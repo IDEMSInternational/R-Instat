@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgMosaicPlot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,9 @@ Partial Class dlgMosaicPlot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdMosaicPlotOptions = New System.Windows.Forms.Button()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblFillColour = New System.Windows.Forms.Label()
         Me.lblConditionFactors = New System.Windows.Forms.Label()
@@ -40,29 +39,12 @@ Partial Class dlgMosaicPlot
         Me.ucrChkXAxisLabelAngle = New instat.ucrCheck()
         Me.ucrSelectorMosaicPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemMosaicOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdMosaicPlotOptions
-        '
-        Me.cmdMosaicPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMosaicPlotOptions.Location = New System.Drawing.Point(10, 196)
-        Me.cmdMosaicPlotOptions.Name = "cmdMosaicPlotOptions"
-        Me.cmdMosaicPlotOptions.Size = New System.Drawing.Size(149, 25)
-        Me.cmdMosaicPlotOptions.TabIndex = 9
-        Me.cmdMosaicPlotOptions.Tag = ""
-        Me.cmdMosaicPlotOptions.Text = "Mosaic Options"
-        Me.cmdMosaicPlotOptions.UseVisualStyleBackColor = True
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(149, 25)
-        Me.cmdOptions.TabIndex = 10
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblFactors
         '
@@ -108,7 +90,7 @@ Partial Class dlgMosaicPlot
         '
         Me.lblPartitioningType.AutoSize = True
         Me.lblPartitioningType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPartitioningType.Location = New System.Drawing.Point(10, 282)
+        Me.lblPartitioningType.Location = New System.Drawing.Point(10, 250)
         Me.lblPartitioningType.Name = "lblPartitioningType"
         Me.lblPartitioningType.Size = New System.Drawing.Size(62, 13)
         Me.lblPartitioningType.TabIndex = 11
@@ -119,7 +101,7 @@ Partial Class dlgMosaicPlot
         Me.ucrNudXAxisLabelsAngle.AutoSize = True
         Me.ucrNudXAxisLabelsAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudXAxisLabelsAngle.Location = New System.Drawing.Point(184, 344)
+        Me.ucrNudXAxisLabelsAngle.Location = New System.Drawing.Point(184, 312)
         Me.ucrNudXAxisLabelsAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Name = "ucrNudXAxisLabelsAngle"
@@ -133,7 +115,7 @@ Partial Class dlgMosaicPlot
         Me.ucrInputPartitioning.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPartitioning.GetSetSelectedIndex = -1
         Me.ucrInputPartitioning.IsReadOnly = False
-        Me.ucrInputPartitioning.Location = New System.Drawing.Point(97, 282)
+        Me.ucrInputPartitioning.Location = New System.Drawing.Point(97, 250)
         Me.ucrInputPartitioning.Name = "ucrInputPartitioning"
         Me.ucrInputPartitioning.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPartitioning.TabIndex = 12
@@ -142,7 +124,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 312)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 280)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(224, 23)
         Me.ucrChkOmitMissing.TabIndex = 13
@@ -202,7 +184,7 @@ Partial Class dlgMosaicPlot
         'ucrSaveMosaicPlot
         '
         Me.ucrSaveMosaicPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveMosaicPlot.Location = New System.Drawing.Point(10, 376)
+        Me.ucrSaveMosaicPlot.Location = New System.Drawing.Point(10, 344)
         Me.ucrSaveMosaicPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveMosaicPlot.Name = "ucrSaveMosaicPlot"
         Me.ucrSaveMosaicPlot.Size = New System.Drawing.Size(317, 24)
@@ -212,7 +194,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrChkXAxisLabelAngle.AutoSize = True
         Me.ucrChkXAxisLabelAngle.Checked = False
-        Me.ucrChkXAxisLabelAngle.Location = New System.Drawing.Point(10, 344)
+        Me.ucrChkXAxisLabelAngle.Location = New System.Drawing.Point(10, 312)
         Me.ucrChkXAxisLabelAngle.Name = "ucrChkXAxisLabelAngle"
         Me.ucrChkXAxisLabelAngle.Size = New System.Drawing.Size(168, 23)
         Me.ucrChkXAxisLabelAngle.TabIndex = 14
@@ -233,17 +215,50 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 411)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 379)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
+        '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemMosaicOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(158, 48)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(157, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemMosaicOptions
+        '
+        Me.toolStripMenuItemMosaicOptions.Name = "toolStripMenuItemMosaicOptions"
+        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(157, 22)
+        Me.toolStripMenuItemMosaicOptions.Text = "Mosaic Options"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AllowDrop = True
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 19
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'dlgMosaicPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(452, 478)
+        Me.ClientSize = New System.Drawing.Size(452, 446)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrNudXAxisLabelsAngle)
         Me.Controls.Add(Me.ucrInputPartitioning)
         Me.Controls.Add(Me.lblPartitioningType)
@@ -258,9 +273,7 @@ Partial Class dlgMosaicPlot
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrSaveMosaicPlot)
         Me.Controls.Add(Me.ucrChkXAxisLabelAngle)
-        Me.Controls.Add(Me.cmdMosaicPlotOptions)
         Me.Controls.Add(Me.ucrSelectorMosaicPlot)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -269,6 +282,7 @@ Partial Class dlgMosaicPlot
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mosaic Plot"
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -276,9 +290,7 @@ Partial Class dlgMosaicPlot
 
     Friend WithEvents ucrSaveMosaicPlot As ucrSave
     Friend WithEvents ucrChkXAxisLabelAngle As ucrCheck
-    Friend WithEvents cmdMosaicPlotOptions As Button
     Friend WithEvents ucrSelectorMosaicPlot As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverX As ucrReceiverMultiple
     Friend WithEvents lblFactors As Label
@@ -292,4 +304,8 @@ Partial Class dlgMosaicPlot
     Friend WithEvents lblPartitioningType As Label
     Friend WithEvents ucrInputPartitioning As ucrInputComboBox
     Friend WithEvents ucrNudXAxisLabelsAngle As ucrNud
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemMosaicOptions As ToolStripMenuItem
 End Class
