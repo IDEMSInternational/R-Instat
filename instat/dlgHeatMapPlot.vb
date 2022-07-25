@@ -463,12 +463,8 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        Dim bOptionsEnabled As Boolean = True
-        If rdoHeatMap.Checked Then
-            bOptionsEnabled = If(ucrVariableAsFactorForHeatMap.bSingleVariable, True, False)
-        End If
-        cmdTileOptions.Enabled = bOptionsEnabled
-        cmdOptions.Enabled = bOptionsEnabled
+        cmdTileOptions.Enabled = rdoHeatMap.Checked AndAlso Not ucrVariableAsFactorForHeatMap.bSingleVariable
+        cmdOptions.Enabled = cmdTileOptions.Enabled
     End Sub
 
     Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariableAsFactorForHeatMap.ControlValueChanged, ucrPnlOptions.ControlValueChanged
