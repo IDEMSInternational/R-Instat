@@ -153,16 +153,16 @@ Public Class dlgExtremes
         bResettingDialogue = False
     End Sub
 
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgExtremesDisplayOptions.SetRCode(clsNewPlotFunction:=clsPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
-        sdgExtremesDisplayOptions.ShowDialog()
-    End Sub
+    'Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+    '    sdgExtremesDisplayOptions.SetRCode(clsNewPlotFunction:=clsPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
+    '    sdgExtremesDisplayOptions.ShowDialog()
+    'End Sub
 
     Private Sub TestOkEnabled()
         ucrBase.OKEnabled(Not ucrReceiverVariable.IsEmpty)
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction)
+        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewPlotFunction:=clsPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesMethod.ShowDialog()
     End Sub
 
