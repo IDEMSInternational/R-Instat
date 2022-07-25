@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Private bControlsInitialised As Boolean = False
-    Private clsREigenValues, clsREigenVectors, clsRRotation As New RFunction
+    Private clsREigenValues, clsREigenVectors As New RFunction
     Public bFirstLoad As Boolean = True
 
     ' to do:
@@ -46,12 +46,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkEigenvectors.SetValueIfChecked(Chr(34) & "ind" & Chr(34))
         ucrChkEigenvectors.AddParameterPresentCondition(True, "value1")
         ucrChkEigenvectors.AddParameterPresentCondition(False, "value1", False)
-
-        'ucrChkRotation.SetParameter(New RParameter("MARGIN", 1))
-        'ucrChkRotation.SetText("Rotation")
-        'ucrChkRotation.SetValueIfChecked(2)
-        'ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
-        'ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
 
         ucrNudDim1.SetParameter(New RParameter("first_dim", 0, bNewIncludeArgumentName:=False))
         ucrNudDim1.SetMinMax(1, 2)
@@ -161,7 +155,6 @@ Public Class sdgPrincipalComponentAnalysis
         clsRsyntax = clsNewRsyntax
         clsREigenValues = clsNewREigenValues
         clsREigenVectors = clsNewREigenVectors
-        clsRRotation = clsNewRRotation
         clsRScreePlotFunction = clsNewScreePlotFunction
         clsRVariablesPlotFunction = clsNewVariablesPlotFunction
         clsRIndividualsPlotFunction = clsNewIndividualsPlotFunction
@@ -194,7 +187,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrChkEigenvalues.SetRCode(clsREigenValues, bReset, bCloneIfNeeded:=True)
         ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset, bCloneIfNeeded:=True)
-        'ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
         ucrPnlGraphics.SetRCode(clsBaseOperator, bReset)
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrNudDim1.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
@@ -221,14 +213,6 @@ Public Class sdgPrincipalComponentAnalysis
             clsRsyntax.RemoveFromAfterCodes(clsREigenVectors)
         End If
     End Sub
-
-    'Private Sub ucrChkRotation_ControlValueChanged(ucrChangedControl As ucrCore)
-    '    If ucrChkRotation.Checked Then
-    '        clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
-    '    Else
-    '        clsRsyntax.RemoveFromAfterCodes(clsRRotation)
-    '    End If
-    'End Sub
 
     'This is here because when you reopen the subdialog the groupboxes are not visible.Don't know why linking isn't working on reopen.
     Private Sub Visibility()
