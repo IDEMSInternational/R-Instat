@@ -976,7 +976,7 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdFactorial)
         Me.grpInteger.Controls.Add(Me.cmdIsPrime)
         Me.grpInteger.Controls.Add(Me.cmdBigZ)
-        Me.grpInteger.Location = New System.Drawing.Point(432, 61)
+        Me.grpInteger.Location = New System.Drawing.Point(431, 61)
         Me.grpInteger.Name = "grpInteger"
         Me.grpInteger.Size = New System.Drawing.Size(226, 168)
         Me.grpInteger.TabIndex = 183

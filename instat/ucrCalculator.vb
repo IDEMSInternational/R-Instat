@@ -1650,11 +1650,20 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdAge_Click(sender As Object, e As EventArgs) Handles cmdAge.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age(n = , x = 20:35 , prob = NULL, name = ""Age"")", 40)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::age()", 1)
-        End If
+        Dim clsWakefieldAgeFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldAgeFunction.SetPackageName("wakefield")
+        clsWakefieldAgeFunction.SetRCommand("age")
+        clsWakefieldAgeFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldAgeFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdAnimal_Click(sender As Object, e As EventArgs) Handles cmdAnimal.Click
