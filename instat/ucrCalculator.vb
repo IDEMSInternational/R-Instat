@@ -2184,179 +2184,377 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPetLikert_Click(sender As Object, e As EventArgs) Handles cmdLikert.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert((n = , x = c(""Strongly Agree"" , ""Agree"" , ""Neutral"" , ""Disagree"" , ""Strongly Disagree""), prob NULL , name = ""Likert"")", 113)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert()", 1)
-        End If
+        Dim clsWakefieldLikertFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldLikertFunction.SetPackageName("wakefield")
+        clsWakefieldLikertFunction.SetRCommand("likert")
+        clsWakefieldLikertFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLikertFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdLorem_Ipsum_Click(sender As Object, e As EventArgs) Handles cmdLorem_ipsum.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum(n = , ..., name = ""Lorem_Ipsum"")", 29)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::lorem_ipsum()", 1)
-        End If
+        Dim clsWakefieldLoremIpsumFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldLoremIpsumFunction.SetPackageName("wakefield")
+        clsWakefieldLoremIpsumFunction.SetRCommand("lorem_ipsum")
+        clsWakefieldLoremIpsumFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLoremIpsumFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdMarital_Click(sender As Object, e As EventArgs) Handles cmdMarital.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital(n = , x = c(""Married"" , ""Divorced"" , ""Widowed"" , ""Separated"" , ""Never Married"") , prob = NULL , name = ""Marital"")", 110)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::marital()", 1)
-        End If
+        Dim clsWakefieldMaritalFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldMaritalFunction.SetPackageName("wakefield")
+        clsWakefieldMaritalFunction.SetRCommand("marital")
+        clsWakefieldMaritalFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldMaritalFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdMilitary_Click(sender As Object, e As EventArgs) Handles cmdMilitary.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military(n = , x = c(""Army"", ""Air Force"", ""Navy"", ""Marine Corps"" , ""Coast Guard"") , prob = c(0.3785 , 0.2334 , 0.2218 , 0.1366 , 0.0296) , name = ""Military"")", 144)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::military()", 1)
-        End If
+        Dim clsWakefieldMilitaryFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldMilitaryFunction.SetPackageName("wakefield")
+        clsWakefieldMilitaryFunction.SetRCommand("military")
+        clsWakefieldMilitaryFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldMilitaryFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdWakefield_Month_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Month.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month(n = , x = month.name , prob = NULL , name = ""Month"")", 49)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_month()", 1)
-        End If
+        Dim clsWakefieldWMonthFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldWMonthFunction.SetPackageName("wakefield")
+        clsWakefieldWMonthFunction.SetRCommand("month")
+        clsWakefieldWMonthFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldWMonthFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdName_Click(sender As Object, e As EventArgs) Handles cmdName.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name(n = , x = wakefield::name_neutral , prob = NULL , replace = FALSE , name = ""Name"")", 79)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::name()", 1)
-        End If
+        Dim clsWakefieldNameFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldNameFunction.SetPackageName("wakefield")
+        clsWakefieldNameFunction.SetRCommand("name")
+        clsWakefieldNameFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldNameFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdNormal_Click(sender As Object, e As EventArgs) Handles cmdNormal.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal(n = , mean = 0 , sd = 1 , min = NULL , max = NULL , name = ""Normal"")", 65)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::normal()", 1)
-        End If
+        Dim clsWakefieldNormalFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldNormalFunction.SetPackageName("wakefield")
+        clsWakefieldNormalFunction.SetRCommand("normal")
+        clsWakefieldNormalFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldNormalFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdPolitical_Click(sender As Object, e As EventArgs) Handles cmdPolitical.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political((n = , x = c(""Democrat"" , ""Republican"" , ""Constitution"" , ""Libertarian"" , ""Green"") , prob = c(0.577269133302094 , 0.410800432748879 , 0.00491084954793489 , 0.00372590303330866 , 0.0032936813677832) , name = ""Political"")", 215)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::political()", 1)
-        End If
+        Dim clsWakefieldPoliticalFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldPoliticalFunction.SetPackageName("wakefield")
+        clsWakefieldPoliticalFunction.SetRCommand("political")
+        clsWakefieldPoliticalFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldPoliticalFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdRace_Click(sender As Object, e As EventArgs) Handles cmdRace.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race(n = , x = c(""White"" , ""Hispanic"" , ""Black"" , ""Asian"" , ""Bi-Racial"" , ""Native"" , ""Other"" , ""Hawaiian"") , prob = c(0.637 , 0.163 , 0.122 , 0.047 , 0.019 , 0.007 , 0.002 , 0.0015) , name = ""Race"")", 190)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::race()", 1)
-        End If
+        Dim clsWakefieldRaceFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldRaceFunction.SetPackageName("wakefield")
+        clsWakefieldRaceFunction.SetRCommand("race")
+        clsWakefieldRaceFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldRaceFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdReligion_Click(sender As Object, e As EventArgs) Handles cmdReligion.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion(n = , x = c(""Christian"" , ""Muslim"" , ""None"" , ""Hindu"" , ""Buddhist"" , ""Folk"" , ""Other"" , ""Jewish"") , prob = c(0.31477 , 0.23163 , 0.16323 , 0.14985 , 0.07083 , 0.05882 , 0.00859 , 0.00227) , name = ""Religion"")", 205)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::religion()", 1)
-        End If
+        Dim clsWakefieldReligionFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldReligionFunction.SetPackageName("wakefield")
+        clsWakefieldReligionFunction.SetRCommand("religion")
+        clsWakefieldReligionFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldReligionFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSat_Click(sender As Object, e As EventArgs) Handles cmdSat.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat(n = , mean = 1500 , sd = 100 , min = 0 , max = 2400 , digits = 0 , name = ""SAT"")", 77)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sat()", 1)
-        End If
+        Dim clsWakefieldSatFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldSatFunction.SetPackageName("wakefield")
+        clsWakefieldSatFunction.SetRCommand("sat")
+        clsWakefieldSatFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSatFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSentence_Click(sender As Object, e As EventArgs) Handles cmdSentence.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence(n = , x = wakefield::presidential_debates_2012 , prob = NULL , name = ""Sentence"")", 78)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sentence()", 1)
-        End If
+        Dim clsWakefieldSentenceFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldSentenceFunction.SetPackageName("wakefield")
+        clsWakefieldSentenceFunction.SetRCommand("sentence")
+        clsWakefieldSentenceFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSentenceFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdGender_Click(sender As Object, e As EventArgs) Handles cmdGender.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender(n = , x = c(""Male"" , ""Female"") , prob = c(0.51219512195122 , 0.48780487804878) , name = ""Gender"")", 95)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::gender()", 1)
-        End If
+        Dim clsWakefieldGenderFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldGenderFunction.SetPackageName("wakefield")
+        clsWakefieldGenderFunction.SetRCommand("gender")
+        clsWakefieldGenderFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldGenderFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSex_Inclusive_Click(sender As Object, e As EventArgs) Handles cmdSex_Inclusive.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive(n = , x = c(""Male"" , ""Female"" , ""Intersex"") , prob = NULL , name = ""Sex"")", 70)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex_inclusive()", 1)
-        End If
+        Dim clsWakefieldSexInclusiveFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldSexInclusiveFunction.SetPackageName("wakefield")
+        clsWakefieldSexInclusiveFunction.SetRCommand("sex_inclusive")
+        clsWakefieldSexInclusiveFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSexInclusiveFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSex_Click(sender As Object, e As EventArgs) Handles cmdSex.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex(n = , x = c(""Male"" , ""Female"") , prob = c(0.51219512195122 , 0.48780487804878) , name = ""Sex"")", 91)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::sex()", 1)
-        End If
+        Dim clsWakefieldSexFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldSexFunction.SetPackageName("wakefield")
+        clsWakefieldSexFunction.SetRCommand("sex")
+        clsWakefieldSexFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSexFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSmokes_Click(sender As Object, e As EventArgs) Handles cmdSmokes.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes(n = , prob = c(0.822 , 0.178) , name = ""Smokes"")", 45)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::smokes()", 1)
-        End If
+        Dim clsWakefieldSmokesFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldSmokesFunction.SetPackageName("wakefield")
+        clsWakefieldSmokesFunction.SetRCommand("smokes")
+        clsWakefieldSmokesFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSmokesFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSpeed_Click(sender As Object, e As EventArgs) Handles cmdSpeed.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed(n = , mean = 55 , sd = 10 , min = 0 , max = NULL , digits = 0 , name = ""Speed"")", 76)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::speed()", 1)
-        End If
+        Dim clsWakefieldSpeedFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldSpeedFunction.SetPackageName("wakefield")
+        clsWakefieldSpeedFunction.SetRCommand("speed")
+        clsWakefieldSpeedFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSpeedFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdState_Click(sender As Object, e As EventArgs) Handles cmdState.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state(n = , x = datasets::state.name , prob = wakefield::state_populations[[""Proportion""]], name = ""State"")", 98)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::state()", 1)
-        End If
+        Dim clsWakefieldStateFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldStateFunction.SetPackageName("wakefield")
+        clsWakefieldStateFunction.SetRCommand("state")
+        clsWakefieldStateFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldStateFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdString_Click(sender As Object, e As EventArgs) Handles cmdString.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string(n = , x = ""[A-Za-z0-9]"" , length = 10 , name = ""String"")", 52)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::string()", 1)
-        End If
+        Dim clsWakefieldStringFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldStringFunction.SetPackageName("wakefield")
+        clsWakefieldStringFunction.SetRCommand("string")
+        clsWakefieldStringFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldStringFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Upper.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper(n = , k = 5, x = LETTERS , prob = NULL, name = ""Upper"")", 52)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_upper()", 1)
-        End If
+        Dim clsWakefieldUpperFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldUpperFunction.SetPackageName("wakefield")
+        clsWakefieldUpperFunction.SetRCommand("upper")
+        clsWakefieldUpperFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldUpperFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdValid_Click(sender As Object, e As EventArgs) Handles cmdValid.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid(n = , prob = NULL, name = ""Valid"")", 31)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::Valid()", 1)
-        End If
+        Dim clsWakefieldValidFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldValidFunction.SetPackageName("wakefield")
+        clsWakefieldValidFunction.SetRCommand("valid")
+        clsWakefieldValidFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldValidFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdWakefield_Year_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Year.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year(n = , x = 1996:as.numeric(format(Sys.Date() , ""%Y"")) , prob = NULL , name = ""Year"")", 80)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::wakefield_year()", 1)
-        End If
+        Dim clsWakefieldYearFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldYearFunction.SetPackageName("wakefield")
+        clsWakefieldYearFunction.SetRCommand("year")
+        clsWakefieldYearFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldYearFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) Handles cmdCircMean.Click
@@ -2788,11 +2986,20 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdLinkert7_Click(sender As Object, e As EventArgs) Handles cmdLinkert7.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7(n = , x = c(""Strongly Agree"", ""Agree"", ""Somewhat Agree"", ""Neutral"",""Somewhat Disagree"", ""Disagree"", ""Strongly Disagree""), prob = NULL,name = ""Likert""))", 148)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::likert_7()", 1)
-        End If
+        Dim clsWakefieldLikert7Function As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsWakefieldDataFunction As New RFunction
+
+        clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+
+        clsWakefieldLikert7Function.SetPackageName("wakefield")
+        clsWakefieldLikert7Function.SetRCommand("likert_7")
+        clsWakefieldLikert7Function.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLikert7Function.ToScript, 0)
     End Sub
 
     Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
