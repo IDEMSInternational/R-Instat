@@ -20,7 +20,7 @@ Public Class dlgExtremes
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
 
-    Private clsFevdFunction, clsPlotsFunction As New RFunction
+    Private clsFevdFunction, clsListFunction, clsPlotsFunction, clsConcatenateFunction, clsListInitialFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
     Private clsLocationParamOperator As New ROperator
@@ -92,10 +92,13 @@ Public Class dlgExtremes
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
         clsPlotsFunction = New RFunction
+        clsListFunction = New RFunction
+        clsListInitialFunction = New RFunction
         clsLocationParamOperator = New ROperator
         clsLocationScaleResetOperator = New ROperator
         clsAttachFunction = New RFunction
         clsDetachFunction = New RFunction
+        clsConcatenateFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -103,6 +106,7 @@ Public Class dlgExtremes
         ucrSelectorExtremes.Reset()
         ucrInputThresholdforLocation.SetText("0")
         ucrSaveExtremes.Reset()
+
 
         clsLocationScaleResetOperator.SetOperation("")
         clsLocationScaleResetOperator.bBrackets = False
@@ -114,6 +118,12 @@ Public Class dlgExtremes
         clsPlotsFunction.SetRCommand("plot")
         clsPlotsFunction.iCallType = 3
         clsPlotsFunction.bExcludeAssignedFunctionOutput = False
+
+        clsListFunction.SetRCommand("list")
+        clsListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0)
+
+        clsListInitialFunction.SetRCommand("list")
+        clsListInitialFunction.AddParameter("l", clsRFunctionParameter:=clsConcatenateFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
@@ -131,6 +141,8 @@ Public Class dlgExtremes
         clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsDetachFunction.AddParameter("unload", "TRUE", iPosition:=2)
+
+        clsConcatenateFunction.SetRCommand("c")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, iPosition:=1)
@@ -162,7 +174,9 @@ Public Class dlgExtremes
         ucrBase.OKEnabled(Not ucrReceiverVariable.IsEmpty)
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewPlotFunction:=clsPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
+        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewListFunction:=clsListFunction,
+                                   clsNewPlotFunction:=clsPlotsFunction, clsNewConcatenateFunction:=clsConcatenateFunction,
+                                   clsNewListInitialFunction:=clsListInitialFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesMethod.ShowDialog()
     End Sub
 

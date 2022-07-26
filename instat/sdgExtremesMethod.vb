@@ -16,6 +16,9 @@
 Public Class sdgExtremesMethod
     Private clsFevdFunction As New RFunction
     Public clsPlotFunction As New RFunction
+    Public clsListFunction As New RFunction
+    Public clsListInitialFunction As New RFunction
+    Public clsConcatenateFunction As New RFunction
     Public clsRsyntax As New RSyntax
     Public bControlsInitialised As Boolean = False
     Public Sub InitialiseControls()
@@ -25,17 +28,27 @@ Public Class sdgExtremesMethod
         ucrPnlExtremes.AddRadioButton(rdoGMLE, Chr(34) & "GMLE" & Chr(34))
         ucrPnlExtremes.AddRadioButton(rdoLmoments, Chr(34) & "Lmoments" & Chr(34))
 
-        ucrNudLocationPrior.SetLinkedDisplayControl(lblLocationPrior)
-        ucrNudScalePrior.SetLinkedDisplayControl(lblScalePrior)
-        ucrNudShapePrior.SetLinkedDisplayControl(lblShapePrior)
-        ucrNudLocationInitial.SetLinkedDisplayControl(lblLocationInitial)
-        ucrNudScaleInitial.SetLinkedDisplayControl(lblScaleInitial)
-        ucrNudshapeInitial.SetLinkedDisplayControl(lblShapeInitial)
+
+        ucrChkType.SetText("Type")
+        ucrChkType.AddToLinkedControls(ucrInputType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputPrior.SetParameter(New RParameter("priorParams", 5))
+        ucrInputPrior.AddQuotesIfUnrecognised = False
+        ucrInputPrior.SetValidationTypeAsNumericList()
+        ucrInputPrior.SetLinkedDisplayControl(lblPrior)
+
+        ucrInputInitial.SetParameter(New RParameter("initial", 6))
+        ucrInputInitial.AddQuotesIfUnrecognised = False
+        ucrInputInitial.SetValidationTypeAsNumericList()
+        ucrInputInitial.SetLinkedDisplayControl(lblInitial)
+
+
+        ucrNudNumberOfIterations.SetParameter(New RParameter("iter", 7))
+        ucrNudNumberOfIterations.SetMinMax(0, 30000)
+        ucrNudNumberOfIterations.SetRDefault(9999)
         ucrNudNumberOfIterations.SetLinkedDisplayControl(lblNumberOfIterations)
 
 
         'ucrPnlExtremes.AddToLinkedControls({ucrNudLocationInitial, ucrNudLocationPrior, ucrNudScaleInitial, ucrNudScalePrior, ucrNudshapeInitial, ucrNudShapePrior, ucrNudNumberOfIterations}, {rdoBayesian})
-
 
 
         ucrPnlExtreme.SetParameter(New RParameter("type", 1))
@@ -71,15 +84,21 @@ Public Class sdgExtremesMethod
 
         bControlsInitialised = True
     End Sub
-    Public Sub SetRCode(clsNewFevdFunction As RFunction, clsNewPlotFunction As RFunction, clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewFevdFunction As RFunction, clsNewListFunction As RFunction, clsNewPlotFunction As RFunction,
+                        clsNewRSyntax As RSyntax, clsNewListInitialFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsFevdFunction = clsNewFevdFunction
         clsRsyntax = clsNewRSyntax
         clsPlotFunction = clsNewPlotFunction
-
-        ucrPnlExtremes.SetRCode(clsFevdFunction)
+        clsListFunction = clsNewListFunction
+        clsListInitialFunction = clsNewListInitialFunction
+        clsConcatenateFunction = clsNewConcatenateFunction
+        ucrInputPrior.SetRCode(clsListFunction, bReset)
+        ucrInputInitial.SetRCode(clsListInitialFunction, bReset)
+        ucrNudNumberOfIterations.SetRCode(clsFevdFunction, bReset)
+        ucrPnlExtremes.SetRCode(clsFevdFunction, bReset)
         ucrPnlExtreme.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrSavePlots.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
     End Sub
@@ -94,25 +113,30 @@ Public Class sdgExtremesMethod
     Private Sub InitialPriorParametres()
 
         If rdoBayesian.Checked Then
-            ucrNudLocationPrior.Visible = True
-            ucrNudScalePrior.Visible = True
-            ucrNudShapePrior.Visible = True
-            ucrNudLocationInitial.Visible = True
-            ucrNudScaleInitial.Visible = True
-            ucrNudshapeInitial.Visible = True
+            ucrInputInitial.Visible = True
+            ucrInputPrior.Visible = True
             ucrNudNumberOfIterations.Visible = True
         Else
-            ucrNudLocationPrior.Visible = False
-            ucrNudScalePrior.Visible = False
-            ucrNudShapePrior.Visible = False
-            ucrNudLocationInitial.Visible = False
-            ucrNudScaleInitial.Visible = False
-            ucrNudshapeInitial.Visible = False
+            ucrInputInitial.Visible = False
+            ucrInputPrior.Visible = False
             ucrNudNumberOfIterations.Visible = False
+
         End If
     End Sub
 
     Private Sub ucrPnlExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExtremes.ControlValueChanged
         InitialPriorParametres()
+    End Sub
+
+    Private Sub ucrInputInitial_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInitial.ControlValueChanged
+        clsFevdFunction.AddParameter("x", "c(" & ucrInputInitial.GetText & ")", iPosition:=6)
+        'ucrInputInitial.SetName("0.25,0.5,0.75")
+        'ucrInputInitial.SetItems({"0.25,0.5,0.75", "0, 0.2, 0.4, 0.6, 0.8, 1", "0.5, 0.8, 1"})
+    End Sub
+
+    Private Sub ucrInputPrior_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPrior.ControlValueChanged
+        clsFevdFunction.AddParameter("v", "c(" & ucrInputPrior.GetText & ")", iPosition:=5)
+        'ucrInputPrior.SetName("0.25,0.5,0.75")
+        'ucrInputPrior.SetItems({"0.25,0.5,0.75", "0, 0.2, 0.4, 0.6, 0.8, 1", "0.5, 0.8, 1"})
     End Sub
 End Class
