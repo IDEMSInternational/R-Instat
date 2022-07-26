@@ -317,7 +317,72 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+    Private Sub SetGeomPrefixFillColourAes()
+        'Sets geom function, fill and colour aesthetics, ucrsave prefix and stat summary parameters
+        clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
+        If rdoBoxplotTufte.Checked Then
+            If ucrChkTufte.Checked Then
+                'cmdBoxPlotOptions.Text = "Tufte Box Options"
+                ucrSaveBoxplot.SetPrefix("tufte_boxplot")
+                clsCurrGeomFunc = clsTufteBoxplotFunc
+                clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
+                ucrSecondFactorReceiver.ChangeParameterName("colour")
+            Else
+                'cmdBoxPlotOptions.Text = "Box Options"
+                ucrSaveBoxplot.SetPrefix("box_plot")
+                ucrSecondFactorReceiver.ChangeParameterName("fill")
+                clsCurrGeomFunc = clsBoxplotFunc
+            End If
+
+        ElseIf rdoJitter.Checked Then
+            'cmdBoxPlotOptions.Text = "Jitter Options"
+            ucrSaveBoxplot.SetPrefix("jitter")
+            ucrSecondFactorReceiver.ChangeParameterName("colour")
+            clsCurrGeomFunc = clsJitterplotFunc
+        Else
+            'cmdBoxPlotOptions.Text = "Violin Options"
+            ucrSaveBoxplot.SetPrefix("violin")
+            ucrSecondFactorReceiver.ChangeParameterName("fill")
+            clsCurrGeomFunc = clsViolinplotFunc
+        End If
+        'TODO Am not sure why the geomfunc parameter which carries clsCurrGeomFunc(current geom function) 
+        'does Not Update() properly when readio buttons are changed
+        'hence i have to force it to update properly after this if statement
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
+            'cmdBoxPlotOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            'cmdBoxPlotOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged
+        SetGeomPrefixFillColourAes()
+    End Sub
+
+    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
+        If ucrChkGrouptoConnect.Checked Then
+            clsBaseOperator.AddParameter(strStatSummaryParameterName, clsRFunctionParameter:=clsStatSummary, iPosition:=4)
+        Else
+            clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
+        End If
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
                           clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
                           clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
@@ -331,7 +396,7 @@ Public Class dlgBoxplot
 
     End Sub
 
-    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
+    Private Sub toolStripMenuItemBoxOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsCurrGeomFunc, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -367,72 +432,6 @@ Public Class dlgBoxplot
         'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
         'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
     End Sub
-
-    Private Sub SetGeomPrefixFillColourAes()
-        'Sets geom function, fill and colour aesthetics, ucrsave prefix and stat summary parameters
-        clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
-        If rdoBoxplotTufte.Checked Then
-            If ucrChkTufte.Checked Then
-                cmdBoxPlotOptions.Text = "Tufte Box Options"
-                ucrSaveBoxplot.SetPrefix("tufte_boxplot")
-                clsCurrGeomFunc = clsTufteBoxplotFunc
-                clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
-                ucrSecondFactorReceiver.ChangeParameterName("colour")
-            Else
-                cmdBoxPlotOptions.Text = "Box Options"
-                ucrSaveBoxplot.SetPrefix("box_plot")
-                ucrSecondFactorReceiver.ChangeParameterName("fill")
-                clsCurrGeomFunc = clsBoxplotFunc
-            End If
-
-        ElseIf rdoJitter.Checked Then
-            cmdBoxPlotOptions.Text = "Jitter Options"
-            ucrSaveBoxplot.SetPrefix("jitter")
-            ucrSecondFactorReceiver.ChangeParameterName("colour")
-            clsCurrGeomFunc = clsJitterplotFunc
-        Else
-            cmdBoxPlotOptions.Text = "Violin Options"
-            ucrSaveBoxplot.SetPrefix("violin")
-            ucrSecondFactorReceiver.ChangeParameterName("fill")
-            clsCurrGeomFunc = clsViolinplotFunc
-        End If
-        'TODO Am not sure why the geomfunc parameter which carries clsCurrGeomFunc(current geom function) 
-        'does Not Update() properly when readio buttons are changed
-        'hence i have to force it to update properly after this if statement
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
-        autoTranslate(Me)
-    End Sub
-
-    Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
-            cmdBoxPlotOptions.Enabled = True
-            cmdOptions.Enabled = True
-        Else
-            cmdBoxPlotOptions.Enabled = False
-            cmdOptions.Enabled = False
-        End If
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-        TempOptionsDisabledInMultipleVariablesCase()
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged
-        SetGeomPrefixFillColourAes()
-    End Sub
-
-    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
-        If ucrChkGrouptoConnect.Checked Then
-            clsBaseOperator.AddParameter(strStatSummaryParameterName, clsRFunctionParameter:=clsStatSummary, iPosition:=4)
-        Else
-            clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
-        End If
-    End Sub
-
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
     'Private Sub SwapFactors()
     '    If ucrChkSwapParameters.Checked Then
