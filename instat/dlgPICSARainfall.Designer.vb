@@ -42,7 +42,6 @@ Partial Class dlgPICSARainfall
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.cmdPICSAOptions = New System.Windows.Forms.Button()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
@@ -58,6 +57,7 @@ Partial Class dlgPICSARainfall
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemPICSAOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -93,18 +93,6 @@ Partial Class dlgPICSARainfall
         Me.lblAvailable.Name = "lblAvailable"
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
         Me.lblAvailable.TabIndex = 2
-        '
-        'cmdPICSAOptions
-        '
-        Me.cmdPICSAOptions.Enabled = False
-        Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 195)
-        Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
-        Me.cmdPICSAOptions.TabIndex = 12
-        Me.cmdPICSAOptions.Tag = ""
-        Me.cmdPICSAOptions.Text = "PICSA Options"
-        Me.cmdPICSAOptions.UseVisualStyleBackColor = True
         '
         'lblFacetBy
         '
@@ -147,7 +135,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrChkPoints.AutoSize = True
         Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
+        Me.ucrChkPoints.Location = New System.Drawing.Point(9, 282)
         Me.ucrChkPoints.Name = "ucrChkPoints"
         Me.ucrChkPoints.Size = New System.Drawing.Size(151, 24)
         Me.ucrChkPoints.TabIndex = 14
@@ -155,7 +143,7 @@ Partial Class dlgPICSARainfall
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(9, 337)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 312)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(320, 24)
@@ -177,7 +165,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 366)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 341)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
@@ -223,9 +211,9 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 223)
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 200)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(151, 25)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Tag = "Plot Options"
@@ -234,33 +222,39 @@ Partial Class dlgPICSARainfall
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemPointOption, Me.toolStripMenuItemPICSAOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(151, 70)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(152, 92)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemLineOptions
         '
         Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(150, 22)
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
         'toolStripMenuItemPointOption
         '
         Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(150, 22)
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPointOption.Text = "Point Options "
+        '
+        'toolStripMenuItemPICSAOptions
+        '
+        Me.toolStripMenuItemPICSAOptions.Name = "toolStripMenuItemPICSAOptions"
+        Me.toolStripMenuItemPICSAOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPICSAOptions.Text = "PICSA Options"
         '
         'ucrChkWithSE
         '
         Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 281)
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 256)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkWithSE.TabIndex = 39
@@ -269,7 +263,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 256)
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 231)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(151, 23)
         Me.ucrChkLineofBestFit.TabIndex = 38
@@ -279,7 +273,7 @@ Partial Class dlgPICSARainfall
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(463, 420)
+        Me.ClientSize = New System.Drawing.Size(463, 399)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
@@ -290,7 +284,6 @@ Partial Class dlgPICSARainfall
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrSave)
-        Me.Controls.Add(Me.cmdPICSAOptions)
         Me.Controls.Add(Me.ucrSelectorPICSARainfall)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverColourBy)
@@ -319,7 +312,6 @@ Partial Class dlgPICSARainfall
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblAvailable As Label
     Friend WithEvents ucrVariablesAsFactorForPicsa As ucrVariablesAsFactor
-    Friend WithEvents cmdPICSAOptions As Button
     Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputStation As ucrInputComboBox
@@ -330,4 +322,5 @@ Partial Class dlgPICSARainfall
     Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
     Friend WithEvents ucrChkWithSE As ucrCheck
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
+    Friend WithEvents toolStripMenuItemPICSAOptions As ToolStripMenuItem
 End Class
