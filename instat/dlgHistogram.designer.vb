@@ -38,8 +38,7 @@ Partial Class dlgHistogram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdHistogramOptions = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
         Me.rdoHistogram = New System.Windows.Forms.RadioButton()
         Me.rdoDensity_ridges = New System.Windows.Forms.RadioButton()
         Me.rdoFrequencyPolygon = New System.Windows.Forms.RadioButton()
@@ -55,29 +54,12 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkRidges = New instat.ucrCheck()
         Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemHistogramOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 267)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(150, 25)
-        Me.cmdOptions.TabIndex = 9
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'cmdHistogramOptions
-        '
-        Me.cmdHistogramOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHistogramOptions.Location = New System.Drawing.Point(10, 236)
-        Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
-        Me.cmdHistogramOptions.Size = New System.Drawing.Size(150, 25)
-        Me.cmdHistogramOptions.TabIndex = 8
-        Me.cmdHistogramOptions.Tag = "Histogram_Options"
-        Me.cmdHistogramOptions.Text = "Histogram Options"
-        Me.cmdHistogramOptions.UseVisualStyleBackColor = True
         '
         'rdoHistogram
         '
@@ -226,7 +208,7 @@ Partial Class dlgHistogram
         Me.ucrBase.Location = New System.Drawing.Point(10, 375)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'ucrPnlOptions
@@ -257,12 +239,44 @@ Partial Class dlgHistogram
         Me.ucrChkDisplayAsDotPlot.Size = New System.Drawing.Size(173, 23)
         Me.ucrChkDisplayAsDotPlot.TabIndex = 16
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemHistogramOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(176, 48)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(175, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemHistogramOptions
+        '
+        Me.toolStripMenuItemHistogramOptions.Name = "toolStripMenuItemHistogramOptions"
+        Me.toolStripMenuItemHistogramOptions.Size = New System.Drawing.Size(175, 22)
+        Me.toolStripMenuItemHistogramOptions.Text = "Histogram Options"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 241)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(145, 28)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 18
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 436)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkDisplayAsDotPlot)
         Me.Controls.Add(Me.ucrChkRidges)
         Me.Controls.Add(Me.lblStats)
@@ -274,12 +288,10 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.rdoFrequencyPolygon)
         Me.Controls.Add(Me.rdoDensity_ridges)
         Me.Controls.Add(Me.rdoHistogram)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblfactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -287,14 +299,13 @@ Partial Class dlgHistogram
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Histogram"
         Me.Text = "Histogram Plot"
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrHistogramSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdHistogramOptions As Button
     Friend WithEvents rdoHistogram As RadioButton
     Friend WithEvents rdoDensity_ridges As RadioButton
     Friend WithEvents rdoFrequencyPolygon As RadioButton
@@ -308,4 +319,8 @@ Partial Class dlgHistogram
     Friend WithEvents lblStats As Label
     Friend WithEvents ucrChkRidges As ucrCheck
     Friend WithEvents ucrChkDisplayAsDotPlot As ucrCheck
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemHistogramOptions As ToolStripMenuItem
 End Class
