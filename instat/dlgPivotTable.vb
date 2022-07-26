@@ -18,9 +18,10 @@ Public Class dlgPivotTable
     Private bFirstLoad As Boolean = True
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
-    Private clsRPivotTableFunction, clsSelectFunction,
-        clsConcatenateFunction, clsGetObjectFunction As New RFunction
-    Private clsPipeOperator As New ROperator
+    Private clsRPivotTableFunction, clsSelectFunction, clsLevelsFunction,
+        clsConcatenateFunction, clsGetObjectFunction, clsPasteFunction,
+        clsFlattenFunction As New RFunction
+    Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
 
     Private Sub dlgPivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -53,6 +54,13 @@ Public Class dlgPivotTable
         ucrReceiverInitialColumnFactor.SetParameterIsString()
         ucrReceiverInitialColumnFactor.Selector = ucrSelectorPivot
 
+        ucrReceiverFactorLevels.SetParameter(New RParameter("variable",iNewPosition:=1))
+        ucrReceiverFactorLevels.SetDataType("factor")
+        ucrReceiverFactorLevels.SetParameterIsString()
+        ucrReceiverFactorLevels.Selector = ucrSelectorPivot
+        ttFactorLevels.SetToolTip(ucrReceiverFactorLevels.txtReceiverSingle,
+                                  "Use when default (alphabetical) order of factor levels is inappropriate.")
+
         ucrReceiverSelectedVariable.Selector = ucrSelectorPivot
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
@@ -76,19 +84,43 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub SetDefaults()
+        clsConcatenateFunction = New RFunction
+        clsFlattenFunction = New RFunction
+        clsLevelsFunction = New RFunction
+        clsGetObjectFunction = New RFunction
+        clsPasteFunction = New RFunction
         clsRPivotTableFunction = New RFunction
         clsSelectFunction = New RFunction
-        clsConcatenateFunction = New RFunction
+
+        clsLevelsDollarOperator = New ROperator
         clsPipeOperator = New ROperator
-        clsGetObjectFunction = New RFunction
 
         UcrReceiverMultipleIntialRowFactor.SetMeAsReceiver()
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
         ucrBase.clsRsyntax.ClearCodes()
 
+        clsConcatenateFunction.SetRCommand("c")
+
+        clsFlattenFunction.SetPackageName("stringr")
+        clsFlattenFunction.SetRCommand("str_flatten")
+        clsFlattenFunction.AddParameter("string", "survey_levels", iPosition:=0)
+
         clsGetObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
         clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        clsLevelsDollarOperator.SetOperation("$")
+        clsLevelsDollarOperator.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        clsLevelsFunction.SetRCommand("levels")
+        clsLevelsFunction.AddParameter("x", clsROperatorParameter:=clsLevelsDollarOperator, iPosition:=0)
+        clsLevelsFunction.SetAssignTo("survey_levels")
+
+        clsPasteFunction.SetRCommand("paste0")
+        clsPasteFunction.AddParameter("first_parameter", Chr(34) & "\" & Chr(34) & Chr(34), iPosition:=0)
+        clsPasteFunction.AddParameter("second_parameter", "survey_levels", iPosition:=1)
+        clsPasteFunction.AddParameter("third_parameter", Chr(34) & "\" & Chr(34) & "," & Chr(34))
+        clsPasteFunction.SetAssignTo("survey_levels")
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("columns", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
@@ -102,8 +134,6 @@ Public Class dlgPivotTable
         clsSelectFunction.SetRCommand("select")
         clsSelectFunction.AddParameter("concatenate", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsConcatenateFunction.SetRCommand("c")
-
         ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTableFunction, 1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectFunction)
     End Sub
@@ -113,6 +143,7 @@ Public Class dlgPivotTable
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
         UcrReceiverMultipleIntialRowFactor.SetRCode(clsRPivotTableFunction, bReset)
+        ucrReceiverFactorLevels.SetRCode(clsLevelsDollarOperator, bReset)
         ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkIncludeSubTotals.SetRCode(clsRPivotTableFunction, bReset)

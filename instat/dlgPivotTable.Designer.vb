@@ -34,6 +34,9 @@ Partial Class dlgPivotTable
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverFactorLevels = New instat.ucrReceiverSingle()
+        Me.lblFactorLevels = New System.Windows.Forms.Label()
+        Me.ttFactorLevels = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'lblInitialRowFactor
@@ -51,7 +54,7 @@ Partial Class dlgPivotTable
         '
         Me.lblInitialColumnFactor.AutoSize = True
         Me.lblInitialColumnFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblInitialColumnFactor.Location = New System.Drawing.Point(248, 156)
+        Me.lblInitialColumnFactor.Location = New System.Drawing.Point(248, 137)
         Me.lblInitialColumnFactor.Name = "lblInitialColumnFactor"
         Me.lblInitialColumnFactor.Size = New System.Drawing.Size(105, 13)
         Me.lblInitialColumnFactor.TabIndex = 27
@@ -66,7 +69,7 @@ Partial Class dlgPivotTable
         Me.UcrReceiverMultipleIntialRowFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiverMultipleIntialRowFactor.Name = "UcrReceiverMultipleIntialRowFactor"
         Me.UcrReceiverMultipleIntialRowFactor.Selector = Nothing
-        Me.UcrReceiverMultipleIntialRowFactor.Size = New System.Drawing.Size(120, 100)
+        Me.UcrReceiverMultipleIntialRowFactor.Size = New System.Drawing.Size(120, 74)
         Me.UcrReceiverMultipleIntialRowFactor.strNcFilePath = ""
         Me.UcrReceiverMultipleIntialRowFactor.TabIndex = 38
         Me.UcrReceiverMultipleIntialRowFactor.ucrSelector = Nothing
@@ -93,11 +96,11 @@ Partial Class dlgPivotTable
         '
         Me.ucrReceiverSelectedVariable.AutoSize = True
         Me.ucrReceiverSelectedVariable.frmParent = Me
-        Me.ucrReceiverSelectedVariable.Location = New System.Drawing.Point(248, 214)
+        Me.ucrReceiverSelectedVariable.Location = New System.Drawing.Point(248, 195)
         Me.ucrReceiverSelectedVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedVariable.Name = "ucrReceiverSelectedVariable"
         Me.ucrReceiverSelectedVariable.Selector = Nothing
-        Me.ucrReceiverSelectedVariable.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSelectedVariable.Size = New System.Drawing.Size(120, 74)
         Me.ucrReceiverSelectedVariable.strNcFilePath = ""
         Me.ucrReceiverSelectedVariable.TabIndex = 35
         Me.ucrReceiverSelectedVariable.ucrSelector = Nothing
@@ -106,7 +109,7 @@ Partial Class dlgPivotTable
         '
         Me.ucrChkSelectedVariable.AutoSize = True
         Me.ucrChkSelectedVariable.Checked = False
-        Me.ucrChkSelectedVariable.Location = New System.Drawing.Point(248, 197)
+        Me.ucrChkSelectedVariable.Location = New System.Drawing.Point(248, 178)
         Me.ucrChkSelectedVariable.Name = "ucrChkSelectedVariable"
         Me.ucrChkSelectedVariable.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkSelectedVariable.TabIndex = 34
@@ -115,7 +118,7 @@ Partial Class dlgPivotTable
         '
         Me.ucrReceiverInitialColumnFactor.AutoSize = True
         Me.ucrReceiverInitialColumnFactor.frmParent = Me
-        Me.ucrReceiverInitialColumnFactor.Location = New System.Drawing.Point(248, 169)
+        Me.ucrReceiverInitialColumnFactor.Location = New System.Drawing.Point(248, 150)
         Me.ucrReceiverInitialColumnFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverInitialColumnFactor.Name = "ucrReceiverInitialColumnFactor"
         Me.ucrReceiverInitialColumnFactor.Selector = Nothing
@@ -130,7 +133,7 @@ Partial Class dlgPivotTable
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 362)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 24
         '
         'ucrSelectorPivot
@@ -145,12 +148,38 @@ Partial Class dlgPivotTable
         Me.ucrSelectorPivot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorPivot.TabIndex = 5
         '
+        'ucrReceiverFactorLevels
+        '
+        Me.ucrReceiverFactorLevels.AutoSize = True
+        Me.ucrReceiverFactorLevels.frmParent = Me
+        Me.ucrReceiverFactorLevels.Location = New System.Drawing.Point(248, 298)
+        Me.ucrReceiverFactorLevels.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactorLevels.Name = "ucrReceiverFactorLevels"
+        Me.ucrReceiverFactorLevels.Selector = Nothing
+        Me.ucrReceiverFactorLevels.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactorLevels.strNcFilePath = ""
+        Me.ucrReceiverFactorLevels.TabIndex = 39
+        Me.ucrReceiverFactorLevels.ucrSelector = Nothing
+        '
+        'lblFactorLevels
+        '
+        Me.lblFactorLevels.AutoSize = True
+        Me.lblFactorLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFactorLevels.Location = New System.Drawing.Point(251, 283)
+        Me.lblFactorLevels.Name = "lblFactorLevels"
+        Me.lblFactorLevels.Size = New System.Drawing.Size(74, 13)
+        Me.lblFactorLevels.TabIndex = 40
+        Me.lblFactorLevels.Tag = ""
+        Me.lblFactorLevels.Text = "Factor Levels:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
         'dlgPivotTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 419)
+        Me.Controls.Add(Me.lblFactorLevels)
+        Me.Controls.Add(Me.ucrReceiverFactorLevels)
         Me.Controls.Add(Me.UcrReceiverMultipleIntialRowFactor)
         Me.Controls.Add(Me.ucrSavePivot)
         Me.Controls.Add(Me.ucrChkIncludeSubTotals)
@@ -184,4 +213,7 @@ Partial Class dlgPivotTable
     Friend WithEvents ucrChkIncludeSubTotals As ucrCheck
     Friend WithEvents ucrSavePivot As ucrSave
     Friend WithEvents UcrReceiverMultipleIntialRowFactor As ucrReceiverMultiple
+    Friend WithEvents lblFactorLevels As Label
+    Friend WithEvents ucrReceiverFactorLevels As ucrReceiverSingle
+    Friend WithEvents ttFactorLevels As ToolTip
 End Class
