@@ -43,9 +43,13 @@ Partial Class sdgExtremesMethod
         Me.ucrPnlExtreme = New instat.UcrPanel()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbFitMethod = New System.Windows.Forms.TabPage()
-        Me.ucrInputInitial = New instat.ucrInputComboBox()
-        Me.ucrInputPrior = New instat.ucrInputComboBox()
-        Me.lblInitial = New System.Windows.Forms.Label()
+        Me.lblLocation = New System.Windows.Forms.Label()
+        Me.lblScale = New System.Windows.Forms.Label()
+        Me.lblShape = New System.Windows.Forms.Label()
+        Me.ucrNudScale = New instat.ucrNud()
+        Me.ucrNudLocation = New instat.ucrNud()
+        Me.ucrNudShape = New instat.ucrNud()
+        Me.ucrInputPrior = New instat.ucrInputTextBox()
         Me.lblPrior = New System.Windows.Forms.Label()
         Me.rdoMle = New System.Windows.Forms.RadioButton()
         Me.rdoBayesian = New System.Windows.Forms.RadioButton()
@@ -55,6 +59,7 @@ Partial Class sdgExtremesMethod
         Me.lblNumberOfIterations = New System.Windows.Forms.Label()
         Me.grpFitMethod = New System.Windows.Forms.GroupBox()
         Me.ucrPnlExtremes = New instat.UcrPanel()
+        Me.grpInitial = New System.Windows.Forms.GroupBox()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbConfidenceInterval.SuspendLayout()
         Me.tbDisplayOptions.SuspendLayout()
@@ -67,9 +72,9 @@ Partial Class sdgExtremesMethod
         'tbConfidenceInterval
         '
         Me.tbConfidenceInterval.Controls.Add(Me.lblReturnLevel)
-        Me.tbConfidenceInterval.Controls.Add(Me.ucrInputType)
         Me.tbConfidenceInterval.Controls.Add(Me.ucrChkType)
         Me.tbConfidenceInterval.Controls.Add(Me.ucrNudReturnLevel)
+        Me.tbConfidenceInterval.Controls.Add(Me.ucrInputType)
         Me.tbConfidenceInterval.Location = New System.Drawing.Point(4, 29)
         Me.tbConfidenceInterval.Margin = New System.Windows.Forms.Padding(4)
         Me.tbConfidenceInterval.Name = "tbConfidenceInterval"
@@ -95,7 +100,7 @@ Partial Class sdgExtremesMethod
         Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(174, 13)
+        Me.ucrInputType.Location = New System.Drawing.Point(163, 18)
         Me.ucrInputType.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(175, 32)
@@ -174,7 +179,7 @@ Partial Class sdgExtremesMethod
         '
         Me.rdoNoPlot.AutoSize = True
         Me.rdoNoPlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoNoPlot.Location = New System.Drawing.Point(20, 34)
+        Me.rdoNoPlot.Location = New System.Drawing.Point(20, 33)
         Me.rdoNoPlot.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoNoPlot.Name = "rdoNoPlot"
         Me.rdoNoPlot.Size = New System.Drawing.Size(85, 24)
@@ -313,9 +318,13 @@ Partial Class sdgExtremesMethod
         '
         'tbFitMethod
         '
-        Me.tbFitMethod.Controls.Add(Me.ucrInputInitial)
+        Me.tbFitMethod.Controls.Add(Me.lblLocation)
+        Me.tbFitMethod.Controls.Add(Me.lblScale)
+        Me.tbFitMethod.Controls.Add(Me.lblShape)
+        Me.tbFitMethod.Controls.Add(Me.ucrNudScale)
+        Me.tbFitMethod.Controls.Add(Me.ucrNudLocation)
+        Me.tbFitMethod.Controls.Add(Me.ucrNudShape)
         Me.tbFitMethod.Controls.Add(Me.ucrInputPrior)
-        Me.tbFitMethod.Controls.Add(Me.lblInitial)
         Me.tbFitMethod.Controls.Add(Me.lblPrior)
         Me.tbFitMethod.Controls.Add(Me.rdoMle)
         Me.tbFitMethod.Controls.Add(Me.rdoBayesian)
@@ -324,6 +333,7 @@ Partial Class sdgExtremesMethod
         Me.tbFitMethod.Controls.Add(Me.ucrNudNumberOfIterations)
         Me.tbFitMethod.Controls.Add(Me.lblNumberOfIterations)
         Me.tbFitMethod.Controls.Add(Me.grpFitMethod)
+        Me.tbFitMethod.Controls.Add(Me.grpInitial)
         Me.tbFitMethod.Location = New System.Drawing.Point(4, 29)
         Me.tbFitMethod.Margin = New System.Windows.Forms.Padding(4)
         Me.tbFitMethod.Name = "tbFitMethod"
@@ -334,43 +344,91 @@ Partial Class sdgExtremesMethod
         Me.tbFitMethod.Text = "Fit Method"
         Me.tbFitMethod.UseVisualStyleBackColor = True
         '
-        'ucrInputInitial
+        'lblLocation
         '
-        Me.ucrInputInitial.AddQuotesIfUnrecognised = True
-        Me.ucrInputInitial.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputInitial.GetSetSelectedIndex = -1
-        Me.ucrInputInitial.IsReadOnly = False
-        Me.ucrInputInitial.Location = New System.Drawing.Point(143, 291)
-        Me.ucrInputInitial.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.ucrInputInitial.Name = "ucrInputInitial"
-        Me.ucrInputInitial.Size = New System.Drawing.Size(206, 32)
-        Me.ucrInputInitial.TabIndex = 79
+        Me.lblLocation.AutoSize = True
+        Me.lblLocation.Location = New System.Drawing.Point(34, 268)
+        Me.lblLocation.Name = "lblLocation"
+        Me.lblLocation.Size = New System.Drawing.Size(74, 20)
+        Me.lblLocation.TabIndex = 85
+        Me.lblLocation.Text = "Location:"
+        '
+        'lblScale
+        '
+        Me.lblScale.AutoSize = True
+        Me.lblScale.Location = New System.Drawing.Point(39, 306)
+        Me.lblScale.Name = "lblScale"
+        Me.lblScale.Size = New System.Drawing.Size(53, 20)
+        Me.lblScale.TabIndex = 84
+        Me.lblScale.Text = "Scale:"
+        '
+        'lblShape
+        '
+        Me.lblShape.AutoSize = True
+        Me.lblShape.Location = New System.Drawing.Point(32, 343)
+        Me.lblShape.Name = "lblShape"
+        Me.lblShape.Size = New System.Drawing.Size(60, 20)
+        Me.lblShape.TabIndex = 83
+        Me.lblShape.Text = "Shape:"
+        '
+        'ucrNudScale
+        '
+        Me.ucrNudScale.AutoSize = True
+        Me.ucrNudScale.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudScale.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudScale.Location = New System.Drawing.Point(122, 302)
+        Me.ucrNudScale.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudScale.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudScale.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudScale.Name = "ucrNudScale"
+        Me.ucrNudScale.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudScale.TabIndex = 82
+        Me.ucrNudScale.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudLocation
+        '
+        Me.ucrNudLocation.AutoSize = True
+        Me.ucrNudLocation.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLocation.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLocation.Location = New System.Drawing.Point(124, 264)
+        Me.ucrNudLocation.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudLocation.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLocation.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLocation.Name = "ucrNudLocation"
+        Me.ucrNudLocation.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudLocation.TabIndex = 81
+        Me.ucrNudLocation.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudShape
+        '
+        Me.ucrNudShape.AutoSize = True
+        Me.ucrNudShape.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShape.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudShape.Location = New System.Drawing.Point(124, 339)
+        Me.ucrNudShape.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudShape.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudShape.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShape.Name = "ucrNudShape"
+        Me.ucrNudShape.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudShape.TabIndex = 80
+        Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputPrior
         '
         Me.ucrInputPrior.AddQuotesIfUnrecognised = True
-        Me.ucrInputPrior.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPrior.GetSetSelectedIndex = -1
+        Me.ucrInputPrior.AutoSize = True
+        Me.ucrInputPrior.IsMultiline = False
         Me.ucrInputPrior.IsReadOnly = False
-        Me.ucrInputPrior.Location = New System.Drawing.Point(143, 222)
+        Me.ucrInputPrior.Location = New System.Drawing.Point(153, 193)
         Me.ucrInputPrior.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputPrior.Name = "ucrInputPrior"
         Me.ucrInputPrior.Size = New System.Drawing.Size(206, 32)
         Me.ucrInputPrior.TabIndex = 78
         '
-        'lblInitial
-        '
-        Me.lblInitial.AutoSize = True
-        Me.lblInitial.Location = New System.Drawing.Point(9, 291)
-        Me.lblInitial.Name = "lblInitial"
-        Me.lblInitial.Size = New System.Drawing.Size(103, 20)
-        Me.lblInitial.TabIndex = 77
-        Me.lblInitial.Text = "Initial Values:"
-        '
         'lblPrior
         '
         Me.lblPrior.AutoSize = True
-        Me.lblPrior.Location = New System.Drawing.Point(3, 222)
+        Me.lblPrior.Location = New System.Drawing.Point(10, 193)
         Me.lblPrior.Name = "lblPrior"
         Me.lblPrior.Size = New System.Drawing.Size(131, 20)
         Me.lblPrior.TabIndex = 76
@@ -428,7 +486,7 @@ Partial Class sdgExtremesMethod
         Me.ucrNudNumberOfIterations.AutoSize = True
         Me.ucrNudNumberOfIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfIterations.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfIterations.Location = New System.Drawing.Point(193, 372)
+        Me.ucrNudNumberOfIterations.Location = New System.Drawing.Point(193, 384)
         Me.ucrNudNumberOfIterations.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudNumberOfIterations.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfIterations.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -440,7 +498,7 @@ Partial Class sdgExtremesMethod
         'lblNumberOfIterations
         '
         Me.lblNumberOfIterations.AutoSize = True
-        Me.lblNumberOfIterations.Location = New System.Drawing.Point(22, 376)
+        Me.lblNumberOfIterations.Location = New System.Drawing.Point(22, 388)
         Me.lblNumberOfIterations.Name = "lblNumberOfIterations"
         Me.lblNumberOfIterations.Size = New System.Drawing.Size(158, 20)
         Me.lblNumberOfIterations.TabIndex = 63
@@ -464,6 +522,15 @@ Partial Class sdgExtremesMethod
         Me.ucrPnlExtremes.Name = "ucrPnlExtremes"
         Me.ucrPnlExtremes.Size = New System.Drawing.Size(370, 138)
         Me.ucrPnlExtremes.TabIndex = 74
+        '
+        'grpInitial
+        '
+        Me.grpInitial.Location = New System.Drawing.Point(22, 236)
+        Me.grpInitial.Name = "grpInitial"
+        Me.grpInitial.Size = New System.Drawing.Size(200, 138)
+        Me.grpInitial.TabIndex = 86
+        Me.grpInitial.TabStop = False
+        Me.grpInitial.Text = "Initial Values:"
         '
         'ucrBase
         '
@@ -533,8 +600,13 @@ Partial Class sdgExtremesMethod
     Friend WithEvents lblNumberOfIterations As Label
     Friend WithEvents grpFitMethod As GroupBox
     Friend WithEvents ucrPnlExtremes As UcrPanel
-    Friend WithEvents lblInitial As Label
     Friend WithEvents lblPrior As Label
-    Friend WithEvents ucrInputInitial As ucrInputComboBox
-    Friend WithEvents ucrInputPrior As ucrInputComboBox
+    Friend WithEvents ucrInputPrior As ucrInputTextBox
+    Friend WithEvents lblLocation As Label
+    Friend WithEvents lblScale As Label
+    Friend WithEvents lblShape As Label
+    Friend WithEvents ucrNudScale As ucrNud
+    Friend WithEvents ucrNudLocation As ucrNud
+    Friend WithEvents ucrNudShape As ucrNud
+    Friend WithEvents grpInitial As GroupBox
 End Class

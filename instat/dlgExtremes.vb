@@ -20,7 +20,8 @@ Public Class dlgExtremes
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
 
-    Private clsFevdFunction, clsListFunction, clsPlotsFunction, clsConcatenateFunction, clsListInitialFunction As New RFunction
+    Private clsFevdFunction, clsListFunction, clsPlotsFunction, clsConcatenateFunction, clsConfidenceIntervalFunction,
+clsListInitialFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
     Private clsLocationParamOperator As New ROperator
@@ -98,8 +99,8 @@ Public Class dlgExtremes
         clsLocationScaleResetOperator = New ROperator
         clsAttachFunction = New RFunction
         clsDetachFunction = New RFunction
+        clsConfidenceIntervalFunction = New RFunction
         clsConcatenateFunction = New RFunction
-
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrReceiverVariable.SetMeAsReceiver()
@@ -107,6 +108,8 @@ Public Class dlgExtremes
         ucrInputThresholdforLocation.SetText("0")
         ucrSaveExtremes.Reset()
 
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("first", "0.1,10,0.1", iPosition:=0, bIncludeArgumentName:=False)
 
         clsLocationScaleResetOperator.SetOperation("")
         clsLocationScaleResetOperator.bBrackets = False
@@ -120,13 +123,22 @@ Public Class dlgExtremes
         clsPlotsFunction.bExcludeAssignedFunctionOutput = False
 
         clsListFunction.SetRCommand("list")
-        clsListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0)
+        clsListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=5)
 
         clsListInitialFunction.SetRCommand("list")
-        clsListInitialFunction.AddParameter("l", clsRFunctionParameter:=clsConcatenateFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsListInitialFunction.AddParameter("location", "0", iPosition:=0)
+        clsListInitialFunction.AddParameter("scale", "0.1", iPosition:=1)
+        clsListInitialFunction.AddParameter("shape", "-0.5", iPosition:=2)
+
+        clsConfidenceIntervalFunction.SetPackageName("extRemes")
+        clsConfidenceIntervalFunction.SetRCommand("ci.fevd")
+        'clsConfidenceIntervalFunction.AddParameter("type", Chr(34) & "parameter" & Chr(34), iPosition:=0)
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
+        clsFevdFunction.AddParameter("priorParams", clsRFunctionParameter:=clsListFunction, iPosition:=4)
+        clsFevdFunction.AddParameter("initial", clsRFunctionParameter:=clsListInitialFunction, iPosition:=5)
+        clsFevdFunction.AddParameter("iter", "9999", iPosition:=6)
 
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=0)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=1)
@@ -141,8 +153,6 @@ Public Class dlgExtremes
         clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsDetachFunction.AddParameter("unload", "TRUE", iPosition:=2)
-
-        clsConcatenateFunction.SetRCommand("c")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, iPosition:=1)
@@ -175,7 +185,8 @@ Public Class dlgExtremes
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewListFunction:=clsListFunction,
-                                   clsNewPlotFunction:=clsPlotsFunction, clsNewConcatenateFunction:=clsConcatenateFunction,
+                                   clsNewConcatenateFunction:=clsConcatenateFunction,
+                                   clsNewPlotFunction:=clsPlotsFunction, clsNewConfidenceIntervalFunction:=clsConfidenceIntervalFunction,
                                    clsNewListInitialFunction:=clsListInitialFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesMethod.ShowDialog()
     End Sub
