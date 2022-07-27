@@ -143,7 +143,7 @@ Partial Class dlgPICSARainfall
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(9, 312)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 332)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(320, 24)
@@ -165,7 +165,7 @@ Partial Class dlgPICSARainfall
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 341)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 361)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
@@ -229,25 +229,25 @@ Partial Class dlgPICSARainfall
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemLineOptions
         '
         Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
-        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(151, 22)
         Me.toolStripMenuItemLineOptions.Text = "Line Options"
         '
         'toolStripMenuItemPointOption
         '
         Me.toolStripMenuItemPointOption.Name = "toolStripMenuItemPointOption"
-        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(151, 22)
         Me.toolStripMenuItemPointOption.Text = "Point Options "
         '
         'toolStripMenuItemPICSAOptions
         '
         Me.toolStripMenuItemPICSAOptions.Name = "toolStripMenuItemPICSAOptions"
-        Me.toolStripMenuItemPICSAOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPICSAOptions.Size = New System.Drawing.Size(151, 22)
         Me.toolStripMenuItemPICSAOptions.Text = "PICSA Options"
         '
         'ucrChkWithSE
@@ -273,7 +273,7 @@ Partial Class dlgPICSARainfall
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(463, 399)
+        Me.ClientSize = New System.Drawing.Size(463, 417)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
