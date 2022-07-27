@@ -241,7 +241,7 @@ Partial Class dlgBoxplot
         'ucrSaveBoxplot
         '
         Me.ucrSaveBoxplot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 372)
+        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 401)
         Me.ucrSaveBoxplot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
         Me.ucrSaveBoxplot.Size = New System.Drawing.Size(361, 24)
@@ -253,7 +253,7 @@ Partial Class dlgBoxplot
         Me.ucrChkHorizontalBoxplot.Checked = False
         Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 295)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
-        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(271, 23)
+        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(259, 23)
         Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrChkVarWidth
@@ -262,7 +262,7 @@ Partial Class dlgBoxplot
         Me.ucrChkVarWidth.Checked = False
         Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 270)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
-        Me.ucrChkVarWidth.Size = New System.Drawing.Size(271, 23)
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(262, 23)
         Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrVariablesAsFactorForBoxplot
@@ -320,7 +320,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 401)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 428)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 23
@@ -369,7 +369,7 @@ Partial Class dlgBoxplot
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(425, 463)
+        Me.ClientSize = New System.Drawing.Size(425, 485)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkTufte)
         Me.Controls.Add(Me.ucrInputSummaries)
