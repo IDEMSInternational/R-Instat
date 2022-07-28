@@ -1622,6 +1622,10 @@ Public Class sdgPICSARainfallGraph
         End If
     End Sub
 
+    Private Sub ucrChkAddMedian_Load(sender As Object, e As EventArgs) Handles ucrChkAddMedian.Load
+
+    End Sub
+
     Private Sub ucrChkIncludeMinorGridLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeMinorGridLines.ControlValueChanged
         AddRemoveMinorGridLines()
     End Sub
