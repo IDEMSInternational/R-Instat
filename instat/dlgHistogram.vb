@@ -337,11 +337,7 @@ Public Class dlgHistogram
         bResetSubdialog = False
     End Sub
 
-    Private Sub contextMenuStripOptions_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles contextMenuStripOptions.Opening
-
-    End Sub
-
-    Private Sub toolStripMenuItemHistogramOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemHistogramOptions.Click
+    Private Sub toolStripMenuItemHistogramOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemHistogramOptions.Click, toolStripMenuItemDensityOptions.Click, toolStripMenuItemFrequencyPolygon.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHistogramSelector, bApplyAesGlobally:=True, bReset:=bResetHistLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetHistLayerSubdialog = False

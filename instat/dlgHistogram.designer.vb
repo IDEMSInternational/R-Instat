@@ -54,11 +54,13 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkRidges = New instat.ucrCheck()
         Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
-        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.tool = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemHistogramOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemDensityOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemFrequencyPolygon = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
-        Me.contextMenuStripOptions.SuspendLayout()
+        Me.tool.SuspendLayout()
         Me.SuspendLayout()
         '
         'rdoHistogram
@@ -239,32 +241,44 @@ Partial Class dlgHistogram
         Me.ucrChkDisplayAsDotPlot.Size = New System.Drawing.Size(173, 23)
         Me.ucrChkDisplayAsDotPlot.TabIndex = 16
         '
-        'contextMenuStripOptions
+        'tool
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemHistogramOptions})
-        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(176, 48)
+        Me.tool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemHistogramOptions, Me.toolStripMenuItemDensityOptions, Me.toolStripMenuItemFrequencyPolygon})
+        Me.tool.Name = "contextMenuStripOk"
+        Me.tool.Size = New System.Drawing.Size(199, 92)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(175, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(198, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemHistogramOptions
         '
         Me.toolStripMenuItemHistogramOptions.Name = "toolStripMenuItemHistogramOptions"
-        Me.toolStripMenuItemHistogramOptions.Size = New System.Drawing.Size(175, 22)
+        Me.toolStripMenuItemHistogramOptions.Size = New System.Drawing.Size(198, 22)
         Me.toolStripMenuItemHistogramOptions.Text = "Histogram Options"
+        '
+        'toolStripMenuItemDensityOptions
+        '
+        Me.toolStripMenuItemDensityOptions.Name = "toolStripMenuItemDensityOptions"
+        Me.toolStripMenuItemDensityOptions.Size = New System.Drawing.Size(198, 22)
+        Me.toolStripMenuItemDensityOptions.Text = "Density/Ridges Options"
+        '
+        'toolStripMenuItemFrequencyPolygon
+        '
+        Me.toolStripMenuItemFrequencyPolygon.Name = "toolStripMenuItemFrequencyPolygon"
+        Me.toolStripMenuItemFrequencyPolygon.Size = New System.Drawing.Size(198, 22)
+        Me.toolStripMenuItemFrequencyPolygon.Text = "Frequency Polygon"
         '
         'cmdOptions
         '
         Me.cmdOptions.AutoSize = True
-        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.ContextMenuStrip = Me.tool
         Me.cmdOptions.Location = New System.Drawing.Point(9, 241)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(145, 28)
-        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Size = New System.Drawing.Size(154, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.tool
         Me.cmdOptions.TabIndex = 18
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.Text = "Plot Options"
@@ -299,7 +313,7 @@ Partial Class dlgHistogram
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Histogram"
         Me.Text = "Histogram Plot"
-        Me.contextMenuStripOptions.ResumeLayout(False)
+        Me.tool.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -320,7 +334,9 @@ Partial Class dlgHistogram
     Friend WithEvents ucrChkRidges As ucrCheck
     Friend WithEvents ucrChkDisplayAsDotPlot As ucrCheck
     Friend WithEvents cmdOptions As ucrSplitButton
-    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents tool As ContextMenuStrip
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemHistogramOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemDensityOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemFrequencyPolygon As ToolStripMenuItem
 End Class
