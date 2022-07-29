@@ -49,7 +49,7 @@ Public Class sdgExtremesMethod
         ucrNudReturnLevel.SetLinkedDisplayControl(lblReturnLevel)
         ucrInputType.AddToLinkedControls(ucrNudReturnLevel, {"return.level"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkType.AddToLinkedControls(ucrInputType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
-                                       bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "parameter" & Chr(34))
+                                       bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="parameter")
 
         ucrInputPrior.SetParameter(New RParameter("first", 5, bNewIncludeArgumentName:=False))
         ucrInputPrior.AddQuotesIfUnrecognised = False
@@ -131,7 +131,7 @@ Public Class sdgExtremesMethod
         clsListInitialFunction = clsNewListInitialFunction
         clsConcatenateFunction = clsNewConcatenateFunction
         clsConfidenceIntervalFunction = clsNewConfidenceIntervalFunction
-        ucrChkType.SetRCode(clsConfidenceIntervalFunction)
+        ucrChkType.SetRCode(clsConfidenceIntervalFunction, bReset)
         ucrNudReturnLevel.SetRCode(clsConfidenceIntervalFunction, bReset)
         ucrInputPrior.SetRCode(clsConcatenateFunction, bReset)
         ucrNudNumberOfIterations.SetRCode(clsFevdFunction, bReset)
