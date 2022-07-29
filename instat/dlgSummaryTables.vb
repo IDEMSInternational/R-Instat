@@ -75,11 +75,11 @@ Public Class dlgSummaryTables
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
 
-        ucrReceiverMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 1))
-        ucrReceiverMultiplePercentages.SetParameterIsString()
-        ucrReceiverMultiplePercentages.Selector = ucrSelectorSummaryTables
-        ucrReceiverMultiplePercentages.SetDataType("factor") ' TODO data this accepts must be in the other receiver too
-        ucrReceiverMultiplePercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
+        ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 1))
+        ucrReceiverPercentages.SetParameterIsString()
+        ucrReceiverPercentages.Selector = ucrSelectorSummaryTables
+        ucrReceiverPercentages.SetDataType("factor") ' TODO data this accepts must be in the other receiver too
+        ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
 
         ucrChkStoreResults.SetText("Store Output")
         ucrChkStoreResults.SetParameter(New RParameter("store_table", 4))
@@ -168,7 +168,7 @@ Public Class dlgSummaryTables
         ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
         ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverMultiplePercentages, {True}, bNewLinkedHideIfParameterMissing:=True,
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                       bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True,
                                                       bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
@@ -626,7 +626,7 @@ Public Class dlgSummaryTables
 
     Private Sub ucrChkDisplayAsPercentage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
         If ucrChkDisplayAsPercentage.Checked Then
-            ucrReceiverMultiplePercentages.SetMeAsReceiver()
+            ucrReceiverPercentages.SetMeAsReceiver()
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If

@@ -56,7 +56,6 @@ Partial Class dlgSummaryTables
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
         Me.lblFrequencyMarginName = New System.Windows.Forms.Label()
         Me.ucrChkFrequencyDisplayMargins = New instat.ucrCheck()
-        Me.ucrReceiverMultiplePercentages = New instat.ucrReceiverMultiple()
         Me.ucrChkPercentageProportion = New instat.ucrCheck()
         Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.ucrPnlSummaryFrequencyTables = New instat.UcrPanel()
@@ -80,6 +79,7 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlMargin = New instat.UcrPanel()
         Me.ucrInputFrequencyMarginName = New instat.ucrInputTextBox()
+        Me.ucrReceiverPercentages = New instat.ucrReceiverSingle()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.grpPercentages.SuspendLayout()
@@ -259,13 +259,13 @@ Partial Class dlgSummaryTables
         '
         'grpPercentages
         '
+        Me.grpPercentages.Controls.Add(Me.ucrReceiverPercentages)
         Me.grpPercentages.Controls.Add(Me.lblFactorsAsPercentage)
-        Me.grpPercentages.Controls.Add(Me.ucrReceiverMultiplePercentages)
         Me.grpPercentages.Controls.Add(Me.ucrChkPercentageProportion)
         Me.grpPercentages.Controls.Add(Me.ucrChkDisplayAsPercentage)
         Me.grpPercentages.Location = New System.Drawing.Point(286, 178)
         Me.grpPercentages.Name = "grpPercentages"
-        Me.grpPercentages.Size = New System.Drawing.Size(174, 192)
+        Me.grpPercentages.Size = New System.Drawing.Size(174, 89)
         Me.grpPercentages.TabIndex = 23
         Me.grpPercentages.TabStop = False
         Me.grpPercentages.Text = "Percentages"
@@ -299,19 +299,6 @@ Partial Class dlgSummaryTables
         Me.ucrChkFrequencyDisplayMargins.Name = "ucrChkFrequencyDisplayMargins"
         Me.ucrChkFrequencyDisplayMargins.Size = New System.Drawing.Size(213, 23)
         Me.ucrChkFrequencyDisplayMargins.TabIndex = 24
-        '
-        'ucrReceiverMultiplePercentages
-        '
-        Me.ucrReceiverMultiplePercentages.AutoSize = True
-        Me.ucrReceiverMultiplePercentages.frmParent = Nothing
-        Me.ucrReceiverMultiplePercentages.Location = New System.Drawing.Point(18, 59)
-        Me.ucrReceiverMultiplePercentages.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultiplePercentages.Name = "ucrReceiverMultiplePercentages"
-        Me.ucrReceiverMultiplePercentages.Selector = Nothing
-        Me.ucrReceiverMultiplePercentages.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultiplePercentages.strNcFilePath = ""
-        Me.ucrReceiverMultiplePercentages.TabIndex = 2
-        Me.ucrReceiverMultiplePercentages.ucrSelector = Nothing
         '
         'ucrChkPercentageProportion
         '
@@ -464,7 +451,7 @@ Partial Class dlgSummaryTables
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 517)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'ucrReceiverSummaryCols
@@ -546,6 +533,19 @@ Partial Class dlgSummaryTables
         Me.ucrInputFrequencyMarginName.Name = "ucrInputFrequencyMarginName"
         Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
         Me.ucrInputFrequencyMarginName.TabIndex = 26
+        '
+        'ucrReceiverPercentages
+        '
+        Me.ucrReceiverPercentages.AutoSize = True
+        Me.ucrReceiverPercentages.frmParent = Me
+        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(21, 60)
+        Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
+        Me.ucrReceiverPercentages.Selector = Nothing
+        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPercentages.strNcFilePath = ""
+        Me.ucrReceiverPercentages.TabIndex = 4
+        Me.ucrReceiverPercentages.ucrSelector = Nothing
         '
         'dlgSummaryTables
         '
@@ -633,10 +633,10 @@ Partial Class dlgSummaryTables
     Friend WithEvents rdoSummaryTable As RadioButton
     Friend WithEvents grpPercentages As GroupBox
     Friend WithEvents lblFactorsAsPercentage As Label
-    Friend WithEvents ucrReceiverMultiplePercentages As ucrReceiverMultiple
     Friend WithEvents ucrChkPercentageProportion As ucrCheck
     Friend WithEvents ucrChkDisplayAsPercentage As ucrCheck
     Friend WithEvents ucrInputFrequencyMarginName As ucrInputTextBox
     Friend WithEvents lblFrequencyMarginName As Label
     Friend WithEvents ucrChkFrequencyDisplayMargins As ucrCheck
+    Friend WithEvents ucrReceiverPercentages As ucrReceiverSingle
 End Class
