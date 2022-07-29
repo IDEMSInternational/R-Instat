@@ -263,7 +263,7 @@ Public Class dlgThreeVariablePivotTable
             If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not lstColumns.Contains(strColumnVariableName) Then
                 lstColumns.Add(ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False))
                 clsConcatenateFunction.AddParameter("col" & iPosition, strColumnVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
-                iPosition = iPosition + 1
+                iPosition += 1
             End If
 
             If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso
