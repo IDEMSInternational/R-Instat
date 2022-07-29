@@ -352,4 +352,16 @@ Public Class dlgHistogram
         clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrPnlOptions_Control(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
+
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrVariablesAsFactorforHist_SelectionChanged(sender As Object, e As EventArgs) Handles ucrVariablesAsFactorforHist.SelectionChanged
+
+    End Sub
 End Class

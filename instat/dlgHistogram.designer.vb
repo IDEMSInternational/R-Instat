@@ -44,6 +44,14 @@ Partial Class dlgHistogram
         Me.rdoFrequencyPolygon = New System.Windows.Forms.RadioButton()
         Me.lblfactor = New System.Windows.Forms.Label()
         Me.lblStats = New System.Windows.Forms.Label()
+        Me.tool = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemHistogramOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemDensityOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemFrequencyPolygon = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
+        Me.ucrChkRidges = New instat.ucrCheck()
         Me.ucrInputStats = New instat.ucrInputComboBox()
         Me.ucrChkPercentages = New instat.ucrCheck()
         Me.ucrSaveHist = New instat.ucrSave()
@@ -52,14 +60,6 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrChkRidges = New instat.ucrCheck()
-        Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
-        Me.tool = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemHistogramOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemDensityOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemFrequencyPolygon = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdOptions = New instat.ucrSplitButton()
         Me.tool.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,7 +118,7 @@ Partial Class dlgHistogram
         'lblfactor
         '
         Me.lblfactor.AutoSize = True
-        Me.lblfactor.Location = New System.Drawing.Point(249, 225)
+        Me.lblfactor.Location = New System.Drawing.Point(249, 204)
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Size = New System.Drawing.Size(85, 13)
         Me.lblfactor.TabIndex = 6
@@ -127,119 +127,11 @@ Partial Class dlgHistogram
         '
         'lblStats
         '
-        Me.lblStats.Location = New System.Drawing.Point(10, 306)
+        Me.lblStats.Location = New System.Drawing.Point(10, 274)
         Me.lblStats.Name = "lblStats"
         Me.lblStats.Size = New System.Drawing.Size(83, 18)
         Me.lblStats.TabIndex = 10
         Me.lblStats.Text = "merge"
-        '
-        'ucrInputStats
-        '
-        Me.ucrInputStats.AddQuotesIfUnrecognised = True
-        Me.ucrInputStats.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputStats.GetSetSelectedIndex = -1
-        Me.ucrInputStats.IsReadOnly = False
-        Me.ucrInputStats.Location = New System.Drawing.Point(101, 305)
-        Me.ucrInputStats.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputStats.Name = "ucrInputStats"
-        Me.ucrInputStats.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputStats.TabIndex = 11
-        '
-        'ucrChkPercentages
-        '
-        Me.ucrChkPercentages.AutoSize = True
-        Me.ucrChkPercentages.Checked = False
-        Me.ucrChkPercentages.Location = New System.Drawing.Point(250, 305)
-        Me.ucrChkPercentages.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrChkPercentages.Name = "ucrChkPercentages"
-        Me.ucrChkPercentages.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkPercentages.TabIndex = 13
-        '
-        'ucrSaveHist
-        '
-        Me.ucrSaveHist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 342)
-        Me.ucrSaveHist.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrSaveHist.Name = "ucrSaveHist"
-        Me.ucrSaveHist.Size = New System.Drawing.Size(322, 24)
-        Me.ucrSaveHist.TabIndex = 12
-        '
-        'ucrVariablesAsFactorforHist
-        '
-        Me.ucrVariablesAsFactorforHist.AutoSize = True
-        Me.ucrVariablesAsFactorforHist.frmParent = Me
-        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(247, 68)
-        Me.ucrVariablesAsFactorforHist.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
-        Me.ucrVariablesAsFactorforHist.Selector = Nothing
-        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorforHist.strNcFilePath = ""
-        Me.ucrVariablesAsFactorforHist.TabIndex = 5
-        Me.ucrVariablesAsFactorforHist.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
-        '
-        'ucrFactorReceiver
-        '
-        Me.ucrFactorReceiver.AutoSize = True
-        Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(250, 241)
-        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
-        Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 20)
-        Me.ucrFactorReceiver.strNcFilePath = ""
-        Me.ucrFactorReceiver.TabIndex = 7
-        Me.ucrFactorReceiver.ucrSelector = Nothing
-        '
-        'ucrHistogramSelector
-        '
-        Me.ucrHistogramSelector.AutoSize = True
-        Me.ucrHistogramSelector.bDropUnusedFilterLevels = False
-        Me.ucrHistogramSelector.bShowHiddenColumns = False
-        Me.ucrHistogramSelector.bUseCurrentFilter = True
-        Me.ucrHistogramSelector.Location = New System.Drawing.Point(10, 48)
-        Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
-        Me.ucrHistogramSelector.Size = New System.Drawing.Size(214, 183)
-        Me.ucrHistogramSelector.TabIndex = 4
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 375)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 14
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(8, 11)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(433, 30)
-        Me.ucrPnlOptions.TabIndex = 0
-        '
-        'ucrChkRidges
-        '
-        Me.ucrChkRidges.AutoSize = True
-        Me.ucrChkRidges.Checked = False
-        Me.ucrChkRidges.Location = New System.Drawing.Point(250, 277)
-        Me.ucrChkRidges.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrChkRidges.Name = "ucrChkRidges"
-        Me.ucrChkRidges.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRidges.TabIndex = 15
-        '
-        'ucrChkDisplayAsDotPlot
-        '
-        Me.ucrChkDisplayAsDotPlot.AutoSize = True
-        Me.ucrChkDisplayAsDotPlot.Checked = False
-        Me.ucrChkDisplayAsDotPlot.Location = New System.Drawing.Point(247, 267)
-        Me.ucrChkDisplayAsDotPlot.Name = "ucrChkDisplayAsDotPlot"
-        Me.ucrChkDisplayAsDotPlot.Size = New System.Drawing.Size(173, 23)
-        Me.ucrChkDisplayAsDotPlot.TabIndex = 16
         '
         'tool
         '
@@ -284,12 +176,120 @@ Partial Class dlgHistogram
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'ucrChkDisplayAsDotPlot
+        '
+        Me.ucrChkDisplayAsDotPlot.AutoSize = True
+        Me.ucrChkDisplayAsDotPlot.Checked = False
+        Me.ucrChkDisplayAsDotPlot.Location = New System.Drawing.Point(247, 243)
+        Me.ucrChkDisplayAsDotPlot.Name = "ucrChkDisplayAsDotPlot"
+        Me.ucrChkDisplayAsDotPlot.Size = New System.Drawing.Size(173, 23)
+        Me.ucrChkDisplayAsDotPlot.TabIndex = 16
+        '
+        'ucrChkRidges
+        '
+        Me.ucrChkRidges.AutoSize = True
+        Me.ucrChkRidges.Checked = False
+        Me.ucrChkRidges.Location = New System.Drawing.Point(249, 256)
+        Me.ucrChkRidges.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkRidges.Name = "ucrChkRidges"
+        Me.ucrChkRidges.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRidges.TabIndex = 15
+        '
+        'ucrInputStats
+        '
+        Me.ucrInputStats.AddQuotesIfUnrecognised = True
+        Me.ucrInputStats.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStats.GetSetSelectedIndex = -1
+        Me.ucrInputStats.IsReadOnly = False
+        Me.ucrInputStats.Location = New System.Drawing.Point(101, 273)
+        Me.ucrInputStats.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputStats.Name = "ucrInputStats"
+        Me.ucrInputStats.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStats.TabIndex = 11
+        '
+        'ucrChkPercentages
+        '
+        Me.ucrChkPercentages.AutoSize = True
+        Me.ucrChkPercentages.Checked = False
+        Me.ucrChkPercentages.Location = New System.Drawing.Point(250, 284)
+        Me.ucrChkPercentages.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkPercentages.Name = "ucrChkPercentages"
+        Me.ucrChkPercentages.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPercentages.TabIndex = 13
+        '
+        'ucrSaveHist
+        '
+        Me.ucrSaveHist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 303)
+        Me.ucrSaveHist.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrSaveHist.Name = "ucrSaveHist"
+        Me.ucrSaveHist.Size = New System.Drawing.Size(322, 24)
+        Me.ucrSaveHist.TabIndex = 12
+        '
+        'ucrVariablesAsFactorforHist
+        '
+        Me.ucrVariablesAsFactorforHist.AutoSize = True
+        Me.ucrVariablesAsFactorforHist.frmParent = Me
+        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(247, 68)
+        Me.ucrVariablesAsFactorforHist.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
+        Me.ucrVariablesAsFactorforHist.Selector = Nothing
+        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorforHist.strNcFilePath = ""
+        Me.ucrVariablesAsFactorforHist.TabIndex = 5
+        Me.ucrVariablesAsFactorforHist.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
+        '
+        'ucrFactorReceiver
+        '
+        Me.ucrFactorReceiver.AutoSize = True
+        Me.ucrFactorReceiver.frmParent = Me
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(250, 219)
+        Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
+        Me.ucrFactorReceiver.Selector = Nothing
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 20)
+        Me.ucrFactorReceiver.strNcFilePath = ""
+        Me.ucrFactorReceiver.TabIndex = 7
+        Me.ucrFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrHistogramSelector
+        '
+        Me.ucrHistogramSelector.AutoSize = True
+        Me.ucrHistogramSelector.bDropUnusedFilterLevels = False
+        Me.ucrHistogramSelector.bShowHiddenColumns = False
+        Me.ucrHistogramSelector.bUseCurrentFilter = True
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(10, 48)
+        Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
+        Me.ucrHistogramSelector.Size = New System.Drawing.Size(214, 183)
+        Me.ucrHistogramSelector.TabIndex = 4
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 330)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 14
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(8, 11)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(433, 30)
+        Me.ucrPnlOptions.TabIndex = 0
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(448, 436)
+        Me.ClientSize = New System.Drawing.Size(448, 384)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkDisplayAsDotPlot)
         Me.Controls.Add(Me.ucrChkRidges)
