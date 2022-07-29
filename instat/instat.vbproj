@@ -189,6 +189,12 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="dlgApsimx.Designer.vb">
+      <DependentUpon>dlgApsimx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgApsimx.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClusterAnalysis.Designer.vb">
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
@@ -2881,6 +2887,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgApsimx.resx">
+      <DependentUpon>dlgApsimx.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
     </EmbeddedResource>

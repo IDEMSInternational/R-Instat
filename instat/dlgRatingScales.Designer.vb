@@ -66,6 +66,7 @@ Partial Class dlgRatingScales
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkVariableNames = New instat.ucrCheck()
         Me.grpSort.SuspendLayout()
         Me.grpSortTable.SuspendLayout()
         Me.SuspendLayout()
@@ -299,7 +300,7 @@ Partial Class dlgRatingScales
         Me.ucrNudNeutralLevel.AutoSize = True
         Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(152, 297)
+        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(152, 325)
         Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
@@ -311,7 +312,7 @@ Partial Class dlgRatingScales
         '
         Me.ucrChkNumberOfCategories.AutoSize = True
         Me.ucrChkNumberOfCategories.Checked = False
-        Me.ucrChkNumberOfCategories.Location = New System.Drawing.Point(12, 299)
+        Me.ucrChkNumberOfCategories.Location = New System.Drawing.Point(12, 325)
         Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
         Me.ucrChkNumberOfCategories.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkNumberOfCategories.TabIndex = 0
@@ -337,7 +338,7 @@ Partial Class dlgRatingScales
         '
         Me.ucrChkFlip.AutoSize = True
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(12, 272)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(12, 298)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(224, 23)
         Me.ucrChkFlip.TabIndex = 11
@@ -383,7 +384,7 @@ Partial Class dlgRatingScales
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 413)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'ucrSelectorRatingScale
@@ -398,12 +399,22 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorRatingScale.TabIndex = 4
         '
+        'ucrChkVariableNames
+        '
+        Me.ucrChkVariableNames.AutoSize = True
+        Me.ucrChkVariableNames.Checked = False
+        Me.ucrChkVariableNames.Location = New System.Drawing.Point(12, 272)
+        Me.ucrChkVariableNames.Name = "ucrChkVariableNames"
+        Me.ucrChkVariableNames.Size = New System.Drawing.Size(224, 23)
+        Me.ucrChkVariableNames.TabIndex = 16
+        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 470)
+        Me.Controls.Add(Me.ucrChkVariableNames)
         Me.Controls.Add(Me.ucrNudNeutralLevel)
         Me.Controls.Add(Me.ucrChkNumberOfCategories)
         Me.Controls.Add(Me.grpSortTable)
@@ -463,4 +474,5 @@ Partial Class dlgRatingScales
     Friend WithEvents rdoHighAscendingTable As RadioButton
     Friend WithEvents ucrPnlTableOptions As UcrPanel
     Friend WithEvents ucrPnlLikertOptions As UcrPanel
+    Friend WithEvents ucrChkVariableNames As ucrCheck
 End Class

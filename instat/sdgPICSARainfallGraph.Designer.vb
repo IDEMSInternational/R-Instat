@@ -2106,7 +2106,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrSdgPICSARainfalbuttons
         '
         Me.ucrSdgPICSARainfalbuttons.AutoSize = True
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(217, 338)
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(183, 338)
         Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(224, 30)
