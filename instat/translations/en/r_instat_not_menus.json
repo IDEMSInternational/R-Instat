@@ -3833,4 +3833,8 @@
   "Selection:": "Selection:",
   "Define New Selection": "Define New Selection",
   "Apply As Selected Columns": "Apply As Selected Columns",
-  "As Subset": "As Subset"}
+  "As Subset": "As Subset",
+  "Column selections": "Column selections",
+  ".everything": ".everything",
+  "Add Not": "Add Not"
+}
