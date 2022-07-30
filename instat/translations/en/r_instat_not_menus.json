@@ -3834,4 +3834,6 @@
   "Define New Selection": "Define New Selection",
   "Apply As Selected Columns": "Apply As Selected Columns",
   "As Subset": "As Subset",
-  "Add Not": "Add Not"}
+  "Add Not": "Add Not",
+  "no_filter": "no_filter",
+  "Remove Current Selection": "Remove Current Selection"}
