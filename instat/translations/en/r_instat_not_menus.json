@@ -3837,4 +3837,9 @@
   "Add Not": "Add Not",
   "no_filter": "no_filter",
   "Remove Current Selection": "Remove Current Selection",
-  "Rename With": "Rename With"}
+  "Rename With": "Rename With",
+  "File name:": "File name:",
+  "Save as type:": "Save as type:",
+  "Cancel ": "Cancel ",
+  "Save As:": "Save As:"
+}
