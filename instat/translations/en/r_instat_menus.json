@@ -436,4 +436,6 @@
   "Delete Cell(s)": "Delete Cell(s)",
   "Import From File ...": "Import From File ...",
   "Import From Library ...": "Import From Library ...",
-  "Import From ODK...": "Import From ODK..."}
+  "Import From ODK...": "Import From ODK...",
+  "Data Book": "Data Book",
+  "Add (Merge) Columns...": "Add (Merge) Columns...",}
