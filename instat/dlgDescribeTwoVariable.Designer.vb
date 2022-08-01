@@ -477,10 +477,10 @@ Partial Class dlgDescribeTwoVariable
         Me.lblThreeVariableFactorAsPercentages.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblThreeVariableFactorAsPercentages.Location = New System.Drawing.Point(18, 44)
         Me.lblThreeVariableFactorAsPercentages.Name = "lblThreeVariableFactorAsPercentages"
-        Me.lblThreeVariableFactorAsPercentages.Size = New System.Drawing.Size(117, 13)
+        Me.lblThreeVariableFactorAsPercentages.Size = New System.Drawing.Size(102, 13)
         Me.lblThreeVariableFactorAsPercentages.TabIndex = 1
         Me.lblThreeVariableFactorAsPercentages.Tag = "Factors as Percentage:"
-        Me.lblThreeVariableFactorAsPercentages.Text = "Factors as Percentage:"
+        Me.lblThreeVariableFactorAsPercentages.Text = "Of Factor (Optional):"
         '
         'ucrChkThreeVariablePercentageProportion
         '
