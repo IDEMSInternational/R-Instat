@@ -25,7 +25,7 @@ Public Class dlgEndOfRainsSeason
     Private strWB As String = "wb"
     Private strEvapReplaceNA As String = "evap_NA_as_value"
     Private strCurrDataName As String = ""
-    Private iCapacityDefault As Integer = 60
+    Private iCapacityDefault As Integer = 160
 
 #Region "general_code_structures"
     ' General
@@ -275,7 +275,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudWBLessThan.DecimalPlaces = 2
 
         ucrNudCapacity.SetParameter(New RParameter("yes", 1))
-        ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
+        ucrNudCapacity.SetMinMax(100, Integer.MaxValue)
         ucrNudCapacity.Increment = 10
 
         ucrInputSeasonDoy.SetParameter(New RParameter("result_name", 3))
