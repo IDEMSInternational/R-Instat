@@ -48,6 +48,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSecondType = New System.Windows.Forms.Label()
         Me.lblSummaryName = New System.Windows.Forms.Label()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
+        Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblSecondBy = New System.Windows.Forms.Label()
         Me.lblThreeVariableCategorical = New System.Windows.Forms.Label()
         Me.rdoTwoVariable = New System.Windows.Forms.RadioButton()
@@ -85,7 +86,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdFormatTable = New System.Windows.Forms.Button()
-        Me.lblFirstType = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpTwoVariablePercentages.SuspendLayout()
@@ -197,6 +197,15 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 11
         Me.grpSummaries.TabStop = False
+        '
+        'lblFirstType
+        '
+        Me.lblFirstType.AutoSize = True
+        Me.lblFirstType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFirstType.Location = New System.Drawing.Point(12, 15)
+        Me.lblFirstType.Name = "lblFirstType"
+        Me.lblFirstType.Size = New System.Drawing.Size(0, 13)
+        Me.lblFirstType.TabIndex = 6
         '
         'lblSecondBy
         '
@@ -324,7 +333,7 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFactorsAsPercentage.Name = "lblFactorsAsPercentage"
         Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(117, 13)
         Me.lblFactorsAsPercentage.TabIndex = 1
-        Me.lblFactorsAsPercentage.Tag = "Factors as Percentage:"
+        Me.lblFactorsAsPercentage.Tag = "Of Factor (Optional):"
         Me.lblFactorsAsPercentage.Text = "Factors as Percentage:"
         '
         'ucrChkPercentageProportion
@@ -453,7 +462,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpThreeVariablePercentages.Controls.Add(Me.ucrChkThreeVariableDisplayAsPercentage)
         Me.grpThreeVariablePercentages.Location = New System.Drawing.Point(239, 250)
         Me.grpThreeVariablePercentages.Name = "grpThreeVariablePercentages"
-        Me.grpThreeVariablePercentages.Size = New System.Drawing.Size(174, 149)
+        Me.grpThreeVariablePercentages.Size = New System.Drawing.Size(174, 114)
         Me.grpThreeVariablePercentages.TabIndex = 26
         Me.grpThreeVariablePercentages.TabStop = False
         Me.grpThreeVariablePercentages.Text = "Percentages"
@@ -486,9 +495,9 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkThreeVariablePercentageProportion.AutoSize = True
         Me.ucrChkThreeVariablePercentageProportion.Checked = False
-        Me.ucrChkThreeVariablePercentageProportion.Location = New System.Drawing.Point(5, 128)
+        Me.ucrChkThreeVariablePercentageProportion.Location = New System.Drawing.Point(14, 88)
         Me.ucrChkThreeVariablePercentageProportion.Name = "ucrChkThreeVariablePercentageProportion"
-        Me.ucrChkThreeVariablePercentageProportion.Size = New System.Drawing.Size(160, 23)
+        Me.ucrChkThreeVariablePercentageProportion.Size = New System.Drawing.Size(136, 23)
         Me.ucrChkThreeVariablePercentageProportion.TabIndex = 3
         '
         'ucrChkThreeVariableDisplayAsPercentage
@@ -626,15 +635,6 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdFormatTable.TabIndex = 28
         Me.cmdFormatTable.Text = "Format Table..."
         Me.cmdFormatTable.UseVisualStyleBackColor = True
-        '
-        'lblFirstType
-        '
-        Me.lblFirstType.AutoSize = True
-        Me.lblFirstType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstType.Location = New System.Drawing.Point(12, 15)
-        Me.lblFirstType.Name = "lblFirstType"
-        Me.lblFirstType.Size = New System.Drawing.Size(0, 13)
-        Me.lblFirstType.TabIndex = 6
         '
         'dlgDescribeTwoVariable
         '

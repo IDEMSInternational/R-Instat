@@ -108,6 +108,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableThirdVariable.SetParameterIsString()
         ucrReceiverThreeVariableThirdVariable.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverThreeVariableThirdVariable.SetLinkedDisplayControl(lblThirdVariable)
+        ucrReceiverThreeVariableThirdVariable.SetDataType("factor")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -245,8 +246,6 @@ Public Class dlgDescribeTwoVariable
         ucrInputMarginName.SetText("All")
         ucrNudColumnFactors.SetText("2")
         ucrInputMarginName.Visible = False
-        grpThreeVariablePercentages.Visible = False
-        cmdFormatTable.Visible = False
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -491,65 +490,30 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverFirstVars.IsEmpty Then
-            If rdoTwoVariable.Checked Then
-                If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            ElseIf rdoSkim.Checked Then
-                ucrBase.OKEnabled(True)
-            Else
-                If Not ucrReceiverThreeVariableSecondFactor.IsEmpty AndAlso
-                Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
-                    If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
-                        ucrBase.OKEnabled(True)
-                    ElseIf (strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical") OrElse
-                            (strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric") Then
-                        ucrBase.OKEnabled(True)
-                    Else
-                        ucrBase.OKEnabled(False)
-                    End If
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty AndAlso (
+                (rdoTwoVariable.Checked _
+                AndAlso Not ucrReceiverSecondTwoVariableFactor.IsEmpty) _
+                OrElse rdoSkim.Checked _
+                OrElse (Not ucrReceiverThreeVariableSecondFactor.IsEmpty _
+                AndAlso Not ucrReceiverThreeVariableThirdVariable.IsEmpty) _
+                AndAlso (IsCategoricalByCategorical() OrElse IsNumericByCategorical() _
+                OrElse IsCategoricalByNumeric())))
     End Sub
 
     Private Function IsCategoricalByCategorical() As Boolean
-        If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" Then
-            Return True
-        Else
-            Return False
-        End If
+        Return strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical"
     End Function
 
     Private Function IsCategoricalByNumeric() As Boolean
-        If strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" Then
-            Return True
-        Else
-            Return False
-        End If
+        Return strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric"
     End Function
 
     Private Function IsNumericByCategorical() As Boolean
-        If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
-            Return True
-        Else
-            Return False
-        End If
+        Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical"
     End Function
 
     Private Function IsNumericByNumeric() As Boolean
-        If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" Then
-            Return True
-        Else
-            Return False
-        End If
+        Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric"
     End Function
 
     Private Sub ucrBaseDescribeTwoVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -585,18 +549,11 @@ Public Class dlgDescribeTwoVariable
         grpOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
-            Select Case strFirstVariablesType
-                Case "numeric"
-                    ucrChkOmitMissing.Visible = True
-                    If strSecondVariableType = "categorical" Then
-                        grpOptions.Visible = True
-                    End If
-            End Select
+            ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
+            grpOptions.Visible = IsNumericByCategorical()
         ElseIf rdoThreeVariable.Checked Then
-            If (strFirstVariablesType = "categorical" AndAlso
-            strSecondVariableType = "numeric") OrElse
-            (strFirstVariablesType = "numeric" And
-            strSecondVariableType = "categorical") Then
+            If IsCategoricalByNumeric() OrElse
+            IsNumericByCategorical() Then
                 grpOptions.Visible = True
             Else
                 grpOptions.Visible = False
@@ -644,30 +601,27 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub AddFormatTableMapToAfterCode()
         ucrBase.clsRsyntax.RemoveFromAfterCodes(clsFormatTableMappingPipeOperator)
-        If rdoSkim.Checked Then
+        If rdoSkim.Checked OrElse IsNothing(clsJoiningPipeOperator.GetParameter("pipe")) Then
             Exit Sub
         End If
 
-        If IsNumericByCategorical() OrElse
-       IsCategoricalByCategorical() OrElse (IsCategoricalByNumeric() AndAlso
-       rdoThreeVariable.Checked) Then
-            If Not IsNothing(clsJoiningPipeOperator.GetParameter("pipe")) Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsFormatTableMappingPipeOperator, 2)
-            End If
+        If IsNumericByCategorical() OrElse IsCategoricalByCategorical() _
+                OrElse (IsCategoricalByNumeric() AndAlso rdoThreeVariable.Checked) Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsFormatTableMappingPipeOperator, 2)
         End If
     End Sub
 
     Private Sub UpdateCombineFactorFunctions()
+        If rdoSkim.Checked OrElse ucrReceiverFirstVars.IsEmpty Then
+            Exit Sub
+        End If
+
         Dim iPosition As Integer = 0
         clsCombineMultipleColumnsFunction.ClearParameters()
-        If rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked Then
-            If Not ucrReceiverFirstVars.IsEmpty Then
-                For Each strColumn In ucrReceiverFirstVars.GetVariableNamesList()
-                    clsCombineMultipleColumnsFunction.AddParameter(strColumn, strColumn, bIncludeArgumentName:=False, iPosition:=iPosition)
-                    iPosition += 1
-                Next
-            End If
-        End If
+        For Each strColumn In ucrReceiverFirstVars.GetVariableNamesList()
+            clsCombineMultipleColumnsFunction.AddParameter(strColumn, strColumn, bIncludeArgumentName:=False, iPosition:=iPosition)
+            iPosition += 1
+        Next
     End Sub
 
     Private Sub UpdateCombineFactorParameterFunction()
@@ -719,6 +673,7 @@ Public Class dlgDescribeTwoVariable
             End If
         End If
     End Sub
+
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
         If ucrChkOmitMissing.Checked Then
             clsRCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
@@ -759,9 +714,9 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub HideFormatTableButton()
-        cmdFormatTable.Visible = IsNumericByCategorical() OrElse
-        IsCategoricalByCategorical() OrElse (IsCategoricalByNumeric() AndAlso
-        rdoThreeVariable.Checked)
+        cmdFormatTable.Visible = IsNumericByCategorical() _
+            OrElse IsCategoricalByCategorical() OrElse (IsCategoricalByNumeric() _
+            AndAlso rdoThreeVariable.Checked)
     End Sub
 
     Private Sub ChangeLocations()
@@ -770,8 +725,8 @@ Public Class dlgDescribeTwoVariable
             Me.Size = New Point(iDialogueXsize, 425)
         Else
 
-            If IsNumericByCategorical() OrElse IsCategoricalByCategorical() OrElse
-                (IsCategoricalByNumeric() AndAlso rdoThreeVariable.Checked) Then
+            If IsNumericByCategorical() OrElse IsCategoricalByCategorical() _
+                OrElse (IsCategoricalByNumeric() AndAlso rdoThreeVariable.Checked) Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 435)
                 Me.Size = New Point(iDialogueXsize, 530)
             ElseIf IsCategoricalByNumeric() Then
@@ -790,28 +745,15 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub EnableDisableFrequencyControls()
-        grpThreeVariablePercentages.Visible = False
-        grpTwoVariablePercentages.Visible = False
-        grpFrequency.Visible = False
+        grpThreeVariablePercentages.Visible = rdoThreeVariable.Checked _
+            AndAlso IsCategoricalByCategorical()
+        grpTwoVariablePercentages.Visible = rdoTwoVariable.Checked AndAlso (IsCategoricalByCategorical() _
+            OrElse IsNumericByCategorical())
+        grpFrequency.Visible = (rdoTwoVariable.Checked AndAlso (IsCategoricalByCategorical() _
+            OrElse IsNumericByCategorical())) OrElse (rdoThreeVariable.Checked _
+            AndAlso (IsNumericByCategorical() OrElse IsCategoricalByNumeric() _
+            OrElse IsCategoricalByCategorical()))
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
-        If rdoTwoVariable.Checked Then
-            If IsCategoricalByCategorical() OrElse IsNumericByCategorical() Then
-                If strFirstVariablesType = "categorical" Then
-                    grpTwoVariablePercentages.Visible = True
-                Else
-                    grpTwoVariablePercentages.Visible = False
-                End If
-                grpFrequency.Visible = True
-            End If
-        ElseIf rdoThreeVariable.Checked Then
-            If IsNumericByCategorical() OrElse IsCategoricalByNumeric() Then
-                grpFrequency.Visible = True
-            ElseIf IsCategoricalByCategorical Then
-                grpFrequency.Visible = True
-                grpThreeVariablePercentages.Visible = True
-                grpTwoVariablePercentages.Visible = False
-            End If
-        End If
     End Sub
 
     Private Sub SwapMmtableHeaderFunctions()
@@ -1126,9 +1068,11 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrReceiverSecondTwoVariableFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSecondTwoVariableFactor.SelectionChanged
         MatchingCategoricalByCategoricalVariables(ucrReceiverSecondTwoVariableFactor)
     End Sub
+
     Private Sub ucrReceiverFirstVars_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstVars.SelectionChanged
         MatchingCategoricalByCategoricalVariables(ucrReceiverFirstVars)
     End Sub
+
     Private Sub ucrReceiverThreeVariableSecondFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverThreeVariableSecondFactor.SelectionChanged
         MatchingCategoricalByCategoricalVariables(ucrReceiverThreeVariableSecondFactor)
     End Sub
@@ -1142,7 +1086,6 @@ Public Class dlgDescribeTwoVariable
             Exit Sub
         End If
         Dim bContainedInMultipleReceiver As Boolean = False
-        Dim strWarningMessage As String = ""
 
         If TypeOf (sender) Is ucrReceiverSingle Then
             bContainedInMultipleReceiver = ucrReceiverFirstVars.GetVariableNamesList.Contains(
@@ -1160,31 +1103,26 @@ Public Class dlgDescribeTwoVariable
 
         If sender Is ucrReceiverSecondTwoVariableFactor Then
             If bContainedInMultipleReceiver And strFirstVariablesType = "categorical" Then
-                strWarningMessage = " First Variable "
-                DisplayWarning(strWarningMessage)
+                DisplayWarning(" First Variable ")
             End If
         ElseIf sender Is ucrReceiverThreeVariableThirdVariable Then
             If (bContainedInMultipleReceiver And strFirstVariablesType = "categorical") OrElse
                (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
-                strWarningMessage = " First Variable and the Second Variable "
-                DisplayWarning(strWarningMessage)
+                DisplayWarning(" First Variable and Second Variable ")
             End If
         ElseIf sender Is ucrReceiverThreeVariableSecondFactor Then
             If (strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver) OrElse
                               (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
-                strWarningMessage = " First Variable and the third Variable "
-                DisplayWarning(strWarningMessage)
+                DisplayWarning(" First Variable and third Variable ")
             End If
         ElseIf sender Is ucrReceiverFirstVars Then
             If rdoTwoVariable.Checked Then
                 If strSecondVariableType = "categorical" AndAlso bContainedInMultipleReceiver Then
-                    strWarningMessage = " Second Variable "
-                    DisplayWarning(strWarningMessage)
+                    DisplayWarning(" Second Variable ")
                 End If
             ElseIf rdoThreeVariable.Checked Then
                 If bContainedInMultipleReceiver Then
-                    strWarningMessage = " Second and Third Variable "
-                    DisplayWarning(strWarningMessage)
+                    DisplayWarning(" Second Variable and Third Variable ")
                 End If
             End If
         End If
