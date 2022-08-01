@@ -266,10 +266,6 @@ Public Class dlgHistogram
                     End If
                 End If
             ElseIf rdoFrequencyPolygon.Checked Then
-                toolStripMenuItemHistogramOptions.Enabled = False
-                toolStripMenuItemDotOptions.Enabled = False
-                toolStripMenuItemDensityOptions.Enabled = False
-                toolStripMenuItemDensityRidgesOptions.Enabled = False
                 toolStripMenuItemFrequencyPolygonOptions.Enabled = True
                 ucrFactorReceiver.ChangeParameterName("colour")
                 clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
