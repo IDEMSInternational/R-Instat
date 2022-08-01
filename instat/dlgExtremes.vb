@@ -28,7 +28,7 @@ clsListInitialFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResettingDialogue As Boolean = False
-
+    Private bResetSubDialogue As Boolean = False
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -107,6 +107,7 @@ clsListInitialFunction As New RFunction
         ucrSelectorExtremes.Reset()
         ucrInputThresholdforLocation.SetText("0")
         ucrSaveExtremes.Reset()
+        bResetSubDialogue = True
 
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("first", "0.1,10,0.1", iPosition:=0, bIncludeArgumentName:=False)
@@ -185,10 +186,11 @@ clsListInitialFunction As New RFunction
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewListFunction:=clsListFunction,
-                                   clsNewConcatenateFunction:=clsConcatenateFunction,
+                                   clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubDialogue,
                                    clsNewPlotFunction:=clsPlotsFunction, clsNewConfidenceIntervalFunction:=clsConfidenceIntervalFunction,
                                    clsNewListInitialFunction:=clsListInitialFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesMethod.ShowDialog()
+        bResetSubDialogue = False
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
