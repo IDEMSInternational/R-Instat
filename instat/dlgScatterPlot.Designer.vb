@@ -47,6 +47,8 @@ Partial Class dlgScatterPlot
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemRugOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemSmoothOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputSides = New instat.ucrInputComboBox()
         Me.ucrNudSize = New instat.ucrNud()
@@ -60,7 +62,6 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.toolStripMenuItemRugOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,7 +69,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorOptional.Location = New System.Drawing.Point(331, 224)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(334, 224)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(111, 13)
         Me.lblFactorOptional.TabIndex = 4
@@ -79,7 +80,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(331, 175)
+        Me.lblXVariable.Location = New System.Drawing.Point(334, 175)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 2
@@ -90,7 +91,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblVariable.AutoSize = True
         Me.lblVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVariable.Location = New System.Drawing.Point(331, 273)
+        Me.lblVariable.Location = New System.Drawing.Point(334, 273)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(125, 13)
         Me.lblVariable.TabIndex = 6
@@ -99,7 +100,7 @@ Partial Class dlgScatterPlot
         'lblSize
         '
         Me.lblSize.AutoSize = True
-        Me.lblSize.Location = New System.Drawing.Point(127, 267)
+        Me.lblSize.Location = New System.Drawing.Point(115, 264)
         Me.lblSize.Name = "lblSize"
         Me.lblSize.Size = New System.Drawing.Size(30, 13)
         Me.lblSize.TabIndex = 12
@@ -109,7 +110,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblSides.AutoSize = True
         Me.lblSides.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSides.Location = New System.Drawing.Point(8, 296)
+        Me.lblSides.Location = New System.Drawing.Point(192, 264)
         Me.lblSides.Name = "lblSides"
         Me.lblSides.Size = New System.Drawing.Size(36, 13)
         Me.lblSides.TabIndex = 14
@@ -117,21 +118,33 @@ Partial Class dlgScatterPlot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemRugOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemRugOptions, Me.toolStripMenuItemSmoothOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 92)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(162, 92)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(161, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemPointOptions
         '
         Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
-        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(161, 22)
         Me.toolStripMenuItemPointOptions.Text = "Point Options"
+        '
+        'toolStripMenuItemRugOptions
+        '
+        Me.toolStripMenuItemRugOptions.Name = "toolStripMenuItemRugOptions"
+        Me.toolStripMenuItemRugOptions.Size = New System.Drawing.Size(161, 22)
+        Me.toolStripMenuItemRugOptions.Text = "Rug Options"
+        '
+        'toolStripMenuItemSmoothOptions
+        '
+        Me.toolStripMenuItemSmoothOptions.Name = "toolStripMenuItemSmoothOptions"
+        Me.toolStripMenuItemSmoothOptions.Size = New System.Drawing.Size(161, 22)
+        Me.toolStripMenuItemSmoothOptions.Text = "Smooth Options"
         '
         'cmdOptions
         '
@@ -152,9 +165,9 @@ Partial Class dlgScatterPlot
         Me.ucrInputSides.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSides.GetSetSelectedIndex = -1
         Me.ucrInputSides.IsReadOnly = False
-        Me.ucrInputSides.Location = New System.Drawing.Point(50, 294)
+        Me.ucrInputSides.Location = New System.Drawing.Point(231, 261)
         Me.ucrInputSides.Name = "ucrInputSides"
-        Me.ucrInputSides.Size = New System.Drawing.Size(134, 21)
+        Me.ucrInputSides.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputSides.TabIndex = 15
         '
         'ucrNudSize
@@ -162,11 +175,11 @@ Partial Class dlgScatterPlot
         Me.ucrNudSize.AutoSize = True
         Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(160, 262)
+        Me.ucrNudSize.Location = New System.Drawing.Point(145, 262)
         Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSize.Size = New System.Drawing.Size(45, 20)
         Me.ucrNudSize.TabIndex = 13
         Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -183,7 +196,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrReceiverLabel.AutoSize = True
         Me.ucrReceiverLabel.frmParent = Me
-        Me.ucrReceiverLabel.Location = New System.Drawing.Point(331, 289)
+        Me.ucrReceiverLabel.Location = New System.Drawing.Point(334, 289)
         Me.ucrReceiverLabel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
         Me.ucrReceiverLabel.Selector = Nothing
@@ -196,24 +209,24 @@ Partial Class dlgScatterPlot
         '
         Me.ucrChkWithSE.AutoSize = True
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(185, 233)
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(189, 233)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(133, 23)
         Me.ucrChkWithSE.TabIndex = 10
         '
         'ucrChkLineofBestFit
         '
         Me.ucrChkLineofBestFit.AutoSize = True
         Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(11, 234)
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(11, 233)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(152, 23)
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 24)
         Me.ucrChkLineofBestFit.TabIndex = 9
         '
         'ucrSaveScatterPlot
         '
         Me.ucrSaveScatterPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 335)
+        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 322)
         Me.ucrSaveScatterPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
         Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(312, 24)
@@ -235,7 +248,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrVariablesAsFactorForScatter.AutoSize = True
         Me.ucrVariablesAsFactorForScatter.frmParent = Me
-        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(331, 30)
+        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(334, 30)
         Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
         Me.ucrVariablesAsFactorForScatter.Selector = Nothing
         Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
@@ -248,7 +261,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrFactorOptionalReceiver.AutoSize = True
         Me.ucrFactorOptionalReceiver.frmParent = Me
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(331, 237)
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(334, 237)
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
@@ -261,7 +274,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(331, 188)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(334, 188)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
@@ -274,23 +287,17 @@ Partial Class dlgScatterPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 363)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 353)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
-        '
-        'toolStripMenuItemRugOptions
-        '
-        Me.toolStripMenuItemRugOptions.Name = "toolStripMenuItemRugOptions"
-        Me.toolStripMenuItemRugOptions.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemRugOptions.Text = "Rug Options"
         '
         'dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(467, 429)
+        Me.ClientSize = New System.Drawing.Size(477, 412)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputSides)
         Me.Controls.Add(Me.lblSides)
@@ -343,4 +350,5 @@ Partial Class dlgScatterPlot
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemRugOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemSmoothOptions As ToolStripMenuItem
 End Class
