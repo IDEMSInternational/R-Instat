@@ -246,8 +246,6 @@ Public Class dlgHistogram
         Else
             If rdoDensity_ridges.Checked Then
                 toolStripMenuItemDensityOptions.Enabled = True
-                toolStripMenuItemDensityRidgesOptions.Enabled = False
-                toolStripMenuItemFrequencyPolygonOptions.Enabled = False
                 If ucrChkRidges.Checked Then
                     toolStripMenuItemHistogramOptions.Enabled = False
                     toolStripMenuItemDotOptions.Enabled = False
