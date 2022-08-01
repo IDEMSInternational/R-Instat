@@ -737,11 +737,11 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoThreeVariable.Checked Then
             lblThreeVariableCategorical.Visible = True
             lblThreeVariableCategorical.Location = New Point(106, 16)
-            lblSecondType.Location = New Point(24, 33)
+            lblSecondType.Location = New Point(12, 33)
             lblSecondBy.Visible = True
         Else
             lblThreeVariableCategorical.Visible = False
-            lblThreeVariableCategorical.Location = New Point(24, 33)
+            lblThreeVariableCategorical.Location = New Point(12, 33)
             lblSecondType.Location = New Point(106, 18)
             lblSecondBy.Visible = False
         End If
