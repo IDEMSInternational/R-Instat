@@ -251,7 +251,6 @@ Public Class dlgHistogram
                     toolStripMenuItemDotOptions.Enabled = False
                     toolStripMenuItemDensityOptions.Enabled = False
                     toolStripMenuItemDensityRidgesOptions.Enabled = True
-                    toolStripMenuItemFrequencyPolygonOptions.Enabled = False
                     ucrFactorReceiver.ChangeParameterName("y")
                     clsHistAesFunction.RemoveParameterByName("y")
                     clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
