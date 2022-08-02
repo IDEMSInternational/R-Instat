@@ -237,7 +237,7 @@ Partial Class sdgDoyRange
         'ucrBaseSub
         '
         Me.ucrBaseSub.AutoSize = True
-        Me.ucrBaseSub.Location = New System.Drawing.Point(213, 324)
+        Me.ucrBaseSub.Location = New System.Drawing.Point(185, 324)
         Me.ucrBaseSub.Name = "ucrBaseSub"
         Me.ucrBaseSub.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSub.TabIndex = 3

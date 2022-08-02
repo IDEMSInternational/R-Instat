@@ -53,6 +53,7 @@ Public Class sdgPICSARainfallGraph
     Private clsYElementTitle As New RFunction
     Private clsXElementLabels As New RFunction
     Private clsYElementLabels As New RFunction
+    Private clsDummyFunction As New RFunction
     Private clsElementPanelGridMajor, clsElementPanelGridMinor As New RFunction
     'Private clsPnlBackgroundElementRect As New RFunction
     Private clsPanelBackgroundElementRect As New RFunction
@@ -225,8 +226,8 @@ Public Class sdgPICSARainfallGraph
         ucrPnlYAxisType.AddToLinkedControls(ucrInputYSpecifyUpperLimitDateMonth, {rdoYDate}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYSpecifyLowerLimit.SetText("Specify Lower Limit")
-        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(True, "lowerlimit", "NA", False)
-        ucrChkYSpecifyLowerLimit.AddParameterValuesCondition(False, "lowerlimit", "NA", True)
+        ucrChkYSpecifyLowerLimit.SetParameter(New RParameter("lower_limit", iNewPosition:=0))
+        ucrChkYSpecifyLowerLimit.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkYSpecifyLowerLimit.AddToLinkedControls(ucrInputYSpecifyLowerLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputYSpecifyLowerLimitNumeric.SetParameter(New RParameter("lowerlimit", 0))
@@ -235,8 +236,8 @@ Public Class sdgPICSARainfallGraph
         ucrInputYSpecifyLowerLimitNumeric.AddQuotesIfUnrecognised = False
 
         ucrChkYSpecifyUpperLimit.SetText("Specify Upper Limit")
-        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(True, "upperlimit", "NA", False)
-        ucrChkYSpecifyUpperLimit.AddParameterValuesCondition(False, "upperlimit", "NA", True)
+        ucrChkYSpecifyUpperLimit.SetParameter(New RParameter("upper_limit", iNewPosition:=1))
+        ucrChkYSpecifyUpperLimit.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkYSpecifyUpperLimit.AddToLinkedControls(ucrInputYSpecifyUpperLimitNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputYSpecifyUpperLimitNumeric.SetParameter(New RParameter("upperlimit", 1))
@@ -423,7 +424,6 @@ Public Class sdgPICSARainfallGraph
         ucrChkBorderColour.AddToLinkedControls(ucrInputBorderColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkBorderLineType.AddToLinkedControls(ucrInputBorderLinetype, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
         UcrChkBorderSize.AddToLinkedControls(ucrNudBorderSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
 
         ' Line tab
         ' Mean Line
@@ -662,7 +662,8 @@ Public Class sdgPICSARainfallGraph
                         Optional clsNewLowerTercileFunction As RFunction = Nothing, Optional clsNewStatRegEquation As RFunction = Nothing, Optional clsNewStatsCorFunction As RFunction = Nothing,
                         Optional clsNewUpperTercileFunction As RFunction = Nothing, Optional clsNewAsDateMeanY As RFunction = Nothing, Optional clsNewAsDateMedianY As RFunction = Nothing,
                         Optional clsNewAsDateLowerTercileY As RFunction = Nothing, Optional clsNewAsDateUpperTercileY As RFunction = Nothing, Optional clsNewFormatMeanY As RFunction = Nothing,
-                        Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing, Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional bReset As Boolean = False)
+                        Optional clsNewFormatMedianY As RFunction = Nothing, Optional clsNewFormatLowerTercileY As RFunction = Nothing,
+                        Optional clsNewFormatUpperTercileY As RFunction = Nothing, Optional clsNewDummyFunction As RFunction = Nothing, Optional bReset As Boolean = False)
         Dim clsCLimitsY As RFunction
 
         bRCodeSet = False
@@ -674,6 +675,8 @@ Public Class sdgPICSARainfallGraph
 
         'themes function
         clsThemeFunction = clsNewThemeFunction
+
+        clsDummyFunction = clsNewDummyFunction
 
         clsMutateFunction = clsNewMutateFunction
         clsMeanFunction = clsNewMeanFunction
@@ -849,9 +852,9 @@ Public Class sdgPICSARainfallGraph
         Else
             clsCLimitsY = clsCLimitsYContinuous
         End If
-        ucrChkYSpecifyLowerLimit.SetRCode(clsCLimitsY, bReset, bCloneIfNeeded:=True)
+        ucrChkYSpecifyLowerLimit.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYSpecifyLowerLimitNumeric.SetRCode(clsCLimitsYContinuous, bReset, bCloneIfNeeded:=True)
-        ucrChkYSpecifyUpperLimit.SetRCode(clsCLimitsY, bReset, bCloneIfNeeded:=True)
+        ucrChkYSpecifyUpperLimit.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYSpecifyUpperLimitNumeric.SetRCode(clsCLimitsYContinuous, bReset, bCloneIfNeeded:=True)
 
         ucrChkSpecifyXAxisTickMarks.SetRCode(clsXScaleContinuousFunction, bReset, bCloneIfNeeded:=True)

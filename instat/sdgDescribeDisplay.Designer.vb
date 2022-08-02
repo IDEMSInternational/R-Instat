@@ -55,7 +55,7 @@ Partial Class sdgDescribeDisplay
         'ucrButtonsDescribeDisplay
         '
         Me.ucrButtonsDescribeDisplay.AutoSize = True
-        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(50, 191)
+        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(20, 190)
         Me.ucrButtonsDescribeDisplay.Name = "ucrButtonsDescribeDisplay"
         Me.ucrButtonsDescribeDisplay.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsDescribeDisplay.TabIndex = 2
