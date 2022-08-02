@@ -20,8 +20,8 @@ Public Class dlgExtremes
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
 
-    Private clsFevdFunction, clsListFunction, clsPlotsFunction, clsConcatenateFunction, clsConfidenceIntervalFunction,
-clsListInitialFunction As New RFunction
+    Private clsFevdFunction, clsPriorParamListFunction, clsPlotsFunction, clsConcatenateFunction, clsConfidenceIntervalFunction,
+clsInitialListFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
     Private clsLocationParamOperator As New ROperator
@@ -93,8 +93,8 @@ clsListInitialFunction As New RFunction
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
         clsPlotsFunction = New RFunction
-        clsListFunction = New RFunction
-        clsListInitialFunction = New RFunction
+        clsPriorParamListFunction = New RFunction
+        clsInitialListFunction = New RFunction
         clsLocationParamOperator = New ROperator
         clsLocationScaleResetOperator = New ROperator
         clsAttachFunction = New RFunction
@@ -123,13 +123,13 @@ clsListInitialFunction As New RFunction
         clsPlotsFunction.iCallType = 3
         clsPlotsFunction.bExcludeAssignedFunctionOutput = False
 
-        clsListFunction.SetRCommand("list")
-        clsListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=5)
+        clsPriorParamListFunction.SetRCommand("list")
+        clsPriorParamListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=5)
 
-        clsListInitialFunction.SetRCommand("list")
-        clsListInitialFunction.AddParameter("location", "0", iPosition:=0)
-        clsListInitialFunction.AddParameter("scale", "0.1", iPosition:=1)
-        clsListInitialFunction.AddParameter("shape", "-0.5", iPosition:=2)
+        clsInitialListFunction.SetRCommand("list")
+        clsInitialListFunction.AddParameter("location", "0", iPosition:=0)
+        clsInitialListFunction.AddParameter("scale", "0.1", iPosition:=1)
+        clsInitialListFunction.AddParameter("shape", "-0.5", iPosition:=2)
 
         clsConfidenceIntervalFunction.SetPackageName("extRemes")
         clsConfidenceIntervalFunction.SetRCommand("ci.fevd")
@@ -137,8 +137,8 @@ clsListInitialFunction As New RFunction
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
-        clsFevdFunction.AddParameter("priorParams", clsRFunctionParameter:=clsListFunction, iPosition:=4)
-        clsFevdFunction.AddParameter("initial", clsRFunctionParameter:=clsListInitialFunction, iPosition:=5)
+        clsFevdFunction.AddParameter("priorParams", clsRFunctionParameter:=clsPriorParamListFunction, iPosition:=4)
+        clsFevdFunction.AddParameter("initial", clsRFunctionParameter:=clsInitialListFunction, iPosition:=5)
         clsFevdFunction.AddParameter("iter", "9999", iPosition:=6)
 
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=0)
@@ -185,10 +185,10 @@ clsListInitialFunction As New RFunction
         ucrBase.OKEnabled(Not ucrReceiverVariable.IsEmpty)
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewListFunction:=clsListFunction,
+        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewPriorParamListFunction:=clsPriorParamListFunction,
                                    clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubDialogue,
                                    clsNewPlotFunction:=clsPlotsFunction, clsNewConfidenceIntervalFunction:=clsConfidenceIntervalFunction,
-                                   clsNewListInitialFunction:=clsListInitialFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
+                                   clsNewInitialListFunction:=clsInitialListFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesMethod.ShowDialog()
         bResetSubDialogue = False
     End Sub
