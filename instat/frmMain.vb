@@ -1048,7 +1048,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseGraph.Click
-        dlgUseGraph.ShowDialog()
+        dlgRenameGraph.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeCombineGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeCombineGraph.Click
@@ -2461,5 +2461,9 @@ Public Class frmMain
     Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
         dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
         dlgPICSARainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+        dlgApsimx.ShowDialog()
     End Sub
 End Class

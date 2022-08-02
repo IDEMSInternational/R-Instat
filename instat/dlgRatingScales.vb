@@ -19,7 +19,10 @@ Imports RDotNet
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSjpLikertFunction, clsSjpStackFrqFunction, clsSjtStackFrqFunction, clsLevelofFactorFunction, clsFactorColumnFunction, clsAsLabelsFunction As New RFunction
+    Private bRcodeSet As Boolean = True
+    Private clsSjpLikertFunction, clsSjpStackFrqFunction, clsSjtStackFrqFunction,
+        clsLevelofFactorFunction, clsFactorColumnFunction, clsAsLabelsFunction,
+        clsGetColumnsFunction, clsColumnNameFunction, clsDummyFunction As New RFunction
     Private Sub dlgRatingScales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -75,11 +78,11 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoStacked, rdoLikert}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 0))
+        ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
         ucrReceiverOrderedFactors.strSelectorHeading = "Variables"
-        ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
+        ucrReceiverOrderedFactors.bUseFilteredData = False
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
@@ -97,6 +100,10 @@ Public Class dlgRatingScales
         ucrChkNumberOfCategories.AddParameterPresentCondition(False, "cat.neutral", False)
         ucrChkNumberOfCategories.SetDefaultState(False)
 
+        ucrChkVariableNames.SetText("Show Variable Names")
+        ucrChkVariableNames.AddParameterValuesCondition(True, "show_variables", "True")
+        ucrChkVariableNames.AddParameterValuesCondition(False, "show_variables", "False")
+
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 4))
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -112,6 +119,7 @@ Public Class dlgRatingScales
         ucrSaveGraph.SetPrefix("rating_scales")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorRatingScale.ucrAvailableDataFrames)
+        ucrSaveGraph.setLinkedReceiver(ucrReceiverOrderedFactors)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
@@ -124,6 +132,9 @@ Public Class dlgRatingScales
         clsAsLabelsFunction = New RFunction
         clsLevelofFactorFunction = New RFunction
         clsFactorColumnFunction = New RFunction
+        clsGetColumnsFunction = New RFunction
+        clsColumnNameFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         rdoNoneLikert.Checked = True
 
@@ -135,6 +146,8 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.SetMeAsReceiver()
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
 
+        clsDummyFunction.AddParameter("show_variables", "False", iPosition:=0)
+
         clsAsLabelsFunction.SetPackageName("sjlabelled")
         clsAsLabelsFunction.SetRCommand("as_label")
 
@@ -142,12 +155,13 @@ Public Class dlgRatingScales
 
         clsFactorColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
 
+        clsColumnNameFunction.SetRCommand("colnames")
+
         clsSjpLikertFunction.SetPackageName("sjPlot")
         clsSjpLikertFunction.SetRCommand("plot_likert")
         clsSjpLikertFunction.AddParameter("cat.neutral", 3)
         clsSjpLikertFunction.AddParameter("coord.flip", "TRUE", iPosition:=4)
         clsSjpLikertFunction.AddParameter("catcount", "NULL", iPosition:=5)
-
 
         clsSjpStackFrqFunction.SetPackageName("sjPlot")
         clsSjpStackFrqFunction.SetRCommand("plot_stackfrq")
@@ -167,25 +181,25 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRcodeSet = False
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, ucrChkWeights.GetParameter(), iAdditionalPairNo:=2)
         ucrChkFlip.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrChkFlip.GetParameter(), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpLikertFunction, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, New RParameter("weight.by", 1), iAdditionalPairNo:=2)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=1)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
         ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
         ucrPnlTableOptions.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, New RParameter("sort.frq", iNewPosition:=2), iAdditionalPairNo:=1)
 
         ucrPnlLikertOptions.SetRCode(clsSjpLikertFunction, bReset)
         ucrPnlTableOptions.SetRCode(clsSjtStackFrqFunction, bReset)
-        ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrqFunction)
         ucrChkFlip.SetRCode(clsSjpStackFrqFunction, bReset)
         ucrChkWeights.SetRCode(clsSjtStackFrqFunction, bReset)
         ucrReceiverWeights.SetRCode(clsSjtStackFrqFunction, bReset)
         ucrChkNumberOfCategories.SetRCode(clsSjpLikertFunction, bReset)
+        ucrChkVariableNames.SetRCode(clsDummyFunction, bReset)
         ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveGraph.SetRCode(clsSjpStackFrqFunction, bReset)
+        bRcodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -256,6 +270,7 @@ Public Class dlgRatingScales
         SetBaseFunction()
         grpSort.Visible = rdoLikert.Checked
         grpSortTable.Visible = Not rdoLikert.Checked
+        VariableNameLabels()
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
@@ -267,9 +282,43 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrChkNumberOfCategories.ControlValueChanged, ucrSelectorRatingScale.ControlValueChanged, ucrPnlGraphType.ControlValueChanged
+        clsGetColumnsFunction = ucrReceiverOrderedFactors.GetVariables()
+        clsGetColumnsFunction.SetAssignTo("columns")
+        clsSjtStackFrqFunction.AddParameter("items", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        clsSjpStackFrqFunction.AddParameter("items", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        clsSjpLikertFunction.AddParameter("items", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
         NumberOfLevels()
     End Sub
 
+    Private Sub VariableNameLabels()
+        clsColumnNameFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+
+        If bRcodeSet Then
+            If ucrChkVariableNames.Checked Then
+                clsDummyFunction.AddParameter("show_variables", "True", iPosition:=0)
+                If rdoTable.Checked Then
+                    clsSjtStackFrqFunction.AddParameter("var.labels", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=6)
+                ElseIf rdoStacked.Checked Then
+                    clsSjpStackFrqFunction.AddParameter("axis.labels", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=6)
+                Else
+                    clsSjpLikertFunction.AddParameter("axis.labels", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=6)
+                End If
+            Else
+                clsDummyFunction.AddParameter("show_variables", "False", iPosition:=0)
+                If rdoTable.Checked Then
+                    clsSjtStackFrqFunction.RemoveParameterByName("var.labels")
+                ElseIf rdoStacked.Checked Then
+                    clsSjpStackFrqFunction.RemoveParameterByName("axis.labels")
+                Else
+                    clsSjpLikertFunction.RemoveParameterByName("axis.labels")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkVariableNames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkVariableNames.ControlValueChanged
+        VariableNameLabels()
+    End Sub
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrPnlGraphType.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
