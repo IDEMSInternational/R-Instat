@@ -546,18 +546,14 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ManageControlsVisibility()
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked
-        grpOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
             grpOptions.Visible = IsNumericByCategorical()
         ElseIf rdoThreeVariable.Checked Then
-            If IsCategoricalByNumeric() OrElse
-            IsNumericByCategorical() Then
-                grpOptions.Visible = True
-            Else
-                grpOptions.Visible = False
-            End If
+            grpOptions.Visible = IsCategoricalByNumeric() OrElse IsNumericByCategorical()
+        Else
+            grpOptions.Visible = False
         End If
     End Sub
 
@@ -1113,7 +1109,7 @@ Public Class dlgDescribeTwoVariable
         ElseIf sender Is ucrReceiverThreeVariableSecondFactor Then
             If (strFirstVariablesType = "categorical" AndAlso bContainedInMultipleReceiver) OrElse
                               (ucrReceiverThreeVariableThirdVariable.GetVariableNames = ucrReceiverThreeVariableSecondFactor.GetVariableNames) Then
-                DisplayWarning(" First Variable and third Variable ")
+                DisplayWarning(" First Variable and Third Variable ")
             End If
         ElseIf sender Is ucrReceiverFirstVars Then
             If rdoTwoVariable.Checked Then
