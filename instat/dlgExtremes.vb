@@ -133,11 +133,9 @@ clsInitialListFunction As New RFunction
 
         clsConfidenceIntervalFunction.SetPackageName("extRemes")
         clsConfidenceIntervalFunction.SetRCommand("ci.fevd")
-        'clsConfidenceIntervalFunction.AddParameter("type", Chr(34) & "parameter" & Chr(34), iPosition:=0)
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
-
 
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=0)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=1)
@@ -173,11 +171,6 @@ clsInitialListFunction As New RFunction
         SetRCodeForControls(True)
         bResettingDialogue = False
     End Sub
-
-    'Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-    '    sdgExtremesDisplayOptions.SetRCode(clsNewPlotFunction:=clsPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
-    '    sdgExtremesDisplayOptions.ShowDialog()
-    'End Sub
 
     Private Sub TestOkEnabled()
         ucrBase.OKEnabled(Not ucrReceiverVariable.IsEmpty)
@@ -299,9 +292,9 @@ clsInitialListFunction As New RFunction
                 clsLocationScaleResetOperator.AddParameter("scaleLocation", clsROperatorParameter:=clsLocationParamOperator, iPosition:=0)
             End If
             grpFirstCalc.Visible = True
-                grpSecondCalc.Visible = True
-            Else
-                ucrReceiverVariable.SetMeAsReceiver()
+            grpSecondCalc.Visible = True
+        Else
+            ucrReceiverVariable.SetMeAsReceiver()
             clsFevdFunction.RemoveParameterByName("scale.fun")
             clsFevdFunction.RemoveParameterByName("location.fun")
             clsLocationScaleResetOperator.RemoveParameterByName("scaleLocation")
@@ -309,7 +302,5 @@ clsInitialListFunction As New RFunction
             grpFirstCalc.Visible = False
             grpSecondCalc.Visible = False
         End If
-
-
     End Sub
 End Class

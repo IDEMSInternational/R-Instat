@@ -52,7 +52,7 @@ Public Class sdgExtremesMethod
 
         ucrNudReturnLevel.SetParameter(New RParameter("return.period", 2))
         ucrNudReturnLevel.SetMinMax(20, 100)
-        ucrNudReturnLevel.SetRDefault(20)
+        ucrNudReturnLevel.SetRDefault(100)
         ucrNudReturnLevel.SetLinkedDisplayControl(lblReturnLevel)
         ucrInputType.AddToLinkedControls(ucrNudReturnLevel, {"return.level"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkType.AddToLinkedControls(ucrInputType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
@@ -83,9 +83,7 @@ Public Class sdgExtremesMethod
         ucrNudNumberOfIterations.SetMinMax(0, 30000)
         ucrNudNumberOfIterations.SetLinkedDisplayControl(lblNumberOfIterations)
 
-
         ucrPnlDisplayOptionsExtreme.SetParameter(New RParameter("type", 1))
-
         ucrPnlDisplayOptionsExtreme.AddRadioButton(rdoPrimary, Chr(34) & "primary" & Chr(34))
         ucrPnlDisplayOptionsExtreme.AddRadioButton(rdoDensity, Chr(34) & "density" & Chr(34))
         ucrPnlDisplayOptionsExtreme.AddRadioButton(rdoHist, Chr(34) & "hist" & Chr(34))
@@ -141,6 +139,7 @@ Public Class sdgExtremesMethod
         ucrPnlDisplayOptionsExtreme.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrSavePlots.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
     End Sub
+
     Private Sub ucrPnlExtreme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptionsExtreme.ControlValueChanged
         If rdoNoPlot.Checked Then
             clsPlotFunction.RemoveParameterByName("type")
