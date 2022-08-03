@@ -224,17 +224,12 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
-            toolStripMenuItemHistogramOptions.Enabled = True
-            toolStripMenuItemDotOptions.Enabled = False
+            toolStripMenuItemHistogramOptions.Enabled = Not ucrChkDisplayAsDotPlot.Checked
+            toolStripMenuItemDotOptions.Enabled = ucrChkDisplayAsDotPlot.Checked
             toolStripMenuItemDensityOptions.Enabled = False
             toolStripMenuItemDensityRidgesOptions.Enabled = False
             toolStripMenuItemFrequencyPolygonOptions.Enabled = False
             If ucrChkDisplayAsDotPlot.Checked Then
-                toolStripMenuItemHistogramOptions.Enabled = False
-                toolStripMenuItemDotOptions.Enabled = True
-                toolStripMenuItemDensityOptions.Enabled = False
-                toolStripMenuItemDensityRidgesOptions.Enabled = False
-                toolStripMenuItemFrequencyPolygonOptions.Enabled = False
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
             Else
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
