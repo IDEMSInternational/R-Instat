@@ -80,6 +80,8 @@ Public Class dlgPICSARainfall
     Private strLowerTercileName As String = ".lower_ter_y"
     Private strUpperTercileName As String = ".upper_ter_y"
 
+    Private clsDummyFunction As New RFunction
+
     Private clsAsDateYLimit As New RFunction
     Private clsGeomHlineMean As New RFunction
     Private clsGeomHlineMedian As New RFunction
@@ -220,6 +222,7 @@ Public Class dlgPICSARainfall
         clsBaseOperator = New ROperator
         clsGroupByFunction = New RFunction
         clsMutateFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         clsRggplotFunction = New RFunction
         clsGeomLine = New RFunction
@@ -291,6 +294,9 @@ Public Class dlgPICSARainfall
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
+
+        clsDummyFunction.AddParameter("upper_limit", "FALSE", iPosition:=0)
+        clsDummyFunction.AddParameter("lower_limit", "FALSE", iPosition:=1)
 
         clsYScalecontinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYContinuous, iPosition:=3)
         clsCLimitsYContinuous.SetRCommand("c")
@@ -796,7 +802,7 @@ Public Class dlgPICSARainfall
     'add more functions 
     Private Sub cmdPICSAOptions_Click(sender As Object, e As EventArgs) Handles cmdPICSAOptions.Click
         sdgPICSARainfallGraph.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewPipeOperator:=clsPipeOperator, clsNewStatRegEquation:=clsStatRegEquationFunction, clsNewStatsCorFunction:=clsStatsCorFunction,
-                                       dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction,
+                                       dctNewThemeFunctions:=dctThemeFunctions, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewXScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewYScaleContinuousFunction:=clsYScalecontinuousFunction,
                                        clsNewGeomhlineMean:=clsGeomHlineMean, clsNewGeomhlineMedian:=clsGeomHlineMedian, clsNewGeomhlineLowerTercile:=clsGeomHlineLowerTercile,
                                        clsNewGeomhlineUpperTercile:=clsGeomHlineUpperTercile, clsNewXLabsFunction:=clsXLabsFunction, clsNewYLabsFunction:=clsYLabsFunction,
@@ -882,7 +888,6 @@ Public Class dlgPICSARainfall
     Private Sub YAxisDataTypeCheck()
         If Not ucrVariablesAsFactorForPicsa.IsEmpty Then
             clsGeomLine.AddParameter("group", 0)
-            clsBaseOperator.RemoveParameterByName("scale_y_continuous")
         Else
             clsGeomLine.RemoveParameterByName("group")
         End If

@@ -47,7 +47,6 @@ pkgs <-
     "RMySQL",
     "DBI",
     "EnvStats",
-    "signmedian.test",
     "sjPlot",
     "sjmisc",
     "plotly",
