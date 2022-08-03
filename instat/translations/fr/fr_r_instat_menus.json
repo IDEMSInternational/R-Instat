@@ -433,7 +433,7 @@
   "Select Columns...": "Sélectionner les colonnes...",
   "Remove Column Selection": "Supprimer la sélection de colonne",
   "Filter Rows...": "Filtrer les lignes...",
-  "Delete Cell(s)": "Supprimer des cellules",
+  "Delete Cell(s)": "Supprimer la ou les cellule(s)",
   "Import From File ...": "Importer à partir d'un fichier...",
   "Import From Library ...": "Importer depuis la bibliothèque ...",
   "Import From ODK...": "Importer depuis ODK...",
