@@ -100,7 +100,7 @@ Public Class dlgInstallRPackage
                 ucrInputMessage.SetText("Cannot get package information.")
             End If
         Else
-            ucrInputMessage.SetText("Cannot get package information. Check your internet connection.")
+            ucrInputMessage.SetText("Not a current CRAN package. Perhaps it has been archived")
         End If
     End Sub
 
