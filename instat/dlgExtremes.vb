@@ -137,9 +137,7 @@ clsInitialListFunction As New RFunction
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
-        clsFevdFunction.AddParameter("priorParams", clsRFunctionParameter:=clsPriorParamListFunction, iPosition:=4)
-        clsFevdFunction.AddParameter("initial", clsRFunctionParameter:=clsInitialListFunction, iPosition:=5)
-        clsFevdFunction.AddParameter("iter", "9999", iPosition:=6)
+
 
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=0)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=1)
