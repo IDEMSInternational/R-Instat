@@ -131,7 +131,14 @@ pkgs <-
     "statip",
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
     "corrr",
-    "dslabs"
+    "dslabs",
+    # used to there and is in some dialogues including the Model > Fit Model > Hypothesis Tests Keyboards
+    "verification",
+    "coin",
+    # used in the Model > Use Model > Use Model Keyboards dialogue
+    "segmented",
+    # It has some excellent datasets for practicing the model-fitting work
+    "islr2"
   )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
