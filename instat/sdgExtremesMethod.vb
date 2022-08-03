@@ -32,9 +32,13 @@ Public Class sdgExtremesMethod
         ucrPnlFitMethodExtremes.AddRadioButton(rdoLmoments, Chr(34) & "Lmoments" & Chr(34))
 
         ucrPnlFitMethodExtremes.AddToLinkedControls(ucrInputPrior, {rdoBayesian}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFitMethodExtremes.AddToLinkedControls({ucrNudNumberOfIterations, ucrNudScale,
+        ucrPnlFitMethodExtremes.AddToLinkedControls({ucrNudScale,
                                                     ucrNudShape, ucrNudLocation}, {rdoBayesian},
                                           bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFitMethodExtremes.AddToLinkedControls(ucrNudNumberOfIterations, {rdoBayesian}, bNewLinkedHideIfParameterMissing:=True,
+                                                    bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=999,
+                                                    bNewLinkedUpdateFunction:=True)
+
 
         ucrChkType.SetText("Type")
         ucrChkType.AddParameterPresentCondition(True, "type")
@@ -130,12 +134,9 @@ Public Class sdgExtremesMethod
         ucrChkType.SetRCode(clsConfidenceIntervalFunction, bReset)
         ucrNudReturnLevel.SetRCode(clsConfidenceIntervalFunction, bReset)
         ucrInputPrior.SetRCode(clsConcatenateFunction, bReset)
-        ucrNudNumberOfIterations.SetRCode(clsFevdFunction, bReset)
-
         ucrNudLocation.SetRCode(clsInitialListFunction, bReset)
         ucrNudScale.SetRCode(clsInitialListFunction, bReset)
         ucrNudShape.SetRCode(clsInitialListFunction, bReset)
-
         ucrPnlFitMethodExtremes.SetRCode(clsFevdFunction, bReset)
         ucrPnlDisplayOptionsExtreme.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrSavePlots.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
@@ -156,6 +157,16 @@ Public Class sdgExtremesMethod
         Else
             clsConfidenceIntervalFunction.RemoveParameterByName("x")
             clsRsyntax.SetBaseRFunction(clsFevdFunction)
+        End If
+    End Sub
+
+    Private Sub ucrPnlFitMethodExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFitMethodExtremes.ControlValueChanged
+        If rdoBayesian.Checked Then
+            clsFevdFunction.AddParameter("priorParams", clsRFunctionParameter:=clsPriorParamListFunction, iPosition:=4)
+            clsFevdFunction.AddParameter("initial", clsRFunctionParameter:=clsInitialListFunction, iPosition:=5)
+        Else
+            clsFevdFunction.RemoveParameterByName("priorParams")
+            clsFevdFunction.RemoveParameterByName("initial")
         End If
     End Sub
 End Class
