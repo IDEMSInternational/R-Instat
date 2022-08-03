@@ -240,9 +240,8 @@ Public Class dlgHistogram
             End If
         Else
             If rdoDensity_ridges.Checked Then
-                toolStripMenuItemDensityOptions.Enabled = True
+                toolStripMenuItemDensityOptions.Enabled = Not ucrChkRidges.Checked
                 If ucrChkRidges.Checked Then
-                    toolStripMenuItemDensityOptions.Enabled = False
                     toolStripMenuItemDensityRidgesOptions.Enabled = True
                     ucrFactorReceiver.ChangeParameterName("y")
                     clsHistAesFunction.RemoveParameterByName("y")
