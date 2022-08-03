@@ -96,11 +96,11 @@ Public Class dlgHistogram
         ucrInputStats.SetDropDownStyleAsNonEditable()
         ucrInputStats.SetItems(dctStats)
         ucrInputStats.SetLinkedDisplayControl(lblStats)
-        ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
+        ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkDisplayAsDotPlot}, {rdoHistogram}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity_ridges}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
+        ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPercentages.SetText("percentages")
         ucrChkPercentages.AddParameterPresentCondition(True, "scale")
