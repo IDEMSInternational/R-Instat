@@ -1141,10 +1141,6 @@ Public Class dlgImportDataset
         Return frmMain.clsRLink.MakeValidText(strCleanFileName)
     End Function
 
-    Private Sub grpCSV_Enter(sender As Object, e As EventArgs) Handles grpCSV.Enter
-
-    End Sub
-
     ''' <summary>
     ''' Creates an R string to be used as the parameter value for na.strings and na parameters 
     ''' </summary>
