@@ -1299,7 +1299,7 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.lblTercilesLineType.AutoSize = True
         Me.lblTercilesLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTercilesLineType.Location = New System.Drawing.Point(307, 148)
+        Me.lblTercilesLineType.Location = New System.Drawing.Point(358, 148)
         Me.lblTercilesLineType.Name = "lblTercilesLineType"
         Me.lblTercilesLineType.Size = New System.Drawing.Size(63, 13)
         Me.lblTercilesLineType.TabIndex = 14
@@ -1319,7 +1319,7 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.lblMedianLineType.AutoSize = True
         Me.lblMedianLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMedianLineType.Location = New System.Drawing.Point(307, 78)
+        Me.lblMedianLineType.Location = New System.Drawing.Point(358, 78)
         Me.lblMedianLineType.Name = "lblMedianLineType"
         Me.lblMedianLineType.Size = New System.Drawing.Size(63, 13)
         Me.lblMedianLineType.TabIndex = 9
@@ -1339,7 +1339,7 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.lblMeanLineType.AutoSize = True
         Me.lblMeanLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMeanLineType.Location = New System.Drawing.Point(307, 13)
+        Me.lblMeanLineType.Location = New System.Drawing.Point(358, 13)
         Me.lblMeanLineType.Name = "lblMeanLineType"
         Me.lblMeanLineType.Size = New System.Drawing.Size(63, 13)
         Me.lblMeanLineType.TabIndex = 4
@@ -1393,7 +1393,7 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputTercilesLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTercilesLabelType.GetSetSelectedIndex = -1
         Me.ucrInputTercilesLabelType.IsReadOnly = False
-        Me.ucrInputTercilesLabelType.Location = New System.Drawing.Point(426, 144)
+        Me.ucrInputTercilesLabelType.Location = New System.Drawing.Point(477, 144)
         Me.ucrInputTercilesLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputTercilesLabelType.Name = "ucrInputTercilesLabelType"
         Me.ucrInputTercilesLabelType.Size = New System.Drawing.Size(95, 21)
@@ -1417,7 +1417,7 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputMedianLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMedianLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMedianLabelType.IsReadOnly = False
-        Me.ucrInputMedianLabelType.Location = New System.Drawing.Point(426, 74)
+        Me.ucrInputMedianLabelType.Location = New System.Drawing.Point(477, 74)
         Me.ucrInputMedianLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMedianLabelType.Name = "ucrInputMedianLabelType"
         Me.ucrInputMedianLabelType.Size = New System.Drawing.Size(95, 21)
@@ -1439,7 +1439,7 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.ucrChkAddTercilesLabel.AutoSize = True
         Me.ucrChkAddTercilesLabel.Checked = False
-        Me.ucrChkAddTercilesLabel.Location = New System.Drawing.Point(132, 144)
+        Me.ucrChkAddTercilesLabel.Location = New System.Drawing.Point(210, 144)
         Me.ucrChkAddTercilesLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddTercilesLabel.Name = "ucrChkAddTercilesLabel"
         Me.ucrChkAddTercilesLabel.Size = New System.Drawing.Size(146, 23)
@@ -1449,7 +1449,7 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.ucrChkAddMedianLabel.AutoSize = True
         Me.ucrChkAddMedianLabel.Checked = False
-        Me.ucrChkAddMedianLabel.Location = New System.Drawing.Point(132, 75)
+        Me.ucrChkAddMedianLabel.Location = New System.Drawing.Point(210, 75)
         Me.ucrChkAddMedianLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMedianLabel.Name = "ucrChkAddMedianLabel"
         Me.ucrChkAddMedianLabel.Size = New System.Drawing.Size(146, 23)
@@ -1461,7 +1461,7 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputMeanLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMeanLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMeanLabelType.IsReadOnly = False
-        Me.ucrInputMeanLabelType.Location = New System.Drawing.Point(426, 9)
+        Me.ucrInputMeanLabelType.Location = New System.Drawing.Point(477, 9)
         Me.ucrInputMeanLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMeanLabelType.Name = "ucrInputMeanLabelType"
         Me.ucrInputMeanLabelType.Size = New System.Drawing.Size(95, 21)
@@ -1474,14 +1474,14 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddMean.Location = New System.Drawing.Point(9, 10)
         Me.ucrChkAddMean.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMean.Name = "ucrChkAddMean"
-        Me.ucrChkAddMean.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkAddMean.Size = New System.Drawing.Size(200, 23)
         Me.ucrChkAddMean.TabIndex = 1
         '
         'ucrChkAddMeanLabel
         '
         Me.ucrChkAddMeanLabel.AutoSize = True
         Me.ucrChkAddMeanLabel.Checked = False
-        Me.ucrChkAddMeanLabel.Location = New System.Drawing.Point(132, 10)
+        Me.ucrChkAddMeanLabel.Location = New System.Drawing.Point(210, 10)
         Me.ucrChkAddMeanLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMeanLabel.Name = "ucrChkAddMeanLabel"
         Me.ucrChkAddMeanLabel.Size = New System.Drawing.Size(146, 23)
@@ -1494,7 +1494,7 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddMedian.Location = New System.Drawing.Point(9, 77)
         Me.ucrChkAddMedian.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMedian.Name = "ucrChkAddMedian"
-        Me.ucrChkAddMedian.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkAddMedian.Size = New System.Drawing.Size(200, 23)
         Me.ucrChkAddMedian.TabIndex = 1
         '
         'ucrChkAddTerciles
@@ -1504,7 +1504,7 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddTerciles.Location = New System.Drawing.Point(9, 144)
         Me.ucrChkAddTerciles.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddTerciles.Name = "ucrChkAddTerciles"
-        Me.ucrChkAddTerciles.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkAddTerciles.Size = New System.Drawing.Size(200, 23)
         Me.ucrChkAddTerciles.TabIndex = 1
         '
         'tpPanel
