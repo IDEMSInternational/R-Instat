@@ -249,7 +249,7 @@ Partial Class sdgPlots
         Me.ucrChkDrop.Checked = False
         Me.ucrChkDrop.Location = New System.Drawing.Point(273, 269)
         Me.ucrChkDrop.Name = "ucrChkDrop"
-        Me.ucrChkDrop.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkDrop.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkDrop.TabIndex = 11
         '
         'ucrNudNumberofRows
@@ -289,7 +289,7 @@ Partial Class sdgPlots
         Me.ucrChkLabeler.Checked = False
         Me.ucrChkLabeler.Location = New System.Drawing.Point(273, 245)
         Me.ucrChkLabeler.Name = "ucrChkLabeler"
-        Me.ucrChkLabeler.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkLabeler.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkLabeler.TabIndex = 10
         '
         'ucrChkFreeSpace
@@ -298,7 +298,7 @@ Partial Class sdgPlots
         Me.ucrChkFreeSpace.Checked = False
         Me.ucrChkFreeSpace.Location = New System.Drawing.Point(273, 221)
         Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
-        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkFreeSpace.TabIndex = 9
         '
         'ucrChkFreeScalesY
@@ -307,7 +307,7 @@ Partial Class sdgPlots
         Me.ucrChkFreeScalesY.Checked = False
         Me.ucrChkFreeScalesY.Location = New System.Drawing.Point(273, 197)
         Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
-        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkFreeScalesY.TabIndex = 8
         '
         'ucrChkFreeScalesX
@@ -316,7 +316,7 @@ Partial Class sdgPlots
         Me.ucrChkFreeScalesX.Checked = False
         Me.ucrChkFreeScalesX.Location = New System.Drawing.Point(273, 173)
         Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
-        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkFreeScalesX.TabIndex = 7
         '
         'ucrChkMargin
@@ -325,7 +325,7 @@ Partial Class sdgPlots
         Me.ucrChkMargin.Checked = False
         Me.ucrChkMargin.Location = New System.Drawing.Point(273, 149)
         Me.ucrChkMargin.Name = "ucrChkMargin"
-        Me.ucrChkMargin.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkMargin.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkMargin.TabIndex = 6
         '
         'ucrFacetSelector
@@ -1018,7 +1018,7 @@ Partial Class sdgPlots
         Me.grpColourScale.Controls.Add(Me.lblColourScaleTransparency)
         Me.grpColourScale.Location = New System.Drawing.Point(13, 236)
         Me.grpColourScale.Name = "grpColourScale"
-        Me.grpColourScale.Size = New System.Drawing.Size(444, 171)
+        Me.grpColourScale.Size = New System.Drawing.Size(444, 181)
         Me.grpColourScale.TabIndex = 25
         Me.grpColourScale.TabStop = False
         Me.grpColourScale.Text = "Colour Scale"
@@ -1086,7 +1086,7 @@ Partial Class sdgPlots
         '
         Me.ucrChkColourScaleReverseOrder.AutoSize = True
         Me.ucrChkColourScaleReverseOrder.Checked = False
-        Me.ucrChkColourScaleReverseOrder.Location = New System.Drawing.Point(7, 145)
+        Me.ucrChkColourScaleReverseOrder.Location = New System.Drawing.Point(6, 152)
         Me.ucrChkColourScaleReverseOrder.Name = "ucrChkColourScaleReverseOrder"
         Me.ucrChkColourScaleReverseOrder.Size = New System.Drawing.Size(352, 23)
         Me.ucrChkColourScaleReverseOrder.TabIndex = 5
@@ -1145,7 +1145,7 @@ Partial Class sdgPlots
         Me.grpFillScale.Controls.Add(Me.lblFillScaleTransparency)
         Me.grpFillScale.Location = New System.Drawing.Point(13, 30)
         Me.grpFillScale.Name = "grpFillScale"
-        Me.grpFillScale.Size = New System.Drawing.Size(444, 163)
+        Me.grpFillScale.Size = New System.Drawing.Size(444, 174)
         Me.grpFillScale.TabIndex = 23
         Me.grpFillScale.TabStop = False
         Me.grpFillScale.Text = "Fill Scale"
@@ -1213,7 +1213,7 @@ Partial Class sdgPlots
         '
         Me.ucrChkFillScaleReverseColourOrder.AutoSize = True
         Me.ucrChkFillScaleReverseColourOrder.Checked = False
-        Me.ucrChkFillScaleReverseColourOrder.Location = New System.Drawing.Point(7, 139)
+        Me.ucrChkFillScaleReverseColourOrder.Location = New System.Drawing.Point(7, 145)
         Me.ucrChkFillScaleReverseColourOrder.Name = "ucrChkFillScaleReverseColourOrder"
         Me.ucrChkFillScaleReverseColourOrder.Size = New System.Drawing.Size(352, 23)
         Me.ucrChkFillScaleReverseColourOrder.TabIndex = 5

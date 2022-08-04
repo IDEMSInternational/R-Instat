@@ -830,7 +830,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(299, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Summary Tables..."
+        Me.mnuDescribeSpecificSummary.Text = "Frequency/Summary Tables..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
@@ -3189,14 +3189,14 @@ Partial Class frmMain
         '
         Me.mnuLogWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuLogWindow.Name = "mnuLogWindow"
-        Me.mnuLogWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuLogWindow.Size = New System.Drawing.Size(166, 22)
         Me.mnuLogWindow.Text = "  Log Window..."
         '
         'mnuScriptWindow
         '
         Me.mnuScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuScriptWindow.Name = "mnuScriptWindow"
-        Me.mnuScriptWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuScriptWindow.Size = New System.Drawing.Size(166, 22)
         Me.mnuScriptWindow.Text = "  Script Window..."
         '
         'mnuTbResetLayout
@@ -4790,16 +4790,11 @@ Partial Class frmMain
         '
         'mnuOptionsByContextCropModel
         '
-
         Me.mnuOptionsByContextCropModel.Enabled = False
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
         Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
-        Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
-        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
         Me.mnuOptionsByContextCropModel.Visible = False
-
         '
         'mnuTools
         '
