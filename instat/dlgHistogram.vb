@@ -224,54 +224,48 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
-            toolStripMenuItemHistogramOptions.Enabled = Not ucrChkDisplayAsDotPlot.Checked
-            toolStripMenuItemDotOptions.Enabled = ucrChkDisplayAsDotPlot.Checked
-            toolStripMenuItemDensityOptions.Enabled = False
-            toolStripMenuItemDensityRidgesOptions.Enabled = False
-            toolStripMenuItemFrequencyPolygonOptions.Enabled = False
             If ucrChkDisplayAsDotPlot.Checked Then
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
             Else
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
             End If
             ucrFactorReceiver.ChangeParameterName("fill")
-            If Not ucrSaveHist.bUserTyped Then
-                ucrSaveHist.SetPrefix("histogram")
-            End If
-        Else
-            If rdoDensity_ridges.Checked Then
-                toolStripMenuItemDensityOptions.Enabled = Not ucrChkRidges.Checked
-                If ucrChkRidges.Checked Then
-                    toolStripMenuItemDensityRidgesOptions.Enabled = True
-                    ucrFactorReceiver.ChangeParameterName("y")
-                    clsHistAesFunction.RemoveParameterByName("y")
-                    clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
-                    clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
-                    clsRgeomPlotFunction.SetPackageName("ggridges")
-                    clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
-                    If Not ucrSaveHist.bUserTyped Then
-                        ucrSaveHist.SetPrefix("density_ridges")
-                    End If
-                Else
-                    ucrFactorReceiver.ChangeParameterName("colour")
-                    clsRgeomPlotFunction.SetRCommand("geom_density")
-                    If Not ucrSaveHist.bUserTyped Then
-                        ucrSaveHist.SetPrefix("density")
-                    End If
-                End If
-            ElseIf rdoFrequencyPolygon.Checked Then
-                toolStripMenuItemFrequencyPolygonOptions.Enabled = True
-                ucrFactorReceiver.ChangeParameterName("colour")
-                clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
+            If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
+        End If
+        If rdoDensity_ridges.Checked Then
+            If ucrChkRidges.Checked Then
+                ucrFactorReceiver.ChangeParameterName("y")
+                clsHistAesFunction.RemoveParameterByName("y")
+                clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
+                clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
+                clsRgeomPlotFunction.SetPackageName("ggridges")
+                clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
                 If Not ucrSaveHist.bUserTyped Then
-                    ucrSaveHist.SetPrefix("frequency_polygon")
+                    ucrSaveHist.SetPrefix("density_ridges")
                 End If
+            Else
+                ucrFactorReceiver.ChangeParameterName("colour")
+                clsRgeomPlotFunction.SetRCommand("geom_density")
+                If Not ucrSaveHist.bUserTyped Then
+                    ucrSaveHist.SetPrefix("density")
+                End If
+            End If
+        ElseIf rdoFrequencyPolygon.Checked Then
+            ucrFactorReceiver.ChangeParameterName("colour")
+            clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
+            If Not ucrSaveHist.bUserTyped Then
+                ucrSaveHist.SetPrefix("frequency_polygon")
             End If
         End If
         autoTranslate(Me)
     End Sub
 
     Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
+        toolStripMenuItemHistogramOptions.Enabled = rdoHistogram.Checked AndAlso Not ucrChkDisplayAsDotPlot.Checked
+        toolStripMenuItemDotOptions.Enabled = rdoHistogram.Checked AndAlso ucrChkDisplayAsDotPlot.Checked
+        toolStripMenuItemDensityOptions.Enabled = rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked
+        toolStripMenuItemDensityRidgesOptions.Enabled = rdoDensity_ridges.Checked AndAlso ucrChkRidges.Checked
+        toolStripMenuItemFrequencyPolygonOptions.Enabled = rdoFrequencyPolygon.Checked
         SetDialogOptions()
         DialogueSize()
     End Sub
