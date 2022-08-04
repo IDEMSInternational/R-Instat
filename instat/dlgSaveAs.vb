@@ -83,7 +83,4 @@ Public Class dlgSaveAs
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrFilePath_Load(sender As Object, e As EventArgs) Handles ucrFilePath.Load
-
-    End Sub
 End Class
