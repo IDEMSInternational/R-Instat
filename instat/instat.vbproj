@@ -408,12 +408,6 @@
     <Compile Include="dlgPasteSpecial.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPivotTable.Designer.vb">
-      <DependentUpon>dlgPivotTable.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPivotTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgScript.Designer.vb">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </Compile>
@@ -2981,9 +2975,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteSpecial.resx">
       <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPivotTable.resx">
-      <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
