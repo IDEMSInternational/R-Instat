@@ -99,7 +99,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoCustomised.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoCustomised.Location = New System.Drawing.Point(247, 13)
         Me.rdoCustomised.Name = "rdoCustomised"
-        Me.rdoCustomised.Size = New System.Drawing.Size(78, 27)
+        Me.rdoCustomised.Size = New System.Drawing.Size(90, 27)
         Me.rdoCustomised.TabIndex = 22
         Me.rdoCustomised.TabStop = True
         Me.rdoCustomised.Text = "Customised"
@@ -114,9 +114,9 @@ Partial Class dlgOneVariableSummarise
         Me.rdoDefault.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDefault.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDefault.Location = New System.Drawing.Point(96, 13)
+        Me.rdoDefault.Location = New System.Drawing.Point(82, 13)
         Me.rdoDefault.Name = "rdoDefault"
-        Me.rdoDefault.Size = New System.Drawing.Size(78, 27)
+        Me.rdoDefault.Size = New System.Drawing.Size(83, 27)
         Me.rdoDefault.TabIndex = 21
         Me.rdoDefault.TabStop = True
         Me.rdoDefault.Text = "Defaults"
@@ -126,9 +126,9 @@ Partial Class dlgOneVariableSummarise
         'ucrPnlSummaries
         '
         Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaries.Location = New System.Drawing.Point(94, 11)
+        Me.ucrPnlSummaries.Location = New System.Drawing.Point(73, 11)
         Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
-        Me.ucrPnlSummaries.Size = New System.Drawing.Size(234, 29)
+        Me.ucrPnlSummaries.Size = New System.Drawing.Size(275, 29)
         Me.ucrPnlSummaries.TabIndex = 20
         '
         'ucrChkDisplaySummariesAsRows
@@ -168,7 +168,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 314)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(190, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
         '
         'ucrSelectorOneVarSummarise
@@ -243,9 +243,9 @@ Partial Class dlgOneVariableSummarise
         Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(171, 13)
+        Me.rdoSkim.Location = New System.Drawing.Point(162, 13)
         Me.rdoSkim.Name = "rdoSkim"
-        Me.rdoSkim.Size = New System.Drawing.Size(78, 27)
+        Me.rdoSkim.Size = New System.Drawing.Size(87, 27)
         Me.rdoSkim.TabIndex = 26
         Me.rdoSkim.TabStop = True
         Me.rdoSkim.Text = "Skim"
@@ -256,7 +256,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.cmdMissingOptions.Enabled = False
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(161, 308)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(206, 311)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
         Me.cmdMissingOptions.TabIndex = 27
