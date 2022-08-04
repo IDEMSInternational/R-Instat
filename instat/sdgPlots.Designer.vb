@@ -249,7 +249,7 @@ Partial Class sdgPlots
         Me.ucrChkDrop.Checked = False
         Me.ucrChkDrop.Location = New System.Drawing.Point(273, 269)
         Me.ucrChkDrop.Name = "ucrChkDrop"
-        Me.ucrChkDrop.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkDrop.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkDrop.TabIndex = 11
         '
         'ucrNudNumberofRows
@@ -289,7 +289,7 @@ Partial Class sdgPlots
         Me.ucrChkLabeler.Checked = False
         Me.ucrChkLabeler.Location = New System.Drawing.Point(273, 245)
         Me.ucrChkLabeler.Name = "ucrChkLabeler"
-        Me.ucrChkLabeler.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkLabeler.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkLabeler.TabIndex = 10
         '
         'ucrChkFreeSpace
@@ -298,7 +298,7 @@ Partial Class sdgPlots
         Me.ucrChkFreeSpace.Checked = False
         Me.ucrChkFreeSpace.Location = New System.Drawing.Point(273, 221)
         Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
-        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkFreeSpace.TabIndex = 9
         '
         'ucrChkFreeScalesY
@@ -307,7 +307,7 @@ Partial Class sdgPlots
         Me.ucrChkFreeScalesY.Checked = False
         Me.ucrChkFreeScalesY.Location = New System.Drawing.Point(273, 197)
         Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
-        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkFreeScalesY.TabIndex = 8
         '
         'ucrChkFreeScalesX
@@ -316,7 +316,7 @@ Partial Class sdgPlots
         Me.ucrChkFreeScalesX.Checked = False
         Me.ucrChkFreeScalesX.Location = New System.Drawing.Point(273, 173)
         Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
-        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkFreeScalesX.TabIndex = 7
         '
         'ucrChkMargin
@@ -325,7 +325,7 @@ Partial Class sdgPlots
         Me.ucrChkMargin.Checked = False
         Me.ucrChkMargin.Location = New System.Drawing.Point(273, 149)
         Me.ucrChkMargin.Name = "ucrChkMargin"
-        Me.ucrChkMargin.Size = New System.Drawing.Size(220, 23)
+        Me.ucrChkMargin.Size = New System.Drawing.Size(257, 23)
         Me.ucrChkMargin.TabIndex = 6
         '
         'ucrFacetSelector

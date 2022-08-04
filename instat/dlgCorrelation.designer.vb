@@ -239,7 +239,7 @@ Partial Class dlgCorrelation
         Me.grpMissing.Controls.Add(Me.ucrPnlCompletePairwise)
         Me.grpMissing.Location = New System.Drawing.Point(261, 241)
         Me.grpMissing.Name = "grpMissing"
-        Me.grpMissing.Size = New System.Drawing.Size(158, 71)
+        Me.grpMissing.Size = New System.Drawing.Size(165, 71)
         Me.grpMissing.TabIndex = 11
         Me.grpMissing.TabStop = False
         Me.grpMissing.Tag = "Missing"
@@ -250,7 +250,7 @@ Partial Class dlgCorrelation
         Me.ucrPnlCompletePairwise.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(6, 13)
         Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
-        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(146, 49)
+        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(152, 49)
         Me.ucrPnlCompletePairwise.TabIndex = 0
         '
         'cmdOptions
@@ -270,7 +270,7 @@ Partial Class dlgCorrelation
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkShave)
         Me.grpDisplayOptions.Location = New System.Drawing.Point(9, 319)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
-        Me.grpDisplayOptions.Size = New System.Drawing.Size(410, 156)
+        Me.grpDisplayOptions.Size = New System.Drawing.Size(426, 156)
         Me.grpDisplayOptions.TabIndex = 14
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Tag = "Display Options"
