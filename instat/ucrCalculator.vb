@@ -1662,6 +1662,9 @@ Public Class ucrCalculator
         clsWakefieldAgeFunction.SetPackageName("wakefield")
         clsWakefieldAgeFunction.SetRCommand("age")
         clsWakefieldAgeFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldAgeFunction.AddParameter("x", "20:35", iPosition:=1)
+        clsWakefieldAgeFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldAgeFunction.AddParameter("name", Chr(34) & "Age" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldAgeFunction.ToScript, 0)
     End Sub
