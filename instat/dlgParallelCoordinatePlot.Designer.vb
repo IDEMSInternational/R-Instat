@@ -169,7 +169,7 @@ Partial Class dlgParallelCoordinatePlot
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.Location = New System.Drawing.Point(9, 194)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(115, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(149, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Plot Options"
