@@ -585,7 +585,7 @@ Partial Class dlgSummaryTables
         Me.MinimizeBox = False
         Me.Name = "dlgSummaryTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summary\Frequency Tables"
+        Me.Text = "Frequency/Summary Tables"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
         Me.grpMargin.ResumeLayout(False)
