@@ -28,7 +28,7 @@ Public Class dlgFitModel
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -96,6 +96,7 @@ Public Class dlgFitModel
         clsFormulaFunction = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
+        clsGLMNB = New RFunction
         clsConfint = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
@@ -133,6 +134,11 @@ Public Class dlgFitModel
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
         clsLM.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+
+        clsGLMNB = clsRegressionDefaults.clsDefaultGLmNBFunction.Clone
+        clsGLMNB.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMNB.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -178,6 +184,7 @@ Public Class dlgFitModel
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
         clsLMOrGLM = clsLM
+        'clsLMOrGLM = clsGLMNB
         bResetModelOptions = True
 
         clsAttach.SetRCommand("attach")
@@ -193,8 +200,11 @@ Public Class dlgFitModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrModelName.AddAdditionalRCode(clsGLM, 1)
+        ucrModelName.AddAdditionalRCode(clsGLMNB, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLM, bReset)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMNB, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 2)
+
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator, bReset)
         ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
         ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
@@ -361,6 +371,12 @@ Public Class dlgFitModel
 
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsLM
+            Else
+                clsLMOrGLM = clsGLM
+            End If
+
+            If (ucrFamily.clsCurrDistribution.strNameTag = "glm.negative_binomial") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
+                clsLMOrGLM = clsGLMNB
             Else
                 clsLMOrGLM = clsGLM
             End If

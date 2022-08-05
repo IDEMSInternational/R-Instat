@@ -25,6 +25,16 @@ Public Class clsRegressionDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsDefaultGLmNBFunction As RFunction
+        Get
+
+            Dim clsRModelFunction As New RFunction
+
+            clsRModelFunction.SetRCommand("glm.nb")
+            clsRModelFunction.SetPackageName("MASS")
+            Return clsRModelFunction
+        End Get
+    End Property
     Public Shared ReadOnly Property clsDefaultGlmFunction As RFunction
         Get
 

@@ -228,6 +228,7 @@ Public Class ucrDistributions
         Dim clsNoDist As New Distribution
         Dim clsEmpiricalDist As New Distribution
         Dim clsTriangularDist As New Distribution
+        Dim clsGlmNegativeBinomial As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -522,6 +523,15 @@ Public Class ucrDistributions
         clsGamma.bNumeric = True
         clsGamma.bIsContinuous = True
         lstAllDistributions.Add(clsGamma)
+
+        'Negative Binomial distribution
+        clsGlmNegativeBinomial.strNameTag = "glm.negative_binomial"
+        clsGlmNegativeBinomial.strRName = "glm.nb"
+        clsGlmNegativeBinomial.strPackagName = "MASS"
+        clsGlmNegativeBinomial.strGLMFunctionName = "glm.nb"
+        clsGlmNegativeBinomial.bNumeric = True
+        clsGlmNegativeBinomial.bIsExact = True
+        lstAllDistributions.Add(clsGlmNegativeBinomial)
 
         'Gamma with Zeros distribution
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
