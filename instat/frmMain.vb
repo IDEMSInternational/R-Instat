@@ -408,7 +408,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgFrequencyOrSummaryTables.ShowDialog()
+        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click

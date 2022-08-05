@@ -829,7 +829,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(299, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Frequency/Summary Tables..."
+        Me.mnuDescribeSpecificSummary.Text = "Summary Tables..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
