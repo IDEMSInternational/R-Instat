@@ -603,6 +603,8 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
+        cmdSummaries.Visible = rdoSummaryTable.Checked
+        cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
         If rdoSummaryTable.Checked Then
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
@@ -610,8 +612,6 @@ Public Class dlgSummaryTables
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
-            cmdFormatTable.Location = New Point(286, 464)
-            cmdSummaries.Visible = True
         Else
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
@@ -619,8 +619,6 @@ Public Class dlgSummaryTables
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("frequency_table")
-            cmdSummaries.Visible = False
-            cmdFormatTable.Location = New Point(286, 379)
         End If
     End Sub
 
