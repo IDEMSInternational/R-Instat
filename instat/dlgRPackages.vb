@@ -75,36 +75,43 @@ Public Class dlgInstallRPackage
         clsPackageCheck.AddParameter("package", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
 
         expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
-        If expOutput IsNot Nothing AndAlso Not expOutput.Type = Internals.SymbolicExpressionType.Null Then
-            chrOutput = expOutput.AsCharacter
-            If chrOutput.Count >= 1 Then
-                If chrOutput(0) = "1" Then
-                    If chrOutput.Count = 4 Then
-                        If chrOutput(1) = "0" Then
-                            ucrInputMessage.SetText("Package is installed and up to date.")
-                            ucrInputMessage.txtInput.BackColor = Color.Yellow
-                        ElseIf chrOutput(1) = "-1" Then
-                            ucrInputMessage.SetText("Package is installed. Newer version available: " & chrOutput(3) & " (current: " & chrOutput(2) & ").")
-                        End If
-                    Else
-                        ucrInputMessage.SetText("Package is installed. No version information available.")
-                    End If
-                ElseIf chrOutput(0) = "2" Then
-                    ucrInputMessage.SetText("Package exists and not currently installed.")
-                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
-                ElseIf chrOutput(0) = "3" Then
-                    ucrInputMessage.SetText("Package is installed but not a current CRAN package")
-                    ucrInputMessage.txtInput.BackColor = Color.LightBlue
-                ElseIf chrOutput(0) = "4" Then
-                    ucrInputMessage.SetText("Not a current CRAN package. Perhaps it has been archived")
-                    ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
-                ElseIf chrOutput(0) = "5" Then
-                    ucrInputMessage.SetText("No internet connection.Try reconnecting")
-                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
-                End If
-            End If
-        Else
+
+        If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
+            ucrInputMessage.SetText("Cannot get package information.")
+            Exit Sub
         End If
+
+        chrOutput = expOutput.AsCharacter
+        If chrOutput.Count < 1 Then
+            ucrInputMessage.SetText("Cannot get package information.")
+            Exit Sub
+        End If
+
+        Select Case chrOutput(0)
+            Case "1"
+                If chrOutput.Count = 4 Then
+                    If chrOutput(1) = "0" Then
+                        ucrInputMessage.SetText("Package is installed and up to date.")
+                        ucrInputMessage.txtInput.BackColor = Color.Yellow
+                    ElseIf chrOutput(1) = "-1" Then
+                        ucrInputMessage.SetText("Package is installed. Newer version available: " & chrOutput(3) & " (current: " & chrOutput(2) & ").")
+                    End If
+                Else
+                    ucrInputMessage.SetText("Package is installed. No version information available.")
+                End If
+            Case "2"
+                ucrInputMessage.SetText("Package exists and not currently installed.")
+                ucrInputMessage.txtInput.BackColor = Color.LightGreen
+            Case "3"
+                ucrInputMessage.SetText("Package is installed but not a current CRAN package")
+                ucrInputMessage.txtInput.BackColor = Color.LightBlue
+            Case "4"
+                ucrInputMessage.SetText("Not a current CRAN package. Perhaps it has been archived")
+                ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+            Case "5"
+                ucrInputMessage.SetText("No internet connection.Try reconnecting")
+                ucrInputMessage.txtInput.BackColor = Color.LightCoral
+        End Select
     End Sub
 
     Private Sub CheckEnable()
