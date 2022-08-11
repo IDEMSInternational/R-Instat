@@ -177,6 +177,10 @@ Public Class ucrDistributions
                                 If Dist.bTwoLevelFactor Then
                                     bUse = True
                                 End If
+                            Case "factor"
+                                If Dist.bFactor Then
+                                    bUse = True
+                                End If
                         End Select
                     End If
                 Case Else
@@ -229,6 +233,7 @@ Public Class ucrDistributions
         Dim clsEmpiricalDist As New Distribution
         Dim clsTriangularDist As New Distribution
         Dim clsGlmNegativeBinomial As New Distribution
+        Dim clsPolarDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -532,6 +537,15 @@ Public Class ucrDistributions
         clsGlmNegativeBinomial.bNumeric = True
         clsGlmNegativeBinomial.bIsExact = True
         lstAllDistributions.Add(clsGlmNegativeBinomial)
+
+        'ordered factor
+        clsPolarDist.strNameTag = "Ordered_Logistic"
+        clsPolarDist.strPackagName = "MASS"
+        clsPolarDist.strRName = "polr"
+        clsPolarDist.bFactor = True
+        clsPolarDist.bIsContinuous = False
+        clsPolarDist.strGLMFunctionName = "polr"
+        lstAllDistributions.Add(clsPolarDist)
 
         'Gamma with Zeros distribution
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"

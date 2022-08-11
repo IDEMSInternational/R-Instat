@@ -35,6 +35,17 @@ Public Class clsRegressionDefaults
             Return clsRModelFunction
         End Get
     End Property
+
+    Public Shared ReadOnly Property clsDefaultGLmPolrFunction As RFunction
+        Get
+
+            Dim clsRModelFunction As New RFunction
+
+            clsRModelFunction.SetRCommand("polr")
+            clsRModelFunction.SetPackageName("MASS")
+            Return clsRModelFunction
+        End Get
+    End Property
     Public Shared ReadOnly Property clsDefaultGlmFunction As RFunction
         Get
 
