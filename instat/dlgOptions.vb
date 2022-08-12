@@ -84,13 +84,13 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Portuguese", "Kiswahili"})
+        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
 
         SetVisibleLanButton()
     End Sub
 
-     Private Sub LoadInstatOptions()
+    Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
@@ -123,10 +123,12 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
-            Case "pt-PT"
-                ucrInputLanguage.SetText("Portuguese")
             Case "sw-KE"
                 ucrInputLanguage.SetText("Kiswahili")
+            Case "pt-PT"
+                ucrInputLanguage.SetText("Portuguese")
+            Case "ru-RU"
+                ucrInputLanguage.SetText("Russian")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -261,10 +263,12 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
-            Case "Portuguese"
-                strCurrLanguageCulture = "pt-PT"
             Case "Kiswahili"
                 strCurrLanguageCulture = "sw-KE"
+            Case "Portuguese"
+                strCurrLanguageCulture = "pt-PT"
+            Case "Russian"
+                strCurrLanguageCulture = "ru-RU"
         End Select
         ApplyEnabled(True)
     End Sub
