@@ -90,7 +90,7 @@ Public Class dlgOptions
         SetVisibleLanButton()
     End Sub
 
-     Private Sub LoadInstatOptions()
+    Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
