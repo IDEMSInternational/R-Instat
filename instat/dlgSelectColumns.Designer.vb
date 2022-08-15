@@ -106,7 +106,7 @@ Partial Class dlgSelectColumns
         Me.cmdAddCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdAddCondition.Location = New System.Drawing.Point(276, 107)
         Me.cmdAddCondition.Name = "cmdAddCondition"
-        Me.cmdAddCondition.Size = New System.Drawing.Size(112, 30)
+        Me.cmdAddCondition.Size = New System.Drawing.Size(112, 37)
         Me.cmdAddCondition.TabIndex = 12
         Me.cmdAddCondition.Tag = "Add_condition"
         Me.cmdAddCondition.Text = "Add Condition"

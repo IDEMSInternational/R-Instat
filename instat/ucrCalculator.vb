@@ -216,7 +216,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
         ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
         ttCalculator.SetToolTip(cmdFactorize, "computes the prime factorizations. For example, Factorize(20)= (2,5,2,1), Factorize(8)= 2:3 for (2,2,2)")
-        ttCalculator.SetToolTip(cmdPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
+        ttCalculator.SetToolTip(cmdIsPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
         ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
         ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
         ttCalculator.SetToolTip(cmdRankPercent, "returns the percentile that the number correspods to. For example, PercentRank(c(1,2,5,11,15)) = 0.2,0.4,0.6,0.8,1.0")
@@ -2952,7 +2952,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPrime_Click(sender As Object, e As EventArgs) Handles cmdPrime.Click
+    Private Sub cmdIsPrime_Click(sender As Object, e As EventArgs) Handles cmdIsPrime.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::isprime(n = , reps = )", 11)
         Else
@@ -3078,5 +3078,38 @@ Public Class ucrCalculator
             strPackageName = "R.utils"
         End If
         OpenHelpPage()
+    End Sub
+
+    Private Sub cmdNthPrime_Click(sender As Object, e As EventArgs) Handles cmdNthPrime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::nth_prime(n = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::nth_prime()", 1)
+        End If
+    End Sub
+
+    Private Sub PrimesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrimesToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "primes"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdGeneratePrimes_Click(sender As Object, e As EventArgs) Handles cmdGeneratePrimes.Click
+        Dim clsGetDataframeFunction As New RFunction
+        Dim clsNRowsFunction As New RFunction
+        Dim clsGeneratePrimesFunction As New RFunction
+
+        clsGetDataframeFunction.AddParameter("data_name", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
+        clsNRowsFunction.SetRCommand("nrow")
+        clsNRowsFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataframeFunction, iPosition:=0)
+
+        clsGeneratePrimesFunction.SetPackageName("primes")
+        clsGeneratePrimesFunction.SetRCommand("generate_n_primes")
+        clsGeneratePrimesFunction.AddParameter("n", clsRFunctionParameter:=clsNRowsFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsGeneratePrimesFunction.ToScript, 0)
+
     End Sub
 End Class

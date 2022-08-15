@@ -178,11 +178,11 @@ Partial Class sdgCorrPlot
         '
         Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(223, 51)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(230, 51)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 10
         Me.ucrReceiverFactor.ucrSelector = Nothing
