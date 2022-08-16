@@ -239,3 +239,5 @@ installer/Output/
 /instat/dlgFrequency.sw-KE.resx
 /instat/dlgFrequency.resx
 /instat/dlgFrequency.Designer.vb
+/packages/cef.redist.x64.104.4.18/CEF/libcef.dll
+/packages/cef.redist.x86.104.4.18/CEF/libcef.dll
