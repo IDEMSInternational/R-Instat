@@ -1682,6 +1682,10 @@ Public Class ucrCalculator
         clsWakefieldAnimalFunction.SetPackageName("wakefield")
         clsWakefieldAnimalFunction.SetRCommand("animal")
         clsWakefieldAnimalFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldAnimalFunction.AddParameter("k", "10", iPosition:=1)
+        clsWakefieldAnimalFunction.AddParameter("x", "wakefield::animal_list", iPosition:=2)
+        clsWakefieldAnimalFunction.AddParameter("prob", "NULL", iPosition:=3)
+        clsWakefieldAnimalFunction.AddParameter("name", Chr(34) & "Animal" & Chr(34), iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldAnimalFunction.ToScript, 0)
     End Sub
@@ -1690,15 +1694,34 @@ Public Class ucrCalculator
         Dim clsWakefieldPetFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsPetListFunction As New RFunction
+        Dim clsPetProbFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsPetListFunction.SetRCommand("c")
+        clsPetListFunction.AddParameter("d", Chr(34) & "Dog" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPetListFunction.AddParameter("c", Chr(34) & "Cat" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsPetListFunction.AddParameter("n", Chr(34) & "None" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsPetListFunction.AddParameter("b", Chr(34) & "Bird" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsPetListFunction.AddParameter("h", Chr(34) & "Horse" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+
+        clsPetProbFunction.SetRCommand("c")
+        clsPetProbFunction.AddParameter("0.365", "0.365", iPosition:=0, bIncludeArgumentName:=False)
+        clsPetProbFunction.AddParameter("0.304", "0.304", iPosition:=1, bIncludeArgumentName:=False)
+        clsPetProbFunction.AddParameter("0.258", "0.258", iPosition:=2, bIncludeArgumentName:=False)
+        clsPetProbFunction.AddParameter("0.031", "0.031", iPosition:=3, bIncludeArgumentName:=False)
+        clsPetProbFunction.AddParameter("0.015", "0.015", iPosition:=4, bIncludeArgumentName:=False)
+
         clsWakefieldPetFunction.SetPackageName("wakefield")
         clsWakefieldPetFunction.SetRCommand("pet")
         clsWakefieldPetFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldPetFunction.AddParameter("x", clsRFunctionParameter:=clsPetListFunction, iPosition:=1)
+        clsWakefieldPetFunction.AddParameter("prob", clsRFunctionParameter:=clsPetProbFunction, iPosition:=2)
+        clsWakefieldPetFunction.AddParameter("name", Chr(34) & "Pet" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldPetFunction.ToScript, 0)
     End Sub
@@ -1707,15 +1730,23 @@ Public Class ucrCalculator
         Dim clsWakefieldAnswerFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsAnswerListFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsAnswerListFunction.SetRCommand("c")
+        clsAnswerListFunction.AddParameter("no", Chr(34) & "No" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsAnswerListFunction.AddParameter("yes", Chr(34) & "Yes" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
         clsWakefieldAnswerFunction.SetPackageName("wakefield")
         clsWakefieldAnswerFunction.SetRCommand("answer")
         clsWakefieldAnswerFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldAnswerFunction.AddParameter("x", clsRFunctionParameter:=clsAnswerListFunction, iPosition:=1)
+        clsWakefieldAnswerFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldAnswerFunction.AddParameter("name", Chr(34) & "Answer" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldAnswerFunction.ToScript, 0)
     End Sub
@@ -1724,15 +1755,22 @@ Public Class ucrCalculator
         Dim clsWakefieldCarFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsRowNameFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsRowNameFunction.SetRCommand("rownames")
+        clsRowNameFunction.AddParameter("x", "datasets::mtcars", iPosition:=0, bIncludeArgumentName:=False)
+
         clsWakefieldCarFunction.SetPackageName("wakefield")
         clsWakefieldCarFunction.SetRCommand("car")
         clsWakefieldCarFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldCarFunction.AddParameter("x", clsRFunctionParameter:=clsRowNameFunction, iPosition:=1)
+        clsWakefieldCarFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldCarFunction.AddParameter("name", Chr(34) & "Car" & Chr(34))
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldCarFunction.ToScript, 0)
     End Sub
@@ -1741,15 +1779,32 @@ Public Class ucrCalculator
         Dim clsWakefieldChildrenFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsChildrenProbFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsChildrenProbFunction.SetRCommand("c")
+        clsChildrenProbFunction.AddParameter("0.25", "0.25", iPosition:=0, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.26", "0.25", iPosition:=1, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.15", "0.15", iPosition:=2, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.16", "0.15", iPosition:=3, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.1", "0.1", iPosition:=4, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.02", "0.02", iPosition:=5, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.03", "0.02", iPosition:=6, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.04", "0.02", iPosition:=7, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.05", "0.02", iPosition:=8, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.01", "0.01", iPosition:=9, bIncludeArgumentName:=False)
+        clsChildrenProbFunction.AddParameter("0.06", "0.01", iPosition:=10, bIncludeArgumentName:=False)
+
         clsWakefieldChildrenFunction.SetPackageName("wakefield")
         clsWakefieldChildrenFunction.SetRCommand("children")
         clsWakefieldChildrenFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldChildrenFunction.AddParameter("x", "0:10", iPosition:=1)
+        clsWakefieldChildrenFunction.AddParameter("prob", clsRFunctionParameter:=clsChildrenProbFunction, iPosition:=2)
+        clsWakefieldChildrenFunction.AddParameter("name", Chr(34) & "Children" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldChildrenFunction.ToScript, 0)
     End Sub
@@ -1766,15 +1821,22 @@ Public Class ucrCalculator
         Dim clsWakefieldColorFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsColorListFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsColorListFunction.SetPackageName("grDevices")
+        clsColorListFunction.SetRCommand("colors")
+
         clsWakefieldColorFunction.SetPackageName("wakefield")
         clsWakefieldColorFunction.SetRCommand("color")
         clsWakefieldColorFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldColorFunction.AddParameter("x", clsRFunctionParameter:=clsColorListFunction, iPosition:=1)
+        clsWakefieldColorFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldColorFunction.AddParameter("name", Chr(34) & "Color" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldColorFunction.ToScript, 0)
     End Sub
@@ -1783,15 +1845,27 @@ Public Class ucrCalculator
         Dim clsWakefieldPrimaryFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsColorListFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsColorListFunction.SetRCommand("c")
+        clsColorListFunction.AddParameter("r", Chr(34) & "Red" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsColorListFunction.AddParameter("g", Chr(34) & "Green" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsColorListFunction.AddParameter("b", Chr(34) & "Blue" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsColorListFunction.AddParameter("y", Chr(34) & "Yellow" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsColorListFunction.AddParameter("bl", Chr(34) & "Black" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        clsColorListFunction.AddParameter("w", Chr(34) & "White" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+
         clsWakefieldPrimaryFunction.SetPackageName("wakefield")
         clsWakefieldPrimaryFunction.SetRCommand("primary")
         clsWakefieldPrimaryFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldPrimaryFunction.AddParameter("x", clsRFunctionParameter:=clsColorListFunction, iPosition:=1)
+        clsWakefieldPrimaryFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldPrimaryFunction.AddParameter("name", Chr(34) & "Color" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldPrimaryFunction.ToScript, 0)
     End Sub
@@ -1800,15 +1874,25 @@ Public Class ucrCalculator
         Dim clsWakefieldDateStampFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsStartDateFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsStartDateFunction.SetRCommand("Sys.Date")
+
         clsWakefieldDateStampFunction.SetPackageName("wakefield")
         clsWakefieldDateStampFunction.SetRCommand("date_stamp")
         clsWakefieldDateStampFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldDateStampFunction.AddParameter("random", "FALSE", iPosition:=1)
+        clsWakefieldDateStampFunction.AddParameter("x", "NULL", iPosition:=2)
+        clsWakefieldDateStampFunction.AddParameter("start", clsRFunctionParameter:=clsStartDateFunction, iPosition:=3)
+        clsWakefieldDateStampFunction.AddParameter("k", 12, iPosition:=4)
+        clsWakefieldDateStampFunction.AddParameter("by", Chr(34) & "-1 months" & Chr(34), iPosition:=5)
+        clsWakefieldDateStampFunction.AddParameter("prob", "NULL", iPosition:=6)
+        clsWakefieldDateStampFunction.AddParameter("name", Chr(34) & "Date" & Chr(34), iPosition:=7)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDateStampFunction.ToScript, 0)
     End Sub
@@ -1826,6 +1910,8 @@ Public Class ucrCalculator
         clsWakefieldDeathFunction.SetPackageName("wakefield")
         clsWakefieldDeathFunction.SetRCommand("death")
         clsWakefieldDeathFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldDeathFunction.AddParameter("prob", "NULL", iPosition:=1)
+        clsWakefieldDeathFunction.AddParameter("name", Chr(34) & "Death" & Chr(34), iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDeathFunction.ToScript, 0)
     End Sub
@@ -1843,6 +1929,8 @@ Public Class ucrCalculator
         clsWakefieldDiedFunction.SetPackageName("wakefield")
         clsWakefieldDiedFunction.SetRCommand("died")
         clsWakefieldDiedFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldDiedFunction.AddParameter("prob", "NULL", iPosition:=1)
+        clsWakefieldDiedFunction.AddParameter("name", Chr(34) & "Died" & Chr(34), iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDiedFunction.ToScript, 0)
     End Sub
@@ -1860,6 +1948,9 @@ Public Class ucrCalculator
         clsWakefieldDiceFunction.SetPackageName("wakefield")
         clsWakefieldDiceFunction.SetRCommand("dice")
         clsWakefieldDiceFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldDiceFunction.AddParameter("x", "1:6", iPosition:=1)
+        clsWakefieldDiceFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldDiceFunction.AddParameter("name", Chr(34) & "Dice" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDiceFunction.ToScript, 0)
     End Sub
@@ -1868,15 +1959,25 @@ Public Class ucrCalculator
         Dim clsWakefieldDnaFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsDNAListFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsDNAListFunction.SetRCommand("c")
+        clsDNAListFunction.AddParameter("G", Chr(34) & "Guanine" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsDNAListFunction.AddParameter("A", Chr(34) & "Adenine" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsDNAListFunction.AddParameter("T", Chr(34) & "Thymine" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsDNAListFunction.AddParameter("C", Chr(34) & "Cytosine" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+
         clsWakefieldDnaFunction.SetPackageName("wakefield")
         clsWakefieldDnaFunction.SetRCommand("dna")
         clsWakefieldDnaFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldDnaFunction.AddParameter("x", clsRFunctionParameter:=clsDNAListFunction, iPosition:=1)
+        clsWakefieldDnaFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldDnaFunction.AddParameter("name", Chr(34) & "DNA" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDnaFunction.ToScript, 0)
     End Sub
@@ -1885,11 +1986,29 @@ Public Class ucrCalculator
         Dim clsWakefieldDobFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsDOBDateFunction As New RFunction
+        Dim clsDobSubtractOperator As New ROperator
+        Dim clsDobMultiplyOperator As New ROperator
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
+        clsDOBDateFunction.SetRCommand("Sys.Date")
+        clsDobMultiplyOperator.SetOperation("*")
+        clsDobMultiplyOperator.AddParameter("x", "365", iPosition:=0, bIncludeArgumentName:=False)
+        clsDobMultiplyOperator.AddParameter("y", "15", iPosition:=1, bIncludeArgumentName:=False)
+        clsDobSubtractOperator.SetOperation("-")
+        clsDobSubtractOperator.AddParameter("x", clsRFunctionParameter:=clsDOBDateFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsDobSubtractOperator.AddParameter("y", clsROperatorParameter:=clsDobMultiplyOperator, bIncludeArgumentName:=False)
+
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
+        clsWakefieldDobFunction.AddParameter("random", "TRUE", iPosition:=1)
+        clsWakefieldDobFunction.AddParameter("x", "NULL", iPosition:=2)
+        clsWakefieldDobFunction.AddParameter("start", clsROperatorParameter:=clsDobSubtractOperator, iPosition:=3)
+        clsWakefieldDobFunction.AddParameter("k", "365*2", iPosition:=4)
+        clsWakefieldDobFunction.AddParameter("by", Chr(34) & "1 days" & Chr(34), iPosition:=5)
+        clsWakefieldDobFunction.AddParameter("prob", "NULL", iPosition:=6)
+        clsWakefieldDobFunction.AddParameter("name", Chr(34) & "DOB" & Chr(34), iPosition:=7)
 
         clsWakefieldDobFunction.SetPackageName("wakefield")
         clsWakefieldDobFunction.SetRCommand("dob")
@@ -1911,6 +2030,8 @@ Public Class ucrCalculator
         clsWakefieldDummyFunction.SetPackageName("wakefield")
         clsWakefieldDummyFunction.SetRCommand("dummy")
         clsWakefieldDummyFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldDummyFunction.AddParameter("prob", "NULL", iPosition:=1)
+        clsWakefieldDummyFunction.AddParameter("name", Chr(34) & "Dummy" & Chr(34), iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDummyFunction.ToScript, 0)
     End Sub
