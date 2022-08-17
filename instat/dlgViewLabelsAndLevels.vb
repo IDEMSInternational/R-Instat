@@ -16,11 +16,13 @@
 
 Imports RDotNet
 Imports instat.Translations
+
+'todo. rename this to dlgViewLabelsAndLevels
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataFrame As String
-    Private clsViewFunction, clsSelectFunction, clsDeleteLabelsFunction As New RFunction
+    Private clsViewHtmlObjectFunction, clsSjTableFunction, clsSelectFunction, clsDeleteLabelsFunction As New RFunction
     Private clsDummyDataFunction As New RFunction
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,7 +44,9 @@ Public Class dlgViewFactorLabels
         Dim lstOfControls As New List(Of Control)
 
         ucrBase.iHelpTopicID = 517
-        ucrBase.clsRsyntax.iCallType = 2
+        'result is a html object. TODO. Check if no longer needed
+        'ucrBase.clsRsyntax.iCallType = 6
+
         ucrReceiverVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverVariables.SetParameterIsString()
         ucrReceiverVariables.SetParameterIncludeArgumentName(False)
@@ -113,7 +117,8 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub SetDefaults()
-        clsViewFunction = New RFunction
+        clsViewHtmlObjectFunction = New RFunction
+        clsSjTableFunction = New RFunction
         clsSelectFunction = New RFunction
         clsDeleteLabelsFunction = New RFunction
         clsDummyDataFunction = New RFunction
@@ -121,8 +126,8 @@ Public Class dlgViewFactorLabels
         'Reset
         ucrSelectorViewLabelsAndLevels.Reset()
         'Defining the function
-        clsViewFunction.SetPackageName("sjPlot")
-        clsViewFunction.SetRCommand("view_df")
+        clsSjTableFunction.SetPackageName("sjPlot")
+        clsSjTableFunction.SetRCommand("view_df")
 
         clsDummyDataFunction.AddParameter("checked", "data", iPosition:=0)
         clsDummyDataFunction.AddParameter("check", "FALSE", iPosition:=1)
@@ -133,27 +138,31 @@ Public Class dlgViewFactorLabels
         clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
         clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
-        clsViewFunction.AddParameter("x", "selected_variables", iPosition:=0)
-        clsViewFunction.AddParameter("show.frq", "TRUE")
-        clsViewFunction.AddParameter("show.id", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
+        clsSjTableFunction.AddParameter("x", clsRFunctionParameter:=clsSelectFunction, iPosition:=0)
+        clsSjTableFunction.AddParameter("show.frq", "TRUE")
+        clsSjTableFunction.AddParameter("show.id", "FALSE")
+        clsSjTableFunction.SetAssignTo("variables_sjTable")
+
+        clsViewHtmlObjectFunction.SetRCommand("view_html_object")
+        clsViewHtmlObjectFunction.AddParameter(strParameterName:="html_object", clsRFunctionParameter:=clsSjTableFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewHtmlObjectFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOptions.SetRCode(clsSjTableFunction, bReset)
         ucrReceiverVariables.AddAdditionalCodeParameterPair(clsDeleteLabelsFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
 
-        ucrChkAlternateColour.SetRCode(clsViewFunction, bReset)
-        ucrChkShowFrequencies.SetRCode(clsViewFunction, bReset)
-        ucrChkShowId.SetRCode(clsViewFunction, bReset)
-        ucrChkShowLabels.SetRCode(clsViewFunction, bReset)
-        ucrChkShowMissingValues.SetRCode(clsViewFunction, bReset)
-        ucrChkSortByName.SetRCode(clsViewFunction, bReset)
-        ucrChkShowPercentage.SetRCode(clsViewFunction, bReset)
-        ucrChkShowType.SetRCode(clsViewFunction, bReset)
-        ucrChkShowValues.SetRCode(clsViewFunction, bReset)
+        ucrChkAlternateColour.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowFrequencies.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowId.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowLabels.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowMissingValues.SetRCode(clsSjTableFunction, bReset)
+        ucrChkSortByName.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowPercentage.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowType.SetRCode(clsSjTableFunction, bReset)
+        ucrChkShowValues.SetRCode(clsSjTableFunction, bReset)
         ucrChkMaxLabels.SetRCode(clsDummyDataFunction, bReset)
-        ucrNudMaxLength.SetRCode(clsViewFunction, bReset)
+        ucrNudMaxLength.SetRCode(clsSjTableFunction, bReset)
         ucrReceiverVariables.SetRCode(clsSelectFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyDataFunction, bReset)
     End Sub
@@ -196,10 +205,8 @@ Public Class dlgViewFactorLabels
             ucrReceiverVariables.Location = New System.Drawing.Point(295, 84)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSelectFunction)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewHtmlObjectFunction)
         Else
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSelectFunction)
             ucrReceiverVariables.Location = New System.Drawing.Point(302, 109)
             ucrReceiverVariables.bWithQuotes = True
             strCurrDataFrame = ucrSelectorViewLabelsAndLevels.ucrAvailableDataFrames.strCurrDataFrame

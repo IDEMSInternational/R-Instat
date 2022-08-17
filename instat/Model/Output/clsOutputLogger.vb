@@ -69,6 +69,7 @@ Public Class clsOutputLogger
             _filteredOutputs = value
         End Set
     End Property
+
     ''' <summary>
     ''' Adds image to be displayed within the output
     ''' </summary>
@@ -83,12 +84,33 @@ Public Class clsOutputLogger
                 image = New Bitmap(Drawing.Image.FromStream(fs))
             End Using
             Dim outputElement As New clsOutputElement
-            outputElement.AddImageOutputFromR(image, _lastScriptElement.FormatedRScript)
+            outputElement.AddImageOutput(image, _lastScriptElement.FormatedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
 
     End Sub
+
+    'todo
+
+    ''' <summary>
+    ''' Adds html output to be displayed within the output
+    ''' </summary>
+    ''' <param name="strFilename"></param>
+    Public Sub AddHtmlOutput(strFilename As String)
+
+        'Note this is always takes the last script added as corresponding script
+        If _lastScriptElement Is Nothing Then
+            Throw New Exception("Cannot find script to attach output to.")
+        Else
+            Dim outputElement As New clsOutputElement
+            outputElement.AddHtmlOutput(strFilename, _lastScriptElement.FormatedRScript)
+            _output.Add(outputElement)
+            RaiseEvent NewOutputAdded(outputElement)
+        End If
+
+    End Sub
+
 
     ''' <summary>
     ''' Adds an output to the given filtered list

@@ -2882,7 +2882,10 @@
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\CefRuntimeWrapper.vb" />
+    <Compile Include="UserControls\Webview\Windows\CefRuntimeWrapper.vb" />
+    <Compile Include="UserControls\Webview\Windows\ucrWebview.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>

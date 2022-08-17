@@ -23,10 +23,11 @@ Imports RScript
 Public Class clsOutputElement
     Private _formattedRScript As List(Of clsRScriptElement)
     Private _id As Integer
+    'TODO. why list if only returning first items?
     Private _lstBmpImage As List(Of Bitmap)
     Private _lstStringOutput As List(Of String)
     Private _outputType As OutputType
-
+    Private _strHtmlOutput As String
     ''' <summary>
     ''' Constructor
     ''' </summary>
@@ -69,6 +70,12 @@ Public Class clsOutputElement
         End Get
     End Property
 
+    Public ReadOnly Property HtmlOutput As String
+        Get
+            Return _strHtmlOutput
+        End Get
+    End Property
+
     ''' <summary>
     ''' Defines the type of output
     ''' </summary>
@@ -97,10 +104,16 @@ Public Class clsOutputElement
     ''' When adding Output the script must always be added too
     ''' </summary>
     ''' <param name="image"></param>
-    Public Sub AddImageOutputFromR(image As Bitmap, script As List(Of clsRScriptElement))
+    Public Sub AddImageOutput(image As Bitmap, script As List(Of clsRScriptElement))
         _lstBmpImage.Add(image)
         _formattedRScript = script
         _outputType = OutputType.ImageOutput
+    End Sub
+
+    Public Sub AddHtmlOutput(strFileName As String, script As List(Of clsRScriptElement))
+        _strHtmlOutput = strFileName
+        _formattedRScript = script
+        _outputType = OutputType.HtmlOutput
     End Sub
 
     ''' <summary>

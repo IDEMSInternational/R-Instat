@@ -101,11 +101,17 @@ Public Class RLink
     ''' The log window.
     Public txtLog As New TextBox
 
-    ''' True if the log window is defined
-    Public bLog As Boolean = False
+    '''  <summary>
+    ''' Is set to True when the log window is defined.
+    ''' If set to False, R scripts will not be logged.
+    ''' </summary>
+    Public bLogRScripts As Boolean = False
 
-    ''' <summary> True if the R output window is defined.</summary>
-    Public bOutput As Boolean = True
+    ''' <summary> 
+    ''' Is set to True when the R output window is defined.
+    ''' If set to False, R scripts will not be shouwn in the output viewer
+    ''' </summary>
+    Public bOutputRscripts As Boolean = True
 
 
     ''' <summary>   True to climate object exists. </summary>
@@ -312,74 +318,6 @@ Public Class RLink
         Return bClose
     End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
-    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
-    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
-    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
-    '''           brackets that have not been closed with an equivalent '}' bracket.
-    '''           This function is named '...FromWindow' because it's designed to execute scripts 
-    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
-    '''           may contain R commands split over multiple lines to make the commands more 
-    '''           readable.</para>
-    ''' </summary>
-    ''' <param name="strNewScript">    The R script to execute.</param>
-    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
-    '''                                <paramref name="strNewScript"/> as the comment.</param>
-    ''' 
-    ''' <returns> Any text at the end of <paramref name="strNewScript"/> that was not executed.
-    '''           If all the text in <paramref name="strNewScript"/> was executed then returns "".
-    '''           </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
-        Dim strScriptCmd As String = ""
-
-
-        'for each line in script
-        For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
-            'remove any comments (character '#' and anything after)
-            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
-            Select Case iCommentPos
-                Case 0      'a normal comment line (starts with '#')
-                    Continue For
-                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
-                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
-            End Select
-
-            'if line is empty or only whitespace then ignore line
-            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
-            If strTrimmedLine.Length <= 0 Then
-                Continue For
-            End If
-
-            'else append line of script to command
-            strScriptCmd &= strScriptLine
-
-            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
-            '    then assume command is not complete
-            Dim cLastChar As Char = strTrimmedLine.Last
-            Dim strLast3Chars As String = ""
-            Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
-            Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
-            Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
-            If strTrimmedLine.Length >= 3 Then
-                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
-            End If
-            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" OrElse iNumOpenCurlies <> iNumClosedCurlies OrElse iNumDoubleQuotes Mod 2 Then
-                Continue For
-            End If
-
-            'else execute command
-            Dim iCallType As Integer = 5
-            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
-                iCallType = 3
-            End If
-            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
-            strScriptCmd = ""
-            strNewComment = ""
-        Next
-        Return strScriptCmd
-    End Function
 
     ''' <summary>
     ''' Extracts all the complete runnable R commands from <paramref name="strScript"/>.
@@ -548,7 +486,7 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     Public Sub SetLog(tempLog As TextBox)
         txtLog = tempLog
-        bLog = True
+        bLogRScripts = True
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -808,7 +746,7 @@ Public Class RLink
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
+    Public Sub RunScriptOld(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strTemp As String = ""
@@ -838,11 +776,11 @@ Public Class RLink
         Else
             strScriptWithComment = strScript
         End If
-        If bLog Then
+        If bLogRScripts Then
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
         ' if the output window is defined then output comments (if exists) and script (if 'bShowCommands' is true).
-        If bOutput Then
+        If bOutputRscripts Then
             clsOutputLogger.AddRScript(strScriptWithComment)
         End If
 
@@ -976,7 +914,7 @@ Public Class RLink
         End If
 
         ' if output window is defined, and there's something to output
-        If bOutput AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
+        If bOutputRscripts AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
             ' if output should be sent to web browser
             If iCallType = 4 Then
                 '  rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
@@ -990,6 +928,375 @@ Public Class RLink
             frmMain.UpdateAllGrids()
         End If
     End Sub
+
+
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns an assignment statement of the form:
+    '''             <code>
+    '''             <paramref name="strAssignTo"/> &lt;- <paramref name="strScripts"/> 
+    '''             </code>
+    '''             If <paramref name="strScripts"/> is multiple lines then the assignment is done
+    '''             on <paramref name="strScripts"/>'s last line. All previous lines are returned 
+    '''             unchanged.
+    '''             </summary>
+    '''
+    ''' <param name="strAssignTo">  The variable to assign to (i.e. the left side of the 
+    '''                             assignment). </param>
+    ''' <param name="strScripts">   The script command(s) that contains the command to assign  (i.e. the right side of the 
+    '''                             assignment). </param>
+    '''
+    ''' <returns>   The constructed assignment statement. </returns>
+    ''' todo. move to another class or module
+    '''--------------------------------------------------------------------------------------------
+    Public Function ConstructAssignTo(strAssignTo As String, strScripts As String) As String
+
+        If String.IsNullOrEmpty(strScripts) Then
+            Return ""
+        Else
+            Dim strReconstructed As String = ""
+            Dim arrScriptParts As String()
+            'if string contains more than one line, assign the last line of the multi-line string
+            arrScriptParts = GetRunnableCommandLines(strScripts)
+            If arrScriptParts.Length > 1 Then
+                're-assemble the string, apart from the last line
+                strReconstructed = String.Join(Environment.NewLine, arrScriptParts, 0, arrScriptParts.Length - 1)
+                'assign the last line of the multi-line string
+                strReconstructed = strReconstructed & Environment.NewLine & strAssignTo & " <- " & arrScriptParts.Last
+            Else
+                'else if string has only one line, then assign to the whole string
+                strReconstructed = strAssignTo & " <- " & strScripts
+            End If
+            Return strReconstructed
+        End If
+
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    ''' This method executes the <paramref name="strScript"/> R script and displays the output. The
+    ''' output may be displayed as text, graph or in a web browser (see <paramref name="iCallType"/>).
+    ''' </summary>
+    ''' <param name="strScript"> is the R script to execute.</param>
+    ''' <param name="iCallType"> defines how to display the R output.
+    ''' <list type="bullet">
+    '''     <item>
+    '''        <description>0 Executes <paramref name="strScript"/> and ignores the result.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>1 Executes <paramref name="strScript"/>, stores the result in a 
+    '''        temporary R variable, and then outputs the variable's value as text.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>2 Executes <paramref name="strScript"/> and if successful shows the 
+    '''        result as text.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>3 Executes <paramref name="strScript"/> and if successful shows the 
+    '''        result as a graph.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>4 Executes <paramref name="strScript"/>, stores the result in a 
+    '''        temporary R variable, and then outputs the variable's value in a web browser.</description>
+    '''     </item>
+    '''     <item>
+    '''        <description>5 Executes <paramref name="strScript"/>, and displays the result 
+    '''        in the output window. Use this value for manually entered R commands (e.g. for 
+    '''        commands entered manually in the script window).</description>
+    '''     </item>
+    ''' </list>
+    ''' </param>
+    ''' <param name="strComment"> is shown as a comment. If this parameter is "" then shows 
+    ''' <paramref name="strScript"/> as the comment.</param>
+    ''' <param name="bSeparateThread"> if true then executes <paramref name="strScript"/> in a 
+    ''' new thread.</param>
+    ''' <param name="bShowWaitDialogOverride"> if true and <paramref name="bSeparateThread"/> is 
+    ''' also true then display a waiting dialog while the R script is executing.</param>
+    ''' <param name="bUpdateGrids"> if true then updates grids after executing 
+    ''' <paramref name="strScript"/>.</param>
+    ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
+    ''' displays the exception message.</param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
+        Dim strCapturedScript As String
+        Dim expTemp As RDotNet.SymbolicExpression
+        Dim strTemp As String = ""
+        Dim strOutput As String = ""
+        Dim strScriptWithComment As String
+        Dim strSplitScript As String
+        Dim strTempGraphsDirectory As String
+        Dim clsPNGFunction As New RFunction
+        Dim strTempAssignTo As String = ".temp_val"
+        Dim bSuccess As Boolean
+        Dim bError As Boolean = False
+
+        ' set temp folder for graphs, e.g. to "C:\Users\myName\Temp\R_Instat_Temp_Graphs"
+        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
+        'Need to create directory as R unable to create the directory in linux
+        If Not Directory.Exists(strTempGraphsDirectory) Then
+            Directory.CreateDirectory(strTempGraphsDirectory)
+        End If
+
+
+
+        ' if comment provided
+        If strComment <> "" Then
+            ' Prefix comment to script, e.g. "# Code generated by the dialog, Import Dataset" & vbCrLf & "new_RDS <- readRDS(file=""C:/Users/myName ...
+            strScriptWithComment = GetFormattedComment(strComment) & Environment.NewLine & strScript
+        Else
+            strScriptWithComment = strScript
+        End If
+
+        If bLogRScripts Then
+            txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
+        End If
+        ' if the output window is defined then output comments (if exists) and script (if 'bShowCommands' is true).
+        If bOutputRscripts Then
+            clsOutputLogger.AddRScript(strScriptWithComment)
+        End If
+
+        'TODO SJL 20/04/20 - is the commented out check below needed?
+        'If strScript.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+
+        Try
+
+            'get the last R script command
+            Dim strLastScript As String = GetRunnableCommandLines(strScript).Last
+            If strLastScript.Contains("view_html_object") Then 'if output should be returned as a html Then
+                Try
+                    Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
+                    Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    expTemp = GetSymbol(strTempAssignTo)
+                    If expTemp IsNot Nothing Then
+                        'get the html file path name
+                        strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                        If strTemp <> "" Then
+                            clsOutputLogger.AddHtmlOutput(strTemp)
+                        End If
+                    End If
+                Catch e As Exception
+                    MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                End Try
+
+            ElseIf iCallType = 0 Then 'if script output should be ignored
+                Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+            ElseIf iCallType = 3 Then 'else if output should be returned as a graph
+
+                If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
+                    'run R command for taking a snapshot of the graph image
+                    clsPNGFunction.SetPackageName("grDevices")
+                    clsPNGFunction.SetRCommand("png")
+                    clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                    'TODO make these options
+                    clsPNGFunction.AddParameter("width", 4000)
+                    clsPNGFunction.AddParameter("height", 4000)
+                    clsPNGFunction.AddParameter("res", 500)
+                    ' temporary solution to being unable to save graphs in a temporary location for display.
+                    ' this can occur if System.IO.Path.GetTempPath() returns a path that is not writable.
+                    bSuccess = Evaluate(clsPNGFunction.ToScript(), bSilent:=True, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    If bSuccess Then
+                        'need to boost resolution of the devices, it's not as good as with ggsave.
+                        Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        'switch of taking of graph snapshots
+                        'todo. not quite sure if this would work, otherwise find the right way to close the appropriate devices.
+                        Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+
+                        'Get the graph images for display.
+                        'todo in future do the following
+                        'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
+                        'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
+                        'This sub is used to display graphics in the output window when necessary.
+                        'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
+                        'It is called from RLink at the end of RunScript.
+                        Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
+                        Dim iNumberOfFiles As Integer = -1
+                        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
+                        Try
+                            lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
+                        Catch e As Exception
+                            lstTempGraphFiles = Nothing
+                            MsgBox(e.Message & Environment.NewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
+                        End Try
+                        If lstTempGraphFiles IsNot Nothing AndAlso lstTempGraphFiles.Count > 0 Then
+                            For Each strFileName As String In lstTempGraphFiles
+                                If strGraphDisplayOption = "view_output_window" Then
+                                    clsOutputLogger.AddImageOutput(strFileName)
+                                ElseIf strGraphDisplayOption = "view_separate_window" Then
+                                    frmMain.AddGraphForm(strFileName)
+                                End If
+                                Try
+                                    My.Computer.FileSystem.DeleteFile(strFileName)
+                                Catch e As Exception
+                                    MsgBox(e.Message & Environment.NewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
+                                End Try
+                            Next
+                        End If
+                    Else
+                        'switch of taking of graph snapshots
+                        'todo. not quite sure if this would work, otherwise find the right way to close the appropriate devices. 
+                        Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        strGraphDisplayOption = "view_R_viewer"
+                        MsgBox("A problem occured saving graphs in the temporary location " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat and/or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
+                        'will launch the R viewer
+                        Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    End If
+
+                ElseIf strGraphDisplayOption = "view_R_viewer" Then
+                    Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                End If
+
+            ElseIf iCallType = 1 OrElse iCallType = 4 Then 'else if script output should be stored in a temp variable
+                ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
+                Try
+                    'TODO check this is valid syntax in all cases
+                    '     i.e. this is potentially: x <- y <- 1
+                    Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    expTemp = GetSymbol(strTempAssignTo)
+                    If expTemp IsNot Nothing Then
+                        strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                        strOutput = strOutput & strTemp & Environment.NewLine
+                    End If
+                Catch e As Exception
+                    MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                End Try
+            Else ' else if script output should not be ignored, not stored in a graph and not stored in a variable
+                'if script comes from script window, or else script is a single line
+                If iCallType = 5 OrElse strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
+                    'wrap the whole script in 'capture.output'
+                    '  'capture.output' returns the result of the R command as a string.
+                    '  This string can be displayed later in the output window.
+                    strCapturedScript = "capture.output(" & strScript & ")"
+                Else 'else if script is multi-line
+                    'execute all lines apart from the final line
+                    strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
+                    If strSplitScript <> "" Then
+                        Try
+                            bError = Not Evaluate(strSplitScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        Catch e As Exception
+                            MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                        End Try
+                    End If
+                    'ensure that the final line of the script will be executed next
+                    strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) - 2)
+                    'wrap the final line in 'capture.output' so that when it's executed, the result can be displayed in the output window
+                    strCapturedScript = "capture.output(" & strSplitScript & ")"
+                End If
+                Try
+                    If Not bError Then
+                        'execute the script and assign the result to a temporary variable
+                        If Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride) Then
+                            expTemp = GetSymbol(strTempAssignTo)
+                            Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
+                            If expTemp IsNot Nothing Then
+                                strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                                If strTemp <> "" Then
+                                    'ensure that the data returned from the script will be displayed in the output window
+                                    strOutput = strOutput & strTemp & Environment.NewLine
+                                End If
+                            End If
+                        End If
+                    End If
+                Catch e As Exception
+                    MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                End Try
+            End If
+
+        Catch e As Exception
+            MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+        End Try
+
+        ' if output window is defined, and there's something to output
+        If bOutputRscripts AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
+            ' if output should be sent to web browser
+            'If iCallType = 4 Then
+            '    '  rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
+            '    'TODO Add to web browser
+            'Else
+            '    clsOutputLogger.AddStringOutput(strOutput)
+            'End If
+            clsOutputLogger.AddStringOutput(strOutput)
+        End If
+        AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
+        If bUpdateGrids Then
+            frmMain.UpdateAllGrids()
+        End If
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
+    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
+    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
+    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
+    '''           brackets that have not been closed with an equivalent '}' bracket.
+    '''           This function is named '...FromWindow' because it's designed to execute scripts 
+    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
+    '''           may contain R commands split over multiple lines to make the commands more 
+    '''           readable.</para>
+    ''' </summary>
+    ''' <param name="strNewScript">    The R script to execute.</param>
+    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
+    '''                                <paramref name="strNewScript"/> as the comment.</param>
+    ''' 
+    ''' <returns> Any text at the end of <paramref name="strNewScript"/> that was not executed.
+    '''           If all the text in <paramref name="strNewScript"/> was executed then returns "".
+    '''           </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
+        Dim strScriptCmd As String = ""
+
+
+        'for each line in script
+        For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
+            'remove any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
+            End Select
+
+            'if line is empty or only whitespace then ignore line
+            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
+            If strTrimmedLine.Length <= 0 Then
+                Continue For
+            End If
+
+            'else append line of script to command
+            strScriptCmd &= strScriptLine
+
+            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
+            '    then assume command is not complete
+            Dim cLastChar As Char = strTrimmedLine.Last
+            Dim strLast3Chars As String = ""
+            Dim iNumOpenRound As Integer = strScriptCmd.Where(Function(c) c = "("c).Count
+            Dim iNumClosedRound As Integer = strScriptCmd.Where(Function(c) c = ")"c).Count
+            Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
+            Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
+            If strTrimmedLine.Length >= 3 Then
+                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
+            End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" _
+                    OrElse iNumOpenRound <> iNumClosedRound _
+                    OrElse iNumOpenCurlies <> iNumClosedCurlies _
+                    OrElse iNumDoubleQuotes Mod 2 Then
+                Continue For
+            End If
+
+            'else execute command
+            Dim iCallType As Integer = 5
+            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
+                iCallType = 3
+            End If
+            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            strScriptCmd = ""
+            strNewComment = ""
+        Next
+        Return strScriptCmd
+    End Function
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Executes the the <paramref name="strScript"/> R script and returns the result 
@@ -1227,7 +1534,7 @@ Public Class RLink
                                                                       frmSetupLoading.Show()
                                                                   End If
                                                               End If
-                                                                  While thrRScript.IsAlive
+                                                              While thrRScript.IsAlive
                                                                   If bErrorMessageOpen Then
                                                                       If Not RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
                                                                           frmSetupLoading.Close()
@@ -2208,13 +2515,18 @@ Public Class RLink
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
 
         If bAsPlotly Then
+            Dim clsViewHtmlObjectFunction As New RFunction
             Dim clsInteractivePlot As New RFunction
             clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
             clsInteractivePlot.SetPackageName("plotly")
             clsInteractivePlot.SetRCommand("ggplotly")
             clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+
+            clsViewHtmlObjectFunction.SetRCommand("view_html_object")
+            clsViewHtmlObjectFunction.AddParameter(strParameterName:="html_object", clsRFunctionParameter:=clsInteractivePlot)
+
             'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
-            RunScript(clsInteractivePlot.ToScript(), iCallType:=2, strComment:="View last graph as Plotly", bSeparateThread:=False)
+            RunScript(clsViewHtmlObjectFunction.ToScript(), iCallType:=2, strComment:="View last graph as Plotly", bSeparateThread:=False)
         Else
             Dim strGlobalGraphDisplayOption As String
             'store the current set graph display option, to restore after display
@@ -2275,7 +2587,7 @@ Public Class RLink
         'Note: this function is not currently called but it will be used in future
         '      functionality to populate dialogs from script.
         '      Please do not delete this function. (@lloyddewit 24/11/21)
-        
+
         'temporary object that retrieves the output from the environment
         Dim strTempAssignTo As String = ".temp_func"
         Dim expTemp As SymbolicExpression

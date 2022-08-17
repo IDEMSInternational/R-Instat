@@ -8,11 +8,11 @@
 '
 ' This program is distributed in the hope that it will be useful,
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
 ' You should have received a copy of the GNU General Public License 
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.InteropServices
 ''' <summary>
@@ -24,11 +24,11 @@ Public Class ucrOutputPage
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
 
-    ''' <summary>
-    ''' Returns all the selected elements
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property SelectedElements() As List(Of clsOutputElement)
+    ''' <summary>
+    ''' Returns all the selected elements
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property SelectedElements() As List(Of clsOutputElement)
         Get
             Dim elements As New List(Of clsOutputElement)
             For Each checkbox In _checkBoxes
@@ -40,11 +40,11 @@ Public Class ucrOutputPage
         End Get
     End Property
 
-    ''' <summary>
-    ''' Checks to see if elements on the page can be re ordered
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property BCanReOrder() As Boolean
+    ''' <summary>
+    ''' Checks to see if elements on the page can be re ordered
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property BCanReOrder() As Boolean
         Get
             Return _bCanReOrder
         End Get
@@ -53,11 +53,11 @@ Public Class ucrOutputPage
         End Set
     End Property
 
-    ''' <summary>
-    ''' Checks to see if page can be renamed
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property BCanRename() As Boolean
+    ''' <summary>
+    ''' Checks to see if page can be renamed
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property BCanRename() As Boolean
         Get
             Return _bCanRename
         End Get
@@ -66,11 +66,11 @@ Public Class ucrOutputPage
         End Set
     End Property
 
-    ''' <summary>
-    ''' Checks to see if elements on the page can be deleted
-    ''' </summary>
-    ''' <returns></returns>
-    Public Property BCanDelete() As Boolean
+    ''' <summary>
+    ''' Checks to see if elements on the page can be deleted
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property BCanDelete() As Boolean
         Get
             Return _bCanDelete
         End Get
@@ -83,37 +83,37 @@ Public Class ucrOutputPage
 
     Public Sub New()
 
-        ' This call is required by the designer.
-        InitializeComponent()
+        ' This call is required by the designer.
+        InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
-        _checkBoxes = New List(Of CheckBox)
+        ' Add any initialization after the InitializeComponent() call.
+        _checkBoxes = New List(Of CheckBox)
     End Sub
 
-    ''' <summary>
-    ''' Clears all check boxes on the page
-    ''' </summary>
-    Public Sub ClearAllCheckBoxes()
+    ''' <summary>
+    ''' Clears all check boxes on the page
+    ''' </summary>
+    Public Sub ClearAllCheckBoxes()
         For Each checkbox In _checkBoxes
             checkbox.Checked = False
         Next
     End Sub
 
-    ''' <summary>
-    ''' Clears all outputs on the page
-    ''' </summary>
-    Public Sub ClearAllOutputs()
+    ''' <summary>
+    ''' Clears all outputs on the page
+    ''' </summary>
+    Public Sub ClearAllOutputs()
         _checkBoxes.Clear()
         While pnlMain.Controls.Count > 0
             pnlMain.Controls(0).Dispose()
         End While
     End Sub
 
-    ''' <summary>
-    ''' Add output to page
-    ''' </summary>
-    ''' <param name="outputElement"></param>
-    Public Sub AddNewOutput(outputElement As clsOutputElement)
+    ''' <summary>
+    ''' Add output to page
+    ''' </summary>
+    ''' <param name="outputElement"></param>
+    Public Sub AddNewOutput(outputElement As clsOutputElement)
         Select Case outputElement.OutputType
             Case OutputType.Script
                 AddNewScript(outputElement)
@@ -121,15 +121,17 @@ Public Class ucrOutputPage
                 AddNewTextOutput(outputElement)
             Case OutputType.ImageOutput
                 AddNewImageOutput(outputElement)
+            Case OutputType.HtmlOutput
+                AddNewHtmlOutput(outputElement)
         End Select
         pnlMain.VerticalScroll.Value = pnlMain.VerticalScroll.Maximum
         pnlMain.PerformLayout()
     End Sub
 
-    ''' <summary>
-    ''' Copies selected elements to clipboard
-    ''' </summary>
-    Public Sub CopySelectedElementsToClipboard()
+    ''' <summary>
+    ''' Copies selected elements to clipboard
+    ''' </summary>
+    Public Sub CopySelectedElementsToClipboard()
         If CopyOneImageOnly() Then
             Exit Sub
         End If
@@ -141,11 +143,11 @@ Public Class ucrOutputPage
         CopySelectedTextToClipBoard(richText, richText.Rtf)
     End Sub
 
-    ''' <summary>
-    ''' Saves page to rich text file
-    ''' </summary>
-    ''' <param name="path"></param>
-    Public Sub Save(path As String)
+    ''' <summary>
+    ''' Saves page to rich text file
+    ''' </summary>
+    ''' <param name="path"></param>
+    Public Sub Save(path As String)
         Dim richText As New RichTextBox
         For Each checkbox In _checkBoxes
             Dim element As clsOutputElement = checkbox.Tag
@@ -160,9 +162,9 @@ Public Class ucrOutputPage
         End If
 
         Dim panel As New Panel With {
-            .Height = 10, ' = 10 'small height as panel will grow
-            .AutoSize = True,
-            .Dock = DockStyle.Top
+          .Height = 10, ' = 10 'small height as panel will grow
+                .AutoSize = True,
+          .Dock = DockStyle.Top
         }
         pnlMain.Controls.Add(panel)
         pnlMain.Controls.SetChildIndex(panel, 0)
@@ -173,11 +175,11 @@ Public Class ucrOutputPage
 
     Private Sub AddCheckBoxToElementPanel(panel As Panel, outputElement As clsOutputElement)
         Dim checkBox As New CheckBox With {
-            .Text = "",
-            .CheckAlign = ContentAlignment.TopLeft,
-            .Dock = DockStyle.Left,
-            .AutoSize = True,
-            .Tag = outputElement
+          .Text = "",
+          .CheckAlign = ContentAlignment.TopLeft,
+          .Dock = DockStyle.Left,
+          .AutoSize = True,
+          .Tag = outputElement
         }
         panel.Controls.Add(checkBox)
         _checkBoxes.Add(checkBox)
@@ -187,8 +189,8 @@ Public Class ucrOutputPage
 
     Private Sub AddNewScript(outputElement As clsOutputElement)
         Dim richTextBox As New RichTextBox With {
-           .Dock = DockStyle.Top,
-           .BorderStyle = BorderStyle.None
+         .Dock = DockStyle.Top,
+         .BorderStyle = BorderStyle.None
         }
         FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormatedRScript)
         Dim panel As Panel = AddElementPanel(outputElement)
@@ -228,8 +230,8 @@ Public Class ucrOutputPage
         Dim intStartSelection As Integer = richTextBox.Text.Length
         richTextBox.AppendText(text)
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            'Through Mono cannot have multiple fonts and colours within RichTextBox
-            richTextBox.SelectAll()
+            'Through Mono cannot have multiple fonts and colours within RichTextBox
+            richTextBox.SelectAll()
             richTextBox.Font = font
             richTextBox.ForeColor = colour
             richTextBox.SelectionLength = 0
@@ -249,8 +251,8 @@ Public Class ucrOutputPage
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
         Dim richTextBox As New RichTextBox With {
-           .Dock = DockStyle.Top,
-           .BorderStyle = BorderStyle.None
+         .Dock = DockStyle.Top,
+         .BorderStyle = BorderStyle.None
         }
         AddFormatedTextToRichTextBox(richTextBox, outputElement.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
         Dim panel As Panel = AddElementPanel(outputElement)
@@ -270,6 +272,38 @@ Public Class ucrOutputPage
         pictureBox.Dock = DockStyle.Top
         pictureBox.SizeMode = PictureBoxSizeMode.Zoom
         SetPictureBoxHeight(pictureBox)
+    End Sub
+
+    Private Sub AddNewHtmlOutput(outputElement As clsOutputElement)
+        Dim panel As Panel = AddElementPanel(outputElement)
+        Dim linkEnlarge As New LinkLabel
+        Dim htmlOutput As New ucrWebview()
+
+        linkEnlarge.Text = "Maximise"
+
+
+        htmlOutput.LoadFile(outputElement.HtmlOutput)
+
+
+        AddHandler linkEnlarge.Click, Sub()
+                                          Dim frm As New Form
+                                          Dim htmlOutput2 As New ucrWebview()
+                                          htmlOutput2.LoadFile(outputElement.HtmlOutput)
+                                          frm.Controls.Add(htmlOutput2)
+                                          htmlOutput2.Dock = DockStyle.Fill
+                                          frm.WindowState = FormWindowState.Maximized
+                                          frm.Show()
+                                      End Sub
+
+
+        panel.Controls.Add(linkEnlarge)
+        panel.Controls.Add(htmlOutput)
+        panel.Controls.SetChildIndex(linkEnlarge, 0)
+        panel.Controls.SetChildIndex(htmlOutput, 0)
+
+        linkEnlarge.Dock = DockStyle.Top
+        htmlOutput.Dock = DockStyle.Top
+
     End Sub
 
     Private Sub SetRichTextBoxHeight(richTextBox As RichTextBox)
