@@ -21,6 +21,7 @@ Imports System.Threading
 Imports instat.Translations
 Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.InteropServices
 
 Public Class frmMain
     Public clsRLink As RLink
@@ -83,7 +84,10 @@ Public Class frmMain
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
 
-        CefRuntimeWrapper.initialiseCefRuntime()
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            CefRuntimeWrapper.initialiseCefRuntime()
+        End If
+
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -898,6 +902,11 @@ Public Class frmMain
                     DeleteAutoSaveDebugLog()
                 End If
                 clsRLink.CloseREngine()
+
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+                    CefRuntimeWrapper.shutDownCef()
+                End If
+
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try

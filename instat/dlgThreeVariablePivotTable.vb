@@ -19,9 +19,9 @@ Public Class dlgThreeVariablePivotTable
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
     Private clsConcatenateFunction, clsFlattenFunction,
-        clsGetObjectFunction, clsLevelsFunction, clsPasteFunction,
+         clsLevelsFunction, clsPasteFunction,
         clsRelevelPasteFunction, clsRPivotTableFunction,
-  clsSelectFunction, clsViewHtmlObjectFunction As New RFunction
+        clsSelectFunction, clsViewHtmlObjectFunction As New RFunction
     Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
 
 
@@ -124,7 +124,6 @@ Public Class dlgThreeVariablePivotTable
         clsConcatenateFunction = New RFunction
         clsFlattenFunction = New RFunction
         clsLevelsFunction = New RFunction
-        clsGetObjectFunction = New RFunction
         clsPasteFunction = New RFunction
         clsRelevelPasteFunction = New RFunction
         clsRPivotTableFunction = New RFunction
@@ -140,45 +139,41 @@ Public Class dlgThreeVariablePivotTable
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
 
-        clsConcatenateFunction.SetRCommand("c")
-
-
-        clsSelectFunction.SetPackageName("dplyr")
-        clsSelectFunction.SetRCommand("select")
-        clsSelectFunction.AddParameter("concatenate", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0, bIncludeArgumentName:=False)
-
-        clsFlattenFunction.SetPackageName("stringr")
-        clsFlattenFunction.SetRCommand("str_flatten")
-        clsFlattenFunction.AddParameter("string", "survey_levels", iPosition:=0)
-        clsFlattenFunction.SetAssignTo("survey_levels")
-
-        clsGetObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-
 
         clsLevelsDollarOperator.SetOperation("$")
 
         clsLevelsFunction.SetRCommand("levels")
         clsLevelsFunction.AddParameter("x", clsROperatorParameter:=clsLevelsDollarOperator, iPosition:=0)
-        clsLevelsFunction.SetAssignTo("survey_levels")
 
         clsPasteFunction.SetRCommand("paste0")
         clsPasteFunction.AddParameter("first_parameter", Chr(34) & "\" & Chr(34) & Chr(34),
                                       iPosition:=0, bIncludeArgumentName:=False)
-        clsPasteFunction.AddParameter("second_parameter", "survey_levels", iPosition:=1,
-                                      bIncludeArgumentName:=False)
+        clsPasteFunction.AddParameter("second_parameter", clsRFunctionParameter:=clsLevelsFunction,
+                                      iPosition:=1, bIncludeArgumentName:=False)
         clsPasteFunction.AddParameter("third_parameter", Chr(34) & "\" & Chr(34) & "," & Chr(34),
                                       iPosition:=2, bIncludeArgumentName:=False)
-        clsPasteFunction.SetAssignTo("survey_levels")
 
-        clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("columns", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
-        clsPipeOperator.SetAssignTo("data_selected")
+        clsFlattenFunction.SetPackageName("stringr")
+        clsFlattenFunction.SetRCommand("str_flatten")
+        clsFlattenFunction.AddParameter("string", clsRFunctionParameter:=clsPasteFunction, iPosition:=0)
+        clsFlattenFunction.SetAssignTo("survey_levels")
+
 
         clsRelevelPasteFunction.SetRCommand("paste0")
         clsRelevelPasteFunction.AddParameter("first_paramete", Chr(34) & "function(attr) {  var sortAs = $.pivotUtilities.sortAs;  return sortAs([" & Chr(34) & ", survey_levels," & Chr(34) & "]); }" & Chr(34),
                                             bIncludeArgumentName:=False, iPosition:=0)
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
+
+
+        clsConcatenateFunction.SetRCommand("c")
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("concatenate", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("columns", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+        clsPipeOperator.SetAssignTo("data_selected")
 
         clsRPivotTableFunction.SetPackageName("rpivotTable")
         clsRPivotTableFunction.SetRCommand("rpivotTable")
@@ -287,17 +282,11 @@ Public Class dlgThreeVariablePivotTable
 
         If ucrChangedControls Is ucrReceiverFactorLevels Then
             If ucrReceiverFactorLevels.IsEmpty Then
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLevelsFunction)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPasteFunction)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFlattenFunction)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRelevelPasteFunction)
                 clsRPivotTableFunction.RemoveParameterByName("sorters")
             Else
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsLevelsFunction, 0)
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsPasteFunction, 1)
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsFlattenFunction, 2)
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsRelevelPasteFunction, 3)
-                clsRPivotTableFunction.AddParameter("sorters", "relevel_variables", iPosition:=3)
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsFlattenFunction, 0)
+                clsRPivotTableFunction.AddParameter(strParameterName:="sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
             End If
         End If
     End Sub
