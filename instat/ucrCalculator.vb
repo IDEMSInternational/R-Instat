@@ -2040,15 +2040,48 @@ Public Class ucrCalculator
         Dim clsWakefieldEducationFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsEducationListFunction As New RFunction
+        Dim clsEducationProbFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsEducationListFunction.SetRCommand("c")
+        clsEducationListFunction.AddParameter("nsc", Chr(34) & "No Schooling Completed" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("ns8", Chr(34) & "Nursery School To 8th Grade" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("9-12", Chr(34) & "9th Grade To 12th Grade,No Diploma" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("rhc", Chr(34) & "Regular High School Diploma" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("ged", Chr(34) & "GED or Alternative Credential" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("sc1", Chr(34) & "Some College,Less Than 1 Year" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("scn", Chr(34) & "Some College,1 orMore Years, No Degree" & Chr(34), iPosition:=6, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("ad", Chr(34) & "Associate's Degree" & Chr(34), iPosition:=7, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("bd", Chr(34) & "Bachelor's Degree" & Chr(34), iPosition:=8, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("md", Chr(34) & "Master's Degree" & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("psc", Chr(34) & "Professional School Degree" & Chr(34), iPosition:=10, bIncludeArgumentName:=False)
+        clsEducationListFunction.AddParameter("dd", Chr(34) & "Doctorate's Degree" & Chr(34), iPosition:=11, bIncludeArgumentName:=False)
+
+        clsEducationProbFunction.SetRCommand("c")
+        clsEducationProbFunction.AddParameter("0.013", "0.013", iPosition:=0, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.05", "0.05", iPosition:=1, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.0850", "0.0850", iPosition:=2, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.246", "0.246", iPosition:=3, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.039", "0.039", iPosition:=4, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.064", "0.064", iPosition:=5, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.15", "0.15", iPosition:=6, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.075", "0.075", iPosition:=7, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.176", "0.176", iPosition:=8, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.072", "0.072", iPosition:=9, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.019", "0.019", iPosition:=10, bIncludeArgumentName:=False)
+        clsEducationProbFunction.AddParameter("0.012", "0.012", iPosition:=11, bIncludeArgumentName:=False)
+
         clsWakefieldEducationFunction.SetPackageName("wakefield")
         clsWakefieldEducationFunction.SetRCommand("education")
         clsWakefieldEducationFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldEducationFunction.AddParameter("x", clsRFunctionParameter:=clsEducationListFunction, iPosition:=1)
+        clsWakefieldEducationFunction.AddParameter("prob", clsRFunctionParameter:=clsEducationProbFunction, iPosition:=2)
+        clsWakefieldEducationFunction.AddParameter("name", Chr(34) & "Education" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldEducationFunction.ToScript, 0)
     End Sub
@@ -2057,15 +2090,34 @@ Public Class ucrCalculator
         Dim clsWakefieldEmploymentFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsEmploymentListFunction As New RFunction
+        Dim clsEmploymentProbFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsEmploymentListFunction.SetRCommand("c")
+        clsEmploymentListFunction.AddParameter("FT", Chr(34) & "Full Time" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsEmploymentListFunction.AddParameter("PT", Chr(34) & "Part Time" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsEmploymentListFunction.AddParameter("U", Chr(34) & "Unemployed" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsEmploymentListFunction.AddParameter("R", Chr(34) & "Retired" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsEmploymentListFunction.AddParameter("S", Chr(34) & "Student" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+
+        clsEmploymentProbFunction.SetPackageName("c")
+        clsEmploymentProbFunction.AddParameter("0.6", "0.6", iPosition:=0, bIncludeArgumentName:=False)
+        clsEmploymentProbFunction.AddParameter("0.1", "0.1", iPosition:=1, bIncludeArgumentName:=False)
+        clsEmploymentProbFunction.AddParameter("0.2", "0.1", iPosition:=2, bIncludeArgumentName:=False)
+        clsEmploymentProbFunction.AddParameter("0.3", "0.1", iPosition:=3, bIncludeArgumentName:=False)
+        clsEmploymentProbFunction.AddParameter("0.4", "0.1", iPosition:=4, bIncludeArgumentName:=False)
+
         clsWakefieldEmploymentFunction.SetPackageName("wakefield")
         clsWakefieldEmploymentFunction.SetRCommand("employment")
         clsWakefieldEmploymentFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldEmploymentFunction.AddParameter("x", clsRFunctionParameter:=clsEmploymentListFunction, iPosition:=1)
+        clsWakefieldEmploymentFunction.AddParameter("prob", clsRFunctionParameter:=clsEmploymentProbFunction, iPosition:=2)
+        clsWakefieldEmploymentFunction.AddParameter("name", Chr(34) & "Employment" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldEmploymentFunction.ToScript, 0)
     End Sub
@@ -2074,15 +2126,34 @@ Public Class ucrCalculator
         Dim clsWakefieldEyeFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsWakefieldDataFunction As New RFunction
+        Dim clsEyeColorFunction As New RFunction
+        Dim clsEyeColorProbFunction As New RFunction
 
         clsWakefieldDataFunction.AddParameter("data", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", clsRFunctionParameter:=clsWakefieldDataFunction, iPosition:=0)
 
+        clsEyeColorFunction.SetRCommand("c")
+        clsEyeColorFunction.AddParameter("brown", Chr(34) & "Brown" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsEyeColorFunction.AddParameter("blue", Chr(34) & "Blue" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsEyeColorFunction.AddParameter("green", Chr(34) & "Green" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsEyeColorFunction.AddParameter("hazel", Chr(34) & "Hazel" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsEyeColorFunction.AddParameter("gray", Chr(34) & "Gray" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+
+        clsEyeColorProbFunction.SetRCommand("c")
+        clsEyeColorProbFunction.AddParameter("0.44", "0.44", iPosition:=0, bIncludeArgumentName:=False)
+        clsEyeColorProbFunction.AddParameter("0.3", "0.3", iPosition:=1, bIncludeArgumentName:=False)
+        clsEyeColorProbFunction.AddParameter("0.13", "0.13", iPosition:=2, bIncludeArgumentName:=False)
+        clsEyeColorProbFunction.AddParameter("0.09", "0.09", iPosition:=3, bIncludeArgumentName:=False)
+        clsEyeColorProbFunction.AddParameter("0.04", "0.04", iPosition:=4, bIncludeArgumentName:=False)
+
         clsWakefieldEyeFunction.SetPackageName("wakefield")
         clsWakefieldEyeFunction.SetRCommand("eye")
         clsWakefieldEyeFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldEyeFunction.AddParameter("x", clsRFunctionParameter:=clsEyeColorFunction, iPosition:=1)
+        clsWakefieldEyeFunction.AddParameter("prob", clsRFunctionParameter:=clsEyeColorProbFunction, iPosition:=2)
+        clsWakefieldEyeFunction.AddParameter("name", Chr(34) & "Eye" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldEyeFunction.ToScript, 0)
     End Sub
