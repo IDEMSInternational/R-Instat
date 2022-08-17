@@ -82,6 +82,8 @@ Public Class frmMain
         ' Add any initialization after the InitializeComponent() call.
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+
+        CefRuntimeWrapper.initialiseCefRuntime()
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
