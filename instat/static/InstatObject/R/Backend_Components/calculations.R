@@ -499,7 +499,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
             dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
         }
-      } else if (any(stringr::str_detect("Date", col_data_type))){
+      } else if (any(stringr::str_detect("Date | POSIXct | POSIXt", col_data_type))){
         # put in here the ones that DO NOT work for date
         if (any(grepl("summary_sum", formula_fn_exp))){
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%

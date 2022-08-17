@@ -52,7 +52,7 @@ Partial Class sdgDescribeTwoVarGraph
         'UcrButtonsSubdialogue1
         '
         Me.UcrButtonsSubdialogue1.AutoSize = True
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(66, 143)
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(40, 143)
         Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
         Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(224, 30)
         Me.UcrButtonsSubdialogue1.TabIndex = 8

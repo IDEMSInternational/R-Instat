@@ -22,6 +22,7 @@ Public Class dlgRowNamesOrNumbers
     Private clsGetRowNamesFunction As New RFunction
     Private clsSetRowNamesFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
+    Private clsAsNumericFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -104,6 +105,7 @@ Public Class dlgRowNamesOrNumbers
         clsAddKeyFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSetRowNamesFunction = New RFunction
+        clsAsNumericFunction = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
@@ -113,6 +115,9 @@ Public Class dlgRowNamesOrNumbers
         clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=2)
 
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+
+        clsAsNumericFunction.SetRCommand("as.numeric")
+        clsAsNumericFunction.AddParameter("x", clsRFunctionParameter:=clsGetRowNamesFunction, iPosition:=0)
 
         clsGetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
         clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
@@ -130,7 +135,8 @@ Public Class dlgRowNamesOrNumbers
         ucrReceiverRowNames.SetRCode(clsSetRowNamesFunction, bReset)
         ucrChkMakeColumnIntoKey.SetRCode(clsDummyFunction, bReset)
         ucrPnlOverallOptions.SetRCode(clsDummyFunction, bReset)
-        ucrNewColumnName.SetRCode(clsGetRowNamesFunction, bReset)
+        ucrNewColumnName.AddAdditionalRCode(clsGetRowNamesFunction, bReset)
+        ucrNewColumnName.SetRCode(clsAsNumericFunction, bReset)
         ucrChkAsNumeric.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -157,7 +163,7 @@ Public Class dlgRowNamesOrNumbers
         Else
             ucrSelectorRowNames.SetVariablesVisible(False)
             If rdoCopyRowNamesIntoFirstColumn.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsAsNumericFunction)
                 clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
             ElseIf rdoResetintoPositiveIntegers.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSetRowNamesFunction)

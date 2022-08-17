@@ -164,14 +164,18 @@ Public Class dlgTransformClimatic
         ucrReceiverTMin.SetParameter(New RParameter("tmin", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTMin.strSelectorHeading = "Numerics"
         ucrReceiverTMin.SetDataType("numeric")
-        ucrReceiverTMin.SetParameterIsRFunction()
+        ucrReceiverTMin.SetClimaticType("temp_min")
+        ucrReceiverTMin.bAutoFill = True
+        ucrReceiverTMin.SetParameterIsString()
         ucrReceiverTMin.SetLinkedDisplayControl(lblTMin)
 
         ucrReceiverTMax.Selector = ucrSelectorTransform
         ucrReceiverTMax.SetParameter(New RParameter("tmax", 0, bNewIncludeArgumentName:=False))
         ucrReceiverTMax.strSelectorHeading = "Numerics"
         ucrReceiverTMax.SetDataType("numeric")
-        ucrReceiverTMax.SetParameterIsRFunction()
+        ucrReceiverTMax.SetClimaticType("temp_max")
+        ucrReceiverTMax.bAutoFill = True
+        ucrReceiverTMax.SetParameterIsString()
         ucrReceiverTMax.SetLinkedDisplayControl(lblTMax)
 
         ucrReceiverTMean.Selector = ucrSelectorTransform

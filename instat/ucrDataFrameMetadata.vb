@@ -24,8 +24,7 @@ Public Class ucrDataFrameMetadata
     Private _grid As IDataframeMetaDataGrid
     Dim _strNameLabel As String = "data_name"
 
-    '  Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
-    Public strPreviousCellText As String
+    '  Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheets
     Private lstNonEditableColumns As New List(Of String)
     Private clsHideDataFrame As New RFunction
     Private clsViewDataFrame As New RFunction
@@ -124,8 +123,7 @@ Public Class ucrDataFrameMetadata
                     MsgBox(newValue.ToString() & " is an existing data frame name.", MsgBoxStyle.Information, "Invalid Data Frame Name")
                     Exit Sub
                 Else
-                    strScript = frmMain.clsRLink.strInstatDataObject & "$rename_dataframe(data_name =" & Chr(34) & strPreviousCellText & Chr(34) &
-                                    ", new_val = " & strNewValue & ")"
+                    strScript = frmMain.clsRLink.strInstatDataObject & "$rename_dataframe(data_name =" & Chr(34) & strPreviousValue & Chr(34) & ", new_val = " & strNewValue & ")"
                     strComment = "Renamed data frame"
                 End If
             Else

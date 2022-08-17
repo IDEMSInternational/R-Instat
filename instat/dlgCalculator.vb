@@ -89,7 +89,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsComboBox()
         ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result")
-        ucrCalc.ucrSaveResultInto.SetAssignToIfUncheckedValue("calc")
+        ucrCalc.ucrSaveResultInto.SetAssignToIfUncheckedValue("last_calc")
 
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
@@ -188,7 +188,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.27
                 ucrBase.iHelpTopicID = 598
             Case "Integer"
-                Me.Width = iBasicWidth * 1.18
+                Me.Width = iBasicWidth * 1.37
             Case Else
                 Me.Width = iBasicWidth
         End Select

@@ -435,11 +435,21 @@ Partial Class ucrFilter
         Me.cmdCombineWithAndOr.Text = "All Combined with &&"
         Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
         '
+        'ucrFactorLevels
+        '
+        Me.ucrFactorLevels.AutoSize = True
+        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
+        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
+        Me.ucrFactorLevels.TabIndex = 2
+        '
         'ucrReceiverExpression
         '
         Me.ucrReceiverExpression.AutoSize = True
         Me.ucrReceiverExpression.frmParent = Nothing
-        Me.ucrReceiverExpression.Location = New System.Drawing.Point(456, 44)
+        Me.ucrReceiverExpression.Location = New System.Drawing.Point(480, 44)
         Me.ucrReceiverExpression.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrReceiverExpression.Name = "ucrReceiverExpression"
         Me.ucrReceiverExpression.Selector = Nothing
@@ -454,7 +464,7 @@ Partial Class ucrFilter
         Me.ucrLogicalCombobox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrLogicalCombobox.GetSetSelectedIndex = -1
         Me.ucrLogicalCombobox.IsReadOnly = False
-        Me.ucrLogicalCombobox.Location = New System.Drawing.Point(456, 44)
+        Me.ucrLogicalCombobox.Location = New System.Drawing.Point(478, 43)
         Me.ucrLogicalCombobox.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
         Me.ucrLogicalCombobox.Size = New System.Drawing.Size(89, 21)
@@ -465,7 +475,7 @@ Partial Class ucrFilter
         Me.ucrDatePicker.AutoSize = True
         Me.ucrDatePicker.DateValue = New Date(2021, 7, 7, 8, 39, 9, 171)
         Me.ucrDatePicker.Format = "dd MMM yyyy"
-        Me.ucrDatePicker.Location = New System.Drawing.Point(457, 44)
+        Me.ucrDatePicker.Location = New System.Drawing.Point(478, 43)
         Me.ucrDatePicker.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrDatePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDatePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
@@ -503,21 +513,11 @@ Partial Class ucrFilter
         Me.ucrFilterOperation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrFilterOperation.GetSetSelectedIndex = -1
         Me.ucrFilterOperation.IsReadOnly = False
-        Me.ucrFilterOperation.Location = New System.Drawing.Point(399, 44)
+        Me.ucrFilterOperation.Location = New System.Drawing.Point(399, 43)
         Me.ucrFilterOperation.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrFilterOperation.Name = "ucrFilterOperation"
-        Me.ucrFilterOperation.Size = New System.Drawing.Size(56, 21)
+        Me.ucrFilterOperation.Size = New System.Drawing.Size(78, 21)
         Me.ucrFilterOperation.TabIndex = 5
-        '
-        'ucrFactorLevels
-        '
-        Me.ucrFactorLevels.AutoSize = True
-        Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
-        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
-        Me.ucrFactorLevels.TabIndex = 2
         '
         'ucrFilterByReceiver
         '

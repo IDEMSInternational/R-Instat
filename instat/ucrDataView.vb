@@ -131,7 +131,6 @@ Public Class ucrDataView
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
-        _grid.ReOrderWorksheets()
     End Sub
 
     Public Sub RefreshGridData()
@@ -240,6 +239,10 @@ Public Class ucrDataView
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
+
+    Public Sub ReOrderWorkSheets()
+        _grid.ReOrderWorksheets()
+    End Sub
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then

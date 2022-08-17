@@ -58,7 +58,8 @@ Partial Class dlgPICSARainfall
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPointOption = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.ucrChkWithSE = New instat.ucrCheck()
+        Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -97,9 +98,9 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdPICSAOptions.Enabled = False
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
+        Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 195)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(151, 23)
         Me.cmdPICSAOptions.TabIndex = 12
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
@@ -148,7 +149,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkPoints.Checked = False
         Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
         Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(151, 24)
+        Me.ucrChkPoints.Size = New System.Drawing.Size(221, 24)
         Me.ucrChkPoints.TabIndex = 14
         '
         'ucrSave
@@ -222,9 +223,9 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 233)
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 219)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(151, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Tag = "Plot Options"
@@ -255,18 +256,23 @@ Partial Class dlgPICSARainfall
         Me.toolStripMenuItemPointOption.Size = New System.Drawing.Size(150, 22)
         Me.toolStripMenuItemPointOption.Text = "Point Options "
         '
-        'ucrReceiverY
+        'ucrChkWithSE
         '
-        Me.ucrReceiverY.AutoSize = True
-        Me.ucrReceiverY.frmParent = Me
-        Me.ucrReceiverY.Location = New System.Drawing.Point(248, 51)
-        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 4
-        Me.ucrReceiverY.ucrSelector = Nothing
+        Me.ucrChkWithSE.AutoSize = True
+        Me.ucrChkWithSE.Checked = False
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 281)
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(221, 23)
+        Me.ucrChkWithSE.TabIndex = 39
+        '
+        'ucrChkLineofBestFit
+        '
+        Me.ucrChkLineofBestFit.AutoSize = True
+        Me.ucrChkLineofBestFit.Checked = False
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 256)
+        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(221, 23)
+        Me.ucrChkLineofBestFit.TabIndex = 38
         '
         'dlgPICSARainfall
         '
@@ -274,7 +280,8 @@ Partial Class dlgPICSARainfall
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(463, 420)
-        Me.Controls.Add(Me.ucrReceiverY)
+        Me.Controls.Add(Me.ucrChkWithSE)
+        Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrVariablesAsFactorForPicsa)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputStation)
@@ -321,5 +328,6 @@ Partial Class dlgPICSARainfall
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLineOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPointOption As ToolStripMenuItem
-    Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents ucrChkWithSE As ucrCheck
+    Friend WithEvents ucrChkLineofBestFit As ucrCheck
 End Class
