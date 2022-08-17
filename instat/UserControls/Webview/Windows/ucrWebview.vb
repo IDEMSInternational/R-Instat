@@ -1,6 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
 Imports CefSharp.WinForms
 Imports CefSharp
+Imports CefSharp.DevTools.DOM
 
 'todo. inherit panel?
 Public Class ucrWebview
@@ -48,21 +49,20 @@ Public Class ucrWebview
     End Sub
 
     Private Sub OnLoadingStateChanged(sender As Object, e As LoadingStateChangedEventArgs)
-        If Not e.IsLoading AndAlso browser.CanExecuteJavascriptInMainFrame Then
-            'javascript for getting document height
-            Dim script As String = "(function() { var body = document.body; var html = document.documentElement; return  Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ); })();"
-            Dim task As Task(Of JavascriptResponse) = browser.EvaluateScriptAsync(script)
-            task.ContinueWith(Sub(t)
-                                  If t.IsFaulted = False Then
-                                      Dim response = t.Result 'Error: Result is not a member of Task' 
-                                      If response.Success And response.Result IsNot Nothing Then
-                                          Dim taskResult As String = response.Result
-                                          Me.Invoke(Sub()
-                                                        Height = Integer.Parse(taskResult)
-                                                    End Sub)
-                                      End If
-                                  End If
-                              End Sub)
+        If Not e.IsLoading Then
+            'Get the height of the html document and set it as the controls height
+            Dim task2 As Task(Of Rect) = browser.GetContentSizeAsync()
+            task2.ContinueWith(Sub(t)
+                                   If Not t.IsFaulted Then
+                                       Dim response As Rect = t.Result
+                                       If response IsNot Nothing Then
+                                           Me.Invoke(Sub()
+                                                         Me.Height = response.Height
+                                                     End Sub)
+                                       End If
+
+                                   End If
+                               End Sub)
         End If
     End Sub
 

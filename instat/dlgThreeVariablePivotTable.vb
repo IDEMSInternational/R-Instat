@@ -19,7 +19,7 @@ Public Class dlgThreeVariablePivotTable
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
     Private clsRPivotTableFunction, clsSelectFunction, clsConcatenateFunction,
-        clsGetObjectFunction As New RFunction
+        clsViewHtmlObjectFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
     Private Sub dlgThreeVariablePivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -39,7 +39,8 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 603
-        ucrBase.clsRsyntax.iCallType = 2
+        'result is a html object. TODO. Check if no longer needed
+        'ucrBase.clsRsyntax.iCallType = 6 
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
         ucrSelectorPivot.SetParameterIsrfunction()
@@ -97,6 +98,8 @@ Public Class dlgThreeVariablePivotTable
                                     "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
 
+        'todo. Enable oonce the correct code for saving html tables is added
+        ucrSavePivot.Enabled = False
         ucrSavePivot.SetPrefix("pivot_table")
         ucrSavePivot.SetSaveTypeAsTable()
         ucrSavePivot.SetDataFrameSelector(ucrSelectorPivot.ucrAvailableDataFrames)
@@ -110,15 +113,17 @@ Public Class dlgThreeVariablePivotTable
         clsSelectFunction = New RFunction
         clsConcatenateFunction = New RFunction
         clsPipeOperator = New ROperator
-        clsGetObjectFunction = New RFunction
+        clsViewHtmlObjectFunction = New RFunction
 
         ucrReceiverInitialRowFactors.SetMeAsReceiver()
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
-        ucrBase.clsRsyntax.ClearCodes()
 
-        clsGetObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConcatenateFunction.SetRCommand("c")
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("concatenate", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("columns", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
@@ -127,15 +132,12 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.SetPackageName("rpivotTable")
         clsRPivotTableFunction.SetRCommand("rpivotTable")
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsRPivotTableFunction.SetAssignTo("last_table")
 
-        clsSelectFunction.SetPackageName("dplyr")
-        clsSelectFunction.SetRCommand("select")
-        clsSelectFunction.AddParameter("concatenate", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsViewHtmlObjectFunction.SetRCommand("view_html_object")
+        clsViewHtmlObjectFunction.AddParameter(strParameterName:="html_object", clsRFunctionParameter:=clsRPivotTableFunction)
 
-        clsConcatenateFunction.SetRCommand("c")
-
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTableFunction, iPosition:=1)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewHtmlObjectFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -144,7 +146,8 @@ Public Class dlgThreeVariablePivotTable
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkNumericVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
-        ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
+        'todo
+        'ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkIncludeSubTotals.SetRCode(clsRPivotTableFunction, bReset)
         bRcodeSet = True
@@ -167,9 +170,7 @@ Public Class dlgThreeVariablePivotTable
     Private Sub ucrChkSelectedVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectedVariable.ControlValueChanged
         If ucrChkSelectedVariable.Checked Then
             ucrReceiverSelectedVariable.SetMeAsReceiver()
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=0)
         Else
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipeOperator)
             If ucrChkNumericVariable.Checked Then
                 ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
             Else
@@ -180,13 +181,12 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub ucrSelectorPivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPivot.ControlValueChanged
-        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         ChangeDataParameterValue()
     End Sub
 
     Private Sub ChangeDataParameterValue()
         If ucrChkSelectedVariable.Checked Then
-            clsRPivotTableFunction.AddParameter("data", "data_selected", iPosition:=0)
+            clsRPivotTableFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         Else
             clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         End If
@@ -242,12 +242,12 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub ucrSavePivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSavePivot.ControlValueChanged
-        If ucrSavePivot.ucrChkSave.Checked Then
-            clsGetObjectFunction.AddParameter("object_name", Chr(34) & ucrSavePivot.ucrInputComboSave.GetText & Chr(34), iPosition:=1)
-        Else
-            clsGetObjectFunction.AddParameter("object_name", Chr(34) & "last_table" & Chr(34), iPosition:=1)
-        End If
-
+        'todo
+        'If ucrSavePivot.ucrChkSave.Checked Then
+        '    clsViewHtmlObjectFunction.AddParameter("object_name", Chr(34) & ucrSavePivot.ucrInputComboSave.GetText & Chr(34), iPosition:=1)
+        'Else
+        '    clsViewHtmlObjectFunction.AddParameter("object_name", Chr(34) & "last_table" & Chr(34), iPosition:=1)
+        'End If
     End Sub
 
     Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged

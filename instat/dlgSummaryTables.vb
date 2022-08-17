@@ -36,6 +36,8 @@ Public Class dlgSummaryTables
     Private clsMmtableOperator, clsSummaryOperator, clsFrequencyOperator, clsColumnOperator,
             clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
 
+    Private clsViewObjectFunction As New RFunction
+
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -51,7 +53,9 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        'result is a html object. TODO. Check if no longer needed
+        'ucrBase.clsRsyntax.iCallType = 6
+
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -178,12 +182,15 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetText("Display as Decimal")
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
+        'todo. Enable oonce the correct code for saving html tables is added
+        ucrSaveTable.Enabled = False
         ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+
 
         ucrReorderSummary.bDataIsSummaries = True
     End Sub
@@ -230,13 +237,15 @@ Public Class dlgSummaryTables
         clsFrequencyOperator = New ROperator
         clsMmtableOperator = New ROperator
         clsDummyFunction = New RFunction
+        clsViewObjectFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
         ucrNudColumnFactors.SetText(1)
+        bResetSubdialog = True
 
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        'ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
 
@@ -305,7 +314,7 @@ Public Class dlgSummaryTables
 
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
-        clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
+        clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
         clsMutableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsSummaryOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
@@ -317,6 +326,8 @@ Public Class dlgSummaryTables
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
+        'todo. When refactoring this dialog
+        'investigate whether clsSummaryDefaultFunction and clsFrequencyDefaultFunction could be merged. It's only their parameters that change.
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
@@ -382,10 +393,11 @@ Public Class dlgSummaryTables
 
         clsStyleListFunction.SetRCommand("list")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
-        ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-        clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
-        bResetSubdialog = True
+        clsJoiningPipeOperator.SetAssignTo("last_table")
+
+        clsViewObjectFunction.SetRCommand("view_html_object")
+        clsViewObjectFunction.AddParameter(strParameterName:="html_object", clsROperatorParameter:=clsJoiningPipeOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectFunction)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -411,7 +423,8 @@ Public Class dlgSummaryTables
         ucrChkDisplayVariablesAsRows.SetRCode(clsSummaryOperator, bReset)
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
-        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        'todo
+        'ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
         FillListView()
     End Sub
 
@@ -607,8 +620,8 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
+            'ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
+            'ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
             cmdFormatTable.Location = New Point(286, 464)
             cmdSummaries.Visible = True
@@ -616,8 +629,8 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
+            'ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
+            'ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("frequency_table")
             cmdSummaries.Visible = False
             cmdFormatTable.Location = New Point(286, 379)

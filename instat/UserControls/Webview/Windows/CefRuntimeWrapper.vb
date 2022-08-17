@@ -61,10 +61,8 @@ Public NotInheritable Class CefRuntimeWrapper
         'todo. explore this further once we find the limitations of File:///
         'settings.RegisterScheme(GetCustomSheme())
 
-        'Perform dependency check to make sure all relevant resources are in our output directory.
-        Dim k = Cef.Initialize(settings, performDependencyCheck:=True, browserProcessHandler:=Nothing)
-
-        Return True
+        'Perform dependency check to make sure all relevant resources are in our output directory then initialise cef
+        Return Cef.Initialize(settings, performDependencyCheck:=True, browserProcessHandler:=Nothing)
 
     End Function
 
