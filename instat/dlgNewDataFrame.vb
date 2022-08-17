@@ -61,7 +61,7 @@ Public Class dlgNewDataFrame
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetIsTextBox()
-        ucrNewDFName.SetPrefix("data")
+        'ucrNewDFName.SetPrefix("data")
 
         'ucrRdoOptions
         ucrPnlDataFrame.AddRadioButton(rdoConstruct)
@@ -173,6 +173,22 @@ Public Class dlgNewDataFrame
         ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
     End Sub
 
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrNudRows.SetRCode(clsRepFunction, bReset)
+
+        ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
+        ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
+        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
+        ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
+        ucrNewDFName.SetRCode(clsConstructFunction, bReset)
+        ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
+        ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
+
+        If bReset Then
+            ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
+    End Sub
+
     Private Sub TestOKEnabled()
         If rdoConstruct.Checked Then
             'validate the datagrid rows 
@@ -248,22 +264,7 @@ Public Class dlgNewDataFrame
         ElseIf rdoLists.Checked Then
             ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputLists.IsEmpty AndAlso ucrInputListInCategory.GetText <> "")
         End If
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrNudRows.SetRCode(clsRepFunction, bReset)
-
-        ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
-        ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
-        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
-        ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
-        ucrNewDFName.SetRCode(clsConstructFunction, bReset)
-        ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
-        ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
-
-        If bReset Then
-            ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        End If
+        ListsDefaultName()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -274,6 +275,16 @@ Public Class dlgNewDataFrame
 
     Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRows.ControlContentsChanged, ucrNudCols.ControlContentsChanged, ucrNewDFName.ControlContentsChanged, ucrPnlDataFrame.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ListsDefaultName()
+        If rdoLists.Checked Then
+            If (Not ucrNewDFName.bUserTyped) AndAlso Not ucrInputListInCategory.IsEmpty Then
+                ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
+            End If
+        Else
+            ucrNewDFName.SetPrefix("data")
+        End If
     End Sub
 
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged,
