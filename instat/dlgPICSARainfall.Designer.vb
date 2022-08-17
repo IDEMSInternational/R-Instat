@@ -100,7 +100,7 @@ Partial Class dlgPICSARainfall
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 195)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(151, 23)
         Me.cmdPICSAOptions.TabIndex = 12
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
@@ -223,9 +223,9 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 223)
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 219)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(151, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Tag = "Plot Options"
