@@ -21,17 +21,6 @@ Public Class ucrWebview
         Controls.Add(browser)
     End Sub
 
-    'Public Sub LoadUrl(strUrl As String)
-    '    'todo.
-    '    'example; www.google.com
-    '    ' browser.LoadUrl(strUrl)
-    'End Sub
-
-    'Public Sub LoadHtml(strHtml As String)
-    '    'todo.
-    '    'browser.LoadHtml(strHtml)
-    'End Sub
-
     Public Sub LoadFile(strFilePathName As String)
         If browser Is Nothing Then
             Return
@@ -72,5 +61,17 @@ Public Class ucrWebview
         End If
         MyBase.Dispose(bDisposing)
     End Sub
+
+
+    'Public Sub LoadUrl(strUrl As String)
+    '    'todo. left here for reference
+    '    'example; www.google.com
+    '    ' browser.LoadUrl(strUrl)
+    'End Sub
+
+    'Public Sub LoadHtml(strHtml As String)
+    '    'todo.  left here for reference
+    '    'browser.LoadHtml(strHtml)
+    'End Sub
 
 End Class
