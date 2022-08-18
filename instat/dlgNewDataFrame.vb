@@ -264,7 +264,6 @@ Public Class dlgNewDataFrame
         ElseIf rdoLists.Checked Then
             ucrBase.OKEnabled(ucrNewDFName.IsComplete AndAlso Not ucrInputLists.IsEmpty AndAlso ucrInputListInCategory.GetText <> "")
         End If
-        ListsDefaultName()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -277,19 +276,12 @@ Public Class dlgNewDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ListsDefaultName()
-        If rdoLists.Checked Then
-            If (Not ucrNewDFName.bUserTyped) AndAlso Not ucrInputListInCategory.IsEmpty Then
-                ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
-            End If
-        Else
-            ucrNewDFName.SetPrefix("data")
-        End If
-    End Sub
-
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged,
         ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged,
         ucrChkRCommand.ControlValueChanged
+        If ucrChangedControl Is ucrPnlDataFrame Then
+            ChangeSavePrefix()
+        End If
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -797,6 +789,8 @@ Public Class dlgNewDataFrame
         clsCorporaFunction.ClearParameters()
         If ucrChangedControl Is ucrInputCategory Then
             LoadLists()
+        ElseIf ucrChangedControl Is ucrInputListInCategory Then
+            ChangeSavePrefix()
         End If
 
         If ucrInputListInCategory.GetText <> "" Then
@@ -807,7 +801,18 @@ Public Class dlgNewDataFrame
                                                  bIncludeArgumentName:=False, iPosition:=0)
         End If
         clsListDfFunction.AddParameter("data", clsRFunctionParameter:=clsCorporaFunction, iPosition:=0)
+        clsListDfFunction.RemoveAssignTo()
         ucrInputLists.SetText(clsListDfFunction.ToScript)
+    End Sub
+
+    Private Sub ChangeSavePrefix()
+        If rdoLists.Checked Then
+            If Not ucrInputListInCategory.IsEmpty Then
+                ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
+            End If
+        Else
+            ucrNewDFName.SetPrefix("data")
+        End If
     End Sub
 
     Private Sub ucrInputLists_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputLists.ControlContentsChanged
