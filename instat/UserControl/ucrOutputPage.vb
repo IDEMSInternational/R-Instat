@@ -282,13 +282,13 @@ Public Class ucrOutputPage
             Dim ucrWebviewHtmlOutput As New ucrWebview()
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
-                                            Dim frmMaximisOutput As New Form
+                                            Dim frmMaximiseOutput As New Form
                                             Dim htmlOutputMaximum As New ucrWebview()
                                             htmlOutputMaximum.LoadHtmlFile(outputElement.HtmlOutput)
-                                            frmMaximisOutput.Controls.Add(htmlOutputMaximum)
+                                            frmMaximiseOutput.Controls.Add(htmlOutputMaximum)
                                             htmlOutputMaximum.Dock = DockStyle.Fill
-                                            frmMaximisOutput.WindowState = FormWindowState.Maximized
-                                            frmMaximisOutput.Show()
+                                            frmMaximiseOutput.WindowState = FormWindowState.Maximized
+                                            frmMaximiseOutput.Show()
                                         End Sub
 
             ucrWebviewHtmlOutput.LoadHtmlFile(outputElement.HtmlOutput)
