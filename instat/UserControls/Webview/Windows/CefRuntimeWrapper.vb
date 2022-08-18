@@ -14,8 +14,6 @@ Imports CefSharp.WinForms
 ''' '''------------------------------------------------------------------------------------------------
 Public NotInheritable Class CefRuntimeWrapper
 
-
-
     '''--------------------------------------------------------------------------------------------
     ''' <summary> 
     ''' Declare constructor 'Private' to prevent instantiation of this class (see class comments 
@@ -25,9 +23,9 @@ Public NotInheritable Class CefRuntimeWrapper
     Private Sub New()
     End Sub
 
-    Public Shared Function initialiseCefRuntime() As Boolean
+    Public Shared Function InitialiseCefRuntime() As Boolean
 
-        If isCefInitilised() Then
+        If IsCefInitilised() Then
             Return False
         End If
 
@@ -42,9 +40,10 @@ Public NotInheritable Class CefRuntimeWrapper
         'If set via app.manifest this call will have no effect.
         'Cef.EnableHighDPISupport()
 
-        Dim settings As New CefSettings()
         'By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
-        settings.CachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache")
+        Dim settings As New CefSettings With {
+            .CachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache")
+        }
 
         'Example of setting a command line argument
         'Enables WebRTC
@@ -66,33 +65,36 @@ Public NotInheritable Class CefRuntimeWrapper
 
     End Function
 
-    'todo. left here for future reference
-    Private Shared Function GetCustomSheme() As CefCustomScheme
-        Dim cefCustomScheme As New CefCustomScheme
-        cefCustomScheme.SchemeName = "rinstat_temp_local_folder"
-        cefCustomScheme.DomainName = "rinstat_output"
-        cefCustomScheme.SchemeHandlerFactory = New FolderSchemeHandlerFactory(
-            rootFolder:="C:\RInstatInstallationFolder\tempfiles",
-            hostName:="rinstat_output",
-            defaultPage:="rinstat_default_page.html")
 
-        'usage example; strUrl = "rinstat_temp_local_folder://rinstat_output/anyFileDisplayable" 
-        'browser.LoadUrl(strUrl)
-        Return cefCustomScheme
 
+    Public Shared Function IsCefInitilised() As Boolean
+        Try
+            'An exception can occur be thrown if some dlls are not available
+            Return Cef.IsInitialized
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
-
-
-    Public Shared Function isCefInitilised() As Boolean
-        Return Cef.IsInitialized
-    End Function
-
-    Public Shared Sub shutDownCef()
+    Public Shared Sub ShutDownCef()
         Cef.Shutdown()
     End Sub
 
 
+    'todo. left here for future reference
+    'Private Shared Function GetCustomSheme() As CefCustomScheme
+    '    Dim cefCustomScheme As New CefCustomScheme
+    '    cefCustomScheme.SchemeName = "rinstat_temp_local_folder"
+    '    cefCustomScheme.DomainName = "rinstat_output"
+    '    cefCustomScheme.SchemeHandlerFactory = New FolderSchemeHandlerFactory(
+    '        rootFolder:="C:\RInstatInstallationFolder\tempfiles",
+    '        hostName:="rinstat_output",
+    '        defaultPage:="rinstat_default_page.html")
 
+    '    'usage example; strUrl = "rinstat_temp_local_folder://rinstat_output/anyFileDisplayable" 
+    '    'browser.LoadUrl(strUrl)
+    '    Return cefCustomScheme
+
+    'End Function
 
 End Class

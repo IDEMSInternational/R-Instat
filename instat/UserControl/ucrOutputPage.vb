@@ -276,33 +276,50 @@ Public Class ucrOutputPage
 
     Private Sub AddNewHtmlOutput(outputElement As clsOutputElement)
         Dim panel As Panel = AddElementPanel(outputElement)
-        Dim linkEnlarge As New LinkLabel
-        Dim htmlOutput As New ucrWebview()
+        Dim linkLabel As New LinkLabel
 
-        linkEnlarge.Text = "Maximise"
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.isCefInitilised Then
+            Dim ucrWebviewHtmlOutput As New ucrWebview()
+            linkLabel.Text = "Maximise"
+            AddHandler linkLabel.Click, Sub()
+                                            Dim frmMaximisOutput As New Form
+                                            Dim htmlOutputMaximum As New ucrWebview()
+                                            htmlOutputMaximum.LoadHtmlFile(outputElement.HtmlOutput)
+                                            frmMaximisOutput.Controls.Add(htmlOutputMaximum)
+                                            htmlOutputMaximum.Dock = DockStyle.Fill
+                                            frmMaximisOutput.WindowState = FormWindowState.Maximized
+                                            frmMaximisOutput.Show()
+                                        End Sub
 
+            ucrWebviewHtmlOutput.LoadHtmlFile(outputElement.HtmlOutput)
 
-        htmlOutput.LoadFile(outputElement.HtmlOutput)
+            panel.Controls.Add(linkLabel)
+            panel.Controls.Add(ucrWebviewHtmlOutput)
+            panel.Controls.SetChildIndex(linkLabel, 0)
+            panel.Controls.SetChildIndex(ucrWebviewHtmlOutput, 0)
 
+            linkLabel.Dock = DockStyle.Top
+            ucrWebviewHtmlOutput.Dock = DockStyle.Top
+        Else
 
-        AddHandler linkEnlarge.Click, Sub()
-                                          Dim frm As New Form
-                                          Dim htmlOutput2 As New ucrWebview()
-                                          htmlOutput2.LoadFile(outputElement.HtmlOutput)
-                                          frm.Controls.Add(htmlOutput2)
-                                          htmlOutput2.Dock = DockStyle.Fill
-                                          frm.WindowState = FormWindowState.Maximized
-                                          frm.Show()
-                                      End Sub
+            linkLabel.Text = "View html file"
+            AddHandler linkLabel.Click, Sub()
+                                            'display the html output in default browser
+                                            Cursor = Cursors.WaitCursor
+                                            Process.Start(outputElement.HtmlOutput)
+                                            Cursor = Cursors.Default
+                                        End Sub
 
+            panel.Controls.Add(linkLabel)
+            panel.Controls.SetChildIndex(linkLabel, 0)
 
-        panel.Controls.Add(linkEnlarge)
-        panel.Controls.Add(htmlOutput)
-        panel.Controls.SetChildIndex(linkEnlarge, 0)
-        panel.Controls.SetChildIndex(htmlOutput, 0)
+            linkLabel.Dock = DockStyle.Top
 
-        linkEnlarge.Dock = DockStyle.Top
-        htmlOutput.Dock = DockStyle.Top
+            'display the html output in default browser
+            Cursor = Cursors.WaitCursor
+            Process.Start(outputElement.HtmlOutput)
+            Cursor = Cursors.Default
+        End If
 
     End Sub
 

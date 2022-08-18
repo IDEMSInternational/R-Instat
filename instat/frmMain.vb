@@ -85,7 +85,7 @@ Public Class frmMain
         clsRLink = New RLink(clsOutputLogger)
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
-            CefRuntimeWrapper.initialiseCefRuntime()
+            CefRuntimeWrapper.InitialiseCefRuntime()
         End If
 
     End Sub
@@ -904,7 +904,7 @@ Public Class frmMain
                 clsRLink.CloseREngine()
 
                 If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
-                    CefRuntimeWrapper.shutDownCef()
+                    CefRuntimeWrapper.ShutDownCef()
                 End If
 
             Catch ex As Exception

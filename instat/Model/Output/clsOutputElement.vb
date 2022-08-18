@@ -23,11 +23,11 @@ Imports RScript
 Public Class clsOutputElement
     Private _formattedRScript As List(Of clsRScriptElement)
     Private _id As Integer
-    'TODO. why list if only returning first items?
     Private _lstBmpImage As List(Of Bitmap)
     Private _lstStringOutput As List(Of String)
     Private _outputType As OutputType
-    Private _strHtmlOutput As String
+    'holds the file paths to the html outputs
+    Private _lstHtmlOutput As List(Of String)
     ''' <summary>
     ''' Constructor
     ''' </summary>
@@ -35,6 +35,7 @@ Public Class clsOutputElement
         _formattedRScript = New List(Of clsRScriptElement)
         _lstStringOutput = New List(Of String)
         _lstBmpImage = New List(Of Bitmap)
+        _lstHtmlOutput = New List(Of String)
     End Sub
 
     ''' <summary>
@@ -72,7 +73,7 @@ Public Class clsOutputElement
 
     Public ReadOnly Property HtmlOutput As String
         Get
-            Return _strHtmlOutput
+            Return _lstHtmlOutput.FirstOrDefault
         End Get
     End Property
 
@@ -111,7 +112,7 @@ Public Class clsOutputElement
     End Sub
 
     Public Sub AddHtmlOutput(strFileName As String, script As List(Of clsRScriptElement))
-        _strHtmlOutput = strFileName
+        _lstHtmlOutput.Add(strFileName)
         _formattedRScript = script
         _outputType = OutputType.HtmlOutput
     End Sub
