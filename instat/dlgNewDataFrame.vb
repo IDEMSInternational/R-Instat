@@ -18,7 +18,7 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgNewDataFrame
-    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction,
+    Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction, clsGetCategories,
         clsSjLabelledFunction, clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction,
          clsAsCharacterFunction, clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
@@ -42,8 +42,6 @@ Public Class dlgNewDataFrame
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
-
-        Dim clsGetCategories As New RFunction
 
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
@@ -100,20 +98,7 @@ Public Class dlgNewDataFrame
 
         ucrChkRCommand.SetText("Show Command")
 
-        clsGetCategories.SetPackageName("rcorpora")
-        clsGetCategories.SetRCommand("categories")
-        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
-        If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
-            Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
-            arrAvailableCategories = chrCategoryNames.ToArray
-            Array.Sort(arrAvailableCategories)
-            ucrInputCategory.SetParameter(New RParameter("category"))
-            ucrInputCategory.SetItems(arrAvailableCategories, bAddConditions:=True)
-        End If
-        ucrInputCategory.SetDropDownStyleAsNonEditable()
-
         ucrInputListInCategory.SetDropDownStyleAsNonEditable()
-        LoadLists()
     End Sub
 
     Private Sub SetDefaults()
@@ -134,6 +119,19 @@ Public Class dlgNewDataFrame
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
 
+        clsGetCategories.SetPackageName("rcorpora")
+        clsGetCategories.SetRCommand("categories")
+        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
+        If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
+            Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
+            arrAvailableCategories = chrCategoryNames.ToArray
+            Array.Sort(arrAvailableCategories)
+            ucrInputCategory.SetParameter(New RParameter("category"))
+            ucrInputCategory.SetItems(arrAvailableCategories, bAddConditions:=True)
+        End If
+        ucrInputCategory.SetDropDownStyleAsNonEditable()
+        LoadLists()
+        ucrChkRCommand.Checked = False
         ucrNudCols.SetText(2)
 
         clsCorporaFunction.SetPackageName("rcorpora")
@@ -782,6 +780,8 @@ Public Class dlgNewDataFrame
             Array.Sort(arrAvailableLists)
             ucrInputListInCategory.SetParameter(New RParameter("list"))
             ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+        Else
+            ucrInputListInCategory.SetItems()
         End If
     End Sub
 
