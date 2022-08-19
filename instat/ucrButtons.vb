@@ -271,7 +271,8 @@ Public Class ucrButtons
 
     Private Sub ResetCommentToInstatOptionComment()
         If frmMain.clsInstatOptions IsNot Nothing Then
-            txtComment.Text = frmMain.clsInstatOptions.strComment & " " & Translations.GetTranslation(ParentForm.Text)
+            txtComment.Text = Translations.GetTranslation(frmMain.clsInstatOptions.strComment) _
+                              & " " & Translations.GetTranslation(ParentForm.Text)
         Else
             txtComment.Text = Translations.GetTranslation(ParentForm.Text)
         End If
@@ -309,6 +310,10 @@ Public Class ucrButtons
         Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
         frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
         autoTranslate(Me.ParentForm)
+        ' If the comment was not set specifically for this dialog, then translate to toggled language
+        If Not bCommentChangedInThisDialog Then
+            ResetCommentToInstatOptionComment()
+        End If
         frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
 
         If cmdLanguage.FlatStyle = FlatStyle.Popup Then
