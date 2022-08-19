@@ -19,9 +19,9 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction,
-        clsGetCategories, clsSjLabelledFunction, clsConstructFunction, clsDummyLabelFunction,
-        clsDummyVarFunction, clsAsCharacterFunction, clsRepFunction, clsCorporaFunction,
-        clsListDfFunction As New RFunction
+        clsGetCategories, clsSjLabelledFunction, clsConstructFunction,
+        clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction,
+        clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
@@ -809,6 +809,8 @@ Public Class dlgNewDataFrame
         If rdoLists.Checked Then
             If Not ucrInputListInCategory.IsEmpty Then
                 ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
+            Else
+                ucrNewDFName.SetPrefix("data")
             End If
         Else
             ucrNewDFName.SetPrefix("data")
