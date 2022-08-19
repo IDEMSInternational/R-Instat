@@ -159,7 +159,7 @@ Partial Class dlgClimaticCheckDataRain
         '
         Me.lblSkewnessWeight.AutoSize = True
         Me.lblSkewnessWeight.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSkewnessWeight.Location = New System.Drawing.Point(235, 333)
+        Me.lblSkewnessWeight.Location = New System.Drawing.Point(204, 332)
         Me.lblSkewnessWeight.Name = "lblSkewnessWeight"
         Me.lblSkewnessWeight.Size = New System.Drawing.Size(96, 13)
         Me.lblSkewnessWeight.TabIndex = 31
@@ -207,9 +207,9 @@ Partial Class dlgClimaticCheckDataRain
         'cmdOmitMonths
         '
         Me.cmdOmitMonths.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOmitMonths.Location = New System.Drawing.Point(345, 299)
+        Me.cmdOmitMonths.Location = New System.Drawing.Point(345, 278)
         Me.cmdOmitMonths.Name = "cmdOmitMonths"
-        Me.cmdOmitMonths.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOmitMonths.Size = New System.Drawing.Size(69, 44)
         Me.cmdOmitMonths.TabIndex = 28
         Me.cmdOmitMonths.Text = "Omit Months"
         Me.cmdOmitMonths.UseVisualStyleBackColor = True
@@ -293,7 +293,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudCoeff.AutoSize = True
         Me.ucrNudCoeff.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCoeff.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCoeff.Location = New System.Drawing.Point(334, 358)
+        Me.ucrNudCoeff.Location = New System.Drawing.Point(364, 356)
         Me.ucrNudCoeff.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCoeff.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCoeff.Name = "ucrNudCoeff"
@@ -307,7 +307,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrChkOmitZero.Checked = False
         Me.ucrChkOmitZero.Location = New System.Drawing.Point(108, 332)
         Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
-        Me.ucrChkOmitZero.Size = New System.Drawing.Size(113, 23)
+        Me.ucrChkOmitZero.Size = New System.Drawing.Size(96, 23)
         Me.ucrChkOmitZero.TabIndex = 30
         '
         'ucrNudSkewnessWeight
@@ -315,7 +315,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrNudSkewnessWeight.AutoSize = True
         Me.ucrNudSkewnessWeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSkewnessWeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSkewnessWeight.Location = New System.Drawing.Point(334, 332)
+        Me.ucrNudSkewnessWeight.Location = New System.Drawing.Point(364, 328)
         Me.ucrNudSkewnessWeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSkewnessWeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSkewnessWeight.Name = "ucrNudSkewnessWeight"
@@ -503,7 +503,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(6, 449)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 38
         '
         'dlgClimaticCheckDataRain
@@ -511,7 +511,7 @@ Partial Class dlgClimaticCheckDataRain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(424, 504)
+        Me.ClientSize = New System.Drawing.Size(419, 504)
         Me.Controls.Add(Me.ucrInputSameValue)
         Me.Controls.Add(Me.lblGreater)
         Me.Controls.Add(Me.lblThresholdmm)
