@@ -58,7 +58,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
-        ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character", "list"})
         ucrReceiverTransformText.strSelectorHeading = "Characters"
 
         'ucrRdoOptions
