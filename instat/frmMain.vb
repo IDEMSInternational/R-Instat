@@ -2079,7 +2079,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuViewer.Click
         Me.Enabled = False
         clsRLink.ViewLastGraph()
         Me.Enabled = True
@@ -2121,13 +2121,13 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuViewer_Click(sender As Object, e As EventArgs) Handles mnuViewer.Click
+    Private Sub MnuViewerR_Click(sender As Object, e As EventArgs) Handles mnuViewerR.Click
         Me.Enabled = False
-        clsRLink.ViewLastGraph()
+        clsRLink.ViewLastGraph(bInRViewer:=True)
         Me.Enabled = True
     End Sub
 
-    Private Sub Mnuploty_Click(sender As Object, e As EventArgs) Handles mnuploty.Click
+    Private Sub MnupViewerloty_Click(sender As Object, e As EventArgs) Handles mnuViewerPloty.Click
         Me.Enabled = False
         clsRLink.ViewLastGraph(bAsPlotly:=True)
         Me.Enabled = True

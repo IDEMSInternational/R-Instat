@@ -2645,7 +2645,6 @@ view_html_object <- function(html_object){
   
 }
 
-
 #displays the graph object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder

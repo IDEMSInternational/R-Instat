@@ -94,8 +94,6 @@ Public Class RSyntax
     ''' </list> </summary>
     Public iCallType As Integer = 0 'TODO SJL 07/04/20 Use enumeration?
 
-    ''' <summary>   TODO SJL 07/04/20 Not used. Remove? </summary>
-    Public bHTMLOutput As Boolean = False
 
     ''' <summary>   The script associated with the base R code. </summary>
     Public strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
