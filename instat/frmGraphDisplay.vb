@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+'todo. delete this form. Replaced with frmMaximiseOutput
+
 Public Class frmGraphDisplay
     Private Sub frmGraphDisplay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

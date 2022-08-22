@@ -388,6 +388,7 @@ Public Class frmMain
         End Try
     End Sub
 
+    'todo. delete this later. Depracated by frmMaximiseOutput
     Public Sub AddGraphForm(strFilePath As String)
         Dim frmNewGraph As New frmGraphDisplay
 

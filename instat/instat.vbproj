@@ -222,6 +222,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMaximiseOutput.Designer.vb">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMaximiseOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
     <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
     <Compile Include="Interface\IDataViewGrid.vb" />
@@ -3030,6 +3036,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMaximiseOutput.resx">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>

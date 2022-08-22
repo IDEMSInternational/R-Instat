@@ -292,13 +292,8 @@ Public Class ucrOutputPage
         SetPictureBoxHeight(pictureBox)
 
         AddHandler linkLabel.Click, Sub()
-                                        Dim frmMaximiseOutput As New Form
-                                        Dim pictureBoxMaximum As New PictureBox
-                                        pictureBoxMaximum.Load(outputElement.ImageOutput)
-                                        frmMaximiseOutput.Controls.Add(pictureBoxMaximum)
-                                        pictureBoxMaximum.SizeMode = PictureBoxSizeMode.Zoom
-                                        pictureBoxMaximum.Dock = DockStyle.Fill
-                                        frmMaximiseOutput.WindowState = FormWindowState.Maximized
+                                        Dim frmMaximiseOutput As New frmMaximiseOutput
+                                        frmMaximiseOutput.SetOutput(outputElement.ImageOutput)
                                         frmMaximiseOutput.Show()
                                     End Sub
     End Sub
@@ -308,27 +303,23 @@ Public Class ucrOutputPage
         Dim linkLabel As New LinkLabel
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.isCefInitilised Then
-            Dim ucrWebviewHtmlOutput As New ucrWebview()
+            Dim ucrWebview As New ucrWebview()
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
-                                            Dim frmMaximiseOutput As New Form
-                                            Dim htmlOutputMaximum As New ucrWebview
-                                            htmlOutputMaximum.LoadHtmlFile(outputElement.HtmlOutput)
-                                            frmMaximiseOutput.Controls.Add(htmlOutputMaximum)
-                                            htmlOutputMaximum.Dock = DockStyle.Fill
-                                            frmMaximiseOutput.WindowState = FormWindowState.Maximized
+                                            Dim frmMaximiseOutput As New frmMaximiseOutput
+                                            frmMaximiseOutput.SetOutput(outputElement.HtmlOutput)
                                             frmMaximiseOutput.Show()
                                         End Sub
 
-            ucrWebviewHtmlOutput.LoadHtmlFile(outputElement.HtmlOutput)
+            ucrWebview.LoadHtmlFile(outputElement.HtmlOutput)
 
             panel.Controls.Add(linkLabel)
-            panel.Controls.Add(ucrWebviewHtmlOutput)
+            panel.Controls.Add(ucrWebview)
             panel.Controls.SetChildIndex(linkLabel, 0)
-            panel.Controls.SetChildIndex(ucrWebviewHtmlOutput, 0)
+            panel.Controls.SetChildIndex(ucrWebview, 0)
 
             linkLabel.Dock = DockStyle.Top
-            ucrWebviewHtmlOutput.Dock = DockStyle.Top
+            ucrWebview.Dock = DockStyle.Top
         Else
 
             linkLabel.Text = "View html file"
