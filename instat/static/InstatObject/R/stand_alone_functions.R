@@ -2658,7 +2658,7 @@ view_graph_object <- function(graph_object){
     #When print command is called in R-Studio, a temp file is
     #automatically created. 
     #TODO. Investigate how that can be done in R-Instat
-    graph_object
+    print(graph_object)
     #return empty file path
     #return("")
   }

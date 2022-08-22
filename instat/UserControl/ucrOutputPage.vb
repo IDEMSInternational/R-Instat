@@ -296,7 +296,7 @@ Public Class ucrOutputPage
                                         Dim pictureBoxMaximum As New PictureBox
                                         pictureBoxMaximum.Load(outputElement.ImageOutput)
                                         frmMaximiseOutput.Controls.Add(pictureBoxMaximum)
-                                        pictureBoxMaximum.SizeMode = PictureBoxSizeMode.StretchImage
+                                        pictureBoxMaximum.SizeMode = PictureBoxSizeMode.Zoom
                                         pictureBoxMaximum.Dock = DockStyle.Fill
                                         frmMaximiseOutput.WindowState = FormWindowState.Maximized
                                         frmMaximiseOutput.Show()
