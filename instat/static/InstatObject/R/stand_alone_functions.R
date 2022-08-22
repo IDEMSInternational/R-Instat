@@ -2548,53 +2548,6 @@ is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
 
-#displays the html object in the set R "viewer".
-#if the viewer is not available then 
-#it saves the object as a file in the temporary folder
-#and returns the file path.
-view_html_object <- function(html_object){
-  #if there is a viewer, like in the case of RStudio then just print the object
-  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
-  r_viewer <- getOption("viewer")
-  if (!is.null(r_viewer)) {
-    #When print command is called in R-Studio, a temp file is
-    #automatically created. 
-    #TODO. Investigate how that can be done in R-Instat
-    print(html_object)
-    #return empty file path
-    #return("")
-  }
-  
-  
-  file_name <- ""
-  object_class_names <- class(html_object)
-  #get a unique temporary file name from the tempdir path
-  file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
-  
-  #save the object as a html file depending on the object type
-  if ("htmlwidget" %in% object_class_names) {
-    #Note. When selfcontained is set to True 
-    #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
-    #when saving an rpivotTable 
-    #TODO. Investigate how to solve it then. 
-    htmlwidgets::saveWidget(html_object, file = file_name, selfcontained = FALSE)
-  } else if ("sjTable" %in% object_class_names) {
-    #"sjTable" objects are not compatible with "htmlwidgets" package. So they have to be saved differently
-    #"sjplot" package produces "sjTable" objects 
-    html_object$file = file_name
-    #TODO. Is there any other function that can save an sjTable to a html file?
-    print(html_object)
-  } else if ("gt_tbl" %in% object_class_names) {
-    #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
-    #"mmtable2" package produces "gt_tbl" objects 
-    gt::gtsave(last_table,filename = file_name)
-  }
-  
-  message("R viewer NOT detected. File saved in location ", file_name)
-  return(file_name)
-  
-}
-
 
 read_corpora <- function(data){
   data_all <- NULL
@@ -2643,5 +2596,98 @@ read_corpora <- function(data){
     return (data.frame(description = description, data_all))
   } 
   return (data.frame(data_all))
+}
+
+#displays the html object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_html_object <- function(html_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #When print command is called in R-Studio, a temp file is
+    #automatically created. 
+    #TODO. Investigate how that can be done in R-Instat
+    print(html_object)
+    #return empty file path
+    #return("")
+  }
+  
+  
+  file_name <- ""
+  object_class_names <- class(html_object)
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
+  
+  #save the object as a html file depending on the object type
+  if ("htmlwidget" %in% object_class_names) {
+    #Note. When selfcontained is set to True 
+    #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
+    #when saving an rpivotTable 
+    #TODO. Investigate how to solve it then. 
+    htmlwidgets::saveWidget(html_object, file = file_name, selfcontained = FALSE)
+  } else if ("sjTable" %in% object_class_names) {
+    #"sjTable" objects are not compatible with "htmlwidgets" package. So they have to be saved differently
+    #"sjplot" package produces "sjTable" objects 
+    html_object$file = file_name
+    #TODO. Is there any other function that can save an sjTable to a html file?
+    print(html_object)
+  } else if ("gt_tbl" %in% object_class_names) {
+    #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
+    #"mmtable2" package produces "gt_tbl" objects 
+    gt::gtsave(last_table,filename = file_name)
+  }
+  
+  message("R viewer NOT detected. File saved in location ", file_name)
+  return(file_name)
+  
+}
+
+
+#displays the graph object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_graph_object <- function(graph_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #When print command is called in R-Studio, a temp file is
+    #automatically created. 
+    #TODO. Investigate how that can be done in R-Instat
+    graph_object
+    #return empty file path
+    #return("")
+  }
+  
+  
+  #get object class names
+  object_class_names <- class(graph_object)
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewgraph", fileext = ".png")
+  
+  #save the object as a html file depending on the object type
+  grDevices::png(file = file_name, width = 4000, height = 4000, res = 500)
+  print(graph_object)
+  dev.off() #todo. use graphics.off() which one is better?
+  
+  # if ("ggplot" %in% object_class_names) {
+  #   
+  # } else if ("ggmultiplot" %in% object_class_names) {
+  #   
+  # } else if ("openair" %in% object_class_names) {
+  #   
+  # } else if ("ggsurvplot" %in% object_class_names) {
+  #   
+  # } else if ("recordedplot" %in% object_class_names) {
+  #   
+  # }
+  
+  message("R viewer NOT detected. File saved in location ", file_name)
+  return(file_name)
+  
 }
 

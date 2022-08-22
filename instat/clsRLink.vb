@@ -325,6 +325,7 @@ Public Class RLink
     ''' <param name="strScript">R script command. Can be a multiline script command</param>
     ''' <returns>an array that contains individual complete runnable R scripts</returns>
     Public Function GetRunnableCommandLines(strScript As String) As String()
+        'todo. move this implementation to another module or class or R script library?
         Dim lstRunnableCommandLines As New List(Of String)
         Dim arrScriptCommands As String() = strScript.Split(New String() {Environment.NewLine, vbLf}, StringSplitOptions.RemoveEmptyEntries)
         Dim strSplitScriptCmd As String = ""
@@ -946,10 +947,11 @@ Public Class RLink
     '''                             assignment). </param>
     '''
     ''' <returns>   The constructed assignment statement. </returns>
-    ''' todo. move to another class or module
+    ''' 
     '''--------------------------------------------------------------------------------------------
     Public Function ConstructAssignTo(strAssignTo As String, strScripts As String) As String
 
+        'todo. move to another class or module or in R script library?
         If String.IsNullOrEmpty(strScripts) Then
             Return ""
         Else
@@ -1062,7 +1064,7 @@ Public Class RLink
 
             'get the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).Last
-            If strLastScript.Contains("view_html_object") Then 'if output should be returned as a html Then
+            If strLastScript.Contains("view_html_object") Then 'if output should be returned as a html then
                 Try
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
                     Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -1072,6 +1074,22 @@ Public Class RLink
                         strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                         If strTemp <> "" Then
                             clsOutputLogger.AddHtmlOutput(strTemp)
+                        End If
+                    End If
+                Catch e As Exception
+                    MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                End Try
+
+            ElseIf strLastScript.Contains("view_graph_object") Then 'if output should be returned as an image then
+                Try
+                    Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
+                    Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    expTemp = GetSymbol(strTempAssignTo)
+                    If expTemp IsNot Nothing Then
+                        'get the image file path name
+                        strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                        If strTemp <> "" Then
+                            clsOutputLogger.AddImageOutput(strTemp)
                         End If
                     End If
                 Catch e As Exception

@@ -372,7 +372,7 @@ Public Class RCodeStructure
         Dim clsAddModels As New RFunction
         Dim clsGetModels As New RFunction
         Dim clsAddGraphs As New RFunction
-        Dim clsGetGraphs As New RFunction
+        Dim clsViewGraphs As New RFunction
         Dim clsAddSurv As New RFunction
         Dim clsGetSurv As New RFunction
         Dim clsAddTables As New RFunction
@@ -446,13 +446,15 @@ Public Class RCodeStructure
                 clsAddGraphs.AddParameter("graph", strAssignTo)
                 If Not strAssignToDataFrame = "" Then
                     clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    'clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
                 strScript = strScript & clsAddGraphs.ToScript() & Environment.NewLine
 
-                clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
-                strAssignTo = clsGetGraphs.ToScript()
+                clsViewGraphs.SetRCommand("view_graph_object")
+                clsViewGraphs.AddParameter("graph_object", strAssignToGraph)
+                strAssignTo = clsViewGraphs.ToScript()
+                'todo. do the same for htmls in another if block
+
             ElseIf Not strAssignToSurv = "" Then 'else if we need to assign to a surv
                 clsAddSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_surv")
                 clsAddSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))

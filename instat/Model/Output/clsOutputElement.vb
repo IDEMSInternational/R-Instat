@@ -21,21 +21,19 @@ Imports RScript
 ''' an image or output text
 ''' </summary>
 Public Class clsOutputElement
-    Private _formattedRScript As List(Of clsRScriptElement)
     Private _id As Integer
-    Private _lstBmpImage As List(Of Bitmap)
-    Private _lstStringOutput As List(Of String)
+    'hold the script elements that form the R script that produced the output
+    Private _lstRScriptElements As New List(Of clsRScriptElement)
     Private _outputType As OutputType
     'holds the file paths to the html outputs
-    Private _lstHtmlOutput As List(Of String)
+    Private _lstHtmlOutput As New List(Of String)
+    'holds the file paths to the image outputs
+    Private _lstImageOutput As New List(Of String)
+    Private _lstStringOutput As New List(Of String)
     ''' <summary>
     ''' Constructor
     ''' </summary>
     Public Sub New()
-        _formattedRScript = New List(Of clsRScriptElement)
-        _lstStringOutput = New List(Of String)
-        _lstBmpImage = New List(Of Bitmap)
-        _lstHtmlOutput = New List(Of String)
     End Sub
 
     ''' <summary>
@@ -44,7 +42,7 @@ Public Class clsOutputElement
     ''' <returns></returns>
     Public ReadOnly Property FormatedRScript As List(Of clsRScriptElement)
         Get
-            Return _formattedRScript
+            Return _lstRScriptElements
         End Get
     End Property
 
@@ -65,9 +63,9 @@ Public Class clsOutputElement
     ''' Holds image if outputType is image
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property ImageOutput As Bitmap
+    Public ReadOnly Property ImageOutput As String
         Get
-            Return _lstBmpImage.FirstOrDefault()
+            Return _lstImageOutput.FirstOrDefault()
         End Get
     End Property
 
@@ -101,19 +99,22 @@ Public Class clsOutputElement
         Return Me.MemberwiseClone
     End Function
 
+
+
     ''' <summary>
     ''' When adding Output the script must always be added too
     ''' </summary>
-    ''' <param name="image"></param>
-    Public Sub AddImageOutput(image As Bitmap, script As List(Of clsRScriptElement))
-        _lstBmpImage.Add(image)
-        _formattedRScript = script
+    ''' <param name="strFileName"></param>
+    ''' <param name="script"></param>
+    Public Sub AddImageOutput(strFileName As String, script As List(Of clsRScriptElement))
+        _lstImageOutput.Add(strFileName)
+        _lstRScriptElements = script
         _outputType = OutputType.ImageOutput
     End Sub
 
     Public Sub AddHtmlOutput(strFileName As String, script As List(Of clsRScriptElement))
         _lstHtmlOutput.Add(strFileName)
-        _formattedRScript = script
+        _lstRScriptElements = script
         _outputType = OutputType.HtmlOutput
     End Sub
 
@@ -128,7 +129,7 @@ Public Class clsOutputElement
 
             If lstTokens IsNot Nothing Then
                 For Each rToken In lstTokens
-                    _formattedRScript.Add(New clsRScriptElement With
+                    _lstRScriptElements.Add(New clsRScriptElement With
                     {
                         .Text = rToken.strTxt,
                         .Type = rToken.enuToken
@@ -149,9 +150,9 @@ Public Class clsOutputElement
     ''' When adding Output the script must always be added too
     ''' </summary>
     ''' <param name="strOutput"></param>
-    Public Sub AddStringOutputFromR(strOutput As String, script As List(Of clsRScriptElement))
+    Public Sub AddStringOutput(strOutput As String, script As List(Of clsRScriptElement))
         _lstStringOutput.Add(strOutput)
-        _formattedRScript = script
+        _lstRScriptElements = script
         _outputType = OutputType.TextOutput
     End Sub
 

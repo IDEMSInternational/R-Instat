@@ -80,11 +80,8 @@ Public Class clsOutputLogger
         If _lastScriptElement Is Nothing Then
             Throw New Exception("Cannot find script to attach output to.")
         Else
-            Using fs As New IO.FileStream(strFilename, IO.FileMode.Open)
-                image = New Bitmap(Drawing.Image.FromStream(fs))
-            End Using
             Dim outputElement As New clsOutputElement
-            outputElement.AddImageOutput(image, _lastScriptElement.FormatedRScript)
+            outputElement.AddImageOutput(strFilename, _lastScriptElement.FormatedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
@@ -148,7 +145,7 @@ Public Class clsOutputLogger
             Throw New Exception("Cannot find script to attach output to.")
         Else
             Dim outputElement As New clsOutputElement
-            outputElement.AddStringOutputFromR(strOutput, _lastScriptElement.FormatedRScript)
+            outputElement.AddStringOutput(strOutput, _lastScriptElement.FormatedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
