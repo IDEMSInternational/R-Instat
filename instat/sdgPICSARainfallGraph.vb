@@ -1384,10 +1384,13 @@ Public Class sdgPICSARainfallGraph
 
         Select Case dlgPICSARainfall.enumPICSAMode
             Case dlgPICSARainfall.PICSAMode.Temperature
+                Me.Text = "PICSA Temperature Graphs"
                 tbPICSA.TabPages.Add(tbPageSlope)
             Case dlgPICSARainfall.PICSAMode.Rainfall
+                Me.Text = "PICSA Rainfall Graphs"
                 tbPICSA.TabPages.Add(tbPageLines)
             Case dlgPICSARainfall.PICSAMode.General
+                Me.Text = "PICSA General Graphs"
                 tbPICSA.TabPages.Add(tbPageLines)
                 tbPICSA.TabPages.Add(tbPageSlope)
         End Select
