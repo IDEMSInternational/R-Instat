@@ -6,13 +6,15 @@ Imports CefSharp.DevTools
 Public Class frmMaximiseOutput
     Private _strDisplayedFileName As String = ""
     Private _strFileFilter As String = ""
+    'todo. to be used by the output page to remember paths selected by user when saving outputs
     Public _strFileDestinationDirectory As String = ""
 
-    Public Sub SetOutput(strFileName As String)
-        Me._strDisplayedFileName = strFileName
-    End Sub
+    'Public Sub SetOutput(strFileName As String)
+    '    Me._strDisplayedFileName = strFileName
+    'End Sub
 
-    Public Overloads Sub Show()
+    Public Overloads Sub Show(strFileName As String)
+        Me._strDisplayedFileName = strFileName
         Dim strExtension As String = Path.GetExtension(_strDisplayedFileName).ToLower
 
         Select Case strExtension
@@ -49,8 +51,6 @@ Public Class frmMaximiseOutput
         MyBase.Show()
     End Sub
 
-
-
     Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Output"
@@ -76,8 +76,5 @@ Public Class frmMaximiseOutput
         End Using
 
     End Sub
-
-
-
 
 End Class
