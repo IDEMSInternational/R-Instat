@@ -181,6 +181,10 @@ Public Class ucrDistributions
                                 If Dist.bFactor Then
                                     bUse = True
                                 End If
+                            Case "ordered,factor"
+                                If Dist.bFactor Then
+                                    bUse = True
+                                End If
                         End Select
                     End If
                 Case Else

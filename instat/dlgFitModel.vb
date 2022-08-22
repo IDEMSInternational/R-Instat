@@ -353,7 +353,8 @@ Public Class dlgFitModel
                     ucrFamily.RecieverDatatype("numeric")
                 Else
                     clsFormulaOperator.AddParameter("x", strParameterValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-                    ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+                    'ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+                    ucrFamily.RecieverDatatype(ucrReceiverResponseVar.strCurrDataType)
                 End If
                 sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
             Else
@@ -459,12 +460,14 @@ Public Class dlgFitModel
                 ElseIf strVariableType.Contains("integer") Then
                     strVariableType = "integer"
                 ElseIf strVariableType.Contains("two level numeric") OrElse strVariableType.Contains("two level factor") Then
-                        strVariableType = "binary"
+                    strVariableType = "binary"
                 ElseIf strVariableType.Contains("numeric") Then
                     strVariableType = "numeric"
                 ElseIf strVariableType.Contains("logical") Then
                     strVariableType = "logical"
                 ElseIf strVariableType.Contains("factor") Then
+                    strVariableType = "factor"
+                ElseIf strVariableType.Contains("ordered,factor") Then
                     strVariableType = "factor"
                 Else
                     strVariableType = "unsuitable type"
