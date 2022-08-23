@@ -52,6 +52,8 @@ Public Class dlgExtremesClimatic
     Private clsDeclusteringFunction As New RFunction
     Private clsDummyRfunction As New RFunction
 
+    Private clsClustersFunction As New RFunction
+
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -253,6 +255,15 @@ Public Class dlgExtremesClimatic
         ucrNudRunLength.SetParameter(New RParameter("r", 4))
         ucrNudRunLength.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
 
+        ucrChkVariableName.SetText("NewVariable Name")
+        ucrChkVariableName.AddToLinkedControls(ucrSaveVariableName, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrSaveVariableName.SetSaveTypeAsColumn()
+        ucrSaveVariableName.SetIsComboBox()
+        ucrSaveVariableName.SetLabelText("New Variable Name")
+        ucrSaveVariableName.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
+        ucrSaveVariableName.SetPrefix("Clusters")
+
+
         ucrSaveMrlPlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
         ucrSaveMrlPlot.SetPrefix("mrl_plot")
         ucrSaveMrlPlot.SetSaveTypeAsGraph()
@@ -334,6 +345,7 @@ Public Class dlgExtremesClimatic
         clsPlotMrlFunction = New RFunction
         clsThresholdPlotFunction = New RFunction
         clsDeclusteringFunction = New RFunction
+        clsClustersFunction = New RFunction
         clsDummyRfunction = clsPlotMrlFunction
 
         ucrSelectorClimaticExtremes.Reset()
@@ -385,6 +397,8 @@ Public Class dlgExtremesClimatic
         clsMinMaxManipulationsFunction.AddParameter("sub2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
         clsMinMaxSummariseFunction.AddParameter("save", 2, iPosition:=4)
         clsMinMaxSummariseFunction.SetAssignTo("min_max_summary")
+
+        clsClustersFunction.SetRCommand("Clusters")
 
         ' For the Peaks option:
         clsDayManipulation.SetRCommand("list")
