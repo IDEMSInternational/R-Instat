@@ -553,8 +553,26 @@ Public Class sdgClimaticDataEntry
             clsSaveDataEntryFunction.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
             clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
-            clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
-            clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
+            If clsCommentsListFunction.clsParameters.Count > 0 Then
+                Dim strRow As String = Nothing
+                Dim bFound As Boolean = False
+                For Each clsParam In clsCommentsListFunction.clsParameters
+                    If clsParam.strArgumentName = "row" AndAlso clsParam.strArgumentValue <> "" Then
+                        strRow = clsParam.strArgumentValue
+                    ElseIf clsParam.strArgumentName = "comment" AndAlso clsParam.strArgumentValue <> "" Then
+                        bFound = True
+                    End If
+                    If strRow IsNot Nothing AndAlso bFound Then
+                        clsEditDataFrameFunction.AddParameter("row", strRow, bIncludeArgumentName:=False, iPosition:=0)
+                        clsSaveDataEntryFunction.AddParameter("rows_changed", strRow, iPosition:=2)
+                        clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
+                        Exit For
+                    End If
+                Next
+            Else
+                clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+                clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
+            End If
         End If
     End Sub
 

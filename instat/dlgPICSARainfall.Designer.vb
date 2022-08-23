@@ -100,7 +100,7 @@ Partial Class dlgPICSARainfall
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 195)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(151, 23)
         Me.cmdPICSAOptions.TabIndex = 12
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
@@ -149,7 +149,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkPoints.Checked = False
         Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
         Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(151, 24)
+        Me.ucrChkPoints.Size = New System.Drawing.Size(221, 24)
         Me.ucrChkPoints.TabIndex = 14
         '
         'ucrSave
@@ -223,9 +223,9 @@ Partial Class dlgPICSARainfall
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(9, 223)
+        Me.cmdOptions.Location = New System.Drawing.Point(9, 219)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(151, 23)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Tag = "Plot Options"
@@ -262,7 +262,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkWithSE.Checked = False
         Me.ucrChkWithSE.Location = New System.Drawing.Point(9, 281)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(221, 23)
         Me.ucrChkWithSE.TabIndex = 39
         '
         'ucrChkLineofBestFit
@@ -271,7 +271,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkLineofBestFit.Checked = False
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(9, 256)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(151, 23)
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(221, 23)
         Me.ucrChkLineofBestFit.TabIndex = 38
         '
         'dlgPICSARainfall
