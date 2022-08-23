@@ -150,8 +150,8 @@ Public Class dlgNewDataFrame
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
-        clsRepFunction.AddParameter("times", "10", bIncludeArgumentName:=False, iPosition:=1)
-        clsAsCharacterFunction.SetRCommand("as.character")
+        clsRepFunction.AddParameter("times", "1000000", bIncludeArgumentName:=False, iPosition:=1)
+        clsAsCharacterFunction.SetRCommand("as.numeric")
         clsAsCharacterFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         'matrix(data = NA,nrow = 10, ncol = 2)
@@ -504,8 +504,8 @@ Public Class dlgNewDataFrame
             With dgrView.Rows
                 .Item(iRow).Cells(0).Value = iRow + 1
                 .Item(iRow).Cells(1).Value = "x" & (iRow + 1)
-                .Item(iRow).Cells(2).Value = "Character"
-                .Item(iRow).Cells(3).Value = "NA"
+                .Item(iRow).Cells(2).Value = "Numeric"
+                .Item(iRow).Cells(3).Value = "1,1000000"
                 .Item(iRow).Cells(4).Value = ""
                 .Item(iRow).Cells(5).Value = ""
             End With
@@ -514,8 +514,8 @@ Public Class dlgNewDataFrame
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
-                    .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = "NA"
+                    .Item(i).Cells(2).Value = "Numeric"
+                    .Item(i).Cells(3).Value = "1,1000000"
                     .Item(i).Cells(4).Value = ""
                     .Item(i).Cells(5).Value = ""
                 End With
@@ -806,12 +806,8 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub ChangeSavePrefix()
-        If rdoLists.Checked Then
-            If Not ucrInputListInCategory.IsEmpty Then
-                ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
-            Else
-                ucrNewDFName.SetPrefix("data")
-            End If
+        If rdoLists.Checked AndAlso Not ucrInputListInCategory.IsEmpty Then
+            ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
         Else
             ucrNewDFName.SetPrefix("data")
         End If
