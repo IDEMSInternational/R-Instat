@@ -392,7 +392,7 @@ Partial Class frmMain
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuLastGraph = New System.Windows.Forms.ToolStripSplitButton()
-        Me.mnuViewer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNormalViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewerPloty = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewerR = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -3103,7 +3103,7 @@ Partial Class frmMain
         'mnuLastGraph
         '
         Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewer, Me.mnuViewerPloty, Me.mnuViewerR})
+        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNormalViewer, Me.mnuViewerPloty, Me.mnuViewerR})
         Me.mnuLastGraph.Image = CType(resources.GetObject("mnuLastGraph.Image"), System.Drawing.Image)
         Me.mnuLastGraph.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuLastGraph.Name = "mnuLastGraph"
@@ -3111,11 +3111,11 @@ Partial Class frmMain
         Me.mnuLastGraph.Text = "ToolStripSplitButton3"
         Me.mnuLastGraph.ToolTipText = "View Last Graph"
         '
-        'mnuViewer
+        'mnuNormalViewer
         '
-        Me.mnuViewer.Name = "mnuViewer"
-        Me.mnuViewer.Size = New System.Drawing.Size(180, 22)
-        Me.mnuViewer.Text = "Viewer..."
+        Me.mnuNormalViewer.Name = "mnuNormalViewer"
+        Me.mnuNormalViewer.Size = New System.Drawing.Size(180, 22)
+        Me.mnuNormalViewer.Text = "Viewer..."
         '
         'mnuViewerPloty
         '
@@ -5785,5 +5785,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPICSAGeneralGraph As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator73 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextCropModel As ToolStripMenuItem
-    Friend WithEvents mnuViewer As ToolStripMenuItem
+    Friend WithEvents mnuNormalViewer As ToolStripMenuItem
 End Class

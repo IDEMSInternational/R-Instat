@@ -2070,7 +2070,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuViewer.Click
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuNormalViewer.Click
         Me.Enabled = False
         clsRLink.ViewLastGraph()
         Me.Enabled = True
