@@ -67,7 +67,7 @@ Public Class dlgModelling
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
         ucrTryModelling.SetIsModel()
 
-        ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS"})
+        ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS", "arm"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         bUpdating = False
@@ -409,6 +409,24 @@ Public Class dlgModelling
         End If
     End Sub
 
+    Private Sub cmdbayesglm_Click(sender As Object, e As EventArgs) Handles cmdbayesglm.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula, family = gaussian, data,weights, subset, na.action,start = NULL, etastart, mustart,offset, control = list(...),model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 476)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdbayespolr_Click(sender As Object, e As EventArgs) Handles cmdbayespolr.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr(formula, data, weights, start,subset, na.action, contrasts = NULL,Hess = TRUE, model = TRUE,method = c(logistic, probit,cloglog,cauchit),drop.unused.levels=TRUE,prior.mean = 0,prior.scale = 2.5,prior.df = 1,prior.counts.for.bins = NULL,min.prior.scale=1e-12,scaled = TRUE,maxit = 100,print.unnormalized.log.posterior = FALSE)", 476)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr()", 1)
+        End If
+    End Sub
+
     Private Sub cmdTilda_Click(sender As Object, e As EventArgs) Handles cmdTilda.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("~")
     End Sub
@@ -590,21 +608,31 @@ Public Class dlgModelling
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                grpArm.Visible = False
             Case "extRemes"
                 grpStats.Visible = False
                 grpextRemes.Visible = True
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                grpArm.Visible = False
             Case "lme4"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = True
                 grpMASS.Visible = False
+                grpArm.Visible = False
             Case "MASS"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = True
+                grpArm.Visible = False
+            Case "arm"
+                grpArm.Visible = True
+                grpStats.Visible = False
+                grpextRemes.Visible = False
+                grplme4.Visible = False
+                grpMASS.Visible = False
         End Select
     End Sub
 
@@ -612,6 +640,4 @@ Public Class dlgModelling
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
-
-
 End Class
