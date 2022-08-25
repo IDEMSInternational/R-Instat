@@ -236,8 +236,9 @@ Public Class ucrDistributions
         Dim clsNoDist As New Distribution
         Dim clsEmpiricalDist As New Distribution
         Dim clsTriangularDist As New Distribution
-        Dim clsGlmNegativeBinomial As New Distribution
+        Dim clsGlmNegativeBinomialDist As New Distribution
         Dim clsPolarDist As New Distribution
+        Dim clsMultinomDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -534,13 +535,13 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsGamma)
 
         'Negative Binomial distribution
-        clsGlmNegativeBinomial.strNameTag = "glm.negative_binomial"
-        clsGlmNegativeBinomial.strRName = "glm.nb"
-        clsGlmNegativeBinomial.strPackagName = "MASS"
-        clsGlmNegativeBinomial.strGLMFunctionName = "glm.nb"
-        clsGlmNegativeBinomial.bNumeric = True
-        clsGlmNegativeBinomial.bIsExact = True
-        lstAllDistributions.Add(clsGlmNegativeBinomial)
+        clsGlmNegativeBinomialDist.strNameTag = "glm.negative_binomial"
+        clsGlmNegativeBinomialDist.strRName = "glm.nb"
+        clsGlmNegativeBinomialDist.strPackagName = "MASS"
+        clsGlmNegativeBinomialDist.strGLMFunctionName = "GLMNB"
+        clsGlmNegativeBinomialDist.bNumeric = True
+        'clsGlmNegativeBinomialDist.bIsExact = True
+        lstAllDistributions.Add(clsGlmNegativeBinomialDist)
 
         'ordered factor
         clsPolarDist.strNameTag = "Ordered_Logistic"
@@ -550,6 +551,14 @@ Public Class ucrDistributions
         clsPolarDist.bIsContinuous = False
         clsPolarDist.strGLMFunctionName = "polr"
         lstAllDistributions.Add(clsPolarDist)
+
+        'multinomial distribution
+        clsMultinomDist.strNameTag = "Multinomial"
+        clsMultinomDist.strPackagName = "nnet"
+        clsMultinomDist.strGLMFunctionName = "multinom"
+        clsMultinomDist.strRName = "multinom"
+        clsMultinomDist.bFactor = True
+        lstAllDistributions.Add(clsMultinomDist)
 
         'Gamma with Zeros distribution
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"

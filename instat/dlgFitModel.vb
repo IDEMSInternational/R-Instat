@@ -28,7 +28,7 @@ Public Class dlgFitModel
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsGLMPolr, clsAsNumeric As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsGLMPolr, clsGLMMultinom, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -98,6 +98,7 @@ Public Class dlgFitModel
         clsGLM = New RFunction
         clsGLMNB = New RFunction
         clsGLMPolr = New RFunction
+        clsGLMMultinom = New RFunction
         clsConfint = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
@@ -144,6 +145,9 @@ Public Class dlgFitModel
         clsGLMPolr.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsGLMPolr.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
+        clsGLMMultinom = clsRegressionDefaults.clsDefaultGLmMultinomFunction.Clone
+        clsGLMMultinom.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMMultinom.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -159,6 +163,7 @@ Public Class dlgFitModel
         'ANOVA
         clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
         clsAnovaFunction.iCallType = 2
+
 
         'FitModel
         clsVisReg.SetPackageName("visreg")
@@ -188,6 +193,7 @@ Public Class dlgFitModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
         clsLMOrGLM = clsLM
         'clsLMOrGLM = clsGLMNB
         bResetModelOptions = True
@@ -205,12 +211,14 @@ Public Class dlgFitModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
+        ucrModelName.AddAdditionalRCode(clsGLMMultinom, bReset)
         ucrModelName.AddAdditionalRCode(clsGLMPolr, bReset)
         ucrModelName.AddAdditionalRCode(clsGLMNB, bReset)
         ucrModelName.AddAdditionalRCode(clsGLM, bReset)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMNB, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 2)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMPolr, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 3)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMMultinom, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 4)
 
 
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator, bReset)
@@ -380,25 +388,33 @@ Public Class dlgFitModel
 
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsLM
-            Else
-                clsLMOrGLM = clsGLM
-            End If
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "glm.negative_binomial") Then
 
-            If (ucrFamily.clsCurrDistribution.strNameTag = "glm.negative_binomial") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsGLMNB
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Ordered_Logistic") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
+                clsLMOrGLM = clsGLMPolr
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Multinomial") Then
+                clsLMOrGLM = clsGLMMultinom
             Else
                 clsLMOrGLM = clsGLM
             End If
 
-            If (ucrFamily.clsCurrDistribution.strNameTag = "Ordered_Logistic") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
-                clsLMOrGLM = clsGLMPolr
-            Else
-                clsLMOrGLM = clsGLM
-            End If
+            'If (ucrFamily.clsCurrDistribution.strNameTag = "glm.negative_binomial") Then 'AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
+            '    clsLMOrGLM = clsGLMNB
+            'Else
+            '    clsLMOrGLM = clsGLM
+            'End If
+
+            'If (ucrFamily.clsCurrDistribution.strNameTag = "Ordered_Logistic") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
+            '    clsLMOrGLM = clsGLMPolr
+            'Else
+            '    clsLMOrGLM = clsGLM
+            'End If
 
             'Update display functions to contain correct model
             clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
             clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            'clsAnovaIIFunction.AddParameter("mod", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
