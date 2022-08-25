@@ -19,7 +19,7 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction,
-        clsGetCategories, clsSjLabelledFunction, clsConstructFunction,
+        clsGetCategoriesFunction, clsSjLabelledFunction, clsConstructFunction,
         clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction,
         clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
@@ -119,9 +119,9 @@ Public Class dlgNewDataFrame
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
 
-        clsGetCategories.SetPackageName("rcorpora")
-        clsGetCategories.SetRCommand("categories")
-        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
+        clsGetCategoriesFunction.SetPackageName("rcorpora")
+        clsGetCategoriesFunction.SetRCommand("categories")
+        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategoriesFunction.ToScript(), bSilent:=True)
         If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
             Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
             arrAvailableCategories = chrCategoryNames.ToArray
@@ -150,8 +150,8 @@ Public Class dlgNewDataFrame
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", "NA", bIncludeArgumentName:=False, iPosition:=0)
-        clsRepFunction.AddParameter("times", "1000000", bIncludeArgumentName:=False, iPosition:=1)
-        clsAsCharacterFunction.SetRCommand("as.numeric")
+        clsRepFunction.AddParameter("times", "10", bIncludeArgumentName:=False, iPosition:=1)
+        clsAsCharacterFunction.SetRCommand("as.character")
         clsAsCharacterFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         'matrix(data = NA,nrow = 10, ncol = 2)
