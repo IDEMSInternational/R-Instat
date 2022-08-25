@@ -464,7 +464,7 @@ Partial Class dlgSummaryTables
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 517)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'ucrReceiverSummaryCols
@@ -585,7 +585,7 @@ Partial Class dlgSummaryTables
         Me.MinimizeBox = False
         Me.Name = "dlgSummaryTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summary\Frequency Tables"
+        Me.Text = "Frequency/Summary Tables"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
         Me.grpMargin.ResumeLayout(False)
