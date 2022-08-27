@@ -58,8 +58,7 @@ Public Class dlgTransformText
         ucrReceiverTransformText.Selector = ucrSelectorForTransformText
         ucrReceiverTransformText.bUseFilteredData = False
         ucrReceiverTransformText.SetMeAsReceiver()
-        ucrReceiverTransformText.SetIncludedDataTypes({"factor", "character"})
-        ucrReceiverTransformText.strSelectorHeading = "Characters"
+        ucrReceiverTransformText.strSelectorHeading = "Variables"
 
         'ucrRdoOptions
         ucrPnlOperation.AddRadioButton(rdoCase)
