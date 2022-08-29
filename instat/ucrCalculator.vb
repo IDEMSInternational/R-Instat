@@ -2438,7 +2438,7 @@ Public Class ucrCalculator
 
     Private Sub cmd_Click(sender As Object, e As EventArgs) Handles cmdPbirth.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN= pbirthday)", 18)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN= pbirthday, classes= 365, coincident= 2)", 47)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , pbirthday)", 13)
         End If
@@ -2478,7 +2478,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQbirth_Click(sender As Object, e As EventArgs) Handles cmdQbirth.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X= , FUN= qbirthday)", 18)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X= , FUN= qbirthday, classes= 365, coincident= 2)", 47)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , qbirthday)", 13)
         End If
