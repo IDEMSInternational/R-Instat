@@ -240,6 +240,12 @@ Public Class dlgOptions
         autoTranslate(Me)
         SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
 
+        If strCurrLanguageCulture <> strPrevLanguageCulture Then
+            Dim strCommentNewLanguage = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
+            frmMain.clsInstatOptions.SetComment(strCommentNewLanguage)
+            ucrInputComment.SetName(strCommentNewLanguage)
+        End If
+
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             frmMain.TranslateFrmMainMenu()
         End If
