@@ -27,7 +27,7 @@ Public Class dlgFitModel
 
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
-    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsAnovaIIFunction, clsSummaryFunction, clsConfint As New RFunction
     Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsGLMPolr, clsGLMMultinom, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
@@ -101,6 +101,7 @@ Public Class dlgFitModel
         clsGLMMultinom = New RFunction
         clsConfint = New RFunction
         clsAnovaFunction = New RFunction
+        clsAnovaIIFunction = New RFunction
         clsVisReg = New RFunction
         clsFamilyFunction = New RFunction
 
@@ -164,6 +165,9 @@ Public Class dlgFitModel
         clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
         clsAnovaFunction.iCallType = 2
 
+        'ANOVAII
+        clsAnovaIIFunction = clsRegressionDefaults.clsDefaultAnovaIIFunction.Clone
+        clsAnovaIIFunction.iCallType = 2
 
         'FitModel
         clsVisReg.SetPackageName("visreg")
@@ -191,7 +195,8 @@ Public Class dlgFitModel
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaIIFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
 
         clsLMOrGLM = clsLM
@@ -414,7 +419,7 @@ Public Class dlgFitModel
             'Update display functions to contain correct model
             clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
             clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-            'clsAnovaIIFunction.AddParameter("mod", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsAnovaIIFunction.AddParameter("mod", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
@@ -433,6 +438,7 @@ Public Class dlgFitModel
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ChooseRFunction()
+        ChooseAnovaFunction()
         ResponseVariableType()
         clsFamilyFunction.RemoveParameterByName("link")
     End Sub
@@ -444,14 +450,27 @@ Public Class dlgFitModel
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
+        ChooseAnovaFunction()
     End Sub
 
     Private Sub ucrReceiverResponseVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
         ResponseVariableType()
+        ChooseAnovaFunction()
     End Sub
+    Public Sub ChooseAnovaFunction()
+        If bRCodeSet Then
+            If ucrReceiverResponseVar.strCurrDataType = ("factor") Then
+                ' ucrBase.clsRsyntax.SetBaseRFunction(clsAnovaIIFunction)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaIIFunction, 1)
 
+            Else
+                'ucrBase.clsRsyntax.SetBaseRFunction(clsAnovaFunction)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+            End If
+        End If
+    End Sub
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
         ResponseConvert()
         ResponseVariableType()
@@ -465,6 +484,7 @@ Public Class dlgFitModel
     Private Sub ucrSelectorByDataFrameAddRemoveForFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorByDataFrameAddRemoveForFitModel.ControlValueChanged
         ChooseRFunction()
         GraphAssignTo()
+        ChooseAnovaFunction()
     End Sub
 
     Public Sub ResponseVariableType()
