@@ -215,7 +215,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFactorial, "factorial n!, as big integer. For example, factorialZ(6)= 720")
         ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
         ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
-        ttCalculator.SetToolTip(cmdFactorize, "computes the prime factorizations. For example, Factorize(20)= (2,5,2,1), Factorize(8)= 2:3 for (2,2,2)")
+        ttCalculator.SetToolTip(cmdFactorize, "computes the prime factorizations. For example, prime_factors(20)= (2,5,2,1), Factorize(8)= 2:3 for (2,2,2)")
         ttCalculator.SetToolTip(cmdIsPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
         ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
         ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
@@ -224,6 +224,18 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdBinary, "converts an integer into a binary number. For example, as.integer(intToBin(c(2,5,7,8)))= 10,101,111,1000")
         ttCalculator.SetToolTip(cmdAsOctmode, "converts an integer into a octal number. For example, as.octmode(intToOct(c(2,5,12,17)))= 02,05,14,21")
         ttCalculator.SetToolTip(cmdAsHexmode, "converts an integer into a hexadecimal number. For example, as.hexmode(intToHex(c(2,7,10,15)))= 2,7,a,f")
+        ttCalculator.SetToolTip(cmdNthPrime, "gives the n-th prime. For example nth_prime(1000)= 7919")
+        ttCalculator.SetToolTip(cmdGeneratePrimes, "generates the first n prime numbers equal to the number of rows in the data")
+        ttCalculator.SetToolTip(cmdGCD, "Greatest common divisor, for example gcd(18,42) = 6")
+        ttCalculator.SetToolTip(cmdSCM, "Smallest common multiple, for example scm(18,42) = 126 (= 718 & 342)")
+        ttCalculator.SetToolTip(cmdCoprime, "Also called mutually prime, for example coprime(30,77) = TRUE. (30 = 235, 77 = 7*11)")
+        ttCalculator.SetToolTip(cmdPhi, "Euler’s Totient Function. For example phi(12) = 4 (1, 2, 5, 7 are less than 12 and coprime)")
+        ttCalculator.SetToolTip(cmdTwin, "Twin primes, for example, twin(0,10) gives (3,5), & (5,7)")
+        ttCalculator.SetToolTip(cmdCousin, "Cousin primes, for example cousin(0,20) gives (3,7) & (13,17)")
+        ttCalculator.SetToolTip(cmdSexy, "Sexy primes (6 in Latin is sex!), for example sexy(0,40) gives (23,29) & (31,37)")
+        ttCalculator.SetToolTip(cmdThird, "Third cousin primes, for example third(0,100) gives (89,97)")
+        ttCalculator.SetToolTip(cmdTriplets, "Sexy prime triplets, for example triplets(0,100) gives (47, 53, 59)")
+        ttCalculator.SetToolTip(cmdKTuple, "k_tuple general formula for all these keys. For example k_tuple(0, 10, c(0,2)) gives twin primes")
 
     End Sub
 
@@ -575,7 +587,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = True
-                Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
+                Me.Size = New Size(iBasicWidth * 1.5, iBaseHeight)
             Case "Basic"
                 grpSummary.Visible = False
                 grpMaths.Visible = False
@@ -2986,9 +2998,9 @@ Public Class ucrCalculator
 
     Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize(n = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::prime_factors(x = )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::prime_factors()", 1)
         End If
     End Sub
 
@@ -3082,7 +3094,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNthPrime_Click(sender As Object, e As EventArgs) Handles cmdNthPrime.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::nth_prime(n = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::nth_prime(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::nth_prime()", 1)
         End If
@@ -3118,6 +3130,86 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringi::stri_reverse(str = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringi::stri_reverse()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdGCD_Click(sender As Object, e As EventArgs) Handles cmdGCD.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::gcd(m= , n= )", 7)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::gcd( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdSCM_Click(sender As Object, e As EventArgs) Handles cmdSCM.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::scm(m= , n= )", 7)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::scm( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdCoprime_Click(sender As Object, e As EventArgs) Handles cmdCoprime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::coprime(m= , n= )", 7)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::coprime( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdPhi_Click(sender As Object, e As EventArgs) Handles cmdPhi.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::phi(n= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::phi()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdTwin_Click(sender As Object, e As EventArgs) Handles cmdTwin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::twin_primes(min= , max= )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::twin_primes( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdCousin_Click(sender As Object, e As EventArgs) Handles cmdCousin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::cousin_primes(min= , max= )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::cousin_primes( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdSexy_Click(sender As Object, e As EventArgs) Handles cmdSexy.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::sexy_primes(min= , max= )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::sexy_primes( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdThird_Click(sender As Object, e As EventArgs) Handles cmdThird.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::third_cousin_primes(min= , max= )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::third_cousin_primes( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdTriplets_Click(sender As Object, e As EventArgs) Handles cmdTriplets.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::sexy_prime_triplets(min= , max= )", 9)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::sexy_prime_triplets( , )", 4)
+        End If
+    End Sub
+
+    Private Sub cmdKTuple_Click(sender As Object, e As EventArgs) Handles cmdKTuple.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::k_tuple(min= , max= , tuple= )", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::k_tuple( , , )", 5)
         End If
     End Sub
 End Class
