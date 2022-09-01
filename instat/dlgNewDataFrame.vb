@@ -505,7 +505,7 @@ Public Class dlgNewDataFrame
                 .Item(iRow).Cells(0).Value = iRow + 1
                 .Item(iRow).Cells(1).Value = "x" & (iRow + 1)
                 .Item(iRow).Cells(2).Value = "Numeric"
-                .Item(iRow).Cells(3).Value = "1,1000000"
+                .Item(iRow).Cells(3).Value = "1,1000"
                 .Item(iRow).Cells(4).Value = ""
                 .Item(iRow).Cells(5).Value = ""
             End With
@@ -515,7 +515,7 @@ Public Class dlgNewDataFrame
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
                     .Item(i).Cells(2).Value = "Numeric"
-                    .Item(i).Cells(3).Value = "1,1000000"
+                    .Item(i).Cells(3).Value = "1,1000"
                     .Item(i).Cells(4).Value = ""
                     .Item(i).Cells(5).Value = ""
                 End With
