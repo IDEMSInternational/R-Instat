@@ -80,8 +80,8 @@ Public Class frmOutputWindow
 
     Private Sub CopyImageRTB_Click(sender As Object, e As EventArgs) Handles CopyImageRTB.Click
         'Copies the first selected image into the clipboard.
-        Dim prphTemp As System.Windows.Documents.Paragraph
-        Dim conImage As System.Windows.Documents.InlineUIContainer
+        'Dim prphTemp As System.Windows.Documents.Paragraph
+        'Dim conImage As System.Windows.Documents.InlineUIContainer
         'For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
         'If TypeOf (block) Is System.Windows.Documents.Paragraph Then
         'prphTemp = block
