@@ -44,7 +44,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.contextMenuStripAdd = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripAddSelected = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripAddAll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparatorContext = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
@@ -82,7 +82,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'contextMenuStripAdd
         '
-        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripAddSelected, Me.toolStripAddAll, Me.ToolStripSeparator1, Me.toolStripHelp})
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripAddSelected, Me.toolStripAddAll, Me.ToolStripSeparatorContext, Me.toolStripHelp})
         Me.contextMenuStripAdd.Name = "SelectionMenuStrip"
         Me.contextMenuStripAdd.Size = New System.Drawing.Size(181, 98)
         '
@@ -99,10 +99,10 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.toolStripAddAll.Size = New System.Drawing.Size(180, 22)
         Me.toolStripAddAll.Text = "Add All"
         '
-        'ToolStripSeparator1
+        'ToolStripSeparatorContext
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparatorContext.Name = "ToolStripSeparatorContext"
+        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(177, 6)
         '
         'toolStripHelp
         '
@@ -132,6 +132,6 @@ Partial Class ucrSelectorByDataFrameAddRemove
     Friend WithEvents contextMenuStripAdd As ContextMenuStrip
     Friend WithEvents toolStripAddSelected As ToolStripMenuItem
     Friend WithEvents toolStripAddAll As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparatorContext As ToolStripSeparator
     Friend WithEvents toolStripHelp As ToolStripMenuItem
 End Class

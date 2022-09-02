@@ -298,7 +298,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSaveDataFrame.Location = New System.Drawing.Point(10, 376)
         Me.ucrSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
-        Me.ucrSaveDataFrame.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveDataFrame.Size = New System.Drawing.Size(304, 24)
         Me.ucrSaveDataFrame.TabIndex = 23
         '
         'ucrNudMinFreq
@@ -320,7 +320,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 352)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(304, 24)
         Me.ucrSaveGraph.TabIndex = 22
         '
         'ucrNudGroups
@@ -381,7 +381,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 410)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 24
         '
         'ucrSelectorOneWayFreq

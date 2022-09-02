@@ -194,6 +194,7 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
         clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
+        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged,
