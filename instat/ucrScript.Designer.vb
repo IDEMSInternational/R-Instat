@@ -59,11 +59,12 @@ Partial Class ucrScript
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.PanelScintillaNet = New System.Windows.Forms.Panel()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -79,7 +80,7 @@ Partial Class ucrScript
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtScript.ShortcutsEnabled = False
-        Me.txtScript.Size = New System.Drawing.Size(405, 235)
+        Me.txtScript.Size = New System.Drawing.Size(405, 42)
         Me.txtScript.TabIndex = 0
         Me.txtScript.WordWrap = False
         '
@@ -198,6 +199,7 @@ Partial Class ucrScript
         '
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Controls.Add(Me.PanelScintillaNet, 0, 4)
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.Panel1, 0, 3)
@@ -205,17 +207,18 @@ Partial Class ucrScript
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 4
+        Me.tlpTableContainer.RowCount = 5
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
         'Panel1
         '
-        Me.Panel1.Location = New System.Drawing.Point(3, 297)
+        Me.Panel1.Location = New System.Drawing.Point(3, 104)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(200, 14)
         Me.Panel1.TabIndex = 9
@@ -231,6 +234,15 @@ Partial Class ucrScript
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(405, 27)
         Me.Panel2.TabIndex = 10
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(165, 1)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(51, 23)
+        Me.cmdHelp.TabIndex = 5
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdClear
         '
@@ -262,14 +274,12 @@ Partial Class ucrScript
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
         '
-        'cmdHelp
+        'PanelScintillaNet
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(165, 1)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(51, 23)
-        Me.cmdHelp.TabIndex = 5
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
+        Me.PanelScintillaNet.Location = New System.Drawing.Point(3, 124)
+        Me.PanelScintillaNet.Name = "PanelScintillaNet"
+        Me.PanelScintillaNet.Size = New System.Drawing.Size(405, 187)
+        Me.PanelScintillaNet.TabIndex = 12
         '
         'ucrScript
         '
@@ -313,4 +323,5 @@ Partial Class ucrScript
     Friend WithEvents tooltiptScriptWindow As ToolTip
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents PanelScintillaNet As Panel
 End Class

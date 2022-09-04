@@ -20,6 +20,8 @@ Public Class ucrScript
     Private strCurrentDirectory As String = ""
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Private bUserTextChanged As Boolean = False
+    'TODO rename to clsTextArea
+    Private TextArea As ScintillaNET.Scintilla = New ScintillaNET.Scintilla()
 
     Public Sub CopyText()
         txtScript.Copy()
@@ -201,6 +203,9 @@ Public Class ucrScript
         txtScript.WordWrap = False
         EnableRunButtons(txtScript.TextLength > 0)
         mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
+
+        PanelScintillaNet.Controls.Add(TextArea)
+        TextArea.Dock = DockStyle.Fill
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
