@@ -57,6 +57,7 @@ Partial Class ucrScript
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.TextArea = New ScintillaNET.Scintilla()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdHelp = New System.Windows.Forms.Button()
@@ -64,7 +65,6 @@ Partial Class ucrScript
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TextArea = New ScintillaNET.Scintilla()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -217,6 +217,16 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'TextArea
+        '
+        Me.TextArea.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextArea.Lexer = ScintillaNET.Lexer.R
+        Me.TextArea.Location = New System.Drawing.Point(3, 56)
+        Me.TextArea.Name = "TextArea"
+        Me.TextArea.Size = New System.Drawing.Size(405, 170)
+        Me.TextArea.TabIndex = 13
+        Me.TextArea.TabWidth = 2
+        '
         'Panel1
         '
         Me.Panel1.Location = New System.Drawing.Point(3, 232)
@@ -274,15 +284,6 @@ Partial Class ucrScript
         Me.cmdRunLineSelection.Text = "Run"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
-        '
-        'TextArea
-        '
-        Me.TextArea.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextArea.Location = New System.Drawing.Point(3, 56)
-        Me.TextArea.Name = "TextArea"
-        Me.TextArea.Size = New System.Drawing.Size(405, 170)
-        Me.TextArea.TabIndex = 13
-        Me.TextArea.Text = "scintilla test"
         '
         'ucrScript
         '

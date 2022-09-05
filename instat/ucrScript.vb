@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports ScintillaNET
+
 Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
     Private strCurrentDirectory As String = ""
@@ -204,8 +206,13 @@ Public Class ucrScript
         EnableRunButtons(txtScript.TextLength > 0)
         mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
 
-        'todo PanelScintillaNet.Controls.Add(TextArea)
-        'todo TextArea.Dock = DockStyle.Fill
+        TextArea.StyleResetDefault()
+        TextArea.Styles(Style.Default).Font = "Consolas"
+        TextArea.Styles(Style.Default).Size = 11
+        'TextArea.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
+        'TextArea.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
+        TextArea.StyleClearAll()
+        TextArea.Styles(Style.R.Comment).ForeColor = Color.FromArgb(0, 128, 0)
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening

@@ -2734,12 +2734,6 @@
     <Compile Include="ucrReceiverSingleNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrREditor.Designer.vb">
-      <DependentUpon>ucrREditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrREditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ucrReorder.Designer.vb">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </Compile>
@@ -5060,9 +5054,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReceiverSingleNew.resx">
       <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrREditor.resx">
-      <DependentUpon>ucrREditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
