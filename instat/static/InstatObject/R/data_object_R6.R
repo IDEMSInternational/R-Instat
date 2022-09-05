@@ -2047,7 +2047,13 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 }
 )
 
-DataSheet$set("public", "add_object", function(object, object_name) {
+DataSheet$set("public", "add_object", function(object, object_name, object_type, object_format) {
+  
+  if(missing(object_type)){
+    #todo. Processing will differ based on the the object type to be added
+  }
+  
+
   if(missing(object_name)) object_name = next_default_item("object", names(private$objects))
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object

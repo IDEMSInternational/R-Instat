@@ -261,17 +261,42 @@ Public Class ucrOutputPage
     End Sub
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
-        Dim richTextBox As New RichTextBox With {
-         .Dock = DockStyle.Top,
-         .BorderStyle = BorderStyle.None
-        }
-        AddFormatedTextToRichTextBox(richTextBox, outputElement.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
         Dim panel As Panel = AddElementPanel(outputElement)
-        panel.Controls.Add(richTextBox)
-        panel.Controls.SetChildIndex(richTextBox, 0)
-        SetRichTextBoxHeight(richTextBox)
-        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
-        AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+
+        If outputElement.StringOutput IsNot Nothing Then
+            Dim richTextBox As New RichTextBox With {
+                .Dock = DockStyle.Top,
+                .BorderStyle = BorderStyle.None
+             }
+            AddFormatedTextToRichTextBox(RichTextBox, outputElement.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
+            panel.Controls.Add(richTextBox)
+            panel.Controls.SetChildIndex(richTextBox, 0)
+            SetRichTextBoxHeight(richTextBox)
+            AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
+            AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+        Else
+            Dim linkLabel As New LinkLabel
+            Dim ucrTextViewer As New ucrTextViewer
+
+            linkLabel.Text = "Maximise"
+            AddHandler linkLabel.Click, Sub()
+                                            Dim frmMaximiseOutput As New frmMaximiseOutput
+                                            frmMaximiseOutput.Show(strFileName:=outputElement.TextOutput)
+                                        End Sub
+
+            ucrTextViewer.LoadTextFile(strFileName:=outputElement.TextOutput)
+            ucrTextViewer.FormatText(OutputFont.ROutputFont, OutputFont.ROutputColour)
+
+            AddHandler ucrTextViewer._richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+
+            panel.Controls.Add(linkLabel)
+            panel.Controls.Add(ucrTextViewer)
+            panel.Controls.SetChildIndex(linkLabel, 0)
+            panel.Controls.SetChildIndex(ucrTextViewer, 0)
+            linkLabel.Dock = DockStyle.Top
+            ucrTextViewer.Dock = DockStyle.Top
+        End If
+
     End Sub
 
     Private Sub AddNewImageOutput(outputElement As clsOutputElement)
@@ -302,7 +327,7 @@ Public Class ucrOutputPage
         Dim linkLabel As New LinkLabel
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.isCefInitilised Then
-            Dim ucrWebview As New ucrWebview()
+            Dim ucrWebview As New ucrWebViewer()
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
                                             Dim frmMaximiseOutput As New frmMaximiseOutput

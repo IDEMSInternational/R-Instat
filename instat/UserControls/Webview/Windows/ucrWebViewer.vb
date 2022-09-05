@@ -20,19 +20,19 @@ Imports CefSharp
 Imports CefSharp.DevTools.DOM
 
 'todo. inherit panel?
-Public Class ucrWebview
+Public Class ucrWebViewer
     Inherits Panel
 
-    Private ReadOnly browser As ChromiumWebBrowser
+    Private ReadOnly _browser As ChromiumWebBrowser
 
     Public Sub New()
-        browser = New ChromiumWebBrowser()
-        AddHandler browser.LoadingStateChanged, AddressOf OnLoadingStateChanged
-        Controls.Add(browser)
+        _browser = New ChromiumWebBrowser()
+        AddHandler _browser.LoadingStateChanged, AddressOf OnLoadingStateChanged
+        Me.Controls.Add(_browser)
     End Sub
 
-    Public Sub LoadHtmlFile(strFilePathName As String)
-        If browser Is Nothing Then
+    Public Sub LoadHtmlFile(strFileName As String)
+        If _browser Is Nothing Then
             Return
         End If
         'todo. this implementation may need to be changed if we face it's limitations
@@ -42,15 +42,16 @@ Public Class ucrWebview
         'not unless we specify R-Instat temp output folder in the R commands.
         'that should be the first step
 
-        Dim strUrl As String = "file:///" + strFilePathName.Replace("\", "/")
-        browser.LoadUrl(strUrl)
-        browser.Dock = DockStyle.Fill
+        Dim strUrl As String = "file:///" + strFileName.Replace("\", "/")
+        _browser.LoadUrl(strUrl)
+        _browser.Dock = DockStyle.Fill
     End Sub
 
     Private Sub OnLoadingStateChanged(sender As Object, e As LoadingStateChangedEventArgs)
+        'by default always set the height of this control to correspond to the html document after loading.
         If Not e.IsLoading Then
             'Get the height of the html document and set it as the controls height
-            Dim task2 As Task(Of Rect) = browser.GetContentSizeAsync()
+            Dim task2 As Task(Of Rect) = _browser.GetContentSizeAsync()
             task2.ContinueWith(Sub(t)
                                    If Not t.IsFaulted Then
                                        Dim response As Rect = t.Result
@@ -66,8 +67,8 @@ Public Class ucrWebview
     End Sub
 
     Protected Overrides Sub Dispose(bDisposing As Boolean)
-        If browser IsNot Nothing Then
-            browser.Dispose()
+        If _browser IsNot Nothing Then
+            _browser.Dispose()
         End If
         MyBase.Dispose(bDisposing)
     End Sub

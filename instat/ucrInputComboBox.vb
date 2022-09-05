@@ -78,6 +78,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsType(strRObjectType As String)
+        strItemsType = strRObjectType
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsGraphs()
         strItemsType = "Graphs"
         FillItemTypes()
@@ -118,6 +123,18 @@ Public Class ucrInputComboBox
                 End If
             Case "Data Frames"
                 'TODO not yet implemented
+            Case "Graphs"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
+                End If
+            Case RObjectType.Graph, RObjectType.Text
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    'todo. implement
+                    'cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
+
             Case "Models"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
@@ -128,11 +145,7 @@ Public Class ucrInputComboBox
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
                 End If
-            Case "Graphs"
-                If ucrDataFrameSelector IsNot Nothing Then
-                    cboInput.Items.Clear()
-                    cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
-                End If
+
             Case "Surv"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()

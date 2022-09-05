@@ -21,7 +21,7 @@ Public Class dlgThreeVariablePivotTable
     Private clsConcatenateFunction, clsFlattenFunction,
          clsLevelsFunction, clsPasteFunction,
         clsRelevelPasteFunction, clsRPivotTableFunction,
-        clsSelectFunction, clsViewHtmlObjectFunction As New RFunction
+        clsSelectFunction As New RFunction
     Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
 
 
@@ -42,8 +42,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 603
-        'result is a html object. TODO. Check if no longer needed
-        'ucrBase.clsRsyntax.iCallType = 6 
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
         ucrSelectorPivot.SetParameterIsrfunction()
@@ -132,9 +131,6 @@ Public Class dlgThreeVariablePivotTable
         clsLevelsDollarOperator = New ROperator
         clsPipeOperator = New ROperator
 
-        clsViewHtmlObjectFunction = New RFunction
-
-
         ucrReceiverInitialRowFactors.SetMeAsReceiver()
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
@@ -180,10 +176,13 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsRPivotTableFunction.SetAssignTo("last_table")
 
-        clsViewHtmlObjectFunction.SetRCommand("view_html_object")
-        clsViewHtmlObjectFunction.AddParameter(strParameterName:="html_object", clsRFunctionParameter:=clsRPivotTableFunction)
+        clsRPivotTableFunction.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+                                                   strRObjectTypeToAssignTo:=RObjectType.Table,
+                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorPivot.strCurrentDataFrame,
+                                                   strObjectName:="last_table")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewHtmlObjectFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRPivotTableFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -231,6 +230,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrSelectorPivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPivot.ControlValueChanged
         ChangeDataParameterValue()
+        clsRPivotTableFunction._rDataFrameNameToAddObjectTo = ucrSelectorPivot.strCurrentDataFrame
     End Sub
 
     Private Sub ChangeDataParameterValue()

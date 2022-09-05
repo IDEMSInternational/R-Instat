@@ -533,7 +533,51 @@ DataBook$set("public", "get_columns_from_data", function(data_name, col_names, f
 }
 )
 
-DataBook$set("public", "add_object", function(data_name, object, object_name, internal = TRUE) {
+#todo. change the internal = FALSE by default after refactoring all functions that use this function
+DataBook$set("public", "add_object", function(data_name, object, object_name, object_type, object_format, internal = TRUE) {
+  
+  #if object type has been passed then use the new code implementation
+  if(!missing(object_type) && !missing(object_format) ){
+    
+    if (internal) {
+      #todo. investigate, which objects will have no data_name and use this function for storage
+      if(missing(data_name)) {
+        if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
+        if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
+        private$.objects[[object_name]] <- object
+      } else{ 
+        self$get_data_objects(data_name)$add_object(object = object, object_name = object_name, object_type = object_type, object_format = object_format)
+      }
+    } else {
+      
+      #todo. should every other big object have their own data book or we use one data book for storing all the objects?
+      #or we store all objects in a separate data structure that is not a data book? 
+      #if we store it in a data structure then we will NOT need the "internal" parameter
+      
+      #for graphs, create a separate .graph_data_book data book if it's not yet created
+      if(identical(object_type, "graph")){
+        if (!exists(".graph_data_book")){
+          self$create_graph_data_book()
+        } 
+        .graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, object_format = object_format, internal = TRUE)
+      }else{
+        self$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, object_format = object_format, internal = TRUE)
+      }
+      
+      
+    }
+    
+    #after adding the graph. set it as last graph contents
+    if(identical(object_type,"graph")){
+      last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
+      if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
+    }
+    
+    #todo. later delete
+    return()
+  }
+  
+  #todo. deprecated. Delete after do the necessary refactoring.
   if (internal) {
     if(missing(data_name)) {
       if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
@@ -547,6 +591,51 @@ DataBook$set("public", "add_object", function(data_name, object, object_name, in
   }
 }
 ) 
+
+#todo. remove the s after deleting the above add_object
+DataBook$set("public", "add_objects", function(data_name, object, object_name, object_type, internal = FALSE) {
+  
+  if(missing(object_type) ){
+    stop("object type missing")
+  }
+ 
+  
+  if (internal) {
+    #todo. investigate, which objects will have no data_name and use this function for storage
+    if(missing(data_name)) {
+      if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
+      if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
+      private$.objects[[object_name]] <- object
+    } else{ 
+      self$get_data_objects(data_name)$add_object(object = object, object_name = object_name, object_type = object_type)
+    }
+  } else {
+    
+    #todo. should every other big object have their own data book or we use one data book for storing all the objects?
+    #or we store all objects in a separate data structure that is not a data book?
+    
+    #for graphs, create a separate .graph_data_book data book if it's not yet created
+    if(identical(object_type, "graph")){
+      if (!exists(".graph_data_book")){
+        self$create_graph_data_book()
+      } 
+      .graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, internal = TRUE)
+    }else{
+      #todo change to self$add_object eventually
+      self$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, internal = TRUE)
+    }
+    
+    
+  }
+  
+  #after adding the graph. set it as last graph contents
+  if(identical(object_type,"graph")){
+    last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
+    if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
+  }
+  
+}
+)
 
 DataBook$set("public", "create_graph_data_book", function() {
   .graph_data_book <- DataBook$new()

@@ -57,7 +57,9 @@ Public Class ucrSave
     ''' <summary>   Type of object saved by this control 
     '''             (valid values are: 'column', 'dataframe', 'graph', model', 'surv', 'table') 
     '''             </summary>
-    Private strSaveType As String = "column"
+    Private _strRObjectType As String = "column"
+    Private _strRObjectFormat As String
+
     ''' <summary>   Prefix used for the default name displayed in the text/combo box </summary>
     Private strPrefix As String
     ''' <summary>   True if this control has a combo box rather than a text box.<para>
@@ -168,7 +170,7 @@ Public Class ucrSave
     Private Sub SetDefaults()
         ucrInputTextSave.Reset()
         ucrInputComboSave.Reset()
-        SetSaveType(strSaveType)
+        SetSaveType(Me._strRObjectType, Me._strRObjectFormat)
         LabelOrCheckboxSettings()
         UpdateRCode()
     End Sub
@@ -369,7 +371,7 @@ Public Class ucrSave
         End If
     End Sub
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets save type to <paramref name="strType"/>. Valid values are: 
+    ''' <summary>   Sets save type to <paramref name="strRObjectType"/>. Valid values are: 
     '''             "column", "dataframe", "graph", "model", "surv" or "table".
     '''             Sets the combobox and textbox to be the same type.
     '''             If type is "column" then makes the 'position' button visible, else makes it not
@@ -379,27 +381,33 @@ Public Class ucrSave
     '''             be placed at the start end, or before/after an adjacent object.)
     '''             </summary>
     '''
-    ''' <param name="strType">  The type of object saved by this control. Valid values are: 
+    ''' <param name="strRObjectType">  The type of object saved by this control. Valid values are: 
     '''                         "column", "dataframe", "graph", "model", "surv" or "table". 
     '''                         An invalid value throws a developer error.</param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub SetSaveType(strType As String)
-        strSaveType = strType
-        Select Case strSaveType
-            Case "column"
+    Public Sub SetSaveType(strRObjectType As String, Optional strRObjectFormat As String = "")
+        Me._strRObjectType = strRObjectType
+        Me._strRObjectFormat = strRObjectFormat
+        Select Case Me._strRObjectType
+            Case RObjectType.Column
                 ucrInputComboSave.SetDefaultTypeAsColumn()
                 ucrInputComboSave.SetItemsTypeAsColumns()
                 ucrInputTextSave.SetDefaultTypeAsColumn()
                 btnColumnPosition.Visible = True
-            Case "dataframe"
+            Case RObjectType.Dataframe
                 ucrInputComboSave.SetDefaultTypeAsDataFrame()
                 ucrInputComboSave.SetItemsTypeAsDataFrames()
                 ucrInputTextSave.SetDefaultTypeAsDataFrame()
                 btnColumnPosition.Visible = False
-            Case "graph"
+            Case RObjectType.Graph
                 ucrInputComboSave.SetDefaultTypeAsGraph()
                 ucrInputComboSave.SetItemsTypeAsGraphs()
                 ucrInputTextSave.SetDefaultTypeAsGraph()
+                btnColumnPosition.Visible = False
+            Case RObjectType.Text
+                ucrInputComboSave.SetDefaultType(_strRObjectType)
+                ucrInputComboSave.SetItemsType(_strRObjectType)
+                ucrInputTextSave.SetDefaultType(_strRObjectType)
                 btnColumnPosition.Visible = False
             Case "model"
                 ucrInputComboSave.SetDefaultTypeAsModel()
@@ -427,7 +435,7 @@ Public Class ucrSave
                 ucrInputTextSave.SetDefaultTypeAsLink()
                 btnColumnPosition.Visible = False
             Case Else
-                MsgBox("Developer error: unrecognised save type: " & strType)
+                MsgBox("Developer error: unrecognised save type: " & strRObjectType)
         End Select
     End Sub
     ''' <summary>   Sets save type as column. </summary>
@@ -438,19 +446,30 @@ Public Class ucrSave
     Public Sub SetSaveTypeAsDataFrame()
         SetSaveType("dataframe")
     End Sub
-    ''' <summary>   Sets save type as graph. </summary>
+    ''' <summary>   
+    ''' Sets save type as graph. 
+    ''' todo. deprecated
+    ''' </summary>
     Public Sub SetSaveTypeAsGraph()
-        SetSaveType("graph")
+        SetSaveType(strRObjectType:=RObjectType.Graph, strRObjectFormat:=RObjectFormat.Image)
     End Sub
-    ''' <summary>   Sets save type as model. </summary>
+    ''' <summary>   
+    ''' Sets save type as model. 
+    ''' todo. deprecated
+    ''' </summary>
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
     End Sub
-    ''' <summary>   Sets save type as surv. </summary>
+    ''' <summary>   
+    ''' Sets save type as surv. 
+    ''' todo. 
+    ''' </summary>
     Public Sub SetSaveTypeAsSurv()
         SetSaveType("surv")
     End Sub
-    ''' <summary>   Sets save type as table. </summary>
+    ''' <summary>   
+    ''' Sets save type as table. 
+    ''' todo. </summary>
     Public Sub SetSaveTypeAsTable()
         SetSaveType("table")
     End Sub
@@ -510,7 +529,7 @@ Public Class ucrSave
         btnColumnPosition.Visible = False
 
         'always hide position button if save type is not a column
-        If strSaveType = "column" Then
+        If _strRObjectType = "column" Then
             btnColumnPosition.Visible = ucrChkSave.Checked
         End If
 
@@ -563,7 +582,7 @@ Public Class ucrSave
     '''                         position variables. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
-        If strSaveType = "key" OrElse strSaveType = "link" Then
+        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
             MyBase.UpdateRCode(bReset)
         Else
             UpdateAssignTo()
@@ -576,7 +595,7 @@ Public Class ucrSave
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
-        If strSaveType = "key" OrElse strSaveType = "link" Then
+        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
             MyBase.UpdateAllParameters()
         Else
             UpdateAssignTo()
@@ -637,8 +656,8 @@ Public Class ucrSave
                         strSaveName = GetText()
                     End If
                     If strSaveName <> "" Then
-                        Select Case strSaveType
-                            Case "column"
+                        Select Case _strRObjectType
+                            Case RObjectType.Column
                                 'todo 25/03/2021. because of this new functionailty added. Should we rename this function from UpdateAssignTo() to something else
                                 If bSetPositionParamsDirectly Then
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, strAdjacentColumn:=strAdjacentColumn)
@@ -650,10 +669,15 @@ Public Class ucrSave
                                         clsTempCode.AddParameter(strParameterName:="adjacent_column", strParameterValue:=strAdjacentColumn)
                                     End If
                                 End If
-                            Case "dataframe"
+                            Case RObjectType.Dataframe
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
-                            Case "graph"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case RObjectType.Graph, RObjectType.Text
+                                clsTempCode.SetAssignToRObject(strRObjectToAssignTo:=strSaveName,
+                                                               strRObjectTypeToAssignTo:=_strRObjectType,
+                                                               strRObjectFormatToAssignTo:=_strRObjectFormat,
+                                                               strRDataFrameNameToAddObjectTo:=strDataName,
+                                                               strObjectName:=strSaveName,
+                                                               bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "table"
@@ -696,7 +720,7 @@ Public Class ucrSave
     '''                                 overridden function. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
-        If Not strSaveType = "key" AndAlso Not strSaveType = "link" Then
+        If Not _strRObjectType = "key" AndAlso Not _strRObjectType = "link" Then
             Dim clsMainRCode As RCodeStructure = GetRCode()
             Dim strControlValue As String = ""
 
@@ -811,10 +835,10 @@ Public Class ucrSave
         '    - Should this function return boolean? The parent function in ucrCore has no return type! Is this good coding practice?
         '    - The parent function returns true if the control has a paremter that is not yet included in the R command. Why is this control different?
         '    - Is the condition for bToBeAssigned correct?
-        If strSaveType = "key" OrElse strSaveType = "link" Then
+        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
             Return MyBase.CanUpdate()
         Else
-            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
+            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso _strRObjectType <> "")
         End If
     End Function
     '''--------------------------------------------------------------------------------------------
@@ -835,7 +859,7 @@ Public Class ucrSave
         'TODO SJL 15/05/20 
         '   - The name is quite confusing. Rename?
         '   - If we made 'UpdateAssignTo' public then we could remove this function
-        If strSaveType = "key" OrElse strSaveType = "link" Then
+        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
             MyBase.AddOrRemoveParameter(True)
         Else
             UpdateAssignTo(Not bAdd)

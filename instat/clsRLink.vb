@@ -788,7 +788,7 @@ Public Class RLink
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional bAddOutputInLogger As Boolean = True, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional bAddOutputInLog As Boolean = True, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strTemp As String = ""
@@ -834,17 +834,17 @@ Public Class RLink
 
             'get the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).Last
-            If strLastScript.Contains("view_html_object") Then 'if output should be returned as a html then
+            If strLastScript.Contains("view_object") Then 'if output should be returned as a file
                 Try
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
                     Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     expTemp = GetSymbol(strTempAssignTo)
                     If expTemp IsNot Nothing Then
-                        'get the html file path name
+                        'get the file path name
                         strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                         If strTemp <> "" Then
-                            If bAddOutputInLogger Then
-                                clsOutputLogger.AddHtmlOutput(strTemp)
+                            If bAddOutputInLog Then
+                                clsOutputLogger.AddFileOutput(strTemp)
                             Else
                                 Dim frmMaximiseOutput As New frmMaximiseOutput
                                 frmMaximiseOutput.Show(strFileName:=strTemp)
@@ -854,18 +854,17 @@ Public Class RLink
                 Catch e As Exception
                     MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End Try
-
-            ElseIf strLastScript.Contains("view_graph_object") Then 'if output should be returned as an image then
+            ElseIf strLastScript.Contains("view_html_object") Then 'if output should be returned as a html then
                 Try
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
                     Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     expTemp = GetSymbol(strTempAssignTo)
                     If expTemp IsNot Nothing Then
-                        'get the image file path name
+                        'get the html file path name
                         strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                         If strTemp <> "" Then
-                            If bAddOutputInLogger Then
-                                clsOutputLogger.AddImageOutput(strTemp)
+                            If bAddOutputInLog Then
+                                clsOutputLogger.AddHtmlOutput(strTemp)
                             Else
                                 Dim frmMaximiseOutput As New frmMaximiseOutput
                                 frmMaximiseOutput.Show(strFileName:=strTemp)
@@ -1106,32 +1105,36 @@ Public Class RLink
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
 
         If bAsPlotly Then
-            Dim clsViewHtmlObjectFunction As New RFunction
+            Dim clsViewObjectFunction As New RFunction
             Dim clsInteractivePlot As New RFunction
             clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
             clsInteractivePlot.SetPackageName("plotly")
             clsInteractivePlot.SetRCommand("ggplotly")
             clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
 
-            clsViewHtmlObjectFunction.SetRCommand("view_html_object")
-            clsViewHtmlObjectFunction.AddParameter(strParameterName:="html_object", clsRFunctionParameter:=clsInteractivePlot)
+            clsViewObjectFunction.SetRCommand("view_object")
+            clsViewObjectFunction.AddParameter(strParameterName:="object", clsRFunctionParameter:=clsInteractivePlot)
+            clsViewObjectFunction.AddParameter(strParameterName:="object_format",
+                                               strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
             'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
-            RunScript(clsViewHtmlObjectFunction.ToScript(), bAddOutputInLogger:=False, strComment:="View last graph as Plotly", bSeparateThread:=False)
+            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInLog:=False, strComment:="View last graph as Plotly", bSeparateThread:=False)
         ElseIf bInRViewer Then
             Dim strGlobalGraphDisplayOption As String
             'store the current set graph display option, to restore after display
             strGlobalGraphDisplayOption = Me.strGraphDisplayOption
             Me.strGraphDisplayOption = "view_R_viewer"
-            RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInLogger:=False, strComment:="View last graph", bSeparateThread:=False)
+            RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInLog:=False, strComment:="View last graph", bSeparateThread:=False)
             'restore the graph display option
             Me.strGraphDisplayOption = strGlobalGraphDisplayOption
         Else
-            Dim clsViewGraphObjectFunction As New RFunction
+            Dim clsViewObjectFunction As New RFunction
             clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
-            clsViewGraphObjectFunction.SetRCommand("view_graph_object")
-            clsViewGraphObjectFunction.AddParameter(strParameterName:="graph_object", clsRFunctionParameter:=clsLastGraph)
-            RunScript(clsViewGraphObjectFunction.ToScript(), bAddOutputInLogger:=False, strComment:="View last graph", bSeparateThread:=False)
+            clsViewObjectFunction.SetRCommand("view_object")
+            clsViewObjectFunction.AddParameter(strParameterName:="object", clsRFunctionParameter:=clsLastGraph)
+            clsViewObjectFunction.AddParameter(strParameterName:="object_format",
+                                               strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
+            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInLog:=False, strComment:="View last graph", bSeparateThread:=False)
         End If
     End Sub
 

@@ -9,29 +9,34 @@ Public Class frmMaximiseOutput
     'todo. to be used by the output page to remember paths selected by user when saving outputs
     Public _strFileDestinationDirectory As String = ""
 
-    'Public Sub SetOutput(strFileName As String)
-    '    Me._strDisplayedFileName = strFileName
-    'End Sub
-
     Public Overloads Sub Show(strFileName As String)
         Me._strDisplayedFileName = strFileName
-        Dim strExtension As String = Path.GetExtension(_strDisplayedFileName).ToLower
+        Dim strFileExtension As String = Path.GetExtension(_strDisplayedFileName).ToLower
+        Me.panelControl.Controls.Clear()
 
-        Select Case strExtension
+        Select Case strFileExtension
+            Case ".txt"
+                _strFileFilter = "txt (*.txt)|*.txt"
+                Dim ucrTextViewer As New ucrTextViewer
+                ucrTextViewer.LoadTextFile(strFileName)
+                ucrTextViewer.FormatText(OutputFont.ROutputFont, OutputFont.ROutputColour)
+                Me.panelControl.Controls.Add(ucrTextViewer)
+                'Me.Margin
+                ucrTextViewer.Dock = DockStyle.Fill
             Case ".png"
+                _strFileFilter = "png (*.png)|*.png"
                 Dim pictureBox As New PictureBox
                 pictureBox.Load(_strDisplayedFileName)
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom
-                Me.Controls.Add(pictureBox)
+                Me.panelControl.Controls.Add(pictureBox)
                 pictureBox.Dock = DockStyle.Fill
-                _strFileFilter = "png (*.png)|*.png"
             Case ".html"
                 If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.IsCefInitilised Then
-                    Dim ucrWebView As New ucrWebview
-                    ucrWebView.LoadHtmlFile(_strDisplayedFileName)
-                    Me.Controls.Add(ucrWebView)
-                    ucrWebView.Dock = DockStyle.Fill
                     _strFileFilter = "html (*.html)|*.html"
+                    Dim ucrWebView As New ucrWebViewer
+                    ucrWebView.LoadHtmlFile(_strDisplayedFileName)
+                    Me.panelControl.Controls.Add(ucrWebView)
+                    ucrWebView.Dock = DockStyle.Fill
                 Else
                     'display the html output in default browser
                     Cursor = Cursors.WaitCursor
@@ -40,10 +45,6 @@ Public Class frmMaximiseOutput
                     'important. just return don't show the form
                     Return
                 End If
-
-            Case ".txt"
-                'todo
-                _strFileFilter = "txt (*.txt)|*.txt"
             Case Else
                 'todo. developer error
                 Return

@@ -36,8 +36,6 @@ Public Class dlgSummaryTables
     Private clsMmtableOperator, clsSummaryOperator, clsFrequencyOperator, clsColumnOperator,
             clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
 
-    Private clsViewObjectFunction As New RFunction
-
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -53,9 +51,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub InitialiseDialog()
-        'result is a html object. TODO. Check if no longer needed
-        'ucrBase.clsRsyntax.iCallType = 6
-
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -185,12 +180,11 @@ Public Class dlgSummaryTables
         'todo. Enable oonce the correct code for saving html tables is added
         ucrSaveTable.Enabled = False
         ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetSaveType(RObjectType.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-
 
         ucrReorderSummary.bDataIsSummaries = True
     End Sub
@@ -237,7 +231,6 @@ Public Class dlgSummaryTables
         clsFrequencyOperator = New ROperator
         clsMmtableOperator = New ROperator
         clsDummyFunction = New RFunction
-        clsViewObjectFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -395,9 +388,13 @@ Public Class dlgSummaryTables
 
         clsJoiningPipeOperator.SetAssignTo("last_table")
 
-        clsViewObjectFunction.SetRCommand("view_html_object")
-        clsViewObjectFunction.AddParameter(strParameterName:="html_object", clsROperatorParameter:=clsJoiningPipeOperator)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectFunction)
+        clsJoiningPipeOperator.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeToAssignTo:=RObjectType.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -620,8 +617,6 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-            'ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
-            'ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
             cmdFormatTable.Location = New Point(286, 464)
             cmdSummaries.Visible = True
@@ -629,8 +624,6 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
-            'ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
-            'ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("frequency_table")
             cmdSummaries.Visible = False
             cmdFormatTable.Location = New Point(286, 379)
@@ -643,5 +636,9 @@ Public Class dlgSummaryTables
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrSelectorSummaryTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSummaryTables.ControlValueChanged
+        clsJoiningPipeOperator._rDataFrameNameToAddObjectTo = ucrSelectorSummaryTables.strCurrentDataFrame
     End Sub
 End Class

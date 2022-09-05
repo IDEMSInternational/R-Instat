@@ -25,6 +25,7 @@ Partial Class frmMaximiseOutput
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.panelControl = New System.Windows.Forms.Panel()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,14 +53,25 @@ Partial Class frmMaximiseOutput
         Me.mnuSave.Size = New System.Drawing.Size(98, 22)
         Me.mnuSave.Text = "Save"
         '
+        'panelControl
+        '
+        Me.panelControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.panelControl.Location = New System.Drawing.Point(12, 27)
+        Me.panelControl.Name = "panelControl"
+        Me.panelControl.Size = New System.Drawing.Size(509, 253)
+        Me.panelControl.TabIndex = 1
+        '
         'frmMaximiseOutput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(533, 292)
+        Me.Controls.Add(Me.panelControl)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmMaximiseOutput"
         Me.Text = "Output"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -73,4 +85,5 @@ Partial Class frmMaximiseOutput
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuSave As ToolStripMenuItem
+    Friend WithEvents panelControl As Panel
 End Class

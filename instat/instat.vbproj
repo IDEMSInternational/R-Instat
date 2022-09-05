@@ -222,6 +222,8 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Enum\RObjectFormat.vb" />
+    <Compile Include="Enum\RObjectType.vb" />
     <Compile Include="frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
@@ -2882,8 +2884,11 @@
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\ucrTextViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControls\Webview\Windows\CefRuntimeWrapper.vb" />
-    <Compile Include="UserControls\Webview\Windows\ucrWebview.vb">
+    <Compile Include="UserControls\Webview\Windows\ucrWebViewer.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">

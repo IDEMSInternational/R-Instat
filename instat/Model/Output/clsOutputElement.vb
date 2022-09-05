@@ -25,11 +25,16 @@ Public Class clsOutputElement
     'hold the script elements that form the R script that produced the output
     Private _lstRScriptElements As New List(Of clsRScriptElement)
     Private _outputType As OutputType
-    'holds the file paths to the html outputs
-    Private _lstHtmlOutput As New List(Of String)
+    'todo. deprecate this list with _lstTextOutput ?
+    Private _lstStringOutput As New List(Of String)
+
+    'holds the file paths to the text outputs
+    Private _lstTextOutput As New List(Of String)
     'holds the file paths to the image outputs
     Private _lstImageOutput As New List(Of String)
-    Private _lstStringOutput As New List(Of String)
+    'holds the file paths to the html outputs
+    Private _lstHtmlOutput As New List(Of String)
+
     ''' <summary>
     ''' Constructor
     ''' </summary>
@@ -59,8 +64,14 @@ Public Class clsOutputElement
         End Set
     End Property
 
+    Public ReadOnly Property TextOutput As String
+        Get
+            Return _lstTextOutput.FirstOrDefault()
+        End Get
+    End Property
+
     ''' <summary>
-    ''' Holds image if outputType is image
+    ''' Holds image file path if outputType is image file
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property ImageOutput As String
@@ -99,7 +110,11 @@ Public Class clsOutputElement
         Return Me.MemberwiseClone
     End Function
 
-
+    Public Sub AddTextOutput(strFileName As String, script As List(Of clsRScriptElement))
+        _lstTextOutput.Add(strFileName)
+        _lstRScriptElements = script
+        _outputType = OutputType.TextOutput
+    End Sub
 
     ''' <summary>
     ''' When adding Output the script must always be added too

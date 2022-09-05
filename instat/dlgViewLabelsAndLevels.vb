@@ -22,7 +22,7 @@ Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataFrame As String
-    Private clsViewHtmlObjectFunction, clsSjTableFunction, clsSelectFunction, clsDeleteLabelsFunction As New RFunction
+    Private clsSjTableFunction, clsSelectFunction, clsDeleteLabelsFunction As New RFunction
     Private clsDummyDataFunction As New RFunction
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -44,8 +44,7 @@ Public Class dlgViewFactorLabels
         Dim lstOfControls As New List(Of Control)
 
         ucrBase.iHelpTopicID = 517
-        'result is a html object. TODO. Check if no longer needed
-        'ucrBase.clsRsyntax.iCallType = 6
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverVariables.SetParameterIsString()
@@ -117,7 +116,6 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub SetDefaults()
-        clsViewHtmlObjectFunction = New RFunction
         clsSjTableFunction = New RFunction
         clsSelectFunction = New RFunction
         clsDeleteLabelsFunction = New RFunction
@@ -143,9 +141,13 @@ Public Class dlgViewFactorLabels
         clsSjTableFunction.AddParameter("show.id", "FALSE")
         clsSjTableFunction.SetAssignTo("variables_sjTable")
 
-        clsViewHtmlObjectFunction.SetRCommand("view_html_object")
-        clsViewHtmlObjectFunction.AddParameter(strParameterName:="html_object", clsRFunctionParameter:=clsSjTableFunction)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewHtmlObjectFunction)
+        clsSjTableFunction.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+                                              strRObjectTypeToAssignTo:=RObjectType.Table,
+                                              strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                              strRDataFrameNameToAddObjectTo:=ucrSelectorViewLabelsAndLevels.strCurrentDataFrame,
+                                              strObjectName:="last_table")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSjTableFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -205,7 +207,7 @@ Public Class dlgViewFactorLabels
             ucrReceiverVariables.Location = New System.Drawing.Point(295, 84)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
             ucrReceiverVariables.bWithQuotes = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewHtmlObjectFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTableFunction)
         Else
             ucrReceiverVariables.Location = New System.Drawing.Point(302, 109)
             ucrReceiverVariables.bWithQuotes = True
@@ -227,4 +229,10 @@ Public Class dlgViewFactorLabels
         ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrSelectorViewLabelsAndLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorViewLabelsAndLevels.ControlValueChanged
+        clsSjTableFunction._rDataFrameNameToAddObjectTo = ucrSelectorViewLabelsAndLevels.strCurrentDataFrame
+    End Sub
+
+
 End Class

@@ -109,6 +109,13 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultType(strRObjectType As String)
+        strDefaultType = strRObjectType
+        SetDefaultName()
+    End Sub
+
+
+
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
         SetDefaultName()
@@ -165,6 +172,8 @@ Public Class ucrInput
                 Else
                     SetName("")
                 End If
+            ElseIf strDefaultType = "Data Frame" Then
+                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
             ElseIf strDefaultType = "Model" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
@@ -179,8 +188,6 @@ Public Class ucrInput
                     'temp disabled as causing bug and not currently needed
                     'SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetTableNames()))
                 End If
-            ElseIf strDefaultType = "Data Frame" Then
-                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
@@ -188,6 +195,8 @@ Public Class ucrInput
                     'temp disabled as causing bug and not currently needed
                     'SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames()))
                 End If
+            ElseIf strDefaultType = RObjectType.Text Then
+                'todo.
             ElseIf strDefaultType = "Filter" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
