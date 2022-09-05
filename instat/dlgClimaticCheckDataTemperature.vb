@@ -597,7 +597,6 @@ Public Class dlgClimaticCheckDataTemperature
         If ucrReceiverElement1.IsEmpty OrElse ucrReceiverElement2.IsEmpty Then
             ucrChkDifference.Enabled = False
             ucrNudDifference.Enabled = False
-            ucrChkDifference.Checked = False
         Else
             ucrChkDifference.Enabled = True
             ucrNudDifference.Enabled = True
