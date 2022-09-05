@@ -195,7 +195,7 @@ Public Class ucrInput
                     'temp disabled as causing bug and not currently needed
                     'SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames()))
                 End If
-            ElseIf strDefaultType = RObjectType.Text Then
+            ElseIf strDefaultType = RObjectType.String_Expression Then
                 'todo.
             ElseIf strDefaultType = "Filter" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then

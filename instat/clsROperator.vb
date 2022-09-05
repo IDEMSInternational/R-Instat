@@ -297,11 +297,17 @@ Public Class ROperator
         Dim clsRParam As RParameter
 
         'RCode properties
+        'todo. why not use the MyBase.Clone() for some of these inherited from the parent properties?
+        clsTempROperator._rObjectToAssignTo = Me._rObjectToAssignTo
+        clsTempROperator._rObjectNameToAssignTo = Me._rObjectNameToAssignTo
+        clsTempROperator._rObjectTypeToAssignTo = Me._rObjectTypeToAssignTo
+        clsTempROperator._rObjectFormatToAssignTo = Me._rObjectFormatToAssignTo
+        clsTempROperator._rDataFrameNameToAddObjectTo = Me._rDataFrameNameToAddObjectTo
+
         clsTempROperator.strAssignTo = strAssignTo
         clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
         clsTempROperator.strAssignToColumn = strAssignToColumn
         clsTempROperator.strAssignToModel = strAssignToModel
-        clsTempROperator.strAssignToGraph = strAssignToGraph
         clsTempROperator.strAssignToTable = strAssignToTable
         clsTempROperator.bToBeAssigned = bToBeAssigned
         clsTempROperator.bIsAssigned = bIsAssigned

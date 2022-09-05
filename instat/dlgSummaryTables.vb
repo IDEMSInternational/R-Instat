@@ -177,8 +177,6 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetText("Display as Decimal")
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
-        'todo. Enable oonce the correct code for saving html tables is added
-        ucrSaveTable.Enabled = False
         ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveType(RObjectType.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
@@ -237,8 +235,6 @@ Public Class dlgSummaryTables
         ucrSaveTable.Reset()
         ucrNudColumnFactors.SetText(1)
         bResetSubdialog = True
-
-        'ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
 
@@ -420,8 +416,7 @@ Public Class dlgSummaryTables
         ucrChkDisplayVariablesAsRows.SetRCode(clsSummaryOperator, bReset)
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
-        'todo
-        'ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
         FillListView()
     End Sub
 
@@ -636,9 +631,5 @@ Public Class dlgSummaryTables
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If
-    End Sub
-
-    Private Sub ucrSelectorSummaryTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSummaryTables.ControlValueChanged
-        clsJoiningPipeOperator._rDataFrameNameToAddObjectTo = ucrSelectorSummaryTables.strCurrentDataFrame
     End Sub
 End Class

@@ -120,7 +120,7 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction.SetRCommand("skim_without_charts")
         clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSkimrFunction.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
-                                            strRObjectTypeToAssignTo:=RObjectType.Text,
+                                            strRObjectTypeToAssignTo:=RObjectType.String_Expression,
                                             strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                             strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
                                             strObjectName:="last_summary")

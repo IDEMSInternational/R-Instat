@@ -109,10 +109,8 @@ Public Class dlgThreeVariablePivotTable
                                     "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
 
-        'todo. Enable oonce the correct code for saving html tables is added
-        ucrSavePivot.Enabled = False
         ucrSavePivot.SetPrefix("pivot_table")
-        ucrSavePivot.SetSaveTypeAsTable()
+        ucrSavePivot.SetSaveType(RObjectType.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSavePivot.SetDataFrameSelector(ucrSelectorPivot.ucrAvailableDataFrames)
         ucrSavePivot.SetIsComboBox()
         ucrSavePivot.SetCheckBoxText("Save Table")
@@ -194,8 +192,7 @@ Public Class dlgThreeVariablePivotTable
         ucrReceiverFactorLevels.SetRCode(clsLevelsDollarOperator, bReset)
         ucrChkNumericVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
-        'todo
-        'ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
+        ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkIncludeSubTotals.SetRCode(clsRPivotTableFunction, bReset)
         bRcodeSet = True
@@ -305,15 +302,6 @@ Public Class dlgThreeVariablePivotTable
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
             ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSavePivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSavePivot.ControlValueChanged
-        'todo
-        'If ucrSavePivot.ucrChkSave.Checked Then
-        '    clsViewHtmlObjectFunction.AddParameter("object_name", Chr(34) & ucrSavePivot.ucrInputComboSave.GetText & Chr(34), iPosition:=1)
-        'Else
-        '    clsViewHtmlObjectFunction.AddParameter("object_name", Chr(34) & "last_table" & Chr(34), iPosition:=1)
-        'End If
     End Sub
 
     Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged

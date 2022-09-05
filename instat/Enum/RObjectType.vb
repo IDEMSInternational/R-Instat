@@ -9,7 +9,7 @@ Public Structure RObjectType
     Public Const Dataframe As String = "dataframe"
     Public Const Column As String = "column"
     Public Const Graph As String = "graph"
-    Public Const Text As String = "text" 'todo. what will this ideally mean. give a suitable name 
+    Public Const String_Expression As String = "string"
     Public Const Table As String = "table"
     Public Const Model As String = "model"
 End Structure

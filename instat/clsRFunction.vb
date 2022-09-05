@@ -215,11 +215,17 @@ Public Class RFunction
         Dim clsRParam As RParameter
 
         'RCode properties
+        'todo. why not use the MyBase.Clone() for some of these inherited from the parent properties?
+        clsRFunction._rObjectToAssignTo = Me._rObjectToAssignTo
+        clsRFunction._rObjectNameToAssignTo = Me._rObjectNameToAssignTo
+        clsRFunction._rObjectTypeToAssignTo = Me._rObjectTypeToAssignTo
+        clsRFunction._rObjectFormatToAssignTo = Me._rObjectFormatToAssignTo
+        clsRFunction._rDataFrameNameToAddObjectTo = Me._rDataFrameNameToAddObjectTo
+
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
         clsRFunction.strAssignToColumn = strAssignToColumn
         clsRFunction.strAssignToModel = strAssignToModel
-        clsRFunction.strAssignToGraph = strAssignToGraph
         clsRFunction.strAssignToTable = strAssignToTable
         clsRFunction.bToBeAssigned = bToBeAssigned
         clsRFunction.bIsAssigned = bIsAssigned

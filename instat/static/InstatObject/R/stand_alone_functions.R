@@ -2604,7 +2604,7 @@ view_object <- function(object, object_format) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
-  } else if (identical(object_format, "text")) {
+  } else if (identical(object_format, "string")) {
     file_name <- view_text_object(object)
   } else if (identical(object_format, "html")) {
     file_name <- view_html_object(object)
