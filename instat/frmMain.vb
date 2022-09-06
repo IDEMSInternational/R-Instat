@@ -2468,7 +2468,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuImportPostgres_Click(sender As Object, e As EventArgs) Handles mnuImportPostgres.Click
-        dlgImportPostgres.ShowDialog()
+        dlgPostgresImport.ShowDialog()
     End Sub
 
     Private Sub mnuImportRapidPro_Click(sender As Object, e As EventArgs) Handles mnuImportRapidPro.Click

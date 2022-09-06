@@ -11,7 +11,7 @@
     <AssemblyName>instat</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
@@ -199,6 +199,16 @@
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.Designer.vb">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.vb" />
+    <Compile Include="dlgPostgresImport.Designer.vb">
+      <DependentUpon>dlgPostgresImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPostgresImport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
@@ -2975,6 +2985,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteSpecial.resx">
       <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPostgresImport.resx">
+      <DependentUpon>dlgPostgresImport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
