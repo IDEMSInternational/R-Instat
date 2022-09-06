@@ -416,6 +416,7 @@ Partial Class frmMain
         Me.mnuFileImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromDatabases = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
@@ -677,7 +678,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3310,12 +3310,21 @@ Partial Class frmMain
         Me.mnuFileImportFromDatabases.Text = "Import From Databases..."
         Me.mnuFileImportFromDatabases.Visible = False
         '
+        'mnuFileImportFromPostgres
+        '
+        Me.mnuFileImportFromPostgres.Enabled = False
+        Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
+        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
+        Me.mnuFileImportFromPostgres.Visible = False
+        '
         'mnuFileImportFromRapidPro
         '
         Me.mnuFileImportFromRapidPro.Enabled = False
         Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
         Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(232, 22)
         Me.mnuFileImportFromRapidPro.Text = "Import From RapidPro"
+        Me.mnuFileImportFromRapidPro.Visible = False
         '
         'mnuFileImportandTidyNetCDFFile
         '
@@ -5099,13 +5108,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuFileImportFromPostgres
-        '
-        Me.mnuFileImportFromPostgres.Enabled = False
-        Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
-        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
-        Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
         '
         'frmMain
         '
