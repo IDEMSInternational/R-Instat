@@ -45,7 +45,7 @@ Partial Class sdgImportFromRapidPro
         Me.MinimizeBox = False
         Me.Name = "sdgImportFromRapidPro"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "sdgImportFromRapidPro"
+        Me.Text = "Import From RapidPro"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
