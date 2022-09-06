@@ -45,7 +45,7 @@ Partial Class dlgImportFromPostgres
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromPostgres"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgImportFromPostgres"
+        Me.Text = "Import From Postgres"
         Me.ResumeLayout(False)
 
     End Sub
