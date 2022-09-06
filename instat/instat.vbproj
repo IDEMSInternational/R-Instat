@@ -11,7 +11,7 @@
     <AssemblyName>instat</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
@@ -201,26 +201,10 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgImportFromPostgres.Designer.vb">
-      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgImportFromPostgres.vb" />
-    <Compile Include="dlgPostgresImport.Designer.vb">
-      <DependentUpon>dlgPostgresImport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPostgresImport.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRapidProImport.Designer.vb">
-      <DependentUpon>dlgRapidProImport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRapidProImport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
@@ -627,12 +611,6 @@
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgMissingOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgRapidProImport.Designer.vb">
-      <DependentUpon>sdgRapidProImport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgRapidProImport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
@@ -2998,14 +2976,8 @@
     <EmbeddedResource Include="dlgPasteSpecial.resx">
       <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPostgresImport.resx">
-      <DependentUpon>dlgPostgresImport.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRapidProImport.resx">
-      <DependentUpon>dlgRapidProImport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
@@ -3111,9 +3083,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgRapidProImport.resx">
-      <DependentUpon>sdgRapidProImport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
