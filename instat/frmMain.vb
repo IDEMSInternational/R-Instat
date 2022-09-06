@@ -2466,4 +2466,12 @@ Public Class frmMain
     Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
         dlgApsimx.ShowDialog()
     End Sub
+
+    Private Sub mnuImportPostgres_Click(sender As Object, e As EventArgs) Handles mnuImportPostgres.Click
+
+    End Sub
+
+    Private Sub mnuImportRapidPro_Click(sender As Object, e As EventArgs) Handles mnuImportRapidPro.Click
+
+    End Sub
 End Class
