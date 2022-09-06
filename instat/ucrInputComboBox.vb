@@ -128,7 +128,7 @@ Public Class ucrInputComboBox
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
-            Case RObjectType.Graph, RObjectType.String_Expression
+            Case RObjectType.Graph, RObjectType.Summary
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     'todo. implement

@@ -9,7 +9,8 @@ Public Structure RObjectType
     Public Const Dataframe As String = "dataframe"
     Public Const Column As String = "column"
     Public Const Graph As String = "graph"
-    Public Const String_Expression As String = "string"
     Public Const Table As String = "table"
     Public Const Model As String = "model"
+    Public Const Summary As String = "summary"
+    Public Const Structure_expression As String = "structure"
 End Structure

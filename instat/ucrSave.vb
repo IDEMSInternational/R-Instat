@@ -404,7 +404,7 @@ Public Class ucrSave
                 ucrInputComboSave.SetItemsTypeAsGraphs()
                 ucrInputTextSave.SetDefaultTypeAsGraph()
                 btnColumnPosition.Visible = False
-            Case RObjectType.String_Expression
+            Case RObjectType.Summary
                 ucrInputComboSave.SetDefaultType(_strRObjectType)
                 ucrInputComboSave.SetItemsType(_strRObjectType)
                 ucrInputTextSave.SetDefaultType(_strRObjectType)
@@ -663,7 +663,7 @@ Public Class ucrSave
                                 End If
                             Case RObjectType.Dataframe
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
-                            Case RObjectType.Graph, RObjectType.String_Expression, RObjectType.Table
+                            Case RObjectType.Graph, RObjectType.Summary, RObjectType.Table
                                 If _strRObjectType = RObjectType.Table AndAlso String.IsNullOrEmpty(Me._strRObjectFormat) Then
                                     'todo. temporary check until all table dialogs are modified to set _strRObjectFormat  
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName,
