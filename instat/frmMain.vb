@@ -2472,6 +2472,5 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuImportRapidPro_Click(sender As Object, e As EventArgs) Handles mnuImportRapidPro.Click
-        dlgImportRapidPro.ShowDialog()
     End Sub
 End Class
