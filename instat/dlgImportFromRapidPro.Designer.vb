@@ -43,7 +43,7 @@ Partial Class dlgImportFromRapidPro
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgImportFromRapidPro"
+        Me.Name = "Import From RapidPro"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "dlgImportFromRapidPro"
         Me.ResumeLayout(False)
