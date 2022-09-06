@@ -88,9 +88,9 @@ Partial Class dlgConversions
         Me.rdoDayLength.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDayLength.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoDayLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDayLength.Location = New System.Drawing.Point(127, 21)
+        Me.rdoDayLength.Location = New System.Drawing.Point(98, 21)
         Me.rdoDayLength.Name = "rdoDayLength"
-        Me.rdoDayLength.Size = New System.Drawing.Size(90, 28)
+        Me.rdoDayLength.Size = New System.Drawing.Size(119, 28)
         Me.rdoDayLength.TabIndex = 2
         Me.rdoDayLength.Text = "Day Length"
         Me.rdoDayLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -106,7 +106,7 @@ Partial Class dlgConversions
         Me.rdoUnits.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoUnits.ForeColor = System.Drawing.SystemColors.ControlText
         Me.rdoUnits.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnits.Location = New System.Drawing.Point(39, 21)
+        Me.rdoUnits.Location = New System.Drawing.Point(9, 21)
         Me.rdoUnits.Name = "rdoUnits"
         Me.rdoUnits.Size = New System.Drawing.Size(90, 28)
         Me.rdoUnits.TabIndex = 1
@@ -417,7 +417,7 @@ Partial Class dlgConversions
         Me.rdoCoordinates.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoCoordinates.Location = New System.Drawing.Point(215, 21)
         Me.rdoCoordinates.Name = "rdoCoordinates"
-        Me.rdoCoordinates.Size = New System.Drawing.Size(90, 28)
+        Me.rdoCoordinates.Size = New System.Drawing.Size(109, 28)
         Me.rdoCoordinates.TabIndex = 3
         Me.rdoCoordinates.Text = "Coordinates"
         Me.rdoCoordinates.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -591,9 +591,9 @@ Partial Class dlgConversions
         'ucrPnlConversions
         '
         Me.ucrPnlConversions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlConversions.Location = New System.Drawing.Point(30, 21)
+        Me.ucrPnlConversions.Location = New System.Drawing.Point(1, 21)
         Me.ucrPnlConversions.Name = "ucrPnlConversions"
-        Me.ucrPnlConversions.Size = New System.Drawing.Size(376, 28)
+        Me.ucrPnlConversions.Size = New System.Drawing.Size(423, 28)
         Me.ucrPnlConversions.TabIndex = 0
         '
         'ucrSelectorConversions
@@ -614,7 +614,7 @@ Partial Class dlgConversions
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 447)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
         'ucrInputMinute
@@ -652,9 +652,9 @@ Partial Class dlgConversions
         Me.rdoYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoYear.Location = New System.Drawing.Point(303, 21)
+        Me.rdoYear.Location = New System.Drawing.Point(323, 21)
         Me.rdoYear.Name = "rdoYear"
-        Me.rdoYear.Size = New System.Drawing.Size(90, 28)
+        Me.rdoYear.Size = New System.Drawing.Size(101, 28)
         Me.rdoYear.TabIndex = 27
         Me.rdoYear.Text = "Year"
         Me.rdoYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
