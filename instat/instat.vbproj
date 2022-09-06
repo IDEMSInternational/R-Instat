@@ -217,6 +217,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRapidProImport.Designer.vb">
+      <DependentUpon>dlgRapidProImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRapidProImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
     <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
     <Compile Include="Interface\IDataViewGrid.vb" />
@@ -621,6 +627,12 @@
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgRapidProImport.Designer.vb">
+      <DependentUpon>sdgRapidProImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgRapidProImport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
@@ -2992,6 +3004,9 @@
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRapidProImport.resx">
+      <DependentUpon>dlgRapidProImport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -3096,6 +3111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgRapidProImport.resx">
+      <DependentUpon>sdgRapidProImport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
