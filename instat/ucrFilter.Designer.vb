@@ -109,9 +109,9 @@ Partial Class ucrFilter
         'cmdToggleSelectAll
         '
         Me.cmdToggleSelectAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdToggleSelectAll.Location = New System.Drawing.Point(674, 363)
+        Me.cmdToggleSelectAll.Location = New System.Drawing.Point(598, 363)
         Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
-        Me.cmdToggleSelectAll.Size = New System.Drawing.Size(93, 23)
+        Me.cmdToggleSelectAll.Size = New System.Drawing.Size(169, 23)
         Me.cmdToggleSelectAll.TabIndex = 7
         Me.cmdToggleSelectAll.Text = "Select All Levels"
         Me.cmdToggleSelectAll.UseVisualStyleBackColor = True
