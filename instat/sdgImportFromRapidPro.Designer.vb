@@ -22,13 +22,24 @@ Partial Class sdgImportFromRapidPro
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
+        '
+        'UcrButtonsSubdialogue1
+        '
+        Me.UcrButtonsSubdialogue1.AutoSize = True
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(233, 204)
+        Me.UcrButtonsSubdialogue1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
+        Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(335, 42)
+        Me.UcrButtonsSubdialogue1.TabIndex = 1
         '
         'sdgImportFromRapidPro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.UcrButtonsSubdialogue1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -36,6 +47,9 @@ Partial Class sdgImportFromRapidPro
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "sdgImportFromRapidPro"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+
+    Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
 End Class
