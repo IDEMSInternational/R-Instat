@@ -14,14 +14,15 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+'todo. delete this control. No longer used
 Public Class ucrSaveModel
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        ucrInputModelName.SetDefaultTypeAsModel()
-        ucrInputModelName.SetItemsTypeAsModels()
+        'ucrInputModelName.SetDefaultTypeAsModel()
+        'ucrInputModelName.SetItemsTypeAsModels()
     End Sub
 
     Public Event CheckedChanged(bChecked As Boolean)

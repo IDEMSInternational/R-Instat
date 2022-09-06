@@ -120,7 +120,7 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction.SetRCommand("skim_without_charts")
         clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSkimrFunction.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
-                                            strRObjectTypeToAssignTo:=RObjectType.Summary,
+                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                             strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                             strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
                                             strObjectName:="last_summary")
@@ -137,7 +137,7 @@ Public Class dlgOneVariableSummarise
         clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
         clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
         clsMmtableOperator.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
-                                               strRObjectTypeToAssignTo:=RObjectType.Table,
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
                                                strObjectName:="last_summary")
@@ -172,7 +172,7 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction.AddParameter("maxsum", 7)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsSummaryFunction.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
-                                              strRObjectTypeToAssignTo:=RObjectType.Table,
+                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                               strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                               strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
                                               strObjectName:="last_summary")

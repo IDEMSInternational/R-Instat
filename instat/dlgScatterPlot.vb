@@ -117,7 +117,7 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
-        ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectType.Graph,
+        ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
                                        strRObjectFormat:=RObjectFormat.Image)
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
@@ -211,7 +211,7 @@ Public Class dlgScatterPlot
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
 
         clsBaseOperator.SetAssignToRObject(strRObjectToAssignTo:="last_graph",
-                                           strRObjectTypeToAssignTo:=RObjectType.Graph,
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Image,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorForScatter.strCurrentDataFrame,
                                            strObjectName:="last_graph")

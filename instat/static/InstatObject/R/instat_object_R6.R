@@ -533,20 +533,26 @@ DataBook$set("public", "get_columns_from_data", function(data_name, col_names, f
 }
 )
 
-#todo. change the internal = FALSE by default after refactoring all functions that use this function
-DataBook$set("public", "add_object", function(data_name, object, object_name, object_type, object_format, internal = TRUE) {
+DataBook$set("public", "add_object", function(data_name, object_name, object_type_label, object_format, object, internal = TRUE) {
   
-  #if object type has been passed then use the new code implementation
-  if(!missing(object_type) && !missing(object_format) ){
+  #if object type and object format has been passed then use the new code implementation
+  if(!missing(object_type_label) && !missing(object_format) ){
     
-    if (internal) {
-      #todo. investigate, which objects will have no data_name and use this function for storage
+    if (internal) { 
       if(missing(data_name)) {
-        if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
-        if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
-        private$.objects[[object_name]] <- object
+        if(missing(object_name)){
+          object_name = next_default_item("object", names(private$.objects))
+        } 
+        
+        #notify user
+        if(object_name %in% names(private$.objects)){
+          message(paste("An object called", object_name, "already exists. It will be replaced."))
+        }
+        
+        #add the object
+        private$.objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
       } else{ 
-        self$get_data_objects(data_name)$add_object(object = object, object_name = object_name, object_type = object_type, object_format = object_format)
+        self$get_data_objects(data_name)$add_object(object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object)
       }
     } else {
       
@@ -555,29 +561,28 @@ DataBook$set("public", "add_object", function(data_name, object, object_name, ob
       #if we store it in a data structure then we will NOT need the "internal" parameter
       
       #for graphs, create a separate .graph_data_book data book if it's not yet created
-      if(identical(object_type, "graph")){
+      if(identical(object_type_label, "graph")){
         if (!exists(".graph_data_book")){
           self$create_graph_data_book()
         } 
-        .graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, object_format = object_format, internal = TRUE)
+        .graph_data_book$add_object(data_name = data_name, object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object, internal = TRUE)
       }else{
-        self$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, object_format = object_format, internal = TRUE)
+        self$add_object(data_name = data_name, object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object, internal = TRUE)
       }
-      
       
     }
     
     #after adding the graph. set it as last graph contents
-    if(identical(object_type,"graph")){
+    if(identical(object_type_label,"graph")){
       last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
       if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
     }
     
-    #todo. later delete
+    #todo. later delete return statement after all internal functions have been refactored to use this new implementation
     return()
   }
   
-  #todo. deprecated. Delete after do the necessary refactoring.
+  #todo. deprecated. Delete after doing the necessary refactoring.
   if (internal) {
     if(missing(data_name)) {
       if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
@@ -592,51 +597,6 @@ DataBook$set("public", "add_object", function(data_name, object, object_name, ob
 }
 ) 
 
-#todo. remove the s after deleting the above add_object
-DataBook$set("public", "add_objects", function(data_name, object, object_name, object_type, internal = FALSE) {
-  
-  if(missing(object_type) ){
-    stop("object type missing")
-  }
- 
-  
-  if (internal) {
-    #todo. investigate, which objects will have no data_name and use this function for storage
-    if(missing(data_name)) {
-      if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
-      if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
-      private$.objects[[object_name]] <- object
-    } else{ 
-      self$get_data_objects(data_name)$add_object(object = object, object_name = object_name, object_type = object_type)
-    }
-  } else {
-    
-    #todo. should every other big object have their own data book or we use one data book for storing all the objects?
-    #or we store all objects in a separate data structure that is not a data book?
-    
-    #for graphs, create a separate .graph_data_book data book if it's not yet created
-    if(identical(object_type, "graph")){
-      if (!exists(".graph_data_book")){
-        self$create_graph_data_book()
-      } 
-      .graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, internal = TRUE)
-    }else{
-      #todo change to self$add_object eventually
-      self$add_object(data_name = data_name, object = object, object_name = object_name, object_type = object_type, internal = TRUE)
-    }
-    
-    
-  }
-  
-  #after adding the graph. set it as last graph contents
-  if(identical(object_type,"graph")){
-    last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
-    if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
-  }
-  
-}
-)
-
 DataBook$set("public", "create_graph_data_book", function() {
   .graph_data_book <- DataBook$new()
   df_names <- self$get_data_names()
@@ -650,7 +610,67 @@ DataBook$set("public", "create_graph_data_book", function() {
 }
 )
 
-DataBook$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, internal = TRUE, ...) {
+DataBook$set("public", "get_objects", function(data_name, object_name, object_type_label, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, internal = TRUE, ...) {
+ 
+  if(!missing(object_type_label)){
+    
+    if (!internal & exists(".graph_data_book")) {
+      out <- .graph_data_book$get_objects(data_name = data_name, object_name = object_name, object_type_label = object_type_label, include_overall = include_overall, as_list = as_list, include_empty = include_empty, force_as_list = force_as_list, print_graph = print_graph, silent = silent, internal = TRUE, ... = ...)
+      if (!is.null(out)){
+        return(out)
+      }
+    }else {
+      #TODO implement force_as_list in all cases
+      if(missing(data_name)) {
+        if(!missing(object_name)) {
+          curr_objects <- private$.objects[self$get_object_names(data_name = overall_label, object_type_label = object_type_label)]
+          if(!(object_name %in% names(curr_objects))) {
+              stop(object_name, "not found.")
+            }else{
+              out <- curr_objects[[object_name]]
+            } 
+        }else{
+          out <- sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(object_type_label = object_type_label))
+          if(include_overall){
+            out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, object_type_label = object_type_label)]
+          } 
+          if(!include_empty){
+            out <- out[sapply(out, function(x) length(x) > 0)]
+          } 
+        }
+        
+         return(out)
+        
+      }else {
+        if(data_name == overall_label) {
+          curr_objects <- private$.objects[self$get_object_names(data_name = data_name, object_type_label = object_type_label)]
+          if(!missing(object_name)) {
+            if(!(object_name %in% names(curr_objects))){
+              stop(object_name, "not found.")
+            }else{
+              out <- curr_objects[[object_name]]
+            } 
+          }else{
+            out <- curr_objects
+          } 
+        }else{
+          out <- self$get_data_objects(data_name)$get_objects(object_name = object_name, object_type_label = object_type_label, force_as_list = force_as_list)
+        }
+        
+        if(as_list) {
+          lst = list()
+          lst[[data_name]][[object_name]] <- out
+          return(lst)
+        }else {
+           return(out)
+        }
+      }
+    }
+    
+    
+  }
+  
+  #todo. deprecated. Delete after doing the necessary refactoring.
   if (!internal & exists(".graph_data_book")) {
     out <- .graph_data_book$get_objects(data_name = data_name, object_name = object_name, include_overall = include_overall, as_list = as_list, type = type, include_empty = include_empty, force_as_list = force_as_list, print_graph = print_graph, silent = silent, internal = TRUE, ... = ...)
     if (!is.null(out)) return(out)
@@ -673,8 +693,8 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
         else return(out)
       }
       else return(out)
-    }
-    else {
+      
+    }else {
       if(data_name == overall_label) {
         curr_objects = private$.objects[self$get_object_names(data_name = data_name, type = type)]
         if(!missing(object_name)) {
@@ -682,14 +702,15 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
           else out = curr_objects[[object_name]]
         }
         else out = curr_objects
+      }else{
+        out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
       }
-      else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
+      
       if(as_list) {
         lst = list()
         lst[[data_name]][[object_name]] <- out
         return(lst)
-      }
-      else {
+      }else {
         if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair", "recordedplot") %in% class(out)))) return(print(out))
         else return(out)
       }
@@ -698,7 +719,65 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
 }
 )
 
-DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
+DataBook$set("public", "get_object_names", function(data_name, object_type_label, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
+ 
+  if(!missing(object_type_label)){
+    
+    if(!internal && exists(".graph_data_book")){
+      return(.graph_data_book$get_object_names(data_name = data_name, object_type_label = object_type_label,include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
+    }
+    
+    if(missing(data_name)) {
+      if(missing(object_type_label)){
+        out <- sapply(self$get_data_objects(), function(x) x$get_object_names())
+      }else{
+        out <- sapply(self$get_data_objects(), function(x) x$get_object_names(object_type_label = object_type_label))
+      } 
+      #temp disabled as causes a bug
+      #if(include_overall) out[[overall_label]] <- overall_object_names
+      if(!include_empty){
+        out <- out[sapply(out, function(x) length(x) > 0)]
+      } 
+      
+      if(as_list){
+        out <- as.list(out)
+      } 
+      return(out)
+    }else {
+      if(data_name == overall_label) {
+        
+        if(object_type_label == ""){
+          overall_object_names <- names(private$.objects)
+        }else {
+          #todo. check if type is recognised?
+          overall_object_names <- names(private$.objects)[sapply(private$.objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
+        }
+        
+        if(length(excluded_items) > 0) {
+          excluded_indices <- which(overall_object_names %in% excluded_items)
+          if(length(excluded_indices) != length(excluded_items)){
+            warning("Some of the excluded_items were not found in the list of objects")
+          } 
+          if(length(excluded_indices) > 0){
+            overall_object_names <- overall_object_names[-excluded_indices]
+          } 
+        }
+        if(as_list) {
+          lst = list()
+          lst[[overall_label]] <- overall_object_names
+          return(lst)
+        }else{
+          return(overall_object_names)
+        } 
+      }else{
+        return(self$get_data_objects(data_name)$get_object_names(object_type_label, as_list = as_list, excluded_items = excluded_items))
+      } 
+    }
+    
+  }
+  
+  
+  #todo. deprecated. Delete after doing the necessary refactoring.
   if (!internal && exists(".graph_data_book")) return(.graph_data_book$get_object_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, type = type, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
   if(type == "") overall_object_names = names(private$.objects)
   else {
@@ -786,26 +865,31 @@ DataBook$set("public", "get_from_object", function(data_name, object_name, value
 }
 )
 
+#deprecated
 DataBook$set("public", "add_model", function(data_name, model, model_name) {
   self$add_object(data_name = data_name, object = model, object_name = model_name)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_models", function(data_name, model_name, include_overall = TRUE, force_as_list = FALSE) {
   self$get_objects(data_name = data_name, object_name = model_name, include_overall = include_overall, type = model_label, force_as_list = force_as_list)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_model_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = model_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_from_model", function(data_name, model_name, value1, value2, value3) {
   self$get_from_object(data_name = data_name, object_name = model_name, value1 = value1, value2 = value2, value3 = value3)
 }
 )
 
+#deprecated
 DataBook$set("public", "add_graph", function(data_name, graph, graph_name, internal = FALSE) {
   if (internal) {
     self$add_object(data_name = data_name, object = graph, object_name = graph_name)
@@ -818,37 +902,47 @@ DataBook$set("public", "add_graph", function(data_name, graph, graph_name, inter
 }
 )
 
+#deprecated
 DataBook$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE, print_graph = TRUE, internal = FALSE) {
   self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list, print_graph = print_graph, internal = internal)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = FALSE) {
   if (!internal & exists(".graph_data_book")) .graph_data_book$get_graph_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE)
   else self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = internal)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_last_graph", function(print_graph = TRUE, internal = FALSE) {
   if (!internal && exists(".graph_data_book")) .graph_data_book$get_last_graph(print_graph = print_graph, internal = TRUE)
   else {
     if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
-      self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], type = graph_label, print_graph = print_graph)
+      graph_object <- self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], object_type_label = graph_label)
+      if(print_graph){
+        print(graph_object)
+      }
+      return(graph_object)
     }
   }
 }
 )
 
+#deprecated
 DataBook$set("public", "add_surv", function(data_name, surv, surv_name) {
   self$add_object(data_name = data_name, object =surv, object_name =surv_name)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_surv", function(data_name, surv_name, include_overall = TRUE, force_as_list = FALSE) {
   self$get_objects(data_name = data_name, object_name = surv_name, include_overall = include_overall, type = surv_label, force_as_list = force_as_list)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_surv_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = surv_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
@@ -859,11 +953,13 @@ DataBook$set("public", "add_table", function(data_name, table, table_name) {
 }
 )
 
+#deprecated
 DataBook$set("public", "get_tables", function(data_name, table_name, include_overall = TRUE, force_as_list = FALSE) {
   self$get_objects(data_name = data_name, object_name = table_name, include_overall = include_overall, type = table_label, force_as_list = force_as_list)
 }
 )
 
+#deprecated
 DataBook$set("public", "get_table_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = table_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }

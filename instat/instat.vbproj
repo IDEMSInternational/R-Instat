@@ -223,7 +223,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
-    <Compile Include="Enum\RObjectType.vb" />
+    <Compile Include="Enum\RObjectLabel.vb" />
     <Compile Include="frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>

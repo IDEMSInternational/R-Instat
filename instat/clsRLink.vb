@@ -877,7 +877,9 @@ Public Class RLink
 
             ElseIf iCallType = 0 Then 'if script output should be ignored. to do. deprecated
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-            ElseIf iCallType = 3 Then 'else if output should be returned as a graph
+            ElseIf iCallType = 3 Then
+                'else if output should be returned as a graph.
+                'todo. deprecate this block. currently used view last graph mainly and viewing graph objects dialog
 
                 If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                     'run R command for taking a snapshot of the graph image
@@ -1100,20 +1102,22 @@ Public Class RLink
     '''
     ''' <param name="bAsPlotly">    (Optional) If true then view last graph as plotly. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False, Optional bInRViewer As Boolean = False)
+    Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False,
+                             Optional bInRViewer As Boolean = False)
         Dim clsLastGraph As New RFunction
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
-
+        clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
         If bAsPlotly Then
             Dim clsViewObjectFunction As New RFunction
             Dim clsInteractivePlot As New RFunction
-            clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
+
             clsInteractivePlot.SetPackageName("plotly")
             clsInteractivePlot.SetRCommand("ggplotly")
             clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
 
             clsViewObjectFunction.SetRCommand("view_object")
-            clsViewObjectFunction.AddParameter(strParameterName:="object", clsRFunctionParameter:=clsInteractivePlot)
+            clsViewObjectFunction.AddParameter(strParameterName:="object",
+                                               clsRFunctionParameter:=clsInteractivePlot)
             clsViewObjectFunction.AddParameter(strParameterName:="object_format",
                                                strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
@@ -1124,12 +1128,12 @@ Public Class RLink
             'store the current set graph display option, to restore after display
             strGlobalGraphDisplayOption = Me.strGraphDisplayOption
             Me.strGraphDisplayOption = "view_R_viewer"
+            clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
             RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInLog:=False, strComment:="View last graph", bSeparateThread:=False)
             'restore the graph display option
             Me.strGraphDisplayOption = strGlobalGraphDisplayOption
         Else
             Dim clsViewObjectFunction As New RFunction
-            clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
             clsViewObjectFunction.SetRCommand("view_object")
             clsViewObjectFunction.AddParameter(strParameterName:="object", clsRFunctionParameter:=clsLastGraph)
             clsViewObjectFunction.AddParameter(strParameterName:="object_format",
@@ -1890,27 +1894,6 @@ Public Class RLink
         Return iColumnCount
     End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's models. </summary>
-    '''
-    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
-    '''
-    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's models. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
-        Return GetNames(strDataFrameName, "$get_model_names")
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's tables. </summary>
-    '''
-    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
-    '''
-    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's tables. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetTableNames(Optional strDataFrameName As String = "") As List(Of String)
-        Return GetNames(strDataFrameName, "$get_table_names")
-    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's filters. </summary>
@@ -1933,27 +1916,7 @@ Public Class RLink
     Public Function GetColumnSelectionNames(strDataFrameName As String) As List(Of String)
         Return GetNames(strDataFrameName, "$get_column_selection_names")
     End Function
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's graphs. </summary>
-    '''
-    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
-    '''
-    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's graphs. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetGraphNames(Optional strDataFrameName As String = "") As List(Of String)
-        Return GetNames(strDataFrameName, "$get_graph_names")
-    End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's survs. </summary>
-    '''
-    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
-    '''
-    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
-        Return GetNames(strDataFrameName, "$get_surv_names")
-    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's keys. </summary>
@@ -2002,6 +1965,35 @@ Public Class RLink
             lstNames = expNames.AsCharacter.ToArray.ToList
         End If
         Return lstNames
+    End Function
+
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''  Gets the names of the <paramref name="strDataFrameName"/> data frame's objects. 
+    ''' </summary>
+    ''' <param name="strDataFrameName">(Optional) The data frame name.</param>
+    ''' <param name="strRObjectTypeLabel">(Optional) The object type label to get.</param>
+    ''' <returns></returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetObjectNames(Optional strDataFrameName As String = "",
+                                   Optional strRObjectTypeLabel As String = "") As List(Of String)
+        Dim lstObjectNames As New List(Of String)
+        Dim clsGetObjectNamesRFunction As New RFunction
+        Dim expNames As SymbolicExpression
+
+        clsGetObjectNamesRFunction.SetRCommand(strInstatDataObject & "$get_object_names")
+        If Not String.IsNullOrEmpty(strDataFrameName) Then
+            clsGetObjectNamesRFunction.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        If Not String.IsNullOrEmpty(strRObjectTypeLabel) Then
+            clsGetObjectNamesRFunction.AddParameter("object_type_label", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expNames = RunInternalScriptGetValue(clsGetObjectNamesRFunction.ToScript(), bSilent:=True)
+        If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstObjectNames = expNames.AsCharacter.ToArray.ToList
+        End If
+        Return lstObjectNames
     End Function
 
 

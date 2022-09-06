@@ -2604,7 +2604,7 @@ view_object <- function(object, object_format) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
-  } else if (identical(object_format, "string")) {
+  } else if (identical(object_format, "text")) {
     file_name <- view_text_object(object)
   } else if (identical(object_format, "html")) {
     file_name <- view_html_object(object)
@@ -2621,7 +2621,7 @@ view_object <- function(object, object_format) {
 view_graph_object <- function(graph_object){
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
-  r_viewer <- getOption("viewer")
+  r_viewer <- base::getOption("viewer")
   if (!is.null(r_viewer)) {
     #When print command is called in R-Studio, a temp file is
     #automatically created. 
@@ -2668,7 +2668,7 @@ view_graph_object <- function(graph_object){
 view_text_object <- function(text_object){
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
-  r_viewer <- getOption("viewer")
+  r_viewer <- base::getOption("viewer")
   if (!is.null(r_viewer)) {
     #When print command is called in R-Studio, a temp file is
     #automatically created. 
@@ -2701,7 +2701,7 @@ view_text_object <- function(text_object){
 view_html_object <- function(html_object){
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
-  r_viewer <- getOption("viewer")
+  r_viewer <- base::getOption("viewer")
   if (!is.null(r_viewer)) {
     #When print command is called in R-Studio, a temp file is
     #automatically created. 

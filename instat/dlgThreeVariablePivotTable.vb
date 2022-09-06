@@ -110,7 +110,7 @@ Public Class dlgThreeVariablePivotTable
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
 
         ucrSavePivot.SetPrefix("pivot_table")
-        ucrSavePivot.SetSaveType(RObjectType.Table, strRObjectFormat:=RObjectFormat.Html)
+        ucrSavePivot.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSavePivot.SetDataFrameSelector(ucrSelectorPivot.ucrAvailableDataFrames)
         ucrSavePivot.SetIsComboBox()
         ucrSavePivot.SetCheckBoxText("Save Table")
@@ -175,7 +175,7 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.SetAssignTo("last_table")
 
         clsRPivotTableFunction.SetAssignToRObject(strRObjectToAssignTo:="last_table",
-                                                   strRObjectTypeToAssignTo:=RObjectType.Table,
+                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                    strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                    strRDataFrameNameToAddObjectTo:=ucrSelectorPivot.strCurrentDataFrame,
                                                    strObjectName:="last_table")

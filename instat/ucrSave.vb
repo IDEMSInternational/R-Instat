@@ -57,7 +57,7 @@ Public Class ucrSave
     ''' <summary>   Type of object saved by this control 
     '''             (valid values are: 'column', 'dataframe', 'graph', model', 'surv', 'table') 
     '''             </summary>
-    Private _strRObjectType As String = "column"
+    Private _strRObjectLabel As String = "column"
     Private _strRObjectFormat As String
 
     ''' <summary>   Prefix used for the default name displayed in the text/combo box </summary>
@@ -170,7 +170,7 @@ Public Class ucrSave
     Private Sub SetDefaults()
         ucrInputTextSave.Reset()
         ucrInputComboSave.Reset()
-        SetSaveType(Me._strRObjectType, Me._strRObjectFormat)
+        SetSaveType(Me._strRObjectLabel, Me._strRObjectFormat)
         LabelOrCheckboxSettings()
         UpdateRCode()
     End Sub
@@ -386,43 +386,28 @@ Public Class ucrSave
     '''                         An invalid value throws a developer error.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetSaveType(strRObjectType As String, Optional strRObjectFormat As String = "")
-        Me._strRObjectType = strRObjectType
+        Me._strRObjectLabel = strRObjectType
         Me._strRObjectFormat = strRObjectFormat
-        Select Case Me._strRObjectType
-            Case RObjectType.Column
+        Select Case Me._strRObjectLabel
+            Case RObjectTypeLabel.Column
                 ucrInputComboSave.SetDefaultTypeAsColumn()
                 ucrInputComboSave.SetItemsTypeAsColumns()
                 ucrInputTextSave.SetDefaultTypeAsColumn()
                 btnColumnPosition.Visible = True
-            Case RObjectType.Dataframe
+            Case RObjectTypeLabel.Dataframe
                 ucrInputComboSave.SetDefaultTypeAsDataFrame()
                 ucrInputComboSave.SetItemsTypeAsDataFrames()
                 ucrInputTextSave.SetDefaultTypeAsDataFrame()
                 btnColumnPosition.Visible = False
-            Case RObjectType.Graph
-                ucrInputComboSave.SetDefaultTypeAsGraph()
-                ucrInputComboSave.SetItemsTypeAsGraphs()
-                ucrInputTextSave.SetDefaultTypeAsGraph()
-                btnColumnPosition.Visible = False
-            Case RObjectType.Summary
-                ucrInputComboSave.SetDefaultType(_strRObjectType)
-                ucrInputComboSave.SetItemsType(_strRObjectType)
-                ucrInputTextSave.SetDefaultType(_strRObjectType)
-                btnColumnPosition.Visible = False
-            Case "model"
-                ucrInputComboSave.SetDefaultTypeAsModel()
-                ucrInputComboSave.SetItemsTypeAsModels()
-                ucrInputTextSave.SetDefaultTypeAsModel()
-                btnColumnPosition.Visible = False
-            Case "surv"
-                ucrInputComboSave.SetDefaultTypeAsSurv()
-                ucrInputComboSave.SetItemsTypeAsSurv()
-                ucrInputTextSave.SetDefaultTypeAsSurv()
-                btnColumnPosition.Visible = False
-            Case "table"
-                ucrInputComboSave.SetDefaultTypeAsTable()
-                ucrInputComboSave.SetItemsTypeAsTables()
-                ucrInputTextSave.SetDefaultTypeAsTable()
+            Case RObjectTypeLabel.Graph,
+                 RObjectTypeLabel.Table,
+                 RObjectTypeLabel.Model,
+                 RObjectTypeLabel.Structure_label,
+                 RObjectTypeLabel.Summary
+                'for objects that are shown in the output viewer. do the following
+                ucrInputComboSave.SetDefaultRObjectTypeLabel(_strRObjectLabel)
+                ucrInputComboSave.SetRObjectItemsTypeLabel(_strRObjectLabel)
+                ucrInputTextSave.SetDefaultRObjectTypeLabel(_strRObjectLabel)
                 btnColumnPosition.Visible = False
             Case "key"
                 ucrInputComboSave.SetDefaultTypeAsKey()
@@ -448,30 +433,34 @@ Public Class ucrSave
     End Sub
     ''' <summary>   
     ''' Sets save type as graph. 
-    ''' todo. deprecated
+    ''' todo. deprecate
     ''' </summary>
     Public Sub SetSaveTypeAsGraph()
-        SetSaveType(strRObjectType:=RObjectType.Graph, strRObjectFormat:=RObjectFormat.Image)
+        'assumption is by default a model is in image format
+        SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
     End Sub
     ''' <summary>   
     ''' Sets save type as model. 
-    ''' todo. deprecated
+    ''' todo. deprecate
     ''' </summary>
     Public Sub SetSaveTypeAsModel()
-        SetSaveType("model")
+        'assumption is by default a model is in text format
+        SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
     ''' <summary>   
     ''' Sets save type as surv. 
-    ''' todo. 
+    ''' todo. deprecate
     ''' </summary>
     Public Sub SetSaveTypeAsSurv()
-        SetSaveType("surv")
+        'assumption is by default a survival is in text format
+        SetSaveType(strRObjectType:=RObjectTypeLabel.Structure_label, strRObjectFormat:=RObjectFormat.Text)
     End Sub
     ''' <summary>   
     ''' Sets save type as table. 
-    ''' todo. </summary>
+    ''' todo. deprecate </summary>
     Public Sub SetSaveTypeAsTable()
-        SetSaveType("table")
+        'assumption is by default a table is in text format
+        SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
     End Sub
     ''' <summary>   Sets save type as key. </summary>
     Public Sub SetSaveTypeAsKey()
@@ -529,7 +518,7 @@ Public Class ucrSave
         btnColumnPosition.Visible = False
 
         'always hide position button if save type is not a column
-        If _strRObjectType = "column" Then
+        If _strRObjectLabel = "column" Then
             btnColumnPosition.Visible = ucrChkSave.Checked
         End If
 
@@ -582,7 +571,7 @@ Public Class ucrSave
     '''                         position variables. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
-        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
+        If _strRObjectLabel = "key" OrElse _strRObjectLabel = "link" Then
             MyBase.UpdateRCode(bReset)
         Else
             UpdateAssignTo()
@@ -595,7 +584,7 @@ Public Class ucrSave
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
-        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
+        If _strRObjectLabel = "key" OrElse _strRObjectLabel = "link" Then
             MyBase.UpdateAllParameters()
         Else
             UpdateAssignTo()
@@ -648,8 +637,8 @@ Public Class ucrSave
                     strDataName = If(ucrDataFrameSelector IsNot Nothing, ucrDataFrameSelector.cboAvailableDataFrames.Text, strGlobalDataName)
                     strSaveName = If(bShowCheckBox AndAlso Not ucrChkSave.Checked, strAssignToIfUnchecked, GetText())
                     If strSaveName <> "" Then
-                        Select Case _strRObjectType
-                            Case RObjectType.Column
+                        Select Case _strRObjectLabel
+                            Case RObjectTypeLabel.Column
                                 'todo 25/03/2021. because of this new functionailty added. Should we rename this function from UpdateAssignTo() to something else
                                 If bSetPositionParamsDirectly Then
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, strAdjacentColumn:=strAdjacentColumn)
@@ -661,10 +650,12 @@ Public Class ucrSave
                                         clsTempCode.AddParameter(strParameterName:="adjacent_column", strParameterValue:=strAdjacentColumn)
                                     End If
                                 End If
-                            Case RObjectType.Dataframe
+                            Case RObjectTypeLabel.Dataframe
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
-                            Case RObjectType.Graph, RObjectType.Summary, RObjectType.Table
-                                If _strRObjectType = RObjectType.Table AndAlso String.IsNullOrEmpty(Me._strRObjectFormat) Then
+                            Case RObjectTypeLabel.Graph,
+                                 RObjectTypeLabel.Summary,
+                                 RObjectTypeLabel.Table
+                                If Me._strRObjectLabel = RObjectTypeLabel.Table AndAlso String.IsNullOrEmpty(Me._strRObjectFormat) Then
                                     'todo. temporary check until all table dialogs are modified to set _strRObjectFormat  
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName,
                                                             strTempDataframe:=strDataName,
@@ -672,7 +663,7 @@ Public Class ucrSave
                                                             bAssignToIsPrefix:=bAssignToIsPrefix)
                                 Else
                                     clsTempCode.SetAssignToRObject(strRObjectToAssignTo:=strSaveName,
-                                                                   strRObjectTypeToAssignTo:=Me._strRObjectType,
+                                                                   strRObjectTypeLabelToAssignTo:=Me._strRObjectLabel,
                                                                    strRObjectFormatToAssignTo:=Me._strRObjectFormat,
                                                                    strRDataFrameNameToAddObjectTo:=strDataName,
                                                                    strObjectName:=strSaveName,
@@ -718,7 +709,7 @@ Public Class ucrSave
     '''                                 overridden function. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
-        If Not _strRObjectType = "key" AndAlso Not _strRObjectType = "link" Then
+        If Not _strRObjectLabel = "key" AndAlso Not _strRObjectLabel = "link" Then
             Dim clsMainRCode As RCodeStructure = GetRCode()
             Dim strControlValue As String = ""
 
@@ -833,10 +824,10 @@ Public Class ucrSave
         '    - Should this function return boolean? The parent function in ucrCore has no return type! Is this good coding practice?
         '    - The parent function returns true if the control has a paremter that is not yet included in the R command. Why is this control different?
         '    - Is the condition for bToBeAssigned correct?
-        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
+        If _strRObjectLabel = "key" OrElse _strRObjectLabel = "link" Then
             Return MyBase.CanUpdate()
         Else
-            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso _strRObjectType <> "")
+            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso _strRObjectLabel <> "")
         End If
     End Function
     '''--------------------------------------------------------------------------------------------
@@ -857,7 +848,7 @@ Public Class ucrSave
         'TODO SJL 15/05/20 
         '   - The name is quite confusing. Rename?
         '   - If we made 'UpdateAssignTo' public then we could remove this function
-        If _strRObjectType = "key" OrElse _strRObjectType = "link" Then
+        If _strRObjectLabel = "key" OrElse _strRObjectLabel = "link" Then
             MyBase.AddOrRemoveParameter(True)
         Else
             UpdateAssignTo(Not bAdd)

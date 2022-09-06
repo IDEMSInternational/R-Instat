@@ -142,7 +142,7 @@ Public Class dlgViewFactorLabels
         clsSjTableFunction.SetAssignTo("variables_sjTable")
 
         clsSjTableFunction.SetAssignToRObject(strRObjectToAssignTo:="last_table",
-                                              strRObjectTypeToAssignTo:=RObjectType.Table,
+                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                               strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                               strRDataFrameNameToAddObjectTo:=ucrSelectorViewLabelsAndLevels.strCurrentDataFrame,
                                               strObjectName:="last_table")

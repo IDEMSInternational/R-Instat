@@ -178,7 +178,7 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
         ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveType(RObjectType.Table, strRObjectFormat:=RObjectFormat.Html)
+        ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
@@ -385,7 +385,7 @@ Public Class dlgSummaryTables
         clsJoiningPipeOperator.SetAssignTo("last_table")
 
         clsJoiningPipeOperator.SetAssignToRObject(strRObjectToAssignTo:="last_table",
-                                                  strRObjectTypeToAssignTo:=RObjectType.Table,
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,
                                                   strObjectName:="last_table")

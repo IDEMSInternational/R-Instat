@@ -225,8 +225,6 @@ Public Class RFunction
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
         clsRFunction.strAssignToColumn = strAssignToColumn
-        clsRFunction.strAssignToModel = strAssignToModel
-        clsRFunction.strAssignToTable = strAssignToTable
         clsRFunction.bToBeAssigned = bToBeAssigned
         clsRFunction.bIsAssigned = bIsAssigned
         clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix

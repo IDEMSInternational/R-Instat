@@ -17,7 +17,7 @@
 Imports System.ComponentModel
 
 Public Class ucrInputComboBox
-    Dim strItemsType As String = ""
+    Dim _strRObjectItemsTypeLabel As String = ""
 
     Public Sub New()
 
@@ -53,65 +53,46 @@ Public Class ucrInputComboBox
         If Not e.Cancel Then OnNameChanged()
     End Sub
 
+    Public Sub SetRObjectItemsTypeLabel(strRObjectLabel As String)
+        Me._strRObjectItemsTypeLabel = strRObjectLabel
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsColumns()
-        strItemsType = "Columns"
+        _strRObjectItemsTypeLabel = "Columns"
         FillItemTypes()
     End Sub
 
     Public Sub SetItemsTypeAsDataFrames()
-        strItemsType = "Data Frames"
+        _strRObjectItemsTypeLabel = "Data Frames"
         FillItemTypes()
     End Sub
 
-    Public Sub SetItemsTypeAsModels()
-        strItemsType = "Models"
-        FillItemTypes()
-    End Sub
-
-    Public Sub SetItemsTypeAsSurv()
-        strItemsType = "Surv"
-        FillItemTypes()
-    End Sub
-
-    Public Sub SetItemsTypeAsTables()
-        strItemsType = "Tables"
-        FillItemTypes()
-    End Sub
-
-    Public Sub SetItemsType(strRObjectType As String)
-        strItemsType = strRObjectType
-        FillItemTypes()
-    End Sub
-
-    Public Sub SetItemsTypeAsGraphs()
-        strItemsType = "Graphs"
-        FillItemTypes()
-    End Sub
 
     Public Sub SetItemsTypeAsFilters()
-        strItemsType = "Filters"
+        _strRObjectItemsTypeLabel = "Filters"
         FillItemTypes()
     End Sub
 
     Public Sub SetItemsTypeAsColumnSelection()
-        strItemsType = "Column Selection"
+        _strRObjectItemsTypeLabel = "Column Selection"
 
         FillItemTypes()
     End Sub
 
 
     Public Sub SetItemsTypeAsKeys()
-        strItemsType = "Keys"
+        _strRObjectItemsTypeLabel = "Keys"
         FillItemTypes()
     End Sub
 
     Public Sub SetItemsTypeAsLinks()
-        strItemsType = "Links"
+        _strRObjectItemsTypeLabel = "Links"
         FillItemTypes()
     End Sub
 
     Private Sub FillItemTypes()
-        Select Case strItemsType
+        Select Case _strRObjectItemsTypeLabel
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
@@ -123,33 +104,17 @@ Public Class ucrInputComboBox
                 End If
             Case "Data Frames"
                 'TODO not yet implemented
-            Case "Graphs"
-                If ucrDataFrameSelector IsNot Nothing Then
+            Case RObjectTypeLabel.Graph,
+                 RObjectTypeLabel.Table,
+                 RObjectTypeLabel.Model,
+                 RObjectTypeLabel.Structure_label,
+                 RObjectTypeLabel.Summary
+                'for objects that are shown in the output viewer. do the following
+                If Me.ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
-                    cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
-                End If
-            Case RObjectType.Graph, RObjectType.Summary
-                If ucrDataFrameSelector IsNot Nothing Then
-                    cboInput.Items.Clear()
-                    'todo. implement
-                    'cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
-                End If
-
-            Case "Models"
-                If ucrDataFrameSelector IsNot Nothing Then
-                    cboInput.Items.Clear()
-                    cboInput.Items.AddRange(frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
-                End If
-            Case "Tables"
-                If ucrDataFrameSelector IsNot Nothing Then
-                    cboInput.Items.Clear()
-                    cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
-                End If
-
-            Case "Surv"
-                If ucrDataFrameSelector IsNot Nothing Then
-                    cboInput.Items.Clear()
-                    cboInput.Items.AddRange(frmMain.clsRLink.GetSurvNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetObjectNames(
+                                            strDataFrameName:=Me.ucrDataFrameSelector.strCurrDataFrame,
+                                            strRObjectTypeLabel:=Me._strRObjectItemsTypeLabel).ToArray)
                 End If
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then

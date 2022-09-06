@@ -307,8 +307,6 @@ Public Class ROperator
         clsTempROperator.strAssignTo = strAssignTo
         clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
         clsTempROperator.strAssignToColumn = strAssignToColumn
-        clsTempROperator.strAssignToModel = strAssignToModel
-        clsTempROperator.strAssignToTable = strAssignToTable
         clsTempROperator.bToBeAssigned = bToBeAssigned
         clsTempROperator.bIsAssigned = bIsAssigned
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
