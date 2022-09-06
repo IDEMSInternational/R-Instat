@@ -535,10 +535,10 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsGamma)
 
         'Negative Binomial distribution
-        clsGlmNegativeBinomialDist.strNameTag = "glm.negative_binomial"
+        clsGlmNegativeBinomialDist.strNameTag = "Negative_Binomial_GLM"
         clsGlmNegativeBinomialDist.strRName = "glm.nb"
         clsGlmNegativeBinomialDist.strPackagName = "MASS"
-        clsGlmNegativeBinomialDist.strGLMFunctionName = "GLMNB"
+        clsGlmNegativeBinomialDist.strGLMFunctionName = "glm.nb"
         clsGlmNegativeBinomialDist.bNumeric = True
         'clsGlmNegativeBinomialDist.bIsExact = True
         lstAllDistributions.Add(clsGlmNegativeBinomialDist)
