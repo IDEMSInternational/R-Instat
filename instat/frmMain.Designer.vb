@@ -416,6 +416,7 @@ Partial Class frmMain
         Me.mnuFileImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromDatabases = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
@@ -676,6 +677,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3252,7 +3254,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -3307,6 +3309,13 @@ Partial Class frmMain
         Me.mnuFileImportFromDatabases.Size = New System.Drawing.Size(232, 22)
         Me.mnuFileImportFromDatabases.Text = "Import From Databases..."
         Me.mnuFileImportFromDatabases.Visible = False
+        '
+        'mnuFileImportFromRapidPro
+        '
+        Me.mnuFileImportFromRapidPro.Enabled = False
+        Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
+        Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromRapidPro.Text = "Import From RapidPro"
         '
         'mnuFileImportandTidyNetCDFFile
         '
@@ -5091,6 +5100,13 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuFileImportFromPostgres
+        '
+        Me.mnuFileImportFromPostgres.Enabled = False
+        Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
+        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5785,4 +5801,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticPICSAGeneralGraph As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator73 As ToolStripSeparator
     Friend WithEvents mnuOptionsByContextCropModel As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromRapidPro As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromPostgres As ToolStripMenuItem
 End Class
