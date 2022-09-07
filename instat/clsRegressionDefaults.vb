@@ -131,6 +131,7 @@ Public Class clsRegressionDefaults
             Return clsDefaultRaovFunction
         End Get
     End Property
+
     Public Shared ReadOnly Property clsDefaultFormulaFunction As RFunction
         Get
             Dim clsDefaultRModelsFunction As New RFunction

@@ -383,6 +383,7 @@ Public Class dlgFitModel
             End If
             UpdatePreview()
             TestOKEnabled()
+            ChooseAnovaFunction()
         End If
     End Sub
 
