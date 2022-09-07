@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Runtime.InteropServices
 Imports CefSharp.WinForms
 Imports CefSharp
 Imports CefSharp.DevTools.DOM
