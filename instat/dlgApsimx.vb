@@ -51,9 +51,9 @@ Public Class dlgApsimx
 
         Dim dctExamplesModels As New Dictionary(Of String, String) From {
            {"Barley", Chr(34) & "Barley" & Chr(34)},
-           {"ControlledEnvironment", Chr(34) & "ControlledEnvironment" & Chr(34)},
+           {"Controlled Environment", Chr(34) & "ControlledEnvironment" & Chr(34)},
            {"Eucalyptus", Chr(34) & "Eucalyptus" & Chr(34)},
-           {"EucalyptusRotation", Chr(34) & "EucalyptusRotation" & Chr(34)},
+           {"Eucalyptus Rotation", Chr(34) & "EucalyptusRotation" & Chr(34)},
            {"Maize", Chr(34) & "Maize" & Chr(34)},
            {"Oats", Chr(34) & "Oats" & Chr(34)},
            {"Rotation", Chr(34) & "Rotation" & Chr(34)},
@@ -117,7 +117,7 @@ Public Class dlgApsimx
     End Sub
 
     Private Sub ucrInputComboList_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboList.ControlValueChanged
-        If ucrInputComboList.GetText = "wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "ControlledEnvironment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "EucalyptusRotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Rotation" OrElse ucrInputComboList.GetText = "Soybean" Then
+        If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "ControlledEnvironment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "EucalyptusRotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Rotation" OrElse ucrInputComboList.GetText = "Soybean" Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsApsimExampleFunction)

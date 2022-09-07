@@ -36,7 +36,7 @@ Partial Class dlgApsimx
         Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveFile.Name = "ucrSaveFile"
         Me.ucrSaveFile.Size = New System.Drawing.Size(394, 23)
-        Me.ucrSaveFile.TabIndex = 36
+        Me.ucrSaveFile.TabIndex = 3
         '
         'ucrChkSilent
         '
@@ -45,7 +45,7 @@ Partial Class dlgApsimx
         Me.ucrChkSilent.Location = New System.Drawing.Point(7, 43)
         Me.ucrChkSilent.Name = "ucrChkSilent"
         Me.ucrChkSilent.Size = New System.Drawing.Size(138, 23)
-        Me.ucrChkSilent.TabIndex = 33
+        Me.ucrChkSilent.TabIndex = 2
         '
         'lblExampleList
         '
@@ -53,7 +53,7 @@ Partial Class dlgApsimx
         Me.lblExampleList.Location = New System.Drawing.Point(7, 17)
         Me.lblExampleList.Name = "lblExampleList"
         Me.lblExampleList.Size = New System.Drawing.Size(69, 13)
-        Me.lblExampleList.TabIndex = 32
+        Me.lblExampleList.TabIndex = 0
         Me.lblExampleList.Text = "Example List:"
         '
         'ucrBase
@@ -63,7 +63,7 @@ Partial Class dlgApsimx
         Me.ucrBase.Location = New System.Drawing.Point(7, 105)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 31
+        Me.ucrBase.TabIndex = 4
         '
         'ucrInputComboList
         '
@@ -71,10 +71,10 @@ Partial Class dlgApsimx
         Me.ucrInputComboList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboList.GetSetSelectedIndex = -1
         Me.ucrInputComboList.IsReadOnly = False
-        Me.ucrInputComboList.Location = New System.Drawing.Point(82, 12)
+        Me.ucrInputComboList.Location = New System.Drawing.Point(99, 12)
         Me.ucrInputComboList.Name = "ucrInputComboList"
         Me.ucrInputComboList.Size = New System.Drawing.Size(219, 23)
-        Me.ucrInputComboList.TabIndex = 37
+        Me.ucrInputComboList.TabIndex = 1
         '
         'dlgApsimx
         '
@@ -91,7 +91,7 @@ Partial Class dlgApsimx
         Me.MinimizeBox = False
         Me.Name = "dlgApsimx"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Apsimx"
+        Me.Text = "Import Apsimx/Apsim Examples"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
