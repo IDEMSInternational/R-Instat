@@ -261,11 +261,15 @@ Public Class clsDataFramePage
             columnHeader.bIsFactor = True
         ElseIf strHeaderType.Contains("character") Then
             columnHeader.strTypeShortCode = "(C)"
-        ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("POSIXct") OrElse
-                strHeaderType.Contains("POSIXt") OrElse strHeaderType.Contains("hms") OrElse
-                strHeaderType.Contains("difftime") OrElse strHeaderType.Contains("Duration") OrElse
+        ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("Duration") OrElse
                 strHeaderType.Contains("Period") OrElse strHeaderType.Contains("Interval") Then
             columnHeader.strTypeShortCode = "(D)"
+        ElseIf strHeaderType.Contains("POSIXct") OrElse
+                strHeaderType.Contains("POSIXt") Then
+            columnHeader.strTypeShortCode = "(D.T)"
+        ElseIf strHeaderType.Contains("hms") OrElse
+                strHeaderType.Contains("difftime") Then
+            columnHeader.strTypeShortCode = "(T)"
         ElseIf strHeaderType.Contains("logical") Then
             columnHeader.strTypeShortCode = "(L)"
             ' Structured columns e.g. "circular" are coded with "(S)"
