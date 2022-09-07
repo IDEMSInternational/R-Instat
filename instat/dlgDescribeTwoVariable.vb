@@ -108,7 +108,6 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableThirdVariable.SetParameterIsString()
         ucrReceiverThreeVariableThirdVariable.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverThreeVariableThirdVariable.SetLinkedDisplayControl(lblThirdVariable)
-        ucrReceiverThreeVariableThirdVariable.SetDataType("factor")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
