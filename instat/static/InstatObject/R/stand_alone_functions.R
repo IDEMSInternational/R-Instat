@@ -2627,8 +2627,8 @@ view_graph_object <- function(graph_object){
     #automatically created. 
     #TODO. Investigate how that can be done in R-Instat
     print(graph_object)
-    #return empty file path
-    #return("")
+    #return empty file path. Important for RStudio to display the object
+    return("")
   }
   
   
@@ -2642,7 +2642,8 @@ view_graph_object <- function(graph_object){
   print(graph_object)
   dev.off() #todo. use graphics.off() which one is better?
   
-  #todo. should we use respective package "convenience" functions to save the objects as text files depending on the class names
+  #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
+  #investigate if thatwill that help with resolution and scaling?
   
   # if ("ggplot" %in% object_class_names) {
   #   
@@ -2674,8 +2675,8 @@ view_text_object <- function(text_object){
     #automatically created. 
     #TODO. Investigate how that can be done in R-Instat
     utils::capture.output(text_object)
-    #return empty file path
-    #return("")
+    #return empty file path. Important for RStudio to display the object
+    return("")
   }
   
   
@@ -2707,8 +2708,8 @@ view_html_object <- function(html_object){
     #automatically created. 
     #TODO. Investigate how that can be done in R-Instat
     print(html_object)
-    #return empty file path
-    #return("")
+    #return empty file path. Important for RStudio to display the object
+    return("")
   }
   
   
