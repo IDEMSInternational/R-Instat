@@ -48,33 +48,24 @@ Public Class RCodeStructure
     ''' <summary>   The name of the data frame to assign to 
     '''             (i.e. the data frame name associated with the R "data_name" parameter). 
     '''             </summary>
+    '''             todo. deprecate
     Public strAssignToDataFrame As String
 
     ''' <summary>   The name of the column to assign to
     '''             (i.e. the column name associated with the R "col_name" or "col_names" 
     '''             parameters).
     '''             </summary>
+    '''              todo. deprecate
     Public strAssignToColumn As String
 
-    ''' <summary>   The name of the model to assign to
-    '''             (i.e. the model name associated with the R "model_name" parameter).
-    '''             </summary>
-    Public strAssignToModel As String
+    '-------------------------
+    Public _rDataFrameNameToAddObjectTo As String
+    Public _rObjectToAssignTo As String
+    Public _rObjectNameToAssignTo As String
+    Public _rObjectTypeToAssignTo As String
+    Public _rObjectFormatToAssignTo As String
 
-    ''' <summary>   The name of the graph to assign to
-    '''             (i.e. the graph name associated with the R "graph_name" parameter).
-    '''             </summary>
-    Public strAssignToGraph As String
-
-    ''' <summary>   The name of the surv to assign to
-    '''             (i.e. the surv name associated with the R "surv_name" parameter).
-    '''             </summary>
-    Public strAssignToSurv As String
-
-    ''' <summary>   The name of the table to assign to
-    '''             (i.e. the table name associated with the R "table_name" parameter).
-    '''             </summary>
-    Public strAssignToTable As String
+    '--------------------------------
 
     ''' <summary>   If true then a list of data frames is assigned (i.e. the R "data_names" 
     '''             parameter needs to be set).
@@ -250,8 +241,22 @@ Public Class RCodeStructure
     '''                                             names of new data frames if data frame list is
     '''                                             not named. </param>
     ''' <param name="strAdjacentColumn">            (Optional) The new value for strAdjacentColumn. </param>
+    ''' todo. deprecate some of the options
     '''--------------------------------------------------------------------------------------------
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "", Optional strAdjacentColumn As String = "")
+    Public Sub SetAssignTo(strTemp As String,
+                           Optional strTempDataframe As String = "",
+                           Optional strTempColumn As String = "",
+                           Optional strTempModel As String = "",
+                           Optional strTempGraph As String = "",
+                           Optional strTempSurv As String = "",
+                           Optional strTempTable As String = "",
+                           Optional bAssignToIsPrefix As Boolean = False,
+                           Optional bAssignToColumnWithoutNames As Boolean = False,
+                           Optional bInsertColumnBefore As Boolean = False,
+                           Optional bRequireCorrectLength As Boolean = True,
+                           Optional bDataFrameList As Boolean = False,
+                           Optional strDataFrameNames As String = "",
+                           Optional strAdjacentColumn As String = "")
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -259,19 +264,7 @@ Public Class RCodeStructure
                 strAssignToColumn = strTempColumn
             End If
         End If
-        If Not strTempModel = "" Then
-            strAssignToModel = strTempModel
-        End If
-        If Not strTempGraph = "" Then
-            strAssignToGraph = strTempGraph
-        End If
-        If Not strTempSurv = "" Then
-            strAssignToSurv = strTempSurv
-        End If
 
-        If Not strTempTable = "" Then
-            strAssignToTable = strTempTable
-        End If
         bToBeAssigned = True
         bIsAssigned = False
         Me.bAssignToIsPrefix = bAssignToIsPrefix
@@ -281,7 +274,81 @@ Public Class RCodeStructure
         Me.bRequireCorrectLength = bRequireCorrectLength
         Me.bDataFrameList = bDataFrameList
         Me.strDataFrameNames = strDataFrameNames
+
+        '-----------------------------------------------------------------------
+        'for dialogs that produce objects shown to the output viewer
+        'using this deprecated subroutine. call the SetAssignToRObject subroutine
+        'this part can be deleted once all the dialogs that have these types of outputs are refactored
+        Dim strNewRObjectTypeToAssignTo As String = ""
+        Dim strNewRObjectTypeLabelToAssignTo As String = ""
+        Dim strNewRObjectFormatToAssignTo As String = ""
+
+        If Not strTempGraph = "" Then
+            strNewRObjectTypeToAssignTo = strTempGraph
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.Graph
+            'assumption is by default a model is in image format
+            strNewRObjectFormatToAssignTo = RObjectFormat.Image
+        End If
+
+        If Not strTempModel = "" Then
+            strNewRObjectTypeToAssignTo = strTempModel
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.Model
+            'assumption is by default a model is in text format
+            strNewRObjectFormatToAssignTo = RObjectFormat.Text
+        End If
+
+        If Not strTempTable = "" Then
+            strNewRObjectTypeToAssignTo = strTempTable
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.Table
+            'assumption is by default a table is in text format
+            strNewRObjectFormatToAssignTo = RObjectFormat.Text
+        End If
+
+        If Not strTempSurv = "" Then
+            strNewRObjectTypeToAssignTo = strTempSurv
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.Structure_label
+            'assumption is by default a survival is in text format
+            strNewRObjectFormatToAssignTo = RObjectFormat.Text
+        End If
+
+        If Not strNewRObjectTypeToAssignTo = "" Then
+            SetAssignToRObject(strRObjectToAssignTo:=strNewRObjectTypeToAssignTo,
+                          strRObjectTypeLabelToAssignTo:=strNewRObjectTypeLabelToAssignTo,
+                          strRObjectFormatToAssignTo:=strNewRObjectFormatToAssignTo,
+                          strRDataFrameNameToAddObjectTo:=strTempDataframe,
+                          strObjectName:=strNewRObjectTypeToAssignTo,
+                          bAssignToIsPrefix:=bAssignToIsPrefix)
+        End If
+        '----------------------------------------------------------
+
     End Sub
+
+    'Not used for assigning columns
+    Public Sub SetAssignToRObject(strRObjectToAssignTo As String,
+                                  strRObjectTypeLabelToAssignTo As String,
+                                  strRObjectFormatToAssignTo As String,
+                                 Optional strRDataFrameNameToAddObjectTo As String = "",
+                                 Optional strObjectName As String = "",
+                                 Optional bAssignToIsPrefix As Boolean = False)
+
+        If strRObjectTypeLabelToAssignTo = RObjectTypeLabel.Dataframe OrElse strRObjectTypeLabelToAssignTo = RObjectTypeLabel.Column Then
+            MsgBox("Developer Error: Incorrect Set Assign." &
+                   Environment.NewLine &
+                   "This can only be done for objects that can be displayed in the output viewer")
+            Return
+        End If
+
+        Me._rObjectToAssignTo = strRObjectToAssignTo
+        Me._rObjectTypeToAssignTo = strRObjectTypeLabelToAssignTo
+        Me._rObjectFormatToAssignTo = strRObjectFormatToAssignTo
+        Me._rDataFrameNameToAddObjectTo = strRDataFrameNameToAddObjectTo
+        Me._rObjectNameToAssignTo = strObjectName
+        Me.bAssignToIsPrefix = bAssignToIsPrefix
+        Me.bToBeAssigned = True
+        Me.bIsAssigned = False
+    End Sub
+
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Resets all the 'AssignTo' variables. 
@@ -294,15 +361,16 @@ Public Class RCodeStructure
         strAssignTo = ""
         strAssignToDataFrame = ""
         strAssignToColumn = ""
-        strAssignToModel = ""
-        strAssignToGraph = ""
-        strAssignToSurv = ""
-        strAssignToTable = ""
         bToBeAssigned = False
         bIsAssigned = False
         bAssignToIsPrefix = False
         bAssignToColumnWithoutNames = False
         bInsertColumnBefore = False
+
+        Me._rObjectToAssignTo = ""
+        Me._rObjectNameToAssignTo = ""
+        Me._rObjectTypeToAssignTo = ""
+        Me._rObjectFormatToAssignTo = ""
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -372,7 +440,7 @@ Public Class RCodeStructure
         Dim clsAddModels As New RFunction
         Dim clsGetModels As New RFunction
         Dim clsAddGraphs As New RFunction
-        Dim clsGetGraphs As New RFunction
+        Dim clsViewGraphObjects As New RFunction
         Dim clsAddSurv As New RFunction
         Dim clsGetSurv As New RFunction
         Dim clsAddTables As New RFunction
@@ -392,10 +460,45 @@ Public Class RCodeStructure
             'Note1: The append allows 'strScript' to be built up into a multi-line string through successive calls of 'ToScript'
             'Note2: Initially, 'strAssignTo' is typically the name of the variable to assign the result of 'strTemp' to, e.g.
             '    'guinea_two_stations'.
-            strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
 
-            'if we need to assign to a column in a data frame
-            If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
+            'todo
+            If Not String.IsNullOrEmpty(Me._rObjectToAssignTo) Then
+                strScript = strScript & ConstructAssignTo(Me._rObjectToAssignTo, strTemp) & Environment.NewLine
+            Else
+                strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
+            End If
+
+            If Not String.IsNullOrEmpty(Me._rObjectTypeToAssignTo) AndAlso Not String.IsNullOrEmpty(Me._rObjectFormatToAssignTo) Then
+                Dim clsAddObject As New RFunction
+                Dim clsViewObject As New RFunction
+
+                'set the R command and parameters for the add object R function
+                clsAddObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+                If Not String.IsNullOrEmpty(Me._rDataFrameNameToAddObjectTo) Then
+                    clsAddObject.AddParameter("data_name", Chr(34) & Me._rDataFrameNameToAddObjectTo & Chr(34))
+                End If
+                If Not String.IsNullOrEmpty(Me._rObjectNameToAssignTo) Then
+                    clsAddObject.AddParameter("object_name", Chr(34) & Me._rObjectNameToAssignTo & Chr(34))
+                End If
+                clsAddObject.AddParameter("object_type_label", Chr(34) & Me._rObjectTypeToAssignTo & Chr(34))
+                clsAddObject.AddParameter("object_format", Chr(34) & Me._rObjectFormatToAssignTo & Chr(34))
+                clsAddObject.AddParameter("object", Me._rObjectToAssignTo)
+
+                'todo. once the R level code has been refactored this parameter will not be necessary.
+                'it's important for it to alway be false.
+                'This can be changed once saving of objects as part of R-Instat session is correctly implemented
+                clsAddObject.AddParameter("internal", "FALSE")
+
+                'set the R command and parameters for the view object R function
+                clsViewObject.SetRCommand("view_object")
+                clsViewObject.AddParameter("object", Me._rObjectToAssignTo)
+                clsViewObject.AddParameter("object_format", Chr(34) & Me._rObjectFormatToAssignTo & Chr(34))
+
+                'construct the scripts 
+                strScript = strScript & clsAddObject.ToScript() & Environment.NewLine
+                strAssignTo = clsViewObject.ToScript()
+            ElseIf Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
+                'if we need to assign to a column in a data frame
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 'if we need to assign to a named column
@@ -426,60 +529,6 @@ Public Class RCodeStructure
                 clsGetColumns.AddParameter("col_names", Chr(34) & strAssignToColumn & Chr(34))
                 ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
                 strAssignTo = clsGetColumns.ToScript()
-            ElseIf Not strAssignToModel = "" Then 'else if we need to assign to a model
-                clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")
-                clsAddModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
-                clsAddModels.AddParameter("model", strAssignTo)
-                clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                If Not strAssignToDataFrame = "" Then
-                    clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                End If
-                strScript = strScript & clsAddModels.ToScript() & Environment.NewLine
-
-                clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
-                strAssignTo = clsGetModels.ToScript()
-            ElseIf Not strAssignToGraph = "" Then 'else if we need to assign to a graph
-                clsAddGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_graph")
-                clsAddGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
-                clsAddGraphs.AddParameter("graph", strAssignTo)
-                If Not strAssignToDataFrame = "" Then
-                    clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                End If
-                strScript = strScript & clsAddGraphs.ToScript() & Environment.NewLine
-
-                clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
-                strAssignTo = clsGetGraphs.ToScript()
-            ElseIf Not strAssignToSurv = "" Then 'else if we need to assign to a surv
-                clsAddSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_surv")
-                clsAddSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
-                clsAddSurv.AddParameter("surv", strAssignTo)
-                If Not strAssignToDataFrame = "" Then
-                    clsAddSurv.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetSurv.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                End If
-                strScript = strScript & clsAddSurv.ToScript() & Environment.NewLine
-
-                clsGetSurv.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
-                clsGetSurv.AddParameter("surv_name", Chr(34) & strAssignToSurv & Chr(34))
-                strAssignTo = clsGetSurv.ToScript()
-
-            ElseIf Not strAssignToTable = "" Then 'else if we need to assign to a table
-                clsAddTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_table")
-                clsAddTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
-                clsAddTables.AddParameter("table", strAssignTo)
-                If Not strAssignToDataFrame = "" Then
-                    clsAddTables.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                    clsGetTables.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                End If
-                strScript = strScript & clsAddTables.ToScript() & Environment.NewLine
-
-                clsGetTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_tables")
-                clsGetTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
-                strAssignTo = clsGetTables.ToScript()
             ElseIf Not strAssignToDataFrame = "" Then 'else if we need to assign to a data frame
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
@@ -534,6 +583,7 @@ Public Class RCodeStructure
     ''' <returns>   The constructed assignment statement. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function ConstructAssignTo(strAssignTo As String, strTemp As String) As String
+        'todo. Use the R script library or move this function to a module
         Dim strReconstructed As String = ""
         Dim arrScriptParts As String()
         If Not String.IsNullOrEmpty(strTemp) Then
@@ -903,13 +953,15 @@ Public Class RCodeStructure
         Dim clsTempCode As New RCodeStructure
         Dim clsRParam As RParameter
 
+        clsTempCode._rObjectToAssignTo = Me._rObjectToAssignTo
+        clsTempCode._rObjectNameToAssignTo = Me._rObjectNameToAssignTo
+        clsTempCode._rObjectTypeToAssignTo = Me._rObjectTypeToAssignTo
+        clsTempCode._rObjectFormatToAssignTo = Me._rObjectFormatToAssignTo
+        clsTempCode._rDataFrameNameToAddObjectTo = Me._rDataFrameNameToAddObjectTo
+
         clsTempCode.strAssignTo = strAssignTo
         clsTempCode.strAssignToDataFrame = strAssignToDataFrame
         clsTempCode.strAssignToColumn = strAssignToColumn
-        clsTempCode.strAssignToModel = strAssignToModel
-        clsTempCode.strAssignToGraph = strAssignToGraph
-        clsTempCode.strAssignToSurv = strAssignToSurv
-        clsTempCode.strAssignToTable = strAssignToTable
         clsTempCode.bDataFrameList = bDataFrameList
         clsTempCode.strDataFrameNames = strDataFrameNames
         clsTempCode.bToBeAssigned = bToBeAssigned
@@ -948,7 +1000,12 @@ Public Class RCodeStructure
         If bToBeAssigned AndAlso Not lstCodes.Contains(Me) Then
             'add this object and its assign script to the respective lists
             lstCodes.Add(Me)
-            lstValues.Add(strAssignTo)
+            If Not String.IsNullOrEmpty(Me._rObjectToAssignTo) Then
+                lstValues.Add(_rObjectToAssignTo)
+            Else
+                lstValues.Add(strAssignTo)
+            End If
+
         End If
         For Each clsTempParam As RParameter In clsParameters
             ' if parameter is a function or operator then also add its respective RCodeStructure

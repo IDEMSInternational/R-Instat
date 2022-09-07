@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 ''' <summary>
 ''' Logging class to hold all scripts and outputs ran.
 ''' Holds multiple lists of outputs
@@ -29,7 +29,6 @@ Public Class clsOutputLogger
             Return _output
         End Get
     End Property
-
     ''' <summary>
     ''' Constructor
     ''' </summary>
@@ -37,26 +36,22 @@ Public Class clsOutputLogger
         _output = New List(Of clsOutputElement)
         _filteredOutputs = New List(Of clsOutputList)
     End Sub
-
     ''' <summary>
     ''' Event to show a new filtered list has been added
     ''' </summary>
     ''' <param name="listName"></param>
     Public Event NewFilteredListAdded(listName As String)
-
     ''' <summary>
     ''' Event to show a new output as been added
     ''' </summary>
     ''' <param name="outputElement"></param>
     Public Event NewOutputAdded(outputElement As clsOutputElement)
-
     ''' <summary>
     ''' Event to show an output as been added to a new filtered list
     ''' </summary>
     ''' <param name="outputElement"></param>
     ''' <param name="listName"></param>
     Public Event NewOutputAddedToFilteredList(outputElement As clsOutputElement, listName As String)
-
     ''' <summary>
     ''' Holds a list of outputs that can be edited
     ''' </summary>
@@ -69,27 +64,80 @@ Public Class clsOutputLogger
             _filteredOutputs = value
         End Set
     End Property
+    Public Sub AddFileOutput(strFileName As String)
+        Dim strFileExtension As String = Path.GetExtension(strFileName).ToLower
+        Select Case strFileExtension
+            Case ".png"
+                AddImageOutput(strFileName)
+            Case ".html"
+                AddHtmlOutput(strFileName)
+            Case ".txt"
+                AddTextOutput(strFileName)
+            Case Else
+                'todo. developer error
+                Return
+        End Select
+    End Sub
     ''' <summary>
-    ''' Adds image to be displayed within the output
+    ''' Adds string output to be displayed within the output
     ''' </summary>
-    ''' <param name="strFilename"></param>
-    Public Sub AddImageOutput(strFilename As String)
-        Dim image As Bitmap
+    ''' <param name="strOutput"></param>
+    Public Sub AddStringOutput(strOutput As String)
         'Note this is always takes the last script added as corresponding script
         If _lastScriptElement Is Nothing Then
             Throw New Exception("Cannot find script to attach output to.")
         Else
-            Using fs As New IO.FileStream(strFilename, IO.FileMode.Open)
-                image = New Bitmap(Drawing.Image.FromStream(fs))
-            End Using
             Dim outputElement As New clsOutputElement
-            outputElement.AddImageOutputFromR(image, _lastScriptElement.FormatedRScript)
+            outputElement.AddStringOutput(strOutput, _lastScriptElement.FormatedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
-
     End Sub
-
+    ''' <summary>
+    ''' Adds text file to be displayed within the output
+    ''' </summary>
+    ''' <param name="strFilename"></param>
+    Public Sub AddTextOutput(strFilename As String)
+        'Note this always takes the last script added as corresponding script
+        If _lastScriptElement Is Nothing Then
+            Throw New Exception("Cannot find script to attach output to.")
+        Else
+            Dim outputElement As New clsOutputElement
+            outputElement.AddTextOutput(strFilename, _lastScriptElement.FormatedRScript)
+            _output.Add(outputElement)
+            RaiseEvent NewOutputAdded(outputElement)
+        End If
+    End Sub
+    ''' <summary>
+    ''' Adds image file to be displayed within the output
+    ''' </summary>
+    ''' <param name="strFilename"></param>
+    Public Sub AddImageOutput(strFilename As String)
+        'Note this always takes the last script added as corresponding script
+        If _lastScriptElement Is Nothing Then
+            Throw New Exception("Cannot find script to attach output to.")
+        Else
+            Dim outputElement As New clsOutputElement
+            outputElement.AddImageOutput(strFilename, _lastScriptElement.FormatedRScript)
+            _output.Add(outputElement)
+            RaiseEvent NewOutputAdded(outputElement)
+        End If
+    End Sub
+    ''' <summary>
+    ''' Adds html output to be displayed within the output
+    ''' </summary>
+    ''' <param name="strFilename"></param>
+    Public Sub AddHtmlOutput(strFilename As String)
+        'Note this always takes the last script added as corresponding script
+        If _lastScriptElement Is Nothing Then
+            Throw New Exception("Cannot find script to attach output to.")
+        Else
+            Dim outputElement As New clsOutputElement
+            outputElement.AddHtmlOutput(strFilename, _lastScriptElement.FormatedRScript)
+            _output.Add(outputElement)
+            RaiseEvent NewOutputAdded(outputElement)
+        End If
+    End Sub
     ''' <summary>
     ''' Adds an output to the given filtered list
     ''' </summary>
@@ -102,7 +150,6 @@ Public Class clsOutputLogger
         filteredList.Output.Add(outputElement)
         RaiseEvent NewOutputAddedToFilteredList(outputElement, strListName)
     End Sub
-
     ''' <summary>
     ''' Adds script to be displayed within the output
     ''' </summary>
@@ -115,23 +162,6 @@ Public Class clsOutputLogger
         _output.Add(_lastScriptElement)
         RaiseEvent NewOutputAdded(_lastScriptElement)
     End Sub
-
-    ''' <summary>
-    ''' Adds text output to be displayed within the output
-    ''' </summary>
-    ''' <param name="strOutput"></param>
-    Public Sub AddStringOutput(strOutput As String)
-        'Note this is always takes the last script added as corresponding script
-        If _lastScriptElement Is Nothing Then
-            Throw New Exception("Cannot find script to attach output to.")
-        Else
-            Dim outputElement As New clsOutputElement
-            outputElement.AddStringOutputFromR(strOutput, _lastScriptElement.FormatedRScript)
-            _output.Add(outputElement)
-            RaiseEvent NewOutputAdded(outputElement)
-        End If
-    End Sub
-
     ''' <summary>
     ''' Deletes output from a filtered list
     ''' </summary>
@@ -146,7 +176,6 @@ Public Class clsOutputLogger
             element.Id -= 1
         Next
     End Sub
-
     ''' <summary>
     ''' Deletes output from main output list
     ''' </summary>
@@ -154,7 +183,6 @@ Public Class clsOutputLogger
     Public Sub DeleteOutputFromMainList(outputElement As clsOutputElement)
         _output.RemoveAll(Function(x) x Is outputElement)
     End Sub
-
     ''' <summary>
     ''' Returns the filtered list given the name. Will create the list if doesnt already exist.
     ''' </summary>
@@ -171,7 +199,6 @@ Public Class clsOutputLogger
         End If
         Return filteredList
     End Function
-
     ''' <summary>
     ''' Checks to see if list name is a valid name for a filtered list
     ''' </summary>
@@ -185,3 +212,9 @@ Public Class clsOutputLogger
         Return True
     End Function
 End Class
+
+
+
+
+
+

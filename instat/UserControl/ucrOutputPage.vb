@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.InteropServices
@@ -121,6 +121,8 @@ Public Class ucrOutputPage
                 AddNewTextOutput(outputElement)
             Case OutputType.ImageOutput
                 AddNewImageOutput(outputElement)
+            Case OutputType.HtmlOutput
+                AddNewHtmlOutput(outputElement)
         End Select
         pnlMain.VerticalScroll.Value = pnlMain.VerticalScroll.Maximum
         pnlMain.PerformLayout()
@@ -160,9 +162,9 @@ Public Class ucrOutputPage
         End If
 
         Dim panel As New Panel With {
-            .Height = 10, ' = 10 'small height as panel will grow
-            .AutoSize = True,
-            .Dock = DockStyle.Top
+          .Height = 10, ' = 10 'small height as panel will grow
+                .AutoSize = True,
+          .Dock = DockStyle.Top
         }
         pnlMain.Controls.Add(panel)
         pnlMain.Controls.SetChildIndex(panel, 0)
@@ -173,11 +175,11 @@ Public Class ucrOutputPage
 
     Private Sub AddCheckBoxToElementPanel(panel As Panel, outputElement As clsOutputElement)
         Dim checkBox As New CheckBox With {
-            .Text = "",
-            .CheckAlign = ContentAlignment.TopLeft,
-            .Dock = DockStyle.Left,
-            .AutoSize = True,
-            .Tag = outputElement
+          .Text = "",
+          .CheckAlign = ContentAlignment.TopLeft,
+          .Dock = DockStyle.Left,
+          .AutoSize = True,
+          .Tag = outputElement
         }
         panel.Controls.Add(checkBox)
         _checkBoxes.Add(checkBox)
@@ -187,8 +189,8 @@ Public Class ucrOutputPage
 
     Private Sub AddNewScript(outputElement As clsOutputElement)
         Dim richTextBox As New RichTextBox With {
-           .Dock = DockStyle.Top,
-           .BorderStyle = BorderStyle.None
+         .Dock = DockStyle.Top,
+         .BorderStyle = BorderStyle.None
         }
         FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormatedRScript)
         Dim panel As Panel = AddElementPanel(outputElement)
@@ -203,7 +205,7 @@ Public Class ucrOutputPage
         If SelectedElements.Count = 1 AndAlso SelectedElements(0).OutputType = OutputType.ImageOutput Then
             Dim element As clsOutputElement = SelectedElements(0)
             Clipboard.Clear()
-            Clipboard.SetImage(element.ImageOutput)
+            Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
             Return True
         End If
         Return False
@@ -217,12 +219,23 @@ Public Class ucrOutputPage
                 AddFormatedTextToRichTextBox(richText, element.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
             Case OutputType.ImageOutput
                 Clipboard.Clear()
-                Clipboard.SetImage(element.ImageOutput)
+                'todo. instead of copy paste, add image to rtf directly from file?
+                Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
                 richText.Paste()
+            Case OutputType.HtmlOutput
+                'todo
         End Select
         richText.AppendText(Environment.NewLine)
         richText.AppendText(Environment.NewLine)
     End Sub
+
+    Private Function GetBitmapFromFile(strFilename As String) As Bitmap
+        Dim image As Bitmap
+        Using fs As New IO.FileStream(strFilename, IO.FileMode.Open)
+            image = New Bitmap(Drawing.Image.FromStream(fs))
+        End Using
+        Return image
+    End Function
 
     Private Sub AddFormatedTextToRichTextBox(richTextBox As RichTextBox, text As String, font As Font, colour As Color)
         Dim intStartSelection As Integer = richTextBox.Text.Length
@@ -248,28 +261,109 @@ Public Class ucrOutputPage
     End Sub
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
-        Dim richTextBox As New RichTextBox With {
-           .Dock = DockStyle.Top,
-           .BorderStyle = BorderStyle.None
-        }
-        AddFormatedTextToRichTextBox(richTextBox, outputElement.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
         Dim panel As Panel = AddElementPanel(outputElement)
-        panel.Controls.Add(richTextBox)
-        panel.Controls.SetChildIndex(richTextBox, 0)
-        SetRichTextBoxHeight(richTextBox)
-        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
-        AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+
+        If outputElement.StringOutput IsNot Nothing Then
+            Dim richTextBox As New RichTextBox With {
+                .Dock = DockStyle.Top,
+                .BorderStyle = BorderStyle.None
+             }
+            AddFormatedTextToRichTextBox(richTextBox, outputElement.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
+            panel.Controls.Add(richTextBox)
+            panel.Controls.SetChildIndex(richTextBox, 0)
+            SetRichTextBoxHeight(richTextBox)
+            AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
+            AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+        Else
+            Dim linkLabel As New LinkLabel
+            Dim ucrTextViewer As New ucrTextViewer
+
+            linkLabel.Text = "Maximise"
+            AddHandler linkLabel.Click, Sub()
+                                            Dim frmMaximiseOutput As New frmMaximiseOutput
+                                            frmMaximiseOutput.Show(strFileName:=outputElement.TextOutput)
+                                        End Sub
+
+            ucrTextViewer.LoadTextFile(strFileName:=outputElement.TextOutput)
+            ucrTextViewer.FormatText(OutputFont.ROutputFont, OutputFont.ROutputColour)
+
+            AddHandler ucrTextViewer._richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+
+            panel.Controls.Add(linkLabel)
+            panel.Controls.Add(ucrTextViewer)
+            panel.Controls.SetChildIndex(linkLabel, 0)
+            panel.Controls.SetChildIndex(ucrTextViewer, 0)
+            linkLabel.Dock = DockStyle.Top
+            ucrTextViewer.Dock = DockStyle.Top
+        End If
+
     End Sub
 
     Private Sub AddNewImageOutput(outputElement As clsOutputElement)
-        Dim pictureBox As New PictureBox
-        pictureBox.Image = outputElement.ImageOutput
         Dim panel As Panel = AddElementPanel(outputElement)
+        Dim linkLabel As New LinkLabel
+        Dim pictureBox As New PictureBox
+
+        linkLabel.Text = "Maximise"
+
+        pictureBox.Load(outputElement.ImageOutput)
+        panel.Controls.Add(linkLabel)
         panel.Controls.Add(pictureBox)
+        panel.Controls.SetChildIndex(linkLabel, 0)
         panel.Controls.SetChildIndex(pictureBox, 0)
+        linkLabel.Dock = DockStyle.Top
         pictureBox.Dock = DockStyle.Top
         pictureBox.SizeMode = PictureBoxSizeMode.Zoom
         SetPictureBoxHeight(pictureBox)
+
+        AddHandler linkLabel.Click, Sub()
+                                        Dim frmMaximiseOutput As New frmMaximiseOutput
+                                        frmMaximiseOutput.Show(strFileName:=outputElement.ImageOutput)
+                                    End Sub
+    End Sub
+
+    Private Sub AddNewHtmlOutput(outputElement As clsOutputElement)
+        Dim panel As Panel = AddElementPanel(outputElement)
+        Dim linkLabel As New LinkLabel
+
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.isCefInitilised Then
+            Dim ucrWebview As New ucrWebViewer()
+            linkLabel.Text = "Maximise"
+            AddHandler linkLabel.Click, Sub()
+                                            Dim frmMaximiseOutput As New frmMaximiseOutput
+                                            frmMaximiseOutput.Show(strFileName:=outputElement.HtmlOutput)
+                                        End Sub
+
+            ucrWebview.LoadHtmlFile(outputElement.HtmlOutput)
+
+            panel.Controls.Add(linkLabel)
+            panel.Controls.Add(ucrWebview)
+            panel.Controls.SetChildIndex(linkLabel, 0)
+            panel.Controls.SetChildIndex(ucrWebview, 0)
+
+            linkLabel.Dock = DockStyle.Top
+            ucrWebview.Dock = DockStyle.Top
+        Else
+
+            linkLabel.Text = "View html file"
+            AddHandler linkLabel.Click, Sub()
+                                            'display the html output in default browser
+                                            Cursor = Cursors.WaitCursor
+                                            Process.Start(outputElement.HtmlOutput)
+                                            Cursor = Cursors.Default
+                                        End Sub
+
+            panel.Controls.Add(linkLabel)
+            panel.Controls.SetChildIndex(linkLabel, 0)
+
+            linkLabel.Dock = DockStyle.Top
+
+            'display the html output in default browser
+            Cursor = Cursors.WaitCursor
+            Process.Start(outputElement.HtmlOutput)
+            Cursor = Cursors.Default
+        End If
+
     End Sub
 
     Private Sub SetRichTextBoxHeight(richTextBox As RichTextBox)

@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''--------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ Public Class RFunction
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the R command's name (e.g. "facet_grid") and flags that the R script 
+    ''' <summary>   Sets the R command's name (e.g. "facet_grid") and flags that the R script
     '''             associated with this object is no longer correctly assigned.</summary>
     '''
     ''' <param name="strTemp">  Name of the R command. </param>
@@ -68,7 +68,7 @@ Public Class RFunction
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
-    '''     Creates, updates and returns the script that generates the expected output for this 
+    '''     Creates, updates and returns the script that generates the expected output for this
     '''     object. This script will have the form 'RCommand(param1=param1Val, param2=param2Val, ...)'.
     ''' </summary>
     '''
@@ -77,7 +77,7 @@ Public Class RFunction
     '''                             This script is passed to the 'ToScript' function of the base
     '''                             class. This script is also passed to the 'ToScript' function
     '''                             of the operator's parameters. </param>
-    ''' <param name="strTemp">      (Optional) Ignored, only included so that this function overrides 
+    ''' <param name="strTemp">      (Optional) Ignored, only included so that this function overrides
     '''                             its parent function. </param>
     '''
     ''' <returns>                   The script that generates the expected output for this object.
@@ -116,8 +116,8 @@ Public Class RFunction
             End If
 
             'replace double quotes with single quotes
-            '  Note : Can't have double quotes ("") in the string because strTemp will be wrapped 
-            '         with "". In most cases single quotes (') will give the same functionality, 
+            '  Note : Can't have double quotes ("") in the string because strTemp will be wrapped
+            '         with "". In most cases single quotes (') will give the same functionality,
             '         though it's preferable to avoid this when constructing the RFunction.
             strTemp = strTemp.Replace(Chr(34), Chr(39))
 
@@ -125,7 +125,7 @@ Public Class RFunction
             strTemp = Chr(34) & strTemp & Chr(34)
         End If
 
-        'if object needs to be assigned to then create/update the assignment script (if needed) 
+        'if object needs to be assigned to then create/update the assignment script (if needed)
         '    and return the assignment script. Otherwise just return 'strTemp'.
         Return MyBase.ToScript(strScript, strTemp)
     End Function
@@ -178,7 +178,7 @@ Public Class RFunction
     '''
     ''' <param name="strName">  The name of the parameter to return. </param>
     '''
-    ''' <returns>   The parameter object named <paramref name="strName"/>. If the parameter 
+    ''' <returns>   The parameter object named <paramref name="strName"/>. If the parameter
     '''             doesn't exist then returns 'Nothing'. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Function GetParameter(strName As String) As RParameter
@@ -215,12 +215,16 @@ Public Class RFunction
         Dim clsRParam As RParameter
 
         'RCode properties
+        'todo. why not use the MyBase.Clone() for some of these inherited from the parent properties?
+        clsRFunction._rObjectToAssignTo = Me._rObjectToAssignTo
+        clsRFunction._rObjectNameToAssignTo = Me._rObjectNameToAssignTo
+        clsRFunction._rObjectTypeToAssignTo = Me._rObjectTypeToAssignTo
+        clsRFunction._rObjectFormatToAssignTo = Me._rObjectFormatToAssignTo
+        clsRFunction._rDataFrameNameToAddObjectTo = Me._rDataFrameNameToAddObjectTo
+
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
         clsRFunction.strAssignToColumn = strAssignToColumn
-        clsRFunction.strAssignToModel = strAssignToModel
-        clsRFunction.strAssignToGraph = strAssignToGraph
-        clsRFunction.strAssignToTable = strAssignToTable
         clsRFunction.bToBeAssigned = bToBeAssigned
         clsRFunction.bIsAssigned = bIsAssigned
         clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix

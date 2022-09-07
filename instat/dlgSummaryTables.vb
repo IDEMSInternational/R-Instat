@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -51,7 +51,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -179,7 +178,7 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
         ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
@@ -235,8 +234,7 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
         ucrNudColumnFactors.SetText(1)
-
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        bResetSubdialog = True
 
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
 
@@ -305,7 +303,7 @@ Public Class dlgSummaryTables
 
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
-        clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
+        clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
         clsMutableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsSummaryOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
@@ -317,6 +315,8 @@ Public Class dlgSummaryTables
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
+        'todo. When refactoring this dialog
+        'investigate whether clsSummaryDefaultFunction and clsFrequencyDefaultFunction could be merged. It's only their parameters that change.
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
@@ -382,10 +382,15 @@ Public Class dlgSummaryTables
 
         clsStyleListFunction.SetRCommand("list")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
+        clsJoiningPipeOperator.SetAssignTo("last_table")
+
+        clsJoiningPipeOperator.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
+
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-        clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
-        bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -607,8 +612,6 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
             cmdFormatTable.Location = New Point(286, 464)
             cmdSummaries.Visible = True
@@ -616,8 +619,6 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("frequency_table")
             cmdSummaries.Visible = False
             cmdFormatTable.Location = New Point(286, 379)

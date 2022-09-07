@@ -111,6 +111,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -205,6 +208,14 @@
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enum\RObjectFormat.vb" />
+    <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="frmMaximiseOutput.Designer.vb">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMaximiseOutput.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
@@ -1248,12 +1259,6 @@
       <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGraphDisplay.Designer.vb">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmGraphDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
@@ -2867,6 +2872,13 @@
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\ucrTextViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\Webview\Windows\CefRuntimeWrapper.vb" />
+    <Compile Include="UserControls\Webview\Windows\ucrWebViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>
@@ -3011,6 +3023,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMaximiseOutput.resx">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
@@ -4023,12 +4039,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.sw-KE.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPackageIssues.resx">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
@@ -5141,6 +5151,7 @@
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.manifest" />
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateIgnore.txt" />
