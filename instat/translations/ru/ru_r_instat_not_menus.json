@@ -3659,9 +3659,6 @@
   "Are you sure you want to the main dialog?": "Вы уверены, что хотите перейти к основному диалогу?",
   "The condition for station has not been added.": "Условие для станции не добавлено.",
   "You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.": "У вас есть несколько строк с одинаковыми датами для одной или нескольких станций. Используйте диалоговое окно Climatic > Tidy and Examine > Duplicates, чтобы исследовать эти проблемы.",
-  "Duplicate dates for station(s) were found": "Обнаружены повторяющиеся даты для станций.",
-  "Selection:": "Selection:",
-  "Define New Selection": "Define New Selection",
-  "Remove Current Selection": "Remove Current Selection"
+  "Duplicate dates for station(s) were found": "Обнаружены повторяющиеся даты для станций."
 }
 
