@@ -2623,14 +2623,11 @@ view_graph_object <- function(graph_object){
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
   if (!is.null(r_viewer)) {
-    #When print command is called in R-Studio, a temp file is
-    #automatically created. 
-    #TODO. Investigate how that can be done in R-Instat
-    print(graph_object)
-    #return empty file path. Important for RStudio to display the object
-    return("")
+    #TODO. When print command is called in R-Studio, a temp file is automatically created
+    #Investigate how that can be done in R-Instat
+    #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    return(graph_object)
   }
-  
   
   #get object class names
   object_class_names <- class(graph_object)
@@ -2657,7 +2654,7 @@ view_graph_object <- function(graph_object){
   #   
   # }
   
-  message("R viewer NOT detected. File saved in location ", file_name)
+  message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
   
 }
@@ -2671,14 +2668,11 @@ view_text_object <- function(text_object){
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
   if (!is.null(r_viewer)) {
-    #When print command is called in R-Studio, a temp file is
-    #automatically created. 
-    #TODO. Investigate how that can be done in R-Instat
-    utils::capture.output(text_object)
-    #return empty file path. Important for RStudio to display the object
-    return("")
+    #TODO. When print command is called in R-Studio, a temp file is
+    #automatically created. Investigate how that can be done in R-Instat
+    #as of 07/09/2022 just return output. Important for RStudio to display the object
+    return(utils::capture.output(text_object))
   }
-  
   
   #get object class names
   object_class_names <- class(text_object)
@@ -2690,7 +2684,7 @@ view_text_object <- function(text_object){
   #save the object as a text file 
   utils::capture.output(text_object, file = file_name)
   
-  message("R viewer NOT detected. File saved in location ", file_name)
+  message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
   
 }
@@ -2705,11 +2699,9 @@ view_html_object <- function(html_object){
   r_viewer <- base::getOption("viewer")
   if (!is.null(r_viewer)) {
     #When print command is called in R-Studio, a temp file is
-    #automatically created. 
-    #TODO. Investigate how that can be done in R-Instat
-    print(html_object)
-    #return empty file path. Important for RStudio to display the object
-    return("")
+    #automatically created. TODO. Investigate how that can be done in R-Instat. 
+    #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    return(html_object)
   }
   
   
@@ -2738,7 +2730,7 @@ view_html_object <- function(html_object){
     gt::gtsave(html_object,filename = file_name)
   }
   
-  message("R viewer NOT detected. File saved in location ", file_name)
+  message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
   
 }
