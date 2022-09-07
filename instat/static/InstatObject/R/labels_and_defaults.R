@@ -63,7 +63,6 @@ table_label="table"
 model_label="model"
 structure_label = "structure"
 summary_label = "summary"
-surv_label="surv" #todo. deprecated.
 
 #link labels
 keyed_link_label="keyed_link"

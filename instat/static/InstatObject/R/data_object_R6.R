@@ -2089,8 +2089,7 @@ DataSheet$set("public", "get_objects", function(object_name, object_type_label, 
 DataSheet$set("public", "get_object_names", function(object_type_label, as_list = FALSE, excluded_items = c()) {
     if(missing(object_type_label)){
       out = names(private$objects)
-    }else{
-      #todo. check if type is recognised?
+    }else{ 
       out = names(private$objects)[sapply(private$objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
     }
     

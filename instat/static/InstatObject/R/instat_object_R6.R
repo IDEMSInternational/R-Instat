@@ -650,7 +650,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, object_ty
 }
 )
 
-DataBook$set("public", "get_object_names", function(data_name, object_type_label, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
+DataBook$set("public", "get_object_names", function(data_name, object_type_label, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
  
   if(!missing(object_type_label)){
     
@@ -707,42 +707,6 @@ DataBook$set("public", "get_object_names", function(data_name, object_type_label
     
   }
   
-  
-  #todo. deprecated. Delete after doing the necessary refactoring.
-  if (!internal && exists(".graph_data_book")) return(.graph_data_book$get_object_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, type = type, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
-  if(type == "") overall_object_names = names(private$.objects)
-  else {
-    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(x)))]
-    else if(type == surv_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("Surv") %in% class(x)))]
-    else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
-    else stop("type: ", type, " not recognised")
-  }
-  if(missing(data_name)) {
-    if(missing(type)) out = sapply(self$get_data_objects(), function(x) x$get_object_names()) 
-    else out = sapply(self$get_data_objects(), function(x) x$get_object_names(type = type))
-    #temp disabled as causes a bug
-    #if(include_overall) out[[overall_label]] <- overall_object_names
-    if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
-    if(as_list) out = as.list(out)
-    return(out)
-  }
-  else {
-    if(data_name == overall_label) {
-      if(length(excluded_items) > 0) {
-        ex_ind = which(overall_object_names %in% excluded_items)
-        if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of objects")
-        if(length(ex_ind) > 0) overall_object_names = overall_object_names[-ex_ind]
-      }
-      if(as_list) {
-        lst = list()
-        lst[[overall_label]] <- overall_object_names
-        return(lst)
-      }
-      else return(overall_object_names)
-    }
-    else return(self$get_data_objects(data_name)$get_object_names(type, as_list = as_list, excluded_items = excluded_items))
-  }
 }
 )
 
