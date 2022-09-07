@@ -3655,7 +3655,7 @@
   "Are you sure you want to delete these column(s)?": "Êtes-vous sûr de vouloir supprimer ces colonnes?",
   "This action connot be undone.": "Cette action ne peut être annulée.",
   "Are you sure you want to delete these row(s)?": "Voulez-vous vraiment supprimer ces lignes ?",
-  "Return to main dialog?": "Return to main dialog?",
+  "Return to main dialog?": "Retour à la page principale?",
   "Are you sure you want to the main dialog?": "Are you sure you want to the main dialog?",
   "The condition for station has not been added.": "The condition for station has not been added.",
   "You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.": "You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.",
