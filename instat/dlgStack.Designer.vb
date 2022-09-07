@@ -232,7 +232,7 @@ Partial Class dlgStack
         Me.ucrNudNoSets.AutoSize = True
         Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoSets.Location = New System.Drawing.Point(210, 320)
+        Me.ucrNudNoSets.Location = New System.Drawing.Point(234, 320)
         Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Name = "ucrNudNoSets"
@@ -345,7 +345,7 @@ Partial Class dlgStack
         Me.ucrReceiverColumnsToCarry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToCarry.Name = "ucrReceiverColumnsToCarry"
         Me.ucrReceiverColumnsToCarry.Selector = Nothing
-        Me.ucrReceiverColumnsToCarry.Size = New System.Drawing.Size(120, 97)
+        Me.ucrReceiverColumnsToCarry.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverColumnsToCarry.strNcFilePath = ""
         Me.ucrReceiverColumnsToCarry.TabIndex = 16
         Me.ucrReceiverColumnsToCarry.ucrSelector = Nothing
@@ -369,7 +369,7 @@ Partial Class dlgStack
         Me.ucrBase.Location = New System.Drawing.Point(10, 387)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 25
         '
         'ucrInputToken
