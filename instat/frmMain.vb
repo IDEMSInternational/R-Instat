@@ -2121,9 +2121,6 @@ Public Class frmMain
         Me.Enabled = True
     End Sub
 
-
-
-
     Private Sub mnuModelFitModelOneVariable_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelOneVariable.Click
         dlgOneVarFitModel.ShowDialog()
     End Sub
