@@ -2047,19 +2047,30 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 }
 )
 
-DataSheet$set("public", "add_object", function(object, object_name) {
-  if(missing(object_name)) object_name = next_default_item("object", names(private$objects))
-  if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
-  private$objects[[object_name]] <- object
-  self$append_to_changes(list(Added_object, object_name))
-  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(object))) {
-    private$.last_graph <- object_name
-  }
+DataSheet$set("public", "add_object", function(object_name, object_type_label, object_format, object) {
+  
+    if(missing(object_name)){
+      object_name = next_default_item("object", names(private$objects))
+    } 
+    
+    if(object_name %in% names(private$objects)){
+      message("An object called ", object_name, " already exists. It will be replaced.")
+    }
+    
+    #add the object with its metadata to the list of objects and add an "Added_object" change 
+    private$objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
+    self$append_to_changes(list(Added_object, object_name))
+    
+    #if the object is a graph then set it's name as the last graph name added. 
+    if(identical(object_type_label, "graph")){
+      private$.last_graph <- object_name
+    }
+  
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE, silent = FALSE) {
-  curr_objects = private$objects[self$get_object_names(type = type)]
+DataSheet$set("public", "get_objects", function(object_name, object_type_label, force_as_list = FALSE, silent = FALSE) {
+  curr_objects = private$objects[self$get_object_names(object_type_label = object_type_label)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
@@ -2075,26 +2086,41 @@ DataSheet$set("public", "get_objects", function(object_name, type = "", force_as
 }
 )
 
-DataSheet$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
-  if(type == "") out = names(private$objects)
-  else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(x)))]
-    else if(type == surv_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("Surv") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
-    else stop("type: ", type, " not recognised")
-  }
-  if(length(excluded_items) > 0) {
-    ex_ind = which(out %in% excluded_items)
-    if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of objects")
-    if(length(ex_ind) > 0) out = out[-ex_ind]
-  }
-  if(as_list) {
-    lst = list()
-    lst[[self$get_metadata(data_name_label)]] <- out
-    return(lst)
-  }
-  else return(out)
+DataSheet$set("public", "get_object_names", function(object_type_label, as_list = FALSE, excluded_items = c()) {
+    if(missing(object_type_label)){
+      out = names(private$objects)
+    }else{ 
+      out = names(private$objects)[sapply(private$objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
+    }
+    
+    if(length(out) == 0){
+      return(out)
+    } 
+      
+    
+    if(length(excluded_items) > 0) {
+      excluded_indices = which(out %in% excluded_items)
+      
+      #notify user
+      if(length(excluded_indices) != length(excluded_items)){
+        warning("Some of the excluded_items were not found in the list of objects")
+      } 
+      
+      #remove the excluded items from the list
+      if(length(excluded_indices) > 0){
+        out = out[-excluded_indices]
+      }
+      
+    }
+    
+    if(as_list) {
+      lst = list()
+      lst[[self$get_metadata(data_name_label)]] <- out
+      return(lst)
+    }else{
+      return(out)
+    } 
+    
 }
 )
 
@@ -2105,7 +2131,7 @@ DataSheet$set("public", "get_last_graph_name", function() {
 
 DataSheet$set("public", "get_last_graph", function() {
   if(!is.null(private$.last_graph)) {
-    self$get_objects(object_name = private$.last_graph, type = graph_label)
+    self$get_objects(object_name = private$.last_graph, object_type = graph_label, type = graph_label)
   }
 }
 )

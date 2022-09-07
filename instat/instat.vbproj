@@ -2766,12 +2766,6 @@
     <Compile Include="ucrSave.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSaveModel.Designer.vb">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveModel.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrScript.Designer.vb">
       <DependentUpon>ucrScript.vb</DependentUpon>
     </Compile>
@@ -5100,12 +5094,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSave.sw-KE.resx">
       <DependentUpon>ucrSave.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrScript.resx">
       <DependentUpon>ucrScript.vb</DependentUpon>
