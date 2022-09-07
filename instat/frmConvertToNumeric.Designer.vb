@@ -40,33 +40,33 @@ Partial Class frmConvertToNumeric
         '
         Me.lblPossibleSolutions.Location = New System.Drawing.Point(13, 30)
         Me.lblPossibleSolutions.Name = "lblPossibleSolutions"
-        Me.lblPossibleSolutions.Size = New System.Drawing.Size(423, 103)
+        Me.lblPossibleSolutions.Size = New System.Drawing.Size(510, 103)
         Me.lblPossibleSolutions.TabIndex = 4
         Me.lblPossibleSolutions.Text = resources.GetString("lblPossibleSolutions.Text")
         '
         'cmdNormalConvert
         '
-        Me.cmdNormalConvert.Location = New System.Drawing.Point(100, 143)
+        Me.cmdNormalConvert.Location = New System.Drawing.Point(131, 143)
         Me.cmdNormalConvert.Name = "cmdNormalConvert"
-        Me.cmdNormalConvert.Size = New System.Drawing.Size(96, 23)
+        Me.cmdNormalConvert.Size = New System.Drawing.Size(130, 23)
         Me.cmdNormalConvert.TabIndex = 6
         Me.cmdNormalConvert.Text = "Normal Convert"
         Me.cmdNormalConvert.UseVisualStyleBackColor = True
         '
         'cmdLabelledConvert
         '
-        Me.cmdLabelledConvert.Location = New System.Drawing.Point(197, 143)
+        Me.cmdLabelledConvert.Location = New System.Drawing.Point(264, 143)
         Me.cmdLabelledConvert.Name = "cmdLabelledConvert"
-        Me.cmdLabelledConvert.Size = New System.Drawing.Size(96, 23)
+        Me.cmdLabelledConvert.Size = New System.Drawing.Size(126, 23)
         Me.cmdLabelledConvert.TabIndex = 7
         Me.cmdLabelledConvert.Text = "Lebelled Convert"
         Me.cmdLabelledConvert.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(302, 143)
+        Me.cmdHelp.Location = New System.Drawing.Point(468, 143)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(66, 23)
+        Me.cmdHelp.Size = New System.Drawing.Size(54, 23)
         Me.cmdHelp.TabIndex = 8
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
@@ -75,16 +75,16 @@ Partial Class frmConvertToNumeric
         '
         Me.lblN.AutoSize = True
         Me.lblN.ForeColor = System.Drawing.Color.Red
-        Me.lblN.Location = New System.Drawing.Point(261, 9)
+        Me.lblN.Location = New System.Drawing.Point(274, 9)
         Me.lblN.Name = "lblN"
         Me.lblN.Size = New System.Drawing.Size(0, 13)
         Me.lblN.TabIndex = 3
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(370, 143)
+        Me.cmdCancel.Location = New System.Drawing.Point(393, 143)
         Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(66, 23)
+        Me.cmdCancel.Size = New System.Drawing.Size(71, 23)
         Me.cmdCancel.TabIndex = 9
         Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
@@ -120,7 +120,7 @@ Partial Class frmConvertToNumeric
         '
         Me.cmdInspectValues.Location = New System.Drawing.Point(3, 143)
         Me.cmdInspectValues.Name = "cmdInspectValues"
-        Me.cmdInspectValues.Size = New System.Drawing.Size(96, 23)
+        Me.cmdInspectValues.Size = New System.Drawing.Size(124, 23)
         Me.cmdInspectValues.TabIndex = 5
         Me.cmdInspectValues.Text = "Inspect Values"
         Me.cmdInspectValues.UseVisualStyleBackColor = True
@@ -129,7 +129,7 @@ Partial Class frmConvertToNumeric
         '
         Me.lblOrdinal.AutoSize = True
         Me.lblOrdinal.ForeColor = System.Drawing.Color.Red
-        Me.lblOrdinal.Location = New System.Drawing.Point(65, 95)
+        Me.lblOrdinal.Location = New System.Drawing.Point(65, 82)
         Me.lblOrdinal.Name = "lblOrdinal"
         Me.lblOrdinal.Size = New System.Drawing.Size(43, 13)
         Me.lblOrdinal.TabIndex = 10
@@ -139,7 +139,7 @@ Partial Class frmConvertToNumeric
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(440, 171)
+        Me.ClientSize = New System.Drawing.Size(528, 171)
         Me.Controls.Add(Me.lblOrdinal)
         Me.Controls.Add(Me.cmdInspectValues)
         Me.Controls.Add(Me.lblNumber)
