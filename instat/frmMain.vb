@@ -21,6 +21,7 @@ Imports System.Threading
 Imports instat.Translations
 Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.InteropServices
 
 Public Class frmMain
     Public clsRLink As RLink
@@ -82,6 +83,9 @@ Public Class frmMain
         ' Add any initialization after the InitializeComponent() call.
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            CefRuntimeWrapper.InitialiseCefRuntime()
+        End If
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -886,8 +890,12 @@ Public Class frmMain
                     DeleteAutoSaveData()
                     DeleteAutoSaveLog()
                     DeleteAutoSaveDebugLog()
+                    clsRLink.CloseREngine()
                 End If
-                clsRLink.CloseREngine()
+
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+                    CefRuntimeWrapper.ShutDownCef()
+                End If
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
@@ -2059,12 +2067,6 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
-    End Sub
-
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
@@ -2101,7 +2103,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuViewer_Click(sender As Object, e As EventArgs) Handles mnuViewer.Click
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuNormalViewer.Click
         Me.Enabled = False
         clsRLink.ViewLastGraph()
         Me.Enabled = True
@@ -2112,6 +2114,15 @@ Public Class frmMain
         clsRLink.ViewLastGraph(bAsPlotly:=True)
         Me.Enabled = True
     End Sub
+
+    Private Sub MnuRViewer_Click(sender As Object, e As EventArgs) Handles mnuRViewer.Click
+        Me.Enabled = False
+        clsRLink.ViewLastGraph(bInRViewer:=True)
+        Me.Enabled = True
+    End Sub
+
+
+
 
     Private Sub mnuModelFitModelOneVariable_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelOneVariable.Click
         dlgOneVarFitModel.ShowDialog()
