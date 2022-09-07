@@ -283,19 +283,19 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" + ")
     End Sub
 
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs) Handles cmdMinus.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("-")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" - ")
     End Sub
 
     Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("*")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" * ")
     End Sub
 
     Private Sub cmdDivide_Click(sender As Object, e As EventArgs) Handles cmdDivide.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("/")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" / ")
     End Sub
 
     Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
@@ -2438,9 +2438,9 @@ Public Class ucrCalculator
 
     Private Sub cmd_Click(sender As Object, e As EventArgs) Handles cmdPbirth.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday(n = , classes = 365, coincident = 2))", 34)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN= pbirthday, classes= 365, coincident= 2)", 47)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbirthday()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , pbirthday)", 13)
         End If
     End Sub
 
@@ -2478,9 +2478,9 @@ Public Class ucrCalculator
 
     Private Sub cmdQbirth_Click(sender As Object, e As EventArgs) Handles cmdQbirth.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday(prob = 0.5, classes = 365, coincident = 2))", 37)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X= , FUN= qbirthday, classes= 365, coincident= 2)", 47)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbirthday()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , qbirthday)", 13)
         End If
     End Sub
 
@@ -3034,9 +3034,9 @@ Public Class ucrCalculator
 
     Private Sub cmdBinary_Click(sender As Object, e As EventArgs) Handles cmdBinary.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.integer(R.utils::intToBin(x = ))", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("R.utils::intToBin(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.integer(R.utils::intToBin())", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("R.utils::intToBin()", 1)
         End If
     End Sub
 

@@ -2471,4 +2471,12 @@ Public Class frmMain
         dlgApsimx.ShowDialog()
 
     End Sub
+
+    Private Sub mnuFileImportFromRapidPro_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromRapidPro.Click
+        dlgImportFromRapidPro.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileImportFromPostgres_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromPostgres.Click
+        dlgImportFromPostgres.ShowDialog()
+    End Sub
 End Class
