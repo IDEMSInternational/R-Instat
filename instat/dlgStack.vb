@@ -285,57 +285,64 @@ Public Class dlgStack
 
     Private Sub SetDataFramePrefix()
         Dim strDataframeName As String = ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-        If ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrSaveNewDataName.bUserTyped) Then
-            If rdoPivotLonger.Checked Then
-                ucrSaveNewDataName.SetPrefix(strDataframeName & "_stacked")
-            Else
-                ucrSaveNewDataName.SetPrefix(strDataframeName & "_unnest")
-            End If
+        If strDataframeName = "" OrElse ucrSaveNewDataName.bUserTyped Then
+            Exit Sub
         End If
+
+        ucrSaveNewDataName.SetPrefix(strDataframeName & If(rdoPivotLonger.Checked _
+                                     , "_stacked", "_unnest"))
     End Sub
 
     Private Sub ucrPnlStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStack.ControlValueChanged
         SetDataFramePrefix()
+        ucrBase.clsRsyntax.SetBaseRFunction(If(rdoUnnest.Checked, clsUnnestTokensFunction _
+                                            , clsPivotLongerFunction))
         If rdoUnnest.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsUnnestTokensFunction)
             ucrReceiverTextColumn.SetMeAsReceiver()
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         End If
     End Sub
 
     Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged,
     ucrReceiverColumnsToBeStack.ControlValueChanged, ucrReceiverColumnsToCarry.ControlValueChanged
+
+        If (ucrChangedControl Is ucrChkCarryColumns) Then
+            If (ucrChkCarryColumns.Checked) Then
+                ucrReceiverColumnsToCarry.SetMeAsReceiver()
+            Else
+                ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+            End If
+        End If
+        ucrChkCarryAllColumns.Enabled = Not ucrChkCarryColumns.Checked
+
         clsSelectFunction.ClearParameters()
+
         Dim iPosition As Integer = 0
         For Each strColumn In ucrReceiverColumnsToBeStack.GetVariableNamesAsList
             clsSelectFunction.AddParameter(strColumn, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
             iPosition = iPosition + 1
         Next
+
         If ucrChkCarryColumns.Checked Then
-            ucrChkCarryAllColumns.Checked = False
             ucrChkCarryAllColumns.Enabled = False
-            ucrReceiverColumnsToCarry.SetMeAsReceiver()
             For Each strColumn In ucrReceiverColumnsToCarry.GetVariableNamesAsList
                 If Not ucrReceiverColumnsToBeStack.GetVariableNamesAsList.Contains(strColumn) Then
                     clsSelectFunction.AddParameter(strColumn, strColumn, iPosition:=iPosition, bIncludeArgumentName:=False)
                     iPosition = iPosition + 1
                 End If
             Next
-        Else
-            ucrChkCarryAllColumns.Enabled = True
-            ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+
         End If
         AddRemoveDataOrPipeOperator()
     End Sub
 
     Private Sub AddRemoveDataOrPipeOperator()
+        clsPivotLongerFunction.RemoveParameterByName(If(ucrChkCarryAllColumns.Checked _
+                                                    , "%>%", "data"))
         If ucrChkCarryAllColumns.Checked Then
-            clsPivotLongerFunction.RemoveParameterByName("%>%")
             clsPivotLongerFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         Else
-            clsPivotLongerFunction.RemoveParameterByName("data")
             clsPivotLongerFunction.AddParameter("%>%", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
@@ -344,18 +351,21 @@ Public Class dlgStack
         AddRemoveDataOrPipeOperator()
     End Sub
 
-    Private Sub CoreControls_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged, ucrInputNamesTo.ControlContentsChanged, ucrInputValuesTo.ControlContentsChanged,
-    ucrSaveNewDataName.ControlContentsChanged, ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged, ucrInputDropPrefix.ControlContentsChanged, ucrFactorInto.ControlContentsChanged,
-    ucrPnlStack.ControlContentsChanged, ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged, ucrReceiverColumnsToCarry.ControlContentsChanged, ucrChkDropMissingValues.ControlContentsChanged, ucrChkDropPrefix.ControlContentsChanged, ucrChkStackMultipleSets.ControlContentsChanged
+    Private Sub CoreControls_ControlContentesChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToBeStack.ControlContentsChanged,
+        ucrInputNamesTo.ControlContentsChanged, ucrInputValuesTo.ControlContentsChanged, ucrSaveNewDataName.ControlContentsChanged,
+        ucrInputOutput.ControlContentsChanged, ucrReceiverTextColumn.ControlContentsChanged, ucrInputToken.ControlContentsChanged,
+        ucrInputDropPrefix.ControlContentsChanged, ucrFactorInto.ControlContentsChanged, ucrPnlStack.ControlContentsChanged,
+        ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged,
+        ucrReceiverColumnsToCarry.ControlContentsChanged, ucrChkDropMissingValues.ControlContentsChanged, ucrChkDropPrefix.ControlContentsChanged,
+        ucrChkStackMultipleSets.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
+        ucrBase.clsRsyntax.SetBaseRFunction(If(ucrChkStackMultipleSets.Checked _
+                                             , clsReshapeFunction, clsPivotLongerFunction))
         If ucrChkStackMultipleSets.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReshapeFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
         End If
         TestOKEnabled()
     End Sub

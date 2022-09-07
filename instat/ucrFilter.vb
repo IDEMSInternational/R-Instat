@@ -157,10 +157,10 @@ Public Class ucrFilter
 
     Private Sub SetToggleButtonSettings()
         If ucrFactorLevels.IsAllGridRowsSelected Then
-            cmdToggleSelectAll.Text = "Deselect All Levels"
+            cmdToggleSelectAll.Text = Translations.GetTranslation("Deselect All Levels")
             cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
         Else
-            cmdToggleSelectAll.Text = "Select All Levels"
+            cmdToggleSelectAll.Text = Translations.GetTranslation("Select All Levels")
             cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
     End Sub
