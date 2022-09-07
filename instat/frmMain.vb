@@ -382,14 +382,6 @@ Public Class frmMain
         End Try
     End Sub
 
-    Public Sub AddGraphForm(strFilePath As String)
-        Dim frmNewGraph As New frmGraphDisplay
-
-        frmNewGraph.SetImageFromFile(strFilePath)
-        frmNewGraph.Show()
-        frmNewGraph.BringToFront()
-    End Sub
-
     Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
         ucrScriptWindow.AppendText(strText)
         If bMakeVisible Then

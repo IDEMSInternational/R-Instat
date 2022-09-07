@@ -17,7 +17,6 @@
 Imports CefSharp.WinForms
 Imports CefSharp
 Imports CefSharp.DevTools.DOM
-Imports System.Windows
 
 'todo. inherit panel?
 Public Class ucrWebViewer
