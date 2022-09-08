@@ -325,7 +325,8 @@ Public Class dlgScatterPlot
                 'Still might be in the case of bSingleVariable with mapping y="".
                 If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
                     ucrVariablesAsFactorForScatter.Clear()
-                Else ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
+                Else 
+                    ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
