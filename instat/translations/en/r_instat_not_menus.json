@@ -3679,5 +3679,12 @@
   "Formula": "Formula",
   "Dumbbell options": "Dumbbell options",
   "X End Variable:": "X End Variable:",
-  "Adjust size of variable": "Adjust size of variable"}
+  "Adjust size of variable": "Adjust size of variable",
+  "Shave": "Shave",
+  "Rearrange": "Rearrange",
+  "Leading Zeros": "Leading Zeros",
+  "Display On Diagonal:": "Display On Diagonal:",
+  "Decimal Places:": "Decimal Places:",
+  "Display As DataFrame": "Display As DataFrame",
+  "Data Frame Name": "Data Frame Name"}
 
