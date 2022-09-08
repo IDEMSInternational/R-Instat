@@ -77,7 +77,7 @@ Public Class ucrDataView
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
         AttachEventsToGrid()
         RefreshDisplayInformation()
-        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click here to to a specific row page.")
+        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click here to go to a specific row page.")
     End Sub
 
     Private Sub AttachEventsToGrid()
