@@ -77,6 +77,7 @@ Public Class ucrDataView
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
         AttachEventsToGrid()
         RefreshDisplayInformation()
+        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click here to to a specific row page.")
     End Sub
 
     Private Sub AttachEventsToGrid()
@@ -893,19 +894,15 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
-        Dim frm As New Form
-        Dim txtPage As New TextBox
-
-        frm.ShowInTaskbar = False
-        frm.FormBorderStyle = FormBorderStyle.None
-        frm.Size = New Size(20, 20)
-        frm.Controls.Add(txtPage)
-
-        txtPage.Dock = DockStyle.Fill
-
-        Dim ctlpos As Point = lblRowFirst.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
-        frm.StartPosition = FormStartPosition.Manual 'set it to manual
-        frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
-        frm.Show()
+        Dim strRow As String = ""
+        strRow = InputBox("Enter row number", "Row Page Number", "1")
+        If strRow <> "" Then
+            If CInt(strRow) < 1 Then
+                MsgBox("Value cannot be 0")
+                Exit Sub
+            End If
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(CInt(strRow))
+            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+        End If
     End Sub
 End Class
