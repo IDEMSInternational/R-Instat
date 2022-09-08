@@ -3686,5 +3686,8 @@
   "Display On Diagonal:": "Display On Diagonal:",
   "Decimal Places:": "Decimal Places:",
   "Display As DataFrame": "Display As DataFrame",
-  "Data Frame Name": "Data Frame Name"}
+  "Data Frame Name": "Data Frame Name",
+  "Rename With": "Rename With",
+  "Rename Columns": "Rename Columns"
+}
 
