@@ -891,4 +891,21 @@ Public Class ucrDataView
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, mnuHelp1.Click, mnuHelp2.Click, mnuHelp3.Click
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "146")
     End Sub
+
+    Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
+        Dim frm As New Form
+        Dim txtPage As New TextBox
+
+        frm.ShowInTaskbar = False
+        frm.FormBorderStyle = FormBorderStyle.None
+        frm.Size = New Size(20, 20)
+        frm.Controls.Add(txtPage)
+
+        txtPage.Dock = DockStyle.Fill
+
+        Dim ctlpos As Point = lblRowFirst.PointToScreen(New Point(0, 0)) 'Point.Empty is not function so use Point(0, 0)
+        frm.StartPosition = FormStartPosition.Manual 'set it to manual
+        frm.Location = New Point(ctlpos.X - 2, ctlpos.Y - frm.Height - 2) 'set location to show the form just above the examples button
+        frm.Show()
+    End Sub
 End Class
