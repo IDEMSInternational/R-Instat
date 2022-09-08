@@ -3659,6 +3659,16 @@
   "Are you sure you want to the main dialog?": "Etes-vous sûr de vouloir accéder au dialogue principal ?",
   "The condition for station has not been added.": "La condition pour la station n'a pas été ajoutée.",
   "You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.": "Vous avez plusieurs lignes avec les mêmes dates pour une ou plusieurs stations. Utilisez la boîte de dialogue Climatique > Ranger et Examiner > Doublons pour étudier ces problèmes.",
-  "Duplicate dates for station(s) were found": "Des dates dupliquées pour la ou les station(s) ont été trouvées"
+  "Duplicate dates for station(s) were found": "Des dates dupliquées pour la ou les station(s) ont été trouvées",
+  "Names To:": "Names To:",
+  "Values To:": "Values To:",
+  "Drop Prefix:": "Drop Prefix:",
+  "Drop Missing Values": "Drop Missing Values",
+  "Carry All Columns": "Carry All Columns",
+  "Columns to Carry": "Columns to Carry",
+  "Pivot Longer": "Pivot Longer",
+  "Unnest": "Unnest",
+  "names": "names",
+  "value": "value"
 }
 
