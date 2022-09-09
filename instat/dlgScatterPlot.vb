@@ -300,26 +300,29 @@ Public Class dlgScatterPlot
         bResetlayerSubdialog = False
         'The aesthetics parameters on the main dialog are repopulated as required. 
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the value stored in the clsRaesFunction in the multiplevariables case is "value",
-                'however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ?
-                'Here if the receiver is actually in single mode, the variable "value" will still be given back,
-                'which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForScatter.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForScatter.Clear()
-                Else ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
-            End If
+            Select Case clsParam.strArgumentName
+                Case "x"
+                    If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        ucrReceiverX.Clear()
+                    Else
+                        ucrReceiverX.Add(clsParam.strArgumentValue)
+                    End If
+                Case "y"
+                    ' If we are in multiple variables mode and 'y = value', 
+                    '     then we should not write 'value' to the multiple variables receiver
+                    If Not ucrVariablesAsFactorForScatter.bSingleVariable _
+                            AndAlso clsParam.strArgumentValue Is "value" Then
+                        Exit Select
+                    End If
+
+                    If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                        ucrVariablesAsFactorForScatter.Clear()
+                    Else
+                        ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
+                    End If
+                Case "colour"
+                    ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            End Select
         Next
     End Sub
 
