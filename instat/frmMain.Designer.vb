@@ -3320,11 +3320,9 @@ Partial Class frmMain
         '
         'mnuFileImportFromRapidPro
         '
-        Me.mnuFileImportFromRapidPro.Enabled = False
         Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
         Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(232, 22)
         Me.mnuFileImportFromRapidPro.Text = "Import From RapidPro"
-        Me.mnuFileImportFromRapidPro.Visible = False
         '
         'mnuFileImportandTidyNetCDFFile
         '
