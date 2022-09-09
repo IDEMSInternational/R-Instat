@@ -2923,12 +2923,14 @@ Partial Class frmMain
         '
         'mnuEditCopySpecial
         '
+        Me.mnuEditCopySpecial.Enabled = False
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
         Me.mnuEditCopySpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
         Me.mnuEditCopySpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditCopySpecial.Tag = "Copy_Special"
         Me.mnuEditCopySpecial.Text = "Copy Special"
+        Me.mnuEditCopySpecial.Visible = False
         '
         'mnuEditPaste
         '
