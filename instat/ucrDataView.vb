@@ -77,7 +77,7 @@ Public Class ucrDataView
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
         AttachEventsToGrid()
         RefreshDisplayInformation()
-        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click here to go to a specific row page.")
+        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click to go to a specific window.")
     End Sub
 
     Private Sub AttachEventsToGrid()
@@ -895,7 +895,7 @@ Public Class ucrDataView
 
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         Dim strRow As String = ""
-        strRow = InputBox("Enter row number", "Row Page Number", "1")
+        strRow = InputBox("Enter window number:", "Window number", "1")
         If strRow <> "" Then
             If CInt(strRow) < 1 Then
                 MsgBox("Value cannot be 0")
