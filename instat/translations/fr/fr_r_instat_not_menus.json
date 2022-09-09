@@ -3685,9 +3685,9 @@
   "Leading Zeros": "Leading Zeros",
   "Display On Diagonal:": "Display On Diagonal:",
   "Decimal Places:": "Decimal Places:",
-  "Display As DataFrame": "Display As DataFrame",
-  "Data Frame Name": "Data Frame Name",
-  "Rename With": "Rename With",
-  "Rename Columns": "Rename Columns"
+  "Display As DataFrame": "Afficher comme tableau de données",
+  "Data Frame Name": " Nom de tableau de données",
+  "Rename With": "Renommer avec",
+  "Rename Columns": "Renommer les colonnes"
 }
 
