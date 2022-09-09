@@ -3109,13 +3109,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdGeneratePrimes_Click(sender As Object, e As EventArgs) Handles cmdGeneratePrimes.Click
-        Dim clsGetDataframeFunction As New RFunction
         Dim clsNRowsFunction As New RFunction
         Dim clsGeneratePrimesFunction As New RFunction
 
-        clsGetDataframeFunction.AddParameter("data_name", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
         clsNRowsFunction.SetRCommand("nrow")
-        clsNRowsFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataframeFunction, iPosition:=0)
+        clsNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
 
         clsGeneratePrimesFunction.SetPackageName("primes")
         clsGeneratePrimesFunction.SetRCommand("generate_n_primes")
