@@ -51,9 +51,9 @@ Public Class dlgApsimx
 
         Dim dctExamplesModels As New Dictionary(Of String, String) From {
            {"Barley", Chr(34) & "Barley" & Chr(34)},
-           {"Controlled Environment", Chr(34) & "ControlledEnvironment" & Chr(34)},
+           {"ControlledEnvironment", Chr(34) & "ControlledEnvironment" & Chr(34)},
            {"Eucalyptus", Chr(34) & "Eucalyptus" & Chr(34)},
-           {"Eucalyptus Rotation", Chr(34) & "EucalyptusRotation" & Chr(34)},
+           {"EucalyptusRotation", Chr(34) & "EucalyptusRotation" & Chr(34)},
            {"Maize", Chr(34) & "Maize" & Chr(34)},
            {"Oats", Chr(34) & "Oats" & Chr(34)},
            {"Rotation", Chr(34) & "Rotation" & Chr(34)},
