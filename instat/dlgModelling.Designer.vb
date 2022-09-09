@@ -59,13 +59,7 @@ Partial Class dlgModelling
         Me.cmdlmer = New System.Windows.Forms.Button()
         Me.cmdglmer = New System.Windows.Forms.Button()
         Me.grplme4 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.grpArm = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.cmdbayesglm = New System.Windows.Forms.Button()
         Me.cmdloglm = New System.Windows.Forms.Button()
         Me.cmdpolr = New System.Windows.Forms.Button()
@@ -86,14 +80,16 @@ Partial Class dlgModelling
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpBayesianPlus = New System.Windows.Forms.GroupBox()
+        Me.cmdinference = New System.Windows.Forms.Button()
+        Me.cmdbayesinference = New System.Windows.Forms.Button()
         Me.grpStats.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpextRemes.SuspendLayout()
         Me.grplme4.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.grpArm.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.grpMASS.SuspendLayout()
+        Me.grpBayesianPlus.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblModel
@@ -429,7 +425,7 @@ Partial Class dlgModelling
         'cmdbayespolr
         '
         Me.cmdbayespolr.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbayespolr.Location = New System.Drawing.Point(107, 19)
+        Me.cmdbayespolr.Location = New System.Drawing.Point(106, 19)
         Me.cmdbayespolr.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdbayespolr.Name = "cmdbayespolr"
         Me.cmdbayespolr.Size = New System.Drawing.Size(104, 45)
@@ -530,8 +526,6 @@ Partial Class dlgModelling
         '
         'grplme4
         '
-        Me.grplme4.Controls.Add(Me.GroupBox1)
-        Me.grplme4.Controls.Add(Me.grpArm)
         Me.grplme4.Controls.Add(Me.cmdlmer)
         Me.grplme4.Controls.Add(Me.cmdglmer)
         Me.grplme4.Controls.Add(Me.cmdnlmer)
@@ -544,88 +538,21 @@ Partial Class dlgModelling
         Me.grplme4.TabStop = False
         Me.grplme4.Text = "lme4"
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 5)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(211, 69)
-        Me.GroupBox1.TabIndex = 126
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "arm"
-        '
-        'Button1
-        '
-        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button1.Location = New System.Drawing.Point(101, 19)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(104, 45)
-        Me.Button1.TabIndex = 126
-        Me.Button1.Text = "bayespolr"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button2.Location = New System.Drawing.Point(0, 19)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(104, 45)
-        Me.Button2.TabIndex = 125
-        Me.Button2.Text = "bayesglm"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'grpArm
         '
-        Me.grpArm.Controls.Add(Me.GroupBox2)
         Me.grpArm.Controls.Add(Me.cmdbayespolr)
         Me.grpArm.Controls.Add(Me.cmdbayesglm)
-        Me.grpArm.Location = New System.Drawing.Point(6, 5)
+        Me.grpArm.Location = New System.Drawing.Point(440, 101)
         Me.grpArm.Name = "grpArm"
-        Me.grpArm.Size = New System.Drawing.Size(233, 88)
+        Me.grpArm.Size = New System.Drawing.Size(215, 73)
         Me.grpArm.TabIndex = 126
         Me.grpArm.TabStop = False
         Me.grpArm.Text = "arm"
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Button3)
-        Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(233, 88)
-        Me.GroupBox2.TabIndex = 126
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "arm"
-        '
-        'Button3
-        '
-        Me.Button3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button3.Location = New System.Drawing.Point(107, 19)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(104, 45)
-        Me.Button3.TabIndex = 126
-        Me.Button3.Text = "bayespolr"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button4.Location = New System.Drawing.Point(6, 19)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(104, 45)
-        Me.Button4.TabIndex = 125
-        Me.Button4.Text = "bayesglm"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'cmdbayesglm
         '
         Me.cmdbayesglm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbayesglm.Location = New System.Drawing.Point(6, 19)
+        Me.cmdbayesglm.Location = New System.Drawing.Point(4, 19)
         Me.cmdbayesglm.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdbayesglm.Name = "cmdbayesglm"
         Me.cmdbayesglm.Size = New System.Drawing.Size(104, 45)
@@ -850,6 +777,39 @@ Partial Class dlgModelling
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 14
         '
+        'grpBayesianPlus
+        '
+        Me.grpBayesianPlus.Controls.Add(Me.cmdinference)
+        Me.grpBayesianPlus.Controls.Add(Me.cmdbayesinference)
+        Me.grpBayesianPlus.Location = New System.Drawing.Point(440, 106)
+        Me.grpBayesianPlus.Name = "grpBayesianPlus"
+        Me.grpBayesianPlus.Size = New System.Drawing.Size(215, 70)
+        Me.grpBayesianPlus.TabIndex = 127
+        Me.grpBayesianPlus.TabStop = False
+        Me.grpBayesianPlus.Text = "Bayesian Plus"
+        '
+        'cmdinference
+        '
+        Me.cmdinference.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdinference.Location = New System.Drawing.Point(107, 18)
+        Me.cmdinference.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdinference.Name = "cmdinference"
+        Me.cmdinference.Size = New System.Drawing.Size(104, 45)
+        Me.cmdinference.TabIndex = 126
+        Me.cmdinference.Text = "Inference"
+        Me.cmdinference.UseVisualStyleBackColor = True
+        '
+        'cmdbayesinference
+        '
+        Me.cmdbayesinference.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdbayesinference.Location = New System.Drawing.Point(4, 19)
+        Me.cmdbayesinference.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdbayesinference.Name = "cmdbayesinference"
+        Me.cmdbayesinference.Size = New System.Drawing.Size(104, 45)
+        Me.cmdbayesinference.TabIndex = 125
+        Me.cmdbayesinference.Text = "bayes_inf"
+        Me.cmdbayesinference.UseVisualStyleBackColor = True
+        '
         'dlgModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -870,10 +830,12 @@ Partial Class dlgModelling
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.ucrSelectorModelling)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpBayesianPlus)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
         Me.Controls.Add(Me.grpStats)
         Me.Controls.Add(Me.grplme4)
+        Me.Controls.Add(Me.grpArm)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
@@ -885,10 +847,9 @@ Partial Class dlgModelling
         Me.grpFirstCalc.ResumeLayout(False)
         Me.grpextRemes.ResumeLayout(False)
         Me.grplme4.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
         Me.grpArm.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
         Me.grpMASS.ResumeLayout(False)
+        Me.grpBayesianPlus.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -951,11 +912,8 @@ Partial Class dlgModelling
     Friend WithEvents ucrTryModelling As ucrTry
     Friend WithEvents cmdbayespolr As Button
     Friend WithEvents cmdbayesglm As Button
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
     Friend WithEvents grpArm As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents grpBayesianPlus As GroupBox
+    Friend WithEvents cmdinference As Button
+    Friend WithEvents cmdbayesinference As Button
 End Class

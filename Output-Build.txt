@@ -1,0 +1,9 @@
+﻿Build started...
+1>------ Build started: Project: instat, Configuration: Debug Any CPU ------
+1>C:\Users\Admin\source\repo\R-Instat\instat\dlgModelling.vb(629,35): error BC30311: Value of type 'Boolean' cannot be converted to 'GroupBox'.
+1>C:\Users\Admin\source\repo\R-Instat\instat\dlgModelling.vb(636,35): error BC30311: Value of type 'Boolean' cannot be converted to 'GroupBox'.
+1>C:\Users\Admin\source\repo\R-Instat\instat\dlgModelling.vb(643,35): error BC30311: Value of type 'Boolean' cannot be converted to 'GroupBox'.
+1>C:\Users\Admin\source\repo\R-Instat\instat\dlgModelling.vb(650,35): error BC30311: Value of type 'Boolean' cannot be converted to 'GroupBox'.
+1>C:\Users\Admin\source\repo\R-Instat\instat\dlgModelling.vb(657,35): error BC30311: Value of type 'Boolean' cannot be converted to 'GroupBox'.
+1>C:\Users\Admin\source\repo\R-Instat\instat\dlgModelling.vb(664,35): error BC30311: Value of type 'Boolean' cannot be converted to 'GroupBox'.
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========

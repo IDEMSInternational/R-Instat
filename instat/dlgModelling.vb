@@ -67,7 +67,7 @@ Public Class dlgModelling
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
         ucrTryModelling.SetIsModel()
 
-        ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS", "arm"})
+        ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS", "arm", "statsr"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         bUpdating = False
@@ -328,6 +328,7 @@ Public Class dlgModelling
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("spline()", 1)
         End If
     End Sub
+
     Private Sub cmdfevd_Click(sender As Object, e As EventArgs) Handles cmdfevd.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -412,7 +413,7 @@ Public Class dlgModelling
     Private Sub cmdbayesglm_Click(sender As Object, e As EventArgs) Handles cmdbayesglm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula, family = gaussian, data,weights, subset, na.action,start = NULL, etastart, mustart,offset, control = list(...),model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 476)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula =, family = gaussian, data=,weights=, subset=, na.action=,start = NULL, etastart=, mustart= ,offset=, control = list(...),model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 489)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm()", 1)
         End If
@@ -421,9 +422,27 @@ Public Class dlgModelling
     Private Sub cmdbayespolr_Click(sender As Object, e As EventArgs) Handles cmdbayespolr.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr(formula, data, weights, start,subset, na.action, contrasts = NULL,Hess = TRUE, model = TRUE,method = c(logistic, probit,cloglog,cauchit),drop.unused.levels=TRUE,prior.mean = 0,prior.scale = 2.5,prior.df = 1,prior.counts.for.bins = NULL,min.prior.scale=1e-12,scaled = TRUE,maxit = 100,print.unnormalized.log.posterior = FALSE)", 476)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr(formula= , data=, weights=, start=, subset=, na.action=, contrasts = NULL,Hess = TRUE, model = TRUE,method = c(logistic, probit,cloglog,cauchit),drop.unused.levels=TRUE,prior.mean = 0,prior.scale = 2.5,prior.df = 1,prior.counts.for.bins = NULL,min.prior.scale=1e-12,scaled = TRUE,maxit = 100,print.unnormalized.log.posterior = FALSE)", 325)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdbayesinference_Click(sender As Object, e As EventArgs) Handles cmdbayesinference.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference(y= ,x = NULL,data= ,type= c(ci, ht), statistic = c(mean, proportion),method = c(theoretical, simulation),success = NULL,null = NULL,cred_level = 0.95,alternative = c(twosided, less, greater) hypothesis_prior = c(H1 = 0.5, H2 = 0.5), prior_family = JZS,n_0 = 1,mu_0 = null, s_0 = 0, v_0 = -1,rscale = 1,beta_prior = NULL,beta_prior1 = NULL,beta_prior2 = NULL,nsim = 10000,verbose = TRUE,show_summ = verbose,show_res = verbose,show_plot = verbose)", 443)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdinference_Click(sender As Object, e As EventArgs) Handles cmdinference.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference(inference(y= , x = NULL,data= ,type = c(ci, ht),statistic = c(mean, median, proportion),success = NULL,order = NULL,method = c(theoretical, simulation),null = NULL,alternative = c(less, greater, twosided),sig_level = 0.05,conf_level = 0.95,boot_method = c(perc, se),nsim = 15000,seed = NULL,verbose = TRUE,show_var_types = verbose,show_summ_stats = verbose,show_eda_plot = verbose,show_inf_plot = verbose,show_res = verbose)", 412)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference()", 1)
         End If
     End Sub
 
@@ -527,7 +546,6 @@ Public Class dlgModelling
         bResetDisplayOptions = False
     End Sub
 
-
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
         Dim strPackageName As String
@@ -609,33 +627,44 @@ Public Class dlgModelling
                 grplme4.Visible = False
                 grpMASS.Visible = False
                 grpArm.Visible = False
+                grpBayesianPlus.Visible = False
             Case "extRemes"
                 grpStats.Visible = False
                 grpextRemes.Visible = True
                 grplme4.Visible = False
                 grpMASS.Visible = False
                 grpArm.Visible = False
+                grpBayesianPlus.Visible = False
             Case "lme4"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = True
                 grpMASS.Visible = False
                 grpArm.Visible = False
+                grpBayesianPlus.Visible = False
             Case "MASS"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = True
                 grpArm.Visible = False
+                grpBayesianPlus.Visible = False
             Case "arm"
                 grpArm.Visible = True
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                grpBayesianPlus.Visible = False
+            Case "statsr"
+                grpArm.Visible = False
+                grpStats.Visible = False
+                grpextRemes.Visible = False
+                grplme4.Visible = False
+                grpMASS.Visible = False
+                grpBayesianPlus.Visible = True
         End Select
     End Sub
-
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
