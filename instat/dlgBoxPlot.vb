@@ -377,17 +377,15 @@ Public Class dlgBoxplot
 
     Private Sub toolStripMenuItemBoxOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsBoxplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsBoxplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
         If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
             If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-                ' chkVarwidth.Checked = True
-                'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
         Else
-            'chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
@@ -414,17 +412,16 @@ Public Class dlgBoxplot
 
     Private Sub toolStripMenuItemTufteOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTufteOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTufteBoxplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTufteBoxplotFunction, clsNewGlobalAesFunc:=clsRaesFunction,
+                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True,
+                                   bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
         If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
             If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-                ' chkVarwidth.Checked = True
-                'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
         Else
-            'chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
@@ -451,17 +448,15 @@ Public Class dlgBoxplot
 
     Private Sub toolStripMenuItemJitterOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemJitterOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsJitterplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsJitterplotFunction, clsNewGlobalAesFunc:=clsRaesFunction,
+                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
         If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
             If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-                ' chkVarwidth.Checked = True
-                'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
         Else
-            'chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
@@ -488,17 +483,16 @@ Public Class dlgBoxplot
 
     Private Sub toolStripMenuItemViolinOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemViolinOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsViolinplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsViolinplotFunction, clsNewGlobalAesFunc:=clsRaesFunction,
+                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True,
+                                   bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBoxLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
         If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
             If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-                ' chkVarwidth.Checked = True
-                'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
         Else
-            'chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
