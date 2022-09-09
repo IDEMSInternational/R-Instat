@@ -125,13 +125,13 @@ Public Class dlgImportFromRapidPro
 
         clsGetUserDataFunction.SetPackageName("rapidpror")
         clsGetUserDataFunction.SetRCommand("get_user_data")
-        clsGetUserDataFunction.AddParameter("rapidpro_site", "get_rapidpro_site()", iPosition:=0)
-        clsGetUserDataFunction.AddParameter("token", "get_rapidpro_key()", iPosition:=1)
+        clsGetUserDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
+        clsGetUserDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
 
         clsGetFlowDataFunction.SetPackageName("rapidpror")
         clsGetFlowDataFunction.SetRCommand("get_flow_data")
-        clsGetFlowDataFunction.AddParameter("rapidpro_site", "get_rapidpro_site()", iPosition:=0)
-        clsGetFlowDataFunction.AddParameter("token", "get_rapidpro_key()", iPosition:=1)
+        clsGetFlowDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
+        clsGetFlowDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction)
