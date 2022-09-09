@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -21,8 +21,8 @@ Public Class dlgImportFromRapidPro
     Private bReset As Boolean = True
     Private clsGetUserDataFunction As New RFunction
     Private clsGetFlowDataFunction As New RFunction
-    Private clsGetRapidTokenFunction As New RFunction
-    Private clsGetSiteFunction As New RFunction
+    Private clsSetTokenFunction As New RFunction
+    Private clsSetSiteFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgImportFromRapidPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -108,31 +108,33 @@ Public Class dlgImportFromRapidPro
     Private Sub SetDefaults()
         clsGetFlowDataFunction = New RFunction
         clsGetUserDataFunction = New RFunction
-        clsGetRapidTokenFunction = New RFunction
+        clsSetTokenFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsGetSiteFunction = New RFunction
+        clsSetSiteFunction = New RFunction
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked1", "FALSE", iPosition:=1)
 
-        clsGetSiteFunction.SetPackageName("rapidpror")
-        clsGetSiteFunction.SetRCommand("get_rapidpro_site")
+        clsSetSiteFunction.SetPackageName("rapidpror")
+        clsSetSiteFunction.SetRCommand("set_rapidpro_site")
 
-        clsGetRapidTokenFunction.SetPackageName("rapidpror")
-        clsGetRapidTokenFunction.SetRCommand("get_rapidpro_key")
-        clsGetRapidTokenFunction.AddParameter(strParameterName:="key", Chr(34) & Chr(34), iPosition:=0)
-        clsGetRapidTokenFunction.AddParameter(strParameterName:="file", "TRUE", iPosition:=1)
+        clsSetTokenFunction.SetPackageName("rapidpror")
+        clsSetTokenFunction.SetRCommand("set_rapidpro_key")
+        clsSetTokenFunction.AddParameter(strParameterName:="key", Chr(34) & Chr(34), iPosition:=0)
+        clsSetTokenFunction.AddParameter(strParameterName:="file", "TRUE", iPosition:=1)
 
         clsGetUserDataFunction.SetPackageName("rapidpror")
         clsGetUserDataFunction.SetRCommand("get_user_data")
-        clsGetUserDataFunction.AddParameter("rapidpro_site", clsRFunctionParameter:=clsGetSiteFunction, iPosition:=0)
-        clsGetUserDataFunction.AddParameter("token", clsRFunctionParameter:=clsGetRapidTokenFunction, iPosition:=1)
+        clsGetUserDataFunction.AddParameter("rapidpro_site", "get_rapidpro_site()", iPosition:=0)
+        clsGetUserDataFunction.AddParameter("token", "get_rapidpro_key()", iPosition:=1)
 
         clsGetFlowDataFunction.SetPackageName("rapidpror")
         clsGetFlowDataFunction.SetRCommand("get_flow_data")
-        clsGetFlowDataFunction.AddParameter("rapidpro_site", clsRFunctionParameter:=clsGetSiteFunction, iPosition:=0)
-        clsGetFlowDataFunction.AddParameter("token", clsRFunctionParameter:=clsGetRapidTokenFunction, iPosition:=1)
+        clsGetFlowDataFunction.AddParameter("rapidpro_site", "get_rapidpro_site()", iPosition:=0)
+        clsGetFlowDataFunction.AddParameter("token", "get_rapidpro_key()", iPosition:=1)
 
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
     End Sub
 
@@ -143,7 +145,7 @@ Public Class dlgImportFromRapidPro
         ucrInputTimezone.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputTimezone.GetParameter(), iAdditionalPairNo:=1)
         ucrChkFlattenData.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrChkFlattenData.GetParameter(), iAdditionalPairNo:=1)
 
-        ucrInputRapidProSite.SetRCode(clsGetSiteFunction, bReset)
+        ucrInputRapidProSite.SetRCode(clsSetSiteFunction, bReset)
         ucrInputEndDate.SetRCode(clsGetUserDataFunction, bReset)
         ucrInputStartDate.SetRCode(clsGetUserDataFunction, bReset)
         ucrInputDateFormat.SetRCode(clsGetUserDataFunction, bReset)
@@ -154,7 +156,7 @@ Public Class dlgImportFromRapidPro
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputRapidProSite.IsEmpty AndAlso clsGetRapidTokenFunction.GetParameter("key").strArgumentValue <> Chr(34) & Chr(34) Then
+        If Not ucrInputRapidProSite.IsEmpty AndAlso clsSetTokenFunction.GetParameter("key").strArgumentValue <> Chr(34) & Chr(34) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -170,7 +172,7 @@ Public Class dlgImportFromRapidPro
     End Sub
 
     Private Sub cmdSetToken_Click(sender As Object, e As EventArgs) Handles cmdSetToken.Click
-        sdgImportFromRapidPro.Setup(clsGetRapidTokenFunction.GetParameter("key"))
+        sdgImportFromRapidPro.Setup(clsSetTokenFunction.GetParameter("key"))
         sdgImportFromRapidPro.ShowDialog()
         TestOKEnabled()
     End Sub
