@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,8 @@ Imports instat.Translations
 Imports System.IO
 
 Public Class sdgImportFromRapidPro
+    Private strFileName As String = ""
+    Private strFilePath As String = ""
 
     Private Sub sdgImportFromRapidPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrInputTokenPath.IsReadOnly = True
@@ -29,20 +31,23 @@ Public Class sdgImportFromRapidPro
     End Sub
 
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        Dim strFileName As String = ""
+        Dim strFileExt As String = ""
+        Dim strTemp As String = ""
+
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "Text Files|*.txt"
             dlgOpen.Title = "Import Text File"
 
-            dlgOpen.InitialDirectory = If(ucrInputTokenPath.IsEmpty(),
-                frmMain.clsInstatOptions.strWorkingDirectory,
-                Path.GetDirectoryName(Replace(ucrInputTokenPath.GetText(), "/", "\")))
+            dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputTokenPath.GetText(), "/", "\"))
 
-            If DialogResult.OK = dlgOpen.ShowDialog() Then
-                If Not String.IsNullOrEmpty(dlgOpen.FileName) Then
-                    Dim strFileName As String = Replace(dlgOpen.FileName, "\", "/")
+            If dlgOpen.ShowDialog() = DialogResult.OK Then
+
+                If dlgOpen.FileName <> "" Then
                     strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                    'display the file path to the user
-                    ucrInputTokenPath.SetName(strFileName)
+                    strFilePath = dlgOpen.FileName
+                    strFileExt = Path.GetExtension(strFilePath)
+                    ucrInputTokenPath.SetName(Replace(strFilePath, "\", "/"))
                 End If
             End If
         End Using
