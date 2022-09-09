@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class sdgImportFromRapidPro
     Inherits System.Windows.Forms.Form
 
@@ -31,9 +31,10 @@ Partial Class sdgImportFromRapidPro
         'lblToken
         '
         Me.lblToken.AutoSize = True
-        Me.lblToken.Location = New System.Drawing.Point(7, 16)
+        Me.lblToken.Location = New System.Drawing.Point(10, 25)
+        Me.lblToken.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblToken.Name = "lblToken"
-        Me.lblToken.Size = New System.Drawing.Size(41, 13)
+        Me.lblToken.Size = New System.Drawing.Size(57, 20)
         Me.lblToken.TabIndex = 0
         Me.lblToken.Text = "Token:"
         '
@@ -43,39 +44,47 @@ Partial Class sdgImportFromRapidPro
         Me.ucrInputTokenPath.AutoSize = True
         Me.ucrInputTokenPath.IsMultiline = False
         Me.ucrInputTokenPath.IsReadOnly = False
-        Me.ucrInputTokenPath.Location = New System.Drawing.Point(45, 12)
+        Me.ucrInputTokenPath.Location = New System.Drawing.Point(69, 22)
+        Me.ucrInputTokenPath.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputTokenPath.Name = "ucrInputTokenPath"
-        Me.ucrInputTokenPath.Size = New System.Drawing.Size(196, 27)
+        Me.ucrInputTokenPath.Size = New System.Drawing.Size(294, 42)
         Me.ucrInputTokenPath.TabIndex = 1
         '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(17, 76)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(26, 117)
+        Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
         Me.ucrBaseSubdialog.TabIndex = 2
         '
         'cmdChooseFile
         '
-        Me.cmdChooseFile.Location = New System.Drawing.Point(258, 11)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(387, 17)
+        Me.cmdChooseFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.Size = New System.Drawing.Size(100, 23)
+        Me.cmdChooseFile.Size = New System.Drawing.Size(150, 35)
         Me.cmdChooseFile.TabIndex = 3
         Me.cmdChooseFile.Text = "Choose File..."
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
         'sdgImportFromRapidPro
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(370, 106)
+        Me.ClientSize = New System.Drawing.Size(555, 163)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.ucrInputTokenPath)
         Me.Controls.Add(Me.lblToken)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "sdgImportFromRapidPro"
-        Me.Text = "sdgImportFromRapidPro"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Import from RapidPro"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
