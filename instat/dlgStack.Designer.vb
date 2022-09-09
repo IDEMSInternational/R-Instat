@@ -369,7 +369,7 @@ Partial Class dlgStack
         Me.ucrBase.Location = New System.Drawing.Point(10, 387)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 25
         '
         'ucrInputToken
@@ -447,7 +447,7 @@ Partial Class dlgStack
         Me.ucrChkStackMultipleSets.Checked = False
         Me.ucrChkStackMultipleSets.Location = New System.Drawing.Point(10, 320)
         Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
-        Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(180, 23)
         Me.ucrChkStackMultipleSets.TabIndex = 29
         '
         'ucrFactorInto

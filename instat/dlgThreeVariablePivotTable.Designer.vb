@@ -40,6 +40,9 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblFactorLevels = New System.Windows.Forms.Label()
+        Me.ucrReceiverFactorLevels = New instat.ucrReceiverSingle()
+        Me.ttFactorLevels = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'lblInitialColumnFactor
@@ -167,7 +170,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverSelectedVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedVariable.Name = "ucrReceiverSelectedVariable"
         Me.ucrReceiverSelectedVariable.Selector = Nothing
-        Me.ucrReceiverSelectedVariable.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSelectedVariable.Size = New System.Drawing.Size(120, 71)
         Me.ucrReceiverSelectedVariable.strNcFilePath = ""
         Me.ucrReceiverSelectedVariable.TabIndex = 57
         Me.ucrReceiverSelectedVariable.ucrSelector = Nothing
@@ -200,7 +203,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 397)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 51
         '
         'ucrSelectorPivot
@@ -215,12 +218,38 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrSelectorPivot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorPivot.TabIndex = 50
         '
+        'lblFactorLevels
+        '
+        Me.lblFactorLevels.AutoSize = True
+        Me.lblFactorLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFactorLevels.Location = New System.Drawing.Point(244, 339)
+        Me.lblFactorLevels.Name = "lblFactorLevels"
+        Me.lblFactorLevels.Size = New System.Drawing.Size(74, 13)
+        Me.lblFactorLevels.TabIndex = 68
+        Me.lblFactorLevels.Tag = "Initial Column Factor:"
+        Me.lblFactorLevels.Text = "Factor Levels:"
+        '
+        'ucrReceiverFactorLevels
+        '
+        Me.ucrReceiverFactorLevels.AutoSize = True
+        Me.ucrReceiverFactorLevels.frmParent = Me
+        Me.ucrReceiverFactorLevels.Location = New System.Drawing.Point(244, 354)
+        Me.ucrReceiverFactorLevels.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactorLevels.Name = "ucrReceiverFactorLevels"
+        Me.ucrReceiverFactorLevels.Selector = Nothing
+        Me.ucrReceiverFactorLevels.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactorLevels.strNcFilePath = ""
+        Me.ucrReceiverFactorLevels.TabIndex = 69
+        Me.ucrReceiverFactorLevels.ucrSelector = Nothing
+        '
         'dlgThreeVariablePivotTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 456)
+        Me.Controls.Add(Me.lblFactorLevels)
+        Me.Controls.Add(Me.ucrReceiverFactorLevels)
         Me.Controls.Add(Me.ucrChkNumericVariable)
         Me.Controls.Add(Me.ucrInputSummary)
         Me.Controls.Add(Me.lblSummary)
@@ -264,4 +293,7 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents ucrInputSummary As ucrInputComboBox
     Friend WithEvents lblSummary As Label
     Friend WithEvents ucrChkNumericVariable As ucrCheck
+    Friend WithEvents lblFactorLevels As Label
+    Friend WithEvents ucrReceiverFactorLevels As ucrReceiverSingle
+    Friend WithEvents ttFactorLevels As ToolTip
 End Class
