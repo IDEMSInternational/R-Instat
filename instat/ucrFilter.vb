@@ -112,10 +112,11 @@ Public Class ucrFilter
                 lblSelectLevels.Visible = True
                 ucrFactorLevels.Visible = True
                 cmdToggleSelectAll.Visible = True
+                'lblSelectLevels.Text = "Select Levels:" & ucrFactorLevels.CountRowSelected
                 'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
                 SetToggleButtonSettings()
-            Else
-                ucrFilterOperation.Visible = True
+                Else
+                    ucrFilterOperation.Visible = True
                 If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" AndAlso ucrFilterOperation.GetText() <> "is.empty" AndAlso ucrFilterOperation.GetText() <> "! is.empty" Then
                     Select Case ucrFilterByReceiver.strCurrDataType.ToLower
                         Case "logical"
@@ -248,6 +249,7 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
+        lblSelectLevels.Text = "Select Levels:" & ucrFactorLevels.CountRowSelected
         SetToggleButtonSettings()
         CheckAddEnabled()
     End Sub

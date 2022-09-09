@@ -442,6 +442,7 @@ Partial Class ucrFilter
         Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
         Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
+        Me.ucrFactorLevels.SelectionControlsVisible = True
         Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
         Me.ucrFactorLevels.TabIndex = 2
         '
@@ -582,7 +583,6 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.lstFilters)
         Me.Controls.Add(Me.cmdToggleSelectAll)
-        Me.Controls.Add(Me.ucrFilterOperation)
         Me.Controls.Add(Me.cmdAddCondition)
         Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrFilterByReceiver)
@@ -590,6 +590,7 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrChkNotForAllConditions)
         Me.Controls.Add(Me.ucrChkNotForEachCondition)
         Me.Controls.Add(Me.ucrReceiverExpression)
+        Me.Controls.Add(Me.ucrFilterOperation)
         Me.Name = "ucrFilter"
         Me.Size = New System.Drawing.Size(772, 395)
         Me.grpNumeric.ResumeLayout(False)

@@ -137,6 +137,20 @@ Public Class ucrFactor
         Public Const SelectorColumn As String = "Select"
     End Structure
 
+    Public Property SelectionControlsVisible As Boolean
+        Get
+            Return Me.Controls.Contains(pnlSelectOptions)
+        End Get
+        Set(value As Boolean)
+            If Not value Then
+                Me.Controls.Remove(pnlSelectOptions)
+            ElseIf Not Me.Controls.Contains(pnlSelectOptions) Then
+                'pnlSelectOptions.Anchor = (AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom )
+                Me.Controls.Add(pnlSelectOptions)
+            End If
+        End Set
+    End Property
+
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'the grid will always have 1 sheet. So no need to display the sheet tab control
@@ -226,6 +240,9 @@ Public Class ucrFactor
 
         _enumControlState = enumControlState
         _ucrLinkedReceiver = ucrLinkedReceiver
+
+        'for normal grid, which means no selection, remove the selection controls
+        SelectionControlsVisible = _enumControlState <> ControlStates.NormalGrid
 
         'if nothing then just initialise with empty collections
         _dctParamAndColNames = If(dctParamAndColNames, New Dictionary(Of String, String))
@@ -709,6 +726,22 @@ Public Class ucrFactor
         Return False
     End Function
 
+    Public Function CountRowSelected() As Integer
+        'only multiple select state supports this
+        If _grdSheet Is Nothing OrElse _enumControlState = ControlStates.NormalGrid Then
+            Return False
+        End If
+
+        Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
+        Dim iCount As Integer = 0
+        For i = 0 To _grdSheet.Rows - 1
+            If DirectCast(_grdSheet(i, iSelectorColumnIndex), Boolean) Then
+                iCount += 1
+            End If
+        Next
+        Return iCount
+    End Function
+
     ''' <summary>
     ''' Checks if all rows are 'selected or checked'
     ''' <para>Note. Should be used in 'MultipleSelector' state only</para>
@@ -883,4 +916,19 @@ Public Class ucrFactor
         End Select
     End Sub
 
+    Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
+        SelectAllGridRows(Not IsAllGridRowsSelected())
+        If IsAllGridRowsSelected() Then
+            btnSelectAll.Text = Translations.GetTranslation("Deselect All Levels")
+            btnSelectAll.FlatStyle = FlatStyle.Flat
+        Else
+            btnSelectAll.Text = Translations.GetTranslation("Select All Levels")
+            btnSelectAll.FlatStyle = FlatStyle.Popup
+        End If
+    End Sub
+
+    Private Sub lblSelected_Click(sender As Object, e As EventArgs) Handles lblSelected.Click
+        lblSelected.Text = "Selected:" & Me.CountRowSelected()
+
+    End Sub
 End Class
