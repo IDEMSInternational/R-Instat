@@ -52,7 +52,8 @@ Public Class dlgImportFromRapidPro
         ucrChkFlattenData.SetText("Flatten")
         ucrChkFlattenData.SetParameter(New RParameter("flatten", 2))
         ucrChkFlattenData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkFlattenData.SetRDefault("FALSE")
+        'ucrChkFlattenData.SetRDefault("FALSE")
+        ucrChkFlattenData.Visible = False ' disabled because R Instat doesn't yet support json format
 
         ucrChkSetStartDate.SetText("Start Date")
         ucrChkSetStartDate.AddParameterValuesCondition(True, "checked", "TRUE")
@@ -103,6 +104,10 @@ Public Class dlgImportFromRapidPro
         ucrInputTimezone.SetItems(dctTimezone)
         ucrInputTimezone.SetRDefault(Chr(34) & "UTC" & Chr(34))
         ucrInputTimezone.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
+
+        ucrSaveDataframeName.SetSaveTypeAsDataFrame()
+        ucrSaveDataframeName.SetIsTextBox()
+        ucrSaveDataframeName.SetLabelText("Data Frame Name:")
     End Sub
 
     Private Sub SetDefaults()
@@ -111,6 +116,8 @@ Public Class dlgImportFromRapidPro
         clsSetTokenFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSetSiteFunction = New RFunction
+
+        ucrSaveDataframeName.SetName("")
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked1", "FALSE", iPosition:=1)
@@ -127,11 +134,13 @@ Public Class dlgImportFromRapidPro
         clsGetUserDataFunction.SetRCommand("get_user_data")
         clsGetUserDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
         clsGetUserDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
+        clsGetUserDataFunction.AddParameter("flatten", "TRUE", iPosition:=1)
 
         clsGetFlowDataFunction.SetPackageName("rapidpror")
-        clsGetFlowDataFunction.SetRCommand("get_flow_data")
+        clsGetFlowDataFunction.SetRCommand("get_flow_names")
         clsGetFlowDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
         clsGetFlowDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
+        clsGetFlowDataFunction.AddParameter("flatten", "TRUE", iPosition:=1)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction)
@@ -143,20 +152,21 @@ Public Class dlgImportFromRapidPro
         ucrInputEndDate.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputEndDate.GetParameter(), iAdditionalPairNo:=1)
         ucrInputDateFormat.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputDateFormat.GetParameter(), iAdditionalPairNo:=1)
         ucrInputTimezone.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputTimezone.GetParameter(), iAdditionalPairNo:=1)
-        ucrChkFlattenData.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrChkFlattenData.GetParameter(), iAdditionalPairNo:=1)
+        'ucrChkFlattenData.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrChkFlattenData.GetParameter(), iAdditionalPairNo:=1)
 
         ucrInputRapidProSite.SetRCode(clsSetSiteFunction, bReset)
         ucrInputEndDate.SetRCode(clsGetUserDataFunction, bReset)
         ucrInputStartDate.SetRCode(clsGetUserDataFunction, bReset)
         ucrInputDateFormat.SetRCode(clsGetUserDataFunction, bReset)
         ucrInputTimezone.SetRCode(clsGetUserDataFunction, bReset)
-        ucrChkFlattenData.SetRCode(clsGetUserDataFunction, bReset)
+        ' ucrChkFlattenData.SetRCode(clsGetUserDataFunction, bReset)
         ucrChkSetEndDate.SetRCode(clsDummyFunction, bReset)
         ucrChkSetStartDate.SetRCode(clsDummyFunction, bReset)
+        ucrSaveDataframeName.SetRCode(clsGetUserDataFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputRapidProSite.IsEmpty AndAlso clsSetTokenFunction.GetParameter("key").strArgumentValue <> Chr(34) & Chr(34) Then
+        If Not ucrInputRapidProSite.IsEmpty AndAlso clsSetTokenFunction.GetParameter("key").strArgumentValue <> Chr(34) & Chr(34) AndAlso ucrSaveDataframeName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -194,7 +204,7 @@ Public Class dlgImportFromRapidPro
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputRapidProSite_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRapidProSite.ControlContentsChanged,
+    Private Sub ucrInputRapidProSite_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveDataframeName.ControlContentsChanged, ucrInputRapidProSite.ControlContentsChanged,
         ucrPnlImportFromRapidPro.ControlContentsChanged
         TestOKEnabled()
     End Sub
