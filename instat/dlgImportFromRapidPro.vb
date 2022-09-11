@@ -21,8 +21,8 @@ Public Class dlgImportFromRapidPro
     Private bReset As Boolean = True
     Private clsGetUserDataFunction As New RFunction
     Private clsGetFlowDataFunction As New RFunction
-    Private clsSetTokenFunction As New RFunction
-    Private clsSetSiteFunction As New RFunction
+    Private clsSetTokenFunction, clsGetTokenFunction As New RFunction
+    Private clsSetSiteFunction, clsGetSiteFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgImportFromRapidPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -107,6 +107,7 @@ Public Class dlgImportFromRapidPro
 
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
         ucrSaveDataframeName.SetIsTextBox()
+        ucrSaveDataframeName.SetPrefix("data")
         ucrSaveDataframeName.SetLabelText("Data Frame Name:")
     End Sub
 
@@ -116,30 +117,43 @@ Public Class dlgImportFromRapidPro
         clsSetTokenFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSetSiteFunction = New RFunction
+        clsGetSiteFunction = New RFunction
+        clsGetTokenFunction = New RFunction
 
-        ucrSaveDataframeName.SetName("")
+        'ucrSaveDataframeName.SetName("")
+        ucrSaveDataframeName.Reset()
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked1", "FALSE", iPosition:=1)
 
         clsSetSiteFunction.SetPackageName("rapidpror")
         clsSetSiteFunction.SetRCommand("set_rapidpro_site")
+        clsSetSiteFunction.SetAssignTo("Site")
 
         clsSetTokenFunction.SetPackageName("rapidpror")
         clsSetTokenFunction.SetRCommand("set_rapidpro_key")
         clsSetTokenFunction.AddParameter(strParameterName:="key", Chr(34) & Chr(34), iPosition:=0)
         clsSetTokenFunction.AddParameter(strParameterName:="file", "TRUE", iPosition:=1)
+        clsSetTokenFunction.SetAssignTo("Key")
+
+        clsGetTokenFunction.SetPackageName("rapidpror")
+        clsGetTokenFunction.SetRCommand("get_rapidpro_key")
+        clsGetTokenFunction.AddParameter("key", clsRFunctionParameter:=clsSetTokenFunction, iPosition:=0)
+
+        clsGetSiteFunction.SetPackageName("rapidpror")
+        clsGetSiteFunction.SetRCommand("get_rapidpro_site")
+        clsGetSiteFunction.AddParameter("site", clsRFunctionParameter:=clsSetSiteFunction, iPosition:=0)
 
         clsGetUserDataFunction.SetPackageName("rapidpror")
         clsGetUserDataFunction.SetRCommand("get_user_data")
-        clsGetUserDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
-        clsGetUserDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
+        clsGetUserDataFunction.AddParameter("rapidpro_site", clsRFunctionParameter:=clsGetSiteFunction, iPosition:=0)
+        clsGetUserDataFunction.AddParameter("token", clsRFunctionParameter:=clsGetTokenFunction, iPosition:=1)
         clsGetUserDataFunction.AddParameter("flatten", "TRUE", iPosition:=1)
 
         clsGetFlowDataFunction.SetPackageName("rapidpror")
         clsGetFlowDataFunction.SetRCommand("get_flow_names")
-        clsGetFlowDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
-        clsGetFlowDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
+        clsGetFlowDataFunction.AddParameter("rapidpro_site", clsRFunctionParameter:=clsGetSiteFunction, iPosition:=0)
+        clsGetFlowDataFunction.AddParameter("token", clsRFunctionParameter:=clsGetTokenFunction, iPosition:=1)
         clsGetFlowDataFunction.AddParameter("flatten", "TRUE", iPosition:=1)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction)
@@ -153,6 +167,7 @@ Public Class dlgImportFromRapidPro
         ucrInputDateFormat.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputDateFormat.GetParameter(), iAdditionalPairNo:=1)
         ucrInputTimezone.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputTimezone.GetParameter(), iAdditionalPairNo:=1)
         'ucrChkFlattenData.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrChkFlattenData.GetParameter(), iAdditionalPairNo:=1)
+        ucrSaveDataframeName.AddAdditionalRCode(clsGetFlowDataFunction, iAdditionalPairNo:=1)
 
         ucrInputRapidProSite.SetRCode(clsSetSiteFunction, bReset)
         ucrInputEndDate.SetRCode(clsGetUserDataFunction, bReset)
