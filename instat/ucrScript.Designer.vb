@@ -39,7 +39,7 @@ Partial Class ucrScript
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.txtScript = New System.Windows.Forms.TextBox()
+        Me.txtToDoDeleteMe = New System.Windows.Forms.TextBox()
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,7 +57,7 @@ Partial Class ucrScript
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.TextArea = New ScintillaNET.Scintilla()
+        Me.txtScript = New ScintillaNET.Scintilla()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdHelp = New System.Windows.Forms.Button()
@@ -70,19 +70,19 @@ Partial Class ucrScript
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'txtScript
+        'txtToDoDeleteMe
         '
-        Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
-        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtScript.Location = New System.Drawing.Point(3, 252)
-        Me.txtScript.Multiline = True
-        Me.txtScript.Name = "txtScript"
-        Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtScript.ShortcutsEnabled = False
-        Me.txtScript.Size = New System.Drawing.Size(405, 38)
-        Me.txtScript.TabIndex = 0
-        Me.txtScript.WordWrap = False
+        Me.txtToDoDeleteMe.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtToDoDeleteMe.ContextMenuStrip = Me.mnuContextScript
+        Me.txtToDoDeleteMe.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtToDoDeleteMe.Location = New System.Drawing.Point(3, 252)
+        Me.txtToDoDeleteMe.Multiline = True
+        Me.txtToDoDeleteMe.Name = "txtToDoDeleteMe"
+        Me.txtToDoDeleteMe.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtToDoDeleteMe.ShortcutsEnabled = False
+        Me.txtToDoDeleteMe.Size = New System.Drawing.Size(405, 38)
+        Me.txtToDoDeleteMe.TabIndex = 0
+        Me.txtToDoDeleteMe.WordWrap = False
         '
         'mnuContextScript
         '
@@ -199,9 +199,9 @@ Partial Class ucrScript
         '
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Controls.Add(Me.TextArea, 0, 2)
+        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 4)
+        Me.tlpTableContainer.Controls.Add(Me.txtToDoDeleteMe, 0, 4)
         Me.tlpTableContainer.Controls.Add(Me.Panel1, 0, 3)
         Me.tlpTableContainer.Controls.Add(Me.Panel2, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
@@ -217,15 +217,15 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
-        'TextArea
+        'txtScript
         '
-        Me.TextArea.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextArea.Lexer = ScintillaNET.Lexer.R
-        Me.TextArea.Location = New System.Drawing.Point(3, 56)
-        Me.TextArea.Name = "TextArea"
-        Me.TextArea.Size = New System.Drawing.Size(405, 170)
-        Me.TextArea.TabIndex = 13
-        Me.TextArea.TabWidth = 2
+        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtScript.Lexer = ScintillaNET.Lexer.R
+        Me.txtScript.Location = New System.Drawing.Point(3, 56)
+        Me.txtScript.Name = "txtScript"
+        Me.txtScript.Size = New System.Drawing.Size(405, 170)
+        Me.txtScript.TabIndex = 13
+        Me.txtScript.TabWidth = 2
         '
         'Panel1
         '
@@ -302,7 +302,7 @@ Partial Class ucrScript
 
     End Sub
 
-    Friend WithEvents txtScript As TextBox
+    Friend WithEvents txtToDoDeleteMe As TextBox
     Friend WithEvents lblHeaderScript As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuContextScript As ContextMenuStrip
@@ -327,5 +327,5 @@ Partial Class ucrScript
     Friend WithEvents tooltiptScriptWindow As ToolTip
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents TextArea As ScintillaNET.Scintilla
+    Friend WithEvents txtScript As ScintillaNET.Scintilla
 End Class

@@ -26,66 +26,66 @@ Public Class ucrScript
     'Private TextArea As ScintillaNET.Scintilla = New ScintillaNET.Scintilla()
 
     Public Sub CopyText()
-        txtScript.Copy()
+        txtToDoDeleteMe.Copy()
     End Sub
 
     Public Sub CutText()
-        txtScript.Cut()
+        txtToDoDeleteMe.Cut()
     End Sub
 
     Public Sub SelectAllText()
-        txtScript.SelectAll()
+        txtToDoDeleteMe.SelectAll()
     End Sub
 
     Private Sub RunAllText()
-        If TextArea.TextLength > 0 Then
+        If txtScript.TextLength > 0 Then
             If MsgBox("Are you sure you want to run the entire contents of the script window?", MessageBoxButtons.YesNo, "Run All") = MsgBoxResult.Yes Then
-                RunText(TextArea.Text)
+                RunText(txtScript.Text)
             End If
         End If
     End Sub
 
     Private Sub RunSelectedText()
-        If txtScript.SelectionLength > 0 Then
-            RunText(txtScript.SelectedText)
+        If txtToDoDeleteMe.SelectionLength > 0 Then
+            RunText(txtToDoDeleteMe.SelectedText)
         End If
     End Sub
 
     Private Sub RunCurrentLine()
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
-        If txtScript.TextLength > 0 Then
-            Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
-            If lineNum < txtScript.Lines.Length Then
+        If txtToDoDeleteMe.TextLength > 0 Then
+            Dim lineNum As Integer = txtToDoDeleteMe.GetLineFromCharIndex(txtToDoDeleteMe.GetFirstCharIndexOfCurrentLine())
+            If lineNum < txtToDoDeleteMe.Lines.Length Then
                 'add the new text to any unexecuted script remaining from previous calls to this function
-                strScriptCmd &= vbCrLf & txtScript.Lines(lineNum) 'insert carriage return to ensure that new text starts on new line
+                strScriptCmd &= vbCrLf & txtToDoDeleteMe.Lines(lineNum) 'insert carriage return to ensure that new text starts on new line
                 strScriptCmd = RunText(strScriptCmd)
-                If lineNum < txtScript.Lines.Length - 1 Then
-                    txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
-                    txtScript.ScrollToCaret()
+                If lineNum < txtToDoDeleteMe.Lines.Length - 1 Then
+                    txtToDoDeleteMe.SelectionStart = txtToDoDeleteMe.GetFirstCharIndexFromLine(lineNum + 1)
+                    txtToDoDeleteMe.ScrollToCaret()
                 End If
             End If
         End If
     End Sub
 
     Private Sub ClearContents()
-        If txtScript.TextLength > 0 Then
+        If txtToDoDeleteMe.TextLength > 0 Then
             If MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text,
                                "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 bUserTextChanged = True
                 'This was preferred over txtScript.Clear() , to support undo
-                txtScript.Focus()
-                txtScript.SelectAll()
+                txtToDoDeleteMe.Focus()
+                txtToDoDeleteMe.SelectAll()
                 SendKeys.Send("{BACKSPACE}")
             End If
         End If
     End Sub
 
     Public Sub AppendText(strText As String)
-        txtScript.Text = txtScript.Text & Environment.NewLine & strText
-        txtScript.SelectionStart = txtScript.Text.Length
-        txtScript.ScrollToCaret()
-        txtScript.Refresh()
+        txtToDoDeleteMe.Text = txtToDoDeleteMe.Text & Environment.NewLine & strText
+        txtToDoDeleteMe.SelectionStart = txtToDoDeleteMe.Text.Length
+        txtToDoDeleteMe.ScrollToCaret()
+        txtToDoDeleteMe.Refresh()
     End Sub
 
     Private Function RunText(strText As String) As String
@@ -97,11 +97,11 @@ Public Class ucrScript
         cmdRunAll.Enabled = bEnable
     End Sub
 
-    Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles cmdRunLineSelection.Click, mnuRunCurrentLineSelection.Click
+    Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
         'temporarily disable the buttons incase its a long operation
         EnableRunButtons(False)
-        txtScript.Focus()
-        If txtScript.SelectionLength > 0 Then
+        txtToDoDeleteMe.Focus()
+        If txtToDoDeleteMe.SelectionLength > 0 Then
             RunSelectedText()
         Else
             RunCurrentLine()
@@ -109,14 +109,14 @@ Public Class ucrScript
         EnableRunButtons(True)
     End Sub
 
-    Private Sub RunAll_Click(sender As Object, e As EventArgs) Handles cmdRunAll.Click, mnuRunAllText.Click
+    Private Sub RunAll_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
         'temporarily disable the buttons incase its a long operation
         EnableRunButtons(False)
         RunAllText()
         EnableRunButtons(True)
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click, mnuClearContents.Click
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click, cmdClear.Click
         ClearContents()
     End Sub
 
@@ -132,7 +132,7 @@ Public Class ucrScript
                 i = i + 1
                 strScriptFilename = "RInstatScript" & i & ".R"
             End While
-            File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename), frmMain.clsRLink.GetRSetupScript() & txtScript.Text)
+            File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename), frmMain.clsRLink.GetRSetupScript() & txtToDoDeleteMe.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
         Catch
             MessageBox.Show("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Open Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -146,7 +146,7 @@ Public Class ucrScript
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSave.FileName, txtScript.Text)
+                    File.WriteAllText(dlgSave.FileName, txtToDoDeleteMe.Text)
                 Catch
                     MessageBox.Show("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Save Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
@@ -162,10 +162,10 @@ Public Class ucrScript
             dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
 
             If dlgLoad.ShowDialog() = DialogResult.OK Then
-                If txtScript.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?",
+                If txtToDoDeleteMe.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" & Environment.NewLine & "Do you still want to load?",
               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(dlgLoad.FileName)
+                        frmMain.ucrScriptWindow.txtToDoDeleteMe.Text = File.ReadAllText(dlgLoad.FileName)
                     Catch
                         MessageBox.Show("Could not load the script from file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", "Load Script", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
@@ -175,13 +175,13 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        If txtScript.SelectionLength > 0 Then
+        If txtToDoDeleteMe.SelectionLength > 0 Then
             CopyText()
         End If
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        If txtScript.SelectionLength > 0 Then
+        If txtToDoDeleteMe.SelectionLength > 0 Then
             bUserTextChanged = False
             mnuUndo.Enabled = True
             CutText()
@@ -192,31 +192,31 @@ Public Class ucrScript
         If Clipboard.ContainsData(DataFormats.Text) Then
             bUserTextChanged = False
             mnuUndo.Enabled = True
-            txtScript.Paste()
+            txtToDoDeleteMe.Paste()
         Else
             MessageBox.Show("You can only paste text data on the script window", "Paste to Script Window", MessageBoxButtons.OK)
         End If
     End Sub
 
-    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'todo. how can this be done through the visual studio properties panel?
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
-        txtScript.WordWrap = False
-        EnableRunButtons(txtScript.TextLength > 0)
+        txtToDoDeleteMe.WordWrap = False
+        EnableRunButtons(txtToDoDeleteMe.TextLength > 0)
         mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
 
-        TextArea.StyleResetDefault()
-        TextArea.Styles(Style.Default).Font = "Consolas"
-        TextArea.Styles(Style.Default).Size = 11
+        txtScript.StyleResetDefault()
+        txtScript.Styles(Style.Default).Font = "Consolas"
+        txtScript.Styles(Style.Default).Size = 11
         'TextArea.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'TextArea.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
-        TextArea.StyleClearAll()
-        TextArea.Styles(Style.R.Comment).ForeColor = Color.FromArgb(0, 128, 0)
+        txtScript.StyleClearAll()
+        txtScript.Styles(Style.R.Comment).ForeColor = Color.FromArgb(0, 128, 0)
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
-        If txtScript.TextLength > 0 Then
+        If txtToDoDeleteMe.TextLength > 0 Then
             mnuOpenScriptasFile.Enabled = True
             mnuClearContents.Enabled = True
             mnuSaveScript.Enabled = True
@@ -230,7 +230,7 @@ Public Class ucrScript
             mnuRunAllText.Enabled = False
         End If
 
-        If txtScript.SelectionLength > 0 Then
+        If txtToDoDeleteMe.SelectionLength > 0 Then
             mnuCopy.Enabled = True
             mnuCut.Enabled = True
         Else
@@ -242,9 +242,9 @@ Public Class ucrScript
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         'Determine if last operation can be undone in text box.   
-        If txtScript.CanUndo Then
+        If txtToDoDeleteMe.CanUndo Then
             bUserTextChanged = False
-            txtScript.Undo() 'Undo the last operation.
+            txtToDoDeleteMe.Undo() 'Undo the last operation.
             mnuUndo.Enabled = False
             mnuRedo.Enabled = True
         End If
@@ -253,37 +253,33 @@ Public Class ucrScript
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
 
         'Determine if last operation can be undone in text box.   
-        If txtScript.CanUndo Then
+        If txtToDoDeleteMe.CanUndo Then
             bUserTextChanged = False
             'This is an equivalent of redo in this case. 
             'because calling undo twice gets the last undone text to be redone
-            txtScript.Undo()
+            txtToDoDeleteMe.Undo()
             mnuUndo.Enabled = True
             mnuRedo.Enabled = False
         End If
     End Sub
 
     Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
-        'Ignore the Ctrl, Shift commands. It could be a redo action which we want to ignore.
-        If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
-            bUserTextChanged = True
-        End If
+
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
-        EnableRunButtons(txtScript.TextLength > 0)
-        'Only enabled undo if the text was changed directly by the user.  
 
-        If bUserTextChanged AndAlso Not mnuUndo.Enabled Then
-            txtScript.ClearUndo() 'Clear undo, because this is now a new text input by the user.
-
-            mnuUndo.Enabled = True
-            mnuRedo.Enabled = False
-        End If
-        bUserTextChanged = False 'reset flag
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
+    End Sub
+
+    Private Sub txtToDoDeleteMe_TextChanged(sender As Object, e As EventArgs) Handles txtToDoDeleteMe.TextChanged
+
+    End Sub
+
+    Private Sub txtToDoDeleteMe_KeyDown(sender As Object, e As KeyEventArgs) Handles txtToDoDeleteMe.KeyDown
+
     End Sub
 End Class
