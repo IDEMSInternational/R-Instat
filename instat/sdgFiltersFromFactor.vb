@@ -92,7 +92,6 @@ Public Class sdgFiltersFromFactor
             cmdSelectAll.Text = Translations.GetTranslation("Select All Levels")
             cmdSelectAll.FlatStyle = FlatStyle.Popup
         End If
-        'autoTranslate(Me)
     End Sub
 
     Private Sub ucrSelectorFiltersFromFactors_DataFrameChanged() Handles ucrSelectorFiltersFromFactors.DataFrameChanged
