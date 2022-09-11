@@ -26,15 +26,15 @@ Public Class ucrScript
     'Private TextArea As ScintillaNET.Scintilla = New ScintillaNET.Scintilla()
 
     Public Sub CopyText()
-        txtToDoDeleteMe.Copy()
+        txtScript.Copy()
     End Sub
 
     Public Sub CutText()
-        txtToDoDeleteMe.Cut()
+        txtScript.Cut()
     End Sub
 
     Public Sub SelectAllText()
-        txtToDoDeleteMe.SelectAll()
+        txtScript.SelectAll()
     End Sub
 
     Private Sub RunAllText()
@@ -46,7 +46,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub RunSelectedText()
-        If txtToDoDeleteMe.SelectionLength > 0 Then
+        If txtScript.SelectedText.Length > 0 Then
             RunText(txtToDoDeleteMe.SelectedText)
         End If
     End Sub
@@ -54,7 +54,7 @@ Public Class ucrScript
     Private Sub RunCurrentLine()
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
-        If txtToDoDeleteMe.TextLength > 0 Then
+        If txtScript.TextLength > 0 Then
             Dim lineNum As Integer = txtToDoDeleteMe.GetLineFromCharIndex(txtToDoDeleteMe.GetFirstCharIndexOfCurrentLine())
             If lineNum < txtToDoDeleteMe.Lines.Length Then
                 'add the new text to any unexecuted script remaining from previous calls to this function
