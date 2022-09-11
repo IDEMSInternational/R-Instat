@@ -135,7 +135,7 @@ Public Class dlgImportFromRapidPro
         clsGetUserDataFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
         clsGetUserDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
         clsGetUserDataFunction.AddParameter("flatten", "TRUE", iPosition:=2)
-        clsGetUserDataFunction.AddParameter("unlist_variable", "TRUE", iPosition:=3)
+        clsGetUserDataFunction.AddParameter("unlist_consent", "TRUE", iPosition:=3)
 
         clsGetFlowDataFunction.SetPackageName("rapidpror")
         clsGetFlowDataFunction.SetRCommand("get_flow_names")
