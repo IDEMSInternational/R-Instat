@@ -264,11 +264,24 @@ Public Class ucrScript
     End Sub
 
     Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
-
+        'Ignore the Ctrl, Shift commands. It could be a redo action which we want to ignore.
+        If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
+            bUserTextChanged = True
+        End If
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
+        EnableRunButtons(txtScript.TextLength > 0)
+        'todo check that undo/redo works correctly
+        'Only enabled undo if the text was changed directly by the user.  
 
+        If bUserTextChanged AndAlso Not mnuUndo.Enabled Then
+            'txtToDoDeleteMe.ClearUndo() 'Clear undo, because this is now a new text input by the user.
+            txtScript.EmptyUndoBuffer()
+            mnuUndo.Enabled = True
+            mnuRedo.Enabled = False
+        End If
+        bUserTextChanged = False 'reset flag
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click

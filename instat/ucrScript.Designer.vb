@@ -219,6 +219,7 @@ Partial Class ucrScript
         '
         'txtScript
         '
+        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
         Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtScript.Lexer = ScintillaNET.Lexer.R
         Me.txtScript.Location = New System.Drawing.Point(3, 56)
