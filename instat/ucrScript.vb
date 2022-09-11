@@ -38,9 +38,9 @@ Public Class ucrScript
     End Sub
 
     Private Sub RunAllText()
-        If txtScript.TextLength > 0 Then
+        If TextArea.TextLength > 0 Then
             If MsgBox("Are you sure you want to run the entire contents of the script window?", MessageBoxButtons.YesNo, "Run All") = MsgBoxResult.Yes Then
-                RunText(txtScript.Text)
+                RunText(TextArea.Text)
             End If
         End If
     End Sub
