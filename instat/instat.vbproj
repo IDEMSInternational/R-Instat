@@ -1485,6 +1485,12 @@
     <Compile Include="sdgVerificationSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgWindowNumber.Designer.vb">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindowNumber.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
@@ -4806,6 +4812,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVerificationSummaries.resx">
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindowNumber.resx">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
