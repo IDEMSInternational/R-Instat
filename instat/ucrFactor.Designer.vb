@@ -79,7 +79,7 @@ Partial Class ucrFactor
         '
         Me.btnSelectAll.Location = New System.Drawing.Point(3, 3)
         Me.btnSelectAll.Name = "btnSelectAll"
-        Me.btnSelectAll.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelectAll.Size = New System.Drawing.Size(83, 23)
         Me.btnSelectAll.TabIndex = 34
         Me.btnSelectAll.Text = "Select All"
         Me.btnSelectAll.UseVisualStyleBackColor = True

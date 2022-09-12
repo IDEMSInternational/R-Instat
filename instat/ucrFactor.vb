@@ -155,6 +155,7 @@ Public Class ucrFactor
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        SetToggleButtonSettings()
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
@@ -165,6 +166,7 @@ Public Class ucrFactor
         'todo Once the receiver is refactored this comment can be removed.
 
         FillGridWithNewDataSheet()
+        SetToggleButtonSettings()
     End Sub
 
     Private Sub _grdSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles _grdSheet.BeforeCut
@@ -358,6 +360,7 @@ Public Class ucrFactor
             RaiseEvent GridContentReFilledFromR()
             OnControlValueChanged()
         End If
+        SetToggleButtonSettings()
     End Sub
 
     ''' <summary>
@@ -380,6 +383,7 @@ Public Class ucrFactor
         'todo removal of this Visibility setting can removed once ucrFilter has been fully refactored
         'see issue #7408  comments
         grdFactorData.Visible = False
+        SetToggleButtonSettings()
     End Sub
 
     ''' <summary>
@@ -917,18 +921,40 @@ Public Class ucrFactor
     End Sub
 
     Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
-        SelectAllGridRows(Not IsAllGridRowsSelected())
-        If IsAllGridRowsSelected() Then
-            btnSelectAll.Text = Translations.GetTranslation("Deselect All Levels")
-            btnSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            btnSelectAll.Text = Translations.GetTranslation("Select All Levels")
-            btnSelectAll.FlatStyle = FlatStyle.Popup
+        'lblSelected.Text = "Selected" & Me.CountRowSelected
+        Me.SelectAllGridRows(Not Me.IsAllGridRowsSelected())
+        SetToggleButtonSettings()
+        'If Me.IsAllGridRowsSelected Then
+        '    btnSelectAll.Text = Translations.GetTranslation("Deselect All")
+        '    btnSelectAll.FlatStyle = FlatStyle.Flat
+        'Else
+        '    btnSelectAll.Text = Translations.GetTranslation("Select All")
+        '    btnSelectAll.FlatStyle = FlatStyle.Popup
+        'End If
+        If Not _grdSheet Is Nothing Then
+            btnSelectAll.Visible = True
+            SetToggleButtonSettings()
         End If
     End Sub
 
     Private Sub lblSelected_Click(sender As Object, e As EventArgs) Handles lblSelected.Click
-        lblSelected.Text = "Selected:" & Me.CountRowSelected()
+        'lblSelected.Text = "Selected" & Me.CountRowSelected()
+        'SelectAllGridRows(Not IsAllGridRowsSelected())
+        SetToggleButtonSettings()
+        'lblSelected.Text = "Selected" & Me.CountRowSelected
 
+
+    End Sub
+    Private Sub SetToggleButtonSettings()
+        lblSelected.Text = "Selected" & Me.CountRowSelected
+        lblSelected.Visible = Me.CountRowSelected > 0
+
+        If Me.IsAllGridRowsSelected Then
+            btnSelectAll.Text = Translations.GetTranslation("Deselect All")
+            btnSelectAll.FlatStyle = FlatStyle.Flat
+        Else
+            btnSelectAll.Text = Translations.GetTranslation("Select All")
+            btnSelectAll.FlatStyle = FlatStyle.Popup
+        End If
     End Sub
 End Class
