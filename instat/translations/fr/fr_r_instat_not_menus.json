@@ -3669,25 +3669,6 @@
   "Pivot Longer": "Pivot plus long",
   "Unnest": "Désimbriquer",
   "names": "noms",
-  "value": "valeur",
-  "Dumbbell": "Haltère",
-  "Line options": "Options de ligne",
-  "Use path or step": "Utiliser le chemin ou l'étape",
-  "Smooth options": "Options de lissage",
-  "Add Line": "Ajouter une ligne",
-  "Add SE": "Ajouter SE",
-  "Formula": "Formule",
-  "Dumbbell options": "Options d'haltère",
-  "X End Variable:": "Variable de fin de X :",
-  "Adjust size of variable": "Ajuster la taille de la variable",
-  "Shave": "Raser",
-  "Rearrange": "Réorganiser",
-  "Leading Zeros": "Zéros principaux",
-  "Display On Diagonal:": "Afficher sur la diagonale:",
-  "Decimal Places:": "Places décimales :",
-  "Display As DataFrame": "Afficher comme tableau de données",
-  "Data Frame Name": " Nom de tableau de données",
-  "Rename With": "Renommer avec",
-  "Rename Columns": "Renommer les colonnes"
+  "value": "valeur"
 }
 
