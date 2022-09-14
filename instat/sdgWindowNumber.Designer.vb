@@ -31,7 +31,7 @@ Partial Class sdgWindowNumber
         '
         Me.lblTitleSize.AutoSize = True
         Me.lblTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTitleSize.Location = New System.Drawing.Point(12, 21)
+        Me.lblTitleSize.Location = New System.Drawing.Point(13, 21)
         Me.lblTitleSize.Name = "lblTitleSize"
         Me.lblTitleSize.Size = New System.Drawing.Size(100, 13)
         Me.lblTitleSize.TabIndex = 30
@@ -64,7 +64,7 @@ Partial Class sdgWindowNumber
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(248, 86)
+        Me.ClientSize = New System.Drawing.Size(248, 81)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.Controls.Add(Me.lblTitleSize)
         Me.Controls.Add(Me.ucrNudPageNumber)
