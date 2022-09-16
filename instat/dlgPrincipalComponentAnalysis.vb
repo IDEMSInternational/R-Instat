@@ -142,6 +142,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSaveResult.Reset()
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
+        clsDummyFunction.AddParameter("value1", "FALSE", iPosition:=1)
 
         clsWhichQuantiSupFunction.SetRCommand("which")
         clsWhichQuantiSupFunction.AddParameter("x", clsROperatorParameter:=clsBinaryQuantiSupOperator, bIncludeArgumentName:=False, iPosition:=1)
@@ -292,7 +293,6 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=4)
         ModelName()
         bResetSubdialog = True
@@ -337,7 +337,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, clsBaseOperator, clsRThemeMinimal, bResetSubdialog)
+        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsDummyFunction, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, clsBaseOperator, clsRThemeMinimal, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
