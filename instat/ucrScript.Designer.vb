@@ -39,7 +39,6 @@ Partial Class ucrScript
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.txtToDoDeleteMe = New System.Windows.Forms.TextBox()
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,7 +57,6 @@ Partial Class ucrScript
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.txtScript = New ScintillaNET.Scintilla()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
@@ -69,20 +67,6 @@ Partial Class ucrScript
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtToDoDeleteMe
-        '
-        Me.txtToDoDeleteMe.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtToDoDeleteMe.ContextMenuStrip = Me.mnuContextScript
-        Me.txtToDoDeleteMe.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtToDoDeleteMe.Location = New System.Drawing.Point(3, 252)
-        Me.txtToDoDeleteMe.Multiline = True
-        Me.txtToDoDeleteMe.Name = "txtToDoDeleteMe"
-        Me.txtToDoDeleteMe.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtToDoDeleteMe.ShortcutsEnabled = False
-        Me.txtToDoDeleteMe.Size = New System.Drawing.Size(405, 38)
-        Me.txtToDoDeleteMe.TabIndex = 0
-        Me.txtToDoDeleteMe.WordWrap = False
         '
         'mnuContextScript
         '
@@ -201,13 +185,11 @@ Partial Class ucrScript
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.txtToDoDeleteMe, 0, 4)
-        Me.tlpTableContainer.Controls.Add(Me.Panel1, 0, 3)
         Me.tlpTableContainer.Controls.Add(Me.Panel2, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 6
+        Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
@@ -224,16 +206,9 @@ Partial Class ucrScript
         Me.txtScript.Lexer = ScintillaNET.Lexer.R
         Me.txtScript.Location = New System.Drawing.Point(3, 56)
         Me.txtScript.Name = "txtScript"
-        Me.txtScript.Size = New System.Drawing.Size(405, 170)
+        Me.txtScript.Size = New System.Drawing.Size(405, 255)
         Me.txtScript.TabIndex = 13
         Me.txtScript.TabWidth = 2
-        '
-        'Panel1
-        '
-        Me.Panel1.Location = New System.Drawing.Point(3, 232)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(200, 14)
-        Me.Panel1.TabIndex = 9
         '
         'Panel2
         '
@@ -297,13 +272,10 @@ Partial Class ucrScript
         Me.Tag = "Script_Window"
         Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
-        Me.tlpTableContainer.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents txtToDoDeleteMe As TextBox
     Friend WithEvents lblHeaderScript As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuContextScript As ContextMenuStrip
@@ -321,7 +293,6 @@ Partial Class ucrScript
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
     Friend WithEvents mnuRedo As ToolStripMenuItem
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents cmdRunAll As Button
     Friend WithEvents cmdRunLineSelection As Button
