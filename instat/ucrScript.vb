@@ -18,9 +18,11 @@ Imports System.IO
 Imports ScintillaNET
 
 Public Class ucrScript
+    Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+
     Private strComment As String = "Code run from Script Window"
     Private strCurrentDirectory As String = ""
-    Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+    Private iMaxLineNumberCharLength As Integer = 0
 
     Public Sub CopyText()
         txtScript.Copy()
@@ -84,6 +86,19 @@ Public Class ucrScript
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdClear.Enabled = bScriptExists
+    End Sub
+
+    Private Sub setLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer)
+        If iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew Then
+            Exit Sub
+        End If
+        iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew
+
+        Dim strLineNumber As String = "9"
+        For i As Integer = 1 To iMaxLineNumberCharLength
+            strLineNumber &= "9"
+        Next
+        txtScript.Margins(0).Width = txtScript.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
@@ -222,6 +237,8 @@ Public Class ucrScript
 
         txtScript.StyleClearAll()
         txtScript.Styles(Style.R.Comment).ForeColor = Color.FromArgb(0, 128, 0)
+
+        setLineNumberMarginWidth(1)
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
@@ -246,6 +263,7 @@ Public Class ucrScript
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
         EnableDisableButtons()
+        setLineNumberMarginWidth(txtScript.Lines.Count.ToString().Length)
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
