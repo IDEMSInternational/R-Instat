@@ -63,21 +63,27 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
+        mnuUndo.Enabled = txtScript.CanUndo
+        mnuRedo.Enabled = txtScript.CanRedo
+
+        Dim bScriptselected = txtScript.SelectedText.Length > 0
         Dim bScriptExists = txtScript.TextLength > 0
-        mnuOpenScriptasFile.Enabled = bScriptExists
+
+        mnuCut.Enabled = bScriptselected
+        mnuCopy.Enabled = bScriptselected
+        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
+        mnuSelectAll.Enabled = bScriptExists
         mnuClearContents.Enabled = bScriptExists
-        mnuSaveScript.Enabled = bScriptExists
+
         mnuRunCurrentLineSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
 
-        Dim bScriptselected = txtScript.SelectedText.Length > 0
-        mnuCopy.Enabled = bScriptselected
-        mnuCut.Enabled = bScriptselected
+        mnuOpenScriptasFile.Enabled = bScriptExists
+        mnuSaveScript.Enabled = bScriptExists
 
-        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
-
-        mnuUndo.Enabled = txtScript.CanUndo
-        mnuRedo.Enabled = txtScript.CanRedo
+        cmdRunLineSelection.Enabled = bScriptExists
+        cmdRunAll.Enabled = bScriptExists
+        cmdClear.Enabled = bScriptExists
     End Sub
 
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
@@ -203,7 +209,7 @@ Public Class ucrScript
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         EnableDisableButtons()
-        'todo. how can this be done through the visual studio properties panel?
+        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
         txtScript.StyleResetDefault()
@@ -233,17 +239,9 @@ Public Class ucrScript
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
         'Determine if last operation can be redone in text box.   
         If txtScript.CanRedo Then
-            txtScript.Undo()
+            txtScript.Redo()
             EnableDisableButtons()
         End If
-    End Sub
-
-    Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
-        'todo delete this sub?
-        'Ignore the Ctrl, Shift commands. It could be a redo action which we want to ignore.
-        'If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
-        '    bUserTextChanged = True
-        'End If
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
@@ -252,5 +250,10 @@ Public Class ucrScript
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
+    End Sub
+
+    Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
+        txtScript.SelectAll()
+        EnableDisableButtons()
     End Sub
 End Class
