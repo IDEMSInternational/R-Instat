@@ -236,7 +236,18 @@ Public Class ucrScript
         'TextArea.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
 
         txtScript.StyleClearAll()
-        txtScript.Styles(Style.R.Comment).ForeColor = Color.FromArgb(0, 128, 0)
+        txtScript.Styles(Style.R.Default).ForeColor = Color.Silver
+        txtScript.Styles(Style.R.Comment).ForeColor = Color.Green
+        txtScript.Styles(Style.R.KWord).ForeColor = Color.Blue
+        txtScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
+        txtScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
+        txtScript.Styles(Style.R.Number).ForeColor = Color.Olive
+        txtScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
+        txtScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
+        txtScript.Styles(Style.R.Operator).ForeColor = Color.Purple
+        txtScript.Styles(Style.R.Identifier).ForeColor = Color.Black
+        txtScript.Styles(Style.R.Infix).ForeColor = Color.Purple
+        txtScript.Styles(Style.R.InfixEol).ForeColor = Color.Purple
 
         setLineNumberMarginWidth(1)
     End Sub
