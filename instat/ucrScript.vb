@@ -241,13 +241,14 @@ Public Class ucrScript
         txtScript.Styles(Style.R.KWord).ForeColor = Color.Blue
         txtScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
         txtScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
-        txtScript.Styles(Style.R.Number).ForeColor = Color.Black
+        txtScript.Styles(Style.R.Number).ForeColor = Color.Purple
         txtScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
         txtScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
-        txtScript.Styles(Style.R.Operator).ForeColor = Color.Black
+        txtScript.Styles(Style.R.Operator).ForeColor = Color.Gray
         txtScript.Styles(Style.R.Identifier).ForeColor = Color.Black
-        txtScript.Styles(Style.R.Infix).ForeColor = Color.Black
-        txtScript.Styles(Style.R.InfixEol).ForeColor = Color.Black
+        txtScript.Styles(Style.R.Infix).ForeColor = Color.Gray
+        txtScript.Styles(Style.R.InfixEol).ForeColor = Color.Gray
+
 
         Dim tmp = txtScript.DescribeKeywordSets()
         txtScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
