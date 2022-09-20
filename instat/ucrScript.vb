@@ -232,8 +232,8 @@ Public Class ucrScript
         txtScript.Styles(Style.Default).Size = 10
 
         'TODO  Configure from R-Instat options?
-        'TextArea.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
-        'TextArea.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
+        'txtScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
+        'txtScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
 
         txtScript.StyleClearAll()
         txtScript.Styles(Style.R.Default).ForeColor = Color.Silver
@@ -241,13 +241,20 @@ Public Class ucrScript
         txtScript.Styles(Style.R.KWord).ForeColor = Color.Blue
         txtScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
         txtScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
-        txtScript.Styles(Style.R.Number).ForeColor = Color.Olive
+        txtScript.Styles(Style.R.Number).ForeColor = Color.Black
         txtScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
         txtScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
-        txtScript.Styles(Style.R.Operator).ForeColor = Color.Purple
+        txtScript.Styles(Style.R.Operator).ForeColor = Color.Black
         txtScript.Styles(Style.R.Identifier).ForeColor = Color.Black
-        txtScript.Styles(Style.R.Infix).ForeColor = Color.Purple
-        txtScript.Styles(Style.R.InfixEol).ForeColor = Color.Purple
+        txtScript.Styles(Style.R.Infix).ForeColor = Color.Black
+        txtScript.Styles(Style.R.InfixEol).ForeColor = Color.Black
+
+        Dim tmp = txtScript.DescribeKeywordSets()
+        txtScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
+
+        'TODO if we want to set the key words for 'default package functions' (key word set 1) 
+        ' and/or 'other package functions', then a good list is available at:
+        '  https://raw.githubusercontent.com/moltenform/scite-files/master/files/files/api_files/r.properties  
 
         setLineNumberMarginWidth(1)
     End Sub
