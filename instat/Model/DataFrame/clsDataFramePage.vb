@@ -337,7 +337,7 @@ Public Class clsDataFramePage
     ''' Go to the specific row page
     ''' </summary>
     Public Sub GoToSpecificRowPage(iRow As Integer)
-        If CanLoadNextRowPage() Then
+        If iRow > 0 Then
             _iRowStart = (intRowIncrements * (iRow - 1)) + 1
             _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         End If

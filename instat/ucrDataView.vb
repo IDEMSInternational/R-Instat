@@ -894,18 +894,15 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
-        'Dim strRow As String = ""
-        'strRow = InputBox("Enter window number:", "Window number", "1")
-        'If strRow <> "" Then
-        '    If CInt(strRow) < 1 Then
-        '        MsgBox("Value cannot be 0")
-        '        Exit Sub
-        '    End If
-        '    GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(CInt(strRow))
-        '    RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-        'End If
-        sdgWindowNumber.ShowDialog()
-        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
-        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+        If lblRowNext.Enabled Then
+            sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalRowCount
+            sdgWindowNumber.ShowDialog()
+            Dim iPageNum As Integer = 0
+            iPageNum = sdgWindowNumber.iPage
+            If iPageNum > 0 Then
+                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPageNum)
+                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            End If
+        End If
     End Sub
 End Class
