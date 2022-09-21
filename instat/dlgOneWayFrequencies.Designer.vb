@@ -53,7 +53,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsText = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoStemAndLeaf = New System.Windows.Forms.RadioButton()
-        Me.lblSelectVariableStemAndLeaf = New System.Windows.Forms.Label()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrNudScale = New instat.ucrNud()
         Me.ucrSaveDataFrame = New instat.ucrSave()
@@ -256,16 +255,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoStemAndLeaf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoStemAndLeaf.UseVisualStyleBackColor = True
         '
-        'lblSelectVariableStemAndLeaf
-        '
-        Me.lblSelectVariableStemAndLeaf.AutoSize = True
-        Me.lblSelectVariableStemAndLeaf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectVariableStemAndLeaf.Location = New System.Drawing.Point(257, 63)
-        Me.lblSelectVariableStemAndLeaf.Name = "lblSelectVariableStemAndLeaf"
-        Me.lblSelectVariableStemAndLeaf.Size = New System.Drawing.Size(93, 13)
-        Me.lblSelectVariableStemAndLeaf.TabIndex = 6
-        Me.lblSelectVariableStemAndLeaf.Text = "Selected Variable:"
-        '
         'ucrReceiverStemAndLeaf
         '
         Me.ucrReceiverStemAndLeaf.AutoSize = True
@@ -298,7 +287,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSaveDataFrame.Location = New System.Drawing.Point(10, 376)
         Me.ucrSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
-        Me.ucrSaveDataFrame.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveDataFrame.Size = New System.Drawing.Size(304, 24)
         Me.ucrSaveDataFrame.TabIndex = 23
         '
         'ucrNudMinFreq
@@ -320,7 +309,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 352)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(304, 24)
         Me.ucrSaveGraph.TabIndex = 22
         '
         'ucrNudGroups
@@ -381,7 +370,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 410)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 24
         '
         'ucrSelectorOneWayFreq
@@ -467,7 +456,6 @@ Partial Class dlgOneWayFrequencies
         Me.Controls.Add(Me.ucrNudWidth)
         Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.ucrNudScale)
-        Me.Controls.Add(Me.lblSelectVariableStemAndLeaf)
         Me.Controls.Add(Me.rdoStemAndLeaf)
         Me.Controls.Add(Me.ucrSaveDataFrame)
         Me.Controls.Add(Me.ucrNudMinFreq)
@@ -532,7 +520,6 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrNudMinFreq As ucrNud
     Friend WithEvents ucrChkMinFrq As ucrCheck
     Friend WithEvents ucrSaveDataFrame As ucrSave
-    Friend WithEvents lblSelectVariableStemAndLeaf As Label
     Private WithEvents rdoStemAndLeaf As RadioButton
     Friend WithEvents ucrNudScale As ucrNud
     Friend WithEvents ucrChkScale As ucrCheck

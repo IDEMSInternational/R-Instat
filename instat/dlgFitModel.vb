@@ -27,8 +27,8 @@ Public Class dlgFitModel
 
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
-    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsAnovaIIFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsGLMPolr, clsGLMMultinom, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -96,11 +96,14 @@ Public Class dlgFitModel
         clsFormulaFunction = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
+        clsGLMNB = New RFunction
+        clsGLMPolr = New RFunction
+        clsGLMMultinom = New RFunction
         clsConfint = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
         clsFamilyFunction = New RFunction
-
+        clsAnovaIIFunction = New RFunction
         clsRstandardFunction = New RFunction
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
@@ -134,6 +137,18 @@ Public Class dlgFitModel
         clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
         clsLM.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
+        clsGLMNB = clsRegressionDefaults.clsDefaultGLmNBFunction.Clone
+        clsGLMNB.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMNB.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+
+        clsGLMPolr = clsRegressionDefaults.clsDefaultGLmPolrFunction.Clone
+        clsGLMPolr.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMPolr.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+
+        clsGLMMultinom = clsRegressionDefaults.clsDefaultGLmMultinomFunction.Clone
+        clsGLMMultinom.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMMultinom.SetAssignTo("last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
 
@@ -148,6 +163,10 @@ Public Class dlgFitModel
         'ANOVA
         clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
         clsAnovaFunction.iCallType = 2
+
+        'ANOVA II
+        clsAnovaIIFunction = clsRegressionDefaults.clsDefaultAnovaIIFunction.Clone
+        clsAnovaIIFunction.iCallType = 2
 
         'FitModel
         clsVisReg.SetPackageName("visreg")
@@ -175,8 +194,8 @@ Public Class dlgFitModel
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
         clsLMOrGLM = clsLM
         bResetModelOptions = True
 
@@ -193,8 +212,15 @@ Public Class dlgFitModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrModelName.AddAdditionalRCode(clsGLM, 1)
+        ucrModelName.AddAdditionalRCode(clsGLMMultinom, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLMPolr, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLMNB, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLM, bReset)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMNB, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 2)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMPolr, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 3)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMMultinom, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 4)
+
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator, bReset)
         ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
         ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
@@ -329,13 +355,18 @@ Public Class dlgFitModel
                     ucrChkConvertToVariate.Visible = False
                 End If
 
-            If ucrChkConvertToVariate.Checked Then
+                If ucrChkConvertToVariate.Checked Then
                     ' clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
                     clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRConvert, iPosition:=0)
                     ucrFamily.RecieverDatatype("numeric")
                 Else
                     clsFormulaOperator.AddParameter("x", strParameterValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-                    ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+
+                    If strVariableType = "binary" Then
+                        ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+                    Else
+                        ucrFamily.RecieverDatatype(ucrReceiverResponseVar.strCurrDataType)
+                    End If
                 End If
                 sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
             Else
@@ -352,15 +383,21 @@ Public Class dlgFitModel
             End If
             UpdatePreview()
             TestOKEnabled()
+            ChooseAnovaFunction()
         End If
     End Sub
 
     Public Sub ChooseRFunction()
 
         If Not ucrReceiverExpressionFitModel.IsEmpty AndAlso Not ucrReceiverResponseVar.IsEmpty Then
-
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsLM
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Negative_Binomial_GLM") Then
+                clsLMOrGLM = clsGLMNB
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Ordered_Logistic") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
+                clsLMOrGLM = clsGLMPolr
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Multinomial") Then
+                clsLMOrGLM = clsGLMMultinom
             Else
                 clsLMOrGLM = clsGLM
             End If
@@ -368,6 +405,7 @@ Public Class dlgFitModel
             'Update display functions to contain correct model
             clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
             clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsAnovaIIFunction.AddParameter("mod", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
@@ -384,8 +422,19 @@ Public Class dlgFitModel
         End If
     End Sub
 
+    Public Sub ChooseAnovaFunction()
+        If strVariableType = "factor" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaIIFunction, 1)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
+        Else
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaIIFunction)
+        End If
+    End Sub
+
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ChooseRFunction()
+        ChooseAnovaFunction()
         ResponseVariableType()
         clsFamilyFunction.RemoveParameterByName("link")
     End Sub
@@ -397,12 +446,14 @@ Public Class dlgFitModel
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
+        ChooseAnovaFunction()
     End Sub
 
     Private Sub ucrReceiverResponseVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
         ResponseVariableType()
+        ChooseAnovaFunction()
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
@@ -417,6 +468,7 @@ Public Class dlgFitModel
 
     Private Sub ucrSelectorByDataFrameAddRemoveForFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorByDataFrameAddRemoveForFitModel.ControlValueChanged
         ChooseRFunction()
+        ChooseAnovaFunction()
         GraphAssignTo()
     End Sub
 
@@ -429,12 +481,14 @@ Public Class dlgFitModel
                 ElseIf strVariableType.Contains("integer") Then
                     strVariableType = "integer"
                 ElseIf strVariableType.Contains("two level numeric") OrElse strVariableType.Contains("two level factor") Then
-                        strVariableType = "binary"
+                    strVariableType = "binary"
                 ElseIf strVariableType.Contains("numeric") Then
                     strVariableType = "numeric"
                 ElseIf strVariableType.Contains("logical") Then
                     strVariableType = "logical"
                 ElseIf strVariableType.Contains("factor") Then
+                    strVariableType = "factor"
+                ElseIf strVariableType.Contains("ordered,factor") Then
                     strVariableType = "factor"
                 Else
                     strVariableType = "unsuitable type"

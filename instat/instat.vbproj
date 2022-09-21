@@ -201,6 +201,18 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportFromPostgres.Designer.vb">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromRapidPro.Designer.vb">
+      <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromRapidPro.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
@@ -599,6 +611,12 @@
       <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgFormatSummaryTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgImportFromRapidPro.Designer.vb">
+      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromRapidPro.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
@@ -1465,6 +1483,12 @@
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgVerificationSummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgWindowNumber.Designer.vb">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindowNumber.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
@@ -2955,6 +2979,12 @@
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromPostgres.resx">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromRapidPro.resx">
+      <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </EmbeddedResource>
@@ -3077,6 +3107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFormatSummaryTables.resx">
       <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromRapidPro.resx">
+      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
@@ -4779,6 +4812,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVerificationSummaries.resx">
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindowNumber.resx">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>

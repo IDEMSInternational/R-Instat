@@ -109,7 +109,7 @@ Partial Class sdgSaveColumnPosition
         '
         Me.lblColumns.AutoSize = True
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(224, 106)
+        Me.lblColumns.Location = New System.Drawing.Point(234, 98)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(45, 13)
         Me.lblColumns.TabIndex = 14
@@ -119,11 +119,11 @@ Partial Class sdgSaveColumnPosition
         '
         Me.ucrReceiverColumn.AutoSize = True
         Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(224, 121)
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(237, 121)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(129, 20)
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(116, 20)
         Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.TabIndex = 15
         Me.ucrReceiverColumn.ucrSelector = Nothing
@@ -153,9 +153,9 @@ Partial Class sdgSaveColumnPosition
         '
         Me.ucrChkKeepExistingPos.AutoSize = True
         Me.ucrChkKeepExistingPos.Checked = False
-        Me.ucrChkKeepExistingPos.Location = New System.Drawing.Point(227, 155)
+        Me.ucrChkKeepExistingPos.Location = New System.Drawing.Point(237, 153)
         Me.ucrChkKeepExistingPos.Name = "ucrChkKeepExistingPos"
-        Me.ucrChkKeepExistingPos.Size = New System.Drawing.Size(126, 23)
+        Me.ucrChkKeepExistingPos.Size = New System.Drawing.Size(116, 23)
         Me.ucrChkKeepExistingPos.TabIndex = 16
         '
         'sdgSaveColumnPosition
