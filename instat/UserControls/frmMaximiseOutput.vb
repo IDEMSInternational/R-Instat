@@ -21,7 +21,6 @@ Public Class frmMaximiseOutput
                 ucrTextViewer.LoadTextFile(strFileName)
                 ucrTextViewer.FormatText(OutputFont.ROutputFont, OutputFont.ROutputColour)
                 Me.panelControl.Controls.Add(ucrTextViewer)
-                'Me.Margin
                 ucrTextViewer.Dock = DockStyle.Fill
             Case ".png"
                 _strFileFilter = "png (*.png)|*.png"
@@ -62,18 +61,20 @@ Public Class frmMaximiseOutput
 
                 _strFileDestinationDirectory = Path.GetDirectoryName(dlgSaveFile.FileName)
 
+                'for htmls copy the html file with it's associated directory; css, javascript files etc
                 If Path.GetExtension(_strDisplayedFileName).ToLower = ".html" Then
-                    'copy the html file with it's associated directory; css, javascript files etc
                     For Each foundDirectory As String In My.Computer.FileSystem.GetDirectories(
-                        Path.GetDirectoryName(_strDisplayedFileName),
-                        FileIO.SearchOption.SearchTopLevelOnly,
-                        "*" & Path.GetFileNameWithoutExtension(_strDisplayedFileName) & "*")
+                                                           Path.GetDirectoryName(_strDisplayedFileName),
+                                                           FileIO.SearchOption.SearchTopLevelOnly,
+                                                           "*" & Path.GetFileNameWithoutExtension(_strDisplayedFileName) & "*")
                         My.Computer.FileSystem.CopyDirectory(foundDirectory, _strFileDestinationDirectory, True)
                     Next
                 Else
                     My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
                 End If
             End If
+
+
         End Using
 
     End Sub

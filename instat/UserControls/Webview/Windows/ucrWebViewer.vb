@@ -25,6 +25,7 @@ Public Class ucrWebViewer
     Private ReadOnly _browser As ChromiumWebBrowser
 
     Public Sub New()
+        Me.Margin = New Padding(0)
         _browser = New ChromiumWebBrowser()
         AddHandler _browser.LoadingStateChanged, AddressOf OnLoadingStateChanged
         Me.Controls.Add(_browser)
@@ -70,6 +71,12 @@ Public Class ucrWebViewer
             _browser.Dispose()
         End If
         MyBase.Dispose(bDisposing)
+    End Sub
+
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        Me.ResumeLayout(False)
+
     End Sub
 
 

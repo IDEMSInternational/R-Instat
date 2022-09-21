@@ -23,6 +23,7 @@ Public Class ucrOutputPage
     Private _bCanReOrder As Boolean
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
+    Private _clsInstatOptions As InstatOptions
 
     ''' <summary>
     ''' Returns all the selected elements
@@ -79,6 +80,8 @@ Public Class ucrOutputPage
         End Set
     End Property
 
+
+
     Public Event RefreshContextButtons()
 
     Public Sub New()
@@ -89,6 +92,17 @@ Public Class ucrOutputPage
         ' Add any initialization after the InitializeComponent() call.
         _checkBoxes = New List(Of CheckBox)
     End Sub
+
+
+    ''' <summary>
+    ''' Holds options.
+    ''' TODO InstatOptions should have bindable objects as it's options 
+    ''' </summary>
+    Public WriteOnly Property clsInstatOptions() As InstatOptions
+        Set(value As InstatOptions)
+            _clsInstatOptions = value
+        End Set
+    End Property
 
     ''' <summary>
     ''' Clears all check boxes on the page
@@ -157,15 +171,22 @@ Public Class ucrOutputPage
     End Sub
 
     Private Function AddElementPanel(outputElement As clsOutputElement) As Panel
-        If outputElement Is Nothing OrElse outputElement.FormatedRScript Is Nothing Then
+        If outputElement Is Nothing OrElse outputElement.FormattedRScript Is Nothing Then
             Return Nothing
         End If
 
         Dim panel As New Panel With {
-          .Height = 10, ' = 10 'small height as panel will grow
-                .AutoSize = True,
-          .Dock = DockStyle.Top
+          .Dock = DockStyle.Top,
+          .Height = 10,
+          .AutoSize = True
         }
+
+        'if maximum height of outputs provided provided set it as the maximum height of panel 
+        If frmMain.clsInstatOptions IsNot Nothing AndAlso Not frmMain.clsInstatOptions.iMaxOutputsHeight <= 0 Then
+            panel.MaximumSize = New Size(Integer.MaxValue,
+                                         frmMain.clsInstatOptions.iMaxOutputsHeight)
+            panel.AutoScroll = True
+        End If
         pnlMain.Controls.Add(panel)
         pnlMain.Controls.SetChildIndex(panel, 0)
         AddCheckBoxToElementPanel(panel, outputElement)
@@ -192,7 +213,7 @@ Public Class ucrOutputPage
          .Dock = DockStyle.Top,
          .BorderStyle = BorderStyle.None
         }
-        FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormatedRScript)
+        FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormattedRScript)
         Dim panel As Panel = AddElementPanel(outputElement)
         panel.Controls.Add(richTextBox)
         panel.Controls.SetChildIndex(richTextBox, 0)
@@ -214,7 +235,7 @@ Public Class ucrOutputPage
     Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
         Select Case element.OutputType
             Case OutputType.Script
-                FillRichTextBoxWithFormatedRScript(richText, element.FormatedRScript)
+                FillRichTextBoxWithFormatedRScript(richText, element.FormattedRScript)
             Case OutputType.TextOutput
                 AddFormatedTextToRichTextBox(richText, element.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
             Case OutputType.ImageOutput
@@ -296,7 +317,6 @@ Public Class ucrOutputPage
             linkLabel.Dock = DockStyle.Top
             ucrTextViewer.Dock = DockStyle.Top
         End If
-
     End Sub
 
     Private Sub AddNewImageOutput(outputElement As clsOutputElement)

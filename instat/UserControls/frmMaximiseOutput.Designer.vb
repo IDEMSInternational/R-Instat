@@ -58,9 +58,9 @@ Partial Class frmMaximiseOutput
         Me.panelControl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.panelControl.Location = New System.Drawing.Point(12, 27)
+        Me.panelControl.Location = New System.Drawing.Point(3, 27)
         Me.panelControl.Name = "panelControl"
-        Me.panelControl.Size = New System.Drawing.Size(509, 253)
+        Me.panelControl.Size = New System.Drawing.Size(528, 262)
         Me.panelControl.TabIndex = 1
         '
         'frmMaximiseOutput

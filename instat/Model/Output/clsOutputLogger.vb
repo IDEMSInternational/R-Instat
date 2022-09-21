@@ -88,7 +88,7 @@ Public Class clsOutputLogger
             Throw New Exception("Cannot find script to attach output to.")
         Else
             Dim outputElement As New clsOutputElement
-            outputElement.AddStringOutput(strOutput, _lastScriptElement.FormatedRScript)
+            outputElement.AddStringOutput(strOutput, _lastScriptElement.FormattedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
@@ -103,7 +103,7 @@ Public Class clsOutputLogger
             Throw New Exception("Cannot find script to attach output to.")
         Else
             Dim outputElement As New clsOutputElement
-            outputElement.AddTextOutput(strFilename, _lastScriptElement.FormatedRScript)
+            outputElement.AddTextOutput(strFilename, _lastScriptElement.FormattedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
@@ -118,7 +118,7 @@ Public Class clsOutputLogger
             Throw New Exception("Cannot find script to attach output to.")
         Else
             Dim outputElement As New clsOutputElement
-            outputElement.AddImageOutput(strFilename, _lastScriptElement.FormatedRScript)
+            outputElement.AddImageOutput(strFilename, _lastScriptElement.FormattedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If
@@ -133,7 +133,7 @@ Public Class clsOutputLogger
             Throw New Exception("Cannot find script to attach output to.")
         Else
             Dim outputElement As New clsOutputElement
-            outputElement.AddHtmlOutput(strFilename, _lastScriptElement.FormatedRScript)
+            outputElement.AddHtmlOutput(strFilename, _lastScriptElement.FormattedRScript)
             _output.Add(outputElement)
             RaiseEvent NewOutputAdded(outputElement)
         End If

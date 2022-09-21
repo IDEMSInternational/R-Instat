@@ -854,27 +854,6 @@ Public Class RLink
                 Catch e As Exception
                     MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End Try
-            ElseIf strLastScript.Contains("view_html_object") Then 'if output should be returned as a html then
-                Try
-                    Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
-                    Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                    expTemp = GetSymbol(strTempAssignTo)
-                    If expTemp IsNot Nothing Then
-                        'get the html file path name
-                        strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                        If strTemp <> "" Then
-                            If bAddOutputInLog Then
-                                clsOutputLogger.AddHtmlOutput(strTemp)
-                            Else
-                                Dim frmMaximiseOutput As New frmMaximiseOutput
-                                frmMaximiseOutput.Show(strFileName:=strTemp)
-                            End If
-                        End If
-                    End If
-                Catch e As Exception
-                    MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
-                End Try
-
             ElseIf iCallType = 0 Then 'if script output should be ignored. to do. deprecated
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             ElseIf iCallType = 3 Then

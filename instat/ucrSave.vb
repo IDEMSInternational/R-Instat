@@ -654,8 +654,9 @@ Public Class ucrSave
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
                             Case RObjectTypeLabel.Graph,
                                  RObjectTypeLabel.Summary,
-                                 RObjectTypeLabel.Table
-                                If Me._strRObjectLabel = RObjectTypeLabel.Table AndAlso String.IsNullOrEmpty(Me._strRObjectFormat) Then
+                                 RObjectTypeLabel.Table,
+                                 RObjectTypeLabel.Model
+                                If _strRObjectLabel = RObjectTypeLabel.Table AndAlso String.IsNullOrEmpty(_strRObjectFormat) Then
                                     'todo. temporary check until all table dialogs are modified to set _strRObjectFormat  
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName,
                                                             strTempDataframe:=strDataName,
@@ -663,14 +664,12 @@ Public Class ucrSave
                                                             bAssignToIsPrefix:=bAssignToIsPrefix)
                                 Else
                                     clsTempCode.SetAssignToRObject(strRObjectToAssignTo:=strSaveName,
-                                                                   strRObjectTypeLabelToAssignTo:=Me._strRObjectLabel,
-                                                                   strRObjectFormatToAssignTo:=Me._strRObjectFormat,
+                                                                   strRObjectTypeLabelToAssignTo:=_strRObjectLabel,
+                                                                   strRObjectFormatToAssignTo:=_strRObjectFormat,
                                                                    strRDataFrameNameToAddObjectTo:=strDataName,
                                                                    strObjectName:=strSaveName,
                                                                    bAssignToIsPrefix:=bAssignToIsPrefix)
                                 End If
-                            Case "model"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "surv"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempSurv:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
