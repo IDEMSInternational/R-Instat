@@ -27,6 +27,8 @@ Public Class ucrCalculator
     Private iBasicWidth As Integer
     Private iBaseHeight As Integer
     Private strPackageName As String
+    Private clsDataFunction As New RFunction
+    Private clsRepFunction As New RFunction
 
     Public Sub New()
 
@@ -3163,114 +3165,85 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdTwin_Click(sender As Object, e As EventArgs) Handles cmdTwin.Click
-        Dim clsDataFunction As New RFunction
-        Dim clsTwinPrimeFunction As New RFunction
-        Dim clsRepFunction As New RFunction
-
+    Private Sub CalculatorFunctions()
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
+
+        clsRepFunction.SetRCommand("rep")
+        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+    End Sub
+
+
+    Private Sub cmdTwin_Click(sender As Object, e As EventArgs) Handles cmdTwin.Click
+        Dim clsTwinPrimeFunction As New RFunction
 
         clsTwinPrimeFunction.SetPackageName("primes")
         clsTwinPrimeFunction.SetRCommand("twin_primes")
         clsTwinPrimeFunction.AddParameter("min", "0", iPosition:=0)
         clsTwinPrimeFunction.AddParameter("max", "100", iPosition:=1)
 
-        clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsTwinPrimeFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+        CalculatorFunctions()
     End Sub
 
     Private Sub cmdCousin_Click(sender As Object, e As EventArgs) Handles cmdCousin.Click
-        Dim clsDataFunction As New RFunction
         Dim clsCousinPrimeFunction As New RFunction
-        Dim clsRepFunction As New RFunction
-
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
 
         clsCousinPrimeFunction.SetPackageName("primes")
         clsCousinPrimeFunction.SetRCommand("cousin_primes")
         clsCousinPrimeFunction.AddParameter("min", "0", iPosition:=0)
         clsCousinPrimeFunction.AddParameter("max", "100", iPosition:=1)
 
-        clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsCousinPrimeFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+        CalculatorFunctions()
     End Sub
 
     Private Sub cmdSexy_Click(sender As Object, e As EventArgs) Handles cmdSexy.Click
-        Dim clsDataFunction As New RFunction
         Dim clsSexyPrimesFunction As New RFunction
-        Dim clsRepFunction As New RFunction
-
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
 
         clsSexyPrimesFunction.SetPackageName("primes")
         clsSexyPrimesFunction.SetRCommand("sexy_primes")
         clsSexyPrimesFunction.AddParameter("min", "0", iPosition:=0)
         clsSexyPrimesFunction.AddParameter("max", "100", iPosition:=1)
 
-        clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSexyPrimesFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+        CalculatorFunctions()
     End Sub
 
     Private Sub cmdThird_Click(sender As Object, e As EventArgs) Handles cmdThird.Click
-        Dim clsDataFunction As New RFunction
-        Dim clsRepFunction As New RFunction
         Dim clsThirdCousinFunction As New RFunction
-
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
 
         clsThirdCousinFunction.SetPackageName("primes")
         clsThirdCousinFunction.SetRCommand("third_cousin_primes")
         clsThirdCousinFunction.AddParameter("min", "0", iPosition:=0)
         clsThirdCousinFunction.AddParameter("max", "100", iPosition:=1)
 
-        clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsThirdCousinFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+        CalculatorFunctions()
     End Sub
 
     Private Sub cmdTriplets_Click(sender As Object, e As EventArgs) Handles cmdTriplets.Click
-        Dim clsDataFunction As New RFunction
         Dim clsTripletsPrimeFunction As New RFunction
-        Dim clsRepFunction As New RFunction
-
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
 
         clsTripletsPrimeFunction.SetPackageName("primes")
         clsTripletsPrimeFunction.SetRCommand("sexy_prime_triplets")
         clsTripletsPrimeFunction.AddParameter("min", "0", iPosition:=0)
         clsTripletsPrimeFunction.AddParameter("max", "100", iPosition:=1)
 
-        clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsTripletsPrimeFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+        CalculatorFunctions()
     End Sub
 
     Private Sub cmdKTuple_Click(sender As Object, e As EventArgs) Handles cmdKTuple.Click
-        Dim clsDataFunction As New RFunction
         Dim clsKTuplePrimeFunction As New RFunction
         Dim clsTuplePatternFunction As New RFunction
-        Dim clsRepFunction As New RFunction
-
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
 
         clsTuplePatternFunction.SetRCommand("c")
         clsTuplePatternFunction.AddParameter("x", "0", iPosition:=0, bIncludeArgumentName:=False)
@@ -3282,10 +3255,8 @@ Public Class ucrCalculator
         clsKTuplePrimeFunction.AddParameter("max", "100", iPosition:=1)
         clsKTuplePrimeFunction.AddParameter("tuple", clsRFunctionParameter:=clsTuplePatternFunction, iPosition:=2)
 
-        clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsKTuplePrimeFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
+        CalculatorFunctions()
     End Sub
 End Class
