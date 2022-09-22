@@ -117,8 +117,18 @@ Public Class dlgApsimx
     End Sub
 
     Private Sub ucrInputComboList_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboList.ControlValueChanged
-        If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "ControlledEnvironment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "EucalyptusRotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Rotation" OrElse ucrInputComboList.GetText = "Soybean" Then
+        Dim clsReportOperator As New ROperator
+        clsReportOperator.SetOperation("$")
+        clsReportOperator.AddParameter("left", "Rotation", iPosition:=0)
+        clsReportOperator.AddParameter("right", "Report", iPosition:=1)
+        clsReportOperator.bSpaceAroundOperation = False
+        clsReportOperator.SetAssignTo("Rotation")
+        If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "ControlledEnvironment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "EucalyptusRotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Soybean" Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsReportOperator)
+        ElseIf ucrInputComboList.GetText = "Rotation" Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsReportOperator)
+            'ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsApsimExampleFunction)
         End If
