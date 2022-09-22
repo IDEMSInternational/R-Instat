@@ -22,21 +22,13 @@ Partial Class dlgApsimx
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSaveFile = New instat.ucrSave()
         Me.ucrChkSilent = New instat.ucrCheck()
         Me.lblExampleList = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputComboList = New instat.ucrInputComboBox()
+        Me.lblSaveData = New System.Windows.Forms.Label()
+        Me.ucrInputSaveData = New instat.ucrInputTextBox()
         Me.SuspendLayout()
-        '
-        'ucrSaveFile
-        '
-        Me.ucrSaveFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveFile.Location = New System.Drawing.Point(7, 74)
-        Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveFile.Name = "ucrSaveFile"
-        Me.ucrSaveFile.Size = New System.Drawing.Size(394, 23)
-        Me.ucrSaveFile.TabIndex = 3
         '
         'ucrChkSilent
         '
@@ -71,18 +63,39 @@ Partial Class dlgApsimx
         Me.ucrInputComboList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputComboList.GetSetSelectedIndex = -1
         Me.ucrInputComboList.IsReadOnly = False
-        Me.ucrInputComboList.Location = New System.Drawing.Point(99, 12)
+        Me.ucrInputComboList.Location = New System.Drawing.Point(135, 12)
         Me.ucrInputComboList.Name = "ucrInputComboList"
         Me.ucrInputComboList.Size = New System.Drawing.Size(219, 23)
         Me.ucrInputComboList.TabIndex = 1
+        '
+        'lblSaveData
+        '
+        Me.lblSaveData.AutoSize = True
+        Me.lblSaveData.Location = New System.Drawing.Point(7, 79)
+        Me.lblSaveData.Name = "lblSaveData"
+        Me.lblSaveData.Size = New System.Drawing.Size(61, 13)
+        Me.lblSaveData.TabIndex = 5
+        Me.lblSaveData.Text = "Save Data:"
+        '
+        'ucrInputSaveData
+        '
+        Me.ucrInputSaveData.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveData.AutoSize = True
+        Me.ucrInputSaveData.IsMultiline = False
+        Me.ucrInputSaveData.IsReadOnly = False
+        Me.ucrInputSaveData.Location = New System.Drawing.Point(135, 75)
+        Me.ucrInputSaveData.Name = "ucrInputSaveData"
+        Me.ucrInputSaveData.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSaveData.TabIndex = 6
         '
         'dlgApsimx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(433, 163)
+        Me.Controls.Add(Me.ucrInputSaveData)
+        Me.Controls.Add(Me.lblSaveData)
         Me.Controls.Add(Me.ucrInputComboList)
-        Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.ucrChkSilent)
         Me.Controls.Add(Me.lblExampleList)
         Me.Controls.Add(Me.ucrBase)
@@ -96,10 +109,10 @@ Partial Class dlgApsimx
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrSaveFile As ucrSave
     Friend WithEvents ucrChkSilent As ucrCheck
     Friend WithEvents lblExampleList As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrInputComboList As ucrInputComboBox
+    Friend WithEvents lblSaveData As Label
+    Friend WithEvents ucrInputSaveData As ucrInputTextBox
 End Class

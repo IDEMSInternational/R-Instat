@@ -21,6 +21,8 @@ Public Class dlgApsimx
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsApsimxExampleFunction, clsApsimExampleFunction As New RFunction
+    Private clsBaseFunction, clsDataListFunction As New RFunction
+    Private clsReportOperator As New ROperator
     Private Sub dlgApsimx_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -44,10 +46,6 @@ Public Class dlgApsimx
         ucrChkSilent.SetParameter(New RParameter("silent", 1))
         ucrChkSilent.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSilent.SetRDefault("FALSE")
-
-        ucrSaveFile.SetSaveTypeAsDataFrame()
-        ucrSaveFile.SetLabelText("New Data Frame Name:")
-        ucrSaveFile.SetIsTextBox()
 
         Dim dctExamplesModels As New Dictionary(Of String, String) From {
            {"Barley", Chr(34) & "Barley" & Chr(34)},
@@ -77,7 +75,19 @@ Public Class dlgApsimx
     Private Sub SetDefaults()
         clsApsimxExampleFunction = New RFunction
         clsApsimExampleFunction = New RFunction
+        clsBaseFunction = New RFunction
+        clsDataListFunction = New RFunction
+        clsReportOperator = New ROperator
 
+        clsReportOperator.SetOperation("$")
+        clsReportOperator.AddParameter("left", "Rotation", iPosition:=0)
+        clsReportOperator.AddParameter("right", "Report", iPosition:=1)
+        clsReportOperator.bSpaceAroundOperation = False
+        clsReportOperator.SetAssignTo("Rotation")
+
+        clsBaseFunction.SetRCommand("data_book$import_data")
+        clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsDataListFunction, iPosition:=0)
+        clsDataListFunction.SetRCommand("list")
         clsApsimxExampleFunction.SetPackageName("apsimx")
         clsApsimxExampleFunction.SetRCommand("apsimx_example")
         clsApsimxExampleFunction.AddParameter("example", Chr(34) & "Barley" & Chr(34), iPosition:=0)
@@ -85,21 +95,21 @@ Public Class dlgApsimx
         clsApsimExampleFunction.SetPackageName("apsimx")
         clsApsimExampleFunction.SetRCommand("apsim_example")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("silent", 1), iAdditionalPairNo:=1)
         ucrInputComboList.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("example", 0), iAdditionalPairNo:=1)
-        ucrSaveFile.AddAdditionalRCode(clsApsimExampleFunction, bReset)
+
 
         ucrChkSilent.SetRCode(clsApsimxExampleFunction, bReset)
-        ucrSaveFile.SetRCode(clsApsimxExampleFunction, bReset)
         ucrInputComboList.SetRCode(clsApsimxExampleFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveFile.IsComplete Then
+        If ucrInputSaveData.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -112,26 +122,29 @@ Public Class dlgApsimx
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputPath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged, ucrChkSilent.ControlContentsChanged
+    Private Sub ucrInputPath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSilent.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrInputComboList_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboList.ControlValueChanged
-        Dim clsReportOperator As New ROperator
-        clsReportOperator.SetOperation("$")
-        clsReportOperator.AddParameter("left", "Rotation", iPosition:=0)
-        clsReportOperator.AddParameter("right", "Report", iPosition:=1)
-        clsReportOperator.bSpaceAroundOperation = False
-        clsReportOperator.SetAssignTo("Rotation")
+        Dim strDataName As String = ucrInputComboList.GetText
+        ucrInputSaveData.SetText(strDataName)
+        clsApsimxExampleFunction.SetAssignTo(strDataName)
+        clsApsimExampleFunction.SetAssignTo(strDataName)
+        clsDataListFunction.ClearParameters()
         If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "ControlledEnvironment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "EucalyptusRotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Soybean" Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsApsimxExampleFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsReportOperator)
+            clsDataListFunction.AddParameter(ucrInputSaveData.GetText, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsReportOperator)
         ElseIf ucrInputComboList.GetText = "Rotation" Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsReportOperator)
-            'ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
+            clsDataListFunction.AddParameter(strDataName, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsReportOperator, 1)
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsApsimExampleFunction)
+            clsDataListFunction.AddParameter(strDataName, clsRFunctionParameter:=clsApsimExampleFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimExampleFunction, 0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsReportOperator)
         End If
-        ucrSaveFile.SetPrefix(ucrInputComboList.GetText)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 End Class
