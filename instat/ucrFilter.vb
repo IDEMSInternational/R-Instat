@@ -100,23 +100,17 @@ Public Class ucrFilter
 
     Private Sub VariableTypeProperties()
         ucrReceiverExpression.Visible = False
-        lblSelectLevels.Visible = False
         ucrFactorLevels.Visible = False
-        cmdToggleSelectAll.Visible = False
         ucrFilterOperation.Visible = False
         ucrLogicalCombobox.Visible = False
         ucrDatePicker.Visible = False
         grpNumeric.Visible = False
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
-                lblSelectLevels.Visible = True
                 ucrFactorLevels.Visible = True
-                cmdToggleSelectAll.Visible = True
-                'lblSelectLevels.Text = "Select Levels:" & ucrFactorLevels.CountRowSelected
                 'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
-                SetToggleButtonSettings()
-                Else
-                    ucrFilterOperation.Visible = True
+            Else
+                ucrFilterOperation.Visible = True
                 If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" AndAlso ucrFilterOperation.GetText() <> "is.empty" AndAlso ucrFilterOperation.GetText() <> "! is.empty" Then
                     Select Case ucrFilterByReceiver.strCurrDataType.ToLower
                         Case "logical"
@@ -153,16 +147,6 @@ Public Class ucrFilter
                         End Select
                 End Select
             End If
-        End If
-    End Sub
-
-    Private Sub SetToggleButtonSettings()
-        If ucrFactorLevels.IsAllGridRowsSelected Then
-            cmdToggleSelectAll.Text = Translations.GetTranslation("Deselect All Levels")
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            cmdToggleSelectAll.Text = Translations.GetTranslation("Select All Levels")
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
     End Sub
 
@@ -244,14 +228,13 @@ Public Class ucrFilter
         RaiseEvent FilterChanged()
     End Sub
 
-    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
+    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs)
         ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
     End Sub
 
     Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
-        lblSelectLevels.Text = "Select Levels:" & ucrFactorLevels.CountRowSelected
-        SetToggleButtonSettings()
         CheckAddEnabled()
+        ucrFactorLevels.SetColumnsSelected()
     End Sub
 
     Private Sub ucrSelectorForFitler_DataFrameChanged() Handles ucrSelectorForFitler.DataFrameChanged
@@ -436,6 +419,5 @@ Public Class ucrFilter
         End If
         ucrFilterPreview.SetName(strFilter)
     End Sub
-
 
 End Class

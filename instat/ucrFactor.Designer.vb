@@ -69,11 +69,11 @@ Partial Class ucrFactor
         '
         Me.lblSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(180, 8)
+        Me.lblSelected.Location = New System.Drawing.Point(172, 8)
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(49, 13)
+        Me.lblSelected.Size = New System.Drawing.Size(52, 13)
         Me.lblSelected.TabIndex = 33
-        Me.lblSelected.Text = "Selected"
+        Me.lblSelected.Text = "Selected:"
         '
         'btnSelectAll
         '
