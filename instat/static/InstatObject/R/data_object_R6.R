@@ -2047,6 +2047,8 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 }
 )
 
+#objects names are expected to be unique. Objects are in a nested list. 
+#see comments in issue #7808 for further details
 DataSheet$set("public", "add_object", function(object_name, object_type_label, object_format, object) {
   
     if(missing(object_name)){
@@ -2086,10 +2088,24 @@ DataSheet$set("public", "get_objects", function(object_name, object_type_label, 
 }
 )
 
+#object name must be supplied
+#returns NULL if object is not found
+DataSheet$set("public", "get_object", function(object_name) {
+  #make sure supplied object name is a character, prevents return of unexpected object
+  if(!missing(object_name) && is.character(object_name) ){
+    return(private$objects[[object_name]])
+  }else{
+    return(NULL)
+  }
+ 
+}
+)
+
 DataSheet$set("public", "get_object_names", function(object_type_label, as_list = FALSE, excluded_items = c()) {
     if(missing(object_type_label)){
       out = names(private$objects)
     }else{ 
+      #todo. has a bug. the object_type_label cannot be accessed directly
       out = names(private$objects)[sapply(private$objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
     }
     

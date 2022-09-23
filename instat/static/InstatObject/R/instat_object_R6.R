@@ -533,6 +533,7 @@ DataBook$set("public", "get_columns_from_data", function(data_name, col_names, f
 }
 )
 
+#see comments in issue #7808. Usage of parameter internal needs further discussions, it may have to be deprecated
 DataBook$set("public", "add_object", function(data_name, object_name, object_type_label, object_format, object, internal = TRUE) {
   
     if (internal) { 
@@ -556,6 +557,7 @@ DataBook$set("public", "add_object", function(data_name, object_name, object_typ
       #todo. should every other big object have their own data book or we use one data book for storing all the objects?
       #or we store all objects in a separate data structure that is not a data book? 
       #if we store it in a data structure then we will NOT need the "internal" parameter
+      #see comments in issue #7808
       
       #for graphs, create a separate .graph_data_book data book if it's not yet created
       if(identical(object_type_label, "graph")){
@@ -563,19 +565,15 @@ DataBook$set("public", "add_object", function(data_name, object_name, object_typ
           self$create_graph_data_book()
         } 
         .graph_data_book$add_object(data_name = data_name, object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object, internal = TRUE)
+        #after adding the graph. set it as last graph contents
+        last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
+        if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
       }else{
         self$add_object(data_name = data_name, object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object, internal = TRUE)
       }
       
     }
     
-    #after adding the graph. set it as last graph contents
-    if(identical(object_type_label,"graph")){
-      last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
-      if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
-    }
-    
-  
 }
 ) 
 
@@ -592,6 +590,7 @@ DataBook$set("public", "create_graph_data_book", function() {
 }
 )
 
+#see comments in issue #7808. Usage of parameter internal needs further discussions
 DataBook$set("public", "get_objects", function(data_name, object_name, object_type_label, include_overall = TRUE, as_list = FALSE, include_empty = FALSE, force_as_list = FALSE, internal = TRUE, ...) {
     
     if (!internal & exists(".graph_data_book")) {
@@ -650,6 +649,31 @@ DataBook$set("public", "get_objects", function(data_name, object_name, object_ty
 }
 )
 
+#returns NULL if object is not found
+#as explained in issue #7808 comments. New implementation is need to remove the internal parameter from the other "object" functions
+#if parameter internal is set to false, parameter object_type_label will have to be passed
+#todo. parameter object_type_label and nternal can be removed as a parameter if all objects are saved in the same data book or structure
+DataBook$set("public", "get_object", function(data_name, object_name, object_type_label = "", internal = TRUE) {
+  if (!internal && identical(object_type_label,"graph") && exists(".graph_data_book")) {
+    r_instant_object <- .graph_data_book$get_object(data_name = data_name, object_name = object_name,  internal = TRUE)
+  }else {
+    if(missing(data_name) || data_name == overall_label) {
+      r_instant_object <- private$.objects[[object_name]]
+    }else {
+      r_instant_object <- self$get_data_objects(data_name)$get_object(object_name = object_name)
+    }
+  }
+  
+  if (is.null(r_instant_object)){
+    return(NULL)
+  }else{
+    return(view_object(object = r_instant_object$object, object_format = r_instant_object$object_format))
+  }
+  
+}
+)
+
+#see comments in issue #7808. Changing internal = true by default needs further discussions
 DataBook$set("public", "get_object_names", function(data_name, object_type_label, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
  
   if(!missing(object_type_label)){

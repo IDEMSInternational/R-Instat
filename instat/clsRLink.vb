@@ -834,7 +834,7 @@ Public Class RLink
 
             'get the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).Last
-            If strLastScript.Contains("view_object") Then 'if output should be returned as a file
+            If strLastScript.Contains("get_object") Then 'if output should be returned as a file
                 Try
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
                     Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -1966,7 +1966,7 @@ Public Class RLink
             clsGetObjectNamesRFunction.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
         If Not String.IsNullOrEmpty(strRObjectTypeLabel) Then
-            clsGetObjectNamesRFunction.AddParameter("object_type_label", Chr(34) & strDataFrameName & Chr(34))
+            clsGetObjectNamesRFunction.AddParameter("object_type_label", Chr(34) & strRObjectTypeLabel & Chr(34))
         End If
         expNames = RunInternalScriptGetValue(clsGetObjectNamesRFunction.ToScript(), bSilent:=True)
         If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then

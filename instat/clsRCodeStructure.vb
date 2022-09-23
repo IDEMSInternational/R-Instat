@@ -468,35 +468,31 @@ Public Class RCodeStructure
                 strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
             End If
 
-            If Not String.IsNullOrEmpty(Me._rObjectTypeToAssignTo) AndAlso Not String.IsNullOrEmpty(Me._rObjectFormatToAssignTo) Then
+            If Not String.IsNullOrEmpty(Me._rObjectTypeToAssignTo) AndAlso Not String.IsNullOrEmpty(Me._rObjectNameToAssignTo) AndAlso Not String.IsNullOrEmpty(Me._rObjectFormatToAssignTo) Then
                 Dim clsAddObject As New RFunction
-                Dim clsViewObject As New RFunction
+                Dim clsGetObject As New RFunction
 
-                'set the R command and parameters for the add object R function
+                'set the R command and parameters for the add object R function. This is used for adding the object in the data book
+                'set the R command and parameters for the get object R function. This is used for viewing the object.
                 clsAddObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+                clsGetObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+
                 If Not String.IsNullOrEmpty(Me._rDataFrameNameToAddObjectTo) Then
                     clsAddObject.AddParameter("data_name", Chr(34) & Me._rDataFrameNameToAddObjectTo & Chr(34))
+                    clsGetObject.AddParameter("data_name", Chr(34) & Me._rDataFrameNameToAddObjectTo & Chr(34))
                 End If
-                If Not String.IsNullOrEmpty(Me._rObjectNameToAssignTo) Then
-                    clsAddObject.AddParameter("object_name", Chr(34) & Me._rObjectNameToAssignTo & Chr(34))
-                End If
+
+                clsAddObject.AddParameter("object_name", Chr(34) & Me._rObjectNameToAssignTo & Chr(34))
                 clsAddObject.AddParameter("object_type_label", Chr(34) & Me._rObjectTypeToAssignTo & Chr(34))
                 clsAddObject.AddParameter("object_format", Chr(34) & Me._rObjectFormatToAssignTo & Chr(34))
                 clsAddObject.AddParameter("object", Me._rObjectToAssignTo)
 
-                'todo. once the R level code has been refactored this parameter will not be necessary.
-                'it's important for it to alway be false.
-                'This can be changed once saving of objects as part of R-Instat session is correctly implemented
-                clsAddObject.AddParameter("internal", "FALSE")
-
-                'set the R command and parameters for the view object R function
-                clsViewObject.SetRCommand("view_object")
-                clsViewObject.AddParameter("object", Me._rObjectToAssignTo)
-                clsViewObject.AddParameter("object_format", Chr(34) & Me._rObjectFormatToAssignTo & Chr(34))
+                clsGetObject.AddParameter("object_name", Chr(34) & Me._rObjectNameToAssignTo & Chr(34))
 
                 'construct the scripts 
                 strScript = strScript & clsAddObject.ToScript() & Environment.NewLine
-                strAssignTo = clsViewObject.ToScript()
+                strAssignTo = clsGetObject.ToScript()
+
             ElseIf Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 'if we need to assign to a column in a data frame
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
