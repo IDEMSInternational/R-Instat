@@ -49,9 +49,9 @@ Public Class dlgApsimx
 
         Dim dctExamplesModels As New Dictionary(Of String, String) From {
            {"Barley", Chr(34) & "Barley" & Chr(34)},
-           {"ControlledEnvironment", Chr(34) & "ControlledEnvironment" & Chr(34)},
+           {"Controlled Environment", Chr(34) & "ControlledEnvironment" & Chr(34)},
            {"Eucalyptus", Chr(34) & "Eucalyptus" & Chr(34)},
-           {"EucalyptusRotation", Chr(34) & "EucalyptusRotation" & Chr(34)},
+           {"Eucalyptus Rotation", Chr(34) & "EucalyptusRotation" & Chr(34)},
            {"Maize", Chr(34) & "Maize" & Chr(34)},
            {"Oats", Chr(34) & "Oats" & Chr(34)},
            {"Rotation", Chr(34) & "Rotation" & Chr(34)},
@@ -62,8 +62,7 @@ Public Class dlgApsimx
            {"Potato", Chr(34) & "Potato" & Chr(34)},
            {"Millet", Chr(34) & "Millet" & Chr(34)},
            {"Centro", Chr(34) & "Centro" & Chr(34)},
-           {"Canopy", Chr(34) & "Canopy" & Chr(34)},
-           {"agpasture", Chr(34) & "agpasture" & Chr(34)}
+           {"Canopy", Chr(34) & "Canopy" & Chr(34)}
        }
 
         ucrInputComboList.SetParameter(New RParameter("example", 0))
@@ -95,12 +94,11 @@ Public Class dlgApsimx
         clsApsimExampleFunction.SetPackageName("apsimx")
         clsApsimExampleFunction.SetRCommand("apsim_example")
 
-        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("silent", 1), iAdditionalPairNo:=1)
+        ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, ucrChkSilent.GetParameter, iAdditionalPairNo:=1)
         ucrInputComboList.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("example", 0), iAdditionalPairNo:=1)
 
 
@@ -127,12 +125,13 @@ Public Class dlgApsimx
     End Sub
 
     Private Sub ucrInputComboList_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboList.ControlValueChanged
-        Dim strDataName As String = ucrInputComboList.GetText
+        Dim strDataName As String = frmMain.clsRLink.MakeValidText(ucrInputComboList.GetText)
         ucrInputSaveData.SetText(strDataName)
         clsApsimxExampleFunction.SetAssignTo(strDataName)
         clsApsimExampleFunction.SetAssignTo(strDataName)
         clsDataListFunction.ClearParameters()
-        If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "ControlledEnvironment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "EucalyptusRotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Soybean" Then
+        ucrBase.clsRsyntax.ClearCodes()
+        If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "Controlled Environment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "Eucalyptus Rotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Soybean" Then
             clsDataListFunction.AddParameter(ucrInputSaveData.GetText, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsReportOperator)

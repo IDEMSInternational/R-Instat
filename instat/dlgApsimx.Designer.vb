@@ -55,7 +55,7 @@ Partial Class dlgApsimx
         Me.ucrBase.Location = New System.Drawing.Point(7, 105)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 4
+        Me.ucrBase.TabIndex = 5
         '
         'ucrInputComboList
         '
@@ -74,7 +74,7 @@ Partial Class dlgApsimx
         Me.lblSaveData.Location = New System.Drawing.Point(7, 79)
         Me.lblSaveData.Name = "lblSaveData"
         Me.lblSaveData.Size = New System.Drawing.Size(61, 13)
-        Me.lblSaveData.TabIndex = 5
+        Me.lblSaveData.TabIndex = 3
         Me.lblSaveData.Text = "Save Data:"
         '
         'ucrInputSaveData
@@ -86,7 +86,7 @@ Partial Class dlgApsimx
         Me.ucrInputSaveData.Location = New System.Drawing.Point(135, 75)
         Me.ucrInputSaveData.Name = "ucrInputSaveData"
         Me.ucrInputSaveData.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSaveData.TabIndex = 6
+        Me.ucrInputSaveData.TabIndex = 4
         '
         'dlgApsimx
         '
