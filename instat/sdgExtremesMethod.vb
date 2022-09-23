@@ -36,7 +36,7 @@ Public Class sdgExtremesMethod
                                                     ucrNudShape, ucrNudLocation}, {rdoBayesian},
                                           bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFitMethodExtremes.AddToLinkedControls(ucrNudNumberOfIterations, {rdoBayesian}, bNewLinkedHideIfParameterMissing:=True,
-                                                    bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=999,
+                                                    bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=9999,
                                                     bNewLinkedUpdateFunction:=True)
 
 
