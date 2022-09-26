@@ -21,7 +21,7 @@ Public Class dlgExtremes
     Private clsDetachFunction As New RFunction
 
     Private clsFevdFunction, clsPriorParamListFunction, clsPlotsFunction, clsConcatenateFunction, clsConfidenceIntervalFunction,
-clsInitialListFunction As New RFunction
+clsInitialListFunction, clsOmitMissingFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
     Private clsLocationParamOperator As New ROperator
@@ -101,6 +101,7 @@ clsInitialListFunction As New RFunction
         clsDetachFunction = New RFunction
         clsConfidenceIntervalFunction = New RFunction
         clsConcatenateFunction = New RFunction
+        clsOmitMissingFunction = New RFunction
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrReceiverVariable.SetMeAsReceiver()
@@ -145,10 +146,15 @@ clsInitialListFunction As New RFunction
         clsPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
 
+        clsOmitMissingFunction.SetRCommand("na.omit")
+        clsOmitMissingFunction.SetPackageName("stats")
+        clsOmitMissingFunction.AddParameter("object", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
+
         clsAttachFunction.SetRCommand("attach")
         clsDetachFunction.SetRCommand("detach")
-        clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsAttachFunction.AddParameter("what", clsRFunctionParameter:=clsOmitMissingFunction, iPosition:=0)
+        clsDetachFunction.AddParameter("name", clsRFunctionParameter:=clsOmitMissingFunction, iPosition:=0)
         clsDetachFunction.AddParameter("unload", "TRUE", iPosition:=2)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
