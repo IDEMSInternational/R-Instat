@@ -161,16 +161,20 @@ Public Class dlgTransformClimatic
         ucrReceiverEvap.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverTMin.Selector = ucrSelectorTransform
-        ucrReceiverTMin.SetParameter(New RParameter("tmin", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverTMin.SetParameter(New RParameter("tmin", 1))
         ucrReceiverTMin.strSelectorHeading = "Numerics"
         ucrReceiverTMin.SetDataType("numeric")
+        ucrReceiverTMin.SetClimaticType("temp_min")
+        ucrReceiverTMin.bAutoFill = True
         ucrReceiverTMin.SetParameterIsRFunction()
         ucrReceiverTMin.SetLinkedDisplayControl(lblTMin)
 
         ucrReceiverTMax.Selector = ucrSelectorTransform
-        ucrReceiverTMax.SetParameter(New RParameter("tmax", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverTMax.SetParameter(New RParameter("tmax", 0))
         ucrReceiverTMax.strSelectorHeading = "Numerics"
         ucrReceiverTMax.SetDataType("numeric")
+        ucrReceiverTMax.SetClimaticType("temp_max")
+        ucrReceiverTMax.bAutoFill = True
         ucrReceiverTMax.SetParameterIsRFunction()
         ucrReceiverTMax.SetLinkedDisplayControl(lblTMax)
 
@@ -485,8 +489,6 @@ Public Class dlgTransformClimatic
 
         ' Degree
         clsDiurnalRangeOperator.SetOperation("-")
-        clsDiurnalRangeOperator.AddParameter("tmax", "tmax", iPosition:=0)
-        clsDiurnalRangeOperator.AddParameter("tmin", "tmin", iPosition:=1)
         clsDiurnalRangeOperator.bToScriptAsRString = True
 
         clsTMeanAddOperator.SetOperation("+")
@@ -911,6 +913,7 @@ Public Class dlgTransformClimatic
         GroupByStation()
         Evaporation()
         ChangeFunctions()
+        AddCalculate()
     End Sub
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
