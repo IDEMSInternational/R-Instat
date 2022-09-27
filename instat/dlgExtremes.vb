@@ -125,12 +125,12 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
         clsPlotsFunction.bExcludeAssignedFunctionOutput = False
 
         clsPriorParamListFunction.SetRCommand("list")
-        clsPriorParamListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=5)
+        'clsPriorParamListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=5)
 
         clsInitialListFunction.SetRCommand("list")
-        clsInitialListFunction.AddParameter("location", "0", iPosition:=0)
-        clsInitialListFunction.AddParameter("scale", "0.1", iPosition:=1)
-        clsInitialListFunction.AddParameter("shape", "-0.5", iPosition:=2)
+        'clsInitialListFunction.AddParameter("location", "0", iPosition:=0)
+        'clsInitialListFunction.AddParameter("scale", "0.1", iPosition:=1)
+        'clsInitialListFunction.AddParameter("shape", "-0.5", iPosition:=2)
 
         clsConfidenceIntervalFunction.SetPackageName("extRemes")
         clsConfidenceIntervalFunction.SetRCommand("ci.fevd")
@@ -307,6 +307,20 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
 
             grpFirstCalc.Visible = False
             grpSecondCalc.Visible = False
+        End If
+        AddNonStationaryModels()
+    End Sub
+    Private Sub AddNonStationaryModels()
+        If ucrChkExplanatoryModelForLocationParameter.Checked Then
+            clsInitialListFunction.RemoveParameterByName("location")
+            clsInitialListFunction.RemoveParameterByName("scale")
+            clsInitialListFunction.RemoveParameterByName("shape")
+            clsPriorParamListFunction.RemoveParameterByName("v")
+        Else
+            clsPriorParamListFunction.AddParameter("v", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=5)
+            clsInitialListFunction.AddParameter("location", "0", iPosition:=0)
+            clsInitialListFunction.AddParameter("scale", "0.1", iPosition:=1)
+            clsInitialListFunction.AddParameter("shape", "-0.5", iPosition:=2)
         End If
     End Sub
 End Class
