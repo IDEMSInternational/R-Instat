@@ -462,7 +462,7 @@ Partial Class DlgDefineClimaticData
         Me.cmdCheckUnique.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdCheckUnique.Location = New System.Drawing.Point(9, 423)
         Me.cmdCheckUnique.Name = "cmdCheckUnique"
-        Me.cmdCheckUnique.Size = New System.Drawing.Size(103, 23)
+        Me.cmdCheckUnique.Size = New System.Drawing.Size(139, 23)
         Me.cmdCheckUnique.TabIndex = 4
         Me.cmdCheckUnique.Text = "Check Duplicates"
         Me.cmdCheckUnique.UseVisualStyleBackColor = True
@@ -473,9 +473,9 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput.AutoSize = True
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
-        Me.ucrInputCheckInput.Location = New System.Drawing.Point(118, 425)
+        Me.ucrInputCheckInput.Location = New System.Drawing.Point(154, 425)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
-        Me.ucrInputCheckInput.Size = New System.Drawing.Size(289, 21)
+        Me.ucrInputCheckInput.Size = New System.Drawing.Size(253, 21)
         Me.ucrInputCheckInput.TabIndex = 5
         '
         'ucrBase
@@ -484,7 +484,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(13, 452)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 6
         '
         'ucrSelectorDefineClimaticData

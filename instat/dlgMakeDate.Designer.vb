@@ -41,6 +41,7 @@ Partial Class dlgMakeDate
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMakeDate))
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
+        Me.lblTypicalLength = New System.Windows.Forms.Label()
         Me.ucrChkTwoDigitYear = New instat.ucrCheck()
         Me.ucrNudCutoff = New instat.ucrNud()
         Me.lblCutOffTwo = New System.Windows.Forms.Label()
@@ -103,7 +104,6 @@ Partial Class dlgMakeDate
         Me.ucrSaveDate = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorMakeDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblTypicalLength = New System.Windows.Forms.Label()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormats.SuspendLayout()
@@ -129,13 +129,23 @@ Partial Class dlgMakeDate
         Me.grpTwoColumns.TabStop = False
         Me.grpTwoColumns.Text = "Two Columns"
         '
+        'lblTypicalLength
+        '
+        Me.lblTypicalLength.AutoSize = True
+        Me.lblTypicalLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTypicalLength.Location = New System.Drawing.Point(130, 95)
+        Me.lblTypicalLength.Name = "lblTypicalLength"
+        Me.lblTypicalLength.Size = New System.Drawing.Size(111, 13)
+        Me.lblTypicalLength.TabIndex = 12
+        Me.lblTypicalLength.Text = "No. of Days in a Year:"
+        '
         'ucrChkTwoDigitYear
         '
         Me.ucrChkTwoDigitYear.AutoSize = True
         Me.ucrChkTwoDigitYear.Checked = False
         Me.ucrChkTwoDigitYear.Location = New System.Drawing.Point(133, 34)
         Me.ucrChkTwoDigitYear.Name = "ucrChkTwoDigitYear"
-        Me.ucrChkTwoDigitYear.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkTwoDigitYear.Size = New System.Drawing.Size(128, 23)
         Me.ucrChkTwoDigitYear.TabIndex = 2
         '
         'ucrNudCutoff
@@ -852,7 +862,7 @@ Partial Class dlgMakeDate
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 422)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
         '
         'ucrSelectorMakeDate
@@ -866,16 +876,6 @@ Partial Class dlgMakeDate
         Me.ucrSelectorMakeDate.Name = "ucrSelectorMakeDate"
         Me.ucrSelectorMakeDate.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorMakeDate.TabIndex = 4
-        '
-        'lblTypicalLength
-        '
-        Me.lblTypicalLength.AutoSize = True
-        Me.lblTypicalLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTypicalLength.Location = New System.Drawing.Point(130, 95)
-        Me.lblTypicalLength.Name = "lblTypicalLength"
-        Me.lblTypicalLength.Size = New System.Drawing.Size(111, 13)
-        Me.lblTypicalLength.TabIndex = 12
-        Me.lblTypicalLength.Text = "No. of Days in a Year:"
         '
         'dlgMakeDate
         '

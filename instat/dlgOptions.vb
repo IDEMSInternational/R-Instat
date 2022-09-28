@@ -84,13 +84,13 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Portuguese", "Kiswahili"})
+        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
 
         SetVisibleLanButton()
     End Sub
 
-     Private Sub LoadInstatOptions()
+    Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
@@ -123,10 +123,14 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
-            Case "pt-PT"
-                ucrInputLanguage.SetText("Portuguese")
             Case "sw-KE"
                 ucrInputLanguage.SetText("Kiswahili")
+            Case "pt-PT"
+                ucrInputLanguage.SetText("Portuguese")
+            Case "ru-RU"
+                ucrInputLanguage.SetText("Russian")
+            Case "es-ES"
+                ucrInputLanguage.SetText("Spanish")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -238,6 +242,12 @@ Public Class dlgOptions
         autoTranslate(Me)
         SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
 
+        If strCurrLanguageCulture <> strPrevLanguageCulture Then
+            Dim strCommentNewLanguage = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
+            frmMain.clsInstatOptions.SetComment(strCommentNewLanguage)
+            ucrInputComment.SetName(strCommentNewLanguage)
+        End If
+
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             frmMain.TranslateFrmMainMenu()
         End If
@@ -261,10 +271,14 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
-            Case "Portuguese"
-                strCurrLanguageCulture = "pt-PT"
             Case "Kiswahili"
                 strCurrLanguageCulture = "sw-KE"
+            Case "Portuguese"
+                strCurrLanguageCulture = "pt-PT"
+            Case "Russian"
+                strCurrLanguageCulture = "ru-RU"
+            Case "Spanish"
+                strCurrLanguageCulture = "es-ES"
         End Select
         ApplyEnabled(True)
     End Sub

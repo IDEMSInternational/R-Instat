@@ -47,6 +47,7 @@ Partial Class ucrFilePath
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = True
         Me.ucrInputFilePath.Location = New System.Drawing.Point(136, 3)
@@ -71,7 +72,7 @@ Partial Class ucrFilePath
         Me.lblName.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblName.Location = New System.Drawing.Point(2, 6)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(50, 13)
+        Me.lblName.Size = New System.Drawing.Size(134, 13)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Save As:"
         '
@@ -85,6 +86,7 @@ Partial Class ucrFilePath
         Me.Name = "ucrFilePath"
         Me.Size = New System.Drawing.Size(392, 34)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
