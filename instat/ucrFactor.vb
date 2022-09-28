@@ -145,7 +145,6 @@ Public Class ucrFactor
             If Not value Then
                 Me.Controls.Remove(pnlSelectOptions)
             ElseIf Not Me.Controls.Contains(pnlSelectOptions) Then
-                'pnlSelectOptions.Anchor = (AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom )
                 Me.Controls.Add(pnlSelectOptions)
             End If
         End Set

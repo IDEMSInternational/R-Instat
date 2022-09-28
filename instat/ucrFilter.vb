@@ -108,7 +108,6 @@ Public Class ucrFilter
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
                 ucrFactorLevels.Visible = True
-                'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
             Else
                 ucrFilterOperation.Visible = True
                 If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" AndAlso ucrFilterOperation.GetText() <> "is.empty" AndAlso ucrFilterOperation.GetText() <> "! is.empty" Then
