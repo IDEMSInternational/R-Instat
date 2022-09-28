@@ -108,7 +108,7 @@ Partial Class sdgExportToWWR
         'ucrButtonsSdg
         '
         Me.ucrButtonsSdg.AutoSize = True
-        Me.ucrButtonsSdg.Location = New System.Drawing.Point(113, 371)
+        Me.ucrButtonsSdg.Location = New System.Drawing.Point(78, 371)
         Me.ucrButtonsSdg.Name = "ucrButtonsSdg"
         Me.ucrButtonsSdg.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsSdg.TabIndex = 17

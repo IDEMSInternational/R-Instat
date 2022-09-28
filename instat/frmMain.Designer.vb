@@ -416,6 +416,8 @@ Partial Class frmMain
         Me.mnuFileImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromDatabases = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
@@ -647,6 +649,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextModelFitModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextGeneralFitModel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsByContextCropModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -829,7 +832,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
         Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(299, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Summary Tables..."
+        Me.mnuDescribeSpecificSummary.Text = "Frequency/Summary Tables..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
@@ -1446,6 +1449,7 @@ Partial Class frmMain
         '
         'mnuViewDataView
         '
+        Me.mnuViewDataView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewDataView.Name = "mnuViewDataView"
         Me.mnuViewDataView.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewDataView.Tag = "Data_View"
@@ -1453,12 +1457,14 @@ Partial Class frmMain
         '
         'mnuViewOutputWindow
         '
+        Me.mnuViewOutputWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOutputWindow.Name = "mnuViewOutputWindow"
         Me.mnuViewOutputWindow.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewOutputWindow.Text = "Output Window"
         '
         'mnuViewLog
         '
+        Me.mnuViewLog.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewLog.Name = "mnuViewLog"
         Me.mnuViewLog.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewLog.Tag = "Log"
@@ -1466,6 +1472,7 @@ Partial Class frmMain
         '
         'mnuViewScriptWindow
         '
+        Me.mnuViewScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewScriptWindow.Name = "mnuViewScriptWindow"
         Me.mnuViewScriptWindow.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewScriptWindow.Tag = "Script_Window"
@@ -1473,6 +1480,7 @@ Partial Class frmMain
         '
         'mnuViewColumnMetadata
         '
+        Me.mnuViewColumnMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewColumnMetadata.Name = "mnuViewColumnMetadata"
         Me.mnuViewColumnMetadata.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewColumnMetadata.Tag = "Column_Metadata"
@@ -1480,6 +1488,7 @@ Partial Class frmMain
         '
         'mnuViewDataFrameMetadata
         '
+        Me.mnuViewDataFrameMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewDataFrameMetadata.Name = "mnuViewDataFrameMetadata"
         Me.mnuViewDataFrameMetadata.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewDataFrameMetadata.Tag = "Data_Frame_Metadata"
@@ -1492,12 +1501,14 @@ Partial Class frmMain
         '
         'mnuViewStructuredMenu
         '
+        Me.mnuViewStructuredMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewStructuredMenu.Name = "mnuViewStructuredMenu"
         Me.mnuViewStructuredMenu.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewStructuredMenu.Text = "Structured Menu"
         '
         'mnuViewClimaticMenu
         '
+        Me.mnuViewClimaticMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewClimaticMenu.Name = "mnuViewClimaticMenu"
         Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewClimaticMenu.Tag = ""
@@ -1505,6 +1516,7 @@ Partial Class frmMain
         '
         'mnuViewProcurementMenu
         '
+        Me.mnuViewProcurementMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewProcurementMenu.Name = "mnuViewProcurementMenu"
         Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewProcurementMenu.Tag = ""
@@ -1512,6 +1524,7 @@ Partial Class frmMain
         '
         'mnuViewOptionsByContextMenu
         '
+        Me.mnuViewOptionsByContextMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOptionsByContextMenu.Name = "mnuViewOptionsByContextMenu"
         Me.mnuViewOptionsByContextMenu.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewOptionsByContextMenu.Text = "Options by Context Menu"
@@ -1523,12 +1536,14 @@ Partial Class frmMain
         '
         'mnuViewResetToDefaultLayout
         '
+        Me.mnuViewResetToDefaultLayout.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewResetToDefaultLayout.Name = "mnuViewResetToDefaultLayout"
         Me.mnuViewResetToDefaultLayout.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewResetToDefaultLayout.Text = "Reset to Default Layout"
         '
         'mnuViewSwapDataAndMetadata
         '
+        Me.mnuViewSwapDataAndMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewSwapDataAndMetadata.Name = "mnuViewSwapDataAndMetadata"
         Me.mnuViewSwapDataAndMetadata.Size = New System.Drawing.Size(211, 22)
         Me.mnuViewSwapDataAndMetadata.Text = "Swap Data and Metadata"
@@ -2260,14 +2275,12 @@ Partial Class frmMain
         '
         'mnuClimaticPICSATemperatureGraph
         '
-        Me.mnuClimaticPICSATemperatureGraph.Enabled = False
         Me.mnuClimaticPICSATemperatureGraph.Name = "mnuClimaticPICSATemperatureGraph"
         Me.mnuClimaticPICSATemperatureGraph.Size = New System.Drawing.Size(246, 22)
         Me.mnuClimaticPICSATemperatureGraph.Text = "Temperature Graph..."
         '
         'mnuClimaticPICSAGeneralGraph
         '
-        Me.mnuClimaticPICSAGeneralGraph.Enabled = False
         Me.mnuClimaticPICSAGeneralGraph.Name = "mnuClimaticPICSAGeneralGraph"
         Me.mnuClimaticPICSAGeneralGraph.Size = New System.Drawing.Size(246, 22)
         Me.mnuClimaticPICSAGeneralGraph.Text = "General Graph..."
@@ -2910,12 +2923,14 @@ Partial Class frmMain
         '
         'mnuEditCopySpecial
         '
+        Me.mnuEditCopySpecial.Enabled = False
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
         Me.mnuEditCopySpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
         Me.mnuEditCopySpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditCopySpecial.Tag = "Copy_Special"
         Me.mnuEditCopySpecial.Text = "Copy Special"
+        Me.mnuEditCopySpecial.Visible = False
         '
         'mnuEditPaste
         '
@@ -2927,12 +2942,14 @@ Partial Class frmMain
         '
         'mnuPasteSpecial
         '
+        Me.mnuPasteSpecial.Enabled = False
         Me.mnuPasteSpecial.Name = "mnuPasteSpecial"
         Me.mnuPasteSpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
         Me.mnuPasteSpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuPasteSpecial.Tag = "Paste"
         Me.mnuPasteSpecial.Text = "Paste New Columns"
+        Me.mnuPasteSpecial.Visible = False
         '
         'mnuEditPasteNewDataFrame
         '
@@ -3151,12 +3168,14 @@ Partial Class frmMain
         '
         'mnuColumnMetadat
         '
+        Me.mnuColumnMetadat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuColumnMetadat.Name = "mnuColumnMetadat"
         Me.mnuColumnMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuColumnMetadat.Text = "  Column Metadata..."
         '
         'mnuDataFrameMetadat
         '
+        Me.mnuDataFrameMetadat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
         Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuDataFrameMetadat.Text = "  Data Frame Metadata..."
@@ -3174,12 +3193,14 @@ Partial Class frmMain
         '
         'mnuLogWindow
         '
+        Me.mnuLogWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuLogWindow.Name = "mnuLogWindow"
         Me.mnuLogWindow.Size = New System.Drawing.Size(166, 22)
         Me.mnuLogWindow.Text = "  Log Window..."
         '
         'mnuScriptWindow
         '
+        Me.mnuScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuScriptWindow.Name = "mnuScriptWindow"
         Me.mnuScriptWindow.Size = New System.Drawing.Size(166, 22)
         Me.mnuScriptWindow.Text = "  Script Window..."
@@ -3237,7 +3258,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 20)
         Me.mnuFile.Tag = "File"
@@ -3292,6 +3313,22 @@ Partial Class frmMain
         Me.mnuFileImportFromDatabases.Size = New System.Drawing.Size(232, 22)
         Me.mnuFileImportFromDatabases.Text = "Import From Databases..."
         Me.mnuFileImportFromDatabases.Visible = False
+        '
+        'mnuFileImportFromPostgres
+        '
+        Me.mnuFileImportFromPostgres.Enabled = False
+        Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
+        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
+        Me.mnuFileImportFromPostgres.Visible = False
+        '
+        'mnuFileImportFromRapidPro
+        '
+        Me.mnuFileImportFromRapidPro.Enabled = False
+        Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
+        Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromRapidPro.Text = "Import From RapidPro"
+        Me.mnuFileImportFromRapidPro.Visible = False
         '
         'mnuFileImportandTidyNetCDFFile
         '
@@ -4626,16 +4663,16 @@ Partial Class frmMain
         '
         'mnuOptionsByContext
         '
-        Me.mnuOptionsByContext.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckData, Me.mnuOptionsByContextDefine, Me.mnuOptionsByContextPrepare, Me.mnuOptionsByContextDescribe, Me.mnuOptionsByContextModel})
+        Me.mnuOptionsByContext.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckData, Me.mnuOptionsByContextDefine, Me.mnuOptionsByContextPrepare, Me.mnuOptionsByContextDescribe, Me.mnuOptionsByContextModel, Me.mnuOptionsByContextCropModel})
         Me.mnuOptionsByContext.Name = "mnuOptionsByContext"
-        Me.mnuOptionsByContext.Size = New System.Drawing.Size(122, 20)
-        Me.mnuOptionsByContext.Text = "Options by Context"
+        Me.mnuOptionsByContext.Size = New System.Drawing.Size(84, 20)
+        Me.mnuOptionsByContext.Text = "Experiments"
         '
         'mnuOptionsByContextCheckData
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -4677,7 +4714,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -4696,7 +4733,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -4732,7 +4769,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -4758,7 +4795,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(134, 22)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(146, 22)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -4772,6 +4809,14 @@ Partial Class frmMain
         Me.mnuOptionsByContextGeneralFitModel.Name = "mnuOptionsByContextGeneralFitModel"
         Me.mnuOptionsByContextGeneralFitModel.Size = New System.Drawing.Size(176, 22)
         Me.mnuOptionsByContextGeneralFitModel.Text = "General Fit Model..."
+        '
+        'mnuOptionsByContextCropModel
+        '
+        Me.mnuOptionsByContextCropModel.Enabled = False
+        Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(146, 22)
+        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
+        Me.mnuOptionsByContextCropModel.Visible = False
         '
         'mnuTools
         '
@@ -5761,5 +5806,7 @@ Partial Class frmMain
 
     Friend WithEvents mnuClimaticPICSAGeneralGraph As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator73 As ToolStripSeparator
-
+    Friend WithEvents mnuOptionsByContextCropModel As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromRapidPro As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromPostgres As ToolStripMenuItem
 End Class

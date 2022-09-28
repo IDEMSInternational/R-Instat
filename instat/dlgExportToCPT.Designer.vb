@@ -159,7 +159,7 @@ Partial Class dlgExportToCPT
         Me.rdoOneDF.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoOneDF.Location = New System.Drawing.Point(14, 7)
         Me.rdoOneDF.Name = "rdoOneDF"
-        Me.rdoOneDF.Size = New System.Drawing.Size(132, 27)
+        Me.rdoOneDF.Size = New System.Drawing.Size(132, 43)
         Me.rdoOneDF.TabIndex = 25
         Me.rdoOneDF.TabStop = True
         Me.rdoOneDF.Text = "One Data Frame"
@@ -176,7 +176,7 @@ Partial Class dlgExportToCPT
         Me.rdoTwoDFLong.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTwoDFLong.Location = New System.Drawing.Point(145, 7)
         Me.rdoTwoDFLong.Name = "rdoTwoDFLong"
-        Me.rdoTwoDFLong.Size = New System.Drawing.Size(136, 27)
+        Me.rdoTwoDFLong.Size = New System.Drawing.Size(136, 43)
         Me.rdoTwoDFLong.TabIndex = 26
         Me.rdoTwoDFLong.TabStop = True
         Me.rdoTwoDFLong.Text = "Two Data Frames Long"
@@ -193,7 +193,7 @@ Partial Class dlgExportToCPT
         Me.rdoTwoDFWide.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTwoDFWide.Location = New System.Drawing.Point(280, 7)
         Me.rdoTwoDFWide.Name = "rdoTwoDFWide"
-        Me.rdoTwoDFWide.Size = New System.Drawing.Size(141, 27)
+        Me.rdoTwoDFWide.Size = New System.Drawing.Size(141, 43)
         Me.rdoTwoDFWide.TabIndex = 27
         Me.rdoTwoDFWide.TabStop = True
         Me.rdoTwoDFWide.Text = "Two Data Frames Wide"
@@ -272,7 +272,7 @@ Partial Class dlgExportToCPT
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(15, 529)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrReceiverStationTwoDF
@@ -343,7 +343,7 @@ Partial Class dlgExportToCPT
         Me.ucrPnlNoOfDF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlNoOfDF.Location = New System.Drawing.Point(6, 3)
         Me.ucrPnlNoOfDF.Name = "ucrPnlNoOfDF"
-        Me.ucrPnlNoOfDF.Size = New System.Drawing.Size(418, 36)
+        Me.ucrPnlNoOfDF.Size = New System.Drawing.Size(418, 50)
         Me.ucrPnlNoOfDF.TabIndex = 21
         '
         'ucrReceiverElement

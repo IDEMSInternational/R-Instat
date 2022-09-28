@@ -608,7 +608,7 @@ Partial Class sdgOpenNetCDF
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(295, 433)
+        Me.ucrBase.Location = New System.Drawing.Point(254, 434)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(229, 30)
         Me.ucrBase.TabIndex = 1

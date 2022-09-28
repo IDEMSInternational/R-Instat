@@ -605,7 +605,7 @@ Partial Class sdgPlotRegion
         'ucrButtonsSdgPlotRegion
         '
         Me.ucrButtonsSdgPlotRegion.AutoSize = True
-        Me.ucrButtonsSdgPlotRegion.Location = New System.Drawing.Point(86, 460)
+        Me.ucrButtonsSdgPlotRegion.Location = New System.Drawing.Point(57, 460)
         Me.ucrButtonsSdgPlotRegion.Name = "ucrButtonsSdgPlotRegion"
         Me.ucrButtonsSdgPlotRegion.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsSdgPlotRegion.TabIndex = 0

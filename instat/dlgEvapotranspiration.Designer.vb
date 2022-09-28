@@ -87,7 +87,7 @@ Partial Class dlgEvapotranspiration
         Me.lblHumidityMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblHumidityMax.Location = New System.Drawing.Point(323, 195)
         Me.lblHumidityMax.Name = "lblHumidityMax"
-        Me.lblHumidityMax.Size = New System.Drawing.Size(78, 17)
+        Me.lblHumidityMax.Size = New System.Drawing.Size(121, 19)
         Me.lblHumidityMax.TabIndex = 10
         Me.lblHumidityMax.Text = "Humidity Max:"
         '
@@ -96,7 +96,7 @@ Partial Class dlgEvapotranspiration
         Me.lblHumidityMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblHumidityMin.Location = New System.Drawing.Point(324, 240)
         Me.lblHumidityMin.Name = "lblHumidityMin"
-        Me.lblHumidityMin.Size = New System.Drawing.Size(77, 17)
+        Me.lblHumidityMin.Size = New System.Drawing.Size(120, 19)
         Me.lblHumidityMin.TabIndex = 12
         Me.lblHumidityMin.Text = "Humidity Min:"
         '
@@ -105,7 +105,7 @@ Partial Class dlgEvapotranspiration
         Me.lblTimeStep.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblTimeStep.Location = New System.Drawing.Point(5, 336)
         Me.lblTimeStep.Name = "lblTimeStep"
-        Me.lblTimeStep.Size = New System.Drawing.Size(58, 20)
+        Me.lblTimeStep.Size = New System.Drawing.Size(134, 20)
         Me.lblTimeStep.TabIndex = 22
         Me.lblTimeStep.Text = "Time Step"
         '
@@ -114,7 +114,7 @@ Partial Class dlgEvapotranspiration
         Me.lblCrop.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCrop.Location = New System.Drawing.Point(5, 523)
         Me.lblCrop.Name = "lblCrop"
-        Me.lblCrop.Size = New System.Drawing.Size(31, 20)
+        Me.lblCrop.Size = New System.Drawing.Size(71, 20)
         Me.lblCrop.TabIndex = 30
         Me.lblCrop.Text = "Crop"
         '
@@ -170,7 +170,7 @@ Partial Class dlgEvapotranspiration
         Me.lblMaxMissingDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblMaxMissingDays.Location = New System.Drawing.Point(5, 262)
         Me.lblMaxMissingDays.Name = "lblMaxMissingDays"
-        Me.lblMaxMissingDays.Size = New System.Drawing.Size(100, 20)
+        Me.lblMaxMissingDays.Size = New System.Drawing.Size(169, 20)
         Me.lblMaxMissingDays.TabIndex = 16
         Me.lblMaxMissingDays.Text = "Max Missing Days"
         '
@@ -179,7 +179,7 @@ Partial Class dlgEvapotranspiration
         Me.lblMaxDurationMissingData.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblMaxDurationMissingData.Location = New System.Drawing.Point(5, 285)
         Me.lblMaxDurationMissingData.Name = "lblMaxDurationMissingData"
-        Me.lblMaxDurationMissingData.Size = New System.Drawing.Size(71, 17)
+        Me.lblMaxDurationMissingData.Size = New System.Drawing.Size(160, 20)
         Me.lblMaxDurationMissingData.TabIndex = 18
         Me.lblMaxDurationMissingData.Text = "Max Duration Missing Data"
         '
@@ -188,7 +188,7 @@ Partial Class dlgEvapotranspiration
         Me.lblMaxPerctMissindData.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblMaxPerctMissindData.Location = New System.Drawing.Point(5, 309)
         Me.lblMaxPerctMissindData.Name = "lblMaxPerctMissindData"
-        Me.lblMaxPerctMissindData.Size = New System.Drawing.Size(100, 19)
+        Me.lblMaxPerctMissindData.Size = New System.Drawing.Size(169, 19)
         Me.lblMaxPerctMissindData.TabIndex = 20
         Me.lblMaxPerctMissindData.Text = "Max  Missing Data"
         '
@@ -197,7 +197,7 @@ Partial Class dlgEvapotranspiration
         Me.lblSolar.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblSolar.Location = New System.Drawing.Point(5, 469)
         Me.lblSolar.Name = "lblSolar"
-        Me.lblSolar.Size = New System.Drawing.Size(38, 18)
+        Me.lblSolar.Size = New System.Drawing.Size(58, 18)
         Me.lblSolar.TabIndex = 26
         Me.lblSolar.Text = "Solar"
         '
@@ -473,7 +473,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 583)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 33
         '
         'dlgEvapotranspiration
