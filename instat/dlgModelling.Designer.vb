@@ -80,16 +80,16 @@ Partial Class dlgModelling
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpBayesianPlus = New System.Windows.Forms.GroupBox()
-        Me.cmdinference = New System.Windows.Forms.Button()
-        Me.cmdbayesinference = New System.Windows.Forms.Button()
+        Me.grpRstanarm = New System.Windows.Forms.GroupBox()
+        Me.cmdstanpolr = New System.Windows.Forms.Button()
+        Me.cmdstanglm = New System.Windows.Forms.Button()
         Me.grpStats.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpextRemes.SuspendLayout()
         Me.grplme4.SuspendLayout()
         Me.grpArm.SuspendLayout()
         Me.grpMASS.SuspendLayout()
-        Me.grpBayesianPlus.SuspendLayout()
+        Me.grpRstanarm.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblModel
@@ -777,38 +777,38 @@ Partial Class dlgModelling
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 14
         '
-        'grpBayesianPlus
+        'grpRstanarm
         '
-        Me.grpBayesianPlus.Controls.Add(Me.cmdinference)
-        Me.grpBayesianPlus.Controls.Add(Me.cmdbayesinference)
-        Me.grpBayesianPlus.Location = New System.Drawing.Point(440, 106)
-        Me.grpBayesianPlus.Name = "grpBayesianPlus"
-        Me.grpBayesianPlus.Size = New System.Drawing.Size(215, 70)
-        Me.grpBayesianPlus.TabIndex = 127
-        Me.grpBayesianPlus.TabStop = False
-        Me.grpBayesianPlus.Text = "Bayesian Plus"
+        Me.grpRstanarm.Controls.Add(Me.cmdstanpolr)
+        Me.grpRstanarm.Controls.Add(Me.cmdstanglm)
+        Me.grpRstanarm.Location = New System.Drawing.Point(439, 102)
+        Me.grpRstanarm.Name = "grpRstanarm"
+        Me.grpRstanarm.Size = New System.Drawing.Size(215, 70)
+        Me.grpRstanarm.TabIndex = 129
+        Me.grpRstanarm.TabStop = False
+        Me.grpRstanarm.Text = "Rstanarm"
         '
-        'cmdinference
+        'cmdstanpolr
         '
-        Me.cmdinference.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdinference.Location = New System.Drawing.Point(107, 18)
-        Me.cmdinference.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdinference.Name = "cmdinference"
-        Me.cmdinference.Size = New System.Drawing.Size(104, 45)
-        Me.cmdinference.TabIndex = 126
-        Me.cmdinference.Text = "Inference"
-        Me.cmdinference.UseVisualStyleBackColor = True
+        Me.cmdstanpolr.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdstanpolr.Location = New System.Drawing.Point(107, 19)
+        Me.cmdstanpolr.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdstanpolr.Name = "cmdstanpolr"
+        Me.cmdstanpolr.Size = New System.Drawing.Size(104, 45)
+        Me.cmdstanpolr.TabIndex = 126
+        Me.cmdstanpolr.Text = "stanpolr"
+        Me.cmdstanpolr.UseVisualStyleBackColor = True
         '
-        'cmdbayesinference
+        'cmdstanglm
         '
-        Me.cmdbayesinference.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbayesinference.Location = New System.Drawing.Point(4, 19)
-        Me.cmdbayesinference.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdbayesinference.Name = "cmdbayesinference"
-        Me.cmdbayesinference.Size = New System.Drawing.Size(104, 45)
-        Me.cmdbayesinference.TabIndex = 125
-        Me.cmdbayesinference.Text = "bayes_inf"
-        Me.cmdbayesinference.UseVisualStyleBackColor = True
+        Me.cmdstanglm.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdstanglm.Location = New System.Drawing.Point(4, 19)
+        Me.cmdstanglm.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdstanglm.Name = "cmdstanglm"
+        Me.cmdstanglm.Size = New System.Drawing.Size(104, 45)
+        Me.cmdstanglm.TabIndex = 125
+        Me.cmdstanglm.Text = "stanglm"
+        Me.cmdstanglm.UseVisualStyleBackColor = True
         '
         'dlgModelling
         '
@@ -816,6 +816,7 @@ Partial Class dlgModelling
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(849, 663)
+        Me.Controls.Add(Me.grpRstanarm)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblRpackage)
@@ -830,7 +831,6 @@ Partial Class dlgModelling
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.ucrSelectorModelling)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.grpBayesianPlus)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
         Me.Controls.Add(Me.grpStats)
@@ -849,7 +849,7 @@ Partial Class dlgModelling
         Me.grplme4.ResumeLayout(False)
         Me.grpArm.ResumeLayout(False)
         Me.grpMASS.ResumeLayout(False)
-        Me.grpBayesianPlus.ResumeLayout(False)
+        Me.grpRstanarm.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -913,7 +913,7 @@ Partial Class dlgModelling
     Friend WithEvents cmdbayespolr As Button
     Friend WithEvents cmdbayesglm As Button
     Friend WithEvents grpArm As GroupBox
-    Friend WithEvents grpBayesianPlus As GroupBox
-    Friend WithEvents cmdinference As Button
-    Friend WithEvents cmdbayesinference As Button
+    Friend WithEvents grpRstanarm As GroupBox
+    Friend WithEvents cmdstanpolr As Button
+    Friend WithEvents cmdstanglm As Button
 End Class
