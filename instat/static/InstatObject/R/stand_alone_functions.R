@@ -2543,3 +2543,20 @@ is.levelscount <- function(x, n){
 is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
+
+sidesOptions <- function(ucrChkSideLeft, ucrChkSideRight, ucrChkSideTop, ucrChkSideBottom){
+  options_list <- c()
+  if (ucrChkSideLeft){
+    options_list <- c(options_list, "left")
+  }
+  if (ucrChkSideRight){
+    options_list <- c(options_list, "right")
+  }
+  if (ucrChkSideTop){
+    options_list <- c(options_list, "top")
+  }
+  if (ucrChkSideBottom){
+    options_list <- c(options_list, "bottom")
+  }
+  return(options_list)
+}
