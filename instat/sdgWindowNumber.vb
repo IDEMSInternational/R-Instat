@@ -19,15 +19,29 @@ Public Class sdgWindowNumber
     Public iPage As Integer
     Public iNumPage, iDefaultPage As Integer
 
+    Public enumWINNUMBERMode As String = WINNUMBERMode.Row
+    Public Enum WINNUMBERMode
+        Row
+        Col
+    End Enum
+
     Private Sub sdgWindowNumber_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseControls()
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
-        Dim iMax As Integer = Math.Round(iNumPage / 1000)
+        Dim iMax, iDefault As Integer
+        Select Case enumWINNUMBERMode
+            Case WINNUMBERMode.Row
+                iMax = Math.Round(iNumPage / 1000)
+                IDefault = Math.Round(iDefaultPage / 1000)
+            Case WINNUMBERMode.Col
+                iMax = Math.Round(iNumPage / 100) - 1
+                iDefault = Math.Round(iDefaultPage / 100) - 1
+        End Select
         ucrNudPageNumber.SetMinMax(1, iMax)
-        ucrNudPageNumber.SetText(Math.Round(iDefaultPage / 1000))
+        ucrNudPageNumber.SetText(iDefault)
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgPICSARainfalbuttons.ClickReturn

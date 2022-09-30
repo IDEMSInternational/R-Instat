@@ -895,6 +895,7 @@ Public Class ucrDataView
 
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
+            sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
             sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalRowCount
             sdgWindowNumber.iDefaultPage = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
@@ -902,6 +903,21 @@ Public Class ucrDataView
             iPageNum = sdgWindowNumber.iPage
             If iPageNum > 0 Then
                 GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPageNum)
+                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            End If
+        End If
+    End Sub
+
+    Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
+        If lblColNext.Enabled OrElse lblColBack.Enabled Then
+            sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
+            sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalColumnCount
+            sdgWindowNumber.iDefaultPage = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
+            sdgWindowNumber.ShowDialog()
+            Dim iPageNum As Integer = 0
+            iPageNum = sdgWindowNumber.iPage
+            If iPageNum > 0 Then
+                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPageNum)
                 RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
             End If
         End If

@@ -400,9 +400,10 @@ Public Class clsDataFramePage
     ''' Go to the specific column page
     ''' </summary>
     Public Sub GoToSpecificColumnPage(iColumn As Integer)
-        If CanLoadNextColumnPage() Then
-            _iColumnStart = (iColumnIncrements * iColumn) + 1
+        If iColumn > 0 Then
+            _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
             _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
         End If
     End Sub
 
