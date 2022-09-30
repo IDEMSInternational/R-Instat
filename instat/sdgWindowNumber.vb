@@ -37,8 +37,8 @@ Public Class sdgWindowNumber
                 iMax = Math.Round(iNumPage / 1000)
                 IDefault = Math.Round(iDefaultPage / 1000)
             Case WINNUMBERMode.Col
-                iMax = Math.Round(iNumPage / 100) - 1
-                iDefault = Math.Round(iDefaultPage / 100) - 1
+                iMax = Math.Round(iNumPage / 300)
+                iDefault = Math.Round(iDefaultPage / 300)
         End Select
         ucrNudPageNumber.SetMinMax(1, iMax)
         ucrNudPageNumber.SetText(iDefault)
