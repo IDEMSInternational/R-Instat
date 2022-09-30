@@ -894,8 +894,9 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
-        If lblRowNext.Enabled Then
+        If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalRowCount
+            sdgWindowNumber.iDefaultPage = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = 0
             iPageNum = sdgWindowNumber.iPage

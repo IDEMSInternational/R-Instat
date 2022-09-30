@@ -16,39 +16,21 @@
 
 Imports instat.Translations
 Public Class sdgWindowNumber
-    Private bFirstLoad As Boolean = True
-    Private clsDummyFunction As New RFunction
     Public iPage As Integer
-    Public iNumPage As Integer
+    Public iNumPage, iDefaultPage As Integer
 
     Private Sub sdgWindowNumber_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseControls()
-            bFirstLoad = False
-        End If
-        setRCodeForControls(True)
+        InitialiseControls()
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
-        Dim iDefaultPage As Integer = PageNum(iNumPage) / 2
         Dim iMax As Integer = Math.Round(iNumPage / 1000)
-        ucrNudPageNumber.SetParameter(New RParameter("num", iNewPosition:=0))
         ucrNudPageNumber.SetMinMax(1, iMax)
-        ucrNudPageNumber.SetRDefault(iDefaultPage)
-    End Sub
-
-    Private Sub setRCodeForControls(bReset As Boolean)
-        ucrNudPageNumber.SetRCode(clsDummyFunction, bReset)
+        ucrNudPageNumber.SetText(Math.Round(iDefaultPage / 1000))
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgPICSARainfalbuttons.ClickReturn
         iPage = ucrNudPageNumber.GetText()
     End Sub
-
-    Private Function PageNum(iPage As Integer)
-        Dim iTemp As Integer = Math.Round(iPage / 1000)
-        Dim iDefault As Integer = iPage Mod iTemp
-        Return iDefault
-    End Function
 End Class
