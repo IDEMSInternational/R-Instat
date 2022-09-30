@@ -52,7 +52,6 @@ Public Class dlgImportFromRapidPro
         ucrChkFlattenData.SetText("Flatten")
         ucrChkFlattenData.SetParameter(New RParameter("flatten", 2))
         ucrChkFlattenData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkFlattenData.SetRDefault("FALSE")
         ucrChkFlattenData.Visible = False ' disabled because R Instat doesn't yet support json format
 
         ucrChkSetStartDate.SetText("Start Date")
