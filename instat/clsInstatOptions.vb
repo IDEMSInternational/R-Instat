@@ -72,7 +72,7 @@ Imports RDotNet
         iPreviewRows = clsInstatOptionsDefaults.DEFAULTiPreviewRows
         iMaxRows = clsInstatOptionsDefaults.DEFAULTiMaxRows
         iMaxCols = clsInstatOptionsDefaults.DEFAULTiMaxCols
-        strComment = clsInstatOptionsDefaults.DEFAULTstrComment
+        strComment = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
         strGraphDisplayOption = clsInstatOptionsDefaults.DEFAULTstrGraphDisplayOption
         strLanguageCultureCode = clsInstatOptionsDefaults.DEFAULTstrLanguageCultureCode
         strWorkingDirectory = clsInstatOptionsDefaults.DEFAULTstrWorkingDirectory
@@ -143,10 +143,8 @@ Imports RDotNet
             SetCommandInOutpt(clsInstatOptionsDefaults.DEFAULTbCommandsinOutput)
         End If
 
-        If strComment IsNot Nothing Then
-            SetComment(strComment)
-        Else
-            SetComment(clsInstatOptionsDefaults.DEFAULTstrComment)
+        If strComment Is Nothing Then
+            SetComment(Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment))
         End If
 
         If strGraphDisplayOption IsNot Nothing Then

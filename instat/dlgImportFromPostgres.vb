@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Imports RDotNet
 Public Class dlgImportFromPostgres
     Public bFirstLoad As Boolean = True
@@ -129,4 +130,9 @@ Public Class dlgImportFromPostgres
             ucrInputChooseDataset.cboInput.Items.Clear()
         End If
     End Sub
+=======
+
+Public Class dlgImportFromPostgres
+
+
 End Class

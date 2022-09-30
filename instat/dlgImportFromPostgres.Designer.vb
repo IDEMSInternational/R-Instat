@@ -22,6 +22,7 @@ Partial Class dlgImportFromPostgres
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.lblDatabase = New System.Windows.Forms.Label()
         Me.lblHost = New System.Windows.Forms.Label()
@@ -156,10 +157,15 @@ Partial Class dlgImportFromPostgres
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
+
+        Me.SuspendLayout()
+        '
+
         'dlgImportFromPostgres
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+
         Me.ClientSize = New System.Drawing.Size(451, 339)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdGetData)
@@ -192,4 +198,12 @@ Partial Class dlgImportFromPostgres
     Friend WithEvents cmdGetData As Button
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblChooseDataset As Label
+
+        Me.ClientSize = New System.Drawing.Size(395, 450)
+        Me.Name = "dlgImportFromPostgres"
+        Me.Text = "dlgImportFromPostgres"
+        Me.ResumeLayout(False)
+
+    End Sub
+
 End Class
