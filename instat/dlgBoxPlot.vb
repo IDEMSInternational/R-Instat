@@ -322,25 +322,20 @@ Public Class dlgBoxplot
         clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
         If rdoBoxplotTufte.Checked Then
             If ucrChkTufte.Checked Then
-                'cmdBoxPlotOptions.Text = "Tufte Box Options"
                 ucrSaveBoxplot.SetPrefix("tufte_boxplot")
                 clsCurrGeomFunc = clsTufteBoxplotFunc
                 clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
                 ucrSecondFactorReceiver.ChangeParameterName("colour")
             Else
-                'cmdBoxPlotOptions.Text = "Box Options"
                 ucrSaveBoxplot.SetPrefix("box_plot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
                 clsCurrGeomFunc = clsBoxplotFunc
             End If
-
         ElseIf rdoJitter.Checked Then
-            'cmdBoxPlotOptions.Text = "Jitter Options"
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
         Else
-            'cmdBoxPlotOptions.Text = "Violin Options"
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
@@ -354,10 +349,8 @@ Public Class dlgBoxplot
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
-            'cmdBoxPlotOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
-            'cmdBoxPlotOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
     End Sub
@@ -404,11 +397,8 @@ Public Class dlgBoxplot
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
         If clsCurrGeomFunc.GetParameter("varwidth") IsNot Nothing Then
             If clsCurrGeomFunc.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-                ' chkVarwidth.Checked = True
-                'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
         Else
-            'chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
