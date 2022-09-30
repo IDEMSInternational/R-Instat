@@ -100,6 +100,14 @@ Public Class dlgImportFromRapidPro
         dctTimezone.Add("UTC", Chr(34) & "UTC" & Chr(34))
         dctTimezone.Add("EAT", Chr(34) & "EAT" & Chr(34))
         dctTimezone.Add("GMT", Chr(34) & "GMT" & Chr(34))
+        dctTimezone.Add("ECT", Chr(34) & "ECT" & Chr(34))
+        dctTimezone.Add("MET", Chr(34) & "MET" & Chr(34))
+        dctTimezone.Add("CST", Chr(34) & "CST" & Chr(34))
+        dctTimezone.Add("EST", Chr(34) & "EST" & Chr(34))
+        dctTimezone.Add("CET", Chr(34) & "CET" & Chr(34))
+        dctTimezone.Add("EET", Chr(34) & "EET" & Chr(34))
+        dctTimezone.Add("WAT", Chr(34) & "WAT" & Chr(34))
+        dctTimezone.Add("WET", Chr(34) & "WET" & Chr(34))
         ucrInputTimezone.SetItems(dctTimezone)
         ucrInputTimezone.SetRDefault(Chr(34) & "UTC" & Chr(34))
         ucrInputTimezone.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
@@ -191,13 +199,8 @@ Public Class dlgImportFromRapidPro
 
     Private Sub ucrChkSetStartDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetStartDate.ControlValueChanged,
         ucrChkSetEndDate.ControlValueChanged, ucrInputDateFormat.ControlValueChanged, ucrInputTimezone.ControlValueChanged
-        If Not ucrChkSetEndDate.Checked AndAlso Not ucrChkSetStartDate.Checked Then
-            ucrInputDateFormat.Visible = False
-            ucrInputTimezone.Visible = False
-        Else
-            ucrInputDateFormat.Visible = True
-            ucrInputTimezone.Visible = True
-        End If
+        ucrInputDateFormat.Visible = ucrChkSetStartDate.Checked OrElse ucrChkSetEndDate.Checked
+        ucrInputTimezone.Visible = ucrInputDateFormat.Visible
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

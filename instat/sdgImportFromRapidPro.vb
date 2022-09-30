@@ -18,9 +18,6 @@ Imports instat.Translations
 Imports System.IO
 
 Public Class sdgImportFromRapidPro
-    Private strFileName As String = ""
-    Private strFilePath As String = ""
-
     Private Sub sdgImportFromRapidPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrInputTokenPath.IsReadOnly = True
         autoTranslate(Me)
@@ -31,10 +28,6 @@ Public Class sdgImportFromRapidPro
     End Sub
 
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
-        Dim strFileName As String = ""
-        Dim strFileExt As String = ""
-        Dim strTemp As String = ""
-
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "Text Files|*.txt"
             dlgOpen.Title = "Import Text File"
@@ -44,10 +37,7 @@ Public Class sdgImportFromRapidPro
             If dlgOpen.ShowDialog() = DialogResult.OK Then
 
                 If dlgOpen.FileName <> "" Then
-                    strFileName = Path.GetFileNameWithoutExtension(dlgOpen.FileName)
-                    strFilePath = dlgOpen.FileName
-                    strFileExt = Path.GetExtension(strFilePath)
-                    ucrInputTokenPath.SetName(Replace(strFilePath, "\", "/"))
+                    ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
                 End If
             End If
         End Using
