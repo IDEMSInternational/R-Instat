@@ -34,12 +34,15 @@ Public Class sdgWindowNumber
         Dim iMax, iDefault As Integer
         Select Case enumWINNUMBERMode
             Case WINNUMBERMode.Row
-                iMax = Math.Round(iNumPage / 1000)
-                IDefault = Math.Round(iDefaultPage / 1000)
+                iMax = Math.Round(iNumPage / 1000) + 1
+                iDefault = Math.Round(iDefaultPage / 1000)
             Case WINNUMBERMode.Col
-                iMax = Math.Round(iNumPage / 300)
+                iMax = Math.Round(iNumPage / 300) + 1
                 iDefault = Math.Round(iDefaultPage / 300)
         End Select
+        If iNumPage = iDefaultPage Then
+            iDefault = iMax
+        End If
         ucrNudPageNumber.SetMinMax(1, iMax)
         ucrNudPageNumber.SetText(iDefault)
     End Sub
