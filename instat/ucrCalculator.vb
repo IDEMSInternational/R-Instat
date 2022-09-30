@@ -2054,7 +2054,7 @@ Public Class ucrCalculator
         clsEmploymentListFunction.AddParameter("R", Chr(34) & "Retired" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
         clsEmploymentListFunction.AddParameter("S", Chr(34) & "Student" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
 
-        clsEmploymentProbFunction.SetPackageName("c")
+        clsEmploymentProbFunction.SetRCommand("c")
         clsEmploymentProbFunction.AddParameter("0.6", "0.6", iPosition:=0, bIncludeArgumentName:=False)
         clsEmploymentProbFunction.AddParameter("0.1", "0.1", iPosition:=1, bIncludeArgumentName:=False)
         clsEmploymentProbFunction.AddParameter("0.2", "0.1", iPosition:=2, bIncludeArgumentName:=False)
@@ -2132,7 +2132,7 @@ Public Class ucrCalculator
         clsWakefieldGradeLevelFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
         clsWakefieldGradeLevelFunction.AddParameter("x", clsRFunctionParameter:=clsGradeLevelListunction, iPosition:=1)
         clsWakefieldGradeLevelFunction.AddParameter("prob", "NULL", iPosition:=2)
-        clsWakefieldGradeLevelFunction.AddParameter("name", "Grade_Level", iPosition:=3)
+        clsWakefieldGradeLevelFunction.AddParameter("name", Chr(34) & "Grade_Level" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldGradeLevelFunction.ToScript, 0)
     End Sub
@@ -2149,7 +2149,7 @@ Public Class ucrCalculator
         clsWakefieldGradeFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
         clsWakefieldGradeFunction.AddParameter("mean", "88", iPosition:=1)
         clsWakefieldGradeFunction.AddParameter("sd", "4", iPosition:=2)
-        clsWakefieldGradeFunction.AddParameter("name", "Grade", iPosition:=3)
+        clsWakefieldGradeFunction.AddParameter("name", Chr(34) & "Grade" & Chr(34), iPosition:=3)
         clsWakefieldGradeFunction.AddParameter("digits", "1", iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldGradeFunction.ToScript, 0)
@@ -2826,6 +2826,9 @@ Public Class ucrCalculator
         clsWakefieldStateFunction.SetPackageName("wakefield")
         clsWakefieldStateFunction.SetRCommand("state")
         clsWakefieldStateFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldStateFunction.AddParameter("x", "datasets::state.name", iPosition:=1)
+        clsWakefieldStateFunction.AddParameter("prob", "wakefield::state_populations[[" & Chr(34) & "Proportion" & Chr(34) & "]]", iPosition:=2)
+        clsWakefieldStateFunction.AddParameter("name", Chr(34) & "State" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldStateFunction.ToScript, 0)
     End Sub
@@ -2838,8 +2841,11 @@ Public Class ucrCalculator
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
         clsWakefieldStringFunction.SetPackageName("wakefield")
-        clsWakefieldStringFunction.SetRCommand("String")
+        clsWakefieldStringFunction.SetRCommand("string")
         clsWakefieldStringFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldStringFunction.AddParameter("x", Chr(34) & "[A-Za-z0-9]" & Chr(34), iPosition:=1)
+        clsWakefieldStringFunction.AddParameter("length", "10", iPosition:=2)
+        clsWakefieldStringFunction.AddParameter("name", Chr(34) & "String" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldStringFunction.ToScript, 0)
     End Sub
@@ -2854,6 +2860,10 @@ Public Class ucrCalculator
         clsWakefieldUpperFunction.SetPackageName("wakefield")
         clsWakefieldUpperFunction.SetRCommand("upper")
         clsWakefieldUpperFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldUpperFunction.AddParameter("k", "5", iPosition:=1)
+        clsWakefieldUpperFunction.AddParameter("x", "LETTERS", iPosition:=2)
+        clsWakefieldUpperFunction.AddParameter("prob", "NULL", iPosition:=3)
+        clsWakefieldUpperFunction.AddParameter("name", Chr(34) & "Upper" & Chr(34), iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldUpperFunction.ToScript, 0)
     End Sub
@@ -2868,6 +2878,8 @@ Public Class ucrCalculator
         clsWakefieldValidFunction.SetPackageName("wakefield")
         clsWakefieldValidFunction.SetRCommand("valid")
         clsWakefieldValidFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldValidFunction.AddParameter("prob", "NULL", iPosition:=1)
+        clsWakefieldValidFunction.AddParameter("name", Chr(34) & "Valid" & Chr(34), iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldValidFunction.ToScript, 0)
     End Sub
@@ -2882,6 +2894,9 @@ Public Class ucrCalculator
         clsWakefieldYearFunction.SetPackageName("wakefield")
         clsWakefieldYearFunction.SetRCommand("year")
         clsWakefieldYearFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldYearFunction.AddParameter("x", "1996:as.numeric(format(Sys.Date()," & Chr(34) & "%Y" & Chr(34) & "))", iPosition:=1)
+        clsWakefieldYearFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldYearFunction.AddParameter("name", Chr(34) & "Year" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldYearFunction.ToScript, 0)
     End Sub
@@ -3317,13 +3332,26 @@ Public Class ucrCalculator
     Private Sub cmdLinkert7_Click(sender As Object, e As EventArgs) Handles cmdLinkert7.Click
         Dim clsWakefieldLikert7Function As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsLikert7ListFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0, bIncludeArgumentName:=False)
 
+        clsLikert7ListFunction.SetRCommand("c")
+        clsLikert7ListFunction.AddParameter("s agree", Chr(34) & "Strongly Agree" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsLikert7ListFunction.AddParameter("agree", Chr(34) & "Agree" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsLikert7ListFunction.AddParameter("some_agree", Chr(34) & "Somewhat Agree" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsLikert7ListFunction.AddParameter("neutral", Chr(34) & "Neutral" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsLikert7ListFunction.AddParameter("some_disagree", Chr(34) & "Somewhat Disagree" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        clsLikert7ListFunction.AddParameter("disagree", Chr(34) & "Disagree" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        clsLikert7ListFunction.AddParameter("s disagree", Chr(34) & "Strongly Disagree" & Chr(34), iPosition:=6, bIncludeArgumentName:=False)
+
         clsWakefieldLikert7Function.SetPackageName("wakefield")
         clsWakefieldLikert7Function.SetRCommand("likert_7")
         clsWakefieldLikert7Function.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldLikert7Function.AddParameter("x", clsRFunctionParameter:=clsLikert7ListFunction, iPosition:=1)
+        clsWakefieldLikert7Function.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldLikert7Function.AddParameter("name", Chr(34) & "Likert" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLikert7Function.ToScript, 0)
     End Sub
