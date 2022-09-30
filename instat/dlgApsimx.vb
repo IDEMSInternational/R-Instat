@@ -101,7 +101,6 @@ Public Class dlgApsimx
         ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, ucrChkSilent.GetParameter, iAdditionalPairNo:=1)
         ucrInputComboList.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("example", 0), iAdditionalPairNo:=1)
 
-
         ucrChkSilent.SetRCode(clsApsimxExampleFunction, bReset)
         ucrInputComboList.SetRCode(clsApsimxExampleFunction, bReset)
     End Sub
