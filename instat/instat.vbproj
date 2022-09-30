@@ -201,6 +201,12 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportFromPostgres.Designer.vb">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
@@ -2954,6 +2960,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromPostgres.resx">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>

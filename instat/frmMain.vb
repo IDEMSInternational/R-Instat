@@ -1039,6 +1039,10 @@ Public Class frmMain
         dlgImportFromODK.ShowDialog()
     End Sub
 
+    Private Sub mnuFileOpenFromPostgres_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromPostgres.Click
+        dlgImportFromPostgres.ShowDialog()
+    End Sub
+
     Private Sub mnuPrepareColumnNumericEnter_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericEnter.Click
         dlgEnter.ShowDialog()
     End Sub
