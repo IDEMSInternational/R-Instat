@@ -3115,14 +3115,13 @@ Public Class ucrCalculator
         Dim clsGeneratePrimesFunction As New RFunction
 
         clsNRowsFunction.SetRCommand("nrow")
-        clsNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
+        clsNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
         clsGeneratePrimesFunction.SetPackageName("primes")
         clsGeneratePrimesFunction.SetRCommand("generate_n_primes")
         clsGeneratePrimesFunction.AddParameter("n", clsRFunctionParameter:=clsNRowsFunction, iPosition:=0)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsGeneratePrimesFunction.ToScript, 0)
-
     End Sub
 
     Private Sub cmdReverseStr_Click(sender As Object, e As EventArgs) Handles cmdReverseStr.Click
@@ -3174,10 +3173,10 @@ Public Class ucrCalculator
         clsPrimesFunction.AddParameter("max", "100", iPosition:=1)
 
         clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsPrimesFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsPrimesFunction, iPosition:=0)
         clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
@@ -3209,7 +3208,7 @@ Public Class ucrCalculator
         Dim clsTuplePatternFunction As New RFunction
 
         clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False)
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsTuplePatternFunction.SetRCommand("c")
         clsTuplePatternFunction.AddParameter("x", "0", iPosition:=0, bIncludeArgumentName:=False)
