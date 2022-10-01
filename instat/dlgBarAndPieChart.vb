@@ -745,23 +745,6 @@ Public Class dlgBarAndPieChart
             End Select
         End If
     End Sub
-
-    'Private Sub ChangeButtonsText()
-    '    If rdoValue.Checked Then
-    '        If ucrChkLollipop.Checked Then
-    '            cmdBarChartOptions.Text = "Lollipop Options"
-    '        Else
-    '            cmdBarChartOptions.Text = "Bar Chart Options"
-    '        End If
-    '    ElseIf rdoFrequency.Checked Then
-    '        cmdBarChartOptions.Text = "Bar Chart Options"
-    '    ElseIf rdoTreeMap.Checked Then
-    '        cmdBarChartOptions.Text = "Treemap Options"
-    '    ElseIf rdoWordCloud.Checked Then
-    '        cmdBarChartOptions.Text = "Wordcloud Options"
-    '    End If
-    'End Sub
-
     Private Sub ChangeParameterName()
         clsBarAesFunction.RemoveParameterByName("x")
         clsBarAesFunction.RemoveParameterByName("y")
@@ -834,7 +817,6 @@ Public Class dlgBarAndPieChart
             End If
         End If
         UpdateParameter()
-        'ChangeButtonsText()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged,
@@ -1035,9 +1017,6 @@ Public Class dlgBarAndPieChart
         EnableDisableOptions()
     End Sub
 
-    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-
-    End Sub
     Private Sub DialogueSize()
         If rdoFrequency.Checked OrElse rdoValue.Checked Then
             Me.Size = New Size(431, 586)
@@ -1052,8 +1031,5 @@ Public Class dlgBarAndPieChart
             Me.ucrSaveBar.Location = New Point(11, 340)
             Me.ucrBase.Location = New Point(7, 370)
         End If
-    End Sub
-    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
-
     End Sub
 End Class
