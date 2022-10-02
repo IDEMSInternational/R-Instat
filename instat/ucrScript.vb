@@ -169,7 +169,8 @@ Public Class ucrScript
     ''' <summary>
     '''     If the caret is next to a bracket, then it highlights the paired open/close bracket. 
     '''     If it cannot find a paired bracket, then it displays the bracket next to the caret in 
-    '''     red (to indicate an error). <para>
+    '''     the specified error colour. For nested indented brackets, also shows a vertical 
+    '''     indentation line. <para>
     '''     This sub is based on a C# function from:
     '''     https://github.com/jacobslusser/ScintillaNET/wiki/Brace-Matching. </para>
     ''' </summary>
@@ -196,12 +197,15 @@ Public Class ucrScript
             Dim iBracketPos2 As Integer = txtScript.BraceMatch(iBracketPos1)
             If iBracketPos2 = Scintilla.InvalidPosition Then
                 txtScript.BraceBadLight(iBracketPos1)
+                txtScript.HighlightGuide = 0
             Else
                 txtScript.BraceHighlight(iBracketPos1, iBracketPos2)
+                txtScript.HighlightGuide = txtScript.GetColumn(iBracketPos1)
             End If
         Else
             'turn off brace matching
             txtScript.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
+            txtScript.HighlightGuide = 0
         End If
     End Sub
 
@@ -339,6 +343,7 @@ Public Class ucrScript
         'txtScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'txtScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
 
+        txtScript.IndentationGuides = IndentView.LookBoth
         txtScript.StyleClearAll()
         txtScript.Styles(Style.R.Default).ForeColor = Color.Silver
         txtScript.Styles(Style.R.Comment).ForeColor = Color.Green
