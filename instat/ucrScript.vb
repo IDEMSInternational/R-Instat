@@ -101,6 +101,57 @@ Public Class ucrScript
         txtScript.Margins(0).Width = txtScript.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
+    Private Function IsCharBlank(charNew As Char) As Boolean
+        Return String.IsNullOrWhiteSpace(charNew.ToString()) OrElse charNew = vbLf OrElse charNew = vbCr
+    End Function
+
+    Private Sub InsertMatchedChars(charNew As Char)
+        Dim iCaretPos As Integer = txtScript.CurrentPosition
+        Dim bIsDocStart As Boolean = iCaretPos = 1
+        Dim bIsDocEnd As Boolean = iCaretPos = txtScript.Text.Length
+
+        Dim charPrev As Char = If(bIsDocStart, Nothing, ChrW(txtScript.GetCharAt(iCaretPos - 2)))
+        Dim charNext As Char = If(bIsDocEnd, Nothing, ChrW(txtScript.GetCharAt(iCaretPos)))
+
+        Dim bIsCharPrevBlank As Boolean = bIsDocStart OrElse IsCharBlank(charPrev)
+        Dim bIsCharNextBlank As Boolean = bIsDocEnd OrElse IsCharBlank(charNext)
+
+        Dim dctBrackets As New Dictionary(Of Char, Char) From {{"(", ")"}, {"{", "}"}, {"[", "]"}}
+        Dim cClosingBracket As Char
+        Dim bIsEnclosed As Boolean = If(dctBrackets.TryGetValue(charPrev, cClosingBracket), charNext = cClosingBracket, False)
+
+        Dim bIsSpaceEnclosed As Boolean = (charPrev = "(" AndAlso bIsCharNextBlank) OrElse (bIsCharPrevBlank AndAlso charNext = ")") OrElse
+                          (charPrev = "{" AndAlso bIsCharNextBlank) OrElse (bIsCharPrevBlank AndAlso charNext = "}") OrElse
+                          (charPrev = "[" AndAlso bIsCharNextBlank) OrElse (bIsCharPrevBlank AndAlso charNext = "]")
+
+        Dim bIsCharOrString As Boolean = (bIsCharPrevBlank AndAlso bIsCharNextBlank) OrElse bIsEnclosed OrElse bIsSpaceEnclosed
+
+        Dim bIsNextCharOrString As Boolean = charNext = """" OrElse charNext = "'"
+
+        If (charNew = "(" OrElse charNew = "{" OrElse charNew = "[") _
+                        AndAlso bIsNextCharOrString Then
+            Exit Sub
+        End If
+
+        Select Case charNew
+            Case "("
+                txtScript.InsertText(iCaretPos, ")")
+            Case "{"
+                txtScript.InsertText(iCaretPos, "}")
+            Case "["
+                txtScript.InsertText(iCaretPos, "]")
+            Case """", "'"
+                If charPrev = charNew AndAlso charNext = charNew Then
+                    txtScript.DeleteRange(iCaretPos, 1)
+                    txtScript.GotoPosition(iCaretPos)
+                    Exit Sub
+                End If
+                If bIsCharOrString Then
+                    txtScript.InsertText(iCaretPos, charNew)
+                End If
+        End Select
+    End Sub
+
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
         'temporarily disable the buttons in case its a long operation
         EnableRunButtons(False)
@@ -292,5 +343,9 @@ Public Class ucrScript
     Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
         txtScript.SelectAll()
         EnableDisableButtons()
+    End Sub
+
+    Private Sub txtScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles txtScript.CharAdded
+        InsertMatchedChars(ChrW(e.Char))
     End Sub
 End Class
