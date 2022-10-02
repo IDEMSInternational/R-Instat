@@ -112,7 +112,7 @@ Public Class ucrScript
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     '''     If <paramref name="charNew"/> is a bracket/quote, then inserts a closing bracket/quote. <para>
-    '''     This sub is based on a C# function from
+    '''     This sub is based on a C# function from:
     '''     https://github.com/jacobslusser/ScintillaNET/wiki/Character-Autocompletion. </para><para>
     '''     It avoids inserting matching quotes in situations such as "don't". 
     '''     It also ensures that the caret does not remain in the center upon multiple quote insertions.</para><para>
@@ -157,6 +157,51 @@ Public Class ucrScript
             If bIsEnclosedByBrackets OrElse bIsEnclosedBySpaces OrElse bIsEnclosedByBracketAndSpace Then
                 txtScript.InsertText(iCaretPos, charNew)
             End If
+        End If
+    End Sub
+
+    Private Function IsBracket(iNewChar As Integer) As Boolean
+        Dim arrRBrackets() As String = {"(", ")", "{", "}", "[", "]"}
+        Return arrRBrackets.Contains(Chr(iNewChar))
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     If the caret is next to a bracket, then it highlights the paired open/close bracket. 
+    '''     If it cannot find a paired bracket, then it displays the bracket next to the caret in 
+    '''     red (to indicate an error). <para>
+    '''     This sub is based on a C# function from:
+    '''     https://github.com/jacobslusser/ScintillaNET/wiki/Brace-Matching. </para>
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub HighlightPairedBracket()
+        'if caret has not moved, then do nothing
+        Static iLastCaretPos As Integer = 0
+        Dim iCaretPos As Integer = txtScript.CurrentPosition
+        If iLastCaretPos = iCaretPos Then
+            Exit Sub
+        End If
+        iLastCaretPos = iCaretPos
+
+        Dim iBracketPos1 As Integer = -1
+        'is there a brace to the left Or right?
+        If iCaretPos > 0 AndAlso IsBracket(txtScript.GetCharAt(iCaretPos - 1)) Then
+            iBracketPos1 = iCaretPos - 1
+        ElseIf IsBracket(txtScript.GetCharAt(iCaretPos)) Then
+            iBracketPos1 = iCaretPos
+        End If
+
+        If iBracketPos1 >= 0 Then
+            'find the matching brace
+            Dim iBracketPos2 As Integer = txtScript.BraceMatch(iBracketPos1)
+            If iBracketPos2 = Scintilla.InvalidPosition Then
+                txtScript.BraceBadLight(iBracketPos1)
+            Else
+                txtScript.BraceHighlight(iBracketPos1, iBracketPos2)
+            End If
+        Else
+            'turn off brace matching
+            txtScript.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
         End If
     End Sub
 
@@ -307,7 +352,9 @@ Public Class ucrScript
         txtScript.Styles(Style.R.Identifier).ForeColor = Color.Black
         txtScript.Styles(Style.R.Infix).ForeColor = Color.Gray
         txtScript.Styles(Style.R.InfixEol).ForeColor = Color.Gray
-
+        txtScript.Styles(Style.BraceLight).BackColor = Color.LightGray
+        txtScript.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
+        txtScript.Styles(Style.BraceBad).ForeColor = Color.Red
 
         Dim tmp = txtScript.DescribeKeywordSets()
         txtScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
@@ -355,5 +402,9 @@ Public Class ucrScript
 
     Private Sub txtScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles txtScript.CharAdded
         InsertMatchedChars(ChrW(e.Char))
+    End Sub
+
+    Private Sub txtScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles txtScript.UpdateUI
+        HighlightPairedBracket()
     End Sub
 End Class
