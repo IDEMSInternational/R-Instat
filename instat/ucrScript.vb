@@ -102,54 +102,62 @@ Public Class ucrScript
     End Sub
 
     Private Function IsCharBlank(charNew As Char) As Boolean
-        Return String.IsNullOrWhiteSpace(charNew.ToString()) OrElse charNew = vbLf OrElse charNew = vbCr
+        Return charNew = Chr(0) OrElse String.IsNullOrWhiteSpace(charNew.ToString()) OrElse charNew = vbLf OrElse charNew = vbCr
     End Function
 
+    Private Function IsCharQuote(charNew As Char) As Boolean
+        Return charNew = """" OrElse charNew = "'"
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     If <paramref name="charNew"/> is a bracket/quote, then inserts a closing bracket/quote. <para>
+    '''     This sub is based on a C# function from
+    '''     https://github.com/jacobslusser/ScintillaNET/wiki/Character-Autocompletion. </para><para>
+    '''     It avoids inserting matching quotes in situations such as "don't". 
+    '''     It also ensures that the caret does not remain in the center upon multiple quote insertions.</para><para>
+    '''     For example ("|" is cursor position; '=&gt;' is output):</para><list type="bullet"><item>
+    '''         insert ' =&gt; '|' </item><item>
+    '''         insert ' again =&gt; ''| </item></list>
+    '''     Visual Studio and RStudio have the same behaviour.
+    ''' </summary>
+    ''' <param name="charNew">  The character typed by the user. </param>
+    '''--------------------------------------------------------------------------------------------
     Private Sub InsertMatchedChars(charNew As Char)
         Dim iCaretPos As Integer = txtScript.CurrentPosition
         Dim bIsDocStart As Boolean = iCaretPos = 1
         Dim bIsDocEnd As Boolean = iCaretPos = txtScript.Text.Length
 
-        Dim charPrev As Char = If(bIsDocStart, Nothing, ChrW(txtScript.GetCharAt(iCaretPos - 2)))
-        Dim charNext As Char = If(bIsDocEnd, Nothing, ChrW(txtScript.GetCharAt(iCaretPos)))
-
-        Dim bIsCharPrevBlank As Boolean = bIsDocStart OrElse IsCharBlank(charPrev)
-        Dim bIsCharNextBlank As Boolean = bIsDocEnd OrElse IsCharBlank(charNext)
+        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(txtScript.GetCharAt(iCaretPos - 2)))
+        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(txtScript.GetCharAt(iCaretPos)))
 
         Dim dctBrackets As New Dictionary(Of Char, Char) From {{"(", ")"}, {"{", "}"}, {"[", "]"}}
-        Dim cClosingBracket As Char
-        Dim bIsEnclosed As Boolean = If(dctBrackets.TryGetValue(charPrev, cClosingBracket), charNext = cClosingBracket, False)
 
-        Dim bIsSpaceEnclosed As Boolean = (charPrev = "(" AndAlso bIsCharNextBlank) OrElse (bIsCharPrevBlank AndAlso charNext = ")") OrElse
-                          (charPrev = "{" AndAlso bIsCharNextBlank) OrElse (bIsCharPrevBlank AndAlso charNext = "}") OrElse
-                          (charPrev = "[" AndAlso bIsCharNextBlank) OrElse (bIsCharPrevBlank AndAlso charNext = "]")
+        'If user entered an open bracket character
+        If dctBrackets.ContainsKey(charNew) Then
+            If IsCharQuote(charNext) Then
+                Exit Sub
+            End If
+            'insert close bracket character
+            txtScript.InsertText(iCaretPos, dctBrackets(charNew))
+        ElseIf IsCharQuote(charNew) Then ' else if user entered quote
+            'if user enters multiple quotes, then ensure that the caret does not remain in the center
+            If charPrev = charNew AndAlso charNext = charNew Then
+                txtScript.DeleteRange(iCaretPos, 1)
+                txtScript.GotoPosition(iCaretPos)
+                Exit Sub
+            End If
 
-        Dim bIsCharOrString As Boolean = (bIsCharPrevBlank AndAlso bIsCharNextBlank) OrElse bIsEnclosed OrElse bIsSpaceEnclosed
-
-        Dim bIsNextCharOrString As Boolean = charNext = """" OrElse charNext = "'"
-
-        If (charNew = "(" OrElse charNew = "{" OrElse charNew = "[") _
-                        AndAlso bIsNextCharOrString Then
-            Exit Sub
+            'in certain situations add a closing quote after the caret
+            Dim charClosingBracket As Char
+            Dim bIsEnclosedByBrackets As Boolean = dctBrackets.TryGetValue(charPrev, charClosingBracket) AndAlso charNext = charClosingBracket
+            Dim bIsEnclosedBySpaces As Boolean = IsCharBlank(charPrev) AndAlso IsCharBlank(charNext)
+            Dim bIsEnclosedByBracketAndSpace As Boolean = (dctBrackets.ContainsKey(charPrev) AndAlso IsCharBlank(charNext)) _
+                                                   OrElse (dctBrackets.ContainsValue(charNext) AndAlso IsCharBlank(charPrev))
+            If bIsEnclosedByBrackets OrElse bIsEnclosedBySpaces OrElse bIsEnclosedByBracketAndSpace Then
+                txtScript.InsertText(iCaretPos, charNew)
+            End If
         End If
-
-        Select Case charNew
-            Case "("
-                txtScript.InsertText(iCaretPos, ")")
-            Case "{"
-                txtScript.InsertText(iCaretPos, "}")
-            Case "["
-                txtScript.InsertText(iCaretPos, "]")
-            Case """", "'"
-                If charPrev = charNew AndAlso charNext = charNew Then
-                    txtScript.DeleteRange(iCaretPos, 1)
-                    txtScript.GotoPosition(iCaretPos)
-                    Exit Sub
-                End If
-                If bIsCharOrString Then
-                    txtScript.InsertText(iCaretPos, charNew)
-                End If
-        End Select
     End Sub
 
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
