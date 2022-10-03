@@ -239,3 +239,6 @@ installer/Output/
 /instat/dlgFrequency.sw-KE.resx
 /instat/dlgFrequency.resx
 /instat/dlgFrequency.Designer.vb
+
+# Package used by script window
+/packages/jacobslusser.ScintillaNET.*/
