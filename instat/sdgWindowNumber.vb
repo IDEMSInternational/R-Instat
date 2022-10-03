@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgWindowNumber
     Public iPage As Integer
-    Public iNumPage, iDefaultPage As Integer
+    Public iNumPage, iStart, iEnd As Integer
 
     Public enumWINNUMBERMode As String = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
@@ -35,16 +35,19 @@ Public Class sdgWindowNumber
         Select Case enumWINNUMBERMode
             Case WINNUMBERMode.Row
                 iMax = Math.Round(iNumPage / 1000) + 1
-                iDefault = Math.Round(iDefaultPage / 1000)
+                iDefault = Math.Round(iEnd / 1000)
             Case WINNUMBERMode.Col
                 iMax = Math.Round(iNumPage / 300) + 1
-                iDefault = Math.Round(iDefaultPage / 300)
+                iDefault = Math.Round(iEnd / 300)
         End Select
-        If iNumPage = iDefaultPage Then
+        If iNumPage = iEnd Then
             iDefault = iMax
+        ElseIf iStart = 1 Then
+            iDefault = Math.Round(iMax / 2)
         End If
         ucrNudPageNumber.SetMinMax(1, iMax)
         ucrNudPageNumber.SetText(iDefault)
+        lblPages.Text = "1-" & iMax & ":"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgPICSARainfalbuttons.ClickReturn

@@ -23,26 +23,44 @@ Partial Class sdgWindowNumber
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblTitleSize = New System.Windows.Forms.Label()
-        Me.ucrNudPageNumber = New instat.ucrNud()
+        Me.lblPages = New System.Windows.Forms.Label()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
+        Me.ucrNudPageNumber = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblTitleSize
         '
         Me.lblTitleSize.AutoSize = True
         Me.lblTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTitleSize.Location = New System.Drawing.Point(13, 21)
+        Me.lblTitleSize.Location = New System.Drawing.Point(4, 21)
         Me.lblTitleSize.Name = "lblTitleSize"
-        Me.lblTitleSize.Size = New System.Drawing.Size(100, 13)
+        Me.lblTitleSize.Size = New System.Drawing.Size(109, 13)
         Me.lblTitleSize.TabIndex = 30
-        Me.lblTitleSize.Text = "Enter page number:"
+        Me.lblTitleSize.Text = "Enter window number"
+        '
+        'lblPages
+        '
+        Me.lblPages.AutoSize = True
+        Me.lblPages.Location = New System.Drawing.Point(112, 21)
+        Me.lblPages.Name = "lblPages"
+        Me.lblPages.Size = New System.Drawing.Size(0, 13)
+        Me.lblPages.TabIndex = 32
+        '
+        'ucrSdgPICSARainfalbuttons
+        '
+        Me.ucrSdgPICSARainfalbuttons.AutoSize = True
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(4, 47)
+        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
+        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgPICSARainfalbuttons.TabIndex = 31
         '
         'ucrNudPageNumber
         '
         Me.ucrNudPageNumber.AutoSize = True
         Me.ucrNudPageNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPageNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPageNumber.Location = New System.Drawing.Point(152, 19)
+        Me.ucrNudPageNumber.Location = New System.Drawing.Point(158, 17)
         Me.ucrNudPageNumber.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPageNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPageNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -51,20 +69,12 @@ Partial Class sdgWindowNumber
         Me.ucrNudPageNumber.TabIndex = 29
         Me.ucrNudPageNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrSdgPICSARainfalbuttons
-        '
-        Me.ucrSdgPICSARainfalbuttons.AutoSize = True
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(13, 47)
-        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(224, 30)
-        Me.ucrSdgPICSARainfalbuttons.TabIndex = 31
-        '
         'sdgWindowNumber
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(248, 81)
+        Me.ClientSize = New System.Drawing.Size(231, 81)
+        Me.Controls.Add(Me.lblPages)
         Me.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.Controls.Add(Me.lblTitleSize)
         Me.Controls.Add(Me.ucrNudPageNumber)
@@ -81,4 +91,5 @@ Partial Class sdgWindowNumber
     Friend WithEvents lblTitleSize As Label
     Friend WithEvents ucrNudPageNumber As ucrNud
     Friend WithEvents ucrSdgPICSARainfalbuttons As ucrButtonsSubdialogue
+    Friend WithEvents lblPages As Label
 End Class

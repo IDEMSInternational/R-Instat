@@ -77,7 +77,6 @@ Public Class ucrDataView
         _grid.SetContextmenuStrips(columnContextMenuStrip, cellContextMenuStrip, rowContextMenuStrip, statusColumnMenu)
         AttachEventsToGrid()
         RefreshDisplayInformation()
-        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click to go to a specific window.")
     End Sub
 
     Private Sub AttachEventsToGrid()
@@ -897,7 +896,8 @@ Public Class ucrDataView
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
             sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalRowCount
-            sdgWindowNumber.iDefaultPage = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+            sdgWindowNumber.iStart = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
+            sdgWindowNumber.iEnd = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = 0
             iPageNum = sdgWindowNumber.iPage
@@ -912,7 +912,8 @@ Public Class ucrDataView
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
             sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalColumnCount
-            sdgWindowNumber.iDefaultPage = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
+            sdgWindowNumber.iStart = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
+            sdgWindowNumber.iEnd = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = 0
             iPageNum = sdgWindowNumber.iPage
@@ -921,5 +922,15 @@ Public Class ucrDataView
                 RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
             End If
         End If
+    End Sub
+
+    Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
+        Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalRowCount / 1000
+        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" & iTotalPage)
+    End Sub
+
+    Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
+        Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalColumnCount / 300
+        ttGoToRowPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" & iTotalPage)
     End Sub
 End Class
