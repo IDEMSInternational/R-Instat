@@ -834,7 +834,7 @@ Public Class RLink
 
             'get the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).Last
-            If strLastScript.Contains("get_object") Then 'if output should be returned as a file
+            If strLastScript.Contains("get_object") OrElse strLastScript.Contains("view_object") Then 'if output should be returned as a file
                 Try
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
                     Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -842,7 +842,7 @@ Public Class RLink
                     If expTemp IsNot Nothing Then
                         'get the file path name
                         strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
-                        If strTemp <> "" Then
+                        If File.Exists(strTemp) Then
                             If bAddOutputInLog Then
                                 clsOutputLogger.AddFileOutput(strTemp)
                             Else

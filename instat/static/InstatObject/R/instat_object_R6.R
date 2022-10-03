@@ -550,10 +550,22 @@ DataBook$set("public", "add_object", function(data_name, object_name, object_typ
         #add the object
         private$.objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
       } else{ 
+        
         self$get_data_objects(data_name)$add_object(object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object)
+       
+         #if its a graph. set it as last graph contents
+        if(identical(object_type_label, "graph")){
+          private$.last_graph <- c(data_name, object_name)
+        }
+        
       }
-    } else {
       
+      
+      
+    
+    } else {
+      #todo. this block will eventually be deprecated once discussions on
+      #where to save objects is finalised.
       #todo. should every other big object have their own data book or we use one data book for storing all the objects?
       #or we store all objects in a separate data structure that is not a data book? 
       #if we store it in a data structure then we will NOT need the "internal" parameter
@@ -565,9 +577,6 @@ DataBook$set("public", "add_object", function(data_name, object_name, object_typ
           self$create_graph_data_book()
         } 
         .graph_data_book$add_object(data_name = data_name, object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object, internal = TRUE)
-        #after adding the graph. set it as last graph contents
-        last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
-        if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
       }else{
         self$add_object(data_name = data_name, object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object, internal = TRUE)
       }
@@ -653,7 +662,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, object_ty
 #as explained in issue #7808 comments. New implementation is need to remove the internal parameter from the other "object" functions
 #if parameter internal is set to false, parameter object_type_label will have to be passed
 #todo. parameter object_type_label and nternal can be removed as a parameter if all objects are saved in the same data book or structure
-DataBook$set("public", "get_object", function(data_name, object_name, object_type_label = "", internal = TRUE) {
+DataBook$set("public", "get_object", function(data_name, object_name, object_type_label = "", as_file = TRUE, internal = TRUE) {
   if (!internal && identical(object_type_label,"graph") && exists(".graph_data_book")) {
     r_instant_object <- .graph_data_book$get_object(data_name = data_name, object_name = object_name,  internal = TRUE)
   }else {
@@ -667,7 +676,11 @@ DataBook$set("public", "get_object", function(data_name, object_name, object_typ
   if (is.null(r_instant_object)){
     return(NULL)
   }else{
-    return(view_object(object = r_instant_object$object, object_format = r_instant_object$object_format))
+    if(as_file){
+      return(view_object(object = r_instant_object$object, object_format = r_instant_object$object_format))
+    }else{
+      return(r_instant_object)
+    }
   }
   
 }
@@ -784,12 +797,11 @@ DataBook$set("public", "get_from_object", function(data_name, object_name, value
 }
 )
 
-#todo. deprecate this later. get_object and view_object should be sufficient
 DataBook$set("public", "get_last_graph", function(print_graph = TRUE, internal = FALSE) {
   if (!internal && exists(".graph_data_book")) .graph_data_book$get_last_graph(print_graph = print_graph, internal = TRUE)
   else {
     if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
-      graph_object <- self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], object_type_label = graph_label)
+      graph_object <- self$get_object(data_name = private$.last_graph[1], object_name = private$.last_graph[2], as_file = FALSE)
       if(print_graph){
         print(graph_object$object)
       }
