@@ -93,11 +93,7 @@ Public Class dlgImportFromPostgres
     End Sub
 
     Private Sub ucrInputUsername_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUsername.ControlContentsChanged
-        If ucrInputUsername.IsEmpty() Then
-            cmdGetData.Enabled = False
-        Else
-            cmdGetData.Enabled = True
-        End If
+        cmdGetData.Enabled = Not ucrInputUsername.IsEmpty()
         ucrInputChooseDataset.cboInput.Items.Clear()
         ucrInputChooseDataset.SetText("")
     End Sub
