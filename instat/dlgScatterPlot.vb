@@ -337,20 +337,4 @@ Public Class dlgScatterPlot
         TestOkEnabled()
     End Sub
 
-
-    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
-        If ucrChkLineofBestFit.Checked Then
-            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunc, iPosition:=4)
-        Else
-            clsBaseOperator.RemoveParameterByName("geom_smooth")
-        End If
-    End Sub
-
-    Private Sub ucrChkAddRugPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddRugPlot.ControlValueChanged
-        If ucrChkAddRugPlot.Checked Then
-            clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=3)
-        Else
-            clsBaseOperator.RemoveParameterByName("geom_rug")
-        End If
-    End Sub
 End Class
