@@ -730,8 +730,4 @@ Public Class dlgLinePlot
             clsOptionsFunction.RemoveParameterByName("formula")
         End If
     End Sub
-
-    Private Sub ucrInputFormula_Load(sender As Object, e As EventArgs) Handles ucrInputFormula.Load
-
-    End Sub
 End Class
