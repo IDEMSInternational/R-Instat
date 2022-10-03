@@ -55,12 +55,14 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric", bStrict:=True)
         ucrReceiverMultiplePCA.SetMeAsReceiver()
+        ucrReceiverMultiplePCA.bExcludeFromSelector = True
 
         ucrReceiverSuppNumeric.SetParameter(New RParameter("right", 1))
         ucrReceiverSuppNumeric.SetParameterIsString()
         ucrReceiverSuppNumeric.Selector = ucrSelectorPCA
         ucrReceiverSuppNumeric.SetDataType("numeric")
         ucrReceiverSuppNumeric.SetLinkedDisplayControl(lblSupplNumeric)
+        ucrReceiverSuppNumeric.bExcludeFromSelector = True
 
         ucrReceiverSupplFactors.SetParameter(New RParameter("right", 1))
         ucrReceiverSupplFactors.SetParameterIsString()
