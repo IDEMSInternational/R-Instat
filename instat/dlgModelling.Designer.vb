@@ -73,6 +73,9 @@ Partial Class dlgModelling
         Me.cmdlda = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
+        Me.grpRstanarm = New System.Windows.Forms.GroupBox()
+        Me.cmdstanpolr = New System.Windows.Forms.Button()
+        Me.cmdstanglm = New System.Windows.Forms.Button()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrSaveResult = New instat.ucrSave()
@@ -80,9 +83,6 @@ Partial Class dlgModelling
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpRstanarm = New System.Windows.Forms.GroupBox()
-        Me.cmdstanpolr = New System.Windows.Forms.Button()
-        Me.cmdstanglm = New System.Windows.Forms.Button()
         Me.grpStats.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpextRemes.SuspendLayout()
@@ -701,6 +701,39 @@ Partial Class dlgModelling
         Me.lblRpackage.TabIndex = 3
         Me.lblRpackage.Text = "R package:"
         '
+        'grpRstanarm
+        '
+        Me.grpRstanarm.Controls.Add(Me.cmdstanpolr)
+        Me.grpRstanarm.Controls.Add(Me.cmdstanglm)
+        Me.grpRstanarm.Location = New System.Drawing.Point(440, 102)
+        Me.grpRstanarm.Name = "grpRstanarm"
+        Me.grpRstanarm.Size = New System.Drawing.Size(215, 70)
+        Me.grpRstanarm.TabIndex = 129
+        Me.grpRstanarm.TabStop = False
+        Me.grpRstanarm.Text = "Rstanarm"
+        '
+        'cmdstanpolr
+        '
+        Me.cmdstanpolr.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdstanpolr.Location = New System.Drawing.Point(107, 19)
+        Me.cmdstanpolr.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdstanpolr.Name = "cmdstanpolr"
+        Me.cmdstanpolr.Size = New System.Drawing.Size(104, 45)
+        Me.cmdstanpolr.TabIndex = 126
+        Me.cmdstanpolr.Text = "stanpolr"
+        Me.cmdstanpolr.UseVisualStyleBackColor = True
+        '
+        'cmdstanglm
+        '
+        Me.cmdstanglm.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdstanglm.Location = New System.Drawing.Point(4, 19)
+        Me.cmdstanglm.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cmdstanglm.Name = "cmdstanglm"
+        Me.cmdstanglm.Size = New System.Drawing.Size(104, 45)
+        Me.cmdstanglm.TabIndex = 125
+        Me.cmdstanglm.Text = "stanglm"
+        Me.cmdstanglm.UseVisualStyleBackColor = True
+        '
         'ucrTryModelling
         '
         Me.ucrTryModelling.AutoSize = True
@@ -776,39 +809,6 @@ Partial Class dlgModelling
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 14
-        '
-        'grpRstanarm
-        '
-        Me.grpRstanarm.Controls.Add(Me.cmdstanpolr)
-        Me.grpRstanarm.Controls.Add(Me.cmdstanglm)
-        Me.grpRstanarm.Location = New System.Drawing.Point(439, 102)
-        Me.grpRstanarm.Name = "grpRstanarm"
-        Me.grpRstanarm.Size = New System.Drawing.Size(215, 70)
-        Me.grpRstanarm.TabIndex = 129
-        Me.grpRstanarm.TabStop = False
-        Me.grpRstanarm.Text = "Rstanarm"
-        '
-        'cmdstanpolr
-        '
-        Me.cmdstanpolr.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdstanpolr.Location = New System.Drawing.Point(107, 19)
-        Me.cmdstanpolr.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdstanpolr.Name = "cmdstanpolr"
-        Me.cmdstanpolr.Size = New System.Drawing.Size(104, 45)
-        Me.cmdstanpolr.TabIndex = 126
-        Me.cmdstanpolr.Text = "stanpolr"
-        Me.cmdstanpolr.UseVisualStyleBackColor = True
-        '
-        'cmdstanglm
-        '
-        Me.cmdstanglm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdstanglm.Location = New System.Drawing.Point(4, 19)
-        Me.cmdstanglm.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdstanglm.Name = "cmdstanglm"
-        Me.cmdstanglm.Size = New System.Drawing.Size(104, 45)
-        Me.cmdstanglm.TabIndex = 125
-        Me.cmdstanglm.Text = "stanglm"
-        Me.cmdstanglm.UseVisualStyleBackColor = True
         '
         'dlgModelling
         '
