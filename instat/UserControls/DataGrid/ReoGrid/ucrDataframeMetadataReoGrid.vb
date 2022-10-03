@@ -42,6 +42,11 @@ Public Class ucrDataframeMetadataReoGrid
         For i = 0 To _clsDataBook.clsDataFrameMetaData.RowCount - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
+                If _clsDataBook.GetDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection.bFilterApplied AndAlso grdData.CurrentWorksheet.ColumnHeaders(j).Text = "Rows" Then
+                    grdData.CurrentWorksheet.Cells(row:=i, col:=j).Style.TextColor = Color.Red
+                ElseIf _clsDataBook.GetDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso grdData.CurrentWorksheet.ColumnHeaders(j).Text = "Columns" Then
+                    grdData.CurrentWorksheet.Cells(row:=i, col:=j).Style.TextColor = Color.Red
+                End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = _clsDataBook.clsDataFrameMetaData.RowName(i)
         Next
