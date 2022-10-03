@@ -40,15 +40,21 @@ Partial Class ucrScript
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRedo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRunCurrentLineSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRunAllText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOpenScriptasFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLoadScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderScript = New System.Windows.Forms.Label()
@@ -60,12 +66,6 @@ Partial Class ucrScript
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuSelectAll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuUndo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRedo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -76,7 +76,26 @@ Partial Class ucrScript
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClearContents, Me.ToolStripSeparator2, Me.mnuRunCurrentLineSelection, Me.mnuRunAllText, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(274, 336)
+        Me.mnuContextScript.Size = New System.Drawing.Size(274, 314)
+        '
+        'mnuUndo
+        '
+        Me.mnuUndo.Name = "mnuUndo"
+        Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.mnuUndo.Size = New System.Drawing.Size(273, 22)
+        Me.mnuUndo.Text = "Undo"
+        '
+        'mnuRedo
+        '
+        Me.mnuRedo.Name = "mnuRedo"
+        Me.mnuRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
+        Me.mnuRedo.Size = New System.Drawing.Size(273, 22)
+        Me.mnuRedo.Text = "Redo"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(270, 6)
         '
         'mnuCut
         '
@@ -99,6 +118,25 @@ Partial Class ucrScript
         Me.mnuPaste.Size = New System.Drawing.Size(273, 22)
         Me.mnuPaste.Text = "Paste"
         '
+        'mnuSelectAll
+        '
+        Me.mnuSelectAll.Name = "mnuSelectAll"
+        Me.mnuSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.mnuSelectAll.Size = New System.Drawing.Size(273, 22)
+        Me.mnuSelectAll.Text = "Select All"
+        '
+        'mnuClearContents
+        '
+        Me.mnuClearContents.Name = "mnuClearContents"
+        Me.mnuClearContents.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
+        Me.mnuClearContents.Size = New System.Drawing.Size(273, 22)
+        Me.mnuClearContents.Text = "Clear All"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(270, 6)
+        '
         'mnuRunCurrentLineSelection
         '
         Me.mnuRunCurrentLineSelection.Name = "mnuRunCurrentLineSelection"
@@ -112,6 +150,11 @@ Partial Class ucrScript
             Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
         Me.mnuRunAllText.Size = New System.Drawing.Size(273, 22)
         Me.mnuRunAllText.Text = "Run All Text"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(270, 6)
         '
         'mnuOpenScriptasFile
         '
@@ -130,13 +173,6 @@ Partial Class ucrScript
         Me.mnuSaveScript.Name = "mnuSaveScript"
         Me.mnuSaveScript.Size = New System.Drawing.Size(273, 22)
         Me.mnuSaveScript.Text = "Save Script..."
-        '
-        'mnuClearContents
-        '
-        Me.mnuClearContents.Name = "mnuClearContents"
-        Me.mnuClearContents.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.mnuClearContents.Size = New System.Drawing.Size(273, 22)
-        Me.mnuClearContents.Text = "Clear All"
         '
         'ToolStripSeparator4
         '
@@ -243,42 +279,6 @@ Partial Class ucrScript
         Me.cmdRunLineSelection.Text = "Run"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(270, 6)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(270, 6)
-        '
-        'mnuSelectAll
-        '
-        Me.mnuSelectAll.Name = "mnuSelectAll"
-        Me.mnuSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuSelectAll.Size = New System.Drawing.Size(273, 22)
-        Me.mnuSelectAll.Text = "Select All"
-        '
-        'mnuUndo
-        '
-        Me.mnuUndo.Name = "mnuUndo"
-        Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuUndo.Size = New System.Drawing.Size(273, 22)
-        Me.mnuUndo.Text = "Undo"
-        '
-        'mnuRedo
-        '
-        Me.mnuRedo.Name = "mnuRedo"
-        Me.mnuRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.mnuRedo.Size = New System.Drawing.Size(273, 22)
-        Me.mnuRedo.Text = "Redo"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(270, 6)
         '
         'ucrScript
         '
