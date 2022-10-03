@@ -33,7 +33,7 @@ Public Class dlgScatterPlot
     Private clsFacetsFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
-    Private clsGeomSmoothFunc As New RFunction
+    Private clsGeomSmoothFunction As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
@@ -156,7 +156,7 @@ Public Class dlgScatterPlot
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
         clsRaesFunction = New RFunction
-        clsGeomSmoothFunc = New RFunction
+        clsGeomSmoothFunction = New RFunction
         clsGeomRugFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
@@ -166,6 +166,9 @@ Public Class dlgScatterPlot
         sdgPlots.Reset()
         bResetSubdialog = True
         bResetlayerSubdialog = True
+
+        toolStripMenuItemRugOptions.Enabled = False
+        toolStripMenuItemSmoothOptions.Enabled = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -205,10 +208,10 @@ Public Class dlgScatterPlot
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
-        clsGeomSmoothFunc.SetPackageName("ggplot2")
-        clsGeomSmoothFunc.SetRCommand("geom_smooth")
-        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
-        clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
+        clsGeomSmoothFunction.SetPackageName("ggplot2")
+        clsGeomSmoothFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsBaseOperator.SetAssignToRObject(strRObjectToAssignTo:="last_graph",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
@@ -227,7 +230,7 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrSaveScatterPlot.SetRCode(clsBaseOperator, bReset)
-        ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
+        ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         ucrChkAddRugPlot.SetRCode(clsBaseOperator, bReset)
         ucrNudSize.SetRCode(clsGeomRugFunction, bReset)
         ucrInputSides.SetRCode(clsGeomRugFunction, bReset)
@@ -248,48 +251,92 @@ Public Class dlgScatterPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                          clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction,
-                          clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
-                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorForScatter, strMainDialogGeomParameterNames:=strGeomParameterNames,
-                          clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog)
+    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
+        If ucrChkLineofBestFit.Checked Then
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=4)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_smooth")
+        End If
+        toolStripMenuItemSmoothOptions.Enabled = ucrChkLineofBestFit.Checked
+    End Sub
+
+    Private Sub ucrChkAddRugPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddRugPlot.ControlValueChanged
+        If ucrChkAddRugPlot.Checked Then
+            clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_rug")
+        End If
+        toolStripMenuItemRugOptions.Enabled = ucrChkAddRugPlot.Checked
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction,
+                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                          clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+                          clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
+                          clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                          clsNewYScaleDateFunction:=clsYScaleDateFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorForScatter,
+                          strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPointOptions.Click
+    Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
+        EnableDisableOptions(clsRScatterGeomFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemRugOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemRugOptions.Click
+        EnableDisableOptions(clsGeomRugFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemSmoothOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemSmoothOptions.Click
+        EnableDisableOptions(clsGeomSmoothFunction)
+    End Sub
+
+    Private Sub EnableDisableOptions(clsTempFunction As RFunction)
         'SetupLayer sends the components storing the plot info (clsRaesFunction, clsRggplotFunction, ...) of dlgScatteredPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRScatterGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorForScatter, bApplyAesGlobally:=True, bReset:=bResetlayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTempFunction,
+                                   clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorForScatter, bApplyAesGlobally:=True,
+                                   bReset:=bResetlayerSubdialog)
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
         sdgLayerOptions.ShowDialog()
         ucrReceiverLabel.SetRCode(clsRaesFunction, bReset)
         bResetlayerSubdialog = False
         'The aesthetics parameters on the main dialog are repopulated as required.
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForScatter.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForScatter.Clear()
-                Else ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
-            End If
+            Select Case clsParam.strArgumentName
+                Case "x"
+                    If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        ucrReceiverX.Clear()
+                    Else
+                        ucrReceiverX.Add(clsParam.strArgumentValue)
+                    End If
+                Case "y"
+                    ' If we are in multiple variables mode and 'y = value', 
+                    '     then we should not write 'value' to the multiple variables receiver
+                    If Not ucrVariablesAsFactorForScatter.bSingleVariable _
+                            AndAlso clsParam.strArgumentValue Is "value" Then
+                        Exit Select
+                    End If
+
+                    If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                        ucrVariablesAsFactorForScatter.Clear()
+                    Else
+                        ucrVariablesAsFactorForScatter.Add(clsParam.strArgumentValue)
+                    End If
+                Case "colour"
+                    ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            End Select
         Next
     End Sub
 
-    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged,
+        ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 
     Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
         If ucrChkLineofBestFit.Checked Then

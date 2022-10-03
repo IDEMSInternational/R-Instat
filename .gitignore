@@ -246,3 +246,7 @@ installer/Output/
 /packages/cef.redist.*/
 /packages/CefSharp.Common.*/
 /packages/CefSharp.WinForms.*/
+
+# Package used by script window
+/packages/jacobslusser.ScintillaNET.*/
+

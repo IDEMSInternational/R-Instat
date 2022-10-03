@@ -84,7 +84,7 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian"})
+        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
 
         ucrChkShowWaitDialog.SetText("Set maximum height for outputs")
@@ -138,6 +138,8 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("Portuguese")
             Case "ru-RU"
                 ucrInputLanguage.SetText("Russian")
+            Case "es-ES"
+                ucrInputLanguage.SetText("Spanish")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -286,6 +288,8 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "pt-PT"
             Case "Russian"
                 strCurrLanguageCulture = "ru-RU"
+            Case "Spanish"
+                strCurrLanguageCulture = "es-ES"
         End Select
         ApplyEnabled(True)
     End Sub
