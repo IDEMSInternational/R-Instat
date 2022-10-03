@@ -36,15 +36,13 @@ Public Class dlgImportFromPostgres
     End Sub
 
     Private Sub InitialiseDialog()
-
-
         ucrInputChooseDataset.SetParameter(New RParameter("Dataset_name", 3))
         ucrInputChooseDataset.bAllowNonConditionValues = True
 
         ucrInputUsername.SetParameter(New RParameter("username", 1))
-        ucrInputPort.SetParameter(New RParameter("port", 2))
+        UcrInputPort.SetParameter(New RParameter("port", 2))
         ucrInputDatabase.SetParameter(New RParameter("database", 2))
-        ucrInputHost.SetParameter(New RParameter("host", 1))
+        UcrInputHost.SetParameter(New RParameter("host", 1))
 
         ucrBase.clsRsyntax.bSeparateThread = False
         ucrBase.clsRsyntax.bShowWaitDialogOverride = False
@@ -61,8 +59,8 @@ Public Class dlgImportFromPostgres
         ucrInputHost.SetName("")
         ucrInputPort.SetName("")
 
-
         clsGetFormsFunction.SetPackageName("postgresr")
+
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_Postgres")
         clsGetFormsFunction.SetRCommand("get_postgres_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
@@ -92,7 +90,6 @@ Public Class dlgImportFromPostgres
         Else
             clsGetFormsFunction.AddParameter("site", Chr(34) & ucrInputUsername.GetText & Chr(34))
         End If
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputUsername_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUsername.ControlContentsChanged
@@ -103,7 +100,6 @@ Public Class dlgImportFromPostgres
         End If
         ucrInputChooseDataset.cboInput.Items.Clear()
         ucrInputChooseDataset.SetText("")
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputChooseDataset_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseDataset.ControlContentsChanged, ucrInputUsername.ControlContentsChanged ', ucrInputPassword.ControlContentsChanged 
