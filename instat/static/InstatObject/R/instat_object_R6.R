@@ -560,9 +560,6 @@ DataBook$set("public", "add_object", function(data_name, object_name, object_typ
         
       }
       
-      
-      
-    
     } else {
       #todo. this block will eventually be deprecated once discussions on
       #where to save objects is finalised.
