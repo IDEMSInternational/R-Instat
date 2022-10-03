@@ -34,11 +34,8 @@ Public Class sdgImportFromRapidPro
 
             dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputTokenPath.GetText(), "/", "\"))
 
-            If dlgOpen.ShowDialog() = DialogResult.OK Then
-
-                If dlgOpen.FileName <> "" Then
-                    ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
-                End If
+            If dlgOpen.ShowDialog() = DialogResult.OK AndAlso dlgOpen.FileName <> "" Then
+                ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
             End If
         End Using
     End Sub
