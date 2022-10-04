@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -15,9 +15,29 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.IO
 
 Public Class sdgImportFromRapidPro
     Private Sub sdgImportFromRapidPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ucrInputTokenPath.IsReadOnly = True
+        autoTranslate(Me)
     End Sub
+
+    Public Sub Setup(clsNewKeyParameter As RParameter)
+        ucrInputTokenPath.SetParameter(clsNewKeyParameter, 0)
+    End Sub
+
+    Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        Using dlgOpen As New OpenFileDialog
+            dlgOpen.Filter = "Text Files|*.txt"
+            dlgOpen.Title = "Import Text File"
+
+            dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputTokenPath.GetText(), "/", "\"))
+
+            If dlgOpen.ShowDialog() = DialogResult.OK AndAlso dlgOpen.FileName <> "" Then
+                ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
+            End If
+        End Using
+    End Sub
+
 End Class
