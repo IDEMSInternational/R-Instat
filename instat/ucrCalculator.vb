@@ -1792,11 +1792,25 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdCoin_Click(sender As Object, e As EventArgs) Handles cmdCoin.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin(""Tails"" , ""Heads"") , prob = NULL , name = ""Coin"")", 49)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("wakefield::coin()", 1)
-        End If
+        Dim clsWakefieldCoinFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+        Dim clsCoinListFunction As New RFunction
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsCoinListFunction.SetRCommand("c")
+        clsCoinListFunction.AddParameter("head", Chr(34) & "Heads" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsCoinListFunction.AddParameter("tail", Chr(34) & "Tails" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsWakefieldCoinFunction.SetPackageName("wakefield")
+        clsWakefieldCoinFunction.SetRCommand("coin")
+        clsWakefieldCoinFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldCoinFunction.AddParameter("x", clsRFunctionParameter:=clsCoinListFunction, iPosition:=1)
+        clsWakefieldCoinFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldCoinFunction.AddParameter("name", Chr(34) & "Coin" & Chr(34), iPosition:=3)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldCoinFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdColor_Click(sender As Object, e As EventArgs) Handles cmdColor.Click
