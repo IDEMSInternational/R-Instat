@@ -59,10 +59,10 @@ Public Class dlgImportFromPostgres
         ucrInputHost.SetName("")
         ucrInputPort.SetName("")
 
-        clsGetFormsFunction.SetPackageName("postgresr")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_Postgres")
         clsGetFormsFunction.SetRCommand("get_postgres_data")
+        clsGetFormsFunction.SetPackageName("postgresr")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
@@ -92,7 +92,7 @@ Public Class dlgImportFromPostgres
         End If
     End Sub
 
-    Private Sub ucrInputUsername_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUsername.ControlContentsChanged
+    Private Sub ucrInputUsername_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUsername.ControlValueChanged
         cmdGetData.Enabled = Not ucrInputUsername.IsEmpty()
         ucrInputChooseDataset.cboInput.Items.Clear()
         ucrInputChooseDataset.SetText("")
