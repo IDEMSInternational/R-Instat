@@ -160,6 +160,60 @@ Public Class ucrScript
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Automatically sets the indent of a new line.<para>
+    '''             Normally the indent is set to the same indent as the last previous non-empty 
+    '''             line. However, if the caret was between '{}' when enter was pressed, then 
+    '''             increases the indent by 2 spaces and moves the '}' to the next line.</para><para>
+    '''             This results in code with nested indents. For example:</para>
+    '''             <code>
+    '''             a = function(b){
+    '''             ..statement1
+    '''             ..if (b){
+    '''             ....statement2
+    '''             ..}
+    '''             }</code>. </summary>
+    '''
+    ''' <param name="iKeyPressed">    The last key pressed by the user. </param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub InsertIndent(iKeyPressed As Integer)
+        ' we only need to enter an indent when the user presses the enter key
+        If iKeyPressed <> Keys.Enter Or txtScript.AutoCActive <> False Then
+            Exit Sub
+        End If
+
+        ' find indent on previous non-blank line
+        Dim iIndent As Integer = 0
+        Dim strLinePrevText As String = ""
+        For iLineNum As Integer = txtScript.CurrentLine - 1 To 0 Step -1
+            strLinePrevText = txtScript.Lines(iLineNum).Text
+            If Not String.IsNullOrWhiteSpace(strLinePrevText) Then
+                iIndent = strLinePrevText.Length - strLinePrevText.TrimStart().Length
+                Exit For
+            End If
+        Next
+
+        ' if caret before '}', then move '}' to new line
+        Dim strCharNext As String = If(txtScript.Text.Length > txtScript.CurrentPosition, txtScript.Text(txtScript.CurrentPosition), "")
+        If strCharNext = "}"c Then
+            txtScript.InsertText(txtScript.CurrentPosition, vbCrLf & "".PadRight(iIndent))
+            txtScript.ScrollRange(txtScript.CurrentPosition, txtScript.CurrentPosition + 2) 'ensure '}' is still visible to user
+        End If
+
+        ' if caret after '{', then increase indent 
+        strLinePrevText = strLinePrevText.Replace(vbCrLf, "").TrimEnd() ' remove carriage returns and trailing spaces
+        Dim strCharPrev As String = If(strLinePrevText.Length >= 1, strLinePrevText(strLinePrevText.Length - 1), "")
+        If strCharPrev = "{"c Then
+            iIndent += 2
+        End If
+
+        ' apply indent to current line
+        txtScript.InsertText(txtScript.CurrentPosition, "".PadRight(iIndent))
+
+        ' move caret to end indent
+        txtScript.GotoPosition(txtScript.CurrentPosition + iIndent)
+    End Sub
+
     Private Function IsBracket(iNewChar As Integer) As Boolean
         Dim arrRBrackets() As String = {"(", ")", "{", "}", "[", "]"}
         Return arrRBrackets.Contains(Chr(iNewChar))
@@ -343,6 +397,38 @@ Public Class ucrScript
         'txtScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'txtScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
 
+
+        ' Set the lexer
+        txtScript.Lexer = Lexer.R
+
+        ' Instruct the lexer to calculate folding
+        txtScript.SetProperty("fold", "1")
+        txtScript.SetProperty("fold.compact", "1")
+
+        ' Configure a margin to display folding symbols
+        txtScript.Margins(2).Type = MarginType.Symbol
+        txtScript.Margins(2).Mask = Marker.MaskFolders
+        txtScript.Margins(2).Sensitive = True
+        txtScript.Margins(2).Width = 20
+
+        ' Set colors for all folding markers
+        For i As Integer = 25 To 31
+            txtScript.Markers(i).SetForeColor(SystemColors.ControlLightLight)
+            txtScript.Markers(i).SetBackColor(SystemColors.ControlDark)
+        Next
+
+        ' Configure folding markers with respective symbols
+        txtScript.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
+        txtScript.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
+        txtScript.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
+        txtScript.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
+        txtScript.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
+        txtScript.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
+        txtScript.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
+
+        ' Enable automatic folding
+        txtScript.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
+
         txtScript.IndentationGuides = IndentView.LookBoth
         txtScript.StyleClearAll()
         txtScript.Styles(Style.R.Default).ForeColor = Color.Silver
@@ -407,6 +493,7 @@ Public Class ucrScript
 
     Private Sub txtScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles txtScript.CharAdded
         InsertMatchedChars(ChrW(e.Char))
+        InsertIndent(e.Char)
     End Sub
 
     Private Sub txtScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles txtScript.UpdateUI
