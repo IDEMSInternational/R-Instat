@@ -551,7 +551,7 @@ DataSheet$set("public", "clear_variables_metadata", function() {
 )
 
 DataSheet$set("public", "get_metadata", function(label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
-  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  curr_data <- self$get_data_frame(use_current_filter = TRUE)
   if(missing(label)) {
     if(include_calculated) {
       #Must be private$data because assigning attribute to data field
