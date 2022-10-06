@@ -153,6 +153,7 @@ Public Class ucrFactor
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'the grid will always have 1 sheet. So no need to display the sheet tab control
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        lblSelected.ForeColor = Color.Red
     End Sub
 
     Private Sub _ucrLinkedReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles _ucrLinkedReceiver.ControlValueChanged
@@ -727,15 +728,16 @@ Public Class ucrFactor
     End Function
 
     Private Function CountRowSelected() As Integer
+        If _grdSheet Is Nothing OrElse _enumControlState = ControlStates.NormalGrid Then
+            Return False
+        End If
         Dim iSelectorColumnIndex As Integer = GetColumnIndex(_grdSheet, DefaultColumnNames.SelectorColumn)
         Dim iCount As Integer = 0
-        If _grdSheet IsNot Nothing Then
-            For i = 0 To _grdSheet.Rows - 1
-                If DirectCast(_grdSheet(i, iSelectorColumnIndex), Boolean) Then
-                    iCount += 1
-                End If
-            Next
-        End If
+        For i = 0 To _grdSheet.Rows - 1
+            If DirectCast(_grdSheet(i, iSelectorColumnIndex), Boolean) Then
+                iCount += 1
+            End If
+        Next
         Return iCount
     End Function
 
@@ -927,10 +929,11 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Public Sub SetColumnsSelected()
-        lblSelected.Text = "Selected:" & CountRowSelected()
-        lblSelected.Visible = CountRowSelected() > 0
-        lblSelected.ForeColor = Color.Red
+    Private Sub SetColumnsSelected(ucrChangedControl As ucrCore) Handles Me.ControlValueChanged
+        Dim iSelectCol As Integer = CountRowSelected()
+
+        lblSelected.Text = "Selected:" & iSelectCol
+        lblSelected.Visible = iSelectCol > 0
         SetToggleButtonSettings()
     End Sub
 End Class

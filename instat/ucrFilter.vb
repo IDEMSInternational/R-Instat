@@ -227,13 +227,8 @@ Public Class ucrFilter
         RaiseEvent FilterChanged()
     End Sub
 
-    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs)
-        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
-    End Sub
-
     Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
         CheckAddEnabled()
-        ucrFactorLevels.SetColumnsSelected()
     End Sub
 
     Private Sub ucrSelectorForFitler_DataFrameChanged() Handles ucrSelectorForFitler.DataFrameChanged
