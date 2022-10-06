@@ -148,13 +148,15 @@ Public Class dlgHideDataframes
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlHideUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHideUnhide.ControlValueChanged
+    Private Sub ucrPnlHideUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHideUnhide.ControlValueChanged, ucrReceiverMultipleUnhide.ControlValueChanged
         If rdoHideDataFrame.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsHideDataFramesFunction)
             clsDummyFunction.AddParameter("checked", "rdoHide", iPosition:=0)
             ucrReceiverMultiple.SetMeAsReceiver()
 
         Else
+            clsDataUnhideFunction.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+
             ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             clsDummyFunction.AddParameter("checked", "rdoUnhide", iPosition:=0)
             ucrReceiverMultipleUnhide.SetMeAsReceiver()
@@ -162,7 +164,7 @@ Public Class dlgHideDataframes
         End If
     End Sub
 
-    Private Sub ucrReceiverMultipleUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleUnhide.ControlValueChanged
-        clsDataUnhideFunction.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
-    End Sub
+    'Private Sub ucrReceiverMultipleUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleUnhide.ControlValueChanged
+    '    clsDataUnhideFunction.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+    'End Sub
 End Class
