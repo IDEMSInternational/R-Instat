@@ -220,9 +220,9 @@ Partial Class dlgClimSoft
         Me.lbTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lbTable.Location = New System.Drawing.Point(3, 74)
         Me.lbTable.Name = "lbTable"
-        Me.lbTable.Size = New System.Drawing.Size(127, 13)
+        Me.lbTable.Size = New System.Drawing.Size(130, 13)
         Me.lbTable.TabIndex = 18
-        Me.lbTable.Text = "Select Observation Table"
+        Me.lbTable.Text = "Select Observation Table:"
         Me.lbTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ucrPnlOptions

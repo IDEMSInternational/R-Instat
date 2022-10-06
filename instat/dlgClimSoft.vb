@@ -128,7 +128,7 @@ Public Class dlgClimSoft
 
         '-------------------------------------------------------------------------
         'observation date range checkbox
-        ucrChkObsDate.SetText("Select Observation Date Range")
+        ucrChkObsDate.SetText("Select Data Date Range")
 
         'start date datepicker
         ucrDtpObStartdate.SetParameter(New RParameter("start_date", 8))
@@ -144,7 +144,7 @@ Public Class dlgClimSoft
 
         '-----------------------------------------------------------------------------------------
         'entry date range checkbox
-        ucrChkObsDate.SetText("Select Observation Entry Date Range")
+        ucrChkObsDate.SetText("Select Data Entry Date Range")
 
         'start date datepicker
         ucrDtpEntryStartdate.SetParameter(New RParameter("start_date", 8))
