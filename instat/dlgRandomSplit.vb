@@ -43,7 +43,6 @@ Public Class dlgRandomSplit
         ucrReceiverRanSplit.Selector = ucrSelectorRandomSplit
         ucrReceiverRanSplit.SetMeAsReceiver()
         ucrReceiverRanSplit.SetDataType("factor")
-        ucrReceiverRanSplit.SetLinkedDisplayControl(lblReceiverRandomSplit)
         ucrReceiverRanSplit.SetParameterIsString()
 
         ucrSelectorRandomSplit.SetParameter(New RParameter("data", 0))
@@ -155,7 +154,13 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If rdoSample.Checked Then
+            ucrBase.OKEnabled(Not ucrReceiverRanSplit.IsEmpty)
+        ElseIf rdoTimeSeries.Checked Then
+            ucrBase.OKEnabled(Not ucrReceiverRanSplit.IsEmpty)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
     Private Sub SetBaseFunction()
         If rdoSample.Checked Then

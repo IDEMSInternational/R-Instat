@@ -26,7 +26,6 @@ Partial Class dlgRandomSplit
         Me.rdoTimeSeries = New System.Windows.Forms.RadioButton()
         Me.lblFraction = New System.Windows.Forms.Label()
         Me.lblPool = New System.Windows.Forms.Label()
-        Me.lblReceiverRandomSplit = New System.Windows.Forms.Label()
         Me.lblBreaks = New System.Windows.Forms.Label()
         Me.ucrNudBreaks = New instat.ucrNud()
         Me.ucrNudPool = New instat.ucrNud()
@@ -92,15 +91,6 @@ Partial Class dlgRandomSplit
         Me.lblPool.Size = New System.Drawing.Size(31, 13)
         Me.lblPool.TabIndex = 33
         Me.lblPool.Text = "Pool:"
-        '
-        'lblReceiverRandomSplit
-        '
-        Me.lblReceiverRandomSplit.AutoSize = True
-        Me.lblReceiverRandomSplit.Location = New System.Drawing.Point(279, 95)
-        Me.lblReceiverRandomSplit.Name = "lblReceiverRandomSplit"
-        Me.lblReceiverRandomSplit.Size = New System.Drawing.Size(53, 13)
-        Me.lblReceiverRandomSplit.TabIndex = 35
-        Me.lblReceiverRandomSplit.Text = "Variables:"
         '
         'lblBreaks
         '
@@ -202,7 +192,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrChkStratifyingFactor.AutoSize = True
         Me.ucrChkStratifyingFactor.Checked = False
-        Me.ucrChkStratifyingFactor.Location = New System.Drawing.Point(281, 69)
+        Me.ucrChkStratifyingFactor.Location = New System.Drawing.Point(281, 82)
         Me.ucrChkStratifyingFactor.Name = "ucrChkStratifyingFactor"
         Me.ucrChkStratifyingFactor.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkStratifyingFactor.TabIndex = 19
@@ -257,7 +247,6 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.ucrReceiverRanSplit)
         Me.Controls.Add(Me.lblBreaks)
         Me.Controls.Add(Me.ucrNudBreaks)
-        Me.Controls.Add(Me.lblReceiverRandomSplit)
         Me.Controls.Add(Me.lblPool)
         Me.Controls.Add(Me.lblFraction)
         Me.Controls.Add(Me.ucrNudPool)
@@ -297,7 +286,6 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrPnlRandomSplit As UcrPanel
     Friend WithEvents lblPool As Label
     Friend WithEvents lblFraction As Label
-    Friend WithEvents lblReceiverRandomSplit As Label
     Friend WithEvents lblBreaks As Label
     Friend WithEvents ucrNudBreaks As ucrNud
     Friend WithEvents ucrSelectorRandomSplit As ucrSelectorByDataFrameAddRemove
