@@ -59,10 +59,9 @@ Public Class dlgImportFromPostgres
         ucrInputHost.SetName("")
         ucrInputPort.SetName("")
 
-
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_Postgres")
-        clsGetFormsFunction.SetRCommand("get_postgres_data")
         clsGetFormsFunction.SetPackageName("postgresr")
+        clsGetFormsFunction.SetRCommand("get_postgres_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
