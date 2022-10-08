@@ -24,7 +24,7 @@ Public Class dlgHideDataframes
     Private clsHideDataFramesFunction As New RFunction
     Private clsAppendToDataFrameFunction As New RFunction
     Private clsMappingFunction As New RFunction
-    Private clsDataUnhideFunction As New ROperator
+    Private clsDataUnhideOperator As New ROperator
     Private clsTildeOperator As New ROperator
 
     Private clsDummyFunction As New RFunction
@@ -38,7 +38,6 @@ Public Class dlgHideDataframes
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        'SetHiddenColumns()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -49,20 +48,17 @@ Public Class dlgHideDataframes
         ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
         ucrReceiverMultiple.strSelectorHeading = "Data Frames"
         ucrReceiverMultiple.SetItemType("dataframe")
-        'ucrReceiverMultiple.SetMeAsReceiver()
 
         ucrReceiverMultipleUnhide.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
         ucrReceiverMultipleUnhide.strSelectorHeading = "Data Frames"
         ucrReceiverMultipleUnhide.SetItemType("dataframe")
-        'ucrReceiverMultipleUnhide.SetMeAsReceiver()
 
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
         ucrPnlHideUnhide.AddParameterValuesCondition(rdoHideDataFrame, "checked", "rdoHide")
         ucrPnlHideUnhide.AddParameterValuesCondition(rdoUnhideDataFrame, "checked", "rdoUnhide")
-
 
         ucrReceiverMultiple.SetLinkedDisplayControl(lblHiddenDataFrames)
         ucrReceiverMultipleUnhide.SetLinkedDisplayControl(lblUnhideDataFrame)
@@ -76,7 +72,7 @@ Public Class dlgHideDataframes
         clsHideDataFramesFunction = New RFunction
         clsAppendToDataFrameFunction = New RFunction
         clsMappingFunction = New RFunction
-        clsDataUnhideFunction = New ROperator
+        clsDataUnhideOperator = New ROperator
         clsTildeOperator = New ROperator
         clsDummyFunction = New RFunction
 
@@ -84,16 +80,15 @@ Public Class dlgHideDataframes
 
         clsMappingFunction.SetPackageName("purrr")
         clsMappingFunction.SetRCommand("map")
-        clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsDataUnhideFunction, iPosition:=0)
+        clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsDataUnhideOperator, iPosition:=0)
         clsMappingFunction.AddParameter(".f", clsROperatorParameter:=clsTildeOperator, iPosition:=1)
 
         clsTildeOperator.SetOperation("~")
         clsTildeOperator.AddParameter("right", clsRFunctionParameter:=clsAppendToDataFrameFunction, iPosition:=1)
         clsTildeOperator.bForceIncludeOperation = True
 
-        clsDataUnhideFunction.SetOperation("", bBracketsTemp:=False)
-        clsDataUnhideFunction.SetAssignTo("data_to_unhide")
-        'clsDataUnhideFunction.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+        clsDataUnhideOperator.SetOperation("", bBracketsTemp:=False)
+        clsDataUnhideOperator.SetAssignTo("data_to_unhide")
 
         clsHideDataFramesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_data_frames")
         clsAppendToDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
@@ -105,12 +100,21 @@ Public Class dlgHideDataframes
     End Sub
 
     Private Sub TestOKEnabled()
-        ' You cannot hide all data frames. When the receiver is blank all data frames are unhidden so this is allowed.
-        If ucrReceiverMultiple.lstSelectedVariables.Items.Count <> ucrSelectorForDataFrames.lstAvailableVariable.Items.Count Then
-            ucrBase.OKEnabled(True)
+        If rdoUnhideDataFrame.Checked Then
+            If Not ucrReceiverMultipleUnhide.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+            ' You cannot hide all data frames. When the receiver is blank all data frames are unhidden so this is allowed.
+            If ucrReceiverMultiple.lstSelectedVariables.Items.Count <> ucrSelectorForDataFrames.lstAvailableVariable.Items.Count Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -120,31 +124,29 @@ Public Class dlgHideDataframes
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrPnlHideUnhide.SetRCode(clsDummyFunction, bReset)
         ucrReceiverMultiple.SetRCode(clsHideDataFramesFunction, bReset)
-        'ucrReceiverMultipleUnhide.SetRCode(clsMappingFunction, bReset)
     End Sub
 
-    'Private Sub SetHiddenColumns()
-    '    Dim expTemp As SymbolicExpression
-    '    Dim chrHiddenColumns As CharacterVector
-    '    Dim clsGetHiddenDataFrames As New RFunction
+    Private Sub SetHiddenColumns()
+        Dim expTemp As SymbolicExpression
+        Dim chrHiddenColumns As CharacterVector
+        Dim clsGetHiddenDataFrames As New RFunction
 
-    '    clsGetHiddenDataFrames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_hidden_data_frames")
+        clsGetHiddenDataFrames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_hidden_data_frames")
 
-    '    ucrReceiverMultiple.Clear()
-    '    expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetHiddenDataFrames.ToScript(), bSilent:=True)
-    '    If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-    '        chrHiddenColumns = expTemp.AsCharacter
-    '        For Each strDataFrame As String In chrHiddenColumns
-    '            ucrReceiverMultiple.Add(strDataFrame)
-    '        Next
-    '    End If
-    'End Sub
+        ucrSelectorForDataFrames.lstAvailableVariable.Items.Clear()
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetHiddenDataFrames.ToScript(), bSilent:=True)
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            chrHiddenColumns = expTemp.AsCharacter
+            For Each strDataFrame As String In chrHiddenColumns
+                ucrSelectorForDataFrames.lstAvailableVariable.Items.Add(strDataFrame)
+            Next
+        End If
+    End Sub
 
-    Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged
+    Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged, ucrReceiverMultipleUnhide.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -153,18 +155,16 @@ Public Class dlgHideDataframes
             ucrBase.clsRsyntax.SetBaseRFunction(clsHideDataFramesFunction)
             clsDummyFunction.AddParameter("checked", "rdoHide", iPosition:=0)
             ucrReceiverMultiple.SetMeAsReceiver()
-
         Else
-            clsDataUnhideFunction.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
-
+            clsDataUnhideOperator.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             clsDummyFunction.AddParameter("checked", "rdoUnhide", iPosition:=0)
-            ucrReceiverMultipleUnhide.SetMeAsReceiver()
-
         End If
+        TestOKEnabled()
     End Sub
 
-    'Private Sub ucrReceiverMultipleUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleUnhide.ControlValueChanged
-    '    clsDataUnhideFunction.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
-    'End Sub
+    Private Sub ucrReceiverMultipleUnhide_Enter(sender As Object, e As EventArgs) Handles ucrReceiverMultipleUnhide.Enter
+        SetHiddenColumns()
+        TestOKEnabled()
+    End Sub
 End Class
