@@ -926,18 +926,18 @@ Public Class ucrDataView
 
     Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
-            Dim iRows As Integer = dlgOptions.GetMaxRows
+            Dim iRows As Integer = frmMain.clsInstatOptions.iMaxRows
             If iRows <= 1000 Then
                 iRows = 1000
             End If
-            Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalRowCount / 1000
+            Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalRowCount / iRows
             ttGoToRowPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" & iTotalPage)
         End If
     End Sub
 
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
-            Dim iCols As Integer = dlgOptions.GetMaxCols
+            Dim iCols As Integer = frmMain.clsInstatOptions.iMaxCols
             If iCols <= 300 Then
                 iCols = 300
             End If
