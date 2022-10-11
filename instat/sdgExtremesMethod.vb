@@ -64,18 +64,18 @@ Public Class sdgExtremesMethod
         ucrInputPrior.SetLinkedDisplayControl(lblPrior)
 
         ucrNudLocation.SetParameter(New RParameter("location", 1))
-        ucrNudLocation.SetMinMax(-5, 10)
+        ucrNudLocation.SetMinMax(-5, 1000)
         ucrNudLocation.DecimalPlaces = 1
         ucrNudLocation.Increment = 0.1
         ucrNudLocation.SetLinkedDisplayControl(grpInitial)
 
         ucrNudScale.SetParameter(New RParameter("scale", 2))
-        ucrNudScale.SetMinMax(-5, 10)
+        ucrNudScale.SetMinMax(-5, 1000)
         ucrNudScale.DecimalPlaces = 1
         ucrNudScale.Increment = 0.1
 
         ucrNudShape.SetParameter(New RParameter("shape", 3))
-        ucrNudShape.SetMinMax(-5, 10)
+        ucrNudShape.SetMinMax(-5, 1000)
         ucrNudShape.DecimalPlaces = 1
         ucrNudShape.Increment = 1
 
