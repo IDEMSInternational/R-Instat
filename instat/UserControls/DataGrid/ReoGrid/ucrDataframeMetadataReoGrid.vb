@@ -42,11 +42,13 @@ Public Class ucrDataframeMetadataReoGrid
         For i = 0 To _clsDataBook.clsDataFrameMetaData.RowCount - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
-                If _clsDataBook.GetDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection.bFilterApplied _
-                    AndAlso grdData.CurrentWorksheet.ColumnHeaders(j).Text = "Rows" Then
-                    grdData.CurrentWorksheet.Cells(row:=i, col:=j).Style.TextColor = Color.Red
-                ElseIf _clsDataBook.GetDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection.bColumnSelectionApplied _
-                    AndAlso grdData.CurrentWorksheet.ColumnHeaders(j).Text = "Columns" Then
+                Dim clsFirstColumnSelection As clsDataFrameFilterOrColumnSelection =
+                        _clsDataBook.GetDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection
+                Dim strColumnHeaderText As String = grdData.CurrentWorksheet.ColumnHeaders(j).Text
+
+                grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
+                If clsFirstColumnSelection.bFilterApplied AndAlso strColumnHeaderText = "Rows" _
+                        OrElse (clsFirstColumnSelection.bColumnSelectionApplied AndAlso strColumnHeaderText = "Columns") Then
                     grdData.CurrentWorksheet.Cells(row:=i, col:=j).Style.TextColor = Color.Red
                 End If
             Next
