@@ -52,8 +52,8 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
-        ucrReceiverMultipleUnhide.strSelectorHeading = "Data Frames"
-        ucrReceiverMultipleUnhide.SetItemType("dataframe")
+        ' ucrReceiverMultipleUnhide.strSelectorHeading = "Data Frames"
+        'ucrReceiverMultipleUnhide.SetItemType("dataframe")
 
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
