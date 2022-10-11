@@ -925,20 +925,24 @@ Public Class ucrDataView
     End Sub
 
     Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
-        Dim iRows As Integer = dlgOptions.GetMaxRows
-        If iRows <= 1000 Then
-            iRows = 1000
+        If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
+            Dim iRows As Integer = dlgOptions.GetMaxRows
+            If iRows <= 1000 Then
+                iRows = 1000
+            End If
+            Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalRowCount / 1000
+            ttGoToRowPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" & iTotalPage)
         End If
-        Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalRowCount / iRows
-        ttGoToRowPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" & iTotalPage)
     End Sub
 
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
-        Dim iCols As Integer = dlgOptions.GetMaxCols
-        If iCols <= 300 Then
-            iCols = 300
+        If lblColNext.Enabled OrElse lblColBack.Enabled Then
+            Dim iCols As Integer = dlgOptions.GetMaxCols
+            If iCols <= 300 Then
+                iCols = 300
+            End If
+            Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalColumnCount / iCols
+            ttGoToRowPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" & iTotalPage)
         End If
-        Dim iTotalPage As Integer = GetCurrentDataFrameFocus().iTotalColumnCount / iCols
-        ttGoToRowPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" & iTotalPage)
     End Sub
 End Class
