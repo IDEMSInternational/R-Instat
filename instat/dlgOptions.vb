@@ -431,6 +431,18 @@ Public Class dlgOptions
         clrEditor = clrNew
     End Sub
 
+    Public ReadOnly Property GetMaxRows() As Integer
+        Get
+            Return ucrNudMaxRows.GetText
+        End Get
+    End Property
+
+    Public ReadOnly Property GetMaxCols() As Integer
+        Get
+            Return ucrNudMaxCols.GetText
+        End Get
+    End Property
+
     Private Sub cmdWorkingDirectory_Click(sender As Object, e As EventArgs) Handles cmdWorkingDirectory.Click
         Dim dlgWorkingDirectory As New FolderBrowserDialog
         If dlgWorkingDirectory.ShowDialog = DialogResult.OK Then

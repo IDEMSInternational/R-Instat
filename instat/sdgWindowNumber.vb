@@ -32,13 +32,21 @@ Public Class sdgWindowNumber
 
     Private Sub InitialiseControls()
         Dim iMax, iDefault As Integer
+        Dim iMaxRows As Integer = dlgOptions.GetMaxRows
+        Dim iMaxCols As Integer = dlgOptions.GetMaxCols
+        If iMaxRows <= 1000 Then
+            iMaxRows = 1000
+        End If
+        If iMaxCols <= 300 Then
+            iMaxCols = 300
+        End If
         Select Case enumWINNUMBERMode
             Case WINNUMBERMode.Row
-                iMax = Math.Round(iNumPage / 1000) + 1
-                iDefault = Math.Round(iEnd / 1000)
+                iMax = Math.Round(iNumPage / iMaxRows)
+                iDefault = Math.Round(iEnd / iMaxRows)
             Case WINNUMBERMode.Col
-                iMax = Math.Round(iNumPage / 300) + 1
-                iDefault = Math.Round(iEnd / 300)
+                iMax = Math.Round(iNumPage / iMaxCols)
+                iDefault = Math.Round(iEnd / iMaxCols)
         End Select
         If iNumPage = iEnd Then
             iDefault = iMax
