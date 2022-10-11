@@ -52,8 +52,6 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
-        ' ucrReceiverMultipleUnhide.strSelectorHeading = "Data Frames"
-        'ucrReceiverMultipleUnhide.SetItemType("dataframe")
 
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
@@ -146,19 +144,20 @@ Public Class dlgHideDataframes
         End If
     End Sub
 
-    Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged, ucrReceiverMultipleUnhide.ControlContentsChanged
+    Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlHideUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHideUnhide.ControlValueChanged, ucrReceiverMultipleUnhide.ControlValueChanged
+    Private Sub ucrPnlHideUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHideUnhide.ControlValueChanged
         If rdoHideDataFrame.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsHideDataFramesFunction)
             clsDummyFunction.AddParameter("checked", "rdoHide", iPosition:=0)
             ucrReceiverMultiple.SetMeAsReceiver()
         Else
-            clsDataUnhideOperator.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
             ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             clsDummyFunction.AddParameter("checked", "rdoUnhide", iPosition:=0)
+            SetHiddenColumns()
+            ucrReceiverMultipleUnhide.SetMeAsReceiver()
         End If
         TestOKEnabled()
     End Sub
@@ -166,5 +165,11 @@ Public Class dlgHideDataframes
     Private Sub ucrReceiverMultipleUnhide_Enter(sender As Object, e As EventArgs) Handles ucrReceiverMultipleUnhide.Enter
         SetHiddenColumns()
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverMultipleUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleUnhide.ControlValueChanged
+        SetHiddenColumns()
+        TestOKEnabled()
+        clsDataUnhideOperator.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
     End Sub
 End Class
