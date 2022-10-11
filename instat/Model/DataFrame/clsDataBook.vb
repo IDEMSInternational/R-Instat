@@ -22,6 +22,7 @@ Imports RDotNet
 Public Class clsDataBook
     Private _RLink As RLink
     Private _lstDataFrames As List(Of clsDataFrame)
+    Private _lstAllDataFrames As List(Of clsDataFrame)
     Private _clsDataFrameMetaData As clsDataFrameMetaData
 
     ''' <summary>
@@ -95,6 +96,10 @@ Public Class clsDataBook
         Return _lstDataFrames.Where(Function(x) x.strName = strName).FirstOrDefault
     End Function
 
+    Public Function GetAllDataFrame(strName As String) As clsDataFrame
+        Return _lstAllDataFrames.Where(Function(x) x.strName = strName).FirstOrDefault
+    End Function
+
     ''' <summary>
     ''' Gets the Column Metadata for the dataframe name given
     ''' </summary>
@@ -131,6 +136,7 @@ Public Class clsDataBook
         'get the recent list of data frame names from R Instant
         Dim lstOfCurrentRDataFrameNames As List(Of String) = GetDataFrameNamesFromR()
 
+        _lstAllDataFrames = _lstDataFrames
         'remove any data frames from this data book that are not in the R Instat object
         _lstDataFrames.RemoveAll(Function(x) Not lstOfCurrentRDataFrameNames.Contains(x.strName))
 

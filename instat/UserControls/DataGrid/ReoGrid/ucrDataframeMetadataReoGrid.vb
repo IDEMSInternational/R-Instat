@@ -43,7 +43,7 @@ Public Class ucrDataframeMetadataReoGrid
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
                 Dim clsFirstColumnSelection As clsDataFrameFilterOrColumnSelection =
-                        _clsDataBook.GetDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection
+                        _clsDataBook.GetAllDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0)).clsFilterOrColumnSelection
                 Dim strColumnHeaderText As String = grdData.CurrentWorksheet.ColumnHeaders(j).Text
 
                 grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
