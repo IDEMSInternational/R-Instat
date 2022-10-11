@@ -455,18 +455,18 @@ Public Class dlgModelling
     Private Sub cmdstanglm_Click(sender As Object, e As EventArgs) Handles cmdstanglm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stanglm(formula= ,family= gaussian, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, subset= ,na.action = NULL,offset = NULL,model = TRUE, x = FALSE, y = TRUE,contrasts = NULL,...,prior = default_prior_coef(family),prior_intercept = default_prior_intercept(family),prior_aux = exponential(autoscale = TRUE),prior_PD = FALSE,algorithm = c(sampling, optimizing, meanfield, fullrank),mean_PPD = algorithm != optimizing && !prior_PD,adapt_delta = NULL,QR = FALSE,sparse = FALSE", 425)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_glm(formula= ,family= gaussian, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, subset= ,na.action = NULL,offset = NULL,model = TRUE, x = FALSE, y = TRUE,contrasts = NULL,prior = default_prior_coef(family),prior_intercept = default_prior_intercept(family),prior_aux = exponential(autoscale = TRUE),prior_PD = FALSE,algorithm = c(sampling, optimizing, meanfield, fullrank),mean_PPD = algorithm != optimizing && !prior_PD,adapt_delta = NULL,QR = FALSE,sparse = FALSE)", 421)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stanglm()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_glm()", 1)
         End If
     End Sub
 
     Private Sub cmdstanpolr_Click(sender As Object, e As EventArgs) Handles cmdstanpolr.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stanpolr(formula=, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights= ,subset= ,na.action = getOption(na.action, na.omit), contrasts = NULL,model = TRUE,method = c(logistic, probit, loglog, cloglog, cauchit), prior = R2,prior_counts = dirichlet(1),shape = NULL,rate = NULL, prior_PD = FALSE,algorithm = c(sampling, meanfield, fullrank),adapt_delta = NULL,do_residuals = NULL", 322)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_polr(formula=, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights= ,subset= ,na.action = getOption(na.action, na.omit), contrasts = NULL,model = TRUE,method = c(logistic, probit, loglog, cloglog, cauchit), prior = R2,prior_counts = dirichlet(1),shape = NULL,rate = NULL, prior_PD = FALSE,algorithm = c(sampling, meanfield, fullrank),adapt_delta = NULL,do_residuals = NULL)", 323)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stanpolr()", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_polr()", 1)
         End If
     End Sub
 
