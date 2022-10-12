@@ -464,14 +464,12 @@ Partial Class dlgOptionsByContextBoxplot
         '
         'toolStripMenuItemBoxplotOptions
         '
-        Me.toolStripMenuItemBoxplotOptions.Enabled = False
         Me.toolStripMenuItemBoxplotOptions.Name = "toolStripMenuItemBoxplotOptions"
         Me.toolStripMenuItemBoxplotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemBoxplotOptions.Text = "Boxplot Options"
         '
         'toolStripMenuItemViolinplotOptions
         '
-        Me.toolStripMenuItemViolinplotOptions.Enabled = False
         Me.toolStripMenuItemViolinplotOptions.Name = "toolStripMenuItemViolinplotOptions"
         Me.toolStripMenuItemViolinplotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemViolinplotOptions.Text = "Violin Options"

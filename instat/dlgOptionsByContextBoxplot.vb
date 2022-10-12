@@ -506,6 +506,12 @@ Public Class dlgOptionsByContextBoxplot
         bResetSubdialog = False
     End Sub
 
+    Private Sub ucrReceiverMeasurement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlPlotType.ControlValueChanged, ucrReceiverContext1.ControlValueChanged
+        cmdOptions.Enabled = True
+        toolStripMenuItemBoxplotOptions.Enabled = rdoBoxplot.Checked
+        toolStripMenuItemViolinplotOptions.Enabled = rdoViolin.Checked
+    End Sub
+
     Private Sub toolStripMenuItemBoxplotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxplotOptions.Click, toolStripMenuItemViolinplotOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsBoxplotViolinGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
