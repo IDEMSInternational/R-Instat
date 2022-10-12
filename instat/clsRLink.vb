@@ -218,7 +218,7 @@ Public Class RLink
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
         Dim strStaticPath = Path.GetFullPath("static")
-        Dim rHome = Path.Combine(strStaticPath, "R-" & strRBundledVersion)
+        Dim rHome = Path.Combine(strStaticPath, "R")
         Dim cpuArchitectureFolder = "i386"
 
         Try
