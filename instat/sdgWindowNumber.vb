@@ -31,31 +31,31 @@ Public Class sdgWindowNumber
     End Sub
 
     Private Sub InitialiseControls()
-        Dim iMax, iDefault As Integer
+        Dim iMax As Double
+        Dim iOutput, iDefault, iRowMax As Integer
         Dim iMaxRows As Integer = frmMain.clsInstatOptions.iMaxRows
         Dim iMaxCols As Integer = frmMain.clsInstatOptions.iMaxCols
-        If iMaxRows <= 1000 Then
-            iMaxRows = 1000
-        End If
-        If iMaxCols <= 300 Then
-            iMaxCols = 300
-        End If
+
         Select Case enumWINNUMBERMode
             Case WINNUMBERMode.Row
-                iMax = Math.Round(iNumPage / iMaxRows)
+                iMax = iNumPage / iMaxRows
                 iDefault = Math.Round(iEnd / iMaxRows)
             Case WINNUMBERMode.Col
-                iMax = Math.Round(iNumPage / iMaxCols)
+                iMax = iNumPage / iMaxCols
                 iDefault = Math.Round(iEnd / iMaxCols)
         End Select
-        If iNumPage = iEnd Then
-            iDefault = iMax
-        ElseIf iStart = 1 Then
-            iDefault = Math.Round(iMax / 2)
+        If Not Integer.TryParse(iMax, iOutput) Then
+            iRowMax = Math.Floor(iMax) + 1
         End If
-        ucrNudPageNumber.SetMinMax(1, iMax)
+        If iNumPage = iEnd Then
+            iDefault = iRowMax
+        ElseIf iStart = 1 Then
+            iDefault = Math.Round(iRowMax / 2)
+        End If
+
+        ucrNudPageNumber.SetMinMax(1, iRowMax)
         ucrNudPageNumber.SetText(iDefault)
-        lblPages.Text = "1-" & iMax & ":"
+        lblPages.Text = "1-" & iRowMax & ":"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgPICSARainfalbuttons.ClickReturn
