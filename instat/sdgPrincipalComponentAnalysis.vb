@@ -16,7 +16,7 @@
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Private bControlsInitialised As Boolean = False
-    Private clsREigenValues, clsREigenVectors, clsRRotation As New RFunction
+    Private clsREigenValues, clsDummyFunction, clsREigenVectors As New RFunction
     Public bFirstLoad As Boolean = True
 
     ' to do:
@@ -44,14 +44,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkEigenvectors.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvectors.SetText("Eigenvectors")
         ucrChkEigenvectors.SetValueIfChecked(Chr(34) & "ind" & Chr(34))
-        ucrChkEigenvectors.AddParameterPresentCondition(True, "value1")
-        ucrChkEigenvectors.AddParameterPresentCondition(False, "value1", False)
-
-        ucrChkRotation.SetParameter(New RParameter("MARGIN", 1))
-        ucrChkRotation.SetText("Rotation")
-        ucrChkRotation.SetValueIfChecked(2)
-        ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
-        ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
+        ucrChkEigenvectors.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNudDim1.SetParameter(New RParameter("first_dim", 0, bNewIncludeArgumentName:=False))
         ucrNudDim1.SetMinMax(1, 2)
@@ -135,9 +128,16 @@ Public Class sdgPrincipalComponentAnalysis
 
         ucrPnlGraphics.AddToLinkedControls(ucrChkIncludePercentage, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrNudDim1, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlGraphics.AddToLinkedControls(ucrNudDim2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlGraphics.AddToLinkedControls(ucrNudDim1, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphics.AddToLinkedControls(ucrNudDim2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudDim1.SetLinkedDisplayControl(lblDim)
+
+        ucrSaveGraph.SetPrefix("pca_graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -147,14 +147,14 @@ Public Class sdgPrincipalComponentAnalysis
         rdoBarPlot.Enabled = False
     End Sub
 
-    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, clsNewRFactor As RFunction, clsNewBaseOperator As ROperator, clsNewRThemeMinimal As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewDummyFunction As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, clsNewVariablesPlotFunctionValue As RFunction, clsNewIndividualsPlotFunctionValue As RFunction, clsNewBiplotFunctionValue As RFunction, clsNewRFactor As RFunction, clsNewBaseOperator As ROperator, clsNewRThemeMinimal As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsRsyntax = clsNewRsyntax
         clsREigenValues = clsNewREigenValues
+        clsDummyFunction = clsNewDummyFunction
         clsREigenVectors = clsNewREigenVectors
-        clsRRotation = clsNewRRotation
         clsRScreePlotFunction = clsNewScreePlotFunction
         clsRVariablesPlotFunction = clsNewVariablesPlotFunction
         clsRIndividualsPlotFunction = clsNewIndividualsPlotFunction
@@ -174,6 +174,11 @@ Public Class sdgPrincipalComponentAnalysis
         ucrNudDim2.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, ucrNudDim2.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
 
+        ucrSaveGraph.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveGraph.AddAdditionalRCode(clsRIndividualsPlotFunction, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsRVariablesPlotFunction, iAdditionalPairNo:=2)
+        ucrSaveGraph.AddAdditionalRCode(clsRBiplotFunction, iAdditionalPairNo:=3)
+
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLabel1.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
@@ -181,8 +186,8 @@ Public Class sdgPrincipalComponentAnalysis
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
         ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrChkEigenvalues.SetRCode(clsREigenValues, bReset, bCloneIfNeeded:=True)
-        ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset, bCloneIfNeeded:=True)
-        ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
+        ucrChkEigenvectors.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+
         ucrPnlGraphics.SetRCode(clsBaseOperator, bReset)
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrNudDim1.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
@@ -205,16 +210,12 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub ucrChkEigenvectors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvectors.ControlValueChanged
         If ucrChkEigenvectors.Checked Then
             clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
-        Else
-            clsRsyntax.RemoveFromAfterCodes(clsREigenVectors)
-        End If
-    End Sub
+            clsDummyFunction.AddParameter("value1", "TRUE", iPosition:=1)
 
-    Private Sub ucrChkRotation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRotation.ControlValueChanged
-        If ucrChkRotation.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
         Else
-            clsRsyntax.RemoveFromAfterCodes(clsRRotation)
+            clsDummyFunction.AddParameter("value1", "FALSE", iPosition:=1)
+            clsRsyntax.RemoveFromAfterCodes(clsREigenVectors)
+
         End If
     End Sub
 

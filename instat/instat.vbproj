@@ -137,6 +137,9 @@
     <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -1483,6 +1486,12 @@
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgVerificationSummaries.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgWindowNumber.Designer.vb">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindowNumber.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
@@ -4806,6 +4815,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVerificationSummaries.resx">
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindowNumber.resx">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
