@@ -2924,12 +2924,14 @@ Partial Class frmMain
         '
         'mnuEditCopySpecial
         '
+        Me.mnuEditCopySpecial.Enabled = False
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
         Me.mnuEditCopySpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
         Me.mnuEditCopySpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditCopySpecial.Tag = "Copy_Special"
         Me.mnuEditCopySpecial.Text = "Copy Special"
+        Me.mnuEditCopySpecial.Visible = False
         '
         'mnuEditPaste
         '
@@ -2941,12 +2943,14 @@ Partial Class frmMain
         '
         'mnuPasteSpecial
         '
+        Me.mnuPasteSpecial.Enabled = False
         Me.mnuPasteSpecial.Name = "mnuPasteSpecial"
         Me.mnuPasteSpecial.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
         Me.mnuPasteSpecial.Size = New System.Drawing.Size(244, 22)
         Me.mnuPasteSpecial.Tag = "Paste"
         Me.mnuPasteSpecial.Text = "Paste New Columns"
+        Me.mnuPasteSpecial.Visible = False
         '
         'mnuEditPasteNewDataFrame
         '
@@ -3321,11 +3325,9 @@ Partial Class frmMain
         '
         'mnuFileImportFromRapidPro
         '
-        Me.mnuFileImportFromRapidPro.Enabled = False
         Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
         Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(232, 22)
         Me.mnuFileImportFromRapidPro.Text = "Import From RapidPro"
-        Me.mnuFileImportFromRapidPro.Visible = False
         '
         'mnuFileImportandTidyNetCDFFile
         '

@@ -2596,3 +2596,13 @@ read_corpora <- function(data){
   } 
   return (data.frame(data_all))
 }
+
+# Bind two data frames
+# and remove any duplicates from data frame x that are in data frame y
+# x = our data to remove duplicates from
+# y = data frame that contains variables in cols argument
+# cols = columns to bind into data1
+cbind_unique <- function(x, y, cols){
+  x <- x %>% dplyr::select(c(setdiff(names(x), cols)))
+  x <- dplyr::bind_cols(x = x, y = dplyr::select(y, tidyselect::all_of(cols)))
+}
