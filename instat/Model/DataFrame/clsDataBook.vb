@@ -117,6 +117,7 @@ Public Class clsDataBook
         'and refresh the data frame metadata from R
         If Not _RLink.bInstatObjectExists Then
             _lstDataFrames.Clear()
+            _lstAllDataFrames.Clear()
             _clsDataFrameMetaData = New clsDataFrameMetaData(_RLink)
             Exit Sub
         End If
@@ -138,7 +139,9 @@ Public Class clsDataBook
 
         'add any data frames from this data book before removing them if not the R Instat object
         For Each clsDatafram In _lstDataFrames
-            _lstAllDataFrames.Add(clsDatafram)
+            If Not _lstAllDataFrames.Contains(clsDatafram) Then
+                _lstAllDataFrames.Add(clsDatafram)
+            End If
         Next
 
         'remove any data frames from this data book that are not in the R Instat object
