@@ -3345,6 +3345,7 @@ Public Class ucrCalculator
         clsUglyFunction.SetPackageName("Zseq")
         clsUglyFunction.SetRCommand("Regular")
         clsUglyFunction.AddParameter("n", "100", iPosition:=0)
+        clsUglyFunction.AddParameter("gmp", "FALSE", iPosition:=1)
 
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
