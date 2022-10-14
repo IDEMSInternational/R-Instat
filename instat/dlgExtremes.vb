@@ -262,14 +262,6 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
 
     Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkExplanatoryModelForLocationParameter.ControlValueChanged, ucrInputThresholdforLocation.ControlValueChanged
         ParameterControl()
-        'If clsFevdFunction.ContainsParameter("method") Then
-        '    If ucrChkExplanatoryModelForLocationParameter.Checked _
-        '        AndAlso clsFevdFunction.GetParameter("method").strArgumentValue = Chr(34) & "Bayesian" & Chr(34) Then
-        '        clsFevdFunction.RemoveParameterByName("priorParams")
-        '        clsFevdFunction.RemoveParameterByName("initial")
-        '        clsFevdFunction.RemoveParameterByName("iter")
-        '    End If
-        'End If
         ucrTryModelling.ResetInputTryMessage()
         TestOkEnabled()
     End Sub
