@@ -29,6 +29,7 @@ Public Class ucrCalculator
     Private strPackageName As String
     Private clsDataFunction As New RFunction
     Private clsRepFunction As New RFunction
+    Private clsZseqFunction As New RFunction
 
     Public Sub New()
 
@@ -3252,7 +3253,6 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ZseqFunctions(strRCommand As String)
-        Dim clsZseqFunction As New RFunction
 
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
@@ -3269,7 +3269,16 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFibonnaci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci2.Click
-        ZseqFunctions("Fibonacci")
+        Dim clsFibonacciFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        clsFibonacciFunction.SetPackageName("Zseq")
+        clsFibonacciFunction.SetRCommand("Fibonacci")
+        clsFibonacciFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFibonacciFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdAbundant_Click(sender As Object, e As EventArgs) Handles cmdAbundant.Click
@@ -3293,7 +3302,16 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPadovan_Click(sender As Object, e As EventArgs) Handles cmdPadovan.Click
-        ZseqFunctions("Padovan")
+        Dim clsPadovanFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        clsPadovanFunction.SetPackageName("Zseq")
+        clsPadovanFunction.SetRCommand("Padovan")
+        clsPadovanFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPadovanFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdTriangle_Click(sender As Object, e As EventArgs) Handles cmdTriangle.Click
@@ -3334,7 +3352,6 @@ Public Class ucrCalculator
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsUglyFunction, iPosition:=0)
         clsRepFunction.AddParameter("length", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
-        clsRepFunction.AddParameter("gmp", "FALSE", iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
     End Sub
