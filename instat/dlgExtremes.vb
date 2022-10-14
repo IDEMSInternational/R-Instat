@@ -29,6 +29,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
     Private bReset As Boolean = True
     Private bResettingDialogue As Boolean = False
     Private bResetSubDialogue As Boolean = False
+    Private strFirstParam As String = "0.1,10,0.1"
     Private Sub dlgExtremes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -111,7 +112,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
         bResetSubDialogue = True
 
         clsConcatenateFunction.SetRCommand("c")
-        clsConcatenateFunction.AddParameter("first", "0.1,10,0.1", iPosition:=0, bIncludeArgumentName:=False)
+        clsConcatenateFunction.AddParameter("first", strFirstParam, iPosition:=0, bIncludeArgumentName:=False)
 
         clsLocationScaleResetOperator.SetOperation("")
         clsLocationScaleResetOperator.bBrackets = False
@@ -261,14 +262,14 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
 
     Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkExplanatoryModelForLocationParameter.ControlValueChanged, ucrInputThresholdforLocation.ControlValueChanged
         ParameterControl()
-        If clsFevdFunction.ContainsParameter("method") Then
-            If ucrChkExplanatoryModelForLocationParameter.Checked _
-                AndAlso clsFevdFunction.GetParameter("method").strArgumentValue = Chr(34) & "Bayesian" & Chr(34) Then
-                clsFevdFunction.RemoveParameterByName("priorParams")
-                clsFevdFunction.RemoveParameterByName("initial")
-                clsFevdFunction.RemoveParameterByName("iter")
-            End If
-        End If
+        'If clsFevdFunction.ContainsParameter("method") Then
+        '    If ucrChkExplanatoryModelForLocationParameter.Checked _
+        '        AndAlso clsFevdFunction.GetParameter("method").strArgumentValue = Chr(34) & "Bayesian" & Chr(34) Then
+        '        clsFevdFunction.RemoveParameterByName("priorParams")
+        '        clsFevdFunction.RemoveParameterByName("initial")
+        '        clsFevdFunction.RemoveParameterByName("iter")
+        '    End If
+        'End If
         ucrTryModelling.ResetInputTryMessage()
         TestOkEnabled()
     End Sub
@@ -315,6 +316,24 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
 
             grpFirstCalc.Visible = False
             grpSecondCalc.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrReceiverExpressionExplanatoryModelForLocParam_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionExplanatoryModelForLocParam.ControlValueChanged
+        Dim strExplanatory As String = ucrReceiverExpressionExplanatoryModelForLocParam.GetText()
+        If ucrChkExplanatoryModelForLocationParameter.Checked _
+             AndAlso Not ucrReceiverExpressionExplanatoryModelForLocParam.IsEmpty() Then
+            Dim strTempParam As String = strFirstParam
+            If strExplanatory.Contains("+") Then
+                For i = 0 To strExplanatory.Split("+").Length - 1
+                    strTempParam &= ",0.1"
+                Next
+            ElseIf Not IsNumeric(strExplanatory) Then
+                strTempParam &= ",0.1"
+            End If
+            clsConcatenateFunction.AddParameter("first", strTempParam, iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsConcatenateFunction.AddParameter("first", strFirstParam, iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
 End Class
