@@ -45,7 +45,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 523
+        ucrBase.iHelpTopicID = 415
         ucrChkWeights.Enabled = False ' temporary because of bug in R functions being used
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
