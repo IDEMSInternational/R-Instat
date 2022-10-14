@@ -372,6 +372,7 @@ Partial Class frmMain
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
@@ -678,7 +679,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2959,6 +2959,13 @@ Partial Class frmMain
         Me.mnuEditPasteNewDataFrame.Tag = "Paste"
         Me.mnuEditPasteNewDataFrame.Text = "Paste New Data Frame"
         '
+        'mnuEditWordwrap
+        '
+        Me.mnuEditWordwrap.Enabled = False
+        Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
+        Me.mnuEditWordwrap.Size = New System.Drawing.Size(244, 22)
+        Me.mnuEditWordwrap.Text = "Wordwrap"
+        '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
@@ -5111,12 +5118,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuEditWordwrap
-        '
-        Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
-        Me.mnuEditWordwrap.Size = New System.Drawing.Size(244, 22)
-        Me.mnuEditWordwrap.Text = "Wordwrap"
         '
         'frmMain
         '
