@@ -172,7 +172,11 @@ Partial Class dlgImportFromPostgres
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblChooseDataset)
         Me.Controls.Add(Me.lblUsername)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgImportFromPostgres"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "dlgImportFromPostgres"
         Me.ResumeLayout(False)
         Me.PerformLayout()
