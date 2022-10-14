@@ -105,6 +105,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverSecondSkimrGroupByFactor.SetLinkedDisplayControl(lblSecondGroupByFactor)
         ucrReceiverSecondSkimrGroupByFactor.SetDataType("factor")
 
+        ucrReceiverThreeVariableThirdVariable.SetParameter(New RParameter("second_factors", 3, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableThirdVariable.SetParameterIsString()
         ucrReceiverThreeVariableThirdVariable.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverThreeVariableThirdVariable.SetLinkedDisplayControl(lblThirdVariable)
@@ -1077,7 +1078,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub MatchingCategoricalByCategoricalVariables(sender As ucrReceiver)
-        If Not bRcodeSet OrElse rdoSkim.Checked Then
+        If Not bRcodeSet OrElse rdoSkim.Checked OrElse sender.IsEmpty Then
             Exit Sub
         End If
         Dim bContainedInMultipleReceiver As Boolean = False
