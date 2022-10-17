@@ -3689,13 +3689,13 @@
   "Data Frame Name": "Nom de tableau de données",
   "Rename With": "Renommer avec",
   "Rename Columns": "Renommer les colonnes",
-  "Command runs without error": "Command runs without error",
-  "Command runs ok": "Command runs ok",
-  "Problem detected running Command or no output to display.": "Problem detected running Command or no output to display.",
-  "Command produced an error. Modify input before running.": "Command produced an error. Modify input before running.",
-  "Model produced an error or no output to display.": "Model produced an error or no output to display.",
-  "Model runs without error": "Model runs without error",
-  "Model runs ok": "Model runs ok",
-  "Problem detected running Model or no output to display.": "Problem detected running Model or no output to display.",
-  "Model produced an error. Modify input before running.": "Model produced an error. Modify input before running."
+  "Command runs without error": "La commande s'exécute sans erreur",
+  "Command runs ok": "La commande s'exécute correctement",
+  "Problem detected running Command or no output to display.": "Problème détecté lors de l'exécution de la commande ou aucune sortie à afficher.",
+  "Command produced an error. Modify input before running.": "La commande a produit une erreur. Modifiez l'entrée avant l'exécution.",
+  "Model produced an error or no output to display.": "Le modèle a produit une erreur ou aucune sortie à afficher.",
+  "Model runs without error": "Le modèle s'exécute sans erreur",
+  "Model runs ok": "Le modèle s'exécute correctement",
+  "Problem detected running Model or no output to display.": "Problème détecté lors de l'exécution du modèle ou aucune sortie à afficher.",
+  "Model produced an error. Modify input before running.": "Le modèle a produit une erreur. Modifiez l'entrée avant l'exécution."
 }
