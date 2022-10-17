@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgWindowNumber
     Public iPage As Integer
-    Public iNumPage, iStart, iEnd As Integer
+    Public iTotalRowOrColum, iStartRowOrColumn, iEndRowOrColumn As Integer
 
     Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
@@ -32,30 +32,31 @@ Public Class sdgWindowNumber
 
     Private Sub InitialiseControls()
         Dim dMax As Double
-        Dim iDefault As Integer
         Dim iMaxRows As Integer = frmMain.clsInstatOptions.iMaxRows
         Dim iMaxCols As Integer = frmMain.clsInstatOptions.iMaxCols
+        Dim iDefaultPage As Integer
 
         Select Case enumWINNUMBERMode
             Case WINNUMBERMode.Row
-                dMax = iNumPage / iMaxRows
-                iDefault = Math.Round(iEnd / iMaxRows)
+                dMax = iTotalRowOrColum / iMaxRows
+                iDefaultPage = iEndRowOrColumn / iMaxRows
             Case WINNUMBERMode.Col
-                dMax = iNumPage / iMaxCols
-                iDefault = Math.Round(iEnd / iMaxCols)
+                dMax = iTotalRowOrColum / iMaxCols
+                iDefaultPage = iEndRowOrColumn / iMaxCols
         End Select
         Dim iRowOrColMaxPages = Math.Floor(dMax)
         If Not iRowOrColMaxPages = dMax Then
             iRowOrColMaxPages = iRowOrColMaxPages + 1
         End If
-        If iNumPage = iEnd Then
-            iDefault = iRowOrColMaxPages
-        ElseIf iStart = 1 Then
-            iDefault = Math.Round(iRowOrColMaxPages / 2)
+
+        If iStartRowOrColumn = 1 Then
+            iDefaultPage = iRowOrColMaxPages / 2
+        ElseIf iTotalRowOrColum = iEndRowOrColumn Then
+            iDefaultPage = iRowOrColMaxPages
         End If
 
         ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
-        ucrNudPageNumber.SetText(iDefault)
+        ucrNudPageNumber.SetText(iDefaultPage)
         lblPages.Text = "1-" & iRowOrColMaxPages & ":"
     End Sub
 

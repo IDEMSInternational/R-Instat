@@ -895,9 +895,9 @@ Public Class ucrDataView
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
-            sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalRowCount
-            sdgWindowNumber.iStart = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
-            sdgWindowNumber.iEnd = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+            sdgWindowNumber.iTotalRowOrColum = GetCurrentDataFrameFocus().iTotalRowCount
+            sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
+            sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = sdgWindowNumber.iPage
             If iPageNum > 0 Then
@@ -910,9 +910,9 @@ Public Class ucrDataView
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
-            sdgWindowNumber.iNumPage = GetCurrentDataFrameFocus().iTotalColumnCount
-            sdgWindowNumber.iStart = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
-            sdgWindowNumber.iEnd = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
+            sdgWindowNumber.iTotalRowOrColum = GetCurrentDataFrameFocus().iTotalColumnCount
+            sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
+            sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = sdgWindowNumber.iPage
             If iPageNum > 0 Then
