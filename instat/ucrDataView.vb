@@ -938,7 +938,7 @@ Public Class ucrDataView
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             Dim iOutput, iColMax As Integer
-            Dim iTotalPage As Double = GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols
+            Dim dTotalPage As Double = GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols
             If Not Integer.TryParse(iTotalPage, iOutput) Then
                 iColMax = Math.Floor(iTotalPage) + 1
             End If
