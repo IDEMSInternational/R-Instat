@@ -927,7 +927,7 @@ Public Class ucrDataView
     Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             Dim iOutput, iRowMax As Integer
-            Dim iTotalPage As Double = GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows
+            Dim dTotalPage As Double = GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows
             If Not Integer.TryParse(iTotalPage, iOutput) Then
                 iRowMax = Math.Floor(iTotalPage) + 1
             End If
