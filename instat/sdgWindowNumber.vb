@@ -32,7 +32,7 @@ Public Class sdgWindowNumber
 
     Private Sub InitialiseControls()
         Dim dMax As Double
-        Dim iOutput, iDefault, iRowMax As Integer
+        Dim iDefault As Integer
         Dim iMaxRows As Integer = frmMain.clsInstatOptions.iMaxRows
         Dim iMaxCols As Integer = frmMain.clsInstatOptions.iMaxCols
 
@@ -44,18 +44,19 @@ Public Class sdgWindowNumber
                 dMax = iNumPage / iMaxCols
                 iDefault = Math.Round(iEnd / iMaxCols)
         End Select
-        If Not Integer.TryParse(dMax, iOutput) Then
-            iRowMax = Math.Floor(dMax) + 1
+        Dim iRowOrColMaxPages = Math.Floor(dMax)
+        If Not iRowOrColMaxPages = dMax Then
+            iRowOrColMaxPages = iRowOrColMaxPages + 1
         End If
         If iNumPage = iEnd Then
-            iDefault = iRowMax
+            iDefault = iRowOrColMaxPages
         ElseIf iStart = 1 Then
-            iDefault = Math.Round(iRowMax / 2)
+            iDefault = Math.Round(iRowOrColMaxPages / 2)
         End If
 
-        ucrNudPageNumber.SetMinMax(1, iRowMax)
+        ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
         ucrNudPageNumber.SetText(iDefault)
-        lblPages.Text = "1-" & iRowMax & ":"
+        lblPages.Text = "1-" & iRowOrColMaxPages & ":"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgPICSARainfalbuttons.ClickReturn
