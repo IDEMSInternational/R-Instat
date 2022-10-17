@@ -46,15 +46,17 @@ Public Class ucrColumnMetadataReoGrid
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = columnMetaData.strRowName(i)
         Next
-        Dim clsDataFramePage As clsDataFramePage = _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name).clsVisibleDataFramePage
-        For i = 0 To clsDataFramePage.lstColumns.Count - 1
-            For j = 0 To grdData.CurrentWorksheet.Rows - 1
-                Dim strRowValue As String = grdData.CurrentWorksheet(row:=j, col:=0)
-                If strRowValue = clsDataFramePage.lstColumns(i).strDisplayName Then
-                    grdData.CurrentWorksheet.Cells(row:=j, col:=0).Style.TextColor = Color.Red
-                End If
+        Dim clsDataFrame As clsDataFrame = _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name)
+        If clsDataFrame.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            For i = 0 To clsDataFrame.clsVisibleDataFramePage.lstColumns.Count - 1
+                For j = 0 To grdData.CurrentWorksheet.Rows - 1
+                    Dim strRowValue As String = grdData.CurrentWorksheet(row:=j, col:=0)
+                    If strRowValue = clsDataFrame.clsVisibleDataFramePage.lstColumns(i).strName Then
+                        grdData.CurrentWorksheet.Cells(row:=j, col:=0).Style.TextColor = Color.Red
+                    End If
+                Next
             Next
-        Next
+        End If
     End Sub
 
     Public Function GetSelectedColumns() As List(Of String) Implements IColumnMetaDataGrid.GetSelectedColumns

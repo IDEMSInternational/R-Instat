@@ -55,9 +55,9 @@ Public Class ucrColumnMetadata
         End If
 
         _grid.CurrentWorksheet = fillWorksheet
+        _grid.UpdateWorksheetStyle(fillWorksheet)
         _grid.AddColumns(dataFrame.clsColumnMetaData)
         _grid.AddRowData(dataFrame.clsColumnMetaData)
-        _grid.UpdateWorksheetStyle(fillWorksheet)
         dataFrame.clsColumnMetaData.HasChanged = False
     End Sub
 
