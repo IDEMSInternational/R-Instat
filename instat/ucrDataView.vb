@@ -899,8 +899,7 @@ Public Class ucrDataView
             sdgWindowNumber.iStart = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
             sdgWindowNumber.iEnd = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
-            Dim iPageNum As Integer = 0
-            iPageNum = sdgWindowNumber.iPage
+            Dim iPageNum As Integer = sdgWindowNumber.iPage
             If iPageNum > 0 Then
                 GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPageNum)
                 RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
@@ -915,8 +914,7 @@ Public Class ucrDataView
             sdgWindowNumber.iStart = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
             sdgWindowNumber.iEnd = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
-            Dim iPageNum As Integer = 0
-            iPageNum = sdgWindowNumber.iPage
+            Dim iPageNum As Integer = sdgWindowNumber.iPage
             If iPageNum > 0 Then
                 GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPageNum)
                 RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
@@ -928,8 +926,8 @@ Public Class ucrDataView
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             Dim iOutput, iRowMax As Integer
             Dim dTotalPage As Double = GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows
-            If Not Integer.TryParse(iTotalPage, iOutput) Then
-                iRowMax = Math.Floor(iTotalPage) + 1
+            If Not Integer.TryParse(dTotalPage, iOutput) Then
+                iRowMax = Math.Floor(dTotalPage) + 1
             End If
             ttGoToRowOrColPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" & iRowMax)
         End If
@@ -939,8 +937,8 @@ Public Class ucrDataView
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             Dim iOutput, iColMax As Integer
             Dim dTotalPage As Double = GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols
-            If Not Integer.TryParse(iTotalPage, iOutput) Then
-                iColMax = Math.Floor(iTotalPage) + 1
+            If Not Integer.TryParse(dTotalPage, iOutput) Then
+                iColMax = Math.Floor(dTotalPage) + 1
             End If
             ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" & iColMax)
         End If
