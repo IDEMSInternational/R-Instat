@@ -38,14 +38,14 @@ Public Class sdgWindowNumber
 
         Select Case enumWINNUMBERMode
             Case WINNUMBERMode.Row
-                iMax = iNumPage / iMaxRows
+                dMax = iNumPage / iMaxRows
                 iDefault = Math.Round(iEnd / iMaxRows)
             Case WINNUMBERMode.Col
-                iMax = iNumPage / iMaxCols
+                dMax = iNumPage / iMaxCols
                 iDefault = Math.Round(iEnd / iMaxCols)
         End Select
-        If Not Integer.TryParse(iMax, iOutput) Then
-            iRowMax = Math.Floor(iMax) + 1
+        If Not Integer.TryParse(dMax, iOutput) Then
+            iRowMax = Math.Floor(dMax) + 1
         End If
         If iNumPage = iEnd Then
             iDefault = iRowMax
