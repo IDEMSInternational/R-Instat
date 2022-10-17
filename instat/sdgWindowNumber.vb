@@ -19,7 +19,7 @@ Public Class sdgWindowNumber
     Public iPage As Integer
     Public iNumPage, iStart, iEnd As Integer
 
-    Public enumWINNUMBERMode As String = WINNUMBERMode.Row
+    Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
         Row
         Col
