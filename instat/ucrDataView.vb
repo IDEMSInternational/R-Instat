@@ -93,9 +93,9 @@ Public Class ucrDataView
             Exit Sub
         End If
         _grid.CurrentWorksheet = fillWorkSheet
+        _grid.UpdateWorksheetStyle(fillWorkSheet)
         _grid.AddColumns(dataFrame.clsVisibleDataFramePage)
         _grid.AddRowData(dataFrame)
-        _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
         RefreshDisplayInformation()
     End Sub
