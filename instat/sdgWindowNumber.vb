@@ -31,7 +31,7 @@ Public Class sdgWindowNumber
     End Sub
 
     Private Sub InitialiseControls()
-        Dim iMax As Double
+        Dim dMax As Double
         Dim iOutput, iDefault, iRowMax As Integer
         Dim iMaxRows As Integer = frmMain.clsInstatOptions.iMaxRows
         Dim iMaxCols As Integer = frmMain.clsInstatOptions.iMaxCols
