@@ -213,7 +213,8 @@ Public Class dlgClimSoft
         Dim strQuery As String
         Dim strSelectedColumn As String = dctStationColumns.Item(ucrCboStations.GetText).Trim("""")
 
-        strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM station WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
+        strQuery = "SELECT DISTINCT " & strSelectedColumn &
+            " FROM station WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
         If ucrReceiverStations.strDatabaseQuery = strQuery Then
             Return False
         End If
@@ -252,12 +253,20 @@ Public Class dlgClimSoft
         Return True
     End Function
 
-    Private Sub ucrComboBoxStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboStations.ControlValueChanged
+    Private Sub ucrCboObsTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboObsTable.ControlValueChanged
         If SetStationsReceiverQuery() Then
             'set as selected receiver. will also execute the receiver's sql query
             ucrReceiverStations.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Sub ucrCboStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboStations.ControlValueChanged
+        If SetStationsReceiverQuery() Then
+            'set as selected receiver. will also execute the receiver's sql query
+            ucrReceiverStations.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub ucrReceiverStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStations.ControlValueChanged
         If Not bIgnoreReceiverChanges Then
             SetStationElementsRecieverQuery()
@@ -269,6 +278,18 @@ Public Class dlgClimSoft
             'set as selected receiver. will also execute receiver's sql the query
             ucrReceiverElements.SetMeAsReceiver()
         End If
+    End Sub
+
+
+    Private Sub ucrCboElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboElements.ControlValueChanged
+        If SetStationElementsRecieverQuery() Then
+            'set as selected receiver. will also execute receiver's sql the query
+            ucrReceiverElements.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStations.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrStackDataControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlValueChanged
@@ -291,9 +312,7 @@ Public Class dlgClimSoft
         'End If
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStations.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
+
 
     Private Sub CheckAndUpdateConnectionStatus()
         If sdgImportFromClimSoft.IsConnectionIsActive() Then
