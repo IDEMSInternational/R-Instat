@@ -17,14 +17,14 @@
 Imports instat.Translations
 Public Class sdgWindowNumber
     ''' <summary>
-    ''' Number of the page to display
+    ''' Page number
     ''' </summary>
     Public iPage As Integer
 
     ''' <summary>
-    ''' iTotalRowOrColumn total number or rows or columns of a data frame depending on the mode i.e Row or Column
-    ''' iStartRowOrColumn value of starting a row or column depending on the mode i.e Row or Column
-    ''' iEndRowOrColumn number of rows or columns displayed in a specific window depending on the mode i.e Row or Column
+    ''' iTotalRowOrColumn total number of rows or columns of a data frame depending on the mode i.e Row or Column
+    ''' iStartRowOrColumn starting value of a row or column in a page depending on the mode i.e Row or Column
+    ''' iEndRowOrColumn ending value of  a row or column in a page depending on the mode i.e Row or Column
     ''' </summary>
     Public iTotalRowOrColumn, iStartRowOrColumn, iEndRowOrColumn As Integer
 
