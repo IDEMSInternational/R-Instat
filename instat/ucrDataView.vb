@@ -895,7 +895,7 @@ Public Class ucrDataView
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
-            sdgWindowNumber.iTotalRowOrColum = GetCurrentDataFrameFocus().iTotalRowCount
+            sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalRowCount
             sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
@@ -910,7 +910,7 @@ Public Class ucrDataView
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
-            sdgWindowNumber.iTotalRowOrColum = GetCurrentDataFrameFocus().iTotalColumnCount
+            sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalColumnCount
             sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
@@ -933,12 +933,8 @@ Public Class ucrDataView
 
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
-            Dim dTotalPage As Double = GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols
-            Dim iCols = Math.Floor(dTotalPage)
-            If Not iCols = dTotalPage Then
-                iCols += 1
-            End If
-            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" & iCols)
+            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If

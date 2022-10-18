@@ -16,8 +16,17 @@
 
 Imports instat.Translations
 Public Class sdgWindowNumber
+    ''' <summary>
+    ''' Number of the page to display
+    ''' </summary>
     Public iPage As Integer
-    Public iTotalRowOrColum, iStartRowOrColumn, iEndRowOrColumn As Integer
+
+    ''' <summary>
+    ''' iTotalRowOrColumn total number or rows or columns of a data frame depending on the mode i.e Row or Column
+    ''' iStartRowOrColumn value of starting a row or column depending on the mode i.e Row or Column
+    ''' iEndRowOrColumn number of rows or columns displayed in a specific window depending on the mode i.e Row or Column
+    ''' </summary>
+    Public iTotalRowOrColumn, iStartRowOrColumn, iEndRowOrColumn As Integer
 
     Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
@@ -39,11 +48,11 @@ Public Class sdgWindowNumber
         Dim iDefaultPage As Integer = Math.Ceiling(CDbl(iEndRowOrColumn / iMaxRowsCols))
 
         ' the maximum number of row/col pages 
-        Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColum / iMaxRowsCols))
+        Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColumn / iMaxRowsCols))
 
         If iStartRowOrColumn = 1 Then
             iDefaultPage = iRowOrColMaxPages / 2
-        ElseIf iTotalRowOrColum = iEndRowOrColumn Then
+        ElseIf iTotalRowOrColumn = iEndRowOrColumn Then
             iDefaultPage = iRowOrColMaxPages
         End If
 
