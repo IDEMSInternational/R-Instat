@@ -34,6 +34,7 @@ Partial Class dlgWordwrap
         Me.ucrBase = New instat.ucrButtons()
         Me.lblAlign = New System.Windows.Forms.Label()
         Me.ucrAlignment = New instat.ucrInputComboBox()
+        Me.lblOptions = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrSelectorForWrapText
@@ -74,16 +75,16 @@ Partial Class dlgWordwrap
         'ucrPnlTextWrap
         '
         Me.ucrPnlTextWrap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTextWrap.Location = New System.Drawing.Point(11, 237)
+        Me.ucrPnlTextWrap.Location = New System.Drawing.Point(18, 237)
         Me.ucrPnlTextWrap.Name = "ucrPnlTextWrap"
-        Me.ucrPnlTextWrap.Size = New System.Drawing.Size(211, 30)
+        Me.ucrPnlTextWrap.Size = New System.Drawing.Size(204, 30)
         Me.ucrPnlTextWrap.TabIndex = 14
         '
         'rdoUnWrapText
         '
         Me.rdoUnWrapText.AutoSize = True
         Me.rdoUnWrapText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnWrapText.Location = New System.Drawing.Point(122, 243)
+        Me.rdoUnWrapText.Location = New System.Drawing.Point(86, 243)
         Me.rdoUnWrapText.Name = "rdoUnWrapText"
         Me.rdoUnWrapText.Size = New System.Drawing.Size(62, 17)
         Me.rdoUnWrapText.TabIndex = 16
@@ -129,7 +130,7 @@ Partial Class dlgWordwrap
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(21, 366)
+        Me.ucrNewColName.Location = New System.Drawing.Point(29, 333)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(331, 22)
@@ -139,7 +140,7 @@ Partial Class dlgWordwrap
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(18, 398)
+        Me.ucrBase.Location = New System.Drawing.Point(18, 361)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
@@ -148,7 +149,7 @@ Partial Class dlgWordwrap
         '
         Me.lblAlign.AutoSize = True
         Me.lblAlign.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlign.Location = New System.Drawing.Point(70, 333)
+        Me.lblAlign.Location = New System.Drawing.Point(201, 283)
         Me.lblAlign.Name = "lblAlign"
         Me.lblAlign.Size = New System.Drawing.Size(67, 13)
         Me.lblAlign.TabIndex = 23
@@ -160,16 +161,27 @@ Partial Class dlgWordwrap
         Me.ucrAlignment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrAlignment.GetSetSelectedIndex = -1
         Me.ucrAlignment.IsReadOnly = False
-        Me.ucrAlignment.Location = New System.Drawing.Point(138, 331)
+        Me.ucrAlignment.Location = New System.Drawing.Point(269, 281)
         Me.ucrAlignment.Name = "ucrAlignment"
         Me.ucrAlignment.Size = New System.Drawing.Size(136, 23)
         Me.ucrAlignment.TabIndex = 24
+        '
+        'lblOptions
+        '
+        Me.lblOptions.AutoSize = True
+        Me.lblOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblOptions.Location = New System.Drawing.Point(15, 225)
+        Me.lblOptions.Name = "lblOptions"
+        Me.lblOptions.Size = New System.Drawing.Size(46, 13)
+        Me.lblOptions.TabIndex = 25
+        Me.lblOptions.Text = "Options:"
         '
         'dlgWordwrap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 460)
+        Me.ClientSize = New System.Drawing.Size(449, 416)
+        Me.Controls.Add(Me.lblOptions)
         Me.Controls.Add(Me.lblAlign)
         Me.Controls.Add(Me.ucrAlignment)
         Me.Controls.Add(Me.ucrNewColName)
@@ -205,4 +217,5 @@ Partial Class dlgWordwrap
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblAlign As Label
     Friend WithEvents ucrAlignment As ucrInputComboBox
+    Friend WithEvents lblOptions As Label
 End Class

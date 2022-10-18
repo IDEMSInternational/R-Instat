@@ -61,6 +61,7 @@ Public Class dlgWordwrap
         ucrPnlTextWrap.AddFunctionNamesCondition(rdoWrapText, "str_wrap")
         ucrPnlTextWrap.AddFunctionNamesCondition(rdoUnWrapText, "str_replace_all")
         ucrPnlTextWrap.AddToLinkedControls(ucrNudWidthWrap, {rdoWrapText}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTextWrap.SetLinkedDisplayControl(lblOptions)
 
         'ucrNudWidthWrap
         ucrNudWidthWrap.SetParameter(New RParameter("width", 1))
@@ -116,10 +117,9 @@ Public Class dlgWordwrap
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverWrapText.IsEmpty()) AndAlso ucrNewColName.IsComplete() Then
-            If rdoWrapText.Checked OrElse rdoUnWrapText.Checked Then
-                ucrBase.OKEnabled(True)
-            End If
+        If rdoWrapText.Checked OrElse rdoUnWrapText.Checked Then
+            ucrBase.OKEnabled(True)
+        Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
@@ -136,20 +136,10 @@ Public Class dlgWordwrap
         End If
     End Sub
 
-    Private Sub ucrPnlTextWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextWrap.ControlValueChanged
-        If rdoWrapText.Checked Then
-            ucrNudWidthWrap.Visible = True
-        Else
-            ucrNudWidthWrap.Visible = False
-            ucrReceiverWrapText.SetMeAsReceiver()
-        End If
-        ChangeBaseFunction()
-    End Sub
-
     Private Sub ChangeBaseFunction()
         If rdoWrapText.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
-        ElseIf rdoUnWrapText.Checked Then
+        Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
         End If
     End Sub
