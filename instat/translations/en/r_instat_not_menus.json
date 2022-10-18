@@ -3701,4 +3701,11 @@
   "Distance": "Distance",
   "Whole Data Frame": "Whole Data Frame",
   "Centre": "Centre",
-  "Display As Data Frame": "Display As Data Frame"}
+  "Display As Data Frame": "Display As Data Frame",
+  "Name": "Name",
+  "Lists": "Lists",
+  "Variable Name": "Variable Name",
+  "Variable Label": "Variable Label",
+  "Levels": "Levels",
+  "Category": "Category",
+  "Show Command": "Show Command"}
