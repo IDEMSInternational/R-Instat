@@ -52,8 +52,6 @@ Public Class sdgWindowNumber
 
         If iStartRowOrColumn = 1 Then
             iDefaultPage = iRowOrColMaxPages / 2
-        ElseIf iTotalRowOrColumn = iEndRowOrColumn Then
-            iDefaultPage = iRowOrColMaxPages
         End If
 
         ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
