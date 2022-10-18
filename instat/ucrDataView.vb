@@ -924,12 +924,8 @@ Public Class ucrDataView
 
     Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
-            Dim dTotalPage As Double = GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows
-            Dim iRows = Math.Floor(dTotalPage)
-            If Not iRows = dTotalPage Then
-                iRows += 1
-            End If
-            ttGoToRowOrColPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" & iRows)
+            ttGoToRowOrColPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If
