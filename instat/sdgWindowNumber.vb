@@ -50,10 +50,6 @@ Public Class sdgWindowNumber
         ' the maximum number of row/col pages 
         Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColumn / iMaxRowsCols))
 
-        If iStartRowOrColumn = 1 Then
-            iDefaultPage = iRowOrColMaxPages / 2
-        End If
-
         ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
         ucrNudPageNumber.SetText(iDefaultPage)
         lblPages.Text = "1-" & iRowOrColMaxPages & ":"
