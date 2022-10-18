@@ -372,6 +372,7 @@ Partial Class frmMain
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
@@ -2874,7 +2875,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 20)
         Me.mnuEdit.Tag = "Edit"
@@ -2957,6 +2958,13 @@ Partial Class frmMain
         Me.mnuEditPasteNewDataFrame.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditPasteNewDataFrame.Tag = "Paste"
         Me.mnuEditPasteNewDataFrame.Text = "Paste New Data Frame"
+        '
+        'mnuEditWordwrap
+        '
+        Me.mnuEditWordwrap.Enabled = False
+        Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
+        Me.mnuEditWordwrap.Size = New System.Drawing.Size(244, 22)
+        Me.mnuEditWordwrap.Text = "Wordwrap"
         '
         'mnuEditSelectAll
         '
@@ -5807,4 +5815,5 @@ Partial Class frmMain
     Friend WithEvents mnuOptionsByContextCropModel As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromRapidPro As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromPostgres As ToolStripMenuItem
+    Friend WithEvents mnuEditWordwrap As ToolStripMenuItem
 End Class

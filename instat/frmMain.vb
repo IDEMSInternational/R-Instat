@@ -2474,4 +2474,8 @@ Public Class frmMain
     Private Sub mnuFileImportFromPostgres_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromPostgres.Click
         dlgImportFromPostgres.ShowDialog()
     End Sub
+
+    Private Sub mnuEditWordwrap_Click(sender As Object, e As EventArgs) Handles mnuEditWordwrap.Click
+        dlgWordwrap.ShowDialog()
+    End Sub
 End Class
