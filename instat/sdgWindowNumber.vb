@@ -31,23 +31,15 @@ Public Class sdgWindowNumber
     End Sub
 
     Private Sub InitialiseControls()
-        Dim dMax As Double
-        Dim iMaxRows As Integer = frmMain.clsInstatOptions.iMaxRows
-        Dim iMaxCols As Integer = frmMain.clsInstatOptions.iMaxCols
-        Dim iDefaultPage As Integer
+        ' the maximum number of rows/columns to display
+        Dim iMaxRowsCols = If(enumWINNUMBERMode = WINNUMBERMode.Row,
+                frmMain.clsInstatOptions.iMaxRows, frmMain.clsInstatOptions.iMaxCols)
 
-        Select Case enumWINNUMBERMode
-            Case WINNUMBERMode.Row
-                dMax = iTotalRowOrColum / iMaxRows
-                iDefaultPage = iEndRowOrColumn / iMaxRows
-            Case WINNUMBERMode.Col
-                dMax = iTotalRowOrColum / iMaxCols
-                iDefaultPage = iEndRowOrColumn / iMaxCols
-        End Select
-        Dim iRowOrColMaxPages = Math.Floor(dMax)
-        If Not iRowOrColMaxPages = dMax Then
-            iRowOrColMaxPages = iRowOrColMaxPages + 1
-        End If
+        ' the current page number displayed
+        Dim iDefaultPage As Integer = Math.Ceiling(CDbl(iEndRowOrColumn / iMaxRowsCols))
+
+        ' the maximum number of row/col pages 
+        Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColum / iMaxRowsCols))
 
         If iStartRowOrColumn = 1 Then
             iDefaultPage = iRowOrColMaxPages / 2
