@@ -27,7 +27,7 @@ Public Class dlgDescribeTwoVariable
            clsSummaryMapFunction, clsCombineMultipleColumnsFunction, clsCombineFactorsFunction,
            clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction,
            clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction As New RFunction
-
+    Private clsTempCustomizeFunction As New RFunction
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapFrequencyPipeOperator,
              clsMmtableTildeOperator, clsDataSelectTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
@@ -471,6 +471,7 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
         ChangeLocations()
+        MissingOptions()
         TestOKEnabled()
     End Sub
 
@@ -480,7 +481,15 @@ Public Class dlgDescribeTwoVariable
         Else
             clsRCorrelationFunction.RemoveParameterByName("use")
         End If
-        cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
+        MissingOptions()
+    End Sub
+
+    Private Sub MissingOptions()
+        If ucrChkOmitMissing.Checked AndAlso strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+            cmdMissingOptions.Enabled = True
+        Else
+            cmdMissingOptions.Enabled = False
+        End If
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged

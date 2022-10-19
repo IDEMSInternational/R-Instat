@@ -90,6 +90,7 @@ Public Class dlgSummaryTables
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+        ucrChkOmitMissing.SetLinkedDisplayControl(cmdMissingOptions)
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 6))
         ucrChkDisplayMargins.SetText("Display Outer Margins")
@@ -628,5 +629,15 @@ Public Class dlgSummaryTables
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
+        cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
+    End Sub
+
+    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsSummaryDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptions.ShowDialog()
     End Sub
 End Class

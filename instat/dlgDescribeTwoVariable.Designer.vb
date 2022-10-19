@@ -120,9 +120,9 @@ Partial Class dlgDescribeTwoVariable
         Me.grpOptions.Controls.Add(Me.cmdMissingOptions)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
-        Me.grpOptions.Location = New System.Drawing.Point(256, 250)
+        Me.grpOptions.Location = New System.Drawing.Point(242, 222)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(155, 103)
+        Me.grpOptions.Size = New System.Drawing.Size(169, 103)
         Me.grpOptions.TabIndex = 12
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -537,9 +537,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.rdoThreeVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpFrequency)
-        Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblNumericVariable)
-        Me.Controls.Add(Me.ucrReceiverNumericVariable)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.ucrReceiverSecondFactor)
         Me.Controls.Add(Me.grpOptions)
@@ -554,6 +552,8 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
         Me.Controls.Add(Me.grpSummaries)
+        Me.Controls.Add(Me.grpDisplay)
+        Me.Controls.Add(Me.ucrReceiverNumericVariable)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
