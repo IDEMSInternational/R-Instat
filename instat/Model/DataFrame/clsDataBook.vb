@@ -138,9 +138,9 @@ Public Class clsDataBook
         Dim lstOfCurrentRDataFrameNames As List(Of String) = GetDataFrameNamesFromR()
 
         'add any data frames from this data book before removing them if not the R Instat object
-        For Each clsDatafram In _lstDataFrames
-            If Not _lstAllDataFrames.Contains(clsDatafram) Then
-                _lstAllDataFrames.Add(clsDatafram)
+        For Each clsDataframe In _lstDataFrames
+            If Not _lstAllDataFrames.Contains(clsDataframe) Then
+                _lstAllDataFrames.Add(clsDataframe)
             End If
         Next
 
