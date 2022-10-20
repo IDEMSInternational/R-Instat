@@ -896,7 +896,6 @@ Public Class ucrDataView
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
             sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalRowCount
-            sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = sdgWindowNumber.iPage
@@ -911,7 +910,6 @@ Public Class ucrDataView
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
             sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalColumnCount
-            sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
             Dim iPageNum As Integer = sdgWindowNumber.iPage

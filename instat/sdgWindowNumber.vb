@@ -16,17 +16,13 @@
 
 Imports instat.Translations
 Public Class sdgWindowNumber
-    ''' <summary>
-    ''' Page number
-    ''' </summary>
-    Public iPage As Integer
 
     ''' <summary>
     ''' iTotalRowOrColumn total number of rows or columns of a data frame depending on the mode i.e Row or Column
-    ''' iStartRowOrColumn starting value of a row or column in a page depending on the mode i.e Row or Column
+    ''' Page number
     ''' iEndRowOrColumn ending value of  a row or column in a page depending on the mode i.e Row or Column
     ''' </summary>
-    Public iTotalRowOrColumn, iStartRowOrColumn, iEndRowOrColumn As Integer
+    Public iTotalRowOrColumn, iPage, iEndRowOrColumn As Integer
 
     Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
