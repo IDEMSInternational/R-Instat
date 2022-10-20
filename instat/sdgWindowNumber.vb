@@ -19,10 +19,18 @@ Public Class sdgWindowNumber
 
     ''' <summary>
     ''' iTotalRowOrColumn total number of rows or columns of a data frame depending on the mode i.e Row or Column
+    ''' </summary>
+    Public iTotalRowOrColumn As Integer
+
+    ''' <summary>
     ''' Page number
+    ''' </summary>
+    Public iPage As Integer
+
+    ''' <summary>
     ''' iEndRowOrColumn ending value of  a row or column in a page depending on the mode i.e Row or Column
     ''' </summary>
-    Public iTotalRowOrColumn, iPage, iEndRowOrColumn As Integer
+    Public iEndRowOrColumn As Integer
 
     Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
