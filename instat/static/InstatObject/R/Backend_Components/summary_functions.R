@@ -225,6 +225,10 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
   out <- self$apply_instat_calculation(combined_calc_sum)
+  # relocate so that the factors are first still for consistency
+  if (percentage_type != "none"){
+    out$data <- (out$data %>% dplyr::select(c(tidyselect::all_of(factors), tidyselect::all_of(manip_factors)), tidyselect::everything()))
+  }
   if(return_output) {
     dat <- out$data
     if(percentage_type == "none" || perc_return_all) return(out$data)
@@ -763,7 +767,11 @@ summary_quantile <- function(x, na.rm = FALSE, weights = NULL, probs, na_type = 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if(missing(weights) || is.null(weights)) {
-      return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+      if("Date" %in% class(x)){
+          return(quantile(x, na.rm = na.rm, probs = probs, type = 1)[[1]])
+      } else {
+          return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
+      }
     }
     else {
       return(Hmisc::wtd.quantile(x, weights = weights, probs = probs, na.rm = na.rm))
