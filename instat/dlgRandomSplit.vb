@@ -86,8 +86,8 @@ Public Class dlgRandomSplit
         ucrNudPool.SetLinkedDisplayControl(lblPool)
         ucrNudPool.SetParameter(New RParameter("pool", 5))
         ucrNudPool.DecimalPlaces = 2
-        ucrNudPool.SetMinMax(0.00, 0.15)
-        ucrNudPool.Increment = 0.01
+        ucrNudPool.SetMinMax(0.01, 1.0)
+        ucrNudPool.Increment = 0.1
 
         ucrPnlRandomSplit.AddRadioButton(rdoSample)
         ucrPnlRandomSplit.AddRadioButton(rdoTimeSeries)
@@ -120,7 +120,7 @@ Public Class dlgRandomSplit
         clsInitialSplit.AddParameter("strata", "NULL", iPosition:=2)
         clsInitialSplit.AddParameter("lag", "0", iPosition:=3)
         clsInitialSplit.AddParameter("breaks", "4", iPosition:=4)
-        clsInitialSplit.AddParameter("pool", "0.1", iPosition:=5)
+        clsInitialSplit.AddParameter("pool", "0.10", iPosition:=5)
 
         clsTraining.SetPackageName("rsample")
         clsTraining.SetRCommand("training")
@@ -154,10 +154,8 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoSample.Checked Then
-            ucrBase.OKEnabled(Not ucrReceiverRanSplit.IsEmpty)
-        ElseIf rdoTimeSeries.Checked Then
-            ucrBase.OKEnabled(Not ucrReceiverRanSplit.IsEmpty)
+        If rdoSample.Checked Or rdoTimeSeries.Checked Then
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
