@@ -18,17 +18,17 @@ Imports instat.Translations
 Public Class sdgWindowNumber
 
     ''' <summary>
-    ''' iTotalRowOrColumn total number of rows or columns of a data frame depending on the mode i.e Row or Column
+    ''' The total number of rows/columns in the data frame (depending on the mode i.e row or column)
     ''' </summary>
     Public iTotalRowOrColumn As Integer
 
     ''' <summary>
-    ''' Page number
+    ''' The current row/column page number (depending on the mode i.e row or column)
     ''' </summary>
     Public iPage As Integer
 
     ''' <summary>
-    ''' iEndRowOrColumn ending value of  a row or column in a page depending on the mode i.e Row or Column
+    ''' The number of the last row/column in the current page (depending on the mode i.e row or column)
     ''' </summary>
     Public iEndRowOrColumn As Integer
 
