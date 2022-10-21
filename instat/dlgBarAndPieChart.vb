@@ -74,6 +74,7 @@ Public Class dlgBarAndPieChart
     Private clsGeomTextWordcloudFunction As New RFunction
     Private clsGeomTextWordcloudAesFunction As New RFunction
     Private clsScaleSizeAreaFunction As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -125,7 +126,7 @@ Public Class dlgBarAndPieChart
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrChkReorderValue, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrInputReorderX, {rdoFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrChkReorderFrequency, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize, ucrChkIncreaseSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
@@ -305,7 +306,6 @@ Public Class dlgBarAndPieChart
 
         ucrInputReorderX.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputReorderX.SetDropDownStyleAsNonEditable()
-        ucrInputReorderX.SetLinkedDisplayControl(lblReorderX)
 
         ucrInputReorderValue.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputReorderValue.SetDropDownStyleAsNonEditable()
@@ -313,6 +313,11 @@ Public Class dlgBarAndPieChart
         ucrChkReorderValue.AddFunctionNamesCondition(True, "reorder", True)
         ucrChkReorderValue.AddFunctionNamesCondition(False, "reorder", False)
         ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkReorderFrequency.SetText("Rorder Frequency")
+        ucrChkReorderFrequency.SetParameter(New RParameter("Checked", iNewPosition:=0))
+        ucrChkReorderFrequency.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkReorderFrequency.AddToLinkedControls(ucrInputReorderX, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrInputLayout.SetParameter(New RParameter("layout", 2))
         dctLayout.Add("Squarified", Chr(34) & "squarified" & Chr(34))
@@ -391,6 +396,7 @@ Public Class dlgBarAndPieChart
         clsGeomTextWordcloudFunction = New RFunction
         clsGeomTextWordcloudAesFunction = New RFunction
         clsScaleSizeAreaFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -408,6 +414,8 @@ Public Class dlgBarAndPieChart
         'Temp fix: Set panel conditions properly!
         rdoPie.Checked = True
         rdoFrequency.Checked = True
+
+        clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -610,6 +618,7 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
+        ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -718,13 +727,13 @@ Public Class dlgBarAndPieChart
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
         If rdoFrequency.Checked Then
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-                ucrInputReorderX.Visible = True
+                'ucrInputReorderX.Visible = True
                 ucrInputAddReorder.Visible = Not ucrReceiverByFactor.IsEmpty()
                 If Not ucrInputAddReorder.Visible Then
                     ucrInputAddReorder.SetText(strNone)
                 End If
             Else
-                ucrInputReorderX.Visible = False
+                'ucrInputReorderX.Visible = False
                 ucrInputReorderX.SetText(strNone)
             End If
         ElseIf rdoValue.Checked Then
@@ -1018,5 +1027,21 @@ Public Class dlgBarAndPieChart
         Else
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
+
+    End Sub
+
+    Private Sub lblReorder_Click(sender As Object, e As EventArgs) Handles lblReorder.Click
+
     End Sub
 End Class
