@@ -113,6 +113,7 @@ Public Class dlgRandomSplit
         clsInitialTimeSplit.SetRCommand("initial_time_split")
         clsInitialTimeSplit.AddParameter("prop", "0.75", iPosition:=1)
         clsInitialTimeSplit.AddParameter("lag", "0", iPosition:=2)
+        clsInitialTimeSplit.SetAssignTo("rsample")
 
         clsInitialSplit.SetPackageName("rsample")
         clsInitialSplit.SetRCommand("initial_split")
@@ -121,6 +122,7 @@ Public Class dlgRandomSplit
         clsInitialSplit.AddParameter("lag", "0", iPosition:=3)
         clsInitialSplit.AddParameter("breaks", "4", iPosition:=4)
         clsInitialSplit.AddParameter("pool", "0.10", iPosition:=5)
+        clsInitialSplit.SetAssignTo("rsample")
 
         clsTraining.SetPackageName("rsample")
         clsTraining.SetRCommand("training")
