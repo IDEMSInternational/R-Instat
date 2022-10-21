@@ -3707,5 +3707,6 @@
   "Variable Name": "Variable Name",
   "Variable Label": "Variable Label",
   "Levels": "Levels",
-  "Category": "Category",
-  "Show Command": "Show Command"}
+  "Category:": "Category:",
+  "Show Command": "Show Command",
+  "Lists:": "Lists:"}
