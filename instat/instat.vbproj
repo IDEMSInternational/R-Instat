@@ -137,6 +137,9 @@
     <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -217,6 +220,12 @@
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWordwrap.Designer.vb">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWordwrap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
@@ -3035,6 +3044,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWordwrap.resx">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
