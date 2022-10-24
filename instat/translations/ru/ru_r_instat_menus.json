@@ -447,9 +447,9 @@
   "View/Delete Labels...": "Просмотр/удаление ярлыков...",
   "Row Sumaries...": "Резюме строк...",
   "Permute/Sample Rows...": "Перестановка/выборка строк...",
-  "Stack (Pivot Longer)...": "Stack (Pivot Longer)...",
+  "Stack (Pivot Longer)...": "Стек (сводка длиннее)...",
   "Unstack (Pivot Wider)...": "Распаковать (Повернуть шире)...",
-  "Merge (Join)...": "Merge (Join)...",
+  "Merge (Join)...": "Объединить (присоединиться)...",
   "Append (Bind Rows)...": "Добавить (связать строки)...",
   "Random Split...": "Случайное разделение...",
   "Scale/Distance...": "Масштаб/расстояние...",
@@ -457,5 +457,5 @@
   "Save": "Сохранять",
   "Import SST...": "Импорт SST...",
   "Daily Data Editing/Entry...": "Ежедневное редактирование/ввод данных...",
-  "Experiments": "Experiments"
+  "Experiments": "Эксперименты"
 }
