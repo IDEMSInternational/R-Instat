@@ -75,16 +75,16 @@ Partial Class dlgWordwrap
         'ucrPnlTextWrap
         '
         Me.ucrPnlTextWrap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTextWrap.Location = New System.Drawing.Point(18, 237)
+        Me.ucrPnlTextWrap.Location = New System.Drawing.Point(270, 130)
         Me.ucrPnlTextWrap.Name = "ucrPnlTextWrap"
-        Me.ucrPnlTextWrap.Size = New System.Drawing.Size(204, 30)
+        Me.ucrPnlTextWrap.Size = New System.Drawing.Size(151, 30)
         Me.ucrPnlTextWrap.TabIndex = 14
         '
         'rdoUnWrapText
         '
         Me.rdoUnWrapText.AutoSize = True
         Me.rdoUnWrapText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnWrapText.Location = New System.Drawing.Point(86, 243)
+        Me.rdoUnWrapText.Location = New System.Drawing.Point(338, 136)
         Me.rdoUnWrapText.Name = "rdoUnWrapText"
         Me.rdoUnWrapText.Size = New System.Drawing.Size(62, 17)
         Me.rdoUnWrapText.TabIndex = 16
@@ -96,7 +96,7 @@ Partial Class dlgWordwrap
         '
         Me.rdoWrapText.AutoSize = True
         Me.rdoWrapText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWrapText.Location = New System.Drawing.Point(29, 243)
+        Me.rdoWrapText.Location = New System.Drawing.Point(281, 136)
         Me.rdoWrapText.Name = "rdoWrapText"
         Me.rdoWrapText.Size = New System.Drawing.Size(51, 17)
         Me.rdoWrapText.TabIndex = 15
@@ -109,7 +109,7 @@ Partial Class dlgWordwrap
         Me.ucrNudWidthWrap.AutoSize = True
         Me.ucrNudWidthWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidthWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidthWrap.Location = New System.Drawing.Point(76, 281)
+        Me.ucrNudWidthWrap.Location = New System.Drawing.Point(328, 174)
         Me.ucrNudWidthWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidthWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidthWrap.Name = "ucrNudWidthWrap"
@@ -121,7 +121,7 @@ Partial Class dlgWordwrap
         '
         Me.lblWidthWrap.AutoSize = True
         Me.lblWidthWrap.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWidthWrap.Location = New System.Drawing.Point(29, 285)
+        Me.lblWidthWrap.Location = New System.Drawing.Point(281, 178)
         Me.lblWidthWrap.Name = "lblWidthWrap"
         Me.lblWidthWrap.Size = New System.Drawing.Size(38, 13)
         Me.lblWidthWrap.TabIndex = 17
@@ -130,17 +130,17 @@ Partial Class dlgWordwrap
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(29, 333)
+        Me.ucrNewColName.Location = New System.Drawing.Point(29, 288)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
-        Me.ucrNewColName.Size = New System.Drawing.Size(331, 22)
+        Me.ucrNewColName.Size = New System.Drawing.Size(392, 22)
         Me.ucrNewColName.TabIndex = 19
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(18, 361)
+        Me.ucrBase.Location = New System.Drawing.Point(18, 316)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
@@ -149,7 +149,7 @@ Partial Class dlgWordwrap
         '
         Me.lblAlign.AutoSize = True
         Me.lblAlign.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlign.Location = New System.Drawing.Point(201, 283)
+        Me.lblAlign.Location = New System.Drawing.Point(224, 241)
         Me.lblAlign.Name = "lblAlign"
         Me.lblAlign.Size = New System.Drawing.Size(67, 13)
         Me.lblAlign.TabIndex = 23
@@ -161,7 +161,7 @@ Partial Class dlgWordwrap
         Me.ucrAlignment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrAlignment.GetSetSelectedIndex = -1
         Me.ucrAlignment.IsReadOnly = False
-        Me.ucrAlignment.Location = New System.Drawing.Point(269, 281)
+        Me.ucrAlignment.Location = New System.Drawing.Point(292, 239)
         Me.ucrAlignment.Name = "ucrAlignment"
         Me.ucrAlignment.Size = New System.Drawing.Size(136, 23)
         Me.ucrAlignment.TabIndex = 24
@@ -170,7 +170,7 @@ Partial Class dlgWordwrap
         '
         Me.lblOptions.AutoSize = True
         Me.lblOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblOptions.Location = New System.Drawing.Point(15, 225)
+        Me.lblOptions.Location = New System.Drawing.Point(267, 118)
         Me.lblOptions.Name = "lblOptions"
         Me.lblOptions.Size = New System.Drawing.Size(46, 13)
         Me.lblOptions.TabIndex = 25
@@ -180,7 +180,7 @@ Partial Class dlgWordwrap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 416)
+        Me.ClientSize = New System.Drawing.Size(449, 373)
         Me.Controls.Add(Me.lblOptions)
         Me.Controls.Add(Me.lblAlign)
         Me.Controls.Add(Me.ucrAlignment)
