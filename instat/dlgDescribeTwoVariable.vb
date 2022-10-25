@@ -27,7 +27,6 @@ Public Class dlgDescribeTwoVariable
            clsSummaryMapFunction, clsCombineMultipleColumnsFunction, clsCombineFactorsFunction,
            clsMmtableMapFunction, clsHeaderTopLeftSummaryVariableFunction,
            clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction As New RFunction
-    Private clsTempCustomizeFunction As New RFunction
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapFrequencyPipeOperator,
              clsMmtableTildeOperator, clsDataSelectTildeOperator, clsEmptyOperator, clsSecondEmptyOperator As New ROperator
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
@@ -480,6 +479,15 @@ Public Class dlgDescribeTwoVariable
             clsRCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
         Else
             clsRCorrelationFunction.RemoveParameterByName("use")
+        End If
+        If Not ucrChkOmitMissing.Checked Then
+            clsRCustomSummaryFunction.RemoveParameterByName("na_type")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_max_n")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_min_n")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_max_prop")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_consecutive_n")
+        Else
+            clsRCustomSummaryFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
         End If
         MissingOptions()
     End Sub
