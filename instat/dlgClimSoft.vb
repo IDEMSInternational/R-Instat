@@ -114,30 +114,19 @@ Public Class dlgClimSoft
         ucrChkStackData.SetParameter(New RParameter("unstack_data", 7))
         ucrChkStackData.SetRDefault("FALSE")
 
-        ucrChkFlags.SetText("Include Flags")
-        ucrChkFlags.SetParameter(New RParameter("include_flags", 7))
-        ucrChkFlags.SetRDefault("FALSE")
-
-        ucrChkFlags.SetText("Include QC Status")
-        ucrChkFlags.SetParameter(New RParameter("include_qc_status", 7))
-        ucrChkFlags.SetRDefault("FALSE")
-
-        ucrChkFlags.SetText("Include Data Entry Form Source")
-        ucrChkFlags.SetParameter(New RParameter("include_qc_status", 7))
-        ucrChkFlags.SetRDefault("FALSE")
-
         '-----------------------------------------------------------------
         'observation date range checkbox
-        ucrChkObsDate.SetText("Select Data Date Range")
+        ucrChkObsDate.SetText("Select Date Range")
 
         'start date datepicker
         ucrDtpObStartdate.SetParameter(New RParameter("obs_start_date", 8))
         ucrDtpObStartdate.SetParameterIsRDate()
-        ucrDtpObStartdate.SetLinkedDisplayControl(lblObsDateTo)
+        ucrDtpObStartdate.SetLinkedDisplayControl(lblObsStartDate)
 
         'end date datepicker
         ucrDtpObsEndDate.SetParameter(New RParameter("obs_end_date", 9))
         ucrDtpObsEndDate.SetParameterIsRDate()
+        ucrDtpObsEndDate.SetLinkedDisplayControl(lblObsEndDate)
 
         'link date pickers to date range checkbox
         ucrChkObsDate.AddToLinkedControls({ucrDtpObStartdate, ucrDtpObsEndDate}, {True},
@@ -310,7 +299,7 @@ Public Class dlgClimSoft
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrIncludeFlagsControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlags.ControlValueChanged, ucrChkStackData.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+    Private Sub ucrIncludeFlagsControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackData.ControlValueChanged, ucrReceiverElements.ControlValueChanged
         'unstack observation data only when more than 1 element is selected
         If ucrChkStackData.Checked AndAlso ucrReceiverElements.GetVariableNamesAsList.Count = 1 Then
             ucrChkFlags.Enabled = True

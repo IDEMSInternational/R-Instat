@@ -1839,8 +1839,12 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
     element_filter_column = "elementId", elements = c(),
     unstack_data = FALSE,
     include_flags = FALSE,
+    include_qc_status = FALSE,
+    include_entry_form = FALSE,
     obs_start_date = NULL,
     obs_end_date = NULL,
+    qc_status = NULL,
+    form_source = NULL,
     include_stations_meta_data = FALSE,
     include_elements_meta_data = FALSE) {
   
