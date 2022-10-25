@@ -897,7 +897,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrReceiverXEnd.AutoSize = True
         Me.ucrReceiverXEnd.frmParent = Me
-        Me.ucrReceiverXEnd.Location = New System.Drawing.Point(246, 288)
+        Me.ucrReceiverXEnd.Location = New System.Drawing.Point(248, 288)
         Me.ucrReceiverXEnd.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXEnd.Name = "ucrReceiverXEnd"
         Me.ucrReceiverXEnd.Selector = Nothing
@@ -936,7 +936,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrReceiverSlopeColour.AutoSize = True
         Me.ucrReceiverSlopeColour.frmParent = Me
-        Me.ucrReceiverSlopeColour.Location = New System.Drawing.Point(249, 288)
+        Me.ucrReceiverSlopeColour.Location = New System.Drawing.Point(247, 288)
         Me.ucrReceiverSlopeColour.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSlopeColour.Name = "ucrReceiverSlopeColour"
         Me.ucrReceiverSlopeColour.Selector = Nothing
@@ -1069,10 +1069,8 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.lblAvailable)
         Me.Controls.Add(Me.lblXEnd)
-        Me.Controls.Add(Me.ucrReceiverXEnd)
         Me.Controls.Add(Me.ucrReceiverSlopeX)
         Me.Controls.Add(Me.ucrReceiverX)
-        Me.Controls.Add(Me.ucrReceiverSlopeColour)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.ucrChkSlopeLineOptions)
         Me.Controls.Add(Me.UcrNudSlopeYTextSize)
@@ -1092,6 +1090,8 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrChkValley)
         Me.Controls.Add(Me.lblSopeTextColour)
         Me.Controls.Add(Me.lblSlopeLabelColour)
+        Me.Controls.Add(Me.ucrReceiverXEnd)
+        Me.Controls.Add(Me.ucrReceiverSlopeColour)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
