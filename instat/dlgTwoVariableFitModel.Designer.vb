@@ -70,6 +70,16 @@ Partial Class dlgTwoVariableFitModel
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
         Me.ucrInputNullHypothesis = New instat.ucrInputTextBox()
         Me.lblNullHypothesis = New System.Windows.Forms.Label()
+        Me.ucrInputStatistic = New instat.ucrInputComboBox()
+        Me.lblStatistic = New System.Windows.Forms.Label()
+        Me.ucrInputAlternative = New instat.ucrInputComboBox()
+        Me.lblAlternative = New System.Windows.Forms.Label()
+        Me.ucrInputType = New instat.ucrInputComboBox()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrInputSuccess = New instat.ucrInputTextBox()
+        Me.lblSuccess = New System.Windows.Forms.Label()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.lblMethodInference = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -351,7 +361,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 449)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
         'ucrInputConfidenceInterval
@@ -395,12 +405,122 @@ Partial Class dlgTwoVariableFitModel
         Me.lblNullHypothesis.TabIndex = 89
         Me.lblNullHypothesis.Text = "Null Hypothesis:"
         '
+        'ucrInputStatistic
+        '
+        Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
+        Me.ucrInputStatistic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStatistic.GetSetSelectedIndex = -1
+        Me.ucrInputStatistic.IsReadOnly = False
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(324, 295)
+        Me.ucrInputStatistic.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputStatistic.Name = "ucrInputStatistic"
+        Me.ucrInputStatistic.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputStatistic.TabIndex = 90
+        '
+        'lblStatistic
+        '
+        Me.lblStatistic.AutoSize = True
+        Me.lblStatistic.Location = New System.Drawing.Point(236, 299)
+        Me.lblStatistic.Name = "lblStatistic"
+        Me.lblStatistic.Size = New System.Drawing.Size(85, 13)
+        Me.lblStatistic.TabIndex = 91
+        Me.lblStatistic.Text = "Sample Statistic:"
+        '
+        'ucrInputAlternative
+        '
+        Me.ucrInputAlternative.AddQuotesIfUnrecognised = True
+        Me.ucrInputAlternative.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAlternative.GetSetSelectedIndex = -1
+        Me.ucrInputAlternative.IsReadOnly = False
+        Me.ucrInputAlternative.Location = New System.Drawing.Point(324, 325)
+        Me.ucrInputAlternative.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputAlternative.Name = "ucrInputAlternative"
+        Me.ucrInputAlternative.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputAlternative.TabIndex = 92
+        '
+        'lblAlternative
+        '
+        Me.lblAlternative.AutoSize = True
+        Me.lblAlternative.Location = New System.Drawing.Point(206, 329)
+        Me.lblAlternative.Name = "lblAlternative"
+        Me.lblAlternative.Size = New System.Drawing.Size(115, 13)
+        Me.lblAlternative.TabIndex = 93
+        Me.lblAlternative.Text = "Alternative Hypothesis:"
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputType.GetSetSelectedIndex = -1
+        Me.ucrInputType.IsReadOnly = False
+        Me.ucrInputType.Location = New System.Drawing.Point(324, 237)
+        Me.ucrInputType.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputType.Name = "ucrInputType"
+        Me.ucrInputType.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputType.TabIndex = 94
+        '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.Location = New System.Drawing.Point(227, 241)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(94, 13)
+        Me.lblType.TabIndex = 95
+        Me.lblType.Text = "Type of Inference:"
+        '
+        'ucrInputSuccess
+        '
+        Me.ucrInputSuccess.AddQuotesIfUnrecognised = True
+        Me.ucrInputSuccess.AutoSize = True
+        Me.ucrInputSuccess.IsMultiline = False
+        Me.ucrInputSuccess.IsReadOnly = False
+        Me.ucrInputSuccess.Location = New System.Drawing.Point(324, 267)
+        Me.ucrInputSuccess.Name = "ucrInputSuccess"
+        Me.ucrInputSuccess.Size = New System.Drawing.Size(94, 22)
+        Me.ucrInputSuccess.TabIndex = 96
+        '
+        'lblSuccess
+        '
+        Me.lblSuccess.AutoSize = True
+        Me.lblSuccess.Location = New System.Drawing.Point(270, 270)
+        Me.lblSuccess.Name = "lblSuccess"
+        Me.lblSuccess.Size = New System.Drawing.Size(51, 13)
+        Me.lblSuccess.TabIndex = 97
+        Me.lblSuccess.Text = "Success:"
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(324, 210)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputMethod.TabIndex = 98
+        '
+        'lblMethodInference
+        '
+        Me.lblMethodInference.AutoSize = True
+        Me.lblMethodInference.Location = New System.Drawing.Point(274, 216)
+        Me.lblMethodInference.Name = "lblMethodInference"
+        Me.lblMethodInference.Size = New System.Drawing.Size(46, 13)
+        Me.lblMethodInference.TabIndex = 99
+        Me.lblMethodInference.Text = "Method:"
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.lblMethodInference)
+        Me.Controls.Add(Me.ucrInputMethod)
+        Me.Controls.Add(Me.lblAlternative)
+        Me.Controls.Add(Me.ucrInputAlternative)
+        Me.Controls.Add(Me.lblStatistic)
+        Me.Controls.Add(Me.ucrInputStatistic)
         Me.Controls.Add(Me.lblNullHypothesis)
         Me.Controls.Add(Me.ucrInputNullHypothesis)
         Me.Controls.Add(Me.lblConfidenceLevel)
@@ -429,6 +549,10 @@ Partial Class dlgTwoVariableFitModel
         Me.Controls.Add(Me.lblFirstVariable)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.lblTest)
+        Me.Controls.Add(Me.ucrInputType)
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblSuccess)
+        Me.Controls.Add(Me.ucrInputSuccess)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
         Me.MaximizeBox = False
@@ -475,4 +599,14 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents lblConfidenceLevel As Label
     Friend WithEvents ucrInputNullHypothesis As ucrInputTextBox
     Friend WithEvents lblNullHypothesis As Label
+    Friend WithEvents lblStatistic As Label
+    Friend WithEvents ucrInputStatistic As ucrInputComboBox
+    Friend WithEvents lblAlternative As Label
+    Friend WithEvents ucrInputAlternative As ucrInputComboBox
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrInputType As ucrInputComboBox
+    Friend WithEvents lblSuccess As Label
+    Friend WithEvents ucrInputSuccess As ucrInputTextBox
+    Friend WithEvents lblMethodInference As Label
+    Friend WithEvents ucrInputMethod As ucrInputComboBox
 End Class
