@@ -137,7 +137,7 @@ Public Class ucrFactor
         Public Const SelectorColumn As String = "Select"
     End Structure
 
-    Public Property SelectionControlsVisible As Boolean
+    Private Property SelectionControlsVisible As Boolean
         Get
             Return Me.Controls.Contains(pnlSelectOptions)
         End Get

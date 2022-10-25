@@ -420,7 +420,6 @@ Partial Class ucrFilter
         Me.ucrFactorLevels.Location = New System.Drawing.Point(398, 65)
         Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.SelectionControlsVisible = True
         Me.ucrFactorLevels.Size = New System.Drawing.Size(354, 262)
         Me.ucrFactorLevels.TabIndex = 2
         '

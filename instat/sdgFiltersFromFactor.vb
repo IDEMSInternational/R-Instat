@@ -76,24 +76,6 @@ Public Class sdgFiltersFromFactor
         End If
     End Sub
 
-    Private Sub cmdSelectAll_Click(sender As Object, e As EventArgs) Handles cmdSelectAll.Click
-        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
-    End Sub
-
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        cmdSelectAll.Enabled = Not ucrReceiverFactor.IsEmpty
-    End Sub
-
-    Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
-        If ucrFactorLevels.IsAllGridRowsSelected() Then
-            cmdSelectAll.Text = Translations.GetTranslation("Deselect All Levels")
-            cmdSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            cmdSelectAll.Text = Translations.GetTranslation("Select All Levels")
-            cmdSelectAll.FlatStyle = FlatStyle.Popup
-        End If
-    End Sub
-
     Private Sub ucrSelectorFiltersFromFactors_DataFrameChanged() Handles ucrSelectorFiltersFromFactors.DataFrameChanged
         clsAddFilterFromFactors.AddParameter("data_name", Chr(34) & ucrSelectorFiltersFromFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub

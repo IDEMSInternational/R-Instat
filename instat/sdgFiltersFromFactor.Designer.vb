@@ -76,7 +76,6 @@ Partial Class sdgFiltersFromFactor
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrFactorLevels.Location = New System.Drawing.Point(267, 57)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.SelectionControlsVisible = True
         Me.ucrFactorLevels.Size = New System.Drawing.Size(270, 208)
         Me.ucrFactorLevels.TabIndex = 1
         '
