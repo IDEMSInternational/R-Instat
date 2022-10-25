@@ -25,9 +25,9 @@ Public Class dlgClimSoft
     'the 2 dictionaries hold data for the station and elements comboboxes
     'As of 28th August 2020, there is no direct way of getting the selected value from the custom combobox
     'these are declared here to be used in getting the selected value
-    Private dctObsTable As New Dictionary(Of String, String)
-    Private dctStationColumns As New Dictionary(Of String, String)
-    Private dctElementsColumns As New Dictionary(Of String, String)
+    Private dctObsTables As New Dictionary(Of String, String)
+    Private dctStationCols As New Dictionary(Of String, String)
+    Private dctElementsCols As New Dictionary(Of String, String)
 
     'flag used by elements receiver to determine when not to clear itself and change its sql query 
     'useful when form is reloaded, to let the elements reciever retain the elements selected
@@ -47,66 +47,33 @@ Public Class dlgClimSoft
         bReset = False
         bIgnoreReceiverChanges = False
         CheckAndUpdateConnectionStatus()
-        'autoTranslate(Me) ' temporary commented, affects the connected text by overwriting it with wrong text
+        'autoTranslate(Me) ' temporary commented, affects the "connected" label by overwriting it's text with wrong text
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
 
         '-------------------------------------------------------------------------
-        'observation date range checkbox
-        ucrChkObsDate.SetText("Select Data Date Range")
-
-        'start date datepicker
-        ucrDtpObStartdate.SetParameter(New RParameter("start_date", 8))
-        ucrDtpObStartdate.SetParameterIsRDate()
-        ucrDtpObStartdate.SetLinkedDisplayControl(lblObsDateTo)
-
-        'end date datepicker
-        ucrDtpObsEndDate.SetParameter(New RParameter("end_date", 9))
-        ucrDtpObsEndDate.SetParameterIsRDate()
-        'link date pickers to date range checkbox
-        ucrChkObsDate.AddToLinkedControls({ucrDtpObStartdate, ucrDtpObsEndDate}, {True},
-                                          bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-
-        'entry date range checkbox
-        ucrChkEntryDate.SetText("Select Data Entry Date Range")
-
-        'start date datepicker
-        ucrDtpEntryStartdate.SetParameter(New RParameter("start_date", 8))
-        ucrDtpEntryStartdate.SetParameterIsRDate()
-        ucrDtpEntryStartdate.SetLinkedDisplayControl(lblEntryDateTo)
-
-        'end date datepicker
-        ucrDtpEntryEndDate.SetParameter(New RParameter("end_date", 9))
-        ucrDtpEntryEndDate.SetParameterIsRDate()
-        'link date pickers to date range checkbox
-        ucrChkEntryDate.AddToLinkedControls({ucrDtpEntryStartdate, ucrDtpEntryEndDate}, {True},
-                                          bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        '-----------------------------------------------------------------------------------------
-
-        dctObsTable.Add("Observation Initial", Chr(34) & "observationinitial" & Chr(34))
-        dctObsTable.Add("Observation Final", Chr(34) & "observationfinal" & Chr(34))
-        ucrCboObsTable.SetParameter(New RParameter("stationfiltercolumn", 0))
-        ucrCboObsTable.SetItems(dctObsTable)
-        ucrCboObsTable.SetRDefault(Chr(34) & "observationinitial" & Chr(34))
+        'observation tables combobox
+        dctObsTables.Add("Observation Initial", Chr(34) & "observationinitial" & Chr(34))
+        dctObsTables.Add("Observation Final", Chr(34) & "observationfinal" & Chr(34))
+        ucrCboObsTable.SetParameter(New RParameter("observation_data_table", 0))
+        ucrCboObsTable.SetItems(dctObsTables)
         ucrCboObsTable.bAllowNonConditionValues = False
         ucrCboObsTable.SetDropDownStyleAsNonEditable()
 
+        '-----------------------------------------------------------------------------------
         'stations combobox
-        dctStationColumns.Add("Station IDs", Chr(34) & "stationId" & Chr(34))
-        dctStationColumns.Add("Station Names", Chr(34) & "stationName" & Chr(34))
-        dctStationColumns.Add("Station Qualifiers", Chr(34) & "qualifier" & Chr(34))
-        ucrCboStations.SetParameter(New RParameter("stationfiltercolumn", 0))
-        ucrCboStations.SetItems(dctStationColumns)
-        ucrCboStations.SetRDefault(Chr(34) & "stationId" & Chr(34))
+        dctStationCols.Add("Station IDs", Chr(34) & "stationId" & Chr(34))
+        dctStationCols.Add("Station Names", Chr(34) & "stationName" & Chr(34))
+        dctStationCols.Add("Station Qualifiers", Chr(34) & "qualifier" & Chr(34))
+        ucrCboStations.SetParameter(New RParameter("station_filter_column", 1))
+        ucrCboStations.SetItems(dctStationCols)
         ucrCboStations.bAllowNonConditionValues = False
         ucrCboStations.SetDropDownStyleAsNonEditable()
 
         'stations receiver
-        ucrReceiverStations.SetParameter(New RParameter("stations", 1))
+        ucrReceiverStations.SetParameter(New RParameter("stations", 2))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.Selector = ucrSelectorForClimSoft
         ucrReceiverStations.SetItemType("database_variables")
@@ -114,18 +81,17 @@ Public Class dlgClimSoft
         ucrReceiverStations.SetLinkedDisplayControl(lblStations)
 
         'station elements combobox
-        dctElementsColumns.Add("Element IDs", Chr(34) & "elementId" & Chr(34))
-        dctElementsColumns.Add("Element Names", Chr(34) & "elementName" & Chr(34))
-        dctElementsColumns.Add("Element Abbreviation", Chr(34) & "abbreviation" & Chr(34))
-        dctElementsColumns.Add("Element Types", Chr(34) & "elementtype" & Chr(34))
-        ucrCboElements.SetParameter(New RParameter("elementfiltercolumn", 2))
-        ucrCboElements.SetItems(dctElementsColumns)
-        ucrCboElements.SetRDefault(Chr(34) & "elementId" & Chr(34))
+        dctElementsCols.Add("Element IDs", Chr(34) & "elementId" & Chr(34))
+        dctElementsCols.Add("Element Names", Chr(34) & "elementName" & Chr(34))
+        dctElementsCols.Add("Element Abbreviation", Chr(34) & "abbreviation" & Chr(34))
+        dctElementsCols.Add("Element Types", Chr(34) & "elementtype" & Chr(34))
+        ucrCboElements.SetParameter(New RParameter("element_filter_column", 3))
+        ucrCboElements.SetItems(dctElementsCols)
         ucrCboElements.bAllowNonConditionValues = False
         ucrCboElements.SetDropDownStyleAsNonEditable()
 
         'station elements receiver
-        ucrReceiverElements.SetParameter(New RParameter("elements", 3))
+        ucrReceiverElements.SetParameter(New RParameter("elements", 4))
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.Selector = ucrSelectorForClimSoft
         ucrReceiverElements.SetItemType("database_variables")
@@ -133,41 +99,80 @@ Public Class dlgClimSoft
         ucrReceiverElements.SetLinkedDisplayControl(lblElements)
 
         '-----------------------------------------------------------------
-        'include stations info checkbox
-        ucrChkStations.SetText("Import Selected Stations Information")
-        ucrChkStations.SetParameter(New RParameter("include_stations_info", 7))
+        'include stations checkbox
+        ucrChkStations.SetText("Import Stations Metadata")
+        ucrChkStations.SetParameter(New RParameter("include_stations_meta_data", 5))
         ucrChkStations.SetRDefault("FALSE")
 
         'include elements info checkbox
-        ucrChkElements.SetText("Import Selected Elements Information")
-        ucrChkElements.SetParameter(New RParameter("include_elements_info", 7))
+        ucrChkElements.SetText("Import Elements Metadata")
+        ucrChkElements.SetParameter(New RParameter("include_elements_meta_data", 6))
         ucrChkElements.SetRDefault("FALSE")
+
         '-----------------------------------------------------------------
+        ucrChkStackData.SetText("Unstack Data")
+        ucrChkStackData.SetParameter(New RParameter("unstack_data", 7))
+        ucrChkStackData.SetRDefault("FALSE")
+
+        ucrChkFlags.SetText("Include Flags")
+        ucrChkFlags.SetParameter(New RParameter("include_flags", 7))
+        ucrChkFlags.SetRDefault("FALSE")
+
+        ucrChkFlags.SetText("Include QC Status")
+        ucrChkFlags.SetParameter(New RParameter("include_qc_status", 7))
+        ucrChkFlags.SetRDefault("FALSE")
+
+        ucrChkFlags.SetText("Include Data Entry Form Source")
+        ucrChkFlags.SetParameter(New RParameter("include_qc_status", 7))
+        ucrChkFlags.SetRDefault("FALSE")
+
+        '-----------------------------------------------------------------
+        'observation date range checkbox
+        ucrChkObsDate.SetText("Select Data Date Range")
+
+        'start date datepicker
+        ucrDtpObStartdate.SetParameter(New RParameter("obs_start_date", 8))
+        ucrDtpObStartdate.SetParameterIsRDate()
+        ucrDtpObStartdate.SetLinkedDisplayControl(lblObsDateTo)
+
+        'end date datepicker
+        ucrDtpObsEndDate.SetParameter(New RParameter("obs_end_date", 9))
+        ucrDtpObsEndDate.SetParameterIsRDate()
+
+        'link date pickers to date range checkbox
+        ucrChkObsDate.AddToLinkedControls({ucrDtpObStartdate, ucrDtpObsEndDate}, {True},
+                                          bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
     End Sub
 
     Private Sub SetDefaults()
         clsRImportFromClimsoft = New RFunction
-        clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
+        clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_observation_data_from_climsoft")
+        clsRImportFromClimsoft.AddParameter(strParameterName:="observation_data_table",
+                                            strParameterValue:=Chr(34) & "observationinitial" & Chr(34),
+                                            iPosition:=0)
+        clsRImportFromClimsoft.AddParameter(strParameterName:="station_filter_column",
+                                            strParameterValue:=Chr(34) & "stationId" & Chr(34),
+                                            iPosition:=1)
+        clsRImportFromClimsoft.AddParameter(strParameterName:="element_filter_column",
+                                            strParameterValue:=Chr(34) & "elementId" & Chr(34),
+                                            iPosition:=3)
 
-        ucrChkObsDate.Checked = True
-        ucrChkEntryDate.Checked = False
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
 
         ucrCboObsTable.Reset()
         ucrSelectorForClimSoft.Reset()
         ucrReceiverStations.SetMeAsReceiver()
-
+        ucrDtpObStartdate.DateValue = Date.Now
+        ucrDtpObsEndDate.DateValue = Date.Now
+        ucrChkObsDate.Checked = False
         ucrChkStations.Checked = False
         ucrChkElements.Checked = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrDtpObStartdate.SetRCode(clsRImportFromClimsoft, bReset)
-        ucrDtpObsEndDate.SetRCode(clsRImportFromClimsoft, bReset)
-        ucrDtpEntryStartdate.SetRCode(clsRImportFromClimsoft, bReset)
-        ucrDtpEntryEndDate.SetRCode(clsRImportFromClimsoft, bReset)
-
         ucrCboObsTable.SetRCode(clsRImportFromClimsoft, bReset)
         ucrCboStations.SetRCode(clsRImportFromClimsoft, bReset)
         ucrCboElements.SetRCode(clsRImportFromClimsoft, bReset)
@@ -177,18 +182,22 @@ Public Class dlgClimSoft
         ucrChkStations.SetRCode(clsRImportFromClimsoft, bReset)
         ucrChkElements.SetRCode(clsRImportFromClimsoft, bReset)
 
+        ucrChkStackData.SetRCode(clsRImportFromClimsoft, bReset)
+
+        ucrDtpObStartdate.SetRCode(clsRImportFromClimsoft, bReset)
+        ucrDtpObsEndDate.SetRCode(clsRImportFromClimsoft, bReset)
     End Sub
 
-    Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
+    Private Sub TestOKEnabled()
+        ucrBase.OKEnabled((Not ucrReceiverStations.IsEmpty() AndAlso Not ucrReceiverElements.IsEmpty()))
+    End Sub
+
+    Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles btnEstablishConnection.Click
         'shows the database connect sub dialog and checks if connection has been established
         sdgImportFromClimSoft.ShowDialog()
         CheckAndUpdateConnectionStatus()
         ucrReceiverStations.Clear()
         ucrReceiverStations.SetMeAsReceiver()
-    End Sub
-
-    Private Sub TestOKEnabled()
-        ucrBase.OKEnabled((Not ucrReceiverStations.IsEmpty() AndAlso Not ucrReceiverElements.IsEmpty()))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -199,22 +208,35 @@ Public Class dlgClimSoft
         TestOKEnabled()
     End Sub
 
+    Private Sub CheckAndUpdateConnectionStatus()
+        If sdgImportFromClimSoft.IsConnectionIsActive() Then
+            lblConnection.Text = Translations.GetTranslation("Connected")
+            lblConnection.ForeColor = Color.Green
+        Else
+            lblConnection.Text = Translations.GetTranslation("No Connection")
+            lblConnection.ForeColor = Color.Red
+            ucrReceiverStations.Clear()
+        End If
+    End Sub
 
     ''' <summary>
     ''' constructs and sets the stations reciver SQL query
     ''' </summary>
     ''' <returns>returns true if receivers query was changed</returns>
     Private Function SetStationsReceiverQuery() As Boolean
-        If dctStationColumns.Count < 1 Then
+        If ucrCboStations.IsEmpty Then
             Return False
         End If
 
         'sql query to get station values of the selected column from station table
         Dim strQuery As String
-        Dim strSelectedColumn As String = dctStationColumns.Item(ucrCboStations.GetText).Trim("""")
+        Dim strSelectedObsTable As String = dctObsTables.Item(ucrCboObsTable.GetText).Trim("""")
+        Dim strSelectedStationCol As String = dctStationCols.Item(ucrCboStations.GetText).Trim("""")
+        strQuery = "SELECT DISTINCT station." & strSelectedStationCol &
+            " FROM " & strSelectedObsTable &
+            " INNER JOIN station ON " & strSelectedObsTable & ".recordedFrom = station.stationId;"
 
-        strQuery = "SELECT DISTINCT " & strSelectedColumn &
-            " FROM station WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
+        'to avoid repetition in code execution check if the database query is still the same
         If ucrReceiverStations.strDatabaseQuery = strQuery Then
             Return False
         End If
@@ -228,23 +250,27 @@ Public Class dlgClimSoft
     ''' </summary>
     ''' <returns>returns true if receivers query was changed</returns>
     Private Function SetStationElementsRecieverQuery() As Boolean
-        If dctElementsColumns.Count < 1 Then
+        If ucrCboStations.IsEmpty OrElse ucrCboElements.IsEmpty Then
             Return False
         End If
 
         'sql query to get distinct element values of the selected column(obselement TABLE COLUMN) from the observationfinal table
         Dim strQuery As String
-        strQuery = "SELECT DISTINCT obselement." & dctElementsColumns.Item(ucrCboElements.GetText).Trim("""") &
-            " FROM observationfinal" &
-            " INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId" &
-            " INNER JOIN station ON observationfinal.recordedFrom = station.stationId"
+        Dim strSelectedObsTable As String = dctObsTables.Item(ucrCboObsTable.GetText).Trim("""")
+        Dim strSelectedStationCol As String = dctStationCols.Item(ucrCboStations.GetText).Trim("""")
+        Dim strSelectedElementCol As String = dctElementsCols.Item(ucrCboElements.GetText).Trim("""")
+        strQuery = "SELECT DISTINCT obselement." & strSelectedElementCol &
+            " FROM " & strSelectedObsTable &
+            " INNER JOIN obselement ON " & strSelectedObsTable & ".describedBy = obselement.elementId" &
+            " INNER JOIN station ON " & strSelectedObsTable & ".recordedFrom = station.stationId"
         'if stations have been specified, then get elements for those stations only
         If Not ucrReceiverStations.IsEmpty Then
-            strQuery = strQuery & " WHERE " & "station." & dctStationColumns.Item(ucrCboStations.GetText).Trim("""") & " IN (" &
+            strQuery = strQuery & " WHERE " & "station." & strSelectedStationCol & " IN (" &
                 String.Join(",", ucrReceiverStations.GetVariableNamesList(strQuotes:=Chr(39))) & ")"
         End If
         strQuery &= ";"
 
+        'to avoid repetition in code execution check if the database query is still the same
         If ucrReceiverElements.strDatabaseQuery = strQuery Then
             Return False
         End If
@@ -273,14 +299,6 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-    Private Sub ucrComboBoxElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboElements.ControlValueChanged
-        If SetStationElementsRecieverQuery() Then
-            'set as selected receiver. will also execute receiver's sql the query
-            ucrReceiverElements.SetMeAsReceiver()
-        End If
-    End Sub
-
-
     Private Sub ucrCboElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboElements.ControlValueChanged
         If SetStationElementsRecieverQuery() Then
             'set as selected receiver. will also execute receiver's sql the query
@@ -288,51 +306,29 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStations.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboStations.ControlContentsChanged, ucrCboElements.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrStackDataControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlValueChanged
-        'only change the receivers if the event was raised by ucrChkObservationData checkbox
-        'If TypeOf ucrChangedControl Is ucrCheck Then
-        '    If ucrChkObservationData.Checked Then
-        '        ucrReceiverElements.SetMeAsReceiver()
-        '    Else
-        '        ucrReceiverStations.SetMeAsReceiver()
-        '    End If
-        'End If
-
-        ''unstack observation data only when more than 1 element is selected
-        'If ucrChkObservationData.Checked AndAlso ucrReceiverElements.GetVariableNamesAsList.Count > 1 Then
-        '    ucrChkStackData.Enabled = True
-        '    clsRImportFromClimsoft.AddParameter("unstack_data", If(ucrChkStackData.Checked, "TRUE", "FALSE"), iPosition:=6)
-        'Else
-        '    ucrChkStackData.Enabled = False
-        '    clsRImportFromClimsoft.RemoveParameterByName("unstack_data")
-        'End If
-    End Sub
-
-
-
-    Private Sub CheckAndUpdateConnectionStatus()
-        If sdgImportFromClimSoft.IsConnectionIsActive() Then
-            lblConnection.Text = Translations.GetTranslation("Connected")
-            lblConnection.ForeColor = Color.Green
+    Private Sub ucrIncludeFlagsControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlags.ControlValueChanged, ucrChkStackData.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+        'unstack observation data only when more than 1 element is selected
+        If ucrChkStackData.Checked AndAlso ucrReceiverElements.GetVariableNamesAsList.Count = 1 Then
+            ucrChkFlags.Enabled = True
+            clsRImportFromClimsoft.AddParameter("include_flags",
+                                                If(ucrChkFlags.Checked, "TRUE", "FALSE"))
         Else
-            lblConnection.Text = Translations.GetTranslation("No Connection")
-            lblConnection.ForeColor = Color.Red
-            ucrReceiverStations.Clear()
+            ucrChkFlags.Enabled = False
+            clsRImportFromClimsoft.RemoveParameterByName("include_flags")
         End If
     End Sub
 
-    Private Sub ucrChkDateRange_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkObsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObsDate.ControlValueChanged
         'this forces the date pickers to write default parameter values to the Rfunction.
         'date picker controls have a problem of default date. 
         'its not set by default until the user changes selected date
         'todo. in future, this may not be needed
-        If ucrChkObsDate.Checked Then
-            ucrDtpObsEndDate.OnControlValueChanged()
-            ucrDtpObStartdate.OnControlValueChanged()
-        End If
+
+        ucrDtpObsEndDate.OnControlValueChanged()
+        ucrDtpObStartdate.OnControlValueChanged()
     End Sub
 End Class

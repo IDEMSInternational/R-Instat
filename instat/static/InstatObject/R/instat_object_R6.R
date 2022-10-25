@@ -1833,135 +1833,122 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
-DataBook$set("public", "import_from_climsoft", function(
-    stationfiltercolumn = "stationId", stations = c(),
-    elementfiltercolumn = "elementId", elements = c(), 
-    include_observation_data = FALSE, 
-    include_observation_flags = FALSE, 
-    unstack_data = FALSE, 
-    include_elements_info = FALSE, 
-    start_date = NULL, end_date = NULL) {
-  #need to perform checks here
+DataBook$set("public", "import_observation_data_from_climsoft", function(
+    observation_data_table,
+    station_filter_column = "stationId", stations = c(),
+    element_filter_column = "elementId", elements = c(),
+    unstack_data = FALSE,
+    include_flags = FALSE,
+    obs_start_date = NULL,
+    obs_end_date = NULL,
+    include_stations_meta_data = FALSE,
+    include_elements_meta_data = FALSE) {
+  
+  if (missing(observation_data_table)) stop("observation data table must be passed.")
+  if (length(stations) < 1) stop("stations must be passed.")
+  if (length(elements) < 1) stop("elements must be passed.")
+  if (unstack_data && include_flags ) stop("cannot include flags when data is unstacked.")
+  
+  #TODO. need to perform checks here
   con <- self$get_database_connection()
   
-  #get stations database data and station ids values
-  if (length(stations) > 0) {
-    #construct a string of station values from the passed station vector eg of result ('191','122')
-    passed_station_values <- paste0("(", paste0("'", stations, "'", collapse =  ", "), ")")
-    
-    #get the station info of the passed station values
-    db_station_info <- DBI::dbGetQuery(con, paste0( "SELECT * FROM station WHERE ", stationfiltercolumn, " IN ", passed_station_values,  ";"))
-    
-    #set values of station ids only
-    if (stationfiltercolumn == "stationId") {
-      station_ids_values <- passed_station_values
-    } else{
-      station_ids_values <- paste0("(", paste0("'", db_station_info$stationId, "'", collapse = ", "),")")
-    }
+  #construct a string of station values from the passed station vector. format example ('191','122')
+  passed_station_values <- paste0("(", paste0("'", stations, "'", collapse =  ", "), ")")
+  
+  #get station id values from passed stations
+  if (station_filter_column == "stationId") {
+    station_ids_values <- passed_station_values
+  } else{
+    #get station id values from the database 
+    db_station_ids <- DBI::dbGetQuery(con, paste0( "SELECT stationId FROM station WHERE ", stationfiltercolumn, " IN ", passed_station_values,  ";"))
+    station_ids_values <- paste0("(", paste0("'", db_station_ids$stationId, "'", collapse = ", "),")")
   }
   
-  #if true get observation data
-  if (include_observation_data) {
-    #if there are no elements passed then stop and throw error
-    if (length(elements) < 1) stop("start_date must be of type Date.")
-    
-    #set values of element ids only
-    if (elementfiltercolumn == "elementId") {
-      #get element id values directly from passed data
-      element_ids_values <- paste0("(", paste0(elements, collapse = ", "), ")")
-    } else{
-      #get element id values from the database
-      passed_element_values <- paste0("(", paste0("'", elements, "'", collapse = ", "), ")")
-      db_elements_ids <- DBI::dbGetQuery( con, paste0("SELECT elementId FROM obselement WHERE ", elementfiltercolumn,  " IN ",  passed_element_values, ";" ))
-      element_ids_values <- paste0("(", paste0(sprintf("%d", db_elements_ids$elementId), collapse = ", "), ")")
-    }
-    
-    if(include_elements_info) {
-      db_elements_info <- DBI::dbGetQuery(con, paste0("SELECT elementId, elementName, abbreviation, description, elementtype, upperLimit, lowerLimit, units FROM obselement WHERE elementId ", " IN ", element_ids_values, ";" ))
-    }
-    
-    flags_column_col_sql <- " "
-    if (include_observation_flags) {
-      flags_column_col_sql <- ", observationfinal.flag AS flag"
-    }
-    
-    #get databounds filter query if dates have been passed
-    date_bounds_filter <- ""
-    if (!is.null(start_date)) {
-      if (!lubridate::is.Date(start_date))
-        stop("start_date must be of type Date.")
-      start_date <- format(start_date, format = "%Y-%m-%d")
-      date_bounds_filter = paste0(date_bounds_filter, " AND obsDatetime >= ", sQuote(start_date))
-    }
-    if (!is.null(end_date)) {
-      if (!lubridate::is.Date(end_date))
-        stop("end_date must be of type Date.")
-      end_date <- format(end_date, format = "%Y-%m-%d")
-      date_bounds_filter <- paste0(date_bounds_filter," AND obsDatetime <=", sQuote(end_date))
-    }
-    
-    #construct observation data sql query and get data from database
-    if (length(stations) > 0) {
-      #if stations passed get observation data of selected elements of passed stations
-      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS datetime, observationfinal.obsValue AS obsvalue", flags_column_col_sql, " FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.recordedFrom IN ", station_ids_values, " AND observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
-    } else{
-      #if stations have not been passed get observation data of passed elements of all stations
-      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS datetime, observationfinal.obsValue AS obsvalue", flags_column_col_sql, " FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
-      
-      #then get the stations ids (uniquely) from the observation data and use the ids to get station info
-      station_ids_values <- paste0("(", paste0("'", as.character(unique(db_observation_data$station) ), "'", collapse = ", "), ")")
-      db_station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationId IN ", station_ids_values, ";" ))
-    }
-    
-    station_data_name <- next_default_item("stations_info", self$get_data_names(), include_index = FALSE)
-    elements_data_name <- next_default_item("elements_info", self$get_data_names(), include_index = FALSE)
-    observation_data_name <- next_default_item("observation_data", self$get_data_names(), include_index = FALSE)
-    
-    #elements info could be optional
-    if (include_elements_info) {
-      data_list <- list(db_station_info, db_elements_info, db_observation_data)
-      names(data_list) <- c(station_data_name, elements_data_name, observation_data_name)
-    } else{
-      data_list <- list(db_station_info, db_observation_data)
-      names(data_list) <- c(station_data_name, observation_data_name)
-    }
-    
+  #construct a string of element values from the passed elements vector. format example ('2','4')
+  passed_element_values <- paste0("(", paste0("'", elements, "'", collapse =  ", "), ")")
+  
+  #get element ids values from passed elements
+  if (element_filter_column == "elementId") {
+    #get element id values directly from passed data
+    element_ids_values <- paste0("(", paste0(elements, collapse = ", "), ")")
   } else{
-    if (length(stations) > 0) {
-      data_list <- list(db_station_info)
-      names(data_list) <- next_default_item("stations_info", self$get_data_names())
-    }
+    #get element id values from the database 
+    db_element_ids <- DBI::dbGetQuery( con, paste0("SELECT elementId FROM obselement WHERE ", element_filter_column,  " IN ",  passed_element_values, ";" ))
+    element_ids_values <- paste0("(", paste0(sprintf("%d", db_element_ids$elementId), collapse = ", "), ")")
   }
+  
+  #list of tables to import
+  data_list <- list()
+  
+  if(include_stations_meta_data) {
+    db_stations <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationId ", " IN ", station_ids_values, ";" ))
+    station_data_name <- next_default_item("stations_meta_data", self$get_data_names(), include_index = FALSE)
+    data_list[[station_data_name]] <- db_stations
+  }
+  
+  if(include_elements_meta_data) {
+    db_elements <- DBI::dbGetQuery(con, paste0("SELECT * FROM obselement WHERE elementId ", " IN ", element_ids_values, ";" ))
+    elements_data_name <- next_default_item("elements_meta_data", self$get_data_names(), include_index = FALSE)
+    data_list[[elements_data_name]] <- db_elements
+  }
+  
+  #get observation data
+  #get date bound filter query if dates have been passed
+  date_bounds_filter <- ""
+  if (!is.null(obs_start_date)) {
+    if (!lubridate::is.Date(obs_start_date)) stop("obs_start_date must be of type Date.")
+    obs_start_date <- format(obs_start_date, format = "%Y-%m-%d")
+    date_bounds_filter = paste0(date_bounds_filter, " AND obsDatetime >= ", sQuote(obs_start_date))
+  }
+  if (!is.null(obs_end_date)) {
+    if (!lubridate::is.Date(obs_end_date)) stop("obs_end_date must be of type Date.")
+    obs_end_date <- format(obs_end_date, format = "%Y-%m-%d")
+    date_bounds_filter <- paste0(date_bounds_filter," AND obsDatetime <=", sQuote(obs_end_date))
+  }
+  
+  'get flags column sql'
+  flags_col_sql <- " "
+  if (!unstack_data && include_flags) {
+    flags_col_sql <- ", flag AS flag"
+  }
+  
+  db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT recordedFrom As station, abbreviation AS element, obsDatetime AS datetime, obsValue AS obsvalue", flags_col_sql, " FROM ", observation_data_table," INNER JOIN obselement ON ", observation_data_table,".describedBy = obselement.elementId WHERE recordedFrom IN ", station_ids_values, " AND describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY obsDatetime;"))
+  observation_data_name <- next_default_item("observation_data", self$get_data_names(), include_index = FALSE)  
+  
+  if(unstack_data){ 
+    #unstack the observation data by elements
+    db_observation_data<- reshape2::dcast(data = db_observation_data, formula = station + datetime ~ element, value.var = "obsvalue")
+  }
+  
+  data_list[[observation_data_name]] <- db_observation_data
   
   #import the data as separate data frames
   self$import_data(data_tables = data_list)
   
-  #if observation data was included, and key links, convert columns and optionally unstack data
-  if (include_observation_data) {
-    #add relationship key between the observation data and station data 
-    #linked by stationId and recordedFrom columns
+  #add relationship key between the observation data and station data 
+  #linked by stationId and recordedFrom columns
+  if(include_stations_meta_data) {
     self$add_key(station_data_name, c("stationId"))
     self$add_link(from_data_frame = observation_data_name, to_data_frame = station_data_name, link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label)
-    
-    #convert stations in observation data to factors
-    self$convert_column_to_type(data_name = observation_data_name, col_names = "station", to_type = "factor")
+  }
+  
+  #convert stations in observation data to factors
+  self$convert_column_to_type(data_name = observation_data_name, col_names = "station", to_type = "factor")
+  
+  if(!unstack_data){
     #convert elements in observation data to factors
     self$convert_column_to_type(data_name = observation_data_name, col_names = "element", to_type = "factor")
-    #convert flags to factors if included
-    if(include_observation_flags){
-      self$convert_column_to_type(data_name = observation_data_name, col_names = "flag", to_type = "factor")
-    }
-    #create a plain date column from the observation data datetime column values
-    obsdate <- self$get_columns_from_data(data_name = observation_data_name, col_names = "datetime", use_current_filter = FALSE)
-    self$add_columns_to_data(data_name = observation_data_name, col_name = "date", col_data = as.Date(x = obsdate), before = FALSE, adjacent_column = "datetime")
-    
-    if(unstack_data){
-      observation_data <- self$get_data_frame(data_name = observation_data_name)
-      observation_data_unstacked <- reshape2::dcast(data = observation_data, formula = station + datetime + date ~ element, value.var = "obsvalue")
-      self$import_data(data_tables = list(observation_data_unstacked = observation_data_unstacked))
-    }
   }
-
+  
+  #convert flags to factors if included
+  if(!unstack_data && include_flags){
+    self$convert_column_to_type(data_name = observation_data_name, col_names = "flag", to_type = "factor")
+  }
+  
+  #create a plain date column from the observation data datetime column values and add it to the data frame
+  datetime <- self$get_columns_from_data(data_name = observation_data_name, col_names = "datetime", use_current_filter = FALSE)
+  self$add_columns_to_data(data_name = observation_data_name, col_name = "date", col_data = as.Date(as.character(datetime), format="%Y-%m-%d"), before = FALSE, adjacent_column = "datetime")
+  
 })
 
 DataBook$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1, X2 = NA, Y1, Y2 = NA, get_area_point = "area"){

@@ -201,7 +201,7 @@ Partial Class sdgImportFromClimSoft
         Me.MinimizeBox = False
         Me.Name = "sdgImportFromClimSoft"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Connect To ClimSoft Database"
+        Me.Text = "Connect To Climsoft Database"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
