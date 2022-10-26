@@ -449,7 +449,7 @@
   "Permute/Sample Rows...": "Permuter/Échantillonner des lignes...",
   "Stack (Pivot Longer)...": "Stack (Pivot Longer)...",
   "Unstack (Pivot Wider)...": "Dépiler (Pivot plus large)...",
-  "Merge (Join)...": "Merge (Join)...",
+  "Merge (Join)...": "Fusionner (Joindre)...",
   "Append (Bind Rows)...": "Ajouter (Lier les lignes)...",
   "Random Split...": "Séparation aléatoire...",
   "Scale/Distance...": "Échelle/Distance...",
@@ -457,5 +457,5 @@
   "Save": "Enregistrer",
   "Import SST...": "Importer SST...",
   "Daily Data Editing/Entry...": "Modifier/entrer de données quotidiennes...",
-  "Experiments": "Experiments"
+  "Experiments": "Expériences"
 }
