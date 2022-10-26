@@ -99,20 +99,11 @@ Public Class dlgHideDataframes
 
     Private Sub TestOKEnabled()
         If rdoUnhideDataFrame.Checked Then
-            If Not ucrReceiverMultipleUnhide.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(Not ucrReceiverMultipleUnhide.IsEmpty)
         Else
             ' You cannot hide all data frames. When the receiver is blank all data frames are unhidden so this is allowed.
-            If ucrReceiverMultiple.lstSelectedVariables.Items.Count <> ucrSelectorForDataFrames.lstAvailableVariable.Items.Count Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(ucrReceiverMultiple.lstSelectedVariables.Items.Count <> ucrSelectorForDataFrames.lstAvailableVariable.Items.Count)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -122,7 +113,6 @@ Public Class dlgHideDataframes
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-
         ucrPnlHideUnhide.SetRCode(clsDummyFunction, bReset)
         ucrReceiverMultiple.SetRCode(clsHideDataFramesFunction, bReset)
     End Sub
