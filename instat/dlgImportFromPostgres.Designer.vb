@@ -67,7 +67,7 @@ Partial Class dlgImportFromPostgres
         Me.ucrInputUsername.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputUsername.Name = "ucrInputUsername"
         Me.ucrInputUsername.Size = New System.Drawing.Size(167, 21)
-        Me.ucrInputUsername.TabIndex = 8
+        Me.ucrInputUsername.TabIndex = 2
         '
         'ucrBase
         '
@@ -92,7 +92,7 @@ Partial Class dlgImportFromPostgres
         Me.lblUsername.Location = New System.Drawing.Point(43, 42)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(112, 13)
-        Me.lblUsername.TabIndex = 7
+        Me.lblUsername.TabIndex = 1
         Me.lblUsername.Text = "Username:"
         '
         'ucrInputDatabase
@@ -105,14 +105,14 @@ Partial Class dlgImportFromPostgres
         Me.ucrInputDatabase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputDatabase.Name = "ucrInputDatabase"
         Me.ucrInputDatabase.Size = New System.Drawing.Size(167, 21)
-        Me.ucrInputDatabase.TabIndex = 14
+        Me.ucrInputDatabase.TabIndex = 4
         '
         'lblDatabase
         '
         Me.lblDatabase.Location = New System.Drawing.Point(43, 79)
         Me.lblDatabase.Name = "lblDatabase"
         Me.lblDatabase.Size = New System.Drawing.Size(112, 13)
-        Me.lblDatabase.TabIndex = 13
+        Me.lblDatabase.TabIndex = 3
         Me.lblDatabase.Text = "Database:"
         '
         'UcrInputHost
@@ -125,14 +125,14 @@ Partial Class dlgImportFromPostgres
         Me.UcrInputHost.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrInputHost.Name = "UcrInputHost"
         Me.UcrInputHost.Size = New System.Drawing.Size(167, 21)
-        Me.UcrInputHost.TabIndex = 16
+        Me.UcrInputHost.TabIndex = 6
         '
         'lblHost
         '
         Me.lblHost.Location = New System.Drawing.Point(43, 116)
         Me.lblHost.Name = "lblHost"
         Me.lblHost.Size = New System.Drawing.Size(112, 13)
-        Me.lblHost.TabIndex = 15
+        Me.lblHost.TabIndex = 5
         Me.lblHost.Text = "Host:"
         '
         'UcrInputPort
@@ -145,14 +145,14 @@ Partial Class dlgImportFromPostgres
         Me.UcrInputPort.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrInputPort.Name = "UcrInputPort"
         Me.UcrInputPort.Size = New System.Drawing.Size(167, 21)
-        Me.UcrInputPort.TabIndex = 18
+        Me.UcrInputPort.TabIndex = 8
         '
         'lblPort
         '
         Me.lblPort.Location = New System.Drawing.Point(43, 153)
         Me.lblPort.Name = "lblPort"
         Me.lblPort.Size = New System.Drawing.Size(112, 13)
-        Me.lblPort.TabIndex = 17
+        Me.lblPort.TabIndex = 7
         Me.lblPort.Text = "Port:"
         '
         'dlgImportFromPostgres
@@ -177,7 +177,7 @@ Partial Class dlgImportFromPostgres
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromPostgres"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgImportFromPostgres"
+        Me.Text = "ImportFromPostgres"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
