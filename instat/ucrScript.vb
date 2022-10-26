@@ -380,7 +380,7 @@ Public Class ucrScript
             txtScript.Paste()
             EnableDisableButtons()
         Else
-            MsgBox("You can only paste text data on the script window.", "Paste to Script Window")
+            MsgBox(Prompt:="You can only paste text data on the script window.", Title:="Paste to Script Window")
         End If
     End Sub
 
