@@ -98,6 +98,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputStatistic = New instat.ucrInputComboBox()
         Me.ucrInputType = New instat.ucrInputComboBox()
         Me.lblType = New System.Windows.Forms.Label()
+        Me.lblNullValue = New System.Windows.Forms.Label()
+        Me.ucrInputNullValue = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -141,7 +143,7 @@ Partial Class dlgOneVarFitModel
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(295, 357)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(295, 331)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(127, 23)
         Me.cmdDisplayOptions.TabIndex = 44
@@ -150,7 +152,7 @@ Partial Class dlgOneVarFitModel
         '
         'cmdFittingOptions
         '
-        Me.cmdFittingOptions.Location = New System.Drawing.Point(295, 332)
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(295, 306)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(127, 23)
         Me.cmdFittingOptions.TabIndex = 43
@@ -333,7 +335,7 @@ Partial Class dlgOneVarFitModel
         'lblSuccess
         '
         Me.lblSuccess.AutoSize = True
-        Me.lblSuccess.Location = New System.Drawing.Point(232, 229)
+        Me.lblSuccess.Location = New System.Drawing.Point(273, 229)
         Me.lblSuccess.Name = "lblSuccess"
         Me.lblSuccess.Size = New System.Drawing.Size(51, 13)
         Me.lblSuccess.TabIndex = 87
@@ -345,7 +347,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputSuccess.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSuccess.GetSetSelectedIndex = -1
         Me.ucrInputSuccess.IsReadOnly = False
-        Me.ucrInputSuccess.Location = New System.Drawing.Point(350, 225)
+        Me.ucrInputSuccess.Location = New System.Drawing.Point(326, 225)
         Me.ucrInputSuccess.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputSuccess.Name = "ucrInputSuccess"
         Me.ucrInputSuccess.Size = New System.Drawing.Size(71, 21)
@@ -627,7 +629,7 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 387)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 361)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -636,7 +638,7 @@ Partial Class dlgOneVarFitModel
         'lblMethodInference
         '
         Me.lblMethodInference.AutoSize = True
-        Me.lblMethodInference.Location = New System.Drawing.Point(278, 144)
+        Me.lblMethodInference.Location = New System.Drawing.Point(278, 258)
         Me.lblMethodInference.Name = "lblMethodInference"
         Me.lblMethodInference.Size = New System.Drawing.Size(46, 13)
         Me.lblMethodInference.TabIndex = 105
@@ -648,7 +650,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(328, 138)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(326, 254)
         Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(94, 21)
@@ -657,7 +659,7 @@ Partial Class dlgOneVarFitModel
         'lblAlternative
         '
         Me.lblAlternative.AutoSize = True
-        Me.lblAlternative.Location = New System.Drawing.Point(208, 284)
+        Me.lblAlternative.Location = New System.Drawing.Point(209, 144)
         Me.lblAlternative.Name = "lblAlternative"
         Me.lblAlternative.Size = New System.Drawing.Size(115, 13)
         Me.lblAlternative.TabIndex = 103
@@ -669,7 +671,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputAlternative.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAlternative.GetSetSelectedIndex = -1
         Me.ucrInputAlternative.IsReadOnly = False
-        Me.ucrInputAlternative.Location = New System.Drawing.Point(326, 280)
+        Me.ucrInputAlternative.Location = New System.Drawing.Point(326, 140)
         Me.ucrInputAlternative.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputAlternative.Name = "ucrInputAlternative"
         Me.ucrInputAlternative.Size = New System.Drawing.Size(94, 21)
@@ -690,7 +692,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputStatistic.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(327, 166)
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(326, 166)
         Me.ucrInputStatistic.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
         Me.ucrInputStatistic.Size = New System.Drawing.Size(94, 21)
@@ -702,7 +704,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(329, 193)
+        Me.ucrInputType.Location = New System.Drawing.Point(326, 193)
         Me.ucrInputType.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(94, 21)
@@ -711,26 +713,47 @@ Partial Class dlgOneVarFitModel
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(232, 197)
+        Me.lblType.Location = New System.Drawing.Point(230, 197)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(94, 13)
         Me.lblType.TabIndex = 107
         Me.lblType.Text = "Type of Inference:"
+        '
+        'lblNullValue
+        '
+        Me.lblNullValue.AutoSize = True
+        Me.lblNullValue.Location = New System.Drawing.Point(266, 286)
+        Me.lblNullValue.Name = "lblNullValue"
+        Me.lblNullValue.Size = New System.Drawing.Size(58, 13)
+        Me.lblNullValue.TabIndex = 109
+        Me.lblNullValue.Text = "Null Value:"
+        '
+        'ucrInputNullValue
+        '
+        Me.ucrInputNullValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputNullValue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputNullValue.GetSetSelectedIndex = -1
+        Me.ucrInputNullValue.IsReadOnly = False
+        Me.ucrInputNullValue.Location = New System.Drawing.Point(326, 282)
+        Me.ucrInputNullValue.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputNullValue.Name = "ucrInputNullValue"
+        Me.ucrInputNullValue.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputNullValue.TabIndex = 110
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(428, 455)
+        Me.ClientSize = New System.Drawing.Size(428, 422)
+        Me.Controls.Add(Me.ucrInputNullValue)
+        Me.Controls.Add(Me.lblNullValue)
         Me.Controls.Add(Me.ucrInputType)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblMethodInference)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.lblAlternative)
-        Me.Controls.Add(Me.ucrInputAlternative)
         Me.Controls.Add(Me.lblStatistic)
-        Me.Controls.Add(Me.ucrInputStatistic)
         Me.Controls.Add(Me.ucrInputSuccess)
         Me.Controls.Add(Me.ucrInputConfidenceInterval)
         Me.Controls.Add(Me.ucrInputComboQMethod)
@@ -781,6 +804,8 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblNullHyp)
         Me.Controls.Add(Me.lblSuccess)
         Me.Controls.Add(Me.lblQMethod)
+        Me.Controls.Add(Me.ucrInputAlternative)
+        Me.Controls.Add(Me.ucrInputStatistic)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -852,4 +877,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputStatistic As ucrInputComboBox
     Friend WithEvents ucrInputType As ucrInputComboBox
     Friend WithEvents lblType As Label
+    Friend WithEvents lblNullValue As Label
+    Friend WithEvents ucrInputNullValue As ucrInputComboBox
 End Class
