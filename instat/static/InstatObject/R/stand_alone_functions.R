@@ -27,11 +27,12 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         #  format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
         temp_data <- c()
         for(val in data[[i]]){
-            if(nchar(val) > 9){
+            #if(nchar(val) > 9 && is_scientific[i]){
+            #   temp_data <- append(temp_data, format(val, digits = decimal_places[i], scientific = is_scientific[i]))
                temp_data <- append(temp_data, format(val, digits = decimal_places[i], scientific = is_scientific[i]))
-            }else{
-               temp_data <- append(temp_data, val)
-            }
+            #}else{
+            #   temp_data <- append(temp_data, val)
+            #}
         }
         out[, i] <- temp_data
       }
