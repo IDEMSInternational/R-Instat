@@ -25,8 +25,6 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
       } else {
         #out[, i] <-
         #  format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
-                #out[, i] <-
-        #  format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
         temp_data <- c()
         for(val in data[[i]]){
             if(nchar(val) > 9){
