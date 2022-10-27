@@ -47,7 +47,8 @@ Partial Class dlgClimSoft
         Me.ucrChkStations = New instat.ucrCheck()
         Me.ucrChkObsDate = New instat.ucrCheck()
         Me.ucrCboObsTable = New instat.ucrInputComboBox()
-        Me.ucrChkStackData = New instat.ucrCheck()
+        Me.ucrChkUnStackData = New instat.ucrCheck()
+        Me.btnMoreOptions = New System.Windows.Forms.Button()
         Me.lblConnection = New System.Windows.Forms.Label()
         Me.lbTable = New System.Windows.Forms.Label()
         Me.lblObsStartDate = New System.Windows.Forms.Label()
@@ -59,7 +60,6 @@ Partial Class dlgClimSoft
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.btnMoreOptions = New System.Windows.Forms.Button()
         Me.lblObsEndDate = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -143,16 +143,27 @@ Partial Class dlgClimSoft
         Me.ucrCboObsTable.TabIndex = 19
         Me.ttClimsoft.SetToolTip(Me.ucrCboObsTable, "Select observation data table")
         '
-        'ucrChkStackData
+        'ucrChkUnStackData
         '
-        Me.ucrChkStackData.AutoSize = True
-        Me.ucrChkStackData.Checked = False
-        Me.ucrChkStackData.Location = New System.Drawing.Point(8, 289)
-        Me.ucrChkStackData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkStackData.Name = "ucrChkStackData"
-        Me.ucrChkStackData.Size = New System.Drawing.Size(144, 23)
-        Me.ucrChkStackData.TabIndex = 45
-        Me.ttClimsoft.SetToolTip(Me.ucrChkStackData, "Stack data")
+        Me.ucrChkUnStackData.AutoSize = True
+        Me.ucrChkUnStackData.Checked = False
+        Me.ucrChkUnStackData.Location = New System.Drawing.Point(8, 289)
+        Me.ucrChkUnStackData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkUnStackData.Name = "ucrChkUnStackData"
+        Me.ucrChkUnStackData.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkUnStackData.TabIndex = 45
+        Me.ttClimsoft.SetToolTip(Me.ucrChkUnStackData, "Stack data")
+        '
+        'btnMoreOptions
+        '
+        Me.btnMoreOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnMoreOptions.Location = New System.Drawing.Point(156, 288)
+        Me.btnMoreOptions.Name = "btnMoreOptions"
+        Me.btnMoreOptions.Size = New System.Drawing.Size(90, 23)
+        Me.btnMoreOptions.TabIndex = 46
+        Me.btnMoreOptions.Text = "More Options"
+        Me.ttClimsoft.SetToolTip(Me.btnMoreOptions, "Click to view more options")
+        Me.btnMoreOptions.UseVisualStyleBackColor = True
         '
         'lblConnection
         '
@@ -282,17 +293,6 @@ Partial Class dlgClimSoft
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
-        'btnMoreOptions
-        '
-        Me.btnMoreOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnMoreOptions.Location = New System.Drawing.Point(156, 288)
-        Me.btnMoreOptions.Name = "btnMoreOptions"
-        Me.btnMoreOptions.Size = New System.Drawing.Size(90, 23)
-        Me.btnMoreOptions.TabIndex = 46
-        Me.btnMoreOptions.Text = "More Options"
-        Me.ttClimsoft.SetToolTip(Me.btnMoreOptions, "Click to view more options")
-        Me.btnMoreOptions.UseVisualStyleBackColor = True
-        '
         'lblObsEndDate
         '
         Me.lblObsEndDate.AutoSize = True
@@ -311,7 +311,7 @@ Partial Class dlgClimSoft
         Me.ClientSize = New System.Drawing.Size(413, 526)
         Me.Controls.Add(Me.lblObsEndDate)
         Me.Controls.Add(Me.btnMoreOptions)
-        Me.Controls.Add(Me.ucrChkStackData)
+        Me.Controls.Add(Me.ucrChkUnStackData)
         Me.Controls.Add(Me.ucrChkElements)
         Me.Controls.Add(Me.ucrChkStations)
         Me.Controls.Add(Me.ucrChkObsDate)
@@ -360,7 +360,7 @@ Partial Class dlgClimSoft
     Friend WithEvents lblObsStartDate As Label
     Friend WithEvents ucrChkElements As ucrCheck
     Friend WithEvents ucrChkStations As ucrCheck
-    Friend WithEvents ucrChkStackData As ucrCheck
+    Friend WithEvents ucrChkUnStackData As ucrCheck
     Friend WithEvents btnMoreOptions As Button
     Friend WithEvents lblObsEndDate As Label
 End Class

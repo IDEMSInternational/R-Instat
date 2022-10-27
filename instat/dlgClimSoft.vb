@@ -110,21 +110,21 @@ Public Class dlgClimSoft
         ucrChkElements.SetRDefault("FALSE")
 
         '-----------------------------------------------------------------
-        ucrChkStackData.SetText("Unstack Data")
-        ucrChkStackData.SetParameter(New RParameter("unstack_data", 7))
-        ucrChkStackData.SetRDefault("FALSE")
+        ucrChkUnStackData.SetText("Unstack Data")
+        ucrChkUnStackData.SetParameter(New RParameter("unstack_data", 7))
+        ucrChkUnStackData.SetRDefault("FALSE")
 
         '-----------------------------------------------------------------
         'observation date range checkbox
         ucrChkObsDate.SetText("Select Date Range")
 
         'start date datepicker
-        ucrDtpObStartdate.SetParameter(New RParameter("obs_start_date", 8))
+        ucrDtpObStartdate.SetParameter(New RParameter("obs_start_date", 11))
         ucrDtpObStartdate.SetParameterIsRDate()
         ucrDtpObStartdate.SetLinkedDisplayControl(lblObsStartDate)
 
         'end date datepicker
-        ucrDtpObsEndDate.SetParameter(New RParameter("obs_end_date", 9))
+        ucrDtpObsEndDate.SetParameter(New RParameter("obs_end_date", 12))
         ucrDtpObsEndDate.SetParameterIsRDate()
         ucrDtpObsEndDate.SetLinkedDisplayControl(lblObsEndDate)
 
@@ -154,8 +154,11 @@ Public Class dlgClimSoft
         ucrCboObsTable.Reset()
         ucrSelectorForClimSoft.Reset()
         ucrReceiverStations.SetMeAsReceiver()
+        ucrChkUnStackData.Checked = False
+        btnMoreOptions.Enabled = False
         ucrDtpObStartdate.DateValue = Date.Now
         ucrDtpObsEndDate.DateValue = Date.Now
+        ucrChkObsDate.Checked = True
         ucrChkObsDate.Checked = False
         ucrChkStations.Checked = False
         ucrChkElements.Checked = False
@@ -171,7 +174,7 @@ Public Class dlgClimSoft
         ucrChkStations.SetRCode(clsRImportFromClimsoft, bReset)
         ucrChkElements.SetRCode(clsRImportFromClimsoft, bReset)
 
-        ucrChkStackData.SetRCode(clsRImportFromClimsoft, bReset)
+        ucrChkUnStackData.SetRCode(clsRImportFromClimsoft, bReset)
 
         ucrDtpObStartdate.SetRCode(clsRImportFromClimsoft, bReset)
         ucrDtpObsEndDate.SetRCode(clsRImportFromClimsoft, bReset)
@@ -299,16 +302,8 @@ Public Class dlgClimSoft
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrIncludeFlagsControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackData.ControlValueChanged, ucrReceiverElements.ControlValueChanged
-        'unstack observation data only when more than 1 element is selected
-        If ucrChkStackData.Checked AndAlso ucrReceiverElements.GetVariableNamesAsList.Count = 1 Then
-            ucrChkFlags.Enabled = True
-            clsRImportFromClimsoft.AddParameter("include_flags",
-                                                If(ucrChkFlags.Checked, "TRUE", "FALSE"))
-        Else
-            ucrChkFlags.Enabled = False
-            clsRImportFromClimsoft.RemoveParameterByName("include_flags")
-        End If
+    Private Sub ucrIncludeFlagsControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUnStackData.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+
     End Sub
 
     Private Sub ucrChkObsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObsDate.ControlValueChanged
@@ -319,5 +314,14 @@ Public Class dlgClimSoft
 
         ucrDtpObsEndDate.OnControlValueChanged()
         ucrDtpObStartdate.OnControlValueChanged()
+    End Sub
+
+    Private Sub ucrChkStackData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUnStackData.ControlValueChanged
+        btnMoreOptions.Enabled = ucrChkUnStackData.Checked
+    End Sub
+
+    Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
+        sdgClimsoftDataOptions.SetUpRCode(clsRImportFromClimsoft)
+        sdgClimsoftDataOptions.ShowDialog(Me)
     End Sub
 End Class
