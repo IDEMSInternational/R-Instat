@@ -224,7 +224,6 @@ Public Class dlgOneVarFitModel
         ucrInputStatistic.SetDropDownStyleAsNonEditable()
         ucrInputStatistic.SetItems(dctStatistic)
         ucrInputComboTests.AddToLinkedControls(ucrInputStatistic, {"bayes"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
-        'ucrInputStatistic.AddToLinkedControls(ucrInputSuccess, {"proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputAlternative.SetParameter(New RParameter("alternative", 5))
         dctAlternative.Add("twosided", Chr(34) & "twosided" & Chr(34))
@@ -257,9 +256,7 @@ Public Class dlgOneVarFitModel
         ucrInputNullValue.SetItems(dctNullValue)
         ucrInputNullValue.SetValidationTypeAsNumeric()
         ucrInputNullValue.AddQuotesIfUnrecognised = False
-        'ucrInputNullValue.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNullValue, {"bayes"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.0")
-
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mean")
@@ -347,9 +344,6 @@ Public Class dlgOneVarFitModel
         clsPearsonFunction = New RFunction
         clsSfFunction = New RFunction
         clsBayesIferenceFunction = New RFunction
-
-
-
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
@@ -537,8 +531,6 @@ Public Class dlgOneVarFitModel
         clsQuantileCIFunction.AddParameter("minLength", "FALSE", iPosition:=6)
         clsQuantileCIFunction.AddParameter("bootci.type", Chr(34) & "norm" & Chr(34), iPosition:=5)
 
-
-
         clsSdCIFunction.SetPackageName("MKinfer")
         clsSdCIFunction.SetRCommand("sdCI")
         clsSdCIFunction.AddParameter("boot", "FALSE", iPosition:=2)
@@ -618,7 +610,6 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsSdCIFunction, iAdditionalPairNo:=21)
         ucrSaveModel.AddAdditionalRCode(clsVarCIFunction, iAdditionalPairNo:=22)
         ucrSaveModel.AddAdditionalRCode(clsBayesIferenceFunction, iAdditionalPairNo:=23)
-
 
 
         ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -756,17 +747,16 @@ Public Class dlgOneVarFitModel
 
     Private Sub EnableDisableConvertVariate()
         If ucrReceiverVariable.strCurrDataType = "numeric" Then
-
             ucrChkConvertVariate.Checked = False
             ucrChkConvertVariate.Visible = False
         Else
             ucrChkConvertVariate.Visible = True
         End If
-        If ucrInputComboTests.GetText() = "bayes" AndAlso ucrReceiverVariable.strCurrDataType = "factor" Then
-            ucrChkConvertVariate.Visible = False
-        Else
-            ucrChkConvertVariate.Visible = True
-        End If
+        'If ucrInputComboTests.GetText() = "bayes" AndAlso ucrReceiverVariable.strCurrDataType = "factor" OrElse ucrReceiverVariable.strCurrDataType = "numeric" Then
+        '    ucrChkConvertVariate.Visible = False
+        'Else
+        '    ucrChkConvertVariate.Visible = True
+        'End If
     End Sub
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged, ucrChkConvertVariate.ControlValueChanged
@@ -849,7 +839,7 @@ Public Class dlgOneVarFitModel
                         clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "Sen"
                         tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen's slope for linear rate of change")
-            clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                        clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "serial corr"
                         clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVectorFunction, iPosition:=0)
 
@@ -963,7 +953,6 @@ Public Class dlgOneVarFitModel
                 Case "bayes"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBayesIferenceFunction)
                     ucrBase.clsRsyntax.AddToBeforeCodes(clsOptions)
-                    'ucrChkConvertVariate.Visible = False
 
             End Select
         ElseIf rdoEstimate.Checked Then
@@ -1056,7 +1045,7 @@ Public Class dlgOneVarFitModel
         AddAsNumeric()
         EstimatesAsNumeric()
         AddFactorLevels()
-        EnableDisableConvertVariate()
+        'EnableDisableConvertVariate()
 
         If ucrInputComboTests.GetText = strSeparator Then
             ucrInputComboTests.cboInput.SelectedIndex = 0
@@ -1075,15 +1064,6 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    'Private Sub ucrInputNullValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNullValue.ControlValueChanged
-    'If ucrInputStatistic.GetText() = "mean" Then
-    '    ucrInputNullValue.SetValidationTypeAsNumeric(dcmMin:=0.0, dcmMax:=Integer.MaxValue)
-    '    'ucrInputNullValue.bAllowNonConditionValues = False
-    'Else
-    '    ucrInputNullValue.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1, bIncludeMax:=True)
-    '    'ucrInputNullValue.bAllowNonConditionValues = True
-    'End If
-    'End Sub
 
     Private Sub ucrInputStatistic_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStatistic.ControlValueChanged, ucrInputNullValue.ControlValueChanged
         If ucrInputStatistic.GetText() = "proportion" Then
