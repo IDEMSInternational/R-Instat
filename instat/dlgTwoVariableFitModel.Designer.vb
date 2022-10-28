@@ -80,6 +80,8 @@ Partial Class dlgTwoVariableFitModel
         Me.lblSuccess = New System.Windows.Forms.Label()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.lblMethodInference = New System.Windows.Forms.Label()
+        Me.ucrInputPriorMean = New instat.ucrInputTextBox()
+        Me.lblPriorMean = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -509,12 +511,34 @@ Partial Class dlgTwoVariableFitModel
         Me.lblMethodInference.TabIndex = 99
         Me.lblMethodInference.Text = "Method:"
         '
+        'ucrInputPriorMean
+        '
+        Me.ucrInputPriorMean.AddQuotesIfUnrecognised = True
+        Me.ucrInputPriorMean.AutoSize = True
+        Me.ucrInputPriorMean.IsMultiline = False
+        Me.ucrInputPriorMean.IsReadOnly = False
+        Me.ucrInputPriorMean.Location = New System.Drawing.Point(325, 326)
+        Me.ucrInputPriorMean.Name = "ucrInputPriorMean"
+        Me.ucrInputPriorMean.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputPriorMean.TabIndex = 115
+        '
+        'lblPriorMean
+        '
+        Me.lblPriorMean.AutoSize = True
+        Me.lblPriorMean.Location = New System.Drawing.Point(262, 330)
+        Me.lblPriorMean.Name = "lblPriorMean"
+        Me.lblPriorMean.Size = New System.Drawing.Size(61, 13)
+        Me.lblPriorMean.TabIndex = 114
+        Me.lblPriorMean.Text = "Prior Mean:"
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.ucrInputPriorMean)
+        Me.Controls.Add(Me.lblPriorMean)
         Me.Controls.Add(Me.lblMethodInference)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.lblAlternative)
@@ -609,4 +633,6 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents ucrInputSuccess As ucrInputTextBox
     Friend WithEvents lblMethodInference As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
+    Friend WithEvents ucrInputPriorMean As ucrInputTextBox
+    Friend WithEvents lblPriorMean As Label
 End Class

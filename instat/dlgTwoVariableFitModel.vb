@@ -163,7 +163,7 @@ Public Class dlgTwoVariableFitModel
         dctAlternative.Add("greater", Chr(34) & "greater" & Chr(34))
         ucrInputAlternative.SetDropDownStyleAsNonEditable()
         ucrInputAlternative.SetItems(dctAlternative)
-        ucrInputTest.AddToLinkedControls(ucrInputAlternative, {"bayes"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="twosided")
+        ucrInputType.AddToLinkedControls(ucrInputAlternative, {"hypothesis test"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="twosided")
 
         ucrInputType.SetParameter(New RParameter("type", 6))
         dctType.Add("credible interval", Chr(34) & "ci" & Chr(34))
@@ -181,7 +181,11 @@ Public Class dlgTwoVariableFitModel
 
 
         ucrInputSuccess.SetParameter(New RParameter("success", 7))
-        'ucrInputTest.AddToLinkedControls(ucrInputSuccess, {"bayes"}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputPriorMean.SetParameter(New RParameter("mu_0", 9))
+        ucrInputPriorMean.SetValidationTypeAsNumeric()
+        ucrInputPriorMean.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
+        ucrInputType.AddToLinkedControls(ucrInputPriorMean, {"credible interval"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.0")
 
 
         ucrInputNullHypothesis.SetParameter(New RParameter("mu", 3))
@@ -200,6 +204,7 @@ Public Class dlgTwoVariableFitModel
         ucrInputType.SetLinkedDisplayControl(lblType)
         ucrInputSuccess.SetLinkedDisplayControl(lblSuccess)
         ucrInputMethod.SetLinkedDisplayControl(lblMethodInference)
+        ucrInputPriorMean.SetLinkedDisplayControl(lblPriorMean)
 
         ucrSaveModels.SetPrefix("two_var")
         ucrSaveModels.SetSaveTypeAsModel()
@@ -324,8 +329,11 @@ Public Class dlgTwoVariableFitModel
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
-        clsLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
-        clsGLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+        clsLM.SetAssignTo("last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+
+
+        'clsLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
+        'clsGLM.SetAssignTo(strTemp:=ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsLMOrGLM = clsLM
 
         clsResidualFunction.SetRCommand("residuals")
@@ -451,7 +459,7 @@ Public Class dlgTwoVariableFitModel
         clsBayesIferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=3)
         clsBayesIferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=4)
         clsBayesIferenceFunction.AddParameter("success", ucrInputSuccess.GetValue, iPosition:=5)
-        clsBayesIferenceFunction.AddParameter("null", 0, iPosition:=6)
+        'clsBayesIferenceFunction.AddParameter("null", 0, iPosition:=6)
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=7)
 
 
@@ -579,6 +587,7 @@ Public Class dlgTwoVariableFitModel
         ucrInputType.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputSuccess.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputMethod.SetRCode(clsBayesIferenceFunction, bReset)
+        ucrInputPriorMean.SetRCode(clsBayesIferenceFunction, bReset)
 
 
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("mu", iNewPosition:=4), iAdditionalPairNo:=1)
@@ -997,5 +1006,36 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub ucrInputTest_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTest.ControlValueChanged
         SetBaseFunction()
+        Save()
+    End Sub
+
+    Private Sub Save()
+        If ucrInputTest.GetText = "bayes" Then
+            If ucrSaveModels.ucrChkSave.Checked Then
+                clsBayesIferenceFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+
+            Else
+                clsBayesIferenceFunction.RemoveAssignTo()
+            End If
+
+        End If
+    End Sub
+
+    Private Sub ucrSaveModels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveModels.ControlValueChanged
+        Save()
+    End Sub
+
+    Private Sub GetNullValue()
+        If ucrInputType.GetText = "hypothesis test" Then
+            clsBayesIferenceFunction.AddParameter("null", 0, iPosition:=6)
+
+        Else
+            clsBayesIferenceFunction.RemoveParameterByName("null")
+
+        End If
+    End Sub
+
+    Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
+        GetNullValue()
     End Sub
 End Class
