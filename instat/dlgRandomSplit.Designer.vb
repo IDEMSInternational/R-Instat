@@ -33,13 +33,12 @@ Partial Class dlgRandomSplit
         Me.ucrNudLag = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkLag = New instat.ucrCheck()
-        Me.ucrChkTrainingData = New instat.ucrCheck()
-        Me.ucrChkTestingData = New instat.ucrCheck()
         Me.ucrChkStratifyingFactor = New instat.ucrCheck()
         Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.ucrSelectorRandomSplit = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRanSplit = New instat.ucrReceiverSingle()
-        Me.ucrSaveRandomSplit = New instat.ucrSave()
+        Me.ucrSaveTrainingData = New instat.ucrSave()
+        Me.ucrSaveTestingData = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -170,24 +169,6 @@ Partial Class dlgRandomSplit
         Me.ucrChkLag.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkLag.TabIndex = 25
         '
-        'ucrChkTrainingData
-        '
-        Me.ucrChkTrainingData.AutoSize = True
-        Me.ucrChkTrainingData.Checked = False
-        Me.ucrChkTrainingData.Location = New System.Drawing.Point(9, 278)
-        Me.ucrChkTrainingData.Name = "ucrChkTrainingData"
-        Me.ucrChkTrainingData.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkTrainingData.TabIndex = 24
-        '
-        'ucrChkTestingData
-        '
-        Me.ucrChkTestingData.AutoSize = True
-        Me.ucrChkTestingData.Checked = False
-        Me.ucrChkTestingData.Location = New System.Drawing.Point(9, 307)
-        Me.ucrChkTestingData.Name = "ucrChkTestingData"
-        Me.ucrChkTestingData.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkTestingData.TabIndex = 23
-        '
         'ucrChkStratifyingFactor
         '
         Me.ucrChkStratifyingFactor.AutoSize = True
@@ -230,20 +211,30 @@ Partial Class dlgRandomSplit
         Me.ucrReceiverRanSplit.TabIndex = 39
         Me.ucrReceiverRanSplit.ucrSelector = Nothing
         '
-        'ucrSaveRandomSplit
+        'ucrSaveTrainingData
         '
-        Me.ucrSaveRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveRandomSplit.Location = New System.Drawing.Point(9, 331)
-        Me.ucrSaveRandomSplit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveRandomSplit.Name = "ucrSaveRandomSplit"
-        Me.ucrSaveRandomSplit.Size = New System.Drawing.Size(403, 23)
-        Me.ucrSaveRandomSplit.TabIndex = 28
+        Me.ucrSaveTrainingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 331)
+        Me.ucrSaveTrainingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveTrainingData.Name = "ucrSaveTrainingData"
+        Me.ucrSaveTrainingData.Size = New System.Drawing.Size(403, 23)
+        Me.ucrSaveTrainingData.TabIndex = 28
+        '
+        'ucrSaveTestingData
+        '
+        Me.ucrSaveTestingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTestingData.Location = New System.Drawing.Point(9, 300)
+        Me.ucrSaveTestingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveTestingData.Name = "ucrSaveTestingData"
+        Me.ucrSaveTestingData.Size = New System.Drawing.Size(403, 23)
+        Me.ucrSaveTestingData.TabIndex = 40
         '
         'dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 418)
+        Me.Controls.Add(Me.ucrSaveTestingData)
         Me.Controls.Add(Me.ucrReceiverRanSplit)
         Me.Controls.Add(Me.lblBreaks)
         Me.Controls.Add(Me.ucrNudBreaks)
@@ -252,11 +243,9 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.ucrNudPool)
         Me.Controls.Add(Me.ucrNudFraction)
         Me.Controls.Add(Me.ucrNudLag)
-        Me.Controls.Add(Me.ucrSaveRandomSplit)
+        Me.Controls.Add(Me.ucrSaveTrainingData)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrChkLag)
-        Me.Controls.Add(Me.ucrChkTrainingData)
-        Me.Controls.Add(Me.ucrChkTestingData)
         Me.Controls.Add(Me.rdoSample)
         Me.Controls.Add(Me.rdoTimeSeries)
         Me.Controls.Add(Me.ucrChkStratifyingFactor)
@@ -277,8 +266,6 @@ Partial Class dlgRandomSplit
     Friend WithEvents rdoTimeSeries As RadioButton
     Friend WithEvents ucrChkStratifyingFactor As ucrCheck
     Friend WithEvents ucrChkLag As ucrCheck
-    Friend WithEvents ucrChkTrainingData As ucrCheck
-    Friend WithEvents ucrChkTestingData As ucrCheck
     Friend WithEvents ucrNudPool As ucrNud
     Friend WithEvents ucrNudFraction As ucrNud
     Friend WithEvents ucrNudLag As ucrNud
@@ -290,5 +277,6 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrNudBreaks As ucrNud
     Friend WithEvents ucrSelectorRandomSplit As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRanSplit As ucrReceiverSingle
-    Friend WithEvents ucrSaveRandomSplit As ucrSave
+    Friend WithEvents ucrSaveTrainingData As ucrSave
+    Friend WithEvents ucrSaveTestingData As ucrSave
 End Class
