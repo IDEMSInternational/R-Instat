@@ -2314,6 +2314,7 @@
   "Scaled Fractions": "Scaled Fractions",
   "Scaled Points": "Scaled Points",
   "Scales": "Scales",
+  "Scale/Distance": "Scale/Distance",
   "Scatter Matrix": "Scatter Matrix",
   "Scatter Plot": "Scatter Plot",
   "Scatter Plot Options": "Scatter Plot Options",
@@ -3708,4 +3709,5 @@
   "Levels": "Levels",
   "Category:": "Category:",
   "Show Command": "Show Command",
-  "Lists:": "Lists:"}
+  "Lists:": "Lists:"
+}
