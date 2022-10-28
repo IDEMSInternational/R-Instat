@@ -36,36 +36,36 @@ Partial Class sdgClimsoftDataOptions
         '
         Me.ucrChkDataForm.AutoSize = True
         Me.ucrChkDataForm.Checked = False
-        Me.ucrChkDataForm.Location = New System.Drawing.Point(8, 77)
+        Me.ucrChkDataForm.Location = New System.Drawing.Point(8, 40)
         Me.ucrChkDataForm.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkDataForm.Name = "ucrChkDataForm"
-        Me.ucrChkDataForm.Size = New System.Drawing.Size(188, 23)
+        Me.ucrChkDataForm.Size = New System.Drawing.Size(220, 23)
         Me.ucrChkDataForm.TabIndex = 51
         '
         'ucrChkQc
         '
         Me.ucrChkQc.AutoSize = True
         Me.ucrChkQc.Checked = False
-        Me.ucrChkQc.Location = New System.Drawing.Point(8, 48)
+        Me.ucrChkQc.Location = New System.Drawing.Point(8, 8)
         Me.ucrChkQc.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkQc.Name = "ucrChkQc"
-        Me.ucrChkQc.Size = New System.Drawing.Size(188, 23)
+        Me.ucrChkQc.Size = New System.Drawing.Size(220, 23)
         Me.ucrChkQc.TabIndex = 50
         '
         'ucrChkFlags
         '
         Me.ucrChkFlags.AutoSize = True
         Me.ucrChkFlags.Checked = False
-        Me.ucrChkFlags.Location = New System.Drawing.Point(8, 17)
+        Me.ucrChkFlags.Location = New System.Drawing.Point(8, 73)
         Me.ucrChkFlags.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkFlags.Name = "ucrChkFlags"
-        Me.ucrChkFlags.Size = New System.Drawing.Size(188, 23)
+        Me.ucrChkFlags.Size = New System.Drawing.Size(220, 23)
         Me.ucrChkFlags.TabIndex = 49
         '
         'ucrBaseSdgClimSoft
         '
         Me.ucrBaseSdgClimSoft.AutoSize = True
-        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(45, 193)
+        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(45, 185)
         Me.ucrBaseSdgClimSoft.Name = "ucrBaseSdgClimSoft"
         Me.ucrBaseSdgClimSoft.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdgClimSoft.TabIndex = 52
@@ -118,7 +118,7 @@ Partial Class sdgClimsoftDataOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(332, 226)
+        Me.ClientSize = New System.Drawing.Size(332, 220)
         Me.Controls.Add(Me.ucrChkFormFilter)
         Me.Controls.Add(Me.ucrChkQCFilter)
         Me.Controls.Add(Me.ucrCboFormFilter)

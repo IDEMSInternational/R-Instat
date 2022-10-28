@@ -1,6 +1,8 @@
 ﻿Public Class sdgClimsoftDataOptions
     Private bControlsInitialised As Boolean = False
     Private clsLinkedRFunction As New RFunction
+    Private dctQCFilter As New Dictionary(Of String, String)
+    Private dctFormFilter As New Dictionary(Of String, String)
 
     Private Sub sdgClimsoftDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bControlsInitialised Then
@@ -32,7 +34,6 @@
         ucrChkQCFilter.SetText("Select Data with QC Status")
         ucrChkQCFilter.Checked = True
 
-        Dim dctQCFilter As New Dictionary(Of String, String)
         dctQCFilter.Add("Zero (No QC Check)", Chr(34) & "0" & Chr(34))
         dctQCFilter.Add("One (Passed Limits Check)", Chr(34) & "1" & Chr(34))
         dctQCFilter.Add("Two (Passed Interelement Check)", Chr(34) & "2" & Chr(34))
@@ -49,7 +50,6 @@
         ucrChkFormFilter.SetText("Select Data of Form")
         ucrChkFormFilter.Checked = True
 
-        Dim dctFormFilter As New Dictionary(Of String, String)
         dctFormFilter.Add("frm_daily2", Chr(34) & "frm_daily2" & Chr(34))
         dctFormFilter.Add("frm_hourly", Chr(34) & "frm_hourly" & Chr(34))
         dctFormFilter.Add("frm_hourlywind", Chr(34) & "frm_hourlywind" & Chr(34))
@@ -68,7 +68,7 @@
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetUpRCode(clsNewRFunction As RFunction)
+    Public Sub SetUpRCode(clsNewRFunction As RFunction, bDisableIncludeColsOptions As Boolean)
         If Not bControlsInitialised Then
             InitialiseControls()
             bControlsInitialised = True
@@ -76,29 +76,38 @@
 
         clsLinkedRFunction = clsNewRFunction
 
-        ucrChkFlags.SetRCode(clsLinkedRFunction, True)
-        ucrChkQc.SetRCode(clsLinkedRFunction, True)
-        ucrChkDataForm.SetRCode(clsLinkedRFunction, True)
+        ucrChkQc.Enabled = bDisableIncludeColsOptions
+        ucrChkDataForm.Enabled = bDisableIncludeColsOptions
+        ucrChkFlags.Enabled = bDisableIncludeColsOptions
+        'omit set r code for the controls if disabled
+        If bDisableIncludeColsOptions Then
+            ucrChkQc.SetRCode(clsLinkedRFunction, True)
+            ucrChkDataForm.SetRCode(clsLinkedRFunction, True)
+            ucrChkFlags.SetRCode(clsLinkedRFunction, True)
+        End If
+
         ucrChkQCFilter.Checked = clsLinkedRFunction.ContainsParameter("qc_status")
         ucrChkFormFilter.Checked = clsLinkedRFunction.ContainsParameter("form_source")
     End Sub
 
     Private Sub ucrChkQCFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQCFilter.ControlValueChanged
-        If ucrChkQCFilter.Checked Then
-            clsLinkedRFunction.AddParameter(strParameterName:="qc_status", iPosition:=13)
+        If ucrChkQCFilter.Checked AndAlso dctQCFilter.Count > 0 Then
+            clsLinkedRFunction.AddParameter(strParameterName:="qc_status",
+                                            strParameterValue:=dctQCFilter.Item(ucrCboQCFilter.GetText),
+                                            iPosition:=13)
         Else
             clsLinkedRFunction.RemoveParameterByName("qc_status")
         End If
     End Sub
 
     Private Sub ucrChkFormFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFormFilter.ControlValueChanged
-        If ucrChkFormFilter.Checked Then
-            clsLinkedRFunction.AddParameter(strParameterName:="form_source", iPosition:=14)
+        If ucrChkFormFilter.Checked AndAlso dctFormFilter.Count > 0 Then
+            clsLinkedRFunction.AddParameter(strParameterName:="form_source",
+                                            strParameterValue:=dctFormFilter.Item(ucrCboFormFilter.GetText),
+                                            iPosition:=14)
         Else
             clsLinkedRFunction.RemoveParameterByName("form_source")
         End If
     End Sub
-
-
 
 End Class

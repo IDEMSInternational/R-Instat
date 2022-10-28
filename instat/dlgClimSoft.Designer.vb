@@ -150,16 +150,16 @@ Partial Class dlgClimSoft
         Me.ucrChkUnStackData.Location = New System.Drawing.Point(8, 289)
         Me.ucrChkUnStackData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkUnStackData.Name = "ucrChkUnStackData"
-        Me.ucrChkUnStackData.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkUnStackData.Size = New System.Drawing.Size(214, 23)
         Me.ucrChkUnStackData.TabIndex = 45
         Me.ttClimsoft.SetToolTip(Me.ucrChkUnStackData, "Stack data")
         '
         'btnMoreOptions
         '
         Me.btnMoreOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnMoreOptions.Location = New System.Drawing.Point(156, 288)
+        Me.btnMoreOptions.Location = New System.Drawing.Point(12, 421)
         Me.btnMoreOptions.Name = "btnMoreOptions"
-        Me.btnMoreOptions.Size = New System.Drawing.Size(90, 23)
+        Me.btnMoreOptions.Size = New System.Drawing.Size(109, 23)
         Me.btnMoreOptions.TabIndex = 46
         Me.btnMoreOptions.Text = "More Options"
         Me.ttClimsoft.SetToolTip(Me.btnMoreOptions, "Click to view more options")

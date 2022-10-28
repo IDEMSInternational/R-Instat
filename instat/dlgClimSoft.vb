@@ -117,16 +117,23 @@ Public Class dlgClimSoft
         '-----------------------------------------------------------------
         'observation date range checkbox
         ucrChkObsDate.SetText("Select Date Range")
+        ucrChkObsDate.Checked = True
 
         'start date datepicker
         ucrDtpObStartdate.SetParameter(New RParameter("obs_start_date", 11))
         ucrDtpObStartdate.SetParameterIsRDate()
         ucrDtpObStartdate.SetLinkedDisplayControl(lblObsStartDate)
+        'todo. temporary, the date control is not writing to it's parameter on initial load
+        'this is due to the date time picker loading with "now date" by default
+        'ucrDtpObStartdate.DateValue = Date.Now.AddDays(1)
 
         'end date datepicker
         ucrDtpObsEndDate.SetParameter(New RParameter("obs_end_date", 12))
         ucrDtpObsEndDate.SetParameterIsRDate()
         ucrDtpObsEndDate.SetLinkedDisplayControl(lblObsEndDate)
+        'todo. temporary, the date control is not writing to it's parameter on initial load
+        'this is due to the date time picker loading with "now date" by default
+        'ucrDtpObsEndDate.DateValue = Date.Now.AddDays(1)
 
         'link date pickers to date range checkbox
         ucrChkObsDate.AddToLinkedControls({ucrDtpObStartdate, ucrDtpObsEndDate}, {True},
@@ -155,10 +162,9 @@ Public Class dlgClimSoft
         ucrSelectorForClimSoft.Reset()
         ucrReceiverStations.SetMeAsReceiver()
         ucrChkUnStackData.Checked = False
-        btnMoreOptions.Enabled = False
-        ucrDtpObStartdate.DateValue = Date.Now
-        ucrDtpObsEndDate.DateValue = Date.Now
-        ucrChkObsDate.Checked = True
+        btnMoreOptions.Enabled = True
+        ucrDtpObStartdate.DateValue = Date.Now.AddDays(1)
+        ucrDtpObsEndDate.DateValue = Date.Now.AddDays(1)
         ucrChkObsDate.Checked = False
         ucrChkStations.Checked = False
         ucrChkElements.Checked = False
@@ -302,26 +308,19 @@ Public Class dlgClimSoft
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrIncludeFlagsControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUnStackData.ControlValueChanged, ucrReceiverElements.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkObsDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObsDate.ControlValueChanged
-        'this forces the date pickers to write default parameter values to the Rfunction.
-        'date picker controls have a problem of default date. 
-        'its not set by default until the user changes selected date
-        'todo. in future, this may not be needed
-
-        ucrDtpObsEndDate.OnControlValueChanged()
-        ucrDtpObStartdate.OnControlValueChanged()
-    End Sub
 
     Private Sub ucrChkStackData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUnStackData.ControlValueChanged
-        btnMoreOptions.Enabled = ucrChkUnStackData.Checked
+        If ucrChkUnStackData.Checked Then
+            clsRImportFromClimsoft.RemoveParameterByName("include_qc_status")
+            clsRImportFromClimsoft.RemoveParameterByName("include_entry_form")
+            clsRImportFromClimsoft.RemoveParameterByName("include_flags")
+        End If
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
-        sdgClimsoftDataOptions.SetUpRCode(clsRImportFromClimsoft)
+        sdgClimsoftDataOptions.SetUpRCode(clsRImportFromClimsoft, Not ucrChkUnStackData.Checked)
         sdgClimsoftDataOptions.ShowDialog(Me)
     End Sub
+
+
 End Class

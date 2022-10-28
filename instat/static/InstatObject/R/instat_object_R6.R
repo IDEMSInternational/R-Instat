@@ -1848,13 +1848,20 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
     include_stations_meta_data = FALSE,
     include_elements_meta_data = FALSE) {
   
+  #todo left here
+  
   if (missing(observation_data_table)) stop("observation data table must be passed.")
   if (length(stations) < 1) stop("stations must be passed.")
   if (length(elements) < 1) stop("elements must be passed.")
   if (unstack_data && include_flags ) stop("cannot include flags when data is unstacked.")
+  if (unstack_data && include_qc_status ) stop("cannot include QC status when data is unstacked.")
+  if (unstack_data && include_entry_form ) stop("cannot include entry form source when data is unstacked.")
   
   #TODO. need to perform checks here
   con <- self$get_database_connection()
+  
+  #----------------------------------
+  #get key ids regardless of key column filter 
   
   #construct a string of station values from the passed station vector. format example ('191','122')
   passed_station_values <- paste0("(", paste0("'", stations, "'", collapse =  ", "), ")")
@@ -1884,6 +1891,9 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
   #list of tables to import
   data_list <- list()
   
+  #-----------------------------------------
+  #get metadata
+  
   if(include_stations_meta_data) {
     db_stations <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationId ", " IN ", station_ids_values, ";" ))
     station_data_name <- next_default_item("stations_meta_data", self$get_data_names(), include_index = FALSE)
@@ -1896,37 +1906,65 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
     data_list[[elements_data_name]] <- db_elements
   }
   
-  #get observation data
-  #get date bound filter query if dates have been passed
-  date_bounds_filter <- ""
+  #------------------------------------------
+  #construct sql for other columns to include in sql query
+  #get flags column sql
+  flags_col_sql <- " "
+  if(include_flags){
+    flags_col_sql <- ", flag"
+  }
+  
+  #get QC status column sql
+  qc_status_col_sql <- " "
+  if(include_qc_status){
+    qc_status_col_sql <- ", qcStatus AS qc_status"
+  }
+  
+  #get entry form column sql
+  form_col_sql <- " "
+  if(include_entry_form){
+    form_col_sql <- ", dataForm AS entry_form"
+  }
+  
+  #--------------------------------------------
+  #construct sql filters
+  
+  date_filter_sql <- ""
   if (!is.null(obs_start_date)) {
     if (!lubridate::is.Date(obs_start_date)) stop("obs_start_date must be of type Date.")
     obs_start_date <- format(obs_start_date, format = "%Y-%m-%d")
-    date_bounds_filter = paste0(date_bounds_filter, " AND obsDatetime >= ", sQuote(obs_start_date))
+    date_filter_sql = paste0(" AND obsDatetime >= ", sQuote(obs_start_date))
   }
   if (!is.null(obs_end_date)) {
     if (!lubridate::is.Date(obs_end_date)) stop("obs_end_date must be of type Date.")
     obs_end_date <- format(obs_end_date, format = "%Y-%m-%d")
-    date_bounds_filter <- paste0(date_bounds_filter," AND obsDatetime <=", sQuote(obs_end_date))
+    date_filter_sql <- paste0(date_filter_sql," AND obsDatetime <=", sQuote(obs_end_date))
   }
   
-  'get flags column sql'
-  flags_col_sql <- " "
-  if (!unstack_data && include_flags) {
-    flags_col_sql <- ", flag AS flag"
+  qc_filter_sql <- ""
+  if (!is.null(qc_status)) {
+    qc_filter_sql <- paste0(" AND qcStatus =", qc_status)
   }
   
-  db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT recordedFrom As station, abbreviation AS element, obsDatetime AS datetime, obsValue AS obsvalue", flags_col_sql, " FROM ", observation_data_table," INNER JOIN obselement ON ", observation_data_table,".describedBy = obselement.elementId WHERE recordedFrom IN ", station_ids_values, " AND describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY obsDatetime;"))
+  form_filter_sql <- ""
+  if (!is.null(form_source)) {
+    form_filter_sql <- paste0(" AND dataForm =", sQuote(form_source))
+  }
+  
+  #------------------------------------------------
+  #get observation data
+  db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT recordedFrom As station, abbreviation AS element, obsDatetime AS date_time", qc_status_col_sql,form_col_sql,flags_col_sql, ",obsValue as obs_value FROM ", observation_data_table," INNER JOIN obselement ON ", observation_data_table,".describedBy = obselement.elementId WHERE recordedFrom IN ", station_ids_values, " AND describedBy IN ", element_ids_values, qc_filter_sql, form_filter_sql, date_filter_sql, " ORDER BY obsDatetime;"))
   observation_data_name <- next_default_item("observation_data", self$get_data_names(), include_index = FALSE)  
   
   if(unstack_data){ 
     #unstack the observation data by elements
-    db_observation_data<- reshape2::dcast(data = db_observation_data, formula = station + datetime ~ element, value.var = "obsvalue")
+    db_observation_data<- reshape2::dcast(data = db_observation_data, formula = station + date_time ~ element, value.var = "obs_value")
   }
   
   data_list[[observation_data_name]] <- db_observation_data
   
-  #import the data as separate data frames
+  #----------------------------------------
+  #import into database tables into data book as separate data frames
   self$import_data(data_tables = data_list)
   
   #add relationship key between the observation data and station data 
@@ -1936,22 +1974,33 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
     self$add_link(from_data_frame = observation_data_name, to_data_frame = station_data_name, link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label)
   }
   
-  #convert stations in observation data to factors
+  #------------------------------------
+  #convert respective columns
+  
   self$convert_column_to_type(data_name = observation_data_name, col_names = "station", to_type = "factor")
   
   if(!unstack_data){
-    #convert elements in observation data to factors
+    #convert elements to factors
     self$convert_column_to_type(data_name = observation_data_name, col_names = "element", to_type = "factor")
   }
   
   #convert flags to factors if included
-  if(!unstack_data && include_flags){
+  if(include_flags){
     self$convert_column_to_type(data_name = observation_data_name, col_names = "flag", to_type = "factor")
   }
   
+  if(include_qc_status){
+    self$convert_column_to_type(data_name = observation_data_name, col_names = "qc_status", to_type = "factor")
+  }
+
+  if(include_entry_form){
+    self$convert_column_to_type(data_name = observation_data_name, col_names = "entry_form", to_type = "factor")
+  }
+  
+  #-------------------------------------------
   #create a plain date column from the observation data datetime column values and add it to the data frame
-  datetime <- self$get_columns_from_data(data_name = observation_data_name, col_names = "datetime", use_current_filter = FALSE)
-  self$add_columns_to_data(data_name = observation_data_name, col_name = "date", col_data = as.Date(as.character(datetime), format="%Y-%m-%d"), before = FALSE, adjacent_column = "datetime")
+  date_time <- self$get_columns_from_data(data_name = observation_data_name, col_names = "date_time", use_current_filter = FALSE)
+  self$add_columns_to_data(data_name = observation_data_name, col_name = "date", col_data = as.Date(as.character(date_time), format="%Y-%m-%d"), before = FALSE, adjacent_column = "date_time")
   
 })
 
