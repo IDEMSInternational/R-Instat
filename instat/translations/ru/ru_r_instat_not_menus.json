@@ -3688,6 +3688,25 @@
   "Display As DataFrame": "Отображать как кадр данных",
   "Data Frame Name": "Имя фрейма данных",
   "Rename With": "Переименовать с помощью",
-  "Rename Columns": "Переименовать столбцы"
+  "Rename Columns": "Переименовать столбцы",
+  "Command runs without error": "Команда выполняется без ошибок",
+  "Command runs ok": "Команда работает нормально",
+  "Problem detected running Command or no output to display.": "Обнаружена проблема с выполнением команды или нет выходных данных для отображения.",
+  "Command produced an error. Modify input before running.": "Команда выдала ошибку. Измените ввод перед запуском.",
+  "Model produced an error or no output to display.": "Модель произвела ошибку или не вывела результат для отображения.",
+  "Model runs without error": "Модель работает без ошибок",
+  "Model runs ok": "Модель работает нормально",
+  "Problem detected running Model or no output to display.": "Обнаружена проблема с работающей моделью или нет выходных данных для отображения.",
+  "Model produced an error. Modify input before running.": "Модель выдала ошибку. Измените ввод перед запуском.",
+  "Distance": "Расстояние",
+  "Whole Data Frame": "Весь фрейм данных",
+  "Centre": "Центр",
+  "Display As Data Frame": "Отображать как фрейм данных",
+  "Name": "Имя",
+  "Lists": "Списки",
+  "Variable Name": "Имя переменной",
+  "Variable Label": "Метка переменной",
+  "Levels": "Уровни",
+  "Category": "Категория",
+  "Show Command": "Показать команду"
 }
-
