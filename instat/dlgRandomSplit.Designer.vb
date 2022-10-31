@@ -202,7 +202,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrReceiverRanSplit.AutoSize = True
         Me.ucrReceiverRanSplit.frmParent = Me
-        Me.ucrReceiverRanSplit.Location = New System.Drawing.Point(281, 108)
+        Me.ucrReceiverRanSplit.Location = New System.Drawing.Point(281, 111)
         Me.ucrReceiverRanSplit.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRanSplit.Name = "ucrReceiverRanSplit"
         Me.ucrReceiverRanSplit.Selector = Nothing

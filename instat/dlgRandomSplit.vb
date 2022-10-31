@@ -52,6 +52,7 @@ Public Class dlgRandomSplit
         ucrChkStratifyingFactor.SetParameter(New RParameter("check"))
         ucrChkStratifyingFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStratifyingFactor.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLag.SetText("Lag")
         ucrNudLag.SetParameter(New RParameter("lag", 3))
