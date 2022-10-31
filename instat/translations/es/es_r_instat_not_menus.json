@@ -3688,6 +3688,25 @@
   "Display As DataFrame": "Mostrar como trama de datos",
   "Data Frame Name": "Nombre del marco de datos",
   "Rename With": "Renombrar con",
-  "Rename Columns": "Cambiar el nombre de las columnas"
+  "Rename Columns": "Cambiar el nombre de las columnas",
+  "Command runs without error": "Command runs without error",
+  "Command runs ok": "Command runs ok",
+  "Problem detected running Command or no output to display.": "Problem detected running Command or no output to display.",
+  "Command produced an error. Modify input before running.": "Command produced an error. Modify input before running.",
+  "Model produced an error or no output to display.": "Model produced an error or no output to display.",
+  "Model runs without error": "Model runs without error",
+  "Model runs ok": "Model runs ok",
+  "Problem detected running Model or no output to display.": "Problem detected running Model or no output to display.",
+  "Model produced an error. Modify input before running.": "Model produced an error. Modify input before running.",
+  "Distance": "Distance",
+  "Whole Data Frame": "Whole Data Frame",
+  "Centre": "Centre",
+  "Display As Data Frame": "Display As Data Frame",
+  "Name": "Name",
+  "Lists": "Lists",
+  "Variable Name": "Variable Name",
+  "Variable Label": "Variable Label",
+  "Levels": "Levels",
+  "Category": "Category",
+  "Show Command": "Show Command"
 }
-
