@@ -34,9 +34,9 @@
         ucrChkQCFilter.SetText("Select Data with QC Status")
         ucrChkQCFilter.Checked = True
 
-        dctQCFilter.Add("Zero (No QC Check)", Chr(34) & "0" & Chr(34))
-        dctQCFilter.Add("One (Passed Limits Check)", Chr(34) & "1" & Chr(34))
-        dctQCFilter.Add("Two (Passed Interelement Check)", Chr(34) & "2" & Chr(34))
+        dctQCFilter.Add("Zero (No QC Check)", "0")
+        dctQCFilter.Add("One (Passed Limits Check)", "1")
+        dctQCFilter.Add("Two (Passed Interelement Check)", "2")
         ucrCboQCFilter.SetParameter(New RParameter("qc_status", 13))
         ucrCboQCFilter.SetItems(dctQCFilter)
         ucrCboQCFilter.GetSetSelectedIndex = 0
@@ -50,12 +50,12 @@
         ucrChkFormFilter.SetText("Select Data of Form")
         ucrChkFormFilter.Checked = True
 
-        dctFormFilter.Add("frm_daily2", Chr(34) & "frm_daily2" & Chr(34))
-        dctFormFilter.Add("frm_hourly", Chr(34) & "frm_hourly" & Chr(34))
-        dctFormFilter.Add("frm_hourlywind", Chr(34) & "frm_hourlywind" & Chr(34))
-        dctFormFilter.Add("frm_monthly", Chr(34) & "frm_monthly" & Chr(34))
-        dctFormFilter.Add("frm_synoptic_2_ra1", Chr(34) & "frm_synoptic_2_ra1" & Chr(34))
-        dctFormFilter.Add("frm_upperair1", Chr(34) & "frm_upperair1" & Chr(34))
+        dctFormFilter.Add("frm_daily2", Chr(34) & "form_daily2" & Chr(34))
+        dctFormFilter.Add("frm_hourly", Chr(34) & "form_hourly" & Chr(34))
+        dctFormFilter.Add("frm_hourlywind", Chr(34) & "form_hourlywind" & Chr(34))
+        dctFormFilter.Add("frm_monthly", Chr(34) & "form_monthly" & Chr(34))
+        dctFormFilter.Add("frm_synoptic_2_ra1", Chr(34) & "form_synoptic_2_ra1" & Chr(34))
+        dctFormFilter.Add("frm_upperair1", Chr(34) & "form_upperair1" & Chr(34))
 
         ucrCboFormFilter.SetParameter(New RParameter("form_source", 14))
         ucrCboFormFilter.SetItems(dctFormFilter)
@@ -90,7 +90,8 @@
         ucrChkFormFilter.Checked = clsLinkedRFunction.ContainsParameter("form_source")
     End Sub
 
-    Private Sub ucrChkQCFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQCFilter.ControlValueChanged
+    'todo. change these to dropdowns
+    Private Sub ucrQCFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQCFilter.ControlValueChanged, ucrCboQCFilter.ControlValueChanged
         If ucrChkQCFilter.Checked AndAlso dctQCFilter.Count > 0 Then
             clsLinkedRFunction.AddParameter(strParameterName:="qc_status",
                                             strParameterValue:=dctQCFilter.Item(ucrCboQCFilter.GetText),
@@ -100,7 +101,7 @@
         End If
     End Sub
 
-    Private Sub ucrChkFormFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFormFilter.ControlValueChanged
+    Private Sub ucrFormFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFormFilter.ControlValueChanged, ucrCboFormFilter.ControlValueChanged
         If ucrChkFormFilter.Checked AndAlso dctFormFilter.Count > 0 Then
             clsLinkedRFunction.AddParameter(strParameterName:="form_source",
                                             strParameterValue:=dctFormFilter.Item(ucrCboFormFilter.GetText),

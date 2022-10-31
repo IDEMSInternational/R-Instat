@@ -159,13 +159,15 @@ Public Class dlgClimSoft
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
 
         ucrCboObsTable.Reset()
-        ucrSelectorForClimSoft.Reset()
+        ucrCboStations.Reset()
+        ucrCboElements.Reset()
         ucrReceiverStations.SetMeAsReceiver()
+        ucrSelectorForClimSoft.Reset()
         ucrChkUnStackData.Checked = False
         btnMoreOptions.Enabled = True
-        ucrDtpObStartdate.DateValue = Date.Now.AddDays(1)
-        ucrDtpObsEndDate.DateValue = Date.Now.AddDays(1)
         ucrChkObsDate.Checked = False
+        ucrDtpObStartdate.DateValue = Date.Now
+        ucrDtpObsEndDate.DateValue = Date.Now
         ucrChkStations.Checked = False
         ucrChkElements.Checked = False
     End Sub
@@ -320,6 +322,17 @@ Public Class dlgClimSoft
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
         sdgClimsoftDataOptions.SetUpRCode(clsRImportFromClimsoft, Not ucrChkUnStackData.Checked)
         sdgClimsoftDataOptions.ShowDialog(Me)
+    End Sub
+
+    Private Sub ucrChkDateRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObsDate.ControlValueChanged
+        'this forces the date pickers to write default parameter values to the Rfunction.
+        'date picker controls have a problem of default date. 
+        'its not set by default until the user changes selected date
+        'todo. in future, this may not be needed
+        If ucrChkObsDate.Checked Then
+            ucrDtpObStartdate.OnControlValueChanged()
+            ucrDtpObsEndDate.OnControlValueChanged()
+        End If
     End Sub
 
 

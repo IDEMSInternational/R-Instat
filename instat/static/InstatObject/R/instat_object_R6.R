@@ -1848,8 +1848,6 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
     include_stations_meta_data = FALSE,
     include_elements_meta_data = FALSE) {
   
-  #todo left here
-  
   if (missing(observation_data_table)) stop("observation data table must be passed.")
   if (length(stations) < 1) stop("stations must be passed.")
   if (length(elements) < 1) stop("elements must be passed.")
@@ -1857,8 +1855,8 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
   if (unstack_data && include_qc_status ) stop("cannot include QC status when data is unstacked.")
   if (unstack_data && include_entry_form ) stop("cannot include entry form source when data is unstacked.")
   
-  #TODO. need to perform checks here
   con <- self$get_database_connection()
+  if (is.null(con)) stop("cannot coonect to database.")
   
   #----------------------------------
   #get key ids regardless of key column filter 
@@ -1888,7 +1886,7 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
     element_ids_values <- paste0("(", paste0(sprintf("%d", db_element_ids$elementId), collapse = ", "), ")")
   }
   
-  #list of tables to import
+  #data list to store impoorted tables
   data_list <- list()
   
   #-----------------------------------------
@@ -1908,19 +1906,17 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
   
   #------------------------------------------
   #construct sql for other columns to include in sql query
-  #get flags column sql
+
   flags_col_sql <- " "
   if(include_flags){
     flags_col_sql <- ", flag"
   }
   
-  #get QC status column sql
   qc_status_col_sql <- " "
   if(include_qc_status){
     qc_status_col_sql <- ", qcStatus AS qc_status"
   }
   
-  #get entry form column sql
   form_col_sql <- " "
   if(include_entry_form){
     form_col_sql <- ", dataForm AS entry_form"
@@ -1933,12 +1929,12 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
   if (!is.null(obs_start_date)) {
     if (!lubridate::is.Date(obs_start_date)) stop("obs_start_date must be of type Date.")
     obs_start_date <- format(obs_start_date, format = "%Y-%m-%d")
-    date_filter_sql = paste0(" AND obsDatetime >= ", sQuote(obs_start_date))
+    date_filter_sql = paste0(" AND obsDatetime >= ", "'",obs_start_date,"'")
   }
   if (!is.null(obs_end_date)) {
     if (!lubridate::is.Date(obs_end_date)) stop("obs_end_date must be of type Date.")
     obs_end_date <- format(obs_end_date, format = "%Y-%m-%d")
-    date_filter_sql <- paste0(date_filter_sql," AND obsDatetime <=", sQuote(obs_end_date))
+    date_filter_sql <- paste0(date_filter_sql," AND obsDatetime <=", "'", obs_end_date,"'")
   }
   
   qc_filter_sql <- ""
@@ -1948,12 +1944,13 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
   
   form_filter_sql <- ""
   if (!is.null(form_source)) {
-    form_filter_sql <- paste0(" AND dataForm =", sQuote(form_source))
+    form_filter_sql <- paste0(" AND dataForm =","'", form_source,"'")
   }
   
   #------------------------------------------------
   #get observation data
-  db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT recordedFrom As station, abbreviation AS element, obsDatetime AS date_time", qc_status_col_sql,form_col_sql,flags_col_sql, ",obsValue as obs_value FROM ", observation_data_table," INNER JOIN obselement ON ", observation_data_table,".describedBy = obselement.elementId WHERE recordedFrom IN ", station_ids_values, " AND describedBy IN ", element_ids_values, qc_filter_sql, form_filter_sql, date_filter_sql, " ORDER BY obsDatetime;"))
+  obs_data_sql  <- paste0("SELECT recordedFrom As station, abbreviation AS element, obsDatetime AS date_time", qc_status_col_sql,form_col_sql,flags_col_sql, ",obsValue as obs_value FROM ", observation_data_table," INNER JOIN obselement ON ", observation_data_table,".describedBy = obselement.elementId WHERE recordedFrom IN ", station_ids_values, " AND describedBy IN ", element_ids_values, qc_filter_sql, form_filter_sql, date_filter_sql, " ORDER BY obsDatetime;")
+  db_observation_data <- DBI::dbGetQuery(con, obs_data_sql)
   observation_data_name <- next_default_item("observation_data", self$get_data_names(), include_index = FALSE)  
   
   if(unstack_data){ 
@@ -1964,14 +1961,19 @@ DataBook$set("public", "import_observation_data_from_climsoft", function(
   data_list[[observation_data_name]] <- db_observation_data
   
   #----------------------------------------
-  #import into database tables into data book as separate data frames
+  #import database tables into data book as separate data frames
   self$import_data(data_tables = data_list)
   
   #add relationship key between the observation data and station data 
-  #linked by stationId and recordedFrom columns
   if(include_stations_meta_data) {
     self$add_key(station_data_name, c("stationId"))
     self$add_link(from_data_frame = observation_data_name, to_data_frame = station_data_name, link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label)
+  }
+  
+  #-----------------------------------
+  if(nrow(db_observation_data) < 1){
+    #no need to convert and add any columns
+    return()
   }
   
   #------------------------------------
