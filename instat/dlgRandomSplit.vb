@@ -52,21 +52,11 @@ Public Class dlgRandomSplit
         ucrChkStratifyingFactor.SetParameter(New RParameter("check"))
         ucrChkStratifyingFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStratifyingFactor.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
-
 
         ucrChkLag.SetText("Lag")
         ucrNudLag.SetParameter(New RParameter("lag", 3))
         ucrNudLag.SetMinMax(-100, 100)
         ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-
-        'ucrChkTestingData.SetText("Save Testing Data")
-        'ucrChkTestingData.SetParameter(New RParameter("testing", 0))
-        'ucrChkTestingData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-
-        'ucrChkTrainingData.SetText("Save Training Data")
-        'ucrChkTrainingData.SetParameter(New RParameter("training", 0))
-        'ucrChkTrainingData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrSaveTrainingData.SetLabelText("Save sample to:")
         ucrSaveTrainingData.SetSaveTypeAsDataFrame()
@@ -145,7 +135,6 @@ Public Class dlgRandomSplit
         ucrSelectorRandomSplit.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("data", ucrSelectorRandomSplit.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
         ucrNudLag.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("lag", 3), iAdditionalPairNo:=1)
-        'ucrSaveTrainingData.AddAdditionalRCode(clsTesting, iAdditionalPairNo:=1)
 
         ucrSelectorRandomSplit.SetRCode(clsInitialSplit, bReset)
         ucrChkStratifyingFactor.SetRCode(clsDummyFunction, bReset)
@@ -162,7 +151,7 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoSample.Checked Or rdoTimeSeries.Checked Then
+        If ucrSaveTestingData.IsComplete Or ucrSaveTrainingData.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -173,24 +162,20 @@ Public Class dlgRandomSplit
             If ucrSaveTestingData.IsComplete Then
                 clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
-                'ucrBase.clsRsyntax.iCallType = 0
-            ElseIf ucrSaveTrainingData.IsComplete Then
+            End If
+            If ucrSaveTrainingData.IsComplete Then
                 clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
-            Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
-                ucrBase.clsRsyntax.iCallType = 2
+                ucrBase.clsRsyntax.AddToAfterCodes(clsTraining)
             End If
         Else
             If ucrSaveTestingData.IsComplete Then
                 clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTesting)
-            ElseIf ucrSaveTrainingData.IsComplete Then
+            End If
+            If ucrSaveTrainingData.IsComplete Then
                 clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTraining)
-            Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
-                ucrBase.clsRsyntax.iCallType = 2
+                ucrBase.clsRsyntax.AddToAfterCodes(clsTraining)
+
             End If
         End If
     End Sub
@@ -221,10 +206,5 @@ Public Class dlgRandomSplit
                 ucrSaveTrainingData.SetPrefix(strDataframeName & "training")
             End If
         End If
-    End Sub
-
-    Private Sub ucrChkTestingData_ControlValueChanged(ucrChangedControl As ucrCore)
-        SetDataFramePrefix()
-        SetBaseFunction()
     End Sub
 End Class
