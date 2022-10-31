@@ -55,8 +55,9 @@ Public Class dlgRandomSplit
 
         ucrChkLag.SetText("Lag")
         ucrNudLag.SetParameter(New RParameter("lag", 3))
-        ucrNudLag.SetMinMax(-100, 100)
+        ucrNudLag.SetMinMax(0, 100)
         ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrNudLag.Increment = 0.5
 
         ucrSaveTrainingData.SetLabelText("Save sample to:")
         ucrSaveTrainingData.SetSaveTypeAsDataFrame()
@@ -190,7 +191,7 @@ Public Class dlgRandomSplit
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged '', ucrChkTestingData.ControlValueChanged, ucrChkTrainingData.ControlValueChanged
+    Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged 
         SetBaseFunction()
     End Sub
 
@@ -198,12 +199,11 @@ Public Class dlgRandomSplit
         Dim strDataframeName As String = ucrSelectorRandomSplit.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         If ucrSelectorRandomSplit.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrSaveTestingData.bUserTyped) AndAlso (Not ucrSaveTrainingData.bUserTyped) Then
             If rdoSample.Checked Then
-                ucrSaveTestingData.SetPrefix(strDataframeName & "testing")
-                ucrSaveTrainingData.SetPrefix(strDataframeName & "training")
-            End If
-            If rdoTimeSeries.Checked Then
-                ucrSaveTestingData.SetPrefix(strDataframeName & "testing")
-                ucrSaveTrainingData.SetPrefix(strDataframeName & "training")
+                ucrSaveTestingData.SetPrefix(strDataframeName & "testing_data")
+                ucrSaveTrainingData.SetPrefix(strDataframeName & "training_data")
+            Else
+                ucrSaveTestingData.SetPrefix(strDataframeName & "testing_data")
+                ucrSaveTrainingData.SetPrefix(strDataframeName & "training_data")
             End If
         End If
     End Sub

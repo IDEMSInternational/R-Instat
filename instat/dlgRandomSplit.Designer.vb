@@ -155,7 +155,7 @@ Partial Class dlgRandomSplit
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 358)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 342)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 27
@@ -214,7 +214,7 @@ Partial Class dlgRandomSplit
         'ucrSaveTrainingData
         '
         Me.ucrSaveTrainingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 331)
+        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 315)
         Me.ucrSaveTrainingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTrainingData.Name = "ucrSaveTrainingData"
         Me.ucrSaveTrainingData.Size = New System.Drawing.Size(403, 23)
@@ -223,7 +223,7 @@ Partial Class dlgRandomSplit
         'ucrSaveTestingData
         '
         Me.ucrSaveTestingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTestingData.Location = New System.Drawing.Point(9, 300)
+        Me.ucrSaveTestingData.Location = New System.Drawing.Point(9, 284)
         Me.ucrSaveTestingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTestingData.Name = "ucrSaveTestingData"
         Me.ucrSaveTestingData.Size = New System.Drawing.Size(403, 23)
@@ -233,7 +233,7 @@ Partial Class dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 418)
+        Me.ClientSize = New System.Drawing.Size(432, 399)
         Me.Controls.Add(Me.ucrSaveTestingData)
         Me.Controls.Add(Me.ucrReceiverRanSplit)
         Me.Controls.Add(Me.lblBreaks)
