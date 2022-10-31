@@ -21,7 +21,6 @@ Public Class dlgRandomSplit
     Private clsInitialTimeSplit As RFunction
     Private clsInitialSplit As New RFunction
     Private clsTraining As RFunction
-    Private clsDummyFunction As RFunction
     Private clsTesting As RFunction
 
     Private Sub dlgRandomSplit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -101,7 +100,6 @@ Public Class dlgRandomSplit
         clsInitialSplit = New RFunction
         clsTesting = New RFunction
         clsTraining = New RFunction
-        clsDummyFunction = New RFunction
 
         ucrSelectorRandomSplit.Reset()
         ucrSelectorRandomSplit.Focus()
@@ -139,7 +137,6 @@ Public Class dlgRandomSplit
         ucrNudLag.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("lag", 3), iAdditionalPairNo:=1)
 
         ucrSelectorRandomSplit.SetRCode(clsInitialSplit, bReset)
-        ucrChkStratifyingFactor.SetRCode(clsDummyFunction, bReset)
         ucrNudBreaks.SetRCode(clsInitialSplit, bReset)
         ucrNudFraction.SetRCode(clsInitialSplit, bReset)
         ucrNudPool.SetRCode(clsInitialSplit, bReset)
@@ -177,7 +174,6 @@ Public Class dlgRandomSplit
             If ucrSaveTrainingData.IsComplete Then
                 clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsTraining)
-
             End If
         End If
     End Sub
