@@ -513,7 +513,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=27)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=28)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=29)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=30)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=30)
 
 
 
@@ -539,7 +539,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=20)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=21)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=22)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=23)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("y", iNewPosition:=0), iAdditionalPairNo:=23)
 
 
         ' Additional Rcode for test functions
@@ -959,7 +959,7 @@ Public Class dlgTwoVariableFitModel
             ElseIf strSecondVariableType = "categorical" Then
                 If iNumberOfSecondFactorLevels = 2 Then
                     ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood", "________",
-                      "oneway", "kruskal", "bartlett", "fligner"})
+                      "oneway", "kruskal", "bartlett", "fligner", "bayes"})
                     ucrInputTest.SetText("t")
                 ElseIf iNumberOfSecondFactorLevels > 2 Then
                     ucrInputTest.SetItems({"oneway", "kruskal", "bartlett", "fligner"})
@@ -992,15 +992,15 @@ Public Class dlgTwoVariableFitModel
             ucrInputTest.SetItems({"None"})
             ucrInputTest.SetText("None")
         End If
-        If strFirstVariableType = "categorical" AndAlso iNumberOfFirstFactorLevels = 2 Then
-            If strSecondVariableType = "numeric" Then
-                ucrInputTest.SetItems({"bayes"})
-                ucrInputTest.SetText("bayes")
-            Else
-                ucrInputTest.SetItems({"proportion", "chisq", "fisher", "mcnemar", "bayes"})
-                ucrInputTest.SetText("proportion")
-            End If
-        End If
+        'If strFirstVariableType = "categorical" AndAlso iNumberOfFirstFactorLevels = 2 Then
+        '    If strSecondVariableType = "numeric" Then
+        '        ucrInputTest.SetItems({"bayes"})
+        '        ucrInputTest.SetText("bayes")
+        '    Else
+        '        ucrInputTest.SetItems({"proportion", "chisq", "fisher", "mcnemar", "bayes"})
+        '        ucrInputTest.SetText("proportion")
+        '    End If
+        'End If
 
     End Sub
 
