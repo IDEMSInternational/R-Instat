@@ -145,7 +145,6 @@ Public Class dlgMergeAdditionalData
                 clsLeftJoinFunction.RemoveAssignTo()
                 If ucrChkSaveDataFrame.Checked Then
                     clsLeftJoinFunction.SetAssignTo(ucrInputSaveDataFrame.GetText, strTempDataframe:=ucrInputSaveDataFrame.GetText)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLeftJoinFunction)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLeftJoinFunction)
                     ucrInputSaveDataFrame.Visible = True
                     bJoinColsAreUnique = True
@@ -154,8 +153,7 @@ Public Class dlgMergeAdditionalData
                 Else
                     clsLeftJoinFunction.SetAssignTo(strParam)
                     clsListFunction.ClearParameters()
-                    clsListFunction.AddParameter(strParam, strParam, iPosition:=0)
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsLeftJoinFunction)
+                    clsListFunction.AddParameter(strParam, clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportDataFunction)
                     ucrInputSaveDataFrame.Visible = False
                     cmdCheckUnique.Visible = True
