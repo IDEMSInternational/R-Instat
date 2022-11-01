@@ -7,7 +7,7 @@ Public Class dlgImportDataset
 
     Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport, clsImportfromJSON As New RFunction
     Private clsGetExcelSheetNames As New RFunction
-    Private clsJsonDataFunction As New RFunction
+    Private clsJsonDataFrameFunction As New RFunction
     Private clsRangeOperator As New ROperator
     ''' <summary>   
     ''' Ensures that any file paths containing special characters (e.g. accents) are 
@@ -297,7 +297,7 @@ Public Class dlgImportDataset
         clsImport = New RFunction
         clsReadRDS = New RFunction
         clsImportfromJSON = New RFunction
-        clsJsonDataFunction = New RFunction
+        clsJsonDataFrameFunction = New RFunction
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
@@ -335,6 +335,9 @@ Public Class dlgImportDataset
 
         clsImportfromJSON.SetPackageName("jsonlite")
         clsImportfromJSON.SetRCommand("fromJSON")
+
+        clsJsonDataFrameFunction.SetRCommand("as.data.frame")
+        clsJsonDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsImportfromJSON, iPosition:=0)
 
         'This R command ensures that any file paths containing special characters (e.g. accents) 
         'are correctly encoded
@@ -482,7 +485,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
         ucrSaveFile.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=7)
-        ucrSaveFile.AddAdditionalRCode(clsJsonDataFunction, iAdditionalPairNo:=8)
+        ucrSaveFile.AddAdditionalRCode(clsJsonDataFrameFunction, iAdditionalPairNo:=8)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'todo. commented temporarily until we are able to add an OR condition for the panel
@@ -680,7 +683,7 @@ Public Class dlgImportDataset
                 ExcelSheetsPreviewVisible(True)
                 FillExcelSheets()
             ElseIf IsJSONFileFormat() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsJsonDataFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsJsonDataFrameFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
             End If
