@@ -2314,7 +2314,7 @@
   "Scaled Fractions": "Масштабированные дроби",
   "Scaled Points": "Масштабированные точки",
   "Scales": "Весы",
-  "Scale/Distance": "Scale/Distance",
+  "Scale/Distance": "Масштаб/расстояние",
   "Scatter Matrix": "Матрица рассеяния",
   "Scatter Plot": "Точечная диаграмма",
   "Scatter Plot Options": "Параметры точечной диаграммы",
@@ -3707,7 +3707,7 @@
   "Variable Name": "Имя переменной",
   "Variable Label": "Метка переменной",
   "Levels": "Уровни",
-  "Category:": "Category:",
+  "Category:": "Категория:",
   "Show Command": "Показать команду",
-  "Lists:": "Lists:"
+  "Lists:": "Списки:"
 }
