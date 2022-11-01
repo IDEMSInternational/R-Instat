@@ -67,6 +67,8 @@ Partial Class dlgOneVarFitModel
         Me.lblMethodInference = New System.Windows.Forms.Label()
         Me.lblNullValue = New System.Windows.Forms.Label()
         Me.lblPriorMean = New System.Windows.Forms.Label()
+        Me.lblCredibleLevel = New System.Windows.Forms.Label()
+        Me.ucrInputCredibleLevel = New instat.ucrInputComboBox()
         Me.ucrInputPriorMean = New instat.ucrInputTextBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputSuccess = New instat.ucrInputComboBox()
@@ -340,7 +342,7 @@ Partial Class dlgOneVarFitModel
         'lblMethodInference
         '
         Me.lblMethodInference.AutoSize = True
-        Me.lblMethodInference.Location = New System.Drawing.Point(278, 258)
+        Me.lblMethodInference.Location = New System.Drawing.Point(278, 197)
         Me.lblMethodInference.Name = "lblMethodInference"
         Me.lblMethodInference.Size = New System.Drawing.Size(46, 13)
         Me.lblMethodInference.TabIndex = 105
@@ -349,7 +351,7 @@ Partial Class dlgOneVarFitModel
         'lblNullValue
         '
         Me.lblNullValue.AutoSize = True
-        Me.lblNullValue.Location = New System.Drawing.Point(266, 286)
+        Me.lblNullValue.Location = New System.Drawing.Point(266, 254)
         Me.lblNullValue.Name = "lblNullValue"
         Me.lblNullValue.Size = New System.Drawing.Size(58, 13)
         Me.lblNullValue.TabIndex = 109
@@ -358,11 +360,32 @@ Partial Class dlgOneVarFitModel
         'lblPriorMean
         '
         Me.lblPriorMean.AutoSize = True
-        Me.lblPriorMean.Location = New System.Drawing.Point(263, 287)
+        Me.lblPriorMean.Location = New System.Drawing.Point(263, 170)
         Me.lblPriorMean.Name = "lblPriorMean"
         Me.lblPriorMean.Size = New System.Drawing.Size(61, 13)
         Me.lblPriorMean.TabIndex = 112
         Me.lblPriorMean.Text = "Prior Mean:"
+        '
+        'lblCredibleLevel
+        '
+        Me.lblCredibleLevel.AutoSize = True
+        Me.lblCredibleLevel.Location = New System.Drawing.Point(247, 144)
+        Me.lblCredibleLevel.Name = "lblCredibleLevel"
+        Me.lblCredibleLevel.Size = New System.Drawing.Size(77, 13)
+        Me.lblCredibleLevel.TabIndex = 115
+        Me.lblCredibleLevel.Text = "Credible Level:"
+        '
+        'ucrInputCredibleLevel
+        '
+        Me.ucrInputCredibleLevel.AddQuotesIfUnrecognised = True
+        Me.ucrInputCredibleLevel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCredibleLevel.GetSetSelectedIndex = -1
+        Me.ucrInputCredibleLevel.IsReadOnly = False
+        Me.ucrInputCredibleLevel.Location = New System.Drawing.Point(326, 140)
+        Me.ucrInputCredibleLevel.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputCredibleLevel.Name = "ucrInputCredibleLevel"
+        Me.ucrInputCredibleLevel.Size = New System.Drawing.Size(71, 21)
+        Me.ucrInputCredibleLevel.TabIndex = 116
         '
         'ucrInputPriorMean
         '
@@ -370,7 +393,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputPriorMean.AutoSize = True
         Me.ucrInputPriorMean.IsMultiline = False
         Me.ucrInputPriorMean.IsReadOnly = False
-        Me.ucrInputPriorMean.Location = New System.Drawing.Point(326, 283)
+        Me.ucrInputPriorMean.Location = New System.Drawing.Point(326, 166)
         Me.ucrInputPriorMean.Name = "ucrInputPriorMean"
         Me.ucrInputPriorMean.Size = New System.Drawing.Size(92, 21)
         Me.ucrInputPriorMean.TabIndex = 113
@@ -381,7 +404,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(326, 254)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(326, 193)
         Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(94, 21)
@@ -687,7 +710,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullValue.AutoSize = True
         Me.ucrInputNullValue.IsMultiline = False
         Me.ucrInputNullValue.IsReadOnly = False
-        Me.ucrInputNullValue.Location = New System.Drawing.Point(326, 283)
+        Me.ucrInputNullValue.Location = New System.Drawing.Point(326, 251)
         Me.ucrInputNullValue.Name = "ucrInputNullValue"
         Me.ucrInputNullValue.Size = New System.Drawing.Size(92, 21)
         Me.ucrInputNullValue.TabIndex = 114
@@ -698,6 +721,8 @@ Partial Class dlgOneVarFitModel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 422)
+        Me.Controls.Add(Me.ucrInputCredibleLevel)
+        Me.Controls.Add(Me.lblCredibleLevel)
         Me.Controls.Add(Me.ucrInputPriorMean)
         Me.Controls.Add(Me.lblPriorMean)
         Me.Controls.Add(Me.lblNullValue)
@@ -823,4 +848,6 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblPriorMean As Label
     Friend WithEvents ucrInputNullValue As ucrInputTextBox
     Friend WithEvents ucrInputPriorMean As ucrInputTextBox
+    Friend WithEvents ucrInputCredibleLevel As ucrInputComboBox
+    Friend WithEvents lblCredibleLevel As Label
 End Class

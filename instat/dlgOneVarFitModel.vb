@@ -62,7 +62,7 @@ Public Class dlgOneVarFitModel
         Dim dctStatistic As New Dictionary(Of String, String)
         Dim dctAlternative As New Dictionary(Of String, String)
         Dim dctType As New Dictionary(Of String, String)
-        Dim dctCredibleInterval As New Dictionary(Of String, String)
+        Dim dctCredibleLevel As New Dictionary(Of String, String)
         Dim dctMethod As New Dictionary(Of String, String)
         Dim lstCommandButtons As New List(Of Control)
 
@@ -245,10 +245,8 @@ Public Class dlgOneVarFitModel
         dctMethod.Add("simulation", Chr(34) & "simulation" & Chr(34))
         ucrInputMethod.SetDropDownStyleAsNonEditable()
         ucrInputMethod.SetItems(dctMethod)
-        ucrInputComboTests.AddToLinkedControls(ucrInputMethod, {"Bayes:Mean", "Bayes:Proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theoretical")
+        ucrInputComboTests.AddToLinkedControls(ucrInputMethod, {"Bayes:Mean", "Bayes:Proportion", "bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theoretical")
         ucrInputComboEstimate.AddToLinkedControls(ucrInputMethod, {"bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theoretical")
-
-
 
         ucrInputNullValue.SetParameter(New RParameter("null", 8))
         ucrInputNullValue.SetValidationTypeAsNumeric()
@@ -263,6 +261,19 @@ Public Class dlgOneVarFitModel
         ucrInputPriorMean.AddQuotesIfUnrecognised = False
         ucrInputPriorMean.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputPriorMean, {"bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.0")
+
+        ucrInputCredibleLevel.SetParameter(New RParameter("cred_level", 10))
+        dctCredibleLevel.Add("0.900", "0.90")
+        dctCredibleLevel.Add("0.950", "0.95")
+        dctCredibleLevel.Add("0.980", "0.98")
+        dctCredibleLevel.Add("0.990", "0.99")
+        dctCredibleLevel.Add("0.999", "0.999")
+        ucrInputCredibleLevel.SetItems(dctCredibleLevel)
+        ucrInputCredibleLevel.AddQuotesIfUnrecognised = False
+        ucrInputCredibleLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
+        ucrInputCredibleLevel.bAllowNonConditionValues = True
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputCredibleLevel, {"bayes:mean", "bayes:proportion"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.95")
+
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mean")
@@ -308,6 +319,7 @@ Public Class dlgOneVarFitModel
         'ucrInputType.SetLinkedDisplayControl(lblType)
         ucrInputNullValue.SetLinkedDisplayControl(lblNullValue)
         ucrInputPriorMean.SetLinkedDisplayControl(lblPriorMean)
+        ucrInputCredibleLevel.SetLinkedDisplayControl(lblCredibleLevel)
         'ucrInputCredibleInterval.SetLinkedDisplayControl(lblCredibleInterval)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
@@ -642,6 +654,7 @@ Public Class dlgOneVarFitModel
         ucrInputNulHypothesis.SetRCode(clsTtestFunction, bReset)
         'ucrInputAlternative.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputMethod.SetRCode(clsBayesIferenceFunction, bReset)
+        ucrInputCredibleLevel.SetRCode(clsBayesIferenceFunction, bReset)
         'ucrInputType.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputNullValue.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputPriorMean.SetRCode(clsBayesIferenceFunction, bReset)
