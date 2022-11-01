@@ -62,13 +62,13 @@ Public Class dlgRandomSplit
         ucrSaveTrainingData.SetLabelText("Save sample to:")
         ucrSaveTrainingData.SetSaveTypeAsDataFrame()
         ucrSaveTrainingData.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
-        ucrSaveTrainingData.SetPrefix("training")
+        ucrSaveTrainingData.SetPrefix("training_data")
         ucrSaveTrainingData.SetIsComboBox()
 
         ucrSaveTestingData.SetLabelText("Save sample to:")
         ucrSaveTestingData.SetSaveTypeAsDataFrame()
         ucrSaveTestingData.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
-        ucrSaveTestingData.SetPrefix("testing")
+        ucrSaveTestingData.SetPrefix("testing_data")
         ucrSaveTestingData.SetIsComboBox()
 
         ucrNudBreaks.SetLinkedDisplayControl(lblBreaks)

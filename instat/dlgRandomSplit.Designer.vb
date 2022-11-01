@@ -85,7 +85,7 @@ Partial Class dlgRandomSplit
         'lblPool
         '
         Me.lblPool.AutoSize = True
-        Me.lblPool.Location = New System.Drawing.Point(281, 183)
+        Me.lblPool.Location = New System.Drawing.Point(281, 215)
         Me.lblPool.Name = "lblPool"
         Me.lblPool.Size = New System.Drawing.Size(31, 13)
         Me.lblPool.TabIndex = 33
@@ -94,7 +94,7 @@ Partial Class dlgRandomSplit
         'lblBreaks
         '
         Me.lblBreaks.AutoSize = True
-        Me.lblBreaks.Location = New System.Drawing.Point(281, 216)
+        Me.lblBreaks.Location = New System.Drawing.Point(281, 184)
         Me.lblBreaks.Name = "lblBreaks"
         Me.lblBreaks.Size = New System.Drawing.Size(46, 13)
         Me.lblBreaks.TabIndex = 37
@@ -105,7 +105,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudBreaks.AutoSize = True
         Me.ucrNudBreaks.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 216)
+        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 184)
         Me.ucrNudBreaks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBreaks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Name = "ucrNudBreaks"
@@ -118,7 +118,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudPool.AutoSize = True
         Me.ucrNudPool.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPool.Location = New System.Drawing.Point(351, 183)
+        Me.ucrNudPool.Location = New System.Drawing.Point(351, 215)
         Me.ucrNudPool.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPool.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Name = "ucrNudPool"
