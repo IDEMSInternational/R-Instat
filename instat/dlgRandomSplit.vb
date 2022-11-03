@@ -47,11 +47,16 @@ Public Class dlgRandomSplit
         ucrSelectorRandomSplit.SetParameter(New RParameter("data", 0))
         ucrSelectorRandomSplit.SetParameterIsrfunction()
 
+        ucrNudPool.SetLinkedDisplayControl(lblPool)
+        ucrNudPool.SetParameter(New RParameter("pool", 5))
+        ucrNudPool.DecimalPlaces = 2
+        ucrNudPool.SetMinMax(0.01, 1.0)
+        ucrNudPool.Increment = 0.1
+
         ucrChkStratifyingFactor.SetText("Stratifying Factor")
-        ucrChkStratifyingFactor.SetParameter(New RParameter("check"))
-        ucrChkStratifyingFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkStratifyingFactor.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStratifyingFactor.SetParameter(ucrNudPool.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkStratifyingFactor.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStratifyingFactor.AddToLinkedControls(ucrReceiverRanSplit, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLag.SetText("Lag")
         ucrNudLag.SetParameter(New RParameter("lag", 3))
@@ -79,12 +84,6 @@ Public Class dlgRandomSplit
         ucrNudFraction.SetMinMax(0.01, 0.99)
         ucrNudFraction.DecimalPlaces = 2
         ucrNudFraction.Increment = 0.01
-
-        ucrNudPool.SetLinkedDisplayControl(lblPool)
-        ucrNudPool.SetParameter(New RParameter("pool", 5))
-        ucrNudPool.DecimalPlaces = 2
-        ucrNudPool.SetMinMax(0.01, 1.0)
-        ucrNudPool.Increment = 0.1
 
         ucrPnlRandomSplit.AddRadioButton(rdoSample)
         ucrPnlRandomSplit.AddRadioButton(rdoTimeSeries)
@@ -118,7 +117,7 @@ Public Class dlgRandomSplit
         clsInitialSplit.AddParameter("strata", "NULL", iPosition:=2)
         clsInitialSplit.AddParameter("lag", "0", iPosition:=3)
         clsInitialSplit.AddParameter("breaks", "4", iPosition:=4)
-        clsInitialSplit.AddParameter("pool", "0.10", iPosition:=5)
+        clsInitialSplit.AddParameter("pool", "0.01", iPosition:=5)
         clsInitialSplit.SetAssignTo("rsample")
 
         clsTraining.SetPackageName("rsample")
@@ -144,6 +143,7 @@ Public Class dlgRandomSplit
         ucrSaveTestingData.SetRCode(clsTesting, bReset)
         ucrNudLag.SetRCode(clsInitialSplit, bReset)
         ucrReceiverRanSplit.SetRCode(clsInitialSplit, bReset)
+        ucrChkStratifyingFactor.SetRCode(clsInitialSplit, bReset)
         If bReset Then
             ucrPnlRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
