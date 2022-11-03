@@ -274,16 +274,17 @@ Public Class dlgHypothesisTestsCalculator
     Private Sub cmdbayesinference_Click(sender As Object, e As EventArgs) Handles cmdbayesinference.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference(y= ,x = NULL,data=" & ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type= c(ci, ht), statistic = c(mean, proportion),method = c(theoretical, simulation),success = NULL,null = NULL,cred_level = 0.95,alternative = c(twosided, less, greater) hypothesis_prior = c(H1 = 0.5, H2 = 0.5), prior_family = JZS,n_0 = 1,mu_0 = null, s_0 = 0, v_0 = -1,rscale = 1,beta_prior = NULL,beta_prior1 = NULL,beta_prior2 = NULL,nsim = 10000,verbose = TRUE,show_summ = verbose,show_res = verbose,show_plot = verbose)", 443)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference(y= ,x = NULL,data=" & ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""),statistic = c(""mean"", ""proportion""),method = c(""theoretical"", ""simulation""),success = NULL,cred_level = 0.95,alternative = ""twosided"", prior_family = ""JZS"",mu_0 = 0,rscale = 1,nsim = 10000,show_plot = FALSE)", 246)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference()", 1)
         End If
+        SaveResults()
     End Sub
 
     Private Sub cmdinference_Click(sender As Object, e As EventArgs) Handles cmdinference.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference(inference(y= , x = NULL,data=" & ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(ci, ht),statistic = c(mean, median, proportion),success = NULL,order = NULL,method = c(theoretical, simulation),null = NULL,alternative = c(less, greater, twosided),sig_level = 0.05,conf_level = 0.95,boot_method = c(perc, se),nsim = 15000,seed = NULL,verbose = TRUE,show_var_types = verbose,show_summ_stats = verbose,show_eda_plot = verbose,show_inf_plot = verbose,show_res = verbose)", 412)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference(y= , x = NULL,data=" & ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""),statistic = c(""mean"", ""median"", ""proportion""),success = NULL,method = c(""theoretical"", ""simulation""),null = 0,alternative =""twosided"",sig_level = 0.05,conf_level = 0.95,boot_method = c(""perc"", ""se""),show_eda_plot = FALSE,show_inf_plot = FALSE)", 282)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference()", 1)
         End If
@@ -1068,5 +1069,19 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("I()", 1)
+    End Sub
+
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        SaveResults()
+    End Sub
+
+    Private Sub SaveResults()
+        If ucrInputComboRPackage.GetText = "statsr" Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        Else
+            ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        End If
+
     End Sub
 End Class
