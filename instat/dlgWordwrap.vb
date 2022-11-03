@@ -61,7 +61,6 @@ Public Class dlgWordwrap
         ucrPnlTextWrap.AddFunctionNamesCondition(rdoWrapText, "str_wrap")
         ucrPnlTextWrap.AddFunctionNamesCondition(rdoUnWrapText, "str_replace_all")
         ucrPnlTextWrap.AddToLinkedControls(ucrNudWidthWrap, {rdoWrapText}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTextWrap.SetLinkedDisplayControl(lblOptions)
 
         'ucrNudWidthWrap
         ucrNudWidthWrap.SetParameter(New RParameter("width", 1))
@@ -100,7 +99,6 @@ Public Class dlgWordwrap
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-
         ucrReceiverWrapText.AddAdditionalCodeParameterPair(clsWrapFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverWrapText.AddAdditionalCodeParameterPair(clsReplaceFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=2)
 
