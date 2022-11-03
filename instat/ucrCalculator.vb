@@ -512,7 +512,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
-                Me.Size = New Size(iBasicWidth * 1.33, iBaseHeight)
+                Me.Size = New Size(iBasicWidth * 1.4, iBaseHeight)
             Case "Wakefield"
                 strPackageName = "wakefield"
                 grpDates.Visible = False
@@ -2282,7 +2282,7 @@ Public Class ucrCalculator
 
         clsBrowserListFunction.SetRCommand("c")
         clsBrowserListFunction.AddParameter("chrome", Chr(34) & "Chrome" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("IE", Chr(34) & "IE" & Chr(34), iPosition:=1,bIncludeArgumentName:=False)
+        clsBrowserListFunction.AddParameter("IE", Chr(34) & "IE" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsBrowserListFunction.AddParameter("firefox", Chr(34) & "Firefox" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
         clsBrowserListFunction.AddParameter("safari", Chr(34) & "Safari" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
         clsBrowserListFunction.AddParameter("opera", Chr(34) & "Opera" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
@@ -3059,9 +3059,9 @@ Public Class ucrCalculator
 
     Private Sub cmdMovmin_Click(sender As Object, e As EventArgs) Handles cmdMovmin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = 3 , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 151)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = 3 , FUN = min , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)", 151)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = 3 , FUN = min, align = ""center"", fill = NA)", 40)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = 3 , FUN = min, align = ""center"", fill = NA)", 54)
         End If
     End Sub
 
@@ -3795,22 +3795,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdHelpZoo_Click(sender As Object, e As EventArgs) Handles cmdHelpZoo.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Transform" Then
-            strPackageName = "zoo"
-        End If
-        OpenHelpPage()
-    End Sub
-
-    Private Sub cmdHelpDplyr_Click(sender As Object, e As EventArgs) Handles cmdHelpDplyr.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Transform" Then
-            strPackageName = "dplyr"
-        End If
-        OpenHelpPage()
-    End Sub
-
     Private Sub cmdBigZ_Click(sender As Object, e As EventArgs) Handles cmdBigZ.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::as.bigz(a = , mod = NA )", 13)
@@ -4082,9 +4066,9 @@ Public Class ucrCalculator
 
     Private Sub cmdMovProd_Click(sender As Object, e As EventArgs) Handles cmdMovProd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = 3 , FUN = prod , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)))", 151)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply(data = , width = 3 , FUN = prod , by = 1, by.column = TRUE, fill = NA, na.pad = FALSE, partial = FALSE, align = c(""center"", ""left"", ""right""), coredata = TRUE)", 151)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = 3 , FUN = prod, align = ""center"", fill = NA)", 40)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("zoo::rollapply( , width = 3 , FUN = prod, align = ""center"", fill = NA)", 55)
         End If
     End Sub
 
@@ -4102,5 +4086,29 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rev()", 1)
         End If
+    End Sub
+
+    Private Sub DplyrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DplyrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ZooToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZooToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "zoo"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdTransformRHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
     End Sub
 End Class
