@@ -317,9 +317,9 @@ Partial Class dlgLinePlot
         '
         Me.ucrChkAddSE.AutoSize = True
         Me.ucrChkAddSE.Checked = False
-        Me.ucrChkAddSE.Location = New System.Drawing.Point(195, 49)
+        Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
         Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        Me.ucrChkAddSE.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
         Me.ucrChkAddSE.TabIndex = 8
         '
         'ucrNudSpan
@@ -856,7 +856,7 @@ Partial Class dlgLinePlot
         Me.ucrSave.Location = New System.Drawing.Point(9, 442)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(401, 24)
         Me.ucrSave.TabIndex = 31
         '
         'ucrVariablesAsFactorForLinePlot
