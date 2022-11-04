@@ -181,7 +181,7 @@ Public Class ucrColumnMetadata
                 End If
                 strNewValue = newValue
             Else
-                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display and N or NA for a mixture", MsgBoxStyle.Information)
+                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display and NA/N for a mixture", MsgBoxStyle.Information)
                 Exit Sub
             End If
         Else
