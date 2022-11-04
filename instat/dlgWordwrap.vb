@@ -89,6 +89,8 @@ Public Class dlgWordwrap
 
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace_all")
+        clsReplaceFunction.AddParameter("pattern", Chr(34) & "\n" & Chr(34), iPosition:=2)
+        clsReplaceFunction.AddParameter("replacement", Chr(34) & " " & Chr(34), iPosition:=3)
 
         clsWrapFunction.SetPackageName("stringr")
         clsWrapFunction.SetRCommand("str_wrap")
@@ -134,6 +136,7 @@ Public Class dlgWordwrap
         End If
     End Sub
 
+
     Private Sub ChangeBaseFunction()
         If rdoWrapText.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
@@ -144,5 +147,9 @@ Public Class dlgWordwrap
 
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWrapText.ControlValueChanged
         NewDefaultName()
+    End Sub
+
+    Private Sub ucrPnlTextWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextWrap.ControlValueChanged
+        ChangeBaseFunction()
     End Sub
 End Class
