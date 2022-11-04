@@ -60,6 +60,7 @@ Public Class dlgRandomSplit
         ucrNudLag.SetParameter(New RParameter("lag", 3))
         ucrNudLag.SetMinMax(0, 100)
         ucrNudLag.Increment = 0.5
+        ucrNudLag.DecimalPlaces = 2
         ucrChkLag.SetText("Lag")
         ucrChkLag.SetParameter(ucrNudLag.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -134,7 +135,6 @@ Public Class dlgRandomSplit
         ucrPnlRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorRandomSplit.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("data", ucrSelectorRandomSplit.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
-        ucrNudLag.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("lag", 2), iAdditionalPairNo:=1)
 
         ucrSelectorRandomSplit.SetRCode(clsInitialSplit, bReset)
         ucrNudBreaks.SetRCode(clsInitialSplit, bReset)
@@ -142,7 +142,7 @@ Public Class dlgRandomSplit
         ucrNudPool.SetRCode(clsInitialSplit, bReset)
         ucrSaveTrainingData.SetRCode(clsTraining, bReset)
         ucrSaveTestingData.SetRCode(clsTesting, bReset)
-        ucrNudLag.SetRCode(clsTesting, bReset)
+        ucrNudLag.SetRCode(clsInitialTimeSplit, bReset)
         ucrReceiverRanSplit.SetRCode(clsInitialSplit, bReset)
         ucrChkStratifyingFactor.SetRCode(clsInitialSplit, bReset)
     End Sub
@@ -192,16 +192,4 @@ Public Class dlgRandomSplit
         SetBaseFunction()
     End Sub
 
-    Private Sub SetDataFramePrefix()
-        Dim strDataframeName As String = ucrSelectorRandomSplit.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-        If ucrSelectorRandomSplit.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrSaveTestingData.bUserTyped) AndAlso (Not ucrSaveTrainingData.bUserTyped) Then
-            If rdoSample.Checked Then
-                ucrSaveTestingData.SetPrefix(strDataframeName & "testing_data")
-                ucrSaveTrainingData.SetPrefix(strDataframeName & "training_data")
-            Else
-                ucrSaveTestingData.SetPrefix(strDataframeName & "testing_data")
-                ucrSaveTrainingData.SetPrefix(strDataframeName & "training_data")
-            End If
-        End If
-    End Sub
 End Class
