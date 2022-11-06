@@ -23,8 +23,6 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         #which are recognised oddly by the R.Net
         out[, i] <- as.character(data[[i]])
       } else {
-        #out[, i] <-
-        #  format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
         temp_data <- c()
         for(val in data[[i]]){
             if(nchar(val) > 9 && is.na(is_scientific[i])){
