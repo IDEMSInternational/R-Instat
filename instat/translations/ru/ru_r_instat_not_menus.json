@@ -2270,7 +2270,6 @@
   "Save Calculation and Result": "Сохранить расчет и результат",
   "Save Column Position": "Сохранить положение столбца",
   "Save Data As": "Сохранить данные как",
-  "Save Data To:": "Сохранить данные в:",
   "Save Date:": "Дата сохранения:",
   "Save Details": "Сохранить детали",
   "Save Downloaded File To:": "Сохранить загруженный файл в:",
@@ -2315,6 +2314,7 @@
   "Scaled Fractions": "Масштабированные дроби",
   "Scaled Points": "Масштабированные точки",
   "Scales": "Весы",
+  "Scale/Distance": "Масштаб/расстояние",
   "Scatter Matrix": "Матрица рассеяния",
   "Scatter Plot": "Точечная диаграмма",
   "Scatter Plot Options": "Параметры точечной диаграммы",
@@ -3707,6 +3707,7 @@
   "Variable Name": "Имя переменной",
   "Variable Label": "Метка переменной",
   "Levels": "Уровни",
-  "Category": "Категория",
-  "Show Command": "Показать команду"
+  "Category:": "Категория:",
+  "Show Command": "Показать команду",
+  "Lists:": "Списки:"
 }

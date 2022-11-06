@@ -2270,7 +2270,6 @@
   "Save Calculation and Result": "Hifadhi Hesabu na Matokeo",
   "Save Column Position": "Hifadhi Nafasi ya Safu wima",
   "Save Data As": "Hifadhi Data Kama",
-  "Save Data To:": "Hifadhi Data Kwa:",
   "Save Date:": "Hifadhi Tarehe:",
   "Save Details": "Hifadhi Maelezo",
   "Save Downloaded File To:": "Hifadhi Faili Iliyopakuliwa Kwa:",
@@ -2315,6 +2314,7 @@
   "Scaled Fractions": "Scaled Fractions",
   "Scaled Points": "Scaled Points",
   "Scales": "Mizani",
+  "Scale/Distance": "Scale/Distance",
   "Scatter Matrix": "Scatter Matrix",
   "Scatter Plot": "Scatter Plot",
   "Scatter Plot Options": "Scatter Plot Options",
@@ -3707,6 +3707,7 @@
   "Variable Name": "Variable Name",
   "Variable Label": "Variable Label",
   "Levels": "Levels",
-  "Category": "Category",
-  "Show Command": "Show Command"
+  "Category:": "Category:",
+  "Show Command": "Show Command",
+  "Lists:": "Lists:"
 }
