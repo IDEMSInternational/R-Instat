@@ -116,6 +116,13 @@ Public Class clsRegressionDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsDefaultConfintBas As RFunction
+        Get
+            Dim clsDefaultRConfint As New RFunction
+            clsDefaultRConfint.SetRCommand("confint")
+            Return clsDefaultRConfint
+        End Get
+    End Property
     Public Shared ReadOnly Property clsDefaultRaovPValueFunction As RFunction
         Get
             Dim clsDefaultRaovpvalFunction As New RFunction
