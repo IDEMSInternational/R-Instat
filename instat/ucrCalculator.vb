@@ -4111,4 +4111,12 @@ Public Class ucrCalculator
         End If
         OpenHelpPage()
     End Sub
+
+    Private Sub BaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
 End Class

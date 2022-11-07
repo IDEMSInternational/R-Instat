@@ -303,6 +303,9 @@ Partial Class ucrCalculator
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ZooToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRev = New System.Windows.Forms.Button()
         Me.cmdMovProd = New System.Windows.Forms.Button()
         Me.cmdCumProd = New System.Windows.Forms.Button()
@@ -432,9 +435,7 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.cmdStringRHelp = New System.Windows.Forms.Button()
-        Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ZooToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdTransformRHelp = New instat.ucrSplitButton()
         Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ucrSaveResultInto = New instat.ucrSave()
@@ -453,12 +454,12 @@ Partial Class ucrCalculator
         Me.grpSummary.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
         Me.grpTransform.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
         Me.grpLogical.SuspendLayout()
         Me.grpTestString.SuspendLayout()
         Me.grpCircular.SuspendLayout()
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
-        Me.ContextMenuStripTransform.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -3622,6 +3623,24 @@ Partial Class ucrCalculator
         Me.grpTransform.TabStop = False
         Me.grpTransform.Text = "Transform"
         '
+        'ContextMenuStripTransform
+        '
+        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ZooToolStripMenuItem})
+        Me.ContextMenuStripTransform.Name = "ContextMenuStripTransform"
+        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(102, 70)
+        '
+        'DplyrToolStripMenuItem
+        '
+        Me.DplyrToolStripMenuItem.Name = "DplyrToolStripMenuItem"
+        Me.DplyrToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.DplyrToolStripMenuItem.Text = "dplyr"
+        '
+        'ZooToolStripMenuItem
+        '
+        Me.ZooToolStripMenuItem.Name = "ZooToolStripMenuItem"
+        Me.ZooToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.ZooToolStripMenuItem.Text = "zoo"
+        '
         'cmdRev
         '
         Me.cmdRev.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -5130,34 +5149,22 @@ Partial Class ucrCalculator
         Me.cmdStringRHelp.Text = "R Help"
         Me.cmdStringRHelp.UseVisualStyleBackColor = True
         '
-        'ContextMenuStripTransform
+        'BaseToolStripMenuItem
         '
-        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DplyrToolStripMenuItem, Me.ZooToolStripMenuItem})
-        Me.ContextMenuStripTransform.Name = "ContextMenuStripTransform"
-        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(181, 70)
-        '
-        'DplyrToolStripMenuItem
-        '
-        Me.DplyrToolStripMenuItem.Name = "DplyrToolStripMenuItem"
-        Me.DplyrToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
-        Me.DplyrToolStripMenuItem.Text = "dplyr"
-        '
-        'ZooToolStripMenuItem
-        '
-        Me.ZooToolStripMenuItem.Name = "ZooToolStripMenuItem"
-        Me.ZooToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
-        Me.ZooToolStripMenuItem.Text = "zoo"
+        Me.BaseToolStripMenuItem.Name = "BaseToolStripMenuItem"
+        Me.BaseToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.BaseToolStripMenuItem.Text = "base"
         '
         'cmdTransformRHelp
         '
         Me.cmdTransformRHelp.AutoSize = True
         Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.Location = New System.Drawing.Point(179, 189)
+        Me.cmdTransformRHelp.Location = New System.Drawing.Point(201, 189)
         Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
-        Me.cmdTransformRHelp.Size = New System.Drawing.Size(100, 23)
+        Me.cmdTransformRHelp.Size = New System.Drawing.Size(78, 23)
         Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
         Me.cmdTransformRHelp.TabIndex = 204
-        Me.cmdTransformRHelp.Text = "R Help (base)"
+        Me.cmdTransformRHelp.Text = "R Help"
         Me.cmdTransformRHelp.UseVisualStyleBackColor = True
         '
         'cmdIntegerRHelp
@@ -5272,12 +5279,12 @@ Partial Class ucrCalculator
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpTransform.ResumeLayout(False)
         Me.grpTransform.PerformLayout()
+        Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpTestString.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
-        Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -5689,4 +5696,5 @@ Partial Class ucrCalculator
     Friend WithEvents ContextMenuStripTransform As ContextMenuStrip
     Friend WithEvents DplyrToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ZooToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BaseToolStripMenuItem As ToolStripMenuItem
 End Class
