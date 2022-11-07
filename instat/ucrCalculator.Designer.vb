@@ -111,6 +111,7 @@ Partial Class ucrCalculator
         Me.cmdGCD = New System.Windows.Forms.Button()
         Me.cmdGeneratePrimes = New System.Windows.Forms.Button()
         Me.cmdNthPrime = New System.Windows.Forms.Button()
+        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripInteger = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GmpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -322,6 +323,10 @@ Partial Class ucrCalculator
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
+        Me.cmdTransformRHelp = New instat.ucrSplitButton()
+        Me.cmdRev = New System.Windows.Forms.Button()
+        Me.cmdMovProd = New System.Windows.Forms.Button()
+        Me.cmdCumProd = New System.Windows.Forms.Button()
         Me.cmdSortF = New System.Windows.Forms.Button()
         Me.cmdNasplin = New System.Windows.Forms.Button()
         Me.cmdNaapprox = New System.Windows.Forms.Button()
@@ -448,17 +453,12 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.cmdStringRHelp = New System.Windows.Forms.Button()
-        Me.cmdCumProd = New System.Windows.Forms.Button()
-        Me.cmdMovProd = New System.Windows.Forms.Button()
-        Me.cmdRev = New System.Windows.Forms.Button()
-        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdTransformRHelp = New instat.ucrSplitButton()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ZooToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -478,7 +478,7 @@ Partial Class ucrCalculator
         Me.grpCircular.SuspendLayout()
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -1323,6 +1323,18 @@ Partial Class ucrCalculator
         Me.cmdNthPrime.TabIndex = 17
         Me.cmdNthPrime.Text = "nth_prime"
         Me.cmdNthPrime.UseVisualStyleBackColor = True
+        '
+        'cmdIntegerRHelp
+        '
+        Me.cmdIntegerRHelp.AutoSize = True
+        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(210, 289)
+        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
+        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(91, 23)
+        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.TabIndex = 16
+        Me.cmdIntegerRHelp.Text = "R Help"
+        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripInteger
         '
@@ -3835,6 +3847,48 @@ Partial Class ucrCalculator
         Me.grpTransform.TabStop = False
         Me.grpTransform.Text = "Transform"
         '
+        'cmdTransformRHelp
+        '
+        Me.cmdTransformRHelp.AutoSize = True
+        Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
+        Me.cmdTransformRHelp.Location = New System.Drawing.Point(216, 195)
+        Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
+        Me.cmdTransformRHelp.Size = New System.Drawing.Size(91, 23)
+        Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
+        Me.cmdTransformRHelp.TabIndex = 204
+        Me.cmdTransformRHelp.Text = "R Help"
+        Me.cmdTransformRHelp.UseVisualStyleBackColor = True
+        '
+        'cmdRev
+        '
+        Me.cmdRev.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRev.Location = New System.Drawing.Point(124, 102)
+        Me.cmdRev.Name = "cmdRev"
+        Me.cmdRev.Size = New System.Drawing.Size(62, 30)
+        Me.cmdRev.TabIndex = 203
+        Me.cmdRev.Text = "rev"
+        Me.cmdRev.UseVisualStyleBackColor = True
+        '
+        'cmdMovProd
+        '
+        Me.cmdMovProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMovProd.Location = New System.Drawing.Point(124, 73)
+        Me.cmdMovProd.Name = "cmdMovProd"
+        Me.cmdMovProd.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMovProd.TabIndex = 202
+        Me.cmdMovProd.Text = "movprod"
+        Me.cmdMovProd.UseVisualStyleBackColor = True
+        '
+        'cmdCumProd
+        '
+        Me.cmdCumProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCumProd.Location = New System.Drawing.Point(124, 44)
+        Me.cmdCumProd.Name = "cmdCumProd"
+        Me.cmdCumProd.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumProd.TabIndex = 201
+        Me.cmdCumProd.Text = "cumprod"
+        Me.cmdCumProd.UseVisualStyleBackColor = True
+        '
         'cmdSortF
         '
         Me.cmdSortF.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -5313,48 +5367,6 @@ Partial Class ucrCalculator
         Me.cmdStringRHelp.Text = "R Help"
         Me.cmdStringRHelp.UseVisualStyleBackColor = True
         '
-        'cmdCumProd
-        '
-        Me.cmdCumProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumProd.Location = New System.Drawing.Point(124, 44)
-        Me.cmdCumProd.Name = "cmdCumProd"
-        Me.cmdCumProd.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCumProd.TabIndex = 201
-        Me.cmdCumProd.Text = "cumprod"
-        Me.cmdCumProd.UseVisualStyleBackColor = True
-        '
-        'cmdMovProd
-        '
-        Me.cmdMovProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovProd.Location = New System.Drawing.Point(124, 73)
-        Me.cmdMovProd.Name = "cmdMovProd"
-        Me.cmdMovProd.Size = New System.Drawing.Size(62, 30)
-        Me.cmdMovProd.TabIndex = 202
-        Me.cmdMovProd.Text = "movprod"
-        Me.cmdMovProd.UseVisualStyleBackColor = True
-        '
-        'cmdRev
-        '
-        Me.cmdRev.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRev.Location = New System.Drawing.Point(124, 102)
-        Me.cmdRev.Name = "cmdRev"
-        Me.cmdRev.Size = New System.Drawing.Size(62, 30)
-        Me.cmdRev.TabIndex = 203
-        Me.cmdRev.Text = "rev"
-        Me.cmdRev.UseVisualStyleBackColor = True
-        '
-        'cmdIntegerRHelp
-        '
-        Me.cmdIntegerRHelp.AutoSize = True
-        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(210, 289)
-        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
-        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(91, 23)
-        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.TabIndex = 16
-        Me.cmdIntegerRHelp.Text = "R Help"
-        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
-        '
         'ucrSaveResultInto
         '
         Me.ucrSaveResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -5411,21 +5423,11 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdTransformRHelp
+        'ContextMenuStripTransform
         '
-        Me.cmdTransformRHelp.AutoSize = True
-        Me.cmdTransformRHelp.Location = New System.Drawing.Point(216, 195)
-        Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
-        Me.cmdTransformRHelp.Size = New System.Drawing.Size(91, 23)
-        Me.cmdTransformRHelp.TabIndex = 204
-        Me.cmdTransformRHelp.Text = "R Help"
-        Me.cmdTransformRHelp.UseVisualStyleBackColor = True
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ZooToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 92)
+        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ZooToolStripMenuItem})
+        Me.ContextMenuStripTransform.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(102, 70)
         '
         'BaseToolStripMenuItem
         '
@@ -5494,7 +5496,7 @@ Partial Class ucrCalculator
         Me.grpCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -5922,7 +5924,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMovProd As Button
     Friend WithEvents cmdCumProd As Button
     Friend WithEvents cmdTransformRHelp As ucrSplitButton
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ContextMenuStripTransform As ContextMenuStrip
     Friend WithEvents BaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DplyrToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ZooToolStripMenuItem As ToolStripMenuItem
