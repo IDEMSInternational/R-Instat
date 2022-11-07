@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgWordwrap
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsWrapFunction, clsConvertFunction, clsReplaceFunction As New RFunction
+    Private clsWrapFunction, clsConvertFunction, clsReplaceFunction, clsColAlignFunction As New RFunction
     Private bRCodeSet As Boolean = False
 
     Private Sub dlgWordwrap_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,6 +54,15 @@ Public Class dlgWordwrap
         ucrReceiverWrapText.SetMeAsReceiver()
         ucrReceiverWrapText.strSelectorHeading = "Variables"
 
+        'ucrAlignment
+        ucrAlignment.SetItems({"auto", "left", "center", "right"})
+        ucrAlignment.AddFunctionNamesCondition("auto", "align = auto")
+        ucrAlignment.AddFunctionNamesCondition("left", "align = left")
+        ucrAlignment.AddFunctionNamesCondition("center", "align = center")
+        ucrAlignment.AddFunctionNamesCondition("right", "align = center")
+        ucrAlignment.SetLinkedDisplayControl(lblAlign)
+        ucrAlignment.SetDropDownStyleAsNonEditable()
+
         'ucrRdoOptions
         ucrPnlTextWrap.AddRadioButton(rdoWrapText)
         ucrPnlTextWrap.AddRadioButton(rdoUnWrapText)
@@ -78,6 +87,7 @@ Public Class dlgWordwrap
         clsConvertFunction = New RFunction
         clsWrapFunction = New RFunction
         clsReplaceFunction = New RFunction
+        clsColAlignFunction = New RFunction
 
         ucrNewColName.Reset()
         ucrSelectorForWrapText.Reset()
@@ -86,6 +96,9 @@ Public Class dlgWordwrap
         clsConvertFunction.SetPackageName("stringr")
         clsConvertFunction.SetRCommand("str_to_lower")
         clsConvertFunction.SetAssignTo(ucrNewColName.GetText(), strTempDataframe:=ucrSelectorForWrapText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
+
+        clsColAlignFunction.SetPackageName("gtr")
+        clsColAlignFunction.SetRCommand("cols_align")
 
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace_all")
@@ -106,7 +119,7 @@ Public Class dlgWordwrap
 
         ucrNewColName.AddAdditionalRCode(clsWrapFunction, iAdditionalPairNo:=1)
         ucrNewColName.AddAdditionalRCode(clsReplaceFunction, iAdditionalPairNo:=2)
-
+        ucrAlignment.SetRCode(clsColAlignFunction, bReset)
         ucrReceiverWrapText.SetRCode(clsConvertFunction, bReset)
         ucrNewColName.SetRCode(clsConvertFunction, bReset)
         ucrPnlTextWrap.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -136,12 +149,31 @@ Public Class dlgWordwrap
         End If
     End Sub
 
-
     Private Sub ChangeBaseFunction()
         If rdoWrapText.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
+            Select Case ucrAlignment.GetText
+                Case "auto"
+                    ucrBase.clsRsyntax.SetFunction("align = auto")
+                Case "left"
+                    ucrBase.clsRsyntax.SetFunction("align = left")
+                Case "center"
+                    ucrBase.clsRsyntax.SetFunction("align = center")
+                Case "rignt"
+                    ucrBase.clsRsyntax.SetFunction("align = center")
+            End Select
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
+            Select Case ucrAlignment.GetText
+                Case "auto"
+                    ucrBase.clsRsyntax.SetFunction("align = auto")
+                Case "left"
+                    ucrBase.clsRsyntax.SetFunction("align = left")
+                Case "center"
+                    ucrBase.clsRsyntax.SetFunction("align = center")
+                Case "rignt"
+                    ucrBase.clsRsyntax.SetFunction("align = right")
+            End Select
         End If
     End Sub
 
@@ -150,6 +182,10 @@ Public Class dlgWordwrap
     End Sub
 
     Private Sub ucrPnlTextWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextWrap.ControlValueChanged
+        ChangeBaseFunction()
+    End Sub
+
+    Private Sub ucrAlignment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrAlignment.ControlValueChanged, ucrPnlTextWrap.ControlValueChanged
         ChangeBaseFunction()
     End Sub
 End Class
