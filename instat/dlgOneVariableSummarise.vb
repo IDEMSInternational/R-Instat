@@ -249,10 +249,13 @@ Public Class dlgOneVariableSummarise
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
         If Not ucrChkOmitMissing.Checked Then
             clsSummaryTableFunction.RemoveParameterByName("na_type")
+            clsSummaryTableFunction.RemoveParameterByName("na_max_n")
+            clsSummaryTableFunction.RemoveParameterByName("na_min_n")
+            clsSummaryTableFunction.RemoveParameterByName("na_max_prop")
+            clsSummaryTableFunction.RemoveParameterByName("na_consecutive_n")
         Else
             clsSummaryTableFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
         End If
-
         cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
     End Sub
 
