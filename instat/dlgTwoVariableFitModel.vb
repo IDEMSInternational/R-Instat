@@ -22,7 +22,7 @@ Public Class dlgTwoVariableFitModel
     Private iNumberOfSecondFactorLevels As Integer
     Private iNumberOfFirstFactorLevels As Integer
     Private bFirstLoad As Boolean = True
-    Private clsVisReg, clsFamilyFunction As New RFunction
+    Private clsVisReg, clsPlotBasFunction, clsFamilyFunction As New RFunction
     Private clsTransformFunction As New RFunction
     Private clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
     Private clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
@@ -44,7 +44,7 @@ Public Class dlgTwoVariableFitModel
 
     'General case codes
     Private clsFormulaOperator As New ROperator
-    Private clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
+    Private clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
     Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
@@ -216,6 +216,7 @@ Public Class dlgTwoVariableFitModel
         clsPolynomialFunc = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
+        clsGLMBayes = New RFunction
         clsAsNumeric = New RFunction
         clsFamilyFunction = New RFunction
         clsFormulaFunction = New RFunction
@@ -223,6 +224,7 @@ Public Class dlgTwoVariableFitModel
         clsSummaryFunction = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
+        clsPlotBasFunction = New RFunction
         clsTransformFunction = New RFunction
         clsRstandardFunction = New RFunction
         clsHatvaluesFunction = New RFunction
@@ -294,6 +296,10 @@ Public Class dlgTwoVariableFitModel
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
+        clsGLMBayes = clsRegressionDefaults.clsDefaultGLmBayesFunction.Clone
+        clsGLMBayes.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMBayes.AddParameter("na.action", "na.exclude", iPosition:=4)
+
         clsPolynomialFunc.SetRCommand("poly")
 
         clsGetFactorLevelFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
@@ -311,6 +317,10 @@ Public Class dlgTwoVariableFitModel
         clsVisReg.AddParameter("gg", "TRUE")
         clsVisReg.iCallType = 3
         clsVisReg.bExcludeAssignedFunctionOutput = False
+
+        'Plot BAS
+        clsPlotBasFunction.SetPackageName("BAS")
+        clsPlotBasFunction.SetRCommand("plot.bas")
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
@@ -560,6 +570,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsKruskalTestFunction, iAdditionalPairNo:=21)
         ucrSaveModels.AddAdditionalRCode(clsBarletteTestFunction, iAdditionalPairNo:=22)
         ucrSaveModels.AddAdditionalRCode(clsFlignerTestFunction, iAdditionalPairNo:=23)
+        ucrSaveModels.AddAdditionalRCode(clsGLMBayes, iAdditionalPairNo:=24)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
@@ -583,6 +594,7 @@ Public Class dlgTwoVariableFitModel
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
         'General case controls 
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
+        ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLMBayes, ucrSelectorSimpleReg.GetParameter(), 2)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
         ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -646,10 +658,20 @@ Public Class dlgTwoVariableFitModel
         If rdoGeneralCase.Checked Then
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
                 clsLMOrGLM = clsLM
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bayes") Then
+                clsLMOrGLM = clsGLMBayes
+                ChooseAnovaFunction()
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
+
+
             Else
                 clsLMOrGLM = clsGLM
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+
             End If
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+            'ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
             'Update display functions to contain correct model
@@ -658,6 +680,7 @@ Public Class dlgTwoVariableFitModel
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
+            clsPlotBasFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
 
             For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
                 kvp.Value.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
@@ -756,6 +779,7 @@ Public Class dlgTwoVariableFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsOnewayTestFunction)
             End Select
         End If
+        'ChooseAnovaFunction()
     End Sub
 
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -788,6 +812,7 @@ Public Class dlgTwoVariableFitModel
         UpdatePreview()
         ReceiverColumnType()
         AddFactorLevels()
+        ChooseAnovaFunction()
     End Sub
 
     Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
@@ -798,6 +823,8 @@ Public Class dlgTwoVariableFitModel
     'temp fix for graph display problem with RDotNet
     'correct solution is to have save controls linked to each graph
     Private Sub GraphAssignTo()
+        clsPlotBasFunction.SetAssignTo("last_bayes", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_bayes")
+
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
     End Sub
 
@@ -885,6 +912,15 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+
+    Public Sub ChooseAnovaFunction()
+        If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bayes") Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
+        Else
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        End If
     End Sub
 
     Private Sub ReceiverColumnType()

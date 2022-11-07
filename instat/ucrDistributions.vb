@@ -239,6 +239,7 @@ Public Class ucrDistributions
         Dim clsGlmNegativeBinomialDist As New Distribution
         Dim clsPolarDist As New Distribution
         Dim clsMultinomDist As New Distribution
+        Dim clsBayesLinearRegression As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -551,6 +552,15 @@ Public Class ucrDistributions
         clsPolarDist.bIsContinuous = False
         clsPolarDist.strGLMFunctionName = "polr"
         lstAllDistributions.Add(clsPolarDist)
+
+        'Bayes Simple linear regression
+        clsBayesLinearRegression.strNameTag = "Bayes"
+        clsBayesLinearRegression.strPackagName = "BAS"
+        clsBayesLinearRegression.strRName = "bas.lm"
+        clsBayesLinearRegression.strGLMFunctionName = "bas.lm"
+        clsBayesLinearRegression.bNumeric = True
+        clsBayesLinearRegression.bTwoLevelFactor = True
+        lstAllDistributions.Add(clsBayesLinearRegression)
 
         'multinomial distribution
         clsMultinomDist.strNameTag = "Multinomial"
