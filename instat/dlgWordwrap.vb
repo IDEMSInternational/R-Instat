@@ -152,29 +152,21 @@ Public Class dlgWordwrap
     Private Sub ChangeBaseFunction()
         If rdoWrapText.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
-            Select Case ucrAlignment.GetText
-                Case "auto"
-                    ucrBase.clsRsyntax.SetFunction("align = auto")
-                Case "left"
-                    ucrBase.clsRsyntax.SetFunction("align = left")
-                Case "center"
-                    ucrBase.clsRsyntax.SetFunction("align = center")
-                Case "rignt"
-                    ucrBase.clsRsyntax.SetFunction("align = center")
-            End Select
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
-            Select Case ucrAlignment.GetText
-                Case "auto"
-                    ucrBase.clsRsyntax.SetFunction("align = auto")
-                Case "left"
-                    ucrBase.clsRsyntax.SetFunction("align = left")
-                Case "center"
-                    ucrBase.clsRsyntax.SetFunction("align = center")
-                Case "rignt"
-                    ucrBase.clsRsyntax.SetFunction("align = right")
-            End Select
         End If
+        'If Not 
+        '       Select Case ucrAlignment.GetText
+        '        Case "auto"
+        '            ucrBase.clsRsyntax.SetFunction("align = auto")
+        '        Case "left"
+        '            ucrBase.clsRsyntax.SetFunction("align = left")
+        '        Case "center"
+        '            ucrBase.clsRsyntax.SetFunction("align = center")
+        '        Case "rignt"
+        '            ucrBase.clsRsyntax.SetFunction("align = center")
+        '    End Select
+        'End If
     End Sub
 
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWrapText.ControlValueChanged
