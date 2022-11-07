@@ -172,13 +172,14 @@ Public Class ucrColumnMetadata
         ElseIf strColumnName = strLabelsScientific Then
             newValue = newValue.ToString.ToUpper
             If strBooleanValsAllowed.Contains(newValue) Then
-                If newValue(0) = "F" Then
-                    newValue = "FALSE"
-                ElseIf newValue(0) = "T" Then
-                    newValue = "TRUE"
-                ElseIf newValue(0) = "N" Then
-                    newValue = "NA"
-                End If
+                Select Case newValue(0)
+                    Case "F"
+                        newValue = "FALSE"
+                    Case "T"
+                        newValue = "TRUE"
+                    Case "N"
+                        newValue = "NA"
+                End Select
                 strNewValue = newValue
             Else
                 MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display and NA/N for a mixture", MsgBoxStyle.Information)
