@@ -21,6 +21,7 @@ Public MustInherit Class ucrReoGrid
     Implements IGrid
 
     Protected _clsDataBook As clsDataBook
+    Private moGrid As Object
 
     ''' <summary>
     ''' Gets current worksheet adapter
@@ -210,6 +211,12 @@ Public MustInherit Class ucrReoGrid
         Next
         Return ""
     End Function
+
+    Private Sub ucrReoGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Right Then
+            'Dim p = Keys.Right
+        End If
+    End Sub
 
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
         'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
