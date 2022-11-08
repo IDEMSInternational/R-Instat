@@ -37,6 +37,7 @@ Public Class dlgHideDataframes
         If bReset Then
             SetDefaults()
         End If
+        SetHiddenColumns()
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -52,6 +53,8 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
+
+
 
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
@@ -73,6 +76,8 @@ Public Class dlgHideDataframes
         clsDataUnhideOperator = New ROperator
         clsTildeOperator = New ROperator
         clsDummyFunction = New RFunction
+
+        ucrSelectorForDataFrames.Reset()
 
         clsDummyFunction.AddParameter("checked", "rdoHide", iPosition:=0)
 
