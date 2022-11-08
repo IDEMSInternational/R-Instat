@@ -84,6 +84,7 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.Selector = ucrSelectorOneVarFitMod
         ucrReceiverVariable.SetParameterIsRFunction()
         ucrReceiverVariable.SetMeAsReceiver()
+        ucrReceiverVariable.SetIncludedDataTypes({"numeric", "dates", "logical", "factor"}, bStrict:=True)
 
         ucrChkConvertVariate.SetText("Convert to Numeric")
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
@@ -99,10 +100,10 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", strSeparator, "Bayes:Mean", "Bayes:Proportion", "Bartel", "br", "runs", "Sen", "serial corr", "snh", strSeparator, "ad", "cvm", "lillie", "pearson", "sf"})
+        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", strSeparator, "Bayes:Mean", "Bayes:Proportion", strSeparator, "Bartel", "br", "runs", "Sen", "serial corr", "snh", strSeparator, "ad", "cvm", "lillie", "pearson", "sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
-        ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance", "bayes:mean", "bayes:proportion"})
+        ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance", strSeparator, "bayes:mean", "bayes:proportion"})
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
         ucrInputMeanCIMethod.SetParameter(New RParameter("method", 3))

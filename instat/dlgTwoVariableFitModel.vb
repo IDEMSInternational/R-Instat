@@ -128,10 +128,12 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.Selector = ucrSelectorSimpleReg
         ucrReceiverResponse.SetParameterIsString()
         ucrReceiverResponse.bWithQuotes = False
+        ucrReceiverResponse.SetIncludedDataTypes({"numeric", "dates", "logical", "factor"}, bStrict:=True)
 
         ucrReceiverExplanatory.SetParameter(New RParameter("x", 1))
         ucrReceiverExplanatory.Selector = ucrSelectorSimpleReg
         ucrReceiverExplanatory.SetParameterIsString()
+        ucrReceiverExplanatory.SetIncludedDataTypes({"numeric", "dates", "logical", "factor"}, bStrict:=True)
         ucrReceiverExplanatory.bWithQuotes = False
 
         ucrChkConvertToVariate.SetText("Convert to Numeric")
