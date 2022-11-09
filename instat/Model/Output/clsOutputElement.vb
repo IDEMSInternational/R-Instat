@@ -22,13 +22,18 @@ Public Class clsOutputElement
     Private _id As Integer
     'hold the script elements that form the R script that produced the output
     Private _lstRScriptElements As New List(Of clsRScriptElement)
+
     Private _outputType As OutputType
+
     'todo. deprecate this list with _lstTextOutput ?
     Private _lstStringOutput As New List(Of String)
+
     'holds the file paths to the text outputs
     Private _lstTextOutput As New List(Of String)
+
     'holds the file paths to the image outputs
     Private _lstImageOutput As New List(Of String)
+
     'holds the file paths to the html outputs
     Private _lstHtmlOutput As New List(Of String)
 
@@ -54,11 +59,13 @@ Public Class clsOutputElement
             _id = value
         End Set
     End Property
+
     Public ReadOnly Property TextOutput As String
         Get
             Return _lstTextOutput.FirstOrDefault()
         End Get
     End Property
+
     ''' <summary>
     ''' Holds image file path if outputType is image file
     ''' </summary>
@@ -68,11 +75,13 @@ Public Class clsOutputElement
             Return _lstImageOutput.FirstOrDefault()
         End Get
     End Property
+
     Public ReadOnly Property HtmlOutput As String
         Get
-            Return _lstHtmlOutput.FirstOrDefault
+            Return _lstHtmlOutput.FirstOrDefault()
         End Get
     End Property
+
     ''' <summary>
     ''' Defines the type of output
     ''' </summary>
@@ -156,4 +165,5 @@ Public Class clsOutputElement
         _lstRScriptElements = script
         _outputType = OutputType.TextOutput
     End Sub
+
 End Class

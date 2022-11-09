@@ -18,7 +18,11 @@ Imports CefSharp.WinForms
 Imports CefSharp
 Imports CefSharp.DevTools.DOM
 
-'todo. inherit panel?
+'''--------------------------------------------------------------------------------------------
+''' <summary>
+''' Control for viewing html output content
+''' </summary>
+'''--------------------------------------------------------------------------------------------
 Public Class ucrWebViewer
     Inherits Panel
 
@@ -73,11 +77,11 @@ Public Class ucrWebViewer
         MyBase.Dispose(bDisposing)
     End Sub
 
-    Private Sub InitializeComponent()
-        Me.SuspendLayout()
-        Me.ResumeLayout(False)
+    'Private Sub InitializeComponent()
+    '    Me.SuspendLayout()
+    '    Me.ResumeLayout(False)
 
-    End Sub
+    'End Sub
 
 
     'Public Sub LoadUrl(strUrl As String)

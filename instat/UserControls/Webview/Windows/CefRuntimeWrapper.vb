@@ -1,5 +1,19 @@
-﻿Imports System.IO
-Imports System.Runtime.ConstrainedExecution
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.IO
 Imports CefSharp
 Imports CefSharp.SchemeHandler
 Imports CefSharp.WinForms
@@ -12,7 +26,7 @@ Imports CefSharp.WinForms
 ''' the class is declared as 'NotInheritable` and the constructor is declared as 'Private'.
 ''' </para>
 ''' </summary>
-''' '''------------------------------------------------------------------------------------------------
+''' '''---------------------------------------------------------------------------------------------
 Public NotInheritable Class CefRuntimeWrapper
 
     '''--------------------------------------------------------------------------------------------
@@ -24,9 +38,15 @@ Public NotInheritable Class CefRuntimeWrapper
     Private Sub New()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    ''' Initialises the Cef Runtime that runs the Cef browser processes.
+    ''' </summary>
+    ''' <returns>True if successful else false</returns>
+    '''--------------------------------------------------------------------------------------------
     Public Shared Function InitialiseCefRuntime() As Boolean
-
         Try
+
             If IsCefInitilised() Then
                 Return False
             End If
@@ -66,15 +86,16 @@ Public NotInheritable Class CefRuntimeWrapper
             Return Cef.Initialize(settings, performDependencyCheck:=True, browserProcessHandler:=Nothing)
 
         Catch ex As Exception
-            'An excpetion "Could not load file or assembly 'CefSharp.Core.Runtime.dll' or one of its dependencies. The specified module could not be found.":"CefSharp.Core.Runtime.dll"
+            'An exception "Could not load file or assembly 'CefSharp.Core.Runtime.dll' or one of its dependencies. The specified module could not be found.":"CefSharp.Core.Runtime.dll"
             'could be thrown.
             Return False
         End Try
-
     End Function
 
-
-
+    ''' <summary>
+    ''' Checks if Cef runtime is initialised
+    ''' </summary>
+    ''' <returns>true if already initialised else false</returns>
     Public Shared Function IsCefInitilised() As Boolean
         Try
             'An excpetion "Could not load file or assembly 'CefSharp.Core.Runtime.dll' or one of its dependencies. The specified module could not be found.":"CefSharp.Core.Runtime.dll"
@@ -85,12 +106,14 @@ Public NotInheritable Class CefRuntimeWrapper
         End Try
     End Function
 
+    ''' <summary>
+    ''' Stops the Cef runtime
+    ''' </summary>
     Public Shared Sub ShutDownCef()
         If IsCefInitilised() Then
             Cef.Shutdown()
         End If
     End Sub
-
 
     'todo. left here for future reference
     'Private Shared Function GetCustomSheme() As CefCustomScheme

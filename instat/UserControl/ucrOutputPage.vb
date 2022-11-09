@@ -243,8 +243,6 @@ Public Class ucrOutputPage
                 'todo. instead of copy paste, add image to rtf directly from file?
                 Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
                 richText.Paste()
-            Case OutputType.HtmlOutput
-                'todo
         End Select
         richText.AppendText(Environment.NewLine)
         richText.AppendText(Environment.NewLine)
@@ -308,7 +306,7 @@ Public Class ucrOutputPage
             ucrTextViewer.LoadTextFile(strFileName:=outputElement.TextOutput)
             ucrTextViewer.FormatText(OutputFont.ROutputFont, OutputFont.ROutputColour)
 
-            AddHandler ucrTextViewer._richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+            AddHandler ucrTextViewer.richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
 
             panel.Controls.Add(linkLabel)
             panel.Controls.Add(ucrTextViewer)

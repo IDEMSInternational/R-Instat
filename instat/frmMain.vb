@@ -84,7 +84,11 @@ Public Class frmMain
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
-            CefRuntimeWrapper.InitialiseCefRuntime()
+            If CefRuntimeWrapper.InitialiseCefRuntime() Then
+                MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Htmlcontet will be shown in your default browser.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
         End If
     End Sub
 

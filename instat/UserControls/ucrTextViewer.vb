@@ -1,22 +1,42 @@
-﻿Imports System.IO
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.IO
 Imports System.Runtime.InteropServices
 
+'''--------------------------------------------------------------------------------------------
+''' <summary>
+''' Control for viewing text output content
+''' </summary>
+'''--------------------------------------------------------------------------------------------
 Public Class ucrTextViewer
     Inherits Panel
 
-    Public ReadOnly _richTextBox As RichTextBox
+    Public ReadOnly richTextBox As RichTextBox
 
     Public Sub New()
-        _richTextBox = New RichTextBox
-        _richTextBox.BorderStyle = BorderStyle.None
-        Me.Controls.Add(_richTextBox)
-        _richTextBox.Dock = DockStyle.Fill
-        AddHandler _richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
+        richTextBox = New RichTextBox
+        richTextBox.BorderStyle = BorderStyle.None
+        Me.Controls.Add(richTextBox)
+        richTextBox.Dock = DockStyle.Fill
+        AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
     End Sub
 
     Public ReadOnly Property TextLength As Integer
         Get
-            Return _richTextBox.Text.Length
+            Return richTextBox.Text.Length
         End Get
     End Property
 
@@ -29,14 +49,14 @@ Public Class ucrTextViewer
     End Sub
 
     Public Sub AddText(text As String)
-        _richTextBox.AppendText(text)
-        'by default always set the height of this control to correspond to the heigh of the rich text box contents
+        richTextBox.AppendText(text)
+        'by default always set the height of this control to correspond to the height of the rich text box contents
         'todo. what happens when the rich text box has multiple fonts?
-        Me.Height = (_richTextBox.GetLineFromCharIndex(_richTextBox.Text.Length) + 1) * (_richTextBox.Font.Height + _richTextBox.Margin.Vertical) + 5
+        Me.Height = (richTextBox.GetLineFromCharIndex(richTextBox.Text.Length) + 1) * (richTextBox.Font.Height + richTextBox.Margin.Vertical) + 5
     End Sub
 
     Public Sub AddTextAndFormat(text As String, font As Font, color As Color)
-        Dim intStartSelection As Integer = _richTextBox.Text.Length
+        Dim intStartSelection As Integer = richTextBox.Text.Length
         AddText(text)
         FormatText(font, color, intStartSelection, text.Length)
     End Sub
@@ -46,21 +66,21 @@ Public Class ucrTextViewer
                           Optional iSelectionLength As Integer = -1)
 
         If iSelectionLength = -1 Then
-            iSelectionLength = _richTextBox.Text.Length
+            iSelectionLength = richTextBox.Text.Length
         End If
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
             'Mono cannot have multiple fonts and colours within RichTextBox
-            _richTextBox.SelectAll()
-            _richTextBox.Font = font
-            _richTextBox.ForeColor = color
-            _richTextBox.SelectionLength = 0
+            richTextBox.SelectAll()
+            richTextBox.Font = font
+            richTextBox.ForeColor = color
+            richTextBox.SelectionLength = 0
         Else
-            _richTextBox.SelectionStart = iSelectionStart
-            _richTextBox.SelectionLength = iSelectionLength
-            _richTextBox.SelectionFont = font
-            _richTextBox.SelectionColor = color
-            _richTextBox.SelectionLength = 0
+            richTextBox.SelectionStart = iSelectionStart
+            richTextBox.SelectionLength = iSelectionLength
+            richTextBox.SelectionFont = font
+            richTextBox.SelectionColor = color
+            richTextBox.SelectionLength = 0
         End If
     End Sub
 
