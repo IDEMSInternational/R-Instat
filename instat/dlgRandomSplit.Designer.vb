@@ -33,12 +33,12 @@ Partial Class dlgRandomSplit
         Me.ucrNudLag = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkLag = New instat.ucrCheck()
-        Me.ucrChkStratifyingFactor = New instat.ucrCheck()
         Me.ucrPnlRandomSplit = New instat.UcrPanel()
         Me.ucrSelectorRandomSplit = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRanSplit = New instat.ucrReceiverSingle()
         Me.ucrSaveTrainingData = New instat.ucrSave()
         Me.ucrSaveTestingData = New instat.ucrSave()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -76,7 +76,7 @@ Partial Class dlgRandomSplit
         'lblFraction
         '
         Me.lblFraction.AutoSize = True
-        Me.lblFraction.Location = New System.Drawing.Point(281, 136)
+        Me.lblFraction.Location = New System.Drawing.Point(281, 141)
         Me.lblFraction.Name = "lblFraction"
         Me.lblFraction.Size = New System.Drawing.Size(48, 13)
         Me.lblFraction.TabIndex = 6
@@ -85,7 +85,7 @@ Partial Class dlgRandomSplit
         'lblPool
         '
         Me.lblPool.AutoSize = True
-        Me.lblPool.Location = New System.Drawing.Point(281, 199)
+        Me.lblPool.Location = New System.Drawing.Point(281, 197)
         Me.lblPool.Name = "lblPool"
         Me.lblPool.Size = New System.Drawing.Size(31, 13)
         Me.lblPool.TabIndex = 10
@@ -94,7 +94,7 @@ Partial Class dlgRandomSplit
         'lblBreaks
         '
         Me.lblBreaks.AutoSize = True
-        Me.lblBreaks.Location = New System.Drawing.Point(281, 168)
+        Me.lblBreaks.Location = New System.Drawing.Point(281, 169)
         Me.lblBreaks.Name = "lblBreaks"
         Me.lblBreaks.Size = New System.Drawing.Size(46, 13)
         Me.lblBreaks.TabIndex = 8
@@ -105,7 +105,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudBreaks.AutoSize = True
         Me.ucrNudBreaks.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 166)
+        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 165)
         Me.ucrNudBreaks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBreaks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Name = "ucrNudBreaks"
@@ -118,7 +118,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudPool.AutoSize = True
         Me.ucrNudPool.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPool.Location = New System.Drawing.Point(351, 198)
+        Me.ucrNudPool.Location = New System.Drawing.Point(351, 197)
         Me.ucrNudPool.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPool.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Name = "ucrNudPool"
@@ -169,15 +169,6 @@ Partial Class dlgRandomSplit
         Me.ucrChkLag.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkLag.TabIndex = 12
         '
-        'ucrChkStratifyingFactor
-        '
-        Me.ucrChkStratifyingFactor.AutoSize = True
-        Me.ucrChkStratifyingFactor.Checked = False
-        Me.ucrChkStratifyingFactor.Location = New System.Drawing.Point(281, 72)
-        Me.ucrChkStratifyingFactor.Name = "ucrChkStratifyingFactor"
-        Me.ucrChkStratifyingFactor.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkStratifyingFactor.TabIndex = 4
-        '
         'ucrPnlRandomSplit
         '
         Me.ucrPnlRandomSplit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -202,7 +193,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrReceiverRanSplit.AutoSize = True
         Me.ucrReceiverRanSplit.frmParent = Me
-        Me.ucrReceiverRanSplit.Location = New System.Drawing.Point(281, 101)
+        Me.ucrReceiverRanSplit.Location = New System.Drawing.Point(281, 105)
         Me.ucrReceiverRanSplit.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRanSplit.Name = "ucrReceiverRanSplit"
         Me.ucrReceiverRanSplit.Selector = Nothing
@@ -229,11 +220,21 @@ Partial Class dlgRandomSplit
         Me.ucrSaveTestingData.Size = New System.Drawing.Size(403, 23)
         Me.ucrSaveTestingData.TabIndex = 14
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(278, 84)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(144, 13)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "Stratifying variable (Optional):"
+        '
         'dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 389)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrSaveTestingData)
         Me.Controls.Add(Me.ucrReceiverRanSplit)
         Me.Controls.Add(Me.lblBreaks)
@@ -248,7 +249,6 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.ucrChkLag)
         Me.Controls.Add(Me.rdoSample)
         Me.Controls.Add(Me.rdoTimeSeries)
-        Me.Controls.Add(Me.ucrChkStratifyingFactor)
         Me.Controls.Add(Me.ucrPnlRandomSplit)
         Me.Controls.Add(Me.ucrSelectorRandomSplit)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -264,7 +264,6 @@ Partial Class dlgRandomSplit
 
     Friend WithEvents rdoSample As RadioButton
     Friend WithEvents rdoTimeSeries As RadioButton
-    Friend WithEvents ucrChkStratifyingFactor As ucrCheck
     Friend WithEvents ucrChkLag As ucrCheck
     Friend WithEvents ucrNudPool As ucrNud
     Friend WithEvents ucrNudFraction As ucrNud
@@ -279,4 +278,5 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrReceiverRanSplit As ucrReceiverSingle
     Friend WithEvents ucrSaveTrainingData As ucrSave
     Friend WithEvents ucrSaveTestingData As ucrSave
+    Friend WithEvents Label1 As Label
 End Class
