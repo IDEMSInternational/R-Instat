@@ -44,7 +44,7 @@ Public Class dlgTwoVariableFitModel
 
     'General case codes
     Private clsFormulaOperator As New ROperator
-    Private clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
+    Private clsGLM, clsLM, clsGLMNB, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
     Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
@@ -210,6 +210,7 @@ Public Class dlgTwoVariableFitModel
         clsLM = New RFunction
         clsGLM = New RFunction
         clsGLMBayes = New RFunction
+        clsGLMNB = New RFunction
         clsAsNumeric = New RFunction
         clsFamilyFunction = New RFunction
         clsFormulaFunction = New RFunction
@@ -289,6 +290,9 @@ Public Class dlgTwoVariableFitModel
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
+
+        clsGLMNB = clsRegressionDefaults.clsDefaultGLmNBFunction.Clone
+        clsGLMNB.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
 
         clsGLMBayes = clsRegressionDefaults.clsDefaultGLmBayesFunction.Clone
         clsGLMBayes.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
@@ -574,6 +578,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsBarletteTestFunction, iAdditionalPairNo:=22)
         ucrSaveModels.AddAdditionalRCode(clsFlignerTestFunction, iAdditionalPairNo:=23)
         ucrSaveModels.AddAdditionalRCode(clsGLMBayes, iAdditionalPairNo:=24)
+        ucrSaveModels.AddAdditionalRCode(clsGLMNB, iAdditionalPairNo:=25)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
@@ -591,12 +596,13 @@ Public Class dlgTwoVariableFitModel
         ucrInputMethod.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputCredibleLevel.SetRCode(clsBayesIferenceFunction, bReset)
 
-
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("mu", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
         'General case controls 
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLMBayes, ucrSelectorSimpleReg.GetParameter(), 2)
+        ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLMNB, ucrSelectorSimpleReg.GetParameter(), 3)
+
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
         ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -663,6 +669,8 @@ Public Class dlgTwoVariableFitModel
                 clsLMOrGLM = clsLM
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bayes") Then
                 clsLMOrGLM = clsGLMBayes
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial_GLM") Then
+                clsLMOrGLM = clsGLMNB
             Else
                 clsLMOrGLM = clsGLM
 
@@ -906,7 +914,6 @@ Public Class dlgTwoVariableFitModel
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 
     Public Sub ChooseAnovaFunction()
         If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bayes") Then
