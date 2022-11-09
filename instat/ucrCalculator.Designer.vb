@@ -83,7 +83,7 @@ Partial Class ucrCalculator
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
         Me.grpInteger = New System.Windows.Forms.GroupBox()
-        Me.cmdFactorize2 = New System.Windows.Forms.Button()
+        Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.cmdSquare = New System.Windows.Forms.Button()
         Me.cmdTriangle = New System.Windows.Forms.Button()
         Me.cmdPadovan = New System.Windows.Forms.Button()
@@ -111,7 +111,6 @@ Partial Class ucrCalculator
         Me.cmdGCD = New System.Windows.Forms.Button()
         Me.cmdGeneratePrimes = New System.Windows.Forms.Button()
         Me.cmdNthPrime = New System.Windows.Forms.Button()
-        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripInteger = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GmpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -127,7 +126,6 @@ Partial Class ucrCalculator
         Me.cmdRankPercent = New System.Windows.Forms.Button()
         Me.cmdDivisors = New System.Windows.Forms.Button()
         Me.cmdFibonacci = New System.Windows.Forms.Button()
-        Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.cmdNextPrime = New System.Windows.Forms.Button()
         Me.cmdChoosez = New System.Windows.Forms.Button()
         Me.cmdFactorial = New System.Windows.Forms.Button()
@@ -323,7 +321,10 @@ Partial Class ucrCalculator
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.cmdTransformRHelp = New instat.ucrSplitButton()
+        Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ZooToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRev = New System.Windows.Forms.Button()
         Me.cmdMovProd = New System.Windows.Forms.Button()
         Me.cmdCumProd = New System.Windows.Forms.Button()
@@ -453,15 +454,14 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.cmdStringRHelp = New System.Windows.Forms.Button()
+        Me.cmdLucas = New System.Windows.Forms.Button()
+        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
+        Me.cmdTransformRHelp = New instat.ucrSplitButton()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ZooToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -473,12 +473,12 @@ Partial Class ucrCalculator
         Me.grpSummary.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
         Me.grpTransform.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
         Me.grpLogical.SuspendLayout()
         Me.grpTestString.SuspendLayout()
         Me.grpCircular.SuspendLayout()
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
-        Me.ContextMenuStripTransform.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -996,7 +996,8 @@ Partial Class ucrCalculator
         '
         'grpInteger
         '
-        Me.grpInteger.Controls.Add(Me.cmdFactorize2)
+        Me.grpInteger.Controls.Add(Me.cmdLucas)
+        Me.grpInteger.Controls.Add(Me.cmdFactorize)
         Me.grpInteger.Controls.Add(Me.cmdSquare)
         Me.grpInteger.Controls.Add(Me.cmdTriangle)
         Me.grpInteger.Controls.Add(Me.cmdPadovan)
@@ -1033,7 +1034,6 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdRankPercent)
         Me.grpInteger.Controls.Add(Me.cmdDivisors)
         Me.grpInteger.Controls.Add(Me.cmdFibonacci)
-        Me.grpInteger.Controls.Add(Me.cmdFactorize)
         Me.grpInteger.Controls.Add(Me.cmdNextPrime)
         Me.grpInteger.Controls.Add(Me.cmdChoosez)
         Me.grpInteger.Controls.Add(Me.cmdFactorial)
@@ -1046,14 +1046,14 @@ Partial Class ucrCalculator
         Me.grpInteger.TabStop = False
         Me.grpInteger.Text = "Integer"
         '
-        'cmdFactorize2
+        'cmdFactorize
         '
-        Me.cmdFactorize2.Location = New System.Drawing.Point(149, 39)
-        Me.cmdFactorize2.Name = "cmdFactorize2"
-        Me.cmdFactorize2.Size = New System.Drawing.Size(75, 23)
-        Me.cmdFactorize2.TabIndex = 44
-        Me.cmdFactorize2.Text = "factorize2"
-        Me.cmdFactorize2.UseVisualStyleBackColor = True
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 39)
+        Me.cmdFactorize.Name = "cmdFactorize"
+        Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorize.TabIndex = 44
+        Me.cmdFactorize.Text = "factorize"
+        Me.cmdFactorize.UseVisualStyleBackColor = True
         '
         'cmdSquare
         '
@@ -1324,18 +1324,6 @@ Partial Class ucrCalculator
         Me.cmdNthPrime.Text = "nth_prime"
         Me.cmdNthPrime.UseVisualStyleBackColor = True
         '
-        'cmdIntegerRHelp
-        '
-        Me.cmdIntegerRHelp.AutoSize = True
-        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(210, 289)
-        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
-        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(91, 23)
-        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.TabIndex = 16
-        Me.cmdIntegerRHelp.Text = "R Help"
-        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
-        '
         'ContextMenuStripInteger
         '
         Me.ContextMenuStripInteger.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GmpToolStripMenuItem, Me.DescToolsToolStripMenuItem, Me.RutilsToolStripMenuItem, Me.PrimesToolStripMenuItem, Me.ZseqToolStripMenuItem, Me.UtilsToolStripMenuItem})
@@ -1448,21 +1436,12 @@ Partial Class ucrCalculator
         '
         'cmdFibonacci
         '
-        Me.cmdFibonacci.Location = New System.Drawing.Point(223, 39)
+        Me.cmdFibonacci.Location = New System.Drawing.Point(149, 39)
         Me.cmdFibonacci.Name = "cmdFibonacci"
         Me.cmdFibonacci.Size = New System.Drawing.Size(75, 23)
         Me.cmdFibonacci.TabIndex = 7
         Me.cmdFibonacci.Text = "fibonacci"
         Me.cmdFibonacci.UseVisualStyleBackColor = True
-        '
-        'cmdFactorize
-        '
-        Me.cmdFactorize.Location = New System.Drawing.Point(75, 39)
-        Me.cmdFactorize.Name = "cmdFactorize"
-        Me.cmdFactorize.Size = New System.Drawing.Size(75, 23)
-        Me.cmdFactorize.TabIndex = 6
-        Me.cmdFactorize.Text = "factorize"
-        Me.cmdFactorize.UseVisualStyleBackColor = True
         '
         'cmdNextPrime
         '
@@ -3847,17 +3826,29 @@ Partial Class ucrCalculator
         Me.grpTransform.TabStop = False
         Me.grpTransform.Text = "Transform"
         '
-        'cmdTransformRHelp
+        'ContextMenuStripTransform
         '
-        Me.cmdTransformRHelp.AutoSize = True
-        Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.Location = New System.Drawing.Point(216, 195)
-        Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
-        Me.cmdTransformRHelp.Size = New System.Drawing.Size(91, 23)
-        Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.TabIndex = 204
-        Me.cmdTransformRHelp.Text = "R Help"
-        Me.cmdTransformRHelp.UseVisualStyleBackColor = True
+        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ZooToolStripMenuItem})
+        Me.ContextMenuStripTransform.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(102, 70)
+        '
+        'BaseToolStripMenuItem
+        '
+        Me.BaseToolStripMenuItem.Name = "BaseToolStripMenuItem"
+        Me.BaseToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.BaseToolStripMenuItem.Text = "base"
+        '
+        'DplyrToolStripMenuItem
+        '
+        Me.DplyrToolStripMenuItem.Name = "DplyrToolStripMenuItem"
+        Me.DplyrToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.DplyrToolStripMenuItem.Text = "dplyr"
+        '
+        'ZooToolStripMenuItem
+        '
+        Me.ZooToolStripMenuItem.Name = "ZooToolStripMenuItem"
+        Me.ZooToolStripMenuItem.Size = New System.Drawing.Size(101, 22)
+        Me.ZooToolStripMenuItem.Text = "zoo"
         '
         'cmdRev
         '
@@ -5367,6 +5358,39 @@ Partial Class ucrCalculator
         Me.cmdStringRHelp.Text = "R Help"
         Me.cmdStringRHelp.UseVisualStyleBackColor = True
         '
+        'cmdLucas
+        '
+        Me.cmdLucas.Location = New System.Drawing.Point(223, 39)
+        Me.cmdLucas.Name = "cmdLucas"
+        Me.cmdLucas.Size = New System.Drawing.Size(75, 23)
+        Me.cmdLucas.TabIndex = 45
+        Me.cmdLucas.Text = "lucas"
+        Me.cmdLucas.UseVisualStyleBackColor = True
+        '
+        'cmdIntegerRHelp
+        '
+        Me.cmdIntegerRHelp.AutoSize = True
+        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(210, 289)
+        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
+        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(91, 23)
+        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.TabIndex = 16
+        Me.cmdIntegerRHelp.Text = "R Help"
+        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
+        '
+        'cmdTransformRHelp
+        '
+        Me.cmdTransformRHelp.AutoSize = True
+        Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
+        Me.cmdTransformRHelp.Location = New System.Drawing.Point(216, 195)
+        Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
+        Me.cmdTransformRHelp.Size = New System.Drawing.Size(91, 23)
+        Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
+        Me.cmdTransformRHelp.TabIndex = 204
+        Me.cmdTransformRHelp.Text = "R Help"
+        Me.cmdTransformRHelp.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         Me.ucrSaveResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -5423,37 +5447,13 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'ContextMenuStripTransform
-        '
-        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ZooToolStripMenuItem})
-        Me.ContextMenuStripTransform.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(102, 70)
-        '
-        'BaseToolStripMenuItem
-        '
-        Me.BaseToolStripMenuItem.Name = "BaseToolStripMenuItem"
-        Me.BaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.BaseToolStripMenuItem.Text = "base"
-        '
-        'DplyrToolStripMenuItem
-        '
-        Me.DplyrToolStripMenuItem.Name = "DplyrToolStripMenuItem"
-        Me.DplyrToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.DplyrToolStripMenuItem.Text = "dplyr"
-        '
-        'ZooToolStripMenuItem
-        '
-        Me.ZooToolStripMenuItem.Name = "ZooToolStripMenuItem"
-        Me.ZooToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ZooToolStripMenuItem.Text = "zoo"
-        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpInteger)
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
@@ -5491,12 +5491,12 @@ Partial Class ucrCalculator
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpTransform.ResumeLayout(False)
         Me.grpTransform.PerformLayout()
+        Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpTestString.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
-        Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -5874,7 +5874,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdBigZ As Button
     Friend WithEvents cmdNextPrime As Button
     Friend WithEvents cmdChoosez As Button
-    Friend WithEvents cmdFactorize As Button
     Friend WithEvents cmdFibonacci As Button
     Friend WithEvents cmdDigitSum As Button
     Friend WithEvents cmdRankPercent As Button
@@ -5916,7 +5915,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdAbundant As Button
     Friend WithEvents cmdFibonacci2 As Button
     Friend WithEvents cmdPalindrome As Button
-    Friend WithEvents cmdFactorize2 As Button
+    Friend WithEvents cmdFactorize As Button
     Friend WithEvents GmpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ZseqToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UtilsToolStripMenuItem As ToolStripMenuItem
@@ -5928,4 +5927,5 @@ Partial Class ucrCalculator
     Friend WithEvents BaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DplyrToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ZooToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cmdLucas As Button
 End Class

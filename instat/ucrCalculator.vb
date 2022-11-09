@@ -222,8 +222,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFactorial, "factorial n!, as big integer. For example, factorialZ(6)= 720")
         ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
         ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
-        ttCalculator.SetToolTip(cmdFactorize, "computes the prime factorizations. For example, prime_factors(20)= (2,5,2,1)")
-        ttCalculator.SetToolTip(cmdFactorize2, "compute the prime factorization(s) of integer(s) n. For example, Factorize(21)=c(3, 7, 1, 1)")
+        ttCalculator.SetToolTip(cmdFactorize, "compute the prime factorizations. For example, Factorize(20)= (2,5,2,1)")
         ttCalculator.SetToolTip(cmdIsPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
         ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
         ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
@@ -259,6 +258,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPadovan, "sum of last but 1 and last but 2 values. So from ...7, 9, 12, next is 7+9 = 16.")
         ttCalculator.SetToolTip(cmdTriangle, "number of objects in a triangle, so 0, 1, 3, 6, 10...")
         ttCalculator.SetToolTip(cmdSquare, "squares of each integer, so 1, 4, 9, 16.")
+        ttCalculator.SetToolTip(cmdLucas, "generartes lucas numbers to the length of the dataframe. For example the 10th lucas number is 76")
 
     End Sub
 
@@ -1402,7 +1402,7 @@ Public Class ucrCalculator
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdTransformHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
         OpenHelpPage()
     End Sub
 
@@ -3857,14 +3857,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::prime_factors(x = )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::prime_factors()", 1)
-        End If
-    End Sub
-
     Private Sub cmdFibonacci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci(n = )", 2)
@@ -4215,7 +4207,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize2.Click
+    Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize(n= )", 1)
         Else
@@ -4301,5 +4293,17 @@ Public Class ucrCalculator
             strPackageName = "zoo"
         End If
         OpenHelpPage()
+    End Sub
+
+    Private Sub cmdLucas_Click(sender As Object, e As EventArgs) Handles cmdLucas.Click
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        clsZseqFunction.SetPackageName("Zseq")
+        clsZseqFunction.SetRCommand("Lucas")
+        clsZseqFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsZseqFunction.AddParameter("gmp", "TRUE", iPosition:=1)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsZseqFunction.ToScript, 0)
     End Sub
 End Class
