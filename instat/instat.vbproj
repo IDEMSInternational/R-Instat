@@ -243,6 +243,10 @@
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.vb">
+    <Compile Include="dlgWordwrap.Designer.vb">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWordwrap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
@@ -3056,6 +3060,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWordwrap.resx">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>

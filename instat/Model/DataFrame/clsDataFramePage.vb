@@ -334,6 +334,16 @@ Public Class clsDataFramePage
     End Sub
 
     ''' <summary>
+    ''' Go to the specific row page
+    ''' </summary>
+    Public Sub GoToSpecificRowPage(iRow As Integer)
+        If iRow > 0 Then
+            _iRowStart = (intRowIncrements * (iRow - 1)) + 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        End If
+    End Sub
+
+    ''' <summary>
     ''' Does a previous page exist for rows
     ''' </summary>
     ''' <returns></returns>
@@ -381,6 +391,17 @@ Public Class clsDataFramePage
     Public Sub LoadNextColumnPage()
         If CanLoadNextColumnPage() Then
             _iColumnStart += iColumnIncrements
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Go to the specific column page
+    ''' </summary>
+    Public Sub GoToSpecificColumnPage(iColumn As Integer)
+        If iColumn > 0 Then
+            _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
             _clsRDotNetDataFrame = GetDataFrameFromRCommand()
             SetHeaders()
         End If

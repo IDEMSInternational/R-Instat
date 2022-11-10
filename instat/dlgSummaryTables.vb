@@ -91,6 +91,7 @@ Public Class dlgSummaryTables
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+        ucrChkOmitMissing.SetLinkedDisplayControl(cmdMissingOptions)
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 6))
         ucrChkDisplayMargins.SetText("Display Outer Margins")
@@ -636,5 +637,4 @@ Public Class dlgSummaryTables
             ucrReceiverFactors.SetMeAsReceiver()
         End If
     End Sub
-
 End Class

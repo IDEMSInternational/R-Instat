@@ -552,10 +552,11 @@ DataSheet$set("public", "clear_variables_metadata", function() {
 
 DataSheet$set("public", "get_metadata", function(label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  n_row <- self$get_data_frame_length(use_current_filter = TRUE) #this is to avoid an eventual bug if we consider using curr_data <- self$get_data_frame(use_current_filter = TRUE)
   if(missing(label)) {
     if(include_calculated) {
       #Must be private$data because assigning attribute to data field
-      attr(curr_data, row_count_label) <- nrow(curr_data)
+      attr(curr_data, row_count_label) <- n_row
       attr(curr_data, column_count_label) <- ncol(curr_data)
     }
     if(excluded_not_for_display) {
@@ -567,7 +568,7 @@ DataSheet$set("public", "get_metadata", function(label, include_calculated = TRU
   }
   else {
     if(label %in% names(attributes(curr_data))) return(attributes(curr_data)[[label]])
-    else if(label == row_count_label) return(nrow(curr_data))
+    else if(label == row_count_label) return(n_row)
     else if(label == column_count_label) return(ncol(curr_data))
     else return("")
   }

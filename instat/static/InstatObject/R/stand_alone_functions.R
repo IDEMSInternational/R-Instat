@@ -2598,6 +2598,7 @@ read_corpora <- function(data){
   return (data.frame(data_all))
 }
 
+
 #object is the object to be displayed
 #object_format is the display format
 view_object <- function(object, object_format) {
@@ -2733,4 +2734,13 @@ view_html_object <- function(html_object){
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
   
+
+# Bind two data frames
+# and remove any duplicates from data frame x that are in data frame y
+# x = our data to remove duplicates from
+# y = data frame that contains variables in cols argument
+# cols = columns to bind into data1
+cbind_unique <- function(x, y, cols){
+  x <- x %>% dplyr::select(c(setdiff(names(x), cols)))
+  x <- dplyr::bind_cols(x = x, y = dplyr::select(y, tidyselect::all_of(cols)))
 }
