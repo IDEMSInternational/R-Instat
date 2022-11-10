@@ -23,15 +23,65 @@ Public Class dlgEvapotranspiration
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
+    Private iEvapOptions As Integer
     Private clsETPenmanMonteith, clsHargreavesSamani, clsDataFunctionPM, clsDataFunctionHS, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
+
+    Private Sub ucrReceiverHumidityMin_Load(sender As Object, e As EventArgs) Handles ucrReceiverHumidityMin.Load
+
+    End Sub
+
+    Private Sub lblDate_Click(sender As Object, e As EventArgs) Handles lblDate.Click
+
+    End Sub
+
+    Private Sub lblTmin_Click(sender As Object, e As EventArgs) Handles lblTmin.Click
+
+    End Sub
+
+    Private Sub ucrReceiverTmin_Load(sender As Object, e As EventArgs) Handles ucrReceiverTmin.Load
+
+    End Sub
+
+    Private Sub lblTmax_Click(sender As Object, e As EventArgs) Handles lblTmax.Click
+
+    End Sub
+
+    Private Sub ucrReceiverTmax_Load(sender As Object, e As EventArgs) Handles ucrReceiverTmax.Load
+
+    End Sub
+
+    Private Sub lblHumidityMax_Click(sender As Object, e As EventArgs) Handles lblHumidityMax.Click
+
+    End Sub
+
+    Private Sub ucrReceiverHumidityMax_Load(sender As Object, e As EventArgs) Handles ucrReceiverHumidityMax.Load
+
+    End Sub
+
+    Private Sub lblHumidityMin_Click(sender As Object, e As EventArgs) Handles lblHumidityMin.Click
+
+    End Sub
+
+    Private Sub ucrReceiverDate_Load(sender As Object, e As EventArgs) Handles ucrReceiverDate.Load
+
+    End Sub
+
+    Private Sub lblRadiation_Click(sender As Object, e As EventArgs) Handles lblRadiation.Click
+
+    End Sub
+
+    Private Sub ucrReceiverRadiation_Load(sender As Object, e As EventArgs) Handles ucrReceiverRadiation.Load
+
+    End Sub
 
     Private Sub dlgdlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
             iSaveMaxY = ucrNewColName.Location.Y
+            iEvapOptions = cmdEvapOptions.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -118,16 +168,6 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
         ' Missing Options 
-        ucrChkInterpMissingDays.SetParameter(New RParameter("interp_missing_days", 5))
-        ucrChkInterpMissingDays.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkInterpMissingDays.SetRDefault("FALSE")
-        ucrChkInterpMissingDays.SetText("Interpolate Missing Days")
-
-        ucrChkInterpMissingEntries.SetParameter(New RParameter("interp_missing_entries", 6))
-        ucrChkInterpMissingEntries.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkInterpMissingEntries.SetRDefault("FALSE")
-        ucrChkInterpMissingEntries.SetText("Interpolate Missing Entries")
-
         ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
         dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
         dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
@@ -135,15 +175,6 @@ Public Class dlgEvapotranspiration
         dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
         ucrInputMissingMethod.SetItems(dctInputMissingMethod)
         ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
-
-        ucrNudMaxMissingData.SetParameter(New RParameter("x", bNewIncludeArgumentName:=False))
-        ucrNudMaxMissingData.SetMinMax(1, 99)
-
-        ucrNudMaxMissingDays.SetParameter(New RParameter("y", bNewIncludeArgumentName:=False))
-        ucrNudMaxMissingDays.SetMinMax(1, 99)
-
-        ucrNudMaxDurationMissingData.SetParameter(New RParameter("z", bNewIncludeArgumentName:=False))
-        ucrNudMaxDurationMissingData.SetMinMax(1, 99)
 
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
@@ -300,24 +331,19 @@ Public Class dlgEvapotranspiration
         ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
-        ucrNudMaxMissingData.SetRCode(clsMissingDataVector, bReset)
-        ucrNudMaxMissingDays.SetRCode(clsMissingDataVector, bReset)
-        ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVector, bReset)
-        ucrChkInterpMissingDays.SetRCode(clsReadInputs, bReset)
-        ucrChkInterpMissingEntries.SetRCode(clsReadInputs, bReset)
         ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoPenmanMonteith.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty AndAlso ucrNudMaxMissingData.GetText <> "" AndAlso ucrNudMaxMissingDays.GetText <> "" AndAlso ucrNudMaxDurationMissingData.GetText <> "" Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
                 ucrBase.OKEnabled(True)
             End If
             If ucrChkWind.Checked And ucrReceiverWindSpeed.IsEmpty Then
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoHargreavesSamani.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() AndAlso ucrNudMaxMissingData.GetText <> "" AndAlso ucrNudMaxMissingDays.GetText <> "" AndAlso ucrNudMaxDurationMissingData.GetText <> "" Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -333,16 +359,24 @@ Public Class dlgEvapotranspiration
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdEvapOptions_Click(sender As Object, e As EventArgs) Handles cmdEvapOptions.Click
+        sdgMissingOptionsEvapotranspiration.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptionsEvapotranspiration.ShowDialog()
+    End Sub
+
     Private Sub DialogSize()
         If rdoPenmanMonteith.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
+            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
         ElseIf rdoHargreavesSamani.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
+            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
         End If
     End Sub
 
@@ -413,7 +447,7 @@ Public Class dlgEvapotranspiration
         End Select
     End Sub
 
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrNudMaxMissingData.ControlContentsChanged, ucrNudMaxDurationMissingData.ControlContentsChanged, ucrNudMaxMissingDays.ControlContentsChanged, ucrChkWind.ControlContentsChanged
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
