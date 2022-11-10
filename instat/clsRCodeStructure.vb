@@ -286,7 +286,6 @@ Public Class RCodeStructure
         If Not strTempGraph = "" Then
             strNewRObjectTypeToAssignTo = strTempGraph
             strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.Graph
-            'assumption is by default a model is in image format
             strNewRObjectFormatToAssignTo = RObjectFormat.Image
         End If
 
@@ -462,13 +461,13 @@ Public Class RCodeStructure
             '    'guinea_two_stations'.
 
             'todo
-            If Not String.IsNullOrEmpty(Me._rObjectToAssignTo) Then
-                strScript = strScript & ConstructAssignTo(Me._rObjectToAssignTo, strTemp) & Environment.NewLine
+            If Not String.IsNullOrEmpty(_rObjectToAssignTo) Then
+                strScript = strScript & ConstructAssignTo(_rObjectToAssignTo, strTemp) & Environment.NewLine
             Else
                 strScript = strScript & ConstructAssignTo(strAssignTo, strTemp) & Environment.NewLine
             End If
 
-            If Not String.IsNullOrEmpty(Me._rObjectTypeToAssignTo) AndAlso Not String.IsNullOrEmpty(Me._rObjectNameToAssignTo) AndAlso Not String.IsNullOrEmpty(Me._rObjectFormatToAssignTo) Then
+            If Not String.IsNullOrEmpty(_rObjectTypeToAssignTo) AndAlso Not String.IsNullOrEmpty(_rObjectNameToAssignTo) AndAlso Not String.IsNullOrEmpty(_rObjectFormatToAssignTo) Then
                 Dim clsAddObject As New RFunction
                 Dim clsGetObject As New RFunction
 
@@ -477,17 +476,17 @@ Public Class RCodeStructure
                 clsAddObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
                 clsGetObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
 
-                If Not String.IsNullOrEmpty(Me._rDataFrameNameToAddObjectTo) Then
-                    clsAddObject.AddParameter("data_name", Chr(34) & Me._rDataFrameNameToAddObjectTo & Chr(34))
-                    clsGetObject.AddParameter("data_name", Chr(34) & Me._rDataFrameNameToAddObjectTo & Chr(34))
+                If Not String.IsNullOrEmpty(_rDataFrameNameToAddObjectTo) Then
+                    clsAddObject.AddParameter("data_name", Chr(34) & _rDataFrameNameToAddObjectTo & Chr(34))
+                    clsGetObject.AddParameter("data_name", Chr(34) & _rDataFrameNameToAddObjectTo & Chr(34))
                 End If
 
-                clsAddObject.AddParameter("object_name", Chr(34) & Me._rObjectNameToAssignTo & Chr(34))
-                clsAddObject.AddParameter("object_type_label", Chr(34) & Me._rObjectTypeToAssignTo & Chr(34))
-                clsAddObject.AddParameter("object_format", Chr(34) & Me._rObjectFormatToAssignTo & Chr(34))
-                clsAddObject.AddParameter("object", Me._rObjectToAssignTo)
+                clsAddObject.AddParameter("object_name", Chr(34) & _rObjectNameToAssignTo & Chr(34))
+                clsAddObject.AddParameter("object_type_label", Chr(34) & _rObjectTypeToAssignTo & Chr(34))
+                clsAddObject.AddParameter("object_format", Chr(34) & _rObjectFormatToAssignTo & Chr(34))
+                clsAddObject.AddParameter("object", _rObjectToAssignTo)
 
-                clsGetObject.AddParameter("object_name", Chr(34) & Me._rObjectNameToAssignTo & Chr(34))
+                clsGetObject.AddParameter("object_name", Chr(34) & _rObjectNameToAssignTo & Chr(34))
 
                 'construct the scripts 
                 strScript = strScript & clsAddObject.ToScript() & Environment.NewLine
