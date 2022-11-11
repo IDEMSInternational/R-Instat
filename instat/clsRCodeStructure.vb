@@ -463,6 +463,7 @@ Public Class RCodeStructure
                 ' e.g. "row_names1 <- data_book$get_row_names(data_name=""survey"")" & vbCrLf & "data_book$add_columns_to_data(data_name=""survey"", col_name=""row_names1"", col_data=row_names1, before=TRUE)" & vbCrLf
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
 
+                'todo. when is this ever used? as of 11/11/2022, this code is not used during execution
                 clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                 clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
                 clsGetRObject.AddParameter("col_names", Chr(34) & _strAssignToName & Chr(34))
@@ -490,7 +491,7 @@ Public Class RCodeStructure
                 '      & "data_book$import_data(data_tables=list(my_stations=my_stations))" & vbCrLf
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
 
-                'todo. when is this ever used? as of 11/11/2022, this is code is not used during execution
+                'todo. when is this ever used? as of 11/11/2022, this code is not used during execution
                 clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                 clsGetRObject.AddParameter("data_name", Chr(34) & _strAssignToName & Chr(34))
                 'Set 'strAssignTo' to final assign-to script 
