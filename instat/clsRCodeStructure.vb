@@ -418,9 +418,6 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     Public Overridable Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
 
-
-
-
         ' if R script still needs to be assigned to this object
         If Not String.IsNullOrEmpty(_strAssignToObject) Then
 
