@@ -656,19 +656,19 @@ Public Class ucrSave
                                  RObjectTypeLabel.Summary,
                                  RObjectTypeLabel.Table,
                                  RObjectTypeLabel.Model
-                                If _strRObjectLabel = RObjectTypeLabel.Table AndAlso String.IsNullOrEmpty(_strRObjectFormat) Then
-                                    'todo. temporary check until all table dialogs are modified to set _strRObjectFormat  
+                                If (_strRObjectLabel = RObjectTypeLabel.Table OrElse _strRObjectLabel = RObjectTypeLabel.Model) AndAlso
+                                    String.IsNullOrEmpty(_strRObjectFormat) Then
+                                    'todo. temporary check until all table and model dialogs are modified to set _strRObjectFormat  
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName,
                                                             strTempDataframe:=strDataName,
                                                             strTempTable:=strSaveName,
                                                             bAssignToIsPrefix:=bAssignToIsPrefix)
                                 Else
-                                    clsTempCode.SetAssignToRObject(strRObjectToAssignTo:=strSaveName,
+                                    clsTempCode.SetAssignToOutputObject(strRObjectToAssignTo:=strSaveName,
                                                                    strRObjectTypeLabelToAssignTo:=_strRObjectLabel,
                                                                    strRObjectFormatToAssignTo:=_strRObjectFormat,
                                                                    strRDataFrameNameToAddObjectTo:=strDataName,
-                                                                   strObjectName:=strSaveName,
-                                                                   bAssignToIsPrefix:=bAssignToIsPrefix)
+                                                                   strObjectName:=strSaveName)
                                 End If
                             Case "surv"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempSurv:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
@@ -714,9 +714,7 @@ Public Class ucrSave
 
             If clsMainRCode IsNot Nothing Then
                 If String.IsNullOrEmpty(strReadNameFromParameterName) Then
-                    If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
-                        strControlValue = If(clsMainRCode.strAssignTo IsNot Nothing, clsMainRCode.strAssignTo, "")
-                    End If
+                    strControlValue = If(clsMainRCode.GetRObjectToAssignTo IsNot Nothing, clsMainRCode.GetRObjectToAssignTo, "")
                 Else
                     If clsMainRCode.GetParameter(strReadNameFromParameterName) IsNot Nothing Then
                         strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
@@ -736,7 +734,7 @@ Public Class ucrSave
                     If GetText() = strAssignToIfUnchecked Then
                         ucrChkSave.Checked = False
                     Else
-                        ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
+                        ucrChkSave.Checked = Not String.IsNullOrEmpty(clsMainRCode.GetRObjectToAssignTo())
                     End If
                 End If
 
@@ -818,7 +816,7 @@ Public Class ucrSave
     ''' <returns>   If the type of object to save is specified (e.g. column), the R code's output 
     '''             hasn't been assigned, and doesn't need to be assigned, then returns true. </returns>
     '''--------------------------------------------------------------------------------------------
-    Protected Overrides Function CanUpdate() As Object
+    Protected Overrides Function CanUpdate() As Boolean
         'TODO SJL 15/05/20 
         '    - Should this function return boolean? The parent function in ucrCore has no return type! Is this good coding practice?
         '    - The parent function returns true if the control has a paremter that is not yet included in the R command. Why is this control different?
@@ -826,7 +824,8 @@ Public Class ucrSave
         If _strRObjectLabel = "key" OrElse _strRObjectLabel = "link" Then
             Return MyBase.CanUpdate()
         Else
-            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso _strRObjectLabel <> "")
+            'Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso _strRObjectLabel <> "")
+            Return (String.IsNullOrEmpty(GetRCode().GetRObjectToAssignTo()) AndAlso _strRObjectLabel <> "")
         End If
     End Function
     '''--------------------------------------------------------------------------------------------

@@ -141,7 +141,7 @@ Public Class dlgViewFactorLabels
         clsSjTableFunction.AddParameter("show.id", "FALSE")
         clsSjTableFunction.SetAssignTo("variables_sjTable")
 
-        clsSjTableFunction.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+        clsSjTableFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                               strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                               strRDataFrameNameToAddObjectTo:=ucrSelectorViewLabelsAndLevels.strCurrentDataFrame,
@@ -231,7 +231,7 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub ucrSelectorViewLabelsAndLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorViewLabelsAndLevels.ControlValueChanged
-        clsSjTableFunction._rDataFrameNameToAddObjectTo = ucrSelectorViewLabelsAndLevels.strCurrentDataFrame
+        clsSjTableFunction._strDataFrameNameToAddAssignToObject = ucrSelectorViewLabelsAndLevels.strCurrentDataFrame
     End Sub
 
 

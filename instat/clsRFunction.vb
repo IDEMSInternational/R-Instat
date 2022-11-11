@@ -54,7 +54,6 @@ Public Class RFunction
     '''--------------------------------------------------------------------------------------------
     Public Sub SetRCommand(strTemp As String)
         strRCommand = strTemp
-        bIsAssigned = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -111,7 +110,7 @@ Public Class RFunction
             'if string is intended to be assigned to a script then raise error (because modified script will no longer suitable for this)
             'TODO SJL if we only allow these 3 flags to be accessed through 'set/get' functions then we can guarantee that this error situation doesn't occur
             'TODO legacy comment:'should also check assignment of parameters'
-            If bToBeAssigned OrElse bIsAssigned Then
+            If IsAssigned() Then
                 MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
             End If
 
@@ -216,17 +215,12 @@ Public Class RFunction
 
         'RCode properties
         'todo. why not use the MyBase.Clone() for some of these inherited from the parent properties?
-        clsRFunction._rObjectToAssignTo = Me._rObjectToAssignTo
-        clsRFunction._rObjectNameToAssignTo = Me._rObjectNameToAssignTo
-        clsRFunction._rObjectTypeToAssignTo = Me._rObjectTypeToAssignTo
-        clsRFunction._rObjectFormatToAssignTo = Me._rObjectFormatToAssignTo
-        clsRFunction._rDataFrameNameToAddObjectTo = Me._rDataFrameNameToAddObjectTo
+        clsRFunction._strAssignToObject = _strAssignToObject
+        clsRFunction._strAssignToName = _strAssignToName
+        clsRFunction._strAssignToObjectTypeLabel = _strAssignToObjectTypeLabel
+        clsRFunction._strAssignToObjectFormat = _strAssignToObjectFormat
+        clsRFunction._strDataFrameNameToAddAssignToObject = _strDataFrameNameToAddAssignToObject
 
-        clsRFunction.strAssignTo = strAssignTo
-        clsRFunction.strAssignToDataFrame = strAssignToDataFrame
-        clsRFunction.strAssignToColumn = strAssignToColumn
-        clsRFunction.bToBeAssigned = bToBeAssigned
-        clsRFunction.bIsAssigned = bIsAssigned
         clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
         clsRFunction.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         clsRFunction.bInsertColumnBefore = bInsertColumnBefore

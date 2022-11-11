@@ -248,8 +248,6 @@ Public Class dlgRegularSequence
 
             'clone the "rep" command base function
             clsNewRepClone = clsRepFunction.Clone()
-            clsNewRepClone.bToBeAssigned = False
-            clsNewRepClone.bIsAssigned = False
 
             'set up "as.character" command to be usde for testing
             clsAsCharacter.SetRCommand("as.character")

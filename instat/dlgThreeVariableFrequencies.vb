@@ -276,21 +276,21 @@ Public Class dlgThreeVariableFrequencies
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strGraph As String
         Dim strTempScript As String = ""
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
+        'Dim bIsAssigned As Boolean
+        'Dim bToBeAssigned As Boolean
+        'Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsGridArrange.bIsAssigned
-            bToBeAssigned = clsGridArrange.bToBeAssigned
-            strAssignTo = clsGridArrange.strAssignTo
+            'bIsAssigned = clsGridArrange.bIsAssigned
+            'bToBeAssigned = clsGridArrange.bToBeAssigned
+            'strAssignTo = clsGridArrange.strAssignTo
 
             strGraph = clsGridArrange.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsGridArrange.bIsAssigned = bIsAssigned
-            clsGridArrange.bToBeAssigned = bToBeAssigned
-            clsGridArrange.strAssignTo = strAssignTo
+            'clsGridArrange.bIsAssigned = bIsAssigned
+            'clsGridArrange.bToBeAssigned = bToBeAssigned
+            'clsGridArrange.strAssignTo = strAssignTo
         End If
     End Sub
 

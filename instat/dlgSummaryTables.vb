@@ -387,7 +387,7 @@ Public Class dlgSummaryTables
         ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
 
-        clsJoiningPipeOperator.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+        clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,

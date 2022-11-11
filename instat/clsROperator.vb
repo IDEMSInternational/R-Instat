@@ -94,7 +94,7 @@ Public Class ROperator
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
         bBrackets = bBracketsTemp
-        bIsAssigned = False
+        'bIsAssigned = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -196,7 +196,7 @@ Public Class ROperator
                 'if string is intended to be assigned to a script then raise error (because modified script will no longer suitable for this)
                 'TODO SJL 03/04/20 if we only allow these 3 flags to be accessed through 'set/get' functions then we can guarantee that this error situation doesn't occur
                 'TODO Legacy comment:'should also check assignment of parameters'
-                If bToBeAssigned OrElse bIsAssigned Then
+                If IsAssigned() Then
                     MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
                 End If
 
@@ -298,17 +298,11 @@ Public Class ROperator
 
         'RCode properties
         'todo. why not use the MyBase.Clone() for some of these inherited from the parent properties?
-        clsTempROperator._rObjectToAssignTo = Me._rObjectToAssignTo
-        clsTempROperator._rObjectNameToAssignTo = Me._rObjectNameToAssignTo
-        clsTempROperator._rObjectTypeToAssignTo = Me._rObjectTypeToAssignTo
-        clsTempROperator._rObjectFormatToAssignTo = Me._rObjectFormatToAssignTo
-        clsTempROperator._rDataFrameNameToAddObjectTo = Me._rDataFrameNameToAddObjectTo
-
-        clsTempROperator.strAssignTo = strAssignTo
-        clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
-        clsTempROperator.strAssignToColumn = strAssignToColumn
-        clsTempROperator.bToBeAssigned = bToBeAssigned
-        clsTempROperator.bIsAssigned = bIsAssigned
+        clsTempROperator._strAssignToObject = _strAssignToObject
+        clsTempROperator._strAssignToName = _strAssignToName
+        clsTempROperator._strAssignToObjectTypeLabel = _strAssignToObjectTypeLabel
+        clsTempROperator._strAssignToObjectFormat = _strAssignToObjectFormat
+        clsTempROperator._strDataFrameNameToAddAssignToObject = _strDataFrameNameToAddAssignToObject
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
         clsTempROperator.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         clsTempROperator.bInsertColumnBefore = bInsertColumnBefore

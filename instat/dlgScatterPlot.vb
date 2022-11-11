@@ -213,7 +213,7 @@ Public Class dlgScatterPlot
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
 
-        clsBaseOperator.SetAssignToRObject(strRObjectToAssignTo:="last_graph",
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Image,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorForScatter.strCurrentDataFrame,

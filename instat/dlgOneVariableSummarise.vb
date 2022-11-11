@@ -120,7 +120,7 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
         clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsSkimrFunction.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
+        clsSkimrFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                             strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                             strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                             strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
@@ -137,7 +137,7 @@ Public Class dlgOneVariableSummarise
         clsMmtableOperator.AddParameter("mmtable_function", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
         clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
         clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
-        clsMmtableOperator.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
+        clsMmtableOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
@@ -172,7 +172,7 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("maxsum", iMaxSum)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
-        clsSummaryFunction.SetAssignToRObject(strRObjectToAssignTo:="last_summary",
+        clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                               strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                               strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
@@ -262,9 +262,9 @@ Public Class dlgOneVariableSummarise
     Private Sub ucrSelectorOneVarSummarise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarSummarise.ControlValueChanged
         clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
-        clsSummaryFunction._rDataFrameNameToAddObjectTo = ucrSelectorOneVarSummarise.strCurrentDataFrame
-        clsMmtableOperator._rDataFrameNameToAddObjectTo = ucrSelectorOneVarSummarise.strCurrentDataFrame
-        clsSkimrFunction._rDataFrameNameToAddObjectTo = ucrSelectorOneVarSummarise.strCurrentDataFrame
+        clsSummaryFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
+        clsMmtableOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
+        clsSkimrFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
     End Sub
 
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged

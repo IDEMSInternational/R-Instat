@@ -174,7 +174,7 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsRPivotTableFunction.SetAssignTo("last_table")
 
-        clsRPivotTableFunction.SetAssignToRObject(strRObjectToAssignTo:="last_table",
+        clsRPivotTableFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                    strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                    strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                    strRDataFrameNameToAddObjectTo:=ucrSelectorPivot.strCurrentDataFrame,
@@ -227,7 +227,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrSelectorPivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPivot.ControlValueChanged
         ChangeDataParameterValue()
-        clsRPivotTableFunction._rDataFrameNameToAddObjectTo = ucrSelectorPivot.strCurrentDataFrame
+        clsRPivotTableFunction._strDataFrameNameToAddAssignToObject = ucrSelectorPivot.strCurrentDataFrame
     End Sub
 
     Private Sub ChangeDataParameterValue()
