@@ -55,13 +55,6 @@ Public Class dlgWordwrap
         ucrReceiverWrapText.strSelectorHeading = "Variables"
 
         'ucrAlignment
-        ucrAlignment.SetItems({"auto", "left", "center", "right"})
-        ucrAlignment.AddFunctionNamesCondition("auto", "align = auto")
-        ucrAlignment.AddFunctionNamesCondition("left", "align = left")
-        ucrAlignment.AddFunctionNamesCondition("center", "align = center")
-        ucrAlignment.AddFunctionNamesCondition("right", "align = center")
-        ucrAlignment.SetLinkedDisplayControl(lblAlign)
-        ucrAlignment.SetDropDownStyleAsNonEditable()
 
         'ucrRdoOptions
         ucrPnlTextWrap.AddRadioButton(rdoWrapText)

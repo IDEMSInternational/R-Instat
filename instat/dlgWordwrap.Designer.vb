@@ -140,9 +140,9 @@ Partial Class dlgWordwrap
         Me.lblAlign.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblAlign.Location = New System.Drawing.Point(263, 172)
         Me.lblAlign.Name = "lblAlign"
-        Me.lblAlign.Size = New System.Drawing.Size(67, 13)
+        Me.lblAlign.Size = New System.Drawing.Size(56, 13)
         Me.lblAlign.TabIndex = 6
-        Me.lblAlign.Text = "Alignmment :"
+        Me.lblAlign.Text = "Alignment:"
         '
         'ucrAlignment
         '
