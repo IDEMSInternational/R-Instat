@@ -495,6 +495,11 @@ Public Class dlgOneVarFitModel
         clsSfFunction.SetPackageName("nortest")
         clsSfFunction.SetRCommand("sf.test")
 
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
+        clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
+
+
         clsBayesIferenceFunction.SetRCommand("bayes_inference")
         clsBayesIferenceFunction.SetPackageName("statsr")
         clsBayesIferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -502,9 +507,7 @@ Public Class dlgOneVarFitModel
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=2)
         clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
 
-        'clsConcatenateFunction.SetRCommand("c")
-        'clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
-        'clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
+
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
@@ -711,7 +714,8 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdPrior_Click(sender As Object, e As EventArgs) Handles cmdPrior.Click
-        sdgPriorParameters.SetRFunction(ucrBase.clsRsyntax, clsBayesIferenceFunction, clsConcatenateFunction, clsDummyFunction, bResetSubdialog)
+        sdgPriorParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesIferenceFunction,
+                                        clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgPriorParameters.ShowDialog()
     End Sub

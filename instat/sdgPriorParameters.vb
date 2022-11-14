@@ -18,11 +18,9 @@ Public Class sdgPriorParameters
 
     Private bControlsInitialised As Boolean = False
     Public bFirstLoad As Boolean = True
-    Private bRcodeSet As Boolean = True
 
 
-    Public clsBayesIferenceFunction, clsConcatenateFunction, clsDummyFunction As RFunction
-    Private clsRsyntax As RSyntax
+    Public clsBayesIferenceFunction, clsConcatenateFunction As New RFunction
 
     Private Sub sdgPriorParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -65,15 +63,13 @@ Public Class sdgPriorParameters
         ucrNudPrioirNull.SetLinkedDisplayControl(lblPrioir)
 
     End Sub
-    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewBayesIferenceFunction As RFunction, clsNewDummyFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewBayesIferenceFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
         clsBayesIferenceFunction = clsNewBayesIferenceFunction
         clsConcatenateFunction = clsNewConcatenateFunction
-        clsDummyFunction = clsNewDummyFunction
-        clsRsyntax = clsNewRSyntax
 
 
         ucrNudSampleSize.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
