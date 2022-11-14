@@ -640,6 +640,12 @@
     <Compile Include="sdgMissingOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPriorParameters.Designer.vb">
+      <DependentUpon>sdgPriorParameters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPriorParameters.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
     </Compile>
@@ -3128,6 +3134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPriorParameters.resx">
+      <DependentUpon>sdgPriorParameters.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>

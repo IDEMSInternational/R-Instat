@@ -22,13 +22,17 @@ Public Class dlgOneVarFitModel
     Private clsRplotFunction, clsRplotPPCompFunction, clsRplotCdfCompFunction, clsRplotQqCompFunction, clsRplotDensCompFunction As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
-    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsBayesIferenceFunction, clsColumnNameFunction As New RFunction
+    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsBayesIferenceFunction, clsConcatenateFunction, clsDummyFunction, clsColumnNameFunction As New RFunction
+
+
     Private WithEvents ucrDistribution As ucrDistributions
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
+    Private bResetSubdialog As Boolean = False
+
     Private bRCodeSet As Boolean = True
     Private ReadOnly strSeparator As String = "---------------------"
 
@@ -336,6 +340,8 @@ Public Class dlgOneVarFitModel
         clsPearsonFunction = New RFunction
         clsSfFunction = New RFunction
         clsBayesIferenceFunction = New RFunction
+        clsConcatenateFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
@@ -351,11 +357,16 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
 
+
         ucrChkConvertVariate.Visible = False 'hide convert to numeric checkbox by default
 
         clsGetFactorLevelFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
 
         clsConvertToColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+
+        'clsDummyFunction.AddParameter("check", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("check", "False", iPosition:=0)
+
 
         clsColumnNameFunction.SetRCommand("c")
         'General Case
@@ -489,6 +500,11 @@ Public Class dlgOneVarFitModel
         clsBayesIferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=1)
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=2)
+        clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
+
+        'clsConcatenateFunction.SetRCommand("c")
+        'clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
+        'clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
@@ -537,6 +553,7 @@ Public Class dlgOneVarFitModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModelFunction)
         bResetFittingOptions = True
         bResetFitModDisplay = True
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -693,6 +710,12 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.ShowDialog()
     End Sub
 
+    Private Sub cmdPrior_Click(sender As Object, e As EventArgs) Handles cmdPrior.Click
+        sdgPriorParameters.SetRFunction(ucrBase.clsRsyntax, clsBayesIferenceFunction, clsConcatenateFunction, clsDummyFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorParameters.ShowDialog()
+    End Sub
+
     Private Sub SetSaveLabelTextAndPrefix()
         If rdoGeneralCase.Checked Then
             ucrSaveModel.SetCheckBoxText("Save Model")
@@ -711,8 +734,10 @@ Public Class dlgOneVarFitModel
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetAllDistributions()
+            cmdPrior.Visible = False
         Else
             ucrDistributionChoice.SetExactDistributions()
+            cmdPrior.Visible = True
         End If
         SetTestEstimateBaseFunction()
         SetSaveLabelTextAndPrefix()

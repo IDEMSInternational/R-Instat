@@ -98,6 +98,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNullValue = New instat.ucrInputTextBox()
+        Me.cmdPrior = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -715,12 +716,22 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullValue.Size = New System.Drawing.Size(92, 21)
         Me.ucrInputNullValue.TabIndex = 114
         '
+        'cmdPrior
+        '
+        Me.cmdPrior.Location = New System.Drawing.Point(298, 331)
+        Me.cmdPrior.Name = "cmdPrior"
+        Me.cmdPrior.Size = New System.Drawing.Size(120, 23)
+        Me.cmdPrior.TabIndex = 117
+        Me.cmdPrior.Text = "Prior"
+        Me.cmdPrior.UseVisualStyleBackColor = True
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 422)
+        Me.Controls.Add(Me.cmdPrior)
         Me.Controls.Add(Me.ucrInputCredibleLevel)
         Me.Controls.Add(Me.lblCredibleLevel)
         Me.Controls.Add(Me.ucrInputPriorMean)
@@ -850,4 +861,5 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputPriorMean As ucrInputTextBox
     Friend WithEvents ucrInputCredibleLevel As ucrInputComboBox
     Friend WithEvents lblCredibleLevel As Label
+    Friend WithEvents cmdPrior As Button
 End Class
