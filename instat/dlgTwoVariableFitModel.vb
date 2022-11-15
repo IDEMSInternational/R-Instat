@@ -31,7 +31,7 @@ Public Class dlgTwoVariableFitModel
     'Tests
     Private clsNumericTtestFunction, clsTtestFunction, clsBayesIferenceFunction, clsNumericWilcoxTestFunction, clsWilcoxTestFunction,
         clsNumericVarTestFunction, clsVarTestFunction, clsAnsariTestFunction, clsNumericAnsariTestFuntion,
-        clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction,
+        clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsConcatenateFunction,
         clsNumericKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction, clsNumericBarletteTestFunction,
         clsMcnemarTestFunction, clsFlignerTestFunction, clsNumericFlignerTestFunction, clsFisherTestFunction,
         clsXchisgTestFunction, clsPropTestFunction, clsConvertToColumnTypeFunction, clsGetFactorLevelFunction, clsColumnNameFunction As New RFunction
@@ -59,10 +59,12 @@ Public Class dlgTwoVariableFitModel
     Private bReset As Boolean = True
     Public bResetOptionsSubDialog As Boolean = False
     Public bResetFirstFunction As Boolean = False
+    Private bResetSubdialog As Boolean = False
+
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
     Public StrMedianValue As String = ""
 
-    Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bRCodeSet = False
         If bFirstLoad Then
             InitialiseDialog()
@@ -261,6 +263,7 @@ Public Class dlgTwoVariableFitModel
         clsConvertToColumnTypeFunction = New RFunction
         clsGetFactorLevelFunction = New RFunction
         clsColumnNameFunction = New RFunction
+        clsConcatenateFunction = New RFunction
 
         clsAnsariTestOperator = New ROperator
         clsMoodTestOperator = New ROperator
@@ -466,13 +469,17 @@ Public Class dlgTwoVariableFitModel
         clsTtestFunction.AddParameter("conf.level", "0.95", iPosition:=2)
         clsTtestFunction.AddParameter("mu", "0", iPosition:=3)
 
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
+        clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
+
         clsBayesIferenceFunction.SetRCommand("bayes_inference")
         clsBayesIferenceFunction.SetPackageName("statsr")
         clsBayesIferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=1)
         clsBayesIferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=2)
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=3)
-
+        clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
 
         clsTtestOperator.SetOperation("~")
         clsTtestOperator.bSpaceAroundOperation = True
@@ -489,6 +496,7 @@ Public Class dlgTwoVariableFitModel
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         bResetOptionsSubDialog = True
         bResetFirstFunction = True
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -654,6 +662,14 @@ Public Class dlgTwoVariableFitModel
         UpdatePreview()
     End Sub
 
+    Private Sub cmdPrior_Click(sender As Object, e As EventArgs) Handles cmdPrior.Click
+        sdgPriorParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesIferenceFunction,
+                                        clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorParameters.ShowDialog()
+    End Sub
+
+
     Private Sub UpdatePreview()
         If Not ucrReceiverResponse.IsEmpty AndAlso Not ucrReceiverExplanatory.IsEmpty Then
             ucrModelPreview.SetName(clsFormulaOperator.ToScript())
@@ -814,7 +830,6 @@ Public Class dlgTwoVariableFitModel
         UpdatePreview()
         ReceiverColumnType()
         AddFactorLevels()
-        ChooseAnovaFunction()
     End Sub
 
     Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
@@ -876,10 +891,12 @@ Public Class dlgTwoVariableFitModel
             ucrDistributionChoice.SetGLMDistributions()
             cmdDisplayOptions.Visible = True
             cmdModelOptions.Visible = True
+            cmdPrior.Visible = False
         Else
             ucrDistributionChoice.SetExactDistributions()
             cmdDisplayOptions.Visible = False
             cmdModelOptions.Visible = False
+            cmdPrior.Visible = True
         End If
         lblNumeric.Visible = rdoGeneralCase.Checked
         lblFactor.Visible = rdoGeneralCase.Checked
@@ -911,7 +928,7 @@ Public Class dlgTwoVariableFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
