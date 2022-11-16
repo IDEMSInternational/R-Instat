@@ -21,6 +21,7 @@ Public Class dlgStack
     Private clsPivotLongerFunction As New RFunction
     Private clsSelectFunction As New RFunction
     Private clsReshapeFunction As New RFunction
+    Private clsExpandFunction As New RFunction
     Private clsSplitColumnsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bFirstLoad As Boolean = True
@@ -47,8 +48,10 @@ Public Class dlgStack
 
         ucrPnlStack.AddRadioButton(rdoUnnest)
         ucrPnlStack.AddRadioButton(rdoPivotLonger)
+        ucrPnlStack.AddRadioButton(rdoExpand)
         ucrPnlStack.AddFunctionNamesCondition(rdoUnnest, "unnest_tokens")
         ucrPnlStack.AddFunctionNamesCondition(rdoPivotLonger, {"pivot_longer", "reshape"})
+        ucrPnlStack.AddFunctionNamesCondition(rdoExpand, "expand.dft")
 
         ucrSelectorStack.SetParameter(New RParameter("tbl", 0))
         ucrSelectorStack.SetParameterIsrfunction()
@@ -60,6 +63,14 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.SetParameter(New RParameter("cols", 2))
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
         ucrReceiverColumnsToBeStack.SetParameterIsString()
+
+        ucrReceiverExpand.SetParameter(New RParameter("cols", 1))
+        ucrReceiverExpand.Selector = ucrSelectorStack
+        ucrReceiverExpand.SetParameterIsString()
+
+        ucrReceiverFrequency.SetParameter(New RParameter("freq", 2))
+        ucrReceiverFrequency.Selector = ucrSelectorStack
+        ucrReceiverFrequency.SetParameterIsString()
 
         ucrInputNamesTo.SetParameter(New RParameter("names_to", 3))
         ucrInputNamesTo.SetRDefault(Chr(34) & "names" & Chr(34))
@@ -167,6 +178,8 @@ Public Class dlgStack
         ucrPnlStack.AddToLinkedControls({ucrInputNamesTo, ucrChkDropMissingValues, ucrFactorInto, ucrInputValuesTo, ucrChkStackMultipleSets, ucrReceiverColumnsToBeStack}, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrChkDropPrefix.AddToLinkedControls(ucrInputDropPrefix, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStack.AddToLinkedControls(ucrChkDropPrefix, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
+        ucrPnlStack.AddToLinkedControls({ucrReceiverExpand, ucrReceiverFrequency}, {rdoExpand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrReceiverTextColumn.SetLinkedDisplayControl(lblVariable)
         ucrReceiverColumnsToBeStack.SetLinkedDisplayControl(lblColumnsTostack)
@@ -176,6 +189,8 @@ Public Class dlgStack
         ucrInputFormat.SetLinkedDisplayControl(lblFormat)
         ucrInputOutput.SetLinkedDisplayControl(lblOutput)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
+        ucrReceiverExpand.SetLinkedDisplayControl(lblExpandFactor)
+        ucrReceiverFrequency.SetLinkedDisplayControl(lblFrequencyVar)
 
         ttPattern.SetToolTip(ucrInputPattern.txtInput, " ""Chapter [\d]"" for regex token or "" "" ")
 
@@ -190,6 +205,7 @@ Public Class dlgStack
         clsUnnestTokensFunction = New RFunction
         clsSelectFunction = New RFunction
         clsReshapeFunction = New RFunction
+        clsExpandFunction = New RFunction
         clsSplitColumnsFunction = New RFunction
         clsPipeOperator = New ROperator
 
@@ -217,6 +233,10 @@ Public Class dlgStack
 
         clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsFunction, iPosition:=1)
 
+        clsExpandFunction.SetPackageName("vcdExtra")
+        clsExpandFunction.SetRCommand("expand.dft")
+        clsExpandFunction.AddParameter("as.is", "TRUE", iPosition:=0)
+
         clsPipeOperator.SetOperation(" %>% ")
         clsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
@@ -227,12 +247,18 @@ Public Class dlgStack
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsFunction, New RParameter("items", 0), iAdditionalPairNo:=1)
         ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
+        ucrSelectorStack.AddAdditionalCodeParameterPair(clsExpandFunction, New RParameter("x", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=2)
+
+        ucrSaveNewDataName.AddAdditionalRCode(clsUnnestTokensFunction, iAdditionalPairNo:=1)
+        ucrSaveNewDataName.AddAdditionalRCode(clsExpandFunction, iAdditionalPairNo:=2)
+
         ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNudNoSets.SetRCode(clsSplitColumnsFunction, bReset)
 
         ucrReceiverTextColumn.SetRCode(clsUnnestTokensFunction, bReset)
         ucrSelectorStack.SetRCode(clsUnnestTokensFunction, bReset)
-        ucrSaveNewDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrSaveNewDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveNewDataName.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputToken.SetRCode(clsUnnestTokensFunction, bReset)
         ucrInputFormat.SetRCode(clsUnnestTokensFunction, bReset)
         ucrChkToLowerCase.SetRCode(clsUnnestTokensFunction, bReset)
@@ -249,6 +275,8 @@ Public Class dlgStack
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
+        ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
+        ucrReceiverExpand.SetRCode(clsExpandFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -260,7 +288,7 @@ Public Class dlgStack
             Else
                 ucrBase.OKEnabled(True)
             End If
-        Else
+        ElseIf rdoPivotLonger.Checked Then
             If ucrReceiverColumnsToBeStack.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete OrElse
                 ucrInputNamesTo.IsEmpty OrElse ucrInputValuesTo.IsEmpty OrElse
                 ucrFactorInto.IsEmpty OrElse
@@ -269,7 +297,15 @@ Public Class dlgStack
             Else
                 ucrBase.OKEnabled(True)
             End If
+        Else
+            If ucrReceiverExpand.IsEmpty OrElse ucrReceiverFrequency.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         End If
+
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -289,18 +325,33 @@ Public Class dlgStack
             Exit Sub
         End If
 
-        ucrSaveNewDataName.SetPrefix(strDataframeName & If(rdoPivotLonger.Checked _
-                                     , "_stacked", "_unnest"))
+        'ucrSaveNewDataName.SetPrefix(strDataframeName & If(rdoPivotLonger.Checked _
+        ', "_stacked", "_unnest"))
+
+        If rdoPivotLonger.Checked Then
+            ucrSaveNewDataName.SetPrefix(strDataframeName & "_stacked")
+        ElseIf rdoUnnest.Checked Then
+            ucrSaveNewDataName.SetPrefix(strDataframeName & "__unnest")
+        Else
+
+            ucrSaveNewDataName.SetPrefix(strDataframeName & "__expand")
+
+        End If
     End Sub
 
     Private Sub ucrPnlStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStack.ControlValueChanged
         SetDataFramePrefix()
-        ucrBase.clsRsyntax.SetBaseRFunction(If(rdoUnnest.Checked, clsUnnestTokensFunction _
-                                            , clsPivotLongerFunction))
+        'ucrBase.clsRsyntax.SetBaseRFunction(If(rdoUnnest.Checked, clsUnnestTokensFunction _
+        ', clsPivotLongerFunction))
         If rdoUnnest.Checked Then
             ucrReceiverTextColumn.SetMeAsReceiver()
-        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsUnnestTokensFunction)
+        ElseIf rdoPivotLonger.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsExpandFunction)
+            ucrReceiverExpand.SetMeAsReceiver()
         End If
     End Sub
 
@@ -357,7 +408,7 @@ Public Class dlgStack
         ucrInputDropPrefix.ControlContentsChanged, ucrFactorInto.ControlContentsChanged, ucrPnlStack.ControlContentsChanged,
         ucrInputFormat.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrChkCarryColumns.ControlContentsChanged,
         ucrReceiverColumnsToCarry.ControlContentsChanged, ucrChkDropMissingValues.ControlContentsChanged, ucrChkDropPrefix.ControlContentsChanged,
-        ucrChkStackMultipleSets.ControlContentsChanged
+        ucrChkStackMultipleSets.ControlContentsChanged, ucrReceiverFrequency.ControlContentsChanged, ucrReceiverExpand.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
