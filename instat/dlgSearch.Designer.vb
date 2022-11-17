@@ -30,6 +30,7 @@ Partial Class dlgSearch
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(390, 255)
+        Me.Enabled = False
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.Name = "dlgSearch"
