@@ -3858,6 +3858,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnTextSearch.Name = "mnuPrepareColumnTextSearch"
         Me.mnuPrepareColumnTextSearch.Size = New System.Drawing.Size(180, 22)
         Me.mnuPrepareColumnTextSearch.Text = "Search..."
+        Me.mnuPrepareColumnTextSearch.Visible = False
         '
         'mnuPrepareColumnTextTransform
         '
