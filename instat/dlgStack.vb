@@ -22,6 +22,7 @@ Public Class dlgStack
     Private clsSelectFunction As New RFunction
     Private clsReshapeFunction As New RFunction
     Private clsExpandFunction As New RFunction
+    Private clsTypeConvertFunction As New RFunction
     Private clsSplitColumnsFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bFirstLoad As Boolean = True
@@ -51,7 +52,7 @@ Public Class dlgStack
         ucrPnlStack.AddRadioButton(rdoExpand)
         ucrPnlStack.AddFunctionNamesCondition(rdoUnnest, "unnest_tokens")
         ucrPnlStack.AddFunctionNamesCondition(rdoPivotLonger, {"pivot_longer", "reshape"})
-        ucrPnlStack.AddFunctionNamesCondition(rdoExpand, "expand.dft")
+        ucrPnlStack.AddFunctionNamesCondition(rdoExpand, {"expand.dft", "type.convert"})
 
         ucrSelectorStack.SetParameter(New RParameter("tbl", 0))
         ucrSelectorStack.SetParameterIsrfunction()
@@ -206,6 +207,7 @@ Public Class dlgStack
         clsSelectFunction = New RFunction
         clsReshapeFunction = New RFunction
         clsExpandFunction = New RFunction
+        clsTypeConvertFunction = New RFunction
         clsSplitColumnsFunction = New RFunction
         clsPipeOperator = New ROperator
 
@@ -235,7 +237,10 @@ Public Class dlgStack
 
         clsExpandFunction.SetPackageName("vcdExtra")
         clsExpandFunction.SetRCommand("expand.dft")
-        clsExpandFunction.AddParameter("as.is", "TRUE", iPosition:=0)
+
+        clsTypeConvertFunction.SetRCommand("type.convert")
+        clsTypeConvertFunction.AddParameter("x", clsRFunctionParameter:=clsExpandFunction, iPosition:=0)
+        clsTypeConvertFunction.AddParameter("as.is", "FALSE", iPosition:=1)
 
         clsPipeOperator.SetOperation(" %>% ")
         clsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -250,7 +255,7 @@ Public Class dlgStack
         ucrSelectorStack.AddAdditionalCodeParameterPair(clsExpandFunction, New RParameter("x", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=2)
 
         ucrSaveNewDataName.AddAdditionalRCode(clsUnnestTokensFunction, iAdditionalPairNo:=1)
-        ucrSaveNewDataName.AddAdditionalRCode(clsExpandFunction, iAdditionalPairNo:=2)
+        ucrSaveNewDataName.AddAdditionalRCode(clsTypeConvertFunction, iAdditionalPairNo:=2)
 
         ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNudNoSets.SetRCode(clsSplitColumnsFunction, bReset)
@@ -350,7 +355,7 @@ Public Class dlgStack
             ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsExpandFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTypeConvertFunction)
             ucrReceiverExpand.SetMeAsReceiver()
         End If
     End Sub
