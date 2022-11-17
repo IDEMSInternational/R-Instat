@@ -181,7 +181,6 @@ Public Class dlgStack
         ucrPnlStack.AddToLinkedControls(ucrChkDropPrefix, {rdoPivotLonger}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
         ucrPnlStack.AddToLinkedControls({ucrReceiverExpand, ucrReceiverFrequency}, {rdoExpand}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-
         ucrReceiverTextColumn.SetLinkedDisplayControl(lblVariable)
         ucrReceiverColumnsToBeStack.SetLinkedDisplayControl(lblColumnsTostack)
         ucrInputNamesTo.SetLinkedDisplayControl(lblNamesTo)
@@ -262,7 +261,6 @@ Public Class dlgStack
 
         ucrReceiverTextColumn.SetRCode(clsUnnestTokensFunction, bReset)
         ucrSelectorStack.SetRCode(clsUnnestTokensFunction, bReset)
-        'ucrSaveNewDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveNewDataName.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputToken.SetRCode(clsUnnestTokensFunction, bReset)
         ucrInputFormat.SetRCode(clsUnnestTokensFunction, bReset)
@@ -310,7 +308,6 @@ Public Class dlgStack
             End If
         End If
 
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -330,24 +327,17 @@ Public Class dlgStack
             Exit Sub
         End If
 
-        'ucrSaveNewDataName.SetPrefix(strDataframeName & If(rdoPivotLonger.Checked _
-        ', "_stacked", "_unnest"))
-
         If rdoPivotLonger.Checked Then
             ucrSaveNewDataName.SetPrefix(strDataframeName & "_stacked")
         ElseIf rdoUnnest.Checked Then
             ucrSaveNewDataName.SetPrefix(strDataframeName & "__unnest")
         Else
-
             ucrSaveNewDataName.SetPrefix(strDataframeName & "__expand")
-
         End If
     End Sub
 
     Private Sub ucrPnlStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStack.ControlValueChanged
         SetDataFramePrefix()
-        'ucrBase.clsRsyntax.SetBaseRFunction(If(rdoUnnest.Checked, clsUnnestTokensFunction _
-        ', clsPivotLongerFunction))
         If rdoUnnest.Checked Then
             ucrReceiverTextColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.SetBaseRFunction(clsUnnestTokensFunction)

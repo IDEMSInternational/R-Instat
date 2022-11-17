@@ -124,7 +124,7 @@ Partial Class dlgStack
         Me.rdoPivotLonger.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPivotLonger.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPivotLonger.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPivotLonger.Location = New System.Drawing.Point(88, 12)
+        Me.rdoPivotLonger.Location = New System.Drawing.Point(76, 12)
         Me.rdoPivotLonger.Name = "rdoPivotLonger"
         Me.rdoPivotLonger.Size = New System.Drawing.Size(95, 28)
         Me.rdoPivotLonger.TabIndex = 1
@@ -140,7 +140,7 @@ Partial Class dlgStack
         Me.rdoUnnest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoUnnest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoUnnest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnnest.Location = New System.Drawing.Point(181, 12)
+        Me.rdoUnnest.Location = New System.Drawing.Point(169, 12)
         Me.rdoUnnest.Name = "rdoUnnest"
         Me.rdoUnnest.Size = New System.Drawing.Size(92, 28)
         Me.rdoUnnest.TabIndex = 2
@@ -306,9 +306,9 @@ Partial Class dlgStack
         'ucrPnlStack
         '
         Me.ucrPnlStack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStack.Location = New System.Drawing.Point(63, 3)
+        Me.ucrPnlStack.Location = New System.Drawing.Point(67, 3)
         Me.ucrPnlStack.Name = "ucrPnlStack"
-        Me.ucrPnlStack.Size = New System.Drawing.Size(317, 49)
+        Me.ucrPnlStack.Size = New System.Drawing.Size(299, 49)
         Me.ucrPnlStack.TabIndex = 0
         '
         'ucrSaveNewDataName
@@ -484,7 +484,7 @@ Partial Class dlgStack
         Me.rdoExpand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoExpand.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoExpand.Location = New System.Drawing.Point(271, 12)
+        Me.rdoExpand.Location = New System.Drawing.Point(259, 12)
         Me.rdoExpand.Name = "rdoExpand"
         Me.rdoExpand.Size = New System.Drawing.Size(91, 28)
         Me.rdoExpand.TabIndex = 34
@@ -520,7 +520,7 @@ Partial Class dlgStack
         '
         Me.ucrReceiverFrequency.AutoSize = True
         Me.ucrReceiverFrequency.frmParent = Me
-        Me.ucrReceiverFrequency.Location = New System.Drawing.Point(260, 202)
+        Me.ucrReceiverFrequency.Location = New System.Drawing.Point(262, 204)
         Me.ucrReceiverFrequency.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFrequency.Name = "ucrReceiverFrequency"
         Me.ucrReceiverFrequency.Selector = Nothing
@@ -533,7 +533,7 @@ Partial Class dlgStack
         '
         Me.lblFrequencyVar.AutoSize = True
         Me.lblFrequencyVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFrequencyVar.Location = New System.Drawing.Point(264, 187)
+        Me.lblFrequencyVar.Location = New System.Drawing.Point(262, 189)
         Me.lblFrequencyVar.Name = "lblFrequencyVar"
         Me.lblFrequencyVar.Size = New System.Drawing.Size(68, 13)
         Me.lblFrequencyVar.TabIndex = 38
@@ -546,8 +546,6 @@ Partial Class dlgStack
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 447)
-        Me.Controls.Add(Me.lblFrequencyVar)
-        Me.Controls.Add(Me.ucrReceiverFrequency)
         Me.Controls.Add(Me.lblExpandFactor)
         Me.Controls.Add(Me.ucrReceiverExpand)
         Me.Controls.Add(Me.rdoExpand)
@@ -556,7 +554,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrInputDropPrefix)
-        Me.Controls.Add(Me.ucrChkCarryAllColumns)
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrInputOutput)
@@ -574,8 +571,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblToken)
         Me.Controls.Add(Me.ucrInputFormat)
         Me.Controls.Add(Me.lblFormat)
-        Me.Controls.Add(Me.lblPattern)
-        Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrChkPunctuation)
         Me.Controls.Add(Me.lblValuesTo)
         Me.Controls.Add(Me.ucrChkDropMissingValues)
@@ -587,6 +582,11 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.lblNamesTo)
         Me.Controls.Add(Me.lblFactorInto)
+        Me.Controls.Add(Me.ucrChkCarryAllColumns)
+        Me.Controls.Add(Me.lblPattern)
+        Me.Controls.Add(Me.ucrInputPattern)
+        Me.Controls.Add(Me.lblFrequencyVar)
+        Me.Controls.Add(Me.ucrReceiverFrequency)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
