@@ -31,8 +31,6 @@ Partial Class dlgWordwrap
         Me.lblWidthWrap = New System.Windows.Forms.Label()
         Me.ucrNewColName = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblAlign = New System.Windows.Forms.Label()
-        Me.ucrAlignment = New instat.ucrInputComboBox()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.rdoUnWrapText = New System.Windows.Forms.RadioButton()
         Me.grpOptions.SuspendLayout()
@@ -119,7 +117,7 @@ Partial Class dlgWordwrap
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(11, 220)
+        Me.ucrNewColName.Location = New System.Drawing.Point(12, 215)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(392, 22)
@@ -133,27 +131,6 @@ Partial Class dlgWordwrap
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
-        '
-        'lblAlign
-        '
-        Me.lblAlign.AutoSize = True
-        Me.lblAlign.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlign.Location = New System.Drawing.Point(263, 172)
-        Me.lblAlign.Name = "lblAlign"
-        Me.lblAlign.Size = New System.Drawing.Size(56, 13)
-        Me.lblAlign.TabIndex = 6
-        Me.lblAlign.Text = "Alignment:"
-        '
-        'ucrAlignment
-        '
-        Me.ucrAlignment.AddQuotesIfUnrecognised = True
-        Me.ucrAlignment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrAlignment.GetSetSelectedIndex = -1
-        Me.ucrAlignment.IsReadOnly = False
-        Me.ucrAlignment.Location = New System.Drawing.Point(263, 189)
-        Me.ucrAlignment.Name = "ucrAlignment"
-        Me.ucrAlignment.Size = New System.Drawing.Size(136, 23)
-        Me.ucrAlignment.TabIndex = 7
         '
         'grpOptions
         '
@@ -185,8 +162,6 @@ Partial Class dlgWordwrap
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(449, 314)
         Me.Controls.Add(Me.grpOptions)
-        Me.Controls.Add(Me.lblAlign)
-        Me.Controls.Add(Me.ucrAlignment)
         Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrNudWidthWrap)
@@ -216,8 +191,6 @@ Partial Class dlgWordwrap
     Friend WithEvents lblWidthWrap As Label
     Friend WithEvents ucrNewColName As ucrSave
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblAlign As Label
-    Friend WithEvents ucrAlignment As ucrInputComboBox
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents rdoUnWrapText As RadioButton
 End Class
