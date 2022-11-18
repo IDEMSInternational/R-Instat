@@ -500,7 +500,7 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        bRCodeSet = False
+        'bRCodeSet = False
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirstOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecondOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
@@ -613,11 +613,15 @@ Public Class dlgTwoVariableFitModel
 
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
-        ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorSimpleReg.SetRCode(clsLM, bReset)
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator)
         ucrSaveModels.SetRCode(clsLM, bReset)
-        ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
+        If bReset Then
+            ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
+            ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
+        'ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
     End Sub
 
