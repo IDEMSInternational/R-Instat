@@ -83,7 +83,6 @@ Public Class dlgWordwrap
 
         ucrNewColName.Reset()
         ucrSelectorForWrapText.Reset()
-        NewDefaultName()
 
         clsConvertFunction.SetPackageName("stringr")
         clsConvertFunction.SetRCommand("str_to_lower")

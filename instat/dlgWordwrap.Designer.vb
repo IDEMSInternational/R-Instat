@@ -54,9 +54,9 @@ Partial Class dlgWordwrap
         Me.lblColumnToTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblColumnToTransform.Location = New System.Drawing.Point(263, 28)
         Me.lblColumnToTransform.Name = "lblColumnToTransform"
-        Me.lblColumnToTransform.Size = New System.Drawing.Size(107, 13)
+        Me.lblColumnToTransform.Size = New System.Drawing.Size(48, 13)
         Me.lblColumnToTransform.TabIndex = 1
-        Me.lblColumnToTransform.Text = "Column to Transform:"
+        Me.lblColumnToTransform.Text = "Column :"
         '
         'ucrReceiverWrapText
         '
@@ -174,7 +174,7 @@ Partial Class dlgWordwrap
         Me.MinimizeBox = False
         Me.Name = "dlgWordwrap"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Wordwrap"
+        Me.Text = "Wrap"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)
