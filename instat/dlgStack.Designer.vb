@@ -511,10 +511,10 @@ Partial Class dlgStack
         Me.lblExpandFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblExpandFactor.Location = New System.Drawing.Point(264, 64)
         Me.lblExpandFactor.Name = "lblExpandFactor"
-        Me.lblExpandFactor.Size = New System.Drawing.Size(40, 13)
+        Me.lblExpandFactor.Size = New System.Drawing.Size(51, 13)
         Me.lblExpandFactor.TabIndex = 36
         Me.lblExpandFactor.Tag = "Columns_to_Stack:"
-        Me.lblExpandFactor.Text = "Factor:"
+        Me.lblExpandFactor.Text = "Factor(s):"
         '
         'ucrReceiverFrequency
         '
