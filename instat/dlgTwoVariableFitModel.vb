@@ -613,7 +613,6 @@ Public Class dlgTwoVariableFitModel
 
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
-        'ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorSimpleReg.SetRCode(clsLM, bReset)
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator)
         ucrSaveModels.SetRCode(clsLM, bReset)
@@ -621,7 +620,6 @@ Public Class dlgTwoVariableFitModel
             ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
             ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
-        'ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
     End Sub
 
@@ -1074,8 +1072,8 @@ Public Class dlgTwoVariableFitModel
                 ucrInputTest.SetText("t")
             ElseIf strSecondVariableType = "categorical" Then
                 If iNumberOfSecondFactorLevels = 2 Then
-                    ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood", "________",
-                      "oneway", "kruskal", "bartlett", "fligner", "Bayes:Mean"})
+                    ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood",
+                      "________", "Bayes:Mean", "________", "oneway", "kruskal", "bartlett", "fligner"})
                     ucrInputTest.SetText("t")
                 ElseIf iNumberOfSecondFactorLevels > 2 Then
                     ucrInputTest.SetItems({"oneway", "kruskal", "bartlett", "fligner"})
