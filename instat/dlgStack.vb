@@ -25,6 +25,7 @@ Public Class dlgStack
     Private clsTypeConvertFunction As New RFunction
     Private clsSplitColumnsFunction As New RFunction
     Private clsGetColumnNamesFunction As New RFunction
+    Private clsGetVariablesFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -68,8 +69,9 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
         ucrReceiverColumnsToBeStack.SetParameterIsString()
 
+        ucrReceiverExpand.SetParameter(New RParameter("col_name", 1))
         ucrReceiverExpand.Selector = ucrSelectorStack
-        ucrReceiverExpand.SetParameterIsRFunction()
+        ucrReceiverExpand.SetParameterIsString()
 
         ucrReceiverFrequency.SetParameter(New RParameter("freq", 2))
         ucrReceiverFrequency.Selector = ucrSelectorStack
@@ -211,6 +213,8 @@ Public Class dlgStack
         clsTypeConvertFunction = New RFunction
         clsSplitColumnsFunction = New RFunction
         clsGetColumnNamesFunction = New RFunction
+        clsGetVariablesFunction = New RFunction
+
         clsPipeOperator = New ROperator
 
         ucrSelectorStack.Reset()
@@ -237,9 +241,15 @@ Public Class dlgStack
 
         clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsFunction, iPosition:=1)
 
+        'clsExpandFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnNamesFunction, iPosition:=0)
+
+
+
         clsExpandFunction.SetPackageName("vcdExtra")
         clsExpandFunction.SetRCommand("expand.dft")
-        clsExpandFunction.AddParameter("x", "columns", iPosition:=0)
+
+        clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+
 
         clsTypeConvertFunction.SetRCommand("type.convert")
         clsTypeConvertFunction.AddParameter("x", clsRFunctionParameter:=clsExpandFunction, iPosition:=0)
@@ -255,6 +265,8 @@ Public Class dlgStack
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsFunction, New RParameter("items", 0), iAdditionalPairNo:=1)
         ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
+        ucrSelectorStack.AddAdditionalCodeParameterPair(clsExpandFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+
 
         ucrSaveNewDataName.AddAdditionalRCode(clsUnnestTokensFunction, iAdditionalPairNo:=1)
         ucrSaveNewDataName.AddAdditionalRCode(clsTypeConvertFunction, iAdditionalPairNo:=2)
@@ -282,6 +294,7 @@ Public Class dlgStack
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
         ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
+        ucrReceiverExpand.SetRCode(clsGetColumnNamesFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -313,12 +326,9 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        bResettingDialogue = True
         SetDefaults()
         SetRCodeForControls(True)
-        UpdateSelector()
         TestOKEnabled()
-        bResettingDialogue = False
     End Sub
 
     Private Sub ucrSelectorStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStack.ControlValueChanged
@@ -343,7 +353,6 @@ Public Class dlgStack
 
     Private Sub ucrPnlStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStack.ControlValueChanged
         SetDataFramePrefix()
-        FillLists()
         If rdoUnnest.Checked Then
             ucrReceiverTextColumn.SetMeAsReceiver()
             ucrBase.clsRsyntax.SetBaseRFunction(clsUnnestTokensFunction)
@@ -422,85 +431,16 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-        clsGetColumnNamesFunction = ucrReceiverExpand.GetVariables(True).Clone
-        clsGetColumnNamesFunction.SetAssignTo("columns")
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnNamesFunction)
-        If ucrReceiverExpand.IsEmpty AndAlso lstEditedVariables.Count > 0 Then
-            UpdateSelector()
-            ucrReceiverExpand.SetMeAsReceiver()
-        End If
-        If ucrReceiverExpand.IsEmpty Then
-            ucrReceiverFrequency.Clear()
-        End If
+    Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrSelectorStack.ControlValueChanged
+        GetVariables()
     End Sub
 
-    Private Sub UpdateSelector()
-        ClearSelector()
-        If bResettingDialogue Then
-            For i = 0 To lstAllVariables.Count - 1
-                ucrSelectorStack.lstAvailableVariable.Items.Add(lstAllVariables.Item(i))
-                ucrSelectorStack.lstAvailableVariable.Items(i).Tag = ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            Next
-        Else
-            For i = 0 To lstEditedVariables.Count - 1
-                ucrSelectorStack.lstAvailableVariable.Items.Add(lstEditedVariables.Item(i))
-                ucrSelectorStack.lstAvailableVariable.Items(i).Tag = ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            Next
-        End If
-    End Sub
-
-    Private Sub ClearSelector()
-        ucrSelectorStack.lstAvailableVariable.Clear()
-        ucrSelectorStack.lstAvailableVariable.Groups.Clear()
-        ucrSelectorStack.lstAvailableVariable.Columns.Add("Variables")
-    End Sub
-
-    Private Sub ucrReceiverFrequency_Enter(sender As Object, e As EventArgs) Handles ucrReceiverFrequency.Enter
-        Dim grps As New ListViewGroup
-        ClearSelector()
+    Private Sub GetVariables()
         If Not ucrReceiverExpand.IsEmpty Then
-            If ucrReceiverExpand.GetVariableNamesList(False).Count > 1 Then
-                grps = New ListViewGroup(key:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
-                                         headerText:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                ucrSelectorStack.lstAvailableVariable.Groups.Add(grps)
-            End If
-            For j = 0 To ucrReceiverExpand.GetVariableNamesList(False).Count - 1
-                ucrSelectorStack.lstAvailableVariable.Items.Add(ucrReceiverExpand.GetVariableNamesList(False)(j))
-                ucrSelectorStack.lstAvailableVariable.Items(j).Tag = ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                ucrSelectorStack.lstAvailableVariable.Items(j).ToolTipText = ucrReceiverExpand.GetVariableNamesList(False)(0)
-            Next
+            clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+            clsGetVariablesFunction.AddParameter("col_names", Chr(34) & ucrReceiverExpand.GetVariableNames(False) & Chr(34), iPosition:=1)
+            'clsExpandFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnNamesFunction, iPosition:=0)
+
         End If
-    End Sub
-
-    Private Sub FillLists()
-        If Not bResettingDialogue Then
-            If ucrSelectorStack.lstAvailableVariable.Items.Count > 0 Then
-                lstEditedVariables.Clear()
-                lstAllVariables.Clear()
-                For Each lstv As ListViewItem In ucrSelectorStack.lstAvailableVariable.Items
-                    lstAllVariables.Add(lstv.Text)
-                    lstEditedVariables.Add(lstv.Text)
-                Next
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrSelectorStack_DataFrameChanged() Handles ucrSelectorStack.DataFrameChanged
-        FillLists()
-    End Sub
-    Private Sub ucrReceiverExpand_Enter(sender As Object, e As EventArgs) Handles ucrReceiverExpand.Enter
-        ResettingDialog()
-        'If Not ucrReceiverColumnsToTranspose.IsEmpty AndAlso
-        '    ucrSelectorTransposeColumns.lstAvailableVariable.Items.Count > 0 Then
-        '    UpdateSelector()
-        'End If
-    End Sub
-
-    Private Sub ResettingDialog()
-        bResettingDialogue = True
-        UpdateSelector()
-        bResettingDialogue = False
     End Sub
 End Class
