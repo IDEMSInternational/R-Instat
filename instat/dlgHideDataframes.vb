@@ -38,6 +38,7 @@ Public Class dlgHideDataframes
             SetDefaults()
         End If
         SetHiddenColumns()
+        ReopenDialog()
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -126,9 +127,11 @@ Public Class dlgHideDataframes
         Dim clsGetHiddenDataFrames As New RFunction
 
         clsGetHiddenDataFrames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_hidden_data_frames")
+        clsHideDataFramesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_data_frames")
 
         ucrSelectorForDataFrames.lstAvailableVariable.Items.Clear()
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetHiddenDataFrames.ToScript(), bSilent:=True)
+
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             chrHiddenColumns = expTemp.AsCharacter
             For Each strDataFrame As String In chrHiddenColumns
@@ -165,4 +168,10 @@ Public Class dlgHideDataframes
         TestOKEnabled()
         clsDataUnhideOperator.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
     End Sub
+
+    Private Sub ReopenDialog()
+        ucrReceiverMultiple.Clear()
+        ucrReceiverMultipleUnhide.Clear()
+    End Sub
+
 End Class
