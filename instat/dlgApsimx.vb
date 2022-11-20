@@ -20,7 +20,7 @@ Imports System.IO
 Public Class dlgApsimx
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsApsimxExampleFunction, clsApsimExampleFunction As New RFunction
+    Private clsApsimxExampleFunction As New RFunction
     Private clsBaseFunction, clsDataListFunction As New RFunction
     Private clsReportOperator As New ROperator
     Private Sub dlgApsimx_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -57,13 +57,7 @@ Public Class dlgApsimx
            {"Rotation", Chr(34) & "Rotation" & Chr(34)},
            {"Soybean", Chr(34) & "Soybean" & Chr(34)},
            {"Sugarcane", Chr(34) & "Sugarcane" & Chr(34)},
-           {"Wheat", Chr(34) & "Wheat" & Chr(34)},
-           {"Sugar", Chr(34) & "Sugar" & Chr(34)},
-           {"Potato", Chr(34) & "Potato" & Chr(34)},
-           {"Millet", Chr(34) & "Millet" & Chr(34)},
-           {"Centro", Chr(34) & "Centro" & Chr(34)},
-           {"Canopy", Chr(34) & "Canopy" & Chr(34)}
-       }
+           {"Wheat", Chr(34) & "Wheat" & Chr(34)}}
 
         ucrInputComboList.SetParameter(New RParameter("example", 0))
         ucrInputComboList.SetItems(dctExamplesModels)
@@ -73,7 +67,6 @@ Public Class dlgApsimx
 
     Private Sub SetDefaults()
         clsApsimxExampleFunction = New RFunction
-        clsApsimExampleFunction = New RFunction
         clsBaseFunction = New RFunction
         clsDataListFunction = New RFunction
         clsReportOperator = New ROperator
@@ -91,16 +84,10 @@ Public Class dlgApsimx
         clsApsimxExampleFunction.SetRCommand("apsimx_example")
         clsApsimxExampleFunction.AddParameter("example", Chr(34) & "Barley" & Chr(34), iPosition:=0)
 
-        clsApsimExampleFunction.SetPackageName("apsimx")
-        clsApsimExampleFunction.SetRCommand("apsim_example")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkSilent.AddAdditionalCodeParameterPair(clsApsimExampleFunction, ucrChkSilent.GetParameter, iAdditionalPairNo:=1)
-        ucrInputComboList.AddAdditionalCodeParameterPair(clsApsimExampleFunction, New RParameter("example", 0), iAdditionalPairNo:=1)
-
         ucrChkSilent.SetRCode(clsApsimxExampleFunction, bReset)
         ucrInputComboList.SetRCode(clsApsimxExampleFunction, bReset)
     End Sub
@@ -127,7 +114,6 @@ Public Class dlgApsimx
         Dim strDataName As String = frmMain.clsRLink.MakeValidText(ucrInputComboList.GetText)
         ucrInputSaveData.SetText(strDataName)
         clsApsimxExampleFunction.SetAssignTo(strDataName)
-        clsApsimExampleFunction.SetAssignTo(strDataName)
         clsDataListFunction.ClearParameters()
         ucrBase.clsRsyntax.ClearCodes()
         If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "Controlled Environment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "Eucalyptus Rotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Soybean" Then
@@ -138,10 +124,6 @@ Public Class dlgApsimx
             clsDataListFunction.AddParameter(strDataName, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsReportOperator, 1)
-        Else
-            clsDataListFunction.AddParameter(strDataName, clsRFunctionParameter:=clsApsimExampleFunction, iPosition:=0)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimExampleFunction, 0)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsReportOperator)
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
