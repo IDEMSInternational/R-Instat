@@ -173,5 +173,4 @@ Public Class dlgHideDataframes
         ucrReceiverMultiple.Clear()
         ucrReceiverMultipleUnhide.Clear()
     End Sub
-
 End Class
