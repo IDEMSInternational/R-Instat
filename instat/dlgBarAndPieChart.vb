@@ -314,7 +314,7 @@ Public Class dlgBarAndPieChart
         ucrChkReorderValue.AddFunctionNamesCondition(False, "reorder", False)
         ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkReorderFrequency.SetText("Rorder Frequency")
+        ucrChkReorderFrequency.SetText("Reorder Frequency")
         ucrChkReorderFrequency.SetParameter(New RParameter("Checked", iNewPosition:=0))
         ucrChkReorderFrequency.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkReorderFrequency.AddToLinkedControls(ucrInputReorderX, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
