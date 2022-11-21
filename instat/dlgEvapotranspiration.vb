@@ -28,54 +28,6 @@ Public Class dlgEvapotranspiration
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
 
-    Private Sub ucrReceiverHumidityMin_Load(sender As Object, e As EventArgs) Handles ucrReceiverHumidityMin.Load
-
-    End Sub
-
-    Private Sub lblDate_Click(sender As Object, e As EventArgs) Handles lblDate.Click
-
-    End Sub
-
-    Private Sub lblTmin_Click(sender As Object, e As EventArgs) Handles lblTmin.Click
-
-    End Sub
-
-    Private Sub ucrReceiverTmin_Load(sender As Object, e As EventArgs) Handles ucrReceiverTmin.Load
-
-    End Sub
-
-    Private Sub lblTmax_Click(sender As Object, e As EventArgs) Handles lblTmax.Click
-
-    End Sub
-
-    Private Sub ucrReceiverTmax_Load(sender As Object, e As EventArgs) Handles ucrReceiverTmax.Load
-
-    End Sub
-
-    Private Sub lblHumidityMax_Click(sender As Object, e As EventArgs) Handles lblHumidityMax.Click
-
-    End Sub
-
-    Private Sub ucrReceiverHumidityMax_Load(sender As Object, e As EventArgs) Handles ucrReceiverHumidityMax.Load
-
-    End Sub
-
-    Private Sub lblHumidityMin_Click(sender As Object, e As EventArgs) Handles lblHumidityMin.Click
-
-    End Sub
-
-    Private Sub ucrReceiverDate_Load(sender As Object, e As EventArgs) Handles ucrReceiverDate.Load
-
-    End Sub
-
-    Private Sub lblRadiation_Click(sender As Object, e As EventArgs) Handles lblRadiation.Click
-
-    End Sub
-
-    Private Sub ucrReceiverRadiation_Load(sender As Object, e As EventArgs) Handles ucrReceiverRadiation.Load
-
-    End Sub
-
     Private Sub dlgdlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             iBasicHeight = Me.Height
@@ -127,6 +79,9 @@ Public Class dlgEvapotranspiration
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
 
+        ucrReceiverRadiation.SetParameter(New RParameter("Radiation", 8, bNewIncludeArgumentName:=False))
+        ucrReceiverRadiation.SetParameterIsRFunction()
+
         ucrReceiverHumidityMax.SetParameter(New RParameter("RHmax", 4))
         ucrReceiverHumidityMax.SetParameterIsRFunction()
         'ucrReceiverHumidityMax.bAutoFill = True
@@ -137,8 +92,8 @@ Public Class dlgEvapotranspiration
 
         ucrReceiverWindSpeed.SetParameter(New RParameter("u2", 7))
         ucrReceiverWindSpeed.SetParameterIsRFunction()
-        'ucrReceiverWindSpeed.SetClimaticType("wind_speed")
-        'ucrReceiverWindSpeed.bAutoFill = True
+        ucrReceiverWindSpeed.SetClimaticType("wind_speed")
+        ucrReceiverWindSpeed.bAutoFill = True
 
         ucrInputTimeStep.SetParameter(New RParameter("ts", 2))
         dctInputTimeStep.Add("daily", Chr(34) & "daily" & Chr(34))
@@ -332,12 +287,16 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
         ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
+
+        ucrReceiverRadiation.SetRCode(clsDataFunctionPM, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoPenmanMonteith.Checked Then
             If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
             If ucrChkWind.Checked And ucrReceiverWindSpeed.IsEmpty Then
                 ucrBase.OKEnabled(False)
@@ -348,8 +307,6 @@ Public Class dlgEvapotranspiration
             Else
                 ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -393,6 +350,8 @@ Public Class dlgEvapotranspiration
     Private Sub ucrPnlMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlValueChanged
         Method()
         DialogSize()
+        DataTypeRadiation()
+
         If rdoPenmanMonteith.Checked Then
             clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
         Else
@@ -415,7 +374,10 @@ Public Class dlgEvapotranspiration
         End If
     End Sub
 
-    Private Sub ucrInputSolar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSolar.ControlValueChanged, ucrReceiverRadiation.ControlValueChanged
+    Private Sub ucrInputSolar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSolar.ControlValueChanged
+        DataTypeRadiation()
+    End Sub
+    Private Sub DataTypeRadiation()
         Select Case ucrInputSolar.GetText
             Case "sunshine hours"
                 ucrReceiverRadiation.SetClimaticType("sunshine_hours")
@@ -446,9 +408,12 @@ Public Class dlgEvapotranspiration
                 clsDataFunctionPM.RemoveParameterByName("Rs")
         End Select
     End Sub
-
     Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverRadiation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRadiation.ControlValueChanged
+        DataTypeRadiation()
     End Sub
 End Class
 
