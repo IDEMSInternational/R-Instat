@@ -24,13 +24,10 @@ Public Class dlgStack
     Private clsExpandFunction As New RFunction
     Private clsTypeConvertFunction As New RFunction
     Private clsSplitColumnsFunction As New RFunction
-    Private clsGetColumnNamesFunction As New RFunction
     Private clsGetVariablesFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private lstEditedVariables, lstAllVariables As New List(Of String)
-    Private bResettingDialogue As Boolean = False
 
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -212,7 +209,6 @@ Public Class dlgStack
         clsExpandFunction = New RFunction
         clsTypeConvertFunction = New RFunction
         clsSplitColumnsFunction = New RFunction
-        clsGetColumnNamesFunction = New RFunction
         clsGetVariablesFunction = New RFunction
 
         clsPipeOperator = New ROperator
@@ -241,15 +237,12 @@ Public Class dlgStack
 
         clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsFunction, iPosition:=1)
 
-        'clsExpandFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnNamesFunction, iPosition:=0)
-
-
+        clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetVariablesFunction.SetAssignTo("colnames")
 
         clsExpandFunction.SetPackageName("vcdExtra")
         clsExpandFunction.SetRCommand("expand.dft")
-
-        clsGetVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-
+        clsExpandFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunction, iPosition:=0)
 
         clsTypeConvertFunction.SetRCommand("type.convert")
         clsTypeConvertFunction.AddParameter("x", clsRFunctionParameter:=clsExpandFunction, iPosition:=0)
@@ -265,8 +258,6 @@ Public Class dlgStack
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsFunction, New RParameter("items", 0), iAdditionalPairNo:=1)
         ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
-        ucrSelectorStack.AddAdditionalCodeParameterPair(clsExpandFunction, New RParameter("data", ucrSelectorStack.ucrAvailableDataFrames.clsCurrDataFrame, 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-
 
         ucrSaveNewDataName.AddAdditionalRCode(clsUnnestTokensFunction, iAdditionalPairNo:=1)
         ucrSaveNewDataName.AddAdditionalRCode(clsTypeConvertFunction, iAdditionalPairNo:=2)
@@ -294,7 +285,6 @@ Public Class dlgStack
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
         ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
-        ucrReceiverExpand.SetRCode(clsGetColumnNamesFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -431,22 +421,17 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrSelectorStack.ControlValueChanged
-        GetVariables()
-    End Sub
-
-    Private Sub GetVariables()
+    Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrReceiverFrequency.ControlValueChanged, ucrSelectorStack.ControlValueChanged
         Dim lstVariables As New List(Of String)
         If ucrReceiverExpand.lstSelectedVariables.Items.Count > 0 Then
-            'lstVariables.Clear()
             lstVariables = ucrReceiverExpand.GetVariableNamesAsList()
-            'For Each var In ucrSelectorStack
+            Dim strVarFrequency As String = ucrReceiverFrequency.GetVariableNames(False)
+            If Not ucrReceiverFrequency.IsEmpty AndAlso Not lstVariables.Contains(strVarFrequency) Then
+                lstVariables.Add(strVarFrequency)
+            End If
 
-            'Next
             clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
-            clsGetVariablesFunction.AddParameter("col_names", Chr(34) & ucrReceiverExpand.GetVariableNames(False) & Chr(34), iPosition:=1)
-
+            clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
         End If
-
     End Sub
 End Class
