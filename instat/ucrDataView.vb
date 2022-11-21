@@ -230,12 +230,19 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
+        If GetWorkSheetCount() <> 0 Then
+            frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
+        End If
         RefreshDisplayInformation()
     End Sub
 
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
+
+    Public Sub ReOrderWorkSheets()
+        _grid.ReOrderWorksheets()
+    End Sub
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
@@ -883,5 +890,51 @@ Public Class ucrDataView
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, mnuHelp1.Click, mnuHelp2.Click, mnuHelp3.Click
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "146")
+    End Sub
+
+    Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
+        If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
+            sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
+            sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalRowCount
+            sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+            sdgWindowNumber.ShowDialog()
+            Dim iPageNum As Integer = sdgWindowNumber.iPage
+            If iPageNum > 0 Then
+                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPageNum)
+                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            End If
+        End If
+    End Sub
+
+    Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
+        If lblColNext.Enabled OrElse lblColBack.Enabled Then
+            sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
+            sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalColumnCount
+            sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
+            sdgWindowNumber.ShowDialog()
+            Dim iPageNum As Integer = sdgWindowNumber.iPage
+            If iPageNum > 0 Then
+                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPageNum)
+                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            End If
+        End If
+    End Sub
+
+    Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
+        If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
+            ttGoToRowOrColPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows)))
+        Else
+            ttGoToRowOrColPage.RemoveAll()
+        End If
+    End Sub
+
+    Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
+        If lblColNext.Enabled OrElse lblColBack.Enabled Then
+            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols)))
+        Else
+            ttGoToRowOrColPage.RemoveAll()
+        End If
     End Sub
 End Class

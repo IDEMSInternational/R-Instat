@@ -95,8 +95,8 @@ Public Class dlgSelectColumns
         clsConditionsList = New RFunction
         clsFromToOperation = New ROperator
 
-        ucrInputSelectOperation.SetText("Columns")
-        ucrInputColumnType.SetText("Numeric")
+        ucrInputSelectOperation.SetName("Columns")
+        ucrInputColumnType.SetName("Numeric")
 
         clsConditionsList.SetRCommand("list")
 
