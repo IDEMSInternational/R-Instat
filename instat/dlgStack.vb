@@ -438,12 +438,15 @@ Public Class dlgStack
     Private Sub GetVariables()
         Dim lstVariables As New List(Of String)
         If ucrReceiverExpand.lstSelectedVariables.Items.Count > 0 Then
+            'lstVariables.Clear()
+            lstVariables = ucrReceiverExpand.GetVariableNamesAsList()
+            'For Each var In ucrSelectorStack
 
+            'Next
             clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
             clsGetVariablesFunction.AddParameter("col_names", Chr(34) & ucrReceiverExpand.GetVariableNames(False) & Chr(34), iPosition:=1)
 
         End If
-        'clsExpandFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnNamesFunction, iPosition:=0)
 
     End Sub
 End Class
