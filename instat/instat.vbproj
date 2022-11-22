@@ -532,6 +532,12 @@
     <Compile Include="sdgDistributionOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgEstimationParameters.Designer.vb">
+      <DependentUpon>sdgEstimationParameters.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgEstimationParameters.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgExportToWWR.Designer.vb">
       <DependentUpon>sdgExportToWWR.vb</DependentUpon>
     </Compile>
@@ -3080,6 +3086,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgEstimationParameters.resx">
+      <DependentUpon>sdgEstimationParameters.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExportToWWR.resx">
       <DependentUpon>sdgExportToWWR.vb</DependentUpon>
