@@ -482,6 +482,12 @@ Public Class dlgTwoVariableFitModel
         clsBayesIferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=2)
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=3)
         clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
+        clsBayesIferenceFunction.AddParameter("n_0", 1, iPosition:=10)
+        clsBayesIferenceFunction.AddParameter("s_0", 0, iPosition:=11)
+        clsBayesIferenceFunction.AddParameter("v_0", -1, iPosition:=12)
+        clsBayesIferenceFunction.AddParameter("rscale", 1, iPosition:=13)
+        clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+
 
         clsTtestOperator.SetOperation("~")
         clsTtestOperator.bSpaceAroundOperation = True
@@ -902,14 +908,10 @@ Public Class dlgTwoVariableFitModel
             ucrDistributionChoice.SetGLMDistributions()
             cmdDisplayOptions.Visible = True
             cmdModelOptions.Visible = True
-            'cmdPrior.Visible = False
-            'cmdEstimation.Visible = False
         Else
             ucrDistributionChoice.SetExactDistributions()
             cmdDisplayOptions.Visible = False
             cmdModelOptions.Visible = False
-            'cmdPrior.Visible = False
-            'cmdEstimation.Visible = False
         End If
         lblNumeric.Visible = rdoGeneralCase.Checked
         lblFactor.Visible = rdoGeneralCase.Checked
@@ -1133,43 +1135,14 @@ Public Class dlgTwoVariableFitModel
             clsBayesIferenceFunction.AddParameter("null", 0, iPosition:=7)
             clsBayesIferenceFunction.RemoveParameterByName("mu_0")
         ElseIf ucrInputType.GetText = "credible interval" Then
-            clsBayesIferenceFunction.AddParameter("mu_0", 0, iPosition:=8)
+            clsBayesIferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
             clsBayesIferenceFunction.RemoveParameterByName("null")
         End If
     End Sub
 
     Private Sub PrioirsVisisbility()
-        'If rdoTest.Checked AndAlso ucrInputType.GetText = "hypothesis test" Then
-        '    cmdEstimation.Visible = False
-        '    cmdPrior.Visible = True
-        'ElseIf rdoTest.Checked AndAlso ucrInputType.GetText = "credible interval" Then
-
-        '    cmdEstimation.Visible = True
-        '    cmdPrior.Visible = False
-        'Else
-        '    cmdEstimation.Visible = False
-        '    cmdPrior.Visible = False
-        'End If
-
-        'If rdoTest.Checked Then
-        '    If ucrInputTest.GetText() = "Bayes:Mean" AndAlso ucrInputType.GetText = "hypothesis test" Then
-        '        cmdPrior.Visible = True
-        '        cmdEstimation.Visible = False
-        '    ElseIf ucrInputTest.GetText() = "Bayes:Proportion" AndAlso ucrInputType.GetText = "hypothesis test" Then
-        '        cmdPrior.Visible = True
-        '        cmdEstimation.Visible = False
-        '    Else
-        '        cmdPrior.Visible = False
-        '        cmdEstimation.Visible = True
-        '    End If
-        'Else
-        '    cmdEstimation.Visible = False
-        '    cmdPrior.Visible = False
-        'End If
-
         If rdoTest.Checked Then
             If ucrInputTest.GetText() = "Bayes:Mean" OrElse ucrInputTest.GetText() = "Bayes:Proportion" Then
-                'cmdEstimation.Visible = True
                 If ucrInputType.GetText = "credible interval" Then
                     cmdEstimation.Visible = True
                     cmdPrior.Visible = False
@@ -1177,18 +1150,15 @@ Public Class dlgTwoVariableFitModel
                     cmdEstimation.Visible = False
                     cmdPrior.Visible = True
                 End If
-
             Else
                 cmdEstimation.Visible = False
                 cmdPrior.Visible = False
             End If
-
         Else
             cmdEstimation.Visible = False
             cmdPrior.Visible = False
         End If
     End Sub
-
 
     Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
         GetNullValue()

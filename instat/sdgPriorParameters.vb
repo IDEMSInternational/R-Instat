@@ -61,13 +61,13 @@ Public Class sdgPriorParameters
         dctPriorFamily.Add("NG", Chr(34) & "NG" & Chr(34))
         ucrInputPriorFamily.SetItems(dctPriorFamily)
         ucrInputPriorFamily.SetRDefault("JSZ")
+        ucrInputPriorFamily.SetDropDownStyleAsNonEditable()
 
         ucrNudSampleSize.SetLinkedDisplayControl(lblSampleSize)
         ucrNudScaleParameter.SetLinkedDisplayControl(lblScalingParameter)
         ucrNudStandardDeviation.SetLinkedDisplayControl(lblStandardDeviation)
         ucrNudDegreesFreedom.SetLinkedDisplayControl(lblDegreesFreedom)
         ucrNudPrioirNull.SetLinkedDisplayControl(lblPrioir)
-
     End Sub
     Public Sub SetRFunction(clsNewBayesIferenceFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then

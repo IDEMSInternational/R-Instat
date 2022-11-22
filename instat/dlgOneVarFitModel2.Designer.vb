@@ -67,6 +67,8 @@ Partial Class dlgOneVarFitModel
         Me.lblMethodInference = New System.Windows.Forms.Label()
         Me.lblNullValue = New System.Windows.Forms.Label()
         Me.lblCredibleLevel = New System.Windows.Forms.Label()
+        Me.cmdPrior = New System.Windows.Forms.Button()
+        Me.cmdEstimation = New System.Windows.Forms.Button()
         Me.ucrInputCredibleLevel = New instat.ucrInputComboBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputSuccess = New instat.ucrInputComboBox()
@@ -96,8 +98,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNullValue = New instat.ucrInputTextBox()
-        Me.cmdPrior = New System.Windows.Forms.Button()
-        Me.cmdEstimation = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -365,6 +365,24 @@ Partial Class dlgOneVarFitModel
         Me.lblCredibleLevel.Size = New System.Drawing.Size(77, 13)
         Me.lblCredibleLevel.TabIndex = 115
         Me.lblCredibleLevel.Text = "Credible Level:"
+        '
+        'cmdPrior
+        '
+        Me.cmdPrior.Location = New System.Drawing.Point(324, 164)
+        Me.cmdPrior.Name = "cmdPrior"
+        Me.cmdPrior.Size = New System.Drawing.Size(101, 23)
+        Me.cmdPrior.TabIndex = 117
+        Me.cmdPrior.Text = "Hypothesis Priors"
+        Me.cmdPrior.UseVisualStyleBackColor = True
+        '
+        'cmdEstimation
+        '
+        Me.cmdEstimation.Location = New System.Drawing.Point(324, 165)
+        Me.cmdEstimation.Name = "cmdEstimation"
+        Me.cmdEstimation.Size = New System.Drawing.Size(100, 23)
+        Me.cmdEstimation.TabIndex = 118
+        Me.cmdEstimation.Text = "Estimation Priors"
+        Me.cmdEstimation.UseVisualStyleBackColor = True
         '
         'ucrInputCredibleLevel
         '
@@ -695,31 +713,12 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullValue.Size = New System.Drawing.Size(92, 21)
         Me.ucrInputNullValue.TabIndex = 114
         '
-        'cmdPrior
-        '
-        Me.cmdPrior.Location = New System.Drawing.Point(298, 331)
-        Me.cmdPrior.Name = "cmdPrior"
-        Me.cmdPrior.Size = New System.Drawing.Size(120, 23)
-        Me.cmdPrior.TabIndex = 117
-        Me.cmdPrior.Text = "Prior"
-        Me.cmdPrior.UseVisualStyleBackColor = True
-        '
-        'cmdEstimation
-        '
-        Me.cmdEstimation.Location = New System.Drawing.Point(298, 330)
-        Me.cmdEstimation.Name = "cmdEstimation"
-        Me.cmdEstimation.Size = New System.Drawing.Size(120, 23)
-        Me.cmdEstimation.TabIndex = 118
-        Me.cmdEstimation.Text = "Estimation"
-        Me.cmdEstimation.UseVisualStyleBackColor = True
-        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 422)
-        Me.Controls.Add(Me.cmdEstimation)
         Me.Controls.Add(Me.cmdPrior)
         Me.Controls.Add(Me.ucrInputCredibleLevel)
         Me.Controls.Add(Me.lblCredibleLevel)
@@ -777,6 +776,7 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblSuccess)
         Me.Controls.Add(Me.lblQMethod)
         Me.Controls.Add(Me.ucrInputNullValue)
+        Me.Controls.Add(Me.cmdEstimation)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

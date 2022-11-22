@@ -18,8 +18,6 @@ Public Class sdgEstimationParameters
 
     Private bControlsInitialised As Boolean = False
     Public bFirstLoad As Boolean = True
-
-
     Public clsBayesIferenceFunction, clsConcatenateFunction As New RFunction
     Private Sub sdgEstimationParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,7 +41,6 @@ Public Class sdgEstimationParameters
         ucrNudScaleParameter.SetMinMax(1, Integer.MaxValue)
         ucrNudScaleParameter.SetRDefault(1)
 
-
         ucrInputPriorFamily.SetParameter(New RParameter("prior", 14))
         dctPriorFamily.Add("JSZ", Chr(34) & "JZS" & Chr(34))
         dctPriorFamily.Add("JUI", Chr(34) & "JUI" & Chr(34))
@@ -51,12 +48,12 @@ Public Class sdgEstimationParameters
         dctPriorFamily.Add("NG", Chr(34) & "NG" & Chr(34))
         ucrInputPriorFamily.SetItems(dctPriorFamily)
         ucrInputPriorFamily.SetRDefault("JSZ")
+        ucrInputPriorFamily.SetDropDownStyleAsNonEditable()
 
-        ucrInputPriorMean.SetParameter(New RParameter("mu_0", 9))
+        ucrInputPriorMean.SetParameter(New RParameter("mu_0", 15))
         ucrInputPriorMean.SetValidationTypeAsNumeric()
         ucrInputPriorMean.AddQuotesIfUnrecognised = False
         ucrInputPriorMean.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
-
 
         ucrNudSampleSize.SetLinkedDisplayControl(lblSampleSize)
         ucrNudScaleParameter.SetLinkedDisplayControl(lblScalingParameter)
@@ -73,13 +70,11 @@ Public Class sdgEstimationParameters
         clsBayesIferenceFunction = clsNewBayesIferenceFunction
         clsConcatenateFunction = clsNewConcatenateFunction
 
-
         ucrNudSampleSize.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrNudDegreesFreedom.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrNudScaleParameter.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrNudStandardDeviation.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPriorFamily.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPriorMean.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-
     End Sub
 End Class

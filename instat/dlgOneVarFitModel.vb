@@ -495,15 +495,17 @@ Public Class dlgOneVarFitModel
         clsBayesIferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=1)
         clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
-        clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=10)
-
+        clsBayesIferenceFunction.AddParameter("n_0", 1, iPosition:=10)
+        clsBayesIferenceFunction.AddParameter("s_0", 0, iPosition:=11)
+        clsBayesIferenceFunction.AddParameter("v_0", -1, iPosition:=12)
+        clsBayesIferenceFunction.AddParameter("rscale", 1, iPosition:=13)
+        clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
         clsMeanCIFunction.AddParameter("conf.level", "0.95", iPosition:=1)
         clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=2)
-
 
         clsMedianCIFunction.SetPackageName("DescTools")
         clsMedianCIFunction.SetRCommand("MedianCI ")
@@ -516,7 +518,6 @@ Public Class dlgOneVarFitModel
         clsNormCIFunction.AddParameter("boot", "FALSE", iPosition:=4)
         clsNormCIFunction.AddParameter("R", "9999", iPosition:=5)
         clsNormCIFunction.AddParameter("bootci.type", Chr(34) & "all" & Chr(34), iPosition:=6)
-
 
         clsQuantileCIFunction.SetPackageName("MKinfer")
         clsQuantileCIFunction.SetRCommand("quantileCI")
@@ -733,10 +734,8 @@ Public Class dlgOneVarFitModel
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetAllDistributions()
-            'cmdPrior.Visible = False
         Else
             ucrDistributionChoice.SetExactDistributions()
-            'cmdPrior.Visible = True
         End If
         SetTestEstimateBaseFunction()
         SetSaveLabelTextAndPrefix()
@@ -1092,7 +1091,6 @@ Public Class dlgOneVarFitModel
         SampleStatistic()
     End Sub
 
-
     Private Sub SampleStatistic()
         If ucrInputComboTests.GetText() = "Bayes:Mean" Then
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
@@ -1116,11 +1114,12 @@ Public Class dlgOneVarFitModel
         ElseIf rdoEstimate.Checked Then
             If ucrInputComboEstimate.GetText() = "bayes:mean" OrElse ucrInputComboEstimate.GetText() = "bayes:proportion" Then
                 clsBayesIferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=6)
+                clsBayesIferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
             Else
+                clsBayesIferenceFunction.RemoveParameterByName("mu_0")
                 clsBayesIferenceFunction.RemoveParameterByName("type")
             End If
         End If
-
     End Sub
     Private Sub CredibleInterval()
         If ucrInputComboEstimate.GetText() = "bayes:mean" Then
