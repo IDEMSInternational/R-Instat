@@ -25,8 +25,6 @@ Partial Class dlgRandomSplit
         Me.rdoSample = New System.Windows.Forms.RadioButton()
         Me.rdoTimeSeries = New System.Windows.Forms.RadioButton()
         Me.lblFraction = New System.Windows.Forms.Label()
-        Me.lblPool = New System.Windows.Forms.Label()
-        Me.lblBreaks = New System.Windows.Forms.Label()
         Me.ucrNudBreaks = New instat.ucrNud()
         Me.ucrNudPool = New instat.ucrNud()
         Me.ucrNudFraction = New instat.ucrNud()
@@ -39,6 +37,8 @@ Partial Class dlgRandomSplit
         Me.ucrSaveTrainingData = New instat.ucrSave()
         Me.ucrSaveTestingData = New instat.ucrSave()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ucrChkbreaks = New instat.ucrCheck()
+        Me.ucrChkPool = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -81,24 +81,6 @@ Partial Class dlgRandomSplit
         Me.lblFraction.Size = New System.Drawing.Size(48, 13)
         Me.lblFraction.TabIndex = 6
         Me.lblFraction.Text = "Fraction:"
-        '
-        'lblPool
-        '
-        Me.lblPool.AutoSize = True
-        Me.lblPool.Location = New System.Drawing.Point(281, 197)
-        Me.lblPool.Name = "lblPool"
-        Me.lblPool.Size = New System.Drawing.Size(31, 13)
-        Me.lblPool.TabIndex = 10
-        Me.lblPool.Text = "Pool:"
-        '
-        'lblBreaks
-        '
-        Me.lblBreaks.AutoSize = True
-        Me.lblBreaks.Location = New System.Drawing.Point(281, 169)
-        Me.lblBreaks.Name = "lblBreaks"
-        Me.lblBreaks.Size = New System.Drawing.Size(46, 13)
-        Me.lblBreaks.TabIndex = 8
-        Me.lblBreaks.Text = "Breaks :"
         '
         'ucrNudBreaks
         '
@@ -229,6 +211,24 @@ Partial Class dlgRandomSplit
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "Stratifying variable (Optional):"
         '
+        'ucrChkbreaks
+        '
+        Me.ucrChkbreaks.AutoSize = True
+        Me.ucrChkbreaks.Checked = False
+        Me.ucrChkbreaks.Location = New System.Drawing.Point(264, 165)
+        Me.ucrChkbreaks.Name = "ucrChkbreaks"
+        Me.ucrChkbreaks.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkbreaks.TabIndex = 18
+        '
+        'ucrChkPool
+        '
+        Me.ucrChkPool.AutoSize = True
+        Me.ucrChkPool.Checked = False
+        Me.ucrChkPool.Location = New System.Drawing.Point(265, 197)
+        Me.ucrChkPool.Name = "ucrChkPool"
+        Me.ucrChkPool.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkPool.TabIndex = 19
+        '
         'dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -237,9 +237,7 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrSaveTestingData)
         Me.Controls.Add(Me.ucrReceiverRanSplit)
-        Me.Controls.Add(Me.lblBreaks)
         Me.Controls.Add(Me.ucrNudBreaks)
-        Me.Controls.Add(Me.lblPool)
         Me.Controls.Add(Me.lblFraction)
         Me.Controls.Add(Me.ucrNudPool)
         Me.Controls.Add(Me.ucrNudFraction)
@@ -251,6 +249,8 @@ Partial Class dlgRandomSplit
         Me.Controls.Add(Me.rdoTimeSeries)
         Me.Controls.Add(Me.ucrPnlRandomSplit)
         Me.Controls.Add(Me.ucrSelectorRandomSplit)
+        Me.Controls.Add(Me.ucrChkPool)
+        Me.Controls.Add(Me.ucrChkbreaks)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -270,13 +270,13 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrNudLag As ucrNud
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrPnlRandomSplit As UcrPanel
-    Friend WithEvents lblPool As Label
     Friend WithEvents lblFraction As Label
-    Friend WithEvents lblBreaks As Label
     Friend WithEvents ucrNudBreaks As ucrNud
     Friend WithEvents ucrSelectorRandomSplit As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRanSplit As ucrReceiverSingle
     Friend WithEvents ucrSaveTrainingData As ucrSave
     Friend WithEvents ucrSaveTestingData As ucrSave
     Friend WithEvents Label1 As Label
+    Friend WithEvents ucrChkPool As ucrCheck
+    Friend WithEvents ucrChkbreaks As ucrCheck
 End Class
