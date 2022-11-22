@@ -45,6 +45,8 @@ Public Class dlgTwoVariableFitModel
     'General case codes
     Private clsFormulaOperator As New ROperator
     Private clsGLM, clsLM, clsGLMNB, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
+
+
     Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
@@ -671,6 +673,13 @@ Public Class dlgTwoVariableFitModel
         sdgPriorParameters.ShowDialog()
     End Sub
 
+    Private Sub cmdEstimation_Click(sender As Object, e As EventArgs) Handles cmdEstimation.Click
+        sdgEstimationParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesIferenceFunction,
+                                        clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgEstimationParameters.ShowDialog()
+    End Sub
+
 
     Private Sub UpdatePreview()
         If Not ucrReceiverResponse.IsEmpty AndAlso Not ucrReceiverExplanatory.IsEmpty Then
@@ -893,12 +902,14 @@ Public Class dlgTwoVariableFitModel
             ucrDistributionChoice.SetGLMDistributions()
             cmdDisplayOptions.Visible = True
             cmdModelOptions.Visible = True
-            cmdPrior.Visible = False
+            'cmdPrior.Visible = False
+            'cmdEstimation.Visible = False
         Else
             ucrDistributionChoice.SetExactDistributions()
             cmdDisplayOptions.Visible = False
             cmdModelOptions.Visible = False
-            cmdPrior.Visible = True
+            'cmdPrior.Visible = False
+            'cmdEstimation.Visible = False
         End If
         lblNumeric.Visible = rdoGeneralCase.Checked
         lblFactor.Visible = rdoGeneralCase.Checked
@@ -907,6 +918,7 @@ Public Class dlgTwoVariableFitModel
         ReceiverColumnType()
         AddFactorLevels()
         ChooseAnovaFunction()
+        PrioirsVisisbility()
     End Sub
 
     Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
@@ -1113,6 +1125,7 @@ Public Class dlgTwoVariableFitModel
         SetBaseFunction()
         SampleStatistic()
         AddFactorLevels()
+        PrioirsVisisbility()
     End Sub
 
     Private Sub GetNullValue()
@@ -1125,8 +1138,61 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
+    Private Sub PrioirsVisisbility()
+        'If rdoTest.Checked AndAlso ucrInputType.GetText = "hypothesis test" Then
+        '    cmdEstimation.Visible = False
+        '    cmdPrior.Visible = True
+        'ElseIf rdoTest.Checked AndAlso ucrInputType.GetText = "credible interval" Then
+
+        '    cmdEstimation.Visible = True
+        '    cmdPrior.Visible = False
+        'Else
+        '    cmdEstimation.Visible = False
+        '    cmdPrior.Visible = False
+        'End If
+
+        'If rdoTest.Checked Then
+        '    If ucrInputTest.GetText() = "Bayes:Mean" AndAlso ucrInputType.GetText = "hypothesis test" Then
+        '        cmdPrior.Visible = True
+        '        cmdEstimation.Visible = False
+        '    ElseIf ucrInputTest.GetText() = "Bayes:Proportion" AndAlso ucrInputType.GetText = "hypothesis test" Then
+        '        cmdPrior.Visible = True
+        '        cmdEstimation.Visible = False
+        '    Else
+        '        cmdPrior.Visible = False
+        '        cmdEstimation.Visible = True
+        '    End If
+        'Else
+        '    cmdEstimation.Visible = False
+        '    cmdPrior.Visible = False
+        'End If
+
+        If rdoTest.Checked Then
+            If ucrInputTest.GetText() = "Bayes:Mean" OrElse ucrInputTest.GetText() = "Bayes:Proportion" Then
+                'cmdEstimation.Visible = True
+                If ucrInputType.GetText = "credible interval" Then
+                    cmdEstimation.Visible = True
+                    cmdPrior.Visible = False
+                Else
+                    cmdEstimation.Visible = False
+                    cmdPrior.Visible = True
+                End If
+
+            Else
+                cmdEstimation.Visible = False
+                cmdPrior.Visible = False
+            End If
+
+        Else
+            cmdEstimation.Visible = False
+            cmdPrior.Visible = False
+        End If
+    End Sub
+
+
     Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
         GetNullValue()
+        PrioirsVisisbility()
     End Sub
 
     Private Sub SampleStatistic()

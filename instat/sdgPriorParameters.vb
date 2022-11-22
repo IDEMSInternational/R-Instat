@@ -15,10 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgPriorParameters
-
     Private bControlsInitialised As Boolean = False
     Public bFirstLoad As Boolean = True
-
 
     Public clsBayesIferenceFunction, clsConcatenateFunction As New RFunction
 
@@ -60,7 +58,7 @@ Public Class sdgPriorParameters
         ucrInputPriorFamily.SetParameter(New RParameter("prior", 14))
         dctPriorFamily.Add("JSZ", Chr(34) & "JZS" & Chr(34))
         dctPriorFamily.Add("JUI", Chr(34) & "JUI" & Chr(34))
-        dctPriorFamily.Add("ref", Chr(34) & "ref" & Chr(34))
+        dctPriorFamily.Add("NG", Chr(34) & "NG" & Chr(34))
         ucrInputPriorFamily.SetItems(dctPriorFamily)
         ucrInputPriorFamily.SetRDefault("JSZ")
 
@@ -75,10 +73,8 @@ Public Class sdgPriorParameters
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
         clsBayesIferenceFunction = clsNewBayesIferenceFunction
         clsConcatenateFunction = clsNewConcatenateFunction
-
 
         ucrNudSampleSize.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrNudDegreesFreedom.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)

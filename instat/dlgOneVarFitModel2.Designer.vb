@@ -66,10 +66,8 @@ Partial Class dlgOneVarFitModel
         Me.lblSuccess = New System.Windows.Forms.Label()
         Me.lblMethodInference = New System.Windows.Forms.Label()
         Me.lblNullValue = New System.Windows.Forms.Label()
-        Me.lblPriorMean = New System.Windows.Forms.Label()
         Me.lblCredibleLevel = New System.Windows.Forms.Label()
         Me.ucrInputCredibleLevel = New instat.ucrInputComboBox()
-        Me.ucrInputPriorMean = New instat.ucrInputTextBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputSuccess = New instat.ucrInputComboBox()
         Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
@@ -99,6 +97,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNullValue = New instat.ucrInputTextBox()
         Me.cmdPrior = New System.Windows.Forms.Button()
+        Me.cmdEstimation = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -358,15 +357,6 @@ Partial Class dlgOneVarFitModel
         Me.lblNullValue.TabIndex = 109
         Me.lblNullValue.Text = "Null Value:"
         '
-        'lblPriorMean
-        '
-        Me.lblPriorMean.AutoSize = True
-        Me.lblPriorMean.Location = New System.Drawing.Point(263, 170)
-        Me.lblPriorMean.Name = "lblPriorMean"
-        Me.lblPriorMean.Size = New System.Drawing.Size(61, 13)
-        Me.lblPriorMean.TabIndex = 112
-        Me.lblPriorMean.Text = "Prior Mean:"
-        '
         'lblCredibleLevel
         '
         Me.lblCredibleLevel.AutoSize = True
@@ -387,17 +377,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputCredibleLevel.Name = "ucrInputCredibleLevel"
         Me.ucrInputCredibleLevel.Size = New System.Drawing.Size(71, 21)
         Me.ucrInputCredibleLevel.TabIndex = 116
-        '
-        'ucrInputPriorMean
-        '
-        Me.ucrInputPriorMean.AddQuotesIfUnrecognised = True
-        Me.ucrInputPriorMean.AutoSize = True
-        Me.ucrInputPriorMean.IsMultiline = False
-        Me.ucrInputPriorMean.IsReadOnly = False
-        Me.ucrInputPriorMean.Location = New System.Drawing.Point(326, 166)
-        Me.ucrInputPriorMean.Name = "ucrInputPriorMean"
-        Me.ucrInputPriorMean.Size = New System.Drawing.Size(92, 21)
-        Me.ucrInputPriorMean.TabIndex = 113
         '
         'ucrInputMethod
         '
@@ -725,17 +704,25 @@ Partial Class dlgOneVarFitModel
         Me.cmdPrior.Text = "Prior"
         Me.cmdPrior.UseVisualStyleBackColor = True
         '
+        'cmdEstimation
+        '
+        Me.cmdEstimation.Location = New System.Drawing.Point(298, 330)
+        Me.cmdEstimation.Name = "cmdEstimation"
+        Me.cmdEstimation.Size = New System.Drawing.Size(120, 23)
+        Me.cmdEstimation.TabIndex = 118
+        Me.cmdEstimation.Text = "Estimation"
+        Me.cmdEstimation.UseVisualStyleBackColor = True
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 422)
+        Me.Controls.Add(Me.cmdEstimation)
         Me.Controls.Add(Me.cmdPrior)
         Me.Controls.Add(Me.ucrInputCredibleLevel)
         Me.Controls.Add(Me.lblCredibleLevel)
-        Me.Controls.Add(Me.ucrInputPriorMean)
-        Me.Controls.Add(Me.lblPriorMean)
         Me.Controls.Add(Me.lblNullValue)
         Me.Controls.Add(Me.lblMethodInference)
         Me.Controls.Add(Me.ucrInputMethod)
@@ -856,10 +843,9 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblMethodInference As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents lblNullValue As Label
-    Friend WithEvents lblPriorMean As Label
     Friend WithEvents ucrInputNullValue As ucrInputTextBox
-    Friend WithEvents ucrInputPriorMean As ucrInputTextBox
     Friend WithEvents ucrInputCredibleLevel As ucrInputComboBox
     Friend WithEvents lblCredibleLevel As Label
     Friend WithEvents cmdPrior As Button
+    Friend WithEvents cmdEstimation As Button
 End Class

@@ -235,14 +235,6 @@ Public Class dlgOneVarFitModel
         ucrInputNullValue.AddQuotesIfUnrecognised = False
         ucrInputComboTests.AddToLinkedControls(ucrInputNullValue, {"Bayes:Mean", "Bayes:Proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.0")
 
-
-        ucrInputPriorMean.SetParameter(New RParameter("mu_0", 9))
-        ucrInputPriorMean.SetValidationTypeAsNumeric()
-        ucrInputPriorMean.AddQuotesIfUnrecognised = False
-        ucrInputPriorMean.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputPriorMean, {"bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.0")
-
-
         ucrInputCredibleLevel.SetParameter(New RParameter("cred_level", 10))
         dctCredibleLevel.Add("0.900", "0.90")
         dctCredibleLevel.Add("0.950", "0.95")
@@ -298,7 +290,6 @@ Public Class dlgOneVarFitModel
         ucrInputSuccess.SetLinkedDisplayControl(lblSuccess)
         ucrInputMethod.SetLinkedDisplayControl(lblMethodInference)
         ucrInputNullValue.SetLinkedDisplayControl(lblNullValue)
-        ucrInputPriorMean.SetLinkedDisplayControl(lblPriorMean)
         ucrInputCredibleLevel.SetLinkedDisplayControl(lblCredibleLevel)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
@@ -638,7 +629,6 @@ Public Class dlgOneVarFitModel
         ucrInputMethod.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputCredibleLevel.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputNullValue.SetRCode(clsBayesIferenceFunction, bReset)
-        ucrInputPriorMean.SetRCode(clsBayesIferenceFunction, bReset)
         ucrInputTextM.SetRCode(clsBrFunction)
         ucrSelectorOneVarFitMod.SetRCode(clsGetFactorLevelFunction, bReset)
 
@@ -718,6 +708,13 @@ Public Class dlgOneVarFitModel
         sdgPriorParameters.ShowDialog()
     End Sub
 
+    Private Sub cmdEstimation_Click(sender As Object, e As EventArgs) Handles cmdEstimation.Click
+        sdgEstimationParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesIferenceFunction,
+                                               clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgEstimationParameters.ShowDialog()
+    End Sub
+
     Private Sub SetSaveLabelTextAndPrefix()
         If rdoGeneralCase.Checked Then
             ucrSaveModel.SetCheckBoxText("Save Model")
@@ -736,16 +733,17 @@ Public Class dlgOneVarFitModel
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetAllDistributions()
-            cmdPrior.Visible = False
+            'cmdPrior.Visible = False
         Else
             ucrDistributionChoice.SetExactDistributions()
-            cmdPrior.Visible = True
+            'cmdPrior.Visible = True
         End If
         SetTestEstimateBaseFunction()
         SetSaveLabelTextAndPrefix()
         AddAsNumeric()
         EstimatesAsNumeric()
         AddFactorLevels()
+        PriorsVisibility()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -1069,6 +1067,7 @@ Public Class dlgOneVarFitModel
         TypeStatistic()
         CredibleInterval()
         EnableDisableConvertVariate()
+        PriorsVisibility()
         If ucrInputComboTests.GetText = strSeparator Then
             ucrInputComboTests.cboInput.SelectedIndex = 0
         End If
@@ -1130,8 +1129,29 @@ Public Class dlgOneVarFitModel
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
         End If
     End Sub
-
-    Private Sub ucrInputPriorFamily_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPriorMean.ControlValueChanged, ucrInputNullValue.ControlValueChanged
+    Private Sub PriorsVisibility()
+        If rdoTest.Checked Then
+            If ucrInputComboTests.GetText() = "Bayes:Mean" OrElse ucrInputComboTests.GetText() = "Bayes:Proportion" Then
+                cmdPrior.Visible = True
+                cmdEstimation.Visible = False
+            Else
+                cmdPrior.Visible = False
+                cmdEstimation.Visible = False
+            End If
+        ElseIf rdoEstimate.Checked Then
+            If ucrInputComboEstimate.GetText() = "bayes:mean" OrElse ucrInputComboEstimate.GetText() = "bayes:proportion" Then
+                cmdPrior.Visible = False
+                cmdEstimation.Visible = True
+            Else
+                cmdPrior.Visible = False
+                cmdEstimation.Visible = False
+            End If
+        Else
+            cmdPrior.Visible = False
+            cmdEstimation.Visible = False
+        End If
+    End Sub
+    Private Sub ucrInputNullValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNullValue.ControlValueChanged
         TypeStatistic()
         CredibleInterval()
     End Sub

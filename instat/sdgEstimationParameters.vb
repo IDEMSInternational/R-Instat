@@ -43,31 +43,27 @@ Public Class sdgEstimationParameters
         ucrNudScaleParameter.SetMinMax(1, Integer.MaxValue)
         ucrNudScaleParameter.SetRDefault(1)
 
-        ucrNudPrioirNull.SetParameter(New RParameter("H1", 0))
-        dctNullHypothesis.Add("0.1", "0.1")
-        dctNullHypothesis.Add("0.2", "0.2")
-        dctNullHypothesis.Add("0.5", "0.5")
-        dctNullHypothesis.Add("0.8", "0.8")
-        dctNullHypothesis.Add("0.9", "0.9")
-        ucrNudPrioirNull.SetItems(dctNullHypothesis)
-        ucrNudPrioirNull.AddQuotesIfUnrecognised = False
-        ucrNudPrioirNull.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
-        ucrNudPrioirNull.bAllowNonConditionValues = True
-        ucrNudPrioirNull.SetRDefault(0.5)
 
         ucrInputPriorFamily.SetParameter(New RParameter("prior", 14))
         dctPriorFamily.Add("JSZ", Chr(34) & "JZS" & Chr(34))
         dctPriorFamily.Add("JUI", Chr(34) & "JUI" & Chr(34))
         dctPriorFamily.Add("ref", Chr(34) & "ref" & Chr(34))
+        dctPriorFamily.Add("NG", Chr(34) & "NG" & Chr(34))
         ucrInputPriorFamily.SetItems(dctPriorFamily)
         ucrInputPriorFamily.SetRDefault("JSZ")
+
+        ucrInputPriorMean.SetParameter(New RParameter("mu_0", 9))
+        ucrInputPriorMean.SetValidationTypeAsNumeric()
+        ucrInputPriorMean.AddQuotesIfUnrecognised = False
+        ucrInputPriorMean.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
+
 
         ucrNudSampleSize.SetLinkedDisplayControl(lblSampleSize)
         ucrNudScaleParameter.SetLinkedDisplayControl(lblScalingParameter)
         ucrNudStandardDeviation.SetLinkedDisplayControl(lblStandardDeviation)
         ucrNudDegreesFreedom.SetLinkedDisplayControl(lblDegreesFreedom)
-        ucrNudPrioirNull.SetLinkedDisplayControl(lblPrioir)
-
+        ucrInputPriorFamily.SetLinkedDisplayControl(lblPriorFamily)
+        ucrInputPriorMean.SetLinkedDisplayControl(lblPriorMean)
     End Sub
     Public Sub SetRFunction(clsNewBayesIferenceFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
@@ -83,6 +79,7 @@ Public Class sdgEstimationParameters
         ucrNudScaleParameter.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrNudStandardDeviation.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPriorFamily.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudPrioirNull.SetRCode(clsConcatenateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputPriorMean.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
+
     End Sub
 End Class
