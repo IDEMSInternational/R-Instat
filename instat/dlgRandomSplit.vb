@@ -51,6 +51,7 @@ Public Class dlgRandomSplit
         ucrNudPool.DecimalPlaces = 1
         ucrNudPool.SetMinMax(0.01, 1.0)
         ucrNudPool.Increment = 0.01
+        ucrNudPool.DecimalPlaces = 2
         ucrChkPool.SetText("Pool")
         ucrChkPool.SetParameter(ucrNudPool.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkPool.AddToLinkedControls(ucrNudPool, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -76,11 +77,12 @@ Public Class dlgRandomSplit
         ucrSaveTestingData.SetIsComboBox()
 
         ucrNudBreaks.SetParameter(New RParameter("breaks", 2))
+        ucrNudBreaks.SetMinMax(0.01, 1.0)
+        ucrNudBreaks.DecimalPlaces = 1
+        ucrNudBreaks.Increment = 0.01
         ucrChkbreaks.SetText("breaks")
         ucrChkbreaks.SetParameter(ucrNudBreaks.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkbreaks.AddToLinkedControls(ucrNudBreaks, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-
-
 
         ucrNudFraction.SetLinkedDisplayControl(lblFraction)
         ucrNudFraction.SetParameter(New RParameter("prop", 1))
@@ -116,9 +118,6 @@ Public Class dlgRandomSplit
         clsInitialSplit.SetPackageName("rsample")
         clsInitialSplit.SetRCommand("initial_split")
         clsInitialSplit.AddParameter("prop", "0.75", iPosition:=1)
-        'clsInitialSplit.AddParameter("strata", "NULL", iPosition:=2)
-        'clsInitialSplit.AddParameter("breaks", "4", iPosition:=3)
-        'clsInitialSplit.AddParameter("pool", "0.1", iPosition:=4)
         clsInitialSplit.SetAssignTo("rsample")
 
         clsTraining.SetPackageName("rsample")
