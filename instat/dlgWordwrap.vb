@@ -32,7 +32,6 @@ Public Class dlgWordwrap
         If bReset Then
             SetDefaults()
         End If
-
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -101,7 +100,7 @@ Public Class dlgWordwrap
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        bRCodeSet = False
+
         ucrReceiverWrapText.AddAdditionalCodeParameterPair(clsWrapFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverWrapText.AddAdditionalCodeParameterPair(clsReplaceFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=2)
 
@@ -136,20 +135,16 @@ Public Class dlgWordwrap
         End If
     End Sub
 
-    Private Sub ChangeBaseFunction()
-        If rdoWrapText.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
-        End If
-    End Sub
-
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWrapText.ControlValueChanged
         NewDefaultName()
     End Sub
 
     Private Sub ucrPnlTextWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextWrap.ControlValueChanged
-        ChangeBaseFunction()
+        If rdoWrapText.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWrapFunction)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
+        End If
     End Sub
 
 End Class
