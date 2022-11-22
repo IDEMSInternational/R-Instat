@@ -263,7 +263,7 @@ Partial Class dlgTwoVariableFitModel
         'lblNullHypothesis
         '
         Me.lblNullHypothesis.AutoSize = True
-        Me.lblNullHypothesis.Location = New System.Drawing.Point(238, 265)
+        Me.lblNullHypothesis.Location = New System.Drawing.Point(238, 268)
         Me.lblNullHypothesis.Name = "lblNullHypothesis"
         Me.lblNullHypothesis.Size = New System.Drawing.Size(83, 13)
         Me.lblNullHypothesis.TabIndex = 89
@@ -272,7 +272,7 @@ Partial Class dlgTwoVariableFitModel
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(227, 241)
+        Me.lblType.Location = New System.Drawing.Point(227, 298)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(94, 13)
         Me.lblType.TabIndex = 95
@@ -281,7 +281,7 @@ Partial Class dlgTwoVariableFitModel
         'lblSuccess
         '
         Me.lblSuccess.AutoSize = True
-        Me.lblSuccess.Location = New System.Drawing.Point(271, 266)
+        Me.lblSuccess.Location = New System.Drawing.Point(271, 271)
         Me.lblSuccess.Name = "lblSuccess"
         Me.lblSuccess.Size = New System.Drawing.Size(51, 13)
         Me.lblSuccess.TabIndex = 97
@@ -290,7 +290,7 @@ Partial Class dlgTwoVariableFitModel
         'lblMethodInference
         '
         Me.lblMethodInference.AutoSize = True
-        Me.lblMethodInference.Location = New System.Drawing.Point(274, 216)
+        Me.lblMethodInference.Location = New System.Drawing.Point(274, 243)
         Me.lblMethodInference.Name = "lblMethodInference"
         Me.lblMethodInference.Size = New System.Drawing.Size(46, 13)
         Me.lblMethodInference.TabIndex = 99
@@ -299,7 +299,7 @@ Partial Class dlgTwoVariableFitModel
         'lblCredibleLevel
         '
         Me.lblCredibleLevel.AutoSize = True
-        Me.lblCredibleLevel.Location = New System.Drawing.Point(245, 288)
+        Me.lblCredibleLevel.Location = New System.Drawing.Point(245, 323)
         Me.lblCredibleLevel.Name = "lblCredibleLevel"
         Me.lblCredibleLevel.Size = New System.Drawing.Size(77, 13)
         Me.lblCredibleLevel.TabIndex = 117
@@ -307,9 +307,9 @@ Partial Class dlgTwoVariableFitModel
         '
         'cmdPrior
         '
-        Me.cmdPrior.Location = New System.Drawing.Point(331, 412)
+        Me.cmdPrior.Location = New System.Drawing.Point(324, 209)
         Me.cmdPrior.Name = "cmdPrior"
-        Me.cmdPrior.Size = New System.Drawing.Size(120, 23)
+        Me.cmdPrior.Size = New System.Drawing.Size(106, 23)
         Me.cmdPrior.TabIndex = 119
         Me.cmdPrior.Text = "Prior"
         Me.cmdPrior.UseVisualStyleBackColor = True
@@ -320,10 +320,10 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputCredibleLevel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCredibleLevel.GetSetSelectedIndex = -1
         Me.ucrInputCredibleLevel.IsReadOnly = False
-        Me.ucrInputCredibleLevel.Location = New System.Drawing.Point(324, 284)
+        Me.ucrInputCredibleLevel.Location = New System.Drawing.Point(324, 319)
         Me.ucrInputCredibleLevel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputCredibleLevel.Name = "ucrInputCredibleLevel"
-        Me.ucrInputCredibleLevel.Size = New System.Drawing.Size(71, 21)
+        Me.ucrInputCredibleLevel.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputCredibleLevel.TabIndex = 118
         '
         'ucrInputSuccess
@@ -332,10 +332,10 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputSuccess.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSuccess.GetSetSelectedIndex = -1
         Me.ucrInputSuccess.IsReadOnly = False
-        Me.ucrInputSuccess.Location = New System.Drawing.Point(324, 262)
+        Me.ucrInputSuccess.Location = New System.Drawing.Point(324, 267)
         Me.ucrInputSuccess.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputSuccess.Name = "ucrInputSuccess"
-        Me.ucrInputSuccess.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputSuccess.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputSuccess.TabIndex = 116
         '
         'ucrInputMethod
@@ -344,10 +344,10 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(324, 210)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(324, 237)
         Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputMethod.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputMethod.TabIndex = 98
         '
         'ucrInputNullHypothesis
@@ -479,10 +479,10 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(324, 237)
+        Me.ucrInputType.Location = New System.Drawing.Point(324, 294)
         Me.ucrInputType.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputType.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputType.TabIndex = 94
         '
         'ucrInputConfidenceInterval
@@ -491,7 +491,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputConfidenceInterval.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputConfidenceInterval.GetSetSelectedIndex = -1
         Me.ucrInputConfidenceInterval.IsReadOnly = False
-        Me.ucrInputConfidenceInterval.Location = New System.Drawing.Point(336, 233)
+        Me.ucrInputConfidenceInterval.Location = New System.Drawing.Point(336, 234)
         Me.ucrInputConfidenceInterval.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputConfidenceInterval.Name = "ucrInputConfidenceInterval"
         Me.ucrInputConfidenceInterval.Size = New System.Drawing.Size(94, 21)
@@ -506,11 +506,6 @@ Partial Class dlgTwoVariableFitModel
         Me.Controls.Add(Me.cmdPrior)
         Me.Controls.Add(Me.ucrInputCredibleLevel)
         Me.Controls.Add(Me.lblCredibleLevel)
-        Me.Controls.Add(Me.ucrInputSuccess)
-        Me.Controls.Add(Me.lblMethodInference)
-        Me.Controls.Add(Me.ucrInputMethod)
-        Me.Controls.Add(Me.lblNullHypothesis)
-        Me.Controls.Add(Me.ucrInputNullHypothesis)
         Me.Controls.Add(Me.lblSecondVariableType)
         Me.Controls.Add(Me.lblFirstVariableType)
         Me.Controls.Add(Me.ucrDistributionChoice)
@@ -536,10 +531,15 @@ Partial Class dlgTwoVariableFitModel
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.lblTest)
         Me.Controls.Add(Me.ucrInputType)
-        Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblSuccess)
         Me.Controls.Add(Me.lblConfidenceLevel)
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblNullHypothesis)
+        Me.Controls.Add(Me.ucrInputSuccess)
+        Me.Controls.Add(Me.ucrInputNullHypothesis)
         Me.Controls.Add(Me.ucrInputConfidenceInterval)
+        Me.Controls.Add(Me.ucrInputMethod)
+        Me.Controls.Add(Me.lblMethodInference)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
         Me.MaximizeBox = False

@@ -471,7 +471,7 @@ Public Class dlgTwoVariableFitModel
 
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
-        clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
+        'clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
 
         clsBayesIferenceFunction.SetRCommand("bayes_inference")
         clsBayesIferenceFunction.SetPackageName("statsr")

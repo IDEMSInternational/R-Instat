@@ -27,15 +27,15 @@ Partial Class sdgPriorParameters
         Me.lblScalingParameter = New System.Windows.Forms.Label()
         Me.lblDegreesFreedom = New System.Windows.Forms.Label()
         Me.lblStandardDeviation = New System.Windows.Forms.Label()
-        Me.lblAlternative = New System.Windows.Forms.Label()
         Me.grpHypothesisPrior = New System.Windows.Forms.GroupBox()
-        Me.ucrNudAlternativePrioir = New instat.ucrNud()
-        Me.ucrNudPrioirNull = New instat.ucrNud()
+        Me.ucrNudPrioirNull = New instat.ucrInputComboBox()
         Me.ucrNudStandardDeviation = New instat.ucrNud()
         Me.ucrNudDegreesFreedom = New instat.ucrNud()
         Me.ucrNudScaleParameter = New instat.ucrNud()
         Me.ucrNudSampleSize = New instat.ucrNud()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputPriorFamily = New instat.ucrInputComboBox()
+        Me.lblPriorFamily = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSampleSize
@@ -83,49 +83,26 @@ Partial Class sdgPriorParameters
         Me.lblStandardDeviation.TabIndex = 14
         Me.lblStandardDeviation.Text = "Prioir Standard Deviation:"
         '
-        'lblAlternative
-        '
-        Me.lblAlternative.AutoSize = True
-        Me.lblAlternative.Location = New System.Drawing.Point(98, 153)
-        Me.lblAlternative.Name = "lblAlternative"
-        Me.lblAlternative.Size = New System.Drawing.Size(24, 13)
-        Me.lblAlternative.TabIndex = 15
-        Me.lblAlternative.Text = "H2:"
-        '
         'grpHypothesisPrior
         '
         Me.grpHypothesisPrior.Location = New System.Drawing.Point(7, 130)
         Me.grpHypothesisPrior.Name = "grpHypothesisPrior"
-        Me.grpHypothesisPrior.Size = New System.Drawing.Size(200, 67)
+        Me.grpHypothesisPrior.Size = New System.Drawing.Size(179, 67)
         Me.grpHypothesisPrior.TabIndex = 16
         Me.grpHypothesisPrior.TabStop = False
         Me.grpHypothesisPrior.Text = "Hypothesis Prior"
         '
-        'ucrNudAlternativePrioir
-        '
-        Me.ucrNudAlternativePrioir.AutoSize = True
-        Me.ucrNudAlternativePrioir.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlternativePrioir.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlternativePrioir.Location = New System.Drawing.Point(124, 150)
-        Me.ucrNudAlternativePrioir.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlternativePrioir.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlternativePrioir.Name = "ucrNudAlternativePrioir"
-        Me.ucrNudAlternativePrioir.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlternativePrioir.TabIndex = 8
-        Me.ucrNudAlternativePrioir.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrNudPrioirNull
         '
-        Me.ucrNudPrioirNull.AutoSize = True
-        Me.ucrNudPrioirNull.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPrioirNull.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPrioirNull.Location = New System.Drawing.Point(40, 150)
-        Me.ucrNudPrioirNull.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPrioirNull.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPrioirNull.AddQuotesIfUnrecognised = True
+        Me.ucrNudPrioirNull.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNudPrioirNull.GetSetSelectedIndex = -1
+        Me.ucrNudPrioirNull.IsReadOnly = False
+        Me.ucrNudPrioirNull.Location = New System.Drawing.Point(38, 148)
+        Me.ucrNudPrioirNull.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPrioirNull.Name = "ucrNudPrioirNull"
-        Me.ucrNudPrioirNull.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPrioirNull.TabIndex = 7
-        Me.ucrNudPrioirNull.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPrioirNull.Size = New System.Drawing.Size(81, 21)
+        Me.ucrNudPrioirNull.TabIndex = 87
         '
         'ucrNudStandardDeviation
         '
@@ -182,24 +159,45 @@ Partial Class sdgPriorParameters
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(8, 213)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(8, 255)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgButtons.TabIndex = 2
+        '
+        'ucrInputPriorFamily
+        '
+        Me.ucrInputPriorFamily.AddQuotesIfUnrecognised = True
+        Me.ucrInputPriorFamily.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPriorFamily.GetSetSelectedIndex = -1
+        Me.ucrInputPriorFamily.IsReadOnly = False
+        Me.ucrInputPriorFamily.Location = New System.Drawing.Point(72, 213)
+        Me.ucrInputPriorFamily.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputPriorFamily.Name = "ucrInputPriorFamily"
+        Me.ucrInputPriorFamily.Size = New System.Drawing.Size(81, 21)
+        Me.ucrInputPriorFamily.TabIndex = 88
+        '
+        'lblPriorFamily
+        '
+        Me.lblPriorFamily.AutoSize = True
+        Me.lblPriorFamily.Location = New System.Drawing.Point(8, 215)
+        Me.lblPriorFamily.Name = "lblPriorFamily"
+        Me.lblPriorFamily.Size = New System.Drawing.Size(63, 13)
+        Me.lblPriorFamily.TabIndex = 89
+        Me.lblPriorFamily.Text = "Prior Family:"
         '
         'sdgPriorParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(273, 255)
-        Me.Controls.Add(Me.lblAlternative)
+        Me.ClientSize = New System.Drawing.Size(273, 321)
+        Me.Controls.Add(Me.lblPriorFamily)
+        Me.Controls.Add(Me.ucrInputPriorFamily)
+        Me.Controls.Add(Me.ucrNudPrioirNull)
         Me.Controls.Add(Me.lblStandardDeviation)
         Me.Controls.Add(Me.lblDegreesFreedom)
         Me.Controls.Add(Me.lblScalingParameter)
         Me.Controls.Add(Me.lblPrioir)
         Me.Controls.Add(Me.lblSampleSize)
-        Me.Controls.Add(Me.ucrNudAlternativePrioir)
-        Me.Controls.Add(Me.ucrNudPrioirNull)
         Me.Controls.Add(Me.ucrNudStandardDeviation)
         Me.Controls.Add(Me.ucrNudDegreesFreedom)
         Me.Controls.Add(Me.ucrNudScaleParameter)
@@ -222,13 +220,13 @@ Partial Class sdgPriorParameters
     Friend WithEvents ucrNudScaleParameter As ucrNud
     Friend WithEvents ucrNudDegreesFreedom As ucrNud
     Friend WithEvents ucrNudStandardDeviation As ucrNud
-    Friend WithEvents ucrNudPrioirNull As ucrNud
-    Friend WithEvents ucrNudAlternativePrioir As ucrNud
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblPrioir As Label
     Friend WithEvents lblScalingParameter As Label
     Friend WithEvents lblDegreesFreedom As Label
     Friend WithEvents lblStandardDeviation As Label
-    Friend WithEvents lblAlternative As Label
     Friend WithEvents grpHypothesisPrior As GroupBox
+    Friend WithEvents ucrNudPrioirNull As ucrInputComboBox
+    Friend WithEvents ucrInputPriorFamily As ucrInputComboBox
+    Friend WithEvents lblPriorFamily As Label
 End Class

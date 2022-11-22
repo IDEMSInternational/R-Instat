@@ -498,13 +498,14 @@ Public Class dlgOneVarFitModel
 
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
-        clsConcatenateFunction.AddParameter("H2", 0.5, iPosition:=1)
 
         clsBayesIferenceFunction.SetRCommand("bayes_inference")
         clsBayesIferenceFunction.SetPackageName("statsr")
         clsBayesIferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=1)
         clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
+        clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=10)
+
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
