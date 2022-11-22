@@ -289,6 +289,23 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCor, "correlation between 2 variables. It is a value between -1 and +1.")
         ttCalculator.SetToolTip(cmdCov, "covariance between 2 variables.")
         ttCalculator.SetToolTip(cmdQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
+
+        ttCalculator.SetToolTip(cmdFreqDistinct, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqIQR, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqLength, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMad, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMax, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMean, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMedian, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMin, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMiss, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMode1, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqPropn, "complete as rep(d > 50, f)) to give the proportion of values in variable d more than 50")
+        ttCalculator.SetToolTip(cmdFreqQuantile, "complete as rep(d ,f), prop=0.2), for example, for the 20% point.")
+        ttCalculator.SetToolTip(cmdFreqSd, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqSum, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqVar, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+
     End Sub
 
     Public Sub Reset()
@@ -865,7 +882,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -873,7 +890,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x = , trim = 0 , na.rm = TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -881,7 +898,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max( , na.rm = TRUE)", 15)
         End If
     End Sub
 
@@ -889,7 +906,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -897,7 +914,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -905,7 +922,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x = , y = NULL, na.rm = TRUE)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -913,7 +930,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -921,7 +938,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range(x = , na.rm = TRUE, finite = FALSE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -942,14 +959,14 @@ Public Class ucrCalculator
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsQuantileFunction, iPosition:=0)
         clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 57)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 66)
     End Sub
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR(x = , na.rm = TRUE, type = 7)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1593,7 +1610,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv(x = , aszero = FALSE, na.rm = TRUE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1601,7 +1618,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = , center = median(x = ), constant = 1.4826, na.rm = TRUE,low = FALSE, high = FALSE)", 84)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1609,7 +1626,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 113)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1625,7 +1642,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness(x = , na.rm = TRUE, type = 3)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -4359,152 +4376,123 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFreqLength_Click(sender As Object, e As EventArgs) Handles cmdFreqLength.Click
-        Dim clsLengthFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsLengthFunction.SetRCommand("length")
-        clsLengthFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsLengthFunction.ToScript, 6)
-    End Sub
-
-    Private Sub FrequencyFunctions(strRCommand As String)
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        FrequencyFunction.SetRCommand(strRCommand)
-        FrequencyFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-        FrequencyFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(FrequencyFunction.ToScript, 18)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("length(x=rep(x= ,times= ))", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("length(rep( , ))", 5)
+        End If
     End Sub
 
     Private Sub cmdFreqSum_Click(sender As Object, e As EventArgs) Handles cmdFreqSum.Click
-        FrequencyFunctions("sum")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x=rep(x= ,times= ),na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(rep(,),na.rm=TRUE)", 14)
+        End If
     End Sub
 
     Private Sub cmdFreqMin_Click(sender As Object, e As EventArgs) Handles cmdFreqMin.Click
-        FrequencyFunctions("min")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(rep( , ), na.rm= TRUE)", 18)
+        End If
     End Sub
 
     Private Sub cmdFreqMax_Click(sender As Object, e As EventArgs) Handles cmdFreqMax.Click
-        FrequencyFunctions("max")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(rep( , ), na.rm= TRUE)", 18)
+        End If
     End Sub
 
     Private Sub cmdFreqMode1_Click(sender As Object, e As EventArgs) Handles cmdFreqMode1.Click
-        Dim clsFreqModeFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsFreqModeFunction.SetRCommand("mode")
-        clsFreqModeFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFreqModeFunction.ToScript, 6)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na.rm = TRUE)", 15)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1( , na.rm=TRUE)", 14)
+        End If
     End Sub
 
     Private Sub cmdFreqMiss_Click(sender As Object, e As EventArgs) Handles cmdFreqMiss.Click
-        Dim clsMissFunction As New RFunction
-        Dim clsSumFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsMissFunction.SetRCommand("is.na")
-        clsMissFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0, bIncludeArgumentName:=False)
-
-        clsSumFunction.SetRCommand("sum")
-        clsSumFunction.AddParameter("x", clsRFunctionParameter:=clsMissFunction, iPosition:=0)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSumFunction.ToScript, 6)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x=is.na(rep(x= ,times= )))", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na(rep( , )))", 5)
+        End If
     End Sub
 
     Private Sub cmdFreqMean_Click(sender As Object, e As EventArgs) Handles cmdFreqMean.Click
-        FrequencyFunctions("mean")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(rep( , ), na.rm=TRUE)", 16)
+        End If
     End Sub
 
     Private Sub cmdFreqMedian_Click(sender As Object, e As EventArgs) Handles cmdFreqMedian.Click
-        FrequencyFunctions("median")
-    End Sub
-
-    Private Sub FreqStatsFunctions(strRCommand As String)
-        Dim clsFrequencyStatsFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsFrequencyStatsFunction.SetPackageName("stats")
-        clsFrequencyStatsFunction.SetRCommand(strRCommand)
-        clsFrequencyStatsFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-        clsFrequencyStatsFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFrequencyStatsFunction.ToScript, 18)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(rep( , ), na.rm=TRUE)", 17)
+        End If
     End Sub
 
     Private Sub cmdFreqVar_Click(sender As Object, e As EventArgs) Handles cmdFreqVar.Click
-        FreqStatsFunctions("var")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::var(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::var(rep( , ), na.rm=TRUE)", 17)
+        End If
     End Sub
 
     Private Sub cmdFreqSd_Click(sender As Object, e As EventArgs) Handles cmdFreqSd.Click
-        FreqStatsFunctions("sd")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::sd(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::sd(rep( , ), na.rm=TRUE)", 17)
+        End If
     End Sub
 
     Private Sub cmdFreqMad_Click(sender As Object, e As EventArgs) Handles cmdFreqMad.Click
-        FreqStatsFunctions("mad")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(rep( , ), na.rm=TRUE)", 17)
+        End If
     End Sub
 
     Private Sub cmdFreqIQR_Click(sender As Object, e As EventArgs) Handles cmdFreqIQR.Click
-        FreqStatsFunctions("IQR")
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::IQR(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::IQR(rep( , ), na.rm=TRUE)", 17)
+        End If
     End Sub
 
     Private Sub cmdFreqDistinct_Click(sender As Object, e As EventArgs) Handles cmdFreqDistinct.Click
-        Dim clsFreDistinctFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsFreDistinctFunction.SetPackageName("dplyr")
-        clsFreDistinctFunction.SetRCommand("n_distinct")
-        clsFreDistinctFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFreDistinctFunction.ToScript, 6)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::n_distinct(x = rep(x= ,times= ))", 10)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::n_distinct(rep( , ))", 5)
+        End If
     End Sub
 
     Private Sub cmdFreqPropn_Click(sender As Object, e As EventArgs) Handles cmdFreqPropn.Click
-        Dim clsFreqPropnFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " <= 1", iPosition:=0)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsFreqPropnFunction.SetRCommand("mean")
-        clsFreqPropnFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-        clsFreqPropnFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFreqPropnFunction.ToScript, 21)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x= rep(x= <=1, ), na.rm = TRUE))", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(rep( <=1, ), na.rm = TRUE)", 21)
+        End If
     End Sub
 
     Private Sub cmdFreqQuantile_Click(sender As Object, e As EventArgs) Handles cmdFreqQuantile.Click
-        Dim clsFreqQuantileFunction As New RFunction
-
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", " ", iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction.AddParameter("y", " ", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsFreqQuantileFunction.SetRCommand("quantile")
-        clsFreqQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction, iPosition:=0)
-        clsFreqQuantileFunction.AddParameter("probs", "0.5", iPosition:=1)
-        clsFreqQuantileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFreqQuantileFunction.ToScript, 28)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= rep(x= , times= ), probs= 0.2, na.rm = TRUE))", 38)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(rep( , ), 0.2, na.rm = TRUE)", 24)
+        End If
     End Sub
 
     Private Sub BaseToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BaseToolStripMenuItem1.Click
