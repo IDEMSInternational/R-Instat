@@ -26,11 +26,11 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.lblMaxDurationMissingData = New System.Windows.Forms.Label()
         Me.lblMaxMissingDays = New System.Windows.Forms.Label()
         Me.grpMissingDataOpts = New System.Windows.Forms.GroupBox()
+        Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
+        Me.ucrChkInterpMissingDays = New instat.ucrCheck()
         Me.ucrNudMaxDurationMissingData = New instat.ucrNud()
         Me.ucrNudMaxMissingDays = New instat.ucrNud()
         Me.ucrNudMaxMissingData = New instat.ucrNud()
-        Me.ucrChkInterpMissingEntries = New instat.ucrCheck()
-        Me.ucrChkInterpMissingDays = New instat.ucrCheck()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.grpMissingDataOpts.SuspendLayout()
         Me.SuspendLayout()
@@ -73,6 +73,24 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.grpMissingDataOpts.TabStop = False
         Me.grpMissingDataOpts.Text = "Missing Data Options"
         '
+        'ucrChkInterpMissingEntries
+        '
+        Me.ucrChkInterpMissingEntries.AutoSize = True
+        Me.ucrChkInterpMissingEntries.Checked = False
+        Me.ucrChkInterpMissingEntries.Location = New System.Drawing.Point(2, 38)
+        Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
+        Me.ucrChkInterpMissingEntries.Size = New System.Drawing.Size(188, 23)
+        Me.ucrChkInterpMissingEntries.TabIndex = 5
+        '
+        'ucrChkInterpMissingDays
+        '
+        Me.ucrChkInterpMissingDays.AutoSize = True
+        Me.ucrChkInterpMissingDays.Checked = False
+        Me.ucrChkInterpMissingDays.Location = New System.Drawing.Point(2, 16)
+        Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
+        Me.ucrChkInterpMissingDays.Size = New System.Drawing.Size(168, 23)
+        Me.ucrChkInterpMissingDays.TabIndex = 6
+        '
         'ucrNudMaxDurationMissingData
         '
         Me.ucrNudMaxDurationMissingData.AutoSize = True
@@ -112,24 +130,6 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.ucrNudMaxMissingData.TabIndex = 28
         Me.ucrNudMaxMissingData.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkInterpMissingEntries
-        '
-        Me.ucrChkInterpMissingEntries.AutoSize = True
-        Me.ucrChkInterpMissingEntries.Checked = False
-        Me.ucrChkInterpMissingEntries.Location = New System.Drawing.Point(2, 38)
-        Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
-        Me.ucrChkInterpMissingEntries.Size = New System.Drawing.Size(188, 23)
-        Me.ucrChkInterpMissingEntries.TabIndex = 5
-        '
-        'ucrChkInterpMissingDays
-        '
-        Me.ucrChkInterpMissingDays.AutoSize = True
-        Me.ucrChkInterpMissingDays.Checked = False
-        Me.ucrChkInterpMissingDays.Location = New System.Drawing.Point(2, 16)
-        Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
-        Me.ucrChkInterpMissingDays.Size = New System.Drawing.Size(168, 23)
-        Me.ucrChkInterpMissingDays.TabIndex = 6
-        '
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
@@ -142,7 +142,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(241, 224)
+        Me.ClientSize = New System.Drawing.Size(245, 229)
         Me.Controls.Add(Me.lblMaxPerctMissindData)
         Me.Controls.Add(Me.ucrNudMaxDurationMissingData)
         Me.Controls.Add(Me.ucrNudMaxMissingDays)

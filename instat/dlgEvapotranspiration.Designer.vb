@@ -32,13 +32,10 @@ Partial Class dlgEvapotranspiration
         Me.lblMissingMethod = New System.Windows.Forms.Label()
         Me.lblSolar = New System.Windows.Forms.Label()
         Me.lblRadiation = New System.Windows.Forms.Label()
-        Me.grpWindSpeed = New System.Windows.Forms.GroupBox()
         Me.rdoHargreavesSamani = New System.Windows.Forms.RadioButton()
         Me.rdoPenmanMonteith = New System.Windows.Forms.RadioButton()
         Me.cmdEvapOptions = New System.Windows.Forms.Button()
         Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
-        Me.ucrChkWind = New instat.ucrCheck()
-        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrInputSolar = New instat.ucrInputComboBox()
         Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
         Me.ucrInputCrop = New instat.ucrInputComboBox()
@@ -52,7 +49,8 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorEvapotranspiration = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpWindSpeed.SuspendLayout()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
+        Me.ucrChkWind = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -143,18 +141,7 @@ Partial Class dlgEvapotranspiration
         Me.lblRadiation.Name = "lblRadiation"
         Me.lblRadiation.Size = New System.Drawing.Size(120, 17)
         Me.lblRadiation.TabIndex = 14
-        Me.lblRadiation.Text = "Radiation:"
-        '
-        'grpWindSpeed
-        '
-        Me.grpWindSpeed.Controls.Add(Me.ucrChkWind)
-        Me.grpWindSpeed.Controls.Add(Me.ucrReceiverWindSpeed)
-        Me.grpWindSpeed.Location = New System.Drawing.Point(262, 286)
-        Me.grpWindSpeed.Name = "grpWindSpeed"
-        Me.grpWindSpeed.Size = New System.Drawing.Size(191, 57)
-        Me.grpWindSpeed.TabIndex = 25
-        Me.grpWindSpeed.TabStop = False
-        Me.grpWindSpeed.Text = "Wind Speed"
+        Me.lblRadiation.Text = "Solar:"
         '
         'rdoHargreavesSamani
         '
@@ -192,7 +179,7 @@ Partial Class dlgEvapotranspiration
         '
         'cmdEvapOptions
         '
-        Me.cmdEvapOptions.Location = New System.Drawing.Point(314, 360)
+        Me.cmdEvapOptions.Location = New System.Drawing.Point(314, 343)
         Me.cmdEvapOptions.Name = "cmdEvapOptions"
         Me.cmdEvapOptions.Size = New System.Drawing.Size(123, 23)
         Me.cmdEvapOptions.TabIndex = 34
@@ -210,28 +197,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputMissingMethod.Name = "ucrInputMissingMethod"
         Me.ucrInputMissingMethod.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMissingMethod.TabIndex = 29
-        '
-        'ucrChkWind
-        '
-        Me.ucrChkWind.AutoSize = True
-        Me.ucrChkWind.Checked = False
-        Me.ucrChkWind.Location = New System.Drawing.Point(5, 31)
-        Me.ucrChkWind.Name = "ucrChkWind"
-        Me.ucrChkWind.Size = New System.Drawing.Size(108, 23)
-        Me.ucrChkWind.TabIndex = 0
-        '
-        'ucrReceiverWindSpeed
-        '
-        Me.ucrReceiverWindSpeed.AutoSize = True
-        Me.ucrReceiverWindSpeed.frmParent = Nothing
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(116, 31)
-        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
-        Me.ucrReceiverWindSpeed.Selector = Nothing
-        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(72, 20)
-        Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.TabIndex = 2
-        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'ucrInputSolar
         '
@@ -382,18 +347,41 @@ Partial Class dlgEvapotranspiration
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 33
         '
+        'ucrReceiverWindSpeed
+        '
+        Me.ucrReceiverWindSpeed.AutoSize = True
+        Me.ucrReceiverWindSpeed.frmParent = Me
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(314, 297)
+        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(123, 20)
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.TabIndex = 2
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
+        '
+        'ucrChkWind
+        '
+        Me.ucrChkWind.AutoSize = True
+        Me.ucrChkWind.Checked = False
+        Me.ucrChkWind.Location = New System.Drawing.Point(314, 277)
+        Me.ucrChkWind.Name = "ucrChkWind"
+        Me.ucrChkWind.Size = New System.Drawing.Size(123, 31)
+        Me.ucrChkWind.TabIndex = 0
+        '
         'dlgEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(453, 478)
+        Me.Controls.Add(Me.ucrReceiverWindSpeed)
+        Me.Controls.Add(Me.ucrChkWind)
         Me.Controls.Add(Me.cmdEvapOptions)
         Me.Controls.Add(Me.rdoHargreavesSamani)
         Me.Controls.Add(Me.rdoPenmanMonteith)
         Me.Controls.Add(Me.ucrInputMissingMethod)
         Me.Controls.Add(Me.lblMissingMethod)
-        Me.Controls.Add(Me.grpWindSpeed)
         Me.Controls.Add(Me.lblSolar)
         Me.Controls.Add(Me.ucrInputSolar)
         Me.Controls.Add(Me.lblRadiation)
@@ -422,8 +410,6 @@ Partial Class dlgEvapotranspiration
         Me.Name = "dlgEvapotranspiration"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Evapotranspiration"
-        Me.grpWindSpeed.ResumeLayout(False)
-        Me.grpWindSpeed.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -449,9 +435,6 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents lblMissingMethod As Label
     Friend WithEvents ucrNewColName As ucrSave
     Friend WithEvents ucrReceiverTmax As ucrReceiverSingle
-    Friend WithEvents grpWindSpeed As GroupBox
-    Friend WithEvents ucrChkWind As ucrCheck
-    Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents ucrInputSolar As ucrInputComboBox
     Friend WithEvents lblSolar As Label
     Friend WithEvents ucrReceiverRadiation As ucrReceiverSingle
@@ -459,4 +442,6 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents rdoHargreavesSamani As RadioButton
     Friend WithEvents rdoPenmanMonteith As RadioButton
     Friend WithEvents cmdEvapOptions As Button
+    Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
+    Friend WithEvents ucrChkWind As ucrCheck
 End Class
