@@ -41,7 +41,7 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 603
+        ucrBase.iHelpTopicID = 417
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))

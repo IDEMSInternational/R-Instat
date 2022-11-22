@@ -244,6 +244,11 @@
     </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.vb">
 	 <SubType>Form</SubType>
+    <Compile Include="dlgSearch.Designer.vb">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSearch.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWordwrap.Designer.vb">
       <DependentUpon>dlgWordwrap.vb</DependentUpon>
@@ -3038,6 +3043,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSearch.resx">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
