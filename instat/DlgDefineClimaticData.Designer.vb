@@ -73,6 +73,10 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDefineClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblMinimumRH = New System.Windows.Forms.Label()
+        Me.ucrReceiverMinRH = New instat.ucrReceiverSingle()
+        Me.lblMaxRH = New System.Windows.Forms.Label()
+        Me.ucrReceiverMaxRH = New instat.ucrReceiverSingle()
         Me.grpElements.SuspendLayout()
         Me.grpDateTime.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -80,6 +84,10 @@ Partial Class DlgDefineClimaticData
         '
         'grpElements
         '
+        Me.grpElements.Controls.Add(Me.ucrReceiverMaxRH)
+        Me.grpElements.Controls.Add(Me.lblMaxRH)
+        Me.grpElements.Controls.Add(Me.ucrReceiverMinRH)
+        Me.grpElements.Controls.Add(Me.lblMinimumRH)
         Me.grpElements.Controls.Add(Me.ucrReceiverWindDirection)
         Me.grpElements.Controls.Add(Me.ucrReceiverRain)
         Me.grpElements.Controls.Add(Me.ucrReceiverSunshine)
@@ -96,9 +104,9 @@ Partial Class DlgDefineClimaticData
         Me.grpElements.Controls.Add(Me.ucrReceiverMinTemp)
         Me.grpElements.Controls.Add(Me.lblWindSpeed)
         Me.grpElements.Controls.Add(Me.lblWindDirection)
-        Me.grpElements.Location = New System.Drawing.Point(306, 71)
+        Me.grpElements.Location = New System.Drawing.Point(306, 7)
         Me.grpElements.Name = "grpElements"
-        Me.grpElements.Size = New System.Drawing.Size(146, 344)
+        Me.grpElements.Size = New System.Drawing.Size(146, 424)
         Me.grpElements.TabIndex = 3
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements"
@@ -107,7 +115,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverWindDirection.AutoSize = True
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(16, 197)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(16, 195)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
@@ -133,7 +141,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverSunshine.AutoSize = True
         Me.ucrReceiverSunshine.frmParent = Me
-        Me.ucrReceiverSunshine.Location = New System.Drawing.Point(16, 238)
+        Me.ucrReceiverSunshine.Location = New System.Drawing.Point(16, 236)
         Me.ucrReceiverSunshine.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSunshine.Name = "ucrReceiverSunshine"
         Me.ucrReceiverSunshine.Selector = Nothing
@@ -146,7 +154,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblRain.AutoSize = True
         Me.lblRain.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRain.Location = New System.Drawing.Point(16, 18)
+        Me.lblRain.Location = New System.Drawing.Point(16, 16)
         Me.lblRain.Name = "lblRain"
         Me.lblRain.Size = New System.Drawing.Size(32, 13)
         Me.lblRain.TabIndex = 0
@@ -156,7 +164,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverRadiation.AutoSize = True
         Me.ucrReceiverRadiation.frmParent = Me
-        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(16, 279)
+        Me.ucrReceiverRadiation.Location = New System.Drawing.Point(16, 277)
         Me.ucrReceiverRadiation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRadiation.Name = "ucrReceiverRadiation"
         Me.ucrReceiverRadiation.Selector = Nothing
@@ -169,7 +177,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverMaxTemp.AutoSize = True
         Me.ucrReceiverMaxTemp.frmParent = Me
-        Me.ucrReceiverMaxTemp.Location = New System.Drawing.Point(16, 115)
+        Me.ucrReceiverMaxTemp.Location = New System.Drawing.Point(16, 113)
         Me.ucrReceiverMaxTemp.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
         Me.ucrReceiverMaxTemp.Selector = Nothing
@@ -182,7 +190,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverCloudCover.AutoSize = True
         Me.ucrReceiverCloudCover.frmParent = Me
-        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(16, 320)
+        Me.ucrReceiverCloudCover.Location = New System.Drawing.Point(16, 318)
         Me.ucrReceiverCloudCover.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCloudCover.Name = "ucrReceiverCloudCover"
         Me.ucrReceiverCloudCover.Selector = Nothing
@@ -195,7 +203,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblMaxTemp.AutoSize = True
         Me.lblMaxTemp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxTemp.Location = New System.Drawing.Point(16, 100)
+        Me.lblMaxTemp.Location = New System.Drawing.Point(16, 98)
         Me.lblMaxTemp.Name = "lblMaxTemp"
         Me.lblMaxTemp.Size = New System.Drawing.Size(117, 13)
         Me.lblMaxTemp.TabIndex = 4
@@ -205,7 +213,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblCloudCover.AutoSize = True
         Me.lblCloudCover.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCloudCover.Location = New System.Drawing.Point(16, 305)
+        Me.lblCloudCover.Location = New System.Drawing.Point(16, 303)
         Me.lblCloudCover.Name = "lblCloudCover"
         Me.lblCloudCover.Size = New System.Drawing.Size(68, 13)
         Me.lblCloudCover.TabIndex = 14
@@ -215,7 +223,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblMinTemp.AutoSize = True
         Me.lblMinTemp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMinTemp.Location = New System.Drawing.Point(16, 59)
+        Me.lblMinTemp.Location = New System.Drawing.Point(16, 57)
         Me.lblMinTemp.Name = "lblMinTemp"
         Me.lblMinTemp.Size = New System.Drawing.Size(111, 13)
         Me.lblMinTemp.TabIndex = 2
@@ -225,7 +233,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblRadiation.AutoSize = True
         Me.lblRadiation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRadiation.Location = New System.Drawing.Point(16, 264)
+        Me.lblRadiation.Location = New System.Drawing.Point(16, 262)
         Me.lblRadiation.Name = "lblRadiation"
         Me.lblRadiation.Size = New System.Drawing.Size(55, 13)
         Me.lblRadiation.TabIndex = 12
@@ -235,7 +243,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverWindSpeed.AutoSize = True
         Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(16, 156)
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(16, 154)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
@@ -248,7 +256,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblSunshine.AutoSize = True
         Me.lblSunshine.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSunshine.Location = New System.Drawing.Point(16, 223)
+        Me.lblSunshine.Location = New System.Drawing.Point(16, 221)
         Me.lblSunshine.Name = "lblSunshine"
         Me.lblSunshine.Size = New System.Drawing.Size(85, 13)
         Me.lblSunshine.TabIndex = 10
@@ -258,7 +266,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrReceiverMinTemp.AutoSize = True
         Me.ucrReceiverMinTemp.frmParent = Me
-        Me.ucrReceiverMinTemp.Location = New System.Drawing.Point(16, 74)
+        Me.ucrReceiverMinTemp.Location = New System.Drawing.Point(16, 72)
         Me.ucrReceiverMinTemp.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
         Me.ucrReceiverMinTemp.Selector = Nothing
@@ -271,7 +279,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblWindSpeed.AutoSize = True
         Me.lblWindSpeed.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWindSpeed.Location = New System.Drawing.Point(16, 141)
+        Me.lblWindSpeed.Location = New System.Drawing.Point(16, 139)
         Me.lblWindSpeed.Name = "lblWindSpeed"
         Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
         Me.lblWindSpeed.TabIndex = 6
@@ -281,7 +289,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.lblWindDirection.AutoSize = True
         Me.lblWindDirection.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWindDirection.Location = New System.Drawing.Point(16, 182)
+        Me.lblWindDirection.Location = New System.Drawing.Point(16, 180)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
         Me.lblWindDirection.TabIndex = 8
@@ -460,7 +468,7 @@ Partial Class DlgDefineClimaticData
         'cmdCheckUnique
         '
         Me.cmdCheckUnique.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCheckUnique.Location = New System.Drawing.Point(9, 423)
+        Me.cmdCheckUnique.Location = New System.Drawing.Point(9, 435)
         Me.cmdCheckUnique.Name = "cmdCheckUnique"
         Me.cmdCheckUnique.Size = New System.Drawing.Size(139, 23)
         Me.cmdCheckUnique.TabIndex = 4
@@ -473,7 +481,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput.AutoSize = True
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
-        Me.ucrInputCheckInput.Location = New System.Drawing.Point(154, 425)
+        Me.ucrInputCheckInput.Location = New System.Drawing.Point(154, 437)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
         Me.ucrInputCheckInput.Size = New System.Drawing.Size(253, 21)
         Me.ucrInputCheckInput.TabIndex = 5
@@ -482,7 +490,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(13, 452)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 464)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 6
@@ -499,12 +507,58 @@ Partial Class DlgDefineClimaticData
         Me.ucrSelectorDefineClimaticData.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDefineClimaticData.TabIndex = 0
         '
+        'lblMinimumRH
+        '
+        Me.lblMinimumRH.AutoSize = True
+        Me.lblMinimumRH.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMinimumRH.Location = New System.Drawing.Point(16, 344)
+        Me.lblMinimumRH.Name = "lblMinimumRH"
+        Me.lblMinimumRH.Size = New System.Drawing.Size(87, 13)
+        Me.lblMinimumRH.TabIndex = 16
+        Me.lblMinimumRH.Text = "Minimum RH (%):"
+        '
+        'ucrReceiverMinRH
+        '
+        Me.ucrReceiverMinRH.AutoSize = True
+        Me.ucrReceiverMinRH.frmParent = Me
+        Me.ucrReceiverMinRH.Location = New System.Drawing.Point(16, 359)
+        Me.ucrReceiverMinRH.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMinRH.Name = "ucrReceiverMinRH"
+        Me.ucrReceiverMinRH.Selector = Nothing
+        Me.ucrReceiverMinRH.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMinRH.strNcFilePath = ""
+        Me.ucrReceiverMinRH.TabIndex = 17
+        Me.ucrReceiverMinRH.ucrSelector = Nothing
+        '
+        'lblMaxRH
+        '
+        Me.lblMaxRH.AutoSize = True
+        Me.lblMaxRH.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMaxRH.Location = New System.Drawing.Point(16, 383)
+        Me.lblMaxRH.Name = "lblMaxRH"
+        Me.lblMaxRH.Size = New System.Drawing.Size(90, 13)
+        Me.lblMaxRH.TabIndex = 18
+        Me.lblMaxRH.Text = "Maximum RH (%):"
+        '
+        'ucrReceiverMaxRH
+        '
+        Me.ucrReceiverMaxRH.AutoSize = True
+        Me.ucrReceiverMaxRH.frmParent = Me
+        Me.ucrReceiverMaxRH.Location = New System.Drawing.Point(16, 398)
+        Me.ucrReceiverMaxRH.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMaxRH.Name = "ucrReceiverMaxRH"
+        Me.ucrReceiverMaxRH.Selector = Nothing
+        Me.ucrReceiverMaxRH.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMaxRH.strNcFilePath = ""
+        Me.ucrReceiverMaxRH.TabIndex = 19
+        Me.ucrReceiverMaxRH.ucrSelector = Nothing
+        '
         'DlgDefineClimaticData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(464, 510)
+        Me.ClientSize = New System.Drawing.Size(464, 522)
         Me.Controls.Add(Me.ucrInputCheckInput)
         Me.Controls.Add(Me.cmdCheckUnique)
         Me.Controls.Add(Me.grpStation)
@@ -564,4 +618,8 @@ Partial Class DlgDefineClimaticData
     Friend WithEvents grpStation As GroupBox
     Friend WithEvents ucrInputCheckInput As ucrInputTextBox
     Friend WithEvents cmdCheckUnique As Button
+    Friend WithEvents ucrReceiverMinRH As ucrReceiverSingle
+    Friend WithEvents lblMinimumRH As Label
+    Friend WithEvents ucrReceiverMaxRH As ucrReceiverSingle
+    Friend WithEvents lblMaxRH As Label
 End Class
