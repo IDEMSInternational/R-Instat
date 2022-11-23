@@ -308,20 +308,20 @@ Partial Class dlgTwoVariableFitModel
         '
         'cmdPrior
         '
-        Me.cmdPrior.Location = New System.Drawing.Point(324, 209)
+        Me.cmdPrior.Location = New System.Drawing.Point(322, 209)
         Me.cmdPrior.Name = "cmdPrior"
-        Me.cmdPrior.Size = New System.Drawing.Size(106, 23)
+        Me.cmdPrior.Size = New System.Drawing.Size(105, 23)
         Me.cmdPrior.TabIndex = 119
-        Me.cmdPrior.Text = "Prior"
+        Me.cmdPrior.Text = "Hypothesis Priors"
         Me.cmdPrior.UseVisualStyleBackColor = True
         '
         'cmdEstimation
         '
-        Me.cmdEstimation.Location = New System.Drawing.Point(325, 208)
+        Me.cmdEstimation.Location = New System.Drawing.Point(322, 208)
         Me.cmdEstimation.Name = "cmdEstimation"
-        Me.cmdEstimation.Size = New System.Drawing.Size(105, 23)
+        Me.cmdEstimation.Size = New System.Drawing.Size(95, 23)
         Me.cmdEstimation.TabIndex = 120
-        Me.cmdEstimation.Text = "Estimation"
+        Me.cmdEstimation.Text = "Estimation Priors"
         Me.cmdEstimation.UseVisualStyleBackColor = True
         '
         'ucrInputCredibleLevel
@@ -549,8 +549,8 @@ Partial Class dlgTwoVariableFitModel
         Me.Controls.Add(Me.ucrInputConfidenceInterval)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.lblMethodInference)
-        Me.Controls.Add(Me.cmdEstimation)
         Me.Controls.Add(Me.cmdPrior)
+        Me.Controls.Add(Me.cmdEstimation)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
         Me.MaximizeBox = False

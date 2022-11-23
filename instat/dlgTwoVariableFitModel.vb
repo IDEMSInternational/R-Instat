@@ -1174,7 +1174,6 @@ Public Class dlgTwoVariableFitModel
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
             clsBayesIferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
         End If
-
     End Sub
 
     Private Sub ucrInputSuccess_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSuccess.ControlValueChanged

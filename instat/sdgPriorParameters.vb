@@ -56,9 +56,9 @@ Public Class sdgPriorParameters
         ucrNudPrioirNull.SetRDefault(0.5)
 
         ucrInputPriorFamily.SetParameter(New RParameter("prior", 14))
-        dctPriorFamily.Add("JSZ", Chr(34) & "JZS" & Chr(34))
-        dctPriorFamily.Add("JUI", Chr(34) & "JUI" & Chr(34))
-        dctPriorFamily.Add("NG", Chr(34) & "NG" & Chr(34))
+        dctPriorFamily.Add("Jeffreys-reference prior", Chr(34) & "JZS" & Chr(34))
+        dctPriorFamily.Add("Unit Information prior", Chr(34) & "JUI" & Chr(34))
+        dctPriorFamily.Add("Normal-Gamma prior", Chr(34) & "NG" & Chr(34))
         ucrInputPriorFamily.SetItems(dctPriorFamily)
         ucrInputPriorFamily.SetRDefault("JSZ")
         ucrInputPriorFamily.SetDropDownStyleAsNonEditable()

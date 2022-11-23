@@ -40,7 +40,7 @@ Partial Class sdgEstimationParameters
         'lblPriorFamily
         '
         Me.lblPriorFamily.AutoSize = True
-        Me.lblPriorFamily.Location = New System.Drawing.Point(72, 153)
+        Me.lblPriorFamily.Location = New System.Drawing.Point(72, 20)
         Me.lblPriorFamily.Name = "lblPriorFamily"
         Me.lblPriorFamily.Size = New System.Drawing.Size(63, 13)
         Me.lblPriorFamily.TabIndex = 103
@@ -52,16 +52,16 @@ Partial Class sdgEstimationParameters
         Me.ucrInputPriorFamily.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPriorFamily.GetSetSelectedIndex = -1
         Me.ucrInputPriorFamily.IsReadOnly = False
-        Me.ucrInputPriorFamily.Location = New System.Drawing.Point(137, 149)
+        Me.ucrInputPriorFamily.Location = New System.Drawing.Point(137, 16)
         Me.ucrInputPriorFamily.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputPriorFamily.Name = "ucrInputPriorFamily"
-        Me.ucrInputPriorFamily.Size = New System.Drawing.Size(81, 21)
+        Me.ucrInputPriorFamily.Size = New System.Drawing.Size(133, 21)
         Me.ucrInputPriorFamily.TabIndex = 102
         '
         'lblStandardDeviation
         '
         Me.lblStandardDeviation.AutoSize = True
-        Me.lblStandardDeviation.Location = New System.Drawing.Point(8, 63)
+        Me.lblStandardDeviation.Location = New System.Drawing.Point(8, 101)
         Me.lblStandardDeviation.Name = "lblStandardDeviation"
         Me.lblStandardDeviation.Size = New System.Drawing.Size(127, 13)
         Me.lblStandardDeviation.TabIndex = 99
@@ -70,7 +70,7 @@ Partial Class sdgEstimationParameters
         'lblDegreesFreedom
         '
         Me.lblDegreesFreedom.AutoSize = True
-        Me.lblDegreesFreedom.Location = New System.Drawing.Point(5, 94)
+        Me.lblDegreesFreedom.Location = New System.Drawing.Point(5, 129)
         Me.lblDegreesFreedom.Name = "lblDegreesFreedom"
         Me.lblDegreesFreedom.Size = New System.Drawing.Size(130, 13)
         Me.lblDegreesFreedom.TabIndex = 98
@@ -79,7 +79,7 @@ Partial Class sdgEstimationParameters
         'lblScalingParameter
         '
         Me.lblScalingParameter.AutoSize = True
-        Me.lblScalingParameter.Location = New System.Drawing.Point(39, 125)
+        Me.lblScalingParameter.Location = New System.Drawing.Point(39, 160)
         Me.lblScalingParameter.Name = "lblScalingParameter"
         Me.lblScalingParameter.Size = New System.Drawing.Size(96, 13)
         Me.lblScalingParameter.TabIndex = 97
@@ -88,7 +88,7 @@ Partial Class sdgEstimationParameters
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(43, 34)
+        Me.lblSampleSize.Location = New System.Drawing.Point(43, 74)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(92, 13)
         Me.lblSampleSize.TabIndex = 95
@@ -99,7 +99,7 @@ Partial Class sdgEstimationParameters
         Me.ucrNudStandardDeviation.AutoSize = True
         Me.ucrNudStandardDeviation.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStandardDeviation.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudStandardDeviation.Location = New System.Drawing.Point(137, 60)
+        Me.ucrNudStandardDeviation.Location = New System.Drawing.Point(137, 98)
         Me.ucrNudStandardDeviation.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudStandardDeviation.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStandardDeviation.Name = "ucrNudStandardDeviation"
@@ -112,7 +112,7 @@ Partial Class sdgEstimationParameters
         Me.ucrNudDegreesFreedom.AutoSize = True
         Me.ucrNudDegreesFreedom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDegreesFreedom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDegreesFreedom.Location = New System.Drawing.Point(137, 91)
+        Me.ucrNudDegreesFreedom.Location = New System.Drawing.Point(137, 126)
         Me.ucrNudDegreesFreedom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDegreesFreedom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDegreesFreedom.Name = "ucrNudDegreesFreedom"
@@ -125,7 +125,7 @@ Partial Class sdgEstimationParameters
         Me.ucrNudScaleParameter.AutoSize = True
         Me.ucrNudScaleParameter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudScaleParameter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudScaleParameter.Location = New System.Drawing.Point(137, 121)
+        Me.ucrNudScaleParameter.Location = New System.Drawing.Point(137, 156)
         Me.ucrNudScaleParameter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudScaleParameter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudScaleParameter.Name = "ucrNudScaleParameter"
@@ -138,7 +138,7 @@ Partial Class sdgEstimationParameters
         Me.ucrNudSampleSize.AutoSize = True
         Me.ucrNudSampleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSampleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSampleSize.Location = New System.Drawing.Point(137, 30)
+        Me.ucrNudSampleSize.Location = New System.Drawing.Point(137, 70)
         Me.ucrNudSampleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSampleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSampleSize.Name = "ucrNudSampleSize"
@@ -160,7 +160,7 @@ Partial Class sdgEstimationParameters
         Me.ucrInputPriorMean.AutoSize = True
         Me.ucrInputPriorMean.IsMultiline = False
         Me.ucrInputPriorMean.IsReadOnly = False
-        Me.ucrInputPriorMean.Location = New System.Drawing.Point(137, 7)
+        Me.ucrInputPriorMean.Location = New System.Drawing.Point(137, 44)
         Me.ucrInputPriorMean.Name = "ucrInputPriorMean"
         Me.ucrInputPriorMean.Size = New System.Drawing.Size(55, 21)
         Me.ucrInputPriorMean.TabIndex = 115
@@ -168,7 +168,7 @@ Partial Class sdgEstimationParameters
         'lblPriorMean
         '
         Me.lblPriorMean.AutoSize = True
-        Me.lblPriorMean.Location = New System.Drawing.Point(74, 11)
+        Me.lblPriorMean.Location = New System.Drawing.Point(74, 48)
         Me.lblPriorMean.Name = "lblPriorMean"
         Me.lblPriorMean.Size = New System.Drawing.Size(61, 13)
         Me.lblPriorMean.TabIndex = 114
@@ -179,7 +179,7 @@ Partial Class sdgEstimationParameters
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(265, 233)
+        Me.ClientSize = New System.Drawing.Size(277, 218)
         Me.Controls.Add(Me.ucrInputPriorMean)
         Me.Controls.Add(Me.lblPriorMean)
         Me.Controls.Add(Me.lblPriorFamily)
