@@ -668,6 +668,13 @@ Public Class dlgDescribeTwoVariable
                 End If
             End If
         End If
+        SwapMmtableHeaderFunctions()
+        Results()
+        EnableDisableFrequencyControls()
+        AddRemoveFrequencyParameters()
+        ChangeLocations()
+        MissingOptions()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
@@ -677,6 +684,25 @@ Public Class dlgDescribeTwoVariable
             clsRCorrelationFunction.RemoveParameterByName("use")
         End If
         AddRemoveNAParameter()
+        If Not ucrChkOmitMissing.Checked Then
+            clsRCustomSummaryFunction.RemoveParameterByName("na_type")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_max_n")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_min_n")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_max_prop")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_consecutive_n")
+        Else
+            clsRCustomSummaryFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
+        End If
+        MissingOptions()
+    End Sub
+
+    Private Sub MissingOptions()
+        If ucrChkOmitMissing.Checked AndAlso strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+            cmdMissingOptions.Enabled = True
+        Else
+            cmdMissingOptions.Enabled = False
+        End If
+
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
@@ -1139,4 +1165,14 @@ Public Class dlgDescribeTwoVariable
         sdgFormatSummaryTables.ShowDialog()
         AddFormatTableMapToAfterCode()
     End Sub
+
 End Class
+
+
+    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsRCustomSummaryFunction, clsNewConcFunction:=clsCombineFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptions.ShowDialog()
+    End Sub
+End Class
+

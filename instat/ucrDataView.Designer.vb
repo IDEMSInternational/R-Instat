@@ -142,6 +142,7 @@ Partial Class ucrDataView
         Me.lblRowBack = New System.Windows.Forms.Label()
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
+        Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -1102,4 +1103,5 @@ Partial Class ucrDataView
     Friend WithEvents mnuHelp2 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents mnuHelp3 As ToolStripMenuItem
+    Friend WithEvents ttGoToRowOrColPage As ToolTip
 End Class

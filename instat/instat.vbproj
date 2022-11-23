@@ -222,6 +222,18 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSearch.Designer.vb">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWordwrap.Designer.vb">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWordwrap.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
     <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
     <Compile Include="Interface\IDataViewGrid.vb" />
@@ -3015,6 +3027,9 @@
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSearch.resx">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -3038,6 +3053,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWordwrap.resx">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
