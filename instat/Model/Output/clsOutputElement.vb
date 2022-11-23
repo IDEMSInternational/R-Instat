@@ -102,6 +102,8 @@ Public Class clsOutputElement
         End Get
     End Property
 
+    'this does a shallow clone
+    'todo. add a deep clone implementation
     Public Function Clone() As clsOutputElement
         Return Me.MemberwiseClone
     End Function

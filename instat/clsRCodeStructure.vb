@@ -279,7 +279,7 @@ Public Class RCodeStructure
 
         If Not strTempSurv = "" Then
             strNewRObjectTypeToAssignTo = strTempSurv
-            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.Structure_label
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.StructureLabel
             'assumption is, by default a survival is in text format
             strNewRObjectFormatToAssignTo = RObjectFormat.Text
         End If

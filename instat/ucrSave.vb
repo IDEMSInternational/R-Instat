@@ -402,7 +402,7 @@ Public Class ucrSave
             Case RObjectTypeLabel.Graph,
                  RObjectTypeLabel.Table,
                  RObjectTypeLabel.Model,
-                 RObjectTypeLabel.Structure_label,
+                 RObjectTypeLabel.StructureLabel,
                  RObjectTypeLabel.Summary
                 'for objects that are shown in the output viewer. do the following
                 ucrInputComboSave.SetDefaultRObjectTypeLabel(_strRObjectLabel)
@@ -453,7 +453,7 @@ Public Class ucrSave
     ''' </summary>
     Public Sub SetSaveTypeAsSurv()
         'assumption is by default a survival is in text format
-        SetSaveType(strRObjectType:=RObjectTypeLabel.Structure_label, strRObjectFormat:=RObjectFormat.Text)
+        SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
     End Sub
     ''' <summary>   
     ''' Sets save type as table. 

@@ -746,10 +746,10 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     ''' This method executes the <paramref name="strScript"/> R script and displays the output. The
-    ''' output may be displayed as text, graph or in a web browser (see <paramref name="iCallType"/>).
+    ''' output may be displayed as text, graph or html (see <paramref name="iCallType"/>).
     ''' </summary>
     ''' <param name="strScript"> is the R script to execute.</param>
-    ''' <param name="iCallType"> defines how to display the R output.
+    ''' <param name="iCallType"> defines how to display the R output. todo deprecate this.
     ''' <list type="bullet">
     '''     <item>
     '''        <description>0 Executes <paramref name="strScript"/> and ignores the result.</description>
@@ -787,8 +787,18 @@ Public Class RLink
     ''' <paramref name="strScript"/>.</param>
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
+    ''' <param name="bAddOutputInViewer"> if true and the script produces and output, the output will be added 
+    ''' in the output viewer, if false, the output will be displayed in a different viewer.
+    ''' displays the exception message.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional bAddOutputInLog As Boolean = True, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, Optional bUpdateGrids As Boolean = True, Optional bSilent As Boolean = False)
+    Public Sub RunScript(strScript As String,
+                         Optional iCallType As Integer = 0,
+                         Optional strComment As String = "",
+                         Optional bSeparateThread As Boolean = True,
+                         Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing,
+                         Optional bUpdateGrids As Boolean = True,
+                         Optional bSilent As Boolean = False,
+                         Optional bAddOutputInViewer As Boolean = True)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strTemp As String = ""
@@ -807,8 +817,6 @@ Public Class RLink
         If Not Directory.Exists(strTempGraphsDirectory) Then
             Directory.CreateDirectory(strTempGraphsDirectory)
         End If
-
-
 
         ' if comment provided
         If strComment <> "" Then
@@ -843,7 +851,7 @@ Public Class RLink
                         'get the file path name
                         strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                         If File.Exists(strTemp) Then
-                            If bAddOutputInLog Then
+                            If bAddOutputInViewer Then
                                 clsOutputLogger.AddFileOutput(strTemp)
                             Else
                                 Dim frmMaximiseOutput As New frmMaximiseOutput
@@ -1100,15 +1108,14 @@ Public Class RLink
             clsViewObjectFunction.AddParameter(strParameterName:="object_format",
                                                strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
-            'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
-            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInLog:=False, strComment:="View last graph as Plotly", bSeparateThread:=False)
+            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInViewer:=False, strComment:="View last graph as Plotly", bSeparateThread:=False)
         ElseIf bInRViewer Then
             Dim strGlobalGraphDisplayOption As String
             'store the current set graph display option, to restore after display
             strGlobalGraphDisplayOption = Me.strGraphDisplayOption
             Me.strGraphDisplayOption = "view_R_viewer"
             clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
-            RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInLog:=False, strComment:="View last graph", bSeparateThread:=False)
+            RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
             'restore the graph display option
             Me.strGraphDisplayOption = strGlobalGraphDisplayOption
         Else
@@ -1117,7 +1124,7 @@ Public Class RLink
             clsViewObjectFunction.AddParameter(strParameterName:="object", clsRFunctionParameter:=clsLastGraph)
             clsViewObjectFunction.AddParameter(strParameterName:="object_format",
                                                strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
-            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInLog:=False, strComment:="View last graph", bSeparateThread:=False)
+            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
         End If
     End Sub
 

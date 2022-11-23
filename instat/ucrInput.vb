@@ -156,7 +156,7 @@ Public Class ucrInput
                 Case RObjectTypeLabel.Graph,
                      RObjectTypeLabel.Table,
                      RObjectTypeLabel.Model,
-                     RObjectTypeLabel.Structure_label,
+                     RObjectTypeLabel.StructureLabel,
                      RObjectTypeLabel.Summary
                     'for objects that are shown in the output viewer. do the following
                     If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.strCurrDataFrame <> "" Then
