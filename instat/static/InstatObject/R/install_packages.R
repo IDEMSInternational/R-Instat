@@ -134,7 +134,7 @@ pkgs <-
     "dslabs",
     # For inspect, read, edit and run files for 'APSIM'
     "apsimx"
-  )
+ )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")

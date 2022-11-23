@@ -5,8 +5,9 @@ Imports instat.Translations
 
 Public Class dlgImportDataset
 
-    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As New RFunction
+    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport, clsImportfromJSON As New RFunction
     Private clsGetExcelSheetNames As New RFunction
+    Private clsJsonDataFrameFunction As New RFunction
     Private clsRangeOperator As New ROperator
     ''' <summary>   
     ''' Ensures that any file paths containing special characters (e.g. accents) are 
@@ -295,6 +296,8 @@ Public Class dlgImportDataset
         clsImportExcel = New RFunction
         clsImport = New RFunction
         clsReadRDS = New RFunction
+        clsImportfromJSON = New RFunction
+        clsJsonDataFrameFunction = New RFunction
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
@@ -329,6 +332,12 @@ Public Class dlgImportDataset
 
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.SetAssignTo("new_RDS")
+
+        clsImportfromJSON.SetPackageName("jsonlite")
+        clsImportfromJSON.SetRCommand("fromJSON")
+
+        clsJsonDataFrameFunction.SetRCommand("as.data.frame")
+        clsJsonDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsImportfromJSON, iPosition:=0)
 
         'This R command ensures that any file paths containing special characters (e.g. accents) 
         'are correctly encoded
@@ -465,6 +474,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=6)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=7)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsFileNamesWithExt, New RParameter("path", 0), iAdditionalPairNo:=8)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportfromJSON, New RParameter("txt", 0), iAdditionalPairNo:=9)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
         'Save control
@@ -475,6 +485,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
         ucrSaveFile.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=7)
+        ucrSaveFile.AddAdditionalRCode(clsJsonDataFrameFunction, iAdditionalPairNo:=8)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'todo. commented temporarily until we are able to add an OR condition for the panel
@@ -671,6 +682,8 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(If(clbSheets.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
                 ExcelSheetsPreviewVisible(True)
                 FillExcelSheets()
+            ElseIf IsJSONFileFormat() Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsJsonDataFrameFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
             End If
@@ -772,7 +785,7 @@ Public Class dlgImportDataset
         bCanImport = False
 
         'grid preview is only supported for a few file formats. It is also not supported for folders
-        If bImportFromFolder OrElse Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat()) Then
+        If bImportFromFolder OrElse Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat() OrElse IsJSONFileFormat()) Then
             lblNoPreview.Show()
             bCanImport = True 'assume its true if preview is not supported for the file
             Exit Sub
@@ -782,6 +795,8 @@ Public Class dlgImportDataset
         If IsTextFileFormat() Then
             strRowMaxParamName = If(rdoSeparatortext.Checked, "nrows", "n_max")
         ElseIf IsCSVFileFormat() Then
+            strRowMaxParamName = "nrows"
+        ElseIf IsJSONFileFormat() Then
             strRowMaxParamName = "nrows"
         ElseIf IsExcelFileFormat() Then
             If dctSelectedExcelSheets.Count = 0 Then
@@ -1196,6 +1211,10 @@ Public Class dlgImportDataset
 
     Private Function IsExcelFileFormat() As Boolean
         Return {".xlsx", ".xls"}.Contains(strFileExtension)
+    End Function
+
+    Private Function IsJSONFileFormat() As Boolean
+        Return {".json"}.Contains(strFileExtension)
     End Function
 
     Private Sub RemoveMissingValues()

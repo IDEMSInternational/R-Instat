@@ -2270,7 +2270,6 @@
   "Save Calculation and Result": "Guardar cálculo y resultado",
   "Save Column Position": "Guardar posición de columna",
   "Save Data As": "Guardar datos como",
-  "Save Data To:": "Guardar datos en:",
   "Save Date:": "Guarde la fecha:",
   "Save Details": "Guardar detalles",
   "Save Downloaded File To:": "Guardar el archivo descargado en:",
@@ -2315,6 +2314,7 @@
   "Scaled Fractions": "fracciones escaladas",
   "Scaled Points": "Puntos escalados",
   "Scales": "Escamas",
+  "Scale/Distance": "Scale/Distance",
   "Scatter Matrix": "Matriz de dispersión",
   "Scatter Plot": "Gráfico de dispersión",
   "Scatter Plot Options": "Opciones de diagrama de dispersión",
@@ -3707,6 +3707,7 @@
   "Variable Name": "Variable Name",
   "Variable Label": "Variable Label",
   "Levels": "Levels",
-  "Category": "Category",
-  "Show Command": "Show Command"
+  "Category:": "Category:",
+  "Show Command": "Show Command",
+  "Lists:": "Lists:"
 }

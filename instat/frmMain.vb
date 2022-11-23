@@ -2478,4 +2478,8 @@ Public Class frmMain
     Private Sub mnuEditWordwrap_Click(sender As Object, e As EventArgs) Handles mnuEditWordwrap.Click
         dlgWordwrap.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
+        dlgSearch.ShowDialog()
+    End Sub
 End Class
