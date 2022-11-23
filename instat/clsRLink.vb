@@ -841,9 +841,10 @@ Public Class RLink
         Try
 
             'get the last R script command
-            Dim strLastScript As String = GetRunnableCommandLines(strScript).Last
-            If strLastScript.Contains("get_object") OrElse strLastScript.Contains("view_object") Then 'if output should be returned as a file
+            Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
+            If strLastScript IsNot Nothing AndAlso strLastScript.Contains("get_object") Then
                 Try
+                    'if object output should be returned as a file do the following. 
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
                     Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     expTemp = GetSymbol(strTempAssignTo)
