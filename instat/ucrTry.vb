@@ -98,8 +98,9 @@ Public Class ucrTry
                     Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
                     Dim strBeforeAfterScript As String = ""
                     Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
-                    'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
-                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                    'Sometimes the output of the R-command we deal with should not be part of the script...
+                    'That's only the case when this output has already been assigned.
+                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.IsAssigned() Then
                         lstScripts.Add(strBeforeAfterScript)
                     Else
                         lstScripts.Add(strBeforeAfterScript & strBeforeAfterTemp)
@@ -184,8 +185,8 @@ Public Class ucrTry
                 Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
                 Dim strBeforeAfterScript As String = ""
                 Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
-                'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
-                If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                'Sometimes the output of the R-command we deal with should not be part of the script... 
+                If clsCodeClone.bExcludeAssignedFunctionOutput Then
                     lstScripts.Add(strBeforeAfterScript)
                 Else
                     lstScripts.Add(strBeforeAfterScript & strBeforeAfterTemp)

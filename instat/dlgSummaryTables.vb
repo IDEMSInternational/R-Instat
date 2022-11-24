@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 Imports instat.Translations
 Public Class dlgSummaryTables
@@ -180,7 +181,7 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
         ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
@@ -385,7 +386,13 @@ Public Class dlgSummaryTables
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-        clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
+
+        clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
+
         bResetSubdialog = True
     End Sub
 
@@ -629,24 +636,5 @@ Public Class dlgSummaryTables
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If
-    End Sub
-
-    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
-        cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
-        If Not ucrChkOmitMissing.Checked Then
-            clsSummaryDefaultFunction.RemoveParameterByName("na_type")
-            clsSummaryDefaultFunction.RemoveParameterByName("na_max_n")
-            clsSummaryDefaultFunction.RemoveParameterByName("na_min_n")
-            clsSummaryDefaultFunction.RemoveParameterByName("na_max_prop")
-            clsSummaryDefaultFunction.RemoveParameterByName("na_consecutive_n")
-        Else
-            clsSummaryDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
-        End If
-    End Sub
-
-    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
-        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsSummaryDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
-        bResetSubdialog = False
-        sdgMissingOptions.ShowDialog()
     End Sub
 End Class

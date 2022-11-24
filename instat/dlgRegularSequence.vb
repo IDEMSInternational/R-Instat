@@ -179,7 +179,10 @@ Public Class dlgRegularSequence
         clsRepFunction.AddParameter("each", 1, iPosition:=2)
         clsRepFunction.AddParameter("length.out", ucrDataFrameLength.GetDataFrameLength, iPosition:=3)
 
-        clsRepFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText, bAssignToIsPrefix:=True)
+        clsRepFunction.SetAssignToColumnObject(strColToAssignTo:=ucrNewColumnName.GetText,
+                                               strColName:=ucrNewColumnName.GetText,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectDataFrameRegularSequence.strCurrDataFrame,
+                                               bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
 
     End Sub
@@ -248,8 +251,6 @@ Public Class dlgRegularSequence
 
             'clone the "rep" command base function
             clsNewRepClone = clsRepFunction.Clone()
-            clsNewRepClone.bToBeAssigned = False
-            clsNewRepClone.bIsAssigned = False
 
             'set up "as.character" command to be usde for testing
             clsAsCharacter.SetRCommand("as.character")
