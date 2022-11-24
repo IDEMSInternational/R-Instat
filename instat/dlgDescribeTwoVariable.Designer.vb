@@ -246,7 +246,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoThreeVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoThreeVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoThreeVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoThreeVariable.Location = New System.Drawing.Point(235, 9)
+        Me.rdoThreeVariable.Location = New System.Drawing.Point(235, 8)
         Me.rdoThreeVariable.Name = "rdoThreeVariable"
         Me.rdoThreeVariable.Size = New System.Drawing.Size(100, 28)
         Me.rdoThreeVariable.TabIndex = 26
@@ -268,7 +268,7 @@ Partial Class dlgDescribeTwoVariable
         'cmdFormatTable
         '
         Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFormatTable.Location = New System.Drawing.Point(265, 404)
+        Me.cmdFormatTable.Location = New System.Drawing.Point(272, 407)
         Me.cmdFormatTable.Name = "cmdFormatTable"
         Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
         Me.cmdFormatTable.TabIndex = 44
@@ -302,7 +302,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(1, 432)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 435)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 43
@@ -349,7 +349,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrPnlDescribe
         '
         Me.ucrPnlDescribe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlDescribe.Location = New System.Drawing.Point(32, 6)
+        Me.ucrPnlDescribe.Location = New System.Drawing.Point(39, 3)
         Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
         Me.ucrPnlDescribe.Size = New System.Drawing.Size(317, 34)
         Me.ucrPnlDescribe.TabIndex = 22
@@ -566,7 +566,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(42, 9)
+        Me.rdoSkim.Location = New System.Drawing.Point(42, 8)
         Me.rdoSkim.Name = "rdoSkim"
         Me.rdoSkim.Size = New System.Drawing.Size(100, 28)
         Me.rdoSkim.TabIndex = 23
@@ -615,7 +615,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoTwoVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTwoVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTwoVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoTwoVariable.Location = New System.Drawing.Point(137, 9)
+        Me.rdoTwoVariable.Location = New System.Drawing.Point(137, 8)
         Me.rdoTwoVariable.Name = "rdoTwoVariable"
         Me.rdoTwoVariable.Size = New System.Drawing.Size(100, 28)
         Me.rdoTwoVariable.TabIndex = 24
