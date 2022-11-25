@@ -93,11 +93,7 @@ Public Class dlgApsimx
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrInputSaveData.GetText <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(ucrInputSaveData.GetText <> "")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -116,14 +112,12 @@ Public Class dlgApsimx
         clsApsimxExampleFunction.SetAssignTo(strDataName)
         clsDataListFunction.ClearParameters()
         ucrBase.clsRsyntax.ClearCodes()
-        If ucrInputComboList.GetText = "Wheat" OrElse ucrInputComboList.GetText = "Barley" OrElse ucrInputComboList.GetText = "Controlled Environment" OrElse ucrInputComboList.GetText = "Sugarcane" OrElse ucrInputComboList.GetText = "Eucalyptus" OrElse ucrInputComboList.GetText = "Eucalyptus Rotation" OrElse ucrInputComboList.GetText = "Maize" OrElse ucrInputComboList.GetText = "Oats" OrElse ucrInputComboList.GetText = "Soybean" Then
-            clsDataListFunction.AddParameter(ucrInputSaveData.GetText, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsReportOperator)
-        ElseIf ucrInputComboList.GetText = "Rotation" Then
+        If ucrInputComboList.GetText = "Rotation" Then
             clsDataListFunction.AddParameter(strDataName, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsApsimxExampleFunction, 0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsReportOperator, 1)
+        Else
+            clsDataListFunction.AddParameter(ucrInputSaveData.GetText, clsRFunctionParameter:=clsApsimxExampleFunction, iPosition:=0)
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
