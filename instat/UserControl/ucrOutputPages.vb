@@ -30,6 +30,8 @@ Public Class ucrOutputPages
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+        ucrMainOutputPage.clsInstatOptions = _clsInstatOptions
         _selectedOutputPage = ucrMainOutputPage
         _allOutputPages = New List(Of ucrOutputPage)
         EnableDisableTopButtons()
@@ -42,6 +44,7 @@ Public Class ucrOutputPages
     Public WriteOnly Property clsInstatOptions() As InstatOptions
         Set(value As InstatOptions)
             _clsInstatOptions = value
+            '_selectedOutputPage.clsInstatOptions = value
         End Set
     End Property
 
@@ -99,7 +102,8 @@ Public Class ucrOutputPages
             .Tag = tabName,
             .BCanReOrder = True,
             .BCanDelete = True,
-            .BCanRename = True
+            .BCanRename = True,
+            .clsInstatOptions = _clsInstatOptions
         }
         tabPage.Controls.Add(outputPage)
         tabControl.TabPages.Add(tabPage)
