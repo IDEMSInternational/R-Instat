@@ -420,15 +420,16 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrReceiverFrequency.ControlValueChanged, ucrSelectorStack.ControlValueChanged
-        If ucrReceiverExpand.lstSelectedVariables.Items.Count > 0 Then
-            Dim lstVariables As List(Of String) = ucrReceiverExpand.GetVariableNamesAsList()
+        If ucrReceiverExpand.lstSelectedVariables.Items.Count <= 0 Then
+            Exit Sub
+        End If
+        Dim lstVariables As List(Of String) = ucrReceiverExpand.GetVariableNamesAsList()
             Dim strVarFrequency As String = ucrReceiverFrequency.GetVariableNames(False)
             If Not ucrReceiverFrequency.IsEmpty AndAlso Not lstVariables.Contains(strVarFrequency) Then
                 lstVariables.Add(strVarFrequency)
             End If
 
             clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
-            clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
-        End If
+        clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
     End Sub
 End Class
