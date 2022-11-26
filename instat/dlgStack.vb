@@ -306,11 +306,9 @@ Public Class dlgStack
                 ucrBase.OKEnabled(True)
             End If
         Else
-            If ucrReceiverExpand.IsEmpty OrElse ucrReceiverFrequency.IsEmpty OrElse Not ucrSaveNewDataName.IsComplete Then
-                ucrBase.OKEnabled(False)
-            Else
-                ucrBase.OKEnabled(True)
-            End If
+            ucrBase.OKEnabled(Not ucrReceiverExpand.IsEmpty _
+                              AndAlso Not ucrReceiverFrequency.IsEmpty _
+                              AndAlso ucrSaveNewDataName.IsComplete)
         End If
 
     End Sub
