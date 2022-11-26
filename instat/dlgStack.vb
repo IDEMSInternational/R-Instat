@@ -422,7 +422,7 @@ Public Class dlgStack
     Private Sub ucrReceiverExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpand.ControlValueChanged, ucrReceiverFrequency.ControlValueChanged, ucrSelectorStack.ControlValueChanged
         Dim lstVariables As New List(Of String)
         If ucrReceiverExpand.lstSelectedVariables.Items.Count > 0 Then
-            lstVariables = ucrReceiverExpand.GetVariableNamesAsList()
+            Dim lstVariables As List(Of String) = ucrReceiverExpand.GetVariableNamesAsList()
             Dim strVarFrequency As String = ucrReceiverFrequency.GetVariableNames(False)
             If Not ucrReceiverFrequency.IsEmpty AndAlso Not lstVariables.Contains(strVarFrequency) Then
                 lstVariables.Add(strVarFrequency)
