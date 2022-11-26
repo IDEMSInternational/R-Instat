@@ -612,7 +612,7 @@ Public Class ucrFactor
     End Function
 
     Private Function GetColumnIndex(grdSheet As unvell.ReoGrid.Worksheet, strColName As String) As Integer
-        If _grdSheet IsNot Nothing Then
+        If grdSheet IsNot Nothing Then
             For i As Integer = 0 To grdSheet.Columns - 1
                 If grdSheet.ColumnHeaders(i).Text = strColName Then
                     Return i
