@@ -53,7 +53,7 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
                                                data_tables_column_selections = rep(list(list()),length(data_tables)),
                                                imported_from = as.list(rep("",length(data_tables))), 
                                                data_names = NULL,
-                                               messages=TRUE, convert=TRUE, create=TRUE,
+                                               messages=TRUE, convert=TRUE, create=TRUE, prefix=TRUE,
                                                add_to_graph_book = TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
@@ -92,9 +92,11 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
     for ( i in (1:length(data_tables)) ) {
       curr_name <- names(data_tables)[[i]]
       if(is.null(curr_name) && !is.null(data_names)) curr_name <- data_names[i]
-      if(tolower(curr_name) %in% tolower(names(private$.data_sheets))) {
-        warning("Cannot have data frames with the same name only differing by case. Data frame will be renamed.")
-        curr_name <- next_default_item(tolower(curr_name), tolower(names(private$.data_sheets)))
+      if (prefix){
+        if(tolower(curr_name) %in% tolower(names(private$.data_sheets))) {
+          warning("Cannot have data frames with the same name only differing by case. Data frame will be renamed.")
+          curr_name <- next_default_item(tolower(curr_name), tolower(names(private$.data_sheets)))
+        } 
       }
       
       new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,

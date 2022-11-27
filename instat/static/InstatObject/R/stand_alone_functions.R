@@ -1254,30 +1254,33 @@ create_av_packs <- function() {
 
 package_check <- function(package) {
   out <- c()
-  if(!exists("av_packs")) {
-    create_av_packs()
-  }
-  if(package %in% rownames(installed.packages())) {
-    out[[1]] <- "1"
-    v_machine <- as.character(packageVersion(package))
-    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
-    out[[2]] <- compareVersion(v_machine, v_web)
-    out[[3]] <- v_machine
-    out[[4]] <- v_web
-    return(out)
-  }
-  else {
-    #check if the package name is typed right
-    if(package %in% av_packs$Package) {
-      out[[1]] <- "2"
-      return(out)
+  if  (!pingr::is_online())  out[[1]] <- "5" 
+  else{
+    if(!exists("av_packs")) {
+      create_av_packs()
     }
-    else {
-      #wrong  spelling check you spelling
-      out[[1]] <- "0"
-      return(out)
+    #CHECK the Package is a CRAN package	
+    if (package %in% av_packs$Package){
+      #PACKAGE IS INSTALLED 
+      if (package %in% rownames(installed.packages())){
+        out[[1]] <- "1"
+        v_machine <- as.character(packageVersion(package))
+        v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+        out[[2]] <- compareVersion(v_machine, v_web)
+        out[[3]] <- v_machine
+        out[[4]] <- v_web			
+      }
+      else  out[[1]] <- "2"	
     }
+    else{
+      #PACKAGE IS INSTALLED BUT NOT IN THE CRAN REPO
+      if (package %in% rownames(installed.packages())) out[[1]] <- "3"			
+      #PACKAGE IS NOT INSTALLED AND NOT IN THE CRAN REPO
+      else out[[1]] <- "4"	
+    }
+    
   }
+  return(out)
 }
               
 in_top_n <- function(x, n = 10, wt, fun = sum) {
