@@ -74,6 +74,7 @@ Public Class frmMaximiseOutput
     End Sub
 
     Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
+        'copies displayed file to the destination folder selected by user
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Output"
             dlgSaveFile.Filter = _strFileFilter
@@ -83,15 +84,25 @@ Public Class frmMaximiseOutput
 
                 _strFileDestinationDirectory = Path.GetDirectoryName(dlgSaveFile.FileName)
 
-                'for htmls copy the html file with it's associated directory; css, javascript files etc
                 If Path.GetExtension(_strDisplayedFileName).ToLower = ".html" Then
-                    For Each foundDirectory As String In My.Computer.FileSystem.GetDirectories(
+                    'for html copy the html file associated directories, css, javascript files etc
+                    For Each strFoundDirectory As String In My.Computer.FileSystem.GetDirectories(
                                                            Path.GetDirectoryName(_strDisplayedFileName),
                                                            FileIO.SearchOption.SearchTopLevelOnly,
                                                            "*" & Path.GetFileNameWithoutExtension(_strDisplayedFileName) & "*")
-                        My.Computer.FileSystem.CopyDirectory(foundDirectory, _strFileDestinationDirectory, True)
+
+                        'create the destination folder first
+                        Dim destDir As String = Path.Combine(_strFileDestinationDirectory,
+                                                             Path.GetFileName(strFoundDirectory))
+                        If Not Directory.Exists(destDir) Then
+                            Directory.CreateDirectory(destDir)
+                        End If
+                        My.Computer.FileSystem.CopyDirectory(strFoundDirectory, destDir, True)
                     Next
+                    'then copy the html file
+                    My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
                 Else
+                    'for other files like text, images, just copy the file
                     My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
                 End If
             End If
