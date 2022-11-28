@@ -131,7 +131,10 @@ pkgs <-
     "statip",
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
     "corrr",
-    "dslabs"
+    "dslabs",
+    "coin",
+    "pingr",
+    "vcdExtra"
   )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"

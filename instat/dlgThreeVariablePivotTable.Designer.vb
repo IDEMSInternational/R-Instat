@@ -18,7 +18,7 @@ Partial Class dlgThreeVariablePivotTable
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
@@ -147,7 +147,7 @@ Partial Class dlgThreeVariablePivotTable
         'ucrSavePivot
         '
         Me.ucrSavePivot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSavePivot.Location = New System.Drawing.Point(9, 366)
+        Me.ucrSavePivot.Location = New System.Drawing.Point(9, 389)
         Me.ucrSavePivot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePivot.Name = "ucrSavePivot"
         Me.ucrSavePivot.Size = New System.Drawing.Size(382, 23)
@@ -201,7 +201,7 @@ Partial Class dlgThreeVariablePivotTable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 397)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 420)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 51
@@ -247,7 +247,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(417, 456)
+        Me.ClientSize = New System.Drawing.Size(417, 481)
         Me.Controls.Add(Me.lblFactorLevels)
         Me.Controls.Add(Me.ucrReceiverFactorLevels)
         Me.Controls.Add(Me.ucrChkNumericVariable)

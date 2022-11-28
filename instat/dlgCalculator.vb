@@ -172,7 +172,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.37
                 ucrBase.iHelpTopicID = 130
             Case "Transform"
-                Me.Width = iBasicWidth * 1.37
+                Me.Width = iBasicWidth * 1.48
                 ucrBase.iHelpTopicID = 166
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
@@ -188,7 +188,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.27
                 ucrBase.iHelpTopicID = 598
             Case "Integer"
-                Me.Width = iBasicWidth * 1.38
+                Me.Width = iBasicWidth * 1.5
             Case Else
                 Me.Width = iBasicWidth
         End Select

@@ -192,6 +192,10 @@ Public Class dlgColumnStats
         End If
         If Not ucrChkOmitMissing.Checked Then
             clsDefaultFunction.RemoveParameterByName("na_type")
+            clsDefaultFunction.RemoveParameterByName("na_max_n")
+            clsDefaultFunction.RemoveParameterByName("na_min_n")
+            clsDefaultFunction.RemoveParameterByName("na_max_prop")
+            clsDefaultFunction.RemoveParameterByName("na_consecutive_n")
         Else
             clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
         End If

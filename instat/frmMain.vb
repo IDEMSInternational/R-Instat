@@ -21,6 +21,7 @@ Imports System.Threading
 Imports instat.Translations
 Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.InteropServices
 
 Public Class frmMain
     Public clsRLink As RLink
@@ -82,6 +83,13 @@ Public Class frmMain
         ' Add any initialization after the InitializeComponent() call.
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            If Not CefRuntimeWrapper.InitialiseCefRuntime() Then
+                MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Html content will be shown in your default browser.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        End If
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -380,14 +388,6 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
         End Try
-    End Sub
-
-    Public Sub AddGraphForm(strFilePath As String)
-        Dim frmNewGraph As New frmGraphDisplay
-
-        frmNewGraph.SetImageFromFile(strFilePath)
-        frmNewGraph.Show()
-        frmNewGraph.BringToFront()
     End Sub
 
     Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
@@ -894,8 +894,12 @@ Public Class frmMain
                     DeleteAutoSaveData()
                     DeleteAutoSaveLog()
                     DeleteAutoSaveDebugLog()
+                    clsRLink.CloseREngine()
                 End If
-                clsRLink.CloseREngine()
+
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+                    CefRuntimeWrapper.ShutDownCef()
+                End If
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
@@ -2067,12 +2071,6 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
-    End Sub
-
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
@@ -2109,7 +2107,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuViewer_Click(sender As Object, e As EventArgs) Handles mnuViewer.Click
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuNormalViewer.Click
         Me.Enabled = False
         clsRLink.ViewLastGraph()
         Me.Enabled = True
@@ -2118,6 +2116,12 @@ Public Class frmMain
     Private Sub Mnuploty_Click(sender As Object, e As EventArgs) Handles mnuploty.Click
         Me.Enabled = False
         clsRLink.ViewLastGraph(bAsPlotly:=True)
+        Me.Enabled = True
+    End Sub
+
+    Private Sub MnuRViewer_Click(sender As Object, e As EventArgs) Handles mnuRViewer.Click
+        Me.Enabled = False
+        clsRLink.ViewLastGraph(bInRViewer:=True)
         Me.Enabled = True
     End Sub
 
@@ -2477,5 +2481,9 @@ Public Class frmMain
 
     Private Sub mnuEditWordwrap_Click(sender As Object, e As EventArgs) Handles mnuEditWordwrap.Click
         dlgWordwrap.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
+        dlgSearch.ShowDialog()
     End Sub
 End Class
