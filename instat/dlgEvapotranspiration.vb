@@ -85,11 +85,13 @@ Public Class dlgEvapotranspiration
 
         ucrReceiverHumidityMax.SetParameter(New RParameter("RHmax", 4))
         ucrReceiverHumidityMax.SetParameterIsRFunction()
-        'ucrReceiverHumidityMax.bAutoFill = True
+        ucrReceiverHumidityMax.SetClimaticType("hum_max")
+        ucrReceiverHumidityMax.bAutoFill = True
 
         ucrReceiverHumidityMin.SetParameter(New RParameter("RHmin", 5))
         ucrReceiverHumidityMin.SetParameterIsRFunction()
-        'ucrReceiverHumidityMin.bAutoFill = True
+        ucrReceiverHumidityMin.SetClimaticType("hum_min")
+        ucrReceiverHumidityMin.bAutoFill = True
 
         ucrReceiverWindSpeed.SetParameter(New RParameter("u2", 7))
         ucrReceiverWindSpeed.SetParameterIsRFunction()
