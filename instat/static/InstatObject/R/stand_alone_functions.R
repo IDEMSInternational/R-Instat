@@ -23,8 +23,11 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         #which are recognised oddly by the R.Net
         out[, i] <- as.character(data[[i]])
       } else {
-        out[, i] <-
-          format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
+        temp_data <- c()
+        for(val in data[[i]]){
+          temp_data <- append(temp_data, format(val, digits = decimal_places[i], scientific = is_scientific[i]))
+        }
+        out[, i] <- temp_data
       }
       if (!is.null(na_display)) {
         out[is.na(data[[i]]), i] <- na_display
@@ -1251,30 +1254,33 @@ create_av_packs <- function() {
 
 package_check <- function(package) {
   out <- c()
-  if(!exists("av_packs")) {
-    create_av_packs()
-  }
-  if(package %in% rownames(installed.packages())) {
-    out[[1]] <- "1"
-    v_machine <- as.character(packageVersion(package))
-    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
-    out[[2]] <- compareVersion(v_machine, v_web)
-    out[[3]] <- v_machine
-    out[[4]] <- v_web
-    return(out)
-  }
-  else {
-    #check if the package name is typed right
-    if(package %in% av_packs$Package) {
-      out[[1]] <- "2"
-      return(out)
+  if  (!pingr::is_online())  out[[1]] <- "5" 
+  else{
+    if(!exists("av_packs")) {
+      create_av_packs()
     }
-    else {
-      #wrong  spelling check you spelling
-      out[[1]] <- "0"
-      return(out)
+    #CHECK the Package is a CRAN package	
+    if (package %in% av_packs$Package){
+      #PACKAGE IS INSTALLED 
+      if (package %in% rownames(installed.packages())){
+        out[[1]] <- "1"
+        v_machine <- as.character(packageVersion(package))
+        v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+        out[[2]] <- compareVersion(v_machine, v_web)
+        out[[3]] <- v_machine
+        out[[4]] <- v_web			
+      }
+      else  out[[1]] <- "2"	
     }
+    else{
+      #PACKAGE IS INSTALLED BUT NOT IN THE CRAN REPO
+      if (package %in% rownames(installed.packages())) out[[1]] <- "3"			
+      #PACKAGE IS NOT INSTALLED AND NOT IN THE CRAN REPO
+      else out[[1]] <- "4"	
+    }
+    
   }
+  return(out)
 }
               
 in_top_n <- function(x, n = 10, wt, fun = sum) {
@@ -2548,6 +2554,7 @@ is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
 
+
 read_corpora <- function(data){
   data_all <- NULL
   description <- NULL
@@ -2597,6 +2604,7 @@ read_corpora <- function(data){
   return (data.frame(data_all))
 }
 
+
 # Bind two data frames
 # and remove any duplicates from data frame x that are in data frame y
 # x = our data to remove duplicates from
@@ -2606,3 +2614,139 @@ cbind_unique <- function(x, y, cols){
   x <- x %>% dplyr::select(c(setdiff(names(x), cols)))
   x <- dplyr::bind_cols(x = x, y = dplyr::select(y, tidyselect::all_of(cols)))
 }
+
+#object is the object to be displayed
+#object_format is the display format
+view_object <- function(object, object_format) {
+  file_name <- ""
+  if (identical(object_format, "image")) {
+    file_name <- view_graph_object(object)
+  } else if (identical(object_format, "text")) {
+    file_name <- view_text_object(object)
+  } else if (identical(object_format, "html")) {
+    file_name <- view_html_object(object)
+  }else{
+    print(object)
+  }
+  return(file_name)
+}
+
+#displays the graph object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_graph_object <- function(graph_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- base::getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #TODO. When print command is called in R-Studio, a temp file is automatically created
+    #Investigate how that can be done in R-Instat
+    #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    return(graph_object)
+  }
+  
+  #get object class names
+  object_class_names <- class(graph_object)
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewgraph", fileext = ".png")
+  
+  #save the object as a html file depending on the object type
+  grDevices::png(file = file_name, width = 4000, height = 4000, res = 500)
+  print(graph_object)
+  dev.off() #todo. use graphics.off() which one is better?
+  
+  #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
+  #investigate if thatwill that help with resolution and scaling?
+  
+  # if ("ggplot" %in% object_class_names) {
+  #   
+  # } else if ("ggmultiplot" %in% object_class_names) {
+  #   
+  # } else if ("openair" %in% object_class_names) {
+  #   
+  # } else if ("ggsurvplot" %in% object_class_names) {
+  #   
+  # } else if ("recordedplot" %in% object_class_names) {
+  #   
+  # }
+  
+  message("R viewer not detected. File saved in location ", file_name)
+  return(file_name)
+  
+}
+
+#displays the object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_text_object <- function(text_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- base::getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #TODO. When print command is called in R-Studio, a temp file is
+    #automatically created. Investigate how that can be done in R-Instat
+    #as of 07/09/2022 just return output. Important for RStudio to display the object
+    return(utils::capture.output(text_object))
+  }
+  
+  #get object class names
+  object_class_names <- class(text_object)
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewtext", fileext = ".txt")
+  
+  #todo. should we use respective package "convenience" functions to save the objects as text files depending on the class names
+  
+  #save the object as a text file 
+  utils::capture.output(text_object, file = file_name)
+  
+  message("R viewer not detected. File saved in location ", file_name)
+  return(file_name)
+  
+}
+
+#displays the html object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_html_object <- function(html_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- base::getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #When print command is called in R-Studio, a temp file is
+    #automatically created. TODO. Investigate how that can be done in R-Instat. 
+    #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    return(html_object)
+  }
+  
+  
+  file_name <- ""
+  #get a vector of available class names
+  object_class_names <- class(html_object)
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
+  
+  #save the object as a html file depending on the object type
+  if ("htmlwidget" %in% object_class_names) {
+    #Note. When selfcontained is set to True 
+    #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
+    #when saving an rpivotTable 
+    #TODO. Investigate how to solve it then. 
+    htmlwidgets::saveWidget(html_object, file = file_name, selfcontained = FALSE)
+  } else if ("sjTable" %in% object_class_names) {
+    #"sjTable" objects are not compatible with "htmlwidgets" package. So they have to be saved differently
+    #"sjplot" package produces "sjTable" objects 
+    html_object$file = file_name
+    #TODO. Is there any other function that can save an sjTable to a html file?
+    print(html_object)
+  } else if ("gt_tbl" %in% object_class_names) {
+    #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
+    #"mmtable2" package produces "gt_tbl" objects 
+    gt::gtsave(html_object,filename = file_name)
+  }
+  
+  message("R viewer not detected. File saved in location ", file_name)
+  return(file_name)
+} 

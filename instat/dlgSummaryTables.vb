@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 Imports instat.Translations
 Public Class dlgSummaryTables
@@ -90,6 +91,7 @@ Public Class dlgSummaryTables
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+        ucrChkOmitMissing.SetLinkedDisplayControl(cmdMissingOptions)
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 6))
         ucrChkDisplayMargins.SetText("Display Outer Margins")
@@ -179,7 +181,7 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
         ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
@@ -384,7 +386,13 @@ Public Class dlgSummaryTables
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-        clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
+
+        clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
+
         bResetSubdialog = True
     End Sub
 

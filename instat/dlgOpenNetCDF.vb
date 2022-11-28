@@ -252,7 +252,6 @@ Public Class dlgOpenNetCDF
                 If strFiles.Count > 0 Then
                     CheckCloseFile()
                     clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFiles(0), "\", "/") & Chr(34))
-                    clsNcOpenFunction.bToBeAssigned = True
                     clsNcOpenFunction.ToScript(strTemp)
                     frmMain.clsRLink.RunScript(strTemp, strComment:="Opening connection to first NetCDF file", bUpdateGrids:=False)
                     bCloseFile = True

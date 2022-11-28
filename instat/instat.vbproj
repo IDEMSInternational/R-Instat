@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -111,10 +114,22 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.104.4.240\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.104.4.240\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.WinForms.104.4.240\lib\net452\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
@@ -220,6 +235,20 @@
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enum\RObjectFormat.vb" />
+    <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmMaximiseOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSearch.Designer.vb">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWordwrap.Designer.vb">
@@ -1275,12 +1304,6 @@
       <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGraphDisplay.Designer.vb">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmGraphDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
@@ -2568,12 +2591,6 @@
     <Compile Include="frmMetaData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScript.Designer.vb">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmScript.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmVariables.designer.vb">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </Compile>
@@ -2776,12 +2793,6 @@
     <Compile Include="ucrSave.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSaveModel.Designer.vb">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveModel.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrScript.Designer.vb">
       <DependentUpon>ucrScript.vb</DependentUpon>
     </Compile>
@@ -2899,6 +2910,13 @@
     </Compile>
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucrTextViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\Webview\Windows\CefRuntimeWrapper.vb" />
+    <Compile Include="UserControls\Webview\Windows\ucrWebViewer.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
@@ -3021,6 +3039,9 @@
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSearch.resx">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -3053,6 +3074,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
@@ -4069,12 +4094,6 @@
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.sw-KE.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPackageIssues.resx">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
@@ -4768,12 +4787,6 @@
     <EmbeddedResource Include="frmMetaData.sw-KE.resx">
       <DependentUpon>frmMetaData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.sw-KE.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmVariables.resx">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </EmbeddedResource>
@@ -5112,12 +5125,6 @@
     <EmbeddedResource Include="ucrSave.sw-KE.resx">
       <DependentUpon>ucrSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrScript.resx">
       <DependentUpon>ucrScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -5189,6 +5196,7 @@
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.manifest" />
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateIgnore.txt" />
@@ -5599,7 +5607,12 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets'))" />
   </Target>
+  <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

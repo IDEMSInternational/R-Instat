@@ -125,7 +125,7 @@ Public Class ucrButtons
         Dim bFirstCode As Boolean = True
         Dim clsRemoveFunc As New RFunction
         Dim clsRemoveListFun As New RFunction
-        Dim lstAssignToCodes As New List(Of RCodeStructure)
+        Dim lstAssignToCodes As New List(Of RCodeStructure) 'todo. remove after refactoring GetAllAssignTo
         Dim lstAssignToStrings As New List(Of String)
 
         'rm is the R function to remove the created objects from the memory at the end of the script and c is the function that puts them together in a list
@@ -217,11 +217,6 @@ Public Class ucrButtons
         Else
             frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
         End If
-        For i As Integer = 0 To lstAssignToCodes.Count - 1
-            lstAssignToCodes(i).bToBeAssigned = True
-            lstAssignToCodes(i).strAssignTo = lstAssignToStrings(i)
-            lstAssignToCodes(i).bIsAssigned = False
-        Next
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)

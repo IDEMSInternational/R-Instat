@@ -447,14 +447,15 @@
   "View/Delete Labels...": "View/Delete Labels...",
   "Row Sumaries...": "Row Sumaries...",
   "Permute/Sample Rows...": "Permute/Sample Rows...",
-  "Stack (Pivot longer)...": "Stack (Pivot longer)...",
+  "Stack (Pivot Longer)...": "Stack (Pivot Longer)...",
   "Unstack (Pivot Wider)...": "Unstack (Pivot Wider)...",
-  "Merge(Join)...": "Merge(Join)...",
+  "Merge (Join)...": "Merge (Join)...",
   "Append (Bind Rows)...": "Append (Bind Rows)...",
   "Random Split...": "Random Split...",
   "Scale/Distance...": "Scale/Distance...",
   "Rename": "Rename",
   "Save": "Save",
   "Import SST...": "Import SST...",
-  "Daily Data Editing/Entry...": "Daily Data Editing/Entry..."
+  "Daily Data Editing/Entry...": "Daily Data Editing/Entry...",
+  "Experiments": "Experiments"
 }
