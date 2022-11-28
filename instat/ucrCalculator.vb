@@ -306,6 +306,18 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFreqSum, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
         ttCalculator.SetToolTip(cmdFreqVar, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
 
+        ttCalculator.SetToolTip(cmduniform, "Random sample from the uniform distribution between 0 & 1. Use say runif(n,5,10) to change the range")
+        ttCalculator.SetToolTip(cmdRan_normal, "Random sample from the standard normal distribution. Use, say rnorm(n,100,15) to change the mean and sd")
+        ttCalculator.SetToolTip(cmduni_integer, "Random integers between 1 and 5. Use say sample.int(3,n,TRUE,prob=c(6,3,1)) to sample 1 to 3 with defined probabilities.")
+        ttCalculator.SetToolTip(cmdbernouli, "Random Bernoulli (0 or 1) sample. Use say rbinom(n,1,1/6) for a random sample of a given dice value.")
+        ttCalculator.SetToolTip(cmdbinomial, "Random binomial sample with values between 0 and 3. Use say rbinom(n,5,prob=0.1) for other distributions")
+        ttCalculator.SetToolTip(cmdpoisson, "Random Poisson sample with mean 1. Change the mean as required.")
+        ttCalculator.SetToolTip(cmdnbinomial, "Random geometric sample as given, i.e. number of failures before size=1 success. Change value of size (must remain positive) for other negative binomials.")
+        ttCalculator.SetToolTip(cmdRan_gamma, "Random sample with shape=1 is from the exponential distribution with mean 2. Keep scale (>0) = 2 and change shape (>0) to 0.5 for chi-square distribution with 1d.f. or to 5, for 10 d.f. Keep scale = 2 for chi-square")
+        ttCalculator.SetToolTip(cmdRan_beta, "This special case is the uniform distribution between 0 and 1. Change shape1 > 0 and shape2 > 0 for different beta distributions.")
+        ttCalculator.SetToolTip(cmdRan_sample, "Random sample with replacement, from a given variable. Change replace to FALSE for a random permutation.")
+
+
     End Sub
 
     Public Sub Reset()
@@ -4550,4 +4562,89 @@ Public Class ucrCalculator
         End If
         OpenHelpPage()
     End Sub
+
+    Private Sub cmduniform_Click(sender As Object, e As EventArgs) Handles cmduniform.Click
+        Dim clsUniformFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsUniformFunction.SetRCommand("runif")
+        clsUniformFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsUniformFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdpoisson_Click(sender As Object, e As EventArgs) Handles cmdpoisson.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" rpois(n = , lamda = 1)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rpois( , lamda = 1)", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRan_normal_Click(sender As Object, e As EventArgs) Handles cmdRan_normal.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("  rnorm(n = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" rnorm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmduni_integer_Click(sender As Object, e As EventArgs) Handles cmduni_integer.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sample.int(n = , size = 5, replace = TRUE)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sample.int( ,5,replace = TRUE)", 1)
+        End If
+    End Sub
+
+    Private Sub cmdbernouli_Click(sender As Object, e As EventArgs) Handles cmdbernouli.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbinom(n = ,size = 1,prob = 0.5)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbinom( ,1,prob=0.5)", 1)
+        End If
+    End Sub
+
+    Private Sub cmdbinomial_Click(sender As Object, e As EventArgs) Handles cmdbinomial.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbinom(n = ,size = 3,prob = 0.5) ", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbinom( ,3,prob = 0.5) ", 1)
+        End If
+    End Sub
+
+    Private Sub cmdnbinomial_Click(sender As Object, e As EventArgs) Handles cmdnbinomial.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rnbinom(n = ,size = 1,prob = 0.5)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rnbinom( ,size = 1,prob = 0.5)", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRan_gamma_Click(sender As Object, e As EventArgs) Handles cmdRan_gamma.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rgamma(n = ,shape = 1,scale = 2) ", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rgamma( ,shape = 1,scale = 2) ", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRan_beta_Click(sender As Object, e As EventArgs) Handles cmdRan_beta.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbeta(n = ,shape1 = 1, shape2 = 1)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbeta( ,shape1 = 1,shape2 = 1)", 1)
+        End If
+    End Sub
+
+    Private Sub cmdRan_sample_Click(sender As Object, e As EventArgs) Handles cmdRan_sample.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sample(size = ,n = ,replace=TRUE)", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sample(size =  , ,replace=TRUE)", 1)
+        End If
+    End Sub
+
 End Class
