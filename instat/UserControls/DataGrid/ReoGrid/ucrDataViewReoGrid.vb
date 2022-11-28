@@ -174,8 +174,8 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Sub Worksheet_BeforeCellsKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
-        e.IsCancelled = True
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            e.IsCancelled = True
             RaiseEvent DeleteValueToDataframe()
         End If
     End Sub
