@@ -431,5 +431,12 @@ Public Class dlgStack
 
             clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
+
+    End Sub
+
+    Private Sub ucrSelectorStack_DataFrameChanged() Handles ucrSelectorStack.ControlContentsChanged
+        If rdoExpand.Checked Then
+            ucrReceiverExpand.SetMeAsReceiver()
+        End If
     End Sub
 End Class
