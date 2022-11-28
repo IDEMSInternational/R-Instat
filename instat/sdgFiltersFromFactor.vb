@@ -55,7 +55,7 @@ Public Class sdgFiltersFromFactor
                                                   dctParamAndColNames:=dctParamAndColNames,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=False)
-        cmdSelectAll.Enabled = False
+
     End Sub
 
     Public Sub SetRcodeAndDefaultDataFrame(ucrNewBaseSelector As ucrSelector, bReset As Boolean)
@@ -73,24 +73,6 @@ Public Class sdgFiltersFromFactor
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         If ucrFactorLevels.IsAnyGridRowSelected Then
             frmMain.clsRLink.RunScript(clsAddFilterFromFactors.ToScript, strComment:="Filter From Factors subdialog: Created new filter", bSilent:=False)
-        End If
-    End Sub
-
-    Private Sub cmdSelectAll_Click(sender As Object, e As EventArgs) Handles cmdSelectAll.Click
-        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
-    End Sub
-
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        cmdSelectAll.Enabled = Not ucrReceiverFactor.IsEmpty
-    End Sub
-
-    Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
-        If ucrFactorLevels.IsAllGridRowsSelected() Then
-            cmdSelectAll.Text = Translations.GetTranslation("Deselect All Levels")
-            cmdSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            cmdSelectAll.Text = Translations.GetTranslation("Select All Levels")
-            cmdSelectAll.FlatStyle = FlatStyle.Popup
         End If
     End Sub
 

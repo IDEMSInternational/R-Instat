@@ -72,7 +72,7 @@ Public Class dlgOptions
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
         ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
         ucrChkViewOptionsByContextMenu.SetText("Show Options By Context Menu")
-        ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
+        ucrChkShowRCommandsinOutputWindow.SetText("Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
@@ -86,6 +86,10 @@ Public Class dlgOptions
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
         ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
+
+        ucrChkShowWaitDialog.SetText("Set maximum height for outputs")
+        ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
+        ucrNudMaximumOutputsHeight.Maximum = 1000
 
         SetVisibleLanButton()
     End Sub
@@ -118,6 +122,11 @@ Public Class dlgOptions
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
+        ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
+        ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
+                                              frmMain.clsInstatOptions.iMaxOutputsHeight,
+                                              clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 ucrInputLanguage.SetText("English")
@@ -174,6 +183,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
+        frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
+                                                         ucrNudMaximumOutputsHeight.Value, -1))
     End Sub
 
     Private Sub SetView()
@@ -399,6 +410,10 @@ Public Class dlgOptions
             strGraphDisplayOption = "view_R_viewer"
         End If
         ApplyEnabled(True)
+    End Sub
+
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+
     End Sub
 
     Private Sub SetVisibleLanButton()

@@ -64,6 +64,7 @@ Partial Class dlgOptions
         Me.ucrNudPreviewRows = New instat.ucrNud()
         Me.pnImportData = New System.Windows.Forms.Panel()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.ucrChkMaximumOutputsHeight = New instat.ucrCheck()
         Me.ucrChkShowRCommandsinOutputWindow = New instat.ucrCheck()
         Me.ucrChkIncludeCommentsbyDefault = New instat.ucrCheck()
         Me.grpROptions = New System.Windows.Forms.GroupBox()
@@ -123,6 +124,7 @@ Partial Class dlgOptions
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.cmdLanguage = New System.Windows.Forms.Button()
+        Me.ucrNudMaximumOutputsHeight = New instat.ucrNud()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -384,6 +386,8 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.ucrNudMaximumOutputsHeight)
+        Me.tbpOutputWindow.Controls.Add(Me.ucrChkMaximumOutputsHeight)
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkShowRCommandsinOutputWindow)
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.grpROptions)
@@ -396,22 +400,31 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
         '
+        'ucrChkMaximumOutputsHeight
+        '
+        Me.ucrChkMaximumOutputsHeight.AutoSize = True
+        Me.ucrChkMaximumOutputsHeight.Checked = False
+        Me.ucrChkMaximumOutputsHeight.Location = New System.Drawing.Point(310, 135)
+        Me.ucrChkMaximumOutputsHeight.Name = "ucrChkMaximumOutputsHeight"
+        Me.ucrChkMaximumOutputsHeight.Size = New System.Drawing.Size(162, 23)
+        Me.ucrChkMaximumOutputsHeight.TabIndex = 28
+        '
         'ucrChkShowRCommandsinOutputWindow
         '
         Me.ucrChkShowRCommandsinOutputWindow.AutoSize = True
         Me.ucrChkShowRCommandsinOutputWindow.Checked = False
-        Me.ucrChkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.ucrChkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 158)
         Me.ucrChkShowRCommandsinOutputWindow.Name = "ucrChkShowRCommandsinOutputWindow"
-        Me.ucrChkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(388, 23)
+        Me.ucrChkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(271, 23)
         Me.ucrChkShowRCommandsinOutputWindow.TabIndex = 27
         '
         'ucrChkIncludeCommentsbyDefault
         '
         Me.ucrChkIncludeCommentsbyDefault.AutoSize = True
         Me.ucrChkIncludeCommentsbyDefault.Checked = False
-        Me.ucrChkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
+        Me.ucrChkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 135)
         Me.ucrChkIncludeCommentsbyDefault.Name = "ucrChkIncludeCommentsbyDefault"
-        Me.ucrChkIncludeCommentsbyDefault.Size = New System.Drawing.Size(391, 23)
+        Me.ucrChkIncludeCommentsbyDefault.Size = New System.Drawing.Size(271, 23)
         Me.ucrChkIncludeCommentsbyDefault.TabIndex = 26
         '
         'grpROptions
@@ -1023,6 +1036,19 @@ Partial Class dlgOptions
         Me.cmdLanguage.Text = "Lang"
         Me.cmdLanguage.UseVisualStyleBackColor = True
         '
+        'ucrNudMaximumOutputsHeight
+        '
+        Me.ucrNudMaximumOutputsHeight.AutoSize = True
+        Me.ucrNudMaximumOutputsHeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumOutputsHeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaximumOutputsHeight.Location = New System.Drawing.Point(478, 135)
+        Me.ucrNudMaximumOutputsHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaximumOutputsHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumOutputsHeight.Name = "ucrNudMaximumOutputsHeight"
+        Me.ucrNudMaximumOutputsHeight.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaximumOutputsHeight.TabIndex = 29
+        Me.ucrNudMaximumOutputsHeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1158,4 +1184,6 @@ Partial Class dlgOptions
     Friend WithEvents lblLanguage As Label
     Friend WithEvents ucrInputLanguage As ucrInputComboBox
     Friend WithEvents cmdLanguage As Button
+    Friend WithEvents ucrChkMaximumOutputsHeight As ucrCheck
+    Friend WithEvents ucrNudMaximumOutputsHeight As ucrNud
 End Class
