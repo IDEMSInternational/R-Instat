@@ -4599,7 +4599,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdbernouli_Click(sender As Object, e As EventArgs) Handles cmdbernoulli.Click
+    Private Sub cmdbernoulli_Click(sender As Object, e As EventArgs) Handles cmdbernoulli.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbinom(n = ,size = 1,prob = 0.5)", 1)
         Else
