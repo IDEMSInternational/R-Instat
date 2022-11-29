@@ -123,6 +123,7 @@ Public Class clsRegressionDefaults
             Return clsDefaultRConfint
         End Get
     End Property
+
     Public Shared ReadOnly Property clsDefaultRaovPValueFunction As RFunction
         Get
             Dim clsDefaultRaovpvalFunction As New RFunction
