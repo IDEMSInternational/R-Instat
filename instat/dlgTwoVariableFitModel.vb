@@ -565,7 +565,6 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=22)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("y", iNewPosition:=0), iAdditionalPairNo:=23)
 
-
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
         ucrSaveModels.AddAdditionalRCode(clsVarTestFunction, iAdditionalPairNo:=2)
