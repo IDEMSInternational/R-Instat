@@ -752,12 +752,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub EnableDisableConvertVariate()
-        If ucrReceiverVariable.strCurrDataType = "numeric" Then
+        If ucrReceiverVariable.strCurrDataType = "numeric" OrElse
+                ucrInputComboTests.GetText() = "Bayes:Mean" OrElse
+                ucrInputComboTests.GetText() = "Bayes:Proportion" Then
             ucrChkConvertVariate.Checked = False
             ucrChkConvertVariate.Visible = False
-        ElseIf ucrInputComboTests.GetText() = "Bayes:Mean" OrElse ucrInputComboTests.GetText() = "Bayes:Proportion" Then
-            ucrChkConvertVariate.Visible = False
-            ucrChkConvertVariate.Checked = False
         Else
             ucrChkConvertVariate.Visible = True
         End If
