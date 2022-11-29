@@ -682,7 +682,6 @@ Public Class dlgTwoVariableFitModel
         sdgEstimationParameters.ShowDialog()
     End Sub
 
-
     Private Sub UpdatePreview()
         If Not ucrReceiverResponse.IsEmpty AndAlso Not ucrReceiverExplanatory.IsEmpty Then
             ucrModelPreview.SetName(clsFormulaOperator.ToScript())
