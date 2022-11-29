@@ -73,6 +73,7 @@ Public Class sdgPriorParameters
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
         clsBayesIferenceFunction = clsNewBayesIferenceFunction
         clsConcatenateFunction = clsNewConcatenateFunction
 
