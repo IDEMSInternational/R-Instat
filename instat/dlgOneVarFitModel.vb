@@ -1116,6 +1116,7 @@ Public Class dlgOneVarFitModel
             End If
         End If
     End Sub
+    
     Private Sub CredibleInterval()
         If ucrInputComboEstimate.GetText() = "bayes:mean" Then
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
