@@ -24,7 +24,6 @@ Public Class dlgOneVarFitModel
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
     Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsBayesIferenceFunction, clsConcatenateFunction, clsDummyFunction, clsColumnNameFunction As New RFunction
 
-
     Private WithEvents ucrDistribution As ucrDistributions
 
     Private bFirstload As Boolean = True
