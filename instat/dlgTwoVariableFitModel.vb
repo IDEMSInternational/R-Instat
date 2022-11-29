@@ -794,7 +794,6 @@ Public Class dlgTwoVariableFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBayesIferenceFunction)
                 Case "Bayes:Mean"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBayesIferenceFunction)
-
                 Case "proportion"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPropTestFunction)
                 Case "mcnemar"
