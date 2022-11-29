@@ -3760,7 +3760,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRan_sample.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRan_sample.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRan_sample.Location = New System.Drawing.Point(244, 43)
+        Me.cmdRan_sample.Location = New System.Drawing.Point(243, 43)
         Me.cmdRan_sample.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdRan_sample.Name = "cmdRan_sample"
         Me.cmdRan_sample.Size = New System.Drawing.Size(57, 30)
@@ -3772,7 +3772,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRan_beta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRan_beta.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRan_beta.Location = New System.Drawing.Point(188, 43)
+        Me.cmdRan_beta.Location = New System.Drawing.Point(187, 43)
         Me.cmdRan_beta.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdRan_beta.Name = "cmdRan_beta"
         Me.cmdRan_beta.Size = New System.Drawing.Size(57, 30)
@@ -3808,7 +3808,7 @@ Partial Class ucrCalculator
         '
         Me.cmdbinomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdbinomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbinomial.Location = New System.Drawing.Point(244, 14)
+        Me.cmdbinomial.Location = New System.Drawing.Point(243, 14)
         Me.cmdbinomial.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdbinomial.Name = "cmdbinomial"
         Me.cmdbinomial.Size = New System.Drawing.Size(57, 30)
@@ -3820,7 +3820,7 @@ Partial Class ucrCalculator
         '
         Me.cmdbernoulli.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdbernoulli.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbernoulli.Location = New System.Drawing.Point(188, 14)
+        Me.cmdbernoulli.Location = New System.Drawing.Point(187, 14)
         Me.cmdbernoulli.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdbernoulli.Name = "cmdbernoulli"
         Me.cmdbernoulli.Size = New System.Drawing.Size(57, 30)
