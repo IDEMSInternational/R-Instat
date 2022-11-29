@@ -154,7 +154,7 @@ Public Class ucrColumnMetadata
         Dim strNameColumn As String
         Dim iTemp As Integer
         Dim strNewValue As String
-        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE"}
+        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE", "N", "NA"}
 
         strNameColumn = _grid.GetCellValue(iRow, strNameLabel)
         If strNameColumn = "" Then
@@ -172,14 +172,17 @@ Public Class ucrColumnMetadata
         ElseIf strColumnName = strLabelsScientific Then
             newValue = newValue.ToString.ToUpper
             If strBooleanValsAllowed.Contains(newValue) Then
-                If newValue(0) = "F" Then
-                    newValue = "FALSE"
-                Else
-                    newValue = "TRUE"
-                End If
+                Select Case newValue(0)
+                    Case "F"
+                        newValue = "FALSE"
+                    Case "T"
+                        newValue = "TRUE"
+                    Case "N"
+                        newValue = "NA"
+                End Select
                 strNewValue = newValue
             Else
-                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
+                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display and NA/N for a mixture", MsgBoxStyle.Information)
                 Exit Sub
             End If
         Else
