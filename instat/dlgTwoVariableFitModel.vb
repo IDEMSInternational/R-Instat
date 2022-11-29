@@ -29,7 +29,7 @@ Public Class dlgTwoVariableFitModel
     Private clsSplineFunc As New RFunction
 
     'Tests
-    Private clsNumericTtestFunction, clsTtestFunction, clsBayesIferenceFunction, clsNumericWilcoxTestFunction, clsWilcoxTestFunction,
+    Private clsNumericTtestFunction, clsTtestFunction, clsBayesInferenceFunction, clsNumericWilcoxTestFunction, clsWilcoxTestFunction,
         clsNumericVarTestFunction, clsVarTestFunction, clsAnsariTestFunction, clsNumericAnsariTestFuntion,
         clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsConcatenateFunction,
         clsNumericKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction, clsNumericBarletteTestFunction,
