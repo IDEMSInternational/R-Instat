@@ -701,7 +701,6 @@ Public Class dlgTwoVariableFitModel
                 clsLMOrGLM = clsGLMNB
             Else
                 clsLMOrGLM = clsGLM
-
             End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
