@@ -355,9 +355,7 @@ Public Class dlgOneVarFitModel
 
         clsConvertToColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
 
-        'clsDummyFunction.AddParameter("check", "True", iPosition:=0)
         clsDummyFunction.AddParameter("check", "False", iPosition:=0)
-
 
         clsColumnNameFunction.SetRCommand("c")
         'General Case
