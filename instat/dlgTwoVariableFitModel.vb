@@ -1166,7 +1166,6 @@ Public Class dlgTwoVariableFitModel
         If ucrInputTest.GetText() = "Bayes:Mean" Then
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
             clsBayesIferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
-
         ElseIf ucrInputTest.GetText() = "Bayes:Proportion" Then
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
             clsBayesIferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
