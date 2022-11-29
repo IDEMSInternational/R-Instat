@@ -54,7 +54,7 @@ Public Class dlgTwoVariableFitModel
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     'Display options codes
-    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsConfintBas, clsCoefFunction As RFunction
+    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsConfintBasFunction, clsCoefFunction As RFunction
 
     Private bRCodeSet As Boolean = True
     Private bReset As Boolean = True
