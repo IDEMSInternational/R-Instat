@@ -46,7 +46,6 @@ Public Class dlgTwoVariableFitModel
     Private clsFormulaOperator As New ROperator
     Private clsGLM, clsLM, clsGLMNB, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
 
-
     Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
