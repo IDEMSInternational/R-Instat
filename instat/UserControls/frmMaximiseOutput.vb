@@ -92,22 +92,18 @@ Public Class frmMaximiseOutput
                                                            "*" & Path.GetFileNameWithoutExtension(_strDisplayedFileName) & "*")
 
                         'create the destination folder first
-                        Dim destDir As String = Path.Combine(_strFileDestinationDirectory,
+                        Dim strDestDir As String = Path.Combine(_strFileDestinationDirectory,
                                                              Path.GetFileName(strFoundDirectory))
-                        If Not Directory.Exists(destDir) Then
-                            Directory.CreateDirectory(destDir)
+                        If Not Directory.Exists(strDestDir) Then
+                            Directory.CreateDirectory(strDestDir)
                         End If
-                        My.Computer.FileSystem.CopyDirectory(strFoundDirectory, destDir, True)
+                        My.Computer.FileSystem.CopyDirectory(strFoundDirectory, strDestDir, True)
                     Next
-                    'then copy the html file
-                    My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
-                Else
-                    'for other files like text, images, just copy the file
-                    My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
                 End If
+
+                'then copy the file
+                My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
             End If
-
-
         End Using
 
     End Sub
