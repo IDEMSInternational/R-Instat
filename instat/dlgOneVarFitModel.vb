@@ -550,7 +550,6 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("y", 0), iAdditionalPairNo:=3)
-
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("col_name", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=2)
