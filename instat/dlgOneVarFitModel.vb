@@ -1097,8 +1097,8 @@ Public Class dlgOneVarFitModel
             clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
             clsBayesIferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
         End If
-
     End Sub
+
     Private Sub TypeStatistic()
         If rdoTest.Checked Then
             If ucrInputComboTests.GetText() = "Bayes:Mean" OrElse ucrInputComboTests.GetText() = "Bayes:Proportion" Then
