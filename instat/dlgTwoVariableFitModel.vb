@@ -541,8 +541,6 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=29)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=30)
 
-
-
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsNumericAnsariTestFuntion, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=3)
