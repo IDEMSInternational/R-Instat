@@ -69,6 +69,7 @@ Public Class sdgPriorParameters
         ucrNudDegreesFreedom.SetLinkedDisplayControl(lblDegreesFreedom)
         ucrNudPrioirNull.SetLinkedDisplayControl(lblPrioir)
     End Sub
+
     Public Sub SetRFunction(clsNewBayesIferenceFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()

@@ -19,11 +19,12 @@ Public Class sdgEstimationParameters
     Private bControlsInitialised As Boolean = False
     Public bFirstLoad As Boolean = True
     Public clsBayesIferenceFunction, clsConcatenateFunction As New RFunction
+
     Private Sub sdgEstimationParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseControls()
-        Dim dctNullHypothesis As New Dictionary(Of String, String)
         Dim dctPriorFamily As New Dictionary(Of String, String)
         ucrNudSampleSize.SetParameter(New RParameter("n_0", 10))
         ucrNudSampleSize.SetMinMax(1, Integer.MaxValue)
@@ -62,6 +63,7 @@ Public Class sdgEstimationParameters
         ucrInputPriorFamily.SetLinkedDisplayControl(lblPriorFamily)
         ucrInputPriorMean.SetLinkedDisplayControl(lblPriorMean)
     End Sub
+
     Public Sub SetRFunction(clsNewBayesIferenceFunction As RFunction, clsNewConcatenateFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
