@@ -309,7 +309,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmduniform, "Random sample from the uniform distribution between 0 & 1. Use say runif(n,5,10) to change the range")
         ttCalculator.SetToolTip(cmdRan_normal, "Random sample from the standard normal distribution. Use, say rnorm(n,100,15) to change the mean and sd")
         ttCalculator.SetToolTip(cmduni_integer, "Random integers between 1 and 5. Use say sample.int(3,n,TRUE,prob=c(6,3,1)) to sample 1 to 3 with defined probabilities.")
-        ttCalculator.SetToolTip(cmdbernouli, "Random Bernoulli (0 or 1) sample. Use say rbinom(n,1,1/6) for a random sample of a given dice value.")
+        ttCalculator.SetToolTip(cmdbernoulli, "Random Bernoulli (0 or 1) sample. Use say rbinom(n,1,1/6) for a random sample of a given dice value.")
         ttCalculator.SetToolTip(cmdbinomial, "Random binomial sample with values between 0 and 3. Use say rbinom(n,5,prob=0.1) for other distributions")
         ttCalculator.SetToolTip(cmdpoisson, "Random Poisson sample with mean 1. Change the mean as required.")
         ttCalculator.SetToolTip(cmdnbinomial, "Random geometric sample as given, i.e. number of failures before size=1 success. Change value of size (must remain positive) for other negative binomials.")
@@ -4599,7 +4599,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdbernouli_Click(sender As Object, e As EventArgs) Handles cmdbernouli.Click
+    Private Sub cmdbernouli_Click(sender As Object, e As EventArgs) Handles cmdbernoulli.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rbinom(n = ,size = 1,prob = 0.5)", 1)
         Else
