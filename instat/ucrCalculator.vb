@@ -4585,7 +4585,7 @@ Public Class ucrCalculator
 
         clsPoissonFunction.SetRCommand("rpois")
         clsPoissonFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
-        clsPoissonFunction.AddParameter("lamda", "1", iPosition:=1)
+        clsPoissonFunction.AddParameter("lambda", "1", iPosition:=1)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPoissonFunction.ToScript, 0)
     End Sub
@@ -4611,8 +4611,8 @@ Public Class ucrCalculator
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
         clsUnitegerFunction.SetRCommand("sample.int")
-        clsUnitegerFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
-        clsUnitegerFunction.AddParameter("size", "5", iPosition:=1)
+        clsUnitegerFunction.AddParameter("size", "5", iPosition:=0)
+        clsUnitegerFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
         clsUnitegerFunction.AddParameter("replace", "TRUE", iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsUnitegerFunction.ToScript, 0)
@@ -4695,8 +4695,9 @@ Public Class ucrCalculator
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
         clsSampleFunction.SetRCommand("sample")
-        clsSampleFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
-        clsSampleFunction.AddParameter("replace", "TRUE", iPosition:=1)
+        clsSampleFunction.AddParameter("size", "", iPosition:=0)
+        clsSampleFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+        clsSampleFunction.AddParameter("replace", "TRUE", iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 0)
     End Sub
