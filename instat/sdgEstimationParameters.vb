@@ -17,8 +17,8 @@ Imports instat.Translations
 Public Class sdgEstimationParameters
 
     Private bControlsInitialised As Boolean = False
-    Public bFirstLoad As Boolean = True
-    Public clsBayesIferenceFunction, clsConcatenateFunction As New RFunction
+    Private bFirstLoad As Boolean = True
+    Private clsBayesInferenceFunction, clsConcatenateFunction As New RFunction
 
     Private Sub sdgEstimationParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -69,14 +69,14 @@ Public Class sdgEstimationParameters
             InitialiseControls()
         End If
 
-        clsBayesIferenceFunction = clsNewBayesIferenceFunction
+        clsBayesInferenceFunction = clsNewBayesIferenceFunction
         clsConcatenateFunction = clsNewConcatenateFunction
 
-        ucrNudSampleSize.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudDegreesFreedom.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudScaleParameter.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudStandardDeviation.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputPriorFamily.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputPriorMean.SetRCode(clsBayesIferenceFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudSampleSize.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudDegreesFreedom.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudScaleParameter.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStandardDeviation.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputPriorFamily.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputPriorMean.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 End Class

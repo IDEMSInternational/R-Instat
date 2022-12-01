@@ -253,7 +253,7 @@ Public Class dlgTwoVariableFitModel
         clsPropTestFunction = New RFunction
         clsNumericTtestFunction = New RFunction
         clsTtestFunction = New RFunction
-        clsBayesIferenceFunction = New RFunction
+        clsBayesInferenceFunction = New RFunction
         clsMcnemarTestFunction = New RFunction
         clsAnsariTestFunction = New RFunction
         clsMoodTestFunction = New RFunction
@@ -471,18 +471,18 @@ Public Class dlgTwoVariableFitModel
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
 
-        clsBayesIferenceFunction.SetRCommand("bayes_inference")
-        clsBayesIferenceFunction.SetPackageName("statsr")
-        clsBayesIferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=1)
-        clsBayesIferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=2)
-        clsBayesIferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=3)
-        clsBayesIferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
-        clsBayesIferenceFunction.AddParameter("n_0", 1, iPosition:=10)
-        clsBayesIferenceFunction.AddParameter("s_0", 0, iPosition:=11)
-        clsBayesIferenceFunction.AddParameter("v_0", -1, iPosition:=12)
-        clsBayesIferenceFunction.AddParameter("rscale", 1, iPosition:=13)
-        clsBayesIferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+        clsBayesInferenceFunction.SetRCommand("bayes_inference")
+        clsBayesInferenceFunction.SetPackageName("statsr")
+        clsBayesInferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=1)
+        clsBayesInferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=2)
+        clsBayesInferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=3)
+        clsBayesInferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
+        clsBayesInferenceFunction.AddParameter("n_0", 1, iPosition:=10)
+        clsBayesInferenceFunction.AddParameter("s_0", 0, iPosition:=11)
+        clsBayesInferenceFunction.AddParameter("v_0", -1, iPosition:=12)
+        clsBayesInferenceFunction.AddParameter("rscale", 1, iPosition:=13)
+        clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
 
         clsTtestOperator.SetOperation("~")
         clsTtestOperator.bSpaceAroundOperation = True
@@ -535,7 +535,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=27)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=28)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=29)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=30)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBayesInferenceFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=30)
 
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
@@ -559,7 +559,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=20)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=21)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=22)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBayesIferenceFunction, New RParameter("y", iNewPosition:=0), iAdditionalPairNo:=23)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBayesInferenceFunction, New RParameter("y", iNewPosition:=0), iAdditionalPairNo:=23)
 
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
@@ -600,9 +600,9 @@ Public Class dlgTwoVariableFitModel
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=10)
 
         ucrInputConfidenceInterval.SetRCode(clsTtestFunction, bReset)
-        ucrInputType.SetRCode(clsBayesIferenceFunction, bReset)
-        ucrInputMethod.SetRCode(clsBayesIferenceFunction, bReset)
-        ucrInputCredibleLevel.SetRCode(clsBayesIferenceFunction, bReset)
+        ucrInputType.SetRCode(clsBayesInferenceFunction, bReset)
+        ucrInputMethod.SetRCode(clsBayesInferenceFunction, bReset)
+        ucrInputCredibleLevel.SetRCode(clsBayesInferenceFunction, bReset)
 
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("mu", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
@@ -665,14 +665,14 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub cmdPrior_Click(sender As Object, e As EventArgs) Handles cmdPrior.Click
-        sdgPriorParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesIferenceFunction,
+        sdgPriorParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesInferenceFunction,
                                         clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgPriorParameters.ShowDialog()
     End Sub
 
     Private Sub cmdEstimation_Click(sender As Object, e As EventArgs) Handles cmdEstimation.Click
-        sdgEstimationParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesIferenceFunction,
+        sdgEstimationParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesInferenceFunction,
                                         clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgEstimationParameters.ShowDialog()
@@ -787,9 +787,9 @@ Public Class dlgTwoVariableFitModel
                 Case "chisq"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsXchisgTestFunction)
                 Case "bayes:proportion"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesIferenceFunction)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
                 Case "bayes:mean"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesIferenceFunction)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
                 Case "proportion"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPropTestFunction)
                 Case "mcnemar"
@@ -1023,7 +1023,7 @@ Public Class dlgTwoVariableFitModel
             FindLevels()
         Else
             ucrInputSuccess.Visible = False
-            clsBayesIferenceFunction.RemoveParameterByName("success")
+            clsBayesInferenceFunction.RemoveParameterByName("success")
         End If
     End Sub
 
@@ -1121,11 +1121,11 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub GetNullValue()
         If ucrInputType.GetText = "hypothesis test" Then
-            clsBayesIferenceFunction.AddParameter("null", 0, iPosition:=7)
-            clsBayesIferenceFunction.RemoveParameterByName("mu_0")
+            clsBayesInferenceFunction.AddParameter("null", 0, iPosition:=7)
+            clsBayesInferenceFunction.RemoveParameterByName("mu_0")
         ElseIf ucrInputType.GetText = "credible interval" Then
-            clsBayesIferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
-            clsBayesIferenceFunction.RemoveParameterByName("null")
+            clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
+            clsBayesInferenceFunction.RemoveParameterByName("null")
         End If
     End Sub
 
@@ -1146,19 +1146,19 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub SampleStatistic()
-        clsBayesIferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
+        clsBayesInferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
         If ucrInputTest.GetText() = "bayes:mean" Then
-            clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
         ElseIf ucrInputTest.GetText() = "bayes:proportion" Then
-            clsBayesIferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
         End If
     End Sub
 
     Private Sub ucrInputSuccess_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSuccess.ControlValueChanged
         If ucrInputSuccess.Visible Then
-            clsBayesIferenceFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=6)
+            clsBayesInferenceFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=6)
         Else
-            clsBayesIferenceFunction.RemoveParameterByName("success")
+            clsBayesInferenceFunction.RemoveParameterByName("success")
         End If
     End Sub
 End Class
