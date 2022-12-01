@@ -239,6 +239,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgSummaryThemes.Designer.vb">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSummaryThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
@@ -3074,6 +3080,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSummaryThemes.resx">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
