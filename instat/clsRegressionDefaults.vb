@@ -68,6 +68,7 @@ Public Class clsRegressionDefaults
             Return clsBayesFunction
         End Get
     End Property
+
     Public Shared ReadOnly Property clsDefaultGlmFunction As RFunction
         Get
 
