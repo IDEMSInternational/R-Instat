@@ -152,7 +152,7 @@ Public Class RLink
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.1.2"
+    Private strRBundledVersion As String = "4.1.3"
 
     Private clsOutputLogger As clsOutputLogger
 
