@@ -4695,10 +4695,10 @@ Public Class ucrCalculator
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
         clsSampleFunction.SetRCommand("sample")
-        clsSampleFunction.AddParameter("n", "", iPosition:=0)
+        clsSampleFunction.AddParameter("x", " ", iPosition:=0)
         clsSampleFunction.AddParameter("size", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
         clsSampleFunction.AddParameter("replace", "TRUE", iPosition:=2)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
     End Sub
 End Class
