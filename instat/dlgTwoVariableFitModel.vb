@@ -35,7 +35,7 @@ Public Class dlgTwoVariableFitModel
         clsNumericKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction, clsNumericBarletteTestFunction,
         clsMcnemarTestFunction, clsFlignerTestFunction, clsNumericFlignerTestFunction, clsFisherTestFunction,
         clsXchisgTestFunction, clsPropTestFunction, clsConvertToColumnTypeFunction, clsGetFactorLevelFunction,
-        clsConfintBas, clsBayesIferenceFunction, clsColumnNameFunction As New RFunction
+        clsConfintBas, clsBayesInferenceFunction, clsColumnNameFunction As New RFunction
 
     Private clsTtestOperator, clsWilcoxTestOperator, clsVarTestOperator, clsAnsariTestOperator,
         clsMoodTestOperator, clsKruskalTestOperator, clsBarletteTestOperator,
