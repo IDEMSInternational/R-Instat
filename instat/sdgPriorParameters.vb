@@ -18,7 +18,7 @@ Public Class sdgPriorParameters
     Private bControlsInitialised As Boolean = False
     Public bFirstLoad As Boolean = True
 
-    Public clsBayesIferenceFunction, clsConcatenateFunction As New RFunction
+    Private clsBayesInferenceFunction, clsConcatenateFunction As New RFunction
 
     Private Sub sdgPriorParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
