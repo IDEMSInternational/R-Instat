@@ -316,8 +316,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdRan_gamma, "Random sample with shape=1 is from the exponential distribution with mean 2. Keep scale (>0) = 2 and change shape (>0) to 0.5 for chi-square distribution with 1d.f. or to 5, for 10 d.f. Keep scale = 2 for chi-square")
         ttCalculator.SetToolTip(cmdRan_beta, "This special case is the uniform distribution between 0 and 1. Change shape1 > 0 and shape2 > 0 for different beta distributions.")
         ttCalculator.SetToolTip(cmdRan_sample, "Random sample with replacement, from a given variable. Change replace to FALSE for a random permutation.")
-
-
     End Sub
 
     Public Sub Reset()
