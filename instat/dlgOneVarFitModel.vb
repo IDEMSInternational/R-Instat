@@ -23,7 +23,7 @@ Public Class dlgOneVarFitModel
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
     Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsConcatenateFunction, clsDummyFunction,
-        clsBayesIferenceFunction, clsColumnNameFunction As New RFunction
+        clsBayesInferenceFunction, clsColumnNameFunction As New RFunction
 
     Private WithEvents ucrDistribution As ucrDistributions
 
