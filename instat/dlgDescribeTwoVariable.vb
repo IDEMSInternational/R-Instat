@@ -191,10 +191,7 @@ Public Class dlgDescribeTwoVariable
         clsCombineFactorsFunction.SetRCommand("c")
 
         clsRenameCombineFunction.SetRCommand("c")
-        clsRenameCombineFunction.AddParameter("first", "1", iPosition:=0, bIncludeArgumentName:=False)
-        clsRenameCombineFunction.AddParameter("by_var", "2", iPosition:=1)
-        clsRenameCombineFunction.AddParameter("third", "3", iPosition:=2, bIncludeArgumentName:=False)
-        clsRenameCombineFunction.AddParameter("fourth", "4", iPosition:=3, bIncludeArgumentName:=False)
+        clsRenameCombineFunction.AddParameter("by_var", ".x", iPosition:=0)
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("rename")
@@ -202,8 +199,7 @@ Public Class dlgDescribeTwoVariable
         clsSelectFunction.AddParameter("rename_function", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRenameCombineFunction, iPosition:=1)
 
         clsCombineFrequencyFactorParameterFunction.SetRCommand("c")
-        clsCombineFrequencyFactorParameterFunction.AddParameter("factor_by", ".x",
-                                                                iPosition:=1, bIncludeArgumentName:=False)
+        clsCombineFrequencyFactorParameterFunction.AddParameter("factor_by", ".x", iPosition:=1, bIncludeArgumentName:=False)
 
         clsEmptyOperator.SetOperation("")
         clsEmptyOperator.AddParameter("multiple_receiver_cols", "multiple_receiver_cols", iPosition:=0)
