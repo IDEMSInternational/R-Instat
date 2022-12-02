@@ -47,30 +47,14 @@ Public Class ucrButtons
         RaiseEvent ClickReset(sender, e)
     End Sub
 
-    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
-        RunFormScripts(sender, e, True)
+    '"Ok", "Ok and Close" and "Ok and Keep" Click event 
+    Private Sub Ok_Click(sender As Object, e As EventArgs) Handles cmdOk.Click, toolStripMenuItemOkClose.Click, toolStripMenuItemOkKeep.Click
+        OnScriptButtonsClick(sender, e, True, Not sender Is toolStripMenuItemOkKeep)
     End Sub
 
-    Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
-        Scripts(bRun:=False)
-        ParentForm.Close()
-    End Sub
-
-    Private Sub toolStripMenuItemOkClose_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOkClose.Click
-        RunFormScripts(sender, e, True)
-    End Sub
-
-    Private Sub toolStripMenuItemOkKeep_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemOkKeep.Click
-        RunFormScripts(sender, e, False)
-    End Sub
-
-    Private Sub toolStripMenuItemToScriptClose_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemToScriptClose.Click
-        Scripts(bRun:=False)
-        ParentForm.Close()
-    End Sub
-
-    Private Sub toolStripMenuItemToScriptKeep_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemToScriptKeep.Click
-        Scripts(bRun:=False)
+    '"To Script", "To Script and Close" and "To Script and Keep" Click event 
+    Private Sub ToScript_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click, toolStripMenuItemToScriptClose.Click, toolStripMenuItemToScriptKeep.Click
+        OnScriptButtonsClick(sender, e, False, Not sender Is toolStripMenuItemToScriptKeep)
     End Sub
 
     Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
@@ -80,7 +64,7 @@ Public Class ucrButtons
         End If
     End Sub
 
-    Private Sub RunFormScripts(sender As Object, e As EventArgs, bCloseForm As Boolean)
+    Private Sub OnScriptButtonsClick(sender As Object, e As EventArgs, bExecuteScripts As Boolean, bCloseForm As Boolean)
         Dim lstCurrentEnabled As New List(Of Boolean)
         Dim ctrTempControl As Control
         Dim j As Integer
@@ -93,7 +77,7 @@ Public Class ucrButtons
         ParentForm.Cursor = Cursors.WaitCursor
 
         RaiseEvent BeforeClickOk(sender, e)
-        Scripts(bRun:=True)
+        Scripts(bRun:=bExecuteScripts)
         RaiseEvent ClickOk(sender, e)
 
         'Need to be resetting other AssignTo values as well, maybe through single method

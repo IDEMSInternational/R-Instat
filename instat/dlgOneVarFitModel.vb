@@ -320,6 +320,11 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModelFunction.SetRCommand("fitdist")
         clsROneVarFitModelFunction.AddParameter("method", Chr(34) & "mle" & Chr(34), iPosition:=1)
         clsROneVarFitModelFunction.AddParameter("data", clsRFunctionParameter:=clsRConvertIntegerFunction, iPosition:=0)
+        clsROneVarFitModelFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarFitMod.strCurrentDataFrame,
+                                           strObjectName:="last_model")
 
         clsNaExcludeFunction.SetPackageName("stats")
         clsNaExcludeFunction.SetRCommand("na.exclude")
@@ -340,9 +345,13 @@ Public Class dlgOneVarFitModel
         'Display Options/Functions
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
-        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=0)
         clsRplotFunction.iCallType = 3
         clsRplotFunction.bExcludeAssignedFunctionOutput = False
+        clsRplotFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarFitMod.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         clsRplotPPCompFunction.SetPackageName("fitdistrplus")
         clsRplotPPCompFunction.SetRCommand("ppcomp")
@@ -376,6 +385,11 @@ Public Class dlgOneVarFitModel
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
         clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=0)
+        clsRLogLikFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarFitMod.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         'Test
         clsBionomialFunction.SetPackageName("mosaic")
@@ -482,15 +496,18 @@ Public Class dlgOneVarFitModel
         clsVarCIFunction.SetRCommand("VarCI")
         clsVarCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=1)
 
-        clsROneVarFitModelFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_likelihood")
-        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModelFunction)
         bResetFittingOptions = True
         bResetFitModDisplay = True
     End Sub
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        clsRplotFunction.AddParameter("x", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=0)
+        'todo. left here
+
+    End Sub
+
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
@@ -570,6 +587,8 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetRCode(clsROneVarFitModelFunction, bReset)
 
     End Sub
+
+
 
     Private Sub TestOKEnabled()
         If ucrSaveModel.IsComplete() AndAlso Not ucrReceiverVariable.IsEmpty AndAlso ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedItem <> "" Then
