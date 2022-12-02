@@ -152,7 +152,7 @@ Public Class RLink
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.1.2"
+    Private strRBundledVersion As String = "4.1.3"
 
     Private clsOutputLogger As clsOutputLogger
 
@@ -224,7 +224,7 @@ Public Class RLink
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
         Dim strStaticPath = Path.GetFullPath("static")
-        Dim rHome = Path.Combine(strStaticPath, "R-" & strRBundledVersion)
+        Dim rHome = Path.Combine(strStaticPath, "R")
         Dim cpuArchitectureFolder = "i386"
 
         Try
@@ -840,9 +840,9 @@ Public Class RLink
 
         Try
 
-            'get the last R script command
+            'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
-            If strLastScript IsNot Nothing AndAlso strLastScript.Contains("get_object") Then
+            If strLastScript IsNot Nothing AndAlso (strLastScript.Contains("get_object") OrElse strLastScript.Contains("get_last_object") OrElse strLastScript.Contains("view_object")) Then
                 Try
                     'if object output should be returned as a file do the following. 
                     Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
@@ -865,74 +865,6 @@ Public Class RLink
                 End Try
             ElseIf iCallType = 0 Then 'if script output should be ignored. to do. deprecated
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-            ElseIf iCallType = 3 Then
-                'else if output should be returned as a graph.
-                'todo. deprecate this block. currently used view last graph mainly and viewing graph objects dialog
-
-                If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
-                    'run R command for taking a snapshot of the graph image
-                    clsPNGFunction.SetPackageName("grDevices")
-                    clsPNGFunction.SetRCommand("png")
-                    clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
-                    'TODO make these options
-                    clsPNGFunction.AddParameter("width", 4000)
-                    clsPNGFunction.AddParameter("height", 4000)
-                    clsPNGFunction.AddParameter("res", 500)
-                    ' temporary solution to being unable to save graphs in a temporary location for display.
-                    ' this can occur if System.IO.Path.GetTempPath() returns a path that is not writable.
-                    bSuccess = Evaluate(clsPNGFunction.ToScript(), bSilent:=True, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                    If bSuccess Then
-                        'need to boost resolution of the devices, it's not as good as with ggsave.
-                        Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                        'switch of taking of graph snapshots
-                        'todo. not quite sure if this would work, otherwise find the right way to close the appropriate devices.
-                        Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-
-                        'Get the graph images for display.
-                        'todo in future do the following
-                        'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
-                        'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
-                        'This sub is used to display graphics in the output window when necessary.
-                        'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
-                        'It is called from RLink at the end of RunScript.
-                        Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
-                        Dim iNumberOfFiles As Integer = -1
-                        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
-                        Try
-                            lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
-                        Catch e As Exception
-                            lstTempGraphFiles = Nothing
-                            MsgBox(e.Message & Environment.NewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
-                        End Try
-                        If lstTempGraphFiles IsNot Nothing AndAlso lstTempGraphFiles.Count > 0 Then
-                            For Each strFileName As String In lstTempGraphFiles
-                                If strGraphDisplayOption = "view_output_window" Then
-                                    clsOutputLogger.AddImageOutput(strFileName)
-                                ElseIf strGraphDisplayOption = "view_separate_window" Then
-                                    Dim frmMaximiseOutput As New frmMaximiseOutput
-                                    frmMaximiseOutput.Show(strTemp)
-                                End If
-                                Try
-                                    My.Computer.FileSystem.DeleteFile(strFileName)
-                                Catch e As Exception
-                                    MsgBox(e.Message & Environment.NewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
-                                End Try
-                            Next
-                        End If
-                    Else
-                        'switch of taking of graph snapshots
-                        'todo. not quite sure if this would work, otherwise find the right way to close the appropriate devices. 
-                        Evaluate("graphics.off()", bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                        strGraphDisplayOption = "view_R_viewer"
-                        MsgBox("A problem occured saving graphs in the temporary location " & strTempGraphsDirectory & vbNewLine & vbNewLine & "To ensure graphs can still be viewed, graphs will now appear in a pop up R viewer." & vbNewLine & "Restarting R-Instat and/or your machine usually resolves this. You can change this setting back in Tools > Options: 'Graph Display' if this later becomes resolved.", MsgBoxStyle.Exclamation)
-                        'will launch the R viewer
-                        Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                    End If
-
-                ElseIf strGraphDisplayOption = "view_R_viewer" Then
-                    Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=False, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                End If
-
             ElseIf iCallType = 1 OrElse iCallType = 4 Then 'else if script output should be stored in a temp variable
                 ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
                 Try
@@ -1090,28 +1022,13 @@ Public Class RLink
     '''
     ''' <param name="bAsPlotly">    (Optional) If true then view last graph as plotly. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False,
-                             Optional bInRViewer As Boolean = False)
+    Public Sub ViewLastGraph(bAsPlotly As String)
         Dim clsLastGraph As New RFunction
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
         clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
-        If bAsPlotly Then
-            Dim clsViewObjectFunction As New RFunction
-            Dim clsInteractivePlot As New RFunction
 
-            clsInteractivePlot.SetPackageName("plotly")
-            clsInteractivePlot.SetRCommand("ggplotly")
-            clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
 
-            clsViewObjectFunction.SetRCommand("view_object")
-            clsViewObjectFunction.AddParameter(strParameterName:="object",
-                                               clsRFunctionParameter:=clsInteractivePlot)
-            clsViewObjectFunction.AddParameter(strParameterName:="object_format",
-                                               strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
-
-            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInViewer:=False, strComment:="View last graph as Plotly", bSeparateThread:=False)
-        ElseIf bInRViewer Then
-            Dim strGlobalGraphDisplayOption As String
+        Dim strGlobalGraphDisplayOption As String
             'store the current set graph display option, to restore after display
             strGlobalGraphDisplayOption = Me.strGraphDisplayOption
             Me.strGraphDisplayOption = "view_R_viewer"
@@ -1119,14 +1036,7 @@ Public Class RLink
             RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
             'restore the graph display option
             Me.strGraphDisplayOption = strGlobalGraphDisplayOption
-        Else
-            Dim clsViewObjectFunction As New RFunction
-            clsViewObjectFunction.SetRCommand("view_object")
-            clsViewObjectFunction.AddParameter(strParameterName:="object", clsRFunctionParameter:=clsLastGraph)
-            clsViewObjectFunction.AddParameter(strParameterName:="object_format",
-                                               strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
-            RunScript(clsViewObjectFunction.ToScript(), bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
-        End If
+
     End Sub
 
     '''--------------------------------------------------------------------------------------------

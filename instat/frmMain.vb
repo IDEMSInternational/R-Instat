@@ -2108,21 +2108,51 @@ Public Class frmMain
     End Sub
 
     Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuNormalViewer.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
+        Dim clsLastGraph As New RFunction
+        clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
+        clsLastGraph.AddParameter("object_type_label", Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+
+        Dim clsViewObjectFunction As New RFunction
+        clsViewObjectFunction.SetRCommand("view_object")
+        clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsLastGraph)
+        clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
+        clsRLink.RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bAddOutputInViewer:=False, bSeparateThread:=False)
+
     End Sub
 
     Private Sub Mnuploty_Click(sender As Object, e As EventArgs) Handles mnuploty.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph(bAsPlotly:=True)
-        Me.Enabled = True
+        Dim clsViewObjectFunction As New RFunction
+        Dim clsInteractivePlot As New RFunction
+        Dim clsLastGraph As New RFunction
+
+        clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
+        clsLastGraph.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastGraph.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+
+        clsInteractivePlot.SetPackageName("plotly")
+        clsInteractivePlot.SetRCommand("ggplotly")
+        clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+
+        clsViewObjectFunction.SetRCommand("view_object")
+        clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsInteractivePlot)
+        clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
+
+        clsRLink.RunScript(clsViewObjectFunction.ToScript(), strComment:="View last graph as plotly", bAddOutputInViewer:=False, bSeparateThread:=False)
+
     End Sub
 
     Private Sub MnuRViewer_Click(sender As Object, e As EventArgs) Handles mnuRViewer.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph(bInRViewer:=True)
-        Me.Enabled = True
+        Dim clsLastGraph As New RFunction
+        Dim clsPrintGraph As New RFunction
+        clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
+        clsLastGraph.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastGraph.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+
+        clsPrintGraph.SetRCommand("print")
+        clsPrintGraph.AddParameter("x", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+
+        clsRLink.RunScript(clsPrintGraph.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False)
+
     End Sub
 
     Private Sub mnuModelFitModelOneVariable_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelOneVariable.Click
@@ -2467,8 +2497,13 @@ Public Class frmMain
         dlgPICSARainfall.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    '    dlgApsimx.ShowDialog()
+    'End Sub
+
+    Private Sub mnuOptionsByContextCropModelApsimxExamples_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModelApsimxExamples.Click
         dlgApsimx.ShowDialog()
+
     End Sub
 
     Private Sub mnuFileImportFromRapidPro_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromRapidPro.Click

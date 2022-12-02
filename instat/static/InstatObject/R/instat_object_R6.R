@@ -660,7 +660,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, object_ty
 #returns NULL if object is not found
 #as explained in issue #7808 comments. New implementation is need to remove the internal parameter from the other "object" functions
 #if parameter internal is set to false, parameter object_type_label will have to be passed
-#todo. parameter object_type_label and nternal can be removed as a parameter if all objects are saved in the same data book or structure
+#todo. parameter object_type_label and internal can be removed as a parameter if all objects are saved in the same data book or structure
 DataBook$set("public", "get_object", function(data_name, object_name, object_type_label = "", as_file = TRUE, internal = TRUE) {
   if (!internal && identical(object_type_label,"graph") && exists(".graph_data_book")) {
     r_instant_object <- .graph_data_book$get_object(data_name = data_name, object_name = object_name,  internal = TRUE)
@@ -796,16 +796,27 @@ DataBook$set("public", "get_from_object", function(data_name, object_name, value
 }
 )
 
-DataBook$set("public", "get_last_graph", function(print_graph = TRUE, internal = FALSE) {
-  if (!internal && exists(".graph_data_book")) .graph_data_book$get_last_graph(print_graph = print_graph, internal = TRUE)
-  else {
-    if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
-      graph_object <- self$get_object(data_name = private$.last_graph[1], object_name = private$.last_graph[2], as_file = FALSE)
-      if(print_graph){
-        print(graph_object$object)
-      }
-      return(graph_object$object)
+DataBook$set("public", "get_last_object", function(object_type_label, as_file = TRUE, internal = TRUE) {
+  if (!internal && exists(".graph_data_book")){
+   return(.graph_data_book$get_last_object(object_type_label = object_type_label, as_file = as_file, internal = TRUE)) 
+  }else {
+    r_instat_object <- NULL
+    if(object_type_label == "graph"){
+      if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
+        r_instat_object <- self$get_object(data_name = private$.last_graph[1], object_name = private$.last_graph[2], as_file = as_file)
+      } 
+    }else{
+      #todo. any other object type label
     }
+    
+    if(is.null(r_instat_object)){
+      return()
+    }else if(as_file){
+      return(r_instat_object)
+    }else{
+      return(r_instat_object$object)
+    }
+    
   }
 }
 )
