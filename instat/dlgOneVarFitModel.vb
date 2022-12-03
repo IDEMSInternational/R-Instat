@@ -358,28 +358,28 @@ Public Class dlgOneVarFitModel
         clsRplotPPCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotPPCompFunction.iCallType = 3
         clsRplotPPCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotPPCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotPPCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRplotCdfCompFunction.SetPackageName("fitdistrplus")
         clsRplotCdfCompFunction.SetRCommand("cdfcomp")
         clsRplotCdfCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotCdfCompFunction.iCallType = 3
         clsRplotCdfCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotCdfCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotCdfCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRplotQqCompFunction.SetPackageName("fitdistrplus")
         clsRplotQqCompFunction.SetRCommand("qqcomp")
         clsRplotQqCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotQqCompFunction.iCallType = 3
         clsRplotQqCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotQqCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotQqCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRplotDensCompFunction.SetPackageName("fitdistrplus")
         clsRplotDensCompFunction.SetRCommand("denscomp")
         clsRplotDensCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotDensCompFunction.iCallType = 3
         clsRplotDensCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotDensCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotDensCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
@@ -483,8 +483,6 @@ Public Class dlgOneVarFitModel
         clsQuantileCIFunction.AddParameter("minLength", "FALSE", iPosition:=6)
         clsQuantileCIFunction.AddParameter("bootci.type", Chr(34) & "norm" & Chr(34), iPosition:=5)
 
-
-
         clsSdCIFunction.SetPackageName("MKinfer")
         clsSdCIFunction.SetRCommand("sdCI")
         clsSdCIFunction.AddParameter("boot", "FALSE", iPosition:=2)
@@ -496,15 +494,21 @@ Public Class dlgOneVarFitModel
         clsVarCIFunction.SetRCommand("VarCI")
         clsVarCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=1)
 
-
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModelFunction)
         bResetFittingOptions = True
         bResetFitModDisplay = True
     End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        'todo
         clsRplotFunction.AddParameter("x", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=0)
-        'todo. left here
+        clsRplotPPCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+        clsRplotCdfCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+        clsRplotQqCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+        clsRplotDensCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+
+
 
     End Sub
 
@@ -587,8 +591,6 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetRCode(clsROneVarFitModelFunction, bReset)
 
     End Sub
-
-
 
     Private Sub TestOKEnabled()
         If ucrSaveModel.IsComplete() AndAlso Not ucrReceiverVariable.IsEmpty AndAlso ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedItem <> "" Then
