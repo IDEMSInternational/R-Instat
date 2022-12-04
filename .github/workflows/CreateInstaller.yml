@@ -83,18 +83,18 @@ jobs:
         Configuration: ${{ matrix.configuration }}      
 
     # Build 32 bit installer without R
-    - name: Building the installer 32bit - No R
-      run: |
-        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-      shell: cmd
+    #- name: Building the installer 32bit - No R
+    #  run: |
+    #    "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+    #  shell: cmd
     
     # upload 32 bit installer without R
-    - name: Upload the 32 bit installer as an artifact
-      uses: actions/upload-artifact@v2
-      if: ${{ github.event_name != 'pull_request' }}
-      with:
-        path: "Output/R-Instat_0.7.4_Installer_32.exe"
-        name: rinstat32NoR-innosetup
+    #- name: Upload the 32 bit installer as an artifact
+    #  uses: actions/upload-artifact@v2
+    #  if: ${{ github.event_name != 'pull_request' }}
+    #  with:
+    #    path: "Output/R-Instat_0.7.4_Installer_32.exe"
+    #    name: rinstat32NoR-innosetup
         
     # Build 64 bit installer without R
     - name: Building the installer 64bit - No R
@@ -129,14 +129,14 @@ jobs:
       continue-on-error: true
       
     # Create directory and copy over InstatData (32bit)
-    - name: Make Library directory 32 bit
-      run: |
-        MKDIR instat\bin\x64\Release\static\Library\   
+    #- name: Make Library directory 32 bit
+    #  run: |
+    #    MKDIR instat\bin\x64\Release\static\Library\   
             
-    - name: Copy R-Instat Data 32 bit
-      run: |
-        ROBOCOPY InstatData\data\*.* instat\bin\x64\Release\static\Library\ /E
-      continue-on-error: true
+    #- name: Copy R-Instat Data 32 bit
+    #  run: |
+    #    ROBOCOPY InstatData\data\*.* instat\bin\x64\Release\static\Library\ /E
+    #  continue-on-error: true
 
       # check out R for R-Instat
     - name: Checkout R for R-Instat
@@ -151,30 +151,30 @@ jobs:
         ROBOCOPY R-RInstat\64Bit\ instat\bin\Release\static\ /E
       continue-on-error: true      
       
-    - name: Copy R 32 bit
-      run: |
-        ROBOCOPY R-RInstat\32Bit\ instat\bin\x64\Release\static\ /E
-      continue-on-error: true 
+    #- name: Copy R 32 bit
+    #  run: |
+    #    ROBOCOPY R-RInstat\32Bit\ instat\bin\x64\Release\static\ /E
+    #  continue-on-error: true 
      
     - name: Install R packages (64 bit)
       run: |
         "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
       shell: cmd
       
-    - name: Install R packages (32 bit)
-      run: |
-        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
-      shell: cmd      
+    #- name: Install R packages (32 bit)
+    #  run: |
+    #    "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+    #  shell: cmd      
       
     - name: Building the installer 64bit - With R
       run: |
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_64bit.iss"
       shell: cmd
       
-    - name: Building the installer 32bit - With R
-      run: |
-        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-      shell: cmd
+    #- name: Building the installer 32bit - With R
+    #  run: |
+    #    "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+    #  shell: cmd
 
     - name: Upload the 64 bit installer with R as an artifact
       uses: actions/upload-artifact@v2
@@ -183,11 +183,11 @@ jobs:
         path: "Output/R-Instat_Installer_64.exe"
         name: rinstat64WithR-innosetup    
          
-    - name: Upload the 32 bit installer with R as an artifact
-      uses: actions/upload-artifact@v2
-      if: ${{ github.event_name != 'pull_request' }}
-      with:
-        path: "Output/R-Instat_Installer_32.exe"
-        name: rinstat64WithR-innosetup      
+    #- name: Upload the 32 bit installer with R as an artifact
+    #  uses: actions/upload-artifact@v2
+    #  if: ${{ github.event_name != 'pull_request' }}
+    #  with:
+    #    path: "Output/R-Instat_Installer_32.exe"
+    #    name: rinstat64WithR-innosetup      
 
             
