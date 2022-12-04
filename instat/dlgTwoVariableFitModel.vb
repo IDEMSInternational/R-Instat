@@ -642,8 +642,6 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
-
-
     Private Sub SetBaseFunction()
         If rdoGeneralCase.Checked Then
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
