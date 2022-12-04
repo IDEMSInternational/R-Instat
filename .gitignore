@@ -240,5 +240,13 @@ installer/Output/
 /instat/dlgFrequency.resx
 /instat/dlgFrequency.Designer.vb
 
+# PR #7853 adds a feature to display html in the output window.
+# This requires the cef packages. These packages are more than 0.4 GB.
+# We want to prevent these packages from being stored in the R-Instat GitHub repository.
+/packages/cef.redist.*/
+/packages/CefSharp.Common.*/
+/packages/CefSharp.WinForms.*/
+
 # Package used by script window
 /packages/jacobslusser.ScintillaNET.*/
+

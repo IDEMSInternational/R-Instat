@@ -51,6 +51,7 @@ Imports RDotNet
     Public strClimsoftHost As String
     Public strClimsoftPort As String
     Public strClimsoftUsername As String
+    Public iMaxOutputsHeight As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -89,6 +90,7 @@ Imports RDotNet
         strClimsoftHost = clsInstatOptionsDefaults.DEFAULTstrClimsoftHost
         strClimsoftPort = clsInstatOptionsDefaults.DEFAULTstrClimsoftPort
         strClimsoftUsername = clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername
+        iMaxOutputsHeight = clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight
         If bSetOptions Then
             SetOptions()
         End If
@@ -277,6 +279,13 @@ Imports RDotNet
             SetClimsoftUsername(strClimsoftUsername)
         Else
             SetClimsoftUsername(clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername)
+        End If
+
+
+        If iMaxOutputsHeight IsNot Nothing Then
+            SetMaximumOutputsHeight(iMaxOutputsHeight)
+        Else
+            SetMaximumOutputsHeight(clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
         End If
     End Sub
 
@@ -515,4 +524,9 @@ Imports RDotNet
     Public Sub SetClimsoftUsername(strNewClimsoftUsername As String)
         strClimsoftUsername = strNewClimsoftUsername
     End Sub
+
+    Public Sub SetMaximumOutputsHeight(iNewMaxOutputsHeight As Integer)
+        iMaxOutputsHeight = iNewMaxOutputsHeight
+    End Sub
+
 End Class
