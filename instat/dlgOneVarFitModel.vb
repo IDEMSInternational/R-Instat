@@ -507,9 +507,6 @@ Public Class dlgOneVarFitModel
         clsRplotCdfCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
         clsRplotQqCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
         clsRplotDensCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
-
-
-
     End Sub
 
 
