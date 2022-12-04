@@ -47,6 +47,8 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 415
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         ucrChkWeights.Enabled = False ' temporary because of bug in R functions being used
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
@@ -122,6 +124,8 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
         'TODO have conditions on multiple functions for both option
+        'and also requires multiple output support. So for now diesable
+        rdoBoth.Enabled = False
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -172,6 +176,11 @@ Public Class dlgThreeVariableFrequencies
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
         clsTableBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=3)
         clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTabFunction, iPosition:=4)
+        clsTableBaseOperator.SetAssignToOutputObject("last_table",
+                                                     RObjectTypeLabel.Table,
+                                                     RObjectFormat.Html,
+                                                     ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
+                                                     "last_table")
 
         clsGraphBaseOperator.SetOperation("%>%")
         clsGraphBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
@@ -203,7 +212,13 @@ Public Class dlgThreeVariableFrequencies
         clsGridArrangeFunction.SetRCommand("grid.arrange")
         clsGridArrangeFunction.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
 
-        clsGridArrangeFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsGridArrangeFunction.SetAssignToOutputObject("last_graph",
+                                          RObjectTypeLabel.Graph,
+                                          RObjectFormat.Image,
+                                          ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
+                                          "last_graph")
+
+
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         clsCurrBaseCode = clsTableBaseOperator
         bResetSubdialog = True
