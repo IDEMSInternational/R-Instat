@@ -17,9 +17,10 @@
 Imports instat
 Imports instat.Translations
 Public Class sdgPairPlotOptions
-    Public clsOperator As New ROperator
-    Public clsPairThemesFunction, clsGGpairAesFunction As New RFunction
+    Public clsPairOperator As New ROperator
+    Public clsPairThemesFunction, clsGGpairsFunction As New RFunction
     Private bControlsInitialised As Boolean = False
+
     Private Sub sdgPairPlotOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -43,45 +44,37 @@ Public Class sdgPairPlotOptions
         ucrChkLegendPosition.AddParameterPresentCondition(True, "legend_position")
         ucrChkLegendPosition.AddParameterPresentCondition(False, "legend_position", False)
 
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperetor As ROperator, clsNewPairThemesFunction As RFunction, clsNewGGpairAesFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewPairOperator As ROperator, clsNewPairThemesFunction As RFunction, clsNewGGpairAesFunction As RFunction, Optional bReset As Boolean = False)
+        clsPairOperator = clsNewPairOperator
+        clsPairThemesFunction = clsNewPairThemesFunction
+        clsGGpairsFunction = clsNewGGpairAesFunction
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        clsOperator = clsNewOperetor
-        clsPairThemesFunction = clsNewPairThemesFunction
-        clsGGpairAesFunction = clsNewGGpairAesFunction
-
-
-        ucrChkLegendPosition.SetRCode(clsPairThemesFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLegendPosition.SetRCode(clsPairThemesFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkShowLegend.SetRCode(clsGGpairAesFunction, bReset, bCloneIfNeeded:=True)
-
+        If bReset Then
+            ucrChkShowLegend.SetRCode(clsGGpairsFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkLegendPosition.SetRCode(clsPairThemesFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputLegendPosition.SetRCode(clsPairThemesFunction, bReset, bCloneIfNeeded:=True)
+        End If
     End Sub
-    'Private Sub AddRemoveTheme()
-    '    'If clsThemeFunction.iParameterCount > 0 Then
-    '    '    clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
-    '    'Else
-    '    '    clsBaseOperator.RemoveParameterByName("theme")
-    '    'End If
-    'End Sub
+
     Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         If ucrChkLegendPosition.Checked Then
-            clsOperator.AddParameter("right", clsRFunctionParameter:=clsPairThemesFunction, iPosition:=1)
-
+            clsPairOperator.AddParameter("right", clsRFunctionParameter:=clsPairThemesFunction, iPosition:=1)
         Else
-            clsOperator.RemoveParameterByName("right")
+            clsPairOperator.RemoveParameterByName("right")
         End If
-
     End Sub
 
     Private Sub ucrChkShowLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowLegend.ControlValueChanged
         If ucrChkShowLegend.Checked Then
-            clsGGpairAesFunction.AddParameter("legend", 1, iPosition:=2)
+            clsGGpairsFunction.AddParameter("legend", 1, iPosition:=2)
         Else
-            clsGGpairAesFunction.RemoveParameterByName("legend")
+            clsGGpairsFunction.RemoveParameterByName("legend")
         End If
     End Sub
 End Class

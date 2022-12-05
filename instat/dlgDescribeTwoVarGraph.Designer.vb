@@ -839,7 +839,7 @@ Partial Class dlgDescribeTwoVarGraph
         'cmdPairOptions
         '
         Me.cmdPairOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPairOptions.Location = New System.Drawing.Point(12, 226)
+        Me.cmdPairOptions.Location = New System.Drawing.Point(11, 226)
         Me.cmdPairOptions.Name = "cmdPairOptions"
         Me.cmdPairOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdPairOptions.TabIndex = 66
