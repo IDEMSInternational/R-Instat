@@ -507,12 +507,20 @@ Public Class RCodeStructure
                     clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
                 End If
 
+                clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
+
                 clsAddRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
                 clsAddRObject.AddParameter("object_type_label", Chr(34) & _strAssignToObjectTypeLabel & Chr(34))
                 clsAddRObject.AddParameter("object_format", Chr(34) & _strAssignToObjectFormat & Chr(34))
-                clsAddRObject.AddParameter("object", _strAssignToObject)
 
-                clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
+                If _strAssignToObjectTypeLabel = RObjectTypeLabel.Graph Then
+                    Dim clsCheckGraphRFunction As New RFunction
+                    clsCheckGraphRFunction.SetRCommand("check_graph")
+                    clsCheckGraphRFunction.AddParameter("graph_object", _strAssignToObject)
+                    clsAddRObject.AddParameter("object", clsRFunctionParameter:=clsCheckGraphRFunction)
+                Else
+                    clsAddRObject.AddParameter("object", strParameterValue:=_strAssignToObject)
+                End If
 
                 'construct the scripts 
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine

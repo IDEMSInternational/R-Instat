@@ -2750,3 +2750,15 @@ view_html_object <- function(html_object){
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
 } 
+
+#
+check_graph <- function(graph_object){
+  if(is.null(graph_object)){
+    #todo. add a try catch. Applies to commands written in the script window
+    return(recordPlot())
+  }else{
+    return(graph_object)
+  }
+} 
+
+
