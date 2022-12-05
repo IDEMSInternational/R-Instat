@@ -84,7 +84,11 @@ Public MustInherit Class ucrReoGrid
                 lstWorkSheetsFound.Add(fillWorkSheet)
             End If
         Next
-        If lstWorkSheetsFound.Count > 1 Then
+
+        Dim bReorder As Boolean = If(lstWorkSheetsFound.Count > 1, _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()), True)
+
+        If Not bReorder Then
             'reorder the worksheets based on the filled list
             For i As Integer = 0 To lstWorkSheetsFound.Count - 1
                 grdData.MoveWorksheet(lstWorkSheetsFound(i), i)

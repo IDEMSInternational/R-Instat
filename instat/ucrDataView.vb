@@ -139,6 +139,7 @@ Public Class ucrDataView
         End If
         _clsDataBook.RefreshData()
         AddAndUpdateWorksheets()
+        _grid.ReOrderWorksheets()
         _grid.RemoveOldWorksheets()
         If _clsDataBook.DataFrames.Count = 0 Then
             RefreshDisplayInformation()
@@ -239,10 +240,6 @@ Public Class ucrDataView
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
-
-    Public Sub ReOrderWorkSheets()
-        _grid.ReOrderWorksheets()
-    End Sub
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
