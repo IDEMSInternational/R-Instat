@@ -86,13 +86,12 @@ Public Class dlgOptions
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
         ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
-
-        ucrChkShowWaitDialog.SetText("Set maximum height for outputs")
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
 
         ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
         ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
         ucrNudMaximumOutputsHeight.Maximum = 1000
-        'todo. temporarily disable
+        'todo. temporarily disabled
         ucrChkMaximumOutputsHeight.Visible = False
         ucrNudMaximumOutputsHeight.Visible = False
 
