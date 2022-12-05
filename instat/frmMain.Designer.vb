@@ -709,7 +709,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeSpecificTables, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         Me.mnuDescribe.Size = New System.Drawing.Size(64, 22)
         Me.mnuDescribe.Tag = "Describe"
@@ -834,15 +834,15 @@ Partial Class frmMain
         'mnuDescribeSpecificSummary
         '
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
-        Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(197, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
-        Me.mnuDescribeSpecificSummary.Text = "Frequency..."
+        Me.mnuDescribeSpecificSummary.Text = "Frequency/Summary ..."
         '
         'mnuDescribeSpecificMultipleResponse
         '
         Me.mnuDescribeSpecificMultipleResponse.Enabled = False
         Me.mnuDescribeSpecificMultipleResponse.Name = "mnuDescribeSpecificMultipleResponse"
-        Me.mnuDescribeSpecificMultipleResponse.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeSpecificMultipleResponse.Size = New System.Drawing.Size(197, 22)
         Me.mnuDescribeSpecificMultipleResponse.Tag = "Multiple Response..."
         Me.mnuDescribeSpecificMultipleResponse.Text = "Multiple Response..."
         Me.mnuDescribeSpecificMultipleResponse.Visible = False
