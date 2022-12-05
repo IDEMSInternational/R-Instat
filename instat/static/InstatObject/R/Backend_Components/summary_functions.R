@@ -176,7 +176,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
       if(percentage_type == "none") {
-          summary_function_exp <- paste0(summary_type, "(x = ", column_names, function_exp)
+        summary_function_exp <- paste0(summary_type, "(x = ", column_names, function_exp)
         summary_calculation <- instat_calculation$new(type = type, result_name = result_name,
                                                       function_exp = summary_function_exp,
                                                       calculated_from = calculated_from, save = save)
