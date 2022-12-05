@@ -100,20 +100,14 @@ Public Class ucrFilter
 
     Private Sub VariableTypeProperties()
         ucrReceiverExpression.Visible = False
-        lblSelectLevels.Visible = False
         ucrFactorLevels.Visible = False
-        cmdToggleSelectAll.Visible = False
         ucrFilterOperation.Visible = False
         ucrLogicalCombobox.Visible = False
         ucrDatePicker.Visible = False
         grpNumeric.Visible = False
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
-                lblSelectLevels.Visible = True
                 ucrFactorLevels.Visible = True
-                cmdToggleSelectAll.Visible = True
-                'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
-                SetToggleButtonSettings()
             Else
                 ucrFilterOperation.Visible = True
                 If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" AndAlso ucrFilterOperation.GetText() <> "is.empty" AndAlso ucrFilterOperation.GetText() <> "! is.empty" Then
@@ -152,16 +146,6 @@ Public Class ucrFilter
                         End Select
                 End Select
             End If
-        End If
-    End Sub
-
-    Private Sub SetToggleButtonSettings()
-        If ucrFactorLevels.IsAllGridRowsSelected Then
-            cmdToggleSelectAll.Text = "Deselect All Levels"
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            cmdToggleSelectAll.Text = "Select All Levels"
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
         End If
     End Sub
 
@@ -243,12 +227,7 @@ Public Class ucrFilter
         RaiseEvent FilterChanged()
     End Sub
 
-    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
-        ucrFactorLevels.SelectAllGridRows(Not ucrFactorLevels.IsAllGridRowsSelected())
-    End Sub
-
     Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
-        SetToggleButtonSettings()
         CheckAddEnabled()
     End Sub
 
@@ -434,6 +413,5 @@ Public Class ucrFilter
         End If
         ucrFilterPreview.SetName(strFilter)
     End Sub
-
 
 End Class

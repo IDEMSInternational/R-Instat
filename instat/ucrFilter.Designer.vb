@@ -39,9 +39,7 @@ Partial Class ucrFilter
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.lblSelectLevels = New System.Windows.Forms.Label()
         Me.cmdAddCondition = New System.Windows.Forms.Button()
-        Me.cmdToggleSelectAll = New System.Windows.Forms.Button()
         Me.lstFilters = New System.Windows.Forms.ListView()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.lblFilterBy = New System.Windows.Forms.Label()
@@ -84,16 +82,6 @@ Partial Class ucrFilter
         Me.grpNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblSelectLevels
-        '
-        Me.lblSelectLevels.AutoSize = True
-        Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectLevels.Location = New System.Drawing.Point(413, 48)
-        Me.lblSelectLevels.Name = "lblSelectLevels"
-        Me.lblSelectLevels.Size = New System.Drawing.Size(74, 13)
-        Me.lblSelectLevels.TabIndex = 3
-        Me.lblSelectLevels.Text = "Select Levels:"
-        '
         'cmdAddCondition
         '
         Me.cmdAddCondition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -105,16 +93,6 @@ Partial Class ucrFilter
         Me.cmdAddCondition.Tag = "Add_Condition"
         Me.cmdAddCondition.Text = "Add Condition"
         Me.cmdAddCondition.UseVisualStyleBackColor = True
-        '
-        'cmdToggleSelectAll
-        '
-        Me.cmdToggleSelectAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdToggleSelectAll.Location = New System.Drawing.Point(674, 363)
-        Me.cmdToggleSelectAll.Name = "cmdToggleSelectAll"
-        Me.cmdToggleSelectAll.Size = New System.Drawing.Size(93, 23)
-        Me.cmdToggleSelectAll.TabIndex = 7
-        Me.cmdToggleSelectAll.Text = "Select All Levels"
-        Me.cmdToggleSelectAll.UseVisualStyleBackColor = True
         '
         'lstFilters
         '
@@ -581,15 +559,13 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrFilterPreview)
         Me.Controls.Add(Me.lblFilterPreview)
         Me.Controls.Add(Me.lstFilters)
-        Me.Controls.Add(Me.cmdToggleSelectAll)
-        Me.Controls.Add(Me.ucrFilterOperation)
         Me.Controls.Add(Me.cmdAddCondition)
-        Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrFilterByReceiver)
         Me.Controls.Add(Me.ucrSelectorForFitler)
         Me.Controls.Add(Me.ucrChkNotForAllConditions)
         Me.Controls.Add(Me.ucrChkNotForEachCondition)
         Me.Controls.Add(Me.ucrReceiverExpression)
+        Me.Controls.Add(Me.ucrFilterOperation)
         Me.Name = "ucrFilter"
         Me.Size = New System.Drawing.Size(772, 395)
         Me.grpNumeric.ResumeLayout(False)
@@ -601,10 +577,8 @@ Partial Class ucrFilter
     Friend WithEvents ucrSelectorForFitler As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrFilterByReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorLevels As ucrFactor
-    Friend WithEvents lblSelectLevels As Label
     Friend WithEvents cmdAddCondition As Button
     Friend WithEvents ucrFilterOperation As ucrInputComboBox
-    Friend WithEvents cmdToggleSelectAll As Button
     Friend WithEvents lstFilters As ListView
     Friend WithEvents lblFilterPreview As Label
     Friend WithEvents ucrFilterPreview As ucrInputTextBox

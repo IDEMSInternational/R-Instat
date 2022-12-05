@@ -137,11 +137,11 @@ Public Class dlgClimaticCheckDataTemperature
         ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
 
         ucrChkSame.SetParameter(New RParameter("same", clsSameOp, 1), bNewChangeParameterValue:=False)
-        ucrChkSame.SetText("Days: (Element1)")
+        ucrChkSame.SetText("Days:")
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
         ucrChkJump.SetParameter(New RParameter("jump", clsJumpOp, 1), bNewChangeParameterValue:=False)
-        ucrChkJump.SetText("Jump: (Element1)")
+        ucrChkJump.SetText("Jump:")
         ucrChkJump.AddToLinkedControls(ucrNudJump, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
         ucrChkDifference.SetParameter(New RParameter("diff", clsDiffOp, 1), bNewChangeParameterValue:=False)
@@ -597,7 +597,6 @@ Public Class dlgClimaticCheckDataTemperature
         If ucrReceiverElement1.IsEmpty OrElse ucrReceiverElement2.IsEmpty Then
             ucrChkDifference.Enabled = False
             ucrNudDifference.Enabled = False
-            ucrChkDifference.Checked = False
         Else
             ucrChkDifference.Enabled = True
             ucrNudDifference.Enabled = True

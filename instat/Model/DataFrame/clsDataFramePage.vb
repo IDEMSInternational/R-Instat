@@ -261,11 +261,15 @@ Public Class clsDataFramePage
             columnHeader.bIsFactor = True
         ElseIf strHeaderType.Contains("character") Then
             columnHeader.strTypeShortCode = "(C)"
-        ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("POSIXct") OrElse
-                strHeaderType.Contains("POSIXt") OrElse strHeaderType.Contains("hms") OrElse
-                strHeaderType.Contains("difftime") OrElse strHeaderType.Contains("Duration") OrElse
+        ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("Duration") OrElse
                 strHeaderType.Contains("Period") OrElse strHeaderType.Contains("Interval") Then
             columnHeader.strTypeShortCode = "(D)"
+        ElseIf strHeaderType.Contains("POSIXct") OrElse
+                strHeaderType.Contains("POSIXt") Then
+            columnHeader.strTypeShortCode = "(D.T)"
+        ElseIf strHeaderType.Contains("hms") OrElse
+                strHeaderType.Contains("difftime") Then
+            columnHeader.strTypeShortCode = "(T)"
         ElseIf strHeaderType.Contains("logical") Then
             columnHeader.strTypeShortCode = "(L)"
             ' Structured columns e.g. "circular" are coded with "(S)"
@@ -330,6 +334,16 @@ Public Class clsDataFramePage
     End Sub
 
     ''' <summary>
+    ''' Go to the specific row page
+    ''' </summary>
+    Public Sub GoToSpecificRowPage(iRow As Integer)
+        If iRow > 0 Then
+            _iRowStart = (intRowIncrements * (iRow - 1)) + 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        End If
+    End Sub
+
+    ''' <summary>
     ''' Does a previous page exist for rows
     ''' </summary>
     ''' <returns></returns>
@@ -377,6 +391,17 @@ Public Class clsDataFramePage
     Public Sub LoadNextColumnPage()
         If CanLoadNextColumnPage() Then
             _iColumnStart += iColumnIncrements
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Go to the specific column page
+    ''' </summary>
+    Public Sub GoToSpecificColumnPage(iColumn As Integer)
+        If iColumn > 0 Then
+            _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
             _clsRDotNetDataFrame = GetDataFrameFromRCommand()
             SetHeaders()
         End If
