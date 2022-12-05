@@ -172,11 +172,11 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("maxsum", iMaxSum)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
-        clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
-                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                              strRObjectFormatToAssignTo:=RObjectFormat.Text,
-                                              strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
-                                              strObjectName:="last_summary")
+        clsSummaryFunction.SetAssignToOutputObject("last_summary",
+                                                   RObjectTypeLabel.Summary,
+                                                   RObjectFormat.Text,
+                                                   ucrSelectorOneVarSummarise.strCurrentDataFrame,
+                                                   "last_summary")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=0)

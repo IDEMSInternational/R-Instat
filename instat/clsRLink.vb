@@ -152,7 +152,7 @@ Public Class RLink
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.1.2"
+    Private strRBundledVersion As String = "4.1.3"
 
     Private clsOutputLogger As clsOutputLogger
 
@@ -1027,16 +1027,14 @@ Public Class RLink
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
         clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
 
-
         Dim strGlobalGraphDisplayOption As String
-            'store the current set graph display option, to restore after display
-            strGlobalGraphDisplayOption = Me.strGraphDisplayOption
-            Me.strGraphDisplayOption = "view_R_viewer"
-            clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
-            RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
-            'restore the graph display option
-            Me.strGraphDisplayOption = strGlobalGraphDisplayOption
-
+        'store the current set graph display option, to restore after display
+        strGlobalGraphDisplayOption = Me.strGraphDisplayOption
+        Me.strGraphDisplayOption = "view_R_viewer"
+        clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
+        RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
+        'restore the graph display option
+        Me.strGraphDisplayOption = strGlobalGraphDisplayOption
     End Sub
 
     '''--------------------------------------------------------------------------------------------
