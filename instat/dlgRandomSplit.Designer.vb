@@ -24,7 +24,7 @@ Partial Class dlgRandomSplit
     Private Sub InitializeComponent()
         Me.rdoSample = New System.Windows.Forms.RadioButton()
         Me.rdoTimeSeries = New System.Windows.Forms.RadioButton()
-        Me.ucrChkStratifyingvariable = New instat.ucrCheck()
+        Me.ucrChkStratifyingFactor = New instat.ucrCheck()
         Me.ucrSaveTestingData = New instat.ucrSave()
         Me.ucrReceiverRanSplit = New instat.ucrReceiverSingle()
         Me.ucrNudBreaks = New instat.ucrNud()
@@ -39,6 +39,7 @@ Partial Class dlgRandomSplit
         Me.lblFraction = New System.Windows.Forms.Label()
         Me.lblBreaks = New System.Windows.Forms.Label()
         Me.lblPool = New System.Windows.Forms.Label()
+        Me.ucrChkTest = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'rdoSample
@@ -73,15 +74,15 @@ Partial Class dlgRandomSplit
         Me.rdoTimeSeries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTimeSeries.UseVisualStyleBackColor = True
         '
-        'ucrChkStratifyingvariable
+        'ucrChkStratifyingFactor
         '
-        Me.ucrChkStratifyingvariable.AutoSize = True
-        Me.ucrChkStratifyingvariable.Checked = False
-        Me.ucrChkStratifyingvariable.Location = New System.Drawing.Point(280, 77)
-        Me.ucrChkStratifyingvariable.Margin = New System.Windows.Forms.Padding(2)
-        Me.ucrChkStratifyingvariable.Name = "ucrChkStratifyingvariable"
-        Me.ucrChkStratifyingvariable.Size = New System.Drawing.Size(148, 23)
-        Me.ucrChkStratifyingvariable.TabIndex = 20
+        Me.ucrChkStratifyingFactor.AutoSize = True
+        Me.ucrChkStratifyingFactor.Checked = False
+        Me.ucrChkStratifyingFactor.Location = New System.Drawing.Point(280, 77)
+        Me.ucrChkStratifyingFactor.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrChkStratifyingFactor.Name = "ucrChkStratifyingFactor"
+        Me.ucrChkStratifyingFactor.Size = New System.Drawing.Size(148, 23)
+        Me.ucrChkStratifyingFactor.TabIndex = 20
         '
         'ucrSaveTestingData
         '
@@ -243,15 +244,26 @@ Partial Class dlgRandomSplit
         Me.lblPool.Tag = ""
         Me.lblPool.Text = "Pool:"
         '
+        'ucrChkTest
+        '
+        Me.ucrChkTest.AutoSize = True
+        Me.ucrChkTest.Checked = False
+        Me.ucrChkTest.Location = New System.Drawing.Point(189, 239)
+        Me.ucrChkTest.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkTest.Name = "ucrChkTest"
+        Me.ucrChkTest.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkTest.TabIndex = 24
+        '
         'dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 389)
+        Me.Controls.Add(Me.ucrChkTest)
         Me.Controls.Add(Me.lblPool)
         Me.Controls.Add(Me.lblBreaks)
         Me.Controls.Add(Me.lblFraction)
-        Me.Controls.Add(Me.ucrChkStratifyingvariable)
+        Me.Controls.Add(Me.ucrChkStratifyingFactor)
         Me.Controls.Add(Me.ucrSaveTestingData)
         Me.Controls.Add(Me.ucrReceiverRanSplit)
         Me.Controls.Add(Me.ucrNudBreaks)
@@ -289,8 +301,9 @@ Partial Class dlgRandomSplit
     Friend WithEvents ucrReceiverRanSplit As ucrReceiverSingle
     Friend WithEvents ucrSaveTrainingData As ucrSave
     Friend WithEvents ucrSaveTestingData As ucrSave
-    Friend WithEvents ucrChkStratifyingvariable As ucrCheck
+    Friend WithEvents ucrChkStratifyingFactor As ucrCheck
     Friend WithEvents lblPool As Label
     Friend WithEvents lblBreaks As Label
     Friend WithEvents lblFraction As Label
+    Friend WithEvents ucrChkTest As ucrCheck
 End Class
