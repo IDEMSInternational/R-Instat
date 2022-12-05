@@ -912,7 +912,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificTables.Name = "mnuDescribeSpecificTables"
         Me.mnuDescribeSpecificTables.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificTables.Tag = "Table_Dialogs"
-        Me.mnuDescribeSpecificTables.Text = "Tables"
+        Me.mnuDescribeSpecificTables.Text = "Tables..."
         '
         'mnuDescribeGeneral
         '
