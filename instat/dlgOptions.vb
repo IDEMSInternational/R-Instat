@@ -91,7 +91,7 @@ Public Class dlgOptions
         ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
         ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
         ucrNudMaximumOutputsHeight.Maximum = 1000
-        'todo. temporarily disabled
+        'todo. temporarily disabled 
         ucrChkMaximumOutputsHeight.Visible = False
         ucrNudMaximumOutputsHeight.Visible = False
 
