@@ -88,8 +88,13 @@ Public Class dlgOptions
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
 
         ucrChkShowWaitDialog.SetText("Set maximum height for outputs")
+
+        ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
         ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
         ucrNudMaximumOutputsHeight.Maximum = 1000
+        'todo. temporarily disable
+        ucrChkMaximumOutputsHeight.Visible = False
+        ucrNudMaximumOutputsHeight.Visible = False
 
         SetVisibleLanButton()
     End Sub
@@ -122,10 +127,12 @@ Public Class dlgOptions
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
-        ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
-        ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
-                                              frmMain.clsInstatOptions.iMaxOutputsHeight,
-                                              clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+
+        'todo. temporarily disabled
+        'ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
+        'ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
+        '                                      frmMain.clsInstatOptions.iMaxOutputsHeight,
+        '                                      clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
