@@ -190,8 +190,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
-        frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
-                                                         ucrNudMaximumOutputsHeight.Value, -1))
+        'todo. temporarily disabled
+        'frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
+        '                                                 ucrNudMaximumOutputsHeight.Value, -1))
     End Sub
 
     Private Sub SetView()
