@@ -78,10 +78,7 @@ packs <- c("abind", "agricolae", "agridat", "AlgDesign", "animation",
         "viridisLite", "visdat", "visreg", "vroom", "wakefield", "waldo", 
         "weathermetrics", "whisker", "withr", "wk", "xfun", "XML", "xml2", 
         "xopen", "xtable", "xts", "yaml", "yulab.utils", "zip", "zoo", 
-        "zyp",
-           # mmtable2 package from GitHub added manually to list
-           # install with devtools::install_github("ianmoran11/mmtable2")
-           "mmtable2")
+        "zyp")
 
 versions <- c("1.4-5", "1.3-5", "1.21", "1.2.1", "2.7", "0.3.9", 
         "1.1.9", "1.0-15", "1.1", "0.2.1", "1.0-16", "1.4.1", "0.1-3", 
@@ -149,10 +146,7 @@ versions <- c("1.4-5", "1.3-5", "1.21", "1.2.1", "2.7", "0.3.9",
         "1.2.2", "1.5-6", "1.4-10", "0.8-0", "0.5.1", "0.6.2", "0.4.1", 
         "0.5.3", "2.7.0", "1.6.0", "0.3.6", "0.4.0", "1.2.2", "0.4", 
         "2.5.0", "0.7.0", "0.35", "3.99-0.12", "1.3.3", "1.0.0", "1.8-4", 
-        "0.12.2", "2.3.6", "0.0.5", "2.2.2", "1.8-11", "0.10-1.1",
-              # mmtable2 package from GitHub added manually to list
-              "0.1.3"
-              )
+        "0.12.2", "2.3.6", "0.0.5", "2.2.2", "1.8-11", "0.10-1.1")
 
 ##################################################
 
@@ -162,43 +156,10 @@ packages_not_installed <- function() {
   return(names(success)[!success])
 }
 
-load_R_Instat_packages <- function() {
-  # ggthemes temp added because themes list doesn't contain package names
-  # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat
-  # plyr and dplyr loaded in order to avoid conflicts
-  # ggplot2 loaded for convenience
-  # svglite and ggfortify needed for View Graph dialog
-  # PCICt needed to access PCICt class when importing NETcdf files
-  # ggmosaic because geom_mosaic aes only work when ggmosaic is loaded
-  # wakefield because many functions do not work without loading (https://github.com/trinker/wakefield/issues/11)
-  # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
-  # texmex loaded because of extreme value distributions
-  # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package
-  # purrr loaded because map_int() is required  by function(s) such as header_top_left() from mmtable2 package
-  # mc2d loaded because of triangular and continuous empirical distributions
-  packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex", "mc2d")
-  for(pack in packs_to_load) {
-    try(library(pack, character.only = TRUE))
-  }
-}
+install.packages(packs, dependencies = FALSE, repos='http://cran.us.r-project.org')
 
-# Returns package names from packs_to_load which are not loaded
-packages_not_loaded <- function() {
-  return(packs_to_load[!packs_to_load %in% .packages()])
-}
+install.packages(packages_not_installed(), dependencies = FALSE, repos='http://cran.us.r-project.org')
 
-##################################################
+devtools::install_github("ianmoran11/mmtable2")
 
-# Now do not install packages on start up
-# success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
-# if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
-load_R_Instat_packages()
-
-setwd(dirname(parent.frame(2)$ofile))
-source("instat_object_R6.R")
-source("data_object_R6.R")
-source("labels_and_defaults.R")
-source("stand_alone_functions.R")
-files <- sort(dir(file.path(getwd(), 'Backend_Components/'), pattern=".R$", full.names = TRUE, recursive = TRUE))
-invisible(lapply(files, source, chdir = TRUE))
