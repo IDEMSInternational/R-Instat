@@ -52,6 +52,10 @@ Public Class dlgDescribeTwoVarGraph
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
     Private strFirstVariablesType, strSecondVariableType As String
+
+    Private clsOperator As New ROperator
+    Private clsPairThemesFunction As New RFunction
+
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -277,6 +281,8 @@ Public Class dlgDescribeTwoVarGraph
         clsMosaicGgplotFunction = New RFunction
         clsDummyFunction = New RFunction
         clsRFacet = New RFunction
+        clsOperator = New ROperator
+        clsPairThemesFunction = New RFunction
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsGlobalAes = New RFunction
@@ -292,6 +298,7 @@ Public Class dlgDescribeTwoVarGraph
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
+
 
         clsGeomBoxplot = New RFunction
         clsGeomJitter = New RFunction
@@ -329,7 +336,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
 
-        cmdOptions.Enabled = False
+        'cmdOptions.Enabled = False
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
@@ -462,6 +469,13 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomHistogram.SetPackageName("ggplot2")
         clsGeomHistogram.SetRCommand("geom_histogram")
         clsGeomHistogram.AddParameter("position", Chr(34) & "dodge" & Chr(34))
+
+        clsPairThemesFunction.SetPackageName("ggplot2")
+        clsPairThemesFunction.SetRCommand("theme")
+        clsPairThemesFunction.AddParameter("legend.position", Chr(34) & "none" & Chr(34), iPosition:=0)
+
+        clsOperator.SetOperation("+")
+        clsOperator.AddParameter("right", clsRFunctionParameter:=clsPairThemesFunction, iPosition:=1)
 
         clsStatSummaryHline.SetPackageName("ggplot2")
         clsStatSummaryHline.SetRCommand("stat_summary")
@@ -849,6 +863,12 @@ Public Class dlgDescribeTwoVarGraph
         bResetSubdialog = False
     End Sub
 
+    Private Sub cmdPairOptions_Click(sender As Object, e As EventArgs) Handles cmdPairOptions.Click
+        sdgPairPlotOptions.SetRCode(clsNewOperetor:=clsOperator, clsNewPairThemesFunction:=clsPairThemesFunction, clsNewGGpairAesFunction:=clsGGpairAesFunction, bReset = bResetSubdialog)
+
+        bResetSubdialog = False
+        sdgPairPlotOptions.ShowDialog()
+    End Sub
     Private Sub SetFreeYAxis()
         Dim clsScaleParam As RParameter
         Dim strXName As String
@@ -953,9 +973,11 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoBy.Checked Then
             cmdOptions.Enabled = True
+            cmdPairOptions.Enabled = False
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
             cmdOptions.Enabled = False
+            cmdPairOptions.Enabled = True
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
         End If
         If bRCodeSet Then

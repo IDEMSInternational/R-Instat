@@ -103,6 +103,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrChkAddLabelsText = New instat.ucrCheck()
         Me.lblLabelPosition = New System.Windows.Forms.Label()
         Me.ucrInputLabelColour = New instat.ucrInputComboBox()
+        Me.cmdPairOptions = New System.Windows.Forms.Button()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -747,7 +748,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 460)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrReceiverFirstVars
@@ -835,12 +836,24 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputLabelColour.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelColour.TabIndex = 63
         '
+        'cmdPairOptions
+        '
+        Me.cmdPairOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPairOptions.Location = New System.Drawing.Point(12, 226)
+        Me.cmdPairOptions.Name = "cmdPairOptions"
+        Me.cmdPairOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdPairOptions.TabIndex = 66
+        Me.cmdPairOptions.Tag = "Options..."
+        Me.cmdPairOptions.Text = "Pair Plot Options"
+        Me.cmdPairOptions.UseVisualStyleBackColor = True
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 516)
+        Me.Controls.Add(Me.cmdPairOptions)
         Me.Controls.Add(Me.ucrInputLabelSize)
         Me.Controls.Add(Me.lblLabelColour)
         Me.Controls.Add(Me.lblLabelSize)
@@ -946,4 +959,5 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrChkAddLabelsText As ucrCheck
     Friend WithEvents lblLabelPosition As Label
     Friend WithEvents ucrInputLabelColour As ucrInputComboBox
+    Friend WithEvents cmdPairOptions As Button
 End Class
