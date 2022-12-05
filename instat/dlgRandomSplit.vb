@@ -66,7 +66,7 @@ Public Class dlgRandomSplit
         ucrChkLag.SetParameter(ucrNudLag.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
-        ucrChkTest.SetText("Save Test")
+        ucrChkTest.SetText("Save Test Variable:")
         ucrChkTest.AddToLinkedControls(ucrSaveTestingData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveTrainingData.SetLabelText("Save Train to:")
@@ -139,7 +139,7 @@ Public Class dlgRandomSplit
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlRandomSplit.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkTest.SetRCode(clsInitialSplit, bReset)
+
         ucrSelectorRandomSplit.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("data", ucrSelectorRandomSplit.ucrAvailableDataFrames.clsCurrDataFrame, 0), iAdditionalPairNo:=1)
         ucrNudFraction.AddAdditionalCodeParameterPair(clsInitialTimeSplit, New RParameter("prop", 1), iAdditionalPairNo:=1)
 
@@ -152,6 +152,10 @@ Public Class dlgRandomSplit
         ucrNudLag.SetRCode(clsInitialTimeSplit, bReset)
         ucrReceiverRanSplit.SetRCode(clsInitialSplit, bReset)
         ucrChkStratifyingFactor.SetRCode(clsInitialSplit, bReset)
+
+        If bReset Then
+            ucrChkTest.SetRCode(clsInitialSplit, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
