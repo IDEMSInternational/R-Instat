@@ -152,7 +152,7 @@ Public Class RLink
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.1.2"
+    Private strRBundledVersion As String = "4.1.3"
 
     Private clsOutputLogger As clsOutputLogger
 
@@ -224,7 +224,7 @@ Public Class RLink
         Dim iCurrentCallType As Integer
         Dim bClose As Boolean = False
         Dim strStaticPath = Path.GetFullPath("static")
-        Dim rHome = Path.Combine(strStaticPath, "R-" & strRBundledVersion)
+        Dim rHome = Path.Combine(strStaticPath, "R")
         Dim cpuArchitectureFolder = "i386"
 
         Try

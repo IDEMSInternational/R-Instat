@@ -239,12 +239,18 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgSummaryThemes.Designer.vb">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSummaryThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.vb">
-	    <SubType>Form</SubType>
-	  </Compile>
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSearch.Designer.vb">
       <DependentUpon>dlgSearch.vb</DependentUpon>
     </Compile>
@@ -1535,6 +1541,12 @@
     <Compile Include="dlgUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgMissingOptionsEvapotranspiration.Designer.vb">
+      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMissingOptionsEvapotranspiration.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -2591,12 +2603,6 @@
     <Compile Include="frmMetaData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScript.Designer.vb">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmScript.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmVariables.designer.vb">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </Compile>
@@ -3080,6 +3086,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSummaryThemes.resx">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
@@ -4793,12 +4802,6 @@
     <EmbeddedResource Include="frmMetaData.sw-KE.resx">
       <DependentUpon>frmMetaData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.sw-KE.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmVariables.resx">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </EmbeddedResource>
@@ -4861,6 +4864,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseModel.resx">
       <DependentUpon>dlgUseModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMissingOptionsEvapotranspiration.resx">
+      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
