@@ -85,13 +85,16 @@ Public MustInherit Class ucrReoGrid
             End If
         Next
 
+        'in the second condition we check if all data frames in the data book
+        'have the same order positions with all data frame sheets in the grid
+        'if not this check will return False which means the data frames in the data book are reordeder
         If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
                                                        SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()) Then
             'reorder the worksheets based on the filled list
             For i As Integer = 0 To lstWorkSheetsFound.Count - 1
                 grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
             Next
-            grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet)
+            grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet) 'set the selected sheet back active before reordering
         End If
     End Sub
 

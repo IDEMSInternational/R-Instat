@@ -96,6 +96,9 @@ Public MustInherit Class ucrLinuxGrid
             End If
         Next
 
+        'in the second condition we check if all data frames in the data book
+        'have the same order positions with all data frame sheets in the grid
+        'if not this check will return False which means the data frames in the data book are reordeder
         If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
                                                        SequenceEqual(tcTabs.Controls.OfType(Of TabPage).Select(Function(x) x.Text).ToList) Then
             'reorder the worksheets based on the filled list
@@ -103,7 +106,7 @@ Public MustInherit Class ucrLinuxGrid
                 tcTabs.TabPages.Remove(lstWorkSheetsFound(i))
                 tcTabs.TabPages.Insert(i, lstWorkSheetsFound(i))
             Next
-            tcTabs.SelectedTab = GetTabPage(strCurrWorksheet)
+            tcTabs.SelectedTab = GetTabPage(strCurrWorksheet) 'set the selected sheet back active before reordering
         End If
     End Sub
 

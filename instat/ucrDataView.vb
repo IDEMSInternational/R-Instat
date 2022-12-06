@@ -129,7 +129,9 @@ Public Class ucrDataView
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
-        _grid.ReOrderWorksheets(strCurrWorksheet)
+        If strCurrWorksheet IsNot Nothing Then
+            _grid.ReOrderWorksheets(strCurrWorksheet)
+        End If
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
