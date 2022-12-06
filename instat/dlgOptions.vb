@@ -86,10 +86,14 @@ Public Class dlgOptions
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
         ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
 
-        ucrChkShowWaitDialog.SetText("Set maximum height for outputs")
+        ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
         ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
         ucrNudMaximumOutputsHeight.Maximum = 1000
+        'todo. temporarily disabled 
+        ucrChkMaximumOutputsHeight.Visible = False
+        ucrNudMaximumOutputsHeight.Visible = False
 
         SetVisibleLanButton()
     End Sub
@@ -122,10 +126,12 @@ Public Class dlgOptions
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
-        ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
-        ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
-                                              frmMain.clsInstatOptions.iMaxOutputsHeight,
-                                              clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+
+        'todo. temporarily disabled
+        'ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
+        'ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
+        '                                      frmMain.clsInstatOptions.iMaxOutputsHeight,
+        '                                      clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -183,8 +189,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
-        frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
-                                                         ucrNudMaximumOutputsHeight.Value, -1))
+        'todo. temporarily disabled
+        'frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
+        '                                                 ucrNudMaximumOutputsHeight.Value, -1))
     End Sub
 
     Private Sub SetView()
