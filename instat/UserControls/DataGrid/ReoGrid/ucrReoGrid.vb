@@ -71,7 +71,7 @@ Public MustInherit Class ucrReoGrid
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
 
-    Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
+    Private Sub ReOrderWorksheets(strCurrWorksheet As String) Implements IGrid.ReOrderWorksheets
         'assuming the databook will always have all the data frames 
         'and the grid may not have all the data frame worksheets equivalent
         'and all data frames in the data book have changed their order positions 
@@ -85,15 +85,15 @@ Public MustInherit Class ucrReoGrid
             End If
         Next
 
-        Dim bReorder As Boolean = If(lstWorkSheetsFound.Count > 1, _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
-                                                       SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()), True)
 
-        If Not bReorder Then
+        If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()) Then
             'reorder the worksheets based on the filled list
             For i As Integer = 0 To lstWorkSheetsFound.Count - 1
                 grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
-                grdData.CurrentWorksheet = lstWorkSheetsFound(i)
+                'grdData.CurrentWorksheet = lstWorkSheetsFound(i)
             Next
+            grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet)
         End If
     End Sub
 

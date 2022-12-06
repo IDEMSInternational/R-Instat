@@ -118,6 +118,7 @@ Public Class ucrDataView
 
     Private Sub AddAndUpdateWorksheets()
         Dim firstAddedWorksheet As clsWorksheetAdapter = Nothing
+        Dim strCurrWorksheet As String = GetCurrentDataFrameNameFocus()
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim worksheet As clsWorksheetAdapter = _grid.GetWorksheet(clsDataFrame.strName)
             If worksheet Is Nothing Then
@@ -128,6 +129,7 @@ Public Class ucrDataView
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
+        _grid.ReOrderWorksheets(strCurrWorksheet)
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
@@ -139,7 +141,6 @@ Public Class ucrDataView
         End If
         _clsDataBook.RefreshData()
         AddAndUpdateWorksheets()
-        _grid.ReOrderWorksheets()
         _grid.RemoveOldWorksheets()
         If _clsDataBook.DataFrames.Count = 0 Then
             RefreshDisplayInformation()
@@ -231,9 +232,7 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
-        If GetWorkSheetCount() <> 0 Then
-            frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
-        End If
+        frmMain.ucrColumnMeta.SetCurrentDataFrame(GetCurrentDataFrameNameFocus())
         RefreshDisplayInformation()
     End Sub
 

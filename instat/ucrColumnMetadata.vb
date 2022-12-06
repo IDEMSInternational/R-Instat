@@ -63,6 +63,7 @@ Public Class ucrColumnMetadata
 
     Private Sub AddAndUpdateWorksheets()
         Dim firstAddedWorksheet As clsWorksheetAdapter = Nothing
+        Dim strCurrWorksheet As String = If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim worksheet As clsWorksheetAdapter = _grid.GetWorksheet(clsDataFrame.strName)
             If worksheet Is Nothing Then
@@ -73,6 +74,7 @@ Public Class ucrColumnMetadata
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
+        _grid.ReOrderWorksheets(strCurrWorksheet)
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If

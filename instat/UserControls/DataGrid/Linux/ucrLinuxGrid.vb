@@ -82,7 +82,7 @@ Public MustInherit Class ucrLinuxGrid
         Return New clsWorksheetAdapter(tab)
     End Function
 
-    Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
+    Private Sub ReOrderWorksheets(strCurrWorksheet As String) Implements IGrid.ReOrderWorksheets
         'assuming the databook will always have all the data frames 
         'and the grid may not have all the data frame worksheets equivalent
         'and all data frames in the data book have changed their order positions 
