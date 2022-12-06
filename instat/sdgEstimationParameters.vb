@@ -80,8 +80,4 @@ Public Class sdgEstimationParameters
         ucrInputPriorMean.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
 
     End Sub
-
-    'Private Sub ucrInputPriorMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPriorMean.ControlValueChanged
-    '    clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
-    'End Sub
 End Class
