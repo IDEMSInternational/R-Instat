@@ -55,7 +55,7 @@ Public Class sdgEstimationParameters
         ucrInputPriorMean.SetValidationTypeAsNumeric()
         ucrInputPriorMean.AddQuotesIfUnrecognised = False
         ucrInputPriorMean.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
-
+         
         ucrNudSampleSize.SetLinkedDisplayControl(lblSampleSize)
         ucrNudScaleParameter.SetLinkedDisplayControl(lblScalingParameter)
         ucrNudStandardDeviation.SetLinkedDisplayControl(lblStandardDeviation)
@@ -78,5 +78,10 @@ Public Class sdgEstimationParameters
         ucrNudStandardDeviation.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPriorFamily.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPriorMean.SetRCode(clsBayesInferenceFunction, bReset, bCloneIfNeeded:=True)
+
     End Sub
+
+    'Private Sub ucrInputPriorMean_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPriorMean.ControlValueChanged
+    '    clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
+    'End Sub
 End Class

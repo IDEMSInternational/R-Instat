@@ -55,9 +55,9 @@ Public Class dlgTwoVariableFitModel
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     'Display options codes
-    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsConfintBasFunction, clsCoefFunction As RFunction
+    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsConfintBasFunction, clsCoefFunction As New RFunction
 
-    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    'Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
 
 
     Private bRCodeSet As Boolean = True
@@ -491,6 +491,7 @@ Public Class dlgTwoVariableFitModel
         clsBayesInferenceFunction.AddParameter("v_0", -1, iPosition:=12)
         clsBayesInferenceFunction.AddParameter("rscale", 1, iPosition:=13)
         clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+
 
         clsTtestOperator.SetOperation("~")
         clsTtestOperator.bSpaceAroundOperation = True
@@ -1196,15 +1197,18 @@ Public Class dlgTwoVariableFitModel
         SampleStatistic()
         AddFactorLevels()
         PrioirsVisisbility()
+        GetNullValue()
     End Sub
 
     Private Sub GetNullValue()
-        If ucrInputType.GetText = "hypothesis test" Then
-            clsBayesInferenceFunction.AddParameter("null", 0, iPosition:=7)
-            clsBayesInferenceFunction.RemoveParameterByName("mu_0")
-        ElseIf ucrInputType.GetText = "credible interval" Then
-            clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
-            clsBayesInferenceFunction.RemoveParameterByName("null")
+        If bRCodeSet Then
+            If ucrInputType.GetText = "credible interval" Then
+                clsBayesInferenceFunction.RemoveParameterByName("null")
+                clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
+            Else
+                clsBayesInferenceFunction.AddParameter("null", 0, iPosition:=7)
+                clsBayesInferenceFunction.RemoveParameterByName("mu_0")
+            End If
         End If
     End Sub
 
