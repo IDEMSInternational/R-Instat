@@ -2636,6 +2636,9 @@ view_object <- function(object, object_format) {
 #it saves the object as a file in the temporary folder
 #and returns the file path.
 view_graph_object <- function(graph_object){
+  #get object class names
+  object_class_names <- class(graph_object)
+  
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
@@ -2643,32 +2646,34 @@ view_graph_object <- function(graph_object){
     #TODO. When print command is called in R-Studio, a temp file is automatically created
     #Investigate how that can be done in R-Instat
     #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    if ("grob" %in% object_class_names){
+      #for grob objects draw them first
+      grid::grid.draw(graph_object)
+    }
     return(graph_object)
   }
   
-  #get object class names
-  object_class_names <- class(graph_object)
+ 
   #get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewgraph", fileext = ".png")
   
-  #save the object as a html file depending on the object type
+  #save the object as a graph file depending on the object type
   grDevices::png(file = file_name, width = 4000, height = 4000, res = 500)
-  print(graph_object)
+  if ("grob" %in% object_class_names) {
+    grid::grid.draw(graph_object)
+  }else{
+    print(graph_object)
+  }
   dev.off() #todo. use graphics.off() which one is better?
+
   
   #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
-  #investigate if thatwill that help with resolution and scaling?
-  
+  #investigate if it will help with resolution and scaling?
   # if ("ggplot" %in% object_class_names) {
-  #   
   # } else if ("ggmultiplot" %in% object_class_names) {
-  #   
   # } else if ("openair" %in% object_class_names) {
-  #   
   # } else if ("ggsurvplot" %in% object_class_names) {
-  #   
   # } else if ("recordedplot" %in% object_class_names) {
-  #   
   # }
   
   message("R viewer not detected. File saved in location ", file_name)
@@ -2751,14 +2756,36 @@ view_html_object <- function(html_object){
   return(file_name)
 } 
 
-#
+#tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
+#applicable to base graphs only
 check_graph <- function(graph_object){
-  if(is.null(graph_object)){
-    #todo. add a try catch. Applies to commands written in the script window
-    return(recordPlot())
-  }else{
-    return(graph_object)
+ 
+  out <- graph_object
+  
+  if (is.null(out)) {
+    out <- tryCatch({
+      message("Recording plot")
+      recordPlot()
+      #return(recordPlot())
+    },
+    error = function(cond) {
+      message(paste("URL does not seem to exist:", url))
+      message("Here's the original error message:")
+      message(cond)
+      # Choose a return value in case of error
+      return(NULL)
+    },
+    warning = function(cond) {
+      message("Warning message:")
+      message(cond)
+      return(NULL)
+    },
+    finally = {
+      message("Plot recorded")
+    })
   }
+  
+  return(out)
 } 
 
 
