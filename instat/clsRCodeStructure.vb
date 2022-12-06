@@ -288,6 +288,10 @@ Public Class RCodeStructure
     End Sub
 
 
+    ''' <summary>
+    ''' Gets the assign to variable
+    ''' </summary>
+    ''' <returns>assign to value</returns>
     Public Function GetRObjectToAssignTo() As String
         Return _strAssignToObject
     End Function
@@ -311,7 +315,8 @@ Public Class RCodeStructure
 
     ''' <summary>
     ''' Sets the assign to variables for objects that will be added to the databook and possibly displayed in the output viewer.
-    ''' To prevent the object from being diplayed in the output viewer, set bExcludeAssignedFunctionOutput = False.
+    ''' To prevent the object from being diplayed in the output viewer,
+    ''' set bExcludeAssignedFunctionOutput = False (Not recommended, use the SetAssignToObject subroutine to get similar functionality).
     ''' </summary>
     ''' <param name="strRObjectToAssignTo">The new value for the R object assignment string</param>
     ''' <param name="strRObjectTypeLabelToAssignTo">The new value for the object type label</param>
