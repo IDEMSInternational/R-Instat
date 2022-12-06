@@ -95,12 +95,15 @@ Public MustInherit Class ucrLinuxGrid
                 lstWorkSheetsFound.Add(fillWorkSheet)
             End If
         Next
-        If lstWorkSheetsFound.Count > 1 Then
+
+        If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(tcTabs.Controls.OfType(Of TabPage).Select(Function(x) x.Text).ToList) Then
             'reorder the worksheets based on the filled list
             For i As Integer = 0 To lstWorkSheetsFound.Count - 1
                 tcTabs.TabPages.Remove(lstWorkSheetsFound(i))
                 tcTabs.TabPages.Insert(i, lstWorkSheetsFound(i))
             Next
+            tcTabs.SelectedTab = GetTabPage(strCurrWorksheet)
         End If
     End Sub
 

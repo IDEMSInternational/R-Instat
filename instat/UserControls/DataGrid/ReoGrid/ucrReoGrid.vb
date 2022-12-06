@@ -85,7 +85,6 @@ Public MustInherit Class ucrReoGrid
             End If
         Next
 
-
         If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
                                                        SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()) Then
             'reorder the worksheets based on the filled list
