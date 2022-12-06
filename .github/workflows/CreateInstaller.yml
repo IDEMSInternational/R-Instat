@@ -31,7 +31,8 @@ jobs:
     env:
       Solution_Name: Instat.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       Test_Project_Path: instat\instat.vbproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
     # check out r-instat
     steps:
     - name: Checkout
