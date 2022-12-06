@@ -440,4 +440,8 @@ Public Class dlgStack
             ucrReceiverExpand.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Sub ucrSelectorStack_DataFrameChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStack.ControlContentsChanged
+
+    End Sub
 End Class
