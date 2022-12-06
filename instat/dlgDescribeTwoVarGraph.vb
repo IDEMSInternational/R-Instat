@@ -333,7 +333,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
 
-        'cmdOptions.Enabled = False
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
@@ -969,12 +968,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoBy.Checked Then
-            cmdOptions.Enabled = True
-            cmdPairOptions.Enabled = False
+            cmdOptions.Visible = True
+            cmdPairOptions.Visible = False
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
-            cmdOptions.Enabled = False
-            cmdPairOptions.Enabled = True
+            cmdOptions.Visible = False
+            cmdPairOptions.Visible = True
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
         End If
         If bRCodeSet Then
