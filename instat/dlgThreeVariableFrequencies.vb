@@ -210,7 +210,10 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlotFunction.AddParameter("show.n", "TRUE")
 
         clsGridArrangeFunction.SetPackageName("gridExtra")
-        clsGridArrangeFunction.SetRCommand("grid.arrange")
+        'use arrangeGrob() instead of grid.arrange() because arrangeGrob() returns a grob without drawing on the current device.
+        'read package ocumentation for more information
+        'clsGridArrangeFunction.SetRCommand("grid.arrange") 'left here for future reference only
+        clsGridArrangeFunction.SetRCommand("arrangeGrob")
         clsGridArrangeFunction.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
 
         clsGridArrangeFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
