@@ -107,13 +107,6 @@ Public Class RLink
     ''' </summary>
     Public bLogRScripts As Boolean = False
 
-    ''' <summary> 
-    ''' Is set to True when the R output window is defined.
-    ''' If set to False, R scripts will not be shouwn in the output viewer
-    ''' </summary>
-    Public bOutputRscripts As Boolean = True
-
-
     ''' <summary>   True to climate object exists. </summary>
     Public bClimateObjectExists As Boolean = False 'TODO SJL 23/04/20 Not used. Delete?
 
@@ -805,18 +798,8 @@ Public Class RLink
         Dim strOutput As String = ""
         Dim strScriptWithComment As String
         Dim strSplitScript As String
-        Dim strTempGraphsDirectory As String
-        Dim clsPNGFunction As New RFunction
         Dim strTempAssignTo As String = ".temp_val"
-        Dim bSuccess As Boolean
         Dim bError As Boolean = False
-
-        ' set temp folder for graphs, e.g. to "C:\Users\myName\Temp\R_Instat_Temp_Graphs"
-        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
-        'Need to create directory as R unable to create the directory in linux
-        If Not Directory.Exists(strTempGraphsDirectory) Then
-            Directory.CreateDirectory(strTempGraphsDirectory)
-        End If
 
         ' if comment provided
         If strComment <> "" Then
@@ -829,10 +812,9 @@ Public Class RLink
         If bLogRScripts Then
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
-        ' if the output window is defined then output comments (if exists) and script (if 'bShowCommands' is true).
-        If bOutputRscripts Then
-            clsOutputLogger.AddRScript(strScriptWithComment)
-        End If
+
+
+        clsOutputLogger.AddRScript(strScriptWithComment)
 
         'TODO SJL 20/04/20 - is the commented out check below needed?
         'If strScript.Length > 2000 Then
@@ -925,8 +907,8 @@ Public Class RLink
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
         End Try
 
-        ' if output window is defined, and there's something to output
-        If bOutputRscripts AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
+        ' if there's something to output
+        If strOutput IsNot Nothing AndAlso strOutput <> "" Then
             ' if output should be sent to web browser
             'If iCallType = 4 Then
             '    '  rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)

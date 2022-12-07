@@ -71,21 +71,49 @@ Public Class clsOutputLogger
         End Set
     End Property
 
+
+    ''' <summary>
+    ''' Adds script to the output logger.
+    ''' Script is displayed in the output window if the "show commands" setting is enabled
+    ''' </summary>
+    ''' <param name="strScript">the R script</param>
+    Public Sub AddRScript(strScript As String)
+        'Always add new element to last element for each script
+        'This will allow the output to atatch to the script later
+        _lastScriptElement = New clsOutputElement
+        _lastScriptElement.AddScript(strScript)
+        If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bCommandsinOutput Then
+            _output.Add(_lastScriptElement)
+            RaiseEvent NewOutputAdded(_lastScriptElement)
+        End If
+    End Sub
+
     Public Sub AddFileOutput(strFileName As String)
+        'Note this always takes the last script added as corresponding script
+        If _lastScriptElement Is Nothing Then
+            Throw New Exception("Cannot find script to attach output to.")
+            Exit Sub
+        End If
+
         Dim strFileExtension As String = Path.GetExtension(strFileName).ToLower
+        Dim outputElement As New clsOutputElement
         Select Case strFileExtension
             Case ".png"
-                AddImageOutput(strFileName)
+                outputElement.AddImageOutput(strFileName, _lastScriptElement.FormattedRScript)
             Case ".html"
-                AddHtmlOutput(strFileName)
+                outputElement.AddHtmlOutput(strFileName, _lastScriptElement.FormattedRScript)
             Case ".txt"
-                AddTextOutput(strFileName)
+                outputElement.AddTextOutput(strFileName, _lastScriptElement.FormattedRScript)
             Case Else
                 MessageBox.Show("The file type to be added is currently not suported",
                             "Developer Error",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error)
+                Exit Sub
         End Select
+        _output.Add(outputElement)
+        'raise event for output pages
+        RaiseEvent NewOutputAdded(outputElement)
     End Sub
 
     ''' <summary>
@@ -105,54 +133,6 @@ Public Class clsOutputLogger
     End Sub
 
     ''' <summary>
-    ''' Adds text file to be displayed within the output
-    ''' </summary>
-    ''' <param name="strFilename"></param>
-    Public Sub AddTextOutput(strFilename As String)
-        'Note this always takes the last script added as corresponding script
-        If _lastScriptElement Is Nothing Then
-            Throw New Exception("Cannot find script to attach output to.")
-        Else
-            Dim outputElement As New clsOutputElement
-            outputElement.AddTextOutput(strFilename, _lastScriptElement.FormattedRScript)
-            _output.Add(outputElement)
-            RaiseEvent NewOutputAdded(outputElement)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' Adds image file to be displayed within the output
-    ''' </summary>
-    ''' <param name="strFilename"></param>
-    Public Sub AddImageOutput(strFilename As String)
-        'Note this always takes the last script added as corresponding script
-        If _lastScriptElement Is Nothing Then
-            Throw New Exception("Cannot find script to attach output to.")
-        Else
-            Dim outputElement As New clsOutputElement
-            outputElement.AddImageOutput(strFilename, _lastScriptElement.FormattedRScript)
-            _output.Add(outputElement)
-            RaiseEvent NewOutputAdded(outputElement)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' Adds html output to be displayed within the output
-    ''' </summary>
-    ''' <param name="strFilename"></param>
-    Public Sub AddHtmlOutput(strFilename As String)
-        'Note this always takes the last script added as corresponding script
-        If _lastScriptElement Is Nothing Then
-            Throw New Exception("Cannot find script to attach output to.")
-        Else
-            Dim outputElement As New clsOutputElement
-            outputElement.AddHtmlOutput(strFilename, _lastScriptElement.FormattedRScript)
-            _output.Add(outputElement)
-            RaiseEvent NewOutputAdded(outputElement)
-        End If
-    End Sub
-
-    ''' <summary>
     ''' Adds an output to the given filtered list
     ''' </summary>
     ''' <param name="outputElement"></param>
@@ -163,19 +143,6 @@ Public Class clsOutputLogger
         outputElement.Id = filteredList.Output.Count + 1
         filteredList.Output.Add(outputElement)
         RaiseEvent NewOutputAddedToFilteredList(outputElement, strListName)
-    End Sub
-
-    ''' <summary>
-    ''' Adds script to be displayed within the output
-    ''' </summary>
-    ''' <param name="strScript"></param>
-    Public Sub AddRScript(strScript As String)
-        'Always add new element to last element for each script
-        'This will allow the output to atatch to the script later
-        _lastScriptElement = New clsOutputElement
-        _lastScriptElement.AddScript(strScript)
-        _output.Add(_lastScriptElement)
-        RaiseEvent NewOutputAdded(_lastScriptElement)
     End Sub
 
     ''' <summary>
