@@ -42,13 +42,14 @@ Partial Class dlgLabelsLevels
         Me.cmdAddLevel = New System.Windows.Forms.Button()
         Me.lblLevelNumber = New System.Windows.Forms.Label()
         Me.lblNaValue = New System.Windows.Forms.Label()
+        Me.ucrInputUnusedLevels = New instat.ucrInputTextBox()
         Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.ucrFactorLabels = New instat.ucrFactor()
         Me.ucrSelectorForLabels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrRemoveLabels = New instat.ucrCheck()
-        Me.ucrInputUnusedLevels = New instat.ucrInputTextBox()
+        Me.ucrChkRemovelabels = New instat.ucrCheck()
+        Me.lblUnusedLevels = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -91,6 +92,17 @@ Partial Class dlgLabelsLevels
         Me.lblNaValue.Size = New System.Drawing.Size(39, 13)
         Me.lblNaValue.TabIndex = 8
         Me.lblNaValue.Text = "Label1"
+        '
+        'ucrInputUnusedLevels
+        '
+        Me.ucrInputUnusedLevels.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnusedLevels.AutoSize = True
+        Me.ucrInputUnusedLevels.IsMultiline = False
+        Me.ucrInputUnusedLevels.IsReadOnly = True
+        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(186, 371)
+        Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
+        Me.ucrInputUnusedLevels.Size = New System.Drawing.Size(406, 21)
+        Me.ucrInputUnusedLevels.TabIndex = 10
         '
         'ucrChkIncludeLevelNumbers
         '
@@ -144,25 +156,23 @@ Partial Class dlgLabelsLevels
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrRemoveLabels
+        'ucrChkRemovelabels
         '
-        Me.ucrRemoveLabels.AutoSize = True
-        Me.ucrRemoveLabels.Checked = False
-        Me.ucrRemoveLabels.Location = New System.Drawing.Point(12, 371)
-        Me.ucrRemoveLabels.Name = "ucrRemoveLabels"
-        Me.ucrRemoveLabels.Size = New System.Drawing.Size(168, 23)
-        Me.ucrRemoveLabels.TabIndex = 9
+        Me.ucrChkRemovelabels.AutoSize = True
+        Me.ucrChkRemovelabels.Checked = False
+        Me.ucrChkRemovelabels.Location = New System.Drawing.Point(82, 342)
+        Me.ucrChkRemovelabels.Name = "ucrChkRemovelabels"
+        Me.ucrChkRemovelabels.Size = New System.Drawing.Size(168, 23)
+        Me.ucrChkRemovelabels.TabIndex = 11
         '
-        'ucrInputUnusedLevels
+        'lblUnusedLevels
         '
-        Me.ucrInputUnusedLevels.AddQuotesIfUnrecognised = True
-        Me.ucrInputUnusedLevels.AutoSize = True
-        Me.ucrInputUnusedLevels.IsMultiline = False
-        Me.ucrInputUnusedLevels.IsReadOnly = True
-        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(186, 371)
-        Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
-        Me.ucrInputUnusedLevels.Size = New System.Drawing.Size(406, 21)
-        Me.ucrInputUnusedLevels.TabIndex = 10
+        Me.lblUnusedLevels.AutoSize = True
+        Me.lblUnusedLevels.Location = New System.Drawing.Point(82, 375)
+        Me.lblUnusedLevels.Name = "lblUnusedLevels"
+        Me.lblUnusedLevels.Size = New System.Drawing.Size(81, 13)
+        Me.lblUnusedLevels.TabIndex = 12
+        Me.lblUnusedLevels.Text = "Unused Levels:"
         '
         'dlgLabelsLevels
         '
@@ -170,8 +180,9 @@ Partial Class dlgLabelsLevels
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(604, 456)
+        Me.Controls.Add(Me.lblUnusedLevels)
+        Me.Controls.Add(Me.ucrChkRemovelabels)
         Me.Controls.Add(Me.ucrInputUnusedLevels)
-        Me.Controls.Add(Me.ucrRemoveLabels)
         Me.Controls.Add(Me.lblNaValue)
         Me.Controls.Add(Me.lblLevelNumber)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
@@ -203,6 +214,7 @@ Partial Class dlgLabelsLevels
     Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
     Friend WithEvents lblLevelNumber As Label
     Friend WithEvents lblNaValue As Label
-    Friend WithEvents ucrRemoveLabels As ucrCheck
     Friend WithEvents ucrInputUnusedLevels As ucrInputTextBox
+    Friend WithEvents ucrChkRemovelabels As ucrCheck
+    Friend WithEvents lblUnusedLevels As Label
 End Class

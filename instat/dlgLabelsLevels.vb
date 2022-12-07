@@ -68,10 +68,11 @@ Public Class dlgLabelsLevels
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
 
-        ucrRemoveLabels.SetText("Remove Unused Labels")
-        ucrRemoveLabels.SetParameter(New RParameter("check"))
-        ucrRemoveLabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrRemoveLabels.AddToLinkedControls(ucrInputUnusedLevels, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRemovelabels.SetText("Remove Unused Levels")
+        ucrChkRemovelabels.AddToLinkedControls(ucrInputUnusedLevels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputUnusedLevels.SetLinkedDisplayControl(lblUnusedLevels)
+        ucrChkRemovelabels.SetParameter(New RParameter("check"))
+        ucrChkRemovelabels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         lblNaValue.ForeColor = Color.Red
         lblLevelNumber.ForeColor = Color.Red
@@ -100,6 +101,10 @@ Public Class dlgLabelsLevels
 
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
+
+        If bReset Then
+            ucrChkRemovelabels.SetRCode(clsUnusedLevels, bReset)
+        End If
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -164,7 +169,7 @@ Public Class dlgLabelsLevels
         lblLevelNumber.Visible = ucrFactorLabels.RowCount > 0
     End Sub
 
-    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged
+    Private Sub ucrReceiverLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlValueChanged, ucrChkRemovelabels.ControlValueChanged
         Dim iNumOutput As Integer
         Dim expNum As SymbolicExpression
         Dim bClear As Boolean = False
@@ -207,7 +212,7 @@ Public Class dlgLabelsLevels
         ucrChkIncludeLevelNumbers.Enabled = Not ucrChkIncludeLevelNumbers.Checked
     End Sub
 
-    Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
+    Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged, ucrChkRemovelabels.ControlValueChanged
 
         'only add levels if indicated by the user
         Dim bAddParam As Boolean
