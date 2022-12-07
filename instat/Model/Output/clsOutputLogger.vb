@@ -82,13 +82,18 @@ Public Class clsOutputLogger
         'This will allow the output to atatch to the script later
         _lastScriptElement = New clsOutputElement
         _lastScriptElement.AddScript(strScript)
+
+        'only display if settting is enabled
+        'todo. should this be done at the logger level or the output page level?
+        'if we associate every script with an output. then this can be pushed to output page.
+        'reason being it's a rendering functionality not a logger functionality.
         If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bCommandsinOutput Then
             _output.Add(_lastScriptElement)
             RaiseEvent NewOutputAdded(_lastScriptElement)
         End If
     End Sub
 
-    Public Sub AddFileOutput(strFileName As String)
+    Public Sub AddFileOutput(strFileName As String, Optional bAddOutputInInternalViewer As Boolean = True)
         'Note this always takes the last script added as corresponding script
         If _lastScriptElement Is Nothing Then
             Throw New Exception("Cannot find script to attach output to.")
@@ -111,9 +116,17 @@ Public Class clsOutputLogger
                             MessageBoxIcon.Error)
                 Exit Sub
         End Select
+
         _output.Add(outputElement)
-        'raise event for output pages
-        RaiseEvent NewOutputAdded(outputElement)
+
+        If bAddOutputInInternalViewer Then
+            'raise event for output pages
+            RaiseEvent NewOutputAdded(outputElement)
+        Else
+            Dim frmMaximiseOutput As New frmMaximiseOutput
+            frmMaximiseOutput.Show(strFileName:=strFileName)
+        End If
+
     End Sub
 
     ''' <summary>

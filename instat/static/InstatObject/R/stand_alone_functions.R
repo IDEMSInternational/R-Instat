@@ -2696,12 +2696,13 @@ view_text_object <- function(text_object){
     return(utils::capture.output(text_object))
   }
   
-  #get object class names
-  object_class_names <- class(text_object)
+  
   #get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewtext", fileext = ".txt")
   
   #todo. should we use respective package "convenience" functions to save the objects as text files depending on the class names
+  #get object class names
+  #object_class_names <- class(text_object)
   
   #save the object as a text file 
   utils::capture.output(text_object, file = file_name)
@@ -2766,11 +2767,9 @@ check_graph <- function(graph_object){
     out <- tryCatch({
       message("Recording plot")
       recordPlot()
-      #return(recordPlot())
     },
     error = function(cond) {
-      message(paste("URL does not seem to exist:", url))
-      message("Here's the original error message:")
+      message("Graph object does not exist:")
       message(cond)
       # Choose a return value in case of error
       return(NULL)

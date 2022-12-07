@@ -142,72 +142,6 @@ Public Class ucrOutputPage
         pnlMain.PerformLayout()
     End Sub
 
-    ''' <summary>
-    ''' Copies selected elements to clipboard
-    ''' </summary>
-    Public Sub CopySelectedElementsToClipboard()
-        If CopyOneImageOnly() Then
-            Exit Sub
-        End If
-
-        Dim richText As New RichTextBox
-        For Each element In SelectedElements
-            AddElementToRichTextBox(element, richText)
-        Next
-        CopySelectedTextToClipBoard(richText, richText.Rtf)
-    End Sub
-
-    ''' <summary>
-    ''' Saves page to rich text file
-    ''' </summary>
-    ''' <param name="path"></param>
-    Public Sub Save(path As String)
-        Dim richText As New RichTextBox
-        For Each checkbox In _checkBoxes
-            Dim element As clsOutputElement = checkbox.Tag
-            AddElementToRichTextBox(element, richText)
-        Next
-        richText.SaveFile(path)
-    End Sub
-
-    Private Function AddElementPanel(outputElement As clsOutputElement) As Panel
-        If outputElement Is Nothing OrElse outputElement.FormattedRScript Is Nothing Then
-            Return Nothing
-        End If
-
-        Dim panel As New Panel With {
-          .Dock = DockStyle.Top,
-          .Height = 10,
-          .AutoSize = True
-        }
-
-        'if maximum height of outputs provided provided set it as the maximum height of panel 
-        If frmMain.clsInstatOptions IsNot Nothing AndAlso Not frmMain.clsInstatOptions.iMaxOutputsHeight <= 0 Then
-            panel.MaximumSize = New Size(Integer.MaxValue,
-                                         frmMain.clsInstatOptions.iMaxOutputsHeight)
-            panel.AutoScroll = True
-        End If
-        pnlMain.Controls.Add(panel)
-        pnlMain.Controls.SetChildIndex(panel, 0)
-        AddCheckBoxToElementPanel(panel, outputElement)
-        AddHandler panel.Resize, AddressOf Panel_Resize
-        Return panel
-    End Function
-
-    Private Sub AddCheckBoxToElementPanel(panel As Panel, outputElement As clsOutputElement)
-        Dim checkBox As New CheckBox With {
-          .Text = "",
-          .CheckAlign = ContentAlignment.TopLeft,
-          .Dock = DockStyle.Left,
-          .AutoSize = True,
-          .Tag = outputElement
-        }
-        panel.Controls.Add(checkBox)
-        _checkBoxes.Add(checkBox)
-        AddHandler checkBox.Click, AddressOf checkButton_Click
-        AddHandler checkBox.MouseLeave, AddressOf panelContents_MouseLeave
-    End Sub
-
     Private Sub AddNewScript(outputElement As clsOutputElement)
         Dim richTextBox As New RichTextBox With {
          .Dock = DockStyle.Top,
@@ -220,63 +154,6 @@ Public Class ucrOutputPage
         SetRichTextBoxHeight(richTextBox)
         AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
         AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
-    End Sub
-
-    Private Function CopyOneImageOnly() As Boolean
-        If SelectedElements.Count = 1 AndAlso SelectedElements(0).OutputType = OutputType.ImageOutput Then
-            Dim element As clsOutputElement = SelectedElements(0)
-            Clipboard.Clear()
-            Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
-            Return True
-        End If
-        Return False
-    End Function
-
-    Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
-        Select Case element.OutputType
-            Case OutputType.Script
-                FillRichTextBoxWithFormatedRScript(richText, element.FormattedRScript)
-            Case OutputType.TextOutput
-                AddFormatedTextToRichTextBox(richText, element.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
-            Case OutputType.ImageOutput
-                Clipboard.Clear()
-                'todo. instead of copy paste, add image to rtf directly from file?
-                Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
-                richText.Paste()
-        End Select
-        richText.AppendText(Environment.NewLine)
-        richText.AppendText(Environment.NewLine)
-    End Sub
-
-    Private Function GetBitmapFromFile(strFilename As String) As Bitmap
-        Dim image As Bitmap
-        Using fs As New IO.FileStream(strFilename, IO.FileMode.Open)
-            image = New Bitmap(Drawing.Image.FromStream(fs))
-        End Using
-        Return image
-    End Function
-
-    Private Sub AddFormatedTextToRichTextBox(richTextBox As RichTextBox, text As String, font As Font, colour As Color)
-        Dim intStartSelection As Integer = richTextBox.Text.Length
-        richTextBox.AppendText(text)
-        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            'Through Mono cannot have multiple fonts and colours within RichTextBox
-            richTextBox.SelectAll()
-            richTextBox.Font = font
-            richTextBox.ForeColor = colour
-            richTextBox.SelectionLength = 0
-        Else
-            richTextBox.SelectionStart = intStartSelection
-            richTextBox.SelectionLength = text.Length()
-            richTextBox.SelectionFont = font
-            richTextBox.SelectionColor = colour
-        End If
-    End Sub
-
-    Private Sub FillRichTextBoxWithFormatedRScript(richTextBox As RichTextBox, formatedRScript As List(Of clsRScriptElement))
-        For Each line In formatedRScript
-            AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
-        Next
     End Sub
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
@@ -344,7 +221,7 @@ Public Class ucrOutputPage
         Dim panel As Panel = AddElementPanel(outputElement)
         Dim linkLabel As New LinkLabel
 
-        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.isCefInitilised Then
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.IsCefInitilised Then
             Dim ucrWebview As New ucrWebViewer()
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
@@ -383,6 +260,133 @@ Public Class ucrOutputPage
         End If
 
     End Sub
+
+
+
+    ''' <summary>
+    ''' Copies selected elements to clipboard
+    ''' </summary>
+    Public Sub CopySelectedElementsToClipboard()
+        If CopyOneImageOnly() Then
+            Exit Sub
+        End If
+
+        Dim richText As New RichTextBox
+        For Each element In SelectedElements
+            AddElementToRichTextBox(element, richText)
+        Next
+        CopySelectedTextToClipBoard(richText, richText.Rtf)
+    End Sub
+
+    ''' <summary>
+    ''' Saves page to rich text file
+    ''' </summary>
+    ''' <param name="path"></param>
+    Public Sub Save(path As String)
+        Dim richText As New RichTextBox
+        For Each checkbox In _checkBoxes
+            Dim element As clsOutputElement = checkbox.Tag
+            AddElementToRichTextBox(element, richText)
+        Next
+        richText.SaveFile(path)
+    End Sub
+
+    Private Function AddElementPanel(outputElement As clsOutputElement) As Panel
+        If outputElement Is Nothing OrElse outputElement.FormattedRScript Is Nothing Then
+            Return Nothing
+        End If
+
+        Dim panel As New Panel With {
+          .Dock = DockStyle.Top,
+          .Height = 10,
+          .AutoSize = True
+        }
+
+        'if maximum height of outputs provided provided set it as the maximum height of panel 
+        If frmMain.clsInstatOptions IsNot Nothing AndAlso Not frmMain.clsInstatOptions.iMaxOutputsHeight <= 0 Then
+            panel.MaximumSize = New Size(Integer.MaxValue,
+                                         frmMain.clsInstatOptions.iMaxOutputsHeight)
+            panel.AutoScroll = True
+        End If
+        pnlMain.Controls.Add(panel)
+        pnlMain.Controls.SetChildIndex(panel, 0)
+        AddCheckBoxToElementPanel(panel, outputElement)
+        AddHandler panel.Resize, AddressOf Panel_Resize
+        Return panel
+    End Function
+
+    Private Sub AddCheckBoxToElementPanel(panel As Panel, outputElement As clsOutputElement)
+        Dim checkBox As New CheckBox With {
+          .Text = "",
+          .CheckAlign = ContentAlignment.TopLeft,
+          .Dock = DockStyle.Left,
+          .AutoSize = True,
+          .Tag = outputElement
+        }
+        panel.Controls.Add(checkBox)
+        _checkBoxes.Add(checkBox)
+        AddHandler checkBox.Click, AddressOf checkButton_Click
+        AddHandler checkBox.MouseLeave, AddressOf panelContents_MouseLeave
+    End Sub
+
+
+    Private Function CopyOneImageOnly() As Boolean
+        If SelectedElements.Count = 1 AndAlso SelectedElements(0).OutputType = OutputType.ImageOutput Then
+            Dim element As clsOutputElement = SelectedElements(0)
+            Clipboard.Clear()
+            Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
+        Select Case element.OutputType
+            Case OutputType.Script
+                FillRichTextBoxWithFormatedRScript(richText, element.FormattedRScript)
+            Case OutputType.TextOutput
+                AddFormatedTextToRichTextBox(richText, element.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
+            Case OutputType.ImageOutput
+                Clipboard.Clear()
+                'todo. instead of copy paste, add image to rtf directly from file?
+                Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
+                richText.Paste()
+        End Select
+        richText.AppendText(Environment.NewLine)
+        richText.AppendText(Environment.NewLine)
+    End Sub
+
+    Private Function GetBitmapFromFile(strFilename As String) As Bitmap
+        Dim image As Bitmap
+        Using fs As New IO.FileStream(strFilename, IO.FileMode.Open)
+            image = New Bitmap(Drawing.Image.FromStream(fs))
+        End Using
+        Return image
+    End Function
+
+    Private Sub AddFormatedTextToRichTextBox(richTextBox As RichTextBox, text As String, font As Font, colour As Color)
+        Dim intStartSelection As Integer = richTextBox.Text.Length
+        richTextBox.AppendText(text)
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+            'Through Mono cannot have multiple fonts and colours within RichTextBox
+            richTextBox.SelectAll()
+            richTextBox.Font = font
+            richTextBox.ForeColor = colour
+            richTextBox.SelectionLength = 0
+        Else
+            richTextBox.SelectionStart = intStartSelection
+            richTextBox.SelectionLength = text.Length()
+            richTextBox.SelectionFont = font
+            richTextBox.SelectionColor = colour
+        End If
+    End Sub
+
+    Private Sub FillRichTextBoxWithFormatedRScript(richTextBox As RichTextBox, formatedRScript As List(Of clsRScriptElement))
+        For Each line In formatedRScript
+            AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
+        Next
+    End Sub
+
 
     Private Sub SetRichTextBoxHeight(richTextBox As RichTextBox)
         richTextBox.Height = (richTextBox.GetLineFromCharIndex(richTextBox.Text.Length) + 1) * (richTextBox.Font.Height + richTextBox.Margin.Vertical) + 5
