@@ -2116,7 +2116,7 @@ Public Class frmMain
         clsViewObjectFunction.SetRCommand("view_object")
         clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsLastGraph)
         clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
-        clsRLink.RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bAddOutputInViewer:=False, bSeparateThread:=False)
+        clsRLink.RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bAddOutputInInternalViewer:=False, bSeparateThread:=False)
 
     End Sub
 
@@ -2137,7 +2137,7 @@ Public Class frmMain
         clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsInteractivePlot)
         clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
-        clsRLink.RunScript(clsViewObjectFunction.ToScript(), strComment:="View last graph as plotly", bAddOutputInViewer:=False, bSeparateThread:=False)
+        clsRLink.RunScript(clsViewObjectFunction.ToScript(), strComment:="View last graph as plotly", bAddOutputInInternalViewer:=False, bSeparateThread:=False)
 
     End Sub
 

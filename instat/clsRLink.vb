@@ -740,6 +740,7 @@ Public Class RLink
     ''' <summary>
     ''' This method executes the <paramref name="strScript"/> R script and displays the output. The
     ''' output may be displayed as text, graph or html (see <paramref name="iCallType"/>).
+    ''' Any R script that is necessary for reproducibility has to be run through this subroutine.
     ''' </summary>
     ''' <param name="strScript"> is the R script to execute.</param>
     ''' <param name="iCallType"> defines how to display the R output. todo deprecate this.
@@ -780,7 +781,7 @@ Public Class RLink
     ''' <paramref name="strScript"/>.</param>
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
-    ''' <param name="bAddOutputInViewer"> if true and the script produces and output, the output will be added 
+    ''' <param name="bAddOutputInInternalViewer"> if true and the script produces and output, the output will be added 
     ''' in the output viewer, if false, the output will be displayed in a different viewer.
     ''' displays the exception message.</param>
     '''--------------------------------------------------------------------------------------------
@@ -791,7 +792,7 @@ Public Class RLink
                          Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing,
                          Optional bUpdateGrids As Boolean = True,
                          Optional bSilent As Boolean = False,
-                         Optional bAddOutputInViewer As Boolean = True)
+                         Optional bAddOutputInInternalViewer As Boolean = True)
 
         'if there is no script to run then just ignore and exit sub
         If String.IsNullOrWhiteSpace(strScript) Then
@@ -806,8 +807,6 @@ Public Class RLink
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
 
-        clsOutputLogger.AddRScript(strScriptWithComment)
-
         'TODO SJL 20/04/20 - is the commented out check below needed?
         'If strScript.Length > 2000 Then
         '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
@@ -820,17 +819,17 @@ Public Class RLink
 
                 Dim strFilePathName As String = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                 If Not String.IsNullOrEmpty(strFilePathName) Then
-                    clsOutputLogger.AddFileOutput(strFilePathName, bAddOutputInViewer)
+                    clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, bAddOutputInInternalViewer)
                 End If
 
             ElseIf iCallType = 0 Then
-                'todo. remove this block?
-                'if script output should be ignored. todo. deprecated
+                'if script output should be ignored. todo. deprecate this block after implementing correctly
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                clsOutputLogger.AddOutput(strScriptWithComment, "", False, bAddOutputInInternalViewer)
             ElseIf iCallType = 1 OrElse iCallType = 4 Then
-                'todo remove this block?
+                'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
                 'else if script output should be stored in a temp variable
-                ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
+                ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
 
                 Dim strTempAssignTo As String = ".temp_val"
                 'TODO check this is valid syntax in all cases
@@ -841,7 +840,7 @@ Public Class RLink
                     Dim strOutput As String = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                     ' if there's something to output
                     If strOutput IsNot Nothing AndAlso strOutput <> "" Then
-                        clsOutputLogger.AddStringOutput(strOutput)
+                        clsOutputLogger.AddOutput(strScriptWithComment, strOutput, False, bAddOutputInInternalViewer)
                     End If
                 End If
 
@@ -864,7 +863,7 @@ Public Class RLink
                     If bSuccess Then
                         Dim strFilePathName As String = GetFileOutput("view_object(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                         If Not String.IsNullOrEmpty(strFilePathName) Then
-                            clsOutputLogger.AddFileOutput(strFilePathName, bAddOutputInViewer)
+                            clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, bAddOutputInInternalViewer)
                         End If
                     End If
                 End If
@@ -999,7 +998,7 @@ Public Class RLink
         strGlobalGraphDisplayOption = Me.strGraphDisplayOption
         Me.strGraphDisplayOption = "view_R_viewer"
         clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
-        RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInViewer:=False, strComment:="View last graph", bSeparateThread:=False)
+        RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInInternalViewer:=False, strComment:="View last graph", bSeparateThread:=False)
         'restore the graph display option
         Me.strGraphDisplayOption = strGlobalGraphDisplayOption
     End Sub

@@ -20,14 +20,13 @@ Imports System.IO
 ''' </summary>
 Public Class clsOutputLogger
     Private _filteredOutputs As List(Of clsOutputList)
-    Private _lastScriptElement As clsOutputElement
-    Private _output As List(Of clsOutputElement)
+    Private _outputElements As List(Of clsOutputElement)
 
     ''Output not used externally at the moment but will this will need to
     ''change if we are to remove from the output list.
-    Public ReadOnly Property Output As List(Of clsOutputElement)
+    Public ReadOnly Property OutputElements As List(Of clsOutputElement)
         Get
-            Return _output
+            Return _outputElements
         End Get
     End Property
 
@@ -35,7 +34,7 @@ Public Class clsOutputLogger
     ''' Constructor
     ''' </summary>
     Public Sub New()
-        _output = New List(Of clsOutputElement)
+        _outputElements = New List(Of clsOutputElement)
         _filteredOutputs = New List(Of clsOutputList)
     End Sub
 
@@ -71,78 +70,49 @@ Public Class clsOutputLogger
         End Set
     End Property
 
-
-    ''' <summary>
-    ''' Adds script to the output logger.
-    ''' Script is displayed in the output window if the "show commands" setting is enabled
-    ''' </summary>
-    ''' <param name="strScript">the R script</param>
-    Public Sub AddRScript(strScript As String)
-        'Always add new element to last element for each script
-        'This will allow the output to atatch to the script later
-        _lastScriptElement = New clsOutputElement
-        _lastScriptElement.AddScript(strScript)
-
-        'only display if settting is enabled
-        'todo. should this be done at the logger level or the output page level?
-        'if we associate every script with an output. then this can be pushed to output page.
-        'reason being it's a rendering functionality not a logger functionality.
-        If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bCommandsinOutput Then
-            _output.Add(_lastScriptElement)
-            RaiseEvent NewOutputAdded(_lastScriptElement)
-        End If
-    End Sub
-
-    Public Sub AddFileOutput(strFileName As String, Optional bAddOutputInInternalViewer As Boolean = True)
+    Public Sub AddOutput(strScript As String, strOutput As String, bAsFile As Boolean, bAddOutputInInternalViewer As Boolean)
         'Note this always takes the last script added as corresponding script
-        If _lastScriptElement Is Nothing Then
+        If String.IsNullOrWhiteSpace(strScript) Then
             Throw New Exception("Cannot find script to attach output to.")
             Exit Sub
         End If
 
-        Dim strFileExtension As String = Path.GetExtension(strFileName).ToLower
-        Dim outputElement As New clsOutputElement
-        Select Case strFileExtension
-            Case ".png"
-                outputElement.AddImageOutput(strFileName, _lastScriptElement.FormattedRScript)
-            Case ".html"
-                outputElement.AddHtmlOutput(strFileName, _lastScriptElement.FormattedRScript)
-            Case ".txt"
-                outputElement.AddTextOutput(strFileName, _lastScriptElement.FormattedRScript)
-            Case Else
-                MessageBox.Show("The file type to be added is currently not suported",
-                            "Developer Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
-                Exit Sub
-        End Select
+        Dim outputType As OutputType
+        If String.IsNullOrEmpty(strOutput) Then
+            outputType = OutputType.Script
+        ElseIf Not bAsFile Then
+            outputType = OutputType.TextOutput
+        Else
+            Dim strFileExtension As String = Path.GetExtension(strOutput).ToLower
+            Select Case strFileExtension
+                Case ".png"
+                    outputType = OutputType.ImageOutput
+                Case ".html"
+                    outputType = OutputType.HtmlOutput
+                Case ".txt"
+                    outputType = OutputType.TextOutput
+                Case Else
+                    MessageBox.Show("The file type to be added is currently not suported",
+                                "Developer Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error)
+                    Exit Sub
+            End Select
+        End If
 
-        _output.Add(outputElement)
+        Dim outputElement As New clsOutputElement
+        outputElement.SetContent(strScript, outputType, strOutput)
+
+        _outputElements.Add(outputElement)
 
         If bAddOutputInInternalViewer Then
             'raise event for output pages
             RaiseEvent NewOutputAdded(outputElement)
         Else
             Dim frmMaximiseOutput As New frmMaximiseOutput
-            frmMaximiseOutput.Show(strFileName:=strFileName)
+            frmMaximiseOutput.Show(strFileName:=strOutput)
         End If
 
-    End Sub
-
-    ''' <summary>
-    ''' Adds string output to be displayed within the output
-    ''' </summary>
-    ''' <param name="strOutput"></param>
-    Public Sub AddStringOutput(strOutput As String)
-        'Note this is always takes the last script added as corresponding script
-        If _lastScriptElement Is Nothing Then
-            Throw New Exception("Cannot find script to attach output to.")
-        Else
-            Dim outputElement As New clsOutputElement
-            outputElement.AddStringOutput(strOutput, _lastScriptElement.FormattedRScript)
-            _output.Add(outputElement)
-            RaiseEvent NewOutputAdded(outputElement)
-        End If
     End Sub
 
     ''' <summary>
@@ -178,7 +148,7 @@ Public Class clsOutputLogger
     ''' </summary>
     ''' <param name="outputElement"></param>
     Public Sub DeleteOutputFromMainList(outputElement As clsOutputElement)
-        _output.RemoveAll(Function(x) x Is outputElement)
+        _outputElements.RemoveAll(Function(x) x Is outputElement)
     End Sub
 
     ''' <summary>

@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.InteropServices
+Imports RScript
 ''' <summary>
 ''' Output page for R outputs
 ''' </summary>
@@ -128,16 +129,22 @@ Public Class ucrOutputPage
     ''' </summary>
     ''' <param name="outputElement"></param>
     Public Sub AddNewOutput(outputElement As clsOutputElement)
-        Select Case outputElement.OutputType
-            Case OutputType.Script
-                AddNewScript(outputElement)
-            Case OutputType.TextOutput
-                AddNewTextOutput(outputElement)
-            Case OutputType.ImageOutput
-                AddNewImageOutput(outputElement)
-            Case OutputType.HtmlOutput
-                AddNewHtmlOutput(outputElement)
-        End Select
+        'add the script first. This applies to whether the output has an output or not or
+        'whether it's just a script output
+        AddNewScript(outputElement)
+
+        'then add the output of the script. If the output element is just a script, ignore it since it's already been added above
+        If Not String.IsNullOrEmpty(outputElement.Output) Then
+            Select Case outputElement.OutputType
+                Case OutputType.TextOutput
+                    AddNewTextOutput(outputElement)
+                Case OutputType.ImageOutput
+                    AddNewImageOutput(outputElement)
+                Case OutputType.HtmlOutput
+                    AddNewHtmlOutput(outputElement)
+            End Select
+        End If
+
         pnlMain.VerticalScroll.Value = pnlMain.VerticalScroll.Maximum
         pnlMain.PerformLayout()
     End Sub
@@ -147,7 +154,36 @@ Public Class ucrOutputPage
          .Dock = DockStyle.Top,
          .BorderStyle = BorderStyle.None
         }
-        FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormattedRScript)
+
+        'if settings are not available or both show commands and comments settings are enabled then just show the whole script
+        If frmMain.clsInstatOptions Is Nothing OrElse (frmMain.clsInstatOptions.bIncludeCommentDefault AndAlso frmMain.clsInstatOptions.bCommandsinOutput) Then
+            FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormattedRScript)
+        Else
+
+            'if either show commands or comments settings is enabled show the script that corresponds to either
+            If frmMain.clsInstatOptions.bIncludeCommentDefault Then
+                'show comments only
+                For Each line As clsRScriptElement In outputElement.FormattedRScript
+                    If line.Type = clsRToken.typToken.RComment Then
+                        AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
+                    End If
+                Next
+
+            ElseIf frmMain.clsInstatOptions.bCommandsinOutput Then
+                'show command lines that are not comments
+                For Each line As clsRScriptElement In outputElement.FormattedRScript
+                    If Not (line.Type = clsRToken.typToken.RComment) Then
+                        AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
+                    End If
+                Next
+            End If
+        End If
+
+        'if no contents added just exit sub
+        If richTextBox.TextLength = 0 Then
+            Exit Sub
+        End If
+
         Dim panel As Panel = AddElementPanel(outputElement)
         panel.Controls.Add(richTextBox)
         panel.Controls.SetChildIndex(richTextBox, 0)
@@ -159,28 +195,17 @@ Public Class ucrOutputPage
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
         Dim panel As Panel = AddElementPanel(outputElement)
 
-        If outputElement.StringOutput IsNot Nothing Then
-            Dim richTextBox As New RichTextBox With {
-                .Dock = DockStyle.Top,
-                .BorderStyle = BorderStyle.None
-             }
-            AddFormatedTextToRichTextBox(richTextBox, outputElement.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
-            panel.Controls.Add(richTextBox)
-            panel.Controls.SetChildIndex(richTextBox, 0)
-            SetRichTextBoxHeight(richTextBox)
-            AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
-            AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
-        Else
+        If outputElement.IsFile Then
             Dim linkLabel As New LinkLabel
             Dim ucrTextViewer As New ucrTextViewer
 
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
                                             Dim frmMaximiseOutput As New frmMaximiseOutput
-                                            frmMaximiseOutput.Show(strFileName:=outputElement.TextOutput)
+                                            frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                         End Sub
 
-            ucrTextViewer.LoadTextFile(strFileName:=outputElement.TextOutput)
+            ucrTextViewer.LoadTextFile(strFileName:=outputElement.Output)
             ucrTextViewer.FormatText(OutputFont.ROutputFont, OutputFont.ROutputColour)
 
             AddHandler ucrTextViewer.richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
@@ -191,6 +216,18 @@ Public Class ucrOutputPage
             panel.Controls.SetChildIndex(ucrTextViewer, 0)
             linkLabel.Dock = DockStyle.Top
             ucrTextViewer.Dock = DockStyle.Top
+        Else
+            Dim richTextBox As New RichTextBox With {
+               .Dock = DockStyle.Top,
+               .BorderStyle = BorderStyle.None
+            }
+            AddFormatedTextToRichTextBox(richTextBox, outputElement.Output, OutputFont.ROutputFont, OutputFont.ROutputColour)
+            panel.Controls.Add(richTextBox)
+            panel.Controls.SetChildIndex(richTextBox, 0)
+            SetRichTextBoxHeight(richTextBox)
+            AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
+            AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
+
         End If
     End Sub
 
@@ -201,7 +238,7 @@ Public Class ucrOutputPage
 
         linkLabel.Text = "Maximise"
 
-        pictureBox.Load(outputElement.ImageOutput)
+        pictureBox.Load(outputElement.Output)
         panel.Controls.Add(linkLabel)
         panel.Controls.Add(pictureBox)
         panel.Controls.SetChildIndex(linkLabel, 0)
@@ -213,7 +250,7 @@ Public Class ucrOutputPage
 
         AddHandler linkLabel.Click, Sub()
                                         Dim frmMaximiseOutput As New frmMaximiseOutput
-                                        frmMaximiseOutput.Show(strFileName:=outputElement.ImageOutput)
+                                        frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                     End Sub
     End Sub
 
@@ -226,10 +263,10 @@ Public Class ucrOutputPage
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
                                             Dim frmMaximiseOutput As New frmMaximiseOutput
-                                            frmMaximiseOutput.Show(strFileName:=outputElement.HtmlOutput)
+                                            frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                         End Sub
 
-            ucrWebview.LoadHtmlFile(outputElement.HtmlOutput)
+            ucrWebview.LoadHtmlFile(outputElement.Output)
 
             panel.Controls.Add(linkLabel)
             panel.Controls.Add(ucrWebview)
@@ -244,7 +281,7 @@ Public Class ucrOutputPage
             AddHandler linkLabel.Click, Sub()
                                             'display the html output in default browser
                                             Cursor = Cursors.WaitCursor
-                                            Process.Start(outputElement.HtmlOutput)
+                                            Process.Start(outputElement.Output)
                                             Cursor = Cursors.Default
                                         End Sub
 
@@ -255,7 +292,7 @@ Public Class ucrOutputPage
 
             'display the html output in default browser
             Cursor = Cursors.WaitCursor
-            Process.Start(outputElement.HtmlOutput)
+            Process.Start(outputElement.Output)
             Cursor = Cursors.Default
         End If
 
@@ -334,7 +371,7 @@ Public Class ucrOutputPage
         If SelectedElements.Count = 1 AndAlso SelectedElements(0).OutputType = OutputType.ImageOutput Then
             Dim element As clsOutputElement = SelectedElements(0)
             Clipboard.Clear()
-            Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
+            Clipboard.SetImage(GetBitmapFromFile(element.Output))
             Return True
         End If
         Return False
@@ -345,11 +382,12 @@ Public Class ucrOutputPage
             Case OutputType.Script
                 FillRichTextBoxWithFormatedRScript(richText, element.FormattedRScript)
             Case OutputType.TextOutput
-                AddFormatedTextToRichTextBox(richText, element.StringOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
+                'todo. check if output is file or not. if file, read the contents of the file
+                AddFormatedTextToRichTextBox(richText, element.Output, OutputFont.ROutputFont, OutputFont.ROutputColour)
             Case OutputType.ImageOutput
                 Clipboard.Clear()
                 'todo. instead of copy paste, add image to rtf directly from file?
-                Clipboard.SetImage(GetBitmapFromFile(element.ImageOutput))
+                Clipboard.SetImage(GetBitmapFromFile(element.Output))
                 richText.Paste()
         End Select
         richText.AppendText(Environment.NewLine)
