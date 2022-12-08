@@ -82,6 +82,15 @@ jobs:
         Appx_Bundle_Platforms: x64|x86
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}      
+        
+            # Create the app package by building and packaging the Windows Application Packaging project
+    - name: Create the app package2
+      run: msbuild Solution_Name /p:Configuration=release /p:PlatformTarget=x86 /p:Platform=x86 /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      env:
+        Appx_Bundle: Always
+        Appx_Bundle_Platforms: x64|x86
+        Appx_Package_Build_Mode: StoreUpload
+        Configuration: ${{ matrix.configuration }} 
 
      #Build 32 bit installer without R
     - name: Building the installer 32bit - No R
