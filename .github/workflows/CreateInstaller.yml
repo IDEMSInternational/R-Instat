@@ -76,18 +76,18 @@ jobs:
 
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create the app package
-      run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:PlatformTarget=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}      
 
-    # Build 32 bit installer without R
-    #- name: Building the installer 32bit - No R
-    #  run: |
-    #    "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-    #  shell: cmd
+     #Build 32 bit installer without R
+    - name: Building the installer 32bit - No R
+      run: |
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+      shell: cmd
     
     # upload 32 bit installer without R
     #- name: Upload the 32 bit installer as an artifact
