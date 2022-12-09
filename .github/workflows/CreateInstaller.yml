@@ -29,8 +29,7 @@ jobs:
     
     # set variables
     env:
-      Solution_Name: Instat.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: instat\instat.vbproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution_Name: Instat.sln                        
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
     # check out r-instat
@@ -75,36 +74,39 @@ jobs:
         version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}" #.${env:BUILD_NUMBER}"
 
     # Create the app package by building and packaging the Windows Application Packaging project
+    #Same output for 64bit and 32 bit 
     - name: Create the app package
-      run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x64|x86
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}      
         
-            # Create the app package by building and packaging the Windows Application Packaging project
-    - name: Create the app package2
-      run: msbuild Instat.sln /p:Configuration=release /p:PlatformTarget=x86 /p:Platform=x86 /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
-      env:
-        Appx_Bundle: Always
-        Appx_Bundle_Platforms: x64|x86
-        Appx_Package_Build_Mode: StoreUpload
-        Configuration: ${{ matrix.configuration }} 
+    # Create directory and copy over application to a 32bit folder
+    # There is no difference in R instat other than the packaged R
+    - name: Make Library directory 64 bit
+      run: |
+        MKDIR instat\bin\x64\Release\
+  
+    - name: Copy R-Instat Data 64 bit
+      run: |
+        ROBOCOPY instat\bin\Release\ instat\bin\x64\Release\ /E
+      continue-on-error: true
 
-     #Build 32 bit installer without R
+    # Build 32 bit installer without R
     - name: Building the installer 32bit - No R
       run: |
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
       shell: cmd
-    
+         
     # upload 32 bit installer without R
-    #- name: Upload the 32 bit installer as an artifact
-    #  uses: actions/upload-artifact@v2
-    #  if: ${{ github.event_name != 'pull_request' }}
-    #  with:
-    #    path: "Output/R-Instat_0.7.4_Installer_32.exe"
-    #    name: rinstat32NoR-innosetup
+    - name: Upload the 32 bit installer as an artifact
+      uses: actions/upload-artifact@v2
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "Output/R-Instat_Installer_32.exe"
+        name: rinstat32NoR-innosetup
         
     # Build 64 bit installer without R
     - name: Building the installer 64bit - No R
@@ -122,7 +124,7 @@ jobs:
             
     # check out R-Instat Data 
     - name: Checkout Instat Data
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ' africanmathsinitiative/R-Instat-Data'
         fetch-depth: 0
@@ -139,18 +141,18 @@ jobs:
       continue-on-error: true
       
     # Create directory and copy over InstatData (32bit)
-    #- name: Make Library directory 32 bit
-    #  run: |
-    #    MKDIR instat\bin\x64\Release\static\Library\   
+    - name: Make Library directory 32 bit
+      run: |
+        MKDIR instat\bin\x64\Release\static\Library\   
             
-    #- name: Copy R-Instat Data 32 bit
-    #  run: |
-    #    ROBOCOPY InstatData\data\*.* instat\bin\x64\Release\static\Library\ /E
-    #  continue-on-error: true
+    - name: Copy R-Instat Data 32 bit
+      run: |
+        ROBOCOPY InstatData\data\*.* instat\bin\x64\Release\static\Library\ /E
+      continue-on-error: true
 
       # check out R for R-Instat
     - name: Checkout R for R-Instat
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: 'ChrisMarsh82/R-RInstat'
         fetch-depth: 0
@@ -161,30 +163,30 @@ jobs:
         ROBOCOPY R-RInstat\64Bit\ instat\bin\Release\static\ /E
       continue-on-error: true      
       
-    #- name: Copy R 32 bit
-    #  run: |
-    #    ROBOCOPY R-RInstat\32Bit\ instat\bin\x64\Release\static\ /E
-    #  continue-on-error: true 
+    - name: Copy R 32 bit
+      run: |
+        ROBOCOPY R-RInstat\32Bit\ instat\bin\x64\Release\static\ /E
+      continue-on-error: true 
      
     - name: Install R packages (64 bit)
       run: |
         "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
       shell: cmd
       
-    #- name: Install R packages (32 bit)
-    #  run: |
-    #    "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
-    #  shell: cmd      
+    - name: Install R packages (32 bit)
+      run: |
+        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+      shell: cmd      
       
     - name: Building the installer 64bit - With R
       run: |
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_64bit.iss"
       shell: cmd
       
-    #- name: Building the installer 32bit - With R
-    #  run: |
-    #    "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-    #  shell: cmd
+    - name: Building the installer 32bit - With R
+      run: |
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+      shell: cmd
 
     - name: Upload the 64 bit installer with R as an artifact
       uses: actions/upload-artifact@v2
@@ -192,12 +194,12 @@ jobs:
       with:
         path: "Output/R-Instat_Installer_64.exe"
         name: rinstat64WithR-innosetup    
-         
-    #- name: Upload the 32 bit installer with R as an artifact
-    #  uses: actions/upload-artifact@v2
-    #  if: ${{ github.event_name != 'pull_request' }}
-    #  with:
-    #    path: "Output/R-Instat_Installer_32.exe"
-    #    name: rinstat64WithR-innosetup      
+        
+    - name: Upload the 32 bit installer with R as an artifact
+      uses: actions/upload-artifact@v2
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "Output/R-Instat_Installer_32.exe"
+        name: rinstat64WithR-innosetup      
 
             
