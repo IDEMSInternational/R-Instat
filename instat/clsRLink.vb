@@ -823,6 +823,7 @@ Public Class RLink
                 End If
 
             ElseIf iCallType = 0 Then
+                'this block is executed during the startup of R-instant.
                 'if script output should be ignored. todo. deprecate this block after implementing correctly
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 clsOutputLogger.AddOutput(strScriptWithComment, "", False, bAddOutputInInternalViewer)
