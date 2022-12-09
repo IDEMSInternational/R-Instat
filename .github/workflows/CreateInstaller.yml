@@ -171,30 +171,38 @@ jobs:
     - name: Install R packages (64 bit)
       run: |
         "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
-      shell: cmd
-      
-    - name: Install R packages (32 bit)
-      run: |
-        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
-      shell: cmd      
+      shell: cmd     
       
     - name: Building the installer 64bit - With R
       run: |
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_64bit.iss"
       shell: cmd
       
-    - name: Building the installer 32bit - With R
-      run: |
-        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-      shell: cmd
-
     - name: Upload the 64 bit installer with R as an artifact
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/R-Instat_Installer_64.exe"
         name: rinstat64WithR-innosetup    
-        
+    
+    - name: Remove 64 bit release files to free up space
+      run: |
+        rmdir /s "instat\bin\Release\"
+            
+    - name: Remove 64 innosetup to free up space
+      run: |
+        del "Output/R-Instat_Installer_64.exe"
+      
+    - name: Install R packages (32 bit)
+      run: |
+        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+      shell: cmd      
+      
+    - name: Building the installer 32bit - With R
+      run: |
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+      shell: cmd
+      
     - name: Upload the 32 bit installer with R as an artifact
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
