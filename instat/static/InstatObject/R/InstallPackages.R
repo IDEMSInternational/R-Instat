@@ -93,7 +93,7 @@ packs <- c("abind", "agricolae", "agridat", "AlgDesign", "animation",
         "xopen", "xtable", "xts", "yaml", "yulab.utils", "zip", "zoo", 
         "zyp")
 
-install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="both")
+install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="win.binary")
 
 #install development packages not on CRAN
 devtools::install_github("ianmoran11/mmtable2")
