@@ -71,7 +71,7 @@ jobs:
         path: instat\My Project\AssemblyInfo.vb
         # optional, default is ${{ github.workspace }}
         # Version number to set on [AssemblyVersion] and [AssemblyFileVersion] attributes of AssemblyInfo.cs/.vb files
-        version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}" #.${env:BUILD_NUMBER}"
+        version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}.${env:BUILD_NUMBER}"
 
     # Create the app package by building and packaging the Windows Application Packaging project
     #Same output for 64bit and 32 bit 
