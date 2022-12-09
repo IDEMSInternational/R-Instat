@@ -2147,6 +2147,7 @@ Public Class frmMain
         clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
         clsLastGraph.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
         clsLastGraph.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+        clsLastGraph.SetAssignTo("last_graph")
 
         clsPrintGraph.SetRCommand("print")
         clsPrintGraph.AddParameter("x", clsRFunctionParameter:=clsLastGraph, iPosition:=0)

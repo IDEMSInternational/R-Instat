@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
 Imports RScript
+
 ''' <summary>
 ''' Output element for an R script. 
 ''' Must contain an R script. The output itself is optional depending on whether the script produces the an output or not.
@@ -72,14 +73,20 @@ Public Class clsOutputElement
         Return Me.MemberwiseClone
     End Function
 
-    Public Sub SetContent(strScript As String, outputType As OutputType, Optional strOutputFileName As String = "")
+    ''' <summary>
+    ''' Sets the contents of the output element
+    ''' </summary>
+    ''' <param name="strScript">R script producing the output</param>
+    ''' <param name="outputType">Type of output</param>
+    ''' <param name="strOutput">Output produced, can be file name or string value</param>
+    Public Sub SetContent(strScript As String, outputType As OutputType, Optional strOutput As String = "")
         _strScript = strScript
         _outputType = outputType
-        _strOutput = strOutputFileName
+        _strOutput = strOutput
     End Sub
 
     ''' <summary>
-    ''' Holds formated R Script, split into R Script Elements
+    ''' Gets formated R Script, split into R Script Elements
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property FormattedRScript As List(Of clsRScriptElement)
