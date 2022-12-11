@@ -1513,11 +1513,6 @@ Public Class frmMain
         ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
-    Public Sub ReOrderWorkSheets()
-        ucrDataViewer.ReOrderWorkSheets()
-        ucrColumnMeta.ReOrderWorkSheets()
-    End Sub
-
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
