@@ -87,7 +87,7 @@ Public MustInherit Class ucrReoGrid
 
         'in the second condition we check if all data frames in the data book
         'have the same order positions with all data frame sheets in the grid
-        'if not this check will return False which means the data frames in the data book are reordeder
+        'if not this check will return False which means the data frames in the data book are reordered
         If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
                                                        SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()) Then
             'reorder the worksheets based on the filled list
