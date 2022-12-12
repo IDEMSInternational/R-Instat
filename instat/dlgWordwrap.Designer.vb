@@ -29,7 +29,6 @@ Partial Class dlgWordwrap
         Me.rdoWrapText = New System.Windows.Forms.RadioButton()
         Me.ucrNudWidthWrap = New instat.ucrNud()
         Me.lblWidthWrap = New System.Windows.Forms.Label()
-        Me.ucrNewColName = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.rdoUnWrapText = New System.Windows.Forms.RadioButton()
@@ -114,20 +113,11 @@ Partial Class dlgWordwrap
         Me.lblWidthWrap.TabIndex = 4
         Me.lblWidthWrap.Text = "Width:"
         '
-        'ucrNewColName
-        '
-        Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(12, 215)
-        Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNewColName.Name = "ucrNewColName"
-        Me.ucrNewColName.Size = New System.Drawing.Size(392, 22)
-        Me.ucrNewColName.TabIndex = 8
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(11, 253)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 221)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
@@ -160,9 +150,8 @@ Partial Class dlgWordwrap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 314)
+        Me.ClientSize = New System.Drawing.Size(449, 282)
         Me.Controls.Add(Me.grpOptions)
-        Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrNudWidthWrap)
         Me.Controls.Add(Me.lblWidthWrap)
@@ -189,7 +178,6 @@ Partial Class dlgWordwrap
     Friend WithEvents rdoWrapText As RadioButton
     Friend WithEvents ucrNudWidthWrap As ucrNud
     Friend WithEvents lblWidthWrap As Label
-    Friend WithEvents ucrNewColName As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents rdoUnWrapText As RadioButton
