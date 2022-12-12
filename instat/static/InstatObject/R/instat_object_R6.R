@@ -658,28 +658,36 @@ DataBook$set("public", "get_objects", function(data_name, object_name, object_ty
 )
 
 #returns NULL if object is not found
-#as explained in issue #7808 comments. New implementation is need to remove the internal parameter from the other "object" functions
-#if parameter internal is set to false, parameter object_type_label will have to be passed
-#todo. parameter object_type_label and internal can be removed as a parameter if all objects are saved in the same data book or structure
-DataBook$set("public", "get_object", function(data_name, object_name, object_type_label = "", as_file = TRUE, internal = TRUE) {
-  if (!internal && identical(object_type_label,"graph") && exists(".graph_data_book")) {
-    r_instant_object <- .graph_data_book$get_object(data_name = data_name, object_name = object_name,  internal = TRUE)
+#see issue #7808 comments for more discussions
+DataBook$set("public", "get_object", function(data_name, object_name, as_file = TRUE) {
+  if(missing(data_name) || data_name == overall_label) {
+    r_instant_object <- private$.objects[[object_name]]
   }else {
-    if(missing(data_name) || data_name == overall_label) {
-      r_instant_object <- private$.objects[[object_name]]
-    }else {
-      r_instant_object <- self$get_data_objects(data_name)$get_object(object_name = object_name)
-    }
+    r_instant_object <- self$get_data_objects(data_name)$get_object(object_name = object_name)
   }
   
-  if (is.null(r_instant_object)){
-    return(NULL)
+  out <- r_instant_object
+  if(!is.null(out) && as_file ){
+    out <- view_object(object = r_instant_object$object, object_format = r_instant_object$object_format)
+  }
+  return(out)
+  
+}
+)
+
+DataBook$set("public", "get_last_object", function(object_type_label, as_file = TRUE) {
+  r_instat_object <- NULL
+  #currently this function is only applicable to graphs. Implement for other objects like models, tables, summaries
+  if(object_type_label == "graph"){
+    if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
+      r_instat_object <- self$get_object(data_name = private$.last_graph[1], object_name = private$.last_graph[2], as_file = as_file)
+    } 
+  }
+  
+  if(!is.null(r_instat_object) && !as_file){
+    return(r_instat_object$object)
   }else{
-    if(as_file){
-      return(view_object(object = r_instant_object$object, object_format = r_instant_object$object_format))
-    }else{
-      return(r_instant_object)
-    }
+    return(r_instat_object)
   }
   
 }
@@ -796,30 +804,7 @@ DataBook$set("public", "get_from_object", function(data_name, object_name, value
 }
 )
 
-DataBook$set("public", "get_last_object", function(object_type_label, as_file = TRUE, internal = TRUE) {
-  if (!internal && exists(".graph_data_book")){
-   return(.graph_data_book$get_last_object(object_type_label = object_type_label, as_file = as_file, internal = TRUE)) 
-  }else {
-    r_instat_object <- NULL
-    if(object_type_label == "graph"){
-      if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
-        r_instat_object <- self$get_object(data_name = private$.last_graph[1], object_name = private$.last_graph[2], as_file = as_file)
-      } 
-    }else{
-      #todo. any other object type label
-    }
-    
-    if(is.null(r_instat_object)){
-      return()
-    }else if(as_file){
-      return(r_instat_object)
-    }else{
-      return(r_instat_object$object)
-    }
-    
-  }
-}
-)
+
 
 
 # Filters -----------------------------------------------------------------
