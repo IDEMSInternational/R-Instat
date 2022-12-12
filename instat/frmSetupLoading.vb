@@ -19,16 +19,27 @@ Imports System.Threading
 Public Class frmSetupLoading
     Private dctMessagesLinks As Dictionary(Of String, String)
     Private iSelectedMessage As Integer
-
     Private Shared CancellationTokenSource As CancellationTokenSource
+
+    ''' <summary>
+    ''' Display a loading screen in seperate flag in order to keep the
+    ''' loading screens responsiveness
+    ''' </summary>
     Public Shared Sub ShowLoadingScreen()
         If CancellationTokenSource Is Nothing Then
             HideLoadingScreen()
         End If
         CancellationTokenSource = New CancellationTokenSource
-        'Ignore the warning - we only want to keep this dialog responsive
+        'Ignore the warning - we only want to keep this dialog responsive it doesn't mater
+        'that its not awaited 
+#Disable Warning BC42358 ' Because this call is not awaited, execution of the current method continues before the call is completed
         ShowLoadingScreenAsync(CancellationTokenSource.Token)
+#Enable Warning BC42358 ' Because this call is not awaited, execution of the current method continues before the call is completed
     End Sub
+
+    ''' <summary>
+    ''' Hide currently displayed loading screen
+    ''' </summary>
     Public Shared Sub HideLoadingScreen()
         If CancellationTokenSource IsNot Nothing Then
             CancellationTokenSource.Cancel()
@@ -40,8 +51,8 @@ Public Class frmSetupLoading
         Await Task.Run(Sub() ShowLoadingScreenAndWait(CancellationToken), CancellationToken)
     End Function
     Private Shared Sub ShowLoadingScreenAndWait(CancellationToken As CancellationToken)
-        Dim iWaitSecondsBeforeShow = 2
-        Dim iWaitSecondsBeforeAbort = 30
+        Dim iWaitSecondsBeforeShow As Integer = 2
+        Dim iWaitSecondsBeforeAbort As Integer = 30
         Dim stopwatch As New Stopwatch
         stopwatch.Start()
         'Wait before showing loading screen
