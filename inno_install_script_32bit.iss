@@ -5,7 +5,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppVersion= {#GetStringFileInfo("instat\bin\Release\instat.exe", "FileVersion")}
+AppVersion= {#GetStringFileInfo("instat\bin\x86\Release\instat.exe", "FileVersion")}
 AppId={{979E51D8-9BC4-418F-8D4D-9B44FEA869A6-{#SetupSetting("AppVersion")}}
 AppName=R-Instat
 
@@ -27,8 +27,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; OnlyBelowVersion: 0
 
 [Files]
-Source: "instat\bin\x64\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "instat\bin\x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "instat\bin\x86\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "instat\bin\x86\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

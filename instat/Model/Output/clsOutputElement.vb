@@ -86,7 +86,7 @@ Public Class clsOutputElement
     End Sub
 
     ''' <summary>
-    ''' Gets formated R Script, split into R Script Elements
+    ''' Gets formatted R Script, split into R Script Elements
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property FormattedRScript As List(Of clsRScriptElement)
