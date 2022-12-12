@@ -397,22 +397,22 @@ Public Class ucrReceiver
             Case "metadata"
                 'TODO what should this be?
                 strItemsParameterNameInRFunction = ""
-            Case "graph"
-                strItemsParameterNameInRFunction = "graph_name"
-            Case "model"
+            Case "object"
+                strItemsParameterNameInRFunction = "object_name"
+            Case RObjectTypeLabel.Graph
+                strItemsParameterNameInRFunction = "object_name"
+            Case RObjectTypeLabel.Model
                 strItemsParameterNameInRFunction = "model_name"
+            Case RObjectTypeLabel.Table
+                strItemsParameterNameInRFunction = "table_name"
             Case "surv"
                 strItemsParameterNameInRFunction = "surv_name"
-            Case "table"
-                strItemsParameterNameInRFunction = "table_name"
             Case "filter"
                 strItemsParameterNameInRFunction = "filter_name"
             Case "column_selection"
                 strItemsParameterNameInRFunction = "column_selection_name"
             Case "link"
                 strItemsParameterNameInRFunction = "link_name"
-            Case "object"
-                strItemsParameterNameInRFunction = "object_name"
             Case "calculation"
                 strItemsParameterNameInRFunction = "calculation_name"
         End Select

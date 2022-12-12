@@ -1430,14 +1430,17 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_filter_names")
                 Case "column_selection"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_selection_names")
-                Case "object"
+                Case "object",
+                     RObjectTypeLabel.Graph,
+                     RObjectTypeLabel.Model,
+                     RObjectTypeLabel.Table,
+                     RObjectTypeLabel.Summary,
+                     RObjectTypeLabel.StructureLabel
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_object_names")
-                Case "model"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_model_names")
-                Case "graph"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
-                Case "surv"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_surv_names")
+                    If strType <> "object" Then
+                        clsGetItems.AddParameter(strParameterName:="object_type_label",
+                                          strParameterValue:=Chr(34) & strType & Chr(34))
+                    End If
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                 Case "link"
@@ -1452,8 +1455,6 @@ Public Class RLink
                     clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
                 Case "variable_sets"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
-                Case "table"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_table_names")
                 Case "calculation"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
             End Select

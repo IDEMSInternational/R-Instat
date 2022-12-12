@@ -2788,3 +2788,57 @@ check_graph <- function(graph_object){
 } 
 
 
+get_data_book_output_object_names <- function(output_object_list,
+                                              object_type_label = NULL, 
+                                              excluded_items = c(), 
+                                              as_list = FALSE, 
+                                              list_label = NULL){
+  
+  if(is.null(object_type_label)){
+    out = names(output_object_list)
+  }else{ 
+    out = names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
+  }
+  
+  if(length(out) == 0){
+    return(out)
+  } 
+  
+  if(length(excluded_items) > 0) {
+    #get indices of items to exclude
+    excluded_indices <- which(out %in% excluded_items)
+    
+    #notify user of items not found
+    if(length(excluded_indices) != length(excluded_items)){
+      warning("Some of the excluded_items were not found in the list of objects")
+    } 
+    
+    #remove the excluded items from the list
+    if(length(excluded_indices) > 0){
+      out <- out[-excluded_indices]
+    }
+    
+  }
+  
+  if(as_list) {
+    #convert the character vector list
+    lst <- list()
+    if(!is.null(list_label)){
+      lst[[list_label]] <- out
+    }else{
+      lst <- as.list(out)
+    }
+   
+    return(lst)
+  }else{
+    #return as a character vector
+    return(out)
+  }
+  
+}
+
+
+
+
+
+

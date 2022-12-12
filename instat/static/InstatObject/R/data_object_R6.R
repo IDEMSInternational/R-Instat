@@ -2049,7 +2049,7 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 )
 
 #objects names are expected to be unique. Objects are in a nested list. 
-#see comments in issue #7808 for further details
+#see comments in issue #7808 for more details
 DataSheet$set("public", "add_object", function(object_name, object_type_label, object_format, object) {
   
     if(missing(object_name)){
@@ -2072,20 +2072,10 @@ DataSheet$set("public", "add_object", function(object_name, object_type_label, o
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, object_type_label, force_as_list = FALSE, silent = FALSE) {
-  curr_objects = private$objects[self$get_object_names(object_type_label = object_type_label)]
-  if(length(curr_objects) == 0) return(curr_objects)
-  if(missing(object_name)) return(curr_objects)
-  if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) {
-    if (silent) return(NULL)
-    else stop(object_name, " not found in objects")
-  }
-  if(length(object_name) == 1) {
-    if(force_as_list) return(curr_objects[object_name])
-    else return(curr_objects[[object_name]])
-  }
-  else return(curr_objects[object_name])
+DataSheet$set("public", "get_objects", function(object_type_label) {
+  out <-
+    private$objects[self$get_object_names(object_type_label = object_type_label)]
+  return(out)
 }
 )
 
@@ -2102,41 +2092,17 @@ DataSheet$set("public", "get_object", function(object_name) {
 }
 )
 
-DataSheet$set("public", "get_object_names", function(object_type_label, as_list = FALSE, excluded_items = c()) {
-    if(missing(object_type_label)){
-      out = names(private$objects)
-    }else{ 
-      #todo. has a bug. the object_type_label cannot be accessed directly
-      out = names(private$objects)[sapply(private$objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
-    }
-    
-    if(length(out) == 0){
-      return(out)
-    } 
-      
-    
-    if(length(excluded_items) > 0) {
-      excluded_indices = which(out %in% excluded_items)
-      
-      #notify user
-      if(length(excluded_indices) != length(excluded_items)){
-        warning("Some of the excluded_items were not found in the list of objects")
-      } 
-      
-      #remove the excluded items from the list
-      if(length(excluded_indices) > 0){
-        out = out[-excluded_indices]
-      }
-      
-    }
-    
-    if(as_list) {
-      lst = list()
-      lst[[self$get_metadata(data_name_label)]] <- out
-      return(lst)
-    }else{
-      return(out)
-    } 
+
+DataSheet$set("public", "get_object_names", function(object_type_label = NULL,
+                                                     as_list = FALSE, 
+                                                     excluded_items = c()) {
+  
+  out <- get_data_book_output_object_names(output_object_list = private$objects, 
+                                           object_type_label = object_type_label, 
+                                           excluded_items = excluded_items, 
+                                           as_list = as_list, 
+                                           list_label= self$get_metadata(data_name_label) )
+  return(out)
     
 }
 )
