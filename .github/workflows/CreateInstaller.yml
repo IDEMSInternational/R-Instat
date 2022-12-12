@@ -208,6 +208,6 @@ jobs:
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/R-Instat_Installer_32.exe"
-        name: rinstat64WithR-innosetup      
+        name: rinstat32WithR-innosetup      
 
             
