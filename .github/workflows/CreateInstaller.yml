@@ -87,11 +87,11 @@ jobs:
     # There is no difference in R instat other than the packaged R
     - name: Make Library directory 64 bit
       run: |
-        MKDIR instat\bin\x64\Release\
+        MKDIR instat\bin\x86\Release\
   
     - name: Copy R-Instat Data 64 bit
       run: |
-        ROBOCOPY instat\bin\Release\ instat\bin\x64\Release\ /E
+        ROBOCOPY instat\bin\Release\ instat\bin\x86\Release\ /E
       continue-on-error: true
 
     # Build 32 bit installer without R
@@ -143,11 +143,11 @@ jobs:
     # Create directory and copy over InstatData (32bit)
     - name: Make Library directory 32 bit
       run: |
-        MKDIR instat\bin\x64\Release\static\Library\   
+        MKDIR instat\bin\x86\Release\static\Library\   
             
     - name: Copy R-Instat Data 32 bit
       run: |
-        ROBOCOPY InstatData\data\*.* instat\bin\x64\Release\static\Library\ /E
+        ROBOCOPY InstatData\data\*.* instat\bin\x86\Release\static\Library\ /E
       continue-on-error: true
 
       # check out R for R-Instat
@@ -165,7 +165,7 @@ jobs:
       
     - name: Copy R 32 bit
       run: |
-        ROBOCOPY R-RInstat\32Bit\ instat\bin\x64\Release\static\ /E
+        ROBOCOPY R-RInstat\32Bit\ instat\bin\x86\Release\static\ /E
       continue-on-error: true 
      
     - name: Install R packages (64 bit)
@@ -195,7 +195,7 @@ jobs:
       
     - name: Install R packages (32 bit)
       run: |
-        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+        "instat\bin\x86\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
       shell: cmd      
       
     - name: Building the installer 32bit - With R
