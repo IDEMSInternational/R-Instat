@@ -19,11 +19,11 @@ Imports instat.Translations
 Public Class dlgViewGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsggPlotly, clsGetGraphs As New RFunction
-    Private strGlobalGraphDisplayOption As String
+    Private clsPlotlyRFunction, clsGetObjectRFunction, clsViewObjectRFunction, clsPrintRFunction As New RFunction
+
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        strGlobalGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
+
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,7 +32,6 @@ Public Class dlgViewGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        SetGraphDisplayType()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -40,48 +39,56 @@ Public Class dlgViewGraph
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 525
-        rdoDisplaySeparateWindow.Enabled = False
 
         'Selector
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
         ucrGraphsSelector.SetParameterIsString()
 
         'Receiver
-        ucrGraphReceiver.SetParameter(New RParameter("graph_name", 1))
+        ucrGraphReceiver.SetParameter(New RParameter("object_name", 1))
         ucrGraphReceiver.strSelectorHeading = "Ggplot Graphs"
         ucrGraphReceiver.bAutoFill = True
         ucrGraphReceiver.SetParameterIsString()
-        ucrGraphReceiver.SetItemType("graph")
+        ucrGraphReceiver.SetItemType(RObjectTypeLabel.Graph)
         ucrGraphReceiver.Selector = ucrGraphsSelector
         ucrGraphReceiver.SetMeAsReceiver()
 
         ' We don't specify rdos in the new system here. This is because the automatic detection of the radio buttons relies on VB options, not R code
         'Group Options panel
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayOutputWindow)
-        ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
-        'ucrPnlDisplayOptions.AddRadioButton(rdoDisplaySeparateWindow) ' TODO: Add code for this
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayInteractiveView)
+        ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
     End Sub
 
     Private Sub SetDefaults()
-        clsggPlotly = New RFunction
-        clsGetGraphs = New RFunction
+        clsPlotlyRFunction = New RFunction
+        clsGetObjectRFunction = New RFunction
+        clsViewObjectRFunction = New RFunction
+        clsPrintRFunction = New RFunction
 
         ucrGraphsSelector.Reset()
-        rdoDisplayInteractiveView.Checked = True
+        rdoDisplayOutputWindow.Checked = True
 
-        clsggPlotly.SetPackageName("plotly")
-        clsggPlotly.SetRCommand("ggplotly")
-        clsggPlotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
+        clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
 
-        clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        clsGetGraphs.AddParameter("print_graph", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
+        clsPlotlyRFunction.SetPackageName("plotly")
+        clsPlotlyRFunction.SetRCommand("ggplotly")
+        clsPlotlyRFunction.AddParameter("p", clsRFunctionParameter:=clsGetObjectRFunction)
+
+        clsPrintRFunction.SetRCommand("print")
+        clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsGetObjectRFunction, iPosition:=0)
+
+        clsViewObjectRFunction.SetRCommand("view_object")
+        clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+        clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrGraphReceiver.SetRCode(clsGetGraphs, bReset)
-        ucrGraphsSelector.SetRCode(clsGetGraphs, bReset)
+        ucrGraphReceiver.SetRCode(clsGetObjectRFunction, bReset)
+        ucrGraphsSelector.SetRCode(clsGetObjectRFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -99,26 +106,18 @@ Public Class dlgViewGraph
     End Sub
 
     Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
-        SetGraphDisplayType()
-    End Sub
-
-    Private Sub SetGraphDisplayType()
-        If rdoDisplayInteractiveView.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
-            ' Since R 3.4.2 this is the only way the RDotNet detects the plotly window should load
-            ucrBase.clsRsyntax.iCallType = 2
-            clsGetGraphs.AddParameter("print_graph", "FALSE")
-        Else
-            clsGetGraphs.AddParameter("print_graph", "TRUE")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
-            ucrBase.clsRsyntax.iCallType = 3
-            If rdoDisplayOutputWindow.Checked Then
-                frmMain.clsInstatOptions.SetGraphDisplayOption("view_output_window")
-            ElseIf rdoDisplayRViewer.Checked Then
-                frmMain.clsInstatOptions.SetGraphDisplayOption("view_R_viewer")
-            ElseIf rdoDisplaySeparateWindow.Checked Then
-                frmMain.clsInstatOptions.SetGraphDisplayOption("view_separate_window")
-            End If
+        If rdoDisplayOutputWindow.Checked Then
+            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+            clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
+        ElseIf rdoDisplayInteractiveView.Checked Then
+            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
+            clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
+        ElseIf rdoDisplayRViewer.Checked Then
+            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+            clsViewObjectRFunction.RemoveParameterByName("object_format")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
         End If
     End Sub
 
@@ -126,9 +125,4 @@ Public Class dlgViewGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub dlgViewGraph_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
-        If Not Me.Visible Then
-            frmMain.clsInstatOptions.SetGraphDisplayOption(strGlobalGraphDisplayOption)
-        End If
-    End Sub
 End Class

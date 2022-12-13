@@ -40,7 +40,6 @@ Partial Class dlgViewGraph
     Private Sub InitializeComponent()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
         Me.rdoDisplayInteractiveView = New System.Windows.Forms.RadioButton()
-        Me.rdoDisplaySeparateWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlDisplayOptions = New instat.UcrPanel()
@@ -54,7 +53,6 @@ Partial Class dlgViewGraph
         'grpDisplayOptions
         '
         Me.grpDisplayOptions.Controls.Add(Me.rdoDisplayInteractiveView)
-        Me.grpDisplayOptions.Controls.Add(Me.rdoDisplaySeparateWindow)
         Me.grpDisplayOptions.Controls.Add(Me.rdoDisplayRViewer)
         Me.grpDisplayOptions.Controls.Add(Me.rdoDisplayOutputWindow)
         Me.grpDisplayOptions.Controls.Add(Me.ucrPnlDisplayOptions)
@@ -68,29 +66,18 @@ Partial Class dlgViewGraph
         'rdoDisplayInteractiveView
         '
         Me.rdoDisplayInteractiveView.AutoSize = True
-        Me.rdoDisplayInteractiveView.Location = New System.Drawing.Point(9, 22)
+        Me.rdoDisplayInteractiveView.Location = New System.Drawing.Point(9, 45)
         Me.rdoDisplayInteractiveView.Name = "rdoDisplayInteractiveView"
-        Me.rdoDisplayInteractiveView.Size = New System.Drawing.Size(158, 17)
+        Me.rdoDisplayInteractiveView.Size = New System.Drawing.Size(133, 17)
         Me.rdoDisplayInteractiveView.TabIndex = 1
         Me.rdoDisplayInteractiveView.TabStop = True
-        Me.rdoDisplayInteractiveView.Text = "Display in Interactive Viewer"
+        Me.rdoDisplayInteractiveView.Text = "Display in Plotly Viewer"
         Me.rdoDisplayInteractiveView.UseVisualStyleBackColor = True
-        '
-        'rdoDisplaySeparateWindow
-        '
-        Me.rdoDisplaySeparateWindow.AutoSize = True
-        Me.rdoDisplaySeparateWindow.Location = New System.Drawing.Point(9, 91)
-        Me.rdoDisplaySeparateWindow.Name = "rdoDisplaySeparateWindow"
-        Me.rdoDisplaySeparateWindow.Size = New System.Drawing.Size(158, 17)
-        Me.rdoDisplaySeparateWindow.TabIndex = 4
-        Me.rdoDisplaySeparateWindow.TabStop = True
-        Me.rdoDisplaySeparateWindow.Text = "Display in Separate Window"
-        Me.rdoDisplaySeparateWindow.UseVisualStyleBackColor = True
         '
         'rdoDisplayRViewer
         '
         Me.rdoDisplayRViewer.AutoSize = True
-        Me.rdoDisplayRViewer.Location = New System.Drawing.Point(9, 45)
+        Me.rdoDisplayRViewer.Location = New System.Drawing.Point(9, 68)
         Me.rdoDisplayRViewer.Name = "rdoDisplayRViewer"
         Me.rdoDisplayRViewer.Size = New System.Drawing.Size(116, 17)
         Me.rdoDisplayRViewer.TabIndex = 2
@@ -101,12 +88,12 @@ Partial Class dlgViewGraph
         'rdoDisplayOutputWindow
         '
         Me.rdoDisplayOutputWindow.AutoSize = True
-        Me.rdoDisplayOutputWindow.Location = New System.Drawing.Point(9, 68)
+        Me.rdoDisplayOutputWindow.Location = New System.Drawing.Point(9, 22)
         Me.rdoDisplayOutputWindow.Name = "rdoDisplayOutputWindow"
-        Me.rdoDisplayOutputWindow.Size = New System.Drawing.Size(147, 17)
+        Me.rdoDisplayOutputWindow.Size = New System.Drawing.Size(141, 17)
         Me.rdoDisplayOutputWindow.TabIndex = 3
         Me.rdoDisplayOutputWindow.TabStop = True
-        Me.rdoDisplayOutputWindow.Text = "Display in Output Window"
+        Me.rdoDisplayOutputWindow.Text = "Display in Normal Viewer"
         Me.rdoDisplayOutputWindow.UseVisualStyleBackColor = True
         '
         'ucrPnlDisplayOptions
@@ -157,7 +144,7 @@ Partial Class dlgViewGraph
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 220)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'dlgViewGraph
@@ -187,7 +174,6 @@ Partial Class dlgViewGraph
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrGraphsSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpDisplayOptions As GroupBox
-    Friend WithEvents rdoDisplaySeparateWindow As RadioButton
     Friend WithEvents rdoDisplayRViewer As RadioButton
     Friend WithEvents rdoDisplayOutputWindow As RadioButton
     Friend WithEvents ucrPnlDisplayOptions As UcrPanel

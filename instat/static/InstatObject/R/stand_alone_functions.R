@@ -2617,7 +2617,7 @@ cbind_unique <- function(x, y, cols){
 
 #object is the object to be displayed
 #object_format is the display format
-view_object <- function(object, object_format) {
+view_object <- function(object, object_format = NULL) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
@@ -2795,9 +2795,9 @@ get_data_book_output_object_names <- function(output_object_list,
                                               list_label = NULL){
   
   if(is.null(object_type_label)){
-    out = names(output_object_list)
+    out <- names(output_object_list)
   }else{ 
-    out = names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
+    out <- names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
   }
   
   if(length(out) == 0){
@@ -2807,11 +2807,6 @@ get_data_book_output_object_names <- function(output_object_list,
   if(length(excluded_items) > 0) {
     #get indices of items to exclude
     excluded_indices <- which(out %in% excluded_items)
-    
-    #notify user of items not found
-    if(length(excluded_indices) != length(excluded_items)){
-      warning("Some of the excluded_items were not found in the list of objects")
-    } 
     
     #remove the excluded items from the list
     if(length(excluded_indices) > 0){

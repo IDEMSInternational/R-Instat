@@ -791,8 +791,7 @@ Public Class RLink
                          Optional bSeparateThread As Boolean = True,
                          Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing,
                          Optional bUpdateGrids As Boolean = True,
-                         Optional bSilent As Boolean = False,
-                         Optional bAddOutputInInternalViewer As Boolean = True)
+                         Optional bSilent As Boolean = False)
 
         'if there is no script to run then just ignore and exit sub
         If String.IsNullOrWhiteSpace(strScript) Then
@@ -815,17 +814,14 @@ Public Class RLink
 
             'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
-            If strLastScript.Contains("get_object") OrElse strLastScript.Contains("get_last_object") OrElse strLastScript.Contains("view_object") Then
-
+            If strLastScript.Contains("get_object_data") OrElse strLastScript.Contains("get_last_object_data") OrElse strLastScript.Contains("view_object") Then
                 Dim strFilePathName As String = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
-                If Not String.IsNullOrEmpty(strFilePathName) Then
-                    clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, bAddOutputInInternalViewer)
-                End If
-
+                'if last function is view_object then display in external viewer (maximised)
+                clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, strLastScript.Contains("view_object"))
             ElseIf iCallType = 0 Then
                 'if script output should be ignored. todo. deprecate this block after implementing correctly
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                clsOutputLogger.AddOutput(strScriptWithComment, "", False, bAddOutputInInternalViewer)
+                clsOutputLogger.AddOutput(strScriptWithComment, "", False, False)
             ElseIf iCallType = 1 OrElse iCallType = 4 Then
                 'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
                 'else if script output should be stored in a temp variable
@@ -836,19 +832,16 @@ Public Class RLink
                 '     i.e. this is potentially: x <- y <- 1
                 Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 Dim expTemp As RDotNet.SymbolicExpression = GetSymbol(strTempAssignTo)
+                Dim strOutput As String = ""
                 If expTemp IsNot Nothing Then
-                    Dim strOutput As String = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
-                    ' if there's something to output
-                    If strOutput IsNot Nothing AndAlso strOutput <> "" Then
-                        clsOutputLogger.AddOutput(strScriptWithComment, strOutput, False, bAddOutputInInternalViewer)
-                    End If
+                    strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                 End If
-
+                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, False, False)
             Else
                 'else if script output should not be ignored or not stored as an object or variable
 
                 Dim arrRScriptLines() As String = GetRunnableCommandLines(strScript)
-
+                Dim strOutput As String = ""
                 'if output should be stored as a variable just execute the script
                 If arrRScriptLines.Last().Contains("<-") Then
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -861,12 +854,11 @@ Public Class RLink
                     End If
 
                     If bSuccess Then
-                        Dim strFilePathName As String = GetFileOutput("view_object(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
-                        If Not String.IsNullOrEmpty(strFilePathName) Then
-                            clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, bAddOutputInInternalViewer)
-                        End If
+                        strOutput = GetFileOutput("view_object(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                     End If
                 End If
+
+                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, True, False)
 
             End If
 
@@ -981,27 +973,6 @@ Public Class RLink
         Next
         Return strScriptCmd
     End Function
-
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   View last graph. </summary>
-    '''
-    ''' <param name="bAsPlotly">    (Optional) If true then view last graph as plotly. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub ViewLastGraph(bAsPlotly As String)
-        Dim clsLastGraph As New RFunction
-        clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
-        clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
-
-        Dim strGlobalGraphDisplayOption As String
-        'store the current set graph display option, to restore after display
-        strGlobalGraphDisplayOption = Me.strGraphDisplayOption
-        Me.strGraphDisplayOption = "view_R_viewer"
-        clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
-        RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInInternalViewer:=False, strComment:="View last graph", bSeparateThread:=False)
-        'restore the graph display option
-        Me.strGraphDisplayOption = strGlobalGraphDisplayOption
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Executes the the <paramref name="strScript"/> R script and returns the result 

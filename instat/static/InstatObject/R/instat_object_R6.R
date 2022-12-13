@@ -543,38 +543,6 @@ DataBook$set("public", "get_columns_from_data", function(data_name, col_names, f
 }
 )
 
-#see comments in issue #7808. 
-DataBook$set("public", "add_object", function(data_name = NULL, 
-                                              object_name = NULL, 
-                                              object_type_label, 
-                                              object_format, 
-                                              object) {
-  if(is.null(data_name)) {
-    if(is.null(object_name)){
-      object_name = next_default_item("object", names(private$.objects))
-    } 
-    
-    #notify user
-    if(object_name %in% names(private$.objects)){
-      message(paste("An object called", object_name, "already exists. It will be replaced."))
-    }
-    
-    #add the object
-    private$.objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
-  } else{ 
-    
-    self$get_data_objects(data_name)$add_object(object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object)
-    
-    #if its a graph. set it as last graph contents
-    if(identical(object_type_label, "graph")){
-      private$.last_graph <- c(data_name, object_name)
-    }
-    
-  }
-  
-    
-}
-) 
 
 #todo. deprecate
 #see issue #7808 comments for more details
@@ -591,17 +559,69 @@ DataBook$set("public", "create_graph_data_book", function() {
 }
 )
 
+#see comments in issue #7808. 
+DataBook$set("public", "add_object", function(data_name = NULL, 
+                                              object_name = NULL, 
+                                              object_type_label, 
+                                              object_format, 
+                                              object) {
+  if(is.null(data_name) || identical(data_name, overall_label)) {
+    if(is.null(object_name)){
+      object_name <- next_default_item("object", names(private$.objects))
+    } 
+    
+    #notify user
+    if(object_name %in% names(private$.objects)){
+      message(paste("An object called", object_name, "already exists. It will be replaced."))
+    }
+    
+    #add the object
+    private$.objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
+  } else{ 
+    self$get_data_objects(data_name)$add_object(object_name = object_name, object_type_label = object_type_label, object_format = object_format, object = object)
+  }
+  
+  #todo. once get_last_object_data is refactored, then this block can be removed
+  #if its a graph. set it as last graph contents
+  if(identical(object_type_label, graph_label)){
+    private$.last_graph <- c(data_name, object_name)
+  }
+  
+    
+}
+) 
+
+#see comments in issue #7808.
+DataBook$set("public", "get_object_names", function(data_name = NULL, 
+                                                    object_type_label = NULL,
+                                                    as_list = FALSE, ...) {
+  
+  if(is.null(data_name) || identical(data_name, overall_label)){
+    out <-
+      get_data_book_output_object_names(
+        output_object_list = private$.objects,
+        object_type_label = object_type_label,
+        as_list = as_list,
+        list_label = overall_label)
+  }else{
+    out <-
+      self$get_data_objects(data_name)$get_object_names(
+        object_type_label = object_type_label,
+        as_list = as_list)
+  }
+  
+  return(out)
+  
+}
+)
+
 #returns a list of objects
 #see issue #7808 comments for more details 
 DataBook$set("public", "get_objects", function(data_name = NULL, object_type_label = NULL) {
-  if(is.null(data_name)) {
-    out <- sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(object_type_label = object_type_label))
+  if(is.null(data_name) || identical(data_name, overall_label)) {
+    out <- private$.objects[self$get_object_names(data_name = data_name, object_type_label = object_type_label)]
   }else {
-    if(identical(data_name,overall_label)) {
-      out <- private$.objects[self$get_object_names(data_name = data_name, object_type_label = object_type_label)]
-    }else{
-      out <- self$get_data_objects(data_name)$get_objects(object_type_label = object_type_label)
-    }
+    out <- self$get_data_objects(data_name)$get_objects(object_type_label = object_type_label)
   }
   return(out)
   
@@ -610,9 +630,9 @@ DataBook$set("public", "get_objects", function(data_name = NULL, object_type_lab
 
 #returns NULL if object is not found
 #see issue #7808 comments for more details
-DataBook$set("public", "get_object", function(data_name, object_name, as_file = TRUE) {
+DataBook$set("public", "get_object", function(data_name = NULL, object_name) {
   out <- NULL
-  if(missing(data_name) || data_name == overall_label) {
+  if(is.null(data_name) || identical(data_name, overall_label)) {
     out <- private$.objects[[object_name]]
   }else {
     out <- self$get_data_objects(data_name)$get_object(object_name = object_name)
@@ -621,7 +641,7 @@ DataBook$set("public", "get_object", function(data_name, object_name, as_file = 
 }
 )
 
-DataBook$set("public", "get_object_data", function(data_name, object_name, as_file = TRUE) {
+DataBook$set("public", "get_object_data", function(data_name = NULL, object_name, as_file = TRUE) {
   out <- self$get_object(data_name = data_name, object_name = object_name)
   if(is.null(out)){
     return(NULL)
@@ -634,10 +654,31 @@ DataBook$set("public", "get_object_data", function(data_name, object_name, as_fi
 }
 )  
 
-DataBook$set("public", "get_last_object", function(object_type_label, as_file = TRUE) {
+#returns object data from the object_names character vector
+DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL) {
+  out <- list()
+  if(is.null(object_names)){
+    objects_list <- self$get_objects(data_name = data_name)
+    out <- self$get_objects_data(data_name = data_name, object_names = names(objects_list) )
+  }else{
+    for(object_name in object_names){
+      object_data <- self$get_object_data(data_name = data_name, object_name = object_name, as_file = FALSE)
+      if(!is.null(object_data)){
+        out[[object_name]] <- object_data
+      }
+    }
+  }
+ 
+  return(out)
+}
+)
+
+#todo. require data name? then do a way with private$.last_graph 
+#and just get it from the objects list?
+DataBook$set("public", "get_last_object_data", function(object_type_label, as_file = TRUE) {
   out <- NULL
   #currently this function is only applicable to graphs. Implement for other objects like models, tables, summaries
-  if(object_type_label == "graph"){
+  if(identical(object_type_label, graph_label)){
     if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
       out <- self$get_object_data(data_name = private$.last_graph[1], object_name = private$.last_graph[2], as_file = as_file)
     } 
@@ -646,35 +687,7 @@ DataBook$set("public", "get_last_object", function(object_type_label, as_file = 
 }
 )
 
-#todo. deprecate excluded_items parameter
-#see comments in issue #7808.
-DataBook$set("public", "get_object_names", function(data_name, 
-                                                    object_type_label = NULL,
-                                                    as_list = FALSE,
-                                                    excluded_items = c()) {
-  
-  if(identical(data_name, overall_label)){
-    out <-
-      get_data_book_output_object_names(
-        output_object_list = private$.objects,
-        object_type_label = object_type_label,
-        excluded_items = excluded_items,
-        as_list = as_list,
-        list_label = overall_label
-      )
-  }else{
-    out <-
-      self$get_data_objects(data_name)$get_object_names(
-        object_type_label = object_type_label,
-        as_list = as_list,
-        excluded_items = excluded_items
-      )
-  }
-  
-  return(out)
-  
-}
-)
+
 
 DataBook$set("public", "rename_object", function(data_name, object_name, new_name, object_type = "object") {
   if(missing(data_name) || data_name == overall_label) {

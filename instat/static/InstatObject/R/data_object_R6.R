@@ -2053,7 +2053,7 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 DataSheet$set("public", "add_object", function(object_name, object_type_label, object_format, object) {
   
     if(missing(object_name)){
-      object_name = next_default_item("object", names(private$objects))
+      object_name <- next_default_item("object", names(private$objects))
     } 
     
     if(object_name %in% names(private$objects)){
@@ -2063,59 +2063,38 @@ DataSheet$set("public", "add_object", function(object_name, object_type_label, o
     #add the object with its metadata to the list of objects and add an "Added_object" change 
     private$objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
     self$append_to_changes(list(Added_object, object_name))
-    
-    #if the object is a graph then set it's name as the last graph name added. 
-    if(identical(object_type_label, "graph")){
-      private$.last_graph <- object_name
-    }
+}
+)
+
+DataSheet$set("public", "get_object_names", function(object_type_label = NULL,
+                                                     as_list = FALSE) {
+  
+  out <- get_data_book_output_object_names(output_object_list = private$objects, 
+                                           object_type_label = object_type_label,  
+                                           as_list = as_list, 
+                                           list_label= self$get_metadata(data_name_label) )
+  return(out)
   
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_type_label) {
+DataSheet$set("public", "get_objects", function(object_type_label = NULL) {
   out <-
     private$objects[self$get_object_names(object_type_label = object_type_label)]
   return(out)
 }
 )
 
-#object name must be supplied
+#object name must be character
 #returns NULL if object is not found
 DataSheet$set("public", "get_object", function(object_name) {
   #make sure supplied object name is a character, prevents return of unexpected object
-  if(!missing(object_name) && is.character(object_name) ){
+  if(is.character(object_name) ){
     return(private$objects[[object_name]])
   }else{
     return(NULL)
   }
  
-}
-)
-
-
-DataSheet$set("public", "get_object_names", function(object_type_label = NULL,
-                                                     as_list = FALSE, 
-                                                     excluded_items = c()) {
-  
-  out <- get_data_book_output_object_names(output_object_list = private$objects, 
-                                           object_type_label = object_type_label, 
-                                           excluded_items = excluded_items, 
-                                           as_list = as_list, 
-                                           list_label= self$get_metadata(data_name_label) )
-  return(out)
-    
-}
-)
-
-DataSheet$set("public", "get_last_graph_name", function() {
-  return(private$.last_graph)
-}
-)
-
-DataSheet$set("public", "get_last_graph", function() {
-  if(!is.null(private$.last_graph)) {
-    self$get_objects(object_name = private$.last_graph, object_type = graph_label, type = graph_label)
-  }
 }
 )
 
