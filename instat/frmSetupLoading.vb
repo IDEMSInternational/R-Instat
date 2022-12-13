@@ -26,7 +26,7 @@ Public Class frmSetupLoading
     ''' loading screens responsiveness
     ''' </summary>
     Public Shared Sub ShowLoadingScreen()
-        If CancellationTokenSource Is Nothing Then
+        If CancellationTokenSource IsNot Nothing Then
             HideLoadingScreen()
         End If
         CancellationTokenSource = New CancellationTokenSource
