@@ -461,7 +461,6 @@ Public Class dlgOneVarFitModel
         clsMeanCIFunction.AddParameter("conf.level", "0.95", iPosition:=1)
         clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=2)
 
-
         clsMedianCIFunction.SetPackageName("DescTools")
         clsMedianCIFunction.SetRCommand("MedianCI ")
         clsMedianCIFunction.AddParameter("method", Chr(34) & "exact" & Chr(34), iPosition:=2)
@@ -500,8 +499,7 @@ Public Class dlgOneVarFitModel
         bResetFitModDisplay = True
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'todo
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlValueChanged
         clsRplotFunction.AddParameter("x", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=0)
         clsRplotPPCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
         clsRplotCdfCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
