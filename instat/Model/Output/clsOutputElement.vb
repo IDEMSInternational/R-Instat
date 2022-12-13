@@ -13,39 +13,26 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.IO
 Imports RScript
+
 ''' <summary>
-''' Output element for a r command, the output element could be just the script or the script with
-''' an image or output text
+''' Output element for an R script. 
+''' Must contain an R script. The output itself is optional depending on whether the script produces the an output or not.
 ''' </summary>
 Public Class clsOutputElement
+    'holds the id given to the output element
     Private _id As Integer
-    'hold the script elements that form the R script that produced the output
-    Private _lstRScriptElements As New List(Of clsRScriptElement)
 
+    'holds the R script that produced the output
+    Private _strScript As String
+
+    'holds the output type; Text, Image, HTML etc
     Private _outputType As OutputType
 
-    'todo. deprecate this list with _lstTextOutput ?
-    Private _lstStringOutput As New List(Of String)
+    'holds the file paths to outputs or the a string output
+    Private _strOutput As String
 
-    'holds the file paths to the text outputs
-    Private _lstTextOutput As New List(Of String)
-
-    'holds the file paths to the image outputs
-    Private _lstImageOutput As New List(Of String)
-
-    'holds the file paths to the html outputs
-    Private _lstHtmlOutput As New List(Of String)
-
-    ''' <summary>
-    ''' Holds formated R Script, split into R Script Elements
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property FormattedRScript As List(Of clsRScriptElement)
-        Get
-            Return _lstRScriptElements
-        End Get
-    End Property
 
     ''' <summary>
     ''' ID used for ordering elements
@@ -55,35 +42,19 @@ Public Class clsOutputElement
         Get
             Return _id
         End Get
-        Set(ByVal value As Integer)
+        Set(value As Integer)
             _id = value
         End Set
     End Property
 
-    Public ReadOnly Property TextOutput As String
+    Public ReadOnly Property Script As String
         Get
-            Return _lstTextOutput.FirstOrDefault()
+            Return _strScript
         End Get
     End Property
 
     ''' <summary>
-    ''' Holds image file path if outputType is image file
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property ImageOutput As String
-        Get
-            Return _lstImageOutput.FirstOrDefault()
-        End Get
-    End Property
-
-    Public ReadOnly Property HtmlOutput As String
-        Get
-            Return _lstHtmlOutput.FirstOrDefault()
-        End Get
-    End Property
-
-    ''' <summary>
-    ''' Defines the type of output
+    ''' Gets the type of output
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property OutputType() As OutputType
@@ -92,80 +63,63 @@ Public Class clsOutputElement
         End Get
     End Property
 
-    ''' <summary>
-    ''' Holds the string output. Not the R Script
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property StringOutput As String
+    Public ReadOnly Property Output As String
         Get
-            Return _lstStringOutput.FirstOrDefault()
+            Return _strOutput
         End Get
     End Property
 
-    'this does a shallow clone
-    'todo. add a deep clone implementation
     Public Function Clone() As clsOutputElement
         Return Me.MemberwiseClone
     End Function
 
-    Public Sub AddTextOutput(strFileName As String, script As List(Of clsRScriptElement))
-        _lstTextOutput.Add(strFileName)
-        _lstRScriptElements = script
-        _outputType = OutputType.TextOutput
+    ''' <summary>
+    ''' Sets the contents of the output element
+    ''' </summary>
+    ''' <param name="strScript">R script producing the output</param>
+    ''' <param name="outputType">Type of output</param>
+    ''' <param name="strOutput">Output produced, can be file name or string value</param>
+    Public Sub SetContent(strScript As String, outputType As OutputType, Optional strOutput As String = "")
+        _strScript = strScript
+        _outputType = outputType
+        _strOutput = strOutput
     End Sub
 
     ''' <summary>
-    ''' When adding Output the script must always be added too
+    ''' Gets formatted R Script, split into R Script Elements
     ''' </summary>
-    ''' <param name="strFileName"></param>
-    ''' <param name="script"></param>
-    Public Sub AddImageOutput(strFileName As String, script As List(Of clsRScriptElement))
-        _lstImageOutput.Add(strFileName)
-        _lstRScriptElements = script
-        _outputType = OutputType.ImageOutput
-    End Sub
-
-    Public Sub AddHtmlOutput(strFileName As String, script As List(Of clsRScriptElement))
-        _lstHtmlOutput.Add(strFileName)
-        _lstRScriptElements = script
-        _outputType = OutputType.HtmlOutput
-    End Sub
-
-    ''' <summary>
-    ''' Adds script and passes through RScript to split into elements
-    ''' </summary>
-    ''' <param name="strScript"></param>
-    Public Sub AddScript(strScript As String)
-        Try
-            Dim rScript As New clsRScript(strScript)
-            Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(strScript)) 'rScript.lstTokens
-            If lstTokens IsNot Nothing Then
-                For Each rToken In lstTokens
-                    _lstRScriptElements.Add(New clsRScriptElement With
+    ''' <returns></returns>
+    Public ReadOnly Property FormattedRScript As List(Of clsRScriptElement)
+        Get
+            Dim _lstRScriptElements As New List(Of clsRScriptElement)
+            Try
+                Dim rScript As New clsRScript(_strScript)
+                Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(_strScript)) 'rScript.lstTokens
+                If lstTokens IsNot Nothing Then
+                    For Each rToken In lstTokens
+                        _lstRScriptElements.Add(New clsRScriptElement With
                     {
                         .Text = rToken.strTxt,
                         .Type = rToken.enuToken
                     })
-                Next
-                _outputType = OutputType.Script
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Unable to parse the following R Script: '" & strScript & "'." &
+                    Next
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Unable to parse the following R Script: '" & _strScript & "'." &
                             Environment.NewLine & ex.Message,
                             "Developer Error",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error)
-        End Try
-    End Sub
+            End Try
+            Return _lstRScriptElements
+        End Get
+    End Property
 
-    ''' <summary>
-    ''' When adding Output the script must always be added too
-    ''' </summary>
-    ''' <param name="strOutput"></param>
-    Public Sub AddStringOutput(strOutput As String, script As List(Of clsRScriptElement))
-        _lstStringOutput.Add(strOutput)
-        _lstRScriptElements = script
-        _outputType = OutputType.TextOutput
-    End Sub
+    Public ReadOnly Property IsFile As Boolean
+        Get
+            Return File.Exists(Output)
+        End Get
+    End Property
+
 
 End Class
