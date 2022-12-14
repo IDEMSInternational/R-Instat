@@ -71,7 +71,11 @@ Public Class ucrDataViewReoGrid
         strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
-                grdData.CurrentWorksheet(row:=i, col:=j) = dataFrame.DisplayedData(i, j)
+                Dim strData As String = dataFrame.DisplayedData(i, j)
+                If strData.Contains("(") AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    strData = strData.Split(New String() {"(", ")"}, StringSplitOptions.None)(1)
+                End If
+                grdData.CurrentWorksheet(row:=i, col:=j) = strData 'dataFrame.DisplayedData(i, j).Split(New String() {"(", ")"}, StringSplitOptions.None)(0)
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
