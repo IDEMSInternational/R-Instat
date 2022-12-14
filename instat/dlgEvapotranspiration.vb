@@ -287,9 +287,17 @@ Public Class dlgEvapotranspiration
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("x", 0), iAdditionalPairNo:=3)
         ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmax", 3), iAdditionalPairNo:=1)
         ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmin", 4), iAdditionalPairNo:=1)
+        ucrReceiverTmax.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("Tmax", 3), iAdditionalPairNo:=2)
+        ucrReceiverTmin.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("Tmin", 4), iAdditionalPairNo:=2)
         ucrInputTimeStep.AddAdditionalCodeParameterPair(clsHargreavesSamani, New RParameter("ts", 2), iAdditionalPairNo:=1)
+        ucrInputTimeStep.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("ts", 2), iAdditionalPairNo:=2)
+        ucrInputSolar.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("solar", 3), iAdditionalPairNo:=1)
+
+        ucrReceiverHumidityMax.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("RHmax", 4), iAdditionalPairNo:=1)
+        ucrReceiverHumidityMin.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("RHmin", 5), iAdditionalPairNo:=1)
 
         ucrPnlMethod.SetRCode(clsBaseOperator, bReset)
         ucrReceiverDate.SetRCode(clsDayFunc, bReset)
