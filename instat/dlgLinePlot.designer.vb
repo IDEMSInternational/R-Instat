@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -318,8 +318,8 @@ Partial Class dlgLinePlot
         Me.ucrChkAddSE.AutoSize = True
         Me.ucrChkAddSE.Checked = False
         Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
+    Me.ucrChkAddSE.Name = "ucrChkAddSE"
+    Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
         Me.ucrChkAddSE.TabIndex = 8
         '
         'ucrNudSpan

@@ -44,7 +44,7 @@ Public Interface IGrid
 
     Sub UpdateAllWorksheetStyles()
 
-    Sub ReOrderWorksheets()
+    Sub ReOrderWorksheets(strCurrWorksheet As String)
 
     Sub UpdateWorksheetStyle(worksheet As clsWorksheetAdapter)
 End Interface
