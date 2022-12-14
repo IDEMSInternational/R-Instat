@@ -23,7 +23,7 @@ Public Class dlgEvapotranspiration
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
     Private iEvapOptions As Integer
-    Private clsETPenmanMonteith, clsHargreavesSamani, clsDataFunctionPM, clsDataFunctionHS, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
+    Private clsETPenmanMonteith, clsHargreavesSamani, clsETPriestleyTaylor, clsDataFunctionPM, clsDataFunctionHS, clsDataFunctionPT, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsVarnamesVectorPT, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
     Private bRcodeSet As Boolean = True
@@ -121,6 +121,12 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetValuesCheckedAndUnchecked(Chr(34) & "yes" & Chr(34), Chr(34) & "no" & Chr(34))
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
+        ucrNudAlpha.SetParameter(New RParameter("alpha", 4))
+        ucrNudAlpha.SetMinMax(0, 1)
+        ''ucrNudAlpha.DecimalPlaces = 2
+        ucrNudAlpha.Increment = 0.05
+        ucrNudAlpha.SetRDefault(0.23)
+
         ' Missing Options 
         ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
         dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
@@ -133,17 +139,20 @@ Public Class dlgEvapotranspiration
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
         ucrPnlMethod.AddRadioButton(rdoHargreavesSamani)
+        ucrPnlMethod.AddRadioButton(rdoPriestleyTaylor)
         ucrPnlMethod.AddParameterValueFunctionNamesCondition(rdoPenmanMonteith, "ET.PenmanMonteith", "ET.PenmanMonteith")
         ucrPnlMethod.AddParameterValueFunctionNamesCondition(rdoHargreavesSamani, "ET.HargreavesSamani", "ET.HargreavesSamani")
+        ucrPnlMethod.AddParameterValueFunctionNamesCondition(rdoPriestleyTaylor, "ET.PriestleyTaylor", "ET.PriestleyTaylor")
+
 
         ucrPnlMethod.AddToLinkedControls(ucrInputCrop, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrReceiverHumidityMax, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrReceiverHumidityMin, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrInputTimeStep, {rdoPenmanMonteith, rdoHargreavesSamani}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethod.AddToLinkedControls(ucrReceiverHumidityMax, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlMethod.AddToLinkedControls(ucrReceiverHumidityMin, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrPnlMethod.AddToLinkedControls(ucrInputTimeStep, {rdoPenmanMonteith, rdoHargreavesSamani, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkWind.AddToLinkedControls(ucrReceiverWindSpeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrReceiverRadiation, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethod.AddToLinkedControls(ucrReceiverRadiation, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrChkWind, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
 
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
@@ -165,6 +174,7 @@ Public Class dlgEvapotranspiration
     Private Sub SetDefaults()
         clsETPenmanMonteith = New RFunction
         clsHargreavesSamani = New RFunction
+        clsETPriestleyTaylor = New RFunction
         clsDataFunctionPM = New RFunction
         clsDataFunctionHS = New RFunction
         clsBaseOperator = New ROperator
@@ -256,6 +266,16 @@ Public Class dlgEvapotranspiration
         clsHargreavesSamani.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=4)
         clsHargreavesSamani.SetAssignTo("Hargreaves_Samani")
 
+        clsETPriestleyTaylor.SetPackageName("Evapotranspiration")
+        clsETPriestleyTaylor.SetRCommand("ET.PriestleyTaylor")
+        clsETPriestleyTaylor.AddParameter("data", clsRFunctionParameter:=clsReadInputs, iPosition:=0)
+        clsETPriestleyTaylor.AddParameter("constants", "constants", iPosition:=1, bIncludeArgumentName:=False)
+        clsETPriestleyTaylor.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
+        clsETPriestleyTaylor.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
+        clsETPriestleyTaylor.AddParameter("alpha", Chr(34) & "alpha" & Chr(34), iPosition:=4)
+        clsETPriestleyTaylor.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=5)
+        clsETPriestleyTaylor.SetAssignTo("Priestley_Taylor")
+
         clsBaseOperator.SetOperation("$")
         clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
         clsBaseOperator.AddParameter("ET.Daily", strParameterValue:="ET.Daily", iPosition:=1)
@@ -284,6 +304,8 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
         ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
+
+        ucrNudAlpha.SetRCode(clsETPriestleyTaylor, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -298,6 +320,12 @@ Public Class dlgEvapotranspiration
             End If
         ElseIf rdoHargreavesSamani.Checked Then
             If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoPriestleyTaylor.Checked Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -329,6 +357,12 @@ Public Class dlgEvapotranspiration
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
+        ElseIf rdoPriestleyTaylor.Checked Then
+            ucrReceiverDate.SetMeAsReceiver()
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.7)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.12)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.18)
+            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.184)
         End If
     End Sub
 
@@ -339,6 +373,9 @@ Public Class dlgEvapotranspiration
         ElseIf rdoHargreavesSamani.Checked Then
             clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorHS, iPosition:=0)
             clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionHS, iPosition:=1)
+        ElseIf rdoPriestleyTaylor.Checked Then
+            clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPT, iPosition:=0)
+            clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPT, iPosition:=1)
         End If
     End Sub
 

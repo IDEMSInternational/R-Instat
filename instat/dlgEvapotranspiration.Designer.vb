@@ -35,6 +35,9 @@ Partial Class dlgEvapotranspiration
         Me.rdoHargreavesSamani = New System.Windows.Forms.RadioButton()
         Me.rdoPenmanMonteith = New System.Windows.Forms.RadioButton()
         Me.cmdEvapOptions = New System.Windows.Forms.Button()
+        Me.rdoPriestleyTaylor = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
+        Me.ucrChkWind = New instat.ucrCheck()
         Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
         Me.ucrInputSolar = New instat.ucrInputComboBox()
         Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
@@ -49,8 +52,8 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorEvapotranspiration = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
-        Me.ucrChkWind = New instat.ucrCheck()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.ucrNudAlpha = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -151,7 +154,7 @@ Partial Class dlgEvapotranspiration
         Me.rdoHargreavesSamani.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoHargreavesSamani.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoHargreavesSamani.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoHargreavesSamani.Location = New System.Drawing.Point(210, 12)
+        Me.rdoHargreavesSamani.Location = New System.Drawing.Point(188, 12)
         Me.rdoHargreavesSamani.Name = "rdoHargreavesSamani"
         Me.rdoHargreavesSamani.Size = New System.Drawing.Size(131, 27)
         Me.rdoHargreavesSamani.TabIndex = 2
@@ -168,7 +171,7 @@ Partial Class dlgEvapotranspiration
         Me.rdoPenmanMonteith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPenmanMonteith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPenmanMonteith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPenmanMonteith.Location = New System.Drawing.Point(103, 12)
+        Me.rdoPenmanMonteith.Location = New System.Drawing.Point(81, 12)
         Me.rdoPenmanMonteith.Name = "rdoPenmanMonteith"
         Me.rdoPenmanMonteith.Size = New System.Drawing.Size(109, 27)
         Me.rdoPenmanMonteith.TabIndex = 1
@@ -186,6 +189,45 @@ Partial Class dlgEvapotranspiration
         Me.cmdEvapOptions.Tag = "Options"
         Me.cmdEvapOptions.Text = "Missing Options"
         Me.cmdEvapOptions.UseVisualStyleBackColor = True
+        '
+        'rdoPriestleyTaylor
+        '
+        Me.rdoPriestleyTaylor.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPriestleyTaylor.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPriestleyTaylor.FlatAppearance.BorderSize = 2
+        Me.rdoPriestleyTaylor.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPriestleyTaylor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPriestleyTaylor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPriestleyTaylor.Location = New System.Drawing.Point(318, 12)
+        Me.rdoPriestleyTaylor.Name = "rdoPriestleyTaylor"
+        Me.rdoPriestleyTaylor.Size = New System.Drawing.Size(109, 27)
+        Me.rdoPriestleyTaylor.TabIndex = 35
+        Me.rdoPriestleyTaylor.TabStop = True
+        Me.rdoPriestleyTaylor.Text = "Priestley-Taylor"
+        Me.rdoPriestleyTaylor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPriestleyTaylor.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverWindSpeed
+        '
+        Me.ucrReceiverWindSpeed.AutoSize = True
+        Me.ucrReceiverWindSpeed.frmParent = Me
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(314, 297)
+        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(123, 20)
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.TabIndex = 2
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
+        '
+        'ucrChkWind
+        '
+        Me.ucrChkWind.AutoSize = True
+        Me.ucrChkWind.Checked = False
+        Me.ucrChkWind.Location = New System.Drawing.Point(314, 277)
+        Me.ucrChkWind.Name = "ucrChkWind"
+        Me.ucrChkWind.Size = New System.Drawing.Size(123, 31)
+        Me.ucrChkWind.TabIndex = 0
         '
         'ucrInputMissingMethod
         '
@@ -258,9 +300,9 @@ Partial Class dlgEvapotranspiration
         'ucrPnlMethod
         '
         Me.ucrPnlMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(102, 10)
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(71, 10)
         Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(244, 37)
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(363, 37)
         Me.ucrPnlMethod.TabIndex = 0
         '
         'ucrInputTimeStep
@@ -347,27 +389,28 @@ Partial Class dlgEvapotranspiration
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 33
         '
-        'ucrReceiverWindSpeed
+        'lblAlpha
         '
-        Me.ucrReceiverWindSpeed.AutoSize = True
-        Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(314, 297)
-        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
-        Me.ucrReceiverWindSpeed.Selector = Nothing
-        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(123, 20)
-        Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.TabIndex = 2
-        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
+        Me.lblAlpha.AutoSize = True
+        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAlpha.Location = New System.Drawing.Point(277, 295)
+        Me.lblAlpha.Name = "lblAlpha"
+        Me.lblAlpha.Size = New System.Drawing.Size(37, 13)
+        Me.lblAlpha.TabIndex = 36
+        Me.lblAlpha.Text = "Alpha:"
         '
-        'ucrChkWind
+        'ucrNudAlpha
         '
-        Me.ucrChkWind.AutoSize = True
-        Me.ucrChkWind.Checked = False
-        Me.ucrChkWind.Location = New System.Drawing.Point(314, 277)
-        Me.ucrChkWind.Name = "ucrChkWind"
-        Me.ucrChkWind.Size = New System.Drawing.Size(123, 31)
-        Me.ucrChkWind.TabIndex = 0
+        Me.ucrNudAlpha.AutoSize = True
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(387, 291)
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlpha.TabIndex = 37
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgEvapotranspiration
         '
@@ -375,6 +418,9 @@ Partial Class dlgEvapotranspiration
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(453, 478)
+        Me.Controls.Add(Me.lblAlpha)
+        Me.Controls.Add(Me.ucrNudAlpha)
+        Me.Controls.Add(Me.rdoPriestleyTaylor)
         Me.Controls.Add(Me.ucrReceiverWindSpeed)
         Me.Controls.Add(Me.ucrChkWind)
         Me.Controls.Add(Me.cmdEvapOptions)
@@ -444,4 +490,7 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents cmdEvapOptions As Button
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents ucrChkWind As ucrCheck
+    Friend WithEvents rdoPriestleyTaylor As RadioButton
+    Friend WithEvents lblAlpha As Label
+    Friend WithEvents ucrNudAlpha As ucrNud
 End Class
