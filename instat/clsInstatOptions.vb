@@ -51,6 +51,7 @@ Imports RDotNet
     Public strClimsoftHost As String
     Public strClimsoftPort As String
     Public strClimsoftUsername As String
+    Public iMaxOutputsHeight As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -72,7 +73,7 @@ Imports RDotNet
         iPreviewRows = clsInstatOptionsDefaults.DEFAULTiPreviewRows
         iMaxRows = clsInstatOptionsDefaults.DEFAULTiMaxRows
         iMaxCols = clsInstatOptionsDefaults.DEFAULTiMaxCols
-        strComment = clsInstatOptionsDefaults.DEFAULTstrComment
+        strComment = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
         strGraphDisplayOption = clsInstatOptionsDefaults.DEFAULTstrGraphDisplayOption
         strLanguageCultureCode = clsInstatOptionsDefaults.DEFAULTstrLanguageCultureCode
         strWorkingDirectory = clsInstatOptionsDefaults.DEFAULTstrWorkingDirectory
@@ -89,6 +90,7 @@ Imports RDotNet
         strClimsoftHost = clsInstatOptionsDefaults.DEFAULTstrClimsoftHost
         strClimsoftPort = clsInstatOptionsDefaults.DEFAULTstrClimsoftPort
         strClimsoftUsername = clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername
+        iMaxOutputsHeight = clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight
         If bSetOptions Then
             SetOptions()
         End If
@@ -143,10 +145,8 @@ Imports RDotNet
             SetCommandInOutpt(clsInstatOptionsDefaults.DEFAULTbCommandsinOutput)
         End If
 
-        If strComment IsNot Nothing Then
-            SetComment(strComment)
-        Else
-            SetComment(clsInstatOptionsDefaults.DEFAULTstrComment)
+        If strComment Is Nothing Then
+            SetComment(Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment))
         End If
 
         If strGraphDisplayOption IsNot Nothing Then
@@ -279,6 +279,13 @@ Imports RDotNet
             SetClimsoftUsername(strClimsoftUsername)
         Else
             SetClimsoftUsername(clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername)
+        End If
+
+
+        If iMaxOutputsHeight IsNot Nothing Then
+            SetMaximumOutputsHeight(iMaxOutputsHeight)
+        Else
+            SetMaximumOutputsHeight(clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
         End If
     End Sub
 
@@ -517,4 +524,9 @@ Imports RDotNet
     Public Sub SetClimsoftUsername(strNewClimsoftUsername As String)
         strClimsoftUsername = strNewClimsoftUsername
     End Sub
+
+    Public Sub SetMaximumOutputsHeight(iNewMaxOutputsHeight As Integer)
+        iMaxOutputsHeight = iNewMaxOutputsHeight
+    End Sub
+
 End Class

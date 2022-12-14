@@ -260,21 +260,21 @@ Public Class dlgTwoWayFrequencies
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strGraph As String
         Dim strTempScript As String = ""
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
+        'Dim bIsAssigned As Boolean
+        'Dim bToBeAssigned As Boolean
+        'Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsSjPlot.bIsAssigned
-            bToBeAssigned = clsSjPlot.bToBeAssigned
-            strAssignTo = clsSjPlot.strAssignTo
+            'bIsAssigned = clsSjPlot.bIsAssigned
+            ' bToBeAssigned = clsSjPlot.bToBeAssigned
+            'strAssignTo = clsSjPlot.strAssignTo
 
             strGraph = clsSjPlot.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsSjPlot.bIsAssigned = bIsAssigned
-            clsSjPlot.bToBeAssigned = bToBeAssigned
-            clsSjPlot.strAssignTo = strAssignTo
+            'clsSjPlot.bIsAssigned = bIsAssigned
+            'clsSjPlot.bToBeAssigned = bToBeAssigned
+            'clsSjPlot.strAssignTo = strAssignTo
         End If
     End Sub
 

@@ -463,32 +463,34 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        cmdTileOptions.Enabled = rdoHeatMap.Checked AndAlso Not ucrVariableAsFactorForHeatMap.bSingleVariable
-        cmdOptions.Enabled = cmdTileOptions.Enabled
+        cmdOptions.Enabled = True
+        toolStripMenuItemTileOptions.Enabled = rdoHeatMap.Checked AndAlso ucrVariableAsFactorForHeatMap.bSingleVariable
+        toolStripMenuItemPolygonOptions.Enabled = rdoChoroplethMap.Checked
     End Sub
 
     Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariableAsFactorForHeatMap.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                     clsNewGlobalAesFunction:=If(rdoHeatMap.Checked, clsHeatmapAesFunction, clsChoroplethAesFunction), clsNewXLabsTitleFunction:=clsXlabsFunction,
-                     clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                     clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
-                     strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                     clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+             clsNewGlobalAesFunction:=If(rdoHeatMap.Checked, clsHeatmapAesFunction, clsChoroplethAesFunction), clsNewXLabsTitleFunction:=clsXlabsFunction,
+             clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+             clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
+             strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+             clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdTileOptions_Click(sender As Object, e As EventArgs) Handles cmdTileOptions.Click
+    Private Sub toolStripMenuItemTileOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTileOptions.Click, toolStripMenuItemPolygonOptions.Click
+
         ''''''' i wonder if all this will be needed for the new system
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction,
                                    clsNewGeomFunc:=If(rdoChoroplethMap.Checked, clsGeomPolygonAesFunction, clsRgeomTileFunction),
                                    clsNewGlobalAesFunc:=If(rdoChoroplethMap.Checked, clsChoroplethAesFunction, clsHeatmapAesFunction),
-                                   clsNewLocalAes:=clsLocalRaesFunction,
-                                   bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
+                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector,
+                                   bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
 
         sdgLayerOptions.ShowDialog()
         bResetRugLayerSubdialog = False
@@ -548,7 +550,6 @@ Public Class dlgHeatMapPlot
         If rdoHeatMap.Checked Then
             clsLabelAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
             clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
-            cmdTileOptions.Text = "Tile Options"
             clsBaseOperator.AddParameter("geom_tile", clsRFunctionParameter:=clsRgeomTileFunction, iPosition:=1)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHeatmapAesFunction, iPosition:=1)
             clsBaseOperator.RemoveParameterByName("geom_polygon")
@@ -558,7 +559,6 @@ Public Class dlgHeatMapPlot
             clsLabelAesFunction.AddParameter("x", "x", iPosition:=0)
             clsLabelAesFunction.AddParameter("y", "y", iPosition:=1)
             clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=2)
-            cmdTileOptions.Text = "Polygon Options"
             clsBaseOperator.RemoveParameterByName("geom_tile")
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsChoroplethAesFunction, iPosition:=1)
             clsBaseOperator.AddParameter("geom_polygon", clsRFunctionParameter:=clsGeomPolygonAesFunction, iPosition:=1)

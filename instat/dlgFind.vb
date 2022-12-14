@@ -31,9 +31,6 @@ Public Class dlgFind
             Case "frmCommand"
                 searchTextBox(frmCommand.txtCommand, targetPos)
 
-            Case "frmScript"
-                searchTextBox(frmScript.txtScript, targetPos)
-
             Case "frmEditor"
                 searchDataView(targetPos)
 
@@ -106,7 +103,7 @@ Public Class dlgFind
             cmdFindNext.Enabled = True
             Me.AcceptButton = cmdFindNext
             cmdFindAll.Enabled = False
-        ElseIf currWindow.Name = "frmCommand" Or currWindow.Name = "frmLog" Or currWindow.Name = "frmScript" Then
+        ElseIf currWindow.Name = "frmCommand" Or currWindow.Name = "frmLog" Then
             cmdFindNext.Enabled = True
             Me.AcceptButton = cmdFindNext
             cmdFindAll.Enabled = False
