@@ -38,10 +38,9 @@ Partial Class dlgLinePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdLinePathStepSmoothOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblGroupLine = New System.Windows.Forms.Label()
         Me.rdoPath = New System.Windows.Forms.RadioButton()
@@ -51,13 +50,6 @@ Partial Class dlgLinePlot
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputFormula = New instat.ucrInputComboBox()
-        Me.ucrChkSpan = New instat.ucrCheck()
-        Me.ucrChkFormula = New instat.ucrCheck()
-        Me.ucrChkAddSE = New instat.ucrCheck()
-        Me.ucrNudSpan = New instat.ucrNud()
-        Me.ucrFamilyInput = New instat.ucrInputComboBox()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.rdoSlope = New System.Windows.Forms.RadioButton()
         Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
         Me.lblXEnd = New System.Windows.Forms.Label()
@@ -78,7 +70,14 @@ Partial Class dlgLinePlot
         Me.lblSlopeLabelColour = New System.Windows.Forms.Label()
         Me.lblSlopeLineColour = New System.Windows.Forms.Label()
         Me.lblSlopeLineTicknes = New System.Windows.Forms.Label()
-        Me.ucrChkSlopeLegend = New instat.ucrCheck()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLineOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemSmoothOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemDumbbellOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemPathOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemStepOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrNudSlopeLabelPadding = New instat.ucrNud()
         Me.ucrNudSlopeLineThickness = New instat.ucrNud()
         Me.ucrInputSlopeLineColour = New instat.ucrInputComboBox()
@@ -95,6 +94,13 @@ Partial Class dlgLinePlot
         Me.ucrChkDumbbellSize = New instat.ucrCheck()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
+        Me.ucrInputFormula = New instat.ucrInputComboBox()
+        Me.ucrChkSpan = New instat.ucrCheck()
+        Me.ucrChkFormula = New instat.ucrCheck()
+        Me.ucrChkAddSE = New instat.ucrCheck()
+        Me.ucrNudSpan = New instat.ucrNud()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlStepOrPath = New instat.UcrPanel()
@@ -118,7 +124,12 @@ Partial Class dlgLinePlot
         Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.ucrChkSlopeLabelOptions = New instat.ucrCheck()
         Me.ucrChkSlopeTextOptions = New instat.ucrCheck()
+
+        Me.ucrChkSlopeLegend = New instat.ucrCheck()
+
+
         Me.grpSmoothOptions.SuspendLayout()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -140,28 +151,6 @@ Partial Class dlgLinePlot
         Me.lblAvailable.Name = "lblAvailable"
         Me.lblAvailable.Size = New System.Drawing.Size(0, 13)
         Me.lblAvailable.TabIndex = 1
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 282)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(148, 23)
-        Me.cmdOptions.TabIndex = 22
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'cmdLinePathStepSmoothOptions
-        '
-        Me.cmdLinePathStepSmoothOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLinePathStepSmoothOptions.Location = New System.Drawing.Point(9, 251)
-        Me.cmdLinePathStepSmoothOptions.Name = "cmdLinePathStepSmoothOptions"
-        Me.cmdLinePathStepSmoothOptions.Size = New System.Drawing.Size(148, 23)
-        Me.cmdLinePathStepSmoothOptions.TabIndex = 21
-        Me.cmdLinePathStepSmoothOptions.Tag = "Line_Options"
-        Me.cmdLinePathStepSmoothOptions.Text = "Line Options"
-        Me.cmdLinePathStepSmoothOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional
         '
@@ -188,7 +177,11 @@ Partial Class dlgLinePlot
         '
         Me.rdoPath.AutoSize = True
         Me.rdoPath.ImeMode = System.Windows.Forms.ImeMode.NoControl
+
+        Me.rdoPath.Location = New System.Drawing.Point(170, 417)
+
         Me.rdoPath.Location = New System.Drawing.Point(165, 417)
+
         Me.rdoPath.Name = "rdoPath"
         Me.rdoPath.Size = New System.Drawing.Size(47, 17)
         Me.rdoPath.TabIndex = 29
@@ -268,15 +261,15 @@ Partial Class dlgLinePlot
         '
         'grpSmoothOptions
         '
-        Me.grpSmoothOptions.Controls.Add(Me.ucrInputFormula)
         Me.grpSmoothOptions.Controls.Add(Me.ucrChkSpan)
         Me.grpSmoothOptions.Controls.Add(Me.ucrChkFormula)
-        Me.grpSmoothOptions.Controls.Add(Me.ucrChkAddSE)
         Me.grpSmoothOptions.Controls.Add(Me.ucrNudSpan)
         Me.grpSmoothOptions.Controls.Add(Me.lblFamily)
         Me.grpSmoothOptions.Controls.Add(Me.ucrFamilyInput)
         Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
         Me.grpSmoothOptions.Controls.Add(Me.lblMethod)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrInputFormula)
+        Me.grpSmoothOptions.Controls.Add(Me.ucrChkAddSE)
         Me.grpSmoothOptions.Location = New System.Drawing.Point(8, 360)
         Me.grpSmoothOptions.Name = "grpSmoothOptions"
         Me.grpSmoothOptions.Size = New System.Drawing.Size(402, 77)
@@ -284,6 +277,8 @@ Partial Class dlgLinePlot
         Me.grpSmoothOptions.TabStop = False
         Me.grpSmoothOptions.Text = "Smooth Options"
         '
+
+
         'ucrInputFormula
         '
         Me.ucrInputFormula.AddQuotesIfUnrecognised = True
@@ -357,6 +352,7 @@ Partial Class dlgLinePlot
         Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
         Me.ucrInputMethod.TabIndex = 1
         '
+
         'rdoSlope
         '
         Me.rdoSlope.Appearance = System.Windows.Forms.Appearance.Button
@@ -579,14 +575,60 @@ Partial Class dlgLinePlot
         Me.lblSlopeLineTicknes.TabIndex = 72
         Me.lblSlopeLineTicknes.Text = "Thicknes:"
         '
-        'ucrChkSlopeLegend
+        'contextMenuStripOptions
         '
-        Me.ucrChkSlopeLegend.AutoSize = True
-        Me.ucrChkSlopeLegend.Checked = False
-        Me.ucrChkSlopeLegend.Location = New System.Drawing.Point(9, 292)
-        Me.ucrChkSlopeLegend.Name = "ucrChkSlopeLegend"
-        Me.ucrChkSlopeLegend.Size = New System.Drawing.Size(80, 24)
-        Me.ucrChkSlopeLegend.TabIndex = 74
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemLineOptions, Me.toolStripMenuItemSmoothOptions, Me.toolStripMenuItemDumbbellOptions, Me.toolStripMenuItemPathOptions, Me.toolStripMenuItemStepOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(172, 136)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemLineOptions
+        '
+        Me.toolStripMenuItemLineOptions.Name = "toolStripMenuItemLineOptions"
+        Me.toolStripMenuItemLineOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemLineOptions.Text = "Line Options"
+        '
+        'toolStripMenuItemSmoothOptions
+        '
+        Me.toolStripMenuItemSmoothOptions.Name = "toolStripMenuItemSmoothOptions"
+        Me.toolStripMenuItemSmoothOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemSmoothOptions.Text = "Smooth Options"
+        '
+        'toolStripMenuItemDumbbellOptions
+        '
+        Me.toolStripMenuItemDumbbellOptions.Name = "toolStripMenuItemDumbbellOptions"
+        Me.toolStripMenuItemDumbbellOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemDumbbellOptions.Text = "Dumbbell Options"
+        '
+        'toolStripMenuItemPathOptions
+        '
+        Me.toolStripMenuItemPathOptions.Name = "toolStripMenuItemPathOptions"
+        Me.toolStripMenuItemPathOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemPathOptions.Text = "Path Options"
+        '
+        'toolStripMenuItemStepOptions
+        '
+        Me.toolStripMenuItemStepOptions.Name = "toolStripMenuItemStepOptions"
+        Me.toolStripMenuItemStepOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemStepOptions.Text = "Step Options"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 248)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 77
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrNudSlopeLabelPadding
         '
@@ -779,6 +821,79 @@ Partial Class dlgLinePlot
         Me.ucrReceiverSlopeY.strNcFilePath = ""
         Me.ucrReceiverSlopeY.TabIndex = 10
         Me.ucrReceiverSlopeY.ucrSelector = Nothing
+        '
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        Me.ucrInputFormula.Location = New System.Drawing.Point(73, 46)
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        Me.ucrInputFormula.Size = New System.Drawing.Size(110, 23)
+        Me.ucrInputFormula.TabIndex = 7
+        '
+        'ucrChkSpan
+        '
+        Me.ucrChkSpan.AutoSize = True
+        Me.ucrChkSpan.Checked = False
+        Me.ucrChkSpan.Location = New System.Drawing.Point(185, 20)
+        Me.ucrChkSpan.Name = "ucrChkSpan"
+        Me.ucrChkSpan.Size = New System.Drawing.Size(54, 23)
+        Me.ucrChkSpan.TabIndex = 3
+        '
+        'ucrChkFormula
+        '
+        Me.ucrChkFormula.AutoSize = True
+        Me.ucrChkFormula.Checked = False
+        Me.ucrChkFormula.Location = New System.Drawing.Point(5, 49)
+        Me.ucrChkFormula.Name = "ucrChkFormula"
+        Me.ucrChkFormula.Size = New System.Drawing.Size(66, 23)
+        Me.ucrChkFormula.TabIndex = 6
+        '
+        'ucrChkAddSE
+        '
+        Me.ucrChkAddSE.AutoSize = True
+        Me.ucrChkAddSE.Checked = False
+        Me.ucrChkAddSE.Location = New System.Drawing.Point(184, 49)
+        Me.ucrChkAddSE.Name = "ucrChkAddSE"
+        Me.ucrChkAddSE.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkAddSE.TabIndex = 8
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.AutoSize = True
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSpan.Location = New System.Drawing.Point(239, 20)
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSpan.TabIndex = 5
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
+        Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
+        Me.ucrFamilyInput.TabIndex = 4
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(52, 20)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputMethod.TabIndex = 1
         '
         'ucrChkAddLine
         '
@@ -995,7 +1110,11 @@ Partial Class dlgLinePlot
         Me.ucrChkAddPoints.Checked = False
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(9, 337)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+
+        Me.ucrChkAddPoints.Size = New System.Drawing.Size(80, 24)
+
         Me.ucrChkAddPoints.Size = New System.Drawing.Size(141, 24)
+
         Me.ucrChkAddPoints.TabIndex = 23
         '
         'ucrChkSlopeLabelOptions
@@ -1016,12 +1135,31 @@ Partial Class dlgLinePlot
         Me.ucrChkSlopeTextOptions.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkSlopeTextOptions.TabIndex = 58
         '
+
+        'ucrChkSlopeLegend
+        '
+        Me.ucrChkSlopeLegend.AutoSize = True
+        Me.ucrChkSlopeLegend.Checked = False
+        Me.ucrChkSlopeLegend.Location = New System.Drawing.Point(9, 292)
+        Me.ucrChkSlopeLegend.Name = "ucrChkSlopeLegend"
+        Me.ucrChkSlopeLegend.Size = New System.Drawing.Size(80, 24)
+        Me.ucrChkSlopeLegend.TabIndex = 74
+        '
+
+
         'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(423, 523)
+
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.ucrNudSlopeLabelPadding)
+        Me.Controls.Add(Me.lblSlopeLineTicknes)
+        Me.Controls.Add(Me.ucrNudSlopeLineThickness)
+
         Me.Controls.Add(Me.ucrChkSlopeLegend)
+
         Me.Controls.Add(Me.lblSlopeLineColour)
         Me.Controls.Add(Me.lblSlopeLabelSize)
         Me.Controls.Add(Me.lblSlopeLabelPadding)
@@ -1061,8 +1199,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
-        Me.Controls.Add(Me.cmdLinePathStepSmoothOptions)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrLinePlotSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorOptional)
@@ -1079,6 +1215,9 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.lblSlopeYTextSize)
         Me.Controls.Add(Me.ucrChkSlopeLabelOptions)
         Me.Controls.Add(Me.ucrChkSlopeTextOptions)
+
+        Me.Controls.Add(Me.ucrChkSlopeLegend)
+
         Me.Controls.Add(Me.ucrNudSlopeLabelSize)
         Me.Controls.Add(Me.ucrNudSlopeLabelPadding)
         Me.Controls.Add(Me.ucrNudDumbbellLine)
@@ -1092,6 +1231,7 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.lblSlopeLabelColour)
         Me.Controls.Add(Me.ucrReceiverXEnd)
         Me.Controls.Add(Me.ucrReceiverSlopeColour)
+
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1101,6 +1241,7 @@ Partial Class dlgLinePlot
         Me.Text = "Line"
         Me.grpSmoothOptions.ResumeLayout(False)
         Me.grpSmoothOptions.PerformLayout()
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1110,8 +1251,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdLinePathStepSmoothOptions As Button
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
@@ -1185,4 +1324,12 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrNudSlopeLabelSize As ucrNud
     Friend WithEvents ucrChkSlopeLabelOptions As ucrCheck
     Friend WithEvents ucrChkSlopeTextOptions As ucrCheck
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLineOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemSmoothOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemDumbbellOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemPathOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemStepOptions As ToolStripMenuItem
 End Class

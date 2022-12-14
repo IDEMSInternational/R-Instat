@@ -557,26 +557,148 @@ Public Class dlgLinePlot
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
-            cmdLinePathStepSmoothOptions.Enabled = True
+            'cmdLinePathStepSmoothOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
-            cmdLinePathStepSmoothOptions.Enabled = False
+            'cmdLinePathStepSmoothOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        cmdOptions.Enabled = True
+        toolStripMenuItemLineOptions.Enabled = rdoLine.Checked
+        toolStripMenuItemSmoothOptions.Enabled = rdoSmoothing.Checked
+        toolStripMenuItemDumbbellOptions.Enabled = rdoDumbbell.Checked
+        toolStripMenuItemPathOptions.Enabled = rdoLine.Checked AndAlso rdoPath.Checked AndAlso ucrChkPathOrStep.Checked
+        toolStripMenuItemStepOptions.Enabled = rdoLine.Checked AndAlso rdoStep.Checked AndAlso ucrChkPathOrStep.Checked
+        SetGroupParam()
+    End Sub
+
+    Private Sub SetGroupParam()
+        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
+            If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+                ucrReceiverGroup.Enabled = False
+            ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+                ucrReceiverGroup.Enabled = True
+                ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+                clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
+            Else
+                clsRaesFunction.RemoveParameterByName("group")
+            End If
+        Else
+            clsRaesFunction.RemoveParameterByName("group")
+        End If
+    End Sub
+
+    Private Sub SetGraphPrefixAndRcommand()
+        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
+        'cmdLinePathStepSmoothOptions.Visible = True
+        cmdOptions.Visible = True
+        clsBaseOperator.RemoveParameterByName("slopeplot")
+        clsBaseOperator.RemoveParameterByName("slopetheme")
+        clsBaseOperator.RemoveParameterByName("dumbbellplot")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=1)
+        clsOptionsFunction.SetPackageName("ggplot2")
+        If rdoLine.Checked Then
+            If ucrChkPathOrStep.Checked Then
+                If rdoStep.Checked Then
+                    ucrSave.SetPrefix("step_plot")
+                    clsOptionsFunction.SetRCommand("geom_step")
+                Else
+                    ucrSave.SetPrefix("path_plot")
+                    clsOptionsFunction.SetRCommand("geom_path")
+                End If
+            Else
+                ucrSave.SetPrefix("line_plot")
+                clsOptionsFunction.SetRCommand("geom_line")
+            End If
+        ElseIf rdoSmoothing.Checked Then
+            ucrSave.SetPrefix("smooth")
+            clsOptionsFunction.SetRCommand("geom_smooth")
+        ElseIf rdoDumbbell.Checked Then
+            ucrReceiverSlopeY.SetMeAsReceiver()
+            ucrSave.SetPrefix("dumbbell")
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
+            clsBaseOperator.AddParameter("dumbbellplot", clsRFunctionParameter:=clsDumbbellFunction, iPosition:=1)
+        ElseIf rdoSlope.Checked Then
+            ucrReceiverSlopeY.SetMeAsReceiver()
+            'cmdLinePathStepSmoothOptions.Visible = False
+            cmdOptions.Visible = False
+            ucrSave.SetPrefix("slope")
+            clsBaseOperator.RemoveParameterByName("ggplot")
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
+            clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsGgSlopeFunction, iPosition:=0)
+            If ucrChkSlopeLegend.Checked Then
+                clsBaseOperator.RemoveParameterByName("slopetheme")
+            Else
+                clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=-1)
+            End If
+        End If
+    End Sub
+
+    Private Sub SetOptionButtonText()
+        If ucrChkPathOrStep.Checked Then
+            If rdoLine.Checked Then
+                If ucrChkPathOrStep.Checked Then
+                    If rdoStep.Checked Then
+                        toolStripMenuItemStepOptions.Enabled = True
+                    Else
+                        toolStripMenuItemStepOptions.Enabled = False
+                    End If
+                    If rdoPath.Checked Then
+                        toolStripMenuItemPathOptions.Enabled = True
+                    Else
+                        toolStripMenuItemPathOptions.Enabled = False
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged
+        SetGraphPrefixAndRcommand()
+        SetOptionButtonText()
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMethod.ControlValueChanged
+        If ucrInputMethod.GetText = "glm" OrElse ucrInputMethod.GetText = "gam" Then
+            clsOptionsFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+        Else
+            clsOptionsFunction.RemoveParameterByName("method.args")
+        End If
+    End Sub
+
+    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged, ucrChkFormula.ControlValueChanged
+        If ucrChkFormula.Checked AndAlso ucrInputFormula.GetText <> "" Then
+            clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
+        Else
+            clsOptionsFunction.RemoveParameterByName("formula")
+        End If
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                          clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
-                          clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
-                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
-                          clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                          strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+                                clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
+                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
+                                clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
+                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLinePathStepSmoothOptions.Click
+    Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click, toolStripMenuItemSmoothOptions.Click, toolStripMenuItemDumbbellOptions.Click, toolStripMenuItemPathOptions.Click, toolStripMenuItemStepOptions.Click
         If rdoLine.Checked Then
             sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsOptionsFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         ElseIf rdoSmoothing.Checked Then
@@ -616,118 +738,11 @@ Public Class dlgLinePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-        TempOptionsDisabledInMultipleVariablesCase()
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
     End Sub
 
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
-        SetGroupParam()
-    End Sub
+    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
 
-    Private Sub SetGroupParam()
-        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
-            If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("group", "1", iPosition:=3)
-                ucrReceiverGroup.Enabled = False
-            ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-                ucrReceiverGroup.Enabled = True
-                ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
-                clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
-            Else
-                clsRaesFunction.RemoveParameterByName("group")
-            End If
-        Else
-            clsRaesFunction.RemoveParameterByName("group")
-        End If
-    End Sub
-
-    Private Sub SetGraphPrefixAndRcommand()
-        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
-        cmdLinePathStepSmoothOptions.Visible = True
-        cmdOptions.Visible = True
-        clsBaseOperator.RemoveParameterByName("slopeplot")
-        clsBaseOperator.RemoveParameterByName("slopetheme")
-        clsBaseOperator.RemoveParameterByName("dumbbellplot")
-        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=1)
-        clsOptionsFunction.SetPackageName("ggplot2")
-        If rdoLine.Checked Then
-            If ucrChkPathOrStep.Checked Then
-                If rdoStep.Checked Then
-                    ucrSave.SetPrefix("step_plot")
-                    clsOptionsFunction.SetRCommand("geom_step")
-                Else
-                    ucrSave.SetPrefix("path_plot")
-                    clsOptionsFunction.SetRCommand("geom_path")
-                End If
-            Else
-                ucrSave.SetPrefix("line_plot")
-                clsOptionsFunction.SetRCommand("geom_line")
-            End If
-        ElseIf rdoSmoothing.Checked Then
-            ucrSave.SetPrefix("smooth")
-            clsOptionsFunction.SetRCommand("geom_smooth")
-        ElseIf rdoDumbbell.Checked Then
-            ucrReceiverSlopeY.SetMeAsReceiver()
-            ucrSave.SetPrefix("dumbbell")
-            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
-            clsBaseOperator.AddParameter("dumbbellplot", clsRFunctionParameter:=clsDumbbellFunction, iPosition:=1)
-        ElseIf rdoSlope.Checked Then
-            ucrReceiverSlopeY.SetMeAsReceiver()
-            cmdLinePathStepSmoothOptions.Visible = False
-            cmdOptions.Visible = False
-            ucrSave.SetPrefix("slope")
-            clsBaseOperator.RemoveParameterByName("ggplot")
-            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
-            clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsGgSlopeFunction, iPosition:=0)
-            If ucrChkSlopeLegend.Checked Then
-                clsBaseOperator.RemoveParameterByName("slopetheme")
-            Else
-                clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=-1)
-            End If
-        End If
-    End Sub
-
-    Private Sub SetOptionButtonText()
-        If rdoLine.Checked Then
-            If ucrChkPathOrStep.Checked Then
-                If rdoStep.Checked Then
-                    cmdLinePathStepSmoothOptions.Text = GetTranslation("Step options")
-                Else
-                    cmdLinePathStepSmoothOptions.Text = GetTranslation("Path options")
-                End If
-            Else
-                cmdLinePathStepSmoothOptions.Text = GetTranslation("Line options")
-            End If
-        ElseIf rdoSmoothing.Checked Then
-            cmdLinePathStepSmoothOptions.Text = GetTranslation("Smooth options")
-        ElseIf rdoDumbbell.Checked Then
-            cmdLinePathStepSmoothOptions.Text = GetTranslation("Dumbbell options")
-        End If
-    End Sub
-
-    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged
-        SetGraphPrefixAndRcommand()
-        SetOptionButtonText()
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMethod.ControlValueChanged
-        If ucrInputMethod.GetText = "glm" OrElse ucrInputMethod.GetText = "gam" Then
-            clsOptionsFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
-        Else
-            clsOptionsFunction.RemoveParameterByName("method.args")
-        End If
-    End Sub
-
-    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged, ucrChkFormula.ControlValueChanged
-        If ucrChkFormula.Checked AndAlso ucrInputFormula.GetText <> "" Then
-            clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
-        Else
-            clsOptionsFunction.RemoveParameterByName("formula")
-        End If
     End Sub
 End Class
