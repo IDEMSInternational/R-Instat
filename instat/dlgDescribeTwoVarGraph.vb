@@ -547,7 +547,7 @@ Public Class dlgDescribeTwoVarGraph
         If rdoBy.Checked Then
             ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso ucrSaveGraph.IsComplete)
         Else
-            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverColour.IsEmpty)
+            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty)
         End If
     End Sub
 
@@ -968,12 +968,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoBy.Checked Then
-            cmdOptions.Visible = True
-            cmdPairOptions.Visible = False
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
-            cmdOptions.Visible = False
-            cmdPairOptions.Visible = True
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
         End If
         If bRCodeSet Then
@@ -988,6 +984,7 @@ Public Class dlgDescribeTwoVarGraph
         EnableVisibleLabelControls()
         AddRemoveColourParameter()
         ChangeGeomToMosaicAndFacet()
+        HideShowOptions()
     End Sub
 
     Private Sub ucrSelectorTwoVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoVarGraph.ControlValueChanged
@@ -1003,8 +1000,23 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrReceiverColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColour.ControlValueChanged
         AddRemoveColourParameter()
+        HideShowOptions()
     End Sub
 
+    Private Sub HideShowOptions()
+        If rdoPairs.Checked Then
+            cmdOptions.Visible = False
+            cmdPairOptions.Visible = True
+            If Not ucrReceiverColour.IsEmpty Then
+                cmdPairOptions.Enabled = True
+            Else
+                cmdPairOptions.Enabled = False
+            End If
+        Else
+            cmdPairOptions.Visible = False
+            cmdOptions.Visible = True
+        End If
+    End Sub
     Private Sub AddRemoveColourParameter()
         If Not ucrReceiverColour.IsEmpty And rdoPairs.Checked Then
             clsGGpairsFunction.AddParameter("colour", clsRFunctionParameter:=clsGGpairAesFunction, bIncludeArgumentName:=False, iPosition:=2)

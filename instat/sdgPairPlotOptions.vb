@@ -27,10 +27,6 @@ Public Class sdgPairPlotOptions
     Public Sub InitialiseControls()
         Dim dctLegendPosition As New Dictionary(Of String, String)
 
-        ucrChkShowLegend.SetText("Show Legend")
-        ucrChkShowLegend.AddParameterPresentCondition(True, "show_legend")
-        ucrChkShowLegend.AddParameterPresentCondition(False, "show_legend", False)
-
         ucrChkLegendPosition.SetText("Legend Position")
         ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
@@ -56,7 +52,6 @@ Public Class sdgPairPlotOptions
             InitialiseControls()
         End If
         If bReset Then
-            ucrChkShowLegend.SetRCode(clsGGpairsFunction, bReset, bCloneIfNeeded:=True)
             ucrChkLegendPosition.SetRCode(clsPairThemesFunction, bReset, bCloneIfNeeded:=True)
             ucrInputLegendPosition.SetRCode(clsPairThemesFunction, bReset, bCloneIfNeeded:=True)
         End If
@@ -65,16 +60,13 @@ Public Class sdgPairPlotOptions
     Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         If ucrChkLegendPosition.Checked Then
             clsPairOperator.AddParameter("right", clsRFunctionParameter:=clsPairThemesFunction, iPosition:=1)
+            If ucrInputLegendPosition.GetText = "None" Then
+                clsGGpairsFunction.RemoveParameterByName("legend")
+            Else
+                clsGGpairsFunction.AddParameter("legend", 1, iPosition:=2)
+            End If
         Else
             clsPairOperator.RemoveParameterByName("right")
-        End If
-    End Sub
-
-    Private Sub ucrChkShowLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowLegend.ControlValueChanged
-        If ucrChkShowLegend.Checked Then
-            clsGGpairsFunction.AddParameter("legend", 1, iPosition:=2)
-        Else
-            clsGGpairsFunction.RemoveParameterByName("legend")
         End If
     End Sub
 End Class

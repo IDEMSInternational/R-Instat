@@ -23,53 +23,25 @@ Partial Class sdgPairPlotOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.tpLegend = New System.Windows.Forms.TabPage()
-        Me.tbInventory = New System.Windows.Forms.TabControl()
-        Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkShowLegend = New instat.ucrCheck()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
+        Me.tbInventory = New System.Windows.Forms.TabControl()
+        Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
         Me.tpLegend.SuspendLayout()
         Me.tbInventory.SuspendLayout()
         Me.SuspendLayout()
         '
         'tpLegend
         '
-        Me.tpLegend.Controls.Add(Me.ucrChkShowLegend)
         Me.tpLegend.Controls.Add(Me.ucrInputLegendPosition)
         Me.tpLegend.Controls.Add(Me.ucrChkLegendPosition)
         Me.tpLegend.Location = New System.Drawing.Point(4, 22)
         Me.tpLegend.Name = "tpLegend"
         Me.tpLegend.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpLegend.Size = New System.Drawing.Size(299, 62)
+        Me.tpLegend.Size = New System.Drawing.Size(291, 36)
         Me.tpLegend.TabIndex = 3
         Me.tpLegend.Text = "Legend"
         Me.tpLegend.UseVisualStyleBackColor = True
-        '
-        'tbInventory
-        '
-        Me.tbInventory.Controls.Add(Me.tpLegend)
-        Me.tbInventory.Location = New System.Drawing.Point(3, 0)
-        Me.tbInventory.Name = "tbInventory"
-        Me.tbInventory.SelectedIndex = 0
-        Me.tbInventory.Size = New System.Drawing.Size(307, 88)
-        Me.tbInventory.TabIndex = 2
-        '
-        'ucrButtonsInventoryplot
-        '
-        Me.ucrButtonsInventoryplot.AutoSize = True
-        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(46, 94)
-        Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
-        Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(224, 30)
-        Me.ucrButtonsInventoryplot.TabIndex = 4
-        '
-        'ucrChkShowLegend
-        '
-        Me.ucrChkShowLegend.AutoSize = True
-        Me.ucrChkShowLegend.Checked = False
-        Me.ucrChkShowLegend.Location = New System.Drawing.Point(7, 5)
-        Me.ucrChkShowLegend.Name = "ucrChkShowLegend"
-        Me.ucrChkShowLegend.Size = New System.Drawing.Size(204, 23)
-        Me.ucrChkShowLegend.TabIndex = 2
         '
         'ucrInputLegendPosition
         '
@@ -77,7 +49,7 @@ Partial Class sdgPairPlotOptions
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(154, 33)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(154, 3)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(134, 25)
         Me.ucrInputLegendPosition.TabIndex = 1
@@ -86,16 +58,33 @@ Partial Class sdgPairPlotOptions
         '
         Me.ucrChkLegendPosition.AutoSize = True
         Me.ucrChkLegendPosition.Checked = False
-        Me.ucrChkLegendPosition.Location = New System.Drawing.Point(7, 35)
+        Me.ucrChkLegendPosition.Location = New System.Drawing.Point(7, 5)
         Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
         Me.ucrChkLegendPosition.Size = New System.Drawing.Size(204, 23)
         Me.ucrChkLegendPosition.TabIndex = 0
+        '
+        'tbInventory
+        '
+        Me.tbInventory.Controls.Add(Me.tpLegend)
+        Me.tbInventory.Location = New System.Drawing.Point(3, 0)
+        Me.tbInventory.Name = "tbInventory"
+        Me.tbInventory.SelectedIndex = 0
+        Me.tbInventory.Size = New System.Drawing.Size(299, 62)
+        Me.tbInventory.TabIndex = 2
+        '
+        'ucrButtonsInventoryplot
+        '
+        Me.ucrButtonsInventoryplot.AutoSize = True
+        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(46, 64)
+        Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
+        Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(224, 30)
+        Me.ucrButtonsInventoryplot.TabIndex = 4
         '
         'sdgPairPlotOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(314, 128)
+        Me.ClientSize = New System.Drawing.Size(311, 98)
         Me.Controls.Add(Me.ucrButtonsInventoryplot)
         Me.Controls.Add(Me.tbInventory)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -115,6 +104,5 @@ Partial Class sdgPairPlotOptions
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegendPosition As ucrCheck
     Friend WithEvents tbInventory As TabControl
-    Friend WithEvents ucrChkShowLegend As ucrCheck
     Friend WithEvents ucrButtonsInventoryplot As ucrButtonsSubdialogue
 End Class
