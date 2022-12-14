@@ -20,7 +20,6 @@ Public Class dlgOneVarUseModel
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction As New RFunction
-    Private clsRSyntax As RSyntax
     'temp fix to deciding if plot should be included
     'won't be needed once RSyntax can contain multiple functions
     Private bPlot As Boolean
@@ -139,8 +138,12 @@ Public Class dlgOneVarUseModel
         clsRBootFunction.AddParameter("niter", 1001)
         clsRBootFunction.iCallType = 2
 
-        clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsQuantileFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_model")
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)

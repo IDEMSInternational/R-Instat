@@ -587,7 +587,6 @@ DataBook$set("public", "add_object", function(data_name = NULL,
     private$.last_graph <- c(data_name, object_name)
   }
   
-    
 }
 ) 
 
@@ -617,7 +616,8 @@ DataBook$set("public", "get_object_names", function(data_name = NULL,
 
 #returns a list of objects
 #see issue #7808 comments for more details 
-DataBook$set("public", "get_objects", function(data_name = NULL, object_type_label = NULL) {
+DataBook$set("public", "get_objects", function(data_name = NULL, 
+                                               object_type_label = NULL) {
   if(is.null(data_name) || identical(data_name, overall_label)) {
     out <- private$.objects[self$get_object_names(data_name = data_name, object_type_label = object_type_label)]
   }else {
