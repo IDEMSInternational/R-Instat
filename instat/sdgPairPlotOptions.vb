@@ -24,6 +24,7 @@ Public Class sdgPairPlotOptions
     Private Sub sdgPairPlotOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
     Public Sub InitialiseControls()
         Dim dctLegendPosition As New Dictionary(Of String, String)
 

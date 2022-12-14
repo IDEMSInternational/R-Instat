@@ -53,7 +53,6 @@ Public Class dlgDescribeTwoVarGraph
 
     Private strFirstVariablesType, strSecondVariableType As String
 
-
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -866,6 +865,7 @@ Public Class dlgDescribeTwoVarGraph
         sdgPairPlotOptions.ShowDialog()
         bResetSubdialog = False
     End Sub
+
     Private Sub SetFreeYAxis()
         Dim clsScaleParam As RParameter
         Dim strXName As String
