@@ -637,8 +637,6 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     use_col_name_as_prefix = TRUE
   }
   
-  if(is.list(col_data)) col_data <- lapply(col_data, paste, collapse=',')
-  
   replaced <- FALSE
   previous_length = self$get_column_count()
   if(adjacent_column != "" && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
