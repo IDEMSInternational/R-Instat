@@ -36,6 +36,8 @@ Partial Class dlgEvapotranspiration
         Me.rdoPenmanMonteith = New System.Windows.Forms.RadioButton()
         Me.cmdEvapOptions = New System.Windows.Forms.Button()
         Me.rdoPriestleyTaylor = New System.Windows.Forms.RadioButton()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.ucrNudAlpha = New instat.ucrNud()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrChkWind = New instat.ucrCheck()
         Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
@@ -52,8 +54,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorEvapotranspiration = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblAlpha = New System.Windows.Forms.Label()
-        Me.ucrNudAlpha = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -207,6 +207,29 @@ Partial Class dlgEvapotranspiration
         Me.rdoPriestleyTaylor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPriestleyTaylor.UseVisualStyleBackColor = True
         '
+        'lblAlpha
+        '
+        Me.lblAlpha.AutoSize = True
+        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAlpha.Location = New System.Drawing.Point(2, 346)
+        Me.lblAlpha.Name = "lblAlpha"
+        Me.lblAlpha.Size = New System.Drawing.Size(37, 13)
+        Me.lblAlpha.TabIndex = 36
+        Me.lblAlpha.Text = "Alpha:"
+        '
+        'ucrNudAlpha
+        '
+        Me.ucrNudAlpha.AutoSize = True
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(109, 344)
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlpha.TabIndex = 37
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrReceiverWindSpeed
         '
         Me.ucrReceiverWindSpeed.AutoSize = True
@@ -278,7 +301,7 @@ Partial Class dlgEvapotranspiration
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(5, 386)
+        Me.ucrNewColName.Location = New System.Drawing.Point(3, 397)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(388, 24)
@@ -384,40 +407,17 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(5, 421)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 432)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 33
-        '
-        'lblAlpha
-        '
-        Me.lblAlpha.AutoSize = True
-        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlpha.Location = New System.Drawing.Point(277, 295)
-        Me.lblAlpha.Name = "lblAlpha"
-        Me.lblAlpha.Size = New System.Drawing.Size(37, 13)
-        Me.lblAlpha.TabIndex = 36
-        Me.lblAlpha.Text = "Alpha:"
-        '
-        'ucrNudAlpha
-        '
-        Me.ucrNudAlpha.AutoSize = True
-        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(387, 291)
-        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Name = "ucrNudAlpha"
-        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlpha.TabIndex = 37
-        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(453, 478)
+        Me.ClientSize = New System.Drawing.Size(453, 490)
         Me.Controls.Add(Me.lblAlpha)
         Me.Controls.Add(Me.ucrNudAlpha)
         Me.Controls.Add(Me.rdoPriestleyTaylor)
