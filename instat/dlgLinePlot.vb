@@ -25,7 +25,11 @@ Public Class dlgLinePlot
     Private bReset As Boolean = True
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
+    Private clsGeomLine As New RFunction
+    Private clsGeomSmooth As New RFunction
+    Private clsGeomDumbbell As New RFunction
     Private clsYlabFunction As New RFunction
+    Private clsPointsFunc As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
@@ -35,8 +39,11 @@ Public Class dlgLinePlot
     Private clsLocalRaesFunction As New RFunction
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsGeomSmoothFunc As New RFunction
+    Private clsGeomPathFunc As New RFunction
+    Private clsGeomStepFunc As New RFunction
     Private clsGeomSmoothParameter As New RParameter
     Private clsPeaksFunction As New RFunction
+    Private clsPeakFunction As New RFunction
     Private clsValleysFunction As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
@@ -218,6 +225,7 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddRadioButton(rdoLine)
         ucrPnlOptions.AddRadioButton(rdoDumbbell)
         ucrPnlOptions.AddRadioButton(rdoSlope)
+
 
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_path", "geom_step"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSmoothing, strFirstParameterName, {"geom_smooth"})
@@ -439,6 +447,15 @@ Public Class dlgLinePlot
         clsGgSlopeFunction = New RFunction
         clsSlopeThemeFunction = New RFunction
         clsDumbbellFunction = New RFunction
+        clsPointsFunc = New RFunction
+        clsGeomLine = New RFunction
+        clsGeomSmooth = New RFunction
+        clsGeomDumbbell = New RFunction
+        clsPeakFunction = New RFunction
+        clsGeomPathFunc = New RFunction
+        clsGeomStepFunc = New RFunction
+        clsValleysFunction = New RFunction
+
 
         ucrLinePlotSelector.Reset()
         ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
@@ -495,6 +512,39 @@ Public Class dlgLinePlot
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         clsListFunction.SetRCommand("list")
+
+        clsGeomLine.SetPackageName("ggplot2")
+        clsGeomLine.SetRCommand("geom_line")
+        clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        clsGeomLine.AddParameter("size", "0.8")
+
+        clsGeomPathFunc.SetPackageName("ggplot2")
+        clsGeomPathFunc.SetRCommand("geom_path")
+        clsGeomPathFunc.AddParameter("linemitre", "10")
+
+        clsGeomStepFunc.SetPackageName("ggplot2")
+        clsGeomStepFunc.SetRCommand("geom_step")
+
+        clsValleysFunction.SetPackageName("ggpmisc")
+        clsValleysFunction.SetRCommand("stat_valleys")
+
+        clsGeomSmooth.SetPackageName("ggplot2")
+        clsGeomSmooth.SetRCommand("geom_smooth")
+        clsGeomSmooth.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmooth.AddParameter("size", "1")
+
+        clsGeomDumbbell.SetPackageName("ggplot2")
+        clsGeomDumbbell.SetRCommand("geom_dumbbell")
+        clsGeomDumbbell.AddParameter("dot_guide", "TRUE")
+        clsGeomDumbbell.AddParameter("dot_guide_size", "0.3")
+
+        clsPointsFunc.SetPackageName("ggplot2")
+        clsPointsFunc.SetRCommand("geom_point")
+        clsPointsFunc.AddParameter("size", "3")
+        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
+
+        clsPeakFunction.SetPackageName("ggpmisc")
+        clsPeakFunction.SetRCommand("stat_peaks")
 
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
         clsBaseOperator.RemoveParameterByName("geom_point")
@@ -565,13 +615,54 @@ Public Class dlgLinePlot
         End If
     End Sub
 
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector,
+                                   bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
+
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverX.Clear()
+                Else
+                    ucrReceiverX.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                    ucrVariablesAsFactorForLinePlot.Clear()
+                Else
+                    ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrReceiverGroup.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
+
     Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         cmdOptions.Enabled = True
-        toolStripMenuItemLineOptions.Enabled = rdoLine.Checked
+        toolStripMenuItemPeakOptions.Enabled = rdoLine.Checked
+        toolStripMenuItemValleyOptions.Enabled = rdoLine.Checked
         toolStripMenuItemSmoothOptions.Enabled = rdoSmoothing.Checked
         toolStripMenuItemDumbbellOptions.Enabled = rdoDumbbell.Checked
         toolStripMenuItemPathOptions.Enabled = rdoLine.Checked AndAlso rdoPath.Checked AndAlso ucrChkPathOrStep.Checked
@@ -660,6 +751,7 @@ Public Class dlgLinePlot
                 End If
             End If
         End If
+
     End Sub
 
     Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged
@@ -697,52 +789,32 @@ Public Class dlgLinePlot
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
-
-    Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click, toolStripMenuItemSmoothOptions.Click, toolStripMenuItemDumbbellOptions.Click, toolStripMenuItemPathOptions.Click, toolStripMenuItemStepOptions.Click
-        If rdoLine.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsOptionsFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        ElseIf rdoSmoothing.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomSmoothFunc, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        Else
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsDumbbellFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        End If
-        sdgLayerOptions.ShowDialog()
-        bResetLineLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
-
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForLinePlot.Clear()
-                Else ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "group" Then
-                ucrReceiverGroup.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "xend" Then
-                ucrReceiverXEnd.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
-        TestOkEnabled()
+    Private Sub toolStripMenuItemPeakOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPeakOptions.Click
+        openSdgLayerOptions(clsPeakFunction)
+    End Sub
+    Private Sub toolStripMenuItemDumbbellOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemDumbbellOptions.Click
+        openSdgLayerOptions(clsGeomDumbbell)
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
-
+    Private Sub toolStripMenuItemLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLineOptions.Click
+        openSdgLayerOptions(clsGeomLine)
+    End Sub
+    Private Sub toolStripMenuItemSmoothOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemSmoothOptions.Click
+        openSdgLayerOptions(clsGeomSmooth)
     End Sub
 
-    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+    Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
+        openSdgLayerOptions(clsPointsFunc)
+    End Sub
 
+    Private Sub toolStripMenuItemPathOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPathOptions.Click
+        openSdgLayerOptions(clsGeomPathFunc)
+    End Sub
+    Private Sub toolStripMenuItemStepOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemStepOptions.Click
+        openSdgLayerOptions(clsGeomStepFunc)
+    End Sub
+
+    Private Sub toolStripMenuItemValleyOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemValleyOptions.Click
+        openSdgLayerOptions(clsValleysFunction)
     End Sub
 End Class
