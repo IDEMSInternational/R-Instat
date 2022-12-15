@@ -26,11 +26,8 @@ Partial Class sdgSummaryThemes
         Me.tbThemeTables = New System.Windows.Forms.TabPage()
         Me.grpTableBorder = New System.Windows.Forms.GroupBox()
         Me.ucrInputTableLeftColor = New instat.ucrInputComboBox()
-        Me.ucrInputTableLeftWidth = New instat.ucrInputComboBox()
         Me.ucrInputTableLeftStyle = New instat.ucrInputComboBox()
         Me.ucrInputTableBottomColor = New instat.ucrInputComboBox()
-        Me.ucrInputTableBottomWidth = New instat.ucrInputComboBox()
-        Me.ucrInputTableTopWidth = New instat.ucrInputComboBox()
         Me.ucrInputTableBottomStyle = New instat.ucrInputComboBox()
         Me.ucrInputTableRightColor = New instat.ucrInputComboBox()
         Me.ucrChkTableLeftColor = New instat.ucrCheck()
@@ -40,7 +37,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableBottomWidth = New instat.ucrCheck()
         Me.ucrChkTableBottomStyle = New instat.ucrCheck()
         Me.ucrChkTableRightColor = New instat.ucrCheck()
-        Me.ucrInputTableRightWidth = New instat.ucrInputComboBox()
         Me.ucrInputTableRightStyle = New instat.ucrInputComboBox()
         Me.ucrInputTableTopColor = New instat.ucrInputComboBox()
         Me.ucrInputTableTopStyle = New instat.ucrInputComboBox()
@@ -49,14 +45,12 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableTopWidth = New instat.ucrCheck()
         Me.ucrChkTableTopStyle = New instat.ucrCheck()
         Me.ucrChkTableTopColor = New instat.ucrCheck()
-        Me.ucrInputTableWidth = New instat.ucrInputComboBox()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
         Me.grpFont = New System.Windows.Forms.GroupBox()
         Me.ucrInputTableFontColor = New instat.ucrInputComboBox()
         Me.ucrInputTableFontStyle = New instat.ucrInputComboBox()
         Me.ucrInputTableFontWeight = New instat.ucrInputComboBox()
-        Me.ucrInputTableFontSize = New instat.ucrInputComboBox()
         Me.ucrInputTableFontNames = New instat.ucrInputComboBox()
         Me.ucrChkTableFontColor = New instat.ucrCheck()
         Me.ucrChkTableFontStyle = New instat.ucrCheck()
@@ -92,12 +86,10 @@ Partial Class sdgSummaryThemes
         Me.ucrChkSubTitleWeight = New instat.ucrCheck()
         Me.ucrChkSubTitleSize = New instat.ucrCheck()
         Me.ucrInputSubTitleWeight = New instat.ucrInputComboBox()
-        Me.ucrInputSubTitleSize = New instat.ucrInputComboBox()
         Me.grpTitle = New System.Windows.Forms.GroupBox()
         Me.ucrChkFontWeight = New instat.ucrCheck()
         Me.ucrChkFontSize = New instat.ucrCheck()
         Me.ucrInputFontWeight = New instat.ucrInputComboBox()
-        Me.ucrInputFontSize = New instat.ucrInputComboBox()
         Me.ucrInputAlignment = New instat.ucrInputComboBox()
         Me.ucrInputBackgroundColour = New instat.ucrInputComboBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
@@ -105,6 +97,14 @@ Partial Class sdgSummaryThemes
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.ucrNudTableWidth = New instat.ucrNud()
+        Me.ucrNudTableFontSize = New instat.ucrNud()
+        Me.ucrNudTableTopWidth = New instat.ucrNud()
+        Me.ucrNudTableRightWidth = New instat.ucrNud()
+        Me.ucrNudTableBottomWidth = New instat.ucrNud()
+        Me.ucrNudTableLeftWidth = New instat.ucrNud()
+        Me.ucrNudFontSize = New instat.ucrNud()
+        Me.ucrNudSubTitleSize = New instat.ucrNud()
         Me.tbSummaryThemes.SuspendLayout()
         Me.tbThemeTables.SuspendLayout()
         Me.grpTableBorder.SuspendLayout()
@@ -132,8 +132,8 @@ Partial Class sdgSummaryThemes
         '
         'tbThemeTables
         '
+        Me.tbThemeTables.Controls.Add(Me.ucrNudTableWidth)
         Me.tbThemeTables.Controls.Add(Me.grpTableBorder)
-        Me.tbThemeTables.Controls.Add(Me.ucrInputTableWidth)
         Me.tbThemeTables.Controls.Add(Me.ucrInputTableLayout)
         Me.tbThemeTables.Controls.Add(Me.ucrInputTableAlign)
         Me.tbThemeTables.Controls.Add(Me.grpFont)
@@ -152,12 +152,13 @@ Partial Class sdgSummaryThemes
         '
         'grpTableBorder
         '
+        Me.grpTableBorder.Controls.Add(Me.ucrNudTableLeftWidth)
+        Me.grpTableBorder.Controls.Add(Me.ucrNudTableBottomWidth)
+        Me.grpTableBorder.Controls.Add(Me.ucrNudTableRightWidth)
+        Me.grpTableBorder.Controls.Add(Me.ucrNudTableTopWidth)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableLeftColor)
-        Me.grpTableBorder.Controls.Add(Me.ucrInputTableLeftWidth)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableLeftStyle)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableBottomColor)
-        Me.grpTableBorder.Controls.Add(Me.ucrInputTableBottomWidth)
-        Me.grpTableBorder.Controls.Add(Me.ucrInputTableTopWidth)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableBottomStyle)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableRightColor)
         Me.grpTableBorder.Controls.Add(Me.ucrChkTableLeftColor)
@@ -167,7 +168,6 @@ Partial Class sdgSummaryThemes
         Me.grpTableBorder.Controls.Add(Me.ucrChkTableBottomWidth)
         Me.grpTableBorder.Controls.Add(Me.ucrChkTableBottomStyle)
         Me.grpTableBorder.Controls.Add(Me.ucrChkTableRightColor)
-        Me.grpTableBorder.Controls.Add(Me.ucrInputTableRightWidth)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableRightStyle)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableTopColor)
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableTopStyle)
@@ -194,17 +194,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputTableLeftColor.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTableLeftColor.TabIndex = 35
         '
-        'ucrInputTableLeftWidth
-        '
-        Me.ucrInputTableLeftWidth.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableLeftWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTableLeftWidth.GetSetSelectedIndex = -1
-        Me.ucrInputTableLeftWidth.IsReadOnly = False
-        Me.ucrInputTableLeftWidth.Location = New System.Drawing.Point(153, 267)
-        Me.ucrInputTableLeftWidth.Name = "ucrInputTableLeftWidth"
-        Me.ucrInputTableLeftWidth.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableLeftWidth.TabIndex = 34
-        '
         'ucrInputTableLeftStyle
         '
         Me.ucrInputTableLeftStyle.AddQuotesIfUnrecognised = True
@@ -226,28 +215,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputTableBottomColor.Name = "ucrInputTableBottomColor"
         Me.ucrInputTableBottomColor.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTableBottomColor.TabIndex = 32
-        '
-        'ucrInputTableBottomWidth
-        '
-        Me.ucrInputTableBottomWidth.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableBottomWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTableBottomWidth.GetSetSelectedIndex = -1
-        Me.ucrInputTableBottomWidth.IsReadOnly = False
-        Me.ucrInputTableBottomWidth.Location = New System.Drawing.Point(153, 192)
-        Me.ucrInputTableBottomWidth.Name = "ucrInputTableBottomWidth"
-        Me.ucrInputTableBottomWidth.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableBottomWidth.TabIndex = 31
-        '
-        'ucrInputTableTopWidth
-        '
-        Me.ucrInputTableTopWidth.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableTopWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTableTopWidth.GetSetSelectedIndex = -1
-        Me.ucrInputTableTopWidth.IsReadOnly = False
-        Me.ucrInputTableTopWidth.Location = New System.Drawing.Point(153, 42)
-        Me.ucrInputTableTopWidth.Name = "ucrInputTableTopWidth"
-        Me.ucrInputTableTopWidth.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableTopWidth.TabIndex = 30
         '
         'ucrInputTableBottomStyle
         '
@@ -334,17 +301,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableRightColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkTableRightColor.TabIndex = 21
         '
-        'ucrInputTableRightWidth
-        '
-        Me.ucrInputTableRightWidth.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableRightWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTableRightWidth.GetSetSelectedIndex = -1
-        Me.ucrInputTableRightWidth.IsReadOnly = False
-        Me.ucrInputTableRightWidth.Location = New System.Drawing.Point(153, 117)
-        Me.ucrInputTableRightWidth.Name = "ucrInputTableRightWidth"
-        Me.ucrInputTableRightWidth.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableRightWidth.TabIndex = 20
-        '
         'ucrInputTableRightStyle
         '
         Me.ucrInputTableRightStyle.AddQuotesIfUnrecognised = True
@@ -423,17 +379,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableTopColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkTableTopColor.TabIndex = 11
         '
-        'ucrInputTableWidth
-        '
-        Me.ucrInputTableWidth.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableWidth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTableWidth.GetSetSelectedIndex = -1
-        Me.ucrInputTableWidth.IsReadOnly = False
-        Me.ucrInputTableWidth.Location = New System.Drawing.Point(160, 97)
-        Me.ucrInputTableWidth.Name = "ucrInputTableWidth"
-        Me.ucrInputTableWidth.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableWidth.TabIndex = 12
-        '
         'ucrInputTableLayout
         '
         Me.ucrInputTableLayout.AddQuotesIfUnrecognised = True
@@ -458,10 +403,10 @@ Partial Class sdgSummaryThemes
         '
         'grpFont
         '
+        Me.grpFont.Controls.Add(Me.ucrNudTableFontSize)
         Me.grpFont.Controls.Add(Me.ucrInputTableFontColor)
         Me.grpFont.Controls.Add(Me.ucrInputTableFontStyle)
         Me.grpFont.Controls.Add(Me.ucrInputTableFontWeight)
-        Me.grpFont.Controls.Add(Me.ucrInputTableFontSize)
         Me.grpFont.Controls.Add(Me.ucrInputTableFontNames)
         Me.grpFont.Controls.Add(Me.ucrChkTableFontColor)
         Me.grpFont.Controls.Add(Me.ucrChkTableFontStyle)
@@ -507,17 +452,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputTableFontWeight.Name = "ucrInputTableFontWeight"
         Me.ucrInputTableFontWeight.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTableFontWeight.TabIndex = 18
-        '
-        'ucrInputTableFontSize
-        '
-        Me.ucrInputTableFontSize.AddQuotesIfUnrecognised = True
-        Me.ucrInputTableFontSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputTableFontSize.GetSetSelectedIndex = -1
-        Me.ucrInputTableFontSize.IsReadOnly = False
-        Me.ucrInputTableFontSize.Location = New System.Drawing.Point(154, 42)
-        Me.ucrInputTableFontSize.Name = "ucrInputTableFontSize"
-        Me.ucrInputTableFontSize.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableFontSize.TabIndex = 17
         '
         'ucrInputTableFontNames
         '
@@ -852,10 +786,10 @@ Partial Class sdgSummaryThemes
         '
         'grpSubTitle
         '
+        Me.grpSubTitle.Controls.Add(Me.ucrNudSubTitleSize)
         Me.grpSubTitle.Controls.Add(Me.ucrChkSubTitleWeight)
         Me.grpSubTitle.Controls.Add(Me.ucrChkSubTitleSize)
         Me.grpSubTitle.Controls.Add(Me.ucrInputSubTitleWeight)
-        Me.grpSubTitle.Controls.Add(Me.ucrInputSubTitleSize)
         Me.grpSubTitle.Location = New System.Drawing.Point(28, 184)
         Me.grpSubTitle.Name = "grpSubTitle"
         Me.grpSubTitle.Size = New System.Drawing.Size(277, 76)
@@ -892,23 +826,12 @@ Partial Class sdgSummaryThemes
         Me.ucrInputSubTitleWeight.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSubTitleWeight.TabIndex = 5
         '
-        'ucrInputSubTitleSize
-        '
-        Me.ucrInputSubTitleSize.AddQuotesIfUnrecognised = True
-        Me.ucrInputSubTitleSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputSubTitleSize.GetSetSelectedIndex = -1
-        Me.ucrInputSubTitleSize.IsReadOnly = False
-        Me.ucrInputSubTitleSize.Location = New System.Drawing.Point(130, 16)
-        Me.ucrInputSubTitleSize.Name = "ucrInputSubTitleSize"
-        Me.ucrInputSubTitleSize.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSubTitleSize.TabIndex = 4
-        '
         'grpTitle
         '
+        Me.grpTitle.Controls.Add(Me.ucrNudFontSize)
         Me.grpTitle.Controls.Add(Me.ucrChkFontWeight)
         Me.grpTitle.Controls.Add(Me.ucrChkFontSize)
         Me.grpTitle.Controls.Add(Me.ucrInputFontWeight)
-        Me.grpTitle.Controls.Add(Me.ucrInputFontSize)
         Me.grpTitle.Location = New System.Drawing.Point(28, 88)
         Me.grpTitle.Name = "grpTitle"
         Me.grpTitle.Size = New System.Drawing.Size(277, 76)
@@ -944,17 +867,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputFontWeight.Name = "ucrInputFontWeight"
         Me.ucrInputFontWeight.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputFontWeight.TabIndex = 5
-        '
-        'ucrInputFontSize
-        '
-        Me.ucrInputFontSize.AddQuotesIfUnrecognised = True
-        Me.ucrInputFontSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputFontSize.GetSetSelectedIndex = -1
-        Me.ucrInputFontSize.IsReadOnly = False
-        Me.ucrInputFontSize.Location = New System.Drawing.Point(130, 16)
-        Me.ucrInputFontSize.Name = "ucrInputFontSize"
-        Me.ucrInputFontSize.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFontSize.TabIndex = 4
         '
         'ucrInputAlignment
         '
@@ -1024,6 +936,110 @@ Partial Class sdgSummaryThemes
         Me.TabPage7.Text = "Sourcenotes"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
+        'ucrNudTableWidth
+        '
+        Me.ucrNudTableWidth.AutoSize = True
+        Me.ucrNudTableWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableWidth.Location = New System.Drawing.Point(160, 98)
+        Me.ucrNudTableWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableWidth.Name = "ucrNudTableWidth"
+        Me.ucrNudTableWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableWidth.TabIndex = 17
+        Me.ucrNudTableWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTableFontSize
+        '
+        Me.ucrNudTableFontSize.AutoSize = True
+        Me.ucrNudTableFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableFontSize.Location = New System.Drawing.Point(154, 42)
+        Me.ucrNudTableFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableFontSize.Name = "ucrNudTableFontSize"
+        Me.ucrNudTableFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableFontSize.TabIndex = 21
+        Me.ucrNudTableFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTableTopWidth
+        '
+        Me.ucrNudTableTopWidth.AutoSize = True
+        Me.ucrNudTableTopWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableTopWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableTopWidth.Location = New System.Drawing.Point(153, 42)
+        Me.ucrNudTableTopWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableTopWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableTopWidth.Name = "ucrNudTableTopWidth"
+        Me.ucrNudTableTopWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableTopWidth.TabIndex = 36
+        Me.ucrNudTableTopWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTableRightWidth
+        '
+        Me.ucrNudTableRightWidth.AutoSize = True
+        Me.ucrNudTableRightWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableRightWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableRightWidth.Location = New System.Drawing.Point(153, 117)
+        Me.ucrNudTableRightWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableRightWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableRightWidth.Name = "ucrNudTableRightWidth"
+        Me.ucrNudTableRightWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableRightWidth.TabIndex = 37
+        Me.ucrNudTableRightWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTableBottomWidth
+        '
+        Me.ucrNudTableBottomWidth.AutoSize = True
+        Me.ucrNudTableBottomWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableBottomWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableBottomWidth.Location = New System.Drawing.Point(153, 192)
+        Me.ucrNudTableBottomWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableBottomWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableBottomWidth.Name = "ucrNudTableBottomWidth"
+        Me.ucrNudTableBottomWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableBottomWidth.TabIndex = 38
+        Me.ucrNudTableBottomWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTableLeftWidth
+        '
+        Me.ucrNudTableLeftWidth.AutoSize = True
+        Me.ucrNudTableLeftWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableLeftWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableLeftWidth.Location = New System.Drawing.Point(153, 267)
+        Me.ucrNudTableLeftWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableLeftWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableLeftWidth.Name = "ucrNudTableLeftWidth"
+        Me.ucrNudTableLeftWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableLeftWidth.TabIndex = 39
+        Me.ucrNudTableLeftWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFontSize
+        '
+        Me.ucrNudFontSize.AutoSize = True
+        Me.ucrNudFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFontSize.Location = New System.Drawing.Point(130, 19)
+        Me.ucrNudFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFontSize.Name = "ucrNudFontSize"
+        Me.ucrNudFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudFontSize.TabIndex = 27
+        Me.ucrNudFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSubTitleSize
+        '
+        Me.ucrNudSubTitleSize.AutoSize = True
+        Me.ucrNudSubTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSubTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSubTitleSize.Location = New System.Drawing.Point(130, 15)
+        Me.ucrNudSubTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSubTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSubTitleSize.Name = "ucrNudSubTitleSize"
+        Me.ucrNudSubTitleSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudSubTitleSize.TabIndex = 27
+        Me.ucrNudSubTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'sdgSummaryThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1065,10 +1081,8 @@ Partial Class sdgSummaryThemes
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents grpSubTitle As GroupBox
     Friend WithEvents ucrInputSubTitleWeight As ucrInputComboBox
-    Friend WithEvents ucrInputSubTitleSize As ucrInputComboBox
     Friend WithEvents grpTitle As GroupBox
     Friend WithEvents ucrInputFontWeight As ucrInputComboBox
-    Friend WithEvents ucrInputFontSize As ucrInputComboBox
     Friend WithEvents ucrInputAlignment As ucrInputComboBox
     Friend WithEvents ucrInputBackgroundColour As ucrInputComboBox
     Friend WithEvents ucrChkBackgroundColour As ucrCheck
@@ -1100,14 +1114,12 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrChkTableWidth As ucrCheck
     Friend WithEvents ucrChkTableLayout As ucrCheck
     Friend WithEvents ucrChkTableAlign As ucrCheck
-    Friend WithEvents ucrInputTableWidth As ucrInputComboBox
     Friend WithEvents ucrInputTableLayout As ucrInputComboBox
     Friend WithEvents ucrInputTableAlign As ucrInputComboBox
     Friend WithEvents grpFont As GroupBox
     Friend WithEvents ucrInputTableFontColor As ucrInputComboBox
     Friend WithEvents ucrInputTableFontStyle As ucrInputComboBox
     Friend WithEvents ucrInputTableFontWeight As ucrInputComboBox
-    Friend WithEvents ucrInputTableFontSize As ucrInputComboBox
     Friend WithEvents ucrInputTableFontNames As ucrInputComboBox
     Friend WithEvents ucrChkTableFontColor As ucrCheck
     Friend WithEvents ucrChkTableFontStyle As ucrCheck
@@ -1134,8 +1146,12 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrInputTableBottomColor As ucrInputComboBox
     Friend WithEvents ucrInputTableBottomStyle As ucrInputComboBox
     Friend WithEvents ucrInputTableRightColor As ucrInputComboBox
-    Friend WithEvents ucrInputTableLeftWidth As ucrInputComboBox
-    Friend WithEvents ucrInputTableBottomWidth As ucrInputComboBox
-    Friend WithEvents ucrInputTableTopWidth As ucrInputComboBox
-    Friend WithEvents ucrInputTableRightWidth As ucrInputComboBox
+    Friend WithEvents ucrNudTableWidth As ucrNud
+    Friend WithEvents ucrNudTableLeftWidth As ucrNud
+    Friend WithEvents ucrNudTableBottomWidth As ucrNud
+    Friend WithEvents ucrNudTableRightWidth As ucrNud
+    Friend WithEvents ucrNudTableTopWidth As ucrNud
+    Friend WithEvents ucrNudTableFontSize As ucrNud
+    Friend WithEvents ucrNudSubTitleSize As ucrNud
+    Friend WithEvents ucrNudFontSize As ucrNud
 End Class
