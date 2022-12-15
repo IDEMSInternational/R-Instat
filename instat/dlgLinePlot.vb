@@ -482,7 +482,6 @@ Public Class dlgLinePlot
 
         clsOptionsFunction.SetPackageName("ggplot2")
         clsOptionsFunction.SetRCommand("geom_line")
-        'clsOptionsFunction.AddParameter("span", 0.75, iPosition:=4)
         clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsDumbbellFunction.SetPackageName("ggalt")
@@ -607,10 +606,8 @@ Public Class dlgLinePlot
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
-            'cmdLinePathStepSmoothOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
-            'cmdLinePathStepSmoothOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
     End Sub
@@ -689,7 +686,6 @@ Public Class dlgLinePlot
 
     Private Sub SetGraphPrefixAndRcommand()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
-        'cmdLinePathStepSmoothOptions.Visible = True
         cmdOptions.Visible = True
         clsBaseOperator.RemoveParameterByName("slopeplot")
         clsBaseOperator.RemoveParameterByName("slopetheme")
@@ -720,7 +716,6 @@ Public Class dlgLinePlot
             clsBaseOperator.AddParameter("dumbbellplot", clsRFunctionParameter:=clsDumbbellFunction, iPosition:=1)
         ElseIf rdoSlope.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
-            'cmdLinePathStepSmoothOptions.Visible = False
             cmdOptions.Visible = False
             ucrSave.SetPrefix("slope")
             clsBaseOperator.RemoveParameterByName("ggplot")
