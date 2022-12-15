@@ -59,7 +59,7 @@ Public Class dlgViewObjects
         'ucrPnlContentsToView.AddRadioButton(rdoAllContents) 'to be added later
         'ucrPnlContentsToView.AddRadioButton(rdoComponent) 'to be added later
 
-        ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         ucrPnlContentsToView.AddFunctionNamesCondition(rdoStructure, "str")
 
         'we are disabling this for now until they're working correctly.
@@ -106,10 +106,10 @@ Public Class dlgViewObjects
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
         'set the appropriate Base RFunction
         If rdoPrint.Checked Then
-            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="TRUE", iPosition:=1)
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="TRUE", iPosition:=3)
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectRFunction)
         ElseIf rdoStructure.Checked Then
-            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=3)
             ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureRFunction)
         End If
     End Sub
