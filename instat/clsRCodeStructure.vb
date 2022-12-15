@@ -537,6 +537,7 @@ Public Class RCodeStructure
                 End If
 
                 clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
+                clsGetRObject.AddParameter("as_file", "TRUE")
 
                 clsAddRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
                 clsAddRObject.AddParameter("object_type_label", Chr(34) & _strAssignToObjectTypeLabel & Chr(34))

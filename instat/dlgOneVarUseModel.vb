@@ -44,7 +44,7 @@ Public Class dlgOneVarUseModel
         'Temp fix: Bugs on second running- an inifinite loop is created
         sdgOneVarUseModFit.rdoCIcdf.Enabled = False
         ucrBase.iHelpTopicID = 375
-        ucrBase.clsRsyntax.iCallType = 2
+        'ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverObject.SetParameter(New RParameter("x", 0))
@@ -95,7 +95,12 @@ Public Class dlgOneVarUseModel
 
         clsRPlotAllFunction.SetPackageName("graphics")
         clsRPlotAllFunction.SetRCommand("plot")
-        clsRPlotAllFunction.iCallType = 3
+        clsRPlotAllFunction.bExcludeAssignedFunctionOutput = False
+        clsRPlotAllFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         clsRplotCDFfunction.SetPackageName("fitdistrplus")
         clsRplotCDFfunction.SetRCommand("cdfcomp")
@@ -129,20 +134,25 @@ Public Class dlgOneVarUseModel
         clsSeqFunction.AddParameter("to", 1)
         clsSeqFunction.AddParameter("by", 0.25)
 
-        clsQuantileFunction.SetRCommand("quantile")
-        clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
         clsRBootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
         clsRBootFunction.AddParameter("niter", 1001)
-        clsRBootFunction.iCallType = 2
-
-        clsQuantileFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
-                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+        clsRBootFunction.bExcludeAssignedFunctionOutput = False
+        clsRBootFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
-                                           strObjectName:="last_model")
+                                           strObjectName:="last_summary")
+
+        clsQuantileFunction.SetRCommand("quantile")
+        clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
+        clsQuantileFunction.bExcludeAssignedFunctionOutput = False
+        clsQuantileFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=2)
@@ -218,7 +228,6 @@ Public Class dlgOneVarUseModel
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
         End If
-        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
         sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 

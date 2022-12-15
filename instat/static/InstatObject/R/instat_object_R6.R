@@ -641,7 +641,7 @@ DataBook$set("public", "get_object", function(data_name = NULL, object_name) {
 }
 )
 
-DataBook$set("public", "get_object_data", function(data_name = NULL, object_name, as_file = TRUE) {
+DataBook$set("public", "get_object_data", function(data_name = NULL, object_name, as_file = FALSE) {
   out <- self$get_object(data_name = data_name, object_name = object_name)
   if(is.null(out)){
     return(NULL)
@@ -655,14 +655,14 @@ DataBook$set("public", "get_object_data", function(data_name = NULL, object_name
 )  
 
 #returns object data from the object_names character vector
-DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL) {
+DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL, as_files = FALSE) {
   out <- list()
   if(is.null(object_names)){
     objects_list <- self$get_objects(data_name = data_name)
     out <- self$get_objects_data(data_name = data_name, object_names = names(objects_list) )
   }else{
     for(object_name in object_names){
-      object_data <- self$get_object_data(data_name = data_name, object_name = object_name, as_file = FALSE)
+      object_data <- self$get_object_data(data_name = data_name, object_name = object_name, as_file = as_files)
       if(!is.null(object_data)){
         out[[object_name]] <- object_data
       }

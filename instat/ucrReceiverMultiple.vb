@@ -179,7 +179,8 @@ Public Class ucrReceiverMultiple
                      RObjectTypeLabel.Summary,
                      RObjectTypeLabel.StructureLabel
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects_data")
-                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("object_names", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("as_files", "FALSE")
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
