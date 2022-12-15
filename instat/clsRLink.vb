@@ -814,7 +814,9 @@ Public Class RLink
 
             'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
-            If strLastScript.Contains("get_object_data") OrElse strLastScript.Contains("get_last_object_data") OrElse strLastScript.Contains("view_object") Then
+            If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
+                strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
+                strLastScript.StartsWith("view_object_data") Then
                 Dim strFilePathName As String = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                 'if last function is view_object then display in external viewer (maximised)
                 clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, strLastScript.Contains("view_object"))
@@ -854,7 +856,7 @@ Public Class RLink
                     End If
 
                     If bSuccess Then
-                        strOutput = GetFileOutput("view_object(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
+                        strOutput = GetFileOutput("view_object_data(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                     End If
                 End If
 

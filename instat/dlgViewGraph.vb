@@ -79,7 +79,7 @@ Public Class dlgViewGraph
         clsPrintRFunction.SetRCommand("print")
         clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsGetObjectRFunction, iPosition:=0)
 
-        clsViewObjectRFunction.SetRCommand("view_object")
+        clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
 

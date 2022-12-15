@@ -2109,7 +2109,7 @@ Public Class frmMain
         clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
 
         Dim clsViewObjectRFunction As New RFunction
-        clsViewObjectRFunction.SetRCommand("view_object")
+        clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsLastObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
 
@@ -2130,7 +2130,7 @@ Public Class frmMain
         clsPlotlyRFunction.SetRCommand("ggplotly")
         clsPlotlyRFunction.AddParameter("p", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
 
-        clsViewObjectRFunction.SetRCommand("view_object")
+        clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
@@ -2144,19 +2144,11 @@ Public Class frmMain
         clsLastObjectRFunction.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object_data")
         clsLastObjectRFunction.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
         clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
-        'clsLastObjectRFunction.SetAssignToObject("last_graph")
-        'clsLastObjectRFunction.bExcludeAssignedFunctionOutput = False
 
         clsPrintRFunction.SetRCommand("print")
         clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
 
-        'Dim strScript1 As String = ""
-        ' Dim strScript2 As String = clsPrintRFunction.ToScript(strScript1)
-
-        'todo. should this script be logged?
-        ' clsRLink.RunScript(strScript1 & strScript2, strComment:="View last graph in R viewer", bSeparateThread:=False)
         clsRLink.RunScript(clsPrintRFunction.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False)
-
 
     End Sub
 

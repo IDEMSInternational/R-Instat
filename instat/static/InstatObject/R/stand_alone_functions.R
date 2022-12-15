@@ -2617,7 +2617,7 @@ cbind_unique <- function(x, y, cols){
 
 #object is the object to be displayed
 #object_format is the display format
-view_object <- function(object, object_format = NULL) {
+view_object_data <- function(object, object_format = NULL) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
@@ -2629,6 +2629,15 @@ view_object <- function(object, object_format = NULL) {
     print(object)
   }
   return(file_name)
+}
+
+view_object <- function(data_book_object) {
+  return(
+    view_object_data(
+      object = data_book_object$object,
+      object_format = data_book_object$object_format
+    )
+  )
 }
 
 #displays the graph object in the set R "viewer".

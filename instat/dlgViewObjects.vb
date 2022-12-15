@@ -20,8 +20,7 @@ Imports RDotNet
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetObjectRFunction As New RFunction
-    Private clsShowObjectStructureRFunction As New RFunction
+    Private clsGetObjectRFunction, clsShowObjectStructureRFunction, clsViewObjectRFunction As New RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -53,24 +52,28 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetItemType("object")
         ucrReceiverSelectedObject.bAutoFill = True
 
+        'todo. disabling this for now until they're working correctly.
+        rdoAllContents.Enabled = False
+        rdoComponent.Enabled = False
+
         'add radio buttons to the panel rdo's
         ucrPnlContentsToView.AddRadioButton(rdoPrint)
         ucrPnlContentsToView.AddRadioButton(rdoStructure)
         'ucrPnlContentsToView.AddRadioButton(rdoAllContents) 'to be added later
         'ucrPnlContentsToView.AddRadioButton(rdoComponent) 'to be added later
 
-        ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        ucrPnlContentsToView.AddFunctionNamesCondition(rdoStructure, "str")
+        'ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        ucrPnlContentsToView.AddParameterValueFunctionNamesCondition(rdoPrint, "object", frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        ucrPnlContentsToView.AddParameterValueFunctionNamesCondition(rdoStructure, "object", "str")
 
-        'we are disabling this for now until they're working correctly.
-        rdoAllContents.Enabled = False
-        rdoComponent.Enabled = False
+
     End Sub
 
     Private Sub SetDefaults()
         'initialise the Rfunctions
         clsGetObjectRFunction = New RFunction
         clsShowObjectStructureRFunction = New RFunction
+        clsViewObjectRFunction = New RFunction
 
         'reset controls to default states
         ucrSelectorForViewObject.Reset()
@@ -78,19 +81,26 @@ Public Class dlgViewObjects
 
         'set R function for getting and viewing objects
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=3)
 
         'set R function for showing selected object structure
         clsShowObjectStructureRFunction.SetRCommand("str")
         clsShowObjectStructureRFunction.AddParameter(New RParameter("object", clsGetObjectRFunction, iNewPosition:=0))
 
+        clsViewObjectRFunction.SetRCommand("view_object_data")
+        clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+        clsViewObjectRFunction.AddParameter("object_format",
+                                            strParameterValue:=Chr(34) & RObjectFormat.Text & Chr(34))
+
+
         'set the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorForViewObject.SetRCode(clsGetObjectRFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsGetObjectRFunction, bReset)
-        ucrPnlContentsToView.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlContentsToView.SetRCode(clsViewObjectRFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -106,11 +116,13 @@ Public Class dlgViewObjects
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
         'set the appropriate Base RFunction
         If rdoPrint.Checked Then
-            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="TRUE", iPosition:=3)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectRFunction)
+            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+            clsViewObjectRFunction.RemoveParameterByName("object_format")
         ElseIf rdoStructure.Checked Then
-            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=3)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsShowObjectStructureRFunction)
+            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsShowObjectStructureRFunction)
+            clsViewObjectRFunction.AddParameter("object_format",
+                                            strParameterValue:=Chr(34) & RObjectFormat.Text & Chr(34))
+
         End If
     End Sub
 

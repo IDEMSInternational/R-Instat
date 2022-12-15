@@ -646,7 +646,7 @@ DataBook$set("public", "get_object_data", function(data_name = NULL, object_name
   if(is.null(out)){
     return(NULL)
   }else if(as_file){
-    out <- view_object(object = out$object, object_format = out$object_format)
+    out <- view_object_data(object = out$object, object_format = out$object_format)
   }else{
     out <- out$object
   }
