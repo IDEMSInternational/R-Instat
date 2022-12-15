@@ -224,9 +224,9 @@ Public Class ucrReceiverSingle
 
             'TODO make this an option set in Options menu
             If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
-                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignToObject(strRObjectToAssignTo:=strDataFrameName & "." & txtReceiverSingle.Text)
             Else
-                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignToObject(strRObjectToAssignTo:=txtReceiverSingle.Text)
             End If
             Return clsGetVariablesFunc
         Else

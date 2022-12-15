@@ -39,7 +39,6 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrNewDataFrameName.Visible = False ' TODO: Discuss this, do we want this?
 
         'Temp fix: Bugs on second running- an inifinite loop is created
         sdgOneVarUseModFit.rdoCIcdf.Enabled = False
@@ -52,27 +51,29 @@ Public Class dlgOneVarUseModel
         ucrReceiverObject.SetParameterIsRFunction()
         ucrReceiverObject.SetMeAsReceiver()
         ucrReceiverObject.strSelectorHeading = "Models"
-        ucrReceiverObject.SetItemType("model")
+        ucrReceiverObject.SetItemType(RObjectTypeLabel.Model)
 
         ucrChkProduceBootstrap.AddRSyntaxContainsFunctionNamesCondition(True, {"bootdist"})
         ucrChkProduceBootstrap.AddRSyntaxContainsFunctionNamesCondition(False, {"bootdist"}, False)
-        ucrChkProduceBootstrap.AddToLinkedControls(ucrSaveObjects, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=False)
+        'ucrChkProduceBootstrap.AddToLinkedControls(ucrSaveObjects, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=False)
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
 
-        'This part is temporary for now
+        'This control is not used yet 
+        ucrNewDataFrameName.Visible = False
+        'ucrNewDataFrameName.SetPrefix("use_model")
+        'ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
+        'ucrNewDataFrameName.SetSaveTypeAsModel()
+        'ucrNewDataFrameName.SetIsComboBox()
+        'ucrNewDataFrameName.SetCheckBoxText("Save Model")
+        'ucrNewDataFrameName.SetAssignToIfUncheckedValue("last_model")
 
-        ucrNewDataFrameName.SetPrefix("use_model")
-        ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
-        ucrNewDataFrameName.SetSaveTypeAsModel()
-        ucrNewDataFrameName.SetIsComboBox()
-        ucrNewDataFrameName.SetCheckBoxText("Save Model")
-        ucrNewDataFrameName.SetAssignToIfUncheckedValue("last_model")
-
-        ucrSaveObjects.SetPrefix("bootstrap")
-        ucrSaveObjects.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
-        ucrSaveObjects.SetSaveTypeAsModel()
-        ucrSaveObjects.SetIsComboBox()
-        ucrSaveObjects.SetCheckBoxText("Save Bootstrap")
+        'This control is not used yet 
+        ucrSaveObjects.Visible = False
+        'ucrSaveObjects.SetPrefix("bootstrap")
+        'ucrSaveObjects.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
+        'ucrSaveObjects.SetSaveTypeAsModel()
+        'ucrSaveObjects.SetIsComboBox()
+        'ucrSaveObjects.SetCheckBoxText("Save Bootstrap")
         'ucrSaveObjects.SetAssignToIfUncheckedValue("last_bootstrap")
     End Sub
 
@@ -86,12 +87,8 @@ Public Class dlgOneVarUseModel
         clsRplotQQfunction = New RFunction
         clsRplotDensfunction = New RFunction
         clsRplotCIfunction = New RFunction
-        ' clsRNoPlotfunction = New RFunction
 
         ucrSelectorUseModel.Reset()
-        ucrSaveObjects.Enabled = False ' temporary
-        ucrSaveObjects.Reset()
-        ucrNewDataFrameName.Reset()
 
         clsRPlotAllFunction.SetPackageName("graphics")
         clsRPlotAllFunction.SetRCommand("plot")
@@ -105,29 +102,42 @@ Public Class dlgOneVarUseModel
         clsRplotCDFfunction.SetPackageName("fitdistrplus")
         clsRplotCDFfunction.SetRCommand("cdfcomp")
         clsRplotCDFfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-        clsRplotCDFfunction.iCallType = 3
+        clsRplotCDFfunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         clsRplotQQfunction.SetPackageName("fitdistrplus")
         clsRplotQQfunction.SetRCommand("qqcomp")
         clsRplotQQfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-        clsRplotQQfunction.iCallType = 3
+        clsRplotQQfunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         clsRplotDensfunction.SetPackageName("fitdistrplus")
         clsRplotDensfunction.SetRCommand("denscomp")
         clsRplotDensfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-        clsRplotDensfunction.iCallType = 3
+        clsRplotDensfunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         clsRplotPPfunction.SetPackageName("fitdistrplus")
         clsRplotPPfunction.SetRCommand("ppcomp")
         clsRplotPPfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-        clsRplotPPfunction.iCallType = 3
+        clsRplotPPfunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorUseModel.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
+        'todo. this option is disabled in the subdialog
         clsRplotCIfunction.SetPackageName("fitdistrplus")
         clsRplotCIfunction.SetRCommand("CIcdfplot")
-        clsRplotCIfunction.iCallType = 3
-
-        'Temporary as we think of how to implement No plot option
-        '  clsRNoPlotfunction.SetRCommand("")
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
@@ -171,13 +181,12 @@ Public Class dlgOneVarUseModel
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotDensfunction, New RParameter("ft", 0), iAdditionalPairNo:=6)
         ucrChkProduceBootstrap.SetRCode(clsRBootFunction, bReset)
         ucrChkProduceBootstrap.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrNewDataFrameName.SetRCode(clsQuantileFunction, bReset)
-        ucrSaveObjects.SetRCode(clsRBootFunction, bReset)
+
 
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverObject.IsEmpty AndAlso ucrSaveObjects.IsComplete() AndAlso ucrNewDataFrameName.IsComplete() Then
+        If Not ucrReceiverObject.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -223,10 +232,10 @@ Public Class dlgOneVarUseModel
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsRBootFunction, iPosition:=1)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRBootFunction)
         End If
         sdgOneVarUseModFit.SetPlotOptions()
     End Sub
