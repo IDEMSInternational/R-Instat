@@ -41,6 +41,7 @@ Public Class frmMain
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -76,7 +77,7 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-
+        Logger.Info("R-Instat started")
         ' This call is required by the designer.
         InitializeComponent()
 
