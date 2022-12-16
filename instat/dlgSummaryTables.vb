@@ -323,13 +323,13 @@ Public Class dlgSummaryTables
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
-        clsSummaryDefaultFunction.SetAssignTo("summary_table")
+        clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
         clsFrequencyDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=2)
         clsFrequencyDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=10)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
-        clsFrequencyDefaultFunction.SetAssignTo("frequency_table")
+        clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
 
         clsTableTitleFunction.SetPackageName("gt")
         clsTableTitleFunction.SetRCommand("tab_header")
@@ -385,9 +385,7 @@ Public Class dlgSummaryTables
 
         clsStyleListFunction.SetRCommand("list")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-
         clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -618,15 +616,11 @@ Public Class dlgSummaryTables
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
         Else
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("frequency_table")
         End If
     End Sub
