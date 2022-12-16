@@ -87,27 +87,46 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorColumn.Reset()
-        ucrReceiverForTestColumn.SetMeAsReceiver()
-        ucrSaveResult.Reset()
-        ucrSaveResult.ucrChkSave.Checked = False
-        ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        ucrBase.clsRsyntax.clsBaseCommandString.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorColumn.strCurrentDataFrame,
+                                           strObjectName:="last_model")
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
+
+        clsSummary.SetRCommand("summary")
+        clsSummary.bExcludeAssignedFunctionOutput = False
+
+        clsAttach.SetRCommand("attach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+
         ucrChkDisplayModel.Checked = True
         ucrChkIncludeArguments.Checked = False
         ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, bNewIsPositive:=True)
         ucrInputComboRPackage.SetName("Stats1")
-        clsAttach.SetRCommand("attach")
-        clsDetach.SetRCommand("detach")
-        clsSummary.SetRCommand("summary")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
-        clsDetach.AddParameter("unload", "TRUE")
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+        ucrSelectorColumn.Reset()
+        ucrReceiverForTestColumn.SetMeAsReceiver()
+        ucrSaveResult.Reset()
+        ucrSaveResult.ucrChkSave.Checked = False
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+
+    End Sub
+
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        clsSummary.AddParameter("object", strParameterValue:=ucrBase.clsRsyntax.clsBaseCommandString.GetRObjectToAssignTo(), iPosition:=0)
+        clsSummary.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorColumn.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
+
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
