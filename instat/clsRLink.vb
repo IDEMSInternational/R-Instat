@@ -811,39 +811,46 @@ Public Class RLink
         '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
 
         Try
+            Dim strOutput As String = ""
+            Dim bAsFile As Boolean = True
+            Dim bDisplayOutputInExternalViewer As Boolean = False
 
             'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
             If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
                 strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
                 strLastScript.StartsWith("view_object_data") Then
-                Dim strFilePathName As String = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
+
+                strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                 'if last function is view_object then display in external viewer (maximised)
-                clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, strLastScript.Contains("view_object"))
+                bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
+
+            ElseIf strLastScript.StartsWith("print") Then
+                bAsFile = False
+                Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             ElseIf iCallType = 0 Then
                 'if script output should be ignored. todo. deprecate this block after implementing correctly
+                bAsFile = False
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                clsOutputLogger.AddOutput(strScriptWithComment, "", False, False)
             ElseIf iCallType = 1 OrElse iCallType = 4 Then
                 'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
                 'else if script output should be stored in a temp variable
                 ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
-
+                bAsFile = False
                 Dim strTempAssignTo As String = ".temp_val"
                 'TODO check this is valid syntax in all cases
                 '     i.e. this is potentially: x <- y <- 1
                 Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 Dim expTemp As RDotNet.SymbolicExpression = GetSymbol(strTempAssignTo)
-                Dim strOutput As String = ""
                 If expTemp IsNot Nothing Then
                     strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                 End If
-                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, False, False)
+
+
             Else
                 'else if script output should not be ignored or not stored as an object or variable
 
                 Dim arrRScriptLines() As String = GetRunnableCommandLines(strScript)
-                Dim strOutput As String = ""
                 'if output should be stored as a variable just execute the script
                 If arrRScriptLines.Last().Contains("<-") Then
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -860,10 +867,10 @@ Public Class RLink
                     End If
                 End If
 
-                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, True, False)
-
             End If
 
+            'log script and output
+            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
         End Try

@@ -2616,7 +2616,8 @@ cbind_unique <- function(x, y, cols){
 }
 
 #object is the object to be displayed
-#object_format is the display format
+#object_format is the display format. If supplied, then returns file name of the object
+#if not then it prints the object
 view_object_data <- function(object, object_format = NULL) {
   file_name <- ""
   if (identical(object_format, "image")) {
