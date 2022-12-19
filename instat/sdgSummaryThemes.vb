@@ -26,7 +26,7 @@ Public Class sdgSummaryThemes
     End Sub
 
     Private Sub InitialiseControls()
-        Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles As New Dictionary(Of String, String)
+        Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform As New Dictionary(Of String, String)
 
         dctWeights.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctWeights.Add("Normal", Chr(34) & "normal" & Chr(34))
@@ -291,6 +291,106 @@ Public Class sdgSummaryThemes
         ucrChkTableLeftColor.AddToLinkedControls(ucrInputTableLeftColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableLeftStyle.AddToLinkedControls(ucrInputTableLeftStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableLeftWidth.AddToLinkedControls(ucrNudTableLeftWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkColumnsBackColor.SetText("Background Color")
+        ucrInputColumnsBackColor.SetParameter(New RParameter("column_labels.background.color", iNewPosition:=35))
+        ucrInputColumnsBackColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrChkColumnsBackColor.AddParameterPresentCondition(True, "column_labels.background.color")
+        ucrChkColumnsBackColor.AddParameterPresentCondition(False, "column_labels.background.color", False)
+
+        ucrChkColumnsPadding.SetText("Vertical Padding")
+        ucrInputColumnsPadding.SetParameter(New RParameter("column_labels.padding", iNewPosition:=1))
+        ' ucrInputColumnsPadding.SetItems(dctAlignment)
+        ucrChkColumnsPadding.AddParameterPresentCondition(True, "column_labels.padding")
+        ucrChkColumnsPadding.AddParameterPresentCondition(False, "column_labels.padding", False)
+
+        ucrChkColumnsFontSize.SetText("Font Size")
+        ucrNudColumnsFontSize.SetParameter(New RParameter("column_labels.font.size", iNewPosition:=2))
+        ucrNudColumnsFontSize.SetRDefault(0)
+        ucrChkColumnsFontSize.AddParameterPresentCondition(True, "column_labels.font.size")
+        ucrChkColumnsFontSize.AddParameterPresentCondition(False, "column_labels.font.size", False)
+
+        ucrChkColumnsHorizontalPadding.SetText("Horizontal Padding")
+        ucrInputColumnsHorizontalPadding.SetParameter(New RParameter("column_labels.padding.horizontal", iNewPosition:=3))
+        'ucrInputColumnsHorizontalPadding.SetRDefault(0)
+        ucrChkColumnsHorizontalPadding.AddParameterPresentCondition(True, "column_labels.padding.horizontal")
+        ucrChkColumnsHorizontalPadding.AddParameterPresentCondition(False, "column_labels.padding.horizontal", False)
+
+        ucrChkColumnsFontWeight.SetText("Font Weights")
+        ucrInputColumnsFontWeight.SetParameter(New RParameter("column_labels.font.weight", iNewPosition:=4))
+        ucrInputColumnsFontWeight.SetItems(dctWeights)
+        ucrChkColumnsFontWeight.AddParameterPresentCondition(True, "column_labels.font.weight")
+        ucrChkColumnsFontWeight.AddParameterPresentCondition(False, "column_labels.font.weight", False)
+
+        ucrChkColumnsTextTransform.SetText("Text Transform")
+        ucrInputColumnsTextTransform.SetParameter(New RParameter("column_labels.text_transform", iNewPosition:=5))
+        ucrInputColumnsTextTransform.SetItems(dctTextTransform)
+        ucrChkColumnsTextTransform.AddParameterPresentCondition(True, "column_labels.text_transform")
+        ucrChkColumnsTextTransform.AddParameterPresentCondition(False, "column_labels.text_transform", False)
+
+        ucrChkBoxWidth.SetText("Width of box")
+        ucrNudBoxWidth.SetParameter(New RParameter("heading.padding", iNewPosition:=6))
+        ucrNudBoxWidth.SetRDefault(0)
+        ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding")
+        ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding", False)
+
+        ucrChkBoxWidth.SetText("Length of box")
+        ucrNudBoxWidth.SetParameter(New RParameter("heading.padding.horizontal", iNewPosition:=7))
+        ucrNudBoxWidth.SetRDefault(0)
+        ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding.horizontal")
+        ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding,horizontal", False)
+
+        ucrChkBottomWidth.SetText("Width of bottom border")
+        ucrNudBottomWidth.SetParameter(New RParameter("heading.border.bottom.width", iNewPosition:=8))
+        ucrNudBottomWidth.SetRDefault(0)
+        ucrChkBottomWidth.AddParameterPresentCondition(True, "heading.border.bottom.width")
+        ucrChkBottomWidth.AddParameterPresentCondition(False, "heading.border.bottom.width", False)
+
+        ucrChkBottomStyle.SetText("Style of bottom border")
+        ucrInputBottomStyle.SetParameter(New RParameter("heading.border.bottom.style", iNewPosition:=9))
+        ucrInputBottomStyle.SetItems(dctBorderStyles)
+        ucrChkBottomStyle.AddParameterPresentCondition(True, "heading.border.bottom.style")
+        ucrChkBottomStyle.AddParameterPresentCondition(False, "heading.border.bottom.style", False)
+
+        ucrChkBottomColour.SetText("Colour of bottom border")
+        ucrInputBottomColour.SetParameter(New RParameter("heading.border.bottom.color", iNewPosition:=10))
+        ucrInputBottomColour.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrChkBottomColour.AddParameterPresentCondition(True, "heading.border.bottom.color")
+        ucrChkBottomColour.AddParameterPresentCondition(False, "heading.border.bottom.color", False)
+
+        ucrChkSideWidth.SetText("Width of side border")
+        ucrNudSideWidth.SetParameter(New RParameter("heading.border.lr.width", iNewPosition:=11))
+        ucrNudSideWidth.SetRDefault(0)
+        ucrChkSideWidth.AddParameterPresentCondition(True, "heading.border.lr.width")
+        ucrChkSideWidth.AddParameterPresentCondition(False, "heading.border.lr.width", False)
+
+        ucrChkSideStyle.SetText("Style of side border")
+        ucrInputSideStyle.SetParameter(New RParameter("heading.border.lr.style", iNewPosition:=12))
+        ucrInputSideStyle.SetItems(dctBorderStyles)
+        ucrChkSideStyle.AddParameterPresentCondition(True, "heading.border.lr.style")
+        ucrChkSideStyle.AddParameterPresentCondition(False, "heading.border.lr.style", False)
+
+        ucrChkSideColour.SetText("Colour of side border")
+        ucrInputSideColour.SetParameter(New RParameter("heading.border.lr.colour", iNewPosition:=13))
+        ucrInputSideColour.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrChkSideColour.AddParameterPresentCondition(True, "heading.border.lr.colour")
+        ucrChkSideColour.AddParameterPresentCondition(False, "heading.border.lr.colour", False)
+
+        ucrChkBackgroundColour.AddToLinkedControls(ucrInputBackgroundColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrChkAlignment.AddToLinkedControls(ucrInputAlignment, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Vertical")
+        ucrChkFontSize.AddToLinkedControls(ucrNudFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Top")
+        ucrChkFontWeight.AddToLinkedControls(ucrInputFontWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Vertical")
+        ucrChkSubTitleSize.AddToLinkedControls(ucrNudSubTitleSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Top")
+        ucrChkSubTitleWeight.AddToLinkedControls(ucrInputSubTitleWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Normal")
+        ucrChkBoxWidth.AddToLinkedControls(ucrNudBoxWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBoxLength.AddToLinkedControls(ucrNudBoxLength, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBottomWidth.AddToLinkedControls(ucrNudBottomWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBottomStyle.AddToLinkedControls(ucrInputBottomStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBottomColour.AddToLinkedControls(ucrInputBottomColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSideWidth.AddToLinkedControls(ucrNudSideWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSideStyle.AddToLinkedControls(ucrInputSideStyle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkSideColour.AddToLinkedControls(ucrInputSideColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
     End Sub
 
     Public Sub SetRCode(bReset As Boolean, clsNewThemesTabOption As RFunction)
@@ -336,4 +436,5 @@ Public Class sdgSummaryThemes
         ucrInputTableLeftStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTableLeftWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
     End Sub
+
 End Class
