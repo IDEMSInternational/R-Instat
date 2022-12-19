@@ -496,6 +496,9 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.grpComplex = New System.Windows.Forms.GroupBox()
+        Me.cmdAsComplex = New System.Windows.Forms.Button()
+        Me.cmdReal = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -516,6 +519,7 @@ Partial Class ucrCalculator
         Me.grpCircular.SuspendLayout()
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
+        Me.grpComplex.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -5873,11 +5877,47 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'grpComplex
+        '
+        Me.grpComplex.Controls.Add(Me.cmdReal)
+        Me.grpComplex.Controls.Add(Me.cmdAsComplex)
+        Me.grpComplex.Location = New System.Drawing.Point(434, 69)
+        Me.grpComplex.Name = "grpComplex"
+        Me.grpComplex.Size = New System.Drawing.Size(200, 100)
+        Me.grpComplex.TabIndex = 198
+        Me.grpComplex.TabStop = False
+        Me.grpComplex.Text = "Complex"
+        '
+        'cmdAsComplex
+        '
+        Me.cmdAsComplex.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAsComplex.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAsComplex.Location = New System.Drawing.Point(5, 19)
+        Me.cmdAsComplex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAsComplex.Name = "cmdAsComplex"
+        Me.cmdAsComplex.Size = New System.Drawing.Size(57, 30)
+        Me.cmdAsComplex.TabIndex = 176
+        Me.cmdAsComplex.Text = "complex"
+        Me.cmdAsComplex.UseVisualStyleBackColor = True
+        '
+        'cmdReal
+        '
+        Me.cmdReal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdReal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdReal.Location = New System.Drawing.Point(64, 19)
+        Me.cmdReal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdReal.Name = "cmdReal"
+        Me.cmdReal.Size = New System.Drawing.Size(57, 30)
+        Me.cmdReal.TabIndex = 177
+        Me.cmdReal.Text = "real"
+        Me.cmdReal.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpComplex)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpInteger)
@@ -5927,6 +5967,7 @@ Partial Class ucrCalculator
         Me.grpCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
+        Me.grpComplex.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -6392,4 +6433,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmduni_integer As Button
     Friend WithEvents cmdRan_normal As Button
     Friend WithEvents cmduniform As Button
+    Friend WithEvents grpComplex As GroupBox
+    Friend WithEvents cmdReal As Button
+    Friend WithEvents cmdAsComplex As Button
 End Class
