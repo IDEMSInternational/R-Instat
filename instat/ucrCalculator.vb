@@ -1504,7 +1504,7 @@ Public Class ucrCalculator
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click, cmdComplexRHelp.Click
         OpenHelpPage()
     End Sub
 
@@ -4739,6 +4739,78 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReal_Click(sender As Object, e As EventArgs) Handles cmdReal.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdImaginary_Click(sender As Object, e As EventArgs) Handles cmdImaginary.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMod_Click(sender As Object, e As EventArgs) Handles cmdMod.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdArg_Click(sender As Object, e As EventArgs) Handles cmdArg.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdConjugate_Click(sender As Object, e As EventArgs) Handles cmdConjugate.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexLog_Click(sender As Object, e As EventArgs) Handles cmdComplexLog.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= , base=exp(1))", 14)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSqrt_Click_1(sender As Object, e As EventArgs) Handles cmdComplexSqrt.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexRound_Click(sender As Object, e As EventArgs) Handles cmdComplexRound.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexExp_Click_1(sender As Object, e As EventArgs) Handles cmdComplexExp.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp()", 1)
         End If
     End Sub
 End Class
