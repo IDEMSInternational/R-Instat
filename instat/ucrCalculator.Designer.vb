@@ -491,12 +491,20 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.cmdStringRHelp = New System.Windows.Forms.Button()
-        Me.ucrSaveResultInto = New instat.ucrSave()
-        Me.ucrTryCalculator = New instat.ucrTry()
-        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
-        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpComplex = New System.Windows.Forms.GroupBox()
+        Me.cmdComplexRHelp = New instat.ucrSplitButton()
+        Me.ContextMenuStripComplex = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ComplexBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdComplexTanH = New System.Windows.Forms.Button()
+        Me.cmdComplexTan = New System.Windows.Forms.Button()
+        Me.cmdComplexPi = New System.Windows.Forms.Button()
+        Me.cmdComplexDeg = New System.Windows.Forms.Button()
+        Me.cmdComplexRad = New System.Windows.Forms.Button()
+        Me.cmdComplexSignif = New System.Windows.Forms.Button()
+        Me.cmdComplexCosH = New System.Windows.Forms.Button()
+        Me.cmdComplexSinH = New System.Windows.Forms.Button()
+        Me.cmdComplexCos = New System.Windows.Forms.Button()
+        Me.cmdComplexSin = New System.Windows.Forms.Button()
         Me.cmdComplexExp = New System.Windows.Forms.Button()
         Me.cmdComplexRound = New System.Windows.Forms.Button()
         Me.cmdComplexLog = New System.Windows.Forms.Button()
@@ -507,7 +515,11 @@ Partial Class ucrCalculator
         Me.cmdImaginary = New System.Windows.Forms.Button()
         Me.cmdReal = New System.Windows.Forms.Button()
         Me.cmdAsComplex = New System.Windows.Forms.Button()
-        Me.cmdComplexRHelp = New System.Windows.Forms.Button()
+        Me.ucrSaveResultInto = New instat.ucrSave()
+        Me.ucrTryCalculator = New instat.ucrTry()
+        Me.ucrInputCalOptions = New instat.ucrInputComboBox()
+        Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpInteger.SuspendLayout()
@@ -529,6 +541,7 @@ Partial Class ucrCalculator
         Me.grpModifier.SuspendLayout()
         Me.grpSymbols.SuspendLayout()
         Me.grpComplex.SuspendLayout()
+        Me.ContextMenuStripComplex.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblExpression
@@ -5830,6 +5843,300 @@ Partial Class ucrCalculator
         Me.cmdStringRHelp.Text = "R Help"
         Me.cmdStringRHelp.UseVisualStyleBackColor = True
         '
+        'grpComplex
+        '
+        Me.grpComplex.Controls.Add(Me.cmdComplexRHelp)
+        Me.grpComplex.Controls.Add(Me.cmdComplexTanH)
+        Me.grpComplex.Controls.Add(Me.cmdComplexTan)
+        Me.grpComplex.Controls.Add(Me.cmdComplexPi)
+        Me.grpComplex.Controls.Add(Me.cmdComplexDeg)
+        Me.grpComplex.Controls.Add(Me.cmdComplexRad)
+        Me.grpComplex.Controls.Add(Me.cmdComplexSignif)
+        Me.grpComplex.Controls.Add(Me.cmdComplexCosH)
+        Me.grpComplex.Controls.Add(Me.cmdComplexSinH)
+        Me.grpComplex.Controls.Add(Me.cmdComplexCos)
+        Me.grpComplex.Controls.Add(Me.cmdComplexSin)
+        Me.grpComplex.Controls.Add(Me.cmdComplexExp)
+        Me.grpComplex.Controls.Add(Me.cmdComplexRound)
+        Me.grpComplex.Controls.Add(Me.cmdComplexLog)
+        Me.grpComplex.Controls.Add(Me.cmdComplexSqrt)
+        Me.grpComplex.Controls.Add(Me.cmdConjugate)
+        Me.grpComplex.Controls.Add(Me.cmdArg)
+        Me.grpComplex.Controls.Add(Me.cmdMod)
+        Me.grpComplex.Controls.Add(Me.cmdImaginary)
+        Me.grpComplex.Controls.Add(Me.cmdReal)
+        Me.grpComplex.Controls.Add(Me.cmdAsComplex)
+        Me.grpComplex.Location = New System.Drawing.Point(434, 69)
+        Me.grpComplex.Name = "grpComplex"
+        Me.grpComplex.Size = New System.Drawing.Size(288, 226)
+        Me.grpComplex.TabIndex = 198
+        Me.grpComplex.TabStop = False
+        Me.grpComplex.Text = "Complex"
+        '
+        'cmdComplexRHelp
+        '
+        Me.cmdComplexRHelp.AutoSize = True
+        Me.cmdComplexRHelp.ContextMenuStrip = Me.ContextMenuStripComplex
+        Me.cmdComplexRHelp.Location = New System.Drawing.Point(183, 169)
+        Me.cmdComplexRHelp.Name = "cmdComplexRHelp"
+        Me.cmdComplexRHelp.Size = New System.Drawing.Size(91, 23)
+        Me.cmdComplexRHelp.SplitMenuStrip = Me.ContextMenuStripComplex
+        Me.cmdComplexRHelp.TabIndex = 209
+        Me.cmdComplexRHelp.Text = "R Help"
+        Me.cmdComplexRHelp.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripComplex
+        '
+        Me.ContextMenuStripComplex.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComplexBaseToolStripMenuItem})
+        Me.ContextMenuStripComplex.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripComplex.Size = New System.Drawing.Size(181, 48)
+        '
+        'ComplexBaseToolStripMenuItem
+        '
+        Me.ComplexBaseToolStripMenuItem.Name = "ComplexBaseToolStripMenuItem"
+        Me.ComplexBaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ComplexBaseToolStripMenuItem.Text = "base"
+        '
+        'cmdComplexTanH
+        '
+        Me.cmdComplexTanH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexTanH.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexTanH.Location = New System.Drawing.Point(212, 104)
+        Me.cmdComplexTanH.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexTanH.Name = "cmdComplexTanH"
+        Me.cmdComplexTanH.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexTanH.TabIndex = 208
+        Me.cmdComplexTanH.Text = "tanh"
+        Me.cmdComplexTanH.UseVisualStyleBackColor = True
+        '
+        'cmdComplexTan
+        '
+        Me.cmdComplexTan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexTan.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexTan.Location = New System.Drawing.Point(212, 75)
+        Me.cmdComplexTan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexTan.Name = "cmdComplexTan"
+        Me.cmdComplexTan.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexTan.TabIndex = 207
+        Me.cmdComplexTan.Text = "tan"
+        Me.cmdComplexTan.UseVisualStyleBackColor = True
+        '
+        'cmdComplexPi
+        '
+        Me.cmdComplexPi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexPi.Location = New System.Drawing.Point(212, 133)
+        Me.cmdComplexPi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexPi.Name = "cmdComplexPi"
+        Me.cmdComplexPi.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexPi.TabIndex = 206
+        Me.cmdComplexPi.Text = "pi"
+        Me.cmdComplexPi.UseVisualStyleBackColor = True
+        '
+        'cmdComplexDeg
+        '
+        Me.cmdComplexDeg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexDeg.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexDeg.Location = New System.Drawing.Point(212, 46)
+        Me.cmdComplexDeg.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexDeg.Name = "cmdComplexDeg"
+        Me.cmdComplexDeg.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexDeg.TabIndex = 205
+        Me.cmdComplexDeg.Text = "deg"
+        Me.cmdComplexDeg.UseVisualStyleBackColor = True
+        '
+        'cmdComplexRad
+        '
+        Me.cmdComplexRad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexRad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexRad.Location = New System.Drawing.Point(212, 17)
+        Me.cmdComplexRad.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexRad.Name = "cmdComplexRad"
+        Me.cmdComplexRad.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexRad.TabIndex = 204
+        Me.cmdComplexRad.Text = "rad"
+        Me.cmdComplexRad.UseVisualStyleBackColor = True
+        '
+        'cmdComplexSignif
+        '
+        Me.cmdComplexSignif.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexSignif.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexSignif.Location = New System.Drawing.Point(147, 133)
+        Me.cmdComplexSignif.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexSignif.Name = "cmdComplexSignif"
+        Me.cmdComplexSignif.Size = New System.Drawing.Size(65, 30)
+        Me.cmdComplexSignif.TabIndex = 203
+        Me.cmdComplexSignif.Text = "signif"
+        Me.cmdComplexSignif.UseVisualStyleBackColor = True
+        '
+        'cmdComplexCosH
+        '
+        Me.cmdComplexCosH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexCosH.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexCosH.Location = New System.Drawing.Point(147, 104)
+        Me.cmdComplexCosH.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexCosH.Name = "cmdComplexCosH"
+        Me.cmdComplexCosH.Size = New System.Drawing.Size(65, 30)
+        Me.cmdComplexCosH.TabIndex = 202
+        Me.cmdComplexCosH.Text = "cosh"
+        Me.cmdComplexCosH.UseVisualStyleBackColor = True
+        '
+        'cmdComplexSinH
+        '
+        Me.cmdComplexSinH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexSinH.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexSinH.Location = New System.Drawing.Point(89, 104)
+        Me.cmdComplexSinH.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexSinH.Name = "cmdComplexSinH"
+        Me.cmdComplexSinH.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexSinH.TabIndex = 201
+        Me.cmdComplexSinH.Text = "sinh"
+        Me.cmdComplexSinH.UseVisualStyleBackColor = True
+        '
+        'cmdComplexCos
+        '
+        Me.cmdComplexCos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexCos.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexCos.Location = New System.Drawing.Point(147, 75)
+        Me.cmdComplexCos.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexCos.Name = "cmdComplexCos"
+        Me.cmdComplexCos.Size = New System.Drawing.Size(65, 30)
+        Me.cmdComplexCos.TabIndex = 200
+        Me.cmdComplexCos.Text = "cos"
+        Me.cmdComplexCos.UseVisualStyleBackColor = True
+        '
+        'cmdComplexSin
+        '
+        Me.cmdComplexSin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexSin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexSin.Location = New System.Drawing.Point(89, 75)
+        Me.cmdComplexSin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexSin.Name = "cmdComplexSin"
+        Me.cmdComplexSin.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexSin.TabIndex = 199
+        Me.cmdComplexSin.Text = "sin"
+        Me.cmdComplexSin.UseVisualStyleBackColor = True
+        '
+        'cmdComplexExp
+        '
+        Me.cmdComplexExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexExp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexExp.Location = New System.Drawing.Point(24, 75)
+        Me.cmdComplexExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexExp.Name = "cmdComplexExp"
+        Me.cmdComplexExp.Size = New System.Drawing.Size(65, 30)
+        Me.cmdComplexExp.TabIndex = 192
+        Me.cmdComplexExp.Text = "exp"
+        Me.cmdComplexExp.UseVisualStyleBackColor = True
+        '
+        'cmdComplexRound
+        '
+        Me.cmdComplexRound.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexRound.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexRound.Location = New System.Drawing.Point(89, 133)
+        Me.cmdComplexRound.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexRound.Name = "cmdComplexRound"
+        Me.cmdComplexRound.Size = New System.Drawing.Size(58, 30)
+        Me.cmdComplexRound.TabIndex = 191
+        Me.cmdComplexRound.Text = "round"
+        Me.cmdComplexRound.UseVisualStyleBackColor = True
+        '
+        'cmdComplexLog
+        '
+        Me.cmdComplexLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexLog.Location = New System.Drawing.Point(24, 104)
+        Me.cmdComplexLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexLog.Name = "cmdComplexLog"
+        Me.cmdComplexLog.Size = New System.Drawing.Size(65, 30)
+        Me.cmdComplexLog.TabIndex = 190
+        Me.cmdComplexLog.Text = "log"
+        Me.cmdComplexLog.UseVisualStyleBackColor = True
+        '
+        'cmdComplexSqrt
+        '
+        Me.cmdComplexSqrt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexSqrt.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexSqrt.Location = New System.Drawing.Point(24, 133)
+        Me.cmdComplexSqrt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexSqrt.Name = "cmdComplexSqrt"
+        Me.cmdComplexSqrt.Size = New System.Drawing.Size(65, 30)
+        Me.cmdComplexSqrt.TabIndex = 189
+        Me.cmdComplexSqrt.Text = "sqrt"
+        Me.cmdComplexSqrt.UseVisualStyleBackColor = True
+        '
+        'cmdConjugate
+        '
+        Me.cmdConjugate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdConjugate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdConjugate.Location = New System.Drawing.Point(147, 46)
+        Me.cmdConjugate.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdConjugate.Name = "cmdConjugate"
+        Me.cmdConjugate.Size = New System.Drawing.Size(65, 30)
+        Me.cmdConjugate.TabIndex = 188
+        Me.cmdConjugate.Text = "conjugate"
+        Me.cmdConjugate.UseVisualStyleBackColor = True
+        '
+        'cmdArg
+        '
+        Me.cmdArg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdArg.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdArg.Location = New System.Drawing.Point(89, 46)
+        Me.cmdArg.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdArg.Name = "cmdArg"
+        Me.cmdArg.Size = New System.Drawing.Size(58, 30)
+        Me.cmdArg.TabIndex = 187
+        Me.cmdArg.Text = "arg"
+        Me.cmdArg.UseVisualStyleBackColor = True
+        '
+        'cmdMod
+        '
+        Me.cmdMod.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdMod.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMod.Location = New System.Drawing.Point(24, 46)
+        Me.cmdMod.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMod.Name = "cmdMod"
+        Me.cmdMod.Size = New System.Drawing.Size(65, 30)
+        Me.cmdMod.TabIndex = 186
+        Me.cmdMod.Text = "mod"
+        Me.cmdMod.UseVisualStyleBackColor = True
+        '
+        'cmdImaginary
+        '
+        Me.cmdImaginary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdImaginary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdImaginary.Location = New System.Drawing.Point(147, 17)
+        Me.cmdImaginary.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdImaginary.Name = "cmdImaginary"
+        Me.cmdImaginary.Size = New System.Drawing.Size(65, 30)
+        Me.cmdImaginary.TabIndex = 185
+        Me.cmdImaginary.Text = "imaginary"
+        Me.cmdImaginary.UseVisualStyleBackColor = True
+        '
+        'cmdReal
+        '
+        Me.cmdReal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdReal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdReal.Location = New System.Drawing.Point(89, 17)
+        Me.cmdReal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdReal.Name = "cmdReal"
+        Me.cmdReal.Size = New System.Drawing.Size(58, 30)
+        Me.cmdReal.TabIndex = 177
+        Me.cmdReal.Text = "real"
+        Me.cmdReal.UseVisualStyleBackColor = True
+        '
+        'cmdAsComplex
+        '
+        Me.cmdAsComplex.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAsComplex.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAsComplex.Location = New System.Drawing.Point(24, 17)
+        Me.cmdAsComplex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAsComplex.Name = "cmdAsComplex"
+        Me.cmdAsComplex.Size = New System.Drawing.Size(65, 30)
+        Me.cmdAsComplex.TabIndex = 176
+        Me.cmdAsComplex.Text = "complex"
+        Me.cmdAsComplex.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         Me.ucrSaveResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -5886,163 +6193,23 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'grpComplex
-        '
-        Me.grpComplex.Controls.Add(Me.cmdComplexRHelp)
-        Me.grpComplex.Controls.Add(Me.cmdComplexExp)
-        Me.grpComplex.Controls.Add(Me.cmdComplexRound)
-        Me.grpComplex.Controls.Add(Me.cmdComplexLog)
-        Me.grpComplex.Controls.Add(Me.cmdComplexSqrt)
-        Me.grpComplex.Controls.Add(Me.cmdConjugate)
-        Me.grpComplex.Controls.Add(Me.cmdArg)
-        Me.grpComplex.Controls.Add(Me.cmdMod)
-        Me.grpComplex.Controls.Add(Me.cmdImaginary)
-        Me.grpComplex.Controls.Add(Me.cmdReal)
-        Me.grpComplex.Controls.Add(Me.cmdAsComplex)
-        Me.grpComplex.Location = New System.Drawing.Point(434, 69)
-        Me.grpComplex.Name = "grpComplex"
-        Me.grpComplex.Size = New System.Drawing.Size(307, 135)
-        Me.grpComplex.TabIndex = 198
-        Me.grpComplex.TabStop = False
-        Me.grpComplex.Text = "Complex"
-        '
-        'cmdComplexExp
-        '
-        Me.cmdComplexExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdComplexExp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexExp.Location = New System.Drawing.Point(127, 54)
-        Me.cmdComplexExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdComplexExp.Name = "cmdComplexExp"
-        Me.cmdComplexExp.Size = New System.Drawing.Size(63, 30)
-        Me.cmdComplexExp.TabIndex = 192
-        Me.cmdComplexExp.Text = "exp"
-        Me.cmdComplexExp.UseVisualStyleBackColor = True
-        '
-        'cmdComplexRound
-        '
-        Me.cmdComplexRound.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdComplexRound.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexRound.Location = New System.Drawing.Point(245, 54)
-        Me.cmdComplexRound.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdComplexRound.Name = "cmdComplexRound"
-        Me.cmdComplexRound.Size = New System.Drawing.Size(57, 30)
-        Me.cmdComplexRound.TabIndex = 191
-        Me.cmdComplexRound.Text = "round"
-        Me.cmdComplexRound.UseVisualStyleBackColor = True
-        '
-        'cmdComplexLog
-        '
-        Me.cmdComplexLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdComplexLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexLog.Location = New System.Drawing.Point(189, 54)
-        Me.cmdComplexLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdComplexLog.Name = "cmdComplexLog"
-        Me.cmdComplexLog.Size = New System.Drawing.Size(57, 30)
-        Me.cmdComplexLog.TabIndex = 190
-        Me.cmdComplexLog.Text = "log"
-        Me.cmdComplexLog.UseVisualStyleBackColor = True
-        '
-        'cmdComplexSqrt
-        '
-        Me.cmdComplexSqrt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdComplexSqrt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexSqrt.Location = New System.Drawing.Point(70, 54)
-        Me.cmdComplexSqrt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdComplexSqrt.Name = "cmdComplexSqrt"
-        Me.cmdComplexSqrt.Size = New System.Drawing.Size(58, 30)
-        Me.cmdComplexSqrt.TabIndex = 189
-        Me.cmdComplexSqrt.Text = "sqrt"
-        Me.cmdComplexSqrt.UseVisualStyleBackColor = True
-        '
-        'cmdConjugate
-        '
-        Me.cmdConjugate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdConjugate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdConjugate.Location = New System.Drawing.Point(5, 54)
-        Me.cmdConjugate.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdConjugate.Name = "cmdConjugate"
-        Me.cmdConjugate.Size = New System.Drawing.Size(65, 30)
-        Me.cmdConjugate.TabIndex = 188
-        Me.cmdConjugate.Text = "conjugate"
-        Me.cmdConjugate.UseVisualStyleBackColor = True
-        '
-        'cmdArg
-        '
-        Me.cmdArg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdArg.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdArg.Location = New System.Drawing.Point(245, 25)
-        Me.cmdArg.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdArg.Name = "cmdArg"
-        Me.cmdArg.Size = New System.Drawing.Size(57, 30)
-        Me.cmdArg.TabIndex = 187
-        Me.cmdArg.Text = "arg"
-        Me.cmdArg.UseVisualStyleBackColor = True
-        '
-        'cmdMod
-        '
-        Me.cmdMod.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdMod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMod.Location = New System.Drawing.Point(189, 25)
-        Me.cmdMod.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdMod.Name = "cmdMod"
-        Me.cmdMod.Size = New System.Drawing.Size(57, 30)
-        Me.cmdMod.TabIndex = 186
-        Me.cmdMod.Text = "mod"
-        Me.cmdMod.UseVisualStyleBackColor = True
-        '
-        'cmdImaginary
-        '
-        Me.cmdImaginary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdImaginary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdImaginary.Location = New System.Drawing.Point(127, 25)
-        Me.cmdImaginary.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdImaginary.Name = "cmdImaginary"
-        Me.cmdImaginary.Size = New System.Drawing.Size(63, 30)
-        Me.cmdImaginary.TabIndex = 185
-        Me.cmdImaginary.Text = "imaginary"
-        Me.cmdImaginary.UseVisualStyleBackColor = True
-        '
-        'cmdReal
-        '
-        Me.cmdReal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdReal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdReal.Location = New System.Drawing.Point(70, 25)
-        Me.cmdReal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdReal.Name = "cmdReal"
-        Me.cmdReal.Size = New System.Drawing.Size(58, 30)
-        Me.cmdReal.TabIndex = 177
-        Me.cmdReal.Text = "real"
-        Me.cmdReal.UseVisualStyleBackColor = True
-        '
-        'cmdAsComplex
-        '
-        Me.cmdAsComplex.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAsComplex.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAsComplex.Location = New System.Drawing.Point(5, 25)
-        Me.cmdAsComplex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAsComplex.Name = "cmdAsComplex"
-        Me.cmdAsComplex.Size = New System.Drawing.Size(65, 30)
-        Me.cmdAsComplex.TabIndex = 176
-        Me.cmdAsComplex.Text = "complex"
-        Me.cmdAsComplex.UseVisualStyleBackColor = True
-        '
-        'cmdComplexRHelp
-        '
-        Me.cmdComplexRHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexRHelp.Location = New System.Drawing.Point(228, 90)
-        Me.cmdComplexRHelp.Name = "cmdComplexRHelp"
-        Me.cmdComplexRHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdComplexRHelp.TabIndex = 198
-        Me.cmdComplexRHelp.Text = "R Help"
-        Me.cmdComplexRHelp.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.cmdWakefieldHelp)
+        Me.Controls.Add(Me.cmdStringRHelp)
+        Me.Controls.Add(Me.ucrSaveResultInto)
+        Me.Controls.Add(Me.ucrTryCalculator)
+        Me.Controls.Add(Me.grpSymbols)
+        Me.Controls.Add(Me.chkShowParameters)
+        Me.Controls.Add(Me.ucrInputCalOptions)
+        Me.Controls.Add(Me.grpBasic)
+        Me.Controls.Add(Me.ucrSelectorForCalculations)
+        Me.Controls.Add(Me.ucrReceiverForCalculation)
+        Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpComplex)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.grpTransform)
@@ -6054,18 +6221,8 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpTestString)
-        Me.Controls.Add(Me.cmdWakefieldHelp)
-        Me.Controls.Add(Me.cmdStringRHelp)
-        Me.Controls.Add(Me.ucrSaveResultInto)
-        Me.Controls.Add(Me.ucrTryCalculator)
-        Me.Controls.Add(Me.grpSymbols)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.chkShowParameters)
-        Me.Controls.Add(Me.ucrInputCalOptions)
-        Me.Controls.Add(Me.grpBasic)
-        Me.Controls.Add(Me.ucrSelectorForCalculations)
-        Me.Controls.Add(Me.ucrReceiverForCalculation)
-        Me.Controls.Add(Me.lblExpression)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(899, 457)
         Me.grpBasic.ResumeLayout(False)
@@ -6092,6 +6249,8 @@ Partial Class ucrCalculator
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.grpComplex.ResumeLayout(False)
+        Me.grpComplex.PerformLayout()
+        Me.ContextMenuStripComplex.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -6568,5 +6727,17 @@ Partial Class ucrCalculator
     Friend WithEvents cmdArg As Button
     Friend WithEvents cmdMod As Button
     Friend WithEvents cmdImaginary As Button
-    Friend WithEvents cmdComplexRHelp As Button
+    Friend WithEvents cmdComplexTanH As Button
+    Friend WithEvents cmdComplexTan As Button
+    Friend WithEvents cmdComplexPi As Button
+    Friend WithEvents cmdComplexDeg As Button
+    Friend WithEvents cmdComplexRad As Button
+    Friend WithEvents cmdComplexSignif As Button
+    Friend WithEvents cmdComplexCosH As Button
+    Friend WithEvents cmdComplexSinH As Button
+    Friend WithEvents cmdComplexCos As Button
+    Friend WithEvents cmdComplexSin As Button
+    Friend WithEvents cmdComplexRHelp As ucrSplitButton
+    Friend WithEvents ContextMenuStripComplex As ContextMenuStrip
+    Friend WithEvents ComplexBaseToolStripMenuItem As ToolStripMenuItem
 End Class
