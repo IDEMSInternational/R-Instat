@@ -196,12 +196,13 @@ Public Class ucrButtons
             Next
             clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
         End If
-        If bRun Then
-            If clsRemoveFunc.clsParameters.Count > 0 Then
+
+        If clsRemoveFunc.clsParameters.Count > 0 Then
+            If bRun Then
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
+            Else
+                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
             End If
-        Else
-            frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
         End If
     End Sub
 
