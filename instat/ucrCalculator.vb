@@ -59,7 +59,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "Integer"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -446,6 +446,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Logical and Symbols"
                 strPackageName = "base"
@@ -467,6 +468,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case "Summary"
                 strPackageName = "base"
                 grpDates.Visible = False
@@ -487,6 +489,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case "Text/Strings (Character Columns)"
                 strPackageName = "stringr"
                 grpDates.Visible = False
@@ -506,6 +509,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = True
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
                 strPackageName = "base"
@@ -527,6 +531,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case "Probability"
                 strPackageName = "stats"
                 grpDates.Visible = False
@@ -546,6 +551,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
                 strPackageName = "lubridate"
@@ -566,6 +572,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
                 strPackageName = "dplyr"
@@ -586,6 +593,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.47, iBaseHeight)
             Case "Wakefield"
                 strPackageName = "wakefield"
@@ -606,6 +614,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.8, iBaseHeight)
             Case "Circular"
                 strPackageName = "circular"
@@ -626,6 +635,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
                 strPackageName = "hydroGOF"
@@ -646,6 +656,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
             Case "Integer"
                 strPackageName = "gmp"
@@ -666,7 +677,29 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = True
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.5, iBaseHeight)
+            Case "Complex"
+                strPackageName = "base"
+                grpSummary.Visible = False
+                grpMaths.Visible = False
+                grpLogical.Visible = False
+                grpBasic.Visible = True
+                grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
+                grpFactor.Visible = False
+                grpProbabilty.Visible = False
+                grpTransform.Visible = False
+                grpDates.Visible = False
+                grpCircular.Visible = False
+                grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
+                grpHydroGOF.Visible = False
+                grpInteger.Visible = False
+                grpComplex.Visible = True
+                Me.Size = New Size(iBasicWidth * 1.3, iBaseHeight)
             Case "Basic"
                 grpSummary.Visible = False
                 grpMaths.Visible = False
@@ -686,6 +719,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, iBaseHeight)
@@ -4561,6 +4595,22 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
+    Private Sub cmdComplexRHelp_Click(sender As Object, e As EventArgs) Handles cmdComplexRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Complex" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ComplexBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComplexBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Complex" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
     Private Sub cmduniform_Click(sender As Object, e As EventArgs) Handles cmduniform.Click
         Dim clsUniformFunction As New RFunction
 
@@ -4698,5 +4748,153 @@ Public Class ucrCalculator
         clsSampleFunction.AddParameter("replace", "TRUE", iPosition:=2)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
+    End Sub
+
+    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReal_Click(sender As Object, e As EventArgs) Handles cmdReal.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdImaginary_Click(sender As Object, e As EventArgs) Handles cmdImaginary.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMod_Click(sender As Object, e As EventArgs) Handles cmdMod.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdArg_Click(sender As Object, e As EventArgs) Handles cmdArg.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdConjugate_Click(sender As Object, e As EventArgs) Handles cmdConjugate.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexLog_Click(sender As Object, e As EventArgs) Handles cmdComplexLog.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= , base=exp(1))", 14)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSqrt_Click_1(sender As Object, e As EventArgs) Handles cmdComplexSqrt.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexRound_Click(sender As Object, e As EventArgs) Handles cmdComplexRound.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexExp_Click_1(sender As Object, e As EventArgs) Handles cmdComplexExp.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSignif_Click(sender As Object, e As EventArgs) Handles cmdComplexSignif.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= , digits=6)", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexCos_Click(sender As Object, e As EventArgs) Handles cmdComplexCos.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSin_Click(sender As Object, e As EventArgs) Handles cmdComplexSin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexTan_Click(sender As Object, e As EventArgs) Handles cmdComplexTan.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexCosH_Click(sender As Object, e As EventArgs) Handles cmdComplexCosH.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSinH_Click(sender As Object, e As EventArgs) Handles cmdComplexSinH.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexTanH_Click(sender As Object, e As EventArgs) Handles cmdComplexTanH.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexRad_Click(sender As Object, e As EventArgs) Handles cmdComplexRad.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rad()", 1)
+    End Sub
+
+    Private Sub cmdComplexDeg_Click(sender As Object, e As EventArgs) Handles cmdComplexDeg.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::deg()", 1)
+    End Sub
+
+    Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
     End Sub
 End Class
