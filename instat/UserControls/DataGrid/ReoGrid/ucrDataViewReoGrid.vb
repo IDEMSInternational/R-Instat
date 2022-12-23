@@ -72,7 +72,12 @@ Public Class ucrDataViewReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
-                If strData.Contains("(") AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                'numeric(0) returns a numeric vector of length 0,
+                'so when you add anything to it you get the same result (it's basically a numeric NULL)
+                'in this case we will display the data as NA
+                If strData = "numeric(0)" Then
+                    strData = "NA"
+                ElseIf strData.Contains("(") AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
                     'get the string in the brackets e.g c(1,2,3), so with this we will display 1,2,3 in the grid.
                     'see issue #7947 for more information
                     strData = strData.Split(New String() {"(", ")"}, StringSplitOptions.None)(1)
