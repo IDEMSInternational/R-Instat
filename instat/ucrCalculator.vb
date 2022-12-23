@@ -1504,7 +1504,7 @@ Public Class ucrCalculator
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs)
         OpenHelpPage()
     End Sub
 
@@ -4607,6 +4607,182 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Complex" Then
             strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdWakefieldHelp_Click(sender As Object, e As EventArgs) Handles cmdWakefieldHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Wakefield" Then
+            strPackageName = "wakefield"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub WakefieldToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WakefieldToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Wakefield" Then
+            strPackageName = "wakefield"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdCircularHelp_Click(sender As Object, e As EventArgs) Handles cmdCircularHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Circular" Then
+            strPackageName = "circular"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub CircularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CircularToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Circular" Then
+            strPackageName = "circular"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdHydroHelp_Click(sender As Object, e As EventArgs) Handles cmdHydroHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "hydroGOF" Then
+            strPackageName = "hydroGOF"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub HydroGOFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HydroGOFToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "hydroGOF" Then
+            strPackageName = "hydroGOF"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsStatsStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsStatsStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdTransformHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Factor" Then
+            strPackageName = "forcats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub FactorForcatsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FactorForcatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Factor" Then
+            strPackageName = "forcats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdLogicalHelp_Click(sender As Object, e As EventArgs) Handles cmdLogicalHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub LogBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub LogDplyrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogDplyrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
+            strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdStringRHelp_Click(sender As Object, e As EventArgs) Handles cmdStringRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "stringr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub TxTStringrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TxTStringrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "stringr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub TxTBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TxTBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdProbRHelp_Click(sender As Object, e As EventArgs) Handles cmdProbRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ProbStatsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbStatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ProbBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "lubridate"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DateLubridateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DateLubridateToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "lubridate"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DateHmsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DateHmsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "hms"
         End If
         OpenHelpPage()
     End Sub
