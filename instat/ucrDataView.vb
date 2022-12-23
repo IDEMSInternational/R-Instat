@@ -354,7 +354,7 @@ Public Class ucrDataView
                         Exit Sub
                     End If
                 Case "list"
-                    If strNewValue.Split(",").All(Function(x) Integer.TryParse(x, iValue) Or Double.TryParse(x, dblValue)) Then
+                    If strNewValue.Split(",").All(Function(x) Integer.TryParse(x, iValue) Or Double.TryParse(x, dblValue) Or Trim(x) = "NA") Then
                         bWithQuotes = False
                         bListOfVector = strNewValue.Contains(",")
                     Else
