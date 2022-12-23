@@ -73,6 +73,8 @@ Public Class ucrDataViewReoGrid
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If strData.Contains("(") AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    'get the string in the brackets e.g c(1,2,3), so with this we will display 1,2,3 in the grid.
+                    'see issue #7947 for more information
                     strData = strData.Split(New String() {"(", ")"}, StringSplitOptions.None)(1)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
