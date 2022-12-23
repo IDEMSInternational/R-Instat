@@ -317,6 +317,7 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="strColumnName"></param>
     ''' <param name="strRowText"></param>
     ''' <param name="bWithQuotes"></param>
+    ''' <param name="bListOfVector"></param>
     Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False)
         Dim clsReplaceValue As New RFunction
         'trim white space from ends of value
