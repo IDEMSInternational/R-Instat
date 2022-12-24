@@ -4774,7 +4774,7 @@ Partial Class ucrCalculator
         Me.grpLogical.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpLogical.Name = "grpLogical"
         Me.grpLogical.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.grpLogical.Size = New System.Drawing.Size(253, 213)
+        Me.grpLogical.Size = New System.Drawing.Size(258, 213)
         Me.grpLogical.TabIndex = 183
         Me.grpLogical.TabStop = False
         Me.grpLogical.Text = "Logical and Symbols"
@@ -4783,7 +4783,7 @@ Partial Class ucrCalculator
         '
         Me.cmdLogicalHelp.AutoSize = True
         Me.cmdLogicalHelp.ContextMenuStrip = Me.ContextMenuStripLogical
-        Me.cmdLogicalHelp.Location = New System.Drawing.Point(180, 187)
+        Me.cmdLogicalHelp.Location = New System.Drawing.Point(186, 187)
         Me.cmdLogicalHelp.Name = "cmdLogicalHelp"
         Me.cmdLogicalHelp.Size = New System.Drawing.Size(68, 23)
         Me.cmdLogicalHelp.SplitMenuStrip = Me.ContextMenuStripLogical
@@ -4812,7 +4812,7 @@ Partial Class ucrCalculator
         'cmdFalse
         '
         Me.cmdFalse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFalse.Location = New System.Drawing.Point(196, 42)
+        Me.cmdFalse.Location = New System.Drawing.Point(202, 42)
         Me.cmdFalse.Name = "cmdFalse"
         Me.cmdFalse.Size = New System.Drawing.Size(52, 30)
         Me.cmdFalse.TabIndex = 207
@@ -4822,7 +4822,7 @@ Partial Class ucrCalculator
         'cmdTrue
         '
         Me.cmdTrue.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTrue.Location = New System.Drawing.Point(196, 13)
+        Me.cmdTrue.Location = New System.Drawing.Point(202, 13)
         Me.cmdTrue.Name = "cmdTrue"
         Me.cmdTrue.Size = New System.Drawing.Size(52, 30)
         Me.cmdTrue.TabIndex = 206
@@ -4832,10 +4832,10 @@ Partial Class ucrCalculator
         'cmdDoubleSqrBrackets
         '
         Me.cmdDoubleSqrBrackets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDoubleSqrBrackets.Location = New System.Drawing.Point(118, 71)
+        Me.cmdDoubleSqrBrackets.Location = New System.Drawing.Point(128, 71)
         Me.cmdDoubleSqrBrackets.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDoubleSqrBrackets.Name = "cmdDoubleSqrBrackets"
-        Me.cmdDoubleSqrBrackets.Size = New System.Drawing.Size(50, 30)
+        Me.cmdDoubleSqrBrackets.Size = New System.Drawing.Size(36, 30)
         Me.cmdDoubleSqrBrackets.TabIndex = 205
         Me.cmdDoubleSqrBrackets.Text = "[[ ]]"
         Me.cmdDoubleSqrBrackets.UseVisualStyleBackColor = True
@@ -4843,7 +4843,7 @@ Partial Class ucrCalculator
         'cmdIn
         '
         Me.cmdIn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdIn.Location = New System.Drawing.Point(122, 100)
+        Me.cmdIn.Location = New System.Drawing.Point(128, 100)
         Me.cmdIn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdIn.Name = "cmdIn"
         Me.cmdIn.Size = New System.Drawing.Size(65, 30)
@@ -4854,7 +4854,7 @@ Partial Class ucrCalculator
         'cmdWhich
         '
         Me.cmdWhich.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdWhich.Location = New System.Drawing.Point(186, 100)
+        Me.cmdWhich.Location = New System.Drawing.Point(192, 100)
         Me.cmdWhich.Name = "cmdWhich"
         Me.cmdWhich.Size = New System.Drawing.Size(62, 30)
         Me.cmdWhich.TabIndex = 203
@@ -4864,10 +4864,10 @@ Partial Class ucrCalculator
         'cmdNA
         '
         Me.cmdNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNA.Location = New System.Drawing.Point(153, 42)
+        Me.cmdNA.Location = New System.Drawing.Point(163, 42)
         Me.cmdNA.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdNA.Name = "cmdNA"
-        Me.cmdNA.Size = New System.Drawing.Size(44, 30)
+        Me.cmdNA.Size = New System.Drawing.Size(40, 30)
         Me.cmdNA.TabIndex = 202
         Me.cmdNA.Text = "NA"
         Me.cmdNA.UseVisualStyleBackColor = True
@@ -4875,7 +4875,7 @@ Partial Class ucrCalculator
         'cmdNear
         '
         Me.cmdNear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNear.Location = New System.Drawing.Point(186, 158)
+        Me.cmdNear.Location = New System.Drawing.Point(192, 158)
         Me.cmdNear.Name = "cmdNear"
         Me.cmdNear.Size = New System.Drawing.Size(62, 30)
         Me.cmdNear.TabIndex = 201
@@ -4885,7 +4885,7 @@ Partial Class ucrCalculator
         'cmdBetween
         '
         Me.cmdBetween.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBetween.Location = New System.Drawing.Point(186, 129)
+        Me.cmdBetween.Location = New System.Drawing.Point(192, 129)
         Me.cmdBetween.Name = "cmdBetween"
         Me.cmdBetween.Size = New System.Drawing.Size(62, 30)
         Me.cmdBetween.TabIndex = 200
@@ -4907,7 +4907,7 @@ Partial Class ucrCalculator
         Me.cmdNotIsNa.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdNotIsNa.Location = New System.Drawing.Point(65, 158)
         Me.cmdNotIsNa.Name = "cmdNotIsNa"
-        Me.cmdNotIsNa.Size = New System.Drawing.Size(58, 30)
+        Me.cmdNotIsNa.Size = New System.Drawing.Size(63, 30)
         Me.cmdNotIsNa.TabIndex = 194
         Me.cmdNotIsNa.Text = "!is.na"
         Me.cmdNotIsNa.UseVisualStyleBackColor = True
@@ -4915,7 +4915,7 @@ Partial Class ucrCalculator
         'cmdDuplicate
         '
         Me.cmdDuplicate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDuplicate.Location = New System.Drawing.Point(122, 158)
+        Me.cmdDuplicate.Location = New System.Drawing.Point(128, 158)
         Me.cmdDuplicate.Name = "cmdDuplicate"
         Me.cmdDuplicate.Size = New System.Drawing.Size(65, 30)
         Me.cmdDuplicate.TabIndex = 193
@@ -4937,7 +4937,7 @@ Partial Class ucrCalculator
         Me.cmdmatch.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdmatch.Location = New System.Drawing.Point(65, 129)
         Me.cmdmatch.Name = "cmdmatch"
-        Me.cmdmatch.Size = New System.Drawing.Size(58, 30)
+        Me.cmdmatch.Size = New System.Drawing.Size(63, 30)
         Me.cmdmatch.TabIndex = 191
         Me.cmdmatch.Text = "match"
         Me.cmdmatch.UseVisualStyleBackColor = True
@@ -4945,7 +4945,7 @@ Partial Class ucrCalculator
         'cmdwhen
         '
         Me.cmdwhen.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdwhen.Location = New System.Drawing.Point(122, 129)
+        Me.cmdwhen.Location = New System.Drawing.Point(128, 129)
         Me.cmdwhen.Name = "cmdwhen"
         Me.cmdwhen.Size = New System.Drawing.Size(65, 30)
         Me.cmdwhen.TabIndex = 190
@@ -4955,7 +4955,7 @@ Partial Class ucrCalculator
         'cmdOpeningBracket
         '
         Me.cmdOpeningBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOpeningBracket.Location = New System.Drawing.Point(167, 71)
+        Me.cmdOpeningBracket.Location = New System.Drawing.Point(163, 71)
         Me.cmdOpeningBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
         Me.cmdOpeningBracket.Size = New System.Drawing.Size(40, 30)
@@ -4967,10 +4967,10 @@ Partial Class ucrCalculator
         '
         Me.cmdColon.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!)
         Me.cmdColon.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdColon.Location = New System.Drawing.Point(41, 71)
+        Me.cmdColon.Location = New System.Drawing.Point(43, 71)
         Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdColon.Name = "cmdColon"
-        Me.cmdColon.Size = New System.Drawing.Size(38, 30)
+        Me.cmdColon.Size = New System.Drawing.Size(40, 30)
         Me.cmdColon.TabIndex = 139
         Me.cmdColon.Text = ":"
         Me.cmdColon.UseVisualStyleBackColor = True
@@ -4978,10 +4978,10 @@ Partial Class ucrCalculator
         'cmdGreaterOrEqualsTo
         '
         Me.cmdGreaterOrEqualsTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdGreaterOrEqualsTo.Location = New System.Drawing.Point(115, 13)
+        Me.cmdGreaterOrEqualsTo.Location = New System.Drawing.Point(128, 13)
         Me.cmdGreaterOrEqualsTo.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdGreaterOrEqualsTo.Name = "cmdGreaterOrEqualsTo"
-        Me.cmdGreaterOrEqualsTo.Size = New System.Drawing.Size(38, 30)
+        Me.cmdGreaterOrEqualsTo.Size = New System.Drawing.Size(36, 30)
         Me.cmdGreaterOrEqualsTo.TabIndex = 138
         Me.cmdGreaterOrEqualsTo.Text = ">="
         Me.cmdGreaterOrEqualsTo.UseVisualStyleBackColor = True
@@ -4989,10 +4989,10 @@ Partial Class ucrCalculator
         'cmdClossingBracket
         '
         Me.cmdClossingBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClossingBracket.Location = New System.Drawing.Point(206, 71)
+        Me.cmdClossingBracket.Location = New System.Drawing.Point(202, 71)
         Me.cmdClossingBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClossingBracket.Name = "cmdClossingBracket"
-        Me.cmdClossingBracket.Size = New System.Drawing.Size(42, 30)
+        Me.cmdClossingBracket.Size = New System.Drawing.Size(52, 30)
         Me.cmdClossingBracket.TabIndex = 137
         Me.cmdClossingBracket.Tag = ""
         Me.cmdClossingBracket.Text = ")"
@@ -5002,10 +5002,10 @@ Partial Class ucrCalculator
         '
         Me.cmdAnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.cmdAnd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAnd.Location = New System.Drawing.Point(115, 42)
+        Me.cmdAnd.Location = New System.Drawing.Point(128, 42)
         Me.cmdAnd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdAnd.Name = "cmdAnd"
-        Me.cmdAnd.Size = New System.Drawing.Size(38, 30)
+        Me.cmdAnd.Size = New System.Drawing.Size(36, 30)
         Me.cmdAnd.TabIndex = 137
         Me.cmdAnd.Tag = "And"
         Me.cmdAnd.Text = "&&"
@@ -5015,10 +5015,10 @@ Partial Class ucrCalculator
         '
         Me.cmdQuotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdQuotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuotes.Location = New System.Drawing.Point(153, 13)
+        Me.cmdQuotes.Location = New System.Drawing.Point(163, 13)
         Me.cmdQuotes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdQuotes.Name = "cmdQuotes"
-        Me.cmdQuotes.Size = New System.Drawing.Size(44, 30)
+        Me.cmdQuotes.Size = New System.Drawing.Size(40, 30)
         Me.cmdQuotes.TabIndex = 135
         Me.cmdQuotes.Text = """ """
         Me.cmdQuotes.UseVisualStyleBackColor = True
@@ -5026,10 +5026,10 @@ Partial Class ucrCalculator
         'cmdSquareBrackets
         '
         Me.cmdSquareBrackets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSquareBrackets.Location = New System.Drawing.Point(78, 71)
+        Me.cmdSquareBrackets.Location = New System.Drawing.Point(82, 71)
         Me.cmdSquareBrackets.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSquareBrackets.Name = "cmdSquareBrackets"
-        Me.cmdSquareBrackets.Size = New System.Drawing.Size(42, 30)
+        Me.cmdSquareBrackets.Size = New System.Drawing.Size(46, 30)
         Me.cmdSquareBrackets.TabIndex = 134
         Me.cmdSquareBrackets.Text = "[ ]"
         Me.cmdSquareBrackets.UseVisualStyleBackColor = True
@@ -5040,9 +5040,9 @@ Partial Class ucrCalculator
         Me.cmdIntegerDivision.Location = New System.Drawing.Point(65, 100)
         Me.cmdIntegerDivision.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdIntegerDivision.Name = "cmdIntegerDivision"
-        Me.cmdIntegerDivision.Size = New System.Drawing.Size(58, 30)
+        Me.cmdIntegerDivision.Size = New System.Drawing.Size(63, 30)
         Me.cmdIntegerDivision.TabIndex = 135
-        Me.cmdIntegerDivision.Text = "div(%/%)"
+        Me.cmdIntegerDivision.Text = "div (%/%)"
         Me.cmdIntegerDivision.UseVisualStyleBackColor = True
         '
         'cmdModulas
@@ -5059,10 +5059,10 @@ Partial Class ucrCalculator
         'cmdGreater
         '
         Me.cmdGreater.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdGreater.Location = New System.Drawing.Point(78, 13)
+        Me.cmdGreater.Location = New System.Drawing.Point(82, 13)
         Me.cmdGreater.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdGreater.Name = "cmdGreater"
-        Me.cmdGreater.Size = New System.Drawing.Size(38, 30)
+        Me.cmdGreater.Size = New System.Drawing.Size(46, 30)
         Me.cmdGreater.TabIndex = 133
         Me.cmdGreater.Text = ">"
         Me.cmdGreater.UseVisualStyleBackColor = True
@@ -5070,10 +5070,10 @@ Partial Class ucrCalculator
         'cmdLesserOrEqualsTo
         '
         Me.cmdLesserOrEqualsTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLesserOrEqualsTo.Location = New System.Drawing.Point(41, 13)
+        Me.cmdLesserOrEqualsTo.Location = New System.Drawing.Point(43, 13)
         Me.cmdLesserOrEqualsTo.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdLesserOrEqualsTo.Name = "cmdLesserOrEqualsTo"
-        Me.cmdLesserOrEqualsTo.Size = New System.Drawing.Size(38, 30)
+        Me.cmdLesserOrEqualsTo.Size = New System.Drawing.Size(40, 30)
         Me.cmdLesserOrEqualsTo.TabIndex = 132
         Me.cmdLesserOrEqualsTo.Text = "<="
         Me.cmdLesserOrEqualsTo.UseVisualStyleBackColor = True
@@ -5084,7 +5084,7 @@ Partial Class ucrCalculator
         Me.cmdLesser.Location = New System.Drawing.Point(4, 13)
         Me.cmdLesser.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLesser.Name = "cmdLesser"
-        Me.cmdLesser.Size = New System.Drawing.Size(38, 30)
+        Me.cmdLesser.Size = New System.Drawing.Size(39, 30)
         Me.cmdLesser.TabIndex = 131
         Me.cmdLesser.Text = "<"
         Me.cmdLesser.UseVisualStyleBackColor = True
@@ -5092,10 +5092,10 @@ Partial Class ucrCalculator
         'cmdOr
         '
         Me.cmdOr.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOr.Location = New System.Drawing.Point(78, 42)
+        Me.cmdOr.Location = New System.Drawing.Point(82, 42)
         Me.cmdOr.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOr.Name = "cmdOr"
-        Me.cmdOr.Size = New System.Drawing.Size(38, 30)
+        Me.cmdOr.Size = New System.Drawing.Size(46, 30)
         Me.cmdOr.TabIndex = 130
         Me.cmdOr.Text = "|"
         Me.cmdOr.UseVisualStyleBackColor = True
@@ -5107,7 +5107,7 @@ Partial Class ucrCalculator
         Me.cmdNot.Location = New System.Drawing.Point(4, 71)
         Me.cmdNot.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdNot.Name = "cmdNot"
-        Me.cmdNot.Size = New System.Drawing.Size(38, 30)
+        Me.cmdNot.Size = New System.Drawing.Size(39, 30)
         Me.cmdNot.TabIndex = 129
         Me.cmdNot.Text = "!"
         Me.cmdNot.UseVisualStyleBackColor = True
@@ -5115,10 +5115,10 @@ Partial Class ucrCalculator
         'cmdNotEqualsTo
         '
         Me.cmdNotEqualsTo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNotEqualsTo.Location = New System.Drawing.Point(41, 42)
+        Me.cmdNotEqualsTo.Location = New System.Drawing.Point(43, 42)
         Me.cmdNotEqualsTo.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdNotEqualsTo.Name = "cmdNotEqualsTo"
-        Me.cmdNotEqualsTo.Size = New System.Drawing.Size(38, 30)
+        Me.cmdNotEqualsTo.Size = New System.Drawing.Size(40, 30)
         Me.cmdNotEqualsTo.TabIndex = 128
         Me.cmdNotEqualsTo.Text = "!="
         Me.cmdNotEqualsTo.UseVisualStyleBackColor = True
@@ -5129,7 +5129,7 @@ Partial Class ucrCalculator
         Me.cmdEquivalent.Location = New System.Drawing.Point(4, 42)
         Me.cmdEquivalent.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdEquivalent.Name = "cmdEquivalent"
-        Me.cmdEquivalent.Size = New System.Drawing.Size(38, 30)
+        Me.cmdEquivalent.Size = New System.Drawing.Size(39, 30)
         Me.cmdEquivalent.TabIndex = 127
         Me.cmdEquivalent.Text = "=="
         Me.cmdEquivalent.UseVisualStyleBackColor = True
@@ -6408,8 +6408,8 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpFactor)
