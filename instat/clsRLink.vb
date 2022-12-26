@@ -803,6 +803,8 @@ Public Class RLink
         Dim strScriptWithComment As String = If(String.IsNullOrEmpty(strComment), strScript, GetFormattedComment(strComment) & Environment.NewLine & strScript)
 
         If bLogRScripts Then
+            'todo. adding a lot of text to the text control can raise an out of memory exception.
+            'change this to only display the text when the audit log is visible.
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
 
