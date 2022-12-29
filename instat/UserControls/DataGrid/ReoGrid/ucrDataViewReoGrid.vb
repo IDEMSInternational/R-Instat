@@ -75,12 +75,20 @@ Public Class ucrDataViewReoGrid
                 'numeric(0) returns a numeric vector of length 0,
                 'so when you add anything to it you get the same result (it's basically a numeric NULL)
                 'in this case we will display the data as NA
-                If strData = "numeric(0)" Then
-                    strData = "NA"
-                ElseIf strData.Contains("(") AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
-                    'get the string in the brackets e.g c(1,2,3), so with this we will display 1,2,3 in the grid.
-                    'see issue #7947 for more information
-                    strData = strData.Split(New String() {"(", ")"}, StringSplitOptions.None)(1)
+                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    If strData = "numeric(0)" Then
+                        strData = "NA"
+                    ElseIf strData.Contains("(") Then
+                        'get the string in the brackets e.g c(1,2,3), so with this we will display 1,2,3 in the grid.
+                        'see issue #7947 for more information
+                        strData = strData.Split(New String() {"(", ")"}, StringSplitOptions.None)(1)
+                        'If strData = "" Then
+                        '    dataFrame.clsPrepareFunctions.ReplaceValueInData("NA", grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Replace("(LT)", "").Trim(),
+                        '           grdData.CurrentWorksheet.RowHeaders.Item(i).Text.Trim(), bWithQuotes:=False, bAddOutputInInternalViewer:=False)
+                        'End If
+                    Else
+                            strData = strData.Replace(":", ",")
+                    End If
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next

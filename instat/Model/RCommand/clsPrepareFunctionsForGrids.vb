@@ -318,7 +318,7 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="strRowText"></param>
     ''' <param name="bWithQuotes"></param>
     ''' <param name="bListOfVector"></param>
-    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False)
+    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False, Optional bAddOutputInInternalViewer As Boolean = True)
         Dim clsReplaceValue As New RFunction
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
@@ -334,7 +334,7 @@ Public Class clsPrepareFunctionsForGrids
         Else
             clsReplaceValue.AddParameter("new_value", strNewValue)
         End If
-        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
+        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data", bAddOutputInInternalViewer:=bAddOutputInInternalViewer)
     End Sub
 
     ''' <summary>
