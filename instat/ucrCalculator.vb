@@ -4519,10 +4519,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub BaseToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BaseToolStripMenuItem1.Click
-        cmdSummaryRHelp.PerformClick()
-    End Sub
-
     Private Sub StatsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatsToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Summary" Then
