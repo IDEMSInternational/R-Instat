@@ -76,6 +76,11 @@ Partial Class dlgStack
         Me.ucrChkStackMultipleSets = New instat.ucrCheck()
         Me.ucrFactorInto = New instat.ucrInputTextBox()
         Me.ucrChkToLowerCase = New instat.ucrCheck()
+        Me.rdoExpand = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverExpand = New instat.ucrReceiverMultiple()
+        Me.lblExpandFactor = New System.Windows.Forms.Label()
+        Me.ucrReceiverFrequency = New instat.ucrReceiverSingle()
+        Me.lblFrequencyVar = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -119,9 +124,9 @@ Partial Class dlgStack
         Me.rdoPivotLonger.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPivotLonger.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPivotLonger.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPivotLonger.Location = New System.Drawing.Point(109, 12)
+        Me.rdoPivotLonger.Location = New System.Drawing.Point(76, 12)
         Me.rdoPivotLonger.Name = "rdoPivotLonger"
-        Me.rdoPivotLonger.Size = New System.Drawing.Size(100, 28)
+        Me.rdoPivotLonger.Size = New System.Drawing.Size(95, 28)
         Me.rdoPivotLonger.TabIndex = 1
         Me.rdoPivotLonger.Text = "Pivot Longer"
         Me.rdoPivotLonger.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -135,9 +140,9 @@ Partial Class dlgStack
         Me.rdoUnnest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoUnnest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoUnnest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoUnnest.Location = New System.Drawing.Point(207, 12)
+        Me.rdoUnnest.Location = New System.Drawing.Point(169, 12)
         Me.rdoUnnest.Name = "rdoUnnest"
-        Me.rdoUnnest.Size = New System.Drawing.Size(100, 28)
+        Me.rdoUnnest.Size = New System.Drawing.Size(92, 28)
         Me.rdoUnnest.TabIndex = 2
         Me.rdoUnnest.Text = "Unnest"
         Me.rdoUnnest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -301,9 +306,9 @@ Partial Class dlgStack
         'ucrPnlStack
         '
         Me.ucrPnlStack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStack.Location = New System.Drawing.Point(87, 3)
+        Me.ucrPnlStack.Location = New System.Drawing.Point(67, 3)
         Me.ucrPnlStack.Name = "ucrPnlStack"
-        Me.ucrPnlStack.Size = New System.Drawing.Size(239, 49)
+        Me.ucrPnlStack.Size = New System.Drawing.Size(299, 49)
         Me.ucrPnlStack.TabIndex = 0
         '
         'ucrSaveNewDataName
@@ -471,18 +476,84 @@ Partial Class dlgStack
         Me.ucrChkToLowerCase.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkToLowerCase.TabIndex = 17
         '
+        'rdoExpand
+        '
+        Me.rdoExpand.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoExpand.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExpand.FlatAppearance.BorderSize = 2
+        Me.rdoExpand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExpand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoExpand.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoExpand.Location = New System.Drawing.Point(259, 12)
+        Me.rdoExpand.Name = "rdoExpand"
+        Me.rdoExpand.Size = New System.Drawing.Size(91, 28)
+        Me.rdoExpand.TabIndex = 34
+        Me.rdoExpand.Text = "Expand"
+        Me.rdoExpand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoExpand.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverExpand
+        '
+        Me.ucrReceiverExpand.AutoSize = True
+        Me.ucrReceiverExpand.frmParent = Me
+        Me.ucrReceiverExpand.Location = New System.Drawing.Point(262, 81)
+        Me.ucrReceiverExpand.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverExpand.Name = "ucrReceiverExpand"
+        Me.ucrReceiverExpand.Selector = Nothing
+        Me.ucrReceiverExpand.Size = New System.Drawing.Size(120, 103)
+        Me.ucrReceiverExpand.strNcFilePath = ""
+        Me.ucrReceiverExpand.TabIndex = 35
+        Me.ucrReceiverExpand.ucrSelector = Nothing
+        '
+        'lblExpandFactor
+        '
+        Me.lblExpandFactor.AutoSize = True
+        Me.lblExpandFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExpandFactor.Location = New System.Drawing.Point(264, 64)
+        Me.lblExpandFactor.Name = "lblExpandFactor"
+        Me.lblExpandFactor.Size = New System.Drawing.Size(51, 13)
+        Me.lblExpandFactor.TabIndex = 36
+        Me.lblExpandFactor.Tag = "Columns_to_Stack:"
+        Me.lblExpandFactor.Text = "Factor(s):"
+        '
+        'ucrReceiverFrequency
+        '
+        Me.ucrReceiverFrequency.AutoSize = True
+        Me.ucrReceiverFrequency.frmParent = Me
+        Me.ucrReceiverFrequency.Location = New System.Drawing.Point(262, 204)
+        Me.ucrReceiverFrequency.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFrequency.Name = "ucrReceiverFrequency"
+        Me.ucrReceiverFrequency.Selector = Nothing
+        Me.ucrReceiverFrequency.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFrequency.strNcFilePath = ""
+        Me.ucrReceiverFrequency.TabIndex = 37
+        Me.ucrReceiverFrequency.ucrSelector = Nothing
+        '
+        'lblFrequencyVar
+        '
+        Me.lblFrequencyVar.AutoSize = True
+        Me.lblFrequencyVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFrequencyVar.Location = New System.Drawing.Point(262, 189)
+        Me.lblFrequencyVar.Name = "lblFrequencyVar"
+        Me.lblFrequencyVar.Size = New System.Drawing.Size(68, 13)
+        Me.lblFrequencyVar.TabIndex = 38
+        Me.lblFrequencyVar.Tag = "Columns_to_Stack:"
+        Me.lblFrequencyVar.Text = "Frequencies:"
+        '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 447)
+        Me.Controls.Add(Me.lblExpandFactor)
+        Me.Controls.Add(Me.ucrReceiverExpand)
+        Me.Controls.Add(Me.rdoExpand)
         Me.Controls.Add(Me.ucrChkToLowerCase)
         Me.Controls.Add(Me.ucrInputNamesTo)
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrInputDropPrefix)
-        Me.Controls.Add(Me.ucrChkCarryAllColumns)
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrInputOutput)
@@ -500,8 +571,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblToken)
         Me.Controls.Add(Me.ucrInputFormat)
         Me.Controls.Add(Me.lblFormat)
-        Me.Controls.Add(Me.lblPattern)
-        Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.ucrChkPunctuation)
         Me.Controls.Add(Me.lblValuesTo)
         Me.Controls.Add(Me.ucrChkDropMissingValues)
@@ -513,6 +582,11 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.lblNamesTo)
         Me.Controls.Add(Me.lblFactorInto)
+        Me.Controls.Add(Me.ucrChkCarryAllColumns)
+        Me.Controls.Add(Me.lblPattern)
+        Me.Controls.Add(Me.ucrInputPattern)
+        Me.Controls.Add(Me.lblFrequencyVar)
+        Me.Controls.Add(Me.ucrReceiverFrequency)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -562,4 +636,9 @@ Partial Class dlgStack
     Friend WithEvents ucrChkStackMultipleSets As ucrCheck
     Friend WithEvents ucrFactorInto As ucrInputTextBox
     Friend WithEvents lblFactorInto As Label
+    Friend WithEvents lblFrequencyVar As Label
+    Friend WithEvents ucrReceiverFrequency As ucrReceiverSingle
+    Friend WithEvents lblExpandFactor As Label
+    Friend WithEvents ucrReceiverExpand As ucrReceiverMultiple
+    Friend WithEvents rdoExpand As RadioButton
 End Class
