@@ -1004,19 +1004,11 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub HideShowOptions()
-        If rdoPairs.Checked Then
-            cmdOptions.Visible = False
-            cmdPairOptions.Visible = True
-            If Not ucrReceiverColour.IsEmpty Then
-                cmdPairOptions.Enabled = True
-            Else
-                cmdPairOptions.Enabled = False
-            End If
-        Else
-            cmdPairOptions.Visible = False
-            cmdOptions.Visible = True
-        End If
+        cmdOptions.Visible = Not rdoPairs.Checked
+        cmdPairOptions.Visible = rdoPairs.Checked
+        cmdPairOptions.Enabled = cmdPairOptions.Visible AndAlso Not ucrReceiverColour.IsEmpty
     End Sub
+
     Private Sub AddRemoveColourParameter()
         If Not ucrReceiverColour.IsEmpty And rdoPairs.Checked Then
             clsGGpairsFunction.AddParameter("colour", clsRFunctionParameter:=clsGGpairAesFunction, bIncludeArgumentName:=False, iPosition:=2)
