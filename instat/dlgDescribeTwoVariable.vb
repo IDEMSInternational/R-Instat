@@ -305,7 +305,7 @@ Public Class dlgDescribeTwoVariable
         clsFrequencyTables2Function.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsFrequencyTables2Function.AddParameter("columns_to_summarise", ".x", iPosition:=1)
         clsFrequencyTables2Function.AddParameter("factors", clsRFunctionParameter:=clsCombineFrequencyFactorParameterFunction, iPosition:=2)
-        clsFrequencyTables2Function.AddParameter("summaries", Chr(34) & "summary_count" & Chr(34), iPosition:=3)
+        clsFrequencyTables2Function.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=3)
 
         clsDataTildeOperator.SetOperation("~")
         clsDataTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
@@ -505,13 +505,13 @@ Public Class dlgDescribeTwoVariable
             clsRCorrelationFunction.RemoveParameterByName("use")
         End If
         If Not ucrChkOmitMissing.Checked Then
-            clsRCustomSummaryFunction.RemoveParameterByName("na_type")
-            clsRCustomSummaryFunction.RemoveParameterByName("na_max_n")
-            clsRCustomSummaryFunction.RemoveParameterByName("na_min_n")
-            clsRCustomSummaryFunction.RemoveParameterByName("na_max_prop")
-            clsRCustomSummaryFunction.RemoveParameterByName("na_consecutive_n")
+            clsFrequencyTables2Function.RemoveParameterByName("na_type")
+            clsFrequencyTables2Function.RemoveParameterByName("na_max_n")
+            clsFrequencyTables2Function.RemoveParameterByName("na_min_n")
+            clsFrequencyTables2Function.RemoveParameterByName("na_max_prop")
+            clsFrequencyTables2Function.RemoveParameterByName("na_consecutive_n")
         Else
-            clsRCustomSummaryFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
+            clsFrequencyTables2Function.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
         End If
         MissingOptions()
     End Sub
@@ -646,7 +646,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
-        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsRCustomSummaryFunction, clsNewConcFunction:=clsCombineFunction, bReset:=bResetSubdialog)
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsFrequencyTables2Function, clsNewConcFunction:=clsCombineFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgMissingOptions.ShowDialog()
     End Sub
