@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -38,7 +38,9 @@ Partial Class dlgLinePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+
         Me.components = New System.ComponentModel.Container()
+
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
@@ -273,6 +275,81 @@ Partial Class dlgLinePlot
         Me.grpSmoothOptions.TabStop = False
         Me.grpSmoothOptions.Text = "Smooth Options"
         '
+
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        Me.ucrInputFormula.Location = New System.Drawing.Point(73, 46)
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        Me.ucrInputFormula.Size = New System.Drawing.Size(110, 23)
+        Me.ucrInputFormula.TabIndex = 7
+        '
+        'ucrChkSpan
+        '
+        Me.ucrChkSpan.AutoSize = True
+        Me.ucrChkSpan.Checked = False
+        Me.ucrChkSpan.Location = New System.Drawing.Point(185, 20)
+        Me.ucrChkSpan.Name = "ucrChkSpan"
+        Me.ucrChkSpan.Size = New System.Drawing.Size(54, 23)
+        Me.ucrChkSpan.TabIndex = 3
+        '
+        'ucrChkFormula
+        '
+        Me.ucrChkFormula.AutoSize = True
+        Me.ucrChkFormula.Checked = False
+        Me.ucrChkFormula.Location = New System.Drawing.Point(5, 49)
+        Me.ucrChkFormula.Name = "ucrChkFormula"
+        Me.ucrChkFormula.Size = New System.Drawing.Size(66, 23)
+        Me.ucrChkFormula.TabIndex = 6
+        '
+        'ucrChkAddSE
+        '
+        Me.ucrChkAddSE.AutoSize = True
+        Me.ucrChkAddSE.Checked = False
+        Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
+    Me.ucrChkAddSE.Name = "ucrChkAddSE"
+    Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkAddSE.TabIndex = 8
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.AutoSize = True
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSpan.Location = New System.Drawing.Point(239, 20)
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSpan.TabIndex = 5
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
+        Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
+        Me.ucrFamilyInput.TabIndex = 4
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(52, 20)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputMethod.TabIndex = 1
+        '
+
         'rdoSlope
         '
         Me.rdoSlope.Appearance = System.Windows.Forms.Appearance.Button
@@ -705,6 +782,17 @@ Partial Class dlgLinePlot
         Me.ucrChkPathOrStep.Size = New System.Drawing.Size(148, 23)
         Me.ucrChkPathOrStep.TabIndex = 32
         '
+
+        'ucrChkValley
+        '
+        Me.ucrChkValley.AutoSize = True
+        Me.ucrChkValley.Checked = False
+        Me.ucrChkValley.Location = New System.Drawing.Point(161, 389)
+        Me.ucrChkValley.Name = "ucrChkValley"
+        Me.ucrChkValley.Size = New System.Drawing.Size(146, 23)
+        Me.ucrChkValley.TabIndex = 27
+        '
+
         'ucrChkPeak
         '
         Me.ucrChkPeak.AutoSize = True
@@ -729,7 +817,7 @@ Partial Class dlgLinePlot
         Me.ucrSave.Location = New System.Drawing.Point(9, 442)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(401, 24)
         Me.ucrSave.TabIndex = 31
         '
         'ucrVariablesAsFactorForLinePlot
@@ -1172,6 +1260,10 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
+
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdLinePathStepSmoothOptions As Button
+
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
@@ -1245,6 +1337,7 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrNudSlopeLabelSize As ucrNud
     Friend WithEvents ucrChkSlopeLabelOptions As ucrCheck
     Friend WithEvents ucrChkSlopeTextOptions As ucrCheck
+
     Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents contextMenuStripOptions As ContextMenuStrip
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
@@ -1256,4 +1349,5 @@ Partial Class dlgLinePlot
     Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPeakOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemValleyOptions As ToolStripMenuItem
+
 End Class

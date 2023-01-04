@@ -217,7 +217,7 @@ Public Class dlgLinePlot
         ucrPnlStepOrPath.AddFunctionNamesCondition(rdoStep, "geom_step")
         ucrChkPathOrStep.AddToLinkedControls(ucrPnlStepOrPath, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPathOrStep.SetText("Use path or step")
+        ucrChkPathOrStep.SetText("Path or Step")
         ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_step", "geom_path"})
         ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_step", "geom_path"}, False)
 
