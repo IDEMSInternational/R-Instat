@@ -277,6 +277,8 @@ Public Class clsDataFramePage
             columnHeader.strTypeShortCode = "(S)"
         ElseIf strHeaderType.Contains("list") Then
             columnHeader.strTypeShortCode = "(LT)"
+        ElseIf strHeaderType.Contains("complex") Then
+            columnHeader.strTypeShortCode = "(CX)"
             ' Types of data for specific Application areas e.g. survival are coded with "(A)"
             ' No examples implemented yet.
             'ElseIf strType.Contains() Then
