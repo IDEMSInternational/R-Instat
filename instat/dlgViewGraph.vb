@@ -58,6 +58,10 @@ Public Class dlgViewGraph
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayOutputWindow)
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayInteractiveView)
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
+
+        'todo. Calling print() from this dialog doesn't work. investigate why
+        'temporarily disabled
+        rdoDisplayRViewer.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -115,9 +119,9 @@ Public Class dlgViewGraph
             clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
         ElseIf rdoDisplayRViewer.Checked Then
-            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
-            clsViewObjectRFunction.RemoveParameterByName("object_format")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
+            'clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+            'clsViewObjectRFunction.RemoveParameterByName("object_format")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
         End If
     End Sub
 

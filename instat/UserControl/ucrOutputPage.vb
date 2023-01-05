@@ -138,7 +138,6 @@ Public Class ucrOutputPage
             If bDisplayOutputInExternalViewer Then
                 Dim frmMaximiseOutput As New frmMaximiseOutput
                 frmMaximiseOutput.Show(strFileName:=outputElement.Output)
-                frmMaximiseOutput.Activate()
             Else
                 Select Case outputElement.OutputType
                     Case OutputType.TextOutput

@@ -835,6 +835,7 @@ Public Class RLink
                 bAsFile = False
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             ElseIf iCallType = 1 OrElse iCallType = 4 Then
+                'todo. this is used by the calculator dialog
                 'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
                 'else if script output should be stored in a temp variable
                 ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
@@ -847,8 +848,6 @@ Public Class RLink
                 If expTemp IsNot Nothing Then
                     strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                 End If
-
-
             Else
                 'else if script output should not be ignored or not stored as an object or variable
 
