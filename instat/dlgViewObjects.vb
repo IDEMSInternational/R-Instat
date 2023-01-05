@@ -38,6 +38,8 @@ Public Class dlgViewObjects
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 349
+        'todo. temporary to have the str() output captured as text
+        ucrBase.clsRsyntax.iCallType = -1
 
         ' ucr receiver
         ucrReceiverSelectedObject.SetParameter(New RParameter("x", 1))
@@ -48,14 +50,17 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetItemType("object")
         ucrReceiverSelectedObject.bAutoFill = True
 
-        'todo. hiding this for now until they're working correctly.
+        'todo. disabling and hiding this for now until they're working correctly.
+        'calling print via a dialog currently does not work correctly
+        rdoPrint.Enabled = False
         rdoAllContents.Visible = False
         rdoComponent.Visible = False
 
         'add radio buttons to the panel rdo's
-        ucrPnlContentsToView.AddRadioButton(rdoPrint)
+        'ucrPnlContentsToView.AddRadioButton(rdoPrint)
         ucrPnlContentsToView.AddRadioButton(rdoStructure)
-        ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, "print")
+
+        'ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, "print")
         ucrPnlContentsToView.AddFunctionNamesCondition(rdoStructure, "str")
 
     End Sub
@@ -67,14 +72,15 @@ Public Class dlgViewObjects
 
         'reset controls to default states
         ucrSelectorForViewObject.Reset()
-        rdoPrint.Checked = True
+        rdoStructure.Checked = True
 
         'set R function for showing selected object structure
-        clsStructureRFunction.SetRCommand("str")
         clsPrintRFunction.SetRCommand("print")
+        clsStructureRFunction.SetRCommand("str")
+
 
         'set the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsStructureRFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
