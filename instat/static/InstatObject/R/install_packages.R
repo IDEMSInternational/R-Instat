@@ -134,6 +134,9 @@ pkgs <-
     # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
     "corrr",
     "dslabs",
+     "coin",
+    "pingr",
+    "vcdExtra",
     # For inspect, read, edit and run files for 'APSIM'
     "apsimx"
  )
