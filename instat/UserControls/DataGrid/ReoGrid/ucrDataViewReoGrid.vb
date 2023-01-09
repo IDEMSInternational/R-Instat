@@ -72,18 +72,15 @@ Public Class ucrDataViewReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
-                'numeric(0) returns a numeric vector of length 0,
-                'so when you add anything to it you get the same result (it's basically a numeric NULL)
-                'in this case we will display the data as NA
                 If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
-                    If strData = "numeric(0)" Then
-                        strData = "NA"
-                    ElseIf strData.Contains("(") Then
-                        'get the string in the brackets e.g c(1,2,3), so with this we will display 1,2,3 in the grid.
-                        'see issue #7947 for more information
-                        strData = strData.Split(New String() {"(", ")"}, StringSplitOptions.None)(1)
-                    ElseIf strData.Contains(":") Then
-                        strData = strData.Replace(":", ",")
+                    Dim strTmp = strData
+                    strData = String.Join(", ", strData.Where(Function(x) IsNumeric(x)))
+                    If strTmp.Contains("NA") Then
+                        If strData.Length > 0 Then
+                            strData &= ", NA"
+                        Else
+                            strData = "NA"
+                        End If
                     End If
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
@@ -105,6 +102,12 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
+    'Private Function GetVector(strData As String) As String
+    '    Dim strTemp As String()
+    '    For Each chrCurr In strData
+    '        If IsNumeric(chrCurr) OrElse chrCurr = 
+    '    Next
+    'End Function
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
