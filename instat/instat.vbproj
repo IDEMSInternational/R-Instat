@@ -239,6 +239,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgPairPlotOptions.Designer.vb">
+      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </Compile>
@@ -3086,6 +3092,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPairPlotOptions.resx">
+      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
