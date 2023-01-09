@@ -49,9 +49,13 @@ Public Class sdgSummaryThemes
         dctBorderStyles.Add("Dashed", Chr(34) & "dashed" & Chr(34))
         dctBorderStyles.Add("Dotted", Chr(34) & "dotted" & Chr(34))
 
+        dctTextTransform.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctTextTransform.Add("Uppercase", Chr(34) & "uppercase" & Chr(34))
+        dctTextTransform.Add("Lowercase", Chr(34) & "lowercase" & Chr(34))
+        dctTextTransform.Add("Capitalize", Chr(34) & "capitalize" & Chr(34))
+
         ucrChkBackgroundColour.SetText("Background Colour")
         ucrInputBackgroundColour.SetParameter(New RParameter("heading.background.color", iNewPosition:=0))
-        ucrInputBackgroundColour.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkBackgroundColour.AddParameterPresentCondition(True, "heading.background.color")
         ucrChkBackgroundColour.AddParameterPresentCondition(False, "heading.background.color", False)
 
@@ -111,7 +115,6 @@ Public Class sdgSummaryThemes
 
         ucrChkBottomColour.SetText("Colour of bottom border")
         ucrInputBottomColour.SetParameter(New RParameter("heading.border.bottom.color", iNewPosition:=10))
-        ucrInputBottomColour.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkBottomColour.AddParameterPresentCondition(True, "heading.border.bottom.color")
         ucrChkBottomColour.AddParameterPresentCondition(False, "heading.border.bottom.color", False)
 
@@ -129,7 +132,6 @@ Public Class sdgSummaryThemes
 
         ucrChkSideColour.SetText("Colour of side border")
         ucrInputSideColour.SetParameter(New RParameter("heading.border.lr.colour", iNewPosition:=13))
-        ucrInputSideColour.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkSideColour.AddParameterPresentCondition(True, "heading.border.lr.colour")
         ucrChkSideColour.AddParameterPresentCondition(False, "heading.border.lr.colour", False)
 
@@ -165,8 +167,7 @@ Public Class sdgSummaryThemes
         ucrChkTableAlign.AddParameterPresentCondition(False, "table.align", False)
 
         ucrChkTableBackColor.SetText("Background color")
-        ucrInputTableBackColor.SetParameter(New RParameter("table.background.color", iNewPosition:=17))
-        ucrInputTableBackColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrTableBackgroundColors.SetParameter(New RParameter("table.background.color", iNewPosition:=17))
         ucrChkTableBackColor.AddParameterPresentCondition(True, "table.background.color")
         ucrChkTableBackColor.AddParameterPresentCondition(False, "table.background.color", False)
 
@@ -195,7 +196,6 @@ Public Class sdgSummaryThemes
 
         ucrChkTableFontColor.SetText("Font color")
         ucrInputTableFontColor.SetParameter(New RParameter("table.font.color", iNewPosition:=22))
-        ucrInputTableFontColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkTableFontColor.AddParameterPresentCondition(True, "table.font.color")
         ucrChkTableFontColor.AddParameterPresentCondition(False, "table.font.color", False)
 
@@ -213,7 +213,6 @@ Public Class sdgSummaryThemes
 
         ucrChkTableTopColor.SetText("Top border color")
         ucrInputTableTopColor.SetParameter(New RParameter("table.border.top.color", iNewPosition:=25))
-        ucrInputTableTopColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkTableTopColor.AddParameterPresentCondition(True, "table.border.top.color")
         ucrChkTableTopColor.AddParameterPresentCondition(False, "table.border.top.color", False)
 
@@ -231,7 +230,6 @@ Public Class sdgSummaryThemes
 
         ucrChkTableRightColor.SetText("Right border color")
         ucrInputTableRightColor.SetParameter(New RParameter("table.border.right.color", iNewPosition:=28))
-        ucrInputTableRightColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkTableRightColor.AddParameterPresentCondition(True, "table.border.right.color")
         ucrChkTableRightColor.AddParameterPresentCondition(False, "table.border.right.color", False)
 
@@ -249,7 +247,6 @@ Public Class sdgSummaryThemes
 
         ucrChkTableBottomColor.SetText("Bottom border color")
         ucrInputTableBottomColor.SetParameter(New RParameter("table.border.bottom.color", iNewPosition:=31))
-        ucrInputTableBottomColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkTableBottomColor.AddParameterPresentCondition(True, "table.border.bottom.color")
         ucrChkTableBottomColor.AddParameterPresentCondition(False, "table.border.bottom.color", False)
 
@@ -273,7 +270,7 @@ Public Class sdgSummaryThemes
         ucrChkTableWidth.AddToLinkedControls(ucrNudTableWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableLayout.AddToLinkedControls(ucrInputTableLayout, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableAlign.AddToLinkedControls(ucrInputTableAlign, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTableBackColor.AddToLinkedControls(ucrInputTableBackColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTableBackColor.AddToLinkedControls(ucrTableBackgroundColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableFontNames.AddToLinkedControls(ucrInputTableFontNames, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableFontSize.AddToLinkedControls(ucrNudTableFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTableFontWeight.AddToLinkedControls(ucrInputTableFontWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -294,7 +291,6 @@ Public Class sdgSummaryThemes
 
         ucrChkColumnsBackColor.SetText("Background Color")
         ucrInputColumnsBackColor.SetParameter(New RParameter("column_labels.background.color", iNewPosition:=35))
-        ucrInputColumnsBackColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkColumnsBackColor.AddParameterPresentCondition(True, "column_labels.background.color")
         ucrChkColumnsBackColor.AddParameterPresentCondition(False, "column_labels.background.color", False)
 
@@ -342,7 +338,6 @@ Public Class sdgSummaryThemes
 
         ucrChkColumnsVlineColor.SetText("Vlines Color")
         ucrInputColumnsVlineColor.SetParameter(New RParameter("column_labels.vlines.color", iNewPosition:=10))
-        ucrInputColumnsVlineColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkColumnsVlineColor.AddParameterPresentCondition(True, "column_labels.vlines.color")
         ucrChkColumnsVlineColor.AddParameterPresentCondition(False, "column_labels.vlines.color", False)
 
@@ -360,7 +355,6 @@ Public Class sdgSummaryThemes
 
         ucrChkColomnsTopColor.SetText("Top Color")
         ucrInputColumnsTopColor.SetParameter(New RParameter("column_labels.border.top.color", iNewPosition:=10))
-        ucrInputColumnsTopColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkColomnsTopColor.AddParameterPresentCondition(True, "column_labels.border.top.color")
         ucrChkColomnsTopColor.AddParameterPresentCondition(False, "column_labels.border.top.color", False)
 
@@ -378,7 +372,6 @@ Public Class sdgSummaryThemes
 
         ucrChkColumnsBottomColor.SetText("Bottom Color")
         ucrInputColumnsBottomColor.SetParameter(New RParameter("column_labels.border.bottom.color", iNewPosition:=10))
-        ucrInputColumnsBottomColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkColumnsBottomColor.AddParameterPresentCondition(True, "column_labels.border.bottom.color")
         ucrChkColumnsBottomColor.AddParameterPresentCondition(False, "column_labels.border.bottom.color", False)
 
@@ -396,7 +389,6 @@ Public Class sdgSummaryThemes
 
         ucrChkColumnsSideColor.SetText("Side Color")
         ucrInputColumnsSideColor.SetParameter(New RParameter("column_labels.border.lr.colour", iNewPosition:=13))
-        ucrInputColumnsSideColor.SetRDefault(Chr(34) & "NULL" & Chr(34))
         ucrChkColumnsSideColor.AddParameterPresentCondition(True, "column_labels.border.lr.colour")
         ucrChkColumnsSideColor.AddParameterPresentCondition(False, "column_labels.border.lr.colour", False)
 
@@ -443,7 +435,7 @@ Public Class sdgSummaryThemes
         ucrInputSideColour.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSideStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTableAlign.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputTableBackColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrTableBackgroundColors.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTableFontColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTableLayout.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTableFontWeight.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
