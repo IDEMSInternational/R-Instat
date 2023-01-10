@@ -73,15 +73,7 @@ Public Class ucrDataViewReoGrid
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
-                    Dim strTmp = strData
-                    strData = String.Join(", ", strData.Where(Function(x) IsNumeric(x)))
-                    If strTmp.Contains("NA") Then
-                        If strData.Length > 0 Then
-                            strData &= ", NA"
-                        Else
-                            strData = "NA"
-                        End If
-                    End If
+                    strData = GetVector(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -102,12 +94,23 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
-    'Private Function GetVector(strData As String) As String
-    '    Dim strTemp As String()
-    '    For Each chrCurr In strData
-    '        If IsNumeric(chrCurr) OrElse chrCurr = 
-    '    Next
-    'End Function
+    Private Function GetVector(strData As String) As String
+        Dim arrChr() As Char = strData.ToCharArray()
+        Dim strVec As String = ""
+        If strData <> "" Then
+            Dim arrChrLength As Integer = arrChr.Length - 1
+            For i As Integer = 0 To arrChrLength
+                Dim iPos As Integer = i + 1
+                If IsNumeric(arrChr(i)) Then
+                    strVec &= arrChr(i) & ", "
+                ElseIf iPos < arrChrLength AndAlso arrChr(i) & strData(iPos) = "NA" Then
+                    strVec &= arrChr(i) & strData(iPos) & ", "
+                End If
+            Next
+        End If
+        Return strVec.TrimEnd(",", " ")
+    End Function
+
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
