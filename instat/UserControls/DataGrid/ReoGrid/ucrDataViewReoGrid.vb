@@ -96,7 +96,7 @@ Public Class ucrDataViewReoGrid
 
     Private Function GetVector(strData As String) As String
         Dim strVec As String = ""
-        Dim collection As System.Text.RegularExpressions.MatchCollection = System.Text.RegularExpressions.Regex.Matches(strData, "\d+")
+        Dim collection As System.Text.RegularExpressions.MatchCollection = System.Text.RegularExpressions.Regex.Matches(strData, "\d+|\bN\S*A\b")
         If strData <> "" Then
             For Each match As System.Text.RegularExpressions.Match In collection
                 strVec &= match.ToString() & ", "
