@@ -324,6 +324,7 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
+        Me.cmdPascal = New System.Windows.Forms.Button()
         Me.cmdProbRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripProbability = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ProbStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -546,7 +547,6 @@ Partial Class ucrCalculator
         Me.ListBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdPascal = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.ContextMenuStripDate.SuspendLayout()
@@ -3853,6 +3853,18 @@ Partial Class ucrCalculator
         Me.grpProbabilty.TabStop = False
         Me.grpProbabilty.Text = "Probability"
         '
+        'cmdPascal
+        '
+        Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPascal.Location = New System.Drawing.Point(2, 189)
+        Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPascal.Name = "cmdPascal"
+        Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPascal.TabIndex = 213
+        Me.cmdPascal.Text = "pascal"
+        Me.cmdPascal.UseVisualStyleBackColor = True
+        '
         'cmdProbRHelp
         '
         Me.cmdProbRHelp.AutoSize = True
@@ -6404,18 +6416,6 @@ Partial Class ucrCalculator
         Me.ListStatipToolStripMenuItem.Name = "ListStatipToolStripMenuItem"
         Me.ListStatipToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ListStatipToolStripMenuItem.Text = "statip"
-        '
-        'cmdPascal
-        '
-        Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPascal.Location = New System.Drawing.Point(2, 189)
-        Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdPascal.Name = "cmdPascal"
-        Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
-        Me.cmdPascal.TabIndex = 213
-        Me.cmdPascal.Text = "Pascal"
-        Me.cmdPascal.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
