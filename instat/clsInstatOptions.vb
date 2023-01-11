@@ -282,11 +282,13 @@ Imports RDotNet
         End If
 
 
-        If iMaxOutputsHeight IsNot Nothing Then
-            SetMaximumOutputsHeight(iMaxOutputsHeight)
-        Else
-            SetMaximumOutputsHeight(clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
-        End If
+        'todo. Temporarily disabled
+        'If iMaxOutputsHeight IsNot Nothing Then
+        '    SetMaximumOutputsHeight(iMaxOutputsHeight)
+        'Else
+        '    SetMaximumOutputsHeight(clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+        'End If
+        SetMaximumOutputsHeight(-1)
     End Sub
 
     Public Sub SetMaxRows(iRows As Integer)

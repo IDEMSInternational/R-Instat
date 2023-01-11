@@ -175,13 +175,6 @@ Public Class RCodeStructure
         ' bExcludeAssignedFunctionOutput which it uses for the base code. Eventually migrate these out of RSyntax.
     End Sub
 
-    Public Function GetRObjectToAssignTo() As String
-        Return _strAssignToObject
-    End Function
-
-    Public Function IsAssigned()
-        Return Not String.IsNullOrEmpty(_strAssignToObject)
-    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary> Deprecated.   
@@ -294,6 +287,42 @@ Public Class RCodeStructure
 
     End Sub
 
+
+    ''' <summary>
+    ''' Gets the assign to variable
+    ''' </summary>
+    ''' <returns>assign to value</returns>
+    Public Function GetRObjectToAssignTo() As String
+        Return _strAssignToObject
+    End Function
+
+    Public Function IsAssigned()
+        Return Not String.IsNullOrEmpty(_strAssignToObject)
+    End Function
+
+    ''' <summary>
+    ''' Sets the assign to variable for objects that will not be added in the data book and displayed in the output viewer.
+    ''' For instance objects used as input parameters for other R funtions
+    ''' </summary>
+    ''' <param name="strRObjectToAssignTo">The new value for the R object assignment string</param>
+    Public Sub SetAssignToObject(strRObjectToAssignTo As String)
+        Me._strAssignToObject = strRObjectToAssignTo
+        Me._strAssignToObjectTypeLabel = ""
+        Me._strAssignToObjectFormat = ""
+        Me._strDataFrameNameToAddAssignToObject = ""
+        Me._strAssignToName = ""
+    End Sub
+
+    ''' <summary>
+    ''' Sets the assign to variables for objects that will be added to the databook and possibly displayed in the output viewer.
+    ''' To prevent the object from being diplayed in the output viewer,
+    ''' set bExcludeAssignedFunctionOutput = False (Not recommended, use the SetAssignToObject subroutine to get similar functionality).
+    ''' </summary>
+    ''' <param name="strRObjectToAssignTo">The new value for the R object assignment string</param>
+    ''' <param name="strRObjectTypeLabelToAssignTo">The new value for the object type label</param>
+    ''' <param name="strRObjectFormatToAssignTo">The new value for the object format</param>
+    ''' <param name="strRDataFrameNameToAddObjectTo">The new value for the data frame name that the object will be added to.</param>
+    ''' <param name="strObjectName">The new value for the object name</param>
     Public Sub SetAssignToOutputObject(strRObjectToAssignTo As String,
                                        strRObjectTypeLabelToAssignTo As String,
                                        strRObjectFormatToAssignTo As String,
@@ -507,12 +536,20 @@ Public Class RCodeStructure
                     clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
                 End If
 
+                clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
+
                 clsAddRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
                 clsAddRObject.AddParameter("object_type_label", Chr(34) & _strAssignToObjectTypeLabel & Chr(34))
                 clsAddRObject.AddParameter("object_format", Chr(34) & _strAssignToObjectFormat & Chr(34))
-                clsAddRObject.AddParameter("object", _strAssignToObject)
 
-                clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
+                If _strAssignToObjectTypeLabel = RObjectTypeLabel.Graph Then
+                    Dim clsCheckGraphRFunction As New RFunction
+                    clsCheckGraphRFunction.SetRCommand("check_graph")
+                    clsCheckGraphRFunction.AddParameter("graph_object", _strAssignToObject)
+                    clsAddRObject.AddParameter("object", clsRFunctionParameter:=clsCheckGraphRFunction)
+                Else
+                    clsAddRObject.AddParameter("object", strParameterValue:=_strAssignToObject)
+                End If
 
                 'construct the scripts 
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
