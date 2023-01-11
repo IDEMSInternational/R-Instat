@@ -80,6 +80,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputNullHypothesis = New instat.ucrInputTextBox()
         Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.cmdProprtionPriors = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -507,12 +508,22 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputMethod.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputMethod.TabIndex = 98
         '
+        'cmdProprtionPriors
+        '
+        Me.cmdProprtionPriors.Location = New System.Drawing.Point(322, 209)
+        Me.cmdProprtionPriors.Name = "cmdProprtionPriors"
+        Me.cmdProprtionPriors.Size = New System.Drawing.Size(105, 23)
+        Me.cmdProprtionPriors.TabIndex = 121
+        Me.cmdProprtionPriors.Text = "Proportion Priors"
+        Me.cmdProprtionPriors.UseVisualStyleBackColor = True
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.cmdProprtionPriors)
         Me.Controls.Add(Me.ucrInputCredibleLevel)
         Me.Controls.Add(Me.lblCredibleLevel)
         Me.Controls.Add(Me.lblSecondVariableType)
@@ -607,4 +618,5 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents lblCredibleLevel As Label
     Friend WithEvents cmdPrior As Button
     Friend WithEvents cmdEstimation As Button
+    Friend WithEvents cmdProprtionPriors As Button
 End Class

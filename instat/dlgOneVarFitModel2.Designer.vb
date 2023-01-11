@@ -98,6 +98,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNullValue = New instat.ucrInputTextBox()
+        Me.cmdProportionPrioirs = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -713,12 +714,22 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputNullValue.Size = New System.Drawing.Size(92, 21)
         Me.ucrInputNullValue.TabIndex = 114
         '
+        'cmdProportionPrioirs
+        '
+        Me.cmdProportionPrioirs.Location = New System.Drawing.Point(325, 164)
+        Me.cmdProportionPrioirs.Name = "cmdProportionPrioirs"
+        Me.cmdProportionPrioirs.Size = New System.Drawing.Size(101, 23)
+        Me.cmdProportionPrioirs.TabIndex = 119
+        Me.cmdProportionPrioirs.Text = "Proportion Prioirs"
+        Me.cmdProportionPrioirs.UseVisualStyleBackColor = True
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(428, 422)
+        Me.Controls.Add(Me.cmdProportionPrioirs)
         Me.Controls.Add(Me.cmdPrior)
         Me.Controls.Add(Me.ucrInputCredibleLevel)
         Me.Controls.Add(Me.lblCredibleLevel)
@@ -848,4 +859,5 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents lblCredibleLevel As Label
     Friend WithEvents cmdPrior As Button
     Friend WithEvents cmdEstimation As Button
+    Friend WithEvents cmdProportionPrioirs As Button
 End Class

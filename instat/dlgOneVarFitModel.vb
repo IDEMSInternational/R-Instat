@@ -22,13 +22,14 @@ Public Class dlgOneVarFitModel
     Private clsRplotFunction, clsRplotPPCompFunction, clsRplotCdfCompFunction, clsRplotQqCompFunction, clsRplotDensCompFunction As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
-    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsConcatenateFunction, clsDummyFunction,
+    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsConcatenateFunction, clsConcatenateBetaFuction, clsDummyFunction,
         clsBayesInferenceFunction, clsColumnNameFunction As New RFunction
 
     Private WithEvents ucrDistribution As ucrDistributions
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
     Private bResetSubdialog As Boolean = False
@@ -332,6 +333,7 @@ Public Class dlgOneVarFitModel
         clsSfFunction = New RFunction
         clsBayesInferenceFunction = New RFunction
         clsConcatenateFunction = New RFunction
+        clsConcatenateBetaFuction = New RFunction
         clsDummyFunction = New RFunction
 
         clsMeanCIFunction = New RFunction
@@ -499,6 +501,11 @@ Public Class dlgOneVarFitModel
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
 
+        clsConcatenateBetaFuction.SetRCommand("c")
+        clsConcatenateBetaFuction.AddParameter("a", 1, iPosition:=0)
+        clsConcatenateBetaFuction.AddParameter("b", 1, iPosition:=1)
+
+
         clsBayesInferenceFunction.SetRCommand("bayes_inference")
         clsBayesInferenceFunction.SetPackageName("statsr")
         clsBayesInferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -509,6 +516,7 @@ Public Class dlgOneVarFitModel
         clsBayesInferenceFunction.AddParameter("v_0", -1, iPosition:=12)
         clsBayesInferenceFunction.AddParameter("rscale", 1, iPosition:=13)
         clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+        clsBayesInferenceFunction.AddParameter("beta_prior", clsRFunctionParameter:=clsConcatenateBetaFuction, iPosition:=15)
 
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
@@ -725,6 +733,14 @@ Public Class dlgOneVarFitModel
         bResetSubdialog = False
         sdgEstimationParameters.ShowDialog()
     End Sub
+
+    Private Sub cmdProportionPrioirs_Click(sender As Object, e As EventArgs) Handles cmdProportionPrioirs.Click
+        sdgPriorProportions.SetRFunction(clsNewConcatenateFunction:=clsConcatenateFunction,
+                                         clsNewConcatenateBetaFuction:=clsConcatenateBetaFuction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorProportions.ShowDialog()
+    End Sub
+
 
     Private Sub SetSaveLabelTextAndPrefix()
         If rdoGeneralCase.Checked Then
@@ -1140,11 +1156,16 @@ Public Class dlgOneVarFitModel
 
     Private Sub PriorsVisibility()
         cmdPrior.Visible = rdoTest.Checked AndAlso (
-                ucrInputComboTests.GetText() = "Bayes:Mean" OrElse
-                ucrInputComboTests.GetText() = "Bayes:Proportion")
+                ucrInputComboTests.GetText() = "Bayes:Mean")
+        'ucrInputComboTests.GetText() = "Bayes:Proportion")
         cmdEstimation.Visible = rdoEstimate.Checked AndAlso (
-                ucrInputComboEstimate.GetText() = "bayes:mean" OrElse
+                ucrInputComboEstimate.GetText() = "bayes:mean")
+        'ucrInputComboEstimate.GetText() = "bayes:proportion")
+        cmdProportionPrioirs.Visible = rdoTest.Checked AndAlso (
+                 ucrInputComboTests.GetText() = "Bayes:Proportion") OrElse
+                 rdoEstimate.Checked AndAlso (
                 ucrInputComboEstimate.GetText() = "bayes:proportion")
+
     End Sub
 
     Private Sub ucrInputNullValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNullValue.ControlValueChanged

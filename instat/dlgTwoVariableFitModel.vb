@@ -31,7 +31,7 @@ Public Class dlgTwoVariableFitModel
     'Tests
     Private clsNumericTtestFunction, clsTtestFunction, clsNumericWilcoxTestFunction, clsWilcoxTestFunction,
         clsNumericVarTestFunction, clsVarTestFunction, clsAnsariTestFunction, clsNumericAnsariTestFuntion,
-        clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsConcatenateFunction,
+        clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsConcatenateFunction, clsConcatenateBetaFuction,
         clsNumericKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction, clsNumericBarletteTestFunction,
         clsMcnemarTestFunction, clsFlignerTestFunction, clsNumericFlignerTestFunction, clsFisherTestFunction,
         clsXchisgTestFunction, clsPropTestFunction, clsConvertToColumnTypeFunction, clsGetFactorLevelFunction,
@@ -46,6 +46,7 @@ Public Class dlgTwoVariableFitModel
     'General case codes
     Private clsFormulaOperator As New ROperator
     Private clsGLM, clsLM, clsGLMNB, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
+
 
     Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
@@ -267,6 +268,7 @@ Public Class dlgTwoVariableFitModel
         clsGetFactorLevelFunction = New RFunction
         clsColumnNameFunction = New RFunction
         clsConcatenateFunction = New RFunction
+        clsConcatenateBetaFuction = New RFunction
 
         clsAnsariTestOperator = New ROperator
         clsMoodTestOperator = New ROperator
@@ -479,6 +481,10 @@ Public Class dlgTwoVariableFitModel
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
 
+        clsConcatenateBetaFuction.SetRCommand("c")
+        clsConcatenateBetaFuction.AddParameter("a", 1, iPosition:=0)
+        clsConcatenateBetaFuction.AddParameter("b", 1, iPosition:=1)
+
         clsBayesInferenceFunction.SetRCommand("bayes_inference")
         clsBayesInferenceFunction.SetPackageName("statsr")
         clsBayesInferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -491,6 +497,8 @@ Public Class dlgTwoVariableFitModel
         clsBayesInferenceFunction.AddParameter("v_0", -1, iPosition:=12)
         clsBayesInferenceFunction.AddParameter("rscale", 1, iPosition:=13)
         clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+        clsBayesInferenceFunction.AddParameter("beta_prior2", clsRFunctionParameter:=clsConcatenateBetaFuction, iPosition:=15)
+
 
 
         clsTtestOperator.SetOperation("~")
@@ -755,6 +763,13 @@ Public Class dlgTwoVariableFitModel
                                         clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgEstimationParameters.ShowDialog()
+    End Sub
+
+    Private Sub cmdProprtionPriors_Click(sender As Object, e As EventArgs) Handles cmdProprtionPriors.Click
+        sdgPriorProportions.SetRFunction(clsNewConcatenateFunction:=clsConcatenateFunction,
+                                                 clsNewConcatenateBetaFuction:=clsConcatenateBetaFuction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorProportions.ShowDialog()
     End Sub
 
     Private Sub UpdatePreview()
@@ -1214,13 +1229,13 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub PrioirsVisisbility()
         cmdPrior.Visible = rdoTest.Checked AndAlso (
-                ucrInputTest.GetText() = "bayes:mean" OrElse
-                ucrInputTest.GetText() = "bayes:proportion") AndAlso
-                ucrInputType.GetText = "hypothesis test"
+                ucrInputTest.GetText() = "bayes:mean" AndAlso
+                ucrInputType.GetText = "hypothesis test")
         cmdEstimation.Visible = rdoTest.Checked AndAlso (
-                ucrInputTest.GetText() = "bayes:mean" OrElse
-                ucrInputTest.GetText() = "bayes:proportion") AndAlso
-                ucrInputType.GetText = "credible interval"
+                ucrInputTest.GetText() = "bayes:mean" AndAlso
+                ucrInputType.GetText = "credible interval")
+        cmdProprtionPriors.Visible = rdoTest.Checked AndAlso (
+            ucrInputTest.GetText() = "bayes:proportion")
     End Sub
 
     Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
