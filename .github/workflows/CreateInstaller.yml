@@ -29,9 +29,9 @@ jobs:
     
     # set variables
     env:
-      Solution_Name: Instat.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: instat\instat.vbproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-
+      Solution_Name: Instat.sln                        
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
     # check out r-instat
     steps:
     - name: Checkout
@@ -41,11 +41,11 @@ jobs:
         
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.1.3
 
     # set up and restore NuGet packages
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.6
+      uses: NuGet/setup-nuget@v1.1.1
       
     - name: Restore NuGet
       run: nuget restore $env:Solution_Name
@@ -71,30 +71,42 @@ jobs:
         path: instat\My Project\AssemblyInfo.vb
         # optional, default is ${{ github.workspace }}
         # Version number to set on [AssemblyVersion] and [AssemblyFileVersion] attributes of AssemblyInfo.cs/.vb files
-        version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}" #.${env:BUILD_NUMBER}"
+        version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}.${env:BUILD_NUMBER}"
 
     # Create the app package by building and packaging the Windows Application Packaging project
+    #Same output for 64bit and 32 bit 
     - name: Create the app package
-      run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
-        Appx_Bundle_Platforms: x86|x64
+        Appx_Bundle_Platforms: x64|x86
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}      
+        
+    # Create directory and copy over application to a 32bit folder
+    # There is no difference in R instat other than the packaged R
+    - name: Make Library directory 64 bit
+      run: |
+        MKDIR instat\bin\x86\Release\
+  
+    - name: Copy R-Instat Data 64 bit
+      run: |
+        ROBOCOPY instat\bin\Release\ instat\bin\x86\Release\ /E
+      continue-on-error: true
 
     # Build 32 bit installer without R
-    #- name: Building the installer 32bit - No R
-    #  run: |
-    #    "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-    #  shell: cmd
-    
+    - name: Building the installer 32bit - No R
+      run: |
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+      shell: cmd
+         
     # upload 32 bit installer without R
-    #- name: Upload the 32 bit installer as an artifact
-    #  uses: actions/upload-artifact@v2
-    #  if: ${{ github.event_name != 'pull_request' }}
-    #  with:
-    #    path: "Output/R-Instat_0.7.4_Installer_32.exe"
-    #    name: rinstat32NoR-innosetup
+    - name: Upload the 32 bit installer as an artifact
+      uses: actions/upload-artifact@v2
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "Output/R-Instat_Installer_32.exe"
+        name: rinstat32NoR-innosetup
         
     # Build 64 bit installer without R
     - name: Building the installer 64bit - No R
@@ -112,7 +124,7 @@ jobs:
             
     # check out R-Instat Data 
     - name: Checkout Instat Data
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: ' africanmathsinitiative/R-Instat-Data'
         fetch-depth: 0
@@ -129,18 +141,18 @@ jobs:
       continue-on-error: true
       
     # Create directory and copy over InstatData (32bit)
-    #- name: Make Library directory 32 bit
-    #  run: |
-    #    MKDIR instat\bin\x64\Release\static\Library\   
+    - name: Make Library directory 32 bit
+      run: |
+        MKDIR instat\bin\x86\Release\static\Library\   
             
-    #- name: Copy R-Instat Data 32 bit
-    #  run: |
-    #    ROBOCOPY InstatData\data\*.* instat\bin\x64\Release\static\Library\ /E
-    #  continue-on-error: true
+    - name: Copy R-Instat Data 32 bit
+      run: |
+        ROBOCOPY InstatData\data\*.* instat\bin\x86\Release\static\Library\ /E
+      continue-on-error: true
 
       # check out R for R-Instat
     - name: Checkout R for R-Instat
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: 'ChrisMarsh82/R-RInstat'
         fetch-depth: 0
@@ -151,129 +163,51 @@ jobs:
         ROBOCOPY R-RInstat\64Bit\ instat\bin\Release\static\ /E
       continue-on-error: true      
       
-    #- name: Copy R 32 bit
-    #  run: |
-    #    ROBOCOPY R-RInstat\32Bit\ instat\bin\x64\Release\static\ /E
-    #  continue-on-error: true 
+    - name: Copy R 32 bit
+      run: |
+        ROBOCOPY R-RInstat\32Bit\ instat\bin\x86\Release\static\ /E
+      continue-on-error: true 
      
     - name: Install R packages (64 bit)
       run: |
-         Sys.setenv(TZ='GMT')
-         install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
-         packs <- c("abind", "agricolae", "agridat", "AlgDesign", "animation", 
-         "anytime", "arrangements", "ash", "askpass", "assertthat", "automap", 
-         "backports", "base64enc", "bayestestR", "BH", "bit", "bit64", 
-         "bitops", "boot", "brew", "brio", "broom", "bslib", "ca", "cachem", 
-         "callr", "candisc", "car", "carData", "caret", "cellranger", 
-         "changepoint", "checkmate", "chillR", "chron", "circlize", "CircStats", 
-         "circular", "class", "classInt", "cli", "clifro", "climdex.pcic", 
-         "clipr", "clock", "clue", "cluster", "cmsaf", "cmsafops", "cmsafvis", 
-         "codetools", "coin", "colorRamps", "colorspace", "colourpicker", 
-         "combinat", "commonmark", "confintr", "corrplot", "corrr", "countrycode", 
-         "cowplot", "cpp11", "crayon", "credentials", "crosstalk", "curl", 
-         "DAAG", "dae", "data.table", "datawizard", "date", "DBI", "deldir", 
-         "dendextend", "DEoptimR", "desc", "DescTools", "devtools", "diffobj", 
-         "digest", "distillery", "dotCall64", "downlit", "dplyr", "dslabs", 
-         "DT", "e1071", "ecmwfr", "effectsize", "ellipse", "ellipsis", 
-         "emmeans", "EnvStats", "estimability", "evaluate", "Evapotranspiration", 
-         "Exact", "exactRankTests", "expm", "extraDistr", "extrafont", 
-         "extrafontdb", "extRemes", "factoextra", "FactoMineR", "fansi", 
-         "faraway", "farver", "fastDummies", "fastmap", "fields", "filelock", 
-         "fitdistrplus", "flashClust", "FNN", "fontawesome", "forcats", 
-         "foreach", "forecast", "foreign", "formula.tools", "Formula", 
-         "fracdiff", "fs", "future.apply", "future", "gapminder", "gclus", 
-         "gcookbook", "generics", "GenSA", "geosphere", "gert", "getPass", 
-         "GGally", "ggalt", "ggdendro", "ggeffects", "ggfittext", "ggforce", 
-         "ggformula", "ggfortify", "ggmosaic", "ggplot2", "ggplotify", 
-         "ggpmisc", "ggpp", "ggpubr", "ggrepel", "ggridges", "ggsci", 
-         "ggsignif", "ggstance", "ggtext", "ggthemes", "ggwordcloud", 
-         "gh", "gitcreds", "gld", "GlobalOptions", "globals", "glue", 
-         "gmp", "gnm", "goftest", "gower", "gridExtra", "gridGraphics", 
-         "gridtext", "gstat", "gtable", "hardhat", "haven", "heplots", 
-         "hexbin", "highr", "HistData", "Hmisc", "hms", "htmlTable", "htmltools", 
-         "htmlwidgets", "httpuv", "httr", "hunspell", "hydroGOF", "hydroTSM", 
-         "imputeTS", "ini", "insight", "interp", "intervals", "ipred", 
-         "isoband", "iterators", "janeaustenr", "janitor", "jpeg", "jquerylib", 
-         "jsonlite", "Kendall", "KernSmooth", "keyring", "klaR", "knitr", 
-         "labeling", "labelled", "Lahman", "later", "lattice", "latticeExtra", 
-         "lava", "lazyeval", "leaflet.providers", "leaflet", "leaps", 
-         "lemon", "libcoin", "lifecycle", "listenv", "lme4", "lmodel2", 
-         "lmom", "lmomco", "Lmoments", "lmtest", "lubridate", "lwgeom", 
-         "magick", "magrittr", "mapdata", "mapproj", "maps", "maptools", 
-         "markdown", "MASS", "Matrix", "MatrixModels", "matrixStats", 
-         "mc2d", "memoise", "metR", "mgcv", "mime", "miniUI", "minqa", 
-         "MKdescr", "MKinfer", "mlbench", "ModelMetrics", "modelr", "modeltools", 
-         "mosaic", "mosaicCore", "mosaicData", "multcomp", "multcompView", 
-         "munsell", "mvtnorm", "ncdf4.helpers", "ncdf4", "nlme", "nloptr", 
-         "nnet", "nortest", "numDeriv", "nycflights13", "openair", "openssl", 
-         "openxlsx", "operator.tools", "parallelly", "parameters", "patchwork", 
-         "pbkrtest", "pbs", "PCICt", "performance", "pillar", "pingr", 
-         "pkgbuild", "pkgconfig", "pkgdown", "pkgload", "plotly", "plotrix", 
-         "pls", "plyr", "png", "polyclip", "polynom", "praise", "prettyunits", 
-         "pROC", "processx", "prodlim", "productplots", "profvis", "progress", 
-         "progressr", "proj4", "promises", "proxy", "ps", "purrr", "qap", 
-         "quadprog", "quantmod", "quantreg", "questionr", "qvcalc", "R.cache", 
-         "R.methodsS3", "R.oo", "R.utils", "R6", "ragg", "rainfarmr", 
-         "rappdirs", "raster", "rasterVis", "rbibutils", "rcmdcheck", 
-         "RColorBrewer", "rcorpora", "Rcpp", "RcppArmadillo", "RcppEigen", 
-         "RcppRoll", "RCurl", "Rdpack", "readODS", "readr", "readxl", 
-         "recipes", "registry", "relimp", "rematch", "rematch2", "remotes", 
-         "repr", "reshape", "reshape2", "rgdal", "rio", "rje", "rlang", 
-         "rmarkdown", "RMAWGEN", "RMySQL", "robustbase", "rootSolve", 
-         "roxygen2", "rpart", "rpivotTable", "rprojroot", "rrefine", "rstatix", 
-         "rstudioapi", "rtf", "Rttf2pt1", "rversions", "rvest", "rworldmap", 
-         "rworldxtra", "s2", "sandwich", "sass", "scales", "scatterplot3d", 
-         "SearchTrees", "selectr", "seriation", "sessioninfo", "sf", "sftime", 
-         "shades", "shape", "shiny", "shinyFiles", "shinyjs", "shinythemes", 
-         "shinyWidgets", "signmedian.test", "sjlabelled", "sjmisc", "sjPlot", 
-         "sjstats", "skimr", "snakecase", "SnowballC", "sodium", "sourcetools", 
-         "sp", "spacetime", "spam", "SparseM", "SPEI", "splines2", "splus2R", 
-         "SQUAREM", "stars", "statip", "stinepack", "stringdist", "stringi", 
-         "stringr", "strucchange", "styler", "survival", "svglite", "sys", 
-         "systemfonts", "terra", "testthat", "texmex", "textshaping", 
-         "TH.data", "tibble", "tidyr", "tidyselect", "tidytext", "timechange", 
-         "timeDate", "tinytex", "tokenizers", "treemapify", "trend", "tseries", 
-         "TSP", "TTR", "tweenr", "tzdb", "units", "urca", "urlchecker", 
-         "usethis", "utf8", "vars", "vcd", "vcdExtra", "vctrs", "viridis", 
-         "viridisLite", "visdat", "visreg", "vroom", "wakefield", "waldo", 
-         "weathermetrics", "whisker", "withr", "wk", "xfun", "XML", "xml2", 
-         "xopen", "xtable", "xts", "yaml", "yulab.utils", "zip", "zoo", 
-         "zyp")
-         
-         install.packages(packs, dependencies = FALSE,repos='https://cloud.r-project.org', type="both")
-         devtools::install_github("ianmoran11/mmtable2")
-      shell: Rscript {0}      
-    #  run: |
-    #    "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
-    #  shell: cmd
-      
-    #- name: Install R packages (32 bit)
-    #  run: |
-    #    "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
-    #  shell: cmd      
+        "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+      shell: cmd     
       
     - name: Building the installer 64bit - With R
       run: |
         "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_64bit.iss"
       shell: cmd
       
-    #- name: Building the installer 32bit - With R
-    #  run: |
-    #    "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
-    #  shell: cmd
-
     - name: Upload the 64 bit installer with R as an artifact
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/R-Instat_Installer_64.exe"
         name: rinstat64WithR-innosetup    
-         
-    #- name: Upload the 32 bit installer with R as an artifact
-    #  uses: actions/upload-artifact@v2
-    #  if: ${{ github.event_name != 'pull_request' }}
-    #  with:
-    #    path: "Output/R-Instat_Installer_32.exe"
-    #    name: rinstat64WithR-innosetup      
+    
+    - name: Remove 64 bit release files to free up space
+      run: |
+        Remove-Item "instat\bin\Release\" -Recurse
+            
+    - name: Remove 64 innosetup to free up space
+      run: |
+        del "Output/R-Instat_Installer_64.exe"
+      
+    - name: Install R packages (32 bit)
+      run: |
+        "instat\bin\x86\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+      shell: cmd      
+      
+    - name: Building the installer 32bit - With R
+      run: |
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_32bit.iss"
+      shell: cmd
+      
+    - name: Upload the 32 bit installer with R as an artifact
+      uses: actions/upload-artifact@v2
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        path: "Output/R-Instat_Installer_32.exe"
+        name: rinstat32WithR-innosetup      
 
             

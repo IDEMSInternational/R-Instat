@@ -554,8 +554,7 @@ Public Class dlgOneVarFitModel
         bResetSubdialog = True
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'todo
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlValueChanged
         clsRplotFunction.AddParameter("x", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=0)
         clsRplotPPCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
         clsRplotCdfCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
