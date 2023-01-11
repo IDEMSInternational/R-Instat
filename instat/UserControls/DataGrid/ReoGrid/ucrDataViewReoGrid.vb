@@ -95,17 +95,11 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Function GetVector(strData As String) As String
-        Dim arrChr() As Char = strData.ToCharArray()
         Dim strVec As String = ""
+        Dim collection As System.Text.RegularExpressions.MatchCollection = System.Text.RegularExpressions.Regex.Matches(strData, "\d+")
         If strData <> "" Then
-            Dim arrChrLength As Integer = arrChr.Length - 1
-            For i As Integer = 0 To arrChrLength
-                Dim iPos As Integer = i + 1
-                If IsNumeric(arrChr(i)) Then
-                    strVec &= arrChr(i) & ", "
-                ElseIf iPos < arrChrLength AndAlso arrChr(i) & strData(iPos) = "NA" Then
-                    strVec &= arrChr(i) & strData(iPos) & ", "
-                End If
+            For Each match As System.Text.RegularExpressions.Match In collection
+                strVec &= match.ToString() & ", "
             Next
         End If
         Return strVec.TrimEnd(",", " ")
