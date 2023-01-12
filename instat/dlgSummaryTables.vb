@@ -32,7 +32,8 @@ Public Class dlgSummaryTables
             clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
             clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
-            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesBaseFunction As New RFunction
+            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesTabOptionsFunction,
+            clsgtExtraThemesFunction, clsThemeDummyFunction As New RFunction
 
     Private clsMmtableOperator, clsSummaryOperator, clsFrequencyOperator, clsColumnOperator,
             clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
@@ -233,7 +234,9 @@ Public Class dlgSummaryTables
         clsFrequencyOperator = New ROperator
         clsMmtableOperator = New ROperator
         clsDummyFunction = New RFunction
-        clsThemesBaseFunction = New RFunction
+        clsThemesTabOptionsFunction = New RFunction
+        clsgtExtraThemesFunction = New RFunction
+        clsThemeDummyFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -265,6 +268,11 @@ Public Class dlgSummaryTables
 
         clsStubHeadFunction.SetPackageName("gt")
         clsStubHeadFunction.SetRCommand("tab_stubhead")
+
+        clsThemesTabOptionsFunction.SetPackageName("gt")
+        clsThemesTabOptionsFunction.SetRCommand("tab_options")
+
+        clsgtExtraThemesFunction.SetPackageName("gtExtras")
 
         clsTabStyleFunction.SetRCommand("tab_style")
         clsTabStyleFunction.SetPackageName("gt")
@@ -466,7 +474,8 @@ Public Class dlgSummaryTables
                                        clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                        clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
-                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesBaseFunction:=clsThemesBaseFunction, bReset:=bReset)
+                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
+                                       clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemeDummyFunction:=clsThemeDummyFunction, bReset:=bReset)
         Else
             sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                       clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
@@ -474,7 +483,8 @@ Public Class dlgSummaryTables
                                      clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                      clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
-                                     clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesBaseFunction:=clsThemesBaseFunction, bReset:=bReset)
+                                     clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
+                                     clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemeDummyFunction:=clsThemeDummyFunction, bReset:=bReset)
         End If
 
         sdgFormatSummaryTables.ShowDialog()

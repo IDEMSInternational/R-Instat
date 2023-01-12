@@ -24,9 +24,22 @@ Partial Class sdgSummaryThemes
     Private Sub InitializeComponent()
         Me.tbSummaryThemes = New System.Windows.Forms.TabControl()
         Me.tbThemeTables = New System.Windows.Forms.TabPage()
+        Me.grpTableBorder = New System.Windows.Forms.GroupBox()
+        Me.grpFont = New System.Windows.Forms.GroupBox()
+        Me.tbThemeTitles = New System.Windows.Forms.TabPage()
+        Me.grpHeadingBorder = New System.Windows.Forms.GroupBox()
+        Me.grpSubTitle = New System.Windows.Forms.GroupBox()
+        Me.grpTitle = New System.Windows.Forms.GroupBox()
+        Me.tbColumns = New System.Windows.Forms.TabPage()
+        Me.grpColumnLabelsFont = New System.Windows.Forms.GroupBox()
+        Me.grpColumnVlines = New System.Windows.Forms.GroupBox()
+        Me.grpColumnsBorder = New System.Windows.Forms.GroupBox()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.ucrTableBackgroundColors = New instat.ucrColors()
         Me.ucrNudTableWidth = New instat.ucrNud()
-        Me.grpTableBorder = New System.Windows.Forms.GroupBox()
         Me.ucrInputTableLeftColor = New instat.ucrColors()
         Me.ucrInputTableBottomColor = New instat.ucrColors()
         Me.ucrInputTableRightColor = New instat.ucrColors()
@@ -53,7 +66,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableTopColor = New instat.ucrCheck()
         Me.ucrInputTableLayout = New instat.ucrInputComboBox()
         Me.ucrInputTableAlign = New instat.ucrInputComboBox()
-        Me.grpFont = New System.Windows.Forms.GroupBox()
         Me.ucrInputTableFontColor = New instat.ucrColors()
         Me.ucrNudTableFontSize = New instat.ucrNud()
         Me.ucrInputTableFontStyle = New instat.ucrInputComboBox()
@@ -68,11 +80,9 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableLayout = New instat.ucrCheck()
         Me.ucrChkTableAlign = New instat.ucrCheck()
         Me.ucrChkTableBackColor = New instat.ucrCheck()
-        Me.tbThemeTitles = New System.Windows.Forms.TabPage()
         Me.ucrInputBackgroundColour = New instat.ucrColors()
         Me.ucrChkBackgroundColour = New instat.ucrCheck()
         Me.ucrChkAlignment = New instat.ucrCheck()
-        Me.grpHeadingBorder = New System.Windows.Forms.GroupBox()
         Me.ucrInputSideColour = New instat.ucrColors()
         Me.ucrInputBottomColour = New instat.ucrColors()
         Me.ucrNudSideWidth = New instat.ucrNud()
@@ -89,39 +99,34 @@ Partial Class sdgSummaryThemes
         Me.ucrChkBoxWidth = New instat.ucrCheck()
         Me.ucrInputSideStyle = New instat.ucrInputComboBox()
         Me.ucrInputBottomStyle = New instat.ucrInputComboBox()
-        Me.grpSubTitle = New System.Windows.Forms.GroupBox()
         Me.ucrNudSubTitleSize = New instat.ucrNud()
         Me.ucrChkSubTitleWeight = New instat.ucrCheck()
         Me.ucrChkSubTitleSize = New instat.ucrCheck()
         Me.ucrInputSubTitleWeight = New instat.ucrInputComboBox()
-        Me.grpTitle = New System.Windows.Forms.GroupBox()
         Me.ucrNudFontSize = New instat.ucrNud()
         Me.ucrChkFontWeight = New instat.ucrCheck()
         Me.ucrChkFontSize = New instat.ucrCheck()
         Me.ucrInputFontWeight = New instat.ucrInputComboBox()
         Me.ucrInputAlignment = New instat.ucrInputComboBox()
-        Me.tbColumns = New System.Windows.Forms.TabPage()
+        Me.ucrNudColumnsHorizontalPadding = New instat.ucrNud()
+        Me.ucrNudColumnsPadding = New instat.ucrNud()
         Me.ucrInputColumnsBackColor = New instat.ucrColors()
         Me.ucrInputColumnsTextTransform = New instat.ucrInputComboBox()
         Me.ucrChkColumnsTextTransform = New instat.ucrCheck()
         Me.ucrChkColumnsBackColor = New instat.ucrCheck()
-        Me.grpColumnLabelsFont = New System.Windows.Forms.GroupBox()
         Me.ucrNudColumnsFontSize = New instat.ucrNud()
         Me.ucrInputColumnsFontWeight = New instat.ucrInputComboBox()
         Me.ucrChkColumnsFontSize = New instat.ucrCheck()
         Me.ucrChkColumnsFontWeight = New instat.ucrCheck()
-        Me.ucrChkColumnsPadding = New instat.ucrCheck()
-        Me.ucrInputColumnsPadding = New instat.ucrInputComboBox()
-        Me.ucrChkColumnsHorizontalPadding = New instat.ucrCheck()
-        Me.ucrInputColumnsHorizontalPadding = New instat.ucrInputComboBox()
-        Me.grpColumnVlines = New System.Windows.Forms.GroupBox()
         Me.ucrInputColumnsVlineColor = New instat.ucrColors()
         Me.ucrNudColumnsVlineWidth = New instat.ucrNud()
         Me.ucrInputColumnsVlineStyle = New instat.ucrInputComboBox()
         Me.ucrChkColumnsVlineWidth = New instat.ucrCheck()
         Me.ucrChkColumnsVlineStyle = New instat.ucrCheck()
         Me.ucrChkColumnsVlineColor = New instat.ucrCheck()
-        Me.grpColumnsBorder = New System.Windows.Forms.GroupBox()
+        Me.ucrInputColumnsSideColor = New instat.ucrColors()
+        Me.ucrInputColumnsBottomColor = New instat.ucrColors()
+        Me.ucrInputColumnsTopColor = New instat.ucrColors()
         Me.ucrNudColumnsSideWidth = New instat.ucrNud()
         Me.ucrNudColumnsBottomWidth = New instat.ucrNud()
         Me.ucrNudColumnsTopWidth = New instat.ucrNud()
@@ -137,13 +142,9 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColumnsTopWidth = New instat.ucrCheck()
         Me.ucrChkColumnsTopStyle = New instat.ucrCheck()
         Me.ucrChkColomnsTopColor = New instat.ucrCheck()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.ucrInputColumnsTopColor = New instat.ucrColors()
-        Me.ucrInputColumnsBottomColor = New instat.ucrColors()
-        Me.ucrInputColumnsSideColor = New instat.ucrColors()
+        Me.ucrChkColumnsPadding = New instat.ucrCheck()
+        Me.ucrChkColumnsHorizontalPadding = New instat.ucrCheck()
+        Me.ucrBaseSummaryTheme = New instat.ucrButtonsSubdialogue()
         Me.tbSummaryThemes.SuspendLayout()
         Me.tbThemeTables.SuspendLayout()
         Me.grpTableBorder.SuspendLayout()
@@ -193,30 +194,6 @@ Partial Class sdgSummaryThemes
         Me.tbThemeTables.Text = "Table"
         Me.tbThemeTables.UseVisualStyleBackColor = True
         '
-        'ucrTableBackgroundColors
-        '
-        Me.ucrTableBackgroundColors.AddQuotesIfUnrecognised = True
-        Me.ucrTableBackgroundColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrTableBackgroundColors.GetSetSelectedIndex = -1
-        Me.ucrTableBackgroundColors.IsReadOnly = False
-        Me.ucrTableBackgroundColors.Location = New System.Drawing.Point(160, 22)
-        Me.ucrTableBackgroundColors.Name = "ucrTableBackgroundColors"
-        Me.ucrTableBackgroundColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrTableBackgroundColors.TabIndex = 19
-        '
-        'ucrNudTableWidth
-        '
-        Me.ucrNudTableWidth.AutoSize = True
-        Me.ucrNudTableWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTableWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTableWidth.Location = New System.Drawing.Point(160, 98)
-        Me.ucrNudTableWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTableWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTableWidth.Name = "ucrNudTableWidth"
-        Me.ucrNudTableWidth.Size = New System.Drawing.Size(137, 20)
-        Me.ucrNudTableWidth.TabIndex = 17
-        Me.ucrNudTableWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'grpTableBorder
         '
         Me.grpTableBorder.Controls.Add(Me.ucrInputTableLeftColor)
@@ -249,6 +226,229 @@ Partial Class sdgSummaryThemes
         Me.grpTableBorder.TabIndex = 16
         Me.grpTableBorder.TabStop = False
         Me.grpTableBorder.Text = "Table Border"
+        '
+        'grpFont
+        '
+        Me.grpFont.Controls.Add(Me.ucrInputTableFontColor)
+        Me.grpFont.Controls.Add(Me.ucrNudTableFontSize)
+        Me.grpFont.Controls.Add(Me.ucrInputTableFontStyle)
+        Me.grpFont.Controls.Add(Me.ucrInputTableFontWeight)
+        Me.grpFont.Controls.Add(Me.ucrInputTableFontNames)
+        Me.grpFont.Controls.Add(Me.ucrChkTableFontColor)
+        Me.grpFont.Controls.Add(Me.ucrChkTableFontStyle)
+        Me.grpFont.Controls.Add(Me.ucrChkTableFontSize)
+        Me.grpFont.Controls.Add(Me.ucrChkTableFontNames)
+        Me.grpFont.Controls.Add(Me.ucrChkTableFontWeight)
+        Me.grpFont.Location = New System.Drawing.Point(6, 166)
+        Me.grpFont.Name = "grpFont"
+        Me.grpFont.Size = New System.Drawing.Size(317, 161)
+        Me.grpFont.TabIndex = 9
+        Me.grpFont.TabStop = False
+        Me.grpFont.Text = "Table Font"
+        '
+        'tbThemeTitles
+        '
+        Me.tbThemeTitles.Controls.Add(Me.ucrInputBackgroundColour)
+        Me.tbThemeTitles.Controls.Add(Me.ucrChkBackgroundColour)
+        Me.tbThemeTitles.Controls.Add(Me.ucrChkAlignment)
+        Me.tbThemeTitles.Controls.Add(Me.grpHeadingBorder)
+        Me.tbThemeTitles.Controls.Add(Me.grpSubTitle)
+        Me.tbThemeTitles.Controls.Add(Me.grpTitle)
+        Me.tbThemeTitles.Controls.Add(Me.ucrInputAlignment)
+        Me.tbThemeTitles.Location = New System.Drawing.Point(4, 22)
+        Me.tbThemeTitles.Name = "tbThemeTitles"
+        Me.tbThemeTitles.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeTitles.Size = New System.Drawing.Size(728, 353)
+        Me.tbThemeTitles.TabIndex = 1
+        Me.tbThemeTitles.Text = "Titles"
+        Me.tbThemeTitles.UseVisualStyleBackColor = True
+        '
+        'grpHeadingBorder
+        '
+        Me.grpHeadingBorder.Controls.Add(Me.ucrInputSideColour)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrInputBottomColour)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrNudSideWidth)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrNudBottomWidth)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrNudBoxLength)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrNudBoxWidth)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkSideColour)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkSideStyle)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkSideWidth)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBottomColour)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBottomStyle)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBottomWidth)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBoxLength)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBoxWidth)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrInputSideStyle)
+        Me.grpHeadingBorder.Controls.Add(Me.ucrInputBottomStyle)
+        Me.grpHeadingBorder.Location = New System.Drawing.Point(324, 18)
+        Me.grpHeadingBorder.Name = "grpHeadingBorder"
+        Me.grpHeadingBorder.Size = New System.Drawing.Size(314, 238)
+        Me.grpHeadingBorder.TabIndex = 6
+        Me.grpHeadingBorder.TabStop = False
+        Me.grpHeadingBorder.Text = "Heading Border"
+        '
+        'grpSubTitle
+        '
+        Me.grpSubTitle.Controls.Add(Me.ucrNudSubTitleSize)
+        Me.grpSubTitle.Controls.Add(Me.ucrChkSubTitleWeight)
+        Me.grpSubTitle.Controls.Add(Me.ucrChkSubTitleSize)
+        Me.grpSubTitle.Controls.Add(Me.ucrInputSubTitleWeight)
+        Me.grpSubTitle.Location = New System.Drawing.Point(28, 184)
+        Me.grpSubTitle.Name = "grpSubTitle"
+        Me.grpSubTitle.Size = New System.Drawing.Size(277, 76)
+        Me.grpSubTitle.TabIndex = 5
+        Me.grpSubTitle.TabStop = False
+        Me.grpSubTitle.Text = "Sub -Title"
+        '
+        'grpTitle
+        '
+        Me.grpTitle.Controls.Add(Me.ucrNudFontSize)
+        Me.grpTitle.Controls.Add(Me.ucrChkFontWeight)
+        Me.grpTitle.Controls.Add(Me.ucrChkFontSize)
+        Me.grpTitle.Controls.Add(Me.ucrInputFontWeight)
+        Me.grpTitle.Location = New System.Drawing.Point(28, 88)
+        Me.grpTitle.Name = "grpTitle"
+        Me.grpTitle.Size = New System.Drawing.Size(277, 76)
+        Me.grpTitle.TabIndex = 4
+        Me.grpTitle.TabStop = False
+        Me.grpTitle.Text = "Title"
+        '
+        'tbColumns
+        '
+        Me.tbColumns.Controls.Add(Me.ucrNudColumnsHorizontalPadding)
+        Me.tbColumns.Controls.Add(Me.ucrNudColumnsPadding)
+        Me.tbColumns.Controls.Add(Me.ucrInputColumnsBackColor)
+        Me.tbColumns.Controls.Add(Me.ucrInputColumnsTextTransform)
+        Me.tbColumns.Controls.Add(Me.ucrChkColumnsTextTransform)
+        Me.tbColumns.Controls.Add(Me.ucrChkColumnsBackColor)
+        Me.tbColumns.Controls.Add(Me.grpColumnLabelsFont)
+        Me.tbColumns.Controls.Add(Me.grpColumnVlines)
+        Me.tbColumns.Controls.Add(Me.grpColumnsBorder)
+        Me.tbColumns.Controls.Add(Me.ucrChkColumnsPadding)
+        Me.tbColumns.Controls.Add(Me.ucrChkColumnsHorizontalPadding)
+        Me.tbColumns.Location = New System.Drawing.Point(4, 22)
+        Me.tbColumns.Name = "tbColumns"
+        Me.tbColumns.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbColumns.Size = New System.Drawing.Size(728, 353)
+        Me.tbColumns.TabIndex = 2
+        Me.tbColumns.Text = "Columns"
+        Me.tbColumns.UseVisualStyleBackColor = True
+        '
+        'grpColumnLabelsFont
+        '
+        Me.grpColumnLabelsFont.Controls.Add(Me.ucrNudColumnsFontSize)
+        Me.grpColumnLabelsFont.Controls.Add(Me.ucrInputColumnsFontWeight)
+        Me.grpColumnLabelsFont.Controls.Add(Me.ucrChkColumnsFontSize)
+        Me.grpColumnLabelsFont.Controls.Add(Me.ucrChkColumnsFontWeight)
+        Me.grpColumnLabelsFont.Location = New System.Drawing.Point(11, 141)
+        Me.grpColumnLabelsFont.Name = "grpColumnLabelsFont"
+        Me.grpColumnLabelsFont.Size = New System.Drawing.Size(317, 77)
+        Me.grpColumnLabelsFont.TabIndex = 24
+        Me.grpColumnLabelsFont.TabStop = False
+        Me.grpColumnLabelsFont.Text = "Column Labels Font"
+        '
+        'grpColumnVlines
+        '
+        Me.grpColumnVlines.Controls.Add(Me.ucrInputColumnsVlineColor)
+        Me.grpColumnVlines.Controls.Add(Me.ucrNudColumnsVlineWidth)
+        Me.grpColumnVlines.Controls.Add(Me.ucrInputColumnsVlineStyle)
+        Me.grpColumnVlines.Controls.Add(Me.ucrChkColumnsVlineWidth)
+        Me.grpColumnVlines.Controls.Add(Me.ucrChkColumnsVlineStyle)
+        Me.grpColumnVlines.Controls.Add(Me.ucrChkColumnsVlineColor)
+        Me.grpColumnVlines.Location = New System.Drawing.Point(11, 226)
+        Me.grpColumnVlines.Name = "grpColumnVlines"
+        Me.grpColumnVlines.Size = New System.Drawing.Size(317, 116)
+        Me.grpColumnVlines.TabIndex = 18
+        Me.grpColumnVlines.TabStop = False
+        Me.grpColumnVlines.Text = "Column Labels vlines"
+        '
+        'grpColumnsBorder
+        '
+        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsSideColor)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsBottomColor)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsTopColor)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrNudColumnsSideWidth)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrNudColumnsBottomWidth)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrNudColumnsTopWidth)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsSideStyle)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsSideWidth)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsSideStyle)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsSideColor)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsBottomColor)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsBottomStyle)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsTopStyle)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsBottomWidth)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsBottomStyle)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsTopWidth)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsTopStyle)
+        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColomnsTopColor)
+        Me.grpColumnsBorder.Location = New System.Drawing.Point(358, 25)
+        Me.grpColumnsBorder.Name = "grpColumnsBorder"
+        Me.grpColumnsBorder.Size = New System.Drawing.Size(351, 317)
+        Me.grpColumnsBorder.TabIndex = 17
+        Me.grpColumnsBorder.TabStop = False
+        Me.grpColumnsBorder.Text = "Column Labels Border"
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(728, 353)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Rows"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(728, 353)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Stub"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Size = New System.Drawing.Size(728, 353)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "Footnotes"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TabPage7
+        '
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Size = New System.Drawing.Size(728, 353)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Sourcenotes"
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'ucrTableBackgroundColors
+        '
+        Me.ucrTableBackgroundColors.AddQuotesIfUnrecognised = True
+        Me.ucrTableBackgroundColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrTableBackgroundColors.GetSetSelectedIndex = -1
+        Me.ucrTableBackgroundColors.IsReadOnly = False
+        Me.ucrTableBackgroundColors.Location = New System.Drawing.Point(160, 22)
+        Me.ucrTableBackgroundColors.Name = "ucrTableBackgroundColors"
+        Me.ucrTableBackgroundColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrTableBackgroundColors.TabIndex = 19
+        '
+        'ucrNudTableWidth
+        '
+        Me.ucrNudTableWidth.AutoSize = True
+        Me.ucrNudTableWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTableWidth.Location = New System.Drawing.Point(160, 98)
+        Me.ucrNudTableWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTableWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTableWidth.Name = "ucrNudTableWidth"
+        Me.ucrNudTableWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudTableWidth.TabIndex = 17
+        Me.ucrNudTableWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputTableLeftColor
         '
@@ -520,25 +720,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputTableAlign.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTableAlign.TabIndex = 10
         '
-        'grpFont
-        '
-        Me.grpFont.Controls.Add(Me.ucrInputTableFontColor)
-        Me.grpFont.Controls.Add(Me.ucrNudTableFontSize)
-        Me.grpFont.Controls.Add(Me.ucrInputTableFontStyle)
-        Me.grpFont.Controls.Add(Me.ucrInputTableFontWeight)
-        Me.grpFont.Controls.Add(Me.ucrInputTableFontNames)
-        Me.grpFont.Controls.Add(Me.ucrChkTableFontColor)
-        Me.grpFont.Controls.Add(Me.ucrChkTableFontStyle)
-        Me.grpFont.Controls.Add(Me.ucrChkTableFontSize)
-        Me.grpFont.Controls.Add(Me.ucrChkTableFontNames)
-        Me.grpFont.Controls.Add(Me.ucrChkTableFontWeight)
-        Me.grpFont.Location = New System.Drawing.Point(6, 166)
-        Me.grpFont.Name = "grpFont"
-        Me.grpFont.Size = New System.Drawing.Size(317, 161)
-        Me.grpFont.TabIndex = 9
-        Me.grpFont.TabStop = False
-        Me.grpFont.Text = "Table Font"
-        '
         'ucrInputTableFontColor
         '
         Me.ucrInputTableFontColor.AddQuotesIfUnrecognised = True
@@ -677,23 +858,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkTableBackColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkTableBackColor.TabIndex = 0
         '
-        'tbThemeTitles
-        '
-        Me.tbThemeTitles.Controls.Add(Me.ucrInputBackgroundColour)
-        Me.tbThemeTitles.Controls.Add(Me.ucrChkBackgroundColour)
-        Me.tbThemeTitles.Controls.Add(Me.ucrChkAlignment)
-        Me.tbThemeTitles.Controls.Add(Me.grpHeadingBorder)
-        Me.tbThemeTitles.Controls.Add(Me.grpSubTitle)
-        Me.tbThemeTitles.Controls.Add(Me.grpTitle)
-        Me.tbThemeTitles.Controls.Add(Me.ucrInputAlignment)
-        Me.tbThemeTitles.Location = New System.Drawing.Point(4, 22)
-        Me.tbThemeTitles.Name = "tbThemeTitles"
-        Me.tbThemeTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeTitles.Size = New System.Drawing.Size(728, 353)
-        Me.tbThemeTitles.TabIndex = 1
-        Me.tbThemeTitles.Text = "Titles"
-        Me.tbThemeTitles.UseVisualStyleBackColor = True
-        '
         'ucrInputBackgroundColour
         '
         Me.ucrInputBackgroundColour.AddQuotesIfUnrecognised = True
@@ -722,31 +886,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkAlignment.Name = "ucrChkAlignment"
         Me.ucrChkAlignment.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkAlignment.TabIndex = 19
-        '
-        'grpHeadingBorder
-        '
-        Me.grpHeadingBorder.Controls.Add(Me.ucrInputSideColour)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrInputBottomColour)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrNudSideWidth)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrNudBottomWidth)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrNudBoxLength)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrNudBoxWidth)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkSideColour)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkSideStyle)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkSideWidth)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBottomColour)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBottomStyle)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBottomWidth)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBoxLength)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrChkBoxWidth)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrInputSideStyle)
-        Me.grpHeadingBorder.Controls.Add(Me.ucrInputBottomStyle)
-        Me.grpHeadingBorder.Location = New System.Drawing.Point(324, 18)
-        Me.grpHeadingBorder.Name = "grpHeadingBorder"
-        Me.grpHeadingBorder.Size = New System.Drawing.Size(314, 238)
-        Me.grpHeadingBorder.TabIndex = 6
-        Me.grpHeadingBorder.TabStop = False
-        Me.grpHeadingBorder.Text = "Heading Border"
         '
         'ucrInputSideColour
         '
@@ -916,19 +1055,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputBottomStyle.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBottomStyle.TabIndex = 7
         '
-        'grpSubTitle
-        '
-        Me.grpSubTitle.Controls.Add(Me.ucrNudSubTitleSize)
-        Me.grpSubTitle.Controls.Add(Me.ucrChkSubTitleWeight)
-        Me.grpSubTitle.Controls.Add(Me.ucrChkSubTitleSize)
-        Me.grpSubTitle.Controls.Add(Me.ucrInputSubTitleWeight)
-        Me.grpSubTitle.Location = New System.Drawing.Point(28, 184)
-        Me.grpSubTitle.Name = "grpSubTitle"
-        Me.grpSubTitle.Size = New System.Drawing.Size(277, 76)
-        Me.grpSubTitle.TabIndex = 5
-        Me.grpSubTitle.TabStop = False
-        Me.grpSubTitle.Text = "Sub -Title"
-        '
         'ucrNudSubTitleSize
         '
         Me.ucrNudSubTitleSize.AutoSize = True
@@ -970,19 +1096,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputSubTitleWeight.Name = "ucrInputSubTitleWeight"
         Me.ucrInputSubTitleWeight.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSubTitleWeight.TabIndex = 5
-        '
-        'grpTitle
-        '
-        Me.grpTitle.Controls.Add(Me.ucrNudFontSize)
-        Me.grpTitle.Controls.Add(Me.ucrChkFontWeight)
-        Me.grpTitle.Controls.Add(Me.ucrChkFontSize)
-        Me.grpTitle.Controls.Add(Me.ucrInputFontWeight)
-        Me.grpTitle.Location = New System.Drawing.Point(28, 88)
-        Me.grpTitle.Name = "grpTitle"
-        Me.grpTitle.Size = New System.Drawing.Size(277, 76)
-        Me.grpTitle.TabIndex = 4
-        Me.grpTitle.TabStop = False
-        Me.grpTitle.Text = "Title"
         '
         'ucrNudFontSize
         '
@@ -1037,26 +1150,31 @@ Partial Class sdgSummaryThemes
         Me.ucrInputAlignment.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputAlignment.TabIndex = 3
         '
-        'tbColumns
+        'ucrNudColumnsHorizontalPadding
         '
-        Me.tbColumns.Controls.Add(Me.ucrInputColumnsBackColor)
-        Me.tbColumns.Controls.Add(Me.ucrInputColumnsTextTransform)
-        Me.tbColumns.Controls.Add(Me.ucrChkColumnsTextTransform)
-        Me.tbColumns.Controls.Add(Me.ucrChkColumnsBackColor)
-        Me.tbColumns.Controls.Add(Me.grpColumnLabelsFont)
-        Me.tbColumns.Controls.Add(Me.ucrChkColumnsPadding)
-        Me.tbColumns.Controls.Add(Me.ucrInputColumnsPadding)
-        Me.tbColumns.Controls.Add(Me.ucrChkColumnsHorizontalPadding)
-        Me.tbColumns.Controls.Add(Me.ucrInputColumnsHorizontalPadding)
-        Me.tbColumns.Controls.Add(Me.grpColumnVlines)
-        Me.tbColumns.Controls.Add(Me.grpColumnsBorder)
-        Me.tbColumns.Location = New System.Drawing.Point(4, 22)
-        Me.tbColumns.Name = "tbColumns"
-        Me.tbColumns.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbColumns.Size = New System.Drawing.Size(728, 353)
-        Me.tbColumns.TabIndex = 2
-        Me.tbColumns.Text = "Columns"
-        Me.tbColumns.UseVisualStyleBackColor = True
+        Me.ucrNudColumnsHorizontalPadding.AutoSize = True
+        Me.ucrNudColumnsHorizontalPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnsHorizontalPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumnsHorizontalPadding.Location = New System.Drawing.Point(165, 115)
+        Me.ucrNudColumnsHorizontalPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnsHorizontalPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnsHorizontalPadding.Name = "ucrNudColumnsHorizontalPadding"
+        Me.ucrNudColumnsHorizontalPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudColumnsHorizontalPadding.TabIndex = 31
+        Me.ucrNudColumnsHorizontalPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudColumnsPadding
+        '
+        Me.ucrNudColumnsPadding.AutoSize = True
+        Me.ucrNudColumnsPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnsPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumnsPadding.Location = New System.Drawing.Point(165, 86)
+        Me.ucrNudColumnsPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnsPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnsPadding.Name = "ucrNudColumnsPadding"
+        Me.ucrNudColumnsPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudColumnsPadding.TabIndex = 30
+        Me.ucrNudColumnsPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputColumnsBackColor
         '
@@ -1097,19 +1215,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColumnsBackColor.Name = "ucrChkColumnsBackColor"
         Me.ucrChkColumnsBackColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkColumnsBackColor.TabIndex = 25
-        '
-        'grpColumnLabelsFont
-        '
-        Me.grpColumnLabelsFont.Controls.Add(Me.ucrNudColumnsFontSize)
-        Me.grpColumnLabelsFont.Controls.Add(Me.ucrInputColumnsFontWeight)
-        Me.grpColumnLabelsFont.Controls.Add(Me.ucrChkColumnsFontSize)
-        Me.grpColumnLabelsFont.Controls.Add(Me.ucrChkColumnsFontWeight)
-        Me.grpColumnLabelsFont.Location = New System.Drawing.Point(11, 141)
-        Me.grpColumnLabelsFont.Name = "grpColumnLabelsFont"
-        Me.grpColumnLabelsFont.Size = New System.Drawing.Size(317, 77)
-        Me.grpColumnLabelsFont.TabIndex = 24
-        Me.grpColumnLabelsFont.TabStop = False
-        Me.grpColumnLabelsFont.Text = "Column Labels Font"
         '
         'ucrNudColumnsFontSize
         '
@@ -1152,61 +1257,6 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColumnsFontWeight.Name = "ucrChkColumnsFontWeight"
         Me.ucrChkColumnsFontWeight.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkColumnsFontWeight.TabIndex = 11
-        '
-        'ucrChkColumnsPadding
-        '
-        Me.ucrChkColumnsPadding.AutoSize = True
-        Me.ucrChkColumnsPadding.Checked = False
-        Me.ucrChkColumnsPadding.Location = New System.Drawing.Point(28, 83)
-        Me.ucrChkColumnsPadding.Name = "ucrChkColumnsPadding"
-        Me.ucrChkColumnsPadding.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkColumnsPadding.TabIndex = 23
-        '
-        'ucrInputColumnsPadding
-        '
-        Me.ucrInputColumnsPadding.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnsPadding.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColumnsPadding.GetSetSelectedIndex = -1
-        Me.ucrInputColumnsPadding.IsReadOnly = False
-        Me.ucrInputColumnsPadding.Location = New System.Drawing.Point(165, 83)
-        Me.ucrInputColumnsPadding.Name = "ucrInputColumnsPadding"
-        Me.ucrInputColumnsPadding.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumnsPadding.TabIndex = 22
-        '
-        'ucrChkColumnsHorizontalPadding
-        '
-        Me.ucrChkColumnsHorizontalPadding.AutoSize = True
-        Me.ucrChkColumnsHorizontalPadding.Checked = False
-        Me.ucrChkColumnsHorizontalPadding.Location = New System.Drawing.Point(28, 112)
-        Me.ucrChkColumnsHorizontalPadding.Name = "ucrChkColumnsHorizontalPadding"
-        Me.ucrChkColumnsHorizontalPadding.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkColumnsHorizontalPadding.TabIndex = 21
-        '
-        'ucrInputColumnsHorizontalPadding
-        '
-        Me.ucrInputColumnsHorizontalPadding.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnsHorizontalPadding.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColumnsHorizontalPadding.GetSetSelectedIndex = -1
-        Me.ucrInputColumnsHorizontalPadding.IsReadOnly = False
-        Me.ucrInputColumnsHorizontalPadding.Location = New System.Drawing.Point(165, 112)
-        Me.ucrInputColumnsHorizontalPadding.Name = "ucrInputColumnsHorizontalPadding"
-        Me.ucrInputColumnsHorizontalPadding.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumnsHorizontalPadding.TabIndex = 20
-        '
-        'grpColumnVlines
-        '
-        Me.grpColumnVlines.Controls.Add(Me.ucrInputColumnsVlineColor)
-        Me.grpColumnVlines.Controls.Add(Me.ucrNudColumnsVlineWidth)
-        Me.grpColumnVlines.Controls.Add(Me.ucrInputColumnsVlineStyle)
-        Me.grpColumnVlines.Controls.Add(Me.ucrChkColumnsVlineWidth)
-        Me.grpColumnVlines.Controls.Add(Me.ucrChkColumnsVlineStyle)
-        Me.grpColumnVlines.Controls.Add(Me.ucrChkColumnsVlineColor)
-        Me.grpColumnVlines.Location = New System.Drawing.Point(11, 226)
-        Me.grpColumnVlines.Name = "grpColumnVlines"
-        Me.grpColumnVlines.Size = New System.Drawing.Size(317, 116)
-        Me.grpColumnVlines.TabIndex = 18
-        Me.grpColumnVlines.TabStop = False
-        Me.grpColumnVlines.Text = "Column Labels vlines"
         '
         'ucrInputColumnsVlineColor
         '
@@ -1270,32 +1320,38 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColumnsVlineColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkColumnsVlineColor.TabIndex = 11
         '
-        'grpColumnsBorder
+        'ucrInputColumnsSideColor
         '
-        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsSideColor)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsBottomColor)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsTopColor)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrNudColumnsSideWidth)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrNudColumnsBottomWidth)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrNudColumnsTopWidth)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsSideStyle)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsSideWidth)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsSideStyle)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsSideColor)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsBottomColor)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsBottomStyle)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrInputColumnsTopStyle)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsBottomWidth)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsBottomStyle)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsTopWidth)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColumnsTopStyle)
-        Me.grpColumnsBorder.Controls.Add(Me.ucrChkColomnsTopColor)
-        Me.grpColumnsBorder.Location = New System.Drawing.Point(358, 25)
-        Me.grpColumnsBorder.Name = "grpColumnsBorder"
-        Me.grpColumnsBorder.Size = New System.Drawing.Size(351, 317)
-        Me.grpColumnsBorder.TabIndex = 17
-        Me.grpColumnsBorder.TabStop = False
-        Me.grpColumnsBorder.Text = "Column Labels Border"
+        Me.ucrInputColumnsSideColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnsSideColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColumnsSideColor.GetSetSelectedIndex = -1
+        Me.ucrInputColumnsSideColor.IsReadOnly = False
+        Me.ucrInputColumnsSideColor.Location = New System.Drawing.Point(153, 274)
+        Me.ucrInputColumnsSideColor.Name = "ucrInputColumnsSideColor"
+        Me.ucrInputColumnsSideColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColumnsSideColor.TabIndex = 41
+        '
+        'ucrInputColumnsBottomColor
+        '
+        Me.ucrInputColumnsBottomColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnsBottomColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColumnsBottomColor.GetSetSelectedIndex = -1
+        Me.ucrInputColumnsBottomColor.IsReadOnly = False
+        Me.ucrInputColumnsBottomColor.Location = New System.Drawing.Point(153, 178)
+        Me.ucrInputColumnsBottomColor.Name = "ucrInputColumnsBottomColor"
+        Me.ucrInputColumnsBottomColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColumnsBottomColor.TabIndex = 40
+        '
+        'ucrInputColumnsTopColor
+        '
+        Me.ucrInputColumnsTopColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnsTopColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColumnsTopColor.GetSetSelectedIndex = -1
+        Me.ucrInputColumnsTopColor.IsReadOnly = False
+        Me.ucrInputColumnsTopColor.Location = New System.Drawing.Point(153, 82)
+        Me.ucrInputColumnsTopColor.Name = "ucrInputColumnsTopColor"
+        Me.ucrInputColumnsTopColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColumnsTopColor.TabIndex = 39
         '
         'ucrNudColumnsSideWidth
         '
@@ -1450,80 +1506,38 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColomnsTopColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkColomnsTopColor.TabIndex = 11
         '
-        'TabPage4
+        'ucrChkColumnsPadding
         '
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Rows"
-        Me.TabPage4.UseVisualStyleBackColor = True
+        Me.ucrChkColumnsPadding.AutoSize = True
+        Me.ucrChkColumnsPadding.Checked = False
+        Me.ucrChkColumnsPadding.Location = New System.Drawing.Point(28, 83)
+        Me.ucrChkColumnsPadding.Name = "ucrChkColumnsPadding"
+        Me.ucrChkColumnsPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkColumnsPadding.TabIndex = 23
         '
-        'TabPage5
+        'ucrChkColumnsHorizontalPadding
         '
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Stub"
-        Me.TabPage5.UseVisualStyleBackColor = True
+        Me.ucrChkColumnsHorizontalPadding.AutoSize = True
+        Me.ucrChkColumnsHorizontalPadding.Checked = False
+        Me.ucrChkColumnsHorizontalPadding.Location = New System.Drawing.Point(28, 112)
+        Me.ucrChkColumnsHorizontalPadding.Name = "ucrChkColumnsHorizontalPadding"
+        Me.ucrChkColumnsHorizontalPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkColumnsHorizontalPadding.TabIndex = 21
         '
-        'TabPage6
+        'ucrBaseSummaryTheme
         '
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Footnotes"
-        Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'TabPage7
-        '
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Sourcenotes"
-        Me.TabPage7.UseVisualStyleBackColor = True
-        '
-        'ucrInputColumnsTopColor
-        '
-        Me.ucrInputColumnsTopColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnsTopColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColumnsTopColor.GetSetSelectedIndex = -1
-        Me.ucrInputColumnsTopColor.IsReadOnly = False
-        Me.ucrInputColumnsTopColor.Location = New System.Drawing.Point(153, 82)
-        Me.ucrInputColumnsTopColor.Name = "ucrInputColumnsTopColor"
-        Me.ucrInputColumnsTopColor.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumnsTopColor.TabIndex = 39
-        '
-        'ucrInputColumnsBottomColor
-        '
-        Me.ucrInputColumnsBottomColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnsBottomColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColumnsBottomColor.GetSetSelectedIndex = -1
-        Me.ucrInputColumnsBottomColor.IsReadOnly = False
-        Me.ucrInputColumnsBottomColor.Location = New System.Drawing.Point(153, 178)
-        Me.ucrInputColumnsBottomColor.Name = "ucrInputColumnsBottomColor"
-        Me.ucrInputColumnsBottomColor.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumnsBottomColor.TabIndex = 40
-        '
-        'ucrInputColumnsSideColor
-        '
-        Me.ucrInputColumnsSideColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputColumnsSideColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColumnsSideColor.GetSetSelectedIndex = -1
-        Me.ucrInputColumnsSideColor.IsReadOnly = False
-        Me.ucrInputColumnsSideColor.Location = New System.Drawing.Point(153, 274)
-        Me.ucrInputColumnsSideColor.Name = "ucrInputColumnsSideColor"
-        Me.ucrInputColumnsSideColor.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColumnsSideColor.TabIndex = 41
+        Me.ucrBaseSummaryTheme.AutoSize = True
+        Me.ucrBaseSummaryTheme.Location = New System.Drawing.Point(261, 397)
+        Me.ucrBaseSummaryTheme.Name = "ucrBaseSummaryTheme"
+        Me.ucrBaseSummaryTheme.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSummaryTheme.TabIndex = 1
         '
         'sdgSummaryThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(754, 392)
+        Me.ClientSize = New System.Drawing.Size(754, 432)
+        Me.Controls.Add(Me.ucrBaseSummaryTheme)
         Me.Controls.Add(Me.tbSummaryThemes)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -1555,6 +1569,7 @@ Partial Class sdgSummaryThemes
         Me.grpColumnsBorder.ResumeLayout(False)
         Me.grpColumnsBorder.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -1662,9 +1677,7 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrChkColumnsFontSize As ucrCheck
     Friend WithEvents ucrChkColumnsFontWeight As ucrCheck
     Friend WithEvents ucrChkColumnsPadding As ucrCheck
-    Friend WithEvents ucrInputColumnsPadding As ucrInputComboBox
     Friend WithEvents ucrChkColumnsHorizontalPadding As ucrCheck
-    Friend WithEvents ucrInputColumnsHorizontalPadding As ucrInputComboBox
     Friend WithEvents ucrInputColumnsTextTransform As ucrInputComboBox
     Friend WithEvents ucrInputTableLeftColor As ucrColors
     Friend WithEvents ucrInputTableBottomColor As ucrColors
@@ -1680,4 +1693,7 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrInputColumnsSideColor As ucrColors
     Friend WithEvents ucrInputColumnsBottomColor As ucrColors
     Friend WithEvents ucrInputColumnsTopColor As ucrColors
+    Friend WithEvents ucrNudColumnsHorizontalPadding As ucrNud
+    Friend WithEvents ucrNudColumnsPadding As ucrNud
+    Friend WithEvents ucrBaseSummaryTheme As ucrButtonsSubdialogue
 End Class
