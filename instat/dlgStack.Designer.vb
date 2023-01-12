@@ -203,7 +203,7 @@ Partial Class dlgStack
         '
         Me.lblSets.AutoSize = True
         Me.lblSets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSets.Location = New System.Drawing.Point(172, 323)
+        Me.lblSets.Location = New System.Drawing.Point(243, 323)
         Me.lblSets.Name = "lblSets"
         Me.lblSets.Size = New System.Drawing.Size(31, 13)
         Me.lblSets.TabIndex = 31
@@ -297,7 +297,7 @@ Partial Class dlgStack
         Me.ucrNudNoSets.AutoSize = True
         Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoSets.Location = New System.Drawing.Point(234, 320)
+        Me.ucrNudNoSets.Location = New System.Drawing.Point(305, 320)
         Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Name = "ucrNudNoSets"
@@ -454,9 +454,9 @@ Partial Class dlgStack
         '
         Me.ucrChkDropMissingValues.AutoSize = True
         Me.ucrChkDropMissingValues.Checked = False
-        Me.ucrChkDropMissingValues.Location = New System.Drawing.Point(10, 343)
+        Me.ucrChkDropMissingValues.Location = New System.Drawing.Point(10, 341)
         Me.ucrChkDropMissingValues.Name = "ucrChkDropMissingValues"
-        Me.ucrChkDropMissingValues.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkDropMissingValues.Size = New System.Drawing.Size(235, 23)
         Me.ucrChkDropMissingValues.TabIndex = 26
         '
         'ucrChkUrl
@@ -483,7 +483,7 @@ Partial Class dlgStack
         Me.ucrChkStackMultipleSets.Checked = False
         Me.ucrChkStackMultipleSets.Location = New System.Drawing.Point(10, 320)
         Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
-        Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(180, 23)
+        Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(235, 23)
         Me.ucrChkStackMultipleSets.TabIndex = 29
         '
         'ucrFactorInto
