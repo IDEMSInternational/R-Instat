@@ -250,3 +250,4 @@ installer/Output/
 # Package used by script window
 /packages/jacobslusser.ScintillaNET.*/
 
+/packages/NLog.*/
