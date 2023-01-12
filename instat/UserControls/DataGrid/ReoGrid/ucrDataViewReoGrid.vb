@@ -73,7 +73,7 @@ Public Class ucrDataViewReoGrid
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
-                    strData = GetVector(strData)
+                    strData = GetInnerBracketedString(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -94,15 +94,10 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
-    Private Function GetVector(strData As String) As String
-        Dim strVec As String = ""
-        Dim collection As System.Text.RegularExpressions.MatchCollection = System.Text.RegularExpressions.Regex.Matches(strData, "\d+|\bN\S*A\b")
-        If strData <> "" Then
-            For Each match As System.Text.RegularExpressions.Match In collection
-                strVec &= match.ToString() & ", "
-            Next
-        End If
-        Return strVec.TrimEnd(",", " ")
+    Private Function GetInnerBracketedString(strData As String) As String
+        Dim strOutput As String = Strings.Left(strData, InStr(strData, ")") - 1) 'Get the first right bracket
+        strOutput = Mid(strOutput, InStrRev(strOutput, "(") + 1) 'Get the last left braket
+        Return strOutput.TrimEnd
     End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
