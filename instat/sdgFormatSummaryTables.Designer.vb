@@ -60,11 +60,11 @@ Partial Class sdgFormatSummaryTables
         Me.tbpRows = New System.Windows.Forms.TabPage()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
-        Me.ucrThemesPanel = New instat.UcrPanel()
         Me.ucrInputSelectThemes = New instat.ucrInputComboBox()
         Me.cmdManualTheme = New System.Windows.Forms.Button()
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.rdoSelectTheme = New System.Windows.Forms.RadioButton()
+        Me.ucrThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
@@ -496,14 +496,6 @@ Partial Class sdgFormatSummaryTables
         Me.tbpThemes.Text = "Themes"
         Me.tbpThemes.UseVisualStyleBackColor = True
         '
-        'ucrThemesPanel
-        '
-        Me.ucrThemesPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrThemesPanel.Location = New System.Drawing.Point(13, 29)
-        Me.ucrThemesPanel.Name = "ucrThemesPanel"
-        Me.ucrThemesPanel.Size = New System.Drawing.Size(121, 99)
-        Me.ucrThemesPanel.TabIndex = 4
-        '
         'ucrInputSelectThemes
         '
         Me.ucrInputSelectThemes.AddQuotesIfUnrecognised = True
@@ -545,6 +537,14 @@ Partial Class sdgFormatSummaryTables
         Me.rdoSelectTheme.TabStop = True
         Me.rdoSelectTheme.Text = "Select Theme"
         Me.rdoSelectTheme.UseVisualStyleBackColor = True
+        '
+        'ucrThemesPanel
+        '
+        Me.ucrThemesPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrThemesPanel.Location = New System.Drawing.Point(13, 29)
+        Me.ucrThemesPanel.Name = "ucrThemesPanel"
+        Me.ucrThemesPanel.Size = New System.Drawing.Size(121, 99)
+        Me.ucrThemesPanel.TabIndex = 4
         '
         'ucrBaseSubdialog
         '

@@ -19,15 +19,17 @@ Imports instat.Translations
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction, clsFootnoteTitleLocationFunction,
-        clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
+ clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellBodyFunction,
         clsStyleListFunction, clsStubHeadFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
         clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
     'The dummy Function is used by input controls that add the parameter manually,
     'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
+    Public clsThemesBaseFunction As New RFunction
     Private clsPipeOperator, clsMutableOperator, clsJoiningOperator, clsTabFootnoteOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
+    Private bResetThemes As Boolean = True
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -129,7 +131,8 @@ Public Class sdgFormatSummaryTables
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewBorderWeightPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
                         clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction, clsNewTabFootnoteOperator As ROperator,
-                        clsNewTabStyleCellTextFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction)
+                        clsNewTabStyleCellTextFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
+                        clsNewThemesBaseFunction As RFunction)
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
@@ -141,6 +144,8 @@ Public Class sdgFormatSummaryTables
         clsHeaderFormatFunction = clsNewHeaderFormatFunction
         clsTabOptionsFunction = clsNewTabOptionsFunction
         clsBorderWeightPxFunction = clsNewBorderWeightPxFunction
+        clsStyleListFunction = clsNewStyleListFunction
+        clsMutableOperator = clsNewMutableOPerator
         clsFootnoteSubtitleLocationFunction = clsNewFootnoteSubtitleLocationFunction
         clsFootnoteTitleLocationFunction = clsNewFootnoteTitleLocationFunction
         clsStyleListFunction = clsNewStyleListFunction
@@ -157,6 +162,7 @@ Public Class sdgFormatSummaryTables
         clsTabStylePxFunction = clsNewTabStylePxFunction
         clsTabFootnoteOperator = clsNewTabFootnoteOperator
         clsDummyFunction = clsNewDummyFunction
+        clsThemesBaseFunction = clsNewThemesBaseFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -238,6 +244,13 @@ Public Class sdgFormatSummaryTables
         Else
             clsPipeOperator.RemoveParameterByName("title_footnote")
         End If
+    End Sub
+
+    Private Sub cmdManualTheme_Click(sender As Object, e As EventArgs) Handles cmdManualTheme.Click
+        sdgSummaryThemes.SetRCode(bReset:=bResetThemes, clsNewThemesTabOption:=clsThemesBaseFunction)
+        Me.SendToBack()
+        sdgSummaryThemes.ShowDialog()
+        bResetThemes = False
     End Sub
 
     Private Sub ucrChkTitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTitleFootnote.ControlValueChanged
