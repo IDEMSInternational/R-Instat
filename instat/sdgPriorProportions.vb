@@ -30,7 +30,7 @@ Public Class sdgPriorProportions
         ucrNudBetaPrioirA.SetRDefault(1)
 
         ucrNudBetaPrioirB.SetParameter(New RParameter("b", 12))
-        ucrNudBetaPrioirB.SetMinMax(-1, Integer.MaxValue)
+        ucrNudBetaPrioirB.SetMinMax(1, Integer.MaxValue)
         ucrNudBetaPrioirB.SetRDefault(1)
 
         ucrNudPrioirNull.SetParameter(New RParameter("H1", 0))
