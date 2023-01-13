@@ -4963,6 +4963,10 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi()", 1)
+    End Sub
+
+    Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
     End Sub
 End Class
