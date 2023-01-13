@@ -95,9 +95,14 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Function GetInnerBracketedString(strData As String) As String
+        If Not strData.Contains("(") Then
+            Return strData
+            Exit Function
+        End If
+
         Dim strOutput As String = Strings.Left(strData, InStr(strData, ")") - 1) 'Get the first right bracket
         strOutput = Mid(strOutput, InStrRev(strOutput, "(") + 1) 'Get the last left braket
-        Return strOutput.TrimEnd
+        Return strOutput
     End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
