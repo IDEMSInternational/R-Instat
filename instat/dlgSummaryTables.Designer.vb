@@ -38,6 +38,7 @@ Partial Class dlgSummaryTables
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblSigFigs = New System.Windows.Forms.Label()
@@ -64,9 +65,9 @@ Partial Class dlgSummaryTables
         Me.ucrChkPercentageProportion = New instat.ucrCheck()
         Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.lblFrequencyMarginName = New System.Windows.Forms.Label()
+        Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.ucrChkFrequencyDisplayMargins = New instat.ucrCheck()
         Me.ucrPnlSummaryFrequencyTables = New instat.UcrPanel()
-        Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -78,8 +79,11 @@ Partial Class dlgSummaryTables
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeight = New instat.ucrCheck()
-        Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputFrequencyMarginName = New instat.ucrInputTextBox()
+        Me.rdoMultipleResponse = New System.Windows.Forms.RadioButton()
+        Me.ttMultipleResponse = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrReorderSummary = New instat.ucrReorder()
+        Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.grpPercentages.SuspendLayout()
@@ -258,7 +262,7 @@ Partial Class dlgSummaryTables
         '
         Me.lblMarginName.AutoSize = True
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(159, 287)
+        Me.lblMarginName.Location = New System.Drawing.Point(159, 288)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
         Me.lblMarginName.TabIndex = 15
@@ -293,12 +297,12 @@ Partial Class dlgSummaryTables
         Me.rdoFrequencyTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFrequencyTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFrequencyTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFrequencyTable.Location = New System.Drawing.Point(107, 7)
+        Me.rdoFrequencyTable.Location = New System.Drawing.Point(51, 7)
         Me.rdoFrequencyTable.Name = "rdoFrequencyTable"
         Me.rdoFrequencyTable.Size = New System.Drawing.Size(129, 27)
         Me.rdoFrequencyTable.TabIndex = 22
         Me.rdoFrequencyTable.TabStop = True
-        Me.rdoFrequencyTable.Text = "Frequency Table"
+        Me.rdoFrequencyTable.Text = "Frequency"
         Me.rdoFrequencyTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoFrequencyTable.UseVisualStyleBackColor = True
         '
@@ -310,12 +314,12 @@ Partial Class dlgSummaryTables
         Me.rdoSummaryTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSummaryTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSummaryTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummaryTable.Location = New System.Drawing.Point(235, 7)
+        Me.rdoSummaryTable.Location = New System.Drawing.Point(178, 7)
         Me.rdoSummaryTable.Name = "rdoSummaryTable"
         Me.rdoSummaryTable.Size = New System.Drawing.Size(133, 27)
         Me.rdoSummaryTable.TabIndex = 21
         Me.rdoSummaryTable.TabStop = True
-        Me.rdoSummaryTable.Text = "Summary Table"
+        Me.rdoSummaryTable.Text = "Summary"
         Me.rdoSummaryTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSummaryTable.UseVisualStyleBackColor = True
         '
@@ -384,6 +388,16 @@ Partial Class dlgSummaryTables
         Me.lblFrequencyMarginName.TabIndex = 25
         Me.lblFrequencyMarginName.Text = "Margin Name :"
         '
+        'cmdMissingOptions
+        '
+        Me.cmdMissingOptions.Enabled = False
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(205, 261)
+        Me.cmdMissingOptions.Name = "cmdMissingOptions"
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdMissingOptions.TabIndex = 27
+        Me.cmdMissingOptions.Text = "Options"
+        Me.cmdMissingOptions.UseVisualStyleBackColor = True
+        '
         'ucrChkFrequencyDisplayMargins
         '
         Me.ucrChkFrequencyDisplayMargins.AutoSize = True
@@ -396,20 +410,10 @@ Partial Class dlgSummaryTables
         'ucrPnlSummaryFrequencyTables
         '
         Me.ucrPnlSummaryFrequencyTables.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaryFrequencyTables.Location = New System.Drawing.Point(107, 3)
+        Me.ucrPnlSummaryFrequencyTables.Location = New System.Drawing.Point(44, 3)
         Me.ucrPnlSummaryFrequencyTables.Name = "ucrPnlSummaryFrequencyTables"
-        Me.ucrPnlSummaryFrequencyTables.Size = New System.Drawing.Size(260, 33)
+        Me.ucrPnlSummaryFrequencyTables.Size = New System.Drawing.Size(407, 33)
         Me.ucrPnlSummaryFrequencyTables.TabIndex = 20
-        '
-        'ucrReorderSummary
-        '
-        Me.ucrReorderSummary.AutoSize = True
-        Me.ucrReorderSummary.Location = New System.Drawing.Point(286, 305)
-        Me.ucrReorderSummary.Name = "ucrReorderSummary"
-        Me.ucrReorderSummary.Size = New System.Drawing.Size(200, 156)
-        Me.ucrReorderSummary.TabIndex = 18
-        Me.ucrReorderSummary.ucrDataFrameList = Nothing
-        Me.ucrReorderSummary.ucrReceiver = Nothing
         '
         'ucrInputMarginName
         '
@@ -417,7 +421,7 @@ Partial Class dlgSummaryTables
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 284)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 285)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
         Me.ucrInputMarginName.TabIndex = 16
@@ -437,7 +441,7 @@ Partial Class dlgSummaryTables
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 266)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(271, 23)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(152, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
         '
         'ucrChkStoreResults
@@ -524,6 +528,46 @@ Partial Class dlgSummaryTables
         Me.ucrChkWeight.Size = New System.Drawing.Size(84, 23)
         Me.ucrChkWeight.TabIndex = 5
         '
+        'ucrInputFrequencyMarginName
+        '
+        Me.ucrInputFrequencyMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrequencyMarginName.AutoSize = True
+        Me.ucrInputFrequencyMarginName.IsMultiline = False
+        Me.ucrInputFrequencyMarginName.IsReadOnly = False
+        Me.ucrInputFrequencyMarginName.Location = New System.Drawing.Point(92, 271)
+        Me.ucrInputFrequencyMarginName.Name = "ucrInputFrequencyMarginName"
+        Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
+        Me.ucrInputFrequencyMarginName.TabIndex = 26
+        '
+        'rdoMultipleResponse
+        '
+        Me.rdoMultipleResponse.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMultipleResponse.Enabled = False
+        Me.rdoMultipleResponse.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultipleResponse.FlatAppearance.BorderSize = 2
+        Me.rdoMultipleResponse.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultipleResponse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMultipleResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultipleResponse.Location = New System.Drawing.Point(309, 7)
+        Me.rdoMultipleResponse.Name = "rdoMultipleResponse"
+        Me.rdoMultipleResponse.Size = New System.Drawing.Size(133, 27)
+        Me.rdoMultipleResponse.TabIndex = 28
+        Me.rdoMultipleResponse.TabStop = True
+        Me.rdoMultipleResponse.Text = "Multiple Response"
+        Me.rdoMultipleResponse.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ttMultipleResponse.SetToolTip(Me.rdoMultipleResponse, "Not Yet Available")
+        Me.rdoMultipleResponse.UseVisualStyleBackColor = True
+        '
+        'ucrReorderSummary
+        '
+        Me.ucrReorderSummary.AutoSize = True
+        Me.ucrReorderSummary.Location = New System.Drawing.Point(286, 305)
+        Me.ucrReorderSummary.Name = "ucrReorderSummary"
+        Me.ucrReorderSummary.Size = New System.Drawing.Size(200, 156)
+        Me.ucrReorderSummary.TabIndex = 18
+        Me.ucrReorderSummary.ucrDataFrameList = Nothing
+        Me.ucrReorderSummary.ucrReceiver = Nothing
+        '
         'ucrSelectorSummaryTables
         '
         Me.ucrSelectorSummaryTables.AutoSize = True
@@ -536,23 +580,14 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorSummaryTables.TabIndex = 0
         '
-        'ucrInputFrequencyMarginName
-        '
-        Me.ucrInputFrequencyMarginName.AddQuotesIfUnrecognised = True
-        Me.ucrInputFrequencyMarginName.AutoSize = True
-        Me.ucrInputFrequencyMarginName.IsMultiline = False
-        Me.ucrInputFrequencyMarginName.IsReadOnly = False
-        Me.ucrInputFrequencyMarginName.Location = New System.Drawing.Point(92, 271)
-        Me.ucrInputFrequencyMarginName.Name = "ucrInputFrequencyMarginName"
-        Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
-        Me.ucrInputFrequencyMarginName.TabIndex = 26
-        '
         'dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(489, 571)
+        Me.Controls.Add(Me.rdoMultipleResponse)
+        Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.ucrChkFrequencyDisplayMargins)
         Me.Controls.Add(Me.grpPercentages)
         Me.Controls.Add(Me.rdoFrequencyTable)
@@ -639,4 +674,7 @@ Partial Class dlgSummaryTables
     Friend WithEvents lblFrequencyMarginName As Label
     Friend WithEvents ucrChkFrequencyDisplayMargins As ucrCheck
     Friend WithEvents ucrReceiverPercentages As ucrReceiverSingle
+    Friend WithEvents cmdMissingOptions As Button
+    Friend WithEvents rdoMultipleResponse As RadioButton
+    Friend WithEvents ttMultipleResponse As ToolTip
 End Class

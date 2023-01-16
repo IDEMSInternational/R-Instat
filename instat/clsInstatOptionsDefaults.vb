@@ -16,7 +16,7 @@
 
 Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbIncludeRDefaultParameters As Boolean = False
-    Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = True
+    Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = False
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
     Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = True
     Public Shared ReadOnly DEFAULTbShowClimaticMenu As Boolean = True
@@ -53,4 +53,5 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTstrClimsoftHost As String = "127.0.0.1"
     Public Shared ReadOnly DEFAULTstrClimsoftPort As String = "3308"
     Public Shared ReadOnly DEFAULTstrClimsoftUsername As String = "root"
+    Public Shared ReadOnly DEFAULTiMaxOutputsHeight As Integer = -1 'todo. temporarily disabled
 End Class

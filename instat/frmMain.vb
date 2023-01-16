@@ -21,6 +21,7 @@ Imports System.Threading
 Imports instat.Translations
 Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.InteropServices
 
 Public Class frmMain
     Public clsRLink As RLink
@@ -40,6 +41,7 @@ Public Class frmMain
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -75,13 +77,20 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-
+        Logger.Info("R-Instat started")
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            If Not CefRuntimeWrapper.InitialiseCefRuntime() Then
+                MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Html content will be shown in your default browser.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        End If
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -382,14 +391,6 @@ Public Class frmMain
         End Try
     End Sub
 
-    Public Sub AddGraphForm(strFilePath As String)
-        Dim frmNewGraph As New frmGraphDisplay
-
-        frmNewGraph.SetImageFromFile(strFilePath)
-        frmNewGraph.Show()
-        frmNewGraph.BringToFront()
-    End Sub
-
     Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
         ucrScriptWindow.AppendText(strText)
         If bMakeVisible Then
@@ -407,7 +408,7 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
+    Private Sub mnuDescribeSpecificTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificTables.Click
         dlgSummaryTables.ShowDialog()
     End Sub
 
@@ -894,8 +895,12 @@ Public Class frmMain
                     DeleteAutoSaveData()
                     DeleteAutoSaveLog()
                     DeleteAutoSaveDebugLog()
+                    clsRLink.CloseREngine()
                 End If
-                clsRLink.CloseREngine()
+
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+                    CefRuntimeWrapper.ShutDownCef()
+                End If
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
@@ -1509,11 +1514,6 @@ Public Class frmMain
         ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
-    Public Sub ReOrderWorkSheets()
-        ucrDataViewer.ReOrderWorkSheets()
-        ucrColumnMeta.ReOrderWorkSheets()
-    End Sub
-
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
@@ -2067,12 +2067,6 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
-    End Sub
-
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
@@ -2109,16 +2103,60 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuViewer_Click(sender As Object, e As EventArgs) Handles mnuViewer.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuNormalViewer.Click
+        Dim clsLastGraph As New RFunction
+        clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
+        clsLastGraph.AddParameter("object_type_label", Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+
+        Dim clsViewObjectFunction As New RFunction
+        clsViewObjectFunction.SetRCommand("view_object")
+        clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsLastGraph)
+        clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
+
+        'todo. should this script be logged?
+        clsRLink.RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bAddOutputInInternalViewer:=False, bSeparateThread:=False)
+
     End Sub
 
     Private Sub Mnuploty_Click(sender As Object, e As EventArgs) Handles mnuploty.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph(bAsPlotly:=True)
-        Me.Enabled = True
+        Dim clsViewObjectFunction As New RFunction
+        Dim clsInteractivePlot As New RFunction
+        Dim clsLastGraph As New RFunction
+
+        clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
+        clsLastGraph.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastGraph.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+
+        clsInteractivePlot.SetPackageName("plotly")
+        clsInteractivePlot.SetRCommand("ggplotly")
+        clsInteractivePlot.AddParameter("p", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+
+        clsViewObjectFunction.SetRCommand("view_object")
+        clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsInteractivePlot)
+        clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
+
+        'todo. should this script be logged?
+        clsRLink.RunScript(clsViewObjectFunction.ToScript(), strComment:="View last graph as plotly", bAddOutputInInternalViewer:=False, bSeparateThread:=False)
+
+    End Sub
+
+    Private Sub MnuRViewer_Click(sender As Object, e As EventArgs) Handles mnuRViewer.Click
+        Dim clsLastGraph As New RFunction
+        Dim clsPrintGraph As New RFunction
+        clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
+        clsLastGraph.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastGraph.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+        clsLastGraph.SetAssignToObject("last_graph")
+
+        clsPrintGraph.SetRCommand("print")
+        clsPrintGraph.AddParameter("x", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
+
+        Dim strScript1 As String = ""
+        Dim strScript2 As String = clsPrintGraph.ToScript(strScript1)
+
+        'todo. should this script be logged?
+        clsRLink.RunScript(strScript1 & strScript2, strComment:="View last graph in R viewer", bSeparateThread:=False)
+
     End Sub
 
     Private Sub mnuModelFitModelOneVariable_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelOneVariable.Click
@@ -2463,8 +2501,13 @@ Public Class frmMain
         dlgPICSARainfall.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    '    dlgApsimx.ShowDialog()
+    'End Sub
+
+    Private Sub mnuOptionsByContextCropModelApsimxExamples_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModelApsimxExamples.Click
         dlgApsimx.ShowDialog()
+
     End Sub
 
     Private Sub mnuFileImportFromRapidPro_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromRapidPro.Click
@@ -2473,5 +2516,13 @@ Public Class frmMain
 
     Private Sub mnuFileImportFromPostgres_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromPostgres.Click
         dlgImportFromPostgres.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditWordwrap_Click(sender As Object, e As EventArgs) Handles mnuEditWordwrap.Click
+        dlgWordwrap.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
+        dlgSearch.ShowDialog()
     End Sub
 End Class

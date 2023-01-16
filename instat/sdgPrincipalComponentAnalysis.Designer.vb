@@ -39,7 +39,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Private Sub InitializeComponent()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.ucrChkRotation = New instat.ucrCheck()
         Me.ucrChkEigenvectors = New instat.ucrCheck()
         Me.ucrChkEigenvalues = New instat.ucrCheck()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
@@ -78,6 +77,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphics = New instat.UcrPanel()
         Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
@@ -86,6 +86,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpVariablePlot.SuspendLayout()
         Me.GrpIndividualPlot.SuspendLayout()
         Me.grpGeom.SuspendLayout()
+        Me.tbSave.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbRegOptions
@@ -101,7 +102,6 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbDisplay
         '
-        Me.tbDisplay.Controls.Add(Me.ucrChkRotation)
         Me.tbDisplay.Controls.Add(Me.ucrChkEigenvectors)
         Me.tbDisplay.Controls.Add(Me.ucrChkEigenvalues)
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
@@ -112,15 +112,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbDisplay.Tag = "Display"
         Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
-        '
-        'ucrChkRotation
-        '
-        Me.ucrChkRotation.AutoSize = True
-        Me.ucrChkRotation.Checked = False
-        Me.ucrChkRotation.Location = New System.Drawing.Point(10, 66)
-        Me.ucrChkRotation.Name = "ucrChkRotation"
-        Me.ucrChkRotation.Size = New System.Drawing.Size(361, 23)
-        Me.ucrChkRotation.TabIndex = 5
         '
         'ucrChkEigenvectors
         '
@@ -538,6 +529,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbSave
         '
+        Me.tbSave.Controls.Add(Me.ucrSaveGraph)
         Me.tbSave.Location = New System.Drawing.Point(4, 22)
         Me.tbSave.Name = "tbSave"
         Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
@@ -546,6 +538,15 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Tag = "Save"
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(5, 11)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSaveGraph.TabIndex = 15
         '
         'ucrSdgButtons
         '
@@ -583,6 +584,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.GrpIndividualPlot.PerformLayout()
         Me.grpGeom.ResumeLayout(False)
         Me.grpGeom.PerformLayout()
+        Me.tbSave.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -609,7 +611,6 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents grpScree As GroupBox
     Friend WithEvents ucrInputLabel1 As ucrInputComboBox
-    Friend WithEvents ucrChkRotation As ucrCheck
     Friend WithEvents ucrChkEigenvectors As ucrCheck
     Friend WithEvents ucrChkEigenvalues As ucrCheck
     Friend WithEvents ucrNudDim2 As ucrNud
@@ -630,4 +631,5 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrPnlIndividualPlot As UcrPanel
     Friend WithEvents grpVariablePlot As GroupBox
     Friend WithEvents GrpIndividualPlot As GroupBox
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
