@@ -47,7 +47,6 @@ pkgs <-
     "RMySQL",
     "DBI",
     "EnvStats",
-    "signmedian.test",
     "sjPlot",
     "sjmisc",
     "plotly",
@@ -131,9 +130,16 @@ pkgs <-
     # For most frequent values in Prepare > Column:Numeric > Row Summaries
     "statip",
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
+    # install.packages('remotes')
+    # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
     "corrr",
-    "dslabs"
-  )
+    "dslabs",
+    "coin",
+    "pingr",
+    "vcdExtra",
+    # For inspect, read, edit and run files for 'APSIM'
+    "apsimx"
+ )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")

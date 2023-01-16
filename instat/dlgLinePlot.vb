@@ -210,7 +210,7 @@ Public Class dlgLinePlot
         ucrPnlStepOrPath.AddFunctionNamesCondition(rdoStep, "geom_step")
         ucrChkPathOrStep.AddToLinkedControls(ucrPnlStepOrPath, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPathOrStep.SetText("Use path or step")
+        ucrChkPathOrStep.SetText("Path or Step")
         ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_step", "geom_path"})
         ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_step", "geom_path"}, False)
 
@@ -375,11 +375,12 @@ Public Class dlgLinePlot
         ucrChkSlopeLegend.AddParameterPresentCondition(True, "slopetheme")
         ucrChkSlopeLegend.AddParameterPresentCondition(False, "slopetheme", False)
 
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd, ucrChkDumbbellColour, ucrChkDumbbellSize}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup, ucrChkAddPoints}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddPoints}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -435,7 +436,7 @@ Public Class dlgLinePlot
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
         clsListFunction = New RFunction
-        clsggSlopeFunction = New RFunction
+        clsGgSlopeFunction = New RFunction
         clsSlopeThemeFunction = New RFunction
         clsDumbbellFunction = New RFunction
 
@@ -470,8 +471,8 @@ Public Class dlgLinePlot
         clsDumbbellFunction.SetPackageName("ggalt")
         clsDumbbellFunction.SetRCommand("geom_dumbbell")
 
-        clsggSlopeFunction.SetRCommand("slopegraph")
-        clsggSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsGgSlopeFunction.SetRCommand("slopegraph")
+        clsGgSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSlopeThemeFunction.SetRCommand("slopegraph_theme")
 
@@ -503,18 +504,17 @@ Public Class dlgLinePlot
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsggSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
+        ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsGgSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverSlopeY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
 
         ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverSlopeY.SetRCode(clsggSlopeFunction, bReset)
-        ucrReceiverSlopeX.SetRCode(clsggSlopeFunction, bReset)
-        ucrReceiverSlopeColour.SetRCode(clsggSlopeFunction, bReset)
+        ucrReceiverSlopeY.SetRCode(clsGgSlopeFunction, bReset)
+        ucrReceiverSlopeX.SetRCode(clsGgSlopeFunction, bReset)
+        ucrReceiverSlopeColour.SetRCode(clsGgSlopeFunction, bReset)
         ucrReceiverXEnd.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverGroup.SetRCode(clsRaesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrChkAddPoints.SetRCode(clsBaseOperator, bReset)
@@ -531,9 +531,9 @@ Public Class dlgLinePlot
         ucrChkFormula.SetRCode(clsBaseOperator, bReset)
         ucrChkDumbbellColour.SetRCode(clsDumbbellFunction, bReset)
         ucrChkDumbbellSize.SetRCode(clsDumbbellFunction, bReset)
-        ucrChkSlopeLabelOptions.SetRCode(clsggSlopeFunction, bReset)
-        ucrChkSlopeTextOptions.SetRCode(clsggSlopeFunction, bReset)
-        ucrChkSlopeLineOptions.SetRCode(clsggSlopeFunction, bReset)
+        ucrChkSlopeLabelOptions.SetRCode(clsGgSlopeFunction, bReset)
+        ucrChkSlopeTextOptions.SetRCode(clsGgSlopeFunction, bReset)
+        ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -679,7 +679,7 @@ Public Class dlgLinePlot
             ucrSave.SetPrefix("slope")
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
-            clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsggSlopeFunction, iPosition:=0)
+            clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsGgSlopeFunction, iPosition:=0)
             If ucrChkSlopeLegend.Checked Then
                 clsBaseOperator.RemoveParameterByName("slopetheme")
             Else

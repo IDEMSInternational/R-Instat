@@ -56,7 +56,7 @@ Partial Class sdgVerificationSummaries
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(212, 268)
+        Me.ucrBase.Location = New System.Drawing.Point(168, 270)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 1
