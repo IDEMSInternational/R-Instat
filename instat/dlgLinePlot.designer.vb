@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -38,7 +38,9 @@ Partial Class dlgLinePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+
         Me.components = New System.ComponentModel.Container()
+
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
@@ -312,9 +314,9 @@ Partial Class dlgLinePlot
         '
         Me.ucrChkAddSE.AutoSize = True
         Me.ucrChkAddSE.Checked = False
-        Me.ucrChkAddSE.Location = New System.Drawing.Point(195, 49)
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        Me.ucrChkAddSE.Size = New System.Drawing.Size(75, 23)
+        Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
+    Me.ucrChkAddSE.Name = "ucrChkAddSE"
+    Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
         Me.ucrChkAddSE.TabIndex = 8
         '
         'ucrNudSpan
@@ -933,7 +935,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrChkValley.AutoSize = True
         Me.ucrChkValley.Checked = False
-        Me.ucrChkValley.Location = New System.Drawing.Point(161, 385)
+        Me.ucrChkValley.Location = New System.Drawing.Point(161, 389)
         Me.ucrChkValley.Name = "ucrChkValley"
         Me.ucrChkValley.Size = New System.Drawing.Size(146, 23)
         Me.ucrChkValley.TabIndex = 27
@@ -971,7 +973,7 @@ Partial Class dlgLinePlot
         Me.ucrSave.Location = New System.Drawing.Point(9, 442)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(401, 24)
         Me.ucrSave.TabIndex = 31
         '
         'ucrVariablesAsFactorForLinePlot
@@ -1251,6 +1253,10 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
+
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdLinePathStepSmoothOptions As Button
+
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
@@ -1324,6 +1330,7 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrNudSlopeLabelSize As ucrNud
     Friend WithEvents ucrChkSlopeLabelOptions As ucrCheck
     Friend WithEvents ucrChkSlopeTextOptions As ucrCheck
+
     Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents contextMenuStripOptions As ContextMenuStrip
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
@@ -1332,4 +1339,5 @@ Partial Class dlgLinePlot
     Friend WithEvents toolStripMenuItemDumbbellOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPathOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemStepOptions As ToolStripMenuItem
+
 End Class
