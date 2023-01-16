@@ -3830,9 +3830,29 @@
   "Swap x and y": "Swap x and y",
   "Colour Palette": "Colour Palette",
   "Reorder:": "Reorder:",
-  "Points (Optional):": "Points (Optional):"
+  "Points (Optional):": "Points (Optional):",
   "Group/ID:": "Group/ID:",
-  "Latitude:": "Latitude:"
-
-
-}
+  "Muptiple Response": "Mulpile Response",
+  "Format Table...": "Format Table...",
+  "Store Output": "Store Output",
+  "Header": "Header",
+  "Add title/subtitle": "Add title/subtitle",
+  "Add footnote": "Add footnote",
+  "Add second footnote": "Add second footnote",
+  "Add source": "Add source",
+  "Add Header": "Add Header",
+  "Add stub": "Add stub",
+  "Add format table": "Add format table",
+  "Margin Name :": "Margin Name :",
+  "Treat Summaries as a Further Factor": "Treat Summaries as a Further Factor",
+  "Display Summary_Variables As  Rows": "Display Summary_Variables As  Rows",
+  "Summary_mean": "Summary_mean",
+  "Display Summaries As  Rows": "Display Summaries As  Rows",
+  "Display Variables As  Rows": "Display Variables As  Rows",
+  "Outer": "Outer",
+  "Fill/Colour:": "Fill/Colour:",
+  "Theme": "Theme",
+  "Extra Variables": "Extra Variables",
+  "Suppl.Numeric:": "Suppl.Numeric:",
+  "Suppl.Factor:": "Suppl.Factor:",
+  "Save New Graph": "Save New Graph"}
