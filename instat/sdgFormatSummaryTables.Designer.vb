@@ -519,7 +519,7 @@ Partial Class sdgFormatSummaryTables
         'rdoManualTheme
         '
         Me.rdoManualTheme.AutoSize = True
-        Me.rdoManualTheme.Location = New System.Drawing.Point(26, 51)
+        Me.rdoManualTheme.Location = New System.Drawing.Point(26, 94)
         Me.rdoManualTheme.Name = "rdoManualTheme"
         Me.rdoManualTheme.Size = New System.Drawing.Size(96, 17)
         Me.rdoManualTheme.TabIndex = 1
@@ -530,7 +530,7 @@ Partial Class sdgFormatSummaryTables
         '
         Me.rdoSelectTheme.AutoSize = True
         Me.rdoSelectTheme.Checked = True
-        Me.rdoSelectTheme.Location = New System.Drawing.Point(26, 94)
+        Me.rdoSelectTheme.Location = New System.Drawing.Point(26, 51)
         Me.rdoSelectTheme.Name = "rdoSelectTheme"
         Me.rdoSelectTheme.Size = New System.Drawing.Size(91, 17)
         Me.rdoSelectTheme.TabIndex = 0
