@@ -332,12 +332,4 @@ Public Class dlgSummaryBarOrPieChart
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
     End Sub
-
-    Private Sub CoreControls_ContenctsChanged(ucrChangedControl As ucrCore) Handles ucrSaveSummaryBar.ControlContentsChanged, ucrReceiverYVariable.ControlContentsChanged, ucrReceiverFactor.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-
-    End Sub
 End Class
