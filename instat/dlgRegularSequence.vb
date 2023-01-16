@@ -21,6 +21,7 @@ Public Class dlgRegularSequence
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRepFunction, clsSeqFunction, clsSeqDateFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private clsByOperator As New ROperator
     Private enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.NumericOption
     Private bDefaultOptionChanged As Boolean = False
@@ -129,6 +130,8 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddToLinkedControls({ucrInputComboDatesBy}, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPreview.SetText("Preview")
+        ucrChkPreview.SetParameter(New RParameter("Checked", iNewPosition:=0))
+        ucrChkPreview.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNewColumnName.SetPrefix("regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
@@ -147,6 +150,7 @@ Public Class dlgRegularSequence
         clsRepFunction = New RFunction
         clsSeqFunction = New RFunction
         clsSeqDateFunction = New RFunction
+        clsDummyFunction = New RFunction
         clsByOperator = New ROperator
 
         ucrSelectDataFrameRegularSequence.Reset()
@@ -157,6 +161,8 @@ Public Class dlgRegularSequence
         txtPreview.Visible = False
         lblPreview.Visible = False
         lblMessage.Visible = False
+
+        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1, iPosition:=0)
@@ -206,6 +212,8 @@ Public Class dlgRegularSequence
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
         ucrDataFrameLength.SetRCode(clsRepFunction, bReset)
         ucrNewColumnName.SetRCode(clsRepFunction, bReset)
+
+        ucrChkPreview.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -251,10 +259,11 @@ Public Class dlgRegularSequence
 
             'clone the "rep" command base function
             clsNewRepClone = clsRepFunction.Clone()
+            clsNewRepClone.bAssignToIsPrefix = False
 
             'set up "as.character" command to be usde for testing
             clsAsCharacter.SetRCommand("as.character")
-            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsNewRepClone)
+            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
 
             'if the new peview script is the same as the previous one then no need to refresh preview
             'this check is useful for large data frames.
