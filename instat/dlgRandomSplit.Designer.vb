@@ -111,7 +111,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudBreaks.AutoSize = True
         Me.ucrNudBreaks.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBreaks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 162)
+        Me.ucrNudBreaks.Location = New System.Drawing.Point(351, 160)
         Me.ucrNudBreaks.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudBreaks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBreaks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -125,7 +125,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudPool.AutoSize = True
         Me.ucrNudPool.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPool.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPool.Location = New System.Drawing.Point(351, 190)
+        Me.ucrNudPool.Location = New System.Drawing.Point(351, 188)
         Me.ucrNudPool.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudPool.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPool.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -153,7 +153,7 @@ Partial Class dlgRandomSplit
         Me.ucrNudLag.AutoSize = True
         Me.ucrNudLag.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLag.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLag.Location = New System.Drawing.Point(105, 239)
+        Me.ucrNudLag.Location = New System.Drawing.Point(351, 159)
         Me.ucrNudLag.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudLag.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLag.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -165,7 +165,7 @@ Partial Class dlgRandomSplit
         'ucrSaveTrainingData
         '
         Me.ucrSaveTrainingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 269)
+        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 270)
         Me.ucrSaveTrainingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTrainingData.Name = "ucrSaveTrainingData"
         Me.ucrSaveTrainingData.Size = New System.Drawing.Size(300, 23)
@@ -184,7 +184,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrChkLag.AutoSize = True
         Me.ucrChkLag.Checked = False
-        Me.ucrChkLag.Location = New System.Drawing.Point(9, 239)
+        Me.ucrChkLag.Location = New System.Drawing.Point(272, 159)
         Me.ucrChkLag.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkLag.Name = "ucrChkLag"
         Me.ucrChkLag.Size = New System.Drawing.Size(143, 23)
@@ -248,7 +248,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrChkTest.AutoSize = True
         Me.ucrChkTest.Checked = False
-        Me.ucrChkTest.Location = New System.Drawing.Point(189, 239)
+        Me.ucrChkTest.Location = New System.Drawing.Point(9, 240)
         Me.ucrChkTest.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkTest.Name = "ucrChkTest"
         Me.ucrChkTest.Size = New System.Drawing.Size(143, 23)

@@ -62,11 +62,11 @@ Public Class dlgRandomSplit
         ucrNudLag.SetMinMax(0, 100)
         ucrNudLag.Increment = 0.5
         ucrNudLag.DecimalPlaces = 2
-        ucrChkLag.SetText("Lag")
+        ucrChkLag.SetText("Lag:")
         ucrChkLag.SetParameter(ucrNudLag.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
-        ucrChkTest.SetText("Save Test Variable:")
+        ucrChkTest.SetText("Save Test Data:")
         ucrChkTest.AddToLinkedControls(ucrSaveTestingData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveTrainingData.SetLabelText("Save Train to:")
