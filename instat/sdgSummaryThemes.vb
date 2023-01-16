@@ -26,7 +26,7 @@ Public Class sdgSummaryThemes
     End Sub
 
     Private Sub InitialiseControls()
-        Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform, dctLayouts As New Dictionary(Of String, String)
+        Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform, dctLayouts, dctFontNames As New Dictionary(Of String, String)
 
         dctWeights.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctWeights.Add("Normal", Chr(34) & "normal" & Chr(34))
@@ -57,6 +57,20 @@ Public Class sdgSummaryThemes
         dctLayouts.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctLayouts.Add("Auto", Chr(34) & "auto" & Chr(34))
         dctLayouts.Add("Fixed", Chr(34) & "fixed" & Chr(34))
+
+        dctFontNames.Add("Null", Chr(34) & "NULL" & Chr(34))
+        dctFontNames.Add("Apple system", Chr(34) & "-apple-system" & Chr(34))
+        dctFontNames.Add("Cantarell", Chr(34) & "Cantarell" & Chr(34))
+        dctFontNames.Add("Helvetica Neue", Chr(34) & "Helvetica Neue" & Chr(34))
+        dctFontNames.Add("BlinkMacSystemFont", Chr(34) & "BlinkMacSystemFont" & Chr(34))
+        dctFontNames.Add("Ubuntu", Chr(34) & "Ubuntu" & Chr(34))
+        dctFontNames.Add("Fira Sans", Chr(34) & "Fira Sans" & Chr(34))
+        dctFontNames.Add("Segoe UI", Chr(34) & "Segoe UI" & Chr(34))
+        dctFontNames.Add("Roboto", Chr(34) & "Roboto" & Chr(34))
+        dctFontNames.Add("Oxygen", Chr(34) & "Oxygen" & Chr(34))
+        dctFontNames.Add("Droid Sans", Chr(34) & "Droid Sans" & Chr(34))
+        dctFontNames.Add("Arial", Chr(34) & "Arial" & Chr(34))
+        dctFontNames.Add("Sans-serif", Chr(34) & "Sans-serif" & Chr(34))
 
         ucrChkBackgroundColour.SetText("Background Colour")
         ucrInputBackgroundColour.SetParameter(New RParameter("heading.background.color"))
@@ -178,6 +192,7 @@ Public Class sdgSummaryThemes
 
         ucrChkTableFontNames.SetText("Font names")
         ucrInputTableFontNames.SetParameter(New RParameter("table.font.names"))
+        ucrInputTableFontNames.SetItems(dctFontNames)
         ucrChkTableFontNames.AddParameterPresentCondition(True, "table.font.names")
         ucrChkTableFontNames.AddParameterPresentCondition(False, "table.font.names", False)
 

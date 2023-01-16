@@ -76,8 +76,8 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpFormatOptions
         '
-        Me.tbpFormatOptions.Controls.Add(Me.tbpFacets)
         Me.tbpFormatOptions.Controls.Add(Me.tbpTitle)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpFacets)
         Me.tbpFormatOptions.Controls.Add(Me.tbpRows)
         Me.tbpFormatOptions.Controls.Add(Me.tbpColumns)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)

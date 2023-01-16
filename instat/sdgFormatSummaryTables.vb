@@ -457,4 +457,10 @@ Public Class sdgFormatSummaryTables
             End Select
         End If
     End Sub
+
+    Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
+        If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Or e.TabPageIndex = 3 Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class
