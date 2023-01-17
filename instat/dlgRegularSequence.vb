@@ -256,6 +256,7 @@ Public Class dlgRegularSequence
             Dim vecSequence As CharacterVector
             Dim strNewPreviewScript As String
             Dim iLength As Integer
+            Dim iDataFrameLength As Integer = ucrDataFrameLength.GetDataFrameLength
 
             'clone the "rep" command base function
             clsNewRepClone = clsRepFunction.Clone()
@@ -273,6 +274,12 @@ Public Class dlgRegularSequence
             End If
             strPreviewScript = strNewPreviewScript
 
+            If iDataFrameLength >= 10000000 Then
+                txtPreview.Text = ""
+                lblMessage.Text = "No preview available."
+                Exit Try
+            End If
+
             'get the sequence from the R command as it is, and dispay it
             vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strPreviewScript, bSilent:=True).AsCharacter
             txtPreview.Text = String.Join(", ", vecSequence)
@@ -281,11 +288,11 @@ Public Class dlgRegularSequence
             clsNewRepClone.RemoveParameterByName("length.out")
             vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacter.ToScript(), bSilent:=True).AsCharacter
             iLength = vecSequence.Length
-            If iLength = ucrDataFrameLength.GetDataFrameLength Then
+            If iLength = iDataFrameLength Then
                 lblMessage.Text = GetTranslation("Sequence matches the length of the data frame.")
-            ElseIf iLength < ucrDataFrameLength.GetDataFrameLength Then
+            ElseIf iLength < iDataFrameLength Then
                 lblMessage.Text = GetTranslation("Sequence extended to match the length of the data frame.")
-            ElseIf iLength > ucrDataFrameLength.GetDataFrameLength Then
+            ElseIf iLength > iDataFrameLength Then
                 lblMessage.Text = GetTranslation("Sequence truncated to match the length of the data frame.")
             End If
         Catch ex As Exception
@@ -328,6 +335,10 @@ Public Class dlgRegularSequence
 
     Private Sub ucrRepeatControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged, ucrDataFrameLength.ControlValueChanged
         PreviewSequence()
+    End Sub
+
+    Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged
+        ucrChkPreview.Checked = False
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrInputComboDatesBy.ControlContentsChanged
