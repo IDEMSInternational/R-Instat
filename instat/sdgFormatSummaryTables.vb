@@ -25,7 +25,7 @@ Public Class sdgFormatSummaryTables
     'The dummy Function is used by input controls that add the parameter manually,
     'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
-    Public clsThemesTabOptionsFunction, clsgtExtrasThemesFunction As New RFunction
+    Public clsThemesTabOptionsFunction, clsgtExtrasThemesFunction, clsThemesDummyFunction As New RFunction
     Private clsPipeOperator, clsMutableOperator, clsJoiningOperator, clsTabFootnoteOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
@@ -44,10 +44,13 @@ Public Class sdgFormatSummaryTables
         ucrThemesPanel.AddRadioButton(rdoManualTheme)
         ucrThemesPanel.AddRadioButton(rdoSelectTheme)
 
-        ucrThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Dark Theme")
+        ucrThemesPanel.AddParameterValuesCondition(rdoSelectTheme, "check", "select")
+        ucrThemesPanel.AddParameterValuesCondition(rdoManualTheme, "check", "manual")
 
         ucrInputSelectThemes.SetItems({"538 Theme", "Dark Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NytimesTheme", "Pff Theme"})
         ucrInputSelectThemes.SetDropDownStyleAsNonEditable()
+
+        ucrThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Dark Theme")
 
         'Titles
         ucrInputTitle.SetParameter(New RParameter("title", iNewPosition:=0))
@@ -139,7 +142,7 @@ Public Class sdgFormatSummaryTables
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
                         clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction, clsNewTabFootnoteOperator As ROperator,
                         clsNewTabStyleCellTextFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
-                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction)
+                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction, clsNewThemesDummyFunction As RFunction)
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
@@ -171,11 +174,12 @@ Public Class sdgFormatSummaryTables
         clsDummyFunction = clsNewDummyFunction
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
+        clsThemesDummyFunction = clsNewThemesDummyFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        rdoSelectTheme.Checked = True
+        AddRemoveManualTheme()
 
         ucrChkAddTitleSubtitle.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkTitleFootnote.SetRCode(clsTabFootnoteOperator, bReset, bCloneIfNeeded:=True)
@@ -197,6 +201,7 @@ Public Class sdgFormatSummaryTables
         ucrInputTitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSubtitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSelectThemes.SetRCode(clsgtExtrasThemesFunction, bReset, bCloneIfNeeded:=True)
+        ucrThemesPanel.SetRCode(clsThemesDummyFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
     End Sub
 
@@ -430,13 +435,15 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrThemesPanel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrThemesPanel.ControlValueChanged, ucrInputSelectThemes.ControlValueChanged
         If rdoManualTheme.Checked Then
-            cmdManualTheme.Visible = True
+            'cmdManualTheme.Visible = True
             ucrInputSelectThemes.Visible = False
-            clsPipeOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemesTabOptionsFunction, iPosition:=6)
+            'clsThemesDummyFunction.AddParameter("check", "manual", iPosition:=0)
+            clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemesTabOptionsFunction, iPosition:=6)
         Else
             cmdManualTheme.Visible = False
-            ucrInputSelectThemes.Visible = True
-            clsPipeOperator.AddParameter("themes_format", clsRFunctionParameter:=clsgtExtrasThemesFunction, iPosition:=6)
+            'ucrInputSelectThemes.Visible = True
+            'clsThemesDummyFunction.AddParameter("check", "select", iPosition:=0)
+            clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsgtExtrasThemesFunction, iPosition:=6)
             Select Case ucrInputSelectThemes.GetText
                 Case "538 Theme"
                     clsgtExtrasThemesFunction.SetRCommand("gt_theme_538")
@@ -456,6 +463,11 @@ Public Class sdgFormatSummaryTables
                     clsgtExtrasThemesFunction.SetRCommand("gt_theme_pff")
             End Select
         End If
+        AddRemoveManualTheme()
+    End Sub
+
+    Private Sub AddRemoveManualTheme()
+        cmdManualTheme.Visible = rdoManualTheme.Checked
     End Sub
 
     Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting

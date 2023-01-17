@@ -141,48 +141,48 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColumnsPadding = New instat.ucrCheck()
         Me.ucrChkColumnsHorizontalPadding = New instat.ucrCheck()
         Me.tbThemeRows = New System.Windows.Forms.TabPage()
-        Me.UcrInputComboBox8 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox7 = New instat.ucrInputComboBox()
-        Me.UcrNud7 = New instat.ucrNud()
-        Me.UcrNud6 = New instat.ucrNud()
-        Me.UcrCheck15 = New instat.ucrCheck()
-        Me.UcrCheck14 = New instat.ucrCheck()
-        Me.UcrCheck13 = New instat.ucrCheck()
-        Me.UcrCheck12 = New instat.ucrCheck()
+        Me.ucrInputRowTextTransform = New instat.ucrInputComboBox()
+        Me.ucrNudRowGroupHorizontalPadding = New instat.ucrNud()
+        Me.ucrNudRowGroupPadding = New instat.ucrNud()
+        Me.ucrChkRowGroupHorizontalPadding = New instat.ucrCheck()
+        Me.ucrChkRowGroupPadding = New instat.ucrCheck()
+        Me.ucrChkRowTextTransform = New instat.ucrCheck()
+        Me.ucrChkRowBackColor = New instat.ucrCheck()
         Me.grpRowLabelsFont = New System.Windows.Forms.GroupBox()
-        Me.UcrNud4 = New instat.ucrNud()
-        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
-        Me.UcrCheck10 = New instat.ucrCheck()
-        Me.UcrCheck11 = New instat.ucrCheck()
+        Me.ucrNudRowFontSize = New instat.ucrNud()
+        Me.ucrInputRowFontWeight = New instat.ucrInputComboBox()
+        Me.ucrChkRowFontSize = New instat.ucrCheck()
+        Me.ucrChkRowFontWeight = New instat.ucrCheck()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.ucrBaseSummaryTheme = New instat.ucrButtonsSubdialogue()
-        Me.grpRowBorderLabels = New System.Windows.Forms.GroupBox()
-        Me.UcrColors1 = New instat.ucrColors()
-        Me.UcrColors2 = New instat.ucrColors()
-        Me.UcrColors3 = New instat.ucrColors()
-        Me.UcrColors4 = New instat.ucrColors()
-        Me.UcrNud1 = New instat.ucrNud()
-        Me.UcrNud2 = New instat.ucrNud()
-        Me.UcrNud3 = New instat.ucrNud()
-        Me.UcrNud8 = New instat.ucrNud()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
-        Me.UcrCheck1 = New instat.ucrCheck()
-        Me.UcrCheck2 = New instat.ucrCheck()
-        Me.UcrCheck3 = New instat.ucrCheck()
-        Me.UcrCheck4 = New instat.ucrCheck()
-        Me.UcrCheck5 = New instat.ucrCheck()
-        Me.UcrCheck6 = New instat.ucrCheck()
-        Me.UcrCheck7 = New instat.ucrCheck()
-        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox9 = New instat.ucrInputComboBox()
-        Me.UcrCheck8 = New instat.ucrCheck()
-        Me.UcrCheck9 = New instat.ucrCheck()
-        Me.UcrCheck19 = New instat.ucrCheck()
-        Me.UcrCheck20 = New instat.ucrCheck()
-        Me.UcrCheck21 = New instat.ucrCheck()
+        Me.grpRowGroupBorder = New System.Windows.Forms.GroupBox()
+        Me.ucrInputRowGroupRightColor = New instat.ucrColors()
+        Me.ucrInputRowGroupLeftColor = New instat.ucrColors()
+        Me.ucrInputRowGroupBottomColor = New instat.ucrColors()
+        Me.ucrInputRowGroupTopColor = New instat.ucrColors()
+        Me.ucrNudRowGroupRightWidth = New instat.ucrNud()
+        Me.ucrNudRowGroupLeftWidth = New instat.ucrNud()
+        Me.ucrNudRowGroupBottomWidth = New instat.ucrNud()
+        Me.ucrNudRowGroupTopWidth = New instat.ucrNud()
+        Me.ucrInputRowGroupRightStyle = New instat.ucrInputComboBox()
+        Me.ucrInputRowGroupLeftStyle = New instat.ucrInputComboBox()
+        Me.ucrChkRowGroupRightColor = New instat.ucrCheck()
+        Me.ucrChkRowGroupRightWidth = New instat.ucrCheck()
+        Me.ucrChkRowGroupRightStyle = New instat.ucrCheck()
+        Me.ucrChkRowGroupLeftColor = New instat.ucrCheck()
+        Me.ucrChkRowGroupLeftWidth = New instat.ucrCheck()
+        Me.ucrChkRowGroupLeftStyle = New instat.ucrCheck()
+        Me.ucrChkRowGroupBottomColor = New instat.ucrCheck()
+        Me.ucrInputRowGroupBottomStyle = New instat.ucrInputComboBox()
+        Me.ucrInputRowGroupTopStyle = New instat.ucrInputComboBox()
+        Me.ucrChkRowGroupBottomWidth = New instat.ucrCheck()
+        Me.ucrChkRowGroupBottomStyle = New instat.ucrCheck()
+        Me.ucrChkRowGroupTopWidth = New instat.ucrCheck()
+        Me.ucrChkRowGroupTopStyle = New instat.ucrCheck()
+        Me.ucrChkRowGroupTopColor = New instat.ucrCheck()
+        Me.ucrRowBackColors = New instat.ucrColors()
         Me.tbSummaryThemes.SuspendLayout()
         Me.tbThemeTables.SuspendLayout()
         Me.grpTableBorder.SuspendLayout()
@@ -197,7 +197,7 @@ Partial Class sdgSummaryThemes
         Me.grpColumnsBorder.SuspendLayout()
         Me.tbThemeRows.SuspendLayout()
         Me.grpRowLabelsFont.SuspendLayout()
-        Me.grpRowBorderLabels.SuspendLayout()
+        Me.grpRowGroupBorder.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbSummaryThemes
@@ -1531,15 +1531,15 @@ Partial Class sdgSummaryThemes
         '
         'tbThemeRows
         '
-        Me.tbThemeRows.Controls.Add(Me.grpRowBorderLabels)
-        Me.tbThemeRows.Controls.Add(Me.UcrInputComboBox8)
-        Me.tbThemeRows.Controls.Add(Me.UcrInputComboBox7)
-        Me.tbThemeRows.Controls.Add(Me.UcrNud7)
-        Me.tbThemeRows.Controls.Add(Me.UcrNud6)
-        Me.tbThemeRows.Controls.Add(Me.UcrCheck15)
-        Me.tbThemeRows.Controls.Add(Me.UcrCheck14)
-        Me.tbThemeRows.Controls.Add(Me.UcrCheck13)
-        Me.tbThemeRows.Controls.Add(Me.UcrCheck12)
+        Me.tbThemeRows.Controls.Add(Me.ucrRowBackColors)
+        Me.tbThemeRows.Controls.Add(Me.grpRowGroupBorder)
+        Me.tbThemeRows.Controls.Add(Me.ucrInputRowTextTransform)
+        Me.tbThemeRows.Controls.Add(Me.ucrNudRowGroupHorizontalPadding)
+        Me.tbThemeRows.Controls.Add(Me.ucrNudRowGroupPadding)
+        Me.tbThemeRows.Controls.Add(Me.ucrChkRowGroupHorizontalPadding)
+        Me.tbThemeRows.Controls.Add(Me.ucrChkRowGroupPadding)
+        Me.tbThemeRows.Controls.Add(Me.ucrChkRowTextTransform)
+        Me.tbThemeRows.Controls.Add(Me.ucrChkRowBackColor)
         Me.tbThemeRows.Controls.Add(Me.grpRowLabelsFont)
         Me.tbThemeRows.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeRows.Name = "tbThemeRows"
@@ -1548,96 +1548,85 @@ Partial Class sdgSummaryThemes
         Me.tbThemeRows.Text = "Rows"
         Me.tbThemeRows.UseVisualStyleBackColor = True
         '
-        'UcrInputComboBox8
+        'ucrInputRowTextTransform
         '
-        Me.UcrInputComboBox8.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox8.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox8.IsReadOnly = False
-        Me.UcrInputComboBox8.Location = New System.Drawing.Point(177, 38)
-        Me.UcrInputComboBox8.Name = "UcrInputComboBox8"
-        Me.UcrInputComboBox8.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox8.TabIndex = 34
+        Me.ucrInputRowTextTransform.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowTextTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowTextTransform.GetSetSelectedIndex = -1
+        Me.ucrInputRowTextTransform.IsReadOnly = False
+        Me.ucrInputRowTextTransform.Location = New System.Drawing.Point(177, 69)
+        Me.ucrInputRowTextTransform.Name = "ucrInputRowTextTransform"
+        Me.ucrInputRowTextTransform.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowTextTransform.TabIndex = 33
         '
-        'UcrInputComboBox7
+        'ucrNudRowGroupHorizontalPadding
         '
-        Me.UcrInputComboBox7.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox7.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox7.IsReadOnly = False
-        Me.UcrInputComboBox7.Location = New System.Drawing.Point(177, 69)
-        Me.UcrInputComboBox7.Name = "UcrInputComboBox7"
-        Me.UcrInputComboBox7.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox7.TabIndex = 33
+        Me.ucrNudRowGroupHorizontalPadding.AutoSize = True
+        Me.ucrNudRowGroupHorizontalPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Location = New System.Drawing.Point(177, 134)
+        Me.ucrNudRowGroupHorizontalPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Name = "ucrNudRowGroupHorizontalPadding"
+        Me.ucrNudRowGroupHorizontalPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupHorizontalPadding.TabIndex = 32
+        Me.ucrNudRowGroupHorizontalPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud7
+        'ucrNudRowGroupPadding
         '
-        Me.UcrNud7.AutoSize = True
-        Me.UcrNud7.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud7.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud7.Location = New System.Drawing.Point(177, 134)
-        Me.UcrNud7.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud7.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud7.Name = "UcrNud7"
-        Me.UcrNud7.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud7.TabIndex = 32
-        Me.UcrNud7.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.AutoSize = True
+        Me.ucrNudRowGroupPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Location = New System.Drawing.Point(177, 102)
+        Me.ucrNudRowGroupPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Name = "ucrNudRowGroupPadding"
+        Me.ucrNudRowGroupPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupPadding.TabIndex = 31
+        Me.ucrNudRowGroupPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud6
+        'ucrChkRowGroupHorizontalPadding
         '
-        Me.UcrNud6.AutoSize = True
-        Me.UcrNud6.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud6.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud6.Location = New System.Drawing.Point(177, 102)
-        Me.UcrNud6.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud6.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud6.Name = "UcrNud6"
-        Me.UcrNud6.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud6.TabIndex = 31
-        Me.UcrNud6.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrChkRowGroupHorizontalPadding.AutoSize = True
+        Me.ucrChkRowGroupHorizontalPadding.Checked = False
+        Me.ucrChkRowGroupHorizontalPadding.Location = New System.Drawing.Point(32, 134)
+        Me.ucrChkRowGroupHorizontalPadding.Name = "ucrChkRowGroupHorizontalPadding"
+        Me.ucrChkRowGroupHorizontalPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupHorizontalPadding.TabIndex = 29
         '
-        'UcrCheck15
+        'ucrChkRowGroupPadding
         '
-        Me.UcrCheck15.AutoSize = True
-        Me.UcrCheck15.Checked = False
-        Me.UcrCheck15.Location = New System.Drawing.Point(32, 134)
-        Me.UcrCheck15.Name = "UcrCheck15"
-        Me.UcrCheck15.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck15.TabIndex = 29
+        Me.ucrChkRowGroupPadding.AutoSize = True
+        Me.ucrChkRowGroupPadding.Checked = False
+        Me.ucrChkRowGroupPadding.Location = New System.Drawing.Point(32, 102)
+        Me.ucrChkRowGroupPadding.Name = "ucrChkRowGroupPadding"
+        Me.ucrChkRowGroupPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupPadding.TabIndex = 28
         '
-        'UcrCheck14
+        'ucrChkRowTextTransform
         '
-        Me.UcrCheck14.AutoSize = True
-        Me.UcrCheck14.Checked = False
-        Me.UcrCheck14.Location = New System.Drawing.Point(32, 102)
-        Me.UcrCheck14.Name = "UcrCheck14"
-        Me.UcrCheck14.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck14.TabIndex = 28
+        Me.ucrChkRowTextTransform.AutoSize = True
+        Me.ucrChkRowTextTransform.Checked = False
+        Me.ucrChkRowTextTransform.Location = New System.Drawing.Point(32, 70)
+        Me.ucrChkRowTextTransform.Name = "ucrChkRowTextTransform"
+        Me.ucrChkRowTextTransform.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowTextTransform.TabIndex = 27
         '
-        'UcrCheck13
+        'ucrChkRowBackColor
         '
-        Me.UcrCheck13.AutoSize = True
-        Me.UcrCheck13.Checked = False
-        Me.UcrCheck13.Location = New System.Drawing.Point(32, 70)
-        Me.UcrCheck13.Name = "UcrCheck13"
-        Me.UcrCheck13.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck13.TabIndex = 27
-        '
-        'UcrCheck12
-        '
-        Me.UcrCheck12.AutoSize = True
-        Me.UcrCheck12.Checked = False
-        Me.UcrCheck12.Location = New System.Drawing.Point(32, 38)
-        Me.UcrCheck12.Name = "UcrCheck12"
-        Me.UcrCheck12.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck12.TabIndex = 26
+        Me.ucrChkRowBackColor.AutoSize = True
+        Me.ucrChkRowBackColor.Checked = False
+        Me.ucrChkRowBackColor.Location = New System.Drawing.Point(32, 38)
+        Me.ucrChkRowBackColor.Name = "ucrChkRowBackColor"
+        Me.ucrChkRowBackColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowBackColor.TabIndex = 26
         '
         'grpRowLabelsFont
         '
-        Me.grpRowLabelsFont.Controls.Add(Me.UcrNud4)
-        Me.grpRowLabelsFont.Controls.Add(Me.UcrInputComboBox4)
-        Me.grpRowLabelsFont.Controls.Add(Me.UcrCheck10)
-        Me.grpRowLabelsFont.Controls.Add(Me.UcrCheck11)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrNudRowFontSize)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrInputRowFontWeight)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrChkRowFontSize)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrChkRowFontWeight)
         Me.grpRowLabelsFont.Location = New System.Drawing.Point(23, 160)
         Me.grpRowLabelsFont.Name = "grpRowLabelsFont"
         Me.grpRowLabelsFont.Size = New System.Drawing.Size(317, 83)
@@ -1645,47 +1634,47 @@ Partial Class sdgSummaryThemes
         Me.grpRowLabelsFont.TabStop = False
         Me.grpRowLabelsFont.Text = "Row Labels Font"
         '
-        'UcrNud4
+        'ucrNudRowFontSize
         '
-        Me.UcrNud4.AutoSize = True
-        Me.UcrNud4.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud4.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud4.Location = New System.Drawing.Point(154, 17)
-        Me.UcrNud4.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud4.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud4.Name = "UcrNud4"
-        Me.UcrNud4.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud4.TabIndex = 21
-        Me.UcrNud4.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowFontSize.AutoSize = True
+        Me.ucrNudRowFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowFontSize.Location = New System.Drawing.Point(154, 17)
+        Me.ucrNudRowFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowFontSize.Name = "ucrNudRowFontSize"
+        Me.ucrNudRowFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowFontSize.TabIndex = 21
+        Me.ucrNudRowFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrInputComboBox4
+        'ucrInputRowFontWeight
         '
-        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox4.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox4.IsReadOnly = False
-        Me.UcrInputComboBox4.Location = New System.Drawing.Point(154, 46)
-        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
-        Me.UcrInputComboBox4.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox4.TabIndex = 18
+        Me.ucrInputRowFontWeight.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowFontWeight.GetSetSelectedIndex = -1
+        Me.ucrInputRowFontWeight.IsReadOnly = False
+        Me.ucrInputRowFontWeight.Location = New System.Drawing.Point(154, 46)
+        Me.ucrInputRowFontWeight.Name = "ucrInputRowFontWeight"
+        Me.ucrInputRowFontWeight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowFontWeight.TabIndex = 18
         '
-        'UcrCheck10
+        'ucrChkRowFontSize
         '
-        Me.UcrCheck10.AutoSize = True
-        Me.UcrCheck10.Checked = False
-        Me.UcrCheck10.Location = New System.Drawing.Point(9, 19)
-        Me.UcrCheck10.Name = "UcrCheck10"
-        Me.UcrCheck10.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck10.TabIndex = 9
+        Me.ucrChkRowFontSize.AutoSize = True
+        Me.ucrChkRowFontSize.Checked = False
+        Me.ucrChkRowFontSize.Location = New System.Drawing.Point(9, 19)
+        Me.ucrChkRowFontSize.Name = "ucrChkRowFontSize"
+        Me.ucrChkRowFontSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowFontSize.TabIndex = 9
         '
-        'UcrCheck11
+        'ucrChkRowFontWeight
         '
-        Me.UcrCheck11.AutoSize = True
-        Me.UcrCheck11.Checked = False
-        Me.UcrCheck11.Location = New System.Drawing.Point(9, 46)
-        Me.UcrCheck11.Name = "UcrCheck11"
-        Me.UcrCheck11.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck11.TabIndex = 11
+        Me.ucrChkRowFontWeight.AutoSize = True
+        Me.ucrChkRowFontWeight.Checked = False
+        Me.ucrChkRowFontWeight.Location = New System.Drawing.Point(9, 46)
+        Me.ucrChkRowFontWeight.Name = "ucrChkRowFontWeight"
+        Me.ucrChkRowFontWeight.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowFontWeight.TabIndex = 11
         '
         'TabPage5
         '
@@ -1722,286 +1711,297 @@ Partial Class sdgSummaryThemes
         Me.ucrBaseSummaryTheme.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSummaryTheme.TabIndex = 1
         '
-        'grpRowBorderLabels
+        'grpRowGroupBorder
         '
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrColors1)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrColors2)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrColors3)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrColors4)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrNud1)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrNud2)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrNud3)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrNud8)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrInputComboBox1)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrInputComboBox2)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck1)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck2)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck3)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck4)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck5)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck6)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck7)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrInputComboBox3)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrInputComboBox9)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck8)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck9)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck19)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck20)
-        Me.grpRowBorderLabels.Controls.Add(Me.UcrCheck21)
-        Me.grpRowBorderLabels.Location = New System.Drawing.Point(356, 9)
-        Me.grpRowBorderLabels.Name = "grpRowBorderLabels"
-        Me.grpRowBorderLabels.Size = New System.Drawing.Size(351, 333)
-        Me.grpRowBorderLabels.TabIndex = 35
-        Me.grpRowBorderLabels.TabStop = False
-        Me.grpRowBorderLabels.Text = "Row Labels Border"
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupRightColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupLeftColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupBottomColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupTopColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrNudRowGroupRightWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrNudRowGroupLeftWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrNudRowGroupBottomWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrNudRowGroupTopWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupRightStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupLeftStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupRightColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupRightWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupRightStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupLeftColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupLeftWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupLeftStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupBottomColor)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupBottomStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrInputRowGroupTopStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupBottomWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupBottomStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupTopWidth)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupTopStyle)
+        Me.grpRowGroupBorder.Controls.Add(Me.ucrChkRowGroupTopColor)
+        Me.grpRowGroupBorder.Location = New System.Drawing.Point(356, 9)
+        Me.grpRowGroupBorder.Name = "grpRowGroupBorder"
+        Me.grpRowGroupBorder.Size = New System.Drawing.Size(351, 333)
+        Me.grpRowGroupBorder.TabIndex = 35
+        Me.grpRowGroupBorder.TabStop = False
+        Me.grpRowGroupBorder.Text = "Row Group Borders"
         '
-        'UcrColors1
+        'ucrInputRowGroupRightColor
         '
-        Me.UcrColors1.AddQuotesIfUnrecognised = True
-        Me.UcrColors1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrColors1.GetSetSelectedIndex = -1
-        Me.UcrColors1.IsReadOnly = False
-        Me.UcrColors1.Location = New System.Drawing.Point(153, 292)
-        Me.UcrColors1.Name = "UcrColors1"
-        Me.UcrColors1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrColors1.TabIndex = 43
+        Me.ucrInputRowGroupRightColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupRightColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupRightColor.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupRightColor.IsReadOnly = False
+        Me.ucrInputRowGroupRightColor.Location = New System.Drawing.Point(153, 292)
+        Me.ucrInputRowGroupRightColor.Name = "ucrInputRowGroupRightColor"
+        Me.ucrInputRowGroupRightColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupRightColor.TabIndex = 43
         '
-        'UcrColors2
+        'ucrInputRowGroupLeftColor
         '
-        Me.UcrColors2.AddQuotesIfUnrecognised = True
-        Me.UcrColors2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrColors2.GetSetSelectedIndex = -1
-        Me.UcrColors2.IsReadOnly = False
-        Me.UcrColors2.Location = New System.Drawing.Point(153, 217)
-        Me.UcrColors2.Name = "UcrColors2"
-        Me.UcrColors2.Size = New System.Drawing.Size(137, 21)
-        Me.UcrColors2.TabIndex = 42
+        Me.ucrInputRowGroupLeftColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupLeftColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupLeftColor.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupLeftColor.IsReadOnly = False
+        Me.ucrInputRowGroupLeftColor.Location = New System.Drawing.Point(153, 217)
+        Me.ucrInputRowGroupLeftColor.Name = "ucrInputRowGroupLeftColor"
+        Me.ucrInputRowGroupLeftColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupLeftColor.TabIndex = 42
         '
-        'UcrColors3
+        'ucrInputRowGroupBottomColor
         '
-        Me.UcrColors3.AddQuotesIfUnrecognised = True
-        Me.UcrColors3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrColors3.GetSetSelectedIndex = -1
-        Me.UcrColors3.IsReadOnly = False
-        Me.UcrColors3.Location = New System.Drawing.Point(153, 142)
-        Me.UcrColors3.Name = "UcrColors3"
-        Me.UcrColors3.Size = New System.Drawing.Size(137, 21)
-        Me.UcrColors3.TabIndex = 41
+        Me.ucrInputRowGroupBottomColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupBottomColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupBottomColor.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupBottomColor.IsReadOnly = False
+        Me.ucrInputRowGroupBottomColor.Location = New System.Drawing.Point(153, 142)
+        Me.ucrInputRowGroupBottomColor.Name = "ucrInputRowGroupBottomColor"
+        Me.ucrInputRowGroupBottomColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupBottomColor.TabIndex = 41
         '
-        'UcrColors4
+        'ucrInputRowGroupTopColor
         '
-        Me.UcrColors4.AddQuotesIfUnrecognised = True
-        Me.UcrColors4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrColors4.GetSetSelectedIndex = -1
-        Me.UcrColors4.IsReadOnly = False
-        Me.UcrColors4.Location = New System.Drawing.Point(153, 66)
-        Me.UcrColors4.Name = "UcrColors4"
-        Me.UcrColors4.Size = New System.Drawing.Size(137, 21)
-        Me.UcrColors4.TabIndex = 40
+        Me.ucrInputRowGroupTopColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupTopColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupTopColor.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupTopColor.IsReadOnly = False
+        Me.ucrInputRowGroupTopColor.Location = New System.Drawing.Point(153, 66)
+        Me.ucrInputRowGroupTopColor.Name = "ucrInputRowGroupTopColor"
+        Me.ucrInputRowGroupTopColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupTopColor.TabIndex = 40
         '
-        'UcrNud1
+        'ucrNudRowGroupRightWidth
         '
-        Me.UcrNud1.AutoSize = True
-        Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud1.Location = New System.Drawing.Point(153, 267)
-        Me.UcrNud1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Name = "UcrNud1"
-        Me.UcrNud1.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud1.TabIndex = 39
-        Me.UcrNud1.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupRightWidth.AutoSize = True
+        Me.ucrNudRowGroupRightWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupRightWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupRightWidth.Location = New System.Drawing.Point(153, 267)
+        Me.ucrNudRowGroupRightWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupRightWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupRightWidth.Name = "ucrNudRowGroupRightWidth"
+        Me.ucrNudRowGroupRightWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupRightWidth.TabIndex = 39
+        Me.ucrNudRowGroupRightWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud2
+        'ucrNudRowGroupLeftWidth
         '
-        Me.UcrNud2.AutoSize = True
-        Me.UcrNud2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud2.Location = New System.Drawing.Point(153, 192)
-        Me.UcrNud2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud2.Name = "UcrNud2"
-        Me.UcrNud2.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud2.TabIndex = 38
-        Me.UcrNud2.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupLeftWidth.AutoSize = True
+        Me.ucrNudRowGroupLeftWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupLeftWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupLeftWidth.Location = New System.Drawing.Point(153, 192)
+        Me.ucrNudRowGroupLeftWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupLeftWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupLeftWidth.Name = "ucrNudRowGroupLeftWidth"
+        Me.ucrNudRowGroupLeftWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupLeftWidth.TabIndex = 38
+        Me.ucrNudRowGroupLeftWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud3
+        'ucrNudRowGroupBottomWidth
         '
-        Me.UcrNud3.AutoSize = True
-        Me.UcrNud3.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud3.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud3.Location = New System.Drawing.Point(153, 117)
-        Me.UcrNud3.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud3.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud3.Name = "UcrNud3"
-        Me.UcrNud3.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud3.TabIndex = 37
-        Me.UcrNud3.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupBottomWidth.AutoSize = True
+        Me.ucrNudRowGroupBottomWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupBottomWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupBottomWidth.Location = New System.Drawing.Point(153, 117)
+        Me.ucrNudRowGroupBottomWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupBottomWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupBottomWidth.Name = "ucrNudRowGroupBottomWidth"
+        Me.ucrNudRowGroupBottomWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupBottomWidth.TabIndex = 37
+        Me.ucrNudRowGroupBottomWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud8
+        'ucrNudRowGroupTopWidth
         '
-        Me.UcrNud8.AutoSize = True
-        Me.UcrNud8.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud8.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud8.Location = New System.Drawing.Point(153, 42)
-        Me.UcrNud8.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud8.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud8.Name = "UcrNud8"
-        Me.UcrNud8.Size = New System.Drawing.Size(137, 20)
-        Me.UcrNud8.TabIndex = 36
-        Me.UcrNud8.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupTopWidth.AutoSize = True
+        Me.ucrNudRowGroupTopWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupTopWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupTopWidth.Location = New System.Drawing.Point(153, 42)
+        Me.ucrNudRowGroupTopWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupTopWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupTopWidth.Name = "ucrNudRowGroupTopWidth"
+        Me.ucrNudRowGroupTopWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupTopWidth.TabIndex = 36
+        Me.ucrNudRowGroupTopWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrInputComboBox1
+        'ucrInputRowGroupRightStyle
         '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox1.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox1.IsReadOnly = False
-        Me.UcrInputComboBox1.Location = New System.Drawing.Point(153, 242)
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox1.TabIndex = 33
+        Me.ucrInputRowGroupRightStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupRightStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupRightStyle.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupRightStyle.IsReadOnly = False
+        Me.ucrInputRowGroupRightStyle.Location = New System.Drawing.Point(153, 242)
+        Me.ucrInputRowGroupRightStyle.Name = "ucrInputRowGroupRightStyle"
+        Me.ucrInputRowGroupRightStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupRightStyle.TabIndex = 33
         '
-        'UcrInputComboBox2
+        'ucrInputRowGroupLeftStyle
         '
-        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox2.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox2.IsReadOnly = False
-        Me.UcrInputComboBox2.Location = New System.Drawing.Point(153, 167)
-        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
-        Me.UcrInputComboBox2.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox2.TabIndex = 29
+        Me.ucrInputRowGroupLeftStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupLeftStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupLeftStyle.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupLeftStyle.IsReadOnly = False
+        Me.ucrInputRowGroupLeftStyle.Location = New System.Drawing.Point(153, 167)
+        Me.ucrInputRowGroupLeftStyle.Name = "ucrInputRowGroupLeftStyle"
+        Me.ucrInputRowGroupLeftStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupLeftStyle.TabIndex = 29
         '
-        'UcrCheck1
+        'ucrChkRowGroupRightColor
         '
-        Me.UcrCheck1.AutoSize = True
-        Me.UcrCheck1.Checked = False
-        Me.UcrCheck1.Location = New System.Drawing.Point(17, 292)
-        Me.UcrCheck1.Name = "UcrCheck1"
-        Me.UcrCheck1.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck1.TabIndex = 27
+        Me.ucrChkRowGroupRightColor.AutoSize = True
+        Me.ucrChkRowGroupRightColor.Checked = False
+        Me.ucrChkRowGroupRightColor.Location = New System.Drawing.Point(17, 292)
+        Me.ucrChkRowGroupRightColor.Name = "ucrChkRowGroupRightColor"
+        Me.ucrChkRowGroupRightColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupRightColor.TabIndex = 27
         '
-        'UcrCheck2
+        'ucrChkRowGroupRightWidth
         '
-        Me.UcrCheck2.AutoSize = True
-        Me.UcrCheck2.Checked = False
-        Me.UcrCheck2.Location = New System.Drawing.Point(17, 267)
-        Me.UcrCheck2.Name = "UcrCheck2"
-        Me.UcrCheck2.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck2.TabIndex = 26
+        Me.ucrChkRowGroupRightWidth.AutoSize = True
+        Me.ucrChkRowGroupRightWidth.Checked = False
+        Me.ucrChkRowGroupRightWidth.Location = New System.Drawing.Point(17, 267)
+        Me.ucrChkRowGroupRightWidth.Name = "ucrChkRowGroupRightWidth"
+        Me.ucrChkRowGroupRightWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupRightWidth.TabIndex = 26
         '
-        'UcrCheck3
+        'ucrChkRowGroupRightStyle
         '
-        Me.UcrCheck3.AutoSize = True
-        Me.UcrCheck3.Checked = False
-        Me.UcrCheck3.Location = New System.Drawing.Point(17, 242)
-        Me.UcrCheck3.Name = "UcrCheck3"
-        Me.UcrCheck3.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck3.TabIndex = 25
+        Me.ucrChkRowGroupRightStyle.AutoSize = True
+        Me.ucrChkRowGroupRightStyle.Checked = False
+        Me.ucrChkRowGroupRightStyle.Location = New System.Drawing.Point(17, 242)
+        Me.ucrChkRowGroupRightStyle.Name = "ucrChkRowGroupRightStyle"
+        Me.ucrChkRowGroupRightStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupRightStyle.TabIndex = 25
         '
-        'UcrCheck4
+        'ucrChkRowGroupLeftColor
         '
-        Me.UcrCheck4.AutoSize = True
-        Me.UcrCheck4.Checked = False
-        Me.UcrCheck4.Location = New System.Drawing.Point(17, 217)
-        Me.UcrCheck4.Name = "UcrCheck4"
-        Me.UcrCheck4.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck4.TabIndex = 24
+        Me.ucrChkRowGroupLeftColor.AutoSize = True
+        Me.ucrChkRowGroupLeftColor.Checked = False
+        Me.ucrChkRowGroupLeftColor.Location = New System.Drawing.Point(17, 217)
+        Me.ucrChkRowGroupLeftColor.Name = "ucrChkRowGroupLeftColor"
+        Me.ucrChkRowGroupLeftColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupLeftColor.TabIndex = 24
         '
-        'UcrCheck5
+        'ucrChkRowGroupLeftWidth
         '
-        Me.UcrCheck5.AutoSize = True
-        Me.UcrCheck5.Checked = False
-        Me.UcrCheck5.Location = New System.Drawing.Point(17, 192)
-        Me.UcrCheck5.Name = "UcrCheck5"
-        Me.UcrCheck5.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck5.TabIndex = 23
+        Me.ucrChkRowGroupLeftWidth.AutoSize = True
+        Me.ucrChkRowGroupLeftWidth.Checked = False
+        Me.ucrChkRowGroupLeftWidth.Location = New System.Drawing.Point(17, 192)
+        Me.ucrChkRowGroupLeftWidth.Name = "ucrChkRowGroupLeftWidth"
+        Me.ucrChkRowGroupLeftWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupLeftWidth.TabIndex = 23
         '
-        'UcrCheck6
+        'ucrChkRowGroupLeftStyle
         '
-        Me.UcrCheck6.AutoSize = True
-        Me.UcrCheck6.Checked = False
-        Me.UcrCheck6.Location = New System.Drawing.Point(17, 167)
-        Me.UcrCheck6.Name = "UcrCheck6"
-        Me.UcrCheck6.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck6.TabIndex = 22
+        Me.ucrChkRowGroupLeftStyle.AutoSize = True
+        Me.ucrChkRowGroupLeftStyle.Checked = False
+        Me.ucrChkRowGroupLeftStyle.Location = New System.Drawing.Point(17, 167)
+        Me.ucrChkRowGroupLeftStyle.Name = "ucrChkRowGroupLeftStyle"
+        Me.ucrChkRowGroupLeftStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupLeftStyle.TabIndex = 22
         '
-        'UcrCheck7
+        'ucrChkRowGroupBottomColor
         '
-        Me.UcrCheck7.AutoSize = True
-        Me.UcrCheck7.Checked = False
-        Me.UcrCheck7.Location = New System.Drawing.Point(17, 142)
-        Me.UcrCheck7.Name = "UcrCheck7"
-        Me.UcrCheck7.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck7.TabIndex = 21
+        Me.ucrChkRowGroupBottomColor.AutoSize = True
+        Me.ucrChkRowGroupBottomColor.Checked = False
+        Me.ucrChkRowGroupBottomColor.Location = New System.Drawing.Point(17, 142)
+        Me.ucrChkRowGroupBottomColor.Name = "ucrChkRowGroupBottomColor"
+        Me.ucrChkRowGroupBottomColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupBottomColor.TabIndex = 21
         '
-        'UcrInputComboBox3
+        'ucrInputRowGroupBottomStyle
         '
-        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox3.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox3.IsReadOnly = False
-        Me.UcrInputComboBox3.Location = New System.Drawing.Point(153, 92)
-        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
-        Me.UcrInputComboBox3.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox3.TabIndex = 19
+        Me.ucrInputRowGroupBottomStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupBottomStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupBottomStyle.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupBottomStyle.IsReadOnly = False
+        Me.ucrInputRowGroupBottomStyle.Location = New System.Drawing.Point(153, 92)
+        Me.ucrInputRowGroupBottomStyle.Name = "ucrInputRowGroupBottomStyle"
+        Me.ucrInputRowGroupBottomStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupBottomStyle.TabIndex = 19
         '
-        'UcrInputComboBox9
+        'ucrInputRowGroupTopStyle
         '
-        Me.UcrInputComboBox9.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox9.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox9.IsReadOnly = False
-        Me.UcrInputComboBox9.Location = New System.Drawing.Point(153, 17)
-        Me.UcrInputComboBox9.Name = "UcrInputComboBox9"
-        Me.UcrInputComboBox9.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox9.TabIndex = 16
+        Me.ucrInputRowGroupTopStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowGroupTopStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowGroupTopStyle.GetSetSelectedIndex = -1
+        Me.ucrInputRowGroupTopStyle.IsReadOnly = False
+        Me.ucrInputRowGroupTopStyle.Location = New System.Drawing.Point(153, 17)
+        Me.ucrInputRowGroupTopStyle.Name = "ucrInputRowGroupTopStyle"
+        Me.ucrInputRowGroupTopStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowGroupTopStyle.TabIndex = 16
         '
-        'UcrCheck8
+        'ucrChkRowGroupBottomWidth
         '
-        Me.UcrCheck8.AutoSize = True
-        Me.UcrCheck8.Checked = False
-        Me.UcrCheck8.Location = New System.Drawing.Point(17, 117)
-        Me.UcrCheck8.Name = "UcrCheck8"
-        Me.UcrCheck8.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck8.TabIndex = 12
+        Me.ucrChkRowGroupBottomWidth.AutoSize = True
+        Me.ucrChkRowGroupBottomWidth.Checked = False
+        Me.ucrChkRowGroupBottomWidth.Location = New System.Drawing.Point(17, 117)
+        Me.ucrChkRowGroupBottomWidth.Name = "ucrChkRowGroupBottomWidth"
+        Me.ucrChkRowGroupBottomWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupBottomWidth.TabIndex = 12
         '
-        'UcrCheck9
+        'ucrChkRowGroupBottomStyle
         '
-        Me.UcrCheck9.AutoSize = True
-        Me.UcrCheck9.Checked = False
-        Me.UcrCheck9.Location = New System.Drawing.Point(17, 92)
-        Me.UcrCheck9.Name = "UcrCheck9"
-        Me.UcrCheck9.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck9.TabIndex = 10
+        Me.ucrChkRowGroupBottomStyle.AutoSize = True
+        Me.ucrChkRowGroupBottomStyle.Checked = False
+        Me.ucrChkRowGroupBottomStyle.Location = New System.Drawing.Point(17, 92)
+        Me.ucrChkRowGroupBottomStyle.Name = "ucrChkRowGroupBottomStyle"
+        Me.ucrChkRowGroupBottomStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupBottomStyle.TabIndex = 10
         '
-        'UcrCheck19
+        'ucrChkRowGroupTopWidth
         '
-        Me.UcrCheck19.AutoSize = True
-        Me.UcrCheck19.Checked = False
-        Me.UcrCheck19.Location = New System.Drawing.Point(17, 42)
-        Me.UcrCheck19.Name = "UcrCheck19"
-        Me.UcrCheck19.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck19.TabIndex = 9
+        Me.ucrChkRowGroupTopWidth.AutoSize = True
+        Me.ucrChkRowGroupTopWidth.Checked = False
+        Me.ucrChkRowGroupTopWidth.Location = New System.Drawing.Point(17, 42)
+        Me.ucrChkRowGroupTopWidth.Name = "ucrChkRowGroupTopWidth"
+        Me.ucrChkRowGroupTopWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupTopWidth.TabIndex = 9
         '
-        'UcrCheck20
+        'ucrChkRowGroupTopStyle
         '
-        Me.UcrCheck20.AutoSize = True
-        Me.UcrCheck20.Checked = False
-        Me.UcrCheck20.Location = New System.Drawing.Point(17, 17)
-        Me.UcrCheck20.Name = "UcrCheck20"
-        Me.UcrCheck20.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck20.TabIndex = 8
+        Me.ucrChkRowGroupTopStyle.AutoSize = True
+        Me.ucrChkRowGroupTopStyle.Checked = False
+        Me.ucrChkRowGroupTopStyle.Location = New System.Drawing.Point(17, 17)
+        Me.ucrChkRowGroupTopStyle.Name = "ucrChkRowGroupTopStyle"
+        Me.ucrChkRowGroupTopStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupTopStyle.TabIndex = 8
         '
-        'UcrCheck21
+        'ucrChkRowGroupTopColor
         '
-        Me.UcrCheck21.AutoSize = True
-        Me.UcrCheck21.Checked = False
-        Me.UcrCheck21.Location = New System.Drawing.Point(17, 67)
-        Me.UcrCheck21.Name = "UcrCheck21"
-        Me.UcrCheck21.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck21.TabIndex = 11
+        Me.ucrChkRowGroupTopColor.AutoSize = True
+        Me.ucrChkRowGroupTopColor.Checked = False
+        Me.ucrChkRowGroupTopColor.Location = New System.Drawing.Point(17, 67)
+        Me.ucrChkRowGroupTopColor.Name = "ucrChkRowGroupTopColor"
+        Me.ucrChkRowGroupTopColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupTopColor.TabIndex = 11
+        '
+        'ucrRowBackColors
+        '
+        Me.ucrRowBackColors.AddQuotesIfUnrecognised = True
+        Me.ucrRowBackColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrRowBackColors.GetSetSelectedIndex = -1
+        Me.ucrRowBackColors.IsReadOnly = False
+        Me.ucrRowBackColors.Location = New System.Drawing.Point(177, 38)
+        Me.ucrRowBackColors.Name = "ucrRowBackColors"
+        Me.ucrRowBackColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrRowBackColors.TabIndex = 43
         '
         'sdgSummaryThemes
         '
@@ -2043,8 +2043,8 @@ Partial Class sdgSummaryThemes
         Me.tbThemeRows.PerformLayout()
         Me.grpRowLabelsFont.ResumeLayout(False)
         Me.grpRowLabelsFont.PerformLayout()
-        Me.grpRowBorderLabels.ResumeLayout(False)
-        Me.grpRowBorderLabels.PerformLayout()
+        Me.grpRowGroupBorder.ResumeLayout(False)
+        Me.grpRowGroupBorder.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2173,42 +2173,42 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrNudColumnsHorizontalPadding As ucrNud
     Friend WithEvents ucrNudColumnsPadding As ucrNud
     Friend WithEvents ucrBaseSummaryTheme As ucrButtonsSubdialogue
-    Friend WithEvents UcrCheck15 As ucrCheck
-    Friend WithEvents UcrCheck14 As ucrCheck
-    Friend WithEvents UcrCheck13 As ucrCheck
-    Friend WithEvents UcrCheck12 As ucrCheck
+    Friend WithEvents ucrChkRowGroupHorizontalPadding As ucrCheck
+    Friend WithEvents ucrChkRowGroupPadding As ucrCheck
+    Friend WithEvents ucrChkRowTextTransform As ucrCheck
+    Friend WithEvents ucrChkRowBackColor As ucrCheck
     Friend WithEvents grpRowLabelsFont As GroupBox
-    Friend WithEvents UcrNud4 As ucrNud
-    Friend WithEvents UcrInputComboBox4 As ucrInputComboBox
-    Friend WithEvents UcrCheck10 As ucrCheck
-    Friend WithEvents UcrCheck11 As ucrCheck
-    Friend WithEvents UcrInputComboBox8 As ucrInputComboBox
-    Friend WithEvents UcrInputComboBox7 As ucrInputComboBox
-    Friend WithEvents UcrNud7 As ucrNud
-    Friend WithEvents UcrNud6 As ucrNud
-    Friend WithEvents grpRowBorderLabels As GroupBox
-    Friend WithEvents UcrColors1 As ucrColors
-    Friend WithEvents UcrColors2 As ucrColors
-    Friend WithEvents UcrColors3 As ucrColors
-    Friend WithEvents UcrColors4 As ucrColors
-    Friend WithEvents UcrNud1 As ucrNud
-    Friend WithEvents UcrNud2 As ucrNud
-    Friend WithEvents UcrNud3 As ucrNud
-    Friend WithEvents UcrNud8 As ucrNud
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
-    Friend WithEvents UcrInputComboBox2 As ucrInputComboBox
-    Friend WithEvents UcrCheck1 As ucrCheck
-    Friend WithEvents UcrCheck2 As ucrCheck
-    Friend WithEvents UcrCheck3 As ucrCheck
-    Friend WithEvents UcrCheck4 As ucrCheck
-    Friend WithEvents UcrCheck5 As ucrCheck
-    Friend WithEvents UcrCheck6 As ucrCheck
-    Friend WithEvents UcrCheck7 As ucrCheck
-    Friend WithEvents UcrInputComboBox3 As ucrInputComboBox
-    Friend WithEvents UcrInputComboBox9 As ucrInputComboBox
-    Friend WithEvents UcrCheck8 As ucrCheck
-    Friend WithEvents UcrCheck9 As ucrCheck
-    Friend WithEvents UcrCheck19 As ucrCheck
-    Friend WithEvents UcrCheck20 As ucrCheck
-    Friend WithEvents UcrCheck21 As ucrCheck
+    Friend WithEvents ucrNudRowFontSize As ucrNud
+    Friend WithEvents ucrInputRowFontWeight As ucrInputComboBox
+    Friend WithEvents ucrChkRowFontSize As ucrCheck
+    Friend WithEvents ucrChkRowFontWeight As ucrCheck
+    Friend WithEvents ucrInputRowTextTransform As ucrInputComboBox
+    Friend WithEvents ucrNudRowGroupHorizontalPadding As ucrNud
+    Friend WithEvents ucrNudRowGroupPadding As ucrNud
+    Friend WithEvents grpRowGroupBorder As GroupBox
+    Friend WithEvents ucrInputRowGroupRightColor As ucrColors
+    Friend WithEvents ucrInputRowGroupLeftColor As ucrColors
+    Friend WithEvents ucrInputRowGroupBottomColor As ucrColors
+    Friend WithEvents ucrInputRowGroupTopColor As ucrColors
+    Friend WithEvents ucrNudRowGroupRightWidth As ucrNud
+    Friend WithEvents ucrNudRowGroupLeftWidth As ucrNud
+    Friend WithEvents ucrNudRowGroupBottomWidth As ucrNud
+    Friend WithEvents ucrNudRowGroupTopWidth As ucrNud
+    Friend WithEvents ucrInputRowGroupRightStyle As ucrInputComboBox
+    Friend WithEvents ucrInputRowGroupLeftStyle As ucrInputComboBox
+    Friend WithEvents ucrChkRowGroupRightColor As ucrCheck
+    Friend WithEvents ucrChkRowGroupRightWidth As ucrCheck
+    Friend WithEvents ucrChkRowGroupRightStyle As ucrCheck
+    Friend WithEvents ucrChkRowGroupLeftColor As ucrCheck
+    Friend WithEvents ucrChkRowGroupLeftWidth As ucrCheck
+    Friend WithEvents ucrChkRowGroupLeftStyle As ucrCheck
+    Friend WithEvents ucrChkRowGroupBottomColor As ucrCheck
+    Friend WithEvents ucrInputRowGroupBottomStyle As ucrInputComboBox
+    Friend WithEvents ucrInputRowGroupTopStyle As ucrInputComboBox
+    Friend WithEvents ucrChkRowGroupBottomWidth As ucrCheck
+    Friend WithEvents ucrChkRowGroupBottomStyle As ucrCheck
+    Friend WithEvents ucrChkRowGroupTopWidth As ucrCheck
+    Friend WithEvents ucrChkRowGroupTopStyle As ucrCheck
+    Friend WithEvents ucrChkRowGroupTopColor As ucrCheck
+    Friend WithEvents ucrRowBackColors As ucrColors
 End Class
