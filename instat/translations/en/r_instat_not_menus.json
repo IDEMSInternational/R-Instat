@@ -3855,4 +3855,10 @@
   "Extra Variables": "Extra Variables",
   "Suppl.Numeric:": "Suppl.Numeric:",
   "Suppl.Factor:": "Suppl.Factor:",
-  "Save New Graph": "Save New Graph"}
+  "Save New Graph": "Save New Graph",
+  "Selection:": "Selection:",
+  "Remove Current Selection": "Remove Current Selection",
+  "Define New Selection": "Define New Selection",
+  "All Combined With &": "All Combined With &",
+  "Operation": "Operation",
+  "All Combined With |": "All Combined With |"}
