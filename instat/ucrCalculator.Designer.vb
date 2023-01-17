@@ -324,6 +324,7 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
+        Me.cmdPascal = New System.Windows.Forms.Button()
         Me.cmdProbRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripProbability = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ProbStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -3816,6 +3817,7 @@ Partial Class ucrCalculator
         '
         'grpProbabilty
         '
+        Me.grpProbabilty.Controls.Add(Me.cmdPascal)
         Me.grpProbabilty.Controls.Add(Me.cmdProbRHelp)
         Me.grpProbabilty.Controls.Add(Me.grpRandom)
         Me.grpProbabilty.Controls.Add(Me.cmdQnbin)
@@ -3850,10 +3852,22 @@ Partial Class ucrCalculator
         Me.grpProbabilty.Controls.Add(Me.cmdDigamma)
         Me.grpProbabilty.Location = New System.Drawing.Point(434, 62)
         Me.grpProbabilty.Name = "grpProbabilty"
-        Me.grpProbabilty.Size = New System.Drawing.Size(316, 307)
+        Me.grpProbabilty.Size = New System.Drawing.Size(316, 321)
         Me.grpProbabilty.TabIndex = 187
         Me.grpProbabilty.TabStop = False
         Me.grpProbabilty.Text = "Probability"
+        '
+        'cmdPascal
+        '
+        Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPascal.Location = New System.Drawing.Point(2, 189)
+        Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPascal.Name = "cmdPascal"
+        Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPascal.TabIndex = 213
+        Me.cmdPascal.Text = "pascal"
+        Me.cmdPascal.UseVisualStyleBackColor = True
         '
         'cmdProbRHelp
         '
@@ -3897,7 +3911,7 @@ Partial Class ucrCalculator
         Me.grpRandom.Controls.Add(Me.cmduni_integer)
         Me.grpRandom.Controls.Add(Me.cmdRan_normal)
         Me.grpRandom.Controls.Add(Me.cmduniform)
-        Me.grpRandom.Location = New System.Drawing.Point(4, 214)
+        Me.grpRandom.Location = New System.Drawing.Point(6, 228)
         Me.grpRandom.Name = "grpRandom"
         Me.grpRandom.Size = New System.Drawing.Size(306, 84)
         Me.grpRandom.TabIndex = 199
@@ -6432,6 +6446,15 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+
+        Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpDates)
+        Me.Controls.Add(Me.grpHydroGOF)
+        Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpCircular)
+        Me.Controls.Add(Me.grpMaths)
+
         Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.cmdWakefieldHelp)
         Me.Controls.Add(Me.cmdStringRHelp)
@@ -7017,6 +7040,10 @@ Partial Class ucrCalculator
     Friend WithEvents ListBaseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ListStatsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ListStatipToolStripMenuItem As ToolStripMenuItem
+
     Friend WithEvents cmdPrimorial As Button
     Friend WithEvents cmdFactorize2 As Button
+
+    Friend WithEvents cmdPascal As Button
+
 End Class

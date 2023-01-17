@@ -71,7 +71,11 @@ Public Class ucrDataViewReoGrid
         strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
-                grdData.CurrentWorksheet(row:=i, col:=j) = dataFrame.DisplayedData(i, j)
+                Dim strData As String = dataFrame.DisplayedData(i, j)
+                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    strData = GetInnerBracketedString(strData)
+                End If
+                grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
@@ -89,6 +93,12 @@ Public Class ucrDataViewReoGrid
         'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
+
+    Private Function GetInnerBracketedString(strData As String) As String
+        Dim strOutput As String = Strings.Left(strData, InStr(strData, ")") - 1) 'Get the first right bracket
+        strOutput = Mid(strOutput, InStrRev(strOutput, "(") + 1) 'Get the last left braket
+        Return strOutput.TrimEnd
+    End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
