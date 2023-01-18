@@ -141,22 +141,7 @@ Partial Class sdgSummaryThemes
         Me.ucrChkColumnsPadding = New instat.ucrCheck()
         Me.ucrChkColumnsHorizontalPadding = New instat.ucrCheck()
         Me.tbThemeRows = New System.Windows.Forms.TabPage()
-        Me.ucrInputRowTextTransform = New instat.ucrInputComboBox()
-        Me.ucrNudRowGroupHorizontalPadding = New instat.ucrNud()
-        Me.ucrNudRowGroupPadding = New instat.ucrNud()
-        Me.ucrChkRowGroupHorizontalPadding = New instat.ucrCheck()
-        Me.ucrChkRowGroupPadding = New instat.ucrCheck()
-        Me.ucrChkRowTextTransform = New instat.ucrCheck()
-        Me.ucrChkRowBackColor = New instat.ucrCheck()
-        Me.grpRowLabelsFont = New System.Windows.Forms.GroupBox()
-        Me.ucrNudRowFontSize = New instat.ucrNud()
-        Me.ucrInputRowFontWeight = New instat.ucrInputComboBox()
-        Me.ucrChkRowFontSize = New instat.ucrCheck()
-        Me.ucrChkRowFontWeight = New instat.ucrCheck()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.ucrBaseSummaryTheme = New instat.ucrButtonsSubdialogue()
+        Me.ucrRowBackColors = New instat.ucrColors()
         Me.grpRowGroupBorder = New System.Windows.Forms.GroupBox()
         Me.ucrInputRowGroupRightColor = New instat.ucrColors()
         Me.ucrInputRowGroupLeftColor = New instat.ucrColors()
@@ -182,7 +167,53 @@ Partial Class sdgSummaryThemes
         Me.ucrChkRowGroupTopWidth = New instat.ucrCheck()
         Me.ucrChkRowGroupTopStyle = New instat.ucrCheck()
         Me.ucrChkRowGroupTopColor = New instat.ucrCheck()
-        Me.ucrRowBackColors = New instat.ucrColors()
+        Me.ucrInputRowTextTransform = New instat.ucrInputComboBox()
+        Me.ucrNudRowGroupHorizontalPadding = New instat.ucrNud()
+        Me.ucrNudRowGroupPadding = New instat.ucrNud()
+        Me.ucrChkRowGroupHorizontalPadding = New instat.ucrCheck()
+        Me.ucrChkRowGroupPadding = New instat.ucrCheck()
+        Me.ucrChkRowTextTransform = New instat.ucrCheck()
+        Me.ucrChkRowBackColor = New instat.ucrCheck()
+        Me.grpRowLabelsFont = New System.Windows.Forms.GroupBox()
+        Me.ucrNudRowFontSize = New instat.ucrNud()
+        Me.ucrInputRowFontWeight = New instat.ucrInputComboBox()
+        Me.ucrChkRowFontSize = New instat.ucrCheck()
+        Me.ucrChkRowFontWeight = New instat.ucrCheck()
+        Me.tbpStub = New System.Windows.Forms.TabPage()
+        Me.ucrInputStubTextTransform = New instat.ucrInputComboBox()
+        Me.ucrInputStubIndentLength = New instat.ucrInputComboBox()
+        Me.grpStubBorder = New System.Windows.Forms.GroupBox()
+        Me.ucrChkStubBorderColor = New instat.ucrCheck()
+        Me.ucrInputStubBorderStyle = New instat.ucrInputComboBox()
+        Me.ucrNudStubBorderWidth = New instat.ucrNud()
+        Me.ucrInputStubBorderColor = New instat.ucrColors()
+        Me.ucrChkStubBorderStyle = New instat.ucrCheck()
+        Me.ucrChkStubBorderWidth = New instat.ucrCheck()
+        Me.grpStubFont = New System.Windows.Forms.GroupBox()
+        Me.ucrNudStubFontSize = New instat.ucrNud()
+        Me.ucrInputStubFontWeight = New instat.ucrInputComboBox()
+        Me.ucrChkStubFontSize = New instat.ucrCheck()
+        Me.ucrChkStubFontWeight = New instat.ucrCheck()
+        Me.ucrChkStubIndentLength = New instat.ucrCheck()
+        Me.ucrChkStubTextTransform = New instat.ucrCheck()
+        Me.ucrChkStubBackColor = New instat.ucrCheck()
+        Me.ucrInputStubBackColor = New instat.ucrColors()
+        Me.grpStubRowGroup = New System.Windows.Forms.GroupBox()
+        Me.ucrInputStubGroupFontWeight = New instat.ucrInputComboBox()
+        Me.ucrInputStubGroupBorderStyle = New instat.ucrInputComboBox()
+        Me.ucrInputStubGroupBorderColor = New instat.ucrColors()
+        Me.ucrNudStubGroupBorderWidth = New instat.ucrNud()
+        Me.ucrNudStubGroupFontSize = New instat.ucrNud()
+        Me.ucrChkStubGroupBorderColor = New instat.ucrCheck()
+        Me.ucrChkStubGroupBorderWidth = New instat.ucrCheck()
+        Me.ucrChkStubGroupBorderStyle = New instat.ucrCheck()
+        Me.ucrChkStubGroupTextTransform = New instat.ucrCheck()
+        Me.ucrChkStubGroupFontWeight = New instat.ucrCheck()
+        Me.ucrChkStubGroupFontSize = New instat.ucrCheck()
+        Me.ucrInputStubGroupTextTransform = New instat.ucrInputComboBox()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.ucrBaseSummaryTheme = New instat.ucrButtonsSubdialogue()
         Me.tbSummaryThemes.SuspendLayout()
         Me.tbThemeTables.SuspendLayout()
         Me.grpTableBorder.SuspendLayout()
@@ -196,8 +227,12 @@ Partial Class sdgSummaryThemes
         Me.grpColumnVlines.SuspendLayout()
         Me.grpColumnsBorder.SuspendLayout()
         Me.tbThemeRows.SuspendLayout()
-        Me.grpRowLabelsFont.SuspendLayout()
         Me.grpRowGroupBorder.SuspendLayout()
+        Me.grpRowLabelsFont.SuspendLayout()
+        Me.tbpStub.SuspendLayout()
+        Me.grpStubBorder.SuspendLayout()
+        Me.grpStubFont.SuspendLayout()
+        Me.grpStubRowGroup.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbSummaryThemes
@@ -206,7 +241,7 @@ Partial Class sdgSummaryThemes
         Me.tbSummaryThemes.Controls.Add(Me.tbThemeTitles)
         Me.tbSummaryThemes.Controls.Add(Me.tbThemeColumns)
         Me.tbSummaryThemes.Controls.Add(Me.tbThemeRows)
-        Me.tbSummaryThemes.Controls.Add(Me.TabPage5)
+        Me.tbSummaryThemes.Controls.Add(Me.tbpStub)
         Me.tbSummaryThemes.Controls.Add(Me.TabPage6)
         Me.tbSummaryThemes.Controls.Add(Me.TabPage7)
         Me.tbSummaryThemes.Location = New System.Drawing.Point(5, 1)
@@ -1548,168 +1583,16 @@ Partial Class sdgSummaryThemes
         Me.tbThemeRows.Text = "Rows"
         Me.tbThemeRows.UseVisualStyleBackColor = True
         '
-        'ucrInputRowTextTransform
+        'ucrRowBackColors
         '
-        Me.ucrInputRowTextTransform.AddQuotesIfUnrecognised = True
-        Me.ucrInputRowTextTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputRowTextTransform.GetSetSelectedIndex = -1
-        Me.ucrInputRowTextTransform.IsReadOnly = False
-        Me.ucrInputRowTextTransform.Location = New System.Drawing.Point(177, 69)
-        Me.ucrInputRowTextTransform.Name = "ucrInputRowTextTransform"
-        Me.ucrInputRowTextTransform.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRowTextTransform.TabIndex = 33
-        '
-        'ucrNudRowGroupHorizontalPadding
-        '
-        Me.ucrNudRowGroupHorizontalPadding.AutoSize = True
-        Me.ucrNudRowGroupHorizontalPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowGroupHorizontalPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowGroupHorizontalPadding.Location = New System.Drawing.Point(177, 134)
-        Me.ucrNudRowGroupHorizontalPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRowGroupHorizontalPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowGroupHorizontalPadding.Name = "ucrNudRowGroupHorizontalPadding"
-        Me.ucrNudRowGroupHorizontalPadding.Size = New System.Drawing.Size(137, 20)
-        Me.ucrNudRowGroupHorizontalPadding.TabIndex = 32
-        Me.ucrNudRowGroupHorizontalPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudRowGroupPadding
-        '
-        Me.ucrNudRowGroupPadding.AutoSize = True
-        Me.ucrNudRowGroupPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowGroupPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowGroupPadding.Location = New System.Drawing.Point(177, 102)
-        Me.ucrNudRowGroupPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRowGroupPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowGroupPadding.Name = "ucrNudRowGroupPadding"
-        Me.ucrNudRowGroupPadding.Size = New System.Drawing.Size(137, 20)
-        Me.ucrNudRowGroupPadding.TabIndex = 31
-        Me.ucrNudRowGroupPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkRowGroupHorizontalPadding
-        '
-        Me.ucrChkRowGroupHorizontalPadding.AutoSize = True
-        Me.ucrChkRowGroupHorizontalPadding.Checked = False
-        Me.ucrChkRowGroupHorizontalPadding.Location = New System.Drawing.Point(32, 134)
-        Me.ucrChkRowGroupHorizontalPadding.Name = "ucrChkRowGroupHorizontalPadding"
-        Me.ucrChkRowGroupHorizontalPadding.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRowGroupHorizontalPadding.TabIndex = 29
-        '
-        'ucrChkRowGroupPadding
-        '
-        Me.ucrChkRowGroupPadding.AutoSize = True
-        Me.ucrChkRowGroupPadding.Checked = False
-        Me.ucrChkRowGroupPadding.Location = New System.Drawing.Point(32, 102)
-        Me.ucrChkRowGroupPadding.Name = "ucrChkRowGroupPadding"
-        Me.ucrChkRowGroupPadding.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRowGroupPadding.TabIndex = 28
-        '
-        'ucrChkRowTextTransform
-        '
-        Me.ucrChkRowTextTransform.AutoSize = True
-        Me.ucrChkRowTextTransform.Checked = False
-        Me.ucrChkRowTextTransform.Location = New System.Drawing.Point(32, 70)
-        Me.ucrChkRowTextTransform.Name = "ucrChkRowTextTransform"
-        Me.ucrChkRowTextTransform.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRowTextTransform.TabIndex = 27
-        '
-        'ucrChkRowBackColor
-        '
-        Me.ucrChkRowBackColor.AutoSize = True
-        Me.ucrChkRowBackColor.Checked = False
-        Me.ucrChkRowBackColor.Location = New System.Drawing.Point(32, 38)
-        Me.ucrChkRowBackColor.Name = "ucrChkRowBackColor"
-        Me.ucrChkRowBackColor.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRowBackColor.TabIndex = 26
-        '
-        'grpRowLabelsFont
-        '
-        Me.grpRowLabelsFont.Controls.Add(Me.ucrNudRowFontSize)
-        Me.grpRowLabelsFont.Controls.Add(Me.ucrInputRowFontWeight)
-        Me.grpRowLabelsFont.Controls.Add(Me.ucrChkRowFontSize)
-        Me.grpRowLabelsFont.Controls.Add(Me.ucrChkRowFontWeight)
-        Me.grpRowLabelsFont.Location = New System.Drawing.Point(23, 160)
-        Me.grpRowLabelsFont.Name = "grpRowLabelsFont"
-        Me.grpRowLabelsFont.Size = New System.Drawing.Size(317, 83)
-        Me.grpRowLabelsFont.TabIndex = 25
-        Me.grpRowLabelsFont.TabStop = False
-        Me.grpRowLabelsFont.Text = "Row Labels Font"
-        '
-        'ucrNudRowFontSize
-        '
-        Me.ucrNudRowFontSize.AutoSize = True
-        Me.ucrNudRowFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowFontSize.Location = New System.Drawing.Point(154, 17)
-        Me.ucrNudRowFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRowFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowFontSize.Name = "ucrNudRowFontSize"
-        Me.ucrNudRowFontSize.Size = New System.Drawing.Size(137, 20)
-        Me.ucrNudRowFontSize.TabIndex = 21
-        Me.ucrNudRowFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputRowFontWeight
-        '
-        Me.ucrInputRowFontWeight.AddQuotesIfUnrecognised = True
-        Me.ucrInputRowFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputRowFontWeight.GetSetSelectedIndex = -1
-        Me.ucrInputRowFontWeight.IsReadOnly = False
-        Me.ucrInputRowFontWeight.Location = New System.Drawing.Point(154, 46)
-        Me.ucrInputRowFontWeight.Name = "ucrInputRowFontWeight"
-        Me.ucrInputRowFontWeight.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRowFontWeight.TabIndex = 18
-        '
-        'ucrChkRowFontSize
-        '
-        Me.ucrChkRowFontSize.AutoSize = True
-        Me.ucrChkRowFontSize.Checked = False
-        Me.ucrChkRowFontSize.Location = New System.Drawing.Point(9, 19)
-        Me.ucrChkRowFontSize.Name = "ucrChkRowFontSize"
-        Me.ucrChkRowFontSize.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRowFontSize.TabIndex = 9
-        '
-        'ucrChkRowFontWeight
-        '
-        Me.ucrChkRowFontWeight.AutoSize = True
-        Me.ucrChkRowFontWeight.Checked = False
-        Me.ucrChkRowFontWeight.Location = New System.Drawing.Point(9, 46)
-        Me.ucrChkRowFontWeight.Name = "ucrChkRowFontWeight"
-        Me.ucrChkRowFontWeight.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRowFontWeight.TabIndex = 11
-        '
-        'TabPage5
-        '
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Stub"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
-        'TabPage6
-        '
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Footnotes"
-        Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'TabPage7
-        '
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Sourcenotes"
-        Me.TabPage7.UseVisualStyleBackColor = True
-        '
-        'ucrBaseSummaryTheme
-        '
-        Me.ucrBaseSummaryTheme.AutoSize = True
-        Me.ucrBaseSummaryTheme.Location = New System.Drawing.Point(261, 397)
-        Me.ucrBaseSummaryTheme.Name = "ucrBaseSummaryTheme"
-        Me.ucrBaseSummaryTheme.Size = New System.Drawing.Size(224, 29)
-        Me.ucrBaseSummaryTheme.TabIndex = 1
+        Me.ucrRowBackColors.AddQuotesIfUnrecognised = True
+        Me.ucrRowBackColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrRowBackColors.GetSetSelectedIndex = -1
+        Me.ucrRowBackColors.IsReadOnly = False
+        Me.ucrRowBackColors.Location = New System.Drawing.Point(177, 38)
+        Me.ucrRowBackColors.Name = "ucrRowBackColors"
+        Me.ucrRowBackColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrRowBackColors.TabIndex = 43
         '
         'grpRowGroupBorder
         '
@@ -1992,16 +1875,514 @@ Partial Class sdgSummaryThemes
         Me.ucrChkRowGroupTopColor.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkRowGroupTopColor.TabIndex = 11
         '
-        'ucrRowBackColors
+        'ucrInputRowTextTransform
         '
-        Me.ucrRowBackColors.AddQuotesIfUnrecognised = True
-        Me.ucrRowBackColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrRowBackColors.GetSetSelectedIndex = -1
-        Me.ucrRowBackColors.IsReadOnly = False
-        Me.ucrRowBackColors.Location = New System.Drawing.Point(177, 38)
-        Me.ucrRowBackColors.Name = "ucrRowBackColors"
-        Me.ucrRowBackColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRowBackColors.TabIndex = 43
+        Me.ucrInputRowTextTransform.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowTextTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowTextTransform.GetSetSelectedIndex = -1
+        Me.ucrInputRowTextTransform.IsReadOnly = False
+        Me.ucrInputRowTextTransform.Location = New System.Drawing.Point(177, 69)
+        Me.ucrInputRowTextTransform.Name = "ucrInputRowTextTransform"
+        Me.ucrInputRowTextTransform.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowTextTransform.TabIndex = 33
+        '
+        'ucrNudRowGroupHorizontalPadding
+        '
+        Me.ucrNudRowGroupHorizontalPadding.AutoSize = True
+        Me.ucrNudRowGroupHorizontalPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Location = New System.Drawing.Point(177, 134)
+        Me.ucrNudRowGroupHorizontalPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupHorizontalPadding.Name = "ucrNudRowGroupHorizontalPadding"
+        Me.ucrNudRowGroupHorizontalPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupHorizontalPadding.TabIndex = 32
+        Me.ucrNudRowGroupHorizontalPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudRowGroupPadding
+        '
+        Me.ucrNudRowGroupPadding.AutoSize = True
+        Me.ucrNudRowGroupPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Location = New System.Drawing.Point(177, 102)
+        Me.ucrNudRowGroupPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowGroupPadding.Name = "ucrNudRowGroupPadding"
+        Me.ucrNudRowGroupPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowGroupPadding.TabIndex = 31
+        Me.ucrNudRowGroupPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkRowGroupHorizontalPadding
+        '
+        Me.ucrChkRowGroupHorizontalPadding.AutoSize = True
+        Me.ucrChkRowGroupHorizontalPadding.Checked = False
+        Me.ucrChkRowGroupHorizontalPadding.Location = New System.Drawing.Point(32, 134)
+        Me.ucrChkRowGroupHorizontalPadding.Name = "ucrChkRowGroupHorizontalPadding"
+        Me.ucrChkRowGroupHorizontalPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupHorizontalPadding.TabIndex = 29
+        '
+        'ucrChkRowGroupPadding
+        '
+        Me.ucrChkRowGroupPadding.AutoSize = True
+        Me.ucrChkRowGroupPadding.Checked = False
+        Me.ucrChkRowGroupPadding.Location = New System.Drawing.Point(32, 102)
+        Me.ucrChkRowGroupPadding.Name = "ucrChkRowGroupPadding"
+        Me.ucrChkRowGroupPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowGroupPadding.TabIndex = 28
+        '
+        'ucrChkRowTextTransform
+        '
+        Me.ucrChkRowTextTransform.AutoSize = True
+        Me.ucrChkRowTextTransform.Checked = False
+        Me.ucrChkRowTextTransform.Location = New System.Drawing.Point(32, 70)
+        Me.ucrChkRowTextTransform.Name = "ucrChkRowTextTransform"
+        Me.ucrChkRowTextTransform.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowTextTransform.TabIndex = 27
+        '
+        'ucrChkRowBackColor
+        '
+        Me.ucrChkRowBackColor.AutoSize = True
+        Me.ucrChkRowBackColor.Checked = False
+        Me.ucrChkRowBackColor.Location = New System.Drawing.Point(32, 38)
+        Me.ucrChkRowBackColor.Name = "ucrChkRowBackColor"
+        Me.ucrChkRowBackColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowBackColor.TabIndex = 26
+        '
+        'grpRowLabelsFont
+        '
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrNudRowFontSize)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrInputRowFontWeight)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrChkRowFontSize)
+        Me.grpRowLabelsFont.Controls.Add(Me.ucrChkRowFontWeight)
+        Me.grpRowLabelsFont.Location = New System.Drawing.Point(23, 160)
+        Me.grpRowLabelsFont.Name = "grpRowLabelsFont"
+        Me.grpRowLabelsFont.Size = New System.Drawing.Size(317, 83)
+        Me.grpRowLabelsFont.TabIndex = 25
+        Me.grpRowLabelsFont.TabStop = False
+        Me.grpRowLabelsFont.Text = "Row Labels Font"
+        '
+        'ucrNudRowFontSize
+        '
+        Me.ucrNudRowFontSize.AutoSize = True
+        Me.ucrNudRowFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowFontSize.Location = New System.Drawing.Point(154, 17)
+        Me.ucrNudRowFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowFontSize.Name = "ucrNudRowFontSize"
+        Me.ucrNudRowFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudRowFontSize.TabIndex = 21
+        Me.ucrNudRowFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputRowFontWeight
+        '
+        Me.ucrInputRowFontWeight.AddQuotesIfUnrecognised = True
+        Me.ucrInputRowFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputRowFontWeight.GetSetSelectedIndex = -1
+        Me.ucrInputRowFontWeight.IsReadOnly = False
+        Me.ucrInputRowFontWeight.Location = New System.Drawing.Point(154, 46)
+        Me.ucrInputRowFontWeight.Name = "ucrInputRowFontWeight"
+        Me.ucrInputRowFontWeight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRowFontWeight.TabIndex = 18
+        '
+        'ucrChkRowFontSize
+        '
+        Me.ucrChkRowFontSize.AutoSize = True
+        Me.ucrChkRowFontSize.Checked = False
+        Me.ucrChkRowFontSize.Location = New System.Drawing.Point(9, 19)
+        Me.ucrChkRowFontSize.Name = "ucrChkRowFontSize"
+        Me.ucrChkRowFontSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowFontSize.TabIndex = 9
+        '
+        'ucrChkRowFontWeight
+        '
+        Me.ucrChkRowFontWeight.AutoSize = True
+        Me.ucrChkRowFontWeight.Checked = False
+        Me.ucrChkRowFontWeight.Location = New System.Drawing.Point(9, 46)
+        Me.ucrChkRowFontWeight.Name = "ucrChkRowFontWeight"
+        Me.ucrChkRowFontWeight.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRowFontWeight.TabIndex = 11
+        '
+        'tbpStub
+        '
+        Me.tbpStub.Controls.Add(Me.ucrInputStubTextTransform)
+        Me.tbpStub.Controls.Add(Me.ucrInputStubIndentLength)
+        Me.tbpStub.Controls.Add(Me.grpStubBorder)
+        Me.tbpStub.Controls.Add(Me.grpStubFont)
+        Me.tbpStub.Controls.Add(Me.ucrChkStubIndentLength)
+        Me.tbpStub.Controls.Add(Me.ucrChkStubTextTransform)
+        Me.tbpStub.Controls.Add(Me.ucrChkStubBackColor)
+        Me.tbpStub.Controls.Add(Me.ucrInputStubBackColor)
+        Me.tbpStub.Controls.Add(Me.grpStubRowGroup)
+        Me.tbpStub.Location = New System.Drawing.Point(4, 22)
+        Me.tbpStub.Name = "tbpStub"
+        Me.tbpStub.Size = New System.Drawing.Size(728, 353)
+        Me.tbpStub.TabIndex = 4
+        Me.tbpStub.Text = "Stub"
+        Me.tbpStub.UseVisualStyleBackColor = True
+        '
+        'ucrInputStubTextTransform
+        '
+        Me.ucrInputStubTextTransform.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubTextTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubTextTransform.GetSetSelectedIndex = -1
+        Me.ucrInputStubTextTransform.IsReadOnly = False
+        Me.ucrInputStubTextTransform.Location = New System.Drawing.Point(201, 69)
+        Me.ucrInputStubTextTransform.Name = "ucrInputStubTextTransform"
+        Me.ucrInputStubTextTransform.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubTextTransform.TabIndex = 40
+        '
+        'ucrInputStubIndentLength
+        '
+        Me.ucrInputStubIndentLength.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubIndentLength.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubIndentLength.GetSetSelectedIndex = -1
+        Me.ucrInputStubIndentLength.IsReadOnly = False
+        Me.ucrInputStubIndentLength.Location = New System.Drawing.Point(201, 100)
+        Me.ucrInputStubIndentLength.Name = "ucrInputStubIndentLength"
+        Me.ucrInputStubIndentLength.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubIndentLength.TabIndex = 39
+        '
+        'grpStubBorder
+        '
+        Me.grpStubBorder.Controls.Add(Me.ucrChkStubBorderColor)
+        Me.grpStubBorder.Controls.Add(Me.ucrInputStubBorderStyle)
+        Me.grpStubBorder.Controls.Add(Me.ucrNudStubBorderWidth)
+        Me.grpStubBorder.Controls.Add(Me.ucrInputStubBorderColor)
+        Me.grpStubBorder.Controls.Add(Me.ucrChkStubBorderStyle)
+        Me.grpStubBorder.Controls.Add(Me.ucrChkStubBorderWidth)
+        Me.grpStubBorder.Location = New System.Drawing.Point(13, 212)
+        Me.grpStubBorder.Name = "grpStubBorder"
+        Me.grpStubBorder.Size = New System.Drawing.Size(336, 107)
+        Me.grpStubBorder.TabIndex = 38
+        Me.grpStubBorder.TabStop = False
+        Me.grpStubBorder.Text = "Stub Border"
+        '
+        'ucrChkStubBorderColor
+        '
+        Me.ucrChkStubBorderColor.AutoSize = True
+        Me.ucrChkStubBorderColor.Checked = False
+        Me.ucrChkStubBorderColor.Location = New System.Drawing.Point(17, 79)
+        Me.ucrChkStubBorderColor.Name = "ucrChkStubBorderColor"
+        Me.ucrChkStubBorderColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubBorderColor.TabIndex = 35
+        '
+        'ucrInputStubBorderStyle
+        '
+        Me.ucrInputStubBorderStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubBorderStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubBorderStyle.GetSetSelectedIndex = -1
+        Me.ucrInputStubBorderStyle.IsReadOnly = False
+        Me.ucrInputStubBorderStyle.Location = New System.Drawing.Point(188, 17)
+        Me.ucrInputStubBorderStyle.Name = "ucrInputStubBorderStyle"
+        Me.ucrInputStubBorderStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubBorderStyle.TabIndex = 34
+        '
+        'ucrNudStubBorderWidth
+        '
+        Me.ucrNudStubBorderWidth.AutoSize = True
+        Me.ucrNudStubBorderWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubBorderWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStubBorderWidth.Location = New System.Drawing.Point(188, 48)
+        Me.ucrNudStubBorderWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStubBorderWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubBorderWidth.Name = "ucrNudStubBorderWidth"
+        Me.ucrNudStubBorderWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudStubBorderWidth.TabIndex = 33
+        Me.ucrNudStubBorderWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputStubBorderColor
+        '
+        Me.ucrInputStubBorderColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubBorderColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubBorderColor.GetSetSelectedIndex = -1
+        Me.ucrInputStubBorderColor.IsReadOnly = False
+        Me.ucrInputStubBorderColor.Location = New System.Drawing.Point(188, 79)
+        Me.ucrInputStubBorderColor.Name = "ucrInputStubBorderColor"
+        Me.ucrInputStubBorderColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubBorderColor.TabIndex = 32
+        '
+        'ucrChkStubBorderStyle
+        '
+        Me.ucrChkStubBorderStyle.AutoSize = True
+        Me.ucrChkStubBorderStyle.Checked = False
+        Me.ucrChkStubBorderStyle.Location = New System.Drawing.Point(17, 17)
+        Me.ucrChkStubBorderStyle.Name = "ucrChkStubBorderStyle"
+        Me.ucrChkStubBorderStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubBorderStyle.TabIndex = 9
+        '
+        'ucrChkStubBorderWidth
+        '
+        Me.ucrChkStubBorderWidth.AutoSize = True
+        Me.ucrChkStubBorderWidth.Checked = False
+        Me.ucrChkStubBorderWidth.Location = New System.Drawing.Point(17, 48)
+        Me.ucrChkStubBorderWidth.Name = "ucrChkStubBorderWidth"
+        Me.ucrChkStubBorderWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubBorderWidth.TabIndex = 11
+        '
+        'grpStubFont
+        '
+        Me.grpStubFont.Controls.Add(Me.ucrNudStubFontSize)
+        Me.grpStubFont.Controls.Add(Me.ucrInputStubFontWeight)
+        Me.grpStubFont.Controls.Add(Me.ucrChkStubFontSize)
+        Me.grpStubFont.Controls.Add(Me.ucrChkStubFontWeight)
+        Me.grpStubFont.Location = New System.Drawing.Point(13, 129)
+        Me.grpStubFont.Name = "grpStubFont"
+        Me.grpStubFont.Size = New System.Drawing.Size(336, 77)
+        Me.grpStubFont.TabIndex = 37
+        Me.grpStubFont.TabStop = False
+        Me.grpStubFont.Text = "Stub Font"
+        '
+        'ucrNudStubFontSize
+        '
+        Me.ucrNudStubFontSize.AutoSize = True
+        Me.ucrNudStubFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStubFontSize.Location = New System.Drawing.Point(188, 17)
+        Me.ucrNudStubFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStubFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubFontSize.Name = "ucrNudStubFontSize"
+        Me.ucrNudStubFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudStubFontSize.TabIndex = 21
+        Me.ucrNudStubFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputStubFontWeight
+        '
+        Me.ucrInputStubFontWeight.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubFontWeight.GetSetSelectedIndex = -1
+        Me.ucrInputStubFontWeight.IsReadOnly = False
+        Me.ucrInputStubFontWeight.Location = New System.Drawing.Point(188, 48)
+        Me.ucrInputStubFontWeight.Name = "ucrInputStubFontWeight"
+        Me.ucrInputStubFontWeight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubFontWeight.TabIndex = 18
+        '
+        'ucrChkStubFontSize
+        '
+        Me.ucrChkStubFontSize.AutoSize = True
+        Me.ucrChkStubFontSize.Checked = False
+        Me.ucrChkStubFontSize.Location = New System.Drawing.Point(17, 17)
+        Me.ucrChkStubFontSize.Name = "ucrChkStubFontSize"
+        Me.ucrChkStubFontSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubFontSize.TabIndex = 9
+        '
+        'ucrChkStubFontWeight
+        '
+        Me.ucrChkStubFontWeight.AutoSize = True
+        Me.ucrChkStubFontWeight.Checked = False
+        Me.ucrChkStubFontWeight.Location = New System.Drawing.Point(17, 48)
+        Me.ucrChkStubFontWeight.Name = "ucrChkStubFontWeight"
+        Me.ucrChkStubFontWeight.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubFontWeight.TabIndex = 11
+        '
+        'ucrChkStubIndentLength
+        '
+        Me.ucrChkStubIndentLength.AutoSize = True
+        Me.ucrChkStubIndentLength.Checked = False
+        Me.ucrChkStubIndentLength.Location = New System.Drawing.Point(30, 100)
+        Me.ucrChkStubIndentLength.Name = "ucrChkStubIndentLength"
+        Me.ucrChkStubIndentLength.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubIndentLength.TabIndex = 36
+        '
+        'ucrChkStubTextTransform
+        '
+        Me.ucrChkStubTextTransform.AutoSize = True
+        Me.ucrChkStubTextTransform.Checked = False
+        Me.ucrChkStubTextTransform.Location = New System.Drawing.Point(30, 69)
+        Me.ucrChkStubTextTransform.Name = "ucrChkStubTextTransform"
+        Me.ucrChkStubTextTransform.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubTextTransform.TabIndex = 35
+        '
+        'ucrChkStubBackColor
+        '
+        Me.ucrChkStubBackColor.AutoSize = True
+        Me.ucrChkStubBackColor.Checked = False
+        Me.ucrChkStubBackColor.Location = New System.Drawing.Point(30, 38)
+        Me.ucrChkStubBackColor.Name = "ucrChkStubBackColor"
+        Me.ucrChkStubBackColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubBackColor.TabIndex = 32
+        '
+        'ucrInputStubBackColor
+        '
+        Me.ucrInputStubBackColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubBackColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubBackColor.GetSetSelectedIndex = -1
+        Me.ucrInputStubBackColor.IsReadOnly = False
+        Me.ucrInputStubBackColor.Location = New System.Drawing.Point(201, 38)
+        Me.ucrInputStubBackColor.Name = "ucrInputStubBackColor"
+        Me.ucrInputStubBackColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubBackColor.TabIndex = 31
+        '
+        'grpStubRowGroup
+        '
+        Me.grpStubRowGroup.Controls.Add(Me.ucrInputStubGroupFontWeight)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrInputStubGroupBorderStyle)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrInputStubGroupBorderColor)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrNudStubGroupBorderWidth)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrNudStubGroupFontSize)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrChkStubGroupBorderColor)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrChkStubGroupBorderWidth)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrChkStubGroupBorderStyle)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrChkStubGroupTextTransform)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrChkStubGroupFontWeight)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrChkStubGroupFontSize)
+        Me.grpStubRowGroup.Controls.Add(Me.ucrInputStubGroupTextTransform)
+        Me.grpStubRowGroup.Location = New System.Drawing.Point(373, 18)
+        Me.grpStubRowGroup.Name = "grpStubRowGroup"
+        Me.grpStubRowGroup.Size = New System.Drawing.Size(342, 209)
+        Me.grpStubRowGroup.TabIndex = 7
+        Me.grpStubRowGroup.TabStop = False
+        Me.grpStubRowGroup.Text = "Stub Row Group"
+        '
+        'ucrInputStubGroupFontWeight
+        '
+        Me.ucrInputStubGroupFontWeight.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubGroupFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubGroupFontWeight.GetSetSelectedIndex = -1
+        Me.ucrInputStubGroupFontWeight.IsReadOnly = False
+        Me.ucrInputStubGroupFontWeight.Location = New System.Drawing.Point(170, 51)
+        Me.ucrInputStubGroupFontWeight.Name = "ucrInputStubGroupFontWeight"
+        Me.ucrInputStubGroupFontWeight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubGroupFontWeight.TabIndex = 33
+        '
+        'ucrInputStubGroupBorderStyle
+        '
+        Me.ucrInputStubGroupBorderStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubGroupBorderStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubGroupBorderStyle.GetSetSelectedIndex = -1
+        Me.ucrInputStubGroupBorderStyle.IsReadOnly = False
+        Me.ucrInputStubGroupBorderStyle.Location = New System.Drawing.Point(170, 113)
+        Me.ucrInputStubGroupBorderStyle.Name = "ucrInputStubGroupBorderStyle"
+        Me.ucrInputStubGroupBorderStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubGroupBorderStyle.TabIndex = 32
+        '
+        'ucrInputStubGroupBorderColor
+        '
+        Me.ucrInputStubGroupBorderColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubGroupBorderColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubGroupBorderColor.GetSetSelectedIndex = -1
+        Me.ucrInputStubGroupBorderColor.IsReadOnly = False
+        Me.ucrInputStubGroupBorderColor.Location = New System.Drawing.Point(170, 175)
+        Me.ucrInputStubGroupBorderColor.Name = "ucrInputStubGroupBorderColor"
+        Me.ucrInputStubGroupBorderColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubGroupBorderColor.TabIndex = 31
+        '
+        'ucrNudStubGroupBorderWidth
+        '
+        Me.ucrNudStubGroupBorderWidth.AutoSize = True
+        Me.ucrNudStubGroupBorderWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubGroupBorderWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStubGroupBorderWidth.Location = New System.Drawing.Point(170, 144)
+        Me.ucrNudStubGroupBorderWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStubGroupBorderWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubGroupBorderWidth.Name = "ucrNudStubGroupBorderWidth"
+        Me.ucrNudStubGroupBorderWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudStubGroupBorderWidth.TabIndex = 29
+        Me.ucrNudStubGroupBorderWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudStubGroupFontSize
+        '
+        Me.ucrNudStubGroupFontSize.AutoSize = True
+        Me.ucrNudStubGroupFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubGroupFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStubGroupFontSize.Location = New System.Drawing.Point(170, 20)
+        Me.ucrNudStubGroupFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStubGroupFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubGroupFontSize.Name = "ucrNudStubGroupFontSize"
+        Me.ucrNudStubGroupFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudStubGroupFontSize.TabIndex = 26
+        Me.ucrNudStubGroupFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkStubGroupBorderColor
+        '
+        Me.ucrChkStubGroupBorderColor.AutoSize = True
+        Me.ucrChkStubGroupBorderColor.Checked = False
+        Me.ucrChkStubGroupBorderColor.Location = New System.Drawing.Point(15, 175)
+        Me.ucrChkStubGroupBorderColor.Name = "ucrChkStubGroupBorderColor"
+        Me.ucrChkStubGroupBorderColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubGroupBorderColor.TabIndex = 25
+        '
+        'ucrChkStubGroupBorderWidth
+        '
+        Me.ucrChkStubGroupBorderWidth.AutoSize = True
+        Me.ucrChkStubGroupBorderWidth.Checked = False
+        Me.ucrChkStubGroupBorderWidth.Location = New System.Drawing.Point(15, 144)
+        Me.ucrChkStubGroupBorderWidth.Name = "ucrChkStubGroupBorderWidth"
+        Me.ucrChkStubGroupBorderWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubGroupBorderWidth.TabIndex = 23
+        '
+        'ucrChkStubGroupBorderStyle
+        '
+        Me.ucrChkStubGroupBorderStyle.AutoSize = True
+        Me.ucrChkStubGroupBorderStyle.Checked = False
+        Me.ucrChkStubGroupBorderStyle.Location = New System.Drawing.Point(15, 113)
+        Me.ucrChkStubGroupBorderStyle.Name = "ucrChkStubGroupBorderStyle"
+        Me.ucrChkStubGroupBorderStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubGroupBorderStyle.TabIndex = 22
+        '
+        'ucrChkStubGroupTextTransform
+        '
+        Me.ucrChkStubGroupTextTransform.AutoSize = True
+        Me.ucrChkStubGroupTextTransform.Checked = False
+        Me.ucrChkStubGroupTextTransform.Location = New System.Drawing.Point(15, 82)
+        Me.ucrChkStubGroupTextTransform.Name = "ucrChkStubGroupTextTransform"
+        Me.ucrChkStubGroupTextTransform.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubGroupTextTransform.TabIndex = 21
+        '
+        'ucrChkStubGroupFontWeight
+        '
+        Me.ucrChkStubGroupFontWeight.AutoSize = True
+        Me.ucrChkStubGroupFontWeight.Checked = False
+        Me.ucrChkStubGroupFontWeight.Location = New System.Drawing.Point(15, 51)
+        Me.ucrChkStubGroupFontWeight.Name = "ucrChkStubGroupFontWeight"
+        Me.ucrChkStubGroupFontWeight.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubGroupFontWeight.TabIndex = 19
+        '
+        'ucrChkStubGroupFontSize
+        '
+        Me.ucrChkStubGroupFontSize.AutoSize = True
+        Me.ucrChkStubGroupFontSize.Checked = False
+        Me.ucrChkStubGroupFontSize.Location = New System.Drawing.Point(15, 20)
+        Me.ucrChkStubGroupFontSize.Name = "ucrChkStubGroupFontSize"
+        Me.ucrChkStubGroupFontSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkStubGroupFontSize.TabIndex = 18
+        '
+        'ucrInputStubGroupTextTransform
+        '
+        Me.ucrInputStubGroupTextTransform.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubGroupTextTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStubGroupTextTransform.GetSetSelectedIndex = -1
+        Me.ucrInputStubGroupTextTransform.IsReadOnly = False
+        Me.ucrInputStubGroupTextTransform.Location = New System.Drawing.Point(170, 82)
+        Me.ucrInputStubGroupTextTransform.Name = "ucrInputStubGroupTextTransform"
+        Me.ucrInputStubGroupTextTransform.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStubGroupTextTransform.TabIndex = 7
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Size = New System.Drawing.Size(728, 353)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "Footnotes"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TabPage7
+        '
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Size = New System.Drawing.Size(728, 353)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Sourcenotes"
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'ucrBaseSummaryTheme
+        '
+        Me.ucrBaseSummaryTheme.AutoSize = True
+        Me.ucrBaseSummaryTheme.Location = New System.Drawing.Point(261, 397)
+        Me.ucrBaseSummaryTheme.Name = "ucrBaseSummaryTheme"
+        Me.ucrBaseSummaryTheme.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSummaryTheme.TabIndex = 1
         '
         'sdgSummaryThemes
         '
@@ -2041,10 +2422,18 @@ Partial Class sdgSummaryThemes
         Me.grpColumnsBorder.PerformLayout()
         Me.tbThemeRows.ResumeLayout(False)
         Me.tbThemeRows.PerformLayout()
-        Me.grpRowLabelsFont.ResumeLayout(False)
-        Me.grpRowLabelsFont.PerformLayout()
         Me.grpRowGroupBorder.ResumeLayout(False)
         Me.grpRowGroupBorder.PerformLayout()
+        Me.grpRowLabelsFont.ResumeLayout(False)
+        Me.grpRowLabelsFont.PerformLayout()
+        Me.tbpStub.ResumeLayout(False)
+        Me.tbpStub.PerformLayout()
+        Me.grpStubBorder.ResumeLayout(False)
+        Me.grpStubBorder.PerformLayout()
+        Me.grpStubFont.ResumeLayout(False)
+        Me.grpStubFont.PerformLayout()
+        Me.grpStubRowGroup.ResumeLayout(False)
+        Me.grpStubRowGroup.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2055,7 +2444,7 @@ Partial Class sdgSummaryThemes
     Friend WithEvents tbThemeTitles As TabPage
     Friend WithEvents tbThemeColumns As TabPage
     Friend WithEvents tbThemeRows As TabPage
-    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents tbpStub As TabPage
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents grpSubTitle As GroupBox
@@ -2211,4 +2600,35 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrChkRowGroupTopStyle As ucrCheck
     Friend WithEvents ucrChkRowGroupTopColor As ucrCheck
     Friend WithEvents ucrRowBackColors As ucrColors
+    Friend WithEvents ucrChkStubBackColor As ucrCheck
+    Friend WithEvents ucrInputStubBackColor As ucrColors
+    Friend WithEvents grpStubRowGroup As GroupBox
+    Friend WithEvents ucrInputStubGroupBorderStyle As ucrInputComboBox
+    Friend WithEvents ucrInputStubGroupBorderColor As ucrColors
+    Friend WithEvents ucrNudStubGroupBorderWidth As ucrNud
+    Friend WithEvents ucrNudStubGroupFontSize As ucrNud
+    Friend WithEvents ucrChkStubGroupBorderColor As ucrCheck
+    Friend WithEvents ucrChkStubGroupBorderWidth As ucrCheck
+    Friend WithEvents ucrChkStubGroupBorderStyle As ucrCheck
+    Friend WithEvents ucrChkStubGroupTextTransform As ucrCheck
+    Friend WithEvents ucrChkStubGroupFontWeight As ucrCheck
+    Friend WithEvents ucrChkStubGroupFontSize As ucrCheck
+    Friend WithEvents ucrInputStubGroupTextTransform As ucrInputComboBox
+    Friend WithEvents grpStubBorder As GroupBox
+    Friend WithEvents ucrChkStubBorderColor As ucrCheck
+    Friend WithEvents ucrInputStubBorderStyle As ucrInputComboBox
+    Friend WithEvents ucrNudStubBorderWidth As ucrNud
+    Friend WithEvents ucrInputStubBorderColor As ucrColors
+    Friend WithEvents ucrChkStubBorderStyle As ucrCheck
+    Friend WithEvents ucrChkStubBorderWidth As ucrCheck
+    Friend WithEvents grpStubFont As GroupBox
+    Friend WithEvents ucrNudStubFontSize As ucrNud
+    Friend WithEvents ucrInputStubFontWeight As ucrInputComboBox
+    Friend WithEvents ucrChkStubFontSize As ucrCheck
+    Friend WithEvents ucrChkStubFontWeight As ucrCheck
+    Friend WithEvents ucrChkStubIndentLength As ucrCheck
+    Friend WithEvents ucrChkStubTextTransform As ucrCheck
+    Friend WithEvents ucrInputStubGroupFontWeight As ucrInputComboBox
+    Friend WithEvents ucrInputStubTextTransform As ucrInputComboBox
+    Friend WithEvents ucrInputStubIndentLength As ucrInputComboBox
 End Class

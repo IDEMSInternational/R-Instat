@@ -71,7 +71,7 @@ Public Class sdgSummaryThemes
         dctFontNames.Add("Droid Sans", Chr(34) & "Droid Sans" & Chr(34))
         dctFontNames.Add("Arial", Chr(34) & "Arial" & Chr(34))
         dctFontNames.Add("Sans-serif", Chr(34) & "Sans-serif" & Chr(34))
-
+        'Titles
         ucrChkBackgroundColour.SetText("Background Colour")
         ucrInputBackgroundColour.SetParameter(New RParameter("heading.background.color"))
         ucrChkBackgroundColour.AddParameterPresentCondition(True, "heading.background.color")
@@ -167,7 +167,7 @@ Public Class sdgSummaryThemes
         ucrChkSideWidth.AddToLinkedControls(ucrNudSideWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkSideStyle.AddToLinkedControls(ucrInputSideStyle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkSideColour.AddToLinkedControls(ucrInputSideColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
-
+        'Tables
         ucrChkTableWidth.SetText("Width")
         ucrInputTableFontWeight.SetParameter(New RParameter("table.width"))
         ucrChkTableWidth.AddParameterPresentCondition(True, "table.width")
@@ -308,7 +308,7 @@ Public Class sdgSummaryThemes
         ucrChkTableLeftColor.AddToLinkedControls(ucrInputTableLeftColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkTableLeftStyle.AddToLinkedControls(ucrInputTableLeftStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkTableLeftWidth.AddToLinkedControls(ucrNudTableLeftWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-
+        'Columns
         ucrChkColumnsBackColor.SetText("Background Color")
         ucrInputColumnsBackColor.SetParameter(New RParameter("column_labels.background.color"))
         ucrChkColumnsBackColor.AddParameterPresentCondition(True, "column_labels.background.color")
@@ -430,7 +430,7 @@ Public Class sdgSummaryThemes
         ucrChkColumnsTopWidth.AddToLinkedControls(ucrNudColumnsTopWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkColumnsTopStyle.AddToLinkedControls(ucrInputColumnsTopStyle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkColomnsTopColor.AddToLinkedControls(ucrInputColumnsTopColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
-
+        'Rows
         ucrChkRowBackColor.SetText("Background color")
         ucrRowBackColors.SetParameter(New RParameter("row_group.background.color"))
         ucrChkRowBackColor.AddParameterPresentCondition(True, "row_group.background.color")
@@ -454,11 +454,11 @@ Public Class sdgSummaryThemes
         ucrChkRowGroupHorizontalPadding.AddParameterPresentCondition(True, "row_group.padding.horizontal")
         ucrChkRowGroupHorizontalPadding.AddParameterPresentCondition(False, "row_group.padding.horizontal", False)
 
-        ucrChkTableFontSize.SetText("Font size")
-        ucrNudTableFontSize.SetParameter(New RParameter("table.font.size"))
-        ucrNudTableFontSize.SetRDefault(0)
-        ucrChkTableFontSize.AddParameterPresentCondition(True, "table.font.size")
-        ucrChkTableFontSize.AddParameterPresentCondition(False, "table.font.size", False)
+        ucrChkRowFontSize.SetText("Font size")
+        ucrNudRowFontSize.SetParameter(New RParameter("row_group.font.size"))
+        ucrNudRowFontSize.SetRDefault(0)
+        ucrChkRowFontSize.AddParameterPresentCondition(True, "row_group.font.size")
+        ucrChkRowFontSize.AddParameterPresentCondition(False, "row_group.font.size", False)
 
         ucrChkRowFontWeight.SetText("Font weight")
         ucrInputRowFontWeight.SetParameter(New RParameter("row_group.font.weight"))
@@ -552,6 +552,102 @@ Public Class sdgSummaryThemes
         ucrChkRowGroupLeftColor.AddToLinkedControls(ucrInputRowGroupLeftColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkRowGroupLeftStyle.AddToLinkedControls(ucrInputRowGroupLeftStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkRowGroupLeftWidth.AddToLinkedControls(ucrNudRowGroupLeftWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        'Stub
+        ucrChkStubBackColor.SetText("Background Color")
+        ucrInputStubBackColor.SetParameter(New RParameter("stub.background.color"))
+        ucrChkStubBackColor.AddParameterPresentCondition(True, "stub.background.color")
+        ucrChkStubBackColor.AddParameterPresentCondition(False, "stub.background.color", False)
+
+        ucrChkStubIndentLength.SetText("Indent Length")
+        ucrInputStubIndentLength.SetParameter(New RParameter("stub.indent_length"))
+        ' ucrInputStubIndentLength.SetItems(dctTextTransform)
+        ucrChkStubIndentLength.AddParameterPresentCondition(True, "stub.indent_length")
+        ucrChkStubIndentLength.AddParameterPresentCondition(False, "stub.indent_length", False)
+
+        ucrChkStubTextTransform.SetText("Text Transform")
+        ucrInputStubTextTransform.SetParameter(New RParameter("stub.text_transform"))
+        ucrInputStubTextTransform.SetItems(dctTextTransform)
+        ucrChkStubTextTransform.AddParameterPresentCondition(True, "stub.text_transform")
+        ucrChkStubTextTransform.AddParameterPresentCondition(False, "stub.text_transform", False)
+
+        ucrChkStubFontSize.SetText("Font Size")
+        ucrNudStubFontSize.SetParameter(New RParameter("stub.font.size"))
+        ucrNudStubFontSize.SetRDefault(0)
+        ucrChkStubFontSize.AddParameterPresentCondition(True, "stub.font.size")
+        ucrChkStubFontSize.AddParameterPresentCondition(False, "stub.font.size", False)
+
+        ucrChkStubFontWeight.SetText("Font Weight")
+        ucrInputStubFontWeight.SetParameter(New RParameter("stub.font.weight"))
+        ucrInputStubFontWeight.SetItems(dctWeights)
+        ucrChkStubFontWeight.AddParameterPresentCondition(True, "stub.font.weight")
+        ucrChkStubFontWeight.AddParameterPresentCondition(False, "stub.font.weight", False)
+
+        ucrChkStubBorderStyle.SetText("Style")
+        ucrInputStubBorderStyle.SetParameter(New RParameter("stub.border.style"))
+        ucrInputStubBorderStyle.SetItems(dctBorderStyles)
+        ucrChkStubBorderStyle.AddParameterPresentCondition(True, "stub.border.style")
+        ucrChkStubBorderStyle.AddParameterPresentCondition(False, "stub.border.style", False)
+
+        ucrChkStubBorderWidth.SetText("Width")
+        ucrNudStubBorderWidth.SetParameter(New RParameter("stub.border.width"))
+        ucrNudStubBorderWidth.SetRDefault(0)
+        ucrChkStubBorderWidth.AddParameterPresentCondition(True, "stub.border.width")
+        ucrChkStubBorderWidth.AddParameterPresentCondition(False, "stub.border.width", False)
+
+        ucrChkStubBorderColor.SetText("Color")
+        ucrInputStubBorderColor.SetParameter(New RParameter("stub.border.color"))
+        ucrChkStubBorderColor.AddParameterPresentCondition(True, "stub.border.color")
+        ucrChkStubBorderColor.AddParameterPresentCondition(False, "stub.border.color", False)
+
+        ucrChkStubGroupFontSize.SetText("Font Size")
+        ucrNudStubGroupFontSize.SetParameter(New RParameter("stub_row_group.font.size"))
+        ucrNudStubGroupFontSize.SetRDefault(0)
+        ucrChkStubGroupFontSize.AddParameterPresentCondition(True, "stub_row_group.font.size")
+        ucrChkStubGroupFontSize.AddParameterPresentCondition(False, "stub_row_group.font.size", False)
+
+        ucrChkStubGroupFontWeight.SetText("Font Weight")
+        ucrInputStubGroupFontWeight.SetParameter(New RParameter("stub_row_group.font.weight"))
+        ucrInputStubGroupFontWeight.SetItems(dctWeights)
+        ucrChkStubGroupFontWeight.AddParameterPresentCondition(True, "stub_row_group.font.weight")
+        ucrChkStubGroupFontWeight.AddParameterPresentCondition(False, "stub_row_group.font.weight", False)
+
+        ucrChkStubGroupTextTransform.SetText("Text Transform")
+        ucrInputStubGroupTextTransform.SetParameter(New RParameter("stub_row_group.text_transform"))
+        ucrInputStubGroupTextTransform.SetItems(dctTextTransform)
+        ucrChkStubGroupTextTransform.AddParameterPresentCondition(True, "stub_row_group.text_transform")
+        ucrChkStubGroupTextTransform.AddParameterPresentCondition(False, "stub_row_group.text_transform", False)
+
+        ucrChkStubGroupBorderStyle.SetText("Style")
+        ucrInputStubGroupBorderStyle.SetParameter(New RParameter("stub_row_group.border.style"))
+        ucrInputStubGroupBorderStyle.SetItems(dctBorderStyles)
+        ucrChkStubGroupBorderStyle.AddParameterPresentCondition(True, "stub_row_group.border.style")
+        ucrChkStubGroupBorderStyle.AddParameterPresentCondition(False, "stub_row_group.border.style", False)
+
+        ucrChkStubGroupBorderWidth.SetText("Width")
+        ucrNudStubGroupBorderWidth.SetParameter(New RParameter("stub_row_group.border.width"))
+        ucrNudStubGroupBorderWidth.SetRDefault(0)
+        ucrChkStubGroupBorderWidth.AddParameterPresentCondition(True, "stub_row_group.border.width")
+        ucrChkStubGroupBorderWidth.AddParameterPresentCondition(False, "stub_row_group.border.width", False)
+
+        ucrChkStubGroupBorderColor.SetText("Color")
+        ucrInputStubGroupBorderColor.SetParameter(New RParameter("stub_row_group.border.color"))
+        ucrChkStubGroupBorderColor.AddParameterPresentCondition(True, "stub_row_group.border.color")
+        ucrChkStubGroupBorderColor.AddParameterPresentCondition(False, "stub_row_group.border.color", False)
+
+        ucrChkStubBackColor.AddToLinkedControls(ucrInputStubBackColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubTextTransform.AddToLinkedControls(ucrInputStubTextTransform, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubIndentLength.AddToLinkedControls(ucrInputStubIndentLength, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubFontSize.AddToLinkedControls(ucrNudStubFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkStubFontWeight.AddToLinkedControls(ucrInputStubFontWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubBorderColor.AddToLinkedControls(ucrInputStubBorderColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubBorderStyle.AddToLinkedControls(ucrInputStubBorderStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubBorderWidth.AddToLinkedControls(ucrNudStubBorderWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkStubGroupTextTransform.AddToLinkedControls(ucrInputStubGroupTextTransform, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubGroupFontSize.AddToLinkedControls(ucrNudStubGroupFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkStubGroupFontWeight.AddToLinkedControls(ucrInputStubGroupFontWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubGroupBorderColor.AddToLinkedControls(ucrInputStubGroupBorderColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubGroupBorderStyle.AddToLinkedControls(ucrInputStubGroupBorderStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubGroupBorderWidth.AddToLinkedControls(ucrNudStubGroupBorderWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
     End Sub
 
@@ -712,7 +808,37 @@ Public Class sdgSummaryThemes
         ucrInputRowGroupLeftStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkRowGroupLeftWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudRowGroupLeftWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+
+        'Stub
+
+        ucrChkStubBackColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubBackColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubIndentLength.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubIndentLength.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubTextTransform.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubTextTransform.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubFontWeight.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubFontWeight.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubFontSize.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStubFontSize.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubBorderColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubBorderColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubBorderStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubBorderStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubBorderWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStubBorderWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubGroupTextTransform.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubGroupTextTransform.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubGroupFontWeight.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubGroupFontWeight.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubGroupFontSize.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStubGroupFontSize.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubGroupBorderColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubGroupBorderColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubGroupBorderStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubGroupBorderStyle.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkStubGroupBorderWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStubGroupBorderWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
     End Sub
-
 End Class
