@@ -88,6 +88,8 @@ Partial Class ucrCalculator
         Me.ContextMenuStripComplex = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ComplexBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpInteger = New System.Windows.Forms.GroupBox()
+        Me.cmdPrimorial = New System.Windows.Forms.Button()
+        Me.cmdFactorize2 = New System.Windows.Forms.Button()
         Me.cmdLucas = New System.Windows.Forms.Button()
         Me.cmdFactorize = New System.Windows.Forms.Button()
         Me.cmdSquare = New System.Windows.Forms.Button()
@@ -546,8 +548,6 @@ Partial Class ucrCalculator
         Me.ListBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdFactorize2 = New System.Windows.Forms.Button()
-        Me.cmdPrimorial = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.ContextMenuStripDate.SuspendLayout()
@@ -1180,6 +1180,26 @@ Partial Class ucrCalculator
         Me.grpInteger.TabIndex = 183
         Me.grpInteger.TabStop = False
         Me.grpInteger.Text = "Integer"
+        '
+        'cmdPrimorial
+        '
+        Me.cmdPrimorial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPrimorial.Location = New System.Drawing.Point(223, 181)
+        Me.cmdPrimorial.Name = "cmdPrimorial"
+        Me.cmdPrimorial.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPrimorial.TabIndex = 47
+        Me.cmdPrimorial.Text = "primorial"
+        Me.cmdPrimorial.UseVisualStyleBackColor = True
+        '
+        'cmdFactorize2
+        '
+        Me.cmdFactorize2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFactorize2.Location = New System.Drawing.Point(149, 39)
+        Me.cmdFactorize2.Name = "cmdFactorize2"
+        Me.cmdFactorize2.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFactorize2.TabIndex = 46
+        Me.cmdFactorize2.Text = "factorize2"
+        Me.cmdFactorize2.UseVisualStyleBackColor = True
         '
         'cmdLucas
         '
@@ -6406,26 +6426,6 @@ Partial Class ucrCalculator
         Me.ListStatipToolStripMenuItem.Name = "ListStatipToolStripMenuItem"
         Me.ListStatipToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ListStatipToolStripMenuItem.Text = "statip"
-        '
-        'cmdFactorize2
-        '
-        Me.cmdFactorize2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFactorize2.Location = New System.Drawing.Point(149, 39)
-        Me.cmdFactorize2.Name = "cmdFactorize2"
-        Me.cmdFactorize2.Size = New System.Drawing.Size(75, 23)
-        Me.cmdFactorize2.TabIndex = 46
-        Me.cmdFactorize2.Text = "Factorize2"
-        Me.cmdFactorize2.UseVisualStyleBackColor = True
-        '
-        'cmdPrimorial
-        '
-        Me.cmdPrimorial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPrimorial.Location = New System.Drawing.Point(223, 181)
-        Me.cmdPrimorial.Name = "cmdPrimorial"
-        Me.cmdPrimorial.Size = New System.Drawing.Size(75, 23)
-        Me.cmdPrimorial.TabIndex = 47
-        Me.cmdPrimorial.Text = "primorial"
-        Me.cmdPrimorial.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
