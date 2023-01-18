@@ -3709,5 +3709,11 @@
   "Levels": "Levels",
   "Category:": "Category:",
   "Show Command": "Show Command",
-  "Lists:": "Lists:"
+  "Lists:": "Lists:",
+  "Absolute": "Absolute",
+  "Omit Character Variables": "Omit Character Variables",
+  "True": "True",
+  "False": "False",
+  "Frequencies": "Frequencies",
+  "Slopes": "Slopes"
 }
