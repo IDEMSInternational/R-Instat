@@ -134,7 +134,6 @@ Public Class ucrReceiver
 
     End Sub
 
-
     Public Property strNcFilePath As String
         Get
             Return strPrvNcFilePath
