@@ -549,6 +549,7 @@ Partial Class ucrCalculator
         Me.ListBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfdesignToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.ContextMenuStripDate.SuspendLayout()
@@ -1503,44 +1504,44 @@ Partial Class ucrCalculator
         '
         'ContextMenuStripInteger
         '
-        Me.ContextMenuStripInteger.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GmpToolStripMenuItem, Me.DescToolsToolStripMenuItem, Me.RutilsToolStripMenuItem, Me.PrimesToolStripMenuItem, Me.ZseqToolStripMenuItem, Me.UtilsToolStripMenuItem})
+        Me.ContextMenuStripInteger.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GmpToolStripMenuItem, Me.DescToolsToolStripMenuItem, Me.RutilsToolStripMenuItem, Me.PrimesToolStripMenuItem, Me.ZseqToolStripMenuItem, Me.UtilsToolStripMenuItem, Me.ConfdesignToolStripMenuItem})
         Me.ContextMenuStripInteger.Name = "ContextMenuStripInteger"
-        Me.ContextMenuStripInteger.Size = New System.Drawing.Size(127, 136)
+        Me.ContextMenuStripInteger.Size = New System.Drawing.Size(181, 180)
         '
         'GmpToolStripMenuItem
         '
         Me.GmpToolStripMenuItem.Name = "GmpToolStripMenuItem"
-        Me.GmpToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.GmpToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GmpToolStripMenuItem.Text = "Gmp"
         '
         'DescToolsToolStripMenuItem
         '
         Me.DescToolsToolStripMenuItem.Name = "DescToolsToolStripMenuItem"
-        Me.DescToolsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.DescToolsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DescToolsToolStripMenuItem.Text = "DescTools"
         '
         'RutilsToolStripMenuItem
         '
         Me.RutilsToolStripMenuItem.Name = "RutilsToolStripMenuItem"
-        Me.RutilsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.RutilsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.RutilsToolStripMenuItem.Text = "R.utils"
         '
         'PrimesToolStripMenuItem
         '
         Me.PrimesToolStripMenuItem.Name = "PrimesToolStripMenuItem"
-        Me.PrimesToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.PrimesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PrimesToolStripMenuItem.Text = "Primes"
         '
         'ZseqToolStripMenuItem
         '
         Me.ZseqToolStripMenuItem.Name = "ZseqToolStripMenuItem"
-        Me.ZseqToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.ZseqToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ZseqToolStripMenuItem.Text = "Zseq"
         '
         'UtilsToolStripMenuItem
         '
         Me.UtilsToolStripMenuItem.Name = "UtilsToolStripMenuItem"
-        Me.UtilsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.UtilsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UtilsToolStripMenuItem.Text = "R Utils"
         '
         'cmdHex
@@ -6441,20 +6442,17 @@ Partial Class ucrCalculator
         Me.ListStatipToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ListStatipToolStripMenuItem.Text = "statip"
         '
+        'ConfdesignToolStripMenuItem
+        '
+        Me.ConfdesignToolStripMenuItem.Name = "ConfdesignToolStripMenuItem"
+        Me.ConfdesignToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ConfdesignToolStripMenuItem.Text = "Conf.design"
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-
-        Me.Controls.Add(Me.grpProbabilty)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpDates)
-        Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpCircular)
-        Me.Controls.Add(Me.grpMaths)
-
         Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.cmdWakefieldHelp)
         Me.Controls.Add(Me.cmdStringRHelp)
@@ -7045,5 +7043,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFactorize2 As Button
 
     Friend WithEvents cmdPascal As Button
-
+    Friend WithEvents ConfdesignToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -4047,6 +4047,14 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
+    Private Sub ConfdesignToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfdesignToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "conf.design"
+        End If
+        OpenHelpPage()
+    End Sub
+
     Private Sub RutilsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RutilsToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
@@ -4405,7 +4413,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize2.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("factorize( , divisors = primes(max( )))", 28)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("conf.design::factorize( ) ", 3)
     End Sub
 
     Private Sub cmdFreqLength_Click(sender As Object, e As EventArgs) Handles cmdFreqLength.Click
