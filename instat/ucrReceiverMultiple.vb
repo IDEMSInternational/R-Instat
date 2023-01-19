@@ -380,6 +380,8 @@ Public Class ucrReceiverMultiple
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
 
+        RemoveVariablesInReceiver(Selector.lstAvailableVariable) 'needed due to the Autofill option
+
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
 
