@@ -93,7 +93,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrChkExtraVariables.Checked = False
         Me.ucrChkExtraVariables.Location = New System.Drawing.Point(4, 274)
         Me.ucrChkExtraVariables.Name = "ucrChkExtraVariables"
-        Me.ucrChkExtraVariables.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkExtraVariables.Size = New System.Drawing.Size(177, 23)
         Me.ucrChkExtraVariables.TabIndex = 28
         '
         'ucrReceiverSuppNumeric
@@ -115,7 +115,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.ucrChkScaleData.Checked = False
         Me.ucrChkScaleData.Location = New System.Drawing.Point(4, 227)
         Me.ucrChkScaleData.Name = "ucrChkScaleData"
-        Me.ucrChkScaleData.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkScaleData.Size = New System.Drawing.Size(177, 27)
         Me.ucrChkScaleData.TabIndex = 23
         '
         'ucrNudNumberOfComp
