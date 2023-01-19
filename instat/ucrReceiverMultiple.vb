@@ -308,7 +308,12 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.BackColor = Color.White
     End Sub
 
-    Public Overrides Sub RemoveVariablesInReceiver(lstViewItem As ListView)
+    ''' <summary>
+    ''' Removes any variable in the multiple receiver
+    ''' that is not in the list of variables of the selector
+    ''' </summary>
+    ''' <param name="lstViewItem"></param>
+    Public Overrides Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
         For Each strVar In GetVariableNamesAsList()
             If lstViewItem.FindItemWithText(strVar) Is Nothing Then
                 Remove({strVar})
@@ -376,7 +381,7 @@ Public Class ucrReceiverMultiple
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
 
-        RemoveVariablesInReceiver(Selector.lstAvailableVariable) 'needed due to the Autofill option
+        RemoveAnyVariablesNotInList(Selector.lstAvailableVariable) 'needed due to the Autofill option
 
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
