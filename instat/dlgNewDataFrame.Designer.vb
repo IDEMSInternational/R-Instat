@@ -420,7 +420,7 @@ Partial Class dlgNewDataFrame
         Me.ucrChkRCommand.Checked = False
         Me.ucrChkRCommand.Location = New System.Drawing.Point(19, 114)
         Me.ucrChkRCommand.Name = "ucrChkRCommand"
-        Me.ucrChkRCommand.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkRCommand.Size = New System.Drawing.Size(177, 23)
         Me.ucrChkRCommand.TabIndex = 175
         '
         'ucrInputListInCategory
