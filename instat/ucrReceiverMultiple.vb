@@ -308,6 +308,18 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.BackColor = Color.White
     End Sub
 
+    Public Overrides Sub RemoveVariablesInReceiver(lstViewItem As ListView)
+        If GetVariableNamesAsList.Count = 0 Then
+            Exit Sub
+        End If
+
+        For Each strVar In GetVariableNamesAsList()
+            If lstViewItem.FindItemWithText(strVar) Is Nothing Then
+                Remove({strVar})
+            End If
+        Next
+    End Sub
+
     Private Sub lstSelectedVariables_KeyDown(sender As Object, e As KeyEventArgs) Handles lstSelectedVariables.KeyDown
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
@@ -367,16 +379,6 @@ Public Class ucrReceiverMultiple
         End If
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
-
-        Dim clsGetItems As New RFunction
-        Dim expColumn As SymbolicExpression
-        clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetItems.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-        clsGetItems.AddParameter("col_names", Chr(34) & strItem & Chr(34))
-        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
-        If expColumn Is Nothing Then
-            Remove({strItem})
-        End If
 
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
