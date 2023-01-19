@@ -309,10 +309,6 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Public Overrides Sub RemoveVariablesInReceiver(lstViewItem As ListView)
-        If GetVariableNamesAsList.Count = 0 Then
-            Exit Sub
-        End If
-
         For Each strVar In GetVariableNamesAsList()
             If lstViewItem.FindItemWithText(strVar) Is Nothing Then
                 Remove({strVar})
