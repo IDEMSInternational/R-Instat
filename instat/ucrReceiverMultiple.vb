@@ -83,7 +83,6 @@ Public Class ucrReceiverMultiple
 
     Public Overrides Sub Remove(strItems() As String)
         MyBase.Remove(strItems)
-        Dim strTempItem As String
 
         If strItems.Count > 0 Then
             For Each strTempItem In strItems
@@ -309,6 +308,19 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.BackColor = Color.White
     End Sub
 
+    ''' <summary>
+    ''' Removes any variable in the multiple receiver
+    ''' that is not in the list of variables of the selector
+    ''' </summary>
+    ''' <param name="lstViewItem"></param>
+    Public Overrides Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
+        For Each strVar In GetVariableNamesAsList()
+            If lstViewItem.FindItemWithText(strVar) Is Nothing Then
+                Remove({strVar})
+            End If
+        Next
+    End Sub
+
     Private Sub lstSelectedVariables_KeyDown(sender As Object, e As KeyEventArgs) Handles lstSelectedVariables.KeyDown
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
             RemoveSelected()
@@ -368,6 +380,8 @@ Public Class ucrReceiverMultiple
         End If
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
+
+        RemoveAnyVariablesNotInList(Selector.lstAvailableVariable) 'needed due to the Autofill option
 
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub

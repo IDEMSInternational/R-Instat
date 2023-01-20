@@ -135,6 +135,8 @@ pkgs <-
     "corrr",
     "dslabs",
     "coin",
+    #This small library contains a series of simple tools for constructing and manipulating confounded and fractional factorial designs.
+    "conf.design",
     "pingr",
     "vcdExtra",
     # For inspect, read, edit and run files for 'APSIM'
