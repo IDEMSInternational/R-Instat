@@ -4414,7 +4414,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize2.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("conf.design::factorize( )", 3)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("conf.design::factorize( )", 2)
     End Sub
 
     Private Sub cmdFreqLength_Click(sender As Object, e As EventArgs) Handles cmdFreqLength.Click
@@ -4985,6 +4985,6 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
     End Sub
 End Class
