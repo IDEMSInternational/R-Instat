@@ -252,6 +252,7 @@ Public Class dlgRegularSequence
             Dim vecSequence As CharacterVector
             Dim strNewPreviewScript As String
             Dim iLength As Integer
+            Dim iDataFrameLenghtLimit As Integer = 10000
             Dim iDataFrameLength As Integer = ucrDataFrameLength.GetDataFrameLength
 
             clsRepFunction.RemoveAssignTo()
@@ -271,7 +272,7 @@ Public Class dlgRegularSequence
             End If
             strPreviewScript = strNewPreviewScript
 
-            If iDataFrameLength >= 10000000 Then
+            If iDataFrameLength > iDataFrameLenghtLimit Then
                 txtPreview.Text = ""
                 lblMessage.Text = "No preview available."
                 Exit Try
@@ -280,7 +281,6 @@ Public Class dlgRegularSequence
             'get the sequence from the R command as it is, and dispay it
             vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strPreviewScript, bSilent:=True).AsCharacter
             txtPreview.Text = String.Join(", ", vecSequence)
-
             'remove the "length.out", then check if sequence is truncated or extended
             clsNewRepClone.RemoveParameterByName("length.out")
             vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacter.ToScript(), bSilent:=True).AsCharacter
