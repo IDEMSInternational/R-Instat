@@ -4408,6 +4408,7 @@ Public Class ucrCalculator
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsZseqFunction.ToScript, 0)
     End Sub
+
     Private Sub cmdPrimorial_Click(sender As Object, e As EventArgs) Handles cmdPrimorial.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,primes::primorial_n)", 22)
     End Sub
