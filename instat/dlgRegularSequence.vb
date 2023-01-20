@@ -185,12 +185,8 @@ Public Class dlgRegularSequence
         clsRepFunction.AddParameter("each", 1, iPosition:=2)
         clsRepFunction.AddParameter("length.out", ucrDataFrameLength.GetDataFrameLength, iPosition:=3)
 
-        clsRepFunction.SetAssignToColumnObject(strColToAssignTo:=ucrNewColumnName.GetText,
-                                               strColName:=ucrNewColumnName.GetText,
-                                               strRDataFrameNameToAddObjectTo:=ucrSelectDataFrameRegularSequence.strCurrDataFrame,
-                                               bAssignToIsPrefix:=True)
+        SetAssignTo()
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -258,13 +254,14 @@ Public Class dlgRegularSequence
             Dim iLength As Integer
             Dim iDataFrameLength As Integer = ucrDataFrameLength.GetDataFrameLength
 
+            clsRepFunction.RemoveAssignTo()
             'clone the "rep" command base function
             clsNewRepClone = clsRepFunction.Clone()
-            clsNewRepClone.bAssignToIsPrefix = False
+            SetAssignTo()
 
             'set up "as.character" command to be usde for testing
             clsAsCharacter.SetRCommand("as.character")
-            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
+            clsAsCharacter.AddParameter("x", clsRFunctionParameter:=clsNewRepClone)
 
             'if the new peview script is the same as the previous one then no need to refresh preview
             'this check is useful for large data frames.
@@ -301,12 +298,20 @@ Public Class dlgRegularSequence
         End Try
     End Sub
 
+    Private Sub SetAssignTo()
+        clsRepFunction.SetAssignToColumnObject(strColToAssignTo:=ucrNewColumnName.GetText,
+                                               strColName:=ucrNewColumnName.GetText,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectDataFrameRegularSequence.strCurrDataFrame,
+                                               bAssignToIsPrefix:=True)
+    End Sub
+
     Private Sub ucrPnlSequenceType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSequenceType.ControlValueChanged
         If rdoNumeric.Checked Then
             clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction, iPosition:=0)
         ElseIf rdoDates.Checked Then
             clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqDateFunction, iPosition:=0)
         End If
+        SetAssignTo()
     End Sub
 
     Private Sub ucrInputStepsOfControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrDateTimePickerFrom.ControlValueChanged, ucrDateTimePickerTo.ControlValueChanged, ucrInputComboDatesBy.ControlValueChanged, ucrPnlSequenceType.ControlValueChanged
