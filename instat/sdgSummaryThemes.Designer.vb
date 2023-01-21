@@ -180,8 +180,8 @@ Partial Class sdgSummaryThemes
         Me.ucrChkRowFontSize = New instat.ucrCheck()
         Me.ucrChkRowFontWeight = New instat.ucrCheck()
         Me.tbpStub = New System.Windows.Forms.TabPage()
+        Me.ucrNudStubIndentLength = New instat.ucrNud()
         Me.ucrInputStubTextTransform = New instat.ucrInputComboBox()
-        Me.ucrInputStubIndentLength = New instat.ucrInputComboBox()
         Me.grpStubBorder = New System.Windows.Forms.GroupBox()
         Me.ucrChkStubBorderColor = New instat.ucrCheck()
         Me.ucrInputStubBorderStyle = New instat.ucrInputComboBox()
@@ -211,9 +211,61 @@ Partial Class sdgSummaryThemes
         Me.ucrChkStubGroupFontWeight = New instat.ucrCheck()
         Me.ucrChkStubGroupFontSize = New instat.ucrCheck()
         Me.ucrInputStubGroupTextTransform = New instat.ucrInputComboBox()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.tbpFootnotes = New System.Windows.Forms.TabPage()
+        Me.ucrInputFootnotesSeparator = New instat.ucrInputComboBox()
+        Me.ucrInputFootnotesMultiline = New instat.ucrInputComboBox()
+        Me.ucrInputFootnotesMarks = New instat.ucrInputComboBox()
+        Me.ucrChkFootnotesSeparator = New instat.ucrCheck()
+        Me.ucrChkFootnotesMultiline = New instat.ucrCheck()
+        Me.ucrChkFootnotesMarks = New instat.ucrCheck()
+        Me.grpFootnotesBorder = New System.Windows.Forms.GroupBox()
+        Me.ucrInputFootnotesBottomStyle = New instat.ucrInputComboBox()
+        Me.ucrInputFootnotesSideStyle = New instat.ucrInputComboBox()
+        Me.ucrInputFootnotesSideColor = New instat.ucrColors()
+        Me.ucrNudFootnotesSideWidth = New instat.ucrNud()
+        Me.ucrNudFootnotesBottomWidth = New instat.ucrNud()
+        Me.ucrChkFootnotesSideColor = New instat.ucrCheck()
+        Me.ucrChkFootnotesSideWidth = New instat.ucrCheck()
+        Me.ucrChkFootnotesSideStyle = New instat.ucrCheck()
+        Me.ucrChkFootnotesBottomColor = New instat.ucrCheck()
+        Me.ucrChkFootnotesBottomWidth = New instat.ucrCheck()
+        Me.ucrChkFootnotesBottomStyles = New instat.ucrCheck()
+        Me.ucrChkFootnotesHorizontalPadding = New instat.ucrCheck()
+        Me.ucrChkFootnotesPadding = New instat.ucrCheck()
+        Me.ucrChkFootnotesFontSize = New instat.ucrCheck()
+        Me.ucrChkFootnotesBackColor = New instat.ucrCheck()
+        Me.ucrNudFootnotesFontSize = New instat.ucrNud()
+        Me.ucrInputFootnotesBackColor = New instat.ucrColors()
+        Me.tbpSourcenotes = New System.Windows.Forms.TabPage()
         Me.ucrBaseSummaryTheme = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputFootnotesBottomColor = New instat.ucrColors()
+        Me.ucrInputSourcenotesBackColor = New instat.ucrColors()
+        Me.ucrChkSourcenotesBackColor = New instat.ucrCheck()
+        Me.grpSourcenotesBorder = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSourcenotesBottomColor = New instat.ucrColors()
+        Me.ucrInputSourcenotesBottomStyle = New instat.ucrInputComboBox()
+        Me.ucrInputSourcenotesSideStyle = New instat.ucrInputComboBox()
+        Me.ucrInputSourcenotesSideColor = New instat.ucrColors()
+        Me.ucrNudSourcenotesSideWidth = New instat.ucrNud()
+        Me.ucrNudSourcenotesBottomWidth = New instat.ucrNud()
+        Me.ucrChkSourcenotesSideColor = New instat.ucrCheck()
+        Me.ucrChkSourcenotesSideWidth = New instat.ucrCheck()
+        Me.ucrChkSourcenotesSideStyle = New instat.ucrCheck()
+        Me.ucrChkSourcenotesBottomColor = New instat.ucrCheck()
+        Me.ucrChkSourcenotesBottomWidth = New instat.ucrCheck()
+        Me.ucrChkSourcenotesBottomStyle = New instat.ucrCheck()
+        Me.ucrNudSourcenotesFontSize = New instat.ucrNud()
+        Me.ucrChkSourcenotesFontSize = New instat.ucrCheck()
+        Me.ucrChkSourcenotesPadding = New instat.ucrCheck()
+        Me.ucrChkSourcenotesHorizontalPadding = New instat.ucrCheck()
+        Me.ucrChkSourcenotesMultiline = New instat.ucrCheck()
+        Me.ucrChkSourcenotesSeparator = New instat.ucrCheck()
+        Me.ucrInputSourcenotesMultiline = New instat.ucrInputComboBox()
+        Me.ucrInputSourcenotesSeparator = New instat.ucrInputComboBox()
+        Me.ucrNudFootnotesPadding = New instat.ucrNud()
+        Me.ucrNudFootnotesHorizontalPadding = New instat.ucrNud()
+        Me.ucrNudSourcenotesPadding = New instat.ucrNud()
+        Me.ucrNudSourcenotesHorizontalPadding = New instat.ucrNud()
         Me.tbSummaryThemes.SuspendLayout()
         Me.tbThemeTables.SuspendLayout()
         Me.grpTableBorder.SuspendLayout()
@@ -233,6 +285,10 @@ Partial Class sdgSummaryThemes
         Me.grpStubBorder.SuspendLayout()
         Me.grpStubFont.SuspendLayout()
         Me.grpStubRowGroup.SuspendLayout()
+        Me.tbpFootnotes.SuspendLayout()
+        Me.grpFootnotesBorder.SuspendLayout()
+        Me.tbpSourcenotes.SuspendLayout()
+        Me.grpSourcenotesBorder.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbSummaryThemes
@@ -242,8 +298,8 @@ Partial Class sdgSummaryThemes
         Me.tbSummaryThemes.Controls.Add(Me.tbThemeColumns)
         Me.tbSummaryThemes.Controls.Add(Me.tbThemeRows)
         Me.tbSummaryThemes.Controls.Add(Me.tbpStub)
-        Me.tbSummaryThemes.Controls.Add(Me.TabPage6)
-        Me.tbSummaryThemes.Controls.Add(Me.TabPage7)
+        Me.tbSummaryThemes.Controls.Add(Me.tbpFootnotes)
+        Me.tbSummaryThemes.Controls.Add(Me.tbpSourcenotes)
         Me.tbSummaryThemes.Location = New System.Drawing.Point(5, 1)
         Me.tbSummaryThemes.Name = "tbSummaryThemes"
         Me.tbSummaryThemes.SelectedIndex = 0
@@ -2005,8 +2061,8 @@ Partial Class sdgSummaryThemes
         '
         'tbpStub
         '
+        Me.tbpStub.Controls.Add(Me.ucrNudStubIndentLength)
         Me.tbpStub.Controls.Add(Me.ucrInputStubTextTransform)
-        Me.tbpStub.Controls.Add(Me.ucrInputStubIndentLength)
         Me.tbpStub.Controls.Add(Me.grpStubBorder)
         Me.tbpStub.Controls.Add(Me.grpStubFont)
         Me.tbpStub.Controls.Add(Me.ucrChkStubIndentLength)
@@ -2021,6 +2077,19 @@ Partial Class sdgSummaryThemes
         Me.tbpStub.Text = "Stub"
         Me.tbpStub.UseVisualStyleBackColor = True
         '
+        'ucrNudStubIndentLength
+        '
+        Me.ucrNudStubIndentLength.AutoSize = True
+        Me.ucrNudStubIndentLength.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubIndentLength.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStubIndentLength.Location = New System.Drawing.Point(201, 103)
+        Me.ucrNudStubIndentLength.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStubIndentLength.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStubIndentLength.Name = "ucrNudStubIndentLength"
+        Me.ucrNudStubIndentLength.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudStubIndentLength.TabIndex = 41
+        Me.ucrNudStubIndentLength.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrInputStubTextTransform
         '
         Me.ucrInputStubTextTransform.AddQuotesIfUnrecognised = True
@@ -2031,17 +2100,6 @@ Partial Class sdgSummaryThemes
         Me.ucrInputStubTextTransform.Name = "ucrInputStubTextTransform"
         Me.ucrInputStubTextTransform.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputStubTextTransform.TabIndex = 40
-        '
-        'ucrInputStubIndentLength
-        '
-        Me.ucrInputStubIndentLength.AddQuotesIfUnrecognised = True
-        Me.ucrInputStubIndentLength.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputStubIndentLength.GetSetSelectedIndex = -1
-        Me.ucrInputStubIndentLength.IsReadOnly = False
-        Me.ucrInputStubIndentLength.Location = New System.Drawing.Point(201, 100)
-        Me.ucrInputStubIndentLength.Name = "ucrInputStubIndentLength"
-        Me.ucrInputStubIndentLength.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputStubIndentLength.TabIndex = 39
         '
         'grpStubBorder
         '
@@ -2232,7 +2290,7 @@ Partial Class sdgSummaryThemes
         Me.grpStubRowGroup.Size = New System.Drawing.Size(342, 209)
         Me.grpStubRowGroup.TabIndex = 7
         Me.grpStubRowGroup.TabStop = False
-        Me.grpStubRowGroup.Text = "Stub Row Group"
+        Me.grpStubRowGroup.Text = "Stub Row Group Border"
         '
         'ucrInputStubGroupFontWeight
         '
@@ -2358,23 +2416,305 @@ Partial Class sdgSummaryThemes
         Me.ucrInputStubGroupTextTransform.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputStubGroupTextTransform.TabIndex = 7
         '
-        'TabPage6
+        'tbpFootnotes
         '
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Footnotes"
-        Me.TabPage6.UseVisualStyleBackColor = True
+        Me.tbpFootnotes.Controls.Add(Me.ucrNudFootnotesHorizontalPadding)
+        Me.tbpFootnotes.Controls.Add(Me.ucrNudFootnotesPadding)
+        Me.tbpFootnotes.Controls.Add(Me.ucrInputFootnotesSeparator)
+        Me.tbpFootnotes.Controls.Add(Me.ucrInputFootnotesMultiline)
+        Me.tbpFootnotes.Controls.Add(Me.ucrInputFootnotesMarks)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesSeparator)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesMultiline)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesMarks)
+        Me.tbpFootnotes.Controls.Add(Me.grpFootnotesBorder)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesHorizontalPadding)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesPadding)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesFontSize)
+        Me.tbpFootnotes.Controls.Add(Me.ucrChkFootnotesBackColor)
+        Me.tbpFootnotes.Controls.Add(Me.ucrNudFootnotesFontSize)
+        Me.tbpFootnotes.Controls.Add(Me.ucrInputFootnotesBackColor)
+        Me.tbpFootnotes.Location = New System.Drawing.Point(4, 22)
+        Me.tbpFootnotes.Name = "tbpFootnotes"
+        Me.tbpFootnotes.Size = New System.Drawing.Size(728, 353)
+        Me.tbpFootnotes.TabIndex = 5
+        Me.tbpFootnotes.Text = "Footnotes"
+        Me.tbpFootnotes.UseVisualStyleBackColor = True
         '
-        'TabPage7
+        'ucrInputFootnotesSeparator
         '
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(728, 353)
-        Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Sourcenotes"
-        Me.TabPage7.UseVisualStyleBackColor = True
+        Me.ucrInputFootnotesSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesSeparator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesSeparator.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesSeparator.IsReadOnly = False
+        Me.ucrInputFootnotesSeparator.Location = New System.Drawing.Point(174, 224)
+        Me.ucrInputFootnotesSeparator.Name = "ucrInputFootnotesSeparator"
+        Me.ucrInputFootnotesSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesSeparator.TabIndex = 52
+        '
+        'ucrInputFootnotesMultiline
+        '
+        Me.ucrInputFootnotesMultiline.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesMultiline.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesMultiline.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesMultiline.IsReadOnly = False
+        Me.ucrInputFootnotesMultiline.Location = New System.Drawing.Point(174, 193)
+        Me.ucrInputFootnotesMultiline.Name = "ucrInputFootnotesMultiline"
+        Me.ucrInputFootnotesMultiline.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesMultiline.TabIndex = 51
+        '
+        'ucrInputFootnotesMarks
+        '
+        Me.ucrInputFootnotesMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesMarks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesMarks.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesMarks.IsReadOnly = False
+        Me.ucrInputFootnotesMarks.Location = New System.Drawing.Point(174, 162)
+        Me.ucrInputFootnotesMarks.Name = "ucrInputFootnotesMarks"
+        Me.ucrInputFootnotesMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesMarks.TabIndex = 50
+        '
+        'ucrChkFootnotesSeparator
+        '
+        Me.ucrChkFootnotesSeparator.AutoSize = True
+        Me.ucrChkFootnotesSeparator.Checked = False
+        Me.ucrChkFootnotesSeparator.Location = New System.Drawing.Point(18, 224)
+        Me.ucrChkFootnotesSeparator.Name = "ucrChkFootnotesSeparator"
+        Me.ucrChkFootnotesSeparator.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesSeparator.TabIndex = 49
+        '
+        'ucrChkFootnotesMultiline
+        '
+        Me.ucrChkFootnotesMultiline.AutoSize = True
+        Me.ucrChkFootnotesMultiline.Checked = False
+        Me.ucrChkFootnotesMultiline.Location = New System.Drawing.Point(18, 193)
+        Me.ucrChkFootnotesMultiline.Name = "ucrChkFootnotesMultiline"
+        Me.ucrChkFootnotesMultiline.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesMultiline.TabIndex = 48
+        '
+        'ucrChkFootnotesMarks
+        '
+        Me.ucrChkFootnotesMarks.AutoSize = True
+        Me.ucrChkFootnotesMarks.Checked = False
+        Me.ucrChkFootnotesMarks.Location = New System.Drawing.Point(18, 162)
+        Me.ucrChkFootnotesMarks.Name = "ucrChkFootnotesMarks"
+        Me.ucrChkFootnotesMarks.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesMarks.TabIndex = 47
+        '
+        'grpFootnotesBorder
+        '
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrInputFootnotesBottomColor)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrInputFootnotesBottomStyle)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrInputFootnotesSideStyle)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrInputFootnotesSideColor)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrNudFootnotesSideWidth)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrNudFootnotesBottomWidth)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrChkFootnotesSideColor)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrChkFootnotesSideWidth)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrChkFootnotesSideStyle)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrChkFootnotesBottomColor)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrChkFootnotesBottomWidth)
+        Me.grpFootnotesBorder.Controls.Add(Me.ucrChkFootnotesBottomStyles)
+        Me.grpFootnotesBorder.Location = New System.Drawing.Point(360, 18)
+        Me.grpFootnotesBorder.Name = "grpFootnotesBorder"
+        Me.grpFootnotesBorder.Size = New System.Drawing.Size(342, 209)
+        Me.grpFootnotesBorder.TabIndex = 46
+        Me.grpFootnotesBorder.TabStop = False
+        Me.grpFootnotesBorder.Text = "Footnote Border"
+        '
+        'ucrInputFootnotesBottomStyle
+        '
+        Me.ucrInputFootnotesBottomStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesBottomStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesBottomStyle.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesBottomStyle.IsReadOnly = False
+        Me.ucrInputFootnotesBottomStyle.Location = New System.Drawing.Point(170, 20)
+        Me.ucrInputFootnotesBottomStyle.Name = "ucrInputFootnotesBottomStyle"
+        Me.ucrInputFootnotesBottomStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesBottomStyle.TabIndex = 33
+        '
+        'ucrInputFootnotesSideStyle
+        '
+        Me.ucrInputFootnotesSideStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesSideStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesSideStyle.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesSideStyle.IsReadOnly = False
+        Me.ucrInputFootnotesSideStyle.Location = New System.Drawing.Point(170, 113)
+        Me.ucrInputFootnotesSideStyle.Name = "ucrInputFootnotesSideStyle"
+        Me.ucrInputFootnotesSideStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesSideStyle.TabIndex = 32
+        '
+        'ucrInputFootnotesSideColor
+        '
+        Me.ucrInputFootnotesSideColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesSideColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesSideColor.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesSideColor.IsReadOnly = False
+        Me.ucrInputFootnotesSideColor.Location = New System.Drawing.Point(170, 175)
+        Me.ucrInputFootnotesSideColor.Name = "ucrInputFootnotesSideColor"
+        Me.ucrInputFootnotesSideColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesSideColor.TabIndex = 31
+        '
+        'ucrNudFootnotesSideWidth
+        '
+        Me.ucrNudFootnotesSideWidth.AutoSize = True
+        Me.ucrNudFootnotesSideWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesSideWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFootnotesSideWidth.Location = New System.Drawing.Point(170, 144)
+        Me.ucrNudFootnotesSideWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFootnotesSideWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesSideWidth.Name = "ucrNudFootnotesSideWidth"
+        Me.ucrNudFootnotesSideWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudFootnotesSideWidth.TabIndex = 29
+        Me.ucrNudFootnotesSideWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFootnotesBottomWidth
+        '
+        Me.ucrNudFootnotesBottomWidth.AutoSize = True
+        Me.ucrNudFootnotesBottomWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesBottomWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFootnotesBottomWidth.Location = New System.Drawing.Point(170, 51)
+        Me.ucrNudFootnotesBottomWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFootnotesBottomWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesBottomWidth.Name = "ucrNudFootnotesBottomWidth"
+        Me.ucrNudFootnotesBottomWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudFootnotesBottomWidth.TabIndex = 26
+        Me.ucrNudFootnotesBottomWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkFootnotesSideColor
+        '
+        Me.ucrChkFootnotesSideColor.AutoSize = True
+        Me.ucrChkFootnotesSideColor.Checked = False
+        Me.ucrChkFootnotesSideColor.Location = New System.Drawing.Point(15, 175)
+        Me.ucrChkFootnotesSideColor.Name = "ucrChkFootnotesSideColor"
+        Me.ucrChkFootnotesSideColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesSideColor.TabIndex = 25
+        '
+        'ucrChkFootnotesSideWidth
+        '
+        Me.ucrChkFootnotesSideWidth.AutoSize = True
+        Me.ucrChkFootnotesSideWidth.Checked = False
+        Me.ucrChkFootnotesSideWidth.Location = New System.Drawing.Point(15, 144)
+        Me.ucrChkFootnotesSideWidth.Name = "ucrChkFootnotesSideWidth"
+        Me.ucrChkFootnotesSideWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesSideWidth.TabIndex = 23
+        '
+        'ucrChkFootnotesSideStyle
+        '
+        Me.ucrChkFootnotesSideStyle.AutoSize = True
+        Me.ucrChkFootnotesSideStyle.Checked = False
+        Me.ucrChkFootnotesSideStyle.Location = New System.Drawing.Point(15, 113)
+        Me.ucrChkFootnotesSideStyle.Name = "ucrChkFootnotesSideStyle"
+        Me.ucrChkFootnotesSideStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesSideStyle.TabIndex = 22
+        '
+        'ucrChkFootnotesBottomColor
+        '
+        Me.ucrChkFootnotesBottomColor.AutoSize = True
+        Me.ucrChkFootnotesBottomColor.Checked = False
+        Me.ucrChkFootnotesBottomColor.Location = New System.Drawing.Point(15, 82)
+        Me.ucrChkFootnotesBottomColor.Name = "ucrChkFootnotesBottomColor"
+        Me.ucrChkFootnotesBottomColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesBottomColor.TabIndex = 21
+        '
+        'ucrChkFootnotesBottomWidth
+        '
+        Me.ucrChkFootnotesBottomWidth.AutoSize = True
+        Me.ucrChkFootnotesBottomWidth.Checked = False
+        Me.ucrChkFootnotesBottomWidth.Location = New System.Drawing.Point(15, 51)
+        Me.ucrChkFootnotesBottomWidth.Name = "ucrChkFootnotesBottomWidth"
+        Me.ucrChkFootnotesBottomWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesBottomWidth.TabIndex = 19
+        '
+        'ucrChkFootnotesBottomStyles
+        '
+        Me.ucrChkFootnotesBottomStyles.AutoSize = True
+        Me.ucrChkFootnotesBottomStyles.Checked = False
+        Me.ucrChkFootnotesBottomStyles.Location = New System.Drawing.Point(15, 20)
+        Me.ucrChkFootnotesBottomStyles.Name = "ucrChkFootnotesBottomStyles"
+        Me.ucrChkFootnotesBottomStyles.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesBottomStyles.TabIndex = 18
+        '
+        'ucrChkFootnotesHorizontalPadding
+        '
+        Me.ucrChkFootnotesHorizontalPadding.AutoSize = True
+        Me.ucrChkFootnotesHorizontalPadding.Checked = False
+        Me.ucrChkFootnotesHorizontalPadding.Location = New System.Drawing.Point(18, 131)
+        Me.ucrChkFootnotesHorizontalPadding.Name = "ucrChkFootnotesHorizontalPadding"
+        Me.ucrChkFootnotesHorizontalPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesHorizontalPadding.TabIndex = 44
+        '
+        'ucrChkFootnotesPadding
+        '
+        Me.ucrChkFootnotesPadding.AutoSize = True
+        Me.ucrChkFootnotesPadding.Checked = False
+        Me.ucrChkFootnotesPadding.Location = New System.Drawing.Point(18, 100)
+        Me.ucrChkFootnotesPadding.Name = "ucrChkFootnotesPadding"
+        Me.ucrChkFootnotesPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesPadding.TabIndex = 43
+        '
+        'ucrChkFootnotesFontSize
+        '
+        Me.ucrChkFootnotesFontSize.AutoSize = True
+        Me.ucrChkFootnotesFontSize.Checked = False
+        Me.ucrChkFootnotesFontSize.Location = New System.Drawing.Point(18, 69)
+        Me.ucrChkFootnotesFontSize.Name = "ucrChkFootnotesFontSize"
+        Me.ucrChkFootnotesFontSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesFontSize.TabIndex = 42
+        '
+        'ucrChkFootnotesBackColor
+        '
+        Me.ucrChkFootnotesBackColor.AutoSize = True
+        Me.ucrChkFootnotesBackColor.Checked = False
+        Me.ucrChkFootnotesBackColor.Location = New System.Drawing.Point(18, 38)
+        Me.ucrChkFootnotesBackColor.Name = "ucrChkFootnotesBackColor"
+        Me.ucrChkFootnotesBackColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFootnotesBackColor.TabIndex = 41
+        '
+        'ucrNudFootnotesFontSize
+        '
+        Me.ucrNudFootnotesFontSize.AutoSize = True
+        Me.ucrNudFootnotesFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFootnotesFontSize.Location = New System.Drawing.Point(174, 69)
+        Me.ucrNudFootnotesFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFootnotesFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesFontSize.Name = "ucrNudFootnotesFontSize"
+        Me.ucrNudFootnotesFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudFootnotesFontSize.TabIndex = 33
+        Me.ucrNudFootnotesFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputFootnotesBackColor
+        '
+        Me.ucrInputFootnotesBackColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesBackColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesBackColor.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesBackColor.IsReadOnly = False
+        Me.ucrInputFootnotesBackColor.Location = New System.Drawing.Point(174, 38)
+        Me.ucrInputFootnotesBackColor.Name = "ucrInputFootnotesBackColor"
+        Me.ucrInputFootnotesBackColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesBackColor.TabIndex = 32
+        '
+        'tbpSourcenotes
+        '
+        Me.tbpSourcenotes.Controls.Add(Me.ucrNudSourcenotesHorizontalPadding)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrNudSourcenotesPadding)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrInputSourcenotesSeparator)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrInputSourcenotesMultiline)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrChkSourcenotesSeparator)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrChkSourcenotesMultiline)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrChkSourcenotesHorizontalPadding)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrChkSourcenotesPadding)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrChkSourcenotesFontSize)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrNudSourcenotesFontSize)
+        Me.tbpSourcenotes.Controls.Add(Me.grpSourcenotesBorder)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrChkSourcenotesBackColor)
+        Me.tbpSourcenotes.Controls.Add(Me.ucrInputSourcenotesBackColor)
+        Me.tbpSourcenotes.Location = New System.Drawing.Point(4, 22)
+        Me.tbpSourcenotes.Name = "tbpSourcenotes"
+        Me.tbpSourcenotes.Size = New System.Drawing.Size(728, 353)
+        Me.tbpSourcenotes.TabIndex = 6
+        Me.tbpSourcenotes.Text = "Sourcenotes"
+        Me.tbpSourcenotes.UseVisualStyleBackColor = True
         '
         'ucrBaseSummaryTheme
         '
@@ -2383,6 +2723,314 @@ Partial Class sdgSummaryThemes
         Me.ucrBaseSummaryTheme.Name = "ucrBaseSummaryTheme"
         Me.ucrBaseSummaryTheme.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSummaryTheme.TabIndex = 1
+        '
+        'ucrInputFootnotesBottomColor
+        '
+        Me.ucrInputFootnotesBottomColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputFootnotesBottomColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFootnotesBottomColor.GetSetSelectedIndex = -1
+        Me.ucrInputFootnotesBottomColor.IsReadOnly = False
+        Me.ucrInputFootnotesBottomColor.Location = New System.Drawing.Point(170, 80)
+        Me.ucrInputFootnotesBottomColor.Name = "ucrInputFootnotesBottomColor"
+        Me.ucrInputFootnotesBottomColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFootnotesBottomColor.TabIndex = 34
+        '
+        'ucrInputSourcenotesBackColor
+        '
+        Me.ucrInputSourcenotesBackColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesBackColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesBackColor.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesBackColor.IsReadOnly = False
+        Me.ucrInputSourcenotesBackColor.Location = New System.Drawing.Point(157, 41)
+        Me.ucrInputSourcenotesBackColor.Name = "ucrInputSourcenotesBackColor"
+        Me.ucrInputSourcenotesBackColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesBackColor.TabIndex = 33
+        '
+        'ucrChkSourcenotesBackColor
+        '
+        Me.ucrChkSourcenotesBackColor.AutoSize = True
+        Me.ucrChkSourcenotesBackColor.Checked = False
+        Me.ucrChkSourcenotesBackColor.Location = New System.Drawing.Point(13, 41)
+        Me.ucrChkSourcenotesBackColor.Name = "ucrChkSourcenotesBackColor"
+        Me.ucrChkSourcenotesBackColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesBackColor.TabIndex = 42
+        '
+        'grpSourcenotesBorder
+        '
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrInputSourcenotesBottomColor)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrInputSourcenotesBottomStyle)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrInputSourcenotesSideStyle)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrInputSourcenotesSideColor)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrNudSourcenotesSideWidth)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrNudSourcenotesBottomWidth)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrChkSourcenotesSideColor)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrChkSourcenotesSideWidth)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrChkSourcenotesSideStyle)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrChkSourcenotesBottomColor)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrChkSourcenotesBottomWidth)
+        Me.grpSourcenotesBorder.Controls.Add(Me.ucrChkSourcenotesBottomStyle)
+        Me.grpSourcenotesBorder.Location = New System.Drawing.Point(352, 21)
+        Me.grpSourcenotesBorder.Name = "grpSourcenotesBorder"
+        Me.grpSourcenotesBorder.Size = New System.Drawing.Size(342, 209)
+        Me.grpSourcenotesBorder.TabIndex = 47
+        Me.grpSourcenotesBorder.TabStop = False
+        Me.grpSourcenotesBorder.Text = "Sourcenotes Border"
+        '
+        'ucrInputSourcenotesBottomColor
+        '
+        Me.ucrInputSourcenotesBottomColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesBottomColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesBottomColor.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesBottomColor.IsReadOnly = False
+        Me.ucrInputSourcenotesBottomColor.Location = New System.Drawing.Point(170, 82)
+        Me.ucrInputSourcenotesBottomColor.Name = "ucrInputSourcenotesBottomColor"
+        Me.ucrInputSourcenotesBottomColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesBottomColor.TabIndex = 34
+        '
+        'ucrInputSourcenotesBottomStyle
+        '
+        Me.ucrInputSourcenotesBottomStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesBottomStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesBottomStyle.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesBottomStyle.IsReadOnly = False
+        Me.ucrInputSourcenotesBottomStyle.Location = New System.Drawing.Point(170, 20)
+        Me.ucrInputSourcenotesBottomStyle.Name = "ucrInputSourcenotesBottomStyle"
+        Me.ucrInputSourcenotesBottomStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesBottomStyle.TabIndex = 33
+        '
+        'ucrInputSourcenotesSideStyle
+        '
+        Me.ucrInputSourcenotesSideStyle.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesSideStyle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesSideStyle.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesSideStyle.IsReadOnly = False
+        Me.ucrInputSourcenotesSideStyle.Location = New System.Drawing.Point(170, 113)
+        Me.ucrInputSourcenotesSideStyle.Name = "ucrInputSourcenotesSideStyle"
+        Me.ucrInputSourcenotesSideStyle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesSideStyle.TabIndex = 32
+        '
+        'ucrInputSourcenotesSideColor
+        '
+        Me.ucrInputSourcenotesSideColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesSideColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesSideColor.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesSideColor.IsReadOnly = False
+        Me.ucrInputSourcenotesSideColor.Location = New System.Drawing.Point(170, 175)
+        Me.ucrInputSourcenotesSideColor.Name = "ucrInputSourcenotesSideColor"
+        Me.ucrInputSourcenotesSideColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesSideColor.TabIndex = 31
+        '
+        'ucrNudSourcenotesSideWidth
+        '
+        Me.ucrNudSourcenotesSideWidth.AutoSize = True
+        Me.ucrNudSourcenotesSideWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesSideWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSourcenotesSideWidth.Location = New System.Drawing.Point(170, 144)
+        Me.ucrNudSourcenotesSideWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSourcenotesSideWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesSideWidth.Name = "ucrNudSourcenotesSideWidth"
+        Me.ucrNudSourcenotesSideWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudSourcenotesSideWidth.TabIndex = 29
+        Me.ucrNudSourcenotesSideWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSourcenotesBottomWidth
+        '
+        Me.ucrNudSourcenotesBottomWidth.AutoSize = True
+        Me.ucrNudSourcenotesBottomWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesBottomWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSourcenotesBottomWidth.Location = New System.Drawing.Point(170, 51)
+        Me.ucrNudSourcenotesBottomWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSourcenotesBottomWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesBottomWidth.Name = "ucrNudSourcenotesBottomWidth"
+        Me.ucrNudSourcenotesBottomWidth.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudSourcenotesBottomWidth.TabIndex = 26
+        Me.ucrNudSourcenotesBottomWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkSourcenotesSideColor
+        '
+        Me.ucrChkSourcenotesSideColor.AutoSize = True
+        Me.ucrChkSourcenotesSideColor.Checked = False
+        Me.ucrChkSourcenotesSideColor.Location = New System.Drawing.Point(15, 175)
+        Me.ucrChkSourcenotesSideColor.Name = "ucrChkSourcenotesSideColor"
+        Me.ucrChkSourcenotesSideColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesSideColor.TabIndex = 25
+        '
+        'ucrChkSourcenotesSideWidth
+        '
+        Me.ucrChkSourcenotesSideWidth.AutoSize = True
+        Me.ucrChkSourcenotesSideWidth.Checked = False
+        Me.ucrChkSourcenotesSideWidth.Location = New System.Drawing.Point(15, 144)
+        Me.ucrChkSourcenotesSideWidth.Name = "ucrChkSourcenotesSideWidth"
+        Me.ucrChkSourcenotesSideWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesSideWidth.TabIndex = 23
+        '
+        'ucrChkSourcenotesSideStyle
+        '
+        Me.ucrChkSourcenotesSideStyle.AutoSize = True
+        Me.ucrChkSourcenotesSideStyle.Checked = False
+        Me.ucrChkSourcenotesSideStyle.Location = New System.Drawing.Point(15, 113)
+        Me.ucrChkSourcenotesSideStyle.Name = "ucrChkSourcenotesSideStyle"
+        Me.ucrChkSourcenotesSideStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesSideStyle.TabIndex = 22
+        '
+        'ucrChkSourcenotesBottomColor
+        '
+        Me.ucrChkSourcenotesBottomColor.AutoSize = True
+        Me.ucrChkSourcenotesBottomColor.Checked = False
+        Me.ucrChkSourcenotesBottomColor.Location = New System.Drawing.Point(15, 82)
+        Me.ucrChkSourcenotesBottomColor.Name = "ucrChkSourcenotesBottomColor"
+        Me.ucrChkSourcenotesBottomColor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesBottomColor.TabIndex = 21
+        '
+        'ucrChkSourcenotesBottomWidth
+        '
+        Me.ucrChkSourcenotesBottomWidth.AutoSize = True
+        Me.ucrChkSourcenotesBottomWidth.Checked = False
+        Me.ucrChkSourcenotesBottomWidth.Location = New System.Drawing.Point(15, 51)
+        Me.ucrChkSourcenotesBottomWidth.Name = "ucrChkSourcenotesBottomWidth"
+        Me.ucrChkSourcenotesBottomWidth.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesBottomWidth.TabIndex = 19
+        '
+        'ucrChkSourcenotesBottomStyle
+        '
+        Me.ucrChkSourcenotesBottomStyle.AutoSize = True
+        Me.ucrChkSourcenotesBottomStyle.Checked = False
+        Me.ucrChkSourcenotesBottomStyle.Location = New System.Drawing.Point(15, 20)
+        Me.ucrChkSourcenotesBottomStyle.Name = "ucrChkSourcenotesBottomStyle"
+        Me.ucrChkSourcenotesBottomStyle.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesBottomStyle.TabIndex = 18
+        '
+        'ucrNudSourcenotesFontSize
+        '
+        Me.ucrNudSourcenotesFontSize.AutoSize = True
+        Me.ucrNudSourcenotesFontSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesFontSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSourcenotesFontSize.Location = New System.Drawing.Point(157, 72)
+        Me.ucrNudSourcenotesFontSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSourcenotesFontSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesFontSize.Name = "ucrNudSourcenotesFontSize"
+        Me.ucrNudSourcenotesFontSize.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudSourcenotesFontSize.TabIndex = 48
+        Me.ucrNudSourcenotesFontSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkSourcenotesFontSize
+        '
+        Me.ucrChkSourcenotesFontSize.AutoSize = True
+        Me.ucrChkSourcenotesFontSize.Checked = False
+        Me.ucrChkSourcenotesFontSize.Location = New System.Drawing.Point(13, 72)
+        Me.ucrChkSourcenotesFontSize.Name = "ucrChkSourcenotesFontSize"
+        Me.ucrChkSourcenotesFontSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesFontSize.TabIndex = 50
+        '
+        'ucrChkSourcenotesPadding
+        '
+        Me.ucrChkSourcenotesPadding.AutoSize = True
+        Me.ucrChkSourcenotesPadding.Checked = False
+        Me.ucrChkSourcenotesPadding.Location = New System.Drawing.Point(13, 103)
+        Me.ucrChkSourcenotesPadding.Name = "ucrChkSourcenotesPadding"
+        Me.ucrChkSourcenotesPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesPadding.TabIndex = 51
+        '
+        'ucrChkSourcenotesHorizontalPadding
+        '
+        Me.ucrChkSourcenotesHorizontalPadding.AutoSize = True
+        Me.ucrChkSourcenotesHorizontalPadding.Checked = False
+        Me.ucrChkSourcenotesHorizontalPadding.Location = New System.Drawing.Point(13, 134)
+        Me.ucrChkSourcenotesHorizontalPadding.Name = "ucrChkSourcenotesHorizontalPadding"
+        Me.ucrChkSourcenotesHorizontalPadding.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesHorizontalPadding.TabIndex = 52
+        '
+        'ucrChkSourcenotesMultiline
+        '
+        Me.ucrChkSourcenotesMultiline.AutoSize = True
+        Me.ucrChkSourcenotesMultiline.Checked = False
+        Me.ucrChkSourcenotesMultiline.Location = New System.Drawing.Point(13, 165)
+        Me.ucrChkSourcenotesMultiline.Name = "ucrChkSourcenotesMultiline"
+        Me.ucrChkSourcenotesMultiline.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesMultiline.TabIndex = 53
+        '
+        'ucrChkSourcenotesSeparator
+        '
+        Me.ucrChkSourcenotesSeparator.AutoSize = True
+        Me.ucrChkSourcenotesSeparator.Checked = False
+        Me.ucrChkSourcenotesSeparator.Location = New System.Drawing.Point(13, 196)
+        Me.ucrChkSourcenotesSeparator.Name = "ucrChkSourcenotesSeparator"
+        Me.ucrChkSourcenotesSeparator.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSourcenotesSeparator.TabIndex = 54
+        '
+        'ucrInputSourcenotesMultiline
+        '
+        Me.ucrInputSourcenotesMultiline.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesMultiline.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesMultiline.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesMultiline.IsReadOnly = False
+        Me.ucrInputSourcenotesMultiline.Location = New System.Drawing.Point(157, 165)
+        Me.ucrInputSourcenotesMultiline.Name = "ucrInputSourcenotesMultiline"
+        Me.ucrInputSourcenotesMultiline.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesMultiline.TabIndex = 56
+        '
+        'ucrInputSourcenotesSeparator
+        '
+        Me.ucrInputSourcenotesSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSourcenotesSeparator.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSourcenotesSeparator.GetSetSelectedIndex = -1
+        Me.ucrInputSourcenotesSeparator.IsReadOnly = False
+        Me.ucrInputSourcenotesSeparator.Location = New System.Drawing.Point(157, 196)
+        Me.ucrInputSourcenotesSeparator.Name = "ucrInputSourcenotesSeparator"
+        Me.ucrInputSourcenotesSeparator.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSourcenotesSeparator.TabIndex = 57
+        '
+        'ucrNudFootnotesPadding
+        '
+        Me.ucrNudFootnotesPadding.AutoSize = True
+        Me.ucrNudFootnotesPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFootnotesPadding.Location = New System.Drawing.Point(174, 100)
+        Me.ucrNudFootnotesPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFootnotesPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesPadding.Name = "ucrNudFootnotesPadding"
+        Me.ucrNudFootnotesPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudFootnotesPadding.TabIndex = 53
+        Me.ucrNudFootnotesPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFootnotesHorizontalPadding
+        '
+        Me.ucrNudFootnotesHorizontalPadding.AutoSize = True
+        Me.ucrNudFootnotesHorizontalPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesHorizontalPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFootnotesHorizontalPadding.Location = New System.Drawing.Point(174, 131)
+        Me.ucrNudFootnotesHorizontalPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFootnotesHorizontalPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFootnotesHorizontalPadding.Name = "ucrNudFootnotesHorizontalPadding"
+        Me.ucrNudFootnotesHorizontalPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudFootnotesHorizontalPadding.TabIndex = 54
+        Me.ucrNudFootnotesHorizontalPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSourcenotesPadding
+        '
+        Me.ucrNudSourcenotesPadding.AutoSize = True
+        Me.ucrNudSourcenotesPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSourcenotesPadding.Location = New System.Drawing.Point(157, 103)
+        Me.ucrNudSourcenotesPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSourcenotesPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesPadding.Name = "ucrNudSourcenotesPadding"
+        Me.ucrNudSourcenotesPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudSourcenotesPadding.TabIndex = 58
+        Me.ucrNudSourcenotesPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSourcenotesHorizontalPadding
+        '
+        Me.ucrNudSourcenotesHorizontalPadding.AutoSize = True
+        Me.ucrNudSourcenotesHorizontalPadding.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesHorizontalPadding.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSourcenotesHorizontalPadding.Location = New System.Drawing.Point(157, 134)
+        Me.ucrNudSourcenotesHorizontalPadding.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSourcenotesHorizontalPadding.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSourcenotesHorizontalPadding.Name = "ucrNudSourcenotesHorizontalPadding"
+        Me.ucrNudSourcenotesHorizontalPadding.Size = New System.Drawing.Size(137, 20)
+        Me.ucrNudSourcenotesHorizontalPadding.TabIndex = 59
+        Me.ucrNudSourcenotesHorizontalPadding.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'sdgSummaryThemes
         '
@@ -2434,6 +3082,14 @@ Partial Class sdgSummaryThemes
         Me.grpStubFont.PerformLayout()
         Me.grpStubRowGroup.ResumeLayout(False)
         Me.grpStubRowGroup.PerformLayout()
+        Me.tbpFootnotes.ResumeLayout(False)
+        Me.tbpFootnotes.PerformLayout()
+        Me.grpFootnotesBorder.ResumeLayout(False)
+        Me.grpFootnotesBorder.PerformLayout()
+        Me.tbpSourcenotes.ResumeLayout(False)
+        Me.tbpSourcenotes.PerformLayout()
+        Me.grpSourcenotesBorder.ResumeLayout(False)
+        Me.grpSourcenotesBorder.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2445,8 +3101,8 @@ Partial Class sdgSummaryThemes
     Friend WithEvents tbThemeColumns As TabPage
     Friend WithEvents tbThemeRows As TabPage
     Friend WithEvents tbpStub As TabPage
-    Friend WithEvents TabPage6 As TabPage
-    Friend WithEvents TabPage7 As TabPage
+    Friend WithEvents tbpFootnotes As TabPage
+    Friend WithEvents tbpSourcenotes As TabPage
     Friend WithEvents grpSubTitle As GroupBox
     Friend WithEvents ucrInputSubTitleWeight As ucrInputComboBox
     Friend WithEvents grpTitle As GroupBox
@@ -2630,5 +3286,57 @@ Partial Class sdgSummaryThemes
     Friend WithEvents ucrChkStubTextTransform As ucrCheck
     Friend WithEvents ucrInputStubGroupFontWeight As ucrInputComboBox
     Friend WithEvents ucrInputStubTextTransform As ucrInputComboBox
-    Friend WithEvents ucrInputStubIndentLength As ucrInputComboBox
+    Friend WithEvents ucrChkFootnotesHorizontalPadding As ucrCheck
+    Friend WithEvents ucrChkFootnotesPadding As ucrCheck
+    Friend WithEvents ucrChkFootnotesFontSize As ucrCheck
+    Friend WithEvents ucrChkFootnotesBackColor As ucrCheck
+    Friend WithEvents ucrNudFootnotesFontSize As ucrNud
+    Friend WithEvents ucrInputFootnotesBackColor As ucrColors
+    Friend WithEvents ucrNudStubIndentLength As ucrNud
+    Friend WithEvents ucrInputFootnotesSeparator As ucrInputComboBox
+    Friend WithEvents ucrInputFootnotesMultiline As ucrInputComboBox
+    Friend WithEvents ucrInputFootnotesMarks As ucrInputComboBox
+    Friend WithEvents ucrChkFootnotesSeparator As ucrCheck
+    Friend WithEvents ucrChkFootnotesMultiline As ucrCheck
+    Friend WithEvents ucrChkFootnotesMarks As ucrCheck
+    Friend WithEvents grpFootnotesBorder As GroupBox
+    Friend WithEvents ucrInputFootnotesBottomStyle As ucrInputComboBox
+    Friend WithEvents ucrInputFootnotesSideStyle As ucrInputComboBox
+    Friend WithEvents ucrInputFootnotesSideColor As ucrColors
+    Friend WithEvents ucrNudFootnotesSideWidth As ucrNud
+    Friend WithEvents ucrNudFootnotesBottomWidth As ucrNud
+    Friend WithEvents ucrChkFootnotesSideColor As ucrCheck
+    Friend WithEvents ucrChkFootnotesSideWidth As ucrCheck
+    Friend WithEvents ucrChkFootnotesSideStyle As ucrCheck
+    Friend WithEvents ucrChkFootnotesBottomColor As ucrCheck
+    Friend WithEvents ucrChkFootnotesBottomWidth As ucrCheck
+    Friend WithEvents ucrChkFootnotesBottomStyles As ucrCheck
+    Friend WithEvents ucrInputFootnotesBottomColor As ucrColors
+    Friend WithEvents ucrInputSourcenotesSeparator As ucrInputComboBox
+    Friend WithEvents ucrInputSourcenotesMultiline As ucrInputComboBox
+    Friend WithEvents ucrChkSourcenotesSeparator As ucrCheck
+    Friend WithEvents ucrChkSourcenotesMultiline As ucrCheck
+    Friend WithEvents ucrChkSourcenotesHorizontalPadding As ucrCheck
+    Friend WithEvents ucrChkSourcenotesPadding As ucrCheck
+    Friend WithEvents ucrChkSourcenotesFontSize As ucrCheck
+    Friend WithEvents ucrNudSourcenotesFontSize As ucrNud
+    Friend WithEvents grpSourcenotesBorder As GroupBox
+    Friend WithEvents ucrInputSourcenotesBottomColor As ucrColors
+    Friend WithEvents ucrInputSourcenotesBottomStyle As ucrInputComboBox
+    Friend WithEvents ucrInputSourcenotesSideStyle As ucrInputComboBox
+    Friend WithEvents ucrInputSourcenotesSideColor As ucrColors
+    Friend WithEvents ucrNudSourcenotesSideWidth As ucrNud
+    Friend WithEvents ucrNudSourcenotesBottomWidth As ucrNud
+    Friend WithEvents ucrChkSourcenotesSideColor As ucrCheck
+    Friend WithEvents ucrChkSourcenotesSideWidth As ucrCheck
+    Friend WithEvents ucrChkSourcenotesSideStyle As ucrCheck
+    Friend WithEvents ucrChkSourcenotesBottomColor As ucrCheck
+    Friend WithEvents ucrChkSourcenotesBottomWidth As ucrCheck
+    Friend WithEvents ucrChkSourcenotesBottomStyle As ucrCheck
+    Friend WithEvents ucrChkSourcenotesBackColor As ucrCheck
+    Friend WithEvents ucrInputSourcenotesBackColor As ucrColors
+    Friend WithEvents ucrNudFootnotesHorizontalPadding As ucrNud
+    Friend WithEvents ucrNudFootnotesPadding As ucrNud
+    Friend WithEvents ucrNudSourcenotesHorizontalPadding As ucrNud
+    Friend WithEvents ucrNudSourcenotesPadding As ucrNud
 End Class

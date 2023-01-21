@@ -236,9 +236,9 @@ Public Class dlgSummaryTables
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
-        clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=0)
-        clsDummyFunction.AddParameter("check", "select", iPosition:=1)
-        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=2)
+        clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
+        clsDummyFunction.AddParameter("check", "select", iPosition:=11)
+        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=12)
 
         clsSummaryOperator.SetOperation("+")
 

@@ -26,7 +26,8 @@ Public Class sdgSummaryThemes
     End Sub
 
     Private Sub InitialiseControls()
-        Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform, dctLayouts, dctFontNames As New Dictionary(Of String, String)
+        Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform, dctLayouts, dctFontNames, dctFootnotesMarks,
+        dctFootnotesMultiline As New Dictionary(Of String, String)
 
         dctWeights.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctWeights.Add("Normal", Chr(34) & "normal" & Chr(34))
@@ -58,7 +59,7 @@ Public Class sdgSummaryThemes
         dctLayouts.Add("Auto", Chr(34) & "auto" & Chr(34))
         dctLayouts.Add("Fixed", Chr(34) & "fixed" & Chr(34))
 
-        dctFontNames.Add("Null", Chr(34) & "NULL" & Chr(34))
+        dctFontNames.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctFontNames.Add("Apple system", Chr(34) & "-apple-system" & Chr(34))
         dctFontNames.Add("Cantarell", Chr(34) & "Cantarell" & Chr(34))
         dctFontNames.Add("Helvetica Neue", Chr(34) & "Helvetica Neue" & Chr(34))
@@ -71,6 +72,18 @@ Public Class sdgSummaryThemes
         dctFontNames.Add("Droid Sans", Chr(34) & "Droid Sans" & Chr(34))
         dctFontNames.Add("Arial", Chr(34) & "Arial" & Chr(34))
         dctFontNames.Add("Sans-serif", Chr(34) & "Sans-serif" & Chr(34))
+
+        dctFootnotesMarks.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctFootnotesMarks.Add("Numbers", Chr(34) & "numbers" & Chr(34))
+        dctFootnotesMarks.Add("letters", Chr(34) & "letters" & Chr(34))
+        dctFootnotesMarks.Add("LETTERS", Chr(34) & "LETTERS" & Chr(34))
+        dctFootnotesMarks.Add("Standard", Chr(34) & "standard" & Chr(34))
+        dctFootnotesMarks.Add("Extended", Chr(34) & "extended" & Chr(34))
+
+        dctFootnotesMultiline.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctFootnotesMultiline.Add("True", Chr(34) & "TRUE" & Chr(34))
+        dctFootnotesMultiline.Add("False", Chr(34) & "FALSE" & Chr(34))
+
         'Titles
         ucrChkBackgroundColour.SetText("Background Colour")
         ucrInputBackgroundColour.SetParameter(New RParameter("heading.background.color"))
@@ -559,8 +572,8 @@ Public Class sdgSummaryThemes
         ucrChkStubBackColor.AddParameterPresentCondition(False, "stub.background.color", False)
 
         ucrChkStubIndentLength.SetText("Indent Length")
-        ucrInputStubIndentLength.SetParameter(New RParameter("stub.indent_length"))
-        ' ucrInputStubIndentLength.SetItems(dctTextTransform)
+        ucrNudStubIndentLength.SetParameter(New RParameter("stub.indent_length"))
+        ucrNudStubIndentLength.SetRDefault(0)
         ucrChkStubIndentLength.AddParameterPresentCondition(True, "stub.indent_length")
         ucrChkStubIndentLength.AddParameterPresentCondition(False, "stub.indent_length", False)
 
@@ -636,7 +649,7 @@ Public Class sdgSummaryThemes
 
         ucrChkStubBackColor.AddToLinkedControls(ucrInputStubBackColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkStubTextTransform.AddToLinkedControls(ucrInputStubTextTransform, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
-        ucrChkStubIndentLength.AddToLinkedControls(ucrInputStubIndentLength, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkStubIndentLength.AddToLinkedControls(ucrNudStubIndentLength, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkStubFontSize.AddToLinkedControls(ucrNudStubFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkStubFontWeight.AddToLinkedControls(ucrInputStubFontWeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkStubBorderColor.AddToLinkedControls(ucrInputStubBorderColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
@@ -648,6 +661,180 @@ Public Class sdgSummaryThemes
         ucrChkStubGroupBorderColor.AddToLinkedControls(ucrInputStubGroupBorderColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkStubGroupBorderStyle.AddToLinkedControls(ucrInputStubGroupBorderStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrChkStubGroupBorderWidth.AddToLinkedControls(ucrNudStubGroupBorderWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+
+        'Footnotes
+        ucrChkFootnotesBackColor.SetText("Background Color")
+        ucrInputFootnotesBackColor.SetParameter(New RParameter("footnotes.background.color"))
+        ucrChkFootnotesBackColor.AddParameterPresentCondition(True, "footnotes.background.color")
+        ucrChkFootnotesBackColor.AddParameterPresentCondition(False, "footnotes.background.color", False)
+
+        ucrChkFootnotesPadding.SetText("Vertical Padding")
+        ucrNudFootnotesPadding.SetParameter(New RParameter("footnotes.padding"))
+        ucrNudFootnotesPadding.SetRDefault(0)
+        ucrChkFootnotesPadding.AddParameterPresentCondition(True, "footnotes.padding")
+        ucrChkFootnotesPadding.AddParameterPresentCondition(False, "footnotes.padding", False)
+
+        ucrChkFootnotesHorizontalPadding.SetText("Horizontal Padding")
+        ucrNudFootnotesHorizontalPadding.SetParameter(New RParameter("footnotes.padding.horizontal"))
+        ucrNudFootnotesHorizontalPadding.SetRDefault(0)
+        ucrChkFootnotesHorizontalPadding.AddParameterPresentCondition(True, "footnotes.padding.horizontal")
+        ucrChkFootnotesHorizontalPadding.AddParameterPresentCondition(False, "footnotes.padding.horizontal", False)
+
+        ucrChkFootnotesFontSize.SetText("Font Size")
+        ucrNudFootnotesFontSize.SetParameter(New RParameter("footnotes.font.size"))
+        ucrNudFootnotesFontSize.SetRDefault(0)
+        ucrChkFootnotesFontSize.AddParameterPresentCondition(True, "footnotes.font.size")
+        ucrChkFootnotesFontSize.AddParameterPresentCondition(False, "footnotes.font.size", False)
+
+        ucrChkFootnotesMarks.SetText("Footnotes Marks")
+        ucrInputFootnotesMarks.SetParameter(New RParameter("footnotes.marks"))
+        ucrInputFootnotesMarks.SetItems(dctFootnotesMarks)
+        ucrChkFootnotesMarks.AddParameterPresentCondition(True, "footnotes.marks")
+        ucrChkFootnotesMarks.AddParameterPresentCondition(False, "footnotes.marks", False)
+
+        ucrChkFootnotesMultiline.SetText("Footnotes Multiline")
+        ucrInputFootnotesMultiline.SetParameter(New RParameter("footnotes.marks"))
+        ucrInputFootnotesMultiline.SetItems(dctFootnotesMultiline)
+        ucrChkFootnotesMultiline.AddParameterPresentCondition(True, "footnotes.marks")
+        ucrChkFootnotesMultiline.AddParameterPresentCondition(False, "footnotes.marks", False)
+
+        ucrChkFootnotesSeparator.SetText("Footnotes Separator")
+        ucrInputFootnotesSeparator.SetParameter(New RParameter("footnotes.marks"))
+        ' ucrInputFootnotesSeparator.SetItems(dctFootnotesMarks)
+        ucrChkFootnotesSeparator.AddParameterPresentCondition(True, "footnotes.marks")
+        ucrChkFootnotesSeparator.AddParameterPresentCondition(False, "footnotes.marks", False)
+
+        ucrChkFootnotesBottomWidth.SetText("Width of bottom border")
+        ucrNudFootnotesBottomWidth.SetParameter(New RParameter("footnotes.border.bottom.width"))
+        ucrNudFootnotesBottomWidth.SetRDefault(0)
+        ucrChkFootnotesBottomWidth.AddParameterPresentCondition(True, "footnotes.border.bottom.width")
+        ucrChkFootnotesBottomWidth.AddParameterPresentCondition(False, "footnotes.border.bottom.width", False)
+
+        ucrChkFootnotesBottomStyles.SetText("Style of bottom border")
+        ucrInputFootnotesBottomStyle.SetParameter(New RParameter("footnotes.border.bottom.style"))
+        ucrInputFootnotesBottomStyle.SetItems(dctBorderStyles)
+        ucrChkFootnotesBottomStyles.AddParameterPresentCondition(True, "footnotes.border.bottom.style")
+        ucrChkFootnotesBottomStyles.AddParameterPresentCondition(False, "footnotes.border.bottom.style", False)
+
+        ucrChkFootnotesBottomColor.SetText("Color of bottom border")
+        ucrInputFootnotesBottomColor.SetParameter(New RParameter("footnotes.border.bottom.color"))
+        ucrChkFootnotesBottomColor.AddParameterPresentCondition(True, "footnotes.border.bottom.color")
+        ucrChkFootnotesBottomColor.AddParameterPresentCondition(False, "footnotes.border.bottom.color", False)
+
+        ucrChkFootnotesSideWidth.SetText("Width of side border")
+        ucrNudFootnotesSideWidth.SetParameter(New RParameter("footnotes.border.lr.width"))
+        ucrNudFootnotesSideWidth.SetRDefault(0)
+        ucrChkFootnotesSideWidth.AddParameterPresentCondition(True, "footnotes.border.lr.width")
+        ucrChkFootnotesSideWidth.AddParameterPresentCondition(False, "footnotes.border.lr.width", False)
+
+        ucrChkFootnotesSideStyle.SetText("Style of side border")
+        ucrInputFootnotesSideStyle.SetParameter(New RParameter("footnotes.border.lr.style"))
+        ucrInputFootnotesSideStyle.SetItems(dctBorderStyles)
+        ucrChkFootnotesSideStyle.AddParameterPresentCondition(True, "footnotes.border.lr.style")
+        ucrChkSideStyle.AddParameterPresentCondition(False, "footnotes.border.lr.style", False)
+
+        ucrChkFootnotesSideColor.SetText("Colour of side border")
+        ucrInputFootnotesSideColor.SetParameter(New RParameter("footnotes.border.lr.colour"))
+        ucrChkFootnotesSideColor.AddParameterPresentCondition(True, "footnotes.border.lr.colour")
+        ucrChkFootnotesSideColor.AddParameterPresentCondition(False, "footnotes.border.lr.colour", False)
+
+        ucrChkFootnotesBackColor.AddToLinkedControls(ucrInputFootnotesBackColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesMarks.AddToLinkedControls(ucrInputFootnotesMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesFontSize.AddToLinkedControls(ucrNudFootnotesFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesMultiline.AddToLinkedControls(ucrInputFootnotesMultiline, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesSeparator.AddToLinkedControls(ucrInputFootnotesSeparator, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesPadding.AddToLinkedControls(ucrNudFootnotesPadding, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesHorizontalPadding.AddToLinkedControls(ucrNudFootnotesHorizontalPadding, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesBottomWidth.AddToLinkedControls(ucrNudFootnotesBottomWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesBottomStyles.AddToLinkedControls(ucrInputFootnotesBottomStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesBottomColor.AddToLinkedControls(ucrInputFootnotesBottomColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesSideWidth.AddToLinkedControls(ucrNudFootnotesSideWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesSideStyle.AddToLinkedControls(ucrInputFootnotesSideStyle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesSideColor.AddToLinkedControls(ucrInputFootnotesSideColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+
+        'Sourcenotes
+        ucrChkSourcenotesBackColor.SetText("Background Color")
+        ucrInputSourcenotesBackColor.SetParameter(New RParameter("sourcenotes.background.color"))
+        ucrChkSourcenotesBackColor.AddParameterPresentCondition(True, "sourcenotes.background.color")
+        ucrChkSourcenotesBackColor.AddParameterPresentCondition(False, "sourcenotes.background.color", False)
+
+        ucrChkSourcenotesPadding.SetText("Vertical Padding")
+        ucrNudSourcenotesPadding.SetParameter(New RParameter("sourcenotes.padding"))
+        ucrNudSourcenotesPadding.SetRDefault(0)
+        ucrChkSourcenotesPadding.AddParameterPresentCondition(True, "sourcenotes.padding")
+        ucrChkSourcenotesPadding.AddParameterPresentCondition(False, "sourcenotes.padding", False)
+
+        ucrChkSourcenotesHorizontalPadding.SetText("Horizontal Padding")
+        ucrNudSourcenotesHorizontalPadding.SetParameter(New RParameter("sourcenotes.padding.horizontal"))
+        ucrNudSourcenotesHorizontalPadding.SetRDefault(0)
+        ucrChkSourcenotesHorizontalPadding.AddParameterPresentCondition(True, "sourcenotes.padding.horizontal")
+        ucrChkSourcenotesHorizontalPadding.AddParameterPresentCondition(False, "sourcenotes.padding.horizontal", False)
+
+        ucrChkSourcenotesFontSize.SetText("Font Size")
+        ucrNudSourcenotesFontSize.SetParameter(New RParameter("sourcenotes.font.size"))
+        ucrNudSourcenotesFontSize.SetRDefault(0)
+        ucrChkSourcenotesFontSize.AddParameterPresentCondition(True, "sourcenotes.font.size")
+        ucrChkSourcenotesFontSize.AddParameterPresentCondition(False, "sourcenotes.font.size", False)
+
+        ucrChkSourcenotesMultiline.SetText("Source notes Multiline")
+        ucrInputSourcenotesMultiline.SetParameter(New RParameter("sourcenotes.marks"))
+        ucrInputSourcenotesMultiline.SetItems(dctFootnotesMultiline)
+        ucrChkSourcenotesMultiline.AddParameterPresentCondition(True, "sourcenotes.marks")
+        ucrChkSourcenotesMultiline.AddParameterPresentCondition(False, "sourcenotes.marks", False)
+
+        ucrChkSourcenotesSeparator.SetText("Source notes Separator")
+        ucrInputSourcenotesSeparator.SetParameter(New RParameter("sourcenotes.marks"))
+        ' ucrInputFootnotesSeparator.SetItems(dctFootnotesMarks)
+        ucrChkSourcenotesSeparator.AddParameterPresentCondition(True, "sourcenotes.marks")
+        ucrChkSourcenotesSeparator.AddParameterPresentCondition(False, "sourcenotes.marks", False)
+
+        ucrChkSourcenotesBottomWidth.SetText("Width of bottom border")
+        ucrNudSourcenotesBottomWidth.SetParameter(New RParameter("sourcenotes.border.bottom.width"))
+        ucrNudSourcenotesBottomWidth.SetRDefault(0)
+        ucrChkSourcenotesBottomWidth.AddParameterPresentCondition(True, "sourcenotes.border.bottom.width")
+        ucrChkSourcenotesBottomWidth.AddParameterPresentCondition(False, "sourcenotes.border.bottom.width", False)
+
+        ucrChkSourcenotesBottomStyle.SetText("Style of bottom border")
+        ucrInputSourcenotesBottomStyle.SetParameter(New RParameter("sourcenotes.border.bottom.style"))
+        ucrInputSourcenotesBottomStyle.SetItems(dctBorderStyles)
+        ucrChkSourcenotesBottomStyle.AddParameterPresentCondition(True, "sourcenotes.border.bottom.style")
+        ucrChkSourcenotesBottomStyle.AddParameterPresentCondition(False, "sourcenotes.border.bottom.style", False)
+
+        ucrChkFootnotesBottomColor.SetText("Color of bottom border")
+        ucrInputFootnotesBottomColor.SetParameter(New RParameter("sourcenotes.border.bottom.color"))
+        ucrChkFootnotesBottomColor.AddParameterPresentCondition(True, "sourcenotes.border.bottom.color")
+        ucrChkFootnotesBottomColor.AddParameterPresentCondition(False, "sourcenotes.border.bottom.color", False)
+
+        ucrChkFootnotesSideWidth.SetText("Width of side border")
+        ucrNudFootnotesSideWidth.SetParameter(New RParameter("sourcenotes.border.lr.width"))
+        ucrNudFootnotesSideWidth.SetRDefault(0)
+        ucrChkFootnotesSideWidth.AddParameterPresentCondition(True, "sourcenotes.border.lr.width")
+        ucrChkFootnotesSideWidth.AddParameterPresentCondition(False, "sourcenotes.border.lr.width", False)
+
+        ucrChkFootnotesSideStyle.SetText("Style of side border")
+        ucrInputFootnotesSideStyle.SetParameter(New RParameter("sourcenotes.border.lr.style"))
+        ucrInputFootnotesSideStyle.SetItems(dctBorderStyles)
+        ucrChkFootnotesSideStyle.AddParameterPresentCondition(True, "sourcenotes.border.lr.style")
+        ucrChkSideStyle.AddParameterPresentCondition(False, "sourcenotes.border.lr.style", False)
+
+        ucrChkFootnotesSideColor.SetText("Colour of side border")
+        ucrInputFootnotesSideColor.SetParameter(New RParameter("footnotes.border.lr.colour"))
+        ucrChkFootnotesSideColor.AddParameterPresentCondition(True, "footnotes.border.lr.colour")
+        ucrChkFootnotesSideColor.AddParameterPresentCondition(False, "footnotes.border.lr.colour", False)
+
+        ucrChkFootnotesBackColor.AddToLinkedControls(ucrInputFootnotesBackColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesMarks.AddToLinkedControls(ucrInputFootnotesMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesFontSize.AddToLinkedControls(ucrNudFootnotesFontSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesMultiline.AddToLinkedControls(ucrInputFootnotesMultiline, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesSeparator.AddToLinkedControls(ucrInputFootnotesSeparator, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesPadding.AddToLinkedControls(ucrNudFootnotesPadding, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesHorizontalPadding.AddToLinkedControls(ucrNudFootnotesHorizontalPadding, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesBottomWidth.AddToLinkedControls(ucrNudFootnotesBottomWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesBottomStyles.AddToLinkedControls(ucrInputFootnotesBottomStyle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesBottomColor.AddToLinkedControls(ucrInputFootnotesBottomColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesSideWidth.AddToLinkedControls(ucrNudFootnotesSideWidth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFootnotesSideStyle.AddToLinkedControls(ucrInputFootnotesSideStyle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
+        ucrChkFootnotesSideColor.AddToLinkedControls(ucrInputFootnotesSideColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
 
     End Sub
 
@@ -814,7 +1001,7 @@ Public Class sdgSummaryThemes
         ucrChkStubBackColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStubBackColor.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkStubIndentLength.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputStubIndentLength.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudStubIndentLength.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkStubTextTransform.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputStubTextTransform.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkStubFontWeight.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
@@ -841,4 +1028,5 @@ Public Class sdgSummaryThemes
         ucrNudStubGroupBorderWidth.SetRCode(clsThemesTabOptionsFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
     End Sub
+
 End Class
