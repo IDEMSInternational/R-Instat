@@ -59,16 +59,22 @@ Partial Class ucrScript
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.txtScript = New ScintillaNET.Scintilla()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel = New System.Windows.Forms.Panel()
+        Me.cmdAddTab = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
+        Me.TabControl = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtScript = New ScintillaNET.Scintilla()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.Panel.SuspendLayout()
+        Me.TabControl.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuContextScript
@@ -202,9 +208,9 @@ Partial Class ucrScript
         '
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.Panel2, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.Panel, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.TabControl, 0, 2)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
@@ -212,34 +218,33 @@ Partial Class ucrScript
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 225.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(411, 500)
         Me.tlpTableContainer.TabIndex = 9
         '
-        'txtScript
+        'Panel
         '
-        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
-        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtScript.Lexer = ScintillaNET.Lexer.R
-        Me.txtScript.Location = New System.Drawing.Point(3, 56)
-        Me.txtScript.Name = "txtScript"
-        Me.txtScript.Size = New System.Drawing.Size(405, 255)
-        Me.txtScript.TabIndex = 13
-        Me.txtScript.TabWidth = 2
+        Me.Panel.Controls.Add(Me.cmdAddTab)
+        Me.Panel.Controls.Add(Me.cmdHelp)
+        Me.Panel.Controls.Add(Me.cmdClear)
+        Me.Panel.Controls.Add(Me.cmdRunAll)
+        Me.Panel.Controls.Add(Me.cmdRunLineSelection)
+        Me.Panel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel.Location = New System.Drawing.Point(3, 23)
+        Me.Panel.Name = "Panel"
+        Me.Panel.Size = New System.Drawing.Size(405, 27)
+        Me.Panel.TabIndex = 10
         '
-        'Panel2
+        'cmdAddTab
         '
-        Me.Panel2.Controls.Add(Me.cmdHelp)
-        Me.Panel2.Controls.Add(Me.cmdClear)
-        Me.Panel2.Controls.Add(Me.cmdRunAll)
-        Me.Panel2.Controls.Add(Me.cmdRunLineSelection)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 23)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(405, 27)
-        Me.Panel2.TabIndex = 10
+        Me.cmdAddTab.Location = New System.Drawing.Point(222, 0)
+        Me.cmdAddTab.Name = "cmdAddTab"
+        Me.cmdAddTab.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAddTab.TabIndex = 6
+        Me.cmdAddTab.Text = "Add Tab"
+        Me.cmdAddTab.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
@@ -280,6 +285,52 @@ Partial Class ucrScript
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
         '
+        'TabControl
+        '
+        Me.TabControl.Controls.Add(Me.TabPage1)
+        Me.TabControl.Controls.Add(Me.TabPage2)
+        Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl.Location = New System.Drawing.Point(3, 56)
+        Me.TabControl.Name = "TabControl"
+        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.Size = New System.Drawing.Size(405, 441)
+        Me.TabControl.TabIndex = 14
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.txtScript)
+        Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(397, 415)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Log"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'txtScript
+        '
+        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
+        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtScript.Lexer = ScintillaNET.Lexer.R
+        Me.txtScript.Location = New System.Drawing.Point(3, 3)
+        Me.txtScript.Name = "txtScript"
+        Me.txtScript.Size = New System.Drawing.Size(391, 409)
+        Me.txtScript.TabIndex = 14
+        Me.txtScript.TabWidth = 2
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage2.ForeColor = System.Drawing.SystemColors.GrayText
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Size = New System.Drawing.Size(397, 415)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "<unsaved>"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -287,11 +338,13 @@ Partial Class ucrScript
         Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrScript"
-        Me.Size = New System.Drawing.Size(411, 314)
+        Me.Size = New System.Drawing.Size(411, 500)
         Me.Tag = "Script_Window"
         Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
+        Me.Panel.ResumeLayout(False)
+        Me.TabControl.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -309,17 +362,21 @@ Partial Class ucrScript
     Friend WithEvents mnuRunCurrentLineSelection As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel As Panel
     Friend WithEvents cmdRunAll As Button
     Friend WithEvents cmdRunLineSelection As Button
     Friend WithEvents tooltiptScriptWindow As ToolTip
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents txtScript As ScintillaNET.Scintilla
     Friend WithEvents mnuUndo As ToolStripMenuItem
     Friend WithEvents mnuRedo As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuSelectAll As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents TabControl As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents txtScript As ScintillaNET.Scintilla
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents cmdAddTab As Button
 End Class

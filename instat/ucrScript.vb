@@ -499,4 +499,8 @@ Public Class ucrScript
     Private Sub txtScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles txtScript.UpdateUI
         HighlightPairedBracket()
     End Sub
+
+    Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
+        TabControl.TabPages.Add("unsaved")
+    End Sub
 End Class
