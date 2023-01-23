@@ -176,17 +176,18 @@ Public Class dlgThreeVariableFrequencies
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
         clsTableBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=3)
         clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTabFunction, iPosition:=4)
-        clsTableBaseOperator.SetAssignToOutputObject("last_table",
-                                                     RObjectTypeLabel.Table,
-                                                     RObjectFormat.Html,
-                                                     ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
-                                                     "last_table")
+        clsTableBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                     strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                     strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                     strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
+                                                     strObjectName:="last_table")
 
         clsGraphBaseOperator.SetOperation("%>%")
+        'iPosition should follow in the folowing order for this operator
         clsGraphBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
         clsGraphBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
         clsGraphBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=3)
-        clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlotFunction, iPosition:=3)
+        clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlotFunction, iPosition:=4)
 
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
@@ -209,14 +210,17 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlotFunction.AddParameter("show.n", "TRUE")
 
         clsGridArrangeFunction.SetPackageName("gridExtra")
-        clsGridArrangeFunction.SetRCommand("grid.arrange")
+        'use arrangeGrob() instead of grid.arrange() because arrangeGrob() returns a grob without drawing on the current device.
+        'read package ocumentation for more information
+        'clsGridArrangeFunction.SetRCommand("grid.arrange") 'left here for future reference only
+        clsGridArrangeFunction.SetRCommand("arrangeGrob")
         clsGridArrangeFunction.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
 
-        clsGridArrangeFunction.SetAssignToOutputObject("last_graph",
-                                          RObjectTypeLabel.Graph,
-                                          RObjectFormat.Image,
-                                          ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
-                                          "last_graph")
+        clsGridArrangeFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                                       strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                                       strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                                       strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
+                                                       strObjectName:="last_graph")
 
 
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
@@ -297,18 +301,17 @@ Public Class dlgThreeVariableFrequencies
         End If
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strGraph As String
-        Dim strTempScript As String = ""
-        'Dim bIsAssigned As Boolean
-        'Dim bToBeAssigned As Boolean
-        'Dim strAssignTo As String
+    'todo. Both option disabled
+    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    Dim strGraph As String
+    '    Dim strTempScript As String = ""
 
-        If rdoBoth.Checked Then
-            strGraph = clsGridArrangeFunction.ToScript(strTempScript)
-            frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
-        End If
-    End Sub
+
+    '    If rdoBoth.Checked Then
+    '        strGraph = clsGridArrangeFunction.ToScript(strTempScript)
+    '        frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
+    '    End If
+    'End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgTwoWayFrequencies.SetRCode(clsSjTabFunction, clsSjPlotFunction, clsGraphBaseOperator, bResetSubdialog, bNewUseTitle:=False)

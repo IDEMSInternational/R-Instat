@@ -31,7 +31,6 @@ Public Class dlgColumnStructure
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        SetColumnStructureInReceiver()
         TestOKEnabled()
         autoTranslate(Me)
     End Sub

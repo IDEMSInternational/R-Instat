@@ -41,6 +41,7 @@ Public Class frmMain
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -76,7 +77,7 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-
+        Logger.Info("R-Instat started")
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -1513,11 +1514,6 @@ Public Class frmMain
         ucrColumnMeta.SetCurrentDataFrame(iIndex)
     End Sub
 
-    Public Sub ReOrderWorkSheets()
-        ucrDataViewer.ReOrderWorkSheets()
-        ucrColumnMeta.ReOrderWorkSheets()
-    End Sub
-
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
@@ -2116,7 +2112,9 @@ Public Class frmMain
         clsViewObjectFunction.SetRCommand("view_object")
         clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsLastGraph)
         clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
-        clsRLink.RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bAddOutputInViewer:=False, bSeparateThread:=False)
+
+        'todo. should this script be logged?
+        clsRLink.RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bAddOutputInInternalViewer:=False, bSeparateThread:=False)
 
     End Sub
 
@@ -2137,7 +2135,8 @@ Public Class frmMain
         clsViewObjectFunction.AddParameter("object", clsRFunctionParameter:=clsInteractivePlot)
         clsViewObjectFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
-        clsRLink.RunScript(clsViewObjectFunction.ToScript(), strComment:="View last graph as plotly", bAddOutputInViewer:=False, bSeparateThread:=False)
+        'todo. should this script be logged?
+        clsRLink.RunScript(clsViewObjectFunction.ToScript(), strComment:="View last graph as plotly", bAddOutputInInternalViewer:=False, bSeparateThread:=False)
 
     End Sub
 
@@ -2147,11 +2146,16 @@ Public Class frmMain
         clsLastGraph.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object")
         clsLastGraph.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
         clsLastGraph.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+        clsLastGraph.SetAssignToObject("last_graph")
 
         clsPrintGraph.SetRCommand("print")
         clsPrintGraph.AddParameter("x", clsRFunctionParameter:=clsLastGraph, iPosition:=0)
 
-        clsRLink.RunScript(clsPrintGraph.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False)
+        Dim strScript1 As String = ""
+        Dim strScript2 As String = clsPrintGraph.ToScript(strScript1)
+
+        'todo. should this script be logged?
+        clsRLink.RunScript(strScript1 & strScript2, strComment:="View last graph in R viewer", bSeparateThread:=False)
 
     End Sub
 

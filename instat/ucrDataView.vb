@@ -118,6 +118,7 @@ Public Class ucrDataView
 
     Private Sub AddAndUpdateWorksheets()
         Dim firstAddedWorksheet As clsWorksheetAdapter = Nothing
+        Dim strCurrWorksheet As String = GetCurrentDataFrameNameFocus()
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim worksheet As clsWorksheetAdapter = _grid.GetWorksheet(clsDataFrame.strName)
             If worksheet Is Nothing Then
@@ -128,6 +129,9 @@ Public Class ucrDataView
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
+        If strCurrWorksheet IsNot Nothing Then
+            _grid.ReOrderWorksheets(strCurrWorksheet)
+        End If
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
@@ -230,19 +234,13 @@ Public Class ucrDataView
     End Sub
 
     Public Sub CurrentWorksheetChanged()
-        If GetWorkSheetCount() <> 0 Then
-            frmMain.ucrColumnMeta.SetCurrentDataFrame(_grid.CurrentWorksheet.Name)
-        End If
+        frmMain.ucrColumnMeta.SetCurrentDataFrame(GetCurrentDataFrameNameFocus())
         RefreshDisplayInformation()
     End Sub
 
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
-
-    Public Sub ReOrderWorkSheets()
-        _grid.ReOrderWorksheets()
-    End Sub
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
@@ -328,6 +326,7 @@ Public Class ucrDataView
         Dim dblValue As Double
         Dim iValue As Integer
         Dim bWithQuotes As Boolean
+        Dim bListOfVector = False
 
         If strNewValue = "NA" Then
             bWithQuotes = False
@@ -354,6 +353,14 @@ Public Class ucrDataView
                         MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                         Exit Sub
                     End If
+                Case "list"
+                    If strNewValue.Split(",").All(Function(x) Integer.TryParse(x, iValue) Or Double.TryParse(x, dblValue) Or Trim(x) = "NA") Then
+                        bWithQuotes = False
+                        bListOfVector = strNewValue.Contains(",")
+                    Else
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: a list of numeric and numeric vector. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        Exit Sub
+                    End If
                 Case Else
                     If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
                         bWithQuotes = False
@@ -363,7 +370,7 @@ Public Class ucrDataView
             End Select
         End If
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes)
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes, bListOfVector)
         EndWait()
     End Sub
 
