@@ -130,7 +130,7 @@ Public Class ucrReceiver
 
     End Sub
 
-    Public Overridable Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
+    Public Overridable Sub RemoveAnyVariablesNotInList()
 
     End Sub
 
