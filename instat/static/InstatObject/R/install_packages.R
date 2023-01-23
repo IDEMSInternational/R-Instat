@@ -139,6 +139,8 @@ pkgs <-
     "vcdExtra",
     # For inspect, read, edit and run files for 'APSIM'
     "apsimx"
+    #Find rational approximations to the components of a real numeric object using a standard continued fraction method.
+    "MASS"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
