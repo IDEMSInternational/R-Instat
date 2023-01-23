@@ -709,7 +709,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkAddLabelsText.Checked = False
         Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(10, 428)
         Me.ucrChkAddLabelsText.Name = "ucrChkAddLabelsText"
-        Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkAddLabelsText.TabIndex = 46
         '
         'ucrPnlPolar
@@ -737,7 +737,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkStart.Checked = False
         Me.ucrChkStart.Location = New System.Drawing.Point(10, 332)
         Me.ucrChkStart.Name = "ucrChkStart"
-        Me.ucrChkStart.Size = New System.Drawing.Size(63, 23)
+        Me.ucrChkStart.Size = New System.Drawing.Size(108, 23)
         Me.ucrChkStart.TabIndex = 28
         '
         'ucrInputStart
@@ -757,7 +757,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkLayout.Checked = False
         Me.ucrChkLayout.Location = New System.Drawing.Point(10, 356)
         Me.ucrChkLayout.Name = "ucrChkLayout"
-        Me.ucrChkLayout.Size = New System.Drawing.Size(63, 23)
+        Me.ucrChkLayout.Size = New System.Drawing.Size(108, 24)
         Me.ucrChkLayout.TabIndex = 35
         '
         'ucrChkFlipCoordinates
@@ -775,7 +775,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkAddLabelsTreemap.Checked = False
         Me.ucrChkAddLabelsTreemap.Location = New System.Drawing.Point(10, 380)
         Me.ucrChkAddLabelsTreemap.Name = "ucrChkAddLabelsTreemap"
-        Me.ucrChkAddLabelsTreemap.Size = New System.Drawing.Size(83, 23)
+        Me.ucrChkAddLabelsTreemap.Size = New System.Drawing.Size(129, 24)
         Me.ucrChkAddLabelsTreemap.TabIndex = 61
         '
         'ucrChkBacktoback
@@ -876,7 +876,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.ucrChkIncreaseSize)
         Me.Controls.Add(Me.ucrInputAddReorder)
-        Me.Controls.Add(Me.ucrChkAddLabelsText)
         Me.Controls.Add(Me.lblLabelPosition)
         Me.Controls.Add(Me.ucrPnlPolar)
         Me.Controls.Add(Me.ucrInputLabelColour)
@@ -884,7 +883,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrInputStart)
         Me.Controls.Add(Me.ucrChkLayout)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
-        Me.Controls.Add(Me.ucrChkAddLabelsTreemap)
         Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.ucrChkPolarCoordinates)
         Me.Controls.Add(Me.lblWordcloudLabel)
@@ -892,6 +890,8 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
         Me.Controls.Add(Me.lblXvariable)
         Me.Controls.Add(Me.ucrReceiverWordcloudAngle)
+        Me.Controls.Add(Me.ucrChkAddLabelsText)
+        Me.Controls.Add(Me.ucrChkAddLabelsTreemap)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

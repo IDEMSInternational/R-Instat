@@ -413,7 +413,8 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       } else { 
         out <- out[1:max_rows, ]  
       }
-    } 
+    }
+
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE) 
       scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)

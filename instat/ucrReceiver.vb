@@ -130,6 +130,10 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Overridable Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
+
+    End Sub
+
     Public Property strNcFilePath As String
         Get
             Return strPrvNcFilePath
