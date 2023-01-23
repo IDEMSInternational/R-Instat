@@ -87,7 +87,7 @@ Partial Class dlgRandomSplit
         'ucrSaveTestingData
         '
         Me.ucrSaveTestingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTestingData.Location = New System.Drawing.Point(9, 300)
+        Me.ucrSaveTestingData.Location = New System.Drawing.Point(9, 274)
         Me.ucrSaveTestingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTestingData.Name = "ucrSaveTestingData"
         Me.ucrSaveTestingData.Size = New System.Drawing.Size(300, 23)
@@ -165,7 +165,7 @@ Partial Class dlgRandomSplit
         'ucrSaveTrainingData
         '
         Me.ucrSaveTrainingData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 270)
+        Me.ucrSaveTrainingData.Location = New System.Drawing.Point(9, 244)
         Me.ucrSaveTrainingData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTrainingData.Name = "ucrSaveTrainingData"
         Me.ucrSaveTrainingData.Size = New System.Drawing.Size(300, 23)
@@ -174,7 +174,7 @@ Partial Class dlgRandomSplit
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 332)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 303)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -184,7 +184,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrChkLag.AutoSize = True
         Me.ucrChkLag.Checked = False
-        Me.ucrChkLag.Location = New System.Drawing.Point(272, 159)
+        Me.ucrChkLag.Location = New System.Drawing.Point(291, 160)
         Me.ucrChkLag.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkLag.Name = "ucrChkLag"
         Me.ucrChkLag.Size = New System.Drawing.Size(143, 23)
@@ -248,7 +248,7 @@ Partial Class dlgRandomSplit
         '
         Me.ucrChkTest.AutoSize = True
         Me.ucrChkTest.Checked = False
-        Me.ucrChkTest.Location = New System.Drawing.Point(9, 240)
+        Me.ucrChkTest.Location = New System.Drawing.Point(9, 274)
         Me.ucrChkTest.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkTest.Name = "ucrChkTest"
         Me.ucrChkTest.Size = New System.Drawing.Size(143, 23)
@@ -258,7 +258,7 @@ Partial Class dlgRandomSplit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 389)
+        Me.ClientSize = New System.Drawing.Size(432, 363)
         Me.Controls.Add(Me.ucrChkTest)
         Me.Controls.Add(Me.lblPool)
         Me.Controls.Add(Me.lblBreaks)
