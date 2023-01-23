@@ -335,8 +335,6 @@ Public Class dlgMakeDate
 
         ucrSaveDate.SetRCode(clsDateFunction, bReset)
 
-        ucrSaveDate.SetRCode(clsDateFunction, bReset)
-
         ucrInputUnits.SetRCode(clsMultiplicationOperator, bReset)
         ucrReceiverForDate.SetRCode(clsDivisionOperator, bReset)
         ucrInputFormat.SetRCode(clsDateFunction, bReset)
@@ -481,7 +479,8 @@ Public Class dlgMakeDate
         SelectorHeader()
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged, ucrReceiverForDate.ControlValueChanged,
+            ucrReceiverDayTwo.ControlValueChanged, ucrReceiverDayTwo.ControlValueChanged, ucrReceiverYearThree.ControlValueChanged, ucrReceiverMonthThree.ControlValueChanged, ucrReceiverDayThree.ControlValueChanged
         GroupBoxSettings()
     End Sub
 
@@ -490,6 +489,7 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.SetBaseRFunction(clsDateFunction)
             ucrReceiverForDate.SetMeAsReceiver()
             ucrSaveDate.setLinkedReceiver(ucrReceiverForDate)
+            ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=False)
             grpSingleColumn.Show()
             grpTwoColumns.Hide()
             grpThreeColumns.Hide()
@@ -498,6 +498,7 @@ Public Class dlgMakeDate
         ElseIf rdoTwoColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearDay)
             ucrSaveDate.setLinkedReceiver(ucrReceiverYearTwo)
+            ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=True)
             ucrReceiverYearTwo.SetMeAsReceiver()
             ucrReceiverYearTwo.SetIncludedDataTypes({"numeric"})
             ucrReceiverDayTwo.SetIncludedDataTypes({"numeric"})
@@ -520,6 +521,7 @@ Public Class dlgMakeDate
                 ucrReceiverDayThree.SetMeAsReceiver()
                 ucrSaveDate.setLinkedReceiver(ucrReceiverDayThree)
             End If
+            ucrSaveDate.SetAssignToBooleans(bTempInsertColumnBefore:=True)
             grpSingleColumn.Hide()
             grpTwoColumns.Hide()
             grpThreeColumns.Show()
