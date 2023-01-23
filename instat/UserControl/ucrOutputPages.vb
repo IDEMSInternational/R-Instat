@@ -80,8 +80,8 @@ Public Class ucrOutputPages
         AddHandler ucrMainOutputPage.RefreshContextButtons, AddressOf EnableDisableTopButtons
     End Sub
 
-    Private Sub AddNewOutput(outputElement As clsOutputElement)
-        ucrMainOutputPage.AddNewOutput(outputElement)
+    Private Sub AddNewOutput(outputElement As clsOutputElement, bDisplayOutputInExternalViewer As Boolean)
+        ucrMainOutputPage.AddNewOutput(outputElement, bDisplayOutputInExternalViewer)
     End Sub
 
     Private Sub AddNewOutputToTab(outputElement As clsOutputElement, tabName As String)

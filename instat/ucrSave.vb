@@ -655,7 +655,8 @@ Public Class ucrSave
                             Case RObjectTypeLabel.Graph,
                                  RObjectTypeLabel.Summary,
                                  RObjectTypeLabel.Table,
-                                 RObjectTypeLabel.Model
+                                 RObjectTypeLabel.Model,
+                                 RObjectTypeLabel.StructureLabel
                                 If (_strRObjectLabel = RObjectTypeLabel.Table OrElse _strRObjectLabel = RObjectTypeLabel.Model) AndAlso
                                     String.IsNullOrEmpty(_strRObjectFormat) Then
                                     'todo. temporary check until all table and model dialogs are modified to set _strRObjectFormat  
@@ -670,8 +671,6 @@ Public Class ucrSave
                                                                    strRDataFrameNameToAddObjectTo:=strDataName,
                                                                    strObjectName:=strSaveName)
                                 End If
-                            Case "surv"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempSurv:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
                     Else
                         clsTempCode.RemoveAssignTo()
