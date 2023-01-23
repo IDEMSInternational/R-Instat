@@ -34,7 +34,8 @@ Public Class dlgViewGraph
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-        autoTranslate(Me)
+        'todo. after changing the radio buttons translations, restore this line
+        'autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -55,13 +56,14 @@ Public Class dlgViewGraph
 
         ' We don't specify rdos in the new system here. This is because the automatic detection of the radio buttons relies on VB options, not R code
         'Group Options panel
-        ucrPnlDisplayOptions.AddRadioButton(rdoDisplayOutputWindow)
-        ucrPnlDisplayOptions.AddRadioButton(rdoDisplayInteractiveView)
-        ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
+        ucrPnlDisplayOptions.AddRadioButton(rdoOutputWindow)
+        ucrPnlDisplayOptions.AddRadioButton(rdoMaximised)
+        ucrPnlDisplayOptions.AddRadioButton(rdoInteractiveView)
+        ucrPnlDisplayOptions.AddRadioButton(rdoRViewer)
 
         'todo. Calling print() from this dialog doesn't work. investigate why
         'temporarily disabled
-        rdoDisplayRViewer.Enabled = False
+        rdoRViewer.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -71,10 +73,9 @@ Public Class dlgViewGraph
         clsPrintRFunction = New RFunction
 
         ucrGraphsSelector.Reset()
-        rdoDisplayOutputWindow.Checked = True
+        rdoOutputWindow.Checked = True
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
 
         clsPlotlyRFunction.SetPackageName("plotly")
         clsPlotlyRFunction.SetRCommand("ggplotly")
@@ -87,7 +88,7 @@ Public Class dlgViewGraph
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -110,15 +111,20 @@ Public Class dlgViewGraph
     End Sub
 
     Private Sub ucrPnlDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayOptions.ControlValueChanged
-        If rdoDisplayOutputWindow.Checked Then
+        If rdoOutputWindow.Checked Then
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="TRUE", iPosition:=2)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectRFunction)
+        ElseIf rdoMaximised.Checked Then
             clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
-            clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
+            clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34), iPosition:=1)
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
-        ElseIf rdoDisplayInteractiveView.Checked Then
+        ElseIf rdoInteractiveView.Checked Then
             clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
-            clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
+            clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34), iPosition:=1)
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
-        ElseIf rdoDisplayRViewer.Checked Then
+        ElseIf rdoRViewer.Checked Then
             'clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
             'clsViewObjectRFunction.RemoveParameterByName("object_format")
             ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
