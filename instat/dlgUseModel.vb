@@ -228,7 +228,7 @@ Public Class dlgUseModel
         Dim item As ListViewItem
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-        clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+        clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         ucrInputModels.SetName("[No models selected]")
         strExpression = ucrReceiverForTestColumn.GetVariableNames(False)
         For Each item In ucrSelectorUseModel.lstAvailableVariable.Items
@@ -236,8 +236,9 @@ Public Class dlgUseModel
             If strExpression.Contains(strModel) Then
                 lstModels.Add(strModel)
                 clsGetModel.AddParameter("data_name", Chr(34) & ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-                clsGetModel.AddParameter("model_name", Chr(34) & strModel & Chr(34), iPosition:=1)
-                clsGetModel.SetAssignTo(strModel)
+                clsGetModel.AddParameter("object_name", Chr(34) & strModel & Chr(34), iPosition:=1)
+                clsGetModel.AddParameter("as_file", "FALSE", iPosition:=2)
+                clsGetModel.SetAssignToObject(strRObjectToAssignTo:=strModel)
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsGetModel.Clone(), iPosition:=i)
                 i = i + 1
             End If
