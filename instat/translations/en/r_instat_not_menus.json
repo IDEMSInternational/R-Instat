@@ -4001,5 +4001,11 @@
   "Factor(s):": "Factor(s):",
   "To Lower Case": "To Lower Case",
   "Punctuation": "Punctuation",
-  "Output:": "Output:"
+  "Output:": "Output:",
+  "Unstack (Pivot Wider)": "Unstack (Pivot Wider)",
+  "Add Prefix:": "Add Prefix:",
+  "Columns to Carry:": "Columns to Carry",
+  "Fill Missing Values:": "Fill Missing Values:",
+  "Merge (Join)": "Merge (Join)",
+  "Append (Bind Rows)": "Append (Bind Rows)"
 }
