@@ -130,7 +130,7 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddToLinkedControls({ucrInputComboDatesBy}, {rdoDates}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPreview.SetText("Preview")
-        ucrChkPreview.SetParameter(New RParameter("Checked", iNewPosition:=0))
+        ucrChkPreview.SetParameter(New RParameter("checked", iNewPosition:=0))
         ucrChkPreview.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNewColumnName.SetPrefix("regular")
