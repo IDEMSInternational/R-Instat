@@ -4007,5 +4007,14 @@
   "Columns to Carry:": "Columns to Carry",
   "Fill Missing Values:": "Fill Missing Values:",
   "Merge (Join)": "Merge (Join)",
-  "Append (Bind Rows)": "Append (Bind Rows)"
-}
+  "Append (Bind Rows)": "Append (Bind Rows)",
+  "Include Old Names": "Include Old Names",
+  "New Names (Optional):": "New Names (Optional):",
+  "Links": "Links",
+  "Data Frames": "Data Frames",
+  "Copy to clipboard": "Copy to clipboard",
+  "Data frame": "Data frame",
+  "Columns metadata": "Columns metadata",
+  "Data frame metadata": "Data frame metadata",
+  "Unhide": "Unhide",
+  "Unhidden Data Frame(s):": "Unhidden Data Frame(s):"}
