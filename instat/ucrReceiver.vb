@@ -130,7 +130,7 @@ Public Class ucrReceiver
 
     End Sub
 
-    'This refers to the selector list of column
+    'This refers to the selector list of columns
     Public Overridable Sub RemoveAnyVariablesNotInList()
 
     End Sub
