@@ -781,9 +781,6 @@ Public Class RLink
     ''' <paramref name="strScript"/>.</param>
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
-    ''' <param name="bAddOutputInInternalViewer"> if true and the script produces and output, the output will be added 
-    ''' in the output viewer, if false, the output will be displayed in a different viewer.
-    ''' displays the exception message.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RunScript(strScript As String,
                          Optional iCallType As Integer = 0,
