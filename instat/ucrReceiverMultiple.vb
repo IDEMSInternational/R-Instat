@@ -171,23 +171,15 @@ Public Class ucrReceiverMultiple
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
-                Case "object"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
-                Case "graph"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
-                Case "surv"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
-                    clsGetVariablesFunc.AddParameter("surv_name", GetVariableNames())
-                Case "model"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
-                    If bForceVariablesAsList Then
-                        clsGetVariablesFunc.AddParameter("force_as_list", "TRUE", iPosition:=3)
-                    Else
-                        clsGetVariablesFunc.RemoveParameterByName("force_as_list")
-                    End If
+                Case "object",
+                     RObjectTypeLabel.Graph,
+                     RObjectTypeLabel.Table,
+                     RObjectTypeLabel.Model,
+                     RObjectTypeLabel.Summary,
+                     RObjectTypeLabel.StructureLabel
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects_data")
+                    clsGetVariablesFunc.AddParameter("object_names", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("as_files", "FALSE")
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())

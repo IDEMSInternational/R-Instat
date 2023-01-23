@@ -48,7 +48,7 @@ Public Class clsOutputLogger
     ''' Event to show a new output as been added
     ''' </summary>
     ''' <param name="outputElement"></param>
-    Public Event NewOutputAdded(outputElement As clsOutputElement)
+    Public Event NewOutputAdded(outputElement As clsOutputElement, bDisplayOutputInExternalViewer As Boolean)
 
     ''' <summary>
     ''' Event to show an output as been added to a new filtered list
@@ -70,7 +70,7 @@ Public Class clsOutputLogger
         End Set
     End Property
 
-    Public Sub AddOutput(strScript As String, strOutput As String, bAsFile As Boolean, bAddOutputInInternalViewer As Boolean)
+    Public Sub AddOutput(strScript As String, strOutput As String, bAsFile As Boolean, bDisplayOutputInExternalViewer As Boolean)
         'Note this always takes the last script added as corresponding script
         If String.IsNullOrWhiteSpace(strScript) Then
             Throw New Exception("Cannot find script to attach output to.")
@@ -105,14 +105,8 @@ Public Class clsOutputLogger
 
         _outputElements.Add(outputElement)
 
-        If bAddOutputInInternalViewer Then
-            'raise event for output pages
-            RaiseEvent NewOutputAdded(outputElement)
-        Else
-            Dim frmMaximiseOutput As New frmMaximiseOutput
-            frmMaximiseOutput.Show(strFileName:=strOutput)
-        End If
-
+        'raise event for output pages
+        RaiseEvent NewOutputAdded(outputElement, bDisplayOutputInExternalViewer)
     End Sub
 
     ''' <summary>
