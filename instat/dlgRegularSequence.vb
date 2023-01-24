@@ -185,6 +185,7 @@ Public Class dlgRegularSequence
         clsRepFunction.AddParameter("each", 1, iPosition:=2)
         clsRepFunction.AddParameter("length.out", ucrDataFrameLength.GetDataFrameLength, iPosition:=3)
 
+        PreviewSequence()
         SetAssignTo()
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
     End Sub
@@ -314,7 +315,7 @@ Public Class dlgRegularSequence
         SetAssignTo()
     End Sub
 
-    Private Sub ucrInputStepsOfControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrDateTimePickerFrom.ControlValueChanged, ucrDateTimePickerTo.ControlValueChanged, ucrInputComboDatesBy.ControlValueChanged, ucrPnlSequenceType.ControlValueChanged
+    Private Sub ucrInputStepsOfControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrDateTimePickerFrom.ControlValueChanged, ucrDateTimePickerTo.ControlValueChanged, ucrInputComboDatesBy.ControlValueChanged, ucrPnlSequenceType.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
         'ucrInputInStepsOf will be empty when dialog loads for the first time
         'no need to st value for ucrInputInStepsOf if its empty
         If ucrInputInStepsOf.IsEmpty Then
@@ -325,13 +326,15 @@ Public Class dlgRegularSequence
             Dim dcmTo As Decimal
             Dim dcmFrom As Decimal
             If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
-                ucrInputInStepsOf.SetName(If(dcmTo >= dcmFrom, "", "-") & ucrInputInStepsOf.GetText().Replace("-", ""))
+                ucrInputInStepsOf.SetText(If(dcmTo >= dcmFrom, "", "-") & ucrInputInStepsOf.GetText().Replace("-", ""))
             End If
         ElseIf rdoDates.Checked Then
-            ucrInputInStepsOf.SetName(If(ucrDateTimePickerTo.DateValue >= ucrDateTimePickerFrom.DateValue,
+            ucrInputInStepsOf.SetText(If(ucrDateTimePickerTo.DateValue >= ucrDateTimePickerFrom.DateValue,
                                           "", "-") & ucrInputInStepsOf.GetText().Replace("-", ""))
         End If
+        clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText())
 
+        PreviewSequence()
     End Sub
 
     Private Sub ucrInputInStepsOf_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInStepsOf.ControlValueChanged
