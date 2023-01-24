@@ -100,7 +100,7 @@ Partial Class dlgScatterPlot
         'lblSize
         '
         Me.lblSize.AutoSize = True
-        Me.lblSize.Location = New System.Drawing.Point(115, 264)
+        Me.lblSize.Location = New System.Drawing.Point(127, 264)
         Me.lblSize.Name = "lblSize"
         Me.lblSize.Size = New System.Drawing.Size(30, 13)
         Me.lblSize.TabIndex = 12
@@ -110,7 +110,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblSides.AutoSize = True
         Me.lblSides.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSides.Location = New System.Drawing.Point(192, 264)
+        Me.lblSides.Location = New System.Drawing.Point(205, 264)
         Me.lblSides.Name = "lblSides"
         Me.lblSides.Size = New System.Drawing.Size(36, 13)
         Me.lblSides.TabIndex = 14
@@ -165,7 +165,7 @@ Partial Class dlgScatterPlot
         Me.ucrInputSides.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSides.GetSetSelectedIndex = -1
         Me.ucrInputSides.IsReadOnly = False
-        Me.ucrInputSides.Location = New System.Drawing.Point(231, 261)
+        Me.ucrInputSides.Location = New System.Drawing.Point(239, 261)
         Me.ucrInputSides.Name = "ucrInputSides"
         Me.ucrInputSides.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputSides.TabIndex = 15
@@ -175,7 +175,7 @@ Partial Class dlgScatterPlot
         Me.ucrNudSize.AutoSize = True
         Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(145, 262)
+        Me.ucrNudSize.Location = New System.Drawing.Point(157, 262)
         Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSize.Name = "ucrNudSize"
@@ -189,7 +189,7 @@ Partial Class dlgScatterPlot
         Me.ucrChkAddRugPlot.Checked = False
         Me.ucrChkAddRugPlot.Location = New System.Drawing.Point(11, 262)
         Me.ucrChkAddRugPlot.Name = "ucrChkAddRugPlot"
-        Me.ucrChkAddRugPlot.Size = New System.Drawing.Size(110, 23)
+        Me.ucrChkAddRugPlot.Size = New System.Drawing.Size(134, 23)
         Me.ucrChkAddRugPlot.TabIndex = 11
         '
         'ucrReceiverLabel

@@ -35,20 +35,19 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Public Sub InitialiseControls()
-        bControlsInitialised = False
         Dim dctgtExtraThemes As New Dictionary(Of String, String)
 
         'Themes
         ucrPnlThemesPanel.AddRadioButton(rdoManualTheme)
         ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
 
-        ucrPnlThemesPanel.AddParameterValuesCondition(rdoSelectTheme, "check", "select")
-        ucrPnlThemesPanel.AddParameterValuesCondition(rdoManualTheme, "check", "manual")
+        ucrPnlThemesPanel.AddParameterPresentCondition(rdoSelectTheme, "theme", True)
+        ucrPnlThemesPanel.AddParameterPresentCondition(rdoManualTheme, "theme", False)
 
-        ucrChkAddTheme.SetText("Add themes")
-        ucrChkAddTheme.AddParameterValuesCondition(True, "checked", "TRUE")
-        ucrChkAddTheme.AddParameterValuesCondition(False, "checked", "FALSE")
-        ucrChkAddTheme.AddToLinkedControls(ucrPnlThemesPanel, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkAddTheme.SetText("Add themes")
+        'ucrChkAddTheme.AddParameterValuesCondition(True, "checked", "TRUE")
+        'ucrChkAddTheme.AddParameterValuesCondition(False, "checked", "FALSE")
+        'ucrChkAddTheme.AddToLinkedControls(ucrPnlThemesPanel, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputSelectThemes.SetParameter(New RParameter("theme", iNewPosition:=13))
         dctgtExtraThemes.Add("Dark Theme", Chr(34) & "gt_theme_dark" & Chr(34))
@@ -62,7 +61,7 @@ Public Class sdgFormatSummaryTables
         ucrInputSelectThemes.SetItems(dctgtExtraThemes)
         ucrInputSelectThemes.SetDropDownStyleAsNonEditable()
 
-        ucrPnlThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Dark Theme")
+        ucrPnlThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Dark Theme")
 
         'Titles
         ucrInputTitle.SetParameter(New RParameter("title", iNewPosition:=0))
@@ -203,7 +202,7 @@ Public Class sdgFormatSummaryTables
         ucrInputSubtitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSelectThemes.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlThemesPanel.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkAddTheme.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        'ucrChkAddTheme.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
     End Sub
 
@@ -436,7 +435,7 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub ucrThemesPanel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged,
-        ucrInputSelectThemes.ControlValueChanged, ucrChkAddTheme.ControlValueChanged
+        ucrInputSelectThemes.ControlValueChanged
         If ucrChkAddTheme.Checked Then
             clsDummyFunction.AddParameter("checked", "TRUE", iPosition:=12)
             If rdoManualTheme.Checked Then
