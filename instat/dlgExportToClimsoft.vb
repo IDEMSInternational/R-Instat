@@ -20,7 +20,8 @@ Imports instat.Translations
 Public Class dlgExportToClimsoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction As New RFunction
+    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction As New RFunction
+    Private clsPipeOperator As New ROperator
 
     Private Sub dlgExportToClimsoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,8 +39,8 @@ Public Class dlgExportToClimsoft
     End Sub
     Private Sub InitialiseDialog()
 
-        ucrReceiverStation.SetParameter(New RParameter("station", 1))
-        ucrReceiverStation.SetParameterIsRFunction()
+        'ucrReceiverStation.SetParameter(New RParameter("station", 1))
+        'ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.Selector = ucrSelectorImportToClimsoft
@@ -77,6 +78,8 @@ Public Class dlgExportToClimsoft
         clsDataFrameFunction = New RFunction
         clsDummyFunction = New RFunction
         clsCurrentNewColumnFunction = New RFunction
+        clsMutateFunction = New RFunction
+        clsPipeOperator = New ROperator
 
         ucrSelectorImportToClimsoft.Reset()
         ucrSaveNewDataFrame.Reset()
@@ -88,16 +91,24 @@ Public Class dlgExportToClimsoft
         clsDataFrameFunction.AddParameter("level", "surface", iPosition:=4)
         clsDataFrameFunction.AddParameter("x", "columns", iPosition:=5, bIncludeArgumentName:=False)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("left", clsRFunctionParameter:=clsDataFrameFunction, iPosition:=0)
+        clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+
+        clsMutateFunction.SetPackageName("dplyr")
+        clsMutateFunction.SetRCommand("mutate")
+
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
         DataFrameAssignTo()
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDate.SetRCode(clsDataFrameFunction, bReset)
-        ucrReceiverStation.SetRCode(clsDataFrameFunction, bReset)
+        'ucrReceiverStation.SetRCode(clsDataFrameFunction, bReset)
         ucrInputHour.SetRCode(clsDataFrameFunction, bReset)
         ucrInputLevel.SetRCode(clsDataFrameFunction, bReset)
         ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
-        ucrSaveNewDataFrame.SetRCode(clsDataFrameFunction, bReset)
+        ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
     End Sub
     Private Sub TestOkEnabled()
         ucrBase.OKEnabled(Not ucrReceiverDate.IsEmpty _
@@ -127,22 +138,16 @@ Public Class dlgExportToClimsoft
 
     Private Sub ucrSelectorImportToClimsoft_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorImportToClimsoft.ControlValueChanged
         DataFrameAssignTo()
-        GetStationName()
+        'GetStationName()
     End Sub
 
     Private Sub ucrChkNewDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewDataFrame.ControlValueChanged
         If ucrChkNewDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDataFrameFunction)
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
             ucrBase.clsRsyntax.iCallType = 0
         Else
             ucrBase.clsRsyntax.iCallType = 1
         End If
-    End Sub
-
-    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlContentsChanged,
-            ucrReceiverDate.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrInputLevel.ControlContentsChanged,
-            ucrInputLevel.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlValueChanged
@@ -155,10 +160,31 @@ Public Class dlgExportToClimsoft
     Private Sub GetStationName()
         If ucrReceiverStation.IsEmpty Then
             ucrReceiverStation.SetText(ucrSelectorImportToClimsoft.strCurrentDataFrame)
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+            clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+        Else
+            clsPipeOperator.RemoveParameterByName("right")
+        End If
+        If ucrSelectorImportToClimsoft.lstAvailableVariable.FindItemWithText(ucrReceiverStation.GetVariableNames(False)) Is Nothing Then
+            clsMutateFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=0)
+            clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+            clsDataFrameFunction.RemoveParameterByName("station")
+        Else
+            Dim clsGetVariable As RFunction = ucrReceiverStation.GetVariables
+            clsGetVariable.SetAssignTo("station")
+            clsDataFrameFunction.AddParameter("station", clsRFunctionParameter:=clsGetVariable, iPosition:=1)
+            clsPipeOperator.RemoveParameterByName("right")
         End If
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GetStationName()
+        Dim strVar As String = ucrReceiverStation.GetVariableNames
+    End Sub
+
+    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlContentsChanged,
+        ucrReceiverDate.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrInputLevel.ControlContentsChanged,
+        ucrInputLevel.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
