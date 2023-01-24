@@ -37,10 +37,9 @@ Public Class dlgExportToClimsoft
         autoTranslate(Me)
         GetStationName()
     End Sub
+
     Private Sub InitialiseDialog()
 
-        'ucrReceiverStation.SetParameter(New RParameter("station", 1))
-        'ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.Selector = ucrSelectorImportToClimsoft
@@ -68,12 +67,12 @@ Public Class dlgExportToClimsoft
         ucrChkNewDataFrame.AddParameterValuesCondition(True, "dataframe", "True")
         ucrChkNewDataFrame.AddParameterValuesCondition(False, "dataframe", "False")
 
-
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.SetIsTextBox()
         ucrSaveNewDataFrame.SetLabelText("Data Frame Name:")
 
     End Sub
+
     Private Sub SetDefaults()
         clsDataFrameFunction = New RFunction
         clsDummyFunction = New RFunction
@@ -98,18 +97,18 @@ Public Class dlgExportToClimsoft
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
 
-
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
         DataFrameAssignTo()
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDate.SetRCode(clsDataFrameFunction, bReset)
-        'ucrReceiverStation.SetRCode(clsDataFrameFunction, bReset)
         ucrInputHour.SetRCode(clsDataFrameFunction, bReset)
         ucrInputLevel.SetRCode(clsDataFrameFunction, bReset)
         ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
     End Sub
+
     Private Sub TestOkEnabled()
         ucrBase.OKEnabled(Not ucrReceiverDate.IsEmpty _
                               AndAlso Not ucrReceiverElements.IsEmpty _
@@ -120,6 +119,7 @@ Public Class dlgExportToClimsoft
         End If
 
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -138,7 +138,6 @@ Public Class dlgExportToClimsoft
 
     Private Sub ucrSelectorImportToClimsoft_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorImportToClimsoft.ControlValueChanged
         DataFrameAssignTo()
-        'GetStationName()
     End Sub
 
     Private Sub ucrChkNewDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewDataFrame.ControlValueChanged
