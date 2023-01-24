@@ -436,47 +436,42 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrThemesPanel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged,
         ucrInputSelectThemes.ControlValueChanged
-        If ucrChkAddTheme.Checked Then
-            clsDummyFunction.AddParameter("checked", "TRUE", iPosition:=12)
-            If rdoManualTheme.Checked Then
-                clsDummyFunction.AddParameter("check", "manual", iPosition:=11)
-                ucrInputSelectThemes.Visible = False
-                clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemesTabOptionsFunction, iPosition:=6)
-            Else
-                cmdManualTheme.Visible = False
-                clsDummyFunction.AddParameter("check", "select", iPosition:=11)
-                clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsgtExtrasThemesFunction, iPosition:=6)
-                'clsgtExtrasThemesFunction.SetRCommand("gt_theme_dark")
-                Select Case ucrInputSelectThemes.GetText
-                    Case "Dark Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_dark")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_dark" & Chr(34), iPosition:=13)
-                    Case "538 Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_538")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_538" & Chr(34), iPosition:=13)
-                    Case "Dot Matrix Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_dot_matrix")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_dot_matrix" & Chr(34), iPosition:=13)
-                    Case "Espn Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_espn")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_espn" & Chr(34), iPosition:=13)
-                    Case "Excel Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_excel")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_excel" & Chr(34), iPosition:=13)
-                    Case "Guardian Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_guardian")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_guardian" & Chr(34), iPosition:=13)
-                    Case "Nytimes Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_nytimes")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_nytimes" & Chr(34), iPosition:=13)
-                    Case "Pff Theme"
-                        clsgtExtrasThemesFunction.SetRCommand("gt_theme_pff")
-                        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_pff" & Chr(34), iPosition:=13)
-                End Select
-            End If
+        clsDummyFunction.AddParameter("checked", "TRUE", iPosition:=12)
+        If rdoManualTheme.Checked Then
+            clsDummyFunction.AddParameter("check", "manual", iPosition:=11)
+            ucrInputSelectThemes.Visible = False
+            clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemesTabOptionsFunction, iPosition:=6)
         Else
-            clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=12)
-            clsJoiningOperator.RemoveParameterByName("theme_format")
+            cmdManualTheme.Visible = False
+            clsDummyFunction.AddParameter("check", "select", iPosition:=11)
+            clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsgtExtrasThemesFunction, iPosition:=6)
+            'clsgtExtrasThemesFunction.SetRCommand("gt_theme_dark")
+            Select Case ucrInputSelectThemes.GetText
+                Case "Dark Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_dark")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_dark" & Chr(34), iPosition:=13)
+                Case "538 Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_538")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_538" & Chr(34), iPosition:=13)
+                Case "Dot Matrix Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_dot_matrix")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_dot_matrix" & Chr(34), iPosition:=13)
+                Case "Espn Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_espn")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_espn" & Chr(34), iPosition:=13)
+                Case "Excel Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_excel")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_excel" & Chr(34), iPosition:=13)
+                Case "Guardian Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_guardian")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_guardian" & Chr(34), iPosition:=13)
+                Case "Nytimes Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_nytimes")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_nytimes" & Chr(34), iPosition:=13)
+                Case "Pff Theme"
+                    clsgtExtrasThemesFunction.SetRCommand("gt_theme_pff")
+                    clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_pff" & Chr(34), iPosition:=13)
+            End Select
         End If
         AddRemoveManualTheme()
     End Sub
