@@ -143,6 +143,10 @@ Public Class ucrDataViewLinuxGrid
         Return lstColumns
     End Function
 
+    Public Sub ResetGridRowHeightAndColumnWidth(strCurrWorksheet As String) Implements IDataViewGrid.ResetGridRowHeightAndColumnWidth
+
+    End Sub
+
     Private Sub tcTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcTabs.SelectedIndexChanged
         RaiseEvent WorksheetChanged()
     End Sub

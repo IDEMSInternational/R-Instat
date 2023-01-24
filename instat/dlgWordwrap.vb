@@ -137,4 +137,10 @@ Public Class dlgWordwrap
     Private Sub ucrReceiverWrapText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWrapText.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If rdoUnWrapText.Checked Then
+            frmMain.ucrDataViewer.ResetGridRowHeightAndColumnWidth(ucrSelectorForWrapText.strCurrentDataFrame)
+        End If
+    End Sub
 End Class
