@@ -43,26 +43,11 @@ Public Class sdgFormatSummaryTables
         ucrPnlThemesPanel.AddParameterValuesCondition(rdoSelectTheme, "theme", "select")
         ucrPnlThemesPanel.AddParameterValuesCondition(rdoManualTheme, "theme", "manual")
 
-
-        'ucrChkAddTheme.SetText("Add themes")
-        'ucrChkAddTheme.AddParameterValuesCondition(True, "checked", "TRUE")
-        'ucrChkAddTheme.AddParameterValuesCondition(False, "checked", "FALSE")
-        'ucrChkAddTheme.AddToLinkedControls(ucrPnlThemesPanel, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrInputSelectThemes.SetParameter(New RParameter("theme", iNewPosition:=13))
-        'dctgtExtraThemes.Add("Dark Theme", Chr(34) & "gt_theme_dark" & Chr(34))
-        'dctgtExtraThemes.Add("538 Theme", Chr(34) & "gt_theme_538" & Chr(34))
-        'dctgtExtraThemes.Add("Dot Matrix Theme", Chr(34) & "gt_theme_dot_matrix" & Chr(34))
-        'dctgtExtraThemes.Add("Espn Theme", Chr(34) & "gt_theme_espn" & Chr(34))
-        'dctgtExtraThemes.Add("Excel Theme", Chr(34) & "gt_theme_excel" & Chr(34))
-        'dctgtExtraThemes.Add("Guardian Theme", Chr(34) & "gt_theme_guardian" & Chr(34))
-        'dctgtExtraThemes.Add("Nytimes Theme", Chr(34) & "gt_theme_nytimes" & Chr(34))
-        'dctgtExtraThemes.Add("Pff Theme", Chr(34) & "gt_theme_pff" & Chr(34))
         ucrInputSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme",
                                       "Guardian Theme", "Nytimes Theme", "Pff Theme"})
         ucrInputSelectThemes.SetDropDownStyleAsNonEditable()
 
-        ucrPnlThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Dark Theme")
+        ucrPnlThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedHideIfParameterMissing:=True)
 
         'Titles
         ucrInputTitle.SetParameter(New RParameter("title", iNewPosition:=0))
@@ -186,7 +171,6 @@ Public Class sdgFormatSummaryTables
 
         If bReset Then
             ucrInputSelectThemes.SetText("Dark Theme")
-            'clsDummyFunc.AddParameter("theme", "select", iPosition:=0)
         End If
 
         ucrChkAddTitleSubtitle.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
@@ -208,9 +192,7 @@ Public Class sdgFormatSummaryTables
         ucrInputAddSourceNote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSubtitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputSelectThemes.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlThemesPanel.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        'ucrChkAddTheme.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
     End Sub
@@ -445,16 +427,13 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrThemesPanel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged,
         ucrInputSelectThemes.ControlValueChanged
-        clsDummyFunction.AddParameter("checked", "TRUE", iPosition:=12)
         If rdoManualTheme.Checked Then
-            clsDummyFunction.AddParameter("check", "manual", iPosition:=11)
-            clsDummyFunction.AddParameter("theme", "manual", iPosition:=13)
+            clsDummyFunction.AddParameter("theme", "manual", iPosition:=11)
             ucrInputSelectThemes.Visible = False
             clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemesTabOptionsFunction, iPosition:=6)
         Else
             cmdManualTheme.Visible = False
-            clsDummyFunction.AddParameter("check", "select", iPosition:=11)
-            clsDummyFunction.AddParameter("theme", "select", iPosition:=13)
+            clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
             clsJoiningOperator.AddParameter("theme_format", clsRFunctionParameter:=clsgtExtrasThemesFunction, iPosition:=6)
             Select Case ucrInputSelectThemes.GetText
                 Case "Dark Theme"
