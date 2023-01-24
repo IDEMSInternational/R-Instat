@@ -5000,11 +5000,19 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdScale_Click(sender As Object, e As EventArgs) Handles cmdScale.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( )", 1)
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( , center = TRUE, scale = TRUE)", 31)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( )", 1)
+        End If
     End Sub
 
     Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
+      If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 39)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
+        End If
     End Sub
 
     Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
