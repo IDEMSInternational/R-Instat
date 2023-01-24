@@ -470,6 +470,7 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         AddRemoveFrequencyParameters()
         ChangeLocations()
+        MissingOptions()
         TestOKEnabled()
     End Sub
 
@@ -478,6 +479,24 @@ Public Class dlgDescribeTwoVariable
             clsRCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
         Else
             clsRCorrelationFunction.RemoveParameterByName("use")
+        End If
+        If Not ucrChkOmitMissing.Checked Then
+            clsRCustomSummaryFunction.RemoveParameterByName("na_type")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_max_n")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_min_n")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_max_prop")
+            clsRCustomSummaryFunction.RemoveParameterByName("na_consecutive_n")
+        Else
+            clsRCustomSummaryFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
+        End If
+        MissingOptions()
+    End Sub
+
+    Private Sub MissingOptions()
+        If ucrChkOmitMissing.Checked AndAlso strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+            cmdMissingOptions.Enabled = True
+        Else
+            cmdMissingOptions.Enabled = False
         End If
     End Sub
 
@@ -600,5 +619,11 @@ Public Class dlgDescribeTwoVariable
         clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsMapFrequencyPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsFrequencyTablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsRCustomSummaryFunction, clsNewConcFunction:=clsCombineFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptions.ShowDialog()
     End Sub
 End Class
