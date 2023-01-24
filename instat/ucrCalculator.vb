@@ -5004,7 +5004,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("MASS::fractions( )", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
     End Sub
 
     Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
