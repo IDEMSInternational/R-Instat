@@ -21,6 +21,7 @@ Public Class dlgSummaryTables
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
+    Private bResetFormatSubdialog As Boolean = False
     Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction, clsConcFunction,
             clsMutableFunction As New RFunction
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
@@ -239,7 +240,7 @@ Public Class dlgSummaryTables
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
         clsDummyFunction.AddParameter("check", "select", iPosition:=11)
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=12)
-        clsDummyFunction.AddParameter("theme", Chr(34) & "gt_theme_dark" & Chr(34), iPosition:=13)
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=13)
 
         clsSummaryOperator.SetOperation("+")
 
@@ -369,6 +370,7 @@ Public Class dlgSummaryTables
                                                   strObjectName:="last_table")
 
         bResetSubdialog = True
+        bResetFormatSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -441,7 +443,7 @@ Public Class dlgSummaryTables
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                        clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
-                                       clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bReset)
+                                       clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         Else
             sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
@@ -449,10 +451,11 @@ Public Class dlgSummaryTables
                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                      clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
                                      clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
-                                     clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bReset)
+                                     clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         End If
 
         sdgFormatSummaryTables.ShowDialog()
+        bResetFormatSubdialog = False
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeight.ControlValueChanged
