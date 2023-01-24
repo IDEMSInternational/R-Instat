@@ -4018,4 +4018,11 @@
   "Data frame metadata": "Data frame metadata",
   "Unhide": "Unhide",
   "Unhidden Data Frame(s):": "Unhidden Data Frame(s):",
-  "Run": "Run"}
+  "Run": "Run",
+  "Import NetCDF File": "Import NetCDF File",
+  "Import Shapefiles": "Import Shapefiles",
+  "Setup For Data Entry": "Setup For Data Entry",
+  "Add Flags": "Add Flags",
+  "Data From:": "Data From:",
+  "Data To:": "Data To:",
+  "Flag Variables:": "Flag Variables:"}
