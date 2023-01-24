@@ -106,9 +106,11 @@ Public Class ucrDataViewReoGrid
     End Function
 
     Public Sub ResetGridRowHeightAndColumnWidth(strCurrWorksheet As String) Implements IDataViewGrid.ResetGridRowHeightAndColumnWidth
-        grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet)
-        grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
-        grdData.CurrentWorksheet.SetColumnsWidth(0, 1, 70)
+        If strCurrWorksheet <> "" Then
+            grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet)
+            grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
+            grdData.CurrentWorksheet.SetColumnsWidth(0, 1, 70)
+        End If
     End Sub
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
