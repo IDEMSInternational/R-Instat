@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgSummaryTables
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bResetRCode = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
@@ -379,8 +380,6 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrReceiverFactors.GetParameter, iAdditionalPairNo:=1)
 
         ucrSelectorSummaryTables.SetRCode(clsSummaryDefaultFunction, bReset)
-        ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
-        ucrReceiverFactors.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkFrequencyDisplayMargins.SetRCode(clsFrequencyDefaultFunction, bReset)
@@ -395,12 +394,18 @@ Public Class dlgSummaryTables
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        If bReset Then
+            ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
+            ucrReceiverFactors.SetRCode(clsSummaryDefaultFunction, bReset)
+        End If
         FillListView()
+
+
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoSummaryTable.Checked Then
-            If ucrSaveTable.IsComplete AndAlso ucrNudColumnFactors.GetText() <> "" AndAlso
+            If ucrSaveTable.IsComplete AndAlso ucrNudColumnFactors.GetText() <> "" AndAlso Not ucrReceiverFactors.IsEmpty AndAlso
                 ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso
                 Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
                 ucrBase.OKEnabled(True)

@@ -126,11 +126,11 @@ Public Class sdgSummaryThemes
         ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding")
         ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding", False)
 
-        ucrChkBoxWidth.SetText("Box Length")
-        ucrNudBoxWidth.SetParameter(New RParameter("heading.padding.horizontal"))
-        ucrNudBoxWidth.SetRDefault(0)
-        ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding.horizontal")
-        ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding,horizontal", False)
+        ucrChkBoxLength.SetText("Box Length")
+        ucrNudBoxLength.SetParameter(New RParameter("heading.padding.horizontal"))
+        ucrNudBoxLength.SetRDefault(0)
+        ucrChkBoxLength.AddParameterPresentCondition(True, "heading.padding.horizontal")
+        ucrChkBoxLength.AddParameterPresentCondition(False, "heading.padding,horizontal", False)
 
         ucrChkBottomWidth.SetText("Bottom Width")
         ucrNudBottomWidth.SetParameter(New RParameter("heading.border.bottom.width"))
@@ -776,10 +776,10 @@ Public Class sdgSummaryThemes
         ucrChkSourcenotesFontSize.AddParameterPresentCondition(False, "source_notes.font.size", False)
 
         ucrChkSourcenotesMultiline.SetText("Sourcenotes Multiline")
-        ucrInputSourcenotesMultiline.SetParameter(New RParameter("source_notes.marks"))
+        ucrInputSourcenotesMultiline.SetParameter(New RParameter("source_notes.multiline"))
         ucrInputSourcenotesMultiline.SetItems(dctFootnotesMultiline)
-        ucrChkSourcenotesMultiline.AddParameterPresentCondition(True, "source_notes.marks")
-        ucrChkSourcenotesMultiline.AddParameterPresentCondition(False, "source_notes.marks", False)
+        ucrChkSourcenotesMultiline.AddParameterPresentCondition(True, "source_notes.multiline")
+        ucrChkSourcenotesMultiline.AddParameterPresentCondition(False, "source_notes.multiline", False)
 
         ucrChkSourcenotesSeparator.SetText("Sourcenotes Separator")
         ucrInputSourcenotesSeparator.SetParameter(New RParameter("source_notes.sep"))
