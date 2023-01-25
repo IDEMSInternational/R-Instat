@@ -4025,4 +4025,12 @@
   "Add Flags": "Add Flags",
   "Data From:": "Data From:",
   "Data To:": "Data To:",
-  "Flag Variables:": "Flag Variables:"}
+  "Flag Variables:": "Flag Variables:",
+  "Day in Year (365)": "Day in Year (365)",
+  "Day in Year (366)": "Day in Year (366)",
+  "Minimum RH (%):": "Minimum RH (%):",
+  "Maximum RH (%):": "Maximum RH (%):",
+  "Base Year:": "Base Year:",
+   
+  
+}
