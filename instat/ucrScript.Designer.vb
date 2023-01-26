@@ -243,7 +243,7 @@ Partial Class ucrScript
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(165, 1)
+        Me.cmdHelp.Location = New System.Drawing.Point(173, 1)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(51, 23)
         Me.cmdHelp.TabIndex = 5
@@ -252,7 +252,7 @@ Partial Class ucrScript
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(110, 1)
+        Me.cmdClear.Location = New System.Drawing.Point(118, 1)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(51, 23)
         Me.cmdClear.TabIndex = 4
@@ -264,7 +264,7 @@ Partial Class ucrScript
         '
         Me.cmdRunAll.Location = New System.Drawing.Point(56, 1)
         Me.cmdRunAll.Name = "cmdRunAll"
-        Me.cmdRunAll.Size = New System.Drawing.Size(51, 23)
+        Me.cmdRunAll.Size = New System.Drawing.Size(59, 23)
         Me.cmdRunAll.TabIndex = 3
         Me.cmdRunAll.Text = "Run All"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunAll, "Run all lines")
