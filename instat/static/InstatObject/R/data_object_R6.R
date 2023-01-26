@@ -413,7 +413,8 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       } else { 
         out <- out[1:max_rows, ]  
       }
-    } 
+    }
+
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE) 
       scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
@@ -2049,11 +2050,11 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 )
 
 #objects names are expected to be unique. Objects are in a nested list. 
-#see comments in issue #7808 for further details
+#see comments in issue #7808 for more details
 DataSheet$set("public", "add_object", function(object_name, object_type_label, object_format, object) {
   
     if(missing(object_name)){
-      object_name = next_default_item("object", names(private$objects))
+      object_name <- next_default_item("object", names(private$objects))
     } 
     
     if(object_name %in% names(private$objects)){
@@ -2063,93 +2064,38 @@ DataSheet$set("public", "add_object", function(object_name, object_type_label, o
     #add the object with its metadata to the list of objects and add an "Added_object" change 
     private$objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
     self$append_to_changes(list(Added_object, object_name))
-    
-    #if the object is a graph then set it's name as the last graph name added. 
-    if(identical(object_type_label, "graph")){
-      private$.last_graph <- object_name
-    }
+}
+)
+
+DataSheet$set("public", "get_object_names", function(object_type_label = NULL,
+                                                     as_list = FALSE) {
+  
+  out <- get_data_book_output_object_names(output_object_list = private$objects, 
+                                           object_type_label = object_type_label,  
+                                           as_list = as_list, 
+                                           list_label= self$get_metadata(data_name_label) )
+  return(out)
   
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, object_type_label, force_as_list = FALSE, silent = FALSE) {
-  curr_objects = private$objects[self$get_object_names(object_type_label = object_type_label)]
-  if(length(curr_objects) == 0) return(curr_objects)
-  if(missing(object_name)) return(curr_objects)
-  if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) {
-    if (silent) return(NULL)
-    else stop(object_name, " not found in objects")
-  }
-  if(length(object_name) == 1) {
-    if(force_as_list) return(curr_objects[object_name])
-    else return(curr_objects[[object_name]])
-  }
-  else return(curr_objects[object_name])
+DataSheet$set("public", "get_objects", function(object_type_label = NULL) {
+  out <-
+    private$objects[self$get_object_names(object_type_label = object_type_label)]
+  return(out)
 }
 )
 
-#object name must be supplied
+#object name must be character
 #returns NULL if object is not found
 DataSheet$set("public", "get_object", function(object_name) {
   #make sure supplied object name is a character, prevents return of unexpected object
-  if(!missing(object_name) && is.character(object_name) ){
+  if(is.character(object_name) ){
     return(private$objects[[object_name]])
   }else{
     return(NULL)
   }
  
-}
-)
-
-DataSheet$set("public", "get_object_names", function(object_type_label, as_list = FALSE, excluded_items = c()) {
-    if(missing(object_type_label)){
-      out = names(private$objects)
-    }else{ 
-      #todo. has a bug. the object_type_label cannot be accessed directly
-      out = names(private$objects)[sapply(private$objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
-    }
-    
-    if(length(out) == 0){
-      return(out)
-    } 
-      
-    
-    if(length(excluded_items) > 0) {
-      excluded_indices = which(out %in% excluded_items)
-      
-      #notify user
-      if(length(excluded_indices) != length(excluded_items)){
-        warning("Some of the excluded_items were not found in the list of objects")
-      } 
-      
-      #remove the excluded items from the list
-      if(length(excluded_indices) > 0){
-        out = out[-excluded_indices]
-      }
-      
-    }
-    
-    if(as_list) {
-      lst = list()
-      lst[[self$get_metadata(data_name_label)]] <- out
-      return(lst)
-    }else{
-      return(out)
-    } 
-    
-}
-)
-
-DataSheet$set("public", "get_last_graph_name", function() {
-  return(private$.last_graph)
-}
-)
-
-DataSheet$set("public", "get_last_graph", function() {
-  if(!is.null(private$.last_graph)) {
-    self$get_objects(object_name = private$.last_graph, object_type = graph_label, type = graph_label)
-  }
 }
 )
 

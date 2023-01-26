@@ -781,9 +781,6 @@ Public Class RLink
     ''' <paramref name="strScript"/>.</param>
     ''' <param name="bSilent"> if false and an exception is raised then open a message box that 
     ''' displays the exception message.</param>
-    ''' <param name="bAddOutputInInternalViewer"> if true and the script produces and output, the output will be added 
-    ''' in the output viewer, if false, the output will be displayed in a different viewer.
-    ''' displays the exception message.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RunScript(strScript As String,
                          Optional iCallType As Integer = 0,
@@ -791,8 +788,7 @@ Public Class RLink
                          Optional bSeparateThread As Boolean = True,
                          Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing,
                          Optional bUpdateGrids As Boolean = True,
-                         Optional bSilent As Boolean = False,
-                         Optional bAddOutputInInternalViewer As Boolean = True)
+                         Optional bSilent As Boolean = False)
 
         'if there is no script to run then just ignore and exit sub
         If String.IsNullOrWhiteSpace(strScript) Then
@@ -804,6 +800,8 @@ Public Class RLink
         Dim strScriptWithComment As String = If(String.IsNullOrEmpty(strComment), strScript, GetFormattedComment(strComment) & Environment.NewLine & strScript)
 
         If bLogRScripts Then
+            'todo. adding a lot of text to the text control can raise an out of memory exception.
+            'change this to only display the text when the audit log is visible.
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
         End If
 
@@ -812,43 +810,45 @@ Public Class RLink
         '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
 
         Try
+            Dim strOutput As String = ""
+            Dim bAsFile As Boolean = True
+            Dim bDisplayOutputInExternalViewer As Boolean = False
 
             'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
             Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
-            If strLastScript.Contains("get_object") OrElse strLastScript.Contains("get_last_object") OrElse strLastScript.Contains("view_object") Then
+            If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
+                strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
+                strLastScript.StartsWith("view_object_data") Then
 
-                Dim strFilePathName As String = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
-                If Not String.IsNullOrEmpty(strFilePathName) Then
-                    clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, bAddOutputInInternalViewer)
-                End If
+                strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
+                'if last function is view_object then display in external viewer (maximised)
+                bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
 
+            ElseIf strLastScript.StartsWith("print") Then
+                bAsFile = False
+                Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             ElseIf iCallType = 0 Then
                 'if script output should be ignored. todo. deprecate this block after implementing correctly
+                bAsFile = False
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                clsOutputLogger.AddOutput(strScriptWithComment, "", False, bAddOutputInInternalViewer)
             ElseIf iCallType = 1 OrElse iCallType = 4 Then
+                'todo. this is used by the calculator dialog
                 'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
                 'else if script output should be stored in a temp variable
                 ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
-
+                bAsFile = False
                 Dim strTempAssignTo As String = ".temp_val"
                 'TODO check this is valid syntax in all cases
                 '     i.e. this is potentially: x <- y <- 1
                 Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 Dim expTemp As RDotNet.SymbolicExpression = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
-                    Dim strOutput As String = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
-                    ' if there's something to output
-                    If strOutput IsNot Nothing AndAlso strOutput <> "" Then
-                        clsOutputLogger.AddOutput(strScriptWithComment, strOutput, False, bAddOutputInInternalViewer)
-                    End If
+                    strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                 End If
-
             Else
                 'else if script output should not be ignored or not stored as an object or variable
 
                 Dim arrRScriptLines() As String = GetRunnableCommandLines(strScript)
-
                 'if output should be stored as a variable just execute the script
                 If arrRScriptLines.Last().Contains("<-") Then
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
@@ -861,15 +861,14 @@ Public Class RLink
                     End If
 
                     If bSuccess Then
-                        Dim strFilePathName As String = GetFileOutput("view_object(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
-                        If Not String.IsNullOrEmpty(strFilePathName) Then
-                            clsOutputLogger.AddOutput(strScriptWithComment, strFilePathName, True, bAddOutputInInternalViewer)
-                        End If
+                        strOutput = GetFileOutput("view_object_data(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                     End If
                 End If
 
             End If
 
+            'log script and output
+            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
         End Try
@@ -981,27 +980,6 @@ Public Class RLink
         Next
         Return strScriptCmd
     End Function
-
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   View last graph. </summary>
-    '''
-    ''' <param name="bAsPlotly">    (Optional) If true then view last graph as plotly. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub ViewLastGraph(bAsPlotly As String)
-        Dim clsLastGraph As New RFunction
-        clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
-        clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
-
-        Dim strGlobalGraphDisplayOption As String
-        'store the current set graph display option, to restore after display
-        strGlobalGraphDisplayOption = Me.strGraphDisplayOption
-        Me.strGraphDisplayOption = "view_R_viewer"
-        clsLastGraph.AddParameter("print_graph", "TRUE", iPosition:=0)
-        RunScript(clsLastGraph.ToScript(), iCallType:=3, bAddOutputInInternalViewer:=False, strComment:="View last graph", bSeparateThread:=False)
-        'restore the graph display option
-        Me.strGraphDisplayOption = strGlobalGraphDisplayOption
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Executes the the <paramref name="strScript"/> R script and returns the result 
@@ -1430,14 +1408,17 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_filter_names")
                 Case "column_selection"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_selection_names")
-                Case "object"
+                Case "object",
+                     RObjectTypeLabel.Graph,
+                     RObjectTypeLabel.Model,
+                     RObjectTypeLabel.Table,
+                     RObjectTypeLabel.Summary,
+                     RObjectTypeLabel.StructureLabel
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_object_names")
-                Case "model"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_model_names")
-                Case "graph"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_graph_names")
-                Case "surv"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_surv_names")
+                    If strType <> "object" Then
+                        clsGetItems.AddParameter(strParameterName:="object_type_label",
+                                          strParameterValue:=Chr(34) & strType & Chr(34))
+                    End If
                 Case "dataframe"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                 Case "link"
@@ -1452,8 +1433,6 @@ Public Class RLink
                     clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
                 Case "variable_sets"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
-                Case "table"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_table_names")
                 Case "calculation"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
             End Select

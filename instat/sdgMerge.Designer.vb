@@ -111,7 +111,7 @@ Partial Class sdgMerge
         Me.cmdRemoveAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdRemoveAll.Location = New System.Drawing.Point(6, 223)
         Me.cmdRemoveAll.Name = "cmdRemoveAll"
-        Me.cmdRemoveAll.Size = New System.Drawing.Size(130, 23)
+        Me.cmdRemoveAll.Size = New System.Drawing.Size(183, 24)
         Me.cmdRemoveAll.TabIndex = 3
         Me.cmdRemoveAll.Text = "Remove All Pairs"
         Me.cmdRemoveAll.UseVisualStyleBackColor = True
@@ -142,7 +142,7 @@ Partial Class sdgMerge
         Me.cmdRemoveSelectedPair.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdRemoveSelectedPair.Location = New System.Drawing.Point(6, 194)
         Me.cmdRemoveSelectedPair.Name = "cmdRemoveSelectedPair"
-        Me.cmdRemoveSelectedPair.Size = New System.Drawing.Size(130, 23)
+        Me.cmdRemoveSelectedPair.Size = New System.Drawing.Size(183, 24)
         Me.cmdRemoveSelectedPair.TabIndex = 2
         Me.cmdRemoveSelectedPair.Text = "Remove Selected Pair"
         Me.cmdRemoveSelectedPair.UseVisualStyleBackColor = True

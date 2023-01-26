@@ -54,7 +54,7 @@ Partial Class dlgHideDataframes
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 190)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 199)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 1
@@ -63,7 +63,7 @@ Partial Class dlgHideDataframes
         '
         Me.ucrSelectorForDataFrames.AutoSize = True
         Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
-        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 44)
+        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 53)
         Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
         Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(218, 147)
@@ -72,7 +72,7 @@ Partial Class dlgHideDataframes
         'lblDataFrames
         '
         Me.lblDataFrames.AutoSize = True
-        Me.lblDataFrames.Location = New System.Drawing.Point(10, 29)
+        Me.lblDataFrames.Location = New System.Drawing.Point(10, 38)
         Me.lblDataFrames.Name = "lblDataFrames"
         Me.lblDataFrames.Size = New System.Drawing.Size(76, 13)
         Me.lblDataFrames.TabIndex = 3
@@ -167,7 +167,7 @@ Partial Class dlgHideDataframes
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(416, 247)
+        Me.ClientSize = New System.Drawing.Size(417, 256)
         Me.Controls.Add(Me.rdoHideDataFrame)
         Me.Controls.Add(Me.rdoUnhideDataFrame)
         Me.Controls.Add(Me.lblHiddenDataFrames)

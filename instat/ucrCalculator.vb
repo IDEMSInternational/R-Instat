@@ -72,6 +72,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
 
         ttCalculator.SetToolTip(cmdSortF, "sorts a vector into ascending or descending order. For example sort(c(5,7,4,4,3)) = (3,4,4,5,7)")
+        ttCalculator.SetToolTip(cmdScale, "centre and scale the data - usually by producing (x - xbar)/s")
+        ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
+        ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
         ttCalculator.SetToolTip(cmdLag, "shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
         ttCalculator.SetToolTip(cmdLead, "shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
         ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
@@ -224,6 +227,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
         ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
         ttCalculator.SetToolTip(cmdFactorize, "compute the prime factorizations. For example, Factorize(20)= (2,5,2,1)")
+        ttCalculator.SetToolTip(cmdFactorize2, "like factorize, but with simpler layout of results and much slower for large data sets.")
         ttCalculator.SetToolTip(cmdIsPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
         ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
         ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
@@ -259,7 +263,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPadovan, "sum of last but 1 and last but 2 values. So from ...7, 9, 12, next is 7+9 = 16.")
         ttCalculator.SetToolTip(cmdTriangle, "number of objects in a triangle, so 0, 1, 3, 6, 10...")
         ttCalculator.SetToolTip(cmdSquare, "squares of each integer, so 1, 4, 9, 16.")
-        ttCalculator.SetToolTip(cmdLucas, "generartes lucas numbers to the length of the dataframe. For example the 10th lucas number is 76")
+        ttCalculator.SetToolTip(cmdLucas, "generates Lucas numbers to the length of the dataframe. For example the 10th Lucas number is 76")
+        ttCalculator.SetToolTip(cmdPrimorial, "gives the primorial (like the factorial, but just the primes up to the number) for a variable. For example primorial(c(7,8,9)) = 235*7 = (210, 210, 210)")
 
         ttCalculator.SetToolTip(cmdLength, "number of observations: For example length(c(1,2,3,4,NA)) = 5 ")
         ttCalculator.SetToolTip(cmdSum, "the sum or total: So sum(c(1,2,3,4,10)) = 20 ")
@@ -1502,10 +1507,6 @@ Public Class ucrCalculator
                                    strComment:="Opening help page for " &
                                    strPackageName & " Package. Generated from dialog Calculator",
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
-    End Sub
-
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
-        OpenHelpPage()
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)
@@ -4033,7 +4034,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIntegerRHelp_Click(sender As Object, e As EventArgs) Handles cmdIntegerRHelp.Click
+    Private Sub cmdIntegerRHelp_Click(sender As Object, e As EventArgs) Handles cmdIntegerRHelp.Click, GmpToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
             strPackageName = "gmp"
@@ -4045,6 +4046,14 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
             strPackageName = "DescTools"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ConfdesignToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfdesignToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "conf.design"
         End If
         OpenHelpPage()
     End Sub
@@ -4319,20 +4328,12 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
+    Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize(n= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize()", 1)
         End If
-    End Sub
-
-    Private Sub GmpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GmpToolStripMenuItem.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Integer" Then
-            strPackageName = "gmp"
-        End If
-        OpenHelpPage()
     End Sub
 
     Private Sub ZseqToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZseqToolStripMenuItem.Click
@@ -4375,15 +4376,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdTransformRHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformRHelp.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Transform" Then
-            strPackageName = "base"
-        End If
-        OpenHelpPage()
-    End Sub
-
-    Private Sub BaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseToolStripMenuItem.Click
+    Private Sub cmdTransformRHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformRHelp.Click, BaseToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Transform" Then
             strPackageName = "base"
@@ -4395,6 +4388,14 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Transform" Then
             strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MASSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MASSToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "MASS"
         End If
         OpenHelpPage()
     End Sub
@@ -4417,6 +4418,14 @@ Public Class ucrCalculator
         clsZseqFunction.AddParameter("gmp", "TRUE", iPosition:=1)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsZseqFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdPrimorial_Click(sender As Object, e As EventArgs) Handles cmdPrimorial.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,primes::primorial_n)", 22)
+    End Sub
+
+    Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize2.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("conf.design::factorize( )", 2)
     End Sub
 
     Private Sub cmdFreqLength_Click(sender As Object, e As EventArgs) Handles cmdFreqLength.Click
@@ -4539,14 +4548,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub BaseToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BaseToolStripMenuItem1.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Summary" Then
-            strPackageName = "base"
-        End If
-        OpenHelpPage()
-    End Sub
-
     Private Sub StatsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatsToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Summary" Then
@@ -4587,7 +4588,7 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdSummaryRHelp_Click(sender As Object, e As EventArgs) Handles cmdSummaryRHelp.Click
+    Private Sub cmdSummaryRHelp_Click(sender As Object, e As EventArgs) Handles cmdSummaryRHelp.Click, BaseToolStripMenuItem1.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Summary" Then
             strPackageName = "base"
@@ -4595,7 +4596,7 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdComplexRHelp_Click(sender As Object, e As EventArgs) Handles cmdComplexRHelp.Click
+    Private Sub cmdComplexRHelp_Click(sender As Object, e As EventArgs) Handles cmdComplexRHelp.Click, ComplexBaseToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Complex" Then
             strPackageName = "base"
@@ -4603,10 +4604,106 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub ComplexBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComplexBaseToolStripMenuItem.Click
+    Private Sub cmdWakefieldHelp_Click(sender As Object, e As EventArgs) Handles cmdWakefieldHelp.Click, WakefieldToolStripMenuItem.Click
         CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Complex" Then
+        If ucrInputCalOptions.GetText = "Wakefield" Then
+            strPackageName = "wakefield"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdCircularHelp_Click(sender As Object, e As EventArgs) Handles cmdCircularHelp.Click, CircularToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Circular" Then
+            strPackageName = "circular"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdHydroHelp_Click(sender As Object, e As EventArgs) Handles cmdHydroHelp.Click, HydroGOFToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "hydroGOF" Then
+            strPackageName = "hydroGOF"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsStatsStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdTransformHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformHelp.Click, FactorForcatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Factor" Then
+            strPackageName = "forcats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdLogicalHelp_Click(sender As Object, e As EventArgs) Handles cmdLogicalHelp.Click, LogBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
             strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub LogDplyrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogDplyrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
+            strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdStringRHelp_Click(sender As Object, e As EventArgs) Handles cmdStringRHelp.Click, TxTStringrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "stringr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub TxTBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TxTBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdProbRHelp_Click(sender As Object, e As EventArgs) Handles cmdProbRHelp.Click, ProbStatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ProbBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, DateLubridateToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "lubridate"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DateHmsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DateHmsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "hms"
         End If
         OpenHelpPage()
     End Sub
@@ -4895,6 +4992,30 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi()", 1)
+    End Sub
+
+    Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
+    End Sub
+
+    Private Sub cmdScale_Click(sender As Object, e As EventArgs) Handles cmdScale.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( , center = TRUE, scale = TRUE)", 31)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
+      If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 39)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
+        End If
+    End Sub
+
+    Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
 End Class
