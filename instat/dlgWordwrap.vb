@@ -101,7 +101,6 @@ Public Class dlgWordwrap
         clsAddUnWrapColumnToDataFunction.AddParameter("before", "FALSE", iPosition:=3)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddWrapColumnToDataFunction)
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnToDataFunction, 0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -154,16 +153,5 @@ Public Class dlgWordwrap
         If rdoUnWrapText.Checked Then
             frmMain.ucrDataViewer.ResetGridRowHeightAndColumnWidth(ucrSelectorForWrapText.strCurrentDataFrame)
         End If
-    End Sub
-
-    Private Sub ucrNudWidthWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWidthWrap.ControlValueChanged
-        'If Not ucrReceiverWrapText.IsEmpty Then
-        '    Dim clsUnwrpFunction As RFunction
-        '    Dim clsRepFunction As RFunction
-        '    clsRepFunction = clsReplaceFunction.Clone()
-        '    clsUnwrpFunction = clsAddColumnToDataFunction.Clone()
-        '    clsUnwrpFunction.AddParameter("col_data", clsRFunctionParameter:=clsRepFunction, iPosition:=2)
-        '    frmMain.clsRLink.RunScript(clsUnwrpFunction.ToScript())
-        'End If
     End Sub
 End Class
