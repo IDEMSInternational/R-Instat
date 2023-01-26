@@ -1166,7 +1166,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpRPackagesCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackages.Click
-        dlgHelpVignettes.ShowDialog()
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
     End Sub
 
     Private Sub mnuHelpR_Click(sender As Object, e As EventArgs) Handles mnuHelpAboutR.Click
@@ -1944,7 +1944,9 @@ Public Class frmMain
     Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
     End Sub
-
+    Private Sub mnuHelpGlossary_Click(sender As Object, e As EventArgs) Handles mnuHelpGlossary.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "92")
+    End Sub
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
         dlgMosaicPlot.ShowDialog()
     End Sub
@@ -2523,4 +2525,5 @@ Public Class frmMain
     Private Sub mnuHelpPackagesDocumentation_Click(sender As Object, e As EventArgs) Handles mnuHelpPackagesDocumentation.Click
         dlgHelpVignettes.ShowDialog()
     End Sub
+
 End Class
