@@ -102,7 +102,6 @@ Public Class frmMain
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
-        'mnuHelpAboutRInstat.Visible = False
 
         ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
         ' e.g. "1.0" fails Decimal.TryParse if CurrentCulture = "fr-FR" because it expects "1,0"
@@ -1177,15 +1176,6 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
     End Sub
 
-
-    Private Sub mnuHelpGuidesCaseStudy_Click(sender As Object, e As EventArgs)
-        Process.Start(Path.Combine(strStaticPath, "Help", "Case_Study_Guide_June_2016.pdf"))
-    End Sub
-
-    Private Sub mnuHelpGuideGlosary_Click(sender As Object, e As EventArgs)
-        Process.Start(Path.Combine(strStaticPath, "Help", "Statistics Glossary.pdf"))
-    End Sub
-
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "323")
     End Sub
@@ -1941,12 +1931,10 @@ Public Class frmMain
         dlgFitModel.ShowDialog()
     End Sub
 
-    Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs)
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
-    End Sub
     Private Sub mnuHelpGlossary_Click(sender As Object, e As EventArgs) Handles mnuHelpGlossary.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "92")
     End Sub
+
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
         dlgMosaicPlot.ShowDialog()
     End Sub
@@ -1996,10 +1984,6 @@ Public Class frmMain
 
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
-    End Sub
-
-    Private Sub mnuHelpDataViewSpreadsheet_Click(sender As Object, e As EventArgs)
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
     Private Sub mnuClimaticTidyandExamineOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableGraph.Click
