@@ -128,23 +128,27 @@ Public Class ucrOutputPage
     ''' Add output to page
     ''' </summary>
     ''' <param name="outputElement"></param>
-    Public Sub AddNewOutput(outputElement As clsOutputElement)
+    Public Sub AddNewOutput(outputElement As clsOutputElement, Optional bDisplayOutputInExternalViewer As Boolean = False)
         'add the script first. This applies to whether the output has an output or not or
         'whether it's just a script output
         AddNewScript(outputElement)
 
         'then add the output of the script. If the output element is just a script, ignore it since it's already been added above
         If Not String.IsNullOrEmpty(outputElement.Output) Then
-            Select Case outputElement.OutputType
-                Case OutputType.TextOutput
-                    AddNewTextOutput(outputElement)
-                Case OutputType.ImageOutput
-                    AddNewImageOutput(outputElement)
-                Case OutputType.HtmlOutput
-                    AddNewHtmlOutput(outputElement)
-            End Select
+            If bDisplayOutputInExternalViewer Then
+                Dim frmMaximiseOutput As New frmMaximiseOutput
+                frmMaximiseOutput.Show(strFileName:=outputElement.Output)
+            Else
+                Select Case outputElement.OutputType
+                    Case OutputType.TextOutput
+                        AddNewTextOutput(outputElement)
+                    Case OutputType.ImageOutput
+                        AddNewImageOutput(outputElement)
+                    Case OutputType.HtmlOutput
+                        AddNewHtmlOutput(outputElement)
+                End Select
+            End If
         End If
-
         pnlMain.VerticalScroll.Value = pnlMain.VerticalScroll.Maximum
         pnlMain.PerformLayout()
     End Sub
