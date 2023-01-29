@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports System.Windows.Controls
 Imports ScintillaNET
 
 Public Class ucrScript
@@ -86,6 +87,8 @@ Public Class ucrScript
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdClear.Enabled = bScriptExists
+
+        btnRemoveTab.Enabled = TabControl.TabCount > 1
     End Sub
 
     Private Sub setLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer)
@@ -501,6 +504,90 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
-        TabControl.TabPages.Add("unsaved")
+
+        Static iTabCounter As Integer = 1
+
+        Dim txtScriptAdded = New ScintillaNET.Scintilla()
+        txtScriptAdded.ContextMenuStrip = Me.mnuContextScript
+        txtScriptAdded.Dock = System.Windows.Forms.DockStyle.Fill
+        txtScriptAdded.Lexer = ScintillaNET.Lexer.R
+        txtScriptAdded.Location = New System.Drawing.Point(3, 3)
+        txtScriptAdded.Name = "txtScript"
+        txtScriptAdded.Size = New System.Drawing.Size(391, 409)
+        txtScriptAdded.TabIndex = 14
+        txtScriptAdded.TabWidth = 2
+
+        Dim tabPageAdded = New TabPage
+        tabPageAdded.Controls.Add(txtScriptAdded)
+        tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
+        tabPageAdded.Location = New System.Drawing.Point(4, 22)
+        tabPageAdded.Name = "TabPageAdded"
+        tabPageAdded.Padding = New System.Windows.Forms.Padding(3)
+        tabPageAdded.Size = New System.Drawing.Size(397, 415)
+        tabPageAdded.TabIndex = 0
+        'tabPageAdded.Text = "Log"
+        tabPageAdded.UseVisualStyleBackColor = True
+
+        TabControl.TabPages.Add(tabPageAdded)
+        'tabPageAdded.Text = "Untitled" & (TabControl.TabPages.IndexOf(tabPageAdded) + 1)
+        tabPageAdded.Text = "Untitled" & iTabCounter
+        iTabCounter += 1
+
+        TabControl.SelectedTab = tabPageAdded
+
+        Dim txtScriptSelected As ScintillaNET.Scintilla
+        Dim tabPageControls = TabControl.SelectedTab.Controls
+        For Each control In tabPageControls
+            If TypeOf control Is ScintillaNET.Scintilla Then
+                txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
+            End If
+            If control.GetType Is GetType(ScintillaNET.Scintilla) Then
+                txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
+            End If
+        Next
+
+        txtScriptSelected.AppendText("test1")
+        EnableDisableButtons()
+
     End Sub
+
+    Private Sub CmdRemoveTab_Click(sender As Object, e As EventArgs) Handles btnRemoveTab.Click
+
+        If TabControl.TabCount < 2 Then
+            Exit Sub
+        End If
+
+        Dim iTabRemovedIndex As Integer = TabControl.TabPages.IndexOf(TabControl.SelectedTab)
+        Dim iTabNewSelected As Integer = iTabRemovedIndex
+        If iTabRemovedIndex >= TabControl.TabCount - 1 Then
+            iTabNewSelected -= 1
+        End If
+        TabControl.TabPages.Remove(TabControl.SelectedTab)
+        TabControl.SelectedTab = TabControl.TabPages(iTabNewSelected)
+        EnableDisableButtons()
+
+    End Sub
+
+    Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
+
+        'TODO continue from here
+        'set txtScript to the Scintilla control of the newly selected tab
+        Dim txtScriptSelected As ScintillaNET.Scintilla = Nothing
+        Dim tabPageControls = TabControl.SelectedTab.Controls
+        For Each control In tabPageControls
+            If TypeOf control Is ScintillaNET.Scintilla Then
+                txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
+            End If
+            If control.GetType Is GetType(ScintillaNET.Scintilla) Then
+                txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
+            End If
+        Next
+
+        If Not IsNothing(txtScriptSelected) Then
+            txtScriptSelected.AppendText("changed1" & vbCrLf)
+        End If
+        EnableDisableButtons()
+    End Sub
+
 End Class

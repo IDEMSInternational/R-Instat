@@ -68,8 +68,8 @@ Partial Class ucrScript
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.txtScript = New ScintillaNET.Scintilla()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnRemoveTab = New System.Windows.Forms.Button()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
@@ -226,6 +226,7 @@ Partial Class ucrScript
         '
         'Panel
         '
+        Me.Panel.Controls.Add(Me.btnRemoveTab)
         Me.Panel.Controls.Add(Me.cmdAddTab)
         Me.Panel.Controls.Add(Me.cmdHelp)
         Me.Panel.Controls.Add(Me.cmdClear)
@@ -288,7 +289,6 @@ Partial Class ucrScript
         'TabControl
         '
         Me.TabControl.Controls.Add(Me.TabPage1)
-        Me.TabControl.Controls.Add(Me.TabPage2)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(3, 56)
         Me.TabControl.Name = "TabControl"
@@ -306,7 +306,7 @@ Partial Class ucrScript
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(397, 415)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Log"
+        Me.TabPage1.Text = "Untitled1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'txtScript
@@ -320,16 +320,14 @@ Partial Class ucrScript
         Me.txtScript.TabIndex = 14
         Me.txtScript.TabWidth = 2
         '
-        'TabPage2
+        'btnRemoveTab
         '
-        Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(397, 415)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "<unsaved>"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.btnRemoveTab.Location = New System.Drawing.Point(303, 0)
+        Me.btnRemoveTab.Name = "btnRemoveTab"
+        Me.btnRemoveTab.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemoveTab.TabIndex = 7
+        Me.btnRemoveTab.Text = "Remove Tab"
+        Me.btnRemoveTab.UseVisualStyleBackColor = True
         '
         'ucrScript
         '
@@ -377,6 +375,6 @@ Partial Class ucrScript
     Friend WithEvents TabControl As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents txtScript As ScintillaNET.Scintilla
-    Friend WithEvents TabPage2 As TabPage
     Friend WithEvents cmdAddTab As Button
+    Friend WithEvents btnRemoveTab As Button
 End Class
