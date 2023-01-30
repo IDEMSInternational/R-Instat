@@ -326,7 +326,7 @@ Public Class dlgSummaryTables
         clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
         clsFrequencyDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=2)
+        clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=8)
         clsFrequencyDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=10)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
         clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")

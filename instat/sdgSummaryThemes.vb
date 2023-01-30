@@ -85,10 +85,11 @@ Public Class sdgSummaryThemes
         dctFootnotesMultiline.Add("False", "FALSE")
 
         dctSeparators.Add("NULL", Chr(34) & "NULL" & Chr(34))
-        dctSeparators.Add("  ", "  ")
-        dctSeparators.Add(" ; ", " ; ")
-        dctSeparators.Add(" : ", " : ")
-        dctSeparators.Add(" , ", " , ")
+        dctSeparators.Add("Space", "  ")
+        dctSeparators.Add("Semi-colon ", " ; ")
+        dctSeparators.Add("Colon", " : ")
+        dctSeparators.Add("Comma", " , ")
+        dctSeparators.Add("Dash", "-")
 
         'Titles
         ucrChkBackgroundColour.SetText("Background Colour")
@@ -126,13 +127,13 @@ Public Class sdgSummaryThemes
         ucrChkSubTitleWeight.AddParameterPresentCondition(True, "heading.subtitle.font.weight")
         ucrChkSubTitleWeight.AddParameterPresentCondition(False, "heading.subtitle.font.weight", False)
 
-        ucrChkBoxWidth.SetText("Box Width")
+        ucrChkBoxWidth.SetText("Vertical Padding")
         ucrNudBoxWidth.SetParameter(New RParameter("heading.padding"))
         ucrNudBoxWidth.SetRDefault(0)
         ucrChkBoxWidth.AddParameterPresentCondition(True, "heading.padding")
         ucrChkBoxWidth.AddParameterPresentCondition(False, "heading.padding", False)
 
-        ucrChkBoxLength.SetText("Box Length")
+        ucrChkBoxLength.SetText("Horizontal Padding")
         ucrNudBoxLength.SetParameter(New RParameter("heading.padding.horizontal"))
         ucrNudBoxLength.SetRDefault(0)
         ucrChkBoxLength.AddParameterPresentCondition(True, "heading.padding.horizontal")
@@ -1087,4 +1088,9 @@ Public Class sdgSummaryThemes
         bRCodeSet = True
     End Sub
 
+    Private Sub tbpSummaryThemes_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpSummaryThemes.Selecting
+        If e.TabPageIndex = 2 Or e.TabPageIndex = 3 Or e.TabPageIndex = 4 Then
+            e.Cancel = True
+        End If
+    End Sub
 End Class
