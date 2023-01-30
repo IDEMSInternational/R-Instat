@@ -32,7 +32,7 @@ Partial Class sdgWindowNumber
         '
         Me.lblTitleSize.AutoSize = True
         Me.lblTitleSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTitleSize.Location = New System.Drawing.Point(6, 32)
+        Me.lblTitleSize.Location = New System.Drawing.Point(6, 29)
         Me.lblTitleSize.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTitleSize.Name = "lblTitleSize"
         Me.lblTitleSize.Size = New System.Drawing.Size(162, 20)
@@ -52,7 +52,7 @@ Partial Class sdgWindowNumber
         '
         Me.ucrBaseWindowNumber.AutoSize = True
         Me.ucrBaseWindowNumber.Location = New System.Drawing.Point(6, 72)
-        Me.ucrBaseWindowNumber.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBaseWindowNumber.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBaseWindowNumber.Name = "ucrBaseWindowNumber"
         Me.ucrBaseWindowNumber.Size = New System.Drawing.Size(336, 46)
         Me.ucrBaseWindowNumber.TabIndex = 31
@@ -63,7 +63,7 @@ Partial Class sdgWindowNumber
         Me.ucrNudPageNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPageNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudPageNumber.Location = New System.Drawing.Point(237, 26)
-        Me.ucrNudPageNumber.Margin = New System.Windows.Forms.Padding(8, 8, 8, 8)
+        Me.ucrNudPageNumber.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrNudPageNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPageNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPageNumber.Name = "ucrNudPageNumber"
