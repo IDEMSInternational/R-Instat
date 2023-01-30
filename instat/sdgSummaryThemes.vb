@@ -27,7 +27,7 @@ Public Class sdgSummaryThemes
 
     Private Sub InitialiseControls()
         Dim dctAlignment, dctWeights, dctStyles, dctBorderStyles, dctTextTransform, dctLayouts, dctFontNames, dctFootnotesMarks,
-        dctFootnotesMultiline As New Dictionary(Of String, String)
+        dctFootnotesMultiline, dctSeparators As New Dictionary(Of String, String)
 
         dctWeights.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctWeights.Add("Normal", Chr(34) & "normal" & Chr(34))
@@ -81,8 +81,14 @@ Public Class sdgSummaryThemes
         dctFootnotesMarks.Add("Extended", Chr(34) & "extended" & Chr(34))
 
         dctFootnotesMultiline.Add("NULL", Chr(34) & "NULL" & Chr(34))
-        dctFootnotesMultiline.Add("True", Chr(34) & "TRUE" & Chr(34))
-        dctFootnotesMultiline.Add("False", Chr(34) & "FALSE" & Chr(34))
+        dctFootnotesMultiline.Add("True", "TRUE")
+        dctFootnotesMultiline.Add("False", "FALSE")
+
+        dctSeparators.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctSeparators.Add("  ", "  ")
+        dctSeparators.Add(" ; ", " ; ")
+        dctSeparators.Add(" : ", " : ")
+        dctSeparators.Add(" , ", " , ")
 
         'Titles
         ucrChkBackgroundColour.SetText("Background Colour")
@@ -700,6 +706,7 @@ Public Class sdgSummaryThemes
 
         ucrChkFootnotesSeparator.SetText("Footnotes Separator")
         ucrInputFootnotesSeparator.SetParameter(New RParameter("footnotes.sep"))
+        ucrInputFootnotesSeparator.SetItems(dctSeparators)
         ucrChkFootnotesSeparator.AddParameterPresentCondition(True, "footnotes.sep")
         ucrChkFootnotesSeparator.AddParameterPresentCondition(False, "footnotes.sep", False)
 
@@ -783,7 +790,7 @@ Public Class sdgSummaryThemes
 
         ucrChkSourcenotesSeparator.SetText("Sourcenotes Separator")
         ucrInputSourcenotesSeparator.SetParameter(New RParameter("source_notes.sep"))
-        ' ucrInputFootnotesSeparator.SetItems(dctSeparators)
+        ucrInputFootnotesSeparator.SetItems(dctSeparators)
         ucrChkSourcenotesSeparator.AddParameterPresentCondition(True, "source_notes.sep")
         ucrChkSourcenotesSeparator.AddParameterPresentCondition(False, "source_notes.sep", False)
 

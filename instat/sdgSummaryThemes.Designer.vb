@@ -22,7 +22,7 @@ Partial Class sdgSummaryThemes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.tbSummaryThemes = New System.Windows.Forms.TabControl()
+        Me.tbpSummaryThemes = New System.Windows.Forms.TabControl()
         Me.tbThemeTables = New System.Windows.Forms.TabPage()
         Me.ucrTableBackgroundColors = New instat.ucrColors()
         Me.ucrNudTableWidth = New instat.ucrNud()
@@ -266,7 +266,7 @@ Partial Class sdgSummaryThemes
         Me.ucrChkSourcenotesBackColor = New instat.ucrCheck()
         Me.ucrInputSourcenotesBackColor = New instat.ucrColors()
         Me.ucrBaseSummaryTheme = New instat.ucrButtonsSubdialogue()
-        Me.tbSummaryThemes.SuspendLayout()
+        Me.tbpSummaryThemes.SuspendLayout()
         Me.tbThemeTables.SuspendLayout()
         Me.grpTableBorder.SuspendLayout()
         Me.grpFont.SuspendLayout()
@@ -291,20 +291,20 @@ Partial Class sdgSummaryThemes
         Me.grpSourcenotesBorder.SuspendLayout()
         Me.SuspendLayout()
         '
-        'tbSummaryThemes
+        'tbpSummaryThemes
         '
-        Me.tbSummaryThemes.Controls.Add(Me.tbThemeTables)
-        Me.tbSummaryThemes.Controls.Add(Me.tbThemeTitles)
-        Me.tbSummaryThemes.Controls.Add(Me.tbThemeColumns)
-        Me.tbSummaryThemes.Controls.Add(Me.tbThemeRows)
-        Me.tbSummaryThemes.Controls.Add(Me.tbpStub)
-        Me.tbSummaryThemes.Controls.Add(Me.tbpFootnotes)
-        Me.tbSummaryThemes.Controls.Add(Me.tbpSourcenotes)
-        Me.tbSummaryThemes.Location = New System.Drawing.Point(5, 1)
-        Me.tbSummaryThemes.Name = "tbSummaryThemes"
-        Me.tbSummaryThemes.SelectedIndex = 0
-        Me.tbSummaryThemes.Size = New System.Drawing.Size(736, 379)
-        Me.tbSummaryThemes.TabIndex = 0
+        Me.tbpSummaryThemes.Controls.Add(Me.tbThemeTables)
+        Me.tbpSummaryThemes.Controls.Add(Me.tbThemeTitles)
+        Me.tbpSummaryThemes.Controls.Add(Me.tbThemeColumns)
+        Me.tbpSummaryThemes.Controls.Add(Me.tbThemeRows)
+        Me.tbpSummaryThemes.Controls.Add(Me.tbpStub)
+        Me.tbpSummaryThemes.Controls.Add(Me.tbpFootnotes)
+        Me.tbpSummaryThemes.Controls.Add(Me.tbpSourcenotes)
+        Me.tbpSummaryThemes.Location = New System.Drawing.Point(5, 1)
+        Me.tbpSummaryThemes.Name = "tbpSummaryThemes"
+        Me.tbpSummaryThemes.SelectedIndex = 0
+        Me.tbpSummaryThemes.Size = New System.Drawing.Size(736, 379)
+        Me.tbpSummaryThemes.TabIndex = 0
         '
         'tbThemeTables
         '
@@ -3038,14 +3038,14 @@ Partial Class sdgSummaryThemes
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(754, 432)
         Me.Controls.Add(Me.ucrBaseSummaryTheme)
-        Me.Controls.Add(Me.tbSummaryThemes)
+        Me.Controls.Add(Me.tbpSummaryThemes)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgSummaryThemes"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Themes"
-        Me.tbSummaryThemes.ResumeLayout(False)
+        Me.tbpSummaryThemes.ResumeLayout(False)
         Me.tbThemeTables.ResumeLayout(False)
         Me.tbThemeTables.PerformLayout()
         Me.grpTableBorder.ResumeLayout(False)
@@ -3095,7 +3095,7 @@ Partial Class sdgSummaryThemes
 
     End Sub
 
-    Friend WithEvents tbSummaryThemes As TabControl
+    Friend WithEvents tbpSummaryThemes As TabControl
     Friend WithEvents tbThemeTables As TabPage
     Friend WithEvents tbThemeTitles As TabPage
     Friend WithEvents tbThemeColumns As TabPage
