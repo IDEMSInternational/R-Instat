@@ -26,31 +26,31 @@ Public Class ucrScript
     Private iMaxLineNumberCharLength As Integer = 0
 
     Public Sub CopyText()
-        clsScript.Copy()
+        clsScriptOld.Copy()
         EnableDisableButtons()
     End Sub
 
     Public Sub SelectAllText()
-        clsScript.SelectAll()
+        clsScriptOld.SelectAll()
         EnableDisableButtons()
     End Sub
 
     Private Sub RunCurrentLine()
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
-        If clsScript.TextLength > 0 Then
-            Dim strLineTextString = clsScript.Lines(clsScript.CurrentLine).Text
+        If clsScriptOld.TextLength > 0 Then
+            Dim strLineTextString = clsScriptOld.Lines(clsScriptOld.CurrentLine).Text
             strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
             strScriptCmd = RunText(strScriptCmd)
 
-            Dim iNextLinePos As Integer = clsScript.Lines(clsScript.CurrentLine).EndPosition
-            clsScript.GotoPosition(iNextLinePos)
+            Dim iNextLinePos As Integer = clsScriptOld.Lines(clsScriptOld.CurrentLine).EndPosition
+            clsScriptOld.GotoPosition(iNextLinePos)
         End If
     End Sub
 
     Public Sub AppendText(strText As String)
-        clsScript.AppendText(Environment.NewLine & strText)
-        clsScript.GotoPosition(clsScript.TextLength)
+        clsScriptOld.AppendText(Environment.NewLine & strText)
+        clsScriptOld.GotoPosition(clsScriptOld.TextLength)
         EnableDisableButtons()
     End Sub
 
@@ -66,11 +66,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
-        mnuUndo.Enabled = clsScript.CanUndo
-        mnuRedo.Enabled = clsScript.CanRedo
+        mnuUndo.Enabled = clsScriptOld.CanUndo
+        mnuRedo.Enabled = clsScriptOld.CanRedo
 
-        Dim bScriptselected = clsScript.SelectedText.Length > 0
-        Dim bScriptExists = clsScript.TextLength > 0
+        Dim bScriptselected = clsScriptOld.SelectedText.Length > 0
+        Dim bScriptExists = clsScriptOld.TextLength > 0
 
         mnuCut.Enabled = bScriptselected
         mnuCopy.Enabled = bScriptselected
@@ -101,7 +101,7 @@ Public Class ucrScript
         For i As Integer = 1 To iMaxLineNumberCharLength
             strLineNumber &= "9"
         Next
-        clsScript.Margins(0).Width = clsScript.TextWidth(Style.LineNumber, strLineNumber)
+        clsScriptOld.Margins(0).Width = clsScriptOld.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
     Private Function IsCharBlank(charNew As Char) As Boolean
@@ -127,12 +127,12 @@ Public Class ucrScript
     ''' <param name="charNew">  The character typed by the user. </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub InsertMatchedChars(charNew As Char)
-        Dim iCaretPos As Integer = clsScript.CurrentPosition
+        Dim iCaretPos As Integer = clsScriptOld.CurrentPosition
         Dim bIsDocStart As Boolean = iCaretPos = 1
-        Dim bIsDocEnd As Boolean = iCaretPos = clsScript.Text.Length
+        Dim bIsDocEnd As Boolean = iCaretPos = clsScriptOld.Text.Length
 
-        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(clsScript.GetCharAt(iCaretPos - 2)))
-        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(clsScript.GetCharAt(iCaretPos)))
+        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(clsScriptOld.GetCharAt(iCaretPos - 2)))
+        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(clsScriptOld.GetCharAt(iCaretPos)))
 
         Dim dctBrackets As New Dictionary(Of Char, Char) From {{"(", ")"}, {"{", "}"}, {"[", "]"}}
 
@@ -142,12 +142,12 @@ Public Class ucrScript
                 Exit Sub
             End If
             'insert close bracket character
-            clsScript.InsertText(iCaretPos, dctBrackets(charNew))
+            clsScriptOld.InsertText(iCaretPos, dctBrackets(charNew))
         ElseIf IsCharQuote(charNew) Then ' else if user entered quote
             'if user enters multiple quotes, then ensure that the caret does not remain in the center
             If charPrev = charNew AndAlso charNext = charNew Then
-                clsScript.DeleteRange(iCaretPos, 1)
-                clsScript.GotoPosition(iCaretPos)
+                clsScriptOld.DeleteRange(iCaretPos, 1)
+                clsScriptOld.GotoPosition(iCaretPos)
                 Exit Sub
             End If
 
@@ -158,7 +158,7 @@ Public Class ucrScript
             Dim bIsEnclosedByBracketAndSpace As Boolean = (dctBrackets.ContainsKey(charPrev) AndAlso IsCharBlank(charNext)) _
                                                    OrElse (dctBrackets.ContainsValue(charNext) AndAlso IsCharBlank(charPrev))
             If bIsEnclosedByBrackets OrElse bIsEnclosedBySpaces OrElse bIsEnclosedByBracketAndSpace Then
-                clsScript.InsertText(iCaretPos, charNew)
+                clsScriptOld.InsertText(iCaretPos, charNew)
             End If
         End If
     End Sub
@@ -181,15 +181,15 @@ Public Class ucrScript
     '''--------------------------------------------------------------------------------------------
     Private Sub InsertIndent(iKeyPressed As Integer)
         ' we only need to enter an indent when the user presses the enter key
-        If iKeyPressed <> Keys.Enter Or clsScript.AutoCActive <> False Then
+        If iKeyPressed <> Keys.Enter Or clsScriptOld.AutoCActive <> False Then
             Exit Sub
         End If
 
         ' find indent on previous non-blank line
         Dim iIndent As Integer = 0
         Dim strLinePrevText As String = ""
-        For iLineNum As Integer = clsScript.CurrentLine - 1 To 0 Step -1
-            strLinePrevText = clsScript.Lines(iLineNum).Text
+        For iLineNum As Integer = clsScriptOld.CurrentLine - 1 To 0 Step -1
+            strLinePrevText = clsScriptOld.Lines(iLineNum).Text
             If Not String.IsNullOrWhiteSpace(strLinePrevText) Then
                 iIndent = strLinePrevText.Length - strLinePrevText.TrimStart().Length
                 Exit For
@@ -197,10 +197,10 @@ Public Class ucrScript
         Next
 
         ' if caret before '}', then move '}' to new line
-        Dim strCharNext As String = If(clsScript.Text.Length > clsScript.CurrentPosition, clsScript.Text(clsScript.CurrentPosition), "")
+        Dim strCharNext As String = If(clsScriptOld.Text.Length > clsScriptOld.CurrentPosition, clsScriptOld.Text(clsScriptOld.CurrentPosition), "")
         If strCharNext = "}"c Then
-            clsScript.InsertText(clsScript.CurrentPosition, vbCrLf & "".PadRight(iIndent))
-            clsScript.ScrollRange(clsScript.CurrentPosition, clsScript.CurrentPosition + 2) 'ensure '}' is still visible to user
+            clsScriptOld.InsertText(clsScriptOld.CurrentPosition, vbCrLf & "".PadRight(iIndent))
+            clsScriptOld.ScrollRange(clsScriptOld.CurrentPosition, clsScriptOld.CurrentPosition + 2) 'ensure '}' is still visible to user
         End If
 
         ' if caret after '{', then increase indent 
@@ -211,10 +211,10 @@ Public Class ucrScript
         End If
 
         ' apply indent to current line
-        clsScript.InsertText(clsScript.CurrentPosition, "".PadRight(iIndent))
+        clsScriptOld.InsertText(clsScriptOld.CurrentPosition, "".PadRight(iIndent))
 
         ' move caret to end indent
-        clsScript.GotoPosition(clsScript.CurrentPosition + iIndent)
+        clsScriptOld.GotoPosition(clsScriptOld.CurrentPosition + iIndent)
     End Sub
 
     Private Function IsBracket(iNewChar As Integer) As Boolean
@@ -235,7 +235,7 @@ Public Class ucrScript
     Private Sub HighlightPairedBracket()
         'if caret has not moved, then do nothing
         Static iLastCaretPos As Integer = 0
-        Dim iCaretPos As Integer = clsScript.CurrentPosition
+        Dim iCaretPos As Integer = clsScriptOld.CurrentPosition
         If iLastCaretPos = iCaretPos Then
             Exit Sub
         End If
@@ -243,34 +243,34 @@ Public Class ucrScript
 
         Dim iBracketPos1 As Integer = -1
         'is there a brace to the left Or right?
-        If iCaretPos > 0 AndAlso IsBracket(clsScript.GetCharAt(iCaretPos - 1)) Then
+        If iCaretPos > 0 AndAlso IsBracket(clsScriptOld.GetCharAt(iCaretPos - 1)) Then
             iBracketPos1 = iCaretPos - 1
-        ElseIf IsBracket(clsScript.GetCharAt(iCaretPos)) Then
+        ElseIf IsBracket(clsScriptOld.GetCharAt(iCaretPos)) Then
             iBracketPos1 = iCaretPos
         End If
 
         If iBracketPos1 >= 0 Then
             'find the matching brace
-            Dim iBracketPos2 As Integer = clsScript.BraceMatch(iBracketPos1)
+            Dim iBracketPos2 As Integer = clsScriptOld.BraceMatch(iBracketPos1)
             If iBracketPos2 = Scintilla.InvalidPosition Then
-                clsScript.BraceBadLight(iBracketPos1)
-                clsScript.HighlightGuide = 0
+                clsScriptOld.BraceBadLight(iBracketPos1)
+                clsScriptOld.HighlightGuide = 0
             Else
-                clsScript.BraceHighlight(iBracketPos1, iBracketPos2)
-                clsScript.HighlightGuide = clsScript.GetColumn(iBracketPos1)
+                clsScriptOld.BraceHighlight(iBracketPos1, iBracketPos2)
+                clsScriptOld.HighlightGuide = clsScriptOld.GetColumn(iBracketPos1)
             End If
         Else
             'turn off brace matching
-            clsScript.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
-            clsScript.HighlightGuide = 0
+            clsScriptOld.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
+            clsScriptOld.HighlightGuide = 0
         End If
     End Sub
 
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
         'temporarily disable the buttons in case its a long operation
         EnableRunButtons(False)
-        If clsScript.SelectedText.Length > 0 Then
-            RunText(clsScript.SelectedText)
+        If clsScriptOld.SelectedText.Length > 0 Then
+            RunText(clsScriptOld.SelectedText)
         Else
             RunCurrentLine()
         End If
@@ -278,24 +278,24 @@ Public Class ucrScript
     End Sub
 
     Private Sub RunAll_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
-        If clsScript.TextLength < 1 _
+        If clsScriptOld.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
                               vbYesNo, "Run All") = vbNo Then
             Exit Sub
         End If
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
-        RunText(clsScript.Text)
+        RunText(clsScriptOld.Text)
         EnableRunButtons(True)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click, cmdClear.Click
-        If clsScript.TextLength < 1 _
+        If clsScriptOld.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
                                vbYesNo, "Clear") = vbNo Then
             Exit Sub
         End If
-        clsScript.ClearAll()
+        clsScriptOld.ClearAll()
         EnableDisableButtons()
     End Sub
 
@@ -311,7 +311,7 @@ Public Class ucrScript
                 strScriptFilename = "RInstatScript" & i & ".R"
             End While
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
-                              frmMain.clsRLink.GetRSetupScript() & clsScript.Text)
+                              frmMain.clsRLink.GetRSetupScript() & clsScriptOld.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
@@ -327,7 +327,7 @@ Public Class ucrScript
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSave.FileName, clsScript.Text)
+                    File.WriteAllText(dlgSave.FileName, clsScriptOld.Text)
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine &
                            "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -338,7 +338,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
-        If clsScript.TextLength > 0 _
+        If clsScriptOld.TextLength > 0 _
                 AndAlso MsgBox("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
                                vbYesNo, "Load Script From File") = vbNo Then
@@ -355,7 +355,7 @@ Public Class ucrScript
             End If
 
             Try
-                frmMain.ucrScriptWindow.clsScript.Text = File.ReadAllText(dlgLoad.FileName)
+                frmMain.ucrScriptWindow.clsScriptOld.Text = File.ReadAllText(dlgLoad.FileName)
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -365,22 +365,22 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        If clsScript.SelectedText.Length > 0 Then
+        If clsScriptOld.SelectedText.Length > 0 Then
             CopyText()
             EnableDisableButtons()
         End If
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        If clsScript.SelectedText.Length > 0 Then
-            clsScript.Cut()
+        If clsScriptOld.SelectedText.Length > 0 Then
+            clsScriptOld.Cut()
             EnableDisableButtons()
         End If
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
         If Clipboard.ContainsData(DataFormats.Text) Then
-            clsScript.Paste()
+            clsScriptOld.Paste()
             EnableDisableButtons()
         Else
             MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
@@ -392,9 +392,25 @@ Public Class ucrScript
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
-        clsScript.StyleResetDefault()
-        clsScript.Styles(Style.Default).Font = "Consolas"
-        clsScript.Styles(Style.Default).Size = 10
+        clsScriptOld = newScriptEditor()
+        setLineNumberMarginWidth(1)
+    End Sub
+
+    Private Function newScriptEditor() As Scintilla
+        Dim clsNewScript As Scintilla = New Scintilla With {
+            .ContextMenuStrip = mnuContextScript,
+            .Dock = DockStyle.Fill,
+            .Location = New Point(3, 3),
+            .Name = "txtScriptAdded",
+            .Size = New Size(391, 409),
+            .TabIndex = 14, 'TODO
+            .TabWidth = 2
+        }
+
+
+        clsNewScript.StyleResetDefault()
+        clsNewScript.Styles(Style.Default).Font = "Consolas"
+        clsNewScript.Styles(Style.Default).Size = 10
 
         'TODO  Configure from R-Instat options?
         'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
@@ -402,63 +418,63 @@ Public Class ucrScript
 
 
         ' Set the lexer
-        clsScript.Lexer = Lexer.R
+        clsNewScript.Lexer = Lexer.R
 
         ' Instruct the lexer to calculate folding
-        clsScript.SetProperty("fold", "1")
-        clsScript.SetProperty("fold.compact", "1")
+        clsNewScript.SetProperty("fold", "1")
+        clsNewScript.SetProperty("fold.compact", "1")
 
         ' Configure a margin to display folding symbols
-        clsScript.Margins(2).Type = MarginType.Symbol
-        clsScript.Margins(2).Mask = Marker.MaskFolders
-        clsScript.Margins(2).Sensitive = True
-        clsScript.Margins(2).Width = 20
+        clsNewScript.Margins(2).Type = MarginType.Symbol
+        clsNewScript.Margins(2).Mask = Marker.MaskFolders
+        clsNewScript.Margins(2).Sensitive = True
+        clsNewScript.Margins(2).Width = 20
 
         ' Set colors for all folding markers
         For i As Integer = 25 To 31
-            clsScript.Markers(i).SetForeColor(SystemColors.ControlLightLight)
-            clsScript.Markers(i).SetBackColor(SystemColors.ControlDark)
+            clsNewScript.Markers(i).SetForeColor(SystemColors.ControlLightLight)
+            clsNewScript.Markers(i).SetBackColor(SystemColors.ControlDark)
         Next
 
         ' Configure folding markers with respective symbols
-        clsScript.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
-        clsScript.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
-        clsScript.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
-        clsScript.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
-        clsScript.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
-        clsScript.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
-        clsScript.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
+        clsNewScript.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
+        clsNewScript.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
+        clsNewScript.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
+        clsNewScript.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
+        clsNewScript.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
+        clsNewScript.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
+        clsNewScript.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
 
         ' Enable automatic folding
-        clsScript.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
+        clsNewScript.AutomaticFold = AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Change
 
-        clsScript.IndentationGuides = IndentView.LookBoth
-        clsScript.StyleClearAll()
-        clsScript.Styles(Style.R.Default).ForeColor = Color.Silver
-        clsScript.Styles(Style.R.Comment).ForeColor = Color.Green
-        clsScript.Styles(Style.R.KWord).ForeColor = Color.Blue
-        clsScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
-        clsScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
-        clsScript.Styles(Style.R.Number).ForeColor = Color.Purple
-        clsScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
-        clsScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
-        clsScript.Styles(Style.R.Operator).ForeColor = Color.Gray
-        clsScript.Styles(Style.R.Identifier).ForeColor = Color.Black
-        clsScript.Styles(Style.R.Infix).ForeColor = Color.Gray
-        clsScript.Styles(Style.R.InfixEol).ForeColor = Color.Gray
-        clsScript.Styles(Style.BraceLight).BackColor = Color.LightGray
-        clsScript.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
-        clsScript.Styles(Style.BraceBad).ForeColor = Color.Red
+        clsNewScript.IndentationGuides = IndentView.LookBoth
+        clsNewScript.StyleClearAll()
+        clsNewScript.Styles(Style.R.Default).ForeColor = Color.Silver
+        clsNewScript.Styles(Style.R.Comment).ForeColor = Color.Green
+        clsNewScript.Styles(Style.R.KWord).ForeColor = Color.Blue
+        clsNewScript.Styles(Style.R.BaseKWord).ForeColor = Color.Blue
+        clsNewScript.Styles(Style.R.OtherKWord).ForeColor = Color.Blue
+        clsNewScript.Styles(Style.R.Number).ForeColor = Color.Purple
+        clsNewScript.Styles(Style.R.String).ForeColor = Color.FromArgb(163, 21, 21)
+        clsNewScript.Styles(Style.R.String2).ForeColor = Color.FromArgb(163, 21, 21)
+        clsNewScript.Styles(Style.R.Operator).ForeColor = Color.Gray
+        clsNewScript.Styles(Style.R.Identifier).ForeColor = Color.Black
+        clsNewScript.Styles(Style.R.Infix).ForeColor = Color.Gray
+        clsNewScript.Styles(Style.R.InfixEol).ForeColor = Color.Gray
+        clsNewScript.Styles(Style.BraceLight).BackColor = Color.LightGray
+        clsNewScript.Styles(Style.BraceLight).ForeColor = Color.BlueViolet
+        clsNewScript.Styles(Style.BraceBad).ForeColor = Color.Red
 
-        Dim tmp = clsScript.DescribeKeywordSets()
-        clsScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
+        Dim tmp = clsNewScript.DescribeKeywordSets()
+        clsNewScript.SetKeywords(0, "if else repeat while function for in next break TRUE FALSE NULL NA Inf NaN NA_integer_ NA_real_ NA_complex_ NA_character")
 
         'TODO if we want to set the key words for 'default package functions' (key word set 1) 
         ' and/or 'other package functions', then a good list is available at:
         '  https://raw.githubusercontent.com/moltenform/scite-files/master/files/files/api_files/r.properties  
 
-        setLineNumberMarginWidth(1)
-    End Sub
+        Return clsNewScript
+    End Function
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
         EnableDisableButtons()
@@ -466,23 +482,23 @@ Public Class ucrScript
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         'Determine if last operation can be undone in text box.   
-        If clsScript.CanUndo Then
-            clsScript.Undo() 'Undo the last operation.
+        If clsScriptOld.CanUndo Then
+            clsScriptOld.Undo() 'Undo the last operation.
             EnableDisableButtons()
         End If
     End Sub
 
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
         'Determine if last operation can be redone in text box.   
-        If clsScript.CanRedo Then
-            clsScript.Redo()
+        If clsScriptOld.CanRedo Then
+            clsScriptOld.Redo()
             EnableDisableButtons()
         End If
     End Sub
 
-    Private Sub clsScript_TextChanged(sender As Object, e As EventArgs) Handles clsScript.TextChanged
+    Private Sub clsScript_TextChanged(sender As Object, e As EventArgs) Handles clsScriptOld.TextChanged
         EnableDisableButtons()
-        setLineNumberMarginWidth(clsScript.Lines.Count.ToString().Length)
+        setLineNumberMarginWidth(clsScriptOld.Lines.Count.ToString().Length)
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -490,16 +506,16 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
-        clsScript.SelectAll()
+        clsScriptOld.SelectAll()
         EnableDisableButtons()
     End Sub
 
-    Private Sub clsScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScript.CharAdded
+    Private Sub clsScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptOld.CharAdded
         InsertMatchedChars(ChrW(e.Char))
         InsertIndent(e.Char)
     End Sub
 
-    Private Sub clsScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles clsScript.UpdateUI
+    Private Sub clsScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles clsScriptOld.UpdateUI
         HighlightPairedBracket()
     End Sub
 
@@ -507,18 +523,11 @@ Public Class ucrScript
 
         Static iTabCounter As Integer = 1
 
-        Dim txtScriptAdded = New ScintillaNET.Scintilla()
-        txtScriptAdded.ContextMenuStrip = Me.mnuContextScript
-        txtScriptAdded.Dock = System.Windows.Forms.DockStyle.Fill
-        txtScriptAdded.Lexer = ScintillaNET.Lexer.R
-        txtScriptAdded.Location = New System.Drawing.Point(3, 3)
-        txtScriptAdded.Name = "txtScript"
-        txtScriptAdded.Size = New System.Drawing.Size(391, 409)
-        txtScriptAdded.TabIndex = 14
-        txtScriptAdded.TabWidth = 2
+        clsScriptOld = newScriptEditor()
+        setLineNumberMarginWidth(1)
 
         Dim tabPageAdded = New TabPage
-        tabPageAdded.Controls.Add(txtScriptAdded)
+        tabPageAdded.Controls.Add(clsScriptOld)
         tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
         tabPageAdded.Location = New System.Drawing.Point(4, 22)
@@ -536,15 +545,15 @@ Public Class ucrScript
 
         TabControl.SelectedTab = tabPageAdded
 
-        Dim txtScriptSelected As ScintillaNET.Scintilla
-        Dim tabPageControls = TabControl.SelectedTab.Controls
-        For Each control In tabPageControls
-            If TypeOf control Is ScintillaNET.Scintilla Then
-                txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
-            End If
-        Next
+        'Dim txtScriptSelected As ScintillaNET.Scintilla
+        'Dim tabPageControls = TabControl.SelectedTab.Controls
+        'For Each control In tabPageControls
+        '    If TypeOf control Is ScintillaNET.Scintilla Then
+        '        txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
+        '    End If
+        'Next
 
-        txtScriptSelected.AppendText("test1")
+        clsScriptOld.AppendText("test" & iTabCounter - 1)
         EnableDisableButtons()
 
     End Sub
@@ -569,7 +578,14 @@ Public Class ucrScript
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
 
         'TODO continue from here
-        'set txtScript to the Scintilla control of the newly selected tab
+        '- set txtScript to the Scintilla control of the newly selected tab
+        '- replace clsScriptOld with clsScriptActive (find and replace, not rename)
+        '- make private
+        '- replace frmMain and dlgImportDataset calls to clsScriptOld with calls to public properties
+        '- remove Scintilla from designer
+        '- remove first tab from designer
+        '- create first tab on load
+
         Dim txtScriptSelected As ScintillaNET.Scintilla = Nothing
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
