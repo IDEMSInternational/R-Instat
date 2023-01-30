@@ -529,7 +529,7 @@ Public Class RCodeStructure
                 'set the R command and parameters for the add object R function. This is used for adding the object in the data book
                 'set the R command and parameters for the get object R function. This is used for viewing the object.
                 clsAddRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-                clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+                clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
                 If Not String.IsNullOrEmpty(_strDataFrameNameToAddAssignToObject) Then
                     clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
@@ -537,6 +537,7 @@ Public Class RCodeStructure
                 End If
 
                 clsGetRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
+                clsGetRObject.AddParameter("as_file", "TRUE")
 
                 clsAddRObject.AddParameter("object_name", Chr(34) & _strAssignToName & Chr(34))
                 clsAddRObject.AddParameter("object_type_label", Chr(34) & _strAssignToObjectTypeLabel & Chr(34))

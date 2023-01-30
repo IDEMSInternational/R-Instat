@@ -171,23 +171,15 @@ Public Class ucrReceiverMultiple
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
-                Case "object"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-                    clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
-                Case "graph"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
-                Case "surv"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_surv")
-                    clsGetVariablesFunc.AddParameter("surv_name", GetVariableNames())
-                Case "model"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
-                    If bForceVariablesAsList Then
-                        clsGetVariablesFunc.AddParameter("force_as_list", "TRUE", iPosition:=3)
-                    Else
-                        clsGetVariablesFunc.RemoveParameterByName("force_as_list")
-                    End If
+                Case "object",
+                     RObjectTypeLabel.Graph,
+                     RObjectTypeLabel.Table,
+                     RObjectTypeLabel.Model,
+                     RObjectTypeLabel.Summary,
+                     RObjectTypeLabel.StructureLabel
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects_data")
+                    clsGetVariablesFunc.AddParameter("object_names", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("as_files", "FALSE")
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
@@ -312,10 +304,9 @@ Public Class ucrReceiverMultiple
     ''' Removes any variable in the multiple receiver
     ''' that is not in the list of variables of the selector
     ''' </summary>
-    ''' <param name="lstViewItem"></param>
-    Public Overrides Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
+    Public Overrides Sub RemoveAnyVariablesNotInList()
         For Each strVar In GetVariableNamesAsList()
-            If lstViewItem.FindItemWithText(strVar) Is Nothing Then
+            If Selector.lstAvailableVariable.FindItemWithText(strVar) Is Nothing Then
                 Remove({strVar})
             End If
         Next
@@ -381,7 +372,7 @@ Public Class ucrReceiverMultiple
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
 
-        RemoveAnyVariablesNotInList(Selector.lstAvailableVariable) 'needed due to the Autofill option
+        RemoveAnyVariablesNotInList() 'needed due to the Autofill option
 
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
