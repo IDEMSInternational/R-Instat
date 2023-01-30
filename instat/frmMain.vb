@@ -102,7 +102,6 @@ Public Class frmMain
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
-        mnuHelpAboutRInstat.Visible = False
 
         ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
         ' e.g. "1.0" fails Decimal.TryParse if CurrentCulture = "fr-FR" because it expects "1,0"
@@ -1153,7 +1152,7 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "0")
     End Sub
 
-    Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpHistFAQ.Click
+    Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpFAQ.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
     End Sub
 
@@ -1161,12 +1160,12 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "3")
     End Sub
 
-    Private Sub mnuHelpDataset_Click(sender As Object, e As EventArgs) Handles mnuHelpDataset.Click
+    Private Sub mnuHelpDataset_Click(sender As Object, e As EventArgs) Handles mnuHelpData.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "71")
     End Sub
 
-    Private Sub mnuHelpRPackagesCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackagesCommands.Click
-        dlgHelpVignettes.ShowDialog()
+    Private Sub mnuHelpRPackagesCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackages.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
     End Sub
 
     Private Sub mnuHelpR_Click(sender As Object, e As EventArgs) Handles mnuHelpAboutR.Click
@@ -1175,15 +1174,6 @@ Public Class frmMain
 
     Private Sub mnuHelpMenus_Click(sender As Object, e As EventArgs) Handles mnuHelpMenus.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
-    End Sub
-
-
-    Private Sub mnuHelpGuidesCaseStudy_Click(sender As Object, e As EventArgs) Handles mnuHelpGuidesCaseStudy.Click
-        Process.Start(Path.Combine(strStaticPath, "Help", "Case_Study_Guide_June_2016.pdf"))
-    End Sub
-
-    Private Sub mnuHelpGuideGlosary_Click(sender As Object, e As EventArgs) Handles mnuHelpGuideGlosary.Click
-        Process.Start(Path.Combine(strStaticPath, "Help", "Statistics Glossary.pdf"))
     End Sub
 
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
@@ -1941,8 +1931,8 @@ Public Class frmMain
         dlgFitModel.ShowDialog()
     End Sub
 
-    Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs) Handles mnuHelpAcknowledgments.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
+    Private Sub mnuHelpGlossary_Click(sender As Object, e As EventArgs) Handles mnuHelpGlossary.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "92")
     End Sub
 
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
@@ -1994,10 +1984,6 @@ Public Class frmMain
 
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
-    End Sub
-
-    Private Sub mnuHelpDataViewSpreadsheet_Click(sender As Object, e As EventArgs) Handles mnuHelpDataViewSpreadsheet.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
     Private Sub mnuClimaticTidyandExamineOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableGraph.Click
@@ -2519,4 +2505,9 @@ Public Class frmMain
     Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
         dlgSearch.ShowDialog()
     End Sub
+
+    Private Sub mnuHelpPackagesDocumentation_Click(sender As Object, e As EventArgs) Handles mnuHelpPackagesDocumentation.Click
+        dlgHelpVignettes.ShowDialog()
+    End Sub
+
 End Class
