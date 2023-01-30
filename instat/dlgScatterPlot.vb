@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
@@ -117,7 +117,8 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
-        ucrSaveScatterPlot.SetSaveTypeAsGraph()
+        ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
+                                       strRObjectFormat:=RObjectFormat.Image)
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
         ucrSaveScatterPlot.SetIsComboBox()
@@ -212,7 +213,12 @@ Public Class dlgScatterPlot
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
 
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorForScatter.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
+
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
@@ -298,7 +304,7 @@ Public Class dlgScatterPlot
         sdgLayerOptions.ShowDialog()
         ucrReceiverLabel.SetRCode(clsRaesFunction, bReset)
         bResetlayerSubdialog = False
-        'The aesthetics parameters on the main dialog are repopulated as required. 
+        'The aesthetics parameters on the main dialog are repopulated as required.
         For Each clsParam In clsRaesFunction.clsParameters
             Select Case clsParam.strArgumentName
                 Case "x"
@@ -330,4 +336,5 @@ Public Class dlgScatterPlot
         ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class

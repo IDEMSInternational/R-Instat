@@ -11,9 +11,8 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneVariableSummarise
     Inherits System.Windows.Forms.Form
@@ -34,7 +33,7 @@ Partial Class dlgOneVariableSummarise
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
@@ -168,7 +167,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 314)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(162, 23)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(190, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
         '
         'ucrSelectorOneVarSummarise
@@ -200,7 +199,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 346)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 386)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
@@ -256,7 +255,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.cmdMissingOptions.Enabled = False
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(165, 311)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(206, 311)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
         Me.cmdMissingOptions.TabIndex = 27
@@ -269,7 +268,7 @@ Partial Class dlgOneVariableSummarise
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(421, 402)
+        Me.ClientSize = New System.Drawing.Size(421, 442)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.ucrInputMarginName)

@@ -447,9 +447,9 @@
   "View/Delete Labels...": "Ver/Eliminar etiquetas...",
   "Row Sumaries...": "Resúmenes de fila...",
   "Permute/Sample Rows...": "Permutar/filas de muestra...",
-  "Stack (Pivot Longer)...": "Stack (Pivot Longer)...",
+  "Stack (Pivot Longer)...": "Pila (pivote más largo)...",
   "Unstack (Pivot Wider)...": "Desapilar (girar más ancho)...",
-  "Merge (Join)...": "Merge (Join)...",
+  "Merge (Join)...": "Fusionar (Unirse)...",
   "Append (Bind Rows)...": "Agregar (vincular filas)...",
   "Random Split...": "División aleatoria...",
   "Scale/Distance...": "Escala/Distancia...",
@@ -457,5 +457,13 @@
   "Save": "Ahorrar",
   "Import SST...": "Importar SST...",
   "Daily Data Editing/Entry...": "Edición/entrada de datos diarios...",
-  "Experiments": "Experiments"
+  "Experiments": "Experimentos",
+  "Two/Three Variables": "Dos/Tres Variables",
+  "Graphs": "gráficos",
+  "Tables...": "Mesas...",
+  "Pivot Table...": "Tabla dinámica...",
+  "Two-Way Frequencies...": "Frecuencias bidireccionales...",
+  "Three-Way Frequencies...": "Frecuencias de tres vías...",
+  "Heatmap...": "Mapa de calor...",
+  "Cluster Analysis...": "Análisis de conglomerados..."
 }

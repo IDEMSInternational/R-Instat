@@ -72,7 +72,7 @@ Public Class dlgOptions
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
         ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
         ucrChkViewOptionsByContextMenu.SetText("Show Options By Context Menu")
-        ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
+        ucrChkShowRCommandsinOutputWindow.SetText("Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
@@ -84,8 +84,16 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
+        ucrInputLanguage.SetItems({"English", "French", "Italian", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
+
+        ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
+        ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
+        ucrNudMaximumOutputsHeight.Maximum = 1000
+        'todo. temporarily disabled 
+        ucrChkMaximumOutputsHeight.Visible = False
+        ucrNudMaximumOutputsHeight.Visible = False
 
         SetVisibleLanButton()
     End Sub
@@ -118,11 +126,20 @@ Public Class dlgOptions
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
+
+        'todo. temporarily disabled
+        'ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
+        'ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
+        '                                      frmMain.clsInstatOptions.iMaxOutputsHeight,
+        '                                      clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
+            Case "it-IT"
+                ucrInputLanguage.SetText("Italian")
             Case "sw-KE"
                 ucrInputLanguage.SetText("Kiswahili")
             Case "pt-PT"
@@ -174,6 +191,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
+        'todo. temporarily disabled
+        'frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
+        '                                                 ucrNudMaximumOutputsHeight.Value, -1))
     End Sub
 
     Private Sub SetView()
@@ -271,6 +291,8 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
+            Case "Italian"
+                strCurrLanguageCulture = "it-IT"
             Case "Kiswahili"
                 strCurrLanguageCulture = "sw-KE"
             Case "Portuguese"
@@ -399,6 +421,10 @@ Public Class dlgOptions
             strGraphDisplayOption = "view_R_viewer"
         End If
         ApplyEnabled(True)
+    End Sub
+
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+
     End Sub
 
     Private Sub SetVisibleLanButton()

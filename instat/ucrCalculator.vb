@@ -30,6 +30,7 @@ Public Class ucrCalculator
     Private clsDataFunction As New RFunction
     Private clsRepFunction As New RFunction
     Private clsZseqFunction As New RFunction
+    Private FrequencyFunction As New RFunction
 
     Public Sub New()
 
@@ -58,7 +59,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "Integer"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -71,6 +72,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
 
         ttCalculator.SetToolTip(cmdSortF, "sorts a vector into ascending or descending order. For example sort(c(5,7,4,4,3)) = (3,4,4,5,7)")
+        ttCalculator.SetToolTip(cmdScale, "centre and scale the data - usually by producing (x - xbar)/s")
+        ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
+        ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
         ttCalculator.SetToolTip(cmdLag, "shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
         ttCalculator.SetToolTip(cmdLead, "shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
         ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
@@ -223,6 +227,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdChoosez, "computes binomial coefficient choose(n,k) as a big integer. For example, chooseZ(20,2)=190")
         ttCalculator.SetToolTip(cmdNextPrime, "gives the next prime number. For example, nextprime(14)= 17")
         ttCalculator.SetToolTip(cmdFactorize, "compute the prime factorizations. For example, Factorize(20)= (2,5,2,1)")
+        ttCalculator.SetToolTip(cmdFactorize2, "like factorize, but with simpler layout of results and much slower for large data sets.")
         ttCalculator.SetToolTip(cmdIsPrime, "checks if the number is prime and returns 0 or 2, 0= False, 2= True. For example, is.prime(10) returns 0")
         ttCalculator.SetToolTip(cmdFibonacci, "generates Fibonacci numbers. For example, Fibonacci(8)=21")
         ttCalculator.SetToolTip(cmdDivisors, "returns the divisors of x. For example, Divisors(21)= c(1,3,7)")
@@ -258,8 +263,64 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPadovan, "sum of last but 1 and last but 2 values. So from ...7, 9, 12, next is 7+9 = 16.")
         ttCalculator.SetToolTip(cmdTriangle, "number of objects in a triangle, so 0, 1, 3, 6, 10...")
         ttCalculator.SetToolTip(cmdSquare, "squares of each integer, so 1, 4, 9, 16.")
-        ttCalculator.SetToolTip(cmdLucas, "generartes lucas numbers to the length of the dataframe. For example the 10th lucas number is 76")
+        ttCalculator.SetToolTip(cmdLucas, "generates Lucas numbers to the length of the dataframe. For example the 10th Lucas number is 76")
+        ttCalculator.SetToolTip(cmdPrimorial, "gives the primorial (like the factorial, but just the primes up to the number) for a variable. For example primorial(c(7,8,9)) = 235*7 = (210, 210, 210)")
 
+        ttCalculator.SetToolTip(cmdLength, "number of observations: For example length(c(1,2,3,4,NA)) = 5 ")
+        ttCalculator.SetToolTip(cmdSum, "the sum or total: So sum(c(1,2,3,4,10)) = 20 ")
+        ttCalculator.SetToolTip(cmdMin, "the smallest value: So min(c(4,3,10,1,2)) = 1 ")
+        ttCalculator.SetToolTip(cmdMax, "the largest value: So max(c(4,3,10,1,2)) = 10 ")
+        ttCalculator.SetToolTip(cmdRange, "gives both the min and the max. Use max - min to give the value of the range")
+        ttCalculator.SetToolTip(cmdMiss, "the number of missing values. So miss(c( NA,2,3,4,NA)) = 2")
+        ttCalculator.SetToolTip(cmdMean, "the average, usually sum/length. So mean(c(1,2,3,4,10)) = 4")
+        ttCalculator.SetToolTip(cmdMedian, "the value halfway up the values in order. So median(c(1,2,3,4,10) = 3")
+        ttCalculator.SetToolTip(cmdMode, "the most popular value. So mode(c(10,2,2,3,3) = 2 and 3")
+        ttCalculator.SetToolTip(cmdMode1, "the first mode. So mode1(c(10,2,2,3,3)) = 2")
+        ttCalculator.SetToolTip(cmdNonMiss, "the number of non-missing values. So nonmiss(c(1,2,3,4,NA)) = 4")
+        ttCalculator.SetToolTip(cmdVar, "the variance. The average of the squared deviations from the mean - dividing by (n-1)")
+        ttCalculator.SetToolTip(cmdSd, "the standard deviation. A typical distance from the mean. Often roughly a quarter of the range of the data.")
+        ttCalculator.SetToolTip(cmdMad, "the median of the absolute deviations from the median. So mad(c(1,2,3,4,10)) = median of (2,1,0,1,7). Median = 1 and multiplied by 1.483 to be like the sd for normally distributed data.")
+        ttCalculator.SetToolTip(cmdIQR, "the interquartile range. So, for (1,2,3,4,10) the upper quartile=4, lower=2, so IQR = 2.")
+        ttCalculator.SetToolTip(cmdDistinct, "the number of different values in the variable. So distinct(c(1,2,3,3,NA,NA)) = 4")
+        ttCalculator.SetToolTip(cmdCv, "coefficient of variation, namely 100 * sd/mean. So cv(c(1,2,3,4,10)) = 100*3.536/4 = 88.4.")
+        ttCalculator.SetToolTip(cmdMc, "median couple. A robust measure of skewness, between -1 and +1. mc(c(1,1,4,4,5)) = -0.5, while mc(c(2,3,3,4,10)) = 0.375.")
+        ttCalculator.SetToolTip(cmdSkew, "skewness defined as third central moment/sd^3. For skew(c(1,1,4,4,5)) = -0.18, while skew(2,3,3,4,10) = 0.95.")
+        ttCalculator.SetToolTip(cmdKurtosis, "kurtosis defined as 4th central moment/sd^4 -3. A measure of peakedness which is zero for normally distributed data.")
+        ttCalculator.SetToolTip(cmdAnyDup, "the row number of the first duplicated value, or 0 if no duplicates. So anydup(c(1,2,3,3,10) = 4.")
+        ttCalculator.SetToolTip(cmdPropn, "proportion of variable less than (or more than) a specified value. So prop(c(0,1,1,4,10) <=1) = 0.6.")
+        ttCalculator.SetToolTip(cmdFirst, "value in the first row. So first(c(NA,7,8,9,10)) is NA. Also first(c(NA,7,8,9,10),order=(2,3,0,1,2)) = 8.")
+        ttCalculator.SetToolTip(cmdLast, "value in the last row. So last(c(NA,7,8,9,10)) = 10. Also last(c(NA,7,8,9,10),order=c(2,3,0,1,2)) = 7")
+        ttCalculator.SetToolTip(cmdnth, "value in nth row, So nth(c(NA,7,8,9,10)) = 8. Also nth(c(NA,7,7,9,10),3,order=c(2,3,0,1,2))= NA.")
+        ttCalculator.SetToolTip(cmdCor, "correlation between 2 variables. It is a value between -1 and +1.")
+        ttCalculator.SetToolTip(cmdCov, "covariance between 2 variables.")
+        ttCalculator.SetToolTip(cmdQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
+
+        ttCalculator.SetToolTip(cmdFreqDistinct, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqIQR, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqLength, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMad, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMax, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMean, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMedian, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMin, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMiss, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqMode1, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqPropn, "complete as rep(d > 50, f)) to give the proportion of values in variable d more than 50")
+        ttCalculator.SetToolTip(cmdFreqQuantile, "complete as rep(d ,f), prop=0.2), for example, for the 20% point.")
+        ttCalculator.SetToolTip(cmdFreqSd, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqSum, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+        ttCalculator.SetToolTip(cmdFreqVar, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
+
+        ttCalculator.SetToolTip(cmduniform, "Random sample from the uniform distribution between 0 & 1. Use say runif(n,5,10) to change the range")
+        ttCalculator.SetToolTip(cmdRan_normal, "Random sample from the standard normal distribution. Use, say rnorm(n,100,15) to change the mean and sd.")
+        ttCalculator.SetToolTip(cmduni_integer, "Random integers between 1 and 5. Use say sample.int(3,n,TRUE,prob=c(6,3,1)) to sample 1 to 3 with defined probabilities.")
+        ttCalculator.SetToolTip(cmdbernoulli, "Random Bernoulli (0 or 1) sample. Use say rbinom(n,1,1/6) for a random sample of a given dice value.")
+        ttCalculator.SetToolTip(cmdbinomial, "Random binomial sample with values between 0 and 3. Use say rbinom(n,5,prob=0.1) for other distributions.")
+        ttCalculator.SetToolTip(cmdpoisson, "Random Poisson sample with mean 1. Change the mean as required.")
+        ttCalculator.SetToolTip(cmdnbinomial, "Random geometric sample as given, i.e. number of failures before size=1 success. Change value of size (must remain positive) for other negative binomials.")
+        ttCalculator.SetToolTip(cmdRan_gamma, "Random sample with shape=1 is from the exponential distribution with mean 2. Keep scale (>0) = 2 and change shape (>0) to 0.5 for chi-square distribution with 1d.f. or to 5, for 10 d.f. Keep scale = 2 for chi-square.")
+        ttCalculator.SetToolTip(cmdRan_beta, "This special case is the uniform distribution between 0 and 1. Change shape1 > 0 and shape2 > 0 for different beta distributions.")
+        ttCalculator.SetToolTip(cmdRan_sample, "Random sample with replacement, from a given variable. Change replace to FALSE for a random permutation.")
     End Sub
 
     Public Sub Reset()
@@ -390,6 +451,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Logical and Symbols"
                 strPackageName = "base"
@@ -411,6 +473,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case "Summary"
                 strPackageName = "base"
                 grpDates.Visible = False
@@ -431,6 +494,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case "Text/Strings (Character Columns)"
                 strPackageName = "stringr"
                 grpDates.Visible = False
@@ -450,6 +514,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = True
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
                 strPackageName = "base"
@@ -471,6 +536,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case "Probability"
                 strPackageName = "stats"
                 grpDates.Visible = False
@@ -490,6 +556,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
                 strPackageName = "lubridate"
@@ -510,6 +577,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
                 strPackageName = "dplyr"
@@ -530,6 +598,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.47, iBaseHeight)
             Case "Wakefield"
                 strPackageName = "wakefield"
@@ -550,6 +619,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.8, iBaseHeight)
             Case "Circular"
                 strPackageName = "circular"
@@ -570,6 +640,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "hydroGOF"
                 strPackageName = "hydroGOF"
@@ -590,6 +661,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
             Case "Integer"
                 strPackageName = "gmp"
@@ -610,7 +682,29 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = True
+                grpComplex.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.5, iBaseHeight)
+            Case "Complex"
+                strPackageName = "base"
+                grpSummary.Visible = False
+                grpMaths.Visible = False
+                grpLogical.Visible = False
+                grpBasic.Visible = True
+                grpTestString.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
+                grpFactor.Visible = False
+                grpProbabilty.Visible = False
+                grpTransform.Visible = False
+                grpDates.Visible = False
+                grpCircular.Visible = False
+                grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
+                grpHydroGOF.Visible = False
+                grpInteger.Visible = False
+                grpComplex.Visible = True
+                Me.Size = New Size(iBasicWidth * 1.3, iBaseHeight)
             Case "Basic"
                 grpSummary.Visible = False
                 grpMaths.Visible = False
@@ -630,6 +724,7 @@ Public Class ucrCalculator
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
                 grpInteger.Visible = False
+                grpComplex.Visible = False
             Case Else
                 grpDates.Visible = False
                 Me.Size = New Size(iBasicWidth, iBaseHeight)
@@ -834,81 +929,93 @@ Public Class ucrCalculator
 
     Private Sub cmdSum_Click(sender As Object, e As EventArgs) Handles cmdSum.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdMean_Click(sender As Object, e As EventArgs) Handles cmdMean.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x = , trim = 0 , na.rm = FALSE)", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x = , trim = 0 , na.rm = TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdMax_Click(sender As Object, e As EventArgs) Handles cmdMax.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max( , na.rm = TRUE)", 15)
         End If
     End Sub
 
     Private Sub cmdMin_Click(sender As Object, e As EventArgs) Handles cmdMin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdVar_Click(sender As Object, e As EventArgs) Handles cmdVar.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x = , y = NULL, na.rm = FALSE)", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x = , y = NULL, na.rm = TRUE)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdSd_Click(sender As Object, e As EventArgs) Handles cmdSd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdRange_Click(sender As Object, e As EventArgs) Handles cmdRange.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range(x = , na.rm = False, finite = FALSE)", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range(x = , na.rm = TRUE, finite = FALSE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = FALSE, names = FALSE, type=7)", 53)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
-        End If
+        Dim clsQuantileFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsQuantileFunction.SetRCommand("quantile")
+        clsQuantileFunction.AddParameter("x", "", iPosition:=0)
+        clsQuantileFunction.AddParameter("probs", "0.5", iPosition:=1)
+        clsQuantileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
+        clsQuantileFunction.AddParameter("names", "FALSE", iPosition:=3)
+        clsQuantileFunction.AddParameter("type", "7", iPosition:=4)
+
+        clsRepFunction.SetRCommand("rep")
+        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsQuantileFunction, iPosition:=0)
+        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 66)
     End Sub
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR(x = , na.rm = FALSE, type = 7)", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR(x = , na.rm = TRUE, type = 7)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1402,10 +1509,6 @@ Public Class ucrCalculator
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, cmdHydroHelp.Click, cmdCircularHelp.Click, cmdWakefieldHelp.Click, cmdMathsHelp.Click, cmdLogicalHelp.Click, cmdSummaryHelp.Click, cmdProbRHelp.Click, cmdStringRHelp.Click
-        OpenHelpPage()
-    End Sub
-
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)
         RaiseEvent TryCommadClick()
     End Sub
@@ -1550,25 +1653,25 @@ Public Class ucrCalculator
 
     Private Sub cmdCv_Click(sender As Object, e As EventArgs) Handles cmdCv.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv(x = , aszero = FALSE, na.rm = FALSE)", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv(x = , aszero = FALSE, na.rm = TRUE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("raster::cv( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdMad_Click(sender As Object, e As EventArgs) Handles cmdMad.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = , center = median(x), constant = 1.4826, na.rm = FALSE,low = FALSE, high = FALSE)", 82)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = , center = median(x = ), constant = 1.4826, na.rm = TRUE,low = FALSE, high = FALSE)", 84)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x =, na.rm = FALSE, doReflect = (length(x) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 112)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 113)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1582,9 +1685,9 @@ Public Class ucrCalculator
 
     Private Sub cmdSkew_Click(sender As Object, e As EventArgs) Handles cmdSkew.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness(x = , na.rm = FALSE, type = 3)", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness(x = , na.rm = TRUE, type = 3)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::skewness( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -1602,17 +1705,17 @@ Public Class ucrCalculator
 
     Private Sub cmdCor_Click(sender As Object, e As EventArgs) Handles cmdCor.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x= , y= , use = ""na"", method = c(""pearson"", ""kendall"", ""spearman""))", 65)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x = , y = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cor(x = , y = , use = ""na"")", 19)
         End If
     End Sub
 
     Private Sub cmdCov_Click(sender As Object, e As EventArgs) Handles cmdCov.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= , y= , use = ""everything"", method = c(""pearson"", ""kendall"", ""spearman""))", 73)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x= , y= , use = ""na"", method = c(""pearson"", ""kendall"", ""spearman""))", 65)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x = , y = )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cov(x = , y = , use = ""na"")", 19)
         End If
     End Sub
 
@@ -1649,11 +1752,21 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMode_Click(sender As Object, e As EventArgs) Handles cmdMode.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv(x = , na_rm = FALSE)", 17)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv()", 1)
-        End If
+        Dim clsSummaryModeFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsSummaryModeFunction.SetPackageName("statip")
+        clsSummaryModeFunction.SetRCommand("mfv")
+        clsSummaryModeFunction.AddParameter("x", "", iPosition:=0)
+        clsSummaryModeFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+        clsRepFunction.SetRCommand("rep")
+        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSummaryModeFunction, iPosition:=0)
+        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 34)
     End Sub
 
     Private Sub cmdNA_Click(sender As Object, e As EventArgs) Handles cmdNA.Click
@@ -3563,17 +3676,17 @@ Public Class ucrCalculator
 
     Private Sub cmdMode1_Click(sender As Object, e As EventArgs) Handles cmdMode1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na_rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1( , na.rm = TRUE)", 16)
         End If
     End Sub
 
     Private Sub cmdKurtosis_Click(sender As Object, e As EventArgs) Handles cmdKurtosis.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis(x = , na.rm = FALSE, type = 3)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis(x = , na.rm = TRUE, type = 3)", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("e1071::kurtosis( , na.rm = TRUE)", 16)
         End If
     End Sub
 
@@ -3921,7 +4034,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIntegerRHelp_Click(sender As Object, e As EventArgs) Handles cmdIntegerRHelp.Click
+    Private Sub cmdIntegerRHelp_Click(sender As Object, e As EventArgs) Handles cmdIntegerRHelp.Click, GmpToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
             strPackageName = "gmp"
@@ -3933,6 +4046,14 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Integer" Then
             strPackageName = "DescTools"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ConfdesignToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfdesignToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Integer" Then
+            strPackageName = "conf.design"
         End If
         OpenHelpPage()
     End Sub
@@ -4207,20 +4328,12 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
+    Private Sub cmdFactorize_Click(sender As Object, e As EventArgs) Handles cmdFactorize.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize(n= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Factorize()", 1)
         End If
-    End Sub
-
-    Private Sub GmpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GmpToolStripMenuItem.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Integer" Then
-            strPackageName = "gmp"
-        End If
-        OpenHelpPage()
     End Sub
 
     Private Sub ZseqToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZseqToolStripMenuItem.Click
@@ -4263,15 +4376,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdTransformRHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformRHelp.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Transform" Then
-            strPackageName = "base"
-        End If
-        OpenHelpPage()
-    End Sub
-
-    Private Sub BaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseToolStripMenuItem.Click
+    Private Sub cmdTransformRHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformRHelp.Click, BaseToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Transform" Then
             strPackageName = "base"
@@ -4283,6 +4388,14 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Transform" Then
             strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MASSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MASSToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "MASS"
         End If
         OpenHelpPage()
     End Sub
@@ -4305,5 +4418,604 @@ Public Class ucrCalculator
         clsZseqFunction.AddParameter("gmp", "TRUE", iPosition:=1)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsZseqFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdPrimorial_Click(sender As Object, e As EventArgs) Handles cmdPrimorial.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,primes::primorial_n)", 22)
+    End Sub
+
+    Private Sub cmdFactorize2_Click(sender As Object, e As EventArgs) Handles cmdFactorize2.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("conf.design::factorize( )", 2)
+    End Sub
+
+    Private Sub cmdFreqLength_Click(sender As Object, e As EventArgs) Handles cmdFreqLength.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("length(x=rep(x= ,times= ))", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("length(rep( , ))", 5)
+        End If
+    End Sub
+
+    Private Sub cmdFreqSum_Click(sender As Object, e As EventArgs) Handles cmdFreqSum.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x=rep(x= ,times= ),na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(rep(,),na.rm=TRUE)", 14)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMin_Click(sender As Object, e As EventArgs) Handles cmdFreqMin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(rep( , ), na.rm= TRUE)", 18)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMax_Click(sender As Object, e As EventArgs) Handles cmdFreqMax.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(rep( , ), na.rm= TRUE)", 18)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMode1_Click(sender As Object, e As EventArgs) Handles cmdFreqMode1.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(rep(x = , times= ), na.rm = TRUE)", 25)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("statip::mfv1(rep( , ), na.rm = TRUE)", 19)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMiss_Click(sender As Object, e As EventArgs) Handles cmdFreqMiss.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x=is.na(rep(x= ,times= )))", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na(rep( , )))", 5)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMean_Click(sender As Object, e As EventArgs) Handles cmdFreqMean.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(rep( , ), na.rm=TRUE)", 16)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMedian_Click(sender As Object, e As EventArgs) Handles cmdFreqMedian.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x=rep(x= ,times= ), na.rm= TRUE)", 23)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(rep( , ), na.rm=TRUE)", 17)
+        End If
+    End Sub
+
+    Private Sub cmdFreqVar_Click(sender As Object, e As EventArgs) Handles cmdFreqVar.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::var(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::var(rep( , ), na.rm=TRUE)", 17)
+        End If
+    End Sub
+
+    Private Sub cmdFreqSd_Click(sender As Object, e As EventArgs) Handles cmdFreqSd.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::sd(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::sd(rep( , ), na.rm=TRUE)", 17)
+        End If
+    End Sub
+
+    Private Sub cmdFreqMad_Click(sender As Object, e As EventArgs) Handles cmdFreqMad.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::mad(rep( , ), na.rm=TRUE)", 17)
+        End If
+    End Sub
+
+    Private Sub cmdFreqIQR_Click(sender As Object, e As EventArgs) Handles cmdFreqIQR.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::IQR(x = rep(x= ,times= ), na.rm = TRUE)", 24)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::IQR(rep( , ), na.rm=TRUE)", 17)
+        End If
+    End Sub
+
+    Private Sub cmdFreqDistinct_Click(sender As Object, e As EventArgs) Handles cmdFreqDistinct.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::n_distinct(x = rep(x= ,times= ))", 10)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::n_distinct(rep( , ))", 5)
+        End If
+    End Sub
+
+    Private Sub cmdFreqPropn_Click(sender As Object, e As EventArgs) Handles cmdFreqPropn.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x= rep(x= <=1, ), na.rm = TRUE))", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(rep( <=1, ), na.rm = TRUE)", 21)
+        End If
+    End Sub
+
+    Private Sub cmdFreqQuantile_Click(sender As Object, e As EventArgs) Handles cmdFreqQuantile.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= rep(x= , times= ), probs= 0.2, na.rm = TRUE))", 38)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(rep( , ), 0.2, na.rm = TRUE)", 24)
+        End If
+    End Sub
+
+    Private Sub StatsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Summary" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub StatipToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatipToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Summary" Then
+            strPackageName = "statip"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub E1071ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles E1071ToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Summary" Then
+            strPackageName = "e1071"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub RobustbaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RobustbaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Summary" Then
+            strPackageName = "robustbase"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub RasterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RasterToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Summary" Then
+            strPackageName = "raster"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdSummaryRHelp_Click(sender As Object, e As EventArgs) Handles cmdSummaryRHelp.Click, BaseToolStripMenuItem1.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Summary" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdComplexRHelp_Click(sender As Object, e As EventArgs) Handles cmdComplexRHelp.Click, ComplexBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Complex" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdWakefieldHelp_Click(sender As Object, e As EventArgs) Handles cmdWakefieldHelp.Click, WakefieldToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Wakefield" Then
+            strPackageName = "wakefield"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdCircularHelp_Click(sender As Object, e As EventArgs) Handles cmdCircularHelp.Click, CircularToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Circular" Then
+            strPackageName = "circular"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdHydroHelp_Click(sender As Object, e As EventArgs) Handles cmdHydroHelp.Click, HydroGOFToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "hydroGOF" Then
+            strPackageName = "hydroGOF"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsStatsStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdTransformHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformHelp.Click, FactorForcatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Factor" Then
+            strPackageName = "forcats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdLogicalHelp_Click(sender As Object, e As EventArgs) Handles cmdLogicalHelp.Click, LogBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub LogDplyrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogDplyrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Logical and Symbols" Then
+            strPackageName = "dplyr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdStringRHelp_Click(sender As Object, e As EventArgs) Handles cmdStringRHelp.Click, TxTStringrToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "stringr"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub TxTBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TxTBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Text/Strings (Character Columns)" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdProbRHelp_Click(sender As Object, e As EventArgs) Handles cmdProbRHelp.Click, ProbStatsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ProbBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProbBaseToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Probability" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, DateLubridateToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "lubridate"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub DateHmsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DateHmsToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Dates/Times" Then
+            strPackageName = "hms"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmduniform_Click(sender As Object, e As EventArgs) Handles cmduniform.Click
+        Dim clsUniformFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsUniformFunction.SetRCommand("runif")
+        clsUniformFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsUniformFunction.AddParameter("min", "0", iPosition:=1)
+        clsUniformFunction.AddParameter("max", "1", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsUniformFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdpoisson_Click(sender As Object, e As EventArgs) Handles cmdpoisson.Click
+        Dim clsPoissonFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsPoissonFunction.SetRCommand("rpois")
+        clsPoissonFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsPoissonFunction.AddParameter("lambda", "1", iPosition:=1)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPoissonFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdRan_normal_Click(sender As Object, e As EventArgs) Handles cmdRan_normal.Click
+        Dim clsNormalFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsNormalFunction.SetRCommand("rnorm")
+        clsNormalFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsNormalFunction.AddParameter("mean", "0", iPosition:=1)
+        clsNormalFunction.AddParameter("sd", "1", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsNormalFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmduni_integer_Click(sender As Object, e As EventArgs) Handles cmduni_integer.Click
+        Dim clsUnitegerFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsUnitegerFunction.SetRCommand("sample.int")
+        clsUnitegerFunction.AddParameter("n", "5", iPosition:=0)
+        clsUnitegerFunction.AddParameter("size", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+        clsUnitegerFunction.AddParameter("replace", "TRUE", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsUnitegerFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdbernoulli_Click(sender As Object, e As EventArgs) Handles cmdbernoulli.Click
+        Dim clsBernoulliFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsBernoulliFunction.SetRCommand("rbinom")
+        clsBernoulliFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsBernoulliFunction.AddParameter("size", "1", iPosition:=1)
+        clsBernoulliFunction.AddParameter("prob", "0.5", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsBernoulliFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdbinomial_Click(sender As Object, e As EventArgs) Handles cmdbinomial.Click
+        Dim clsBinomialFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsBinomialFunction.SetRCommand("rbinom")
+        clsBinomialFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsBinomialFunction.AddParameter("size", "3", iPosition:=1)
+        clsBinomialFunction.AddParameter("prob", "0.5", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsBinomialFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdnbinomial_Click(sender As Object, e As EventArgs) Handles cmdnbinomial.Click
+        Dim clsNbinomialFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsNbinomialFunction.SetRCommand("rnbinom")
+        clsNbinomialFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsNbinomialFunction.AddParameter("size", "1", iPosition:=1)
+        clsNbinomialFunction.AddParameter("prob", "0.5", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsNbinomialFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdRan_gamma_Click(sender As Object, e As EventArgs) Handles cmdRan_gamma.Click
+        Dim clsGammaFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsGammaFunction.SetRCommand("rgamma")
+        clsGammaFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsGammaFunction.AddParameter("shape", "1", iPosition:=1)
+        clsGammaFunction.AddParameter("scale", "2", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsGammaFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdRan_beta_Click(sender As Object, e As EventArgs) Handles cmdRan_beta.Click
+        Dim clsBetaFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsBetaFunction.SetRCommand("rbeta")
+        clsBetaFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsBetaFunction.AddParameter("shape1", "1", iPosition:=1)
+        clsBetaFunction.AddParameter("shape2", "1", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsBetaFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdRan_sample_Click(sender As Object, e As EventArgs) Handles cmdRan_sample.Click
+        Dim clsSampleFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsSampleFunction.SetRCommand("sample")
+        clsSampleFunction.AddParameter("x", " ", iPosition:=0)
+        clsSampleFunction.AddParameter("size", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+        clsSampleFunction.AddParameter("replace", "TRUE", iPosition:=2)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
+    End Sub
+
+    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdReal_Click(sender As Object, e As EventArgs) Handles cmdReal.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdImaginary_Click(sender As Object, e As EventArgs) Handles cmdImaginary.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMod_Click(sender As Object, e As EventArgs) Handles cmdMod.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdArg_Click(sender As Object, e As EventArgs) Handles cmdArg.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdConjugate_Click(sender As Object, e As EventArgs) Handles cmdConjugate.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj(z = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexLog_Click(sender As Object, e As EventArgs) Handles cmdComplexLog.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= , base=exp(1))", 14)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSqrt_Click_1(sender As Object, e As EventArgs) Handles cmdComplexSqrt.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexRound_Click(sender As Object, e As EventArgs) Handles cmdComplexRound.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexExp_Click_1(sender As Object, e As EventArgs) Handles cmdComplexExp.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSignif_Click(sender As Object, e As EventArgs) Handles cmdComplexSignif.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= , digits=6)", 11)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexCos_Click(sender As Object, e As EventArgs) Handles cmdComplexCos.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSin_Click(sender As Object, e As EventArgs) Handles cmdComplexSin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexTan_Click(sender As Object, e As EventArgs) Handles cmdComplexTan.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexCosH_Click(sender As Object, e As EventArgs) Handles cmdComplexCosH.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexSinH_Click(sender As Object, e As EventArgs) Handles cmdComplexSinH.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexTanH_Click(sender As Object, e As EventArgs) Handles cmdComplexTanH.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdComplexRad_Click(sender As Object, e As EventArgs) Handles cmdComplexRad.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rad()", 1)
+    End Sub
+
+    Private Sub cmdComplexDeg_Click(sender As Object, e As EventArgs) Handles cmdComplexDeg.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::deg()", 1)
+    End Sub
+
+    Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi()", 1)
+    End Sub
+
+    Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
+    End Sub
+
+    Private Sub cmdScale_Click(sender As Object, e As EventArgs) Handles cmdScale.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( , center = TRUE, scale = TRUE)", 31)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
+      If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 39)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
+        End If
+    End Sub
+
+    Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
 End Class
