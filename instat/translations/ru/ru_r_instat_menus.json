@@ -457,5 +457,13 @@
   "Save": "Сохранять",
   "Import SST...": "Импорт SST...",
   "Daily Data Editing/Entry...": "Ежедневное редактирование/ввод данных...",
-  "Experiments": "Эксперименты"
+  "Experiments": "Эксперименты",
+  "Two/Three Variables": "Две/три переменные",
+  "Graphs": "Графики",
+  "Tables...": "Таблицы...",
+  "Pivot Table...": "Сводная таблица...",
+  "Two-Way Frequencies...": "Двусторонние частоты...",
+  "Three-Way Frequencies...": "Трехполосные частоты...",
+  "Heatmap...": "Тепловая карта...",
+  "Cluster Analysis...": "Кластерный анализ..."
 }
