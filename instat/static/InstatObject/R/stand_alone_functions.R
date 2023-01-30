@@ -2616,8 +2616,9 @@ cbind_unique <- function(x, y, cols){
 }
 
 #object is the object to be displayed
-#object_format is the display format
-view_object <- function(object, object_format) {
+#object_format is the display format. If supplied, then returns file name of the object
+#if not then it prints the object
+view_object_data <- function(object, object_format = NULL) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
@@ -2629,6 +2630,15 @@ view_object <- function(object, object_format) {
     print(object)
   }
   return(file_name)
+}
+
+view_object <- function(data_book_object) {
+  return(
+    view_object_data(
+      object = data_book_object$object,
+      object_format = data_book_object$object_format
+    )
+  )
 }
 
 #displays the graph object in the set R "viewer".
@@ -2786,5 +2796,54 @@ check_graph <- function(graph_object){
   
   return(out)
 } 
+
+
+get_data_book_output_object_names <- function(output_object_list,
+                                              object_type_label = NULL, 
+                                              excluded_items = c(), 
+                                              as_list = FALSE, 
+                                              list_label = NULL){
+  
+  if(is.null(object_type_label)){
+    out <- names(output_object_list)
+  }else{ 
+    out <- names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
+  }
+  
+  if(length(out) == 0){
+    return(out)
+  } 
+  
+  if(length(excluded_items) > 0) {
+    #get indices of items to exclude
+    excluded_indices <- which(out %in% excluded_items)
+    
+    #remove the excluded items from the list
+    if(length(excluded_indices) > 0){
+      out <- out[-excluded_indices]
+    }
+    
+  }
+  
+  if(as_list) {
+    #convert the character vector list
+    lst <- list()
+    if(!is.null(list_label)){
+      lst[[list_label]] <- out
+    }else{
+      lst <- as.list(out)
+    }
+   
+    return(lst)
+  }else{
+    #return as a character vector
+    return(out)
+  }
+  
+}
+
+
+
+
 
 

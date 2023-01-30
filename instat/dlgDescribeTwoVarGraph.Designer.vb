@@ -114,7 +114,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(138, 23)
         Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Tag = "Options..."
         Me.cmdOptions.Text = "Plot Options"
@@ -841,7 +841,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdPairOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPairOptions.Location = New System.Drawing.Point(11, 226)
         Me.cmdPairOptions.Name = "cmdPairOptions"
-        Me.cmdPairOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdPairOptions.Size = New System.Drawing.Size(137, 24)
         Me.cmdPairOptions.TabIndex = 66
         Me.cmdPairOptions.Tag = "Options..."
         Me.cmdPairOptions.Text = "Pair Plot Options"
@@ -853,7 +853,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 516)
-        Me.Controls.Add(Me.cmdPairOptions)
         Me.Controls.Add(Me.ucrInputLabelSize)
         Me.Controls.Add(Me.lblLabelColour)
         Me.Controls.Add(Me.lblLabelSize)
@@ -877,6 +876,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.cmdPairOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

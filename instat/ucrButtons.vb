@@ -183,6 +183,8 @@ Public Class ucrButtons
         'Clear variables from global environment
         'TODO check that this line could be removed
         clsRemoveFunc.ClearParameters()
+        'remove any duplicate set assign to. This gets unique set assign to object names to remove
+        lstAssignToStrings = lstAssignToStrings.Distinct().ToList
         'TODO remove assign to instat object
         'lstAssignToStrings.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
         If lstAssignToStrings.Count = 1 Then
@@ -194,12 +196,13 @@ Public Class ucrButtons
             Next
             clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
         End If
-        If bRun Then
-            If clsRemoveFunc.clsParameters.Count > 0 Then
+
+        If clsRemoveFunc.clsParameters.Count > 0 Then
+            If bRun Then
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
+            Else
+                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
             End If
-        Else
-            frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
         End If
     End Sub
 

@@ -19,7 +19,7 @@ Public Class dlgCombineforGraphics
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubDialog As Boolean = False
-    Private clsDefaultRFunction As New RFunction
+    Private clsArrangeRFunction As New RFunction
     Private Sub dlgCombineforGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -42,28 +42,32 @@ Public Class dlgCombineforGraphics
         ucrCombineGraphReceiver.SetParameter(New RParameter("grobs", 0))
         ucrCombineGraphReceiver.SetParameterIsRFunction()
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
-        ucrCombineGraphReceiver.SetItemType("graph")
+        ucrCombineGraphReceiver.SetItemType(RObjectTypeLabel.Graph)
         ucrCombineGraphReceiver.strSelectorHeading = "Graphs"
 
         ucrSave.SetPrefix("combined_graph")
         ucrSave.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
-        ucrSave.SetSaveTypeAsGraph()
+        ucrSave.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultRFunction = New RFunction
+        clsArrangeRFunction = New RFunction
 
         ucrCombineGraphReceiver.SetMeAsReceiver()
         ucrCombineGraphSelector.Reset()
         ucrSave.Reset()
 
-        clsDefaultRFunction.SetPackageName("gridExtra")
-        clsDefaultRFunction.SetRCommand("grid.arrange")
-        clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        clsArrangeRFunction.SetPackageName("gridExtra")
+        clsArrangeRFunction.SetRCommand("grid.arrange")
+        clsArrangeRFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrCombineGraphSelector.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsArrangeRFunction)
         bResetSubDialog = True
     End Sub
 

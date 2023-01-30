@@ -108,11 +108,11 @@ Partial Class dlgRandomSample
         Me.ucrNudNumberOfSamples.AutoSize = True
         Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(359, 126)
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(372, 126)
         Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
-        Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(55, 26)
         Me.ucrNudNumberOfSamples.TabIndex = 5
         Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -121,11 +121,11 @@ Partial Class dlgRandomSample
         Me.ucrNudSeed.AutoSize = True
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSeed.Location = New System.Drawing.Point(359, 100)
+        Me.ucrNudSeed.Location = New System.Drawing.Point(372, 100)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Name = "ucrNudSeed"
-        Me.ucrNudSeed.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSeed.Size = New System.Drawing.Size(55, 24)
         Me.ucrNudSeed.TabIndex = 3
         Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -144,7 +144,7 @@ Partial Class dlgRandomSample
         Me.ucrSampleSize.AutoSize = True
         Me.ucrSampleSize.IsMultiline = False
         Me.ucrSampleSize.IsReadOnly = True
-        Me.ucrSampleSize.Location = New System.Drawing.Point(359, 152)
+        Me.ucrSampleSize.Location = New System.Drawing.Point(372, 152)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 7
