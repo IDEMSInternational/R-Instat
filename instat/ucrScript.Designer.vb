@@ -67,7 +67,7 @@ Partial Class ucrScript
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.txtScript = New ScintillaNET.Scintilla()
+        Me.clsScript = New ScintillaNET.Scintilla()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnRemoveTab = New System.Windows.Forms.Button()
         Me.mnuContextScript.SuspendLayout()
@@ -298,7 +298,7 @@ Partial Class ucrScript
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.txtScript)
+        Me.TabPage1.Controls.Add(Me.clsScript)
         Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
@@ -311,14 +311,14 @@ Partial Class ucrScript
         '
         'txtScript
         '
-        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
-        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtScript.Lexer = ScintillaNET.Lexer.R
-        Me.txtScript.Location = New System.Drawing.Point(3, 3)
-        Me.txtScript.Name = "txtScript"
-        Me.txtScript.Size = New System.Drawing.Size(391, 409)
-        Me.txtScript.TabIndex = 14
-        Me.txtScript.TabWidth = 2
+        Me.clsScript.ContextMenuStrip = Me.mnuContextScript
+        Me.clsScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.clsScript.Lexer = ScintillaNET.Lexer.R
+        Me.clsScript.Location = New System.Drawing.Point(3, 3)
+        Me.clsScript.Name = "txtScript"
+        Me.clsScript.Size = New System.Drawing.Size(391, 409)
+        Me.clsScript.TabIndex = 14
+        Me.clsScript.TabWidth = 2
         '
         'btnRemoveTab
         '
@@ -374,7 +374,7 @@ Partial Class ucrScript
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents TabControl As TabControl
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents txtScript As ScintillaNET.Scintilla
+    Friend WithEvents clsScript As ScintillaNET.Scintilla
     Friend WithEvents cmdAddTab As Button
     Friend WithEvents btnRemoveTab As Button
 End Class
