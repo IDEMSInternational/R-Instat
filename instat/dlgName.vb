@@ -547,7 +547,7 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Private Sub grdCurrentWorkSheet_CellMouseLeave(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
+    Private Sub grdCurrentWorkSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
         If grdCurrentWorkSheet.ColumnCount > 0 Then
             Dim iCol As Integer = e.Cell.Column
             Dim parsedValue As Boolean
