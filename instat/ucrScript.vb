@@ -24,33 +24,44 @@ Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
     Private strCurrentDirectory As String = ""
     Private iMaxLineNumberCharLength As Integer = 0
+    'Private txtScriptSelected As Scintilla = Nothing
+    Friend WithEvents clsScriptActive As Scintilla
+
+    Public Property strText As String
+        Get
+            Return clsScriptActive.Text
+        End Get
+        Set(strNewText As String)
+            clsScriptActive.Text = strNewText
+        End Set
+    End Property
 
     Public Sub CopyText()
-        clsScriptOld.Copy()
+        clsScriptActive.Copy()
         EnableDisableButtons()
     End Sub
 
     Public Sub SelectAllText()
-        clsScriptOld.SelectAll()
+        clsScriptActive.SelectAll()
         EnableDisableButtons()
     End Sub
 
     Private Sub RunCurrentLine()
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
-        If clsScriptOld.TextLength > 0 Then
-            Dim strLineTextString = clsScriptOld.Lines(clsScriptOld.CurrentLine).Text
+        If clsScriptActive.TextLength > 0 Then
+            Dim strLineTextString = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
             strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
             strScriptCmd = RunText(strScriptCmd)
 
-            Dim iNextLinePos As Integer = clsScriptOld.Lines(clsScriptOld.CurrentLine).EndPosition
-            clsScriptOld.GotoPosition(iNextLinePos)
+            Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
+            clsScriptActive.GotoPosition(iNextLinePos)
         End If
     End Sub
 
     Public Sub AppendText(strText As String)
-        clsScriptOld.AppendText(Environment.NewLine & strText)
-        clsScriptOld.GotoPosition(clsScriptOld.TextLength)
+        clsScriptActive.AppendText(Environment.NewLine & strText)
+        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
         EnableDisableButtons()
     End Sub
 
@@ -66,11 +77,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
-        mnuUndo.Enabled = clsScriptOld.CanUndo
-        mnuRedo.Enabled = clsScriptOld.CanRedo
+        mnuUndo.Enabled = clsScriptActive.CanUndo
+        mnuRedo.Enabled = clsScriptActive.CanRedo
 
-        Dim bScriptselected = clsScriptOld.SelectedText.Length > 0
-        Dim bScriptExists = clsScriptOld.TextLength > 0
+        Dim bScriptselected = clsScriptActive.SelectedText.Length > 0
+        Dim bScriptExists = clsScriptActive.TextLength > 0
 
         mnuCut.Enabled = bScriptselected
         mnuCopy.Enabled = bScriptselected
@@ -101,7 +112,7 @@ Public Class ucrScript
         For i As Integer = 1 To iMaxLineNumberCharLength
             strLineNumber &= "9"
         Next
-        clsScriptOld.Margins(0).Width = clsScriptOld.TextWidth(Style.LineNumber, strLineNumber)
+        clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
     Private Function IsCharBlank(charNew As Char) As Boolean
@@ -127,12 +138,12 @@ Public Class ucrScript
     ''' <param name="charNew">  The character typed by the user. </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub InsertMatchedChars(charNew As Char)
-        Dim iCaretPos As Integer = clsScriptOld.CurrentPosition
+        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
         Dim bIsDocStart As Boolean = iCaretPos = 1
-        Dim bIsDocEnd As Boolean = iCaretPos = clsScriptOld.Text.Length
+        Dim bIsDocEnd As Boolean = iCaretPos = clsScriptActive.Text.Length
 
-        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(clsScriptOld.GetCharAt(iCaretPos - 2)))
-        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(clsScriptOld.GetCharAt(iCaretPos)))
+        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(clsScriptActive.GetCharAt(iCaretPos - 2)))
+        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(clsScriptActive.GetCharAt(iCaretPos)))
 
         Dim dctBrackets As New Dictionary(Of Char, Char) From {{"(", ")"}, {"{", "}"}, {"[", "]"}}
 
@@ -142,12 +153,12 @@ Public Class ucrScript
                 Exit Sub
             End If
             'insert close bracket character
-            clsScriptOld.InsertText(iCaretPos, dctBrackets(charNew))
+            clsScriptActive.InsertText(iCaretPos, dctBrackets(charNew))
         ElseIf IsCharQuote(charNew) Then ' else if user entered quote
             'if user enters multiple quotes, then ensure that the caret does not remain in the center
             If charPrev = charNew AndAlso charNext = charNew Then
-                clsScriptOld.DeleteRange(iCaretPos, 1)
-                clsScriptOld.GotoPosition(iCaretPos)
+                clsScriptActive.DeleteRange(iCaretPos, 1)
+                clsScriptActive.GotoPosition(iCaretPos)
                 Exit Sub
             End If
 
@@ -158,7 +169,7 @@ Public Class ucrScript
             Dim bIsEnclosedByBracketAndSpace As Boolean = (dctBrackets.ContainsKey(charPrev) AndAlso IsCharBlank(charNext)) _
                                                    OrElse (dctBrackets.ContainsValue(charNext) AndAlso IsCharBlank(charPrev))
             If bIsEnclosedByBrackets OrElse bIsEnclosedBySpaces OrElse bIsEnclosedByBracketAndSpace Then
-                clsScriptOld.InsertText(iCaretPos, charNew)
+                clsScriptActive.InsertText(iCaretPos, charNew)
             End If
         End If
     End Sub
@@ -181,15 +192,15 @@ Public Class ucrScript
     '''--------------------------------------------------------------------------------------------
     Private Sub InsertIndent(iKeyPressed As Integer)
         ' we only need to enter an indent when the user presses the enter key
-        If iKeyPressed <> Keys.Enter Or clsScriptOld.AutoCActive <> False Then
+        If iKeyPressed <> Keys.Enter Or clsScriptActive.AutoCActive <> False Then
             Exit Sub
         End If
 
         ' find indent on previous non-blank line
         Dim iIndent As Integer = 0
         Dim strLinePrevText As String = ""
-        For iLineNum As Integer = clsScriptOld.CurrentLine - 1 To 0 Step -1
-            strLinePrevText = clsScriptOld.Lines(iLineNum).Text
+        For iLineNum As Integer = clsScriptActive.CurrentLine - 1 To 0 Step -1
+            strLinePrevText = clsScriptActive.Lines(iLineNum).Text
             If Not String.IsNullOrWhiteSpace(strLinePrevText) Then
                 iIndent = strLinePrevText.Length - strLinePrevText.TrimStart().Length
                 Exit For
@@ -197,10 +208,10 @@ Public Class ucrScript
         Next
 
         ' if caret before '}', then move '}' to new line
-        Dim strCharNext As String = If(clsScriptOld.Text.Length > clsScriptOld.CurrentPosition, clsScriptOld.Text(clsScriptOld.CurrentPosition), "")
+        Dim strCharNext As String = If(clsScriptActive.Text.Length > clsScriptActive.CurrentPosition, clsScriptActive.Text(clsScriptActive.CurrentPosition), "")
         If strCharNext = "}"c Then
-            clsScriptOld.InsertText(clsScriptOld.CurrentPosition, vbCrLf & "".PadRight(iIndent))
-            clsScriptOld.ScrollRange(clsScriptOld.CurrentPosition, clsScriptOld.CurrentPosition + 2) 'ensure '}' is still visible to user
+            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, vbCrLf & "".PadRight(iIndent))
+            clsScriptActive.ScrollRange(clsScriptActive.CurrentPosition, clsScriptActive.CurrentPosition + 2) 'ensure '}' is still visible to user
         End If
 
         ' if caret after '{', then increase indent 
@@ -211,10 +222,10 @@ Public Class ucrScript
         End If
 
         ' apply indent to current line
-        clsScriptOld.InsertText(clsScriptOld.CurrentPosition, "".PadRight(iIndent))
+        clsScriptActive.InsertText(clsScriptActive.CurrentPosition, "".PadRight(iIndent))
 
         ' move caret to end indent
-        clsScriptOld.GotoPosition(clsScriptOld.CurrentPosition + iIndent)
+        clsScriptActive.GotoPosition(clsScriptActive.CurrentPosition + iIndent)
     End Sub
 
     Private Function IsBracket(iNewChar As Integer) As Boolean
@@ -235,7 +246,7 @@ Public Class ucrScript
     Private Sub HighlightPairedBracket()
         'if caret has not moved, then do nothing
         Static iLastCaretPos As Integer = 0
-        Dim iCaretPos As Integer = clsScriptOld.CurrentPosition
+        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
         If iLastCaretPos = iCaretPos Then
             Exit Sub
         End If
@@ -243,34 +254,34 @@ Public Class ucrScript
 
         Dim iBracketPos1 As Integer = -1
         'is there a brace to the left Or right?
-        If iCaretPos > 0 AndAlso IsBracket(clsScriptOld.GetCharAt(iCaretPos - 1)) Then
+        If iCaretPos > 0 AndAlso IsBracket(clsScriptActive.GetCharAt(iCaretPos - 1)) Then
             iBracketPos1 = iCaretPos - 1
-        ElseIf IsBracket(clsScriptOld.GetCharAt(iCaretPos)) Then
+        ElseIf IsBracket(clsScriptActive.GetCharAt(iCaretPos)) Then
             iBracketPos1 = iCaretPos
         End If
 
         If iBracketPos1 >= 0 Then
             'find the matching brace
-            Dim iBracketPos2 As Integer = clsScriptOld.BraceMatch(iBracketPos1)
+            Dim iBracketPos2 As Integer = clsScriptActive.BraceMatch(iBracketPos1)
             If iBracketPos2 = Scintilla.InvalidPosition Then
-                clsScriptOld.BraceBadLight(iBracketPos1)
-                clsScriptOld.HighlightGuide = 0
+                clsScriptActive.BraceBadLight(iBracketPos1)
+                clsScriptActive.HighlightGuide = 0
             Else
-                clsScriptOld.BraceHighlight(iBracketPos1, iBracketPos2)
-                clsScriptOld.HighlightGuide = clsScriptOld.GetColumn(iBracketPos1)
+                clsScriptActive.BraceHighlight(iBracketPos1, iBracketPos2)
+                clsScriptActive.HighlightGuide = clsScriptActive.GetColumn(iBracketPos1)
             End If
         Else
             'turn off brace matching
-            clsScriptOld.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
-            clsScriptOld.HighlightGuide = 0
+            clsScriptActive.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
+            clsScriptActive.HighlightGuide = 0
         End If
     End Sub
 
     Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
         'temporarily disable the buttons in case its a long operation
         EnableRunButtons(False)
-        If clsScriptOld.SelectedText.Length > 0 Then
-            RunText(clsScriptOld.SelectedText)
+        If clsScriptActive.SelectedText.Length > 0 Then
+            RunText(clsScriptActive.SelectedText)
         Else
             RunCurrentLine()
         End If
@@ -278,24 +289,24 @@ Public Class ucrScript
     End Sub
 
     Private Sub RunAll_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
-        If clsScriptOld.TextLength < 1 _
+        If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
                               vbYesNo, "Run All") = vbNo Then
             Exit Sub
         End If
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
-        RunText(clsScriptOld.Text)
+        RunText(clsScriptActive.Text)
         EnableRunButtons(True)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click, cmdClear.Click
-        If clsScriptOld.TextLength < 1 _
+        If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
                                vbYesNo, "Clear") = vbNo Then
             Exit Sub
         End If
-        clsScriptOld.ClearAll()
+        clsScriptActive.ClearAll()
         EnableDisableButtons()
     End Sub
 
@@ -311,7 +322,7 @@ Public Class ucrScript
                 strScriptFilename = "RInstatScript" & i & ".R"
             End While
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
-                              frmMain.clsRLink.GetRSetupScript() & clsScriptOld.Text)
+                              frmMain.clsRLink.GetRSetupScript() & clsScriptActive.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
@@ -327,7 +338,7 @@ Public Class ucrScript
             dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSave.FileName, clsScriptOld.Text)
+                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine &
                            "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -338,7 +349,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
-        If clsScriptOld.TextLength > 0 _
+        If clsScriptActive.TextLength > 0 _
                 AndAlso MsgBox("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
                                vbYesNo, "Load Script From File") = vbNo Then
@@ -355,7 +366,7 @@ Public Class ucrScript
             End If
 
             Try
-                frmMain.ucrScriptWindow.clsScriptOld.Text = File.ReadAllText(dlgLoad.FileName)
+                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -365,35 +376,26 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        If clsScriptOld.SelectedText.Length > 0 Then
+        If clsScriptActive.SelectedText.Length > 0 Then
             CopyText()
             EnableDisableButtons()
         End If
     End Sub
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        If clsScriptOld.SelectedText.Length > 0 Then
-            clsScriptOld.Cut()
+        If clsScriptActive.SelectedText.Length > 0 Then
+            clsScriptActive.Cut()
             EnableDisableButtons()
         End If
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
         If Clipboard.ContainsData(DataFormats.Text) Then
-            clsScriptOld.Paste()
+            clsScriptActive.Paste()
             EnableDisableButtons()
         Else
             MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
         End If
-    End Sub
-
-    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        EnableDisableButtons()
-        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
-        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
-
-        clsScriptOld = newScriptEditor()
-        setLineNumberMarginWidth(1)
     End Sub
 
     Private Function newScriptEditor() As Scintilla
@@ -482,23 +484,23 @@ Public Class ucrScript
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         'Determine if last operation can be undone in text box.   
-        If clsScriptOld.CanUndo Then
-            clsScriptOld.Undo() 'Undo the last operation.
+        If clsScriptActive.CanUndo Then
+            clsScriptActive.Undo() 'Undo the last operation.
             EnableDisableButtons()
         End If
     End Sub
 
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
         'Determine if last operation can be redone in text box.   
-        If clsScriptOld.CanRedo Then
-            clsScriptOld.Redo()
+        If clsScriptActive.CanRedo Then
+            clsScriptActive.Redo()
             EnableDisableButtons()
         End If
     End Sub
 
-    Private Sub clsScript_TextChanged(sender As Object, e As EventArgs) Handles clsScriptOld.TextChanged
+    Private Sub clsScript_TextChanged(sender As Object, e As EventArgs) Handles clsScriptActive.TextChanged
         EnableDisableButtons()
-        setLineNumberMarginWidth(clsScriptOld.Lines.Count.ToString().Length)
+        setLineNumberMarginWidth(clsScriptActive.Lines.Count.ToString().Length)
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -506,28 +508,33 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
-        clsScriptOld.SelectAll()
+        clsScriptActive.SelectAll()
         EnableDisableButtons()
     End Sub
 
-    Private Sub clsScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptOld.CharAdded
+    Private Sub clsScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
         InsertMatchedChars(ChrW(e.Char))
         InsertIndent(e.Char)
     End Sub
 
-    Private Sub clsScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles clsScriptOld.UpdateUI
+    Private Sub clsScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles clsScriptActive.UpdateUI
         HighlightPairedBracket()
     End Sub
 
-    Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
+        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+        addTab()
+    End Sub
 
+    Private Sub addTab()
         Static iTabCounter As Integer = 1
 
-        clsScriptOld = newScriptEditor()
+        clsScriptActive = newScriptEditor()
         setLineNumberMarginWidth(1)
 
         Dim tabPageAdded = New TabPage
-        tabPageAdded.Controls.Add(clsScriptOld)
+        tabPageAdded.Controls.Add(clsScriptActive)
         tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
         tabPageAdded.Location = New System.Drawing.Point(4, 22)
@@ -553,9 +560,12 @@ Public Class ucrScript
         '    End If
         'Next
 
-        clsScriptOld.AppendText("test" & iTabCounter - 1)
+        clsScriptActive.AppendText("test" & iTabCounter - 1)
         EnableDisableButtons()
+    End Sub
 
+    Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
+        addTab()
     End Sub
 
     Private Sub CmdRemoveTab_Click(sender As Object, e As EventArgs) Handles btnRemoveTab.Click
@@ -578,24 +588,21 @@ Public Class ucrScript
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
 
         'TODO continue from here
-        '- set txtScript to the Scintilla control of the newly selected tab
-        '- replace clsScriptOld with clsScriptActive (find and replace, not rename)
-        '- make private
-        '- replace frmMain and dlgImportDataset calls to clsScriptOld with calls to public properties
-        '- remove Scintilla from designer
-        '- remove first tab from designer
-        '- create first tab on load
+        '- improve remove button
+        '- test output displayed correctly
+        '- remove test/changed messages
+        '- refactor
 
-        Dim txtScriptSelected As ScintillaNET.Scintilla = Nothing
+        'Dim txtScriptSelected As ScintillaNET.Scintilla = Nothing
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
-            If TypeOf control Is ScintillaNET.Scintilla Then
-                txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
+            If TypeOf control Is Scintilla Then
+                clsScriptActive = DirectCast(control, Scintilla)
             End If
         Next
 
-        If Not IsNothing(txtScriptSelected) Then
-            txtScriptSelected.AppendText("changed1" & vbCrLf)
+        If Not IsNothing(clsScriptActive) Then
+            clsScriptActive.AppendText("changed1" & vbCrLf)
         End If
         EnableDisableButtons()
     End Sub

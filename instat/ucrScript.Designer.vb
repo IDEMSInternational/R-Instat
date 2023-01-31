@@ -60,21 +60,17 @@ Partial Class ucrScript
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel = New System.Windows.Forms.Panel()
+        Me.btnRemoveTab = New System.Windows.Forms.Button()
         Me.cmdAddTab = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.clsScriptOld = New ScintillaNET.Scintilla()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnRemoveTab = New System.Windows.Forms.Button()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
-        Me.TabControl.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuContextScript
@@ -238,6 +234,15 @@ Partial Class ucrScript
         Me.Panel.Size = New System.Drawing.Size(405, 27)
         Me.Panel.TabIndex = 10
         '
+        'btnRemoveTab
+        '
+        Me.btnRemoveTab.Location = New System.Drawing.Point(303, 0)
+        Me.btnRemoveTab.Name = "btnRemoveTab"
+        Me.btnRemoveTab.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemoveTab.TabIndex = 7
+        Me.btnRemoveTab.Text = "Remove Tab"
+        Me.btnRemoveTab.UseVisualStyleBackColor = True
+        '
         'cmdAddTab
         '
         Me.cmdAddTab.Location = New System.Drawing.Point(222, 0)
@@ -288,46 +293,12 @@ Partial Class ucrScript
         '
         'TabControl
         '
-        Me.TabControl.Controls.Add(Me.TabPage1)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(3, 56)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(405, 441)
         Me.TabControl.TabIndex = 14
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.clsScriptOld)
-        Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(397, 415)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Untitled1"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'txtScript
-        '
-        Me.clsScriptOld.ContextMenuStrip = Me.mnuContextScript
-        Me.clsScriptOld.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.clsScriptOld.Lexer = ScintillaNET.Lexer.R
-        Me.clsScriptOld.Location = New System.Drawing.Point(3, 3)
-        Me.clsScriptOld.Name = "txtScript"
-        Me.clsScriptOld.Size = New System.Drawing.Size(391, 409)
-        Me.clsScriptOld.TabIndex = 14
-        Me.clsScriptOld.TabWidth = 2
-        '
-        'btnRemoveTab
-        '
-        Me.btnRemoveTab.Location = New System.Drawing.Point(303, 0)
-        Me.btnRemoveTab.Name = "btnRemoveTab"
-        Me.btnRemoveTab.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemoveTab.TabIndex = 7
-        Me.btnRemoveTab.Text = "Remove Tab"
-        Me.btnRemoveTab.UseVisualStyleBackColor = True
         '
         'ucrScript
         '
@@ -341,8 +312,6 @@ Partial Class ucrScript
         Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.Panel.ResumeLayout(False)
-        Me.TabControl.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -373,8 +342,6 @@ Partial Class ucrScript
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents TabControl As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents clsScriptOld As ScintillaNET.Scintilla
     Friend WithEvents cmdAddTab As Button
     Friend WithEvents btnRemoveTab As Button
 End Class
