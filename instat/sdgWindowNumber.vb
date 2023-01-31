@@ -55,10 +55,20 @@ Public Class sdgWindowNumber
 
         ' the maximum number of row/col pages 
         Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColumn / iMaxRowsCols))
-
-        ucrNudPageNumber.SetMinMax(0, iRowOrColMaxPages)
+        Dim strStartRowOrCol As String
+        Dim iMin As Integer = 0
+        Dim iTempRowOrColMaxPages = iRowOrColMaxPages
+        If enumWINNUMBERMode = WINNUMBERMode.Row Then
+            iMin = 0
+            strStartRowOrCol = "0-"
+            iTempRowOrColMaxPages -= 1
+        Else
+            iMin = 1
+            strStartRowOrCol = "1-"
+        End If
+        ucrNudPageNumber.SetMinMax(iMin, iRowOrColMaxPages)
         ucrNudPageNumber.SetText(iDefaultPage)
-        lblPages.Text = "0-" & iRowOrColMaxPages - 1 & ":"
+        lblPages.Text = strStartRoworCol & iTempRowOrColMaxPages & ":"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseWindowNumber.ClickReturn

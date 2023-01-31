@@ -99,7 +99,7 @@ Public Class clsDataFramePage
     ''' <returns></returns>
     Public ReadOnly Property intEndColumn As Integer
         Get
-            Return _iColumnStart + _clsRDotNetDataFrame.ColumnCount
+            Return _iColumnStart + _clsRDotNetDataFrame.ColumnCount - 1
         End Get
     End Property
 
@@ -148,7 +148,7 @@ Public Class clsDataFramePage
         _clsRLink = rLink
         _strDataFrameName = strDataFrameName
         _lstColumns = New List(Of clsColumnHeaderDisplay)
-        _iColumnStart = 0
+        _iColumnStart = 1
         _iRowStart = 0
         _hasChanged = True
     End Sub
@@ -180,7 +180,7 @@ Public Class clsDataFramePage
             _iRowStart = 0
         End If
         If _iTotalColumnCount < _iColumnStart Then
-            _iColumnStart = 0
+            _iColumnStart = 1
         End If
     End Sub
 
@@ -402,7 +402,7 @@ Public Class clsDataFramePage
     ''' Go to the specific column page
     ''' </summary>
     Public Sub GoToSpecificColumnPage(iColumn As Integer)
-        _iColumnStart = iColumnIncrements * iColumn
+        _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
         _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         SetHeaders()
     End Sub
@@ -439,7 +439,7 @@ Public Class clsDataFramePage
     ''' Load first column page
     ''' </summary>
     Public Sub LoadFirstColumnPage()
-        _iColumnStart = 0
+        _iColumnStart = 1
         _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         SetHeaders()
     End Sub

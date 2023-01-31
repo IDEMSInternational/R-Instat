@@ -933,8 +933,8 @@ Public Class ucrDataView
 
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
-            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 0-" &
-                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols - 1)))
+            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If
