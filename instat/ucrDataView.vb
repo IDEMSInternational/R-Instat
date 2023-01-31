@@ -903,13 +903,11 @@ Public Class ucrDataView
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
             sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalRowCount
-            sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+            sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
             sdgWindowNumber.ShowDialog()
-            Dim iPageNum As Integer = sdgWindowNumber.iPage
-            If iPageNum > 0 Then
-                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPageNum)
-                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-            End If
+
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
+            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
         End If
     End Sub
 
@@ -917,20 +915,17 @@ Public Class ucrDataView
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
             sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalColumnCount
-            sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
+            sdgWindowNumber.iStartRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
             sdgWindowNumber.ShowDialog()
-            Dim iPageNum As Integer = sdgWindowNumber.iPage
-            If iPageNum > 0 Then
-                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPageNum)
-                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-            End If
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(sdgWindowNumber.iPage)
+            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
         End If
     End Sub
 
     Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
-            ttGoToRowOrColPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 1-" &
-                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows)))
+            ttGoToRowOrColPage.SetToolTip(lblRowDisplay, "Click to go to a specific window 0-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows - 1)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If
@@ -938,8 +933,8 @@ Public Class ucrDataView
 
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
-            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 1-" &
-                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols)))
+            ttGoToRowOrColPage.SetToolTip(lblColDisplay, "Click to go to a specific window 0-" &
+                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols - 1)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If

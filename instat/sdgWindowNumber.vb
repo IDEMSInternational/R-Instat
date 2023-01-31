@@ -30,7 +30,7 @@ Public Class sdgWindowNumber
     ''' <summary>
     ''' The number of the last row/column in the current page (depending on the mode i.e row or column)
     ''' </summary>
-    Public iEndRowOrColumn As Integer
+    Public iStartRowOrColumn As Integer
 
     Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
@@ -51,14 +51,14 @@ Public Class sdgWindowNumber
                 frmMain.clsInstatOptions.iMaxRows, frmMain.clsInstatOptions.iMaxCols)
 
         ' the current page number displayed
-        Dim iDefaultPage As Integer = Math.Ceiling(CDbl(iEndRowOrColumn / iMaxRowsCols))
+        Dim iDefaultPage As Integer = Math.Ceiling(CDbl(iStartRowOrColumn / iMaxRowsCols))
 
         ' the maximum number of row/col pages 
         Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColumn / iMaxRowsCols))
 
-        ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
+        ucrNudPageNumber.SetMinMax(0, iRowOrColMaxPages)
         ucrNudPageNumber.SetText(iDefaultPage)
-        lblPages.Text = "1-" & iRowOrColMaxPages & ":"
+        lblPages.Text = "0-" & iRowOrColMaxPages - 1 & ":"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseWindowNumber.ClickReturn
