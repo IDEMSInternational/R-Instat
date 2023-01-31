@@ -471,7 +471,11 @@ Partial Class dlgNewDataFrame
         Me.ucrChkVariable.Checked = False
         Me.ucrChkVariable.Location = New System.Drawing.Point(37, 101)
         Me.ucrChkVariable.Name = "ucrChkVariable"
+
         Me.ucrChkVariable.Size = New System.Drawing.Size(152, 23)
+
+        Me.ucrChkVariable.Size = New System.Drawing.Size(138, 27)
+
         Me.ucrChkVariable.TabIndex = 162
         '
         'ucrTryNewDataFrame

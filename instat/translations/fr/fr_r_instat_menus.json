@@ -457,5 +457,13 @@
   "Save": "Enregistrer",
   "Import SST...": "Importer SST...",
   "Daily Data Editing/Entry...": "Modifier/entrer de données quotidiennes...",
-  "Experiments": "Expériences"
+  "Experiments": "Expériences",
+  "Two/Three Variables": "Deux/Trois Variables",
+  "Graphs": "Graphiques",
+  "Tables...": "Tableaux...",
+  "Pivot Table...": "Tableau Pivot...",
+  "Two-Way Frequencies...": "Fréquences Deux-Voies...",
+  "Three-Way Frequencies...": "Fréquences Trois-Voies...",
+  "Heatmap...": "Carte thermique...",
+  "Cluster Analysis...": "Analyse de Groupe..."
 }
