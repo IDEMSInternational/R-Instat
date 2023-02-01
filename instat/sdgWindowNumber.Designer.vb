@@ -62,7 +62,7 @@ Partial Class sdgWindowNumber
         Me.ucrNudPageNumber.AutoSize = True
         Me.ucrNudPageNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPageNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPageNumber.Location = New System.Drawing.Point(237, 26)
+        Me.ucrNudPageNumber.Location = New System.Drawing.Point(237, 27)
         Me.ucrNudPageNumber.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrNudPageNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPageNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
