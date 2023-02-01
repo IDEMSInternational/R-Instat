@@ -29,7 +29,6 @@ Partial Class dlgEvapotranspiration
         Me.lblTimeStep = New System.Windows.Forms.Label()
         Me.lblCrop = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.lblMissingMethod = New System.Windows.Forms.Label()
         Me.lblSolar = New System.Windows.Forms.Label()
         Me.lblRadiation = New System.Windows.Forms.Label()
         Me.rdoHargreavesSamani = New System.Windows.Forms.RadioButton()
@@ -40,7 +39,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudAlpha = New instat.ucrNud()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrChkWind = New instat.ucrCheck()
-        Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
         Me.ucrInputSolar = New instat.ucrInputComboBox()
         Me.ucrReceiverRadiation = New instat.ucrReceiverSingle()
         Me.ucrInputCrop = New instat.ucrInputComboBox()
@@ -57,6 +55,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrChkUseMaxMin = New instat.ucrCheck()
         Me.ucrReceiverTMean = New instat.ucrReceiverSingle()
         Me.lblTMean = New System.Windows.Forms.Label()
+        Me.cmdHSEvapOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -107,7 +106,7 @@ Partial Class dlgEvapotranspiration
         'lblCrop
         '
         Me.lblCrop.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCrop.Location = New System.Drawing.Point(2, 344)
+        Me.lblCrop.Location = New System.Drawing.Point(2, 315)
         Me.lblCrop.Name = "lblCrop"
         Me.lblCrop.Size = New System.Drawing.Size(71, 20)
         Me.lblCrop.TabIndex = 30
@@ -121,15 +120,6 @@ Partial Class dlgEvapotranspiration
         Me.lblDate.Size = New System.Drawing.Size(43, 14)
         Me.lblDate.TabIndex = 4
         Me.lblDate.Text = "Date:"
-        '
-        'lblMissingMethod
-        '
-        Me.lblMissingMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMissingMethod.Location = New System.Drawing.Point(2, 310)
-        Me.lblMissingMethod.Name = "lblMissingMethod"
-        Me.lblMissingMethod.Size = New System.Drawing.Size(107, 20)
-        Me.lblMissingMethod.TabIndex = 28
-        Me.lblMissingMethod.Text = "Missing Method"
         '
         'lblSolar
         '
@@ -214,7 +204,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.lblAlpha.AutoSize = True
         Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlpha.Location = New System.Drawing.Point(2, 346)
+        Me.lblAlpha.Location = New System.Drawing.Point(2, 316)
         Me.lblAlpha.Name = "lblAlpha"
         Me.lblAlpha.Size = New System.Drawing.Size(37, 13)
         Me.lblAlpha.TabIndex = 36
@@ -225,7 +215,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudAlpha.AutoSize = True
         Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(109, 344)
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(109, 314)
         Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Name = "ucrNudAlpha"
@@ -254,17 +244,6 @@ Partial Class dlgEvapotranspiration
         Me.ucrChkWind.Name = "ucrChkWind"
         Me.ucrChkWind.Size = New System.Drawing.Size(123, 31)
         Me.ucrChkWind.TabIndex = 0
-        '
-        'ucrInputMissingMethod
-        '
-        Me.ucrInputMissingMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMissingMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputMissingMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMissingMethod.IsReadOnly = False
-        Me.ucrInputMissingMethod.Location = New System.Drawing.Point(109, 310)
-        Me.ucrInputMissingMethod.Name = "ucrInputMissingMethod"
-        Me.ucrInputMissingMethod.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputMissingMethod.TabIndex = 29
         '
         'ucrInputSolar
         '
@@ -296,7 +275,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputCrop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCrop.GetSetSelectedIndex = -1
         Me.ucrInputCrop.IsReadOnly = False
-        Me.ucrInputCrop.Location = New System.Drawing.Point(109, 343)
+        Me.ucrInputCrop.Location = New System.Drawing.Point(109, 313)
         Me.ucrInputCrop.Name = "ucrInputCrop"
         Me.ucrInputCrop.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCrop.TabIndex = 31
@@ -447,6 +426,16 @@ Partial Class dlgEvapotranspiration
         Me.lblTMean.TabIndex = 40
         Me.lblTMean.Text = "Tmean:"
         '
+        'cmdHSEvapOptions
+        '
+        Me.cmdHSEvapOptions.Location = New System.Drawing.Point(314, 368)
+        Me.cmdHSEvapOptions.Name = "cmdHSEvapOptions"
+        Me.cmdHSEvapOptions.Size = New System.Drawing.Size(137, 21)
+        Me.cmdHSEvapOptions.TabIndex = 41
+        Me.cmdHSEvapOptions.Tag = "Options"
+        Me.cmdHSEvapOptions.Text = "Missing Options"
+        Me.cmdHSEvapOptions.UseVisualStyleBackColor = True
+        '
         'dlgEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -463,8 +452,6 @@ Partial Class dlgEvapotranspiration
         Me.Controls.Add(Me.cmdEvapOptions)
         Me.Controls.Add(Me.rdoHargreavesSamani)
         Me.Controls.Add(Me.rdoPenmanMonteith)
-        Me.Controls.Add(Me.ucrInputMissingMethod)
-        Me.Controls.Add(Me.lblMissingMethod)
         Me.Controls.Add(Me.lblSolar)
         Me.Controls.Add(Me.ucrInputSolar)
         Me.Controls.Add(Me.lblRadiation)
@@ -488,6 +475,7 @@ Partial Class dlgEvapotranspiration
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverTMean)
         Me.Controls.Add(Me.ucrReceiverTmax)
+        Me.Controls.Add(Me.cmdHSEvapOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -515,8 +503,6 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents ucrPnlMethod As UcrPanel
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblDate As Label
-    Friend WithEvents ucrInputMissingMethod As ucrInputComboBox
-    Friend WithEvents lblMissingMethod As Label
     Friend WithEvents ucrNewColName As ucrSave
     Friend WithEvents ucrReceiverTmax As ucrReceiverSingle
     Friend WithEvents ucrInputSolar As ucrInputComboBox
@@ -534,4 +520,5 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents ucrChkUseMaxMin As ucrCheck
     Friend WithEvents ucrReceiverTMean As ucrReceiverSingle
     Friend WithEvents lblTMean As Label
+    Friend WithEvents cmdHSEvapOptions As Button
 End Class

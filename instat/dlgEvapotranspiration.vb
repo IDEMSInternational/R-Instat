@@ -23,6 +23,7 @@ Public Class dlgEvapotranspiration
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
     Private iEvapOptions As Integer
+    Private iHSEvapOptions As Integer
     Private clsETPenmanMonteith, clsHargreavesSamani, clsETPriestleyTaylor, clsDataFunctionPM, clsDataFunctionHS, clsDataFunctionPT, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsVarnamesVectorPT, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
@@ -34,6 +35,7 @@ Public Class dlgEvapotranspiration
             iBaseMaxY = ucrBase.Location.Y
             iSaveMaxY = ucrNewColName.Location.Y
             iEvapOptions = cmdEvapOptions.Location.Y
+            iHSEvapOptions = cmdHSEvapOptions.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -53,7 +55,7 @@ Public Class dlgEvapotranspiration
         Dim dctInputCrops As New Dictionary(Of String, String)
         Dim dctInputTimeStep As New Dictionary(Of String, String)
         Dim dctInputSolar As New Dictionary(Of String, String)
-        Dim dctInputMissingMethod As New Dictionary(Of String, String)
+        'Dim dctInputMissingMethod As New Dictionary(Of String, String)
 
         ucrReceiverDate.Selector = ucrSelectorEvapotranspiration
         ucrReceiverTmax.Selector = ucrSelectorEvapotranspiration
@@ -140,15 +142,6 @@ Public Class dlgEvapotranspiration
         ucrNudAlpha.Increment = 0.05
         ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
 
-        ' Missing Options 
-        ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
-        dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
-        dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
-        dctInputMissingMethod.Add("DoY average", Chr(34) & "DoY average" & Chr(34))
-        dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
-        ucrInputMissingMethod.SetItems(dctInputMissingMethod)
-        ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
-
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
         ucrPnlMethod.AddRadioButton(rdoHargreavesSamani)
@@ -164,17 +157,14 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrReceiverRadiation, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrChkWind, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
         ucrPnlMethod.AddToLinkedControls(ucrNudAlpha, {rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.23)
         ucrPnlMethod.AddToLinkedControls({ucrChkUseMaxMin}, {rdoPenmanMonteith, rdoHargreavesSamani, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
 
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)
         ucrInputTimeStep.SetLinkedDisplayControl(lblTimeStep)
         ucrInputSolar.SetLinkedDisplayControl(lblSolar)
-        ucrInputMissingMethod.SetLinkedDisplayControl(lblMissingMethod)
         ucrInputCrop.SetLinkedDisplayControl(lblCrop)
 
         'ucrSave Column
@@ -248,6 +238,8 @@ Public Class dlgEvapotranspiration
         clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPM, iPosition:=1)
         clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPT, iPosition:=10)
         clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPT, iPosition:=11)
+        clsReadInputs.AddParameter("missing_method", Chr(34) & "monthly average" & Chr(34), iPosition:=8)
+
         clsReadInputs.SetAssignTo("temp_data")
 
         clsVarnamesVectorPM.SetRCommand("c")
@@ -337,7 +329,6 @@ Public Class dlgEvapotranspiration
         ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
-        ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
 
         ucrNudAlpha.SetRCode(clsETPriestleyTaylor, bReset)
     End Sub
@@ -379,24 +370,33 @@ Public Class dlgEvapotranspiration
         sdgMissingOptionsEvapotranspiration.ShowDialog()
     End Sub
 
+    Private Sub cmdHSEvapOptions_Click(sender As Object, e As EventArgs) Handles cmdHSEvapOptions.Click
+        sdgHSMissingOptionsEvap.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
+        bResetSubdialog = False
+        sdgHSMissingOptionsEvap.ShowDialog()
+    End Sub
+
     Private Sub DialogSize()
         If rdoPenmanMonteith.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
+            cmdHSEvapOptions.Location = New Point(cmdHSEvapOptions.Location.X, iEvapOptions)
         ElseIf rdoHargreavesSamani.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
+            cmdHSEvapOptions.Location = New Point(cmdHSEvapOptions.Location.X, iEvapOptions / 1.187)
         ElseIf rdoPriestleyTaylor.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.03)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.04)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
+            cmdHSEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
         End If
     End Sub
 
@@ -418,6 +418,7 @@ Public Class dlgEvapotranspiration
         DialogSize()
         SetAsReceiver()
         AddRemoveParameter()
+        EnableDesableSubDialog()
         If rdoPenmanMonteith.Checked Then
             clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
         Else
@@ -435,6 +436,16 @@ Public Class dlgEvapotranspiration
         End If
     End Sub
 
+    Private Sub EnableDesableSubDialog()
+        If rdoPenmanMonteith.Checked Then
+            cmdEvapOptions.Visible = True
+            cmdHSEvapOptions.Visible = False
+        Else
+            cmdEvapOptions.Visible = False
+            cmdHSEvapOptions.Visible = True
+        End If
+
+    End Sub
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
         If ucrChkWind.Checked AndAlso Not ucrReceiverWindSpeed.IsEmpty Then
             clsVarnamesVectorPM.AddParameter("u2", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
