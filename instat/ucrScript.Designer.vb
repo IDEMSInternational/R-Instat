@@ -60,7 +60,7 @@ Partial Class ucrScript
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel = New System.Windows.Forms.Panel()
-        Me.btnRemoveTab = New System.Windows.Forms.Button()
+        Me.cmdRemoveTab = New System.Windows.Forms.Button()
         Me.cmdAddTab = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
@@ -222,7 +222,7 @@ Partial Class ucrScript
         '
         'Panel
         '
-        Me.Panel.Controls.Add(Me.btnRemoveTab)
+        Me.Panel.Controls.Add(Me.cmdRemoveTab)
         Me.Panel.Controls.Add(Me.cmdAddTab)
         Me.Panel.Controls.Add(Me.cmdHelp)
         Me.Panel.Controls.Add(Me.cmdClear)
@@ -236,12 +236,12 @@ Partial Class ucrScript
         '
         'btnRemoveTab
         '
-        Me.btnRemoveTab.Location = New System.Drawing.Point(303, 0)
-        Me.btnRemoveTab.Name = "btnRemoveTab"
-        Me.btnRemoveTab.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemoveTab.TabIndex = 7
-        Me.btnRemoveTab.Text = "Remove Tab"
-        Me.btnRemoveTab.UseVisualStyleBackColor = True
+        Me.cmdRemoveTab.Location = New System.Drawing.Point(303, 0)
+        Me.cmdRemoveTab.Name = "btnRemoveTab"
+        Me.cmdRemoveTab.Size = New System.Drawing.Size(75, 23)
+        Me.cmdRemoveTab.TabIndex = 7
+        Me.cmdRemoveTab.Text = "Remove Tab"
+        Me.cmdRemoveTab.UseVisualStyleBackColor = True
         '
         'cmdAddTab
         '
@@ -343,5 +343,5 @@ Partial Class ucrScript
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents TabControl As TabControl
     Friend WithEvents cmdAddTab As Button
-    Friend WithEvents btnRemoveTab As Button
+    Friend WithEvents cmdRemoveTab As Button
 End Class

@@ -19,12 +19,11 @@ Imports System.Windows.Controls
 Imports ScintillaNET
 
 Public Class ucrScript
-    Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
-    Private strComment As String = "Code run from Script Window"
-    Private strCurrentDirectory As String = ""
     Private iMaxLineNumberCharLength As Integer = 0
-    'Private txtScriptSelected As Scintilla = Nothing
+    Private Const strComment As String = "Code run from Script Window"
+    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+
     Friend WithEvents clsScriptActive As Scintilla
 
     Public Property strText As String
@@ -36,6 +35,12 @@ Public Class ucrScript
         End Set
     End Property
 
+    Public Sub AppendText(strText As String)
+        clsScriptActive.AppendText(Environment.NewLine & strText)
+        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+        EnableDisableButtons()
+    End Sub
+
     Public Sub CopyText()
         clsScriptActive.Copy()
         EnableDisableButtons()
@@ -46,34 +51,28 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub RunCurrentLine()
-        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
+    Private Sub addTab()
+        clsScriptActive = newScriptEditor()
+        SetLineNumberMarginWidth(1)
 
-        If clsScriptActive.TextLength > 0 Then
-            Dim strLineTextString = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
-            strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
-            strScriptCmd = RunText(strScriptCmd)
+        Dim tabPageAdded = New TabPage
+        tabPageAdded.Controls.Add(clsScriptActive)
+        tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
+        tabPageAdded.Location = New System.Drawing.Point(4, 22)
+        tabPageAdded.Name = "TabPageAdded"
+        tabPageAdded.Padding = New System.Windows.Forms.Padding(3)
+        tabPageAdded.Size = New System.Drawing.Size(397, 415)
+        tabPageAdded.TabIndex = 0
+        tabPageAdded.UseVisualStyleBackColor = True
 
-            Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
-            clsScriptActive.GotoPosition(iNextLinePos)
-        End If
-    End Sub
+        TabControl.TabPages.Add(tabPageAdded)
+        Static iTabCounter As Integer = 1
+        tabPageAdded.Text = "Untitled" & iTabCounter
+        iTabCounter += 1
 
-    Public Sub AppendText(strText As String)
-        clsScriptActive.AppendText(Environment.NewLine & strText)
-        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+        TabControl.SelectedTab = tabPageAdded
         EnableDisableButtons()
-    End Sub
-
-    Private Function RunText(strText As String) As String
-        Return If(Not String.IsNullOrEmpty(strText),
-                  frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment),
-                  "")
-    End Function
-
-    Private Sub EnableRunButtons(bEnable As Boolean)
-        cmdRunLineSelection.Enabled = bEnable
-        cmdRunAll.Enabled = bEnable
     End Sub
 
     Private Sub EnableDisableButtons()
@@ -99,29 +98,57 @@ Public Class ucrScript
         cmdRunAll.Enabled = bScriptExists
         cmdClear.Enabled = bScriptExists
 
-        btnRemoveTab.Enabled = TabControl.TabCount > 1
+        cmdRemoveTab.Enabled = TabControl.TabCount > 1
     End Sub
 
-    Private Sub setLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer)
-        If iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew Then
+    Private Sub EnableRunButtons(bEnable As Boolean)
+        cmdRunLineSelection.Enabled = bEnable
+        cmdRunAll.Enabled = bEnable
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     If the caret is next to a bracket, then it highlights the paired open/close bracket. 
+    '''     If it cannot find a paired bracket, then it displays the bracket next to the caret in 
+    '''     the specified error colour. For nested indented brackets, also shows a vertical 
+    '''     indentation line. <para>
+    '''     This sub is based on a C# function from:
+    '''     https://github.com/jacobslusser/ScintillaNET/wiki/Brace-Matching. </para>
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub HighlightPairedBracket()
+        'if caret has not moved, then do nothing
+        Static iLastCaretPos As Integer = 0
+        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+        If iLastCaretPos = iCaretPos Then
             Exit Sub
         End If
-        iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew
+        iLastCaretPos = iCaretPos
 
-        Dim strLineNumber As String = "9"
-        For i As Integer = 1 To iMaxLineNumberCharLength
-            strLineNumber &= "9"
-        Next
-        clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
+        Dim iBracketPos1 As Integer = -1
+        'is there a brace to the left Or right?
+        If iCaretPos > 0 AndAlso IsBracket(clsScriptActive.GetCharAt(iCaretPos - 1)) Then
+            iBracketPos1 = iCaretPos - 1
+        ElseIf IsBracket(clsScriptActive.GetCharAt(iCaretPos)) Then
+            iBracketPos1 = iCaretPos
+        End If
+
+        If iBracketPos1 >= 0 Then
+            'find the matching brace
+            Dim iBracketPos2 As Integer = clsScriptActive.BraceMatch(iBracketPos1)
+            If iBracketPos2 = Scintilla.InvalidPosition Then
+                clsScriptActive.BraceBadLight(iBracketPos1)
+                clsScriptActive.HighlightGuide = 0
+            Else
+                clsScriptActive.BraceHighlight(iBracketPos1, iBracketPos2)
+                clsScriptActive.HighlightGuide = clsScriptActive.GetColumn(iBracketPos1)
+            End If
+        Else
+            'turn off brace matching
+            clsScriptActive.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
+            clsScriptActive.HighlightGuide = 0
+        End If
     End Sub
-
-    Private Function IsCharBlank(charNew As Char) As Boolean
-        Return charNew = Chr(0) OrElse String.IsNullOrWhiteSpace(charNew.ToString()) OrElse charNew = vbLf OrElse charNew = vbCr
-    End Function
-
-    Private Function IsCharQuote(charNew As Char) As Boolean
-        Return charNew = """" OrElse charNew = "'"
-    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -233,182 +260,25 @@ Public Class ucrScript
         Return arrRBrackets.Contains(Chr(iNewChar))
     End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>
-    '''     If the caret is next to a bracket, then it highlights the paired open/close bracket. 
-    '''     If it cannot find a paired bracket, then it displays the bracket next to the caret in 
-    '''     the specified error colour. For nested indented brackets, also shows a vertical 
-    '''     indentation line. <para>
-    '''     This sub is based on a C# function from:
-    '''     https://github.com/jacobslusser/ScintillaNET/wiki/Brace-Matching. </para>
-    ''' </summary>
-    '''--------------------------------------------------------------------------------------------
-    Private Sub HighlightPairedBracket()
-        'if caret has not moved, then do nothing
-        Static iLastCaretPos As Integer = 0
-        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
-        If iLastCaretPos = iCaretPos Then
-            Exit Sub
-        End If
-        iLastCaretPos = iCaretPos
+    Private Function IsCharBlank(charNew As Char) As Boolean
+        Return charNew = Chr(0) OrElse String.IsNullOrWhiteSpace(charNew.ToString()) OrElse charNew = vbLf OrElse charNew = vbCr
+    End Function
 
-        Dim iBracketPos1 As Integer = -1
-        'is there a brace to the left Or right?
-        If iCaretPos > 0 AndAlso IsBracket(clsScriptActive.GetCharAt(iCaretPos - 1)) Then
-            iBracketPos1 = iCaretPos - 1
-        ElseIf IsBracket(clsScriptActive.GetCharAt(iCaretPos)) Then
-            iBracketPos1 = iCaretPos
-        End If
-
-        If iBracketPos1 >= 0 Then
-            'find the matching brace
-            Dim iBracketPos2 As Integer = clsScriptActive.BraceMatch(iBracketPos1)
-            If iBracketPos2 = Scintilla.InvalidPosition Then
-                clsScriptActive.BraceBadLight(iBracketPos1)
-                clsScriptActive.HighlightGuide = 0
-            Else
-                clsScriptActive.BraceHighlight(iBracketPos1, iBracketPos2)
-                clsScriptActive.HighlightGuide = clsScriptActive.GetColumn(iBracketPos1)
-            End If
-        Else
-            'turn off brace matching
-            clsScriptActive.BraceHighlight(Scintilla.InvalidPosition, Scintilla.InvalidPosition)
-            clsScriptActive.HighlightGuide = 0
-        End If
-    End Sub
-
-    Private Sub RunLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
-        'temporarily disable the buttons in case its a long operation
-        EnableRunButtons(False)
-        If clsScriptActive.SelectedText.Length > 0 Then
-            RunText(clsScriptActive.SelectedText)
-        Else
-            RunCurrentLine()
-        End If
-        EnableRunButtons(True)
-    End Sub
-
-    Private Sub RunAll_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
-        If clsScriptActive.TextLength < 1 _
-                OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
-                              vbYesNo, "Run All") = vbNo Then
-            Exit Sub
-        End If
-
-        EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
-        RunText(clsScriptActive.Text)
-        EnableRunButtons(True)
-    End Sub
-
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click, cmdClear.Click
-        If clsScriptActive.TextLength < 1 _
-                OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
-                               vbYesNo, "Clear") = vbNo Then
-            Exit Sub
-        End If
-        clsScriptActive.ClearAll()
-        EnableDisableButtons()
-    End Sub
-
-    Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
-        Try
-            If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
-                Directory.CreateDirectory(strRInstatLogFilesFolderPath)
-            End If
-            Dim strScriptFilename As String = "RInstatScript.R"
-            Dim i As Integer = 0
-            While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
-                i += 1
-                strScriptFilename = "RInstatScript" & i & ".R"
-            End While
-            File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
-                              frmMain.clsRLink.GetRSetupScript() & clsScriptActive.Text)
-            Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
-        Catch
-            MsgBox("Could not save the script file." & Environment.NewLine &
-                   "The file may be in use by another program or you may not have access to write to the specified location.",
-                   vbExclamation, "Open Script")
-        End Try
-    End Sub
-
-    Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save Script")
-                End Try
-            End If
-        End Using
-    End Sub
-
-    Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
-        If clsScriptActive.TextLength > 0 _
-                AndAlso MsgBox("Loading a script from file will clear your current script" _
-                               & Environment.NewLine & "Do you still want to load?",
-                               vbYesNo, "Load Script From File") = vbNo Then
-            Exit Sub
-        End If
-
-        Using dlgLoad As New OpenFileDialog
-            dlgLoad.Title = "Load Script From Text File"
-            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-
-            If Not dlgLoad.ShowDialog() = DialogResult.OK Then
-                Exit Sub
-            End If
-
-            Try
-                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-            Catch
-                MsgBox("Could not load the script from file." & Environment.NewLine &
-                       "The file may be in use by another program or you may not have access to write to the specified location.",
-                       vbExclamation, "Load Script")
-            End Try
-        End Using
-    End Sub
-
-    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        If clsScriptActive.SelectedText.Length > 0 Then
-            CopyText()
-            EnableDisableButtons()
-        End If
-    End Sub
-
-    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        If clsScriptActive.SelectedText.Length > 0 Then
-            clsScriptActive.Cut()
-            EnableDisableButtons()
-        End If
-    End Sub
-
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        If Clipboard.ContainsData(DataFormats.Text) Then
-            clsScriptActive.Paste()
-            EnableDisableButtons()
-        Else
-            MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
-        End If
-    End Sub
+    Private Function IsCharQuote(charNew As Char) As Boolean
+        Return charNew = """" OrElse charNew = "'"
+    End Function
 
     Private Function newScriptEditor() As Scintilla
         Dim clsNewScript As Scintilla = New Scintilla With {
             .ContextMenuStrip = mnuContextScript,
             .Dock = DockStyle.Fill,
+            .Lexer = Lexer.R,
             .Location = New Point(3, 3),
             .Name = "txtScriptAdded",
             .Size = New Size(391, 409),
             .TabIndex = 14, 'TODO
             .TabWidth = 2
         }
-
 
         clsNewScript.StyleResetDefault()
         clsNewScript.Styles(Style.Default).Font = "Consolas"
@@ -417,10 +287,6 @@ Public Class ucrScript
         'TODO  Configure from R-Instat options?
         'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
-
-
-        ' Set the lexer
-        clsNewScript.Lexer = Lexer.R
 
         ' Instruct the lexer to calculate folding
         clsNewScript.SetProperty("fold", "1")
@@ -478,98 +344,58 @@ Public Class ucrScript
         Return clsNewScript
     End Function
 
-    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
-        EnableDisableButtons()
-    End Sub
+    Private Sub RunCurrentLine()
+        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
-    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
-        'Determine if last operation can be undone in text box.   
-        If clsScriptActive.CanUndo Then
-            clsScriptActive.Undo() 'Undo the last operation.
-            EnableDisableButtons()
+        If clsScriptActive.TextLength > 0 Then
+            Dim strLineTextString = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
+            strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
+            strScriptCmd = RunText(strScriptCmd)
+
+            Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
+            clsScriptActive.GotoPosition(iNextLinePos)
         End If
     End Sub
 
-    Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
-        'Determine if last operation can be redone in text box.   
-        If clsScriptActive.CanRedo Then
-            clsScriptActive.Redo()
-            EnableDisableButtons()
+    Private Function RunText(strText As String) As String
+        Return If(Not String.IsNullOrEmpty(strText),
+                  frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment),
+                  "")
+    End Function
+
+    Private Sub SetLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer)
+        If iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew Then
+            Exit Sub
         End If
+        iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew
+
+        Dim strLineNumber As String = "9"
+        For i As Integer = 1 To iMaxLineNumberCharLength
+            strLineNumber &= "9"
+        Next
+        clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
     End Sub
 
-    Private Sub clsScript_TextChanged(sender As Object, e As EventArgs) Handles clsScriptActive.TextChanged
-        EnableDisableButtons()
-        setLineNumberMarginWidth(clsScriptActive.Lines.Count.ToString().Length)
-    End Sub
-
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
-    End Sub
-
-    Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
-        clsScriptActive.SelectAll()
-        EnableDisableButtons()
-    End Sub
-
-    Private Sub clsScript_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
+    Private Sub clsScriptActive_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
         InsertMatchedChars(ChrW(e.Char))
         InsertIndent(e.Char)
     End Sub
 
-    Private Sub clsScript_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles clsScriptActive.UpdateUI
-        HighlightPairedBracket()
-    End Sub
-
-    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
-        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
-        addTab()
-    End Sub
-
-    Private Sub addTab()
-        Static iTabCounter As Integer = 1
-
-        clsScriptActive = newScriptEditor()
-        setLineNumberMarginWidth(1)
-
-        Dim tabPageAdded = New TabPage
-        tabPageAdded.Controls.Add(clsScriptActive)
-        tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
-        tabPageAdded.Location = New System.Drawing.Point(4, 22)
-        tabPageAdded.Name = "TabPageAdded"
-        tabPageAdded.Padding = New System.Windows.Forms.Padding(3)
-        tabPageAdded.Size = New System.Drawing.Size(397, 415)
-        tabPageAdded.TabIndex = 0
-        'tabPageAdded.Text = "Log"
-        tabPageAdded.UseVisualStyleBackColor = True
-
-        TabControl.TabPages.Add(tabPageAdded)
-        'tabPageAdded.Text = "Untitled" & (TabControl.TabPages.IndexOf(tabPageAdded) + 1)
-        tabPageAdded.Text = "Untitled" & iTabCounter
-        iTabCounter += 1
-
-        TabControl.SelectedTab = tabPageAdded
-
-        'Dim txtScriptSelected As ScintillaNET.Scintilla
-        'Dim tabPageControls = TabControl.SelectedTab.Controls
-        'For Each control In tabPageControls
-        '    If TypeOf control Is ScintillaNET.Scintilla Then
-        '        txtScriptSelected = DirectCast(control, ScintillaNET.Scintilla)
-        '    End If
-        'Next
-
-        clsScriptActive.AppendText("test" & iTabCounter - 1)
+    Private Sub clsScriptActive_TextChanged(sender As Object, e As EventArgs) Handles clsScriptActive.TextChanged
         EnableDisableButtons()
+        SetLineNumberMarginWidth(clsScriptActive.Lines.Count.ToString().Length)
+    End Sub
+
+    Private Sub clsScriptActive_UpdateUI(sender As Object, e As UpdateUIEventArgs) Handles clsScriptActive.UpdateUI
+        HighlightPairedBracket()
     End Sub
 
     Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
         addTab()
     End Sub
 
-    Private Sub CmdRemoveTab_Click(sender As Object, e As EventArgs) Handles btnRemoveTab.Click
-
+    Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
+        'never remove last tab
         If TabControl.TabCount < 2 Then
             Exit Sub
         End If
@@ -582,29 +408,176 @@ Public Class ucrScript
         TabControl.TabPages.Remove(TabControl.SelectedTab)
         TabControl.SelectedTab = TabControl.TabPages(iTabNewSelected)
         EnableDisableButtons()
+    End Sub
 
+    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click, cmdClear.Click
+        If clsScriptActive.TextLength < 1 _
+                OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
+                               vbYesNo, "Clear") = vbNo Then
+            Exit Sub
+        End If
+        clsScriptActive.ClearAll()
+        EnableDisableButtons()
+    End Sub
+
+    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
+        EnableDisableButtons()
+    End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        If clsScriptActive.SelectedText.Length > 0 Then
+            CopyText()
+            EnableDisableButtons()
+        End If
+    End Sub
+
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        If clsScriptActive.SelectedText.Length > 0 Then
+            clsScriptActive.Cut()
+            EnableDisableButtons()
+        End If
+    End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        If Clipboard.ContainsData(DataFormats.Text) Then
+            clsScriptActive.Paste()
+            EnableDisableButtons()
+        Else
+            MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
+        End If
+    End Sub
+
+    Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
+        If clsScriptActive.TextLength > 0 _
+                AndAlso MsgBox("Loading a script from file will clear your current script" _
+                               & Environment.NewLine & "Do you still want to load?",
+                               vbYesNo, "Load Script From File") = vbNo Then
+            Exit Sub
+        End If
+
+        Using dlgLoad As New OpenFileDialog
+            dlgLoad.Title = "Load Script From Text File"
+            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            If Not dlgLoad.ShowDialog() = DialogResult.OK Then
+                Exit Sub
+            End If
+
+            Try
+                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
+            Catch
+                MsgBox("Could not load the script from file." & Environment.NewLine &
+                       "The file may be in use by another program or you may not have access to write to the specified location.",
+                       vbExclamation, "Load Script")
+            End Try
+        End Using
+    End Sub
+
+    Private Sub mnuOpenScriptasFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
+        Try
+            If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
+                Directory.CreateDirectory(strRInstatLogFilesFolderPath)
+            End If
+            Dim strScriptFilename As String = "RInstatScript.R"
+            Dim i As Integer = 0
+            While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
+                i += 1
+                strScriptFilename = "RInstatScript" & i & ".R"
+            End While
+            File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
+                              frmMain.clsRLink.GetRSetupScript() & clsScriptActive.Text)
+            Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
+        Catch
+            MsgBox("Could not save the script file." & Environment.NewLine &
+                   "The file may be in use by another program or you may not have access to write to the specified location.",
+                   vbExclamation, "Open Script")
+        End Try
+    End Sub
+
+    Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+        'Determine if last operation can be redone in text box.   
+        If clsScriptActive.CanRedo Then
+            clsScriptActive.Redo()
+            EnableDisableButtons()
+        End If
+    End Sub
+
+    Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
+        If clsScriptActive.TextLength < 1 _
+                OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
+                              vbYesNo, "Run All") = vbNo Then
+            Exit Sub
+        End If
+
+        EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
+        RunText(clsScriptActive.Text)
+        EnableRunButtons(True)
+    End Sub
+
+    Private Sub mnuRunCurrentLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
+        'temporarily disable the buttons in case its a long operation
+        EnableRunButtons(False)
+        If clsScriptActive.SelectedText.Length > 0 Then
+            RunText(clsScriptActive.SelectedText)
+        Else
+            RunCurrentLine()
+        End If
+        EnableRunButtons(True)
+    End Sub
+
+    Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Script To File"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
+                Catch
+                    MsgBox("Could not save the script file." & Environment.NewLine &
+                           "The file may be in use by another program or you may not have access to write to the specified location.",
+                           vbExclamation, "Save Script")
+                End Try
+            End If
+        End Using
+    End Sub
+
+    Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
+        SelectAllText()
+    End Sub
+
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        'Determine if last operation can be undone in text box.   
+        If clsScriptActive.CanUndo Then
+            clsScriptActive.Undo() 'Undo the last operation.
+            EnableDisableButtons()
+        End If
     End Sub
 
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
-
-        'TODO continue from here
-        '- improve remove button
-        '- test output displayed correctly
-        '- remove test/changed messages
-        '- refactor
-
-        'Dim txtScriptSelected As ScintillaNET.Scintilla = Nothing
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
             If TypeOf control Is Scintilla Then
                 clsScriptActive = DirectCast(control, Scintilla)
+                EnableDisableButtons()
+                Exit Sub
             End If
         Next
 
-        If Not IsNothing(clsScriptActive) Then
-            clsScriptActive.AppendText("changed1" & vbCrLf)
+        If IsNothing(clsScriptActive) Then
+            MsgBox("Developer error: could not find editor winfow in tab.")
         End If
-        EnableDisableButtons()
+    End Sub
+
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
+        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+        addTab()
     End Sub
 
 End Class
