@@ -55,7 +55,6 @@ Public Class dlgEvapotranspiration
         Dim dctInputCrops As New Dictionary(Of String, String)
         Dim dctInputTimeStep As New Dictionary(Of String, String)
         Dim dctInputSolar As New Dictionary(Of String, String)
-        'Dim dctInputMissingMethod As New Dictionary(Of String, String)
 
         ucrReceiverDate.Selector = ucrSelectorEvapotranspiration
         ucrReceiverTmax.Selector = ucrSelectorEvapotranspiration
@@ -81,18 +80,7 @@ Public Class dlgEvapotranspiration
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.SetLinkedDisplayControl(lblTmin)
         ucrReceiverTmin.bAutoFill = True
-
-        ucrReceiverTMean.Selector = ucrSelectorEvapotranspiration
-        ucrReceiverTMean.SetParameter(New RParameter("Tmean", 6))
-        ucrReceiverTMean.strSelectorHeading = "Numerics"
-        ucrReceiverTMean.SetDataType("numeric")
-        ucrReceiverTMean.SetParameterIsRFunction()
-        ucrReceiverTMean.SetLinkedDisplayControl(lblTMean)
         ucrReceiverTmin.bAutoFill = True
-
-        ucrChkUseMaxMin.SetText("Use Max and Min")
-        ucrChkUseMaxMin.AddToLinkedControls({ucrReceiverTmin, ucrReceiverTmax}, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUseMaxMin.AddToLinkedControls(ucrReceiverTMean, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverHumidityMax.SetParameter(New RParameter("RHmax", 4))
         ucrReceiverHumidityMax.SetParameterIsRFunction()
@@ -158,7 +146,6 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrChkWind, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrNudAlpha, {rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.23)
-        ucrPnlMethod.AddToLinkedControls({ucrChkUseMaxMin}, {rdoPenmanMonteith, rdoHargreavesSamani, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
@@ -306,7 +293,6 @@ Public Class dlgEvapotranspiration
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmax", 3), iAdditionalPairNo:=1)
         ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmin", 4), iAdditionalPairNo:=1)
-        ucrReceiverTMean.AddAdditionalCodeParameterPair(clsDataFunctionPM, New RParameter("Tmean", 5), iAdditionalPairNo:=1)
         ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("Tmax", 3), iAdditionalPairNo:=2)
         ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("Tmin", 4), iAdditionalPairNo:=2)
         ucrInputTimeStep.AddAdditionalCodeParameterPair(clsHargreavesSamani, New RParameter("ts", 2), iAdditionalPairNo:=1)
@@ -320,7 +306,6 @@ Public Class dlgEvapotranspiration
         ucrReceiverDate.SetRCode(clsDayFunc, bReset)
         ucrReceiverTmax.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverTmin.SetRCode(clsDataFunctionPM, bReset)
-        ucrReceiverTMean.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverHumidityMax.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverHumidityMin.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverWindSpeed.SetRCode(clsDataFunctionPM, bReset)
@@ -335,7 +320,7 @@ Public Class dlgEvapotranspiration
 
     Private Sub TestOKEnabled()
         If rdoPenmanMonteith.Checked Then
-            If (ucrChkUseMaxMin.Checked AndAlso Not (ucrReceiverTmin.IsEmpty() OrElse ucrReceiverTmax.IsEmpty)) OrElse Not (ucrChkUseMaxMin.Checked = False AndAlso ucrReceiverTMean.IsEmpty) AndAlso ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -382,21 +367,18 @@ Public Class dlgEvapotranspiration
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
-            cmdHSEvapOptions.Location = New Point(cmdHSEvapOptions.Location.X, iEvapOptions)
         ElseIf rdoHargreavesSamani.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
-            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
-            cmdHSEvapOptions.Location = New Point(cmdHSEvapOptions.Location.X, iEvapOptions / 1.187)
+            cmdHSEvapOptions.Location = New Point(cmdHSEvapOptions.Location.X, iHSEvapOptions / 1.187)
         ElseIf rdoPriestleyTaylor.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.03)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.04)
-            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
-            cmdHSEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
+            cmdHSEvapOptions.Location = New Point(cmdHSEvapOptions.Location.X, iHSEvapOptions / 1.187)
         End If
     End Sub
 
@@ -416,8 +398,6 @@ Public Class dlgEvapotranspiration
     Private Sub ucrPnlMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlValueChanged
         Method()
         DialogSize()
-        SetAsReceiver()
-        AddRemoveParameter()
         EnableDesableSubDialog()
         If rdoPenmanMonteith.Checked Then
             clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
@@ -441,8 +421,8 @@ Public Class dlgEvapotranspiration
             cmdEvapOptions.Visible = True
             cmdHSEvapOptions.Visible = False
         Else
-            cmdEvapOptions.Visible = False
             cmdHSEvapOptions.Visible = True
+            cmdEvapOptions.Visible = False
         End If
 
     End Sub
@@ -505,44 +485,8 @@ Public Class dlgEvapotranspiration
         End Select
     End Sub
 
-    Private Sub SetAsReceiver()
-        If ucrChkUseMaxMin.Checked Then
-
-            If ucrReceiverTmax.IsEmpty Then
-                ucrReceiverTmax.SetMeAsReceiver()
-            Else
-                ucrReceiverTmin.SetMeAsReceiver()
-            End If
-        Else
-            ucrReceiverTMean.SetMeAsReceiver()
-        End If
-    End Sub
     Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged, ucrChkWind.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkUseMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseMaxMin.ControlValueChanged
-        SetAsReceiver()
-        AddRemoveParameter()
-    End Sub
-    Private Sub AddRemoveParameter()
-        If ucrChkUseMaxMin.Checked AndAlso Not ucrReceiverTmax.IsEmpty Then
-            clsVarnamesVectorPM.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
-            clsVarnamesVectorPM.RemoveParameterByName("Tmean")
-        ElseIf ucrChkUseMaxMin.Checked AndAlso Not ucrReceiverTmin.IsEmpty Then
-            clsVarnamesVectorPM.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
-            clsVarnamesVectorPM.RemoveParameterByName("Tmean")
-        Else
-            clsVarnamesVectorPM.AddParameter("Tmean", Chr(34) & "Tmean" & Chr(34), bIncludeArgumentName:=False)
-            clsVarnamesVectorPM.RemoveParameterByName("Tmax")
-            clsVarnamesVectorPM.RemoveParameterByName("Tmin")
-
-        End If
-    End Sub
-
-    Private Sub ucrReceiverTmax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTmax.ControlValueChanged, ucrReceiverTmin.ControlValueChanged, ucrReceiverTMean.ControlValueChanged
-        AddRemoveParameter()
-        SetAsReceiver()
     End Sub
 End Class
 
