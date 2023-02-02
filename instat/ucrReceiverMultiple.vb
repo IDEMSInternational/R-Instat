@@ -304,10 +304,9 @@ Public Class ucrReceiverMultiple
     ''' Removes any variable in the multiple receiver
     ''' that is not in the list of variables of the selector
     ''' </summary>
-    ''' <param name="lstViewItem"></param>
-    Public Overrides Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
+    Public Overrides Sub RemoveAnyVariablesNotInList()
         For Each strVar In GetVariableNamesAsList()
-            If lstViewItem.FindItemWithText(strVar) Is Nothing Then
+            If Selector.lstAvailableVariable.FindItemWithText(strVar) Is Nothing Then
                 Remove({strVar})
             End If
         Next
@@ -373,7 +372,7 @@ Public Class ucrReceiverMultiple
         kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
         AddMultiple(kvpItems)
 
-        RemoveAnyVariablesNotInList(Selector.lstAvailableVariable) 'needed due to the Autofill option
+        RemoveAnyVariablesNotInList() 'needed due to the Autofill option
 
         lstSelectedVariables.Enabled = Not bFixreceiver
     End Sub
