@@ -28,9 +28,9 @@ Public Class sdgWindowNumber
     Public iPage As Integer
 
     ''' <summary>
-    ''' The number of the last/firs row/column in the current page (depending on the mode i.e row or column)
+    ''' The number of the last row/column in the current page (depending on the mode i.e row or column)
     ''' </summary>
-    Public iEndRowOrStartColumn As Integer
+    Public iEndRowOrColumn As Integer
 
     Public enumWINNUMBERMode As WINNUMBERMode = WINNUMBERMode.Row
     Public Enum WINNUMBERMode
@@ -51,29 +51,20 @@ Public Class sdgWindowNumber
                 frmMain.clsInstatOptions.iMaxRows, frmMain.clsInstatOptions.iMaxCols)
 
         ' the current page number displayed
-        Dim iDefaultPage As Integer = Math.Ceiling(CDbl(iEndRowOrStartColumn / iMaxRowsCols))
+        Dim iDefaultPage As Integer = Math.Ceiling(CDbl(iEndRowOrColumn / iMaxRowsCols))
 
         ' the maximum number of row/col pages 
         Dim iRowOrColMaxPages As Integer = Math.Ceiling(CDbl(iTotalRowOrColumn / iMaxRowsCols))
-        Dim strStartRowOrCol As String
-        Dim iMin As Integer = 0
-        Dim iTempRowOrColMaxPages = iRowOrColMaxPages
-        If enumWINNUMBERMode = WINNUMBERMode.Row Then
-            iMin = 0
-            strStartRowOrCol = "0-"
-            iTempRowOrColMaxPages -= 1
-            iDefaultPage -= 1
-        Else
-            iMin = 1
-            strStartRowOrCol = "1-"
-        End If
-        ucrNudPageNumber.SetMinMax(iMin, iRowOrColMaxPages)
+
+        ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
         ucrNudPageNumber.SetText(iDefaultPage)
-        lblPages.Text = strStartRoworCol & iTempRowOrColMaxPages & ":"
+        lblPages.Text = "1-" & iRowOrColMaxPages & ":"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseWindowNumber.ClickReturn
-        Dim iPageNum As String = ucrNudPageNumber.GetText()
-        iPage = If(iPageNum <> "", CInt(iPageNum), 1)
+        Dim strPageNum As String = ucrNudPageNumber.GetText()
+        If strPageNum <> "" Then
+            iPage = CInt(strPageNum)
+        End If
     End Sub
 End Class

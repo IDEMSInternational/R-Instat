@@ -341,8 +341,10 @@ Public Class clsDataFramePage
     ''' Go to the specific row page
     ''' </summary>
     Public Sub GoToSpecificRowPage(iRow As Integer)
-        _iRowStart = (intRowIncrements * iRow) + 1
-        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        If iRow > 0 Then
+            _iRowStart = (intRowIncrements * (iRow - 1)) + 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        End If
     End Sub
 
     ''' <summary>
@@ -402,9 +404,11 @@ Public Class clsDataFramePage
     ''' Go to the specific column page
     ''' </summary>
     Public Sub GoToSpecificColumnPage(iColumn As Integer)
-        _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
-        _clsRDotNetDataFrame = GetDataFrameFromRCommand()
-        SetHeaders()
+        If iColumn > 0 Then
+            _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
+        End If
     End Sub
 
     ''' <summary>
