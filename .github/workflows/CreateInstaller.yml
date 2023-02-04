@@ -74,25 +74,35 @@ jobs:
         version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}.${env:BUILD_NUMBER}"
 
     # Create the app package by building and packaging the Windows Application Packaging project
-    #Same output for 64bit and 32 bit 
+    # 32 bit 
+    - name: Create the app package 32bit
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      env:
+        Appx_Bundle: Always
+        Appx_Bundle_Platforms: x86
+        Appx_Package_Build_Mode: StoreUpload
+        Configuration: ${{ matrix.configuration }}      
+    
+    # Create the app package by building and packaging the Windows Application Packaging project
+    # 64bit  
     - name: Create the app package
       run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
-        Appx_Bundle_Platforms: x64|x86
+        Appx_Bundle_Platforms: x64
         Appx_Package_Build_Mode: StoreUpload
-        Configuration: ${{ matrix.configuration }}      
+        Configuration: ${{ matrix.configuration }}   
         
     # Create directory and copy over application to a 32bit folder
     # There is no difference in R instat other than the packaged R
-    - name: Make Library directory 64 bit
-      run: |
-        MKDIR instat\bin\x86\Release\
+    #- name: Make Library directory 64 bit
+    #  run: |
+    #    MKDIR instat\bin\x86\Release\
   
-    - name: Copy R-Instat Data 64 bit
-      run: |
-        ROBOCOPY instat\bin\Release\ instat\bin\x86\Release\ /E
-      continue-on-error: true
+   # - name: Copy R-Instat Data 64 bit
+   #   run: |
+   #     ROBOCOPY instat\bin\Release\ instat\bin\x86\Release\ /E
+   #   continue-on-error: true
 
     # Build 32 bit installer without R
     - name: Building the installer 32bit - No R
