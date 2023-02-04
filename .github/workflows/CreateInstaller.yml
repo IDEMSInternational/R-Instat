@@ -143,11 +143,11 @@ jobs:
     # Create directory and copy over InstatData (64bit)
     - name: Make Library directory 64 bit
       run: |
-        MKDIR instat\bin\Release\static\Library\  
+        MKDIR instat\bin\x64\Release\static\Library\  
   
     - name: Copy R-Instat Data 64 bit
       run: |
-        ROBOCOPY InstatData\data\ instat\bin\Release\static\Library\ /E
+        ROBOCOPY InstatData\data\ instat\bin\x64\Release\static\Library\ /E
       continue-on-error: true
       
     # Create directory and copy over InstatData (32bit)
@@ -170,7 +170,7 @@ jobs:
 
     - name: Copy R 64 bit
       run: |
-        ROBOCOPY R-RInstat\64Bit\ instat\bin\Release\static\ /E
+        ROBOCOPY R-RInstat\64Bit\ instat\bin\x64\Release\static\ /E
       continue-on-error: true      
       
     - name: Copy R 32 bit
@@ -180,7 +180,7 @@ jobs:
      
     - name: Install R packages (64 bit)
       run: |
-        "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
       shell: cmd     
       
     - name: Building the installer 64bit - With R
@@ -197,7 +197,7 @@ jobs:
     
     - name: Remove 64 bit release files to free up space
       run: |
-        Remove-Item "instat\bin\Release\" -Recurse
+        Remove-Item "instat\bin\x64\Release\" -Recurse
             
     - name: Remove 64 innosetup to free up space
       run: |
