@@ -126,7 +126,7 @@ Public Class dlgSplitText
         clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
         clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
 
-        clsTextComponentsFixed.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText)
+        clsTextComponentsFixed.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
