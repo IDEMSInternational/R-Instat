@@ -282,7 +282,7 @@ Partial Class dlgCorrelation
         Me.ucrChkDisplayAsDataFrame.Checked = False
         Me.ucrChkDisplayAsDataFrame.Location = New System.Drawing.Point(168, 128)
         Me.ucrChkDisplayAsDataFrame.Name = "ucrChkDisplayAsDataFrame"
-        Me.ucrChkDisplayAsDataFrame.Size = New System.Drawing.Size(162, 23)
+        Me.ucrChkDisplayAsDataFrame.Size = New System.Drawing.Size(206, 23)
         Me.ucrChkDisplayAsDataFrame.TabIndex = 1
         '
         'ucrChkShave
@@ -350,7 +350,7 @@ Partial Class dlgCorrelation
         '
         Me.ucrChkAbsolute.AutoSize = True
         Me.ucrChkAbsolute.Checked = False
-        Me.ucrChkAbsolute.Location = New System.Drawing.Point(266, 417)
+        Me.ucrChkAbsolute.Location = New System.Drawing.Point(270, 417)
         Me.ucrChkAbsolute.Name = "ucrChkAbsolute"
         Me.ucrChkAbsolute.Size = New System.Drawing.Size(117, 23)
         Me.ucrChkAbsolute.TabIndex = 23
@@ -361,7 +361,7 @@ Partial Class dlgCorrelation
         Me.ucrInputRearrange.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputRearrange.GetSetSelectedIndex = -1
         Me.ucrInputRearrange.IsReadOnly = False
-        Me.ucrInputRearrange.Location = New System.Drawing.Point(175, 416)
+        Me.ucrInputRearrange.Location = New System.Drawing.Point(179, 416)
         Me.ucrInputRearrange.Name = "ucrInputRearrange"
         Me.ucrInputRearrange.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputRearrange.TabIndex = 22
@@ -381,9 +381,9 @@ Partial Class dlgCorrelation
         Me.ucrInputDisplayNas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDisplayNas.GetSetSelectedIndex = -1
         Me.ucrInputDisplayNas.IsReadOnly = False
-        Me.ucrInputDisplayNas.Location = New System.Drawing.Point(127, 363)
+        Me.ucrInputDisplayNas.Location = New System.Drawing.Point(139, 363)
         Me.ucrInputDisplayNas.Name = "ucrInputDisplayNas"
-        Me.ucrInputDisplayNas.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputDisplayNas.Size = New System.Drawing.Size(55, 21)
         Me.ucrInputDisplayNas.TabIndex = 18
         '
         'ucrChkLeadingZeros
@@ -400,11 +400,11 @@ Partial Class dlgCorrelation
         Me.ucrNudDecimalPlaces.AutoSize = True
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(127, 338)
+        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(140, 338)
         Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
-        Me.ucrNudDecimalPlaces.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDecimalPlaces.Size = New System.Drawing.Size(54, 19)
         Me.ucrNudDecimalPlaces.TabIndex = 16
         Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
