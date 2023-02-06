@@ -44,6 +44,7 @@ Public Class dlgOptions
         LoadInstatOptions()
         ApplyEnabled(False)
         autoTranslate(Me)
+        lversion.Text = "v. " + My.Application.Info.Version.ToString
     End Sub
 
     Private Sub InitialiseDialog()
@@ -84,12 +85,16 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
+        ucrInputLanguage.SetItems({"English", "French", "Italian", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
 
-        ucrChkShowWaitDialog.SetText("Set maximum height for outputs")
+        ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
         ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
         ucrNudMaximumOutputsHeight.Maximum = 1000
+        'todo. temporarily disabled 
+        ucrChkMaximumOutputsHeight.Visible = False
+        ucrNudMaximumOutputsHeight.Visible = False
 
         SetVisibleLanButton()
     End Sub
@@ -122,16 +127,20 @@ Public Class dlgOptions
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
-        ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
-        ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
-                                              frmMain.clsInstatOptions.iMaxOutputsHeight,
-                                              clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+
+        'todo. temporarily disabled
+        'ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
+        'ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
+        '                                      frmMain.clsInstatOptions.iMaxOutputsHeight,
+        '                                      clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
+            Case "it-IT"
+                ucrInputLanguage.SetText("Italian")
             Case "sw-KE"
                 ucrInputLanguage.SetText("Kiswahili")
             Case "pt-PT"
@@ -183,8 +192,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
-        frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
-                                                         ucrNudMaximumOutputsHeight.Value, -1))
+        'todo. temporarily disabled
+        'frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
+        '                                                 ucrNudMaximumOutputsHeight.Value, -1))
     End Sub
 
     Private Sub SetView()
@@ -282,6 +292,8 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
+            Case "Italian"
+                strCurrLanguageCulture = "it-IT"
             Case "Kiswahili"
                 strCurrLanguageCulture = "sw-KE"
             Case "Portuguese"

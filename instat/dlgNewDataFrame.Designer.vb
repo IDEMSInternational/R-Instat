@@ -64,6 +64,12 @@ Partial Class dlgNewDataFrame
         Me.lblCommand = New System.Windows.Forms.Label()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.dataTypeGridView = New System.Windows.Forms.DataGridView()
+        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colDefault = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colLevels = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rdoLists = New System.Windows.Forms.RadioButton()
         Me.lblCategories = New System.Windows.Forms.Label()
         Me.lblLists = New System.Windows.Forms.Label()
@@ -80,12 +86,6 @@ Partial Class dlgNewDataFrame
         Me.ucrNudCols = New instat.ucrNud()
         Me.ucrNudRows = New instat.ucrNud()
         Me.ucrBase = New instat.ucrButtons()
-        Me.no = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colNames = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cbType = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colDefault = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colLevels = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuStripCommand.SuspendLayout()
         CType(Me.dataTypeGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -336,6 +336,47 @@ Partial Class dlgNewDataFrame
         Me.dataTypeGridView.Size = New System.Drawing.Size(416, 115)
         Me.dataTypeGridView.TabIndex = 163
         '
+        'no
+        '
+        Me.no.FillWeight = 90.0!
+        Me.no.HeaderText = "No."
+        Me.no.Name = "no"
+        Me.no.ReadOnly = True
+        Me.no.Width = 30
+        '
+        'colNames
+        '
+        Me.colNames.HeaderText = "Name"
+        Me.colNames.Name = "colNames"
+        Me.colNames.Width = 60
+        '
+        'cbType
+        '
+        Me.cbType.HeaderText = "Type"
+        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
+        Me.cbType.MaxDropDownItems = 4
+        Me.cbType.Name = "cbType"
+        Me.cbType.Width = 60
+        '
+        'colDefault
+        '
+        Me.colDefault.HeaderText = "Default"
+        Me.colDefault.Items.AddRange(New Object() {"NA", "0", "1", "1,1000"})
+        Me.colDefault.Name = "colDefault"
+        '
+        'colLevels
+        '
+        Me.colLevels.HeaderText = "Levels"
+        Me.colLevels.Items.AddRange(New Object() {"No, Yes", "Bad, Poor, Average, Good, Great", "0-4,5-9,10-14,15-19, 20-64, 65+", "1:5"})
+        Me.colLevels.Name = "colLevels"
+        '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.Visible = False
+        Me.colLabel.Width = 80
+        '
         'rdoLists
         '
         Me.rdoLists.Appearance = System.Windows.Forms.Appearance.Button
@@ -430,7 +471,7 @@ Partial Class dlgNewDataFrame
         Me.ucrChkVariable.Checked = False
         Me.ucrChkVariable.Location = New System.Drawing.Point(37, 101)
         Me.ucrChkVariable.Name = "ucrChkVariable"
-        Me.ucrChkVariable.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkVariable.Size = New System.Drawing.Size(138, 27)
         Me.ucrChkVariable.TabIndex = 162
         '
         'ucrTryNewDataFrame
@@ -508,47 +549,6 @@ Partial Class dlgNewDataFrame
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
-        '
-        'no
-        '
-        Me.no.FillWeight = 90.0!
-        Me.no.HeaderText = "No."
-        Me.no.Name = "no"
-        Me.no.ReadOnly = True
-        Me.no.Width = 30
-        '
-        'colNames
-        '
-        Me.colNames.HeaderText = "Name"
-        Me.colNames.Name = "colNames"
-        Me.colNames.Width = 60
-        '
-        'cbType
-        '
-        Me.cbType.HeaderText = "Type"
-        Me.cbType.Items.AddRange(New Object() {"Character", "Numeric", "Factor", "Integer"})
-        Me.cbType.MaxDropDownItems = 4
-        Me.cbType.Name = "cbType"
-        Me.cbType.Width = 60
-        '
-        'colDefault
-        '
-        Me.colDefault.HeaderText = "Default"
-        Me.colDefault.Items.AddRange(New Object() {"NA", "0", "1", "1,1000"})
-        Me.colDefault.Name = "colDefault"
-        '
-        'colLevels
-        '
-        Me.colLevels.HeaderText = "Levels"
-        Me.colLevels.Items.AddRange(New Object() {"No, Yes", "Bad, Poor, Average, Good, Great", "0-4,5-9,10-14,15-19, 20-64, 65+", "1:5"})
-        Me.colLevels.Name = "colLevels"
-        '
-        'colLabel
-        '
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.Visible = False
-        Me.colLabel.Width = 80
         '
         'dlgNewDataFrame
         '

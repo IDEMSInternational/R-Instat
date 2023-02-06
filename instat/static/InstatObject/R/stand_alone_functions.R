@@ -2616,8 +2616,9 @@ cbind_unique <- function(x, y, cols){
 }
 
 #object is the object to be displayed
-#object_format is the display format
-view_object <- function(object, object_format) {
+#object_format is the display format. If supplied, then returns file name of the object
+#if not then it prints the object
+view_object_data <- function(object, object_format = NULL) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
@@ -2631,11 +2632,23 @@ view_object <- function(object, object_format) {
   return(file_name)
 }
 
+view_object <- function(data_book_object) {
+  return(
+    view_object_data(
+      object = data_book_object$object,
+      object_format = data_book_object$object_format
+    )
+  )
+}
+
 #displays the graph object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
 #and returns the file path.
 view_graph_object <- function(graph_object){
+  #get object class names
+  object_class_names <- class(graph_object)
+  
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
@@ -2643,32 +2656,34 @@ view_graph_object <- function(graph_object){
     #TODO. When print command is called in R-Studio, a temp file is automatically created
     #Investigate how that can be done in R-Instat
     #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    if ("grob" %in% object_class_names){
+      #for grob objects draw them first
+      grid::grid.draw(graph_object)
+    }
     return(graph_object)
   }
   
-  #get object class names
-  object_class_names <- class(graph_object)
+ 
   #get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewgraph", fileext = ".png")
   
-  #save the object as a html file depending on the object type
+  #save the object as a graph file depending on the object type
   grDevices::png(file = file_name, width = 4000, height = 4000, res = 500)
-  print(graph_object)
+  if ("grob" %in% object_class_names) {
+    grid::grid.draw(graph_object)
+  }else{
+    print(graph_object)
+  }
   dev.off() #todo. use graphics.off() which one is better?
+
   
   #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
-  #investigate if thatwill that help with resolution and scaling?
-  
+  #investigate if it will help with resolution and scaling?
   # if ("ggplot" %in% object_class_names) {
-  #   
   # } else if ("ggmultiplot" %in% object_class_names) {
-  #   
   # } else if ("openair" %in% object_class_names) {
-  #   
   # } else if ("ggsurvplot" %in% object_class_names) {
-  #   
   # } else if ("recordedplot" %in% object_class_names) {
-  #   
   # }
   
   message("R viewer not detected. File saved in location ", file_name)
@@ -2691,12 +2706,13 @@ view_text_object <- function(text_object){
     return(utils::capture.output(text_object))
   }
   
-  #get object class names
-  object_class_names <- class(text_object)
+  
   #get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewtext", fileext = ".txt")
   
   #todo. should we use respective package "convenience" functions to save the objects as text files depending on the class names
+  #get object class names
+  #object_class_names <- class(text_object)
   
   #save the object as a text file 
   utils::capture.output(text_object, file = file_name)
@@ -2750,3 +2766,84 @@ view_html_object <- function(html_object){
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
 } 
+
+#tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
+#applicable to base graphs only
+check_graph <- function(graph_object){
+ 
+  out <- graph_object
+  
+  if (is.null(out)) {
+    out <- tryCatch({
+      message("Recording plot")
+      recordPlot()
+    },
+    error = function(cond) {
+      message("Graph object does not exist:")
+      message(cond)
+      # Choose a return value in case of error
+      return(NULL)
+    },
+    warning = function(cond) {
+      message("Warning message:")
+      message(cond)
+      return(NULL)
+    },
+    finally = {
+      message("Plot recorded")
+    })
+  }
+  
+  return(out)
+} 
+
+
+get_data_book_output_object_names <- function(output_object_list,
+                                              object_type_label = NULL, 
+                                              excluded_items = c(), 
+                                              as_list = FALSE, 
+                                              list_label = NULL){
+  
+  if(is.null(object_type_label)){
+    out <- names(output_object_list)
+  }else{ 
+    out <- names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
+  }
+  
+  if(length(out) == 0){
+    return(out)
+  } 
+  
+  if(length(excluded_items) > 0) {
+    #get indices of items to exclude
+    excluded_indices <- which(out %in% excluded_items)
+    
+    #remove the excluded items from the list
+    if(length(excluded_indices) > 0){
+      out <- out[-excluded_indices]
+    }
+    
+  }
+  
+  if(as_list) {
+    #convert the character vector list
+    lst <- list()
+    if(!is.null(list_label)){
+      lst[[list_label]] <- out
+    }else{
+      lst <- as.list(out)
+    }
+   
+    return(lst)
+  }else{
+    #return as a character vector
+    return(out)
+  }
+  
+}
+
+
+
+
+
+

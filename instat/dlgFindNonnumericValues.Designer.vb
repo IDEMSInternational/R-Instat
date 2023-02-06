@@ -67,7 +67,7 @@ Partial Class dlgFindNonnumericValues
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(136, 23)
         Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.TabIndex = 2
         Me.ucrReceiverColumn.ucrSelector = Nothing
@@ -90,7 +90,7 @@ Partial Class dlgFindNonnumericValues
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 274)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 7
         '
         'ucrSaveColumn

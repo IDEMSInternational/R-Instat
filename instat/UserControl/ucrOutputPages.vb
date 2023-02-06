@@ -80,8 +80,8 @@ Public Class ucrOutputPages
         AddHandler ucrMainOutputPage.RefreshContextButtons, AddressOf EnableDisableTopButtons
     End Sub
 
-    Private Sub AddNewOutput(outputElement As clsOutputElement)
-        ucrMainOutputPage.AddNewOutput(outputElement)
+    Private Sub AddNewOutput(outputElement As clsOutputElement, bDisplayOutputInExternalViewer As Boolean)
+        ucrMainOutputPage.AddNewOutput(outputElement, bDisplayOutputInExternalViewer)
     End Sub
 
     Private Sub AddNewOutputToTab(outputElement As clsOutputElement, tabName As String)
@@ -223,7 +223,7 @@ Public Class ucrOutputPages
                 _outputLogger.DeleteOutputFromMainList(element)
             Next
             _selectedOutputPage.ClearAllOutputs()
-            For Each output In _outputLogger.Output
+            For Each output In _outputLogger.OutputElements
                 _selectedOutputPage.AddNewOutput(output)
             Next
             EnableDisableTopButtons()
@@ -244,8 +244,8 @@ Public Class ucrOutputPages
     ''' </summary>
     Public Sub ClearOutputWindow()
         tabControl.SelectedIndex = 0
-        For i = _outputLogger.Output.Count - 1 To 0 Step -1
-            _outputLogger.DeleteOutputFromMainList(_outputLogger.Output(i))
+        For i = _outputLogger.OutputElements.Count - 1 To 0 Step -1
+            _outputLogger.DeleteOutputFromMainList(_outputLogger.OutputElements(i))
         Next
         _selectedOutputPage.ClearAllOutputs()
         EnableDisableTopButtons()
