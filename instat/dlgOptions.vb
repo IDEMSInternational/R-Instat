@@ -44,6 +44,7 @@ Public Class dlgOptions
         LoadInstatOptions()
         ApplyEnabled(False)
         autoTranslate(Me)
+        lversion.Text = "v. " + My.Application.Info.Version.ToString
     End Sub
 
     Private Sub InitialiseDialog()
@@ -84,7 +85,7 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Kiswahili", "Portuguese", "Russian", "Spanish"})
+        ucrInputLanguage.SetItems({"English", "French", "Italian", "Kiswahili", "Portuguese", "Russian", "Spanish"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
 
@@ -138,6 +139,8 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
+            Case "it-IT"
+                ucrInputLanguage.SetText("Italian")
             Case "sw-KE"
                 ucrInputLanguage.SetText("Kiswahili")
             Case "pt-PT"
@@ -289,6 +292,8 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
+            Case "Italian"
+                strCurrLanguageCulture = "it-IT"
             Case "Kiswahili"
                 strCurrLanguageCulture = "sw-KE"
             Case "Portuguese"
