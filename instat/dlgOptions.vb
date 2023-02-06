@@ -44,6 +44,7 @@ Public Class dlgOptions
         LoadInstatOptions()
         ApplyEnabled(False)
         autoTranslate(Me)
+        lversion.Text = "v. " + My.Application.Info.Version.ToString
     End Sub
 
     Private Sub InitialiseDialog()
