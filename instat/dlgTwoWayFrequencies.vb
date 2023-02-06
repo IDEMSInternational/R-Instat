@@ -48,8 +48,9 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        'HelpID
         ucrBase.iHelpTopicID = 415
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
@@ -131,6 +132,8 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
         'TODO conditions for both requires checks on multiple functions
+        'and also requires multiple output support. So for now diesable
+        rdoBoth.Enabled = False
 
         'Setting Display of the group boxes in the dialog
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -170,6 +173,13 @@ Public Class dlgTwoWayFrequencies
         clsSjTab.AddParameter("title", Chr(34) & "" & Chr(34))
         clsSjTab.AddParameter("string.total", Chr(34) & "Total" & Chr(34))
 
+        clsSjTab.SetAssignToOutputObject("last_table",
+                                         RObjectTypeLabel.Table,
+                                         RObjectFormat.Html,
+                                         ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
+                                         "last_table")
+
+
         'Defining Plot functions and default functions
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
@@ -178,7 +188,12 @@ Public Class dlgTwoWayFrequencies
         clsSjPlot.AddParameter("show.n", "TRUE")
         clsSjPlot.AddParameter("title", Chr(34) & "" & Chr(34))
         clsSjPlot.AddParameter("facet.grid", "TRUE")
-        clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsSjPlot.SetAssignToOutputObject("last_graph",
+                                          RObjectTypeLabel.Graph,
+                                          RObjectFormat.Image,
+                                          ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
+                                          "last_graph")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
     End Sub
@@ -260,21 +275,21 @@ Public Class dlgTwoWayFrequencies
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strGraph As String
         Dim strTempScript As String = ""
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
+        'Dim bIsAssigned As Boolean
+        'Dim bToBeAssigned As Boolean
+        'Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsSjPlot.bIsAssigned
-            bToBeAssigned = clsSjPlot.bToBeAssigned
-            strAssignTo = clsSjPlot.strAssignTo
+            'bIsAssigned = clsSjPlot.bIsAssigned
+            ' bToBeAssigned = clsSjPlot.bToBeAssigned
+            'strAssignTo = clsSjPlot.strAssignTo
 
             strGraph = clsSjPlot.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsSjPlot.bIsAssigned = bIsAssigned
-            clsSjPlot.bToBeAssigned = bToBeAssigned
-            clsSjPlot.strAssignTo = strAssignTo
+            'clsSjPlot.bIsAssigned = bIsAssigned
+            'clsSjPlot.bToBeAssigned = bToBeAssigned
+            'clsSjPlot.strAssignTo = strAssignTo
         End If
     End Sub
 

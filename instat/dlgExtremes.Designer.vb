@@ -59,7 +59,6 @@ Partial Class dlgExtremes
         Me.cmdZero = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.lblFevdType = New System.Windows.Forms.Label()
-        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.lblDataToFit = New System.Windows.Forms.Label()
         Me.ucrInputThresholdforLocation = New instat.ucrInputTextBox()
@@ -325,16 +324,6 @@ Partial Class dlgExtremes
         Me.lblFevdType.TabIndex = 7
         Me.lblFevdType.Text = "Distribution:"
         '
-        'cmdDisplayOptions
-        '
-        Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(401, 290)
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(108, 23)
-        Me.cmdDisplayOptions.TabIndex = 14
-        Me.cmdDisplayOptions.Text = "Display Options"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
         'cmdFittingOptions
         '
         Me.cmdFittingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -342,7 +331,7 @@ Partial Class dlgExtremes
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(108, 23)
         Me.cmdFittingOptions.TabIndex = 12
-        Me.cmdFittingOptions.Text = "Fitting Options"
+        Me.cmdFittingOptions.Text = "Options"
         Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'lblDataToFit
@@ -363,6 +352,7 @@ Partial Class dlgExtremes
         Me.ucrInputThresholdforLocation.IsMultiline = False
         Me.ucrInputThresholdforLocation.IsReadOnly = False
         Me.ucrInputThresholdforLocation.Location = New System.Drawing.Point(79, 231)
+        Me.ucrInputThresholdforLocation.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputThresholdforLocation.Name = "ucrInputThresholdforLocation"
         Me.ucrInputThresholdforLocation.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputThresholdforLocation.TabIndex = 10
@@ -371,9 +361,10 @@ Partial Class dlgExtremes
         '
         Me.ucrTryModelling.AutoSize = True
         Me.ucrTryModelling.Location = New System.Drawing.Point(1, 258)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
-        Me.ucrTryModelling.Size = New System.Drawing.Size(389, 33)
+        Me.ucrTryModelling.Size = New System.Drawing.Size(396, 37)
         Me.ucrTryModelling.TabIndex = 11
         '
         'ucrChkExplanatoryModelForLocationParameter
@@ -381,6 +372,7 @@ Partial Class dlgExtremes
         Me.ucrChkExplanatoryModelForLocationParameter.AutoSize = True
         Me.ucrChkExplanatoryModelForLocationParameter.Checked = False
         Me.ucrChkExplanatoryModelForLocationParameter.Location = New System.Drawing.Point(258, 85)
+        Me.ucrChkExplanatoryModelForLocationParameter.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkExplanatoryModelForLocationParameter.Name = "ucrChkExplanatoryModelForLocationParameter"
         Me.ucrChkExplanatoryModelForLocationParameter.Size = New System.Drawing.Size(270, 23)
         Me.ucrChkExplanatoryModelForLocationParameter.TabIndex = 3
@@ -390,6 +382,7 @@ Partial Class dlgExtremes
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.AutoSize = True
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.frmParent = Me
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.Location = New System.Drawing.Point(258, 108)
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.Name = "ucrReceiverExpressionExplanatoryModelForLocParam"
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.Selector = Nothing
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.Size = New System.Drawing.Size(251, 22)
@@ -404,6 +397,7 @@ Partial Class dlgExtremes
         Me.ucrInputExtremes.GetSetSelectedIndex = -1
         Me.ucrInputExtremes.IsReadOnly = False
         Me.ucrInputExtremes.Location = New System.Drawing.Point(79, 204)
+        Me.ucrInputExtremes.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputExtremes.Name = "ucrInputExtremes"
         Me.ucrInputExtremes.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputExtremes.TabIndex = 8
@@ -411,7 +405,7 @@ Partial Class dlgExtremes
         'ucrSaveExtremes
         '
         Me.ucrSaveExtremes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveExtremes.Location = New System.Drawing.Point(10, 292)
+        Me.ucrSaveExtremes.Location = New System.Drawing.Point(10, 303)
         Me.ucrSaveExtremes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
         Me.ucrSaveExtremes.Size = New System.Drawing.Size(320, 22)
@@ -446,9 +440,10 @@ Partial Class dlgExtremes
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 321)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 330)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
         'dlgExtremes
@@ -456,7 +451,7 @@ Partial Class dlgExtremes
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(533, 378)
+        Me.ClientSize = New System.Drawing.Size(533, 389)
         Me.Controls.Add(Me.ucrInputThresholdforLocation)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.ucrTryModelling)
@@ -467,7 +462,6 @@ Partial Class dlgExtremes
         Me.Controls.Add(Me.lblFevdType)
         Me.Controls.Add(Me.ucrInputExtremes)
         Me.Controls.Add(Me.ucrSaveExtremes)
-        Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdFittingOptions)
         Me.Controls.Add(Me.ucrSelectorExtremes)
         Me.Controls.Add(Me.lblDataToFit)
@@ -514,7 +508,6 @@ Partial Class dlgExtremes
     Friend WithEvents lblFevdType As Label
     Friend WithEvents ucrInputExtremes As ucrInputComboBox
     Friend WithEvents ucrSaveExtremes As ucrSave
-    Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents cmdFittingOptions As Button
     Friend WithEvents ucrSelectorExtremes As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblDataToFit As Label

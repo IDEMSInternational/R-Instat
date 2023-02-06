@@ -482,7 +482,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
       # if it is a ordered factor...
       if (any(stringr::str_detect("ordered", col_data_type))){
         # put in here the ones that DO work for ordered factor
-        if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count|summary_min|summary_max|summary_range", formula_fn_exp))){
+        if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count|summary_min|summary_max|summary_range|summary_median|summary_quantile|p10|p20|p25|p30|p33|p40|p60|p67|p70|p75|p80|p90", formula_fn_exp))){
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
             dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
         } else {
