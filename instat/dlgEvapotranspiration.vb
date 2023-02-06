@@ -24,7 +24,7 @@ Public Class dlgEvapotranspiration
     Private iSaveMaxY As Integer
     Private iEvapOptions As Integer
     Private iHSEvapOptions As Integer
-    Private clsETPenmanMonteith, clsHargreavesSamani, clsETPriestleyTaylor, clsDataFunctionPM, clsDataFunctionHS, clsDataFunctionPT, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsVarnamesVectorPT, clsLibraryEvap As New RFunction
+    Private clsETPenmanMonteith, clsHargreavesSamani, clsListFunction, clsETPriestleyTaylor, clsDataFunctionPM, clsDataFunctionHS, clsDataFunctionPT, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsVarnamesVectorPT, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
     Private bRcodeSet As Boolean = True
@@ -208,13 +208,13 @@ Public Class dlgEvapotranspiration
         clsYearFunc.SetRCommand("year")
         clsYearFunc.SetPackageName("lubridate")
 
-        clsDataFunction.SetRCommand("data")
-        clsDataFunction.AddParameter("constants", Chr(34) & "constants" & Chr(34), bIncludeArgumentName:=False)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction, iPosition:=1)
+        'clsDataFunction.SetRCommand("data")
+        'clsDataFunction.AddParameter("constants", Chr(34) & "constants" & Chr(34), bIncludeArgumentName:=False)
+
 
         clsReadInputs.SetPackageName("Evapotranspiration")
         clsReadInputs.SetRCommand("ReadInputs")
-        clsReadInputs.AddParameter("constants", "constants", iPosition:=2, bIncludeArgumentName:=False)
+        clsReadInputs.AddParameter("constants", "constants", iPosition:=2)
         clsReadInputs.AddParameter("stopmissing", clsRFunctionParameter:=clsMissingDataVector, iPosition:=3)
         clsReadInputs.AddParameter("timestep", Chr(34) & "daily" & Chr(34), iPosition:=4)
         clsReadInputs.AddParameter("interp_missing_days", "FALSE", iPosition:=5)
@@ -230,8 +230,11 @@ Public Class dlgEvapotranspiration
         clsReadInputs.SetAssignTo("temp_data")
 
         clsVarnamesVectorPM.SetRCommand("c")
+        clsVarnamesVectorPM.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorPM.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
         clsVarnamesVectorPM.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), bIncludeArgumentName:=False)
         clsVarnamesVectorPM.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), bIncludeArgumentName:=False)
+
 
         clsVarnamesVectorPT.SetRCommand("c")
         clsVarnamesVectorPT.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
@@ -252,10 +255,21 @@ Public Class dlgEvapotranspiration
 
         clsVector.SetRCommand("c")
 
+        clsListFunction.SetRCommand("list")
+        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
+        clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
+        clsListFunction.AddParameter("lat_rad", -1.57, iPosition:=2)
+        clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
+        clsListFunction.AddParameter("z", 2, iPosition:=4)
+        clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
+        clsListFunction.AddParameter("G", 0, iPosition:=6)
+        clsListFunction.AddParameter("Y", -3.14, iPosition:=9)
+        clsListFunction.SetAssignTo("constants")
+
         clsETPenmanMonteith.SetPackageName("Evapotranspiration")
         clsETPenmanMonteith.SetRCommand("ET.PenmanMonteith")
         clsETPenmanMonteith.AddParameter("data", clsRFunctionParameter:=clsReadInputs, iPosition:=0)
-        clsETPenmanMonteith.AddParameter("constants", "constants", iPosition:=1, bIncludeArgumentName:=False)
+        clsETPenmanMonteith.AddParameter("constants", "constants", iPosition:=1)
         clsETPenmanMonteith.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
         clsETPenmanMonteith.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
         clsETPenmanMonteith.AddParameter("crops", Chr(34) & "short" & Chr(34), iPosition:=4)
@@ -286,11 +300,16 @@ Public Class dlgEvapotranspiration
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColName.GetText, strTempDataframe:=ucrSelectorEvapotranspiration.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsListFunction, iPosition:=1)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("x", 0), iAdditionalPairNo:=2)
+        'ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionPM, New RParameter("Tmax", 5), iAdditionalPairNo:=1)
+        'ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionPM, New RParameter("Tmin", 6), iAdditionalPairNo:=1)
+
+
         ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmax", 3), iAdditionalPairNo:=1)
         ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmin", 4), iAdditionalPairNo:=1)
         ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("Tmax", 3), iAdditionalPairNo:=2)
@@ -359,6 +378,13 @@ Public Class dlgEvapotranspiration
         sdgHSMissingOptionsEvap.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
         bResetSubdialog = False
         sdgHSMissingOptionsEvap.ShowDialog()
+    End Sub
+
+    Private Sub cmdPMConstants_Click(sender As Object, e As EventArgs) Handles cmdPMConstants.Click
+        sdgPMConstants.SetRFunction(clsNewReadInputs:=clsReadInputs, clsNewDataFunction:=clsDataFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPMConstants.ShowDialog()
+        AddRemoveAbBsParameters()
     End Sub
 
     Private Sub DialogSize()
@@ -433,6 +459,19 @@ Public Class dlgEvapotranspiration
             clsVarnamesVectorPM.RemoveParameterByName("u2")
             ucrReceiverHumidityMax.SetMeAsReceiver()
         End If
+    End Sub
+    Private Sub AddRemoveAbBsParameters()
+        If ucrInputTimeStep.GetText = "daily" AndAlso ucrInputSolar.GetText = "cloud" Then
+            clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+            clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
+        Else
+            clsListFunction.RemoveParameterByName("as")
+            clsListFunction.RemoveParameterByName("bs")
+        End If
+    End Sub
+
+    Private Sub ucrInputTimeStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTimeStep.ControlValueChanged, ucrInputSolar.ControlValueChanged
+        AddRemoveAbBsParameters()
     End Sub
 
     Private Sub ucrInputSolar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSolar.ControlValueChanged, ucrReceiverRadiation.ControlValueChanged

@@ -37,6 +37,7 @@ Partial Class dlgEvapotranspiration
         Me.rdoPriestleyTaylor = New System.Windows.Forms.RadioButton()
         Me.lblAlpha = New System.Windows.Forms.Label()
         Me.cmdHSEvapOptions = New System.Windows.Forms.Button()
+        Me.cmdPMConstants = New System.Windows.Forms.Button()
         Me.ucrNudAlpha = New instat.ucrNud()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrChkWind = New instat.ucrCheck()
@@ -94,7 +95,7 @@ Partial Class dlgEvapotranspiration
         'lblTimeStep
         '
         Me.lblTimeStep.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTimeStep.Location = New System.Drawing.Point(2, 242)
+        Me.lblTimeStep.Location = New System.Drawing.Point(5, 242)
         Me.lblTimeStep.Name = "lblTimeStep"
         Me.lblTimeStep.Size = New System.Drawing.Size(107, 20)
         Me.lblTimeStep.TabIndex = 22
@@ -103,7 +104,7 @@ Partial Class dlgEvapotranspiration
         'lblCrop
         '
         Me.lblCrop.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCrop.Location = New System.Drawing.Point(2, 315)
+        Me.lblCrop.Location = New System.Drawing.Point(5, 298)
         Me.lblCrop.Name = "lblCrop"
         Me.lblCrop.Size = New System.Drawing.Size(71, 20)
         Me.lblCrop.TabIndex = 30
@@ -121,7 +122,7 @@ Partial Class dlgEvapotranspiration
         'lblSolar
         '
         Me.lblSolar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSolar.Location = New System.Drawing.Point(2, 275)
+        Me.lblSolar.Location = New System.Drawing.Point(5, 272)
         Me.lblSolar.Name = "lblSolar"
         Me.lblSolar.Size = New System.Drawing.Size(58, 18)
         Me.lblSolar.TabIndex = 26
@@ -201,7 +202,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.lblAlpha.AutoSize = True
         Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlpha.Location = New System.Drawing.Point(2, 316)
+        Me.lblAlpha.Location = New System.Drawing.Point(5, 305)
         Me.lblAlpha.Name = "lblAlpha"
         Me.lblAlpha.Size = New System.Drawing.Size(37, 13)
         Me.lblAlpha.TabIndex = 36
@@ -217,12 +218,22 @@ Partial Class dlgEvapotranspiration
         Me.cmdHSEvapOptions.Text = "Missing Options"
         Me.cmdHSEvapOptions.UseVisualStyleBackColor = True
         '
+        'cmdPMConstants
+        '
+        Me.cmdPMConstants.Location = New System.Drawing.Point(8, 341)
+        Me.cmdPMConstants.Name = "cmdPMConstants"
+        Me.cmdPMConstants.Size = New System.Drawing.Size(137, 21)
+        Me.cmdPMConstants.TabIndex = 42
+        Me.cmdPMConstants.Tag = "Options"
+        Me.cmdPMConstants.Text = "Constants"
+        Me.cmdPMConstants.UseVisualStyleBackColor = True
+        '
         'ucrNudAlpha
         '
         Me.ucrNudAlpha.AutoSize = True
         Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(109, 314)
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(109, 303)
         Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Name = "ucrNudAlpha"
@@ -258,7 +269,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputSolar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSolar.GetSetSelectedIndex = -1
         Me.ucrInputSolar.IsReadOnly = False
-        Me.ucrInputSolar.Location = New System.Drawing.Point(109, 275)
+        Me.ucrInputSolar.Location = New System.Drawing.Point(109, 271)
         Me.ucrInputSolar.Name = "ucrInputSolar"
         Me.ucrInputSolar.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSolar.TabIndex = 27
@@ -282,7 +293,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputCrop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCrop.GetSetSelectedIndex = -1
         Me.ucrInputCrop.IsReadOnly = False
-        Me.ucrInputCrop.Location = New System.Drawing.Point(109, 313)
+        Me.ucrInputCrop.Location = New System.Drawing.Point(109, 302)
         Me.ucrInputCrop.Name = "ucrInputCrop"
         Me.ucrInputCrop.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCrop.TabIndex = 31
@@ -290,7 +301,7 @@ Partial Class dlgEvapotranspiration
         'ucrNewColName
         '
         Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(3, 397)
+        Me.ucrNewColName.Location = New System.Drawing.Point(8, 397)
         Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(388, 24)
@@ -406,7 +417,8 @@ Partial Class dlgEvapotranspiration
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(464, 496)
+        Me.ClientSize = New System.Drawing.Size(464, 484)
+        Me.Controls.Add(Me.cmdPMConstants)
         Me.Controls.Add(Me.lblAlpha)
         Me.Controls.Add(Me.ucrNudAlpha)
         Me.Controls.Add(Me.rdoPriestleyTaylor)
@@ -480,4 +492,5 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents lblAlpha As Label
     Friend WithEvents ucrNudAlpha As ucrNud
     Friend WithEvents cmdHSEvapOptions As Button
+    Friend WithEvents cmdPMConstants As Button
 End Class

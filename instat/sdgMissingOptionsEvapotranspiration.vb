@@ -45,10 +45,6 @@ Public Class sdgMissingOptionsEvapotranspiration
         ucrChkInterpMissingEntries.SetRDefault("FALSE")
         ucrChkInterpMissingEntries.SetText("Interpolate Missing Entries")
 
-        'ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith, rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
-
-
-
         ucrNudMaxMissingData.SetParameter(New RParameter("x", bNewIncludeArgumentName:=False))
         ucrNudMaxMissingData.SetMinMax(1, 99)
 
@@ -74,8 +70,4 @@ Public Class sdgMissingOptionsEvapotranspiration
         ucrNudMaxMissingDays.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
         ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
     End Sub
-
-    'Private Sub ucrInputMissingMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMissingMethod.ControlValueChanged
-    '    clsReadInputs.AddParameter("missing_method", Chr(34) & "monthly average" & Chr(34), iPosition:=8)
-    'End Sub
 End Class

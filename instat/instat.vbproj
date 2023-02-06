@@ -245,6 +245,12 @@
     <Compile Include="sdgHSMissingOptionsEvap.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPMConstants.Designer.vb">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPMConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </Compile>
@@ -3095,6 +3101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHSMissingOptionsEvap.resx">
       <DependentUpon>sdgHSMissingOptionsEvap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPMConstants.resx">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
