@@ -274,7 +274,8 @@ Public Class clsDataFramePage
             columnHeader.strTypeShortCode = "(L)"
             ' Structured columns or Bigq or Bigz e.g. "circular" are coded with "(S)"
         ElseIf strHeaderType.Contains("circular") OrElse strHeaderType.Contains("bigz") OrElse
-                       strHeaderType.Contains("bigq") Then
+               strHeaderType.Contains("bigq") Then
+            columnHeader.strTypeShortCode = "(S)"
         ElseIf strHeaderType.Contains("list") Then
             columnHeader.strTypeShortCode = "(LT)"
         ElseIf strHeaderType.Contains("complex") Then
