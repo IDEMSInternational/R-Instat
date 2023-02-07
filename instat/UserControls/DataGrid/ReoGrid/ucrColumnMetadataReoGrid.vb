@@ -43,6 +43,9 @@ Public Class ucrColumnMetadataReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = columnMetaData.Data(i, j)
+                If grdData.CurrentWorksheet.Item(row:=i, col:=j) = "list" Then
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=GetColumnIndex("Signif_Figures")).IsReadOnly = True
+                End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = columnMetaData.strRowName(i)
         Next
@@ -59,6 +62,17 @@ Public Class ucrColumnMetadataReoGrid
             Next
         End If
     End Sub
+
+    Private Function GetColumnIndex(strColName As String) As Integer
+        If grdData.CurrentWorksheet IsNot Nothing Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.Columns - 1
+                If grdData.CurrentWorksheet.ColumnHeaders(i).Text = strColName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
 
     Public Function GetSelectedColumns() As List(Of String) Implements IColumnMetaDataGrid.GetSelectedColumns
         Dim lstColumns As New List(Of String)
