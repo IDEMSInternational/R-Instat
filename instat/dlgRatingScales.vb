@@ -76,7 +76,6 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoStacked, rdoLikert}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
