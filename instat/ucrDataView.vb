@@ -905,11 +905,9 @@ Public Class ucrDataView
             sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalRowCount
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
-            Dim iPageNum As Integer = sdgWindowNumber.iPage
-            If iPageNum > 0 Then
-                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPageNum)
-                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-            End If
+
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
+            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
         End If
     End Sub
 
@@ -919,11 +917,8 @@ Public Class ucrDataView
             sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalColumnCount
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
-            Dim iPageNum As Integer = sdgWindowNumber.iPage
-            If iPageNum > 0 Then
-                GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPageNum)
-                RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
-            End If
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(sdgWindowNumber.iPage)
+            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
         End If
     End Sub
 
