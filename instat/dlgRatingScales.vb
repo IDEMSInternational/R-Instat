@@ -161,7 +161,8 @@ Public Class dlgRatingScales
         clsSjpLikertFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Image,
-       strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame, strObjectName:="last_graph")
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame,
+                                               strObjectName:="last_graph")
 
         clsSjpStackFrqFunction.SetPackageName("sjPlot")
         clsSjpStackFrqFunction.SetRCommand("plot_stackfrq")
@@ -170,7 +171,8 @@ Public Class dlgRatingScales
         clsSjpStackFrqFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Image,
-       strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame, strObjectName:="last_graph")
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame,
+                                               strObjectName:="last_graph")
 
         clsSjtStackFrqFunction.SetPackageName("sjPlot")
         clsSjtStackFrqFunction.SetRCommand("tab_stackfrq")
@@ -182,7 +184,8 @@ Public Class dlgRatingScales
         clsSjtStackFrqFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
-       strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame, strObjectName:="last_table")
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame,
+                                               strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrqFunction)
     End Sub
