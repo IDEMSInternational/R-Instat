@@ -639,7 +639,7 @@ Public Class dlgLinePlot
                 '  throws the problem back to the creation of "value" in the multiple receiver case.
             ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
                 'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrVariablesAsFactorForLinePlot.Clear()
                 Else
                     ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
