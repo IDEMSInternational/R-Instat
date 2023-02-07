@@ -794,7 +794,9 @@ Public Class dlgLinePlot
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
+    
     Private Sub PeakOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PeakOptionsToolStripMenuItem.Click
+
         openSdgLayerOptions(clsPeakFunction)
     End Sub
     Private Sub DumbbellOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DumbbellOptionsToolStripMenuItem.Click
