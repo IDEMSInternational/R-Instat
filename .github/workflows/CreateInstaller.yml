@@ -74,14 +74,24 @@ jobs:
         version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}.${env:BUILD_NUMBER}"
 
     # Create the app package by building and packaging the Windows Application Packaging project
-    #Same output for 64bit and 32 bit 
-    - name: Create the app package
+    # 32 bit 
+    - name: Create the app package 32bit
       run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
-        Appx_Bundle_Platforms: x64|x86
+        Appx_Bundle_Platforms: x86
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}      
+    
+    # Create the app package by building and packaging the Windows Application Packaging project
+    # 64bit  
+    - name: Create the app package 64 bit
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform=x64 /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      env:
+        Appx_Bundle: Always
+        Appx_Bundle_Platforms: x64
+        Appx_Package_Build_Mode: StoreUpload
+        Configuration: ${{ matrix.configuration }}   
         
     # Create directory and copy over application to a 32bit folder
     # There is no difference in R instat other than the packaged R
@@ -133,11 +143,11 @@ jobs:
     # Create directory and copy over InstatData (64bit)
     - name: Make Library directory 64 bit
       run: |
-        MKDIR instat\bin\Release\static\Library\  
+        MKDIR instat\bin\x64\Release\static\Library\  
   
     - name: Copy R-Instat Data 64 bit
       run: |
-        ROBOCOPY InstatData\data\ instat\bin\Release\static\Library\ /E
+        ROBOCOPY InstatData\data\ instat\bin\x64\Release\static\Library\ /E
       continue-on-error: true
       
     # Create directory and copy over InstatData (32bit)
@@ -160,7 +170,7 @@ jobs:
 
     - name: Copy R 64 bit
       run: |
-        ROBOCOPY R-RInstat\64Bit\ instat\bin\Release\static\ /E
+        ROBOCOPY R-RInstat\64Bit\ instat\bin\x64\Release\static\ /E
       continue-on-error: true      
       
     - name: Copy R 32 bit
@@ -170,7 +180,7 @@ jobs:
      
     - name: Install R packages (64 bit)
       run: |
-        "instat\bin\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
       shell: cmd     
       
     - name: Building the installer 64bit - With R
@@ -187,7 +197,7 @@ jobs:
     
     - name: Remove 64 bit release files to free up space
       run: |
-        Remove-Item "instat\bin\Release\" -Recurse
+        Remove-Item "instat\bin\x64\Release\" -Recurse
             
     - name: Remove 64 innosetup to free up space
       run: |
