@@ -17,12 +17,24 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgImportFromPostgres
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetFormsFunction As New RFunction, clsDefaultRFunction As New RFunction
+    Private clsRImportFromDatabase As New RFunction
+
+    'the 2 dictionaries hold data for the station and elements comboboxes
+    'As of 28th August 2020, there is no direct way of getting the selected value from the custom combobox
+    'these are declared here to be used in getting the selected value
+    Private dctDatabaseColumns As New Dictionary(Of String, String)
+    Private dctColumns As New Dictionary(Of String, String)
+
+    'flag used by elements receiver to determine when not to clear itself and change its sql query 
+    'useful when form is reloaded, to let the elements reciever retain the elements selected
+    Private bIgnoreReceiverChanges As Boolean = False
 
     Private Sub dlgImportFromPostgres_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        bIgnoreReceiverChanges = True
         If bFirstLoad Then
+            bIgnoreReceiverChanges = False
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -31,93 +43,175 @@ Public Class dlgImportFromPostgres
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
-        autoTranslate(Me)
+        bIgnoreReceiverChanges = False
+        CheckAndUpdateConnectionStatus()
+        'autoTranslate(Me) ' temporary commented, affects the connected text by overwriting it with wrong text
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrInputChooseDataset.SetParameter(New RParameter("Dataset_name", 3))
-        ucrInputChooseDataset.bAllowNonConditionValues = True
+        ucrBase.iHelpTopicID = 329
 
-        ucrInputUsername.SetParameter(New RParameter("username", 1))
-        UcrInputPort.SetParameter(New RParameter("port", 2))
-        ucrInputDatabase.SetParameter(New RParameter("database", 2))
-        UcrInputHost.SetParameter(New RParameter("host", 1))
+        'stations combobox
+        dctDatabaseColumns.Add("Database IDs", Chr(34) & "databaseId" & Chr(34))
+        dctDatabaseColumns.Add("Database Names", Chr(34) & "databaseName" & Chr(34))
+        dctDatabaseColumns.Add("Database Qualifiers", Chr(34) & "qualifier" & Chr(34))
+        ucrComboBoxDatabase.SetParameter(New RParameter("databasefiltercolumn", 0))
+        ucrComboBoxDatabase.SetItems(dctDatabaseColumns)
+        ucrComboBoxDatabase.SetRDefault(Chr(34) & "databaseId" & Chr(34))
+        ucrComboBoxDatabase.bAllowNonConditionValues = False
+        ucrComboBoxDatabase.SetDropDownStyleAsNonEditable()
+
+        'stations receiver
+        ucrReceiverDatabase.SetParameter(New RParameter("database", 1))
+        ucrReceiverDatabase.SetParameterIsString()
+        ucrReceiverDatabase.Selector = ucrSelectorForDatabase
+        ucrReceiverDatabase.SetItemType("database_variables")
+        ucrReceiverDatabase.strSelectorHeading = "Database"
+        ucrReceiverDatabase.SetLinkedDisplayControl(lblDatabase)
+
+        'elements combobox
+        dctColumns.Add("Column IDs", Chr(34) & "columnId" & Chr(34))
+        dctColumns.Add("Column Names", Chr(34) & "columnName" & Chr(34))
+        dctColumns.Add("Column Abbreviation", Chr(34) & "abbreviation" & Chr(34))
+        dctColumns.Add("Column Types", Chr(34) & "columntype" & Chr(34))
+        ucrComboBoxColumns.SetParameter(New RParameter("columnfiltercolumn", 2))
+        ucrComboBoxColumns.SetItems(dctColumns)
+        ucrComboBoxColumns.SetRDefault(Chr(34) & "columnId" & Chr(34))
+        ucrComboBoxColumns.bAllowNonConditionValues = False
+        ucrComboBoxColumns.SetDropDownStyleAsNonEditable()
+
+        'elements receiver
+        ucrReceiverMultipleColumns.SetParameter(New RParameter("elements", 3))
+        ucrReceiverMultipleColumns.SetParameterIsString()
+        ucrReceiverMultipleColumns.Selector = ucrSelectorForDatabase
+        ucrReceiverMultipleColumns.SetItemType("database_variables")
+        ucrReceiverMultipleColumns.strSelectorHeading = "Elements"
+        ucrReceiverMultipleColumns.SetLinkedDisplayControl(lblColumns)
 
         ucrBase.clsRsyntax.bSeparateThread = False
         ucrBase.clsRsyntax.bShowWaitDialogOverride = False
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultRFunction = New RFunction
-        clsGetFormsFunction = New RFunction
+        clsRImportFromDatabase = New RFunction
+        clsRImportFromDatabase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_database")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromDatabase)
 
-        ucrInputChooseDataset.bAllowNonConditionValues = True
-        ucrInputChooseDataset.SetName("")
-        ucrInputUsername.SetName("")
-        ucrInputDatabase.SetName("")
-        ucrInputHost.SetName("")
-        ucrInputPort.SetName("")
-
-        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_Postgres")
-        clsGetFormsFunction.SetPackageName("postgresr")
-        clsGetFormsFunction.SetRCommand("get_postgres_data")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        ucrReceiverDatabase.SetMeAsReceiver()
+        ucrSelectorForDatabase.Reset()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputChooseDataset.IsEmpty AndAlso Not ucrInputUsername.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled((Not ucrReceiverDatabase.IsEmpty()) OrElse (Not ucrReceiverMultipleColumns.IsEmpty()))
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrComboBoxDatabase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverDatabase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrComboBoxColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverMultipleColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        sdgImportFromClimSoft.Reset()
+        CheckAndUpdateConnectionStatus()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputUsername_NameChanged() Handles ucrInputUsername.ControlValueChanged
-        If ucrInputUsername.IsEmpty() Then
-            clsGetFormsFunction.RemoveParameterByName("site")
-        Else
-            clsGetFormsFunction.AddParameter("site", Chr(34) & ucrInputUsername.GetText & Chr(34))
+    Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
+        'shows the database connect sub dialog and checks if connection has been established
+        sdgImportfromRDBMS.ShowDialog()
+        CheckAndUpdateConnectionStatus()
+        ucrReceiverDatabase.Clear()
+        ucrReceiverDatabase.SetMeAsReceiver()
+    End Sub
+
+    ''' <summary>
+    ''' constructs and sets the stations reciver SQL query
+    ''' </summary>
+    ''' <returns>returns true if receivers query was changed</returns>
+    Private Function SetStationsReceiverQuery() As Boolean
+        If dctDatabaseColumns.Count < 1 Then
+            Return False
+        End If
+
+        'sql query to get station values of the selected column from station table
+        Dim strQuery As String
+        Dim strSelectedColumn As String = dctDatabaseColumns.Item(ucrComboBoxDatabase.GetText).Trim("""")
+
+        strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM database WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
+        If ucrReceiverDatabase.strDatabaseQuery = strQuery Then
+            Return False
+        End If
+        ucrReceiverDatabase.Clear()
+        ucrReceiverDatabase.strDatabaseQuery = strQuery
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' constructs and sets elements receiver SQL query
+    ''' </summary>
+    ''' <returns>returns true if receivers query was changed</returns>
+    Private Function SetElementsRecieverQuery() As Boolean
+        If dctColumns.Count < 1 Then
+            Return False
+        End If
+
+        'sql query to get distinct element values of the selected column(obselement TABLE COLUMN) from the observationfinal table
+        Dim strQuery As String
+        strQuery = "SELECT DISTINCT obscolumn." & dctColumns.Item(ucrComboBoxColumns.GetText).Trim("""") &
+            " FROM observationfinal" &
+            " INNER JOIN obselement ON observationfinal.describedBy = obscolumn.columnId" &
+            " INNER JOIN station ON observationfinal.recordedFrom = database.databaseId"
+        'if stations have been specified, then get elements for those stations only
+        If Not ucrReceiverDatabase.IsEmpty Then
+            strQuery = strQuery & " WHERE " & "station." & dctDatabaseColumns.Item(ucrComboBoxDatabase.GetText).Trim("""") & " IN (" &
+                String.Join(",", ucrReceiverDatabase.GetVariableNameslist(strQuotes:=Chr(39))) & ")"
+        End If
+        strQuery &= ";"
+
+        If ucrReceiverMultipleColumns.strDatabaseQuery = strQuery Then
+            Return False
+        End If
+        ucrReceiverMultipleColumns.Clear()
+        ucrReceiverMultipleColumns.strDatabaseQuery = strQuery
+        Return True
+    End Function
+
+    Private Sub ucrComboBoxDatabase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabase.ControlValueChanged
+        If SetStationsReceiverQuery() Then
+            'set as selected receiver. will also execute the receiver's sql query
+            ucrReceiverDatabase.SetMeAsReceiver()
+        End If
+    End Sub
+    Private Sub ucrReceiverDatabase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDatabase.ControlValueChanged
+        If Not bIgnoreReceiverChanges Then
+            SetElementsRecieverQuery()
         End If
     End Sub
 
-    Private Sub ucrInputUsername_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUsername.ControlValueChanged
-        cmdGetData.Enabled = Not ucrInputUsername.IsEmpty()
-        ucrInputChooseDataset.cboInput.Items.Clear()
-        ucrInputChooseDataset.SetText("")
+    Private Sub ucrComboBoxColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxColumns.ControlValueChanged
+        If SetElementsRecieverQuery() Then
+            'set as selected receiver. will also execute receiver's sql the query
+            ucrReceiverMultipleColumns.SetMeAsReceiver()
+        End If
     End Sub
 
-    Private Sub ucrInputChooseDataset_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseDataset.ControlContentsChanged, ucrInputUsername.ControlContentsChanged ', ucrInputPassword.ControlContentsChanged 
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDatabase.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdGetData_click(sender As Object, e As EventArgs) Handles cmdGetData.Click
-        Dim strFormNames() As String
-        Dim expTemp As SymbolicExpression
-
-        Cursor = Cursors.WaitCursor
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFormsFunction.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
-        Cursor = Cursors.Default
-        If expTemp IsNot Nothing Then
-            strFormNames = expTemp.AsCharacter().ToArray()
-            If strFormNames.Length > 0 Then
-                ucrInputChooseDataset.SetItems(strFormNames)
-                ucrInputChooseDataset.SetName(ucrInputChooseDataset.cboInput.Items(0))
-            Else
-                ucrInputChooseDataset.cboInput.Items.Clear()
-            End If
+    Private Sub CheckAndUpdateConnectionStatus()
+        If sdgImportfromRDBMS.IsConnectionIsActive() Then
+            lblConnection.Text = "Connected"
+            lblConnection.ForeColor = Color.Green
         Else
-            ucrInputChooseDataset.cboInput.Items.Clear()
+            lblConnection.Text = "No Connection"
+            lblConnection.ForeColor = Color.Red
+            ucrReceiverDatabase.Clear()
         End If
+        autoTranslate(Me)
     End Sub
 End Class
