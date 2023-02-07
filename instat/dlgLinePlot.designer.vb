@@ -50,6 +50,13 @@ Partial Class dlgLinePlot
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.grpSmoothOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputFormula = New instat.ucrInputComboBox()
+        Me.ucrChkSpan = New instat.ucrCheck()
+        Me.ucrChkFormula = New instat.ucrCheck()
+        Me.ucrChkAddSE = New instat.ucrCheck()
+        Me.ucrNudSpan = New instat.ucrNud()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.rdoSlope = New System.Windows.Forms.RadioButton()
         Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
         Me.lblXEnd = New System.Windows.Forms.Label()
@@ -117,13 +124,6 @@ Partial Class dlgLinePlot
         Me.ucrNudDumbbellLine = New instat.ucrNud()
         Me.ucrInputDumbbellX = New instat.ucrInputComboBox()
         Me.ucrNudSlopeLineThickness = New instat.ucrNud()
-        Me.ucrInputFormula = New instat.ucrInputComboBox()
-        Me.ucrChkSpan = New instat.ucrCheck()
-        Me.ucrChkFormula = New instat.ucrCheck()
-        Me.ucrChkAddSE = New instat.ucrCheck()
-        Me.ucrNudSpan = New instat.ucrNud()
-        Me.ucrFamilyInput = New instat.ucrInputComboBox()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputSlopeLabelColour = New instat.ucrInputComboBox()
         Me.ucrChkValley = New instat.ucrCheck()
         Me.ucrReceiverXEnd = New instat.ucrReceiverSingle()
@@ -272,6 +272,79 @@ Partial Class dlgLinePlot
         Me.grpSmoothOptions.TabIndex = 25
         Me.grpSmoothOptions.TabStop = False
         Me.grpSmoothOptions.Text = "Smooth Options"
+        '
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        Me.ucrInputFormula.Location = New System.Drawing.Point(73, 46)
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        Me.ucrInputFormula.Size = New System.Drawing.Size(110, 23)
+        Me.ucrInputFormula.TabIndex = 7
+        '
+        'ucrChkSpan
+        '
+        Me.ucrChkSpan.AutoSize = True
+        Me.ucrChkSpan.Checked = False
+        Me.ucrChkSpan.Location = New System.Drawing.Point(185, 20)
+        Me.ucrChkSpan.Name = "ucrChkSpan"
+        Me.ucrChkSpan.Size = New System.Drawing.Size(54, 23)
+        Me.ucrChkSpan.TabIndex = 3
+        '
+        'ucrChkFormula
+        '
+        Me.ucrChkFormula.AutoSize = True
+        Me.ucrChkFormula.Checked = False
+        Me.ucrChkFormula.Location = New System.Drawing.Point(5, 49)
+        Me.ucrChkFormula.Name = "ucrChkFormula"
+        Me.ucrChkFormula.Size = New System.Drawing.Size(66, 23)
+        Me.ucrChkFormula.TabIndex = 6
+        '
+        'ucrChkAddSE
+        '
+        Me.ucrChkAddSE.AutoSize = True
+        Me.ucrChkAddSE.Checked = False
+        Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
+        Me.ucrChkAddSE.Name = "ucrChkAddSE"
+        Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
+        Me.ucrChkAddSE.TabIndex = 8
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.AutoSize = True
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSpan.Location = New System.Drawing.Point(239, 20)
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSpan.TabIndex = 5
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
+        Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
+        Me.ucrFamilyInput.TabIndex = 4
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(52, 20)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
+        Me.ucrInputMethod.TabIndex = 1
         '
         'rdoSlope
         '
@@ -497,7 +570,7 @@ Partial Class dlgLinePlot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.LineOptionsToolStripMenuItem, Me.PointOptionToolStripMenuItem, Me.SmoothOptionsToolStripMenuItem, Me.DumbbellOptionsToolStripMenuItem, Me.PathOptionsToolStripMenuItem, Me.StepOptionsToolStripMenuItem, Me.PeakOptionsToolStripMenuItem, Me.ValleyOptionsToolStripMenuItem})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.DumbbellOptionsToolStripMenuItem, Me.LineOptionsToolStripMenuItem, Me.PathOptionsToolStripMenuItem, Me.PeakOptionsToolStripMenuItem, Me.PointOptionToolStripMenuItem, Me.SmoothOptionsToolStripMenuItem, Me.StepOptionsToolStripMenuItem, Me.ValleyOptionsToolStripMenuItem})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
         Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 224)
         '
@@ -958,79 +1031,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSlopeLineThickness.Size = New System.Drawing.Size(44, 20)
         Me.ucrNudSlopeLineThickness.TabIndex = 71
         Me.ucrNudSlopeLineThickness.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputFormula
-        '
-        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
-        Me.ucrInputFormula.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputFormula.GetSetSelectedIndex = -1
-        Me.ucrInputFormula.IsReadOnly = False
-        Me.ucrInputFormula.Location = New System.Drawing.Point(73, 46)
-        Me.ucrInputFormula.Name = "ucrInputFormula"
-        Me.ucrInputFormula.Size = New System.Drawing.Size(110, 23)
-        Me.ucrInputFormula.TabIndex = 7
-        '
-        'ucrChkSpan
-        '
-        Me.ucrChkSpan.AutoSize = True
-        Me.ucrChkSpan.Checked = False
-        Me.ucrChkSpan.Location = New System.Drawing.Point(185, 20)
-        Me.ucrChkSpan.Name = "ucrChkSpan"
-        Me.ucrChkSpan.Size = New System.Drawing.Size(54, 23)
-        Me.ucrChkSpan.TabIndex = 3
-        '
-        'ucrChkFormula
-        '
-        Me.ucrChkFormula.AutoSize = True
-        Me.ucrChkFormula.Checked = False
-        Me.ucrChkFormula.Location = New System.Drawing.Point(5, 49)
-        Me.ucrChkFormula.Name = "ucrChkFormula"
-        Me.ucrChkFormula.Size = New System.Drawing.Size(66, 23)
-        Me.ucrChkFormula.TabIndex = 6
-        '
-        'ucrChkAddSE
-        '
-        Me.ucrChkAddSE.AutoSize = True
-        Me.ucrChkAddSE.Checked = False
-        Me.ucrChkAddSE.Location = New System.Drawing.Point(185, 51)
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        Me.ucrChkAddSE.Size = New System.Drawing.Size(82, 23)
-        Me.ucrChkAddSE.TabIndex = 8
-        '
-        'ucrNudSpan
-        '
-        Me.ucrNudSpan.AutoSize = True
-        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSpan.Location = New System.Drawing.Point(239, 20)
-        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Name = "ucrNudSpan"
-        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSpan.TabIndex = 5
-        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrFamilyInput
-        '
-        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
-        Me.ucrFamilyInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrFamilyInput.GetSetSelectedIndex = -1
-        Me.ucrFamilyInput.IsReadOnly = False
-        Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
-        Me.ucrFamilyInput.Name = "ucrFamilyInput"
-        Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
-        Me.ucrFamilyInput.TabIndex = 4
-        '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(52, 20)
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
-        Me.ucrInputMethod.TabIndex = 1
         '
         'ucrInputSlopeLabelColour
         '
