@@ -23,6 +23,7 @@ Public Class dlgEvapotranspiration
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
     Private iEvapOptions As Integer
+    Private iHSMissingOptions As Integer
     Private clsETPenmanMonteith, clsHargreavesSamani, clsDataFunctionPM, clsDataFunctionHS, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
@@ -34,6 +35,7 @@ Public Class dlgEvapotranspiration
             iBaseMaxY = ucrBase.Location.Y
             iSaveMaxY = ucrNewColName.Location.Y
             iEvapOptions = cmdEvapOptions.Location.Y
+            iHSMissingOptions = cmdHSMissingOptions.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -54,7 +56,7 @@ Public Class dlgEvapotranspiration
         Dim dctInputCrops As New Dictionary(Of String, String)
         Dim dctInputTimeStep As New Dictionary(Of String, String)
         Dim dctInputSolar As New Dictionary(Of String, String)
-        Dim dctInputMissingMethod As New Dictionary(Of String, String)
+        'Dim dctInputMissingMethod As New Dictionary(Of String, String)
 
         ucrReceiverDate.Selector = ucrSelectorEvapotranspiration
         ucrReceiverTmax.Selector = ucrSelectorEvapotranspiration
@@ -122,13 +124,13 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
         ' Missing Options 
-        ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
-        dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
-        dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
-        dctInputMissingMethod.Add("DoY average", Chr(34) & "DoY average" & Chr(34))
-        dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
-        ucrInputMissingMethod.SetItems(dctInputMissingMethod)
-        ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
+        'ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
+        'dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
+        'dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
+        'dctInputMissingMethod.Add("DoY average", Chr(34) & "DoY average" & Chr(34))
+        'dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
+        'ucrInputMissingMethod.SetItems(dctInputMissingMethod)
+        'ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
 
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
@@ -144,14 +146,14 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrReceiverRadiation, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrChkWind, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
+        'ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
 
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)
         ucrInputTimeStep.SetLinkedDisplayControl(lblTimeStep)
         ucrInputSolar.SetLinkedDisplayControl(lblSolar)
-        ucrInputMissingMethod.SetLinkedDisplayControl(lblMissingMethod)
+        'ucrInputMissingMethod.SetLinkedDisplayControl(lblMissingMethod)
         ucrInputCrop.SetLinkedDisplayControl(lblCrop)
 
         'ucrSave Column
@@ -217,6 +219,7 @@ Public Class dlgEvapotranspiration
         clsReadInputs.AddParameter("abnormal_method", "NULL", iPosition:=9)
         clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPM, iPosition:=0)
         clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPM, iPosition:=1)
+        clsReadInputs.AddParameter("missing_method", Chr(34) & "monthly average" & Chr(34), iPosition:=8)
         clsReadInputs.SetAssignTo("temp_data")
 
         clsVarnamesVectorPM.SetRCommand("c")
@@ -234,6 +237,7 @@ Public Class dlgEvapotranspiration
         clsMissingDataVector.AddParameter("x", 1, bIncludeArgumentName:=False)
         clsMissingDataVector.AddParameter("y", 1, bIncludeArgumentName:=False)
         clsMissingDataVector.AddParameter("z", 1, bIncludeArgumentName:=False)
+
 
         clsVector.SetRCommand("c")
 
@@ -283,7 +287,7 @@ Public Class dlgEvapotranspiration
         ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
-        ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
+        'ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -317,6 +321,12 @@ Public Class dlgEvapotranspiration
         sdgMissingOptionsEvapotranspiration.ShowDialog()
     End Sub
 
+    Private Sub cmdHSMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdHSMissingOptions.Click
+        sdgHSMissingOptions.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
+        bResetSubdialog = False
+        sdgHSMissingOptions.ShowDialog()
+    End Sub
+
     Private Sub DialogSize()
         If rdoPenmanMonteith.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
@@ -328,7 +338,9 @@ Public Class dlgEvapotranspiration
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
-            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
+            'cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
+            cmdHSMissingOptions.Location = New Point(cmdHSMissingOptions.Location.X, iEvapOptions / 1.187)
+
         End If
     End Sub
 
@@ -345,6 +357,7 @@ Public Class dlgEvapotranspiration
     Private Sub ucrPnlMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlValueChanged
         Method()
         DialogSize()
+        EnableDesableSubDialog()
         If rdoPenmanMonteith.Checked Then
             clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
         Else
@@ -355,6 +368,17 @@ Public Class dlgEvapotranspiration
         Else
             clsBaseOperator.RemoveParameterByName("ET.HargreavesSamani")
         End If
+    End Sub
+
+    Private Sub EnableDesableSubDialog()
+        If rdoPenmanMonteith.Checked Then
+            cmdEvapOptions.Visible = True
+            cmdHSMissingOptions.Visible = False
+        Else
+            cmdEvapOptions.Visible = False
+            cmdHSMissingOptions.Visible = True
+        End If
+
     End Sub
 
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
