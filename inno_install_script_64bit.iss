@@ -5,7 +5,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppVersion= {#GetStringFileInfo("instat\bin\Release\instat.exe", "FileVersion")}
+AppVersion= {#GetStringFileInfo("instat\bin\x64\Release\instat.exe", "FileVersion")}
 AppId={{5455FC1A-85BE-4679-B600-8A1A4FC3CDD9-{#SetupSetting("AppVersion")}}
 AppName=R-Instat
 AppVerName ={code:GetShortAppVersion}
@@ -44,10 +44,10 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat {#SetupSe
 Filename: "{app}\instat.exe"; Description: "{cm:LaunchProgram,R-Instat}"; Flags: nowait postinstall skipifsilent
 
 [Code]
-function GetShortAppVersion(): String;
+function GetShortAppVersion(Param: String): String;
 var 
   major, minor,revision,build:Word; 
 begin    
-  GetVersionComponents('instat\bin\Release\instat.exe',major,minor,revision,build) ;
+  GetVersionComponents('instat\bin\x64\Release\instat.exe',major,minor,revision,build) ;
   Result := IntToStr(major) + '.' + IntToStr(minor) + '.' + IntToStr(revision) ;
 end;
