@@ -25,13 +25,13 @@ Public Class dlgLinePlot
     Private bReset As Boolean = True
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
-    Private clsGeomLine As New RFunction
-    Private clsGeomSmooth As New RFunction
-    Private clsGeomDumbbell As New RFunction
-    Private clsPointsFunc As New RFunction
+    Private clsGeomLineFunction As New RFunction
+    Private clsGeomSmoothFunction As New RFunction
+    Private clsGeomDumbbellFunction As New RFunction
+    Private clsPointsFunction As New RFunction
     Private clsYlabFunction As New RFunction
-    Private clsGeomPathFunc As New RFunction
-    Private clsGeomStepFunc As New RFunction
+    Private clsPathFunction As New RFunction
+    Private clsGeomStepFunction As New RFunction
     Private clsPeakFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
@@ -446,13 +446,13 @@ Public Class dlgLinePlot
         clsGgSlopeFunction = New RFunction
         clsSlopeThemeFunction = New RFunction
         clsDumbbellFunction = New RFunction
-        clsPointsFunc = New RFunction
-        clsGeomLine = New RFunction
-        clsGeomSmooth = New RFunction
-        clsGeomDumbbell = New RFunction
+        clsPointsFunction = New RFunction
+        clsGeomLineFunction = New RFunction
+        clsGeomSmoothFunction = New RFunction
+        clsGeomDumbbellFunction = New RFunction
         clsPeakFunction = New RFunction
-        clsGeomPathFunc = New RFunction
-        clsGeomStepFunc = New RFunction
+        clsPathFunction = New RFunction
+        clsGeomStepFunction = New RFunction
         clsValleysFunction = New RFunction
 
         ucrLinePlotSelector.Reset()
@@ -511,35 +511,35 @@ Public Class dlgLinePlot
 
         clsListFunction.SetRCommand("list")
 
-        clsGeomLine.SetPackageName("ggplot2")
-        clsGeomLine.SetRCommand("geom_line")
-        clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
-        clsGeomLine.AddParameter("size", "0.8")
+        clsGeomLineFunction.SetPackageName("ggplot2")
+        clsGeomLineFunction.SetRCommand("geom_line")
+        clsGeomLineFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        clsGeomLineFunction.AddParameter("size", "0.8")
 
-        clsGeomPathFunc.SetPackageName("ggplot2")
-        clsGeomPathFunc.SetRCommand("geom_path")
-        clsGeomPathFunc.AddParameter("linemitre", "10")
+        clsPathFunction.SetPackageName("ggplot2")
+        clsPathFunction.SetRCommand("geom_path")
+        clsPathFunction.AddParameter("linemitre", "10")
 
-        clsGeomStepFunc.SetPackageName("ggplot2")
-        clsGeomStepFunc.SetRCommand("geom_step")
+        clsGeomStepFunction.SetPackageName("ggplot2")
+        clsGeomStepFunction.SetRCommand("geom_step")
 
         clsValleysFunction.SetPackageName("ggpmisc")
         clsValleysFunction.SetRCommand("stat_valleys")
 
-        clsGeomSmooth.SetPackageName("ggplot2")
-        clsGeomSmooth.SetRCommand("geom_smooth")
-        clsGeomSmooth.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
-        clsGeomSmooth.AddParameter("size", "1")
+        clsGeomSmoothFunction.SetPackageName("ggplot2")
+        clsGeomSmoothFunction.SetRCommand("geom_smooth")
+        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+        clsGeomSmoothFunction.AddParameter("size", "1")
 
-        clsGeomDumbbell.SetPackageName("ggplot2")
-        clsGeomDumbbell.SetRCommand("geom_dumbbell")
-        clsGeomDumbbell.AddParameter("dot_guide", "TRUE")
-        clsGeomDumbbell.AddParameter("dot_guide_size", "0.3")
+        clsGeomDumbbellFunction.SetPackageName("ggplot2")
+        clsGeomDumbbellFunction.SetRCommand("geom_dumbbell")
+        clsGeomDumbbellFunction.AddParameter("dot_guide", "TRUE")
+        clsGeomDumbbellFunction.AddParameter("dot_guide_size", "0.3")
 
-        clsPointsFunc.SetPackageName("ggplot2")
-        clsPointsFunc.SetRCommand("geom_point")
-        clsPointsFunc.AddParameter("size", "3")
-        clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        clsPointsFunction.SetPackageName("ggplot2")
+        clsPointsFunction.SetRCommand("geom_point")
+        clsPointsFunction.AddParameter("size", "3")
+        clsPointsFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsPeakFunction.SetPackageName("ggpmisc")
         clsPeakFunction.SetRCommand("stat_peaks")
@@ -604,11 +604,7 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
-            cmdOptions.Enabled = True
-        Else
-            cmdOptions.Enabled = False
-        End If
+        cmdOptions.Enabled = ucrVariablesAsFactorForLinePlot.bSingleVariable
     End Sub
 
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
@@ -648,46 +644,6 @@ Public Class dlgLinePlot
                 ucrReceiverGroup.Add(clsParam.strArgumentValue)
             End If
         Next
-        TestOkEnabled()
-    End Sub
-
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs)
-        If rdoLine.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsOptionsFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        ElseIf rdoSmoothing.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomSmoothFunc, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        Else
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsDumbbellFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
-        End If
-        sdgLayerOptions.ShowDialog()
-        bResetLineLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
-
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForLinePlot.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForLinePlot.Clear()
-                Else ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "group" Then
-                ucrReceiverGroup.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "xend" Then
-                ucrReceiverXEnd.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
         TestOkEnabled()
     End Sub
 
@@ -786,7 +742,6 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
-
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                                 clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
@@ -796,31 +751,30 @@ Public Class dlgLinePlot
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
-    
-    Private Sub PeakOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PeakOptionsToolStripMenuItem.Click
 
+    Private Sub PeakOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PeakOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsPeakFunction)
     End Sub
     Private Sub DumbbellOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DumbbellOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsGeomDumbbell)
+        openSdgLayerOptions(clsGeomDumbbellFunction)
     End Sub
 
     Private Sub LineOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LineOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsGeomLine)
+        openSdgLayerOptions(clsGeomLineFunction)
     End Sub
     Private Sub SmoothOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsGeomSmooth)
+        openSdgLayerOptions(clsGeomSmoothFunction)
     End Sub
 
     Private Sub PointOptionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PointOptionToolStripMenuItem.Click
-        openSdgLayerOptions(clsPointsFunc)
+        openSdgLayerOptions(clsPointsFunction)
     End Sub
 
     Private Sub PathOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PathOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsGeomPathFunc)
+        openSdgLayerOptions(clsPathFunction)
     End Sub
     Private Sub StepOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StepOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsGeomStepFunc)
+        openSdgLayerOptions(clsGeomStepFunction)
     End Sub
 
     Private Sub ValleyOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ValleyOptionsToolStripMenuItem.Click
