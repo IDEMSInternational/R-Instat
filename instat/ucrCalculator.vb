@@ -5108,11 +5108,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
     Private Sub cmdListLength_Click(sender As Object, e As EventArgs) Handles cmdListLength.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,length)", 8)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply((   ,length),na.rm=TRUE)", 20)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,length)", 9)
     End Sub
 
     Private Sub cmdListSum_Click(sender As Object, e As EventArgs) Handles cmdListSum.Click
@@ -5124,19 +5120,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListMin_Click(sender As Object, e As EventArgs) Handles cmdListMin.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,min)", 6)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply((   ,min),na.rm=TRUE)", 18)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,min)", 6)
     End Sub
 
     Private Sub cmdListMax_Click(sender As Object, e As EventArgs) Handles cmdListMax.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,max)", 6)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply((   ,max),na.rm=TRUE)", 18)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,max)", 6)
     End Sub
 
     Private Sub cmdListRange_Click(sender As Object, e As EventArgs) Handles cmdListRange.Click
@@ -5160,71 +5148,43 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListSsq_Click(sender As Object, e As EventArgs) Handles cmdListSsq.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {sum(x*x) } )", 28)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {sum(x*x)})", 28)
     End Sub
 
     Private Sub cmdListVar_Click(sender As Object, e As EventArgs) Handles cmdListVar.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(var( , y = NULL, na.rm = TRUE))", 16)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(var( , na.rm = TRUE))", 16)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {var(x)})", 25)
     End Sub
 
     Private Sub cmdListSd_Click(sender As Object, e As EventArgs) Handles cmdListSd.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(sd( , na.rm = TRUE))", 16)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(sd( , na.rm = TRUE))", 16)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {sd(x)})", 24)
     End Sub
 
     Private Sub cmdListMad_Click(sender As Object, e As EventArgs) Handles cmdListMad.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(stats::mad( , center = median( ), constant = 1.4826, na.rm = TRUE,low = FALSE, high = FALSE))", 84)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(stats::mad( , na.rm = TRUE))", 16)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {stats::mad(x)})", 32)
     End Sub
 
     Private Sub cmdListIQR_Click(sender As Object, e As EventArgs) Handles cmdListIQR.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(IQR( , na.rm = TRUE, type = 7))", 26)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(IQR( , na.rm = TRUE))", 16)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {IQR(x)})", 25)
     End Sub
 
     Private Sub cmdListDistinct_Click(sender As Object, e As EventArgs) Handles cmdListDistinct.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::n_distinct())", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::n_distinct(x)})", 38)
     End Sub
 
     Private Sub cmdListAnyDup_Click(sender As Object, e As EventArgs) Handles cmdListAnyDup.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(anyDuplicated())", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {anyDuplicated(x)})", 35)
     End Sub
 
     Private Sub cmdListFirst_Click(sender As Object, e As EventArgs) Handles cmdListFirst.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::first(x= , order_by=NULL))", 17)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::first())", 2)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::first(x)})", 33)
     End Sub
 
     Private Sub cmdListLast_Click(sender As Object, e As EventArgs) Handles cmdListLast.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::last(x= , order_by=NULL))", 17)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::last())", 2)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::last(x)})", 33)
     End Sub
 
     Private Sub cmdListNth_Click(sender As Object, e As EventArgs) Handles cmdListNth.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::nth(x= , n= , order_by=NULL))", 22)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(dplyr::nth())", 2)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::nth(x)})", 32)
     End Sub
 
     Private Sub cmdListQuantile_Click(sender As Object, e As EventArgs) Handles cmdListQuantile.Click
@@ -5244,11 +5204,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListMissing_Click(sender As Object, e As EventArgs) Handles cmdListMissing.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(sum(is.na( ), na.rm = TRUE))", 19)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(sum(is.na(), na.rm = TRUE))", 17)
-        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(sum(is.na( )))", 3)
     End Sub
 
     Private Sub cmdListAdd_Click(sender As Object, e As EventArgs) Handles cmdListAdd.Click
