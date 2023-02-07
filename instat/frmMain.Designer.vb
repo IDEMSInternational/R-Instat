@@ -413,6 +413,7 @@ Partial Class frmMain
         Me.mnuFileImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromDatabases = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
@@ -675,7 +676,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3292,6 +3292,12 @@ Partial Class frmMain
         Me.mnuFileImportFromDatabases.Text = "Import From Databases..."
         Me.mnuFileImportFromDatabases.Visible = False
         '
+        'mnuFileImportFromPostgres
+        '
+        Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
+        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromPostgres.Text = "Import From RDBMS"
+        '
         'mnuFileImportFromRapidPro
         '
         Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
@@ -4647,11 +4653,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(180, 22)
-
         Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(137, 22)
-
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -4693,11 +4695,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(180, 22)
-
         Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(137, 22)
-
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -4716,11 +4714,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(180, 22)
-
         Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(137, 22)
-
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -4756,11 +4750,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(180, 22)
-
         Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(137, 22)
-
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -4786,11 +4776,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(180, 22)
-
         Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(137, 22)
-
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -4809,20 +4795,15 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCropModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCropModelApsimxExamples})
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
-        Me.mnuOptionsByContextCropModel.Text = "Crop Model..."
-        Me.mnuOptionsByContextCropModel.Visible = False
-
         Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model"
+        Me.mnuOptionsByContextCropModel.Visible = False
         '
         'mnuOptionsByContextCropModelApsimxExamples
         '
         Me.mnuOptionsByContextCropModelApsimxExamples.Name = "mnuOptionsByContextCropModelApsimxExamples"
         Me.mnuOptionsByContextCropModelApsimxExamples.Size = New System.Drawing.Size(176, 22)
         Me.mnuOptionsByContextCropModelApsimxExamples.Text = "Apsimx Examples..."
-
         '
         'mnuTools
         '
@@ -5112,12 +5093,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuFileImportFromPostgres
-        '
-        Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
-        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
-        Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5131,9 +5106,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat  " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat  .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()

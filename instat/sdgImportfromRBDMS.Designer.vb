@@ -180,7 +180,7 @@ Partial Class sdgImportfromRDBMS
         Me.Controls.Add(Me.lblHost)
         Me.Controls.Add(Me.lblDatabaseName)
         Me.Name = "sdgImportfromRDBMS"
-        Me.Text = "ImportfromRDBS"
+        Me.Text = "Import from RDBMS"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
