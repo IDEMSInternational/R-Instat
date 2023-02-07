@@ -87,14 +87,14 @@ jobs:
         
     # Create directory and copy over application to a 32bit folder
     # There is no difference in R instat other than the packaged R
-    #- name: Make Library directory 64 bit
-    #  run: |
-    #    MKDIR instat\bin\x86\Release\
+    - name: Make Library directory 64 bit
+      run: |
+        MKDIR instat\bin\x86\Release\
   
-    #- name: Copy R-Instat Data 64 bit
-    #  run: |
-    #    ROBOCOPY instat\bin\Release\ instat\bin\x86\Release\ /E
-    #  continue-on-error: true
+    - name: Copy R-Instat Data 64 bit
+      run: |
+        ROBOCOPY instat\bin\Release\ instat\bin\x86\Release\ /E
+      continue-on-error: true
 
     # Build 32 bit installer without R
     - name: Building the installer 32bit - No R
