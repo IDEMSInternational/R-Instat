@@ -128,7 +128,6 @@ Public Class dlgThreeVariableFrequencies
         rdoBoth.Enabled = False
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -148,11 +147,8 @@ Public Class dlgThreeVariableFrequencies
 
         ' ucrSaveGraph.Enabled = False 'temporary for now
         ucrSaveGraph.SetPrefix("three_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
@@ -215,13 +211,11 @@ Public Class dlgThreeVariableFrequencies
         'clsGridArrangeFunction.SetRCommand("grid.arrange") 'left here for future reference only
         clsGridArrangeFunction.SetRCommand("arrangeGrob")
         clsGridArrangeFunction.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
-
         clsGridArrangeFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                                        strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
                                                        strRObjectFormatToAssignTo:=RObjectFormat.Image,
                                                        strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
                                                        strObjectName:="last_graph")
-
 
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         clsCurrBaseCode = clsTableBaseOperator
@@ -231,6 +225,9 @@ Public Class dlgThreeVariableFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         Dim clsTempParamX As RParameter
         Dim clsTempParamY As RParameter
+
+        ucrSaveGraph.AddAdditionalRCode(clsTableBaseOperator, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsGridArrangeFunction, iAdditionalPairNo:=2)
 
         clsTempParamX = New RParameter("x", 3)
         ucrReceiverGroupsBy1st.AddAdditionalCodeParameterPair(clsSelectFunction, clsTempParamX, iAdditionalPairNo:=1)
@@ -268,7 +265,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
+        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrSaveGraph.IsComplete OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
@@ -292,12 +289,14 @@ Public Class dlgThreeVariableFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
-            clsCurrBaseCode = clsTableBaseOperator
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_table")
+            ucrSaveGraph.SetCheckBoxText("Save Table")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrangeFunction)
-            clsCurrBaseCode = clsGraphBaseOperator
-            ucrBase.clsRsyntax.iCallType = 3
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+            ucrSaveGraph.SetCheckBoxText("Save Graph")
         End If
     End Sub
 
