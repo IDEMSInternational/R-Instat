@@ -8,7 +8,7 @@
 AppVersion= {#GetStringFileInfo("instat\bin\Release\instat.exe", "FileVersion")}
 AppId={{979E51D8-9BC4-418F-8D4D-9B44FEA869A6-{#SetupSetting("AppVersion")}}
 AppName=R-Instat
-AppVerName ={code:GetShortAppVersion}
+AppVerName ={code:GetShortAppVersion|{#SetupSetting("AppVersion")}}
 
 AppPublisher=African Maths Initiative
 AppPublisherURL=http://r-instat.org/
@@ -45,8 +45,12 @@ Filename: "{app}\instat.exe"; Description: "{cm:LaunchProgram,R-Instat}"; Flags:
 [Code]
 function GetShortAppVersion(Param: String): String;
 var 
-  major, minor,revision,build:Word; 
-begin    
-  GetVersionComponents('instat\bin\x64\Release\instat.exe',major,minor,revision,build) ;
-  Result := IntToStr(major) + '.' + IntToStr(minor) + '.' + IntToStr(revision) ;
+  major,minor,revision:String; 
+begin 
+  major := Copy(Param,0,Pos('.',Param));
+  Delete(Param,1,Pos('.',Param));
+  minor := Copy(Param,0,Pos('.',Param));
+  Delete(Param,1,Pos('.',Param));
+  revision := Copy(Param,0,Pos('.',Param)-1);
+  Result := major +  minor + revision;
 end;
