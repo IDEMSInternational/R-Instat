@@ -30,13 +30,13 @@ Public Class sdgPMConstants
         ucrNudLatitude.DecimalPlaces = 2
         ucrNudLatitude.Increment = 0.01
         ucrNudLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrNudLatitude.SetRDefault(0.00)
+        'ucrNudLatitude.SetRDefault(0.00)
 
 
         ucrNudElevation.SetParameter(New RParameter("Elev", 0))
         ucrNudElevation.SetMinMax(0, 5000)
         ucrNudElevation.Increment = 1
-        ucrNudElevation.SetRDefault(0)
+        'ucrNudElevation.SetRDefault(0)
         ucrNudElevation.SetLinkedDisplayControl(lblElevation)
 
         ucrNudLongitude.SetParameter(New RParameter("Y", 9))
@@ -44,7 +44,7 @@ Public Class sdgPMConstants
         ucrNudLongitude.DecimalPlaces = 2
         ucrNudLongitude.Increment = 0.01
         ucrNudLongitude.SetLinkedDisplayControl(lblLongitude)
-        ucrNudLongitude.SetRDefault(0.00)
+        ' ucrNudLongitude.SetRDefault(0.00)
 
         'Constants'
         ucrNudLambda.SetParameter(New RParameter("lambda", 1))
@@ -52,7 +52,7 @@ Public Class sdgPMConstants
         ucrNudLambda.DecimalPlaces = 2
         ucrNudLambda.Increment = 0.01
         ucrNudLambda.SetLinkedDisplayControl(lbllambda)
-        ucrNudLambda.SetRDefault(2.45)
+        'ucrNudLambda.SetRDefault(2.45)
 
         ucrInputSigma.SetParameter(New RParameter("sigma", 5))
         ucrInputSigma.AddQuotesIfUnrecognised = False
@@ -65,19 +65,19 @@ Public Class sdgPMConstants
         ucrNudSolarconstant.DecimalPlaces = 3
         ucrNudSolarconstant.Increment = 0.001
         ucrNudSolarconstant.SetLinkedDisplayControl(lblSolarConstant)
-        ucrNudSolarconstant.SetRDefault(0.082)
+        'ucrNudSolarconstant.SetRDefault(0.082)
 
         ucrNudHeigth.SetParameter(New RParameter("z", 4))
         ucrNudHeigth.SetMinMax(0, 10)
         ucrNudHeigth.Increment = 1
-        ucrNudHeigth.SetRDefault(2)
+        ' ucrNudHeigth.SetRDefault(2)
 
         ucrNudSoil.SetParameter(New RParameter("G", 6))
         ucrNudSoil.SetMinMax(0, 10)
         ucrNudSoil.DecimalPlaces = 2
         ucrNudSoil.Increment = 0.01
         ucrNudSoil.SetLinkedDisplayControl(lblSoilHeatFlux)
-        ucrNudSoil.SetRDefault(0.00)
+        'ucrNudSoil.SetRDefault(0)
 
         ucrNudAS.SetParameter(New RParameter("as", 7))
         ucrNudAS.SetMinMax(0, 1)
@@ -94,13 +94,11 @@ Public Class sdgPMConstants
         ucrNudBS.SetRDefault(0.5)
     End Sub
 
-    Public Sub SetRFunction(clsNewReadInputs As RFunction, clsNewDataFunction As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewListFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
-        clsReadInputs = clsNewReadInputs
-        clsDataFunction = clsNewDataFunction
         clsListFunction = clsNewListFunction
 
         ucrNudLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -114,12 +112,4 @@ Public Class sdgPMConstants
         ucrNudAS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrNudBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
     End Sub
-
-    '    Private Sub ConvertValue()
-    '        If ucrRadioSouth.Checked Then
-
-    '        Else
-
-    '        End If
-    '    End Sub
 End Class
