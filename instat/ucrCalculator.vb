@@ -5184,7 +5184,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListNth_Click(sender As Object, e As EventArgs) Handles cmdListNth.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::nth(x)})", 32)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::nth(x, )})", 33)
     End Sub
 
     Private Sub cmdListQuantile_Click(sender As Object, e As EventArgs) Handles cmdListQuantile.Click
