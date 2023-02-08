@@ -110,7 +110,7 @@ jobs:
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
       with:
-        path: "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${env:BUILD_NUMBER}_Installer_64.exe"
+        path: "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${{env:BUILD_NUMBER}}_Installer_64.exe"
         name: rinstat64NoR-innosetup
             
     # check out R-Instat Data 
@@ -173,7 +173,7 @@ jobs:
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
       with:
-        path: "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${env:BUILD_NUMBER}_Installer_64.exe"
+        path: "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${{env:BUILD_NUMBER}}_Installer_64.exe"
         name: rinstat64WithR-innosetup    
     
     - name: Remove 64 bit release files to free up space
@@ -182,7 +182,7 @@ jobs:
             
     - name: Remove 64 innosetup to free up space
       run: |
-        del "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${env:BUILD_NUMBER}_Installer_64.exe"
+        del "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${{env:BUILD_NUMBER}}_Installer_64.exe"
       
     - name: Install R packages (32 bit)
       run: |
@@ -198,7 +198,7 @@ jobs:
       uses: actions/upload-artifact@v2
       if: ${{ github.event_name != 'pull_request' }}
       with:
-        path: "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${env:BUILD_NUMBER}_Installer_32.exe"
+        path: "Output/R-Instat_${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${{env:BUILD_NUMBER}}_Installer_32.exe"
         name: rinstat32WithR-innosetup      
 
             
