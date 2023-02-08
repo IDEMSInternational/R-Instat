@@ -56,7 +56,6 @@ Public Class dlgEvapotranspiration
         Dim dctInputCrops As New Dictionary(Of String, String)
         Dim dctInputTimeStep As New Dictionary(Of String, String)
         Dim dctInputSolar As New Dictionary(Of String, String)
-        'Dim dctInputMissingMethod As New Dictionary(Of String, String)
 
         ucrReceiverDate.Selector = ucrSelectorEvapotranspiration
         ucrReceiverTmax.Selector = ucrSelectorEvapotranspiration
@@ -104,7 +103,6 @@ Public Class dlgEvapotranspiration
         ucrInputTimeStep.SetDropDownStyleAsNonEditable()
 
         ucrInputSolar.SetParameter(New RParameter("solar", 3))
-        'ucrInputSolar.SetRDefault(Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("sunshine hours", Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("cloud", Chr(34) & "cloud" & Chr(34))
         dctInputSolar.Add("radiation", Chr(34) & "radiation" & Chr(34))
@@ -123,15 +121,6 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetValuesCheckedAndUnchecked(Chr(34) & "yes" & Chr(34), Chr(34) & "no" & Chr(34))
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
-        ' Missing Options 
-        'ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
-        'dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
-        'dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
-        'dctInputMissingMethod.Add("DoY average", Chr(34) & "DoY average" & Chr(34))
-        'dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
-        'ucrInputMissingMethod.SetItems(dctInputMissingMethod)
-        'ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
-
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
         ucrPnlMethod.AddRadioButton(rdoHargreavesSamani)
@@ -146,14 +135,12 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrReceiverRadiation, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrChkWind, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
 
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)
         ucrInputTimeStep.SetLinkedDisplayControl(lblTimeStep)
         ucrInputSolar.SetLinkedDisplayControl(lblSolar)
-        'ucrInputMissingMethod.SetLinkedDisplayControl(lblMissingMethod)
         ucrInputCrop.SetLinkedDisplayControl(lblCrop)
 
         'ucrSave Column
@@ -207,10 +194,6 @@ Public Class dlgEvapotranspiration
         clsYearFunc.SetRCommand("year")
         clsYearFunc.SetPackageName("lubridate")
 
-        'clsDataFunction.SetRCommand("data")
-        'clsDataFunction.AddParameter("constants", Chr(34) & "constants" & Chr(34), bIncludeArgumentName:=False)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsDataFunction, iPosition:=1)
-
         clsReadInputs.SetPackageName("Evapotranspiration")
         clsReadInputs.SetRCommand("ReadInputs")
         clsReadInputs.AddParameter("constants", "constants", iPosition:=2)
@@ -244,16 +227,6 @@ Public Class dlgEvapotranspiration
         clsVector.SetRCommand("c")
 
         clsListFunction.SetRCommand("list")
-        'clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-        'clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
-        'clsListFunction.AddParameter("lat_rad", 0.00, iPosition:=2)
-        'clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
-        'clsListFunction.AddParameter("z", 2, iPosition:=4)
-        'clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
-        'clsListFunction.AddParameter("G", 0, iPosition:=6)
-        'clsListFunction.AddParameter("as", 0.25, iPosition:=7)
-        'clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
-        'clsListFunction.AddParameter("Y", 0.00, iPosition:=9)
         clsListFunction.SetAssignTo("constants")
 
         clsETPenmanMonteith.SetPackageName("Evapotranspiration")
@@ -305,7 +278,6 @@ Public Class dlgEvapotranspiration
         ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
-        'ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -365,7 +337,6 @@ Public Class dlgEvapotranspiration
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
-            'cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
             cmdHSMissingOptions.Location = New Point(cmdHSMissingOptions.Location.X, iEvapOptions / 1.187)
 
         End If
@@ -415,21 +386,6 @@ Public Class dlgEvapotranspiration
             clsVarnamesVectorPM.RemoveParameterByName("u2")
             ucrReceiverHumidityMax.SetMeAsReceiver()
         End If
-    End Sub
-
-    Private Sub AddRemoveAbBsParameters()
-        'If ucrInputSolar.GetText = "cloud" Then
-        '    clsListFunction.AddParameter("as", 0.25, iPosition:=7)
-        '    clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
-        'Else
-        '    clsListFunction.RemoveParameterByName("as")
-        '    clsListFunction.RemoveParameterByName("bs")
-        'End If
-    End Sub
-
-
-    Private Sub ucrInputTimeStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTimeStep.ControlValueChanged, ucrInputSolar.ControlValueChanged
-        'AddRemoveAbBsParameters()
     End Sub
 
     Private Sub ucrInputSolar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSolar.ControlValueChanged, ucrReceiverRadiation.ControlValueChanged
