@@ -5204,7 +5204,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListMissing_Click(sender As Object, e As EventArgs) Handles cmdListMissing.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(sum(is.na( )))", 3)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  , function(x) sum(is.na(x)))", 29)
     End Sub
 
     Private Sub cmdListAdd_Click(sender As Object, e As EventArgs) Handles cmdListAdd.Click
