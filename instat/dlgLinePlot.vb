@@ -763,6 +763,7 @@ Public Class dlgLinePlot
     Private Sub LineOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LineOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomLineFunction)
     End Sub
+    
     Private Sub SmoothOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomSmoothFunction)
     End Sub
