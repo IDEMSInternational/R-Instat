@@ -12,17 +12,13 @@ on:
       minor_version:
         description: 'Minor Version'
         required: true
-      build_no:
-        description: 'Build No'
+      revision_no:
+        description: 'Revision'
         required: true
 
 jobs:
 
   build:
-
-    strategy:
-      matrix:
-        configuration: [Release]
 
     # running on 2019 so that .NET version 4.5 and lower can be used
     runs-on: windows-2019 
@@ -53,12 +49,10 @@ jobs:
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=Release 
         
-    # increment revision number    
-    - name: Generate revision number
+    # increment build number    
+    - name: Generate build number
       uses: einaregilsson/build-number@v3
       with:
         token: ${{secrets.github_token}}    
@@ -71,25 +65,23 @@ jobs:
         path: instat\My Project\AssemblyInfo.vb
         # optional, default is ${{ github.workspace }}
         # Version number to set on [AssemblyVersion] and [AssemblyFileVersion] attributes of AssemblyInfo.cs/.vb files
-        version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.build_no }}.${env:BUILD_NUMBER}"
+        version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${env:BUILD_NUMBER}"
 
     # Create the app package by building and packaging the Windows Application Packaging project
     # 32 bit 
     - name: Create the app package 32bit
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:AppxBundlePlatforms=$env:Appx_Bundle_Platforms /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Solution_Name /p:Configuration=Release /p:Platform=x86 /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
-        Appx_Bundle_Platforms: x86
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}      
     
     # Create the app package by building and packaging the Windows Application Packaging project
     # 64bit  
     - name: Create the app package 64 bit
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform=x64 /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      run: msbuild $env:Solution_Name /p:Configuration=Release /p:Platform=x64 /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
       env:
         Appx_Bundle: Always
-        Appx_Bundle_Platforms: x64
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}   
         
