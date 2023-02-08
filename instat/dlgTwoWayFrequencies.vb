@@ -247,7 +247,7 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete Then
+        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
