@@ -18,13 +18,13 @@ Imports instat.Translations
 Public Class dlgEvapotranspiration
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private bResetSubdialog As Boolean = False
+    Private bResetSubdialog As Boolean = True
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
     Private iEvapOptions As Integer
     Private iHSMissingOptions As Integer
-    Private clsETPenmanMonteith, clsHargreavesSamani, clsListFunction, clsRadianFunction, clsDataFunctionPM, clsDataFunctionHS, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
+    Private clsETPenmanMonteith, clsHargreavesSamani, clsListFunction, clsDataFunctionPM, clsDataFunctionHS, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
     Private bRcodeSet As Boolean = True
@@ -104,8 +104,8 @@ Public Class dlgEvapotranspiration
         ucrInputTimeStep.SetDropDownStyleAsNonEditable()
 
         ucrInputSolar.SetParameter(New RParameter("solar", 3))
-        ucrInputSolar.SetRDefault(Chr(34) & "sunshine-hours" & Chr(34))
-        dctInputSolar.Add("sunshine hours", Chr(34) & "sunshine-hours" & Chr(34))
+        'ucrInputSolar.SetRDefault(Chr(34) & "sunshine hours" & Chr(34))
+        dctInputSolar.Add("sunshine hours", Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("cloud", Chr(34) & "cloud" & Chr(34))
         dctInputSolar.Add("radiation", Chr(34) & "radiation" & Chr(34))
         ucrInputSolar.SetItems(dctInputSolar)
@@ -176,11 +176,13 @@ Public Class dlgEvapotranspiration
         clsMonthFunc = New RFunction
         clsYearFunc = New RFunction
         clsLibraryEvap = New RFunction
-        clsRadianFunction = New RFunction
+        clsListFunction = New RFunction
 
         ucrSelectorEvapotranspiration.Reset()
         ucrReceiverHumidityMax.SetMeAsReceiver()
         ucrNewColName.Reset()
+
+        bResetSubdialog = True
 
         clsLibraryEvap.SetRCommand("library")
         clsLibraryEvap.AddParameter("Evapotranspiration", "Evapotranspiration", bIncludeArgumentName:=False)
@@ -242,14 +244,16 @@ Public Class dlgEvapotranspiration
         clsVector.SetRCommand("c")
 
         clsListFunction.SetRCommand("list")
-        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-        clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
-        clsListFunction.AddParameter("lat_rad", -1.57, iPosition:=2)
-        clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
-        clsListFunction.AddParameter("z", 2, iPosition:=4)
-        clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
-        clsListFunction.AddParameter("G", 0, iPosition:=6)
-        clsListFunction.AddParameter("Y", -3.14, iPosition:=9)
+        'clsListFunction.AddParameter("Elev", 0, iPosition:=0)
+        'clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
+        'clsListFunction.AddParameter("lat_rad", 0.00, iPosition:=2)
+        'clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
+        'clsListFunction.AddParameter("z", 2, iPosition:=4)
+        'clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
+        'clsListFunction.AddParameter("G", 0, iPosition:=6)
+        'clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+        'clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
+        'clsListFunction.AddParameter("Y", 0.00, iPosition:=9)
         clsListFunction.SetAssignTo("constants")
 
         clsETPenmanMonteith.SetPackageName("Evapotranspiration")
@@ -257,9 +261,10 @@ Public Class dlgEvapotranspiration
         clsETPenmanMonteith.AddParameter("data", clsRFunctionParameter:=clsReadInputs, iPosition:=0)
         clsETPenmanMonteith.AddParameter("constants", "constants", iPosition:=1)
         clsETPenmanMonteith.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
-        clsETPenmanMonteith.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
-        clsETPenmanMonteith.AddParameter("crops", Chr(34) & "short" & Chr(34), iPosition:=4)
-        clsETPenmanMonteith.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=5)
+        clsETPenmanMonteith.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
+        clsETPenmanMonteith.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=4)
+        clsETPenmanMonteith.AddParameter("crops", Chr(34) & "short" & Chr(34), iPosition:=5)
+        clsETPenmanMonteith.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=6)
         clsETPenmanMonteith.SetAssignTo("Penman_Monteith")
 
         clsHargreavesSamani.SetPackageName("Evapotranspiration")
@@ -272,6 +277,7 @@ Public Class dlgEvapotranspiration
         clsHargreavesSamani.SetAssignTo("Hargreaves_Samani")
 
         clsBaseOperator.SetOperation("$")
+        clsBaseOperator.bSpaceAroundOperation = False
         clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
         clsBaseOperator.AddParameter("ET.Daily", strParameterValue:="ET.Daily", iPosition:=1)
 
@@ -304,7 +310,9 @@ Public Class dlgEvapotranspiration
 
     Private Sub TestOKEnabled()
         If rdoPenmanMonteith.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso
+               Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso
+               Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty AndAlso clsListFunction.clsParameters.Count > 0 Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -340,10 +348,10 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdPMConstants_Click(sender As Object, e As EventArgs) Handles cmdPMConstants.Click
-        sdgPMConstants.SetRFunction(clsNewReadInputs:=clsReadInputs, clsNewDataFunction:=clsDataFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
-        bResetSubdialog = False
+        sdgPMConstants.SetRFunction(clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgPMConstants.ShowDialog()
-        AddRemoveAbBsParameters()
+        bResetSubdialog = False
+        TestOKEnabled()
     End Sub
 
     Private Sub DialogSize()
@@ -410,18 +418,18 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub AddRemoveAbBsParameters()
-        If ucrReceiverRadiation.GetParameterName = "sunshine_hours" AndAlso ucrInputSolar.GetText = "cloud" Then
-            clsListFunction.AddParameter("as", 0.25, iPosition:=7)
-            clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
-        Else
-            clsListFunction.RemoveParameterByName("as")
-            clsListFunction.RemoveParameterByName("bs")
-        End If
+        'If ucrInputSolar.GetText = "cloud" Then
+        '    clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+        '    clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
+        'Else
+        '    clsListFunction.RemoveParameterByName("as")
+        '    clsListFunction.RemoveParameterByName("bs")
+        'End If
     End Sub
 
 
     Private Sub ucrInputTimeStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTimeStep.ControlValueChanged, ucrInputSolar.ControlValueChanged
-        AddRemoveAbBsParameters()
+        'AddRemoveAbBsParameters()
     End Sub
 
     Private Sub ucrInputSolar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSolar.ControlValueChanged, ucrReceiverRadiation.ControlValueChanged
