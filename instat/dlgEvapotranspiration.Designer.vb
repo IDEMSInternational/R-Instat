@@ -50,6 +50,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorEvapotranspiration = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdPMConstants = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -100,7 +101,7 @@ Partial Class dlgEvapotranspiration
         'lblCrop
         '
         Me.lblCrop.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCrop.Location = New System.Drawing.Point(2, 344)
+        Me.lblCrop.Location = New System.Drawing.Point(2, 303)
         Me.lblCrop.Name = "lblCrop"
         Me.lblCrop.Size = New System.Drawing.Size(71, 20)
         Me.lblCrop.TabIndex = 30
@@ -118,7 +119,7 @@ Partial Class dlgEvapotranspiration
         'lblSolar
         '
         Me.lblSolar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSolar.Location = New System.Drawing.Point(2, 275)
+        Me.lblSolar.Location = New System.Drawing.Point(2, 271)
         Me.lblSolar.Name = "lblSolar"
         Me.lblSolar.Size = New System.Drawing.Size(58, 18)
         Me.lblSolar.TabIndex = 26
@@ -215,7 +216,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputSolar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSolar.GetSetSelectedIndex = -1
         Me.ucrInputSolar.IsReadOnly = False
-        Me.ucrInputSolar.Location = New System.Drawing.Point(109, 275)
+        Me.ucrInputSolar.Location = New System.Drawing.Point(109, 268)
         Me.ucrInputSolar.Name = "ucrInputSolar"
         Me.ucrInputSolar.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSolar.TabIndex = 27
@@ -239,7 +240,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrInputCrop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCrop.GetSetSelectedIndex = -1
         Me.ucrInputCrop.IsReadOnly = False
-        Me.ucrInputCrop.Location = New System.Drawing.Point(109, 343)
+        Me.ucrInputCrop.Location = New System.Drawing.Point(109, 302)
         Me.ucrInputCrop.Name = "ucrInputCrop"
         Me.ucrInputCrop.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCrop.TabIndex = 31
@@ -358,12 +359,23 @@ Partial Class dlgEvapotranspiration
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 33
         '
+        'cmdPMConstants
+        '
+        Me.cmdPMConstants.Location = New System.Drawing.Point(12, 344)
+        Me.cmdPMConstants.Name = "cmdPMConstants"
+        Me.cmdPMConstants.Size = New System.Drawing.Size(123, 23)
+        Me.cmdPMConstants.TabIndex = 36
+        Me.cmdPMConstants.Tag = "Options"
+        Me.cmdPMConstants.Text = "Missing Options"
+        Me.cmdPMConstants.UseVisualStyleBackColor = True
+        '
         'dlgEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(453, 478)
+        Me.Controls.Add(Me.cmdPMConstants)
         Me.Controls.Add(Me.cmdHSMissingOptions)
         Me.Controls.Add(Me.ucrReceiverWindSpeed)
         Me.Controls.Add(Me.ucrChkWind)
@@ -431,4 +443,5 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents ucrChkWind As ucrCheck
     Friend WithEvents cmdHSMissingOptions As Button
+    Friend WithEvents cmdPMConstants As Button
 End Class
