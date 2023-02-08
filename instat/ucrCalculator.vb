@@ -72,6 +72,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
 
         ttCalculator.SetToolTip(cmdSortF, "sorts a vector into ascending or descending order. For example sort(c(5,7,4,4,3)) = (3,4,4,5,7)")
+        ttCalculator.SetToolTip(cmdScale, "centre and scale the data - usually by producing (x - xbar)/s")
+        ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
+        ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
         ttCalculator.SetToolTip(cmdLag, "shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
         ttCalculator.SetToolTip(cmdLead, "shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
         ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
@@ -4389,6 +4392,14 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
+    Private Sub MASSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MASSToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Transform" Then
+            strPackageName = "MASS"
+        End If
+        OpenHelpPage()
+    End Sub
+
     Private Sub ZooToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZooToolStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Transform" Then
@@ -4986,5 +4997,25 @@ Public Class ucrCalculator
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
+    End Sub
+
+    Private Sub cmdScale_Click(sender As Object, e As EventArgs) Handles cmdScale.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( , center = TRUE, scale = TRUE)", 31)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scale( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
+      If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 39)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
+        End If
+    End Sub
+
+    Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
 End Class

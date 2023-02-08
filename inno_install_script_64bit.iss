@@ -5,18 +5,19 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppVersion= {#GetStringFileInfo("instat\bin\Release\instat.exe", "FileVersion")}
+AppVersion= {#GetStringFileInfo("instat\bin\x64\Release\instat.exe", "FileVersion")}
 AppId={{5455FC1A-85BE-4679-B600-8A1A4FC3CDD9-{#SetupSetting("AppVersion")}}
 AppName=R-Instat
+AppVerName ={code:GetShortAppVersion}
 
 AppPublisher=African Maths Initiative
 AppPublisherURL=http://r-instat.org/
 AppSupportURL=http://r-instat.org/
 AppUpdatesURL=http://r-instat.org/
-DefaultDirName={autopf}\R-Instat\
+DefaultDirName={autopf}\R-Instat\{#SetupSetting("AppVerName")}\
 DefaultGroupName=R-Instat
 AllowNoIcons=yes
-OutputBaseFilename=R-Instat_Installer_64
+OutputBaseFilename=R-Instat_{#SetupSetting("AppVersion")}_Installer_64
 SetupIconFile=.\instat\Resources\rinstat_icon_Hih_icon.ico
 UninstallDisplayIcon=.\instat\Resources\rinstat_icon_Hih_icon.ico
 Compression=lzma
@@ -28,8 +29,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; OnlyBelowVersion: 0
 
 [Files]
-Source: "instat\bin\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "instat\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "instat\bin\x64\Release\instat.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "instat\bin\x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -41,3 +42,12 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat {#SetupSe
 
 [Run]
 Filename: "{app}\instat.exe"; Description: "{cm:LaunchProgram,R-Instat}"; Flags: nowait postinstall skipifsilent
+
+[Code]
+function GetShortAppVersion(Param: String): String;
+var 
+  major, minor,revision,build:Word; 
+begin    
+  GetVersionComponents('instat\bin\x64\Release\instat.exe',major,minor,revision,build) ;
+  Result := IntToStr(major) + '.' + IntToStr(minor) + '.' + IntToStr(revision) ;
+end;

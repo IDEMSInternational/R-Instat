@@ -44,6 +44,8 @@ Public Class sdgWindowNumber
     End Sub
 
     Private Sub InitialiseControls()
+        ucrBaseWindowNumber.iHelpTopicID = 294
+
         ' the maximum number of rows/columns to display
         Dim iMaxRowsCols = If(enumWINNUMBERMode = WINNUMBERMode.Row,
                 frmMain.clsInstatOptions.iMaxRows, frmMain.clsInstatOptions.iMaxCols)
@@ -59,7 +61,10 @@ Public Class sdgWindowNumber
         lblPages.Text = "1-" & iRowOrColMaxPages & ":"
     End Sub
 
-    Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgPICSARainfalbuttons.ClickReturn
-        iPage = ucrNudPageNumber.GetText()
+    Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseWindowNumber.ClickReturn
+        Dim strPageNum As String = ucrNudPageNumber.GetText()
+        If strPageNum <> "" Then
+            iPage = CInt(strPageNum)
+        End If
     End Sub
 End Class

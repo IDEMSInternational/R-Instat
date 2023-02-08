@@ -88,7 +88,7 @@ Partial Class dlgRandomSubsets
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 224)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
         '
         'ucrNewDataFrame
@@ -115,7 +115,7 @@ Partial Class dlgRandomSubsets
         Me.ucrChkSetSeed.Checked = False
         Me.ucrChkSetSeed.Location = New System.Drawing.Point(252, 92)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
-        Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSetSeed.Size = New System.Drawing.Size(115, 24)
         Me.ucrChkSetSeed.TabIndex = 7
         '
         'ucrNudSetSeed
@@ -123,7 +123,7 @@ Partial Class dlgRandomSubsets
         Me.ucrNudSetSeed.AutoSize = True
         Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSetSeed.Location = New System.Drawing.Point(363, 89)
+        Me.ucrNudSetSeed.Location = New System.Drawing.Point(373, 89)
         Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
@@ -136,7 +136,7 @@ Partial Class dlgRandomSubsets
         Me.ucrNudNumberOfColumns.AutoSize = True
         Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(363, 141)
+        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(373, 141)
         Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
@@ -149,7 +149,7 @@ Partial Class dlgRandomSubsets
         Me.ucrNudSampleSize.AutoSize = True
         Me.ucrNudSampleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSampleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSampleSize.Location = New System.Drawing.Point(363, 115)
+        Me.ucrNudSampleSize.Location = New System.Drawing.Point(373, 115)
         Me.ucrNudSampleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSampleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSampleSize.Name = "ucrNudSampleSize"
