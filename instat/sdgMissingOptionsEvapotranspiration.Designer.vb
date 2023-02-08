@@ -32,6 +32,8 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.ucrNudMaxMissingDays = New instat.ucrNud()
         Me.ucrNudMaxMissingData = New instat.ucrNud()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.lblMissingMethod = New System.Windows.Forms.Label()
+        Me.ucrInputMissingMethod = New instat.ucrInputComboBox()
         Me.grpMissingDataOpts.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,7 +68,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         '
         Me.grpMissingDataOpts.Controls.Add(Me.ucrChkInterpMissingEntries)
         Me.grpMissingDataOpts.Controls.Add(Me.ucrChkInterpMissingDays)
-        Me.grpMissingDataOpts.Location = New System.Drawing.Point(9, 106)
+        Me.grpMissingDataOpts.Location = New System.Drawing.Point(9, 139)
         Me.grpMissingDataOpts.Name = "grpMissingDataOpts"
         Me.grpMissingDataOpts.Size = New System.Drawing.Size(198, 66)
         Me.grpMissingDataOpts.TabIndex = 31
@@ -133,16 +135,38 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(0, 189)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(0, 222)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(259, 29)
         Me.ucrSdgButtons.TabIndex = 3
+        '
+        'lblMissingMethod
+        '
+        Me.lblMissingMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMissingMethod.Location = New System.Drawing.Point(6, 99)
+        Me.lblMissingMethod.Name = "lblMissingMethod"
+        Me.lblMissingMethod.Size = New System.Drawing.Size(90, 19)
+        Me.lblMissingMethod.TabIndex = 32
+        Me.lblMissingMethod.Text = "Missing Method"
+        '
+        'ucrInputMissingMethod
+        '
+        Me.ucrInputMissingMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissingMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputMissingMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMissingMethod.IsReadOnly = False
+        Me.ucrInputMissingMethod.Location = New System.Drawing.Point(97, 97)
+        Me.ucrInputMissingMethod.Name = "ucrInputMissingMethod"
+        Me.ucrInputMissingMethod.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputMissingMethod.TabIndex = 33
         '
         'sdgMissingOptionsEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 229)
+        Me.ClientSize = New System.Drawing.Size(250, 256)
+        Me.Controls.Add(Me.ucrInputMissingMethod)
+        Me.Controls.Add(Me.lblMissingMethod)
         Me.Controls.Add(Me.lblMaxPerctMissindData)
         Me.Controls.Add(Me.ucrNudMaxDurationMissingData)
         Me.Controls.Add(Me.ucrNudMaxMissingDays)
@@ -174,4 +198,6 @@ Partial Class sdgMissingOptionsEvapotranspiration
     Friend WithEvents grpMissingDataOpts As GroupBox
     Friend WithEvents ucrChkInterpMissingEntries As ucrCheck
     Friend WithEvents ucrChkInterpMissingDays As ucrCheck
+    Friend WithEvents lblMissingMethod As Label
+    Friend WithEvents ucrInputMissingMethod As ucrInputComboBox
 End Class
