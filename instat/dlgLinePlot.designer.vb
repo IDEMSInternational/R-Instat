@@ -79,13 +79,13 @@ Partial Class dlgLinePlot
         Me.lblSlopeLineTicknes = New System.Windows.Forms.Label()
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DumbbellOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LineOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PathOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PeakOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PointOptionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SmoothOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DumbbellOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PathOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StepOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PeakOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ValleyOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkSlopeLegend = New instat.ucrCheck()
@@ -572,60 +572,60 @@ Partial Class dlgLinePlot
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.DumbbellOptionsToolStripMenuItem, Me.LineOptionsToolStripMenuItem, Me.PathOptionsToolStripMenuItem, Me.PeakOptionsToolStripMenuItem, Me.PointOptionToolStripMenuItem, Me.SmoothOptionsToolStripMenuItem, Me.StepOptionsToolStripMenuItem, Me.ValleyOptionsToolStripMenuItem})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 224)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(172, 202)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
+        '
+        'DumbbellOptionsToolStripMenuItem
+        '
+        Me.DumbbellOptionsToolStripMenuItem.Name = "DumbbellOptionsToolStripMenuItem"
+        Me.DumbbellOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.DumbbellOptionsToolStripMenuItem.Text = "Dumbbell Options"
         '
         'LineOptionsToolStripMenuItem
         '
         Me.LineOptionsToolStripMenuItem.Name = "LineOptionsToolStripMenuItem"
-        Me.LineOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LineOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.LineOptionsToolStripMenuItem.Text = "Line Options"
+        '
+        'PathOptionsToolStripMenuItem
+        '
+        Me.PathOptionsToolStripMenuItem.Name = "PathOptionsToolStripMenuItem"
+        Me.PathOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.PathOptionsToolStripMenuItem.Text = "Path Options "
+        '
+        'PeakOptionsToolStripMenuItem
+        '
+        Me.PeakOptionsToolStripMenuItem.Name = "PeakOptionsToolStripMenuItem"
+        Me.PeakOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.PeakOptionsToolStripMenuItem.Text = "Peak Options"
         '
         'PointOptionToolStripMenuItem
         '
         Me.PointOptionToolStripMenuItem.Name = "PointOptionToolStripMenuItem"
-        Me.PointOptionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PointOptionToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.PointOptionToolStripMenuItem.Text = "Point Options "
         '
         'SmoothOptionsToolStripMenuItem
         '
         Me.SmoothOptionsToolStripMenuItem.Name = "SmoothOptionsToolStripMenuItem"
-        Me.SmoothOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SmoothOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.SmoothOptionsToolStripMenuItem.Text = "Smooth Options"
-        '
-        'DumbbellOptionsToolStripMenuItem
-        '
-        Me.DumbbellOptionsToolStripMenuItem.Name = "DumbbellOptionsToolStripMenuItem"
-        Me.DumbbellOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.DumbbellOptionsToolStripMenuItem.Text = "Dumbbell Options"
-        '
-        'PathOptionsToolStripMenuItem
-        '
-        Me.PathOptionsToolStripMenuItem.Name = "PathOptionsToolStripMenuItem"
-        Me.PathOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PathOptionsToolStripMenuItem.Text = "Path Options "
         '
         'StepOptionsToolStripMenuItem
         '
         Me.StepOptionsToolStripMenuItem.Name = "StepOptionsToolStripMenuItem"
-        Me.StepOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StepOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.StepOptionsToolStripMenuItem.Text = "Step Options"
-        '
-        'PeakOptionsToolStripMenuItem
-        '
-        Me.PeakOptionsToolStripMenuItem.Name = "PeakOptionsToolStripMenuItem"
-        Me.PeakOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PeakOptionsToolStripMenuItem.Text = "Peak Options"
         '
         'ValleyOptionsToolStripMenuItem
         '
         Me.ValleyOptionsToolStripMenuItem.Name = "ValleyOptionsToolStripMenuItem"
-        Me.ValleyOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ValleyOptionsToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.ValleyOptionsToolStripMenuItem.Text = "Valley Options"
         '
         'cmdOptions
@@ -774,7 +774,7 @@ Partial Class dlgLinePlot
         Me.ucrChkAddLine.Checked = False
         Me.ucrChkAddLine.Location = New System.Drawing.Point(133, 337)
         Me.ucrChkAddLine.Name = "ucrChkAddLine"
-        Me.ucrChkAddLine.Size = New System.Drawing.Size(77, 24)
+        Me.ucrChkAddLine.Size = New System.Drawing.Size(114, 24)
         Me.ucrChkAddLine.TabIndex = 24
         '
         'ucrPnlOptions
