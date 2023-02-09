@@ -40,7 +40,7 @@ Public Class ucrColumnMetadataReoGrid
         rngDataRange = New RangePosition(0, 0, grdData.CurrentWorksheet.Rows, grdData.CurrentWorksheet.Columns)
         grdData.CurrentWorksheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
 
-        Dim iCoumnIndex As Integer = GetColumnIndex("Signif_Figures")
+        Dim iColumnIndex As Integer = GetColumnIndex("Signif_Figures")
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = columnMetaData.Data(i, j)
