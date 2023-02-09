@@ -587,6 +587,11 @@ Partial Class ucrCalculator
         Me.cmdListSum = New System.Windows.Forms.Button()
         Me.cmdListSumd = New System.Windows.Forms.Button()
         Me.cmdListMissing = New System.Windows.Forms.Button()
+        Me.cmdListSQRT = New System.Windows.Forms.Button()
+        Me.cmdListRound2 = New System.Windows.Forms.Button()
+        Me.cmdListPercent = New System.Windows.Forms.Button()
+        Me.cmdListProportion = New System.Windows.Forms.Button()
+        Me.cmdListRound1 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.ContextMenuStripDate.SuspendLayout()
@@ -6506,24 +6511,24 @@ Partial Class ucrCalculator
         '
         Me.ContextMenuStripList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListBaseToolStripMenuItem, Me.ListStatsToolStripMenuItem, Me.ListStatipToolStripMenuItem})
         Me.ContextMenuStripList.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripList.Size = New System.Drawing.Size(181, 92)
+        Me.ContextMenuStripList.Size = New System.Drawing.Size(104, 70)
         '
         'ListBaseToolStripMenuItem
         '
         Me.ListBaseToolStripMenuItem.Name = "ListBaseToolStripMenuItem"
-        Me.ListBaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ListBaseToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ListBaseToolStripMenuItem.Text = "base"
         '
         'ListStatsToolStripMenuItem
         '
         Me.ListStatsToolStripMenuItem.Name = "ListStatsToolStripMenuItem"
-        Me.ListStatsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ListStatsToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ListStatsToolStripMenuItem.Text = "stats"
         '
         'ListStatipToolStripMenuItem
         '
         Me.ListStatipToolStripMenuItem.Name = "ListStatipToolStripMenuItem"
-        Me.ListStatipToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ListStatipToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ListStatipToolStripMenuItem.Text = "statip"
         '
         'grpList
@@ -6576,6 +6581,11 @@ Partial Class ucrCalculator
         '
         'grpMathBloc
         '
+        Me.grpMathBloc.Controls.Add(Me.cmdListSQRT)
+        Me.grpMathBloc.Controls.Add(Me.cmdListRound2)
+        Me.grpMathBloc.Controls.Add(Me.cmdListPercent)
+        Me.grpMathBloc.Controls.Add(Me.cmdListProportion)
+        Me.grpMathBloc.Controls.Add(Me.cmdListRound1)
         Me.grpMathBloc.Controls.Add(Me.cmdListSquare)
         Me.grpMathBloc.Controls.Add(Me.cmdListDivide)
         Me.grpMathBloc.Controls.Add(Me.cmdListMultiply)
@@ -6628,10 +6638,10 @@ Partial Class ucrCalculator
         '
         Me.cmdListSubtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdListSubtract.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListSubtract.Location = New System.Drawing.Point(59, 14)
+        Me.cmdListSubtract.Location = New System.Drawing.Point(55, 14)
         Me.cmdListSubtract.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdListSubtract.Name = "cmdListSubtract"
-        Me.cmdListSubtract.Size = New System.Drawing.Size(58, 30)
+        Me.cmdListSubtract.Size = New System.Drawing.Size(62, 30)
         Me.cmdListSubtract.TabIndex = 173
         Me.cmdListSubtract.Text = "subtract"
         Me.cmdListSubtract.UseVisualStyleBackColor = True
@@ -6643,7 +6653,7 @@ Partial Class ucrCalculator
         Me.cmdListAdd.Location = New System.Drawing.Point(3, 14)
         Me.cmdListAdd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdListAdd.Name = "cmdListAdd"
-        Me.cmdListAdd.Size = New System.Drawing.Size(57, 30)
+        Me.cmdListAdd.Size = New System.Drawing.Size(53, 30)
         Me.cmdListAdd.TabIndex = 172
         Me.cmdListAdd.Text = "add"
         Me.cmdListAdd.UseVisualStyleBackColor = True
@@ -6948,6 +6958,66 @@ Partial Class ucrCalculator
         Me.cmdListMissing.TabIndex = 164
         Me.cmdListMissing.Text = "missing"
         Me.cmdListMissing.UseVisualStyleBackColor = True
+        '
+        'cmdListSQRT
+        '
+        Me.cmdListSQRT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListSQRT.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListSQRT.Location = New System.Drawing.Point(243, 44)
+        Me.cmdListSQRT.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListSQRT.Name = "cmdListSQRT"
+        Me.cmdListSQRT.Size = New System.Drawing.Size(57, 30)
+        Me.cmdListSQRT.TabIndex = 181
+        Me.cmdListSQRT.Text = "sqrt"
+        Me.cmdListSQRT.UseVisualStyleBackColor = True
+        '
+        'cmdListRound2
+        '
+        Me.cmdListRound2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListRound2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListRound2.Location = New System.Drawing.Point(187, 44)
+        Me.cmdListRound2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListRound2.Name = "cmdListRound2"
+        Me.cmdListRound2.Size = New System.Drawing.Size(57, 30)
+        Me.cmdListRound2.TabIndex = 180
+        Me.cmdListRound2.Text = "round2"
+        Me.cmdListRound2.UseVisualStyleBackColor = True
+        '
+        'cmdListPercent
+        '
+        Me.cmdListPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListPercent.Location = New System.Drawing.Point(116, 44)
+        Me.cmdListPercent.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListPercent.Name = "cmdListPercent"
+        Me.cmdListPercent.Size = New System.Drawing.Size(72, 30)
+        Me.cmdListPercent.TabIndex = 179
+        Me.cmdListPercent.Text = "percent"
+        Me.cmdListPercent.UseVisualStyleBackColor = True
+        '
+        'cmdListProportion
+        '
+        Me.cmdListProportion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListProportion.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListProportion.Location = New System.Drawing.Point(55, 44)
+        Me.cmdListProportion.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListProportion.Name = "cmdListProportion"
+        Me.cmdListProportion.Size = New System.Drawing.Size(62, 30)
+        Me.cmdListProportion.TabIndex = 178
+        Me.cmdListProportion.Text = "proportion"
+        Me.cmdListProportion.UseVisualStyleBackColor = True
+        '
+        'cmdListRound1
+        '
+        Me.cmdListRound1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListRound1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListRound1.Location = New System.Drawing.Point(3, 44)
+        Me.cmdListRound1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListRound1.Name = "cmdListRound1"
+        Me.cmdListRound1.Size = New System.Drawing.Size(53, 30)
+        Me.cmdListRound1.TabIndex = 177
+        Me.cmdListRound1.Text = "round1"
+        Me.cmdListRound1.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -7588,4 +7658,9 @@ Partial Class ucrCalculator
     Friend WithEvents cmdListSum As Button
     Friend WithEvents cmdListSumd As Button
     Friend WithEvents cmdListMissing As Button
+    Friend WithEvents cmdListSQRT As Button
+    Friend WithEvents cmdListRound2 As Button
+    Friend WithEvents cmdListPercent As Button
+    Friend WithEvents cmdListProportion As Button
+    Friend WithEvents cmdListRound1 As Button
 End Class

@@ -5184,7 +5184,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListNth_Click(sender As Object, e As EventArgs) Handles cmdListNth.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::nth(x, )})", 33)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::nth(x,  )})", 34)
     End Sub
 
     Private Sub cmdListQuantile_Click(sender As Object, e As EventArgs) Handles cmdListQuantile.Click
@@ -5225,5 +5225,25 @@ Public Class ucrCalculator
 
     Private Sub cmdListSquare_Click(sender As Object, e As EventArgs) Handles cmdListSquare.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) x^2)", 19)
+    End Sub
+
+    Private Sub cmdListRound1_Click(sender As Object, e As EventArgs) Handles cmdListRound1.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,function(x) round(x/sum(x)*100,3))", 39)
+    End Sub
+
+    Private Sub cmdListProportion_Click(sender As Object, e As EventArgs) Handles cmdListProportion.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) x/sum(x))", 23)
+    End Sub
+
+    Private Sub cmdListPercent_Click(sender As Object, e As EventArgs) Handles cmdListPercent.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) 100*x/sum(x))", 23)
+    End Sub
+
+    Private Sub cmdListRound2_Click(sender As Object, e As EventArgs) Handles cmdListRound2.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) round(x,3))", 23)
+    End Sub
+
+    Private Sub cmdListSQRT_Click(sender As Object, e As EventArgs) Handles cmdListSQRT.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( calc ,function(x){sqrt(x)})", 23)
     End Sub
 End Class
