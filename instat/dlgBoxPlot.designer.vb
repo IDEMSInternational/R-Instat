@@ -52,6 +52,7 @@ Partial Class dlgBoxplot
         Me.toolStripMenuItemJitterOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTufteOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemViolinOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemSummaryOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrInputSummaries = New instat.ucrInputComboBox()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkTufte = New instat.ucrCheck()
@@ -169,39 +170,45 @@ Partial Class dlgBoxplot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxOptions, Me.toolStripMenuItemJitterOptions, Me.toolStripMenuItemTufteOptions, Me.toolStripMenuItemViolinOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxOptions, Me.toolStripMenuItemJitterOptions, Me.ToolStripMenuItemSummaryOptions, Me.toolStripMenuItemTufteOptions, Me.toolStripMenuItemViolinOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(150, 114)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(149, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemBoxOptions
         '
         Me.toolStripMenuItemBoxOptions.Name = "toolStripMenuItemBoxOptions"
-        Me.toolStripMenuItemBoxOptions.Size = New System.Drawing.Size(149, 22)
-        Me.toolStripMenuItemBoxOptions.Text = "Box Options"
+        Me.toolStripMenuItemBoxOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemBoxOptions.Text = "Boxplot Options"
         '
         'toolStripMenuItemJitterOptions
         '
         Me.toolStripMenuItemJitterOptions.Name = "toolStripMenuItemJitterOptions"
-        Me.toolStripMenuItemJitterOptions.Size = New System.Drawing.Size(149, 22)
+        Me.toolStripMenuItemJitterOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemJitterOptions.Text = "Jitter Options"
         '
         'toolStripMenuItemTufteOptions
         '
         Me.toolStripMenuItemTufteOptions.Name = "toolStripMenuItemTufteOptions"
-        Me.toolStripMenuItemTufteOptions.Size = New System.Drawing.Size(149, 22)
+        Me.toolStripMenuItemTufteOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemTufteOptions.Text = "Tufte Options"
         '
         'toolStripMenuItemViolinOptions
         '
         Me.toolStripMenuItemViolinOptions.Name = "toolStripMenuItemViolinOptions"
-        Me.toolStripMenuItemViolinOptions.Size = New System.Drawing.Size(149, 22)
+        Me.toolStripMenuItemViolinOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemViolinOptions.Text = "Violin Options"
+        '
+        'ToolStripMenuItemSummaryOptions
+        '
+        Me.ToolStripMenuItemSummaryOptions.Name = "ToolStripMenuItemSummaryOptions"
+        Me.ToolStripMenuItemSummaryOptions.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuItemSummaryOptions.Text = "Summary Options"
         '
         'ucrInputSummaries
         '
@@ -459,4 +466,5 @@ Partial Class dlgBoxplot
     Friend WithEvents toolStripMenuItemViolinOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTufteOptions As ToolStripMenuItem
     Friend WithEvents ucrInputSummaries As ucrInputComboBox
+    Friend WithEvents ToolStripMenuItemSummaryOptions As ToolStripMenuItem
 End Class

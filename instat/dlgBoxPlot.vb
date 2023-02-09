@@ -17,6 +17,7 @@
 Imports instat
 Imports instat.Translations
 Public Class dlgBoxplot
+    Private bResetLineLayerSubdialog As Boolean = True
     Private clsRggplotFunction As New RFunction
     'clsRggplotFunction is the global ggplot function, will be used as RFunction of the first RParameter of ucrBase.clsRSyntax (which has "+" as main command). It is emphasised as a public field as it is used/editted in the sdgLayerOptions. The link is operated via SetupLayer that sets sdgLayerOptions.clsGgplotFunction = dlgBoxPlot.clsRggplotFunction.
     Private clsRgeomPlotFunction As New RFunction
@@ -49,6 +50,7 @@ Public Class dlgBoxplot
     Private clsJitterplotFunction As New RFunction
     Private clsViolinplotFunction As New RFunction
     Private clsCurrGeomFunction As New RFunction
+    Private clsSummaryFunction As New RFunction
     ' Jitter function that can be added to the boxplot/violin base layer
     Private clsAddedJitterFunc As New RFunction
     Private clsXScaleDateFunction As New RFunction
@@ -187,6 +189,7 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub SetDefaults()
+        bResetLineLayerSubdialog = True
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
@@ -199,6 +202,7 @@ Public Class dlgBoxplot
         clsTufteBoxplotFunction = New RFunction
         clsJitterplotFunction = New RFunction
         clsViolinplotFunction = New RFunction
+        clsSummaryFunction = New RFunction
 
         clsAddedJitterFunc.Clear()
 
@@ -228,6 +232,9 @@ Public Class dlgBoxplot
 
         clsViolinplotFunction.SetPackageName("ggplot2")
         clsViolinplotFunction.SetRCommand("geom_violin")
+
+        clsSummaryFunction.SetPackageName("ggplot2")
+        clsSummaryFunction.SetRCommand("stat_summary")
 
         clsJitterplotFunction.SetPackageName("ggplot2")
         clsJitterplotFunction.SetRCommand("geom_jitter")
@@ -361,160 +368,75 @@ Public Class dlgBoxplot
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
     End Sub
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot,
+                                   bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
+
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrByFactorsReceiver.Clear()
+                Else
+                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBoxplot.bSingleVariable) Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrVariablesAsFactorForBoxplot.Clear()
+                Else
+                    ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
-                        clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                        clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
-                        clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableDiscrete:=False,
-                         clsNewAnnotateFunction:=clsAnnotateFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
+                                clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
+                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot,
+                                clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
+                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
-
-        'this syncs the coordflip in sdgplots and this main dlg
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub toolStripMenuItemBoxOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxOptions.Click
-        'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsBoxplotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
-                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetBoxLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
-        If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
-            If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-            End If
-        Else
-        End If
-
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrByFactorsReceiver.Clear()
-                Else
-                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBoxplot.bSingleVariable) Then
-                ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-
-        'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
-        'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
-        'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
-    End Sub
-
-    Private Sub toolStripMenuItemTufteOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTufteOptions.Click
-        'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTufteBoxplotFunction, clsNewGlobalAesFunc:=clsRaesFunction,
-                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True,
-                                   bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetBoxLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
-        If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
-            If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-            End If
-        Else
-        End If
-
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrByFactorsReceiver.Clear()
-                Else
-                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBoxplot.bSingleVariable) Then
-                ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-
-        'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
-        'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
-        'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
+        openSdgLayerOptions(clsBoxplotFunction)
     End Sub
 
     Private Sub toolStripMenuItemJitterOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemJitterOptions.Click
-        'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsJitterplotFunction, clsNewGlobalAesFunc:=clsRaesFunction,
-                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetBoxLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
-        If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
-            If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-            End If
-        Else
-        End If
+        openSdgLayerOptions(clsJitterplotFunction)
+    End Sub
 
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrByFactorsReceiver.Clear()
-                Else
-                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBoxplot.bSingleVariable) Then
-                ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-
-        'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
-        'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
-        'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
+    Private Sub toolStripMenuItemTufteOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTufteOptions.Click
+        openSdgLayerOptions(clsTufteBoxplotFunction)
     End Sub
 
     Private Sub toolStripMenuItemViolinOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemViolinOptions.Click
-        'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsViolinplotFunction, clsNewGlobalAesFunc:=clsRaesFunction,
-                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True,
-                                   bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        bResetBoxLayerSubdialog = False
-        'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
-        If clsCurrGeomFunction.GetParameter("varwidth") IsNot Nothing Then
-            If clsCurrGeomFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-            End If
-        Else
-        End If
+        openSdgLayerOptions(clsViolinplotFunction)
+    End Sub
 
-        'The aesthetics parameters on the main dialog are repopulated as required. 
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrByFactorsReceiver.Clear()
-                Else
-                    ucrByFactorsReceiver.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the vlue stored in the clsReasFunction in the multiplevariables case is "value", however that one shouldn't be written in the multiple variables receiver (otherwise it would stack all variables and the stack ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables independently from the multiple variables method ? Here if the receiver is actually in single mode, the variable "value" will still be given back, which throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBoxplot.bSingleVariable) Then
-                ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-
-        'Question to be discussed: After running through the sdgLayerOptions, the clsCurrDataFrame parameters seem to have been cleared, such that in the multiple variable case, clsCurrDataFrame needs to be repopulated with "stack", "measure.vars" and "id.vars" parameters. Actually, even when repopulated, they are still not appearing in the script. ??
-        'This resets the factor receiver and causes it to be cleared of the correct variable. We don't want this.
-        'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
+    Private Sub ToolStripMenuItemSummaryOptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOptions.Click
+        openSdgLayerOptions(clsSummaryFunction)
     End Sub
 
     Private Sub DialogueSize()
@@ -541,7 +463,8 @@ Public Class dlgBoxplot
         toolStripMenuItemJitterOptions.Enabled = rdoJitter.Checked OrElse ((rdoBoxplotTufte.Checked _
             OrElse rdoViolin.Checked) AndAlso ucrChkAddPoints.Checked)
         toolStripMenuItemViolinOptions.Enabled = rdoViolin.Checked
-        toolStripMenuItemBoxOptions.Enabled = rdoBoxplotTufte.Checked
+        ToolStripMenuItemSummaryOptions.Enabled = rdoBoxplotTufte.Checked OrElse ((rdoJitter.Checked _
+            OrElse rdoViolin.Checked) AndAlso ucrChkGrouptoConnect.Checked)
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
     End Sub
 
