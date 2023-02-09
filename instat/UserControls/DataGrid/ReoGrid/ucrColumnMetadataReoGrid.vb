@@ -40,11 +40,12 @@ Public Class ucrColumnMetadataReoGrid
         rngDataRange = New RangePosition(0, 0, grdData.CurrentWorksheet.Rows, grdData.CurrentWorksheet.Columns)
         grdData.CurrentWorksheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
 
+        Dim iCoumnIndex As Integer = GetColumnIndex("Signif_Figures")
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = columnMetaData.Data(i, j)
                 If grdData.CurrentWorksheet.Item(row:=i, col:=j) = "list" Then
-                    grdData.CurrentWorksheet.GetCell(row:=i, col:=GetColumnIndex("Signif_Figures")).IsReadOnly = True
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=iCoumnIndex).IsReadOnly = True
                 End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = columnMetaData.strRowName(i)
