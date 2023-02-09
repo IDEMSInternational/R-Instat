@@ -357,7 +357,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverHumidityMax.AutoSize = True
         Me.ucrReceiverHumidityMax.frmParent = Me
-        Me.ucrReceiverHumidityMax.Location = New System.Drawing.Point(314, 185)
+        Me.ucrReceiverHumidityMax.Location = New System.Drawing.Point(314, 188)
         Me.ucrReceiverHumidityMax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverHumidityMax.Name = "ucrReceiverHumidityMax"
         Me.ucrReceiverHumidityMax.Selector = Nothing
@@ -426,7 +426,7 @@ Partial Class dlgEvapotranspiration
         '
         Me.ucrReceiverExtraRadiation.AutoSize = True
         Me.ucrReceiverExtraRadiation.frmParent = Me
-        Me.ucrReceiverExtraRadiation.Location = New System.Drawing.Point(314, 186)
+        Me.ucrReceiverExtraRadiation.Location = New System.Drawing.Point(314, 188)
         Me.ucrReceiverExtraRadiation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExtraRadiation.Name = "ucrReceiverExtraRadiation"
         Me.ucrReceiverExtraRadiation.Selector = Nothing
