@@ -44,8 +44,8 @@ Public Class ucrColumnMetadataReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = columnMetaData.Data(i, j)
-                If grdData.CurrentWorksheet.Item(row:=i, col:=j) = "list" Then
-                    grdData.CurrentWorksheet.GetCell(row:=i, col:=iCoumnIndex).IsReadOnly = True
+                If grdData.CurrentWorksheet.Item(row:=i, col:=j) = "list" AndAlso iColumnIndex >= 0 Then
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=iColumnIndex).IsReadOnly = True
                 End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = columnMetaData.strRowName(i)
