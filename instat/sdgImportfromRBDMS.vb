@@ -37,30 +37,68 @@ Public Class sdgImportfromRDBMS
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctDatabaseNames As New Dictionary(Of String, String)
-        Dim dctPorts As New Dictionary(Of String, String)
+
+
+        ucrCboType.SetDropDownStyleAsNonEditable()
+        ucrCboType.bAllowNonConditionValues = False
+        ucrCboType.AddQuotesIfUnrecognised = False
+        ucrCboType.SetParameter(New RParameter("drv", 0))
 
         'database names
-        dctDatabaseNames.Add("mariadb_climsoft_db_v4", Chr(34) & "mariadb_climsoft_db_v4" & Chr(34))
-        dctDatabaseNames.Add("mariadb_climsoft_test_db_v4", Chr(34) & "mariadb_climsoft_test_db_v4" & Chr(34))
-        ucrComboBoxDatabaseName.SetParameter(New RParameter("dbname", 0))
-        ucrComboBoxDatabaseName.SetItems(dctDatabaseNames)
-        ucrComboBoxDatabaseName.bAllowNonConditionValues = True
+        ucrCboName.bAllowNonConditionValues = True
+        ucrCboName.SetParameter(New RParameter("dbname", 1))
+
+        'username
+        ucrTxtUserName.SetParameter(New RParameter("user", 2))
 
         'host e.g 127.0.0.1
-        ucrTxtHost.SetParameter(New RParameter("host", 1))
+        ucrTxtHost.SetParameter(New RParameter("host", 3))
 
         'ports
-        dctPorts.Add("3308", "3308")
-        dctPorts.Add("3306", "3306")
-        ucrComboBoxPort.SetParameter(New RParameter("port", 2))
-        ucrComboBoxPort.SetItems(dctPorts)
-        ucrComboBoxPort.AddQuotesIfUnrecognised = False
-        ucrComboBoxPort.bAllowNonConditionValues = True
-        ucrComboBoxPort.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrCboPort.AddQuotesIfUnrecognised = False
+        ucrCboPort.bAllowNonConditionValues = True
+        ucrCboPort.SetParameter(New RParameter("port", 4))
+        ucrCboPort.SetValidationTypeAsNumeric(dcmMin:=0)
 
-        'user name
-        ucrTxtUserName.SetParameter(New RParameter("user", 3))
+        chkRememberCredentials.Enabled = False
+
+    End Sub
+
+    Public Sub SetDatabaseOptions(bImportFromClimsoft)
+
+        If bFirstLoad Then
+            InitialiseDialog()
+        End If
+
+        Dim dctDatabaseDriver As New Dictionary(Of String, String)
+
+        'clear all the option items
+        ucrCboType.cboInput.Items.Clear()
+        ucrCboName.cboInput.Items.Clear()
+        ucrCboPort.cboInput.Items.Clear()
+
+
+        'if launched as climsoft connection subdialog the add the climsoft databases and ports as options
+        If bImportFromClimsoft AndAlso ucrCboName.GetItemsCount < 1 Then
+            Dim dctDatabaseNames As New Dictionary(Of String, String)
+            dctDatabaseNames.Add("mariadb_climsoft_db_v4", Chr(34) & "mariadb_climsoft_db_v4" & Chr(34))
+            dctDatabaseNames.Add("mariadb_climsoft_test_db_v4", Chr(34) & "mariadb_climsoft_test_db_v4" & Chr(34))
+
+            ucrCboName.SetItems(dctDatabaseNames)
+
+            Dim dctPorts As New Dictionary(Of String, String)
+            dctPorts.Add("3308", "3308")
+            dctPorts.Add("3306", "3306")
+            ucrCboPort.SetItems(dctPorts)
+
+            dctDatabaseDriver.Add("MYSQL", "RMySQL::MySQL()")
+        Else
+            dctDatabaseDriver.Add("MYSQL", "RMySQL::MySQL()")
+            dctDatabaseDriver.Add("POSTGRES", "RPostgres::Postgres()")
+        End If
+
+        ucrCboType.SetItems(dctDatabaseDriver)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -82,9 +120,10 @@ Public Class sdgImportfromRDBMS
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrComboBoxDatabaseName.SetRCode(clsRDatabaseConnect, bReset)
+        ucrCboType.SetRCode(clsRDatabaseConnect, bReset)
+        ucrCboName.SetRCode(clsRDatabaseConnect, bReset)
         ucrTxtHost.SetRCode(clsRDatabaseConnect, bReset)
-        ucrComboBoxPort.SetRCode(clsRDatabaseConnect, bReset)
+        ucrCboPort.SetRCode(clsRDatabaseConnect, bReset)
         ucrTxtUserName.SetRCode(clsRDatabaseConnect, bReset)
     End Sub
 
@@ -105,11 +144,12 @@ Public Class sdgImportfromRDBMS
         End If
 
         'enable/disable all other controls to allow entry of connection details
-        ucrComboBoxDatabaseName.Enabled = bEnableControls
-        ucrComboBoxPort.Enabled = bEnableControls
+        ucrCboType.Enabled = bEnableControls
+        ucrCboName.Enabled = bEnableControls
+        ucrCboPort.Enabled = bEnableControls
         ucrTxtHost.Enabled = bEnableControls
         ucrTxtUserName.Enabled = bEnableControls
-        chkRememberCredentials.Enabled = bEnableControls
+        'chkRememberCredentials.Enabled = bEnableControls
     End Sub
 
     ''' <summary>
@@ -157,21 +197,21 @@ Public Class sdgImportfromRDBMS
         UpdateConnectionAndControlsState()
         btnConnect.Enabled = True
 
-        If  chkRememberCredentials.Checked AndAlso bConnected Then
+        If chkRememberCredentials.Checked AndAlso bConnected Then
             'save credentials
-            frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrComboBoxDatabaseName.GetText())
+            frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrCboName.GetText())
             frmMain.clsInstatOptions.SetClimsoftHost(ucrTxtHost.GetText())
-            frmMain.clsInstatOptions.SetClimsoftPort(ucrComboBoxPort.GetText())
+            frmMain.clsInstatOptions.SetClimsoftPort(ucrCboPort.GetText())
             frmMain.clsInstatOptions.SetClimsoftUsername(ucrTxtUserName.GetText())
         End If
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabaseName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrComboBoxPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboType.ControlContentsChanged, ucrCboName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrCboPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
         'if not already connected, check if it's valid to attempt connecting to database
         If bConnected Then
             btnConnect.Enabled = True
         Else
-            btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty
+            btnConnect.Enabled = Not ucrCboType.IsEmpty AndAlso Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrCboPort.IsEmpty AndAlso Not ucrCboName.IsEmpty
         End If
     End Sub
 End Class

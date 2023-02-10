@@ -26,14 +26,12 @@ Partial Class dlgImportFromPostgres
         Me.ucrBase = New instat.ucrButtons()
         Me.ttRDBMS = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblConnection = New System.Windows.Forms.Label()
-        Me.ucrComboBoxColumns = New instat.ucrInputComboBox()
-        Me.ucrComboBoxDatabase = New instat.ucrInputComboBox()
         Me.ucrSelectorForDatabase = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
-        Me.lblDatabase = New System.Windows.Forms.Label()
+        Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
+        Me.lblTables = New System.Windows.Forms.Label()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.cmdEstablishConnection = New System.Windows.Forms.Button()
-        Me.ucrReceiverDatabase = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTable = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -57,30 +55,6 @@ Partial Class dlgImportFromPostgres
         Me.lblConnection.TabIndex = 24
         Me.lblConnection.Text = "No Connection"
         '
-        'ucrComboBoxColumns
-        '
-        Me.ucrComboBoxColumns.AddQuotesIfUnrecognised = True
-        Me.ucrComboBoxColumns.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrComboBoxColumns.GetSetSelectedIndex = -1
-        Me.ucrComboBoxColumns.IsReadOnly = False
-        Me.ucrComboBoxColumns.Location = New System.Drawing.Point(257, 157)
-        Me.ucrComboBoxColumns.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
-        Me.ucrComboBoxColumns.Name = "ucrComboBoxColumns"
-        Me.ucrComboBoxColumns.Size = New System.Drawing.Size(137, 21)
-        Me.ucrComboBoxColumns.TabIndex = 22
-        '
-        'ucrComboBoxDatabase
-        '
-        Me.ucrComboBoxDatabase.AddQuotesIfUnrecognised = True
-        Me.ucrComboBoxDatabase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrComboBoxDatabase.GetSetSelectedIndex = -1
-        Me.ucrComboBoxDatabase.IsReadOnly = False
-        Me.ucrComboBoxDatabase.Location = New System.Drawing.Point(260, 69)
-        Me.ucrComboBoxDatabase.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
-        Me.ucrComboBoxDatabase.Name = "ucrComboBoxDatabase"
-        Me.ucrComboBoxDatabase.Size = New System.Drawing.Size(137, 21)
-        Me.ucrComboBoxDatabase.TabIndex = 20
-        '
         'ucrSelectorForDatabase
         '
         Me.ucrSelectorForDatabase.AutoSize = True
@@ -91,35 +65,35 @@ Partial Class dlgImportFromPostgres
         Me.ucrSelectorForDatabase.Size = New System.Drawing.Size(216, 147)
         Me.ucrSelectorForDatabase.TabIndex = 18
         '
-        'ucrReceiverMultipleColumns
+        'ucrReceiverColumns
         '
-        Me.ucrReceiverMultipleColumns.AutoSize = True
-        Me.ucrReceiverMultipleColumns.frmParent = Me
-        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(257, 181)
-        Me.ucrReceiverMultipleColumns.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
-        Me.ucrReceiverMultipleColumns.Selector = Nothing
-        Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(137, 100)
-        Me.ucrReceiverMultipleColumns.strNcFilePath = ""
-        Me.ucrReceiverMultipleColumns.TabIndex = 23
-        Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
+        Me.ucrReceiverColumns.AutoSize = True
+        Me.ucrReceiverColumns.frmParent = Me
+        Me.ucrReceiverColumns.Location = New System.Drawing.Point(257, 142)
+        Me.ucrReceiverColumns.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
+        Me.ucrReceiverColumns.Selector = Nothing
+        Me.ucrReceiverColumns.Size = New System.Drawing.Size(137, 100)
+        Me.ucrReceiverColumns.strNcFilePath = ""
+        Me.ucrReceiverColumns.TabIndex = 23
+        Me.ucrReceiverColumns.ucrSelector = Nothing
         '
-        'lblDatabase
+        'lblTables
         '
-        Me.lblDatabase.AutoSize = True
-        Me.lblDatabase.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDatabase.Location = New System.Drawing.Point(260, 54)
-        Me.lblDatabase.Name = "lblDatabase"
-        Me.lblDatabase.Size = New System.Drawing.Size(106, 13)
-        Me.lblDatabase.TabIndex = 19
-        Me.lblDatabase.Text = "Selected Databases:"
-        Me.lblDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblTables.AutoSize = True
+        Me.lblTables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTables.Location = New System.Drawing.Point(260, 54)
+        Me.lblTables.Name = "lblTables"
+        Me.lblTables.Size = New System.Drawing.Size(87, 13)
+        Me.lblTables.TabIndex = 19
+        Me.lblTables.Text = "Selected Tables:"
+        Me.lblTables.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(259, 141)
+        Me.lblColumns.Location = New System.Drawing.Point(259, 122)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(95, 13)
         Me.lblColumns.TabIndex = 21
@@ -135,31 +109,29 @@ Partial Class dlgImportFromPostgres
         Me.cmdEstablishConnection.Text = "Establish Connection..."
         Me.cmdEstablishConnection.UseVisualStyleBackColor = True
         '
-        'ucrReceiverDatabase
+        'ucrReceiverTable
         '
-        Me.ucrReceiverDatabase.AutoSize = True
-        Me.ucrReceiverDatabase.frmParent = Me
-        Me.ucrReceiverDatabase.Location = New System.Drawing.Point(260, 93)
-        Me.ucrReceiverDatabase.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDatabase.Name = "ucrReceiverDatabase"
-        Me.ucrReceiverDatabase.Selector = Nothing
-        Me.ucrReceiverDatabase.Size = New System.Drawing.Size(137, 21)
-        Me.ucrReceiverDatabase.strNcFilePath = ""
-        Me.ucrReceiverDatabase.TabIndex = 25
-        Me.ucrReceiverDatabase.ucrSelector = Nothing
+        Me.ucrReceiverTable.AutoSize = True
+        Me.ucrReceiverTable.frmParent = Me
+        Me.ucrReceiverTable.Location = New System.Drawing.Point(257, 75)
+        Me.ucrReceiverTable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTable.Name = "ucrReceiverTable"
+        Me.ucrReceiverTable.Selector = Nothing
+        Me.ucrReceiverTable.Size = New System.Drawing.Size(137, 21)
+        Me.ucrReceiverTable.strNcFilePath = ""
+        Me.ucrReceiverTable.TabIndex = 25
+        Me.ucrReceiverTable.ucrSelector = Nothing
         '
         'dlgImportFromPostgres
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 351)
-        Me.Controls.Add(Me.ucrReceiverDatabase)
+        Me.Controls.Add(Me.ucrReceiverTable)
         Me.Controls.Add(Me.lblConnection)
-        Me.Controls.Add(Me.ucrComboBoxColumns)
-        Me.Controls.Add(Me.ucrComboBoxDatabase)
         Me.Controls.Add(Me.ucrSelectorForDatabase)
-        Me.Controls.Add(Me.ucrReceiverMultipleColumns)
-        Me.Controls.Add(Me.lblDatabase)
+        Me.Controls.Add(Me.ucrReceiverColumns)
+        Me.Controls.Add(Me.lblTables)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.cmdEstablishConnection)
         Me.Controls.Add(Me.ucrBase)
@@ -176,12 +148,10 @@ Partial Class dlgImportFromPostgres
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ttRDBMS As ToolTip
     Friend WithEvents lblConnection As Label
-    Friend WithEvents ucrComboBoxColumns As ucrInputComboBox
-    Friend WithEvents ucrComboBoxDatabase As ucrInputComboBox
     Friend WithEvents ucrSelectorForDatabase As ucrSelectorAddRemove
-    Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
-    Friend WithEvents lblDatabase As Label
+    Friend WithEvents ucrReceiverColumns As ucrReceiverMultiple
+    Friend WithEvents lblTables As Label
     Friend WithEvents lblColumns As Label
     Friend WithEvents cmdEstablishConnection As Button
-    Friend WithEvents ucrReceiverDatabase As ucrReceiverSingle
+    Friend WithEvents ucrReceiverTable As ucrReceiverSingle
 End Class

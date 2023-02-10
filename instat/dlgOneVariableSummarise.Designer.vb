@@ -55,6 +55,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveSummary = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -263,12 +264,22 @@ Partial Class dlgOneVariableSummarise
         Me.cmdMissingOptions.Text = "Options"
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveSummary
+        '
+        Me.ucrSaveSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 347)
+        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(319, 24)
+        Me.ucrSaveSummary.TabIndex = 28
+        '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(421, 442)
+        Me.Controls.Add(Me.ucrSaveSummary)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.ucrInputMarginName)
@@ -317,4 +328,5 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents cmdMissingOptions As Button
+    Friend WithEvents ucrSaveSummary As ucrSave
 End Class
