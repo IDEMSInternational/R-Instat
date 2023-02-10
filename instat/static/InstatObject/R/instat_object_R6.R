@@ -1735,7 +1735,7 @@ DataBook$set("public", "has_database_connection", function() {
 }
 )
 
-DataBook$set("public", "database_connect", function(dbname, user, host, port, drv = RMySQL::MySQL()) {
+DataBook$set("public", "database_connect", function(drv = RMySQL::MySQL(), dbname, user, host, port) {
   #launches an input box prompt for entering password. 
   #done this way so that password characters are not displayed in the output window
   password <- getPass::getPass(paste0(user, " password:"))
