@@ -35,7 +35,7 @@ Public Class dlgExportToClimsoft
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
-        GetStationName()
+        AddStationName()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -156,7 +156,7 @@ Public Class dlgExportToClimsoft
         ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
     End Sub
 
-    Private Sub GetStationName()
+    Private Sub AddStationName()
         If ucrReceiverStation.IsEmpty Then
             ucrReceiverStation.SetText(ucrSelectorImportToClimsoft.strCurrentDataFrame)
             ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
@@ -177,8 +177,7 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        GetStationName()
-        Dim strVar As String = ucrReceiverStation.GetVariableNames
+        AddStationName()
     End Sub
 
     Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlContentsChanged,
