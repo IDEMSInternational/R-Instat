@@ -86,7 +86,7 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
         ucrPnlGraphType.AddToLinkedControls(ucrSelectorFactor, {rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrReceiverFactor, {rdoScatterPlotMatrix},, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrReceiverFactor, {rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrChkReverseLegendOrder, {rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactor)
 
