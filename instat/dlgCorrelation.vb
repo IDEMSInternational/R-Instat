@@ -549,7 +549,7 @@ Public Class dlgCorrelation
 
     Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged,
         ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged,
-         ucrInputRearrange.ControlValueChanged, ucrPnlOutput.ControlValueChanged
+        ucrInputRearrange.ControlValueChanged, ucrPnlOutput.ControlValueChanged
         DisplayOptions()
         ChangeOutputObject()
         ChangeBaseFunction()
@@ -610,7 +610,7 @@ Public Class dlgCorrelation
         Else
 
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
-            ucrSaveCorrelation.SetCheckBoxText("Save model")
+            ucrSaveCorrelation.SetCheckBoxText("Save Model")
             ucrSaveCorrelation.SetPrefix("summary_model")
             ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_model")
             clsCorrelationTestFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
