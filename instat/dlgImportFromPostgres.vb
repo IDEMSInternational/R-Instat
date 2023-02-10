@@ -54,22 +54,22 @@ Public Class dlgImportFromPostgres
 
         'table receiver
         ucrReceiverTable.SetParameter(New RParameter("database", 1))
-        ucrReceiverDatabase.SetParameterIsString()
-        ucrReceiverDatabase.Selector = ucrSelectorForDatabase
-        ucrReceiverDatabase.SetItemType("database_variables")
-        ucrReceiverDatabase.strSelectorHeading = "Database"
-        ucrReceiverDatabase.SetLinkedDisplayControl(lblTables)
+        ucrReceiverTable.SetParameterIsString()
+        ucrReceiverTable.Selector = ucrSelectorForDatabase
+        ucrReceiverTable.SetItemType("database_variables")
+        ucrReceiverTable.strSelectorHeading = "Tables"
+        ucrReceiverTable.SetLinkedDisplayControl(lblTables)
 
         'elements combobox
         dctColumns.Add("Column IDs", Chr(34) & "columnId" & Chr(34))
         dctColumns.Add("Column Names", Chr(34) & "columnName" & Chr(34))
         dctColumns.Add("Column Abbreviation", Chr(34) & "abbreviation" & Chr(34))
         dctColumns.Add("Column Types", Chr(34) & "columntype" & Chr(34))
-        ucrCboColumns.SetParameter(New RParameter("columnfiltercolumn", 2))
-        ucrCboColumns.SetItems(dctColumns)
-        ucrCboColumns.SetRDefault(Chr(34) & "columnId" & Chr(34))
-        ucrCboColumns.bAllowNonConditionValues = False
-        ucrCboColumns.SetDropDownStyleAsNonEditable()
+        'ucrCboColumns.SetParameter(New RParameter("columnfiltercolumn", 2))
+        'ucrCboColumns.SetItems(dctColumns)
+        'ucrCboColumns.SetRDefault(Chr(34) & "columnId" & Chr(34))
+        'ucrCboColumns.bAllowNonConditionValues = False
+        'ucrCboColumns.SetDropDownStyleAsNonEditable()
 
         'elements receiver
         ucrReceiverColumns.SetParameter(New RParameter("elements", 3))
@@ -88,18 +88,16 @@ Public Class dlgImportFromPostgres
         clsRImportFromDatabase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_database")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromDatabase)
 
-        ucrReceiverDatabase.SetMeAsReceiver()
+        ucrReceiverTable.SetMeAsReceiver()
         ucrSelectorForDatabase.Reset()
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled((Not ucrReceiverDatabase.IsEmpty()) OrElse (Not ucrReceiverColumns.IsEmpty()))
+        ucrBase.OKEnabled((Not ucrReceiverTable.IsEmpty()) OrElse (Not ucrReceiverColumns.IsEmpty()))
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrCboTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverDatabase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrCboColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -123,72 +121,72 @@ Public Class dlgImportFromPostgres
     ''' constructs and sets the stations reciver SQL query
     ''' </summary>
     ''' <returns>returns true if receivers query was changed</returns>
-    Private Function SetStationsReceiverQuery() As Boolean
-        If dctDatabaseColumns.Count < 1 Then
-            Return False
-        End If
+    'Private Function SetStationsReceiverQuery() As Boolean
+    '    If dctDatabaseColumns.Count < 1 Then
+    '        Return False
+    '    End If
 
-        'sql query to get station values of the selected column from station table
-        Dim strQuery As String
-        Dim strSelectedColumn As String = dctDatabaseColumns.Item(ucrCboTable.GetText).Trim("""")
+    '    'sql query to get station values of the selected column from station table
+    '    Dim strQuery As String
+    '    Dim strSelectedColumn As String = dctDatabaseColumns.Item(ucrCboTable.GetText).Trim("""")
 
-        strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM database WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
-        If ucrReceiverDatabase.strDatabaseQuery = strQuery Then
-            Return False
-        End If
-        ucrReceiverDatabase.Clear()
-        ucrReceiverDatabase.strDatabaseQuery = strQuery
-        Return True
-    End Function
+    '    strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM database WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
+    '    If ucrReceiverTable.strDatabaseQuery = strQuery Then
+    '        Return False
+    '    End If
+    '    ucrReceiverTable.Clear()
+    '    ucrReceiverTable.strDatabaseQuery = strQuery
+    '    Return True
+    'End Function
 
     ''' <summary>
     ''' constructs and sets elements receiver SQL query
     ''' </summary>
     ''' <returns>returns true if receivers query was changed</returns>
-    Private Function SetElementsRecieverQuery() As Boolean
-        If dctColumns.Count < 1 Then
-            Return False
-        End If
+    'Private Function SetElementsRecieverQuery() As Boolean
+    '    If dctColumns.Count < 1 Then
+    '        Return False
+    '    End If
 
-        'sql query to get distinct element values of the selected column(obselement TABLE COLUMN) from the observationfinal table
-        Dim strQuery As String
-        strQuery = "SELECT DISTINCT obscolumn." & dctColumns.Item(ucrCboColumns.GetText).Trim("""") &
-            " FROM observationfinal" &
-            " INNER JOIN obselement ON observationfinal.describedBy = obscolumn.columnId" &
-            " INNER JOIN station ON observationfinal.recordedFrom = database.databaseId"
-        'if stations have been specified, then get elements for those stations only
-        If Not ucrReceiverDatabase.IsEmpty Then
-            strQuery = strQuery & " WHERE " & "station." & dctDatabaseColumns.Item(ucrCboTable.GetText).Trim("""") & " IN (" &
-                String.Join(",", ucrReceiverDatabase.GetVariableNameslist(strQuotes:=Chr(39))) & ")"
-        End If
-        strQuery &= ";"
+    '    'sql query to get distinct element values of the selected column(obselement TABLE COLUMN) from the observationfinal table
+    '    Dim strQuery As String
+    '    strQuery = "SELECT DISTINCT obscolumn." & dctColumns.Item(ucrCboColumns.GetText).Trim("""") &
+    '        " FROM observationfinal" &
+    '        " INNER JOIN obselement ON observationfinal.describedBy = obscolumn.columnId" &
+    '        " INNER JOIN station ON observationfinal.recordedFrom = database.databaseId"
+    '    'if stations have been specified, then get elements for those stations only
+    '    If Not ucrReceiverTable.IsEmpty Then
+    '        strQuery = strQuery & " WHERE " & "station." & dctDatabaseColumns.Item(ucrCboTable.GetText).Trim("""") & " IN (" &
+    '            String.Join(",", ucrReceiverTable.GetVariableNameslist(strQuotes:=Chr(39))) & ")"
+    '    End If
+    '    strQuery &= ";"
 
-        If ucrReceiverColumns.strDatabaseQuery = strQuery Then
-            Return False
-        End If
-        ucrReceiverColumns.Clear()
-        ucrReceiverColumns.strDatabaseQuery = strQuery
-        Return True
-    End Function
+    '    If ucrReceiverColumns.strDatabaseQuery = strQuery Then
+    '        Return False
+    '    End If
+    '    ucrReceiverColumns.Clear()
+    '    ucrReceiverColumns.strDatabaseQuery = strQuery
+    '    Return True
+    'End Function
 
-    Private Sub ucrComboBoxDatabase_ControlValueChanged(ucrChangedControl As ucrCore)
-        If SetStationsReceiverQuery() Then
-            'set as selected receiver. will also execute the receiver's sql query
-            ucrReceiverDatabase.SetMeAsReceiver()
-        End If
-    End Sub
+    'Private Sub ucrComboBoxDatabase_ControlValueChanged(ucrChangedControl As ucrCore)
+    '    If SetStationsReceiverQuery() Then
+    '        'set as selected receiver. will also execute the receiver's sql query
+    '        ucrReceiverTable.SetMeAsReceiver()
+    '    End If
+    'End Sub
     Private Sub ucrReceiverDatabase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTable.ControlValueChanged
         If Not bIgnoreReceiverChanges Then
-            SetElementsRecieverQuery()
+            'SetElementsRecieverQuery()
         End If
     End Sub
 
-    Private Sub ucrComboBoxColumns_ControlValueChanged(ucrChangedControl As ucrCore)
-        If SetElementsRecieverQuery() Then
-            'set as selected receiver. will also execute receiver's sql the query
-            ucrReceiverColumns.SetMeAsReceiver()
-        End If
-    End Sub
+    'Private Sub ucrComboBoxColumns_ControlValueChanged(ucrChangedControl As ucrCore)
+    '    If SetElementsRecieverQuery() Then
+    '        'set as selected receiver. will also execute receiver's sql the query
+    '        ucrReceiverColumns.SetMeAsReceiver()
+    '    End If
+    'End Sub
 
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTable.ControlContentsChanged, ucrReceiverColumns.ControlContentsChanged
         TestOKEnabled()
