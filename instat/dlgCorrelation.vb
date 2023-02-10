@@ -551,7 +551,7 @@ Public Class dlgCorrelation
 
     Private Sub ucrChkDisplayOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayOptions.ControlValueChanged,
         ucrChkRearrange.ControlValueChanged, ucrChkShave.ControlValueChanged, ucrChkAbsolute.ControlValueChanged, ucrChkLeadingZeros.ControlValueChanged,
-         ucrInputRearrange.ControlValueChanged, ucrPnlOutput.ControlValueChanged
+        ucrInputRearrange.ControlValueChanged, ucrPnlOutput.ControlValueChanged
         DisplayOptions()
         ChangeOutputObject()
         ChangeBaseFunction()
