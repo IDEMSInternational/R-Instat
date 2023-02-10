@@ -247,6 +247,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgImportfromRBDMS.Designer.vb">
+      <DependentUpon>sdgImportfromRBDMS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportfromRBDMS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPairPlotOptions.Designer.vb">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </Compile>
@@ -3100,6 +3106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportfromRBDMS.resx">
+      <DependentUpon>sdgImportfromRBDMS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPairPlotOptions.resx">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
