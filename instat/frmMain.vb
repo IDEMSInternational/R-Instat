@@ -2510,4 +2510,7 @@ Public Class frmMain
         dlgHelpVignettes.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeUseTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseTable.Click
+        dlgUseTable.ShowDialog()
+    End Sub
 End Class
