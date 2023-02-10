@@ -466,11 +466,9 @@ Public Class dlgCorrelation
         If bRcodeSet Then
             If rdoMultipleColumns.Checked Then
                 If ucrChkDisplayOptions.Checked Then
+                    ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
                     If rdoAsDataFrame.Checked Then
                         ucrBase.clsRsyntax.iCallType = 0
-                        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-                    Else
-                        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
                     End If
                 Else
                     ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)

@@ -98,7 +98,6 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetItems(dctGeom)
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
-        'ucrInputComboGeom.SetRDefault("tile")
 
         bControlsInitialised = True
     End Sub
@@ -210,19 +209,6 @@ Public Class sdgCorrPlot
             clsRsyntax.AddToAfterCodes(clsRGGscatMatricReverseOperator, iPosition:=3)
             clsDummyFunction.AddParameter("checked", "scatter", iPosition:=0)
         End If
-
-        'If rdoCorrelationPlot.Checked AndAlso rdoCorrelationPlot.Enabled Then
-        '        clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-        '        clsDummyFunction.AddParameter("checked", "cor", iPosition:=0)
-
-        '    ElseIf rdoPairwisePlot.Checked Then
-        '        clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
-        '        clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
-
-        '    ElseIf rdoScatterPlotMatrix.Checked Then
-        '        clsRsyntax.AddToAfterCodes(clsRGGscatMatricReverseOperator, iPosition:=3)
-        '        clsDummyFunction.AddParameter("checked", "scatter", iPosition:=0)
-        '    End If
     End Sub
 
     Private Sub ucrChkReverseLegendOrder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReverseLegendOrder.ControlValueChanged
