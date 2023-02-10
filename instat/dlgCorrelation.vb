@@ -612,7 +612,7 @@ Public Class dlgCorrelation
         Else
 
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
-            ucrSaveCorrelation.SetCheckBoxText("Save model")
+            ucrSaveCorrelation.SetCheckBoxText("Save Model")
             ucrSaveCorrelation.SetPrefix("summary_model")
             ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_model")
             clsCorrelationTestFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
