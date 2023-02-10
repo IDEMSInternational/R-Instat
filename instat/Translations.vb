@@ -27,7 +27,7 @@ Public Class Translations
     '''
     ''' <param name="clsControl">    The WinForm control to translate. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Shared Sub autoTranslate(clsControl As Control)
+    Public Shared Sub autoTranslate(ByRef clsControl As Control)
         If IsNothing(TryCast(clsControl, Form)) Then
             Exit Sub
         End If
@@ -44,7 +44,7 @@ Public Class Translations
     ''' <param name="tsCollection">     The WinForm menu items to translate. </param>
     ''' <param name="ctrParent">        The WinForm control that is the parent of the menu. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Shared Sub translateMenu(tsCollection As ToolStripItemCollection, ctrParent As Control)
+    Public Shared Sub translateMenu(ByRef tsCollection As ToolStripItemCollection, ctrParent As Control)
         ' The 'WriteCsvFile' function call below should normally be commented out. 
         ' It only needs be uncommented and executed once, prior to each new release.
         'WriteCsvFile()
@@ -73,7 +73,7 @@ Public Class Translations
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrLogWindow.Name, frmMain.ucrLogWindow.mnuContextLogFile.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.rowContextMenu.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.RowContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.ColumnContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.CellContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))

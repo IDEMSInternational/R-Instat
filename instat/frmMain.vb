@@ -77,7 +77,7 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-        Logger.Info("R-Instat started")
+        Logger.Info("R-Instat started version" + My.Application.Info.Version.ToString)
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -2036,7 +2036,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
+        'Trace logging for possible memory leak
+        Logger.Trace("Memory before dlgCalculator is shown :" + GC.GetTotalMemory(True).ToString)
         dlgCalculator.ShowDialog()
+        Logger.Trace("Memory after dlgCalculator is shown  :" + GC.GetTotalMemory(True).ToString)
     End Sub
 
     Private Sub mnuPrepareColumnFactorCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
