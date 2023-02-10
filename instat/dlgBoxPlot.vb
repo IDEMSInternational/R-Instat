@@ -368,6 +368,7 @@ Public Class dlgBoxplot
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
     End Sub
+
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
                                    clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
