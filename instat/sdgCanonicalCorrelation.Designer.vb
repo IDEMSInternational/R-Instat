@@ -38,75 +38,8 @@ Partial Class sdgCanonicalCorrelation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrChkCoefficients = New instat.ucrCheck()
-        Me.ucrChkCanonicalCorrelations = New instat.ucrCheck()
-        Me.ucrChkPairwisePlot = New instat.ucrCheck()
-        Me.rdoYVariables = New System.Windows.Forms.RadioButton()
-        Me.rdoXVariables = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlVariables = New instat.UcrPanel()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.grpDisplay = New System.Windows.Forms.GroupBox()
-        Me.grpGraphics = New System.Windows.Forms.GroupBox()
-        Me.grpDisplay.SuspendLayout()
-        Me.grpGraphics.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrChkCoefficients
-        '
-        Me.ucrChkCoefficients.AutoSize = True
-        Me.ucrChkCoefficients.Checked = False
-        Me.ucrChkCoefficients.Location = New System.Drawing.Point(10, 46)
-        Me.ucrChkCoefficients.Name = "ucrChkCoefficients"
-        Me.ucrChkCoefficients.Size = New System.Drawing.Size(184, 23)
-        Me.ucrChkCoefficients.TabIndex = 1
-        '
-        'ucrChkCanonicalCorrelations
-        '
-        Me.ucrChkCanonicalCorrelations.AutoSize = True
-        Me.ucrChkCanonicalCorrelations.Checked = False
-        Me.ucrChkCanonicalCorrelations.Location = New System.Drawing.Point(10, 18)
-        Me.ucrChkCanonicalCorrelations.Name = "ucrChkCanonicalCorrelations"
-        Me.ucrChkCanonicalCorrelations.Size = New System.Drawing.Size(184, 23)
-        Me.ucrChkCanonicalCorrelations.TabIndex = 0
-        '
-        'ucrChkPairwisePlot
-        '
-        Me.ucrChkPairwisePlot.AutoSize = True
-        Me.ucrChkPairwisePlot.Checked = False
-        Me.ucrChkPairwisePlot.Location = New System.Drawing.Point(10, 18)
-        Me.ucrChkPairwisePlot.Name = "ucrChkPairwisePlot"
-        Me.ucrChkPairwisePlot.Size = New System.Drawing.Size(184, 23)
-        Me.ucrChkPairwisePlot.TabIndex = 0
-        '
-        'rdoYVariables
-        '
-        Me.rdoYVariables.AutoSize = True
-        Me.rdoYVariables.Location = New System.Drawing.Point(46, 67)
-        Me.rdoYVariables.Name = "rdoYVariables"
-        Me.rdoYVariables.Size = New System.Drawing.Size(78, 17)
-        Me.rdoYVariables.TabIndex = 3
-        Me.rdoYVariables.Tag = "Y_Variables"
-        Me.rdoYVariables.Text = "Y Variables"
-        Me.rdoYVariables.UseVisualStyleBackColor = True
-        '
-        'rdoXVariables
-        '
-        Me.rdoXVariables.AutoSize = True
-        Me.rdoXVariables.Location = New System.Drawing.Point(46, 44)
-        Me.rdoXVariables.Name = "rdoXVariables"
-        Me.rdoXVariables.Size = New System.Drawing.Size(78, 17)
-        Me.rdoXVariables.TabIndex = 2
-        Me.rdoXVariables.Tag = "X_Variables"
-        Me.rdoXVariables.Text = "X Variables"
-        Me.rdoXVariables.UseVisualStyleBackColor = True
-        '
-        'ucrPnlVariables
-        '
-        Me.ucrPnlVariables.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlVariables.Location = New System.Drawing.Point(36, 36)
-        Me.ucrPnlVariables.Name = "ucrPnlVariables"
-        Me.ucrPnlVariables.Size = New System.Drawing.Size(127, 58)
-        Me.ucrPnlVariables.TabIndex = 1
         '
         'ucrSdgButtons
         '
@@ -116,38 +49,12 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrSdgButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgButtons.TabIndex = 2
         '
-        'grpDisplay
-        '
-        Me.grpDisplay.Controls.Add(Me.ucrChkCoefficients)
-        Me.grpDisplay.Controls.Add(Me.ucrChkCanonicalCorrelations)
-        Me.grpDisplay.Location = New System.Drawing.Point(7, 7)
-        Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(200, 72)
-        Me.grpDisplay.TabIndex = 0
-        Me.grpDisplay.TabStop = False
-        Me.grpDisplay.Text = "Display"
-        '
-        'grpGraphics
-        '
-        Me.grpGraphics.Controls.Add(Me.rdoYVariables)
-        Me.grpGraphics.Controls.Add(Me.ucrChkPairwisePlot)
-        Me.grpGraphics.Controls.Add(Me.rdoXVariables)
-        Me.grpGraphics.Controls.Add(Me.ucrPnlVariables)
-        Me.grpGraphics.Location = New System.Drawing.Point(7, 85)
-        Me.grpGraphics.Name = "grpGraphics"
-        Me.grpGraphics.Size = New System.Drawing.Size(200, 100)
-        Me.grpGraphics.TabIndex = 1
-        Me.grpGraphics.TabStop = False
-        Me.grpGraphics.Text = "Graphics"
-        '
         'sdgCanonicalCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(230, 227)
-        Me.Controls.Add(Me.grpGraphics)
-        Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -156,22 +63,10 @@ Partial Class sdgCanonicalCorrelation
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "CCA_Options"
         Me.Text = "CCA Options"
-        Me.grpDisplay.ResumeLayout(False)
-        Me.grpDisplay.PerformLayout()
-        Me.grpGraphics.ResumeLayout(False)
-        Me.grpGraphics.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrSdgButtons As ucrButtonsSubdialogue
-    Friend WithEvents rdoYVariables As RadioButton
-    Friend WithEvents rdoXVariables As RadioButton
-    Friend WithEvents ucrChkCoefficients As ucrCheck
-    Friend WithEvents ucrChkCanonicalCorrelations As ucrCheck
-    Friend WithEvents ucrChkPairwisePlot As ucrCheck
-    Friend WithEvents ucrPnlVariables As UcrPanel
-    Friend WithEvents grpDisplay As GroupBox
-    Friend WithEvents grpGraphics As GroupBox
 End Class
