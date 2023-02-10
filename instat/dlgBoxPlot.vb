@@ -436,19 +436,19 @@ Public Class dlgBoxplot
         openSdgLayerOptions(clsViolinplotFunction)
     End Sub
 
-    Private Sub ToolStripMenuItemSummaryOptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOptions.Click
+    Private Sub toolStripMenuItemSummaryOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemSummaryOptions.Click
         openSdgLayerOptions(clsSummaryFunction)
     End Sub
 
     Private Sub DialogueSize()
-        If rdoBoxplotTufte.Checked Then
+        If rdoBoxplotTufte.Checked OrElse rdoViolin.Checked Then
             Me.Size = New Size(441, 505)
             Me.ucrSaveBoxplot.Location = New Point(10, 384)
             Me.ucrBase.Location = New Point(10, 413)
-        ElseIf rdoViolin.Checked Then
-            Me.Size = New Size(441, 505)
-            Me.ucrSaveBoxplot.Location = New Point(10, 384)
-            Me.ucrBase.Location = New Point(10, 413)
+            'ElseIf rdoViolin.Checked Then
+            '    Me.Size = New Size(441, 505)
+            '    Me.ucrSaveBoxplot.Location = New Point(10, 384)
+            '    Me.ucrBase.Location = New Point(10, 413)
         Else
             Me.Size = New Size(441, 479)
             Me.ucrSaveBoxplot.Location = New Point(10, 356)
@@ -464,7 +464,7 @@ Public Class dlgBoxplot
         toolStripMenuItemJitterOptions.Enabled = rdoJitter.Checked OrElse ((rdoBoxplotTufte.Checked _
             OrElse rdoViolin.Checked) AndAlso ucrChkAddPoints.Checked)
         toolStripMenuItemViolinOptions.Enabled = rdoViolin.Checked
-        ToolStripMenuItemSummaryOptions.Enabled = rdoBoxplotTufte.Checked OrElse ((rdoJitter.Checked _
+        toolStripMenuItemSummaryOptions.Enabled = rdoBoxplotTufte.Checked OrElse ((rdoJitter.Checked _
             OrElse rdoViolin.Checked) AndAlso ucrChkGrouptoConnect.Checked)
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
     End Sub
