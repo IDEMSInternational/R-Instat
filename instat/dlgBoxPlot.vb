@@ -445,10 +445,6 @@ Public Class dlgBoxplot
             Me.Size = New Size(441, 505)
             Me.ucrSaveBoxplot.Location = New Point(10, 384)
             Me.ucrBase.Location = New Point(10, 413)
-            'ElseIf rdoViolin.Checked Then
-            '    Me.Size = New Size(441, 505)
-            '    Me.ucrSaveBoxplot.Location = New Point(10, 384)
-            '    Me.ucrBase.Location = New Point(10, 413)
         Else
             Me.Size = New Size(441, 479)
             Me.ucrSaveBoxplot.Location = New Point(10, 356)
