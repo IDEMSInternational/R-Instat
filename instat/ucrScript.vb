@@ -472,6 +472,7 @@ Public Class ucrScript
 
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
+                TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -494,6 +495,7 @@ Public Class ucrScript
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
                               frmMain.clsRLink.GetRSetupScript() & clsScriptActive.Text)
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
+            TabControl.SelectedTab.Text = strScriptFilename
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -540,6 +542,7 @@ Public Class ucrScript
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
                     File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine &
                            "The file may be in use by another program or you may not have access to write to the specified location.",
