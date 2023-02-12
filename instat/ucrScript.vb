@@ -53,7 +53,7 @@ Public Class ucrScript
 
     Private Sub addTab()
         clsScriptActive = newScriptEditor()
-        'TODO SetLineNumberMarginWidth(1)
+        SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
         tabPageAdded.Controls.Add(clsScriptActive)
@@ -288,8 +288,6 @@ Public Class ucrScript
         'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
 
-        clsNewScript.Margins(0).Width = 30 'TODO
-
         ' Instruct the lexer to calculate folding
         clsNewScript.SetProperty("fold", "1")
         clsNewScript.SetProperty("fold.compact", "1")
@@ -365,8 +363,10 @@ Public Class ucrScript
                   "")
     End Function
 
-    Private Sub SetLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer)
-        If iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew Then
+    Private Sub SetLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer,
+                                         Optional bForce As Boolean = False)
+        If iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew _
+                AndAlso Not bForce Then
             Exit Sub
         End If
         iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew
