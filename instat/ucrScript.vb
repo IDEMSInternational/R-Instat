@@ -53,7 +53,7 @@ Public Class ucrScript
 
     Private Sub addTab()
         clsScriptActive = newScriptEditor()
-        SetLineNumberMarginWidth(1)
+        'TODO SetLineNumberMarginWidth(1)
 
         Dim tabPageAdded = New TabPage
         tabPageAdded.Controls.Add(clsScriptActive)
@@ -287,6 +287,8 @@ Public Class ucrScript
         'TODO  Configure from R-Instat options?
         'clsScript.Styles(Style.Default).Font = frmMain.clsInstatOptions.fntEditor.Name
         'clsScript.Styles(Style.Default).Size = frmMain.clsInstatOptions.fntEditor.Size
+
+        clsNewScript.Margins(0).Width = 30 'TODO
 
         ' Instruct the lexer to calculate folding
         clsNewScript.SetProperty("fold", "1")
