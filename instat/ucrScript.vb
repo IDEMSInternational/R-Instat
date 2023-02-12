@@ -28,10 +28,12 @@ Public Class ucrScript
 
     Public Property strText As String
         Get
-            Return clsScriptActive.Text
+            Return If(IsNothing(clsScriptActive), Nothing, clsScriptActive.Text)
         End Get
         Set(strNewText As String)
-            clsScriptActive.Text = strNewText
+            If Not IsNothing(clsScriptActive) Then
+                clsScriptActive.Text = strNewText
+            End If
         End Set
     End Property
 
@@ -41,9 +43,27 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+    Public Sub CutText()
+        If clsScriptActive.SelectedText.Length > 0 Then
+            clsScriptActive.Cut()
+            EnableDisableButtons()
+        End If
+    End Sub
+
     Public Sub CopyText()
-        clsScriptActive.Copy()
-        EnableDisableButtons()
+        If clsScriptActive.SelectedText.Length > 0 Then
+            clsScriptActive.Copy()
+            EnableDisableButtons()
+        End If
+    End Sub
+
+    Public Sub PasteText()
+        If Clipboard.ContainsData(DataFormats.Text) Then
+            clsScriptActive.Paste()
+            EnableDisableButtons()
+        Else
+            MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
+        End If
     End Sub
 
     Public Sub SelectAllText()
@@ -426,31 +446,20 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        If clsScriptActive.SelectedText.Length > 0 Then
-            CopyText()
-            EnableDisableButtons()
-        End If
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        CutText()
     End Sub
 
-    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        If clsScriptActive.SelectedText.Length > 0 Then
-            clsScriptActive.Cut()
-            EnableDisableButtons()
-        End If
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        CopyText()
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteText()
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
-    End Sub
-
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        If Clipboard.ContainsData(DataFormats.Text) Then
-            clsScriptActive.Paste()
-            EnableDisableButtons()
-        Else
-            MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
-        End If
     End Sub
 
     Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click

@@ -2404,6 +2404,12 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
+    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
+        If ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.CutText()
+        End If
+    End Sub
+
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
@@ -2424,6 +2430,9 @@ Public Class frmMain
 
     Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click, mnuTbPaste.ButtonClick, mnuSubTbPaste.Click
         'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
+        If ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.PasteText()
+        End If
     End Sub
 
     Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
@@ -2525,4 +2534,5 @@ Public Class frmMain
     Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
         dlgSearch.ShowDialog()
     End Sub
+
 End Class
