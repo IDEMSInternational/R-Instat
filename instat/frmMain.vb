@@ -2534,5 +2534,4 @@ Public Class frmMain
     Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
         dlgSearch.ShowDialog()
     End Sub
-
 End Class
