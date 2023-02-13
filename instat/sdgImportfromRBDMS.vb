@@ -199,6 +199,7 @@ Public Class sdgImportfromRDBMS
 
         If chkRememberCredentials.Checked AndAlso bConnected Then
             'save credentials
+            frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrCboType.GetText())
             frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrCboName.GetText())
             frmMain.clsInstatOptions.SetClimsoftHost(ucrTxtHost.GetText())
             frmMain.clsInstatOptions.SetClimsoftPort(ucrCboPort.GetText())

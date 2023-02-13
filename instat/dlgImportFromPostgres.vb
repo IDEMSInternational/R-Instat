@@ -51,9 +51,8 @@ Public Class dlgImportFromPostgres
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
 
-
         'table receiver
-        ucrReceiverTable.SetParameter(New RParameter("database", 1))
+        ucrReceiverTable.SetParameter(New RParameter("Table", 1))
         ucrReceiverTable.SetParameterIsString()
         ucrReceiverTable.Selector = ucrSelectorForDatabase
         ucrReceiverTable.SetItemType("database_variables")
@@ -65,18 +64,13 @@ Public Class dlgImportFromPostgres
         dctColumns.Add("Column Names", Chr(34) & "columnName" & Chr(34))
         dctColumns.Add("Column Abbreviation", Chr(34) & "abbreviation" & Chr(34))
         dctColumns.Add("Column Types", Chr(34) & "columntype" & Chr(34))
-        'ucrCboColumns.SetParameter(New RParameter("columnfiltercolumn", 2))
-        'ucrCboColumns.SetItems(dctColumns)
-        'ucrCboColumns.SetRDefault(Chr(34) & "columnId" & Chr(34))
-        'ucrCboColumns.bAllowNonConditionValues = False
-        'ucrCboColumns.SetDropDownStyleAsNonEditable()
 
-        'elements receiver
-        ucrReceiverColumns.SetParameter(New RParameter("elements", 3))
+        'columns receiver
+        ucrReceiverColumns.SetParameter(New RParameter("column", 3))
         ucrReceiverColumns.SetParameterIsString()
         ucrReceiverColumns.Selector = ucrSelectorForDatabase
         ucrReceiverColumns.SetItemType("database_variables")
-        ucrReceiverColumns.strSelectorHeading = "Elements"
+        ucrReceiverColumns.strSelectorHeading = "Columns"
         ucrReceiverColumns.SetLinkedDisplayControl(lblColumns)
 
         ucrBase.clsRsyntax.bSeparateThread = False
@@ -104,7 +98,7 @@ Public Class dlgImportFromPostgres
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        sdgImportFromClimSoft.Reset()
+        sdgImportfromRDBMS.Reset()
         CheckAndUpdateConnectionStatus()
         TestOKEnabled()
     End Sub
@@ -121,14 +115,14 @@ Public Class dlgImportFromPostgres
     ''' constructs and sets the stations reciver SQL query
     ''' </summary>
     ''' <returns>returns true if receivers query was changed</returns>
-    'Private Function SetStationsReceiverQuery() As Boolean
-    '    If dctDatabaseColumns.Count < 1 Then
-    '        Return False
-    '    End If
+    'Private Function SetTableReceiverQuery() As Boolean
+    'If ucrReceiverTable.IsEmpty Then
+    'Return False
+    'End If
 
-    '    'sql query to get station values of the selected column from station table
+    '    'sql query to get the selected column from a database table
     '    Dim strQuery As String
-    '    Dim strSelectedColumn As String = dctDatabaseColumns.Item(ucrCboTable.GetText).Trim("""")
+    'Dim strSelectedColumn As String = ucrReceiverTable.GetListAsRString
 
     '    strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM database WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
     '    If ucrReceiverTable.strDatabaseQuery = strQuery Then
