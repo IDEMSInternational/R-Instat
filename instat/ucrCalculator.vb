@@ -1497,16 +1497,17 @@ Public Class ucrCalculator
 
 
     Private Sub OpenHelpPage()
-        Dim clsHelp As New RFunction
+        'Dim clsHelp As New RFunction
 
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript,
-                                   strComment:="Opening help page for " &
-                                   strPackageName & " Package. Generated from dialog Calculator",
-                                   iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        'clsHelp.SetPackageName("utils")
+        'clsHelp.SetRCommand("help")
+        'clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        'clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        'frmMain.clsRLink.RunScript(clsHelp.ToScript,
+        '                           strComment:="Opening help page for " &
+        '                           strPackageName & " Package. Generated from dialog Calculator",
+        '                           iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        frmMaximiseOutput.Show("C:\Program Files\R-Instat\0.7.8\static\R\library\" & strPackageName & "\html\00Index.html")
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)
