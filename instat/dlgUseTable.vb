@@ -16,7 +16,55 @@
 
 Imports instat.Translations
 Public Class dlgUseTable
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsRFunctionAsHTML, clsRFunctionAsRTF, clsRFunctionAsWord, ClsRFunctionAsLaTex As New RFunction
+
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrTablesReceiver.SetParameter(New RParameter("x", 0))
+        ucrTablesReceiver.Selector = ucrTablesSelector
+        ucrTablesReceiver.SetParameterIsRFunction()
+        ucrTablesReceiver.SetMeAsReceiver()
+        ucrTablesReceiver.strSelectorHeading = "Tables"
+        ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
+
+        ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
+        ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
+        ucrPnlExportOptions.AddRadioButton(rdoAsWord)
+        ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
+
+        ucrChkExportTable.SetText("Export File")
+
+    End Sub
+
+    Private Sub SetDefaults()
+        clsRFunctionAsHTML = New RFunction
+        clsRFunctionAsRTF = New RFunction
+        clsRFunctionAsWord = New RFunction
+        ClsRFunctionAsLaTex = New RFunction
+
+
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+    Private Sub TestOKEnabled()
 
     End Sub
 End Class

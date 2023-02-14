@@ -996,11 +996,9 @@ Partial Class frmMain
         '
         'mnuDescribeUseTable
         '
-        Me.mnuDescribeUseTable.Enabled = False
         Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
         Me.mnuDescribeUseTable.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeUseTable.Text = "Use Table..."
-        Me.mnuDescribeUseTable.Visible = False
         '
         'mnuDescribeUseGraph
         '
@@ -5116,9 +5114,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat  " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat  .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
