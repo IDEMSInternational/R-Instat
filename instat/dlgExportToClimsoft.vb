@@ -58,6 +58,7 @@ Public Class dlgExportToClimsoft
         ucrInputLevel.SetParameter(New RParameter("level", 4))
         ucrInputLevel.SetLinkedDisplayControl(lblLevel)
 
+        ucrReceiverElements.SetParameter(New RParameter("element", 5, bNewIncludeArgumentName:=False))
         ucrReceiverElements.SetParameterIsRFunction()
         ucrReceiverElements.SetLinkedDisplayControl(lblElement)
         ucrReceiverElements.Selector = ucrSelectorImportToClimsoft
@@ -82,6 +83,8 @@ Public Class dlgExportToClimsoft
 
         ucrSelectorImportToClimsoft.Reset()
         ucrSaveNewDataFrame.Reset()
+        ucrReceiverElements.SetMeAsReceiver()
+
 
         clsDummyFunction.AddParameter("dataframe", "True", iPosition:=0)
 
