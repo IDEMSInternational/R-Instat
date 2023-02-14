@@ -20,6 +20,7 @@ Imports ScintillaNET
 
 Public Class ucrScript
 
+    Private bIsTextChanged = False
     Private iMaxLineNumberCharLength As Integer = 0
     Private Const strComment As String = "Code run from Script Window"
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
@@ -92,6 +93,7 @@ Public Class ucrScript
         iTabCounter += 1
 
         TabControl.SelectedTab = tabPageAdded
+        bIsTextChanged = False
         EnableDisableButtons()
     End Sub
 
@@ -404,6 +406,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub clsScriptActive_TextChanged(sender As Object, e As EventArgs) Handles clsScriptActive.TextChanged
+        bIsTextChanged = True
         EnableDisableButtons()
         SetLineNumberMarginWidth(clsScriptActive.Lines.Count.ToString().Length)
     End Sub
@@ -419,6 +422,12 @@ Public Class ucrScript
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
         'never remove last tab
         If TabControl.TabCount < 2 Then
+            Exit Sub
+        End If
+
+        If clsScriptActive.TextLength > 0 AndAlso bIsTextChanged _
+            AndAlso MsgBox("Are you sure you want to delete the tab and lose the contents?",
+                               vbYesNo, "Remove Tab") = vbNo Then
             Exit Sub
         End If
 
@@ -482,6 +491,7 @@ Public Class ucrScript
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
                 TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
+                bIsTextChanged = False
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -552,6 +562,7 @@ Public Class ucrScript
                 Try
                     File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
                     TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    bIsTextChanged = False
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine &
                            "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -578,6 +589,12 @@ Public Class ucrScript
         For Each control In tabPageControls
             If TypeOf control Is Scintilla Then
                 clsScriptActive = DirectCast(control, Scintilla)
+
+                'If tab contains script, then assume that latest script is not yet saved.
+                'This is just to be on the safe side. It is not worth the extra complexity of
+                'checking if the script is the same as the associated file name
+                bIsTextChanged = clsScriptActive.TextLength > 0
+
                 EnableDisableButtons()
                 Exit Sub
             End If
