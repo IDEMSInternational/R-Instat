@@ -108,12 +108,12 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         clsRFunctionGraphics.SetPackageName("GGally")
         clsRFunctionGraphics.SetRCommand("ggpairs")
-        ''clsRFunctionGraphics.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
-        'strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
-        '                                          strRObjectFormatToAssignTo:=RObjectFormat.Image,
-        '                                          strRDataFrameNameToAddObjectTo:=ucrSelectorCCA.strCurrentDataFrame,
-        '                                          strObjectName:="last_graph")
-        'clsRFunctionGraphics.bExcludeAssignedFunctionOutput = False
+        clsRFunctionGraphics.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorCCA.strCurrentDataFrame,
+                                                  strObjectName:="last_graph")
+        clsRFunctionGraphics.bExcludeAssignedFunctionOutput = False
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFunctionCancor)
         'bResetSubdialog = True
