@@ -327,7 +327,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListMin, "the smallest value: So min(c(4,3,10,1,2)) = 1 ")
         ttCalculator.SetToolTip(cmdListMax, "the largest value: So max(c(4,3,10,1,2)) = 10 ")
         ttCalculator.SetToolTip(cmdListRange, "gives both the min and the max. Use max - min to give the value of the range")
-        ttCalculator.SetToolTip(cmdListMissing, "the number of missing values. So miss(c( NA,2,3,4,NA)) = 2")
+        ttCalculator.SetToolTip(cmdListMissing, "add the option to omit missing values in the summaries")
         ttCalculator.SetToolTip(cmdListMean, "the average, usually sum/length. So mean(c(1,2,3,4,10)) = 4")
         ttCalculator.SetToolTip(cmdListMedian, "the value halfway up the values in order. So median(c(1,2,3,4,10) = 3")
         ttCalculator.SetToolTip(cmdListMode, "the most popular value. So mode(c(10,2,2,3,3) = 2 and 3")
@@ -344,13 +344,28 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDivide, "divide each value in the list by a given value (default 10).")
         ttCalculator.SetToolTip(cmdListAnyDup, "the row number of the first duplicated value, or 0 if no duplicates. So anydup(c(1,2,3,3,10) = 4.")
         ttCalculator.SetToolTip(cmdListSquare, "raise each number in the list to a given power (default 2, to square the numbers).")
-        ttCalculator.SetToolTip(cmdListFirst, "value in the first row. So first(c(NA,7,8,9,10)) is NA. Also first(c(NA,7,8,9,10),order=(2,3,0,1,2)) = 8.")
-        ttCalculator.SetToolTip(cmdListLast, "value in the last row. So last(c(NA,7,8,9,10)) = 10. Also last(c(NA,7,8,9,10),order=c(2,3,0,1,2)) = 7")
-        ttCalculator.SetToolTip(cmdListNth, "value in nth row, So nth(c(NA,7,8,9,10)) = 8. Also nth(c(NA,7,7,9,10),3,order=c(2,3,0,1,2))= NA.")
+        ttCalculator.SetToolTip(cmdListFirst, "the first value in each list.")
+        ttCalculator.SetToolTip(cmdListLast, "the last value in each list.")
+        ttCalculator.SetToolTip(cmdListNth, "the nth value in each list, (default = 2, the second value).")
         ttCalculator.SetToolTip(cmdListQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
         ttCalculator.SetToolTip(cmdListRound1, "round the numbers in each list. Default is to 3 decimals).")
         ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals.")
         ttCalculator.SetToolTip(cmdListSQRT, "square root each number in the list. (Change sqrt to abs, log, exp, sin, etc for other functions).")
+        ttCalculator.SetToolTip(cmdListSort, "sort values into ascending order.  (Change FALSE to TRUE for descending).")
+        ttCalculator.SetToolTip(cmdListRank, "ranks of values with average for tied values.")
+        ttCalculator.SetToolTip(cmdListLag, "lag values by one observation, so NA starts each list.")
+        ttCalculator.SetToolTip(cmdListLead, "opposite to lag, so NA is last value.")
+        ttCalculator.SetToolTip(cmdListDiff, "differences between successive elements.")
+        ttCalculator.SetToolTip(cmdListScale, "scale each list, by subtracting the mean and dividing by the sd.")
+        ttCalculator.SetToolTip(cmdListCumsum, "cumulative sum of elements in each list. (replace by cummin, cummax, cumprod, or dplyr::cummean for other cumulative functions).")
+        ttCalculator.SetToolTip(cmdListMovsum, "moving sum of elements in each list (replace by rollmax, rollmean or rollmedian for others).")
+        ttCalculator.SetToolTip(cmdListRev, "reverse the data in each list.")
+        ttCalculator.SetToolTip(cmdListOmit, "drop NA values.")
+        ttCalculator.SetToolTip(cmdListIfelse, "replace the condition and the TRUE, FALSE values with those of your choice.")
+        ttCalculator.SetToolTip(cmdListMod, "gives the remainder from division by 10, or a number you choose.  For example 28 %%8 = 4.")
+        ttCalculator.SetToolTip(cmdListDiv, "gives the value after integer division by 10, or a number of your choice.  For example 28 %/% 8 = 3.")
+        ttCalculator.SetToolTip(cmdListOperator, "gives TRUE or FALSE depending on the condition.  (Use >=, <, <=, ==, != as well).")
+        ttCalculator.SetToolTip(cmdListDuplicated, "gives TRUE for any duplicates and FALSE otherwise.")
 
     End Sub
 
@@ -5202,7 +5217,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListNth_Click(sender As Object, e As EventArgs) Handles cmdListNth.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) {dplyr::nth(x,  )})", 34)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,dplyr::nth, 2)", 16)
     End Sub
 
     Private Sub cmdListQuantile_Click(sender As Object, e As EventArgs) Handles cmdListQuantile.Click
@@ -5222,7 +5237,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListMissing_Click(sender As Object, e As EventArgs) Handles cmdListMissing.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  , function(x) sum(is.na(x)))", 29)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("  ,na.rm=TRUE")
     End Sub
 
     Private Sub cmdListAdd_Click(sender As Object, e As EventArgs) Handles cmdListAdd.Click
@@ -5246,7 +5261,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListRound1_Click(sender As Object, e As EventArgs) Handles cmdListRound1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) round(x,3))", 25)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,round,3)", 10)
     End Sub
 
     Private Sub cmdListProportion_Click(sender As Object, e As EventArgs) Handles cmdListProportion.Click
@@ -5262,7 +5277,66 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdListSQRT_Click(sender As Object, e As EventArgs) Handles cmdListSQRT.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lapply( ,sqrt)", 7)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,sqrt)", 7)
     End Sub
 
+    Private Sub cmdListSort_Click(sender As Object, e As EventArgs) Handles cmdListSort.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,sort, FALSE)", 14)
+    End Sub
+
+    Private Sub cmdListRank_Click(sender As Object, e As EventArgs) Handles cmdListRank.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,rank)", 7)
+    End Sub
+
+    Private Sub cmdListLag_Click(sender As Object, e As EventArgs) Handles cmdListLag.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,dplyr::lag)", 13)
+    End Sub
+
+    Private Sub cmdListLead_Click(sender As Object, e As EventArgs) Handles cmdListLead.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,dplyr::lead)", 14)
+    End Sub
+
+    Private Sub cmdListDiff_Click(sender As Object, e As EventArgs) Handles cmdListDiff.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,diff)", 7)
+    End Sub
+
+    Private Sub cmdListScale_Click(sender As Object, e As EventArgs) Handles cmdListScale.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) {round(scale(x),3)})", 34)
+    End Sub
+
+    Private Sub cmdListCumsum_Click(sender As Object, e As EventArgs) Handles cmdListCumsum.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,cumsum)", 9)
+    End Sub
+
+    Private Sub cmdListMovsum_Click(sender As Object, e As EventArgs) Handles cmdListMovsum.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,zoo::rollsum,3,NA)", 19)
+    End Sub
+
+    Private Sub cmdListRev_Click(sender As Object, e As EventArgs) Handles cmdListRev.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,rev)", 6)
+    End Sub
+
+    Private Sub cmdListOmit_Click(sender As Object, e As EventArgs) Handles cmdListOmit.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply( ,na.omit)", 10)
+    End Sub
+
+    Private Sub cmdListIfelse_Click(sender As Object, e As EventArgs) Handles cmdListIfelse.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  , function(x) {ifelse(x < 10, -1,1)})", 38)
+    End Sub
+
+    Private Sub cmdListMod_Click(sender As Object, e As EventArgs) Handles cmdListMod.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) {x %% 10})", 24)
+    End Sub
+
+    Private Sub cmdListDiv_Click(sender As Object, e As EventArgs) Handles cmdListDiv.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,function(x) { x %/% 10})", 26)
+    End Sub
+
+    Private Sub cmdListOperator_Click(sender As Object, e As EventArgs) Handles cmdListOperator.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   , function(x) { x > 10 })", 26)
+    End Sub
+
+    Private Sub cmdListDuplicated_Click(sender As Object, e As EventArgs) Handles cmdListDuplicated.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,duplicated)", 13)
+    End Sub
 End Class
