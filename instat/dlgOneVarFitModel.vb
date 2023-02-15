@@ -60,7 +60,6 @@ Public Class dlgOneVarFitModel
         Dim lstCommandButtons As New List(Of Control)
 
         ucrBase.iHelpTopicID = 296
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
@@ -345,7 +344,6 @@ Public Class dlgOneVarFitModel
         'Display Options/Functions
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
-        clsRplotFunction.iCallType = 3
         clsRplotFunction.bExcludeAssignedFunctionOutput = False
         clsRplotFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,

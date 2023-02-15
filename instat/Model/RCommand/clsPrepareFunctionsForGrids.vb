@@ -334,7 +334,7 @@ Public Class clsPrepareFunctionsForGrids
         Else
             clsReplaceValue.AddParameter("new_value", strNewValue)
         End If
-        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data", bAddOutputInInternalViewer:=bAddOutputInInternalViewer)
+        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
     End Sub
 
     ''' <summary>

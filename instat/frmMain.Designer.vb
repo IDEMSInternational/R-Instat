@@ -84,6 +84,7 @@ Partial Class frmMain
         Me.mnuDescribeMultivariateCanonicalCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeMultivariateClusterAnalysis = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuDescribeUseTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeUseGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeCombineGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
@@ -162,23 +163,19 @@ Partial Class frmMain
         Me.mnuViewSwapDataAndMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpHistFAQ = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpFAQ = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGetingStarted = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator28 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelpWindows = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpDataViewSpreadsheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpMenus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAboutR = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpRPackagesCommands = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpDataset = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuHelpGuide = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpGuidesCaseStudy = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpGuideGlosary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuhelpGuidesMore = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpAboutRInstat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpLearningStatistics = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpRPackages = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpGlossary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpAcknowledgments = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuHelpPackagesDocumentation = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -707,7 +704,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeSpecificTables, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeSpecificTables, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseTable, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         Me.mnuDescribe.Size = New System.Drawing.Size(64, 22)
         Me.mnuDescribe.Tag = "Describe"
@@ -996,6 +993,14 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
         Me.ToolStripSeparator13.Size = New System.Drawing.Size(175, 6)
+        '
+        'mnuDescribeUseTable
+        '
+        Me.mnuDescribeUseTable.Enabled = False
+        Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
+        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeUseTable.Text = "Use Table..."
+        Me.mnuDescribeUseTable.Visible = False
         '
         'mnuDescribeUseGraph
         '
@@ -1444,7 +1449,7 @@ Partial Class frmMain
         '
         Me.mnuViewDataView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewDataView.Name = "mnuViewDataView"
-        Me.mnuViewDataView.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewDataView.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewDataView.Tag = "Data_View"
         Me.mnuViewDataView.Text = "Data View"
         '
@@ -1452,14 +1457,14 @@ Partial Class frmMain
         '
         Me.mnuViewOutputWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOutputWindow.Name = "mnuViewOutputWindow"
-        Me.mnuViewOutputWindow.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewOutputWindow.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewOutputWindow.Text = "Output Window"
         '
         'mnuViewLog
         '
         Me.mnuViewLog.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewLog.Name = "mnuViewLog"
-        Me.mnuViewLog.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewLog.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewLog.Tag = "Log"
         Me.mnuViewLog.Text = "Log Window"
         '
@@ -1467,7 +1472,7 @@ Partial Class frmMain
         '
         Me.mnuViewScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewScriptWindow.Name = "mnuViewScriptWindow"
-        Me.mnuViewScriptWindow.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewScriptWindow.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewScriptWindow.Tag = "Script_Window"
         Me.mnuViewScriptWindow.Text = "Script Window"
         '
@@ -1475,7 +1480,7 @@ Partial Class frmMain
         '
         Me.mnuViewColumnMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewColumnMetadata.Name = "mnuViewColumnMetadata"
-        Me.mnuViewColumnMetadata.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewColumnMetadata.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewColumnMetadata.Tag = "Column_Metadata"
         Me.mnuViewColumnMetadata.Text = "Column Metadata"
         '
@@ -1483,27 +1488,27 @@ Partial Class frmMain
         '
         Me.mnuViewDataFrameMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewDataFrameMetadata.Name = "mnuViewDataFrameMetadata"
-        Me.mnuViewDataFrameMetadata.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewDataFrameMetadata.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewDataFrameMetadata.Tag = "Data_Frame_Metadata"
         Me.mnuViewDataFrameMetadata.Text = "Data Frame Metadata"
         '
         'ToolStripSeparator22
         '
         Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
-        Me.ToolStripSeparator22.Size = New System.Drawing.Size(208, 6)
+        Me.ToolStripSeparator22.Size = New System.Drawing.Size(202, 6)
         '
         'mnuViewStructuredMenu
         '
         Me.mnuViewStructuredMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewStructuredMenu.Name = "mnuViewStructuredMenu"
-        Me.mnuViewStructuredMenu.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewStructuredMenu.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewStructuredMenu.Text = "Structured Menu"
         '
         'mnuViewClimaticMenu
         '
         Me.mnuViewClimaticMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewClimaticMenu.Name = "mnuViewClimaticMenu"
-        Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewClimaticMenu.Tag = ""
         Me.mnuViewClimaticMenu.Text = "Climatic Menu"
         '
@@ -1511,7 +1516,7 @@ Partial Class frmMain
         '
         Me.mnuViewProcurementMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewProcurementMenu.Name = "mnuViewProcurementMenu"
-        Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewProcurementMenu.Tag = ""
         Me.mnuViewProcurementMenu.Text = "Procurement Menu"
         '
@@ -1519,31 +1524,31 @@ Partial Class frmMain
         '
         Me.mnuViewOptionsByContextMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOptionsByContextMenu.Name = "mnuViewOptionsByContextMenu"
-        Me.mnuViewOptionsByContextMenu.Size = New System.Drawing.Size(211, 22)
-        Me.mnuViewOptionsByContextMenu.Text = "Options by Context Menu"
+        Me.mnuViewOptionsByContextMenu.Size = New System.Drawing.Size(205, 22)
+        Me.mnuViewOptionsByContextMenu.Text = "Experiments"
         '
         'ToolStripSeparator39
         '
         Me.ToolStripSeparator39.Name = "ToolStripSeparator39"
-        Me.ToolStripSeparator39.Size = New System.Drawing.Size(208, 6)
+        Me.ToolStripSeparator39.Size = New System.Drawing.Size(202, 6)
         '
         'mnuViewResetToDefaultLayout
         '
         Me.mnuViewResetToDefaultLayout.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewResetToDefaultLayout.Name = "mnuViewResetToDefaultLayout"
-        Me.mnuViewResetToDefaultLayout.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewResetToDefaultLayout.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewResetToDefaultLayout.Text = "Reset to Default Layout"
         '
         'mnuViewSwapDataAndMetadata
         '
         Me.mnuViewSwapDataAndMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewSwapDataAndMetadata.Name = "mnuViewSwapDataAndMetadata"
-        Me.mnuViewSwapDataAndMetadata.Size = New System.Drawing.Size(211, 22)
+        Me.mnuViewSwapDataAndMetadata.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewSwapDataAndMetadata.Text = "Swap Data and Metadata"
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpHistFAQ, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.mnuHelpDataViewSpreadsheet, Me.mnuHelpMenus, Me.mnuHelpAboutR, Me.mnuHelpRPackagesCommands, Me.mnuHelpDataset, Me.ToolStripSeparator29, Me.mnuHelpGuide, Me.mnuHelpAboutRInstat, Me.mnuHelpLicence, Me.mnuHelpAcknowledgments})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpFAQ, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.mnuHelpMenus, Me.mnuHelpAboutR, Me.mnuHelpLearningStatistics, Me.mnuHelpRPackages, Me.mnuHelpGlossary, Me.mnuHelpData, Me.mnuHelpLicence, Me.ToolStripSeparator29, Me.mnuHelpPackagesDocumentation})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(44, 22)
         Me.mnuHelp.Tag = "Help"
@@ -1552,113 +1557,87 @@ Partial Class frmMain
         'mnuHelpHelpIntroduction
         '
         Me.mnuHelpHelpIntroduction.Name = "mnuHelpHelpIntroduction"
-        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(230, 22)
+        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpHelpIntroduction.Text = "Introduction"
         '
-        'mnuHelpHistFAQ
+        'mnuHelpFAQ
         '
-        Me.mnuHelpHistFAQ.Name = "mnuHelpHistFAQ"
-        Me.mnuHelpHistFAQ.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpHistFAQ.Text = "History and FAQ"
+        Me.mnuHelpFAQ.Name = "mnuHelpFAQ"
+        Me.mnuHelpFAQ.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpFAQ.Text = "FAQ"
         '
         'mnuHelpGetingStarted
         '
         Me.mnuHelpGetingStarted.Name = "mnuHelpGetingStarted"
-        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(230, 22)
+        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpGetingStarted.Text = "Getting Started"
         '
         'ToolStripSeparator28
         '
         Me.ToolStripSeparator28.Name = "ToolStripSeparator28"
-        Me.ToolStripSeparator28.Size = New System.Drawing.Size(227, 6)
+        Me.ToolStripSeparator28.Size = New System.Drawing.Size(206, 6)
         '
         'mnuHelpWindows
         '
         Me.mnuHelpWindows.Name = "mnuHelpWindows"
-        Me.mnuHelpWindows.Size = New System.Drawing.Size(230, 22)
+        Me.mnuHelpWindows.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpWindows.Text = "Windows"
-        '
-        'mnuHelpDataViewSpreadsheet
-        '
-        Me.mnuHelpDataViewSpreadsheet.Name = "mnuHelpDataViewSpreadsheet"
-        Me.mnuHelpDataViewSpreadsheet.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpDataViewSpreadsheet.Text = "Data View (Spreadsheet)"
         '
         'mnuHelpMenus
         '
         Me.mnuHelpMenus.Name = "mnuHelpMenus"
-        Me.mnuHelpMenus.Size = New System.Drawing.Size(230, 22)
+        Me.mnuHelpMenus.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpMenus.Text = "Menus and Dialogs"
         '
         'mnuHelpAboutR
         '
         Me.mnuHelpAboutR.Name = "mnuHelpAboutR"
-        Me.mnuHelpAboutR.Size = New System.Drawing.Size(230, 22)
+        Me.mnuHelpAboutR.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpAboutR.Text = "About R"
+        Me.mnuHelpAboutR.Visible = False
         '
-        'mnuHelpRPackagesCommands
+        'mnuHelpLearningStatistics
         '
-        Me.mnuHelpRPackagesCommands.Name = "mnuHelpRPackagesCommands"
-        Me.mnuHelpRPackagesCommands.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpRPackagesCommands.Text = "R Packages and Commands..."
+        Me.mnuHelpLearningStatistics.Name = "mnuHelpLearningStatistics"
+        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpLearningStatistics.Text = "Learning Statistics"
+        Me.mnuHelpLearningStatistics.Visible = False
         '
-        'mnuHelpDataset
+        'mnuHelpRPackages
         '
-        Me.mnuHelpDataset.Name = "mnuHelpDataset"
-        Me.mnuHelpDataset.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpDataset.Text = "Datasets"
+        Me.mnuHelpRPackages.Name = "mnuHelpRPackages"
+        Me.mnuHelpRPackages.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpRPackages.Text = "R Packages"
         '
-        'ToolStripSeparator29
+        'mnuHelpGlossary
         '
-        Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
-        Me.ToolStripSeparator29.Size = New System.Drawing.Size(227, 6)
+        Me.mnuHelpGlossary.Name = "mnuHelpGlossary"
+        Me.mnuHelpGlossary.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpGlossary.Text = "Glossary"
         '
-        'mnuHelpGuide
+        'mnuHelpData
         '
-        Me.mnuHelpGuide.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpGuidesCaseStudy, Me.mnuHelpGuideGlosary, Me.mnuhelpGuidesMore})
-        Me.mnuHelpGuide.Name = "mnuHelpGuide"
-        Me.mnuHelpGuide.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpGuide.Text = "Guides"
-        '
-        'mnuHelpGuidesCaseStudy
-        '
-        Me.mnuHelpGuidesCaseStudy.Name = "mnuHelpGuidesCaseStudy"
-        Me.mnuHelpGuidesCaseStudy.Size = New System.Drawing.Size(166, 22)
-        Me.mnuHelpGuidesCaseStudy.Text = "Case Study Guide"
-        '
-        'mnuHelpGuideGlosary
-        '
-        Me.mnuHelpGuideGlosary.Name = "mnuHelpGuideGlosary"
-        Me.mnuHelpGuideGlosary.Size = New System.Drawing.Size(166, 22)
-        Me.mnuHelpGuideGlosary.Text = "Glossary"
-        '
-        'mnuhelpGuidesMore
-        '
-        Me.mnuhelpGuidesMore.Enabled = False
-        Me.mnuhelpGuidesMore.Name = "mnuhelpGuidesMore"
-        Me.mnuhelpGuidesMore.Size = New System.Drawing.Size(166, 22)
-        Me.mnuhelpGuidesMore.Text = "More..."
-        '
-        'mnuHelpAboutRInstat
-        '
-        Me.mnuHelpAboutRInstat.Enabled = False
-        Me.mnuHelpAboutRInstat.Name = "mnuHelpAboutRInstat"
-        Me.mnuHelpAboutRInstat.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpAboutRInstat.Tag = "About_R-Instat"
-        Me.mnuHelpAboutRInstat.Text = "About R-Instat"
+        Me.mnuHelpData.Name = "mnuHelpData"
+        Me.mnuHelpData.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpData.Text = "Data"
         '
         'mnuHelpLicence
         '
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(230, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
-        Me.mnuHelpLicence.Text = "Licence..."
+        Me.mnuHelpLicence.Text = "Licence"
         '
-        'mnuHelpAcknowledgments
+        'ToolStripSeparator29
         '
-        Me.mnuHelpAcknowledgments.Name = "mnuHelpAcknowledgments"
-        Me.mnuHelpAcknowledgments.Size = New System.Drawing.Size(230, 22)
-        Me.mnuHelpAcknowledgments.Text = "Acknowledgements"
+        Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
+        Me.ToolStripSeparator29.Size = New System.Drawing.Size(206, 6)
+        '
+        'mnuHelpPackagesDocumentation
+        '
+        Me.mnuHelpPackagesDocumentation.Name = "mnuHelpPackagesDocumentation"
+        Me.mnuHelpPackagesDocumentation.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpPackagesDocumentation.Text = "Packages Documentation"
         '
         'ToolStripSeparator16
         '
@@ -1742,11 +1721,9 @@ Partial Class frmMain
         '
         'mnuClimaticFileExportToClimsoft
         '
-        Me.mnuClimaticFileExportToClimsoft.Enabled = False
         Me.mnuClimaticFileExportToClimsoft.Name = "mnuClimaticFileExportToClimsoft"
         Me.mnuClimaticFileExportToClimsoft.Size = New System.Drawing.Size(282, 22)
         Me.mnuClimaticFileExportToClimsoft.Text = "Export to Climsoft..."
-        Me.mnuClimaticFileExportToClimsoft.Visible = False
         '
         'mnuClimaticFileExportToCPT
         '
@@ -5137,7 +5114,9 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat "
+        Me.Text = "R-Instat  " + My.Application.Info.Version.Major.ToString + "." +
+                My.Application.Info.Version.Minor.ToString + "." +
+                My.Application.Info.Version.Build.ToString
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5350,7 +5329,6 @@ Partial Class frmMain
     Friend WithEvents mnuViewOutputWindow As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator22 As ToolStripSeparator
     Friend WithEvents mnuModelOtherOneVariableGoodnessofFit As ToolStripMenuItem
-    Friend WithEvents mnuHelpAboutRInstat As ToolStripMenuItem
     Friend WithEvents mnuHelpLicence As ToolStripMenuItem
     Friend WithEvents mnuToolsCheckForUpdates As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
@@ -5439,18 +5417,14 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCheckDataImportOpenRefine As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents mnuHelpHelpIntroduction As ToolStripMenuItem
-    Friend WithEvents mnuHelpHistFAQ As ToolStripMenuItem
+    Friend WithEvents mnuHelpFAQ As ToolStripMenuItem
     Friend WithEvents mnuHelpGetingStarted As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator28 As ToolStripSeparator
     Friend WithEvents mnuHelpMenus As ToolStripMenuItem
     Friend WithEvents mnuHelpAboutR As ToolStripMenuItem
-    Friend WithEvents mnuHelpRPackagesCommands As ToolStripMenuItem
-    Friend WithEvents mnuHelpDataset As ToolStripMenuItem
+    Friend WithEvents mnuHelpRPackages As ToolStripMenuItem
+    Friend WithEvents mnuHelpData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator29 As ToolStripSeparator
-    Friend WithEvents mnuHelpGuide As ToolStripMenuItem
-    Friend WithEvents mnuHelpGuidesCaseStudy As ToolStripMenuItem
-    Friend WithEvents mnuHelpGuideGlosary As ToolStripMenuItem
-    Friend WithEvents mnuhelpGuidesMore As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileExportToCPT As ToolStripMenuItem
     Friend WithEvents mnuClimateFileImportfromClimSoft As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportfromCliData As ToolStripMenuItem
@@ -5628,7 +5602,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareConversions As ToolStripMenuItem
-    Friend WithEvents mnuHelpAcknowledgments As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategorical As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeNumeric As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategoricalOneVarFreq As ToolStripMenuItem
@@ -5650,7 +5623,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator51 As ToolStripSeparator
     Friend WithEvents mnuClimaticMapping As ToolStripMenuItem
     Friend WithEvents mnuHelpWindows As ToolStripMenuItem
-    Friend WithEvents mnuHelpDataViewSpreadsheet As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineDuplicateRows As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineOneVariableFrequencies As ToolStripMenuItem
@@ -5822,4 +5794,8 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnTextSearch As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificTables As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As ToolStripSeparator
+    Friend WithEvents mnuHelpLearningStatistics As ToolStripMenuItem
+    Friend WithEvents mnuHelpGlossary As ToolStripMenuItem
+    Friend WithEvents mnuHelpPackagesDocumentation As ToolStripMenuItem
+    Friend WithEvents mnuDescribeUseTable As ToolStripMenuItem
 End Class
