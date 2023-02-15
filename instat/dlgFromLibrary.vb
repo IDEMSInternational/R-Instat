@@ -233,7 +233,6 @@ Public Class dlgFromLibrary
         Dim strPackage As String = ucrInputPackages.cboInput.SelectedItem
 
         Dim strTempFile As String = String.Concat(strTopic, ".html")
-        Dim strTempPath As String = "C:\Program Files\R-Instat\0.7.8\static"
         Dim strRLibrary As String = "\R\library\datasets\html\"
         Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
 
