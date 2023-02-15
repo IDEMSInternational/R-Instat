@@ -330,7 +330,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListMissing, "add the option to omit missing values in the summaries")
         ttCalculator.SetToolTip(cmdListMean, "the average, usually sum/length. So mean(c(1,2,3,4,10)) = 4")
         ttCalculator.SetToolTip(cmdListMedian, "the value halfway up the values in order. So median(c(1,2,3,4,10) = 3")
-        ttCalculator.SetToolTip(cmdListMode, "the most popular value. So mode(c(10,2,2,3,3) = 2 and 3")
+        ttCalculator.SetToolTip(cmdListMode, "the most popular value(s). So mode(c(10,2,2,3,3) = 2 and 3")
         ttCalculator.SetToolTip(cmdListMode1, "the first mode. So mode1(c(10,2,2,3,3)) = 2")
         ttCalculator.SetToolTip(cmdListDigitsum, "calculates digit sum of x. For example, DigitSum(12344)= 14")
         ttCalculator.SetToolTip(cmdListVar, "the variance. The average of the squared deviations from the mean - dividing by (n-1)")
