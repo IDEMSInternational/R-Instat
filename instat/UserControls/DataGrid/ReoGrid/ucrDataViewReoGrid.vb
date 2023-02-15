@@ -105,13 +105,13 @@ Public Class ucrDataViewReoGrid
         End If
     End Function
 
-    Public Sub SearchInGrid(strPattern As String) Implements IDataViewGrid.SearchInGrid
+    Public Sub SearchInGrid(strPattern As String, strColumn As String) Implements IDataViewGrid.SearchInGrid
         Dim iSearch As Integer = 0
-
+        Dim iColIndex As Integer = GetColumnIndex(strColumn)
         Dim currSheet = grdData.CurrentWorksheet
-        Dim addressList As New List(Of Tuple(Of Integer, Integer))
+
         currSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
-                                                                             If CStr(cell.Data).Contains(strPattern) Then
+                                                                             If CStr(cell.Data).Contains(strPattern) AndAlso col = iColIndex Then
                                                                                  If iSearch = 0 Then
                                                                                      currSheet.FocusPos = cell.Position
                                                                                  End If
@@ -121,6 +121,18 @@ Public Class ucrDataViewReoGrid
                                                                              Return True
                                                                          End Function)
     End Sub
+
+    Private Function GetColumnIndex(strColName As String) As Integer
+        If grdData.CurrentWorksheet IsNot Nothing Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.Columns - 1
+                Dim strCol As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
+                If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
