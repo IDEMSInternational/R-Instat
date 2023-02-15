@@ -720,6 +720,7 @@ Public Class dlgBarAndPieChart
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
+
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
         openSdgLayerOptions(clsRgeomBarFunction1)
     End Sub
