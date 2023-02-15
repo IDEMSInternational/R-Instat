@@ -330,7 +330,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListMissing, "add the option to omit missing values in the summaries")
         ttCalculator.SetToolTip(cmdListMean, "the average, usually sum/length. So mean(c(1,2,3,4,10)) = 4")
         ttCalculator.SetToolTip(cmdListMedian, "the value halfway up the values in order. So median(c(1,2,3,4,10) = 3")
-        ttCalculator.SetToolTip(cmdListMode, "the most popular value(s). So mode(c(10,2,2,3,3) = 2 and 3")
+        ttCalculator.SetToolTip(cmdListMode, "the most popular value. So mode(c(10,2,2,3,3) = 2 and 3")
         ttCalculator.SetToolTip(cmdListMode1, "the first mode. So mode1(c(10,2,2,3,3)) = 2")
         ttCalculator.SetToolTip(cmdListDigitsum, "calculates digit sum of x. For example, DigitSum(12344)= 14")
         ttCalculator.SetToolTip(cmdListVar, "the variance. The average of the squared deviations from the mean - dividing by (n-1)")
@@ -348,8 +348,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListLast, "the last value in each list.")
         ttCalculator.SetToolTip(cmdListNth, "the nth value in each list, (default = 2, the second value).")
         ttCalculator.SetToolTip(cmdListQuantile, "default is 20%, 50% (median) and 80% of each list.")
-        ttCalculator.SetToolTip(cmdListRound, "replace by round the numbers in each list, with default of 3 decimals (change round to signif for significant figures).")
-        ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals places.")
+        ttCalculator.SetToolTip(cmdListRound, "replaces by round, the numbers in each list, with default of 3 decimals (change round to signif for significant figures).")
+        ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals.")
         ttCalculator.SetToolTip(cmdListSQRT, "square root each number in the list. (Change sqrt to abs, log, exp, sin, etc for other functions).")
         ttCalculator.SetToolTip(cmdListSort, "sort values into ascending order.  (Change FALSE to TRUE for descending).")
         ttCalculator.SetToolTip(cmdListRank, "ranks of values with average for tied values.")
@@ -367,7 +367,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListOperator, "gives TRUE or FALSE depending on the condition.  (Use >=, <, <=, ==, != as well).")
         ttCalculator.SetToolTip(cmdListDuplicated, "gives TRUE for any duplicates and FALSE otherwise.")
         ttCalculator.SetToolTip(cmdListFivenum, "gives the same summaries as the boxplot, so minimum, lower and upper hinges (roughly the quartiles), median, and maximum.")
-        ttCalculator.SetToolTip(cmdListSumd, "gives the sum of the digit sums (e.g. for 34, 27 = 7 + 9 = 16).")
+        ttCalculator.SetToolTip(cmdListSumd, "gives the sum of the digit sums (e.g. for 34, 27 + 7 = 9 + 16).")
 
     End Sub
 
@@ -5142,7 +5142,6 @@ Public Class ucrCalculator
     Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
-
     Private Sub cmdListLength_Click(sender As Object, e As EventArgs) Handles cmdListLength.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,length)", 9)
     End Sub
