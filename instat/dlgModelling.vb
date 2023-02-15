@@ -582,15 +582,18 @@ Public Class dlgModelling
 
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        Dim strPackageName As String
-
-        strPackageName = ucrInputComboRPackage.GetText
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        Dim strPackageName As String = ucrInputComboRPackage.GetText
+        Dim strPath As String = "C:\Program Files\R-Instat\0.7.8\static\R\library\" & strPackageName & "\html\00Index.html"
+        If System.IO.File.Exists(strPath) Then
+            frmMaximiseOutput.Show(strPath)
+        Else
+            Dim clsHelp As New RFunction
+            clsHelp.SetPackageName("utils")
+            clsHelp.SetRCommand("help")
+            clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+            clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        End If
     End Sub
 
     Private Sub Clear()
