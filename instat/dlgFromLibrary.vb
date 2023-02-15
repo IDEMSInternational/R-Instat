@@ -242,8 +242,9 @@ Public Class dlgFromLibrary
             strHelpPath = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
         End If
 
-        'use this line to test in the development mode
-        'strHelpPath = String.Concat(strTempPath, strRLibrary, strTempFile)
+        'if you wish to test this in the development environment, then uncomment line below
+        '(you may need to change the path or version number)
+        'strHelpPath = String.Concat("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strTempFile)
 
         If System.IO.File.Exists(strHelpPath) Then
             frmMaximiseOutput.Show(strHelpPath)
