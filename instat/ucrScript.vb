@@ -73,7 +73,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub addTab()
-        clsScriptActive = newScriptEditor()
+        clsScriptActive = NewScriptEditor()
         SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
@@ -108,7 +108,7 @@ Public Class ucrScript
         mnuCopy.Enabled = bScriptselected
         mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
         mnuSelectAll.Enabled = bScriptExists
-        mnuClearContents.Enabled = bScriptExists
+        mnuClear.Enabled = bScriptExists
 
         mnuRunCurrentLineSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
@@ -118,6 +118,7 @@ Public Class ucrScript
 
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
+        cmdSave.Enabled = bScriptExists
         cmdClear.Enabled = bScriptExists
 
         cmdRemoveTab.Enabled = TabControl.TabCount > 1
@@ -290,7 +291,7 @@ Public Class ucrScript
         Return charNew = """" OrElse charNew = "'"
     End Function
 
-    Private Function newScriptEditor() As Scintilla
+    Private Function NewScriptEditor() As Scintilla
         Dim clsNewScript As Scintilla = New Scintilla With {
             .ContextMenuStrip = mnuContextScript,
             .Dock = DockStyle.Fill,
@@ -441,7 +442,7 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click, cmdClear.Click
+    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClear.Click, cmdClear.Click
         If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
                                vbYesNo, "Clear") = vbNo Then
@@ -471,7 +472,7 @@ Public Class ucrScript
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
-    Private Sub mnuLoadScriptFromFile_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
+    Private Sub LoadScript()
         If clsScriptActive.TextLength > 0 _
                 AndAlso MsgBox("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
@@ -498,6 +499,15 @@ Public Class ucrScript
                        vbExclamation, "Load Script")
             End Try
         End Using
+
+    End Sub
+
+    Private Sub mnuLoadScript_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
+        LoadScript()
+    End Sub
+
+    Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
+        LoadScript()
     End Sub
 
     Private Sub mnuOpenScriptasFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
@@ -553,7 +563,7 @@ Public Class ucrScript
         EnableRunButtons(True)
     End Sub
 
-    Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
+    Private Sub SaveScript()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Script To File"
             dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
@@ -570,6 +580,14 @@ Public Class ucrScript
                 End Try
             End If
         End Using
+    End Sub
+
+    Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
+        SaveScript()
+    End Sub
+
+    Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
+        SaveScript()
     End Sub
 
     Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
