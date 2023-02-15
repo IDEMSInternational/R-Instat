@@ -36,6 +36,9 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub InitialiseDialog()
         ucrReceiverVariable.Selector = ucrSelectorFind
+
+        ucrPnlOptions.AddRadioButton(rdoVariable, True)
+        ucrPnlOptions.AddRadioButton(rdoInFilter, False)
     End Sub
 
     Private Sub SetDefaults()
@@ -44,7 +47,7 @@ Public Class dlgFindInVariableOrFilter
 
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()

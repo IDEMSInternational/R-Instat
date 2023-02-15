@@ -29,6 +29,9 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoInFilter = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'ucrInputPattern
@@ -40,7 +43,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrInputPattern.Location = New System.Drawing.Point(427, 204)
         Me.ucrInputPattern.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputPattern.Size = New System.Drawing.Size(180, 32)
         Me.ucrInputPattern.TabIndex = 1
         '
         'cmdFind
@@ -105,12 +108,60 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 13
         '
+        'rdoVariable
+        '
+        Me.rdoVariable.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoVariable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoVariable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVariable.FlatAppearance.BorderSize = 2
+        Me.rdoVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoVariable.Location = New System.Drawing.Point(130, 13)
+        Me.rdoVariable.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoVariable.Name = "rdoVariable"
+        Me.rdoVariable.Size = New System.Drawing.Size(202, 40)
+        Me.rdoVariable.TabIndex = 25
+        Me.rdoVariable.Text = "Variable"
+        Me.rdoVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoVariable.UseVisualStyleBackColor = True
+        '
+        'rdoInFilter
+        '
+        Me.rdoInFilter.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoInFilter.Enabled = False
+        Me.rdoInFilter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoInFilter.FlatAppearance.BorderSize = 2
+        Me.rdoInFilter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoInFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoInFilter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoInFilter.Location = New System.Drawing.Point(329, 13)
+        Me.rdoInFilter.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoInFilter.Name = "rdoInFilter"
+        Me.rdoInFilter.Size = New System.Drawing.Size(202, 40)
+        Me.rdoInFilter.TabIndex = 24
+        Me.rdoInFilter.Text = "In Filter"
+        Me.rdoInFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoInFilter.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(122, 11)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(417, 52)
+        Me.ucrPnlOptions.TabIndex = 26
+        '
         'dlgFindInVariableOrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(665, 442)
+        Me.ClientSize = New System.Drawing.Size(640, 442)
+        Me.Controls.Add(Me.rdoVariable)
+        Me.Controls.Add(Me.rdoInFilter)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorFind)
         Me.Controls.Add(Me.ucrReceiverVariable)
@@ -134,4 +185,7 @@ Partial Class dlgFindInVariableOrFilter
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents ucrSelectorFind As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents rdoVariable As RadioButton
+    Friend WithEvents rdoInFilter As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class
