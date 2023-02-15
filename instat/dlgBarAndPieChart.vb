@@ -102,7 +102,6 @@ Public Class dlgBarAndPieChart
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
-        'ChangeButtonsText()
     End Sub
 
     Private Sub InitialiseDialog()
