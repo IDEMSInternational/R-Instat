@@ -230,20 +230,30 @@ Public Class dlgFromLibrary
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim strTopic As String = lstCollection.SelectedItems(0).Text
-        Dim strPath As String = "C:\Program Files\R-Instat\0.7.8\static\R\library\datasets\html\" & strTopic & ".html"
         Dim strPackage As String = ucrInputPackages.cboInput.SelectedItem
+
+        Dim strTempFile As String = String.Concat(strTopic, ".html")
+        Dim strTempPath As String = "C:\Program Files\R-Instat\0.7.8\static"
+        Dim strRLibrary As String = "\R\library\datasets\html\"
+        Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
+
         If strPackage <> "datasets" Then
-            strPath = "C:\Program Files\R-Instat\0.7.8\static\R\library\" & strPackage & "\html\" & "00Index.html"
+            strTempFile = "00Index.html"
+            strRLibrary = String.Concat("\R\library\", strPackage, "\html\")
+            strHelpPath = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
         End If
 
-        If System.IO.File.Exists(strPath) Then
-            frmMaximiseOutput.Show(strPath)
+        'use this line to test in the development mode
+        'strHelpPath = String.Concat(strTempPath, strRLibrary, strTempFile)
+
+        If System.IO.File.Exists(strHelpPath) Then
+            frmMaximiseOutput.Show(strHelpPath)
         Else
             Dim clsHelp As New RFunction
             clsHelp.SetPackageName("utils")
             clsHelp.SetRCommand("help")
-            clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
-            clsHelp.AddParameter("package", Chr(34) & ucrInputPackages.cboInput.SelectedItem & Chr(34))
+            clsHelp.AddParameter("topic", Chr(34) & strTopic & Chr(34))
+            clsHelp.AddParameter("package", Chr(34) & strPackage & Chr(34))
             clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
             frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset. Generated from dialog Open Dataset from Library", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
         End If

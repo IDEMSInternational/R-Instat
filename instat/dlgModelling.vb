@@ -583,9 +583,16 @@ Public Class dlgModelling
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim strPackageName As String = ucrInputComboRPackage.GetText
-        Dim strPath As String = "C:\Program Files\R-Instat\0.7.8\static\R\library\" & strPackageName & "\html\00Index.html"
-        If System.IO.File.Exists(strPath) Then
-            frmMaximiseOutput.Show(strPath)
+        Dim strTempFile As String = "\html\00Index.html"
+        Dim strTempPath As String = "C:\Program Files\R-Instat\0.7.8\static"
+        Dim strRLibrary As String = "\R\library\"
+        Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strPackageName, strTempFile)
+
+        'use this line to test in the development mode
+        'strHelpPath = String.Concat(strTempPath, strRLibrary, strPackageName, strTempFile)
+
+        If System.IO.File.Exists(strHelpPath) Then
+            frmMaximiseOutput.Show(strHelpPath)
         Else
             Dim clsHelp As New RFunction
             clsHelp.SetPackageName("utils")
