@@ -399,7 +399,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListOperator, "gives TRUE or FALSE depending on the condition.  (Use >=, <, <=, ==, != as well).")
         ttCalculator.SetToolTip(cmdListDuplicated, "gives TRUE for any duplicates and FALSE otherwise.")
         ttCalculator.SetToolTip(cmdListFivenum, "gives the same summaries as the boxplot, so minimum, lower and upper hinges (roughly the quartiles), median, and maximum.")
-        ttCalculator.SetToolTip(cmdListSumd, "gives the sum of the digit sums (e.g. for 34, 27 + 7 = 9 + 16).")
+        ttCalculator.SetToolTip(cmdListSumd, "gives the sum of the digit sums (e.g. for 34, 27 = 7 + 9 = 16).")
 
     End Sub
 
