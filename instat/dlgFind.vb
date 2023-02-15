@@ -22,21 +22,21 @@ Public Class dlgFind
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 406
     End Sub
-    Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
+    Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
 
-        Select Case currWindow.Name
-            Case "frmLog"
-                searchTextBox(frmLog.txtLog, targetPos)
+        'Select Case currWindow.Name
+        '    Case "frmLog"
+        '        searchTextBox(frmLog.txtLog, targetPos)
 
-            Case "frmCommand"
-                searchTextBox(frmCommand.txtCommand, targetPos)
+        '    Case "frmCommand"
+        '        searchTextBox(frmCommand.txtCommand, targetPos)
 
-            Case "frmEditor"
-                searchDataView(targetPos)
+        '    Case "frmEditor"
+        '        searchDataView(targetPos)
 
-            Case Nothing
-                Exit Sub
-        End Select
+        '    Case Nothing
+        '        Exit Sub
+        'End Select
     End Sub
 
     Private Sub dlgFind_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -48,7 +48,7 @@ Public Class dlgFind
             TestEnabled()
         Else
             cmdFindAll.Enabled = False
-            cmdFindNext.Enabled = False
+            cmdFind.Enabled = False
         End If
         targetPos = 0
     End Sub
@@ -100,12 +100,12 @@ Public Class dlgFind
 
     Private Sub TestEnabled()
         If currWindow.Name = "frmEditor" Then
-            cmdFindNext.Enabled = True
-            Me.AcceptButton = cmdFindNext
+            cmdFind.Enabled = True
+            Me.AcceptButton = cmdFind
             cmdFindAll.Enabled = False
         ElseIf currWindow.Name = "frmCommand" Or currWindow.Name = "frmLog" Then
-            cmdFindNext.Enabled = True
-            Me.AcceptButton = cmdFindNext
+            cmdFind.Enabled = True
+            Me.AcceptButton = cmdFind
             cmdFindAll.Enabled = False
         End If
     End Sub

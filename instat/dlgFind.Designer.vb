@@ -38,7 +38,7 @@ Partial Class dlgFind
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cmdFindNext = New System.Windows.Forms.Button()
+        Me.cmdFind = New System.Windows.Forms.Button()
         Me.cmdReplace = New System.Windows.Forms.Button()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.chkSearchToEndOnly = New System.Windows.Forms.CheckBox()
@@ -50,22 +50,24 @@ Partial Class dlgFind
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'cmdFindNext
+        'cmdFind
         '
-        Me.cmdFindNext.Location = New System.Drawing.Point(268, 39)
-        Me.cmdFindNext.Name = "cmdFindNext"
-        Me.cmdFindNext.Size = New System.Drawing.Size(75, 23)
-        Me.cmdFindNext.TabIndex = 1
-        Me.cmdFindNext.Tag = "Find_next"
-        Me.cmdFindNext.Text = "Find next"
-        Me.cmdFindNext.UseVisualStyleBackColor = True
+        Me.cmdFind.Location = New System.Drawing.Point(402, 58)
+        Me.cmdFind.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdFind.Name = "cmdFind"
+        Me.cmdFind.Size = New System.Drawing.Size(112, 34)
+        Me.cmdFind.TabIndex = 1
+        Me.cmdFind.Tag = "Find_next"
+        Me.cmdFind.Text = "Find"
+        Me.cmdFind.UseVisualStyleBackColor = True
         '
         'cmdReplace
         '
         Me.cmdReplace.Enabled = False
-        Me.cmdReplace.Location = New System.Drawing.Point(268, 102)
+        Me.cmdReplace.Location = New System.Drawing.Point(402, 153)
+        Me.cmdReplace.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdReplace.Name = "cmdReplace"
-        Me.cmdReplace.Size = New System.Drawing.Size(75, 23)
+        Me.cmdReplace.Size = New System.Drawing.Size(112, 34)
         Me.cmdReplace.TabIndex = 3
         Me.cmdReplace.Tag = "Replace"
         Me.cmdReplace.Text = "Replace"
@@ -73,9 +75,11 @@ Partial Class dlgFind
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(268, 140)
+        Me.cmdClose.Enabled = False
+        Me.cmdClose.Location = New System.Drawing.Point(402, 210)
+        Me.cmdClose.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(75, 23)
+        Me.cmdClose.Size = New System.Drawing.Size(112, 34)
         Me.cmdClose.TabIndex = 7
         Me.cmdClose.Tag = "Close"
         Me.cmdClose.Text = "Close"
@@ -85,9 +89,10 @@ Partial Class dlgFind
         '
         Me.chkSearchToEndOnly.AutoSize = True
         Me.chkSearchToEndOnly.Enabled = False
-        Me.chkSearchToEndOnly.Location = New System.Drawing.Point(13, 100)
+        Me.chkSearchToEndOnly.Location = New System.Drawing.Point(20, 150)
+        Me.chkSearchToEndOnly.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chkSearchToEndOnly.Name = "chkSearchToEndOnly"
-        Me.chkSearchToEndOnly.Size = New System.Drawing.Size(115, 17)
+        Me.chkSearchToEndOnly.Size = New System.Drawing.Size(167, 24)
         Me.chkSearchToEndOnly.TabIndex = 4
         Me.chkSearchToEndOnly.Tag = "Search_to_end_only"
         Me.chkSearchToEndOnly.Text = "Search to end only"
@@ -99,9 +104,10 @@ Partial Class dlgFind
         Me.chkMatchCase.Checked = True
         Me.chkMatchCase.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkMatchCase.Enabled = False
-        Me.chkMatchCase.Location = New System.Drawing.Point(13, 123)
+        Me.chkMatchCase.Location = New System.Drawing.Point(20, 184)
+        Me.chkMatchCase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chkMatchCase.Name = "chkMatchCase"
-        Me.chkMatchCase.Size = New System.Drawing.Size(83, 17)
+        Me.chkMatchCase.Size = New System.Drawing.Size(120, 24)
         Me.chkMatchCase.TabIndex = 5
         Me.chkMatchCase.Tag = "Match_case"
         Me.chkMatchCase.Text = "Match Case"
@@ -111,9 +117,10 @@ Partial Class dlgFind
         '
         Me.chkFindWholeWordOnly.AutoSize = True
         Me.chkFindWholeWordOnly.Enabled = False
-        Me.chkFindWholeWordOnly.Location = New System.Drawing.Point(13, 146)
+        Me.chkFindWholeWordOnly.Location = New System.Drawing.Point(20, 219)
+        Me.chkFindWholeWordOnly.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chkFindWholeWordOnly.Name = "chkFindWholeWordOnly"
-        Me.chkFindWholeWordOnly.Size = New System.Drawing.Size(125, 17)
+        Me.chkFindWholeWordOnly.Size = New System.Drawing.Size(181, 24)
         Me.chkFindWholeWordOnly.TabIndex = 6
         Me.chkFindWholeWordOnly.Tag = "Find_whole_word_only"
         Me.chkFindWholeWordOnly.Text = "Find whole word only"
@@ -122,25 +129,29 @@ Partial Class dlgFind
         'lblFindWhat
         '
         Me.lblFindWhat.AutoSize = True
-        Me.lblFindWhat.Location = New System.Drawing.Point(13, 13)
+        Me.lblFindWhat.Location = New System.Drawing.Point(20, 20)
+        Me.lblFindWhat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFindWhat.Name = "lblFindWhat"
-        Me.lblFindWhat.Size = New System.Drawing.Size(53, 13)
+        Me.lblFindWhat.Size = New System.Drawing.Size(78, 20)
         Me.lblFindWhat.TabIndex = 8
         Me.lblFindWhat.Tag = "Find_what"
         Me.lblFindWhat.Text = "Find what"
         '
         'txtFindWhat
         '
-        Me.txtFindWhat.Location = New System.Drawing.Point(83, 13)
+        Me.txtFindWhat.Location = New System.Drawing.Point(124, 20)
+        Me.txtFindWhat.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtFindWhat.Name = "txtFindWhat"
-        Me.txtFindWhat.Size = New System.Drawing.Size(161, 20)
+        Me.txtFindWhat.Size = New System.Drawing.Size(240, 26)
         Me.txtFindWhat.TabIndex = 0
         '
         'cmdFindAll
         '
-        Me.cmdFindAll.Location = New System.Drawing.Point(268, 68)
+        Me.cmdFindAll.Enabled = False
+        Me.cmdFindAll.Location = New System.Drawing.Point(402, 102)
+        Me.cmdFindAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdFindAll.Name = "cmdFindAll"
-        Me.cmdFindAll.Size = New System.Drawing.Size(75, 23)
+        Me.cmdFindAll.Size = New System.Drawing.Size(112, 34)
         Me.cmdFindAll.TabIndex = 2
         Me.cmdFindAll.Tag = "Find_zll"
         Me.cmdFindAll.Text = "Find all"
@@ -150,17 +161,18 @@ Partial Class dlgFind
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 234)
+        Me.ucrBase.Location = New System.Drawing.Point(18, 351)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 9
         '
         'dlgFind
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(420, 287)
+        Me.ClientSize = New System.Drawing.Size(630, 430)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdFindAll)
         Me.Controls.Add(Me.txtFindWhat)
@@ -170,8 +182,9 @@ Partial Class dlgFind
         Me.Controls.Add(Me.chkSearchToEndOnly)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.cmdReplace)
-        Me.Controls.Add(Me.cmdFindNext)
+        Me.Controls.Add(Me.cmdFind)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgFind"
@@ -183,7 +196,7 @@ Partial Class dlgFind
 
     End Sub
 
-    Friend WithEvents cmdFindNext As Button
+    Friend WithEvents cmdFind As Button
     Friend WithEvents cmdReplace As Button
     Friend WithEvents cmdClose As Button
     Friend WithEvents chkSearchToEndOnly As CheckBox

@@ -105,6 +105,36 @@ Public Class ucrDataViewReoGrid
         End If
     End Function
 
+    Public Sub SearchInGrid(strPattern As String)
+        Dim iSearch As Integer = 0
+        'AccountsDataGridView.ClearSelection()
+        'For Each row As   In grdData.CurrentWorksheet.Rows
+        '    For Each cell As DataGridViewCell In row.Cells
+        '        If CStr(cell.Value).Contains(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase) Then
+        '            If searchIndex = m_CurrentSearchIndex Then
+        '                'This is the cell we want to select
+        '                cell.Selected = True
+        '            End If
+        '            'Yellow background for all matches
+        '            cell.Style.BackColor = Color.Yellow
+        '            searchIndex += 1
+        '        End If
+        '    Next
+        'Next
+
+        Dim currSheet = grdData.CurrentWorksheet
+        Dim addressList As New List(Of Tuple(Of Integer, Integer))
+        currSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
+                                                                             If cell.Data.Contains(strPattern, StringComparison.OrdinalIgnoreCase) Then
+                                                                                 'addressList.Add(New Tuple(Of Integer, Integer)(cell.Row, cell.Column))
+                                                                                 ''currSheet.StartEdit(cell.Row, cell.Column)
+                                                                                 'cell.StartEdit()
+                                                                                 'Return False
+                                                                             End If
+                                                                             Return True
+                                                                         End Function)
+    End Sub
+
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
