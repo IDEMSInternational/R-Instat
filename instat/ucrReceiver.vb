@@ -130,7 +130,8 @@ Public Class ucrReceiver
 
     End Sub
 
-    Public Overridable Sub RemoveAnyVariablesNotInList(lstViewItem As ListView)
+    'This refers to the selector list of columns
+    Public Overridable Sub RemoveAnyVariablesNotInList()
 
     End Sub
 
@@ -401,22 +402,19 @@ Public Class ucrReceiver
             Case "metadata"
                 'TODO what should this be?
                 strItemsParameterNameInRFunction = ""
-            Case "graph"
-                strItemsParameterNameInRFunction = "graph_name"
-            Case "model"
-                strItemsParameterNameInRFunction = "model_name"
-            Case "surv"
-                strItemsParameterNameInRFunction = "surv_name"
-            Case "table"
-                strItemsParameterNameInRFunction = "table_name"
+            Case "object",
+                 RObjectTypeLabel.Graph,
+                 RObjectTypeLabel.Model,
+                 RObjectTypeLabel.Table,
+                 RObjectTypeLabel.Summary,
+                 RObjectTypeLabel.StructureLabel
+                strItemsParameterNameInRFunction = "object_name"
             Case "filter"
                 strItemsParameterNameInRFunction = "filter_name"
             Case "column_selection"
                 strItemsParameterNameInRFunction = "column_selection_name"
             Case "link"
                 strItemsParameterNameInRFunction = "link_name"
-            Case "object"
-                strItemsParameterNameInRFunction = "object_name"
             Case "calculation"
                 strItemsParameterNameInRFunction = "calculation_name"
         End Select

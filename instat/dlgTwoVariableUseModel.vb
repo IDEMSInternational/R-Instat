@@ -26,8 +26,6 @@ Public Class dlgTwoVariableUseModel
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReOpenDialog()
         End If
         TestOkEnabled()
         autoTranslate(Me)
@@ -53,7 +51,7 @@ Public Class dlgTwoVariableUseModel
         '  sdgSimpleRegOptions.chkFittedModel.Enabled = False
         'ucrBase.iHelpTopicID = 
         ucrBaseUseModel.clsRsyntax.SetOperation("+")
-        ucrReceiverUseModel.SetItemType("model")
+        ucrReceiverUseModel.SetItemType(RObjectTypeLabel.Model)
         ucrReceiverUseModel.Selector = ucrSelectorUseModel
         clsRCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
         ucrBaseUseModel.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRCommand)
@@ -62,16 +60,8 @@ Public Class dlgTwoVariableUseModel
         ucrReceiverUseModel.strSelectorHeading = "Models"
     End Sub
 
-    Private Sub ReOpenDialog()
-
-    End Sub
-
     Private Sub ucrBaseUseModel_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseUseModel.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrBaseUseModel_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseUseModel.ClickOk
-        'sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub TestOkEnabled()

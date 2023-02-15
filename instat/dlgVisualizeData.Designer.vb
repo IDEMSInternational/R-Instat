@@ -155,7 +155,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudAdjustSize.AutoSize = True
         Me.ucrNudAdjustSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAdjustSize.Increment = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAdjustSize.Location = New System.Drawing.Point(156, 325)
+        Me.ucrNudAdjustSize.Location = New System.Drawing.Point(235, 325)
         Me.ucrNudAdjustSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAdjustSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAdjustSize.Name = "ucrNudAdjustSize"
@@ -169,7 +169,7 @@ Partial Class dlgVisualizeData
         Me.ucrChkAdjustSize.Checked = False
         Me.ucrChkAdjustSize.Location = New System.Drawing.Point(10, 325)
         Me.ucrChkAdjustSize.Name = "ucrChkAdjustSize"
-        Me.ucrChkAdjustSize.Size = New System.Drawing.Size(130, 23)
+        Me.ucrChkAdjustSize.Size = New System.Drawing.Size(219, 23)
         Me.ucrChkAdjustSize.TabIndex = 19
         '
         'ucrNudSamplingFunction
@@ -274,7 +274,7 @@ Partial Class dlgVisualizeData
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 385)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 18
         '
         'dlgVisualizeData

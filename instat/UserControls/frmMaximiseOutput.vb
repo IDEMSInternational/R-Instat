@@ -70,7 +70,10 @@ Public Class frmMaximiseOutput
                 Return
         End Select
 
-        MyBase.Show()
+        'todo. how else can we attach the main form to have this form be displayed infront of it (top most)
+        'this is an issue when this function is called after click ok of a dialog
+        'MyBase.Show()
+        MyBase.Show(frmMain)
     End Sub
 
     Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
