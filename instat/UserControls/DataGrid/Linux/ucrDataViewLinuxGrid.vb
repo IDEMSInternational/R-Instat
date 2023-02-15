@@ -119,6 +119,9 @@ Public Class ucrDataViewLinuxGrid
         End If
     End Sub
 
+    Public Sub SearchInGrid(strPattern As String) Implements IDataViewGrid.SearchInGrid
+
+    End Sub
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
         If _currentDataFrame Is Nothing Then
             _currentDataFrame = _clsDataBook.GetDataFrame(SelectedTab)

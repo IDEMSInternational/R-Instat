@@ -104,6 +104,10 @@ Public Class ucrDataView
         _grid.UpdateAllWorksheetStyles()
     End Sub
 
+    Public Sub SearchInGrid(strPattern As String)
+        _grid.SearchInGrid(strPattern)
+    End Sub
+
     Private Sub UpdateNavigationButtons()
         lblColBack.Enabled = If(GetCurrentDataFrameFocus()?.clsVisibleDataFramePage?.CanLoadPreviousColumnPage(), False)
         lblColNext.Enabled = If(GetCurrentDataFrameFocus()?.clsVisibleDataFramePage?.CanLoadNextColumnPage(), False)

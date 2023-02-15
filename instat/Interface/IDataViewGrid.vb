@@ -37,4 +37,6 @@ Public Interface IDataViewGrid
 
     Function GetWorksheetCount() As Integer
 
+    Sub SearchInGrid(strPattern As String)
+
 End Interface
