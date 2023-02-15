@@ -549,6 +549,11 @@ Partial Class ucrCalculator
         Me.ListStatipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpList = New System.Windows.Forms.GroupBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdListDuplicated = New System.Windows.Forms.Button()
+        Me.cmdListOperator = New System.Windows.Forms.Button()
+        Me.cmdListDiv = New System.Windows.Forms.Button()
+        Me.cmdListMod = New System.Windows.Forms.Button()
+        Me.cmdListIfelse = New System.Windows.Forms.Button()
         Me.cmdListOmit = New System.Windows.Forms.Button()
         Me.cmdListRev = New System.Windows.Forms.Button()
         Me.cmdListMovsum = New System.Windows.Forms.Button()
@@ -564,7 +569,7 @@ Partial Class ucrCalculator
         Me.cmdListPercent2 = New System.Windows.Forms.Button()
         Me.cmdListPercent = New System.Windows.Forms.Button()
         Me.cmdListProportion = New System.Windows.Forms.Button()
-        Me.cmdListRound1 = New System.Windows.Forms.Button()
+        Me.cmdListRound = New System.Windows.Forms.Button()
         Me.cmdListSquare = New System.Windows.Forms.Button()
         Me.cmdListDivide = New System.Windows.Forms.Button()
         Me.cmdListMultiply = New System.Windows.Forms.Button()
@@ -603,47 +608,42 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdListDuplicated = New System.Windows.Forms.Button()
-        Me.cmdListOperator = New System.Windows.Forms.Button()
-        Me.cmdListDiv = New System.Windows.Forms.Button()
-        Me.cmdListMod = New System.Windows.Forms.Button()
-        Me.cmdListIfelse = New System.Windows.Forms.Button()
-        Me.grpBasic.SuspendLayout
-        Me.grpDates.SuspendLayout
-        Me.ContextMenuStripDate.SuspendLayout
-        Me.ContextMenuStripComplex.SuspendLayout
-        Me.grpInteger.SuspendLayout
-        Me.ContextMenuStripInteger.SuspendLayout
-        Me.grpFactor.SuspendLayout
-        Me.ContextMenuStripFactor.SuspendLayout
-        Me.grpHydroGOF.SuspendLayout
-        Me.ContextMenuStripHydroGOF.SuspendLayout
-        Me.grpWakefield.SuspendLayout
-        Me.grpMaths.SuspendLayout
-        Me.ContextMenuStripMaths.SuspendLayout
-        Me.grpSummary.SuspendLayout
-        Me.ContextMenuStripSummary.SuspendLayout
-        Me.grpFrequencies.SuspendLayout
-        Me.grpProbabilty.SuspendLayout
-        Me.ContextMenuStripProbability.SuspendLayout
-        Me.grpRandom.SuspendLayout
-        Me.grpTransform.SuspendLayout
-        Me.ContextMenuStripTransform.SuspendLayout
-        Me.grpLogical.SuspendLayout
-        Me.ContextMenuStripLogical.SuspendLayout
-        Me.grpTestString.SuspendLayout
-        Me.grpCircular.SuspendLayout
-        Me.ContextMenuStripCircular.SuspendLayout
-        Me.grpModifier.SuspendLayout
-        Me.grpSymbols.SuspendLayout
-        Me.grpComplex.SuspendLayout
-        Me.ContextMenuStripTxtString.SuspendLayout
-        Me.ContextMenuStripWakefield.SuspendLayout
-        Me.ContextMenuStripList.SuspendLayout
-        Me.grpList.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.grpMathBloc.SuspendLayout
-        Me.SuspendLayout
+        Me.grpBasic.SuspendLayout()
+        Me.grpDates.SuspendLayout()
+        Me.ContextMenuStripDate.SuspendLayout()
+        Me.ContextMenuStripComplex.SuspendLayout()
+        Me.grpInteger.SuspendLayout()
+        Me.ContextMenuStripInteger.SuspendLayout()
+        Me.grpFactor.SuspendLayout()
+        Me.ContextMenuStripFactor.SuspendLayout()
+        Me.grpHydroGOF.SuspendLayout()
+        Me.ContextMenuStripHydroGOF.SuspendLayout()
+        Me.grpWakefield.SuspendLayout()
+        Me.grpMaths.SuspendLayout()
+        Me.ContextMenuStripMaths.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
+        Me.ContextMenuStripSummary.SuspendLayout()
+        Me.grpFrequencies.SuspendLayout()
+        Me.grpProbabilty.SuspendLayout()
+        Me.ContextMenuStripProbability.SuspendLayout()
+        Me.grpRandom.SuspendLayout()
+        Me.grpTransform.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
+        Me.grpLogical.SuspendLayout()
+        Me.ContextMenuStripLogical.SuspendLayout()
+        Me.grpTestString.SuspendLayout()
+        Me.grpCircular.SuspendLayout()
+        Me.ContextMenuStripCircular.SuspendLayout()
+        Me.grpModifier.SuspendLayout()
+        Me.grpSymbols.SuspendLayout()
+        Me.grpComplex.SuspendLayout()
+        Me.ContextMenuStripTxtString.SuspendLayout()
+        Me.ContextMenuStripWakefield.SuspendLayout()
+        Me.ContextMenuStripList.SuspendLayout()
+        Me.grpList.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpMathBloc.SuspendLayout()
+        Me.SuspendLayout()
         '
         'lblExpression
         '
@@ -6528,6 +6528,66 @@ Partial Class ucrCalculator
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Transform"
         '
+        'cmdListDuplicated
+        '
+        Me.cmdListDuplicated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListDuplicated.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListDuplicated.Location = New System.Drawing.Point(241, 72)
+        Me.cmdListDuplicated.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListDuplicated.Name = "cmdListDuplicated"
+        Me.cmdListDuplicated.Size = New System.Drawing.Size(65, 30)
+        Me.cmdListDuplicated.TabIndex = 186
+        Me.cmdListDuplicated.Text = "duplicated"
+        Me.cmdListDuplicated.UseVisualStyleBackColor = True
+        '
+        'cmdListOperator
+        '
+        Me.cmdListOperator.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListOperator.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListOperator.Location = New System.Drawing.Point(186, 72)
+        Me.cmdListOperator.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListOperator.Name = "cmdListOperator"
+        Me.cmdListOperator.Size = New System.Drawing.Size(56, 30)
+        Me.cmdListOperator.TabIndex = 185
+        Me.cmdListOperator.Text = ">"
+        Me.cmdListOperator.UseVisualStyleBackColor = True
+        '
+        'cmdListDiv
+        '
+        Me.cmdListDiv.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListDiv.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListDiv.Location = New System.Drawing.Point(127, 72)
+        Me.cmdListDiv.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListDiv.Name = "cmdListDiv"
+        Me.cmdListDiv.Size = New System.Drawing.Size(60, 30)
+        Me.cmdListDiv.TabIndex = 184
+        Me.cmdListDiv.Text = "div (%/%)"
+        Me.cmdListDiv.UseVisualStyleBackColor = True
+        '
+        'cmdListMod
+        '
+        Me.cmdListMod.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListMod.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListMod.Location = New System.Drawing.Point(57, 72)
+        Me.cmdListMod.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListMod.Name = "cmdListMod"
+        Me.cmdListMod.Size = New System.Drawing.Size(71, 30)
+        Me.cmdListMod.TabIndex = 183
+        Me.cmdListMod.Text = "mod (%%)"
+        Me.cmdListMod.UseVisualStyleBackColor = True
+        '
+        'cmdListIfelse
+        '
+        Me.cmdListIfelse.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListIfelse.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListIfelse.Location = New System.Drawing.Point(1, 72)
+        Me.cmdListIfelse.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListIfelse.Name = "cmdListIfelse"
+        Me.cmdListIfelse.Size = New System.Drawing.Size(57, 30)
+        Me.cmdListIfelse.TabIndex = 182
+        Me.cmdListIfelse.Text = "ifelse"
+        Me.cmdListIfelse.UseVisualStyleBackColor = True
+        '
         'cmdListOmit
         '
         Me.cmdListOmit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -6654,7 +6714,7 @@ Partial Class ucrCalculator
         Me.grpMathBloc.Controls.Add(Me.cmdListPercent2)
         Me.grpMathBloc.Controls.Add(Me.cmdListPercent)
         Me.grpMathBloc.Controls.Add(Me.cmdListProportion)
-        Me.grpMathBloc.Controls.Add(Me.cmdListRound1)
+        Me.grpMathBloc.Controls.Add(Me.cmdListRound)
         Me.grpMathBloc.Controls.Add(Me.cmdListSquare)
         Me.grpMathBloc.Controls.Add(Me.cmdListDivide)
         Me.grpMathBloc.Controls.Add(Me.cmdListMultiply)
@@ -6715,17 +6775,17 @@ Partial Class ucrCalculator
         Me.cmdListProportion.Text = "proportion"
         Me.cmdListProportion.UseVisualStyleBackColor = True
         '
-        'cmdListRound1
+        'cmdListRound
         '
-        Me.cmdListRound1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdListRound1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListRound1.Location = New System.Drawing.Point(1, 43)
-        Me.cmdListRound1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdListRound1.Name = "cmdListRound1"
-        Me.cmdListRound1.Size = New System.Drawing.Size(57, 30)
-        Me.cmdListRound1.TabIndex = 177
-        Me.cmdListRound1.Text = "round"
-        Me.cmdListRound1.UseVisualStyleBackColor = True
+        Me.cmdListRound.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdListRound.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdListRound.Location = New System.Drawing.Point(1, 43)
+        Me.cmdListRound.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdListRound.Name = "cmdListRound"
+        Me.cmdListRound.Size = New System.Drawing.Size(57, 30)
+        Me.cmdListRound.TabIndex = 177
+        Me.cmdListRound.Text = "round"
+        Me.cmdListRound.UseVisualStyleBackColor = True
         '
         'cmdListSquare
         '
@@ -7179,66 +7239,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdListDuplicated
-        '
-        Me.cmdListDuplicated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdListDuplicated.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListDuplicated.Location = New System.Drawing.Point(241, 72)
-        Me.cmdListDuplicated.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdListDuplicated.Name = "cmdListDuplicated"
-        Me.cmdListDuplicated.Size = New System.Drawing.Size(65, 30)
-        Me.cmdListDuplicated.TabIndex = 186
-        Me.cmdListDuplicated.Text = "duplicated"
-        Me.cmdListDuplicated.UseVisualStyleBackColor = True
-        '
-        'cmdListOperator
-        '
-        Me.cmdListOperator.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdListOperator.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListOperator.Location = New System.Drawing.Point(186, 72)
-        Me.cmdListOperator.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdListOperator.Name = "cmdListOperator"
-        Me.cmdListOperator.Size = New System.Drawing.Size(56, 30)
-        Me.cmdListOperator.TabIndex = 185
-        Me.cmdListOperator.Text = ">"
-        Me.cmdListOperator.UseVisualStyleBackColor = True
-        '
-        'cmdListDiv
-        '
-        Me.cmdListDiv.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdListDiv.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListDiv.Location = New System.Drawing.Point(127, 72)
-        Me.cmdListDiv.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdListDiv.Name = "cmdListDiv"
-        Me.cmdListDiv.Size = New System.Drawing.Size(60, 30)
-        Me.cmdListDiv.TabIndex = 184
-        Me.cmdListDiv.Text = "div (%/%)"
-        Me.cmdListDiv.UseVisualStyleBackColor = True
-        '
-        'cmdListMod
-        '
-        Me.cmdListMod.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdListMod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListMod.Location = New System.Drawing.Point(57, 72)
-        Me.cmdListMod.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdListMod.Name = "cmdListMod"
-        Me.cmdListMod.Size = New System.Drawing.Size(71, 30)
-        Me.cmdListMod.TabIndex = 183
-        Me.cmdListMod.Text = "mod (%%)"
-        Me.cmdListMod.UseVisualStyleBackColor = True
-        '
-        'cmdListIfelse
-        '
-        Me.cmdListIfelse.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdListIfelse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdListIfelse.Location = New System.Drawing.Point(1, 72)
-        Me.cmdListIfelse.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdListIfelse.Name = "cmdListIfelse"
-        Me.cmdListIfelse.Size = New System.Drawing.Size(57, 30)
-        Me.cmdListIfelse.TabIndex = 182
-        Me.cmdListIfelse.Text = "ifelse"
-        Me.cmdListIfelse.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -7884,7 +7884,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdListPercent2 As Button
     Friend WithEvents cmdListPercent As Button
     Friend WithEvents cmdListProportion As Button
-    Friend WithEvents cmdListRound1 As Button
+    Friend WithEvents cmdListRound As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents cmdListOmit As Button
     Friend WithEvents cmdListRev As Button

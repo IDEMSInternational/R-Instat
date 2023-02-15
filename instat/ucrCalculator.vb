@@ -342,13 +342,13 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListSubtract, "subtract a value (default 10) from each number in the list.")
         ttCalculator.SetToolTip(cmdListMultiply, "multiply each number in the list by a given value (default 10).")
         ttCalculator.SetToolTip(cmdDivide, "divide each value in the list by a given value (default 10).")
-        ttCalculator.SetToolTip(cmdListAnyDup, "the row number of the first duplicated value, or 0 if no duplicates. So anydup(c(1,2,3,3,10) = 4.")
+        ttCalculator.SetToolTip(cmdListAnyDup, "the observation number of the first duplicated value, or 0 if no duplicates. So anydup(c(1,2,3,3,10) = 4.")
         ttCalculator.SetToolTip(cmdListSquare, "raise each number in the list to a given power (default 2, to square the numbers).")
         ttCalculator.SetToolTip(cmdListFirst, "the first value in each list.")
         ttCalculator.SetToolTip(cmdListLast, "the last value in each list.")
         ttCalculator.SetToolTip(cmdListNth, "the nth value in each list, (default = 2, the second value).")
-        ttCalculator.SetToolTip(cmdListQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
-        ttCalculator.SetToolTip(cmdListRound1, "round the numbers in each list. Default is to 3 decimals).")
+        ttCalculator.SetToolTip(cmdListQuantile, "default is 20%, 50% (median) and 80% of each list.")
+        ttCalculator.SetToolTip(cmdListRound, "replace by round the numbers in each list, with default of 3 decimals (change round to signif for significant figures).")
         ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals.")
         ttCalculator.SetToolTip(cmdListSQRT, "square root each number in the list. (Change sqrt to abs, log, exp, sin, etc for other functions).")
         ttCalculator.SetToolTip(cmdListSort, "sort values into ascending order.  (Change FALSE to TRUE for descending).")
@@ -366,6 +366,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListDiv, "gives the value after integer division by 10, or a number of your choice.  For example 28 %/% 8 = 3.")
         ttCalculator.SetToolTip(cmdListOperator, "gives TRUE or FALSE depending on the condition.  (Use >=, <, <=, ==, != as well).")
         ttCalculator.SetToolTip(cmdListDuplicated, "gives TRUE for any duplicates and FALSE otherwise.")
+        ttCalculator.SetToolTip(cmdListFivenum, "gives the same summaries as the boxplot, so minimum, lower and upper hinges (roughly the quartiles), median, and maximum.")
+        ttCalculator.SetToolTip(cmdListSumd, "gives the sum of the digit sums (e.g. for 34, 27 = 7 + 9 = 16).")
 
     End Sub
 
@@ -5130,7 +5132,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
-      If chkShowParameters.Checked Then
+        If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 39)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
@@ -5260,7 +5262,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) x^2)", 19)
     End Sub
 
-    Private Sub cmdListRound1_Click(sender As Object, e As EventArgs) Handles cmdListRound1.Click
+    Private Sub cmdListRound_Click(sender As Object, e As EventArgs) Handles cmdListRound.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,round,3)", 10)
     End Sub
 
@@ -5272,7 +5274,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,function(x) 100*x/sum(x))", 27)
     End Sub
 
-    Private Sub cmdListRound2_Click(sender As Object, e As EventArgs) Handles cmdListPercent2.Click
+    Private Sub cmdListPercent2_Click(sender As Object, e As EventArgs) Handles cmdListPercent2.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,function(x) round(x/sum(x)*100,2))", 37)
     End Sub
 
