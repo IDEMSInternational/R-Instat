@@ -317,6 +317,7 @@ Public Class dlgOneWayFrequencies
             If rdoStemAndLeaf.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeafFunction)
                 clsDummyFunction.AddParameter("check", "stem", iPosition:=0)
+                ucrBase.clsRsyntax.iCallType = 2
             End If
         End If
     End Sub
