@@ -19,6 +19,7 @@ Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iClick As Integer = 1
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,11 +39,23 @@ Public Class dlgFindInVariableOrFilter
     Private Sub InitialiseDialog()
         ucrReceiverVariable.Selector = ucrSelectorFind
 
-        ucrPnlOptions.AddRadioButton(rdoVariable, True)
-        ucrPnlOptions.AddRadioButton(rdoInFilter, False)
+        ucrPnlOptions.AddRadioButton(rdoVariable)
+        ucrPnlOptions.AddRadioButton(rdoInFilter)
+
+        ucrPnlOptions.AddParameterValuesCondition(rdoVariable, "check", "variable")
+        ucrPnlOptions.AddParameterValuesCondition(rdoInFilter, "check", "filter")
+
+        ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverFilter, {rdoInFilter}, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverFilter.SetLinkedDisplayControl(lblFilter)
+        ucrInputPattern.SetLinkedDisplayControl(lblPattern)
     End Sub
 
     Private Sub SetDefaults()
+        clsDummyFunction = New RFunction
+
+        clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
+
         ucrReceiverVariable.SetMeAsReceiver()
         cmdFindNext.Enabled = False
     End Sub
@@ -50,6 +63,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -60,6 +74,7 @@ Public Class dlgFindInVariableOrFilter
         frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
                                            strVariable:=ucrReceiverVariable.GetVariableNames,
                                            bFindNext:=False)
+        frmMain.ucrDataViewer.GetCurrentDataPageFocus()
         iClick = 1
         cmdFindNext.Enabled = True
     End Sub
@@ -69,6 +84,21 @@ Public Class dlgFindInVariableOrFilter
                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                    bFindNext:=True,
                                    iClick:=iClick)
+        frmMain.ucrDataViewer.GetCurrentDataPageFocus()
         iClick += 1
+    End Sub
+
+    Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
+        cmdFindNext.Enabled = False
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRcodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
+        cmdFindNext.Enabled = False
     End Sub
 End Class

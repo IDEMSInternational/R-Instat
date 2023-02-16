@@ -33,6 +33,8 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoInFilter = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.cmdFindNext = New System.Windows.Forms.Button()
+        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
+        Me.lblFilter = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrInputPattern
@@ -130,7 +132,6 @@ Partial Class dlgFindInVariableOrFilter
         'rdoInFilter
         '
         Me.rdoInFilter.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoInFilter.Enabled = False
         Me.rdoInFilter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInFilter.FlatAppearance.BorderSize = 2
         Me.rdoInFilter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -163,12 +164,36 @@ Partial Class dlgFindInVariableOrFilter
         Me.cmdFindNext.Text = "Find Next"
         Me.cmdFindNext.UseVisualStyleBackColor = True
         '
+        'ucrReceiverFilter
+        '
+        Me.ucrReceiverFilter.AutoSize = True
+        Me.ucrReceiverFilter.frmParent = Me
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(427, 195)
+        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
+        Me.ucrReceiverFilter.Selector = Nothing
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverFilter.strNcFilePath = ""
+        Me.ucrReceiverFilter.TabIndex = 11
+        Me.ucrReceiverFilter.ucrSelector = Nothing
+        '
+        'lblFilter
+        '
+        Me.lblFilter.AutoSize = True
+        Me.lblFilter.Location = New System.Drawing.Point(427, 170)
+        Me.lblFilter.Name = "lblFilter"
+        Me.lblFilter.Size = New System.Drawing.Size(48, 20)
+        Me.lblFilter.TabIndex = 12
+        Me.lblFilter.Text = "Filter:"
+        '
         'dlgFindInVariableOrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(640, 442)
+        Me.Controls.Add(Me.lblFilter)
+        Me.Controls.Add(Me.ucrReceiverFilter)
         Me.Controls.Add(Me.cmdFindNext)
         Me.Controls.Add(Me.rdoVariable)
         Me.Controls.Add(Me.rdoInFilter)
@@ -200,4 +225,6 @@ Partial Class dlgFindInVariableOrFilter
     Friend WithEvents rdoInFilter As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents cmdFindNext As Button
+    Friend WithEvents lblFilter As Label
+    Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
 End Class

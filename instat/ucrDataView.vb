@@ -916,6 +916,11 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Sub GetCurrentDataPageFocus()
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.LoadNextRowPage()
+        'RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
