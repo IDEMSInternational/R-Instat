@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class sdgPMConstants
+Public Class sdgHSConstants
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsListFunction As New RFunction
-    Private Sub sdgPMConstants_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
+    Private Sub sdgHSConstants_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
         autoTranslate(Me)
     End Sub
 
@@ -49,39 +49,11 @@ Public Class sdgPMConstants
         ucrInputLambda.SetLinkedDisplayControl(lbllambda)
         ucrInputLambda.SetRDefault(2.45)
 
-        ucrInputSigma.SetParameter(New RParameter("sigma", 5))
-        ucrInputSigma.AddQuotesIfUnrecognised = False
-        ucrInputSigma.IsReadOnly = True
-        ucrInputSigma.SetRDefault(4.903 * 10 ^ -9)
-
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))
         ucrInputSolarConstant.AddQuotesIfUnrecognised = False
         ucrInputSolarConstant.IsReadOnly = True
         ucrInputSolarConstant.SetLinkedDisplayControl(lblSolarConstant)
         ucrInputSolarConstant.SetRDefault(0.082)
-
-        ucrNudHeigth.SetParameter(New RParameter("z", 4))
-        ucrNudHeigth.SetMinMax(0, 10)
-        ucrNudHeigth.Increment = 1
-        ucrNudHeigth.SetRDefault(2)
-
-        ucrInputSoilFlux.SetParameter(New RParameter("G", 6))
-        ucrInputSoilFlux.AddQuotesIfUnrecognised = False
-        ucrInputSoilFlux.SetLinkedDisplayControl(lblSoilHeatFlux)
-        ucrInputSoilFlux.SetRDefault(0)
-
-        'Radiation Constants'
-        ucrInputAS.SetParameter(New RParameter("as", 7))
-        ucrInputAS.AddQuotesIfUnrecognised = False
-        ucrInputAS.IsReadOnly = True
-        ucrInputAS.SetLinkedDisplayControl(lblAS)
-        ucrInputAS.SetRDefault(0.25)
-
-        ucrInputBS.SetParameter(New RParameter("bs", 8))
-        ucrInputBS.AddQuotesIfUnrecognised = False
-        ucrInputBS.IsReadOnly = True
-        ucrInputBS.SetLinkedDisplayControl(lblBS)
-        ucrInputBS.SetRDefault(0.5)
 
         bControlsInitialised = True
     End Sub
@@ -96,12 +68,7 @@ Public Class sdgPMConstants
         ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrNudElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLongitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudHeigth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSoilFlux.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputAS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 End Class

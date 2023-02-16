@@ -22,20 +22,22 @@ Public Class dlgEvapotranspiration
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
-    Private iEvapOptions As Integer
+    Private iEvapOptions, iHSConstants, iLocation As Integer
     Private iHSMissingOptions As Integer
-    Private clsETPenmanMonteith, clsHargreavesSamani, clsListFunction, clsDataFunctionPM, clsDataFunctionHS, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
+    Private clsETPenmanMonteith, clsHargreavesSamani, clsReadFunction, clsListFunction, clsDataFunctionPM, clsDataFunctionHS, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
     Private bRcodeSet As Boolean = True
 
-    Private Sub dlgdlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
             iSaveMaxY = ucrNewColName.Location.Y
             iEvapOptions = cmdEvapOptions.Location.Y
             iHSMissingOptions = cmdHSMissingOptions.Location.Y
+            iHSConstants = cmdHSConstants.Location.Y
+            iLocation = cmdLocation.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -51,7 +53,6 @@ Public Class dlgEvapotranspiration
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 565
-        ucrBase.clsRsyntax.iCallType = 2
 
         Dim dctInputCrops As New Dictionary(Of String, String)
         Dim dctInputTimeStep As New Dictionary(Of String, String)
@@ -152,6 +153,7 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub SetDefaults()
+        'clsReadFunction.iCallType = 0
         clsETPenmanMonteith = New RFunction
         clsHargreavesSamani = New RFunction
         clsDataFunctionPM = New RFunction
@@ -293,7 +295,7 @@ Public Class dlgEvapotranspiration
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoHargreavesSamani.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() AndAlso clsListFunction.clsParameters.Count > 0 Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -326,19 +328,35 @@ Public Class dlgEvapotranspiration
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdHSConstants_Click(sender As Object, e As EventArgs) Handles cmdHSConstants.Click
+        sdgHSConstants.SetRFunction(clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        sdgHSConstants.ShowDialog()
+        bResetSubdialog = False
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdLocation_Click(sender As Object, e As EventArgs) Handles cmdLocation.Click
+        sdgLocation.SetRFunction(clsNewDataFunctionPM:=clsDataFunctionPM, clsNewDataFunctionHS:=clsDataFunctionHS, bReset:=bResetSubdialog)
+        sdgLocation.ShowDialog()
+        bResetSubdialog = False
+        TestOKEnabled()
+    End Sub
+
     Private Sub DialogSize()
         If rdoPenmanMonteith.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
+            cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation)
         ElseIf rdoHargreavesSamani.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
-            cmdHSMissingOptions.Location = New Point(cmdHSMissingOptions.Location.X, iEvapOptions / 1.187)
-
+            cmdHSMissingOptions.Location = New Point(cmdHSMissingOptions.Location.X, iHSMissingOptions / 1.187)
+            cmdHSConstants.Location = New Point(cmdHSConstants.Location.X, iHSConstants / 1.187)
+            cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation / 1.187)
         End If
     End Sub
 
@@ -371,10 +389,16 @@ Public Class dlgEvapotranspiration
     Private Sub EnableDesableSubDialog()
         If rdoPenmanMonteith.Checked Then
             cmdEvapOptions.Visible = True
+            cmdPMConstants.Visible = True
             cmdHSMissingOptions.Visible = False
+            cmdHSConstants.Visible = False
         Else
             cmdEvapOptions.Visible = False
+            cmdPMConstants.Visible = False
             cmdHSMissingOptions.Visible = True
+            cmdHSConstants.Visible = True
+
+
         End If
 
     End Sub
