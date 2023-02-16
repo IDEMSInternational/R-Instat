@@ -22,6 +22,7 @@ Public Class dlgOneWayFrequencies
     Private clsSjMiscFrq As New RFunction
     Private clsSjPlot As New RFunction
     Private clsPlotGrid As New RFunction
+    Private clsGetColumnsFunction As New RFunction
     Private clsSjPlotList As New RFunction
     Private clsAsGGplot As New RFunction
     Private clsAsDataFrame As New RFunction
@@ -164,6 +165,7 @@ Public Class dlgOneWayFrequencies
         clsAsDataFrame = New RFunction
         clsStemAndLeafFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsGetColumnsFunction = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
@@ -306,21 +308,24 @@ Public Class dlgOneWayFrequencies
             clsDummyFunction.AddParameter("check", "graph", iPosition:=0)
         ElseIf rdoTable.Checked Then
             clsDummyFunction.AddParameter("check", "table", iPosition:=0)
-            If rdoAsTable.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
-            Else
+            If rdoAsDataFrame.Checked Then
                 clsAsDataFrame.AddParameter("x", clsRFunctionParameter:=clsSjMiscFrq, iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAsDataFrame)
             End If
         Else
             ucrReceiverStemAndLeaf.SetMeAsReceiver()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeafFunction)
-            clsDummyFunction.AddParameter("check", "stem", iPosition:=0)
+            If rdoStemAndLeaf.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeafFunction)
+                clsDummyFunction.AddParameter("check", "stem", iPosition:=0)
+            End If
         End If
-
     End Sub
 
     Private Sub ucrReceiverOneWayFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlValueChanged
+        clsGetColumnsFunction = ucrReceiverOneWayFreq.GetVariables()
+        clsGetColumnsFunction.SetAssignTo("columns")
+        clsSjMiscFrq.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
+        clsAsGGplot.AddParameter("data", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
         clsPlotGrid.AddParameter("tags", ucrReceiverOneWayFreq.GetVariableNames, iPosition:=1)
         If ucrReceiverOneWayFreq.lstSelectedVariables.Items.Count > 1 Then
             clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot, iPosition:=0)
@@ -364,6 +369,10 @@ Public Class dlgOneWayFrequencies
             ucrSaveGraph.SetPrefix("freq_graph")
             ucrSaveGraph.SetIsComboBox()
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ElseIf rdoStemAndLeaf.Checked Then
+            'ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
+            'ucrSaveGraph.SetAssignToIfUncheckedValue("last_Summary")
+            'ucrSaveGraph.SetCheckBoxText("Save Summary")
         End If
     End Sub
 End Class
