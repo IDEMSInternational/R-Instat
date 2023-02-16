@@ -380,8 +380,13 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListLast, "the last value in each list.")
         ttCalculator.SetToolTip(cmdListNth, "the nth value in each list, (default = 2, the second value).")
         ttCalculator.SetToolTip(cmdListQuantile, "default is 20%, 50% (median) and 80% of each list.")
+
         ttCalculator.SetToolTip(cmdListRound, "applies the round function to each value in each list, with a default of 3 decimal places (change round to signif for significant figures).")
         ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals.")
+
+        ttCalculator.SetToolTip(cmdListRound, "replaces by round, the numbers in each list, with default of 3 decimals (change round to signif for significant figures).")
+        ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimal places.")
+
         ttCalculator.SetToolTip(cmdListSQRT, "square root each number in the list. (Change sqrt to abs, log, exp, sin, etc for other functions).")
         ttCalculator.SetToolTip(cmdListSort, "sort values into ascending order.  (Change FALSE to TRUE for descending).")
         ttCalculator.SetToolTip(cmdListRank, "ranks of values with average for tied values.")
@@ -5174,6 +5179,7 @@ Public Class ucrCalculator
     Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
+
     Private Sub cmdListLength_Click(sender As Object, e As EventArgs) Handles cmdListLength.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,length)", 9)
     End Sub
