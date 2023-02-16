@@ -5174,6 +5174,7 @@ Public Class ucrCalculator
     Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(X = , FUN = function(v) {sapply(X = v,FUN = function(w) eval(parse(text=w)))})", 75)
     End Sub
+
     Private Sub cmdListLength_Click(sender As Object, e As EventArgs) Handles cmdListLength.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(   ,length)", 9)
     End Sub
