@@ -105,22 +105,44 @@ Public Class ucrDataViewReoGrid
         End If
     End Function
 
-    Public Sub SearchInGrid(strPattern As String, strColumn As String) Implements IDataViewGrid.SearchInGrid
+    Public Sub SearchInGrid(strPattern As String, strColumn As String, bFindNext As Boolean,
+                            Optional iClick As Integer = 0) Implements IDataViewGrid.SearchInGrid
         Dim iSearch As Integer = 0
         Dim iColIndex As Integer = GetColumnIndex(strColumn)
         Dim currSheet = grdData.CurrentWorksheet
-
-        currSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
-                                                                             If CStr(cell.Data).Contains(strPattern) AndAlso col = iColIndex Then
-                                                                                 If iSearch = 0 Then
-                                                                                     currSheet.FocusPos = cell.Position
+        If Not bFindNext Then
+            currSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
+                                                                                 If CStr(cell.Data).ToLower.Contains(strPattern) AndAlso col = iColIndex Then
+                                                                                     If iSearch = 0 Then
+                                                                                         currSheet.FocusPos = cell.Position
+                                                                                         currSheet.ScrollToCell(cell.Address)
+                                                                                     End If
+                                                                                     cell.Style.BackColor = Color.LightGreen
+                                                                                     iSearch += 1
                                                                                  End If
-                                                                                 cell.Style.BackColor = Color.Yellow
-                                                                                 iSearch += 1
+                                                                                 Return True
+                                                                             End Function)
+        Else
+            For i As Integer = 0 To GetSelectedCells().Count - 1
+                If i = iClick Then
+                    currSheet.FocusPos = GetSelectedCells()(i)
+                    currSheet.ScrollToCell(GetSelectedCells()(i))
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Function GetSelectedCells() As List(Of CellPosition)
+        Dim lstCellPosition As New List(Of CellPosition)
+        Dim currSheet = grdData.CurrentWorksheet
+        currSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
+                                                                             If cell.Style.BackColor = Color.LightGreen Then
+                                                                                 lstCellPosition.Add(cell.Position)
                                                                              End If
                                                                              Return True
                                                                          End Function)
-    End Sub
+        Return lstCellPosition
+    End Function
 
     Private Function GetColumnIndex(strColName As String) As Integer
         If grdData.CurrentWorksheet IsNot Nothing Then

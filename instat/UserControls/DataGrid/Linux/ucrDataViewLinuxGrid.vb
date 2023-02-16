@@ -119,7 +119,8 @@ Public Class ucrDataViewLinuxGrid
         End If
     End Sub
 
-    Public Sub SearchInGrid(strPattern As String, strColumn As String) Implements IDataViewGrid.SearchInGrid
+    Public Sub SearchInGrid(strPattern As String, strColumn As String, bFindNext As Boolean,
+                            Optional iClick As Integer = 0) Implements IDataViewGrid.SearchInGrid
 
     End Sub
     Private Function GetCurrentDataFrameFocus() As clsDataFrame

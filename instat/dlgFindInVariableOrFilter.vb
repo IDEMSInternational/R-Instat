@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private iClick As Integer = 1
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -43,6 +44,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub SetDefaults()
         ucrReceiverVariable.SetMeAsReceiver()
+        cmdFindNext.Enabled = False
     End Sub
 
 
@@ -55,6 +57,18 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
-        frmMain.ucrDataViewer.SearchInGrid(ucrInputPattern.GetText, ucrReceiverVariable.GetVariableNames.ToString)
+        frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+                                           strVariable:=ucrReceiverVariable.GetVariableNames,
+                                           bFindNext:=False)
+        iClick = 1
+        cmdFindNext.Enabled = True
+    End Sub
+
+    Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
+        frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+                                   strVariable:=ucrReceiverVariable.GetVariableNames,
+                                   bFindNext:=True,
+                                   iClick:=iClick)
+        iClick += 1
     End Sub
 End Class
