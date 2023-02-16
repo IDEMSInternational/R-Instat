@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO
 Public Class ucrCalculator
     Public iHelpCalcID As Integer
     Public Event NameChanged()
@@ -1497,13 +1498,13 @@ Public Class ucrCalculator
 
 
     Private Sub OpenHelpPage()
-        Dim strTempFile As String = "\html\00Index.html"
-        Dim strTempPath As String = "C:\Program Files\R-Instat\0.7.8\static"
-        Dim strRLibrary As String = "\R\library\"
-        Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strPackageName, strTempFile)
+        Dim strTempFile As String = Path.Combine("html", "00Index.html")
+        Dim strRLibrary As String = Path.Combine("R", "library")
+        Dim strHelpPath As String = Path.Combine(frmMain.strStaticPath, strRLibrary, strPackageName, strTempFile)
 
-        'use this line to test in the development mode
-        'strHelpPath = String.Concat(strTempPath, strRLibrary, strPackageName, strTempFile)
+        'if you wish to test this in the development environment, then uncomment line below
+        '(you may need to change the path or version number)
+        'strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strPackageName, strTempFile)
 
         If System.IO.File.Exists(strHelpPath) Then
             frmMaximiseOutput.Show(strHelpPath)

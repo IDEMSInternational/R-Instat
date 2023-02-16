@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports RDotNet
+Imports System.IO
 
 Public Class dlgFromLibrary
     Private strLibraryTemp As String = "dfLibrary"
@@ -232,9 +233,9 @@ Public Class dlgFromLibrary
         Dim strTopic As String = lstCollection.SelectedItems(0).Text
         Dim strPackage As String = ucrInputPackages.cboInput.SelectedItem
 
-        Dim strTempFile As String = String.Concat(strTopic, ".html")
-        Dim strRLibrary As String = Path.Combine("R", "library", "datasets", "html"
-        Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
+        Dim strTempFile As String = Path.Combine(strTopic, ".html")
+        Dim strRLibrary As String = Path.Combine("R", "library", "datasets", "html")
+        Dim strHelpPath As String = Path.Combine(frmMain.strStaticPath, strRLibrary, strTempFile)
 
         If strPackage <> "datasets" Then
             strTempFile = "00Index.html"

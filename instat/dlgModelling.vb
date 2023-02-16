@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports RDotNet
+Imports System.IO
 
 Public Class dlgModelling
     Public bFirstLoad As Boolean = True
@@ -583,13 +584,13 @@ Public Class dlgModelling
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim strPackageName As String = ucrInputComboRPackage.GetText
-        Dim strTempFile As String = "\html\00Index.html"
-        Dim strTempPath As String = "C:\Program Files\R-Instat\0.7.8\static"
-        Dim strRLibrary As String = "\R\library\"
-        Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strPackageName, strTempFile)
+        Dim strTempFile As String = Path.Combine("html", "00Index.html")
+        Dim strRLibrary As String = Path.Combine("R","library")
+        Dim strHelpPath As String = Path.Combine(frmMain.strStaticPath, strRLibrary, strPackageName, strTempFile)
 
-        'use this line to test in the development mode
-        'strHelpPath = String.Concat(strTempPath, strRLibrary, strPackageName, strTempFile)
+        'if you wish to test this in the development environment, then uncomment line below
+        '(you may need to change the path or version number)
+        'strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strPackageName, strTempFile)
 
         If System.IO.File.Exists(strHelpPath) Then
             frmMaximiseOutput.Show(strHelpPath)
