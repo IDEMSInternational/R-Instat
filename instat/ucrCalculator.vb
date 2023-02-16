@@ -381,7 +381,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListNth, "the nth value in each list, (default = 2, the second value).")
         ttCalculator.SetToolTip(cmdListQuantile, "default is 20%, 50% (median) and 80% of each list.")
         ttCalculator.SetToolTip(cmdListRound, "replaces by round, the numbers in each list, with default of 3 decimals (change round to signif for significant figures).")
-        ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals.")
+        ttCalculator.SetToolTip(cmdListPercent2, "percent of each value in the list, rounded to a default of 2 decimals places.")
         ttCalculator.SetToolTip(cmdListSQRT, "square root each number in the list. (Change sqrt to abs, log, exp, sin, etc for other functions).")
         ttCalculator.SetToolTip(cmdListSort, "sort values into ascending order.  (Change FALSE to TRUE for descending).")
         ttCalculator.SetToolTip(cmdListRank, "ranks of values with average for tied values.")
