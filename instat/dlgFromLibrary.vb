@@ -233,18 +233,18 @@ Public Class dlgFromLibrary
         Dim strPackage As String = ucrInputPackages.cboInput.SelectedItem
 
         Dim strTempFile As String = String.Concat(strTopic, ".html")
-        Dim strRLibrary As String = "\R\library\datasets\html\"
+        Dim strRLibrary As String = Path.Combine("R", "library", "datasets", "html"
         Dim strHelpPath As String = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
 
         If strPackage <> "datasets" Then
             strTempFile = "00Index.html"
-            strRLibrary = String.Concat("\R\library\", strPackage, "\html\")
-            strHelpPath = String.Concat(frmMain.strStaticPath, strRLibrary, strTempFile)
+            strRLibrary = Path.Combine("R", "library", strPackage, "html")
+            strHelpPath = Path.Combine(frmMain.strStaticPath, strRLibrary, strTempFile)
         End If
 
         'if you wish to test this in the development environment, then uncomment line below
         '(you may need to change the path or version number)
-        'strHelpPath = String.Concat("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strTempFile)
+        'strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strTempFile)
 
         If System.IO.File.Exists(strHelpPath) Then
             frmMaximiseOutput.Show(strHelpPath)
