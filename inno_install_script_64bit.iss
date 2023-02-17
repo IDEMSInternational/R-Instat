@@ -5,18 +5,19 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppVersion= {#GetStringFileInfo("instat\bin\Release\instat.exe", "FileVersion")}
+AppVersion= {#GetStringFileInfo("instat\bin\x64\Release\instat.exe", "FileVersion")}
 AppId={{5455FC1A-85BE-4679-B600-8A1A4FC3CDD9-{#SetupSetting("AppVersion")}}
 AppName=R-Instat
+AppVerName ={code:GetShortAppVersion|{#SetupSetting("AppVersion")}}
 
 AppPublisher=African Maths Initiative
 AppPublisherURL=http://r-instat.org/
 AppSupportURL=http://r-instat.org/
 AppUpdatesURL=http://r-instat.org/
-DefaultDirName={autopf}\R-Instat\
+DefaultDirName={autopf}\R-Instat\{#SetupSetting("AppVerName")}\
 DefaultGroupName=R-Instat
 AllowNoIcons=yes
-OutputBaseFilename=R-Instat_Installer_64
+OutputBaseFilename=R-Instat_{#SetupSetting("AppVersion")}_Installer_64
 SetupIconFile=.\instat\Resources\rinstat_icon_Hih_icon.ico
 UninstallDisplayIcon=.\instat\Resources\rinstat_icon_Hih_icon.ico
 Compression=lzma
@@ -41,3 +42,16 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\R-Instat {#SetupSe
 
 [Run]
 Filename: "{app}\instat.exe"; Description: "{cm:LaunchProgram,R-Instat}"; Flags: nowait postinstall skipifsilent
+
+[Code]
+function GetShortAppVersion(Param: String): String;
+var 
+  major,minor,revision:String; 
+begin 
+  major := Copy(Param,0,Pos('.',Param));
+  Delete(Param,1,Pos('.',Param));
+  minor := Copy(Param,0,Pos('.',Param));
+  Delete(Param,1,Pos('.',Param));
+  revision := Copy(Param,0,Pos('.',Param)-1);
+  Result := major +  minor + revision;
+end;
