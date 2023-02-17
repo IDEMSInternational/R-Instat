@@ -25,17 +25,17 @@ Public Class sdgPMConstants
 
     Private Sub InitialiseControls()
         'Location'
-        ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
-        ucrInputLatitude.AddQuotesIfUnrecognised = False
-        ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrInputLatitude.SetRDefault(0)
+        'ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
+        'ucrInputLatitude.AddQuotesIfUnrecognised = False
+        'ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
+        'ucrInputLatitude.SetRDefault(0)
 
 
-        ucrNudElevation.SetParameter(New RParameter("Elev", 0))
-        ucrNudElevation.SetMinMax(0, 5000)
-        ucrNudElevation.Increment = 1
-        ucrNudElevation.SetRDefault(0)
-        ucrNudElevation.SetLinkedDisplayControl(lblElevation)
+        'ucrNudElevation.SetParameter(New RParameter("Elev", 0))
+        'ucrNudElevation.SetMinMax(0, 5000)
+        'ucrNudElevation.Increment = 1
+        'ucrNudElevation.SetRDefault(0)
+        'ucrNudElevation.SetLinkedDisplayControl(lblElevation)
 
         ucrInputLongitude.SetParameter(New RParameter("Y", 9))
         ucrInputLongitude.AddQuotesIfUnrecognised = False
@@ -93,8 +93,8 @@ Public Class sdgPMConstants
             InitialiseControls()
         End If
 
-        ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        'ucrNudElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLongitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrNudHeigth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)

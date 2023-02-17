@@ -336,7 +336,7 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdLocation_Click(sender As Object, e As EventArgs) Handles cmdLocation.Click
-        sdgLocation.SetRFunction(clsNewDataFunctionPM:=clsDataFunctionPM, clsNewDataFunctionHS:=clsDataFunctionHS, bReset:=bResetSubdialog)
+        sdgLocation.SetRFunction(clsNewDataFunctionPM:=clsDataFunctionPM, clsNewVarnamesVectorPM:=clsVarnamesVectorPM, clsNewListFunction:=clsListFunction, clsNewDataFunctionHS:=clsDataFunctionHS, bReset:=bResetSubdialog)
         sdgLocation.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()

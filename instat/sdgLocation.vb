@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgLocation
     Private bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
-    Private clsDataFunctionPM, clsDatafunctionHS As New RFunction
+    Private clsDataFunctionPM, clsDatafunctionHS, clsVarnamesVectorPM, clsListFunction As New RFunction
     Private bOKEnabled As Boolean = True
 
     Public Sub New()
@@ -49,7 +49,7 @@ Public Class sdgLocation
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
 
-        ucrReceiverLatitude.SetParameter(New RParameter("lat", 2))
+        ucrReceiverLatitude.SetParameter(New RParameter("lat_rad", 2))
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.Selector = ucrSelectorLocation
 
@@ -57,28 +57,29 @@ Public Class sdgLocation
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.Selector = ucrSelectorLocation
 
-        ucrReceiverAltitude.SetParameter(New RParameter("elev", 4))
+        ucrReceiverAltitude.SetParameter(New RParameter("Elev", 4))
         ucrReceiverAltitude.SetParameterIsString()
         ucrReceiverAltitude.Selector = ucrSelectorLocation
     End Sub
 
-    Public Sub SetRFunction(clsNewDataFunctionPM As RFunction, clsNewDataFunctionHS As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewDataFunctionPM As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewDataFunctionHS As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseDialog()
         End If
         clsDataFunctionPM = clsNewDataFunctionPM
         clsDatafunctionHS = clsNewDataFunctionHS
-
+        clsListFunction = clsNewListFunction
+        clsVarnamesVectorPM = clsNewVarnamesVectorPM
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsNewDataFunctionHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
-        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsNewDataFunctionHS, New RParameter("lat", 2), iAdditionalPairNo:=1)
-        ucrReceiverAltitude.AddAdditionalCodeParameterPair(clsNewDataFunctionHS, New RParameter("elev", 4), iAdditionalPairNo:=1)
+        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat", 2), iAdditionalPairNo:=1)
+        ucrReceiverAltitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("elev", 4), iAdditionalPairNo:=1)
 
 
-        ucrSelectorLocation.SetRCode(clsDataFunctionPM, bReset, bCloneIfNeeded:=True)
-        ucrReceiverStation.SetRCode(clsDataFunctionPM, bReset, bCloneIfNeeded:=True)
-        ucrReceiverLatitude.SetRCode(clsDataFunctionPM, bReset, bCloneIfNeeded:=True)
-        ucrReceiverAltitude.SetRCode(clsDataFunctionPM, bReset, bCloneIfNeeded:=True)
-        ucrReceiverLongitude.SetRCode(clsDataFunctionPM, bReset, bCloneIfNeeded:=True)
+        ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
+        ucrReceiverStation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
+        ucrReceiverLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverAltitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
 
         bControlsInitialised = True
     End Sub
