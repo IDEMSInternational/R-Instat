@@ -72,6 +72,10 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.lblLongitude = New System.Windows.Forms.Label()
+        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
+        Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.UcrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.lblAltitude = New System.Windows.Forms.Label()
         Me.ucrReceiverAltitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
@@ -79,10 +83,6 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDefineClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblLatitude = New System.Windows.Forms.Label()
-        Me.UcrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.lblLongitude = New System.Windows.Forms.Label()
-        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.grpElements.SuspendLayout()
         Me.grpDateTime.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -510,6 +510,52 @@ Partial Class DlgDefineClimaticData
         Me.grpStation.Tag = ""
         Me.grpStation.Text = "Station"
         '
+        'lblLongitude
+        '
+        Me.lblLongitude.AutoSize = True
+        Me.lblLongitude.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLongitude.Location = New System.Drawing.Point(7, 93)
+        Me.lblLongitude.Name = "lblLongitude"
+        Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
+        Me.lblLongitude.TabIndex = 6
+        Me.lblLongitude.Text = "Longitude:"
+        '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.AutoSize = True
+        Me.ucrReceiverLongitude.frmParent = Me
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(7, 108)
+        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.TabIndex = 7
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
+        'lblLatitude
+        '
+        Me.lblLatitude.AutoSize = True
+        Me.lblLatitude.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLatitude.Location = New System.Drawing.Point(7, 55)
+        Me.lblLatitude.Name = "lblLatitude"
+        Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
+        Me.lblLatitude.TabIndex = 4
+        Me.lblLatitude.Text = "Latitude:"
+        '
+        'UcrReceiverLatitude
+        '
+        Me.UcrReceiverLatitude.AutoSize = True
+        Me.UcrReceiverLatitude.frmParent = Me
+        Me.UcrReceiverLatitude.Location = New System.Drawing.Point(7, 70)
+        Me.UcrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverLatitude.Name = "UcrReceiverLatitude"
+        Me.UcrReceiverLatitude.Selector = Nothing
+        Me.UcrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
+        Me.UcrReceiverLatitude.strNcFilePath = ""
+        Me.UcrReceiverLatitude.TabIndex = 5
+        Me.UcrReceiverLatitude.ucrSelector = Nothing
+        '
         'lblAltitude
         '
         Me.lblAltitude.AutoSize = True
@@ -587,52 +633,6 @@ Partial Class DlgDefineClimaticData
         Me.ucrSelectorDefineClimaticData.Name = "ucrSelectorDefineClimaticData"
         Me.ucrSelectorDefineClimaticData.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDefineClimaticData.TabIndex = 0
-        '
-        'lblLatitude
-        '
-        Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLatitude.Location = New System.Drawing.Point(7, 55)
-        Me.lblLatitude.Name = "lblLatitude"
-        Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
-        Me.lblLatitude.TabIndex = 4
-        Me.lblLatitude.Text = "Latitude:"
-        '
-        'UcrReceiverLatitude
-        '
-        Me.UcrReceiverLatitude.AutoSize = True
-        Me.UcrReceiverLatitude.frmParent = Me
-        Me.UcrReceiverLatitude.Location = New System.Drawing.Point(7, 70)
-        Me.UcrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverLatitude.Name = "UcrReceiverLatitude"
-        Me.UcrReceiverLatitude.Selector = Nothing
-        Me.UcrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverLatitude.strNcFilePath = ""
-        Me.UcrReceiverLatitude.TabIndex = 5
-        Me.UcrReceiverLatitude.ucrSelector = Nothing
-        '
-        'lblLongitude
-        '
-        Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLongitude.Location = New System.Drawing.Point(7, 93)
-        Me.lblLongitude.Name = "lblLongitude"
-        Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
-        Me.lblLongitude.TabIndex = 6
-        Me.lblLongitude.Text = "Longitude:"
-        '
-        'ucrReceiverLongitude
-        '
-        Me.ucrReceiverLongitude.AutoSize = True
-        Me.ucrReceiverLongitude.frmParent = Me
-        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(7, 108)
-        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
-        Me.ucrReceiverLongitude.Selector = Nothing
-        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverLongitude.strNcFilePath = ""
-        Me.ucrReceiverLongitude.TabIndex = 7
-        Me.ucrReceiverLongitude.ucrSelector = Nothing
         '
         'DlgDefineClimaticData
         '
