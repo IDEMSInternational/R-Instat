@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports RDotNet
 Public Class ucrCalculator
     Public iHelpCalcID As Integer
     Public Event NameChanged()
@@ -1498,28 +1499,41 @@ Public Class ucrCalculator
 
 
     Private Sub OpenHelpPage()
-        Dim strTempFile As String = Path.Combine("html", "00Index.html")
-        Dim strRLibrary As String = Path.Combine("R", "library")
-        Dim strHelpPath As String = Path.Combine(frmMain.strStaticPath, strRLibrary, strPackageName, strTempFile)
+        Dim strLocalHost As String = "127.0.0.1"
+        Dim clsStartServer As New RFunction
+        Dim clsGetPort As New RFunction
+        Dim clsList As New RFunction
+        Dim clsGetOperator As New ROperator
+        Dim expPortTemp As SymbolicExpression
+        Dim strPort As String = ""
+        Dim strURL As String
+        Dim strFilePath As String = Path.Combine("library", strPackageName, "html", "00Index.html")
 
-        'if you wish to test this in the development environment, then uncomment line below
-        '(you may need to change the path or version number)
-        strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strPackageName, strTempFile)
+        clsGetPort.SetPackageName("httpuv")
+        clsGetPort.SetRCommand("randomPort")
 
-        If System.IO.File.Exists(strHelpPath) Then
-            frmMaximiseOutput.Show(strHelpPath)
-        Else
-            Dim clsHelp As New RFunction
+        clsList.SetRCommand("list")
 
-            clsHelp.SetPackageName("utils")
-            clsHelp.SetRCommand("help")
-            clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-            clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-            frmMain.clsRLink.RunScript(clsHelp.ToScript,
-                                       strComment:="Opening help page for " &
-                                       strPackageName & " Package. Generated from dialog Calculator",
-                                       iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        clsStartServer.SetPackageName("httpuv")
+        clsStartServer.SetRCommand("startServer")
+        clsStartServer.AddParameter("host", Chr(34) & strLocalHost & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsStartServer.AddParameter("port", clsRFunctionParameter:=clsGetPort, bIncludeArgumentName:=False, iPosition:=1)
+        clsStartServer.AddParameter("list", clsRFunctionParameter:=clsList, bIncludeArgumentName:=False, iPosition:=3)
+
+        clsGetOperator.SetOperation("$")
+        clsGetOperator.AddParameter("left", clsRFunctionParameter:=clsStartServer, iPosition:=0)
+        clsGetOperator.AddParameter("right", "getPort()", iPosition:=1)
+
+        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetOperator.ToScript(), bSilent:=True)
+        If expPortTemp IsNot Nothing AndAlso expPortTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            strPort = expPortTemp.AsCharacter(0)
         End If
+
+        strURL = Path.Combine(String.Concat("http:\\", strLocalHost, ":"), strPort, strFilePath)
+        If strURL <> "" AndAlso strPort <> "" Then
+            frmMaximiseOutput.Show(strFileName:=strURL.Replace("\", "/"), bReplace:=False)
+        End If
+
     End Sub
 
     Private Sub cmdTry_Click(sender As Object, e As EventArgs)

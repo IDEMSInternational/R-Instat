@@ -35,7 +35,8 @@ Public Class ucrWebViewer
         Me.Controls.Add(_browser)
     End Sub
 
-    Public Sub LoadHtmlFile(strFileName As String)
+    Public Sub LoadHtmlFile(strFileName As String, Optional bReplace As Boolean = True)
+        Dim strUrl As String = strFileName
         If _browser Is Nothing Then
             Return
         End If
@@ -46,7 +47,9 @@ Public Class ucrWebViewer
         'not unless we specify R-Instat temp output folder in the R commands.
         'that should be the first step
 
-        Dim strUrl As String = "file:///" + strFileName.Replace("\", "/")
+        If bReplace Then
+            strUrl = "file:///" + strFileName.Replace("\", "/")
+        End If
         _browser.LoadUrl(strUrl)
         _browser.Dock = DockStyle.Fill
     End Sub
