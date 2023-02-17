@@ -133,7 +133,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(0, 189)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(9, 188)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(259, 29)
         Me.ucrSdgButtons.TabIndex = 3
@@ -142,7 +142,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 229)
+        Me.ClientSize = New System.Drawing.Size(241, 229)
         Me.Controls.Add(Me.lblMaxPerctMissindData)
         Me.Controls.Add(Me.ucrNudMaxDurationMissingData)
         Me.Controls.Add(Me.ucrNudMaxMissingDays)

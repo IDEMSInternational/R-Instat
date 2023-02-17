@@ -108,7 +108,7 @@ Public Class dlgEvapotranspiration
         ucrInputSolar.SetRDefault(Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("sunshine hours", Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("cloud", Chr(34) & "cloud" & Chr(34))
-        dctInputSolar.Add("radiation", Chr(34) & "radiation" & Chr(34))
+        dctInputSolar.Add("radiation", Chr(34) & "data" & Chr(34))
         ucrInputSolar.SetItems(dctInputSolar)
         ucrInputSolar.SetDropDownStyleAsNonEditable()
 
@@ -284,6 +284,7 @@ Public Class dlgEvapotranspiration
         clsETPriestleyTaylor.AddParameter("constants", "constants", iPosition:=1, bIncludeArgumentName:=False)
         clsETPriestleyTaylor.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
         clsETPriestleyTaylor.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
+        clsETPriestleyTaylor.AddParameter("alpha", 0.23, iPosition:=4)
         clsETPriestleyTaylor.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=5)
         clsETPriestleyTaylor.SetAssignTo("Priestley_Taylor")
 
