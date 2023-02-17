@@ -44,21 +44,21 @@ Public Class sdgLocation
         ucrSelectorLocation.SetParameterIsrfunction()
 
         ucrReceiverStation.SetParameter(New RParameter("name", 1))
-        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.Selector = ucrSelectorLocation
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
 
         ucrReceiverLatitude.SetParameter(New RParameter("lat_rad", 2))
-        ucrReceiverLatitude.SetParameterIsString()
+        ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorLocation
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 3))
-        ucrReceiverLongitude.SetParameterIsString()
+        ucrReceiverLongitude.SetParameterIsRFunction()
         ucrReceiverLongitude.Selector = ucrSelectorLocation
 
         ucrReceiverAltitude.SetParameter(New RParameter("Elev", 4))
-        ucrReceiverAltitude.SetParameterIsString()
+        ucrReceiverAltitude.SetParameterIsRFunction()
         ucrReceiverAltitude.Selector = ucrSelectorLocation
     End Sub
 
@@ -71,8 +71,8 @@ Public Class sdgLocation
         clsListFunction = clsNewListFunction
         clsVarnamesVectorPM = clsNewVarnamesVectorPM
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsNewDataFunctionHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
-        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat", 2), iAdditionalPairNo:=1)
-        ucrReceiverAltitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("elev", 4), iAdditionalPairNo:=1)
+        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat_rad", 2), iAdditionalPairNo:=1)
+        ucrReceiverAltitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("Elev", 4), iAdditionalPairNo:=1)
 
 
         ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
