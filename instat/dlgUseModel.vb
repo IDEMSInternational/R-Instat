@@ -17,6 +17,7 @@
 Imports instat
 Imports instat.Translations
 Imports RDotNet
+Imports System.IO
 Public Class dlgUseModel
 
     Public bFirstLoad As Boolean = True
@@ -383,15 +384,31 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        Dim strPackageName As String
+        Dim strPackageName As String = ucrInputComboRPackage.cboInput.SelectedItem
 
-        strPackageName = ucrInputComboRPackage.GetText
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        Dim strTempFile As String = Path.Combine("html", "00Index.html")
+        Dim strRLibrary As String = Path.Combine("R", "library", "General")
+        Dim strHelpPath As String = Path.Combine(frmMain.strStaticPath, strRLibrary, strTempFile)
+
+        If strPackageName <> "General" Then
+            strRLibrary = Path.Combine("R", "library", strPackageName)
+            strHelpPath = Path.Combine(frmMain.strStaticPath, strRLibrary, strTempFile)
+        End If
+        'if you wish to test this in the development environment, then uncomment line below
+        '(you may need to change the path or version number)
+        strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strTempFile)
+
+        If System.IO.File.Exists(strHelpPath) Then
+            frmMaximiseOutput.Show(strHelpPath)
+        Else
+            Dim clsHelp As New RFunction
+
+            clsHelp.SetPackageName("utils")
+            clsHelp.SetRCommand("help")
+            clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+            clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+            frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        End If
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click

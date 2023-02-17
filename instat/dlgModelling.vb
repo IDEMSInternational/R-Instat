@@ -590,7 +590,7 @@ Public Class dlgModelling
 
         'if you wish to test this in the development environment, then uncomment line below
         '(you may need to change the path or version number)
-        'strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strPackageName, strTempFile)
+        strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strPackageName, strTempFile)
 
         If System.IO.File.Exists(strHelpPath) Then
             frmMaximiseOutput.Show(strHelpPath)

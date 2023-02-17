@@ -245,7 +245,7 @@ Public Class dlgFromLibrary
 
         'if you wish to test this in the development environment, then uncomment line below
         '(you may need to change the path or version number)
-        'strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strTempFile)
+        strHelpPath = Path.Combine("C:\Program Files\R-Instat\0.7.8\static", strRLibrary, strTempFile)
 
         If System.IO.File.Exists(strHelpPath) Then
             frmMaximiseOutput.Show(strHelpPath)
