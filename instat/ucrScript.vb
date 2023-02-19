@@ -624,6 +624,30 @@ Public Class ucrScript
     End Sub
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        toolTipScriptWindow.SetToolTip(cmdRunLineSelection, "Run the current line or selection. (Ctrl+Enter)")
+        toolTipScriptWindow.SetToolTip(cmdRunAll, "Run all the text in the tab. (Ctrl+Alt+R)")
+        toolTipScriptWindow.SetToolTip(cmdLoadScript, "Load a script from file into the current tab.")
+        toolTipScriptWindow.SetToolTip(cmdSave, "Save the script in the current tab to a file.")
+        toolTipScriptWindow.SetToolTip(cmdAddTab, "Add a new tab.")
+        toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
+        toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
+        toolTipScriptWindow.SetToolTip(cmdHelp, "Display the Script Window help information.")
+
+        mnuUndo.ToolTipText = "Undo the last change. (Ctrl+Z)"
+        mnuRedo.ToolTipText = "Redo the last change. (Ctrl+Y)"
+        mnuCut.ToolTipText = "Copy the selected text to the clipboard, then delete the text. (Ctrl+X)"
+        mnuCopy.ToolTipText = "Copy the selected text to the clipboard. (Ctrl+C)"
+        mnuPaste.ToolTipText = "Paste the contents of the clipboard into the current tab. (Ctrl+V)"
+        mnuSelectAll.ToolTipText = "Select all the contents of the current tab. (Ctrl+A)"
+        mnuClear.ToolTipText = "Clear the contents of the current tab. (Ctrl+L)"
+        mnuRunCurrentLineSelection.ToolTipText = "Run the current line or selection. (Ctrl+Enter)"
+        mnuRunAllText.ToolTipText = "Run all the text in the tab. (Ctrl+Alt+R)"
+        mnuOpenScriptasFile.ToolTipText = "Save file to log folder and open file in external editor."
+        mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
+        mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
+        mnuHelp.ToolTipText = "Display the Script Window help information."
+
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
         addTab()

@@ -69,7 +69,7 @@ Partial Class ucrScript
         Me.cmdRunAll = New System.Windows.Forms.Button()
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
-        Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
+        Me.toolTipScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
@@ -80,7 +80,7 @@ Partial Class ucrScript
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuRunCurrentLineSelection, Me.mnuRunAllText, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(274, 314)
+        Me.mnuContextScript.Size = New System.Drawing.Size(274, 336)
         '
         'mnuUndo
         '
@@ -245,7 +245,6 @@ Partial Class ucrScript
         Me.cmdSave.Size = New System.Drawing.Size(55, 23)
         Me.cmdSave.TabIndex = 3
         Me.cmdSave.Text = "Save"
-        Me.tooltiptScriptWindow.SetToolTip(Me.cmdSave, "Run all lines")
         Me.cmdSave.UseVisualStyleBackColor = True
         '
         'cmdLoadScript
@@ -255,7 +254,6 @@ Partial Class ucrScript
         Me.cmdLoadScript.Size = New System.Drawing.Size(55, 23)
         Me.cmdLoadScript.TabIndex = 2
         Me.cmdLoadScript.Text = "Load"
-        Me.tooltiptScriptWindow.SetToolTip(Me.cmdLoadScript, "Run all lines")
         Me.cmdLoadScript.UseVisualStyleBackColor = True
         '
         'cmdRemoveTab
@@ -292,7 +290,6 @@ Partial Class ucrScript
         Me.cmdClear.Size = New System.Drawing.Size(55, 23)
         Me.cmdClear.TabIndex = 6
         Me.cmdClear.Text = "Clear"
-        Me.tooltiptScriptWindow.SetToolTip(Me.cmdClear, "Clear all the contents of the script window")
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdRunAll
@@ -302,7 +299,6 @@ Partial Class ucrScript
         Me.cmdRunAll.Size = New System.Drawing.Size(55, 23)
         Me.cmdRunAll.TabIndex = 1
         Me.cmdRunAll.Text = "Run All"
-        Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunAll, "Run all lines")
         Me.cmdRunAll.UseVisualStyleBackColor = True
         '
         'cmdRunLineSelection
@@ -312,7 +308,6 @@ Partial Class ucrScript
         Me.cmdRunLineSelection.Size = New System.Drawing.Size(55, 23)
         Me.cmdRunLineSelection.TabIndex = 0
         Me.cmdRunLineSelection.Text = "Run"
-        Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
         '
         'TabControl
@@ -356,7 +351,7 @@ Partial Class ucrScript
     Friend WithEvents Panel As Panel
     Friend WithEvents cmdRunAll As Button
     Friend WithEvents cmdRunLineSelection As Button
-    Friend WithEvents tooltiptScriptWindow As ToolTip
+    Friend WithEvents toolTipScriptWindow As ToolTip
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents mnuUndo As ToolStripMenuItem
