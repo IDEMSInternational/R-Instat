@@ -198,7 +198,7 @@ Partial Class ucrScript
         Me.lblHeaderScript.Location = New System.Drawing.Point(3, 0)
         Me.lblHeaderScript.Name = "lblHeaderScript"
         Me.lblHeaderScript.Size = New System.Drawing.Size(664, 20)
-        Me.lblHeaderScript.TabIndex = 8
+        Me.lblHeaderScript.TabIndex = 0
         Me.lblHeaderScript.Text = "Script Window"
         Me.lblHeaderScript.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -243,7 +243,7 @@ Partial Class ucrScript
         Me.cmdSave.Location = New System.Drawing.Point(186, 1)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(55, 23)
-        Me.cmdSave.TabIndex = 9
+        Me.cmdSave.TabIndex = 3
         Me.cmdSave.Text = "Save"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdSave, "Run all lines")
         Me.cmdSave.UseVisualStyleBackColor = True
@@ -253,7 +253,7 @@ Partial Class ucrScript
         Me.cmdLoadScript.Location = New System.Drawing.Point(129, 1)
         Me.cmdLoadScript.Name = "cmdLoadScript"
         Me.cmdLoadScript.Size = New System.Drawing.Size(55, 23)
-        Me.cmdLoadScript.TabIndex = 8
+        Me.cmdLoadScript.TabIndex = 2
         Me.cmdLoadScript.Text = "Load"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdLoadScript, "Run all lines")
         Me.cmdLoadScript.UseVisualStyleBackColor = True
@@ -263,7 +263,7 @@ Partial Class ucrScript
         Me.cmdRemoveTab.Location = New System.Drawing.Point(314, 1)
         Me.cmdRemoveTab.Name = "cmdRemoveTab"
         Me.cmdRemoveTab.Size = New System.Drawing.Size(55, 23)
-        Me.cmdRemoveTab.TabIndex = 7
+        Me.cmdRemoveTab.TabIndex = 5
         Me.cmdRemoveTab.Text = "Remove Tab"
         Me.cmdRemoveTab.UseVisualStyleBackColor = True
         '
@@ -272,7 +272,7 @@ Partial Class ucrScript
         Me.cmdAddTab.Location = New System.Drawing.Point(257, 1)
         Me.cmdAddTab.Name = "cmdAddTab"
         Me.cmdAddTab.Size = New System.Drawing.Size(55, 23)
-        Me.cmdAddTab.TabIndex = 6
+        Me.cmdAddTab.TabIndex = 4
         Me.cmdAddTab.Text = "Add Tab"
         Me.cmdAddTab.UseVisualStyleBackColor = True
         '
@@ -281,7 +281,7 @@ Partial Class ucrScript
         Me.cmdHelp.Location = New System.Drawing.Point(442, 1)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(55, 23)
-        Me.cmdHelp.TabIndex = 5
+        Me.cmdHelp.TabIndex = 7
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
@@ -290,7 +290,7 @@ Partial Class ucrScript
         Me.cmdClear.Location = New System.Drawing.Point(371, 1)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(55, 23)
-        Me.cmdClear.TabIndex = 4
+        Me.cmdClear.TabIndex = 6
         Me.cmdClear.Text = "Clear"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdClear, "Clear all the contents of the script window")
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -300,7 +300,7 @@ Partial Class ucrScript
         Me.cmdRunAll.Location = New System.Drawing.Point(58, 1)
         Me.cmdRunAll.Name = "cmdRunAll"
         Me.cmdRunAll.Size = New System.Drawing.Size(55, 23)
-        Me.cmdRunAll.TabIndex = 3
+        Me.cmdRunAll.TabIndex = 1
         Me.cmdRunAll.Text = "Run All"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunAll, "Run all lines")
         Me.cmdRunAll.UseVisualStyleBackColor = True
@@ -310,7 +310,7 @@ Partial Class ucrScript
         Me.cmdRunLineSelection.Location = New System.Drawing.Point(2, 1)
         Me.cmdRunLineSelection.Name = "cmdRunLineSelection"
         Me.cmdRunLineSelection.Size = New System.Drawing.Size(55, 23)
-        Me.cmdRunLineSelection.TabIndex = 2
+        Me.cmdRunLineSelection.TabIndex = 0
         Me.cmdRunLineSelection.Text = "Run"
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
         Me.cmdRunLineSelection.UseVisualStyleBackColor = True
@@ -322,7 +322,7 @@ Partial Class ucrScript
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(664, 441)
-        Me.TabControl.TabIndex = 14
+        Me.TabControl.TabIndex = 1
         '
         'ucrScript
         '
