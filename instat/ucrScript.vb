@@ -27,6 +27,9 @@ Public Class ucrScript
 
     Friend WithEvents clsScriptActive As Scintilla
 
+    ''' <summary>
+    '''     The current text in the active tab. 
+    ''' </summary>
     Public Property strText As String
         Get
             Return If(IsNothing(clsScriptActive), Nothing, clsScriptActive.Text)
@@ -38,12 +41,19 @@ Public Class ucrScript
         End Set
     End Property
 
+    ''' <summary>
+    '''     Appends <paramref name="strText"/> to the end of the text in the active tab.    ''' 
+    ''' </summary>
+    ''' <param name="strText"> The text to append to the contents of the active tab.</param>
     Public Sub AppendText(strText As String)
         clsScriptActive.AppendText(Environment.NewLine & strText)
         clsScriptActive.GotoPosition(clsScriptActive.TextLength)
         EnableDisableButtons()
     End Sub
 
+    ''' <summary>
+    ''' Removes the selected text from the active tab, and copies the removed text to the clipboard.
+    ''' </summary>
     Public Sub CutText()
         If clsScriptActive.SelectedText.Length > 0 Then
             clsScriptActive.Cut()
@@ -51,6 +61,9 @@ Public Class ucrScript
         End If
     End Sub
 
+    ''' <summary>
+    ''' Copies the selected text from the active tab to the clipboard.
+    ''' </summary>
     Public Sub CopyText()
         If clsScriptActive.SelectedText.Length > 0 Then
             clsScriptActive.Copy()
@@ -58,6 +71,9 @@ Public Class ucrScript
         End If
     End Sub
 
+    ''' <summary>
+    ''' Pastes the contents of the clipboard into the active tab.
+    ''' </summary>
     Public Sub PasteText()
         If Clipboard.ContainsData(DataFormats.Text) Then
             clsScriptActive.Paste()
@@ -67,6 +83,9 @@ Public Class ucrScript
         End If
     End Sub
 
+    ''' <summary>
+    ''' Selects all the text in the active tab.
+    ''' </summary>
     Public Sub SelectAllText()
         clsScriptActive.SelectAll()
         EnableDisableButtons()
@@ -174,57 +193,6 @@ Public Class ucrScript
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>
-    '''     If <paramref name="charNew"/> is a bracket/quote, then inserts a closing bracket/quote. <para>
-    '''     This sub is based on a C# function from:
-    '''     https://github.com/jacobslusser/ScintillaNET/wiki/Character-Autocompletion. </para><para>
-    '''     It avoids inserting matching quotes in situations such as "don't". 
-    '''     It also ensures that the caret does not remain in the center upon multiple quote insertions.</para><para>
-    '''     For example ("|" is cursor position; '=&gt;' is output):</para><list type="bullet"><item>
-    '''         insert ' =&gt; '|' </item><item>
-    '''         insert ' again =&gt; ''| </item></list>
-    '''     Visual Studio and RStudio have the same behaviour.
-    ''' </summary>
-    ''' <param name="charNew">  The character typed by the user. </param>
-    '''--------------------------------------------------------------------------------------------
-    Private Sub InsertMatchedChars(charNew As Char)
-        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
-        Dim bIsDocStart As Boolean = iCaretPos = 1
-        Dim bIsDocEnd As Boolean = iCaretPos = clsScriptActive.Text.Length
-
-        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(clsScriptActive.GetCharAt(iCaretPos - 2)))
-        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(clsScriptActive.GetCharAt(iCaretPos)))
-
-        Dim dctBrackets As New Dictionary(Of Char, Char) From {{"(", ")"}, {"{", "}"}, {"[", "]"}}
-
-        'If user entered an open bracket character
-        If dctBrackets.ContainsKey(charNew) Then
-            If IsCharQuote(charNext) Then
-                Exit Sub
-            End If
-            'insert close bracket character
-            clsScriptActive.InsertText(iCaretPos, dctBrackets(charNew))
-        ElseIf IsCharQuote(charNew) Then ' else if user entered quote
-            'if user enters multiple quotes, then ensure that the caret does not remain in the center
-            If charPrev = charNew AndAlso charNext = charNew Then
-                clsScriptActive.DeleteRange(iCaretPos, 1)
-                clsScriptActive.GotoPosition(iCaretPos)
-                Exit Sub
-            End If
-
-            'in certain situations add a closing quote after the caret
-            Dim charClosingBracket As Char
-            Dim bIsEnclosedByBrackets As Boolean = dctBrackets.TryGetValue(charPrev, charClosingBracket) AndAlso charNext = charClosingBracket
-            Dim bIsEnclosedBySpaces As Boolean = IsCharBlank(charPrev) AndAlso IsCharBlank(charNext)
-            Dim bIsEnclosedByBracketAndSpace As Boolean = (dctBrackets.ContainsKey(charPrev) AndAlso IsCharBlank(charNext)) _
-                                                   OrElse (dctBrackets.ContainsValue(charNext) AndAlso IsCharBlank(charPrev))
-            If bIsEnclosedByBrackets OrElse bIsEnclosedBySpaces OrElse bIsEnclosedByBracketAndSpace Then
-                clsScriptActive.InsertText(iCaretPos, charNew)
-            End If
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Automatically sets the indent of a new line.<para>
     '''             Normally the indent is set to the same indent as the last previous non-empty 
     '''             line. However, if the caret was between '{}' when enter was pressed, then 
@@ -278,6 +246,57 @@ Public Class ucrScript
         clsScriptActive.GotoPosition(clsScriptActive.CurrentPosition + iIndent)
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     If <paramref name="charNew"/> is a bracket/quote, then inserts a closing bracket/quote. <para>
+    '''     This sub is based on a C# function from:
+    '''     https://github.com/jacobslusser/ScintillaNET/wiki/Character-Autocompletion. </para><para>
+    '''     It avoids inserting matching quotes in situations such as "don't". 
+    '''     It also ensures that the caret does not remain in the center upon multiple quote insertions.</para><para>
+    '''     For example ("|" is cursor position; '=&gt;' is output):</para><list type="bullet"><item>
+    '''         insert ' =&gt; '|' </item><item>
+    '''         insert ' again =&gt; ''| </item></list>
+    '''     Visual Studio and RStudio have the same behaviour.
+    ''' </summary>
+    ''' <param name="charNew">  The character typed by the user. </param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub InsertMatchedChars(charNew As Char)
+        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+        Dim bIsDocStart As Boolean = iCaretPos = 1
+        Dim bIsDocEnd As Boolean = iCaretPos = clsScriptActive.Text.Length
+
+        Dim charPrev As Char = If(bIsDocStart, Chr(0), ChrW(clsScriptActive.GetCharAt(iCaretPos - 2)))
+        Dim charNext As Char = If(bIsDocEnd, Chr(0), ChrW(clsScriptActive.GetCharAt(iCaretPos)))
+
+        Dim dctBrackets As New Dictionary(Of Char, Char) From {{"(", ")"}, {"{", "}"}, {"[", "]"}}
+
+        'If user entered an open bracket character
+        If dctBrackets.ContainsKey(charNew) Then
+            If IsCharQuote(charNext) Then
+                Exit Sub
+            End If
+            'insert close bracket character
+            clsScriptActive.InsertText(iCaretPos, dctBrackets(charNew))
+        ElseIf IsCharQuote(charNew) Then ' else if user entered quote
+            'if user enters multiple quotes, then ensure that the caret does not remain in the center
+            If charPrev = charNew AndAlso charNext = charNew Then
+                clsScriptActive.DeleteRange(iCaretPos, 1)
+                clsScriptActive.GotoPosition(iCaretPos)
+                Exit Sub
+            End If
+
+            'in certain situations add a closing quote after the caret
+            Dim charClosingBracket As Char
+            Dim bIsEnclosedByBrackets As Boolean = dctBrackets.TryGetValue(charPrev, charClosingBracket) AndAlso charNext = charClosingBracket
+            Dim bIsEnclosedBySpaces As Boolean = IsCharBlank(charPrev) AndAlso IsCharBlank(charNext)
+            Dim bIsEnclosedByBracketAndSpace As Boolean = (dctBrackets.ContainsKey(charPrev) AndAlso IsCharBlank(charNext)) _
+                                                   OrElse (dctBrackets.ContainsValue(charNext) AndAlso IsCharBlank(charPrev))
+            If bIsEnclosedByBrackets OrElse bIsEnclosedBySpaces OrElse bIsEnclosedByBracketAndSpace Then
+                clsScriptActive.InsertText(iCaretPos, charNew)
+            End If
+        End If
+    End Sub
+
     Private Function IsBracket(iNewChar As Integer) As Boolean
         Dim arrRBrackets() As String = {"(", ")", "{", "}", "[", "]"}
         Return arrRBrackets.Contains(Chr(iNewChar))
@@ -290,6 +309,36 @@ Public Class ucrScript
     Private Function IsCharQuote(charNew As Char) As Boolean
         Return charNew = """" OrElse charNew = "'"
     End Function
+
+    Private Sub LoadScript()
+        If clsScriptActive.TextLength > 0 _
+                AndAlso MsgBox("Loading a script from file will clear your current script" _
+                               & Environment.NewLine & "Do you still want to load?",
+                               vbYesNo, "Load Script From File") = vbNo Then
+            Exit Sub
+        End If
+
+        Using dlgLoad As New OpenFileDialog
+            dlgLoad.Title = "Load Script From Text File"
+            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            If Not dlgLoad.ShowDialog() = DialogResult.OK Then
+                Exit Sub
+            End If
+
+            Try
+                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
+                TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
+                bIsTextChanged = False
+            Catch
+                MsgBox("Could not load the script from file." & Environment.NewLine &
+                       "The file may be in use by another program or you may not have access to write to the specified location.",
+                       vbExclamation, "Load Script")
+            End Try
+        End Using
+
+    End Sub
 
     Private Function NewScriptEditor() As Scintilla
         Dim clsNewScript As Scintilla = New Scintilla With {
@@ -386,6 +435,17 @@ Public Class ucrScript
                   "")
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     Sets the margin used to display line numbers to the correct width so that line numbers 
+    '''     up to and including <paramref name="iMaxLineNumberCharLengthNew"/> display correctly.
+    ''' </summary>
+    ''' <param name="iMaxLineNumberCharLengthNew"> The maximum line number that needs to be 
+    '''     displayed (normally the number of lines in the script).</param>
+    ''' <param name="bForce"> If true, then forces reset of margin width even if the margin width  
+    '''     is the same as the last time that this sub was called (normally only needed when 
+    '''     switching to a new tab).</param>
+    '''--------------------------------------------------------------------------------------------
     Private Sub SetLineNumberMarginWidth(iMaxLineNumberCharLengthNew As Integer,
                                          Optional bForce As Boolean = False)
         If iMaxLineNumberCharLength = iMaxLineNumberCharLengthNew _
@@ -399,6 +459,25 @@ Public Class ucrScript
             strLineNumber &= "9"
         Next
         clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
+    End Sub
+
+    Private Sub SaveScript()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Script To File"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    bIsTextChanged = False
+                Catch
+                    MsgBox("Could not save the script file." & Environment.NewLine &
+                           "The file may be in use by another program or you may not have access to write to the specified location.",
+                           vbExclamation, "Save Script")
+                End Try
+            End If
+        End Using
     End Sub
 
     Private Sub clsScriptActive_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
@@ -418,6 +497,10 @@ Public Class ucrScript
 
     Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
         addTab()
+    End Sub
+
+    Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
+        LoadScript()
     End Sub
 
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
@@ -456,57 +539,19 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        CutText()
-    End Sub
-
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
         CopyText()
     End Sub
 
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteText()
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        CutText()
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
-    Private Sub LoadScript()
-        If clsScriptActive.TextLength > 0 _
-                AndAlso MsgBox("Loading a script from file will clear your current script" _
-                               & Environment.NewLine & "Do you still want to load?",
-                               vbYesNo, "Load Script From File") = vbNo Then
-            Exit Sub
-        End If
-
-        Using dlgLoad As New OpenFileDialog
-            dlgLoad.Title = "Load Script From Text File"
-            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-
-            If Not dlgLoad.ShowDialog() = DialogResult.OK Then
-                Exit Sub
-            End If
-
-            Try
-                frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
-                bIsTextChanged = False
-            Catch
-                MsgBox("Could not load the script from file." & Environment.NewLine &
-                       "The file may be in use by another program or you may not have access to write to the specified location.",
-                       vbExclamation, "Load Script")
-            End Try
-        End Using
-
-    End Sub
-
     Private Sub mnuLoadScript_Click(sender As Object, e As EventArgs) Handles mnuLoadScriptFromFile.Click
-        LoadScript()
-    End Sub
-
-    Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
         LoadScript()
     End Sub
 
@@ -530,6 +575,10 @@ Public Class ucrScript
                    "The file may be in use by another program or you may not have access to write to the specified location.",
                    vbExclamation, "Open Script")
         End Try
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteText()
     End Sub
 
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
@@ -561,25 +610,6 @@ Public Class ucrScript
             RunCurrentLine()
         End If
         EnableRunButtons(True)
-    End Sub
-
-    Private Sub SaveScript()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
-                    bIsTextChanged = False
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save Script")
-                End Try
-            End If
-        End Using
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
