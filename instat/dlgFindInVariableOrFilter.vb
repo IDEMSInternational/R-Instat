@@ -56,6 +56,7 @@ Public Class dlgFindInVariableOrFilter
 
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
 
+        ucrNudPage.SetMinMax(1, Integer.MaxValue)
         ucrReceiverVariable.SetMeAsReceiver()
         cmdFindNext.Enabled = False
     End Sub
@@ -71,10 +72,10 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
+        frmMain.ucrDataViewer.GoToSpecificRowPage(ucrNudPage.GetText)
         frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
                                            strVariable:=ucrReceiverVariable.GetVariableNames,
                                            bFindNext:=False)
-        frmMain.ucrDataViewer.GetCurrentDataPageFocus()
         iClick = 1
         cmdFindNext.Enabled = True
     End Sub
@@ -84,7 +85,6 @@ Public Class dlgFindInVariableOrFilter
                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                    bFindNext:=True,
                                    iClick:=iClick)
-        frmMain.ucrDataViewer.GetCurrentDataPageFocus()
         iClick += 1
     End Sub
 
