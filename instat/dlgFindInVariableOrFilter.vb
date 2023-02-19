@@ -41,7 +41,7 @@ Public Class dlgFindInVariableOrFilter
 
         ucrPnlOptions.AddRadioButton(rdoVariable)
         ucrPnlOptions.AddRadioButton(rdoInFilter)
-
+        rdoInFilter.Enabled = False
         ucrPnlOptions.AddParameterValuesCondition(rdoVariable, "check", "variable")
         ucrPnlOptions.AddParameterValuesCondition(rdoInFilter, "check", "filter")
 

@@ -22,34 +22,22 @@ Partial Class dlgFindInVariableOrFilter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.cmdFind = New System.Windows.Forms.Button()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.lblPattern = New System.Windows.Forms.Label()
-        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
-        Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoInFilter = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.cmdFindNext = New System.Windows.Forms.Button()
-        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.lblFilter = New System.Windows.Forms.Label()
         Me.lblPage = New System.Windows.Forms.Label()
         Me.ucrNudPage = New instat.ucrNud()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.ucrInputPattern = New instat.ucrInputTextBox()
+        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
-        '
-        'ucrInputPattern
-        '
-        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
-        Me.ucrInputPattern.AutoSize = True
-        Me.ucrInputPattern.IsMultiline = False
-        Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(427, 153)
-        Me.ucrInputPattern.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(180, 32)
-        Me.ucrInputPattern.TabIndex = 7
         '
         'cmdFind
         '
@@ -72,46 +60,11 @@ Partial Class dlgFindInVariableOrFilter
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(427, 163)
+        Me.lblPattern.Location = New System.Drawing.Point(427, 129)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(65, 20)
         Me.lblPattern.TabIndex = 6
         Me.lblPattern.Text = "Pattern:"
-        '
-        'ucrReceiverVariable
-        '
-        Me.ucrReceiverVariable.AutoSize = True
-        Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(427, 98)
-        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
-        Me.ucrReceiverVariable.Selector = Nothing
-        Me.ucrReceiverVariable.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverVariable.strNcFilePath = ""
-        Me.ucrReceiverVariable.TabIndex = 5
-        Me.ucrReceiverVariable.ucrSelector = Nothing
-        '
-        'ucrSelectorFind
-        '
-        Me.ucrSelectorFind.AutoSize = True
-        Me.ucrSelectorFind.bDropUnusedFilterLevels = False
-        Me.ucrSelectorFind.bShowHiddenColumns = False
-        Me.ucrSelectorFind.bUseCurrentFilter = True
-        Me.ucrSelectorFind.Location = New System.Drawing.Point(22, 64)
-        Me.ucrSelectorFind.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFind.Name = "ucrSelectorFind"
-        Me.ucrSelectorFind.Size = New System.Drawing.Size(320, 274)
-        Me.ucrSelectorFind.TabIndex = 3
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(15, 351)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
-        Me.ucrBase.TabIndex = 10
         '
         'rdoVariable
         '
@@ -148,15 +101,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoInFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInFilter.UseVisualStyleBackColor = True
         '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(122, 11)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(417, 52)
-        Me.ucrPnlOptions.TabIndex = 0
-        '
         'cmdFindNext
         '
         Me.cmdFindNext.Location = New System.Drawing.Point(427, 269)
@@ -165,19 +109,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.cmdFindNext.TabIndex = 9
         Me.cmdFindNext.Text = "Find Next"
         Me.cmdFindNext.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverFilter
-        '
-        Me.ucrReceiverFilter.AutoSize = True
-        Me.ucrReceiverFilter.frmParent = Me
-        Me.ucrReceiverFilter.Location = New System.Drawing.Point(427, 155)
-        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
-        Me.ucrReceiverFilter.Selector = Nothing
-        Me.ucrReceiverFilter.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverFilter.strNcFilePath = ""
-        Me.ucrReceiverFilter.TabIndex = 11
-        Me.ucrReceiverFilter.ucrSelector = Nothing
         '
         'lblFilter
         '
@@ -191,7 +122,7 @@ Partial Class dlgFindInVariableOrFilter
         'lblPage
         '
         Me.lblPage.AutoSize = True
-        Me.lblPage.Location = New System.Drawing.Point(427, 191)
+        Me.lblPage.Location = New System.Drawing.Point(427, 192)
         Me.lblPage.Name = "lblPage"
         Me.lblPage.Size = New System.Drawing.Size(50, 20)
         Me.lblPage.TabIndex = 13
@@ -211,6 +142,75 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrNudPage.TabIndex = 14
         Me.ucrNudPage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(122, 11)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(417, 52)
+        Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(15, 351)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 10
+        '
+        'ucrSelectorFind
+        '
+        Me.ucrSelectorFind.AutoSize = True
+        Me.ucrSelectorFind.bDropUnusedFilterLevels = False
+        Me.ucrSelectorFind.bShowHiddenColumns = False
+        Me.ucrSelectorFind.bUseCurrentFilter = True
+        Me.ucrSelectorFind.Location = New System.Drawing.Point(22, 64)
+        Me.ucrSelectorFind.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFind.Name = "ucrSelectorFind"
+        Me.ucrSelectorFind.Size = New System.Drawing.Size(320, 274)
+        Me.ucrSelectorFind.TabIndex = 3
+        '
+        'ucrReceiverVariable
+        '
+        Me.ucrReceiverVariable.AutoSize = True
+        Me.ucrReceiverVariable.frmParent = Me
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(427, 98)
+        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
+        Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.TabIndex = 5
+        Me.ucrReceiverVariable.ucrSelector = Nothing
+        '
+        'ucrInputPattern
+        '
+        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputPattern.AutoSize = True
+        Me.ucrInputPattern.IsMultiline = False
+        Me.ucrInputPattern.IsReadOnly = False
+        Me.ucrInputPattern.Location = New System.Drawing.Point(427, 153)
+        Me.ucrInputPattern.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputPattern.Size = New System.Drawing.Size(180, 32)
+        Me.ucrInputPattern.TabIndex = 7
+        '
+        'ucrReceiverFilter
+        '
+        Me.ucrReceiverFilter.AutoSize = True
+        Me.ucrReceiverFilter.frmParent = Me
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(427, 155)
+        Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
+        Me.ucrReceiverFilter.Selector = Nothing
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverFilter.strNcFilePath = ""
+        Me.ucrReceiverFilter.TabIndex = 11
+        Me.ucrReceiverFilter.ucrSelector = Nothing
+        '
         'dlgFindInVariableOrFilter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -220,7 +220,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.Controls.Add(Me.ucrNudPage)
         Me.Controls.Add(Me.lblPage)
         Me.Controls.Add(Me.lblFilter)
-        Me.Controls.Add(Me.ucrReceiverFilter)
         Me.Controls.Add(Me.cmdFindNext)
         Me.Controls.Add(Me.rdoVariable)
         Me.Controls.Add(Me.rdoInFilter)
@@ -232,6 +231,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.cmdFind)
         Me.Controls.Add(Me.ucrInputPattern)
+        Me.Controls.Add(Me.ucrReceiverFilter)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFindInVariableOrFilter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
