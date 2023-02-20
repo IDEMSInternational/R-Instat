@@ -72,6 +72,7 @@ Public Class dlgExportToClimsoft
         ucrChkExportDataFrame.AddToLinkedControls(ucrInputExportFile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkExportDataFrame.AddParameterValuesCondition(True, "export", "True")
         ucrChkExportDataFrame.AddParameterValuesCondition(False, "export", "False")
+        ucrChkExportDataFrame.SetLinkedDisplayControl(lblExport)
 
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.SetIsTextBox()
@@ -79,7 +80,8 @@ Public Class dlgExportToClimsoft
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrInputExportFile.IsReadOnly = True
-
+        ucrInputExportFile.SetLinkedDisplayControl(lblExport)
+        ucrInputExportFile.SetLinkedDisplayControl(cmdBrowse)
 
     End Sub
 
@@ -97,6 +99,8 @@ Public Class dlgExportToClimsoft
 
 
         clsDummyFunction.AddParameter("dataframe", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("export", "False", iPosition:=1)
+
 
         clsDataFrameFunction.SetRCommand("data.frame")
         clsDataFrameFunction.AddParameter("hour", 6, iPosition:=3)
@@ -120,6 +124,8 @@ Public Class dlgExportToClimsoft
 
 
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
+
         DataFrameAssignTo()
     End Sub
 
@@ -127,11 +133,14 @@ Public Class dlgExportToClimsoft
         ucrReceiverDate.SetRCode(clsDataFrameFunction, bReset)
         ucrInputHour.SetRCode(clsDataFrameFunction, bReset)
         ucrInputLevel.SetRCode(clsDataFrameFunction, bReset)
-        ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
-        ucrChkExportDataFrame.SetRCode(clsDummyFunction, bReset)
+        'ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportClimsoftFunction, bReset)
+        If bReset Then
+            ucrChkExportDataFrame.SetRCode(clsDummyFunction, bReset)
+            ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
 
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -140,6 +149,9 @@ Public Class dlgExportToClimsoft
                               AndAlso Not ucrReceiverStation.IsEmpty
                               )
         If ucrChkNewDataFrame.Checked And Not ucrSaveNewDataFrame.IsComplete Then
+            ucrBase.OKEnabled(False)
+        End If
+        If ucrChkExportDataFrame.Checked And ucrInputExportFile.IsEmpty Then
             ucrBase.OKEnabled(False)
         End If
 
@@ -166,13 +178,7 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub ucrChkNewDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewDataFrame.ControlValueChanged, ucrChkExportDataFrame.ControlValueChanged
-        If ucrChkNewDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-            ucrBase.clsRsyntax.iCallType = 0
-        ElseIf ucrChkExportDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimsoftFunction)
-            'ucrBase.clsRsyntax.iCallType = 1
-        End If
+        SettingBaseFunction()
     End Sub
 
     Private Sub ucrReceiverElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlValueChanged
@@ -180,6 +186,7 @@ Public Class dlgExportToClimsoft
         clsCurrentNewColumnFunction = ucrReceiverElements.GetVariables(True).Clone
         clsCurrentNewColumnFunction.SetAssignTo("columns")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
+        SettingBaseFunction()
     End Sub
 
     Private Sub AddStationName()
@@ -206,6 +213,49 @@ Public Class dlgExportToClimsoft
         SelectFileToSave()
     End Sub
 
+    Private Sub SettingBaseFunction()
+        'If ucrChkNewDataFrame.Checked Then
+        '    ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+        '    ucrBase.clsRsyntax.iCallType = 0
+        'ElseIf ucrChkExportDataFrame.Checked Then
+        '    ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+
+        '    'ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimsoftFunction)
+        '    ucrBase.clsRsyntax.AddToAfterCodes(clsExportClimsoftFunction)
+        '    'ElseIf ucrChkNewDataFrame.Checked AndAlso ucrChkExportDataFrame.Checked Then
+        '    '    ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+        '    '    ucrBase.clsRsyntax.AddToAfterCodes(clsExportClimsoftFunction)
+        'End If
+
+        If ucrChkNewDataFrame.Checked And ucrChkExportDataFrame.Checked Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+            ucrBase.clsRsyntax.ClearCodes()
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsExportClimsoftFunction)
+        ElseIf ucrChkNewDataFrame.Checked AndAlso Not ucrChkExportDataFrame.Checked Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
+            ucrBase.clsRsyntax.lstAfterCodes.Clear()
+        ElseIf ucrChkExportDataFrame.Checked AndAlso Not ucrChkNewDataFrame.Checked Then
+            ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimsoftFunction)
+            ucrBase.clsRsyntax.lstAfterCodes.Clear()
+        End If
+
+        'If ucrChkNewDataFrame.Checked Then
+        '    If ucrChkExportDataFrame.Checked Then
+
+
+        '    Else
+
+
+        '    End If
+
+        'Else
+
+        'End If
+    End Sub
+
     Private Sub SelectFileToSave()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save CPT File"
@@ -228,7 +278,7 @@ Public Class dlgExportToClimsoft
 
     Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlContentsChanged,
         ucrReceiverDate.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrInputLevel.ControlContentsChanged,
-        ucrInputLevel.ControlContentsChanged
+        ucrInputLevel.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrChkExportDataFrame.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -236,5 +286,6 @@ Public Class dlgExportToClimsoft
         If ucrInputExportFile.IsEmpty() Then
             SelectFileToSave()
         End If
+        SettingBaseFunction()
     End Sub
 End Class
