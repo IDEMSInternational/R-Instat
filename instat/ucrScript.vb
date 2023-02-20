@@ -321,7 +321,12 @@ Public Class ucrScript
         Using dlgLoad As New OpenFileDialog
             dlgLoad.Title = "Load Script From Text File"
             dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgLoad.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+
+            'Ensure that dialog opens in correct folder.
+            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
+            'not work (I think a bug in WinForms).So we need to use a static variable instead.
+            Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
+            dlgLoad.InitialDirectory = strInitialDirectory
 
             If Not dlgLoad.ShowDialog() = DialogResult.OK Then
                 Exit Sub
@@ -330,6 +335,7 @@ Public Class ucrScript
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
                 TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
+                strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
                 bIsTextChanged = False
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
@@ -435,6 +441,32 @@ Public Class ucrScript
                   "")
     End Function
 
+    Private Sub SaveScript()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Script To File"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+
+            'Ensure that dialog opens in correct folder.
+            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
+            'not work (I think a bug in WinForms).So we need to use a static variable instead.
+            Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
+            dlgSave.InitialDirectory = strInitialDirectory
+
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
+                    bIsTextChanged = False
+                Catch
+                    MsgBox("Could not save the script file." & Environment.NewLine &
+                           "The file may be in use by another program or you may not have access to write to the specified location.",
+                           vbExclamation, "Save Script")
+                End Try
+            End If
+        End Using
+    End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     '''     Sets the margin used to display line numbers to the correct width so that line numbers 
@@ -459,25 +491,6 @@ Public Class ucrScript
             strLineNumber &= "9"
         Next
         clsScriptActive.Margins(0).Width = clsScriptActive.TextWidth(Style.LineNumber, strLineNumber)
-    End Sub
-
-    Private Sub SaveScript()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
-                    bIsTextChanged = False
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save Script")
-                End Try
-            End If
-        End Using
     End Sub
 
     Private Sub clsScriptActive_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
