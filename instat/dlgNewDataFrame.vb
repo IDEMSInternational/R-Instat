@@ -87,7 +87,8 @@ Public Class dlgNewDataFrame
 
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
-        ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVariable.AddParameterValuesCondition(True, "variablename", "True")
+        ucrChkVariable.AddParameterValuesCondition(False, "variablename", "False")
 
         ucrChkIncludeLabel.SetText("Variable Label")
         ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
@@ -118,6 +119,7 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
+        clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
 
         clsGetCategoriesFunction.SetPackageName("rcorpora")
         clsGetCategoriesFunction.SetRCommand("categories")
