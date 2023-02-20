@@ -32,6 +32,17 @@ Partial Class sdgLocation
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.ucrSelectorLocation = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.gprLocation = New System.Windows.Forms.GroupBox()
+        Me.ucrInputLongitude = New instat.ucrInputTextBox()
+        Me.ucrInputLatitude = New instat.ucrInputTextBox()
+        Me.ucrNudElevation = New instat.ucrNud()
+        Me.lblDegreesLon = New System.Windows.Forms.Label()
+        Me.lblDegreesLat = New System.Windows.Forms.Label()
+        Me.lblLongitude1 = New System.Windows.Forms.Label()
+        Me.lblLatitude1 = New System.Windows.Forms.Label()
+        Me.lblElevationunit = New System.Windows.Forms.Label()
+        Me.lblAltitude1 = New System.Windows.Forms.Label()
+        Me.gprLocation.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblLatitude
@@ -78,7 +89,7 @@ Partial Class sdgLocation
         Me.ucrReceiverAltitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverAltitude.Name = "ucrReceiverAltitude"
         Me.ucrReceiverAltitude.Selector = Nothing
-        Me.ucrReceiverAltitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverAltitude.Size = New System.Drawing.Size(89, 20)
         Me.ucrReceiverAltitude.strNcFilePath = ""
         Me.ucrReceiverAltitude.TabIndex = 6
         Me.ucrReceiverAltitude.ucrSelector = Nothing
@@ -91,7 +102,7 @@ Partial Class sdgLocation
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
         Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(89, 20)
         Me.ucrReceiverLatitude.strNcFilePath = ""
         Me.ucrReceiverLatitude.TabIndex = 7
         Me.ucrReceiverLatitude.ucrSelector = Nothing
@@ -104,7 +115,7 @@ Partial Class sdgLocation
         Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
         Me.ucrReceiverLongitude.Selector = Nothing
-        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(89, 20)
         Me.ucrReceiverLongitude.strNcFilePath = ""
         Me.ucrReceiverLongitude.TabIndex = 8
         Me.ucrReceiverLongitude.ucrSelector = Nothing
@@ -117,7 +128,7 @@ Partial Class sdgLocation
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(89, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 9
         Me.ucrReceiverStation.ucrSelector = Nothing
@@ -142,11 +153,121 @@ Partial Class sdgLocation
         Me.ucrSelectorLocation.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorLocation.TabIndex = 11
         '
+        'gprLocation
+        '
+        Me.gprLocation.Controls.Add(Me.ucrInputLongitude)
+        Me.gprLocation.Controls.Add(Me.ucrInputLatitude)
+        Me.gprLocation.Controls.Add(Me.ucrNudElevation)
+        Me.gprLocation.Controls.Add(Me.lblDegreesLon)
+        Me.gprLocation.Controls.Add(Me.lblDegreesLat)
+        Me.gprLocation.Controls.Add(Me.lblLongitude1)
+        Me.gprLocation.Controls.Add(Me.lblLatitude1)
+        Me.gprLocation.Controls.Add(Me.lblElevationunit)
+        Me.gprLocation.Controls.Add(Me.lblAltitude1)
+        Me.gprLocation.Location = New System.Drawing.Point(351, 63)
+        Me.gprLocation.Name = "gprLocation"
+        Me.gprLocation.Size = New System.Drawing.Size(172, 129)
+        Me.gprLocation.TabIndex = 12
+        Me.gprLocation.TabStop = False
+        Me.gprLocation.Text = "Location"
+        '
+        'ucrInputLongitude
+        '
+        Me.ucrInputLongitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLongitude.AutoSize = True
+        Me.ucrInputLongitude.IsMultiline = False
+        Me.ucrInputLongitude.IsReadOnly = False
+        Me.ucrInputLongitude.Location = New System.Drawing.Point(62, 82)
+        Me.ucrInputLongitude.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputLongitude.Name = "ucrInputLongitude"
+        Me.ucrInputLongitude.Size = New System.Drawing.Size(51, 21)
+        Me.ucrInputLongitude.TabIndex = 16
+        '
+        'ucrInputLatitude
+        '
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.AutoSize = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        Me.ucrInputLatitude.Location = New System.Drawing.Point(62, 51)
+        Me.ucrInputLatitude.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
+        Me.ucrInputLatitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrInputLatitude.TabIndex = 15
+        '
+        'ucrNudElevation
+        '
+        Me.ucrNudElevation.AutoSize = True
+        Me.ucrNudElevation.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudElevation.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudElevation.Location = New System.Drawing.Point(63, 18)
+        Me.ucrNudElevation.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrNudElevation.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudElevation.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudElevation.Name = "ucrNudElevation"
+        Me.ucrNudElevation.Size = New System.Drawing.Size(50, 26)
+        Me.ucrNudElevation.TabIndex = 6
+        Me.ucrNudElevation.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblDegreesLon
+        '
+        Me.lblDegreesLon.AutoSize = True
+        Me.lblDegreesLon.Location = New System.Drawing.Point(120, 86)
+        Me.lblDegreesLon.Name = "lblDegreesLon"
+        Me.lblDegreesLon.Size = New System.Drawing.Size(46, 13)
+        Me.lblDegreesLon.TabIndex = 5
+        Me.lblDegreesLon.Text = "Radians"
+        '
+        'lblDegreesLat
+        '
+        Me.lblDegreesLat.AutoSize = True
+        Me.lblDegreesLat.Location = New System.Drawing.Point(119, 54)
+        Me.lblDegreesLat.Name = "lblDegreesLat"
+        Me.lblDegreesLat.Size = New System.Drawing.Size(46, 13)
+        Me.lblDegreesLat.TabIndex = 4
+        Me.lblDegreesLat.Text = "Radians"
+        '
+        'lblLongitude1
+        '
+        Me.lblLongitude1.AutoSize = True
+        Me.lblLongitude1.Location = New System.Drawing.Point(6, 86)
+        Me.lblLongitude1.Name = "lblLongitude1"
+        Me.lblLongitude1.Size = New System.Drawing.Size(54, 13)
+        Me.lblLongitude1.TabIndex = 3
+        Me.lblLongitude1.Text = "Longitude"
+        '
+        'lblLatitude1
+        '
+        Me.lblLatitude1.AutoSize = True
+        Me.lblLatitude1.Location = New System.Drawing.Point(7, 54)
+        Me.lblLatitude1.Name = "lblLatitude1"
+        Me.lblLatitude1.Size = New System.Drawing.Size(45, 13)
+        Me.lblLatitude1.TabIndex = 2
+        Me.lblLatitude1.Text = "Latitude"
+        '
+        'lblElevationunit
+        '
+        Me.lblElevationunit.AutoSize = True
+        Me.lblElevationunit.Location = New System.Drawing.Point(120, 20)
+        Me.lblElevationunit.Name = "lblElevationunit"
+        Me.lblElevationunit.Size = New System.Drawing.Size(39, 13)
+        Me.lblElevationunit.TabIndex = 1
+        Me.lblElevationunit.Text = "Meters"
+        '
+        'lblAltitude1
+        '
+        Me.lblAltitude1.AutoSize = True
+        Me.lblAltitude1.Location = New System.Drawing.Point(7, 20)
+        Me.lblAltitude1.Name = "lblAltitude1"
+        Me.lblAltitude1.Size = New System.Drawing.Size(42, 13)
+        Me.lblAltitude1.TabIndex = 0
+        Me.lblAltitude1.Text = "Altitude"
+        '
         'sdgLocation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 236)
+        Me.ClientSize = New System.Drawing.Size(535, 225)
         Me.Controls.Add(Me.ucrSelectorLocation)
         Me.Controls.Add(Me.ucrSubDialogueBase)
         Me.Controls.Add(Me.ucrReceiverStation)
@@ -157,12 +278,15 @@ Partial Class sdgLocation
         Me.Controls.Add(Me.lblAltitude)
         Me.Controls.Add(Me.lblLongitude)
         Me.Controls.Add(Me.lblLatitude)
+        Me.Controls.Add(Me.gprLocation)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgLocation"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Location"
+        Me.gprLocation.ResumeLayout(False)
+        Me.gprLocation.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -178,4 +302,14 @@ Partial Class sdgLocation
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrSelectorLocation As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSubDialogueBase As ucrButtonsSubdialogue
+    Friend WithEvents gprLocation As GroupBox
+    Friend WithEvents ucrInputLongitude As ucrInputTextBox
+    Friend WithEvents ucrInputLatitude As ucrInputTextBox
+    Friend WithEvents ucrNudElevation As ucrNud
+    Friend WithEvents lblDegreesLon As Label
+    Friend WithEvents lblDegreesLat As Label
+    Friend WithEvents lblLongitude1 As Label
+    Friend WithEvents lblLatitude1 As Label
+    Friend WithEvents lblElevationunit As Label
+    Friend WithEvents lblAltitude1 As Label
 End Class

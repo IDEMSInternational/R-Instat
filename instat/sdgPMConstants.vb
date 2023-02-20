@@ -19,7 +19,7 @@ Public Class sdgPMConstants
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsListFunction As New RFunction
-    Private Sub sdgPMConstants_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
+    Private Sub sdgPMConstants_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load, UcrButtonsSubdialogue1.Load
         autoTranslate(Me)
     End Sub
 
