@@ -502,14 +502,12 @@ Public Class dlgNewDataFrame
     Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bInsert As Boolean)
         If bInsert Then
             For i As Integer = iRow To dgrView.Rows.Count - 1
-                'i += 1
+                Dim iRowHeader = i + 1
                 With dgrView.Rows
-                    .Item(i).Cells(0).Value = i + 1
-                    .Item(i).Cells(1).Value = "x" & i + 1
-                    .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = "NA"
-                    .Item(i).Cells(4).Value = ""
-                    .Item(i).Cells(5).Value = ""
+                    .Item(i).Cells(0).Value = iRowHeader
+                    .Item(i).Cells(1).Value = String.Concat("x", iRowHeader)
+                    '.Item(i).Cells(2).Value = "Character"
+                    '.Item(i).Cells(3).Value = "NA"
                 End With
             Next
         Else
@@ -517,8 +515,6 @@ Public Class dlgNewDataFrame
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
-                    .Item(i).Cells(4).Value = ""
-                    .Item(i).Cells(5).Value = ""
                     If i = 0 Then
                         .Item(i).Cells(2).Value = "Numeric"
                         .Item(i).Cells(3).Value = "1,1000"
@@ -540,11 +536,14 @@ Public Class dlgNewDataFrame
                 dataTypeGridView.Rows.Insert(iRow, iNumRowsToInsert)
                 FillGrid(iRow, dataTypeGridView, True)
             ElseIf iValue < iRow Then
-                dataTypeGridView.Rows.RemoveAt(iRow - 1)
+                Dim iRange = iRow - iValue
+                For i As Integer = 1 To iRange
+                    dataTypeGridView.Rows.RemoveAt(iRow - i)
+                Next
             End If
         End If
-        CreateEmptyDataFrame(ucrNudCols.Value)
-        SampleEmpty()
+        'CreateEmptyDataFrame(ucrNudCols.Value)
+        'SampleEmpty()
     End Sub
 
     Private Sub dataTypeGridView_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dataTypeGridView.CellValidating
