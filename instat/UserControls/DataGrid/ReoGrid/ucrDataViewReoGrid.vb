@@ -110,18 +110,21 @@ Public Class ucrDataViewReoGrid
         Dim iSearch As Integer = 0
         Dim iColIndex As Integer = GetColumnIndex(strColumn)
         Dim currSheet = grdData.CurrentWorksheet
+        currSheet.SetRangeStyles(New RangePosition(1, 0, currSheet.RowCount, currSheet.ColumnCount), New WorksheetRangeStyle() With {
+                                .BackColor = Color.White
+                                })
         If Not bFindNext Then
-            currSheet.IterateCells(unvell.ReoGrid.RangePosition.EntireRange, Function(row, col, cell)
-                                                                                 If CStr(cell.Data).Contains(strPattern) AndAlso col = iColIndex Then
-                                                                                     If iSearch = 0 Then
-                                                                                         currSheet.FocusPos = cell.Position
-                                                                                         currSheet.ScrollToCell(cell.Address)
-                                                                                     End If
-                                                                                     cell.Style.BackColor = Color.LightGreen
-                                                                                     iSearch += 1
-                                                                                 End If
-                                                                                 Return True
-                                                                             End Function)
+            currSheet.IterateCells(RangePosition.EntireRange, Function(row, col, cell)
+                                                                  If CStr(cell.Data).Contains(strPattern) AndAlso col = iColIndex Then
+                                                                      If iSearch = 0 Then
+                                                                          currSheet.FocusPos = cell.Position
+                                                                          currSheet.ScrollToCell(cell.Address)
+                                                                      End If
+                                                                      cell.Style.BackColor = Color.LightGreen
+                                                                      iSearch += 1
+                                                                  End If
+                                                                  Return True
+                                                              End Function)
         Else
             For i As Integer = 0 To GetSelectedCells().Count - 1
                 If i = iClick Then
