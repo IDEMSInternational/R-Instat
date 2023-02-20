@@ -501,14 +501,17 @@ Public Class dlgNewDataFrame
 
     Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bInsert As Boolean)
         If bInsert Then
-            With dgrView.Rows
-                .Item(iRow).Cells(0).Value = iRow + 1
-                .Item(iRow).Cells(1).Value = "x" & (iRow + 1)
-                .Item(iRow).Cells(2).Value = "Character"
-                .Item(iRow).Cells(3).Value = "NA"
-                .Item(iRow).Cells(4).Value = ""
-                .Item(iRow).Cells(5).Value = ""
-            End With
+            For i As Integer = iRow To dgrView.Rows.Count - 1
+                'i += 1
+                With dgrView.Rows
+                    .Item(i).Cells(0).Value = i + 1
+                    .Item(i).Cells(1).Value = "x" & i + 1
+                    .Item(i).Cells(2).Value = "Character"
+                    .Item(i).Cells(3).Value = "NA"
+                    .Item(i).Cells(4).Value = ""
+                    .Item(i).Cells(5).Value = ""
+                End With
+            Next
         Else
             For i As Integer = 0 To dgrView.Rows.Count - 1
                 With dgrView.Rows
@@ -535,7 +538,7 @@ Public Class dlgNewDataFrame
             If iValue > iRow Then
                 Dim iNumRowsToInsert As Integer = iValue - iRow
                 dataTypeGridView.Rows.Insert(iRow, iNumRowsToInsert)
-                FillGrid(iValue - 1, dataTypeGridView, True)
+                FillGrid(iRow, dataTypeGridView, True)
             ElseIf iValue < iRow Then
                 dataTypeGridView.Rows.RemoveAt(iRow - 1)
             End If
