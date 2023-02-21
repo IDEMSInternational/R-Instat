@@ -65,7 +65,6 @@ Public Class dlgHelpVignettes
         End If
 
         If strAvailablePackages IsNot Nothing Then
-            'ucrInputComboPackage.SetParameter(New RParameter("package", 0))
             ucrInputComboPackage.SetItems(strAvailablePackages)
             ucrInputComboPackage.SetDropDownStyleAsNonEditable()
         End If
@@ -102,8 +101,10 @@ Public Class dlgHelpVignettes
     Private Sub ucrPnlHelpVignettes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHelpVignettes.ControlValueChanged
         If rdoHelp.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsStartDynamicServerFunction)
+            ucrBase.clsRsyntax.iCallType = 5
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsVignettesFunction)
+            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 
@@ -140,5 +141,9 @@ Public Class dlgHelpVignettes
         If rdoHelp.Checked Then
             OpenHelpFile()
         End If
+    End Sub
+
+    Private Sub ucrInputComboPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboPackage.ControlValueChanged
+        clsVignettesFunction.AddParameter("package", Chr(34) & ucrInputComboPackage.GetText() & Chr(34), iPosition:=0)
     End Sub
 End Class
