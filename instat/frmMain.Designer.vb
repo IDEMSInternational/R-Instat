@@ -2876,7 +2876,6 @@ Partial Class frmMain
         '
         'mnuEditCut
         '
-        Me.mnuEditCut.Enabled = False
         Me.mnuEditCut.Name = "mnuEditCut"
         Me.mnuEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
         Me.mnuEditCut.Size = New System.Drawing.Size(244, 22)
@@ -5018,6 +5017,7 @@ Partial Class frmMain
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
         Me.ucrScriptWindow.Size = New System.Drawing.Size(396, 167)
+        Me.ucrScriptWindow.strText = ""
         Me.ucrScriptWindow.TabIndex = 0
         Me.ucrScriptWindow.Tag = "Script_Window"
         '
