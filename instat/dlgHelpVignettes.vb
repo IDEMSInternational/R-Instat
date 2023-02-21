@@ -16,12 +16,14 @@
 
 Imports RDotNet
 Imports instat.Translations
+Imports System.IO
 
 Public Class dlgHelpVignettes
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private strAvailablePackages() As String
-    Private clsHelpFunction, clsVignettesFunction As New RFunction
+    Private clsVignettesFunction, clsStartDynamicServerFunction As New RFunction
+    Private clsGetPortOperator As New ROperator
     Private Sub dlgHelpVignettes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -39,16 +41,13 @@ Public Class dlgHelpVignettes
         Dim clsGetPackages As New RFunction
         Dim expPackageNames As SymbolicExpression
         Dim chrPackageNames As CharacterVector
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.bSeparateThread = False
 
         ucrPnlHelpVignettes.AddRadioButton(rdoHelp)
         ucrPnlHelpVignettes.AddRadioButton(rdoVignettes)
 
-        ucrInputFunctionName.SetParameter(New RParameter("topic", 0))
         ucrInputFunctionName.AddQuotesIfUnrecognised = True
 
-        ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoHelp, "help")
+        ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoHelp, "startDynamicHelp")
         ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoVignettes, "browseVignettes")
 
         ucrPnlHelpVignettes.AddToLinkedControls(ucrChkFunction, {rdoHelp}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
@@ -66,45 +65,82 @@ Public Class dlgHelpVignettes
         End If
 
         If strAvailablePackages IsNot Nothing Then
-            ucrInputComboPackage.SetParameter(New RParameter("package", 1))
-            ucrInputComboPackage.SetItems(strAvailablePackages, bAddConditions:=True)
+            ucrInputComboPackage.SetParameter(New RParameter("package", 0))
+            ucrInputComboPackage.SetItems(strAvailablePackages)
             ucrInputComboPackage.SetDropDownStyleAsNonEditable()
         End If
 
     End Sub
 
     Private Sub SetDefaults()
-        clsHelpFunction = New RFunction
+        clsGetPortOperator = New ROperator
+        clsStartDynamicServerFunction = New RFunction
         clsVignettesFunction = New RFunction
-
-        clsHelpFunction.SetPackageName("utils")
-        clsHelpFunction.SetRCommand("help")
-        clsHelpFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
 
         clsVignettesFunction.SetPackageName("utils")
         clsVignettesFunction.SetRCommand("browseVignettes")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
+        ucrInputComboPackage.cboInput.SelectedItem = "datasets"
+
+        clsGetPortOperator.SetOperation(":::")
+        clsGetPortOperator.AddParameter("left", "tools", iPosition:=0)
+        clsGetPortOperator.AddParameter("right", "httpdPort()", iPosition:=1)
+        clsGetPortOperator.bSpaceAroundOperation = False
+
+        clsStartDynamicServerFunction.SetPackageName("tools")
+        clsStartDynamicServerFunction.SetRCommand("startDynamicHelp")
+        clsStartDynamicServerFunction.AddParameter("start", "NA", iPosition:=0)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsStartDynamicServerFunction)
+        ucrBase.clsRsyntax.bSeparateThread = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputComboPackage.AddAdditionalCodeParameterPair(clsVignettesFunction, New RParameter("package", 0), iAdditionalPairNo:=1)
-        ucrInputComboPackage.SetRCode(clsHelpFunction, bReset)
-        ucrInputFunctionName.SetRCode(clsHelpFunction, bReset)
-        ucrChkFunction.SetRCode(clsHelpFunction, bReset)
+        ucrChkFunction.SetRCode(clsStartDynamicServerFunction, bReset)
+        ucrInputComboPackage.SetRCode(clsVignettesFunction, bReset)
         ucrPnlHelpVignettes.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrPnlHelpVignettes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHelpVignettes.ControlValueChanged
         If rdoHelp.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStartDynamicServerFunction)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsVignettesFunction)
+        End If
+    End Sub
+
+    Private Sub OpenHelpFile()
+        Dim expPortTemp As SymbolicExpression
+        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPortOperator.ToScript())
+        Dim strPort As String = ""
+        If expPortTemp IsNot Nothing AndAlso expPortTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            strPort = expPortTemp.AsInteger(0)
+        End If
+
+        Dim strPackageName As String = ucrInputComboPackage.cboInput.SelectedItem
+        Dim strTopic As String = ucrInputFunctionName.GetText
+        Dim strFilePath As String = Path.Combine("library", strPackageName, "html", "00Index.html")
+        If strTopic <> "" Then
+            strFilePath = Path.Combine("library", strPackageName, "html", String.Concat(strTopic, ".html"))
+        End If
+
+        Dim strLocalHost As String = "127.0.0.1:"
+        Dim strURL As String
+        strURL = Path.Combine(String.Concat("http://", strLocalHost), strPort, strFilePath)
+        If strURL <> "" Then
+            strURL = strURL.Replace("\", "/")
+            frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If rdoHelp.Checked Then
+            OpenHelpFile()
+        End If
     End Sub
 End Class

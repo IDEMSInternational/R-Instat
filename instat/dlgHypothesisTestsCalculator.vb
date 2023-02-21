@@ -17,6 +17,7 @@
 
 Imports instat.Translations
 Imports RDotNet
+Imports System.IO
 Public Class dlgHypothesisTestsCalculator
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -665,13 +666,34 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
+        Dim clsGetPortOperator As New ROperator
+        Dim clsStartDynamicServerFunction As New RFunction
 
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Hypothesis Tests", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        clsGetPortOperator.SetOperation(":::")
+        clsGetPortOperator.AddParameter("left", "tools", iPosition:=0)
+        clsGetPortOperator.AddParameter("right", "httpdPort()", iPosition:=1)
+        clsGetPortOperator.bSpaceAroundOperation = False
+
+        clsStartDynamicServerFunction.SetPackageName("tools")
+        clsStartDynamicServerFunction.SetRCommand("startDynamicHelp")
+        clsStartDynamicServerFunction.AddParameter("start", "NA", iPosition:=0)
+        frmMain.clsRLink.RunScript(clsStartDynamicServerFunction.ToScript(), iCallType:=5, bSeparateThread:=False, bSilent:=False)
+
+        Dim expPortTemp As SymbolicExpression
+        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPortOperator.ToScript())
+        Dim strPort As String = ""
+        If expPortTemp IsNot Nothing AndAlso expPortTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            strPort = expPortTemp.AsInteger(0)
+        End If
+
+        Dim strFilePath As String = Path.Combine("library", strPackageName, "html", "00Index.html")
+        Dim strLocalHost As String = "127.0.0.1:"
+        Dim strURL As String
+        strURL = Path.Combine(String.Concat("http://", strLocalHost), strPort, strFilePath)
+        If strURL <> "" Then
+            strURL = strURL.Replace("\", "/")
+            frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
+        End If
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
