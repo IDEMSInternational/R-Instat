@@ -370,10 +370,6 @@ Public Class dlgOneWayFrequencies
             ucrSaveGraph.SetPrefix("freq_graph")
             ucrSaveGraph.SetIsComboBox()
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-        ElseIf rdoStemAndLeaf.Checked Then
-            'ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-            'ucrSaveGraph.SetAssignToIfUncheckedValue("last_Summary")
-            'ucrSaveGraph.SetCheckBoxText("Save Summary")
         End If
     End Sub
 End Class
