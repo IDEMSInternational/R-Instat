@@ -48,9 +48,9 @@ Public Class DlgDefineClimaticData
         Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"rain", "prec", "rr", "prcp"}.ToList())
         Dim kvpDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("date", {"date", "record"}.ToList())
         Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
-        Dim kvpAltitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("altitude", {"altitude", "elevation", "elev", "alt"}.ToList())
-        Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"longitude", "lon"}.ToList())
-        Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("latitude", {"latitude", "lat"}.ToList())
+        Dim kvpAltitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("alt", {"alt", "altitude", "elevation", "elev"}.ToList())
+        Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "lont", "longitude"}.ToList())
+        Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude"}.ToList())
         Dim kvpCloudCover As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("cloud_cover", {"cloud"}.ToList())
         Dim kvpTempMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"tmax", "tx", "tempmax", "tmp_max"}.ToList())
         Dim kvpTempMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"tmin", "tn", "tempmin", "tmp_min"}.ToList())
@@ -77,9 +77,9 @@ Public Class DlgDefineClimaticData
         ucrReceiverDate.Tag = "date"
         ucrReceiverCloudCover.Tag = "cloud_cover"
         ucrReceiverStationName.Tag = "station"
-        ucrReceiverAltitude.Tag = "altitude"
-        ucrReceiverLongitude.Tag= "longitude"
-        UcrReceiverLatitude.Tag = "latitude"
+        ucrReceiverAltitude.Tag = "alt"
+        ucrReceiverLongitude.Tag = "lon"
+        UcrReceiverLatitude.Tag = "lat"
         ucrReceiverMaxTemp.Tag = "temp_max"
         ucrReceiverMinTemp.Tag = "temp_min"
         ucrReceiverRadiation.Tag = "radiation"
