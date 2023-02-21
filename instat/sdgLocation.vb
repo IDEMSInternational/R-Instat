@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgLocation
     Private bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
-    Private clsDataFunctionPM, clsDatafunctionHS, clsVarnamesVectorPM, clsListFunction As New RFunction
+    Private clsVarnamesVectorPM, clsVarnamesVectorHS, clsListFunction As New RFunction
     Private bOKEnabled As Boolean = True
 
     Public Sub New()
@@ -53,35 +53,63 @@ Public Class sdgLocation
         ucrReceiverLatitude.SetParameterIsRFunction()
         ucrReceiverLatitude.Selector = ucrSelectorLocation
 
+        ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
+        ucrInputLatitude.AddQuotesIfUnrecognised = False
+        ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
+        ucrInputLatitude.SetRDefault(0)
+
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 3))
         ucrReceiverLongitude.SetParameterIsRFunction()
         ucrReceiverLongitude.Selector = ucrSelectorLocation
 
+        ucrInputLongitude.SetParameter(New RParameter("lon", 3))
+        ucrInputLongitude.AddQuotesIfUnrecognised = False
+        ucrInputLongitude.SetLinkedDisplayControl(lblLongitude)
+        ucrInputLongitude.SetRDefault(0)
+
         ucrReceiverAltitude.SetParameter(New RParameter("Elev", 4))
         ucrReceiverAltitude.SetParameterIsRFunction()
         ucrReceiverAltitude.Selector = ucrSelectorLocation
+
+        ucrInputElevation.SetParameter(New RParameter("Elev", 4))
+        ucrInputElevation.AddQuotesIfUnrecognised = False
+        ucrInputElevation.SetLinkedDisplayControl(lblLatitude)
+        ucrInputElevation.SetRDefault(0)
     End Sub
 
-    Public Sub SetRFunction(clsNewDataFunctionPM As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewDataFunctionHS As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
+        EnableDesableSelector()
         If Not bControlsInitialised Then
             InitialiseDialog()
         End If
-        clsDataFunctionPM = clsNewDataFunctionPM
-        clsDatafunctionHS = clsNewDataFunctionHS
         clsListFunction = clsNewListFunction
         clsVarnamesVectorPM = clsNewVarnamesVectorPM
-        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsNewDataFunctionHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
+        clsVarnamesVectorHS = clsNewVarnamesVectorHS
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat_rad", 2), iAdditionalPairNo:=1)
         ucrReceiverAltitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("Elev", 4), iAdditionalPairNo:=1)
-
+        ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
+        ucrInputLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat_rad", 2), iAdditionalPairNo:=1)
+        ucrInputElevation.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("Elev", 4), iAdditionalPairNo:=1)
 
         ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
         ucrReceiverStation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
         ucrReceiverLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverAltitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
+        ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
 
         bControlsInitialised = True
     End Sub
-
+    Private Sub EnableDesableSelector()
+        If ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty Then
+            grpLocation.Visible = True
+            ucrSelectorLocation.Visible = False
+        Else
+            ucrSelectorLocation.Visible = True
+            grpLocation.Visible = False
+        End If
+    End Sub
 End Class

@@ -22,7 +22,6 @@ Partial Class sdgPMConstants
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.ucrInputAs = New instat.ucrInputTextBox()
         Me.ucrInputBS = New instat.ucrInputTextBox()
@@ -45,19 +44,10 @@ Partial Class sdgPMConstants
         Me.lblLambda = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'ucrSdgButtons
-        '
-        Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(33, 237)
-        Me.ucrSdgButtons.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrSdgButtons.Name = "ucrSdgButtons"
-        Me.ucrSdgButtons.Size = New System.Drawing.Size(259, 29)
-        Me.ucrSdgButtons.TabIndex = 5
-        '
         'UcrButtonsSubdialogue1
         '
         Me.UcrButtonsSubdialogue1.AutoSize = True
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(33, 237)
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(33, 206)
         Me.UcrButtonsSubdialogue1.Margin = New System.Windows.Forms.Padding(4)
         Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
         Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(259, 29)
@@ -261,7 +251,7 @@ Partial Class sdgPMConstants
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(327, 279)
+        Me.ClientSize = New System.Drawing.Size(325, 246)
         Me.Controls.Add(Me.ucrInputAs)
         Me.Controls.Add(Me.ucrInputBS)
         Me.Controls.Add(Me.lblBS)
@@ -282,7 +272,6 @@ Partial Class sdgPMConstants
         Me.Controls.Add(Me.lblSolarConstant)
         Me.Controls.Add(Me.lblLambda)
         Me.Controls.Add(Me.UcrButtonsSubdialogue1)
-        Me.Controls.Add(Me.ucrSdgButtons)
         Me.Name = "sdgPMConstants"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Penman Monteith Constants"
@@ -290,7 +279,6 @@ Partial Class sdgPMConstants
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrSdgButtons As ucrButtonsSubdialogue
     Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
     Friend WithEvents ucrInputAs As ucrInputTextBox
     Friend WithEvents ucrInputBS As ucrInputTextBox
