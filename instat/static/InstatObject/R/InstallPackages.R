@@ -63,8 +63,8 @@ packs <- c("abind", "agricolae", "agridat", "AlgDesign", "animation",
         "pbkrtest", "pbs", "PCICt", "performance", "pillar", "pingr", 
         "pkgbuild", "pkgconfig", "pkgdown", "pkgload", "plotly", "plotrix", 
         "pls", "plyr", "png", "polyclip", "polynom", "praise", "prettyunits", 
-        "pROC", "processx", "prodlim", "productplots", "profvis", "progress", 
-        "progressr", "proj4", "promises", "proxy", "ps", "purrr", "qap", 
+        "primes","pROC", "processx", "prodlim", "productplots", "profvis", 
+        "progress", "progressr", "proj4", "promises", "proxy", "ps", "purrr", "qap", 
         "quadprog", "quantmod", "quantreg", "questionr", "qvcalc", "R.cache", 
         "R.methodsS3", "R.oo", "R.utils", "R6", "ragg", "rainfarmr", 
         "rappdirs", "raster", "rasterVis", "rbibutils", "rcmdcheck", 
@@ -91,7 +91,7 @@ packs <- c("abind", "agricolae", "agridat", "AlgDesign", "animation",
         "viridisLite", "visdat", "visreg", "vroom", "wakefield", "waldo", 
         "weathermetrics", "whisker", "withr", "wk", "xfun", "xml2", 
         "xopen", "xtable", "xts", "yaml", "yulab.utils", "zip", "zoo", 
-        "zyp")
+        "Zseq","zyp")
 
 install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="win.binary")
 

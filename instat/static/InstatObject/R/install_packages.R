@@ -141,6 +141,10 @@ pkgs <-
     "vcdExtra",
     # For inspect, read, edit and run files for 'APSIM'
     "apsimx"
+    #Fast functions for dealing with prime numbers, such as testing whether a number is prime and generating a sequence prime numbers.
+    "primes"
+    #Generates well-known integer sequences. 'gmp' package is adopted for computing with arbitrarily large numbers.
+    "Zseq"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
