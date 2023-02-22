@@ -185,6 +185,9 @@ Public Class dlgOneWayFrequencies
 
         clsSjMiscFrq.SetPackageName("sjmisc")
         clsSjMiscFrq.SetRCommand("frq")
+        clsSjMiscFrq.AddParameter("show.strings", "TRUE")
+        clsSjMiscFrq.AddParameter("show.na", "TRUE")
+        clsSjMiscFrq.AddParameter("grp.strings", "NULL")
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("plot_frq")
@@ -218,7 +221,7 @@ Public Class dlgOneWayFrequencies
         ucrSaveGraph.AddAdditionalRCode(clsAsDataFrame)
 
         ucrReceiverWeights.SetRCode(clsSjMiscFrq, bReset)
-        ucrReceiverOneWayFreq.SetRCode(clsSjMiscFrq, bReset)
+        'ucrReceiverOneWayFreq.SetRCode(clsSjMiscFrq, bReset)
 
         ucrNudScale.SetRCode(clsStemAndLeafFunction, bReset)
         ucrNudWidth.SetRCode(clsStemAndLeafFunction, bReset)
