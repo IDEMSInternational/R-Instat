@@ -21,6 +21,7 @@ Public Class dlgEnter
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Dim clsLength As New RFunction
+    Private strPackageName As String
     Public bFirstLoad As Boolean = True
     Public strOutput As String
     Public clsCommands As New RFunction
@@ -375,4 +376,15 @@ Public Class dlgEnter
     Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("runif( )", 2)
     End Sub
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, BaseToolStripMenuItem.Click
+        Dim clsHelp As New RFunction
+        strPackageName = "base"
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Hypothesis Tests", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
+
 End Class

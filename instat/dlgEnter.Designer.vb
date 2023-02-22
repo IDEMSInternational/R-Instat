@@ -81,8 +81,12 @@ Partial Class dlgEnter
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ContextMenuStripEnterKeys = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRHelp = New instat.ucrSplitButton()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
+        Me.ContextMenuStripEnterKeys.SuspendLayout()
         Me.SuspendLayout()
         '
         'chkShowEnterArguments
@@ -573,8 +577,32 @@ Partial Class dlgEnter
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(11, 278)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ContextMenuStripEnterKeys
+        '
+        Me.ContextMenuStripEnterKeys.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem})
+        Me.ContextMenuStripEnterKeys.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripEnterKeys.Size = New System.Drawing.Size(99, 26)
+        '
+        'BaseToolStripMenuItem
+        '
+        Me.BaseToolStripMenuItem.Name = "BaseToolStripMenuItem"
+        Me.BaseToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.BaseToolStripMenuItem.Text = "base"
+        '
+        'cmdRHelp
+        '
+        Me.cmdRHelp.AutoSize = True
+        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripEnterKeys
+        Me.cmdRHelp.Location = New System.Drawing.Point(430, 187)
+        Me.cmdRHelp.Name = "cmdRHelp"
+        Me.cmdRHelp.Size = New System.Drawing.Size(97, 23)
+        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripEnterKeys
+        Me.cmdRHelp.TabIndex = 214
+        Me.cmdRHelp.Text = "R Help"
+        Me.cmdRHelp.UseVisualStyleBackColor = True
         '
         'dlgEnter
         '
@@ -582,6 +610,7 @@ Partial Class dlgEnter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(538, 336)
+        Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.btnExample)
@@ -600,6 +629,7 @@ Partial Class dlgEnter
         Me.Text = "Enter"
         Me.grpEnterKeyboard2.ResumeLayout(False)
         Me.grpBasic.ResumeLayout(False)
+        Me.ContextMenuStripEnterKeys.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -647,4 +677,7 @@ Partial Class dlgEnter
     Friend WithEvents cmdText As Button
     Friend WithEvents ucrSaveEnterResultInto As ucrSave
     Friend WithEvents ttEnter As ToolTip
+    Friend WithEvents ContextMenuStripEnterKeys As ContextMenuStrip
+    Friend WithEvents BaseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cmdRHelp As ucrSplitButton
 End Class
