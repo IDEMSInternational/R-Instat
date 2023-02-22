@@ -89,7 +89,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdLSD = New System.Windows.Forms.Button()
         Me.cmdDuncan = New System.Windows.Forms.Button()
         Me.cmdBIB = New System.Windows.Forms.Button()
-        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.grpCoin = New System.Windows.Forms.GroupBox()
         Me.grpScale = New System.Windows.Forms.GroupBox()
         Me.cmdConover = New System.Windows.Forms.Button()
@@ -138,7 +137,25 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBu = New System.Windows.Forms.Button()
         Me.cmdBr = New System.Windows.Forms.Button()
         Me.cmdBartels = New System.Windows.Forms.Button()
+        Me.ContextMenuStripVerification = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripVerification = New System.Windows.Forms.ToolStripMenuItem()
         Me.ttHypothesisTests = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ContextMenuStripEnterStats1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripStats1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStats2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripStats2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripAgricolae = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripAgricolae = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripCoin = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripCoin = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripTrend = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripTrend = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRHelpAgricolae = New instat.ucrSplitButton()
+        Me.cmdRHelpVerification = New instat.ucrSplitButton()
+        Me.cmdRHelpCoin = New instat.ucrSplitButton()
+        Me.cmdRHelpTrend = New instat.ucrSplitButton()
+        Me.cmdRHelpStats2 = New instat.ucrSplitButton()
+        Me.cmdRHelpStats1 = New instat.ucrSplitButton()
         Me.ucrChkDisplayModel = New instat.ucrCheck()
         Me.ucrChkSummaryModel = New instat.ucrCheck()
         Me.ucrTryModelling = New instat.ucrTry()
@@ -162,6 +179,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCorrelation.SuspendLayout()
         Me.grpLocation.SuspendLayout()
         Me.grpTrend.SuspendLayout()
+        Me.ContextMenuStripVerification.SuspendLayout()
+        Me.ContextMenuStripEnterStats1.SuspendLayout()
+        Me.ContextMenuStats2.SuspendLayout()
+        Me.ContextMenuStripAgricolae.SuspendLayout()
+        Me.ContextMenuStripCoin.SuspendLayout()
+        Me.ContextMenuStripTrend.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTest
@@ -952,16 +975,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBIB.Text = "BIB"
         Me.cmdBIB.UseVisualStyleBackColor = True
         '
-        'cmdHelp
-        '
-        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(521, 261)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 11
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
         'grpCoin
         '
         Me.grpCoin.Controls.Add(Me.grpScale)
@@ -1484,6 +1497,150 @@ Partial Class dlgHypothesisTestsCalculator
         Me.cmdBartels.Text = "bartels"
         Me.cmdBartels.UseVisualStyleBackColor = True
         '
+        'ContextMenuStripVerification
+        '
+        Me.ContextMenuStripVerification.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripVerification})
+        Me.ContextMenuStripVerification.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripVerification.Size = New System.Drawing.Size(134, 26)
+        '
+        'ToolStripVerification
+        '
+        Me.ToolStripVerification.Name = "ToolStripVerification"
+        Me.ToolStripVerification.Size = New System.Drawing.Size(133, 22)
+        Me.ToolStripVerification.Text = "verification"
+        '
+        'ContextMenuStripEnterStats1
+        '
+        Me.ContextMenuStripEnterStats1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStats1})
+        Me.ContextMenuStripEnterStats1.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripEnterStats1.Size = New System.Drawing.Size(181, 48)
+        '
+        'ToolStripStats1
+        '
+        Me.ToolStripStats1.Name = "ToolStripStats1"
+        Me.ToolStripStats1.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripStats1.Text = "stats1"
+        '
+        'ContextMenuStats2
+        '
+        Me.ContextMenuStats2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStats2})
+        Me.ContextMenuStats2.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStats2.Size = New System.Drawing.Size(105, 26)
+        '
+        'ToolStripStats2
+        '
+        Me.ToolStripStats2.Name = "ToolStripStats2"
+        Me.ToolStripStats2.Size = New System.Drawing.Size(104, 22)
+        Me.ToolStripStats2.Text = "stats2"
+        '
+        'ContextMenuStripAgricolae
+        '
+        Me.ContextMenuStripAgricolae.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripAgricolae})
+        Me.ContextMenuStripAgricolae.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripAgricolae.Size = New System.Drawing.Size(123, 26)
+        '
+        'ToolStripAgricolae
+        '
+        Me.ToolStripAgricolae.Name = "ToolStripAgricolae"
+        Me.ToolStripAgricolae.Size = New System.Drawing.Size(122, 22)
+        Me.ToolStripAgricolae.Text = "agricolae"
+        '
+        'ContextMenuStripCoin
+        '
+        Me.ContextMenuStripCoin.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripCoin})
+        Me.ContextMenuStripCoin.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripCoin.Size = New System.Drawing.Size(98, 26)
+        '
+        'ToolStripCoin
+        '
+        Me.ToolStripCoin.Name = "ToolStripCoin"
+        Me.ToolStripCoin.Size = New System.Drawing.Size(97, 22)
+        Me.ToolStripCoin.Text = "coin"
+        '
+        'ContextMenuStripTrend
+        '
+        Me.ContextMenuStripTrend.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTrend})
+        Me.ContextMenuStripTrend.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripTrend.Size = New System.Drawing.Size(103, 26)
+        '
+        'ToolStripTrend
+        '
+        Me.ToolStripTrend.Name = "ToolStripTrend"
+        Me.ToolStripTrend.Size = New System.Drawing.Size(102, 22)
+        Me.ToolStripTrend.Text = "trend"
+        '
+        'cmdRHelpAgricolae
+        '
+        Me.cmdRHelpAgricolae.AutoSize = True
+        Me.cmdRHelpAgricolae.ContextMenuStrip = Me.ContextMenuStripAgricolae
+        Me.cmdRHelpAgricolae.Location = New System.Drawing.Point(521, 261)
+        Me.cmdRHelpAgricolae.Name = "cmdRHelpAgricolae"
+        Me.cmdRHelpAgricolae.Size = New System.Drawing.Size(74, 23)
+        Me.cmdRHelpAgricolae.SplitMenuStrip = Me.ContextMenuStripAgricolae
+        Me.cmdRHelpAgricolae.TabIndex = 225
+        Me.cmdRHelpAgricolae.Text = "R Help"
+        Me.cmdRHelpAgricolae.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpVerification
+        '
+        Me.cmdRHelpVerification.AutoSize = True
+        Me.cmdRHelpVerification.ContextMenuStrip = Me.ContextMenuStripVerification
+        Me.cmdRHelpVerification.Location = New System.Drawing.Point(522, 260)
+        Me.cmdRHelpVerification.Name = "cmdRHelpVerification"
+        Me.cmdRHelpVerification.Size = New System.Drawing.Size(74, 23)
+        Me.cmdRHelpVerification.SplitMenuStrip = Me.ContextMenuStripVerification
+        Me.cmdRHelpVerification.TabIndex = 224
+        Me.cmdRHelpVerification.Text = "R Help"
+        Me.cmdRHelpVerification.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpCoin
+        '
+        Me.cmdRHelpCoin.AutoSize = True
+        Me.cmdRHelpCoin.ContextMenuStrip = Me.ContextMenuStripCoin
+        Me.cmdRHelpCoin.Location = New System.Drawing.Point(521, 259)
+        Me.cmdRHelpCoin.Name = "cmdRHelpCoin"
+        Me.cmdRHelpCoin.Size = New System.Drawing.Size(74, 23)
+        Me.cmdRHelpCoin.SplitMenuStrip = Me.ContextMenuStripCoin
+        Me.cmdRHelpCoin.TabIndex = 223
+        Me.cmdRHelpCoin.Text = "R Help"
+        Me.cmdRHelpCoin.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpTrend
+        '
+        Me.cmdRHelpTrend.AutoSize = True
+        Me.cmdRHelpTrend.ContextMenuStrip = Me.ContextMenuStripTrend
+        Me.cmdRHelpTrend.Location = New System.Drawing.Point(522, 262)
+        Me.cmdRHelpTrend.Name = "cmdRHelpTrend"
+        Me.cmdRHelpTrend.Size = New System.Drawing.Size(74, 23)
+        Me.cmdRHelpTrend.SplitMenuStrip = Me.ContextMenuStripTrend
+        Me.cmdRHelpTrend.TabIndex = 222
+        Me.cmdRHelpTrend.Text = "R Help"
+        Me.cmdRHelpTrend.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpStats2
+        '
+        Me.cmdRHelpStats2.AutoSize = True
+        Me.cmdRHelpStats2.ContextMenuStrip = Me.ContextMenuStats2
+        Me.cmdRHelpStats2.Location = New System.Drawing.Point(521, 260)
+        Me.cmdRHelpStats2.Name = "cmdRHelpStats2"
+        Me.cmdRHelpStats2.Size = New System.Drawing.Size(74, 23)
+        Me.cmdRHelpStats2.SplitMenuStrip = Me.ContextMenuStats2
+        Me.cmdRHelpStats2.TabIndex = 217
+        Me.cmdRHelpStats2.Text = "R Help"
+        Me.cmdRHelpStats2.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpStats1
+        '
+        Me.cmdRHelpStats1.AutoSize = True
+        Me.cmdRHelpStats1.ContextMenuStrip = Me.ContextMenuStripEnterStats1
+        Me.cmdRHelpStats1.Location = New System.Drawing.Point(520, 259)
+        Me.cmdRHelpStats1.Name = "cmdRHelpStats1"
+        Me.cmdRHelpStats1.Size = New System.Drawing.Size(74, 23)
+        Me.cmdRHelpStats1.SplitMenuStrip = Me.ContextMenuStripEnterStats1
+        Me.cmdRHelpStats1.TabIndex = 215
+        Me.cmdRHelpStats1.Text = "R Help"
+        Me.cmdRHelpStats1.UseVisualStyleBackColor = True
+        '
         'ucrChkDisplayModel
         '
         Me.ucrChkDisplayModel.AutoSize = True
@@ -1556,7 +1713,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrBase.Location = New System.Drawing.Point(10, 430)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
         'ucrChkBy
@@ -1611,6 +1768,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(643, 485)
+        Me.Controls.Add(Me.cmdRHelpAgricolae)
+        Me.Controls.Add(Me.cmdRHelpVerification)
+        Me.Controls.Add(Me.cmdRHelpCoin)
+        Me.Controls.Add(Me.cmdRHelpTrend)
+        Me.Controls.Add(Me.cmdRHelpStats2)
+        Me.Controls.Add(Me.cmdRHelpStats1)
         Me.Controls.Add(Me.grpTrend)
         Me.Controls.Add(Me.grpCoin)
         Me.Controls.Add(Me.grpVerification)
@@ -1618,7 +1781,6 @@ Partial Class dlgHypothesisTestsCalculator
         Me.Controls.Add(Me.ucrChkDisplayModel)
         Me.Controls.Add(Me.ucrChkSummaryModel)
         Me.Controls.Add(Me.ucrTryModelling)
-        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.ucrReceiverMultiple)
         Me.Controls.Add(Me.grpStats2)
         Me.Controls.Add(Me.grpStats1)
@@ -1651,6 +1813,12 @@ Partial Class dlgHypothesisTestsCalculator
         Me.grpCorrelation.ResumeLayout(False)
         Me.grpLocation.ResumeLayout(False)
         Me.grpTrend.ResumeLayout(False)
+        Me.ContextMenuStripVerification.ResumeLayout(False)
+        Me.ContextMenuStripEnterStats1.ResumeLayout(False)
+        Me.ContextMenuStats2.ResumeLayout(False)
+        Me.ContextMenuStripAgricolae.ResumeLayout(False)
+        Me.ContextMenuStripCoin.ResumeLayout(False)
+        Me.ContextMenuStripTrend.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1724,7 +1892,6 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdLSD As Button
     Friend WithEvents cmdDuncan As Button
     Friend WithEvents cmdBIB As Button
-    Friend WithEvents cmdHelp As Button
     Friend WithEvents ucrTryModelling As ucrTry
     Friend WithEvents grpVerification As GroupBox
     Friend WithEvents cmdCont As Button
@@ -1782,4 +1949,22 @@ Partial Class dlgHypothesisTestsCalculator
     Friend WithEvents cmdSnh As Button
     Friend WithEvents ttHypothesisTests As ToolTip
     Friend WithEvents cmdZero As Button
+    Friend WithEvents cmdRHelpStats1 As ucrSplitButton
+    Friend WithEvents ContextMenuStripEnterStats1 As ContextMenuStrip
+    Friend WithEvents ToolStripStats1 As ToolStripMenuItem
+    Friend WithEvents cmdRHelpStats2 As ucrSplitButton
+    Friend WithEvents ContextMenuStats2 As ContextMenuStrip
+    Friend WithEvents ToolStripStats2 As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripAgricolae As ContextMenuStrip
+    Friend WithEvents ToolStripAgricolae As ToolStripMenuItem
+    Friend WithEvents cmdRHelpVerification As ucrSplitButton
+    Friend WithEvents ContextMenuStripVerification As ContextMenuStrip
+    Friend WithEvents ToolStripVerification As ToolStripMenuItem
+    Friend WithEvents cmdRHelpAgricolae As ucrSplitButton
+    Friend WithEvents cmdRHelpCoin As ucrSplitButton
+    Friend WithEvents ContextMenuStripCoin As ContextMenuStrip
+    Friend WithEvents ToolStripCoin As ToolStripMenuItem
+    Friend WithEvents cmdRHelpTrend As ucrSplitButton
+    Friend WithEvents ContextMenuStripTrend As ContextMenuStrip
+    Friend WithEvents ToolStripTrend As ToolStripMenuItem
 End Class
