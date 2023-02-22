@@ -28,41 +28,41 @@ Public Class sdgPMConstants
         ucrInputLambda.AddQuotesIfUnrecognised = False
         ucrInputLambda.IsReadOnly = True
         ucrInputLambda.SetLinkedDisplayControl(lblLambda)
-        ucrInputLambda.SetRDefault(2.45)
+        'ucrInputLambda.SetRDefault(2.45)
 
         ucrInputSigma.SetParameter(New RParameter("sigma", 5))
         ucrInputSigma.AddQuotesIfUnrecognised = False
         ucrInputSigma.IsReadOnly = True
-        ucrInputSigma.SetRDefault(4.903 * 10 ^ -9)
+        'ucrInputSigma.SetRDefault(4.903 * 10 ^ -9)
 
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))
         ucrInputSolarConstant.AddQuotesIfUnrecognised = False
         ucrInputSolarConstant.IsReadOnly = True
         ucrInputSolarConstant.SetLinkedDisplayControl(lblSolarConstant)
-        ucrInputSolarConstant.SetRDefault(0.082)
+        'ucrInputSolarConstant.SetRDefault(0.082)
 
         ucrNudHeigth.SetParameter(New RParameter("z", 4))
         ucrNudHeigth.SetMinMax(0, 10)
         ucrNudHeigth.Increment = 1
-        ucrNudHeigth.SetRDefault(2)
+        'ucrNudHeigth.SetRDefault(2)
 
         ucrInputSoilFlux.SetParameter(New RParameter("G", 6))
         ucrInputSoilFlux.AddQuotesIfUnrecognised = False
         ucrInputSoilFlux.SetLinkedDisplayControl(lblSoilFlux)
-        ucrInputSoilFlux.SetRDefault(0)
+        'ucrInputSoilFlux.SetRDefault(0)
 
         'Radiation Constants'
         ucrInputAs.SetParameter(New RParameter("as", 7))
         ucrInputAs.AddQuotesIfUnrecognised = False
         ucrInputAs.IsReadOnly = True
         ucrInputAs.SetLinkedDisplayControl(lblAS)
-        ucrInputAs.SetRDefault(0.25)
+        'ucrInputAs.SetRDefault(0.25)
 
         ucrInputBS.SetParameter(New RParameter("bs", 8))
         ucrInputBS.AddQuotesIfUnrecognised = False
         ucrInputBS.IsReadOnly = True
         ucrInputBS.SetLinkedDisplayControl(lblBS)
-        ucrInputBS.SetRDefault(0.5)
+        'ucrInputBS.SetRDefault(0.5)
 
         bControlsInitialised = True
     End Sub

@@ -33,15 +33,15 @@ Partial Class sdgLocation
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.ucrSelectorLocation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.lblAltitude1 = New System.Windows.Forms.Label()
+        Me.ucrInputElevation = New instat.ucrInputTextBox()
+        Me.ucrInputLatitude = New instat.ucrInputTextBox()
+        Me.lblLatitude1 = New System.Windows.Forms.Label()
+        Me.lblLongitude1 = New System.Windows.Forms.Label()
+        Me.ucrInputLongitude = New instat.ucrInputTextBox()
         Me.lblDegreesLon = New System.Windows.Forms.Label()
         Me.lblDegreesLat = New System.Windows.Forms.Label()
         Me.lblElevationunit = New System.Windows.Forms.Label()
-        Me.ucrInputLongitude = New instat.ucrInputTextBox()
-        Me.lblLongitude1 = New System.Windows.Forms.Label()
-        Me.lblLatitude1 = New System.Windows.Forms.Label()
-        Me.ucrInputLatitude = New instat.ucrInputTextBox()
-        Me.ucrInputElevation = New instat.ucrInputTextBox()
-        Me.lblAltitude1 = New System.Windows.Forms.Label()
         Me.grpLocation.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,7 +136,7 @@ Partial Class sdgLocation
         'ucrSubDialogueBase
         '
         Me.ucrSubDialogueBase.AutoSize = True
-        Me.ucrSubDialogueBase.Location = New System.Drawing.Point(66, 195)
+        Me.ucrSubDialogueBase.Location = New System.Drawing.Point(66, 325)
         Me.ucrSubDialogueBase.Name = "ucrSubDialogueBase"
         Me.ucrSubDialogueBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrSubDialogueBase.TabIndex = 10
@@ -164,12 +164,75 @@ Partial Class sdgLocation
         Me.grpLocation.Controls.Add(Me.lblDegreesLon)
         Me.grpLocation.Controls.Add(Me.lblDegreesLat)
         Me.grpLocation.Controls.Add(Me.lblElevationunit)
-        Me.grpLocation.Location = New System.Drawing.Point(10, 15)
+        Me.grpLocation.Location = New System.Drawing.Point(21, 195)
         Me.grpLocation.Name = "grpLocation"
         Me.grpLocation.Size = New System.Drawing.Size(212, 116)
         Me.grpLocation.TabIndex = 18
         Me.grpLocation.TabStop = False
         Me.grpLocation.Text = "Location"
+        '
+        'lblAltitude1
+        '
+        Me.lblAltitude1.AutoSize = True
+        Me.lblAltitude1.Location = New System.Drawing.Point(9, 30)
+        Me.lblAltitude1.Name = "lblAltitude1"
+        Me.lblAltitude1.Size = New System.Drawing.Size(42, 13)
+        Me.lblAltitude1.TabIndex = 22
+        Me.lblAltitude1.Text = "Altitude"
+        '
+        'ucrInputElevation
+        '
+        Me.ucrInputElevation.AddQuotesIfUnrecognised = True
+        Me.ucrInputElevation.AutoSize = True
+        Me.ucrInputElevation.IsMultiline = False
+        Me.ucrInputElevation.IsReadOnly = False
+        Me.ucrInputElevation.Location = New System.Drawing.Point(67, 25)
+        Me.ucrInputElevation.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputElevation.Name = "ucrInputElevation"
+        Me.ucrInputElevation.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputElevation.TabIndex = 19
+        '
+        'ucrInputLatitude
+        '
+        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatitude.AutoSize = True
+        Me.ucrInputLatitude.IsMultiline = False
+        Me.ucrInputLatitude.IsReadOnly = False
+        Me.ucrInputLatitude.Location = New System.Drawing.Point(67, 54)
+        Me.ucrInputLatitude.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputLatitude.Name = "ucrInputLatitude"
+        Me.ucrInputLatitude.Size = New System.Drawing.Size(89, 20)
+        Me.ucrInputLatitude.TabIndex = 21
+        '
+        'lblLatitude1
+        '
+        Me.lblLatitude1.AutoSize = True
+        Me.lblLatitude1.Location = New System.Drawing.Point(9, 58)
+        Me.lblLatitude1.Name = "lblLatitude1"
+        Me.lblLatitude1.Size = New System.Drawing.Size(45, 13)
+        Me.lblLatitude1.TabIndex = 20
+        Me.lblLatitude1.Text = "Latitude"
+        '
+        'lblLongitude1
+        '
+        Me.lblLongitude1.AutoSize = True
+        Me.lblLongitude1.Location = New System.Drawing.Point(9, 87)
+        Me.lblLongitude1.Name = "lblLongitude1"
+        Me.lblLongitude1.Size = New System.Drawing.Size(54, 13)
+        Me.lblLongitude1.TabIndex = 19
+        Me.lblLongitude1.Text = "Longitude"
+        '
+        'ucrInputLongitude
+        '
+        Me.ucrInputLongitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputLongitude.AutoSize = True
+        Me.ucrInputLongitude.IsMultiline = False
+        Me.ucrInputLongitude.IsReadOnly = False
+        Me.ucrInputLongitude.Location = New System.Drawing.Point(67, 81)
+        Me.ucrInputLongitude.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputLongitude.Name = "ucrInputLongitude"
+        Me.ucrInputLongitude.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputLongitude.TabIndex = 17
         '
         'lblDegreesLon
         '
@@ -198,75 +261,11 @@ Partial Class sdgLocation
         Me.lblElevationunit.TabIndex = 6
         Me.lblElevationunit.Text = "Meters"
         '
-        'ucrInputLongitude
-        '
-        Me.ucrInputLongitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLongitude.AutoSize = True
-        Me.ucrInputLongitude.IsMultiline = False
-        Me.ucrInputLongitude.IsReadOnly = False
-        Me.ucrInputLongitude.Location = New System.Drawing.Point(67, 81)
-        Me.ucrInputLongitude.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputLongitude.Name = "ucrInputLongitude"
-        Me.ucrInputLongitude.Size = New System.Drawing.Size(89, 21)
-        Me.ucrInputLongitude.TabIndex = 17
-        '
-        'lblLongitude1
-        '
-        Me.lblLongitude1.AutoSize = True
-        Me.lblLongitude1.Location = New System.Drawing.Point(9, 87)
-        Me.lblLongitude1.Name = "lblLongitude1"
-        Me.lblLongitude1.Size = New System.Drawing.Size(54, 13)
-        Me.lblLongitude1.TabIndex = 19
-        Me.lblLongitude1.Text = "Longitude"
-        '
-        'lblLatitude1
-        '
-        Me.lblLatitude1.AutoSize = True
-        Me.lblLatitude1.Location = New System.Drawing.Point(9, 58)
-        Me.lblLatitude1.Name = "lblLatitude1"
-        Me.lblLatitude1.Size = New System.Drawing.Size(45, 13)
-        Me.lblLatitude1.TabIndex = 20
-        Me.lblLatitude1.Text = "Latitude"
-        '
-        'ucrInputLatitude
-        '
-        Me.ucrInputLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatitude.AutoSize = True
-        Me.ucrInputLatitude.IsMultiline = False
-        Me.ucrInputLatitude.IsReadOnly = False
-        Me.ucrInputLatitude.Location = New System.Drawing.Point(67, 54)
-        Me.ucrInputLatitude.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputLatitude.Name = "ucrInputLatitude"
-        Me.ucrInputLatitude.Size = New System.Drawing.Size(89, 20)
-        Me.ucrInputLatitude.TabIndex = 21
-        '
-        'ucrInputElevation
-        '
-        Me.ucrInputElevation.AddQuotesIfUnrecognised = True
-        Me.ucrInputElevation.AutoSize = True
-        Me.ucrInputElevation.IsMultiline = False
-        Me.ucrInputElevation.IsReadOnly = False
-        Me.ucrInputElevation.Location = New System.Drawing.Point(67, 25)
-        Me.ucrInputElevation.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputElevation.Name = "ucrInputElevation"
-        Me.ucrInputElevation.Size = New System.Drawing.Size(89, 21)
-        Me.ucrInputElevation.TabIndex = 19
-        '
-        'lblAltitude1
-        '
-        Me.lblAltitude1.AutoSize = True
-        Me.lblAltitude1.Location = New System.Drawing.Point(9, 30)
-        Me.lblAltitude1.Name = "lblAltitude1"
-        Me.lblAltitude1.Size = New System.Drawing.Size(42, 13)
-        Me.lblAltitude1.TabIndex = 22
-        Me.lblAltitude1.Text = "Altitude"
-        '
         'sdgLocation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(346, 236)
-        Me.Controls.Add(Me.ucrSelectorLocation)
+        Me.ClientSize = New System.Drawing.Size(346, 359)
         Me.Controls.Add(Me.ucrSubDialogueBase)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.Station)
@@ -277,6 +276,7 @@ Partial Class sdgLocation
         Me.Controls.Add(Me.ucrReceiverAltitude)
         Me.Controls.Add(Me.lblAltitude)
         Me.Controls.Add(Me.grpLocation)
+        Me.Controls.Add(Me.ucrSelectorLocation)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
