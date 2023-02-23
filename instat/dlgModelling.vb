@@ -21,7 +21,7 @@ Public Class dlgModelling
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsAttach, clsDetach As New RFunction
-
+    Private strPackageName As String
     Public clsRModelFunction As New RFunction
     Public clsRYVariable, clsRXVariable As String
     Private ucrAvailableDataframe As ucrDataFrame
@@ -580,17 +580,17 @@ Public Class dlgModelling
         bResetDisplayOptions = False
     End Sub
 
-
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+    Private Sub OpenHelpPage()
         Dim clsHelp As New RFunction
-        Dim strPackageName As String
 
-        strPackageName = ucrInputComboRPackage.GetText
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        frmMain.clsRLink.RunScript(clsHelp.ToScript,
+                                   strComment:="Opening help page for " &
+                                   strPackageName & " Package. Generated from dialog Calculator",
+                                   iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
 
     Private Sub Clear()
@@ -616,25 +616,45 @@ Public Class dlgModelling
     Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged
         Select Case ucrInputComboRPackage.GetText
             Case "stats"
+                strPackageName = "stats"
                 grpStats.Visible = True
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                cmdRHelpStats.Visible = True
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpLme4.Visible = False
+                cmdRHelpMASS.Visible = False
             Case "extRemes"
+                strPackageName = "extRemes"
                 grpStats.Visible = False
                 grpextRemes.Visible = True
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpExtRemes.Visible = True
+                cmdRHelpLme4.Visible = False
+                cmdRHelpMASS.Visible = False
             Case "lme4"
+                strPackageName = "lme4"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = True
                 grpMASS.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpLme4.Visible = True
+                cmdRHelpMASS.Visible = False
             Case "MASS"
+                strPackageName = "MASS"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = True
+                cmdRHelpStats.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpLme4.Visible = False
+                cmdRHelpMASS.Visible = True
         End Select
     End Sub
 
@@ -643,5 +663,32 @@ Public Class dlgModelling
         ucrReceiverForTestColumn.AddtoCombobox(ucrReceiverForTestColumn.GetText)
     End Sub
 
+    Private Sub cmdRHelpStats_Click(sender As Object, e As EventArgs) Handles cmdRHelpStats.Click, ToolStripStats.Click
+        If ucrInputComboRPackage.GetText = "stats" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpExtRemes_Click(sender As Object, e As EventArgs) Handles cmdRHelpExtRemes.Click, ToolStripExtRemes.Click
+        If ucrInputComboRPackage.GetText = "extRemes" Then
+            strPackageName = "extRemes"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpLme4_Click(sender As Object, e As EventArgs) Handles cmdRHelpLme4.Click, ToolStripLme4.Click
+        If ucrInputComboRPackage.GetText = "lme4" Then
+            strPackageName = "lme4"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpMASS_Click(sender As Object, e As EventArgs) Handles cmdRHelpMASS.Click, ToolStripMASS.Click
+        If ucrInputComboRPackage.GetText = "MASS" Then
+            strPackageName = "MASS"
+        End If
+        OpenHelpPage()
+    End Sub
 
 End Class

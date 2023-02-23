@@ -1095,7 +1095,7 @@ Public Class dlgHypothesisTestsCalculator
                                    strPackageName & " Package. Generated from dialog Calculator",
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
     End Sub
-    Private Sub cmdTransformRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelpStats1.Click, ToolStripStats1.Click
+    Private Sub cmdRHelpStats1_Click(sender As Object, e As EventArgs) Handles cmdRHelpStats1.Click, ToolStripStats1.Click
         If ucrInputComboRPackage.GetText = "Stats1" Then
             strPackageName = "stats"
         End If
