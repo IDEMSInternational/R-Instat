@@ -314,6 +314,7 @@ Public Class dlgOneWayFrequencies
             If rdoAsDataFrame.Checked Then
                 clsAsDataFrame.AddParameter("x", clsRFunctionParameter:=clsSjMiscFrq, iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAsDataFrame)
+                ucrBase.clsRsyntax.iCallType = 2
             End If
         Else
             ucrReceiverStemAndLeaf.SetMeAsReceiver()
