@@ -1047,7 +1047,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrChkValley.AutoSize = True
         Me.ucrChkValley.Checked = False
-        Me.ucrChkValley.Location = New System.Drawing.Point(161, 389)
+        Me.ucrChkValley.Location = New System.Drawing.Point(247, 389)
         Me.ucrChkValley.Name = "ucrChkValley"
         Me.ucrChkValley.Size = New System.Drawing.Size(146, 23)
         Me.ucrChkValley.TabIndex = 27
