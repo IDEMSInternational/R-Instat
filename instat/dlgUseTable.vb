@@ -52,14 +52,16 @@ Public Class dlgUseTable
         ucrTablesReceiver.strSelectorHeading = "Tables"
         ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
 
-        ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
-        ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
-        ucrPnlExportOptions.AddRadioButton(rdoAsWord)
-        ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "as_raw_html")
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
+        ''To Be enabled later when the formats are supported.
+
+        'ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
+        'ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
+        'ucrPnlExportOptions.AddRadioButton(rdoAsWord)
+        'ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
+        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "as_raw_html")
+        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
+        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
+        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
 
         ucrSaveTable.SetPrefix("use_table")
         ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -205,7 +207,7 @@ Public Class dlgUseTable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrTablesReceiver.SetRCode(clsJoiningPipeOperator, bReset)
-        'ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()

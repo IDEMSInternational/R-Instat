@@ -23,7 +23,6 @@ Partial Class dlgUseTable
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrTablesSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrTablesReceiver = New instat.ucrReceiverSingle()
         Me.lblTablesToUse = New System.Windows.Forms.Label()
         Me.ucrSaveTable = New instat.ucrSave()
@@ -34,6 +33,7 @@ Partial Class dlgUseTable
         Me.rdoAsLaTex = New System.Windows.Forms.RadioButton()
         Me.cmdFormatOptions = New System.Windows.Forms.Button()
         Me.lblExportTable = New System.Windows.Forms.Label()
+        Me.ucrTablesSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -43,18 +43,6 @@ Partial Class dlgUseTable
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'ucrTablesSelector
-        '
-        Me.ucrTablesSelector.AutoSize = True
-        Me.ucrTablesSelector.bDropUnusedFilterLevels = False
-        Me.ucrTablesSelector.bShowHiddenColumns = False
-        Me.ucrTablesSelector.bUseCurrentFilter = True
-        Me.ucrTablesSelector.Location = New System.Drawing.Point(8, 23)
-        Me.ucrTablesSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrTablesSelector.Name = "ucrTablesSelector"
-        Me.ucrTablesSelector.Size = New System.Drawing.Size(213, 183)
-        Me.ucrTablesSelector.TabIndex = 1
         '
         'ucrTablesReceiver
         '
@@ -151,11 +139,24 @@ Partial Class dlgUseTable
         'lblExportTable
         '
         Me.lblExportTable.AutoSize = True
+        Me.lblExportTable.Enabled = False
         Me.lblExportTable.Location = New System.Drawing.Point(5, 227)
         Me.lblExportTable.Name = "lblExportTable"
         Me.lblExportTable.Size = New System.Drawing.Size(119, 13)
         Me.lblExportTable.TabIndex = 12
         Me.lblExportTable.Text = "Export Table Object As:"
+        '
+        'ucrTablesSelector
+        '
+        Me.ucrTablesSelector.AutoSize = True
+        Me.ucrTablesSelector.bDropUnusedFilterLevels = False
+        Me.ucrTablesSelector.bShowHiddenColumns = False
+        Me.ucrTablesSelector.bUseCurrentFilter = True
+        Me.ucrTablesSelector.Location = New System.Drawing.Point(8, 23)
+        Me.ucrTablesSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrTablesSelector.Name = "ucrTablesSelector"
+        Me.ucrTablesSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrTablesSelector.TabIndex = 1
         '
         'dlgUseTable
         '
@@ -175,6 +176,8 @@ Partial Class dlgUseTable
         Me.Controls.Add(Me.ucrTablesSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgUseTable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Use Table"
