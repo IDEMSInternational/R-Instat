@@ -666,21 +666,14 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsGetPortOperator As New ROperator
-        Dim clsStartDynamicServerFunction As New RFunction
+        Dim clsGetPortFunction As New RFunction
 
-        clsGetPortOperator.SetOperation(":::")
-        clsGetPortOperator.AddParameter("left", "tools", iPosition:=0)
-        clsGetPortOperator.AddParameter("right", "httpdPort()", iPosition:=1)
-        clsGetPortOperator.bSpaceAroundOperation = False
-
-        clsStartDynamicServerFunction.SetPackageName("tools")
-        clsStartDynamicServerFunction.SetRCommand("startDynamicHelp")
-        clsStartDynamicServerFunction.AddParameter("start", "NA", iPosition:=0)
-        frmMain.clsRLink.RunScript(clsStartDynamicServerFunction.ToScript(), iCallType:=5, bSeparateThread:=False, bSilent:=False)
+        clsGetPortFunction.SetPackageName("tools")
+        clsGetPortFunction.SetRCommand("startDynamicHelp")
+        clsGetPortFunction.AddParameter("start", "NA", iPosition:=0)
 
         Dim expPortTemp As SymbolicExpression
-        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPortOperator.ToScript())
+        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPortFunction.ToScript(), bSeparateThread:=False)
         Dim strPort As String = ""
         If expPortTemp IsNot Nothing AndAlso expPortTemp.Type <> Internals.SymbolicExpressionType.Null Then
             strPort = expPortTemp.AsInteger(0)
