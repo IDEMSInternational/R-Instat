@@ -2897,7 +2897,6 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
   cat("</div>")
   sink()
   if (port > 0L){
-    print(port)
     return(sprintf("http://127.0.0.1:%d/session/%s", 
                    port, basename(file)))}
   else return(sprintf("file://%s", file))
