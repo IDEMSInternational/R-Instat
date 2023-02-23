@@ -134,6 +134,7 @@ Public Class dlgNewDataFrame
         ucrChkRCommand.Checked = False
         ucrNudCols.SetText(2)
 
+        ucrInputCategory.SetName("animals")
         clsCorporaFunction.SetPackageName("rcorpora")
         clsCorporaFunction.SetRCommand("corpora")
 
@@ -788,8 +789,11 @@ Public Class dlgNewDataFrame
             Array.Sort(arrAvailableLists)
             ucrInputListInCategory.SetParameter(New RParameter("list"))
             ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+            If arrAvailableLists.Count > 0 Then
+                ucrInputListInCategory.cboInput.SelectedIndex = 0
+            End If
         Else
-            ucrInputListInCategory.SetItems()
+                ucrInputListInCategory.SetItems()
         End If
     End Sub
 
