@@ -45,6 +45,19 @@ Public Class dlgExportToClimsoft
         ucrReceiverStation.Selector = ucrSelectorImportToClimsoft
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
 
+
+        ucrDataFrameSheets.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameSheets.SetParameterIsString()
+
+        ucrReceiverComments.SetParameter(New RParameter("comments", 1))
+        ucrReceiverComments.SetLinkedDisplayControl(lblcomments)
+
+        ucrChkAddReport.SetText("Add Reports")
+        ucrChkAddReport.AddToLinkedControls({ucrReceiverComments, ucrDataFrameSheets, ucrInputExportFile}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddReport.AddParameterValuesCondition(True, "comments", "True")
+        ucrChkAddReport.AddParameterValuesCondition(False, "comments", "False")
+
+
         ucrReceiverDate.SetParameter(New RParameter("date", 2))
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.SetClimaticType("date")
@@ -95,8 +108,12 @@ Public Class dlgExportToClimsoft
         ucrSaveNewDataFrame.Reset()
         ucrReceiverElements.SetMeAsReceiver()
 
+        AddingComments()
+
         clsDummyFunction.AddParameter("dataframe", "True", iPosition:=0)
         clsDummyFunction.AddParameter("export", "False", iPosition:=1)
+        clsDummyFunction.AddParameter("comments", "False", iPosition:=2)
+
 
         clsDataFrameFunction.SetRCommand("data.frame")
         clsDataFrameFunction.AddParameter("hour", 6, iPosition:=3)
@@ -126,9 +143,12 @@ Public Class dlgExportToClimsoft
         ucrInputLevel.SetRCode(clsDataFrameFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportClimsoftFunction, bReset)
+        ucrReceiverComments.SetRCode(clsExportClimsoftFunction, bReset)
+        ucrDataFrameSheets.SetRCode(clsExportClimsoftFunction, bReset)
         If bReset Then
             ucrChkExportDataFrame.SetRCode(clsDummyFunction, bReset)
             ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
+            ucrChkAddReport.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -141,6 +161,9 @@ Public Class dlgExportToClimsoft
             ucrBase.OKEnabled(False)
         End If
         If ucrChkExportDataFrame.Checked And ucrInputExportFile.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        End If
+        If ucrChkAddReport.Checked And ucrReceiverComments.IsEmpty Then
             ucrBase.OKEnabled(False)
         End If
 
@@ -221,7 +244,26 @@ Public Class dlgExportToClimsoft
             ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimsoftFunction)
             ucrBase.clsRsyntax.lstAfterCodes.Clear()
             cmdBrowse.Visible = True
+        ElseIf ucrChkAddReport.Checked Then
+            ucrBase.clsRsyntax.ClearCodes()
+            ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimsoftFunction)
+            cmdBrowse.Visible = True
+
         End If
+    End Sub
+
+    Private Sub AddingComments()
+        'If Not ucrInputComments.bUserTyped Then
+        '    ucrInputComments.SetName(ucrDataFrameSheets.cboAvailableDataFrames.Text = ".comments")
+        '    clsExportClimsoftFunction.AddParameter("x", ucrInputComments.GetText = ".comment", iPosition:=1, bIncludeArgumentName:=False)
+        '    ucrInputComments.GetText = ".comment"
+        '    ' & Chr(34) & .comments & Chr(34))
+        'End If
+
+        'If ucrDataFrameSheets.cboAvailableDataFrames.Text Then
+        '    clsExportClimsoftFunction.AddParameter("x", ucrInputComments.GetText = ".comment", iPosition:=1, bIncludeArgumentName:=False)
+
+
     End Sub
 
     Private Sub SelectFileToSave()
@@ -255,5 +297,14 @@ Public Class dlgExportToClimsoft
             SelectFileToSave()
         End If
         SettingBaseFunction()
+    End Sub
+
+    Private Sub ucrDataFrameSheets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameSheets.ControlValueChanged
+        AddingComments()
+    End Sub
+
+    Private Sub ucrReceiverComments_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverComments.ControlValueChanged
+        clsExportClimsoftFunction.AddParameter("x", ucrReceiverComments.GetDataName(ucrDataFrameSheets.cboAvailableDataFrames.Text = ".comment"))
+
     End Sub
 End Class
