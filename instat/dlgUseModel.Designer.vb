@@ -22,6 +22,7 @@ Partial Class dlgUseModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblModel = New System.Windows.Forms.Label()
         Me.cmdsummary = New System.Windows.Forms.Button()
         Me.cmdanova = New System.Windows.Forms.Button()
@@ -74,10 +75,27 @@ Partial Class dlgUseModel
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
         Me.ucrTryModelling = New instat.ucrTry()
+        Me.cmdRHelpGeneral = New instat.ucrSplitButton()
+        Me.ContextMenuStripGeneral = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripStats = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripCar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRHelpPrediction = New instat.ucrSplitButton()
+        Me.ContextMenuStripPrediction = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripPrediction = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripExtRemes = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripextRemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripSegmented = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripSegmented = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRHelpExtRemes = New instat.ucrSplitButton()
+        Me.cmdRHelpSegmented = New instat.ucrSplitButton()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
         Me.grpSegmented.SuspendLayout()
+        Me.ContextMenuStripGeneral.SuspendLayout()
+        Me.ContextMenuStripPrediction.SuspendLayout()
+        Me.ContextMenuStripExtRemes.SuspendLayout()
+        Me.ContextMenuStripSegmented.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblModel
@@ -646,7 +664,7 @@ Partial Class dlgUseModel
         Me.ucrBase.Location = New System.Drawing.Point(9, 362)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
         '
         'ucrReceiverForTestColumn
@@ -684,12 +702,118 @@ Partial Class dlgUseModel
         Me.ucrTryModelling.Size = New System.Drawing.Size(480, 30)
         Me.ucrTryModelling.TabIndex = 163
         '
+        'cmdRHelpGeneral
+        '
+        Me.cmdRHelpGeneral.AutoSize = True
+        Me.cmdRHelpGeneral.ContextMenuStrip = Me.ContextMenuStripGeneral
+        Me.cmdRHelpGeneral.Location = New System.Drawing.Point(460, 80)
+        Me.cmdRHelpGeneral.Name = "cmdRHelpGeneral"
+        Me.cmdRHelpGeneral.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpGeneral.SplitMenuStrip = Me.ContextMenuStripGeneral
+        Me.cmdRHelpGeneral.TabIndex = 231
+        Me.cmdRHelpGeneral.Text = "R Help"
+        Me.cmdRHelpGeneral.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripGeneral
+        '
+        Me.ContextMenuStripGeneral.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStats, Me.ToolStripCar})
+        Me.ContextMenuStripGeneral.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripGeneral.Size = New System.Drawing.Size(99, 48)
+        '
+        'ToolStripStats
+        '
+        Me.ToolStripStats.Name = "ToolStripStats"
+        Me.ToolStripStats.Size = New System.Drawing.Size(98, 22)
+        Me.ToolStripStats.Text = "stats"
+        '
+        'ToolStripCar
+        '
+        Me.ToolStripCar.Name = "ToolStripCar"
+        Me.ToolStripCar.Size = New System.Drawing.Size(98, 22)
+        Me.ToolStripCar.Text = "car"
+        '
+        'cmdRHelpPrediction
+        '
+        Me.cmdRHelpPrediction.AutoSize = True
+        Me.cmdRHelpPrediction.ContextMenuStrip = Me.ContextMenuStripPrediction
+        Me.cmdRHelpPrediction.Location = New System.Drawing.Point(460, 79)
+        Me.cmdRHelpPrediction.Name = "cmdRHelpPrediction"
+        Me.cmdRHelpPrediction.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpPrediction.SplitMenuStrip = Me.ContextMenuStripPrediction
+        Me.cmdRHelpPrediction.TabIndex = 232
+        Me.cmdRHelpPrediction.Text = "R Help"
+        Me.cmdRHelpPrediction.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripPrediction
+        '
+        Me.ContextMenuStripPrediction.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripPrediction})
+        Me.ContextMenuStripPrediction.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripPrediction.Size = New System.Drawing.Size(129, 26)
+        '
+        'ToolStripPrediction
+        '
+        Me.ToolStripPrediction.Name = "ToolStripPrediction"
+        Me.ToolStripPrediction.Size = New System.Drawing.Size(128, 22)
+        Me.ToolStripPrediction.Text = "prediction"
+        '
+        'ContextMenuStripExtRemes
+        '
+        Me.ContextMenuStripExtRemes.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripextRemes})
+        Me.ContextMenuStripExtRemes.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripExtRemes.Size = New System.Drawing.Size(126, 26)
+        '
+        'ToolStripextRemes
+        '
+        Me.ToolStripextRemes.Name = "ToolStripextRemes"
+        Me.ToolStripextRemes.Size = New System.Drawing.Size(125, 22)
+        Me.ToolStripextRemes.Text = "extRemes"
+        '
+        'ContextMenuStripSegmented
+        '
+        Me.ContextMenuStripSegmented.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSegmented})
+        Me.ContextMenuStripSegmented.Name = "ContextMenuStripInteger"
+        Me.ContextMenuStripSegmented.Size = New System.Drawing.Size(134, 26)
+        '
+        'ToolStripSegmented
+        '
+        Me.ToolStripSegmented.Name = "ToolStripSegmented"
+        Me.ToolStripSegmented.Size = New System.Drawing.Size(133, 22)
+        Me.ToolStripSegmented.Text = "segmented"
+        '
+        'cmdRHelpExtRemes
+        '
+        Me.cmdRHelpExtRemes.AutoSize = True
+        Me.cmdRHelpExtRemes.ContextMenuStrip = Me.ContextMenuStripExtRemes
+        Me.cmdRHelpExtRemes.Location = New System.Drawing.Point(460, 78)
+        Me.cmdRHelpExtRemes.Name = "cmdRHelpExtRemes"
+        Me.cmdRHelpExtRemes.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpExtRemes.SplitMenuStrip = Me.ContextMenuStripExtRemes
+        Me.cmdRHelpExtRemes.TabIndex = 236
+        Me.cmdRHelpExtRemes.Text = "R Help"
+        Me.cmdRHelpExtRemes.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpSegmented
+        '
+        Me.cmdRHelpSegmented.AutoSize = True
+        Me.cmdRHelpSegmented.ContextMenuStrip = Me.ContextMenuStripSegmented
+        Me.cmdRHelpSegmented.Location = New System.Drawing.Point(460, 78)
+        Me.cmdRHelpSegmented.Name = "cmdRHelpSegmented"
+        Me.cmdRHelpSegmented.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpSegmented.SplitMenuStrip = Me.ContextMenuStripSegmented
+        Me.cmdRHelpSegmented.TabIndex = 237
+        Me.cmdRHelpSegmented.Text = "R Help"
+        Me.cmdRHelpSegmented.UseVisualStyleBackColor = True
+        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(582, 423)
+        Me.Controls.Add(Me.cmdRHelpSegmented)
+        Me.Controls.Add(Me.cmdRHelpExtRemes)
+        Me.Controls.Add(Me.cmdRHelpPrediction)
+        Me.Controls.Add(Me.cmdRHelpGeneral)
         Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.lblRpackage)
@@ -716,6 +840,10 @@ Partial Class dlgUseModel
         Me.grpPrediction.ResumeLayout(False)
         Me.grpExtrRemes.ResumeLayout(False)
         Me.grpSegmented.ResumeLayout(False)
+        Me.ContextMenuStripGeneral.ResumeLayout(False)
+        Me.ContextMenuStripPrediction.ResumeLayout(False)
+        Me.ContextMenuStripExtRemes.ResumeLayout(False)
+        Me.ContextMenuStripSegmented.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -775,4 +903,17 @@ Partial Class dlgUseModel
     Friend WithEvents cmdSlope As Button
     Friend WithEvents cmdPscore As Button
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents cmdRHelpGeneral As ucrSplitButton
+    Friend WithEvents ContextMenuStripGeneral As ContextMenuStrip
+    Friend WithEvents ToolStripStats As ToolStripMenuItem
+    Friend WithEvents ToolStripCar As ToolStripMenuItem
+    Friend WithEvents cmdRHelpSegmented As ucrSplitButton
+    Friend WithEvents cmdRHelpExtRemes As ucrSplitButton
+    Friend WithEvents cmdRHelpPrediction As ucrSplitButton
+    Friend WithEvents ContextMenuStripPrediction As ContextMenuStrip
+    Friend WithEvents ToolStripPrediction As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripExtRemes As ContextMenuStrip
+    Friend WithEvents ToolStripextRemes As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripSegmented As ContextMenuStrip
+    Friend WithEvents ToolStripSegmented As ToolStripMenuItem
 End Class
