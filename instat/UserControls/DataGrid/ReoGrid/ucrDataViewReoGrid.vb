@@ -94,7 +94,7 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
-    Public Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
+    Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
 

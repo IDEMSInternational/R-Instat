@@ -148,7 +148,7 @@ Public Class ucrDataViewLinuxGrid
         RaiseEvent WorksheetChanged()
     End Sub
 
-    Public Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
+    Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
