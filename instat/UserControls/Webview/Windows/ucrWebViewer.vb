@@ -47,7 +47,7 @@ Public Class ucrWebViewer
         'that should be the first step
         Dim strUrl As String = strFileName
         If bReplace Then
-            bReplace = "file:///" + strFileName.Replace("\", "/")
+            strUrl = "file:///" + strFileName.Replace("\", "/")
         End If
         _browser.LoadUrl(strUrl)
         _browser.Dock = DockStyle.Fill

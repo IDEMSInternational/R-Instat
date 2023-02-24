@@ -17,7 +17,6 @@
 
 Imports instat.Translations
 Imports RDotNet
-Imports System.IO
 Public Class dlgHypothesisTestsCalculator
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -666,25 +665,8 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsGetPortFunction As New RFunction
-
-        clsGetPortFunction.SetPackageName("tools")
-        clsGetPortFunction.SetRCommand("startDynamicHelp")
-        clsGetPortFunction.AddParameter("start", "NA", iPosition:=0)
-
-        Dim expPortTemp As SymbolicExpression
-        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPortFunction.ToScript(), bSeparateThread:=False)
-        Dim strPort As String = ""
-        If expPortTemp IsNot Nothing AndAlso expPortTemp.Type <> Internals.SymbolicExpressionType.Null Then
-            strPort = expPortTemp.AsInteger(0)
-        End If
-
-        Dim strFilePath As String = Path.Combine("library", strPackageName, "html", "00Index.html")
-        Dim strLocalHost As String = "127.0.0.1:"
-        Dim strURL As String
-        strURL = Path.Combine(String.Concat("http://", strLocalHost), strPort, strFilePath)
-        If strURL <> "" Then
-            strURL = strURL.Replace("\", "/")
+        If strPackageName <> "" Then
+            Dim strURL As String = dlgFromLibrary.GetFileURL(strPackageName:=strPackageName)
             frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
         End If
     End Sub
