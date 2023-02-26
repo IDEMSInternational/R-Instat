@@ -95,6 +95,10 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
+    Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
+        grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
+    End Sub
+
     Private Function GetInnerBracketedString(strData As String) As String
         Dim intFirstRightBracket As Integer = InStr(strData, ")")
         Dim intLastLeftBracket As Integer = InStrRev(strData, "(")
@@ -169,6 +173,7 @@ Public Class ucrDataViewReoGrid
                            GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(e.Cell.Column).strName,
                            GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+        RefreshSingleCell(e.Cell.Column, e.Cell.Row)
     End Sub
 
 
