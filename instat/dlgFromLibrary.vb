@@ -16,7 +16,6 @@
 
 Imports instat.Translations
 Imports RDotNet
-Imports System.IO
 
 Public Class dlgFromLibrary
     Private strLibraryTemp As String = "dfLibrary"
@@ -229,47 +228,11 @@ Public Class dlgFromLibrary
         End If
     End Function
 
-    Public Function GetFileURL(strPackageName As String, Optional strTopic As String = "", Optional bVignette As Boolean = False) As String
-        Dim clsGetPortFunction As New RFunction
-
-        clsGetPortFunction.SetPackageName("tools")
-        clsGetPortFunction.SetRCommand("startDynamicHelp")
-        clsGetPortFunction.AddParameter("start", "NA", iPosition:=0)
-
-        Dim expPortTemp As SymbolicExpression
-        expPortTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPortFunction.ToScript(), bSeparateThread:=False)
-        Dim strPort As String = ""
-        If expPortTemp IsNot Nothing AndAlso expPortTemp.Type <> Internals.SymbolicExpressionType.Null Then
-            strPort = expPortTemp.AsInteger(0)
-        End If
-
-        Dim strFilePath As String = Path.Combine("library", strPackageName, "html", "00Index.html")
-        If strTopic <> "" Then
-            strFilePath = Path.Combine("library", strPackageName, "html", String.Concat(strTopic, ".html"))
-        End If
-
-        Dim strLocalHost As String = "127.0.0.1:"
-        Dim strURL As String = Path.Combine(String.Concat("http://", strLocalHost), strPort, strFilePath)
-
-        If bVignette Then
-            Dim clsGetVignetteFunction As New RFunction
-
-            clsGetVignetteFunction.SetRCommand("get_vignette")
-            clsGetVignetteFunction.AddParameter("package", Chr(34) & strPackageName & Chr(34), iPosition:=0)
-            strURL = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVignetteFunction.ToScript(), bSeparateThread:=False).AsCharacter(0)
-        End If
-
-        If strURL <> "" Then
-            strURL = strURL.Replace("\", "/")
-        End If
-        Return strURL
-    End Function
-
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim strPackageName As String = ucrInputPackages.cboInput.SelectedItem
         Dim strTopic As String = lstCollection.SelectedItems(0).Text
         If strPackageName <> "" AndAlso strTopic <> "" Then
-            frmMaximiseOutput.Show(strFileName:=GetFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
         End If
     End Sub
 

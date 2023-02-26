@@ -1631,8 +1631,7 @@ Public Class ucrCalculator
 
     Private Sub OpenHelpPage()
         If strPackageName <> "" Then
-            Dim strURL As String = dlgFromLibrary.GetFileURL(strPackageName:=strPackageName)
-            frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub
 

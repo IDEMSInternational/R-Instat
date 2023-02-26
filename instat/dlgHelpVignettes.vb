@@ -89,7 +89,7 @@ Public Class dlgHelpVignettes
         Dim strPackageName As String = ucrInputComboPackage.cboInput.SelectedItem
         Dim strTopic As String = ucrInputFunctionName.GetText
         If strPackageName <> "" Then
-            Dim strURL = dlgFromLibrary.GetFileURL(strPackageName:=strPackageName, strTopic:=strTopic,
+            Dim strURL = clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic,
                                                           bVignette:=rdoVignettes.Checked)
             frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
         End If

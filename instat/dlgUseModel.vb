@@ -385,8 +385,7 @@ Public Class dlgUseModel
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim strPackageName As String = ucrInputComboRPackage.GetText
         If strPackageName <> "" Then
-            Dim strURL As String = dlgFromLibrary.GetFileURL(strPackageName:=strPackageName)
-            frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub
 
