@@ -145,6 +145,8 @@ pkgs <-
     "primes"
     #Generates well-known integer sequences. 'gmp' package is adopted for computing with arbitrarily large numbers.
     "Zseq"
+    # Extending 'gt' for Beautiful HTML Tables.
+    "gtExtras"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
