@@ -184,7 +184,6 @@ Public Class dlgNewDataFrame
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
 
-
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
             ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
