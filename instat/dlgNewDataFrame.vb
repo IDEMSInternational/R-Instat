@@ -122,8 +122,6 @@ Public Class dlgNewDataFrame
         clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
         clsDummyVarFunction.AddParameter("checked", "defaults", iPosition:=1)
 
-
-
         clsGetCategoriesFunction.SetPackageName("rcorpora")
         clsGetCategoriesFunction.SetRCommand("categories")
         Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategoriesFunction.ToScript(), bSilent:=True)
