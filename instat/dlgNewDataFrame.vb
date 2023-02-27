@@ -515,7 +515,7 @@ Public Class dlgNewDataFrame
                 Dim iRowHeader = i + 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = iRowHeader
-                    .Item(i).Cells(1).Value = "x" & (iRowHeader)
+                    .Item(i).Cells(1).Value = "x" & iRowHeader
                     .Item(i).Cells(2).Value = "Character"
                     .Item(i).Cells(3).Value = "NA"
                 End With
