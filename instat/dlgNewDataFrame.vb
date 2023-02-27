@@ -87,7 +87,7 @@ Public Class dlgNewDataFrame
 
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
-        ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkIncludeLabel.SetText("Variable Label")
         ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
@@ -120,7 +120,10 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
-        'clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
+        clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
+        clsDummyVarFunction.AddParameter("checked", "defaults", iPosition:=1)
+
+
 
         clsGetCategoriesFunction.SetPackageName("rcorpora")
         clsGetCategoriesFunction.SetRCommand("categories")
@@ -183,10 +186,11 @@ Public Class dlgNewDataFrame
         ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
-        ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
+
 
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+            ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
         End If
     End Sub
 
@@ -498,6 +502,10 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
+    Private Sub dataTypeGridView_CellEndEdit(sender As Object, e As EventArgs) Handles dataTypeGridView.CellEndEdit
+        SampleEmpty()
+    End Sub
+
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles dataTypeGridView.DataError
         If e.Context _
                     = (DataGridViewDataErrorContexts.Formatting Or DataGridViewDataErrorContexts.PreferredSize) Then
@@ -511,7 +519,7 @@ Public Class dlgNewDataFrame
                 Dim iRowHeader = i + 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = iRowHeader
-                    .Item(i).Cells(1).Value = String.Concat("x", iRowHeader)
+                    .Item(i).Cells(1).Value = "x" & (iRowHeader)
                     .Item(i).Cells(2).Value = "Character"
                     .Item(i).Cells(3).Value = "NA"
                 End With
