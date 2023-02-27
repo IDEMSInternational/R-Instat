@@ -793,7 +793,7 @@ Public Class dlgNewDataFrame
                 ucrInputListInCategory.cboInput.SelectedIndex = 0
             End If
         Else
-                ucrInputListInCategory.SetItems()
+            ucrInputListInCategory.SetItems()
         End If
     End Sub
 
