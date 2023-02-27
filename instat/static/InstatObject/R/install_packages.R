@@ -135,6 +135,10 @@ pkgs <-
     "corrr",
     "dslabs",
     "coin",
+    "segmented", 
+    # Utilities for verifying discrete, continuous and probabilistic forecasts, and forecasts expressed as parametric distributions are included.
+    "verification",
+    "prediction",
     #This small library contains a series of simple tools for constructing and manipulating confounded and fractional factorial designs.
     "conf.design",
     "pingr",
