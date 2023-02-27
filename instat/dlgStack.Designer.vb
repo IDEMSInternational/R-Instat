@@ -64,7 +64,11 @@ Partial Class dlgStack
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverTextColumn = New instat.ucrReceiverSingle()
         Me.ucrPnlStack = New instat.UcrPanel()
+
         Me.ucrChkCarryColumns = New instat.ucrCheck()
+
+        Me.ucrSaveNewDataName = New instat.ucrSave()
+
         Me.ucrInputValuesTo = New instat.ucrInputTextBox()
         Me.ucrReceiverColumnsToCarry = New instat.ucrReceiverMultiple()
         Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
@@ -81,6 +85,12 @@ Partial Class dlgStack
         Me.ucrChkCarryAllColumns = New instat.ucrCheck()
         Me.ucrInputPattern = New instat.ucrInputTextBox()
         Me.ucrReceiverFrequency = New instat.ucrReceiverSingle()
+
+        Me.lblFrequencyVar = New System.Windows.Forms.Label()
+        Me.ucrPnlCarryColumns = New instat.UcrPanel()
+        Me.rdoCarryAllColumns = New System.Windows.Forms.RadioButton()
+        Me.rdoCarryColumns = New System.Windows.Forms.RadioButton()
+
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -330,6 +340,7 @@ Partial Class dlgStack
         Me.ucrInputDropPrefix.TabIndex = 28
         '
 
+
         'ucrChkCarryAllColumns
         '
         Me.ucrChkCarryAllColumns.AutoSize = True
@@ -339,6 +350,7 @@ Partial Class dlgStack
         Me.ucrChkCarryAllColumns.Size = New System.Drawing.Size(165, 23)
         Me.ucrChkCarryAllColumns.TabIndex = 14
         '
+
 
         'ucrInputOutput
         '
@@ -385,6 +397,7 @@ Partial Class dlgStack
         Me.ucrPnlStack.Size = New System.Drawing.Size(299, 49)
         Me.ucrPnlStack.TabIndex = 0
         '
+
         'ucrChkCarryColumns
         '
         Me.ucrChkCarryColumns.AutoSize = True
@@ -398,6 +411,16 @@ Partial Class dlgStack
         Me.ucrChkCarryColumns.Size = New System.Drawing.Size(166, 23)
 
         Me.ucrChkCarryColumns.TabIndex = 15
+
+        'ucrSaveNewDataName
+        '
+        Me.ucrSaveNewDataName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(8, 364)
+        Me.ucrSaveNewDataName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
+        Me.ucrSaveNewDataName.Size = New System.Drawing.Size(372, 20)
+        Me.ucrSaveNewDataName.TabIndex = 24
+
         '
         'ucrInputValuesTo
         '
@@ -629,12 +652,46 @@ Partial Class dlgStack
         Me.lblFrequencyVar.Text = "Frequencies:"
         '
 
+        'ucrPnlCarryColumns
+        '
+        Me.ucrPnlCarryColumns.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCarryColumns.Location = New System.Drawing.Point(251, 189)
+        Me.ucrPnlCarryColumns.Name = "ucrPnlCarryColumns"
+        Me.ucrPnlCarryColumns.Size = New System.Drawing.Size(159, 48)
+        Me.ucrPnlCarryColumns.TabIndex = 39
+        '
+        'rdoCarryAllColumns
+        '
+        Me.rdoCarryAllColumns.AutoSize = True
+        Me.rdoCarryAllColumns.Location = New System.Drawing.Point(258, 193)
+        Me.rdoCarryAllColumns.Name = "rdoCarryAllColumns"
+        Me.rdoCarryAllColumns.Size = New System.Drawing.Size(106, 17)
+        Me.rdoCarryAllColumns.TabIndex = 40
+        Me.rdoCarryAllColumns.TabStop = True
+        Me.rdoCarryAllColumns.Text = "Carry All Columns"
+        Me.rdoCarryAllColumns.UseVisualStyleBackColor = True
+        '
+        'rdoCarryColumns
+        '
+        Me.rdoCarryColumns.AutoSize = True
+        Me.rdoCarryColumns.Location = New System.Drawing.Point(258, 215)
+        Me.rdoCarryColumns.Name = "rdoCarryColumns"
+        Me.rdoCarryColumns.Size = New System.Drawing.Size(92, 17)
+        Me.rdoCarryColumns.TabIndex = 41
+        Me.rdoCarryColumns.TabStop = True
+        Me.rdoCarryColumns.Text = "Carry Columns"
+        Me.rdoCarryColumns.UseVisualStyleBackColor = True
+        '
+
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 442)
+        Me.Controls.Add(Me.rdoCarryColumns)
+        Me.Controls.Add(Me.rdoCarryAllColumns)
+        Me.Controls.Add(Me.ucrPnlCarryColumns)
         Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
         Me.Controls.Add(Me.lblExpandFactor)
         Me.Controls.Add(Me.rdoExpand)
@@ -648,7 +705,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.rdoUnnest)
         Me.Controls.Add(Me.rdoPivotLonger)
         Me.Controls.Add(Me.ucrPnlStack)
-        Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrInputValuesTo)
         Me.Controls.Add(Me.ucrReceiverColumnsToCarry)
         Me.Controls.Add(Me.ucrSelectorStack)
@@ -670,7 +726,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrInputPattern)
         Me.Controls.Add(Me.lblFrequencyVar)
         Me.Controls.Add(Me.ucrReceiverFrequency)
-        Me.Controls.Add(Me.ucrChkCarryAllColumns)
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.ucrReceiverExpand)
         Me.Controls.Add(Me.lblFormat)
@@ -697,7 +752,6 @@ Partial Class dlgStack
     Friend WithEvents ucrReceiverColumnsToCarry As ucrReceiverMultiple
     Friend WithEvents ucrInputNamesTo As ucrInputTextBox
     Friend WithEvents ucrInputValuesTo As ucrInputTextBox
-    Friend WithEvents ucrChkCarryColumns As ucrCheck
     Friend WithEvents ucrSaveNewDataName As ucrSave
     Friend WithEvents ucrPnlStack As UcrPanel
     Friend WithEvents rdoUnnest As RadioButton
@@ -716,7 +770,6 @@ Partial Class dlgStack
     Friend WithEvents ucrInputOutput As ucrInputTextBox
     Friend WithEvents lblOutput As Label
     Friend WithEvents lblVariable As Label
-    Friend WithEvents ucrChkCarryAllColumns As ucrCheck
     Friend WithEvents ucrChkDropMissingValues As ucrCheck
     Friend WithEvents ucrChkDropPrefix As ucrCheck
     Friend WithEvents ucrInputDropPrefix As ucrInputTextBox
@@ -730,4 +783,7 @@ Partial Class dlgStack
     Friend WithEvents lblExpandFactor As Label
     Friend WithEvents ucrReceiverExpand As ucrReceiverMultiple
     Friend WithEvents rdoExpand As RadioButton
+    Friend WithEvents rdoCarryColumns As RadioButton
+    Friend WithEvents rdoCarryAllColumns As RadioButton
+    Friend WithEvents ucrPnlCarryColumns As UcrPanel
 End Class

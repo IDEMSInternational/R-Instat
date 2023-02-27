@@ -76,7 +76,6 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoStacked, rdoLikert}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
@@ -117,12 +116,9 @@ Public Class dlgRatingScales
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveGraph.SetPrefix("rating_scales")
-        ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorRatingScale.ucrAvailableDataFrames)
         ucrSaveGraph.setLinkedReceiver(ucrReceiverOrderedFactors)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -162,12 +158,21 @@ Public Class dlgRatingScales
         clsSjpLikertFunction.AddParameter("cat.neutral", 3)
         clsSjpLikertFunction.AddParameter("coord.flip", "TRUE", iPosition:=4)
         clsSjpLikertFunction.AddParameter("catcount", "NULL", iPosition:=5)
+        clsSjpLikertFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                               strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame,
+                                               strObjectName:="last_graph")
 
         clsSjpStackFrqFunction.SetPackageName("sjPlot")
         clsSjpStackFrqFunction.SetRCommand("plot_stackfrq")
         clsSjpStackFrqFunction.AddParameter("show.n", "FALSE", iPosition:=3)
         clsSjpStackFrqFunction.AddParameter("coord.flip", "TRUE", iPosition:=4)
-        clsSjpStackFrqFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsSjpStackFrqFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                               strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame,
+                                               strObjectName:="last_graph")
 
         clsSjtStackFrqFunction.SetPackageName("sjPlot")
         clsSjtStackFrqFunction.SetRCommand("tab_stackfrq")
@@ -176,12 +181,19 @@ Public Class dlgRatingScales
         clsSjtStackFrqFunction.AddParameter("show.n", "TRUE", iPosition:=3)
         clsSjtStackFrqFunction.AddParameter("show.total", "TRUE", iPosition:=4)
         clsSjtStackFrqFunction.AddParameter("show.na", "TRUE", iPosition:=5)
+        clsSjtStackFrqFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                               strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorRatingScale.strCurrentDataFrame,
+                                               strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrqFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRcodeSet = False
+        ucrSaveGraph.AddAdditionalRCode(clsSjpLikertFunction, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsSjpStackFrqFunction, iAdditionalPairNo:=2)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpStackFrqFunction, ucrChkWeights.GetParameter(), iAdditionalPairNo:=2)
         ucrChkFlip.AddAdditionalCodeParameterPair(clsSjpLikertFunction, ucrChkFlip.GetParameter(), iAdditionalPairNo:=1)
@@ -203,7 +215,7 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrNudNeutralLevel.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) Then
+        If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrSaveGraph.IsComplete AndAlso ucrNudNeutralLevel.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -248,13 +260,19 @@ Public Class dlgRatingScales
     Private Sub SetBaseFunction()
         If rdoLikert.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpLikertFunction)
-            ucrBase.clsRsyntax.iCallType = 3
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+            ucrSaveGraph.SetCheckBoxText("Save Graph")
         ElseIf rdoStacked.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrqFunction)
-            ucrBase.clsRsyntax.iCallType = 3
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+            ucrSaveGraph.SetCheckBoxText("Save Graph")
         ElseIf rdoTable.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrqFunction)
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_table")
+            ucrSaveGraph.SetCheckBoxText("Save Table")
         End If
     End Sub
 
