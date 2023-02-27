@@ -19,6 +19,7 @@ Public Class sdgPMConstants
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsListFunction As New RFunction
+    Private bRCodeset As Boolean = True
     Private Sub sdgPMConstants_Load(sender As Object, e As EventArgs) Handles  UcrButtonsSubdialogue1.Load
         autoTranslate(Me)
     End Sub
@@ -26,18 +27,18 @@ Public Class sdgPMConstants
     Private Sub InitialiseControls()
         ucrInputLambda.SetParameter(New RParameter("lambda", 1))
         ucrInputLambda.AddQuotesIfUnrecognised = False
-        ucrInputLambda.IsReadOnly = True
+        'ucrInputLambda.IsReadOnly = True
         ucrInputLambda.SetLinkedDisplayControl(lblLambda)
         'ucrInputLambda.SetRDefault(2.45)
 
         ucrInputSigma.SetParameter(New RParameter("sigma", 5))
         ucrInputSigma.AddQuotesIfUnrecognised = False
-        ucrInputSigma.IsReadOnly = True
+        'ucrInputSigma.IsReadOnly = True
         'ucrInputSigma.SetRDefault(4.903 * 10 ^ -9)
 
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))
         ucrInputSolarConstant.AddQuotesIfUnrecognised = False
-        ucrInputSolarConstant.IsReadOnly = True
+        'ucrInputSolarConstant.IsReadOnly = True
         ucrInputSolarConstant.SetLinkedDisplayControl(lblSolarConstant)
         'ucrInputSolarConstant.SetRDefault(0.082)
 
@@ -54,29 +55,26 @@ Public Class sdgPMConstants
         'Radiation Constants'
         ucrInputAs.SetParameter(New RParameter("as", 7))
         ucrInputAs.AddQuotesIfUnrecognised = False
-        ucrInputAs.IsReadOnly = True
+        'ucrInputAs.IsReadOnly = True
         ucrInputAs.SetLinkedDisplayControl(lblAS)
         'ucrInputAs.SetRDefault(0.25)
 
         ucrInputBS.SetParameter(New RParameter("bs", 8))
         ucrInputBS.AddQuotesIfUnrecognised = False
-        ucrInputBS.IsReadOnly = True
+        'ucrInputBS.IsReadOnly = True
         ucrInputBS.SetLinkedDisplayControl(lblBS)
         'ucrInputBS.SetRDefault(0.5)
 
         bControlsInitialised = True
+
     End Sub
 
     Public Sub SetRFunction(clsNewListFunction As RFunction, Optional bReset As Boolean = False)
         clsListFunction = clsNewListFunction
-
+        bRCodeset = False
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        'ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrNudElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputLongitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrNudHeigth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -84,5 +82,6 @@ Public Class sdgPMConstants
         ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        bRCodeset = True
     End Sub
 End Class

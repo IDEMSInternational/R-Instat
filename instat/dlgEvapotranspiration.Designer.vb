@@ -389,7 +389,7 @@ Partial Class dlgEvapotranspiration
         '
         'cmdHSConstants
         '
-        Me.cmdHSConstants.Location = New System.Drawing.Point(166, 343)
+        Me.cmdHSConstants.Location = New System.Drawing.Point(166, 344)
         Me.cmdHSConstants.Name = "cmdHSConstants"
         Me.cmdHSConstants.Size = New System.Drawing.Size(123, 23)
         Me.cmdHSConstants.TabIndex = 38

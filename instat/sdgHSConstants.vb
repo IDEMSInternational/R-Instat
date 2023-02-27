@@ -24,36 +24,16 @@ Public Class sdgHSConstants
     End Sub
 
     Private Sub InitialiseControls()
-        'Location'
-        ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
-        ucrInputLatitude.AddQuotesIfUnrecognised = False
-        ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrInputLatitude.SetRDefault(0)
-
-
-        ucrNudElevation.SetParameter(New RParameter("Elev", 0))
-        ucrNudElevation.SetMinMax(0, 5000)
-        ucrNudElevation.Increment = 1
-        ucrNudElevation.SetRDefault(0)
-        ucrNudElevation.SetLinkedDisplayControl(lblElevation)
-
-        ucrInputLongitude.SetParameter(New RParameter("Y", 9))
-        ucrInputLongitude.AddQuotesIfUnrecognised = False
-        ucrInputLongitude.SetLinkedDisplayControl(lblLongitude)
-        ucrInputLongitude.SetRDefault(0)
-
-        'Constants'
         ucrInputLambda.SetParameter(New RParameter("lambda", 1))
         ucrInputLambda.AddQuotesIfUnrecognised = False
-        ucrInputLambda.IsReadOnly = True
+        'ucrInputLambda.IsReadOnly = True
         ucrInputLambda.SetLinkedDisplayControl(lbllambda)
-        ucrInputLambda.SetRDefault(2.45)
+        'ucrInputLambda.SetRDefault(2.45)
 
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))
         ucrInputSolarConstant.AddQuotesIfUnrecognised = False
-        ucrInputSolarConstant.IsReadOnly = True
         ucrInputSolarConstant.SetLinkedDisplayControl(lblSolarConstant)
-        ucrInputSolarConstant.SetRDefault(0.082)
+        'ucrInputSolarConstant.SetRDefault(0.082)
 
         bControlsInitialised = True
     End Sub
@@ -64,10 +44,6 @@ Public Class sdgHSConstants
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLongitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
     End Sub

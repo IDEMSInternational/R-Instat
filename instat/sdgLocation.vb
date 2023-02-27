@@ -19,16 +19,6 @@ Public Class sdgLocation
     Private bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private clsVarnamesVectorPM, clsVarnamesVectorHS, clsListFunction As New RFunction
-    Private bOKEnabled As Boolean = True
-
-    'Public Sub New()
-
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
-
-    '    ' Add any initialization after the InitializeComponent() call.
-    '    bFirstLoad = True
-    'End Sub
 
     Private Sub sdgLocation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -59,7 +49,7 @@ Public Class sdgLocation
         ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
         ucrInputLatitude.AddQuotesIfUnrecognised = False
         ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrInputLatitude.SetRDefault(0)
+        'ucrInputLatitude.SetRDefault(0)
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 3))
         ucrReceiverLongitude.SetParameterIsRFunction()
@@ -81,24 +71,25 @@ Public Class sdgLocation
         ucrInputElevation.SetParameter(New RParameter("Elev", 4))
         ucrInputElevation.AddQuotesIfUnrecognised = False
         ucrInputElevation.SetLinkedDisplayControl(lblLatitude)
-        ucrInputElevation.SetRDefault(0)
-        'bControlsInitialised = True
+        'ucrInputElevation.SetRDefault(0)
+
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
         'EnableDesableSelector()
-        If Not bControlsInitialised Then
-            InitialiseDialog()
-        End If
+
         clsListFunction = clsNewListFunction
         clsVarnamesVectorPM = clsNewVarnamesVectorPM
         clsVarnamesVectorHS = clsNewVarnamesVectorHS
+
+
+        If Not bControlsInitialised Then
+            InitialiseDialog()
+        End If
+
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
-        'ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat_rad", 2), iAdditionalPairNo:=1)
-        'ucrReceiverAltitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("Elev", 4), iAdditionalPairNo:=1)
         ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
-        'ucrInputLatitude.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("lat_rad", 2), iAdditionalPairNo:=1)
-        'ucrInputElevation.AddAdditionalCodeParameterPair(clsListFunction, New RParameter("Elev", 4), iAdditionalPairNo:=1)
 
         ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
         ucrReceiverStation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
@@ -110,29 +101,23 @@ Public Class sdgLocation
             ucrInputLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
             ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         End If
-        bControlsInitialised = True
+        'bControlsInitialised = True
+
     End Sub
 
     Private Sub EnableDesableSelector()
         'clsListFunction.AddParameter("Elev", 0, iPosition:=0)
         'clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
         If ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty Then
-            'grpLocation.Enabled = True
             ucrInputLatitude.Enabled = True
             ucrInputElevation.Enabled = True
             ucrInputLongitude.Enabled = True
-            'grpLocation.Visible = True
-            'ucrSelectorLocation.Visible = False
-            'ucrSelectorLocation.Enabled = True
-
         Else
             ucrInputLatitude.Enabled = False
             ucrInputElevation.Enabled = False
             ucrInputLongitude.Enabled = False
-            'grpLocation.Enabled = True
-            'grpLocation.Visible = False
-            'ucrSelectorLocation.Visible = True
-            'ucrSelectorLocation.Enabled = False
+
+
         End If
     End Sub
 
