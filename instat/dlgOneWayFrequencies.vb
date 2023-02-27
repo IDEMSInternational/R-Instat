@@ -22,7 +22,6 @@ Public Class dlgOneWayFrequencies
     Private clsSjMiscFrq As New RFunction
     Private clsSjPlot As New RFunction
     Private clsPlotGrid As New RFunction
-    Private clsGetColumnsFunction As New RFunction
     Private clsSjPlotList As New RFunction
     Private clsAsGGplot As New RFunction
     Private clsAsDataFrame As New RFunction
@@ -165,7 +164,6 @@ Public Class dlgOneWayFrequencies
         clsAsDataFrame = New RFunction
         clsStemAndLeafFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsGetColumnsFunction = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
@@ -185,9 +183,9 @@ Public Class dlgOneWayFrequencies
 
         clsSjMiscFrq.SetPackageName("sjmisc")
         clsSjMiscFrq.SetRCommand("frq")
-        clsSjMiscFrq.AddParameter("show.strings", "TRUE")
-        clsSjMiscFrq.AddParameter("show.na", "TRUE")
-        clsSjMiscFrq.AddParameter("grp.strings", "NULL")
+        clsSjMiscFrq.AddParameter("show.strings", "TRUE", iPosition:=1)
+        clsSjMiscFrq.AddParameter("show.na", "TRUE", iPosition:=2)
+        clsSjMiscFrq.AddParameter("grp.strings", "NULL", iPosition:=3)
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("plot_frq")
@@ -221,7 +219,6 @@ Public Class dlgOneWayFrequencies
         ucrSaveGraph.AddAdditionalRCode(clsAsDataFrame)
 
         ucrReceiverWeights.SetRCode(clsSjMiscFrq, bReset)
-        'ucrReceiverOneWayFreq.SetRCode(clsSjMiscFrq, bReset)
 
         ucrNudScale.SetRCode(clsStemAndLeafFunction, bReset)
         ucrNudWidth.SetRCode(clsStemAndLeafFunction, bReset)
@@ -327,6 +324,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub ucrReceiverOneWayFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlValueChanged
+        Dim clsGetColumnsFunction As New RFunction
         clsGetColumnsFunction = ucrReceiverOneWayFreq.GetVariables()
         clsGetColumnsFunction.SetAssignTo("columns")
         clsSjMiscFrq.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
