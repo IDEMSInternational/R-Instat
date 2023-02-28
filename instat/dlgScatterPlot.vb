@@ -185,7 +185,6 @@ Public Class dlgScatterPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
@@ -348,7 +347,6 @@ Public Class dlgScatterPlot
             clsBaseOperator.RemoveParameterByName(strGeomTextParameterName)
         Else
             clsBaseOperator.AddParameter(strGeomTextParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
-
         End If
     End Sub
 End Class
