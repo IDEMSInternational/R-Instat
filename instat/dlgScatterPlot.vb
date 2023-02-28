@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class dlgScatterPlot
     Private clsRggplotFunction As New RFunction
-    Private clsRScatterGeomFunction As New RFunction
+    Private clsRScatterGeomFunction, clsLabelFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsLocalRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
@@ -45,7 +45,8 @@ Public Class dlgScatterPlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName}
+    Private strGeomTextParameterName As String = "geom_text"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName, strGeomTextParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -155,6 +156,7 @@ Public Class dlgScatterPlot
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
+        clsLabelFunction = New RFunction
         clsRaesFunction = New RFunction
         clsGeomSmoothFunction = New RFunction
         clsGeomRugFunction = New RFunction
@@ -183,8 +185,12 @@ Public Class dlgScatterPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
+
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
+
+        clsLabelFunction.SetPackageName("ggplot2")
+        clsLabelFunction.SetRCommand("geom_text")
 
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
@@ -337,4 +343,12 @@ Public Class dlgScatterPlot
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabel.ControlValueChanged
+        If ucrReceiverLabel.IsEmpty Then
+            clsBaseOperator.RemoveParameterByName(strGeomTextParameterName)
+        Else
+            clsBaseOperator.AddParameter(strGeomTextParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
+
+        End If
+    End Sub
 End Class
