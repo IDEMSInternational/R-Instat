@@ -78,6 +78,7 @@ Partial Class dlgUseTable
         'ucrPnlExportOptions
         '
         Me.ucrPnlExportOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlExportOptions.Enabled = False
         Me.ucrPnlExportOptions.Location = New System.Drawing.Point(8, 243)
         Me.ucrPnlExportOptions.Name = "ucrPnlExportOptions"
         Me.ucrPnlExportOptions.Size = New System.Drawing.Size(105, 110)

@@ -53,7 +53,10 @@ Public Class dlgUseTable
         ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
 
         ''To Be enabled later when the formats are supported.
-
+        rdoAsHTML.Enabled = False
+        rdoAsLaTex.Enabled = False
+        rdoAsRTF.Enabled = False
+        rdoAsWord.Enabled = False
         'ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
         'ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
         'ucrPnlExportOptions.AddRadioButton(rdoAsWord)
