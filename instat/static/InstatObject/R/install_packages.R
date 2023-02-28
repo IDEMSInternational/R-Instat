@@ -130,6 +130,7 @@ pkgs <-
     # For most frequent values in Prepare > Column:Numeric > Row Summaries
     "statip",
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
+    # also install CDT from GitHub devtools::install_github("rijaf-iri/CDT")
     # install.packages('remotes')
     # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
     "corrr",
