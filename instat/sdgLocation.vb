@@ -49,7 +49,6 @@ Public Class sdgLocation
         ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
         ucrInputLatitude.AddQuotesIfUnrecognised = False
         ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
-        'ucrInputLatitude.SetRDefault(0)
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 3))
         ucrReceiverLongitude.SetParameterIsRFunction()
@@ -71,18 +70,14 @@ Public Class sdgLocation
         ucrInputElevation.SetParameter(New RParameter("Elev", 4))
         ucrInputElevation.AddQuotesIfUnrecognised = False
         ucrInputElevation.SetLinkedDisplayControl(lblLatitude)
-        'ucrInputElevation.SetRDefault(0)
 
         bControlsInitialised = True
     End Sub
 
     Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
-        'EnableDesableSelector()
-
         clsListFunction = clsNewListFunction
         clsVarnamesVectorPM = clsNewVarnamesVectorPM
         clsVarnamesVectorHS = clsNewVarnamesVectorHS
-
 
         If Not bControlsInitialised Then
             InitialiseDialog()
@@ -96,18 +91,15 @@ Public Class sdgLocation
         ucrReceiverLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverAltitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
+
         If bReset Then
             ucrInputElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrInputLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
             ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         End If
-        'bControlsInitialised = True
-
     End Sub
 
     Private Sub EnableDesableSelector()
-        'clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-        'clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
         If ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty Then
             ucrInputLatitude.Enabled = True
             ucrInputElevation.Enabled = True
@@ -116,8 +108,6 @@ Public Class sdgLocation
             ucrInputLatitude.Enabled = False
             ucrInputElevation.Enabled = False
             ucrInputLongitude.Enabled = False
-
-
         End If
     End Sub
 

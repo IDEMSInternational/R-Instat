@@ -24,10 +24,9 @@ Public Class dlgEvapotranspiration
     Private iSaveMaxY As Integer
     Private iEvapOptions, iHSConstants, iLocation As Integer
     Private iHSMissingOptions As Integer
-    Private clsETPenmanMonteith, clsHargreavesSamani, clsReadFunction, clsListFunction, clsDataFunctionPM, clsDataFunctionHS, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
+    Private clsETPenmanMonteith, clsHargreavesSamani, clsListFunction, clsDataFunctionPM, clsDataFunctionHS, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
-    Private clsBaseOperator, clsDailyOperatorHS As New ROperator
-    Private bRcodeSet As Boolean = True
+    Private clsBaseOperator As New ROperator
 
     Private Sub dlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -158,7 +157,6 @@ Public Class dlgEvapotranspiration
         clsDataFunctionPM = New RFunction
         clsDataFunctionHS = New RFunction
         clsBaseOperator = New ROperator
-        clsDailyOperatorHS = New ROperator
         clsReadInputs = New RFunction
         clsDayFunc = New RFunction
         clsMonthFunc = New RFunction
@@ -171,10 +169,6 @@ Public Class dlgEvapotranspiration
         ucrNewColName.Reset()
 
         bResetSubdialog = True
-
-        'clsLibraryEvap.SetRCommand("library")
-        'clsLibraryEvap.AddParameter("Evapotranspiration", "Evapotranspiration", bIncludeArgumentName:=False)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsLibraryEvap, iPosition:=0)
 
         clsDataFunctionPM.SetRCommand("data.frame")
         clsDataFunctionPM.AddParameter("Year", clsRFunctionParameter:=clsYearFunc)
@@ -227,8 +221,8 @@ Public Class dlgEvapotranspiration
 
         clsVector.SetRCommand("c")
 
+        clsListFunction.ClearParameters()
         clsListFunction.SetRCommand("list")
-        clsListFunction.SetAssignTo("constants")
         clsListFunction.AddParameter("Elev", 0, iPosition:=0)
         clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
         clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
@@ -238,6 +232,7 @@ Public Class dlgEvapotranspiration
         clsListFunction.AddParameter("G", 0, iPosition:=6)
         clsListFunction.AddParameter("as", 0.25, iPosition:=7)
         clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
+        clsListFunction.SetAssignTo("constants")
 
         clsETPenmanMonteith.SetPackageName("Evapotranspiration")
         clsETPenmanMonteith.SetRCommand("ET.PenmanMonteith")
@@ -264,6 +259,7 @@ Public Class dlgEvapotranspiration
         clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
         clsBaseOperator.AddParameter("ET.Daily", strParameterValue:="ET.Daily", iPosition:=1)
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColName.GetText, strTempDataframe:=ucrSelectorEvapotranspiration.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText)
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsListFunction, iPosition:=1)
@@ -276,18 +272,17 @@ Public Class dlgEvapotranspiration
         ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmin", 4), iAdditionalPairNo:=1)
         ucrInputTimeStep.AddAdditionalCodeParameterPair(clsHargreavesSamani, New RParameter("ts", 2), iAdditionalPairNo:=1)
 
-        ucrPnlMethod.SetRCode(clsBaseOperator, bReset)
         ucrReceiverDate.SetRCode(clsDayFunc, bReset)
         ucrReceiverTmax.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverTmin.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverHumidityMax.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverHumidityMin.SetRCode(clsDataFunctionPM, bReset)
         ucrReceiverWindSpeed.SetRCode(clsDataFunctionPM, bReset)
-        ucrInputSolar.SetRCode(clsETPenmanMonteith, bReset)
         ucrInputTimeStep.SetRCode(clsETPenmanMonteith, bReset)
         ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
+        ucrPnlMethod.SetRCode(clsBaseOperator, bReset)
         If bReset Then
             ucrInputSolar.SetRCode(clsETPenmanMonteith, bReset)
         End If
@@ -380,30 +375,6 @@ Public Class dlgEvapotranspiration
             clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionHS, iPosition:=1)
         End If
     End Sub
-
-    'Private Sub RemoveConstants()
-    '    If rdoPenmanMonteith.Checked Then
-    '        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-    '        clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
-    '        clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
-    '        clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
-    '        clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
-    '        clsListFunction.AddParameter("z", 2, iPosition:=4)
-    '        clsListFunction.AddParameter("G", 0, iPosition:=6)
-    '        clsListFunction.AddParameter("as", 0.25, iPosition:=7)
-    '        clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
-    '    Else
-    '        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-    '        clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
-    '        clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
-    '        clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
-    '        clsListFunction.RemoveParameterByName("sigma")
-    '        clsListFunction.RemoveParameterByName("as")
-    '        clsListFunction.RemoveParameterByName("bs")
-    '        clsListFunction.RemoveParameterByName("G")
-    '        clsListFunction.RemoveParameterByName("z")
-    '    End If
-    'End Sub
 
     Private Sub ucrPnlMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlValueChanged
         Method()
