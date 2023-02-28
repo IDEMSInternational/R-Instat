@@ -1513,25 +1513,25 @@ Partial Class dlgHypothesisTestsCalculator
         '
         Me.ContextMenuStripEnterStats1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStats1})
         Me.ContextMenuStripEnterStats1.Name = "ContextMenuStripInteger"
-        Me.ContextMenuStripEnterStats1.Size = New System.Drawing.Size(181, 48)
+        Me.ContextMenuStripEnterStats1.Size = New System.Drawing.Size(99, 26)
         '
         'ToolStripStats1
         '
         Me.ToolStripStats1.Name = "ToolStripStats1"
-        Me.ToolStripStats1.Size = New System.Drawing.Size(180, 22)
-        Me.ToolStripStats1.Text = "stats1"
+        Me.ToolStripStats1.Size = New System.Drawing.Size(98, 22)
+        Me.ToolStripStats1.Text = "stats"
         '
         'ContextMenuStats2
         '
         Me.ContextMenuStats2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStats2})
         Me.ContextMenuStats2.Name = "ContextMenuStripInteger"
-        Me.ContextMenuStats2.Size = New System.Drawing.Size(105, 26)
+        Me.ContextMenuStats2.Size = New System.Drawing.Size(99, 26)
         '
         'ToolStripStats2
         '
         Me.ToolStripStats2.Name = "ToolStripStats2"
-        Me.ToolStripStats2.Size = New System.Drawing.Size(104, 22)
-        Me.ToolStripStats2.Text = "stats2"
+        Me.ToolStripStats2.Size = New System.Drawing.Size(98, 22)
+        Me.ToolStripStats2.Text = "stats"
         '
         'ContextMenuStripAgricolae
         '
