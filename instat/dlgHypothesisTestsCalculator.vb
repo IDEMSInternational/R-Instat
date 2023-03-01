@@ -614,6 +614,11 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                cmdRHelpStats.Visible = True
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
@@ -622,6 +627,11 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                cmdRHelpStats.Visible = True
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
@@ -630,6 +640,11 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = True
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
             Case "Verification"
                 strPackageName = "verification"
                 grpStats1.Visible = False
@@ -638,6 +653,11 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = True
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = True
+                cmdRHelpTrend.Visible = False
             Case "Coin"
                 strPackageName = "coin"
                 grpStats1.Visible = False
@@ -646,6 +666,11 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = True
                 grpTrend.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = True
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
             Case "Trend"
                 strPackageName = "trend"
                 grpStats1.Visible = False
@@ -654,6 +679,11 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = True
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = True
 
         End Select
     End Sub
@@ -664,7 +694,7 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+    Private Sub OpenHelpPage()
         If strPackageName <> "" Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
@@ -1052,5 +1082,42 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("I()", 1)
+    End Sub
+
+    Private Sub cmdRHelpStats_Click(sender As Object, e As EventArgs) Handles cmdRHelpStats.Click, ToolStripMenuStats.Click
+        If ucrInputComboRPackage.GetText = "Stats1" Then
+            strPackageName = "stats"
+        ElseIf ucrInputComboRPackage.GetText = "Stats2" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpAgricolae_Click(sender As Object, e As EventArgs) Handles cmdRHelpAgricolae.Click, ToolStripMenuAgricolae.Click
+        If ucrInputComboRPackage.GetText = "Agricolae" Then
+            strPackageName = "agricolae"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpCoin_Click(sender As Object, e As EventArgs) Handles cmdRHelpCoin.Click, ToolStripMenuCoin.Click
+        If ucrInputComboRPackage.GetText = "Coin" Then
+            strPackageName = "coin"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpTrend_Click(sender As Object, e As EventArgs) Handles cmdRHelpTrend.Click, ToolStripMenuTrend.Click
+        If ucrInputComboRPackage.GetText = "Trend" Then
+            strPackageName = "trend"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpVerification_Click(sender As Object, e As EventArgs) Handles cmdRHelpVerification.Click, ToolStripMenuVerification.Click
+        If ucrInputComboRPackage.GetText = "Verification" Then
+            strPackageName = "verification"
+        End If
+        OpenHelpPage()
     End Sub
 End Class
