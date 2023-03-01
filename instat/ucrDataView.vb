@@ -22,6 +22,7 @@ Imports instat.Translations
 Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
+    Private bOnlyUpdateOneCell As Boolean = False
 
     Public WriteOnly Property DataBook() As clsDataBook
         Set(value As clsDataBook)
@@ -142,10 +143,14 @@ Public Class ucrDataView
             Exit Sub
         End If
         _clsDataBook.RefreshData()
-        AddAndUpdateWorksheets()
-        _grid.RemoveOldWorksheets()
-        If _clsDataBook.DataFrames.Count = 0 Then
-            RefreshDisplayInformation()
+        'If we are updating one cell we do not need to refresh the grid and the 
+        'refresh of that cell will be done manually 
+        If Not bOnlyUpdateOneCell Then
+            AddAndUpdateWorksheets()
+            _grid.RemoveOldWorksheets()
+            If _clsDataBook.DataFrames.Count = 0 Then
+                RefreshDisplayInformation()
+            End If
         End If
     End Sub
 
@@ -370,7 +375,9 @@ Public Class ucrDataView
             End Select
         End If
         StartWait()
+        bOnlyUpdateOneCell = True
         GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes, bListOfVector)
+        bOnlyUpdateOneCell = False
         EndWait()
     End Sub
 

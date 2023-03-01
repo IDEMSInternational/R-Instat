@@ -398,6 +398,7 @@ Public Class dlgUseModel
         End If
     End Sub
 
+
     Private Sub OpenHelpPage()
         Dim clsHelp As New RFunction
 
@@ -444,6 +445,13 @@ Public Class dlgUseModel
             strPackageName = "segmented"
         End If
         OpenHelpPage()
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim strPackageName As String = ucrInputComboRPackage.GetText
+        If strPackageName <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
+
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click

@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgModelling
     Public bFirstLoad As Boolean = True
@@ -580,6 +579,7 @@ Public Class dlgModelling
         bResetDisplayOptions = False
     End Sub
 
+
     Private Sub OpenHelpPage()
         Dim clsHelp As New RFunction
 
@@ -591,6 +591,14 @@ Public Class dlgModelling
                                    strComment:="Opening help page for " &
                                    strPackageName & " Package. Generated from dialog Calculator",
                                    iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim strPackageName As String = ucrInputComboRPackage.GetText
+        If strPackageName <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
+
     End Sub
 
     Private Sub Clear()

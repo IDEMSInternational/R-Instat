@@ -699,6 +699,14 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
     End Sub
 
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        If strPackageName <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
+    End Sub
+
+
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
