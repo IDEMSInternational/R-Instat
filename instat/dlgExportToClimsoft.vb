@@ -49,14 +49,13 @@ Public Class dlgExportToClimsoft
         End If
         If bReset Then
             SetDefaults()
-            DialogSize()
         End If
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
         AddStationName()
-        ' DialogSize()
+        DialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -75,8 +74,13 @@ Public Class dlgExportToClimsoft
 
         ucrReceiverComments.SetLinkedDisplayControl(lblcomments)
 
+        ucrPnlPrepareData.AddRadioButton(rdoData)
+        ucrPnlPrepareData.AddRadioButton(rdoStation)
+        ucrPnlPrepareData.AddParameterValuesCondition(rdoData, "checked", "data")
+        ucrPnlPrepareData.AddParameterValuesCondition(rdoStation, "checked", "station")
+
         ucrChkAddReport.SetText("Add Reports")
-        ucrChkAddReport.AddToLinkedControls({ucrReceiverComments, ucrDataFrameSheets, ucrInputExportFile}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddReport.AddToLinkedControls({ucrReceiverComments, ucrDataFrameSheets, ucrInputExportFile}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddReport.AddToLinkedControls({ucrReceiverElements, ucrReceiverDate, ucrSaveNewDataFrame, ucrChkExportDataFrame, ucrChkNewDataFrame, ucrReceiverStation, ucrInputHour, ucrInputLevel, ucrSelectorImportToClimsoft}, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkAddReport.AddParameterValuesCondition(True, "comments", "True")
         ucrChkAddReport.AddParameterValuesCondition(False, "comments", "False")
@@ -116,6 +120,12 @@ Public Class dlgExportToClimsoft
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.SetLinkedDisplayControl(lblExport)
+
+        ucrPnlPrepareData.AddToLinkedControls({ucrReceiverComments, ucrReceiverElements, ucrInputExportFile,
+                                              ucrInputHour, ucrInputLevel, ucrChkAddReport, ucrChkExportDataFrame,
+                                              ucrChkNewDataFrame}, {rdoData}, bNewLinkedHideIfParameterMissing:=True)
+
+
         DialogSize()
     End Sub
 
@@ -138,6 +148,8 @@ Public Class dlgExportToClimsoft
         clsDummyFunction.AddParameter("dataframe", "True", iPosition:=0)
         clsDummyFunction.AddParameter("export", "False", iPosition:=1)
         clsDummyFunction.AddParameter("comments", "False", iPosition:=2)
+        clsDummyFunction.AddParameter("checked", "data", iPosition:=3)
+
 
         clsDataFrameFunction.SetRCommand("data.frame")
         clsDataFrameFunction.AddParameter("hour", 6, iPosition:=3)
@@ -173,7 +185,7 @@ Public Class dlgExportToClimsoft
         ucrInputLevel.SetRCode(clsDataFrameFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportClimsoftFunction, bReset)
-        'ucrDataFrameSheets.SetRCode(clsExportCommentsFunction, bReset)
+        ucrPnlPrepareData.SetRCode(clsDummyFunction, bReset)
         If bReset Then
             ucrChkExportDataFrame.SetRCode(clsDummyFunction, bReset)
             ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
@@ -183,29 +195,6 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub TestOkEnabled()
-        'ucrBase.OKEnabled(Not ucrReceiverDate.IsEmpty _
-        '                      AndAlso Not ucrReceiverElements.IsEmpty _
-        '                      AndAlso Not ucrReceiverStation.IsEmpty
-        '                      )
-        'If ucrChkNewDataFrame.Checked And Not ucrSaveNewDataFrame.IsComplete Then
-        '    ucrBase.OKEnabled(False)
-        'End If
-        'If ucrChkExportDataFrame.Checked And ucrInputExportFile.IsEmpty Then
-        '    ucrBase.OKEnabled(False)
-        'End If
-        'If ucrChkAddReport.Checked And ucrInputExportFile.IsEmpty And ucrReceiverComments.IsEmpty Then
-        '    ucrBase.OKEnabled(False)
-        'End If
-        'ucrBase.OKEnabled(Not ucrReceiverDate.IsEmpty _
-        '                      AndAlso Not ucrReceiverElements.IsEmpty _
-        '                      AndAlso Not ucrReceiverStation.IsEmpty _
-        '                      AndAlso ucrChkNewDataFrame.Checked _
-        '                      AndAlso ucrSaveNewDataFrame.IsComplete
-        '                      )
-
-
-        'ucrBase.OKEnabled(ucrChkAddReport.Checked And Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverComments.IsEmpty)
-
 
         If ucrChkNewDataFrame.Checked Then
             If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty AndAlso ucrSaveNewDataFrame.IsComplete Then
@@ -347,17 +336,16 @@ Public Class dlgExportToClimsoft
             ucrChkNewDataFrame.Checked = False
             ucrChkExportDataFrame.Checked = False
 
-            Me.Size = New System.Drawing.Size(Me.Width, 240)
+            Me.Size = New System.Drawing.Size(Me.Width, 255)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 3)
-            ucrInputExportFile.Location = New Point(ucrInputExportFile.Location.X, iInputExp / 3.95)
-            ucrChkAddReport.Location = New Point(ucrChkAddReport.Location.X, ichkAddReport / 35)
-            ucrReceiverComments.Location = New Point(ucrReceiverComments.Location.X, iucrReceiverComment / 6.5)
-            cmdBrowse.Location = New Point(cmdBrowse.Location.X, icmdBrowser / 4)
-            lblExport.Location = New Point(lblExport.Location.X, ilblBrowser / 4)
-            ucrDataFrameSheets.Location = New Point(ucrDataFrameSheets.Location.X, iucrDataFrame / 10)
-            lblcomments.Location = New Point(lblcomments.Location.X, icomments / 8.5)
+            ucrInputExportFile.Location = New Point(ucrInputExportFile.Location.X, iInputExp / 3.45)
+            ucrChkAddReport.Location = New Point(ucrChkAddReport.Location.X, ichkAddReport / 8)
+            ucrReceiverComments.Location = New Point(ucrReceiverComments.Location.X, iucrReceiverComment / 4.5)
+            cmdBrowse.Location = New Point(cmdBrowse.Location.X, icmdBrowser / 3.5)
+            lblExport.Location = New Point(lblExport.Location.X, ilblBrowser / 3.4)
+            ucrDataFrameSheets.Location = New Point(ucrDataFrameSheets.Location.X, iucrDataFrame / 5.5)
+            lblcomments.Location = New Point(lblcomments.Location.X, icomments / 5.5)
         Else
-            'ucrChkNewDataFrame.Checked = True
 
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
@@ -408,9 +396,6 @@ Public Class dlgExportToClimsoft
             ucrChkExportDataFrame.Checked = False
 
         End If
-        'cmdBrowse.Visible = True
-        'ucrChkNewDataFrame.Checked = False
-        'ucrChkExportDataFrame.Checked = False
         SettingBaseFunction()
         DialogSize()
     End Sub
@@ -420,4 +405,9 @@ Public Class dlgExportToClimsoft
         DialogSize()
     End Sub
 
+    Private Sub ucrPnlPrepareData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPrepareData.ControlValueChanged
+        SettingBaseFunction()
+        DialogSize()
+        AddingComments()
+    End Sub
 End Class
