@@ -29,6 +29,10 @@ Partial Class dlgExportToClimsoft
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
+        Me.lblcomments = New System.Windows.Forms.Label()
+        Me.ucrReceiverComments = New instat.ucrReceiverSingle()
+        Me.ucrChkAddReport = New instat.ucrCheck()
+        Me.ucrDataFrameSheets = New instat.ucrDataFrame()
         Me.ucrChkExportDataFrame = New instat.ucrCheck()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
@@ -40,10 +44,6 @@ Partial Class dlgExportToClimsoft
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrSelectorImportToClimsoft = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblcomments = New System.Windows.Forms.Label()
-        Me.ucrDataFrameSheets = New instat.ucrDataFrame()
-        Me.ucrChkAddReport = New instat.ucrCheck()
-        Me.ucrReceiverComments = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblElement
@@ -111,11 +111,55 @@ Partial Class dlgExportToClimsoft
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
+        'lblcomments
+        '
+        Me.lblcomments.AutoSize = True
+        Me.lblcomments.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblcomments.Location = New System.Drawing.Point(278, 320)
+        Me.lblcomments.Name = "lblcomments"
+        Me.lblcomments.Size = New System.Drawing.Size(59, 13)
+        Me.lblcomments.TabIndex = 76
+        Me.lblcomments.Tag = "New_Name"
+        Me.lblcomments.Text = "Comments:"
+        '
+        'ucrReceiverComments
+        '
+        Me.ucrReceiverComments.AutoSize = True
+        Me.ucrReceiverComments.frmParent = Me
+        Me.ucrReceiverComments.Location = New System.Drawing.Point(278, 337)
+        Me.ucrReceiverComments.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverComments.Name = "ucrReceiverComments"
+        Me.ucrReceiverComments.Selector = Nothing
+        Me.ucrReceiverComments.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverComments.strNcFilePath = ""
+        Me.ucrReceiverComments.TabIndex = 79
+        Me.ucrReceiverComments.ucrSelector = Nothing
+        '
+        'ucrChkAddReport
+        '
+        Me.ucrChkAddReport.AutoSize = True
+        Me.ucrChkAddReport.Checked = False
+        Me.ucrChkAddReport.Location = New System.Drawing.Point(9, 279)
+        Me.ucrChkAddReport.Name = "ucrChkAddReport"
+        Me.ucrChkAddReport.Size = New System.Drawing.Size(266, 23)
+        Me.ucrChkAddReport.TabIndex = 78
+        '
+        'ucrDataFrameSheets
+        '
+        Me.ucrDataFrameSheets.AutoSize = True
+        Me.ucrDataFrameSheets.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameSheets.bUseCurrentFilter = True
+        Me.ucrDataFrameSheets.Location = New System.Drawing.Point(9, 315)
+        Me.ucrDataFrameSheets.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameSheets.Name = "ucrDataFrameSheets"
+        Me.ucrDataFrameSheets.Size = New System.Drawing.Size(151, 50)
+        Me.ucrDataFrameSheets.TabIndex = 75
+        '
         'ucrChkExportDataFrame
         '
         Me.ucrChkExportDataFrame.AutoSize = True
         Me.ucrChkExportDataFrame.Checked = False
-        Me.ucrChkExportDataFrame.Location = New System.Drawing.Point(8, 246)
+        Me.ucrChkExportDataFrame.Location = New System.Drawing.Point(9, 245)
         Me.ucrChkExportDataFrame.Name = "ucrChkExportDataFrame"
         Me.ucrChkExportDataFrame.Size = New System.Drawing.Size(266, 23)
         Me.ucrChkExportDataFrame.TabIndex = 74
@@ -233,55 +277,10 @@ Partial Class dlgExportToClimsoft
         Me.ucrSelectorImportToClimsoft.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorImportToClimsoft.TabIndex = 1
         '
-        'lblcomments
-        '
-        Me.lblcomments.AutoSize = True
-        Me.lblcomments.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblcomments.Location = New System.Drawing.Point(278, 320)
-        Me.lblcomments.Name = "lblcomments"
-        Me.lblcomments.Size = New System.Drawing.Size(59, 13)
-        Me.lblcomments.TabIndex = 76
-        Me.lblcomments.Tag = "New_Name"
-        Me.lblcomments.Text = "Comments:"
-        '
-        'ucrDataFrameSheets
-        '
-        Me.ucrDataFrameSheets.AutoSize = True
-        Me.ucrDataFrameSheets.bDropUnusedFilterLevels = False
-        Me.ucrDataFrameSheets.bUseCurrentFilter = True
-        Me.ucrDataFrameSheets.Location = New System.Drawing.Point(3, 315)
-        Me.ucrDataFrameSheets.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameSheets.Name = "ucrDataFrameSheets"
-        Me.ucrDataFrameSheets.Size = New System.Drawing.Size(151, 50)
-        Me.ucrDataFrameSheets.TabIndex = 75
-        '
-        'ucrChkAddReport
-        '
-        Me.ucrChkAddReport.AutoSize = True
-        Me.ucrChkAddReport.Checked = False
-        Me.ucrChkAddReport.Location = New System.Drawing.Point(7, 279)
-        Me.ucrChkAddReport.Name = "ucrChkAddReport"
-        Me.ucrChkAddReport.Size = New System.Drawing.Size(266, 23)
-        Me.ucrChkAddReport.TabIndex = 78
-        '
-        'ucrReceiverComments
-        '
-        Me.ucrReceiverComments.AutoSize = True
-        Me.ucrReceiverComments.frmParent = Me
-        Me.ucrReceiverComments.Location = New System.Drawing.Point(270, 337)
-        Me.ucrReceiverComments.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverComments.Name = "ucrReceiverComments"
-        Me.ucrReceiverComments.Selector = Nothing
-        Me.ucrReceiverComments.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverComments.strNcFilePath = ""
-        Me.ucrReceiverComments.TabIndex = 79
-        Me.ucrReceiverComments.ucrSelector = Nothing
-        '
         'dlgExportToClimsoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 496)
         Me.Controls.Add(Me.ucrReceiverComments)
         Me.Controls.Add(Me.ucrChkAddReport)
@@ -305,9 +304,9 @@ Partial Class dlgExportToClimsoft
         Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrSelectorImportToClimsoft)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgExportToClimsoft"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export For Climsoft"
         Me.ResumeLayout(False)
         Me.PerformLayout()
