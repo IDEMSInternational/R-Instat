@@ -126,7 +126,7 @@ packs <- c("abind", "agricolae", "agridat",
             # install with remotes::install_github('michael-franke/aida-package')
             # CDT package from GitHub added manually to list
             # install with devtools::install_github("rijaf-iri/CDT")
-           "mmtable2",  "aida-package", "CDT"
+           "mmtable2",  "aida", "CDT"
            )
 
 versions <- c("1.4-5", "1.3-5", "1.21", "1.2.1", 
