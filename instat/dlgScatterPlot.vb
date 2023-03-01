@@ -45,8 +45,8 @@ Public Class dlgScatterPlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
-    Private strGeomTextParameterName As String = "geom_text"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName, strGeomTextParameterName}
+    Private strGeomTextRepelParameterName As String = "geom_text_repel"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName, strGeomTextRepelParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -95,9 +95,6 @@ Public Class dlgScatterPlot
         ucrReceiverLabel.bWithQuotes = False
         ucrReceiverLabel.Selector = ucrSelectorForScatter
         ucrReceiverLabel.strSelectorHeading = "Variables"
-
-        ttLabelVariable.SetToolTip(ucrReceiverLabel.txtReceiverSingle, "Use plotly display option for more information about the labels.")
-
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.SetParameterIsString()
@@ -191,8 +188,8 @@ Public Class dlgScatterPlot
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
-        clsLabelFunction.SetPackageName("ggplot2")
-        clsLabelFunction.SetRCommand("geom_text")
+        clsLabelFunction.SetPackageName("ggrepel")
+        clsLabelFunction.SetRCommand("geom_text_repel")
 
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
@@ -347,9 +344,9 @@ Public Class dlgScatterPlot
 
     Private Sub ucrReceiverLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabel.ControlValueChanged
         If ucrReceiverLabel.IsEmpty Then
-            clsBaseOperator.RemoveParameterByName(strGeomTextParameterName)
+            clsBaseOperator.RemoveParameterByName(strGeomTextRepelParameterName)
         Else
-            clsBaseOperator.AddParameter(strGeomTextParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
+            clsBaseOperator.AddParameter(strGeomTextRepelParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
         End If
     End Sub
 End Class
