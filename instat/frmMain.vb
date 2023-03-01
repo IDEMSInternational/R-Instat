@@ -77,7 +77,7 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-        Logger.Info("R-Instat started")
+        Logger.Info("R-Instat started version" + My.Application.Info.Version.ToString)
         ' This call is required by the designer.
         InitializeComponent()
 

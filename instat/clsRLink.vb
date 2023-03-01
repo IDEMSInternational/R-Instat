@@ -149,6 +149,8 @@ Public Class RLink
 
     Private clsOutputLogger As clsOutputLogger
 
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
+
     ''' <summary>
     ''' Create method for clsRLink
     ''' Must pass in the output logger so the R link knows where to post outputs to
@@ -229,12 +231,12 @@ Public Class RLink
                 cpuArchitectureFolder = "x64"
             End If
             Dim rPath = Path.Combine(rHome, "bin", cpuArchitectureFolder)
-            Console.WriteLine("R Home: " & rHome)
-            Console.WriteLine("R Path: " & rPath)
+            Logger.Info("R Home: " & rHome)
+            Logger.Info("R Path: " & rPath)
 
             ' Use bundled R if included
             If Directory.Exists(rHome) And Directory.Exists(rPath) Then
-                Console.WriteLine("Using bundled R")
+                Logger.Info("Using bundled R")
                 REngine.SetEnvironmentVariables(rPath, rHome)
             Else
                 ' Use normal process for finding local R if bundled version not included
