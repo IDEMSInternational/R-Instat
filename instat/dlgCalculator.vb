@@ -27,7 +27,7 @@ Public Class dlgCalculator
     Private iBasicWidth As Integer
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
-    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF", "Integer", "Complex"}
+    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF", "Integer", "Complex", "List"}
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -189,6 +189,8 @@ Public Class dlgCalculator
             Case "Integer"
                 Me.Width = iBasicWidth * 1.5
             Case "Complex"
+                Me.Width = iBasicWidth * 1.5
+            Case "List"
                 Me.Width = iBasicWidth * 1.5
             Case Else
                 Me.Width = iBasicWidth
