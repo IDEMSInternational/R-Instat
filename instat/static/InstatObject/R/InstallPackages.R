@@ -1,4 +1,5 @@
 Sys.setenv(TZ='GMT')
+Sys.setlocale("LC_TIME", "C")
 
 #Install packages from CRAN archive
 install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
