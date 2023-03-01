@@ -96,6 +96,9 @@ Public Class dlgScatterPlot
         ucrReceiverLabel.Selector = ucrSelectorForScatter
         ucrReceiverLabel.strSelectorHeading = "Variables"
 
+        ttLabelVariable.SetToolTip(ucrReceiverLabel.txtReceiverSingle, "Use plotly display option for more information about the labels.")
+
+
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.SetParameterIsString()
         ucrFactorOptionalReceiver.bWithQuotes = False

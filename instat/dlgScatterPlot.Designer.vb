@@ -62,6 +62,7 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ttLabelVariable = New System.Windows.Forms.ToolTip(Me.components)
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -351,4 +352,5 @@ Partial Class dlgScatterPlot
     Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemRugOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemSmoothOptions As ToolStripMenuItem
+    Friend WithEvents ttLabelVariable As ToolTip
 End Class
