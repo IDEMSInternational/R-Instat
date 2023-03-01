@@ -28,7 +28,7 @@ Public Class dlgUseTable
                                        clsStyleListFunction, clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction As New RFunction
 
-    Private clsPipeOperator, clsTabFootnoteOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
+    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -104,14 +104,10 @@ Public Class dlgUseTable
         clsTabStyleFunction = New RFunction
         clsTabStylePxFunction = New RFunction
         clsTabStyleCellTitleFunction = New RFunction
-        clsTabFootnoteOperator = New ROperator
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
 
-        rdoAsHTML.Checked = True
-
-        clsTabFootnoteOperator.SetOperation("%>%")
-        clsTabFootnoteOperator.bBrackets = False
+        'rdoAsHTML.Checked = True
 
         clsJoiningPipeOperator.SetOperation("%>%")
 
@@ -233,7 +229,7 @@ Public Class dlgUseTable
                                         clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                        clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                       clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                       clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub

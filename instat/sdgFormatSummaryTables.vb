@@ -25,7 +25,7 @@ Public Class sdgFormatSummaryTables
     'The dummy Function is used by input controls that add the parameter manually,
     'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
-    Private clsPipeOperator, clsMutableOperator, clsJoiningOperator, clsTabFootnoteOperator As New ROperator
+    Private clsPipeOperator, clsMutableOperator, clsJoiningOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -343,7 +343,7 @@ Public Class sdgFormatSummaryTables
                         clsNewCellBorderFunction As RFunction, clsNewCellFillFunction As RFunction, clsNewHeaderFormatFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewTabOptionsFunction As RFunction, clsNewPipeOperator As ROperator, clsNewBorderWeightPxFunction As RFunction, clsNewFootnoteTitleLocationFunction As RFunction,
                         clsNewFootnoteSubtitleLocationFunction As RFunction, clsNewTabFootnoteSubtitleFunction As RFunction, clsNewStyleListFunction As RFunction,
-                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction, clsNewTabFootnoteOperator As ROperator,
+                        clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator, clsNewSecondFootnoteCellFunction As RFunction,
                         clsNewTabStyleCellTextFunction As RFunction, clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction)
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
@@ -370,7 +370,6 @@ Public Class sdgFormatSummaryTables
         clsTabStyleFunction = clsNewTabStyleFunction
         clsTabStyleCellTextFunction = clsNewTabStyleCellTextFunction
         clsTabStylePxFunction = clsNewTabStylePxFunction
-        clsTabFootnoteOperator = clsNewTabFootnoteOperator
         clsDummyFunction = clsNewDummyFunction
 
         If Not bControlsInitialised Then
@@ -378,10 +377,10 @@ Public Class sdgFormatSummaryTables
         End If
 
         ucrChkAddTitleSubtitle.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkTitleFootnote.SetRCode(clsTabFootnoteOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkTitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChKAddSecondFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkSubtitleFootnote.SetRCode(clsTabFootnoteOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkSubtitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddSourcenote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddHeader.SetRCode(clsMutableOperator, bReset, bCloneIfNeeded:=True)
         ucrChkStyleText.SetRCode(clsStyleListFunction, bReset, bCloneIfNeeded:=True)
@@ -469,21 +468,15 @@ Public Class sdgFormatSummaryTables
             Exit Sub
         End If
         If ucrChkTitleFootnote.Checked AndAlso Not ucrInputTitleFootnote.IsEmpty Then
-            clsTabFootnoteOperator.AddParameter("title_footnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
+            clsPipeOperator.AddParameter("title_footnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=1)
         Else
-            clsTabFootnoteOperator.RemoveParameterByName("title_footnote")
+            clsPipeOperator.RemoveParameterByName("title_footnote")
         End If
 
         If ucrChkSubtitleFootnote.Checked AndAlso Not ucrInputSubtitleFootnote.IsEmpty Then
-            clsTabFootnoteOperator.AddParameter("subtitle_footnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
+            clsPipeOperator.AddParameter("subtitle_footnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
         Else
-            clsTabFootnoteOperator.RemoveParameterByName("subtitle_footnote")
-        End If
-
-        If (ucrChkSubtitleFootnote.Checked OrElse ucrChkTitleFootnote.Checked) AndAlso clsTabFootnoteOperator.clsParameters.Count >= 1 AndAlso ucrChkAddTitleSubtitle.Checked Then
-            clsPipeOperator.AddParameter("title_footnote", clsROperatorParameter:=clsTabFootnoteOperator, iPosition:=1)
-        Else
-            clsPipeOperator.RemoveParameterByName("title_footnote")
+            clsPipeOperator.RemoveParameterByName("subtitle_footnote")
         End If
     End Sub
 
