@@ -411,6 +411,11 @@ Public Class ucrCalculator
         ucrSelectorForCalculations.Reset()
         clsHelp.ClearParameters()
     End Sub
+
+    Public Function GetExpersion() As String
+        Return If(ucrChkShowExpression.Checked, ucrReceiverForCalculation.GetText(), "")
+    End Function
+
     Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
     End Sub
