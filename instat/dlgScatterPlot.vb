@@ -171,6 +171,7 @@ Public Class dlgScatterPlot
 
         toolStripMenuItemRugOptions.Enabled = False
         toolStripMenuItemSmoothOptions.Enabled = False
+        toolStripMenuItemTextrepelOptions.Enabled = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -299,6 +300,10 @@ Public Class dlgScatterPlot
         EnableDisableOptions(clsGeomSmoothFunction)
     End Sub
 
+    Private Sub toolStripMenuItemTextrepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextrepelOptions.Click
+        EnableDisableOptions(clsLabelFunction)
+    End Sub
+
     Private Sub EnableDisableOptions(clsTempFunction As RFunction)
         'SetupLayer sends the components storing the plot info (clsRaesFunction, clsRggplotFunction, ...) of dlgScatteredPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTempFunction,
@@ -348,5 +353,6 @@ Public Class dlgScatterPlot
         Else
             clsBaseOperator.AddParameter(strGeomTextRepelParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
         End If
+        toolStripMenuItemTextrepelOptions.Enabled = Not ucrReceiverLabel.IsEmpty
     End Sub
 End Class
