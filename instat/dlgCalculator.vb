@@ -55,7 +55,6 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
-        ucrCalc.ucrChkShowExpression.chkCheck.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
@@ -93,8 +92,6 @@ Public Class dlgCalculator
 
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
-
-        ucrCalc.ucrChkShowExpression.SetText("Show Expression")
 
     End Sub
 
