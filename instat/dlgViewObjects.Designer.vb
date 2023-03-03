@@ -56,9 +56,9 @@ Partial Class dlgViewObjects
         Me.lblSelectedObject.AutoSize = True
         Me.lblSelectedObject.Location = New System.Drawing.Point(250, 72)
         Me.lblSelectedObject.Name = "lblSelectedObject"
-        Me.lblSelectedObject.Size = New System.Drawing.Size(41, 13)
+        Me.lblSelectedObject.Size = New System.Drawing.Size(83, 13)
         Me.lblSelectedObject.TabIndex = 1
-        Me.lblSelectedObject.Text = "Object:"
+        Me.lblSelectedObject.Text = "Object To View:"
         '
         'rdoStructure
         '
@@ -145,10 +145,10 @@ Partial Class dlgViewObjects
         'ucrPnlContentsToView
         '
         Me.ucrPnlContentsToView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlContentsToView.Location = New System.Drawing.Point(250, 113)
+        Me.ucrPnlContentsToView.Location = New System.Drawing.Point(250, 115)
         Me.ucrPnlContentsToView.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrPnlContentsToView.Name = "ucrPnlContentsToView"
-        Me.ucrPnlContentsToView.Size = New System.Drawing.Size(120, 100)
+        Me.ucrPnlContentsToView.Size = New System.Drawing.Size(120, 98)
         Me.ucrPnlContentsToView.TabIndex = 3
         '
         'ucrInputObjectType
@@ -167,9 +167,9 @@ Partial Class dlgViewObjects
         Me.lblObjectType.AutoSize = True
         Me.lblObjectType.Location = New System.Drawing.Point(250, 32)
         Me.lblObjectType.Name = "lblObjectType"
-        Me.lblObjectType.Size = New System.Drawing.Size(106, 13)
+        Me.lblObjectType.Size = New System.Drawing.Size(34, 13)
         Me.lblObjectType.TabIndex = 10
-        Me.lblObjectType.Text = "Object Type to View:"
+        Me.lblObjectType.Text = "Type:"
         '
         'dlgViewObjects
         '
