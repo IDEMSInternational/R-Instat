@@ -378,11 +378,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, ToolStripMenuBase.Click
-        Dim clsHelp As New RFunction
         strPackageName = "base"
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
         If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
