@@ -383,7 +383,7 @@ Public Class dlgEnter
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        If strPackageName <> "" Then
+        If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub
