@@ -20,6 +20,7 @@ Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iClick As Integer = 1
+    Private iFisrtRow As Integer = 0
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
 
@@ -67,6 +68,8 @@ Public Class dlgFindInVariableOrFilter
         ucrSelectorFind.Reset()
         ucrInputPattern.SetName("")
 
+        iFisrtRow = 0
+
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
 
         clsGetRowsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_rows")
@@ -90,12 +93,12 @@ Public Class dlgFindInVariableOrFilter
         Try
             Dim vecRowNumbers As CharacterVector = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
 
-
-            frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(0))
+            frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(iFisrtRow))
             frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
                                                strVariable:=ucrReceiverVariable.GetVariableNames,
                                                bFindNext:=False)
             iClick = 1
+            iFisrtRow += 1
             cmdFindNext.Enabled = True
 
         Catch ex As Exception

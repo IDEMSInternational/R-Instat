@@ -350,7 +350,7 @@ Public Class clsDataFramePage
 
     Public Sub GoToFirstRowFound(iRow As Integer)
         If iRow > 0 Then
-            _iRowStart = iRow '(intRowIncrements * (iRow - 1)) + 1
+            _iRowStart = iRow
             _clsRDotNetDataFrame = GetDataFrameFromRCommand()
         End If
     End Sub

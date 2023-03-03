@@ -101,6 +101,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         'cmdFindNext
         '
+        Me.cmdFindNext.Enabled = False
         Me.cmdFindNext.Location = New System.Drawing.Point(427, 242)
         Me.cmdFindNext.Name = "cmdFindNext"
         Me.cmdFindNext.Size = New System.Drawing.Size(180, 36)
