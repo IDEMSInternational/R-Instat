@@ -580,7 +580,7 @@ Public Class dlgModelling
     End Sub
 
     Private Sub OpenHelpPage()
-        If strPackageName <> "" Then
+        If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub

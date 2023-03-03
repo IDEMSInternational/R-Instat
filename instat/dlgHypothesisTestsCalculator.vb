@@ -695,7 +695,7 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub OpenHelpPage()
-        If strPackageName <> "" Then
+        If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub
@@ -1085,9 +1085,7 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub cmdRHelpStats_Click(sender As Object, e As EventArgs) Handles cmdRHelpStats.Click, ToolStripMenuStats.Click
-        If ucrInputComboRPackage.GetText = "Stats1" Then
-            strPackageName = "stats"
-        ElseIf ucrInputComboRPackage.GetText = "Stats2" Then
+        If ucrInputComboRPackage.GetText = "Stats1" OrElse ucrInputComboRPackage.GetText = "Stats2" Then
             strPackageName = "stats"
         End If
         OpenHelpPage()

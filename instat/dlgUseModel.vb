@@ -399,14 +399,7 @@ Public Class dlgUseModel
     End Sub
 
         Private Sub OpenHelpPage()
-        If strPackageName <> "" Then
-            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
-        End If
-    End Sub
-
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs)
-        Dim strPackageName As String = ucrInputComboRPackage.GetText
-        If strPackageName <> "" Then
+        If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
     End Sub
