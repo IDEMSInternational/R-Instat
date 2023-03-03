@@ -68,7 +68,7 @@ Public Class dlgRenameObjects
 
         ucrInputType.SetParameter(New RParameter("object_type", 3))
         dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
-        dctTypes.Add("Summaries", Chr(34) & "summaries" & Chr(34))
+        dctTypes.Add("Summaries", Chr(34) & "summary" & Chr(34))
         dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
         dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
         dctTypes.Add("Models", Chr(34) & "model" & Chr(34))

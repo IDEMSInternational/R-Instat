@@ -827,6 +827,7 @@ Public Class RLink
                 bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
 
             ElseIf strLastScript.StartsWith("print") Then
+                'Todo. This is not yet supported for printing object formats like html
                 bAsFile = False
                 Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             ElseIf iCallType = 0 Then
