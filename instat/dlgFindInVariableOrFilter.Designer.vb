@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgFindInVariableOrFilter
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgFindInVariableOrFilter
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cmdFind = New System.Windows.Forms.Button()
         Me.lblVariable = New System.Windows.Forms.Label()
@@ -29,8 +29,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoInFilter = New System.Windows.Forms.RadioButton()
         Me.cmdFindNext = New System.Windows.Forms.Button()
         Me.lblFilter = New System.Windows.Forms.Label()
-        Me.lblPage = New System.Windows.Forms.Label()
-        Me.ucrNudPage = New instat.ucrNud()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
@@ -41,7 +39,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         'cmdFind
         '
-        Me.cmdFind.Location = New System.Drawing.Point(427, 227)
+        Me.cmdFind.Location = New System.Drawing.Point(427, 200)
         Me.cmdFind.Name = "cmdFind"
         Me.cmdFind.Size = New System.Drawing.Size(180, 36)
         Me.cmdFind.TabIndex = 8
@@ -103,7 +101,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         'cmdFindNext
         '
-        Me.cmdFindNext.Location = New System.Drawing.Point(427, 269)
+        Me.cmdFindNext.Location = New System.Drawing.Point(427, 242)
         Me.cmdFindNext.Name = "cmdFindNext"
         Me.cmdFindNext.Size = New System.Drawing.Size(180, 36)
         Me.cmdFindNext.TabIndex = 9
@@ -118,29 +116,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.lblFilter.Size = New System.Drawing.Size(48, 20)
         Me.lblFilter.TabIndex = 12
         Me.lblFilter.Text = "Filter:"
-        '
-        'lblPage
-        '
-        Me.lblPage.AutoSize = True
-        Me.lblPage.Location = New System.Drawing.Point(427, 192)
-        Me.lblPage.Name = "lblPage"
-        Me.lblPage.Size = New System.Drawing.Size(50, 20)
-        Me.lblPage.TabIndex = 13
-        Me.lblPage.Text = "Page:"
-        '
-        'ucrNudPage
-        '
-        Me.ucrNudPage.AutoSize = True
-        Me.ucrNudPage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPage.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPage.Location = New System.Drawing.Point(488, 188)
-        Me.ucrNudPage.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrNudPage.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPage.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPage.Name = "ucrNudPage"
-        Me.ucrNudPage.Size = New System.Drawing.Size(75, 30)
-        Me.ucrNudPage.TabIndex = 14
-        Me.ucrNudPage.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlOptions
         '
@@ -217,8 +192,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(640, 442)
-        Me.Controls.Add(Me.ucrNudPage)
-        Me.Controls.Add(Me.lblPage)
         Me.Controls.Add(Me.lblFilter)
         Me.Controls.Add(Me.cmdFindNext)
         Me.Controls.Add(Me.rdoVariable)
@@ -254,6 +227,4 @@ Partial Class dlgFindInVariableOrFilter
     Friend WithEvents cmdFindNext As Button
     Friend WithEvents lblFilter As Label
     Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
-    Friend WithEvents lblPage As Label
-    Friend WithEvents ucrNudPage As ucrNud
 End Class

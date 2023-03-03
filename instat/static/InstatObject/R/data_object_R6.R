@@ -4363,3 +4363,14 @@ DataSheet$set("public", "has_labels", function(col_names) {
   return(!is.null(attr(col_names, "labels")))
 }
 )
+
+DataSheet$set("public", "get_rows", function(data_name, col_name, pattern){
+  if(missing(col_name)) stop("Column name must be specified.")
+  data <- self$get_data_frame(data_name=data_name)
+  row_numbers <- data %>% 
+                 tibble::rownames_to_column('gene') %>%
+                 dplyr::filter(grepl(pattern = pattern, x = .[[col_name]], ignore.case = TRUE)) %>%
+                 tibble::column_to_rownames('gene') %>% row.names()
+  return(row_numbers)
+}
+)

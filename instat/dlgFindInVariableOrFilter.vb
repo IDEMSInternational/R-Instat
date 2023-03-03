@@ -15,11 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iClick As Integer = 1
     Private clsDummyFunction As New RFunction
+    Private clsGetRowsFunction As New RFunction
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,13 +39,20 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverVariable.Selector = ucrSelectorFind
+        ucrSelectorFind.SetParameter(New RParameter("data", 0))
+        ucrSelectorFind.SetParameterIsString()
 
         ucrPnlOptions.AddRadioButton(rdoVariable)
         ucrPnlOptions.AddRadioButton(rdoInFilter)
         rdoInFilter.Enabled = False
         ucrPnlOptions.AddParameterValuesCondition(rdoVariable, "check", "variable")
         ucrPnlOptions.AddParameterValuesCondition(rdoInFilter, "check", "filter")
+
+        ucrReceiverVariable.SetParameter(New RParameter("col_name", 1))
+        'ucrReceiverVariable.bWithQuotes = False
+        ucrReceiverVariable.SetParameterIsString()
+        ucrReceiverVariable.bUseFilteredData = False
+        ucrReceiverVariable.Selector = ucrSelectorFind
 
         ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverFilter, {rdoInFilter}, bNewLinkedHideIfParameterMissing:=True)
@@ -53,17 +62,23 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub SetDefaults()
         clsDummyFunction = New RFunction
+        clsGetRowsFunction = New RFunction
+
+        ucrSelectorFind.Reset()
+        ucrInputPattern.SetName("")
 
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
 
-        ucrNudPage.SetMinMax(1, Integer.MaxValue)
+        clsGetRowsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_rows")
+
         ucrReceiverVariable.SetMeAsReceiver()
         cmdFindNext.Enabled = False
     End Sub
 
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorFind.SetRCode(clsGetRowsFunction, bReset)
+        ucrReceiverVariable.SetRCode(clsGetRowsFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
@@ -72,12 +87,19 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
-        frmMain.ucrDataViewer.GoToSpecificRowPage(ucrNudPage.GetText)
-        frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
-                                           strVariable:=ucrReceiverVariable.GetVariableNames,
-                                           bFindNext:=False)
-        iClick = 1
-        cmdFindNext.Enabled = True
+        Try
+            Dim strRows = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
+
+            'frmMain.ucrDataViewer.GoToSpecificRowPage("")
+            frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+                                               strVariable:=ucrReceiverVariable.GetVariableNames,
+                                               bFindNext:=False)
+            iClick = 1
+            cmdFindNext.Enabled = True
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
@@ -100,5 +122,9 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
+    End Sub
+
+    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged
+        clsGetRowsFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText() & Chr(34), iPosition:=2)
     End Sub
 End Class
