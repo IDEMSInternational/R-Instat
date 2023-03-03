@@ -93,13 +93,17 @@ Public Class dlgFindInVariableOrFilter
         Try
             Dim vecRowNumbers As CharacterVector = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
 
+            If iFisrtRow = vecRowNumbers.Length Then
+                Exit Sub
+            End If
+
             frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(iFisrtRow))
             frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
                                                strVariable:=ucrReceiverVariable.GetVariableNames,
                                                bFindNext:=False)
             iClick = 1
             iFisrtRow += 1
-            cmdFindNext.Enabled = True
+            'cmdFindNext.Enabled = True
 
         Catch ex As Exception
             MsgBox(ex.Message)
