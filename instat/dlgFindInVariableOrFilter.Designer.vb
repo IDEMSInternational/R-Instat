@@ -43,7 +43,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.cmdFind.Name = "cmdFind"
         Me.cmdFind.Size = New System.Drawing.Size(180, 36)
         Me.cmdFind.TabIndex = 8
-        Me.cmdFind.Text = "Find All"
+        Me.cmdFind.Text = "Find"
         Me.cmdFind.UseVisualStyleBackColor = True
         '
         'lblVariable

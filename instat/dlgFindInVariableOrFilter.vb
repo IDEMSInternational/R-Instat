@@ -88,9 +88,10 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
-            Dim strRows = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
+            Dim vecRowNumbers As CharacterVector = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
 
-            'frmMain.ucrDataViewer.GoToSpecificRowPage("")
+
+            frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(0))
             frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
                                                strVariable:=ucrReceiverVariable.GetVariableNames,
                                                bFindNext:=False)
