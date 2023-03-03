@@ -40,7 +40,7 @@ Public Class dlgViewObjects
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 349
         'todo. temporary to have the str() output captured as text
-        'ucrBase.clsRsyntax.iCallType = -1
+        ucrBase.clsRsyntax.iCallType = -1
         ucrSelectorForViewObject.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForViewObject.SetParameterIsString()
 
