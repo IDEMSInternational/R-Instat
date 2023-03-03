@@ -397,7 +397,8 @@ Public Class dlgUseModel
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("extRemes::lr.test()", 1)
         End If
     End Sub
-    Private Sub OpenHelpPage()
+
+        Private Sub OpenHelpPage()
         If strPackageName <> "" Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
