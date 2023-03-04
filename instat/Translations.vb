@@ -16,6 +16,8 @@
 Imports System.Data.SQLite
 Imports System.IO
 Imports System.Reflection
+Imports Newtonsoft.Json
+Imports NLog.Targets
 
 Public Class Translations
 
@@ -45,6 +47,10 @@ Public Class Translations
     ''' <param name="ctrParent">        The WinForm control that is the parent of the menu. </param>
     '''--------------------------------------------------------------------------------------------
     Public Shared Sub translateMenu(tsCollection As ToolStripItemCollection, ctrParent As Control)
+
+        'TODO - temporary exploratory code, do not include in release 
+        WriteDialogsToJson()
+
         ' The 'WriteCsvFile' function call below should normally be commented out. 
         ' It only needs be uncommented and executed once, prior to each new release.
         'WriteCsvFile()
@@ -73,7 +79,7 @@ Public Class Translations
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrLogWindow.Name, frmMain.ucrLogWindow.mnuContextLogFile.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.rowContextMenu.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.RowContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.ColumnContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.CellContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))
@@ -139,6 +145,44 @@ Public Class Translations
         Dim strDbPath As String = System.IO.Path.Combine(strTranslationsPath, strDbFile)
         Return strDbPath
     End Function
+
+    'TODO temporary exploratory code, do not include in release
+    Private Shared Sub WriteDialogsToJson()
+
+        'SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        Dim clsJsonSettings As New JsonSerializerSettings With {
+            .Formatting = Formatting.Indented,
+            .ReferenceLoopHandling = ReferenceLoopHandling.Ignore 'needed to prevent https://dotnetcoretutorials.com/2020/03/15/fixing-json-self-referencing-loop-exceptions/
+        }
+        'Dim strDialogAsJson As String = JsonConvert.SerializeObject(dlgSplitText, clsJsonSettings) 'throws stack overflow exception
+        Dim strDialogAsJson As String = JsonConvert.SerializeObject(dlgSplitText.ucrChkIncludeRegularExpressions.TabIndex, clsJsonSettings)
+
+
+        'Write the csv file
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFileName As String = "dlgSplitText.json"
+        Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
+        Using sw As New System.IO.StreamWriter(strPath)
+            Console.WriteLine(strDialogAsJson)
+            sw.WriteLine(strDialogAsJson)
+            sw.Flush()
+            sw.Close()
+        End Using
+
+        ' Deserialize the JSON file to a new form object called dlgSplitTextDynamic.
+        Dim strDialogAsJsonDynamic As String = System.IO.File.ReadAllText(strPath)
+        Dim dlgSplitTextDynamic As dlgSplitText = JsonConvert.DeserializeObject(Of dlgSplitText)(strDialogAsJsonDynamic)
+
+        ' Show dlgSplitTextDynamic on the screen.
+        dlgSplitTextDynamic.ShowDialog()
+
+        'This sub should only be used by developers to create the dialog JSON files.
+        'Therefore, exit the application with a message to ensure that this sub is not run 
+        'accidentally in the release version. 
+        MsgBox("The JSON files were written to: " & strPath &
+               ". The application will now exit.", MsgBoxStyle.Exclamation)
+        Application.Exit()
+    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
