@@ -2612,12 +2612,6 @@
     <Compile Include="dlgNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLog.Designer.vb">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmLog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -4818,12 +4812,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgNewDataFrame.sw-KE.resx">
       <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.sw-KE.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
