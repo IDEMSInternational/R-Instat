@@ -28,9 +28,23 @@ Public Class ucrScript
     Friend WithEvents clsScriptActive As Scintilla
 
     ''' <summary>
+    '''     The current text in the log tab. 
+    ''' </summary>
+    Public Property strLogText As String
+        Get
+            Return If(IsNothing(clsScriptActive), Nothing, clsScriptActive.Text) 'TODO
+        End Get
+        Set(strNewText As String)
+            If Not IsNothing(clsScriptActive) Then
+                clsScriptActive.Text = strNewText
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
     '''     The current text in the active tab. 
     ''' </summary>
-    Public Property strText As String
+    Public Property strActiveTabText As String
         Get
             Return If(IsNothing(clsScriptActive), Nothing, clsScriptActive.Text)
         End Get
@@ -42,7 +56,7 @@ Public Class ucrScript
     End Property
 
     ''' <summary>
-    '''     Appends <paramref name="strText"/> to the end of the text in the active tab.    ''' 
+    '''     Appends <paramref name="strText"/> to the end of the text in the active tab.
     ''' </summary>
     ''' <param name="strText"> The text to append to the contents of the active tab.</param>
     Public Sub AppendText(strText As String)
@@ -72,6 +86,16 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
+    '''     Appends <paramref name="strText"/> to the end of the text in the log tab.
+    ''' </summary>
+    ''' <param name="strText"> The text to append to the contents of the log tab.</param>
+    Public Sub LogText(strText As String)
+        clsScriptActive.AppendText(Environment.NewLine & strText) 'TODO
+        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+        EnableDisableButtons()
+    End Sub
+
+    ''' <summary>
     ''' Pastes the contents of the clipboard into the active tab.
     ''' </summary>
     Public Sub PasteText()
@@ -91,7 +115,7 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub addTab()
+    Private Sub AddTab()
         clsScriptActive = NewScriptEditor()
         SetLineNumberMarginWidth(1, True)
 
@@ -509,7 +533,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
-        addTab()
+        AddTab()
     End Sub
 
     Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
@@ -693,7 +717,7 @@ Public Class ucrScript
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
-        addTab()
+        AddTab()
     End Sub
 
 End Class

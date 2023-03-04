@@ -5017,7 +5017,7 @@ Partial Class frmMain
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
         Me.ucrScriptWindow.Size = New System.Drawing.Size(396, 167)
-        Me.ucrScriptWindow.strText = ""
+        Me.ucrScriptWindow.strActiveTabText = ""
         Me.ucrScriptWindow.TabIndex = 0
         Me.ucrScriptWindow.Tag = "Script_Window"
         '

@@ -98,14 +98,11 @@ Public Class RLink
     ''' <summary>   True if the link to the R environment is initialised. </summary>
     Public bREngineInitialised As Boolean = False
 
-    ''' The log window.
-    Public txtLog As New TextBox
-
     '''  <summary>
     ''' Is set to True when the log window is defined.
     ''' If set to False, R scripts will not be logged.
     ''' </summary>
-    Public bLogRScripts As Boolean = False
+    Public bLogRScripts As Boolean = True 'TODO just for testing, reset to False before merging
 
     ''' <summary>   True to climate object exists. </summary>
     Public bClimateObjectExists As Boolean = False 'TODO SJL 23/04/20 Not used. Delete?
@@ -475,16 +472,6 @@ Public Class RLink
 
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the log window. </summary>
-    '''
-    ''' <param name="tempLog">  The log window. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetLog(tempLog As TextBox)
-        txtLog = tempLog
-        bLogRScripts = True
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets a list of data frame names. </summary>
     '''
     ''' <returns>   The data frame names. </returns>
@@ -802,9 +789,7 @@ Public Class RLink
         Dim strScriptWithComment As String = If(String.IsNullOrEmpty(strComment), strScript, GetFormattedComment(strComment) & Environment.NewLine & strScript)
 
         If bLogRScripts Then
-            'todo. adding a lot of text to the text control can raise an out of memory exception.
-            'change this to only display the text when the audit log is visible.
-            txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
+            frmMain.ucrScriptWindow.LogText(strScriptWithComment & Environment.NewLine)
         End If
 
         'TODO SJL 20/04/20 - is the commented out check below needed?

@@ -115,8 +115,6 @@ Public Class frmMain
         ucrColumnMeta.DataBook = clsDataBook
         ucrDataFrameMeta.DataBook = clsDataBook
 
-        clsRLink.SetLog(ucrLogWindow.txtLog)
-
         ucrOutput.SetLogger(clsOutputLogger)
 
         SetToDefaultLayout()
@@ -746,8 +744,6 @@ Public Class frmMain
                 ucrColumnMeta.SelectAllText()
             ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
                 ucrDataFrameMeta.SelectAllText()
-            ElseIf ctrActive.Equals(ucrLogWindow) Then
-                ucrLogWindow.SelectAllText()
             ElseIf ctrActive.Equals(ucrScriptWindow) Then
                 ucrScriptWindow.SelectAllText()
             End If
@@ -1001,7 +997,7 @@ Public Class frmMain
             End If
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrLogWindow.txtLog.Text)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strLogText)
                     strCurrentLogFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
@@ -1022,7 +1018,7 @@ Public Class frmMain
             End If
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strText)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strActiveTabText)
                     strCurrentScriptFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
@@ -1426,10 +1422,6 @@ Public Class frmMain
 
     Private Sub ucrScriptWindow_Enter(sender As Object, e As EventArgs) Handles ucrScriptWindow.Enter
         ctrActive = ucrScriptWindow
-    End Sub
-
-    Private Sub ucrLogWindow_Enter(sender As Object, e As EventArgs) Handles ucrLogWindow.Enter
-        ctrActive = ucrLogWindow
     End Sub
 
     Private Sub ucrColumnMeta_Enter(sender As Object, e As EventArgs) Handles ucrColumnMeta.Enter
@@ -2397,8 +2389,6 @@ Public Class frmMain
             ucrColumnMeta.CopyRange()
         ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
             ucrDataFrameMeta.CopyRange()
-        ElseIf ctrActive.Equals(ucrLogWindow) Then
-            ucrLogWindow.CopyText()
         ElseIf ctrActive.Equals(ucrScriptWindow) Then
             ucrScriptWindow.CopyText()
         End If
