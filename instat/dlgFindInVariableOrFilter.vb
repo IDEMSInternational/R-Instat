@@ -100,28 +100,10 @@ Public Class dlgFindInVariableOrFilter
                 Exit Sub
             End If
 
-            Dim iRow As Integer = vecRowNumbers(iFisrtRow)
-            If Not iRow >= frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow _
-               AndAlso Not iRow <= frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow Then
-                If bFindRow Then
-                    frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(iRow))
-                    bFindNext = True
-                    bFindRow = False
-                End If
-            End If
-
-            If Not bFindNext Then
-                frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+            frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(iFisrtRow))
+            frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
                                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                                    bFindNext:=bFindNext)
-                bFindNext = True
-            Else
-                frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
-                                   strVariable:=ucrReceiverVariable.GetVariableNames,
-                                   bFindNext:=bFindNext,
-                                   iClick:=iClick)
-                iClick += 1
-            End If
             iFisrtRow += 1
 
         Catch ex As Exception
