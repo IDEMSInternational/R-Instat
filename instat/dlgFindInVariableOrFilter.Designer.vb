@@ -39,7 +39,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         'cmdFind
         '
-        Me.cmdFind.Location = New System.Drawing.Point(427, 200)
+        Me.cmdFind.Location = New System.Drawing.Point(427, 227)
         Me.cmdFind.Name = "cmdFind"
         Me.cmdFind.Size = New System.Drawing.Size(180, 36)
         Me.cmdFind.TabIndex = 8
@@ -49,7 +49,7 @@ Partial Class dlgFindInVariableOrFilter
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(427, 75)
+        Me.lblVariable.Location = New System.Drawing.Point(427, 104)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(71, 20)
         Me.lblVariable.TabIndex = 4
@@ -58,7 +58,7 @@ Partial Class dlgFindInVariableOrFilter
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(427, 129)
+        Me.lblPattern.Location = New System.Drawing.Point(427, 164)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(65, 20)
         Me.lblPattern.TabIndex = 6
@@ -102,17 +102,18 @@ Partial Class dlgFindInVariableOrFilter
         'cmdFindNext
         '
         Me.cmdFindNext.Enabled = False
-        Me.cmdFindNext.Location = New System.Drawing.Point(427, 242)
+        Me.cmdFindNext.Location = New System.Drawing.Point(427, 280)
         Me.cmdFindNext.Name = "cmdFindNext"
         Me.cmdFindNext.Size = New System.Drawing.Size(180, 36)
         Me.cmdFindNext.TabIndex = 9
         Me.cmdFindNext.Text = "Find Next"
         Me.cmdFindNext.UseVisualStyleBackColor = True
+        Me.cmdFindNext.Visible = False
         '
         'lblFilter
         '
         Me.lblFilter.AutoSize = True
-        Me.lblFilter.Location = New System.Drawing.Point(427, 131)
+        Me.lblFilter.Location = New System.Drawing.Point(427, 164)
         Me.lblFilter.Name = "lblFilter"
         Me.lblFilter.Size = New System.Drawing.Size(48, 20)
         Me.lblFilter.TabIndex = 12
@@ -153,7 +154,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrReceiverVariable.AutoSize = True
         Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(427, 98)
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(427, 127)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
@@ -168,7 +169,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrInputPattern.AutoSize = True
         Me.ucrInputPattern.IsMultiline = False
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(427, 153)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(427, 188)
         Me.ucrInputPattern.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(180, 32)
@@ -178,7 +179,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrReceiverFilter.AutoSize = True
         Me.ucrReceiverFilter.frmParent = Me
-        Me.ucrReceiverFilter.Location = New System.Drawing.Point(427, 155)
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(427, 184)
         Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
         Me.ucrReceiverFilter.Selector = Nothing

@@ -21,6 +21,8 @@ Public Class dlgFindInVariableOrFilter
     Private bReset As Boolean = True
     Private iClick As Integer = 1
     Private iFisrtRow As Integer = 0
+    Private bFindRow As Boolean = True
+    Private bFindNext As Boolean = False
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
 
@@ -94,16 +96,33 @@ Public Class dlgFindInVariableOrFilter
             Dim vecRowNumbers As CharacterVector = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
 
             If iFisrtRow = vecRowNumbers.Length Then
+                iFisrtRow = 0
                 Exit Sub
             End If
 
-            frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(iFisrtRow))
-            frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
-                                               strVariable:=ucrReceiverVariable.GetVariableNames,
-                                               bFindNext:=False)
-            iClick = 1
+            Dim iRow As Integer = vecRowNumbers(iFisrtRow)
+            If Not iRow >= frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow _
+               AndAlso Not iRow <= frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow Then
+                If bFindRow Then
+                    frmMain.ucrDataViewer.GoToFirstRowFound(vecRowNumbers(iRow))
+                    bFindNext = True
+                    bFindRow = False
+                End If
+            End If
+
+            If Not bFindNext Then
+                frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+                                                   strVariable:=ucrReceiverVariable.GetVariableNames,
+                                                   bFindNext:=bFindNext)
+                bFindNext = True
+            Else
+                frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+                                   strVariable:=ucrReceiverVariable.GetVariableNames,
+                                   bFindNext:=bFindNext,
+                                   iClick:=iClick)
+                iClick += 1
+            End If
             iFisrtRow += 1
-            'cmdFindNext.Enabled = True
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -120,6 +139,8 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
+        bFindNext = False
+        bFindRow = True
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -130,9 +151,15 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
+        bFindNext = False
     End Sub
 
     Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged
         clsGetRowsFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText() & Chr(34), iPosition:=2)
+    End Sub
+
+    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
+        bFindNext = False
+        bFindRow = True
     End Sub
 End Class
