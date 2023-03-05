@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.ComponentModel
 Imports System.Data.SQLite
 Imports System.IO
 Imports System.Reflection
@@ -147,18 +148,63 @@ Public Class Translations
     End Function
 
     'TODO temporary exploratory code, do not include in release
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Populates dictionary <paramref name="dctComponents"/> with the control 
+    '''    <paramref name="clsControl"/> and its children.    
+    '''    The dictionary can then be used to conveniently translate the control text (see other
+    '''    functions and subs in this class).
+    ''' </summary>
+    '''
+    ''' <param name="clsControl">       The control used to populate the dictionary. </param>
+    ''' <param name="dctComponents">    [in,out] Dictionary to store the control and its children. 
+    '''                                 </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Sub FillDctComponentsFromControl(clsControl As Control,
+                                                   ByRef dctComponents As Dictionary(Of String, Component),
+                                                   Optional strParentName As String = "")
+        If IsNothing(clsControl) OrElse IsNothing(clsControl.Controls) OrElse IsNothing(dctComponents) Then
+            Exit Sub
+        End If
+
+        'if control is valid, then add it to the dictionary
+        Dim strControlName As String = ""
+        If Not String.IsNullOrEmpty(clsControl.Name) Then
+            strControlName = If(String.IsNullOrEmpty(strParentName), clsControl.Name, strParentName & "_" & clsControl.Name)
+            If Not dctComponents.ContainsKey(strControlName) Then  'ignore components that are already in the dictionary
+                dctComponents.Add(strControlName, clsControl)
+            End If
+        End If
+
+        For Each ctlChild As Control In clsControl.Controls
+
+            'Recursively process different types of menus and child controls
+            If TypeOf ctlChild Is MenuStrip Then
+                'FillDctComponentsFromMenuItems(DirectCast(ctlChild, MenuStrip).Items, dctComponents)
+            ElseIf TypeOf ctlChild Is ToolStrip Then
+                'FillDctComponentsFromMenuItems(DirectCast(ctlChild, ToolStrip).Items, dctComponents)
+            ElseIf TypeOf ctlChild Is Control Then
+                'FillDctComponentsFromControl(ctlChild, dctComponents, strControlName)
+                FillDctComponentsFromControl(ctlChild, dctComponents)
+            End If
+
+        Next
+    End Sub
+
     Private Shared Sub WriteDialogsToJson()
 
-        'SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        'Dim dctComponents As Dictionary(Of String, Component) = New Dictionary(Of String, Component)
+        'FillDctComponentsFromControl(dlgSplitText, dctComponents)
+
+        Dim clsUcrControlJson As clsUcrControlJson = New clsUcrControlJson(dlgSplitText)
+
         Dim clsJsonSettings As New JsonSerializerSettings With {
             .Formatting = Formatting.Indented,
             .ReferenceLoopHandling = ReferenceLoopHandling.Ignore 'needed to prevent https://dotnetcoretutorials.com/2020/03/15/fixing-json-self-referencing-loop-exceptions/
         }
-        'Dim strDialogAsJson As String = JsonConvert.SerializeObject(dlgSplitText, clsJsonSettings) 'throws stack overflow exception
-        Dim strDialogAsJson As String = JsonConvert.SerializeObject(dlgSplitText.ucrChkIncludeRegularExpressions.TabIndex, clsJsonSettings)
+        Dim strDialogAsJson As String = JsonConvert.SerializeObject(clsUcrControlJson, clsJsonSettings)
 
-
-        'Write the csv file
+        'Write the Json file
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         Dim strFileName As String = "dlgSplitText.json"
         Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
@@ -168,13 +214,6 @@ Public Class Translations
             sw.Flush()
             sw.Close()
         End Using
-
-        ' Deserialize the JSON file to a new form object called dlgSplitTextDynamic.
-        Dim strDialogAsJsonDynamic As String = System.IO.File.ReadAllText(strPath)
-        Dim dlgSplitTextDynamic As dlgSplitText = JsonConvert.DeserializeObject(Of dlgSplitText)(strDialogAsJsonDynamic)
-
-        ' Show dlgSplitTextDynamic on the screen.
-        dlgSplitTextDynamic.ShowDialog()
 
         'This sub should only be used by developers to create the dialog JSON files.
         'Therefore, exit the application with a message to ensure that this sub is not run 
