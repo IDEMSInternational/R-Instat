@@ -218,7 +218,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
-    <Compile Include="clsUcrControlJson.vb" />
+    <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
