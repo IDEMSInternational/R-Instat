@@ -370,15 +370,16 @@ Public Class dlgOneWayFrequencies
     Private Sub ChangeOutputObject()
         If rdoTable.Checked Then
             If rdoAsTable.Checked Then
-                ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-                ucrSaveGraph.SetCheckBoxText("Save Table")
-                ucrSaveGraph.SetPrefix("freq_table")
+                ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
+                ucrSaveGraph.SetCheckBoxText("Save Summary")
+                ucrSaveGraph.SetPrefix("freq_summary")
                 ucrSaveGraph.SetIsComboBox()
-                ucrSaveGraph.SetAssignToIfUncheckedValue("last_table")
-                clsSjMiscFrq.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                                      strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
+                clsSjMiscFrq.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                                      strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                       strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                       strRDataFrameNameToAddObjectTo:=ucrSelectorOneWayFreq.strCurrentDataFrame,
+
                                                       strObjectName:="last_table")
             ElseIf rdoHTML.Checked Then
                 ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -391,6 +392,9 @@ Public Class dlgOneWayFrequencies
                 '                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
                 '                                      strRDataFrameNameToAddObjectTo:=ucrSelectorOneWayFreq.strCurrentDataFrame,
                 '                                      strObjectName:="last_table")
+
+                                                      strObjectName:="last_summary")
+
             Else
                 clsSjMiscFrq.RemoveAssignTo()
 

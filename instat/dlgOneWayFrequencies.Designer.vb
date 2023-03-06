@@ -217,9 +217,9 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoAsTable.Location = New System.Drawing.Point(6, 20)
         Me.rdoAsTable.Name = "rdoAsTable"
-        Me.rdoAsTable.Size = New System.Drawing.Size(67, 17)
+        Me.rdoAsTable.Size = New System.Drawing.Size(113, 17)
         Me.rdoAsTable.TabIndex = 2
-        Me.rdoAsTable.Text = "As Table"
+        Me.rdoAsTable.Text = "As Summary Table"
         Me.rdoAsTable.UseVisualStyleBackColor = True
         '
         'rdoAsDataFrame
