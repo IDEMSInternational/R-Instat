@@ -239,7 +239,7 @@ Public Class dlgOneWayFrequencies
         ucrChkScale.SetRCode(clsStemAndLeafFunction, bReset)
         ucrChkWidth.SetRCode(clsStemAndLeafFunction, bReset)
         ucrChkWeights.SetRCode(clsSjMiscFrq, bReset)
-        ucrPnlSort.SetRCode(clsSjFrq, bReset)
+        ucrPnlSort.SetRCode(clsSjMiscFrq, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrChkGroupData.SetRCode(clsSjMiscFrq, bReset)
         ucrNudGroups.SetRCode(clsSjMiscFrq, bReset)
@@ -332,7 +332,7 @@ Public Class dlgOneWayFrequencies
             End If
             If rdoHTML.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjFrq)
-                'clsDummyFunction.AddParameter("check", "HTML", iPosition:=0)
+                clsDummyFunction.AddParameter("check", "HTML", iPosition:=0)
                 ucrBase.clsRsyntax.iCallType = 2
             End If
         Else
@@ -379,7 +379,7 @@ Public Class dlgOneWayFrequencies
                                                       strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                       strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                       strRDataFrameNameToAddObjectTo:=ucrSelectorOneWayFreq.strCurrentDataFrame,
-                                                                                                            strObjectName:="last_table")
+                                                      strObjectName:="last_table")
             ElseIf rdoHTML.Checked Then
                 ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveGraph.SetCheckBoxText("Save Table")
