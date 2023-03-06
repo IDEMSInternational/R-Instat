@@ -120,7 +120,7 @@ Public Class ucrDataViewLinuxGrid
         End If
     End Sub
 
-    Public Sub SearchInGrid(strPattern As String, strColumn As String, bFindNext As Boolean,
+    Public Sub SearchInGrid(lstRows As List(Of String), strColumn As String, bFindNext As Boolean,
                             Optional iClick As Integer = 0) Implements IDataViewGrid.SearchInGrid
 
     End Sub

@@ -105,9 +105,9 @@ Public Class ucrDataView
         _grid.UpdateAllWorksheetStyles()
     End Sub
 
-    Public Sub SearchInGrid(strPattern As String, strVariable As String,
+    Public Sub SearchInGrid(lstRows As List(Of String), strVariable As String,
                             bFindNext As Boolean, Optional iClick As Integer = 0)
-        _grid.SearchInGrid(strPattern, strVariable, bFindNext, iClick)
+        _grid.SearchInGrid(lstRows, strVariable, bFindNext, iClick)
     End Sub
 
     Private Sub UpdateNavigationButtons()
