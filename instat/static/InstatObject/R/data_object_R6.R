@@ -4364,13 +4364,21 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "get_rows", function(data_name, col_name, pattern, ignore_case){
+DataSheet$set("public", "get_rows", function(data_name, col_name, pattern, ignore_case, use_regex){
   if(missing(col_name)) stop("Column name must be specified.")
   data <- self$get_data_frame(data_name=data_name)
-  row_numbers <- data %>% 
-                 tibble::rownames_to_column('gene') %>%
-                 dplyr::filter(stringr::str_detect(string=.[[col_name]], stringr::coll(pattern, ignore_case = ignore_case))) %>%
-                 tibble::column_to_rownames('gene') %>% row.names()
+  if(!use_regex){
+    row_numbers <- data %>% 
+                   tibble::rownames_to_column('gene') %>%
+                   dplyr::filter(stringr::str_detect(string=.[[col_name]], stringr::coll(pattern, ignore_case = ignore_case))) %>%
+                   tibble::column_to_rownames('gene') %>% row.names()
+  }
+  else{
+    row_numbers <- data %>% 
+                   tibble::rownames_to_column('gene') %>%
+                   dplyr::filter(stringr::str_detect(string=village, stringr::regex(pattern, ignore_case = ignore_case, multiline=FALSE, comments=FALSE))) %>%
+                   tibble::column_to_rownames('gene') %>% row.names()
+  }
   return(row_numbers)
 }
 )

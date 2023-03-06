@@ -68,6 +68,10 @@ Public Class dlgFindInVariableOrFilter
         ucrChkIgnoreCase.SetParameter(New RParameter("ignore_case", 3))
         ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        ucrChkIncludeRegularExpressions.SetText("Use Regular Expression")
+        ucrChkIncludeRegularExpressions.SetParameter(New RParameter("use_regex", 4))
+        ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
         ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverFilter, {rdoInFilter}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFilter.SetLinkedDisplayControl(lblFilter)
@@ -87,7 +91,8 @@ Public Class dlgFindInVariableOrFilter
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
 
         clsGetRowsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_rows")
-        clsGetRowsFunction.AddParameter("ignore_case", "FALSE", iPosition:=3)
+        clsGetRowsFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)
+        clsGetRowsFunction.AddParameter("use_regex", "FALSE", iPosition:=4)
 
         ucrReceiverVariable.SetMeAsReceiver()
         cmdFindNext.Enabled = False
@@ -98,12 +103,13 @@ Public Class dlgFindInVariableOrFilter
         ucrSelectorFind.SetRCode(clsGetRowsFunction, bReset)
         ucrReceiverVariable.SetRCode(clsGetRowsFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsGetRowsFunction, bReset)
+        ucrChkIncludeRegularExpressions.SetRCode(clsGetRowsFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         ucrPnlSelect.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverVariable.IsEmpty OrElse Not ucrInputPattern.IsEmpty Then
+        If Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty Then
             cmdFind.Enabled = True
         Else
             cmdFind.Enabled = False
@@ -148,6 +154,11 @@ Public Class dlgFindInVariableOrFilter
         iClick += 1
     End Sub
 
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
+        sdgConstructRegexExpression.ShowDialog()
+        ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
+    End Sub
+
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         'cmdFindNext.Enabled = False
         bFindNext = False
@@ -165,8 +176,9 @@ Public Class dlgFindInVariableOrFilter
         bFindNext = False
     End Sub
 
-    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged
+    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
         clsGetRowsFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText() & Chr(34), iPosition:=2)
+        cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
     End Sub
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
@@ -177,4 +189,5 @@ Public Class dlgFindInVariableOrFilter
     Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class

@@ -115,10 +115,10 @@ Public Class ucrDataViewReoGrid
         Dim iSearch As Integer = 0
         Dim iColIndex As Integer = GetColumnIndex(strColumn)
         Dim currSheet = grdData.CurrentWorksheet
-        currSheet.SetRangeStyles(New RangePosition(1, 0, currSheet.RowCount, currSheet.ColumnCount), New WorksheetRangeStyle() With {
+        If Not bFindNext Then
+            currSheet.SetRangeStyles(New RangePosition(1, 0, currSheet.RowCount, currSheet.ColumnCount), New WorksheetRangeStyle() With {
                                 .BackColor = Color.White
                                 })
-        If Not bFindNext Then
             currSheet.IterateCells(RangePosition.EntireRange, Function(row, col, cell)
                                                                   If CStr(cell.DisplayText.ToLower).Contains(strPattern.ToLower) AndAlso col = iColIndex Then
                                                                       If iSearch = 0 Then

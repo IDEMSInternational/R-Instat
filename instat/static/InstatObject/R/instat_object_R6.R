@@ -2705,7 +2705,7 @@ DataBook$set("public","has_labels", function(data_name, col_names) {
 }
 )
 
-DataBook$set("public", "get_rows", function(data_name, col_name, pattern, ignore_case){
-  self$get_data_objects(data_name)$get_rows(data_name, col_name, pattern, ignore_case)
+DataBook$set("public", "get_rows", function(data_name, col_name, pattern, ignore_case, use_regex){
+  self$get_data_objects(data_name)$get_rows(data_name, col_name, pattern, ignore_case, use_regex)
 }
 )
