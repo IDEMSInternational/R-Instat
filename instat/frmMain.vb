@@ -997,7 +997,8 @@ Public Class frmMain
             End If
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strLogText)
+                    'TODO move this functionality to ucrScript
+                    'File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strLogText)
                     strCurrentLogFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)

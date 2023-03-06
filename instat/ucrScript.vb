@@ -22,24 +22,12 @@ Public Class ucrScript
 
     Private bIsTextChanged = False
     Private iMaxLineNumberCharLength As Integer = 0
+    Private Const iTabIndexLog As Integer = 0
     Private Const strComment As String = "Code run from Script Window"
-    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files") 'TODO
 
     Friend WithEvents clsScriptActive As Scintilla
-
-    ''' <summary>
-    '''     The current text in the log tab. 
-    ''' </summary>
-    Public Property strLogText As String
-        Get
-            Return If(IsNothing(clsScriptActive), Nothing, clsScriptActive.Text) 'TODO
-        End Get
-        Set(strNewText As String)
-            If Not IsNothing(clsScriptActive) Then
-                clsScriptActive.Text = strNewText
-            End If
-        End Set
-    End Property
+    Friend WithEvents clsScriptLog As Scintilla
 
     ''' <summary>
     '''     The current text in the active tab. 
@@ -69,6 +57,11 @@ Public Class ucrScript
     ''' Removes the selected text from the active tab, and copies the removed text to the clipboard.
     ''' </summary>
     Public Sub CutText()
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only cut from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Cut from log tab")
+            Exit Sub
+        End If
+
         If clsScriptActive.SelectedText.Length > 0 Then
             clsScriptActive.Cut()
             EnableDisableButtons()
@@ -90,15 +83,22 @@ Public Class ucrScript
     ''' </summary>
     ''' <param name="strText"> The text to append to the contents of the log tab.</param>
     Public Sub LogText(strText As String)
-        clsScriptActive.AppendText(Environment.NewLine & strText) 'TODO
-        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
-        EnableDisableButtons()
+        clsScriptLog.AppendText(Environment.NewLine & strText)
+        clsScriptLog.GotoPosition(clsScriptLog.TextLength)
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            EnableDisableButtons()
+        End If
     End Sub
 
     ''' <summary>
     ''' Pastes the contents of the clipboard into the active tab.
     ''' </summary>
     Public Sub PasteText()
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only paste to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Paste to log tab")
+            Exit Sub
+        End If
+
         If Clipboard.ContainsData(DataFormats.Text) Then
             clsScriptActive.Paste()
             EnableDisableButtons()
@@ -115,25 +115,31 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub AddTab()
+    Private Sub AddTab(Optional bIsLogTab As Boolean = False)
         clsScriptActive = NewScriptEditor()
         SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
         tabPageAdded.Controls.Add(clsScriptActive)
-        tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
-        tabPageAdded.Location = New System.Drawing.Point(4, 22)
+        tabPageAdded.Font = New Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        tabPageAdded.ForeColor = SystemColors.ControlText
+        tabPageAdded.Location = New Point(4, 22)
         tabPageAdded.Name = "TabPageAdded"
-        tabPageAdded.Padding = New System.Windows.Forms.Padding(3)
-        tabPageAdded.Size = New System.Drawing.Size(397, 415)
+        tabPageAdded.Padding = New Padding(3)
+        tabPageAdded.Size = New Size(397, 415)
         tabPageAdded.TabIndex = 0
         tabPageAdded.UseVisualStyleBackColor = True
 
+        If bIsLogTab Then
+            tabPageAdded.Text = "Log"
+            clsScriptLog = clsScriptActive
+        Else
+            Static iTabCounter As Integer = 1
+            tabPageAdded.Text = "Untitled" & iTabCounter
+            iTabCounter += 1
+        End If
+
         TabControl.TabPages.Add(tabPageAdded)
-        Static iTabCounter As Integer = 1
-        tabPageAdded.Text = "Untitled" & iTabCounter
-        iTabCounter += 1
 
         TabControl.SelectedTab = tabPageAdded
         bIsTextChanged = False
@@ -141,30 +147,35 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
-        mnuUndo.Enabled = clsScriptActive.CanUndo
-        mnuRedo.Enabled = clsScriptActive.CanRedo
+
+        Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
+
+        mnuUndo.Enabled = clsScriptActive.CanUndo AndAlso Not bIslogTab
+        mnuRedo.Enabled = clsScriptActive.CanRedo AndAlso Not bIslogTab
 
         Dim bScriptselected = clsScriptActive.SelectedText.Length > 0
         Dim bScriptExists = clsScriptActive.TextLength > 0
 
-        mnuCut.Enabled = bScriptselected
+        mnuCut.Enabled = bScriptselected AndAlso Not bIsLogTab
         mnuCopy.Enabled = bScriptselected
-        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
+        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text) AndAlso Not bIslogTab
         mnuSelectAll.Enabled = bScriptExists
-        mnuClear.Enabled = bScriptExists
+        mnuClear.Enabled = bScriptExists AndAlso Not bIslogTab
 
         mnuRunCurrentLineSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
 
         mnuOpenScriptasFile.Enabled = bScriptExists
+        mnuLoadScriptFromFile.Enabled = Not bIsLogTab
         mnuSaveScript.Enabled = bScriptExists
 
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
+        cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
-        cmdClear.Enabled = bScriptExists
+        cmdClear.Enabled = bScriptExists AndAlso Not bIslogTab
 
-        cmdRemoveTab.Enabled = TabControl.TabCount > 1
+        cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIslogTab
     End Sub
 
     Private Sub EnableRunButtons(bEnable As Boolean)
@@ -541,7 +552,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
-        'never remove last tab
+        'never remove last script tab
         If TabControl.TabCount < 2 Then
             Exit Sub
         End If
@@ -563,6 +574,12 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClear.Click, cmdClear.Click
+
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only clear a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Clear log tab")
+            Exit Sub
+        End If
+
         If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
                                vbYesNo, "Clear") = vbNo Then
@@ -619,6 +636,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only redo in a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Redo log tab")
+            Exit Sub
+        End If
+
         'Determine if last operation can be redone in text box.   
         If clsScriptActive.CanRedo Then
             clsScriptActive.Redo()
@@ -662,6 +684,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only undo from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
+            Exit Sub
+        End If
+
         'Determine if last operation can be undone in text box.   
         If clsScriptActive.CanUndo Then
             clsScriptActive.Undo() 'Undo the last operation.
@@ -717,7 +744,15 @@ Public Class ucrScript
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+
+        'Create log tab
+        AddTab(bIsLogTab:=True)
+
+        'Create script tab
         AddTab()
+
+        'Make the log tab the selected tab
+        TabControl.SelectTab(iTabIndexLog)
     End Sub
 
 End Class
