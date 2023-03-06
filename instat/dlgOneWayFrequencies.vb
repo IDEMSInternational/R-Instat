@@ -379,8 +379,7 @@ Public Class dlgOneWayFrequencies
                                                       strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                       strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                       strRDataFrameNameToAddObjectTo:=ucrSelectorOneWayFreq.strCurrentDataFrame,
-
-                                                      strObjectName:="last_table")
+                                                                                                            strObjectName:="last_table")
             ElseIf rdoHTML.Checked Then
                 ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveGraph.SetCheckBoxText("Save Table")
@@ -392,8 +391,7 @@ Public Class dlgOneWayFrequencies
                 '                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
                 '                                      strRDataFrameNameToAddObjectTo:=ucrSelectorOneWayFreq.strCurrentDataFrame,
                 '                                      strObjectName:="last_table")
-
-                                                      strObjectName:="last_summary")
+                '                                      strObjectName:="last_summary")
 
             Else
                 clsSjMiscFrq.RemoveAssignTo()
