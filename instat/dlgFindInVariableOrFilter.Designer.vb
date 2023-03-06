@@ -203,6 +203,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Enabled = False
         Me.ucrBase.Location = New System.Drawing.Point(15, 434)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"

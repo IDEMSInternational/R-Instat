@@ -136,10 +136,10 @@ Public Class dlgFindInVariableOrFilter
                     frmMain.ucrDataViewer.GoToFirstRowFound(iRow)
                     iFisrtRow += 1
                 End If
+
                 frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
                                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                                    bFindNext:=bFindNext)
-                iClick = 1
 
             End If
 
@@ -149,13 +149,13 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
-        If iClick < lstRowNumbers.Count Then
+        If iClick <= lstRowNumbers.Count Then
             frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                    bFindNext:=True,
                                    iClick:=iClick)
+            iClick += 1
         End If
-        iClick += 1
     End Sub
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click

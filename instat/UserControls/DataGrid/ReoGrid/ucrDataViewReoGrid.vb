@@ -129,7 +129,9 @@ Public Class ucrDataViewReoGrid
                     End If
                     currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
                     iSearch += 1
+                    'currSheet.se
                 End If
+
             Next
         Else
             If lstRows(iClick) < currSheet.RowCount Then
