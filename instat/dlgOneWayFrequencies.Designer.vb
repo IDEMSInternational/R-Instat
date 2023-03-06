@@ -42,6 +42,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
@@ -50,17 +51,16 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput = New System.Windows.Forms.GroupBox()
         Me.rdoAsTable = New System.Windows.Forms.RadioButton()
         Me.rdoAsDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoStemAndLeaf = New System.Windows.Forms.RadioButton()
         Me.ucrNudWidth = New instat.ucrNud()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrNudScale = New instat.ucrNud()
         Me.ucrNudMinFreq = New instat.ucrNud()
-        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudGroups = New instat.ucrNud()
         Me.ucrPnlFrequencies = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkFlip = New instat.ucrCheck()
@@ -70,6 +70,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkWidth = New instat.ucrCheck()
         Me.ucrChkGroupData = New instat.ucrCheck()
+        Me.rdoHTML = New System.Windows.Forms.RadioButton()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -119,6 +120,14 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.TabStop = True
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSort
+        '
+        Me.ucrPnlSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 14)
+        Me.ucrPnlSort.Name = "ucrPnlSort"
+        Me.ucrPnlSort.Size = New System.Drawing.Size(158, 69)
+        Me.ucrPnlSort.TabIndex = 0
         '
         'cmdOptions
         '
@@ -191,6 +200,7 @@ Partial Class dlgOneWayFrequencies
         '
         'grpOutput
         '
+        Me.grpOutput.Controls.Add(Me.rdoHTML)
         Me.grpOutput.Controls.Add(Me.rdoAsTable)
         Me.grpOutput.Controls.Add(Me.rdoAsDataFrame)
         Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
@@ -222,6 +232,14 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsDataFrame.TabIndex = 1
         Me.rdoAsDataFrame.Text = "As DataFrame"
         Me.rdoAsDataFrame.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOutput
+        '
+        Me.ucrPnlOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        Me.ucrPnlOutput.Size = New System.Drawing.Size(150, 53)
+        Me.ucrPnlOutput.TabIndex = 0
         '
         'rdoStemAndLeaf
         '
@@ -291,14 +309,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudMinFreq.TabIndex = 21
         Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrPnlOutput
-        '
-        Me.ucrPnlOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlOutput.Name = "ucrPnlOutput"
-        Me.ucrPnlOutput.Size = New System.Drawing.Size(150, 53)
-        Me.ucrPnlOutput.TabIndex = 0
-        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -341,14 +351,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 15
         Me.ucrReceiverWeights.ucrSelector = Nothing
-        '
-        'ucrPnlSort
-        '
-        Me.ucrPnlSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 14)
-        Me.ucrPnlSort.Name = "ucrPnlSort"
-        Me.ucrPnlSort.Size = New System.Drawing.Size(158, 69)
-        Me.ucrPnlSort.TabIndex = 0
         '
         'ucrBase
         '
@@ -438,6 +440,17 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 23)
         Me.ucrChkGroupData.TabIndex = 17
         '
+        'rdoHTML
+        '
+        Me.rdoHTML.AutoSize = True
+        Me.rdoHTML.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoHTML.Location = New System.Drawing.Point(79, 20)
+        Me.rdoHTML.Name = "rdoHTML"
+        Me.rdoHTML.Size = New System.Drawing.Size(70, 17)
+        Me.rdoHTML.TabIndex = 3
+        Me.rdoHTML.Text = "As HTML"
+        Me.rdoHTML.UseVisualStyleBackColor = True
+        '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -515,4 +528,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverSingle
     Friend WithEvents ucrNudWidth As ucrNud
     Friend WithEvents ucrChkWidth As ucrCheck
+    Friend WithEvents rdoHTML As RadioButton
 End Class
