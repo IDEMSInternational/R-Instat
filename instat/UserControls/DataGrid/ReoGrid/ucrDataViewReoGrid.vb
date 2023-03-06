@@ -120,7 +120,7 @@ Public Class ucrDataViewReoGrid
                                 })
         If Not bFindNext Then
             currSheet.IterateCells(RangePosition.EntireRange, Function(row, col, cell)
-                                                                  If CStr(cell.Data).Contains(strPattern) AndAlso col = iColIndex Then
+                                                                  If CStr(cell.DisplayText.ToLower).Contains(strPattern.ToLower) AndAlso col = iColIndex Then
                                                                       If iSearch = 0 Then
                                                                           currSheet.FocusPos = cell.Position
                                                                           currSheet.ScrollToCell(cell.Address)
