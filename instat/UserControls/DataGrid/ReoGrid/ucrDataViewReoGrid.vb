@@ -131,12 +131,10 @@ Public Class ucrDataViewReoGrid
                                                                   Return True
                                                               End Function)
         Else
-            For i As Integer = 0 To GetSelectedCells().Count - 1
-                If i = iClick Then
-                    currSheet.FocusPos = GetSelectedCells()(i)
-                    currSheet.ScrollToCell(GetSelectedCells()(i))
-                End If
-            Next
+            If iClick < GetSelectedCells().Count Then
+                currSheet.FocusPos = GetSelectedCells()(iClick)
+                currSheet.ScrollToCell(GetSelectedCells()(iClick))
+            End If
         End If
     End Sub
 

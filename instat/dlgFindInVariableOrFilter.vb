@@ -62,6 +62,12 @@ Public Class dlgFindInVariableOrFilter
         ucrReceiverVariable.bUseFilteredData = False
         ucrReceiverVariable.Selector = ucrSelectorFind
 
+        ucrInputPattern.SetItems({"TRUE", "FALSE"})
+
+        ucrChkIgnoreCase.SetText("Ignore Case")
+        ucrChkIgnoreCase.SetParameter(New RParameter("ignore_case", 3))
+        ucrChkIgnoreCase.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
         ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverFilter, {rdoInFilter}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFilter.SetLinkedDisplayControl(lblFilter)
@@ -73,7 +79,7 @@ Public Class dlgFindInVariableOrFilter
         clsGetRowsFunction = New RFunction
 
         ucrSelectorFind.Reset()
-        ucrInputPattern.SetName("")
+        ucrInputPattern.SetName("TRUE")
 
         iFisrtRow = 0
 
@@ -81,43 +87,53 @@ Public Class dlgFindInVariableOrFilter
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
 
         clsGetRowsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_rows")
+        clsGetRowsFunction.AddParameter("ignore_case", "FALSE", iPosition:=3)
 
         ucrReceiverVariable.SetMeAsReceiver()
-        'cmdFindNext.Enabled = False
+        cmdFindNext.Enabled = False
     End Sub
 
 
     Private Sub SetRcodeForControls(bReset As Boolean)
         ucrSelectorFind.SetRCode(clsGetRowsFunction, bReset)
         ucrReceiverVariable.SetRCode(clsGetRowsFunction, bReset)
+        ucrChkIgnoreCase.SetRCode(clsGetRowsFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         ucrPnlSelect.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrReceiverVariable.IsEmpty OrElse Not ucrInputPattern.IsEmpty Then
+            cmdFind.Enabled = True
+        Else
+            cmdFind.Enabled = False
+        End If
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
-            Dim vecRowNumbers As CharacterVector = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
+            Dim strPattern As String = ucrInputPattern.GetText
+            If strPattern <> "" Then
+                Dim vecRowNumbers As CharacterVector = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter
 
-            If iFisrtRow = vecRowNumbers.Length Then
-                iFisrtRow = 0
-            End If
+                cmdFindNext.Enabled = vecRowNumbers.Length > 1
+                If iFisrtRow = vecRowNumbers.Length Then
+                    iFisrtRow = 0
+                End If
 
-            Dim iStartRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
-            Dim iEndRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
-            Dim iRow As Integer = vecRowNumbers(iFisrtRow)
-            Dim bFirstRow As Boolean = iRow >= iStartRow AndAlso iRow <= iEndRow
-            If Not bFirstRow Then
-                frmMain.ucrDataViewer.GoToFirstRowFound(iRow)
-                iFisrtRow += 1
-            End If
-            frmMain.ucrDataViewer.SearchInGrid(strPattern:=ucrInputPattern.GetText,
+                Dim iStartRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
+                Dim iEndRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+                Dim iRow As Integer = vecRowNumbers(iFisrtRow)
+                Dim bFirstRow As Boolean = iRow >= iStartRow AndAlso iRow <= iEndRow
+                If Not bFirstRow Then
+                    frmMain.ucrDataViewer.GoToFirstRowFound(iRow)
+                End If
+                frmMain.ucrDataViewer.SearchInGrid(strPattern:=strPattern,
                                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                                    bFindNext:=bFindNext)
-            iClick = 1
+                iClick = 1
+                iFisrtRow += 1
+            End If
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -144,7 +160,7 @@ Public Class dlgFindInVariableOrFilter
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
+    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs)
         'cmdFindNext.Enabled = False
         bFindNext = False
     End Sub
@@ -156,5 +172,9 @@ Public Class dlgFindInVariableOrFilter
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         bFindNext = False
         bFindRow = True
+    End Sub
+
+    Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
