@@ -22,6 +22,7 @@ Public Class ucrCalculator
     Public Event SaveNameChanged()
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
+    Public Event ControlValueChanged()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -411,6 +412,7 @@ Public Class ucrCalculator
         ucrSelectorForCalculations.Reset()
         clsHelp.ClearParameters()
     End Sub
+
     Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
     End Sub
@@ -4014,6 +4016,10 @@ Public Class ucrCalculator
     ''' <param name="ucrChangedControl"></param>
     Private Sub ucrSaveResultInto_SaveNameChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlContentsChanged
         RaiseEvent SaveNameChanged()
+    End Sub
+
+    Private Sub ucrSaveResultInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlValueChanged
+        RaiseEvent ControlValueChanged()
     End Sub
 
     Private Sub cmdGlue_Click(sender As Object, e As EventArgs) Handles cmdGlue.Click
