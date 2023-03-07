@@ -4376,7 +4376,7 @@ DataSheet$set("public", "get_rows", function(data_name, col_name, pattern, ignor
   else{
     row_numbers <- data %>% 
                    tibble::rownames_to_column('gene') %>%
-                   dplyr::filter(stringr::str_detect(string=village, stringr::regex(pattern, ignore_case = ignore_case, multiline=FALSE, comments=FALSE))) %>%
+                   dplyr::filter(stringr::str_detect(string=.[[col_name]], stringr::regex(pattern, ignore_case = ignore_case, multiline=FALSE, comments=FALSE))) %>%
                    tibble::column_to_rownames('gene') %>% row.names()
   }
   return(row_numbers)
