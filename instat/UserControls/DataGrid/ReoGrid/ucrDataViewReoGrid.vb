@@ -120,11 +120,7 @@ Public Class ucrDataViewReoGrid
                                 .BackColor = Color.White
                                 })
 
-            For i = 1 To currSheet.RowCount
-                If i > lstRows.Count Then
-                    Exit For
-                End If
-                Dim iRow As Integer? = lstRows(i - 1)
+            For Each iRow In lstRows
                 If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
                     Dim iRowIndex = GetRowIndex(iRow)
                     If iSearch = 0 Then
@@ -137,7 +133,7 @@ Public Class ucrDataViewReoGrid
             Next
         Else
             If iClick < lstRows.Count Then
-                Dim iRow = lstRows(iClick - 1)
+                Dim iRow = lstRows(iClick)
                 If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
                     Dim iRowIndex = GetRowIndex(iRow)
                     currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position

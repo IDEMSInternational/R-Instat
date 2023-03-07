@@ -127,15 +127,15 @@ Public Class dlgFindInVariableOrFilter
                 cmdFindNext.Enabled = lstRowNumbers.Count > 1
 
                 Dim iEndRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
-
+                iFindNext = 1
                 If iFisrtRow <> 0 Then
                     For Each iRow In lstRowNumbers
                         If iRow > iEndRow AndAlso iRow <> iFisrtRow Then
                             Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
                             frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
+                            iFindNext = iRow
                             Exit For
                         End If
-                        iFindNext += 1
                     Next
                 End If
 
@@ -153,8 +153,9 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
         If iClick <= lstRowNumbers.Count Then
-            If iFindNext > iClick Then
-                iClick = iFindNext
+            If iFindNext > 1 Then
+                iClick = lstRowNumbers.IndexOf(iFindNext)
+                iFindNext = 1
             End If
             iClick += 1
             frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
