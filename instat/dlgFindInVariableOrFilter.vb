@@ -171,7 +171,8 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
-        'cmdFindNext.Enabled = False
+        cmdFindNext.Enabled = False
+        iFisrtRow = 1
         bFindNext = False
     End Sub
 
@@ -182,7 +183,8 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs)
-        'cmdFindNext.Enabled = False
+        cmdFindNext.Enabled = False
+        iFisrtRow = 1
         bFindNext = False
     End Sub
 
@@ -193,6 +195,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         bFindNext = False
+        iFisrtRow = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
