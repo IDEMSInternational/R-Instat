@@ -106,8 +106,9 @@ Public Class ucrDataView
     End Sub
 
     Public Sub SearchInGrid(lstRows As List(Of String), strVariable As String,
-                            bFindNext As Boolean, Optional iClick As Integer = 0)
-        _grid.SearchInGrid(lstRows, strVariable, bFindNext, iClick)
+                            bFindNext As Boolean, Optional iClick As Integer = 0,
+                            Optional bCellOrRow As Boolean = False)
+        _grid.SearchInGrid(lstRows, strVariable, bFindNext, iClick, bCellOrRow)
     End Sub
 
     Private Sub UpdateNavigationButtons()

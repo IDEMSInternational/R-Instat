@@ -111,7 +111,7 @@ Public Class ucrDataViewReoGrid
     End Function
 
     Public Sub SearchInGrid(lstRows As List(Of String), strColumn As String, bFindNext As Boolean,
-                            Optional iClick As Integer = 0) Implements IDataViewGrid.SearchInGrid
+                            Optional iClick As Integer = 0, Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
         Dim iSearch As Integer = 0
         Dim iColIndex As Integer = GetColumnIndex(strColumn)
         Dim currSheet = grdData.CurrentWorksheet
@@ -123,12 +123,16 @@ Public Class ucrDataViewReoGrid
             For Each iRow In lstRows
                 If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
                     Dim iRowIndex = GetRowIndex(iRow)
-                    If iSearch = 0 Then
-                        currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
-                        currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                    If bCellOrRow Then
+                        If iSearch = 0 Then
+                            currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
+                            currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                        End If
+                        currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
+                        iSearch += 1
+                    Else
+                        currSheet.Cells(row:=iRowIndex, col:=currSheet.ColumnCount - 1).Style.BackColor = Color.LightGreen
                     End If
-                    currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
-                    iSearch += 1
                 End If
             Next
         Else

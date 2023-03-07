@@ -141,7 +141,7 @@ Public Class dlgFindInVariableOrFilter
 
                 frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
                                                    strVariable:=ucrReceiverVariable.GetVariableNames,
-                                                   bFindNext:=bFindNext)
+                                                   bFindNext:=bFindNext, bCellOrRow:=rdoCell.Checked)
                 iFisrtRow = 1
                 iClick = 1
             End If
