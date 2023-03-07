@@ -120,24 +120,29 @@ Public Class ucrDataViewReoGrid
                                 .BackColor = Color.White
                                 })
 
-            For Each iRow In lstRows
-                If iRow <= currSheet.RowCount Then
-                    Dim iRowIndex = iRow - 1
+            For i = 1 To currSheet.RowCount
+                If i > lstRows.Count Then
+                    Exit For
+                End If
+                Dim iRow As Integer? = lstRows(i - 1)
+                If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+                    Dim iRowIndex = GetRowIndex(iRow)
                     If iSearch = 0 Then
                         currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
                         currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
                     End If
                     currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
                     iSearch += 1
-                    'currSheet.se
                 End If
-
             Next
         Else
-            If lstRows(iClick) < currSheet.RowCount Then
-                Dim iRowIndex = lstRows(iClick) - 1
-                currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
-                currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+            If iClick < lstRows.Count Then
+                Dim iRow = lstRows(iClick - 1)
+                If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+                    Dim iRowIndex = GetRowIndex(iRow)
+                    currSheet.FocusPos = currSheet.Cells(row:=iRowIndex, col:=iColIndex).Position
+                    currSheet.ScrollToCell(currSheet.Cells(row:=iRowIndex, col:=iColIndex).Address)
+                End If
             End If
         End If
     End Sub
@@ -147,6 +152,18 @@ Public Class ucrDataViewReoGrid
             For i As Integer = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strCol As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
                 If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowIndex(strRowName As String) As Integer
+        If grdData.CurrentWorksheet IsNot Nothing Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.Rows - 1
+                Dim strCol As String = grdData.CurrentWorksheet.RowHeaders(i).Text
+                If strCol = strRowName Then
                     Return i
                 End If
             Next

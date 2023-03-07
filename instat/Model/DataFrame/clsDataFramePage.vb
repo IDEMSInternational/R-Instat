@@ -348,13 +348,6 @@ Public Class clsDataFramePage
         End If
     End Sub
 
-    Public Sub GoToFirstRowFound(iRow As Integer)
-        If iRow > 0 Then
-            _iRowStart = iRow
-            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
-        End If
-    End Sub
-
     ''' <summary>
     ''' Does a previous page exist for rows
     ''' </summary>

@@ -124,23 +124,24 @@ Public Class dlgFindInVariableOrFilter
                 lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
 
                 cmdFindNext.Enabled = lstRowNumbers.Count > 1
-                If iFisrtRow = lstRowNumbers.Count Then
-                    iFisrtRow = 0
-                End If
 
-                Dim iStartRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
                 Dim iEndRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
-                Dim iRow As Integer = lstRowNumbers(iFisrtRow)
-                Dim bFirstRow As Boolean = iRow >= iStartRow AndAlso iRow <= iEndRow
-                If Not bFirstRow Then
-                    frmMain.ucrDataViewer.GoToFirstRowFound(iRow)
-                    iFisrtRow += 1
+
+                If iFisrtRow <> 0 Then
+                    For Each iRow In lstRowNumbers
+                        If iRow <> iFisrtRow Then
+                            Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
+                            frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
+                            Exit For
+                        End If
+                    Next
                 End If
 
                 frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
                                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                                    bFindNext:=bFindNext)
-
+                iFisrtRow = 1
+                iClick = 1
             End If
 
         Catch ex As Exception
@@ -150,6 +151,15 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
         If iClick <= lstRowNumbers.Count Then
+            If iFisrtRow > 1 Then
+                iClick = 1
+                For Each iRow In lstRowNumbers
+                    If iRow = iFisrtRow Then
+                        Exit For
+                    End If
+                    iClick += 1
+                Next
+            End If
             frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
                                    strVariable:=ucrReceiverVariable.GetVariableNames,
                                    bFindNext:=True,

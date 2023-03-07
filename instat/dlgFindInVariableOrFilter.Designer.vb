@@ -172,7 +172,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrChkIgnoreCase.AutoSize = True
         Me.ucrChkIgnoreCase.Checked = False
-        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(16, 344)
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(22, 344)
         Me.ucrChkIgnoreCase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
         Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(196, 34)
@@ -204,7 +204,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Enabled = False
-        Me.ucrBase.Location = New System.Drawing.Point(15, 434)
+        Me.ucrBase.Location = New System.Drawing.Point(22, 434)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -262,7 +262,7 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrChkIncludeRegularExpressions.AutoSize = True
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(15, 393)
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(22, 393)
         Me.ucrChkIncludeRegularExpressions.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(358, 34)
