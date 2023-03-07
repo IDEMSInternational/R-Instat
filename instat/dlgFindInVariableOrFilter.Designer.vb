@@ -140,6 +140,7 @@ Partial Class dlgFindInVariableOrFilter
         'rdoRow
         '
         Me.rdoRow.AutoSize = True
+        Me.rdoRow.Enabled = False
         Me.rdoRow.Location = New System.Drawing.Point(114, 32)
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.Size = New System.Drawing.Size(66, 24)
