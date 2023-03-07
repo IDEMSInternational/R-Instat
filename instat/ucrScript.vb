@@ -83,7 +83,9 @@ Public Class ucrScript
     ''' </summary>
     ''' <param name="strText"> The text to append to the contents of the log tab.</param>
     Public Sub LogText(strText As String)
+        clsScriptLog.ReadOnly = False
         clsScriptLog.AppendText(Environment.NewLine & strText)
+        clsScriptLog.ReadOnly = True
         clsScriptLog.GotoPosition(clsScriptLog.TextLength)
         If TabControl.SelectedIndex = iTabIndexLog Then
             EnableDisableButtons()
@@ -133,6 +135,24 @@ Public Class ucrScript
         If bIsLogTab Then
             tabPageAdded.Text = "Log"
             clsScriptLog = clsScriptActive
+            clsScriptLog.Styles(Style.Default).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Default).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Comment).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.KWord).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.BaseKWord).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.OtherKWord).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Number).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.String).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.String2).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Operator).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Identifier).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Infix).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.InfixEol).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.BraceLight).BackColor = Color.DarkGray
+            clsScriptLog.Styles(Style.BraceBad).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.LineNumber).BackColor = Color.DarkGray
+            clsScriptLog.SetFoldMarginColor(True, Color.DarkGray)
+            clsScriptLog.ReadOnly = True
         Else
             Static iTabCounter As Integer = 1
             tabPageAdded.Text = "Untitled" & iTabCounter
