@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRFunctionAsHTML, clsRFunctionAsRTF, clsRFunctionAsWord, clsRFunctionAsLaTex As New RFunction
+    Private clsRFunctionAsHTML, clsRFunctionAsRTF, clsRFunctionAsWord, clsRFunctionAsLaTex, clsUseTableFunction As New RFunction
 
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsDummyFunction,
                                         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
@@ -45,10 +45,14 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrTablesReceiver.SetParameter(New RParameter("data", 0))
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrTablesSelector.SetParameter(New RParameter("data_name", 0))
+        ucrTablesSelector.SetParameterIsString()
+
+        ucrTablesReceiver.SetParameter(New RParameter("object_name", 1))
         ucrTablesReceiver.Selector = ucrTablesSelector
-        ucrTablesReceiver.SetParameterIsRFunction()
-        ucrTablesReceiver.SetMeAsReceiver()
+        ucrTablesReceiver.SetParameterIsString()
         ucrTablesReceiver.strSelectorHeading = "Tables"
         ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
 
@@ -79,6 +83,7 @@ Public Class dlgUseTable
         clsRFunctionAsRTF = New RFunction
         clsRFunctionAsWord = New RFunction
         clsRFunctionAsLaTex = New RFunction
+        clsUseTableFunction = New RFunction
         clsPipeOperator = New ROperator
 
         clsTableTitleFunction = New RFunction
@@ -108,8 +113,12 @@ Public Class dlgUseTable
         clsJoiningPipeOperator = New ROperator
 
         'rdoAsHTML.Checked = True
+        ucrTablesReceiver.SetMeAsReceiver()
+        ucrTablesSelector.Reset()
+        ucrSaveTable.Reset()
 
         clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
 
         clsSummaryOperator.SetOperation("+")
 
@@ -199,13 +208,16 @@ Public Class dlgUseTable
         clsRFunctionAsLaTex.SetPackageName("gt")
         clsRFunctionAsLaTex.SetRCommand("as_word")
 
+        clsUseTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+
         clsPipeOperator.SetOperation("%>%")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrTablesReceiver.SetRCode(clsJoiningPipeOperator, bReset)
+        ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
+        ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
     End Sub
 
