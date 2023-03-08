@@ -77,7 +77,7 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-        Logger.Info("R-Instat started")
+        Logger.Info("R-Instat started version" + My.Application.Info.Version.ToString)
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -1022,7 +1022,7 @@ Public Class frmMain
             End If
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.txtScript.Text)
+                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strText)
                     strCurrentScriptFileName = dlgSaveFile.FileName
                 Catch
                     MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
@@ -2384,6 +2384,12 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
+    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
+        If ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.CutText()
+        End If
+    End Sub
+
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
@@ -2404,6 +2410,9 @@ Public Class frmMain
 
     Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click, mnuTbPaste.ButtonClick, mnuSubTbPaste.Click
         'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
+        If ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.PasteText()
+        End If
     End Sub
 
     Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
@@ -2510,4 +2519,7 @@ Public Class frmMain
         dlgHelpVignettes.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeUseTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseTable.Click
+        dlgUseTable.ShowDialog()
+    End Sub
 End Class
