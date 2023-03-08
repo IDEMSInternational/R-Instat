@@ -58,6 +58,7 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveData = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -279,17 +280,27 @@ Partial Class dlgView
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 324)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 359)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
+        '
+        'ucrSaveData
+        '
+        Me.ucrSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveData.Location = New System.Drawing.Point(10, 318)
+        Me.ucrSaveData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveData.Name = "ucrSaveData"
+        Me.ucrSaveData.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSaveData.TabIndex = 18
         '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(416, 386)
+        Me.ClientSize = New System.Drawing.Size(416, 419)
+        Me.Controls.Add(Me.ucrSaveData)
         Me.Controls.Add(Me.rdoViewAll)
         Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
         Me.Controls.Add(Me.ucrPnlViewData)
@@ -341,4 +352,5 @@ Partial Class dlgView
     Friend WithEvents rdoViewAll As RadioButton
     Friend WithEvents rdoViewSelectedColumnsRows As RadioButton
     Friend WithEvents ucrPnlViewData As UcrPanel
+    Friend WithEvents ucrSaveData As ucrSave
 End Class
