@@ -43,7 +43,7 @@ Partial Class dlgDeleteDataFrames
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverDataFrames = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataFramesToDelete = New instat.ucrSelectorAddRemove()
-        Me.lblLevelNumber = New System.Windows.Forms.Label()
+        Me.lblDeleteNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDataframes
@@ -96,15 +96,15 @@ Partial Class dlgDeleteDataFrames
         Me.ucrSelectorDataFramesToDelete.Size = New System.Drawing.Size(216, 141)
         Me.ucrSelectorDataFramesToDelete.TabIndex = 1
         '
-        'lblLevelNumber
+        'lblDeleteNumber
         '
-        Me.lblLevelNumber.AutoSize = True
-        Me.lblLevelNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLevelNumber.Location = New System.Drawing.Point(359, 17)
-        Me.lblLevelNumber.Name = "lblLevelNumber"
-        Me.lblLevelNumber.Size = New System.Drawing.Size(12, 13)
-        Me.lblLevelNumber.TabIndex = 8
-        Me.lblLevelNumber.Text = "s"
+        Me.lblDeleteNumber.AutoSize = True
+        Me.lblDeleteNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDeleteNumber.Location = New System.Drawing.Point(359, 17)
+        Me.lblDeleteNumber.Name = "lblDeleteNumber"
+        Me.lblDeleteNumber.Size = New System.Drawing.Size(21, 13)
+        Me.lblDeleteNumber.TabIndex = 8
+        Me.lblDeleteNumber.Text = "DF"
         '
         'dlgDeleteDataFrames
         '
@@ -112,7 +112,7 @@ Partial Class dlgDeleteDataFrames
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 236)
-        Me.Controls.Add(Me.lblLevelNumber)
+        Me.Controls.Add(Me.lblDeleteNumber)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblDataframes)
         Me.Controls.Add(Me.lblAppendToDataframe)
@@ -123,7 +123,7 @@ Partial Class dlgDeleteDataFrames
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteDataFrames"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Delete Data Frames"
+        Me.Text = "s"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -133,5 +133,5 @@ Partial Class dlgDeleteDataFrames
     Friend WithEvents lblAppendToDataframe As Label
     Friend WithEvents ucrReceiverDataFrames As ucrReceiverMultiple
     Friend WithEvents ucrSelectorDataFramesToDelete As ucrSelectorAddRemove
-    Friend WithEvents lblLevelNumber As Label
+    Friend WithEvents lblDeleteNumber As Label
 End Class

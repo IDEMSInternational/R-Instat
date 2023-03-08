@@ -51,7 +51,7 @@ Public Class dlgDeleteDataFrames
         ucrReceiverDataFrames.SetItemType("dataframe")
         ucrReceiverDataFrames.strSelectorHeading = "Data Frames"
 
-        lblLevelNumber.ForeColor = Color.Red
+        lblDeleteNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -114,7 +114,7 @@ Public Class dlgDeleteDataFrames
     End Sub
 
     Private Sub CountLevels()
-        lblLevelNumber.Text = "Dataframes: " & ucrReceiverDataFrames.Count
-        lblLevelNumber.Visible = ucrReceiverDataFrames.Count > 0
+        lblDeleteNumber.Text = "Dataframes: " & ucrReceiverDataFrames.Count
+        lblDeleteNumber.Visible = ucrReceiverDataFrames.Count > 0
     End Sub
 End Class
