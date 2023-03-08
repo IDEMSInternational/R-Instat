@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgDeleteDataFrames
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDeleteFunction As New RFunction
+    Private clsDeleteFunction, clsSumCountMissingFunction As New RFunction
     Private bUseSelectedDataFrame As Boolean = False
     Private strSelectedDataFrame As String = ""
 
@@ -37,6 +37,7 @@ Public Class dlgDeleteDataFrames
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        CountLevels()
         autoTranslate(Me)
     End Sub
 
@@ -49,12 +50,17 @@ Public Class dlgDeleteDataFrames
         ucrReceiverDataFrames.SetMeAsReceiver()
         ucrReceiverDataFrames.SetItemType("dataframe")
         ucrReceiverDataFrames.strSelectorHeading = "Data Frames"
+
+        lblLevelNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
         clsDeleteFunction = New RFunction
 
         ucrSelectorDataFramesToDelete.Reset()
+        clsSumCountMissingFunction = New RFunction
+        clsSumCountMissingFunction.SetRCommand("summary_count_missing")
+
 
         clsDeleteFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteFunction)
@@ -107,5 +113,22 @@ Public Class dlgDeleteDataFrames
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDataFrames.ControlContentsChanged
         TestOKEnabled()
+        CountLevels()
+    End Sub
+
+    Private Sub CountLevels()
+        Dim clsGetColumnFunction As RFunction
+
+        clsGetColumnFunction = ucrReceiverDataFrames.GetVariables()
+        clsGetColumnFunction.RemoveAssignTo()
+
+        If Not ucrReceiverDataFrames.IsEmpty Then
+            clsSumCountMissingFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
+        Else
+            clsSumCountMissingFunction.RemoveParameterByName("x")
+        End If
+
+        lblLevelNumber.Text = "Dataframes: " & ucrReceiverDataFrames.Count
+        lblLevelNumber.Visible = ucrReceiverDataFrames.Count > 0
     End Sub
 End Class

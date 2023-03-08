@@ -43,6 +43,7 @@ Partial Class dlgDeleteDataFrames
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverDataFrames = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataFramesToDelete = New instat.ucrSelectorAddRemove()
+        Me.lblLevelNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDataframes
@@ -57,7 +58,7 @@ Partial Class dlgDeleteDataFrames
         'lblAppendToDataframe
         '
         Me.lblAppendToDataframe.AutoSize = True
-        Me.lblAppendToDataframe.Location = New System.Drawing.Point(253, 17)
+        Me.lblAppendToDataframe.Location = New System.Drawing.Point(244, 17)
         Me.lblAppendToDataframe.Name = "lblAppendToDataframe"
         Me.lblAppendToDataframe.Size = New System.Drawing.Size(115, 13)
         Me.lblAppendToDataframe.TabIndex = 2
@@ -69,14 +70,14 @@ Partial Class dlgDeleteDataFrames
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 177)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrReceiverDataFrames
         '
         Me.ucrReceiverDataFrames.AutoSize = True
         Me.ucrReceiverDataFrames.frmParent = Me
-        Me.ucrReceiverDataFrames.Location = New System.Drawing.Point(253, 33)
+        Me.ucrReceiverDataFrames.Location = New System.Drawing.Point(244, 33)
         Me.ucrReceiverDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataFrames.Name = "ucrReceiverDataFrames"
         Me.ucrReceiverDataFrames.Selector = Nothing
@@ -95,12 +96,23 @@ Partial Class dlgDeleteDataFrames
         Me.ucrSelectorDataFramesToDelete.Size = New System.Drawing.Size(216, 141)
         Me.ucrSelectorDataFramesToDelete.TabIndex = 1
         '
+        'lblLevelNumber
+        '
+        Me.lblLevelNumber.AutoSize = True
+        Me.lblLevelNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLevelNumber.Location = New System.Drawing.Point(358, 17)
+        Me.lblLevelNumber.Name = "lblLevelNumber"
+        Me.lblLevelNumber.Size = New System.Drawing.Size(12, 13)
+        Me.lblLevelNumber.TabIndex = 8
+        Me.lblLevelNumber.Text = "s"
+        '
         'dlgDeleteDataFrames
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 236)
+        Me.Controls.Add(Me.lblLevelNumber)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblDataframes)
         Me.Controls.Add(Me.lblAppendToDataframe)
@@ -121,4 +133,5 @@ Partial Class dlgDeleteDataFrames
     Friend WithEvents lblAppendToDataframe As Label
     Friend WithEvents ucrReceiverDataFrames As ucrReceiverMultiple
     Friend WithEvents ucrSelectorDataFramesToDelete As ucrSelectorAddRemove
+    Friend WithEvents lblLevelNumber As Label
 End Class
