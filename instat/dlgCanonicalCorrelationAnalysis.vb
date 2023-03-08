@@ -34,13 +34,8 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBase.clsRsyntax.iCallType = 2
-        'ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
-
-        'ucrSelectorCCA.SetParameter(New RParameter("data_name", 0))
-        'ucrSelectorCCA.SetParameterIsString()
-
 
         ' X Variable Selector
         ucrReceiverXVariables.SetParameter(New RParameter("x", 0))
@@ -58,6 +53,8 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         ucrPnlVariables.AddRadioButton(rdoXVariables)
         ucrPnlVariables.AddRadioButton(rdoYVariables)
+        ucrPnlVariables.AddParameterValuesCondition(rdoXVariables, "checked", "xvar")
+        ucrPnlVariables.AddParameterValuesCondition(rdoYVariables, "checked", "yvar")
 
         ucrChkCoefficients.SetText("Coefficients")
         ucrChkPairwisePlot.SetText("Pairwise Plot")
@@ -65,7 +62,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrChkPairwisePlot.AddParameterValuesCondition(False, "check", "FALSE")
         ucrChkPairwisePlot.AddToLinkedControls(ucrPnlVariables, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSaveResult.SetPrefix("last_model")
+        'ucrSaveResult.SetPrefix("last_model")
         ucrSaveResult.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveResult.SetDataFrameSelector(ucrSelectorCCA.ucrAvailableDataFrames)
         ucrSaveResult.SetIsComboBox()
@@ -84,10 +81,9 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrReceiverXVariables.SetMeAsReceiver()
         ucrChkCoefficients.Checked = True
 
-        'ucrBase.clsRsyntax.lstAfterCodes.Clear()
-
         'Define the default RFunction
         clsDummyFunction.AddParameter("check", "FALSE", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "xvar", iPosition:=1)
 
         clsRFunctionCancor.SetPackageName("stats")
         clsRFunctionCancor.SetRCommand("cancor")
@@ -96,10 +92,9 @@ Public Class dlgCanonicalCorrelationAnalysis
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCCA.strCurrentDataFrame,
                                                   strObjectName:="last_model")
-        'clsRFunctionCancor.bExcludeAssignedFunctionOutput = False
 
         clsRFunctionCoef.SetRCommand("cancor_coef")
-        clsRFunctionCoef.AddParameter("object", clsRFunctionParameter:=clsRFunctionCancor, iPosition:=0)
+        clsRFunctionCoef.bExcludeAssignedFunctionOutput = False
         clsRFunctionCoef.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                  strRObjectFormatToAssignTo:=RObjectFormat.Text,
@@ -116,14 +111,17 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRFunctionGraphics.bExcludeAssignedFunctionOutput = False
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFunctionCancor)
-        'bResetSubdialog = True
+    End Sub
+
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        clsRFunctionCoef.AddParameter("object", strParameterValue:=clsRFunctionCancor.GetRObjectToAssignTo(), iPosition:=0)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverXVariables.SetRCode(clsRFunctionCancor, bReset)
         ucrReceiverYVariables.SetRCode(clsRFunctionCancor, bReset)
         ucrChkPairwisePlot.SetRCode(clsDummyFunction, bReset)
-        ucrPnlVariables.SetRCode(clsRFunctionGraphics, bReset)
+        ucrPnlVariables.SetRCode(clsDummyFunction, bReset)
         ucrSaveResult.SetRCode(clsRFunctionCancor, bReset)
     End Sub
 
@@ -150,10 +148,19 @@ Public Class dlgCanonicalCorrelationAnalysis
         End If
     End Sub
 
-    Private Sub ucrChkPairwisePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPairwisePlot.ControlValueChanged
+    Private Sub ucrChkPairwisePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPairwisePlot.ControlValueChanged, ucrReceiverXVariables.ControlValueChanged, ucrReceiverYVariables.ControlValueChanged,
+        ucrPnlVariables.ControlValueChanged
         If ucrChkPairwisePlot.Checked Then
             ucrPnlVariables.Visible = True
             clsDummyFunction.AddParameter("check", "TRUE", iPosition:=0)
+            clsRFunctionGraphics.AddParameter("data", clsRFunctionParameter:=ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            If rdoXVariables.Checked Then
+                clsDummyFunction.AddParameter("checked", "xvar", iPosition:=1)
+                clsRFunctionGraphics.AddParameter("columns", ucrReceiverXVariables.GetVariableNames, iPosition:=1)
+            ElseIf rdoYVariables.Checked Then
+                clsDummyFunction.AddParameter("checked", "yvar", iPosition:=1)
+                clsRFunctionGraphics.AddParameter("columns", ucrReceiverYVariables.GetVariableNames, iPosition:=2)
+            End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsRFunctionGraphics, iPosition:=1)
         Else
             ucrPnlVariables.Visible = False
@@ -162,16 +169,6 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         End If
     End Sub
-
-    Private Sub ucrReceiverVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlValueChanged, ucrReceiverYVariables.ControlValueChanged
-        clsRFunctionGraphics.AddParameter("data", clsRFunctionParameter:=ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        If rdoXVariables.Checked Then
-            clsRFunctionGraphics.AddParameter("columns", ucrReceiverXVariables.GetVariableNames, iPosition:=1)
-        ElseIf rdoYVariables.Checked Then
-            clsRFunctionGraphics.AddParameter("columns", ucrReceiverYVariables.GetVariableNames, iPosition:=2)
-        End If
-    End Sub
-
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged,
         ucrReceiverXVariables.ControlContentsChanged, ucrReceiverYVariables.ControlContentsChanged,
