@@ -116,10 +116,12 @@ Public Class ucrDataViewReoGrid
         Dim iColIndex As Integer = GetColumnIndex(strColumn)
         Dim currSheet = grdData.CurrentWorksheet
         If Not bFindNext Then
-            currSheet.SetRangeStyles(New RangePosition(1, 0, currSheet.RowCount, currSheet.ColumnCount), New WorksheetRangeStyle() With {
-                                .BackColor = Color.White
-                                })
-
+            currSheet.SetRangeStyles(New RangePosition(0, 0, currSheet.RowCount, currSheet.ColumnCount),
+                                           New WorksheetRangeStyle With {.Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or
+                                                                          PlainStyleFlag.FontName Or PlainStyleFlag.BackColor,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name})
             For Each iRow In lstRows
                 If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
                     Dim iRowIndex = GetRowIndex(iRow)
@@ -131,7 +133,7 @@ Public Class ucrDataViewReoGrid
                         currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
                         iSearch += 1
                     Else
-                        currSheet.Cells(row:=iRowIndex, col:=currSheet.ColumnCount - 1).Style.BackColor = Color.LightGreen
+                        currSheet.Cells(row:=iRowIndex, col:=currSheet.ColumnCount).Style.BackColor = Color.LightGreen
                     End If
                 End If
             Next
