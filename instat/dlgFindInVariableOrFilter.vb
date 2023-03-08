@@ -172,7 +172,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
-        iFisrtRow = 1
+        iFisrtRow = 0
         bFindNext = False
     End Sub
 
@@ -184,7 +184,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs)
         cmdFindNext.Enabled = False
-        iFisrtRow = 1
+        iFisrtRow = 0
         bFindNext = False
     End Sub
 
@@ -195,11 +195,18 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         bFindNext = False
-        iFisrtRow = 1
+        iFisrtRow = 0
     End Sub
 
     Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrPnlSelect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelect.ControlValueChanged
+        If rdoCell.Checked Then
+            clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
+        Else
+            clsDummyFunction.AddParameter("select", "row", iPosition:=1)
+        End If
+    End Sub
 End Class

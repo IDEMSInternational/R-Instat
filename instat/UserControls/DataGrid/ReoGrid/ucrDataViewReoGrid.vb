@@ -133,7 +133,14 @@ Public Class ucrDataViewReoGrid
                         currSheet.Cells(row:=iRowIndex, col:=iColIndex).Style.BackColor = Color.LightGreen
                         iSearch += 1
                     Else
-                        currSheet.Cells(row:=iRowIndex, col:=currSheet.ColumnCount).Style.BackColor = Color.LightGreen
+                        currSheet.SetRangeStyles(New RangePosition(iRowIndex, 0, 1, currSheet.ColumnCount),
+                                      New WorksheetRangeStyle With {.Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or
+                                                                     PlainStyleFlag.FontName Or PlainStyleFlag.BackColor,
+                           .TextColor = frmMain.clsInstatOptions.clrEditor,
+                           .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                           .FontName = frmMain.clsInstatOptions.fntEditor.Name,
+                           .BackColor = Color.LightGreen})
+                        'currSheet.SelectRows(iRowIndex, 1)
                     End If
                 End If
             Next
