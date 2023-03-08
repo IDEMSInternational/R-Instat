@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgDeleteDataFrames
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDeleteFunction, clsSumCountMissingFunction As New RFunction
+    Private clsDeleteFunction As New RFunction
     Private bUseSelectedDataFrame As Boolean = False
     Private strSelectedDataFrame As String = ""
 
@@ -58,9 +58,6 @@ Public Class dlgDeleteDataFrames
         clsDeleteFunction = New RFunction
 
         ucrSelectorDataFramesToDelete.Reset()
-        clsSumCountMissingFunction = New RFunction
-        clsSumCountMissingFunction.SetRCommand("summary_count_missing")
-
 
         clsDeleteFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteFunction)
@@ -117,17 +114,6 @@ Public Class dlgDeleteDataFrames
     End Sub
 
     Private Sub CountLevels()
-        Dim clsGetColumnFunction As RFunction
-
-        clsGetColumnFunction = ucrReceiverDataFrames.GetVariables()
-        clsGetColumnFunction.RemoveAssignTo()
-
-        If Not ucrReceiverDataFrames.IsEmpty Then
-            clsSumCountMissingFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumnFunction, iPosition:=0)
-        Else
-            clsSumCountMissingFunction.RemoveParameterByName("x")
-        End If
-
         lblLevelNumber.Text = "Dataframes: " & ucrReceiverDataFrames.Count
         lblLevelNumber.Visible = ucrReceiverDataFrames.Count > 0
     End Sub

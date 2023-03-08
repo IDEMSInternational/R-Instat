@@ -100,7 +100,7 @@ Partial Class dlgDeleteDataFrames
         '
         Me.lblLevelNumber.AutoSize = True
         Me.lblLevelNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLevelNumber.Location = New System.Drawing.Point(358, 17)
+        Me.lblLevelNumber.Location = New System.Drawing.Point(359, 17)
         Me.lblLevelNumber.Name = "lblLevelNumber"
         Me.lblLevelNumber.Size = New System.Drawing.Size(12, 13)
         Me.lblLevelNumber.TabIndex = 8
