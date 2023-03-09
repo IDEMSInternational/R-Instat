@@ -54,6 +54,7 @@ Partial Class ucrDataFrameMetadata
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.ucrLinuxGrid = New instat.ucrDataframeMetadataLinuxGrid()
         Me.ucrReoGrid = New instat.ucrDataframeMetadataReoGrid()
+        Me.ViewHTMLSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowRightClickMenu.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -75,57 +76,57 @@ Partial Class ucrDataFrameMetadata
         'rowRightClickMenu
         '
         Me.rowRightClickMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet})
+        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.ViewHTMLSheet, Me.viewSheet})
         Me.rowRightClickMenu.Name = "statusColumnMenu"
-        Me.rowRightClickMenu.Size = New System.Drawing.Size(163, 180)
+        Me.rowRightClickMenu.Size = New System.Drawing.Size(181, 224)
         '
         'deleteDataFrame
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
+        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
         Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
         Me.renameSheet.Text = "Rename..."
         '
         'mnuAddComment
         '
         Me.mnuAddComment.Name = "mnuAddComment"
-        Me.mnuAddComment.Size = New System.Drawing.Size(162, 22)
+        Me.mnuAddComment.Size = New System.Drawing.Size(180, 22)
         Me.mnuAddComment.Text = "Add Comment..."
         '
         'hideSheet
         '
         Me.hideSheet.Name = "hideSheet"
-        Me.hideSheet.Size = New System.Drawing.Size(162, 22)
+        Me.hideSheet.Size = New System.Drawing.Size(180, 22)
         Me.hideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
         'copySheet
         '
         Me.copySheet.Name = "copySheet"
-        Me.copySheet.Size = New System.Drawing.Size(162, 22)
+        Me.copySheet.Size = New System.Drawing.Size(180, 22)
         Me.copySheet.Text = "Copy..."
         '
         'reorderSheet
         '
         Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'viewSheet
         '
         Me.viewSheet.Name = "viewSheet"
-        Me.viewSheet.Size = New System.Drawing.Size(162, 22)
+        Me.viewSheet.Size = New System.Drawing.Size(180, 22)
         Me.viewSheet.Text = "View Data Frame"
         '
         'lblHeaderDataFrameMetaData
@@ -178,6 +179,12 @@ Partial Class ucrDataFrameMetadata
         Me.ucrReoGrid.Size = New System.Drawing.Size(324, 381)
         Me.ucrReoGrid.TabIndex = 9
         '
+        'ViewHTMLSheet
+        '
+        Me.ViewHTMLSheet.Name = "ViewHTMLSheet"
+        Me.ViewHTMLSheet.Size = New System.Drawing.Size(180, 22)
+        Me.ViewHTMLSheet.Text = "View (HTML)"
+        '
         'ucrDataFrameMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -207,4 +214,5 @@ Partial Class ucrDataFrameMetadata
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents ucrLinuxGrid As ucrDataframeMetadataLinuxGrid
     Friend WithEvents ucrReoGrid As ucrDataframeMetadataReoGrid
+    Friend WithEvents ViewHTMLSheet As ToolStripMenuItem
 End Class

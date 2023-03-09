@@ -517,6 +517,12 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
+    Private Sub ViewHTMLSheet_Click(sender As Object, e As EventArgs)
+        StartWait()
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        EndWait()
+    End Sub
+
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedColumnNames())

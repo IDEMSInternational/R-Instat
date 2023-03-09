@@ -28,6 +28,7 @@ Public Class ucrDataFrameMetadata
     Private lstNonEditableColumns As New List(Of String)
     Private clsHideDataFrame As New RFunction
     Private clsViewDataFrame As New RFunction
+    Private clsHTMLFunction As New RFunction
     Private clsGetDataFrame As New RFunction
 
     Public WriteOnly Property DataBook() As clsDataBook
@@ -40,6 +41,7 @@ Public Class ucrDataFrameMetadata
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
         LoadForm()
         clsViewDataFrame.SetRCommand("View")
+        clsHTMLFunction.SetRCommand("tab_df")
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
     End Sub
@@ -201,6 +203,16 @@ Public Class ucrDataFrameMetadata
         clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
         strTemp = clsViewDataFrame.ToScript(strScript)
         RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+    End Sub
+
+    Private Sub ViewHTMLSheet_Click(sender As Object, e As EventArgs) Handles ViewHTMLSheet.Click
+        Dim strScript As String = ""
+        Dim strTemp As String
+        clsGetDataFrame.AddParameter("data_name", Chr(34) & GetSelectedDataframeNameFromSelectedRow() & Chr(34), iPosition:=0)
+        clsHTMLFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0)
+        clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
+        strTemp = clsHTMLFunction.ToScript(strScript)
+        RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View HTML Data Frame", bSeparateThread:=False)
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
