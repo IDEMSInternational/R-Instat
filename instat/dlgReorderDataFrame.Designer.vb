@@ -19,7 +19,7 @@ Partial Class dlgReorderDataFrame
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -41,7 +41,6 @@ Partial Class dlgReorderDataFrame
         Me.lblDataFrameToReorder = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameToReorder = New instat.ucrReorder()
-        Me.lblReorderNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDataFrameToReorder
@@ -71,23 +70,12 @@ Partial Class dlgReorderDataFrame
         Me.ucrDataFrameToReorder.ucrDataFrameList = Nothing
         Me.ucrDataFrameToReorder.ucrReceiver = Nothing
         '
-        'lblReorderNumber
-        '
-        Me.lblReorderNumber.AutoSize = True
-        Me.lblReorderNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReorderNumber.Location = New System.Drawing.Point(304, 13)
-        Me.lblReorderNumber.Name = "lblReorderNumber"
-        Me.lblReorderNumber.Size = New System.Drawing.Size(21, 13)
-        Me.lblReorderNumber.TabIndex = 9
-        Me.lblReorderNumber.Text = "DF"
-        '
         'dlgReorderDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 266)
-        Me.Controls.Add(Me.lblReorderNumber)
         Me.Controls.Add(Me.lblDataFrameToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFrameToReorder)
@@ -105,5 +93,4 @@ Partial Class dlgReorderDataFrame
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblDataFrameToReorder As Label
     Friend WithEvents ucrDataFrameToReorder As ucrReorder
-    Friend WithEvents lblReorderNumber As Label
 End Class

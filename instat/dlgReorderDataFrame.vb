@@ -43,7 +43,6 @@ Public Class dlgReorderDataFrame
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-        CountLevels()
         autoTranslate(Me)
     End Sub
 
@@ -53,7 +52,6 @@ Public Class dlgReorderDataFrame
         ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
         ucrDataFrameToReorder.setDataType("dataframe")
 
-        lblReorderNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -79,11 +77,5 @@ Public Class dlgReorderDataFrame
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToReorder.ControlContentsChanged
         TestOkEnabled()
-        CountLevels()
-    End Sub
-
-    Private Sub CountLevels()
-        lblReorderNumber.Text = "Dataframes: " & ucrDataFrameToReorder.Count
-        lblReorderNumber.Visible = ucrDataFrameToReorder.Count > 0
     End Sub
 End Class
