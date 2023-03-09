@@ -109,6 +109,10 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrCalc_ControlValueChanged() Handles ucrCalc.ControlValueChanged
+        SaveResults()
+    End Sub
+
     ''' <summary>
     ''' Determines where the results will be saved; to a column or output window
     ''' </summary>
