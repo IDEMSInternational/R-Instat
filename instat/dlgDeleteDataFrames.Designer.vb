@@ -40,10 +40,10 @@ Partial Class dlgDeleteDataFrames
     Private Sub InitializeComponent()
         Me.lblDataframes = New System.Windows.Forms.Label()
         Me.lblAppendToDataframe = New System.Windows.Forms.Label()
+        Me.lblDeleteNumber = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverDataFrames = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataFramesToDelete = New instat.ucrSelectorAddRemove()
-        Me.lblDeleteNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblDataframes
@@ -63,6 +63,16 @@ Partial Class dlgDeleteDataFrames
         Me.lblAppendToDataframe.Size = New System.Drawing.Size(115, 13)
         Me.lblAppendToDataframe.TabIndex = 2
         Me.lblAppendToDataframe.Text = "Selected Data Frames:"
+        '
+        'lblDeleteNumber
+        '
+        Me.lblDeleteNumber.AutoSize = True
+        Me.lblDeleteNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDeleteNumber.Location = New System.Drawing.Point(354, 17)
+        Me.lblDeleteNumber.Name = "lblDeleteNumber"
+        Me.lblDeleteNumber.Size = New System.Drawing.Size(21, 13)
+        Me.lblDeleteNumber.TabIndex = 8
+        Me.lblDeleteNumber.Text = "DF"
         '
         'ucrBase
         '
@@ -95,16 +105,6 @@ Partial Class dlgDeleteDataFrames
         Me.ucrSelectorDataFramesToDelete.Name = "ucrSelectorDataFramesToDelete"
         Me.ucrSelectorDataFramesToDelete.Size = New System.Drawing.Size(216, 141)
         Me.ucrSelectorDataFramesToDelete.TabIndex = 1
-        '
-        'lblDeleteNumber
-        '
-        Me.lblDeleteNumber.AutoSize = True
-        Me.lblDeleteNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDeleteNumber.Location = New System.Drawing.Point(359, 17)
-        Me.lblDeleteNumber.Name = "lblDeleteNumber"
-        Me.lblDeleteNumber.Size = New System.Drawing.Size(21, 13)
-        Me.lblDeleteNumber.TabIndex = 8
-        Me.lblDeleteNumber.Text = "DF"
         '
         'dlgDeleteDataFrames
         '

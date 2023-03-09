@@ -56,7 +56,6 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
 
-
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
         ucrPnlHideUnhide.AddParameterValuesCondition(rdoHideDataFrame, "checked", "rdoHide")
@@ -188,10 +187,10 @@ Public Class dlgHideDataframes
 
     Private Sub CountLevels()
 
-        lblHiddenNumber.Text = "Dataframes: " & ucrReceiverMultiple.Count
+        lblHiddenNumber.Text = " " & ucrReceiverMultiple.Count
         lblHiddenNumber.Visible = ucrReceiverMultiple.Count > 0
 
-        lblUnHiddenNumber.Text = "Dataframes: " & ucrReceiverMultipleUnhide.Count
+        lblUnHiddenNumber.Text = " " & ucrReceiverMultipleUnhide.Count
         lblUnHiddenNumber.Visible = ucrReceiverMultipleUnhide.Count > 0
     End Sub
 End Class

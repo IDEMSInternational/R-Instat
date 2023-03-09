@@ -168,7 +168,7 @@ Partial Class dlgHideDataframes
         '
         Me.lblHiddenNumber.AutoSize = True
         Me.lblHiddenNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHiddenNumber.Location = New System.Drawing.Point(355, 47)
+        Me.lblHiddenNumber.Location = New System.Drawing.Point(349, 47)
         Me.lblHiddenNumber.Name = "lblHiddenNumber"
         Me.lblHiddenNumber.Size = New System.Drawing.Size(21, 13)
         Me.lblHiddenNumber.TabIndex = 11
@@ -178,7 +178,7 @@ Partial Class dlgHideDataframes
         '
         Me.lblUnHiddenNumber.AutoSize = True
         Me.lblUnHiddenNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUnHiddenNumber.Location = New System.Drawing.Point(355, 47)
+        Me.lblUnHiddenNumber.Location = New System.Drawing.Point(349, 47)
         Me.lblUnHiddenNumber.Name = "lblUnHiddenNumber"
         Me.lblUnHiddenNumber.Size = New System.Drawing.Size(21, 13)
         Me.lblUnHiddenNumber.TabIndex = 12

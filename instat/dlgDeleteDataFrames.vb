@@ -114,7 +114,7 @@ Public Class dlgDeleteDataFrames
     End Sub
 
     Private Sub CountLevels()
-        lblDeleteNumber.Text = "Dataframes: " & ucrReceiverDataFrames.Count
+        lblDeleteNumber.Text = " " & ucrReceiverDataFrames.Count
         lblDeleteNumber.Visible = ucrReceiverDataFrames.Count > 0
     End Sub
 End Class
