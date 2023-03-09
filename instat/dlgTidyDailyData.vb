@@ -78,6 +78,7 @@ Public Class dlgTidyDailyData
 
         ucrTxtBoxElementName.SetParameter(New RParameter("element_name", 8))
         ucrTxtBoxElementName.SetValidationTypeAsRVariable()
+        ucrTxtBoxElementName.SetRDefault(Chr(34) & "value" & Chr(34))
         ucrTxtBoxElementName.SetLinkedDisplayControl(lblElementName)
 
         ucrChkUnstackElements.SetText("Unstack elements")
