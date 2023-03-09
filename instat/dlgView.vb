@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOutputWindowFunction, clsHTMLFunction, clsViewColumnsFunction, clsGetObjectDataFunction, clsViewAllFunction As New RFunction
+    Private clsOutputWindowFunction, clsHTMLFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction, clsViewAllFunction As New RFunction
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -50,10 +50,13 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoHTMLOutputWindow)
+        ucrPnlDisplayWindow.AddParameterValuesCondition(rdoHTMLOutputWindow, "checked", "html")
+        ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispOutputWindow, "checked", "window")
+        ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispSepOutputWindow, "checked", "viewer")
 
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "tab_df")
+        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "tab_df")
 
 
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
@@ -120,9 +123,12 @@ Public Class dlgView
         clsHTMLFunction = New RFunction
         clsViewAllFunction = New RFunction
         clsGetObjectDataFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
 
         clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
@@ -182,7 +188,9 @@ Public Class dlgView
         'ucrSaveData.AddAdditionalRCode(clsViewAllFunction, iAdditionalPairNo:=2)
 
         ucrReceiverView.SetRCode(clsViewColumnsFunction, bReset)
-        ucrPnlDisplayWindow.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPnlDisplayWindow.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlDisplayWindow.SetRCode(clsDummyFunction, bReset)
+
         ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
         ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
@@ -240,6 +248,8 @@ Public Class dlgView
     Private Sub ChangeFunctionParameters()
         If rdoViewSelectedColumnsRows.Checked Then
             If rdoDispOutputWindow.Checked Then
+                clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
+
                 ucrSaveData.Visible = True
                 'ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
                 ucrBase.clsRsyntax.iCallType = 2
@@ -257,11 +267,14 @@ Public Class dlgView
                     ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
                 End If
             ElseIf rdoDispSepOutputWindow.Checked Then
+                clsDummyFunction.AddParameter("checked", "viewer", iPosition:=0)
+
                 ucrBase.clsRsyntax.iCallType = 0
                 ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
                 ucrSaveData.Visible = False
             Else
+                clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
                 ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveData.Visible = True
