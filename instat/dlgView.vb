@@ -37,7 +37,6 @@ Public Class dlgView
     End Sub
 
     Private Sub InitialiseDialog()
-        'rdoHTMLOutputWindow.Enabled = False 'TODO. temporarily disabled until the feauture can be improved on.
         ucrBase.iHelpTopicID = 32
         'Needed because window may pop up window which will disappear in a separate thread
         ucrBase.clsRsyntax.bSeparateThread = False
@@ -53,11 +52,6 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoHTMLOutputWindow, "checked", "html")
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispOutputWindow, "checked", "window")
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispSepOutputWindow, "checked", "viewer")
-
-        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
-        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-        'ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "tab_df")
-
 
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
 
@@ -161,16 +155,8 @@ Public Class dlgView
         clsViewAllFunction.SetPackageName("utils")
         clsViewAllFunction.SetRCommand("View")
         clsViewAllFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        'clsViewAllFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-        '                                       strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-        '                                       strRObjectFormatToAssignTo:=RObjectFormat.Text,
-        '                                       strRDataFrameNameToAddObjectTo:=ucrSelectorForView.strCurrentDataFrame,
-        '                                       strObjectName:="last_table")
-
-
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewAllFunction)
-        ' ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -185,10 +171,8 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
         ucrSelectorForView.AddAdditionalCodeParameterPair(clsViewColumnsFunction, ucrSelectorForView.GetParameter(), iAdditionalPairNo:=1)
         ucrSaveData.AddAdditionalRCode(clsOutputWindowFunction, iAdditionalPairNo:=1)
-        'ucrSaveData.AddAdditionalRCode(clsViewAllFunction, iAdditionalPairNo:=2)
 
         ucrReceiverView.SetRCode(clsViewColumnsFunction, bReset)
-        'ucrPnlDisplayWindow.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsDummyFunction, bReset)
 
         ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
@@ -251,7 +235,6 @@ Public Class dlgView
                 clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
 
                 ucrSaveData.Visible = True
-                'ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
                 ucrBase.clsRsyntax.iCallType = 2
                 If ucrChkSpecifyRows.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
