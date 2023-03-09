@@ -49,12 +49,13 @@ Partial Class ucrDataFrameMetadata
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewHTMLSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderDataFrameMetaData = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.ucrLinuxGrid = New instat.ucrDataframeMetadataLinuxGrid()
         Me.ucrReoGrid = New instat.ucrDataframeMetadataReoGrid()
-        Me.ViewHTMLSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowRightClickMenu.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -76,9 +77,9 @@ Partial Class ucrDataFrameMetadata
         'rowRightClickMenu
         '
         Me.rowRightClickMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.ViewHTMLSheet, Me.viewSheet})
+        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.renameSheet, Me.reorderSheet, Me.copySheet, Me.deleteDataFrame, Me.hideSheet, Me.unhideSheet, Me.ToolStripSeparator12, Me.mnuAddComment, Me.ViewHTMLSheet, Me.viewSheet})
         Me.rowRightClickMenu.Name = "statusColumnMenu"
-        Me.rowRightClickMenu.Size = New System.Drawing.Size(181, 224)
+        Me.rowRightClickMenu.Size = New System.Drawing.Size(181, 230)
         '
         'deleteDataFrame
         '
@@ -122,6 +123,12 @@ Partial Class ucrDataFrameMetadata
         Me.reorderSheet.Name = "reorderSheet"
         Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
         Me.reorderSheet.Text = "Reorder..."
+        '
+        'ViewHTMLSheet
+        '
+        Me.ViewHTMLSheet.Name = "ViewHTMLSheet"
+        Me.ViewHTMLSheet.Size = New System.Drawing.Size(180, 22)
+        Me.ViewHTMLSheet.Text = "View (HTML)"
         '
         'viewSheet
         '
@@ -179,11 +186,10 @@ Partial Class ucrDataFrameMetadata
         Me.ucrReoGrid.Size = New System.Drawing.Size(324, 381)
         Me.ucrReoGrid.TabIndex = 9
         '
-        'ViewHTMLSheet
+        'ToolStripSeparator12
         '
-        Me.ViewHTMLSheet.Name = "ViewHTMLSheet"
-        Me.ViewHTMLSheet.Size = New System.Drawing.Size(180, 22)
-        Me.ViewHTMLSheet.Text = "View (HTML)"
+        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(177, 6)
         '
         'ucrDataFrameMetadata
         '
@@ -215,4 +221,5 @@ Partial Class ucrDataFrameMetadata
     Friend WithEvents ucrLinuxGrid As ucrDataframeMetadataLinuxGrid
     Friend WithEvents ucrReoGrid As ucrDataframeMetadataReoGrid
     Friend WithEvents ViewHTMLSheet As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
 End Class
