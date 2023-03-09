@@ -126,6 +126,7 @@ Partial Class ucrDataFrameMetadata
         '
         'ViewHTMLSheet
         '
+        Me.ViewHTMLSheet.Enabled = False
         Me.ViewHTMLSheet.Name = "ViewHTMLSheet"
         Me.ViewHTMLSheet.Size = New System.Drawing.Size(180, 22)
         Me.ViewHTMLSheet.Text = "View (HTML)"
