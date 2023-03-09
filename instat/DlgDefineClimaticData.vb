@@ -29,7 +29,6 @@ Public Class DlgDefineClimaticData
     Private clsDefaultFunction, clsNewDefautFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private strCurrentDataframeName As String
-    Private strLinkedDataframe As String
     Private bIsUnique As Boolean = True
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -157,7 +156,6 @@ Public Class DlgDefineClimaticData
         ucrBase.clsRsyntax.ClearCodes()
         clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
-        clsGetColFunction.AddParameter("y", Chr(34) & strLinkedDataframe & Chr(34))
         clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -379,7 +377,7 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged
-        clsGetColFunction.AddParameter("y", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
+        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
         NewAutoFillReceivers()
         NewSetRSelector()
     End Sub
