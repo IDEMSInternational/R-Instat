@@ -65,8 +65,6 @@ Public Class frmMain
     Public strDefaultDataFrame As String = ""
 
     Private strCurrentOutputFileName As String = "" 'holds the saved ouput file name to help remember the current selected folder path
-    Private strCurrentScriptFileName As String = "" 'holds the saved script file name to help remember the current selected folder path
-    Private strCurrentLogFileName As String = "" 'holds the saved log file name to help remember the current selected folder path
 
     ''' <summary>
     ''' flag used to indicate if current state of selected data has been saved
@@ -986,46 +984,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
-        Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Log Window"
-            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            If Not String.IsNullOrEmpty(strCurrentLogFileName) Then
-                dlgSaveFile.FileName = Path.GetFileName(strCurrentLogFileName)
-                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentLogFileName)
-            Else
-                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
-                Try
-                    'TODO move this functionality to ucrScript
-                    'File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strLogText)
-                    strCurrentLogFileName = dlgSaveFile.FileName
-                Catch
-                    MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-                End Try
-            End If
-        End Using
+        ucrScriptWindow.SaveScript(True)
     End Sub
 
     Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click
-        Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Script Window"
-            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            If Not String.IsNullOrEmpty(strCurrentScriptFileName) Then
-                dlgSaveFile.FileName = Path.GetFileName(strCurrentScriptFileName)
-                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentScriptFileName)
-            Else
-                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.strActiveTabText)
-                    strCurrentScriptFileName = dlgSaveFile.FileName
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-                End Try
-            End If
-        End Using
+        ucrScriptWindow.SaveScript(False)
     End Sub
 
     Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click

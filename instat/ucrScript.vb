@@ -110,6 +110,51 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
+    ''' Displays a file save dialog; allows the user to specify a folder and file name; and saves 
+    ''' the log/script to the specified file.
+    ''' </summary>
+    ''' <param name="bIsLog"> True if the script to be saved is the log file.</param>
+    Public Sub SaveScript(bIsLog)
+        If Not bIsLog AndAlso TabControl.SelectedIndex = iTabIndexLog Then
+            If TabControl.TabCount = 2 Then
+                TabControl.SelectTab(1)
+            Else
+                MsgBox("No script tab selected. Please first select the tab of the script you wish to save.", vbExclamation, "Save Script")
+                Exit Sub
+            End If
+        End If
+
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+
+            'Ensure that dialog opens in correct folder.
+            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
+            'not work (I think a bug in WinForms).So we need to use static variables instead.
+            Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
+            Static strInitialDirectoryLog As String = frmMain.clsInstatOptions.strWorkingDirectory
+            dlgSave.InitialDirectory = If(bIsLog, strInitialDirectoryLog, strInitialDirectory)
+
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
+                    bIsTextChanged = False
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    If bIsLog Then
+                        strInitialDirectoryLog = Path.GetDirectoryName(dlgSave.FileName)
+                    Else
+                        strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
+                    End If
+                Catch
+                    MsgBox("Could not save the " & If(bIsLog, "Log", "Script") & " file." & Environment.NewLine &
+                           "The file may be in use by another program or you may not have access to write to the specified location.",
+                           vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
+                End Try
+            End If
+        End Using
+    End Sub
+
+    ''' <summary>
     ''' Selects all the text in the active tab.
     ''' </summary>
     Public Sub SelectAllText()
@@ -496,32 +541,6 @@ Public Class ucrScript
                   "")
     End Function
 
-    Private Sub SaveScript()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-
-            'Ensure that dialog opens in correct folder.
-            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
-            'not work (I think a bug in WinForms).So we need to use a static variable instead.
-            Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
-            dlgSave.InitialDirectory = strInitialDirectory
-
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
-                    strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
-                    bIsTextChanged = False
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save Script")
-                End Try
-            End If
-        End Using
-    End Sub
-
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     '''     Sets the margin used to display line numbers to the correct width so that line numbers 
@@ -692,11 +711,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-        SaveScript()
+        SaveScript(TabControl.SelectedIndex = iTabIndexLog)
     End Sub
 
     Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
-        SaveScript()
+        SaveScript(TabControl.SelectedIndex = iTabIndexLog)
     End Sub
 
     Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
