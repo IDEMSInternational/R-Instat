@@ -49,7 +49,7 @@ Partial Class sdgSelectMonth
         'ucrBaseSdg
         '
         Me.ucrBaseSdg.AutoSize = True
-        Me.ucrBaseSdg.Location = New System.Drawing.Point(53, 265)
+        Me.ucrBaseSdg.Location = New System.Drawing.Point(19, 267)
         Me.ucrBaseSdg.Name = "ucrBaseSdg"
         Me.ucrBaseSdg.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdg.TabIndex = 0

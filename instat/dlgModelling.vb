@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgModelling
     Public bFirstLoad As Boolean = True
@@ -25,7 +24,7 @@ Public Class dlgModelling
     Public clsRModelFunction As New RFunction
     Public clsRYVariable, clsRXVariable As String
     Private ucrAvailableDataframe As ucrDataFrame
-    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    'Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public clsWhichFunction As New RFunction
     Public bUpdating As Boolean = False
@@ -76,43 +75,37 @@ Public Class dlgModelling
     Private Sub SetDefaults()
         clsAttach = New RFunction
         clsDetach = New RFunction
-
         clsFormulaFunction = New RFunction
         clsRModelFunction = New RFunction
-        clsRAovFunction = New RFunction
-        clsRAovPValFunction = New RFunction
         clsConfint = New RFunction
-        clsREstPValFunction = New RFunction
-        clsRFittedValues = New RFunction
-        clsRResiduals = New RFunction
-        clsRStdResiduals = New RFunction
-        clsRWriteResiduals = New RFunction
-        clsRWriteLeverage = New RFunction
-        clsRLeverage = New RFunction
-        clsRWriteStdResiduals = New RFunction
-        clsRWriteFitted = New RFunction
         clsSummaryFunction = New RFunction
         clsAnovaFunction = New RFunction
-        clsRgeom_point = New RFunction
         clsVisReg = New RFunction
         clsRstandardFunction = New RFunction
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
 
+        '---------------------------------------------------------
+        'todo. what was the purpose of these RFunctions? delete?
+        'clsRAovFunction = New RFunction
+        'clsRAovPValFunction = New RFunction
+        'clsREstPValFunction = New RFunction
+        'clsRFittedValues = New RFunction
+        'clsRResiduals = New RFunction
+        'clsRStdResiduals = New RFunction
+
+        'clsRWriteResiduals = New RFunction
+        'clsRWriteLeverage = New RFunction
+        'clsRLeverage = New RFunction
+        'clsRWriteStdResiduals = New RFunction
+        'clsRWriteFitted = New RFunction
+        ' clsRgeom_point = New RFunction
+        '---------------------------------------------------------
+
         ucrBase.clsRsyntax.ClearCodes()
 
         bUpdating = True
-
-        ucrSelectorModelling.Reset()
-
-        ucrReceiverForTestColumn.SetMeAsReceiver()
-
-        ucrBase.clsRsyntax.SetCommandString("")
-        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(, na.action = na.exclude)", 25)
-
-
-        ucrSaveResult.Reset()
 
         clsAttach.SetRCommand("attach")
         clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -121,89 +114,167 @@ Public Class dlgModelling
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorModelling.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsDetach.AddParameter("unload", "TRUE", iPosition:=1)
 
-
-        ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        ucrBase.clsRsyntax.SetCommandString("")
+        ucrBase.clsRsyntax.clsBaseCommandString.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
-
-        ucrChkIncludeArguments.Checked = False
-        ucrInputComboRPackage.SetName("stats")
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
-
-        clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
-
-        clsRAovFunction.SetPackageName("stats")
-        clsRAovFunction.SetRCommand("anova")
-        clsRAovFunction.iCallType = 2
 
         'FitModel
         clsVisReg.SetPackageName("visreg")
         clsVisReg.SetRCommand("visreg")
         clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
         clsVisReg.AddParameter("gg", "TRUE")
-        clsVisReg.iCallType = 3
         clsVisReg.bExcludeAssignedFunctionOutput = False
 
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
-        clsFormulaFunction.iCallType = 2
+        clsFormulaFunction.bExcludeAssignedFunctionOutput = False
 
         'Summary
         clsSummaryFunction = clsRegressionDefaults.clsDefaultSummary.Clone
-        clsSummaryFunction.iCallType = 2
+        clsSummaryFunction.bExcludeAssignedFunctionOutput = False
 
         'ANOVA
         clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
-        clsAnovaFunction.iCallType = 2
+        clsAnovaFunction.bExcludeAssignedFunctionOutput = False
 
         'Confidence Interval
         clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
-        clsConfint.iCallType = 2
+        clsConfint.bExcludeAssignedFunctionOutput = False
+
+        '--------------------------------------------------------------------
+        'todo. what was the purpose of these RFunctions? Delete
+        'clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
+
+        'clsRAovFunction.SetPackageName("stats")
+        'clsRAovFunction.SetRCommand("anova")
+        'clsRAovFunction.iCallType = 2
 
         'Anova +Pvalue
-        clsREstPValFunction = clsRegressionDefaults.clsDefaultRaovPValueFunction.Clone
-        '  clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRLmOrGLM)
-        clsREstPValFunction.iCallType = 2
+        'clsREstPValFunction = clsRegressionDefaults.clsDefaultRaovPValueFunction.Clone
+        'clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRLmOrGLM)
+        'clsREstPValFunction.iCallType = 2
 
+        'todo. where is it used?
         'ucrSave (sdgSimpleRegOptions) Fitted Values
-        clsRWriteFitted = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
-        clsRWriteFitted.SetAssignTo(sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, bAssignToIsPrefix:=True)
-        ' clsRWriteFitted.iCallType = 3
+        'clsRWriteFitted = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        'clsRWriteFitted.SetAssignTo(sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, bAssignToIsPrefix:=True)
+        'clsRWriteFitted.iCallType = 3
 
         'ucrSave (sdgSimpleRegOptions) Residuals
-        clsRWriteResiduals = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
-        clsRWriteResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveResidualsColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveResidualsColumnName.GetText, bAssignToIsPrefix:=True)
-        ' clsRWriteResiduals.iCallType = 3
+        'clsRWriteResiduals = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        'clsRWriteResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveResidualsColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveResidualsColumnName.GetText, bAssignToIsPrefix:=True)
+        'clsRWriteResiduals.iCallType = 3
 
         'ucrSave (sdgSimpleRegOptions) StdResiduals
-        clsRWriteStdResiduals = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
-        clsRWriteStdResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, bAssignToIsPrefix:=True)
-        ' clsRWriteStdResiduals.iCallType = 3
+        'clsRWriteStdResiduals = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        'clsRWriteStdResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, bAssignToIsPrefix:=True)
+        'clsRWriteStdResiduals.iCallType = 3
 
         'ucrSave (sdgSimpleRegOptions) Leverage
-        clsRWriteLeverage = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
-        clsRWriteLeverage.SetAssignTo(sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, bAssignToIsPrefix:=True)
+        'clsRWriteLeverage = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        'clsRWriteLeverage.SetAssignTo(sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, bAssignToIsPrefix:=True)
         'clsRWriteLeverage.iCallType = 3
 
+        '--------------------------------------------------------------------
 
         clsResidualFunction.SetRCommand("residuals")
-
         clsFittedValuesFunction.SetRCommand("fitted.values")
-
         clsRstandardFunction.SetRCommand("rstandard")
-
         clsHatvaluesFunction.SetRCommand("hatvalues")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 1000)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
 
+        ucrSelectorModelling.Reset()
+        ucrChkIncludeArguments.Checked = False
+        ucrInputComboRPackage.SetName("stats")
+        ucrReceiverForTestColumn.SetMeAsReceiver()
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(, na.action = na.exclude)", 25)
+        ucrSaveResult.Reset()
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
-
         bResetDisplayOptions = True
         bUpdating = False
+    End Sub
+
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+
+        Dim strAssginTo As String
+        strAssginTo = ucrBase.clsRsyntax.GetstrAssignTo()
+
+        '---------------------------------------------------------------------
+        'model summaries outputs
+
+        'stats output formula for the model
+        clsFormulaFunction.AddParameter("x", strParameterValue:=strAssginTo, iPosition:=0)
+        clsFormulaFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
+
+        'anova output summary for the model
+        clsAnovaFunction.AddParameter("object", strParameterValue:=strAssginTo, iPosition:=0)
+        clsAnovaFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
+
+        'estimates output for the model
+        clsSummaryFunction.AddParameter("object", strParameterValue:=strAssginTo, iPosition:=0)
+        clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
+
+
+        'confidence output limits for the model
+        clsConfint.AddParameter("object", strParameterValue:=strAssginTo, iPosition:=0)
+        clsConfint.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
+
+        '---------------------------------------------------------------------
+        'column outputs
+        'note set assign has not been set here because it's done at the sub dialog level
+        'through individual save controls linked to this dialog data frame selector
+
+        clsResidualFunction.AddParameter("object", strParameterValue:=strAssginTo, iPosition:=0)
+        clsFittedValuesFunction.AddParameter("object", strParameterValue:=strAssginTo, iPosition:=0)
+        clsRstandardFunction.AddParameter("model", strParameterValue:=strAssginTo, iPosition:=0)
+        clsHatvaluesFunction.AddParameter("model", strParameterValue:=strAssginTo, iPosition:=0)
+
+        '---------------------------------------------------------------------
+        'graphical outputs
+
+        'model plot output
+        clsVisReg.AddParameter("fit", strParameterValue:=strAssginTo, iPosition:=0)
+        clsVisReg.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                  strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                  strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame,
+                                  strObjectName:="last_graph")
+
+        'residual plots outputs
+        For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+            kvp.Value.AddParameter("x", strParameterValue:=strAssginTo, iPosition:=0)
+            kvp.Value.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                        strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                        strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                        strRDataFrameNameToAddObjectTo:=ucrSelectorModelling.strCurrentDataFrame,
+                                        strObjectName:="last_graph")
+        Next
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -505,21 +576,15 @@ Public Class dlgModelling
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, dctNewPlot:=dctPlotFunctions, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
-        GraphAssignTo()
         bResetDisplayOptions = False
     End Sub
 
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        Dim strPackageName As String
-
-        strPackageName = ucrInputComboRPackage.GetText
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        Dim strPackageName As String = ucrInputComboRPackage.GetText
+        If strPackageName <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
     End Sub
 
     Private Sub Clear()
@@ -530,7 +595,6 @@ Public Class dlgModelling
         bUpdating = True
         ucrSaveResult.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString, bReset)
         bUpdating = False
-        SetObjectInFunctions()
     End Sub
 
 
@@ -539,48 +603,8 @@ Public Class dlgModelling
         TestOkEnabled()
     End Sub
 
-    Private Sub GraphAssignTo()
-        'Dim lstPlotNames As New List(Of String)
-        'Dim i As Integer = 0
-
-        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
-
-        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
-        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
-        '    i = i + 1
-        'Next
-    End Sub
-
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        If Not bUpdating Then
-            SetObjectInFunctions()
-        End If
-    End Sub
-
-    Private Sub SetObjectInFunctions()
-        Dim strAssginTo As String
-
-        strAssginTo = ucrBase.clsRsyntax.GetstrAssignTo()
-
-        clsFormulaFunction.AddParameter("x", strAssginTo)
-        clsAnovaFunction.AddParameter("object", strAssginTo)
-        clsSummaryFunction.AddParameter("object", strAssginTo)
-        clsConfint.AddParameter("object", strAssginTo)
-        clsVisReg.AddParameter("fit", strAssginTo)
-
-        For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
-            kvp.Value.AddParameter("x", strAssginTo, iPosition:=0)
-        Next
-
-        clsResidualFunction.AddParameter("object", strAssginTo)
-        clsFittedValuesFunction.AddParameter("object", strAssginTo)
-        clsRstandardFunction.AddParameter("model", strAssginTo)
-        clsHatvaluesFunction.AddParameter("model", strAssginTo)
     End Sub
 
     Private Sub ucrInputComboRPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboRPackage.ControlValueChanged

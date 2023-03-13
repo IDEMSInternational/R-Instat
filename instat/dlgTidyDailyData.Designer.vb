@@ -35,9 +35,9 @@ Partial Class dlgTidyDailyData
         Me.lblColumnstoStack = New System.Windows.Forms.Label()
         Me.lblMultipleElement = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.ucrTxtBoxElementName = New instat.ucrInputTextBox()
         Me.ucrChkUnstackElements = New instat.ucrCheck()
         Me.lblOr = New System.Windows.Forms.Label()
-        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
@@ -190,10 +190,10 @@ Partial Class dlgTidyDailyData
         '
         'grpElements
         '
+        Me.grpElements.Controls.Add(Me.ucrTxtBoxElementName)
         Me.grpElements.Controls.Add(Me.ucrChkUnstackElements)
         Me.grpElements.Controls.Add(Me.lblOr)
         Me.grpElements.Controls.Add(Me.lblElementName)
-        Me.grpElements.Controls.Add(Me.ucrTextBoxElementName)
         Me.grpElements.Controls.Add(Me.lblMultipleElement)
         Me.grpElements.Controls.Add(Me.ucrReceiverElement)
         Me.grpElements.Location = New System.Drawing.Point(271, 337)
@@ -201,6 +201,17 @@ Partial Class dlgTidyDailyData
         Me.grpElements.Size = New System.Drawing.Size(140, 152)
         Me.grpElements.TabIndex = 15
         Me.grpElements.TabStop = False
+        '
+        'ucrTxtBoxElementName
+        '
+        Me.ucrTxtBoxElementName.AddQuotesIfUnrecognised = True
+        Me.ucrTxtBoxElementName.AutoSize = True
+        Me.ucrTxtBoxElementName.IsMultiline = False
+        Me.ucrTxtBoxElementName.IsReadOnly = False
+        Me.ucrTxtBoxElementName.Location = New System.Drawing.Point(9, 31)
+        Me.ucrTxtBoxElementName.Name = "ucrTxtBoxElementName"
+        Me.ucrTxtBoxElementName.Size = New System.Drawing.Size(120, 21)
+        Me.ucrTxtBoxElementName.TabIndex = 29
         '
         'ucrChkUnstackElements
         '
@@ -220,17 +231,6 @@ Partial Class dlgTidyDailyData
         Me.lblOr.Size = New System.Drawing.Size(18, 13)
         Me.lblOr.TabIndex = 18
         Me.lblOr.Text = "Or"
-        '
-        'ucrTextBoxElementName
-        '
-        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
-        Me.ucrTextBoxElementName.AutoSize = True
-        Me.ucrTextBoxElementName.IsMultiline = False
-        Me.ucrTextBoxElementName.IsReadOnly = False
-        Me.ucrTextBoxElementName.Location = New System.Drawing.Point(13, 32)
-        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
-        Me.ucrTextBoxElementName.Size = New System.Drawing.Size(120, 21)
-        Me.ucrTextBoxElementName.TabIndex = 17
         '
         'ucrReceiverElement
         '
@@ -396,7 +396,7 @@ Partial Class dlgTidyDailyData
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 524)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 25
         '
         'dlgTidyDailyData
@@ -462,7 +462,6 @@ Partial Class dlgTidyDailyData
     Friend WithEvents lblElementName As Label
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverMultipleStack As ucrReceiverMultiple
-    Friend WithEvents ucrTextBoxElementName As ucrInputTextBox
     Friend WithEvents ucrChkIgnoreInvalid As ucrCheck
     Friend WithEvents ucrChkSilent As ucrCheck
     Friend WithEvents grpElements As GroupBox
@@ -473,4 +472,5 @@ Partial Class dlgTidyDailyData
     Friend WithEvents ttReshapeType As ToolTip
     Friend WithEvents ucrChkUnstackElements As ucrCheck
     Friend WithEvents lblNColumns As Label
+    Friend WithEvents ucrTxtBoxElementName As ucrInputTextBox
 End Class

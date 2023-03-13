@@ -49,7 +49,7 @@ Partial Class dlgRandomSample
         Me.ucrNudSeed = New instat.ucrNud()
         Me.ucrChkSetSeed = New instat.ucrCheck()
         Me.ucrSampleSize = New instat.ucrDataFrameLength()
-        Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
+        Me.ucrDataFrameRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -108,11 +108,11 @@ Partial Class dlgRandomSample
         Me.ucrNudNumberOfSamples.AutoSize = True
         Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(359, 126)
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(372, 126)
         Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
-        Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(55, 26)
         Me.ucrNudNumberOfSamples.TabIndex = 5
         Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -121,11 +121,11 @@ Partial Class dlgRandomSample
         Me.ucrNudSeed.AutoSize = True
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSeed.Location = New System.Drawing.Point(359, 100)
+        Me.ucrNudSeed.Location = New System.Drawing.Point(372, 100)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Name = "ucrNudSeed"
-        Me.ucrNudSeed.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSeed.Size = New System.Drawing.Size(55, 24)
         Me.ucrNudSeed.TabIndex = 3
         Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -140,22 +140,25 @@ Partial Class dlgRandomSample
         '
         'ucrSampleSize
         '
+        Me.ucrSampleSize.AddQuotesIfUnrecognised = True
         Me.ucrSampleSize.AutoSize = True
-        Me.ucrSampleSize.Location = New System.Drawing.Point(359, 152)
+        Me.ucrSampleSize.IsMultiline = False
+        Me.ucrSampleSize.IsReadOnly = True
+        Me.ucrSampleSize.Location = New System.Drawing.Point(372, 152)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 7
         '
-        'ucrSelectorRandomSamples
+        'ucrDataFrameRandomSamples
         '
-        Me.ucrSelectorRandomSamples.AutoSize = True
-        Me.ucrSelectorRandomSamples.bDropUnusedFilterLevels = False
-        Me.ucrSelectorRandomSamples.bUseCurrentFilter = True
-        Me.ucrSelectorRandomSamples.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorRandomSamples.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
-        Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(153, 43)
-        Me.ucrSelectorRandomSamples.TabIndex = 0
+        Me.ucrDataFrameRandomSamples.AutoSize = True
+        Me.ucrDataFrameRandomSamples.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameRandomSamples.bUseCurrentFilter = True
+        Me.ucrDataFrameRandomSamples.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameRandomSamples.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameRandomSamples.Name = "ucrDataFrameRandomSamples"
+        Me.ucrDataFrameRandomSamples.Size = New System.Drawing.Size(153, 43)
+        Me.ucrDataFrameRandomSamples.TabIndex = 0
         '
         'ucrDistWithParameters
         '
@@ -171,7 +174,7 @@ Partial Class dlgRandomSample
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 262)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
         'dlgRandomSample
@@ -188,7 +191,7 @@ Partial Class dlgRandomSample
         Me.Controls.Add(Me.ucrSampleSize)
         Me.Controls.Add(Me.lblNumberofSamples)
         Me.Controls.Add(Me.lblSampleSize)
-        Me.Controls.Add(Me.ucrSelectorRandomSamples)
+        Me.Controls.Add(Me.ucrDataFrameRandomSamples)
         Me.Controls.Add(Me.ucrDistWithParameters)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -204,7 +207,7 @@ Partial Class dlgRandomSample
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDistWithParameters As ucrDistributionsWithParameters
-    Friend WithEvents ucrSelectorRandomSamples As ucrDataFrame
+    Friend WithEvents ucrDataFrameRandomSamples As ucrDataFrame
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents ucrSampleSize As ucrDataFrameLength

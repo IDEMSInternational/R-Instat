@@ -480,7 +480,7 @@ Partial Class sdgOneWayFrequencies
         'ucrBaseOneWayFrequencies
         '
         Me.ucrBaseOneWayFrequencies.AutoSize = True
-        Me.ucrBaseOneWayFrequencies.Location = New System.Drawing.Point(105, 292)
+        Me.ucrBaseOneWayFrequencies.Location = New System.Drawing.Point(74, 292)
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
         Me.ucrBaseOneWayFrequencies.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseOneWayFrequencies.TabIndex = 1

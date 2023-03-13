@@ -71,8 +71,41 @@ Public MustInherit Class ucrReoGrid
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
 
+    ''' <summary>
+    ''' Reorder the worksheets
+    ''' </summary>
+    Private Sub ReOrderWorksheets(strCurrWorksheet As String) Implements IGrid.ReOrderWorksheets
+        'assuming the databook will always have all the data frames 
+        'and the grid may not have all the data frame worksheets equivalent
+        'and all data frames in the data book have changed their order positions 
+        'get data frames sheets in the grid based on the databook data frames position order
+        'and add it to the list.
+        Dim lstWorkSheetsFound As New List(Of Worksheet)
+        For Each clsDataframe In _clsDataBook.DataFrames
+            Dim fillWorkSheet As Worksheet = grdData.GetWorksheetByName(clsDataframe.strName)
+            If fillWorkSheet IsNot Nothing Then
+                lstWorkSheetsFound.Add(fillWorkSheet)
+            End If
+        Next
+
+        'in the second condition we check if all data frames in the data book
+        'have the same order positions with all data frame sheets in the grid
+        'if not this check will return False which means the data frames in the data book are reordered
+        If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()) Then
+            'reorder the worksheets based on the filled list
+            For i As Integer = 0 To lstWorkSheetsFound.Count - 1
+                grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
+            Next
+            grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet) 'set the selected sheet back active before reordering
+        End If
+    End Sub
+
     Public Sub CopyRange() Implements IGrid.CopyRange
-        grdData.CurrentWorksheet.Copy()
+        If Not IsNothing(grdData) _
+                AndAlso Not IsNothing(grdData.CurrentWorksheet) Then
+            grdData.CurrentWorksheet.Copy()
+        End If
     End Sub
 
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows

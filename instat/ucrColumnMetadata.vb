@@ -55,14 +55,15 @@ Public Class ucrColumnMetadata
         End If
 
         _grid.CurrentWorksheet = fillWorksheet
+        _grid.UpdateWorksheetStyle(fillWorksheet)
         _grid.AddColumns(dataFrame.clsColumnMetaData)
         _grid.AddRowData(dataFrame.clsColumnMetaData)
-        _grid.UpdateWorksheetStyle(fillWorksheet)
         dataFrame.clsColumnMetaData.HasChanged = False
     End Sub
 
     Private Sub AddAndUpdateWorksheets()
         Dim firstAddedWorksheet As clsWorksheetAdapter = Nothing
+        Dim strCurrWorksheet As String = If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim worksheet As clsWorksheetAdapter = _grid.GetWorksheet(clsDataFrame.strName)
             If worksheet Is Nothing Then
@@ -73,6 +74,9 @@ Public Class ucrColumnMetadata
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
+        If strCurrWorksheet IsNot Nothing Then
+            _grid.ReOrderWorksheets(strCurrWorksheet)
+        End If
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
@@ -150,7 +154,7 @@ Public Class ucrColumnMetadata
         Dim strNameColumn As String
         Dim iTemp As Integer
         Dim strNewValue As String
-        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE"}
+        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE", "N", "NA"}
 
         strNameColumn = _grid.GetCellValue(iRow, strNameLabel)
         If strNameColumn = "" Then
@@ -168,14 +172,17 @@ Public Class ucrColumnMetadata
         ElseIf strColumnName = strLabelsScientific Then
             newValue = newValue.ToString.ToUpper
             If strBooleanValsAllowed.Contains(newValue) Then
-                If newValue(0) = "F" Then
-                    newValue = "FALSE"
-                Else
-                    newValue = "TRUE"
-                End If
+                Select Case newValue(0)
+                    Case "F"
+                        newValue = "FALSE"
+                    Case "T"
+                        newValue = "TRUE"
+                    Case "N"
+                        newValue = "NA"
+                End Select
                 strNewValue = newValue
             Else
-                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
+                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display and NA/N for a mixture", MsgBoxStyle.Information)
                 Exit Sub
             End If
         Else

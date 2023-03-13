@@ -228,7 +228,7 @@ Public Class dlgUseModel
         Dim item As ListViewItem
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-        clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
+        clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         ucrInputModels.SetName("[No models selected]")
         strExpression = ucrReceiverForTestColumn.GetVariableNames(False)
         For Each item In ucrSelectorUseModel.lstAvailableVariable.Items
@@ -236,8 +236,9 @@ Public Class dlgUseModel
             If strExpression.Contains(strModel) Then
                 lstModels.Add(strModel)
                 clsGetModel.AddParameter("data_name", Chr(34) & ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-                clsGetModel.AddParameter("model_name", Chr(34) & strModel & Chr(34), iPosition:=1)
-                clsGetModel.SetAssignTo(strModel)
+                clsGetModel.AddParameter("object_name", Chr(34) & strModel & Chr(34), iPosition:=1)
+                clsGetModel.AddParameter("as_file", "FALSE", iPosition:=2)
+                clsGetModel.SetAssignToObject(strRObjectToAssignTo:=strModel)
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsGetModel.Clone(), iPosition:=i)
                 i = i + 1
             End If
@@ -382,15 +383,10 @@ Public Class dlgUseModel
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        Dim strPackageName As String
-
-        strPackageName = ucrInputComboRPackage.GetText
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        Dim strPackageName As String = ucrInputComboRPackage.GetText
+        If strPackageName <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click

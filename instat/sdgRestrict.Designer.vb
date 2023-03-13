@@ -60,7 +60,7 @@ Partial Class sdgRestrict
         'ucrSubDialogBase
         '
         Me.ucrSubDialogBase.AutoSize = True
-        Me.ucrSubDialogBase.Location = New System.Drawing.Point(48, 259)
+        Me.ucrSubDialogBase.Location = New System.Drawing.Point(73, 259)
         Me.ucrSubDialogBase.Name = "ucrSubDialogBase"
         Me.ucrSubDialogBase.Size = New System.Drawing.Size(225, 30)
         Me.ucrSubDialogBase.TabIndex = 1

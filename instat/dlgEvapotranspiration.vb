@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
 
 Public Class dlgEvapotranspiration
@@ -23,15 +22,18 @@ Public Class dlgEvapotranspiration
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
     Private iSaveMaxY As Integer
+    Private iEvapOptions As Integer
     Private clsETPenmanMonteith, clsHargreavesSamani, clsDataFunctionPM, clsDataFunctionHS, clsDataFunction, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
     Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
     Private clsBaseOperator, clsDailyOperatorHS As New ROperator
+    Private bRcodeSet As Boolean = True
 
     Private Sub dlgdlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
             iSaveMaxY = ucrNewColName.Location.Y
+            iEvapOptions = cmdEvapOptions.Location.Y
             InitialiseDialog()
             bFirstload = False
         End If
@@ -79,16 +81,18 @@ Public Class dlgEvapotranspiration
 
         ucrReceiverHumidityMax.SetParameter(New RParameter("RHmax", 4))
         ucrReceiverHumidityMax.SetParameterIsRFunction()
-        'ucrReceiverHumidityMax.bAutoFill = True
+        ucrReceiverHumidityMax.SetClimaticType("hum_max")
+        ucrReceiverHumidityMax.bAutoFill = True
 
         ucrReceiverHumidityMin.SetParameter(New RParameter("RHmin", 5))
         ucrReceiverHumidityMin.SetParameterIsRFunction()
-        'ucrReceiverHumidityMin.bAutoFill = True
+        ucrReceiverHumidityMin.SetClimaticType("hum_min")
+        ucrReceiverHumidityMin.bAutoFill = True
 
         ucrReceiverWindSpeed.SetParameter(New RParameter("u2", 7))
         ucrReceiverWindSpeed.SetParameterIsRFunction()
-        'ucrReceiverWindSpeed.SetClimaticType("wind_speed")
-        'ucrReceiverWindSpeed.bAutoFill = True
+        ucrReceiverWindSpeed.SetClimaticType("wind_speed")
+        ucrReceiverWindSpeed.bAutoFill = True
 
         ucrInputTimeStep.SetParameter(New RParameter("ts", 2))
         dctInputTimeStep.Add("daily", Chr(34) & "daily" & Chr(34))
@@ -101,7 +105,7 @@ Public Class dlgEvapotranspiration
         ucrInputSolar.SetRDefault(Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("sunshine hours", Chr(34) & "sunshine hours" & Chr(34))
         dctInputSolar.Add("cloud", Chr(34) & "cloud" & Chr(34))
-        dctInputSolar.Add("data", Chr(34) & "data" & Chr(34))
+        dctInputSolar.Add("radiation", Chr(34) & "radiation" & Chr(34))
         ucrInputSolar.SetItems(dctInputSolar)
         ucrInputSolar.SetDropDownStyleAsNonEditable()
 
@@ -118,16 +122,6 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
         ' Missing Options 
-        ucrChkInterpMissingDays.SetParameter(New RParameter("interp_missing_days", 5))
-        ucrChkInterpMissingDays.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkInterpMissingDays.SetRDefault("FALSE")
-        ucrChkInterpMissingDays.SetText("Interpolate Missing Days")
-
-        ucrChkInterpMissingEntries.SetParameter(New RParameter("interp_missing_entries", 6))
-        ucrChkInterpMissingEntries.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkInterpMissingEntries.SetRDefault("FALSE")
-        ucrChkInterpMissingEntries.SetText("Interpolate Missing Entries")
-
         ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
         dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
         dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
@@ -135,15 +129,6 @@ Public Class dlgEvapotranspiration
         dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
         ucrInputMissingMethod.SetItems(dctInputMissingMethod)
         ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
-
-        ucrNudMaxMissingData.SetParameter(New RParameter("x", bNewIncludeArgumentName:=False))
-        ucrNudMaxMissingData.SetMinMax(1, 99)
-
-        ucrNudMaxMissingDays.SetParameter(New RParameter("y", bNewIncludeArgumentName:=False))
-        ucrNudMaxMissingDays.SetMinMax(1, 99)
-
-        ucrNudMaxDurationMissingData.SetParameter(New RParameter("z", bNewIncludeArgumentName:=False))
-        ucrNudMaxDurationMissingData.SetMinMax(1, 99)
 
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
@@ -161,7 +146,6 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputMissingMethod, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="monthly average")
 
-        ucrChkWind.SetLinkedDisplayControl(grpWindSpeed)
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)
@@ -240,7 +224,6 @@ Public Class dlgEvapotranspiration
         clsVarnamesVectorPM.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
         clsVarnamesVectorPM.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), bIncludeArgumentName:=False)
         clsVarnamesVectorPM.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), bIncludeArgumentName:=False)
-        'clsVarnamesVectorPM.AddParameter("n", Chr(34) & "n" & Chr(34), bIncludeArgumentName:=False)
 
 
         clsVarnamesVectorHS.SetRCommand("c")
@@ -300,30 +283,25 @@ Public Class dlgEvapotranspiration
         ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
-        ucrNudMaxMissingData.SetRCode(clsMissingDataVector, bReset)
-        ucrNudMaxMissingDays.SetRCode(clsMissingDataVector, bReset)
-        ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVector, bReset)
-        ucrChkInterpMissingDays.SetRCode(clsReadInputs, bReset)
-        ucrChkInterpMissingEntries.SetRCode(clsReadInputs, bReset)
         ucrInputMissingMethod.SetRCode(clsReadInputs, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoPenmanMonteith.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty AndAlso ucrNudMaxMissingData.GetText <> "" AndAlso ucrNudMaxMissingDays.GetText <> "" AndAlso ucrNudMaxDurationMissingData.GetText <> "" Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrReceiverHumidityMax.IsEmpty() AndAlso Not ucrReceiverHumidityMin.IsEmpty() AndAlso Not ucrReceiverRadiation.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty Then
                 ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
             End If
             If ucrChkWind.Checked And ucrReceiverWindSpeed.IsEmpty Then
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoHargreavesSamani.Checked Then
-            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() AndAlso ucrNudMaxMissingData.GetText <> "" AndAlso ucrNudMaxMissingDays.GetText <> "" AndAlso ucrNudMaxDurationMissingData.GetText <> "" Then
+            If ucrNewColName.IsComplete AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverTmax.IsEmpty() AndAlso Not ucrReceiverTmin.IsEmpty() AndAlso Not ucrInputTimeStep.IsEmpty() Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -333,16 +311,24 @@ Public Class dlgEvapotranspiration
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdEvapOptions_Click(sender As Object, e As EventArgs) Handles cmdEvapOptions.Click
+        sdgMissingOptionsEvapotranspiration.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptionsEvapotranspiration.ShowDialog()
+    End Sub
+
     Private Sub DialogSize()
         If rdoPenmanMonteith.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
+            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
         ElseIf rdoHargreavesSamani.Checked Then
             ucrReceiverDate.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
             ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
+            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions / 1.187)
         End If
     End Sub
 
@@ -369,7 +355,6 @@ Public Class dlgEvapotranspiration
         Else
             clsBaseOperator.RemoveParameterByName("ET.HargreavesSamani")
         End If
-
     End Sub
 
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
@@ -392,7 +377,7 @@ Public Class dlgEvapotranspiration
                 clsVarnamesVectorPM.RemoveParameterByName("Cd")
                 clsDataFunctionPM.RemoveParameterByName("Rs")
                 clsDataFunctionPM.RemoveParameterByName("cd")
-            Case "data"
+            Case "radiation"
                 ucrReceiverRadiation.SetClimaticType("radiation")
                 ucrReceiverRadiation.bAutoFill = True
                 clsVarnamesVectorPM.AddParameter("Rs", Chr(34) & "Rs" & Chr(34), bIncludeArgumentName:=False)
@@ -412,8 +397,7 @@ Public Class dlgEvapotranspiration
                 clsDataFunctionPM.RemoveParameterByName("Rs")
         End Select
     End Sub
-
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrNudMaxMissingData.ControlContentsChanged, ucrNudMaxDurationMissingData.ControlContentsChanged, ucrNudMaxMissingDays.ControlContentsChanged, ucrChkWind.ControlContentsChanged
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged, ucrChkWind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

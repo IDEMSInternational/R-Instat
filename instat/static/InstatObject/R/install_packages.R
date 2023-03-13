@@ -47,7 +47,6 @@ pkgs <-
     "RMySQL",
     "DBI",
     "EnvStats",
-    "signmedian.test",
     "sjPlot",
     "sjmisc",
     "plotly",
@@ -129,11 +128,34 @@ pkgs <-
     # For fast creation of dummy (binary) variables from categories variables in Prepare > Column:Factor > Dummy Variables
     "fastDummies",
     # For most frequent values in Prepare > Column:Numeric > Row Summaries
-    "statip"
+    "statip",
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
-  )
+    # install.packages('remotes')
+    # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
+    # also install CDT from GitHub devtools::install_github("rijaf-iri/CDT")
+    "corrr",
+    "dslabs",
+    "coin",
+    #This small library contains a series of simple tools for constructing and manipulating confounded and fractional factorial designs.
+    "conf.design",
+    "pingr",
+    "vcdExtra",
+    # For inspect, read, edit and run files for 'APSIM'
+    "apsimx",
+    #Fast functions for dealing with prime numbers, such as testing whether a number is prime and generating a sequence prime numbers.
+    "primes",
+    #Generates well-known integer sequences. 'gmp' package is adopted for computing with arbitrarily large numbers.
+    "Zseq",
+    # Extending 'gt' for Beautiful HTML Tables.
+    "gtExtras",
+    "segmented", 
+    # Utilities for verifying discrete, continuous and probabilistic forecasts, and forecasts expressed as parametric distributions are included.
+    "verification",
+    "prediction"
+
+ )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
-pth <- "C:/Users/Danny/Documents/RPackages"
+pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")
 
 #add extra packages to location

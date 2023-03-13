@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,8 +34,8 @@
     <ProductName>Missing Tool</ProductName>
     <PublisherName>Polycarp</PublisherName>
     <SuiteName>Testing Instat</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>5.5.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -111,10 +114,25 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.104.4.240\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.104.4.240\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.WinForms.104.4.240\lib\net452\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
@@ -129,6 +147,9 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.1.0\lib\net46\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -137,7 +158,11 @@
     <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -146,6 +171,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -189,16 +215,79 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="clsFileUrlUtilities.vb" />
+    <Compile Include="dlgApsimx.Designer.vb">
+      <DependentUpon>dlgApsimx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgApsimx.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClusterAnalysis.Designer.vb">
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.Designer.vb">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromRapidPro.Designer.vb">
+      <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromRapidPro.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgUseTable.Designer.vb">
+      <DependentUpon>dlgUseTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUseTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enum\RObjectFormat.vb" />
+    <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgPairPlotOptions.Designer.vb">
+      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgSummaryThemes.Designer.vb">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSummaryThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmMaximiseOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSearch.Designer.vb">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWordwrap.Designer.vb">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWordwrap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IColumnMetaDataGrid.vb" />
@@ -402,12 +491,6 @@
     <Compile Include="dlgPasteSpecial.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPivotTable.Designer.vb">
-      <DependentUpon>dlgPivotTable.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPivotTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgScript.Designer.vb">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </Compile>
@@ -599,6 +682,12 @@
       <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgFormatSummaryTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgImportFromRapidPro.Designer.vb">
+      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromRapidPro.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
@@ -1250,12 +1339,6 @@
     <Compile Include="dlgViewGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGraphDisplay.Designer.vb">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmGraphDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </Compile>
@@ -1467,6 +1550,12 @@
     <Compile Include="sdgVerificationSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgWindowNumber.Designer.vb">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindowNumber.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
@@ -1477,6 +1566,12 @@
       <DependentUpon>dlgUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMissingOptionsEvapotranspiration.Designer.vb">
+      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMissingOptionsEvapotranspiration.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -2535,12 +2630,6 @@
     <Compile Include="frmMetaData.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScript.Designer.vb">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmScript.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmVariables.designer.vb">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </Compile>
@@ -2743,12 +2832,6 @@
     <Compile Include="ucrSave.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSaveModel.Designer.vb">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveModel.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrScript.Designer.vb">
       <DependentUpon>ucrScript.vb</DependentUpon>
     </Compile>
@@ -2867,6 +2950,13 @@
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\ucrTextViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\Webview\Windows\CefRuntimeWrapper.vb" />
+    <Compile Include="UserControls\Webview\Windows\ucrWebViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControl\ucrOutputPage.Designer.vb">
       <DependentUpon>ucrOutputPage.vb</DependentUpon>
     </Compile>
@@ -2881,6 +2971,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgApsimx.resx">
+      <DependentUpon>dlgApsimx.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
     </EmbeddedResource>
@@ -2946,11 +3039,20 @@
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFindInVariableOrFilter.resx">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromPostgres.resx">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromRapidPro.resx">
+      <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
@@ -2973,14 +3075,14 @@
     <EmbeddedResource Include="dlgPasteSpecial.resx">
       <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPivotTable.resx">
-      <DependentUpon>dlgPivotTable.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSearch.resx">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
@@ -3003,14 +3105,30 @@
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgUseTable.resx">
+      <DependentUpon>dlgUseTable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWordwrap.resx">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPairPlotOptions.resx">
+      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSummaryThemes.resx">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
@@ -3077,6 +3195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFormatSummaryTables.resx">
       <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromRapidPro.resx">
+      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
@@ -4024,12 +4145,6 @@
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.sw-KE.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPackageIssues.resx">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
@@ -4723,12 +4838,6 @@
     <EmbeddedResource Include="frmMetaData.sw-KE.resx">
       <DependentUpon>frmMetaData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.sw-KE.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmVariables.resx">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </EmbeddedResource>
@@ -4780,6 +4889,9 @@
     <EmbeddedResource Include="sdgVerificationSummaries.resx">
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindowNumber.resx">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
@@ -4788,6 +4900,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseModel.resx">
       <DependentUpon>dlgUseModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMissingOptionsEvapotranspiration.resx">
+      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
@@ -5064,12 +5179,6 @@
     <EmbeddedResource Include="ucrSave.sw-KE.resx">
       <DependentUpon>ucrSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrScript.resx">
       <DependentUpon>ucrScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -5141,6 +5250,7 @@
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.manifest" />
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateIgnore.txt" />
@@ -5164,6 +5274,12 @@
     <None Include="lib\RDotNet.NativeLibrary.dll" />
     <None Include="lib\unvell.ReoGrid.dll" />
     <None Include="lib\unvell.ReoScript.dll" />
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -5551,7 +5667,12 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets'))" />
   </Target>
+  <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

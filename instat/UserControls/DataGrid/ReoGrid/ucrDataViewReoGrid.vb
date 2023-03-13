@@ -54,7 +54,7 @@ Public Class ucrDataViewReoGrid
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim textColour As Color
         Dim strRowNames As String()
-
+        Dim strLongestRowHeaderText As String = ""
         If dataFrame.iDisplayedRowCount = 0 Then
             AddBlankRow(grdData.CurrentWorksheet)
             Exit Sub
@@ -64,6 +64,7 @@ Public Class ucrDataViewReoGrid
 
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             textColour = Color.Red
+            grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top when filter is applied. see issue #8116
         Else
             textColour = Color.DarkBlue
         End If
@@ -71,12 +72,43 @@ Public Class ucrDataViewReoGrid
         strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
-                grdData.CurrentWorksheet(row:=i, col:=j) = dataFrame.DisplayedData(i, j)
+                Dim strData As String = dataFrame.DisplayedData(i, j)
+                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    strData = GetInnerBracketedString(strData)
+                End If
+                grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
+
+            'get longest row header text
+            If strRowNames(i).Length > strLongestRowHeaderText.Length Then
+                strLongestRowHeaderText = strRowNames(i)
+            End If
         Next
+
+        'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
+        'see issue #7221 for more information.
+        'get pixel size equivalent of the longest row header text
+        'and use it as the row header width.
+        'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
+        grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
+
+    Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
+        grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
+    End Sub
+
+    Private Function GetInnerBracketedString(strData As String) As String
+        Dim intFirstRightBracket As Integer = InStr(strData, ")")
+        Dim intLastLeftBracket As Integer = InStrRev(strData, "(")
+        If intFirstRightBracket = 0 Or intLastLeftBracket = 0 Then
+            Return strData
+        Else
+            Dim strOutput As String = Mid(strData, intLastLeftBracket + 1, intFirstRightBracket - intLastLeftBracket - 1)
+            Return strOutput
+        End If
+    End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
@@ -141,6 +173,7 @@ Public Class ucrDataViewReoGrid
                            GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(e.Cell.Column).strName,
                            GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+        RefreshSingleCell(e.Cell.Column, e.Cell.Row)
     End Sub
 
 
@@ -162,8 +195,8 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Sub Worksheet_BeforeCellsKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs)
-        e.IsCancelled = True
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            e.IsCancelled = True
             RaiseEvent DeleteValueToDataframe()
         End If
     End Sub
