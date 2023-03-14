@@ -24,7 +24,7 @@ Public Class ucrScript
     Private iMaxLineNumberCharLength As Integer = 0
     Private Const iTabIndexLog As Integer = 0
     Private Const strComment As String = "Code run from Script Window"
-    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files") 'TODO
+    Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
@@ -136,7 +136,7 @@ Public Class ucrScript
     ''' the log/script to the specified file.
     ''' </summary>
     ''' <param name="bIsLog"> True if the script to be saved is the log file.</param>
-    Public Sub SaveScript(bIsLog)
+    Public Sub SaveScript(bIsLog As Boolean, Optional bOpenAsFile As Boolean = False)
         If Not bIsLog AndAlso TabControl.SelectedIndex = iTabIndexLog Then
             If TabControl.TabCount = 2 Then
                 TabControl.SelectTab(1)
@@ -461,7 +461,7 @@ Public Class ucrScript
                 bIsTextChanged = False
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
-                       "The file may be in use by another program or you may not have access to write to the specified location.",
+                       "The file may be in use by another program or you may not have access to read from the specified location.",
                        vbExclamation, "Load Script")
             End Try
         End Using
@@ -672,23 +672,26 @@ Public Class ucrScript
 
     Private Sub mnuOpenScriptasFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Try
+            Dim bIsLog As Boolean = TabControl.SelectedIndex = iTabIndexLog
+
             If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
                 Directory.CreateDirectory(strRInstatLogFilesFolderPath)
             End If
-            Dim strScriptFilename As String = "RInstatScript.R"
+            Dim strScriptFilename As String = If(bIsLog, "RInstatLog.R", "RInstatScript.R")
             Dim i As Integer = 0
             While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
                 i += 1
-                strScriptFilename = "RInstatScript" & i & ".R"
+                strScriptFilename = If(bIsLog, "RInstatLog", "RInstatScript") & i & ".R"
             End While
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
-                              frmMain.clsRLink.GetRSetupScript() & clsScriptActive.Text)
+                              If(bIsLog, clsScriptLog.Text,
+                                 frmMain.clsRLink.GetRSetupScript() & vbCrLf & clsScriptActive.Text))
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
             TabControl.SelectedTab.Text = strScriptFilename
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
-                   vbExclamation, "Open Script")
+                   vbExclamation, "Open Script as File")
         End Try
     End Sub
 
