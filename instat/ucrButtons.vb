@@ -102,6 +102,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub Scripts(bRun As Boolean)
+        If Not frmMain.ucrScriptWindow.IsScriptTabSelected() Then
+            Exit Sub
+        End If
+
         Dim strComment, strComments As String
         Dim lstBeforeScripts As List(Of String)
         Dim lstAfterScripts As List(Of String)
