@@ -145,6 +145,6 @@ install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org
 
 #install development packages not on CRAN
 devtools::install_github("ianmoran11/mmtable2")
-remotes::install_github('michael-franke/aida-package')
+devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 
