@@ -667,7 +667,6 @@ Partial Class frmMain
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
@@ -693,7 +692,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.SuspendLayout()
         Me.splMetadata.SuspendLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splLogScript.Panel1.SuspendLayout()
         Me.splLogScript.Panel2.SuspendLayout()
         Me.splLogScript.SuspendLayout()
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -998,7 +996,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeUseTable.Enabled = False
         Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
-        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeUseTable.Text = "Use Table..."
         Me.mnuDescribeUseTable.Visible = False
         '
@@ -3178,14 +3176,14 @@ Partial Class frmMain
         '
         Me.mnuLogWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuLogWindow.Name = "mnuLogWindow"
-        Me.mnuLogWindow.Size = New System.Drawing.Size(166, 22)
+        Me.mnuLogWindow.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogWindow.Text = "  Log Window..."
         '
         'mnuScriptWindow
         '
         Me.mnuScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuScriptWindow.Name = "mnuScriptWindow"
-        Me.mnuScriptWindow.Size = New System.Drawing.Size(166, 22)
+        Me.mnuScriptWindow.Size = New System.Drawing.Size(180, 22)
         Me.mnuScriptWindow.Text = "  Script Window..."
         '
         'mnuTbResetLayout
@@ -4986,7 +4984,6 @@ Partial Class frmMain
         'splLogScript.Panel1
         '
         Me.splLogScript.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.splLogScript.Panel1.Controls.Add(Me.ucrLogWindow)
         '
         'splLogScript.Panel2
         '
@@ -4996,17 +4993,6 @@ Partial Class frmMain
         Me.splLogScript.SplitterDistance = 174
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.AutoSize = True
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(174, 167)
-        Me.ucrLogWindow.TabIndex = 0
         '
         'ucrScriptWindow
         '
@@ -5114,9 +5100,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat  " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat  .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5138,8 +5122,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.PerformLayout()
         CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splMetadata.ResumeLayout(False)
-        Me.splLogScript.Panel1.ResumeLayout(False)
-        Me.splLogScript.Panel1.PerformLayout()
         Me.splLogScript.Panel2.ResumeLayout(False)
         Me.splLogScript.Panel2.PerformLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5501,7 +5483,6 @@ Partial Class frmMain
     Friend WithEvents ucrColumnMeta As ucrColumnMetadata
     Friend WithEvents mnuViewResetToDefaultLayout As ToolStripMenuItem
     Friend WithEvents ucrDataFrameMeta As ucrDataFrameMetadata
-    Friend WithEvents ucrLogWindow As ucrLog
     Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuClimaticFileImportfromIRIDataLibrary As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableRatingData As ToolStripMenuItem
