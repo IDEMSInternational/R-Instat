@@ -130,11 +130,9 @@ Public Class dlgRandomSplit
 
         clsTraining.SetPackageName("rsample")
         clsTraining.SetRCommand("training")
-        clsTraining.SetAssignTo("training_data", strTempDataframe:=ucrSelectorRandomSplit.strCurrentDataFrame, strDataFrameNames:="last_training")
 
         clsTesting.SetPackageName("rsample")
         clsTesting.SetRCommand("testing")
-        clsTesting.SetAssignTo("testing_data", strTempDataframe:=ucrSelectorRandomSplit.strCurrentDataFrame, strDataFrameNames:="last_testing")
         ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
         ucrBase.clsRsyntax.AddToAfterCodes(clsTesting, 0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsTraining, 1)
@@ -162,7 +160,7 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSaveTrainingData.IsComplete Or ucrSaveTestingData.IsComplete Then
+        If (rdoSample.Checked AndAlso ucrChkStratifyingFactor.Checked AndAlso Not ucrReceiverRanSplit.IsEmpty) OrElse (rdoTimeSeries.Checked AndAlso ucrChkLag.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -205,13 +203,12 @@ Public Class dlgRandomSplit
         End If
     End Sub
 
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged, ucrNudPool.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged, ucrSaveTrainingData.ControlContentsChanged, ucrSaveTestingData.ControlContentsChanged, ucrChkTest.ControlContentsChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStratifyingFactor.ControlContentsChanged, ucrReceiverRanSplit.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrSaveTrainingData.ControlContentsChanged, ucrSaveTestingData.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrPnlRandomSplit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRandomSplit.ControlValueChanged, ucrChkLag.ControlValueChanged, ucrNudBreaks.ControlValueChanged, ucrNudFraction.ControlValueChanged, ucrNudPool.ControlValueChanged
         SetBaseFunction()
-        NewDefaultName()
     End Sub
 
 End Class
