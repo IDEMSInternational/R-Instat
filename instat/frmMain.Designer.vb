@@ -666,8 +666,6 @@ Partial Class frmMain
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
@@ -676,6 +674,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrScriptWindow = New instat.ucrScript()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -691,9 +690,6 @@ Partial Class frmMain
         Me.splMetadata.Panel1.SuspendLayout()
         Me.splMetadata.Panel2.SuspendLayout()
         Me.splMetadata.SuspendLayout()
-        CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splLogScript.Panel2.SuspendLayout()
-        Me.splLogScript.SuspendLayout()
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splDataOutput.Panel1.SuspendLayout()
         Me.splDataOutput.Panel2.SuspendLayout()
@@ -3176,14 +3172,14 @@ Partial Class frmMain
         '
         Me.mnuLogWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuLogWindow.Name = "mnuLogWindow"
-        Me.mnuLogWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuLogWindow.Size = New System.Drawing.Size(166, 22)
         Me.mnuLogWindow.Text = "  Log Window..."
         '
         'mnuScriptWindow
         '
         Me.mnuScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuScriptWindow.Name = "mnuScriptWindow"
-        Me.mnuScriptWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuScriptWindow.Size = New System.Drawing.Size(166, 22)
         Me.mnuScriptWindow.Text = "  Script Window..."
         '
         'mnuTbResetLayout
@@ -4925,7 +4921,7 @@ Partial Class frmMain
         'splExtraWindows.Panel2
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
+        Me.splExtraWindows.Panel2.Controls.Add(Me.ucrScriptWindow)
         Me.splExtraWindows.Size = New System.Drawing.Size(834, 167)
         Me.splExtraWindows.SplitterDistance = 254
         Me.splExtraWindows.SplitterWidth = 5
@@ -4973,39 +4969,6 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
         Me.ucrDataFrameMeta.Size = New System.Drawing.Size(178, 167)
         Me.ucrDataFrameMeta.TabIndex = 0
-        '
-        'splLogScript
-        '
-        Me.splLogScript.BackColor = System.Drawing.Color.LightGray
-        Me.splLogScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splLogScript.Location = New System.Drawing.Point(0, 0)
-        Me.splLogScript.Name = "splLogScript"
-        '
-        'splLogScript.Panel1
-        '
-        Me.splLogScript.Panel1.BackColor = System.Drawing.SystemColors.Control
-        '
-        'splLogScript.Panel2
-        '
-        Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splLogScript.Size = New System.Drawing.Size(575, 167)
-        Me.splLogScript.SplitterDistance = 174
-        Me.splLogScript.SplitterWidth = 5
-        Me.splLogScript.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.AutoSize = True
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(396, 167)
-        Me.ucrScriptWindow.strActiveTabText = ""
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -5087,6 +5050,19 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.AutoSize = True
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(575, 167)
+        Me.ucrScriptWindow.strActiveTabText = ""
+        Me.ucrScriptWindow.TabIndex = 2
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5114,6 +5090,7 @@ Partial Class frmMain
         Me.splOverall.ResumeLayout(False)
         Me.splExtraWindows.Panel1.ResumeLayout(False)
         Me.splExtraWindows.Panel2.ResumeLayout(False)
+        Me.splExtraWindows.Panel2.PerformLayout()
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
         Me.splMetadata.Panel1.ResumeLayout(False)
@@ -5122,10 +5099,6 @@ Partial Class frmMain
         Me.splMetadata.Panel2.PerformLayout()
         CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splMetadata.ResumeLayout(False)
-        Me.splLogScript.Panel2.ResumeLayout(False)
-        Me.splLogScript.Panel2.PerformLayout()
-        CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splLogScript.ResumeLayout(False)
         Me.splDataOutput.Panel1.ResumeLayout(False)
         Me.splDataOutput.Panel1.PerformLayout()
         Me.splDataOutput.Panel2.ResumeLayout(False)
@@ -5479,11 +5452,9 @@ Partial Class frmMain
     Friend WithEvents ucrOutput As ucrOutputWindow
     Friend WithEvents splExtraWindows As SplitContainer
     Friend WithEvents splMetadata As SplitContainer
-    Friend WithEvents splLogScript As SplitContainer
     Friend WithEvents ucrColumnMeta As ucrColumnMetadata
     Friend WithEvents mnuViewResetToDefaultLayout As ToolStripMenuItem
     Friend WithEvents ucrDataFrameMeta As ucrDataFrameMetadata
-    Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuClimaticFileImportfromIRIDataLibrary As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableRatingData As ToolStripMenuItem
     Friend WithEvents mnuDescribeViewGraph As ToolStripMenuItem
@@ -5779,4 +5750,5 @@ Partial Class frmMain
     Friend WithEvents mnuHelpGlossary As ToolStripMenuItem
     Friend WithEvents mnuHelpPackagesDocumentation As ToolStripMenuItem
     Friend WithEvents mnuDescribeUseTable As ToolStripMenuItem
+    Friend WithEvents ucrScriptWindow As ucrScript
 End Class

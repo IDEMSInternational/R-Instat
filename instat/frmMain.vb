@@ -319,7 +319,6 @@ Public Class frmMain
         splOverall.SplitterDistance = splOverall.Height / 4
         splDataOutput.SplitterDistance = splDataOutput.Width / 2
         splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
-        splLogScript.SplitterDistance = splLogScript.Width / 2
         splMetadata.SplitterDistance = splMetadata.Width / 2
 
         mnuViewDataView.Checked = True
@@ -490,8 +489,6 @@ Public Class frmMain
                 End If
                 If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                     splExtraWindows.Panel2Collapsed = False
-                    splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
-                    splLogScript.Panel2Collapsed = Not mnuViewScriptWindow.Checked
                 Else
                     splExtraWindows.Panel2Collapsed = True
                 End If
@@ -1384,7 +1381,7 @@ Public Class frmMain
         ctrActive = ucrOutput
     End Sub
 
-    Private Sub ucrScriptWindow_Enter(sender As Object, e As EventArgs) Handles ucrScriptWindow.Enter
+    Private Sub ucrScriptWindow_Enter(sender As Object, e As EventArgs)
         ctrActive = ucrScriptWindow
     End Sub
 
