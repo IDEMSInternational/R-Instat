@@ -123,7 +123,7 @@ Partial Class dlgDeleteDataFrames
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteDataFrames"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "s"
+        Me.Text = "Delete Data Frames"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
