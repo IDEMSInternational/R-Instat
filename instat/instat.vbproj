@@ -215,6 +215,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -225,6 +226,12 @@
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
@@ -3031,6 +3038,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFindInVariableOrFilter.resx">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>

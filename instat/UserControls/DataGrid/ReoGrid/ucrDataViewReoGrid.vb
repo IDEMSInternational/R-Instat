@@ -64,6 +64,7 @@ Public Class ucrDataViewReoGrid
 
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             textColour = Color.Red
+            grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top when filter is applied. see issue #8116
         Else
             textColour = Color.DarkBlue
         End If
@@ -92,6 +93,10 @@ Public Class ucrDataViewReoGrid
         'and use it as the row header width.
         'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
+    End Sub
+
+    Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
+        grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
 
     Private Function GetInnerBracketedString(strData As String) As String
@@ -168,6 +173,7 @@ Public Class ucrDataViewReoGrid
                            GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(e.Cell.Column).strName,
                            GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+        RefreshSingleCell(e.Cell.Column, e.Cell.Row)
     End Sub
 
 
