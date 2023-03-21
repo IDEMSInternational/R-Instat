@@ -160,7 +160,8 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-        If (rdoSample.Checked AndAlso ucrChkStratifyingFactor.Checked AndAlso Not ucrReceiverRanSplit.IsEmpty) OrElse (rdoTimeSeries.Checked AndAlso ucrChkLag.Checked) Then
+        If (rdoSample.Checked AndAlso ucrChkStratifyingFactor.Checked AndAlso Not ucrReceiverRanSplit.IsEmpty AndAlso Not ucrNudFraction.IsEmpty AndAlso Not ucrNudBreaks.IsEmpty AndAlso Not ucrNudPool.IsEmpty) OrElse
+            (rdoTimeSeries.Checked AndAlso ucrChkLag.Checked AndAlso Not ucrNudFraction.IsEmpty AndAlso Not ucrNudLag.IsEmpty) Then
             If ucrSaveTrainingData.IsComplete AndAlso ucrSaveTestingData.IsComplete Then
                 ucrBase.OKEnabled(True)
             Else
@@ -207,7 +208,9 @@ Public Class dlgRandomSplit
         End If
     End Sub
 
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStratifyingFactor.ControlContentsChanged, ucrReceiverRanSplit.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged, ucrChkLag.ControlContentsChanged, ucrSaveTrainingData.ControlContentsChanged, ucrSaveTestingData.ControlContentsChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkStratifyingFactor.ControlContentsChanged, ucrReceiverRanSplit.ControlContentsChanged, ucrPnlRandomSplit.ControlContentsChanged,
+        ucrChkLag.ControlContentsChanged, ucrSaveTrainingData.ControlContentsChanged, ucrSaveTestingData.ControlContentsChanged, ucrNudBreaks.ControlContentsChanged, ucrNudFraction.ControlContentsChanged, ucrNudLag.ControlContentsChanged,
+        ucrNudPool.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
