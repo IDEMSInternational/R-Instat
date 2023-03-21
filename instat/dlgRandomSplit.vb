@@ -161,7 +161,11 @@ Public Class dlgRandomSplit
 
     Private Sub TestOkEnabled()
         If (rdoSample.Checked AndAlso ucrChkStratifyingFactor.Checked AndAlso Not ucrReceiverRanSplit.IsEmpty) OrElse (rdoTimeSeries.Checked AndAlso ucrChkLag.Checked) Then
-            ucrBase.OKEnabled(True)
+            If ucrSaveTrainingData.IsComplete AndAlso ucrSaveTestingData.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
