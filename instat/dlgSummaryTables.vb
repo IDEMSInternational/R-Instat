@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -310,7 +310,7 @@ Public Class dlgSummaryTables
         clsMutableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsSummaryOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
-        ' clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
+        clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
 
         clsFrequencyOperator.SetOperation("+")
         clsFrequencyOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
@@ -319,7 +319,7 @@ Public Class dlgSummaryTables
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        'clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
+        clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
         clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
@@ -510,7 +510,6 @@ Public Class dlgSummaryTables
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
         AddcolumnParameters()
-        ChangeOneTwoVariables()
     End Sub
 
     Private Sub AddcolumnParameters()
@@ -615,20 +614,6 @@ Public Class dlgSummaryTables
             ucrReceiverPercentages.SetMeAsReceiver()
         Else
             ucrReceiverFactors.SetMeAsReceiver()
-        End If
-    End Sub
-
-    Private Sub ChangeOneTwoVariables()
-        If ucrReceiverFactors.IsEmpty Then
-            clsSummaryDefaultFunction.AddParameter("treat_columns_as_factors", "TRUE", iPosition:=8)
-            clsSummaryOperator.AddParameter("variableLeftTop", clsRFunctionParameter:=clsVariableHeaderLeftTopFunction, iPosition:=1)
-            clsSummaryOperator.AddParameter("summaryTopLeft", clsRFunctionParameter:=clsSummariesHeaderTopLeftFunction, iPosition:=2)
-            clsSummaryOperator.RemoveParameterByName("summariesVariableTopLeft")
-        Else
-            clsSummaryDefaultFunction.AddParameter("treat_columns_as_factors", "FALSE", iPosition:=8)
-            clsSummaryOperator.RemoveParameterByName("variableLeftTop")
-            clsSummaryOperator.RemoveParameterByName("summaryTopLeft")
-            clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
         End If
     End Sub
 End Class
