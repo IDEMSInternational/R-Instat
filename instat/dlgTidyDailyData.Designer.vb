@@ -75,7 +75,7 @@ Partial Class dlgTidyDailyData
         Me.rdoDay.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDay.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDay.Location = New System.Drawing.Point(262, 17)
+        Me.rdoDay.Location = New System.Drawing.Point(8, 17)
         Me.rdoDay.Name = "rdoDay"
         Me.rdoDay.Size = New System.Drawing.Size(145, 27)
         Me.rdoDay.TabIndex = 3
@@ -92,7 +92,7 @@ Partial Class dlgTidyDailyData
         Me.rdoMonth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMonth.Location = New System.Drawing.Point(141, 17)
+        Me.rdoMonth.Location = New System.Drawing.Point(145, 17)
         Me.rdoMonth.Name = "rdoMonth"
         Me.rdoMonth.Size = New System.Drawing.Size(123, 27)
         Me.rdoMonth.TabIndex = 2
@@ -109,7 +109,7 @@ Partial Class dlgTidyDailyData
         Me.rdoYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoYear.Location = New System.Drawing.Point(7, 17)
+        Me.rdoYear.Location = New System.Drawing.Point(262, 17)
         Me.rdoYear.Name = "rdoYear"
         Me.rdoYear.Size = New System.Drawing.Size(136, 27)
         Me.rdoYear.TabIndex = 1
