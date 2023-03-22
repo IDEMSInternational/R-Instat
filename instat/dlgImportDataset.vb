@@ -708,11 +708,11 @@ Public Class dlgImportDataset
                     frmMain.mnuViewScriptWindow.Checked = True
                     frmMain.UpdateLayout()
                 End If
-                If frmMain.ucrScriptWindow.txtScript.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
+                If frmMain.ucrScriptWindow.strText.Length = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
                               Environment.NewLine & "Do you still want to load?",
                               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFilePathSystem)
+                        frmMain.ucrScriptWindow.strText = File.ReadAllText(strFilePathSystem)
                     Catch
                         MessageBox.Show("Could not load the script from file." &
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
