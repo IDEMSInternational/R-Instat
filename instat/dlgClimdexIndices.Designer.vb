@@ -47,10 +47,10 @@ Partial Class dlgClimdexIndices
         Me.lblYear = New System.Windows.Forms.Label()
         Me.rdoAnnual = New System.Windows.Forms.RadioButton()
         Me.rdoMonthly = New System.Windows.Forms.RadioButton()
-        Me.lblIndicesSelectedOutOf = New System.Windows.Forms.Label()
         Me.lblSelectedIndices = New System.Windows.Forms.Label()
         Me.lblTotalIndices = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblOutof = New System.Windows.Forms.Label()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrPnlAnnualMonthly = New instat.UcrPanel()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -175,23 +175,12 @@ Partial Class dlgClimdexIndices
         Me.rdoMonthly.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMonthly.UseVisualStyleBackColor = True
         '
-        'lblIndicesSelectedOutOf
-        '
-        Me.lblIndicesSelectedOutOf.AutoSize = True
-        Me.lblIndicesSelectedOutOf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIndicesSelectedOutOf.Location = New System.Drawing.Point(181, 359)
-        Me.lblIndicesSelectedOutOf.Name = "lblIndicesSelectedOutOf"
-        Me.lblIndicesSelectedOutOf.Size = New System.Drawing.Size(116, 13)
-        Me.lblIndicesSelectedOutOf.TabIndex = 17
-        Me.lblIndicesSelectedOutOf.Tag = "Month:"
-        Me.lblIndicesSelectedOutOf.Text = "indices  selected out of"
-        '
         'lblSelectedIndices
         '
         Me.lblSelectedIndices.AutoSize = True
         Me.lblSelectedIndices.ForeColor = System.Drawing.Color.Green
         Me.lblSelectedIndices.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedIndices.Location = New System.Drawing.Point(170, 360)
+        Me.lblSelectedIndices.Location = New System.Drawing.Point(190, 360)
         Me.lblSelectedIndices.Name = "lblSelectedIndices"
         Me.lblSelectedIndices.Size = New System.Drawing.Size(0, 13)
         Me.lblSelectedIndices.TabIndex = 16
@@ -218,6 +207,15 @@ Partial Class dlgClimdexIndices
         Me.lblDate.TabIndex = 21
         Me.lblDate.Tag = ""
         Me.lblDate.Text = "Date:"
+        '
+        'lblOutof
+        '
+        Me.lblOutof.AutoSize = True
+        Me.lblOutof.Location = New System.Drawing.Point(145, 360)
+        Me.lblOutof.Name = "lblOutof"
+        Me.lblOutof.Size = New System.Drawing.Size(150, 13)
+        Me.lblOutof.TabIndex = 23
+        Me.lblOutof.Text = "Indices             selected out of"
         '
         'ucrReceiverDate
         '
@@ -354,11 +352,11 @@ Partial Class dlgClimdexIndices
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 440)
+        Me.Controls.Add(Me.lblSelectedIndices)
+        Me.Controls.Add(Me.lblOutof)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblTotalIndices)
-        Me.Controls.Add(Me.lblSelectedIndices)
-        Me.Controls.Add(Me.lblIndicesSelectedOutOf)
         Me.Controls.Add(Me.rdoAnnual)
         Me.Controls.Add(Me.rdoMonthly)
         Me.Controls.Add(Me.ucrPnlAnnualMonthly)
@@ -412,7 +410,7 @@ Partial Class dlgClimdexIndices
     Friend WithEvents ucrPnlAnnualMonthly As UcrPanel
     Friend WithEvents lblTotalIndices As Label
     Friend WithEvents lblSelectedIndices As Label
-    Friend WithEvents lblIndicesSelectedOutOf As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents lblOutof As Label
 End Class
