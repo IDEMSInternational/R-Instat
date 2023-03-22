@@ -179,19 +179,19 @@ Partial Class dlgClimdexIndices
         '
         Me.lblIndicesSelectedOutOf.AutoSize = True
         Me.lblIndicesSelectedOutOf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIndicesSelectedOutOf.Location = New System.Drawing.Point(100, 361)
+        Me.lblIndicesSelectedOutOf.Location = New System.Drawing.Point(181, 359)
         Me.lblIndicesSelectedOutOf.Name = "lblIndicesSelectedOutOf"
-        Me.lblIndicesSelectedOutOf.Size = New System.Drawing.Size(140, 13)
+        Me.lblIndicesSelectedOutOf.Size = New System.Drawing.Size(116, 13)
         Me.lblIndicesSelectedOutOf.TabIndex = 17
         Me.lblIndicesSelectedOutOf.Tag = "Month:"
-        Me.lblIndicesSelectedOutOf.Text = "indices          selected out of"
+        Me.lblIndicesSelectedOutOf.Text = "indices  selected out of"
         '
         'lblSelectedIndices
         '
         Me.lblSelectedIndices.AutoSize = True
         Me.lblSelectedIndices.ForeColor = System.Drawing.Color.Green
         Me.lblSelectedIndices.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedIndices.Location = New System.Drawing.Point(143, 361)
+        Me.lblSelectedIndices.Location = New System.Drawing.Point(170, 360)
         Me.lblSelectedIndices.Name = "lblSelectedIndices"
         Me.lblSelectedIndices.Size = New System.Drawing.Size(0, 13)
         Me.lblSelectedIndices.TabIndex = 16
@@ -202,7 +202,7 @@ Partial Class dlgClimdexIndices
         Me.lblTotalIndices.AutoSize = True
         Me.lblTotalIndices.ForeColor = System.Drawing.Color.Green
         Me.lblTotalIndices.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTotalIndices.Location = New System.Drawing.Point(272, 361)
+        Me.lblTotalIndices.Location = New System.Drawing.Point(297, 360)
         Me.lblTotalIndices.Name = "lblTotalIndices"
         Me.lblTotalIndices.Size = New System.Drawing.Size(0, 13)
         Me.lblTotalIndices.TabIndex = 18
@@ -345,7 +345,7 @@ Partial Class dlgClimdexIndices
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 383)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
         '
         'dlgClimdexIndices
