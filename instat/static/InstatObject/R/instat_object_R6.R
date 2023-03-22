@@ -1989,7 +1989,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
 })
 
-#todo. deprecated. delete this after after deleting the wizard climsoft import dialog
+#todo. deprecated. delete this after after deleting the import from climsoft wizard dialog
 DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_observation_flags = FALSE, unstack_data = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con <- self$get_database_connection()
