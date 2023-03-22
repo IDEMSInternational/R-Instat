@@ -359,7 +359,7 @@ Partial Class frmMain
         Me.tlSeparatorFile3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFIleExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditFind = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditFindRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditFindNext = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditReplace = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCut = New System.Windows.Forms.ToolStripMenuItem()
@@ -2844,19 +2844,19 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFindRows, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(58, 29)
         Me.mnuEdit.Tag = "Edit"
         Me.mnuEdit.Text = "Edit"
         '
-        'mnuEditFind
+        'mnuEditFindRows
         '
-        Me.mnuEditFind.Name = "mnuEditFind"
-        Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.mnuEditFind.Size = New System.Drawing.Size(366, 34)
-        Me.mnuEditFind.Tag = "Find"
-        Me.mnuEditFind.Text = "Find"
+        Me.mnuEditFindRows.Name = "mnuEditFindRows"
+        Me.mnuEditFindRows.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
+        Me.mnuEditFindRows.Size = New System.Drawing.Size(366, 34)
+        Me.mnuEditFindRows.Tag = "Find_Rows"
+        Me.mnuEditFindRows.Text = "Find Rows"
         '
         'mnuEditFindNext
         '
@@ -3234,7 +3234,6 @@ Partial Class frmMain
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
-        Me.mnuBar.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.ShowItemToolTips = True
         Me.mnuBar.Size = New System.Drawing.Size(1251, 33)
@@ -4896,7 +4895,7 @@ Partial Class frmMain
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splOverall.Location = New System.Drawing.Point(0, 72)
-        Me.splOverall.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splOverall.Margin = New System.Windows.Forms.Padding(4)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -4919,7 +4918,7 @@ Partial Class frmMain
         Me.splExtraWindows.BackColor = System.Drawing.Color.LightGray
         Me.splExtraWindows.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splExtraWindows.Location = New System.Drawing.Point(0, 0)
-        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(4)
         Me.splExtraWindows.Name = "splExtraWindows"
         '
         'splExtraWindows.Panel1
@@ -4941,7 +4940,7 @@ Partial Class frmMain
         Me.splMetadata.BackColor = System.Drawing.Color.LightGray
         Me.splMetadata.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splMetadata.Location = New System.Drawing.Point(0, 0)
-        Me.splMetadata.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splMetadata.Margin = New System.Windows.Forms.Padding(4)
         Me.splMetadata.Name = "splMetadata"
         '
         'splMetadata.Panel1
@@ -4985,7 +4984,7 @@ Partial Class frmMain
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
         Me.splLogScript.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splLogScript.Location = New System.Drawing.Point(0, 0)
-        Me.splLogScript.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splLogScript.Margin = New System.Windows.Forms.Padding(4)
         Me.splLogScript.Name = "splLogScript"
         '
         'splLogScript.Panel1
@@ -5022,7 +5021,6 @@ Partial Class frmMain
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
         Me.ucrScriptWindow.Size = New System.Drawing.Size(594, 259)
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(396, 167)
         Me.ucrScriptWindow.strText = ""
         Me.ucrScriptWindow.TabIndex = 0
         Me.ucrScriptWindow.Tag = "Script_Window"
@@ -5032,7 +5030,7 @@ Partial Class frmMain
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
         Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
-        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.splDataOutput.Name = "splDataOutput"
         '
         'splDataOutput.Panel1
@@ -5120,7 +5118,7 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmMain"
         Me.Text = "R-Instat  .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -5195,7 +5193,7 @@ Partial Class frmMain
     Friend WithEvents mnuEditCopySpecial As ToolStripMenuItem
     Friend WithEvents mnuEditPaste As ToolStripMenuItem
     Friend WithEvents mnuEditSelectAll As ToolStripMenuItem
-    Friend WithEvents mnuEditFind As ToolStripMenuItem
+    Friend WithEvents mnuEditFindRows As ToolStripMenuItem
     Friend WithEvents mnuEditReplace As ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents stsStrip As StatusStrip

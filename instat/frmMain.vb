@@ -845,7 +845,7 @@ Public Class frmMain
         dlgJitter.ShowDialog()
     End Sub
 
-    Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
+    Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFindRows.Click
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 

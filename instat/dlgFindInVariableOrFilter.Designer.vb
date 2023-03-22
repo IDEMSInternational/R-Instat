@@ -36,7 +36,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrChkIgnoreCase = New instat.ucrCheck()
         Me.ucrInputPattern = New instat.ucrInputComboBox()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
@@ -199,17 +198,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrPnlOptions.Size = New System.Drawing.Size(417, 52)
         Me.ucrPnlOptions.TabIndex = 0
         '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Enabled = False
-        Me.ucrBase.Location = New System.Drawing.Point(22, 434)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
-        Me.ucrBase.TabIndex = 10
-        '
         'ucrSelectorFind
         '
         Me.ucrSelectorFind.AutoSize = True
@@ -273,7 +261,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(640, 519)
+        Me.ClientSize = New System.Drawing.Size(640, 440)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.ucrChkIgnoreCase)
@@ -284,7 +272,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.Controls.Add(Me.rdoVariable)
         Me.Controls.Add(Me.rdoInFilter)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorFind)
         Me.Controls.Add(Me.ucrReceiverVariable)
         Me.Controls.Add(Me.lblPattern)
@@ -306,7 +293,6 @@ Partial Class dlgFindInVariableOrFilter
     Friend WithEvents lblPattern As Label
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents ucrSelectorFind As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents rdoVariable As RadioButton
     Friend WithEvents rdoInFilter As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel

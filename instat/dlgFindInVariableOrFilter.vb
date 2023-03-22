@@ -176,7 +176,7 @@ Public Class dlgFindInVariableOrFilter
         bFindNext = False
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) 
         SetDefaults()
         SetRcodeForControls(True)
         TestOkEnabled()
