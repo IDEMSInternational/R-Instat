@@ -60,8 +60,6 @@ Public Class dlgRandomSplit
 
         ucrNudLag.SetParameter(New RParameter("lag", 3))
         ucrNudLag.SetMinMax(Integer.MinValue, Integer.MaxValue)
-        ucrNudLag.Increment = 0.5
-        ucrNudLag.DecimalPlaces = 2
 
         ucrChkLag.SetText("Lag")
         ucrChkLag.SetParameter(ucrNudLag.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
