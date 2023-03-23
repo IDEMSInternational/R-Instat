@@ -152,6 +152,8 @@ pkgs <-
     # Utilities for verifying discrete, continuous and probabilistic forecasts, and forecasts expressed as parametric distributions are included.
     "verification",
     "prediction"
+    # Tutorial Analysis of Some Agricultural Experiments. 
+    "agriTutorial"
 
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
