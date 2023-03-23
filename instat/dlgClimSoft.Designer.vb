@@ -48,6 +48,7 @@ Partial Class dlgClimSoft
         Me.ucrChkDataDate = New instat.ucrCheck()
         Me.ucrDtpEndDataDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartDataDate = New instat.ucrDateTimePicker()
+        Me.ucrChkImportFlagsMetadata = New instat.ucrCheck()
         Me.lblConnection = New System.Windows.Forms.Label()
         Me.lblToDataDate = New System.Windows.Forms.Label()
         Me.lblSelectTable = New System.Windows.Forms.Label()
@@ -66,7 +67,6 @@ Partial Class dlgClimSoft
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkImportFlagsMetadata = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'btnConnection
@@ -161,6 +161,17 @@ Partial Class dlgClimSoft
         Me.ucrDtpStartDataDate.TabIndex = 22
         Me.ttClimsoft.SetToolTip(Me.ucrDtpStartDataDate, "Start Date (From)")
         '
+        'ucrChkImportFlagsMetadata
+        '
+        Me.ucrChkImportFlagsMetadata.AutoSize = True
+        Me.ucrChkImportFlagsMetadata.Checked = True
+        Me.ucrChkImportFlagsMetadata.Location = New System.Drawing.Point(10, 135)
+        Me.ucrChkImportFlagsMetadata.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkImportFlagsMetadata.Name = "ucrChkImportFlagsMetadata"
+        Me.ucrChkImportFlagsMetadata.Size = New System.Drawing.Size(213, 23)
+        Me.ucrChkImportFlagsMetadata.TabIndex = 37
+        Me.ttClimsoft.SetToolTip(Me.ucrChkImportFlagsMetadata, "Unstack elements")
+        '
         'lblConnection
         '
         Me.lblConnection.AutoSize = True
@@ -186,7 +197,7 @@ Partial Class dlgClimSoft
         '
         Me.lblSelectTable.AutoSize = True
         Me.lblSelectTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectTable.Location = New System.Drawing.Point(5, 241)
+        Me.lblSelectTable.Location = New System.Drawing.Point(5, 238)
         Me.lblSelectTable.Name = "lblSelectTable"
         Me.lblSelectTable.Size = New System.Drawing.Size(96, 13)
         Me.lblSelectTable.TabIndex = 24
@@ -197,7 +208,7 @@ Partial Class dlgClimSoft
         '
         Me.lblSelectQCStatus.AutoSize = True
         Me.lblSelectQCStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectQCStatus.Location = New System.Drawing.Point(5, 268)
+        Me.lblSelectQCStatus.Location = New System.Drawing.Point(5, 265)
         Me.lblSelectQCStatus.Name = "lblSelectQCStatus"
         Me.lblSelectQCStatus.Size = New System.Drawing.Size(117, 13)
         Me.lblSelectQCStatus.TabIndex = 26
@@ -285,7 +296,7 @@ Partial Class dlgClimSoft
         Me.ucrCboQCStatus.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboQCStatus.GetSetSelectedIndex = -1
         Me.ucrCboQCStatus.IsReadOnly = False
-        Me.ucrCboQCStatus.Location = New System.Drawing.Point(154, 262)
+        Me.ucrCboQCStatus.Location = New System.Drawing.Point(154, 259)
         Me.ucrCboQCStatus.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrCboQCStatus.Name = "ucrCboQCStatus"
         Me.ucrCboQCStatus.Size = New System.Drawing.Size(104, 21)
@@ -297,7 +308,7 @@ Partial Class dlgClimSoft
         Me.ucrCboTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboTable.GetSetSelectedIndex = -1
         Me.ucrCboTable.IsReadOnly = False
-        Me.ucrCboTable.Location = New System.Drawing.Point(154, 236)
+        Me.ucrCboTable.Location = New System.Drawing.Point(154, 233)
         Me.ucrCboTable.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrCboTable.Name = "ucrCboTable"
         Me.ucrCboTable.Size = New System.Drawing.Size(104, 21)
@@ -372,17 +383,6 @@ Partial Class dlgClimSoft
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
-        '
-        'ucrChkImportFlagsMetadata
-        '
-        Me.ucrChkImportFlagsMetadata.AutoSize = True
-        Me.ucrChkImportFlagsMetadata.Checked = True
-        Me.ucrChkImportFlagsMetadata.Location = New System.Drawing.Point(10, 135)
-        Me.ucrChkImportFlagsMetadata.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChkImportFlagsMetadata.Name = "ucrChkImportFlagsMetadata"
-        Me.ucrChkImportFlagsMetadata.Size = New System.Drawing.Size(213, 23)
-        Me.ucrChkImportFlagsMetadata.TabIndex = 37
-        Me.ttClimsoft.SetToolTip(Me.ucrChkImportFlagsMetadata, "Unstack elements")
         '
         'dlgClimSoft
         '
