@@ -14,9 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
-Imports MS.Internal
 Imports RDotNet
 
 Public Class dlgClimSoft
@@ -59,7 +58,6 @@ Public Class dlgClimSoft
 
         'stations
         '---------------------------------------
-        'stations combobox
         dctStationCols.Add("Station IDs", Chr(34) & "stationId" & Chr(34))
         dctStationCols.Add("Station Names", Chr(34) & "stationName" & Chr(34))
         dctStationCols.Add("Station Qualifiers", Chr(34) & "qualifier" & Chr(34))
@@ -69,7 +67,6 @@ Public Class dlgClimSoft
         ucrCboStations.SetDropDownStyleAsNonEditable()
         ucrCboElements.SetLinkedDisplayControl(lblSelectElements)
 
-        'stations receiver
         ucrReceiverMultipleStations.SetParameter(New RParameter("stations", 2))
         ucrReceiverMultipleStations.SetParameterIsString()
         ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
@@ -78,7 +75,7 @@ Public Class dlgClimSoft
         ucrReceiverMultipleStations.SetLinkedDisplayControl(lblSelectStations)
         '---------------------------------------
 
-        'elements combobox
+        'elements
         '---------------------------------------
         dctElementsCols.Add("Element IDs", Chr(34) & "elementId" & Chr(34))
         dctElementsCols.Add("Element Names", Chr(34) & "elementName" & Chr(34))
@@ -90,7 +87,6 @@ Public Class dlgClimSoft
         ucrCboElements.SetDropDownStyleAsNonEditable()
         ucrCboElements.SetLinkedDisplayControl(lblSelectElements)
 
-        'elements receiver
         ucrReceiverMultipleElements.SetParameter(New RParameter("elements", 4))
         ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
@@ -99,7 +95,7 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblSelectElements)
         '---------------------------------------
 
-        'QC status
+        'qc status
         '---------------------------------------
         dctQCStatuses.Add("All", "-1")
         dctQCStatuses.Add("Zero", "0")
@@ -113,7 +109,7 @@ Public Class dlgClimSoft
         ucrCboQCStatus.SetLinkedDisplayControl(lblSelectQCStatus)
         '---------------------------------------
 
-        'Data date controls
+        'date range
         '---------------------------------------
         ucrChkDataDate.SetText("Select Data Date")
 
@@ -151,8 +147,7 @@ Public Class dlgClimSoft
         ucrPnlOptions.AddFunctionNamesCondition(rdoMetadata, frmMain.clsRLink.strInstatDataObject & "$import_climsoft_metadata")
 
 
-        ucrPnlOptions.AddToLinkedControls({ucrCboTable, ucrCboQCStatus, ucrSelectorForClimSoft, ucrReceiverMultipleStations, ucrReceiverMultipleElements,
-                                          ucrCboStations, ucrCboElements, ucrChkDataDate},
+        ucrPnlOptions.AddToLinkedControls({ucrCboTable, ucrCboQCStatus, ucrSelectorForClimSoft, ucrReceiverMultipleStations, ucrReceiverMultipleElements, ucrCboStations, ucrCboElements, ucrChkDataDate},
                                           {rdoData}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkImportStationsMetadata, ucrChkImportElementsMetadata, ucrChkImportFlagsMetadata},
                                         {rdoMetadata}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
@@ -165,24 +160,25 @@ Public Class dlgClimSoft
         clsRImportClimsoftData = New RFunction
         clsRImportClimsoftMetaData = New RFunction
 
+        'data command
+        '---------------------------------------
         clsRImportClimsoftData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_climsoft_data")
         clsRImportClimsoftData.AddParameter(strParameterName:="table", strParameterValue:=Chr(34) & "observationinitial" & Chr(34), iPosition:=0)
         clsRImportClimsoftData.AddParameter(strParameterName:="station_filter_column", strParameterValue:=Chr(34) & "stationId" & Chr(34), iPosition:=1)
         clsRImportClimsoftData.AddParameter(strParameterName:="element_filter_column", strParameterValue:=Chr(34) & "elementId" & Chr(34), iPosition:=3)
+        '---------------------------------------
 
-
+        'metadata command
+        '---------------------------------------
         clsRImportClimsoftMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_climsoft_metadata")
-
+        '---------------------------------------
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportClimsoftData)
 
         ucrSelectorForClimSoft.Reset()
         ucrReceiverMultipleStations.SetMeAsReceiver()
-
         ucrChkDataDate.Checked = False
-
         rdoData.Checked = True
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -202,7 +198,7 @@ Public Class dlgClimSoft
         ucrDtpStartDataDate.SetRCode(clsRImportClimsoftData, bReset)
         ucrDtpEndDataDate.SetRCode(clsRImportClimsoftData, bReset)
 
-        'sub dialog
+        'data sub dialog
         sdgClimsoft.SetRCode(clsRImportClimsoftData, bReset)
         '---------------------------------------
 
@@ -212,7 +208,6 @@ Public Class dlgClimSoft
         ucrChkImportElementsMetadata.SetRCode(clsRImportClimsoftMetaData, bReset)
         ucrChkImportFlagsMetadata.SetRCode(clsRImportClimsoftMetaData, bReset)
         '---------------------------------------
-
     End Sub
 
     Private Sub btnConnection_Click(sender As Object, e As EventArgs) Handles btnConnection.Click
@@ -267,7 +262,6 @@ Public Class dlgClimSoft
 
     Private Sub btnCheckRecords_Click(sender As Object, e As EventArgs) Handles btnCheckRecords.Click
         Try
-
             lblRecordsNum.Text = ""
             Dim strTableName As String = dctTables.Item(ucrCboTable.GetText).Trim("""")
             Dim strStationColumn As String = dctStationCols.Item(ucrCboStations.GetText).Trim("""")
@@ -289,12 +283,12 @@ Public Class dlgClimSoft
                 strQueryCondition = strQueryCondition & " AND obsDatetime >= '" & ucrDtpStartDataDate.DateValue.ToString("yyyy-MM-dd") & "' AND obsDatetime <= '" & ucrDtpEndDataDate.DateValue.ToString("yyyy-MM-dd") & "'"
             End If
 
-            Dim clsCheckRecordsRFunction As New RFunction
-            clsCheckRecordsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_db_table_row_count")
-            clsCheckRecordsRFunction.AddParameter(strParameterName:="tableName", strParameterValue:=Chr(34) & strTableName & Chr(34))
-            clsCheckRecordsRFunction.AddParameter(strParameterName:="query_condition", strParameterValue:=Chr(34) & strQueryCondition & Chr(34))
+            Dim clsRowsCountRFunction As New RFunction
+            clsRowsCountRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_db_table_row_count")
+            clsRowsCountRFunction.AddParameter(strParameterName:="tableName", strParameterValue:=Chr(34) & strTableName & Chr(34))
+            clsRowsCountRFunction.AddParameter(strParameterName:="query_condition", strParameterValue:=Chr(34) & strQueryCondition & Chr(34))
 
-            Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsCheckRecordsRFunction.ToScript())
+            Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsRowsCountRFunction.ToScript())
             If expTemp IsNot Nothing Then
                 Dim recordsNum As Integer = expTemp.AsNumeric().FirstOrDefault()
                 lblRecordsNum.Text = recordsNum & " records found"
@@ -303,13 +297,6 @@ Public Class dlgClimSoft
         Catch ex As Exception
             MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        sdgImportFromClimSoft.Reset()
-        CheckAndUpdateConnectionStatus()
     End Sub
 
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrCboTable.ControlContentsChanged, ucrCboQCStatus.ControlContentsChanged, ucrDtpStartDataDate.ControlContentsChanged, ucrDtpEndDataDate.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkImportStationsMetadata.ControlContentsChanged, ucrChkImportElementsMetadata.ControlContentsChanged, ucrChkImportFlagsMetadata.ControlContentsChanged
@@ -322,6 +309,13 @@ Public Class dlgClimSoft
             bValid = ucrChkImportStationsMetadata.Checked OrElse ucrChkImportElementsMetadata.Checked OrElse ucrChkImportFlagsMetadata.Checked
         End If
         ucrBase.OKEnabled(bValid)
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        sdgImportFromClimSoft.Reset()
+        CheckAndUpdateConnectionStatus()
     End Sub
 
     Private Sub SetRecieverQuery(strTable As String, strSelectedColumn As String, ucrReceiverControl As ucrReceiverMultiple)
@@ -342,6 +336,7 @@ Public Class dlgClimSoft
             lblConnection.Text = "No Connection"
             lblConnection.ForeColor = Color.Red
             ucrReceiverMultipleStations.Clear()
+            ucrReceiverMultipleElements.Clear()
         End If
     End Sub
 
