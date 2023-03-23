@@ -59,7 +59,7 @@ Public Class dlgRandomSplit
         ucrChkStratifyingFactor.AddToLinkedControls({ucrNudPool, ucrReceiverRanSplit}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.1)
 
         ucrNudLag.SetParameter(New RParameter("lag", 3))
-        ucrNudLag.SetMinMax(0, 100)
+        ucrNudLag.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudLag.Increment = 0.5
         ucrNudLag.DecimalPlaces = 2
 
