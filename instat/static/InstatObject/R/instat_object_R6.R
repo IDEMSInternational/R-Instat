@@ -1843,7 +1843,8 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
                                                         element_filter_column, elements = c(),
                                                         qc_status = -1, start_date = NULL, end_date = NULL,
                                                         include_station_name = TRUE, include_element_abbreviation = TRUE, include_qc_status = TRUE,
-                                                        include_acquisition_type = TRUE, include_flag = TRUE,include_entry_form = FALSE,
+                                                        include_acquisition_type = TRUE, include_flag = TRUE, include_entry_form = TRUE, 
+                                                        include_qc_log = TRUE, include_captured_by = TRUE, include_level = TRUE,
                                                         import_selected_stations_metadata = TRUE, import_selected_elements_metadata = TRUE) {
   #connection and parameter checks
   #--------------------------------
@@ -1879,23 +1880,35 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
     sql_select <-paste0(sql_select,", obselement.abbreviation AS element_abbrv") 
   }
   
-  if(include_qc_status){
-    sql_select <-paste0(sql_select,", ", tableName,".qcStatus"," AS qc_status") 
-  }
-
   if(include_acquisition_type){
     sql_select <-paste0(sql_select,", ", tableName,".acquisitionType"," AS acquisition_type") 
   }
   
-  if(include_flag){
-    sql_select <-paste0(sql_select,", ", tableName,".flag"," AS flag") 
+  if(include_level){
+    sql_select <-paste0(sql_select,", ", tableName,".obsLevel"," AS level") 
   }
 
   if(include_entry_form){
     sql_select <-paste0(sql_select,", ", tableName,".dataForm"," AS entry_form") 
   }
   
+  if(include_captured_by){
+    sql_select <-paste0(sql_select,", ", tableName,".capturedBy"," AS captured_by") 
+  }
+  
+  if(include_qc_status){
+    sql_select <-paste0(sql_select,", ", tableName,".qcStatus"," AS qc_status") 
+  }
+  
   sql_select <-paste0(sql_select,", ", tableName,".obsDatetime AS date_time") 
+  
+  if(include_qc_log){
+    sql_select <-paste0(sql_select,", ", tableName,".qcTypeLog"," AS qc_log") 
+  }
+  
+  if(include_flag){
+    sql_select <-paste0(sql_select,", ", tableName,".flag"," AS flag") 
+  }
   
   sql_select <-paste0(sql_select,", ", tableName,".obsValue AS value") 
   
@@ -1971,6 +1984,10 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
   if(include_acquisition_type){
     self$convert_column_to_type(data_name = observations_data_name, col_names = "acquisition_type", to_type = "factor")
+  }
+  
+  if(include_level){
+    self$convert_column_to_type(data_name = observations_data_name, col_names = "level", to_type = "factor")
   }
  
   if(include_flag){

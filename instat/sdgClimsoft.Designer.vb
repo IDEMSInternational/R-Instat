@@ -22,20 +22,23 @@ Partial Class sdgClimsoft
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpTitles = New System.Windows.Forms.TabPage()
         Me.grpMetadataToImport = New System.Windows.Forms.GroupBox()
-        Me.ucrChkImportElementsMetadata = New instat.ucrCheck()
-        Me.ucrChkImportStationsMetadata = New instat.ucrCheck()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.grpColumnsToInclude = New System.Windows.Forms.GroupBox()
+        Me.tbpMoreOptions = New System.Windows.Forms.TabControl()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkIncludeQCLog = New instat.ucrCheck()
+        Me.ucrChkIncludeCapturedBy = New instat.ucrCheck()
+        Me.ucrChkIncludeQCStatus = New instat.ucrCheck()
+        Me.ucrChkIncludeLevel = New instat.ucrCheck()
         Me.ucrChkIncludeElementAbbrv = New instat.ucrCheck()
         Me.ucrChkIncludeStationName = New instat.ucrCheck()
         Me.ucrChkIncludeAquistion = New instat.ucrCheck()
         Me.ucrChkIncludeEntryForm = New instat.ucrCheck()
         Me.ucrChkIncludeFlag = New instat.ucrCheck()
-        Me.ucrChkIncludeQCStatus = New instat.ucrCheck()
-        Me.tbpMoreOptions = New System.Windows.Forms.TabControl()
+        Me.ucrChkImportElementsMetadata = New instat.ucrCheck()
+        Me.ucrChkImportStationsMetadata = New instat.ucrCheck()
         Me.tbpTitles.SuspendLayout()
         Me.grpMetadataToImport.SuspendLayout()
         Me.tbColumns.SuspendLayout()
@@ -43,21 +46,13 @@ Partial Class sdgClimsoft
         Me.tbpMoreOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(100, 251)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
-        Me.ucrBaseSubdialog.TabIndex = 3
-        '
         'tbpTitles
         '
         Me.tbpTitles.Controls.Add(Me.grpMetadataToImport)
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(409, 219)
+        Me.tbpTitles.Size = New System.Drawing.Size(409, 281)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = ""
         Me.tbpTitles.Text = "Metadata"
@@ -69,10 +64,139 @@ Partial Class sdgClimsoft
         Me.grpMetadataToImport.Controls.Add(Me.ucrChkImportStationsMetadata)
         Me.grpMetadataToImport.Location = New System.Drawing.Point(6, 6)
         Me.grpMetadataToImport.Name = "grpMetadataToImport"
-        Me.grpMetadataToImport.Size = New System.Drawing.Size(384, 120)
+        Me.grpMetadataToImport.Size = New System.Drawing.Size(384, 243)
         Me.grpMetadataToImport.TabIndex = 8
         Me.grpMetadataToImport.TabStop = False
         Me.grpMetadataToImport.Text = "Metadata to Import"
+        '
+        'tbColumns
+        '
+        Me.tbColumns.Controls.Add(Me.grpColumnsToInclude)
+        Me.tbColumns.Location = New System.Drawing.Point(4, 22)
+        Me.tbColumns.Name = "tbColumns"
+        Me.tbColumns.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbColumns.Size = New System.Drawing.Size(409, 281)
+        Me.tbColumns.TabIndex = 3
+        Me.tbColumns.Tag = ""
+        Me.tbColumns.Text = "Data"
+        Me.tbColumns.UseVisualStyleBackColor = True
+        '
+        'grpColumnsToInclude
+        '
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeQCLog)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeCapturedBy)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeQCStatus)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeLevel)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeElementAbbrv)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeStationName)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeAquistion)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeEntryForm)
+        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeFlag)
+        Me.grpColumnsToInclude.Location = New System.Drawing.Point(8, 10)
+        Me.grpColumnsToInclude.Name = "grpColumnsToInclude"
+        Me.grpColumnsToInclude.Size = New System.Drawing.Size(394, 265)
+        Me.grpColumnsToInclude.TabIndex = 32
+        Me.grpColumnsToInclude.TabStop = False
+        Me.grpColumnsToInclude.Text = "Columns to Include"
+        '
+        'tbpMoreOptions
+        '
+        Me.tbpMoreOptions.Controls.Add(Me.tbColumns)
+        Me.tbpMoreOptions.Controls.Add(Me.tbpTitles)
+        Me.tbpMoreOptions.Location = New System.Drawing.Point(-1, 4)
+        Me.tbpMoreOptions.Name = "tbpMoreOptions"
+        Me.tbpMoreOptions.SelectedIndex = 0
+        Me.tbpMoreOptions.Size = New System.Drawing.Size(417, 307)
+        Me.tbpMoreOptions.TabIndex = 2
+        '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.AutoSize = True
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(88, 315)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSubdialog.TabIndex = 3
+        '
+        'ucrChkIncludeQCLog
+        '
+        Me.ucrChkIncludeQCLog.AutoSize = True
+        Me.ucrChkIncludeQCLog.Checked = True
+        Me.ucrChkIncludeQCLog.Location = New System.Drawing.Point(6, 186)
+        Me.ucrChkIncludeQCLog.Name = "ucrChkIncludeQCLog"
+        Me.ucrChkIncludeQCLog.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeQCLog.TabIndex = 21
+        '
+        'ucrChkIncludeCapturedBy
+        '
+        Me.ucrChkIncludeCapturedBy.AutoSize = True
+        Me.ucrChkIncludeCapturedBy.Checked = True
+        Me.ucrChkIncludeCapturedBy.Location = New System.Drawing.Point(6, 138)
+        Me.ucrChkIncludeCapturedBy.Name = "ucrChkIncludeCapturedBy"
+        Me.ucrChkIncludeCapturedBy.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeCapturedBy.TabIndex = 20
+        '
+        'ucrChkIncludeQCStatus
+        '
+        Me.ucrChkIncludeQCStatus.AutoSize = True
+        Me.ucrChkIncludeQCStatus.Checked = True
+        Me.ucrChkIncludeQCStatus.Location = New System.Drawing.Point(6, 162)
+        Me.ucrChkIncludeQCStatus.Name = "ucrChkIncludeQCStatus"
+        Me.ucrChkIncludeQCStatus.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeQCStatus.TabIndex = 0
+        '
+        'ucrChkIncludeLevel
+        '
+        Me.ucrChkIncludeLevel.AutoSize = True
+        Me.ucrChkIncludeLevel.Checked = True
+        Me.ucrChkIncludeLevel.Location = New System.Drawing.Point(6, 90)
+        Me.ucrChkIncludeLevel.Name = "ucrChkIncludeLevel"
+        Me.ucrChkIncludeLevel.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeLevel.TabIndex = 19
+        '
+        'ucrChkIncludeElementAbbrv
+        '
+        Me.ucrChkIncludeElementAbbrv.AutoSize = True
+        Me.ucrChkIncludeElementAbbrv.Checked = True
+        Me.ucrChkIncludeElementAbbrv.Location = New System.Drawing.Point(6, 42)
+        Me.ucrChkIncludeElementAbbrv.Name = "ucrChkIncludeElementAbbrv"
+        Me.ucrChkIncludeElementAbbrv.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeElementAbbrv.TabIndex = 18
+        '
+        'ucrChkIncludeStationName
+        '
+        Me.ucrChkIncludeStationName.AutoSize = True
+        Me.ucrChkIncludeStationName.Checked = True
+        Me.ucrChkIncludeStationName.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkIncludeStationName.Name = "ucrChkIncludeStationName"
+        Me.ucrChkIncludeStationName.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeStationName.TabIndex = 17
+        '
+        'ucrChkIncludeAquistion
+        '
+        Me.ucrChkIncludeAquistion.AutoSize = True
+        Me.ucrChkIncludeAquistion.Checked = True
+        Me.ucrChkIncludeAquistion.Location = New System.Drawing.Point(6, 66)
+        Me.ucrChkIncludeAquistion.Name = "ucrChkIncludeAquistion"
+        Me.ucrChkIncludeAquistion.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeAquistion.TabIndex = 16
+        '
+        'ucrChkIncludeEntryForm
+        '
+        Me.ucrChkIncludeEntryForm.AutoSize = True
+        Me.ucrChkIncludeEntryForm.Checked = True
+        Me.ucrChkIncludeEntryForm.Location = New System.Drawing.Point(6, 114)
+        Me.ucrChkIncludeEntryForm.Name = "ucrChkIncludeEntryForm"
+        Me.ucrChkIncludeEntryForm.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeEntryForm.TabIndex = 15
+        '
+        'ucrChkIncludeFlag
+        '
+        Me.ucrChkIncludeFlag.AutoSize = True
+        Me.ucrChkIncludeFlag.Checked = True
+        Me.ucrChkIncludeFlag.Location = New System.Drawing.Point(7, 210)
+        Me.ucrChkIncludeFlag.Name = "ucrChkIncludeFlag"
+        Me.ucrChkIncludeFlag.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeFlag.TabIndex = 14
         '
         'ucrChkImportElementsMetadata
         '
@@ -92,102 +216,11 @@ Partial Class sdgClimsoft
         Me.ucrChkImportStationsMetadata.Size = New System.Drawing.Size(315, 23)
         Me.ucrChkImportStationsMetadata.TabIndex = 19
         '
-        'tbColumns
-        '
-        Me.tbColumns.Controls.Add(Me.grpColumnsToInclude)
-        Me.tbColumns.Location = New System.Drawing.Point(4, 22)
-        Me.tbColumns.Name = "tbColumns"
-        Me.tbColumns.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbColumns.Size = New System.Drawing.Size(409, 219)
-        Me.tbColumns.TabIndex = 3
-        Me.tbColumns.Tag = ""
-        Me.tbColumns.Text = "Data"
-        Me.tbColumns.UseVisualStyleBackColor = True
-        '
-        'grpColumnsToInclude
-        '
-        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeElementAbbrv)
-        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeStationName)
-        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeAquistion)
-        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeEntryForm)
-        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeFlag)
-        Me.grpColumnsToInclude.Controls.Add(Me.ucrChkIncludeQCStatus)
-        Me.grpColumnsToInclude.Location = New System.Drawing.Point(8, 10)
-        Me.grpColumnsToInclude.Name = "grpColumnsToInclude"
-        Me.grpColumnsToInclude.Size = New System.Drawing.Size(368, 203)
-        Me.grpColumnsToInclude.TabIndex = 32
-        Me.grpColumnsToInclude.TabStop = False
-        Me.grpColumnsToInclude.Text = "Columns to Include"
-        '
-        'ucrChkIncludeElementAbbrv
-        '
-        Me.ucrChkIncludeElementAbbrv.AutoSize = True
-        Me.ucrChkIncludeElementAbbrv.Checked = True
-        Me.ucrChkIncludeElementAbbrv.Location = New System.Drawing.Point(6, 42)
-        Me.ucrChkIncludeElementAbbrv.Name = "ucrChkIncludeElementAbbrv"
-        Me.ucrChkIncludeElementAbbrv.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeElementAbbrv.TabIndex = 18
-        '
-        'ucrChkIncludeStationName
-        '
-        Me.ucrChkIncludeStationName.AutoSize = True
-        Me.ucrChkIncludeStationName.Checked = True
-        Me.ucrChkIncludeStationName.Location = New System.Drawing.Point(6, 19)
-        Me.ucrChkIncludeStationName.Name = "ucrChkIncludeStationName"
-        Me.ucrChkIncludeStationName.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeStationName.TabIndex = 17
-        '
-        'ucrChkIncludeAquistion
-        '
-        Me.ucrChkIncludeAquistion.AutoSize = True
-        Me.ucrChkIncludeAquistion.Checked = True
-        Me.ucrChkIncludeAquistion.Location = New System.Drawing.Point(6, 90)
-        Me.ucrChkIncludeAquistion.Name = "ucrChkIncludeAquistion"
-        Me.ucrChkIncludeAquistion.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeAquistion.TabIndex = 16
-        '
-        'ucrChkIncludeEntryForm
-        '
-        Me.ucrChkIncludeEntryForm.AutoSize = True
-        Me.ucrChkIncludeEntryForm.Checked = False
-        Me.ucrChkIncludeEntryForm.Location = New System.Drawing.Point(6, 139)
-        Me.ucrChkIncludeEntryForm.Name = "ucrChkIncludeEntryForm"
-        Me.ucrChkIncludeEntryForm.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeEntryForm.TabIndex = 15
-        '
-        'ucrChkIncludeFlag
-        '
-        Me.ucrChkIncludeFlag.AutoSize = True
-        Me.ucrChkIncludeFlag.Checked = True
-        Me.ucrChkIncludeFlag.Location = New System.Drawing.Point(6, 113)
-        Me.ucrChkIncludeFlag.Name = "ucrChkIncludeFlag"
-        Me.ucrChkIncludeFlag.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeFlag.TabIndex = 14
-        '
-        'ucrChkIncludeQCStatus
-        '
-        Me.ucrChkIncludeQCStatus.AutoSize = True
-        Me.ucrChkIncludeQCStatus.Checked = True
-        Me.ucrChkIncludeQCStatus.Location = New System.Drawing.Point(6, 66)
-        Me.ucrChkIncludeQCStatus.Name = "ucrChkIncludeQCStatus"
-        Me.ucrChkIncludeQCStatus.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeQCStatus.TabIndex = 0
-        '
-        'tbpMoreOptions
-        '
-        Me.tbpMoreOptions.Controls.Add(Me.tbColumns)
-        Me.tbpMoreOptions.Controls.Add(Me.tbpTitles)
-        Me.tbpMoreOptions.Location = New System.Drawing.Point(-1, 4)
-        Me.tbpMoreOptions.Name = "tbpMoreOptions"
-        Me.tbpMoreOptions.SelectedIndex = 0
-        Me.tbpMoreOptions.Size = New System.Drawing.Size(417, 245)
-        Me.tbpMoreOptions.TabIndex = 2
-        '
         'sdgClimsoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 284)
+        Me.ClientSize = New System.Drawing.Size(417, 348)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpMoreOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -220,4 +253,7 @@ Partial Class sdgClimsoft
     Friend WithEvents ucrChkIncludeStationName As ucrCheck
     Friend WithEvents ucrChkImportElementsMetadata As ucrCheck
     Friend WithEvents ucrChkImportStationsMetadata As ucrCheck
+    Friend WithEvents ucrChkIncludeCapturedBy As ucrCheck
+    Friend WithEvents ucrChkIncludeLevel As ucrCheck
+    Friend WithEvents ucrChkIncludeQCLog As ucrCheck
 End Class

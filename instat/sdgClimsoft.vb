@@ -35,24 +35,37 @@ Public Class sdgClimsoft
         ucrChkIncludeStationName.SetRDefault("TRUE")
 
         ucrChkIncludeElementAbbrv.SetText("Element Abbreviation")
-        ucrChkIncludeElementAbbrv.SetParameter(New RParameter("include_element_abbreviation", 13))
+        ucrChkIncludeElementAbbrv.SetParameter(New RParameter("include_element_abbreviation", 14))
         ucrChkIncludeElementAbbrv.SetRDefault("TRUE")
 
-        ucrChkIncludeQCStatus.SetText("QC Status")
-        ucrChkIncludeQCStatus.SetParameter(New RParameter("include_qc_status", 11))
-        ucrChkIncludeQCStatus.SetRDefault("TRUE")
-
         ucrChkIncludeAquistion.SetText("Acquisition Type")
-        ucrChkIncludeAquistion.SetParameter(New RParameter("include_acquisition_type", 14))
+        ucrChkIncludeAquistion.SetParameter(New RParameter("include_acquisition_type", 15))
         ucrChkIncludeAquistion.SetRDefault("TRUE")
 
-        ucrChkIncludeFlag.SetText("Flag")
-        ucrChkIncludeFlag.SetParameter(New RParameter("include_flag", 12))
-        ucrChkIncludeFlag.SetRDefault("TRUE")
+        ucrChkIncludeLevel.SetText("Level")
+        ucrChkIncludeLevel.SetParameter(New RParameter("include_level", 16))
+        ucrChkIncludeLevel.SetRDefault("TRUE")
 
         ucrChkIncludeEntryForm.SetText("Entry Form")
-        ucrChkIncludeEntryForm.SetParameter(New RParameter("include_entry_form", 13))
-        ucrChkIncludeEntryForm.SetRDefault("FALSE")
+        ucrChkIncludeEntryForm.SetParameter(New RParameter("include_entry_form", 17))
+        ucrChkIncludeEntryForm.SetRDefault("TRUE")
+
+        ucrChkIncludeCapturedBy.SetText("Captured By (user)")
+        ucrChkIncludeCapturedBy.SetParameter(New RParameter("include_captured_by", 18))
+        ucrChkIncludeCapturedBy.SetRDefault("TRUE")
+
+        ucrChkIncludeQCStatus.SetText("QC Status")
+        ucrChkIncludeQCStatus.SetParameter(New RParameter("include_qc_status", 19))
+        ucrChkIncludeQCStatus.SetRDefault("TRUE")
+
+        ucrChkIncludeQCLog.SetText("QC Log")
+        ucrChkIncludeQCLog.SetParameter(New RParameter("include_qc_log", 20))
+        ucrChkIncludeQCLog.SetRDefault("TRUE")
+
+        ucrChkIncludeFlag.SetText("Flag")
+        ucrChkIncludeFlag.SetParameter(New RParameter("include_flag", 21))
+        ucrChkIncludeFlag.SetRDefault("TRUE")
+
         '---------------------------------------
 
         'Metadata
@@ -74,15 +87,24 @@ Public Class sdgClimsoft
         'initialise controls if not initialised
         InitialiseControls()
 
-        ucrChkIncludeQCStatus.SetRCode(clsRFunction, bReset)
-        ucrChkIncludeAquistion.SetRCode(clsRFunction, bReset)
-        ucrChkIncludeFlag.SetRCode(clsRFunction, bReset)
-        ucrChkIncludeEntryForm.SetRCode(clsRFunction, bReset)
+        'Columns
+        '---------------------------------------
         ucrChkIncludeStationName.SetRCode(clsRFunction, bReset)
         ucrChkIncludeElementAbbrv.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeAquistion.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeLevel.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeEntryForm.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeCapturedBy.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeQCStatus.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeQCLog.SetRCode(clsRFunction, bReset)
+        ucrChkIncludeFlag.SetRCode(clsRFunction, bReset)
+        '---------------------------------------
 
+        'Metadata
+        '---------------------------------------
         ucrChkImportStationsMetadata.SetRCode(clsRFunction, bReset)
         ucrChkImportElementsMetadata.SetRCode(clsRFunction, bReset)
+        '---------------------------------------
 
     End Sub
 
