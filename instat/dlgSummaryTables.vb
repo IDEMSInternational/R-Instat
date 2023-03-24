@@ -514,10 +514,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub AddcolumnParameters()
-        'If ucrReceiverFactors.IsEmpty OrElse String.IsNullOrEmpty(ucrNudColumnFactors.GetText()) Then
-        '    Exit Sub
-        'End If
-
         If rdoSummaryTable.Checked Then
             Dim iColumn As Integer = 0
             Dim iNumberOfColumns As Integer

@@ -44,7 +44,7 @@ Public Class sdgFormatSummaryTables
         ucrPnlThemesPanel.AddParameterValuesCondition(rdoManualTheme, "theme", "manual")
 
         ucrInputSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme",
-                                      "Guardian Theme", "Nytimes Theme", "Pff Theme"})
+                                      "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrInputSelectThemes.SetDropDownStyleAsNonEditable()
 
         ucrPnlThemesPanel.AddToLinkedControls(ucrInputSelectThemes, {rdoSelectTheme}, bNewLinkedHideIfParameterMissing:=True)
@@ -167,7 +167,6 @@ Public Class sdgFormatSummaryTables
         clsDummyFunction = clsNewDummyFunction
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
-
 
         If bReset Then
             ucrInputSelectThemes.SetText("Dark Theme")
@@ -448,9 +447,9 @@ Public Class sdgFormatSummaryTables
                     clsgtExtrasThemesFunction.SetRCommand("gt_theme_excel")
                 Case "Guardian Theme"
                     clsgtExtrasThemesFunction.SetRCommand("gt_theme_guardian")
-                Case "Nytimes Theme"
+                Case "NY Times Theme"
                     clsgtExtrasThemesFunction.SetRCommand("gt_theme_nytimes")
-                Case "Pff Theme"
+                Case "PFF Theme"
                     clsgtExtrasThemesFunction.SetRCommand("gt_theme_pff")
             End Select
         End If
