@@ -158,15 +158,36 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-        If (rdoSample.Checked AndAlso ucrChkStratifyingFactor.Checked AndAlso Not ucrReceiverRanSplit.IsEmpty AndAlso Not ucrNudBreaks.IsEmpty AndAlso Not ucrNudPool.IsEmpty) OrElse
-            (rdoTimeSeries.Checked AndAlso ucrChkLag.Checked AndAlso Not ucrNudLag.IsEmpty) Then
-            If ucrSaveTrainingData.IsComplete AndAlso ucrSaveTestingData.IsComplete AndAlso Not ucrNudFraction.IsEmpty Then
-                ucrBase.OKEnabled(True)
+        If rdoSample.Checked Then
+            If ucrChkStratifyingFactor.Checked Then
+                If Not ucrReceiverRanSplit.IsEmpty AndAlso Not ucrNudBreaks.IsEmpty AndAlso Not ucrNudPool.IsEmpty Then
+                    If ucrSaveTrainingData.IsComplete AndAlso ucrSaveTestingData.IsComplete AndAlso Not ucrNudFraction.IsEmpty Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             Else
                 ucrBase.OKEnabled(False)
             End If
         Else
-            ucrBase.OKEnabled(False)
+            If rdoTimeSeries.Checked Then
+                If ucrChkLag.Checked Then
+                    If Not ucrNudLag.IsEmpty Then
+                        If ucrSaveTrainingData.IsComplete AndAlso ucrSaveTestingData.IsComplete AndAlso Not ucrNudFraction.IsEmpty Then
+                            ucrBase.OKEnabled(True)
+                        Else
+                            ucrBase.OKEnabled(False)
+                        End If
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            End If
         End If
     End Sub
 
