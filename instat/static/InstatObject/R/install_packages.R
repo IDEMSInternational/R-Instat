@@ -151,7 +151,7 @@ pkgs <-
     "segmented", 
     # Utilities for verifying discrete, continuous and probabilistic forecasts, and forecasts expressed as parametric distributions are included.
     "verification",
-    "prediction"
+    "prediction",
     # Tutorial Analysis of Some Agricultural Experiments. 
     "agriTutorial"
 
