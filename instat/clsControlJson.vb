@@ -47,13 +47,27 @@ Public Class clsControlJson
     Private Class clsUcrCoreJson
         Inherits clsControlJson
 
-        Public Property bAddRemoveParameter As Boolean
+        Public Property dctProperties As Dictionary(Of String, Object)
 
-        Public Sub New(clsControl As ucrCore)
-            MyBase.New(clsControl)
-            bAddRemoveParameter = clsControl.bAddRemoveParameter
+        Public Sub New(ucrCore As ucrCore)
+            MyBase.New(ucrCore)
+            dctProperties = New Dictionary(Of String, Object)
+            Dim bindingFlags As Reflection.BindingFlags =
+                Reflection.BindingFlags.Public _
+                Or Reflection.BindingFlags.NonPublic _
+                Or Reflection.BindingFlags.Instance _
+                Or Reflection.BindingFlags.FlattenHierarchy
+            For Each clsField As Reflection.FieldInfo In ucrCore.GetType().GetFields(bindingFlags)
+                If clsField.FieldType Is GetType(String) OrElse clsField.FieldType.IsPrimitive Then
+                    dctProperties.Add(clsField.Name, clsField.GetValue(ucrCore))
+                Else
+                    dctProperties.Add(clsField.Name, clsField.FieldType.ToString() & " TODO")
+                End If
+            Next
         End Sub
+
     End Class
+
 End Class
 
 
