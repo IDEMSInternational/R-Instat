@@ -19,11 +19,12 @@ Imports RDotNet
 
 Public Class dlgNewDataFrame
     Private clsEmptyOverallFunction, clsEmptyMatrixFunction, clsNewDataFrameFunction,
-        clsSjLabelledFunction, clsConstructFunction, clsDummyLabelFunction, clsDummyVarFunction,
-         clsAsCharacterFunction, clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
+        clsGetCategoriesFunction, clsSjLabelledFunction, clsConstructFunction,
+        clsDummyLabelFunction, clsDummyVarFunction, clsAsCharacterFunction,
+        clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private bLastRow As Boolean = False
     Private arrAvailableCategories() As String
     Private arrAvailableLists() As String
 
@@ -43,8 +44,6 @@ Public Class dlgNewDataFrame
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 6
 
-        Dim clsGetCategories As New RFunction
-
         ucrInputCommand.txtInput.WordWrap = False
         ucrInputCommand.txtInput.ScrollBars = ScrollBars.Both
 
@@ -61,7 +60,6 @@ Public Class dlgNewDataFrame
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetIsTextBox()
-        ucrNewDFName.SetPrefix("data")
 
         'ucrRdoOptions
         ucrPnlDataFrame.AddRadioButton(rdoConstruct)
@@ -89,31 +87,19 @@ Public Class dlgNewDataFrame
 
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
-        ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkIncludeLabel.SetText("Variable Label")
         ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
         ucrChkIncludeLabel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVariable.AddParameterValuesCondition(True, "variablename", "True")
+        ucrChkVariable.AddParameterValuesCondition(False, "variablename", "False")
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
 
         ucrChkRCommand.SetText("Show Command")
 
-        clsGetCategories.SetPackageName("rcorpora")
-        clsGetCategories.SetRCommand("categories")
-        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategories.ToScript(), bSilent:=True)
-        If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
-            Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
-            arrAvailableCategories = chrCategoryNames.ToArray
-            Array.Sort(arrAvailableCategories)
-            ucrInputCategory.SetParameter(New RParameter("category"))
-            ucrInputCategory.SetItems(arrAvailableCategories, bAddConditions:=True)
-        End If
-        ucrInputCategory.SetDropDownStyleAsNonEditable()
-
         ucrInputListInCategory.SetDropDownStyleAsNonEditable()
-        LoadLists()
     End Sub
 
     Private Sub SetDefaults()
@@ -133,7 +119,22 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
+        clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
+        clsDummyVarFunction.AddParameter("checked", "defaults", iPosition:=1)
 
+        clsGetCategoriesFunction.SetPackageName("rcorpora")
+        clsGetCategoriesFunction.SetRCommand("categories")
+        Dim expCategoryNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCategoriesFunction.ToScript(), bSilent:=True)
+        If expCategoryNames IsNot Nothing AndAlso expCategoryNames.Type <> Internals.SymbolicExpressionType.Null Then
+            Dim chrCategoryNames As CharacterVector = expCategoryNames.AsCharacter
+            arrAvailableCategories = chrCategoryNames.ToArray
+            Array.Sort(arrAvailableCategories)
+            ucrInputCategory.SetParameter(New RParameter("category"))
+            ucrInputCategory.SetItems(arrAvailableCategories, bAddConditions:=True)
+        End If
+        ucrInputCategory.SetDropDownStyleAsNonEditable()
+        LoadLists()
+        ucrChkRCommand.Checked = False
         ucrNudCols.SetText(2)
 
         clsCorporaFunction.SetPackageName("rcorpora")
@@ -171,6 +172,22 @@ Public Class dlgNewDataFrame
         dataGridView.Rows.Clear()
         dataGridView.Rows.Add(5)
         ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrNudRows.SetRCode(clsRepFunction, bReset)
+
+        ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
+        ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
+        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
+        ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
+        ucrNewDFName.SetRCode(clsConstructFunction, bReset)
+        ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
+
+        If bReset Then
+            ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+            ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -250,22 +267,6 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrNudRows.SetRCode(clsRepFunction, bReset)
-
-        ucrNewDFName.AddAdditionalRCode(clsEmptyOverallFunction, iAdditionalPairNo:=1)
-        ucrNewDFName.AddAdditionalRCode(clsNewDataFrameFunction, iAdditionalPairNo:=2)
-        ucrNewDFName.AddAdditionalRCode(clsSjLabelledFunction, iAdditionalPairNo:=3)
-        ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
-        ucrNewDFName.SetRCode(clsConstructFunction, bReset)
-        ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
-        ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
-
-        If bReset Then
-            ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        End If
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
@@ -279,6 +280,9 @@ Public Class dlgNewDataFrame
     Private Sub ucrPnlDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDataFrame.ControlValueChanged,
         ucrChkVariable.ControlValueChanged, ucrChkIncludeLabel.ControlValueChanged, ucrNewDFName.ControlValueChanged,
         ucrChkRCommand.ControlValueChanged
+        If ucrChangedControl Is ucrPnlDataFrame Then
+            ChangeSavePrefix()
+        End If
         If rdoConstruct.Checked Then
             btnExample.Text = "Construct Examples" 'this is being done here cause of the datagridview. We don't have its custom control
             lblCommand.Visible = True
@@ -488,6 +492,13 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataTypeGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataTypeGridView.CellValueChanged
+        If bLastRow Then
+            SampleEmpty()
+            bLastRow = False
+        End If
+    End Sub
+
+    Private Sub dataTypeGridView_CellEndEdit(sender As Object, e As EventArgs) Handles dataTypeGridView.CellEndEdit
         SampleEmpty()
     End Sub
 
@@ -500,23 +511,30 @@ Public Class dlgNewDataFrame
 
     Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bInsert As Boolean)
         If bInsert Then
-            With dgrView.Rows
-                .Item(iRow).Cells(0).Value = iRow + 1
-                .Item(iRow).Cells(1).Value = "x" & (iRow + 1)
-                .Item(iRow).Cells(2).Value = "Character"
-                .Item(iRow).Cells(3).Value = "NA"
-                .Item(iRow).Cells(4).Value = ""
-                .Item(iRow).Cells(5).Value = ""
-            End With
+            For i As Integer = iRow To dgrView.Rows.Count - 1
+                Dim iRowHeader = i + 1
+                With dgrView.Rows
+                    .Item(i).Cells(0).Value = iRowHeader
+                    .Item(i).Cells(1).Value = "x" & iRowHeader
+                    .Item(i).Cells(2).Value = "Character"
+                    .Item(i).Cells(3).Value = "NA"
+                End With
+                bLastRow = If(i = dgrView.Rows.Count - 1, True, False)
+            Next
         Else
             For i As Integer = 0 To dgrView.Rows.Count - 1
                 With dgrView.Rows
                     .Item(i).Cells(0).Value = i + 1
                     .Item(i).Cells(1).Value = "x" & (i + 1)
-                    .Item(i).Cells(2).Value = "Character"
-                    .Item(i).Cells(3).Value = "NA"
                     .Item(i).Cells(4).Value = ""
                     .Item(i).Cells(5).Value = ""
+                    If i = 0 Then
+                        .Item(i).Cells(2).Value = "Numeric"
+                        .Item(i).Cells(3).Value = "1,1000"
+                    Else
+                        .Item(i).Cells(2).Value = "Character"
+                        .Item(i).Cells(3).Value = "NA"
+                    End If
                 End With
             Next
         End If
@@ -529,9 +547,12 @@ Public Class dlgNewDataFrame
             If iValue > iRow Then
                 Dim iNumRowsToInsert As Integer = iValue - iRow
                 dataTypeGridView.Rows.Insert(iRow, iNumRowsToInsert)
-                FillGrid(iValue - 1, dataTypeGridView, True)
+                FillGrid(iRow, dataTypeGridView, True)
             ElseIf iValue < iRow Then
-                dataTypeGridView.Rows.RemoveAt(iRow - 1)
+                Dim iRange = iRow - iValue
+                For i As Integer = 1 To iRange
+                    dataTypeGridView.Rows.RemoveAt(iRow - i)
+                Next
             End If
         End If
         CreateEmptyDataFrame(ucrNudCols.Value)
@@ -597,6 +618,9 @@ Public Class dlgNewDataFrame
             Dim selectedCombobox As ComboBox = DirectCast(sender, ComboBox)
             If selectedCombobox.SelectedItem = "Factor" Then
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = False
+                Dim iColDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").ColumnIndex
+                Dim iRowDefaultIndex As Integer = dataTypeGridView.CurrentRow.Cells("colDefault").RowIndex
+                dataTypeGridView(iColDefaultIndex, iRowDefaultIndex).Value = "NA"
             Else
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).ReadOnly = True
                 dataTypeGridView(iColumnLevelIndex, iRowLevelIndex).Value = ""
@@ -779,6 +803,8 @@ Public Class dlgNewDataFrame
             Array.Sort(arrAvailableLists)
             ucrInputListInCategory.SetParameter(New RParameter("list"))
             ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+        Else
+            ucrInputListInCategory.SetItems()
         End If
     End Sub
 
@@ -786,6 +812,8 @@ Public Class dlgNewDataFrame
         clsCorporaFunction.ClearParameters()
         If ucrChangedControl Is ucrInputCategory Then
             LoadLists()
+        ElseIf ucrChangedControl Is ucrInputListInCategory Then
+            ChangeSavePrefix()
         End If
 
         If ucrInputListInCategory.GetText <> "" Then
@@ -796,7 +824,16 @@ Public Class dlgNewDataFrame
                                                  bIncludeArgumentName:=False, iPosition:=0)
         End If
         clsListDfFunction.AddParameter("data", clsRFunctionParameter:=clsCorporaFunction, iPosition:=0)
+        clsListDfFunction.RemoveAssignTo()
         ucrInputLists.SetText(clsListDfFunction.ToScript)
+    End Sub
+
+    Private Sub ChangeSavePrefix()
+        If rdoLists.Checked AndAlso Not ucrInputListInCategory.IsEmpty Then
+            ucrNewDFName.SetPrefix(ucrInputListInCategory.GetText)
+        Else
+            ucrNewDFName.SetPrefix("data")
+        End If
     End Sub
 
     Private Sub ucrInputLists_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputLists.ControlContentsChanged

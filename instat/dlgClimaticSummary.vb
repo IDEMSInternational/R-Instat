@@ -87,7 +87,8 @@ Public Class dlgClimaticSummary
 
         ucrReceiverWithinYear.SetParameter(New RParameter("within_variable", 2, False))
         ucrReceiverWithinYear.SetParameterIsString()
-        'ucrReceiverWithinYear.strSelectorHeading = "Factors"
+        ucrReceiverWithinYear.SetClimaticType("month")
+        ucrReceiverWithinYear.bAutoFill = True
         ucrReceiverWithinYear.Selector = ucrSelectorVariable
         ucrReceiverWithinYear.SetIncludedDataTypes({"numeric", "factor"})
 

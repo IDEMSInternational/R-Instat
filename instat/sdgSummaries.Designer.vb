@@ -1377,7 +1377,7 @@ Partial Class sdgSummaries
         Me.ucrChkNonMissing.Location = New System.Drawing.Point(7, 19)
         Me.ucrChkNonMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkNonMissing.Name = "ucrChkNonMissing"
-        Me.ucrChkNonMissing.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkNonMissing.Size = New System.Drawing.Size(129, 23)
         Me.ucrChkNonMissing.TabIndex = 0
         '
         'grpQuartilesTerciles
@@ -1509,7 +1509,7 @@ Partial Class sdgSummaries
         Me.ucrChkMedian.Location = New System.Drawing.Point(292, 19)
         Me.ucrChkMedian.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMedian.Name = "ucrChkMedian"
-        Me.ucrChkMedian.Size = New System.Drawing.Size(85, 23)
+        Me.ucrChkMedian.Size = New System.Drawing.Size(103, 23)
         Me.ucrChkMedian.TabIndex = 4
         '
         'ucrChkStdDev

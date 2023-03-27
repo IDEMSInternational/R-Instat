@@ -49,29 +49,27 @@ Partial Class dlgOneWayFrequencies
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.grpOutput = New System.Windows.Forms.GroupBox()
-        Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
-        Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.rdoAsTable = New System.Windows.Forms.RadioButton()
+        Me.rdoAsDataFrame = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoStemAndLeaf = New System.Windows.Forms.RadioButton()
-        Me.lblSelectVariableStemAndLeaf = New System.Windows.Forms.Label()
+        Me.ucrNudWidth = New instat.ucrNud()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrNudScale = New instat.ucrNud()
-        Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.ucrNudMinFreq = New instat.ucrNud()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudGroups = New instat.ucrNud()
         Me.ucrPnlFrequencies = New instat.UcrPanel()
-        Me.ucrChkGroupData = New instat.ucrCheck()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
-        Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkFlip = New instat.ucrCheck()
-        Me.ucrChkMinFrq = New instat.ucrCheck()
         Me.ucrChkScale = New instat.ucrCheck()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
+        Me.ucrChkMinFrq = New instat.ucrCheck()
+        Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkWidth = New instat.ucrCheck()
-        Me.ucrNudWidth = New instat.ucrNud()
+        Me.ucrChkGroupData = New instat.ucrCheck()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -185,6 +183,7 @@ Partial Class dlgOneWayFrequencies
         'rdoBoth
         '
         Me.rdoBoth.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoBoth.Enabled = False
         Me.rdoBoth.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoth.FlatAppearance.BorderSize = 2
         Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -200,8 +199,8 @@ Partial Class dlgOneWayFrequencies
         '
         'grpOutput
         '
-        Me.grpOutput.Controls.Add(Me.rdoAsHtml)
-        Me.grpOutput.Controls.Add(Me.rdoAsText)
+        Me.grpOutput.Controls.Add(Me.rdoAsTable)
+        Me.grpOutput.Controls.Add(Me.rdoAsDataFrame)
         Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
         Me.grpOutput.Location = New System.Drawing.Point(258, 275)
         Me.grpOutput.Name = "grpOutput"
@@ -210,27 +209,27 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput.TabStop = False
         Me.grpOutput.Text = "Output "
         '
-        'rdoAsHtml
+        'rdoAsTable
         '
-        Me.rdoAsHtml.AutoSize = True
-        Me.rdoAsHtml.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAsHtml.Location = New System.Drawing.Point(6, 43)
-        Me.rdoAsHtml.Name = "rdoAsHtml"
-        Me.rdoAsHtml.Size = New System.Drawing.Size(102, 17)
-        Me.rdoAsHtml.TabIndex = 2
-        Me.rdoAsHtml.Text = "HTML (Browser)"
-        Me.rdoAsHtml.UseVisualStyleBackColor = True
+        Me.rdoAsTable.AutoSize = True
+        Me.rdoAsTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoAsTable.Location = New System.Drawing.Point(6, 20)
+        Me.rdoAsTable.Name = "rdoAsTable"
+        Me.rdoAsTable.Size = New System.Drawing.Size(113, 17)
+        Me.rdoAsTable.TabIndex = 2
+        Me.rdoAsTable.Text = "As Summary Table"
+        Me.rdoAsTable.UseVisualStyleBackColor = True
         '
-        'rdoAsText
+        'rdoAsDataFrame
         '
-        Me.rdoAsText.AutoSize = True
-        Me.rdoAsText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAsText.Location = New System.Drawing.Point(6, 20)
-        Me.rdoAsText.Name = "rdoAsText"
-        Me.rdoAsText.Size = New System.Drawing.Size(129, 17)
-        Me.rdoAsText.TabIndex = 1
-        Me.rdoAsText.Text = "Text (Output Window)"
-        Me.rdoAsText.UseVisualStyleBackColor = True
+        Me.rdoAsDataFrame.AutoSize = True
+        Me.rdoAsDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoAsDataFrame.Location = New System.Drawing.Point(6, 46)
+        Me.rdoAsDataFrame.Name = "rdoAsDataFrame"
+        Me.rdoAsDataFrame.Size = New System.Drawing.Size(92, 17)
+        Me.rdoAsDataFrame.TabIndex = 1
+        Me.rdoAsDataFrame.Text = "As DataFrame"
+        Me.rdoAsDataFrame.UseVisualStyleBackColor = True
         '
         'ucrPnlOutput
         '
@@ -256,15 +255,18 @@ Partial Class dlgOneWayFrequencies
         Me.rdoStemAndLeaf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoStemAndLeaf.UseVisualStyleBackColor = True
         '
-        'lblSelectVariableStemAndLeaf
+        'ucrNudWidth
         '
-        Me.lblSelectVariableStemAndLeaf.AutoSize = True
-        Me.lblSelectVariableStemAndLeaf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectVariableStemAndLeaf.Location = New System.Drawing.Point(257, 63)
-        Me.lblSelectVariableStemAndLeaf.Name = "lblSelectVariableStemAndLeaf"
-        Me.lblSelectVariableStemAndLeaf.Size = New System.Drawing.Size(93, 13)
-        Me.lblSelectVariableStemAndLeaf.TabIndex = 6
-        Me.lblSelectVariableStemAndLeaf.Text = "Selected Variable:"
+        Me.ucrNudWidth.AutoSize = True
+        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWidth.Location = New System.Drawing.Point(142, 260)
+        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWidth.TabIndex = 16
+        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverStemAndLeaf
         '
@@ -292,15 +294,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudScale.TabIndex = 13
         Me.ucrNudScale.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrSaveDataFrame
-        '
-        Me.ucrSaveDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDataFrame.Location = New System.Drawing.Point(10, 376)
-        Me.ucrSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
-        Me.ucrSaveDataFrame.Size = New System.Drawing.Size(254, 24)
-        Me.ucrSaveDataFrame.TabIndex = 23
-        '
         'ucrNudMinFreq
         '
         Me.ucrNudMinFreq.AutoSize = True
@@ -317,10 +310,10 @@ Partial Class dlgOneWayFrequencies
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 352)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 368)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(304, 24)
         Me.ucrSaveGraph.TabIndex = 22
         '
         'ucrNudGroups
@@ -344,15 +337,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlFrequencies.Size = New System.Drawing.Size(410, 35)
         Me.ucrPnlFrequencies.TabIndex = 0
         '
-        'ucrChkGroupData
-        '
-        Me.ucrChkGroupData.AutoSize = True
-        Me.ucrChkGroupData.Checked = False
-        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 280)
-        Me.ucrChkGroupData.Name = "ucrChkGroupData"
-        Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 23)
-        Me.ucrChkGroupData.TabIndex = 17
-        '
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.AutoSize = True
@@ -366,22 +350,13 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights.TabIndex = 15
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
-        'ucrChkWeights
-        '
-        Me.ucrChkWeights.AutoSize = True
-        Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 256)
-        Me.ucrChkWeights.Name = "ucrChkWeights"
-        Me.ucrChkWeights.Size = New System.Drawing.Size(145, 23)
-        Me.ucrChkWeights.TabIndex = 14
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 410)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 400)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 24
         '
         'ucrSelectorOneWayFreq
@@ -405,15 +380,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkFlip.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkFlip.TabIndex = 19
         '
-        'ucrChkMinFrq
-        '
-        Me.ucrChkMinFrq.AutoSize = True
-        Me.ucrChkMinFrq.Checked = False
-        Me.ucrChkMinFrq.Location = New System.Drawing.Point(10, 326)
-        Me.ucrChkMinFrq.Name = "ucrChkMinFrq"
-        Me.ucrChkMinFrq.Size = New System.Drawing.Size(210, 23)
-        Me.ucrChkMinFrq.TabIndex = 20
-        '
         'ucrChkScale
         '
         Me.ucrChkScale.AutoSize = True
@@ -436,6 +402,24 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.TabIndex = 8
         Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
+        'ucrChkMinFrq
+        '
+        Me.ucrChkMinFrq.AutoSize = True
+        Me.ucrChkMinFrq.Checked = False
+        Me.ucrChkMinFrq.Location = New System.Drawing.Point(10, 326)
+        Me.ucrChkMinFrq.Name = "ucrChkMinFrq"
+        Me.ucrChkMinFrq.Size = New System.Drawing.Size(210, 23)
+        Me.ucrChkMinFrq.TabIndex = 20
+        '
+        'ucrChkWeights
+        '
+        Me.ucrChkWeights.AutoSize = True
+        Me.ucrChkWeights.Checked = False
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 256)
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        Me.ucrChkWeights.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkWeights.TabIndex = 14
+        '
         'ucrChkWidth
         '
         Me.ucrChkWidth.AutoSize = True
@@ -445,31 +429,25 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkWidth.Size = New System.Drawing.Size(126, 23)
         Me.ucrChkWidth.TabIndex = 15
         '
-        'ucrNudWidth
+        'ucrChkGroupData
         '
-        Me.ucrNudWidth.AutoSize = True
-        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(142, 260)
-        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Name = "ucrNudWidth"
-        Me.ucrNudWidth.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWidth.TabIndex = 16
-        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrChkGroupData.AutoSize = True
+        Me.ucrChkGroupData.Checked = False
+        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 280)
+        Me.ucrChkGroupData.Name = "ucrChkGroupData"
+        Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkGroupData.TabIndex = 17
         '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(435, 470)
+        Me.ClientSize = New System.Drawing.Size(435, 456)
         Me.Controls.Add(Me.ucrNudWidth)
         Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.ucrNudScale)
-        Me.Controls.Add(Me.lblSelectVariableStemAndLeaf)
         Me.Controls.Add(Me.rdoStemAndLeaf)
-        Me.Controls.Add(Me.ucrSaveDataFrame)
         Me.Controls.Add(Me.ucrNudMinFreq)
         Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrSaveGraph)
@@ -526,13 +504,11 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrReceiverOneWayFreq As ucrReceiverMultiple
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents grpOutput As GroupBox
-    Friend WithEvents rdoAsHtml As RadioButton
-    Friend WithEvents rdoAsText As RadioButton
+    Friend WithEvents rdoAsTable As RadioButton
+    Friend WithEvents rdoAsDataFrame As RadioButton
     Friend WithEvents ucrPnlOutput As UcrPanel
     Friend WithEvents ucrNudMinFreq As ucrNud
     Friend WithEvents ucrChkMinFrq As ucrCheck
-    Friend WithEvents ucrSaveDataFrame As ucrSave
-    Friend WithEvents lblSelectVariableStemAndLeaf As Label
     Private WithEvents rdoStemAndLeaf As RadioButton
     Friend WithEvents ucrNudScale As ucrNud
     Friend WithEvents ucrChkScale As ucrCheck

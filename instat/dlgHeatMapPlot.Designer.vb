@@ -38,9 +38,8 @@ Partial Class dlgHeatMapPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHeatMapPlot))
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdTileOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblFill = New System.Windows.Forms.Label()
         Me.lblLabelPosition = New System.Windows.Forms.Label()
@@ -79,21 +78,13 @@ Partial Class dlgHeatMapPlot
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.lblGroup = New System.Windows.Forms.Label()
         Me.ucrChkPoints = New instat.ucrCheck()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTileOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdOptions
-        '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'cmdTileOptions
-        '
-        resources.ApplyResources(Me.cmdTileOptions, "cmdTileOptions")
-        Me.cmdTileOptions.Name = "cmdTileOptions"
-        Me.cmdTileOptions.Tag = "Tile_Options"
-        Me.cmdTileOptions.UseVisualStyleBackColor = True
         '
         'lblXVariable
         '
@@ -366,10 +357,41 @@ Partial Class dlgHeatMapPlot
         Me.ucrChkPoints.Checked = False
         Me.ucrChkPoints.Name = "ucrChkPoints"
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemTileOptions, Me.toolStripMenuItemPolygonOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        resources.ApplyResources(Me.contextMenuStripOptions, "contextMenuStripOptions")
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        resources.ApplyResources(Me.toolStripMenuItemPlotOptions, "toolStripMenuItemPlotOptions")
+        '
+        'toolStripMenuItemTileOptions
+        '
+        Me.toolStripMenuItemTileOptions.Name = "toolStripMenuItemTileOptions"
+        resources.ApplyResources(Me.toolStripMenuItemTileOptions, "toolStripMenuItemTileOptions")
+        '
+        'toolStripMenuItemPolygonOptions
+        '
+        Me.toolStripMenuItemPolygonOptions.Name = "toolStripMenuItemPolygonOptions"
+        resources.ApplyResources(Me.toolStripMenuItemPolygonOptions, "toolStripMenuItemPolygonOptions")
+        '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgHeatMapPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.lblGroup)
         Me.Controls.Add(Me.lblFillChoropleth)
@@ -385,8 +407,6 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.lblFill)
         Me.Controls.Add(Me.ucrReceiverFill)
         Me.Controls.Add(Me.ucrSaveGraph)
-        Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.cmdTileOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrInputReorderValue)
@@ -401,7 +421,6 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrVariableAsFactorForHeatMap)
         Me.Controls.Add(Me.ucrInputReorderVariableX)
         Me.Controls.Add(Me.ucrInputSize)
-        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.lblLabelPosition)
         Me.Controls.Add(Me.ucrInputPosition)
         Me.Controls.Add(Me.lblLabelColour)
@@ -410,16 +429,16 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblReorderVariableX)
         Me.Controls.Add(Me.ucrReceiverGroup)
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgHeatMapPlot"
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdTileOptions As Button
     Friend WithEvents ucrHeatMapSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
@@ -458,4 +477,9 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents lblGroup As Label
     Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
     Friend WithEvents ucrChkPoints As ucrCheck
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTileOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemPolygonOptions As ToolStripMenuItem
 End Class

@@ -82,7 +82,10 @@ Public MustInherit Class ucrLinuxGrid
         Return New clsWorksheetAdapter(tab)
     End Function
 
-    Private Sub ReOrderWorksheets() Implements IGrid.ReOrderWorksheets
+    ''' <summary>
+    ''' Reorder the worksheets
+    ''' </summary>
+    Private Sub ReOrderWorksheets(strCurrWorksheet As String) Implements IGrid.ReOrderWorksheets
         'assuming the databook will always have all the data frames 
         'and the grid may not have all the data frame worksheets equivalent
         'and all data frames in the data book have changed their order positions 
@@ -95,12 +98,18 @@ Public MustInherit Class ucrLinuxGrid
                 lstWorkSheetsFound.Add(fillWorkSheet)
             End If
         Next
-        If lstWorkSheetsFound.Count > 1 Then
+
+        'in the second condition we check if all data frames in the data book
+        'have the same order positions with all data frame sheets in the grid
+        'if not this check will return False which means the data frames in the data book are reordered
+        If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(tcTabs.Controls.OfType(Of TabPage).Select(Function(x) x.Text).ToList) Then
             'reorder the worksheets based on the filled list
             For i As Integer = 0 To lstWorkSheetsFound.Count - 1
                 tcTabs.TabPages.Remove(lstWorkSheetsFound(i))
                 tcTabs.TabPages.Insert(i, lstWorkSheetsFound(i))
             Next
+            tcTabs.SelectedTab = GetTabPage(strCurrWorksheet) 'set the selected sheet back active before reordering
         End If
     End Sub
 

@@ -27,8 +27,7 @@ Public Class dlgCalculator
     Private iBasicWidth As Integer
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
-    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF", "Integer"}
-
+    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF", "Integer", "Complex", "List"}
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -110,6 +109,10 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrCalc_ControlValueChanged() Handles ucrCalc.ControlValueChanged
+        SaveResults()
+    End Sub
+
     ''' <summary>
     ''' Determines where the results will be saved; to a column or output window
     ''' </summary>
@@ -172,7 +175,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.37
                 ucrBase.iHelpTopicID = 130
             Case "Transform"
-                Me.Width = iBasicWidth * 1.37
+                Me.Width = iBasicWidth * 1.48
                 ucrBase.iHelpTopicID = 166
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
@@ -188,7 +191,11 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.27
                 ucrBase.iHelpTopicID = 598
             Case "Integer"
-                Me.Width = iBasicWidth * 1.37
+                Me.Width = iBasicWidth * 1.5
+            Case "Complex"
+                Me.Width = iBasicWidth * 1.5
+            Case "List"
+                Me.Width = iBasicWidth * 1.5
             Case Else
                 Me.Width = iBasicWidth
         End Select

@@ -11,9 +11,8 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneVariableSummarise
     Inherits System.Windows.Forms.Form
@@ -34,7 +33,7 @@ Partial Class dlgOneVariableSummarise
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
@@ -56,6 +55,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveSummary = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -200,7 +200,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 336)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 386)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
@@ -264,12 +264,22 @@ Partial Class dlgOneVariableSummarise
         Me.cmdMissingOptions.Text = "Options"
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveSummary
+        '
+        Me.ucrSaveSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 347)
+        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(319, 24)
+        Me.ucrSaveSummary.TabIndex = 28
+        '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(421, 395)
+        Me.ClientSize = New System.Drawing.Size(421, 442)
+        Me.Controls.Add(Me.ucrSaveSummary)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.ucrInputMarginName)
@@ -318,4 +328,5 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents cmdMissingOptions As Button
+    Friend WithEvents ucrSaveSummary As ucrSave
 End Class

@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 Imports instat.Translations
 Public Class dlgSummaryTables
@@ -75,11 +76,11 @@ Public Class dlgSummaryTables
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
 
-        ucrReceiverMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 1))
-        ucrReceiverMultiplePercentages.SetParameterIsString()
-        ucrReceiverMultiplePercentages.Selector = ucrSelectorSummaryTables
-        ucrReceiverMultiplePercentages.SetDataType("factor") ' TODO data this accepts must be in the other receiver too
-        ucrReceiverMultiplePercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
+        ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 1))
+        ucrReceiverPercentages.SetParameterIsString()
+        ucrReceiverPercentages.Selector = ucrSelectorSummaryTables
+        ucrReceiverPercentages.SetDataType("factor") ' TODO data this accepts must be in the other receiver too
+        ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
 
         ucrChkStoreResults.SetText("Store Output")
         ucrChkStoreResults.SetParameter(New RParameter("store_table", 4))
@@ -90,6 +91,7 @@ Public Class dlgSummaryTables
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
+        ucrChkOmitMissing.SetLinkedDisplayControl(cmdMissingOptions)
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 6))
         ucrChkDisplayMargins.SetText("Display Outer Margins")
@@ -153,6 +155,7 @@ Public Class dlgSummaryTables
 
         ucrPnlSummaryFrequencyTables.AddRadioButton(rdoSummaryTable)
         ucrPnlSummaryFrequencyTables.AddRadioButton(rdoFrequencyTable)
+        ucrPnlSummaryFrequencyTables.AddRadioButton(rdoMultipleResponse)
         ucrPnlSummaryFrequencyTables.AddParameterValuesCondition(rdoSummaryTable, "rdo_checked", "rdoSummary")
         ucrPnlSummaryFrequencyTables.AddParameterValuesCondition(rdoFrequencyTable, "rdo_checked", "rdoFrequency")
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrReceiverSummaryCols}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
@@ -168,7 +171,7 @@ Public Class dlgSummaryTables
         ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
         ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverMultiplePercentages, {True}, bNewLinkedHideIfParameterMissing:=True,
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                       bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True,
                                                       bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
@@ -179,7 +182,7 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
         ucrSaveTable.SetPrefix("summary_table")
-        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetCheckBoxText("Save Table")
@@ -320,13 +323,13 @@ Public Class dlgSummaryTables
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
-        clsSummaryDefaultFunction.SetAssignTo("summary_table")
+        clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
         clsFrequencyDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=2)
         clsFrequencyDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=10)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
-        clsFrequencyDefaultFunction.SetAssignTo("frequency_table")
+        clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
 
         clsTableTitleFunction.SetPackageName("gt")
         clsTableTitleFunction.SetRCommand("tab_header")
@@ -382,9 +385,13 @@ Public Class dlgSummaryTables
 
         clsStyleListFunction.SetRCommand("list")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-        clsJoiningPipeOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
+        clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorSummaryTables.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
+
         bResetSubdialog = True
     End Sub
 
@@ -603,30 +610,24 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
+        cmdSummaries.Visible = rdoSummaryTable.Checked
+        cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
         If rdoSummaryTable.Checked Then
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFrequencyDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSummaryDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("summary_table")
-            cmdFormatTable.Location = New Point(286, 464)
-            cmdSummaries.Visible = True
         Else
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
             clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummaryDefaultFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsFrequencyDefaultFunction, iPosition:=0)
             ucrSaveTable.SetPrefix("frequency_table")
-            cmdSummaries.Visible = False
-            cmdFormatTable.Location = New Point(286, 379)
         End If
     End Sub
 
     Private Sub ucrChkDisplayAsPercentage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
         If ucrChkDisplayAsPercentage.Checked Then
-            ucrReceiverMultiplePercentages.SetMeAsReceiver()
+            ucrReceiverPercentages.SetMeAsReceiver()
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If

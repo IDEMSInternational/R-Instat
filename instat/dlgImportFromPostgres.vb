@@ -14,18 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class frmGraphDisplay
-    Private Sub frmGraphDisplay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Imports instat.Translations
 
-    End Sub
+Public Class dlgImportFromPostgres
 
-    Public Sub SetImageFromFile(strFilePath As String)
-        Dim fsTemp As System.IO.FileStream
-        Dim imgTemp As Image
-
-        fsTemp = New System.IO.FileStream(strFilePath, IO.FileMode.Open, IO.FileAccess.Read)
-        imgTemp = System.Drawing.Image.FromStream(fsTemp)
-        pctGraph.Image = imgTemp
-        fsTemp.Close()
-    End Sub
 End Class
