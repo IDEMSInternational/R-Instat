@@ -420,7 +420,7 @@ Partial Class dlgNewDataFrame
         Me.ucrChkRCommand.Checked = False
         Me.ucrChkRCommand.Location = New System.Drawing.Point(19, 114)
         Me.ucrChkRCommand.Name = "ucrChkRCommand"
-        Me.ucrChkRCommand.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkRCommand.Size = New System.Drawing.Size(177, 23)
         Me.ucrChkRCommand.TabIndex = 175
         '
         'ucrInputListInCategory
@@ -462,7 +462,7 @@ Partial Class dlgNewDataFrame
         Me.ucrChkIncludeLabel.Checked = False
         Me.ucrChkIncludeLabel.Location = New System.Drawing.Point(194, 101)
         Me.ucrChkIncludeLabel.Name = "ucrChkIncludeLabel"
-        Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(160, 23)
         Me.ucrChkIncludeLabel.TabIndex = 164
         '
         'ucrChkVariable
@@ -471,7 +471,11 @@ Partial Class dlgNewDataFrame
         Me.ucrChkVariable.Checked = False
         Me.ucrChkVariable.Location = New System.Drawing.Point(37, 101)
         Me.ucrChkVariable.Name = "ucrChkVariable"
+
+        Me.ucrChkVariable.Size = New System.Drawing.Size(152, 23)
+
         Me.ucrChkVariable.Size = New System.Drawing.Size(138, 27)
+
         Me.ucrChkVariable.TabIndex = 162
         '
         'ucrTryNewDataFrame
