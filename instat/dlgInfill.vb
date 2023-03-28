@@ -135,16 +135,10 @@ Public Class dlgInfill
     End Sub
 
     Private Sub AutoFillStation()
-        Dim ucrCurrentReceiver As ucrReceiver = Nothing
-
         If ucrInfillSelector.CurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver = ucrInfillSelector.CurrentReceiver
+            ucrInfillSelector.CurrentReceiver.SetMeAsReceiver()
         End If
-        ucrReceiverFactors.AddItemsWithMetadataProperty(ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-
+ucrReceiverFactors.AddItemsWithMetadataProperty(ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
