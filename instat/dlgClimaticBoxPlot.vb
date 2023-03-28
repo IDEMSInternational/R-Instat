@@ -426,7 +426,7 @@ Public Class dlgClimaticBoxPlot
         strMonthCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "month_label")
         strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
         strTempCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "temp_min_label")
-        If strTempCol <> "" Then
+        If Not String.IsNullOrEmpty(strTempCol) Then
             ucrReceiverElement.Add(strTempCol, strDataFrame)
         Else
             ucrReceiverElement.Add(strRainCol, strDataFrame)
