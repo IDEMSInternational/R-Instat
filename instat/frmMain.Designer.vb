@@ -397,7 +397,6 @@ Partial Class frmMain
         Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTbLog = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
@@ -2958,7 +2957,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
@@ -3145,16 +3144,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
         Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuDataFrameMetadat.Text = "  Data Frame Metadata..."
-        '
-        'mnuTbLog
-        '
-        Me.mnuTbLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLog.Image = CType(resources.GetObject("mnuTbLog.Image"), System.Drawing.Image)
-        Me.mnuTbLog.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbLog.Name = "mnuTbLog"
-        Me.mnuTbLog.Size = New System.Drawing.Size(46, 34)
-        Me.mnuTbLog.Text = "Script Window..."
-        Me.mnuTbLog.ToolTipText = "Log Window"
         '
         'mnuTbResetLayout
         '
@@ -5568,7 +5557,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCalculator As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnFactorCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
-    Friend WithEvents mnuTbLog As ToolStripSplitButton
     Friend WithEvents mnuMetadata As ToolStripSplitButton
     Friend WithEvents mnuColumnMetadat As ToolStripMenuItem
     Friend WithEvents mnuDataFrameMetadat As ToolStripMenuItem
