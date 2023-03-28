@@ -149,7 +149,6 @@ Partial Class frmMain
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewOutputWindow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -399,8 +398,6 @@ Partial Class frmMain
         Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTbLog = New System.Windows.Forms.ToolStripSplitButton()
-        Me.mnuLogWindow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuScriptWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
@@ -666,6 +663,7 @@ Partial Class frmMain
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
@@ -674,7 +672,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrScriptWindow = New instat.ucrScript()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1433,7 +1430,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 22)
         Me.mnuView.Tag = "View"
@@ -1452,15 +1449,7 @@ Partial Class frmMain
         Me.mnuViewOutputWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOutputWindow.Name = "mnuViewOutputWindow"
         Me.mnuViewOutputWindow.Size = New System.Drawing.Size(205, 22)
-        Me.mnuViewOutputWindow.Text = "Output Window"
-        '
-        'mnuViewLog
-        '
-        Me.mnuViewLog.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuViewLog.Name = "mnuViewLog"
-        Me.mnuViewLog.Size = New System.Drawing.Size(205, 22)
-        Me.mnuViewLog.Tag = "Log"
-        Me.mnuViewLog.Text = "Log Window"
+        Me.mnuViewOutputWindow.Text = "Output"
         '
         'mnuViewScriptWindow
         '
@@ -1468,7 +1457,7 @@ Partial Class frmMain
         Me.mnuViewScriptWindow.Name = "mnuViewScriptWindow"
         Me.mnuViewScriptWindow.Size = New System.Drawing.Size(205, 22)
         Me.mnuViewScriptWindow.Tag = "Script_Window"
-        Me.mnuViewScriptWindow.Text = "Script Window"
+        Me.mnuViewScriptWindow.Text = "Log/Script"
         '
         'mnuViewColumnMetadata
         '
@@ -3160,27 +3149,12 @@ Partial Class frmMain
         'mnuTbLog
         '
         Me.mnuTbLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbLog.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogWindow, Me.mnuScriptWindow})
         Me.mnuTbLog.Image = CType(resources.GetObject("mnuTbLog.Image"), System.Drawing.Image)
         Me.mnuTbLog.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbLog.Name = "mnuTbLog"
         Me.mnuTbLog.Size = New System.Drawing.Size(46, 34)
         Me.mnuTbLog.Text = "Script Window..."
         Me.mnuTbLog.ToolTipText = "Log Window"
-        '
-        'mnuLogWindow
-        '
-        Me.mnuLogWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuLogWindow.Name = "mnuLogWindow"
-        Me.mnuLogWindow.Size = New System.Drawing.Size(166, 22)
-        Me.mnuLogWindow.Text = "  Log Window..."
-        '
-        'mnuScriptWindow
-        '
-        Me.mnuScriptWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuScriptWindow.Name = "mnuScriptWindow"
-        Me.mnuScriptWindow.Size = New System.Drawing.Size(166, 22)
-        Me.mnuScriptWindow.Text = "  Script Window..."
         '
         'mnuTbResetLayout
         '
@@ -4970,6 +4944,19 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Size = New System.Drawing.Size(178, 167)
         Me.ucrDataFrameMeta.TabIndex = 0
         '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.AutoSize = True
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(575, 167)
+        Me.ucrScriptWindow.strActiveTabText = ""
+        Me.ucrScriptWindow.TabIndex = 2
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -5049,19 +5036,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.AutoSize = True
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(575, 167)
-        Me.ucrScriptWindow.strActiveTabText = ""
-        Me.ucrScriptWindow.TabIndex = 2
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'frmMain
         '
@@ -5173,7 +5147,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnReshapeMerge As ToolStripMenuItem
     Friend WithEvents mnuViewColumnMetadata As ToolStripMenuItem
     Friend WithEvents mnuViewDataFrameMetadata As ToolStripMenuItem
-    Friend WithEvents mnuViewLog As ToolStripMenuItem
     Friend WithEvents mnuViewScriptWindow As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataBook As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataObjectDeleteDataFrame As ToolStripMenuItem
@@ -5596,8 +5569,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnFactorCountInFactor As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
     Friend WithEvents mnuTbLog As ToolStripSplitButton
-    Friend WithEvents mnuScriptWindow As ToolStripMenuItem
-    Friend WithEvents mnuLogWindow As ToolStripMenuItem
     Friend WithEvents mnuMetadata As ToolStripSplitButton
     Friend WithEvents mnuColumnMetadat As ToolStripMenuItem
     Friend WithEvents mnuDataFrameMetadat As ToolStripMenuItem
