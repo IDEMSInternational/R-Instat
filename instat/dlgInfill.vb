@@ -138,7 +138,7 @@ Public Class dlgInfill
         If ucrInfillSelector.CurrentReceiver IsNot Nothing Then
             ucrInfillSelector.CurrentReceiver.SetMeAsReceiver()
         End If
-ucrReceiverFactors.AddItemsWithMetadataProperty(ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        ucrReceiverFactors.AddItemsWithMetadataProperty(ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
