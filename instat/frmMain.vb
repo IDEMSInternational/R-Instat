@@ -530,7 +530,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
+    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click, ToolStripButton1.Click
         mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
         UpdateLayout()
     End Sub
