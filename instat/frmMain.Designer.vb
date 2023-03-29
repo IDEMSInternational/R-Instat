@@ -3107,7 +3107,7 @@ Partial Class frmMain
         Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbDataView.Name = "mnuTbDataView"
         Me.mnuTbDataView.Size = New System.Drawing.Size(34, 34)
-        Me.mnuTbDataView.ToolTipText = "Data View"
+        Me.mnuTbDataView.ToolTipText = "Toggle Data view open and closed"
         '
         'mnuTbOutput
         '
@@ -3118,7 +3118,7 @@ Partial Class frmMain
         Me.mnuTbOutput.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOutput.Name = "mnuTbOutput"
         Me.mnuTbOutput.Size = New System.Drawing.Size(34, 34)
-        Me.mnuTbOutput.ToolTipText = "Output Window"
+        Me.mnuTbOutput.ToolTipText = "Toggle Output window open and closed"
         '
         'mnuTbLogScript
         '
@@ -3139,7 +3139,7 @@ Partial Class frmMain
         Me.mnuMetadata.Name = "mnuMetadata"
         Me.mnuMetadata.Size = New System.Drawing.Size(46, 34)
         Me.mnuMetadata.Text = "ToolStripSplitButton2"
-        Me.mnuMetadata.ToolTipText = "Column Metadata"
+        Me.mnuMetadata.ToolTipText = "Toggle Metadata windows open and closed"
         '
         'mnuColumnMetadat
         '
