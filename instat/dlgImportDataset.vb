@@ -117,6 +117,7 @@ Public Class dlgImportDataset
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
+        ucrNudPreviewLines.Maximum = 1000
 
         '##############################################################
         'RDS Controls

@@ -251,4 +251,4 @@ installer/Output/
 /packages/jacobslusser.ScintillaNET.*/
 
 /packages/NLog.*/
-/packages/Newtonsoft*/
+/packages/Newtonsoft.Json.*/
