@@ -173,7 +173,7 @@ Public Class dlgRandomSplit
                 End If
             Else
                 If rdoTimeSeries.Checked Then
-                If ucrChkLag.Checked Then
+                    If ucrChkLag.Checked Then
                         If Not ucrNudLag.IsEmpty Then
                             ucrBase.OKEnabled(True)
                         Else
@@ -182,8 +182,8 @@ Public Class dlgRandomSplit
                     Else
                         ucrBase.OKEnabled(True)
                     End If
+                End If
             End If
-        End If
         End If
     End Sub
 
