@@ -44,6 +44,7 @@ Partial Class dlgDeleteObjects
         Me.ucrReceiverObjectsToDelete = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDeleteObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblDeleteNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblObjectsToDelete
@@ -107,8 +108,18 @@ Partial Class dlgDeleteObjects
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 204)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 5
+        '
+        'lblDeleteNumber
+        '
+        Me.lblDeleteNumber.AutoSize = True
+        Me.lblDeleteNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDeleteNumber.Location = New System.Drawing.Point(338, 24)
+        Me.lblDeleteNumber.Name = "lblDeleteNumber"
+        Me.lblDeleteNumber.Size = New System.Drawing.Size(21, 13)
+        Me.lblDeleteNumber.TabIndex = 9
+        Me.lblDeleteNumber.Text = "DF"
         '
         'dlgDeleteObjects
         '
@@ -116,6 +127,7 @@ Partial Class dlgDeleteObjects
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 260)
+        Me.Controls.Add(Me.lblDeleteNumber)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.ucrInputComboType)
         Me.Controls.Add(Me.ucrReceiverObjectsToDelete)
@@ -140,4 +152,5 @@ Partial Class dlgDeleteObjects
     Friend WithEvents ucrReceiverObjectsToDelete As ucrReceiverMultiple
     Friend WithEvents lblType As Label
     Friend WithEvents ucrInputComboType As ucrInputComboBox
+    Friend WithEvents lblDeleteNumber As Label
 End Class
