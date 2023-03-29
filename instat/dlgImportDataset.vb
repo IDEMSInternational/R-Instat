@@ -704,8 +704,8 @@ Public Class dlgImportDataset
             End If
 
             If strFileExtension = ".r" Then
-                If Not frmMain.mnuViewScriptWindow.Checked Then
-                    frmMain.mnuViewScriptWindow.Checked = True
+                If Not frmMain.mnuViewLogScript.Checked Then
+                    frmMain.mnuViewLogScript.Checked = True
                     frmMain.UpdateLayout()
                 End If
                 If frmMain.ucrScriptWindow.strActiveTabText.Length = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &

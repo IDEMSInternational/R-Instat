@@ -322,10 +322,10 @@ Public Class frmMain
         splMetadata.SplitterDistance = splMetadata.Width / 2
 
         mnuViewDataView.Checked = True
-        mnuViewOutputWindow.Checked = True
+        mnuViewOutput.Checked = True
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
-        mnuViewScriptWindow.Checked = False
+        mnuViewLogScript.Checked = False
         mnuViewSwapDataAndMetadata.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
@@ -386,7 +386,7 @@ Public Class frmMain
     Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
         ucrScriptWindow.AppendText(strText)
         If bMakeVisible Then
-            mnuViewScriptWindow.Checked = True
+            mnuViewLogScript.Checked = True
             UpdateLayout()
         End If
     End Sub
@@ -466,24 +466,24 @@ Public Class frmMain
 
     Public Sub UpdateLayout()
         If Not mnuViewDataView.Checked _
-                AndAlso Not mnuViewOutputWindow.Checked _
+                AndAlso Not mnuViewOutput.Checked _
                 AndAlso Not mnuViewColumnMetadata.Checked _
                 AndAlso Not mnuViewDataFrameMetadata.Checked _
-                AndAlso Not mnuViewScriptWindow.Checked _
+                AndAlso Not mnuViewLogScript.Checked _
                 AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
             splOverall.Show()
-            If mnuViewDataView.Checked OrElse mnuViewOutputWindow.Checked Then
+            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
                 splOverall.Panel2Collapsed = False
                 splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
-                splDataOutput.Panel2Collapsed = Not mnuViewOutputWindow.Checked
+                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
             Else
                 splOverall.Panel2Collapsed = True
             End If
             If mnuViewColumnMetadata.Checked _
                     OrElse mnuViewDataFrameMetadata.Checked _
-                    OrElse mnuViewScriptWindow.Checked Then
+                    OrElse mnuViewLogScript.Checked Then
                 splOverall.Panel1Collapsed = False
                 If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
                     splExtraWindows.Panel1Collapsed = False
@@ -492,7 +492,7 @@ Public Class frmMain
                 Else
                     splExtraWindows.Panel1Collapsed = True
                 End If
-                If mnuViewScriptWindow.Checked Then
+                If mnuViewLogScript.Checked Then
                     splExtraWindows.Panel2Collapsed = False
                 Else
                     splExtraWindows.Panel2Collapsed = True
@@ -502,8 +502,8 @@ Public Class frmMain
             End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
-        mnuTbOutput.Checked = mnuViewOutputWindow.Checked
-        ToolStripButton1.Checked = mnuViewScriptWindow.Checked
+        mnuTbOutput.Checked = mnuViewOutput.Checked
+        ToolStripButton1.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Sub UpdateSwapDataAndMetadata()
@@ -520,21 +520,15 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
-        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
-        UpdateLayout()
-    End Sub
-
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
     End Sub
 
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click, ToolStripButton1.Click
-        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
-        ToolStripButton1.Checked = mnuViewScriptWindow.Checked
+    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, mnuViewLogScript.Click
+        mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
+        ToolStripButton1.Checked = mnuViewLogScript.Checked
         UpdateLayout()
     End Sub
 
@@ -559,7 +553,7 @@ Public Class frmMain
         dlgDataFrameMetaData.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs)
+    Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuViewColumnMetadata.Checked = True
         UpdateLayout()
     End Sub
@@ -793,8 +787,8 @@ Public Class frmMain
         dlgGeneralANOVA.ShowDialog()
     End Sub
 
-    Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
-        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+    Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutput.Click
+        mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
 
@@ -1381,10 +1375,6 @@ Public Class frmMain
         ctrActive = ucrOutput
     End Sub
 
-    Private Sub ucrScriptWindow_Enter(sender As Object, e As EventArgs)
-        ctrActive = ucrScriptWindow
-    End Sub
-
     Private Sub ucrColumnMeta_Enter(sender As Object, e As EventArgs) Handles ucrColumnMeta.Enter
         ctrActive = ucrColumnMeta
     End Sub
@@ -1563,7 +1553,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
-        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+        mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
 
@@ -2014,7 +2004,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick, mnuNormalViewer.Click
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuNormalViewer.Click, mnuLastGraph.ButtonClick
         Dim clsLastObjectRFunction As New RFunction
         clsLastObjectRFunction.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object_data")
         clsLastObjectRFunction.AddParameter("object_type_label", Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
@@ -2315,7 +2305,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.ButtonClick, mnuSubTbCopy.Click, mnuEditCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
         ElseIf ctrActive.Equals(ucrColumnMeta) Then
@@ -2327,18 +2317,18 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuEditCopySpecial.Click, mnuSubTbCopySpecial.Click
+    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbCopySpecial.Click, mnuEditCopySpecial.Click
         dlgCopySpecial.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click, mnuTbPaste.ButtonClick, mnuSubTbPaste.Click
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuTbPaste.ButtonClick, mnuSubTbPaste.Click, mnuEditPaste.Click
         'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
         If ctrActive.Equals(ucrScriptWindow) Then
             ucrScriptWindow.PasteText()
         End If
     End Sub
 
-    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
+    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbPasteSpecial.Click, mnuPasteSpecial.Click
         dlgPasteNewColumns.ShowDialog()
     End Sub
 
