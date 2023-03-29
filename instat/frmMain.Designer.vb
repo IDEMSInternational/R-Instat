@@ -998,7 +998,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeUseTable.Enabled = False
         Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
-        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeUseTable.Text = "Use Table..."
         Me.mnuDescribeUseTable.Visible = False
         '
@@ -4293,11 +4293,12 @@ Partial Class frmMain
         Me.mnuStructuredLow_Flow.Name = "mnuStructuredLow_Flow"
         Me.mnuStructuredLow_Flow.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredLow_Flow.Text = "Low_Flow"
+        Me.mnuStructuredLow_Flow.Visible = False
         '
         'mnuStructuredLow_FlowDefine
         '
         Me.mnuStructuredLow_FlowDefine.Name = "mnuStructuredLow_FlowDefine"
-        Me.mnuStructuredLow_FlowDefine.Size = New System.Drawing.Size(117, 22)
+        Me.mnuStructuredLow_FlowDefine.Size = New System.Drawing.Size(180, 22)
         Me.mnuStructuredLow_FlowDefine.Text = "Define..."
         '
         'mnuStructuredSurvival
@@ -4319,23 +4320,24 @@ Partial Class frmMain
         Me.mnuStructuredTimeSeries.Name = "mnuStructuredTimeSeries"
         Me.mnuStructuredTimeSeries.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredTimeSeries.Text = "Time Series"
+        Me.mnuStructuredTimeSeries.Visible = False
         '
         'mnuStructuredTimeSeriesDefine
         '
         Me.mnuStructuredTimeSeriesDefine.Name = "mnuStructuredTimeSeriesDefine"
-        Me.mnuStructuredTimeSeriesDefine.Size = New System.Drawing.Size(119, 22)
+        Me.mnuStructuredTimeSeriesDefine.Size = New System.Drawing.Size(180, 22)
         Me.mnuStructuredTimeSeriesDefine.Text = "Define..."
         '
         'ToolStripSeparator60
         '
         Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
-        Me.ToolStripSeparator60.Size = New System.Drawing.Size(116, 6)
+        Me.ToolStripSeparator60.Size = New System.Drawing.Size(177, 6)
         '
         'mnuStructuredTimeSeriesDescribe
         '
         Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable, Me.mnuStructuredTimeSeriesDescribeGeneral})
         Me.mnuStructuredTimeSeriesDescribe.Name = "mnuStructuredTimeSeriesDescribe"
-        Me.mnuStructuredTimeSeriesDescribe.Size = New System.Drawing.Size(119, 22)
+        Me.mnuStructuredTimeSeriesDescribe.Size = New System.Drawing.Size(180, 22)
         Me.mnuStructuredTimeSeriesDescribe.Text = "Describe"
         '
         'mnuStructuredTimeSeriesDescribeOneVariable
@@ -4353,13 +4355,13 @@ Partial Class frmMain
         'ToolStripSeparator61
         '
         Me.ToolStripSeparator61.Name = "ToolStripSeparator61"
-        Me.ToolStripSeparator61.Size = New System.Drawing.Size(116, 6)
+        Me.ToolStripSeparator61.Size = New System.Drawing.Size(177, 6)
         '
         'mnuStructuredTimeSeriesModel
         '
         Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable, Me.mnuStructuredTimeSeriesModelGeneral})
         Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
-        Me.mnuStructuredTimeSeriesModel.Size = New System.Drawing.Size(119, 22)
+        Me.mnuStructuredTimeSeriesModel.Size = New System.Drawing.Size(180, 22)
         Me.mnuStructuredTimeSeriesModel.Text = "Model"
         '
         'mnuStructuredTimeSeriesModelOneVariable
@@ -4377,7 +4379,7 @@ Partial Class frmMain
         'ToolStripSeparator62
         '
         Me.ToolStripSeparator62.Name = "ToolStripSeparator62"
-        Me.ToolStripSeparator62.Size = New System.Drawing.Size(116, 6)
+        Me.ToolStripSeparator62.Size = New System.Drawing.Size(177, 6)
         '
         'ToolStripSeparator63
         '
@@ -4389,18 +4391,21 @@ Partial Class frmMain
         Me.mnuStructuredClimatic.Name = "mnuStructuredClimatic"
         Me.mnuStructuredClimatic.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredClimatic.Text = "Climatic..."
+        Me.mnuStructuredClimatic.Visible = False
         '
         'mnuStructuredProcurement
         '
         Me.mnuStructuredProcurement.Name = "mnuStructuredProcurement"
         Me.mnuStructuredProcurement.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredProcurement.Text = "Procurement..."
+        Me.mnuStructuredProcurement.Visible = False
         '
         'mnuStructuredOptionByContext
         '
         Me.mnuStructuredOptionByContext.Name = "mnuStructuredOptionByContext"
         Me.mnuStructuredOptionByContext.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredOptionByContext.Text = "Options by Context..."
+        Me.mnuStructuredOptionByContext.Visible = False
         '
         'mnuProcurement
         '
@@ -5114,9 +5119,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat  " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat  .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()

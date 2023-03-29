@@ -64,7 +64,6 @@ Public Class ucrDataViewReoGrid
 
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             textColour = Color.Red
-            grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top when filter is applied. see issue #8116
         Else
             textColour = Color.DarkBlue
         End If
@@ -86,6 +85,8 @@ Public Class ucrDataViewReoGrid
                 strLongestRowHeaderText = strRowNames(i)
             End If
         Next
+
+        grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
 
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.
