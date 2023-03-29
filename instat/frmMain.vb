@@ -332,7 +332,7 @@ Public Class frmMain
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
-        ToolStripButton1.Checked = False
+        mnuTbLogScript.Checked = False
         UpdateLayout()
     End Sub
 
@@ -503,7 +503,7 @@ Public Class frmMain
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutput.Checked
-        ToolStripButton1.Checked = mnuViewLogScript.Checked
+        mnuTbLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Sub UpdateSwapDataAndMetadata()
@@ -526,9 +526,9 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, mnuViewLogScript.Click
+    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTbLogScript.Click, mnuViewLogScript.Click
         mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
-        ToolStripButton1.Checked = mnuViewLogScript.Checked
+        mnuTbLogScript.Checked = mnuViewLogScript.Checked
         UpdateLayout()
     End Sub
 
