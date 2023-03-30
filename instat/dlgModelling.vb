@@ -31,7 +31,7 @@ Public Class dlgModelling
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction As New RFunction
+    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParameters, clsStanGlmFunction, clsStanPolrFunction As New RFunction
 
     Private bResetDisplayOptions = False
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
@@ -66,7 +66,7 @@ Public Class dlgModelling
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
         ucrTryModelling.SetIsModel()
 
-        ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS"})
+        ucrInputComboRPackage.SetItems({"stats", "extRemes", "lme4", "MASS", "arm", "rstanarm"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         bUpdating = False
@@ -85,6 +85,9 @@ Public Class dlgModelling
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
+        clsArmAddParameters = New RFunction
+        clsStanGlmFunction = New RFunction
+        clsStanPolrFunction = New RFunction
 
         '---------------------------------------------------------
         'todo. what was the purpose of these RFunctions? delete?
@@ -134,6 +137,23 @@ Public Class dlgModelling
         'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
         clsFormulaFunction.bExcludeAssignedFunctionOutput = False
+
+        'Bayesian
+        clsArmAddParameters.SetPackageName("arm")
+        clsArmAddParameters.SetRCommand("bayesglm")
+        clsArmAddParameters.iCallType = 2
+
+        clsArmAddParameters.SetPackageName("arm")
+        clsArmAddParameters.SetRCommand("bayespolr")
+        clsArmAddParameters.iCallType = 2
+
+        clsStanGlmFunction.SetPackageName("rstanarm")
+        clsStanGlmFunction.SetRCommand("StanGlm")
+        clsStanGlmFunction.iCallType = 2
+
+        clsStanPolrFunction.SetPackageName("rstanarm")
+        clsStanPolrFunction.SetRCommand("StanPolr")
+        clsStanPolrFunction.iCallType = 2
 
         'Summary
         clsSummaryFunction = clsRegressionDefaults.clsDefaultSummary.Clone
@@ -493,6 +513,42 @@ Public Class dlgModelling
         End If
     End Sub
 
+    Private Sub cmdbayesglm_Click(sender As Object, e As EventArgs) Handles cmdbayesglm.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula =, family = gaussian, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ",weights=, subset=, na.action=,start = NULL, etastart=, mustart= ,offset=, control = list(...),model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 489)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdbayespolr_Click(sender As Object, e As EventArgs) Handles cmdbayespolr.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr(formula= , data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, start=, subset=, na.action=, contrasts = NULL,Hess = TRUE, model = TRUE,method = c(logistic, probit,cloglog,cauchit),drop.unused.levels=TRUE,prior.mean = 0,prior.scale = 2.5,prior.df = 1,prior.counts.for.bins = NULL,min.prior.scale=1e-12,scaled = TRUE,maxit = 100,print.unnormalized.log.posterior = FALSE)", 325)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdstanglm_Click(sender As Object, e As EventArgs) Handles cmdstanglm.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_glm(formula= ,family= gaussian, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, subset= ,na.action = NULL,offset = NULL,model = TRUE, x = FALSE, y = TRUE,contrasts = NULL,prior = default_prior_coef(family),prior_intercept = default_prior_intercept(family),prior_aux = exponential(autoscale = TRUE),prior_PD = FALSE,algorithm = c(sampling, optimizing, meanfield, fullrank),mean_PPD = algorithm != optimizing && !prior_PD,adapt_delta = NULL,QR = FALSE,sparse = FALSE)", 421)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_glm()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdstanpolr_Click(sender As Object, e As EventArgs) Handles cmdstanpolr.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_polr(formula=, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights= ,subset= ,na.action = getOption(na.action, na.omit), contrasts = NULL,model = TRUE,method = c(logistic, probit, loglog, cloglog, cauchit), prior = R2,prior_counts = dirichlet(1),shape = NULL,rate = NULL, prior_PD = FALSE,algorithm = c(sampling, meanfield, fullrank),adapt_delta = NULL,do_residuals = NULL)", 323)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_polr()", 1)
+        End If
+    End Sub
+
     Private Sub cmdlda_Click(sender As Object, e As EventArgs) Handles cmdlda.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
@@ -613,40 +669,84 @@ Public Class dlgModelling
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                grpArm.Visible = False
+                grpRstanarm.Visible = False
                 cmdRHelpStats.Visible = True
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpLme4.Visible = False
                 cmdRHelpMASS.Visible = False
+                cmdRHelpArm.Visible = False
+                cmdRHelpRstanam.Visible = False
             Case "extRemes"
                 strPackageName = "extRemes"
                 grpStats.Visible = False
                 grpextRemes.Visible = True
                 grplme4.Visible = False
                 grpMASS.Visible = False
+                grpArm.Visible = False
+                grpRstanarm.Visible = False
                 cmdRHelpStats.Visible = False
                 cmdRHelpExtRemes.Visible = True
                 cmdRHelpLme4.Visible = False
                 cmdRHelpMASS.Visible = False
+                cmdRHelpArm.Visible = False
+                cmdRHelpRstanam.Visible = False
             Case "lme4"
                 strPackageName = "lme4"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = True
                 grpMASS.Visible = False
+                grpArm.Visible = False
+                grpRstanarm.Visible = False
                 cmdRHelpStats.Visible = False
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpLme4.Visible = True
                 cmdRHelpMASS.Visible = False
+                cmdRHelpArm.Visible = False
+                cmdRHelpRstanam.Visible = False
             Case "MASS"
                 strPackageName = "MASS"
                 grpStats.Visible = False
                 grpextRemes.Visible = False
                 grplme4.Visible = False
                 grpMASS.Visible = True
+                grpArm.Visible = False
+                grpRstanarm.Visible = False
                 cmdRHelpStats.Visible = False
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpLme4.Visible = False
                 cmdRHelpMASS.Visible = True
+                cmdRHelpArm.Visible = False
+                cmdRHelpRstanam.Visible = False
+            Case "arm"
+                strPackageName = "arm"
+                grpArm.Visible = True
+                grpRstanarm.Visible = False
+                grpStats.Visible = False
+                grpextRemes.Visible = False
+                grplme4.Visible = False
+                grpMASS.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpLme4.Visible = False
+                cmdRHelpMASS.Visible = False
+                cmdRHelpArm.Visible = True
+                cmdRHelpRstanam.Visible = False
+            Case "rstanarm"
+                strPackageName = "rstanarm"
+                grpRstanarm.Visible = True
+                grpArm.Visible = False
+                grpStats.Visible = False
+                grpextRemes.Visible = False
+                grplme4.Visible = False
+                grpMASS.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpLme4.Visible = False
+                cmdRHelpMASS.Visible = False
+                cmdRHelpArm.Visible = False
+                cmdRHelpRstanam.Visible = True
         End Select
     End Sub
 
@@ -673,6 +773,20 @@ Public Class dlgModelling
     Private Sub cmdRHelpMASS_Click(sender As Object, e As EventArgs) Handles cmdRHelpMASS.Click, ToolStripMenuMASS.Click
         If ucrInputComboRPackage.GetText = "MASS" Then
             strPackageName = "MASS"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpArm_Click(sender As Object, e As EventArgs) Handles cmdRHelpArm.Click, ToolStripMenuIArm.Click
+        If ucrInputComboRPackage.GetText = "arm" Then
+            strPackageName = "arm"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpRstanam_Click(sender As Object, e As EventArgs) Handles cmdRHelpRstanam.Click, ToolStripMenuRstanam.Click
+        If ucrInputComboRPackage.GetText = "rstanarm" Then
+            strPackageName = "rstanarm"
         End If
         OpenHelpPage()
     End Sub
