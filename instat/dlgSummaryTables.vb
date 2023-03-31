@@ -21,18 +21,19 @@ Public Class dlgSummaryTables
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
+    Private bRCodeSet As Boolean = True
     Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction, clsConcFunction,
             clsMutableFunction As New RFunction
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction, clsStubHeadFunction,
-            clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
+            clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction, clsPivotWiderFunction As New RFunction
 
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
             clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
             clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
             clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
-            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction As New RFunction
+            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsGtFunction As New RFunction
 
     Private clsMmtableOperator, clsSummaryOperator, clsFrequencyOperator, clsColumnOperator,
             clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
@@ -110,22 +111,6 @@ Public Class dlgSummaryTables
         ucrInputFrequencyMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=5))
         ucrInputFrequencyMarginName.SetLinkedDisplayControl(lblFrequencyMarginName)
 
-        ucrChkDisplaySummariesAsRow.SetText("Display Summaries As Rows")
-        ucrChkDisplaySummariesAsRow.AddParameterPresentCondition(True, "summariesLeftTop")
-        ucrChkDisplaySummariesAsRow.AddParameterPresentCondition(False, "summariesLeftTop", False)
-
-        ucrChkDisplaySummaryVariablesAsRow.SetText("Display Summary_Variables As Rows")
-        ucrChkDisplaySummaryVariablesAsRow.AddParameterPresentCondition(True, "summariesVariableLeftTop")
-        ucrChkDisplaySummaryVariablesAsRow.AddParameterPresentCondition(False, "summariesVariableLeftTop", False)
-
-        ucrChkDisplayVariablesAsRows.SetText("Display Variables As Rows")
-        ucrChkDisplayVariablesAsRows.AddParameterPresentCondition(True, "variablesLeftTop")
-        ucrChkDisplayVariablesAsRows.AddParameterPresentCondition(False, "variablesLeftTop", False)
-
-        ucrNudColumnFactors.SetLinkedDisplayControl(lblColumnFactors)
-        ucrNudColumnFactors.SetMinMax(iNewMin:=0)
-        ucrNudColumnFactors.Increment = 1
-
         ucrPnlMargin.SetParameter(New RParameter("margins", iNewPosition:=7))
         ucrPnlMargin.AddRadioButton(rdoOuter, Chr(34) & "outer" & Chr(34))
         ucrPnlMargin.AddRadioButton(rdoSummary, Chr(34) & "summary" & Chr(34))
@@ -138,10 +123,6 @@ Public Class dlgSummaryTables
         ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 8))
         ucrChkSummaries.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSummaries.SetText("Treat Summaries as a Further Factor")
-        ucrChkSummaries.AddToLinkedControls({ucrChkDisplaySummariesAsRow, ucrChkDisplayVariablesAsRows}, {True},
-                                            bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkSummaries.AddToLinkedControls(ucrChkDisplaySummaryVariablesAsRow, {False}, bNewLinkedAddRemoveParameter:=True,
-                                            bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 9))
         ucrNudSigFigs.SetMinMax(0, 22)
@@ -181,6 +162,22 @@ Public Class dlgSummaryTables
         ucrChkPercentageProportion.SetText("Display as Decimal")
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
+        ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
+        ucrPnlColumnFactor.AddRadioButton(rdoFactorVariable)
+        ucrPnlColumnFactor.AddRadioButton(rdoFactorSummary)
+        ucrPnlColumnFactor.AddRadioButton(rdoSummaryVariable)
+        ucrPnlColumnFactor.AddRadioButton(rdoVariable)
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoFactorVariable, "factor_cols", "FactorVar")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoFactorSummary, "factor_cols", "FactorSum")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummaryVariable, "factor_cols", "SumVar")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariable, "factor_cols", "Var")
+        ucrPnlColumnFactor.AddToLinkedControls(ucrReceiverColumnFactor, {rdoFactorVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrReceiverColumnFactor.SetParameter(New RParameter("names_from", 0))
+        ucrReceiverColumnFactor.Selector = ucrSelectorSummaryTables
+        ucrReceiverColumnFactor.SetDataType("factor")
+
         ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
@@ -196,13 +193,6 @@ Public Class dlgSummaryTables
         clsFrequencyDefaultFunction = New RFunction
         clsSummariesList = New RFunction
         clsConcFunction = New RFunction
-        clsMutableFunction = New RFunction
-        clsSummariesHeaderLeftTopFunction = New RFunction
-        clsSummariesHeaderTopLeftFunction = New RFunction
-        clsVariableHeaderLeftTopFunction = New RFunction
-        clsVariableHeaderTopLeftFunction = New RFunction
-        clsummaryVariableHeaderLeftTopFunction = New RFunction
-        clsSummaryVariableHeaderTopLeftFunction = New RFunction
         clsTableTitleFunction = New RFunction
         clsTabFootnoteTitleFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
@@ -233,19 +223,21 @@ Public Class dlgSummaryTables
         clsFrequencyOperator = New ROperator
         clsMmtableOperator = New ROperator
         clsDummyFunction = New RFunction
+        clsGtFunction = New RFunction
+        clsPivotWiderFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
-        ucrNudColumnFactors.SetText(1)
+        ' ucrNudColumnFactors.SetText(1)
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
-        clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
+        clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
+        clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=2)
 
-        clsSummaryOperator.SetOperation("+")
-
-        clsFrequencyOperator.SetOperation("+")
+        clsSummaryOperator.SetOperation("%>%")
+        clsSummaryOperator.bBrackets = False
 
         clsColumnOperator.SetOperation("+")
 
@@ -261,6 +253,9 @@ Public Class dlgSummaryTables
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
+
+        clsGtFunction.SetPackageName("gt")
+        clsGtFunction.SetRCommand("gt")
 
         clsStubHeadFunction.SetPackageName("gt")
         clsStubHeadFunction.SetRCommand("tab_stubhead")
@@ -282,43 +277,19 @@ Public Class dlgSummaryTables
         clsTabStylePxFunction.SetRCommand("px")
         clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
 
-        clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
-        clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsSummariesHeaderLeftTopFunction.AddParameter("variable", "summary", iPosition:=0)
+        clsPivotWiderFunction.SetRCommand("pivot_wider")
+        clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
 
-        clsSummariesHeaderTopLeftFunction.SetPackageName("mmtable2")
-        clsSummariesHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummariesHeaderTopLeftFunction.AddParameter("variable", "summary", iPosition:=0)
+        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
 
-        clsVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
-        clsVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsVariableHeaderLeftTopFunction.AddParameter("variable", "variable", iPosition:=0)
-
-        clsVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
-        clsVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsVariableHeaderTopLeftFunction.AddParameter("variable", "variable", iPosition:=0)
-
-        clsummaryVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
-        clsummaryVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsummaryVariableHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
-
-        clsSummaryVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
-        clsSummaryVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummaryVariableHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
-
-        clsMutableFunction.SetPackageName("mmtable2")
-        clsMutableFunction.SetRCommand("mmtable")
-        clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
-        clsMutableFunction.AddParameter("cells", "value", iPosition:=1)
-
-        clsSummaryOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
-        clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
-
-        clsFrequencyOperator.SetOperation("+")
-        clsFrequencyOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
+        clsFrequencyOperator.SetOperation("%>%")
+        clsFrequencyOperator.bBrackets = False
+        clsFrequencyOperator.AddParameter("tableFun", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
+        clsFrequencyOperator.AddParameter("gttbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
@@ -399,7 +370,6 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrSelectorSummaryTables.GetParameter, iAdditionalPairNo:=1)
         ucrChkStoreResults.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrChkStoreResults.GetParameter, iAdditionalPairNo:=1)
         ucrNudSigFigs.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrNudSigFigs.GetParameter, iAdditionalPairNo:=1)
-        ucrNudColumnFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrNudColumnFactors.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrReceiverFactors.GetParameter, iAdditionalPairNo:=1)
 
         ucrSelectorSummaryTables.SetRCode(clsSummaryDefaultFunction, bReset)
@@ -413,18 +383,17 @@ Public Class dlgSummaryTables
         ucrChkSummaries.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkWeight.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrPnlSummaryFrequencyTables.SetRCode(clsDummyFunction, bReset)
-        ucrChkDisplaySummariesAsRow.SetRCode(clsSummaryOperator, bReset)
-        ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsSummaryOperator, bReset)
-        ucrChkDisplayVariablesAsRows.SetRCode(clsSummaryOperator, bReset)
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
+        ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
+        ucrReceiverColumnFactor.SetRCode(clsPivotWiderFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
         FillListView()
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoSummaryTable.Checked Then
-            If ucrSaveTable.IsComplete AndAlso ucrNudColumnFactors.GetText() <> "" AndAlso
+            If ucrSaveTable.IsComplete AndAlso 'ucrNudColumnFactors.GetText() <> "" AndAlso
                 ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso
                 Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
                 ucrBase.OKEnabled(True)
@@ -494,89 +463,57 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged,
-        ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged,
-        ucrNudColumnFactors.ControlContentsChanged, ucrPnlSummaryFrequencyTables.ControlContentsChanged
+        ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged, ucrPnlSummaryFrequencyTables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplaySummariesAsRow.ControlValueChanged, ucrChkDisplayVariablesAsRows.ControlValueChanged, ucrChkDisplaySummaryVariablesAsRow.ControlValueChanged, ucrChkSummaries.ControlValueChanged
-        clsSummaryOperator.RemoveParameterByName("summariesTopLeft")
-        clsSummaryOperator.RemoveParameterByName("summariesLeftTop")
-        clsSummaryOperator.RemoveParameterByName("variablesTopLeft")
-        clsSummaryOperator.RemoveParameterByName("variablesLeftTop")
-        clsSummaryOperator.RemoveParameterByName("summariesVariableTopLeft")
-        clsSummaryOperator.RemoveParameterByName("summariesVariableLeftTop")
+    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged,
+        ucrChkSummaries.ControlValueChanged, ucrPnlSummaryFrequencyTables.ControlValueChanged
+        cmdSummaries.Visible = rdoSummaryTable.Checked
+        cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
 
-        If ucrChkSummaries.Checked Then
-            If ucrChkDisplaySummariesAsRow.Checked Then
-                clsSummaryOperator.AddParameter("summariesLeftTop", clsRFunctionParameter:=clsSummariesHeaderLeftTopFunction, iPosition:=1)
-            Else
-                clsSummaryOperator.AddParameter("summariesTopLeft", clsRFunctionParameter:=clsSummariesHeaderTopLeftFunction, iPosition:=1)
-            End If
-
-            If ucrChkDisplayVariablesAsRows.Checked Then
-                clsSummaryOperator.AddParameter("variablesLeftTop", clsRFunctionParameter:=clsVariableHeaderLeftTopFunction, iPosition:=1)
-            Else
-                clsSummaryOperator.AddParameter("variablesTopLeft", clsRFunctionParameter:=clsVariableHeaderTopLeftFunction, iPosition:=1)
-            End If
+        If rdoFrequencyTable.Checked Then
+            rdoSummaryVariable.Visible = True
+            rdoFactorSummary.Visible = False
+            rdoVariable.Visible = False
+            clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
+            ucrSaveTable.SetPrefix("frequency_table")
         Else
-            If ucrChkDisplaySummaryVariablesAsRow.Checked Then
-                clsSummaryOperator.AddParameter("summariesVariableLeftTop", clsRFunctionParameter:=clsummaryVariableHeaderLeftTopFunction, iPosition:=1)
+            clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=1)
+            ucrSaveTable.SetPrefix("summary_table")
+            If ucrChkSummaries.Checked Then
+                rdoFactorSummary.Visible = True
+                rdoVariable.Visible = True
+                rdoSummaryVariable.Visible = False
             Else
-                clsSummaryOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
+                rdoSummaryVariable.Visible = True
+                rdoFactorSummary.Visible = False
+                rdoVariable.Visible = False
             End If
         End If
-    End Sub
 
-    Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
-        If ucrReceiverFactors.IsEmpty OrElse String.IsNullOrEmpty(ucrNudColumnFactors.GetText()) Then
-            Exit Sub
-        End If
-
-        If rdoSummaryTable.Checked Then
-            Dim iColumn As Integer = 0
-            Dim iNumberOfColumns As Integer
-
-            clsColumnOperator.ClearParameters()
-            clsSummaryOperator.RemoveParameterByName("columnOp")
-
-            If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
-                iNumberOfColumns = ucrNudColumnFactors.GetText()
-                For Each strColumn As String In ucrReceiverFactors.GetVariableNamesAsList
-                    Dim clsHeaderFunction As New RFunction
-                    clsHeaderFunction.SetPackageName("mmtable2")
-                    clsHeaderFunction.SetRCommand(If(iColumn < iNumberOfColumns, "header_top_left", "header_left_top"))
-                    clsHeaderFunction.AddParameter("variable", strColumn, iPosition:=0)
-                    clsColumnOperator.AddParameter(strColumn, clsRFunctionParameter:=clsHeaderFunction, iPosition:=iColumn)
-                    iColumn += 1
-                Next
-                clsSummaryOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator, iPosition:=3)
-            End If
+        If rdoNoColumnFactor.Checked Then
+            clsSummaryOperator.RemoveParameterByName("col_factor")
+            clsFrequencyOperator.RemoveParameterByName("col_factor")
+            clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=2)
         Else
-            Dim iColumn As Integer = 1
-            Dim iNumberOfColumns As Integer
-            clsMmtableOperator.ClearParameters()
-
-            iNumberOfColumns = ucrNudColumnFactors.GetText()
-            For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
-                If iColumn <= iNumberOfColumns Then
-                    Dim clsHeaderLeftFunction As New RFunction
-                    clsHeaderLeftFunction.SetPackageName("mmtable2")
-                    clsHeaderLeftFunction.SetRCommand("header_top_left")
-                    clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
-                    clsMmtableOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
-                Else
-                    Dim clsHeaderTopFunction As New RFunction
-                    clsHeaderTopFunction.SetPackageName("mmtable2")
-                    clsHeaderTopFunction.SetRCommand("header_left_top")
-                    clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
-                    clsMmtableOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
-                End If
-                iColumn += 1
-            Next
-            clsFrequencyOperator.AddParameter("columnOp", clsROperatorParameter:=clsMmtableOperator, iPosition:=1)
+            clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            If rdoFactorVariable.Checked Then
+                ucrReceiverColumnFactor.SetMeAsReceiver()
+                clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverColumnFactor.GetVariableNames(False), iPosition:=0)
+            ElseIf rdoSummaryVariable.Checked Then
+                clsDummyFunction.AddParameter("factor_cols", "SumVar", iPosition:=2)
+                clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+            ElseIf rdoFactorSummary.Checked Then
+                clsDummyFunction.AddParameter("factor_cols", "FactorSum", iPosition:=2)
+                clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+            ElseIf rdoVariable.Checked Then
+                clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=2)
+                clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
+            End If
         End If
-
     End Sub
 
     Private Sub FillListView()
@@ -609,27 +546,34 @@ Public Class dlgSummaryTables
         Next
     End Sub
 
-    Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
-        cmdSummaries.Visible = rdoSummaryTable.Checked
-        cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
-        If rdoSummaryTable.Checked Then
-            clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=10)
-            clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
-            clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-            ucrSaveTable.SetPrefix("summary_table")
-        Else
-            clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=10)
-            clsMutableFunction.AddParameter("data", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
-            clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
-            ucrSaveTable.SetPrefix("frequency_table")
-        End If
-    End Sub
-
     Private Sub ucrChkDisplayAsPercentage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
         If ucrChkDisplayAsPercentage.Checked Then
             ucrReceiverPercentages.SetMeAsReceiver()
         Else
             ucrReceiverFactors.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrInputFactorVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlValueChanged,
+        ucrReceiverFactors.ControlValueChanged
+        Dim lstVariables As New List(Of String)
+        Dim iXVarCount As Integer
+
+        iXVarCount = lstVariables.Count
+        If bRCodeSet Then
+            If lstVariables.Contains(ucrReceiverColumnFactor.GetVariableNames(False)) OrElse
+                Not ucrReceiverFactors.GetVariableNamesAsList().Contains(ucrReceiverColumnFactor.GetVariableNames(False)) Then
+                ucrReceiverColumnFactor.Clear()
+                ucrReceiverFactors.SetMeAsReceiver()
+            End If
+            If iXVarCount = 0 AndAlso ucrReceiverFactors.lstSelectedVariables.Items.Count >= 1 AndAlso
+                ucrReceiverColumnFactor.IsEmpty() Then
+                ucrReceiverColumnFactor.Add(ucrReceiverFactors.lstSelectedVariables.Items(0).Text)
+                ucrReceiverFactors.SetMeAsReceiver()
+            ElseIf ucrReceiverFactors.IsEmpty Then
+                ucrReceiverColumnFactor.Clear()
+            End If
+            lstVariables = ucrReceiverFactors.GetVariableNamesAsList()
         End If
     End Sub
 End Class
