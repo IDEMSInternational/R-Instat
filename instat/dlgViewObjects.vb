@@ -48,7 +48,7 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetParameter(New RParameter("object_name", 1))
         'ucrReceiverSelectedObject.SetParameterIsRFunction()
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
-        ucrReceiverSelectedObject.SetMeAsReceiver()
+        'ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
         ucrReceiverSelectedObject.SetItemType("object")
         ucrReceiverSelectedObject.bAutoFill = True
@@ -66,10 +66,10 @@ Public Class dlgViewObjects
 
         ucrInputObjectType.SetParameter(New RParameter("object_type", 0))
         dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
-        dctTypes.Add("Summaries", Chr(34) & "summary" & Chr(34))
-        dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
-        dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
-        dctTypes.Add("Models", Chr(34) & "model" & Chr(34))
+        dctTypes.Add("Summaries", RObjectTypeLabel.Summary)
+        dctTypes.Add("Tables", RObjectTypeLabel.Table)
+        dctTypes.Add("Graphs", RObjectTypeLabel.Graph)
+        dctTypes.Add("Models", RObjectTypeLabel.Model)
         ucrInputObjectType.SetItems(dctTypes)
         ucrInputObjectType.SetDropDownStyleAsNonEditable()
 
@@ -133,12 +133,13 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputObjectType.ControlValueChanged
+    Private Sub ucrInputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputObjectType.ControlValueChanged, ucrReceiverSelectedObject.ControlValueChanged
         Dim key As String = dctTypes.Keys(ucrInputObjectType.cboInput.SelectedIndex)
         Dim value As String = ""
 
         If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
             ucrReceiverSelectedObject.strSelectorHeading = key
+            ucrReceiverSelectedObject.SetMeAsReceiver()
             ucrReceiverSelectedObject.SetItemType(value.Replace(Chr(34), ""))
         End If
     End Sub
