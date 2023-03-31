@@ -153,7 +153,10 @@ pkgs <-
     "verification",
     "prediction",
     # Tutorial Analysis of Some Agricultural Experiments. 
-    "agriTutorial"
+    "agriTutorial", 
+    "arm", 
+    "rstanarm", 
+    "statsr"
 
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
