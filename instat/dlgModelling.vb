@@ -31,7 +31,7 @@ Public Class dlgModelling
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParametersFunction, clsStanGlmFunction, clsStanPolrFunction As New RFunction
+    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParameters, clsStanGlmFunction, clsStanPolrFunction As New RFunction
 
 
     Private bResetDisplayOptions = False
@@ -517,7 +517,9 @@ Public Class dlgModelling
     Private Sub cmdbayesglm_Click(sender As Object, e As EventArgs) Handles cmdbayesglm.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula =, family = gaussian, data=" & ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ",weights=, subset=, na.action=,start = NULL, etastart=, mustart= ,offset=, control = list(...),model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 489)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula =, family = gaussian, data=" &
+            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ",weights=, subset=, na.action=,start = NULL, etastart=, mustart= ,offset=, control = list(...),model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, 
+            prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 503)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm()", 1)
         End If
