@@ -1100,7 +1100,9 @@ Public Class dlgHypothesisTestsCalculator
     Private Sub cmdbayesinference_Click(sender As Object, e As EventArgs) Handles cmdbayesinference.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference(y= ,x = NULL,data=" & ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""),statistic = c(""mean"", ""proportion""),method = c(""theoretical"", ""simulation""),success = NULL,cred_level = 0.95,alternative = ""twosided"", prior_family = ""JZS"",mu_0 = 0,rscale = 1,nsim = 10000,show_plot = FALSE)", 246)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference(y= ,x = NULL,data=" &
+            ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""),statistic = c(""mean"", ""proportion""),method = c(""theoretical"", ""simulation""),success = NULL,cred_level = 0.95,
+            alternative = ""twosided"", prior_family = ""JZS"",mu_0 = 0,rscale = 1,nsim = 10000,show_plot = FALSE)", 260)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference()", 1)
         End If
@@ -1109,7 +1111,9 @@ Public Class dlgHypothesisTestsCalculator
     Private Sub cmdinference_Click(sender As Object, e As EventArgs) Handles cmdinference.Click
         clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference(y= , x = NULL,data=" & ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""),statistic = c(""mean"", ""median"", ""proportion""),success = NULL,method = c(""theoretical"", ""simulation""),null = 0,alternative =""twosided"",sig_level = 0.05,conf_level = 0.95,boot_method = c(""perc"", ""se""),show_eda_plot = FALSE,show_inf_plot = FALSE)", 282)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference(y= , x = NULL,data=" &
+            ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""),statistic = c(""mean"", ""median"", ""proportion""),success = NULL,method = c(""theoretical"", ""simulation""),null = 0,
+            alternative =""twosided"",sig_level = 0.05,conf_level = 0.95,boot_method = c(""perc"", ""se""),show_eda_plot = FALSE,show_inf_plot = FALSE)", 296)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference()", 1)
         End If

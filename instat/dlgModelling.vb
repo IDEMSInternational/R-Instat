@@ -142,7 +142,7 @@ Public Class dlgModelling
         'Bayesian
         clsArmAddParameters.SetPackageName("arm")
         clsArmAddParameters.SetRCommand("bayesglm")
-        clsArmAddParameters.iCallType = 2
+
 
         clsArmAddParameters.SetPackageName("arm")
         clsArmAddParameters.SetRCommand("bayespolr")
