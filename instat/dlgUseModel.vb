@@ -18,7 +18,7 @@ Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgUseModel
-
+    Private strPackageName As String
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
     Public bUpdating As Boolean = False
@@ -201,12 +201,28 @@ Public Class dlgUseModel
         Select Case ucrInputComboRPackage.GetText
             Case "General"
                 grpGeneral.Visible = True
+                cmdRHelpGeneral.Visible = True
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpPrediction.Visible = False
+                cmdRHelpSegmented.Visible = False
             Case "Prediction"
                 grpPrediction.Visible = True
+                cmdRHelpGeneral.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpPrediction.Visible = True
+                cmdRHelpSegmented.Visible = False
             Case "extRemes"
                 grpExtrRemes.Visible = True
+                cmdRHelpGeneral.Visible = False
+                cmdRHelpExtRemes.Visible = True
+                cmdRHelpPrediction.Visible = False
+                cmdRHelpSegmented.Visible = False
             Case "segmented"
                 grpSegmented.Visible = True
+                cmdRHelpGeneral.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpPrediction.Visible = False
+                cmdRHelpSegmented.Visible = True
         End Select
     End Sub
 
@@ -382,16 +398,10 @@ Public Class dlgUseModel
         End If
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        Dim strPackageName As String
-
-        strPackageName = ucrInputComboRPackage.GetText
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        Private Sub OpenHelpPage()
+        If Not String.IsNullOrEmpty(strPackageName) Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -466,5 +476,40 @@ Public Class dlgUseModel
 
     Private Sub cmdIntercept_Click(sender As Object, e As EventArgs) Handles cmdIntercept.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("segmented::intercept()", 1)
+    End Sub
+
+    Private Sub cmdRHelpGeneral_Click(sender As Object, e As EventArgs) Handles cmdRHelpGeneral.Click, ToolStripMenuStats.Click
+        If ucrInputComboRPackage.GetText = "General" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ToolStripCar_Click(sender As Object, e As EventArgs) Handles ToolStripMenuCar.Click
+        If ucrInputComboRPackage.GetText = "General" Then
+            strPackageName = "car"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpExtRemes_Click(sender As Object, e As EventArgs) Handles cmdRHelpExtRemes.Click, ToolStripMenuExtRemes.Click
+        If ucrInputComboRPackage.GetText = "extRemes" Then
+            strPackageName = "extRemes"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpPrediction_Click(sender As Object, e As EventArgs) Handles cmdRHelpPrediction.Click, ToolStripMenuPrediction.Click
+        If ucrInputComboRPackage.GetText = "Prediction" Then
+            strPackageName = "prediction"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpSegmented_Click(sender As Object, e As EventArgs) Handles cmdRHelpSegmented.Click, ToolStripMenuSegmented.Click
+        If ucrInputComboRPackage.GetText = "segmented" Then
+            strPackageName = "segmented"
+        End If
+        OpenHelpPage()
     End Sub
 End Class

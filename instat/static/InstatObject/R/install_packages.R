@@ -132,6 +132,7 @@ pkgs <-
     # also install mmtable2 from GitHub devtools::install_github("ianmoran11/mmtable2")
     # install.packages('remotes')
     # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
+    # also install CDT from GitHub devtools::install_github("rijaf-iri/CDT")
     "corrr",
     "dslabs",
     "coin",
@@ -140,11 +141,20 @@ pkgs <-
     "pingr",
     "vcdExtra",
     # For inspect, read, edit and run files for 'APSIM'
-    "apsimx"
+    "apsimx",
     #Fast functions for dealing with prime numbers, such as testing whether a number is prime and generating a sequence prime numbers.
-    "primes"
+    "primes",
     #Generates well-known integer sequences. 'gmp' package is adopted for computing with arbitrarily large numbers.
-    "Zseq"
+    "Zseq",
+    # Extending 'gt' for Beautiful HTML Tables.
+    "gtExtras",
+    "segmented", 
+    # Utilities for verifying discrete, continuous and probabilistic forecasts, and forecasts expressed as parametric distributions are included.
+    "verification",
+    "prediction",
+    # Tutorial Analysis of Some Agricultural Experiments. 
+    "agriTutorial"
+
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"

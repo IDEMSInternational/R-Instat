@@ -55,7 +55,7 @@ Public Class dlgOneVariableSummarise
         ucrSelectorOneVarSummarise.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarSummarise.SetParameterIsString()
 
-        ucrReceiverOneVarSummarise.SetParameter(New RParameter("object", 0))
+        ucrReceiverOneVarSummarise.SetParameter(New RParameter("object", 1))
         ucrReceiverOneVarSummarise.SetParameterIsRFunction()
         ucrReceiverOneVarSummarise.Selector = ucrSelectorOneVarSummarise
         ucrReceiverOneVarSummarise.SetMeAsReceiver()
@@ -176,17 +176,19 @@ Public Class dlgOneVariableSummarise
 
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("maxsum", iMaxSum)
+        clsSummaryFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
-        clsSummaryFunction.SetAssignToOutputObject("last_summary",
-                                                   RObjectTypeLabel.Summary,
-                                                   RObjectFormat.Text,
-                                                   ucrSelectorOneVarSummarise.strCurrentDataFrame,
-                                                   "last_summary")
+        clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                                   strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
+                                                   strObjectName:="last_summary")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=0)
-        clsSummaryTableFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=1)
-        clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
+        clsSummaryTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=1)
+        clsSummaryTableFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=2)
+        clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=5)
         clsSummaryTableFunction.SetAssignTo("summary_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)

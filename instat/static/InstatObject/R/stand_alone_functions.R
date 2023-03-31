@@ -2842,7 +2842,65 @@ get_data_book_output_object_names <- function(output_object_list,
   
 }
 
-
+get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE) 
+{   
+  oneLink <- function(s) {
+    if (length(s) == 0L) 
+      return(character(0L))
+    title <- s[, "Title"]
+    if (port > 0L) 
+      prefix <- sprintf("/library/%s/doc", pkg)
+    else prefix <- sprintf("file://%s/doc", s[, "Dir"])
+    src <- s[, "File"]
+    pdf <- s[, "PDF"]
+    rcode <- s[, "R"]
+    pdfext <- sub("^.*\\.", "", pdf)
+    sprintf("  <li>%s  -  \n    %s  \n    %s  \n    %s \n  </li>\n", 
+            title, ifelse(nzchar(pdf), sprintf("<a href='%s/%s'>%s</a>&nbsp;", 
+                                               prefix, pdf, toupper(pdfext)), ""), sprintf("<a href='%s/%s'>source</a>&nbsp;", 
+                                                                                           prefix, src), ifelse(nzchar(rcode), sprintf("<a href='%s/%s'>R code</a>&nbsp;", 
+                                                                                                                                       prefix, rcode), ""))
+  }
+  
+  port <- tools::startDynamicHelp(NA)
+  file <- tempfile("Rvig.", fileext = ".html")
+  print(file)
+  sink(file = file, type = "output")
+  vinfo <- tools::getVignetteInfo(package, lib.loc, all)
+  pkgs <- unique(vinfo[, "Package"])
+  db <- lapply(pkgs, function(p) vinfo[vinfo[, "Package"] == 
+                                         p, , drop = FALSE])
+  names(db) <- pkgs
+  attr(db, "call") <- sys.call()
+  attr(db, "footer") <- if (all) 
+    ""
+  else sprintf(gettext("Use <code> %s </code> \n to list the vignettes in all <strong>available</strong> packages."), 
+               "browseVignettes(all = TRUE)")
+  if (port > 0L) 
+    css_file <- "/doc/html/R.css"
+  else css_file <- file.path(R.home("doc"), "html", 
+                             "R.css")
+  cat(sprintf("<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>\n<html>\n<head>\n<title>R Vignettes</title>\n<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes' />\n<link rel='stylesheet' type='text/css' href='%s'>\n</head><body><div class='container'>\n", 
+              css_file))
+  
+  cat(sprintf("<center><h3>Vignettes found by <code><q>%s</q></code></h3></center>", 
+              deparse1(attr(db, "call"))))
+  cat("<div class=\"vignettes\">")
+  for (pkg in names(db)) {
+    cat(sprintf("<h4>Vignettes in package <code>%s</code></h4>\n", 
+                pkg))
+    cat("<ul>\n")
+    links <- oneLink(db[[pkg]])
+    cat(paste(links), collapse = "\n")
+    cat("\n</ul>\n")
+  }
+  cat("</div>")
+  sink()
+  if (port > 0L){
+    return(sprintf("http://127.0.0.1:%d/session/%s", 
+                   port, basename(file)))}
+  else return(sprintf("file://%s", file))
+}
 
 
 
