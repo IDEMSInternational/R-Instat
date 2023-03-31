@@ -143,7 +143,6 @@ Public Class dlgModelling
         clsArmAddParameters.SetPackageName("arm")
         clsArmAddParameters.SetRCommand("bayesglm")
 
-
         clsArmAddParameters.SetPackageName("arm")
         clsArmAddParameters.SetRCommand("bayespolr")
         clsArmAddParameters.iCallType = 2
