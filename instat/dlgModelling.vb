@@ -31,7 +31,8 @@ Public Class dlgModelling
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParameters, clsStanGlmFunction, clsStanPolrFunction As New RFunction
+    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParametersFunction, clsStanGlmFunction, clsStanPolrFunction As New RFunction
+
 
     Private bResetDisplayOptions = False
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
