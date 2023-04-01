@@ -2612,12 +2612,6 @@
     <Compile Include="dlgNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLog.Designer.vb">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmLog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -2746,12 +2740,6 @@
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrLayerParamsControls.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrLog.Designer.vb">
-      <DependentUpon>ucrLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrLog.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
@@ -4819,12 +4807,6 @@
     <EmbeddedResource Include="dlgNewDataFrame.sw-KE.resx">
       <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.sw-KE.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -5097,12 +5079,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrLog.resx">
-      <DependentUpon>ucrLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrLog.sw-KE.resx">
-      <DependentUpon>ucrLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
