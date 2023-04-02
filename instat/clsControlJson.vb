@@ -1,5 +1,8 @@
 ﻿Imports System.ComponentModel
+Imports System.Reflection
+Imports System.Runtime
 Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Serialization
 
 Public Class clsControlJson
     Public Property strName As String
@@ -44,6 +47,7 @@ Public Class clsControlJson
     Public Shared Function FromJsonString(jsonString As String) As clsControlJson
         Return JsonConvert.DeserializeObject(Of clsControlJson)(jsonString)
     End Function
+
     Private Class clsUcrCoreJson
         Inherits clsControlJson
 
@@ -58,13 +62,51 @@ Public Class clsControlJson
                 Or Reflection.BindingFlags.Instance _
                 Or Reflection.BindingFlags.FlattenHierarchy
             For Each clsField As Reflection.FieldInfo In ucrCore.GetType().GetFields(bindingFlags)
-                If clsField.FieldType Is GetType(String) OrElse clsField.FieldType.IsPrimitive Then
+                Dim clsFieldType As Type = clsField.FieldType
+                If clsFieldType Is GetType(String) OrElse clsFieldType.IsPrimitive Then
                     dctProperties.Add(clsField.Name, clsField.GetValue(ucrCore))
+                ElseIf clsFieldType Is GetType(RFunction) Then
+                    Console.WriteLine(clsFieldType.ToString())
+                    Dim clsJsonSettings As New JsonSerializerSettings With {
+                            .Formatting = Formatting.Indented,
+                            .ContractResolver = New clsContractResolver()
+                    }
+                    Console.WriteLine(JsonConvert.SerializeObject(clsField.GetValue(ucrCore), clsJsonSettings))
                 Else
-                    dctProperties.Add(clsField.Name, clsField.FieldType.ToString() & " TODO")
+                    dctProperties.Add(clsField.Name, clsFieldType.ToString() & " TODO")
                 End If
             Next
         End Sub
+
+        Public Class clsContractResolver
+            Inherits DefaultContractResolver
+
+            'Protected Overrides Function CreateProperties(type As Type, memberSerialization As MemberSerialization) As IList(Of JsonProperty)
+            '    Dim props As IList(Of JsonProperty) = MyBase.CreateProperties(type, memberSerialization)
+            '    Dim allProps As IList(Of JsonProperty) = type.GetProperties(BindingFlags.NonPublic Or BindingFlags.Public Or BindingFlags.Instance).Select(Function(p) MyBase.CreateProperty(p, memberSerialization)).ToList()
+            '    For Each clsProperty In allProps
+            '        clsProperty.Writable = clsProperty.Readable
+            '    Next
+
+            '    Return allProps
+            'End Function
+
+            Protected Overrides Function CreateProperties(type As Type, memberSerialization As MemberSerialization) As IList(Of JsonProperty)
+                Dim props As IList(Of JsonProperty) = MyBase.CreateProperties(type, memberSerialization)
+                Dim allFields = type.GetFields(BindingFlags.Public Or BindingFlags.NonPublic Or BindingFlags.Instance)
+
+                For Each field In allFields
+                    If props.All(Function(p) p.PropertyName <> field.Name) Then
+                        Dim prop = MyBase.CreateProperty(field, memberSerialization)
+                        prop.Writable = prop.Readable = True
+                        prop.PropertyName = field.Name
+                        props.Add(prop)
+                    End If
+                Next
+
+                Return props
+            End Function
+        End Class
 
     End Class
 

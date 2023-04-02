@@ -149,6 +149,7 @@ Public Class Translations
 
     Private Shared Sub WriteDialogsToJson()
 
+        dlgSplitText.ShowDialog()
         Dim clsUcrControlJson As clsControlJson = New clsControlJson(dlgSplitText)
 
         'Write the Json file
