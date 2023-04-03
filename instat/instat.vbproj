@@ -1970,12 +1970,6 @@
     <Compile Include="dlgRecodeFactor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgCanonicalCorrelation.Designer.vb">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCanonicalCorrelation.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgCreateFilter.Designer.vb">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </Compile>
@@ -4174,12 +4168,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCalculationsSummmary.sw-KE.resx">
       <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCanonicalCorrelation.resx">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimdexIndices.resx">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
