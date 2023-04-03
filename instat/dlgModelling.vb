@@ -31,9 +31,8 @@ Public Class dlgModelling
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParametersFunction, clsStanGlmFunction, clsStanPolrFunction As New RFunction
-
-
+    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParametersFunction, clsStanGlmFunction,
+    clsStanPolrFunction As New RFunction
 
     Private bResetDisplayOptions = False
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
@@ -87,7 +86,7 @@ Public Class dlgModelling
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
-        clsArmAddParameters = New RFunction
+        clsArmAddParametersFunction = New RFunction
         clsStanGlmFunction = New RFunction
         clsStanPolrFunction = New RFunction
 
@@ -141,12 +140,12 @@ Public Class dlgModelling
         clsFormulaFunction.bExcludeAssignedFunctionOutput = False
 
         'Bayesian
-        clsArmAddParameters.SetPackageName("arm")
-        clsArmAddParameters.SetRCommand("bayesglm")
+        clsArmAddParametersFunction.SetPackageName("arm")
+        clsArmAddParametersFunction.SetRCommand("bayesglm")
 
-        clsArmAddParameters.SetPackageName("arm")
-        clsArmAddParameters.SetRCommand("bayespolr")
-        clsArmAddParameters.iCallType = 2
+        clsArmAddParametersFunction.SetPackageName("arm")
+        clsArmAddParametersFunction.SetRCommand("bayespolr")
+        clsArmAddParametersFunction.iCallType = 2
 
         clsStanGlmFunction.SetPackageName("rstanarm")
         clsStanGlmFunction.SetRCommand("StanGlm")
