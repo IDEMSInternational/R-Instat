@@ -51,6 +51,7 @@ Partial Class dlgAddComment
         Me.ucrInputRow = New instat.ucrInputTextBox()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrChkMakeColumnIntoKey = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblRow
@@ -74,7 +75,7 @@ Partial Class dlgAddComment
         'lblComment
         '
         Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(14, 242)
+        Me.lblComment.Location = New System.Drawing.Point(14, 264)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
         Me.lblComment.TabIndex = 10
@@ -128,7 +129,7 @@ Partial Class dlgAddComment
         Me.ucrInputComment.AutoSize = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(83, 239)
+        Me.ucrInputComment.Location = New System.Drawing.Point(83, 261)
         Me.ucrInputComment.Name = "ucrInputComment"
         Me.ucrInputComment.Size = New System.Drawing.Size(325, 47)
         Me.ucrInputComment.TabIndex = 11
@@ -150,9 +151,9 @@ Partial Class dlgAddComment
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 293)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 308)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 12
         '
         'ucrSelectorAddComment
@@ -216,12 +217,22 @@ Partial Class dlgAddComment
         Me.rdoColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoColumn.UseVisualStyleBackColor = True
         '
+        'ucrChkMakeColumnIntoKey
+        '
+        Me.ucrChkMakeColumnIntoKey.AutoSize = True
+        Me.ucrChkMakeColumnIntoKey.Checked = False
+        Me.ucrChkMakeColumnIntoKey.Location = New System.Drawing.Point(12, 233)
+        Me.ucrChkMakeColumnIntoKey.Name = "ucrChkMakeColumnIntoKey"
+        Me.ucrChkMakeColumnIntoKey.Size = New System.Drawing.Size(297, 23)
+        Me.ucrChkMakeColumnIntoKey.TabIndex = 13
+        '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(418, 346)
+        Me.ClientSize = New System.Drawing.Size(418, 365)
+        Me.Controls.Add(Me.ucrChkMakeColumnIntoKey)
         Me.Controls.Add(Me.rdoColumn)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrInputRow)
@@ -259,4 +270,5 @@ Partial Class dlgAddComment
     Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoColumn As RadioButton
     Friend WithEvents rdoDataFrame As RadioButton
+    Friend WithEvents ucrChkMakeColumnIntoKey As ucrCheck
 End Class

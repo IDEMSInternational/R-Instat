@@ -74,6 +74,11 @@ Public Class dlgAddComment
         ucrReceiverColumn.SetParameterIsString()
 
         ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
+        'ucrChkMakeColumnIntoKey
+        ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
+        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "TRUE")
+        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "FALSE")
+
     End Sub
 
     Private Sub SetDefaults()
