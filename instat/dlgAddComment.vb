@@ -23,6 +23,10 @@ Public Class dlgAddComment
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsAddComment As New RFunction
+    Private clsAddKeyFunction As New RFunction
+    Private clsGetRowNamesFunction As New RFunction
+    Private clsDummyFunction As New RFunction
+
 
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -79,22 +83,53 @@ Public Class dlgAddComment
         ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "TRUE")
         ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "FALSE")
 
+        'ucrNewColumnName
+        ucrNewColumnName.SetIsComboBox()
+        ucrNewColumnName.SetPrefix("row")
+        ucrNewColumnName.SetSaveTypeAsColumn()
+        ucrNewColumnName.SetDataFrameSelector(ucrSelectorAddComment.ucrAvailableDataFrames)
+        ucrNewColumnName.SetLabelText("Column Name:")
+
     End Sub
 
     Private Sub SetDefaults()
         clsAddComment = New RFunction
+        clsAddKeyFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsGetRowNamesFunction = New RFunction
+
+
 
         ucrSelectorAddComment.Reset()
         ucrInputComment.IsMultiline = True
 
         ucrReceiverColumn.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=1)
+
+        clsGetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+        clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
+
+
+        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+
 
         clsAddComment.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_new_comment")
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddComment)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorAddComment.AddAdditionalCodeParameterPair(clsAddKeyFunction, ucrSelectorAddComment.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorAddComment.AddAdditionalCodeParameterPair(clsGetRowNamesFunction, ucrSelectorAddComment.GetParameter, iAdditionalPairNo:=2)
+
+        ' SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputComment.SetRCode(clsAddComment, bReset)
+        ucrReceiverColumn.SetRCode(clsAddComment, bReset)
+        ucrInputRow.SetRCode(clsAddComment, bReset)
+        ucrPnlCellRowColumnDataFrame.SetRCode(clsAddComment, bReset)
+        ucrChkMakeColumnIntoKey.SetRCode(clsDummyFunction, bReset)
+        ucrSelectorAddComment.SetRCode(clsAddComment, bReset)
+        ucrNewColumnName.SetRCode(clsGetRowNamesFunction, bReset)
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -140,12 +175,35 @@ Public Class dlgAddComment
         strSelectedColumn = strColumn
         bUseSelectedPosition = True
     End Sub
+    Private Sub AddRemoveKeyFromAfterCodes()
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+        If ucrChkMakeColumnIntoKey.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRowNamesFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAddKeyFunction, iPosition:=1)
+
+            clsDummyFunction.AddParameter("add_key", "TRUE", iPosition:=2)
+        Else
+            clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=2)
+        End If
+    End Sub
+
+    Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
+        AddRemoveKeyFromAfterCodes()
+    End Sub
 
     Private Sub ucrPnlCellRowColumnDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCellRowColumnDataFrame.ControlValueChanged
         ucrSelectorAddComment.ShowColumnSelector(rdoCell.Checked OrElse rdoColumn.Checked)
+        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
+
+        AddRemoveKeyFromAfterCodes()
     End Sub
 
     Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrInputRow.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellRowColumnDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
+    Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
+        clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
+        ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
+    End Sub
+
 End Class
