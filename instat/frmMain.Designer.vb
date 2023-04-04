@@ -387,13 +387,13 @@ Partial Class frmMain
         Me.mnuSubTbPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripSplitButton()
+        Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbOutput = New System.Windows.Forms.ToolStripButton()
         Me.mnuLastGraph = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuNormalViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuploty = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
-        Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbOutput = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbLogScript = New System.Windows.Forms.ToolStripButton()
         Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
@@ -672,6 +672,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvey = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3065,36 +3066,6 @@ Partial Class frmMain
         Me.mnuTbLast10Dialogs.Text = "ToolStripSplitButton3"
         Me.mnuTbLast10Dialogs.ToolTipText = "View/Edit Last Dialogue"
         '
-        'mnuLastGraph
-        '
-        Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuLastGraph.DropDownButtonWidth = 16
-        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNormalViewer, Me.mnuploty, Me.mnuRViewer})
-        Me.mnuLastGraph.Image = CType(resources.GetObject("mnuLastGraph.Image"), System.Drawing.Image)
-        Me.mnuLastGraph.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuLastGraph.Name = "mnuLastGraph"
-        Me.mnuLastGraph.Size = New System.Drawing.Size(51, 34)
-        Me.mnuLastGraph.Text = "ToolStripSplitButton3"
-        Me.mnuLastGraph.ToolTipText = "View Last Graph"
-        '
-        'mnuNormalViewer
-        '
-        Me.mnuNormalViewer.Name = "mnuNormalViewer"
-        Me.mnuNormalViewer.Size = New System.Drawing.Size(180, 22)
-        Me.mnuNormalViewer.Text = "Viewer..."
-        '
-        'mnuploty
-        '
-        Me.mnuploty.Name = "mnuploty"
-        Me.mnuploty.Size = New System.Drawing.Size(180, 22)
-        Me.mnuploty.Text = "Plotly..."
-        '
-        'mnuRViewer
-        '
-        Me.mnuRViewer.Name = "mnuRViewer"
-        Me.mnuRViewer.Size = New System.Drawing.Size(180, 22)
-        Me.mnuRViewer.Text = "R Viewer..."
-        '
         'separator2
         '
         Me.separator2.Name = "separator2"
@@ -3121,6 +3092,36 @@ Partial Class frmMain
         Me.mnuTbOutput.Name = "mnuTbOutput"
         Me.mnuTbOutput.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbOutput.ToolTipText = "Toggle Output window open and closed"
+        '
+        'mnuLastGraph
+        '
+        Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuLastGraph.DropDownButtonWidth = 16
+        Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNormalViewer, Me.mnuploty, Me.mnuRViewer})
+        Me.mnuLastGraph.Image = CType(resources.GetObject("mnuLastGraph.Image"), System.Drawing.Image)
+        Me.mnuLastGraph.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuLastGraph.Name = "mnuLastGraph"
+        Me.mnuLastGraph.Size = New System.Drawing.Size(51, 34)
+        Me.mnuLastGraph.Text = "ToolStripSplitButton3"
+        Me.mnuLastGraph.ToolTipText = "View Last Graph"
+        '
+        'mnuNormalViewer
+        '
+        Me.mnuNormalViewer.Name = "mnuNormalViewer"
+        Me.mnuNormalViewer.Size = New System.Drawing.Size(128, 22)
+        Me.mnuNormalViewer.Text = "Viewer..."
+        '
+        'mnuploty
+        '
+        Me.mnuploty.Name = "mnuploty"
+        Me.mnuploty.Size = New System.Drawing.Size(128, 22)
+        Me.mnuploty.Text = "Plotly..."
+        '
+        'mnuRViewer
+        '
+        Me.mnuRViewer.Name = "mnuRViewer"
+        Me.mnuRViewer.Size = New System.Drawing.Size(128, 22)
+        Me.mnuRViewer.Text = "R Viewer..."
         '
         'mnuTbLogScript
         '
@@ -4179,7 +4180,7 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext, Me.mnuStructuredSurvey})
         Me.mnuStructured.Name = "mnuStructured"
         Me.mnuStructured.Size = New System.Drawing.Size(74, 22)
         Me.mnuStructured.Text = "Structured"
@@ -4280,7 +4281,7 @@ Partial Class frmMain
         'mnuStructuredSurvivalDefine
         '
         Me.mnuStructuredSurvivalDefine.Name = "mnuStructuredSurvivalDefine"
-        Me.mnuStructuredSurvivalDefine.Size = New System.Drawing.Size(117, 22)
+        Me.mnuStructuredSurvivalDefine.Size = New System.Drawing.Size(180, 22)
         Me.mnuStructuredSurvivalDefine.Text = "Define..."
         '
         'mnuStructuredTimeSeries
@@ -5043,6 +5044,12 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuStructuredSurvey
+        '
+        Me.mnuStructuredSurvey.Name = "mnuStructuredSurvey"
+        Me.mnuStructuredSurvey.Size = New System.Drawing.Size(186, 22)
+        Me.mnuStructuredSurvey.Text = "Survey..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5728,4 +5735,5 @@ Partial Class frmMain
     Friend WithEvents mnuTbLogScript As ToolStripButton
     Friend WithEvents mnuViewOutput As ToolStripMenuItem
     Friend WithEvents mnuViewLogScript As ToolStripMenuItem
+    Friend WithEvents mnuStructuredSurvey As ToolStripMenuItem
 End Class

@@ -2435,4 +2435,8 @@ Public Class frmMain
     Private Sub mnuDescribeUseTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseTable.Click
         dlgUseTable.ShowDialog()
     End Sub
+
+    Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
+        dlgSurvey.ShowDialog()
+    End Sub
 End Class
