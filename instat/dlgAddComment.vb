@@ -64,6 +64,7 @@ Public Class dlgAddComment
 
         ucrPnlCellRowColumnDataFrame.AddToLinkedControls(ucrReceiverColumn, {rdoCell, rdoColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlCellRowColumnDataFrame.AddToLinkedControls(ucrInputRow, {rdoCell, rdoRow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
         ucrInputRow.SetLinkedDisplayControl(lblRow)
         ucrReceiverColumn.SetLinkedDisplayControl(lblColumn)
 
@@ -80,8 +81,9 @@ Public Class dlgAddComment
         ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
         'ucrChkMakeColumnIntoKey
         ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
-        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "TRUE")
-        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "FALSE")
+        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "True")
+        ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "False")
+        ucrChkMakeColumnIntoKey.AddToLinkedControls(ucrNewColumnName, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
@@ -98,20 +100,16 @@ Public Class dlgAddComment
         clsDummyFunction = New RFunction
         clsGetRowNamesFunction = New RFunction
 
-
-
         ucrSelectorAddComment.Reset()
         ucrInputComment.IsMultiline = True
 
         ucrReceiverColumn.SetMeAsReceiver()
-        clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=1)
+        clsDummyFunction.AddParameter("add_key", "True", iPosition:=0)
 
         clsGetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
         clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
 
-
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-
 
         clsAddComment.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_new_comment")
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddComment)
@@ -121,7 +119,6 @@ Public Class dlgAddComment
         ucrSelectorAddComment.AddAdditionalCodeParameterPair(clsAddKeyFunction, ucrSelectorAddComment.GetParameter, iAdditionalPairNo:=1)
         ucrSelectorAddComment.AddAdditionalCodeParameterPair(clsGetRowNamesFunction, ucrSelectorAddComment.GetParameter, iAdditionalPairNo:=2)
 
-        ' SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputComment.SetRCode(clsAddComment, bReset)
         ucrReceiverColumn.SetRCode(clsAddComment, bReset)
         ucrInputRow.SetRCode(clsAddComment, bReset)
@@ -180,10 +177,9 @@ Public Class dlgAddComment
         If ucrChkMakeColumnIntoKey.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRowNamesFunction, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAddKeyFunction, iPosition:=1)
-
-            clsDummyFunction.AddParameter("add_key", "TRUE", iPosition:=2)
         Else
-            clsDummyFunction.AddParameter("add_key", "FALSE", iPosition:=2)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetRowNamesFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAddKeyFunction)
         End If
     End Sub
 
@@ -201,6 +197,7 @@ Public Class dlgAddComment
     Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrInputRow.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellRowColumnDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
     Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
         clsAddKeyFunction.AddParameter("col_names", Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
         ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)

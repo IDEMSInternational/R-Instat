@@ -76,7 +76,7 @@ Partial Class dlgAddComment
         'lblComment
         '
         Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(14, 316)
+        Me.lblComment.Location = New System.Drawing.Point(13, 331)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
         Me.lblComment.TabIndex = 10
@@ -130,7 +130,7 @@ Partial Class dlgAddComment
         Me.ucrInputComment.AutoSize = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(83, 313)
+        Me.ucrInputComment.Location = New System.Drawing.Point(83, 318)
         Me.ucrInputComment.Name = "ucrInputComment"
         Me.ucrInputComment.Size = New System.Drawing.Size(325, 47)
         Me.ucrInputComment.TabIndex = 11
@@ -152,7 +152,7 @@ Partial Class dlgAddComment
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 369)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 12
@@ -222,7 +222,7 @@ Partial Class dlgAddComment
         '
         Me.ucrChkMakeColumnIntoKey.AutoSize = True
         Me.ucrChkMakeColumnIntoKey.Checked = False
-        Me.ucrChkMakeColumnIntoKey.Location = New System.Drawing.Point(12, 279)
+        Me.ucrChkMakeColumnIntoKey.Location = New System.Drawing.Point(10, 282)
         Me.ucrChkMakeColumnIntoKey.Name = "ucrChkMakeColumnIntoKey"
         Me.ucrChkMakeColumnIntoKey.Size = New System.Drawing.Size(297, 23)
         Me.ucrChkMakeColumnIntoKey.TabIndex = 13
@@ -230,7 +230,7 @@ Partial Class dlgAddComment
         'ucrNewColumnName
         '
         Me.ucrNewColumnName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(15, 240)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 245)
         Me.ucrNewColumnName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(343, 21)
@@ -241,7 +241,7 @@ Partial Class dlgAddComment
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(418, 425)
+        Me.ClientSize = New System.Drawing.Size(418, 419)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.ucrChkMakeColumnIntoKey)
         Me.Controls.Add(Me.rdoColumn)
