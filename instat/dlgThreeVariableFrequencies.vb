@@ -172,11 +172,11 @@ Public Class dlgThreeVariableFrequencies
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
         clsTableBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=3)
         clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTabFunction, iPosition:=4)
-        clsTableBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                                     strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+        clsTableBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                                     strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                      strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
-                                                     strObjectName:="last_table")
+                                                     strObjectName:="last_summary")
 
         clsGraphBaseOperator.SetOperation("%>%")
         'iPosition should follow in the folowing order for this operator
@@ -290,8 +290,8 @@ Public Class dlgThreeVariableFrequencies
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
-            ucrSaveGraph.SetAssignToIfUncheckedValue("last_table")
-            ucrSaveGraph.SetCheckBoxText("Save Table")
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
+            ucrSaveGraph.SetCheckBoxText("Save Summary")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrangeFunction)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)

@@ -27,7 +27,7 @@ Public Class frmMaximiseOutput
     'todo. to be used by the output page to remember paths selected by user when saving outputs
     Public _strFileDestinationDirectory As String = ""
 
-    Public Overloads Sub Show(strFileName As String)
+    Public Overloads Sub Show(strFileName As String, Optional bReplace As Boolean = True)
         Me._strDisplayedFileName = strFileName
         Dim strFileExtension As String = Path.GetExtension(_strDisplayedFileName).ToLower
         Me.panelControl.Controls.Clear()
@@ -51,7 +51,7 @@ Public Class frmMaximiseOutput
                 If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.IsCefInitilised Then
                     _strFileFilter = "html (*.html)|*.html"
                     Dim ucrWebView As New ucrWebViewer
-                    ucrWebView.LoadHtmlFile(_strDisplayedFileName)
+                    ucrWebView.LoadHtmlFile(strFileName:=_strDisplayedFileName, bReplace:=bReplace)
                     Me.panelControl.Controls.Add(ucrWebView)
                     ucrWebView.Dock = DockStyle.Fill
                 Else

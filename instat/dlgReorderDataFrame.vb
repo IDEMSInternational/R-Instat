@@ -51,6 +51,7 @@ Public Class dlgReorderDataFrame
 
         ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
         ucrDataFrameToReorder.setDataType("dataframe")
+
     End Sub
 
     Private Sub SetDefaults()
