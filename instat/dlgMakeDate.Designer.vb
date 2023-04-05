@@ -789,7 +789,7 @@ Partial Class dlgMakeDate
         Me.rdoThreeColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoThreeColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoThreeColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoThreeColumns.Location = New System.Drawing.Point(324, 8)
+        Me.rdoThreeColumns.Location = New System.Drawing.Point(54, 8)
         Me.rdoThreeColumns.Name = "rdoThreeColumns"
         Me.rdoThreeColumns.Size = New System.Drawing.Size(137, 28)
         Me.rdoThreeColumns.TabIndex = 3
@@ -821,7 +821,7 @@ Partial Class dlgMakeDate
         Me.rdoSingleColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingleColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingleColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingleColumn.Location = New System.Drawing.Point(54, 8)
+        Me.rdoSingleColumn.Location = New System.Drawing.Point(324, 8)
         Me.rdoSingleColumn.Name = "rdoSingleColumn"
         Me.rdoSingleColumn.Size = New System.Drawing.Size(137, 28)
         Me.rdoSingleColumn.TabIndex = 1
