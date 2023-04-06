@@ -4037,5 +4037,8 @@
   "Maximum RH (%):": "HR maximum (%):",
   "Base Year:": "Année de Base:",
   "Rug colour:": "Couleur Tapis:",
-  "Time interval:": "Interval de Temps:"
+  "Time interval:": "Interval de Temps:",
+  "Load": "Load",
+  "Run All": "Run All",
+  "Save Summary": "Save Summary"
 }
