@@ -4037,5 +4037,8 @@
   "Maximum RH (%):": "Максимальная относительная влажность (%):",
   "Base Year:": "Базисный год:",
   "Rug colour:": "Цвет коврика:",
-  "Time interval:": "Временной интервал:"
+  "Time interval:": "Временной интервал:",
+  "Load": "Load",
+  "Run All": "Run All",
+  "Save Summary": "Save Summary"
 }
