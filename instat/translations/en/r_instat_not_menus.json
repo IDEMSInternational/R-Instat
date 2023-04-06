@@ -4041,5 +4041,8 @@
   "Spline": "Spline",
   "Time interval:": "Time interval:",
   "From:": "From:",
-  "Occurrence": "Occurrence"
+  "Occurrence": "Occurrence",
+  "Load": "Load",
+  "Run All": "Run All",
+  "Save Summary": "Save Summary"  
 }
