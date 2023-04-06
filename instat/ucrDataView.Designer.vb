@@ -143,6 +143,7 @@ Partial Class ucrDataView
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
+        Me.mnuEditCell = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -305,9 +306,9 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteCells, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilterRows, Me.mnuCellContextColumnSelection, Me.mnuCellContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilters, Me.ToolStripSeparator9, Me.mnuHelp1})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteCells, Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilterRows, Me.mnuCellContextColumnSelection, Me.mnuCellContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilters, Me.ToolStripSeparator9, Me.mnuHelp1, Me.mnuEditCell})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(215, 430)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(215, 474)
         '
         'mnuDeleteCells
         '
@@ -525,65 +526,65 @@ Partial Class ucrDataView
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.HideSheet, Me.unhideSheet, Me.CopySheet, Me.reorderSheet, Me.ViewSheet, Me.ToolStripSeparator11, Me.mnuHelp3})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 230)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 208)
         '
         'deleteDataFrame
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
         Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
         '
         'mnuBottomAddComment
         '
         Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
-        Me.mnuBottomAddComment.Size = New System.Drawing.Size(180, 22)
+        Me.mnuBottomAddComment.Size = New System.Drawing.Size(162, 22)
         Me.mnuBottomAddComment.Text = "Add Comment..."
         '
         'HideSheet
         '
         Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.HideSheet.Size = New System.Drawing.Size(162, 22)
         Me.HideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
         'CopySheet
         '
         Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(180, 22)
+        Me.CopySheet.Size = New System.Drawing.Size(162, 22)
         Me.CopySheet.Text = "Copy..."
         '
         'reorderSheet
         '
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'ViewSheet
         '
         Me.ViewSheet.Name = "ViewSheet"
-        Me.ViewSheet.Size = New System.Drawing.Size(180, 22)
+        Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
         Me.ViewSheet.Text = "View Data Frame"
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(159, 6)
         '
         'mnuHelp3
         '
         Me.mnuHelp3.Name = "mnuHelp3"
-        Me.mnuHelp3.Size = New System.Drawing.Size(180, 22)
+        Me.mnuHelp3.Size = New System.Drawing.Size(162, 22)
         Me.mnuHelp3.Text = "Help"
         '
         'lblHeaderDataView
@@ -970,6 +971,12 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(245, 437)
         Me.ucrLinuxGrid.TabIndex = 13
         '
+        'mnuEditCell
+        '
+        Me.mnuEditCell.Name = "mnuEditCell"
+        Me.mnuEditCell.Size = New System.Drawing.Size(214, 22)
+        Me.mnuEditCell.Text = "Edit"
+        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1104,4 +1111,5 @@ Partial Class ucrDataView
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents mnuHelp3 As ToolStripMenuItem
     Friend WithEvents ttGoToRowOrColPage As ToolTip
+    Friend WithEvents mnuEditCell As ToolStripMenuItem
 End Class

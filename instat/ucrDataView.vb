@@ -594,6 +594,10 @@ Public Class ucrDataView
         dlgReorderColumns.ShowDialog()
     End Sub
 
+    Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+        dlgEdit.ShowDialog()
+    End Sub
+
     Private Sub mnuConvertToFact_Click(sender As Object, e As EventArgs) Handles mnuConvertToFact.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedColumnNames())
