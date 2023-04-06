@@ -4037,5 +4037,8 @@
   "Maximum RH (%):": "UR máxima (%):",
   "Base Year:": "Ano base:",
   "Rug colour:": "Cor do tapete:",
-  "Time interval:": "Intervalo de tempo:"
+  "Time interval:": "Intervalo de tempo:",
+  "Load": "Load",
+  "Run All": "Run All",
+  "Save Summary": "Save Summary"
 }
