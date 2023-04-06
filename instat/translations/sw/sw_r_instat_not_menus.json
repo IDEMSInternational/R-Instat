@@ -4037,5 +4037,8 @@
   "Maximum RH (%):": "Kiwango cha juu cha RH (%):",
   "Base Year:": "Mwaka wa Msingi:",
   "Rug colour:": "Rangi ya rug:",
-  "Time interval:": "Muda wa muda:"
+  "Time interval:": "Muda wa muda:",
+  "Load": "Load",
+  "Run All": "Run All",
+  "Save Summary": "Save Summary"
 }
