@@ -4037,5 +4037,8 @@
   "Maximum RH (%):": "Humedad relativa máxima (%):",
   "Base Year:": "Año base:",
   "Rug colour:": "Color de la alfombra:",
-  "Time interval:": "Intervalo de tiempo:"
+  "Time interval:": "Intervalo de tiempo:",
+  "Load": "Load",
+  "Run All": "Run All",
+  "Save Summary": "Save Summary"
 }
