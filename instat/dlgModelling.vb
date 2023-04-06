@@ -31,7 +31,7 @@ Public Class dlgModelling
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Private clsFittedValuesFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParametersFunction, clsStanGlmFunction,
+    Private clsFittedValuesFunction, clsBayesglmFunction, clsResidualFunction, clsRstandardFunction, clsHatvaluesFunction, clsArmAddParametersFunction, clsStanGlmFunction,
     clsStanPolrFunction As New RFunction
 
     Private bResetDisplayOptions = False
@@ -87,6 +87,7 @@ Public Class dlgModelling
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
         clsArmAddParametersFunction = New RFunction
+        clsBayesglmFunction = New RFunction
         clsStanGlmFunction = New RFunction
         clsStanPolrFunction = New RFunction
 
@@ -140,8 +141,8 @@ Public Class dlgModelling
         clsFormulaFunction.bExcludeAssignedFunctionOutput = False
 
         'Bayesian
-        clsArmAddParametersFunction.SetPackageName("arm")
-        clsArmAddParametersFunction.SetRCommand("bayesglm")
+        clsBayesglmFunction.SetPackageName("arm")
+        clsBayesglmFunction.SetRCommand("bayesglm")
 
         clsArmAddParametersFunction.SetPackageName("arm")
         clsArmAddParametersFunction.SetRCommand("bayespolr")
@@ -517,10 +518,11 @@ Public Class dlgModelling
         Clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm(formula =, family = gaussian, data=" &
-            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ",weights=, subset=, na.action=,start = NULL, etastart=, mustart= ,offset=, control = list(...),
-            model = TRUE, method = glm.fit, x = FALSE, y = TRUE, contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, 
-            prior.mean.for.intercept = 0,prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE,drop.baseline=TRUE,maxit=100,
-            print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 503)
+            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ",weights=, subset=, na.action=,start = NULL, " &
+            " etastart=, mustart= ,offset=, control = list(...), model = TRUE, method = glm.fit, x = FALSE, y = TRUE, " &
+            " contrasts = NULL,drop.unused.levels = TRUE,prior.mean = 0,prior.scale = NULL,prior.df = 1, prior.mean.for.intercept = 0, " &
+            "prior.scale.for.intercept = NULL,prior.df.for.intercept = 1,min.prior.scale=1e-12,scaled = TRUE, keep.order=TRUE, " &
+            "drop.baseline=TRUE,maxit=100, print.unnormalized.log.posterior=FALSE,Warning=TRUE)", 494)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayesglm()", 1)
         End If
@@ -530,9 +532,11 @@ Public Class dlgModelling
         Clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr(formula= , data=" &
-            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, start=, subset=, na.action=, contrasts = NULL,
-            Hess = TRUE, model = TRUE,method = c(logistic, probit,cloglog,cauchit),drop.unused.levels=TRUE,prior.mean = 0,prior.scale = 2.5,prior.df = 1,prior.counts.for.bins = NULL,min.prior.scale=1e-12,
-            scaled = TRUE,maxit = 100,print.unnormalized.log.posterior = FALSE)", 325)
+            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text &
+            ", weights=, start=, subset=, na.action=, contrasts = NULL, Hess = TRUE, model = TRUE," &
+            "method = c(logistic, probit,cloglog,cauchit),drop.unused.levels=TRUE,prior.mean = 0, " &
+            "prior.scale = 2.5,prior.df = 1,prior.counts.for.bins = NULL,min.prior.scale=1e-12, scaled = TRUE, " &
+            "maxit = 100,print.unnormalized.log.posterior = FALSE)", 329)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("arm::bayespolr()", 1)
         End If
@@ -542,9 +546,11 @@ Public Class dlgModelling
         Clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_glm(formula= ,family= gaussian, data=" &
-            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, subset= ,na.action = NULL,
-            offset = NULL,model = TRUE, x = FALSE, y = TRUE,contrasts = NULL,prior = default_prior_coef(family),prior_intercept = default_prior_intercept(family),prior_aux = exponential(autoscale = TRUE),
-            prior_PD = FALSE,algorithm = c(sampling, optimizing, meanfield, fullrank),mean_PPD = algorithm != optimizing && !prior_PD,adapt_delta = NULL,QR = FALSE,sparse = FALSE)", 421)
+            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights=, subset= ,na.action = NULL," &
+            " offset = NULL,model = TRUE, x = FALSE, y = TRUE,contrasts = NULL,prior = default_prior_coef(family), " &
+            "prior_intercept = default_prior_intercept(family),prior_aux = exponential(autoscale = TRUE), prior_PD = FALSE, " &
+            "algorithm = c(sampling, optimizing, meanfield, fullrank),mean_PPD = algorithm != optimizing && !prior_PD,adapt_delta = NULL, " &
+            "QR = FALSE,sparse = FALSE)", 426)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_glm()", 1)
         End If
@@ -554,9 +560,10 @@ Public Class dlgModelling
         Clear()
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_polr(formula=, data=" &
-            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights= ,subset= ,na.action = getOption(na.action, na.omit), contrasts = NULL,model = TRUE,
-            method = c(logistic, probit, loglog, cloglog, cauchit), prior = R2,prior_counts = dirichlet(1),shape = NULL,rate = NULL, prior_PD = FALSE,algorithm = c(sampling, meanfield, fullrank),
-            adapt_delta = NULL,do_residuals = NULL)", 323)
+            ucrSelectorModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & ", weights= ,subset= , " &
+            "na.action = getOption(na.action, na.omit), contrasts = NULL,model = TRUE, method = c(logistic, probit, loglog, cloglog, cauchit), " &
+            " prior = R2,prior_counts = dirichlet(1),shape = NULL,rate = NULL, prior_PD = FALSE,algorithm = c(sampling, meanfield, fullrank), " &
+            "adapt_delta = NULL,do_residuals = NULL)", 327)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("rstanarm::stan_polr()", 1)
         End If
