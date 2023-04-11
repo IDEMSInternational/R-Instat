@@ -15,27 +15,27 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgSurvey
-        Private bFirstLoad As Boolean = True
-        Private bReset As Boolean = True
-        Public bRCodeSet As Boolean = True
-        Private clsSvydesignFunction As New RFunction
-        Private clsSvrepDesignFunction, clsSvyTotalFunction, clsSvycoFunction, clsSvymeanFunction, clsVarFunction, clsSvyQuantileFunction, clsSvySDFunction As New RFunction
-        Private clsSummaryFunction, clsDummyFunction, clsSvychisqFunction As New RFunction
-    Private clsDCastLeftContextFormula, clsVar2Operator, clsWeightsOperator, clsIDNewOperator, clsIdOperator, clsFpcOperator, clsStrataOperator, clsXOperator, clsVar1operator As New ROperator
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Public bRCodeSet As Boolean = True
+    Private clsSvydesignFunction As New RFunction
+    Private clsSvrepDesignFunction, clsSvyTotalFunction, clsSvycoFunction, clsSvymeanFunction, clsVarFunction, clsSvyQuantileFunction, clsSvySDFunction As New RFunction
+    Private clsSummaryFunction, clsDummyFunction, clsRatioFunction, clsSvychisqFunction As New RFunction
+    Private clsDCastLeftContextFormula, clsformulaOperator, clsDCastLeftContext, clsVar2Operator, clsWeightsOperator, clsIDNewOperator, clsIdOperator, clsFpcOperator, clsStrataOperator, clsXOperator, clsVar1operator As New ROperator
 
     Private Sub dlgSurvey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            If bFirstLoad Then
-                InitialiseDialog()
-                bFirstLoad = False
-            End If
-            If bReset Then
-                SetDefaults()
-            End If
-            SetRCodeForControls(bReset)
-            bReset = False
-            autoTranslate(Me)
-            TestOkEnabled()
-        End Sub
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        TestOkEnabled()
+    End Sub
 
     Private Sub InitialiseDialog()
         Dim dctInputSummaryStat As New Dictionary(Of String, String)
@@ -81,10 +81,38 @@ Public Class dlgSurvey
         ucrReceiverMultipleVar2.Selector = ucrSelectorSurvey
         ucrReceiverMultipleVar2.SetLinkedDisplayControl(lblXFormula)
 
+        ucrReceiverMultipleContTable.SetParameter(New RParameter("formula", 13))
+        ucrReceiverMultipleContTable.SetParameterIsString()
+        ucrReceiverMultipleContTable.bWithQuotes = False
+        ucrReceiverMultipleContTable.Selector = ucrSelectorSurvey
+        ucrReceiverMultipleContTable.SetLinkedDisplayControl(lblFormula)
+
+        ucrReceiverVar1.SetParameter(New RParameter("denominator", 14))
+        ucrReceiverVar1.Selector = ucrSelectorSurvey
+        ucrReceiverVar1.bWithQuotes = False
+        ucrReceiverVar1.SetParameterIsString()
+        ucrReceiverVar1.SetMeAsReceiver()
+        ucrReceiverVar1.SetLinkedDisplayControl(lblVar1)
+
         ucrChkSummary.SetText("Summary")
         ucrChkSummary.SetParameter(New RParameter("check", 7))
         ucrChkSummary.SetValuesCheckedAndUnchecked("True", "False")
         ucrChkSummary.SetRDefault("TRUE")
+
+        ucrChkRatios.SetText("Ratios")
+        ucrChkRatios.SetParameter(New RParameter("check", 11))
+        ucrChkRatios.SetValuesCheckedAndUnchecked("True", "False")
+        ucrChkRatios.SetRDefault("FALSE")
+        ucrChkRatios.AddToLinkedControls(ucrReceiverVar1, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkContingencyTables.SetParameter(New RParameter("check", 10))
+        'ucrChkContingencyTables.SetValuesCheckedAndUnchecked("True", "False")
+        'ucrChkContingencyTables.SetRDefault("FALSE")
+
+        ucrChkContingencyTables.SetText("Contingency Tables")
+        ucrChkContingencyTables.AddParameterValuesCondition(True, "check", "False")
+        ucrChkContingencyTables.AddParameterValuesCondition(False, "check", "True")
+        ucrChkContingencyTables.AddToLinkedControls(ucrReceiverMultipleContTable, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputSummaryStat.SetParameter(New RParameter("x", 11, bNewIncludeArgumentName:=False))
         dctInputSummaryStat.Add("total", Chr(34) & "total" & Chr(34))
@@ -108,42 +136,50 @@ Public Class dlgSurvey
     End Sub
 
     Private Sub SetDefaults()
-            clsSvydesignFunction = New RFunction
-            clsSummaryFunction = New RFunction
-            clsSvrepDesignFunction = New RFunction
-            clsSvymeanFunction = New RFunction
-            clsVarFunction = New RFunction
-            clsSvyTotalFunction = New RFunction
-            clsSvyQuantileFunction = New RFunction
-            clsSvySDFunction = New RFunction
-            clsSvycoFunction = New RFunction
-            clsDummyFunction = New RFunction
 
-            clsWeightsOperator = New ROperator
-            clsSvychisqFunction = New RFunction
+        clsSvydesignFunction = New RFunction
+        clsSummaryFunction = New RFunction
+        clsSvrepDesignFunction = New RFunction
+        clsSvymeanFunction = New RFunction
+        clsVarFunction = New RFunction
+        clsSvyTotalFunction = New RFunction
+        clsSvyQuantileFunction = New RFunction
+        clsSvySDFunction = New RFunction
+        clsSvycoFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsRatioFunction = New RFunction
+        clsSvychisqFunction = New RFunction
+
+        clsWeightsOperator = New ROperator
         clsIDNewOperator = New ROperator
         clsIdOperator = New ROperator
         clsFpcOperator = New ROperator
-            clsStrataOperator = New ROperator
-            clsXOperator = New ROperator
-            clsVar2Operator = New ROperator
-            clsDCastLeftContextFormula = New ROperator
+        clsStrataOperator = New ROperator
+        clsXOperator = New ROperator
+        clsVar2Operator = New ROperator
+        clsDCastLeftContextFormula = New ROperator
+        clsDCastLeftContext = New ROperator
+        clsformulaOperator = New ROperator
 
-            ucrInputSummaryStat.SetName("mean")
+        ucrInputSummaryStat.SetName("mean")
 
-            clsDummyFunction.AddParameter("checked", "srs", iPosition:=0)
-            clsDummyFunction.AddParameter("...", "True", iPosition:=1)
-            clsDummyFunction.AddParameter("Sampling", "True", iPosition:=2)
+        clsDummyFunction.AddParameter("checked", "srs", iPosition:=0)
+        clsDummyFunction.AddParameter("...", "True", iPosition:=1)
+        clsDummyFunction.AddParameter("Sampling", "True", iPosition:=2)
+        clsDummyFunction.AddParameter("check", "True", iPosition:=1)
 
-            clsDCastLeftContextFormula.SetOperation("+")
-            clsDCastLeftContextFormula.bBrackets = False
+        clsDCastLeftContextFormula.SetOperation("+")
+        clsDCastLeftContextFormula.bBrackets = False
 
-            clsWeightsOperator.SetOperation("~")
-            clsWeightsOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
-            clsWeightsOperator.bSpaceAroundOperation = False
+        clsDCastLeftContext.SetOperation("+")
+        clsDCastLeftContext.bBrackets = False
 
-            clsIdOperator.SetOperation("~")
-            clsIdOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsWeightsOperator.SetOperation("~")
+        clsWeightsOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsWeightsOperator.bSpaceAroundOperation = False
+
+        clsIdOperator.SetOperation("~")
+        clsIdOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
         clsIdOperator.bSpaceAroundOperation = False
 
         clsIDNewOperator.SetOperation("~")
@@ -151,188 +187,202 @@ Public Class dlgSurvey
         clsIDNewOperator.bSpaceAroundOperation = False
 
         clsFpcOperator.SetOperation("~")
-            clsFpcOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
-            clsFpcOperator.bSpaceAroundOperation = False
+        clsFpcOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsFpcOperator.bSpaceAroundOperation = False
 
-            clsStrataOperator.SetOperation("~")
-            clsStrataOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
-            clsStrataOperator.bSpaceAroundOperation = False
+        clsStrataOperator.SetOperation("~")
+        clsStrataOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsStrataOperator.bSpaceAroundOperation = False
 
-            clsXOperator.SetOperation("~")
-            clsXOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
-            clsXOperator.bSpaceAroundOperation = False
+        clsXOperator.SetOperation("~")
+        clsXOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsXOperator.bSpaceAroundOperation = False
 
-            clsVar2Operator.SetOperation("~")
-            clsVar2Operator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
-            clsVar2Operator.bSpaceAroundOperation = False
+        clsformulaOperator.SetOperation("~")
+        clsformulaOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsformulaOperator.bSpaceAroundOperation = False
 
-            clsVar1operator.SetOperation("~")
-            clsVar1operator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
-            clsVar1operator.bSpaceAroundOperation = False
+        clsVar2Operator.SetOperation("~")
+        clsVar2Operator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsVar2Operator.bSpaceAroundOperation = False
 
-            ucrSelectorSurvey.Reset()
-            ucrReceiverFPC.SetMeAsReceiver()
+        clsVar1operator.SetOperation("~")
+        clsVar1operator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsVar1operator.bSpaceAroundOperation = False
 
-            clsSvydesignFunction.SetPackageName("survey")
-            clsSvydesignFunction.SetRCommand("svydesign")
-            clsSvydesignFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSurvey.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=4)
-            clsSvydesignFunction.AddParameter("weights", clsROperatorParameter:=clsWeightsOperator, iPosition:=3)
-            clsSvydesignFunction.AddParameter("fpc", clsROperatorParameter:=clsFpcOperator, iPosition:=2)
-        'clsSvydesignFunction.AddParameter("ids", clsROperatorParameter:=clsIdOperator, iPosition:=0)
+        ucrSelectorSurvey.Reset()
+        ucrReceiverFPC.SetMeAsReceiver()
+
+        clsSvydesignFunction.SetPackageName("survey")
+        clsSvydesignFunction.SetRCommand("svydesign")
+        clsSvydesignFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSurvey.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=4)
+        clsSvydesignFunction.AddParameter("weights", clsROperatorParameter:=clsWeightsOperator, iPosition:=3)
+        clsSvydesignFunction.AddParameter("fpc", clsROperatorParameter:=clsFpcOperator, iPosition:=2)
 
         clsSummaryFunction.SetRCommand("summary")
-            clsSummaryFunction.iCallType = 2
+        clsSummaryFunction.iCallType = 2
 
-            clsSvychisqFunction.SetPackageName("survey")
-            clsSvychisqFunction.SetRCommand("svychisq")
-            clsSvychisqFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsSvychisqFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsSvychisqFunction.AddParameter("statistic", Chr(34) & "F" & Chr(34), iPosition:=2)
-            clsSvychisqFunction.iCallType = 2
+        clsRatioFunction.SetPackageName("survey")
+        clsRatioFunction.SetRCommand("svyratio")
+        clsRatioFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsRatioFunction.AddParameter("denominator", clsROperatorParameter:=clsVar1operator, iPosition:=1)
+        clsRatioFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=2)
+        clsRatioFunction.iCallType = 2
 
-            clsSvrepDesignFunction.SetPackageName("survey")
-            clsSvrepDesignFunction.SetRCommand("as.svrepdesign")
-            clsSvrepDesignFunction.AddParameter("design", clsRFunctionParameter:=clsSvydesignFunction, iPosition:=0)
-            clsSvrepDesignFunction.iCallType = 2
+        clsSvychisqFunction.SetPackageName("survey")
+        clsSvychisqFunction.SetRCommand("svychisq")
+        clsSvychisqFunction.AddParameter("formula", clsROperatorParameter:=clsformulaOperator, iPosition:=0)
+        clsSvychisqFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvychisqFunction.AddParameter("statistic", Chr(34) & "F" & Chr(34), iPosition:=2)
+        clsSvychisqFunction.iCallType = 2
 
-            clsSvymeanFunction.SetPackageName("survey")
-            clsSvymeanFunction.SetRCommand("svymean")
-            clsSvymeanFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsSvymeanFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsSvymeanFunction.iCallType = 2
+        clsSvrepDesignFunction.SetPackageName("survey")
+        clsSvrepDesignFunction.SetRCommand("as.svrepdesign")
+        clsSvrepDesignFunction.AddParameter("design", clsRFunctionParameter:=clsSvydesignFunction, iPosition:=0)
+        clsSvrepDesignFunction.iCallType = 2
 
-            clsSvyQuantileFunction.SetPackageName("survey")
-            clsSvyQuantileFunction.SetRCommand("svyquantile")
-            clsSvyQuantileFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsSvyQuantileFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsSvyQuantileFunction.AddParameter("quantiles", "c(.25,.5,.75)", iPosition:=2, bIncludeArgumentName:=False)
-            clsSvyQuantileFunction.iCallType = 2
+        clsSvymeanFunction.SetPackageName("survey")
+        clsSvymeanFunction.SetRCommand("svymean")
+        clsSvymeanFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsSvymeanFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvymeanFunction.iCallType = 2
 
-            clsSvySDFunction.SetPackageName("jtools")
-            clsSvySDFunction.SetRCommand("svysd")
-            clsSvySDFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsSvySDFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsSvySDFunction.iCallType = 2
+        clsSvyQuantileFunction.SetPackageName("survey")
+        clsSvyQuantileFunction.SetRCommand("svyquantile")
+        clsSvyQuantileFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsSvyQuantileFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvyQuantileFunction.AddParameter("quantiles", "c(.25,.5,.75)", iPosition:=2, bIncludeArgumentName:=False)
+        clsSvyQuantileFunction.iCallType = 2
 
-            clsSvycoFunction.SetPackageName("jtools")
-            clsSvycoFunction.SetRCommand("svycor")
-            clsSvycoFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsSvycoFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsSvycoFunction.iCallType = 2
+        clsSvySDFunction.SetPackageName("jtools")
+        clsSvySDFunction.SetRCommand("svysd")
+        clsSvySDFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsSvySDFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvySDFunction.iCallType = 2
 
-            clsSvyTotalFunction.SetPackageName("survey")
-            clsSvyTotalFunction.SetRCommand("svytotal")
-            clsSvyTotalFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsSvyTotalFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsSvyTotalFunction.iCallType = 2
+        clsSvycoFunction.SetPackageName("jtools")
+        clsSvycoFunction.SetRCommand("svycor")
+        clsSvycoFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsSvycoFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvycoFunction.iCallType = 2
 
-            clsVarFunction.SetPackageName("survey")
-            clsVarFunction.SetRCommand("svyvar")
-            clsVarFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
-            clsVarFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-            clsVarFunction.iCallType = 2
+        clsSvyTotalFunction.SetPackageName("survey")
+        clsSvyTotalFunction.SetRCommand("svytotal")
+        clsSvyTotalFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsSvyTotalFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvyTotalFunction.iCallType = 2
 
-            ucrBase.clsRsyntax.ClearCodes()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSvydesignFunction)
-            AddSummaryParameters()
-            UpdateContextVariables()
-        End Sub
+        clsVarFunction.SetPackageName("survey")
+        clsVarFunction.SetRCommand("svyvar")
+        clsVarFunction.AddParameter("x", clsROperatorParameter:=clsXOperator, iPosition:=0)
+        clsVarFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsVarFunction.iCallType = 2
 
-        Private Sub SetRCodeForControls(bReset As Boolean)
-            ucrReceiverFPC.SetRCode(clsFpcOperator, bReset)
-            ucrInputId.SetRCode(clsIdOperator, bReset)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSvydesignFunction)
+        AddSummaryParameters()
+        UpdateContextVariables()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverFPC.SetRCode(clsFpcOperator, bReset)
+        ucrInputId.SetRCode(clsIdOperator, bReset)
+        'ucrReceiverMultipleContTable(clsformulaOperator, bReset)
+        ucrReceiverVar1.SetRCode(clsVar1operator, bReset)
         ucrReceiverSingleID.SetRCode(clsIDNewOperator, bReset)
         ucrReceiverStrata.SetRCode(clsStrataOperator, bReset)
-            ucrReceiverWeights.SetRCode(clsWeightsOperator, bReset)
-            ucrChkSummary.SetRCode(clsSummaryFunction, bReset)
-            ucrPnlMethod.SetRCode(clsDummyFunction, bReset)
+        ucrReceiverWeights.SetRCode(clsWeightsOperator, bReset)
+        ucrChkSummary.SetRCode(clsSummaryFunction, bReset)
+        ucrPnlMethod.SetRCode(clsDummyFunction, bReset)
+        ucrChkContingencyTables.SetRCode(clsDummyFunction, bReset)
 
-            AddSummaryStatParameters()
-        End Sub
+        ucrChkRatios.SetRCode(clsRatioFunction, bReset)
+        AddSummaryStatParameters()
+    End Sub
 
-        Private Sub TestOkEnabled()
-            If rdoStratified.Checked Then
-                If Not ucrReceiverFPC.IsEmpty AndAlso Not ucrInputId.IsEmpty AndAlso Not ucrReceiverMultipleVar2.IsEmpty AndAlso Not ucrReceiverWeights.IsEmpty AndAlso Not ucrReceiverStrata.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            ElseIf rdoClustered.Checked Then
-                If Not ucrReceiverFPC.IsEmpty AndAlso Not ucrReceiverSingleID.IsEmpty AndAlso Not ucrReceiverMultipleVar2.IsEmpty AndAlso Not ucrReceiverWeights.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
+    Private Sub TestOkEnabled()
+        If rdoStratified.Checked Then
+            If Not ucrReceiverFPC.IsEmpty AndAlso Not ucrInputId.IsEmpty AndAlso Not ucrReceiverMultipleVar2.IsEmpty AndAlso Not ucrReceiverWeights.IsEmpty AndAlso Not ucrReceiverStrata.IsEmpty Then
+                ucrBase.OKEnabled(True)
             Else
-                If Not ucrReceiverFPC.IsEmpty AndAlso Not ucrInputId.IsEmpty AndAlso Not ucrReceiverMultipleVar2.IsEmpty AndAlso Not ucrReceiverWeights.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
+                ucrBase.OKEnabled(False)
             End If
-
-        End Sub
-
-        Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-            SetDefaults()
-            SetRCodeForControls(True)
-            TestOkEnabled()
-        End Sub
-
-        Private Sub ucrPnlMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlValueChanged
-            RemoveStrata()
-            UpdateContextVariables()
-        End Sub
-
-        Private Sub AddSummaryParameters()
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction, iPosition:=0)
-        End Sub
-
-        Private Sub AddSummaryStatParameters()
-            If ucrInputSummaryStat.GetText = "mean" Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSvymeanFunction, iPosition:=0)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            ElseIf ucrInputSummaryStat.GetText = "variance" Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsVarFunction, iPosition:=0)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            ElseIf ucrInputSummaryStat.GetText = "total" Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyTotalFunction, iPosition:=0)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            ElseIf ucrInputSummaryStat.GetText = "standard deviation" Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSvySDFunction, iPosition:=0)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            ElseIf ucrInputSummaryStat.GetText = "quantile" Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyQuantileFunction, iPosition:=0)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+        ElseIf rdoClustered.Checked Then
+            If Not ucrReceiverFPC.IsEmpty AndAlso Not ucrReceiverSingleID.IsEmpty AndAlso Not ucrReceiverMultipleVar2.IsEmpty AndAlso Not ucrReceiverWeights.IsEmpty Then
+                ucrBase.OKEnabled(True)
             Else
-                ucrBase.clsRsyntax.AddToAfterCodes(clsSvycoFunction, iPosition:=0)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+                ucrBase.OKEnabled(False)
             End If
-        End Sub
+        Else
+            If Not ucrReceiverFPC.IsEmpty AndAlso Not ucrInputId.IsEmpty AndAlso Not ucrReceiverMultipleVar2.IsEmpty AndAlso Not ucrReceiverWeights.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlValueChanged
+        RemoveStrata()
+        UpdateContextVariables()
+    End Sub
+
+    Private Sub AddSummaryParameters()
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=ucrBase.clsRsyntax.clsBaseFunction, iPosition:=0)
+    End Sub
+
+    Private Sub AddSummaryStatParameters()
+        If ucrInputSummaryStat.GetText = "mean" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSvymeanFunction, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+        ElseIf ucrInputSummaryStat.GetText = "variance" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsVarFunction, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+        ElseIf ucrInputSummaryStat.GetText = "total" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSvyTotalFunction, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+        ElseIf ucrInputSummaryStat.GetText = "standard deviation" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSvySDFunction, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+        ElseIf ucrInputSummaryStat.GetText = "quantile" Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSvyQuantileFunction, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+        Else
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSvycoFunction, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+        End If
+    End Sub
 
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
         If ucrChkSummary.Checked Then
@@ -343,39 +393,51 @@ Public Class dlgSurvey
     End Sub
 
     Private Sub UpdateContextVariables()
-            Dim i As Integer = 0
+        Dim i As Integer = 0
 
-            If Not ucrReceiverMultipleVar2.IsEmpty Then
-                clsDCastLeftContextFormula.ClearParameters()
-                For Each strContextVar As String In ucrReceiverMultipleVar2.GetVariableNamesAsList
-                    clsDCastLeftContextFormula.AddParameter(i, strContextVar, iPosition:=i)
-                    i = i + 1
-                Next
-                clsXOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextFormula)
-            End If
-        End Sub
+        If Not ucrReceiverMultipleVar2.IsEmpty Then
+            clsDCastLeftContextFormula.ClearParameters()
+            For Each strContextVar As String In ucrReceiverMultipleVar2.GetVariableNamesAsList
+                clsDCastLeftContextFormula.AddParameter(i, strContextVar, iPosition:=i)
+                i = i + 1
+            Next
+            clsXOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextFormula)
+        End If
+    End Sub
 
-        Private Sub ucrReceiverMultipleVar2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVar2.ControlValueChanged
-            UpdateContextVariables()
-        End Sub
+    Private Sub UpdateContextVariables2()
+        Dim i As Integer = 0
 
+        If Not ucrReceiverMultipleContTable.IsEmpty Then
+            clsDCastLeftContext.ClearParameters()
+            For Each strContextVar As String In ucrReceiverMultipleContTable.GetVariableNamesAsList
+                clsDCastLeftContext.AddParameter(i, strContextVar, iPosition:=i)
+                i = i + 1
+            Next
+            clsformulaOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContext)
+        End If
+    End Sub
 
-        Private Sub RemoveStrata()
+    Private Sub ucrReceiverMultipleVar2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleVar2.ControlValueChanged
+        UpdateContextVariables()
+    End Sub
+
+    Private Sub RemoveStrata()
+        clsSvydesignFunction.RemoveParameterByName("strata")
+        If rdoStratified.Checked Then
+            clsSvydesignFunction.AddParameter("strata", clsROperatorParameter:=clsStrataOperator, iPosition:=1)
+        Else
             clsSvydesignFunction.RemoveParameterByName("strata")
-            If rdoStratified.Checked Then
-                clsSvydesignFunction.AddParameter("strata", clsROperatorParameter:=clsStrataOperator, iPosition:=1)
-            Else
-                clsSvydesignFunction.RemoveParameterByName("strata")
-            End If
-        End Sub
+        End If
+    End Sub
 
-        Private Sub ucrReceiverStrata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStrata.ControlValueChanged
-            RemoveStrata()
-        End Sub
+    Private Sub ucrReceiverStrata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStrata.ControlValueChanged
+        RemoveStrata()
+    End Sub
 
-        Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrReceiverSingleID.ControlContentsChanged, ucrReceiverStrata.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverFPC.ControlContentsChanged, ucrInputId.ControlContentsChanged, ucrReceiverMultipleVar2.ControlContentsChanged
-            TestOkEnabled()
-        End Sub
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrReceiverSingleID.ControlContentsChanged, ucrReceiverStrata.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverFPC.ControlContentsChanged, ucrInputId.ControlContentsChanged, ucrReceiverMultipleVar2.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 
     Private Sub ucrInputSummaryStat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSummaryStat.ControlValueChanged
         AddSummaryStatParameters()
@@ -386,11 +448,34 @@ Public Class dlgSurvey
             ucrInputId.Visible = False
             ucrReceiverSingleID.Visible = True
             clsSvydesignFunction.AddParameter("ids", clsROperatorParameter:=clsIDNewOperator, iPosition:=0)
-
         Else
             ucrInputId.Visible = True
             ucrReceiverSingleID.Visible = False
             clsSvydesignFunction.AddParameter("ids", clsROperatorParameter:=clsIdOperator, iPosition:=0)
         End If
+    End Sub
+
+    Private Sub ucrChkRatios_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRatios.ControlValueChanged
+        If ucrChkRatios.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRatioFunction, iPosition:=0)
+            ucrReceiverVar1.Visible = True
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRatioFunction)
+            ucrReceiverVar1.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrChkContingencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkContingencyTables.ControlValueChanged
+        If ucrChkContingencyTables.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSvychisqFunction, iPosition:=0)
+            ucrReceiverMultipleContTable.Visible = True
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvychisqFunction)
+            ucrReceiverMultipleContTable.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrReceiverMultipleContTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleContTable.ControlValueChanged
+        UpdateContextVariables2()
     End Sub
 End Class
