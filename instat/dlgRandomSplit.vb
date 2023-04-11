@@ -158,7 +158,7 @@ Public Class dlgRandomSplit
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrSaveTrainingData.IsComplete Or Not ucrSaveTestingData.IsComplete Or ucrNudFraction.IsEmpty Then
+        If Not ucrSaveTrainingData.IsComplete OrElse Not ucrSaveTestingData.IsComplete OrElse ucrNudFraction.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             If rdoSample.Checked Then
