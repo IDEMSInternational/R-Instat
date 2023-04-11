@@ -55,7 +55,6 @@ Public Class dlgEdit
 
         ucrReceiverName.SetParameter(New RParameter("column_name", 1))
         ucrReceiverName.SetParameterIsString()
-        ucrReceiverName.Selector = ucrSelectValues
 
         ucrNewName.SetParameter(New RParameter("new_val", 2))
         'set validation of ucrInputNewName as an RVariable.(input should not have any R reserved words like 'if','while')
@@ -69,7 +68,7 @@ Public Class dlgEdit
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34))
+        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34))
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34))
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowText & Chr(34))
 

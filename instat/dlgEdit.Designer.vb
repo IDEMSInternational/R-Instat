@@ -23,10 +23,10 @@ Partial Class dlgEdit
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblCurrentName = New System.Windows.Forms.Label()
+        Me.ucrSelectValues = New instat.ucrDataFrame()
+        Me.ucrReceiverName = New instat.ucrReceiverSingle()
         Me.ucrNewName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectValues = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverName = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblCurrentName
@@ -35,7 +35,31 @@ Partial Class dlgEdit
         Me.lblCurrentName.Name = "lblCurrentName"
         Me.lblCurrentName.Size = New System.Drawing.Size(100, 15)
         Me.lblCurrentName.TabIndex = 15
-        Me.lblCurrentName.Text = "New Name:"
+        Me.lblCurrentName.Text = "New Value:"
+        '
+        'ucrSelectValues
+        '
+        Me.ucrSelectValues.AutoSize = True
+        Me.ucrSelectValues.bDropUnusedFilterLevels = False
+        Me.ucrSelectValues.bUseCurrentFilter = True
+        Me.ucrSelectValues.Location = New System.Drawing.Point(29, 52)
+        Me.ucrSelectValues.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectValues.Name = "ucrSelectValues"
+        Me.ucrSelectValues.Size = New System.Drawing.Size(153, 43)
+        Me.ucrSelectValues.TabIndex = 19
+        '
+        'ucrReceiverName
+        '
+        Me.ucrReceiverName.AutoSize = True
+        Me.ucrReceiverName.frmParent = Me
+        Me.ucrReceiverName.Location = New System.Drawing.Point(219, 73)
+        Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverName.Name = "ucrReceiverName"
+        Me.ucrReceiverName.Selector = Nothing
+        Me.ucrReceiverName.Size = New System.Drawing.Size(148, 21)
+        Me.ucrReceiverName.strNcFilePath = ""
+        Me.ucrReceiverName.TabIndex = 18
+        Me.ucrReceiverName.ucrSelector = Nothing
         '
         'ucrNewName
         '
@@ -57,41 +81,16 @@ Partial Class dlgEdit
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 13
         '
-        'ucrSelectValues
-        '
-        Me.ucrSelectValues.AutoSize = True
-        Me.ucrSelectValues.bDropUnusedFilterLevels = False
-        Me.ucrSelectValues.bShowHiddenColumns = False
-        Me.ucrSelectValues.bUseCurrentFilter = True
-        Me.ucrSelectValues.Location = New System.Drawing.Point(3, 9)
-        Me.ucrSelectValues.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectValues.Name = "ucrSelectValues"
-        Me.ucrSelectValues.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectValues.TabIndex = 17
-        '
-        'ucrReceiverName
-        '
-        Me.ucrReceiverName.AutoSize = True
-        Me.ucrReceiverName.frmParent = Me
-        Me.ucrReceiverName.Location = New System.Drawing.Point(219, 73)
-        Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverName.Name = "ucrReceiverName"
-        Me.ucrReceiverName.Selector = Nothing
-        Me.ucrReceiverName.Size = New System.Drawing.Size(148, 21)
-        Me.ucrReceiverName.strNcFilePath = ""
-        Me.ucrReceiverName.TabIndex = 18
-        Me.ucrReceiverName.ucrSelector = Nothing
-        '
         'dlgEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(414, 244)
+        Me.Controls.Add(Me.ucrSelectValues)
         Me.Controls.Add(Me.ucrReceiverName)
         Me.Controls.Add(Me.ucrNewName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblCurrentName)
-        Me.Controls.Add(Me.ucrSelectValues)
         Me.Name = "dlgEdit"
         Me.Text = "Edit"
         Me.ResumeLayout(False)
@@ -102,6 +101,6 @@ Partial Class dlgEdit
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblCurrentName As Label
     Friend WithEvents ucrNewName As ucrInputTextBox
-    Friend WithEvents ucrSelectValues As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverName As ucrReceiverSingle
+    Friend WithEvents ucrSelectValues As ucrDataFrame
 End Class
