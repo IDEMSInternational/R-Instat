@@ -48,6 +48,8 @@ Partial Class dlgHideDataframes
         Me.ucrPnlHideUnhide = New instat.UcrPanel()
         Me.ucrReceiverMultipleUnhide = New instat.ucrReceiverMultiple()
         Me.lblUnhideDataFrame = New System.Windows.Forms.Label()
+        Me.lblHiddenNumber = New System.Windows.Forms.Label()
+        Me.lblUnHiddenNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -81,7 +83,7 @@ Partial Class dlgHideDataframes
         'lblHiddenDataFrames
         '
         Me.lblHiddenDataFrames.AutoSize = True
-        Me.lblHiddenDataFrames.Location = New System.Drawing.Point(248, 47)
+        Me.lblHiddenDataFrames.Location = New System.Drawing.Point(236, 47)
         Me.lblHiddenDataFrames.Name = "lblHiddenDataFrames"
         Me.lblHiddenDataFrames.Size = New System.Drawing.Size(113, 13)
         Me.lblHiddenDataFrames.TabIndex = 4
@@ -91,7 +93,7 @@ Partial Class dlgHideDataframes
         '
         Me.ucrReceiverMultiple.AutoSize = True
         Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(248, 62)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(232, 62)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
@@ -144,7 +146,7 @@ Partial Class dlgHideDataframes
         '
         Me.ucrReceiverMultipleUnhide.AutoSize = True
         Me.ucrReceiverMultipleUnhide.frmParent = Me
-        Me.ucrReceiverMultipleUnhide.Location = New System.Drawing.Point(248, 62)
+        Me.ucrReceiverMultipleUnhide.Location = New System.Drawing.Point(233, 62)
         Me.ucrReceiverMultipleUnhide.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleUnhide.Name = "ucrReceiverMultipleUnhide"
         Me.ucrReceiverMultipleUnhide.Selector = Nothing
@@ -156,11 +158,31 @@ Partial Class dlgHideDataframes
         'lblUnhideDataFrame
         '
         Me.lblUnhideDataFrame.AutoSize = True
-        Me.lblUnhideDataFrame.Location = New System.Drawing.Point(248, 47)
+        Me.lblUnhideDataFrame.Location = New System.Drawing.Point(231, 47)
         Me.lblUnhideDataFrame.Name = "lblUnhideDataFrame"
         Me.lblUnhideDataFrame.Size = New System.Drawing.Size(125, 13)
         Me.lblUnhideDataFrame.TabIndex = 10
         Me.lblUnhideDataFrame.Text = "Unhidden Data Frame(s):"
+        '
+        'lblHiddenNumber
+        '
+        Me.lblHiddenNumber.AutoSize = True
+        Me.lblHiddenNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblHiddenNumber.Location = New System.Drawing.Point(349, 47)
+        Me.lblHiddenNumber.Name = "lblHiddenNumber"
+        Me.lblHiddenNumber.Size = New System.Drawing.Size(21, 13)
+        Me.lblHiddenNumber.TabIndex = 11
+        Me.lblHiddenNumber.Text = "DF"
+        '
+        'lblUnHiddenNumber
+        '
+        Me.lblUnHiddenNumber.AutoSize = True
+        Me.lblUnHiddenNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblUnHiddenNumber.Location = New System.Drawing.Point(349, 47)
+        Me.lblUnHiddenNumber.Name = "lblUnHiddenNumber"
+        Me.lblUnHiddenNumber.Size = New System.Drawing.Size(21, 13)
+        Me.lblUnHiddenNumber.TabIndex = 12
+        Me.lblUnHiddenNumber.Text = "DF"
         '
         'dlgHideDataframes
         '
@@ -168,6 +190,8 @@ Partial Class dlgHideDataframes
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 256)
+        Me.Controls.Add(Me.lblUnHiddenNumber)
+        Me.Controls.Add(Me.lblHiddenNumber)
         Me.Controls.Add(Me.rdoHideDataFrame)
         Me.Controls.Add(Me.rdoUnhideDataFrame)
         Me.Controls.Add(Me.lblHiddenDataFrames)
@@ -200,4 +224,6 @@ Partial Class dlgHideDataframes
     Friend WithEvents ucrPnlHideUnhide As UcrPanel
     Friend WithEvents ucrReceiverMultipleUnhide As ucrReceiverMultiple
     Friend WithEvents lblUnhideDataFrame As Label
+    Friend WithEvents lblUnHiddenNumber As Label
+    Friend WithEvents lblHiddenNumber As Label
 End Class
