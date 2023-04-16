@@ -141,16 +141,12 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkFacetGrid, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
         ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
         ucrSaveGraph.SetPrefix("two_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
 
@@ -163,7 +159,7 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrSaveGraph.Reset()
 
-        'Defining Table functions and default functions
+        'Defining Summary Table functions and default functions
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.obs", "TRUE")
@@ -172,13 +168,11 @@ Public Class dlgTwoWayFrequencies
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
         clsSjTab.AddParameter("title", Chr(34) & "" & Chr(34))
         clsSjTab.AddParameter("string.total", Chr(34) & "Total" & Chr(34))
-
-        clsSjTab.SetAssignToOutputObject("last_table",
-                                         RObjectTypeLabel.Table,
-                                         RObjectFormat.Html,
-                                         ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
-                                         "last_table")
-
+        clsSjTab.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                               strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
+                                               strObjectName:="last_summary")
 
         'Defining Plot functions and default functions
         clsSjPlot.SetPackageName("sjPlot")
@@ -188,11 +182,11 @@ Public Class dlgTwoWayFrequencies
         clsSjPlot.AddParameter("show.n", "TRUE")
         clsSjPlot.AddParameter("title", Chr(34) & "" & Chr(34))
         clsSjPlot.AddParameter("facet.grid", "TRUE")
-        clsSjPlot.SetAssignToOutputObject("last_graph",
-                                          RObjectTypeLabel.Graph,
-                                          RObjectFormat.Image,
-                                          ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
-                                          "last_graph")
+        clsSjPlot.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                               strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                               strRDataFrameNameToAddObjectTo:=ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
+                                               strObjectName:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
@@ -206,6 +200,9 @@ Public Class dlgTwoWayFrequencies
         clsTempParamOne = New RParameter("x", 1)
         clsTempParamOne.bIncludeArgumentName = False
         ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamOne, iAdditionalPairNo:=1)
+
+        ucrSaveGraph.AddAdditionalRCode(clsSjTab, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsSjPlot, iAdditionalPairNo:=2)
 
         clsTempParamTwo = New RParameter("grp", 2)
         clsTempParamTwo.bIncludeArgumentName = False
@@ -250,7 +247,7 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete Then
+        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
@@ -380,12 +377,14 @@ Public Class dlgTwoWayFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            'ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Html)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
+            ucrSaveGraph.SetCheckBoxText("Save Summary")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
-            ' ucrBase.clsRsyntax.bHTMLOutput = False
-            ucrBase.clsRsyntax.iCallType = 3
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+            ucrSaveGraph.SetCheckBoxText("Save Graph")
         End If
     End Sub
 

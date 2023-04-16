@@ -117,6 +117,7 @@ Public Class dlgImportDataset
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
+        ucrNudPreviewLines.Maximum = 1000
 
         '##############################################################
         'RDS Controls
@@ -704,15 +705,15 @@ Public Class dlgImportDataset
             End If
 
             If strFileExtension = ".r" Then
-                If Not frmMain.mnuViewScriptWindow.Checked Then
-                    frmMain.mnuViewScriptWindow.Checked = True
+                If Not frmMain.mnuViewLogScript.Checked Then
+                    frmMain.mnuViewLogScript.Checked = True
                     frmMain.UpdateLayout()
                 End If
-                If frmMain.ucrScriptWindow.txtScript.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
+                If frmMain.ucrScriptWindow.strActiveTabText.Length = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
                               Environment.NewLine & "Do you still want to load?",
                               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFilePathSystem)
+                        frmMain.ucrScriptWindow.strActiveTabText = File.ReadAllText(strFilePathSystem)
                     Catch
                         MessageBox.Show("Could not load the script from file." &
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
