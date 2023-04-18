@@ -83,7 +83,7 @@ Public Class dlgAddComment
 
         ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
         'ucrChkMakeColumnIntoKey
-        ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
+        ucrChkMakeColumnIntoKey.SetText("Make Row a Key for the Data Frame:")
         ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "True")
         ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "False")
 
@@ -107,13 +107,10 @@ Public Class dlgAddComment
         clsGetRowNamesFunction.SetAssignTo("row")
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        ' clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE", iPosition:=7)
         clsInsertColumnFunction.AddParameter("before", "TRUE", iPosition:=0)
         clsInsertColumnFunction.AddParameter("col_data", "row", iPosition:=1)
         clsInsertColumnFunction.AddParameter("col_name", Chr(34) & "row" & Chr(34), iPosition:=2)
 
-
-        'clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
 
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsAddKeyFunction.AddParameter("col_names", Chr(34) & "row" & Chr(34), iPosition:=1)
@@ -198,6 +195,7 @@ Public Class dlgAddComment
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddComment)
 
     End Sub
+
     Private Sub IdentifyKey()
         If frmMain.clsRLink.IsVariablesMetadata(ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Key") Then
             ucrChkMakeColumnIntoKey.Enabled = False
@@ -222,7 +220,6 @@ Public Class dlgAddComment
     Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrInputRow.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellRowColumnDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 
     Private Sub ucrSelectorAddComment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAddComment.ControlValueChanged
         IdentifyKey()

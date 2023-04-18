@@ -43,15 +43,15 @@ Partial Class dlgAddComment
         Me.lblComment = New System.Windows.Forms.Label()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
+        Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrChkMakeColumnIntoKey = New instat.ucrCheck()
+        Me.ucrInputRow = New instat.ucrInputTextBox()
+        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlCellRowColumnDataFrame = New instat.UcrPanel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputRow = New instat.ucrInputTextBox()
-        Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
-        Me.rdoColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrChkMakeColumnIntoKey = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblRow
@@ -75,7 +75,7 @@ Partial Class dlgAddComment
         'lblComment
         '
         Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(13, 296)
+        Me.lblComment.Location = New System.Drawing.Point(10, 296)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
         Me.lblComment.TabIndex = 10
@@ -114,70 +114,6 @@ Partial Class dlgAddComment
         Me.rdoRow.Text = "Row"
         Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRow.UseVisualStyleBackColor = True
-        '
-        'ucrPnlCellRowColumnDataFrame
-        '
-        Me.ucrPnlCellRowColumnDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCellRowColumnDataFrame.Location = New System.Drawing.Point(-4, 1)
-        Me.ucrPnlCellRowColumnDataFrame.Name = "ucrPnlCellRowColumnDataFrame"
-        Me.ucrPnlCellRowColumnDataFrame.Size = New System.Drawing.Size(422, 44)
-        Me.ucrPnlCellRowColumnDataFrame.TabIndex = 0
-        '
-        'ucrInputComment
-        '
-        Me.ucrInputComment.AddQuotesIfUnrecognised = True
-        Me.ucrInputComment.AutoSize = True
-        Me.ucrInputComment.IsMultiline = False
-        Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(83, 283)
-        Me.ucrInputComment.Name = "ucrInputComment"
-        Me.ucrInputComment.Size = New System.Drawing.Size(325, 47)
-        Me.ucrInputComment.TabIndex = 11
-        '
-        'ucrReceiverColumn
-        '
-        Me.ucrReceiverColumn.AutoSize = True
-        Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 129)
-        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
-        Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverColumn.strNcFilePath = ""
-        Me.ucrReceiverColumn.TabIndex = 9
-        Me.ucrReceiverColumn.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 334)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 12
-        '
-        'ucrSelectorAddComment
-        '
-        Me.ucrSelectorAddComment.AutoSize = True
-        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
-        Me.ucrSelectorAddComment.bShowHiddenColumns = False
-        Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(10, 48)
-        Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
-        Me.ucrSelectorAddComment.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorAddComment.TabIndex = 5
-        '
-        'ucrInputRow
-        '
-        Me.ucrInputRow.AddQuotesIfUnrecognised = True
-        Me.ucrInputRow.AutoSize = True
-        Me.ucrInputRow.IsMultiline = False
-        Me.ucrInputRow.IsReadOnly = False
-        Me.ucrInputRow.Location = New System.Drawing.Point(302, 68)
-        Me.ucrInputRow.Name = "ucrInputRow"
-        Me.ucrInputRow.Size = New System.Drawing.Size(80, 21)
-        Me.ucrInputRow.TabIndex = 7
         '
         'rdoDataFrame
         '
@@ -221,10 +157,74 @@ Partial Class dlgAddComment
         '
         Me.ucrChkMakeColumnIntoKey.AutoSize = True
         Me.ucrChkMakeColumnIntoKey.Checked = False
-        Me.ucrChkMakeColumnIntoKey.Location = New System.Drawing.Point(10, 245)
+        Me.ucrChkMakeColumnIntoKey.Location = New System.Drawing.Point(10, 244)
         Me.ucrChkMakeColumnIntoKey.Name = "ucrChkMakeColumnIntoKey"
         Me.ucrChkMakeColumnIntoKey.Size = New System.Drawing.Size(297, 23)
         Me.ucrChkMakeColumnIntoKey.TabIndex = 13
+        '
+        'ucrInputRow
+        '
+        Me.ucrInputRow.AddQuotesIfUnrecognised = True
+        Me.ucrInputRow.AutoSize = True
+        Me.ucrInputRow.IsMultiline = False
+        Me.ucrInputRow.IsReadOnly = False
+        Me.ucrInputRow.Location = New System.Drawing.Point(302, 68)
+        Me.ucrInputRow.Name = "ucrInputRow"
+        Me.ucrInputRow.Size = New System.Drawing.Size(80, 21)
+        Me.ucrInputRow.TabIndex = 7
+        '
+        'ucrSelectorAddComment
+        '
+        Me.ucrSelectorAddComment.AutoSize = True
+        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAddComment.bShowHiddenColumns = False
+        Me.ucrSelectorAddComment.bUseCurrentFilter = True
+        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(10, 48)
+        Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
+        Me.ucrSelectorAddComment.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorAddComment.TabIndex = 5
+        '
+        'ucrPnlCellRowColumnDataFrame
+        '
+        Me.ucrPnlCellRowColumnDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCellRowColumnDataFrame.Location = New System.Drawing.Point(-4, 1)
+        Me.ucrPnlCellRowColumnDataFrame.Name = "ucrPnlCellRowColumnDataFrame"
+        Me.ucrPnlCellRowColumnDataFrame.Size = New System.Drawing.Size(422, 44)
+        Me.ucrPnlCellRowColumnDataFrame.TabIndex = 0
+        '
+        'ucrInputComment
+        '
+        Me.ucrInputComment.AddQuotesIfUnrecognised = True
+        Me.ucrInputComment.AutoSize = True
+        Me.ucrInputComment.IsMultiline = False
+        Me.ucrInputComment.IsReadOnly = False
+        Me.ucrInputComment.Location = New System.Drawing.Point(83, 283)
+        Me.ucrInputComment.Name = "ucrInputComment"
+        Me.ucrInputComment.Size = New System.Drawing.Size(325, 47)
+        Me.ucrInputComment.TabIndex = 11
+        '
+        'ucrReceiverColumn
+        '
+        Me.ucrReceiverColumn.AutoSize = True
+        Me.ucrReceiverColumn.frmParent = Me
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 129)
+        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.TabIndex = 9
+        Me.ucrReceiverColumn.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 334)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 12
         '
         'dlgAddComment
         '
