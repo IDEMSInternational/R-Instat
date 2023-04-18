@@ -53,6 +53,8 @@ Partial Class dlgBoxplot
         Me.toolStripMenuItemSummaryOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTufteOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemViolinOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomTextOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrChkLabelOutlier = New instat.ucrCheck()
         Me.ucrInputSummaries = New instat.ucrInputComboBox()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkTufte = New instat.ucrCheck()
@@ -150,7 +152,7 @@ Partial Class dlgBoxplot
         '
         Me.lblJitter.AutoSize = True
         Me.lblJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblJitter.Location = New System.Drawing.Point(128, 360)
+        Me.lblJitter.Location = New System.Drawing.Point(128, 326)
         Me.lblJitter.Name = "lblJitter"
         Me.lblJitter.Size = New System.Drawing.Size(32, 13)
         Me.lblJitter.TabIndex = 18
@@ -161,7 +163,7 @@ Partial Class dlgBoxplot
         '
         Me.lblTransparency.AutoSize = True
         Me.lblTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTransparency.Location = New System.Drawing.Point(223, 359)
+        Me.lblTransparency.Location = New System.Drawing.Point(223, 325)
         Me.lblTransparency.Name = "lblTransparency"
         Me.lblTransparency.Size = New System.Drawing.Size(75, 13)
         Me.lblTransparency.TabIndex = 20
@@ -170,9 +172,9 @@ Partial Class dlgBoxplot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxOptions, Me.toolStripMenuItemJitterOptions, Me.toolStripMenuItemSummaryOptions, Me.toolStripMenuItemTufteOptions, Me.toolStripMenuItemViolinOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxOptions, Me.toolStripMenuItemJitterOptions, Me.toolStripMenuItemSummaryOptions, Me.toolStripMenuItemTufteOptions, Me.toolStripMenuItemViolinOptions, Me.toolStripMenuItemGeomTextOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 180)
         '
         'toolStripMenuItemPlotOptions
         '
@@ -210,13 +212,29 @@ Partial Class dlgBoxplot
         Me.toolStripMenuItemViolinOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemViolinOptions.Text = "Violin Options"
         '
+        'toolStripMenuItemGeomTextOptions
+        '
+        Me.toolStripMenuItemGeomTextOptions.Enabled = False
+        Me.toolStripMenuItemGeomTextOptions.Name = "toolStripMenuItemGeomTextOptions"
+        Me.toolStripMenuItemGeomTextOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemGeomTextOptions.Text = "Geom_Text Options"
+        '
+        'ucrChkLabelOutlier
+        '
+        Me.ucrChkLabelOutlier.AutoSize = True
+        Me.ucrChkLabelOutlier.Checked = False
+        Me.ucrChkLabelOutlier.Location = New System.Drawing.Point(10, 352)
+        Me.ucrChkLabelOutlier.Name = "ucrChkLabelOutlier"
+        Me.ucrChkLabelOutlier.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkLabelOutlier.TabIndex = 24
+        '
         'ucrInputSummaries
         '
         Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
         Me.ucrInputSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummaries.GetSetSelectedIndex = -1
         Me.ucrInputSummaries.IsReadOnly = False
-        Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 327)
+        Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 293)
         Me.ucrInputSummaries.Name = "ucrInputSummaries"
         Me.ucrInputSummaries.Size = New System.Drawing.Size(81, 21)
         Me.ucrInputSummaries.TabIndex = 16
@@ -225,9 +243,9 @@ Partial Class dlgBoxplot
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 236)
+        Me.cmdOptions.Location = New System.Drawing.Point(272, 288)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
+        Me.cmdOptions.Size = New System.Drawing.Size(138, 25)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Tag = "Plot Options"
@@ -238,7 +256,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkTufte.AutoSize = True
         Me.ucrChkTufte.Checked = False
-        Me.ucrChkTufte.Location = New System.Drawing.Point(275, 313)
+        Me.ucrChkTufte.Location = New System.Drawing.Point(275, 352)
         Me.ucrChkTufte.Name = "ucrChkTufte"
         Me.ucrChkTufte.Size = New System.Drawing.Size(145, 23)
         Me.ucrChkTufte.TabIndex = 11
@@ -247,7 +265,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkGrouptoConnect.AutoSize = True
         Me.ucrChkGrouptoConnect.Checked = False
-        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 328)
+        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 294)
         Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
         Me.ucrChkGrouptoConnect.Size = New System.Drawing.Size(144, 23)
         Me.ucrChkGrouptoConnect.TabIndex = 15
@@ -257,7 +275,7 @@ Partial Class dlgBoxplot
         Me.ucrNudTransparency.AutoSize = True
         Me.ucrNudTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTransparency.Location = New System.Drawing.Point(301, 356)
+        Me.ucrNudTransparency.Location = New System.Drawing.Point(301, 322)
         Me.ucrNudTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTransparency.Name = "ucrNudTransparency"
@@ -270,7 +288,7 @@ Partial Class dlgBoxplot
         Me.ucrNudJitter.AutoSize = True
         Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudJitter.Location = New System.Drawing.Point(164, 356)
+        Me.ucrNudJitter.Location = New System.Drawing.Point(164, 322)
         Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudJitter.Name = "ucrNudJitter"
@@ -282,7 +300,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkAddPoints.AutoSize = True
         Me.ucrChkAddPoints.Checked = False
-        Me.ucrChkAddPoints.Location = New System.Drawing.Point(10, 356)
+        Me.ucrChkAddPoints.Location = New System.Drawing.Point(10, 322)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
         Me.ucrChkAddPoints.Size = New System.Drawing.Size(115, 23)
         Me.ucrChkAddPoints.TabIndex = 17
@@ -310,7 +328,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkHorizontalBoxplot.AutoSize = True
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 300)
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 266)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(238, 23)
         Me.ucrChkHorizontalBoxplot.TabIndex = 14
@@ -319,7 +337,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkVarWidth.AutoSize = True
         Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 272)
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 238)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(238, 23)
         Me.ucrChkVarWidth.TabIndex = 13
@@ -398,6 +416,7 @@ Partial Class dlgBoxplot
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(425, 466)
+        Me.Controls.Add(Me.ucrChkLabelOutlier)
         Me.Controls.Add(Me.ucrInputSummaries)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkTufte)
@@ -467,4 +486,6 @@ Partial Class dlgBoxplot
     Friend WithEvents toolStripMenuItemTufteOptions As ToolStripMenuItem
     Friend WithEvents ucrInputSummaries As ucrInputComboBox
     Friend WithEvents toolStripMenuItemSummaryOptions As ToolStripMenuItem
+    Friend WithEvents ucrChkLabelOutlier As ucrCheck
+    Friend WithEvents toolStripMenuItemGeomTextOptions As ToolStripMenuItem
 End Class
