@@ -3269,11 +3269,9 @@ Partial Class frmMain
         '
         'mnuFileImportFromPostgres
         '
-        Me.mnuFileImportFromPostgres.Enabled = False
         Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
         Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
-        Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
-        Me.mnuFileImportFromPostgres.Visible = False
+        Me.mnuFileImportFromPostgres.Text = "Import From RDBMS"
         '
         'mnuFileImportFromRapidPro
         '
@@ -4779,6 +4777,7 @@ Partial Class frmMain
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
         Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model"
+        Me.mnuOptionsByContextCropModel.Visible = False
         '
         'mnuOptionsByContextCropModelApsimxExamples
         '
