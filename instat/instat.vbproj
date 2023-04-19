@@ -215,6 +215,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -225,6 +226,12 @@
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
@@ -243,6 +250,12 @@
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgUseTable.Designer.vb">
+      <DependentUpon>dlgUseTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUseTable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
@@ -1957,12 +1970,6 @@
     <Compile Include="dlgRecodeFactor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgCanonicalCorrelation.Designer.vb">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCanonicalCorrelation.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgCreateFilter.Designer.vb">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </Compile>
@@ -2599,12 +2606,6 @@
     <Compile Include="dlgNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLog.Designer.vb">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmLog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -2733,12 +2734,6 @@
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrLayerParamsControls.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrLog.Designer.vb">
-      <DependentUpon>ucrLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrLog.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
@@ -3026,6 +3021,9 @@
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFindInVariableOrFilter.resx">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
@@ -3088,6 +3086,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUseTable.resx">
+      <DependentUpon>dlgUseTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
@@ -4168,12 +4169,6 @@
     <EmbeddedResource Include="sdgCalculationsSummmary.sw-KE.resx">
       <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgCanonicalCorrelation.resx">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimdexIndices.resx">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
     </EmbeddedResource>
@@ -4800,12 +4795,6 @@
     <EmbeddedResource Include="dlgNewDataFrame.sw-KE.resx">
       <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.sw-KE.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -5078,12 +5067,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrLog.resx">
-      <DependentUpon>ucrLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrLog.sw-KE.resx">
-      <DependentUpon>ucrLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
