@@ -11,7 +11,7 @@ Namespace R_Adapter.RLink
         Private Shared ReadOnly log As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
         Private _rEngine As REngine
 
-        Protected Function ConnectedToR() As Boolean
+        Protected Function IsConnectedToR() As Boolean
             If _rEngine IsNot Nothing Then
                 Return _rEngine.IsRunning
             Else
@@ -59,7 +59,8 @@ Namespace R_Adapter.RLink
             End If
         End Sub
 
-        Protected Function GetSymbol(ByVal strSymbol As String, ByVal Optional bSilent As Boolean = False) As SymbolicExpression
+        'ToDo should be protected
+        Public Function GetSymbol(ByVal strSymbol As String, ByVal Optional bSilent As Boolean = False) As SymbolicExpression
             Dim expTemp As SymbolicExpression = Nothing
 
             If _rEngine IsNot Nothing Then

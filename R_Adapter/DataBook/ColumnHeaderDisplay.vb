@@ -13,30 +13,26 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Drawing
 
-Imports R_Adapter2.R_Adapter.DataBook
+Namespace R_Adapter.DataBook
+    Public Class ColumnHeaderDisplay
+        Public Property strName As String
 
-Public Interface IDataViewGrid
-    Inherits IGrid
+        Public ReadOnly Property strDisplayName As String
+            Get
+                Return strName & " " & strTypeShortCode
+            End Get
+        End Property
 
-    Event CellDataChanged()
+        Public Property strTypeShortCode As String
 
-    Event PasteValuesToDataframe()
+        Public Property clsColour As Color
 
-    Event ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
+        Public Property clsBackGroundColour As Color
 
-    Event DeleteValuesToDataframe()
+        Public Property bIsFactor As Boolean
 
-    Event WorksheetChanged()
+    End Class
+End Namespace
 
-    Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
-
-    Sub AddColumns(visiblePage As DataFramePage)
-
-    Sub AddRowData(dataFrame As DataFrame)
-
-    Function GetSelectedColumns() As List(Of ColumnHeaderDisplay)
-
-    Function GetWorksheetCount() As Integer
-
-End Interface

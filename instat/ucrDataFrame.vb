@@ -16,6 +16,7 @@
 
 Imports instat
 Imports instat.Translations
+Imports R_Adapter2.R_Adapter.DataBook
 
 Public Class ucrDataFrame
     Public clsCurrDataFrame As New RFunction
@@ -115,7 +116,7 @@ Public Class ucrDataFrame
         ElseIf frmMain.DataBook IsNot Nothing Then
             'Above check was added because of issue #4557.
             'todo. Once the DataBook is moved to a global class, then it can be removed
-            For Each dataFrame As clsDataFrame In frmMain.DataBook.DataFrames
+            For Each dataFrame As DataFrame In frmMain.DataBook.DataFrames
                 cboAvailableDataFrames.Items.Add(dataFrame.strName)
             Next
         End If

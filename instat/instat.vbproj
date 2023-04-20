@@ -5624,6 +5624,12 @@
   <ItemGroup>
     <Folder Include="obj\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R_Adapter\R_Adapter.vbproj">
+      <Project>{7c682a32-468e-4aee-84b5-55e807ff6e73}</Project>
+      <Name>R_Adapter</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

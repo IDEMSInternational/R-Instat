@@ -140,7 +140,7 @@ Public Class clsDataFrame
     Public Sub New(rLink As RLink, strDataFrameName As String)
         _RLink = rLink
         _strDataFrameName = strDataFrameName
-        _clsPrepareFunctions = New clsPrepareFunctionsForGrids(rLink, strDataFrameName)
+        '  _clsPrepareFunctions = New clsPrepareFunctionsForGrids(rLink, strDataFrameName)
         _clsVisibleDataFramePage = New clsDataFramePage(rLink, strDataFrameName)
         _clsFilterOrColumnSelection = New clsDataFrameFilterOrColumnSelection(rLink, strDataFrameName)
         _clsColumnMetaData = New clsColumnMetaData(rLink, strDataFrameName)

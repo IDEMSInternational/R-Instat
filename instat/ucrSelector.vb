@@ -13,6 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports R_Adapter2.R_Adapter.DataBook
+
 Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
     Public Event ResetAll()
@@ -157,7 +159,7 @@ Public Class ucrSelector
 
     End Sub
 
-    Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String,
+    Private Function GetSelectorFillCondition(dataFrame As DataFrame, strElementType As String,
             lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))),
             strHeading As String, arrStrExcludedItems As String(), strDatabaseQuery As String,
             strNcFilePath As String)

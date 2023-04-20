@@ -22,6 +22,7 @@ Imports instat.Translations
 Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.InteropServices
+Imports R_Adapter2.R_Adapter.DataBook
 
 Public Class frmMain
     Public clsRLink As RLink
@@ -40,9 +41,9 @@ Public Class frmMain
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
-    Private clsDataBook As clsDataBook
+    Private clsDataBook As DataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
-    Public ReadOnly Property DataBook As clsDataBook
+    Public ReadOnly Property DataBook As DataBook
         Get
             Return clsDataBook
         End Get
@@ -107,7 +108,7 @@ Public Class frmMain
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
         ucrDataViewer.StartupMenuItemsVisibility(False)
-        clsDataBook = New clsDataBook(clsRLink)
+        clsDataBook = New DataBook(Nothing)
 
         ucrDataViewer.DataBook = clsDataBook
         ucrColumnMeta.DataBook = clsDataBook
@@ -179,6 +180,8 @@ Public Class frmMain
 
         ucrOutput.SetInstatOptions(clsInstatOptions)
         isMaximised = True 'Need to get the windowstate when the application is loaded
+
+
     End Sub
 
     ''' <summary>

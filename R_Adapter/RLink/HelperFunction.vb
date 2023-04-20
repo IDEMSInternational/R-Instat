@@ -35,6 +35,7 @@ Namespace R_Adapter.RLink
             Return strScript
         End Function
 
+
         Public Function GetDataFrameNames() As List(Of String)
             Dim lstDataFrameNames As List(Of String) = New List(Of String)()
             Dim clsGetDataNames As RFunction = New RFunction()

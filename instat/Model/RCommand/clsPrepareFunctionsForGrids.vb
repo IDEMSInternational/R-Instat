@@ -13,100 +13,104 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports R_Adapter2.R_Adapter.Constant
+Imports R_Adapter2.R_Adapter.RLink
 Imports RDotNet
 ''' <summary>
 ''' Class for holding any prepare functions that can be called from within the dataview grid, column metadata grid
 ''' and, meta data grid. 
 ''' </summary>
 Public Class clsPrepareFunctionsForGrids
-    Private ReadOnly _RLink As RLink
-    Private ReadOnly _strDataFrame As String
+    'Private ReadOnly _RLink As RLink
+    Private scriptRunner As ScriptRunner = ScriptRunner.SingletonInstance()
+    ' Private ReadOnly _strDataFrame As String
 
     ''' <summary>
     ''' Create a new instance of prepare functions for an indivdual dataframe
     ''' </summary>
     ''' <param name="rLink"></param>
     ''' <param name="strDataFrame"></param>
-    Public Sub New(rLink As RLink, strDataFrame As String)
-        _RLink = rLink
-        _strDataFrame = strDataFrame
+    ''' ToDo Remove strDataFrame
+    Public Sub New()
+        '_RLink = RLink
+        ' _strDataFrame = strDataFrame
     End Sub
 
     ''' <summary>
     ''' Delete one or many columns
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub DeleteColumn(lstColumnNames As List(Of String))
+    Public Sub DeleteColumn(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsDeleteColumns As New RFunction
-        clsDeleteColumns.SetRCommand(_RLink.strInstatDataObject & "$remove_columns_in_data")
-        clsDeleteColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
-        clsDeleteColumns.AddParameter("cols", _RLink.GetListAsRString(lstColumnNames))
-        _RLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
+        clsDeleteColumns.SetRCommand(RCodeConstant.DataBookName & "$remove_columns_in_data")
+        clsDeleteColumns.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsDeleteColumns.AddParameter("cols", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames))
+        scriptRunner.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
     End Sub
 
     ''' <summary>
     ''' Convert one or many columns to text type
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub ConvertToText(lstColumnNames As List(Of String))
+    Public Sub ConvertToText(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsConvertTo As New RFunction
-        clsConvertTo.SetRCommand(_RLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertTo.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsConvertTo.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames), iPosition:=1)
+        clsConvertTo.SetRCommand(RCodeConstant.DataBookName & "$convert_column_to_type")
+        clsConvertTo.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsConvertTo.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames), iPosition:=1)
         clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34), iPosition:=2)
-        _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
+        scriptRunner.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     ''' <summary>
     ''' Convert one or many columns to logical type
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub ConvertToLogical(lstColumnNames As List(Of String))
+    Public Sub ConvertToLogical(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsConvertTo As New RFunction
-        clsConvertTo.SetRCommand(_RLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertTo.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsConvertTo.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames), iPosition:=1)
+        clsConvertTo.SetRCommand(RCodeConstant.DataBookName & "$convert_column_to_type")
+        clsConvertTo.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsConvertTo.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames), iPosition:=1)
         clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34), iPosition:=2)
-        _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
+        scriptRunner.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
     ''' <summary>
     ''' Convert one or many columns to factor type
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub ConvertToFactor(lstColumnNames As List(Of String))
+    Public Sub ConvertToFactor(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsConvertTo As New RFunction
-        clsConvertTo.SetRCommand(_RLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertTo.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsConvertTo.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames), iPosition:=1)
+        clsConvertTo.SetRCommand(RCodeConstant.DataBookName & "$convert_column_to_type")
+        clsConvertTo.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsConvertTo.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames), iPosition:=1)
         clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
-        _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
+        scriptRunner.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
     ''' <summary>
     ''' Convert one or many columns to ordered factor type
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub ConvertToOrderedFactor(lstColumnNames As List(Of String))
+    Public Sub ConvertToOrderedFactor(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsConvertTo As New RFunction
-        clsConvertTo.SetRCommand(_RLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertTo.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsConvertTo.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames), iPosition:=1)
+        clsConvertTo.SetRCommand(RCodeConstant.DataBookName & "$convert_column_to_type")
+        clsConvertTo.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsConvertTo.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames), iPosition:=1)
         clsConvertTo.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34), iPosition:=2)
-        _RLink.RunScript(clsConvertTo.ToScript, strComment:="Right click menu: Convert to Ordered Factor")
+        scriptRunner.RunScript(clsConvertTo.ToScript, strComment:="Right click menu: Convert to Ordered Factor")
     End Sub
 
     ''' <summary>
     ''' Convert one or many columns to character type
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub ConvertToCharacter(lstColumnNames As List(Of String))
+    Public Sub ConvertToCharacter(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsConvertTo As New RFunction
-        clsConvertTo.SetRCommand(_RLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertTo.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsConvertTo.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames), iPosition:=1)
+        clsConvertTo.SetRCommand(RCodeConstant.DataBookName & "$convert_column_to_type")
+        clsConvertTo.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsConvertTo.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames), iPosition:=1)
         clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34), iPosition:=2)
-        _RLink.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
+        scriptRunner.RunScript(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     ''' <summary>
@@ -114,19 +118,19 @@ Public Class clsPrepareFunctionsForGrids
     ''' </summary>
     ''' <param name="strColumnName"></param>
     ''' <returns></returns>
-    Public Function GetAmountOfNonNumericValuesInColumn(strColumnName As String) As Integer
+    Public Function GetAmountOfNonNumericValuesInColumn(strDataFrame As String, strColumnName As String) As Integer
         Dim expTemp As SymbolicExpression
         Dim clsGetColumnsFromData As New RFunction
         Dim clsNNonNumeric As New RFunction
 
-        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetColumnsFromData.SetRCommand(RCodeConstant.DataBookName & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
         clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
 
         clsNNonNumeric.SetRCommand("n_non_numeric")
         clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
-        expTemp = _RLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
+        expTemp = scriptRunner.RunInternalScriptGetValue(clsNNonNumeric.ToScript())
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsNumeric(0)
         Else
@@ -139,52 +143,52 @@ Public Class clsPrepareFunctionsForGrids
     ''' </summary>
     ''' <param name="strColumnName"></param>
     ''' <param name="bIgnoreLabels"></param>
-    Public Sub ConvertToNumeric(strColumnName As String, bIgnoreLabels As Boolean)
+    Public Sub ConvertToNumeric(strDataFrame As String, strColumnName As String, bIgnoreLabels As Boolean)
         Dim clsConvertToNumeric As New RFunction
-        clsConvertToNumeric.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertToNumeric.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsConvertToNumeric.SetRCommand(RCodeConstant.DataBookName & "$convert_column_to_type")
+        clsConvertToNumeric.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsConvertToNumeric.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
         clsConvertToNumeric.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         If bIgnoreLabels Then
             clsConvertToNumeric.AddParameter("ignore_labels", "TRUE", iPosition:=3)
         End If
-        _RLink.RunScript(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+        scriptRunner.RunScript(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
     ''' <summary>
     '''  Check if the column factor contains labels.
     ''' </summary>
-    Public Function CheckHasLabels(strColumnName As String) As Boolean
+    Public Function CheckHasLabels(strDataFrame As String, strColumnName As String) As Boolean
         Dim clsColmnLabelsRFunction = New RFunction
         Dim clsGetColumnsFromData As New RFunction
 
-        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetColumnsFromData.SetRCommand(RCodeConstant.DataBookName & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
         clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
 
-        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_labels")
-        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.SetRCommand(RCodeConstant.DataBookName & "$has_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsColmnLabelsRFunction.AddParameter("col_names", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
 
-        Return frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True).AsLogical(0)
+        Return scriptRunner.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript()).AsLogical(0)
     End Function
 
     ''' <summary>
     ''' View dataframe the whole dataframe within a pop up
     ''' </summary>
-    Public Sub ViewDataFrame()
+    Public Sub ViewDataFrame(strDataFrame As String)
         Dim clsGetDataFrame As New RFunction
         Dim clsViewDataFrame As New RFunction
         Dim strScript As String = ""
         Dim strTemp As String
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataFrame.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetDataFrame.SetRCommand(RCodeConstant.DataBookName & "$get_data_frame")
+        clsGetDataFrame.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsViewDataFrame.SetRCommand("View")
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
-        clsGetDataFrame.SetAssignTo(_strDataFrame)
+        clsGetDataFrame.SetAssignTo(strDataFrame)
         strTemp = clsViewDataFrame.ToScript(strScript)
-        _RLink.RunScript(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+        scriptRunner.RunScript(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
     End Sub
     ''' <summary>
     ''' insert new rows
@@ -192,82 +196,82 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="noOfRowsToAdd"></param>
     ''' <param name="currentRowHeader"></param>
     ''' <param name="bBefore"></param>
-    Public Sub InsertRows(noOfRowsToAdd As Integer, currentRowHeader As String, bBefore As Boolean)
+    Public Sub InsertRows(strDataFrame As String, noOfRowsToAdd As Integer, currentRowHeader As String, bBefore As Boolean)
         Dim clsInsertRows As New RFunction
-        clsInsertRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
-        clsInsertRows.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsInsertRows.SetRCommand(RCodeConstant.DataBookName & "$insert_row_in_data")
+        clsInsertRows.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsInsertRows.AddParameter("start_row", currentRowHeader)
         clsInsertRows.AddParameter("number_rows", noOfRowsToAdd)
         If bBefore Then
             clsInsertRows.AddParameter("before", "TRUE")
-            _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) Before")
+            scriptRunner.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) Before")
         Else
             clsInsertRows.AddParameter("before", "FALSE")
-            _RLink.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) After")
+            scriptRunner.RunScript(clsInsertRows.ToScript(), strComment:="Right click menu: Insert Row(s) After")
         End If
     End Sub
     ''' <summary>
     ''' deletes given rows
     ''' </summary>
     ''' <param name="lstRowNames"></param>
-    Public Sub DeleteRows(lstRowNames As List(Of String))
+    Public Sub DeleteRows(strDataFrame As String, lstRowNames As List(Of String))
         Dim clsDeleteRows As New RFunction
-        clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
-        clsDeleteRows.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsDeleteRows.AddParameter("row_names", _RLink.GetListAsRString(lstRowNames))
-        _RLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right click menu: Delete Row(s)")
+        clsDeleteRows.SetRCommand(RCodeConstant.DataBookName & "$remove_rows_in_data")
+        clsDeleteRows.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsDeleteRows.AddParameter("row_names", scriptRunner.HelperFunctions.GetListAsRString(lstRowNames))
+        scriptRunner.RunScript(clsDeleteRows.ToScript(), strComment:="Right click menu: Delete Row(s)")
 
     End Sub
     ''' <summary>
     ''' Removes current filter
     ''' </summary>
-    Public Sub RemoveCurrentFilter()
+    Public Sub RemoveCurrentFilter(strDataFrame As String)
         Dim clsRemoveFilter As New RFunction
-        clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
-        clsRemoveFilter.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        _RLink.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+        clsRemoveFilter.SetRCommand(RCodeConstant.DataBookName & "$remove_current_filter")
+        clsRemoveFilter.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        scriptRunner.RunScript(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
     End Sub
     ''' <summary>
     ''' Removes current column selection
     ''' </summary>
-    Public Sub RemoveCurrentColumnSelection()
+    Public Sub RemoveCurrentColumnSelection(strDataFrame As String)
         Dim clsRemoveCurrentColumnSelection As New RFunction
-        clsRemoveCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
-        clsRemoveCurrentColumnSelection.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        _RLink.RunScript(clsRemoveCurrentColumnSelection.ToScript(), strComment:="Right click menu: Remove Current Column Selection")
+        clsRemoveCurrentColumnSelection.SetRCommand(RCodeConstant.DataBookName & "$remove_current_column_selection")
+        clsRemoveCurrentColumnSelection.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        scriptRunner.RunScript(clsRemoveCurrentColumnSelection.ToScript(), strComment:="Right click menu: Remove Current Column Selection")
     End Sub
     ''' <summary>
     ''' Freeze selected columns
     ''' </summary>
     ''' <param name="strLastSelectedColumn"></param>
-    Public Sub FreezeColumns(strLastSelectedColumn As String)
+    Public Sub FreezeColumns(strDataFrame As String, strLastSelectedColumn As String)
         Dim clsFreezeColumns As New RFunction
-        clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
-        clsFreezeColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsFreezeColumns.SetRCommand(RCodeConstant.DataBookName & "$freeze_columns")
+        clsFreezeColumns.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsFreezeColumns.AddParameter("column", Chr(34) & strLastSelectedColumn & Chr(34))
-        _RLink.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze Columns")
+        scriptRunner.RunScript(clsFreezeColumns.ToScript(), strComment:="Right click menu: Freeze Columns")
     End Sub
     ''' <summary>
     ''' UnFreeze selected columns
     ''' </summary>
-    Public Sub UnFreezeColumns()
+    Public Sub UnFreezeColumns(strDataFrame As String)
         Dim clsUnfreezeColumns As New RFunction
-        clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
-        clsUnfreezeColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        _RLink.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Unfreeze Columns")
+        clsUnfreezeColumns.SetRCommand(RCodeConstant.DataBookName & "$unfreeze_columns")
+        clsUnfreezeColumns.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        scriptRunner.RunScript(clsUnfreezeColumns.ToScript(), strComment:="Right click menu: Unfreeze Columns")
     End Sub
     ''' <summary>
     ''' Appends variables to Metadata
     ''' </summary>
     ''' <param name="lstColumnNames"></param>
-    Public Sub AppendToVariablesMetadata(lstColumnNames As List(Of String))
+    Public Sub AppendToVariablesMetadata(strDataFrame As String, lstColumnNames As List(Of String))
         Dim clsAppendVariablesMetaData As New RFunction
-        clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
-        clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsAppendVariablesMetaData.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames))
+        clsAppendVariablesMetaData.SetRCommand(RCodeConstant.DataBookName & "$append_to_variables_metadata")
+        clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        clsAppendVariablesMetaData.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames))
         clsAppendVariablesMetaData.AddParameter("property", "labels_label")
         clsAppendVariablesMetaData.AddParameter("new_val", "NULL")
-        _RLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Removed value labels")
+        scriptRunner.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Removed value labels")
     End Sub
     ''' <summary>
     ''' Paste values directly into the dataframe. Columns and start row given
@@ -275,40 +279,40 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="strClipBoardText"></param>
     ''' <param name="lstColumnNames"></param>
     ''' <param name="strStartRow"></param>
-    Public Sub PasteValues(strClipBoardText As String, lstColumnNames As List(Of String), strStartRow As String)
+    Public Sub PasteValues(strDataFrame As String, strClipBoardText As String, lstColumnNames As List(Of String), strStartRow As String)
         Dim clsPasteValues As New RFunction
-        clsPasteValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$paste_from_clipboard")
-        clsPasteValues.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
-        clsPasteValues.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames))
+        clsPasteValues.SetRCommand(RCodeConstant.DataBookName & "$paste_from_clipboard")
+        clsPasteValues.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsPasteValues.AddParameter("col_names", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames))
         clsPasteValues.AddParameter("start_row_pos", strStartRow)
         clsPasteValues.AddParameter("first_clip_row_is_header", "FALSE")
         clsPasteValues.AddParameter("clip_board_text", Chr(34) & strClipBoardText & Chr(34))
-        _RLink.RunScript(clsPasteValues.ToScript(), strComment:="Paste Values In Data")
+        scriptRunner.RunScript(clsPasteValues.ToScript(), strComment:="Paste Values In Data")
     End Sub
     ''' <summary>
     ''' Get data type label for a given column
     ''' </summary>
     ''' <param name="strColumnName"></param>
     ''' <returns></returns>
-    Public Function GetDataTypeLabel(strColumnName As String) As String
+    Public Function GetDataTypeLabel(strDataFrame As String, strColumnName As String) As String
         Dim clsGetVariablesMetadata As New RFunction
-        clsGetVariablesMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-        clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsGetVariablesMetadata.SetRCommand(RCodeConstant.DataBookName & "$get_variables_metadata")
+        clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
         clsGetVariablesMetadata.AddParameter("property", "data_type_label")
         clsGetVariablesMetadata.AddParameter("column", Chr(34) & strColumnName & Chr(34))
-        Return _RLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
+        Return scriptRunner.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsCharacter(0)
     End Function
     ''' <summary>
     ''' Get factor levels for a given column
     ''' </summary>
     ''' <param name="strColumnName"></param>
     ''' <returns></returns>
-    Public Function GetColumnFactorLevels(strColumnName As String) As CharacterVector
+    Public Function GetColumnFactorLevels(strDataFrame As String, strColumnName As String) As CharacterVector
         Dim clsGetFactorLevels As New RFunction
-        clsGetFactorLevels.SetRCommand(_RLink.strInstatDataObject & "$get_column_factor_levels")
-        clsGetFactorLevels.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsGetFactorLevels.SetRCommand(RCodeConstant.DataBookName & "$get_column_factor_levels")
+        clsGetFactorLevels.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
         clsGetFactorLevels.AddParameter("col_name", Chr(34) & strColumnName & Chr(34))
-        Return _RLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
+        Return scriptRunner.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
     End Function
     ''' <summary>
     ''' Replace value in given cell
@@ -318,12 +322,12 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="strRowText"></param>
     ''' <param name="bWithQuotes"></param>
     ''' <param name="bListOfVector"></param>
-    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False, Optional bAddOutputInInternalViewer As Boolean = True)
+    Public Sub ReplaceValueInData(strDataFrame As String, strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False, Optional bAddOutputInInternalViewer As Boolean = True)
         Dim clsReplaceValue As New RFunction
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsReplaceValue.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
         clsReplaceValue.AddParameter("col_name", Chr(34) & strColumnName & Chr(34))
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowText & Chr(34))
         If bListOfVector Then
@@ -334,7 +338,7 @@ Public Class clsPrepareFunctionsForGrids
         Else
             clsReplaceValue.AddParameter("new_value", strNewValue)
         End If
-        _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
+        scriptRunner.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
     End Sub
 
     ''' <summary>
@@ -342,8 +346,8 @@ Public Class clsPrepareFunctionsForGrids
     ''' </summary>
     ''' <param name="strColumnName"></param>
     ''' <returns></returns>
-    Public Function GetColumnType(strColumnName As String) As String
-        Return _RLink.GetColumnType(_strDataFrame, strColumnName)
+    Public Function GetColumnType(strDataFrame As String, strColumnName As String) As String
+        Return scriptRunner.GetColumnType(strDataFrame, strColumnName)
     End Function
 
     ''' <summary>
@@ -353,13 +357,13 @@ Public Class clsPrepareFunctionsForGrids
     '''</summary>
     ''' <param name="lstColumnNames"></param>
     ''' <param name="lstRowNames"></param>
-    Public Sub DeleteCells(lstRowNames As List(Of String), lstColumnNames As List(Of String))
+    Public Sub DeleteCells(strDataFrame As String, lstRowNames As List(Of String), lstColumnNames As List(Of String))
         Dim clsDeleteCells As New RFunction
-        clsDeleteCells.SetRCommand(_RLink.strInstatDataObject & "$replace_values_with_NA")
-        clsDeleteCells.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
-        clsDeleteCells.AddParameter("column_index", _RLink.GetListAsRString(lstColumnNames, bWithQuotes:=False))
-        clsDeleteCells.AddParameter("row_index", _RLink.GetListAsRString(lstRowNames, bWithQuotes:=False))
-        _RLink.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Delete Cell(s)")
+        clsDeleteCells.SetRCommand(RCodeConstant.DataBookName & "$replace_values_with_NA")
+        clsDeleteCells.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsDeleteCells.AddParameter("column_index", scriptRunner.HelperFunctions.GetListAsRString(lstColumnNames, bWithQuotes:=False))
+        clsDeleteCells.AddParameter("row_index", scriptRunner.HelperFunctions.GetListAsRString(lstRowNames, bWithQuotes:=False))
+        scriptRunner.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Delete Cell(s)")
     End Sub
 End Class
 

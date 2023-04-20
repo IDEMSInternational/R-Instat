@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
@@ -26,14 +27,14 @@ Public Class ucrColumnMetadataReoGrid
     Public Event DeleteLabels(strColumnName As String) Implements IColumnMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
-    Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
+    Public Sub AddColumns(columnMetaData As ColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
         grdData.CurrentWorksheet.Columns = columnMetaData.iColumnCount
         For i = 0 To columnMetaData.iColumnCount - 1
             grdData.CurrentWorksheet.ColumnHeaders(i).Text = columnMetaData.strColumnName(i)
         Next
     End Sub
 
-    Public Sub AddRowData(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddRowData
+    Public Sub AddRowData(columnMetaData As ColumnMetaData) Implements IColumnMetaDataGrid.AddRowData
         Dim rngDataRange As RangePosition
 
         grdData.CurrentWorksheet.Rows = columnMetaData.iRowCount
@@ -51,7 +52,7 @@ Public Class ucrColumnMetadataReoGrid
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = columnMetaData.strRowName(i)
         Next
 
-        Dim clsDataFrame As clsDataFrame = _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name)
+        Dim clsDataFrame As DataFrame = _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name)
         If clsDataFrame.clsFilterOrColumnSelection.bColumnSelectionApplied Then
             For i = 0 To clsDataFrame.clsVisibleDataFramePage.lstColumns.Count - 1
                 For j = 0 To grdData.CurrentWorksheet.Rows - 1

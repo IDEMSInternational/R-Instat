@@ -15,11 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
+Imports R_Adapter2.R_Adapter.DataBook
 
 Public Class ucrDataViewLinuxGrid
     Implements IDataViewGrid
 
-    Private _currentDataFrame As clsDataFrame 'Do not use anywhere other than GetCurrentDataFrameFocus()
+    Private _currentDataFrame As DataFrame 'Do not use anywhere other than GetCurrentDataFrameFocus()
 
     Public Event CellDataChanged() Implements IDataViewGrid.CellDataChanged
 
@@ -33,7 +34,7 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
-    Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
+    Public Sub AddColumns(visiblePage As DataFramePage) Implements IDataViewGrid.AddColumns
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
         dataGrid.ClearSelection()
         dataGrid.Columns.Clear()
@@ -45,7 +46,7 @@ Public Class ucrDataViewLinuxGrid
         Next
     End Sub
 
-    Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
+    Public Sub AddRowData(dataFrame As DataFrame) Implements IDataViewGrid.AddRowData
         Dim dataGrid = GetDataGridFromSelectedTab()
 
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
@@ -120,7 +121,7 @@ Public Class ucrDataViewLinuxGrid
         End If
     End Sub
 
-    Private Function GetCurrentDataFrameFocus() As clsDataFrame
+    Private Function GetCurrentDataFrameFocus() As DataFrame
         If _currentDataFrame Is Nothing Then
             _currentDataFrame = _clsDataBook.GetDataFrame(SelectedTab)
         ElseIf _currentDataFrame.strName IsNot SelectedTab() Then
@@ -129,8 +130,8 @@ Public Class ucrDataViewLinuxGrid
         Return _currentDataFrame
     End Function
 
-    Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
-        Dim lstColumns As New List(Of clsColumnHeaderDisplay)
+    Private Function GetSelectedColumns() As List(Of ColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
+        Dim lstColumns As New List(Of ColumnHeaderDisplay)
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
         Dim selectedColumns As New List(Of Integer)
         For Each cell In dataGrid.SelectedCells

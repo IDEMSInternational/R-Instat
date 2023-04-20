@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
@@ -32,7 +33,7 @@ Public Class ucrDataViewReoGrid
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
-    Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
+    Public Sub AddColumns(visiblePage As DataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
         Dim variableTextColour As Color
 
@@ -51,7 +52,7 @@ Public Class ucrDataViewReoGrid
         Next
     End Sub
 
-    Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
+    Public Sub AddRowData(dataFrame As DataFrame) Implements IDataViewGrid.AddRowData
         Dim textColour As Color
         Dim strRowNames As String()
         Dim strLongestRowHeaderText As String = ""
@@ -111,8 +112,8 @@ Public Class ucrDataViewReoGrid
         End If
     End Function
 
-    Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
-        Dim lstColumns As New List(Of clsColumnHeaderDisplay)
+    Public Function GetSelectedColumns() As List(Of ColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
+        Dim lstColumns As New List(Of ColumnHeaderDisplay)
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
             lstColumns.Add(GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(i))
         Next
@@ -142,7 +143,7 @@ Public Class ucrDataViewReoGrid
         Exit Sub
     End Sub
 
-    Private Function GetCurrentDataFrameFocus() As clsDataFrame
+    Private Function GetCurrentDataFrameFocus() As DataFrame
         Return _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name)
     End Function
 

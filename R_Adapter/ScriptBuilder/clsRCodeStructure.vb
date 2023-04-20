@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.Enum
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R command. 
 '''             The R command may include parameters and an assignment part.
@@ -464,7 +465,8 @@ Public Class RCodeStructure
 
             If _strAssignToObjectTypeLabel = RObjectTypeLabel.Column Then
                 'for column object
-                clsAddRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+                'ToDo link to frmMain
+                '  clsAddRObject.SetRCommand(DataBookName & "$add_columns_to_data")
                 clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
                 'if we need to assign to a named column
                 If Not bAssignToColumnWithoutNames Then
@@ -474,9 +476,10 @@ Public Class RCodeStructure
                 If bAssignToIsPrefix Then
                     clsAddRObject.AddParameter("use_col_name_as_prefix", "TRUE")
                 Else
-                    If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                        clsAddRObject.AddParameter("use_col_name_as_prefix", "FALSE")
-                    End If
+                    'ToDo link to frmMain
+                    'If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                    'clsAddRObject.AddParameter("use_col_name_as_prefix", "FALSE")
+                    'End If
                 End If
                 clsAddRObject.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
                 If Not String.IsNullOrEmpty(strAdjacentColumn) Then
@@ -490,7 +493,8 @@ Public Class RCodeStructure
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
 
                 'todo. when is this ever used? as of 11/11/2022, this code is not used during execution
-                clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                'ToDo link to frmMain
+                'clsGetRObject.SetRCommand(DataBookName & "$get_columns_from_data")
                 clsGetRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
                 clsGetRObject.AddParameter("col_names", Chr(34) & _strAssignToName & Chr(34))
                 ' set 'strAssignTo' to e.g. "data_book$get_columns_from_data(data_name=""survey"", col_names=""row_names1"")"
@@ -498,7 +502,8 @@ Public Class RCodeStructure
 
             ElseIf _strAssignToObjectTypeLabel = RObjectTypeLabel.Dataframe Then
                 'for data frame object
-                clsAddRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                'ToDo link to frmMain
+                'clsAddRObject.SetRCommand(DataBookName & "$import_data")
 
                 If bDataFrameList Then
                     clsAddRObject.AddParameter("data_tables", _strAssignToObject, iPosition:=0)
@@ -518,7 +523,8 @@ Public Class RCodeStructure
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
 
                 'todo. when is this ever used? as of 11/11/2022, this code is not used during execution
-                clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+                'ToDo link to frmMain
+                'clsGetRObject.SetRCommand(DataBookName & "$get_data_frame")
                 clsGetRObject.AddParameter("data_name", Chr(34) & _strAssignToName & Chr(34))
                 'Set 'strAssignTo' to final assign-to script 
                 ' e.g. "data_book$get_columns_from_data(data_name=""my_stations"", col_names=""Calc1"")"
@@ -528,8 +534,9 @@ Public Class RCodeStructure
                 'for output objects like graphs, texts, table
                 'set the R command and parameters for the add object R function. This is used for adding the object in the data book
                 'set the R command and parameters for the get object R function. This is used for viewing the object.
-                clsAddRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-                clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+                'ToDo link to frmMain
+                'clsAddRObject.SetRCommand(DataBookName & "$add_object")
+                'clsGetRObject.SetRCommand(DataBookName & "$get_object_data")
 
                 If Not String.IsNullOrEmpty(_strDataFrameNameToAddAssignToObject) Then
                     clsAddRObject.AddParameter("data_name", Chr(34) & _strDataFrameNameToAddAssignToObject & Chr(34))
@@ -588,7 +595,8 @@ Public Class RCodeStructure
         Dim arrScriptParts As String()
         If Not String.IsNullOrEmpty(strTemp) Then
             'if string contains more than one line, assign the last line of the multi-line string
-            arrScriptParts = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
+            'ToDo link to frmMain
+            'arrScriptParts = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
             If arrScriptParts.Length > 1 Then
                 're-assemble the string, apart from the last line
                 strReconstructed = String.Join(Environment.NewLine, arrScriptParts, 0, arrScriptParts.Length - 1)

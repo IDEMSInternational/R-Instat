@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
+
 Public Class ucrColumnMetadataLinuxGrid
     Implements IColumnMetaDataGrid
 
@@ -23,7 +25,7 @@ Public Class ucrColumnMetadataLinuxGrid
 
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
-    Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
+    Public Sub AddColumns(columnMetaData As ColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
         dataGrid.Columns.Clear()
         For i = 0 To columnMetaData.iColumnCount - 1
@@ -34,7 +36,7 @@ Public Class ucrColumnMetadataLinuxGrid
         Next
     End Sub
 
-    Public Sub AddRowData(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddRowData
+    Public Sub AddRowData(columnMetaData As ColumnMetaData) Implements IColumnMetaDataGrid.AddRowData
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.Rows.Clear()
         For i = 0 To columnMetaData.iRowCount - 1

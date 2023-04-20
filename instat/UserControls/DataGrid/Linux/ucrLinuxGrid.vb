@@ -15,11 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
+Imports R_Adapter2.R_Adapter.DataBook
 
 Public MustInherit Class ucrLinuxGrid
     Implements IGrid
 
-    Protected _clsDataBook As clsDataBook
+    Protected _clsDataBook As DataBook
     Private _cellContextMenuStrip As ContextMenuStrip
     Private _columnContextMenuStrip As ContextMenuStrip
     Private _rowContextMenuStrip As ContextMenuStrip
@@ -43,8 +44,8 @@ Public MustInherit Class ucrLinuxGrid
         End Set
     End Property
 
-    Public WriteOnly Property DataBook As clsDataBook Implements IGrid.DataBook
-        Set(value As clsDataBook)
+    Public WriteOnly Property DataBook As DataBook Implements IGrid.DataBook
+        Set(value As DataBook)
             _clsDataBook = value
         End Set
     End Property

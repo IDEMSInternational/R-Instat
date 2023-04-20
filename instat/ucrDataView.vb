@@ -18,14 +18,16 @@ Imports System.ComponentModel
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports instat.Translations
+Imports R_Adapter2.R_Adapter.DataBook
 
 Public Class ucrDataView
-    Private _clsDataBook As clsDataBook
+    Private _clsDataBook As DataBook
     Private _grid As IDataViewGrid
     Private bOnlyUpdateOneCell As Boolean = False
+    Private _clsPrepareFunctions As clsPrepareFunctionsForGrids = New clsPrepareFunctionsForGrids()
 
-    Public WriteOnly Property DataBook() As clsDataBook
-        Set(value As clsDataBook)
+    Public WriteOnly Property DataBook() As DataBook
+        Set(value As DataBook)
             _clsDataBook = value
             _grid.DataBook = value
         End Set
@@ -89,7 +91,7 @@ Public Class ucrDataView
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
     End Sub
 
-    Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
+    Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As DataFrame)
         If Not dataFrame.clsVisibleDataFramePage.HasChanged Then
             Exit Sub
         End If
@@ -162,7 +164,7 @@ Public Class ucrDataView
     ''' <para>Nothing if no data frame is currently focused.</para>
     ''' <para>This can happen when all data frames have been deleted</para>
     ''' </returns>
-    Public Function GetCurrentDataFrameFocus() As clsDataFrame
+    Public Function GetCurrentDataFrameFocus() As DataFrame
         Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name))
     End Function
 
@@ -185,7 +187,7 @@ Public Class ucrDataView
             Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
-                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedColumnNames())
+                _clsPrepareFunctions.DeleteColumn(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
                 EndWait()
             End If
         End If
@@ -193,13 +195,13 @@ Public Class ucrDataView
 
     Private Sub mnuInsertRowsAfter_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsAfter.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.InsertRows(GetSelectedRows.Count, GetLastSelectedRow(), False)
+        _clsPrepareFunctions.InsertRows(_grid.CurrentWorksheet.Name, GetSelectedRows.Count, GetLastSelectedRow(), False)
         EndWait()
     End Sub
 
     Private Sub mnuInsertRowsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsBefore.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.InsertRows(GetSelectedRows.Count, GetFirstSelectedRow, True)
+        _clsPrepareFunctions.InsertRows(_grid.CurrentWorksheet.Name, GetSelectedRows.Count, GetFirstSelectedRow, True)
         EndWait()
     End Sub
 
@@ -207,7 +209,7 @@ Public Class ucrDataView
         Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
         If Delete = DialogResult.Yes Then
             StartWait()
-            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteRows(GetSelectedRows())
+            _clsPrepareFunctions.DeleteRows(_grid.CurrentWorksheet.Name, GetSelectedRows())
             EndWait()
         End If
     End Sub
@@ -336,9 +338,9 @@ Public Class ucrDataView
         If strNewValue = "NA" Then
             bWithQuotes = False
         Else
-            Select Case GetCurrentDataFrameFocus().clsPrepareFunctions.GetDataTypeLabel(strColumnName)
+            Select Case _clsPrepareFunctions.GetDataTypeLabel(_grid.CurrentWorksheet.Name, strColumnName)
                 Case "factor"
-                    If Not GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnFactorLevels(strColumnName).Contains(strNewValue) Then
+                    If Not _clsPrepareFunctions.GetColumnFactorLevels(_grid.CurrentWorksheet.Name, strColumnName).Contains(strNewValue) Then
                         MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
                         Exit Sub
                     Else
@@ -376,7 +378,7 @@ Public Class ucrDataView
         End If
         StartWait()
         bOnlyUpdateOneCell = True
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes, bListOfVector)
+        _clsPrepareFunctions.ReplaceValueInData(_grid.CurrentWorksheet.Name, strNewValue, strColumnName, strRowText, bWithQuotes, bListOfVector)
         bOnlyUpdateOneCell = False
         EndWait()
     End Sub
@@ -398,7 +400,7 @@ Public Class ucrDataView
         dlgLabelsLevels.ShowDialog()
     End Sub
 
-    Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
+    Private Function GetSelectedColumns() As List(Of ColumnHeaderDisplay)
         Return _grid.GetSelectedColumns()
     End Function
 
@@ -450,19 +452,19 @@ Public Class ucrDataView
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToText(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToText(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToLogical(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToFactor(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
@@ -484,13 +486,13 @@ Public Class ucrDataView
 
     Private Sub mnuRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilter.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
+        _clsPrepareFunctions.RemoveCurrentFilter(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
     Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
+        _clsPrepareFunctions.RemoveCurrentFilter(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
@@ -501,25 +503,25 @@ Public Class ucrDataView
 
     Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs)
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.FreezeColumns(GetLastSelectedColumnName)
+        _clsPrepareFunctions.FreezeColumns(_grid.CurrentWorksheet.Name, GetLastSelectedColumnName)
         EndWait()
     End Sub
 
     Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs)
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.UnFreezeColumns()
+        _clsPrepareFunctions.UnFreezeColumns(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        _clsPrepareFunctions.ViewDataFrame(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToOrderedFactor(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
@@ -596,35 +598,35 @@ Public Class ucrDataView
 
     Private Sub mnuConvertToFact_Click(sender As Object, e As EventArgs) Handles mnuConvertToFact.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToFactor(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToOrderedFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToOrderedFactor.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToOrderedFactor(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToCharacter_Click(sender As Object, e As EventArgs) Handles mnuConvertToCharacter.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToCharacter(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToCharacter(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToLogic_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogic.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedColumnNames())
+        _clsPrepareFunctions.ConvertToLogical(_grid.CurrentWorksheet.Name, GetSelectedColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
         For Each strColumn In GetSelectedColumnNames()
-            Dim iNonNumericValues As Integer = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
+            Dim iNonNumericValues As Integer = _clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(_grid.CurrentWorksheet.Name, strColumn)
             If iNonNumericValues = 0 Then
-                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, True)
             Else
-                Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
+                Dim bCheckLabels As Boolean = _clsPrepareFunctions.CheckHasLabels(_grid.CurrentWorksheet.Name, strColumn)
                 frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                 frmConvertToNumeric.SetColumnName(strColumn)
                 frmConvertToNumeric.CheckLabels(bCheckLabels)
@@ -632,9 +634,9 @@ Public Class ucrDataView
                 frmConvertToNumeric.ShowDialog()
                 ' Yes for "normal" convert and No for "ordinal" convert
                 If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, True)
                 ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                    _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, False)
                 ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
                     Continue For
                 End If
@@ -663,7 +665,7 @@ Public Class ucrDataView
 
     Private Sub mnuRemoveCurrentFilters_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilters.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
+        _clsPrepareFunctions.RemoveCurrentFilter(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
@@ -804,7 +806,7 @@ Public Class ucrDataView
             Exit Sub
         End If
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.PasteValues(strClipBoardText, GetSelectedColumnNames(), GetFirstSelectedRow)
+        _clsPrepareFunctions.PasteValues(_grid.CurrentWorksheet.Name, strClipBoardText, GetSelectedColumnNames(), GetFirstSelectedRow)
         EndWait()
     End Sub
 
@@ -879,7 +881,7 @@ Public Class ucrDataView
 
     Private Sub RemoveCurrentColumnSelection()
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
+        _clsPrepareFunctions.RemoveCurrentColumnSelection(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
@@ -893,7 +895,7 @@ Public Class ucrDataView
                                 MessageBoxButtons.YesNo, "Delete Cells")
         If deleteCell = DialogResult.Yes Then
             StartWait()
-            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())
+            _clsPrepareFunctions.DeleteCells(_grid.CurrentWorksheet.Name, GetSelectedRows(), GetSelectedColumnIndexes())
             EndWait()
         End If
     End Sub

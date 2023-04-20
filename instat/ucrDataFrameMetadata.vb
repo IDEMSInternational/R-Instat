@@ -16,11 +16,12 @@
 
 Imports System.Runtime.InteropServices
 Imports instat.Translations
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class ucrDataFrameMetadata
-    Private _clsDataBook As clsDataBook
+    Private _clsDataBook As DataBook
     Private _grid As IDataframeMetaDataGrid
     Dim _strNameLabel As String = "data_name"
 
@@ -30,8 +31,8 @@ Public Class ucrDataFrameMetadata
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
 
-    Public WriteOnly Property DataBook() As clsDataBook
-        Set(ByVal value As clsDataBook)
+    Public WriteOnly Property DataBook() As DataBook
+        Set(ByVal value As DataBook)
             _clsDataBook = value
             _grid.DataBook = value
         End Set

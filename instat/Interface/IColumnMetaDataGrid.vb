@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
+
 Public Interface IColumnMetaDataGrid
     Inherits IGrid
 
@@ -21,9 +23,9 @@ Public Interface IColumnMetaDataGrid
 
     Event DeleteLabels(strColumnName As String)
 
-    Sub AddColumns(columnMetaData As clsColumnMetaData)
+    Sub AddColumns(columnMetaData As ColumnMetaData)
 
-    Sub AddRowData(columnMetaData As clsColumnMetaData)
+    Sub AddRowData(columnMetaData As ColumnMetaData)
 
     Function GetSelectedColumns() As List(Of String)
 

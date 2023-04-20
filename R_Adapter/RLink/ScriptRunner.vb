@@ -13,6 +13,11 @@ Namespace R_Adapter.RLink
     Public NotInheritable Class ScriptRunner
         Inherits RConnector
 
+        Event OutputAdded()
+        Event StatusChanged()
+        Event DatabookRefresh()
+
+
         Private Sub New()
         End Sub
 
@@ -105,6 +110,8 @@ Namespace R_Adapter.RLink
         End Function
 
         Public Sub RunScript(ByVal strScript As String, ByVal Optional iCallType As Integer = 0, ByVal Optional strComment As String = "", ByVal Optional bSeparateThread As Boolean = True, ByVal Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing, ByVal Optional bUpdateGrids As Boolean = True, ByVal Optional bSilent As Boolean = False)
+            Evaluate(strScript)
+            RaiseEvent DatabookRefresh()
         End Sub
 
         Public Sub RunScriptNoResult(ByVal strScript As String)
@@ -286,7 +293,7 @@ Namespace R_Adapter.RLink
                 strCommand = strScript
             End If
 
-            If ConnectedToR() Then
+            If IsConnectedToR() Then
                 bReturn = Evaluate(strCommand)
                 Return bReturn
             Else
@@ -294,7 +301,7 @@ Namespace R_Adapter.RLink
             End If
         End Function
 
-        Public Function RunInternalScriptGetValue(ByVal strScript As String, ByVal Optional strVariableName As String = "") As SymbolicExpression
+        Public Function RunInternalScriptGetValue(ByVal strScript As String, ByVal Optional strVariableName As String = "test") As SymbolicExpression
             Dim expTemp As SymbolicExpression
             Dim strCommand As String
             strCommand = strVariableName & " <- " & strScript
@@ -315,22 +322,88 @@ Namespace R_Adapter.RLink
             End If
         End Function
 
+        Public Function GetColumnType(strDataName As String, strColumnName As String) As String
+            Dim strDataType As String
+            Dim clsGetColumnType As New RFunction
+            Dim expDateType As SymbolicExpression
+
+            clsGetColumnType.SetRCommand(RCodeConstant.DataBookName & "$get_column_data_types")
+            clsGetColumnType.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+            clsGetColumnType.AddParameter("columns", Chr(34) & strColumnName & Chr(34))
+            expDateType = RunInternalScriptGetValue(clsGetColumnType.ToScript())
+            If expDateType IsNot Nothing AndAlso expDateType.Type <> Internals.SymbolicExpressionType.Null Then
+                strDataType = String.Join(",", expDateType.AsCharacter)
+            Else
+                strDataType = ""
+            End If
+            Return strDataType
+        End Function
+
+
         Public Function ConnectAndCheckVersion(ByVal expectedMajorVersion As String, ByVal expectedMinorVersion As String) As Boolean
             Dim bClose As Boolean = Connect()
             If Not HelperFunctions.CompareRVersion(expectedMajorVersion, expectedMinorVersion) Then Return False
             Return bClose
         End Function
 
-        Friend Function GetDataFrameLength(ByVal strDataFrameName As String, ByVal v As Boolean) As Integer
-            Throw New NotImplementedException()
+        Friend Function GetDataFrameLength(ByVal strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
+            Dim iLength As Integer
+            Dim clsDataFrameLength As New RFunction
+            Dim expLength As SymbolicExpression
+
+            clsDataFrameLength.SetRCommand(RCodeConstant.DataBookName & "$get_data_frame_length")
+            clsDataFrameLength.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            If bUseCurrentFilter Then
+                clsDataFrameLength.AddParameter("use_current_filter", "TRUE")
+            Else
+                clsDataFrameLength.AddParameter("use_current_filter", "FALSE")
+            End If
+            expLength = RunInternalScriptGetValue(clsDataFrameLength.ToScript())
+            If expLength IsNot Nothing AndAlso Not expLength.Type = Internals.SymbolicExpressionType.Null Then
+                iLength = expLength.AsInteger(0)
+            Else
+                iLength = 0
+            End If
+            Return iLength
         End Function
 
         Friend Function GetDataFrameColumnCount(ByVal strDataFrameName As String) As Integer
-            Throw New NotImplementedException()
+            Dim iColumnCount As Integer
+            Dim clsDataFrameColCount As New RFunction
+            Dim expCount As SymbolicExpression
+
+            clsDataFrameColCount.SetRCommand(RCodeConstant.DataBookName & "$get_column_count")
+            clsDataFrameColCount.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            expCount = RunInternalScriptGetValue(clsDataFrameColCount.ToScript())
+            If expCount IsNot Nothing AndAlso Not expCount.Type = Internals.SymbolicExpressionType.Null Then
+                iColumnCount = expCount.AsInteger(0)
+            Else
+                iColumnCount = 0
+            End If
+            Return iColumnCount
         End Function
 
-        Friend Function GetListAsRString(ByVal toList As Func(Of List(Of String))) As String
-            Throw New NotImplementedException()
+        Friend Function ConvertListToRString(ByVal stringList As List(Of String)) As String
+            Dim strTemp As String = ""
+            Dim i As Integer
+
+            If stringList.Count = 1 Then
+                strTemp = Chr(34) & stringList.Item(0) & Chr(34)
+
+            ElseIf stringList.Count > 1 Then
+                strTemp = "c" & "("
+                For i = 0 To stringList.Count - 1
+                    If i > 0 Then
+                        strTemp = strTemp & ","
+                    End If
+                    If stringList.Item(i) <> "" Then
+                        strTemp = strTemp & Chr(34) & stringList.Item(i) & Chr(34)
+
+                    End If
+                Next
+                strTemp = strTemp & ")"
+            End If
+            Return strTemp
         End Function
     End Class
 End Namespace
