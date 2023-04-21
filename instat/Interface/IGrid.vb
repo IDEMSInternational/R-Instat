@@ -14,10 +14,12 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
+
 Public Interface IGrid
 
     Property CurrentWorksheet As clsWorksheetAdapter
-    WriteOnly Property DataBook As clsDataBook
+    WriteOnly Property DataBook As DataBook
     Property bEnabled() As Boolean
     Property bVisible() As Boolean
     Function AddNewWorksheet(strName As String) As clsWorksheetAdapter

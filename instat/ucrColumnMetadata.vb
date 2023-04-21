@@ -17,12 +17,14 @@
 Imports System.ComponentModel
 Imports System.Runtime.InteropServices
 Imports instat.Translations
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class ucrColumnMetadata
-    Private _clsDataBook As clsDataBook
+    Private _clsDataBook As DataBook
     Private _grid As IColumnMetaDataGrid
+    Private _clsPrepareFunctions As clsPrepareFunctionsForGrids = New clsPrepareFunctionsForGrids()
 
     Private lstNonEditableColumns As New List(Of String)
 
@@ -32,8 +34,8 @@ Public Class ucrColumnMetadata
     Private strLabelsLabel As String = "labels"
     Private strLabelsScientific As String = "Scientific"
 
-    Public WriteOnly Property DataBook() As clsDataBook
-        Set(ByVal value As clsDataBook)
+    Public WriteOnly Property DataBook() As DataBook
+        Set(ByVal value As DataBook)
             _clsDataBook = value
             _grid.DataBook = value
         End Set
@@ -45,11 +47,11 @@ Public Class ucrColumnMetadata
         mnuInsertColsBefore.Visible = False
     End Sub
 
-    Private Function GetCurrentDataFrameFocus() As clsDataFrame
+    Private Function GetCurrentDataFrameFocus() As DataFrame
         Return _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name)
     End Function
 
-    Private Sub RefreshWorksheet(fillWorksheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
+    Private Sub RefreshWorksheet(fillWorksheet As clsWorksheetAdapter, dataFrame As DataFrame)
         If Not dataFrame.clsColumnMetaData.HasChanged Then
             Exit Sub
         End If
@@ -238,12 +240,12 @@ Public Class ucrColumnMetadata
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
         For Each strColumn In GetSelectedDataframeColumnsFromSelectedRows()
             Dim iNonNumericValues As Integer
-            iNonNumericValues = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
+            iNonNumericValues = _clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(_grid.CurrentWorksheet.Name, strColumn)
             Select Case iNonNumericValues
                 Case 0
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, True)
                 Case GetCurrentDataFrameFocus().iTotalRowCount
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                    _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, False)
                 Case Else
                     frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                     frmConvertToNumeric.SetColumnName(strColumn)
@@ -251,9 +253,9 @@ Public Class ucrColumnMetadata
                     Dim dialogResult = frmConvertToNumeric.ShowDialog()
                     ' Yes for "normal" convert and No for "labelled" convert
                     If dialogResult = DialogResult.Yes Then
-                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                        _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, True)
                     ElseIf dialogResult = DialogResult.No Then
-                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                        _clsPrepareFunctions.ConvertToNumeric(_grid.CurrentWorksheet.Name, strColumn, False)
                     ElseIf dialogResult = DialogResult.Cancel Then
                         Continue For
                     End If
@@ -263,19 +265,19 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToText(GetSelectedDataframeColumnsFromSelectedRows)
+        _clsPrepareFunctions.ConvertToText(_grid.CurrentWorksheet.Name, GetSelectedDataframeColumnsFromSelectedRows)
         EndWait()
     End Sub
 
     Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedDataframeColumnsFromSelectedRows)
+        _clsPrepareFunctions.ConvertToLogical(_grid.CurrentWorksheet.Name, GetSelectedDataframeColumnsFromSelectedRows)
         EndWait()
     End Sub
 
     Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
+        _clsPrepareFunctions.RemoveCurrentFilter(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
@@ -312,13 +314,13 @@ Public Class ucrColumnMetadata
     End Function
 
     Private Function IsFirstSelectedDataFrameColumnAFactor() As Boolean
-        Dim strType As String = GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnType(GetFirstSelectedDataframeColumnFromSelectedRow())
+        Dim strType As String = _clsPrepareFunctions.GetColumnType(_grid.CurrentWorksheet.Name, GetFirstSelectedDataframeColumnFromSelectedRow())
         Return strType.Contains("factor")
     End Function
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedDataframeColumnsFromSelectedRows)
+        _clsPrepareFunctions.ConvertToOrderedFactor(_grid.CurrentWorksheet.Name, GetSelectedDataframeColumnsFromSelectedRows)
         EndWait()
     End Sub
 
@@ -335,7 +337,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedDataframeColumnsFromSelectedRows)
+        _clsPrepareFunctions.ConvertToFactor(_grid.CurrentWorksheet.Name, GetSelectedDataframeColumnsFromSelectedRows)
         EndWait()
     End Sub
 
@@ -347,7 +349,7 @@ Public Class ucrColumnMetadata
             Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
-                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedDataframeColumnsFromSelectedRows)
+                _clsPrepareFunctions.DeleteColumn(_grid.CurrentWorksheet.Name, GetSelectedDataframeColumnsFromSelectedRows)
                 EndWait()
             End If
         End If
@@ -370,7 +372,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
-        If IsOnlyOneDataFrameColumnSeleted() Then
+        If IsOnlyOneDataframeColumnSeleted() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedDataFrameColumnAFactor()
             mnuDeleteCol.Text = GetTranslation("Delete Column")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
@@ -397,7 +399,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuDeleteLabels_Click(sender As Object, e As EventArgs) Handles mnuDeleteLabels.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.AppendToVariablesMetadata(GetSelectedDataframeColumnsFromSelectedRows)
+        _clsPrepareFunctions.AppendToVariablesMetadata(_grid.CurrentWorksheet.Name, GetSelectedDataframeColumnsFromSelectedRows)
         EndWait()
     End Sub
 
@@ -432,7 +434,7 @@ Public Class ucrColumnMetadata
 
     Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        _clsPrepareFunctions.ViewDataFrame(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 
@@ -461,7 +463,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuColumnContextRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextRemoveCurrentColumnSelection.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
+        _clsPrepareFunctions.RemoveCurrentColumnSelection(_grid.CurrentWorksheet.Name)
         EndWait()
     End Sub
 

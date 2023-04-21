@@ -19,6 +19,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
 Imports RScript
+Imports R_Adapter2.R_Adapter.RLink
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -93,7 +94,8 @@ Public Class RLink
 
 
     ''' <summary>   The link to the R environment. </summary>
-    Public clsEngine As REngine 'TODO SJL 23/04/20 Make private?
+   ' Public clsEngine As REngine 'TODO SJL 23/04/20 Make private?
+    Public clsScriptRunner As ScriptRunner = ScriptRunner.SingletonInstance
 
     ''' <summary>   True if the link to the R environment is initialised. </summary>
     Public bREngineInitialised As Boolean = False
@@ -221,20 +223,28 @@ Public Class RLink
                 cpuArchitectureFolder = "x64"
             End If
             Dim rPath = Path.Combine(rHome, "bin", cpuArchitectureFolder)
-            Logger.Info("R Home: " & rHome)
-            Logger.Info("R Path: " & rPath)
 
-            ' Use bundled R if included
-            If Directory.Exists(rHome) And Directory.Exists(rPath) Then
-                Logger.Info("Using bundled R")
-                REngine.SetEnvironmentVariables(rPath, rHome)
-            Else
-                ' Use normal process for finding local R if bundled version not included
-                REngine.SetEnvironmentVariables()
-            End If
 
-            clsEngine = REngine.GetInstance()
-            clsEngine.Initialize()
+            'Logger.Info("R Home: " & rHome)
+            'Logger.Info("R Path: " & rPath)
+
+            '' Use bundled R if included
+            'If Directory.Exists(rHome) And Directory.Exists(rPath) Then
+            '    Logger.Info("Using bundled R")
+            '    REngine.SetEnvironmentVariables(rPath, rHome)
+
+            'Else
+            '    ' Use normal process for finding local R if bundled version not included
+            '    REngine.SetEnvironmentVariables()
+            'End If
+            clsScriptRunner.SetEnviromentVariables(rPath, rHome)
+
+            'clsEngine = REngine.GetInstance()
+            'clsEngine.Initialize()
+            clsScriptRunner.Connect()
+
+            AddHandler clsScriptRunner.DatabookRefresh, AddressOf RefreshGrids
+            AddHandler clsScriptRunner.OutputAdded, AddressOf AddOutput
         Catch ex As Exception
             ' Modified message since currently we recommend use of same R version as bundled version
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
@@ -302,6 +312,18 @@ Public Class RLink
         bInstatObjectExists = True
         Return bClose
     End Function
+
+    Public Sub RefreshGrids()
+        frmMain.UpdateAllGrids()
+    End Sub
+
+    Public Sub UpdateRLinkStatus(strStatus As String)
+
+    End Sub
+    Public Sub AddOutput(strScript As String, strOutput As String, bIsFile As Boolean, bDisplayInExternalViewer As Boolean)
+        frmMain.ucrScriptWindow.LogText(strScript & Environment.NewLine)
+        clsOutputLogger.AddOutput(strScript, strOutput, bIsFile, bDisplayInExternalViewer)
+    End Sub
 
     ''' <summary>
     ''' Extracts all the complete runnable R commands from <paramref name="strScript"/>.
@@ -380,13 +402,14 @@ Public Class RLink
 
     ''' <summary>   Closes down the R engine (which encapsulates the R environment). </summary>
     Public Sub CloseREngine()
-        If clsEngine IsNot Nothing Then
-            Try
-                clsEngine.Dispose()
-            Catch ex As Exception
-                MsgBox("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
-            End Try
-        End If
+        clsScriptRunner.Diconnect()
+        'If clsEngine IsNot Nothing Then
+        '    Try
+        '        clsEngine.Dispose()
+        '    Catch ex As Exception
+        '        MsgBox("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
+        '    End Try
+        'End If
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -988,12 +1011,12 @@ Public Class RLink
         expTemp = Nothing
         'TODO Legacy - Bug here if strScript is multiple lines. Wrong value will be returned
         strCommand = strVariableName & " <- " & strScript
-        If clsEngine IsNot Nothing Then
-            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
+        '  If clsEngine IsNot Nothing Then
+        Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride, strError:=strError)
             expTemp = GetSymbol(strVariableName, bSilent:=True)
             'Very important to remove the variable after getting it otherwise could be returning wrong variable later if a command gives an error
             Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
-        End If
+        ' End If
         Return expTemp
     End Function
 
@@ -1062,12 +1085,12 @@ Public Class RLink
         Else
             strCommand = strScript
         End If
-        If clsEngine IsNot Nothing Then
-            bReturn = Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        '  If clsEngine IsNot Nothing Then
+        bReturn = Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
             Return bReturn
-        Else
-            Return False
-        End If
+        '  Else
+        ' Return False
+        ' End If
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1117,9 +1140,9 @@ Public Class RLink
         End While
         bRCodeRunning = True
         ' if R engine defined
-        If clsEngine IsNot Nothing Then
-            ' if this is the first R code executed, then open and initialise log file
-            If bFirstRCode Then
+        'If clsEngine IsNot Nothing Then
+        ' if this is the first R code executed, then open and initialise log file
+        If bFirstRCode Then
                 Try
                     If Not Directory.Exists(frmMain.strAutoSaveInternalLogFolderPath) Then
                         Directory.CreateDirectory(frmMain.strAutoSaveInternalLogFolderPath)
@@ -1168,7 +1191,8 @@ Public Class RLink
                 If bSeparateThread Then
                     thrRScript = New Threading.Thread(Sub()
                                                           Try
-                                                              clsEngine.Evaluate(strScript)
+                                                              clsScriptRunner.Evaluate(strScript)
+                                                              'clsEngine.Evaluate(strScript)
                                                           Catch ex As Exception
                                                               If Not bSilent Then
                                                                   bErrorMessageOpen = True
@@ -1218,8 +1242,9 @@ Public Class RLink
                         evtWaitHandleWaitDisplayDone.WaitOne()
                     End If
                 Else 'else if script does NOT need to run in a separate thread
-                    clsEngine.Evaluate(strScript)
-                End If
+                clsScriptRunner.Evaluate(strScript)
+                'clsEngine.Evaluate(strScript)
+            End If
             Catch ex As Exception
                 If Not bSilent Then
                     MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -1227,9 +1252,9 @@ Public Class RLink
                 strTempError = ex.Message
                 bReturn = False
             End Try
-        Else
-            bReturn = False
-        End If
+        ' Else
+        ' bReturn = False
+        'End If
         bRCodeRunning = False
         strError = strTempError
         Return bReturn 'return if script executed without raising an exception
@@ -1247,15 +1272,16 @@ Public Class RLink
     Private Function GetSymbol(strSymbol As String, Optional bSilent As Boolean = False) As SymbolicExpression
         Dim expTemp As SymbolicExpression = Nothing
 
-        If clsEngine IsNot Nothing Then
-            Try
-                expTemp = clsEngine.GetSymbol(strSymbol)
-            Catch ex As Exception
+        ' If clsEngine IsNot Nothing Then
+        Try
+            'expTemp = clsEngine.GetSymbol(strSymbol)
+            expTemp = clsScriptRunner.GetSymbol(strSymbol)
+        Catch ex As Exception
                 If Not bSilent Then
                     MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to retrieve:" & strSymbol, MsgBoxStyle.Critical, "Error retrieving R variable")
                 End If
             End Try
-        End If
+        '  End If
         Return expTemp
     End Function
 

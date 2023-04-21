@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''--------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@
 '''     <item><description>
 '''             Set the parameter's name and type.
 '''     </description></item><item><description>
-'''             Set the parameter's position in relation to the associated R command's other 
+'''             Set the parameter's position in relation to the associated R command's other
 '''             parameters.
 '''     </description></item><item><description>
 '''             Create the R script associated with this parameter.
@@ -31,12 +31,13 @@
 ''' </summary>
 '''--------------------------------------------------------------------------------------------
 Public Class RParameter
-    ''' <summary>   The parameter's name. This is only used if the parameter's name needs to be 
+
+    ''' <summary>   The parameter's name. This is only used if the parameter's name needs to be
     '''             included in the R script (see 'bIncludeArgumentName' below).</summary>
     Public strArgumentName As String
 
-    ''' <summary>   The parameter's argument value. Only used if the parammter's argument is a 
-    '''             string. This can either be a simple string value, or 
+    ''' <summary>   The parameter's argument value. Only used if the parammter's argument is a
+    '''             string. This can either be a simple string value, or
     '''             it can be an RFunction or ROperator (then stored as an RCodeStructure).</summary>
     Public strArgumentValue As String
 
@@ -56,17 +57,17 @@ Public Class RParameter
     ''' <summary>   If true then the parameter's argument is a string. </summary>
     Public bIsString As Boolean = False
 
-    ''' <summary>   This parameter's (zero-based) position in relation to the associated 
+    ''' <summary>   This parameter's (zero-based) position in relation to the associated
     '''             R command's other parameters.<para>
-    '''             For example, parameters with positions a 0, b 2, c 5, d 3 will be sorted 
+    '''             For example, parameters with positions a 0, b 2, c 5, d 3 will be sorted
     '''             as a, b, d, c. </para><para>
-    '''             Note that a position of 0 has a special meaning for ROperators with only one 
-    '''             parameter. In this case, a position of 0 means that the parameter will be put 
+    '''             Note that a position of 0 has a special meaning for ROperators with only one
+    '''             parameter. In this case, a position of 0 means that the parameter will be put
     '''             on the left side of the operation symbol (e.g. '!x')</para>
-    '''             </summary> 
+    '''             </summary>
     Private iPosition As Integer = -1
 
-    ''' <summary>   If true then include the name of the parameter in the R script 
+    ''' <summary>   If true then include the name of the parameter in the R script
     '''             (e.g. 'dir="C:/Users/myName/InstatObject/R"'. </summary>
     Public bIncludeArgumentName As Boolean = True
 
@@ -78,10 +79,10 @@ Public Class RParameter
     ''' <summary>   Constructor for a named parameter.</summary>
     '''
     ''' <param name="strParameterName">         The parameter's name. </param>
-    ''' <param name="iNewPosition">             (Optional) The parameter's (zero-based) position 
-    '''                                         in relation to the associated R command's other 
+    ''' <param name="iNewPosition">             (Optional) The parameter's (zero-based) position
+    '''                                         in relation to the associated R command's other
     '''                                         parameters. </param>
-    ''' <param name="bNewIncludeArgumentName">  (Optional) If true then include the name of the 
+    ''' <param name="bNewIncludeArgumentName">  (Optional) If true then include the name of the
     '''                                         parameter in the R script. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub New(strParameterName As String, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
@@ -109,7 +110,7 @@ Public Class RParameter
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Constructor for a named parameter with an assigned function or operator. 
+    ''' <summary>   Constructor for a named parameter with an assigned function or operator.
     '''             </summary>
     '''
     ''' <param name="strParameterName">         The parameter's name. </param>
@@ -228,7 +229,7 @@ Public Class RParameter
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if the parameter has a value, otherwise returns false. The value 
+    ''' <summary>   Returns true if the parameter has a value, otherwise returns false. The value
     '''             may be a string, function or operator). </summary>
     '''
     ''' <returns>   True if the parameter has a value, otherwise returns false. </returns>
@@ -265,11 +266,11 @@ Public Class RParameter
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   If this parameter is a function or operator, then adds this parameter's 
+    ''' <summary>   If this parameter is a function or operator, then adds this parameter's
     '''             function/operator and its associated R script to <paramref name="lstCodes"/>
     '''             and <paramref name="lstValues"/> respectively.<para>
-    '''             If this parameter's function/operator parameters also contain functions or 
-    '''             operators, then also recursively adds these operators/functions/scripts to the 
+    '''             If this parameter's function/operator parameters also contain functions or
+    '''             operators, then also recursively adds these operators/functions/scripts to the
     '''             respective lists.
     '''             </para></summary>
     '''
@@ -281,4 +282,5 @@ Public Class RParameter
             clsArgumentCodeStructure.GetAllAssignTo(lstCodes, lstValues)
         End If
     End Sub
+
 End Class

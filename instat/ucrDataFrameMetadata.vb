@@ -16,11 +16,12 @@
 
 Imports System.Runtime.InteropServices
 Imports instat.Translations
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class ucrDataFrameMetadata
-    Private _clsDataBook As clsDataBook
+    Private _clsDataBook As DataBook
     Private _grid As IDataframeMetaDataGrid
     Dim _strNameLabel As String = "data_name"
 
@@ -29,9 +30,10 @@ Public Class ucrDataFrameMetadata
     Private clsHideDataFrame As New RFunction
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
+    Private _clsPrepareFunctions As clsPrepareFunctionsForGrids = New clsPrepareFunctionsForGrids()
 
-    Public WriteOnly Property DataBook() As clsDataBook
-        Set(ByVal value As clsDataBook)
+    Public WriteOnly Property DataBook() As DataBook
+        Set(ByVal value As DataBook)
             _clsDataBook = value
             _grid.DataBook = value
         End Set
@@ -201,6 +203,10 @@ Public Class ucrDataFrameMetadata
         clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
         strTemp = clsViewDataFrame.ToScript(strScript)
         RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+
+        StartWait()
+        _clsPrepareFunctions.ViewDataFrame(GetSelectedDataframeNameFromSelectedRow())
+        EndWait()
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click

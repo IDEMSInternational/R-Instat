@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -86,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant\RCodeConstant.vb" />
+    <Compile Include="DataBook\ColumnHeaderDisplay.vb" />
+    <Compile Include="DataBook\ColumnMetaData.vb" />
+    <Compile Include="DataBook\DataBook.vb" />
+    <Compile Include="DataBook\DataFrame.vb" />
+    <Compile Include="DataBook\DataFrameFilter.vb" />
+    <Compile Include="DataBook\DataFrameMetaData.vb" />
+    <Compile Include="DataBook\DataFramePage.vb" />
+    <Compile Include="Enum\OutputType.vb" />
+    <Compile Include="Enum\RObjectFormat.vb" />
+    <Compile Include="Enum\RObjectTypeLabel.vb" />
     <Compile Include="Interface\IOutputLog.vb" />
     <Compile Include="Interface\IStatusLog.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -103,7 +114,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RLink\HelperFunction.vb" />
+    <Compile Include="RLink\AdvancedFunction.vb" />
     <Compile Include="RLink\RConnector.vb" />
     <Compile Include="RLink\RSetupOptions.vb" />
     <Compile Include="RLink\ScriptRunner.vb" />

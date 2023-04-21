@@ -11,18 +11,18 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   This class encapsulates the R commands associated with a specific dialog box.
-'''             It is a composite of the RCodeStructure, RFunction, ROperator and RParameter 
+'''             It is a composite of the RCodeStructure, RFunction, ROperator and RParameter
 '''             classes. It provides a single interface for using these classes.
 '''             <para>
 '''             An object of this Class represents <b>either</b> an R Function, an R Operator
 '''             or a generic R command. This R function/operation/command is known as the
 '''             'base R command'. </para><para>
-'''             An object of this class may also include a list of R commands to be executed 
+'''             An object of this class may also include a list of R commands to be executed
 '''             before/after the base R command.</para><para>
 '''             This class provides methods and fields to:</para>
 ''' <list type="bullet">
@@ -35,22 +35,22 @@
 '''     </description></item><item><description>
 '''             Manage the lists of R commands to be executed before/after the 'base R command'.
 '''     </description></item><item><description>
-'''             Get the R scripts associated with the  lists of R commands to be executed 
+'''             Get the R scripts associated with the  lists of R commands to be executed
 '''             before/after the 'base R command'.
 '''     </description></item>
 ''' </list>
 ''' </summary>
 '''--------------------------------------------------------------------------------------------
 Public Class RSyntax
-    'TODO Legacy - Adapt RSyntax to new style... 
+    'TODO Legacy - Adapt RSyntax to new style...
 
     ' An object of this class is associated with a base R code. This R code must be (only one of):
     '   - An R function,
     '   - An R operator
     '   - A generic R command
-    ' 
+    '
     ' Use the 3 booleans below to set the type
-    ' 'TODO SJL It's not valid for an object of this class to be more than one of the 3 types above. 
+    ' 'TODO SJL It's not valid for an object of this class to be more than one of the 3 types above.
     '     However the booleans potentially allow this. Replace with an enumeration?
 
     ''' <summary>   An R function of the form 'RCommand(param1=param1Val, param2=param2Val, ...)'. </summary>
@@ -60,8 +60,7 @@ Public Class RSyntax
     Public clsBaseOperator As New ROperator
 
     ''' <summary>   An R command (of any type). </summary>
-    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUeseCommandString' and 'strCommandString'? 
-
+    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUeseCommandString' and 'strCommandString'?
 
     ''' <summary>   The R command in the form of a string. </summary>
     Public strCommandString As String = ""
@@ -72,7 +71,6 @@ Public Class RSyntax
     ''' <summary>   The R functions/operators/commands that should be run after the base R code. </summary>
     Public lstAfterCodes As New List(Of RCodeStructure)
 
-
     ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
     Public bUseBaseFunction As Boolean = False
 
@@ -82,11 +80,10 @@ Public Class RSyntax
     ''' <summary>   If true then use 'clsBaseCommandString' as this object's base R code. </summary>
     Public bUseCommandString As Boolean = False
 
-
     ''' <summary>   Defines how to display the R output.
     ''' <list type="bullet">
     '''     <item><description>0 Ignore the result.</description></item>
-    '''     <item><description>1 Store result in a temporary variable, then output the variable's 
+    '''     <item><description>1 Store result in a temporary variable, then output the variable's
     '''                          value as text.</description></item>
     '''     <item><description>2 Show the result as text.</description></item>
     '''     <item><description>3 Show the result as a graph.</description></item>
@@ -94,14 +91,13 @@ Public Class RSyntax
     ''' </list> </summary>
     Public iCallType As Integer = 0 'TODO SJL 07/04/20 Use enumeration?
 
-
     ''' <summary>   The script associated with the base R code. </summary>
     Public strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
 
     ''' <summary>   TODO SJL 07/04/20 Not used. Remove? </summary>
     Public i As Integer
 
-    ''' <summary>   If true then don't include the output part in the script (i.e. the part of the 
+    ''' <summary>   If true then don't include the output part in the script (i.e. the part of the
     '''             script to the left of the assignment operator '&lt;-'). </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
@@ -112,7 +108,7 @@ Public Class RSyntax
     Public bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the function's name (e.g. "facet_grid") and flags that the R script 
+    ''' <summary>   Sets the function's name (e.g. "facet_grid") and flags that the R script
     '''             associated with this object is no longer correctly assigned.</summary>
     '''
     ''' <param name="strFunctionName">  Name of the R command. </param>
@@ -167,7 +163,7 @@ Public Class RSyntax
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the operation's symbol to <paramref name="strOp"/> (e.g. "+") and if
-    '''             <paramref name="bBracketTemp"/> is true then includes the first operation 
+    '''             <paramref name="bBracketTemp"/> is true then includes the first operation
     '''             parameter in brackets. </summary>
     '''
     ''' <param name="strOp">          The operation symbol (e.g. "+"). </param>
@@ -182,7 +178,7 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets this object's R command to <paramref name="strCommand"/>. This object's 
+    ''' <summary>   Sets this object's R command to <paramref name="strCommand"/>. This object's
     '''             R command is then just a string (rather than a function or operation object)
     '''             </summary>
     '''
@@ -196,7 +192,7 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>    Sets the 'assignTo' variables for this object's associated R function, R 
+    ''' <summary>    Sets the 'assignTo' variables for this object's associated R function, R
     '''              operation or R command string. </summary>
     '''
     ''' <param name="strAssignToName">              The new value for the assignment string. </param>
@@ -220,9 +216,9 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Resets all the 'AssignTo' variables. 
+    ''' <summary>   Resets all the 'AssignTo' variables.
     '''             String variables are set to "".
-    '''             Booleans are set to false. 
+    '''             Booleans are set to false.
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveAssignTo()
@@ -252,7 +248,7 @@ Public Class RSyntax
     ''' <param name="clsRCodeStructureParameter">   (Optional) The R code structure parameter. </param>
     ''' <param name="bIncludeArgumentName">         (Optional) True to include, false to exclude the
     '''                                             argument name. </param>
-    ''' <param name="iPosition">                    (Optional) The relative position of the 
+    ''' <param name="iPosition">                    (Optional) The relative position of the
     '''                                             parameter in this object's parameter list.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
@@ -288,7 +284,7 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is superceded by the 'SetOperatorParameter' 
+    ''' <summary>   TODO SJL 04/04/20 This function is superceded by the 'SetOperatorParameter'
     '''             function below, remove? </summary>
     '''
     ''' <param name="iPos">                 True to position. </param>
@@ -301,7 +297,7 @@ Public Class RSyntax
     '''                                     name. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetOperatorParameter(iPos As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional clsCs As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        'TODO legacy comment: This is temporary, just don't want to change all the files in one pull request... 
+        'TODO legacy comment: This is temporary, just don't want to change all the files in one pull request...
         '                     Will have to change the first argument to an integer...
         Dim iPosition As Integer
         If iPos Then
@@ -318,8 +314,8 @@ Public Class RSyntax
     '''             <para>Sets the parameter's argument to <b>one of</b> <paramref name="strValue"/>,
     '''             <paramref name="clsRFunc"/>, <paramref name="clsOp"/>,
     '''             or <paramref name="clsCs"/>.</para>
-    '''             Sets the parameter's position and include/exclude argument name flag to 
-    '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/> 
+    '''             Sets the parameter's position and include/exclude argument name flag to
+    '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/>
     '''             respectively.
     '''             </summary>
     '''
@@ -328,7 +324,7 @@ Public Class RSyntax
     ''' <param name="clsRFunc">             (Optional) The R function parameter. </param>
     ''' <param name="clsOp">                (Optional) The R operator parameter. </param>
     ''' <param name="clsCs">                (Optional) The R code structure parameter. </param>
-    ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the 
+    ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the
     '''                                     argument name. </param>
     ''' <param name="iPosition">            (Optional) The relative position of the
     '''                                     parameter in this object's parameter list. </param>
@@ -394,13 +390,13 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the script associated with this object's R function, R operator or 
-    '''             R command string. 
-    '''             If this object is flagged to exclude the script's output, and the output has 
-    '''             already been assigned, then the returned script does not include the output 
+    ''' <summary>   Returns the script associated with this object's R function, R operator or
+    '''             R command string.
+    '''             If this object is flagged to exclude the script's output, and the output has
+    '''             already been assigned, then the returned script does not include the output
     '''             part.</summary>
     '''
-    ''' <returns>   The script associated with this object's R function, R operator or R command 
+    ''' <returns>   The script associated with this object's R function, R operator or R command
     '''             string. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetScript() As String
@@ -415,7 +411,7 @@ Public Class RSyntax
         End If
 
         If bExcludeAssignedFunctionOutput Then
-            'Sometimes the output of the R-command we deal with should not be part of the script...  
+            'Sometimes the output of the R-command we deal with should not be part of the script...
             'That's only the case when this output has already been assigned.
             If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
                 (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
@@ -427,10 +423,10 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
+    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/>
     '''             list of R functions/operators/commands.
-    '''             If a list object is flagged to exclude the script's output, and the output has 
-    '''             already been assigned, then the list object's script does not include the output 
+    '''             If a list object is flagged to exclude the script's output, and the output has
+    '''             already been assigned, then the list object's script does not include the output
     '''             part.</summary>
     '''
     ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
@@ -446,7 +442,7 @@ Public Class RSyntax
         For Each clsTempCode In lstCodes
             strScript = ""
             strTemp = clsTempCode.ToScript(strScript)
-            'Sometimes the output of the R-command we deal with should not be part of the script... 
+            'Sometimes the output of the R-command we deal with should not be part of the script...
             If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
                 lstScripts.Add(strScript)
             Else
@@ -457,7 +453,7 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the list of 'before' R 
+    ''' <summary>   Returns the list of scripts associated with the list of 'before' R
     '''             functions/operators/commands (i.e. the ones that run before the base R code).
     '''             If a list object is flagged to exclude the script's output, and the output has
     '''             already been assigned, then the list object's script does not include the output
@@ -472,10 +468,10 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of 'before' R functions/operators/commands (i.e. the ones that 
+    ''' <summary>   Returns the list of 'before' R functions/operators/commands (i.e. the ones that
     '''             run before the base R code). </summary>
     '''
-    ''' <returns>   The list of 'before' R functions/operators/commands (i.e. the ones that run 
+    ''' <returns>   The list of 'before' R functions/operators/commands (i.e. the ones that run
     '''             before the base R code). </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetBeforeCodes() As List(Of RCodeStructure)
@@ -513,11 +509,11 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adds this object and its associated assign script to <paramref name="lstCodes"/>
     '''             and <paramref name="lstValues"/> respectively.<para>
-    '''             If this object's parameters also contain functions or operators then also 
-    '''             recursively adds their respective RCodeStructure objects and associated assign 
+    '''             If this object's parameters also contain functions or operators then also
+    '''             recursively adds their respective RCodeStructure objects and associated assign
     '''             scripts to the respective lists.
-    '''             If this object has lists of 'before' or 'after' functions/operators/commands, 
-    '''             then also adds these objects and their associated assign scripts to the 
+    '''             If this object has lists of 'before' or 'after' functions/operators/commands,
+    '''             then also adds these objects and their associated assign scripts to the
     '''             respective lists.
     '''             </para> </summary>
     '''
@@ -549,7 +545,7 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the relative positions of <paramref name="clsMain"/> and 
+    ''' <summary>   Returns the relative positions of <paramref name="clsMain"/> and
     '''             <paramref name="clsRelative"/>.
     '''             If both have the same position then returns 0.
     '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
@@ -580,7 +576,7 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If the output from the R command needs to be assigned, then returns
     '''             the part of the script to the left of the assignment operator ('&lt;-').
-    '''             If the output from the R command doesn't to be assigned, then returns an empty 
+    '''             If the output from the R command doesn't to be assigned, then returns an empty
     '''             string. </summary>
     '''
     ''' <returns>   If the output from the R command needs to be assigned, then returns
@@ -635,8 +631,8 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if a function named <paramref name="strFunctionName"/> is in the 
-    '''             list of 'before' R functions/operators/commands (i.e. the ones that run before 
+    ''' <summary>   Returns true if a function named <paramref name="strFunctionName"/> is in the
+    '''             list of 'before' R functions/operators/commands (i.e. the ones that run before
     '''             the base R code), else returns false.  </summary>
     '''
     ''' <param name="strFunctionName">  The function to search for in the list of 'before' R
@@ -647,7 +643,7 @@ Public Class RSyntax
     '''             the base R code), else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function BeforeCodesContain(strFunctionName As String) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Inline or make private? 
+        'TODO SJL 04/04/20 This function is only called from within this class. Inline or make private?
         Dim clsTempFunc As RFunction
         For Each clsRCode As RCodeStructure In lstBeforeCodes
             clsTempFunc = TryCast(clsRCode, RFunction)
@@ -659,8 +655,8 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if a function named <paramref name="strFunctionName"/> is in the 
-    '''             list of 'after' R functions/operators/commands (i.e. the ones that run after 
+    ''' <summary>   Returns true if a function named <paramref name="strFunctionName"/> is in the
+    '''             list of 'after' R functions/operators/commands (i.e. the ones that run after
     '''             the base R code), else returns false.  </summary>
     '''
     ''' <param name="strFunctionName">  The function to search for in the list of 'after' R
@@ -671,9 +667,9 @@ Public Class RSyntax
     '''             else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function AfterCodesContain(strFunctionName As String) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Make private? 
-        'TODO SJL 06/04/20I think this function is identical to the function above! 
-        ' There's a bug in the list name below. Even after this is corrected, both functions could be 
+        'TODO SJL 04/04/20 This function is only called from within this class. Make private?
+        'TODO SJL 06/04/20I think this function is identical to the function above!
+        ' There's a bug in the list name below. Even after this is corrected, both functions could be
         ' combined into one (or they could call a shared private function).
         Dim clsTempFunc As RFunction
         For Each clsRCode As RCodeStructure In lstBeforeCodes 'TODO SJL 06/04/20 Should this be 'lstAfterCodes'?
@@ -687,8 +683,8 @@ Public Class RSyntax
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns true if the <paramref name="clsRCode"/> R function/operator/command is
-    '''             the R function/operator/command associated with this object. Also returns true 
-    '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists. 
+    '''             the R function/operator/command associated with this object. Also returns true
+    '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists.
     '''             Else returns false.
     '''             </summary>
     '''
@@ -744,11 +740,11 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the 
+    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the
     '''             'before' list. </summary>
     '''
     ''' <param name="clsNewRCode">  The R function/operation/command to add. </param>
-    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this 
+    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this
     '''                             object's 'before' list. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub AddToBeforeCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
@@ -759,11 +755,11 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the 
+    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the
     '''             'after' list. </summary>
     '''
     ''' <param name="clsNewRCode">  The R function/operation/command to add. </param>
-    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this 
+    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this
     '''                             object's 'after' list. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
@@ -776,7 +772,7 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 06/04/20 This is a single line function on a public data member. 
+    ''' <summary>   TODO SJL 06/04/20 This is a single line function on a public data member.
     '''             I'm not sure what it adds. Remove? </summary>
     '''
     ''' <param name="clsNewRCode">  The cls new r code. </param>
@@ -808,4 +804,5 @@ Public Class RSyntax
         bUseBaseOperator = False
         bUseCommandString = False
     End Sub
+
 End Class

@@ -13,22 +13,27 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Drawing
 
-Imports R_Adapter2.R_Adapter.DataBook
+Namespace R_Adapter.DataBook
 
-Public Interface IColumnMetaDataGrid
-    Inherits IGrid
+    Public Class ColumnHeaderDisplay
+        Public Property strName As String
 
-    Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
+        Public ReadOnly Property strDisplayName As String
+            Get
+                Return strName & " " & strTypeShortCode
+            End Get
+        End Property
 
-    Event DeleteLabels(strColumnName As String)
+        Public Property strTypeShortCode As String
 
-    Sub AddColumns(columnMetaData As ColumnMetaData)
+        Public Property clsColour As Color
 
-    Sub AddRowData(columnMetaData As ColumnMetaData)
+        Public Property clsBackGroundColour As Color
 
-    Function GetSelectedColumns() As List(Of String)
+        Public Property bIsFactor As Boolean
 
-    Sub SetNonEditableColumns(lstNonEditableColumns As List(Of String))
+    End Class
 
-End Interface
+End Namespace

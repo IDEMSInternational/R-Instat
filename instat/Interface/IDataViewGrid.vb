@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
+
 Public Interface IDataViewGrid
     Inherits IGrid
 
@@ -29,11 +31,11 @@ Public Interface IDataViewGrid
 
     Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
 
-    Sub AddColumns(visiblePage As clsDataFramePage)
+    Sub AddColumns(visiblePage As DataFramePage)
 
-    Sub AddRowData(dataFrame As clsDataFrame)
+    Sub AddRowData(dataFrame As DataFrame)
 
-    Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
+    Function GetSelectedColumns() As List(Of ColumnHeaderDisplay)
 
     Function GetWorksheetCount() As Integer
 

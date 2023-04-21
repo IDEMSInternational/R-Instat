@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
@@ -42,7 +43,7 @@ Public Class ucrDataframeMetadataReoGrid
         For i = 0 To _clsDataBook.clsDataFrameMetaData.RowCount - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
-                Dim clsDataFrame As clsDataFrame = _clsDataBook.GetAllDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0))
+                Dim clsDataFrame As DataFrame = _clsDataBook.GetAllDataFrame(_clsDataBook.clsDataFrameMetaData.Data(i, 0))
                 If clsDataFrame IsNot Nothing Then
                     Dim strColumnHeaderText As String = grdData.CurrentWorksheet.ColumnHeaders(j).Text
                     grdData.CurrentWorksheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)

@@ -1,0 +1,458 @@
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports System.Drawing
+Imports R_Adapter2.R_Adapter.Constant
+Imports R_Adapter2.R_Adapter.RLink
+
+''' <summary>
+''' Holds a subset dataset of an R dataframe.
+''' The subset is determined by the rows and columns indexes and count
+''' </summary>
+'''
+Namespace R_Adapter.DataBook
+
+    Public Class DataFramePage
+        Private _iRowStart As Integer
+        Private _iColumnStart As Integer
+        Private _iTotalRowCount As Integer
+        Private _iTotalColumnCount As Integer
+        Private _strDataFrameName As String
+        Private _scriptRunner As ScriptRunner = ScriptRunner.SingletonInstance()
+        Private _clsRDotNetDataFrame As RDotNet.DataFrame
+        Private _lstColumns As List(Of ColumnHeaderDisplay)
+        Private _hasChanged As Boolean
+        Private _iRowIncrements As Integer = DisplayConstant.MaxRowsDisplayed
+        Private _iColumnIncrements As Integer = DisplayConstant.maxColumnsDisplayed
+        Private _lstColourPalette As List(Of Color)
+
+        Private ReadOnly Property iColumnIncrements As Integer
+            Get
+                Return _iColumnIncrements
+            End Get
+        End Property
+
+        Private ReadOnly Property intRowIncrements As Integer
+            Get
+                Return _iRowIncrements
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' List of columns within the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property lstColumns() As List(Of ColumnHeaderDisplay)
+            Get
+                Return _lstColumns
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Array of row names within the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property RowNames() As String()
+            Get
+                Return _clsRDotNetDataFrame.RowNames()
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Starting row of the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property intStartRow As Integer
+            Get
+                Return _iRowStart
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' End row of the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property intEndRow As Integer
+            Get
+                Return _iRowStart + _clsRDotNetDataFrame.RowCount - 1
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Start column of the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property intStartColumn As Integer
+            Get
+                Return _iColumnStart
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' End column of the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property intEndColumn As Integer
+            Get
+                Return _iColumnStart + _clsRDotNetDataFrame.ColumnCount - 1
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Contents of the dataframe for a given cell
+        ''' </summary>
+        ''' <param name="iRow"></param>
+        ''' <param name="iColumn"></param>
+        ''' <returns></returns>
+        Public ReadOnly Property Data(iRow As Integer, iColumn As Integer) As Object
+            Get
+                Return _clsRDotNetDataFrame(iRow, iColumn)
+                'ToDo Need better error handling if out of range
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Total number of rows for the visible page
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property DisplayedRowCount As Integer
+            Get
+                Return _clsRDotNetDataFrame.RowCount
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' holds whether the dataframe is different from visual grid component
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property HasChanged() As Boolean
+            Get
+                Return _hasChanged
+            End Get
+            Set(ByVal value As Boolean)
+                _hasChanged = value
+            End Set
+        End Property
+
+        ''' <summary>
+        ''' Create a new instance of a dataframe page
+        ''' </summary>
+        ''' <param name="rLink"></param>
+        ''' <param name="strDataFrameName"></param>
+        Public Sub New(strDataFrameName As String, colourPalette As List(Of Color))
+            _strDataFrameName = strDataFrameName
+            _lstColumns = New List(Of ColumnHeaderDisplay)
+            _iColumnStart = 1
+            _iRowStart = 1
+            _hasChanged = True
+            _lstColourPalette = colourPalette
+        End Sub
+
+        ''' <summary>
+        ''' Refreshes data.
+        ''' When called, a new R.Net data frame will be set.
+        ''' If data frame set is not successful, a null object will be set.
+        ''' <para>Note: always refreshes regardless whether dataset has changed.</para>
+        ''' </summary>
+        ''' <returns>Returns true if R.Net data frame is set, false if not set</returns>
+        Public Function RefreshData(maxRowsDisplayed As Integer, maxColumnsDisplayed As Integer)
+            _iRowIncrements = maxRowsDisplayed
+            _iColumnIncrements = maxColumnsDisplayed
+
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            If _clsRDotNetDataFrame IsNot Nothing Then
+                SetHeaders()
+            End If
+            Return _clsRDotNetDataFrame IsNot Nothing 'Returns a success value
+        End Function
+
+        ''' <summary>
+        ''' Update the total rows and columns for the dataset so paging can be set
+        ''' </summary>
+        ''' <param name="intTotalColumns"></param>
+        ''' <param name="intTotalRows"></param>
+        Public Sub SetTotalRowAndColumnCounts(intTotalColumns As Integer, intTotalRows As Integer)
+            _iTotalRowCount = intTotalRows
+            _iTotalColumnCount = intTotalColumns
+            If _iTotalRowCount < _iRowStart Then
+                _iRowStart = 1
+            End If
+            If _iTotalColumnCount < _iColumnStart Then
+                _iColumnStart = 1
+            End If
+        End Sub
+
+        Private Function GetNoOfRowPages() As Integer
+            'Needs to be a function as the number of increments can be changed through options
+            Return Math.Ceiling(_iTotalRowCount / intRowIncrements)
+        End Function
+
+        Private Function GetNoOfColumnPages() As Integer
+            'Needs to be a function as the number of increments can be changed through options
+            Return Math.Ceiling(_iTotalColumnCount / iColumnIncrements)
+        End Function
+
+        Private Function GetDataFrameFromRCommand() As RDotNet.DataFrame
+            Dim clsGetDataFrameRFunction As New RFunction
+            _hasChanged = True
+            clsGetDataFrameRFunction.SetRCommand(RCodeConstant.DataBookName & "$get_data_frame")
+            clsGetDataFrameRFunction.AddParameter("convert_to_character", "TRUE")
+            clsGetDataFrameRFunction.AddParameter("use_current_filter", "TRUE")
+            clsGetDataFrameRFunction.AddParameter("use_column_selection", "TRUE")
+            clsGetDataFrameRFunction.AddParameter("max_cols", iColumnIncrements)
+            clsGetDataFrameRFunction.AddParameter("max_rows", intRowIncrements)
+            clsGetDataFrameRFunction.AddParameter("start_row", _iRowStart)
+            clsGetDataFrameRFunction.AddParameter("start_col", _iColumnStart)
+            clsGetDataFrameRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+            Return _scriptRunner.RunInternalScriptGetDataFrame(clsGetDataFrameRFunction.ToScript())
+        End Function
+
+        Private Function GetColumnDataTypes() As String()
+            Dim clsRFunction As New RFunction
+            clsRFunction.SetRCommand(RCodeConstant.DataBookName & "$get_column_data_types")
+            clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+            clsRFunction.AddParameter("columns", _scriptRunner.ConvertListToRString(_clsRDotNetDataFrame.ColumnNames.ToList))
+            Return _scriptRunner.RunInternalScriptGetStringArray(clsRFunction.ToScript())
+        End Function
+
+        Private Function GetColumnBackgroundColours() As Integer()
+            Dim clsRFunction As New RFunction
+            clsRFunction.SetRCommand(RCodeConstant.DataBookName & "$get_variables_metadata")
+            clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+            clsRFunction.AddParameter("property", "colour_label")
+            clsRFunction.AddParameter("column", _scriptRunner.ConvertListToRString(_clsRDotNetDataFrame.ColumnNames.ToList))
+            Return _scriptRunner.RunInternalScriptGetIntegerArray(clsRFunction.ToScript())
+        End Function
+
+        Private Function GetHasColumnColours() As Boolean
+            Dim clsRFunction As New RFunction
+            clsRFunction.ClearParameters()
+            clsRFunction.SetRCommand(RCodeConstant.DataBookName & "$has_colours")
+            clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+            clsRFunction.AddParameter("columns", _scriptRunner.ConvertListToRString(_clsRDotNetDataFrame.ColumnNames.ToList))
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsRFunction.ToScript())
+        End Function
+
+        Private Function GetColumnDispayDetails(strHeaderName As String, strHeaderType As String) As ColumnHeaderDisplay
+            Dim columnHeader As ColumnHeaderDisplay
+            columnHeader = New ColumnHeaderDisplay With
+                                {
+                                    .strName = strHeaderName,
+                                    .strTypeShortCode = "",
+                                    .bIsFactor = False,
+                                    .clsColour = Color.DarkBlue,
+                                    .clsBackGroundColour = Nothing
+                                }
+            If strHeaderType.Contains("factor") AndAlso strHeaderType.Contains("ordered") Then
+                columnHeader.strTypeShortCode = "(O.F)"
+                columnHeader.clsColour = Color.Blue
+                columnHeader.bIsFactor = True
+            ElseIf strHeaderType.Contains("factor") Then
+                columnHeader.strTypeShortCode = "(F)"
+                columnHeader.clsColour = Color.Blue
+                columnHeader.bIsFactor = True
+            ElseIf strHeaderType.Contains("character") Then
+                columnHeader.strTypeShortCode = "(C)"
+            ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("Duration") OrElse
+                    strHeaderType.Contains("Period") OrElse strHeaderType.Contains("Interval") Then
+                columnHeader.strTypeShortCode = "(D)"
+            ElseIf strHeaderType.Contains("POSIXct") OrElse
+                    strHeaderType.Contains("POSIXt") Then
+                columnHeader.strTypeShortCode = "(D.T)"
+            ElseIf strHeaderType.Contains("hms") OrElse
+                    strHeaderType.Contains("difftime") Then
+                columnHeader.strTypeShortCode = "(T)"
+            ElseIf strHeaderType.Contains("logical") Then
+                columnHeader.strTypeShortCode = "(L)"
+                ' Structured columns e.g. "circular or bigz or bigq " are coded with "(S)"
+            ElseIf strHeaderType.Contains("circular") OrElse strHeaderType.Contains("bigz") OrElse
+                   strHeaderType.Contains("bigq") Then
+                columnHeader.strTypeShortCode = "(S)"
+            ElseIf strHeaderType.Contains("list") Then
+                columnHeader.strTypeShortCode = "(LT)"
+            ElseIf strHeaderType.Contains("complex") Then
+                columnHeader.strTypeShortCode = "(CX)"
+                ' Types of data for specific Application areas e.g. survival are coded with "(A)"
+                ' No examples implemented yet.
+                'ElseIf strType.Contains() Then
+                '    fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (A)"
+                '    fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
+            End If
+            Return columnHeader
+        End Function
+
+        Private Sub SetHeaders()
+            Dim ColumnColours As Integer() = Nothing
+            Dim bApplyBackGroundColumnColours As Boolean
+            Dim ColumnDataTypes As String()
+            Dim columnHeader As ColumnHeaderDisplay
+
+            ColumnDataTypes = GetColumnDataTypes()
+            bApplyBackGroundColumnColours = GetHasColumnColours()
+            If bApplyBackGroundColumnColours Then
+                ColumnColours = GetColumnBackgroundColours()
+            End If
+            _lstColumns.Clear()
+
+            For i = 0 To _clsRDotNetDataFrame.ColumnNames.ToList.Count - 1
+                columnHeader = GetColumnDispayDetails(_clsRDotNetDataFrame.ColumnNames.ToList(i), ColumnDataTypes(i))
+                If bApplyBackGroundColumnColours AndAlso Not Double.IsNaN(ColumnColours(i)) Then
+                    columnHeader.clsBackGroundColour = GetColumnBackGroundColor(i, ColumnColours(i).ToString())
+                End If
+                _lstColumns.Add(columnHeader)
+            Next
+        End Sub
+
+        Private Function GetColumnBackGroundColor(iColumn As Integer, Optional iColour As Integer = -1) As Color
+            If iColour > 0 AndAlso iColour <= _lstColourPalette.Count Then
+                Return _lstColourPalette(iColour - 1)
+            Else
+                Return Nothing
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Does a next page exist for rows
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function CanLoadNextRowPage() As Boolean
+            Return intEndRow < _iTotalRowCount
+        End Function
+
+        ''' <summary>
+        ''' Load the next row page
+        ''' </summary>
+        Public Sub LoadNextRowPage()
+            If CanLoadNextRowPage() Then
+                _iRowStart += intRowIncrements
+                _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' Go to the specific row page
+        ''' </summary>
+        Public Sub GoToSpecificRowPage(iRow As Integer)
+            If iRow > 0 Then
+                _iRowStart = (intRowIncrements * (iRow - 1)) + 1
+                _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' Does a previous page exist for rows
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function CanLoadPreviousRowPage() As Boolean
+            Return _iRowStart > intRowIncrements
+        End Function
+
+        ''' <summary>
+        ''' Load the previous row page
+        ''' </summary>
+        Public Sub LoadPreviousRowPage()
+            If CanLoadPreviousRowPage() Then
+                _iRowStart -= intRowIncrements
+                _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' Load last row page
+        ''' </summary>
+        Public Sub LoadLastRowPage()
+            _iRowStart = (intRowIncrements * (GetNoOfRowPages() - 1)) + 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        End Sub
+
+        ''' <summary>
+        ''' Load first row page
+        ''' </summary>
+        Public Sub LoadFirstRowPage()
+            _iRowStart = 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+        End Sub
+
+        ''' <summary>
+        ''' Does the next column page exist
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function CanLoadNextColumnPage() As Boolean
+            Return intEndColumn < _iTotalColumnCount
+        End Function
+
+        ''' <summary>
+        ''' Load the next column page
+        ''' </summary>
+        Public Sub LoadNextColumnPage()
+            If CanLoadNextColumnPage() Then
+                _iColumnStart += iColumnIncrements
+                _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+                SetHeaders()
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' Go to the specific column page
+        ''' </summary>
+        Public Sub GoToSpecificColumnPage(iColumn As Integer)
+            If iColumn > 0 Then
+                _iColumnStart = (iColumnIncrements * (iColumn - 1)) + 1
+                _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+                SetHeaders()
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' Does the previous column page exist
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function CanLoadPreviousColumnPage() As Boolean
+            Return _iColumnStart > iColumnIncrements
+        End Function
+
+        ''' <summary>
+        ''' Load previous column page
+        ''' </summary>
+        Public Sub LoadPreviousColumnPage()
+            If _iColumnStart - iColumnIncrements >= 0 Then
+                _iColumnStart -= iColumnIncrements
+                _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+                SetHeaders()
+            End If
+        End Sub
+
+        ''' <summary>
+        ''' Load last column page
+        ''' </summary>
+        Public Sub LoadLastColumnPage()
+            _iColumnStart = (iColumnIncrements * (GetNoOfColumnPages() - 1)) + 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
+        End Sub
+
+        ''' <summary>
+        ''' Load first column page
+        ''' </summary>
+        Public Sub LoadFirstColumnPage()
+            _iColumnStart = 1
+            _clsRDotNetDataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
+        End Sub
+
+    End Class
+
+End Namespace

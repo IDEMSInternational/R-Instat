@@ -14,13 +14,14 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports R_Adapter2.R_Adapter.DataBook
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public MustInherit Class ucrReoGrid
     Implements IGrid
 
-    Protected _clsDataBook As clsDataBook
+    Protected _clsDataBook As DataBook
 
     ''' <summary>
     ''' Gets current worksheet adapter
@@ -35,8 +36,8 @@ Public MustInherit Class ucrReoGrid
         End Set
     End Property
 
-    Public WriteOnly Property DataBook As clsDataBook Implements IGrid.DataBook
-        Set(value As clsDataBook)
+    Public WriteOnly Property DataBook As DataBook Implements IGrid.DataBook
+        Set(value As DataBook)
             _clsDataBook = value
         End Set
     End Property
