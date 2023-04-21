@@ -326,4 +326,5 @@ Public Class ROperator
 
         Return clsTempROperator
     End Function
+
 End Class

@@ -11,20 +11,20 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Drawing
 Imports R_Adapter2.R_Adapter.Constant
 Imports R_Adapter2.R_Adapter.RLink
-Imports RDotNet
 
 ''' <summary>
 ''' Holds a subset dataset of an R dataframe.
 ''' The subset is determined by the rows and columns indexes and count
 ''' </summary>
-''' 
+'''
 Namespace R_Adapter.DataBook
+
     Public Class DataFramePage
         Private _iRowStart As Integer
         Private _iColumnStart As Integer
@@ -38,6 +38,7 @@ Namespace R_Adapter.DataBook
         Private _iRowIncrements As Integer = DisplayConstant.MaxRowsDisplayed
         Private _iColumnIncrements As Integer = DisplayConstant.maxColumnsDisplayed
         Private _lstColourPalette As List(Of Color)
+
         Private ReadOnly Property iColumnIncrements As Integer
             Get
                 Return _iColumnIncrements
@@ -161,8 +162,8 @@ Namespace R_Adapter.DataBook
         End Sub
 
         ''' <summary>
-        ''' Refreshes data. 
-        ''' When called, a new R.Net data frame will be set. 
+        ''' Refreshes data.
+        ''' When called, a new R.Net data frame will be set.
         ''' If data frame set is not successful, a null object will be set.
         ''' <para>Note: always refreshes regardless whether dataset has changed.</para>
         ''' </summary>
@@ -195,18 +196,17 @@ Namespace R_Adapter.DataBook
         End Sub
 
         Private Function GetNoOfRowPages() As Integer
-            'Needs to be a function as the number of increments can be changed through options 
+            'Needs to be a function as the number of increments can be changed through options
             Return Math.Ceiling(_iTotalRowCount / intRowIncrements)
         End Function
 
         Private Function GetNoOfColumnPages() As Integer
-            'Needs to be a function as the number of increments can be changed through options 
+            'Needs to be a function as the number of increments can be changed through options
             Return Math.Ceiling(_iTotalColumnCount / iColumnIncrements)
         End Function
 
         Private Function GetDataFrameFromRCommand() As RDotNet.DataFrame
             Dim clsGetDataFrameRFunction As New RFunction
-            Dim expTemp As SymbolicExpression
             _hasChanged = True
             clsGetDataFrameRFunction.SetRCommand(RCodeConstant.DataBookName & "$get_data_frame")
             clsGetDataFrameRFunction.AddParameter("convert_to_character", "TRUE")
@@ -217,29 +217,24 @@ Namespace R_Adapter.DataBook
             clsGetDataFrameRFunction.AddParameter("start_row", _iRowStart)
             clsGetDataFrameRFunction.AddParameter("start_col", _iColumnStart)
             clsGetDataFrameRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsGetDataFrameRFunction.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsDataFrame
-            Else
-                Return Nothing
-            End If
+            Return _scriptRunner.RunInternalScriptGetDataFrame(clsGetDataFrameRFunction.ToScript())
         End Function
 
-        Private Function GetColumnDataTypes() As CharacterVector
+        Private Function GetColumnDataTypes() As String()
             Dim clsRFunction As New RFunction
             clsRFunction.SetRCommand(RCodeConstant.DataBookName & "$get_column_data_types")
             clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
             clsRFunction.AddParameter("columns", _scriptRunner.ConvertListToRString(_clsRDotNetDataFrame.ColumnNames.ToList))
-            Return _scriptRunner.RunInternalScriptGetValue(clsRFunction.ToScript()).AsCharacter
+            Return _scriptRunner.RunInternalScriptGetStringArray(clsRFunction.ToScript())
         End Function
 
-        Private Function GetColumnBackgroundColours() As NumericVector
+        Private Function GetColumnBackgroundColours() As Integer()
             Dim clsRFunction As New RFunction
             clsRFunction.SetRCommand(RCodeConstant.DataBookName & "$get_variables_metadata")
             clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
             clsRFunction.AddParameter("property", "colour_label")
             clsRFunction.AddParameter("column", _scriptRunner.ConvertListToRString(_clsRDotNetDataFrame.ColumnNames.ToList))
-            Return _scriptRunner.RunInternalScriptGetValue(clsRFunction.ToScript()).AsNumeric
+            Return _scriptRunner.RunInternalScriptGetIntegerArray(clsRFunction.ToScript())
         End Function
 
         Private Function GetHasColumnColours() As Boolean
@@ -248,7 +243,7 @@ Namespace R_Adapter.DataBook
             clsRFunction.SetRCommand(RCodeConstant.DataBookName & "$has_colours")
             clsRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
             clsRFunction.AddParameter("columns", _scriptRunner.ConvertListToRString(_clsRDotNetDataFrame.ColumnNames.ToList))
-            Return _scriptRunner.RunInternalScriptGetValue(clsRFunction.ToScript()).AsLogical(0)
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsRFunction.ToScript())
         End Function
 
         Private Function GetColumnDispayDetails(strHeaderName As String, strHeaderType As String) As ColumnHeaderDisplay
@@ -300,23 +295,22 @@ Namespace R_Adapter.DataBook
         End Function
 
         Private Sub SetHeaders()
-            Dim vecColumnColours As NumericVector = Nothing
+            Dim ColumnColours As Integer() = Nothing
             Dim bApplyBackGroundColumnColours As Boolean
-            Dim vecColumnDataTypes As CharacterVector
+            Dim ColumnDataTypes As String()
             Dim columnHeader As ColumnHeaderDisplay
 
-            vecColumnDataTypes = GetColumnDataTypes()
+            ColumnDataTypes = GetColumnDataTypes()
             bApplyBackGroundColumnColours = GetHasColumnColours()
             If bApplyBackGroundColumnColours Then
-                vecColumnColours = GetColumnBackgroundColours()
+                ColumnColours = GetColumnBackgroundColours()
             End If
             _lstColumns.Clear()
 
-
             For i = 0 To _clsRDotNetDataFrame.ColumnNames.ToList.Count - 1
-                columnHeader = GetColumnDispayDetails(_clsRDotNetDataFrame.ColumnNames.ToList(i), vecColumnDataTypes(i))
-                If bApplyBackGroundColumnColours AndAlso Not Double.IsNaN(vecColumnColours(i)) Then
-                    columnHeader.clsBackGroundColour = GetColumnBackGroundColor(i, vecColumnColours(i).ToString())
+                columnHeader = GetColumnDispayDetails(_clsRDotNetDataFrame.ColumnNames.ToList(i), ColumnDataTypes(i))
+                If bApplyBackGroundColumnColours AndAlso Not Double.IsNaN(ColumnColours(i)) Then
+                    columnHeader.clsBackGroundColour = GetColumnBackGroundColor(i, ColumnColours(i).ToString())
                 End If
                 _lstColumns.Add(columnHeader)
             Next
@@ -460,6 +454,5 @@ Namespace R_Adapter.DataBook
         End Sub
 
     End Class
+
 End Namespace
-
-

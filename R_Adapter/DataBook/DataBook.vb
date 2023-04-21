@@ -11,19 +11,19 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Drawing
 Imports R_Adapter2.R_Adapter.Constant
 Imports R_Adapter2.R_Adapter.RLink
-Imports RDotNet
 
 ''' <summary>
 ''' Holds the dataframes and metadata.
 ''' </summary>
-''' 
+'''
 Namespace R_Adapter.DataBook
+
     Public Class DataBook
         Private _scriptRunner As ScriptRunner = ScriptRunner.SingletonInstance()
         Private _lstDataFrames As List(Of DataFrame)
@@ -31,6 +31,7 @@ Namespace R_Adapter.DataBook
         Private _clsDataFrameMetaData As DataFrameMetaData
         Private _maxRowsDisplayed As Integer
         Private _maxColumnsDisplayed As Integer
+
         'ToDo the colourPalette should not be passed like this
         Private _colourPalette As List(Of Color)
 
@@ -46,8 +47,9 @@ Namespace R_Adapter.DataBook
                 _lstDataFrames = value
             End Set
         End Property
+
         ''' <summary>
-        ''' Holds the MetaData at a dataframe level. 
+        ''' Holds the MetaData at a dataframe level.
         ''' Use the metadata at a dataframe level for any column metadata
         ''' </summary>
         ''' <returns></returns>
@@ -69,19 +71,13 @@ Namespace R_Adapter.DataBook
 
         Private Function HasDataChanged() As Boolean
             Dim clsDataChanged As New RFunction
-            Dim expTemp As SymbolicExpression
 
             'ToDo This should check if there is a databook but can't understand how it works
             'If Not _RLink.bInstatObjectExists Then
             ' Return False
             'End If
             clsDataChanged.SetRCommand(RCodeConstant.DataBookName & "$get_data_changed")
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsDataChanged.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsLogical(0)
-            Else
-                Return False
-            End If
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsDataChanged.ToScript())
         End Function
 
         ''' <summary>
@@ -136,7 +132,7 @@ Namespace R_Adapter.DataBook
             'End If
 
             'else if the R Instat object data has changed
-            'refresh data frames data and metadata 
+            'refresh data frames data and metadata
             If HasDataChanged() Then
                 RefreshDataFrames()
                 _clsDataFrameMetaData.RefreshData()
@@ -161,7 +157,7 @@ Namespace R_Adapter.DataBook
             _lstDataFrames.RemoveAll(Function(x) Not lstOfCurrentRDataFrameNames.Contains(x.strName))
 
             'add any R Instat object data frames missing in the data book
-            'and also refresh data of the data book data frames 
+            'and also refresh data of the data book data frames
             Dim dataFrame As DataFrame
             For Each strDataFrameName In lstOfCurrentRDataFrameNames
                 dataFrame = _lstDataFrames.Where(Function(x) x.strName = strDataFrameName).SingleOrDefault
@@ -184,29 +180,27 @@ Namespace R_Adapter.DataBook
             End If
         End Sub
 
-
         ''' <summary>
         ''' Gets current data frame names from R (the R Instant object).
         ''' </summary>
         ''' <returns>list of data frame names. If no data frame names found, an empty list is returned</returns>
         Private Function GetDataFrameNamesFromR() As List(Of String)
             Dim clsGetDataFrameNames As New RFunction
-            Dim expTemp As SymbolicExpression
+            Dim dataframeNames As String()
             Dim listOfDataFrames As New List(Of String)
 
             clsGetDataFrameNames.SetRCommand(RCodeConstant.DataBookName & "$get_data_names")
             clsGetDataFrameNames.AddParameter("include_hidden", "FALSE")
 
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsGetDataFrameNames.ToScript())
-            If expTemp IsNot Nothing Then
-                For i = 0 To expTemp.AsList.Length - 1
-                    listOfDataFrames.Add(expTemp.AsList.AsCharacter(i))
+            dataframeNames = _scriptRunner.RunInternalScriptGetStringArray(clsGetDataFrameNames.ToScript())
+            If dataframeNames IsNot Nothing Then
+                For i = 0 To dataframeNames.Length - 1
+                    listOfDataFrames.Add(dataframeNames(i))
                 Next
             End If
             Return listOfDataFrames
         End Function
 
     End Class
+
 End Namespace
-
-

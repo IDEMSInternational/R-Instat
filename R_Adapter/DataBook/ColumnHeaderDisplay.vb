@@ -11,11 +11,12 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.Drawing
 
 Namespace R_Adapter.DataBook
+
     Public Class ColumnHeaderDisplay
         Public Property strName As String
 
@@ -34,5 +35,5 @@ Namespace R_Adapter.DataBook
         Public Property bIsFactor As Boolean
 
     End Class
-End Namespace
 
+End Namespace

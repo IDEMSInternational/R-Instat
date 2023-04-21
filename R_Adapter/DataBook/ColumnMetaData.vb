@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports R_Adapter2.R_Adapter.Constant
@@ -21,8 +21,9 @@ Imports RDotNet
 ''' <summary>
 ''' Holds Column Meta Data for a single dataframe
 ''' </summary>
-''' 
+'''
 Namespace R_Adapter.DataBook
+
     Public Class ColumnMetaData
         Private _strDataFrameName As String
         Private _scriptRunner As ScriptRunner = ScriptRunner.SingletonInstance()
@@ -31,7 +32,7 @@ Namespace R_Adapter.DataBook
 
         ''' <summary>
         ''' holds the metadata change audit id
-        ''' </summary> 
+        ''' </summary>
         Public Property MetadataChangeAuditId As Integer
 
         ''' <summary>
@@ -114,22 +115,16 @@ Namespace R_Adapter.DataBook
 
         Private Function HasDataChanged() As Boolean
             Dim clsVariablesMetadataChanged As New RFunction
-            Dim expTemp As SymbolicExpression
             clsVariablesMetadataChanged.SetRCommand(RCodeConstant.DataBookName & "$get_variables_metadata_changed")
             clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsLogical(0)
-            Else
-                Return False
-            End If
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsVariablesMetadataChanged.ToScript())
         End Function
 
         ''' <summary>
         ''' Updates column Meta Data if data has changed
         ''' </summary>
         Public Sub RefreshData()
-            'Need to check to see if dataframe exists due to the column meta data not changing when sheets are un-hidden 
+            'Need to check to see if dataframe exists due to the column meta data not changing when sheets are un-hidden
             If _clsColsMetadataDataFrame Is Nothing OrElse HasDataChanged() Then
                 _clsColsMetadataDataFrame = GetColsMetadataFromRCommand()
                 SetColsMetadataToNotChangedInR()
@@ -150,12 +145,7 @@ Namespace R_Adapter.DataBook
             clsGetVariablesMetadata.SetRCommand(RCodeConstant.DataBookName & "$get_variables_metadata")
             clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
             clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsDataFrame
-            Else
-                Return Nothing
-            End If
+            Return _scriptRunner.RunInternalScriptGetDataFrame(clsGetVariablesMetadata.ToScript())
         End Function
 
         Private Sub SetColsMetadataToNotChangedInR()
@@ -165,7 +155,7 @@ Namespace R_Adapter.DataBook
             clsSetVariablesMetadataChanged.AddParameter("new_val", "FALSE")
             _scriptRunner.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
         End Sub
+
     End Class
+
 End Namespace
-
-

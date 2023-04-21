@@ -244,6 +244,7 @@ Public Class RLink
             clsScriptRunner.Connect()
 
             AddHandler clsScriptRunner.DatabookRefresh, AddressOf RefreshGrids
+            AddHandler clsScriptRunner.OutputAdded, AddressOf AddOutput
         Catch ex As Exception
             ' Modified message since currently we recommend use of same R version as bundled version
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
@@ -314,6 +315,14 @@ Public Class RLink
 
     Public Sub RefreshGrids()
         frmMain.UpdateAllGrids()
+    End Sub
+
+    Public Sub UpdateRLinkStatus(strStatus As String)
+
+    End Sub
+    Public Sub AddOutput(strScript As String, strOutput As String, bIsFile As Boolean, bDisplayInExternalViewer As Boolean)
+        frmMain.ucrScriptWindow.LogText(strScript & Environment.NewLine)
+        clsOutputLogger.AddOutput(strScript, strOutput, bIsFile, bDisplayInExternalViewer)
     End Sub
 
     ''' <summary>

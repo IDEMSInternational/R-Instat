@@ -11,14 +11,14 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports R_Adapter2.R_Adapter.Constant
 Imports R_Adapter2.R_Adapter.RLink
-Imports RDotNet
 
 Namespace R_Adapter.DataBook
+
     Public Class DataFrameMetaData
         Private _scriptRunner As ScriptRunner = ScriptRunner.SingletonInstance()
         Private _clsDataFrame As RDotNet.DataFrame
@@ -58,14 +58,8 @@ Namespace R_Adapter.DataBook
 
         Private Function HasDataChanged() As Boolean
             Dim clsMetadataChanged As New RFunction
-            Dim expTemp As SymbolicExpression
             clsMetadataChanged.SetRCommand(RCodeConstant.DataBookName & "$get_metadata_changed")
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsMetadataChanged.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsLogical(0)
-            Else
-                Return False
-            End If
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsMetadataChanged.ToScript())
         End Function
 
         Public Sub RefreshData()
@@ -77,16 +71,10 @@ Namespace R_Adapter.DataBook
 
         Private Function GetDataFrameFromRCommand() As RDotNet.DataFrame
             Dim clsGetCombinedMetadata As New RFunction
-            Dim expTemp As SymbolicExpression
 
             clsGetCombinedMetadata.SetRCommand(RCodeConstant.DataBookName & "$get_combined_metadata")
             clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsDataFrame
-            Else
-                Return Nothing
-            End If
+            Return _scriptRunner.RunInternalScriptGetDataFrame(clsGetCombinedMetadata.ToScript())
         End Function
 
         Private Sub ResetDataFramesChanged()
@@ -97,5 +85,5 @@ Namespace R_Adapter.DataBook
         End Sub
 
     End Class
-End Namespace
 
+End Namespace

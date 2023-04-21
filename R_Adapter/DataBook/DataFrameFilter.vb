@@ -11,14 +11,14 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports R_Adapter2.R_Adapter.Constant
 Imports R_Adapter2.R_Adapter.RLink
-Imports RDotNet
 
 Namespace R_Adapter.DataBook
+
     ''' <summary>
     ''' Holds filter information for the dataframe
     ''' </summary>
@@ -91,14 +91,14 @@ Namespace R_Adapter.DataBook
             Dim clsFilterApplied As New RFunction
             clsFilterApplied.SetRCommand(RCodeConstant.DataBookName & "$filter_applied")
             clsFilterApplied.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-            Return _scriptRunner.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0)
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsFilterApplied.ToScript())
         End Function
 
         Private Function GetColumnSelectionAppliedFromRCommand() As Boolean
             Dim clsColumnSelectionApplied As New RFunction
             clsColumnSelectionApplied.SetRCommand(RCodeConstant.DataBookName & "$column_selection_applied")
             clsColumnSelectionApplied.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-            Return _scriptRunner.RunInternalScriptGetValue(clsColumnSelectionApplied.ToScript()).AsLogical(0)
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsColumnSelectionApplied.ToScript())
         End Function
 
         Public Sub RefreshData()
@@ -111,5 +111,5 @@ Namespace R_Adapter.DataBook
         End Sub
 
     End Class
-End Namespace
 
+End Namespace

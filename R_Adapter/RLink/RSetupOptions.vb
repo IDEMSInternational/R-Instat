@@ -1,14 +1,11 @@
-﻿Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
+﻿Namespace R_Adapter.RLink
 
-Namespace R_Adapter.RLink
-    'ToDo would be good if R packages was passed in. Allowing them to be defined within the dialogs. 
+    'ToDo would be good if R packages was passed in. Allowing them to be defined within the dialogs.
     Public Class RSetupOptions
+
         'These are passed in to allow for seperation - possible to have different front end version
         Public ReadOnly Property ExpectedMajorVersion As Integer
+
         Public ReadOnly Property ExpectedMinorVersion As Integer
         Public ReadOnly Property DirectoryOfRFiles As String
         Public ReadOnly Property RPath As String
@@ -25,5 +22,7 @@ Namespace R_Adapter.RLink
             NumberOfDigitsToDisplay = 4
             ShowStarsOnCoefficients = False
         End Sub
+
     End Class
+
 End Namespace

@@ -114,7 +114,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RLink\HelperFunction.vb" />
+    <Compile Include="RLink\AdvancedFunction.vb" />
     <Compile Include="RLink\RConnector.vb" />
     <Compile Include="RLink\RSetupOptions.vb" />
     <Compile Include="RLink\ScriptRunner.vb" />

@@ -1,16 +1,8 @@
-﻿Imports Microsoft.VisualBasic
-Imports R_Adapter.Constant
-Imports R_Adapter.ScriptBuilder
-Imports R_Adapter2.R_Adapter.Constant
-Imports RDotNet
-Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
+﻿Imports R_Adapter2.R_Adapter.Constant
 
 Namespace R_Adapter.RLink
-    Public Class HelperFunction
+
+    Public Class AdvancedFunction
         Private ReadOnly _scriptRunner As ScriptRunner
 
         Public Function GetRSetupScript() As String
@@ -35,7 +27,6 @@ Namespace R_Adapter.RLink
             Return strScript
         End Function
 
-
         Public Function GetDataFrameNames() As List(Of String)
             Dim lstDataFrameNames As List(Of String) = New List(Of String)()
             Dim clsGetDataNames As RFunction = New RFunction()
@@ -48,7 +39,7 @@ Namespace R_Adapter.RLink
             Dim clsDataFrameExists As RFunction = New RFunction()
             clsDataFrameExists.SetRCommand(RCodeConstant.DataBookName & "$data_frame_exists")
             clsDataFrameExists.AddParameter("data_name", Strings.Chr(34) & strDataFrameName + Strings.Chr(34))
-            Return If(_scriptRunner.RunInternalScriptGetBoolean(clsDataFrameExists.ToScript()), False)
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsDataFrameExists.ToScript())
         End Function
 
         Public Function GetColumnNames(ByVal strDataFrameName As String, ByVal Optional bIncludeHiddenColumns As Boolean = True) As List(Of String)
@@ -203,12 +194,13 @@ Namespace R_Adapter.RLink
                 Else
                     Return False
                 End If
-
             Catch ex As Exception
                 Return False
             End Try
 
             Return True
         End Function
+
     End Class
+
 End Namespace

@@ -30,6 +30,7 @@ Public Class ucrDataFrameMetadata
     Private clsHideDataFrame As New RFunction
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
+    Private _clsPrepareFunctions As clsPrepareFunctionsForGrids = New clsPrepareFunctionsForGrids()
 
     Public WriteOnly Property DataBook() As DataBook
         Set(ByVal value As DataBook)
@@ -202,6 +203,10 @@ Public Class ucrDataFrameMetadata
         clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
         strTemp = clsViewDataFrame.ToScript(strScript)
         RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+
+        StartWait()
+        _clsPrepareFunctions.ViewDataFrame(GetSelectedDataframeNameFromSelectedRow())
+        EndWait()
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click

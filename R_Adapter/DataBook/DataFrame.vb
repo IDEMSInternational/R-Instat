@@ -11,23 +11,24 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 
 Imports System.Drawing
 Imports R_Adapter2.R_Adapter.Constant
 Imports R_Adapter2.R_Adapter.RLink
-Imports RDotNet
 
 ''' <summary>
-''' Holds data for the dataframe so that it can be displayed. 
+''' Holds data for the dataframe so that it can be displayed.
 ''' </summary>
 '''
 Namespace R_Adapter.DataBook
+
     Public Class DataFrame
+
         ' Private _clsPrepareFunctions As clsPrepareFunctionsForGrids
         Private _clsVisibleDataFramePage As DataFramePage
+
         Private _clsColumnMetaData As ColumnMetaData
         Private _clsFilterOrColumnSelection As DataFrameFilter
         Private _strDataFrameName As String
@@ -99,7 +100,7 @@ Namespace R_Adapter.DataBook
         End Property
 
         ''' <summary>
-        ''' Returns how many rows are contained in the visible page 
+        ''' Returns how many rows are contained in the visible page
         ''' </summary>
         ''' <returns></returns>
         Public ReadOnly Property iDisplayedRowCount As Integer
@@ -153,20 +154,14 @@ Namespace R_Adapter.DataBook
 
         Private Function HasDataChanged() As Boolean
             Dim clsDataChanged As New RFunction
-            Dim expTemp As SymbolicExpression
 
             clsDataChanged.SetRCommand(RCodeConstant.DataBookName & "$get_data_changed")
             clsDataChanged.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-            expTemp = _scriptRunner.RunInternalScriptGetValue(clsDataChanged.ToScript())
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                Return expTemp.AsLogical(0)
-            Else
-                Return False
-            End If
+            Return _scriptRunner.RunInternalScriptGetBoolean(clsDataChanged.ToScript())
         End Function
 
         ''' <summary>
-        ''' Updates dataframe where data has changed 
+        ''' Updates dataframe where data has changed
         ''' </summary>
         ''' <returns>Returns true if data frame is succesfully refeshed from R, false if otherwise</returns>
         Public Function RefreshData(maxRowsDisplayed As Integer, maxColumnsDisplayed As Integer) As Boolean
@@ -200,5 +195,5 @@ Namespace R_Adapter.DataBook
         End Sub
 
     End Class
-End Namespace
 
+End Namespace

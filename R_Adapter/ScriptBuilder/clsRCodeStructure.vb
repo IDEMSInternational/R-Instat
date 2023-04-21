@@ -11,12 +11,13 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports R_Adapter2.R_Adapter.Enum
+
 '''--------------------------------------------------------------------------------------------
-''' <summary>   An object of this class represents an R command. 
+''' <summary>   An object of this class represents an R command.
 '''             The R command may include parameters and an assignment part.
 '''             <para>
 '''             This class provides methods and fields to:</para>
@@ -30,7 +31,7 @@ Imports R_Adapter2.R_Adapter.Enum
 '''     </description></item><item><description>
 '''             Whether the assignment part has been created (or needs to be created).
 '''     </description></item><item><description>
-'''             Define what to do with the result returned from the R command (e.g. ignore, show 
+'''             Define what to do with the result returned from the R command (e.g. ignore, show
 '''             the result as text, show the result as a graph or store in a temporary variable).
 '''     </description></item><item><description>
 '''             Return the R command as an executable R string.
@@ -44,31 +45,32 @@ Public Class RCodeStructure
     'todo. the properties in this block should eventually be private
     'start block
 
-    ''' <summary>   
-    ''' If the output from the R command needs to be assigned, then this string is 
+    ''' <summary>
+    ''' If the output from the R command needs to be assigned, then this string is
     ''' the part of the script to the left of the assignment operator ('&lt;-').
     ''' This could be a data frame, data frame colmun, model, graph etc.
-    ''' If the output from the R command doesn't to be assigned, then this string is null or empty. 
+    ''' If the output from the R command doesn't to be assigned, then this string is null or empty.
     ''' </summary>
     Public _strAssignToObject As String
+
     Public _strAssignToName As String
     Public _strAssignToObjectTypeLabel As String
     Public _strAssignToObjectFormat As String
     Public _strDataFrameNameToAddAssignToObject As String
 
-    ''' <summary>   
-    ''' If true then a list of data frames is assigned (i.e. the R "_strAssignToName" 
+    ''' <summary>
+    ''' If true then a list of data frames is assigned (i.e. the R "_strAssignToName"
     ''' parameter needs to be an R string list).
     ''' </summary>
     Private bDataFrameList As Boolean = False
 
-    ''' <summary>   If true then the R parameter "use_col_name_as_prefix" is set to true, 
+    ''' <summary>   If true then the R parameter "use_col_name_as_prefix" is set to true,
     '''             else the parameter is set to false.
     '''             </summary>
     Public bAssignToIsPrefix As Boolean = False
 
-    ''' <summary>   If true then don't assign to a specific named column. If false then assign to 
-    '''             a named column (i.e. the R "col_name" parameter needs to be set). 
+    ''' <summary>   If true then don't assign to a specific named column. If false then assign to
+    '''             a named column (i.e. the R "col_name" parameter needs to be set).
     '''             </summary>
     Public bAssignToColumnWithoutNames As Boolean = False
 
@@ -83,7 +85,7 @@ Public Class RCodeStructure
     Public strAdjacentColumn As String = ""
 
     ''' <summary>   If true then there is no effect.
-    '''             If false then set the R "require_correct_length" parameter to false. 
+    '''             If false then set the R "require_correct_length" parameter to false.
     '''             Only used when assigning to a column.
     '''             </summary>
     Public bRequireCorrectLength As Boolean = True
@@ -98,19 +100,20 @@ Public Class RCodeStructure
     Protected iNumberOfAddedParameters As Integer = 0 'TODSO Is this used or needed? Couldn't we find the number of parameters from the num of elements in clsParameters?
 
     ''' <summary>   used as a constant to represent an undefined parameter position.
-    '''             Note: This is currently only used in RSyntax as a before/after code to 
+    '''             Note: This is currently only used in RSyntax as a before/after code to
     '''             determine whether the position code should be run in the list.
     '''             </summary>
-    Public iPosition = -1 ' TODO SJL 03/04/20 This seems to be a constant, should we declare it with 'const'? 
+    Public iPosition = -1 ' TODO SJL 03/04/20 This seems to be a constant, should we declare it with 'const'?
+
     'TODO SJL 03/04/20 - Also, it only seems to be used by RSyntax. Move the constant to that class and give it a less confusing name?
 
-    ''' <summary>Deprecated.  What to do with the result returned by executing the R code: 
+    ''' <summary>Deprecated.  What to do with the result returned by executing the R code:
     ''' <list type="bullet">
     '''     <item>
     '''        <description>0 Ignore the result of the R code.</description>
     '''     </item>
     '''     <item>
-    '''        <description>1 Store the result of the R code in a temporary R variable, and then 
+    '''        <description>1 Store the result of the R code in a temporary R variable, and then
     '''                     output the variable's value as text.</description>
     '''     </item>
     '''     <item>
@@ -122,7 +125,7 @@ Public Class RCodeStructure
     '''                     </description>
     '''     </item>
     '''     <item>
-    '''        <description>4 Store the result of the R code in a temporary R variable, and then 
+    '''        <description>4 Store the result of the R code in a temporary R variable, and then
     '''                     output the variable's value in a web browser.
     '''                     </description>
     '''     </item>
@@ -130,31 +133,31 @@ Public Class RCodeStructure
     ''' </summary>
     Public iCallType As Integer = 0 'TODO SJL 03/04/20 In RInstat, iCallType only seems to be 0, 2 or 3. Are call types 1 and 4 used?
 
-    ''' <summary>   If true then potentially exclude the assignment part of the script from the R 
+    ''' <summary>   If true then potentially exclude the assignment part of the script from the R
     '''             command.
-    '''             Normally, the assignment part of the script should only be excluded if the assignement 
-    '''             has been set. 
+    '''             Normally, the assignment part of the script should only be excluded if the assignement
+    '''             has been set.
     '''             For example:
     '''             <code>
     '''                 If bExcludeAssignedFunctionOutput AndAlso IsAssigned Then
     '''                     'process script without assignment part
     '''                 Else
-    '''                     'process script with assignment part 
+    '''                     'process script with assignment part
     '''             </code>
     '''             </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
-    ''' <summary>   This is used to clear the global environment of unused variables. 
+    ''' <summary>   This is used to clear the global environment of unused variables.
     '''             </summary>
     Public bClearFromGlobal As Boolean = False 'TODO SJL 03/04/20 This variable is never checked or set to true, can we remove?
 
-    ''' <summary>   If true then 'clsRFunction.ToScript' and 'clsROperator.ToScript' return a string 
-    '''             that can be passed to R (i.e. double quotes are replaced with single quotes, 
+    ''' <summary>   If true then 'clsRFunction.ToScript' and 'clsROperator.ToScript' return a string
+    '''             that can be passed to R (i.e. double quotes are replaced with single quotes,
     '''             and the string is wrapped in double quotes).
     '''             <para>
     '''             For example: <c>seq(from = 1, to = 10)</c> becomes <c>"seq(from = 1, to = 10)"</c>.
     '''             </para><para>
-    '''             Note: if true then the returned string can no longer be used for the 
+    '''             Note: if true then the returned string can no longer be used for the
     '''             function or its parameters because it will not produce the correct script
     '''             (i.e. it should not be true if 'bToBeAssigned' or 'bIsAssigned' is true.</para>
     '''             </summary>
@@ -166,20 +169,19 @@ Public Class RCodeStructure
     ''' <summary>   Event queue for all listeners interested in ParametersChanged events. </summary>
     Public Event ParametersChanged() 'TODO SJL 03/04/20 Is this used? Can it be removed?
 
-    ''' <summary>   Executes the parameters changed action. 
+    ''' <summary>   Executes the parameters changed action.
     '''             </summary>
     Protected Sub OnParametersChanged()
         RaiseEvent ParametersChanged()
         'TODO SJL 03/04/20 Is this still used? Can it be removed?
-        ' Currently only used when this is in RSyntax as a before/after code to determine if 
-        ' position code should be run in the list. This is because RSyntax has iCallType and 
+        ' Currently only used when this is in RSyntax as a before/after code to determine if
+        ' position code should be run in the list. This is because RSyntax has iCallType and
         ' bExcludeAssignedFunctionOutput which it uses for the base code. Eventually migrate these out of RSyntax.
     End Sub
 
-
     '''--------------------------------------------------------------------------------------------
-    ''' <summary> Deprecated.   
-    ''' Sets the 'assignTo' variables. 
+    ''' <summary> Deprecated.
+    ''' Sets the 'assignTo' variables.
     ''' </summary>
     '''
     ''' <param name="strTemp">                      The new value for the assignment string. </param>
@@ -229,7 +231,6 @@ Public Class RCodeStructure
             Return
         End If
 
-
         If Not strTempDataframe = "" Then
             If bDataFrameList Then
                 SetAssignToDataFrameObject(strDataFrameToAssignTo:=strTemp,
@@ -242,7 +243,6 @@ Public Class RCodeStructure
             End If
             Return
         End If
-
 
         'for dialogs that produce objects shown to the output viewer
         'using this deprecated subroutine. call the SetAssignToRObject subroutine
@@ -287,7 +287,6 @@ Public Class RCodeStructure
         End If
 
     End Sub
-
 
     ''' <summary>
     ''' Gets the assign to variable
@@ -369,9 +368,9 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Resets all the 'AssignTo' variables. 
+    ''' <summary>   Resets all the 'AssignTo' variables.
     '''             String variables are set to "".
-    '''             Booleans are set to false. 
+    '''             Booleans are set to false.
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveAssignTo()
@@ -388,62 +387,62 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Creates and returns the assignment part of the R script associated with this 
-    '''             object. (i.e. the left side of the assignment, hereafter referred to as the 
+    ''' <summary>   Creates and returns the assignment part of the R script associated with this
+    '''             object. (i.e. the left side of the assignment, hereafter referred to as the
     '''             'assign-to script').
-    '''             The assign-to script may just be the name of the variable where the script 
-    '''             stores the output (e.g. 'my_stations'). 
-    '''             Or it may be a short R script, e.g. 
+    '''             The assign-to script may just be the name of the variable where the script
+    '''             stores the output (e.g. 'my_stations').
+    '''             Or it may be a short R script, e.g.
     '''             'data_book$get_columns_from_data(data_name="my_stations", col_names="Calc1")'.
     '''             <para>
     '''             This function is powerful but potentially confusing. It works as follows:
     '''             </para><para>
     '''             If the assign-to script is not needed then just returns <paramref name="strTemp"/>.
     '''             </para><para>
-    '''             Else if the assign-to script already already exists then returns the existing 
+    '''             Else if the assign-to script already already exists then returns the existing
     '''             assign-to script.
     '''             </para><para>
     '''             Else creates and returns a new assign-to script:
     '''             </para><para>
-    '''             First, adds a new line (that includes the assignment part) to  
-    '''             <paramref name="strScript"/> e.g. 
+    '''             First, adds a new line (that includes the assignment part) to
+    '''             <paramref name="strScript"/> e.g.
     '''             'new_RDS &lt;- readRDS(file=""C:/myDir/experimental_survey.RDS"")" &amp; vbCrLf'.
     '''             Note that the new line is appended to <paramref name="strScript"/>. This allows
-    '''             <paramref name="strScript"/> to be built up into a multi-line script through 
+    '''             <paramref name="strScript"/> to be built up into a multi-line script through
     '''             successive (potentially recursive) calls of this function.
-    '''             Note also that the right side of the assignment should be created by the 
+    '''             Note also that the right side of the assignment should be created by the
     '''             child's 'ToScript' function, and passed to this function via <paramref name="strTemp"/>.
     '''             </para><para>
-    '''             If the assign-to script requires an extra assign line (e.g. to assign to a 
-    '''             dataframe, column, model, graph, surv or table) then adds these extra elements. 
-    '''             The elements are added by creating an additional line of R script, and 
-    '''             appending to <paramref name="strScript"/>. The additional line of R script is 
+    '''             If the assign-to script requires an extra assign line (e.g. to assign to a
+    '''             dataframe, column, model, graph, surv or table) then adds these extra elements.
+    '''             The elements are added by creating an additional line of R script, and
+    '''             appending to <paramref name="strScript"/>. The additional line of R script is
     '''             generated by creating a new 'RFunction', and then generating the script for this
-    '''             new RFunction. Generating the script for the new 'RFunction' in turn generates 
+    '''             new RFunction. Generating the script for the new 'RFunction' in turn generates
     '''             a recursive call again to this function.
     '''             </para><para>
-    '''             This function has a return value (the assign-to string). It also returns the 
+    '''             This function has a return value (the assign-to string). It also returns the
     '''             entire R script via the 'ByRef' <paramref name="strScript"/> parameter. This
     '''             parameter can be thought of as a paragraph of R statements that, when executed,
     '''             generate the expected output for this object.
     '''             </para><para>
-    '''             This function sets the value of several data members. It stores the new 
+    '''             This function sets the value of several data members. It stores the new
     '''             assign-to script in 'strAssignTo' (replacing the previous value stored).
     '''             This function also updates the 'bIsAssigned' and 'bToBeAssigned' flags that
     '''             store this object's assignment status.
     '''             </para></summary>
     '''
-    ''' <param name="strScript">    [in,out] (Optional) The existing script including any 
+    ''' <param name="strScript">    [in,out] (Optional) The existing script including any
     '''                             assignment part. This script may be multi-line.
-    '''                             If the assignment requires extra elements (e.g. columns, models, 
-    '''                             graphs etc.) then this script is updated to include the 
+    '''                             If the assignment requires extra elements (e.g. columns, models,
+    '''                             graphs etc.) then this script is updated to include the
     '''                             addition of the new elements.
-    '''                             This script may be built up, line by line, by successive calls 
+    '''                             This script may be built up, line by line, by successive calls
     '''                             to this function.</param>
     ''' <param name="strTemp">      (Optional) The expression to assign (i.e. the right side of the
     '''                             assignment). </param>
     '''
-    ''' <returns>   If object needs to be assigned to, then returns the assign-to script. 
+    ''' <returns>   If object needs to be assigned to, then returns the assign-to script.
     '''             Else returns <paramref name="strTemp"/>. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
@@ -455,7 +454,7 @@ Public Class RCodeStructure
             Dim clsGetRObject As New RFunction
             Dim strRObject As String = _strAssignToObject
 
-            'Append the new script (including the intial assignment part) to 'strScript', e.g. 
+            'Append the new script (including the intial assignment part) to 'strScript', e.g.
             '    'my_stations <- rio::import(file=""C:/myDir/my_stations.csv"", stringsAsFactors=TRUE)" & vbCrLf'
             'Note1: The append allows 'strScript' to be built up into a multi-line string through successive calls of 'ToScript'
             'Note2: Initially, 'strAssignTo' is typically the name of the variable to assign the result of 'strTemp' to, e.g.
@@ -488,7 +487,7 @@ Public Class RCodeStructure
                 If Not bRequireCorrectLength Then
                     clsAddRObject.AddParameter("require_correct_length", "FALSE")
                 End If
-                ' add '$add_columns_to_data' parameters to 'strScript' 
+                ' add '$add_columns_to_data' parameters to 'strScript'
                 ' e.g. "row_names1 <- data_book$get_row_names(data_name=""survey"")" & vbCrLf & "data_book$add_columns_to_data(data_name=""survey"", col_name=""row_names1"", col_data=row_names1, before=TRUE)" & vbCrLf
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
 
@@ -517,8 +516,8 @@ Public Class RCodeStructure
                     clsAddRObject.AddParameter("data_tables", clsRFunctionParameter:=clsDataList, iPosition:=0)
                 End If
 
-                'append the next line of script to 'strScript' e.g. 
-                '     "my_stations <- rio::import(file=""C:/myFolder/my_stations.csv"", stringsAsFactors=TRUE)" & vbCrLf 
+                'append the next line of script to 'strScript' e.g.
+                '     "my_stations <- rio::import(file=""C:/myFolder/my_stations.csv"", stringsAsFactors=TRUE)" & vbCrLf
                 '      & "data_book$import_data(data_tables=list(my_stations=my_stations))" & vbCrLf
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
 
@@ -526,7 +525,7 @@ Public Class RCodeStructure
                 'ToDo link to frmMain
                 'clsGetRObject.SetRCommand(DataBookName & "$get_data_frame")
                 clsGetRObject.AddParameter("data_name", Chr(34) & _strAssignToName & Chr(34))
-                'Set 'strAssignTo' to final assign-to script 
+                'Set 'strAssignTo' to final assign-to script
                 ' e.g. "data_book$get_columns_from_data(data_name=""my_stations"", col_names=""Calc1"")"
                 strRObject = clsGetRObject.ToScript()
 
@@ -559,7 +558,7 @@ Public Class RCodeStructure
                     clsAddRObject.AddParameter("object", strParameterValue:=_strAssignToObject)
                 End If
 
-                'construct the scripts 
+                'construct the scripts
                 strScript = strScript & clsAddRObject.ToScript() & Environment.NewLine
                 strRObject = clsGetRObject.ToScript()
 
@@ -575,16 +574,16 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns an assignment statement of the form:
     '''             <code>
-    '''             <paramref name="strAssignTo"/> &lt;- <paramref name="strTemp"/> 
+    '''             <paramref name="strAssignTo"/> &lt;- <paramref name="strTemp"/>
     '''             </code>
     '''             If <paramref name="strTemp"/> is multiple lines then the assignment is done
-    '''             on <paramref name="strTemp"/>'s last line. All previous lines are returned 
+    '''             on <paramref name="strTemp"/>'s last line. All previous lines are returned
     '''             unchanged.
     '''             </summary>
     '''
-    ''' <param name="strAssignTo">  The variable to assign to (i.e. the left side of the 
+    ''' <param name="strAssignTo">  The variable to assign to (i.e. the left side of the
     '''                             assignment). </param>
-    ''' <param name="strTemp">      The expression to assign (i.e. the right side of the 
+    ''' <param name="strTemp">      The expression to assign (i.e. the right side of the
     '''                             assignment). </param>
     '''
     ''' <returns>   The constructed assignment statement. </returns>
@@ -612,7 +611,7 @@ Public Class RCodeStructure
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Creates and returns a new RParameter object. Child classes that override this
-    '''             function should return the parameter named <paramref name="strName"/>. 
+    '''             function should return the parameter named <paramref name="strName"/>.
     '''             </summary>
     '''
     ''' <param name="strName">  The name of the parameter to return (only used when this function
@@ -630,8 +629,8 @@ Public Class RCodeStructure
     '''             <para>Sets the parameter's argument to <b>one of</b> <paramref name="strParameterValue"/>,
     '''             <paramref name="clsRFunctionParameter"/>, <paramref name="clsROperatorParameter"/>,
     '''             or <paramref name="clsRCodeStructureParameter"/>.</para>
-    '''             Sets the parameter's position and include/exclude argument name flag to 
-    '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/> 
+    '''             Sets the parameter's position and include/exclude argument name flag to
+    '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/>
     '''             respectively.
     '''             </summary>
     '''
@@ -686,7 +685,7 @@ Public Class RCodeStructure
     '''                                     parameter in this object's parameter list. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overridable Sub AddParameterWithCodeStructure(Optional strParameterName As String = "", Optional strParameterValue As String = "", Optional clsRCodeObject As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
-        ' TODO Legacy - This should be call AddParameter but need to make it unambiguous with above. 
+        ' TODO Legacy - This should be call AddParameter but need to make it unambiguous with above.
         ' TODO SJL 03/04/20 I think this function has a bug: If strParameterValue is specified then the
         ' clsRFunctionParameter and clsROperatorParameter parameters will be ignored.
         If TypeOf (clsRCodeObject) Is RFunction Then
@@ -701,11 +700,11 @@ Public Class RCodeStructure
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   If the object already has a parameter with the same name then changes the 
+    ''' <summary>   If the object already has a parameter with the same name then changes the
     '''             parameter's value to the value in <paramref name="clsNewParam"/>.
     '''             Else adds <paramref name="clsNewParam"/> to the object as a new parameter.
     '''             <para>
-    '''             This function also ensures that there is no existing parameter with the same 
+    '''             This function also ensures that there is no existing parameter with the same
     '''             position as the newly added/updated parameter.</para>
     '''             </summary>
     '''
@@ -756,16 +755,16 @@ Public Class RCodeStructure
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Ensures that there is no existing parameter with position <paramref name="iPosition"/>.
-    '''             It does this by searching for a parameter with position <paramref name="iPosition"/>. 
-    '''             If it finds one then it increments that parameter's position (and if needed, 
-    '''             also increments the position of any subsequent parameters to avoid new 
+    '''             It does this by searching for a parameter with position <paramref name="iPosition"/>.
+    '''             If it finds one then it increments that parameter's position (and if needed,
+    '''             also increments the position of any subsequent parameters to avoid new
     '''             duplications).
     '''             <para>
     '''             This function assumes that each existing parameter has a unique position.
     '''             </para> </summary>
     '''
     ''' <param name="iPosition">    The position that needs to be made free for a new parameter.
-    '''                             If this parameter is less than zero then this function does 
+    '''                             If this parameter is less than zero then this function does
     '''                             nothing.</param>
     '''--------------------------------------------------------------------------------------------
     Private Sub ShiftParametersPositions(iPosition As Integer)
@@ -782,7 +781,7 @@ Public Class RCodeStructure
                 For i As Integer = 0 To clsParameters.Count - 1
                     'If an existing parameter already has the required position
                     If clsParameters(i).Position = iPosition Then
-                        ' The parameter with the duplicated position will have its position incremented. 
+                        ' The parameter with the duplicated position will have its position incremented.
                         ' But this in turn may duplicate the position of another parameter.
                         ' So increment 'iPosition' so that this duplication is also checked for.
                         iPosition = iPosition + 1 ' TODO SJL 03/04/20 if there are more duplicates of iPosition then we won't find them. Should we check for this?
@@ -821,7 +820,7 @@ Public Class RCodeStructure
     ''' <param name="clsRelative">  The second parameter. </param>
     '''
     ''' <returns>   If the 2 parameters have the same position then returns 0.
-    '''             If <paramref name="clsMain"/>'s position is less than 
+    '''             If <paramref name="clsMain"/>'s position is less than
     '''             <paramref name="clsRelative"/>'s position, then returns -1.
     '''             Else returns 1. </returns>
     '''--------------------------------------------------------------------------------------------
@@ -839,7 +838,7 @@ Public Class RCodeStructure
         End If
     End Function
 
-    ''' <summary>   Removes all parameters that do not have a specified position 
+    ''' <summary>   Removes all parameters that do not have a specified position
     '''             (i.e. parameter's position is -1).
     '''             </summary>
     Public Sub RemoveUnorderedParameters()
@@ -862,9 +861,9 @@ Public Class RCodeStructure
     Public Overridable Sub RemoveParameterByName(strArgName As String)
         Dim clsParam As RParameter
 
-        ' TODO SJL 03/04/20 If there is no parameter with the required name then Find returns a default 
+        ' TODO SJL 03/04/20 If there is no parameter with the required name then Find returns a default
         '     RParameter, is this a problem?
-        '     Remove will then try and remove this default parameter. It returns False if the removal 
+        '     Remove will then try and remove this default parameter. It returns False if the removal
         '     fails. Should we check this return value?
         If Not clsParameters Is Nothing Then
             clsParam = clsParameters.Find(Function(x) x.strArgumentName = strArgName)
@@ -882,9 +881,9 @@ Public Class RCodeStructure
     Public Overridable Sub RemoveParameterByPosition(iPosition As Integer)
         Dim clsParam As RParameter
 
-        ' TODO SJL 03/04/20 If there is no parameter with the required position then Find returns a default 
+        ' TODO SJL 03/04/20 If there is no parameter with the required position then Find returns a default
         '     RParameter, is this a problem?
-        '     Remove will then try and remove this default parameter. It returns False if the removal 
+        '     Remove will then try and remove this default parameter. It returns False if the removal
         '     fails. Should we check this return value?
         If Not clsParameters Is Nothing Then
             clsParam = clsParameters.Find(Function(x) x.Position = iPosition)
@@ -934,7 +933,7 @@ Public Class RCodeStructure
 
     ''' <summary>   Clears this object to its blank/initial state. </summary>
     Public Overridable Sub Clear()
-        'TODO legacy  tidy up iPosition 
+        'TODO legacy  tidy up iPosition
         iPosition = -1
         iCallType = 0
         bExcludeAssignedFunctionOutput = True
@@ -987,8 +986,8 @@ Public Class RCodeStructure
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adds this object and its associated assign script to <paramref name="lstCodes"/>
     '''             and <paramref name="lstValues"/> respectively.<para>
-    '''             If this object's parameters also contain functions or operators then also 
-    '''             recursively add their respective RCodeStructure objects and associated assign 
+    '''             If this object's parameters also contain functions or operators then also
+    '''             recursively add their respective RCodeStructure objects and associated assign
     '''             scripts to the respective lists.
     '''             </para> </summary>
     '''
@@ -1010,4 +1009,5 @@ Public Class RCodeStructure
             clsTempParam.GetAllAssignTo(lstCodes, lstValues)
         Next
     End Sub
+
 End Class

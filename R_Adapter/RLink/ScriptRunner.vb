@@ -1,22 +1,16 @@
-﻿Imports Microsoft.VisualBasic
-Imports R_Adapter2.R_Adapter.Constant
-Imports R_Link.ScriptBuilder
+﻿Imports R_Adapter2.R_Adapter.Constant
 Imports RDotNet
-Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
-Imports System.Net.Mime.MediaTypeNames
 
 Namespace R_Adapter.RLink
+
     Public NotInheritable Class ScriptRunner
         Inherits RConnector
 
-        Event OutputAdded()
-        Event StatusChanged()
-        Event DatabookRefresh()
+        Event OutputAdded(script As String, output As String, isFile As Boolean, displayInExternalViewer As Boolean)
 
+        Event StatusChanged(status As String)
+
+        Event DatabookRefresh()
 
         Private Sub New()
         End Sub
@@ -36,8 +30,7 @@ Namespace R_Adapter.RLink
             End Get
         End Property
 
-
-        Public HelperFunctions As HelperFunction = New HelperFunction()
+        Public HelperFunctions As AdvancedFunction = New AdvancedFunction()
 
         Public Sub ConfigureREngine(ByVal rSetupOptions As RSetupOptions)
             SetEnviromentVariables(rSetupOptions.RPath, rSetupOptions.RHome)
@@ -54,7 +47,7 @@ Namespace R_Adapter.RLink
                 'Select Case iCommentPos
                 '    Case 0
                 '        Continue For
-                '    Case Object _ When iCommentPos > 0 
+                '    Case Object _ When iCommentPos > 0
                 '        test = strScriptLine.Substring(0, iCommentPos - 1)
                 '        Exit Select
                 'End Select
@@ -114,8 +107,14 @@ Namespace R_Adapter.RLink
             RaiseEvent DatabookRefresh()
         End Sub
 
-        Public Sub RunScriptNoResult(ByVal strScript As String)
-            Evaluate(strScript)
+        Private Function AddCommentToScript(script As String, comment As String) As String
+            Return If(String.IsNullOrEmpty(comment), script, GetFormattedComment(comment) & Environment.NewLine & script)
+        End Function
+
+        Public Sub RunScriptNoResult(script As String, comment As String)
+            Evaluate(script)
+            RaiseEvent DatabookRefresh()
+            RaiseEvent OutputAdded(AddCommentToScript(script, comment), "", False, False)
         End Sub
 
         Public Function RunScriptGetTemporaryVariable(ByVal strScript As String) As String
@@ -132,7 +131,6 @@ Namespace R_Adapter.RLink
                     Dim strTemp As String = String.Join(Environment.NewLine, expTemp.AsCharacter())
                     strOutput = strOutput & strTemp & Environment.NewLine
                 End If
-
             Catch e As Exception
             End Try
 
@@ -180,7 +178,6 @@ Namespace R_Adapter.RLink
                         End If
                     End If
                 End If
-
             Catch e As Exception
             End Try
 
@@ -205,7 +202,6 @@ Namespace R_Adapter.RLink
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
                     strOutput = strOutput & strTemp & Environment.NewLine
                 End If
-
             Catch e As Exception
             End Try
 
@@ -240,14 +236,13 @@ Namespace R_Adapter.RLink
                         End If
                     End If
                 End If
-
             Catch e As Exception
             End Try
 
             Return strOutput
         End Function
 
-        Public Function RunInternalScriptGetString(ByVal strScript As String, ByVal Optional strVariableName As String = ".temp_value") As String
+        Public Function RunInternalScriptGetString(strScript As String, Optional strVariableName As String = ".temp_value") As String
             Dim expTemp As SymbolicExpression
             expTemp = RunInternalScriptGetValue(strScript, strVariableName)
 
@@ -258,12 +253,33 @@ Namespace R_Adapter.RLink
             End If
         End Function
 
+        Public Function RunInternalScriptGetInteger(strScript As String, Optional strVariableName As String = ".temp_value") As Integer
+            Dim expTemp As SymbolicExpression
+            expTemp = RunInternalScriptGetValue(strScript, strVariableName)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                Return expTemp.AsNumeric(0)
+            Else
+                Return 0 'Defaults to 0 if value cannot be got
+            End If
+        End Function
+
         Public Function RunInternalScriptGetStringArray(ByVal strScript As String, ByVal Optional strVariableName As String = ".temp_value") As String()
             Dim expTemp As SymbolicExpression
             expTemp = RunInternalScriptGetValue(strScript, strVariableName)
 
             If expTemp IsNot Nothing AndAlso expTemp.Type <> RDotNet.Internals.SymbolicExpressionType.Null Then
                 Return expTemp.AsCharacter().ToArray()
+            Else
+                Return Nothing
+            End If
+        End Function
+
+        Public Function RunInternalScriptGetIntegerArray(ByVal strScript As String, ByVal Optional strVariableName As String = ".temp_value") As Integer()
+            Dim expTemp As SymbolicExpression
+            expTemp = RunInternalScriptGetValue(strScript, strVariableName)
+
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> RDotNet.Internals.SymbolicExpressionType.Null Then
+                Return expTemp.AsInteger().ToArray()
             Else
                 Return Nothing
             End If
@@ -301,7 +317,7 @@ Namespace R_Adapter.RLink
             End If
         End Function
 
-        Public Function RunInternalScriptGetValue(ByVal strScript As String, ByVal Optional strVariableName As String = "test") As SymbolicExpression
+        Private Function RunInternalScriptGetValue(ByVal strScript As String, ByVal Optional strVariableName As String = "test") As SymbolicExpression
             Dim expTemp As SymbolicExpression
             Dim strCommand As String
             strCommand = strVariableName & " <- " & strScript
@@ -311,14 +327,25 @@ Namespace R_Adapter.RLink
             Return expTemp
         End Function
 
-        Public Function RunInternalScriptGetBoolean(ByVal strScript As String, ByVal Optional strVariableName As String = ".temp_value") As Boolean?
+        Public Function RunInternalScriptGetDataFrame(ByVal strScript As String, ByVal Optional strVariableName As String = ".temp_value") As DataFrame
+            'Currently passing data frame. This may need to change so there is no reference to r.net passed out
             Dim expTemp As SymbolicExpression
             expTemp = RunInternalScriptGetValue(strScript, strVariableName)
 
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                Return expTemp.AsDataFrame
+            Else
+                Return Nothing
+            End If
+        End Function
+
+        Public Function RunInternalScriptGetBoolean(ByVal strScript As String, ByVal Optional strVariableName As String = ".temp_value") As Boolean
+            Dim expTemp As SymbolicExpression
+            expTemp = RunInternalScriptGetValue(strScript, strVariableName)
             If expTemp IsNot Nothing AndAlso expTemp.Type <> RDotNet.Internals.SymbolicExpressionType.Null Then
                 Return expTemp.AsLogical()(0)
             Else
-                Return Nothing
+                Return False
             End If
         End Function
 
@@ -338,7 +365,6 @@ Namespace R_Adapter.RLink
             End If
             Return strDataType
         End Function
-
 
         Public Function ConnectAndCheckVersion(ByVal expectedMajorVersion As String, ByVal expectedMinorVersion As String) As Boolean
             Dim bClose As Boolean = Connect()
@@ -405,6 +431,7 @@ Namespace R_Adapter.RLink
             End If
             Return strTemp
         End Function
-    End Class
-End Namespace
 
+    End Class
+
+End Namespace
