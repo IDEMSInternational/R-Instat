@@ -42,7 +42,6 @@ Public Class dlgHideDataframes
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        CountLevels()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -61,20 +60,12 @@ Public Class dlgHideDataframes
         ucrPnlHideUnhide.AddParameterValuesCondition(rdoHideDataFrame, "checked", "rdoHide")
         ucrPnlHideUnhide.AddParameterValuesCondition(rdoUnhideDataFrame, "checked", "rdoUnhide")
 
-        Dim lstControlsHidden As New List(Of Control)
-        lstControlsHidden.Add(lblHiddenDataFrames)
-        lstControlsHidden.Add(lblHiddenNumber)
-        ucrReceiverMultiple.SetLinkedDisplayControl(lstControlsHidden)
-        Dim lstControlsUnhidden As New List(Of Control)
-        lstControlsUnhidden.Add(lblUnhideDataFrame)
-        lstControlsUnhidden.Add(lblUnHiddenNumber)
-        ucrReceiverMultipleUnhide.SetLinkedDisplayControl(lstControlsUnhidden)
+        ucrReceiverMultiple.SetLinkedDisplayControl(lblHiddenDataFrames)
+        ucrReceiverMultipleUnhide.SetLinkedDisplayControl(lblUnhideDataFrame)
 
         ucrPnlHideUnhide.AddToLinkedControls(ucrReceiverMultiple, {rdoHideDataFrame}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlHideUnhide.AddToLinkedControls(ucrReceiverMultipleUnhide, {rdoUnhideDataFrame}, bNewLinkedHideIfParameterMissing:=True)
 
-        lblHiddenNumber.ForeColor = Color.Red
-        lblUnHiddenNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -151,7 +142,6 @@ Public Class dlgHideDataframes
 
     Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged
         TestOKEnabled()
-        CountLevels()
     End Sub
 
     Private Sub ucrPnlHideUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHideUnhide.ControlValueChanged
@@ -176,7 +166,6 @@ Public Class dlgHideDataframes
     Private Sub ucrReceiverMultipleUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleUnhide.ControlValueChanged
         SetHiddenColumns()
         TestOKEnabled()
-        CountLevels()
         clsDataUnhideOperator.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
     End Sub
 
@@ -185,12 +174,4 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.Clear()
     End Sub
 
-    Private Sub CountLevels()
-
-        lblHiddenNumber.Text = " " & ucrReceiverMultiple.Count
-        lblHiddenNumber.Visible = ucrReceiverMultiple.Count > 0
-
-        lblUnHiddenNumber.Text = " " & ucrReceiverMultipleUnhide.Count
-        lblUnHiddenNumber.Visible = ucrReceiverMultipleUnhide.Count > 0
-    End Sub
 End Class

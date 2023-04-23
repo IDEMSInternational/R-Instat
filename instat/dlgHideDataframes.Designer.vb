@@ -48,8 +48,6 @@ Partial Class dlgHideDataframes
         Me.ucrPnlHideUnhide = New instat.UcrPanel()
         Me.ucrReceiverMultipleUnhide = New instat.ucrReceiverMultiple()
         Me.lblUnhideDataFrame = New System.Windows.Forms.Label()
-        Me.lblHiddenNumber = New System.Windows.Forms.Label()
-        Me.lblUnHiddenNumber = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -164,34 +162,12 @@ Partial Class dlgHideDataframes
         Me.lblUnhideDataFrame.TabIndex = 10
         Me.lblUnhideDataFrame.Text = "Unhidden Data Frame(s):"
         '
-        'lblHiddenNumber
-        '
-        Me.lblHiddenNumber.AutoSize = True
-        Me.lblHiddenNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHiddenNumber.Location = New System.Drawing.Point(349, 47)
-        Me.lblHiddenNumber.Name = "lblHiddenNumber"
-        Me.lblHiddenNumber.Size = New System.Drawing.Size(21, 13)
-        Me.lblHiddenNumber.TabIndex = 11
-        Me.lblHiddenNumber.Text = "DF"
-        '
-        'lblUnHiddenNumber
-        '
-        Me.lblUnHiddenNumber.AutoSize = True
-        Me.lblUnHiddenNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUnHiddenNumber.Location = New System.Drawing.Point(349, 47)
-        Me.lblUnHiddenNumber.Name = "lblUnHiddenNumber"
-        Me.lblUnHiddenNumber.Size = New System.Drawing.Size(21, 13)
-        Me.lblUnHiddenNumber.TabIndex = 12
-        Me.lblUnHiddenNumber.Text = "DF"
-        '
         'dlgHideDataframes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 256)
-        Me.Controls.Add(Me.lblUnHiddenNumber)
-        Me.Controls.Add(Me.lblHiddenNumber)
         Me.Controls.Add(Me.rdoHideDataFrame)
         Me.Controls.Add(Me.rdoUnhideDataFrame)
         Me.Controls.Add(Me.lblHiddenDataFrames)
@@ -224,6 +200,4 @@ Partial Class dlgHideDataframes
     Friend WithEvents ucrPnlHideUnhide As UcrPanel
     Friend WithEvents ucrReceiverMultipleUnhide As ucrReceiverMultiple
     Friend WithEvents lblUnhideDataFrame As Label
-    Friend WithEvents lblUnHiddenNumber As Label
-    Friend WithEvents lblHiddenNumber As Label
 End Class
