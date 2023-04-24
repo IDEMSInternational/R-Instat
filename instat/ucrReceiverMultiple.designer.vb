@@ -40,6 +40,7 @@ Partial Class ucrReceiverMultiple
         Me.MenuStripDelete = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblNumber = New System.Windows.Forms.Label()
         Me.MenuStripDelete.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -79,20 +80,32 @@ Partial Class ucrReceiverMultiple
         Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
+        'lblNumber
+        '
+        Me.lblNumber.AutoSize = True
+        Me.lblNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNumber.Location = New System.Drawing.Point(117, 0)
+        Me.lblNumber.Name = "lblNumber"
+        Me.lblNumber.Size = New System.Drawing.Size(0, 13)
+        Me.lblNumber.TabIndex = 8
+        '
         'ucrReceiverMultiple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.lblNumber)
         Me.Controls.Add(Me.lstSelectedVariables)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrReceiverMultiple"
         Me.Size = New System.Drawing.Size(120, 100)
         Me.MenuStripDelete.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lstSelectedVariables As ListView
     Friend WithEvents MenuStripDelete As ContextMenuStrip
     Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblNumber As Label
 End Class
