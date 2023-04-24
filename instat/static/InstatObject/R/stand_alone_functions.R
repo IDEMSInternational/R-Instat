@@ -2902,6 +2902,9 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
   else return(sprintf("file://%s", file))
 }
 
-
+# Function used in <<< DLG NAME >>> as `fun` parameter value
+stat_summary_fun <- function(y) {
+  o <- boxplot.stats(y)$out; if(length(o) == 0) NA else o
+}
 
 
