@@ -477,7 +477,16 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub toolStripMenuItemGeomTextOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemGeomTextOptions.Click
+        TextOptions()
         openSdgLayerOptions(clsGeomLabelFunction)
+    End Sub
+
+    Private Sub TextOptions()
+        If Not toolStripMenuItemGeomTextOptions.CheckOnClick Then
+            clsBaseOperator.RemoveParameterByName(strGeomLabelParameterName)
+        Else
+            clsBaseOperator.AddParameter(strGeomLabelParameterName, clsRFunctionParameter:=clsGeomLabelFunction, iPosition:=3)
+        End If
     End Sub
 
     Private Sub DialogueSize()
