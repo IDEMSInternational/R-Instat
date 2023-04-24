@@ -581,7 +581,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged, ucrReceiverForDate.ControlValueChanged,
-            ucrReceiverDayTwo.ControlValueChanged, ucrReceiverDayTwo.ControlValueChanged
+            ucrReceiverDayTwo.ControlValueChanged, ucrReceiverDayTwo.ControlValueChanged ', ucrReceiverYearThree.ControlValueChanged, ucrReceiverMonthThree.ControlValueChanged, ucrReceiverDayThree.ControlValueChanged
         GroupBoxSettings()
     End Sub
 
