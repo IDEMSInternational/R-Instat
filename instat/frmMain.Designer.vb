@@ -2957,7 +2957,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuTbLogScript, Me.mnuMetadata, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuLastGraph, Me.mnuTbLogScript, Me.mnuMetadata, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
@@ -3057,40 +3057,42 @@ Partial Class frmMain
         'mnuTbLast10Dialogs
         '
         Me.mnuTbLast10Dialogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbLast10Dialogs.DropDownButtonWidth = 16
         Me.mnuTbLast10Dialogs.Image = Global.instat.My.Resources.Resources.last10dialogs
         Me.mnuTbLast10Dialogs.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbLast10Dialogs.Name = "mnuTbLast10Dialogs"
-        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(46, 34)
+        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(51, 34)
         Me.mnuTbLast10Dialogs.Text = "ToolStripSplitButton3"
         Me.mnuTbLast10Dialogs.ToolTipText = "View/Edit Last Dialogue"
         '
         'mnuLastGraph
         '
         Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuLastGraph.DropDownButtonWidth = 16
         Me.mnuLastGraph.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNormalViewer, Me.mnuploty, Me.mnuRViewer})
         Me.mnuLastGraph.Image = CType(resources.GetObject("mnuLastGraph.Image"), System.Drawing.Image)
         Me.mnuLastGraph.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuLastGraph.Name = "mnuLastGraph"
-        Me.mnuLastGraph.Size = New System.Drawing.Size(46, 34)
+        Me.mnuLastGraph.Size = New System.Drawing.Size(51, 34)
         Me.mnuLastGraph.Text = "ToolStripSplitButton3"
         Me.mnuLastGraph.ToolTipText = "View Last Graph"
         '
         'mnuNormalViewer
         '
         Me.mnuNormalViewer.Name = "mnuNormalViewer"
-        Me.mnuNormalViewer.Size = New System.Drawing.Size(128, 22)
+        Me.mnuNormalViewer.Size = New System.Drawing.Size(180, 22)
         Me.mnuNormalViewer.Text = "Viewer..."
         '
         'mnuploty
         '
         Me.mnuploty.Name = "mnuploty"
-        Me.mnuploty.Size = New System.Drawing.Size(128, 22)
+        Me.mnuploty.Size = New System.Drawing.Size(180, 22)
         Me.mnuploty.Text = "Plotly..."
         '
         'mnuRViewer
         '
         Me.mnuRViewer.Name = "mnuRViewer"
-        Me.mnuRViewer.Size = New System.Drawing.Size(128, 22)
+        Me.mnuRViewer.Size = New System.Drawing.Size(180, 22)
         Me.mnuRViewer.Text = "R Viewer..."
         '
         'separator2
@@ -4265,7 +4267,7 @@ Partial Class frmMain
         'mnuStructuredLow_FlowDefine
         '
         Me.mnuStructuredLow_FlowDefine.Name = "mnuStructuredLow_FlowDefine"
-        Me.mnuStructuredLow_FlowDefine.Size = New System.Drawing.Size(180, 22)
+        Me.mnuStructuredLow_FlowDefine.Size = New System.Drawing.Size(117, 22)
         Me.mnuStructuredLow_FlowDefine.Text = "Define..."
         '
         'mnuStructuredSurvival
@@ -4292,19 +4294,19 @@ Partial Class frmMain
         'mnuStructuredTimeSeriesDefine
         '
         Me.mnuStructuredTimeSeriesDefine.Name = "mnuStructuredTimeSeriesDefine"
-        Me.mnuStructuredTimeSeriesDefine.Size = New System.Drawing.Size(180, 22)
+        Me.mnuStructuredTimeSeriesDefine.Size = New System.Drawing.Size(119, 22)
         Me.mnuStructuredTimeSeriesDefine.Text = "Define..."
         '
         'ToolStripSeparator60
         '
         Me.ToolStripSeparator60.Name = "ToolStripSeparator60"
-        Me.ToolStripSeparator60.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator60.Size = New System.Drawing.Size(116, 6)
         '
         'mnuStructuredTimeSeriesDescribe
         '
         Me.mnuStructuredTimeSeriesDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesDescribeOneVariable, Me.mnuStructuredTimeSeriesDescribeGeneral})
         Me.mnuStructuredTimeSeriesDescribe.Name = "mnuStructuredTimeSeriesDescribe"
-        Me.mnuStructuredTimeSeriesDescribe.Size = New System.Drawing.Size(180, 22)
+        Me.mnuStructuredTimeSeriesDescribe.Size = New System.Drawing.Size(119, 22)
         Me.mnuStructuredTimeSeriesDescribe.Text = "Describe"
         '
         'mnuStructuredTimeSeriesDescribeOneVariable
@@ -4322,13 +4324,13 @@ Partial Class frmMain
         'ToolStripSeparator61
         '
         Me.ToolStripSeparator61.Name = "ToolStripSeparator61"
-        Me.ToolStripSeparator61.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator61.Size = New System.Drawing.Size(116, 6)
         '
         'mnuStructuredTimeSeriesModel
         '
         Me.mnuStructuredTimeSeriesModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredTimeSeriesModelOneVariable, Me.mnuStructuredTimeSeriesModelGeneral})
         Me.mnuStructuredTimeSeriesModel.Name = "mnuStructuredTimeSeriesModel"
-        Me.mnuStructuredTimeSeriesModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuStructuredTimeSeriesModel.Size = New System.Drawing.Size(119, 22)
         Me.mnuStructuredTimeSeriesModel.Text = "Model"
         '
         'mnuStructuredTimeSeriesModelOneVariable
@@ -4346,7 +4348,7 @@ Partial Class frmMain
         'ToolStripSeparator62
         '
         Me.ToolStripSeparator62.Name = "ToolStripSeparator62"
-        Me.ToolStripSeparator62.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator62.Size = New System.Drawing.Size(116, 6)
         '
         'ToolStripSeparator63
         '
