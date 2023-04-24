@@ -587,7 +587,7 @@ Partial Class ucrDataView
         '
         Me.ViewSheet.Name = "ViewSheet"
         Me.ViewSheet.Size = New System.Drawing.Size(180, 22)
-        Me.ViewSheet.Text = "View Data Frame"
+        Me.ViewSheet.Text = "R Viewer"
         '
         'ToolStripSeparator12
         '
