@@ -206,6 +206,7 @@ Public Class dlgAddComment
             ucrChkMakeColumnIntoKey.Checked = True
         End If
     End Sub
+
     Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
         AddRemoveKeyFromAfterCodes()
         IdentifyKey()
