@@ -467,9 +467,10 @@ Public Class dlgMakeDate
 
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
-
-            If lstRecognisedValues.Count > 0 Then
+            Dim lstRecognisedValues As List(Of String) = dctRecognisedTypes.Item(ucrTempReceiver.Tag)
+            If IsNothing(lstRecognisedValues) Then
+                Continue For
+            End If
                 For Each lviTempVariable As ListViewItem In ucrSelectorMakeDate.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
                         If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
