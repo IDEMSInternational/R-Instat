@@ -331,7 +331,6 @@ Public Class dlgMakeDate
         clsDefaultFunction = New RFunction
         clsConcFunction = New RFunction
 
-
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
