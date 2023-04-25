@@ -32,8 +32,6 @@ Public Class dlgMakeDate
     Private clsConcFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
-
-
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
