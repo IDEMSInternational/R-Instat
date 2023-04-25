@@ -60,7 +60,6 @@ Public Class dlgMakeDate
         Dim kvpDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("day", {"day", "jour"}.ToList())
         Dim kvpDOY As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("doy", {"doy", "doy_366"}.ToList())
 
-
         lstRecognisedTypes.AddRange({kvpYear, kvpMonth, kvpDay, kvpDOY, kvpDate})
         lstReceivers.AddRange({ucrReceiverDayThree, ucrReceiverDayTwo, ucrReceiverForDate, ucrReceiverMonthThree, ucrReceiverYearThree, ucrReceiverYearTwo})
 
