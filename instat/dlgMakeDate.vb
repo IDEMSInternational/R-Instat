@@ -16,7 +16,6 @@
 
 Imports instat.Translations
 Imports System.Text.RegularExpressions
-Imports RDotNet
 Public Class dlgMakeDate
     Public clsPaste As New RFunction
     Public bFirstLoad As Boolean = True
