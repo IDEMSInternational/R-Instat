@@ -23,7 +23,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
-    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+   Dim dctRecognisedTypes As New Dictionary(Of String, List(Of String))
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate As New RFunction
