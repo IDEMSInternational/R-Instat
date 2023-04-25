@@ -476,10 +476,7 @@ Public Class dlgMakeDate
                             Exit For
                         End If
                     Next
-                    If bFound Then
-                        bFound = False
-                        Exit For
-                    End If
+                If bFound Then Exit For
                 Next
             End If
         Next
