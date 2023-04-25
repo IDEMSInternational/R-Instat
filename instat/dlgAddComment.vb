@@ -179,6 +179,7 @@ Public Class dlgAddComment
         strSelectedColumn = strColumn
         bUseSelectedPosition = True
     End Sub
+
     Private Sub AddRemoveKeyFromAfterCodes()
 
         ucrBase.clsRsyntax.ClearCodes()
