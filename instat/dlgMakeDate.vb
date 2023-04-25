@@ -63,7 +63,6 @@ Public Class dlgMakeDate
         lstRecognisedTypes.AddRange({kvpYear, kvpMonth, kvpDay, kvpDOY, kvpDate})
         lstReceivers.AddRange({ucrReceiverDayThree, ucrReceiverDayTwo, ucrReceiverForDate, ucrReceiverMonthThree, ucrReceiverYearThree, ucrReceiverYearTwo})
 
-
         ucrReceiverForDate.Tag = "date"
         ucrReceiverYearTwo.Tag = "year"
         ucrReceiverMonthThree.Tag = "month"
