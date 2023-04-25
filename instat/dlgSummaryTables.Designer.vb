@@ -43,6 +43,12 @@ Partial Class dlgSummaryTables
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoSummaryVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoFactorVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColumnFactor = New instat.UcrPanel()
         Me.ucrNudSigFigs = New instat.ucrNud()
         Me.grpMargin = New System.Windows.Forms.GroupBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
@@ -79,13 +85,6 @@ Partial Class dlgSummaryTables
         Me.ttMultipleResponse = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlColumnFactor = New instat.UcrPanel()
-        Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
-        Me.rdoFactorVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoSummaryVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoFactorSummary = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.grpPercentages.SuspendLayout()
@@ -126,7 +125,6 @@ Partial Class dlgSummaryTables
         'grpDisplay
         '
         Me.grpDisplay.Controls.Add(Me.ucrReceiverColumnFactor)
-        Me.grpDisplay.Controls.Add(Me.rdoFactorSummary)
         Me.grpDisplay.Controls.Add(Me.rdoVariable)
         Me.grpDisplay.Controls.Add(Me.rdoSummaryVariable)
         Me.grpDisplay.Controls.Add(Me.rdoFactorVariable)
@@ -140,6 +138,71 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.TabIndex = 11
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display Column Factors"
+        '
+        'ucrReceiverColumnFactor
+        '
+        Me.ucrReceiverColumnFactor.AutoSize = True
+        Me.ucrReceiverColumnFactor.frmParent = Me
+        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(140, 61)
+        Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
+        Me.ucrReceiverColumnFactor.Selector = Nothing
+        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverColumnFactor.strNcFilePath = ""
+        Me.ucrReceiverColumnFactor.TabIndex = 34
+        Me.ucrReceiverColumnFactor.ucrSelector = Nothing
+        '
+        'rdoVariable
+        '
+        Me.rdoVariable.AutoSize = True
+        Me.rdoVariable.Location = New System.Drawing.Point(14, 99)
+        Me.rdoVariable.Name = "rdoVariable"
+        Me.rdoVariable.Size = New System.Drawing.Size(63, 17)
+        Me.rdoVariable.TabIndex = 32
+        Me.rdoVariable.TabStop = True
+        Me.rdoVariable.Text = "Variable"
+        Me.rdoVariable.UseVisualStyleBackColor = True
+        '
+        'rdoSummaryVariable
+        '
+        Me.rdoSummaryVariable.AutoSize = True
+        Me.rdoSummaryVariable.Location = New System.Drawing.Point(14, 80)
+        Me.rdoSummaryVariable.Name = "rdoSummaryVariable"
+        Me.rdoSummaryVariable.Size = New System.Drawing.Size(109, 17)
+        Me.rdoSummaryVariable.TabIndex = 31
+        Me.rdoSummaryVariable.TabStop = True
+        Me.rdoSummaryVariable.Text = "Summary-Variable"
+        Me.rdoSummaryVariable.UseVisualStyleBackColor = True
+        '
+        'rdoFactorVariable
+        '
+        Me.rdoFactorVariable.AutoSize = True
+        Me.rdoFactorVariable.Location = New System.Drawing.Point(14, 61)
+        Me.rdoFactorVariable.Name = "rdoFactorVariable"
+        Me.rdoFactorVariable.Size = New System.Drawing.Size(96, 17)
+        Me.rdoFactorVariable.TabIndex = 30
+        Me.rdoFactorVariable.TabStop = True
+        Me.rdoFactorVariable.Text = "Factor Variable"
+        Me.rdoFactorVariable.UseVisualStyleBackColor = True
+        '
+        'rdoNoColumnFactor
+        '
+        Me.rdoNoColumnFactor.AutoSize = True
+        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(14, 42)
+        Me.rdoNoColumnFactor.Name = "rdoNoColumnFactor"
+        Me.rdoNoColumnFactor.Size = New System.Drawing.Size(110, 17)
+        Me.rdoNoColumnFactor.TabIndex = 29
+        Me.rdoNoColumnFactor.TabStop = True
+        Me.rdoNoColumnFactor.Text = "No Column Factor"
+        Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
+        '
+        'ucrPnlColumnFactor
+        '
+        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(11, 40)
+        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(124, 80)
+        Me.ucrPnlColumnFactor.TabIndex = 29
         '
         'ucrNudSigFigs
         '
@@ -533,82 +596,6 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorSummaryTables.TabIndex = 0
         '
-        'ucrPnlColumnFactor
-        '
-        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(11, 40)
-        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
-        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(124, 80)
-        Me.ucrPnlColumnFactor.TabIndex = 29
-        '
-        'rdoNoColumnFactor
-        '
-        Me.rdoNoColumnFactor.AutoSize = True
-        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(14, 42)
-        Me.rdoNoColumnFactor.Name = "rdoNoColumnFactor"
-        Me.rdoNoColumnFactor.Size = New System.Drawing.Size(110, 17)
-        Me.rdoNoColumnFactor.TabIndex = 29
-        Me.rdoNoColumnFactor.TabStop = True
-        Me.rdoNoColumnFactor.Text = "No Column Factor"
-        Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
-        '
-        'rdoFactorVariable
-        '
-        Me.rdoFactorVariable.AutoSize = True
-        Me.rdoFactorVariable.Location = New System.Drawing.Point(14, 61)
-        Me.rdoFactorVariable.Name = "rdoFactorVariable"
-        Me.rdoFactorVariable.Size = New System.Drawing.Size(96, 17)
-        Me.rdoFactorVariable.TabIndex = 30
-        Me.rdoFactorVariable.TabStop = True
-        Me.rdoFactorVariable.Text = "Factor Variable"
-        Me.rdoFactorVariable.UseVisualStyleBackColor = True
-        '
-        'rdoSummaryVariable
-        '
-        Me.rdoSummaryVariable.AutoSize = True
-        Me.rdoSummaryVariable.Location = New System.Drawing.Point(14, 80)
-        Me.rdoSummaryVariable.Name = "rdoSummaryVariable"
-        Me.rdoSummaryVariable.Size = New System.Drawing.Size(109, 17)
-        Me.rdoSummaryVariable.TabIndex = 31
-        Me.rdoSummaryVariable.TabStop = True
-        Me.rdoSummaryVariable.Text = "Summary-Variable"
-        Me.rdoSummaryVariable.UseVisualStyleBackColor = True
-        '
-        'rdoVariable
-        '
-        Me.rdoVariable.AutoSize = True
-        Me.rdoVariable.Location = New System.Drawing.Point(14, 99)
-        Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.Size = New System.Drawing.Size(63, 17)
-        Me.rdoVariable.TabIndex = 32
-        Me.rdoVariable.TabStop = True
-        Me.rdoVariable.Text = "Variable"
-        Me.rdoVariable.UseVisualStyleBackColor = True
-        '
-        'rdoFactorSummary
-        '
-        Me.rdoFactorSummary.AutoSize = True
-        Me.rdoFactorSummary.Location = New System.Drawing.Point(14, 80)
-        Me.rdoFactorSummary.Name = "rdoFactorSummary"
-        Me.rdoFactorSummary.Size = New System.Drawing.Size(68, 17)
-        Me.rdoFactorSummary.TabIndex = 33
-        Me.rdoFactorSummary.TabStop = True
-        Me.rdoFactorSummary.Text = "Summary"
-        Me.rdoFactorSummary.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverColumnFactor
-        '
-        Me.ucrReceiverColumnFactor.AutoSize = True
-        Me.ucrReceiverColumnFactor.frmParent = Me
-        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(140, 61)
-        Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
-        Me.ucrReceiverColumnFactor.Selector = Nothing
-        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverColumnFactor.strNcFilePath = ""
-        Me.ucrReceiverColumnFactor.TabIndex = 34
-        Me.ucrReceiverColumnFactor.ucrSelector = Nothing
-        '
         'dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -702,7 +689,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents rdoMultipleResponse As RadioButton
     Friend WithEvents ttMultipleResponse As ToolTip
     Friend WithEvents ucrReceiverColumnFactor As ucrReceiverSingle
-    Friend WithEvents rdoFactorSummary As RadioButton
     Friend WithEvents rdoVariable As RadioButton
     Friend WithEvents rdoSummaryVariable As RadioButton
     Friend WithEvents rdoFactorVariable As RadioButton
