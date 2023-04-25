@@ -70,7 +70,6 @@ Public Class dlgMakeDate
         ucrReceiverDayTwo.Tag = "doy"
         ucrReceiverYearThree.Tag = "year"
 
-
         clsHelp = New RFunction
 
         clsHelp.SetPackageName("utils")
