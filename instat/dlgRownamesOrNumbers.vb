@@ -33,6 +33,7 @@ Public Class dlgRowNamesOrNumbers
 
         If bReset Then
             SetDefaults()
+            IdentifyKey()
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -91,7 +92,7 @@ Public Class dlgRowNamesOrNumbers
         ucrChkMakeColumnIntoKey.SetText("Make the Column a Key for the Data Frame")
         ucrChkMakeColumnIntoKey.AddParameterValuesCondition(True, "add_key", "TRUE")
         ucrChkMakeColumnIntoKey.AddParameterValuesCondition(False, "add_key", "FALSE")
-
+        IdentifyKey()
         'ucrNewColumnName
         ucrNewColumnName.SetIsComboBox()
         ucrNewColumnName.SetPrefix("row")
@@ -138,6 +139,7 @@ Public Class dlgRowNamesOrNumbers
         ucrNewColumnName.AddAdditionalRCode(clsGetRowNamesFunction, bReset)
         ucrNewColumnName.SetRCode(clsAsNumericFunction, bReset)
         ucrChkAsNumeric.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        IdentifyKey()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -188,8 +190,17 @@ Public Class dlgRowNamesOrNumbers
         End If
     End Sub
 
+    Private Sub IdentifyKey()
+        If frmMain.clsRLink.IsVariablesMetadata(ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Key") Then
+            ucrChkMakeColumnIntoKey.Checked = False
+        Else
+            ucrChkMakeColumnIntoKey.Checked = True
+        End If
+    End Sub
+
     Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
         AddRemoveKeyFromAfterCodes()
+        IdentifyKey()
     End Sub
 
     Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
@@ -202,4 +213,7 @@ Public Class dlgRowNamesOrNumbers
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrSelectorRowNames_DataFrameChanged() Handles ucrSelectorRowNames.DataFrameChanged
+        IdentifyKey()
+    End Sub
 End Class
