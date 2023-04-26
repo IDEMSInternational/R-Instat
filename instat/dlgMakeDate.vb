@@ -481,14 +481,6 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
-        Dim lstValues As New List(Of String)
-        If dctRecognisedTypes.ContainsKey(strVariable) Then
-            lstValues = dctRecognisedTypes(strVariable)
-        End If
-        Return lstValues
-    End Function
-
     Private Sub ucrBase_ClickOk_(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         SetHistory()
     End Sub
