@@ -23,7 +23,7 @@ Public Class dlgMakeDate
     Private bUseSelectedColumn As Boolean = False
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
-   Dim dctRecognisedTypes As New Dictionary(Of String, List(Of String))
+    Dim dctRecognisedTypes As New Dictionary(Of String, List(Of String))
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay, clsDefaultDate, clsRDefaultDate As New RFunction
@@ -54,13 +54,12 @@ Public Class dlgMakeDate
         Dim dctMonthTwoItems As New Dictionary(Of String, String)
         Dim dctDateFormat As New Dictionary(Of String, String)
 
-        Dim kvpDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("date", {"date", "record"}.ToList())
-        Dim kvpYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("year", {"year", "yr"}.ToList())
-        Dim kvpMonth As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("month", {"month", "mon", "mois"}.ToList())
-        Dim kvpDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("day", {"day", "jour"}.ToList())
-        Dim kvpDOY As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("doy", {"doy", "doy_366"}.ToList())
+        dctRecognisedTypes.Add("date", {"date", "record"}.ToList())
+        dctRecognisedTypes.Add("year", {"year", "yr"}.ToList())
+        dctRecognisedTypes.Add("month", {"month", "mon", "mois"}.ToList())
+        dctRecognisedTypes.Add("day", {"day", "jour"}.ToList())
+        dctRecognisedTypes.Add("doy", {"doy", "doy_366"}.ToList())
 
-        lstRecognisedTypes.AddRange({kvpYear, kvpMonth, kvpDay, kvpDOY, kvpDate})
         lstReceivers.AddRange({ucrReceiverDayThree, ucrReceiverDayTwo, ucrReceiverForDate, ucrReceiverMonthThree, ucrReceiverYearThree, ucrReceiverYearTwo})
 
         ucrReceiverForDate.Tag = "date"
@@ -457,31 +456,39 @@ Public Class dlgMakeDate
 
     Private Sub AutoFillReceivers()
         Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorMakeDate.CurrentReceiver
+        Dim lstRecognisedValues As List(Of String)
 
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
             Dim bFound As Boolean = False
             ucrTempReceiver.SetMeAsReceiver()
-            Dim lstRecognisedValues As List(Of String) = dctRecognisedTypes.Item(ucrTempReceiver.Tag)
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
             If IsNothing(lstRecognisedValues) Then
                 Continue For
             End If
-                For Each lviTempVariable As ListViewItem In ucrSelectorMakeDate.lstAvailableVariable.Items
-                    For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
-                            Exit For
-                        End If
-                    Next
-                If bFound Then Exit For
+            For Each lviTempVariable As ListViewItem In ucrSelectorMakeDate.lstAvailableVariable.Items
+                For Each strValue As String In lstRecognisedValues
+                    If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                        bFound = True
+                        Exit For
+                    End If
                 Next
-            End If
+                If bFound Then Exit For
+            Next
         Next
 
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+        If dctRecognisedTypes.ContainsKey(strVariable) Then
+            lstValues = dctRecognisedTypes(strVariable)
+        End If
+        Return lstValues
+    End Function
 
     Private Sub ucrBase_ClickOk_(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         SetHistory()
@@ -606,7 +613,6 @@ Public Class dlgMakeDate
             grpFormats.Hide()
         End If
     End Sub
-
 
     Private Sub ucrSelectorMakeDate_DataFrameChanged() Handles ucrSelectorMakeDate.DataFrameChanged
         DataFrameParameter()
