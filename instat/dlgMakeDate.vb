@@ -456,13 +456,12 @@ Public Class dlgMakeDate
 
     Private Sub AutoFillReceivers()
         Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorMakeDate.CurrentReceiver
-        Dim lstRecognisedValues As List(Of String)
+        Dim lstRecognisedValues As List(Of String) = New List(Of String)
 
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
             Dim bFound As Boolean = False
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
-            If IsNothing(lstRecognisedValues) Then
+            If Not dctRecognisedTypes.TryGetValue(ucrTempReceiver.Tag, lstRecognisedValues) Then
                 Continue For
             End If
             For Each lviTempVariable As ListViewItem In ucrSelectorMakeDate.lstAvailableVariable.Items
