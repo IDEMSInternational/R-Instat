@@ -229,4 +229,10 @@ Public Class dlgRestrict
             ucrReceiverFilter.Clear()
         End If
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If rdoApplyAsSubset.Checked Then
+            SetDefaults()
+        End If
+    End Sub
 End Class

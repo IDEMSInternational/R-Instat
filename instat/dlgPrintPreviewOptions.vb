@@ -55,7 +55,8 @@ Public Class dlgPrintPreviewOptions
     End Sub
 
     Private Sub cmdPrtLog_Click(sender As Object, e As EventArgs) Handles cmdPrtLog.Click
-        printControl(frmLog.txtLog)
+        'TODO Eventually this option should print the log window, but this dialog is not called
+        'anywhere and appears to be under construction.
     End Sub
 
     Private Sub cmdPrtOutput_Click(sender As Object, e As EventArgs) Handles cmdPrtOutput.Click
@@ -74,7 +75,8 @@ Public Class dlgPrintPreviewOptions
         End Using
     End Sub
     Private Sub cmdPrevLog_Click(sender As Object, e As EventArgs) Handles cmdPrevLog.Click
-        previewControl(frmLog.txtLog)
+        'TODO Eventually this option should print the log window, but this dialog is not called
+        'anywhere and appears to be under construction.
     End Sub
 
     Private Sub cmdPrevOutput_Click(sender As Object, e As EventArgs) Handles cmdPrevOutput.Click
