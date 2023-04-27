@@ -221,7 +221,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelColour.AutoSize = True
         Me.lblLabelColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelColour.Location = New System.Drawing.Point(176, 439)
+        Me.lblLabelColour.Location = New System.Drawing.Point(176, 440)
         Me.lblLabelColour.Name = "lblLabelColour"
         Me.lblLabelColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLabelColour.TabIndex = 26
@@ -231,7 +231,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelSize.AutoSize = True
         Me.lblLabelSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelSize.Location = New System.Drawing.Point(280, 439)
+        Me.lblLabelSize.Location = New System.Drawing.Point(280, 440)
         Me.lblLabelSize.Name = "lblLabelSize"
         Me.lblLabelSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLabelSize.TabIndex = 56
@@ -251,7 +251,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopColour.AutoSize = True
         Me.lblLollipopColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopColour.Location = New System.Drawing.Point(220, 407)
+        Me.lblLollipopColour.Location = New System.Drawing.Point(220, 408)
         Me.lblLollipopColour.Name = "lblLollipopColour"
         Me.lblLollipopColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLollipopColour.TabIndex = 44
@@ -310,7 +310,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblPlace.AutoSize = True
         Me.lblPlace.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPlace.Location = New System.Drawing.Point(110, 368)
+        Me.lblPlace.Location = New System.Drawing.Point(123, 368)
         Me.lblPlace.Name = "lblPlace"
         Me.lblPlace.Size = New System.Drawing.Size(37, 13)
         Me.lblPlace.TabIndex = 47
@@ -464,7 +464,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputPlace.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPlace.GetSetSelectedIndex = -1
         Me.ucrInputPlace.IsReadOnly = False
-        Me.ucrInputPlace.Location = New System.Drawing.Point(153, 364)
+        Me.ucrInputPlace.Location = New System.Drawing.Point(166, 364)
         Me.ucrInputPlace.Name = "ucrInputPlace"
         Me.ucrInputPlace.Size = New System.Drawing.Size(88, 21)
         Me.ucrInputPlace.TabIndex = 53
@@ -484,7 +484,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverLabel.AutoSize = True
         Me.ucrReceiverLabel.frmParent = Me
-        Me.ucrReceiverLabel.Location = New System.Drawing.Point(266, 381)
+        Me.ucrReceiverLabel.Location = New System.Drawing.Point(266, 383)
         Me.ucrReceiverLabel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
         Me.ucrReceiverLabel.Selector = Nothing
@@ -499,7 +499,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelSize.GetSetSelectedIndex = -1
         Me.ucrInputLabelSize.IsReadOnly = False
-        Me.ucrInputLabelSize.Location = New System.Drawing.Point(330, 436)
+        Me.ucrInputLabelSize.Location = New System.Drawing.Point(330, 437)
         Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
         Me.ucrInputLabelSize.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelSize.TabIndex = 58
@@ -509,7 +509,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudLollipopSize.AutoSize = True
         Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(167, 405)
+        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(170, 405)
         Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
@@ -536,7 +536,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLollipopColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLollipopColour.GetSetSelectedIndex = -1
         Me.ucrInputLollipopColour.IsReadOnly = False
-        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(276, 404)
+        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(276, 405)
         Me.ucrInputLollipopColour.Name = "ucrInputLollipopColour"
         Me.ucrInputLollipopColour.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputLollipopColour.TabIndex = 45
@@ -556,7 +556,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelPosition.GetSetSelectedIndex = -1
         Me.ucrInputLabelPosition.IsReadOnly = False
-        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(90, 436)
+        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(100, 436)
         Me.ucrInputLabelPosition.Name = "ucrInputLabelPosition"
         Me.ucrInputLabelPosition.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelPosition.TabIndex = 25
@@ -757,7 +757,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelColour.GetSetSelectedIndex = -1
         Me.ucrInputLabelColour.IsReadOnly = False
-        Me.ucrInputLabelColour.Location = New System.Drawing.Point(220, 436)
+        Me.ucrInputLabelColour.Location = New System.Drawing.Point(220, 437)
         Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
         Me.ucrInputLabelColour.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelColour.TabIndex = 54
