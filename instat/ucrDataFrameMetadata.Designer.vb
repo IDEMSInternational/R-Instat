@@ -182,6 +182,7 @@ Partial Class ucrDataFrameMetadata
         '
         'ViewHTMLToolStripMenuItem
         '
+        Me.ViewHTMLToolStripMenuItem.Enabled = False
         Me.ViewHTMLToolStripMenuItem.Name = "ViewHTMLToolStripMenuItem"
         Me.ViewHTMLToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ViewHTMLToolStripMenuItem.Text = "View HTML"
