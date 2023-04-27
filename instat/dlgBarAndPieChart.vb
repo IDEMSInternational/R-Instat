@@ -740,7 +740,7 @@ Public Class dlgBarAndPieChart
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
         openSdgLayerOptions(clsPointsFunction)
     End Sub
-    
+
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
@@ -1044,17 +1044,5 @@ Public Class dlgBarAndPieChart
         Else
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
-    End Sub
-
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
-
     End Sub
 End Class

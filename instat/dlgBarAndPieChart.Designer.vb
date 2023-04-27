@@ -221,7 +221,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelColour.AutoSize = True
         Me.lblLabelColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelColour.Location = New System.Drawing.Point(182, 439)
+        Me.lblLabelColour.Location = New System.Drawing.Point(176, 439)
         Me.lblLabelColour.Name = "lblLabelColour"
         Me.lblLabelColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLabelColour.TabIndex = 26
@@ -231,7 +231,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelSize.AutoSize = True
         Me.lblLabelSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelSize.Location = New System.Drawing.Point(286, 439)
+        Me.lblLabelSize.Location = New System.Drawing.Point(280, 439)
         Me.lblLabelSize.Name = "lblLabelSize"
         Me.lblLabelSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLabelSize.TabIndex = 56
@@ -241,7 +241,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopSize.AutoSize = True
         Me.lblLollipopSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopSize.Location = New System.Drawing.Point(126, 408)
+        Me.lblLollipopSize.Location = New System.Drawing.Point(123, 408)
         Me.lblLollipopSize.Name = "lblLollipopSize"
         Me.lblLollipopSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLollipopSize.TabIndex = 42
@@ -251,7 +251,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopColour.AutoSize = True
         Me.lblLollipopColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopColour.Location = New System.Drawing.Point(225, 407)
+        Me.lblLollipopColour.Location = New System.Drawing.Point(220, 407)
         Me.lblLollipopColour.Name = "lblLollipopColour"
         Me.lblLollipopColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLollipopColour.TabIndex = 44
@@ -757,7 +757,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelColour.GetSetSelectedIndex = -1
         Me.ucrInputLabelColour.IsReadOnly = False
-        Me.ucrInputLabelColour.Location = New System.Drawing.Point(224, 436)
+        Me.ucrInputLabelColour.Location = New System.Drawing.Point(220, 436)
         Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
         Me.ucrInputLabelColour.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelColour.TabIndex = 54
