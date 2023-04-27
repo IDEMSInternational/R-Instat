@@ -52,10 +52,10 @@ Partial Class ucrDataFrameMetadata
         Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderDataFrameMetaData = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuViewHTML = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.ucrLinuxGrid = New instat.ucrDataframeMetadataLinuxGrid()
         Me.ucrReoGrid = New instat.ucrDataframeMetadataReoGrid()
-        Me.ViewHTMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowRightClickMenu.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -77,7 +77,7 @@ Partial Class ucrDataFrameMetadata
         'rowRightClickMenu
         '
         Me.rowRightClickMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.renameSheet, Me.reorderSheet, Me.copySheet, Me.deleteDataFrame, Me.hideSheet, Me.unhideSheet, Me.ToolStripSeparator11, Me.mnuAddComment, Me.ViewHTMLToolStripMenuItem, Me.viewSheet})
+        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.renameSheet, Me.reorderSheet, Me.copySheet, Me.deleteDataFrame, Me.hideSheet, Me.unhideSheet, Me.ToolStripSeparator11, Me.mnuAddComment, Me.mnuViewHTML, Me.viewSheet})
         Me.rowRightClickMenu.Name = "statusColumnMenu"
         Me.rowRightClickMenu.Size = New System.Drawing.Size(181, 230)
         '
@@ -162,6 +162,18 @@ Partial Class ucrDataFrameMetadata
         Me.tlpTableContainer.Size = New System.Drawing.Size(655, 405)
         Me.tlpTableContainer.TabIndex = 8
         '
+        'mnuViewHTML
+        '
+        Me.mnuViewHTML.Enabled = False
+        Me.mnuViewHTML.Name = "mnuViewHTML"
+        Me.mnuViewHTML.Size = New System.Drawing.Size(180, 22)
+        Me.mnuViewHTML.Text = "View HTML"
+        '
+        'ToolStripSeparator11
+        '
+        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(177, 6)
+        '
         'ucrLinuxGrid
         '
         Me.ucrLinuxGrid.Dock = System.Windows.Forms.DockStyle.Fill
@@ -179,18 +191,6 @@ Partial Class ucrDataFrameMetadata
         Me.ucrReoGrid.Name = "ucrReoGrid"
         Me.ucrReoGrid.Size = New System.Drawing.Size(324, 381)
         Me.ucrReoGrid.TabIndex = 9
-        '
-        'ViewHTMLToolStripMenuItem
-        '
-        Me.ViewHTMLToolStripMenuItem.Enabled = False
-        Me.ViewHTMLToolStripMenuItem.Name = "ViewHTMLToolStripMenuItem"
-        Me.ViewHTMLToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ViewHTMLToolStripMenuItem.Text = "View HTML"
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(177, 6)
         '
         'ucrDataFrameMetadata
         '
@@ -221,6 +221,6 @@ Partial Class ucrDataFrameMetadata
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents ucrLinuxGrid As ucrDataframeMetadataLinuxGrid
     Friend WithEvents ucrReoGrid As ucrDataframeMetadataReoGrid
-    Friend WithEvents ViewHTMLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuViewHTML As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
 End Class
