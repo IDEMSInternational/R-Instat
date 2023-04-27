@@ -514,10 +514,6 @@ Public Class dlgBoxplot
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
     End Sub
 
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged, ucrChkAddPoints.ControlValueChanged
-
-    End Sub
-
     Private Sub ucrChkLabelOutlier_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelOutlier.ControlValueChanged
         If ucrChkLabelOutlier.Checked Then
             clsBaseOperator.AddParameter(strLabelOutierParameterName, clsRFunctionParameter:=clsLabelOutlierFunction, iPosition:=5)
