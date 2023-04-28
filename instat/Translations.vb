@@ -78,7 +78,11 @@ Public Class Translations
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))
 
         'todo
+        TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.mnuTbLast10Dialogs.DropDownItems, strDbPath, strLanguageCode)
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.mnuTbLast10Dialogs.DropDownItems, strDbPath, strLanguageCode))
+        For Each clsMenuItem As ToolStripItem In frmMain.mnuTbLast10Dialogs.DropDownItems
+            clsMenuItem.Text = "hi"
+        Next
     End Sub
 
     '''--------------------------------------------------------------------------------------------
