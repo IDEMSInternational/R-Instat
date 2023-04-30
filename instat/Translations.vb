@@ -63,6 +63,12 @@ Public Class Translations
         Dim strLanguageCode = GetLanguageCode()
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(ctrParent, strDbPath, strLanguageCode))
 
+        'The list of 10 most recent dialogs is dynamic and isn't translated as part of the main
+        '    form. So translate manually.
+        For Each clsMenuItem As ToolStripItem In frmMain.mnuTbLast10Dialogs.DropDownItems
+            clsMenuItem.Text = GetTranslation(clsMenuItem.Text)
+        Next
+
         'The right mouse button menus for the 6 output windows are not accessible via 
         '    the control lists. Therefore, translate these menus explicitly
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.UcrOutputPages.tsButtons.Items, strDbPath, strLanguageCode))
@@ -76,13 +82,6 @@ Public Class Translations
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.ColumnContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.CellContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))
-
-        'todo
-        TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.mnuTbLast10Dialogs.DropDownItems, strDbPath, strLanguageCode)
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.mnuTbLast10Dialogs.DropDownItems, strDbPath, strLanguageCode))
-        For Each clsMenuItem As ToolStripItem In frmMain.mnuTbLast10Dialogs.DropDownItems
-            clsMenuItem.Text = "hi"
-        Next
     End Sub
 
     '''--------------------------------------------------------------------------------------------
