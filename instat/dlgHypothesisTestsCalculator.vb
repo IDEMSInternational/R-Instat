@@ -52,7 +52,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrSaveResult.SetAssignToIfUncheckedValue("Last_Test")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorColumn.ucrAvailableDataFrames)
 
-        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin", "Trend"})
+        ucrInputComboRPackage.SetItems({"Stats1", "Stats2", "Agricolae", "Verification", "Coin", "Trend", "Statsr"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
         'Tooltips for conf & and Alt Buttons
         ttHypothesisTests.SetToolTip(cmdConf, "The confidence level can be changed for some tests to 0.9 or 0.99 etc")
@@ -87,27 +87,46 @@ Public Class dlgHypothesisTestsCalculator
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorColumn.Reset()
-        ucrReceiverForTestColumn.SetMeAsReceiver()
-        ucrSaveResult.Reset()
-        ucrSaveResult.ucrChkSave.Checked = False
-        ucrBase.clsRsyntax.SetAssignTo("Last_Test", strTempModel:="Last_Test", strTempDataframe:=ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        ucrBase.clsRsyntax.clsBaseCommandString.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorColumn.strCurrentDataFrame,
+                                           strObjectName:="last_model")
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 2
+
+        clsSummary.SetRCommand("summary")
+        clsSummary.bExcludeAssignedFunctionOutput = False
+
+        clsAttach.SetRCommand("attach")
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.SetRCommand("detach")
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+
         ucrChkDisplayModel.Checked = True
         ucrChkIncludeArguments.Checked = False
         ucrChkSummaryModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, bNewIsPositive:=True)
         ucrInputComboRPackage.SetName("Stats1")
-        clsAttach.SetRCommand("attach")
-        clsDetach.SetRCommand("detach")
-        clsSummary.SetRCommand("summary")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorColumn.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsSummary.AddParameter("object", clsRCodeStructureParameter:=ucrBase.clsRsyntax.clsBaseCommandString, iPosition:=0)
-        clsDetach.AddParameter("unload", "TRUE")
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+        ucrSelectorColumn.Reset()
+        ucrReceiverForTestColumn.SetMeAsReceiver()
+        ucrSaveResult.Reset()
+        ucrSaveResult.ucrChkSave.Checked = False
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+
+    End Sub
+
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        clsSummary.AddParameter("object", strParameterValue:=ucrBase.clsRsyntax.clsBaseCommandString.GetRObjectToAssignTo(), iPosition:=0)
+        clsSummary.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorColumn.strCurrentDataFrame,
+                                           strObjectName:="last_summary")
+
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -595,6 +614,13 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                grpBayesianPlus.Visible = False
+                cmdRHelpStats.Visible = True
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
+                cmdRHelpStatsr.Visible = False
             Case "Stats2"
                 strPackageName = "stats"
                 grpAgricolae.Visible = False
@@ -603,6 +629,13 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                grpBayesianPlus.Visible = False
+                cmdRHelpStats.Visible = True
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
+                cmdRHelpStatsr.Visible = False
             Case "Agricolae"
                 strPackageName = "agricolae"
                 grpStats1.Visible = False
@@ -611,6 +644,13 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                grpBayesianPlus.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = True
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
+                cmdRHelpStatsr.Visible = False
             Case "Verification"
                 strPackageName = "verification"
                 grpStats1.Visible = False
@@ -619,6 +659,13 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = True
                 grpCoin.Visible = False
                 grpTrend.Visible = False
+                grpBayesianPlus.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = True
+                cmdRHelpTrend.Visible = False
+                cmdRHelpStatsr.Visible = False
             Case "Coin"
                 strPackageName = "coin"
                 grpStats1.Visible = False
@@ -627,6 +674,13 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = True
                 grpTrend.Visible = False
+                grpBayesianPlus.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = True
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
+                cmdRHelpStatsr.Visible = False
             Case "Trend"
                 strPackageName = "trend"
                 grpStats1.Visible = False
@@ -635,7 +689,27 @@ Public Class dlgHypothesisTestsCalculator
                 grpVerification.Visible = False
                 grpCoin.Visible = False
                 grpTrend.Visible = True
-
+                grpBayesianPlus.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = True
+                cmdRHelpStatsr.Visible = False
+            Case "Statsr"
+                grpBayesianPlus.Visible = True
+                grpStats1.Visible = False
+                grpStats2.Visible = False
+                grpAgricolae.Visible = False
+                grpVerification.Visible = False
+                grpCoin.Visible = False
+                grpTrend.Visible = False
+                cmdRHelpStats.Visible = False
+                cmdRHelpAgricolae.Visible = False
+                cmdRHelpCoin.Visible = False
+                cmdRHelpVerification.Visible = False
+                cmdRHelpTrend.Visible = False
+                cmdRHelpStatsr.Visible = True
         End Select
     End Sub
 
@@ -645,14 +719,10 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Hypothesis Tests", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    Private Sub OpenHelpPage()
+        If Not String.IsNullOrEmpty(strPackageName) Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverForTestColumn.ControlContentsChanged
@@ -1027,6 +1097,31 @@ Public Class dlgHypothesisTestsCalculator
         End If
     End Sub
 
+    Private Sub cmdbayesinference_Click(sender As Object, e As EventArgs) Handles cmdbayesinference.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference(y= ,x = NULL,data=" &
+            ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""), " &
+            "statistic = c(""mean"", ""proportion""),method = c(""theoretical"", ""simulation""),success = NULL, " &
+            "cred_level = 0.95,alternative = ""twosided"", prior_family = ""JZS"",mu_0 = 0,rscale = 1,nsim = 10000,show_plot = FALSE)", 248)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::bayes_inference()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdinference_Click(sender As Object, e As EventArgs) Handles cmdinference.Click
+        clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference(y= , x = NULL,data=" &
+            ucrSelectorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " ,type = c(""ci"", ""ht""), " &
+            "statistic = c(""mean"", ""median"", ""proportion""),success = NULL,method = c(""theoretical"", ""simulation""),null = 0, " &
+            " alternative =""twosided"",sig_level = 0.05,conf_level = 0.95,boot_method = c(""perc"", ""se""),show_eda_plot = FALSE," &
+            " show_inf_plot = FALSE)", 287)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("statsr::inference()", 1)
+        End If
+    End Sub
+
     Private Sub cmdWm_Click(sender As Object, e As EventArgs) Handles cmdWm.Click
         If ucrChkIncludeArguments.Checked Then
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("trend::wm.test(x = )", 2)
@@ -1037,5 +1132,47 @@ Public Class dlgHypothesisTestsCalculator
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("I()", 1)
+    End Sub
+
+    Private Sub cmdRHelpStats_Click(sender As Object, e As EventArgs) Handles cmdRHelpStats.Click, ToolStripMenuStats.Click
+        If ucrInputComboRPackage.GetText = "Stats1" OrElse ucrInputComboRPackage.GetText = "Stats2" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpAgricolae_Click(sender As Object, e As EventArgs) Handles cmdRHelpAgricolae.Click, ToolStripMenuAgricolae.Click
+        If ucrInputComboRPackage.GetText = "Agricolae" Then
+            strPackageName = "agricolae"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpCoin_Click(sender As Object, e As EventArgs) Handles cmdRHelpCoin.Click, ToolStripMenuCoin.Click
+        If ucrInputComboRPackage.GetText = "Coin" Then
+            strPackageName = "coin"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpTrend_Click(sender As Object, e As EventArgs) Handles cmdRHelpTrend.Click, ToolStripMenuTrend.Click
+        If ucrInputComboRPackage.GetText = "Trend" Then
+            strPackageName = "trend"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpVerification_Click(sender As Object, e As EventArgs) Handles cmdRHelpVerification.Click, ToolStripMenuVerification.Click
+        If ucrInputComboRPackage.GetText = "Verification" Then
+            strPackageName = "verification"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdRHelpStatsr_Click(sender As Object, e As EventArgs) Handles cmdRHelpStatsr.Click, ToolStripMenuStatsr.Click
+        If ucrInputComboRPackage.GetText = "Statsr" Then
+            strPackageName = "statsr"
+        End If
+        OpenHelpPage()
     End Sub
 End Class

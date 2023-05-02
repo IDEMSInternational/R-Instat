@@ -283,7 +283,7 @@ Partial Class dlgClimaticSummary
         Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStation.Location = New System.Drawing.Point(308, 14)
+        Me.rdoStation.Location = New System.Drawing.Point(326, 14)
         Me.rdoStation.Name = "rdoStation"
         Me.rdoStation.Size = New System.Drawing.Size(61, 27)
         Me.rdoStation.TabIndex = 5
@@ -302,7 +302,7 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoDaily.Location = New System.Drawing.Point(249, 14)
         Me.rdoDaily.Name = "rdoDaily"
-        Me.rdoDaily.Size = New System.Drawing.Size(63, 27)
+        Me.rdoDaily.Size = New System.Drawing.Size(82, 27)
         Me.rdoDaily.TabIndex = 4
         Me.rdoDaily.TabStop = True
         Me.rdoDaily.Text = "Daily"

@@ -101,6 +101,7 @@ Public Class ucrDataViewLinuxGrid
         RaiseEvent IDataViewGrid_ReplaceValueInData(dataGrid.CurrentCell.Value.ToString(),
                         GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(dataGrid.CurrentCell.ColumnIndex).strName,
                         GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(dataGrid.CurrentCell.RowIndex))
+        RefreshSingleCell(dataGrid.CurrentCell.ColumnIndex, dataGrid.CurrentCell.RowIndex)
     End Sub
 
     'ToDo allow editing
@@ -145,5 +146,10 @@ Public Class ucrDataViewLinuxGrid
 
     Private Sub tcTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcTabs.SelectedIndexChanged
         RaiseEvent WorksheetChanged()
+    End Sub
+
+    Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
+        Dim dataGrid = GetDataGridFromSelectedTab()
+        dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
 End Class

@@ -25,14 +25,8 @@ Public Class dlgFind
     Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
 
         Select Case currWindow.Name
-            Case "frmLog"
-                searchTextBox(frmLog.txtLog, targetPos)
-
             Case "frmCommand"
                 searchTextBox(frmCommand.txtCommand, targetPos)
-
-            Case "frmScript"
-                searchTextBox(frmScript.txtScript, targetPos)
 
             Case "frmEditor"
                 searchDataView(targetPos)
@@ -106,7 +100,7 @@ Public Class dlgFind
             cmdFindNext.Enabled = True
             Me.AcceptButton = cmdFindNext
             cmdFindAll.Enabled = False
-        ElseIf currWindow.Name = "frmCommand" Or currWindow.Name = "frmLog" Or currWindow.Name = "frmScript" Then
+        ElseIf currWindow.Name = "frmCommand" Then
             cmdFindNext.Enabled = True
             Me.AcceptButton = cmdFindNext
             cmdFindAll.Enabled = False

@@ -21,6 +21,7 @@ Imports System.Threading
 Imports instat.Translations
 Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.InteropServices
 
 Public Class frmMain
     Public clsRLink As RLink
@@ -40,6 +41,7 @@ Public Class frmMain
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -63,8 +65,6 @@ Public Class frmMain
     Public strDefaultDataFrame As String = ""
 
     Private strCurrentOutputFileName As String = "" 'holds the saved ouput file name to help remember the current selected folder path
-    Private strCurrentScriptFileName As String = "" 'holds the saved script file name to help remember the current selected folder path
-    Private strCurrentLogFileName As String = "" 'holds the saved log file name to help remember the current selected folder path
 
     ''' <summary>
     ''' flag used to indicate if current state of selected data has been saved
@@ -75,13 +75,20 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-
+        Logger.Info("R-Instat started version" + My.Application.Info.Version.ToString)
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            If Not CefRuntimeWrapper.InitialiseCefRuntime() Then
+                MessageBox.Show(Me, "Cef runtime could not be initialised." & Environment.NewLine & "Html content will be shown in your default browser.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        End If
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -93,7 +100,6 @@ Public Class frmMain
         SetMainMenusEnabled(False)
         Cursor = Cursors.WaitCursor
         'temporary
-        mnuHelpAboutRInstat.Visible = False
 
         ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
         ' e.g. "1.0" fails Decimal.TryParse if CurrentCulture = "fr-FR" because it expects "1,0"
@@ -106,8 +112,6 @@ Public Class frmMain
         ucrDataViewer.DataBook = clsDataBook
         ucrColumnMeta.DataBook = clsDataBook
         ucrDataFrameMeta.DataBook = clsDataBook
-
-        clsRLink.SetLog(ucrLogWindow.txtLog)
 
         ucrOutput.SetLogger(clsOutputLogger)
 
@@ -315,23 +319,20 @@ Public Class frmMain
         splOverall.SplitterDistance = splOverall.Height / 4
         splDataOutput.SplitterDistance = splDataOutput.Width / 2
         splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
-        splLogScript.SplitterDistance = splLogScript.Width / 2
         splMetadata.SplitterDistance = splMetadata.Width / 2
 
         mnuViewDataView.Checked = True
-        mnuViewOutputWindow.Checked = True
-        mnuViewLog.Checked = False
+        mnuViewOutput.Checked = True
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
-        mnuViewScriptWindow.Checked = False
+        mnuViewLogScript.Checked = False
         mnuViewSwapDataAndMetadata.Checked = False
-        mnuLogWindow.Checked = False
-        mnuScriptWindow.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
+        mnuTbLogScript.Checked = False
         UpdateLayout()
     End Sub
 
@@ -382,18 +383,10 @@ Public Class frmMain
         End Try
     End Sub
 
-    Public Sub AddGraphForm(strFilePath As String)
-        Dim frmNewGraph As New frmGraphDisplay
-
-        frmNewGraph.SetImageFromFile(strFilePath)
-        frmNewGraph.Show()
-        frmNewGraph.BringToFront()
-    End Sub
-
     Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
         ucrScriptWindow.AppendText(strText)
         If bMakeVisible Then
-            mnuViewScriptWindow.Checked = True
+            mnuViewLogScript.Checked = True
             UpdateLayout()
         End If
     End Sub
@@ -407,7 +400,7 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
+    Private Sub mnuDescribeSpecificTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificTables.Click
         dlgSummaryTables.ShowDialog()
     End Sub
 
@@ -472,18 +465,25 @@ Public Class frmMain
     End Sub
 
     Public Sub UpdateLayout()
-        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
+        If Not mnuViewDataView.Checked _
+                AndAlso Not mnuViewOutput.Checked _
+                AndAlso Not mnuViewColumnMetadata.Checked _
+                AndAlso Not mnuViewDataFrameMetadata.Checked _
+                AndAlso Not mnuViewLogScript.Checked _
+                AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
             splOverall.Show()
-            If mnuViewDataView.Checked OrElse mnuViewOutputWindow.Checked Then
+            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
                 splOverall.Panel2Collapsed = False
                 splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
-                splDataOutput.Panel2Collapsed = Not mnuViewOutputWindow.Checked
+                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
             Else
                 splOverall.Panel2Collapsed = True
             End If
-            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
+            If mnuViewColumnMetadata.Checked _
+                    OrElse mnuViewDataFrameMetadata.Checked _
+                    OrElse mnuViewLogScript.Checked Then
                 splOverall.Panel1Collapsed = False
                 If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
                     splExtraWindows.Panel1Collapsed = False
@@ -492,10 +492,8 @@ Public Class frmMain
                 Else
                     splExtraWindows.Panel1Collapsed = True
                 End If
-                If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
+                If mnuViewLogScript.Checked Then
                     splExtraWindows.Panel2Collapsed = False
-                    splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
-                    splLogScript.Panel2Collapsed = Not mnuViewScriptWindow.Checked
                 Else
                     splExtraWindows.Panel2Collapsed = True
                 End If
@@ -504,7 +502,8 @@ Public Class frmMain
             End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
-        mnuTbOutput.Checked = mnuViewOutputWindow.Checked
+        mnuTbOutput.Checked = mnuViewOutput.Checked
+        mnuTbLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Sub UpdateSwapDataAndMetadata()
@@ -521,27 +520,15 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
-        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
-        UpdateLayout()
-    End Sub
-
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
     End Sub
 
-    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
-        mnuViewLog.Checked = Not mnuViewLog.Checked
-        mnuLogWindow.Checked = mnuViewLog.Checked
-        UpdateLayout()
-    End Sub
-
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
-        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
-        mnuScriptWindow.Checked = mnuViewScriptWindow.Checked
+    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTbLogScript.Click, mnuViewLogScript.Click
+        mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
+        mnuTbLogScript.Checked = mnuViewLogScript.Checked
         UpdateLayout()
     End Sub
 
@@ -566,7 +553,7 @@ Public Class frmMain
         dlgDataFrameMetaData.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs)
+    Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuViewColumnMetadata.Checked = True
         UpdateLayout()
     End Sub
@@ -746,8 +733,6 @@ Public Class frmMain
                 ucrColumnMeta.SelectAllText()
             ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
                 ucrDataFrameMeta.SelectAllText()
-            ElseIf ctrActive.Equals(ucrLogWindow) Then
-                ucrLogWindow.SelectAllText()
             ElseIf ctrActive.Equals(ucrScriptWindow) Then
                 ucrScriptWindow.SelectAllText()
             End If
@@ -802,8 +787,8 @@ Public Class frmMain
         dlgGeneralANOVA.ShowDialog()
     End Sub
 
-    Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
-        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+    Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutput.Click
+        mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
 
@@ -894,8 +879,12 @@ Public Class frmMain
                     DeleteAutoSaveData()
                     DeleteAutoSaveLog()
                     DeleteAutoSaveDebugLog()
+                    clsRLink.CloseREngine()
                 End If
-                clsRLink.CloseREngine()
+
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+                    CefRuntimeWrapper.ShutDownCef()
+                End If
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
@@ -986,45 +975,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
-        Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Log Window"
-            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            If Not String.IsNullOrEmpty(strCurrentLogFileName) Then
-                dlgSaveFile.FileName = Path.GetFileName(strCurrentLogFileName)
-                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentLogFileName)
-            Else
-                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrLogWindow.txtLog.Text)
-                    strCurrentLogFileName = dlgSaveFile.FileName
-                Catch
-                    MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-                End Try
-            End If
-        End Using
+        ucrScriptWindow.SaveScript(True)
     End Sub
 
     Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click
-        Using dlgSaveFile As New SaveFileDialog
-            dlgSaveFile.Title = "Save Script Window"
-            dlgSaveFile.Filter = "Text File (*.txt)|*.txt|R Script File (*.R)|*.R"
-            If Not String.IsNullOrEmpty(strCurrentScriptFileName) Then
-                dlgSaveFile.FileName = Path.GetFileName(strCurrentScriptFileName)
-                dlgSaveFile.InitialDirectory = Path.GetDirectoryName(strCurrentScriptFileName)
-            Else
-                dlgSaveFile.InitialDirectory = clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSaveFile.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSaveFile.FileName, ucrScriptWindow.txtScript.Text)
-                    strCurrentScriptFileName = dlgSaveFile.FileName
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
-                End Try
-            End If
-        End Using
+        ucrScriptWindow.SaveScript(False)
     End Sub
 
     Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click
@@ -1048,7 +1003,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeUseGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseGraph.Click
-        dlgRenameGraph.ShowDialog()
+        dlgUseGraph.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeCombineGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeCombineGraph.Click
@@ -1148,7 +1103,7 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "0")
     End Sub
 
-    Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpHistFAQ.Click
+    Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpFAQ.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
     End Sub
 
@@ -1156,12 +1111,12 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "3")
     End Sub
 
-    Private Sub mnuHelpDataset_Click(sender As Object, e As EventArgs) Handles mnuHelpDataset.Click
+    Private Sub mnuHelpDataset_Click(sender As Object, e As EventArgs) Handles mnuHelpData.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "71")
     End Sub
 
-    Private Sub mnuHelpRPackagesCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackagesCommands.Click
-        dlgHelpVignettes.ShowDialog()
+    Private Sub mnuHelpRPackagesCommands_Click(sender As Object, e As EventArgs) Handles mnuHelpRPackages.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "26")
     End Sub
 
     Private Sub mnuHelpR_Click(sender As Object, e As EventArgs) Handles mnuHelpAboutR.Click
@@ -1170,15 +1125,6 @@ Public Class frmMain
 
     Private Sub mnuHelpMenus_Click(sender As Object, e As EventArgs) Handles mnuHelpMenus.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
-    End Sub
-
-
-    Private Sub mnuHelpGuidesCaseStudy_Click(sender As Object, e As EventArgs) Handles mnuHelpGuidesCaseStudy.Click
-        Process.Start(Path.Combine(strStaticPath, "Help", "Case_Study_Guide_June_2016.pdf"))
-    End Sub
-
-    Private Sub mnuHelpGuideGlosary_Click(sender As Object, e As EventArgs) Handles mnuHelpGuideGlosary.Click
-        Process.Start(Path.Combine(strStaticPath, "Help", "Statistics Glossary.pdf"))
     End Sub
 
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
@@ -1429,14 +1375,6 @@ Public Class frmMain
         ctrActive = ucrOutput
     End Sub
 
-    Private Sub ucrScriptWindow_Enter(sender As Object, e As EventArgs) Handles ucrScriptWindow.Enter
-        ctrActive = ucrScriptWindow
-    End Sub
-
-    Private Sub ucrLogWindow_Enter(sender As Object, e As EventArgs) Handles ucrLogWindow.Enter
-        ctrActive = ucrLogWindow
-    End Sub
-
     Private Sub ucrColumnMeta_Enter(sender As Object, e As EventArgs) Handles ucrColumnMeta.Enter
         ctrActive = ucrColumnMeta
     End Sub
@@ -1507,11 +1445,6 @@ Public Class frmMain
     Public Sub SetCurrentDataFrame(iIndex As Integer)
         ucrDataViewer.SetCurrentDataFrame(iIndex)
         ucrColumnMeta.SetCurrentDataFrame(iIndex)
-    End Sub
-
-    Public Sub ReOrderWorkSheets()
-        ucrDataViewer.ReOrderWorkSheets()
-        ucrColumnMeta.ReOrderWorkSheets()
     End Sub
 
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificCummulativeDistribution.Click
@@ -1620,7 +1553,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
-        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+        mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
 
@@ -1941,8 +1874,8 @@ Public Class frmMain
         dlgFitModel.ShowDialog()
     End Sub
 
-    Private Sub mnuHelpAcknowledgments_Click(sender As Object, e As EventArgs) Handles mnuHelpAcknowledgments.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "151")
+    Private Sub mnuHelpGlossary_Click(sender As Object, e As EventArgs) Handles mnuHelpGlossary.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "92")
     End Sub
 
     Private Sub mnuDescribeSpecificMosaic_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificMosaic.Click
@@ -1994,10 +1927,6 @@ Public Class frmMain
 
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
-    End Sub
-
-    Private Sub mnuHelpDataViewSpreadsheet_Click(sender As Object, e As EventArgs) Handles mnuHelpDataViewSpreadsheet.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
     Private Sub mnuClimaticTidyandExamineOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableGraph.Click
@@ -2057,31 +1986,9 @@ Public Class frmMain
         dlgCountinFactor.ShowDialog()
     End Sub
 
-    Private Sub MnuScriptFile_Click(sender As Object, e As EventArgs) Handles mnuScriptFile.Click
-        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
-        UpdateLayout()
-    End Sub
-
-    Private Sub MnuLogFile_Click(sender As Object, e As EventArgs) Handles mnuLogFile.Click
-        mnuViewLog.Checked = Not mnuViewLog.Checked
-        UpdateLayout()
-    End Sub
-
-    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuLastGraph.ButtonClick
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
-    End Sub
-
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
-        UpdateLayout()
-    End Sub
-
-    Private Sub MnuTbLog_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLog.ButtonClick
-        mnuViewLog.Checked = Not mnuViewLog.Checked
-        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
@@ -2097,28 +2004,54 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub MnuScriptWindow_Click(sender As Object, e As EventArgs) Handles mnuScriptWindow.Click
-        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
-        mnuScriptWindow.Checked = mnuViewScriptWindow.Checked
-        UpdateLayout()
-    End Sub
+    Private Sub MnuLastGraph_ButtonClick(sender As Object, e As EventArgs) Handles mnuNormalViewer.Click, mnuLastGraph.ButtonClick
+        Dim clsLastObjectRFunction As New RFunction
+        clsLastObjectRFunction.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object_data")
+        clsLastObjectRFunction.AddParameter("object_type_label", Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
 
-    Private Sub MnuLogWindow_Click(sender As Object, e As EventArgs) Handles mnuLogWindow.Click
-        mnuViewLog.Checked = Not mnuViewLog.Checked
-        mnuLogWindow.Checked = mnuViewLog.Checked
-        UpdateLayout()
-    End Sub
+        Dim clsViewObjectRFunction As New RFunction
+        clsViewObjectRFunction.SetRCommand("view_object_data")
+        clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsLastObjectRFunction)
+        clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
 
-    Private Sub MnuViewer_Click(sender As Object, e As EventArgs) Handles mnuViewer.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph()
-        Me.Enabled = True
+        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+
     End Sub
 
     Private Sub Mnuploty_Click(sender As Object, e As EventArgs) Handles mnuploty.Click
-        Me.Enabled = False
-        clsRLink.ViewLastGraph(bAsPlotly:=True)
-        Me.Enabled = True
+        Dim clsViewObjectRFunction As New RFunction
+        Dim clsPlotlyRFunction As New RFunction
+        Dim clsLastObjectRFunction As New RFunction
+
+        clsLastObjectRFunction.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object_data")
+        clsLastObjectRFunction.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+
+        clsPlotlyRFunction.SetPackageName("plotly")
+        clsPlotlyRFunction.SetRCommand("ggplotly")
+        clsPlotlyRFunction.AddParameter("p", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
+
+        clsViewObjectRFunction.SetRCommand("view_object_data")
+        clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
+        clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
+
+        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph as plotly", bSeparateThread:=False)
+
+    End Sub
+
+    Private Sub MnuRViewer_Click(sender As Object, e As EventArgs) Handles mnuRViewer.Click
+        Dim clsLastObjectRFunction As New RFunction
+        Dim clsPrintRFunction As New RFunction
+        clsLastObjectRFunction.SetRCommand(clsRLink.strInstatDataObject & "$get_last_object_data")
+        clsLastObjectRFunction.AddParameter("object_type_label", strParameterValue:=Chr(34) & RObjectTypeLabel.Graph & Chr(34), iPosition:=0)
+        clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
+
+        clsPrintRFunction.SetRCommand("print")
+        clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
+
+        clsRLink.RunScript(clsPrintRFunction.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False)
+
     End Sub
 
     Private Sub mnuModelFitModelOneVariable_Click(sender As Object, e As EventArgs) Handles mnuModelFitModelOneVariable.Click
@@ -2366,29 +2299,36 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
-    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
+    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
+        If ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.CutText()
+        End If
+    End Sub
+
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.ButtonClick, mnuSubTbCopy.Click, mnuEditCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
         ElseIf ctrActive.Equals(ucrColumnMeta) Then
             ucrColumnMeta.CopyRange()
         ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
             ucrDataFrameMeta.CopyRange()
-        ElseIf ctrActive.Equals(ucrLogWindow) Then
-            ucrLogWindow.CopyText()
         ElseIf ctrActive.Equals(ucrScriptWindow) Then
             ucrScriptWindow.CopyText()
         End If
     End Sub
 
-    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuEditCopySpecial.Click, mnuSubTbCopySpecial.Click
+    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbCopySpecial.Click, mnuEditCopySpecial.Click
         dlgCopySpecial.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click, mnuTbPaste.ButtonClick, mnuSubTbPaste.Click
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuTbPaste.ButtonClick, mnuSubTbPaste.Click, mnuEditPaste.Click
         'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
+        If ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.PasteText()
+        End If
     End Sub
 
-    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
+    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbPasteSpecial.Click, mnuPasteSpecial.Click
         dlgPasteNewColumns.ShowDialog()
     End Sub
 
@@ -2463,7 +2403,36 @@ Public Class frmMain
         dlgPICSARainfall.ShowDialog()
     End Sub
 
-    Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
+    '    dlgApsimx.ShowDialog()
+    'End Sub
+
+    Private Sub mnuOptionsByContextCropModelApsimxExamples_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModelApsimxExamples.Click
         dlgApsimx.ShowDialog()
+
+    End Sub
+
+    Private Sub mnuFileImportFromRapidPro_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromRapidPro.Click
+        dlgImportFromRapidPro.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileImportFromPostgres_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromPostgres.Click
+        dlgImportFromPostgres.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditWordwrap_Click(sender As Object, e As EventArgs) Handles mnuEditWordwrap.Click
+        dlgWordwrap.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
+        dlgSearch.ShowDialog()
+    End Sub
+
+    Private Sub mnuHelpPackagesDocumentation_Click(sender As Object, e As EventArgs) Handles mnuHelpPackagesDocumentation.Click
+        dlgHelpVignettes.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeUseTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseTable.Click
+        dlgUseTable.ShowDialog()
     End Sub
 End Class

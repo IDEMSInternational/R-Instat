@@ -117,69 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 281</value>
-  </data>
-  <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 25</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="cmdOptions.Text" xml:space="preserve">
-    <value>Plot Options</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
-    <value>cmdOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="cmdTileOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdTileOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 250</value>
-  </data>
-  <data name="cmdTileOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 25</value>
-  </data>
-  <data name="cmdTileOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="cmdTileOptions.Text" xml:space="preserve">
-    <value>Tile Options</value>
-  </data>
-  <data name="&gt;&gt;cmdTileOptions.Name" xml:space="preserve">
-    <value>cmdTileOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdTileOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdTileOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdTileOptions.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
   <data name="lblXVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblXVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblXVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 197</value>
   </data>
@@ -232,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFill.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="lblLabelPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -241,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 413</value>
+    <value>126, 413</value>
   </data>
   <data name="lblLabelPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -262,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelPosition.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>31</value>
   </data>
   <data name="lblLabelColour.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -271,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 413</value>
+    <value>229, 413</value>
   </data>
   <data name="lblLabelColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -292,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelColour.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>33</value>
   </data>
   <data name="lblLabelSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -301,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 413</value>
+    <value>322, 413</value>
   </data>
   <data name="lblLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -322,7 +268,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabelSize.ZOrder" xml:space="preserve">
-    <value>36</value>
+    <value>35</value>
   </data>
   <data name="lblPointsOptional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -352,7 +298,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPointsOptional.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lblPointsSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -382,7 +328,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPointsSize.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblReorderVariableX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -412,7 +358,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblReorderVariableX.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>37</value>
   </data>
   <data name="lblReorderValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,7 +424,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoChoroplethMap.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="rdoHeatMap.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -514,7 +460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoHeatMap.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblLongitude.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -604,7 +550,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFillChoropleth.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrChkFlipCoordinates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -628,7 +574,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkFlipCoordinates.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrReceiverPointsHeatMap.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -641,6 +587,45 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>420, 562</value>
+  </data>
+  <data name="cmdOptions.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <metadata name="contextMenuStripOptions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="contextMenuStripOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 70</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripOptions.Name" xml:space="preserve">
+    <value>contextMenuStripOptions</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 247</value>
+  </data>
+  <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 23</value>
+  </data>
+  <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="cmdOptions.Text" xml:space="preserve">
+    <value>Plot Options</value>
+  </data>
+  <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
+    <value>cmdOptions</value>
+  </data>
+  <data name="&gt;&gt;cmdOptions.Type" xml:space="preserve">
+    <value>instat.ucrSplitButton, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cmdOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkPoints.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -664,7 +649,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPoints.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblGroup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -691,7 +676,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblGroup.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrNudShapeHeatMap.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -715,7 +700,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudShapeHeatMap.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="ucrChkColourPalette.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -739,7 +724,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkColourPalette.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="ucrInputColourPalette.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -763,7 +748,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputColourPalette.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverFill.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -790,7 +775,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFill.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="ucrSaveGraph.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -817,7 +802,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="ucrBase.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -1051,10 +1036,10 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 409</value>
+    <value>349, 409</value>
   </data>
   <data name="ucrInputSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>59, 23</value>
   </data>
   <data name="ucrInputSize.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1071,38 +1056,14 @@
   <data name="&gt;&gt;ucrInputSize.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
-  <data name="ucrChkAddLabels.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 409</value>
-  </data>
-  <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 23</value>
-  </data>
-  <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
-    <value>ucrChkAddLabels</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabels.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabels.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddLabels.ZOrder" xml:space="preserve">
-    <value>31</value>
-  </data>
   <data name="ucrInputPosition.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 409</value>
+    <value>173, 409</value>
   </data>
   <data name="ucrInputPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
+    <value>52, 23</value>
   </data>
   <data name="ucrInputPosition.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -1117,16 +1078,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputPosition.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>32</value>
   </data>
   <data name="ucrInputColour.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 409</value>
+    <value>269, 409</value>
   </data>
   <data name="ucrInputColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 21</value>
+    <value>50, 23</value>
   </data>
   <data name="ucrInputColour.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1141,7 +1102,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputColour.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>34</value>
   </data>
   <data name="ucrReceiverX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1168,7 +1129,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>36</value>
   </data>
   <data name="ucrReceiverGroup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1195,6 +1156,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverGroup.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="ucrChkAddLabels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 409</value>
+  </data>
+  <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="ucrChkAddLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.Name" xml:space="preserve">
+    <value>ucrChkAddLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddLabels.ZOrder" xml:space="preserve">
     <value>39</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
@@ -1202,6 +1187,24 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Heat Map/Choropleth</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemPlotOptions.Name" xml:space="preserve">
+    <value>toolStripMenuItemPlotOptions</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemPlotOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemTileOptions.Name" xml:space="preserve">
+    <value>toolStripMenuItemTileOptions</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemTileOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemPolygonOptions.Name" xml:space="preserve">
+    <value>toolStripMenuItemPolygonOptions</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemPolygonOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgHeatMapPlot</value>
@@ -1231,6 +1234,24 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverPointsHeatMap.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
+  </data>
+  <data name="toolStripMenuItemPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 22</value>
+  </data>
+  <data name="toolStripMenuItemPlotOptions.Text" xml:space="preserve">
+    <value>Plot Options</value>
+  </data>
+  <data name="toolStripMenuItemTileOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 22</value>
+  </data>
+  <data name="toolStripMenuItemTileOptions.Text" xml:space="preserve">
+    <value>Tile Options</value>
+  </data>
+  <data name="toolStripMenuItemPolygonOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 22</value>
+  </data>
+  <data name="toolStripMenuItemPolygonOptions.Text" xml:space="preserve">
+    <value>Polygon Options</value>
   </data>
 </root>

@@ -35,7 +35,7 @@ Partial Class dlgFindNonnumericValues
         '
         Me.lblColumn.AutoSize = True
         Me.lblColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumn.Location = New System.Drawing.Point(240, 45)
+        Me.lblColumn.Location = New System.Drawing.Point(271, 45)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(94, 13)
         Me.lblColumn.TabIndex = 1
@@ -63,11 +63,11 @@ Partial Class dlgFindNonnumericValues
         '
         Me.ucrReceiverColumn.AutoSize = True
         Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(240, 60)
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(271, 60)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(136, 23)
         Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.TabIndex = 2
         Me.ucrReceiverColumn.ucrSelector = Nothing
@@ -90,7 +90,7 @@ Partial Class dlgFindNonnumericValues
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 274)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 7
         '
         'ucrSaveColumn
@@ -99,7 +99,7 @@ Partial Class dlgFindNonnumericValues
         Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 247)
         Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        Me.ucrSaveColumn.Size = New System.Drawing.Size(288, 21)
+        Me.ucrSaveColumn.Size = New System.Drawing.Size(350, 21)
         Me.ucrSaveColumn.TabIndex = 8
         '
         'dlgFindNonnumericValues

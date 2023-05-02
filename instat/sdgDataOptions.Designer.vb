@@ -52,7 +52,7 @@ Partial Class sdgDataOptions
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.cmdRemoveCurrentColumnSelection = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpColumnsApplyOptions = New System.Windows.Forms.GroupBox()
         Me.rdoColumnsForThisDialog = New System.Windows.Forms.RadioButton()
         Me.rdoColumnsForAllDialogs = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
@@ -64,7 +64,7 @@ Partial Class sdgDataOptions
         Me.tbRows.SuspendLayout()
         Me.grpApplyOptions.SuspendLayout()
         Me.tbColumns.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpColumnsApplyOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcDataOptions
@@ -216,7 +216,7 @@ Partial Class sdgDataOptions
         'tbColumns
         '
         Me.tbColumns.Controls.Add(Me.cmdRemoveCurrentColumnSelection)
-        Me.tbColumns.Controls.Add(Me.GroupBox1)
+        Me.tbColumns.Controls.Add(Me.grpColumnsApplyOptions)
         Me.tbColumns.Controls.Add(Me.ucrReceiverSelect)
         Me.tbColumns.Controls.Add(Me.lblSelection)
         Me.tbColumns.Controls.Add(Me.ucrSelectorForSelectColumns)
@@ -241,17 +241,17 @@ Partial Class sdgDataOptions
         Me.cmdRemoveCurrentColumnSelection.Text = "Remove Current Selection"
         Me.cmdRemoveCurrentColumnSelection.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'grpColumnsApplyOptions
         '
-        Me.GroupBox1.Controls.Add(Me.rdoColumnsForThisDialog)
-        Me.GroupBox1.Controls.Add(Me.rdoColumnsForAllDialogs)
-        Me.GroupBox1.Location = New System.Drawing.Point(4, 234)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(340, 58)
-        Me.GroupBox1.TabIndex = 5
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Tag = "Apply_Options"
-        Me.GroupBox1.Text = "Apply Options"
+        Me.grpColumnsApplyOptions.Controls.Add(Me.rdoColumnsForThisDialog)
+        Me.grpColumnsApplyOptions.Controls.Add(Me.rdoColumnsForAllDialogs)
+        Me.grpColumnsApplyOptions.Location = New System.Drawing.Point(4, 234)
+        Me.grpColumnsApplyOptions.Name = "grpColumnsApplyOptions"
+        Me.grpColumnsApplyOptions.Size = New System.Drawing.Size(340, 58)
+        Me.grpColumnsApplyOptions.TabIndex = 5
+        Me.grpColumnsApplyOptions.TabStop = False
+        Me.grpColumnsApplyOptions.Tag = "Apply_Options"
+        Me.grpColumnsApplyOptions.Text = "Apply Options"
         '
         'rdoColumnsForThisDialog
         '
@@ -355,8 +355,8 @@ Partial Class sdgDataOptions
         Me.grpApplyOptions.PerformLayout()
         Me.tbColumns.ResumeLayout(False)
         Me.tbColumns.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpColumnsApplyOptions.ResumeLayout(False)
+        Me.grpColumnsApplyOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -380,7 +380,7 @@ Partial Class sdgDataOptions
     Friend WithEvents lblSelection As Label
     Friend WithEvents ucrSelectorForSelectColumns As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdDefineNewSelect As Button
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpColumnsApplyOptions As GroupBox
     Friend WithEvents rdoColumnsForThisDialog As RadioButton
     Friend WithEvents rdoColumnsForAllDialogs As RadioButton
     Friend WithEvents cmdRemoveCurrentColumnSelection As Button

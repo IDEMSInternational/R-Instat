@@ -109,6 +109,7 @@ Partial Class ucrDataView
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewHTML = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp3 = New System.Windows.Forms.ToolStripMenuItem()
@@ -140,6 +141,8 @@ Partial Class ucrDataView
         Me.lblRowNext = New System.Windows.Forms.Label()
         Me.lblColLast = New System.Windows.Forms.Label()
         Me.lblRowBack = New System.Windows.Forms.Label()
+        Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.columnContextMenuStrip.SuspendLayout()
@@ -522,9 +525,9 @@ Partial Class ucrDataView
         'statusColumnMenu
         '
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.HideSheet, Me.unhideSheet, Me.CopySheet, Me.reorderSheet, Me.ViewSheet, Me.ToolStripSeparator11, Me.mnuHelp3})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.deleteDataFrame, Me.HideSheet, Me.unhideSheet, Me.ToolStripSeparator12, Me.mnuBottomAddComment, Me.mnuViewHTML, Me.ViewSheet, Me.ToolStripSeparator11, Me.mnuHelp3})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 230)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 236)
         '
         'deleteDataFrame
         '
@@ -568,11 +571,18 @@ Partial Class ucrDataView
         Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
+        'mnuViewHTML
+        '
+        Me.mnuViewHTML.Enabled = False
+        Me.mnuViewHTML.Name = "mnuViewHTML"
+        Me.mnuViewHTML.Size = New System.Drawing.Size(162, 22)
+        Me.mnuViewHTML.Text = "View HTML"
+        '
         'ViewSheet
         '
         Me.ViewSheet.Name = "ViewSheet"
         Me.ViewSheet.Size = New System.Drawing.Size(180, 22)
-        Me.ViewSheet.Text = "View Data Frame"
+        Me.ViewSheet.Text = "R Viewer"
         '
         'ToolStripSeparator11
         '
@@ -951,6 +961,11 @@ Partial Class ucrDataView
         Me.lblRowBack.Text = "<"
         Me.lblRowBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'ToolStripSeparator12
+        '
+        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(177, 6)
+        '
         'ucrReoGrid
         '
         Me.ucrReoGrid.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1102,4 +1117,7 @@ Partial Class ucrDataView
     Friend WithEvents mnuHelp2 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents mnuHelp3 As ToolStripMenuItem
+    Friend WithEvents ttGoToRowOrColPage As ToolTip
+    Friend WithEvents mnuViewHTML As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
 End Class
