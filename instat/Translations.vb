@@ -51,8 +51,13 @@ Public Class Translations
 
         ' The function calls below should normally be commented out.
         ' They only need to be uncommented when changes need to be applied to the database.
-        UpdateTranslationDatabase("translateDynamic.txt", "ReplaceWithDynamicTranslation")
-        UpdateTranslationDatabase("translateIgnore.txt", "DoNotTranslate")
+        'UpdateTranslationDatabase("translateDynamic.txt", "ReplaceWithDynamicTranslation")
+        'UpdateTranslationDatabase("translateIgnore.txt", "DoNotTranslate")
+
+        'The lines above should only be used by developers to update the translation database.
+        'Therefore, exit the application with a message to ensure that this sub is not run 
+        'accidentally in the release version. 
+        'Application.Exit()
 
         If IsNothing(tsCollection) OrElse IsNothing(ctrParent) OrElse IsNothing(TryCast(ctrParent, Form)) Then
             Exit Sub
@@ -327,11 +332,6 @@ Public Class Translations
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "An error occured processing " & strFileName, MsgBoxStyle.Exclamation)
         End Try
-
-        'This sub should only be used by developers to update the translation database.
-        'Therefore, exit the application with a message to ensure that this sub is not run 
-        'accidentally in the release version. 
-        Application.Exit()
     End Sub
 
 End Class

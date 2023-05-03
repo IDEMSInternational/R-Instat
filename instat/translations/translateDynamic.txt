@@ -1,7 +1,7 @@
 ﻿####################################################################################################
 #
 # This file provides a way to specify WinForm controls that have dynamically changing text.
-# This file is used to update the translation database so that the tranlation mechanism translates
+# This file is used to update the translation database so that the translation mechanism translates
 # the control's current text, rather than the control's default text.
 # 
 # For example, this file can be used to ensure that a label that changes depending on the context 
