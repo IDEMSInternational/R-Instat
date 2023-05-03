@@ -76,10 +76,10 @@ Public Class dlgTidyDailyData
         ucrReceiverElement.bExcludeFromSelector = True
         ucrReceiverElement.SetLinkedDisplayControl(lblMultipleElement)
 
-        ucrTextBoxElementName.SetParameter(New RParameter("element_name", 8))
-        ucrTextBoxElementName.SetRDefault(Chr(34) & "value" & Chr(34))
-        ucrTextBoxElementName.SetValidationTypeAsRVariable()
-        ucrTextBoxElementName.SetLinkedDisplayControl(lblElementName)
+        ucrTxtBoxElementName.SetParameter(New RParameter("element_name", 8))
+        ucrTxtBoxElementName.SetValidationTypeAsRVariable()
+        ucrTxtBoxElementName.SetRDefault(Chr(34) & "value" & Chr(34))
+        ucrTxtBoxElementName.SetLinkedDisplayControl(lblElementName)
 
         ucrChkUnstackElements.SetText("Unstack elements")
         ucrChkUnstackElements.SetParameter(New RParameter("unstack_elements", 12), bNewChangeParameterValue:=True)
@@ -140,18 +140,19 @@ Public Class dlgTidyDailyData
         ucrSelectorTidyDailyData.Reset()
         ucrReceiverMultipleStack.SetMeAsReceiver()
         ucrInputNewDataFrame.Reset()
+        ucrTxtBoxElementName.SetName("value")
 
-        clsTidyClimaticFunction.AddParameter("format", Chr(34) & "years" & Chr(34), iPosition:=3)
+        clsTidyClimaticFunction.AddParameter("format", Chr(34) & "days" & Chr(34), iPosition:=3)
 
         clsTidyClimaticFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$tidy_climatic_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsTidyClimaticFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         If bReset Then
-            NewDefaultName()
+            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
+        NewDefaultName()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -237,11 +238,11 @@ Public Class dlgTidyDailyData
     Private Sub ElementAddRemoveParam()
         If Not ucrReceiverElement.IsEmpty Then
             clsTidyClimaticFunction.RemoveParameterByName("element_name")
-            ucrTextBoxElementName.Enabled = False
+            ucrTxtBoxElementName.Enabled = False
             ucrChkUnstackElements.Visible = True
         Else
-            clsTidyClimaticFunction.AddParameter("element_name", Chr(34) & ucrTextBoxElementName.GetText & Chr(34), iPosition:=8)
-            ucrTextBoxElementName.Enabled = True
+            clsTidyClimaticFunction.AddParameter("element_name", Chr(34) & ucrTxtBoxElementName.GetText & Chr(34), iPosition:=8)
+            ucrTxtBoxElementName.Enabled = True
             ucrChkUnstackElements.Visible = False
         End If
     End Sub
@@ -262,7 +263,7 @@ Public Class dlgTidyDailyData
         NewDefaultName()
     End Sub
 
-    Private Sub ucrTextBoxElementName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTextBoxElementName.ControlValueChanged, ucrReceiverElement.ControlValueChanged
+    Private Sub ucrTxtBoxElementName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtBoxElementName.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         ElementAddRemoveParam()
     End Sub
 

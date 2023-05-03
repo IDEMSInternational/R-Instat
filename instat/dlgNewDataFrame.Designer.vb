@@ -119,9 +119,9 @@ Partial Class dlgNewDataFrame
         Me.rdoCommand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCommand.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCommand.Location = New System.Drawing.Point(186, 15)
+        Me.rdoCommand.Location = New System.Drawing.Point(358, 15)
         Me.rdoCommand.Name = "rdoCommand"
-        Me.rdoCommand.Size = New System.Drawing.Size(85, 27)
+        Me.rdoCommand.Size = New System.Drawing.Size(78, 27)
         Me.rdoCommand.TabIndex = 2
         Me.rdoCommand.TabStop = True
         Me.rdoCommand.Text = "Command"
@@ -136,9 +136,9 @@ Partial Class dlgNewDataFrame
         Me.rdoRandom.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRandom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRandom.Location = New System.Drawing.Point(269, 15)
+        Me.rdoRandom.Location = New System.Drawing.Point(217, 15)
         Me.rdoRandom.Name = "rdoRandom"
-        Me.rdoRandom.Size = New System.Drawing.Size(85, 27)
+        Me.rdoRandom.Size = New System.Drawing.Size(73, 27)
         Me.rdoRandom.TabIndex = 3
         Me.rdoRandom.TabStop = True
         Me.rdoRandom.Text = "Random"
@@ -153,12 +153,12 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEmpty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoEmpty.Location = New System.Drawing.Point(20, 15)
+        Me.rdoEmpty.Location = New System.Drawing.Point(19, 15)
         Me.rdoEmpty.Name = "rdoEmpty"
-        Me.rdoEmpty.Size = New System.Drawing.Size(85, 27)
+        Me.rdoEmpty.Size = New System.Drawing.Size(106, 27)
         Me.rdoEmpty.TabIndex = 4
         Me.rdoEmpty.TabStop = True
-        Me.rdoEmpty.Text = "Empty"
+        Me.rdoEmpty.Text = "New"
         Me.rdoEmpty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoEmpty.UseVisualStyleBackColor = True
         '
@@ -170,9 +170,9 @@ Partial Class dlgNewDataFrame
         Me.rdoConstruct.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoConstruct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoConstruct.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoConstruct.Location = New System.Drawing.Point(103, 15)
+        Me.rdoConstruct.Location = New System.Drawing.Point(290, 15)
         Me.rdoConstruct.Name = "rdoConstruct"
-        Me.rdoConstruct.Size = New System.Drawing.Size(85, 27)
+        Me.rdoConstruct.Size = New System.Drawing.Size(69, 27)
         Me.rdoConstruct.TabIndex = 1
         Me.rdoConstruct.TabStop = True
         Me.rdoConstruct.Text = "Construct"
@@ -385,9 +385,9 @@ Partial Class dlgNewDataFrame
         Me.rdoLists.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLists.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoLists.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLists.Location = New System.Drawing.Point(352, 15)
+        Me.rdoLists.Location = New System.Drawing.Point(135, 15)
         Me.rdoLists.Name = "rdoLists"
-        Me.rdoLists.Size = New System.Drawing.Size(85, 27)
+        Me.rdoLists.Size = New System.Drawing.Size(74, 27)
         Me.rdoLists.TabIndex = 165
         Me.rdoLists.TabStop = True
         Me.rdoLists.Text = "Lists"
@@ -420,7 +420,7 @@ Partial Class dlgNewDataFrame
         Me.ucrChkRCommand.Checked = False
         Me.ucrChkRCommand.Location = New System.Drawing.Point(19, 114)
         Me.ucrChkRCommand.Name = "ucrChkRCommand"
-        Me.ucrChkRCommand.Size = New System.Drawing.Size(118, 23)
+        Me.ucrChkRCommand.Size = New System.Drawing.Size(177, 23)
         Me.ucrChkRCommand.TabIndex = 175
         '
         'ucrInputListInCategory
@@ -462,7 +462,7 @@ Partial Class dlgNewDataFrame
         Me.ucrChkIncludeLabel.Checked = False
         Me.ucrChkIncludeLabel.Location = New System.Drawing.Point(194, 101)
         Me.ucrChkIncludeLabel.Name = "ucrChkIncludeLabel"
-        Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkIncludeLabel.Size = New System.Drawing.Size(160, 23)
         Me.ucrChkIncludeLabel.TabIndex = 164
         '
         'ucrChkVariable

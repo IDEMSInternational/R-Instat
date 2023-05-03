@@ -24,7 +24,7 @@ Public Class dlgNewDataFrame
         clsRepFunction, clsCorporaFunction, clsListDfFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private bLastRow As Boolean = False
     Private arrAvailableCategories() As String
     Private arrAvailableLists() As String
 
@@ -87,11 +87,12 @@ Public Class dlgNewDataFrame
 
         ucrChkVariable.SetText("Variable Name")
         ucrChkVariable.SetParameter(New RParameter("var", 0))
-        ucrChkVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkIncludeLabel.SetText("Variable Label")
         ucrChkIncludeLabel.SetParameter(New RParameter("label", 0))
         ucrChkIncludeLabel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVariable.AddParameterValuesCondition(True, "variablename", "True")
+        ucrChkVariable.AddParameterValuesCondition(False, "variablename", "False")
 
         ucrTryNewDataFrame.SetIsCommand()
         ucrTryNewDataFrame.RunCommandAsMultipleLines = True
@@ -118,6 +119,8 @@ Public Class dlgNewDataFrame
         'reset the controls
         ucrNewDFName.Reset()
         ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
+        clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
+        clsDummyVarFunction.AddParameter("checked", "defaults", iPosition:=1)
 
         clsGetCategoriesFunction.SetPackageName("rcorpora")
         clsGetCategoriesFunction.SetRCommand("categories")
@@ -134,6 +137,7 @@ Public Class dlgNewDataFrame
         ucrChkRCommand.Checked = False
         ucrNudCols.SetText(2)
 
+        ucrInputCategory.SetName("animals")
         clsCorporaFunction.SetPackageName("rcorpora")
         clsCorporaFunction.SetRCommand("corpora")
 
@@ -180,10 +184,10 @@ Public Class dlgNewDataFrame
         ucrNewDFName.AddAdditionalRCode(clsListDfFunction, iAdditionalPairNo:=4)
         ucrNewDFName.SetRCode(clsConstructFunction, bReset)
         ucrChkIncludeLabel.SetRCode(clsDummyLabelFunction, bReset)
-        ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
 
         If bReset Then
             ucrPnlDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+            ucrChkVariable.SetRCode(clsDummyVarFunction, bReset)
         End If
     End Sub
 
@@ -489,6 +493,13 @@ Public Class dlgNewDataFrame
     End Sub
 
     Private Sub dataTypeGridView_ValueChanged(sender As Object, e As EventArgs) Handles dataTypeGridView.CellValueChanged
+        If bLastRow Then
+            SampleEmpty()
+            bLastRow = False
+        End If
+    End Sub
+
+    Private Sub dataTypeGridView_CellEndEdit(sender As Object, e As EventArgs) Handles dataTypeGridView.CellEndEdit
         SampleEmpty()
     End Sub
 
@@ -501,14 +512,16 @@ Public Class dlgNewDataFrame
 
     Private Sub FillGrid(iRow As Integer, dgrView As DataGridView, bInsert As Boolean)
         If bInsert Then
-            With dgrView.Rows
-                .Item(iRow).Cells(0).Value = iRow + 1
-                .Item(iRow).Cells(1).Value = "x" & (iRow + 1)
-                .Item(iRow).Cells(2).Value = "Character"
-                .Item(iRow).Cells(3).Value = "NA"
-                .Item(iRow).Cells(4).Value = ""
-                .Item(iRow).Cells(5).Value = ""
-            End With
+            For i As Integer = iRow To dgrView.Rows.Count - 1
+                Dim iRowHeader = i + 1
+                With dgrView.Rows
+                    .Item(i).Cells(0).Value = iRowHeader
+                    .Item(i).Cells(1).Value = "x" & iRowHeader
+                    .Item(i).Cells(2).Value = "Character"
+                    .Item(i).Cells(3).Value = "NA"
+                End With
+                bLastRow = If(i = dgrView.Rows.Count - 1, True, False)
+            Next
         Else
             For i As Integer = 0 To dgrView.Rows.Count - 1
                 With dgrView.Rows
@@ -535,9 +548,12 @@ Public Class dlgNewDataFrame
             If iValue > iRow Then
                 Dim iNumRowsToInsert As Integer = iValue - iRow
                 dataTypeGridView.Rows.Insert(iRow, iNumRowsToInsert)
-                FillGrid(iValue - 1, dataTypeGridView, True)
+                FillGrid(iRow, dataTypeGridView, True)
             ElseIf iValue < iRow Then
-                dataTypeGridView.Rows.RemoveAt(iRow - 1)
+                Dim iRange = iRow - iValue
+                For i As Integer = 1 To iRange
+                    dataTypeGridView.Rows.RemoveAt(iRow - i)
+                Next
             End If
         End If
         CreateEmptyDataFrame(ucrNudCols.Value)
@@ -788,6 +804,9 @@ Public Class dlgNewDataFrame
             Array.Sort(arrAvailableLists)
             ucrInputListInCategory.SetParameter(New RParameter("list"))
             ucrInputListInCategory.SetItems(arrAvailableLists, bAddConditions:=True)
+            If arrAvailableLists.Count > 0 Then
+                ucrInputListInCategory.cboInput.SelectedIndex = 0
+            End If
         Else
             ucrInputListInCategory.SetItems()
         End If
