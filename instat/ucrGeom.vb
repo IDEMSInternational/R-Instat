@@ -874,7 +874,7 @@ Public Class ucrGeom
         clsgeom_density_ridges.AddLayerParameter("point_shape", "editablelist", "|", lstParameterStrings:={"|", "/", "$", "#", "*", "?", "!"})
         clsgeom_density_ridges.AddLayerParameter("point_size", "numeric", "3")
         clsgeom_density_ridges.AddLayerParameter("point_alpha", "numeric", "1", lstParameterStrings:={1, 0})
-        clsgeom_density_ridges.AddLayerParameter("min_height", "numeric", "0.01", lstParameterStrings:={3, 0, 0.1})
+        clsgeom_density_ridges.AddLayerParameter("rel_min_height", "numeric", "0.01", lstParameterStrings:={3, 0, 0.1})
         lstAllGeoms.Add(clsgeom_density_ridges)
 
         Dim clsgeom_density_ridges2 As New Geoms
