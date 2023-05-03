@@ -46,9 +46,8 @@ Public Class dlgViewObjects
 
         ' ucr receiver
         ucrReceiverSelectedObject.SetParameter(New RParameter("object_name", 1))
-        'ucrReceiverSelectedObject.SetParameterIsRFunction()
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
-        'ucrReceiverSelectedObject.SetMeAsReceiver()
+        ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
         ucrReceiverSelectedObject.SetItemType("object")
         ucrReceiverSelectedObject.bAutoFill = True
@@ -133,19 +132,16 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputObjectType.ControlValueChanged, ucrReceiverSelectedObject.ControlValueChanged
+    Private Sub ucrInputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputObjectType.ControlValueChanged
         Dim key As String = dctTypes.Keys(ucrInputObjectType.cboInput.SelectedIndex)
         Dim value As String = ""
 
-        ucrReceiverSelectedObject.ResetText()
-
+        If Not ucrReceiverSelectedObject.IsEmpty AndAlso ucrSelectorForViewObject.lstAvailableVariable.FindItemWithText(ucrReceiverSelectedObject.GetVariableNames(False), True, 0, False) Is Nothing Then
+            ucrReceiverSelectedObject.SetText("")
+        End If
         If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
             ucrReceiverSelectedObject.strSelectorHeading = key
-            ucrReceiverSelectedObject.SetMeAsReceiver()
             ucrReceiverSelectedObject.SetItemType(value.Replace(Chr(34), ""))
         End If
-        'If ucrSelectorForViewObject.lstAvailableVariable.FindItemWithText(ucrReceiverSelectedObject.GetVariableNames(False)) Is Nothing Then
-        '    ucrReceiverSelectedObject.RemoveAnyVariablesNotInList()
-        'End If
     End Sub
 End Class
