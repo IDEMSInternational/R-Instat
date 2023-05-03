@@ -25,6 +25,7 @@ Public Class dlgStack
     Private clsTypeConvertFunction As New RFunction
     Private clsSplitColumnsFunction As New RFunction
     Private clsGetVariablesFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -74,6 +75,11 @@ Public Class dlgStack
         ucrReceiverFrequency.Selector = ucrSelectorStack
         ucrReceiverFrequency.SetParameterIsString()
 
+        ucrReceiverDropValues.SetParameter(New RParameter("drop", 4))
+        ucrReceiverDropValues.Selector = ucrSelectorStack
+        ucrReceiverDropValues.SetParameterIsRFunction()
+        ucrReceiverDropValues.SetLinkedDisplayControl(lblDropValues)
+
         ucrInputNamesTo.SetParameter(New RParameter("names_to", 3))
         ucrInputNamesTo.SetRDefault(Chr(34) & "names" & Chr(34))
 
@@ -82,9 +88,15 @@ Public Class dlgStack
         ucrChkDropMissingValues.SetRDefault("FALSE")
         ucrChkDropMissingValues.SetText("Drop Missing Values")
 
+        ucrChkDropVariables.SetText("Drop Variables")
+        ucrChkDropVariables.AddParameterValuesCondition(True, "drop", "True")
+        ucrChkDropVariables.AddParameterValuesCondition(False, "drop", "False")
+        ucrChkDropVariables.AddToLinkedControls(ucrReceiverDropValues, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkStackMultipleSets.SetText("Stack Multiple Column Sets")
         ucrChkStackMultipleSets.AddToLinkedControls(ucrNudNoSets, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrFactorInto, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropVariables, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrPnlCarryColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrInputValuesTo, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkDropMissingValues, {False}, bNewLinkedHideIfParameterMissing:=True)
@@ -207,13 +219,16 @@ Public Class dlgStack
         clsTypeConvertFunction = New RFunction
         clsSplitColumnsFunction = New RFunction
         clsGetVariablesFunction = New RFunction
-
+        clsDummyFunction = New RFunction
         clsPipeOperator = New ROperator
 
         ucrSelectorStack.Reset()
         ucrSaveNewDataName.Reset()
         rdoCarryAllColumns.Checked = True
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+
 
         clsPivotLongerFunction.SetRCommand("pivot_longer")
         clsPivotLongerFunction.SetPackageName("tidyr")
@@ -282,6 +297,11 @@ Public Class dlgStack
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
         ucrReceiverFrequency.SetRCode(clsExpandFunction, bReset)
+        If bReset Then
+            ucrReceiverDropValues.SetRCode(clsReshapeFunction, bReset)
+            ucrChkDropVariables.SetRCode(clsDummyFunction, bReset)
+
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -342,7 +362,7 @@ Public Class dlgStack
             ucrBase.clsRsyntax.SetBaseRFunction(clsUnnestTokensFunction)
         ElseIf rdoPivotLonger.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPivotLongerFunction)
-            ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+            'ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsTypeConvertFunction)
             ucrReceiverExpand.SetMeAsReceiver()
@@ -405,6 +425,10 @@ Public Class dlgStack
                                              , clsReshapeFunction, clsPivotLongerFunction))
         If ucrChkStackMultipleSets.Checked Then
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+            If ucrChkDropVariables.Checked Then
+                ucrReceiverDropValues.SetMeAsReceiver()
+            End If
+
         End If
         TestOKEnabled()
     End Sub
@@ -427,6 +451,19 @@ Public Class dlgStack
     Private Sub ucrSelectorStack_DataFrameChanged() Handles ucrSelectorStack.ControlContentsChanged
         If rdoExpand.Checked Then
             ucrReceiverExpand.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrChkDropVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropVariables.ControlValueChanged
+        If ucrChkDropVariables.Checked Then
+            clsDummyFunction.AddParameter("drop", "True", iPosition:=0)
+            'ucrReceiverDropValues.SetMeAsReceiver()
+            'clsReshapeFunction.AddParameter("drop", ucrReceiverDropValues.GetVariableNames, iPosition:=4)
+
+        Else
+            clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+            'clsReshapeFunction.RemoveParameterByName("drop")
+            'ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         End If
     End Sub
 End Class
