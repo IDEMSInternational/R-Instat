@@ -77,7 +77,7 @@ Public Class dlgStack
 
         ucrReceiverDropValues.SetParameter(New RParameter("drop", 4))
         ucrReceiverDropValues.Selector = ucrSelectorStack
-        ucrReceiverDropValues.SetParameterIsRFunction()
+        ucrReceiverDropValues.SetParameterIsString()
         ucrReceiverDropValues.SetLinkedDisplayControl(lblDropValues)
 
         ucrInputNamesTo.SetParameter(New RParameter("names_to", 3))
@@ -243,6 +243,8 @@ Public Class dlgStack
         clsReshapeFunction.SetRCommand("reshape")
         clsReshapeFunction.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34), iPosition:=4)
+        clsReshapeFunction.AddParameter("idvar", Chr(34) & "id" & Chr(34), iPosition:=5)
+
 
         clsSplitColumnsFunction.SetRCommand("split_items_in_groups")
         clsSplitColumnsFunction.AddParameter("num", 2)
@@ -438,12 +440,12 @@ Public Class dlgStack
             Exit Sub
         End If
         Dim lstVariables As List(Of String) = ucrReceiverExpand.GetVariableNamesAsList()
-            Dim strVarFrequency As String = ucrReceiverFrequency.GetVariableNames(False)
-            If Not ucrReceiverFrequency.IsEmpty AndAlso Not lstVariables.Contains(strVarFrequency) Then
-                lstVariables.Add(strVarFrequency)
-            End If
+        Dim strVarFrequency As String = ucrReceiverFrequency.GetVariableNames(False)
+        If Not ucrReceiverFrequency.IsEmpty AndAlso Not lstVariables.Contains(strVarFrequency) Then
+            lstVariables.Add(strVarFrequency)
+        End If
 
-            clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorStack.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         clsGetVariablesFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
 
     End Sub
