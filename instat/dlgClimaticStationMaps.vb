@@ -331,6 +331,8 @@ Public Class dlgClimaticStationMaps
                                    bReset:=bResetSFLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetSFLayerSubdialog = False
+        clsGgplotFunction.RemoveParameterByName("mapping")
+        clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
     End Sub
 
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
