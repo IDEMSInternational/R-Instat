@@ -137,10 +137,15 @@ Public Class dlgViewObjects
         Dim key As String = dctTypes.Keys(ucrInputObjectType.cboInput.SelectedIndex)
         Dim value As String = ""
 
+        ucrReceiverSelectedObject.ResetText()
+
         If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
             ucrReceiverSelectedObject.strSelectorHeading = key
             ucrReceiverSelectedObject.SetMeAsReceiver()
             ucrReceiverSelectedObject.SetItemType(value.Replace(Chr(34), ""))
         End If
+        'If ucrSelectorForViewObject.lstAvailableVariable.FindItemWithText(ucrReceiverSelectedObject.GetVariableNames(False)) Is Nothing Then
+        '    ucrReceiverSelectedObject.RemoveAnyVariablesNotInList()
+        'End If
     End Sub
 End Class
