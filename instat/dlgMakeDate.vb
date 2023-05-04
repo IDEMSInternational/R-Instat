@@ -55,7 +55,7 @@ Public Class dlgMakeDate
         Dim dctDateFormat As New Dictionary(Of String, String)
 
         dctRecognisedTypes.Add("date", {"date", "record"}.ToList())
-        dctRecognisedTypes.Add("year", {"year", "yr"}.ToList())
+        dctRecognisedTypes.Add("year", {"year", "yr", "A"}.ToList())
         dctRecognisedTypes.Add("month", {"month", "mon", "mois"}.ToList())
         dctRecognisedTypes.Add("day", {"day", "jour"}.ToList())
         dctRecognisedTypes.Add("doy", {"doy", "doy_366"}.ToList())
@@ -188,16 +188,13 @@ Public Class dlgMakeDate
         'rdoSingle
         ucrReceiverForDate.SetParameter(New RParameter("x", 0))
         ucrReceiverForDate.SetParameterIsRFunction()
-        ucrReceiverForDate.bAutoFill = True
 
         'rdoYearDayofMonth
         ucrReceiverYearTwo.SetParameter(New RParameter("year", 2))
         ucrReceiverYearTwo.SetParameterIsString()
-        ucrReceiverYearTwo.bAutoFill = True
 
         ucrReceiverDayTwo.SetParameter(New RParameter("doy", 1))
         ucrReceiverDayTwo.SetParameterIsString()
-        ucrReceiverDayTwo.bAutoFill = True
 
         'rdoYearMonthDay
         ucrPnlYearType.AddRadioButton(rdoYearColumn)
@@ -209,7 +206,6 @@ Public Class dlgMakeDate
 
         ucrReceiverYearThree.SetParameter(New RParameter("year", 3))
         ucrReceiverYearThree.SetParameterIsString()
-        ucrReceiverYearThree.bAutoFill = True
 
         ucrInputYearThree.SetParameter(New RParameter("f_year", 6))
         ucrInputYearThree.SetValidationTypeAsNumeric()
@@ -223,7 +219,6 @@ Public Class dlgMakeDate
 
         ucrReceiverMonthThree.SetParameter(New RParameter("month", 2))
         ucrReceiverMonthThree.SetParameterIsString()
-        ucrReceiverMonthThree.bAutoFill = True
 
         ucrInputMonthThree.SetParameter(New RParameter("f_month", 5))
         ucrInputMonthThree.SetValidationTypeAsNumeric(dcmMin:=1, dcmMax:=12)
@@ -237,7 +232,6 @@ Public Class dlgMakeDate
 
         ucrReceiverDayThree.SetParameter(New RParameter("day", 1))
         ucrReceiverDayThree.SetParameterIsString()
-        ucrReceiverDayThree.bAutoFill = True
 
         ucrInputDayThree.SetParameter(New RParameter("f_day", 4))
         ucrInputDayThree.SetValidationTypeAsNumeric(dcmMin:=1, dcmMax:=31)
@@ -406,7 +400,6 @@ Public Class dlgMakeDate
         ucrPnlDayType.SetRCode(clsMakeYearMonthDay, bReset)
 
         ucrSelectorMakeDate.SetRCode(clsMakeYearMonthDay, bReset)
-        SetRCodesforReceivers(bReset)
 
         GroupBoxSettings()
         DataFrameParameter()
@@ -445,13 +438,6 @@ Public Class dlgMakeDate
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetRCodesforReceivers(bReset As Boolean)
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
-        Next
     End Sub
 
     Private Sub AutoFillReceivers()
