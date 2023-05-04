@@ -30,6 +30,7 @@ Public Class dlgEdit
     Private bUseSelectedColumn As Boolean = False
     Private strColumnName As String = ""
     Private strSelectedColumn As String = ""
+    Private strSelectedRow As String = " "
 
     Private Sub dlgEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -63,7 +64,7 @@ Public Class dlgEdit
 
     Private Sub SetDefaults()
         clsReplaceValue = New RFunction
-       
+
 
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
@@ -95,15 +96,20 @@ Public Class dlgEdit
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
+
     Private Sub SetSelectedColumn()
         ucrReceiverName.Add(strSelectedColumn)
         bUseSelectedColumn = False
     End Sub
+
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewName.ControlContentsChanged
-
+    Public Sub SetCurrentColumn(strColumn As String, strRowText As String)
+        strSelectedColumn = strColumn
+        strRowText = strRowText
+        bUseSelectedColumn = True
     End Sub
+
 End Class

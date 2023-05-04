@@ -595,6 +595,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+        dlgEdit.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         dlgEdit.ShowDialog()
     End Sub
 
