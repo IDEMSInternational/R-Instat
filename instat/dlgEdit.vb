@@ -106,9 +106,9 @@ Public Class dlgEdit
         TestOKEnabled()
     End Sub
 
-    Public Sub SetCurrentColumn(strColumn As String, strRowText As String)
+    Public Sub SetCurrentColumn(strColumn As String, strRowNumber As String)
         strSelectedColumn = strColumn
-        strRowText = strRowText
+        strRowText = strRowNumber
         bUseSelectedColumn = True
     End Sub
 
