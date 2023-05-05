@@ -541,7 +541,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged, ucrReceiverForDate.ControlValueChanged,
-            ucrReceiverDayTwo.ControlValueChanged, ucrReceiverDayTwo.ControlValueChanged
+        ucrReceiverDayTwo.ControlValueChanged, ucrReceiverDayTwo.ControlValueChanged
         GroupBoxSettings()
     End Sub
 
@@ -661,5 +661,13 @@ Public Class dlgMakeDate
 
     Private Sub ucrSelectorMakeDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorMakeDate.ControlContentsChanged
         AutoFillReceivers()
+    End Sub
+
+    Private Sub ucrReceiverYearThree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYearThree.ControlValueChanged
+        GroupBoxSettings()
+    End Sub
+
+    Private Sub ucrReceiverDayThree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayThree.ControlValueChanged
+        GroupBoxSettings()
     End Sub
 End Class
