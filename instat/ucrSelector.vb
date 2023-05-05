@@ -147,8 +147,12 @@ Public Class ucrSelector
         End If
 
         'todo, for columns, the list view should be field with variables from the .Net metadata object
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
-        CurrentReceiver.RemoveAnyVariablesNotInList() 'this needed for the multiple receiver(s) where the autofill is not applied
+        frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1),
+                                      strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
+                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+        If Not CurrentReceiver.bExcludeFromSelector Then
+            CurrentReceiver.RemoveAnyVariablesNotInList() 'this needed for the multiple receiver(s) where the autofill is not applied
+        End If
         EnableDataOptions(strCurrentType)
 
     End Sub
