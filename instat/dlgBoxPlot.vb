@@ -102,6 +102,7 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkLabelOutlier}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -158,6 +159,7 @@ Public Class dlgBoxplot
         ucrChkLabelOutlier.SetText("Label Outliers")
         ucrChkLabelOutlier.AddParameterPresentCondition(True, strLabelOutierParameterName, True)
         ucrChkLabelOutlier.AddParameterPresentCondition(False, strLabelOutierParameterName, False)
+        ucrChkLabelOutlier.AddToLinkedControls({ucrNudSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudJitter.SetParameter(New RParameter("width", 2))
         ucrNudJitter.Minimum = 0
@@ -172,7 +174,14 @@ Public Class dlgBoxplot
         ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetRDefault(1)
 
-        ucrChkTufte.SetText("Tufte Boxplots")
+        ucrNudSize.SetParameter(New RParameter("size", 3))
+        ucrNudSize.Minimum = 0
+        ucrNudSize.Increment = 1
+        ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrNudSize.SetRDefault(3)
+
+
+        ucrChkTufte.SetText("Tufte Boxplot")
         ucrChkTufte.AddFunctionNamesCondition(False, "geom_tufteboxplot", False)
         ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
 
@@ -296,6 +305,7 @@ Public Class dlgBoxplot
         clsLabelOutlierFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
         clsLabelOutlierFunction.AddParameter("fun", "stat_summary_fun", iPosition:=2)
         clsLabelOutlierFunction.AddParameter("hjust", "-1", iPosition:=3)
+        clsLabelOutlierFunction.AddParameter("size", "3", iPosition:=4)
 
         clsBoxplotStatFunction.SetRCommand("boxplot.stats")
         clsBoxplotStatFunction.AddParameter("y", "y", bIncludeArgumentName:=False, iPosition:=0)
@@ -340,6 +350,7 @@ Public Class dlgBoxplot
         ucrChkLabelOutlier.SetRCode(clsBaseOperator, bReset)
         ucrNudJitter.SetRCode(clsAddedJitterFunc, bReset)
         ucrNudTransparency.SetRCode(clsAddedJitterFunc, bReset)
+        ucrNudSize.SetRCode(clsLabelOutlierFunction, bReset)
         ucrInputSummaries.SetRCode(clsStatSummary, bReset)
         ucrChkGrouptoConnect.SetRCode(clsBaseOperator, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunction, bReset)
@@ -517,8 +528,10 @@ Public Class dlgBoxplot
     Private Sub ucrChkLabelOutlier_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelOutlier.ControlValueChanged
         If ucrChkLabelOutlier.Checked Then
             clsBaseOperator.AddParameter(strLabelOutierParameterName, clsRFunctionParameter:=clsLabelOutlierFunction, iPosition:=5)
+            ucrNudSize.Visible = True
         Else
             clsBaseOperator.RemoveParameterByName(strLabelOutierParameterName)
+            ucrNudSize.Visible = False
         End If
     End Sub
 

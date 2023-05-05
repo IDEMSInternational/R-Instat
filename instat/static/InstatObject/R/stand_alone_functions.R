@@ -2904,7 +2904,7 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
 
 # Function used in <<< DLG NAME >>> as `fun` parameter value
 stat_summary_fun <- function(y) {
-  o <- boxplot.stats(y)$out; if(length(o) == 0) NA else o
+  out <- boxplot.stats(y)$out; if(length(out) == 0) NA else out
 }
 
 
