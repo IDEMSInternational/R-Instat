@@ -19,21 +19,15 @@ Imports instat.Translations
 Public Class dlgSummaryTables
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private bResetRCode = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
-    Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction, clsConcFunction,
-            clsMutableFunction As New RFunction
-    Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
-            clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
-            clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
+    Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction, clsConcFunction As New RFunction
     Private bRCodeSet As Boolean = True
     Private clsStubHeadFunction, clsPivotWiderFunction As New RFunction
 
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
-             clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
-            clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+            clsTabFootnoteSubtitleFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
             clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesTabOptionsFunction,
             clsgtExtraThemesFunction, clsGtFunction As New RFunction
@@ -196,7 +190,6 @@ Public Class dlgSummaryTables
         clsTableTitleFunction = New RFunction
         clsTabFootnoteTitleFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
-        clsBorderWeightPxFunction = New RFunction
         clsFootnoteTitleLocationFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
         clsSummaryOperator = New ROperator
