@@ -267,7 +267,7 @@ Public Class dlgDescribeTwoVariable
         clsGroupByFunction.SetRCommand("group_by")
 
         clsSkimrFunction.SetPackageName("skimr")
-        clsSkimrFunction.SetRCommand("skim_without_charts")
+        clsSkimrFunction.SetRCommand("skim")
 
         clsCombineFunction.SetRCommand("c")
 
