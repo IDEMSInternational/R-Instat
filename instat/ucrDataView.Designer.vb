@@ -148,11 +148,7 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
 
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
-<<<<<<< HEAD
-=======
         Me.mnuEditCell = New System.Windows.Forms.ToolStripMenuItem()
-
->>>>>>> b884f9ee2b53752d6a43348efffdd372280fe80b
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
