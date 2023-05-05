@@ -31,6 +31,7 @@ Public Class ucrColumnMetadata
     Private strDataTypeLabel As String = "DataType"
     Private strLabelsLabel As String = "labels"
     Private strLabelsScientific As String = "Scientific"
+    Private _Refreshed As Boolean = False
 
     Public WriteOnly Property DataBook() As clsDataBook
         Set(ByVal value As clsDataBook)
@@ -43,6 +44,12 @@ Public Class ucrColumnMetadata
         loadForm()
         mnuInsertColsAfter.Visible = False
         mnuInsertColsBefore.Visible = False
+    End Sub
+
+    Private Sub ucrColumnMetadata_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        'the grid may not have the latest contents because of being hidden
+        'so refresh the grid data
+        RefreshGridData()
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
@@ -87,7 +94,9 @@ Public Class ucrColumnMetadata
     End Sub
 
     Public Sub RefreshGridData()
-        If _clsDataBook IsNot Nothing Then
+        'only refresh the grid when the data book is initialised and the grid is visible
+        'very useful for wide data sets.
+        If _clsDataBook IsNot Nothing And Visible Then
             _grid.RemoveOldWorksheets()
             AddAndUpdateWorksheets()
             _grid.bVisible = _clsDataBook.DataFrames.Count > 0
@@ -468,4 +477,5 @@ Public Class ucrColumnMetadata
     Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click, mnuHelp2.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
     End Sub
+
 End Class
