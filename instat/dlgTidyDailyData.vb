@@ -142,7 +142,7 @@ Public Class dlgTidyDailyData
         ucrInputNewDataFrame.Reset()
         ucrTxtBoxElementName.SetName("value")
 
-        clsTidyClimaticFunction.AddParameter("format", Chr(34) & "years" & Chr(34), iPosition:=3)
+        clsTidyClimaticFunction.AddParameter("format", Chr(34) & "days" & Chr(34), iPosition:=3)
 
         clsTidyClimaticFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$tidy_climatic_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsTidyClimaticFunction)
