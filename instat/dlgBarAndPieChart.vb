@@ -241,6 +241,7 @@ Public Class dlgBarAndPieChart
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
+        dctPositionPairs.Add("Fill in reverse", "position_fill(reverse = TRUE)")
         ucrInputBarChartPositions.SetItems(dctPositionPairs)
         ucrInputBarChartPositions.SetDropDownStyleAsNonEditable()
         ucrInputBarChartPositions.SetRDefault(Chr(34) & "stack" & Chr(34))
@@ -1012,6 +1013,8 @@ Public Class dlgBarAndPieChart
             clsGeomTextFunction.AddParameter("position", "position_jitter(width = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
             clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.5, reverse = TRUE)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Fill in reverse" Then
+            clsGeomTextFunction.AddParameter("position", "position_fill(reverse = TRUE)", iPosition:=2)
         Else
             clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
         End If
