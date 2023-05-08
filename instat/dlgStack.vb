@@ -79,6 +79,7 @@ Public Class dlgStack
         ucrReceiverDropValues.Selector = ucrSelectorStack
         ucrReceiverDropValues.SetParameterIsString()
         ucrReceiverDropValues.SetLinkedDisplayControl(lblDropValues)
+        ucrReceiverDropValues.bExcludeFromSelector = True
 
         ucrInputNamesTo.SetParameter(New RParameter("names_to", 3))
         ucrInputNamesTo.SetRDefault(Chr(34) & "names" & Chr(34))
@@ -289,7 +290,7 @@ Public Class dlgStack
         ucrChkPunctuation.SetRCode(clsUnnestTokensFunction, bReset)
         ucrChkUrl.SetRCode(clsUnnestTokensFunction, bReset)
         ucrInputOutput.SetRCode(clsUnnestTokensFunction, bReset)
-        ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
+        ' ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputNamesTo.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropMissingValues.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputValuesTo.SetRCode(clsPivotLongerFunction, bReset)
@@ -302,6 +303,7 @@ Public Class dlgStack
         If bReset Then
             ucrReceiverDropValues.SetRCode(clsReshapeFunction, bReset)
             ucrChkDropVariables.SetRCode(clsDummyFunction, bReset)
+            ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
 
         End If
     End Sub
@@ -373,6 +375,7 @@ Public Class dlgStack
 
     Private Sub CarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCarryColumns.ControlValueChanged,
     ucrReceiverColumnsToBeStack.ControlValueChanged, ucrReceiverColumnsToCarry.ControlValueChanged
+        Excludevariables()
 
         If rdoCarryColumns.Checked Then
             ucrReceiverColumnsToCarry.Visible = True
@@ -461,11 +464,32 @@ Public Class dlgStack
             clsDummyFunction.AddParameter("drop", "True", iPosition:=0)
             'ucrReceiverDropValues.SetMeAsReceiver()
             'clsReshapeFunction.AddParameter("drop", ucrReceiverDropValues.GetVariableNames, iPosition:=4)
-
+            'ucrReceiverColumnsToBeStack.bExcludeFromSelector = True
         Else
             clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+            'ucrReceiverColumnsToBeStack.bExcludeFromSelector = False
+
             'clsReshapeFunction.RemoveParameterByName("drop")
             'ucrReceiverColumnsToBeStack.SetMeAsReceiver()
         End If
+        Excludevariables()
+    End Sub
+    Private Sub Excludevariables()
+        If ucrChkDropVariables.Checked Then
+            'clsDummyFunction.AddParameter("drop", "True", iPosition:=0)
+            ucrReceiverDropValues.SetMeAsReceiver()
+            'clsReshapeFunction.AddParameter("drop", ucrReceiverDropValues.GetVariableNames, iPosition:=4)
+            ucrReceiverColumnsToBeStack.bExcludeFromSelector = True
+        Else
+            'clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+            ucrReceiverColumnsToBeStack.bExcludeFromSelector = False
+
+            'clsReshapeFunction.RemoveParameterByName("drop")
+            ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrReceiverDropValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDropValues.ControlValueChanged
+        Excludevariables()
     End Sub
 End Class

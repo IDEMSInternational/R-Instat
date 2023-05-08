@@ -288,7 +288,7 @@ Partial Class dlgStack
         '
         Me.ucrChkDropVariables.AutoSize = True
         Me.ucrChkDropVariables.Checked = False
-        Me.ucrChkDropVariables.Location = New System.Drawing.Point(184, 352)
+        Me.ucrChkDropVariables.Location = New System.Drawing.Point(184, 345)
         Me.ucrChkDropVariables.Name = "ucrChkDropVariables"
         Me.ucrChkDropVariables.Size = New System.Drawing.Size(231, 24)
         Me.ucrChkDropVariables.TabIndex = 42
