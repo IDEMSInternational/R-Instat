@@ -44,7 +44,7 @@ Public Class dlgEdit
             SetSelectedColumn()
         End If
         SetRCodeForControls(bReset)
-        bReset = False
+        bReset = True
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -59,12 +59,12 @@ Public Class dlgEdit
 
         ucrNewName.SetParameter(New RParameter("new_val", 2))
         'set validation of ucrInputNewName as an RVariable.(input should not have any R reserved words like 'if','while')
-        ucrNewName.SetValidationTypeAsRVariable()
+        ucrNewName.SetValidationTypeAsList()
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceValue = New RFunction
-
+        ucrSelectValues.Reset()
 
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
@@ -102,7 +102,7 @@ Public Class dlgEdit
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
