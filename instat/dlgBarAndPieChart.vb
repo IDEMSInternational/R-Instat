@@ -789,8 +789,8 @@ Public Class dlgBarAndPieChart
         Dim strChangedTextValue As String = ucrInputAddReorder.GetText()
         Dim strChangeTextReorder As String = ucrInputReorderValue.GetText()
         If rdoFrequency.Checked Then
-            clsForecatsInfreq.AddParameter("f", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
-            clsForecatsInfreqValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+            clsForecatsInfreq.AddParameter("f", "as.factor(" & Chr(34) & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & Chr(34) & ")", iPosition:=0)
+            clsForecatsInfreqValue.AddParameter("f", "as.factor(" & Chr(34) & ucrReceiverByFactor.GetVariableNames(False) & Chr(34) & ")", iPosition:=0)
             Select Case strChangedTextFreq
                 Case strAscending
                     clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
@@ -808,7 +808,7 @@ Public Class dlgBarAndPieChart
                 Case strDescending
                     clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=1)
                 Case strReverse
-                    clsForecatsReverseValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+                    clsForecatsReverseValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False) & Chr(34), iPosition:=0)
                     clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=1)
             End Select
 
