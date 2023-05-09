@@ -80,7 +80,7 @@ Partial Class ucrScript
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuRunCurrentLineSelection, Me.mnuRunAllText, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(274, 336)
+        Me.mnuContextScript.Size = New System.Drawing.Size(274, 314)
         '
         'mnuUndo
         '
@@ -258,25 +258,25 @@ Partial Class ucrScript
         '
         'cmdRemoveTab
         '
-        Me.cmdRemoveTab.Location = New System.Drawing.Point(314, 1)
+        Me.cmdRemoveTab.Location = New System.Drawing.Point(334, 1)
         Me.cmdRemoveTab.Name = "cmdRemoveTab"
-        Me.cmdRemoveTab.Size = New System.Drawing.Size(55, 23)
+        Me.cmdRemoveTab.Size = New System.Drawing.Size(75, 23)
         Me.cmdRemoveTab.TabIndex = 5
-        Me.cmdRemoveTab.Text = "Remove Tab"
+        Me.cmdRemoveTab.Text = "Remove"
         Me.cmdRemoveTab.UseVisualStyleBackColor = True
         '
         'cmdAddTab
         '
         Me.cmdAddTab.Location = New System.Drawing.Point(257, 1)
         Me.cmdAddTab.Name = "cmdAddTab"
-        Me.cmdAddTab.Size = New System.Drawing.Size(55, 23)
+        Me.cmdAddTab.Size = New System.Drawing.Size(75, 23)
         Me.cmdAddTab.TabIndex = 4
-        Me.cmdAddTab.Text = "Add Tab"
+        Me.cmdAddTab.Text = "Add"
         Me.cmdAddTab.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(442, 1)
+        Me.cmdHelp.Location = New System.Drawing.Point(502, 1)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(55, 23)
         Me.cmdHelp.TabIndex = 7
@@ -285,9 +285,9 @@ Partial Class ucrScript
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(371, 1)
+        Me.cmdClear.Location = New System.Drawing.Point(411, 1)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(55, 23)
+        Me.cmdClear.Size = New System.Drawing.Size(80, 23)
         Me.cmdClear.TabIndex = 6
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
