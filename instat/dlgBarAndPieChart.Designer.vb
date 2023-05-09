@@ -936,8 +936,8 @@ Partial Class dlgBarAndPieChart
         Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Bar_and_Pie_Chart"
-        Me.Text = "Bar and Pie Chart"
+        Me.Tag = "Bar_Chart"
+        Me.Text = "Bar  Chart"
         Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
