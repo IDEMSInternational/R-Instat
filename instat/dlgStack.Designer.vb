@@ -288,9 +288,9 @@ Partial Class dlgStack
         '
         Me.ucrChkDropVariables.AutoSize = True
         Me.ucrChkDropVariables.Checked = False
-        Me.ucrChkDropVariables.Location = New System.Drawing.Point(184, 345)
+        Me.ucrChkDropVariables.Location = New System.Drawing.Point(10, 344)
         Me.ucrChkDropVariables.Name = "ucrChkDropVariables"
-        Me.ucrChkDropVariables.Size = New System.Drawing.Size(231, 24)
+        Me.ucrChkDropVariables.Size = New System.Drawing.Size(219, 24)
         Me.ucrChkDropVariables.TabIndex = 42
         '
         'ucrPnlCarryColumns
@@ -594,7 +594,6 @@ Partial Class dlgStack
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 442)
-        Me.Controls.Add(Me.ucrChkDropVariables)
         Me.Controls.Add(Me.rdoCarryColumns)
         Me.Controls.Add(Me.rdoCarryAllColumns)
         Me.Controls.Add(Me.ucrPnlCarryColumns)
@@ -604,7 +603,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrChkToLowerCase)
         Me.Controls.Add(Me.ucrInputNamesTo)
         Me.Controls.Add(Me.lblSets)
-        Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrInputDropPrefix)
         Me.Controls.Add(Me.ucrInputOutput)
         Me.Controls.Add(Me.ucrReceiverTextColumn)
@@ -639,6 +637,8 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrReceiverColumnsToCarry)
         Me.Controls.Add(Me.ucrReceiverDropValues)
         Me.Controls.Add(Me.lblDropValues)
+        Me.Controls.Add(Me.ucrNudNoSets)
+        Me.Controls.Add(Me.ucrChkDropVariables)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
