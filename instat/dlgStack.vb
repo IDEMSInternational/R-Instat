@@ -230,7 +230,6 @@ Public Class dlgStack
 
         clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
 
-
         clsPivotLongerFunction.SetRCommand("pivot_longer")
         clsPivotLongerFunction.SetPackageName("tidyr")
 
