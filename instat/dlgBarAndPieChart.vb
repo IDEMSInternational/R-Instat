@@ -254,7 +254,7 @@ Public Class dlgBarAndPieChart
 
         ucrInputLabelPosition.SetParameter(New RParameter("vjust", 2))
         dctLabelPositions.Add("Out", "-0.25")
-        dctLabelPositions.Add("In", "5")
+        dctLabelPositions.Add("In", "1.5")
         ucrInputLabelPosition.SetItems(dctLabelPositions)
         ucrInputLabelPosition.SetDropDownStyleAsNonEditable()
 
