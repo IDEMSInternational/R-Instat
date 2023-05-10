@@ -50,9 +50,10 @@ Partial Class dlgClimaticStationMaps
         Me.PlotOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemSFOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemMapping = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdOptions = New instat.ucrSplitButton()
         Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLabelRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.toolStripMenuItemTextRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpPoints.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -330,9 +331,9 @@ Partial Class dlgClimaticStationMaps
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemLabelRepelOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemLabelRepelOptions, Me.toolStripMenuItemTextRepelOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
         '
         'PlotOptionsToolStripMenuItem
         '
@@ -352,6 +353,18 @@ Partial Class dlgClimaticStationMaps
         Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemMapping.Text = "Map Options"
         '
+        'toolStripMenuItemPointOptions
+        '
+        Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOptions.Text = "Point Options"
+        '
+        'toolStripMenuItemLabelRepelOptions
+        '
+        Me.toolStripMenuItemLabelRepelOptions.Name = "toolStripMenuItemLabelRepelOptions"
+        Me.toolStripMenuItemLabelRepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLabelRepelOptions.Text = "Label Repel Options"
+        '
         'cmdOptions
         '
         Me.cmdOptions.AutoSize = True
@@ -365,17 +378,11 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'toolStripMenuItemPointOptions
+        'toolStripMenuItemTextRepelOptions
         '
-        Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
-        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemPointOptions.Text = "Point Options"
-        '
-        'toolStripMenuItemLabelRepelOptions
-        '
-        Me.toolStripMenuItemLabelRepelOptions.Name = "toolStripMenuItemLabelRepelOptions"
-        Me.toolStripMenuItemLabelRepelOptions.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemLabelRepelOptions.Text = "Label Repel Options"
+        Me.toolStripMenuItemTextRepelOptions.Name = "toolStripMenuItemTextRepelOptions"
+        Me.toolStripMenuItemTextRepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTextRepelOptions.Text = "Text Repel Options"
         '
         'dlgClimaticStationMaps
         '
@@ -432,4 +439,5 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents PlotOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLabelRepelOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTextRepelOptions As ToolStripMenuItem
 End Class

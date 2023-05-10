@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class dlgClimaticStationMaps
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsScaleShapeFunction, clsLabelRepelFunction As New RFunction
+    Private clsGgplotFunction, clsGeomSfFunction, clsGeomPointFunction, clsSfAesFunction, clsGeomPointAesFunction, clsScaleShapeFunction, clsLabelRepelFunction, clsTextRepelFunction As New RFunction
     Private clsGGplotOperator, clsFacetOp As New ROperator
 
     Private clsLabsFunction As New RFunction
@@ -36,6 +36,7 @@ Public Class dlgClimaticStationMaps
     Private bResetSubdialog As Boolean = True
     Private bResetSFLayerSubdialog As Boolean = True
     Private clsLabelRepelAesFunction As New RFunction
+    Private clsTextRepelAesFunction As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
@@ -139,7 +140,9 @@ Public Class dlgClimaticStationMaps
         clsGeomPointAesFunction = New RFunction
         clsScaleShapeFunction = New RFunction
         clsLabelRepelFunction = New RFunction
+        clsTextRepelFunction = New RFunction
         clsLabelRepelAesFunction = New RFunction
+        clsTextRepelAesFunction = New RFunction
 
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
@@ -194,9 +197,16 @@ Public Class dlgClimaticStationMaps
         clsLabelRepelFunction.SetRCommand("geom_label_repel")
         clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
 
+        clsTextRepelFunction.SetPackageName("ggrepel")
+        clsTextRepelFunction.SetRCommand("geom_text_repel")
+        clsTextRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextRepelAesFunction, iPosition:=1)
+
+
         clsLabelRepelAesFunction.SetPackageName("ggplot2")
         clsLabelRepelAesFunction.SetRCommand("aes")
 
+        clsTextRepelAesFunction.SetPackageName("ggplot2")
+        clsTextRepelAesFunction.SetRCommand("aes")
 
         clsGGplotOperator.SetOperation("+")
         clsGGplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -234,6 +244,10 @@ Public Class dlgClimaticStationMaps
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLongitude.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLatitude.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverLongitude.GetParameter(), iAdditionalPairNo:=2)
+        ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverLatitude.GetParameter(), iAdditionalPairNo:=2)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverStation.GetParameter(), iAdditionalPairNo:=1)
 
         ucrSelectorOutline.SetRCode(clsGeomSfFunction, bReset)
         ucrReceiverFill.SetRCode(clsSfAesFunction, bReset)
@@ -335,6 +349,18 @@ Public Class dlgClimaticStationMaps
         clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
     End Sub
 
+
+    Private Sub toolStripMenuItemTextRepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextRepelOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsTextRepelFunction, clsNewGlobalAesFunc:=clsTextRepelAesFunction,
+                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorStation, bApplyAesGlobally:=True,
+                                   bReset:=bResetSFLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetSFLayerSubdialog = False
+        clsGgplotFunction.RemoveParameterByName("mapping")
+        clsTextRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextRepelAesFunction, iPosition:=1)
+
+    End Sub
+
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsGeomPointFunction, clsNewGlobalAesFunc:=clsGeomPointAesFunction,
                                   clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorStation, bApplyAesGlobally:=True,
@@ -351,6 +377,7 @@ Public Class dlgClimaticStationMaps
         If ucrChkAddPoints.Checked Then
             If Not ucrReceiverStation.IsEmpty Then
                 clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+                clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
             End If
             If Not ucrReceiverFacet.IsEmpty Then
                 clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
