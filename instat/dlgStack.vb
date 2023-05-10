@@ -441,7 +441,6 @@ Public Class dlgStack
             End If
         Else
             ucrChkDropPrefix.Visible = True
-
         End If
         If ucrChkStackMultipleSets.Checked = False Then
             If ucrChkDropVariables.Checked Then
