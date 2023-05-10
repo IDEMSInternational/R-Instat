@@ -207,7 +207,7 @@ Partial Class dlgStack
         '
         Me.lblSets.AutoSize = True
         Me.lblSets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSets.Location = New System.Drawing.Point(227, 323)
+        Me.lblSets.Location = New System.Drawing.Point(181, 323)
         Me.lblSets.Name = "lblSets"
         Me.lblSets.Size = New System.Drawing.Size(31, 13)
         Me.lblSets.TabIndex = 31
@@ -288,9 +288,9 @@ Partial Class dlgStack
         '
         Me.ucrChkDropVariables.AutoSize = True
         Me.ucrChkDropVariables.Checked = False
-        Me.ucrChkDropVariables.Location = New System.Drawing.Point(10, 344)
+        Me.ucrChkDropVariables.Location = New System.Drawing.Point(257, 197)
         Me.ucrChkDropVariables.Name = "ucrChkDropVariables"
-        Me.ucrChkDropVariables.Size = New System.Drawing.Size(219, 24)
+        Me.ucrChkDropVariables.Size = New System.Drawing.Size(161, 24)
         Me.ucrChkDropVariables.TabIndex = 42
         '
         'ucrPnlCarryColumns
@@ -340,7 +340,7 @@ Partial Class dlgStack
         Me.ucrNudNoSets.AutoSize = True
         Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoSets.Location = New System.Drawing.Point(288, 320)
+        Me.ucrNudNoSets.Location = New System.Drawing.Point(220, 320)
         Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Name = "ucrNudNoSets"
@@ -568,7 +568,7 @@ Partial Class dlgStack
         '
         Me.ucrReceiverDropValues.AutoSize = True
         Me.ucrReceiverDropValues.frmParent = Me
-        Me.ucrReceiverDropValues.Location = New System.Drawing.Point(257, 211)
+        Me.ucrReceiverDropValues.Location = New System.Drawing.Point(257, 240)
         Me.ucrReceiverDropValues.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDropValues.Name = "ucrReceiverDropValues"
         Me.ucrReceiverDropValues.Selector = Nothing
@@ -581,12 +581,12 @@ Partial Class dlgStack
         '
         Me.lblDropValues.AutoSize = True
         Me.lblDropValues.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDropValues.Location = New System.Drawing.Point(260, 193)
+        Me.lblDropValues.Location = New System.Drawing.Point(257, 221)
         Me.lblDropValues.Name = "lblDropValues"
-        Me.lblDropValues.Size = New System.Drawing.Size(74, 13)
+        Me.lblDropValues.Size = New System.Drawing.Size(85, 13)
         Me.lblDropValues.TabIndex = 44
         Me.lblDropValues.Tag = "Columns_to_Stack:"
-        Me.lblDropValues.Text = "Drop Value(s):"
+        Me.lblDropValues.Text = "Drop Variable(s):"
         '
         'dlgStack
         '
@@ -594,9 +594,10 @@ Partial Class dlgStack
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 442)
+        Me.Controls.Add(Me.ucrNudNoSets)
+        Me.Controls.Add(Me.ucrReceiverDropValues)
+        Me.Controls.Add(Me.lblDropValues)
         Me.Controls.Add(Me.rdoCarryColumns)
-        Me.Controls.Add(Me.rdoCarryAllColumns)
-        Me.Controls.Add(Me.ucrPnlCarryColumns)
         Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
         Me.Controls.Add(Me.lblExpandFactor)
         Me.Controls.Add(Me.rdoExpand)
@@ -616,7 +617,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.ucrInputFormat)
         Me.Controls.Add(Me.ucrChkPunctuation)
         Me.Controls.Add(Me.lblValuesTo)
-        Me.Controls.Add(Me.ucrChkDropMissingValues)
         Me.Controls.Add(Me.ucrChkUrl)
         Me.Controls.Add(Me.ucrChkDropPrefix)
         Me.Controls.Add(Me.lblOutput)
@@ -635,10 +635,10 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblToken)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverColumnsToCarry)
-        Me.Controls.Add(Me.ucrReceiverDropValues)
-        Me.Controls.Add(Me.lblDropValues)
-        Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrChkDropVariables)
+        Me.Controls.Add(Me.rdoCarryAllColumns)
+        Me.Controls.Add(Me.ucrPnlCarryColumns)
+        Me.Controls.Add(Me.ucrChkDropMissingValues)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

@@ -435,10 +435,13 @@ Public Class dlgStack
         ucrBase.clsRsyntax.SetBaseRFunction(If(ucrChkStackMultipleSets.Checked _
                                              , clsReshapeFunction, clsPivotLongerFunction))
         If ucrChkStackMultipleSets.Checked Then
+            ucrChkDropPrefix.Visible = False
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
             If ucrChkDropVariables.Checked Then
                 ucrReceiverDropValues.SetMeAsReceiver()
             End If
+        Else
+            ucrChkDropPrefix.Visible = True
 
         End If
         If ucrChkStackMultipleSets.Checked = False Then
@@ -475,6 +478,7 @@ Public Class dlgStack
             clsDummyFunction.AddParameter("drop", "True", iPosition:=0)
         Else
             clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+
         End If
         Excludevariables()
     End Sub
