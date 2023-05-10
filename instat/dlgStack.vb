@@ -325,7 +325,6 @@ Public Class dlgStack
             If ucrChkStackMultipleSets.Checked Then
                 If ucrChkDropVariables.Checked AndAlso ucrReceiverDropValues.IsEmpty Then
                     ucrBase.OKEnabled(False)
-
                 Else
                     ucrBase.OKEnabled(True)
                 End If
