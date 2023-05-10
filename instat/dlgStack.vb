@@ -328,7 +328,6 @@ Public Class dlgStack
 
                 Else
                     ucrBase.OKEnabled(True)
-
                 End If
             End If
         Else
