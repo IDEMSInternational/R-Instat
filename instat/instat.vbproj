@@ -5217,6 +5217,7 @@
     <None Include="app.manifest" />
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <Content Include="Resources\upward-arrow1.png" />
+    <Content Include="translations\translateDynamic.txt" />
     <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
