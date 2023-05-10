@@ -477,7 +477,6 @@ Public Class dlgStack
             clsDummyFunction.AddParameter("drop", "True", iPosition:=0)
         Else
             clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
-
         End If
         Excludevariables()
     End Sub
