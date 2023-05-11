@@ -119,7 +119,7 @@ Partial Class dlgNewDataFrame
         Me.rdoCommand.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCommand.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCommand.Location = New System.Drawing.Point(348, 15)
+        Me.rdoCommand.Location = New System.Drawing.Point(333, 15)
         Me.rdoCommand.Name = "rdoCommand"
         Me.rdoCommand.Size = New System.Drawing.Size(78, 27)
         Me.rdoCommand.TabIndex = 2
@@ -136,7 +136,7 @@ Partial Class dlgNewDataFrame
         Me.rdoRandom.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRandom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRandom.Location = New System.Drawing.Point(207, 15)
+        Me.rdoRandom.Location = New System.Drawing.Point(192, 15)
         Me.rdoRandom.Name = "rdoRandom"
         Me.rdoRandom.Size = New System.Drawing.Size(73, 27)
         Me.rdoRandom.TabIndex = 3
@@ -153,9 +153,9 @@ Partial Class dlgNewDataFrame
         Me.rdoEmpty.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEmpty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoEmpty.Location = New System.Drawing.Point(28, 15)
+        Me.rdoEmpty.Location = New System.Drawing.Point(45, 15)
         Me.rdoEmpty.Name = "rdoEmpty"
-        Me.rdoEmpty.Size = New System.Drawing.Size(106, 27)
+        Me.rdoEmpty.Size = New System.Drawing.Size(74, 27)
         Me.rdoEmpty.TabIndex = 4
         Me.rdoEmpty.TabStop = True
         Me.rdoEmpty.Text = "New"
@@ -170,7 +170,7 @@ Partial Class dlgNewDataFrame
         Me.rdoConstruct.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoConstruct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoConstruct.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoConstruct.Location = New System.Drawing.Point(280, 15)
+        Me.rdoConstruct.Location = New System.Drawing.Point(265, 15)
         Me.rdoConstruct.Name = "rdoConstruct"
         Me.rdoConstruct.Size = New System.Drawing.Size(69, 27)
         Me.rdoConstruct.TabIndex = 1
@@ -385,7 +385,7 @@ Partial Class dlgNewDataFrame
         Me.rdoLists.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLists.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoLists.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLists.Location = New System.Drawing.Point(134, 15)
+        Me.rdoLists.Location = New System.Drawing.Point(119, 15)
         Me.rdoLists.Name = "rdoLists"
         Me.rdoLists.Size = New System.Drawing.Size(74, 27)
         Me.rdoLists.TabIndex = 165
