@@ -46,6 +46,7 @@ Public Class dlgClimaticStationMaps
     Private clsAnnotateFunction As New RFunction
     Private clsGetDataFrame As New RFunction
     Private clsRemoveFunc As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -73,15 +74,12 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
-
         ucrReceiverGeometry.Selector = ucrSelectorOutline
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
         ucrReceiverFill.SetParameterIsString()
         ucrReceiverFill.bWithQuotes = False
-
-
 
         ucrReceiverLongitude.SetParameter(New RParameter("x", 0))
         ucrReceiverLongitude.Selector = ucrSelectorStation
@@ -124,6 +122,21 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 
+        ucrChkLabelledRectangle.SetText("Labelled Rectangle")
+        ucrChkLabelledRectangle.AddParameterValuesCondition(True, "colour", "True")
+        ucrChkLabelledRectangle.AddParameterValuesCondition(False, "colour", "False")
+
+        ucrChkLabelAll.SetText("Label All")
+        ucrChkLabelAll.AddParameterValuesCondition(True, "check", "True")
+        ucrChkLabelAll.AddParameterValuesCondition(False, "check", "False")
+        ucrChkLabelAll.SetRDefault("FALSE")
+
+        ucrNudSize.SetParameter(New RParameter("size", 2))
+        ucrNudSize.Minimum = 1
+        ucrNudSize.DecimalPlaces = 2
+        ucrNudSize.Increment = 0.1
+        ucrNudSize.SetLinkedDisplayControl(lblSize)
+
         ucrChkAddPoints.SetText("Add Points")
         ucrChkAddPoints.AddParameterPresentCondition(True, "geom_point")
         ucrChkAddPoints.AddParameterPresentCondition(False, "geom_point", False)
@@ -143,6 +156,7 @@ Public Class dlgClimaticStationMaps
         clsTextRepelFunction = New RFunction
         clsLabelRepelAesFunction = New RFunction
         clsTextRepelAesFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         clsGGplotOperator = New ROperator
         clsXlimFunction = New RFunction
@@ -167,6 +181,8 @@ Public Class dlgClimaticStationMaps
         clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsRemoveFunc.SetRCommand("rm")
+
+        clsDummyFunction.AddParameter("colour", "True", iPosition:=1)
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -196,11 +212,14 @@ Public Class dlgClimaticStationMaps
         clsLabelRepelFunction.SetPackageName("ggrepel")
         clsLabelRepelFunction.SetRCommand("geom_label_repel")
         clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
+        clsLabelRepelFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=2)
+        clsLabelRepelFunction.AddParameter("size", "1", iPosition:=3)
 
         clsTextRepelFunction.SetPackageName("ggrepel")
         clsTextRepelFunction.SetRCommand("geom_text_repel")
         clsTextRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextRepelAesFunction, iPosition:=1)
-
+        clsTextRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+        clsTextRepelFunction.AddParameter("size", "1", iPosition:=3)
 
         clsLabelRepelAesFunction.SetPackageName("ggplot2")
         clsLabelRepelAesFunction.SetRCommand("aes")
@@ -244,10 +263,9 @@ Public Class dlgClimaticStationMaps
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLongitude.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLatitude.GetParameter(), iAdditionalPairNo:=1)
-
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverStation.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverLongitude.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverLatitude.GetParameter(), iAdditionalPairNo:=2)
-        ucrReceiverStation.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverStation.GetParameter(), iAdditionalPairNo:=1)
 
         ucrSelectorOutline.SetRCode(clsGeomSfFunction, bReset)
         ucrReceiverFill.SetRCode(clsSfAesFunction, bReset)
@@ -258,7 +276,8 @@ Public Class dlgClimaticStationMaps
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
-
+        ucrChkLabelledRectangle.SetRCode(clsDummyFunction, bReset)
+        ucrChkLabelAll.SetRCode(clsGGplotOperator, bReset)
         ucrReceiverStation.SetRCode(clsLabelRepelAesFunction, bReset)
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
     End Sub
@@ -349,7 +368,6 @@ Public Class dlgClimaticStationMaps
         clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
     End Sub
 
-
     Private Sub toolStripMenuItemTextRepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextRepelOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsTextRepelFunction, clsNewGlobalAesFunc:=clsTextRepelAesFunction,
                                    clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=False, ucrNewBaseSelector:=ucrSelectorStation, bApplyAesGlobally:=True,
@@ -375,8 +393,9 @@ Public Class dlgClimaticStationMaps
         clsGGplotOperator.RemoveParameterByName("facets")
         clsGGplotOperator.RemoveParameterByName("scale_shape_manual")
         If ucrChkAddPoints.Checked Then
-            If Not ucrReceiverStation.IsEmpty Then
+            If Not ucrReceiverStation.IsEmpty AndAlso ucrChkLabelledRectangle.Checked Then
                 clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            ElseIf Not ucrReceiverStation.IsEmpty AndAlso Not ucrChkLabelledRectangle.Checked Then
                 clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
             End If
             If Not ucrReceiverFacet.IsEmpty Then
@@ -443,5 +462,28 @@ Public Class dlgClimaticStationMaps
         ucrReceiverLongitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrSaveMap.ControlContentsChanged,
         ucrReceiverStation.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkLabelledRectangle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelledRectangle.ControlValueChanged
+        If ucrChkLabelledRectangle.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+            clsLabelRepelAesFunction.RemoveParameterByName("size")
+        Else
+            clsGGplotOperator.AddParameter("geom_Text", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
+            clsTextRepelAesFunction.RemoveParameterByName("size")
+        End If
+    End Sub
+
+    Private Sub ucrChkLabelAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelAll.ControlValueChanged
+        If ucrChkLabelAll.Checked AndAlso ucrChkLabelAll.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+        ElseIf ucrChkLabelAll.Checked AndAlso Not ucrChkLabelAll.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
+            clsTextRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+        End If
     End Sub
 End Class

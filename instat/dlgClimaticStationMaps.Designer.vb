@@ -26,6 +26,11 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSaveMap = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPoints = New System.Windows.Forms.GroupBox()
+        Me.grpBoxLabelOptions = New System.Windows.Forms.GroupBox()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.ucrChkLabelAll = New instat.ucrCheck()
+        Me.ucrChkLabelledRectangle = New instat.ucrCheck()
         Me.lblLabels = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.lblFacet = New System.Windows.Forms.Label()
@@ -52,9 +57,10 @@ Partial Class dlgClimaticStationMaps
         Me.toolStripMenuItemMapping = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLabelRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdOptions = New instat.ucrSplitButton()
         Me.toolStripMenuItemTextRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
         Me.grpPoints.SuspendLayout()
+        Me.grpBoxLabelOptions.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -62,7 +68,7 @@ Partial Class dlgClimaticStationMaps
         'ucrSaveMap
         '
         Me.ucrSaveMap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveMap.Location = New System.Drawing.Point(10, 261)
+        Me.ucrSaveMap.Location = New System.Drawing.Point(10, 319)
         Me.ucrSaveMap.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveMap.Name = "ucrSaveMap"
         Me.ucrSaveMap.Size = New System.Drawing.Size(320, 22)
@@ -72,7 +78,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 286)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 350)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -80,6 +86,7 @@ Partial Class dlgClimaticStationMaps
         '
         'grpPoints
         '
+        Me.grpPoints.Controls.Add(Me.grpBoxLabelOptions)
         Me.grpPoints.Controls.Add(Me.lblLabels)
         Me.grpPoints.Controls.Add(Me.ucrReceiverStation)
         Me.grpPoints.Controls.Add(Me.lblFacet)
@@ -95,10 +102,64 @@ Partial Class dlgClimaticStationMaps
         Me.grpPoints.Controls.Add(Me.ucrReceiverLongitude)
         Me.grpPoints.Location = New System.Drawing.Point(373, 8)
         Me.grpPoints.Name = "grpPoints"
-        Me.grpPoints.Size = New System.Drawing.Size(371, 261)
+        Me.grpPoints.Size = New System.Drawing.Size(371, 334)
         Me.grpPoints.TabIndex = 1
         Me.grpPoints.TabStop = False
         Me.grpPoints.Text = "Points"
+        '
+        'grpBoxLabelOptions
+        '
+        Me.grpBoxLabelOptions.Controls.Add(Me.lblSize)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrNudSize)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelAll)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelledRectangle)
+        Me.grpBoxLabelOptions.Location = New System.Drawing.Point(21, 228)
+        Me.grpBoxLabelOptions.Name = "grpBoxLabelOptions"
+        Me.grpBoxLabelOptions.Size = New System.Drawing.Size(200, 100)
+        Me.grpBoxLabelOptions.TabIndex = 13
+        Me.grpBoxLabelOptions.TabStop = False
+        Me.grpBoxLabelOptions.Text = "Label Options:"
+        '
+        'lblSize
+        '
+        Me.lblSize.AutoSize = True
+        Me.lblSize.Location = New System.Drawing.Point(5, 46)
+        Me.lblSize.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblSize.TabIndex = 12
+        Me.lblSize.Text = "Size:"
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.AutoSize = True
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(45, 43)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSize.TabIndex = 8
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkLabelAll
+        '
+        Me.ucrChkLabelAll.AutoSize = True
+        Me.ucrChkLabelAll.Checked = False
+        Me.ucrChkLabelAll.Location = New System.Drawing.Point(6, 72)
+        Me.ucrChkLabelAll.Name = "ucrChkLabelAll"
+        Me.ucrChkLabelAll.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkLabelAll.TabIndex = 7
+        '
+        'ucrChkLabelledRectangle
+        '
+        Me.ucrChkLabelledRectangle.AutoSize = True
+        Me.ucrChkLabelledRectangle.Checked = False
+        Me.ucrChkLabelledRectangle.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkLabelledRectangle.Name = "ucrChkLabelledRectangle"
+        Me.ucrChkLabelledRectangle.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkLabelledRectangle.TabIndex = 6
         '
         'lblLabels
         '
@@ -333,37 +394,43 @@ Partial Class dlgClimaticStationMaps
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlotOptionsToolStripMenuItem, Me.toolStripMenuItemSFOptions, Me.toolStripMenuItemMapping, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemLabelRepelOptions, Me.toolStripMenuItemTextRepelOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(180, 136)
         '
         'PlotOptionsToolStripMenuItem
         '
         Me.PlotOptionsToolStripMenuItem.Name = "PlotOptionsToolStripMenuItem"
-        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PlotOptionsToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.PlotOptionsToolStripMenuItem.Text = "Plot Options"
         '
         'toolStripMenuItemSFOptions
         '
         Me.toolStripMenuItemSFOptions.Name = "toolStripMenuItemSFOptions"
-        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemSFOptions.Size = New System.Drawing.Size(179, 22)
         Me.toolStripMenuItemSFOptions.Text = "SF Options"
         '
         'toolStripMenuItemMapping
         '
         Me.toolStripMenuItemMapping.Name = "toolStripMenuItemMapping"
-        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemMapping.Size = New System.Drawing.Size(179, 22)
         Me.toolStripMenuItemMapping.Text = "Map Options"
         '
         'toolStripMenuItemPointOptions
         '
         Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
-        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(179, 22)
         Me.toolStripMenuItemPointOptions.Text = "Point Options"
         '
         'toolStripMenuItemLabelRepelOptions
         '
         Me.toolStripMenuItemLabelRepelOptions.Name = "toolStripMenuItemLabelRepelOptions"
-        Me.toolStripMenuItemLabelRepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLabelRepelOptions.Size = New System.Drawing.Size(179, 22)
         Me.toolStripMenuItemLabelRepelOptions.Text = "Label Repel Options"
+        '
+        'toolStripMenuItemTextRepelOptions
+        '
+        Me.toolStripMenuItemTextRepelOptions.Name = "toolStripMenuItemTextRepelOptions"
+        Me.toolStripMenuItemTextRepelOptions.Size = New System.Drawing.Size(179, 22)
+        Me.toolStripMenuItemTextRepelOptions.Text = "Text Repel Options"
         '
         'cmdOptions
         '
@@ -378,17 +445,12 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'toolStripMenuItemTextRepelOptions
-        '
-        Me.toolStripMenuItemTextRepelOptions.Name = "toolStripMenuItemTextRepelOptions"
-        Me.toolStripMenuItemTextRepelOptions.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemTextRepelOptions.Text = "Text Repel Options"
-        '
         'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(756, 345)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(756, 406)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpMapOutline)
         Me.Controls.Add(Me.grpPoints)
@@ -402,6 +464,8 @@ Partial Class dlgClimaticStationMaps
         Me.Text = "Climatic Maps"
         Me.grpPoints.ResumeLayout(False)
         Me.grpPoints.PerformLayout()
+        Me.grpBoxLabelOptions.ResumeLayout(False)
+        Me.grpBoxLabelOptions.PerformLayout()
         Me.grpMapOutline.ResumeLayout(False)
         Me.grpMapOutline.PerformLayout()
         Me.contextMenuStripOptions.ResumeLayout(False)
@@ -440,4 +504,9 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLabelRepelOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTextRepelOptions As ToolStripMenuItem
+    Friend WithEvents grpBoxLabelOptions As GroupBox
+    Friend WithEvents lblSize As Label
+    Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents ucrChkLabelAll As ucrCheck
+    Friend WithEvents ucrChkLabelledRectangle As ucrCheck
 End Class
