@@ -58,7 +58,7 @@ Public Class sdgWindowNumber
 
         ucrNudPageNumber.SetMinMax(1, iRowOrColMaxPages)
         ucrNudPageNumber.SetText(iDefaultPage)
-        lblPages.Text = "1-" & iRowOrColMaxPages & ":"
+        lblPages.Text = "(1-" & iRowOrColMaxPages & "):"
     End Sub
 
     Private Sub ucrSdgPICSARainfalbuttons_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseWindowNumber.ClickReturn
