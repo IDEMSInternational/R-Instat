@@ -449,7 +449,6 @@ Partial Class dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(756, 406)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpMapOutline)

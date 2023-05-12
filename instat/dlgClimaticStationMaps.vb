@@ -351,10 +351,14 @@ Public Class dlgClimaticStationMaps
     Private Sub ChangeSize()
         If ucrChkAddPoints.Checked Then
             grpPoints.Visible = True
-            Me.Size = New Size(772, 384)
+            Me.Size = New Size(772, 442)
+            Me.ucrSaveMap.Location = New Point(10, 319)
+            Me.ucrBase.Location = New Point(10, 350)
         Else
             grpPoints.Visible = False
-            Me.Size = New Size(439, 384)
+            Me.Size = New Size(772, 384)
+            Me.ucrSaveMap.Location = New Point(10, 261)
+            Me.ucrBase.Location = New Point(10, 286)
         End If
     End Sub
 
