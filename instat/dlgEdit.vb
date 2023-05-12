@@ -99,6 +99,7 @@ Public Class dlgEdit
 
     Private Sub SetSelectedColumn()
         ucrReceiverName.Add(strSelectedColumn)
+        ucrRowNumber.Add(strRowText)
         bUseSelectedColumn = False
     End Sub
 
