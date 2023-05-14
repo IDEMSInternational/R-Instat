@@ -36,6 +36,12 @@ Public Class clsControlJson
                     Dim ucrReceiverSingleJson = New ucrReceiverSingleJson(ucrReceiverSingle)
                     dctFields.Add(clsField.Name, ucrReceiverSingleJson)
                 End If
+            ElseIf GetType(ucrCore).IsAssignableFrom(clsFieldType) Then
+                Dim ucrCore As ucrCore = DirectCast(clsField.GetValue(clsControl), ucrCore)
+                If ucrCore IsNot Nothing Then
+                    Dim ucrCoreJson = New ucrCoreJson(ucrCore)
+                    dctFields.Add(clsField.Name, ucrCoreJson)
+                End If
             ElseIf GetType(Control).IsAssignableFrom(clsFieldType) Then 'field is a WinForm control
                 Console.WriteLine(clsField.Name)
                 dctFields.Add(clsField.Name, New clsControlJson(clsField.GetValue(clsControl)))
@@ -79,6 +85,8 @@ Public Class clsControlJson
         Public bAllowNonConditionValues As Boolean = True
         Public bIsVisible As Boolean = True
 
+        Public dctConditions As New Dictionary(Of Object, List(Of Condition))
+
         Public Sub New(ucrCore As ucrCore)
             bAddRemoveParameter = ucrCore.bAddRemoveParameter
             bChangeParameterValue = ucrCore.bChangeParameterValue
@@ -92,6 +100,8 @@ Public Class clsControlJson
             bUpdateRCodeFromControl = ucrCore.bUpdateRCodeFromControl
             bAllowNonConditionValues = ucrCore.bAllowNonConditionValues
             bIsVisible = ucrCore.bIsVisible
+
+            dctConditions = ucrCore.dctConditions
         End Sub
     End Class
 

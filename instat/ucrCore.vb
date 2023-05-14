@@ -216,7 +216,7 @@ Public Class ucrCore
     ''' </summary>
 
 
-    Protected dctConditions As New Dictionary(Of Object, List(Of Condition))
+    Public dctConditions As New Dictionary(Of Object, List(Of Condition))
 
     ''' <summary> If true then allow the control's value to be set to a value that is not one of 
     ''' the pre-defined valid values in the 'dctConditions' dictionary.
