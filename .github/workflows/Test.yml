@@ -42,7 +42,7 @@ jobs:
         
     - name: install
       run : | 
-        rtools\R-4.0.0-win.exe /NORESTART /VERYSILENT /SUPPRESSMSGBOXES
+        D:\a\R-Instat\R-Instat\rtools\R-4.0.0-win.exe /NORESTART /VERYSILENT /SUPPRESSMSGBOXES
         
     - name: update path
       run : |
