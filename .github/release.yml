@@ -1,24 +1,24 @@
 changelog:
   exclude:
     labels:
-      - skip-releasenotes
+      - 'skip-releasenotes'
   categroies:
-    - title: ⭐ Features
+    - title: '⭐ Features'
       labels:
-        - feature
-        - enhancement
-    - title: 🐞 Bug Fixes
+        - 'feature'
+        - 'enhancement'
+    - title: '🐞 Bug Fixes'
       labels:
-        - fix
-        - bugfix
-        - bug
-    - title: 🌦️ Climatic
+        - 'fix'
+        - 'bugfix'
+        - 'bug'
+    - title: '🌦️ Climatic'
       labels: 
-        - Climatic
-    - title: 📝 Procurement
+        - 'Climatic'
+    - title: '📝 Procurement'
       labels: 
-        - Procurement
-    - title: Other Changes
+        - 'Procurement'
+    - title: 'Other Changes'
       labels:
         - "*"
     
