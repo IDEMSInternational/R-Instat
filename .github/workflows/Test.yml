@@ -37,12 +37,12 @@ jobs:
     
     - name: Install R tools
       run : |
-        curl -o D:\a\R-Instat\R-Instat\rtools\R-4.0.0-win.exe https://cran.r-project.org/bin/windows/base/R-4.0.0-win.exe
+        curl -o D:\a\R-Instat\R-Instat\rtools\R-4.0.0-win.exe https://cran.r-project.org/bin/windows/base/R-4.0.0-win.exe 
 
         
     - name: install
       run : | 
-        rtools\R-4.0.0-win.exe /SILENT
+        rtools\R-4.0.0-win.exe /NORESTART /VERYSILENT /SUPPRESSMSGBOXES
         
     - name: update path
       run : |
