@@ -7,19 +7,19 @@ changelog:
       labels:
         - feature
         - enhancement
-- title: 🐞 Bug Fixes
-    labels:
-      - fix
-      - bugfix
-      - bug
-- title: '🌦️ Climatic'
-    labels: 
-      - Climatic
-- title: 📝 Procurement
-    labels: 
-      - Procurement
-- title: Other Changes
+    - title: 🐞 Bug Fixes
       labels:
-        - "*"
+        - fix
+        - bugfix
+        - bug
+    - title: '🌦️ Climatic'
+      labels: 
+        - Climatic
+    - title: 📝 Procurement
+      labels: 
+        - Procurement
+    - title: Other Changes
+        labels:
+          - "*"
     
 
