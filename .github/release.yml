@@ -19,7 +19,7 @@ changelog:
       labels: 
         - Procurement
     - title: Other Changes
-        labels:
-          - "*"
+      labels:
+        - "*"
     
 
