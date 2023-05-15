@@ -29,14 +29,19 @@ jobs:
         ROBOCOPY R-RInstat\64Bit\ instat\bin\x64\Release\static\ /E
       continue-on-error: true      
  
+    - name: make r tools directory
+      run: |
+        MKDIR rtools  
+
     
     - name: Install R tools
       run : |
-        curl -O https://cran.r-project.org/bin/windows/base/R-4.0.0-win.exe
+        curl -o rtools\R-4.0.0-win.exe https://cran.r-project.org/bin/windows/base/R-4.0.0-win.exe
+
         
     - name: install
       run : | 
-        rtoolsR-4.0.0-win.exe /SILENT
+        rtools\R-4.0.0-win.exe /SILENT
         
     - name: update path
       run : |
