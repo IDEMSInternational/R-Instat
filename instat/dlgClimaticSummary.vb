@@ -101,7 +101,7 @@ Public Class dlgClimaticSummary
         ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
-        ucrReceiverDOY.SetParameterIsRFunction()
+        ucrReceiverDOY.SetParameterIsString()
         ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorVariable
         ucrReceiverDOY.SetClimaticType("doy")
