@@ -86,6 +86,7 @@ Public Class dlgImportDataset
         HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -414,6 +415,7 @@ Public Class dlgImportDataset
         SetRCodeForControls(True)
         TestOkEnabled()
         HideDropEmptyCheckBox()
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -917,12 +919,14 @@ Public Class dlgImportDataset
         TryTextPreview()
         TryGridPreview()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
         TryTextPreview()
         TryGridPreview()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub HideDropEmptyCheckBox()
@@ -943,6 +947,7 @@ Public Class dlgImportDataset
         TryGridPreview()
         TestOkEnabled()
         HideDropEmptyCheckBox()
+        autoTranslate(Me)
     End Sub
 
     Private Sub MissingValuesInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMissingValueStringText.ControlContentsChanged, ucrInputMissingValueStringCSV.ControlContentsChanged, ucrInputMissingValueStringExcel.ControlContentsChanged
@@ -970,6 +975,7 @@ Public Class dlgImportDataset
         End If
         TryGridPreview()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     'todo. This event could be changed to UcrPanelFixedWidthText_ControlValueChanged
@@ -999,6 +1005,7 @@ Public Class dlgImportDataset
         TryGridPreview()
         RemoveMissingValues()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub clbSheets_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles clbSheets.ItemCheck
@@ -1043,6 +1050,7 @@ Public Class dlgImportDataset
         TryGridPreview()
         RemoveMissingValues()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged
@@ -1101,6 +1109,7 @@ Public Class dlgImportDataset
         End If
         TryGridPreview()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Function GetCorrectSeparatorInPath() As String
