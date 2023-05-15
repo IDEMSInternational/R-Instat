@@ -12,7 +12,7 @@ changelog:
         - fix
         - bugfix
         - bug
-    - title: '🌦️ Climatic'
+    - title: 🌦️ Climatic
       labels: 
         - Climatic
     - title: 📝 Procurement
