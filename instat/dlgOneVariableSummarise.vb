@@ -20,12 +20,10 @@ Public Class dlgOneVariableSummarise
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bRCodeSet As Boolean = True
-    Private clsSummaryFunction, clsSummariesList, clsMmtableFunction,
-        clsConcFunction, clsSummaryTableFunction, clsHeaderLeftTopVariableFunction,
-                clsHeaderLeftTopSummaryFunction, clsHeaderTopLeftVariableFunction,
-                clsHeaderTopLeftSummaryFunction, clsDummyFunction,
-                clsSkimrFunction As New RFunction
-    Private clsMmtableOperator As New ROperator
+    Private clsSummaryFunction, clsSummariesList, clsGtFunction,
+        clsConcFunction, clsSummaryTableFunction, clsDummyFunction,
+        clsSkimrFunction, clsPivotWiderFunction As New RFunction
+    Private clsSummaryOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
@@ -91,6 +89,13 @@ Public Class dlgOneVariableSummarise
         ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=4))
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
+        ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
+        ucrPnlColumnFactor.AddRadioButton(rdoSummary)
+        ucrPnlColumnFactor.AddRadioButton(rdoVariable)
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummary, "factor_cols", "Sum")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariable, "factor_cols", "Var")
+
         ucrSaveSummary.SetPrefix("summary_table")
         ucrSaveSummary.SetDataFrameSelector(ucrSelectorOneVarSummarise.ucrAvailableDataFrames)
         ucrSaveSummary.SetIsComboBox()
@@ -102,14 +107,11 @@ Public Class dlgOneVariableSummarise
         clsSummaryFunction = New RFunction
         clsConcFunction = New RFunction
         clsSummaryTableFunction = New RFunction
-        clsMmtableOperator = New ROperator
-        clsMmtableFunction = New RFunction
-        clsHeaderLeftTopVariableFunction = New RFunction
-        clsHeaderLeftTopSummaryFunction = New RFunction
-        clsHeaderTopLeftVariableFunction = New RFunction
-        clsHeaderTopLeftSummaryFunction = New RFunction
+        clsGtFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSkimrFunction = New RFunction
+        clsSummaryOperator = New ROperator
+        clsPivotWiderFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
 
@@ -122,43 +124,26 @@ Public Class dlgOneVariableSummarise
                                             strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
                                             strObjectName:="last_summary")
 
-        'Dummy function used to set conditions for the summary and variable checkbox
-        clsDummyFunction.AddParameter("variable_by_row", "TRUE", iPosition:=0)
-        clsDummyFunction.AddParameter("summary_by_row", "FALSE", iPosition:=1)
-        clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=2)
+        'Dummy function used to set conditions
+        clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
+        clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
 
         clsConcFunction.SetRCommand("c")
 
-        clsMmtableOperator.SetOperation("+")
-        clsMmtableOperator.AddParameter("mmtable_function", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
-        clsMmtableOperator.AddParameter("header_left_top_variable", clsRFunctionParameter:=clsHeaderLeftTopVariableFunction, iPosition:=1)
-        clsMmtableOperator.AddParameter("header_top_left_summary", clsRFunctionParameter:=clsHeaderTopLeftSummaryFunction, iPosition:=2)
-        clsMmtableOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+        clsPivotWiderFunction.SetRCommand("pivot_wider")
+        clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
+
+        clsGtFunction.SetPackageName("gt")
+        clsGtFunction.SetRCommand("gt")
+
+        clsSummaryOperator.SetOperation("%>%")
+        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
+        clsSummaryOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
                                                strObjectName:="last_table")
-
-        clsHeaderLeftTopVariableFunction.SetPackageName("mmtable2")
-        clsHeaderLeftTopVariableFunction.SetRCommand("header_left_top")
-        clsHeaderLeftTopVariableFunction.AddParameter("variable", Chr(39) & "variable" & Chr(39), iPosition:=0)
-
-        clsHeaderLeftTopSummaryFunction.SetPackageName("mmtable2")
-        clsHeaderLeftTopSummaryFunction.SetRCommand("header_left_top")
-        clsHeaderLeftTopSummaryFunction.AddParameter("variable", Chr(39) & "summary" & Chr(39), iPosition:=0)
-
-        clsHeaderTopLeftVariableFunction.SetPackageName("mmtable2")
-        clsHeaderTopLeftVariableFunction.SetRCommand("header_top_left")
-        clsHeaderTopLeftVariableFunction.AddParameter("variable", Chr(39) & "variable" & Chr(39), iPosition:=0)
-
-        clsHeaderTopLeftSummaryFunction.SetPackageName("mmtable2")
-        clsHeaderTopLeftSummaryFunction.SetRCommand("header_top_left")
-        clsHeaderTopLeftSummaryFunction.AddParameter("variable", Chr(39) & "summary" & Chr(39), iPosition:=0)
-
-        clsMmtableFunction.SetPackageName("mmtable2")
-        clsMmtableFunction.SetRCommand("mmtable")
-        clsMmtableFunction.AddParameter("data", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
-        clsMmtableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
@@ -190,15 +175,15 @@ Public Class dlgOneVariableSummarise
         bRCodeSet = False
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
-        ucrSaveSummary.AddAdditionalRCode(clsMmtableOperator, iAdditionalPairNo:=2)
+        ucrSaveSummary.AddAdditionalRCode(clsSummaryOperator, iAdditionalPairNo:=2)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
         ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
+        ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
-
         ucrSaveSummary.SetRCode(clsSkimrFunction, bReset)
 
         bRCodeSet = True
@@ -262,7 +247,7 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSummaryFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
-        clsMmtableOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
+        clsSummaryOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
         clsSkimrFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
     End Sub
 
@@ -278,19 +263,19 @@ Public Class dlgOneVariableSummarise
 
     Private Sub ucrPnlSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaries.ControlValueChanged
         If rdoCustomised.Checked Then
-            clsDummyFunction.AddParameter("checked_radio", "customised", iPosition:=2)
-            ucrBase.clsRsyntax.SetBaseROperator(clsMmtableOperator)
+            clsDummyFunction.AddParameter("checked_radio", "customised", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseROperator(clsSummaryOperator)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_table")
             ucrSaveSummary.SetCheckBoxText("Save Table")
         ElseIf rdoDefault.Checked Then
-            clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=2)
+            clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
             ucrSaveSummary.SetCheckBoxText("Save Summary")
         ElseIf rdoSkim.Checked Then
-            clsDummyFunction.AddParameter("checked_radio", "skim", iPosition:=2)
+            clsDummyFunction.AddParameter("checked_radio", "skim", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
@@ -298,9 +283,21 @@ Public Class dlgOneVariableSummarise
         End If
     End Sub
 
-    Private Sub ucrChkDisplayVariablesAsRows_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
         If bRCodeSet Then
-
+            If rdoNoColumnFactor.Checked Then
+                clsSummaryOperator.RemoveParameterByName("col_factor")
+                clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
+            Else
+                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If rdoSummary.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+                    clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+                ElseIf rdoVariable.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
+                    clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
+                End If
+            End If
         End If
     End Sub
 

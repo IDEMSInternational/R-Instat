@@ -290,7 +290,7 @@ Partial Class dlgOneVariableSummarise
         'rdoSummary
         '
         Me.rdoSummary.AutoSize = True
-        Me.rdoSummary.Location = New System.Drawing.Point(16, 340)
+        Me.rdoSummary.Location = New System.Drawing.Point(16, 339)
         Me.rdoSummary.Name = "rdoSummary"
         Me.rdoSummary.Size = New System.Drawing.Size(68, 17)
         Me.rdoSummary.TabIndex = 32
