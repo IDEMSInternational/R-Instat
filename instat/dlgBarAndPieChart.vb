@@ -789,8 +789,8 @@ Public Class dlgBarAndPieChart
         Dim strChangedTextValue As String = ucrInputAddReorder.GetText()
         Dim strChangeTextReorder As String = ucrInputReorderValue.GetText()
         If rdoFrequency.Checked Then
-            clsForecatsInfreq.AddParameter("f", "as.factor(" & Chr(34) & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & Chr(34) & ")", iPosition:=0)
-            clsForecatsInfreqValue.AddParameter("f", "as.factor(" & Chr(34) & ucrReceiverByFactor.GetVariableNames(False) & Chr(34) & ")", iPosition:=0)
+            clsForecatsInfreq.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+            clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrReceiverByFactor.GetVariableNames(False) & ")", iPosition:=0)
             Select Case strChangedTextFreq
                 Case strAscending
                     clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
@@ -1049,15 +1049,4 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrInputReorderX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
-
-    End Sub
 End Class
