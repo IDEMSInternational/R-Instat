@@ -245,28 +245,28 @@ Public Class frmMain
     End Function
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
-        Dim strScript As String = ""
+        Dim strRScripts As String = ""
         Dim strDataFilePath As String = ""
         Dim bRecoveryFilesPresent As Boolean = False
 
         'could either be a file path or a script
-        GetAutoRecoveredPreviousSessionData(strScript, strDataFilePath, bRecoveryFilesPresent)
+        GetAutoRecoveredPreviousSessionData(strRScripts, strDataFilePath, bRecoveryFilesPresent)
 
         'if no script recovered then use the default R set up script
-        If String.IsNullOrEmpty(strScript) Then
-            strScript = "# Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
+        If String.IsNullOrEmpty(strRScripts) Then
+            strRScripts = "# Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
         End If
 
         'if data file recovered then add it as part of the initial R set up script
         If Not String.IsNullOrEmpty(strDataFilePath) Then
-            strScript = strScript & Environment.NewLine &
+            strRScripts = strRScripts & Environment.NewLine &
                         "# Importing auto recovered data" & Environment.NewLine &
                         clsRLink.GetImportRDSRScript(strDataFilePath, False)
         End If
 
 
         'execute the R-Instat set up R scripts
-        For Each strLine As String In strScript.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+        For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
             clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
         Next
 
@@ -293,7 +293,7 @@ Public Class frmMain
                                                            ByRef bRecoveryFilesPresent As Boolean)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
-        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 0 Then
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
             Return
         End If
 
