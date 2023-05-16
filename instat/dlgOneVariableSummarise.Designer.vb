@@ -42,20 +42,22 @@ Partial Class dlgOneVariableSummarise
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.rdoCustomised = New System.Windows.Forms.RadioButton()
         Me.rdoDefault = New System.Windows.Forms.RadioButton()
+        Me.lblMarginName = New System.Windows.Forms.Label()
+        Me.rdoSkim = New System.Windows.Forms.RadioButton()
+        Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveSummary = New instat.ucrSave()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.ucrPnlSummaries = New instat.UcrPanel()
-        Me.ucrChkDisplaySummariesAsRows = New instat.ucrCheck()
-        Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
         Me.ucrNudMaxSum = New instat.ucrNud()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrSelectorOneVarSummarise = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneVarSummarise = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputMarginName = New instat.ucrInputTextBox()
-        Me.lblMarginName = New System.Windows.Forms.Label()
-        Me.ucrChkDisplayMargins = New instat.ucrCheck()
-        Me.rdoSkim = New System.Windows.Forms.RadioButton()
-        Me.cmdMissingOptions = New System.Windows.Forms.Button()
-        Me.ucrSaveSummary = New instat.ucrSave()
+        Me.ucrPnlColumnFactor = New instat.UcrPanel()
+        Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -123,6 +125,74 @@ Partial Class dlgOneVariableSummarise
         Me.rdoDefault.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDefault.UseVisualStyleBackColor = True
         '
+        'lblMarginName
+        '
+        Me.lblMarginName.AutoSize = True
+        Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMarginName.Location = New System.Drawing.Point(159, 246)
+        Me.lblMarginName.Name = "lblMarginName"
+        Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
+        Me.lblMarginName.TabIndex = 24
+        Me.lblMarginName.Text = "Name :"
+        '
+        'rdoSkim
+        '
+        Me.rdoSkim.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSkim.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkim.FlatAppearance.BorderSize = 2
+        Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSkim.Location = New System.Drawing.Point(162, 13)
+        Me.rdoSkim.Name = "rdoSkim"
+        Me.rdoSkim.Size = New System.Drawing.Size(87, 27)
+        Me.rdoSkim.TabIndex = 26
+        Me.rdoSkim.TabStop = True
+        Me.rdoSkim.Text = "Skim"
+        Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSkim.UseVisualStyleBackColor = True
+        '
+        'cmdMissingOptions
+        '
+        Me.cmdMissingOptions.Enabled = False
+        Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(206, 268)
+        Me.cmdMissingOptions.Name = "cmdMissingOptions"
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
+        Me.cmdMissingOptions.TabIndex = 27
+        Me.cmdMissingOptions.Tag = "MissingOptions"
+        Me.cmdMissingOptions.Text = "Options"
+        Me.cmdMissingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrSaveSummary
+        '
+        Me.ucrSaveSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 368)
+        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(319, 24)
+        Me.ucrSaveSummary.TabIndex = 28
+        '
+        'ucrInputMarginName
+        '
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.AutoSize = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 243)
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputMarginName.TabIndex = 25
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.AutoSize = True
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 246)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(150, 23)
+        Me.ucrChkDisplayMargins.TabIndex = 23
+        '
         'ucrPnlSummaries
         '
         Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -130,24 +200,6 @@ Partial Class dlgOneVariableSummarise
         Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
         Me.ucrPnlSummaries.Size = New System.Drawing.Size(275, 29)
         Me.ucrPnlSummaries.TabIndex = 20
-        '
-        'ucrChkDisplaySummariesAsRows
-        '
-        Me.ucrChkDisplaySummariesAsRows.AutoSize = True
-        Me.ucrChkDisplaySummariesAsRows.Checked = False
-        Me.ucrChkDisplaySummariesAsRows.Location = New System.Drawing.Point(10, 267)
-        Me.ucrChkDisplaySummariesAsRows.Name = "ucrChkDisplaySummariesAsRows"
-        Me.ucrChkDisplaySummariesAsRows.Size = New System.Drawing.Size(241, 23)
-        Me.ucrChkDisplaySummariesAsRows.TabIndex = 19
-        '
-        'ucrChkDisplayVariablesAsRows
-        '
-        Me.ucrChkDisplayVariablesAsRows.AutoSize = True
-        Me.ucrChkDisplayVariablesAsRows.Checked = False
-        Me.ucrChkDisplayVariablesAsRows.Location = New System.Drawing.Point(10, 290)
-        Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
-        Me.ucrChkDisplayVariablesAsRows.Size = New System.Drawing.Size(227, 23)
-        Me.ucrChkDisplayVariablesAsRows.TabIndex = 18
         '
         'ucrNudMaxSum
         '
@@ -166,7 +218,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 314)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 270)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(190, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
@@ -200,85 +252,62 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 386)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 400)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
         '
-        'ucrInputMarginName
+        'ucrPnlColumnFactor
         '
-        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
-        Me.ucrInputMarginName.AutoSize = True
-        Me.ucrInputMarginName.IsMultiline = False
-        Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 243)
-        Me.ucrInputMarginName.Name = "ucrInputMarginName"
-        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputMarginName.TabIndex = 25
+        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(8, 291)
+        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(137, 69)
+        Me.ucrPnlColumnFactor.TabIndex = 29
         '
-        'lblMarginName
+        'rdoNoColumnFactor
         '
-        Me.lblMarginName.AutoSize = True
-        Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(159, 246)
-        Me.lblMarginName.Name = "lblMarginName"
-        Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
-        Me.lblMarginName.TabIndex = 24
-        Me.lblMarginName.Text = "Name :"
+        Me.rdoNoColumnFactor.AutoSize = True
+        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(16, 297)
+        Me.rdoNoColumnFactor.Name = "rdoNoColumnFactor"
+        Me.rdoNoColumnFactor.Size = New System.Drawing.Size(110, 17)
+        Me.rdoNoColumnFactor.TabIndex = 30
+        Me.rdoNoColumnFactor.TabStop = True
+        Me.rdoNoColumnFactor.Text = "No Column Factor"
+        Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
         '
-        'ucrChkDisplayMargins
+        'rdoVariable
         '
-        Me.ucrChkDisplayMargins.AutoSize = True
-        Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 246)
-        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(150, 23)
-        Me.ucrChkDisplayMargins.TabIndex = 23
+        Me.rdoVariable.AutoSize = True
+        Me.rdoVariable.Location = New System.Drawing.Point(16, 318)
+        Me.rdoVariable.Name = "rdoVariable"
+        Me.rdoVariable.Size = New System.Drawing.Size(63, 17)
+        Me.rdoVariable.TabIndex = 31
+        Me.rdoVariable.TabStop = True
+        Me.rdoVariable.Text = "Variable"
+        Me.rdoVariable.UseVisualStyleBackColor = True
         '
-        'rdoSkim
+        'rdoSummary
         '
-        Me.rdoSkim.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSkim.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSkim.FlatAppearance.BorderSize = 2
-        Me.rdoSkim.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSkim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSkim.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSkim.Location = New System.Drawing.Point(162, 13)
-        Me.rdoSkim.Name = "rdoSkim"
-        Me.rdoSkim.Size = New System.Drawing.Size(87, 27)
-        Me.rdoSkim.TabIndex = 26
-        Me.rdoSkim.TabStop = True
-        Me.rdoSkim.Text = "Skim"
-        Me.rdoSkim.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSkim.UseVisualStyleBackColor = True
-        '
-        'cmdMissingOptions
-        '
-        Me.cmdMissingOptions.Enabled = False
-        Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(206, 311)
-        Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
-        Me.cmdMissingOptions.TabIndex = 27
-        Me.cmdMissingOptions.Tag = "MissingOptions"
-        Me.cmdMissingOptions.Text = "Options"
-        Me.cmdMissingOptions.UseVisualStyleBackColor = True
-        '
-        'ucrSaveSummary
-        '
-        Me.ucrSaveSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 347)
-        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveSummary.Name = "ucrSaveSummary"
-        Me.ucrSaveSummary.Size = New System.Drawing.Size(319, 24)
-        Me.ucrSaveSummary.TabIndex = 28
+        Me.rdoSummary.AutoSize = True
+        Me.rdoSummary.Location = New System.Drawing.Point(16, 340)
+        Me.rdoSummary.Name = "rdoSummary"
+        Me.rdoSummary.Size = New System.Drawing.Size(68, 17)
+        Me.rdoSummary.TabIndex = 32
+        Me.rdoSummary.TabStop = True
+        Me.rdoSummary.Text = "Summary"
+        Me.rdoSummary.UseVisualStyleBackColor = True
         '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(421, 442)
+        Me.ClientSize = New System.Drawing.Size(421, 455)
+        Me.Controls.Add(Me.rdoSummary)
+        Me.Controls.Add(Me.rdoVariable)
+        Me.Controls.Add(Me.rdoNoColumnFactor)
+        Me.Controls.Add(Me.ucrPnlColumnFactor)
         Me.Controls.Add(Me.ucrSaveSummary)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.rdoSkim)
@@ -288,8 +317,6 @@ Partial Class dlgOneVariableSummarise
         Me.Controls.Add(Me.rdoCustomised)
         Me.Controls.Add(Me.rdoDefault)
         Me.Controls.Add(Me.ucrPnlSummaries)
-        Me.Controls.Add(Me.ucrChkDisplaySummariesAsRows)
-        Me.Controls.Add(Me.ucrChkDisplayVariablesAsRows)
         Me.Controls.Add(Me.ucrNudMaxSum)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrSelectorOneVarSummarise)
@@ -318,8 +345,6 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents lblMaxSum As Label
     Friend WithEvents ucrNudMaxSum As ucrNud
     Friend WithEvents cmdSummaries As Button
-    Friend WithEvents ucrChkDisplaySummariesAsRows As ucrCheck
-    Friend WithEvents ucrChkDisplayVariablesAsRows As ucrCheck
     Friend WithEvents ucrPnlSummaries As UcrPanel
     Friend WithEvents rdoCustomised As RadioButton
     Friend WithEvents rdoDefault As RadioButton
@@ -329,4 +354,8 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents cmdMissingOptions As Button
     Friend WithEvents ucrSaveSummary As ucrSave
+    Friend WithEvents rdoNoColumnFactor As RadioButton
+    Friend WithEvents ucrPnlColumnFactor As UcrPanel
+    Friend WithEvents rdoSummary As RadioButton
+    Friend WithEvents rdoVariable As RadioButton
 End Class
