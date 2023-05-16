@@ -27,6 +27,7 @@ Public Class dlgEdit
     Private clsReplaceValue As New RFunction
     Private strNewValue As String = ""
     Private strRowText As String = ""
+    Private StrRowIndex As String = " "
     Private bUseSelectedColumn As Boolean = False
     Private strColumnName As String = ""
     Private strSelectedColumn As String = ""
@@ -71,7 +72,7 @@ Public Class dlgEdit
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34))
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34))
-        clsReplaceValue.AddParameter("rows", Chr(34) & strRowText & Chr(34))
+        clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
 
@@ -107,9 +108,10 @@ Public Class dlgEdit
         TestOKEnabled()
     End Sub
 
-    Public Sub SetCurrentColumn(strColumn As String, strRowNumber As String)
+    Public Sub SetCurrentColumn(strColumn As String, strRowNumber As String, strIRow As String)
         strSelectedColumn = strColumn
         strRowText = strRowNumber
+        StrRowIndex = strIRow
         bUseSelectedColumn = True
     End Sub
 
