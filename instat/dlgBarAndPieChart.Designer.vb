@@ -455,7 +455,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkReorderFrequency.Checked = False
         Me.ucrChkReorderFrequency.Location = New System.Drawing.Point(257, 189)
         Me.ucrChkReorderFrequency.Name = "ucrChkReorderFrequency"
-        Me.ucrChkReorderFrequency.Size = New System.Drawing.Size(125, 23)
+        Me.ucrChkReorderFrequency.Size = New System.Drawing.Size(158, 23)
         Me.ucrChkReorderFrequency.TabIndex = 66
         '
         'ucrInputPlace
