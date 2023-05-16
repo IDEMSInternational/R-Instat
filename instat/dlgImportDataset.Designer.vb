@@ -317,7 +317,7 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipCSV.AutoSize = True
         Me.ucrNudRowsToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipCSV.Location = New System.Drawing.Point(105, 207)
+        Me.ucrNudRowsToSkipCSV.Location = New System.Drawing.Point(210, 207)
         Me.ucrNudRowsToSkipCSV.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNudRowsToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.ucrNudRowsToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -344,10 +344,10 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringCSV.AutoSize = True
         Me.ucrInputMissingValueStringCSV.IsMultiline = False
         Me.ucrInputMissingValueStringCSV.IsReadOnly = False
-        Me.ucrInputMissingValueStringCSV.Location = New System.Drawing.Point(173, 145)
+        Me.ucrInputMissingValueStringCSV.Location = New System.Drawing.Point(195, 145)
         Me.ucrInputMissingValueStringCSV.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputMissingValueStringCSV.Name = "ucrInputMissingValueStringCSV"
-        Me.ucrInputMissingValueStringCSV.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputMissingValueStringCSV.Size = New System.Drawing.Size(90, 21)
         Me.ucrInputMissingValueStringCSV.TabIndex = 13
         '
         'ucrInputDecimalCSV
@@ -492,7 +492,7 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipExcel.AutoSize = True
         Me.ucrNudRowsToSkipExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Location = New System.Drawing.Point(148, 111)
+        Me.ucrNudRowsToSkipExcel.Location = New System.Drawing.Point(140, 111)
         Me.ucrNudRowsToSkipExcel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNudRowsToSkipExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRowsToSkipExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -517,10 +517,10 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringExcel.AutoSize = True
         Me.ucrInputMissingValueStringExcel.IsMultiline = False
         Me.ucrInputMissingValueStringExcel.IsReadOnly = False
-        Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(157, 25)
+        Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(195, 25)
         Me.ucrInputMissingValueStringExcel.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputMissingValueStringExcel.Name = "ucrInputMissingValueStringExcel"
-        Me.ucrInputMissingValueStringExcel.Size = New System.Drawing.Size(125, 21)
+        Me.ucrInputMissingValueStringExcel.Size = New System.Drawing.Size(90, 21)
         Me.ucrInputMissingValueStringExcel.TabIndex = 5
         '
         'ucrInputNamedRegions
@@ -664,12 +664,11 @@ Partial Class dlgImportDataset
         '
         'lblCannotImport
         '
-        Me.lblCannotImport.AutoSize = True
         Me.lblCannotImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblCannotImport.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblCannotImport.Location = New System.Drawing.Point(297, 290)
         Me.lblCannotImport.Name = "lblCannotImport"
-        Me.lblCannotImport.Size = New System.Drawing.Size(366, 36)
+        Me.lblCannotImport.Size = New System.Drawing.Size(366, 72)
         Me.lblCannotImport.TabIndex = 13
         Me.lblCannotImport.Text = "Cannot import this file with the current options. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Modify options or select a di" &
     "fferent file."
@@ -678,12 +677,11 @@ Partial Class dlgImportDataset
         '
         'lblNoPreview
         '
-        Me.lblNoPreview.AutoSize = True
         Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
         Me.lblNoPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblNoPreview.Location = New System.Drawing.Point(276, 329)
         Me.lblNoPreview.Name = "lblNoPreview"
-        Me.lblNoPreview.Size = New System.Drawing.Size(298, 18)
+        Me.lblNoPreview.Size = New System.Drawing.Size(298, 54)
         Me.lblNoPreview.TabIndex = 14
         Me.lblNoPreview.Text = "Preview not yet implemented for this file type"
         Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -720,7 +718,7 @@ Partial Class dlgImportDataset
         Me.grpText.Controls.Add(Me.ucrChkMaxRowsText)
         Me.grpText.Location = New System.Drawing.Point(9, 93)
         Me.grpText.Name = "grpText"
-        Me.grpText.Size = New System.Drawing.Size(256, 132)
+        Me.grpText.Size = New System.Drawing.Size(290, 132)
         Me.grpText.TabIndex = 17
         Me.grpText.TabStop = False
         Me.grpText.Text = "Import Text Options"
@@ -755,7 +753,7 @@ Partial Class dlgImportDataset
         Me.ucrNudRowsToSkipText.AutoSize = True
         Me.ucrNudRowsToSkipText.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowsToSkipText.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipText.Location = New System.Drawing.Point(118, 74)
+        Me.ucrNudRowsToSkipText.Location = New System.Drawing.Point(210, 74)
         Me.ucrNudRowsToSkipText.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNudRowsToSkipText.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.ucrNudRowsToSkipText.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -770,10 +768,10 @@ Partial Class dlgImportDataset
         Me.ucrInputMissingValueStringText.AutoSize = True
         Me.ucrInputMissingValueStringText.IsMultiline = False
         Me.ucrInputMissingValueStringText.IsReadOnly = False
-        Me.ucrInputMissingValueStringText.Location = New System.Drawing.Point(138, 44)
+        Me.ucrInputMissingValueStringText.Location = New System.Drawing.Point(195, 44)
         Me.ucrInputMissingValueStringText.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputMissingValueStringText.Name = "ucrInputMissingValueStringText"
-        Me.ucrInputMissingValueStringText.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputMissingValueStringText.Size = New System.Drawing.Size(90, 21)
         Me.ucrInputMissingValueStringText.TabIndex = 13
         '
         'lblLinesToSkipText
@@ -988,6 +986,7 @@ Partial Class dlgImportDataset
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(660, 502)
+        Me.Controls.Add(Me.grpText)
         Me.Controls.Add(Me.cmdStepBack)
         Me.Controls.Add(Me.ucrChkMultipleFiles)
         Me.Controls.Add(Me.lblSelectSheets)
@@ -1011,7 +1010,6 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.ucrChkSheetsCheckAll)
         Me.Controls.Add(Me.ucrChkDropEmptyCols)
         Me.Controls.Add(Me.ucrSaveFile)
-        Me.Controls.Add(Me.grpText)
         Me.Controls.Add(Me.grpExcel)
         Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.grpCSV)
