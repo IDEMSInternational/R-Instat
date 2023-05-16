@@ -27,8 +27,8 @@ Partial Class dlgClimaticStationMaps
         Me.ucrBase = New instat.ucrButtons()
         Me.grpPoints = New System.Windows.Forms.GroupBox()
         Me.grpBoxLabelOptions = New System.Windows.Forms.GroupBox()
-        Me.lblSize = New System.Windows.Forms.Label()
-        Me.ucrNudSize = New instat.ucrNud()
+        Me.ucrChkColour = New instat.ucrCheck()
+        Me.ucrChkSize = New instat.ucrCheck()
         Me.ucrChkLabelAll = New instat.ucrCheck()
         Me.ucrChkLabelledRectangle = New instat.ucrCheck()
         Me.lblLabels = New System.Windows.Forms.Label()
@@ -59,6 +59,8 @@ Partial Class dlgClimaticStationMaps
         Me.toolStripMenuItemLabelRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTextRepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.grpPoints.SuspendLayout()
         Me.grpBoxLabelOptions.SuspendLayout()
         Me.grpMapOutline.SuspendLayout()
@@ -109,47 +111,44 @@ Partial Class dlgClimaticStationMaps
         '
         'grpBoxLabelOptions
         '
-        Me.grpBoxLabelOptions.Controls.Add(Me.lblSize)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrInputColour)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrNudSize)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkColour)
+        Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkSize)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelAll)
         Me.grpBoxLabelOptions.Controls.Add(Me.ucrChkLabelledRectangle)
-        Me.grpBoxLabelOptions.Location = New System.Drawing.Point(21, 228)
+        Me.grpBoxLabelOptions.Location = New System.Drawing.Point(21, 205)
         Me.grpBoxLabelOptions.Name = "grpBoxLabelOptions"
-        Me.grpBoxLabelOptions.Size = New System.Drawing.Size(200, 100)
+        Me.grpBoxLabelOptions.Size = New System.Drawing.Size(214, 128)
         Me.grpBoxLabelOptions.TabIndex = 13
         Me.grpBoxLabelOptions.TabStop = False
         Me.grpBoxLabelOptions.Text = "Label Options:"
         '
-        'lblSize
+        'ucrChkColour
         '
-        Me.lblSize.AutoSize = True
-        Me.lblSize.Location = New System.Drawing.Point(5, 46)
-        Me.lblSize.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(30, 13)
-        Me.lblSize.TabIndex = 12
-        Me.lblSize.Text = "Size:"
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(6, 95)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkColour.TabIndex = 9
         '
-        'ucrNudSize
+        'ucrChkSize
         '
-        Me.ucrNudSize.AutoSize = True
-        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(45, 43)
-        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSize.TabIndex = 8
-        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrChkSize.AutoSize = True
+        Me.ucrChkSize.Checked = False
+        Me.ucrChkSize.Location = New System.Drawing.Point(6, 41)
+        Me.ucrChkSize.Name = "ucrChkSize"
+        Me.ucrChkSize.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkSize.TabIndex = 8
         '
         'ucrChkLabelAll
         '
         Me.ucrChkLabelAll.AutoSize = True
         Me.ucrChkLabelAll.Checked = False
-        Me.ucrChkLabelAll.Location = New System.Drawing.Point(6, 72)
+        Me.ucrChkLabelAll.Location = New System.Drawing.Point(6, 69)
         Me.ucrChkLabelAll.Name = "ucrChkLabelAll"
-        Me.ucrChkLabelAll.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkLabelAll.Size = New System.Drawing.Size(87, 23)
         Me.ucrChkLabelAll.TabIndex = 7
         '
         'ucrChkLabelledRectangle
@@ -158,7 +157,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrChkLabelledRectangle.Checked = False
         Me.ucrChkLabelledRectangle.Location = New System.Drawing.Point(6, 17)
         Me.ucrChkLabelledRectangle.Name = "ucrChkLabelledRectangle"
-        Me.ucrChkLabelledRectangle.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkLabelledRectangle.Size = New System.Drawing.Size(87, 23)
         Me.ucrChkLabelledRectangle.TabIndex = 6
         '
         'lblLabels
@@ -445,6 +444,30 @@ Partial Class dlgClimaticStationMaps
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.AutoSize = True
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(108, 41)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSize.TabIndex = 10
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(86, 94)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(122, 21)
+        Me.ucrInputColour.TabIndex = 11
+        '
         'dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -504,8 +527,10 @@ Partial Class dlgClimaticStationMaps
     Friend WithEvents toolStripMenuItemLabelRepelOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTextRepelOptions As ToolStripMenuItem
     Friend WithEvents grpBoxLabelOptions As GroupBox
-    Friend WithEvents lblSize As Label
-    Friend WithEvents ucrNudSize As ucrNud
     Friend WithEvents ucrChkLabelAll As ucrCheck
     Friend WithEvents ucrChkLabelledRectangle As ucrCheck
+    Friend WithEvents ucrChkSize As ucrCheck
+    Friend WithEvents ucrChkColour As ucrCheck
+    Friend WithEvents ucrInputColour As ucrInputComboBox
+    Friend WithEvents ucrNudSize As ucrNud
 End Class

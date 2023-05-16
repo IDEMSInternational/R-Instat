@@ -68,6 +68,8 @@ Public Class dlgClimaticStationMaps
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
+        Dim dctGRugColour As New Dictionary(Of String, String)
+
         ucrSelectorOutline.SetParameter(New RParameter("data", 0))
         ucrSelectorOutline.SetParameterIsrfunction()
 
@@ -122,26 +124,51 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 
-        ucrChkLabelledRectangle.SetText("Labelled Rectangle")
-        ucrChkLabelledRectangle.AddParameterValuesCondition(True, "colour", "True")
-        ucrChkLabelledRectangle.AddParameterValuesCondition(False, "colour", "False")
+        ucrChkLabelledRectangle.SetText("Text")
+        ucrChkLabelledRectangle.AddParameterValuesCondition(True, "text", "True")
+        ucrChkLabelledRectangle.AddParameterValuesCondition(False, "text", "False")
+        ucrChkLabelledRectangle.SetRDefault("FALSE")
 
         ucrChkLabelAll.SetText("Label All")
-        ucrChkLabelAll.AddParameterValuesCondition(True, "check", "True")
-        ucrChkLabelAll.AddParameterValuesCondition(False, "check", "False")
+        ucrChkLabelAll.SetParameter(New RParameter("max.overlaps", 6))
+        ucrChkLabelAll.AddParameterValuesCondition(True, "max.overlaps", "True")
+        ucrChkLabelAll.AddParameterValuesCondition(False, "max.overlaps", "False")
         ucrChkLabelAll.SetRDefault("FALSE")
 
-        ucrNudSize.SetParameter(New RParameter("size", 2))
-        ucrNudSize.Minimum = 1
-        ucrNudSize.DecimalPlaces = 2
+        ucrChkSize.SetText("Size")
+        ucrChkSize.AddParameterValuesCondition(True, "check", "True")
+        ucrChkSize.AddParameterValuesCondition(False, "check", "False")
+        ucrChkSize.AddToLinkedControls(ucrNudSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudSize.SetParameter(New RParameter("size", 4))
+        ucrNudSize.Minimum = 0
+        ucrNudSize.DecimalPlaces = 1
         ucrNudSize.Increment = 0.1
-        ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrNudSize.SetRDefault("5")
+
+        ucrChkColour.SetText("Colour")
+        ucrChkColour.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkColour.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkColour.AddToLinkedControls(ucrInputColour, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+
+        ucrInputColour.SetParameter(New RParameter("colour", 5))
+        dctGRugColour.Add("Black", Chr(34) & "black" & Chr(34))
+        dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctGRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
+        dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
+        dctGRugColour.Add("White", Chr(34) & "white" & Chr(34))
+        dctGRugColour.Add("None", Chr(34) & "none" & Chr(34))
+        ucrInputColour.SetItems(dctGRugColour)
+        ucrInputColour.bAllowNonConditionValues = True
+        ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkAddPoints.SetText("Add Points")
         ucrChkAddPoints.AddParameterPresentCondition(True, "geom_point")
         ucrChkAddPoints.AddParameterPresentCondition(False, "geom_point", False)
         ChangeSize()
-
     End Sub
 
     Private Sub SetDefaults()
@@ -182,7 +209,8 @@ Public Class dlgClimaticStationMaps
 
         clsRemoveFunc.SetRCommand("rm")
 
-        clsDummyFunction.AddParameter("colour", "True", iPosition:=1)
+        clsDummyFunction.AddParameter("checked", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("check", "False", iPosition:=1)
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -212,14 +240,10 @@ Public Class dlgClimaticStationMaps
         clsLabelRepelFunction.SetPackageName("ggrepel")
         clsLabelRepelFunction.SetRCommand("geom_label_repel")
         clsLabelRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelRepelAesFunction, iPosition:=1)
-        clsLabelRepelFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=2)
-        clsLabelRepelFunction.AddParameter("size", "1", iPosition:=3)
 
         clsTextRepelFunction.SetPackageName("ggrepel")
         clsTextRepelFunction.SetRCommand("geom_text_repel")
         clsTextRepelFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextRepelAesFunction, iPosition:=1)
-        clsTextRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
-        clsTextRepelFunction.AddParameter("size", "1", iPosition:=3)
 
         clsLabelRepelAesFunction.SetPackageName("ggplot2")
         clsLabelRepelAesFunction.SetRCommand("aes")
@@ -261,6 +285,9 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrChkLabelAll.AddAdditionalCodeParameterPair(clsTextRepelFunction, New RParameter("max.overlaps", 6), iAdditionalPairNo:=1)
+        ucrNudSize.AddAdditionalCodeParameterPair(clsTextRepelFunction, New RParameter("size", 4), iAdditionalPairNo:=1)
+        ucrInputColour.AddAdditionalCodeParameterPair(clsTextRepelFunction, New RParameter("colour", 5), iAdditionalPairNo:=1)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLongitude.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverLatitude.AddAdditionalCodeParameterPair(clsLabelRepelAesFunction, ucrReceiverLatitude.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsTextRepelAesFunction, ucrReceiverStation.GetParameter(), iAdditionalPairNo:=1)
@@ -276,10 +303,17 @@ Public Class dlgClimaticStationMaps
         ucrReceiverShape.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverColor.SetRCode(clsGeomPointAesFunction, bReset)
         ucrReceiverFacet.SetRCode(clsFacetOp, bReset)
-        ucrChkLabelledRectangle.SetRCode(clsDummyFunction, bReset)
-        ucrChkLabelAll.SetRCode(clsGGplotOperator, bReset)
         ucrReceiverStation.SetRCode(clsLabelRepelAesFunction, bReset)
+
+        ucrNudSize.SetRCode(clsLabelRepelFunction, bReset)
+        ucrInputColour.SetRCode(clsLabelRepelFunction, bReset)
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
+        If bReset Then
+            ucrChkLabelledRectangle.SetRCode(clsGGplotOperator, bReset)
+            ucrChkLabelAll.SetRCode(clsLabelRepelFunction, bReset)
+            ucrChkSize.SetRCode(clsDummyFunction, bReset)
+            ucrChkColour.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -400,7 +434,7 @@ Public Class dlgClimaticStationMaps
             If Not ucrReceiverStation.IsEmpty AndAlso ucrChkLabelledRectangle.Checked Then
                 clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
             ElseIf Not ucrReceiverStation.IsEmpty AndAlso Not ucrChkLabelledRectangle.Checked Then
-                clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
+                clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
             End If
             If Not ucrReceiverFacet.IsEmpty Then
                 clsGGplotOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction, bIncludeArgumentName:=False, iPosition:=2)
@@ -468,26 +502,119 @@ Public Class dlgClimaticStationMaps
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkLabelledRectangle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelledRectangle.ControlValueChanged
-        If ucrChkLabelledRectangle.Checked Then
+    Private Sub AddGeomParameter()
+        If ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsLabelRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsLabelRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsTextRepelFunction.RemoveParameterByName("size")
+            clsTextRepelFunction.RemoveParameterByName("colour")
+            clsTextRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsTextRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsTextRepelFunction.RemoveParameterByName("size")
+            clsTextRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsLabelRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+            clsLabelRepelFunction.RemoveParameterByName("colour")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsLabelRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+            clsLabelRepelFunction.RemoveParameterByName("size")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsLabelRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+            clsLabelRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsTextRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsTextRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsTextRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsTextRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsTextRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsTextRepelFunction.RemoveParameterByName("size")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+            clsLabelRepelFunction.RemoveParameterByName("colour")
+            clsLabelRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+            clsLabelRepelFunction.RemoveParameterByName("size")
+            clsLabelRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsTextRepelFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=2)
+            clsTextRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsTextRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsLabelRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsLabelRepelFunction.RemoveParameterByName("size")
+            clsLabelRepelFunction.RemoveParameterByName("colour")
+            clsGGplotOperator.RemoveParameterByName("geom_text")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsTextRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=2)
+            clsTextRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsTextRepelFunction.RemoveParameterByName("colour")
+        ElseIf Not ucrChkLabelledRectangle.Checked AndAlso ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
+            clsTextRepelFunction.AddParameter("size", "5", iPosition:=3)
+            clsGGplotOperator.RemoveParameterByName("geom_label")
+            clsTextRepelFunction.RemoveParameterByName("colour")
+            clsTextRepelFunction.RemoveParameterByName("max.overlaps")
+        ElseIf ucrChkLabelledRectangle.Checked AndAlso Not ucrChkSize.Checked AndAlso Not ucrChkLabelAll.Checked AndAlso Not ucrChkColour.Checked Then
             clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
             clsGGplotOperator.RemoveParameterByName("geom_text")
-            clsLabelRepelAesFunction.RemoveParameterByName("size")
+            clsLabelRepelFunction.RemoveParameterByName("colour")
+            clsLabelRepelFunction.RemoveParameterByName("max.overlaps")
+            clsLabelRepelFunction.RemoveParameterByName("size")
         Else
-            clsGGplotOperator.AddParameter("geom_Text", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
+            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=2)
             clsGGplotOperator.RemoveParameterByName("geom_label")
-            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
-            clsTextRepelAesFunction.RemoveParameterByName("size")
+            clsTextRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
+            clsTextRepelFunction.RemoveParameterByName("colour")
+            clsTextRepelFunction.RemoveParameterByName("size")
         End If
     End Sub
 
+    Private Sub ucrChkLabelledRectangle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelledRectangle.ControlValueChanged
+        AddGeomParameter()
+    End Sub
+
     Private Sub ucrChkLabelAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelAll.ControlValueChanged
-        If ucrChkLabelAll.Checked AndAlso ucrChkLabelAll.Checked Then
-            clsGGplotOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelRepelFunction, iPosition:=2)
-            clsLabelRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
-        ElseIf ucrChkLabelAll.Checked AndAlso Not ucrChkLabelAll.Checked Then
-            clsGGplotOperator.AddParameter("geom_text", clsRFunctionParameter:=clsTextRepelFunction, iPosition:=3)
-            clsTextRepelFunction.AddParameter("max.overlaps", "Inf", iPosition:=4)
-        End If
+        AddGeomParameter()
+    End Sub
+
+    Private Sub ucrChkSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSize.ControlValueChanged
+        AddGeomParameter()
+    End Sub
+
+    Private Sub ucrChkColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColour.ControlValueChanged
+        AddGeomParameter()
     End Sub
 End Class
