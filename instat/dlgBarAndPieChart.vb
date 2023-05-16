@@ -442,7 +442,7 @@ Public Class dlgBarAndPieChart
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
-        clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("position", Chr(34) & "stack" & Chr(34), iPosition:=0)
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
@@ -871,6 +871,9 @@ Public Class dlgBarAndPieChart
             If ucrChkLollipop.Checked Then
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
                 clsBaseOperator.RemoveParameterByName("geom_bar")
+            End If
+            If ucrChkBacktoback.Checked Then
+                clsBaseOperator.RemoveParameterByName("geom_bar")
             Else
                 clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
@@ -945,6 +948,7 @@ Public Class dlgBarAndPieChart
             clsAesFunction1.RemoveParameterByName("y")
             clsAesFunction2.RemoveParameterByName("y")
             clsRgeomBarFunction2.RemoveParameterByName("aes")
+            clsRgeomBarFunction1.RemoveParameterByName("aes")
             ucrChkPolarCoordinates.Enabled = True
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)

@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -21,16 +21,16 @@ Public Class dlgSummaryTables
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
-    Private bRCodeSet As Boolean = True
+    Private bResetFormatSubdialog As Boolean = False
     Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction, clsConcFunction As New RFunction
+    Private bRCodeSet As Boolean = True
     Private clsStubHeadFunction, clsPivotWiderFunction As New RFunction
 
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction,
-            clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-            clsTabOptionsFunction, clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
-            clsTabFootnoteSubtitleFunction, clsStyleListFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
+    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+            clsTabFootnoteSubtitleFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
-            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsGtFunction As New RFunction
+            clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesTabOptionsFunction,
+            clsgtExtraThemesFunction, clsGtFunction As New RFunction
 
     Private clsSummaryOperator, clsFrequencyOperator, clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
 
@@ -190,15 +190,8 @@ Public Class dlgSummaryTables
         clsTableTitleFunction = New RFunction
         clsTabFootnoteTitleFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
-        clsCellTextFunction = New RFunction
-        clsCellBorderFunction = New RFunction
-        clsCellFillFunction = New RFunction
-        clsHeaderFormatFunction = New RFunction
-        clsTabOptionsFunction = New RFunction
-        clsBorderWeightPxFunction = New RFunction
         clsFootnoteTitleLocationFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
-        clsStyleListFunction = New RFunction
         clsSummaryOperator = New ROperator
         clsPipeOperator = New ROperator
         clsTabFootnoteSubtitleFunction = New RFunction
@@ -206,7 +199,6 @@ Public Class dlgSummaryTables
         clsSecondFootnoteCellBodyFunction = New RFunction
         clsFootnoteCellFunction = New RFunction
         clsSecondFootnoteCellFunction = New RFunction
-        clsStubHeadFunction = New RFunction
         clsTabStyleFunction = New RFunction
         clsTabStyleCellTextFunction = New RFunction
         clsTabStylePxFunction = New RFunction
@@ -215,6 +207,8 @@ Public Class dlgSummaryTables
         clsTabFootnoteOperator = New ROperator
         clsFrequencyOperator = New ROperator
         clsDummyFunction = New RFunction
+        clsThemesTabOptionsFunction = New RFunction
+        clsgtExtraThemesFunction = New RFunction
         clsGtFunction = New RFunction
         clsPivotWiderFunction = New RFunction
 
@@ -224,6 +218,7 @@ Public Class dlgSummaryTables
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
         clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=2)
 
@@ -241,6 +236,10 @@ Public Class dlgSummaryTables
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
 
+        clsThemesTabOptionsFunction.SetPackageName("gt")
+        clsThemesTabOptionsFunction.SetRCommand("tab_options")
+
+        clsgtExtraThemesFunction.SetPackageName("gtExtras")
         clsGtFunction.SetPackageName("gt")
         clsGtFunction.SetRCommand("gt")
 
@@ -284,7 +283,7 @@ Public Class dlgSummaryTables
         clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
         clsFrequencyDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=2)
+        clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=8)
         clsFrequencyDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=10)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
         clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
@@ -319,30 +318,6 @@ Public Class dlgSummaryTables
         clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
         clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
 
-        clsCellTextFunction.SetPackageName("gt")
-        clsCellTextFunction.SetRCommand("cell_text")
-
-        clsCellBorderFunction.SetPackageName("gt")
-        clsCellBorderFunction.SetRCommand("cell_borders")
-        clsCellBorderFunction.AddParameter("weight", clsRFunctionParameter:=clsBorderWeightPxFunction, iPosition:=3)
-
-        clsCellFillFunction.SetPackageName("gt")
-        clsCellFillFunction.SetRCommand("cell_fill")
-
-        clsHeaderFormatFunction.SetPackageName("mmtable2")
-        clsHeaderFormatFunction.SetRCommand("header_format")
-        clsHeaderFormatFunction.AddParameter("header", Chr(34) & "all_cols" & Chr(34), iPosition:=0)
-        clsHeaderFormatFunction.AddParameter("style", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
-
-        clsTabOptionsFunction.SetPackageName("gt")
-        clsTabOptionsFunction.SetRCommand("tab_options")
-
-        clsBorderWeightPxFunction.SetPackageName("gt")
-        clsBorderWeightPxFunction.SetRCommand("px")
-        clsBorderWeightPxFunction.AddParameter("weight", "1", iPosition:=0, bIncludeArgumentName:=False)
-
-        clsStyleListFunction.SetRCommand("list")
-
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
         clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -351,6 +326,7 @@ Public Class dlgSummaryTables
                                                   strObjectName:="last_table")
 
         bResetSubdialog = True
+        bResetFormatSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -379,6 +355,8 @@ Public Class dlgSummaryTables
         End If
         bRCodeSet = True
         FillListView()
+
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -419,23 +397,24 @@ Public Class dlgSummaryTables
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
         If rdoSummaryTable.Checked Then
             sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                        clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
-                                        clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                       clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                         clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                       clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                       clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
-                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
+                                       clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
+                                       clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         Else
             sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                      clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
-                                      clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                     clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                       clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                     clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                     clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
-                                     clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
+                                     clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator,
+                                     clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
+                                     clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         End If
 
         sdgFormatSummaryTables.ShowDialog()
+        bResetFormatSubdialog = False
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeight.ControlValueChanged

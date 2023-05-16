@@ -101,9 +101,9 @@ Partial Class ucrButtons
         '
         'txtComment
         '
-        Me.txtComment.Location = New System.Drawing.Point(90, 1)
+        Me.txtComment.Location = New System.Drawing.Point(100, 1)
         Me.txtComment.Name = "txtComment"
-        Me.txtComment.Size = New System.Drawing.Size(312, 20)
+        Me.txtComment.Size = New System.Drawing.Size(302, 20)
         Me.txtComment.TabIndex = 1
         '
         'cmdLanguage
