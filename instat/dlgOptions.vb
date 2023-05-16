@@ -195,6 +195,8 @@ Public Class dlgOptions
         'todo. temporarily disabled
         'frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
         '                                                 ucrNudMaximumOutputsHeight.Value, -1))
+
+        frmMain.clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub SetView()
