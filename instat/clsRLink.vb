@@ -207,7 +207,7 @@ Public Class RLink
     End Function
 
     Private Function CheckIfRVersionIsSupported() As Boolean
-        Dim bSupported As Boolean
+        Dim bSupported As Boolean = False
         Try
             Dim expTemp As SymbolicExpression
             Dim strMajor As String = ""
@@ -222,14 +222,12 @@ Public Class RLink
             End If
 
             If String.IsNullOrEmpty(strMajor) OrElse String.IsNullOrEmpty(strMinor) Then
-                bSupported = False
                 MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
                                        "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
                                        strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
                                        "And restart R-Instat.",
                                        MsgBoxStyle.Critical, "R Version error.")
             ElseIf strMajor <> strRVersionMajorRequired OrElse strMinor.Substring(0, 1) < strRVersionMinorRequired Then
-                bSupported = False
                 MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & Environment.NewLine &
                        "R-Instat requires at least version " & strRVersionRequired & " or greater." & Environment.NewLine &
                        "Try reruning the installation to install an updated version of R or download R from " &
@@ -239,14 +237,16 @@ Public Class RLink
                 bSupported = True
             End If
         Catch ex As Exception
-            bSupported = False
             MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
         End Try
 
         Return bSupported
     End Function
 
-    ''' <summary>   Gets the R setup script.</summary>
+    ''' <summary>  
+    ''' Gets the default R set up script.
+    ''' The script return sets the working directory and source file.
+    ''' </summary>
     ''' <returns>   The R setup script. </returns>
     Public Function GetRSetupScript() As String
         Dim clsSetWd As New RFunction
@@ -282,7 +282,7 @@ Public Class RLink
     End Function
 
     ''' <summary>   Closes the current instat data object, and opens a new one. </summary>
-    Public Sub CloseData()
+    Public Sub CloseDataBook()
         Dim clsRm As New RFunction
 
         clsRm.SetRCommand("rm")
@@ -386,7 +386,7 @@ Public Class RLink
     '''
     ''' <returns>   The packages not installed. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Function GetPackagesNotInstalled() As String()
+    Public Function GetRPackagesNotInstalled() As String()
         Dim chrPackagesNotInstalled As CharacterVector
         Dim clsPackagesNotInstalled As New RFunction
         Dim expTemp As SymbolicExpression

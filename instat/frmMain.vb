@@ -108,6 +108,7 @@ Public Class frmMain
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
         '---------------------------------------
+        'disable main menu items to prevent user inputs durinng initialisation
         Cursor = Cursors.WaitCursor
         SetMainMenusEnabled(False)
         '---------------------------------------
@@ -129,7 +130,6 @@ Public Class frmMain
 
         SetToDefaultLayout()
 
-
         '---------------------------------------
         'set up R-Instat options (settings)
         'load any saved options if available
@@ -141,28 +141,33 @@ Public Class frmMain
         '---------------------------------------
 
         '---------------------------------------
-        'Must come after loading options as options may change language.
+        'translate the form menu items
+        'must come after loading options as options may change language.
         TranslateFrmMainMenu()
         '---------------------------------------
 
+        '---------------------------------------
+        'toggle the optional form menu items based on set opyions
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
         strCurrLang = clsInstatOptions.strLanguageCultureCode
+        '---------------------------------------
 
         '---------------------------------------
-        'Sets up the Recent items
+        'Set up the Recent items; files, dialogs
         clsRecentItems = New clsRecentFiles(strAppDataPath)
         clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
         clsRecentItems.SetDataViewWindow(ucrDataViewer)
-        'checks existence of MRU list
+        'check existence of MRU list
         clsRecentItems.checkOnLoad()
         '---------------------------------------
+
+        '---------------------------------------
+        'set output window options
         ucrOutput.SetInstatOptions(clsInstatOptions)
-
-
-        ucrDataViewer.StartupMenuItemsVisibility(True)
+        '---------------------------------------
 
         '---------------------------------------
         'start the R engine and install any missing R packages
@@ -176,13 +181,14 @@ Public Class frmMain
         '---------------------------------------
 
         '---------------------------------------
+        'execute R-Instat R set up scripts to set up R data book
+        ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         'execute R global options used by R-Instat R data book
         clsInstatOptions.ExecuteRGlobalOptions()
-        'execute R-Instat R set up scripts to set up R data book
-        ExecuteRInstatRSetupScriptsAndInitialiseRDatabook()
         '---------------------------------------
 
         '---------------------------------------
+        'enable menu items to allow user inputs
         Cursor = Cursors.Default
         SetMainMenusEnabled(True)
         '---------------------------------------
@@ -228,35 +234,33 @@ Public Class frmMain
 
     Private Function AllPackagesInstalled() As Boolean
         'check missing R packages and prompt to install them
-        Dim arrMissingPackages() As String = clsRLink.GetPackagesNotInstalled()
+        Dim arrMissingPackages() As String = clsRLink.GetRPackagesNotInstalled()
         If arrMissingPackages IsNot Nothing AndAlso arrMissingPackages.Length > 0 Then
             frmPackageIssues.SetMissingPackages(arrMissingPackages)
             frmPackageIssues.ShowDialog()
-            'change flag depending on if all missing packages have been installed
-            'todo. this block should be removed from here
-            Return frmPackageIssues.bCloseRInstat
+            Return Not frmPackageIssues.bCloseRInstat
         Else
             Return True
         End If
     End Function
 
-    Private Sub ExecuteRInstatRSetupScriptsAndInitialiseRDatabook()
+    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strScript As String = ""
         Dim strDataFilePath As String = ""
         Dim bRecoveryFilesPresent As Boolean = False
 
         'could either be a file path or a script
-        GetAutoRecoveredRInstatPreviousSessionData(strScript, strDataFilePath, bRecoveryFilesPresent)
+        GetAutoRecoveredPreviousSessionData(strScript, strDataFilePath, bRecoveryFilesPresent)
 
         'if no script recovered then use the default R set up script
         If String.IsNullOrEmpty(strScript) Then
-            strScript = "#Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
+            strScript = "# Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
         End If
 
         'if data file recovered then add it as part of the initial R set up script
         If Not String.IsNullOrEmpty(strDataFilePath) Then
             strScript = strScript & Environment.NewLine &
-                        "#Importing auto recovered data" & Environment.NewLine &
+                        "# Importing auto recovered data" & Environment.NewLine &
                         clsRLink.GetImportRDSRScript(strDataFilePath, False)
         End If
 
@@ -266,13 +270,25 @@ Public Class frmMain
             clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
         Next
 
+        'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
+        'to check if R object has been set up at R level.
+
+        'grids are only updated when clsRLink.bInstatObjectExists = True
+        If clsRLink.RunInternalScriptGetValue(strScript:="exists('" & clsRLink.strInstatDataObject & "')",
+                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" Then
+            'set R-Instat R object as exists if it has been set up in R level and refresh the grids
+            'refreshing grids internally updates the .Net databook object as well.
+            clsRLink.bInstatObjectExists = True
+            UpdateAllGrids()
+        End If
+
         'delete the autorecovery files if present
         If bRecoveryFilesPresent Then
             DeleteRecoveryFiles()
         End If
     End Sub
 
-    Private Sub GetAutoRecoveredRInstatPreviousSessionData(ByRef strScript As String,
+    Private Sub GetAutoRecoveredPreviousSessionData(ByRef strScript As String,
                                                            ByRef strDataFilePath As String,
                                                            ByRef bRecoveryFilesPresent As Boolean)
 
@@ -1597,7 +1613,7 @@ Public Class frmMain
             Exit Sub
         End If
 
-        clsRLink.CloseData()
+        clsRLink.CloseDataBook()
         strSaveFilePath = ""
     End Sub
 
