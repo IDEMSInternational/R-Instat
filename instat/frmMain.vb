@@ -247,10 +247,9 @@ Public Class frmMain
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
         Dim strDataFilePath As String = ""
-        Dim bRecoveryFilesPresent As Boolean = False
 
         'could either be a file path or a script
-        GetAutoRecoveredPreviousSessionData(strRScripts, strDataFilePath, bRecoveryFilesPresent)
+        PromtAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
 
         'if no script recovered then use the default R set up script
         If String.IsNullOrEmpty(strRScripts) Then
@@ -282,38 +281,34 @@ Public Class frmMain
             UpdateAllGrids()
         End If
 
-        'delete the autorecovery files if present
-        If bRecoveryFilesPresent Then
-            DeleteRecoveryFiles()
-        End If
     End Sub
 
-    Private Sub GetAutoRecoveredPreviousSessionData(ByRef strScript As String,
-                                                           ByRef strDataFilePath As String,
-                                                           ByRef bRecoveryFilesPresent As Boolean)
+    Private Sub PromtAndSetAutoRecoveredPrevSessionData(ByRef strScript As String,
+                                                           ByRef strDataFilePath As String)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
             Return
         End If
 
+        'todo. As of 16/05/2023. Only 1 file for each of the recovery file is expected.
+        'should we change stop using arrays?
         Dim strAutoSavedLogFilePaths() As String = {}
         Dim strAutoSavedInternalLogFilePaths() As String = {}
         Dim strAutoSavedDataFilePaths() As String = {}
 
         If (Directory.Exists(strAutoSaveLogFolderPath)) Then
             strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
-            bRecoveryFilesPresent = True
         End If
         If Directory.Exists(strAutoSaveDataFolderPath) Then
             strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
-            bRecoveryFilesPresent = True
         End If
         If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
             strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
-            bRecoveryFilesPresent = True
         End If
 
+        '---------------------------------------
+        'prompt user for recovery selection
         If (strAutoSavedLogFilePaths.Length > 0 OrElse
             strAutoSavedInternalLogFilePaths.Length > 0 OrElse
             strAutoSavedDataFilePaths.Length > 0) AndAlso
@@ -328,51 +323,40 @@ Public Class frmMain
 
             'todo. the dialog design is meant to only return just one option; script, data file path or new session.
             'refactor the dialog to enforce the design
+
+            'get the R script from read file if selected by the user
             strScript = dlgAutoSaveRecovery.GetScript()
+            'get the data file path if selected by the user
             strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
         End If
+        '---------------------------------------
 
-    End Sub
-
-    Private Sub DeleteRecoveryFiles()
-
-        If (Directory.Exists(strAutoSaveLogFolderPath)) Then
-            Dim strAutoSavedLogFilePaths() As String = {}
-            strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
-            If strAutoSavedLogFilePaths.Length > 0 Then
-                Try
-                    File.Delete(strAutoSavedLogFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
-                End Try
-            End If
+        '---------------------------------------
+        'delete the recovery files
+        If strAutoSavedLogFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedLogFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+            End Try
         End If
 
-        If Directory.Exists(strAutoSaveInternalLogFolderPath) Then
-            Dim strAutoSavedInternalLogFilePaths() As String = {}
-            strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
-            If strAutoSavedInternalLogFilePaths.Length > 0 Then
-                Try
-                    File.Delete(strAutoSavedInternalLogFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
-                End Try
-            End If
-        End If
-        If (Directory.Exists(strAutoSaveDataFolderPath)) Then
-            Dim strAutoSavedDataFilePaths() As String = {}
-            strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
-            If strAutoSavedDataFilePaths.Length > 0 Then
-                Try
-                    File.Delete(strAutoSavedDataFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-                End Try
-            End If
+        If strAutoSavedInternalLogFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedInternalLogFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
         End If
 
-
-
+        If strAutoSavedDataFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedDataFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
+        End If
+        '---------------------------------------
 
     End Sub
 
