@@ -67,19 +67,15 @@ Public Class dlgEdit
         clsReplaceValue = New RFunction
         ucrSelectValues.Reset()
 
-        'trim white space from ends of value
-        strNewValue = strNewValue.Trim()
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34))
-        clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34))
-        clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34))
-
+        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
+        clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
 
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
         ucrSelectValues.SetRCode(clsReplaceValue, bReset)
         ucrNewName.SetRCode(clsReplaceValue, bReset)
     End Sub
@@ -114,5 +110,4 @@ Public Class dlgEdit
         StrRowIndex = strIRow
         bUseSelectedColumn = True
     End Sub
-
 End Class
