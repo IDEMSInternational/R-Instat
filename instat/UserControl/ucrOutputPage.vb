@@ -268,7 +268,9 @@ Public Class ucrOutputPage
 
 
         AddHandler linkLabel.Click, Sub()
-                                        Dim frmMaximiseOutput As New frmMaximiseOutput
+                                        Dim frmMaximiseOutput As New frmMaximiseOutput With {
+                                            .Text = "Maximised output"
+                                        }
                                         frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                     End Sub
     End Sub
@@ -281,7 +283,9 @@ Public Class ucrOutputPage
             Dim ucrWebview As New ucrWebViewer()
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
-                                            Dim frmMaximiseOutput As New frmMaximiseOutput
+                                            Dim frmMaximiseOutput As New frmMaximiseOutput With {
+                                                .Text = "Maximised output"
+                                            }
                                             frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                         End Sub
 
