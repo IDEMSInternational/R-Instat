@@ -210,6 +210,7 @@ Public Class dlgSummaryTables
         clsgtExtraThemesFunction = New RFunction
         clsGtFunction = New RFunction
         clsPivotWiderFunction = New RFunction
+        clsTabFootnoteOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -228,6 +229,9 @@ Public Class dlgSummaryTables
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
+
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)

@@ -21,11 +21,10 @@ Public Class dlgUseTable
     Private clsRFunctionAsHTML, clsRFunctionAsRTF, clsRFunctionAsWord, clsRFunctionAsLaTex, clsUseTableFunction As New RFunction
 
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsDummyFunction,
-                                        clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-                                        clsThemesTabOptionsFunction, clsFootnoteCellFunction, clsStubHeadFunction, clsSecondFootnoteCellBodyFunction,
-                                       clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteCellBodyFunction,
+                                        clsThemesTabOptionsFunction, clsFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
+                                       clsFootnoteTitleLocationFunction, clsFootnoteCellBodyFunction,
                                        clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
-                                       clsStyleListFunction, clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
+                                        clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
                                        clsgtExtraThemesFunction As New RFunction
 
@@ -91,20 +90,13 @@ Public Class dlgUseTable
         clsTabFootnoteTitleFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsCellTextFunction = New RFunction
-        clsCellBorderFunction = New RFunction
-        clsCellFillFunction = New RFunction
-        clsHeaderFormatFunction = New RFunction
         clsThemesTabOptionsFunction = New RFunction
         clsFootnoteCellFunction = New RFunction
-        clsStubHeadFunction = New RFunction
         clsSecondFootnoteCellBodyFunction = New RFunction
-        clsBorderWeightPxFunction = New RFunction
         clsFootnoteTitleLocationFunction = New RFunction
         clsFootnoteCellBodyFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
         clsTabFootnoteSubtitleFunction = New RFunction
-        clsStyleListFunction = New RFunction
         clsSecondFootnoteCellFunction = New RFunction
         clsTabStyleCellTextFunction = New RFunction
         clsTabStyleFunction = New RFunction
@@ -127,8 +119,8 @@ Public Class dlgUseTable
 
         clsSummaryOperator.SetOperation("+")
 
-        clsStubHeadFunction.SetPackageName("gt")
-        clsStubHeadFunction.SetRCommand("tab_stubhead")
+        clsTabFootnoteOperator.SetOperation("%>%")
+        clsTabFootnoteOperator.bBrackets = False
 
         clsTabStyleFunction.SetRCommand("tab_style")
         clsTabStyleFunction.SetPackageName("gt")
@@ -177,29 +169,8 @@ Public Class dlgUseTable
         clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
         clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
 
-        clsCellTextFunction.SetPackageName("gt")
-        clsCellTextFunction.SetRCommand("cell_text")
-
-        clsCellBorderFunction.SetPackageName("gt")
-        clsCellBorderFunction.SetRCommand("cell_borders")
-        clsCellBorderFunction.AddParameter("weight", clsRFunctionParameter:=clsBorderWeightPxFunction, iPosition:=3)
-
-        clsCellFillFunction.SetPackageName("gt")
-        clsCellFillFunction.SetRCommand("cell_fill")
-
-        clsHeaderFormatFunction.SetPackageName("mmtable2")
-        clsHeaderFormatFunction.SetRCommand("header_format")
-        clsHeaderFormatFunction.AddParameter("header", Chr(34) & "all_cols" & Chr(34), iPosition:=0)
-        clsHeaderFormatFunction.AddParameter("style", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
-
         clsThemesTabOptionsFunction.SetPackageName("gt")
         clsThemesTabOptionsFunction.SetRCommand("tab_options")
-
-        clsBorderWeightPxFunction.SetPackageName("gt")
-        clsBorderWeightPxFunction.SetRCommand("px")
-        clsBorderWeightPxFunction.AddParameter("weight", "1", iPosition:=0, bIncludeArgumentName:=False)
-
-        clsStyleListFunction.SetRCommand("list")
 
         clsRFunctionAsHTML.SetPackageName("gt")
         clsRFunctionAsHTML.SetRCommand("as_raw_html")
