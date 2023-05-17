@@ -122,7 +122,7 @@ Public Class sdgFormatSummaryTables
                         clsNewTableSourcenoteFunction As RFunction, clsNewTabStyleFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewPipeOperator As ROperator, clsNewFootnoteTitleLocationFunction As RFunction, clsNewFootnoteSubtitleLocationFunction As RFunction,
                         clsNewTabFootnoteSubtitleFunction As RFunction, clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator,
-                        clsNewSecondFootnoteCellFunction As RFunction, clsNewTabFootnoteOperator As ROperator, clsNewTabStyleCellTextFunction As RFunction,
+                        clsNewSecondFootnoteCellFunction As RFunction, clsNewTabStyleCellTextFunction As RFunction,
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
                         clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction)
 
@@ -286,11 +286,6 @@ Public Class sdgFormatSummaryTables
         AddFootnote()
     End Sub
 
-    Private Sub ucrInputAddSourceNote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAddSourceNote.ControlValueChanged
-        AddRemoveSourceNoteParameter()
-        AddSourceNote()
-    End Sub
-
     Private Sub PipeOperator_controlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlContentsChanged,
             ucrChkAddFootnote.ControlContentsChanged, ucrChKAddSecondFootnote.ControlContentsChanged, ucrChkAddSourcenote.ControlContentsChanged,
             ucrInputTitle.ControlContentsChanged, ucrInputSubtitle.ControlContentsChanged, ucrInputTitleFootnote.ControlContentsChanged,
@@ -368,7 +363,7 @@ Public Class sdgFormatSummaryTables
         End If
     End Sub
 
-    Private Sub ucrChkAddSourcenote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddSourcenote.ControlValueChanged, ucrInputAddSourceNote.ControlValueChanged
+    Private Sub ucrChkAddSourcenote_value(ucrChangedControl As ucrCore) Handles ucrChkAddSourcenote.ControlValueChanged, ucrInputAddSourceNote.ControlValueChanged
         If ucrChkAddSourcenote.Checked Then
             clsPipeOperator.AddParameter("source_note", clsRFunctionParameter:=clsTableSourcenoteFunction, iPosition:=4)
             If Not ucrInputAddSourceNote.IsEmpty Then
@@ -379,10 +374,7 @@ Public Class sdgFormatSummaryTables
         Else
             clsPipeOperator.RemoveParameterByName("source_note")
         End If
-    End Sub
 
-    Private Sub ucrChkAddSourcenote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddSourcenote.ControlValueChanged
-        AddSourceNote()
         AddRemoveSourceNoteParameter()
     End Sub
 

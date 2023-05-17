@@ -22,11 +22,12 @@ Public Class dlgUseTable
 
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsDummyFunction,
                                         clsCellTextFunction, clsCellBorderFunction, clsCellFillFunction, clsHeaderFormatFunction,
-                                        clsTabOptionsFunction, clsFootnoteCellFunction, clsStubHeadFunction, clsSecondFootnoteCellBodyFunction,
+                                        clsThemesTabOptionsFunction, clsFootnoteCellFunction, clsStubHeadFunction, clsSecondFootnoteCellBodyFunction,
                                        clsBorderWeightPxFunction, clsFootnoteTitleLocationFunction, clsFootnoteCellBodyFunction,
                                        clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
                                        clsStyleListFunction, clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
-                                       clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction As New RFunction
+                                       clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
+                                       clsgtExtraThemesFunction As New RFunction
 
     Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
 
@@ -94,7 +95,7 @@ Public Class dlgUseTable
         clsCellBorderFunction = New RFunction
         clsCellFillFunction = New RFunction
         clsHeaderFormatFunction = New RFunction
-        clsTabOptionsFunction = New RFunction
+        clsThemesTabOptionsFunction = New RFunction
         clsFootnoteCellFunction = New RFunction
         clsStubHeadFunction = New RFunction
         clsSecondFootnoteCellBodyFunction = New RFunction
@@ -111,11 +112,14 @@ Public Class dlgUseTable
         clsTabStyleCellTitleFunction = New RFunction
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
+        clsgtExtraThemesFunction = New RFunction
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
         ucrTablesSelector.Reset()
         ucrSaveTable.Reset()
+
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
@@ -187,8 +191,8 @@ Public Class dlgUseTable
         clsHeaderFormatFunction.AddParameter("header", Chr(34) & "all_cols" & Chr(34), iPosition:=0)
         clsHeaderFormatFunction.AddParameter("style", clsRFunctionParameter:=clsStyleListFunction, iPosition:=1)
 
-        clsTabOptionsFunction.SetPackageName("gt")
-        clsTabOptionsFunction.SetRCommand("tab_options")
+        clsThemesTabOptionsFunction.SetPackageName("gt")
+        clsThemesTabOptionsFunction.SetRCommand("tab_options")
 
         clsBorderWeightPxFunction.SetPackageName("gt")
         clsBorderWeightPxFunction.SetRCommand("px")
@@ -237,12 +241,12 @@ Public Class dlgUseTable
 
     Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdFormatOptions.Click
         sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                        clsNewCellTextFunction:=clsCellTextFunction, clsNewCellBorderFunction:=clsCellBorderFunction, clsNewCellFillFunction:=clsCellFillFunction, clsNewHeaderFormatFunction:=clsHeaderFormatFunction,
-                                        clsNewTabOptionsFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewStubHeadFunction:=clsStubHeadFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                       clsNewPipeOperator:=clsPipeOperator, clsNewBorderWeightPxFunction:=clsBorderWeightPxFunction, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
-                                       clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                       clsNewStyleListFunction:=clsStyleListFunction, clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
-                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
+                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
+                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
+                                        clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
+                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
+                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
