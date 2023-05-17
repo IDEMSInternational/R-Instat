@@ -102,7 +102,10 @@ Public MustInherit Class ucrReoGrid
     End Sub
 
     Public Sub CopyRange() Implements IGrid.CopyRange
-        grdData.CurrentWorksheet.Copy()
+        If Not IsNothing(grdData) _
+                AndAlso Not IsNothing(grdData.CurrentWorksheet) Then
+            grdData.CurrentWorksheet.Copy()
+        End If
     End Sub
 
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows

@@ -94,3 +94,11 @@ dlgClimaticBoxPlot_ucrInputWithinYear%
 # In the 'InventoryPlot' dialog, the selected 'Facet' should not be translated
 # Partially fixes issue #6989, related to PR #7070
 dlgInventoryPlot_ucrInputFacetBy%
+
+# In any dialog, input text should not be translated
+# Fixes issue #8275
+# TODO If by 2024, this line has not caused any problems, then delete ucrInput controls specified above (already covered by this pattern)
+%_ucrInput%
+
+# Shows a dynamically created range of page numbers
+%sdgWindowNumber_lblPages

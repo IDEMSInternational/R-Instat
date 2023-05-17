@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class dlgScatterPlot
     Private clsRggplotFunction As New RFunction
-    Private clsRScatterGeomFunction As New RFunction
+    Private clsRScatterGeomFunction, clsLabelFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsLocalRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
@@ -45,7 +45,8 @@ Public Class dlgScatterPlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName}
+    Private strGeomTextRepelParameterName As String = "geom_text_repel"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName, strGeomTextRepelParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -155,6 +156,7 @@ Public Class dlgScatterPlot
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
+        clsLabelFunction = New RFunction
         clsRaesFunction = New RFunction
         clsGeomSmoothFunction = New RFunction
         clsGeomRugFunction = New RFunction
@@ -169,6 +171,7 @@ Public Class dlgScatterPlot
 
         toolStripMenuItemRugOptions.Enabled = False
         toolStripMenuItemSmoothOptions.Enabled = False
+        toolStripMenuItemTextrepelOptions.Enabled = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -185,6 +188,9 @@ Public Class dlgScatterPlot
 
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
+
+        clsLabelFunction.SetPackageName("ggrepel")
+        clsLabelFunction.SetRCommand("geom_text_repel")
 
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
@@ -294,6 +300,10 @@ Public Class dlgScatterPlot
         EnableDisableOptions(clsGeomSmoothFunction)
     End Sub
 
+    Private Sub toolStripMenuItemTextrepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextrepelOptions.Click
+        EnableDisableOptions(clsLabelFunction)
+    End Sub
+
     Private Sub EnableDisableOptions(clsTempFunction As RFunction)
         'SetupLayer sends the components storing the plot info (clsRaesFunction, clsRggplotFunction, ...) of dlgScatteredPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTempFunction,
@@ -337,4 +347,12 @@ Public Class dlgScatterPlot
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabel.ControlValueChanged
+        If ucrReceiverLabel.IsEmpty Then
+            clsBaseOperator.RemoveParameterByName(strGeomTextRepelParameterName)
+        Else
+            clsBaseOperator.AddParameter(strGeomTextRepelParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
+        End If
+        toolStripMenuItemTextrepelOptions.Enabled = Not ucrReceiverLabel.IsEmpty
+    End Sub
 End Class

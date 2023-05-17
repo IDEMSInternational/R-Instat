@@ -102,13 +102,15 @@ Partial Class ucrDataView
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuBottomAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuBottomAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewHTML = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp3 = New System.Windows.Forms.ToolStripMenuItem()
@@ -523,67 +525,79 @@ Partial Class ucrDataView
         'statusColumnMenu
         '
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.HideSheet, Me.unhideSheet, Me.CopySheet, Me.reorderSheet, Me.ViewSheet, Me.ToolStripSeparator11, Me.mnuHelp3})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.renameSheet, Me.reorderSheet, Me.CopySheet, Me.deleteDataFrame, Me.HideSheet, Me.unhideSheet, Me.ToolStripSeparator12, Me.mnuBottomAddComment, Me.mnuViewHTML, Me.ViewSheet, Me.ToolStripSeparator11, Me.mnuHelp3})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 230)
-        '
-        'deleteDataFrame
-        '
-        Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
-        Me.deleteDataFrame.Text = "Delete..."
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 236)
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
         '
-        'mnuBottomAddComment
+        'reorderSheet
         '
-        Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
-        Me.mnuBottomAddComment.Size = New System.Drawing.Size(180, 22)
-        Me.mnuBottomAddComment.Text = "Add Comment..."
+        Me.reorderSheet.Name = "reorderSheet"
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
+        Me.reorderSheet.Text = "Reorder..."
+        '
+        'CopySheet
+        '
+        Me.CopySheet.Name = "CopySheet"
+        Me.CopySheet.Size = New System.Drawing.Size(162, 22)
+        Me.CopySheet.Text = "Copy..."
+        '
+        'deleteDataFrame
+        '
+        Me.deleteDataFrame.Name = "deleteDataFrame"
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
+        Me.deleteDataFrame.Text = "Delete..."
         '
         'HideSheet
         '
         Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.HideSheet.Size = New System.Drawing.Size(162, 22)
         Me.HideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
-        'CopySheet
+        'ToolStripSeparator12
         '
-        Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(180, 22)
-        Me.CopySheet.Text = "Copy..."
+        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(159, 6)
         '
-        'reorderSheet
+        'mnuBottomAddComment
         '
-        Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
-        Me.reorderSheet.Text = "Reorder..."
+        Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
+        Me.mnuBottomAddComment.Size = New System.Drawing.Size(162, 22)
+        Me.mnuBottomAddComment.Text = "Add Comment..."
+        '
+        'mnuViewHTML
+        '
+        Me.mnuViewHTML.Enabled = False
+        Me.mnuViewHTML.Name = "mnuViewHTML"
+        Me.mnuViewHTML.Size = New System.Drawing.Size(162, 22)
+        Me.mnuViewHTML.Text = "View HTML"
         '
         'ViewSheet
         '
         Me.ViewSheet.Name = "ViewSheet"
-        Me.ViewSheet.Size = New System.Drawing.Size(180, 22)
+        Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
         Me.ViewSheet.Text = "View Data Frame"
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(159, 6)
         '
         'mnuHelp3
         '
         Me.mnuHelp3.Name = "mnuHelp3"
-        Me.mnuHelp3.Size = New System.Drawing.Size(180, 22)
+        Me.mnuHelp3.Size = New System.Drawing.Size(162, 22)
         Me.mnuHelp3.Text = "Help"
         '
         'lblHeaderDataView
@@ -1104,4 +1118,6 @@ Partial Class ucrDataView
     Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents mnuHelp3 As ToolStripMenuItem
     Friend WithEvents ttGoToRowOrColPage As ToolTip
+    Friend WithEvents mnuViewHTML As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
 End Class
