@@ -32,7 +32,7 @@ Public Class dlgSummaryTables
             clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesTabOptionsFunction,
             clsgtExtraThemesFunction, clsGtFunction As New RFunction
 
-  Private clsColumnOperator, clsSummaryOperator, clsFrequencyOperator, clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
+    Private clsColumnOperator, clsSummaryOperator, clsFrequencyOperator, clsPipeOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -398,7 +398,7 @@ Public Class dlgSummaryTables
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                        clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
-                                       clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
+                                       clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator, bReset:=bResetFormatSubdialog)
         Else
             sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
@@ -406,7 +406,7 @@ Public Class dlgSummaryTables
                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                      clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                      clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
-                                     clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
+                                     clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator, bReset:=bResetFormatSubdialog)
         End If
 
         sdgFormatSummaryTables.ShowDialog()

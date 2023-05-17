@@ -29,7 +29,7 @@ Public Class dlgUseTable
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
                                        clsgtExtraThemesFunction As New RFunction
 
-    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
+    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -113,6 +113,7 @@ Public Class dlgUseTable
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
+        clsTabFootnoteOperator = New ROperator
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
@@ -246,7 +247,7 @@ Public Class dlgUseTable
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                         clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
+                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
