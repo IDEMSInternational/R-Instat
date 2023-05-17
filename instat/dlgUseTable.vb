@@ -28,7 +28,7 @@ Public Class dlgUseTable
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
                                        clsgtExtraThemesFunction As New RFunction
 
-    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator, clsTabFootnoteOperator As ROperator
+    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -75,7 +75,7 @@ Public Class dlgUseTable
         ucrSaveTable.SetDataFrameSelector(ucrTablesSelector.ucrAvailableDataFrames)
         ucrSaveTable.SetCheckBoxText("Save New Table")
         ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+        ucrSaveTable.SetAssignToIfUncheckedValue("table")
     End Sub
 
     Private Sub SetDefaults()
@@ -105,7 +105,6 @@ Public Class dlgUseTable
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
-        clsTabFootnoteOperator = New ROperator
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
@@ -114,13 +113,12 @@ Public Class dlgUseTable
 
         clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
 
+        clsgtExtraThemesFunction.SetPackageName("gtExtras")
+
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
 
         clsSummaryOperator.SetOperation("+")
-
-        clsTabFootnoteOperator.SetOperation("%>%")
-        clsTabFootnoteOperator.bBrackets = False
 
         clsTabStyleFunction.SetRCommand("tab_style")
         clsTabStyleFunction.SetPackageName("gt")
@@ -218,7 +216,7 @@ Public Class dlgUseTable
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                         clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, clsNewTabFootnoteOperator:=clsTabFootnoteOperator, bReset:=bReset)
+                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
     End Sub
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
