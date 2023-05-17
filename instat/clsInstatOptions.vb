@@ -92,14 +92,14 @@ Imports RDotNet
         strClimsoftUsername = clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername
         iMaxOutputsHeight = clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight
         If bSetOptions Then
-            SetDefaultsToOptionsNotSet()
+            SetDefaultValuesToOptionsNotSet()
         End If
     End Sub
 
     ''' <summary>
     ''' sets the default values to options that have not been set with values
     ''' </summary>
-    Public Sub SetDefaultsToOptionsNotSet()
+    Public Sub SetDefaultValuesToOptionsNotSet()
         If fntOutput IsNot Nothing AndAlso clrOutput <> Color.Empty Then
             SetFormatOutput(fntOutput, clrOutput)
         Else
@@ -284,14 +284,8 @@ Imports RDotNet
             SetClimsoftUsername(clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername)
         End If
 
+        SetMaximumOutputsHeight(If(iMaxOutputsHeight Is Nothing, clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight, iMaxOutputsHeight))
 
-        'todo. Temporarily disabled
-        'If iMaxOutputsHeight IsNot Nothing Then
-        '    SetMaximumOutputsHeight(iMaxOutputsHeight)
-        'Else
-        '    SetMaximumOutputsHeight(clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
-        'End If
-        SetMaximumOutputsHeight(-1)
     End Sub
 
     ''' <summary>

@@ -137,7 +137,7 @@ Public Class frmMain
         If clsInstatOptions Is Nothing Then
             clsInstatOptions = New InstatOptions
         End If
-        clsInstatOptions.SetDefaultsToOptionsNotSet()
+        clsInstatOptions.SetDefaultValuesToOptionsNotSet()
         '---------------------------------------
 
         '---------------------------------------
@@ -283,8 +283,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub PromtAndSetAutoRecoveredPrevSessionData(ByRef strScript As String,
-                                                           ByRef strDataFilePath As String)
+    Private Sub PromtAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
