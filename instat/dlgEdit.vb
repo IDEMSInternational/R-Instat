@@ -72,7 +72,6 @@ Public Class dlgEdit
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
         clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
