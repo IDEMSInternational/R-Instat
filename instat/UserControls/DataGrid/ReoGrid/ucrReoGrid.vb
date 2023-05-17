@@ -217,9 +217,9 @@ Public MustInherit Class ucrReoGrid
         For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
             Dim strColumnHeader As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
             If strColumnHeader.Contains("(") Then
-                strColumnHeader = strColumnHeader.Split("(")(0).Trim
+                strColumnHeader = strColumnHeader.Split("(")(0)
             End If
-            If strColumnHeader = strColumn Then
+            If strColumnHeader.Trim = strColumn Then
                 Return grdData.CurrentWorksheet(iRow, i).ToString()
             End If
         Next
