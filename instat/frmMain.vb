@@ -249,7 +249,7 @@ Public Class frmMain
         Dim strDataFilePath As String = ""
 
         'could either be a file path or a script
-        PromtAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
+        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
 
         'if no script recovered then use the default R set up script
         If String.IsNullOrEmpty(strRScripts) Then
@@ -283,15 +283,17 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub PromtAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
+    Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
             Return
         End If
 
-        'todo. As of 16/05/2023. Only 1 file for each of the recovery file is expected.
-        'should we change stop using arrays?
+        'todo. As of 16/05/2023.
+        'the only log file that are multiple is the internal debug file.
+        'this is due to checking of R version when setting up R engine. the check creates a debug file before this subroutine is called
+        'should we change stop using arrays for the other recovery files?
         Dim strAutoSavedLogFilePaths() As String = {}
         Dim strAutoSavedInternalLogFilePaths() As String = {}
         Dim strAutoSavedDataFilePaths() As String = {}
@@ -309,7 +311,6 @@ Public Class frmMain
         '---------------------------------------
         'prompt user for recovery selection
         If (strAutoSavedLogFilePaths.Length > 0 OrElse
-            strAutoSavedInternalLogFilePaths.Length > 0 OrElse
             strAutoSavedDataFilePaths.Length > 0) AndAlso
             MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
                           "Would you like to see auto recovery options?",
@@ -342,7 +343,13 @@ Public Class frmMain
 
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
-                File.Delete(strAutoSavedInternalLogFilePaths(0))
+                For Each strFilePath As String In strAutoSavedInternalLogFilePaths
+                    'debug log is created when checking r version. 
+                    'so always delete the previous session debug file only
+                    If strFilePath <> clsRLink.strAutoSaveDebugLogFilePath Then
+                        File.Delete(strFilePath)
+                    End If
+                Next
             Catch ex As Exception
                 MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try

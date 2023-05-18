@@ -250,9 +250,9 @@ Public Class ucrOutputPage
         linkLabel.Text = "Maximise"
 
         pictureBox.Load(outputElement.Output)
+
         If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.iMaxOutputsHeight > -1 Then
             pictureBox.Height = frmMain.clsInstatOptions.iMaxOutputsHeight
-            'pictureBox.MaximumSize = New Size(Integer.MaxValue, frmMain.clsInstatOptions.iMaxOutputsHeight)
         Else
             SetPictureBoxHeight(pictureBox)
         End If
@@ -268,9 +268,7 @@ Public Class ucrOutputPage
 
 
         AddHandler linkLabel.Click, Sub()
-                                        Dim frmMaximiseOutput As New frmMaximiseOutput With {
-                                            .Text = "Maximised output"
-                                        }
+                                        Dim frmMaximiseOutput As New frmMaximiseOutput
                                         frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                     End Sub
     End Sub
@@ -283,9 +281,7 @@ Public Class ucrOutputPage
             Dim ucrWebview As New ucrWebViewer()
             linkLabel.Text = "Maximise"
             AddHandler linkLabel.Click, Sub()
-                                            Dim frmMaximiseOutput As New frmMaximiseOutput With {
-                                                .Text = "Maximised output"
-                                            }
+                                            Dim frmMaximiseOutput As New frmMaximiseOutput
                                             frmMaximiseOutput.Show(strFileName:=outputElement.Output)
                                         End Sub
 
