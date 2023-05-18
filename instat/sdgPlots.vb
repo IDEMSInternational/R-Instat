@@ -271,7 +271,6 @@ Public Class sdgPlots
         ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
-        'dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
         dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
         dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
