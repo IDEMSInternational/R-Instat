@@ -49,6 +49,8 @@ Public Class dlgOneVariableSummarise
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
+        Dim dctDisplayMissing As New Dictionary(Of String, String)
+
         'The selector is only used for one of the functions. Therefore it's parameter name is always the same. So this can be done in Initialise.
         ucrSelectorOneVarSummarise.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarSummarise.SetParameterIsString()
@@ -70,7 +72,7 @@ Public Class dlgOneVariableSummarise
         ucrPnlSummaries.AddParameterValuesCondition(rdoSkim, "checked_radio", "skim")
         ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
                                             bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=iMaxSum)
-        ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrPnlColumnFactor, ucrChkDisplayMargins},
+        ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrPnlColumnFactor, ucrChkDisplayMargins, ucrChkDisplayMissing},
                                             {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
@@ -95,6 +97,22 @@ Public Class dlgOneVariableSummarise
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummary, "factor_cols", "Sum")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariable, "factor_cols", "Var")
+        ucrPnlColumnFactor.SetLinkedDisplayControl(grpRows)
+
+        ucrChkDisplayMissing.SetText("Display Missing As")
+        ucrChkDisplayMissing.AddParameterValuesCondition(True, "checked", "TRUE")
+        ucrChkDisplayMissing.AddParameterValuesCondition(False, "checked", "FALSE")
+
+        ucrInputDisplayMissing.SetParameter(New RParameter("na_display", 6))
+        dctDisplayMissing.Add("NA", "NA")
+        dctDisplayMissing.Add("(blank)", " ")
+        dctDisplayMissing.Add(".", ".")
+        dctDisplayMissing.Add("...", "...")
+        dctDisplayMissing.Add("---", "---")
+        ucrInputDisplayMissing.SetItems(dctDisplayMissing)
+        ucrInputDisplayMissing.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
+        ucrChkDisplayMissing.AddToLinkedControls({ucrInputDisplayMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
+                                                 bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
 
         ucrSaveSummary.SetPrefix("summary_table")
         ucrSaveSummary.SetDataFrameSelector(ucrSelectorOneVarSummarise.ucrAvailableDataFrames)
@@ -126,7 +144,8 @@ Public Class dlgOneVariableSummarise
 
         'Dummy function used to set conditions
         clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
-        clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
+        clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=2)
 
         clsConcFunction.SetRCommand("c")
 
@@ -183,7 +202,9 @@ Public Class dlgOneVariableSummarise
         ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
         ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
+        ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
+        ucrInputDisplayMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveSummary.SetRCode(clsSkimrFunction, bReset)
 
         bRCodeSet = True
@@ -281,6 +302,7 @@ Public Class dlgOneVariableSummarise
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
             ucrSaveSummary.SetCheckBoxText("Save Summary")
         End If
+        cmdSummaries.Visible = rdoCustomised.Checked
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
