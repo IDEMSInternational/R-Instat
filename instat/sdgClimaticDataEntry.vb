@@ -61,6 +61,7 @@ Public Class sdgClimaticDataEntry
     Private strValueTypeToCalculate As String = "sum"
     Private strDefaultValue As String = "NA"
     Private bEditNewDataOnly As Boolean = False
+    Private _grid As Object
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -701,5 +702,28 @@ Public Class sdgClimaticDataEntry
 
     End Sub
 
+    Private Sub mnuDelete_Click(sender As Object, e As EventArgs) Handles mnuDelete.Click
+        DeleteCell_Click()
+    End Sub
 
+    Private Sub DeleteCell_Click()
+        Dim deleteCell = MsgBox("This will replace the selected cells with missing values (NA)." &
+                                Environment.NewLine & "Continue?",
+                                MessageBoxButtons.YesNo, "Delete Cells")
+        If deleteCell = DialogResult.Yes Then
+            StartWait()
+            GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())
+            EndWait()
+        End If
+    End Sub
+
+    Private Sub StartWait()
+        _grid.bEnabled = False
+        Cursor = Cursors.WaitCursor
+    End Sub
+
+    Private Sub EndWait()
+        _grid.bEnabled = True
+        Cursor = Cursors.Default
+    End Sub
 End Class
