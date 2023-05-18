@@ -1356,7 +1356,6 @@ SEDI <- function(x, y, frcst.type, obs.type, ...){
 
 ##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
 
-
 DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_table = FALSE, store_results = FALSE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = FALSE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, include_counts_with_percentage = FALSE, margin_name = "(All)", additional_filter, ...) {
   # TODO: write in errors
   if (na_level_display == "") stop("na_level_display must be a non empty string")
@@ -1388,6 +1387,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   for (i in seq_along(factors)) {
     levels(shaped_cell_values[[i]]) <- c(levels(shaped_cell_values[[i]]), margin_name) 
   }
+  
+  # If margins ---------------------------------------------------------------------------
   if (include_margins) {
     margin_tables <- list()
     power_sets <- rje::powerSet(factors)
@@ -1505,6 +1506,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         dplyr::mutate_at(vars(-c(value)), ~forcats::as_factor(forcats::fct_relevel(.x, margin_name, after = Inf)))
     }
   }
+  # To all data --------------------------------------------------------------------------
   # Used to make all values numeric, but stopped because of issues with ordered factors/dates.
   # I don't think this line is needed anymore, but will keep it commented for now in case it becomes more apparent in the future
   #if (percentage_type == "none" || include_counts_with_percentage == FALSE){
@@ -1516,6 +1518,10 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       dplyr::mutate(summary = as.factor(summary)) %>% dplyr::mutate(summary = forcats::fct_relevel(summary, summaries_display)) %>%
       dplyr::mutate(variable = as.factor(variable)) %>% dplyr::mutate(variable= forcats::fct_relevel(variable, columns_to_summarise))
   }
+  if (!treat_columns_as_factor && !is.null(columns_to_summarise)){
+   shaped_cell_values <- shaped_cell_values %>%
+       dplyr::mutate(`summary-variable` = forcats::as_factor(`summary-variable`))
+   }
   if (store_table) {
     data_book$import_data(data_tables = list(shaped_cell_values = shaped_cell_values))
   }

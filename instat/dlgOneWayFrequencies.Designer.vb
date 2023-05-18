@@ -42,6 +42,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
@@ -50,17 +51,16 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput = New System.Windows.Forms.GroupBox()
         Me.rdoAsTable = New System.Windows.Forms.RadioButton()
         Me.rdoAsDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.rdoStemAndLeaf = New System.Windows.Forms.RadioButton()
         Me.ucrNudWidth = New instat.ucrNud()
         Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverSingle()
         Me.ucrNudScale = New instat.ucrNud()
         Me.ucrNudMinFreq = New instat.ucrNud()
-        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrNudGroups = New instat.ucrNud()
         Me.ucrPnlFrequencies = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkFlip = New instat.ucrCheck()
@@ -119,6 +119,14 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.TabStop = True
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSort
+        '
+        Me.ucrPnlSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 14)
+        Me.ucrPnlSort.Name = "ucrPnlSort"
+        Me.ucrPnlSort.Size = New System.Drawing.Size(158, 69)
+        Me.ucrPnlSort.TabIndex = 0
         '
         'cmdOptions
         '
@@ -207,9 +215,9 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoAsTable.Location = New System.Drawing.Point(6, 20)
         Me.rdoAsTable.Name = "rdoAsTable"
-        Me.rdoAsTable.Size = New System.Drawing.Size(67, 17)
+        Me.rdoAsTable.Size = New System.Drawing.Size(113, 17)
         Me.rdoAsTable.TabIndex = 2
-        Me.rdoAsTable.Text = "As Table"
+        Me.rdoAsTable.Text = "As Summary Table"
         Me.rdoAsTable.UseVisualStyleBackColor = True
         '
         'rdoAsDataFrame
@@ -222,6 +230,14 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsDataFrame.TabIndex = 1
         Me.rdoAsDataFrame.Text = "As DataFrame"
         Me.rdoAsDataFrame.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOutput
+        '
+        Me.ucrPnlOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        Me.ucrPnlOutput.Size = New System.Drawing.Size(150, 53)
+        Me.ucrPnlOutput.TabIndex = 0
         '
         'rdoStemAndLeaf
         '
@@ -291,14 +307,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudMinFreq.TabIndex = 21
         Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrPnlOutput
-        '
-        Me.ucrPnlOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOutput.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlOutput.Name = "ucrPnlOutput"
-        Me.ucrPnlOutput.Size = New System.Drawing.Size(150, 53)
-        Me.ucrPnlOutput.TabIndex = 0
-        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -341,14 +349,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 15
         Me.ucrReceiverWeights.ucrSelector = Nothing
-        '
-        'ucrPnlSort
-        '
-        Me.ucrPnlSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 14)
-        Me.ucrPnlSort.Name = "ucrPnlSort"
-        Me.ucrPnlSort.Size = New System.Drawing.Size(158, 69)
-        Me.ucrPnlSort.TabIndex = 0
         '
         'ucrBase
         '
