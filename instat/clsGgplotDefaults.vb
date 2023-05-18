@@ -24,6 +24,10 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("title", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("subtitle", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("caption", Chr(34) & Chr(34))
+            clsTempFunc.AddParameter("tag", Chr(34) & "A" & Chr(34))
+            clsTempFunc.AddParameter("colour", Chr(34) & Chr(34))
+            clsTempFunc.AddParameter("fill", Chr(34) & Chr(34))
+
             Return clsTempFunc
         End Get
     End Property

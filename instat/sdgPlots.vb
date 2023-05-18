@@ -38,6 +38,10 @@ Public Class sdgPlots
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsPlotElementTitle As New RFunction
+    Private clsPlotElementSubTitle As New RFunction
+    Private clsPlotElementCaption As New RFunction
+
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -193,6 +197,29 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
         ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+        ucrInputTag.SetParameter(New RParameter("tag"))
+        ucrInputLegendTitle.SetParameter(New RParameter("colour"))
+        ucrInputFillLegend.SetParameter(New RParameter("fill"))
+
+        ucrNudTitleSize.SetParameter(New RParameter("size"))
+        ucrNudTitleSize.Increment = 0.1
+        ucrNudTitleSize.SetRDefault(20.0)
+        'ucrNudTitleSize.Minimum = 0
+        ucrNudTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudTitleSize.DecimalPlaces = 1
+
+        ucrNudSubTitleSize.SetParameter(New RParameter("size"))
+        ucrNudSubTitleSize.Increment = 0.1
+        ucrNudSubTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudSubTitleSize.DecimalPlaces = 1
+        ucrNudSubTitleSize.SetRDefault(15.0)
+
+        ucrNudCaptionSize.SetParameter(New RParameter("size"))
+        ucrNudCaptionSize.Increment = 0.1
+        ucrNudCaptionSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudCaptionSize.DecimalPlaces = 1
+        ucrNudCaptionSize.SetRDefault(8.0)
+
 
         'TODO what about the subtitle argument of labs?
         'TODO what about the caption argument of labs?
@@ -621,6 +648,10 @@ Public Class sdgPlots
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElemetText)
+        dctThemeFunctions.TryGetValue("title", clsPlotElementTitle)
+        dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitle)
+        dctThemeFunctions.TryGetValue("caption", clsPlotElementCaption)
+
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
 
@@ -649,6 +680,10 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputFillLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+
         ucrInputThemes.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
@@ -685,6 +720,7 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
 
+
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
@@ -710,6 +746,12 @@ Public Class sdgPlots
         ucrChkFillDiscrete.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColourDiscrete.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        'labels
+        ucrNudTitleSize.SetRCode(clsPlotElementTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bReset, bCloneIfNeeded:=True)
+        ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bReset, bCloneIfNeeded:=True)
+
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -921,7 +963,7 @@ Public Class sdgPlots
 
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
-            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() Then
+            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputFillLegend.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
                 clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
             Else
                 clsBaseOperator.RemoveParameterByName("labs")
@@ -929,7 +971,8 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
+        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrInputFillLegend.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
@@ -998,6 +1041,7 @@ Public Class sdgPlots
     Private Sub AddRemoveXElementTitle()
         If clsXElementTitle.iParameterCount > 0 Then
             clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
+
         Else
             clsThemeFunction.RemoveParameterByName("axis.title.x")
         End If
@@ -1050,6 +1094,8 @@ Public Class sdgPlots
 
         ucrChkXaxisSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
         ucrNudXSize.SetRCode(clsXElementTitle, bReset, bCloneIfNeeded:=True)
+
+
 
         ucrChkYaxisTickMarkLabelSize.SetRCode(clsYElemetText, bReset, bCloneIfNeeded:=True)
         ucrNudYaxisMarkSize.SetRCode(clsYElemetText, bReset, bCloneIfNeeded:=True)
@@ -1155,5 +1201,49 @@ Public Class sdgPlots
             Case Else
                 clsAnnotateFunction.RemoveParameterByName("label")
         End Select
+    End Sub
+
+
+    Private Sub AddRemoveTittle()
+        If clsPlotElementTitle.iParameterCount > 0 Then
+            clsThemeFunction.AddParameter("title", clsRFunctionParameter:=clsPlotElementTitle)
+            clsPlotElementTitle.AddParameter("size", ucrNudTitleSize.GetText)
+
+        Else
+            clsThemeFunction.RemoveParameterByName("title")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AddRemoveSubTittle()
+        If clsPlotElementSubTitle.iParameterCount > 0 Then
+            clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitle)
+            clsPlotElementSubTitle.AddParameter("size", ucrNudSubTitleSize.GetText)
+        Else
+            clsThemeFunction.RemoveParameterByName("plot.subtitle")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AddRemoveCaption()
+        If clsPlotElementCaption.iParameterCount > 0 Then
+            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
+            clsPlotElementCaption.AddParameter("size", ucrNudCaptionSize.GetText)
+        Else
+            clsThemeFunction.RemoveParameterByName("plot.caption")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
+        AddRemoveTittle()
+    End Sub
+
+    Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
+        AddRemoveSubTittle()
+    End Sub
+
+    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
+        AddRemoveCaption()
     End Sub
 End Class
