@@ -74,6 +74,10 @@ Public Class Translations
             clsMenuItem.Text = GetTranslation(clsMenuItem.Text)
         Next
 
+        'The data grid status bar is dynamic and isn't translated as part of the main form.
+        '    So translate manually.
+        frmMain.ucrDataViewer.SetDisplayLabels()
+
         'The right mouse button menus for the 6 output windows are not accessible via 
         '    the control lists. Therefore, translate these menus explicitly
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.UcrOutputPages.tsButtons.Items, strDbPath, strLanguageCode))

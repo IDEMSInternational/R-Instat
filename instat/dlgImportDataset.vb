@@ -86,6 +86,7 @@ Public Class dlgImportDataset
         HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -414,6 +415,7 @@ Public Class dlgImportDataset
         SetRCodeForControls(True)
         TestOkEnabled()
         HideDropEmptyCheckBox()
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOkEnabled()
