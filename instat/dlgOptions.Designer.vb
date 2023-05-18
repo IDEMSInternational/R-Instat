@@ -126,7 +126,6 @@ Partial Class dlgOptions
         Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
-        Me.cmdLanguage = New System.Windows.Forms.Button()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
