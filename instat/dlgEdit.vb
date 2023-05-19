@@ -60,11 +60,11 @@ Public Class dlgEdit
         ucrReceiverName.SetParameterIsString()
 
         ucrNewName.SetParameter(New RParameter("new_value", 2))
-        'set validation of ucrInputNewName as an RVariable.(input should not have any R reserved words like 'if','while')
         ucrNewName.SetValidationTypeAsList()
 
 
         ucrInputSelect.SetFactorReceiver(ucrReceiverName)
+        ucrInputSelect.SetParameter(New RParameter("new_value", 2))
         ucrInputSelect.strQuotes = ""
         ucrInputSelect.bFirstLevelDefault = True
 
@@ -92,6 +92,7 @@ Public Class dlgEdit
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectValues.SetRCode(clsReplaceValue, bReset)
         ucrNewName.SetRCode(clsReplaceValue, bReset)
+        ucrInputSelect.SetRCode(clsReplaceValue, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -126,13 +127,10 @@ Public Class dlgEdit
     End Sub
 
     Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrInputSelect.ControlValueChanged
-        Dim strStation As String = ucrReceiverName.GetVariableNames(bWithQuotes:=False)
-        Dim strDaframeName As String = ucrInputSelect.GetText.Replace(" ", "_").ToLower
 
         If Not ucrReceiverName.IsEmpty AndAlso Not ucrInputSelect.IsEmpty Then
-            clsReplaceValue.AddParameter(strStation, "as.factor(" & Chr(34) & ucrInputSelect.GetValue() & Chr(34) & ")", iPosition:=0)
-        Else
-            clsReplaceValue.RemoveParameterByName(strStation)
+            ucrNewName.Enabled = False
+
         End If
 
     End Sub
