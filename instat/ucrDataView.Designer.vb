@@ -142,14 +142,17 @@ Partial Class ucrDataView
         Me.lblRowNext = New System.Windows.Forms.Label()
         Me.lblColLast = New System.Windows.Forms.Label()
         Me.lblRowBack = New System.Windows.Forms.Label()
+
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuDeleteCells2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCell2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDeleteCol2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
+
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
+        Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -592,7 +595,11 @@ Partial Class ucrDataView
         '
         Me.ViewSheet.Name = "ViewSheet"
         Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
+
         Me.ViewSheet.Text = "R Viewer"
+
+        Me.ViewSheet.Text = "View Data Frame"
+
         '
         'ToolStripSeparator11
         '
@@ -971,6 +978,7 @@ Partial Class ucrDataView
         Me.lblRowBack.Text = "<"
         Me.lblRowBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+
         'mnuDeleteCells2
         '
         Me.mnuDeleteCells2.Enabled = False
@@ -1002,6 +1010,7 @@ Partial Class ucrDataView
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
         Me.ToolStripSeparator14.Size = New System.Drawing.Size(211, 6)
         '
+
         'ucrReoGrid
         '
         Me.ucrReoGrid.Dock = System.Windows.Forms.DockStyle.Fill
