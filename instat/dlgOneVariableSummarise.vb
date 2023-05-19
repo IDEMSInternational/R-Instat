@@ -91,9 +91,9 @@ Public Class dlgOneVariableSummarise
         ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=4))
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
-        ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
         ucrPnlColumnFactor.AddRadioButton(rdoSummary)
         ucrPnlColumnFactor.AddRadioButton(rdoVariable)
+        ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummary, "factor_cols", "Sum")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariable, "factor_cols", "Var")
@@ -106,9 +106,9 @@ Public Class dlgOneVariableSummarise
         ucrInputDisplayMissing.SetParameter(New RParameter("na_display", 6))
         dctDisplayMissing.Add("NA", "NA")
         dctDisplayMissing.Add("(blank)", " ")
-        dctDisplayMissing.Add(".", ".")
-        dctDisplayMissing.Add("...", "...")
-        dctDisplayMissing.Add("---", "---")
+        dctDisplayMissing.Add(".", Chr(34) & "." & Chr(34))
+        dctDisplayMissing.Add("...", Chr(34) & "..." & Chr(34))
+        dctDisplayMissing.Add("---", Chr(34) & "---" & Chr(34))
         ucrInputDisplayMissing.SetItems(dctDisplayMissing)
         ucrInputDisplayMissing.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
         ucrChkDisplayMissing.AddToLinkedControls({ucrInputDisplayMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
@@ -202,10 +202,13 @@ Public Class dlgOneVariableSummarise
         ucrChkDisplayMargins.SetRCode(clsSummaryTableFunction, bReset)
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
         ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
-        ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
         ucrInputDisplayMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveSummary.SetRCode(clsSkimrFunction, bReset)
+
+        If bReset Then
+            ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
+        End If
 
         bRCodeSet = True
     End Sub
@@ -278,7 +281,6 @@ Public Class dlgOneVariableSummarise
         Else
             clsSummaryTableFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
         End If
-
         cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
     End Sub
 
@@ -306,20 +308,17 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
-        If bRCodeSet Then
-            If rdoNoColumnFactor.Checked Then
-                clsSummaryOperator.RemoveParameterByName("col_factor")
-                clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
-            Else
-                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-                If rdoSummary.Checked Then
-                    clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
-                    clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
-                ElseIf rdoVariable.Checked Then
-                    clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
-                    clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
-                End If
-            End If
+        If rdoSummary.Checked Then
+            clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+        ElseIf rdoVariable.Checked Then
+            clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
+            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
+        Else
+            clsSummaryOperator.RemoveParameterByName("col_factor")
+            clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
         End If
     End Sub
 
