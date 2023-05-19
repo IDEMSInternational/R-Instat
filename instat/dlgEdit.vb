@@ -56,22 +56,37 @@ Public Class dlgEdit
         ucrSelectValues.SetParameterIsString()
 
         ucrReceiverName.SetParameter(New RParameter("column_name", 1))
+        ucrReceiverName.Selector = ucrSelectValues
         ucrReceiverName.SetParameterIsString()
 
-        ucrNewName.SetParameter(New RParameter("new_val", 2))
+        ucrNewName.SetParameter(New RParameter("new_value", 2))
         'set validation of ucrInputNewName as an RVariable.(input should not have any R reserved words like 'if','while')
         ucrNewName.SetValidationTypeAsList()
+
+
+        ucrInputSelect.SetFactorReceiver(ucrReceiverName)
+        ucrInputSelect.strQuotes = ""
+        ucrInputSelect.bFirstLevelDefault = True
+
+        ucrInputSelect.SetLinkedDisplayControl(lblSelectFactor)
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceValue = New RFunction
         ucrSelectValues.Reset()
+        Dim bWithQuotes As Boolean
 
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
         clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
+
+        If bWithQuotes Then
+            clsReplaceValue.AddParameter("new_value", Chr(34) & strRowText & Chr(34))
+        Else
+            clsReplaceValue.AddParameter("new_value", strRowText)
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -108,5 +123,17 @@ Public Class dlgEdit
         strRowText = strRowNumber
         StrRowIndex = strIRow
         bUseSelectedColumn = True
+    End Sub
+
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrInputSelect.ControlValueChanged
+        Dim strStation As String = ucrReceiverName.GetVariableNames(bWithQuotes:=False)
+        Dim strDaframeName As String = ucrInputSelect.GetText.Replace(" ", "_").ToLower
+
+        If Not ucrReceiverName.IsEmpty AndAlso Not ucrInputSelect.IsEmpty Then
+            clsReplaceValue.AddParameter(strStation, "as.factor(" & Chr(34) & ucrInputSelect.GetValue() & Chr(34) & ")", iPosition:=0)
+        Else
+            clsReplaceValue.RemoveParameterByName(strStation)
+        End If
+
     End Sub
 End Class
