@@ -64,9 +64,9 @@ Public Class dlgEdit
 
 
         ucrInputSelect.SetFactorReceiver(ucrReceiverName)
-        ucrInputSelect.SetParameter(New RParameter("new_value", 2))
+        ucrInputSelect.SetParameter(New RParameter("new_value", 3))
         ucrInputSelect.strQuotes = ""
-        ucrInputSelect.bFirstLevelDefault = True
+
 
         ucrInputSelect.SetLinkedDisplayControl(lblSelectFactor)
     End Sub
@@ -115,7 +115,7 @@ Public Class dlgEdit
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputSelect.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -127,10 +127,13 @@ Public Class dlgEdit
     End Sub
 
     Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrInputSelect.ControlValueChanged
-
-        If Not ucrReceiverName.IsEmpty AndAlso Not ucrInputSelect.IsEmpty Then
-            ucrNewName.Enabled = False
-
+        If Not ucrReceiverName.IsEmpty Then
+            If Not ucrInputSelect.IsEmpty Then
+                ucrNewName.Enabled = False
+            Else
+                ucrNewName.Enabled = True
+            End If
+            ucrNewName.Enabled = True
         End If
 
     End Sub
