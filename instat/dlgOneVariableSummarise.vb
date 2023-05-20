@@ -97,7 +97,7 @@ Public Class dlgOneVariableSummarise
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummary, "factor_cols", "Sum")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariable, "factor_cols", "Var")
-        ucrPnlColumnFactor.SetLinkedDisplayControl(grpRows)
+        ucrPnlColumnFactor.SetLinkedDisplayControl(grpColumns)
 
         ucrChkDisplayMissing.SetText("Display Missing As")
         ucrChkDisplayMissing.AddParameterValuesCondition(True, "checked", "TRUE")

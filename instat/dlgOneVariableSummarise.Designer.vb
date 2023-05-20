@@ -58,10 +58,10 @@ Partial Class dlgOneVariableSummarise
         Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.grpRows = New System.Windows.Forms.GroupBox()
+        Me.grpColumns = New System.Windows.Forms.GroupBox()
         Me.ucrChkDisplayMissing = New instat.ucrCheck()
         Me.ucrInputDisplayMissing = New instat.ucrInputComboBox()
-        Me.grpRows.SuspendLayout()
+        Me.grpColumns.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSelectedVariable
@@ -133,7 +133,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.lblMarginName.AutoSize = True
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(159, 246)
+        Me.lblMarginName.Location = New System.Drawing.Point(159, 247)
         Me.lblMarginName.Name = "lblMarginName"
         Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
         Me.lblMarginName.TabIndex = 24
@@ -160,7 +160,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.cmdMissingOptions.Enabled = False
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(206, 297)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(206, 294)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
         Me.cmdMissingOptions.TabIndex = 27
@@ -183,7 +183,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 243)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 244)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
         Me.ucrInputMarginName.TabIndex = 25
@@ -222,7 +222,7 @@ Partial Class dlgOneVariableSummarise
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 297)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 296)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(190, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
@@ -302,24 +302,24 @@ Partial Class dlgOneVariableSummarise
         Me.rdoSummary.Text = "Summary"
         Me.rdoSummary.UseVisualStyleBackColor = True
         '
-        'grpRows
+        'grpColumns
         '
-        Me.grpRows.Controls.Add(Me.rdoNoColumnFactor)
-        Me.grpRows.Controls.Add(Me.rdoVariable)
-        Me.grpRows.Controls.Add(Me.rdoSummary)
-        Me.grpRows.Controls.Add(Me.ucrPnlColumnFactor)
-        Me.grpRows.Location = New System.Drawing.Point(2, 324)
-        Me.grpRows.Name = "grpRows"
-        Me.grpRows.Size = New System.Drawing.Size(200, 83)
-        Me.grpRows.TabIndex = 33
-        Me.grpRows.TabStop = False
-        Me.grpRows.Text = "Rows:"
+        Me.grpColumns.Controls.Add(Me.rdoNoColumnFactor)
+        Me.grpColumns.Controls.Add(Me.rdoVariable)
+        Me.grpColumns.Controls.Add(Me.rdoSummary)
+        Me.grpColumns.Controls.Add(Me.ucrPnlColumnFactor)
+        Me.grpColumns.Location = New System.Drawing.Point(2, 324)
+        Me.grpColumns.Name = "grpColumns"
+        Me.grpColumns.Size = New System.Drawing.Size(200, 83)
+        Me.grpColumns.TabIndex = 33
+        Me.grpColumns.TabStop = False
+        Me.grpColumns.Text = "Columns:"
         '
         'ucrChkDisplayMissing
         '
         Me.ucrChkDisplayMissing.AutoSize = True
         Me.ucrChkDisplayMissing.Checked = False
-        Me.ucrChkDisplayMissing.Location = New System.Drawing.Point(10, 272)
+        Me.ucrChkDisplayMissing.Location = New System.Drawing.Point(10, 271)
         Me.ucrChkDisplayMissing.Name = "ucrChkDisplayMissing"
         Me.ucrChkDisplayMissing.Size = New System.Drawing.Size(190, 23)
         Me.ucrChkDisplayMissing.TabIndex = 34
@@ -360,7 +360,7 @@ Partial Class dlgOneVariableSummarise
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.lblMaxSum)
-        Me.Controls.Add(Me.grpRows)
+        Me.Controls.Add(Me.grpColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -369,8 +369,8 @@ Partial Class dlgOneVariableSummarise
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "One_Variable_summarise"
         Me.Text = "One Variable Summarise"
-        Me.grpRows.ResumeLayout(False)
-        Me.grpRows.PerformLayout()
+        Me.grpColumns.ResumeLayout(False)
+        Me.grpColumns.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -398,5 +398,5 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents rdoVariable As RadioButton
     Friend WithEvents ucrInputDisplayMissing As ucrInputComboBox
     Friend WithEvents ucrChkDisplayMissing As ucrCheck
-    Friend WithEvents grpRows As GroupBox
+    Friend WithEvents grpColumns As GroupBox
 End Class
