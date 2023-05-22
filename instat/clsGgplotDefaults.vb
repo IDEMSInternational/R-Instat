@@ -24,9 +24,6 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("title", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("subtitle", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("caption", Chr(34) & Chr(34))
-            clsTempFunc.AddParameter("tag", Chr(34) & "A" & Chr(34))
-            clsTempFunc.AddParameter("colour", Chr(34) & Chr(34))
-            clsTempFunc.AddParameter("fill", Chr(34) & Chr(34))
 
             Return clsTempFunc
         End Get
@@ -223,6 +220,9 @@ Public Class GgplotDefaults
             dctTemp.Add("title", clsElementText.Clone())
             dctTemp.Add("sub.title", clsElementText.Clone())
             dctTemp.Add("caption", clsElementText.Clone())
+            dctTemp.Add("tag", clsElementText.Clone())
+            dctTemp.Add("colour", clsElementText.Clone())
+
             'dctTemp.Add("aspect.ratio", clsElementText.Clone())
             dctTemp.Add("axis.title", clsElementText.Clone())
             dctTemp.Add("axis.title.x", clsElementText.Clone())
@@ -275,6 +275,7 @@ Public Class GgplotDefaults
             dctTemp.Add("plot.title", clsElementText.Clone())
             dctTemp.Add("plot.subtitle", clsElementText.Clone())
             dctTemp.Add("plot.caption", clsElementText.Clone())
+            dctTemp.Add("plot.tag", clsElementText.Clone())
             dctTemp.Add("plot.margin", clsUnit.Clone())
             dctTemp.Add("strip.background", clsElementRect.Clone())
             ' dctTemp.Add("strip.placement", clsElementLine.Clone())
