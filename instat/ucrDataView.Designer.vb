@@ -68,13 +68,14 @@ Partial Class ucrDataView
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuDeleteCells = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCol2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuEditCell = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDeleteCells = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFact = New System.Windows.Forms.ToolStripMenuItem()
@@ -150,7 +151,6 @@ Partial Class ucrDataView
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
-        Me.mnuEditCell = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -168,7 +168,7 @@ Partial Class ucrDataView
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.ToolStripSeparator13, Me.mnuEditCell2, Me.mnuDeleteCells2, Me.mnuPaste, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextColumnSelection, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator8, Me.mnuHelp})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 518)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 540)
         '
         'mnuColumnRename
         '
@@ -216,7 +216,7 @@ Partial Class ucrDataView
         Me.mnuEditCell2.Enabled = False
         Me.mnuEditCell2.Name = "mnuEditCell2"
         Me.mnuEditCell2.Size = New System.Drawing.Size(214, 22)
-        Me.mnuEditCell2.Text = "Edit Cell(s)..."
+        Me.mnuEditCell2.Text = "Edit Cell..."
         '
         'mnuDeleteCells2
         '
@@ -334,18 +334,7 @@ Partial Class ucrDataView
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuDeleteCol2, Me.ToolStripSeparator14, Me.mnuEditCell, Me.mnuDeleteCells, Me.ToolStripSeparator3, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLabelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilterRows, Me.mnuCellContextColumnSelection, Me.mnuCellContextRemoveCurrentColumnSelection, Me.mnuRemoveCurrentFilters, Me.ToolStripSeparator9, Me.mnuHelp1})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(215, 502)
-        '
-        'mnuDeleteCells
-        '
-        Me.mnuDeleteCells.Name = "mnuDeleteCells"
-        Me.mnuDeleteCells.Size = New System.Drawing.Size(214, 22)
-        Me.mnuDeleteCells.Text = "Delete Cell(s)"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(211, 6)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(215, 480)
         '
         'mnuRenameColumn
         '
@@ -376,6 +365,24 @@ Partial Class ucrDataView
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
         Me.ToolStripSeparator14.Size = New System.Drawing.Size(211, 6)
+        '
+        'mnuEditCell
+        '
+        Me.mnuEditCell.Enabled = False
+        Me.mnuEditCell.Name = "mnuEditCell"
+        Me.mnuEditCell.Size = New System.Drawing.Size(214, 22)
+        Me.mnuEditCell.Text = "Edit Cell"
+        '
+        'mnuDeleteCells
+        '
+        Me.mnuDeleteCells.Name = "mnuDeleteCells"
+        Me.mnuDeleteCells.Size = New System.Drawing.Size(214, 22)
+        Me.mnuDeleteCells.Text = "Delete Cell(s)"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(211, 6)
         '
         'mnuCellPasteRange
         '
@@ -1020,13 +1027,6 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid.Name = "ucrLinuxGrid"
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(245, 437)
         Me.ucrLinuxGrid.TabIndex = 13
-        '
-        'mnuEditCell
-        '
-        Me.mnuEditCell.Enabled = False
-        Me.mnuEditCell.Name = "mnuEditCell"
-        Me.mnuEditCell.Size = New System.Drawing.Size(214, 22)
-        Me.mnuEditCell.Text = "Edit Cell"
         '
         'ucrDataView
         '
