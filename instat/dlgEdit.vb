@@ -68,13 +68,12 @@ Public Class dlgEdit
         ucrInputSelect.strQuotes = ""
 
 
-        ucrInputSelect.SetLinkedDisplayControl(lblSelectFactor)
+        ucrInputSelect.SetLinkedDisplayControl(lblRow)
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceValue = New RFunction
         ucrSelectValues.Reset()
-        Dim bWithQuotes As Boolean
 
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34), iPosition:=0)
@@ -82,11 +81,6 @@ Public Class dlgEdit
         clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
 
-        If bWithQuotes Then
-            clsReplaceValue.AddParameter("new_value", Chr(34) & strRowText & Chr(34))
-        Else
-            clsReplaceValue.AddParameter("new_value", strRowText)
-        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -96,7 +90,7 @@ Public Class dlgEdit
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrNewName.IsEmpty Then
+        If Not ucrNewName.IsEmpty OrElse Not ucrInputSelect.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -112,10 +106,12 @@ Public Class dlgEdit
     Private Sub SetSelectedColumn()
         ucrReceiverName.Add(strSelectedColumn)
         ucrRowNumber.Add(strRowText)
+        ucrReceiverRow.SetName(StrRowIndex)
+        ucrNewName.SetName(strRowText)
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputSelect.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputSelect.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -133,8 +129,19 @@ Public Class dlgEdit
             Else
                 ucrNewName.Enabled = True
             End If
-            ucrNewName.Enabled = True
         End If
-
     End Sub
+
+    Private Sub ucrNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewName.ControlValueChanged
+        Dim dblValue As Double
+        Dim iValue As Integer
+        Dim strNewValue As String = ucrNewName.GetText
+
+        If Double.TryParse(strNewValue, dblValue) OrElse Integer.TryParse(strNewValue, iValue) Then
+            clsReplaceValue.AddParameter("new_value", strNewValue, iPosition:=2)
+        Else
+            clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34), iPosition:=2)
+        End If
+    End Sub
+
 End Class

@@ -30,8 +30,9 @@ Partial Class dlgEdit
         Me.lblCurrentRow = New System.Windows.Forms.Label()
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.ucrInputSelect = New instat.ucrInputFactorLevels()
-        Me.lblSelectFactor = New System.Windows.Forms.Label()
+        Me.lblRow = New System.Windows.Forms.Label()
         Me.ucrSelectValues = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverRow = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblCurrentName
@@ -63,7 +64,7 @@ Partial Class dlgEdit
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
-        Me.ucrReceiverName.Size = New System.Drawing.Size(148, 21)
+        Me.ucrReceiverName.Size = New System.Drawing.Size(186, 21)
         Me.ucrReceiverName.strNcFilePath = ""
         Me.ucrReceiverName.TabIndex = 18
         Me.ucrReceiverName.ucrSelector = Nothing
@@ -102,7 +103,7 @@ Partial Class dlgEdit
         Me.lblColumnName.Name = "lblColumnName"
         Me.lblColumnName.Size = New System.Drawing.Size(100, 15)
         Me.lblColumnName.TabIndex = 22
-        Me.lblColumnName.Text = "Column Name:"
+        Me.lblColumnName.Text = "Column:"
         '
         'ucrInputSelect
         '
@@ -110,18 +111,18 @@ Partial Class dlgEdit
         Me.ucrInputSelect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSelect.GetSetSelectedIndex = -1
         Me.ucrInputSelect.IsReadOnly = False
-        Me.ucrInputSelect.Location = New System.Drawing.Point(237, 98)
+        Me.ucrInputSelect.Location = New System.Drawing.Point(237, 236)
         Me.ucrInputSelect.Name = "ucrInputSelect"
         Me.ucrInputSelect.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputSelect.TabIndex = 23
         '
-        'lblSelectFactor
+        'lblRow
         '
-        Me.lblSelectFactor.Location = New System.Drawing.Point(238, 80)
-        Me.lblSelectFactor.Name = "lblSelectFactor"
-        Me.lblSelectFactor.Size = New System.Drawing.Size(100, 15)
-        Me.lblSelectFactor.TabIndex = 24
-        Me.lblSelectFactor.Text = "Select Factor:"
+        Me.lblRow.Location = New System.Drawing.Point(238, 80)
+        Me.lblRow.Name = "lblRow"
+        Me.lblRow.Size = New System.Drawing.Size(100, 15)
+        Me.lblRow.TabIndex = 24
+        Me.lblRow.Text = "Row:"
         '
         'ucrSelectValues
         '
@@ -135,13 +136,25 @@ Partial Class dlgEdit
         Me.ucrSelectValues.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectValues.TabIndex = 25
         '
+        'ucrReceiverRow
+        '
+        Me.ucrReceiverRow.AddQuotesIfUnrecognised = True
+        Me.ucrReceiverRow.AutoSize = True
+        Me.ucrReceiverRow.IsMultiline = False
+        Me.ucrReceiverRow.IsReadOnly = False
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(237, 98)
+        Me.ucrReceiverRow.Name = "ucrReceiverRow"
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(186, 21)
+        Me.ucrReceiverRow.TabIndex = 26
+        '
         'dlgEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(433, 345)
+        Me.Controls.Add(Me.ucrReceiverRow)
         Me.Controls.Add(Me.ucrSelectValues)
-        Me.Controls.Add(Me.lblSelectFactor)
+        Me.Controls.Add(Me.lblRow)
         Me.Controls.Add(Me.ucrInputSelect)
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.lblCurrentRow)
@@ -165,6 +178,7 @@ Partial Class dlgEdit
     Friend WithEvents lblColumnName As Label
     Friend WithEvents lblCurrentRow As Label
     Friend WithEvents ucrInputSelect As ucrInputFactorLevels
-    Friend WithEvents lblSelectFactor As Label
+    Friend WithEvents lblRow As Label
     Friend WithEvents ucrSelectValues As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverRow As ucrInputTextBox
 End Class
