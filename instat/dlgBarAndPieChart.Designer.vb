@@ -189,10 +189,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoPie.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoPie.Location = New System.Drawing.Point(115, 343)
         Me.rdoPie.Name = "rdoPie"
-        Me.rdoPie.Size = New System.Drawing.Size(40, 17)
+        Me.rdoPie.Size = New System.Drawing.Size(133, 17)
         Me.rdoPie.TabIndex = 34
         Me.rdoPie.TabStop = True
-        Me.rdoPie.Text = "Pie"
+        Me.rdoPie.Text = "Pie                               "
         Me.rdoPie.UseVisualStyleBackColor = True
         '
         'rdoDonut
@@ -201,10 +201,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoDonut.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoDonut.Location = New System.Drawing.Point(115, 365)
         Me.rdoDonut.Name = "rdoDonut"
-        Me.rdoDonut.Size = New System.Drawing.Size(54, 17)
+        Me.rdoDonut.Size = New System.Drawing.Size(126, 17)
         Me.rdoDonut.TabIndex = 32
         Me.rdoDonut.TabStop = True
-        Me.rdoDonut.Text = "Donut"
+        Me.rdoDonut.Text = "Donut                        "
         Me.rdoDonut.UseVisualStyleBackColor = True
         '
         'lblLabelPosition
@@ -455,7 +455,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkReorderFrequency.Checked = False
         Me.ucrChkReorderFrequency.Location = New System.Drawing.Point(257, 189)
         Me.ucrChkReorderFrequency.Name = "ucrChkReorderFrequency"
-        Me.ucrChkReorderFrequency.Size = New System.Drawing.Size(125, 23)
+        Me.ucrChkReorderFrequency.Size = New System.Drawing.Size(158, 23)
         Me.ucrChkReorderFrequency.TabIndex = 66
         '
         'ucrInputPlace
@@ -578,7 +578,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrSaveBar.Location = New System.Drawing.Point(10, 461)
         Me.ucrSaveBar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(317, 24)
+        Me.ucrSaveBar.Size = New System.Drawing.Size(372, 24)
         Me.ucrSaveBar.TabIndex = 59
         '
         'ucrReceiverByFactor
@@ -936,8 +936,8 @@ Partial Class dlgBarAndPieChart
         Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Bar_and_Pie_Chart"
-        Me.Text = "Bar and Pie Chart"
+        Me.Tag = "Bar_Chart"
+        Me.Text = "Bar  Chart"
         Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
