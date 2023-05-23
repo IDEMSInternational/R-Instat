@@ -154,9 +154,6 @@ Public Class dlgOneVariableSummarise
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
 
-        clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
-
         clsThemesTabOptionsFunction.SetPackageName("gt")
         clsThemesTabOptionsFunction.SetRCommand("tab_options")
 
@@ -222,6 +219,7 @@ Public Class dlgOneVariableSummarise
         clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
         clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=2)
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
 
         clsConcFunction.SetRCommand("c")
 
@@ -234,7 +232,10 @@ Public Class dlgOneVariableSummarise
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
         clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
-        clsSummaryOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+
+        clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
+        clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
@@ -270,19 +271,19 @@ Public Class dlgOneVariableSummarise
         bRCodeSet = False
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
-        ucrSaveSummary.AddAdditionalRCode(clsSummaryOperator, iAdditionalPairNo:=2)
+        ucrSaveSummary.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=2)
         ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
-        ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
         ucrInputDisplayMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveSummary.SetRCode(clsSkimrFunction, bReset)
 
         If bReset Then
             ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
+            ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
         End If
         bRCodeSet = True
         FillListView()
@@ -347,7 +348,7 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSummaryFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
-        clsSummaryOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
+        clsJoiningPipeOperator._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
         clsSkimrFunction._strDataFrameNameToAddAssignToObject = ucrSelectorOneVarSummarise.strCurrentDataFrame
     End Sub
 
@@ -363,7 +364,7 @@ Public Class dlgOneVariableSummarise
     Private Sub ucrPnlSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaries.ControlValueChanged
         If rdoCustomised.Checked Then
             clsDummyFunction.AddParameter("checked_radio", "customised", iPosition:=0)
-            ucrBase.clsRsyntax.SetBaseROperator(clsSummaryOperator)
+            ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_table")
             ucrSaveSummary.SetCheckBoxText("Save Table")
@@ -428,18 +429,21 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
-        If rdoSummary.Checked Then
-            clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
-            clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
-            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-        ElseIf rdoVariable.Checked Then
-            clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
-            clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
-            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-        Else
+        'If bRCodeSet Then
+        If rdoNoColumnFactor.Checked Then
             clsSummaryOperator.RemoveParameterByName("col_factor")
             clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
+        Else
+            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            If rdoSummary.Checked Then
+                clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+                clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+            ElseIf rdoVariable.Checked Then
+                clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
+                clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
+            End If
         End If
+        'End If
     End Sub
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
         TestOKEnabled()

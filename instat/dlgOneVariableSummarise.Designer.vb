@@ -44,6 +44,12 @@ Partial Class dlgOneVariableSummarise
         Me.rdoDefault = New System.Windows.Forms.RadioButton()
         Me.rdoSkim = New System.Windows.Forms.RadioButton()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
+        Me.rdoSummary = New System.Windows.Forms.RadioButton()
+        Me.grpColumns = New System.Windows.Forms.GroupBox()
+        Me.cmdFormatTable = New System.Windows.Forms.Button()
+        Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrSaveSummary = New instat.ucrSave()
         Me.ucrPnlSummaries = New instat.UcrPanel()
         Me.ucrNudMaxSum = New instat.ucrNud()
@@ -52,14 +58,8 @@ Partial Class dlgOneVariableSummarise
         Me.ucrReceiverOneVarSummarise = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlColumnFactor = New instat.UcrPanel()
-        Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
-        Me.rdoVariable = New System.Windows.Forms.RadioButton()
-        Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.grpColumns = New System.Windows.Forms.GroupBox()
         Me.ucrChkDisplayMissing = New instat.ucrCheck()
         Me.ucrInputDisplayMissing = New instat.ucrInputComboBox()
-        Me.ucrReorderSummary = New instat.ucrReorder()
-        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.grpColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,94 +149,13 @@ Partial Class dlgOneVariableSummarise
         '
         Me.cmdMissingOptions.Enabled = False
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(186, 278)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(201, 278)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
         Me.cmdMissingOptions.TabIndex = 27
         Me.cmdMissingOptions.Tag = "MissingOptions"
         Me.cmdMissingOptions.Text = "Options"
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
-        '
-        'ucrSaveSummary
-        '
-        Me.ucrSaveSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 418)
-        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveSummary.Name = "ucrSaveSummary"
-        Me.ucrSaveSummary.Size = New System.Drawing.Size(406, 24)
-        Me.ucrSaveSummary.TabIndex = 28
-        '
-        'ucrPnlSummaries
-        '
-        Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaries.Location = New System.Drawing.Point(82, 11)
-        Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
-        Me.ucrPnlSummaries.Size = New System.Drawing.Size(286, 29)
-        Me.ucrPnlSummaries.TabIndex = 20
-        '
-        'ucrNudMaxSum
-        '
-        Me.ucrNudMaxSum.AutoSize = True
-        Me.ucrNudMaxSum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxSum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxSum.Location = New System.Drawing.Point(246, 249)
-        Me.ucrNudMaxSum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxSum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxSum.Name = "ucrNudMaxSum"
-        Me.ucrNudMaxSum.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxSum.TabIndex = 8
-        Me.ucrNudMaxSum.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.AutoSize = True
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(8, 280)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(173, 23)
-        Me.ucrChkOmitMissing.TabIndex = 9
-        '
-        'ucrSelectorOneVarSummarise
-        '
-        Me.ucrSelectorOneVarSummarise.AutoSize = True
-        Me.ucrSelectorOneVarSummarise.bDropUnusedFilterLevels = False
-        Me.ucrSelectorOneVarSummarise.bShowHiddenColumns = False
-        Me.ucrSelectorOneVarSummarise.bUseCurrentFilter = True
-        Me.ucrSelectorOneVarSummarise.Location = New System.Drawing.Point(10, 55)
-        Me.ucrSelectorOneVarSummarise.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorOneVarSummarise.Name = "ucrSelectorOneVarSummarise"
-        Me.ucrSelectorOneVarSummarise.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorOneVarSummarise.TabIndex = 0
-        '
-        'ucrReceiverOneVarSummarise
-        '
-        Me.ucrReceiverOneVarSummarise.AutoSize = True
-        Me.ucrReceiverOneVarSummarise.frmParent = Me
-        Me.ucrReceiverOneVarSummarise.Location = New System.Drawing.Point(301, 78)
-        Me.ucrReceiverOneVarSummarise.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverOneVarSummarise.Name = "ucrReceiverOneVarSummarise"
-        Me.ucrReceiverOneVarSummarise.Selector = Nothing
-        Me.ucrReceiverOneVarSummarise.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverOneVarSummarise.strNcFilePath = ""
-        Me.ucrReceiverOneVarSummarise.TabIndex = 2
-        Me.ucrReceiverOneVarSummarise.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 444)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 11
-        '
-        'ucrPnlColumnFactor
-        '
-        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 12)
-        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
-        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(137, 65)
-        Me.ucrPnlColumnFactor.TabIndex = 29
         '
         'rdoNoColumnFactor
         '
@@ -284,25 +203,15 @@ Partial Class dlgOneVariableSummarise
         Me.grpColumns.TabStop = False
         Me.grpColumns.Text = "Columns:"
         '
-        'ucrChkDisplayMissing
+        'cmdFormatTable
         '
-        Me.ucrChkDisplayMissing.AutoSize = True
-        Me.ucrChkDisplayMissing.Checked = False
-        Me.ucrChkDisplayMissing.Location = New System.Drawing.Point(8, 247)
-        Me.ucrChkDisplayMissing.Name = "ucrChkDisplayMissing"
-        Me.ucrChkDisplayMissing.Size = New System.Drawing.Size(173, 23)
-        Me.ucrChkDisplayMissing.TabIndex = 34
-        '
-        'ucrInputDisplayMissing
-        '
-        Me.ucrInputDisplayMissing.AddQuotesIfUnrecognised = True
-        Me.ucrInputDisplayMissing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDisplayMissing.GetSetSelectedIndex = -1
-        Me.ucrInputDisplayMissing.IsReadOnly = False
-        Me.ucrInputDisplayMissing.Location = New System.Drawing.Point(186, 248)
-        Me.ucrInputDisplayMissing.Name = "ucrInputDisplayMissing"
-        Me.ucrInputDisplayMissing.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputDisplayMissing.TabIndex = 35
+        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatTable.Location = New System.Drawing.Point(317, 393)
+        Me.cmdFormatTable.Name = "cmdFormatTable"
+        Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
+        Me.cmdFormatTable.TabIndex = 37
+        Me.cmdFormatTable.Text = "Format Table..."
+        Me.cmdFormatTable.UseVisualStyleBackColor = True
         '
         'ucrReorderSummary
         '
@@ -314,15 +223,107 @@ Partial Class dlgOneVariableSummarise
         Me.ucrReorderSummary.ucrDataFrameList = Nothing
         Me.ucrReorderSummary.ucrReceiver = Nothing
         '
-        'cmdFormatTable
+        'ucrSaveSummary
         '
-        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFormatTable.Location = New System.Drawing.Point(317, 393)
-        Me.cmdFormatTable.Name = "cmdFormatTable"
-        Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
-        Me.cmdFormatTable.TabIndex = 37
-        Me.cmdFormatTable.Text = "Format Table..."
-        Me.cmdFormatTable.UseVisualStyleBackColor = True
+        Me.ucrSaveSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 418)
+        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(406, 24)
+        Me.ucrSaveSummary.TabIndex = 28
+        '
+        'ucrPnlSummaries
+        '
+        Me.ucrPnlSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSummaries.Location = New System.Drawing.Point(82, 11)
+        Me.ucrPnlSummaries.Name = "ucrPnlSummaries"
+        Me.ucrPnlSummaries.Size = New System.Drawing.Size(286, 29)
+        Me.ucrPnlSummaries.TabIndex = 20
+        '
+        'ucrNudMaxSum
+        '
+        Me.ucrNudMaxSum.AutoSize = True
+        Me.ucrNudMaxSum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxSum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxSum.Location = New System.Drawing.Point(246, 249)
+        Me.ucrNudMaxSum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxSum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxSum.Name = "ucrNudMaxSum"
+        Me.ucrNudMaxSum.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxSum.TabIndex = 8
+        Me.ucrNudMaxSum.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.AutoSize = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(8, 280)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(187, 23)
+        Me.ucrChkOmitMissing.TabIndex = 9
+        '
+        'ucrSelectorOneVarSummarise
+        '
+        Me.ucrSelectorOneVarSummarise.AutoSize = True
+        Me.ucrSelectorOneVarSummarise.bDropUnusedFilterLevels = False
+        Me.ucrSelectorOneVarSummarise.bShowHiddenColumns = False
+        Me.ucrSelectorOneVarSummarise.bUseCurrentFilter = True
+        Me.ucrSelectorOneVarSummarise.Location = New System.Drawing.Point(10, 55)
+        Me.ucrSelectorOneVarSummarise.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorOneVarSummarise.Name = "ucrSelectorOneVarSummarise"
+        Me.ucrSelectorOneVarSummarise.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorOneVarSummarise.TabIndex = 0
+        '
+        'ucrReceiverOneVarSummarise
+        '
+        Me.ucrReceiverOneVarSummarise.AutoSize = True
+        Me.ucrReceiverOneVarSummarise.frmParent = Me
+        Me.ucrReceiverOneVarSummarise.Location = New System.Drawing.Point(301, 78)
+        Me.ucrReceiverOneVarSummarise.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverOneVarSummarise.Name = "ucrReceiverOneVarSummarise"
+        Me.ucrReceiverOneVarSummarise.Selector = Nothing
+        Me.ucrReceiverOneVarSummarise.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverOneVarSummarise.strNcFilePath = ""
+        Me.ucrReceiverOneVarSummarise.TabIndex = 2
+        Me.ucrReceiverOneVarSummarise.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 444)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 11
+        '
+        'ucrPnlColumnFactor
+        '
+        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 12)
+        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(137, 65)
+        Me.ucrPnlColumnFactor.TabIndex = 29
+        '
+        'ucrChkDisplayMissing
+        '
+        Me.ucrChkDisplayMissing.AutoSize = True
+        Me.ucrChkDisplayMissing.Checked = False
+        Me.ucrChkDisplayMissing.Enabled = False
+        Me.ucrChkDisplayMissing.Location = New System.Drawing.Point(8, 247)
+        Me.ucrChkDisplayMissing.Name = "ucrChkDisplayMissing"
+        Me.ucrChkDisplayMissing.Size = New System.Drawing.Size(173, 23)
+        Me.ucrChkDisplayMissing.TabIndex = 34
+        '
+        'ucrInputDisplayMissing
+        '
+        Me.ucrInputDisplayMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputDisplayMissing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDisplayMissing.GetSetSelectedIndex = -1
+        Me.ucrInputDisplayMissing.IsReadOnly = False
+        Me.ucrInputDisplayMissing.Location = New System.Drawing.Point(189, 248)
+        Me.ucrInputDisplayMissing.Name = "ucrInputDisplayMissing"
+        Me.ucrInputDisplayMissing.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputDisplayMissing.TabIndex = 35
         '
         'dlgOneVariableSummarise
         '
