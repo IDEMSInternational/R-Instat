@@ -739,20 +739,6 @@ Public Class ucrDataView
         HideOrShowRecentSection()
     End Sub
 
-    ''' <summary>
-    ''' toggles startup menu items visibility
-    ''' </summary>
-    ''' <param name="bVisibility"></param>
-    Public Sub StartupMenuItemsVisibility(bVisibility As Boolean)
-        panelSectionStart.Visible = bVisibility
-        panelSectionHelp.Visible = bVisibility
-        If bVisibility Then
-            HideOrShowRecentSection()
-        Else
-            panelSectionRecent.Visible = False
-        End If
-    End Sub
-
     Private Sub HideOrShowRecentSection()
         panelSectionRecent.Visible = panelRecentMenuItems.Controls.Count > 0
     End Sub

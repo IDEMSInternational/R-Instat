@@ -2932,6 +2932,9 @@
     <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\ucrImageViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControls\ucrTextViewer.vb">
       <SubType>Component</SubType>
     </Compile>
