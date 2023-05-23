@@ -1,0 +1,285 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+TranslateWinForm
+</name>
+</assembly>
+<members>
+<member name="T:TranslateWinForm.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:TranslateWinForm.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:TranslateWinForm.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:TranslateWinForm.clsTranslateWinForm">
+------------------------------------------------------------------------------------------------
+ <summary>   
+ Provides utility functions to translate the text in WinForm objects (e.g. menu items, forms and 
+ controls) to a different natural language (e.g. to French). 
+ <para>
+ This class uses an SQLite database to translate text items to a new language. The database must 
+ contain the following tables:
+ <code>
+ CREATE TABLE "form_controls" (
+	"form_name"	TEXT,
+	"control_name"	TEXT,
+	"id_text"	TEXT,
+	PRIMARY KEY("form_name", "control_name")
+ )
+ <para>
+ CREATE TABLE "translations" (
+	"id_text"	TEXT,
+	"language_code"	TEXT,
+	"translation"	TEXT,
+	PRIMARY KEY("id_text", "language_code")
+ )
+ </para></code>
+ For example, if the 'form_controls' table contains a row with the values 
+ {'frmMain', 'mnuFile', 'File'}, 
+ then the 'translations' table should have a row for each supported language, e.g. 
+ {'File', 'en', 'File'}, {'File', 'fr', 'Fichier'}.
+ </para><para>
+ Note: This class is intended to be used solely as a 'static' class (i.e. contains only shared 
+ members, cannot be instantiated and cannot be inherited from).
+ In order to enforce this (and prevent developers from using this class in an unintended way), 
+ the class is declared as 'NotInheritable` and the constructor is declared as 'Private'.</para>
+ </summary>
+------------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.#ctor">
+--------------------------------------------------------------------------------------------
+ <summary> 
+ Declare constructor 'Private' to prevent instantiation of this class (see class comments 
+ for more details). 
+ </summary>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.TranslateForm(System.Windows.Forms.Form,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>
+     Translates all the text in form <paramref name="clsForm"/> into language 
+     <paramref name="strLanguage"/> using the translations in database 
+     <paramref name="strDataSource"/>.
+     All the form's (sub)controls and (sub) menus are translated.     
+ </summary>
+
+ <param name="clsForm">          The WinForm form to translate. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French). 
+                                 </param>
+
+ <returns>   If an exception is thrown, then returns the exception text; else returns 
+             'Nothing'. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(System.String,System.Windows.Forms.ToolStripItemCollection,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Translates all the (sub)menu items in <paramref name="clsMenuItems"/> into language
+    <paramref name="strLanguage"/> using the translations in database
+    <paramref name="strDataSource"/>.
+ </summary>
+
+ <param name="strParentName">    The menu's parent control. </param>
+ <param name="clsMenuItems">     The (sub)menu items to translate. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French).
+                                 </param>
+
+ <returns>   If an exception is thrown, then returns the exception text; else returns 
+             'Nothing'. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetTranslation(System.String,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Returns <paramref name="strText"/> translated into <paramref name="strLanguage"/>. 
+    <para>
+    Translations can be bi-directional (e.g. from English to French or from French to English).
+    If <paramref name="strText"/> is already in the current language, or if no translation 
+    can be found, then returns <paramref name="strText"/>.         
+    </para></summary>
+
+ <param name="strText">          The text to translate. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French).
+                                 </param>
+
+ <returns>   <paramref name="strText"/> translated into <paramref name="strLanguage"/>. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(System.Windows.Forms.Control)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+     Recursively traverses the <paramref name="clsControl"/> control hierarchy and returns a
+     string containing the parent, name and associated text of each control. The string is 
+     formatted as a comma-separated list suitable for importing into a database.
+ </summary>
+
+ <param name="clsControl">   The control to process (it's children and sub-children shall 
+                             also be processed recursively). </param>
+
+ <returns>   
+     A string containing the parent, name and associated text of each control in the 
+     hierarchy. The string is formatted as a comma-separated list suitable for importing 
+     into a database. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(System.Windows.Forms.Control,System.Windows.Forms.ToolStripItemCollection)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+     Recursively traverses the <paramref name="clsMenuItems"/> menu hierarchy and returns a 
+     string containing the parent, name and associated text of each (sub)menu option in 
+     <paramref name="clsMenuItems"/>. The string is formatted as a comma-separated list 
+     suitable for importing into a database.
+ </summary>
+
+ <param name="clsControl">        The WinForm control that is the parent of the menu. </param>
+ <param name="clsMenuItems">     The WinForm menu items to add to the return string. </param>
+
+ <returns>   
+     A string containing the parent and name of each (sub)menu option in
+     <paramref name="clsMenuItems"/>. The string is formatted as a comma-separated list
+     suitable for importing into a database. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetDctComponentsFromControl(System.Windows.Forms.Control,System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component}@,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>
+    Populates dictionary <paramref name="dctComponents"/> with the control 
+    <paramref name="clsControl"/> and its children.    
+    The dictionary can then be used to conveniently translate the control text (see other
+    functions and subs in this class).
+ </summary>
+
+ <param name="clsControl">       The control used to populate the dictionary. </param>
+ <param name="dctComponents">    [in,out] Dictionary to store the control and its children. 
+                                 </param>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetDctComponentsFromMenuItems(System.Windows.Forms.ToolStripItemCollection,System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component}@)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Populates dictionary <paramref name="dctComponents"/> with all the menu items, and 
+    sub-menu items in the <paramref name="clsMenuItems"/>. 
+    The dictionary can then be used to conveniently translate the menu item text (see other 
+    functions and subs in this class).
+ </summary>
+
+ <param name="clsMenuItems">     The list of menu items to populate the dictionary. </param>
+ <param name="dctComponents">    [in,out] Dictionary to store the menu items. </param>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.TranslateDctComponents(System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component}@,System.String,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>
+     Attempts to translate all the text in <paramref name="dctComponents"/>
+     to <paramref name="strLanguage"/>.
+     Opens database <paramref name="strDataSource"/> and reads in all translations for the 
+     <paramref name="strControlName"/> control for target language <paramref name="strLanguage"/>.
+     For each translation in the database, attempts to find the corresponding component in 
+     <paramref name="dctComponents"/>. If found, then it translates the text to the target 
+     language. If a component has a tool tip, then it also translates the tool tip.
+ </summary>
+
+ <param name="dctComponents">    [in,out] The dictionary of translatable components. </param>
+ <param name="strControlName">   The name of the form or menu used to populate the dictionary. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French). </param>
+
+ <returns>
+     If an exception is thrown, then returns the exception text; else returns 'Nothing'.
+ </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.TranslateToolTip(System.Collections.Generic.List{System.Windows.Forms.ToolTip},System.ComponentModel.Component,System.String,System.Data.SQLite.SQLiteConnection)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+   
+  If <paramref name="clsComponent"/> has a tool tip, then converts the tool tip into 
+  <paramref name="strLanguage"/>.
+  For controls, it searches in <paramref name="lstToolTips"/> for the control's tool tip. 
+  Tool bar buttons are not controls and their tool tips are not stored in 
+  <paramref name="lstToolTips"/>. Therefore, for tool bar buttons, if the tool bar button 
+  has tool tip text, then it translates the tool tip text directly.
+ </summary>
+
+ <param name="lstToolTips">      The tool tip object(s) that ay contain <paramref name="clsComponent"/>'s tool tip text. </param>
+ <param name="clsComponent">     The component that may have tool tip text. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French). </param>
+ <param name="clsConnection">    An open connection to the SQLite translation database. </param>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetComponent(System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component},System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Returns the component associated with <paramref name="strComponentName"/> in 
+    <paramref name="dctComponents"/>.
+    If an exact match is not found, then returns a component whose name is a superset of 
+    <paramref name="strComponentName"/>. 
+    If no match is found then returns Nothing.
+ </summary>
+
+ <param name="dctComponents">    The dictionary of translatable components. </param>
+ <param name="strComponentName"> Name of the component to search for. </param>
+
+ <returns>   The component associated with <paramref name="strComponentName"/> in
+    <paramref name="dctComponents"/>. If an exact match is not found, then returns a 
+    component whose name is a superset of <paramref name="strComponentName"/>.
+    If no match is found then returns Nothing. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetDynamicTranslation(System.String,System.String,System.Data.SQLite.SQLiteConnection)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Returns <paramref name="strText"/> translated into <paramref name="strLanguage"/>. 
+    <para>
+    Translations can be bi-directional (e.g. from English to French or from French to English).
+    If <paramref name="strText"/> is already in the current language, or if no translation 
+    can be found, then returns <paramref name="strText"/>.         
+    </para></summary>
+
+ <param name="strText">          The text to translate. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French).
+                                 </param>
+ <param name="clsConnection">    An open connection to the SQLite translation database. </param>
+
+ <returns>   <paramref name="strText"/> translated into <paramref name="strLanguage"/>. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetCsvText(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Decides whether <paramref name="strText"/> is likely to be changed during execution of 
+    the software. If no, then returns <paramref name="strText"/>. If yes, then returns 
+    'ReplaceWithDynamicTranslation'. It makes the decision based upon a set of heuristics.
+    <para>
+    This function is normally only used when creating a comma-separated list suitable for 
+    importing into a database. During program execution, the 'ReplaceWithDynamicTranslation'
+    text tells the library to dynamically try and translate the current text, rather than
+    looking up the static text associated with the control.</para></summary>
+
+ <param name="strText">  The text to assess. </param>
+
+ <returns>   Decides whether <paramref name="strText"/> is likely to be changed during 
+             execution of the software. If no, then returns <paramref name="strText"/>. 
+             If yes, then returns'ReplaceWithDynamicTranslation'. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+</members>
+</doc>
