@@ -191,11 +191,7 @@ Public Class dlgRowNamesOrNumbers
     End Sub
 
     Private Sub IdentifyKey()
-        If frmMain.clsRLink.IsVariablesMetadata(ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Key") Then
-            ucrChkMakeColumnIntoKey.Checked = False
-        Else
-            ucrChkMakeColumnIntoKey.Checked = True
-        End If
+        ucrChkMakeColumnIntoKey.Checked = Not frmMain.clsRLink.IsVariablesMetadata(ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Key")
     End Sub
 
     Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
