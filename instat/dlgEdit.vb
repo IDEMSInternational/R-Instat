@@ -130,7 +130,6 @@ Public Class dlgEdit
             Else
                 ucrNewName.Visible = True
             End If
-            'ucrInputSelect.Visible = False
         End If
     End Sub
 
