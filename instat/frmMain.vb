@@ -75,7 +75,7 @@ Public Class frmMain
 
     Private strCurrLang As String
     Public Sub New()
-        Logger.Info("R-Instat started version" + My.Application.Info.Version.ToString)
+        Logger.Info("R-Instat started version " & My.Application.Info.Version.ToString)
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -92,13 +92,26 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        '---------------------------------------
+        'Gets the path for the executable file that started the application, not including the executable name.
+        'We use `Application.StartupPath` because this returns the correct path even if the 
+        'application was started by double-clicking a data file in another folder.
+        'We need the full path of the static folder to set the working folder containing files 
+        'needed when the application is loading.         
+        strStaticPath = String.Concat(Application.StartupPath, "\static")
+        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
+        '---------------------------------------
+
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
-        Dim bClose As Boolean = False
 
         mnuBar.Renderer = prdCustom
         Tool_strip.Renderer = prdCustom
-        SetMainMenusEnabled(False)
+        '---------------------------------------
+        'disable main menu items to prevent user inputs durinng initialisation
         Cursor = Cursors.WaitCursor
+        SetMainMenusEnabled(False)
+        '---------------------------------------
         'temporary
 
         ' This must be fixed because CurrentCulture affects functions such as Decimal.TryParse
@@ -106,7 +119,7 @@ Public Class frmMain
         ' Decimal point must be `.` and not `,` because R only accepts `.`
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
-        ucrDataViewer.StartupMenuItemsVisibility(False)
+        'ucrDataViewer.StartupMenuItemsVisibility(False)
         clsDataBook = New clsDataBook(clsRLink)
 
         ucrDataViewer.DataBook = clsDataBook
@@ -117,47 +130,70 @@ Public Class frmMain
 
         SetToDefaultLayout()
 
-        'Gets the path for the executable file that started the application, not including the 
-        'executable name.
-        'We use `Application.StartupPath` because this returns the correct path even if the 
-        'application was started by double-clicking a data file in another folder.
-        'We need the full path of the static folder to set the working folder containing files 
-        'needed when the application is loading.         
-        strStaticPath = String.Concat(Application.StartupPath, "\static")
-
-        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-
-        bClose = AutoRecoverAndStartREngine()
-        If bClose Then
-            Application.Exit()
-        Else
-            'Do this after setting up R Link because loading options may run R code
-            LoadInstatOptions()
-            'Must come after loading options as options may change language.
-            TranslateFrmMainMenu()
-
-            'Do this after loading options because interval depends on options
-            'Interval is in milliseconds and option is in minutes
-            timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
-            timer.Start()
-
-            AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
-
-            'Sets up the Recent items
-            clsRecentItems = New clsRecentFiles(strAppDataPath)
-            clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
-            clsRecentItems.SetDataViewWindow(ucrDataViewer)
-            'checks existence of MRU list
-            clsRecentItems.checkOnLoad()
-            ucrDataViewer.StartupMenuItemsVisibility(True)
-            Cursor = Cursors.Default
-            SetMainMenusEnabled(True)
-
-            mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
-            mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
-            mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        '---------------------------------------
+        'set up R-Instat options (settings)
+        'load any saved options if available
+        clsInstatOptions = GetSavedRInstatOptions()
+        If clsInstatOptions Is Nothing Then
+            clsInstatOptions = New InstatOptions
         End If
+        clsInstatOptions.SetDefaultValuesToOptionsNotSet()
+        '---------------------------------------
 
+        '---------------------------------------
+        'translate the form menu items
+        'must come after loading options as options may change language.
+        TranslateFrmMainMenu()
+        '---------------------------------------
+
+        '---------------------------------------
+        'toggle the optional form menu items based on set opyions
+        mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
+        mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
+        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
+        strCurrLang = clsInstatOptions.strLanguageCultureCode
+        '---------------------------------------
+
+        '---------------------------------------
+        'Set up the Recent items; files, dialogs
+        clsRecentItems = New clsRecentFiles(strAppDataPath)
+        clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
+        clsRecentItems.SetDataViewWindow(ucrDataViewer)
+        'check existence of MRU list
+        clsRecentItems.checkOnLoad()
+        '---------------------------------------
+
+        '---------------------------------------
+        'set output window options
+        ucrOutput.SetInstatOptions(clsInstatOptions)
+        '---------------------------------------
+
+        '---------------------------------------
+        'start the R engine and install any missing R packages
+        'only proceed if;
+        '1. R engine has been started
+        '2. All packages have been installed
+        If Not (clsRLink.StartREngine() AndAlso AllPackagesInstalled()) Then
+            Application.Exit()
+            Environment.Exit(0)
+        End If
+        '---------------------------------------
+
+        '---------------------------------------
+        'execute R-Instat R set up scripts to set up R data book
+        ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
+        'execute R global options used by R-Instat R data book
+        clsInstatOptions.ExecuteRGlobalOptions()
+        '---------------------------------------
+
+        '---------------------------------------
+        'enable menu items to allow user inputs
+        Cursor = Cursors.Default
+        SetMainMenusEnabled(True)
+        '---------------------------------------
+
+        '---------------------------------------
         Try
             If (Environment.GetCommandLineArgs.Length > 1) Then
                 dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
@@ -167,18 +203,167 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+        '---------------------------------------
 
-        If Me.clsInstatOptions IsNot Nothing Then
-            If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
-                mnuTbLan.Visible = True
-            Else
-                mnuTbLan.Visible = False
-            End If
-            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
+        '---------------------------------------
+        'Do this after loading options because interval depends on options
+        'Interval is in milliseconds and option is in minutes
+        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
+        timer.Start()
+        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
+        '---------------------------------------
+
+        isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Private Function GetSavedRInstatOptions() As InstatOptions
+        Dim clsInstatOptions As InstatOptions = Nothing
+        Dim strFilePath As String = Path.Combine(strAppDataPath, strInstatOptionsFile)
+        If File.Exists(strFilePath) Then
+            Try
+                Using FileStream As Stream = File.OpenRead(strFilePath)
+                    clsInstatOptions = CType(New BinaryFormatter().Deserialize(FileStream), InstatOptions)
+                End Using
+            Catch ex As Exception
+                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
+            End Try
         End If
 
-        ucrOutput.SetInstatOptions(clsInstatOptions)
-        isMaximised = True 'Need to get the windowstate when the application is loaded
+        Return clsInstatOptions
+    End Function
+
+    Private Function AllPackagesInstalled() As Boolean
+        'check missing R packages and prompt to install them
+        Dim arrMissingPackages() As String = clsRLink.GetRPackagesNotInstalled()
+        If arrMissingPackages IsNot Nothing AndAlso arrMissingPackages.Length > 0 Then
+            frmPackageIssues.SetMissingPackages(arrMissingPackages)
+            frmPackageIssues.ShowDialog()
+            Return Not frmPackageIssues.bCloseRInstat
+        Else
+            Return True
+        End If
+    End Function
+
+    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
+        Dim strRScripts As String = ""
+        Dim strDataFilePath As String = ""
+
+        'could either be a file path or a script
+        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
+
+        'if no script recovered then use the default R set up script
+        If String.IsNullOrEmpty(strRScripts) Then
+            strRScripts = "# Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
+        End If
+
+        'if data file recovered then add it as part of the initial R set up script
+        If Not String.IsNullOrEmpty(strDataFilePath) Then
+            strRScripts = strRScripts & Environment.NewLine &
+                        "# Importing auto recovered data" & Environment.NewLine &
+                        clsRLink.GetImportRDSRScript(strDataFilePath, False)
+        End If
+
+
+        'execute the R-Instat set up R scripts
+        For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
+        Next
+
+        'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
+        'to check if R object has been set up at R level.
+
+        'grids are only updated when clsRLink.bInstatObjectExists = True
+        If clsRLink.RunInternalScriptGetValue(strScript:="exists('" & clsRLink.strInstatDataObject & "')",
+                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" Then
+            'set R-Instat R object as exists if it has been set up in R level and refresh the grids
+            'refreshing grids internally updates the .Net databook object as well.
+            clsRLink.bInstatObjectExists = True
+            UpdateAllGrids()
+        End If
+
+    End Sub
+
+    Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
+
+        'if there is  another R-Instat process in the machine then no need to check for autorecovery files
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
+            Return
+        End If
+
+        'todo. As of 16/05/2023.
+        'the only log file that are multiple is the internal debug file.
+        'this is due to checking of R version when setting up R engine. the check creates a debug file before this subroutine is called
+        'should we change stop using arrays for the other recovery files?
+        Dim strAutoSavedLogFilePaths() As String = {}
+        Dim strAutoSavedInternalLogFilePaths() As String = {}
+        Dim strAutoSavedDataFilePaths() As String = {}
+
+        If (Directory.Exists(strAutoSaveLogFolderPath)) Then
+            strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
+        End If
+        If Directory.Exists(strAutoSaveDataFolderPath) Then
+            strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
+        End If
+        If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
+            strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
+        End If
+
+        '---------------------------------------
+        'prompt user for recovery selection
+        If (strAutoSavedLogFilePaths.Length > 0 OrElse
+            strAutoSavedDataFilePaths.Length > 0) AndAlso
+            MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
+                          "Would you like to see auto recovery options?",
+                          MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
+
+            dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
+            dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+            dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
+            dlgAutoSaveRecovery.ShowDialog()
+
+            'todo. the dialog design is meant to only return just one option; script, data file path or new session.
+            'refactor the dialog to enforce the design
+
+            'get the R script from read file if selected by the user
+            strScript = dlgAutoSaveRecovery.GetScript()
+            'get the data file path if selected by the user
+            strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+        End If
+        '---------------------------------------
+
+        '---------------------------------------
+        'delete the recovery files
+        If strAutoSavedLogFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedLogFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+            End Try
+        End If
+
+        If strAutoSavedInternalLogFilePaths.Length > 0 Then
+            Try
+                For Each strFilePath As String In strAutoSavedInternalLogFilePaths
+                    'debug log is created when checking r version. 
+                    'so always delete the previous session debug file only
+                    If strFilePath <> clsRLink.strAutoSaveDebugLogFilePath Then
+                        File.Delete(strFilePath)
+                    End If
+                Next
+            Catch ex As Exception
+                MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
+        End If
+
+        If strAutoSavedDataFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedDataFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
+        End If
+        '---------------------------------------
+
     End Sub
 
     ''' <summary>
@@ -239,81 +424,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Function AutoRecoverAndStartREngine() As Boolean
-        Dim iLogFiles As Integer = 0
-        Dim iInternalLogFiles As Integer = 0
-        Dim iDataFiles As Integer = 0
-        Dim strScript As String = ""
-        Dim strDataFilePath As String = ""
-        Dim strAutoSavedLogFilePaths() As String = Nothing
-        Dim strAutoSavedInternalLogFilePaths() As String = Nothing
-        Dim strAutoSavedDataFilePaths() As String = Nothing
-        Dim bClose As Boolean = False
 
-        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
-            bClose = clsRLink.StartREngine(clsRLink.GetRSetupScript())
-        Else
-            If (Directory.Exists(strAutoSaveLogFolderPath)) Then
-                strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
-                iLogFiles = strAutoSavedLogFilePaths.Count
-            End If
-            If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
-                strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
-                iInternalLogFiles = strAutoSavedInternalLogFilePaths.Count
-            End If
-            If Directory.Exists(strAutoSaveDataFolderPath) Then
-                strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
-                iDataFiles = strAutoSavedDataFilePaths.Count
-            End If
-            If iLogFiles > 0 OrElse iDataFiles > 0 OrElse iInternalLogFiles > 0 Then
-                If MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
-                    dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
-                    dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
-                    dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
-                    dlgAutoSaveRecovery.ShowDialog()
-                    strScript = dlgAutoSaveRecovery.GetScript()
-                    strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
-                End If
-            End If
-            bClose = clsRLink.StartREngine(strScript)
-            If Not bClose Then
-                If strDataFilePath <> "" Then
-                    clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
-                End If
-                If iLogFiles > 0 Then
-                    Try
-                        File.Delete(strAutoSavedLogFilePaths(0))
-                    Catch ex As Exception
-                        MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
-                    End Try
-                End If
-                If iInternalLogFiles > 0 Then
-                    Try
-                        File.Delete(strAutoSavedInternalLogFilePaths(0))
-                    Catch ex As Exception
-                        MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
-                    End Try
-                End If
-                If iDataFiles > 0 Then
-                    Try
-                        File.Delete(strAutoSavedDataFilePaths(0))
-                    Catch ex As Exception
-                        MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-                    End Try
-                End If
-            End If
-        End If
-        Return bClose
-    End Function
-
-    Private Sub LoadInstatOptions()
-        If File.Exists(Path.Combine(strAppDataPath, strInstatOptionsFile)) Then
-            LoadInstatOptionsFromFile(Path.Combine(strAppDataPath, strInstatOptionsFile))
-        Else
-            clsInstatOptions = New InstatOptions
-            'TODO Should these be here or in the constructor (New) of InstatOptions?
-        End If
-    End Sub
 
     Private Sub SetToDefaultLayout()
         splOverall.SplitterDistance = splOverall.Height / 4
@@ -334,33 +445,6 @@ Public Class frmMain
         mnuTbOutput.Checked = True
         mnuTbLogScript.Checked = False
         UpdateLayout()
-    End Sub
-
-    Public Sub LoadInstatOptionsFromFile(strFilePath As String)
-        'Dim FileStream As Stream
-        Dim deserializer As New BinaryFormatter()
-
-        'TODO Check if any options are not in loaded file, add defaults if missing
-        '     Could happen when updating to newer version with more options, and old options file remains on disk.
-        '     Alternative could be to create new instance with defaults and add/override only non empty fields from the imported file
-        '     to ensure all fields have some value
-        If File.Exists(strFilePath) Then
-            Try
-                Using FileStream As Stream = File.OpenRead(strFilePath)
-                    clsInstatOptions = CType(deserializer.Deserialize(FileStream), InstatOptions)
-                    clsInstatOptions.SetOptions()
-                    'TODO Check whether this is needed or not. Using should do it automatically.
-                    '     Also check general structure of this code.
-                    'FileStream.Close()
-                End Using
-            Catch ex As Exception
-                MsgBox("Could not load options from:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "Options will be reset to factory defaults." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Information, "Cannot open options file")
-                clsInstatOptions = New InstatOptions
-            End Try
-        Else
-            MsgBox("Options file:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded." & vbNewLine & "Options will be reset to factory defaults.", MsgBoxStyle.Information)
-            clsInstatOptions = New InstatOptions
-        End If
     End Sub
 
     Public Sub SaveInstatOptions(strFilePath As String)
@@ -1519,7 +1603,7 @@ Public Class frmMain
             Exit Sub
         End If
 
-        clsRLink.CloseData()
+        clsRLink.CloseDataBook()
         strSaveFilePath = ""
     End Sub
 
