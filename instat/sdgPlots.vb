@@ -685,7 +685,7 @@ Public Class sdgPlots
             clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
         End If
 
-        If dctThemeFunctions.TryGetValue("title", clsPlotElementTitle) Then
+        If dctThemeFunctions.TryGetValue("plot.title", clsPlotElementTitle) Then
             clsPlotElementTitle.AddParameter("size", 20)
             clsThemeFunction.AddParameter("title", clsRFunctionParameter:=clsPlotElementTitle)
         End If
@@ -1258,79 +1258,6 @@ Public Class sdgPlots
     End Sub
 
 
-    Private Sub AddRemoveTittle()
-        'If clsPlotElementTitle.iParameterCount > 0 Then
-        '    clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitle)
-        '    clsPlotElementTitle.AddParameter("size", 20)
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("plot.title")
-        '    clsPlotElementTitle.RemoveParameterByName("size")
-
-        'End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveSubTittle()
-        'If clsPlotElementSubTitle.iParameterCount > 0 Then
-        '    clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitle)
-        '    clsPlotElementSubTitle.AddParameter("size", 15)
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("plot.subtitle")
-        '    clsPlotElementSubTitle.RemoveParameterByName("size")
-        'End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveCaption()
-        'If clsPlotElementCaption.iParameterCount > 0 Then
-        '    clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
-        '    clsPlotElementCaption.AddParameter("size", ucrNudCaptionSize.GetText)
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("plot.caption")
-        '    clsPlotElementCaption.RemoveParameterByName("size")
-        'End If
-        AddRemoveTheme()
-        'If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaption) Then
-        '    clsPlotElementCaption.AddParameter("size", 8)
-        '    clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
-        'End If
-    End Sub
-
-
-    Private Sub AddRemoveTag()
-        'If clsPlotElementTag.iParameterCount > 0 Then
-        '    clsThemeFunction.AddParameter("plot.tag", clsRFunctionParameter:=clsPlotElementTag)
-        '    clsPlotElementTag.AddParameter("size", ucrNudTagSize.GetText)
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("plot.tag")
-        '    clsPlotElementTag.RemoveParameterByName("size")
-        'End If
-        AddRemoveTheme()
-    End Sub
-
-    'Private Sub AddRemoveLegend()
-    '    If clsPlotLegendTitle.iParameterCount > 0 Then
-    '        clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitle)
-    '        clsPlotLegendTitle.AddParameter("size", 18)
-    '    Else
-    '        clsThemeFunction.RemoveParameterByName("legend.title")
-    '        clsPlotLegendTitle.RemoveParameterByName("size")
-    '    End If
-    '    AddRemoveTheme()
-
-    'End Sub
-
-    'Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
-    '    AddRemoveTittle()
-    'End Sub
-
-    'Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
-    '    AddRemoveSubTittle()
-    'End Sub
-
-    'Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
-    '    AddRemoveCaption()
-    'End Sub
 
     Private Sub ucrChkTag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTag.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrNudTagSize.ControlValueChanged
         If ucrChkTag.Checked AndAlso Not ucrInputTag.IsEmpty Then
@@ -1358,13 +1285,5 @@ Public Class sdgPlots
 
         End If
     End Sub
-
-    'Private Sub ucrNudTagSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTagSize.ControlValueChanged
-    '    AddRemoveTag()
-    'End Sub
-
-    'Private Sub ucrNudLegendSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudLegendSize.ControlValueChanged
-    '    AddRemoveLegend()
-    'End Sub
 
 End Class
