@@ -685,9 +685,9 @@ Public Class sdgPlots
             clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaption)
         End If
 
-        If dctThemeFunctions.TryGetValue("plot.title", clsPlotElementTitle) Then
+        If dctThemeFunctions.TryGetValue("title", clsPlotElementTitle) Then
             clsPlotElementTitle.AddParameter("size", 20)
-            clsThemeFunction.AddParameter("title", clsRFunctionParameter:=clsPlotElementTitle)
+            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitle)
         End If
 
         If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitle) Then
@@ -697,12 +697,10 @@ Public Class sdgPlots
 
         If dctThemeFunctions.TryGetValue("tag", clsPlotElementTag) Then
             clsPlotElementTag.AddParameter("size", 15)
-            clsThemeFunction.AddParameter("plot.tag", clsRFunctionParameter:=clsPlotElementTag)
         End If
 
         If dctThemeFunctions.TryGetValue("colour", clsPlotLegendTitle) Then
             clsPlotLegendTitle.AddParameter("size", 18)
-            clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitle)
         End If
 
         If clsFacetFunction.ContainsParameter("facets") Then
@@ -801,10 +799,10 @@ Public Class sdgPlots
         ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'labels
-        ucrNudTitleSize.SetRCode(clsPlotElementTitle, bReset, bCloneIfNeeded:=True)
-        ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bReset, bCloneIfNeeded:=True)
-        ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bReset, bCloneIfNeeded:=True)
         If bReset Then
+            ucrNudTitleSize.SetRCode(clsPlotElementTitle, bReset, bCloneIfNeeded:=True)
+            ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitle, bReset, bCloneIfNeeded:=True)
+            ucrNudCaptionSize.SetRCode(clsPlotElementCaption, bReset, bCloneIfNeeded:=True)
             ucrNudLegendSize.SetRCode(clsPlotLegendTitle, bReset, bCloneIfNeeded:=True)
             ucrNudTagSize.SetRCode(clsPlotElementTag, bReset, bCloneIfNeeded:=True)
         End If
@@ -1274,8 +1272,8 @@ Public Class sdgPlots
 
     Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputFillLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
         If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty AndAlso Not ucrInputFillLegend.IsEmpty Then
-            clsLabsFunction.AddParameter("colour", Chr(34) & "new_title" & Chr(34))
-            clsLabsFunction.AddParameter("fill", Chr(34) & "new_title" & Chr(34))
+            clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
+            clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputFillLegend.GetText & Chr(34))
             clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitle)
 
         Else
