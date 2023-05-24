@@ -584,7 +584,4 @@ Public Class dlgClimaticBoxPlot
         AddRemoveFacets()
     End Sub
 
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
-        AutoFill()
-    End Sub
 End Class
