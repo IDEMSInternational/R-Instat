@@ -146,7 +146,4 @@ Public Class dlgEdit
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlContentsChanged, ucrNewName.ControlContentsChanged, ucrInputRows.ControlContentsChanged
-
-    End Sub
 End Class
