@@ -69,6 +69,7 @@ Public Class dlgViewObjects
         dctTypes.Add("Tables", RObjectTypeLabel.Table)
         dctTypes.Add("Graphs", RObjectTypeLabel.Graph)
         dctTypes.Add("Models", RObjectTypeLabel.Model)
+        dctTypes.Add("Structured", RObjectTypeLabel.StructureLabel)
         ucrInputObjectType.SetItems(dctTypes)
         ucrInputObjectType.SetDropDownStyleAsNonEditable()
 
@@ -139,6 +140,7 @@ Public Class dlgViewObjects
         If Not ucrReceiverSelectedObject.IsEmpty AndAlso ucrSelectorForViewObject.lstAvailableVariable.FindItemWithText(ucrReceiverSelectedObject.GetVariableNames(False), True, 0, False) Is Nothing Then
             ucrReceiverSelectedObject.SetText("")
         End If
+
         If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
             ucrReceiverSelectedObject.strSelectorHeading = key
             ucrReceiverSelectedObject.SetItemType(value.Replace(Chr(34), ""))
