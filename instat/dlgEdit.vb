@@ -22,17 +22,15 @@ Imports unvell.ReoGrid.Events
 
 Public Class dlgEdit
 
-    Private _strDataFrame As String
+
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsReplaceValue As New RFunction
-    Private strNewValue As String = ""
     Private strRowText As String = ""
     Private StrRowIndex As String = " "
     Private bUseSelectedColumn As Boolean = False
-    Private strColumnName As String = ""
     Private strSelectedColumn As String = ""
-    Private strSelectedRow As String = " "
+
 
     Private Sub dlgEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
