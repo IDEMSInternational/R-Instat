@@ -64,7 +64,7 @@ Partial Class dlgEdit
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
-        Me.ucrReceiverName.Size = New System.Drawing.Size(186, 21)
+        Me.ucrReceiverName.Size = New System.Drawing.Size(120, 21)
         Me.ucrReceiverName.strNcFilePath = ""
         Me.ucrReceiverName.TabIndex = 18
         Me.ucrReceiverName.ucrSelector = Nothing
@@ -111,7 +111,7 @@ Partial Class dlgEdit
         Me.ucrInputSelect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSelect.GetSetSelectedIndex = -1
         Me.ucrInputSelect.IsReadOnly = False
-        Me.ucrInputSelect.Location = New System.Drawing.Point(237, 236)
+        Me.ucrInputSelect.Location = New System.Drawing.Point(237, 209)
         Me.ucrInputSelect.Name = "ucrInputSelect"
         Me.ucrInputSelect.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputSelect.TabIndex = 23
@@ -144,7 +144,7 @@ Partial Class dlgEdit
         Me.ucrReceiverRow.IsReadOnly = False
         Me.ucrReceiverRow.Location = New System.Drawing.Point(237, 98)
         Me.ucrReceiverRow.Name = "ucrReceiverRow"
-        Me.ucrReceiverRow.Size = New System.Drawing.Size(186, 21)
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(120, 21)
         Me.ucrReceiverRow.TabIndex = 26
         '
         'dlgEdit
@@ -152,6 +152,7 @@ Partial Class dlgEdit
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(433, 345)
+        Me.Controls.Add(Me.ucrNewName)
         Me.Controls.Add(Me.ucrReceiverRow)
         Me.Controls.Add(Me.ucrSelectValues)
         Me.Controls.Add(Me.lblRow)
@@ -160,7 +161,6 @@ Partial Class dlgEdit
         Me.Controls.Add(Me.lblCurrentRow)
         Me.Controls.Add(Me.ucrRowNumber)
         Me.Controls.Add(Me.ucrReceiverName)
-        Me.Controls.Add(Me.ucrNewName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblCurrentName)
         Me.Name = "dlgEdit"
