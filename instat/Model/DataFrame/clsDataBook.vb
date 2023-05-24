@@ -119,12 +119,9 @@ Public Class clsDataBook
             _lstDataFrames.Clear()
             _lstAllDataFrames.Clear()
             _clsDataFrameMetaData = New clsDataFrameMetaData(_RLink)
-            Exit Sub
-        End If
-
-        'else if the R Instat object data has changed
-        'refresh data frames data and metadata 
-        If HasDataChanged() Then
+        ElseIf HasDataChanged() Then
+            'else if the R Instat object data has changed
+            'refresh data frames data and metadata 
             RefreshDataFrames()
             _clsDataFrameMetaData.RefreshData()
         End If
