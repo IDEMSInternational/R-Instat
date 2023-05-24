@@ -235,12 +235,13 @@ Public Class dlgBarAndPieChart
         ucrPnlPolar.AddRadioButton(rdoDonut)
 
         ucrInputBarChartPositions.SetParameter(New RParameter("position", 0))
-        dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
-        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
+        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
+        dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
+        dctPositionPairs.Add("Fill in reverse", "position_fill(reverse = TRUE)")
         ucrInputBarChartPositions.SetItems(dctPositionPairs)
         ucrInputBarChartPositions.SetDropDownStyleAsNonEditable()
         ucrInputBarChartPositions.SetRDefault(Chr(34) & "stack" & Chr(34))
@@ -253,7 +254,7 @@ Public Class dlgBarAndPieChart
 
         ucrInputLabelPosition.SetParameter(New RParameter("vjust", 2))
         dctLabelPositions.Add("Out", "-0.25")
-        dctLabelPositions.Add("In", "5")
+        dctLabelPositions.Add("In", "1.5")
         ucrInputLabelPosition.SetItems(dctLabelPositions)
         ucrInputLabelPosition.SetDropDownStyleAsNonEditable()
 
@@ -322,7 +323,7 @@ Public Class dlgBarAndPieChart
         ucrChkReorderValue.AddFunctionNamesCondition(False, "reorder", False)
         ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkReorderFrequency.SetText("Reorder Frequency")
+        ucrChkReorderFrequency.SetText("Reorder")
         ucrChkReorderFrequency.SetParameter(New RParameter("Checked", iNewPosition:=0))
         ucrChkReorderFrequency.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkReorderFrequency.AddToLinkedControls(ucrInputReorderX, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -788,8 +789,8 @@ Public Class dlgBarAndPieChart
         Dim strChangedTextValue As String = ucrInputAddReorder.GetText()
         Dim strChangeTextReorder As String = ucrInputReorderValue.GetText()
         If rdoFrequency.Checked Then
-            clsForecatsInfreq.AddParameter("f", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
-            clsForecatsInfreqValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+            clsForecatsInfreq.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+            clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrReceiverByFactor.GetVariableNames(False) & ")", iPosition:=0)
             Select Case strChangedTextFreq
                 Case strAscending
                     clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
@@ -1006,16 +1007,18 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetGeomTextOptions()
-        If ucrInputBarChartPositions.GetText = "Dodge" Then
-            clsGeomTextFunction.AddParameter("position", "position_dodge(width = 0.9)", iPosition:=2)
+        If ucrInputBarChartPositions.GetText = "Stack" Then
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Fill" Then
             clsGeomTextFunction.AddParameter("position", "position_fill(vjust = 0.9)", iPosition:=2)
-        ElseIf ucrInputBarChartPositions.GetText = "Stack" Then
-            clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Dodge" Then
+            clsGeomTextFunction.AddParameter("position", "position_dodge(width = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Jitter" Then
             clsGeomTextFunction.AddParameter("position", "position_jitter(width = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
             clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.5, reverse = TRUE)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Fill in reverse" Then
+            clsGeomTextFunction.AddParameter("position", "position_fill(reverse = TRUE)", iPosition:=2)
         Else
             clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
         End If
@@ -1049,4 +1052,5 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
+
 End Class

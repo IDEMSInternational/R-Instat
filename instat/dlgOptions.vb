@@ -89,12 +89,11 @@ Public Class dlgOptions
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
 
-        ucrChkMaximumOutputsHeight.SetText("Set maximum height for outputs")
-        ucrChkMaximumOutputsHeight.AddToLinkedControls(ucrNudMaximumOutputsHeight, {True})
-        ucrNudMaximumOutputsHeight.Maximum = 1000
-        'todo. temporarily disabled 
-        ucrChkMaximumOutputsHeight.Visible = False
-        ucrNudMaximumOutputsHeight.Visible = False
+        ucrChkMaxOutputsHeight.Checked = False
+        ucrChkMaxOutputsHeight.SetText("Set maximum height for outputs")
+        ucrNudMaxOutputsHeight.Visible = False
+        ucrNudMaxOutputsHeight.Minimum = 0
+        ucrNudMaxOutputsHeight.Maximum = 1000
 
         SetVisibleLanButton()
     End Sub
@@ -128,11 +127,9 @@ Public Class dlgOptions
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
 
-        'todo. temporarily disabled
-        'ucrChkMaximumOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > 0
-        'ucrNudMaximumOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > 0,
-        '                                      frmMain.clsInstatOptions.iMaxOutputsHeight,
-        '                                      clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+        'maximum heights for output
+        ucrChkMaxOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > -1
+        ucrNudMaxOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > -1, frmMain.clsInstatOptions.iMaxOutputsHeight, clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -192,9 +189,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
-        'todo. temporarily disabled
-        'frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaximumOutputsHeight.Checked,
-        '                                                 ucrNudMaximumOutputsHeight.Value, -1))
+        frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaxOutputsHeight.Checked, ucrNudMaxOutputsHeight.Value, -1))
+
+        frmMain.clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub SetView()
@@ -305,7 +302,7 @@ Public Class dlgOptions
         End Select
         ApplyEnabled(True)
     End Sub
-  
+
     Private Sub cmdScriptChange_Click(sender As Object, e As EventArgs) Handles cmdCommandFormat.Click
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
@@ -360,7 +357,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
@@ -380,6 +377,10 @@ Public Class dlgOptions
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "336")
+    End Sub
+
+    Private Sub ucrChkMaxOutputHeight_ControlValueChanged() Handles ucrChkMaxOutputsHeight.ControlValueChanged
+        ucrNudMaxOutputsHeight.Visible = ucrChkMaxOutputsHeight.Checked
     End Sub
 
     Private Sub ucrChkAutoSave_ControlValueChanged() Handles ucrChkAutoSave.ControlValueChanged
@@ -424,7 +425,7 @@ Public Class dlgOptions
         ApplyEnabled(True)
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged
 
     End Sub
 

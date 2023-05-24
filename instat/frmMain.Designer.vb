@@ -987,11 +987,9 @@ Partial Class frmMain
         '
         'mnuDescribeUseTable
         '
-        Me.mnuDescribeUseTable.Enabled = False
         Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
         Me.mnuDescribeUseTable.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeUseTable.Text = "Use Table..."
-        Me.mnuDescribeUseTable.Visible = False
         '
         'mnuDescribeUseGraph
         '
