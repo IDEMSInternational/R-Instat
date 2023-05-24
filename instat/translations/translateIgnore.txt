@@ -102,3 +102,12 @@ dlgInventoryPlot_ucrInputFacetBy%
 
 # Shows a dynamically created range of page numbers
 %sdgWindowNumber_lblPages
+
+# Contain variable dates
+sdgOpenNetCDF_tbNetCDF_tbSubset_dtpMinT%
+sdgOpenNetCDF_tbNetCDF_tbSubset_dtpMaxT%
+
+# Mathematical symbols
+sdgConstructRegexExpression_grpSymbols_cmdNumbers%
+sdgCalculationsSummmary_tbSummaryCalcs_tbMain_ucrCalcSummary_grpSymbols_cmdNumbers%
+dlgCalculator_ucrCalc_grpSymbols_cmdNumbers%
