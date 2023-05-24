@@ -23,12 +23,16 @@ Partial Class dlgEdit
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrInputRows = New instat.ucrInputFactorLevels()
-        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
         Me.ucrNewName = New instat.ucrInputTextBox()
         Me.ucrReceiverName = New instat.ucrReceiverSingle()
-        Me.ucrRowNumber = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectValues = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblColumns = New System.Windows.Forms.Label()
+        Me.lblRows = New System.Windows.Forms.Label()
+        Me.lblCurrentValue = New System.Windows.Forms.Label()
+        Me.lblNewValue = New System.Windows.Forms.Label()
+        Me.ucrReceiverRow = New instat.ucrInputTextBox()
+        Me.ucrRowNumber = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrInputRows
@@ -41,19 +45,6 @@ Partial Class dlgEdit
         Me.ucrInputRows.Name = "ucrInputRows"
         Me.ucrInputRows.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputRows.TabIndex = 92
-        '
-        'ucrReceiverRow
-        '
-        Me.ucrReceiverRow.AutoSize = True
-        Me.ucrReceiverRow.frmParent = Me
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(249, 162)
-        Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRow.Name = "ucrReceiverRow"
-        Me.ucrReceiverRow.Selector = Nothing
-        Me.ucrReceiverRow.Size = New System.Drawing.Size(148, 21)
-        Me.ucrReceiverRow.strNcFilePath = ""
-        Me.ucrReceiverRow.TabIndex = 16
-        Me.ucrReceiverRow.ucrSelector = Nothing
         '
         'ucrNewName
         '
@@ -79,17 +70,6 @@ Partial Class dlgEdit
         Me.ucrReceiverName.TabIndex = 14
         Me.ucrReceiverName.ucrSelector = Nothing
         '
-        'ucrRowNumber
-        '
-        Me.ucrRowNumber.AddQuotesIfUnrecognised = True
-        Me.ucrRowNumber.AutoSize = True
-        Me.ucrRowNumber.IsMultiline = False
-        Me.ucrRowNumber.IsReadOnly = False
-        Me.ucrRowNumber.Location = New System.Drawing.Point(249, 109)
-        Me.ucrRowNumber.Name = "ucrRowNumber"
-        Me.ucrRowNumber.Size = New System.Drawing.Size(148, 21)
-        Me.ucrRowNumber.TabIndex = 15
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
@@ -111,16 +91,80 @@ Partial Class dlgEdit
         Me.ucrSelectValues.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectValues.TabIndex = 4
         '
+        'lblColumns
+        '
+        Me.lblColumns.Location = New System.Drawing.Point(246, 39)
+        Me.lblColumns.Name = "lblColumns"
+        Me.lblColumns.Size = New System.Drawing.Size(100, 13)
+        Me.lblColumns.TabIndex = 93
+        Me.lblColumns.Tag = "New_Name"
+        Me.lblColumns.Text = "Column:"
+        '
+        'lblRows
+        '
+        Me.lblRows.Location = New System.Drawing.Point(246, 92)
+        Me.lblRows.Name = "lblRows"
+        Me.lblRows.Size = New System.Drawing.Size(100, 14)
+        Me.lblRows.TabIndex = 94
+        Me.lblRows.Tag = "New_Name"
+        Me.lblRows.Text = "Rows:"
+        '
+        'lblCurrentValue
+        '
+        Me.lblCurrentValue.Location = New System.Drawing.Point(249, 144)
+        Me.lblCurrentValue.Name = "lblCurrentValue"
+        Me.lblCurrentValue.Size = New System.Drawing.Size(100, 15)
+        Me.lblCurrentValue.TabIndex = 95
+        Me.lblCurrentValue.Tag = "Current_Value"
+        Me.lblCurrentValue.Text = "Current Value:"
+        '
+        'lblNewValue
+        '
+        Me.lblNewValue.Location = New System.Drawing.Point(247, 189)
+        Me.lblNewValue.Name = "lblNewValue"
+        Me.lblNewValue.Size = New System.Drawing.Size(100, 14)
+        Me.lblNewValue.TabIndex = 96
+        Me.lblNewValue.Tag = "New_Value"
+        Me.lblNewValue.Text = "New Value:"
+        '
+        'ucrReceiverRow
+        '
+        Me.ucrReceiverRow.AddQuotesIfUnrecognised = True
+        Me.ucrReceiverRow.AutoSize = True
+        Me.ucrReceiverRow.IsMultiline = False
+        Me.ucrReceiverRow.IsReadOnly = False
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(249, 109)
+        Me.ucrReceiverRow.Name = "ucrReceiverRow"
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(148, 21)
+        Me.ucrReceiverRow.TabIndex = 97
+        '
+        'ucrRowNumber
+        '
+        Me.ucrRowNumber.AutoSize = True
+        Me.ucrRowNumber.frmParent = Me
+        Me.ucrRowNumber.Location = New System.Drawing.Point(249, 163)
+        Me.ucrRowNumber.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrRowNumber.Name = "ucrRowNumber"
+        Me.ucrRowNumber.Selector = Nothing
+        Me.ucrRowNumber.Size = New System.Drawing.Size(148, 21)
+        Me.ucrRowNumber.strNcFilePath = ""
+        Me.ucrRowNumber.TabIndex = 98
+        Me.ucrRowNumber.ucrSelector = Nothing
+        '
         'dlgEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(432, 390)
-        Me.Controls.Add(Me.ucrInputRows)
+        Me.Controls.Add(Me.ucrRowNumber)
         Me.Controls.Add(Me.ucrReceiverRow)
+        Me.Controls.Add(Me.lblNewValue)
+        Me.Controls.Add(Me.lblCurrentValue)
+        Me.Controls.Add(Me.lblRows)
+        Me.Controls.Add(Me.lblColumns)
+        Me.Controls.Add(Me.ucrInputRows)
         Me.Controls.Add(Me.ucrNewName)
         Me.Controls.Add(Me.ucrReceiverName)
-        Me.Controls.Add(Me.ucrRowNumber)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectValues)
         Me.MaximizeBox = False
@@ -136,8 +180,12 @@ Partial Class dlgEdit
     Friend WithEvents ucrSelectValues As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverName As ucrReceiverSingle
-    Friend WithEvents ucrReceiverRow As ucrReceiverSingle
     Friend WithEvents ucrNewName As ucrInputTextBox
-    Friend WithEvents ucrRowNumber As ucrInputTextBox
     Friend WithEvents ucrInputRows As ucrInputFactorLevels
+    Friend WithEvents lblNewValue As Label
+    Friend WithEvents lblCurrentValue As Label
+    Friend WithEvents lblRows As Label
+    Friend WithEvents lblColumns As Label
+    Friend WithEvents ucrRowNumber As ucrReceiverSingle
+    Friend WithEvents ucrReceiverRow As ucrInputTextBox
 End Class
