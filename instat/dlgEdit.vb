@@ -89,11 +89,7 @@ Public Class dlgEdit
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrNewName.IsEmpty OrElse Not ucrInputRows.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrNewName.IsEmpty OrElse Not ucrInputRows.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
