@@ -200,7 +200,7 @@ Public Class sdgPlots
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
         ucrInputTag.SetParameter(New RParameter("tag"))
         ucrInputLegendTitle.SetParameter(New RParameter("colour"))
-        ucrInputFillLegend.SetParameter(New RParameter("fill"))
+        'ucrInputFillLegend.SetParameter(New RParameter("fill"))
 
         ucrNudTitleSize.SetParameter(New RParameter("size"))
         'ucrNudTitleSize.SetRDefault(20)
@@ -231,7 +231,7 @@ Public Class sdgPlots
 
         ucrChkNewLegend.SetText("New Legend ")
         ucrChkNewLegend.AddToLinkedControls(ucrInputLegendTitle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
-        ucrChkNewLegend.AddToLinkedControls({ucrInputFillLegend}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
+        'ucrChkNewLegend.AddToLinkedControls({ucrInputFillLegend}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
         ucrChkNewLegend.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNewLegend.AddParameterPresentCondition(True, {"colour", "fill"}, True)
         ucrChkNewLegend.AddParameterPresentCondition(False, {"colour", "fill"}, False)
@@ -729,7 +729,7 @@ Public Class sdgPlots
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputFillLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        'ucrInputFillLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
@@ -1271,9 +1271,9 @@ Public Class sdgPlots
 
 
     Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputFillLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
-        If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty AndAlso Not ucrInputFillLegend.IsEmpty Then
+        If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty Then
             clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
-            clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputFillLegend.GetText & Chr(34))
+            clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitle)
 
         Else
