@@ -27,7 +27,7 @@ Public Class dlgEdit
     Private bReset As Boolean = True
     Private clsReplaceValue As New RFunction
     Private strRowText As String = ""
-    Private StrRowIndex As String = " "
+    Private strRowIndex As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
 
