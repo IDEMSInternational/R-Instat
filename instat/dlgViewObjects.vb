@@ -134,16 +134,14 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub ucrInputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputObjectType.ControlValueChanged
-        Dim key As String = dctTypes.Keys(ucrInputObjectType.cboInput.SelectedIndex)
-        Dim value As String = ""
-
+        'Checks whether the item in the receiver is contained in the selector. I.e when a selected object is renamed, the receiver clears.
         If Not ucrReceiverSelectedObject.IsEmpty AndAlso ucrSelectorForViewObject.lstAvailableVariable.FindItemWithText(ucrReceiverSelectedObject.GetVariableNames(False), True, 0, False) Is Nothing Then
             ucrReceiverSelectedObject.SetText("")
         End If
 
-        If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
-            ucrReceiverSelectedObject.strSelectorHeading = key
-            ucrReceiverSelectedObject.SetItemType(value.Replace(Chr(34), ""))
+        If dctTypes.ContainsKey(ucrInputObjectType.cboInput.Text) Then
+            ucrReceiverSelectedObject.strSelectorHeading = ucrInputObjectType.cboInput.Text
+            ucrReceiverSelectedObject.SetItemType(dctTypes.Item(ucrInputObjectType.cboInput.Text).Replace(Chr(34), ""))
         End If
     End Sub
 End Class

@@ -57,9 +57,8 @@ Public Class dlgDeleteObjects
         dctTypes.Add("Tables", RObjectTypeLabel.Table)
         dctTypes.Add("Graphs", RObjectTypeLabel.Graph)
         dctTypes.Add("Models", RObjectTypeLabel.Model)
-        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
-        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
-        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        'dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
+        'dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
         ucrInputComboType.SetItems(dctTypes)
         ucrInputComboType.SetDropDownStyleAsNonEditable()
 
