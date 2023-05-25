@@ -31,8 +31,8 @@ Partial Class dlgEdit
         Me.lblRows = New System.Windows.Forms.Label()
         Me.lblCurrentValue = New System.Windows.Forms.Label()
         Me.lblNewValue = New System.Windows.Forms.Label()
-        Me.ucrReceiverRow = New instat.ucrInputTextBox()
-        Me.ucrRowNumber = New instat.ucrReceiverSingle()
+        Me.ucrRowNumber = New instat.ucrInputTextBox()
+        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'ucrInputRows
@@ -127,29 +127,29 @@ Partial Class dlgEdit
         Me.lblNewValue.Tag = "New_Value"
         Me.lblNewValue.Text = "New Value:"
         '
-        'ucrReceiverRow
-        '
-        Me.ucrReceiverRow.AddQuotesIfUnrecognised = True
-        Me.ucrReceiverRow.AutoSize = True
-        Me.ucrReceiverRow.IsMultiline = False
-        Me.ucrReceiverRow.IsReadOnly = False
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(242, 109)
-        Me.ucrReceiverRow.Name = "ucrReceiverRow"
-        Me.ucrReceiverRow.Size = New System.Drawing.Size(148, 21)
-        Me.ucrReceiverRow.TabIndex = 97
-        '
         'ucrRowNumber
         '
+        Me.ucrRowNumber.AddQuotesIfUnrecognised = True
         Me.ucrRowNumber.AutoSize = True
-        Me.ucrRowNumber.frmParent = Me
-        Me.ucrRowNumber.Location = New System.Drawing.Point(242, 163)
-        Me.ucrRowNumber.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrRowNumber.IsMultiline = False
+        Me.ucrRowNumber.IsReadOnly = False
+        Me.ucrRowNumber.Location = New System.Drawing.Point(242, 109)
         Me.ucrRowNumber.Name = "ucrRowNumber"
-        Me.ucrRowNumber.Selector = Nothing
-        Me.ucrRowNumber.Size = New System.Drawing.Size(231, 21)
-        Me.ucrRowNumber.strNcFilePath = ""
-        Me.ucrRowNumber.TabIndex = 98
-        Me.ucrRowNumber.ucrSelector = Nothing
+        Me.ucrRowNumber.Size = New System.Drawing.Size(148, 21)
+        Me.ucrRowNumber.TabIndex = 97
+        '
+        'ucrReceiverRow
+        '
+        Me.ucrReceiverRow.AutoSize = True
+        Me.ucrReceiverRow.frmParent = Me
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(242, 163)
+        Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRow.Name = "ucrReceiverRow"
+        Me.ucrReceiverRow.Selector = Nothing
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(231, 21)
+        Me.ucrReceiverRow.strNcFilePath = ""
+        Me.ucrReceiverRow.TabIndex = 98
+        Me.ucrReceiverRow.ucrSelector = Nothing
         '
         'dlgEdit
         '
@@ -157,8 +157,8 @@ Partial Class dlgEdit
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(482, 320)
         Me.Controls.Add(Me.ucrNewName)
-        Me.Controls.Add(Me.ucrRowNumber)
         Me.Controls.Add(Me.ucrReceiverRow)
+        Me.Controls.Add(Me.ucrRowNumber)
         Me.Controls.Add(Me.lblNewValue)
         Me.Controls.Add(Me.lblCurrentValue)
         Me.Controls.Add(Me.lblRows)
@@ -186,6 +186,6 @@ Partial Class dlgEdit
     Friend WithEvents lblCurrentValue As Label
     Friend WithEvents lblRows As Label
     Friend WithEvents lblColumns As Label
-    Friend WithEvents ucrRowNumber As ucrReceiverSingle
-    Friend WithEvents ucrReceiverRow As ucrInputTextBox
+    Friend WithEvents ucrReceiverRow As ucrReceiverSingle
+    Friend WithEvents ucrRowNumber As ucrInputTextBox
 End Class

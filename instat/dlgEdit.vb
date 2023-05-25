@@ -19,10 +19,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
-
 Public Class dlgEdit
-
-
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsReplaceValue As New RFunction
@@ -77,7 +74,7 @@ Public Class dlgEdit
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
-        clsReplaceValue.AddParameter("rows", Chr(34) & StrRowIndex & Chr(34), iPosition:=2)
+        clsReplaceValue.AddParameter("rows", Chr(34) & strRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
 
     End Sub
@@ -100,20 +97,20 @@ Public Class dlgEdit
 
     Private Sub SetSelectedColumn()
         ucrReceiverName.Add(strSelectedColumn)
-        ucrRowNumber.Add(strRowText)
-        ucrReceiverRow.SetName(StrRowIndex)
+        ucrReceiverRow.Add(strRowText)
+        ucrRowNumber.SetName(strRowIndex)
         ucrNewName.SetName(strRowText)
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrRowNumber.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Public Sub SetCurrentColumn(strColumn As String, strRowNumber As String, strIRow As String)
+    Public Sub SetCurrentColumn(strColumn As String, strRowContents As String, strRowNumber As String)
         strSelectedColumn = strColumn
-        strRowText = strRowNumber
-        StrRowIndex = strIRow
+        strRowText = strRowContents
+        strRowIndex = strRowNumber
         bUseSelectedColumn = True
     End Sub
 
