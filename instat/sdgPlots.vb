@@ -200,7 +200,6 @@ Public Class sdgPlots
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
         ucrInputTag.SetParameter(New RParameter("tag"))
         ucrInputLegendTitle.SetParameter(New RParameter("colour"))
-        'ucrInputFillLegend.SetParameter(New RParameter("fill"))
 
         ucrNudTitleSize.SetParameter(New RParameter("size"))
         'ucrNudTitleSize.SetRDefault(20)
@@ -231,14 +230,12 @@ Public Class sdgPlots
 
         ucrChkNewLegend.SetText("New Legend ")
         ucrChkNewLegend.AddToLinkedControls(ucrInputLegendTitle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
-        'ucrChkNewLegend.AddToLinkedControls({ucrInputFillLegend}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
         ucrChkNewLegend.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNewLegend.AddParameterPresentCondition(True, {"colour", "fill"}, True)
         ucrChkNewLegend.AddParameterPresentCondition(False, {"colour", "fill"}, False)
 
         ucrInputTag.SetLinkedDisplayControl(lblTag)
         ucrInputLegendTitle.SetLinkedDisplayControl(lblLegendTitle)
-        ucrInputFillLegend.SetLinkedDisplayControl(lblFillLegend)
         ucrNudTagSize.SetLinkedDisplayControl(lblTagSize)
         ucrNudLegendSize.SetLinkedDisplayControl(lblLegendSize)
 
@@ -729,7 +726,6 @@ Public Class sdgPlots
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputFillLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
@@ -1017,7 +1013,7 @@ Public Class sdgPlots
 
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
-            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputFillLegend.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
+            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
                 clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
             Else
                 clsBaseOperator.RemoveParameterByName("labs")
@@ -1026,7 +1022,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
-        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrInputFillLegend.ControlValueChanged
+        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
@@ -1270,7 +1266,7 @@ Public Class sdgPlots
     End Sub
 
 
-    Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputFillLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
+    Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
         If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty Then
             clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
