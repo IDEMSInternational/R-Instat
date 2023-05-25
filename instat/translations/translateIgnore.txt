@@ -99,3 +99,15 @@ dlgInventoryPlot_ucrInputFacetBy%
 # Fixes issue #8275
 # TODO If by 2024, this line has not caused any problems, then delete ucrInput controls specified above (already covered by this pattern)
 %_ucrInput%
+
+# Shows a dynamically created range of page numbers
+%sdgWindowNumber_lblPages
+
+# Contain variable dates
+sdgOpenNetCDF_tbNetCDF_tbSubset_dtpMinT%
+sdgOpenNetCDF_tbNetCDF_tbSubset_dtpMaxT%
+
+# Mathematical symbols
+sdgConstructRegexExpression_grpSymbols_cmdNumbers%
+sdgCalculationsSummmary_tbSummaryCalcs_tbMain_ucrCalcSummary_grpSymbols_cmdNumbers%
+dlgCalculator_ucrCalc_grpSymbols_cmdNumbers%
