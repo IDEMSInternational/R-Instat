@@ -226,7 +226,6 @@ Public MustInherit Class ucrReoGrid
         Return ""
     End Function
 
-
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
         'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
         'changes. This would then override the back color set in R
