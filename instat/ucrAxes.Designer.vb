@@ -380,9 +380,9 @@ Partial Class ucrAxes
         Me.ucrInputRelaceMissingvalues.AutoSize = True
         Me.ucrInputRelaceMissingvalues.IsMultiline = False
         Me.ucrInputRelaceMissingvalues.IsReadOnly = False
-        Me.ucrInputRelaceMissingvalues.Location = New System.Drawing.Point(112, 103)
+        Me.ucrInputRelaceMissingvalues.Location = New System.Drawing.Point(191, 103)
         Me.ucrInputRelaceMissingvalues.Name = "ucrInputRelaceMissingvalues"
-        Me.ucrInputRelaceMissingvalues.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputRelaceMissingvalues.Size = New System.Drawing.Size(78, 22)
         Me.ucrInputRelaceMissingvalues.TabIndex = 27
         '
         'ucrInputExpand
@@ -391,9 +391,9 @@ Partial Class ucrAxes
         Me.ucrInputExpand.AutoSize = True
         Me.ucrInputExpand.IsMultiline = False
         Me.ucrInputExpand.IsReadOnly = False
-        Me.ucrInputExpand.Location = New System.Drawing.Point(112, 187)
+        Me.ucrInputExpand.Location = New System.Drawing.Point(191, 187)
         Me.ucrInputExpand.Name = "ucrInputExpand"
-        Me.ucrInputExpand.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputExpand.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputExpand.TabIndex = 27
         '
         'ucrInputTransformation
@@ -402,9 +402,9 @@ Partial Class ucrAxes
         Me.ucrInputTransformation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTransformation.GetSetSelectedIndex = -1
         Me.ucrInputTransformation.IsReadOnly = False
-        Me.ucrInputTransformation.Location = New System.Drawing.Point(112, 159)
+        Me.ucrInputTransformation.Location = New System.Drawing.Point(191, 159)
         Me.ucrInputTransformation.Name = "ucrInputTransformation"
-        Me.ucrInputTransformation.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputTransformation.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputTransformation.TabIndex = 26
         '
         'ucrInputPosition
@@ -413,9 +413,9 @@ Partial Class ucrAxes
         Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(112, 131)
+        Me.ucrInputPosition.Location = New System.Drawing.Point(191, 131)
         Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputPosition.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputPosition.TabIndex = 26
         '
         'ucrChkExpand
@@ -424,7 +424,7 @@ Partial Class ucrAxes
         Me.ucrChkExpand.Checked = False
         Me.ucrChkExpand.Location = New System.Drawing.Point(6, 187)
         Me.ucrChkExpand.Name = "ucrChkExpand"
-        Me.ucrChkExpand.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkExpand.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkExpand.TabIndex = 23
         '
         'ucrChkTransformation
@@ -433,7 +433,7 @@ Partial Class ucrAxes
         Me.ucrChkTransformation.Checked = False
         Me.ucrChkTransformation.Location = New System.Drawing.Point(6, 159)
         Me.ucrChkTransformation.Name = "ucrChkTransformation"
-        Me.ucrChkTransformation.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkTransformation.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkTransformation.TabIndex = 23
         '
         'ucrChkPosition
@@ -442,7 +442,7 @@ Partial Class ucrAxes
         Me.ucrChkPosition.Checked = False
         Me.ucrChkPosition.Location = New System.Drawing.Point(6, 131)
         Me.ucrChkPosition.Name = "ucrChkPosition"
-        Me.ucrChkPosition.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPosition.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkPosition.TabIndex = 23
         '
         'ucrChkNaValue
@@ -451,7 +451,7 @@ Partial Class ucrAxes
         Me.ucrChkNaValue.Checked = False
         Me.ucrChkNaValue.Location = New System.Drawing.Point(6, 103)
         Me.ucrChkNaValue.Name = "ucrChkNaValue"
-        Me.ucrChkNaValue.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkNaValue.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkNaValue.TabIndex = 23
         '
         'ucrInputUpperLimit
@@ -807,10 +807,10 @@ Partial Class ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpMinorBreaks)
         Me.Controls.Add(Me.ucrInputAxisType)
-        Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMajorBreaks)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"

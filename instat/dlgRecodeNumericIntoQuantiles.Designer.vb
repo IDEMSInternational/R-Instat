@@ -85,7 +85,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 199)
         Me.ucrNewColumnName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
-        Me.ucrNewColumnName.Size = New System.Drawing.Size(253, 24)
+        Me.ucrNewColumnName.Size = New System.Drawing.Size(393, 24)
         Me.ucrNewColumnName.TabIndex = 7
         '
         'ucrNudQuantileAlgorithm
@@ -133,7 +133,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrSelectorRecodeNumeric
