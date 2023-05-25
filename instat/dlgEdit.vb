@@ -119,11 +119,7 @@ Public Class dlgEdit
 
     Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrInputRows.ControlValueChanged
         If Not ucrReceiverName.IsEmpty Then
-            If Not ucrInputRows.IsEmpty Then
-                ucrNewName.Visible = False
-            Else
-                ucrNewName.Visible = True
-            End If
+            ucrNewName.Visible = ucrInputRows.IsEmpty
         End If
     End Sub
 
