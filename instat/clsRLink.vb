@@ -150,98 +150,68 @@ Public Class RLink
         clsOutputLogger = outputLogger
     End Sub
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Initialises the connection with the R environment:
+
+    ''' <summary>
+    ''' Initialises the connection with the R environment:
     ''' <list type="bullet">
     '''     <item><description>
-    '''             Ensures that a suitable version of R is installed
-    '''     </description></item><item><description>
-    '''             Sets the necessary environment variables
-    '''     </description></item><item><description>
     '''             Creates and initializes the REngine (which enacpsulates the R environment)
-    '''     </description></item><item><description>
-    '''             Sets the working directory
-    '''     </description></item><item><description>
-    '''             Loads the R packages, and displays information about any missing packages 
     '''     </description></item>
-    ''' </list></summary>
-    '''
-    ''' <param name="strScript">        (Optional) The R setup script to execute. If "" then 
-    '''                                 a default setup script is used. </param>
-    ''' <param name="iCallType">        (Optional) How to display the output from the setup script:
-    ''' <list type="bullet">
-    '''     <item>
-    '''        <description>0 Executes <paramref name="strScript"/> and ignores the result.</description>
-    '''     </item>
-    '''     <item>
-    '''        <description>1 Executes <paramref name="strScript"/>, stores the result in a
-    '''        temporary R variable, and then outputs the variable's value as text.</description>
-    '''     </item>
-    '''     <item>
-    '''        <description>2 Executes <paramref name="strScript"/> and if successful shows the
-    '''        result as text.</description>
-    '''     </item>
-    '''     <item>
-    '''        <description>3 Executes <paramref name="strScript"/> and if successful shows the
-    '''        result as a graph.</description>
-    '''     </item>
-    '''     <item>
-    '''        <description>4 Executes <paramref name="strScript"/>, stores the result in a
-    '''        temporary R variable, and then outputs the variable's value in a web browser.</description>
-    '''     </item>
+    '''     <item><description>
+    '''             Ensures that a suitable version of R is installed
+    '''     </description></item>
     ''' </list>
-    '''                                 Note: If a script line contains "$get_graphs" then call 
-    '''                                 type is set to 3 just for that line.</param>
-    ''' <param name="strComment">       (Optional) The comment to display before the first line of
-    '''                                 <paramref name="strScript"/>.
-    '''                                 If <paramref name="strScript"/> is not defined then a
-    '''                                 default comment is used. </param>
-    ''' <param name="bSeparateThread">  (Optional) If true then execute the R script in a new 
-    '''                                 thread. </param>
-    '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True) As Boolean
-        Dim strMissingPackages() As String
-        Dim expTemp As SymbolicExpression
-        Dim strMajor As String = ""
-        Dim strMinor As String = ""
-        Dim iCurrentCallType As Integer
-        Dim bClose As Boolean = False
-        Dim strStaticPath = Path.GetFullPath("static")
-        Dim rHome = Path.Combine(strStaticPath, "R")
-        Dim cpuArchitectureFolder = "i386"
+    ''' </summary>
+    ''' <returns>True if it succeeds, false if it fails. </returns>
+    Public Function StartREngine() As Boolean
+        'reset "R engine initialised" flag
+        bREngineInitialised = False
 
         Try
-            ' Get R .NET to use bundled R in static folder
-            ' This static folder is added as a part of the install process as described in 
-            ' installer/Installer_Generation_Guide.md
-            ' 
-            If Environment.Is64BitProcess Then
-                cpuArchitectureFolder = "x64"
-            End If
-            Dim rPath = Path.Combine(rHome, "bin", cpuArchitectureFolder)
+            'Get R .NET to use bundled R in static folder
+            'This static folder is added as a part of the install process as described in 
+            'installer/Installer_Generation_Guide.md 
+            Dim rHome = Path.Combine(Path.GetFullPath("static"), "R")
+            Dim rPath As String = Path.Combine(rHome, "bin", If(Environment.Is64BitProcess, "x64", "i386"))
+
             Logger.Info("R Home: " & rHome)
             Logger.Info("R Path: " & rPath)
 
-            ' Use bundled R if included
             If Directory.Exists(rHome) And Directory.Exists(rPath) Then
+                'use bundled R if included
                 Logger.Info("Using bundled R")
                 REngine.SetEnvironmentVariables(rPath, rHome)
             Else
-                ' Use normal process for finding local R if bundled version not included
+                'use normal process for finding local R if bundled version not included
+                Logger.Info("Using installed R")
                 REngine.SetEnvironmentVariables()
             End If
 
+            'initialise R engine
             clsEngine = REngine.GetInstance()
             clsEngine.Initialize()
+
+            'check if R version is supported, important if R-Instat is not using bundled R.
+            'todo. should we check the R version if R has been successfully bundled with R-Instat?
+            bREngineInitialised = CheckIfRVersionIsSupported()
         Catch ex As Exception
-            ' Modified message since currently we recommend use of same R version as bundled version
-            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & vbNewLine & "R-Instat requires version " & strRVersionRequired & " of R." & vbNewLine & "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion & ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " & strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat." & vbNewLine & ex.Message, MsgBoxStyle.Critical, "Cannot initialise R connection.")
-            Application.Exit()
-            Environment.Exit(0)
+            MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
+                   "R-Instat requires version " & strRVersionRequired & " of R." & Environment.NewLine &
+                   "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion &
+                   ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " &
+                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat.",
+                   MsgBoxStyle.Critical, "Cannot initialise R connection.")
         End Try
+
+        Return bREngineInitialised
+    End Function
+
+    Private Function CheckIfRVersionIsSupported() As Boolean
+        Dim bSupported As Boolean = False
         Try
+            Dim expTemp As SymbolicExpression
+            Dim strMajor As String = ""
+            Dim strMinor As String = ""
             expTemp = RunInternalScriptGetValue("R.Version()$major", bSilent:=True)
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 strMajor = expTemp.AsCharacter(0)
@@ -250,58 +220,80 @@ Public Class RLink
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 strMinor = expTemp.AsCharacter(0)
             End If
-            Dim strRVersionRunning = strMajor & "." & strMinor
-            If strMinor.Count >= 3 Then
-                If Not (strMajor = strRVersionMajorRequired AndAlso strMinor.Count > 0 AndAlso strMinor(0) >= strRVersionMinorRequired) Then
-                    MsgBox("Your current version of R is outdated. You are currently running R version: " & strRVersionRunning & vbNewLine &
-                           "R-Instat requires at least version " & strRVersionRequired & " or greater." &
-                           vbNewLine & "Try reruning the installation to install an updated version of R or download R from " &
-                           "https://cran.r-project.org/bin/windows/base/" & strRVersionRequired & "and restart R-Instat.", MsgBoxStyle.Critical, "R Version not supported.")
-                    Application.Exit()
-                    Environment.Exit(0)
-                End If
-            Else
+
+            If String.IsNullOrEmpty(strMajor) OrElse String.IsNullOrEmpty(strMinor) Then
                 MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
-                       "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
-                       strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
-                       "And restart R-Instat.", MsgBoxStyle.Critical, "R Version error.")
-                Application.Exit()
-                Environment.Exit(0)
+                                       "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
+                                       strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
+                                       "And restart R-Instat.",
+                                       MsgBoxStyle.Critical, "R Version error.")
+            ElseIf strMajor <> strRVersionMajorRequired OrElse strMinor.Substring(0, 1) < strRVersionMinorRequired Then
+                MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & Environment.NewLine &
+                       "R-Instat requires at least version " & strRVersionRequired & " or greater." & Environment.NewLine &
+                       "Try reruning the installation to install an updated version of R or download R from " &
+                       "https://cran.r-project.org/bin/windows/base/" & strRVersionRequired & "and restart R-Instat.",
+                       MsgBoxStyle.Critical, "R Version not supported.")
+            Else
+                bSupported = True
             End If
         Catch ex As Exception
             MsgBox(ex.Message & Environment.NewLine & "Could not determine the version of R installed on your machine. We recommend rerunning the installation to install an updated version of R or download the latest version from https://cran.r-project.org/ and restart R-Instat.", MsgBoxStyle.Critical, "Cannot determine R version.")
-
-            Application.Exit()
-            Environment.Exit(0)
         End Try
-        bREngineInitialised = True
-        If strScript = "" Then
-            strScript = GetRSetupScript()
-            iCallType = 0
-            strComment = "Setting working directory, sourcing R code and loading R packages"
 
-            bSeparateThread = True
-        End If
-        For Each strLine As String In strScript.Split(Environment.NewLine)
-            If strLine.Trim(vbLf).Count > 0 Then
-                If strLine.Contains(strInstatDataObject & "$get_graphs") Then
-                    iCurrentCallType = 3
-                Else
-                    iCurrentCallType = iCallType
-                End If
-                RunScript(strScript:=strLine.Trim(vbLf), iCallType:=iCurrentCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bSilent:=True)
-            End If
-            strComment = ""
-        Next
-        strMissingPackages = GetPackagesNotInstalled()
-        If strMissingPackages IsNot Nothing AndAlso strMissingPackages.Count > 0 Then
-            frmPackageIssues.SetMissingPackages(strMissingPackages)
-            frmPackageIssues.ShowDialog()
-            bClose = frmPackageIssues.bCloseRInstat
-        End If
-        bInstatObjectExists = True
-        Return bClose
+        Return bSupported
     End Function
+
+    ''' <summary>  
+    ''' Gets the default R set up script.
+    ''' The script return sets the working directory and source file.
+    ''' </summary>
+    ''' <returns>   The R setup script. </returns>
+    Public Function GetRSetupScript() As String
+        Dim clsSetWd As New RFunction
+        Dim clsSource As New RFunction
+        Dim strScript As String = ""
+
+        clsSetWd.SetRCommand("setwd")
+        clsSetWd.AddParameter("dir", Chr(34) & Path.Combine(frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath) & Chr(34)) 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        clsSource.SetRCommand("source")
+        clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
+
+        strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
+        strScript = strScript & clsSource.ToScript() & Environment.NewLine
+        strScript = strScript & GetCreateNewDatabookObjectRScript() & Environment.NewLine
+
+        Return strScript
+    End Function
+
+    ''' <summary>
+    ''' Gets new databook R script. 
+    ''' </summary>
+    Private Function GetCreateNewDatabookObjectRScript() As String
+        Dim clsCreateIO As New ROperator
+        Dim clsNewDataBook As New RFunction
+
+        clsNewDataBook.SetRCommand(strDataBookClassName & "$new")
+
+        clsCreateIO.SetOperation("<-")
+        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
+        clsCreateIO.AddParameter("right", clsRFunctionParameter:=clsNewDataBook, iPosition:=1)
+
+        Return clsCreateIO.ToScript()
+    End Function
+
+    ''' <summary>   Closes the current instat data object, and opens a new one. </summary>
+    Public Sub CloseDataBook()
+        Dim clsRm As New RFunction
+
+        clsRm.SetRCommand("rm")
+        clsRm.AddParameter("0", strInstatDataObject, iPosition:=0, bIncludeArgumentName:=False)
+        clsRm.AddParameter("1", strGraphDataBook, iPosition:=1, bIncludeArgumentName:=False)
+
+        bInstatObjectExists = False
+        RunScript(clsRm.ToScript(), strComment:="Closing data")
+        bInstatObjectExists = True
+        RunScript(GetCreateNewDatabookObjectRScript(), strComment:="Defining new data book")
+    End Sub
 
     ''' <summary>
     ''' Extracts all the complete runnable R commands from <paramref name="strScript"/>.
@@ -394,7 +386,7 @@ Public Class RLink
     '''
     ''' <returns>   The packages not installed. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Function GetPackagesNotInstalled() As String()
+    Public Function GetRPackagesNotInstalled() As String()
         Dim chrPackagesNotInstalled As CharacterVector
         Dim clsPackagesNotInstalled As New RFunction
         Dim expTemp As SymbolicExpression
@@ -433,6 +425,11 @@ Public Class RLink
     '''                                 R script. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional bKeepExisting As Boolean = False, Optional strComment As String = "")
+
+        RunScript(GetImportRDSRScript(strFile, bKeepExisting), strComment:=strComment)
+    End Sub
+
+    Public Function GetImportRDSRScript(strFile As String, bKeepExisting As Boolean) As String
         Dim clsImportRDS As New RFunction
         Dim clsReadRDS As New RFunction
         Dim strScript As String = ""
@@ -444,13 +441,13 @@ Public Class RLink
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
         clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS, iPosition:=0)
-        'This RFunction takes booleans in capitals hence ToUpper
         clsImportRDS.AddParameter("keep_existing", bKeepExisting.ToString.ToUpper, iPosition:=1)
 
         strTemp = clsImportRDS.ToScript(strScript)
-        RunScript(strScript & strTemp, strComment:=strComment)
-        bInstatObjectExists = True
-    End Sub
+
+        Return strScript & strTemp
+
+    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the current grid (the worksheet that appears similar to a spreadsheet
@@ -720,11 +717,11 @@ Public Class RLink
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
-    ''' This method executes the <paramref name="strScript"/> R script and displays the output. The
+    ''' This method executes the <paramref name="strScript"/> R script(s) and displays the output. The
     ''' output may be displayed as text, graph or html (see <paramref name="iCallType"/>).
-    ''' Any R script that is necessary for reproducibility has to be run through this subroutine.
+    ''' Any R script(s) that is necessary for reproducibility has to be run through this subroutine.
     ''' </summary>
-    ''' <param name="strScript"> is the R script to execute.</param>
+    ''' <param name="strScript"> is the R script(s) to execute.</param>
     ''' <param name="iCallType"> defines how to display the R output. todo deprecate this.
     ''' <list type="bullet">
     '''     <item>
@@ -792,65 +789,69 @@ Public Class RLink
             Dim bAsFile As Boolean = True
             Dim bDisplayOutputInExternalViewer As Boolean = False
 
-            'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
-            Dim strLastScript As String = GetRunnableCommandLines(strScript).LastOrDefault
-            If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
+            'exclude lines not needed for execution e.g comments, empty lines.
+            Dim arrExecutableRScriptLines() As String = GetRunnableCommandLines(strScript)
+            If arrExecutableRScriptLines.Length > 0 Then
+                'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
+                Dim strLastScript As String = arrExecutableRScriptLines.Last()
+                If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
                 strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
                 strLastScript.StartsWith("view_object_data") Then
 
-                strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
-                'if last function is view_object then display in external viewer (maximised)
-                bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
+                    strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
+                    'if last function is view_object then display in external viewer (maximised)
+                    bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
 
-            ElseIf strLastScript.StartsWith("print") Then
-                bAsFile = False
-                Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-            ElseIf iCallType = 0 Then
-                'if script output should be ignored. todo. deprecate this block after implementing correctly
-                bAsFile = False
-                Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-            ElseIf iCallType = 1 OrElse iCallType = 4 Then
-                'todo. this is used by the calculator dialog
-                'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
-                'else if script output should be stored in a temp variable
-                ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
-                bAsFile = False
-                Dim strTempAssignTo As String = ".temp_val"
-                'TODO check this is valid syntax in all cases
-                '     i.e. this is potentially: x <- y <- 1
-                Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-                Dim expTemp As RDotNet.SymbolicExpression = GetSymbol(strTempAssignTo)
-                If expTemp IsNot Nothing Then
-                    strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
-                End If
-            Else
-                'else if script output should not be ignored or not stored as an object or variable
-
-                Dim arrRScriptLines() As String = GetRunnableCommandLines(strScript)
-                'if output should be stored as a variable just execute the script
-                If arrRScriptLines.Last().Contains("<-") Then
+                ElseIf strLastScript.StartsWith("print") Then
+                    bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                ElseIf iCallType = 0 Then
+                    'if script output should be ignored. todo. deprecate this block after implementing correctly
+                    bAsFile = False
+                    Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                ElseIf iCallType = 1 OrElse iCallType = 4 Then
+                    'todo. this is used by the calculator dialog
+                    'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
+                    'else if script output should be stored in a temp variable
+                    ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
+                    bAsFile = False
+                    Dim strTempAssignTo As String = ".temp_val"
+                    'TODO check this is valid syntax in all cases
+                    '     i.e. this is potentially: x <- y <- 1
+                    Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    Dim expTemp As RDotNet.SymbolicExpression = GetSymbol(strTempAssignTo)
+                    If expTemp IsNot Nothing Then
+                        strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
+                    End If
                 Else
-                    'else capture the output as plain text
-                    Dim bSuccess As Boolean = True
-                    If arrRScriptLines.Length > 1 Then
-                        Dim strScriptWithoutLastLine As String = String.Join(Environment.NewLine, arrRScriptLines, 0, arrRScriptLines.Length - 1)
-                        bSuccess = Evaluate(strScriptWithoutLastLine, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    'else if script output should not be ignored or not stored as an object or variable
+
+                    'if output should be stored as a variable just execute the script
+                    If arrExecutableRScriptLines.Last().Contains("<-") Then
+                        Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                    Else
+                        'else capture the output as plain text
+                        Dim bSuccess As Boolean = True
+                        If arrExecutableRScriptLines.Length > 1 Then
+                            Dim strScriptWithoutLastLine As String = String.Join(Environment.NewLine, arrExecutableRScriptLines, 0, arrExecutableRScriptLines.Length - 1)
+                            bSuccess = Evaluate(strScriptWithoutLastLine, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+                        End If
+
+                        If bSuccess Then
+                            strOutput = GetFileOutput("view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
+                        End If
                     End If
 
-                    If bSuccess Then
-                        strOutput = GetFileOutput("view_object_data(object = " & arrRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
-                    End If
                 End If
-
             End If
+
 
             'log script and output
             clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
         End Try
-
 
         AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
         If bUpdateGrids Then
@@ -1258,77 +1259,6 @@ Public Class RLink
         End If
         Return expTemp
     End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the next default data frame name. </summary>
-    '''
-    ''' <param name="strPrefix">        The value for the R 'prefix' parameter. </param>
-    ''' <param name="iStartIndex">      (Optional) The value for the R 'start_index' parameter. </param>
-    ''' <param name="bIncludeIndex">    (Optional) The value for the R 'include_index' parameter. </param>
-    '''
-    ''' <returns>   The next default data frame name. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
-        Dim strTemp As String
-        Dim clsGetNextDataName As New RFunction
-        Dim expName As SymbolicExpression
-
-        clsGetNextDataName.SetRCommand(strInstatDataObject & "$get_next_default_dataframe_name")
-        clsGetNextDataName.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
-        clsGetNextDataName.AddParameter("start_index", iStartIndex)
-        If Not bInstatObjectExists Then
-            CreateNewInstatObject()
-        End If
-        If bIncludeIndex Then
-            clsGetNextDataName.AddParameter("include_index", "TRUE")
-        Else
-            clsGetNextDataName.AddParameter("include_index", "FALSE")
-        End If
-        expName = RunInternalScriptGetValue(clsGetNextDataName.ToScript(), bSilent:=True)
-        If expName IsNot Nothing AndAlso Not expName.Type = Internals.SymbolicExpressionType.Null Then
-            strTemp = expName.AsCharacter(0)
-        Else
-            strTemp = ""
-        End If
-        Return strTemp
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the R setup script.</summary>
-    '''
-    ''' <returns>   The R setup script. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetRSetupScript() As String
-        Dim clsSetWd As New RFunction
-        Dim clsSource As New RFunction
-        Dim clsCreateIO As New ROperator
-        Dim clsDplyrOption As New RFunction
-        Dim strScript As String = ""
-
-        clsSetWd.SetRCommand("setwd")
-        clsSetWd.AddParameter("dir", Chr(34) & Path.Combine(frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath) & Chr(34)) 'This is bad the wd should be flexible and not automatically set to the instat object directory 
-        clsSource.SetRCommand("source")
-        clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
-        clsCreateIO.SetOperation("<-")
-        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
-        clsDplyrOption.SetRCommand("options")
-        clsDplyrOption.AddParameter("dplyr.summarise.inform", "FALSE", iPosition:=0)
-
-        strScript = ""
-        strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
-        strScript = strScript & clsSource.ToScript() & Environment.NewLine
-        strScript = strScript & clsCreateIO.ToScript() & Environment.NewLine
-        strScript = strScript & clsDplyrOption.ToScript()
-
-        Return strScript
-    End Function
-
-    ''' <summary>   Creates a new instat object. </summary>
-    Public Sub CreateNewInstatObject()
-        RunScript(strInstatDataObject & " <- " & strDataBookClassName & "$new()", strComment:="Defining new Instat Object")
-        bInstatObjectExists = True
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Fills the list view control <paramref name="lstView"/> with the type of items 
@@ -2134,25 +2064,6 @@ Public Class RLink
             iTimeInSeconds = 2
         End If
         iWaitDelay = iTimeInSeconds
-    End Sub
-
-    ''' <summary>   Closes the current instat data object, and opens a new one. </summary>
-    Public Sub CloseData()
-        Dim clsRm As New RFunction
-        Dim clsCreateIO As New ROperator
-
-        clsRm.SetRCommand("rm")
-        clsRm.AddParameter("0", strInstatDataObject, iPosition:=0, bIncludeArgumentName:=False)
-        clsRm.AddParameter("1", strGraphDataBook, iPosition:=1, bIncludeArgumentName:=False)
-
-        clsCreateIO.SetOperation("<-")
-        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
-        clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
-
-        bInstatObjectExists = False
-        RunScript(clsRm.ToScript(), strComment:="Closing data")
-        bInstatObjectExists = True
-        RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
     End Sub
 
     '''--------------------------------------------------------------------------------------------
