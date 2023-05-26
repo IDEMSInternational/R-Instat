@@ -60,6 +60,9 @@
 # 
 ####################################################################################################
 
+# Ensure 'R-Instat <version number>' in top left does not translate (see PR #8356)
+frmMain
+
 # Single receivers normally contain column names, and these should not be translated
 # Fixes issue 6519
 %_txtReceiverSingle
