@@ -185,7 +185,6 @@ sdgSaveColumnPosition_ucrChkKeepExistingPos%
 %txtTextFilePreview%
 %txtValidation%
 %ucRdoCoordinated%
-%ucrBase%
 %ucrCalc%
 %ucrCalcSummary%
 %ucrDataFrameGet%
