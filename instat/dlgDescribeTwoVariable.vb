@@ -33,27 +33,26 @@ Public Class dlgDescribeTwoVariable
         clsSummaryTableFunction, clsThreeVariableCombineFrequencyParametersFunction As New RFunction
 
     'FORMAT TABLE FUNCTIONS
-    Private clsBorderWeightPxFunction, clsCellBorderFunction, clsCellFillFunction,
-        clsCellTextFunction, clsFootnoteCellBodyFunction, clsFootnoteCellFunction,
+    Private clsFootnoteCellBodyFunction, clsFootnoteCellFunction,
         clsFootnoteSubtitleLocationFunction, clsFootnoteTitleLocationFunction,
         clsHeaderFormatFunction, clsSecondFootnoteCellBodyFunction,
-        clsSecondFootnoteCellFunction, clsStubHeadFunction, clsStyleListFunction,
+        clsSecondFootnoteCellFunction, clsStyleListFunction,
         clsTabFootnoteSubtitleFunction, clsTabFootnoteTitleFunction,
-        clsTableSourcenoteFunction, clsTableTitleFunction, clsTabOptionsFunction,
+        clsTableSourcenoteFunction, clsTableTitleFunction, clsThemesTabOptionFunction,
         clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
-        clsTabStylePxFunction, clsgtExtraThemesFunction As New RFunction
+        clsTabStylePxFunction, clsgtExtraThemesFuction As New RFunction
 
     Private clsGroupByPipeOperator, clsMmtablePlusOperator, clsMapPipeOperator,
              clsMmtableTildeOperator, clsSummaryTildeOperator, clsEmptyOperator,
              clsSecondEmptyOperator As New ROperator
-    'Frequency Parameters
-    Public clsGetDataTypeFunction, clsGetSecondDataTypeFunction,
+
+    Private clsGetDataTypeFunction, clsGetSecondDataTypeFunction,
            clsFrequencyTablesFunction, clsCombineFactorsFunction,
            clsHeaderTopLeftSummaryVariableFunction,
            clsCombineFrequencyFactorParameterFunction, clsSelectFunction, clsRenameCombineFunction,
            clsFrequencyTables2Function, clsSummaryMap2Function As New RFunction
-    Private clsMapFrequencyPipeOperator, clsDataSelectTildeOperator,
-               clsDataTildeOperator, clsMapFrequency2PipeOperator As New ROperator
+    Private clsDataTildeOperator, clsMapFrequency2PipeOperator As New ROperator
+    'Frequency Parameters
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
                                                           "signif_fig", "include_margins"})
@@ -192,10 +191,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub SetDefaults()
-        clsBorderWeightPxFunction = New RFunction
-        clsCellBorderFunction = New RFunction
-        clsCellFillFunction = New RFunction
-        clsCellTextFunction = New RFunction
         clsCombineFrequencyParametersFunction = New RFunction
         clsCombineFunction = New RFunction
         clsCombineMultipleColumnsFunction = New RFunction
@@ -220,7 +215,6 @@ Public Class dlgDescribeTwoVariable
         clsSecondHeaderFunction = New RFunction
         clsSkimrFunction = New RFunction
         clsStyleListFunction = New RFunction
-        clsStubHeadFunction = New RFunction
         clsSummariesListFunction = New RFunction
         clsSummaryMapFunction = New RFunction
         clsSummaryTableCombineFactorsFunction = New RFunction
@@ -229,7 +223,7 @@ Public Class dlgDescribeTwoVariable
         clsTabFootnoteTitleFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
         clsTableTitleFunction = New RFunction
-        clsTabOptionsFunction = New RFunction
+        clsThemesTabOptionFunction = New RFunction
         clsTabStyleCellTextFunction = New RFunction
         clsTabStyleCellTitleFunction = New RFunction
         clsTabStyleFunction = New RFunction
@@ -258,20 +252,6 @@ Public Class dlgDescribeTwoVariable
         ucrInputMarginName.Visible = False
 
         ucrBase.clsRsyntax.ClearCodes()
-
-        clsBorderWeightPxFunction.SetPackageName("gt")
-        clsBorderWeightPxFunction.SetRCommand("px")
-        clsBorderWeightPxFunction.AddParameter("weight", "1", iPosition:=0, bIncludeArgumentName:=False)
-
-        clsCellBorderFunction.SetPackageName("gt")
-        clsCellBorderFunction.SetRCommand("cell_borders")
-        clsCellBorderFunction.AddParameter("weight", clsRFunctionParameter:=clsBorderWeightPxFunction, iPosition:=3)
-
-        clsCellFillFunction.SetPackageName("gt")
-        clsCellFillFunction.SetRCommand("cell_fill")
-
-        clsCellTextFunction.SetPackageName("gt")
-        clsCellTextFunction.SetRCommand("cell_text")
 
         clsCombineFrequencyParametersFunction.SetRCommand("c")
 
@@ -371,8 +351,8 @@ Public Class dlgDescribeTwoVariable
         clsMmtableTildeOperator.AddParameter("empty_parameter", "", iPosition:=0)
         clsMmtableTildeOperator.AddParameter("mmtable", clsRFunctionParameter:=clsMmtableFunction, iPosition:=1)
 
-        clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.bBrackets = False
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
 
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim")
@@ -383,6 +363,9 @@ Public Class dlgDescribeTwoVariable
         clsFrequencyTablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsFrequencyTablesFunction.AddParameter("summaries", Chr(34) & "summary_count" & Chr(34), iPosition:=1)
         clsFrequencyTablesFunction.AddParameter("factors", clsRFunctionParameter:=clsCombineFrequencyFactorParameterFunction, iPosition:=2)
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
 
         clsRAnovaFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
         clsRAnovaFunction.AddParameter("signif.stars", "FALSE", iPosition:=2)
@@ -419,9 +402,6 @@ Public Class dlgDescribeTwoVariable
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
 
-        clsStubHeadFunction.SetPackageName("gt")
-        clsStubHeadFunction.SetRCommand("tab_stubhead")
-
         clsStyleListFunction.SetRCommand("list")
 
         clsSummariesListFunction.SetRCommand("c")
@@ -456,8 +436,8 @@ Public Class dlgDescribeTwoVariable
         clsTabFootnoteSubtitleFunction.SetPackageName("gt")
         clsTabFootnoteSubtitleFunction.SetRCommand("tab_footnote")
 
-        clsTabOptionsFunction.SetPackageName("gt")
-        clsTabOptionsFunction.SetRCommand("tab_options")
+        clsThemesTabOptionFunction.SetPackageName("gt")
+        clsThemesTabOptionFunction.SetRCommand("tab_options")
 
         clsTabStyleCellTextFunction.SetPackageName("gt")
         clsTabStyleCellTextFunction.SetRCommand("cell_text")
@@ -600,6 +580,7 @@ Public Class dlgDescribeTwoVariable
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
+            cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked AndAlso IsNumericByCategorical()
             grpOptions.Visible = IsNumericByCategorical()
         ElseIf rdoThreeVariable.Checked Then
             grpOptions.Visible = IsCategoricalByNumeric() OrElse IsNumericByCategorical()
@@ -725,7 +706,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFrequencyParameters()
         AddRemoveTopLeftVariable()
         ChangeLocations()
-        MissingOptions()
         TestOKEnabled()
     End Sub
 
@@ -744,15 +724,6 @@ Public Class dlgDescribeTwoVariable
             clsFrequencyTables2Function.RemoveParameterByName("na_consecutive_n")
         Else
             clsFrequencyTables2Function.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
-        End If
-        MissingOptions()
-    End Sub
-
-    Private Sub MissingOptions()
-        If ucrChkOmitMissing.Checked AndAlso strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
-            cmdMissingOptions.Enabled = True
-        Else
-            cmdMissingOptions.Enabled = False
         End If
     End Sub
 
@@ -1210,10 +1181,10 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
         sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                       clsNewThemesTabOptionFunction:=clsTabOptionsFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
+                                        clsNewThemesTabOptionFunction:=clsThemesTabOptionFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                       clsNewMutableOPerator:=clsMmtablePlusOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction,
+                                       clsNewMutableOPerator:=clsMmtablePlusOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewgtExtraThemesFunction:=clsgtExtraThemesFuction,
                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
         AddFormatTableMapToAfterCode()
@@ -1225,7 +1196,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub AddRemoveTopLeftVariable()
-        If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+        If IsNumericByCategorical() Then
             clsCombineFrequencyFactorParameterFunction.RemoveParameterByName("factor_by")
             clsMmtablePlusOperator.RemoveParameterByName("header_top_left")
             clsMmtablePlusOperator.AddParameter("header_top_left", clsRFunctionParameter:=clsHeaderTopLeftSummaryVariableFunction, iPosition:=1, bIncludeArgumentName:=False)
