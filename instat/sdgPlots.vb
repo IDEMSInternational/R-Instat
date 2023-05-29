@@ -623,7 +623,6 @@ Public Class sdgPlots
 
         ttCaptionTitle.SetToolTip(ucrInputGraphCaption.txtInput, "Type \n where you would like a new-line")
 
-
         grpFillScale.Visible = False
         grpColourScale.Visible = False
     End Sub
