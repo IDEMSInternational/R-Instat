@@ -1267,7 +1267,6 @@ Public Class sdgPlots
             clsLabsFunction.RemoveParameterByName("colour")
             clsLabsFunction.RemoveParameterByName("fill")
             clsThemeFunction.RemoveParameterByName("legend.title")
-
         End If
     End Sub
 
