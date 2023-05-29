@@ -1255,7 +1255,6 @@ Public Class sdgPlots
         Else
             clsLabsFunction.RemoveParameterByName("tag")
             clsThemeFunction.RemoveParameterByName("plot.tag")
-
         End If
     End Sub
 
