@@ -1089,7 +1089,6 @@ Public Class sdgPlots
     Private Sub AddRemoveXElementTitle()
         If clsXElementTitle.iParameterCount > 0 Then
             clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
-
         Else
             clsThemeFunction.RemoveParameterByName("axis.title.x")
         End If
