@@ -1263,7 +1263,6 @@ Public Class sdgPlots
             clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitle)
-
         Else
             clsLabsFunction.RemoveParameterByName("colour")
             clsLabsFunction.RemoveParameterByName("fill")
