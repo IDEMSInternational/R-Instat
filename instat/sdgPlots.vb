@@ -1252,7 +1252,6 @@ Public Class sdgPlots
         If ucrChkTag.Checked AndAlso Not ucrInputTag.IsEmpty Then
             clsLabsFunction.AddParameter("tag", Chr(34) & ucrInputTag.GetText & Chr(34))
             clsThemeFunction.AddParameter("plot.tag", clsRFunctionParameter:=clsPlotElementTag)
-
         Else
             clsLabsFunction.RemoveParameterByName("tag")
             clsThemeFunction.RemoveParameterByName("plot.tag")
