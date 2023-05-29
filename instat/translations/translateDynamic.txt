@@ -121,7 +121,6 @@ sdgSaveColumnPosition_ucrChkKeepExistingPos%
 %cmdPlotOptions%
 %cmdTransform%
 %cmdVariables%
-%frmMain%
 %grdCurrentWorkSheet%
 %grpCSV%
 %grpColumnPosition%
@@ -186,7 +185,6 @@ sdgSaveColumnPosition_ucrChkKeepExistingPos%
 %txtTextFilePreview%
 %txtValidation%
 %ucRdoCoordinated%
-%ucrBase%
 %ucrCalc%
 %ucrCalcSummary%
 %ucrDataFrameGet%
