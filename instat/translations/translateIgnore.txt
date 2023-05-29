@@ -60,6 +60,9 @@
 # 
 ####################################################################################################
 
+# Ensure 'R-Instat <version number>' in top left does not translate (see PR #8356)
+frmMain
+
 # Single receivers normally contain column names, and these should not be translated
 # Fixes issue 6519
 %_txtReceiverSingle
@@ -111,3 +114,8 @@ sdgOpenNetCDF_tbNetCDF_tbSubset_dtpMaxT%
 sdgConstructRegexExpression_grpSymbols_cmdNumbers%
 sdgCalculationsSummmary_tbSummaryCalcs_tbMain_ucrCalcSummary_grpSymbols_cmdNumbers%
 dlgCalculator_ucrCalc_grpSymbols_cmdNumbers%
+
+# Tab headings in Log/Script window
+ucrScriptWindow_tlpTableContainer_TabControl
+ucrScriptWindow_tlpTableContainer_TabControl_TabPageAdded
+ucrScriptWindow_tlpTableContainer_TabControl_TabPageAdded_txtScriptAdded
