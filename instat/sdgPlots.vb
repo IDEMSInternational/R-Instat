@@ -1258,7 +1258,6 @@ Public Class sdgPlots
         End If
     End Sub
 
-
     Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
         If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty Then
             clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
