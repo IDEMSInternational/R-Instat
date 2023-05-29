@@ -619,7 +619,6 @@ Public Class sdgPlots
 
         ttCaptionTitle.SetToolTip(ucrInputGraphCaption.txtInput, "Type \n where you would like a new-line")
 
-
         grpFillScale.Visible = False
         grpColourScale.Visible = False
     End Sub
@@ -762,7 +761,6 @@ Public Class sdgPlots
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
-
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
@@ -1084,10 +1082,10 @@ Public Class sdgPlots
         End If
         AddRemoveTheme()
     End Sub
+
     Private Sub AddRemoveXElementTitle()
         If clsXElementTitle.iParameterCount > 0 Then
             clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
-
         Else
             clsThemeFunction.RemoveParameterByName("axis.title.x")
         End If
@@ -1247,32 +1245,25 @@ Public Class sdgPlots
         End Select
     End Sub
 
-
-
     Private Sub ucrChkTag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTag.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrNudTagSize.ControlValueChanged
         If ucrChkTag.Checked AndAlso Not ucrInputTag.IsEmpty Then
             clsLabsFunction.AddParameter("tag", Chr(34) & ucrInputTag.GetText & Chr(34))
             clsThemeFunction.AddParameter("plot.tag", clsRFunctionParameter:=clsPlotElementTagFunction)
-
         Else
             clsLabsFunction.RemoveParameterByName("tag")
             clsThemeFunction.RemoveParameterByName("plot.tag")
-
         End If
     End Sub
-
 
     Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
         If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty Then
             clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitleFunction)
-
         Else
             clsLabsFunction.RemoveParameterByName("colour")
             clsLabsFunction.RemoveParameterByName("fill")
             clsThemeFunction.RemoveParameterByName("legend.title")
-
         End If
     End Sub
 
