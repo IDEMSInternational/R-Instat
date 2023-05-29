@@ -87,6 +87,7 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoTwoVariable = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveTable = New instat.ucrSave()
         Me.grpThreeVariablePercentages.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpFrequency.SuspendLayout()
@@ -303,7 +304,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 435)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 477)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 43
@@ -647,12 +648,22 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdMissingOptions.Text = "Missing Options..."
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 438)
+        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(399, 34)
+        Me.ucrSaveTable.TabIndex = 47
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(419, 491)
+        Me.ClientSize = New System.Drawing.Size(419, 530)
+        Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.grpThreeVariablePercentages)
         Me.Controls.Add(Me.cmdFormatTable)
@@ -749,4 +760,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents rdoSkim As RadioButton
     Friend WithEvents ucrPnlDescribe As UcrPanel
     Friend WithEvents cmdMissingOptions As Button
+    Friend WithEvents ucrSaveTable As ucrSave
 End Class
