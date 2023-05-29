@@ -1248,8 +1248,6 @@ Public Class sdgPlots
         End Select
     End Sub
 
-
-
     Private Sub ucrChkTag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTag.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrNudTagSize.ControlValueChanged
         If ucrChkTag.Checked AndAlso Not ucrInputTag.IsEmpty Then
             clsLabsFunction.AddParameter("tag", Chr(34) & ucrInputTag.GetText & Chr(34))
