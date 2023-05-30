@@ -21,6 +21,7 @@ Public Class dlgInventoryPlot
     Private clsInventoryPlot As New RFunction
     Private clsClimaticMissing As New RFunction
     Private clsClimaticDetails As New RFunction
+    Private clsDummyFunction As New RFunction
     Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -68,8 +69,11 @@ Public Class dlgInventoryPlot
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        ucrChkSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"climatic_missing"})
+        'ucrChkSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"climatic_missing"})
         ucrChkSummary.SetText("Summary")
+        ucrChkSummary.AddParameterValuesCondition(True, "summary", "True")
+        ucrChkSummary.AddParameterValuesCondition(False, "summary", "False")
+
 
         ucrChkDetails.AddRSyntaxContainsFunctionNamesCondition(True, {"climatic_details"})
         ucrChkDetails.SetText("Details")
@@ -92,12 +96,12 @@ Public Class dlgInventoryPlot
         ucrChkMonth.SetParameter(New RParameter("month", 6))
         ucrChkMonth.SetText("Month")
         ucrChkMonth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkMonth.SetRDefault("FALSE")
+        ucrChkMonth.SetRDefault("TRUE")
 
         ucrChkDay.SetParameter(New RParameter("day", 5))
         ucrChkDay.SetText("Day")
         ucrChkDay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDay.SetRDefault("TRUE")
+        ucrChkDay.SetRDefault("FALSE")
 
         ucrSaveDetails.SetPrefix("details")
         ucrSaveDetails.SetCheckBoxText("Save Details")
@@ -121,7 +125,7 @@ Public Class dlgInventoryPlot
         ucrPnlOrder.SetParameter(New RParameter("order", 4))
         ucrPnlOrder.AddRadioButton(rdoDateOrder, "TRUE")
         ucrPnlOrder.AddRadioButton(rdoElementOrder, "FALSE")
-        ucrPnlOrder.SetRDefault("FALSE")
+        ucrPnlOrder.SetRDefault("TRUE")
 
         ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4))
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
@@ -162,8 +166,12 @@ Public Class dlgInventoryPlot
 
         ucrPnlOptions.AddRadioButton(rdoMissing)
         ucrPnlOptions.AddRadioButton(rdoGraph)
-        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoMissing, {"climatic_missing", "climatic_details"})
-        ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoGraph, {frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot"})
+        'ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoMissing, {"climatic_missing", "climatic_details"})
+        'ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoGraph, {frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot"})
+
+        ucrPnlOptions.AddParameterValuesCondition(rdoMissing, "checked", "missing")
+        ucrPnlOptions.AddParameterValuesCondition(rdoGraph, "checked", "graph")
+
 
         ucrPnlOptions.AddToLinkedControls({ucrChkDisplayRainDays, ucrChkFlipCoordinates, ucrChkShowNonMissing, ucrPnlPlotType, ucrSaveGraph, ucrInputTitle, ucrInputFacetBy}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkSummary, ucrChkDetails}, {rdoMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -185,12 +193,16 @@ Public Class dlgInventoryPlot
         clsInventoryPlot = New RFunction
         clsClimaticMissing = New RFunction
         clsClimaticDetails = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrInventoryPlotSelector.Reset()
         ucrReceiverElements.SetMeAsReceiver()
         ucrSaveGraph.Reset()
         ucrSaveDetails.Reset()
         bResetSubdialog = True
+
+        clsDummyFunction.AddParameter("checked", "graph", iPosition:=0)
+        clsDummyFunction.AddParameter("summary", "True", iPosition:=1)
 
         clsInventoryPlot.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsInventoryPlot.AddParameter("coord_flip", "FALSE", iPosition:=4)
@@ -231,7 +243,8 @@ Public Class dlgInventoryPlot
         ucrInputFacetBy.SetRCode(clsInventoryPlot, bReset)
         ucrSaveGraph.SetRCode(clsInventoryPlot, bReset)
         ucrReceiverStation.SetRCode(clsInventoryPlot, bReset)
-        ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        'ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrChkSummary.SetRCode(clsDummyFunction, bReset)
         ucrChkDetails.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
         ucrChkMonth.SetRCode(clsClimaticDetails, bReset)
@@ -240,8 +253,8 @@ Public Class dlgInventoryPlot
         ucrChkOmitStart.SetRCode(clsClimaticMissing, bReset)
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
         ucrPnlOrder.SetRCode(clsClimaticDetails, bReset)
-        ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
-
+        'ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
