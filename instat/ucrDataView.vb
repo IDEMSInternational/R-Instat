@@ -65,6 +65,7 @@ Public Class ucrDataView
 
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
+        mnuPaste.Visible = False
         autoTranslate(Me)
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
@@ -563,12 +564,12 @@ Public Class ucrDataView
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
         If IsOnlyOneColumnSelected() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedColumnAFactor()
-            mnuDeleteCol.Text = GetTranslation("Delete Column")
+            mnuDeleteCol.Text = GetTranslation("Delete Column(s)")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
             mnuInsertColsAfter.Text = GetTranslation("Insert 1 Column After")
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = GetTranslation("Delete Columns")
+            mnuDeleteCol.Text = GetTranslation("Delete Column(s)")
             mnuInsertColsBefore.Text = "Insert " & GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & GetSelectedColumns.Count & " Columns After"
         End If
