@@ -21,6 +21,7 @@ Public Class dlgInventoryPlot
     Private clsInventoryPlot As New RFunction
     Private clsClimaticMissing As New RFunction
     Private clsClimaticDetails As New RFunction
+    Private clsAddKeyFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private bResetSubdialog As Boolean = True
 
@@ -194,6 +195,8 @@ Public Class dlgInventoryPlot
         clsClimaticMissing = New RFunction
         clsClimaticDetails = New RFunction
         clsDummyFunction = New RFunction
+        clsAddKeyFunction = New RFunction
+
 
         ucrInventoryPlotSelector.Reset()
         ucrReceiverElements.SetMeAsReceiver()
@@ -214,6 +217,9 @@ Public Class dlgInventoryPlot
         clsClimaticDetails.SetRCommand("climatic_details")
         clsClimaticDetails.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
+        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
         clsInventoryPlot.iCallType = 3
@@ -231,6 +237,7 @@ Public Class dlgInventoryPlot
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("date", 1), iAdditionalPairNo:=2)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("elements", 2), iAdditionalPairNo:=2)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("station", 3), iAdditionalPairNo:=2)
+        ucrInventoryPlotSelector.AddAdditionalCodeParameterPair(clsAddKeyFunction, New RParameter("data", 0), iAdditionalPairNo:=3)
 
         ucrInventoryPlotSelector.SetRCode(clsInventoryPlot, bReset)
         ucrReceiverDate.SetRCode(clsInventoryPlot, bReset)
@@ -244,7 +251,7 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.SetRCode(clsInventoryPlot, bReset)
         ucrReceiverStation.SetRCode(clsInventoryPlot, bReset)
         'ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrChkSummary.SetRCode(clsDummyFunction, bReset)
+        ''ucrChkSummary.SetRCode(clsDummyFunction, bReset)
         ucrChkDetails.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
         ucrChkMonth.SetRCode(clsClimaticDetails, bReset)
@@ -253,8 +260,12 @@ Public Class dlgInventoryPlot
         ucrChkOmitStart.SetRCode(clsClimaticMissing, bReset)
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
         ucrPnlOrder.SetRCode(clsClimaticDetails, bReset)
-        'ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+
+        If bReset Then
+            ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+            ucrChkSummary.SetRCode(clsDummyFunction, bReset)
+
+        End If 'ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -319,6 +330,15 @@ Public Class dlgInventoryPlot
 
     End Sub
 
+    Private Sub AddingKeys()
+        If ucrSaveDetails.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=3)
+
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
+
+        End If
+    End Sub
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
         If ucrChkSummary.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
@@ -326,15 +346,17 @@ Public Class dlgInventoryPlot
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
         End If
-
+        AddingKeys()
     End Sub
 
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
         If ucrChkDetails.Checked Then
+            ucrBase.clsRsyntax.ClearCodes()
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticDetails, iPosition:=2)
             clsClimaticDetails.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticDetails)
+
         End If
 
     End Sub
@@ -358,4 +380,11 @@ Public Class dlgInventoryPlot
 
     End Sub
 
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        AddingKeys()
+    End Sub
+
+    Private Sub ucrSaveDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveDetails.ControlValueChanged
+        AddingKeys()
+    End Sub
 End Class
