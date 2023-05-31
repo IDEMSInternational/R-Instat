@@ -38,35 +38,16 @@ Partial Class dlgDescribeTwoVariable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
-        Me.ucrReceiverPercentages = New instat.ucrReceiverSingle()
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
-        Me.ucrChkPercentageProportion = New instat.ucrCheck()
-        Me.ucrNudSigFigs = New instat.ucrNud()
-        Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.lblSigFigs = New System.Windows.Forms.Label()
-        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.grpThreeVariablePercentages = New System.Windows.Forms.GroupBox()
-        Me.ucrReceiverThreeVariablePercentage = New instat.ucrReceiverSingle()
         Me.lblThreeVariableFactorAsPercentages = New System.Windows.Forms.Label()
-        Me.ucrChkThreeVariablePercentageProportion = New instat.ucrCheck()
-        Me.ucrChkThreeVariableDisplayAsPercentage = New instat.ucrCheck()
         Me.rdoThreeVariable = New System.Windows.Forms.RadioButton()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.lblThreeVariableSecondFactor = New System.Windows.Forms.Label()
-        Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverThreeVariableThirdVariable = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSecondSkimrGroupByFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSkimrGroupByFactor = New instat.ucrReceiverSingle()
-        Me.ucrPnlDescribe = New instat.UcrPanel()
-        Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
-        Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.lbSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.grpFrequency = New System.Windows.Forms.GroupBox()
@@ -85,41 +66,34 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSecondGroupByFactor = New System.Windows.Forms.Label()
         Me.grpTwoVariablePercentages = New System.Windows.Forms.GroupBox()
         Me.rdoTwoVariable = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.ucrSaveTable = New instat.ucrSave()
+        Me.ucrReceiverThreeVariablePercentage = New instat.ucrReceiverSingle()
+        Me.ucrChkThreeVariablePercentageProportion = New instat.ucrCheck()
+        Me.ucrChkThreeVariableDisplayAsPercentage = New instat.ucrCheck()
+        Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverThreeVariableThirdVariable = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecondSkimrGroupByFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSkimrGroupByFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSecondTwoVariableFactor = New instat.ucrReceiverSingle()
+        Me.ucrSelectorDescribeTwoVar = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.ucrNudSigFigs = New instat.ucrNud()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.ucrReceiverPercentages = New instat.ucrReceiverSingle()
+        Me.ucrChkPercentageProportion = New instat.ucrCheck()
+        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
+        Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
+        Me.ucrPnlDescribe = New instat.UcrPanel()
         Me.grpThreeVariablePercentages.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpFrequency.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.grpTwoVariablePercentages.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrNudColumnFactors
-        '
-        Me.ucrNudColumnFactors.AutoSize = True
-        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumnFactors.Location = New System.Drawing.Point(129, 48)
-        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudColumnFactors.TabIndex = 6
-        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrReceiverPercentages
-        '
-        Me.ucrReceiverPercentages.AutoSize = True
-        Me.ucrReceiverPercentages.frmParent = Me
-        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(21, 63)
-        Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
-        Me.ucrReceiverPercentages.Selector = Nothing
-        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPercentages.strNcFilePath = ""
-        Me.ucrReceiverPercentages.TabIndex = 8
-        Me.ucrReceiverPercentages.ucrSelector = Nothing
         '
         'lblFactorsAsPercentage
         '
@@ -132,39 +106,6 @@ Partial Class dlgDescribeTwoVariable
         Me.lblFactorsAsPercentage.Tag = "Of Factor (Optional):"
         Me.lblFactorsAsPercentage.Text = "Factors as Percentage:"
         '
-        'ucrChkPercentageProportion
-        '
-        Me.ucrChkPercentageProportion.AutoSize = True
-        Me.ucrChkPercentageProportion.Checked = False
-        Me.ucrChkPercentageProportion.Location = New System.Drawing.Point(14, 86)
-        Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
-        Me.ucrChkPercentageProportion.Size = New System.Drawing.Size(154, 23)
-        Me.ucrChkPercentageProportion.TabIndex = 3
-        '
-        'ucrNudSigFigs
-        '
-        Me.ucrNudSigFigs.AutoSize = True
-        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigFigs.Location = New System.Drawing.Point(129, 22)
-        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSigFigs.TabIndex = 5
-        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputMarginName
-        '
-        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
-        Me.ucrInputMarginName.AutoSize = True
-        Me.ucrInputMarginName.IsMultiline = False
-        Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(53, 98)
-        Me.ucrInputMarginName.Name = "ucrInputMarginName"
-        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputMarginName.TabIndex = 4
-        '
         'lblSigFigs
         '
         Me.lblSigFigs.AutoSize = True
@@ -175,15 +116,6 @@ Partial Class dlgDescribeTwoVariable
         Me.lblSigFigs.TabIndex = 0
         Me.lblSigFigs.Tag = "Significant_Figures:"
         Me.lblSigFigs.Text = "Significant Figures:"
-        '
-        'ucrChkDisplayMargins
-        '
-        Me.ucrChkDisplayMargins.AutoSize = True
-        Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(9, 74)
-        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(149, 23)
-        Me.ucrChkDisplayMargins.TabIndex = 2
         '
         'grpThreeVariablePercentages
         '
@@ -198,19 +130,6 @@ Partial Class dlgDescribeTwoVariable
         Me.grpThreeVariablePercentages.TabStop = False
         Me.grpThreeVariablePercentages.Text = "Percentages"
         '
-        'ucrReceiverThreeVariablePercentage
-        '
-        Me.ucrReceiverThreeVariablePercentage.AutoSize = True
-        Me.ucrReceiverThreeVariablePercentage.frmParent = Me
-        Me.ucrReceiverThreeVariablePercentage.Location = New System.Drawing.Point(21, 63)
-        Me.ucrReceiverThreeVariablePercentage.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverThreeVariablePercentage.Name = "ucrReceiverThreeVariablePercentage"
-        Me.ucrReceiverThreeVariablePercentage.Selector = Nothing
-        Me.ucrReceiverThreeVariablePercentage.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverThreeVariablePercentage.strNcFilePath = ""
-        Me.ucrReceiverThreeVariablePercentage.TabIndex = 3
-        Me.ucrReceiverThreeVariablePercentage.ucrSelector = Nothing
-        '
         'lblThreeVariableFactorAsPercentages
         '
         Me.lblThreeVariableFactorAsPercentages.AutoSize = True
@@ -221,24 +140,6 @@ Partial Class dlgDescribeTwoVariable
         Me.lblThreeVariableFactorAsPercentages.TabIndex = 2
         Me.lblThreeVariableFactorAsPercentages.Tag = "Factors as Percentage:"
         Me.lblThreeVariableFactorAsPercentages.Text = "Of Factor (Optional):"
-        '
-        'ucrChkThreeVariablePercentageProportion
-        '
-        Me.ucrChkThreeVariablePercentageProportion.AutoSize = True
-        Me.ucrChkThreeVariablePercentageProportion.Checked = False
-        Me.ucrChkThreeVariablePercentageProportion.Location = New System.Drawing.Point(14, 88)
-        Me.ucrChkThreeVariablePercentageProportion.Name = "ucrChkThreeVariablePercentageProportion"
-        Me.ucrChkThreeVariablePercentageProportion.Size = New System.Drawing.Size(136, 23)
-        Me.ucrChkThreeVariablePercentageProportion.TabIndex = 0
-        '
-        'ucrChkThreeVariableDisplayAsPercentage
-        '
-        Me.ucrChkThreeVariableDisplayAsPercentage.AutoSize = True
-        Me.ucrChkThreeVariableDisplayAsPercentage.Checked = False
-        Me.ucrChkThreeVariableDisplayAsPercentage.Location = New System.Drawing.Point(14, 19)
-        Me.ucrChkThreeVariableDisplayAsPercentage.Name = "ucrChkThreeVariableDisplayAsPercentage"
-        Me.ucrChkThreeVariableDisplayAsPercentage.Size = New System.Drawing.Size(135, 23)
-        Me.ucrChkThreeVariableDisplayAsPercentage.TabIndex = 0
         '
         'rdoThreeVariable
         '
@@ -287,109 +188,6 @@ Partial Class dlgDescribeTwoVariable
         Me.lblThreeVariableSecondFactor.Tag = ""
         Me.lblThreeVariableSecondFactor.Text = "Second Variable :"
         '
-        'ucrReceiverThreeVariableSecondFactor
-        '
-        Me.ucrReceiverThreeVariableSecondFactor.AutoSize = True
-        Me.ucrReceiverThreeVariableSecondFactor.frmParent = Me
-        Me.ucrReceiverThreeVariableSecondFactor.Location = New System.Drawing.Point(264, 176)
-        Me.ucrReceiverThreeVariableSecondFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverThreeVariableSecondFactor.Name = "ucrReceiverThreeVariableSecondFactor"
-        Me.ucrReceiverThreeVariableSecondFactor.Selector = Nothing
-        Me.ucrReceiverThreeVariableSecondFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverThreeVariableSecondFactor.strNcFilePath = ""
-        Me.ucrReceiverThreeVariableSecondFactor.TabIndex = 36
-        Me.ucrReceiverThreeVariableSecondFactor.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 477)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 43
-        '
-        'ucrReceiverThreeVariableThirdVariable
-        '
-        Me.ucrReceiverThreeVariableThirdVariable.AutoSize = True
-        Me.ucrReceiverThreeVariableThirdVariable.frmParent = Me
-        Me.ucrReceiverThreeVariableThirdVariable.Location = New System.Drawing.Point(265, 219)
-        Me.ucrReceiverThreeVariableThirdVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverThreeVariableThirdVariable.Name = "ucrReceiverThreeVariableThirdVariable"
-        Me.ucrReceiverThreeVariableThirdVariable.Selector = Nothing
-        Me.ucrReceiverThreeVariableThirdVariable.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverThreeVariableThirdVariable.strNcFilePath = ""
-        Me.ucrReceiverThreeVariableThirdVariable.TabIndex = 38
-        Me.ucrReceiverThreeVariableThirdVariable.ucrSelector = Nothing
-        '
-        'ucrReceiverSecondSkimrGroupByFactor
-        '
-        Me.ucrReceiverSecondSkimrGroupByFactor.AutoSize = True
-        Me.ucrReceiverSecondSkimrGroupByFactor.frmParent = Me
-        Me.ucrReceiverSecondSkimrGroupByFactor.Location = New System.Drawing.Point(265, 219)
-        Me.ucrReceiverSecondSkimrGroupByFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondSkimrGroupByFactor.Name = "ucrReceiverSecondSkimrGroupByFactor"
-        Me.ucrReceiverSecondSkimrGroupByFactor.Selector = Nothing
-        Me.ucrReceiverSecondSkimrGroupByFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondSkimrGroupByFactor.strNcFilePath = ""
-        Me.ucrReceiverSecondSkimrGroupByFactor.TabIndex = 34
-        Me.ucrReceiverSecondSkimrGroupByFactor.ucrSelector = Nothing
-        '
-        'ucrReceiverSkimrGroupByFactor
-        '
-        Me.ucrReceiverSkimrGroupByFactor.AutoSize = True
-        Me.ucrReceiverSkimrGroupByFactor.frmParent = Me
-        Me.ucrReceiverSkimrGroupByFactor.Location = New System.Drawing.Point(264, 176)
-        Me.ucrReceiverSkimrGroupByFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSkimrGroupByFactor.Name = "ucrReceiverSkimrGroupByFactor"
-        Me.ucrReceiverSkimrGroupByFactor.Selector = Nothing
-        Me.ucrReceiverSkimrGroupByFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSkimrGroupByFactor.strNcFilePath = ""
-        Me.ucrReceiverSkimrGroupByFactor.TabIndex = 32
-        Me.ucrReceiverSkimrGroupByFactor.ucrSelector = Nothing
-        '
-        'ucrPnlDescribe
-        '
-        Me.ucrPnlDescribe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlDescribe.Location = New System.Drawing.Point(39, 3)
-        Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
-        Me.ucrPnlDescribe.Size = New System.Drawing.Size(317, 34)
-        Me.ucrPnlDescribe.TabIndex = 22
-        '
-        'ucrReceiverSecondTwoVariableFactor
-        '
-        Me.ucrReceiverSecondTwoVariableFactor.AutoSize = True
-        Me.ucrReceiverSecondTwoVariableFactor.frmParent = Me
-        Me.ucrReceiverSecondTwoVariableFactor.Location = New System.Drawing.Point(264, 176)
-        Me.ucrReceiverSecondTwoVariableFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondTwoVariableFactor.Name = "ucrReceiverSecondTwoVariableFactor"
-        Me.ucrReceiverSecondTwoVariableFactor.Selector = Nothing
-        Me.ucrReceiverSecondTwoVariableFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverSecondTwoVariableFactor.strNcFilePath = ""
-        Me.ucrReceiverSecondTwoVariableFactor.TabIndex = 25
-        Me.ucrReceiverSecondTwoVariableFactor.ucrSelector = Nothing
-        '
-        'ucrSelectorDescribeTwoVar
-        '
-        Me.ucrSelectorDescribeTwoVar.AutoSize = True
-        Me.ucrSelectorDescribeTwoVar.bDropUnusedFilterLevels = False
-        Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
-        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = True
-        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(3, 36)
-        Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
-        Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorDescribeTwoVar.TabIndex = 28
-        '
-        'ucrChkDisplayAsPercentage
-        '
-        Me.ucrChkDisplayAsPercentage.AutoSize = True
-        Me.ucrChkDisplayAsPercentage.Checked = False
-        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 19)
-        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
-        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(135, 23)
-        Me.ucrChkDisplayAsPercentage.TabIndex = 0
-        '
         'cmdSummaries
         '
         Me.cmdSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -405,21 +203,13 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.cmdSummaries)
+        Me.grpOptions.Controls.Add(Me.cmdMissingOptions)
         Me.grpOptions.Location = New System.Drawing.Point(249, 247)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(155, 76)
+        Me.grpOptions.Size = New System.Drawing.Size(155, 108)
         Me.grpOptions.TabIndex = 40
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.AutoSize = True
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 19)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkOmitMissing.TabIndex = 0
         '
         'lbSecondVariable
         '
@@ -625,25 +415,12 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoTwoVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTwoVariable.UseVisualStyleBackColor = True
         '
-        'ucrReceiverFirstVars
-        '
-        Me.ucrReceiverFirstVars.AutoSize = True
-        Me.ucrReceiverFirstVars.frmParent = Me
-        Me.ucrReceiverFirstVars.Location = New System.Drawing.Point(264, 73)
-        Me.ucrReceiverFirstVars.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFirstVars.Name = "ucrReceiverFirstVars"
-        Me.ucrReceiverFirstVars.Selector = Nothing
-        Me.ucrReceiverFirstVars.Size = New System.Drawing.Size(120, 79)
-        Me.ucrReceiverFirstVars.strNcFilePath = ""
-        Me.ucrReceiverFirstVars.TabIndex = 30
-        Me.ucrReceiverFirstVars.ucrSelector = Nothing
-        '
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(272, 378)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(6, 72)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Size = New System.Drawing.Size(104, 23)
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdMissingOptions.TabIndex = 46
         Me.cmdMissingOptions.Text = "Missing Options..."
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
@@ -657,14 +434,238 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSaveTable.Size = New System.Drawing.Size(399, 34)
         Me.ucrSaveTable.TabIndex = 47
         '
+        'ucrReceiverThreeVariablePercentage
+        '
+        Me.ucrReceiverThreeVariablePercentage.AutoSize = True
+        Me.ucrReceiverThreeVariablePercentage.frmParent = Nothing
+        Me.ucrReceiverThreeVariablePercentage.Location = New System.Drawing.Point(21, 63)
+        Me.ucrReceiverThreeVariablePercentage.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverThreeVariablePercentage.Name = "ucrReceiverThreeVariablePercentage"
+        Me.ucrReceiverThreeVariablePercentage.Selector = Nothing
+        Me.ucrReceiverThreeVariablePercentage.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverThreeVariablePercentage.strNcFilePath = ""
+        Me.ucrReceiverThreeVariablePercentage.TabIndex = 3
+        Me.ucrReceiverThreeVariablePercentage.ucrSelector = Nothing
+        '
+        'ucrChkThreeVariablePercentageProportion
+        '
+        Me.ucrChkThreeVariablePercentageProportion.AutoSize = True
+        Me.ucrChkThreeVariablePercentageProportion.Checked = False
+        Me.ucrChkThreeVariablePercentageProportion.Location = New System.Drawing.Point(14, 88)
+        Me.ucrChkThreeVariablePercentageProportion.Name = "ucrChkThreeVariablePercentageProportion"
+        Me.ucrChkThreeVariablePercentageProportion.Size = New System.Drawing.Size(136, 23)
+        Me.ucrChkThreeVariablePercentageProportion.TabIndex = 0
+        '
+        'ucrChkThreeVariableDisplayAsPercentage
+        '
+        Me.ucrChkThreeVariableDisplayAsPercentage.AutoSize = True
+        Me.ucrChkThreeVariableDisplayAsPercentage.Checked = False
+        Me.ucrChkThreeVariableDisplayAsPercentage.Location = New System.Drawing.Point(14, 19)
+        Me.ucrChkThreeVariableDisplayAsPercentage.Name = "ucrChkThreeVariableDisplayAsPercentage"
+        Me.ucrChkThreeVariableDisplayAsPercentage.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkThreeVariableDisplayAsPercentage.TabIndex = 0
+        '
+        'ucrReceiverThreeVariableSecondFactor
+        '
+        Me.ucrReceiverThreeVariableSecondFactor.AutoSize = True
+        Me.ucrReceiverThreeVariableSecondFactor.frmParent = Me
+        Me.ucrReceiverThreeVariableSecondFactor.Location = New System.Drawing.Point(264, 176)
+        Me.ucrReceiverThreeVariableSecondFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverThreeVariableSecondFactor.Name = "ucrReceiverThreeVariableSecondFactor"
+        Me.ucrReceiverThreeVariableSecondFactor.Selector = Nothing
+        Me.ucrReceiverThreeVariableSecondFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverThreeVariableSecondFactor.strNcFilePath = ""
+        Me.ucrReceiverThreeVariableSecondFactor.TabIndex = 36
+        Me.ucrReceiverThreeVariableSecondFactor.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(8, 477)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 43
+        '
+        'ucrReceiverThreeVariableThirdVariable
+        '
+        Me.ucrReceiverThreeVariableThirdVariable.AutoSize = True
+        Me.ucrReceiverThreeVariableThirdVariable.frmParent = Me
+        Me.ucrReceiverThreeVariableThirdVariable.Location = New System.Drawing.Point(265, 219)
+        Me.ucrReceiverThreeVariableThirdVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverThreeVariableThirdVariable.Name = "ucrReceiverThreeVariableThirdVariable"
+        Me.ucrReceiverThreeVariableThirdVariable.Selector = Nothing
+        Me.ucrReceiverThreeVariableThirdVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverThreeVariableThirdVariable.strNcFilePath = ""
+        Me.ucrReceiverThreeVariableThirdVariable.TabIndex = 38
+        Me.ucrReceiverThreeVariableThirdVariable.ucrSelector = Nothing
+        '
+        'ucrReceiverSecondSkimrGroupByFactor
+        '
+        Me.ucrReceiverSecondSkimrGroupByFactor.AutoSize = True
+        Me.ucrReceiverSecondSkimrGroupByFactor.frmParent = Me
+        Me.ucrReceiverSecondSkimrGroupByFactor.Location = New System.Drawing.Point(265, 219)
+        Me.ucrReceiverSecondSkimrGroupByFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondSkimrGroupByFactor.Name = "ucrReceiverSecondSkimrGroupByFactor"
+        Me.ucrReceiverSecondSkimrGroupByFactor.Selector = Nothing
+        Me.ucrReceiverSecondSkimrGroupByFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondSkimrGroupByFactor.strNcFilePath = ""
+        Me.ucrReceiverSecondSkimrGroupByFactor.TabIndex = 34
+        Me.ucrReceiverSecondSkimrGroupByFactor.ucrSelector = Nothing
+        '
+        'ucrReceiverSkimrGroupByFactor
+        '
+        Me.ucrReceiverSkimrGroupByFactor.AutoSize = True
+        Me.ucrReceiverSkimrGroupByFactor.frmParent = Me
+        Me.ucrReceiverSkimrGroupByFactor.Location = New System.Drawing.Point(264, 176)
+        Me.ucrReceiverSkimrGroupByFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSkimrGroupByFactor.Name = "ucrReceiverSkimrGroupByFactor"
+        Me.ucrReceiverSkimrGroupByFactor.Selector = Nothing
+        Me.ucrReceiverSkimrGroupByFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSkimrGroupByFactor.strNcFilePath = ""
+        Me.ucrReceiverSkimrGroupByFactor.TabIndex = 32
+        Me.ucrReceiverSkimrGroupByFactor.ucrSelector = Nothing
+        '
+        'ucrReceiverSecondTwoVariableFactor
+        '
+        Me.ucrReceiverSecondTwoVariableFactor.AutoSize = True
+        Me.ucrReceiverSecondTwoVariableFactor.frmParent = Me
+        Me.ucrReceiverSecondTwoVariableFactor.Location = New System.Drawing.Point(264, 176)
+        Me.ucrReceiverSecondTwoVariableFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondTwoVariableFactor.Name = "ucrReceiverSecondTwoVariableFactor"
+        Me.ucrReceiverSecondTwoVariableFactor.Selector = Nothing
+        Me.ucrReceiverSecondTwoVariableFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSecondTwoVariableFactor.strNcFilePath = ""
+        Me.ucrReceiverSecondTwoVariableFactor.TabIndex = 25
+        Me.ucrReceiverSecondTwoVariableFactor.ucrSelector = Nothing
+        '
+        'ucrSelectorDescribeTwoVar
+        '
+        Me.ucrSelectorDescribeTwoVar.AutoSize = True
+        Me.ucrSelectorDescribeTwoVar.bDropUnusedFilterLevels = False
+        Me.ucrSelectorDescribeTwoVar.bShowHiddenColumns = False
+        Me.ucrSelectorDescribeTwoVar.bUseCurrentFilter = True
+        Me.ucrSelectorDescribeTwoVar.Location = New System.Drawing.Point(3, 36)
+        Me.ucrSelectorDescribeTwoVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDescribeTwoVar.Name = "ucrSelectorDescribeTwoVar"
+        Me.ucrSelectorDescribeTwoVar.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorDescribeTwoVar.TabIndex = 28
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.AutoSize = True
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 19)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkOmitMissing.TabIndex = 0
+        '
+        'ucrNudColumnFactors
+        '
+        Me.ucrNudColumnFactors.AutoSize = True
+        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumnFactors.Location = New System.Drawing.Point(129, 48)
+        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
+        Me.ucrNudColumnFactors.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudColumnFactors.TabIndex = 6
+        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSigFigs
+        '
+        Me.ucrNudSigFigs.AutoSize = True
+        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSigFigs.Location = New System.Drawing.Point(129, 22)
+        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
+        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSigFigs.TabIndex = 5
+        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMarginName
+        '
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.AutoSize = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(53, 98)
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
+        Me.ucrInputMarginName.TabIndex = 4
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.AutoSize = True
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(9, 74)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(149, 23)
+        Me.ucrChkDisplayMargins.TabIndex = 2
+        '
+        'ucrReceiverPercentages
+        '
+        Me.ucrReceiverPercentages.AutoSize = True
+        Me.ucrReceiverPercentages.frmParent = Nothing
+        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(21, 63)
+        Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
+        Me.ucrReceiverPercentages.Selector = Nothing
+        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPercentages.strNcFilePath = ""
+        Me.ucrReceiverPercentages.TabIndex = 8
+        Me.ucrReceiverPercentages.ucrSelector = Nothing
+        '
+        'ucrChkPercentageProportion
+        '
+        Me.ucrChkPercentageProportion.AutoSize = True
+        Me.ucrChkPercentageProportion.Checked = False
+        Me.ucrChkPercentageProportion.Location = New System.Drawing.Point(14, 86)
+        Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
+        Me.ucrChkPercentageProportion.Size = New System.Drawing.Size(154, 23)
+        Me.ucrChkPercentageProportion.TabIndex = 3
+        '
+        'ucrChkDisplayAsPercentage
+        '
+        Me.ucrChkDisplayAsPercentage.AutoSize = True
+        Me.ucrChkDisplayAsPercentage.Checked = False
+        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 19)
+        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
+        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkDisplayAsPercentage.TabIndex = 0
+        '
+        'ucrReceiverFirstVars
+        '
+        Me.ucrReceiverFirstVars.AutoSize = True
+        Me.ucrReceiverFirstVars.frmParent = Me
+        Me.ucrReceiverFirstVars.Location = New System.Drawing.Point(264, 73)
+        Me.ucrReceiverFirstVars.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFirstVars.Name = "ucrReceiverFirstVars"
+        Me.ucrReceiverFirstVars.Selector = Nothing
+        Me.ucrReceiverFirstVars.Size = New System.Drawing.Size(120, 79)
+        Me.ucrReceiverFirstVars.strNcFilePath = ""
+        Me.ucrReceiverFirstVars.TabIndex = 30
+        Me.ucrReceiverFirstVars.ucrSelector = Nothing
+        '
+        'ucrPnlDescribe
+        '
+        Me.ucrPnlDescribe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDescribe.Location = New System.Drawing.Point(39, 3)
+        Me.ucrPnlDescribe.Name = "ucrPnlDescribe"
+        Me.ucrPnlDescribe.Size = New System.Drawing.Size(317, 34)
+        Me.ucrPnlDescribe.TabIndex = 22
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(419, 530)
+        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrSaveTable)
-        Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.grpThreeVariablePercentages)
         Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.lblThreeVariableSecondFactor)
@@ -675,7 +676,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrReceiverSkimrGroupByFactor)
         Me.Controls.Add(Me.ucrReceiverSecondTwoVariableFactor)
         Me.Controls.Add(Me.ucrSelectorDescribeTwoVar)
-        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstVariable)
         Me.Controls.Add(Me.grpFrequency)
