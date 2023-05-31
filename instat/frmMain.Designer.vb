@@ -379,8 +379,9 @@ Partial Class frmMain
         Me.mnuTbOpenFromLibrary = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbSave = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuSaveData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSaveOutputTab = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSaveOutput = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSaveLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripSplitButton()
@@ -2966,11 +2967,12 @@ Partial Class frmMain
         'mnuTbOpen
         '
         Me.mnuTbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbOpen.DropDownButtonWidth = 18
         Me.mnuTbOpen.Image = Global.instat.My.Resources.Resources.openfromfile2
         Me.mnuTbOpen.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbOpen.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOpen.Name = "mnuTbOpen"
-        Me.mnuTbOpen.Size = New System.Drawing.Size(46, 34)
+        Me.mnuTbOpen.Size = New System.Drawing.Size(53, 34)
         Me.mnuTbOpen.Text = "&Open"
         Me.mnuTbOpen.ToolTipText = "Import"
         '
@@ -2988,7 +2990,7 @@ Partial Class frmMain
         '
         Me.mnuTbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbSave.DropDownButtonWidth = 18
-        Me.mnuTbSave.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSaveData, Me.mnuSaveOutputTab, Me.mnuSaveScript})
+        Me.mnuTbSave.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSaveData, Me.mnuSaveOutput, Me.mnuSaveScript, Me.mnuSaveLog})
         Me.mnuTbSave.Image = Global.instat.My.Resources.Resources.save2
         Me.mnuTbSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbSave.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
@@ -3003,12 +3005,12 @@ Partial Class frmMain
         Me.mnuSaveData.Size = New System.Drawing.Size(180, 22)
         Me.mnuSaveData.Text = "Save Data"
         '
-        'mnuSaveOutputTab
+        'mnuSaveOutput
         '
-        Me.mnuSaveOutputTab.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuSaveOutputTab.Name = "mnuSaveOutputTab"
-        Me.mnuSaveOutputTab.Size = New System.Drawing.Size(180, 22)
-        Me.mnuSaveOutputTab.Text = "Save Output Tab"
+        Me.mnuSaveOutput.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuSaveOutput.Name = "mnuSaveOutput"
+        Me.mnuSaveOutput.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSaveOutput.Text = "Save Output"
         '
         'mnuSaveScript
         '
@@ -3016,6 +3018,12 @@ Partial Class frmMain
         Me.mnuSaveScript.Name = "mnuSaveScript"
         Me.mnuSaveScript.Size = New System.Drawing.Size(180, 22)
         Me.mnuSaveScript.Text = "Save Script"
+        '
+        'mnuSaveLog
+        '
+        Me.mnuSaveLog.Name = "mnuSaveLog"
+        Me.mnuSaveLog.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSaveLog.Text = "Save Log"
         '
         'toolStripSeparator
         '
@@ -5707,6 +5715,7 @@ Partial Class frmMain
     Friend WithEvents mnuTbLogScript As ToolStripSplitButton
     Friend WithEvents mnuLogScript As ToolStripMenuItem
     Friend WithEvents mnuSaveData As ToolStripMenuItem
-    Friend WithEvents mnuSaveOutputTab As ToolStripMenuItem
+    Friend WithEvents mnuSaveOutput As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
+    Friend WithEvents mnuSaveLog As ToolStripMenuItem
 End Class

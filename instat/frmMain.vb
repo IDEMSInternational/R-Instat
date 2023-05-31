@@ -1060,11 +1060,11 @@ Public Class frmMain
         dlgAppend.ShowDialog()
     End Sub
 
-    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click, mnuSaveOutputTab.Click
+    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click, mnuSaveOutput.Click
         ucrOutput.UcrOutputPages.SaveTab()
     End Sub
 
-    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
+    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click, mnuSaveLog.Click
         ucrScriptWindow.SaveScript(True)
     End Sub
 
