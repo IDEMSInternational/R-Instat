@@ -73,7 +73,7 @@ Partial Class frmMaximiseOutput
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmMaximiseOutput"
-        Me.Text = "Output"
+        Me.Text = "Maximised Output"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
