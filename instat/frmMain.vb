@@ -670,7 +670,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.ButtonClick
+    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.ButtonClick, mnuSaveData.Click
         mnuFileSave_Click(sender, e)
     End Sub
 
@@ -1173,7 +1173,7 @@ Public Class frmMain
         dlgImportOpenRefine.ShowDialog()
     End Sub
 
-    Private Sub mnuFileSaveAsDataAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsDataAs.Click, mnuSaveData.Click
+    Private Sub mnuFileSaveAsDataAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsDataAs.Click
         dlgSaveAs.ShowDialog()
     End Sub
 

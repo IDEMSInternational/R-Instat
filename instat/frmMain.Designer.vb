@@ -671,6 +671,10 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator74 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator75 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator77 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2954,7 +2958,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.separator1, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuLastGraph, Me.mnuTbLogScript, Me.mnuMetadata, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.ToolStripSeparator74, Me.mnuLastGraph, Me.ToolStripSeparator75, Me.mnuTbLogScript, Me.mnuMetadata, Me.ToolStripSeparator76, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.ToolStripSeparator77, Me.mnuTbLan, Me.separator1})
         Me.Tool_strip.Location = New System.Drawing.Point(0, 24)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
@@ -3002,27 +3006,27 @@ Partial Class frmMain
         '
         Me.mnuSaveData.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuSaveData.Name = "mnuSaveData"
-        Me.mnuSaveData.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSaveData.Size = New System.Drawing.Size(139, 22)
         Me.mnuSaveData.Text = "Save Data"
         '
         'mnuSaveOutput
         '
         Me.mnuSaveOutput.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuSaveOutput.Name = "mnuSaveOutput"
-        Me.mnuSaveOutput.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSaveOutput.Size = New System.Drawing.Size(139, 22)
         Me.mnuSaveOutput.Text = "Save Output"
         '
         'mnuSaveScript
         '
         Me.mnuSaveScript.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuSaveScript.Name = "mnuSaveScript"
-        Me.mnuSaveScript.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSaveScript.Size = New System.Drawing.Size(139, 22)
         Me.mnuSaveScript.Text = "Save Script"
         '
         'mnuSaveLog
         '
         Me.mnuSaveLog.Name = "mnuSaveLog"
-        Me.mnuSaveLog.Size = New System.Drawing.Size(180, 22)
+        Me.mnuSaveLog.Size = New System.Drawing.Size(139, 22)
         Me.mnuSaveLog.Text = "Save Log"
         '
         'toolStripSeparator
@@ -5034,6 +5038,26 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'ToolStripSeparator74
+        '
+        Me.ToolStripSeparator74.Name = "ToolStripSeparator74"
+        Me.ToolStripSeparator74.Size = New System.Drawing.Size(6, 37)
+        '
+        'ToolStripSeparator75
+        '
+        Me.ToolStripSeparator75.Name = "ToolStripSeparator75"
+        Me.ToolStripSeparator75.Size = New System.Drawing.Size(6, 37)
+        '
+        'ToolStripSeparator76
+        '
+        Me.ToolStripSeparator76.Name = "ToolStripSeparator76"
+        Me.ToolStripSeparator76.Size = New System.Drawing.Size(6, 37)
+        '
+        'ToolStripSeparator77
+        '
+        Me.ToolStripSeparator77.Name = "ToolStripSeparator77"
+        Me.ToolStripSeparator77.Size = New System.Drawing.Size(6, 37)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5718,4 +5742,8 @@ Partial Class frmMain
     Friend WithEvents mnuSaveOutput As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
     Friend WithEvents mnuSaveLog As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator74 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator75 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator76 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator77 As ToolStripSeparator
 End Class
