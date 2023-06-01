@@ -68,7 +68,7 @@ Public Class sdgThemes
 
         ucrPanelGrid.SetLabel("Grid lines")
         ucrPanelGridMajor.SetLabel("Major grid lines ")
-        ucrPanelGridMinor.SetLabel("Major grid lines ")
+        ucrPanelGridMinor.SetLabel("Minor grid lines ")
         ucrPanelBorder.SetLabel("Panel border")
         ucrPanelBackGround.SetLabel("Panel background")
 
