@@ -610,13 +610,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub mnuLogScript_Click(sender As Object, e As EventArgs) Handles mnuLogScript.Click, mnuViewLogScript.Click
-        mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
-        mnuLogScript.Checked = mnuViewLogScript.Checked
-        UpdateLayout()
-    End Sub
-
-    Private Sub mnuTbLogScript_Click(sender As Object, e As EventArgs) Handles mnuTbLogScript.ButtonClick
+    Private Sub mnuLogScript_Click(sender As Object, e As EventArgs) Handles mnuLogScript.Click, mnuViewLogScript.Click, mnuTbLogScript.ButtonClick
         mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
         UpdateLayout()
@@ -2406,21 +2400,6 @@ Public Class frmMain
             ucrScriptWindow.CopyText()
         End If
     End Sub
-
-    'Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuEditCopySpecial.Click
-    '    dlgCopySpecial.ShowDialog()
-    'End Sub
-
-    'Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click
-    '    'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
-    '    If ctrActive.Equals(ucrScriptWindow) Then
-    '        ucrScriptWindow.PasteText()
-    '    End If
-    'End Sub
-
-    'Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click
-    '    dlgPasteNewColumns.ShowDialog()
-    'End Sub
 
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
         dlgScript.ShowDialog()
