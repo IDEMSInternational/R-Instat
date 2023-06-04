@@ -64,7 +64,7 @@ Public Class RParameter
     '''             parameter. In this case, a position of 0 means that the parameter will be put 
     '''             on the left side of the operation symbol (e.g. '!x')</para>
     '''             </summary> 
-    Private iPosition As Integer = -1
+    Public iPosition As Integer = -1
 
     ''' <summary>   If true then include the name of the parameter in the R script 
     '''             (e.g. 'dir="C:/Users/myName/InstatObject/R"'. </summary>

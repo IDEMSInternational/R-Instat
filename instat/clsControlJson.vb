@@ -23,36 +23,43 @@ Public Class clsControlJson
 
         For Each clsField As Reflection.FieldInfo In clsControl.GetType().GetFields(bindingFlags)
             Dim clsFieldType As Type = clsField.FieldType
-            If clsFieldType Is GetType(ucrNud) Then
-                Console.WriteLine("*** ignored ucrNud: " & clsField.Name)
-            ElseIf GetType(RSyntax).IsAssignableFrom(clsFieldType) Then
-                Dim clsRSyntax As RSyntax = DirectCast(clsField.GetValue(clsControl), RSyntax)
-                If clsRSyntax IsNot Nothing Then
-                    dctFields.Add(clsField.Name, clsRSyntax)
-                End If
-            ElseIf GetType(ucrReceiverSingle).IsAssignableFrom(clsFieldType) Then
-                Dim ucrReceiverSingle As ucrReceiverSingle = DirectCast(clsField.GetValue(clsControl), ucrReceiverSingle)
-                If ucrReceiverSingle IsNot Nothing Then
-                    Dim ucrReceiverSingleJson = New ucrReceiverSingleJson(ucrReceiverSingle)
-                    dctFields.Add(clsField.Name, ucrReceiverSingleJson)
-                End If
-            ElseIf GetType(ucrCore).IsAssignableFrom(clsFieldType) Then
+            If GetType(ucrCore).IsAssignableFrom(clsFieldType) Then
                 Dim ucrCore As ucrCore = DirectCast(clsField.GetValue(clsControl), ucrCore)
                 If ucrCore IsNot Nothing Then
                     Dim ucrCoreJson = New ucrCoreJson(ucrCore)
                     dctFields.Add(clsField.Name, ucrCoreJson)
                 End If
-            ElseIf GetType(Control).IsAssignableFrom(clsFieldType) Then 'field is a WinForm control
-                Console.WriteLine(clsField.Name)
-                dctFields.Add(clsField.Name, New clsControlJson(clsField.GetValue(clsControl)))
-                'Else
-                '    dctFields.Add(clsField.Name, clsField.GetValue(clsControl))
-                '    Dim clsJsonSettings As New JsonSerializerSettings With {
-                '            .ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                '            .Formatting = Formatting.Indented
-                '    }
-                '    Console.WriteLine("***" & clsField.Name & vbCrLf & JsonConvert.SerializeObject(clsField.GetValue(clsControl), clsJsonSettings))
             End If
+            'If clsFieldType Is GetType(ucrNud) Then
+            '    Console.WriteLine("*** ignored ucrNud: " & clsField.Name)
+            'ElseIf GetType(RSyntax).IsAssignableFrom(clsFieldType) Then
+            '    Dim clsRSyntax As RSyntax = DirectCast(clsField.GetValue(clsControl), RSyntax)
+            '    If clsRSyntax IsNot Nothing Then
+            '        dctFields.Add(clsField.Name, clsRSyntax)
+            '    End If
+            'ElseIf GetType(ucrReceiverSingle).IsAssignableFrom(clsFieldType) Then
+            '    Dim ucrReceiverSingle As ucrReceiverSingle = DirectCast(clsField.GetValue(clsControl), ucrReceiverSingle)
+            '    If ucrReceiverSingle IsNot Nothing Then
+            '        Dim ucrReceiverSingleJson = New ucrReceiverSingleJson(ucrReceiverSingle)
+            '        dctFields.Add(clsField.Name, ucrReceiverSingleJson)
+            '    End If
+            'ElseIf GetType(ucrCore).IsAssignableFrom(clsFieldType) Then
+            '    Dim ucrCore As ucrCore = DirectCast(clsField.GetValue(clsControl), ucrCore)
+            '    If ucrCore IsNot Nothing Then
+            '        Dim ucrCoreJson = New ucrCoreJson(ucrCore)
+            '        dctFields.Add(clsField.Name, ucrCoreJson)
+            '    End If
+            'ElseIf GetType(Control).IsAssignableFrom(clsFieldType) Then 'field is a WinForm control
+            '    Console.WriteLine(clsField.Name)
+            '    dctFields.Add(clsField.Name, New clsControlJson(clsField.GetValue(clsControl)))
+            '    'Else
+            '    '    dctFields.Add(clsField.Name, clsField.GetValue(clsControl))
+            '    '    Dim clsJsonSettings As New JsonSerializerSettings With {
+            '    '            .ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            '    '            .Formatting = Formatting.Indented
+            '    '    }
+            '    '    Console.WriteLine("***" & clsField.Name & vbCrLf & JsonConvert.SerializeObject(clsField.GetValue(clsControl), clsJsonSettings))
+            'End If
         Next
 
     End Sub
@@ -70,6 +77,7 @@ Public Class clsControlJson
     End Function
 
     Public Class ucrCoreJson
+        Inherits clsControlJson
 
         Public bAddRemoveParameter As Boolean = True
         Public bChangeParameterValue As Boolean = True
@@ -85,9 +93,15 @@ Public Class clsControlJson
         Public bAllowNonConditionValues As Boolean = True
         Public bIsVisible As Boolean = True
 
-        Public dctConditions As New Dictionary(Of Object, List(Of Condition))
+        Public lstAllRCodes As List(Of RCodeStructure)
+        Public lstAllRParameters As List(Of RParameter)
+        'Public lstValuesAndControl As List(Of KeyValuePair(Of ucrCore, Object()))
+        Public dctValuesAndControl As New Dictionary(Of String, Object())
+        Public dctConditions As Dictionary(Of Object, List(Of Condition))
 
         Public Sub New(ucrCore As ucrCore)
+            MyBase.New(ucrCore)
+
             bAddRemoveParameter = ucrCore.bAddRemoveParameter
             bChangeParameterValue = ucrCore.bChangeParameterValue
             bLinkedAddRemoveParameter = ucrCore.bLinkedAddRemoveParameter
@@ -100,6 +114,13 @@ Public Class clsControlJson
             bUpdateRCodeFromControl = ucrCore.bUpdateRCodeFromControl
             bAllowNonConditionValues = ucrCore.bAllowNonConditionValues
             bIsVisible = ucrCore.bIsVisible
+
+            lstAllRCodes = ucrCore.lstAllRCodes
+            lstAllRParameters = ucrCore.lstAllRParameters
+
+            For Each kvp In ucrCore.lstValuesAndControl
+                dctValuesAndControl.Add(kvp.Key.Name, kvp.Value)
+            Next
 
             dctConditions = ucrCore.dctConditions
         End Sub
