@@ -62,6 +62,7 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.toolStripMenuItemTextrepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,32 +119,32 @@ Partial Class dlgScatterPlot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemRugOptions, Me.toolStripMenuItemSmoothOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemRugOptions, Me.toolStripMenuItemSmoothOptions, Me.toolStripMenuItemTextrepelOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(162, 92)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(161, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemPointOptions
         '
         Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
-        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(161, 22)
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPointOptions.Text = "Point Options"
         '
         'toolStripMenuItemRugOptions
         '
         Me.toolStripMenuItemRugOptions.Name = "toolStripMenuItemRugOptions"
-        Me.toolStripMenuItemRugOptions.Size = New System.Drawing.Size(161, 22)
+        Me.toolStripMenuItemRugOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemRugOptions.Text = "Rug Options"
         '
         'toolStripMenuItemSmoothOptions
         '
         Me.toolStripMenuItemSmoothOptions.Name = "toolStripMenuItemSmoothOptions"
-        Me.toolStripMenuItemSmoothOptions.Size = New System.Drawing.Size(161, 22)
+        Me.toolStripMenuItemSmoothOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemSmoothOptions.Text = "Smooth Options"
         '
         'cmdOptions
@@ -292,6 +293,12 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
+        'toolStripMenuItemTextrepelOptions
+        '
+        Me.toolStripMenuItemTextrepelOptions.Name = "toolStripMenuItemTextrepelOptions"
+        Me.toolStripMenuItemTextrepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTextrepelOptions.Text = "Text_repel Options"
+        '
         'dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -351,4 +358,5 @@ Partial Class dlgScatterPlot
     Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemRugOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemSmoothOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTextrepelOptions As ToolStripMenuItem
 End Class

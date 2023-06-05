@@ -53,7 +53,7 @@ Public Class frmOutputWindow
     End Sub
 
     Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
-        frmMain.mnuViewOutputWindow.Checked = Me.Visible
+        frmMain.mnuViewOutput.Checked = Me.Visible
     End Sub
 
     Private Sub mnuContextRTB_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextRTB.Opening

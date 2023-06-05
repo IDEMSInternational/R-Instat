@@ -592,9 +592,9 @@ Partial Class dlgTransformText
         Me.rdoCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCase.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCase.Location = New System.Drawing.Point(94, 8)
+        Me.rdoCase.Location = New System.Drawing.Point(85, 8)
         Me.rdoCase.Name = "rdoCase"
-        Me.rdoCase.Size = New System.Drawing.Size(46, 34)
+        Me.rdoCase.Size = New System.Drawing.Size(54, 34)
         Me.rdoCase.TabIndex = 1
         Me.rdoCase.TabStop = True
         Me.rdoCase.Text = "Case"
@@ -628,7 +628,7 @@ Partial Class dlgTransformText
         Me.rdoPad.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoPad.Location = New System.Drawing.Point(197, 8)
         Me.rdoPad.Name = "rdoPad"
-        Me.rdoPad.Size = New System.Drawing.Size(51, 34)
+        Me.rdoPad.Size = New System.Drawing.Size(55, 34)
         Me.rdoPad.TabIndex = 3
         Me.rdoPad.TabStop = True
         Me.rdoPad.Text = "Pad"
@@ -645,7 +645,7 @@ Partial Class dlgTransformText
         Me.rdoSubstring.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoSubstring.Location = New System.Drawing.Point(7, 8)
         Me.rdoSubstring.Name = "rdoSubstring"
-        Me.rdoSubstring.Size = New System.Drawing.Size(87, 34)
+        Me.rdoSubstring.Size = New System.Drawing.Size(81, 34)
         Me.rdoSubstring.TabIndex = 8
         Me.rdoSubstring.TabStop = True
         Me.rdoSubstring.Text = "Substring"
@@ -660,9 +660,9 @@ Partial Class dlgTransformText
         Me.rdoWords.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWords.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWords.Location = New System.Drawing.Point(436, 8)
+        Me.rdoWords.Location = New System.Drawing.Point(418, 8)
         Me.rdoWords.Name = "rdoWords"
-        Me.rdoWords.Size = New System.Drawing.Size(45, 34)
+        Me.rdoWords.Size = New System.Drawing.Size(57, 34)
         Me.rdoWords.TabIndex = 7
         Me.rdoWords.TabStop = True
         Me.rdoWords.Text = "Words"
@@ -679,7 +679,7 @@ Partial Class dlgTransformText
         Me.rdoTrim.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTrim.Location = New System.Drawing.Point(310, 8)
         Me.rdoTrim.Name = "rdoTrim"
-        Me.rdoTrim.Size = New System.Drawing.Size(58, 34)
+        Me.rdoTrim.Size = New System.Drawing.Size(55, 34)
         Me.rdoTrim.TabIndex = 5
         Me.rdoTrim.TabStop = True
         Me.rdoTrim.Text = "Trim"
@@ -694,9 +694,9 @@ Partial Class dlgTransformText
         Me.rdoWrap.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWrap.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWrap.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWrap.Location = New System.Drawing.Point(367, 8)
+        Me.rdoWrap.Location = New System.Drawing.Point(361, 8)
         Me.rdoWrap.Name = "rdoWrap"
-        Me.rdoWrap.Size = New System.Drawing.Size(69, 34)
+        Me.rdoWrap.Size = New System.Drawing.Size(59, 34)
         Me.rdoWrap.TabIndex = 6
         Me.rdoWrap.TabStop = True
         Me.rdoWrap.Text = "Wrap"
@@ -713,7 +713,7 @@ Partial Class dlgTransformText
         Me.rdoTruncate.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTruncate.Location = New System.Drawing.Point(247, 8)
         Me.rdoTruncate.Name = "rdoTruncate"
-        Me.rdoTruncate.Size = New System.Drawing.Size(63, 34)
+        Me.rdoTruncate.Size = New System.Drawing.Size(66, 34)
         Me.rdoTruncate.TabIndex = 4
         Me.rdoTruncate.TabStop = True
         Me.rdoTruncate.Text = "Truncate"
