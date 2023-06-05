@@ -102,7 +102,7 @@ Partial Class dlgEdit
         '
         'lblRows
         '
-        Me.lblRows.Location = New System.Drawing.Point(240, 82)
+        Me.lblRows.Location = New System.Drawing.Point(240, 85)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(100, 14)
         Me.lblRows.TabIndex = 94
@@ -120,7 +120,7 @@ Partial Class dlgEdit
         '
         'lblNewValue
         '
-        Me.lblNewValue.Location = New System.Drawing.Point(240, 190)
+        Me.lblNewValue.Location = New System.Drawing.Point(240, 196)
         Me.lblNewValue.Name = "lblNewValue"
         Me.lblNewValue.Size = New System.Drawing.Size(100, 14)
         Me.lblNewValue.TabIndex = 96
