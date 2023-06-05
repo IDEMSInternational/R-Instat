@@ -41,7 +41,7 @@ Partial Class dlgEdit
         Me.ucrInputRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputRows.GetSetSelectedIndex = -1
         Me.ucrInputRows.IsReadOnly = False
-        Me.ucrInputRows.Location = New System.Drawing.Point(242, 209)
+        Me.ucrInputRows.Location = New System.Drawing.Point(242, 210)
         Me.ucrInputRows.Name = "ucrInputRows"
         Me.ucrInputRows.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputRows.TabIndex = 92
@@ -52,7 +52,7 @@ Partial Class dlgEdit
         Me.ucrNewName.AutoSize = True
         Me.ucrNewName.IsMultiline = False
         Me.ucrNewName.IsReadOnly = False
-        Me.ucrNewName.Location = New System.Drawing.Point(242, 209)
+        Me.ucrNewName.Location = New System.Drawing.Point(242, 210)
         Me.ucrNewName.Name = "ucrNewName"
         Me.ucrNewName.Size = New System.Drawing.Size(231, 21)
         Me.ucrNewName.TabIndex = 17
@@ -61,7 +61,7 @@ Partial Class dlgEdit
         '
         Me.ucrReceiverName.AutoSize = True
         Me.ucrReceiverName.frmParent = Me
-        Me.ucrReceiverName.Location = New System.Drawing.Point(242, 62)
+        Me.ucrReceiverName.Location = New System.Drawing.Point(242, 48)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
@@ -85,7 +85,7 @@ Partial Class dlgEdit
         Me.ucrSelectValues.bDropUnusedFilterLevels = False
         Me.ucrSelectValues.bShowHiddenColumns = False
         Me.ucrSelectValues.bUseCurrentFilter = True
-        Me.ucrSelectValues.Location = New System.Drawing.Point(9, 43)
+        Me.ucrSelectValues.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectValues.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectValues.Name = "ucrSelectValues"
         Me.ucrSelectValues.Size = New System.Drawing.Size(213, 183)
@@ -93,7 +93,7 @@ Partial Class dlgEdit
         '
         'lblColumns
         '
-        Me.lblColumns.Location = New System.Drawing.Point(239, 39)
+        Me.lblColumns.Location = New System.Drawing.Point(239, 25)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(100, 13)
         Me.lblColumns.TabIndex = 93
@@ -102,7 +102,7 @@ Partial Class dlgEdit
         '
         'lblRows
         '
-        Me.lblRows.Location = New System.Drawing.Point(239, 92)
+        Me.lblRows.Location = New System.Drawing.Point(239, 82)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(100, 14)
         Me.lblRows.TabIndex = 94
@@ -111,7 +111,7 @@ Partial Class dlgEdit
         '
         'lblCurrentValue
         '
-        Me.lblCurrentValue.Location = New System.Drawing.Point(242, 144)
+        Me.lblCurrentValue.Location = New System.Drawing.Point(242, 134)
         Me.lblCurrentValue.Name = "lblCurrentValue"
         Me.lblCurrentValue.Size = New System.Drawing.Size(100, 15)
         Me.lblCurrentValue.TabIndex = 95
@@ -120,7 +120,7 @@ Partial Class dlgEdit
         '
         'lblNewValue
         '
-        Me.lblNewValue.Location = New System.Drawing.Point(240, 189)
+        Me.lblNewValue.Location = New System.Drawing.Point(240, 190)
         Me.lblNewValue.Name = "lblNewValue"
         Me.lblNewValue.Size = New System.Drawing.Size(100, 14)
         Me.lblNewValue.TabIndex = 96
@@ -133,7 +133,7 @@ Partial Class dlgEdit
         Me.ucrRowNumber.AutoSize = True
         Me.ucrRowNumber.IsMultiline = False
         Me.ucrRowNumber.IsReadOnly = False
-        Me.ucrRowNumber.Location = New System.Drawing.Point(242, 109)
+        Me.ucrRowNumber.Location = New System.Drawing.Point(242, 99)
         Me.ucrRowNumber.Name = "ucrRowNumber"
         Me.ucrRowNumber.Size = New System.Drawing.Size(148, 21)
         Me.ucrRowNumber.TabIndex = 97
@@ -142,7 +142,7 @@ Partial Class dlgEdit
         '
         Me.ucrReceiverRow.AutoSize = True
         Me.ucrReceiverRow.frmParent = Me
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(242, 163)
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(242, 153)
         Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRow.Name = "ucrReceiverRow"
         Me.ucrReceiverRow.Selector = Nothing
@@ -167,6 +167,7 @@ Partial Class dlgEdit
         Me.Controls.Add(Me.ucrReceiverName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectValues)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgEdit"
