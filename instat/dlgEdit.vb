@@ -58,11 +58,9 @@ Public Class dlgEdit
         ucrNewName.SetParameter(New RParameter("new_value", 2))
         ucrNewName.SetValidationTypeAsList()
 
-
         ucrInputRows.SetFactorReceiver(ucrReceiverName)
         ucrInputRows.SetParameter(New RParameter("new_value", 3))
         ucrInputRows.strQuotes = ""
-
 
         ucrInputRows.SetLinkedDisplayControl(lblNewValue)
     End Sub

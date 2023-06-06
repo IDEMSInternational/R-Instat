@@ -41,7 +41,7 @@ Partial Class dlgEdit
         Me.ucrInputRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputRows.GetSetSelectedIndex = -1
         Me.ucrInputRows.IsReadOnly = False
-        Me.ucrInputRows.Location = New System.Drawing.Point(242, 157)
+        Me.ucrInputRows.Location = New System.Drawing.Point(242, 170)
         Me.ucrInputRows.Name = "ucrInputRows"
         Me.ucrInputRows.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputRows.TabIndex = 92
@@ -52,7 +52,7 @@ Partial Class dlgEdit
         Me.ucrNewName.AutoSize = True
         Me.ucrNewName.IsMultiline = False
         Me.ucrNewName.IsReadOnly = False
-        Me.ucrNewName.Location = New System.Drawing.Point(242, 157)
+        Me.ucrNewName.Location = New System.Drawing.Point(242, 170)
         Me.ucrNewName.Name = "ucrNewName"
         Me.ucrNewName.Size = New System.Drawing.Size(231, 21)
         Me.ucrNewName.TabIndex = 17
@@ -61,7 +61,7 @@ Partial Class dlgEdit
         '
         Me.ucrReceiverName.AutoSize = True
         Me.ucrReceiverName.frmParent = Me
-        Me.ucrReceiverName.Location = New System.Drawing.Point(242, 48)
+        Me.ucrReceiverName.Location = New System.Drawing.Point(242, 39)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
@@ -74,7 +74,7 @@ Partial Class dlgEdit
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(34, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(34, 209)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 13
@@ -93,7 +93,7 @@ Partial Class dlgEdit
         '
         'lblColumns
         '
-        Me.lblColumns.Location = New System.Drawing.Point(240, 35)
+        Me.lblColumns.Location = New System.Drawing.Point(240, 26)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(100, 13)
         Me.lblColumns.TabIndex = 93
@@ -102,7 +102,7 @@ Partial Class dlgEdit
         '
         'lblRows
         '
-        Me.lblRows.Location = New System.Drawing.Point(240, 70)
+        Me.lblRows.Location = New System.Drawing.Point(240, 68)
         Me.lblRows.Name = "lblRows"
         Me.lblRows.Size = New System.Drawing.Size(100, 14)
         Me.lblRows.TabIndex = 94
@@ -111,7 +111,7 @@ Partial Class dlgEdit
         '
         'lblCurrentValue
         '
-        Me.lblCurrentValue.Location = New System.Drawing.Point(240, 107)
+        Me.lblCurrentValue.Location = New System.Drawing.Point(240, 112)
         Me.lblCurrentValue.Name = "lblCurrentValue"
         Me.lblCurrentValue.Size = New System.Drawing.Size(100, 15)
         Me.lblCurrentValue.TabIndex = 95
@@ -120,7 +120,7 @@ Partial Class dlgEdit
         '
         'lblNewValue
         '
-        Me.lblNewValue.Location = New System.Drawing.Point(240, 143)
+        Me.lblNewValue.Location = New System.Drawing.Point(240, 156)
         Me.lblNewValue.Name = "lblNewValue"
         Me.lblNewValue.Size = New System.Drawing.Size(100, 14)
         Me.lblNewValue.TabIndex = 96
@@ -132,8 +132,8 @@ Partial Class dlgEdit
         Me.ucrRowNumber.AddQuotesIfUnrecognised = True
         Me.ucrRowNumber.AutoSize = True
         Me.ucrRowNumber.IsMultiline = False
-        Me.ucrRowNumber.IsReadOnly = False
-        Me.ucrRowNumber.Location = New System.Drawing.Point(242, 84)
+        Me.ucrRowNumber.IsReadOnly = True
+        Me.ucrRowNumber.Location = New System.Drawing.Point(242, 82)
         Me.ucrRowNumber.Name = "ucrRowNumber"
         Me.ucrRowNumber.Size = New System.Drawing.Size(148, 21)
         Me.ucrRowNumber.TabIndex = 97
@@ -142,7 +142,7 @@ Partial Class dlgEdit
         '
         Me.ucrReceiverRow.AutoSize = True
         Me.ucrReceiverRow.frmParent = Me
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(242, 122)
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(242, 127)
         Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRow.Name = "ucrReceiverRow"
         Me.ucrReceiverRow.Selector = Nothing
@@ -156,7 +156,7 @@ Partial Class dlgEdit
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(482, 293)
+        Me.ClientSize = New System.Drawing.Size(482, 269)
         Me.Controls.Add(Me.ucrNewName)
         Me.Controls.Add(Me.ucrReceiverRow)
         Me.Controls.Add(Me.ucrRowNumber)
