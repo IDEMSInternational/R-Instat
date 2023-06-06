@@ -199,12 +199,12 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
+        Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
         Me.grpTransform.Controls.Add(Me.ucrChkOptions)
-        Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
         Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
         Me.grpTransform.Controls.Add(Me.ucrChkGroupByYear)
-        Me.grpTransform.Controls.Add(Me.rdoEvapVariable)
         Me.grpTransform.Controls.Add(Me.rdoEvapValue)
         Me.grpTransform.Controls.Add(Me.ucrPnlEvap)
         Me.grpTransform.Controls.Add(Me.ucrInputCircularPosition)
@@ -216,6 +216,7 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
         Me.grpTransform.Controls.Add(Me.lblSumRows)
         Me.grpTransform.Controls.Add(Me.ucrInputCondition)
+        Me.grpTransform.Controls.Add(Me.grpDegree)
         Me.grpTransform.Controls.Add(Me.lblCondition)
         Me.grpTransform.Controls.Add(Me.lblWBEvaporation)
         Me.grpTransform.Controls.Add(Me.lblCountOver)
@@ -691,7 +692,6 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverTMin)
-        Me.Controls.Add(Me.grpDegree)
         Me.Controls.Add(Me.ucrReceiverTMean)
         Me.Controls.Add(Me.lblTMin)
         Me.Controls.Add(Me.lblTMax)
