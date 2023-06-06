@@ -947,4 +947,9 @@ Public Class ucrDataView
             ttGoToRowOrColPage.RemoveAll()
         End If
     End Sub
+
+    Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+        dlgEdit.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.GetCellValue(GetFirstSelectedRow() - 1, GetFirstSelectedColumnName), GetFirstSelectedRow())
+        dlgEdit.ShowDialog()
+    End Sub
 End Class
