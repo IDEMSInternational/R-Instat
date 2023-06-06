@@ -443,7 +443,7 @@ Public Class frmMain
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
-        mnuTbLogScript.Checked = False
+        mnuLogScript.Checked = False
         UpdateLayout()
     End Sub
 
@@ -587,7 +587,7 @@ Public Class frmMain
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutput.Checked
-        mnuTbLogScript.Checked = mnuViewLogScript.Checked
+        mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Sub UpdateSwapDataAndMetadata()
@@ -610,9 +610,9 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTbLogScript.Click, mnuViewLogScript.Click
+    Private Sub mnuLogScript_Click(sender As Object, e As EventArgs) Handles mnuLogScript.Click, mnuViewLogScript.Click, mnuTbLogScript.ButtonClick
         mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
-        mnuTbLogScript.Checked = mnuViewLogScript.Checked
+        mnuLogScript.Checked = mnuViewLogScript.Checked
         UpdateLayout()
     End Sub
 
@@ -664,7 +664,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
+    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.ButtonClick, mnuSaveData.Click
         mnuFileSave_Click(sender, e)
     End Sub
 
@@ -1054,15 +1054,15 @@ Public Class frmMain
         dlgAppend.ShowDialog()
     End Sub
 
-    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
+    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click, mnuSaveOutput.Click
         ucrOutput.UcrOutputPages.SaveTab()
     End Sub
 
-    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
+    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click, mnuSaveLog.Click
         ucrScriptWindow.SaveScript(True)
     End Sub
 
-    Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click
+    Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click, mnuSaveScript.Click
         ucrScriptWindow.SaveScript(False)
     End Sub
 
@@ -2389,7 +2389,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.ButtonClick, mnuSubTbCopy.Click, mnuEditCopy.Click
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
         ElseIf ctrActive.Equals(ucrColumnMeta) Then
@@ -2399,21 +2399,6 @@ Public Class frmMain
         ElseIf ctrActive.Equals(ucrScriptWindow) Then
             ucrScriptWindow.CopyText()
         End If
-    End Sub
-
-    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbCopySpecial.Click, mnuEditCopySpecial.Click
-        dlgCopySpecial.ShowDialog()
-    End Sub
-
-    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuTbPaste.ButtonClick, mnuSubTbPaste.Click, mnuEditPaste.Click
-        'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
-        If ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.PasteText()
-        End If
-    End Sub
-
-    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbPasteSpecial.Click, mnuPasteSpecial.Click
-        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
