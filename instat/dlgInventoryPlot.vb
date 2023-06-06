@@ -22,6 +22,8 @@ Public Class dlgInventoryPlot
     Private clsClimaticMissing As New RFunction
     Private clsClimaticDetails As New RFunction
     Private clsAddKeyFunction As New RFunction
+    Private clsNewCAddKeyFunction As New RFunction
+
     Private clsDummyFunction As New RFunction
     Private bResetSubdialog As Boolean = True
 
@@ -74,7 +76,6 @@ Public Class dlgInventoryPlot
         ucrChkSummary.SetText("Summary")
         ucrChkSummary.AddParameterValuesCondition(True, "summary", "True")
         ucrChkSummary.AddParameterValuesCondition(False, "summary", "False")
-
 
         ucrChkDetails.AddRSyntaxContainsFunctionNamesCondition(True, {"climatic_details"})
         ucrChkDetails.SetText("Details")
@@ -167,9 +168,6 @@ Public Class dlgInventoryPlot
 
         ucrPnlOptions.AddRadioButton(rdoMissing)
         ucrPnlOptions.AddRadioButton(rdoGraph)
-        'ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoMissing, {"climatic_missing", "climatic_details"})
-        'ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoGraph, {frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot"})
-
         ucrPnlOptions.AddParameterValuesCondition(rdoMissing, "checked", "missing")
         ucrPnlOptions.AddParameterValuesCondition(rdoGraph, "checked", "graph")
 
@@ -196,7 +194,7 @@ Public Class dlgInventoryPlot
         clsClimaticDetails = New RFunction
         clsDummyFunction = New RFunction
         clsAddKeyFunction = New RFunction
-
+        clsNewCAddKeyFunction = New RFunction
 
         ucrInventoryPlotSelector.Reset()
         ucrReceiverElements.SetMeAsReceiver()
@@ -217,8 +215,15 @@ Public Class dlgInventoryPlot
         clsClimaticDetails.SetRCommand("climatic_details")
         clsClimaticDetails.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
-        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+        clsNewCAddKeyFunction.SetRCommand("c")
+        clsNewCAddKeyFunction.AddParameter("station", Chr(34) & "station_name" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsNewCAddKeyFunction.AddParameter("elements", Chr(34) & "Element" & Chr(34), bIncludeArgumentName:=False, iPosition:=2)
+        clsNewCAddKeyFunction.AddParameter("levels", Chr(34) & "Level" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsNewCAddKeyFunction.AddParameter("from", Chr(34) & "From" & Chr(34), bIncludeArgumentName:=False, iPosition:=4)
+        clsNewCAddKeyFunction.SetAssignTo("key_cols")
 
+        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+        clsAddKeyFunction.AddParameter("col_names", "key_cols", iPosition:=1)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
@@ -237,7 +242,6 @@ Public Class dlgInventoryPlot
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("date", 1), iAdditionalPairNo:=2)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("elements", 2), iAdditionalPairNo:=2)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("station", 3), iAdditionalPairNo:=2)
-        ucrInventoryPlotSelector.AddAdditionalCodeParameterPair(clsAddKeyFunction, New RParameter("data", 0), iAdditionalPairNo:=3)
 
         ucrInventoryPlotSelector.SetRCode(clsInventoryPlot, bReset)
         ucrReceiverDate.SetRCode(clsInventoryPlot, bReset)
@@ -250,8 +254,6 @@ Public Class dlgInventoryPlot
         ucrInputFacetBy.SetRCode(clsInventoryPlot, bReset)
         ucrSaveGraph.SetRCode(clsInventoryPlot, bReset)
         ucrReceiverStation.SetRCode(clsInventoryPlot, bReset)
-        'ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ''ucrChkSummary.SetRCode(clsDummyFunction, bReset)
         ucrChkDetails.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
         ucrChkMonth.SetRCode(clsClimaticDetails, bReset)
@@ -264,8 +266,7 @@ Public Class dlgInventoryPlot
         If bReset Then
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkSummary.SetRCode(clsDummyFunction, bReset)
-
-        End If 'ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -331,14 +332,16 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub AddingKeys()
-        If ucrSaveDetails.ucrChkSave.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=3)
-
+        If ucrSaveDetails.ucrChkSave.Checked AndAlso Not ucrReceiverStation.IsEmpty Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsNewCAddKeyFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=4)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
-
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsNewCAddKeyFunction)
         End If
+
     End Sub
+
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
         If ucrChkSummary.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
@@ -347,6 +350,7 @@ Public Class dlgInventoryPlot
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
         End If
         AddingKeys()
+
     End Sub
 
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
@@ -386,5 +390,11 @@ Public Class dlgInventoryPlot
 
     Private Sub ucrSaveDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveDetails.ControlValueChanged
         AddingKeys()
+        If ucrSaveDetails.IsComplete Then
+            clsAddKeyFunction.AddParameter("data_name", Chr(34) & ucrSaveDetails.GetText & Chr(34), iPosition:=0)
+        Else
+            clsAddKeyFunction.RemoveParameterByName("data_name")
+        End If
+
     End Sub
 End Class
