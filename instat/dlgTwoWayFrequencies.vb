@@ -159,7 +159,7 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrSaveGraph.Reset()
 
-        'Defining Table functions and default functions
+        'Defining Summary Table functions and default functions
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.obs", "TRUE")
@@ -168,11 +168,11 @@ Public Class dlgTwoWayFrequencies
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
         clsSjTab.AddParameter("title", Chr(34) & "" & Chr(34))
         clsSjTab.AddParameter("string.total", Chr(34) & "Total" & Chr(34))
-        clsSjTab.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+        clsSjTab.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorTwoWayFrequencies.strCurrentDataFrame,
-                                               strObjectName:="last_table")
+                                               strObjectName:="last_summary")
 
         'Defining Plot functions and default functions
         clsSjPlot.SetPackageName("sjPlot")
@@ -377,9 +377,9 @@ Public Class dlgTwoWayFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
-            ucrSaveGraph.SetAssignToIfUncheckedValue("last_table")
-            ucrSaveGraph.SetCheckBoxText("Save Table")
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Html)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
+            ucrSaveGraph.SetCheckBoxText("Save Summary")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)

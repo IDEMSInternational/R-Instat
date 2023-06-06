@@ -21,7 +21,7 @@ Public Class dlgHelpVignettes
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private strAvailablePackages() As String
-    Private clsHelpFunction, clsVignettesFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private Sub dlgHelpVignettes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -39,17 +39,14 @@ Public Class dlgHelpVignettes
         Dim clsGetPackages As New RFunction
         Dim expPackageNames As SymbolicExpression
         Dim chrPackageNames As CharacterVector
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.bSeparateThread = False
 
         ucrPnlHelpVignettes.AddRadioButton(rdoHelp)
         ucrPnlHelpVignettes.AddRadioButton(rdoVignettes)
 
-        ucrInputFunctionName.SetParameter(New RParameter("topic", 0))
         ucrInputFunctionName.AddQuotesIfUnrecognised = True
 
-        ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoHelp, "help")
-        ucrPnlHelpVignettes.AddFunctionNamesCondition(rdoVignettes, "browseVignettes")
+        ucrPnlHelpVignettes.AddParameterValuesCondition(rdoHelp, "type", "help")
+        ucrPnlHelpVignettes.AddParameterValuesCondition(rdoVignettes, "type", "browseVignettes")
 
         ucrPnlHelpVignettes.AddToLinkedControls(ucrChkFunction, {rdoHelp}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
         ucrChkFunction.AddToLinkedControls(ucrInputFunctionName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -66,45 +63,43 @@ Public Class dlgHelpVignettes
         End If
 
         If strAvailablePackages IsNot Nothing Then
-            ucrInputComboPackage.SetParameter(New RParameter("package", 1))
-            ucrInputComboPackage.SetItems(strAvailablePackages, bAddConditions:=True)
+            ucrInputComboPackage.SetItems(strAvailablePackages)
             ucrInputComboPackage.SetDropDownStyleAsNonEditable()
         End If
-
     End Sub
 
     Private Sub SetDefaults()
-        clsHelpFunction = New RFunction
-        clsVignettesFunction = New RFunction
+        clsDummyFunction = New RFunction
 
-        clsHelpFunction.SetPackageName("utils")
-        clsHelpFunction.SetRCommand("help")
-        clsHelpFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
+        ucrInputComboPackage.cboInput.SelectedItem = "datasets"
 
-        clsVignettesFunction.SetPackageName("utils")
-        clsVignettesFunction.SetRCommand("browseVignettes")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
+        clsDummyFunction.AddParameter("type", "help", iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputComboPackage.AddAdditionalCodeParameterPair(clsVignettesFunction, New RParameter("package", 0), iAdditionalPairNo:=1)
-        ucrInputComboPackage.SetRCode(clsHelpFunction, bReset)
-        ucrInputFunctionName.SetRCode(clsHelpFunction, bReset)
-        ucrChkFunction.SetRCode(clsHelpFunction, bReset)
-        ucrPnlHelpVignettes.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub ucrPnlHelpVignettes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHelpVignettes.ControlValueChanged
-        If rdoHelp.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsHelpFunction)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsVignettesFunction)
-        End If
+        ucrPnlHelpVignettes.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim strPackageName As String = ucrInputComboPackage.cboInput.SelectedItem
+        Dim strTopic As String = ucrInputFunctionName.GetText
+        If strPackageName <> "" Then
+            Dim strURL = clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic,
+                                                          bVignette:=rdoVignettes.Checked)
+            frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
+        End If
+    End Sub
+
+    Private Sub ucrPnlHelpVignettes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHelpVignettes.ControlValueChanged
+        If rdoHelp.Checked Then
+            clsDummyFunction.AddParameter("type", "help", iPosition:=0)
+        Else
+            clsDummyFunction.AddParameter("type", "browseVignettes", iPosition:=0)
+        End If
     End Sub
 End Class

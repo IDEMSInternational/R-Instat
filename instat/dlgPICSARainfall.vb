@@ -156,10 +156,11 @@ Public Class dlgPICSARainfall
         ucrVariablesAsFactorForPicsa.SetParameterIsString()
         ucrVariablesAsFactorForPicsa.bWithQuotes = False
 
-        ucrReceiverX.SetParameter(New RParameter("x", 0))
+        ucrReceiverX.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrSelectorPICSARainfall
         ucrReceiverX.SetClimaticType("year")
+        ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
         ucrReceiverX.bAddParameterIfEmpty = True
@@ -278,7 +279,7 @@ Public Class dlgPICSARainfall
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
 
-        ucrInputStation.SetName(strNone)
+        ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
 
         clsDatePeriodOperator = New ROperator
@@ -643,6 +644,7 @@ Public Class dlgPICSARainfall
         clsAsNumeric.SetRCommand("as.numeric")
 
         clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=1)
+        clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames, iPosition:=2)
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
