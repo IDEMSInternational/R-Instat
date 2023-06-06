@@ -153,8 +153,9 @@ Partial Class dlgEdit
         '
         'dlgEdit
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(482, 293)
         Me.Controls.Add(Me.ucrNewName)
         Me.Controls.Add(Me.ucrReceiverRow)
@@ -173,6 +174,7 @@ Partial Class dlgEdit
         Me.Name = "dlgEdit"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Tag = "Edit_Cell"
         Me.Text = "Edit Cell"
         Me.ResumeLayout(False)
         Me.PerformLayout()
