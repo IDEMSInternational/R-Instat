@@ -11,13 +11,13 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
 Public Class dlgScatterPlot
     Private clsRggplotFunction As New RFunction
-    Private clsRScatterGeomFunction As New RFunction
+    Private clsRScatterGeomFunction, clsLabelFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsLocalRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
@@ -45,7 +45,8 @@ Public Class dlgScatterPlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName}
+    Private strGeomTextRepelParameterName As String = "geom_text_repel"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName, strGeomTextRepelParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -117,7 +118,8 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
-        ucrSaveScatterPlot.SetSaveTypeAsGraph()
+        ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
+                                       strRObjectFormat:=RObjectFormat.Image)
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
         ucrSaveScatterPlot.SetIsComboBox()
@@ -154,6 +156,7 @@ Public Class dlgScatterPlot
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
+        clsLabelFunction = New RFunction
         clsRaesFunction = New RFunction
         clsGeomSmoothFunction = New RFunction
         clsGeomRugFunction = New RFunction
@@ -168,6 +171,7 @@ Public Class dlgScatterPlot
 
         toolStripMenuItemRugOptions.Enabled = False
         toolStripMenuItemSmoothOptions.Enabled = False
+        toolStripMenuItemTextrepelOptions.Enabled = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -184,6 +188,9 @@ Public Class dlgScatterPlot
 
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
+
+        clsLabelFunction.SetPackageName("ggrepel")
+        clsLabelFunction.SetRCommand("geom_text_repel")
 
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
@@ -212,7 +219,12 @@ Public Class dlgScatterPlot
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=1)
 
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorForScatter.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
+
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
@@ -288,6 +300,10 @@ Public Class dlgScatterPlot
         EnableDisableOptions(clsGeomSmoothFunction)
     End Sub
 
+    Private Sub toolStripMenuItemTextrepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextrepelOptions.Click
+        EnableDisableOptions(clsLabelFunction)
+    End Sub
+
     Private Sub EnableDisableOptions(clsTempFunction As RFunction)
         'SetupLayer sends the components storing the plot info (clsRaesFunction, clsRggplotFunction, ...) of dlgScatteredPlot through to sdgLayerOptions where these will be edited.
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsTempFunction,
@@ -298,7 +314,7 @@ Public Class dlgScatterPlot
         sdgLayerOptions.ShowDialog()
         ucrReceiverLabel.SetRCode(clsRaesFunction, bReset)
         bResetlayerSubdialog = False
-        'The aesthetics parameters on the main dialog are repopulated as required. 
+        'The aesthetics parameters on the main dialog are repopulated as required.
         For Each clsParam In clsRaesFunction.clsParameters
             Select Case clsParam.strArgumentName
                 Case "x"
@@ -329,5 +345,14 @@ Public Class dlgScatterPlot
     Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged,
         ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabel.ControlValueChanged
+        If ucrReceiverLabel.IsEmpty Then
+            clsBaseOperator.RemoveParameterByName(strGeomTextRepelParameterName)
+        Else
+            clsBaseOperator.AddParameter(strGeomTextRepelParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
+        End If
+        toolStripMenuItemTextrepelOptions.Enabled = Not ucrReceiverLabel.IsEmpty
     End Sub
 End Class

@@ -39,13 +39,19 @@ Partial Class ucrFactor
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grdFactorData = New unvell.ReoGrid.ReoGridControl()
+        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.btnSelectAll = New System.Windows.Forms.Button()
+        Me.pnlSelectOptions = New System.Windows.Forms.Panel()
+        Me.pnlSelectOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdFactorData
         '
+        Me.grdFactorData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdFactorData.BackColor = System.Drawing.Color.White
         Me.grdFactorData.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdFactorData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdFactorData.LeadHeaderContextMenuStrip = Nothing
         Me.grdFactorData.Location = New System.Drawing.Point(0, 0)
         Me.grdFactorData.Name = "grdFactorData"
@@ -56,19 +62,55 @@ Partial Class ucrFactor
         Me.grdFactorData.SheetTabVisible = True
         Me.grdFactorData.SheetTabWidth = 60
         Me.grdFactorData.ShowScrollEndSpacing = True
-        Me.grdFactorData.Size = New System.Drawing.Size(268, 206)
+        Me.grdFactorData.Size = New System.Drawing.Size(268, 186)
         Me.grdFactorData.TabIndex = 32
+        '
+        'lblSelected
+        '
+        Me.lblSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(172, 8)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(52, 13)
+        Me.lblSelected.TabIndex = 33
+        Me.lblSelected.Text = "Selected:"
+        '
+        'btnSelectAll
+        '
+        Me.btnSelectAll.Location = New System.Drawing.Point(3, 3)
+        Me.btnSelectAll.Name = "btnSelectAll"
+        Me.btnSelectAll.Size = New System.Drawing.Size(83, 23)
+        Me.btnSelectAll.TabIndex = 34
+        Me.btnSelectAll.Text = "Select All"
+        Me.btnSelectAll.UseVisualStyleBackColor = True
+        '
+        'pnlSelectOptions
+        '
+        Me.pnlSelectOptions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlSelectOptions.Controls.Add(Me.btnSelectAll)
+        Me.pnlSelectOptions.Controls.Add(Me.lblSelected)
+        Me.pnlSelectOptions.Location = New System.Drawing.Point(3, 192)
+        Me.pnlSelectOptions.Name = "pnlSelectOptions"
+        Me.pnlSelectOptions.Size = New System.Drawing.Size(268, 28)
+        Me.pnlSelectOptions.TabIndex = 35
         '
         'ucrFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Controls.Add(Me.pnlSelectOptions)
         Me.Controls.Add(Me.grdFactorData)
         Me.Name = "ucrFactor"
-        Me.Size = New System.Drawing.Size(268, 206)
+        Me.Size = New System.Drawing.Size(274, 224)
+        Me.pnlSelectOptions.ResumeLayout(False)
+        Me.pnlSelectOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents grdFactorData As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents lblSelected As Label
+    Friend WithEvents btnSelectAll As Button
+    Friend WithEvents pnlSelectOptions As Panel
 End Class

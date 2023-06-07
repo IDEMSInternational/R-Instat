@@ -58,10 +58,10 @@ structure_type_3_label="Measurement"
 
 #object labels
 overall_label="[Overall]"
-model_label="model"
 graph_label="graph"
 table_label="table"
-surv_label="surv"
+model_label="model"
+summary_label = "summary"
 
 #link labels
 keyed_link_label="keyed_link"

@@ -546,4 +546,16 @@ Public Class dlgName
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub grdCurrentWorkSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
+        If grdCurrentWorkSheet.ColumnCount > 0 Then
+            Dim iCol As Integer = e.Cell.Column
+            Dim parsedValue As Boolean
+            Dim strNewData As String = ValidateRVariable(e.Text, iCol)
+            If Not strNewData.ToLower.Equals("t") AndAlso Not strNewData.ToLower.Equals("f") AndAlso Not IsNumeric(strNewData) AndAlso Not Boolean.TryParse(strNewData, parsedValue) Then
+                RenameColumns(strNewData, e.Cell.Row, iCol)
+                ValidateNamesFromDictionary(iCol)
+            End If
+        End If
+    End Sub
 End Class

@@ -194,7 +194,7 @@ Partial Class dlgCluster
         Me.ucrPnlSelectData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlSelectData.Location = New System.Drawing.Point(255, 65)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
-        Me.ucrPnlSelectData.Size = New System.Drawing.Size(135, 48)
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(160, 48)
         Me.ucrPnlSelectData.TabIndex = 4
         '
         'ucrPnlPrepareData

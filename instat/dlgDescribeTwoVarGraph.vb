@@ -17,12 +17,12 @@
 Imports instat.Translations
 
 Public Class dlgDescribeTwoVarGraph
-    Private clsBaseOperator, clsCoordPolarStartOperator As New ROperator
+    Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator As New ROperator
     Private clsRGGplotFunction, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
             clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
             clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
-            clsScaleColourViridisFunction As New RFunction
+            clsScaleColourViridisFunction, clsPairThemesFunction As New RFunction
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,
@@ -52,6 +52,7 @@ Public Class dlgDescribeTwoVarGraph
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
     Private strFirstVariablesType, strSecondVariableType As String
+
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -274,8 +275,10 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub SetDefaults()
         clsGGpairsFunction = New RFunction
         clsRGGplotFunction = New RFunction
+        clsPairThemesFunction = New RFunction
         clsMosaicGgplotFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsPairOperator = New ROperator
         clsRFacet = New RFunction
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
@@ -329,7 +332,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
 
-        cmdOptions.Enabled = False
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
@@ -368,6 +370,13 @@ Public Class dlgDescribeTwoVarGraph
 
         clsGGpairsFunction.SetPackageName("GGally")
         clsGGpairsFunction.SetRCommand("ggpairs")
+
+        clsPairThemesFunction.SetPackageName("ggplot2")
+        clsPairThemesFunction.SetRCommand("theme")
+        clsPairThemesFunction.AddParameter("legend.position", Chr(34) & "none" & Chr(34), iPosition:=0)
+
+        clsPairOperator.SetOperation("+")
+        clsPairOperator.AddParameter("left", clsRFunctionParameter:=clsGGpairsFunction, iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
 
@@ -482,9 +491,11 @@ Public Class dlgDescribeTwoVarGraph
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGGpairsFunction)
+        clsPairOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsPairOperator)
+
         AddDataFrame()
-        ' bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -495,7 +506,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesCategoricalByNumericXNumeric, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesNumericByNumeric, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrReceiverSecondVar.AddAdditionalCodeParameterPair(clsAesStatSummaryHlineCategoricalByNumeric, New RParameter("y", 1), iAdditionalPairNo:=6)
-        ucrSaveGraph.AddAdditionalRCode(clsGGpairsFunction, bReset)
+        ucrSaveGraph.AddAdditionalRCode(clsPairOperator, bReset)
 
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrReceiverSecondVar.SetRCode(clsAesCategoricalByCategoricalBarChart, bReset)
@@ -532,12 +543,10 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub TestOkEnabled()
-        If rdoBy.Checked AndAlso Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
-            ucrBase.OKEnabled(True)
-        ElseIf rdoPairs.Checked AndAlso Not ucrReceiverFirstVars.IsEmpty Then
-            ucrBase.OKEnabled(True)
+        If rdoBy.Checked Then
+            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty AndAlso Not ucrReceiverSecondVar.IsEmpty AndAlso ucrSaveGraph.IsComplete)
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(Not ucrReceiverFirstVars.IsEmpty)
         End If
     End Sub
 
@@ -810,7 +819,9 @@ Public Class dlgDescribeTwoVarGraph
         ChangeGeomToMosaicAndFacet()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged, ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrPnlByPairs.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondVar.ControlContentsChanged,
+        ucrReceiverFirstVars.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged,
+        ucrPnlByPairs.ControlContentsChanged, ucrReceiverColour.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -844,8 +855,14 @@ Public Class dlgDescribeTwoVarGraph
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
         sdgPlots.tbpFacet.Enabled = True
-        ' Readd as may get removed by subdialog
         clsRFacet.AddParameter("facets", "~variable", iPosition:=0)
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub cmdPairOptions_Click(sender As Object, e As EventArgs) Handles cmdPairOptions.Click
+        sdgPairPlotOptions.SetRCode(clsNewPairOperator:=clsPairOperator, clsNewPairThemesFunction:=clsPairThemesFunction, clsNewGGpairAesFunction:=clsGGpairsFunction, bReset:=bResetSubdialog)
+
+        sdgPairPlotOptions.ShowDialog()
         bResetSubdialog = False
     End Sub
 
@@ -898,7 +915,6 @@ Public Class dlgDescribeTwoVarGraph
             strXName = "x"
             strYName = "y"
         End If
-
         If bAdd Then
             If clsRFacet.ContainsParameter("scales") Then
                 clsScaleParam = clsRFacet.GetParameter("scales")
@@ -952,10 +968,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.ucrMultipleVariables.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
         If rdoBy.Checked Then
-            cmdOptions.Enabled = True
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         Else
-            cmdOptions.Enabled = False
             ucrReceiverFirstVars.ucrMultipleVariables.SetSingleTypeStatus(False)
         End If
         If bRCodeSet Then
@@ -963,13 +977,14 @@ Public Class dlgDescribeTwoVarGraph
                 ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
                 clsDummyFunction.AddParameter("checked", "by", iPosition:=0)
             Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsGGpairsFunction)
+                ucrBase.clsRsyntax.SetBaseROperator(clsPairOperator)
                 clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
             End If
         End If
         EnableVisibleLabelControls()
         AddRemoveColourParameter()
         ChangeGeomToMosaicAndFacet()
+        HideShowOptions()
     End Sub
 
     Private Sub ucrSelectorTwoVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTwoVarGraph.ControlValueChanged
@@ -985,6 +1000,13 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrReceiverColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColour.ControlValueChanged
         AddRemoveColourParameter()
+        HideShowOptions()
+    End Sub
+
+    Private Sub HideShowOptions()
+        cmdOptions.Visible = Not rdoPairs.Checked
+        cmdPairOptions.Visible = rdoPairs.Checked
+        cmdPairOptions.Enabled = cmdPairOptions.Visible AndAlso Not ucrReceiverColour.IsEmpty
     End Sub
 
     Private Sub AddRemoveColourParameter()

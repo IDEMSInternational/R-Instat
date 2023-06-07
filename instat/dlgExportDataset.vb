@@ -22,9 +22,6 @@ Public Class dlgExportDataset
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'temporarily commented out because it overwrites lblConfirm text contents
-        'autoTranslate(Me) 
-
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +31,7 @@ Public Class dlgExportDataset
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

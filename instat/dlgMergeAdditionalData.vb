@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class dlgMergeAdditionalData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsInsertColumnFunction, clsGetColumnsFromData As New RFunction
+    Private clsInsertColumnFunction, clsGetColumnsFromData, clsListFunction, clsImportDataFunction As New RFunction
     Private lstJoinColumns As New List(Of String)
     Private clsLeftJoinFunction As New RFunction
     Private clsByListFunction As New RFunction
@@ -70,6 +70,8 @@ Public Class dlgMergeAdditionalData
         clsLeftJoinFunction = New RFunction
         clsByListFunction = New RFunction
         clsInsertColumnFunction = New RFunction
+        clsImportDataFunction = New RFunction
+        clsListFunction = New RFunction
         clsGetColumnsFromData = New RFunction
         clsGetVariablesFunction = New RFunction
 
@@ -90,7 +92,12 @@ Public Class dlgMergeAdditionalData
         clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
 
-        clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+
+        clsListFunction.SetRCommand("list")
+
+        clsImportDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+        clsImportDataFunction.AddParameter("data_tables", clsRFunctionParameter:=clsListFunction, iPosition:=0)
+        clsImportDataFunction.AddParameter("prefix", "FALSE", iPosition:=1)
 
         SetDataFrameAssign()
         ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
@@ -133,7 +140,8 @@ Public Class dlgMergeAdditionalData
 
     Private Sub SetDataFrameAssign()
         If clsLeftJoinFunction IsNot Nothing Then
-            If ucrToDataFrame.cboAvailableDataFrames.Text <> "" Then
+            Dim strParam As String = ucrToDataFrame.cboAvailableDataFrames.Text
+            If strParam <> "" Then
                 clsLeftJoinFunction.RemoveAssignTo()
                 If ucrChkSaveDataFrame.Checked Then
                     clsLeftJoinFunction.SetAssignTo(ucrInputSaveDataFrame.GetText, strTempDataframe:=ucrInputSaveDataFrame.GetText)
@@ -143,10 +151,10 @@ Public Class dlgMergeAdditionalData
                     cmdCheckUnique.Visible = False
                     SetInputCheckVisibility(False)
                 Else
-                    clsLeftJoinFunction.SetAssignTo(ucrToDataFrame.cboAvailableDataFrames.Text)
-                    clsInsertColumnFunction.AddParameter("data_name", Chr(34) & ucrToDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-                    clsInsertColumnFunction.AddParameter("col_data", clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=1)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+                    clsLeftJoinFunction.SetAssignTo(strParam)
+                    clsListFunction.ClearParameters()
+                    clsListFunction.AddParameter(strParam, clsRFunctionParameter:=clsLeftJoinFunction, iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportDataFunction)
                     ucrInputSaveDataFrame.Visible = False
                     cmdCheckUnique.Visible = True
                 End If

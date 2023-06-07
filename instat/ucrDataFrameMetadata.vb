@@ -82,9 +82,9 @@ Public Class ucrDataFrameMetadata
         If _clsDataBook Is Nothing Or _clsDataBook.DataFrames.Count = 0 Then
             Exit Sub
         End If
+        _grid.UpdateAllWorksheetStyles()
         _grid.AddColumns()
         _grid.AddRowData()
-        _grid.UpdateAllWorksheetStyles()
     End Sub
 
     Public Sub RefreshGridData()
