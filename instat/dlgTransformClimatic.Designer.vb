@@ -80,8 +80,6 @@ Partial Class dlgTransformClimatic
         Me.ttRdoHdd = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttRdoGdd = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttRdoMgdd = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrNudReducingEvap = New instat.ucrNud()
-        Me.ucrChkReducingEvap = New instat.ucrCheck()
         Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -111,11 +109,13 @@ Partial Class dlgTransformClimatic
         Me.ucrNudGDD = New instat.ucrNud()
         Me.ucrNudHDD = New instat.ucrNud()
         Me.ucrPnlDegree = New instat.UcrPanel()
+        Me.ucrNudReducingEvap = New instat.ucrNud()
         Me.ucrNudSumOver = New instat.ucrNud()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.ucrInputCumulative = New instat.ucrInputComboBox()
+        Me.ucrChkReducingEvap = New instat.ucrCheck()
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -229,7 +229,6 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Controls.Add(Me.lblSumOver)
         Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
         Me.grpTransform.Controls.Add(Me.ucrInputCumulative)
-        Me.grpTransform.Controls.Add(Me.ucrNudReducingEvap)
         Me.grpTransform.Controls.Add(Me.ucrChkReducingEvap)
         resources.ApplyResources(Me.grpTransform, "grpTransform")
         Me.grpTransform.Name = "grpTransform"
@@ -276,6 +275,7 @@ Partial Class dlgTransformClimatic
         Me.grpDegree.Controls.Add(Me.ucrNudHDD)
         Me.grpDegree.Controls.Add(Me.rdoDiurnalRange)
         Me.grpDegree.Controls.Add(Me.ucrPnlDegree)
+        Me.grpDegree.Controls.Add(Me.ucrNudReducingEvap)
         resources.ApplyResources(Me.grpDegree, "grpDegree")
         Me.grpDegree.Name = "grpDegree"
         Me.grpDegree.TabStop = False
@@ -401,22 +401,6 @@ Partial Class dlgTransformClimatic
         '
         resources.ApplyResources(Me.lblTMean, "lblTMean")
         Me.lblTMean.Name = "lblTMean"
-        '
-        'ucrNudReducingEvap
-        '
-        resources.ApplyResources(Me.ucrNudReducingEvap, "ucrNudReducingEvap")
-        Me.ucrNudReducingEvap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudReducingEvap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudReducingEvap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudReducingEvap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudReducingEvap.Name = "ucrNudReducingEvap"
-        Me.ucrNudReducingEvap.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkReducingEvap
-        '
-        resources.ApplyResources(Me.ucrChkReducingEvap, "ucrChkReducingEvap")
-        Me.ucrChkReducingEvap.Checked = False
-        Me.ucrChkReducingEvap.Name = "ucrChkReducingEvap"
         '
         'ucrSaveColumn
         '
@@ -645,6 +629,16 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrPnlDegree, "ucrPnlDegree")
         Me.ucrPnlDegree.Name = "ucrPnlDegree"
         '
+        'ucrNudReducingEvap
+        '
+        resources.ApplyResources(Me.ucrNudReducingEvap, "ucrNudReducingEvap")
+        Me.ucrNudReducingEvap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudReducingEvap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudReducingEvap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudReducingEvap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudReducingEvap.Name = "ucrNudReducingEvap"
+        Me.ucrNudReducingEvap.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudSumOver
         '
         resources.ApplyResources(Me.ucrNudSumOver, "ucrNudSumOver")
@@ -690,6 +684,12 @@ Partial Class dlgTransformClimatic
         Me.ucrInputCumulative.GetSetSelectedIndex = -1
         Me.ucrInputCumulative.IsReadOnly = False
         Me.ucrInputCumulative.Name = "ucrInputCumulative"
+        '
+        'ucrChkReducingEvap
+        '
+        resources.ApplyResources(Me.ucrChkReducingEvap, "ucrChkReducingEvap")
+        Me.ucrChkReducingEvap.Checked = False
+        Me.ucrChkReducingEvap.Name = "ucrChkReducingEvap"
         '
         'dlgTransformClimatic
         '

@@ -298,6 +298,17 @@ Public Class dlgEndOfRainsSeason
         ucrInputEndofSeasonOccurence.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
         ucrInputEndofSeasonOccurence.SetValidationTypeAsRVariable()
 
+        ucrChkReducingEvap.SetText("Reducing")
+        ucrChkReducingEvap.AddParameterPresentCondition(True, "reduce", True)
+        ucrChkReducingEvap.AddParameterPresentCondition(False, "reduce", False)
+
+        ucrNudReducingEvap.SetParameter(New RParameter("reduce"))
+        ucrNudReducingEvap.DecimalPlaces = 2
+        ucrNudReducingEvap.Increment = 0.01
+        ucrNudReducingEvap.Minimum = 0
+        ucrNudReducingEvap.Maximum = 1
+        ucrChkReducingEvap.AddToLinkedControls(ucrNudReducingEvap, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudReducingEvap.SetRDefault(0.05)
 
         'linking controls
         ucrChkEndofRainsDoy.AddToLinkedControls(ucrInputEndRainDoy, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -312,6 +323,7 @@ Public Class dlgEndOfRainsSeason
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrNudAmount, ucrNudTotalOverDays}, {rdoEndOfRains}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrNudCapacity, ucrNudWBLessThan, ucrChkEndofSeasonDoy}, {rdoEndOfSeasons}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEndOfRainsAndSeasons.AddToLinkedControls({ucrPnlEvaporation}, {rdoEndOfSeasons}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEndOfRainsAndSeasons.AddToLinkedControls(ucrChkReducingEvap, {rdoEndOfSeasons}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkEndofRainsDoy.SetLinkedDisplayControl(grpEndofRains)
         ucrPnlEvaporation.SetLinkedDisplayControl(lblEvaporation)

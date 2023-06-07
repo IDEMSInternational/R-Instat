@@ -499,7 +499,7 @@
     <value>True</value>
   </data>
   <data name="ucrReceiverEvap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 54</value>
+    <value>334, 54</value>
   </data>
   <data name="ucrReceiverEvap.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -688,7 +688,7 @@
     <value>82, 47</value>
   </data>
   <data name="ucrPnlEvap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 34</value>
+    <value>406, 34</value>
   </data>
   <data name="ucrPnlEvap.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -1299,6 +1299,30 @@
   <data name="&gt;&gt;ucrPnlDegree.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="ucrNudReducingEvap.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ucrNudReducingEvap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 87</value>
+  </data>
+  <data name="ucrNudReducingEvap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudReducingEvap.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;ucrNudReducingEvap.Name" xml:space="preserve">
+    <value>ucrNudReducingEvap</value>
+  </data>
+  <data name="&gt;&gt;ucrNudReducingEvap.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudReducingEvap.Parent" xml:space="preserve">
+    <value>grpDegree</value>
+  </data>
+  <data name="&gt;&gt;ucrNudReducingEvap.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
   <data name="grpDegree.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 0</value>
   </data>
@@ -1533,38 +1557,17 @@
   <data name="&gt;&gt;ucrInputCumulative.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
-  <data name="ucrNudReducingEvap.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ucrNudReducingEvap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 84</value>
-  </data>
-  <data name="ucrNudReducingEvap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudReducingEvap.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;ucrNudReducingEvap.Name" xml:space="preserve">
-    <value>ucrNudReducingEvap</value>
-  </data>
-  <data name="&gt;&gt;ucrNudReducingEvap.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudReducingEvap.Parent" xml:space="preserve">
-    <value>grpTransform</value>
-  </data>
-  <data name="&gt;&gt;ucrNudReducingEvap.ZOrder" xml:space="preserve">
-    <value>28</value>
-  </data>
   <data name="ucrChkReducingEvap.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="ucrChkReducingEvap.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ucrChkReducingEvap.Location" type="System.Drawing.Point, System.Drawing">
     <value>82, 82</value>
   </data>
   <data name="ucrChkReducingEvap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 23</value>
+    <value>116, 23</value>
   </data>
   <data name="ucrChkReducingEvap.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -1579,7 +1582,7 @@
     <value>grpTransform</value>
   </data>
   <data name="&gt;&gt;ucrChkReducingEvap.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>28</value>
   </data>
   <data name="grpTransform.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 261</value>
@@ -2141,6 +2144,9 @@
   </data>
   <data name="&gt;&gt;ucrChkUseMaxMin.ZOrder" xml:space="preserve">
     <value>23</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
