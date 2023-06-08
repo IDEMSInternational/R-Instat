@@ -338,7 +338,6 @@ Public Class dlgInventoryPlot
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsNewCAddKeyFunction)
         End If
-
     End Sub
 
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
