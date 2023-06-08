@@ -358,7 +358,6 @@ Public Class dlgInventoryPlot
             clsClimaticDetails.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticDetails)
-
         End If
 
     End Sub
