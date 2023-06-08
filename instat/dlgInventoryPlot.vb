@@ -330,7 +330,7 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub AddingKeys()
+    Private Sub AddOrRemoveKeyFunctions()
         If ucrSaveDetails.ucrChkSave.Checked AndAlso Not ucrReceiverStation.IsEmpty Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsNewCAddKeyFunction, iPosition:=3)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=4)
@@ -347,7 +347,7 @@ Public Class dlgInventoryPlot
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
         End If
-        AddingKeys()
+        AddOrRemoveKeyFunctions()
 
     End Sub
 
@@ -382,11 +382,11 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        AddingKeys()
+        AddOrRemoveKeyFunctions()
     End Sub
 
     Private Sub ucrSaveDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveDetails.ControlValueChanged
-        AddingKeys()
+        AddOrRemoveKeyFunctions()
         If ucrSaveDetails.IsComplete Then
             clsAddKeyFunction.AddParameter("data_name", Chr(34) & ucrSaveDetails.GetText & Chr(34), iPosition:=0)
         Else
