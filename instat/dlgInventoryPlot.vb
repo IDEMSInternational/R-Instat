@@ -72,7 +72,6 @@ Public Class dlgInventoryPlot
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        'ucrChkSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"climatic_missing"})
         ucrChkSummary.SetText("Summary")
         ucrChkSummary.AddParameterValuesCondition(True, "summary", "True")
         ucrChkSummary.AddParameterValuesCondition(False, "summary", "False")
