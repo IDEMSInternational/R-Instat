@@ -215,10 +215,10 @@ Public Class dlgInventoryPlot
         clsClimaticDetails.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
         clsNewCAddKeyFunction.SetRCommand("c")
-        clsNewCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames, bIncludeArgumentName:=False, iPosition:=1)
-        clsNewCAddKeyFunction.AddParameter("elements", Chr(34) & "Element" & Chr(34), bIncludeArgumentName:=False, iPosition:=2)
-        clsNewCAddKeyFunction.AddParameter("levels", Chr(34) & "Level" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
-        clsNewCAddKeyFunction.AddParameter("from", Chr(34) & "From" & Chr(34), bIncludeArgumentName:=False, iPosition:=4)
+        clsNewCAddKeyFunction.AddParameter("from", Chr(34) & "From" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsNewCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames, bIncludeArgumentName:=False, iPosition:=2)
+        clsNewCAddKeyFunction.AddParameter("elements", Chr(34) & "Element" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsNewCAddKeyFunction.AddParameter("levels", Chr(34) & "Level" & Chr(34), bIncludeArgumentName:=False, iPosition:=4)
         clsNewCAddKeyFunction.SetAssignTo("key_cols")
 
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
