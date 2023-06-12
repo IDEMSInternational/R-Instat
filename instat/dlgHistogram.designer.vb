@@ -51,6 +51,9 @@ Partial Class dlgHistogram
         Me.toolStripMenuItemDensityOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemDensityRidgesOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemFrequencyPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrChkReverse = New instat.ucrCheck()
+        Me.ucrInputHistPositions = New instat.ucrInputComboBox()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
         Me.ucrChkRidges = New instat.ucrCheck()
@@ -62,9 +65,6 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblPosition = New System.Windows.Forms.Label()
-        Me.ucrInputHistPositions = New instat.ucrInputComboBox()
-        Me.UcrChkReverse = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -186,6 +186,39 @@ Partial Class dlgHistogram
         Me.toolStripMenuItemFrequencyPolygonOptions.Size = New System.Drawing.Size(258, 24)
         Me.toolStripMenuItemFrequencyPolygonOptions.Text = "Frequency Polygon Options"
         '
+        'lblPosition
+        '
+        Me.lblPosition.AutoSize = True
+        Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPosition.Location = New System.Drawing.Point(354, 425)
+        Me.lblPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Size = New System.Drawing.Size(62, 17)
+        Me.lblPosition.TabIndex = 40
+        Me.lblPosition.Text = "Position:"
+        '
+        'ucrChkReverse
+        '
+        Me.ucrChkReverse.AutoSize = True
+        Me.ucrChkReverse.Checked = False
+        Me.ucrChkReverse.Location = New System.Drawing.Point(351, 390)
+        Me.ucrChkReverse.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkReverse.Name = "ucrChkReverse"
+        Me.ucrChkReverse.Size = New System.Drawing.Size(157, 29)
+        Me.ucrChkReverse.TabIndex = 42
+        '
+        'ucrInputHistPositions
+        '
+        Me.ucrInputHistPositions.AddQuotesIfUnrecognised = True
+        Me.ucrInputHistPositions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputHistPositions.GetSetSelectedIndex = -1
+        Me.ucrInputHistPositions.IsReadOnly = False
+        Me.ucrInputHistPositions.Location = New System.Drawing.Point(351, 450)
+        Me.ucrInputHistPositions.Margin = New System.Windows.Forms.Padding(8)
+        Me.ucrInputHistPositions.Name = "ucrInputHistPositions"
+        Me.ucrInputHistPositions.Size = New System.Drawing.Size(150, 26)
+        Me.ucrInputHistPositions.TabIndex = 41
+        '
         'cmdOptions
         '
         Me.cmdOptions.AutoSize = True
@@ -245,7 +278,7 @@ Partial Class dlgHistogram
         'ucrSaveHist
         '
         Me.ucrSaveHist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveHist.Location = New System.Drawing.Point(12, 389)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(12, 490)
         Me.ucrSaveHist.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(402, 30)
@@ -259,7 +292,7 @@ Partial Class dlgHistogram
         Me.ucrVariablesAsFactorforHist.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Selector = Nothing
-        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(156, 170)
+        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(153, 170)
         Me.ucrVariablesAsFactorforHist.strNcFilePath = ""
         Me.ucrVariablesAsFactorforHist.TabIndex = 5
         Me.ucrVariablesAsFactorforHist.ucrSelector = Nothing
@@ -309,46 +342,13 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions.Size = New System.Drawing.Size(541, 38)
         Me.ucrPnlOptions.TabIndex = 0
         '
-        'lblPosition
-        '
-        Me.lblPosition.AutoSize = True
-        Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosition.Location = New System.Drawing.Point(354, 458)
-        Me.lblPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(62, 17)
-        Me.lblPosition.TabIndex = 40
-        Me.lblPosition.Text = "Position:"
-        '
-        'ucrInputHistPositions
-        '
-        Me.ucrInputHistPositions.AddQuotesIfUnrecognised = True
-        Me.ucrInputHistPositions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputHistPositions.GetSetSelectedIndex = -1
-        Me.ucrInputHistPositions.IsReadOnly = False
-        Me.ucrInputHistPositions.Location = New System.Drawing.Point(354, 493)
-        Me.ucrInputHistPositions.Margin = New System.Windows.Forms.Padding(8)
-        Me.ucrInputHistPositions.Name = "ucrInputHistPositions"
-        Me.ucrInputHistPositions.Size = New System.Drawing.Size(150, 26)
-        Me.ucrInputHistPositions.TabIndex = 41
-        '
-        'UcrChkReverse
-        '
-        Me.UcrChkReverse.AutoSize = True
-        Me.UcrChkReverse.Checked = False
-        Me.UcrChkReverse.Location = New System.Drawing.Point(351, 431)
-        Me.UcrChkReverse.Margin = New System.Windows.Forms.Padding(6)
-        Me.UcrChkReverse.Name = "UcrChkReverse"
-        Me.UcrChkReverse.Size = New System.Drawing.Size(191, 29)
-        Me.UcrChkReverse.TabIndex = 42
-        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(560, 623)
-        Me.Controls.Add(Me.UcrChkReverse)
+        Me.Controls.Add(Me.ucrChkReverse)
         Me.Controls.Add(Me.ucrInputHistPositions)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.cmdOptions)
@@ -405,5 +405,5 @@ Partial Class dlgHistogram
     Friend WithEvents toolStripMenuItemDotOptions As ToolStripMenuItem
     Friend WithEvents lblPosition As Label
     Friend WithEvents ucrInputHistPositions As ucrInputComboBox
-    Friend WithEvents UcrChkReverse As ucrCheck
+    Friend WithEvents ucrChkReverse As ucrCheck
 End Class
