@@ -52,7 +52,6 @@ Public Class dlgEdit
         ucrSelectValues.SetParameterIsString()
 
         ucrReceiverName.SetParameter(New RParameter("column_name", 1))
-        ucrReceiverName.Selector = ucrSelectValues
         ucrReceiverName.SetParameterIsString()
 
         ucrNewName.SetParameter(New RParameter("new_value", 2))
@@ -62,6 +61,9 @@ Public Class dlgEdit
         ucrInputRows.SetParameter(New RParameter("new_value", 3))
         ucrInputRows.strQuotes = ""
 
+        ucrDate.SetParameter(New RParameter("new_value", 3))
+        ucrDate.SetParameterIsRDate()
+
         ucrInputRows.SetLinkedDisplayControl(lblNewValue)
     End Sub
 
@@ -70,7 +72,7 @@ Public Class dlgEdit
         ucrSelectValues.Reset()
 
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34), iPosition:=0)
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
@@ -81,6 +83,12 @@ Public Class dlgEdit
         ucrSelectValues.SetRCode(clsReplaceValue, bReset)
         ucrNewName.SetRCode(clsReplaceValue, bReset)
         ucrInputRows.SetRCode(clsReplaceValue, bReset)
+
+        ucrDate.SetRCode(clsReplaceValue, bReset)
+        If bReset Then
+            'Default start date to 1 Jan.
+            ucrDate.DateValue = New Date(Date.Now.Year, "1", "1")
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -101,7 +109,7 @@ Public Class dlgEdit
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged, ucrDate.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -113,8 +121,11 @@ Public Class dlgEdit
     End Sub
 
     Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrInputRows.ControlValueChanged
+
         If Not ucrReceiverName.IsEmpty Then
             ucrNewName.Visible = ucrInputRows.IsEmpty
+            ucrDate.Visible = False
+
         End If
     End Sub
 
@@ -130,4 +141,7 @@ Public Class dlgEdit
         End If
     End Sub
 
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowNumber.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrNewName.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrDate.ControlContentsChanged
+
+    End Sub
 End Class
