@@ -48,6 +48,7 @@ Public Class dlgOneWayFrequencies
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 518
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 5
 
         ucrReceiverOneWayFreq.SetParameter(New RParameter("x", 0))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
