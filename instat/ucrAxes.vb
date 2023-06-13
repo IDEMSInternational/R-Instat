@@ -195,6 +195,11 @@ Public Class ucrAxes
         ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
         ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
+        ucrInputNaValueDiscrete.SetParameter(New RParameter("na.value"))
+        ucrInputNaValueDiscrete.SetValidationTypeAsNumeric()
+        ucrInputNaValueDiscrete.bAddRemoveParameter = False
+        ucrInputNaValueDiscrete.AddQuotesIfUnrecognised = False
+
         ucrChkNaValueDiscrete.SetText("Replace Missing Values")
         ucrChkNaValueDiscrete.AddParameterPresentCondition(True, "na.value")
         ucrChkNaValueDiscrete.AddParameterPresentCondition(False, "na.value", False)
@@ -446,9 +451,6 @@ Public Class ucrAxes
         ucrChkNaValue.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputRelaceMissingvalues.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrChkNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrInputNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-
         ucrChkTransformation.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
@@ -497,6 +499,8 @@ Public Class ucrAxes
             ucrInputAxisType.SetName(strAxisType)
             ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrChkExpandDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
         SetLabel()
         AddRemoveContinuousXYScales()
@@ -744,7 +748,7 @@ Public Class ucrAxes
         AddRemoveDiscreteXYScales()
     End Sub
 
-    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged
+    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged, ucrInputMajorBreaksLabelsDiscrete.ControlValueChanged
         SetLabelsDiscreteParameter()
     End Sub
 
