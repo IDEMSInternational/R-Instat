@@ -24,7 +24,6 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("title", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("subtitle", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("caption", Chr(34) & Chr(34))
-
             Return clsTempFunc
         End Get
     End Property
@@ -104,12 +103,34 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsXScaleDiscreteFunction As RFunction
+        Get
+            Dim clsXlabScalesTempFunc As New RFunction
+
+            clsXlabScalesTempFunc.SetPackageName("ggplot2")
+
+            clsXlabScalesTempFunc.SetRCommand("scale_x_discrete")
+            Return clsXlabScalesTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsYScalecontinuousFunction As RFunction
         Get
             Dim clsYlabScalesTempFunc As New RFunction
 
             clsYlabScalesTempFunc.SetPackageName("ggplot2")
             clsYlabScalesTempFunc.SetRCommand("scale_y_continuous")
+
+            Return clsYlabScalesTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsYScaleDiscreteFunction As RFunction
+        Get
+            Dim clsYlabScalesTempFunc As New RFunction
+
+            clsYlabScalesTempFunc.SetPackageName("ggplot2")
+            clsYlabScalesTempFunc.SetRCommand("scale_y_discrete")
 
             Return clsYlabScalesTempFunc
         End Get
@@ -220,9 +241,6 @@ Public Class GgplotDefaults
             dctTemp.Add("title", clsElementText.Clone())
             dctTemp.Add("sub.title", clsElementText.Clone())
             dctTemp.Add("caption", clsElementText.Clone())
-            dctTemp.Add("tag", clsElementText.Clone())
-            dctTemp.Add("colour", clsElementText.Clone())
-
             'dctTemp.Add("aspect.ratio", clsElementText.Clone())
             dctTemp.Add("axis.title", clsElementText.Clone())
             dctTemp.Add("axis.title.x", clsElementText.Clone())
@@ -275,7 +293,6 @@ Public Class GgplotDefaults
             dctTemp.Add("plot.title", clsElementText.Clone())
             dctTemp.Add("plot.subtitle", clsElementText.Clone())
             dctTemp.Add("plot.caption", clsElementText.Clone())
-            dctTemp.Add("plot.tag", clsElementText.Clone())
             dctTemp.Add("plot.margin", clsUnit.Clone())
             dctTemp.Add("strip.background", clsElementRect.Clone())
             ' dctTemp.Add("strip.placement", clsElementLine.Clone())
@@ -427,6 +444,14 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property dctDropUnusedLevels As Dictionary(Of String, String)
+        Get
+            Dim dcttempDropUnusedLevels As New Dictionary(Of String, String)
+            dcttempDropUnusedLevels.Add("TRUE", Chr(34) & "TRUE" & Chr(34))
+            dcttempDropUnusedLevels.Add("FALSE", Chr(34) & "FALSE" & Chr(34))
+            Return dcttempDropUnusedLevels
+        End Get
+    End Property
 
     Public Shared ReadOnly Property dctXPosition As Dictionary(Of String, String)
         Get
@@ -467,3 +492,4 @@ Public Class GgplotDefaults
         End Get
     End Property
 End Class
+
