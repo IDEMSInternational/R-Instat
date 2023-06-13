@@ -417,7 +417,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrPnlAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAxisTitle.ControlValueChanged, ucrInputTitle.ControlValueChanged
+    Private Sub ucrPnlAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore)
         SetLabel()
     End Sub
 
@@ -442,7 +442,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
+    Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore)
         SetAxisTypeControls()
         AddRemoveScaleFunctions()
 
@@ -472,7 +472,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub BreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMajorBreaks.ControlValueChanged, ucrInputMajorBreaksCustom.ControlValueChanged
+    Private Sub BreaksControls_ControlValueChanged(ucrChangedControl As ucrCore)
         If rdoMajorBreaksAuto.Checked Then
             clsXYScaleContinuousFunction.RemoveParameterByName("breaks")
         ElseIf rdoMajorBreaksNone.Checked Then
@@ -486,7 +486,7 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ucrPnlMinorBreaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMinorBreaks.ControlValueChanged
+    Private Sub ucrPnlMinorBreaks_ControlValueChanged(ucrChangedControl As ucrCore)
         If rdoMinorBreaksAuto.Checked Then
             clsXYScaleContinuousFunction.RemoveParameterByName("minor_breaks")
         ElseIf rdoMinorBreaksNone.Checked Then
@@ -499,7 +499,7 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
+    Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore)
         If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
             clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
         Else
@@ -508,7 +508,7 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ExpandControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrInputExpand.ControlValueChanged
+    Private Sub ExpandControls_ControlValueChanged(ucrChangedControl As ucrCore)
         If bRCodeSet Then
             If ucrChkExpand.Checked AndAlso Not ucrInputExpand.IsEmpty Then
                 clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpand.clsRList)
@@ -519,11 +519,11 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged, ucrChkNaValue.ControlValueChanged
+    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkExpand.ControlValueChanged
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub LabelsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabels.ControlValueChanged, ucrInputMajorBreaksLabels.ControlValueChanged
+    Private Sub LabelsControls_ControlValueChanged(ucrChangedControl As ucrCore)
         SetLabelsParameter()
     End Sub
 
@@ -537,7 +537,7 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ScaleDateFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimits.ControlValueChanged, ucrChkBreaks.ControlValueChanged
+    Private Sub ScaleDateFunction_ControlValueChanged(ucrChangedControl As ucrCore)
         If bRCodeSet Then
             If ucrChkLimits.Checked Then
                 clsXYScaleDateFunction.AddParameter("limits", clsRFunctionParameter:=clsXYScaleDateLimitFunction, iPosition:=2)
@@ -546,5 +546,25 @@ Public Class ucrAxes
                 clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator, iPosition:=1)
             End If
         End If
+    End Sub
+
+    Private Sub ucrInputExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputBreaksDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputLimitDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrPnlScaleDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 End Class
