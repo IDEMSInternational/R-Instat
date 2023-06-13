@@ -30,6 +30,8 @@ Public Class dlgCumulativeDistribution
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
+    Private clsYScaleDiscreteFunction As New RFunction
+    Private clsXScaleDiscreteFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsXScaleDateFunction As New RFunction
@@ -190,6 +192,8 @@ Public Class dlgCumulativeDistribution
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
@@ -245,6 +249,7 @@ Public Class dlgCumulativeDistribution
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction,
                           clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                           clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, ucrNewBaseSelector:=ucrCumDistSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction,
                           clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,

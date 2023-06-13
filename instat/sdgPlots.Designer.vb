@@ -230,7 +230,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(7, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
-        Me.tbpPlotsOptions.Size = New System.Drawing.Size(677, 449)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(781, 449)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -255,7 +255,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFacet.Size = New System.Drawing.Size(669, 423)
+        Me.tbpFacet.Size = New System.Drawing.Size(727, 423)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -445,7 +445,7 @@ Partial Class sdgPlots
         Me.tbpLayers.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayers.Size = New System.Drawing.Size(669, 423)
+        Me.tbpLayers.Size = New System.Drawing.Size(727, 423)
         Me.tbpLayers.TabIndex = 4
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
@@ -487,7 +487,7 @@ Partial Class sdgPlots
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(669, 423)
+        Me.tbpTitles.Size = New System.Drawing.Size(727, 423)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
@@ -822,7 +822,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(669, 423)
+        Me.tbpXAxis.Size = New System.Drawing.Size(773, 423)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -832,7 +832,7 @@ Partial Class sdgPlots
         Me.ucrXAxis.AutoSize = True
         Me.ucrXAxis.Location = New System.Drawing.Point(-4, 3)
         Me.ucrXAxis.Name = "ucrXAxis"
-        Me.ucrXAxis.Size = New System.Drawing.Size(669, 436)
+        Me.ucrXAxis.Size = New System.Drawing.Size(774, 436)
         Me.ucrXAxis.TabIndex = 0
         '
         'tbpYAxis
@@ -841,7 +841,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(669, 423)
+        Me.tbpYAxis.Size = New System.Drawing.Size(727, 423)
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
@@ -851,7 +851,7 @@ Partial Class sdgPlots
         Me.ucrYAxis.AutoSize = True
         Me.ucrYAxis.Location = New System.Drawing.Point(0, 1)
         Me.ucrYAxis.Name = "ucrYAxis"
-        Me.ucrYAxis.Size = New System.Drawing.Size(669, 416)
+        Me.ucrYAxis.Size = New System.Drawing.Size(774, 416)
         Me.ucrYAxis.TabIndex = 0
         '
         'tbpTheme
@@ -865,7 +865,7 @@ Partial Class sdgPlots
         Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(669, 423)
+        Me.tbpTheme.Size = New System.Drawing.Size(727, 423)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.Text = "Themes"
@@ -1079,7 +1079,7 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 423)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(727, 423)
         Me.tbpCoordinates.TabIndex = 7
         Me.tbpCoordinates.Text = "Coordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
@@ -1198,7 +1198,7 @@ Partial Class sdgPlots
         Me.tbpColour.Location = New System.Drawing.Point(4, 22)
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpColour.Size = New System.Drawing.Size(669, 423)
+        Me.tbpColour.Size = New System.Drawing.Size(727, 423)
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
@@ -1482,7 +1482,7 @@ Partial Class sdgPlots
         Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 423)
+        Me.tbpAnnotation.Size = New System.Drawing.Size(727, 423)
         Me.tbpAnnotation.TabIndex = 9
         Me.tbpAnnotation.Text = "Annotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
@@ -2047,7 +2047,7 @@ Partial Class sdgPlots
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(687, 502)
+        Me.ClientSize = New System.Drawing.Size(800, 502)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

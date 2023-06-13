@@ -31,6 +31,8 @@ Public Class dlgSummaryBarOrPieChart
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
+    Private clsYScaleDiscreteFunction As New RFunction
+    Private clsXScaleDiscreteFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -187,6 +189,8 @@ Public Class dlgSummaryBarOrPieChart
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
@@ -234,6 +238,7 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                           clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions,
                           ucrNewBaseSelector:=ucrSummaryBarSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,

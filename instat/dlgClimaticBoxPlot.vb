@@ -45,6 +45,8 @@ Public Class dlgClimaticBoxPlot
     Private clsAsFactorFunction As New RFunction
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
+    Private clsYScaleDiscreteFunction As New RFunction
+    Private clsXScaleDiscreteFunction As New RFunction
 
     Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
@@ -281,6 +283,8 @@ Public Class dlgClimaticBoxPlot
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
@@ -342,6 +346,7 @@ Public Class dlgClimaticBoxPlot
         End If
         sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
                          clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction,
+                         clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                          clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
                          clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                          clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction,

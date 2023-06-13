@@ -42,6 +42,8 @@ Public Class dlgOptionsByContextBoxplot
     Public clsYLabFunction As New RFunction
     Public clsXScaleContinuousFunction As New RFunction
     Public clsYScaleContinuousFunction As New RFunction
+    Private clsYScaleDiscreteFunction As New RFunction
+    Private clsXScaleDiscreteFunction As New RFunction
     Public clsThemeFunction As New RFunction
     Public dctThemeFunctions As Dictionary(Of String, RFunction)
 
@@ -266,6 +268,8 @@ Public Class dlgOptionsByContextBoxplot
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
         clsYLabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
@@ -496,6 +500,7 @@ Public Class dlgOptionsByContextBoxplot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesGlobalFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                                  clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                                  clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYLabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
                                  clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorPlot, bReset:=bResetSubdialog)

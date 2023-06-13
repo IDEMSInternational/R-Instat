@@ -29,6 +29,8 @@ Public Class dlgMosaicPlot
     Private clsYlabFunction As New RFunction
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
+    Private clsYScaleDiscreteFunction As New RFunction
+    Private clsXScaleDiscreteFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsXElementLabels As New RFunction
     Private clsRFacetFunction As New RFunction
@@ -177,6 +179,8 @@ Public Class dlgMosaicPlot
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -296,6 +300,7 @@ Public Class dlgMosaicPlot
 
     Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPlotOptions.Click, cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsAesFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                          clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
                          clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
                          clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
