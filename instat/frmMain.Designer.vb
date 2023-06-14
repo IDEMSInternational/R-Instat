@@ -194,25 +194,30 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticTidyandExamine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineTidyDailyData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineReplaceValues = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticTidyData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditTidyDailyData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditReplaceValues = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator54 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticTidyandExamineStack = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineUnstack = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineMerge = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineAppend = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator69 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuSetupForDataEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTidyandExamineClimaticDataEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditStack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditUnstack = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditMerge = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditAppend = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticTidyandExamineOneVariableSummarize = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticTidyandExamineOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticTidyDataTransformText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticTidyDataSplitText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditOneVariableSummarize = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator78 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticExamineandEditPivotTable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator79 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticExamineandEditSetupForDataEditing = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineAndEditClimaticDailyDataEditing = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticExamineandEditCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDatesGenerateDates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDatesMakeDate = New System.Windows.Forms.ToolStripMenuItem()
@@ -383,24 +388,28 @@ Partial Class frmMain
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripSplitButton()
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbOutput = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator74 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuLastGraph = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuNormalViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuploty = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator75 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLogScript = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuLogScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator77 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLan = New System.Windows.Forms.ToolStripButton()
+        Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -671,10 +680,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator74 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator75 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator77 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1629,7 +1634,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticNCMP, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyData, Me.mnuClimaticExamineandEdit, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticNCMP, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 22)
         Me.mnuClimatic.Tag = "Climatic"
@@ -1726,117 +1731,147 @@ Partial Class frmMain
         Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
         Me.ToolStripSeparator18.Size = New System.Drawing.Size(209, 6)
         '
-        'mnuClimaticTidyandExamine
+        'mnuClimaticTidyData
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicateRows, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuSetupForDataEntry, Me.mnuTidyandExamineClimaticDataEntry, Me.mnuClimaticTidyandExamineCompareColumns, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
-        Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
-        Me.mnuClimaticTidyandExamine.Size = New System.Drawing.Size(212, 22)
-        Me.mnuClimaticTidyandExamine.Text = "Tidy and Examine"
+        Me.mnuClimaticTidyData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticExamineandEditVisualiseData, Me.mnuClimaticExamineandEditTidyDailyData, Me.mnuClimaticExamineandEditNonNumericCases, Me.mnuClimaticExamineandEditReplaceValues, Me.mnuClimaticExamineandEditDuplicateRows, Me.ToolStripSeparator54, Me.mnuClimaticExamineandEditStack, Me.mnuClimaticExamineandEditUnstack, Me.mnuClimaticExamineandEditMerge, Me.mnuClimaticExamineandEditAppend, Me.ToolStripSeparator50, Me.mnuClimaticTidyDataTransformText, Me.mnuClimaticTidyDataSplitText})
+        Me.mnuClimaticTidyData.Name = "mnuClimaticTidyData"
+        Me.mnuClimaticTidyData.Size = New System.Drawing.Size(212, 22)
+        Me.mnuClimaticTidyData.Text = "Tidy Data"
         '
-        'mnuClimaticTidyandExamineVisualiseData
+        'mnuClimaticExamineandEditVisualiseData
         '
-        Me.mnuClimaticTidyandExamineVisualiseData.Name = "mnuClimaticTidyandExamineVisualiseData"
-        Me.mnuClimaticTidyandExamineVisualiseData.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineVisualiseData.Text = "Visualise Data..."
+        Me.mnuClimaticExamineandEditVisualiseData.Name = "mnuClimaticExamineandEditVisualiseData"
+        Me.mnuClimaticExamineandEditVisualiseData.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditVisualiseData.Text = "Visualise Data..."
         '
-        'mnuClimaticTidyandExamineTidyDailyData
+        'mnuClimaticExamineandEditTidyDailyData
         '
-        Me.mnuClimaticTidyandExamineTidyDailyData.Name = "mnuClimaticTidyandExamineTidyDailyData"
-        Me.mnuClimaticTidyandExamineTidyDailyData.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineTidyDailyData.Text = "Tidy Daily Data..."
+        Me.mnuClimaticExamineandEditTidyDailyData.Name = "mnuClimaticExamineandEditTidyDailyData"
+        Me.mnuClimaticExamineandEditTidyDailyData.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditTidyDailyData.Text = "Tidy Daily Data..."
         '
-        'mnuClimaticTidyandExamineNonNumericCases
+        'mnuClimaticExamineandEditNonNumericCases
         '
-        Me.mnuClimaticTidyandExamineNonNumericCases.Name = "mnuClimaticTidyandExamineNonNumericCases"
-        Me.mnuClimaticTidyandExamineNonNumericCases.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineNonNumericCases.Text = "Non-Numeric Values..."
+        Me.mnuClimaticExamineandEditNonNumericCases.Name = "mnuClimaticExamineandEditNonNumericCases"
+        Me.mnuClimaticExamineandEditNonNumericCases.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditNonNumericCases.Text = "Non-Numeric Values..."
         '
-        'mnuClimaticTidyandExamineReplaceValues
+        'mnuClimaticExamineandEditReplaceValues
         '
-        Me.mnuClimaticTidyandExamineReplaceValues.Name = "mnuClimaticTidyandExamineReplaceValues"
-        Me.mnuClimaticTidyandExamineReplaceValues.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineReplaceValues.Text = "Replace Values..."
+        Me.mnuClimaticExamineandEditReplaceValues.Name = "mnuClimaticExamineandEditReplaceValues"
+        Me.mnuClimaticExamineandEditReplaceValues.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditReplaceValues.Text = "Replace Values..."
         '
-        'mnuClimaticTidyandExamineDuplicateRows
+        'mnuClimaticExamineandEditDuplicateRows
         '
-        Me.mnuClimaticTidyandExamineDuplicateRows.Name = "mnuClimaticTidyandExamineDuplicateRows"
-        Me.mnuClimaticTidyandExamineDuplicateRows.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineDuplicateRows.Text = "Duplicate Rows..."
+        Me.mnuClimaticExamineandEditDuplicateRows.Name = "mnuClimaticExamineandEditDuplicateRows"
+        Me.mnuClimaticExamineandEditDuplicateRows.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditDuplicateRows.Text = "Duplicate Rows..."
         '
         'ToolStripSeparator54
         '
         Me.ToolStripSeparator54.Name = "ToolStripSeparator54"
-        Me.ToolStripSeparator54.Size = New System.Drawing.Size(212, 6)
+        Me.ToolStripSeparator54.Size = New System.Drawing.Size(194, 6)
         '
-        'mnuClimaticTidyandExamineStack
+        'mnuClimaticExamineandEditStack
         '
-        Me.mnuClimaticTidyandExamineStack.Name = "mnuClimaticTidyandExamineStack"
-        Me.mnuClimaticTidyandExamineStack.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineStack.Text = "Stack (Pivot Longer)..."
+        Me.mnuClimaticExamineandEditStack.Name = "mnuClimaticExamineandEditStack"
+        Me.mnuClimaticExamineandEditStack.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditStack.Text = "Stack (Pivot Longer)..."
         '
-        'mnuClimaticTidyandExamineUnstack
+        'mnuClimaticExamineandEditUnstack
         '
-        Me.mnuClimaticTidyandExamineUnstack.Name = "mnuClimaticTidyandExamineUnstack"
-        Me.mnuClimaticTidyandExamineUnstack.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineUnstack.Text = "Unstack (Pivot Wider)..."
+        Me.mnuClimaticExamineandEditUnstack.Name = "mnuClimaticExamineandEditUnstack"
+        Me.mnuClimaticExamineandEditUnstack.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditUnstack.Text = "Unstack (Pivot Wider)..."
         '
-        'mnuClimaticTidyandExamineMerge
+        'mnuClimaticExamineandEditMerge
         '
-        Me.mnuClimaticTidyandExamineMerge.Name = "mnuClimaticTidyandExamineMerge"
-        Me.mnuClimaticTidyandExamineMerge.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineMerge.Text = "Merge..."
+        Me.mnuClimaticExamineandEditMerge.Name = "mnuClimaticExamineandEditMerge"
+        Me.mnuClimaticExamineandEditMerge.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditMerge.Text = "Merge..."
         '
-        'mnuClimaticTidyandExamineAppend
+        'mnuClimaticExamineandEditAppend
         '
-        Me.mnuClimaticTidyandExamineAppend.Name = "mnuClimaticTidyandExamineAppend"
-        Me.mnuClimaticTidyandExamineAppend.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineAppend.Text = "Append (Bind Rows)..."
-        '
-        'ToolStripSeparator69
-        '
-        Me.ToolStripSeparator69.Name = "ToolStripSeparator69"
-        Me.ToolStripSeparator69.Size = New System.Drawing.Size(212, 6)
-        '
-        'mnuSetupForDataEntry
-        '
-        Me.mnuSetupForDataEntry.Name = "mnuSetupForDataEntry"
-        Me.mnuSetupForDataEntry.Size = New System.Drawing.Size(215, 22)
-        Me.mnuSetupForDataEntry.Text = "Setup for Data Entry..."
-        '
-        'mnuTidyandExamineClimaticDataEntry
-        '
-        Me.mnuTidyandExamineClimaticDataEntry.Name = "mnuTidyandExamineClimaticDataEntry"
-        Me.mnuTidyandExamineClimaticDataEntry.Size = New System.Drawing.Size(215, 22)
-        Me.mnuTidyandExamineClimaticDataEntry.Text = "Daily Data Editing/Entry..."
-        '
-        'mnuClimaticTidyandExamineCompareColumns
-        '
-        Me.mnuClimaticTidyandExamineCompareColumns.Name = "mnuClimaticTidyandExamineCompareColumns"
-        Me.mnuClimaticTidyandExamineCompareColumns.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineCompareColumns.Text = "Compare Columns..."
+        Me.mnuClimaticExamineandEditAppend.Name = "mnuClimaticExamineandEditAppend"
+        Me.mnuClimaticExamineandEditAppend.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticExamineandEditAppend.Text = "Append (Bind Rows)..."
         '
         'ToolStripSeparator50
         '
         Me.ToolStripSeparator50.Name = "ToolStripSeparator50"
-        Me.ToolStripSeparator50.Size = New System.Drawing.Size(212, 6)
+        Me.ToolStripSeparator50.Size = New System.Drawing.Size(194, 6)
         '
-        'mnuClimaticTidyandExamineOneVariableSummarize
+        'mnuClimaticTidyDataTransformText
         '
-        Me.mnuClimaticTidyandExamineOneVariableSummarize.Name = "mnuClimaticTidyandExamineOneVariableSummarize"
-        Me.mnuClimaticTidyandExamineOneVariableSummarize.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineOneVariableSummarize.Text = "One Variable Summarise..."
+        Me.mnuClimaticTidyDataTransformText.Name = "mnuClimaticTidyDataTransformText"
+        Me.mnuClimaticTidyDataTransformText.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticTidyDataTransformText.Text = "Transform Text"
         '
-        'mnuClimaticTidyandExamineOneVariableGraph
+        'mnuClimaticTidyDataSplitText
         '
-        Me.mnuClimaticTidyandExamineOneVariableGraph.Name = "mnuClimaticTidyandExamineOneVariableGraph"
-        Me.mnuClimaticTidyandExamineOneVariableGraph.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineOneVariableGraph.Text = "One Variable Graph..."
+        Me.mnuClimaticTidyDataSplitText.Name = "mnuClimaticTidyDataSplitText"
+        Me.mnuClimaticTidyDataSplitText.Size = New System.Drawing.Size(197, 22)
+        Me.mnuClimaticTidyDataSplitText.Text = "Split Text"
         '
-        'mnuClimaticTidyandExamineOneVariableFrequencies
+        'mnuClimaticExamineandEdit
         '
-        Me.mnuClimaticTidyandExamineOneVariableFrequencies.Name = "mnuClimaticTidyandExamineOneVariableFrequencies"
-        Me.mnuClimaticTidyandExamineOneVariableFrequencies.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticTidyandExamineOneVariableFrequencies.Text = "One Variable Frequencies..."
+        Me.mnuClimaticExamineandEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticExamineandEditOneVariableSummarize, Me.mnuClimaticExamineandEditOneVariableGraph, Me.mnuClimaticExamineandEditOneVariableFrequencies, Me.ToolStripSeparator78, Me.mnuClimaticExamineandEditPivotTable, Me.ToolStripSeparator79, Me.mnuClimaticExamineandEditSetupForDataEditing, Me.mnuClimaticExamineAndEditClimaticDailyDataEditing, Me.mnuClimaticExamineandEditCompareColumns})
+        Me.mnuClimaticExamineandEdit.Name = "mnuClimaticExamineandEdit"
+        Me.mnuClimaticExamineandEdit.Size = New System.Drawing.Size(212, 22)
+        Me.mnuClimaticExamineandEdit.Text = "Examine and Edit"
+        '
+        'mnuClimaticExamineandEditOneVariableSummarize
+        '
+        Me.mnuClimaticExamineandEditOneVariableSummarize.Name = "mnuClimaticExamineandEditOneVariableSummarize"
+        Me.mnuClimaticExamineandEditOneVariableSummarize.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineandEditOneVariableSummarize.Text = "One Variable Summarise..."
+        '
+        'mnuClimaticExamineandEditOneVariableGraph
+        '
+        Me.mnuClimaticExamineandEditOneVariableGraph.Name = "mnuClimaticExamineandEditOneVariableGraph"
+        Me.mnuClimaticExamineandEditOneVariableGraph.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineandEditOneVariableGraph.Text = "One Variable Graph..."
+        '
+        'mnuClimaticExamineandEditOneVariableFrequencies
+        '
+        Me.mnuClimaticExamineandEditOneVariableFrequencies.Name = "mnuClimaticExamineandEditOneVariableFrequencies"
+        Me.mnuClimaticExamineandEditOneVariableFrequencies.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineandEditOneVariableFrequencies.Text = "One Variable Frequencies..."
+        '
+        'ToolStripSeparator78
+        '
+        Me.ToolStripSeparator78.Name = "ToolStripSeparator78"
+        Me.ToolStripSeparator78.Size = New System.Drawing.Size(212, 6)
+        '
+        'mnuClimaticExamineandEditPivotTable
+        '
+        Me.mnuClimaticExamineandEditPivotTable.Name = "mnuClimaticExamineandEditPivotTable"
+        Me.mnuClimaticExamineandEditPivotTable.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineandEditPivotTable.Text = "Pivot Table..."
+        '
+        'ToolStripSeparator79
+        '
+        Me.ToolStripSeparator79.Name = "ToolStripSeparator79"
+        Me.ToolStripSeparator79.Size = New System.Drawing.Size(212, 6)
+        '
+        'mnuClimaticExamineandEditSetupForDataEditing
+        '
+        Me.mnuClimaticExamineandEditSetupForDataEditing.Name = "mnuClimaticExamineandEditSetupForDataEditing"
+        Me.mnuClimaticExamineandEditSetupForDataEditing.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineandEditSetupForDataEditing.Text = "Setup for Data Editing"
+        '
+        'mnuClimaticExamineAndEditClimaticDailyDataEditing
+        '
+        Me.mnuClimaticExamineAndEditClimaticDailyDataEditing.Name = "mnuClimaticExamineAndEditClimaticDailyDataEditing"
+        Me.mnuClimaticExamineAndEditClimaticDailyDataEditing.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineAndEditClimaticDailyDataEditing.Text = "Daily Data Editing"
+        '
+        'mnuClimaticExamineandEditCompareColumns
+        '
+        Me.mnuClimaticExamineandEditCompareColumns.Name = "mnuClimaticExamineandEditCompareColumns"
+        Me.mnuClimaticExamineandEditCompareColumns.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticExamineandEditCompareColumns.Text = "Compare Columns"
         '
         'mnuClimaticDates
         '
@@ -3034,11 +3069,6 @@ Partial Class frmMain
         Me.toolStripSeparator.Name = "toolStripSeparator"
         Me.toolStripSeparator.Size = New System.Drawing.Size(6, 37)
         '
-        'separator1
-        '
-        Me.separator1.Name = "separator1"
-        Me.separator1.Size = New System.Drawing.Size(6, 37)
-        '
         'mnuTbLast10Dialogs
         '
         Me.mnuTbLast10Dialogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -3077,6 +3107,11 @@ Partial Class frmMain
         Me.mnuTbOutput.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbOutput.ToolTipText = "Toggle Output window open and closed"
         '
+        'ToolStripSeparator74
+        '
+        Me.ToolStripSeparator74.Name = "ToolStripSeparator74"
+        Me.ToolStripSeparator74.Size = New System.Drawing.Size(6, 37)
+        '
         'mnuLastGraph
         '
         Me.mnuLastGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -3106,6 +3141,11 @@ Partial Class frmMain
         Me.mnuRViewer.Name = "mnuRViewer"
         Me.mnuRViewer.Size = New System.Drawing.Size(128, 22)
         Me.mnuRViewer.Text = "R Viewer..."
+        '
+        'ToolStripSeparator75
+        '
+        Me.ToolStripSeparator75.Name = "ToolStripSeparator75"
+        Me.ToolStripSeparator75.Size = New System.Drawing.Size(6, 37)
         '
         'mnuTbLogScript
         '
@@ -3152,6 +3192,11 @@ Partial Class frmMain
         Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuDataFrameMetadat.Text = "  Data Frame Metadata..."
         '
+        'ToolStripSeparator76
+        '
+        Me.ToolStripSeparator76.Name = "ToolStripSeparator76"
+        Me.ToolStripSeparator76.Size = New System.Drawing.Size(6, 37)
+        '
         'mnuTbResetLayout
         '
         Me.mnuTbResetLayout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -3177,6 +3222,11 @@ Partial Class frmMain
         Me.mnuTbHelp.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbHelp.Text = "He&lp"
         '
+        'ToolStripSeparator77
+        '
+        Me.ToolStripSeparator77.Name = "ToolStripSeparator77"
+        Me.ToolStripSeparator77.Size = New System.Drawing.Size(6, 37)
+        '
         'mnuTbLan
         '
         Me.mnuTbLan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -3186,6 +3236,11 @@ Partial Class frmMain
         Me.mnuTbLan.Name = "mnuTbLan"
         Me.mnuTbLan.Size = New System.Drawing.Size(34, 34)
         Me.mnuTbLan.ToolTipText = "Changes the menu language to English, and from English"
+        '
+        'separator1
+        '
+        Me.separator1.Name = "separator1"
+        Me.separator1.Size = New System.Drawing.Size(6, 37)
         '
         'mnuBar
         '
@@ -5038,26 +5093,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'ToolStripSeparator74
-        '
-        Me.ToolStripSeparator74.Name = "ToolStripSeparator74"
-        Me.ToolStripSeparator74.Size = New System.Drawing.Size(6, 37)
-        '
-        'ToolStripSeparator75
-        '
-        Me.ToolStripSeparator75.Name = "ToolStripSeparator75"
-        Me.ToolStripSeparator75.Size = New System.Drawing.Size(6, 37)
-        '
-        'ToolStripSeparator76
-        '
-        Me.ToolStripSeparator76.Name = "ToolStripSeparator76"
-        Me.ToolStripSeparator76.Size = New System.Drawing.Size(6, 37)
-        '
-        'ToolStripSeparator77
-        '
-        Me.ToolStripSeparator77.Name = "ToolStripSeparator77"
-        Me.ToolStripSeparator77.Size = New System.Drawing.Size(6, 37)
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5534,15 +5569,13 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCheckDataAnonymiseIDColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataNonNumericCases As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator49 As ToolStripSeparator
-    Friend WithEvents mnuClimaticTidyandExamine As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineTidyDailyData As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineNonNumericCases As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineReplaceValues As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineOneVariableSummarize As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
+    Friend WithEvents mnuClimaticTidyData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditTidyDailyData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditNonNumericCases As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditReplaceValues As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareLengthOfSeason As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportandTidyShapefile As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineMerge As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditMerge As ToolStripMenuItem
     Friend WithEvents mnuClimaticCMSAFExporttoCMSAFRToolbox As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareConversions As ToolStripMenuItem
     Friend WithEvents mnuProcurementDescribeCategorical As ToolStripMenuItem
@@ -5557,18 +5590,16 @@ Partial Class frmMain
     Friend WithEvents HistogramToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator53 As ToolStripSeparator
     Friend WithEvents mnuProcurementOpenFromLibrary As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineUnstack As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineStack As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineAppend As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditUnstack As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditStack As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditAppend As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator54 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareClimdex As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareSPI As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator51 As ToolStripSeparator
     Friend WithEvents mnuClimaticMapping As ToolStripMenuItem
     Friend WithEvents mnuHelpWindows As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineDuplicateRows As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineOneVariableGraph As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineOneVariableFrequencies As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditDuplicateRows As ToolStripMenuItem
     Friend WithEvents mnuModelUseModel As ToolStripMenuItem
     Friend WithEvents mnuClimaticPICSACumExeedenceGraph As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataQCTemperatures As ToolStripMenuItem
@@ -5643,7 +5674,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCheckDataFillMissingValues As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator65 As ToolStripSeparator
     Friend WithEvents mnuPrepareCheckDataVisualiseData As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineVisualiseData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditVisualiseData As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompare As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareCalculation As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareSummary As ToolStripMenuItem
@@ -5677,14 +5708,11 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticNCMPCountRecords As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMPSummary As ToolStripMenuItem
     Friend WithEvents mnuViewSwapDataAndMetadata As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator69 As ToolStripSeparator
-    Friend WithEvents mnuTidyandExamineClimaticDataEntry As ToolStripMenuItem
     Friend WithEvents mnuClimaticMappingMap As ToolStripMenuItem
     Friend WithEvents mnuClimaticMappingCheckStationLocations As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator70 As ToolStripSeparator
     Friend WithEvents mnuClimaticCheckDataCheckStationLocations As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportfromClimateDataStore As ToolStripMenuItem
-    Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
     Friend WithEvents mnuTbLan As ToolStripButton
     Friend WithEvents mnuPasteSpecial As ToolStripMenuItem
@@ -5696,7 +5724,6 @@ Partial Class frmMain
     Friend WithEvents mnuEditScript As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileExportToClimsoft As ToolStripMenuItem
-    Friend WithEvents mnuClimaticTidyandExamineCompareColumns As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameDuplicateColumn As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataReshapeScaleOrDistance As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableVisualiseData As ToolStripMenuItem
@@ -5746,4 +5773,17 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator75 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator76 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator77 As ToolStripSeparator
+    Friend WithEvents mnuClimaticExamineandEdit As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditOneVariableSummarize As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditOneVariableGraph As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditOneVariableFrequencies As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator78 As ToolStripSeparator
+    Friend WithEvents mnuClimaticExamineandEditPivotTable As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator79 As ToolStripSeparator
+    Friend WithEvents mnuClimaticExamineandEditSetupForDataEditing As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineAndEditClimaticDailyDataEditing As ToolStripMenuItem
+    Friend WithEvents mnuClimaticExamineandEditCompareColumns As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
+    Friend WithEvents mnuClimaticTidyDataTransformText As ToolStripMenuItem
+    Friend WithEvents mnuClimaticTidyDataSplitText As ToolStripMenuItem
 End Class
