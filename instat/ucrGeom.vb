@@ -947,6 +947,7 @@ Public Class ucrGeom
         clsgeom_density_ridges_gradient.AddLayerParameter("gradient_lwd", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_density_ridges_gradient.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density_ridges_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("rel_min_height", "numeric", "0.01", lstParameterStrings:={3, 0, 0.1})
 
         lstAllGeoms.Add(clsgeom_density_ridges_gradient)
 
