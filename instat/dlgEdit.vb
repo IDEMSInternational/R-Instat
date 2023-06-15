@@ -20,13 +20,15 @@ Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class dlgEdit
-    Dim bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bFirstLevelDefault As Boolean = False
     Private clsReplaceValue As New RFunction
     Private strRowText As String = ""
     Private strRowIndex As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    Private strLastSelectedLevel As String = ""
 
 
     Private Sub dlgEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -41,7 +43,7 @@ Public Class dlgEdit
             SetSelectedColumn()
         End If
         SetRCodeForControls(bReset)
-        bReset = True
+        bReset = False
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -53,6 +55,8 @@ Public Class dlgEdit
 
         ucrReceiverName.SetParameter(New RParameter("column_name", 1))
         ucrReceiverName.SetParameterIsString()
+        ucrReceiverName.Selector = ucrSelectValues
+        ucrReceiverName.RemoveColor()
 
         ucrNewName.SetParameter(New RParameter("new_value", 2))
         ucrNewName.SetValidationTypeAsList()
@@ -64,19 +68,21 @@ Public Class dlgEdit
         ucrDate.SetParameter(New RParameter("new_value", 3))
         ucrDate.SetParameterIsRDate()
 
-        ucrInputRows.SetLinkedDisplayControl(lblNewValue)
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceValue = New RFunction
         ucrSelectValues.Reset()
+        strLastSelectedLevel = ""
+        bFirstLevelDefault = True
+        ucrDate.DateValue = DateAndTime.Now()
 
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsReplaceValue.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
-
+        VariableTypeProperties()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -120,13 +126,48 @@ Public Class dlgEdit
         bUseSelectedColumn = True
     End Sub
 
-    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrInputRows.ControlValueChanged
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+        Dim expTemp As SymbolicExpression
+        Dim strLevels() As String
+        Dim lstLevels As New List(Of String)
+        Dim clsFactor As New RFunction
+        Dim clsLevels As New RFunction
 
-        If Not ucrReceiverName.IsEmpty Then
-            ucrNewName.Visible = ucrInputRows.IsEmpty
-            ucrDate.Visible = False
+        If ucrReceiverName Is Nothing OrElse ucrReceiverName.IsEmpty Then
+            ucrInputRows.SetItems()
+            ucrInputRows.Visible = True
+        Else
+            ' This is done because of bug in RunInternalScriptGetValue cannot return correct value when R code is multiple lines
+            clsFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsFactor.AddParameter("data_name", Chr(34) & ucrSelectValues.strCurrentDataFrame & Chr(34))
+            clsFactor.AddParameter("col_names", ucrReceiverName.GetVariableNames(True))
+            clsFactor.RemoveAssignTo()
+            clsLevels.SetRCommand("levels")
+            clsLevels.AddParameter("x", clsRFunctionParameter:=clsFactor, iPosition:=0)
+            ucrInputRows.Visible = False
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsLevels.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                Try
+                    strLevels = expTemp.AsCharacter.ToArray
+                    ucrInputRows.Visible = True
+                Catch ex As Exception
+                    strLevels = Nothing
+                    ucrInputRows.Visible = False
+                End Try
+                For i As Integer = 0 To strLevels.Count - 1
+                    lstLevels.Add(strLevels(i))
+                Next
+                ucrInputRows.SetItems(lstLevels.ToArray())
 
+                'restore last selected level if its still contained in the new list of retrieved levels
+                If strLastSelectedLevel <> "" AndAlso lstLevels.Contains(strLastSelectedLevel) Then
+                    ucrInputRows.SetName(strLastSelectedLevel)
+                ElseIf bFirstLevelDefault AndAlso lstLevels.Count > 0 Then
+                    ucrInputRows.GetSetSelectedIndex = 0
+                End If
+            End If
         End If
+        VariableTypeProperties()
     End Sub
 
     Private Sub ucrNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewName.ControlValueChanged
@@ -141,7 +182,26 @@ Public Class dlgEdit
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowNumber.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrNewName.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrDate.ControlContentsChanged
-
+    Private Sub ucrInputRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRows.ControlValueChanged
+        If Not String.IsNullOrEmpty(ucrInputRows.GetText) Then
+            strLastSelectedLevel = ucrInputRows.GetText()
+        End If
     End Sub
+
+    Private Sub VariableTypeProperties()
+        ucrInputRows.Visible = False
+        ucrDate.Visible = False
+        ucrNewName.Visible = False
+        If Not ucrReceiverName.IsEmpty() Then
+            Select Case ucrReceiverName.strCurrDataType.ToLower
+                Case "factor"
+                    ucrInputRows.Visible = True
+                Case "date"
+                    ucrDate.Visible = True
+                Case Else
+                    ucrNewName.Visible = True
+            End Select
+        End If
+    End Sub
+
 End Class
