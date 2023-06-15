@@ -45,14 +45,14 @@ Partial Class ucrButtons
         Me.chkComment = New System.Windows.Forms.CheckBox()
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.cmdLanguage = New System.Windows.Forms.Button()
-        Me.cmdOk = New instat.ucrSplitButton()
         Me.contextMenuStripOk = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemOkClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemOkKeep = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdPaste = New instat.ucrSplitButton()
         Me.contextMenuStripToScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemToScriptClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemToScriptKeep = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdPaste = New instat.ucrSplitButton()
+        Me.cmdOk = New instat.ucrSplitButton()
         Me.contextMenuStripOk.SuspendLayout()
         Me.contextMenuStripToScript.SuspendLayout()
         Me.SuspendLayout()
@@ -74,7 +74,7 @@ Partial Class ucrButtons
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
         Me.cmdReset.TabIndex = 3
         Me.cmdReset.Tag = "Reset"
-        Me.cmdReset.Text = "Reset "
+        Me.cmdReset.Text = "Reset"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmdHelp
@@ -85,7 +85,7 @@ Partial Class ucrButtons
         Me.cmdHelp.Size = New System.Drawing.Size(84, 23)
         Me.cmdHelp.TabIndex = 5
         Me.cmdHelp.Tag = "Help"
-        Me.cmdHelp.Text = "Help "
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'chkComment
@@ -117,19 +117,6 @@ Partial Class ucrButtons
         Me.cmdLanguage.Text = "Lang"
         Me.cmdLanguage.UseVisualStyleBackColor = True
         '
-        'cmdOk
-        '
-        Me.cmdOk.AutoSize = True
-        Me.cmdOk.ContextMenuStrip = Me.contextMenuStripOk
-        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
-        Me.cmdOk.Name = "cmdOk"
-        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.SplitMenuStrip = Me.contextMenuStripOk
-        Me.cmdOk.TabIndex = 8
-        Me.cmdOk.Tag = "Ok"
-        Me.cmdOk.Text = "Ok"
-        Me.cmdOk.UseVisualStyleBackColor = True
-        '
         'contextMenuStripOk
         '
         Me.contextMenuStripOk.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemOkClose, Me.toolStripMenuItemOkKeep})
@@ -148,19 +135,6 @@ Partial Class ucrButtons
         Me.toolStripMenuItemOkKeep.Size = New System.Drawing.Size(134, 22)
         Me.toolStripMenuItemOkKeep.Text = "Ok && Keep"
         '
-        'cmdPaste
-        '
-        Me.cmdPaste.AutoSize = True
-        Me.cmdPaste.ContextMenuStrip = Me.contextMenuStripToScript
-        Me.cmdPaste.Location = New System.Drawing.Point(327, 26)
-        Me.cmdPaste.Name = "cmdPaste"
-        Me.cmdPaste.Size = New System.Drawing.Size(78, 23)
-        Me.cmdPaste.SplitMenuStrip = Me.contextMenuStripToScript
-        Me.cmdPaste.TabIndex = 10
-        Me.cmdPaste.Tag = "To_Script"
-        Me.cmdPaste.Text = "To Script"
-        Me.cmdPaste.UseVisualStyleBackColor = True
-        '
         'contextMenuStripToScript
         '
         Me.contextMenuStripToScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemToScriptClose, Me.toolStripMenuItemToScriptKeep})
@@ -178,6 +152,32 @@ Partial Class ucrButtons
         Me.toolStripMenuItemToScriptKeep.Name = "toolStripMenuItemToScriptKeep"
         Me.toolStripMenuItemToScriptKeep.Size = New System.Drawing.Size(164, 22)
         Me.toolStripMenuItemToScriptKeep.Text = "To Script && Keep"
+        '
+        'cmdPaste
+        '
+        Me.cmdPaste.AutoSize = True
+        Me.cmdPaste.ContextMenuStrip = Me.contextMenuStripToScript
+        Me.cmdPaste.Location = New System.Drawing.Point(327, 26)
+        Me.cmdPaste.Name = "cmdPaste"
+        Me.cmdPaste.Size = New System.Drawing.Size(78, 23)
+        Me.cmdPaste.SplitMenuStrip = Me.contextMenuStripToScript
+        Me.cmdPaste.TabIndex = 10
+        Me.cmdPaste.Tag = "To_Script"
+        Me.cmdPaste.Text = "To Script"
+        Me.cmdPaste.UseVisualStyleBackColor = True
+        '
+        'cmdOk
+        '
+        Me.cmdOk.AutoSize = True
+        Me.cmdOk.ContextMenuStrip = Me.contextMenuStripOk
+        Me.cmdOk.Location = New System.Drawing.Point(0, 26)
+        Me.cmdOk.Name = "cmdOk"
+        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOk.SplitMenuStrip = Me.contextMenuStripOk
+        Me.cmdOk.TabIndex = 8
+        Me.cmdOk.Tag = "Ok"
+        Me.cmdOk.Text = "Ok"
+        Me.cmdOk.UseVisualStyleBackColor = True
         '
         'ucrButtons
         '
