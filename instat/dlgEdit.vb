@@ -43,7 +43,7 @@ Public Class dlgEdit
             SetSelectedColumn()
         End If
         SetRCodeForControls(bReset)
-        bReset = False
+        bReset = True
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
