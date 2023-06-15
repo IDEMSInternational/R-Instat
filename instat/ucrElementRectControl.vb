@@ -19,7 +19,7 @@ Public Class ucrElementRectControl
     Private bInitialiseControls As Boolean = False
     Public strLegend As String
     Private clsThemeFunction As New RFunction
-    Private clsElementLine As New RFunction
+    Private clsElementRect As New RFunction
     Private clsBaseOperator As New ROperator
 
     Public Sub InitialiseControl()
@@ -72,26 +72,26 @@ Public Class ucrElementRectControl
         SetAxisLine(strNewLegend)
         clsBaseOperator = clsNewBaseOperator
         clsThemeFunction = clsNewThemeFunction
-        clsElementLine = clsNewElementLine
+        clsElementRect = clsNewElementLine
 
-        ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrNudRectSize.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectSize.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrRectColors.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectColour.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrRectFill.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectFill.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputRectLineType.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectLineType.SetRCode(clsElementRect, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         AddRemoveElementLineAxis()
     End Sub
 
     Private Sub AddRemoveElementLineAxis()
         If ucrChkRectColour.Checked OrElse ucrChkRectFill.Checked OrElse ucrChkRectLineType.Checked OrElse ucrChkRectSize.Checked OrElse ucrChkRectFill.Checked Then
-            clsThemeFunction.AddParameter(strLegend, clsRFunctionParameter:=clsElementLine)
+            clsThemeFunction.AddParameter(strLegend, clsRFunctionParameter:=clsElementRect)
         Else
             clsThemeFunction.RemoveParameterByName(strLegend)
         End If

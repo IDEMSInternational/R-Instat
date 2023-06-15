@@ -200,7 +200,6 @@ Public Class GgplotDefaults
             clsElementText = New RFunction
             clsElementLine = New RFunction
             clsElementRect = New RFunction
-            clsElementRect = New RFunction
 
             clsUnit = New RFunction
 
