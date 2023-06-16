@@ -34,6 +34,7 @@ Partial Class dlgEdit
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNewName = New instat.ucrInputTextBox()
         Me.ucrInputRows = New instat.ucrInputFactorLevels()
+        Me.ucrInputogical = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblColumns
@@ -164,12 +165,24 @@ Partial Class dlgEdit
         Me.ucrInputRows.Size = New System.Drawing.Size(120, 23)
         Me.ucrInputRows.TabIndex = 0
         '
+        'ucrInputogical
+        '
+        Me.ucrInputogical.AddQuotesIfUnrecognised = True
+        Me.ucrInputogical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputogical.GetSetSelectedIndex = -1
+        Me.ucrInputogical.IsReadOnly = False
+        Me.ucrInputogical.Location = New System.Drawing.Point(237, 159)
+        Me.ucrInputogical.Name = "ucrInputogical"
+        Me.ucrInputogical.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputogical.TabIndex = 46
+        '
         'dlgEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(479, 274)
+        Me.Controls.Add(Me.ucrInputogical)
         Me.Controls.Add(Me.ucrSelectValues)
         Me.Controls.Add(Me.ucrDate)
         Me.Controls.Add(Me.ucrReceiverRow)
@@ -206,4 +219,5 @@ Partial Class dlgEdit
     Friend WithEvents ucrRowNumber As ucrInputTextBox
     Friend WithEvents ucrDate As ucrDateTimePicker
     Friend WithEvents ucrSelectValues As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrInputogical As ucrInputComboBox
 End Class

@@ -49,6 +49,7 @@ Public Class dlgEdit
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctLogical As New Dictionary(Of String, String)
 
         ucrSelectValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectValues.SetParameterIsString()
@@ -68,6 +69,12 @@ Public Class dlgEdit
         ucrDate.SetParameter(New RParameter("new_value", 3))
         ucrDate.SetParameterIsRDate()
 
+        ucrInputogical.SetParameter(New RParameter("new_value", 2))
+        dctLogical.Add("TRUE", "TRUE")
+        dctLogical.Add("FALSE", "FALSE")
+        dctLogical.Add("NA", "NA")
+        ucrInputogical.SetItems(dctLogical)
+        ucrInputogical.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
@@ -89,6 +96,7 @@ Public Class dlgEdit
         ucrSelectValues.SetRCode(clsReplaceValue, bReset)
         ucrNewName.SetRCode(clsReplaceValue, bReset)
         ucrInputRows.SetRCode(clsReplaceValue, bReset)
+        ucrInputogical.SetRCode(clsReplaceValue, bReset)
 
         ucrDate.SetRCode(clsReplaceValue, bReset)
         If bReset Then
@@ -112,10 +120,12 @@ Public Class dlgEdit
         ucrReceiverRow.Add(strRowText)
         ucrRowNumber.SetName(strRowIndex)
         ucrNewName.SetName(strRowText)
+        ucrInputogical.SetName(strRowText)
         bUseSelectedColumn = False
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged, ucrDate.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged,
+        ucrDate.ControlContentsChanged, ucrInputogical.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -192,12 +202,15 @@ Public Class dlgEdit
         ucrInputRows.Visible = False
         ucrDate.Visible = False
         ucrNewName.Visible = False
+        ucrInputogical.Visible = False
         If Not ucrReceiverName.IsEmpty() Then
             Select Case ucrReceiverName.strCurrDataType.ToLower
                 Case "factor"
                     ucrInputRows.Visible = True
                 Case "date"
                     ucrDate.Visible = True
+                Case "logical"
+                    ucrInputogical.Visible = True
                 Case Else
                     ucrNewName.Visible = True
             End Select
