@@ -1425,9 +1425,9 @@ climatic_missing <- function(data, date, elements = ..., stations,
   
   
 climatic_details <- function(data, date, elements = ..., stations,
-                 order = FALSE,
-                 day = TRUE,
-                 month = FALSE,
+                 order = TRUE,
+                 day = FALSE,
+                 month = TRUE,
                  year = FALSE, level = FALSE){
   
   
