@@ -548,7 +548,6 @@ Public Class dlgLinePlot
         clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -603,10 +602,6 @@ Public Class dlgLinePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        cmdOptions.Enabled = ucrVariablesAsFactorForLinePlot.bSingleVariable
-    End Sub
-
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
                                    clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction,
@@ -645,10 +640,6 @@ Public Class dlgLinePlot
             End If
         Next
         TestOkEnabled()
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-        TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged

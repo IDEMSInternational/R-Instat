@@ -102,7 +102,10 @@ Public MustInherit Class ucrReoGrid
     End Sub
 
     Public Sub CopyRange() Implements IGrid.CopyRange
-        grdData.CurrentWorksheet.Copy()
+        If Not IsNothing(grdData) _
+                AndAlso Not IsNothing(grdData.CurrentWorksheet) Then
+            grdData.CurrentWorksheet.Copy()
+        End If
     End Sub
 
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows
@@ -212,7 +215,11 @@ Public MustInherit Class ucrReoGrid
 
     Private Function GetCellValue(iRow As Integer, strColumn As String) As String Implements IGrid.GetCellValue
         For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
-            If grdData.CurrentWorksheet.ColumnHeaders(i).Text = strColumn Then
+            Dim strColumnHeader As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
+            If strColumnHeader.Contains("(") Then
+                strColumnHeader = strColumnHeader.Split("(")(0)
+            End If
+            If strColumnHeader.Trim = strColumn Then
                 Return grdData.CurrentWorksheet(iRow, i).ToString()
             End If
         Next
