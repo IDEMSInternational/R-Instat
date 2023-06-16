@@ -18,6 +18,14 @@ Public Class dlgThreeVariablePivotTable
     Private bFirstLoad As Boolean = True
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
+
+    Public enumPivotMode As String = PivotMode.Describe
+
+    Public Enum PivotMode
+        Describe
+        Climatic
+    End Enum
+
     Private clsConcatenateFunction, clsFlattenFunction,
          clsLevelsFunction, clsPasteFunction,
         clsRelevelPasteFunction, clsRPivotTableFunction,
@@ -33,6 +41,7 @@ Public Class dlgThreeVariablePivotTable
 
         If bReset Then
             SetDefaults()
+            AutofillMode()
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -59,7 +68,7 @@ Public Class dlgThreeVariablePivotTable
 
         ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
         ucrReceiverAdditionalRowFactor.SetParameterIsString()
-        ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
+        'ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
         ucrReceiverAdditionalRowFactor.Selector = ucrSelectorPivot
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
@@ -67,7 +76,7 @@ Public Class dlgThreeVariablePivotTable
 
 
         ucrReceiverFactorLevels.SetParameter(New RParameter("variable", iNewPosition:=1))
-        ucrReceiverFactorLevels.SetDataType("factor")
+        'ucrReceiverFactorLevels.SetDataType("factor")
         ucrReceiverFactorLevels.SetParameterIsString()
         ucrReceiverFactorLevels.bWithQuotes = False
         ucrReceiverFactorLevels.Selector = ucrSelectorPivot
@@ -208,6 +217,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        AutofillMode()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
@@ -227,6 +237,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrSelectorPivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPivot.ControlValueChanged
         ChangeDataParameterValue()
+        AutofillMode()
         clsRPivotTableFunction._strDataFrameNameToAddAssignToObject = ucrSelectorPivot.strCurrentDataFrame
     End Sub
 
@@ -240,6 +251,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged,
         ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverAdditionalRowFactor.ControlValueChanged, ucrReceiverFactorLevels.ControlValueChanged
+        'AutofillMode()
         If Not bRcodeSet Then
             Exit Sub
         End If
@@ -297,6 +309,67 @@ Public Class dlgThreeVariablePivotTable
             clsConcatenateFunction.AddParameter("col" & iNewposition, strColumn, iPosition:=iNewposition, bIncludeArgumentName:=False)
             iNewposition += 1
         Next
+    End Sub
+
+    Private Sub AutofillMode()
+        Select Case enumPivotMode
+            Case PivotMode.Describe
+                ucrReceiverInitialRowFactors.bAutoFill = False
+
+                ucrReceiverInitialColumnFactor.bAutoFill = False
+
+                ucrReceiverFactorLevels.SetDataType("factor")
+                ucrReceiverFactorLevels.bAutoFill = False
+
+                ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
+                ucrReceiverAdditionalRowFactor.bAutoFill = False
+            Case PivotMode.Climatic
+                Dim strMonthCol As String
+                Dim strDataFrame As String
+                Dim strRainCol As String
+                Dim strYearCol As String
+                Dim strDayCol As String
+
+                strDataFrame = ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+                strMonthCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "month_label")
+                strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
+                strYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "year_label")
+                strDayCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "day_label")
+                'If Not String.IsNullOrEmpty(strTempCol) Then
+                '    ucrReceiverElement.Add(strTempCol, strDataFrame)
+                'Else
+                '    ucrReceiverElement.Add(strRainCol, strDataFrame)
+
+                'End If
+                If strRainCol <> "" Then
+                    ucrReceiverAdditionalRowFactor.Add(strRainCol, strDataFrame)
+                End If
+
+                If strMonthCol <> "" Then
+                    ucrReceiverFactorLevels.Add(strMonthCol, strDataFrame)
+                End If
+
+                If strDayCol <> "" Then
+                    ucrReceiverInitialColumnFactor.Add(strDayCol, strDataFrame)
+                End If
+
+                'If strYearCol <> "" Then
+                '    ucrReceiverInitialRowFactors.Add(strYearCol, strDataFrame)
+                'End If
+
+                'ucrReceiverInitialRowFactors.SetClimaticType("year")
+                'ucrReceiverInitialRowFactors.SetClimaticType("month_abbr")
+                'ucrReceiverInitialRowFactors.bAutoFill = True
+
+                'ucrReceiverInitialColumnFactor.SetClimaticType("day_in_month")
+                'ucrReceiverInitialColumnFactor.bAutoFill = True
+
+                'ucrReceiverFactorLevels.SetClimaticType("month_abbr")
+                'ucrReceiverFactorLevels.bAutoFill = True
+
+                'ucrReceiverAdditionalRowFactor.SetClimaticType("rain")
+                'ucrReceiverAdditionalRowFactor.bAutoFill = True
+        End Select
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
