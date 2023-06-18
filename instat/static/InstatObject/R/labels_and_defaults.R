@@ -8,6 +8,7 @@ Added_metadata="Added metadata"
 Added_object="Added object"
 Added_variables_metadata="Added variables metadata"
 Added_filter="Added filter"
+Added_column_selection="Added column selection"
 Converted_col_="Converted column"
 Replaced_value="Replaced value"
 Removed_row="Removed row"
@@ -25,8 +26,8 @@ decimal_places_label="Decimal_Places"
 columns_label="columns"
 summarised_from_label="summarised_from"
 key_label="key"
-row_count_label="Row_Count"
-column_count_label="Column_Count"
+row_count_label="Rows"
+column_count_label="Columns"
 is_linkable="Is_Linkable"
 
 #variables_metadata labels
@@ -57,12 +58,15 @@ structure_type_3_label="Measurement"
 
 #object labels
 overall_label="[Overall]"
-model_label="model"
 graph_label="graph"
 table_label="table"
-surv_label="surv"
+model_label="model"
+summary_label = "summary"
 
 #link labels
 keyed_link_label="keyed_link"
 
 max_labels_display=4
+
+# Column Selection Operations
+column_selection_operations <- c("base::match", "tidyselect::starts_with", "tidyselect::ends_with", "tidyselect::contains", "tidyselect::matches", "tidyselect::num_range", "tidyselect::last_col", "tidyselect::where")

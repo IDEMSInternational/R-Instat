@@ -23,7 +23,6 @@ Public Class dlgAugment
     Private clsAugment As New RFunction
 
     Private Sub dlgTidy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bfirstload Then
             InitialiseDialog()
             bfirstload = False
@@ -34,6 +33,7 @@ Public Class dlgAugment
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -58,7 +58,7 @@ Public Class dlgAugment
         ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.lblSaveText.Visible = False
         ucrSaveNewDataFrame.SetLabelText("")
-        ucrSaveNewDataFrame.SetPrefix("Augment_dataframe")
+        ucrSaveNewDataFrame.SetPrefix("augment_dataframe")
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrModelSelector.ucrAvailableDataFrames)
 
         ucrModelReceiver.SetParameter(New RParameter("x", 0))

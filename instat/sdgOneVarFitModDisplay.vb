@@ -25,7 +25,7 @@ Public Class sdgOneVarFitModDisplay
     Private clsRSyntax As RSyntax
     Public bControlsInitialised As Boolean = False
 
-    Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub sdgOneVarFitModDisplay_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
@@ -34,6 +34,9 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlLikelihood.AddRadioButton(rdoLoglik, "TRUE")
         ucrPnlLikelihood.AddRadioButton(rdoLik, "FALSE")
         ucrPnlLikelihood.SetRDefault("TRUE")
+
+        ucrBase.iHelpTopicID = 114
+
 
         ucrChkPLotLogLik.AddToLinkedControls(ucrPnlLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkPLotLogLik.AddToLinkedControls(ucrSaveLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)

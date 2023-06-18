@@ -23,7 +23,6 @@ Public Class dlgStandardiseCountryNames
     Public strDefaultColumn As String = ""
 
     Private Sub dlgStandardiseCountryNames_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +33,7 @@ Public Class dlgStandardiseCountryNames
         SetRCodeForControls(bReset)
         SetDefaultColumn()
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

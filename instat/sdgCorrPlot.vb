@@ -16,7 +16,10 @@
 
 Imports instat.Translations
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationTestFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
+    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction,
+        clsCorrelationTestFunction, clsCorrelationFunction, clsRGraphicsFuction,
+       clsGuideFunction, clsDummyFunction As New RFunction
+    Public clsRGGscatMatricReverseOperator As New ROperator
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Private clsRsyntax As RSyntax
@@ -29,6 +32,8 @@ Public Class sdgCorrPlot
 
     Public Sub InitialiseControls()
         Dim dctGeom As New Dictionary(Of String, String)
+
+        ucrBaseSdgCorrPlot.iHelpTopicID = 266
 
         ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
         ucrNudMaximumSize.SetMinMax(1, 10)
@@ -43,7 +48,17 @@ Public Class sdgCorrPlot
         ucrChkLabel.SetText("Label")
         ucrChkLabel.SetRDefault("FALSE")
 
-        ucrSaveGraph.SetPrefix("CorGraph")
+        ucrPnlGraphType.AddRadioButton(rdoNone)
+        ucrPnlGraphType.AddRadioButton(rdoCorrelationPlot)
+        ucrPnlGraphType.AddRadioButton(rdoPairwisePlot)
+        ucrPnlGraphType.AddRadioButton(rdoScatterPlotMatrix)
+
+        ucrPnlGraphType.AddParameterValuesCondition(rdoNone, "checked", "none")
+        ucrPnlGraphType.AddParameterValuesCondition(rdoCorrelationPlot, "checked", "cor")
+        ucrPnlGraphType.AddParameterValuesCondition(rdoPairwisePlot, "checked", "pair")
+        ucrPnlGraphType.AddParameterValuesCondition(rdoScatterPlotMatrix, "checked", "scatter")
+
+        ucrSaveGraph.SetPrefix("cor_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
@@ -56,18 +71,23 @@ Public Class sdgCorrPlot
         ucrReceiverFactor.SetDataType("factor")
         ucrReceiverFactor.SetMeAsReceiver()
 
-        ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tile")
-        ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrNudMaximumSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrChkLabel, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoPairwisePlot, rdoCorrelationPlot, rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkReverseLegendOrder.SetText("Reverse Legend Order")
+        ucrChkReverseLegendOrder.AddParameterPresentCondition(True, "reverse")
+        ucrChkReverseLegendOrder.AddParameterPresentCondition(False, "reverse", False)
+
+        ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrNudMaximumSize, {rdoCorrelationPlot}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrChkLabel, {rdoCorrelationPlot}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoPairwisePlot, rdoCorrelationPlot, rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudMinimunSize.SetLinkedDisplayControl(lblMinimumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
         ucrPnlGraphType.SetLinkedDisplayControl(grpOptions)
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
-        ucrPnlGraphType.AddToLinkedControls(ucrSelectorFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrReceiverFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrSelectorFactor, {rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrReceiverFactor, {rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrChkReverseLegendOrder, {rdoScatterPlotMatrix}, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactor)
 
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
@@ -79,19 +99,15 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
         ucrInputComboGeom.SetLinkedDisplayControl(lblGeom)
 
-        ucrPnlGraphType.AddRadioButton(rdoNone)
-        ucrPnlGraphType.AddRadioButton(rdoCorrelationPlot)
-        ucrPnlGraphType.AddRadioButton(rdoPairwisePlot)
-        ucrPnlGraphType.AddRadioButton(rdoScatterPlotMatrix)
-
-        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoCorrelationPlot, {"ggcorr"})
-        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoPairwisePlot, {"ggpairs"})
-        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoScatterPlotMatrix, {"ggscatmat"})
-        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoNone, {"ggcorr", "ggpairs", "ggscatmat"}, False)
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, strColFunction As String, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional bTwoColumns As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewcorrelationTestFunction As RFunction,
+                        clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction,
+                        clsNewRGGscatmatrixFunction As RFunction, strNewColFunction As String, clsNewDummyFunction As RFunction,
+                        clsNewRGGscatMatrixReverseOperator As ROperator, clsNewGuideFunction As RFunction,
+                        Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False,
+                        Optional bTwoColumns As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -104,21 +120,25 @@ Public Class sdgCorrPlot
         End If
 
         clsRsyntax = clsNewRSyntax
+        clsDummyFunction = clsNewDummyFunction
+        clsRGGscatMatricReverseOperator = clsNewRGGscatMatrixReverseOperator
+        clsGuideFunction = clsNewGuideFunction
         clsCorrelationTestFunction = clsNewcorrelationTestFunction
         clsCorrelationFunction = clsNewcorrelationFunction
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction
-        clsRTempFunction = clsNewRTempFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkReverseLegendOrder.SetRCode(clsRGGscatMatricReverseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, iAdditionalPairNo:=1)
-        ucrSaveGraph.AddAdditionalRCode(clsRGGscatmatrixFunction, iAdditionalPairNo:=2)
-        ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
+        ucrSaveGraph.AddAdditionalRCode(clsRGGscatMatricReverseOperator, iAdditionalPairNo:=2)
+        ucrPnlGraphType.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         Visibility()
+
         If bReset Then
             ucrSelectorFactor.Reset()
         End If
@@ -165,6 +185,7 @@ Public Class sdgCorrPlot
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
         If Not ucrReceiverFactor.IsEmpty Then
             clsRGGscatmatrixFunction.AddParameter("color", ucrReceiverFactor.GetVariableNames(), iPosition:=2)
+            ucrChkReverseLegendOrder.Checked = True
         Else
             clsRGGscatmatrixFunction.RemoveParameterByName("color")
         End If
@@ -173,15 +194,28 @@ Public Class sdgCorrPlot
     Public Sub BeforeAndAfterCodes()
         clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
-        clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
-        If rdoCorrelationPlot.Checked AndAlso rdoCorrelationPlot.Enabled Then
+        clsRsyntax.RemoveFromAfterCodes(clsRGGscatMatricReverseOperator)
+        If rdoNone.Checked Then
+            clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
+
+        ElseIf rdoCorrelationPlot.Checked AndAlso rdoCorrelationPlot.Enabled Then
             clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-        End If
-        If rdoPairwisePlot.Checked Then
+            clsDummyFunction.AddParameter("checked", "cor", iPosition:=0)
+        ElseIf rdoPairwisePlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
+            clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
+
+        Else
+            clsRsyntax.AddToAfterCodes(clsRGGscatMatricReverseOperator, iPosition:=3)
+            clsDummyFunction.AddParameter("checked", "scatter", iPosition:=0)
         End If
-        If rdoScatterPlotMatrix.Checked Then
-            clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=3)
+    End Sub
+
+    Private Sub ucrChkReverseLegendOrder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReverseLegendOrder.ControlValueChanged
+        If ucrChkReverseLegendOrder.Checked Then
+            clsRGGscatMatricReverseOperator.AddParameter("reverse", clsRFunctionParameter:=clsGuideFunction, iPosition:=1)
+        Else
+            clsRGGscatMatricReverseOperator.RemoveParameterByName("reverse")
         End If
     End Sub
 End Class

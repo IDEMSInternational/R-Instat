@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgDeleteModels
     Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -26,6 +25,7 @@ Public Class dlgDeleteModels
             bFirstLoad = False
         End If
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

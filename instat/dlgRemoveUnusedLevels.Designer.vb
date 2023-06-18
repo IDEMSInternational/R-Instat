@@ -38,63 +38,106 @@ Partial Class dlgRemoveUnusedLevels
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRemoveUnusedLevels))
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrRemoveUnusedFactorLevels = New instat.ucrFactor()
         Me.ucrReceiverFactorColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputUnusedLevels = New instat.ucrInputTextBox()
+        Me.lblLevelsPreview = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFactor
         '
-        resources.ApplyResources(Me.lblFactor, "lblFactor")
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(239, 13)
         Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
+        Me.lblFactor.TabIndex = 1
         Me.lblFactor.Tag = "Factor_Selected:"
+        Me.lblFactor.Text = "Factor Selected:"
         '
         'ucrRemoveUnusedFactorLevels
         '
-        resources.ApplyResources(Me.ucrRemoveUnusedFactorLevels, "ucrRemoveUnusedFactorLevels")
+        Me.ucrRemoveUnusedFactorLevels.AutoSize = True
         Me.ucrRemoveUnusedFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrRemoveUnusedFactorLevels.clsReceiver = Nothing
+        Me.ucrRemoveUnusedFactorLevels.Location = New System.Drawing.Point(239, 72)
         Me.ucrRemoveUnusedFactorLevels.Name = "ucrRemoveUnusedFactorLevels"
-        Me.ucrRemoveUnusedFactorLevels.shtCurrSheet = Nothing
-        Me.ucrRemoveUnusedFactorLevels.ucrChkLevels = Nothing
+        Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(255, 175)
+        Me.ucrRemoveUnusedFactorLevels.TabIndex = 4
         '
         'ucrReceiverFactorColumn
         '
+        Me.ucrReceiverFactorColumn.AutoSize = True
         Me.ucrReceiverFactorColumn.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactorColumn, "ucrReceiverFactorColumn")
+        Me.ucrReceiverFactorColumn.Location = New System.Drawing.Point(239, 29)
+        Me.ucrReceiverFactorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
         Me.ucrReceiverFactorColumn.Selector = Nothing
+        Me.ucrReceiverFactorColumn.Size = New System.Drawing.Size(106, 26)
         Me.ucrReceiverFactorColumn.strNcFilePath = ""
+        Me.ucrReceiverFactorColumn.TabIndex = 2
         Me.ucrReceiverFactorColumn.ucrSelector = Nothing
         '
         'ucrSelectorFactorColumn
         '
+        Me.ucrSelectorFactorColumn.AutoSize = True
+        Me.ucrSelectorFactorColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactorColumn.bShowHiddenColumns = False
         Me.ucrSelectorFactorColumn.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFactorColumn, "ucrSelectorFactorColumn")
+        Me.ucrSelectorFactorColumn.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorFactorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorColumn.Name = "ucrSelectorFactorColumn"
+        Me.ucrSelectorFactorColumn.Size = New System.Drawing.Size(242, 200)
+        Me.ucrSelectorFactorColumn.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 293)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'ucrInputUnusedLevels
         '
         Me.ucrInputUnusedLevels.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnusedLevels.AutoSize = True
         Me.ucrInputUnusedLevels.IsMultiline = False
-        Me.ucrInputUnusedLevels.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputUnusedLevels, "ucrInputUnusedLevels")
+        Me.ucrInputUnusedLevels.IsReadOnly = True
+        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(100, 268)
         Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
+        Me.ucrInputUnusedLevels.Size = New System.Drawing.Size(380, 21)
+        Me.ucrInputUnusedLevels.TabIndex = 6
+        '
+        'lblLevelsPreview
+        '
+        Me.lblLevelsPreview.AutoSize = True
+        Me.lblLevelsPreview.Location = New System.Drawing.Point(239, 56)
+        Me.lblLevelsPreview.Name = "lblLevelsPreview"
+        Me.lblLevelsPreview.Size = New System.Drawing.Size(82, 13)
+        Me.lblLevelsPreview.TabIndex = 3
+        Me.lblLevelsPreview.Text = "Levels Preview:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 270)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(81, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "Unused Levels:"
         '
         'dlgRemoveUnusedLevels
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(504, 352)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblLevelsPreview)
         Me.Controls.Add(Me.ucrInputUnusedLevels)
         Me.Controls.Add(Me.ucrRemoveUnusedFactorLevels)
         Me.Controls.Add(Me.lblFactor)
@@ -105,7 +148,9 @@ Partial Class dlgRemoveUnusedLevels
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRemoveUnusedLevels"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Remove_Unused_Factor_Levels"
+        Me.Text = "Remove Unused Levels"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -117,4 +162,6 @@ Partial Class dlgRemoveUnusedLevels
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrRemoveUnusedFactorLevels As ucrFactor
     Friend WithEvents ucrInputUnusedLevels As ucrInputTextBox
+    Friend WithEvents lblLevelsPreview As Label
+    Friend WithEvents Label1 As Label
 End Class

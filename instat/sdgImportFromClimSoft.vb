@@ -25,7 +25,6 @@ Public Class sdgImportFromClimSoft
     Private bConnected As Boolean
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,6 +34,7 @@ Public Class sdgImportFromClimSoft
         'could have been connected through the wizard. So check here
         bConnected = IsConnectionIsActive()
         UpdateConnectionAndControlsState()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -92,15 +92,15 @@ Public Class sdgImportFromClimSoft
     Private Sub UpdateConnectionAndControlsState()
         Dim bEnableControls As Boolean
         If bConnected Then
-            lblConnection.Text = "Connected"
+            lblConnection.Text = GetTranslation("Connected")
             lblConnection.ForeColor = Color.Green
-            btnConnect.Text = "Disconnect"
+            btnConnect.Text = GetTranslation("Disconnect")
             'disable all other controls. Entry allowed only when there is no existing connection
             bEnableControls = False
         Else
-            lblConnection.Text = "No Connection"
+            lblConnection.Text = GetTranslation("No Connection")
             lblConnection.ForeColor = Color.Red
-            btnConnect.Text = "Connect"
+            btnConnect.Text = GetTranslation("Connect")
             'enable all other controls to allow entry of connection details
             bEnableControls = True
         End If

@@ -24,6 +24,27 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("title", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("subtitle", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("caption", Chr(34) & Chr(34))
+
+            Return clsTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsScaleColorViridisFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("viridis")
+            clsTempFunc.SetRCommand("scale_colour_viridis")
+            Return clsTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsScaleFillViridisFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("viridis")
+            clsTempFunc.SetRCommand("scale_fill_viridis")
             Return clsTempFunc
         End Get
     End Property
@@ -128,6 +149,18 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsAnnotateFunction As RFunction
+        Get
+            Dim clsAnnotateTempFunc As New RFunction
+
+            clsAnnotateTempFunc.SetPackageName("ggplot2")
+            clsAnnotateTempFunc.SetRCommand("annotate")
+            clsAnnotateTempFunc.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=15)
+
+            Return clsAnnotateTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsAesFunction As RFunction
         Get
             Dim clslocalAesTempFunc As New RFunction
@@ -187,6 +220,9 @@ Public Class GgplotDefaults
             dctTemp.Add("title", clsElementText.Clone())
             dctTemp.Add("sub.title", clsElementText.Clone())
             dctTemp.Add("caption", clsElementText.Clone())
+            dctTemp.Add("tag", clsElementText.Clone())
+            dctTemp.Add("colour", clsElementText.Clone())
+
             'dctTemp.Add("aspect.ratio", clsElementText.Clone())
             dctTemp.Add("axis.title", clsElementText.Clone())
             dctTemp.Add("axis.title.x", clsElementText.Clone())
@@ -239,6 +275,7 @@ Public Class GgplotDefaults
             dctTemp.Add("plot.title", clsElementText.Clone())
             dctTemp.Add("plot.subtitle", clsElementText.Clone())
             dctTemp.Add("plot.caption", clsElementText.Clone())
+            dctTemp.Add("plot.tag", clsElementText.Clone())
             dctTemp.Add("plot.margin", clsUnit.Clone())
             dctTemp.Add("strip.background", clsElementRect.Clone())
             ' dctTemp.Add("strip.placement", clsElementLine.Clone())

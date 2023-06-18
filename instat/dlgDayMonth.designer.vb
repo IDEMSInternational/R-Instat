@@ -89,13 +89,18 @@ Partial Class dlgDayMonth
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(12, 148)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 51)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputColumnName1
         '
+        Me.ucrInputColumnName1.AddQuotesIfUnrecognised = True
+        Me.ucrInputColumnName1.AutoSize = True
+        Me.ucrInputColumnName1.IsMultiline = False
         Me.ucrInputColumnName1.IsReadOnly = False
         Me.ucrInputColumnName1.Location = New System.Drawing.Point(161, 67)
         Me.ucrInputColumnName1.Name = "ucrInputColumnName1"
@@ -104,6 +109,9 @@ Partial Class dlgDayMonth
         '
         'ucrInputTimePeriod
         '
+        Me.ucrInputTimePeriod.AddQuotesIfUnrecognised = True
+        Me.ucrInputTimePeriod.AutoSize = True
+        Me.ucrInputTimePeriod.IsMultiline = False
         Me.ucrInputTimePeriod.IsReadOnly = False
         Me.ucrInputTimePeriod.Location = New System.Drawing.Point(161, 94)
         Me.ucrInputTimePeriod.Name = "ucrInputTimePeriod"
@@ -112,6 +120,9 @@ Partial Class dlgDayMonth
         '
         'ucrInputRequiredTimeFormat
         '
+        Me.ucrInputRequiredTimeFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputRequiredTimeFormat.AutoSize = True
+        Me.ucrInputRequiredTimeFormat.IsMultiline = False
         Me.ucrInputRequiredTimeFormat.IsReadOnly = False
         Me.ucrInputRequiredTimeFormat.Location = New System.Drawing.Point(161, 121)
         Me.ucrInputRequiredTimeFormat.Name = "ucrInputRequiredTimeFormat"
@@ -120,8 +131,9 @@ Partial Class dlgDayMonth
         '
         'dlgDayMonth
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(441, 211)
         Me.Controls.Add(Me.ucrInputRequiredTimeFormat)
         Me.Controls.Add(Me.ucrInputTimePeriod)

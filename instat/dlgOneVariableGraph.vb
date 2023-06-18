@@ -25,7 +25,6 @@ Public Class dlgOneVariableGraph
     Public strDefaultColumns() As String = Nothing
 
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -38,6 +37,7 @@ Public Class dlgOneVariableGraph
         bReset = False
         ReopenDialog()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

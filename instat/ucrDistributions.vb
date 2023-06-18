@@ -89,7 +89,6 @@ Public Class ucrDistributions
         Else
             clsCurrRFunction.AddParameter(strArgumentName, strArgumentValue)
         End If
-
     End Sub
 
     Public Sub SetRDistributions()
@@ -158,16 +157,32 @@ Public Class ucrDistributions
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
                         Select Case strDataType
-                            Case "numeric"
+                            Case "logical"
+                                If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                            Case "numeric", "integer"
                                 If Dist.bNumeric Then
                                     bUse = True
                                 End If
                             Case "positive integer"
-                                If Dist.bPositiveInt Then
+                                If Dist.bPositiveInt Or Dist.bNumeric Then
+                                    bUse = True
+                                End If
+                            Case "two level numeric"
+                                If Dist.bNumeric Or Dist.bTwoLevelFactor Then
                                     bUse = True
                                 End If
                             Case "two level factor"
                                 If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                            Case "factor"
+                                If Dist.bFactor Then
+                                    bUse = True
+                                End If
+                            Case "ordered,factor"
+                                If Dist.bFactor Then
                                     bUse = True
                                 End If
                         End Select
@@ -179,7 +194,7 @@ Public Class ucrDistributions
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
-                ucrInputDistributions.AddItems({translate(Dist.strNameTag)})
+                ucrInputDistributions.AddItems({GetTranslation(Dist.strNameTag)})
             End If
         Next
         If ucrInputDistributions.cboInput.Items.Count > 0 Then
@@ -191,7 +206,6 @@ Public Class ucrDistributions
         Dim clsNormalDist As New Distribution
         Dim clsExponentialDist As New Distribution
         Dim clsGeometricDist As New Distribution
-        'Dim clsExtremeValueDist As New Distribution
         Dim clsWeibullDist As New Distribution
         Dim clsUniformDist As New Distribution
         Dim clsBernouliDist As New Distribution
@@ -214,9 +228,17 @@ Public Class ucrDistributions
         Dim clsCauchyDist As New Distribution
         Dim clsChiSqDist As New Distribution
         Dim clsFDist As New Distribution
-        'Dim clsHyperGeoDist As New Distribution
+        Dim clsHyperGeoDist As New Distribution
         Dim clsLogNormDist As New Distribution
+        Dim clsExtremeValueDist As New Distribution
+        Dim clsGeneralizedParetoDist As New Distribution
+        Dim clsGumbelDist As New Distribution
         Dim clsNoDist As New Distribution
+        Dim clsEmpiricalDist As New Distribution
+        Dim clsTriangularDist As New Distribution
+        Dim clsGlmNegativeBinomialDist As New Distribution
+        Dim clsPolarDist As New Distribution
+        Dim clsMultinomDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -257,20 +279,6 @@ Public Class ucrDistributions
         clsGeometricDist.AddParameter("prob", "Probability", 0.5)
         lstAllDistributions.Add(clsGeometricDist)
 
-        ' Extreme Value Distribution
-        'clsExtremeValueDist.strNameTag = "Extreme_Value"
-        'clsExtremeValueDist.strRName = "evd"
-        'clsExtremeValueDist.strPackagName = "extRemes"
-        'clsExtremeValueDist.strRFunctionName = "revd"
-        'clsExtremeValueDist.strPFunctionName = "pevd"
-        'clsExtremeValueDist.strQFunctionName = "qqevd"
-        'clsExtremeValueDist.strDFunctionName = "devd"
-        'clsExtremeValueDist.bIsContinuous = True
-        'clsExtremeValueDist.AddParameter("shape", "Shape", 0)
-        'clsExtremeValueDist.AddParameter("scale", "Scale", 1)
-        'clsExtremeValueDist.AddParameter("loc", "Location", 0)
-        'lstAllDistributions.Add(clsExtremeValueDist)
-
         ' Weibull Distribution
         clsWeibullDist.strNameTag = "Weibull"
         clsWeibullDist.strRName = "weibull"
@@ -296,7 +304,7 @@ Public Class ucrDistributions
         lstAllDistributions.Add(clsUniformDist)
 
         'Bernouli Distribution
-        clsBernouliDist.strNameTag = "Bernouli"
+        clsBernouliDist.strNameTag = "Bernoulli"
         clsBernouliDist.strRName = "binom"
         clsBernouliDist.strRFunctionName = "rbinom"
         clsBernouliDist.strPFunctionName = "pbinom"
@@ -308,6 +316,7 @@ Public Class ucrDistributions
         clsBernouliDist.strExactName = "binom"
         clsBernouliDist.lstExact = {"prob", "Probability:", 0.5, 0.1, 2, 0, 1}
         clsBernouliDist.AddParameter("prob", "Probability", 0.5)
+        clsBernouliDist.AddParameter("size", "Number", 1)
         lstAllDistributions.Add(clsBernouliDist)
 
         'Binomial Distribution
@@ -372,6 +381,7 @@ Public Class ucrDistributions
         clsStudentsTDist.strQFunctionName = "qt"
         clsStudentsTDist.strDFunctionName = "dt"
         clsStudentsTDist.AddParameter("df", "DF", 1)
+        clsStudentsTDist.AddParameter("ncp", "Non-Centrality", 0)
         lstAllDistributions.Add(clsStudentsTDist)
 
         ' von mises distribution
@@ -408,6 +418,7 @@ Public Class ucrDistributions
         clsChiSqDist.strDFunctionName = "dchisq"
         clsChiSqDist.bIsContinuous = True
         clsChiSqDist.AddParameter("df", "DF", 1)
+        clsChiSqDist.AddParameter("ncp", "Non-Centrality", 0)
         lstAllDistributions.Add(clsChiSqDist)
 
         ' F Distribution
@@ -423,17 +434,42 @@ Public Class ucrDistributions
 
         'Hypergeometric Distribution
         ' For rhyper, the parameters are nn = size, whereas for the other parameters this is n.
-        'clsHyperGeoDist.strNameTag = "Hypergeometric"
-        'clsHyperGeoDist.strRName = "hyper"
-        'clsHyperGeoDist.strRFunctionName = "rhyper"
-        'clsHyperGeoDist.strPFunctionName = "phyper"
-        'clsHyperGeoDist.strQFunctionName = "qhyper"
-        'clsHyperGeoDist.strDFunctionName = "dhyper"
-        'clsHyperGeoDist.bIsContinuous = False
-        'clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
-        'clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
-        'clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
-        'lstAllDistributions.Add(clsHyperGeoDist)
+        clsHyperGeoDist.strNameTag = "Hypergeometric"
+        clsHyperGeoDist.strRName = "hyper"
+        clsHyperGeoDist.strRFunctionName = "rhyper"
+        clsHyperGeoDist.strPFunctionName = "phyper"
+        clsHyperGeoDist.strQFunctionName = "qhyper"
+        clsHyperGeoDist.strDFunctionName = "dhyper"
+        clsHyperGeoDist.bIsContinuous = False
+        clsHyperGeoDist.AddParameter("m", "Population_Successes", 10)
+        clsHyperGeoDist.AddParameter("n", "Population_Failures", 10)
+        clsHyperGeoDist.AddParameter("k", "Sample_Size", 10)
+        lstAllDistributions.Add(clsHyperGeoDist)
+
+        'Discrete Empirical distribution
+        clsEmpiricalDist.strNameTag = "Discrete_Empirical"
+        clsEmpiricalDist.strRName = "empiricalD"
+        clsEmpiricalDist.strDFunctionName = "dempiricalD"
+        clsEmpiricalDist.strPFunctionName = "pempiricalD"
+        clsEmpiricalDist.strQFunctionName = "qempiricalD"
+        clsEmpiricalDist.strRFunctionName = "rempiricalD"
+        clsEmpiricalDist.SetPackageName("mc2d")
+        clsEmpiricalDist.AddParameter("values", "Values", "1:5")
+        clsEmpiricalDist.AddParameter("prob", "Probability", "10, 10, 10, 0, 10")
+        lstAllDistributions.Add(clsEmpiricalDist)
+
+        'Triangular distribution
+        clsTriangularDist.strNameTag = "Triangular"
+        clsTriangularDist.strRName = "triang"
+        clsTriangularDist.strRFunctionName = "rtriang"
+        clsTriangularDist.strPFunctionName = "ptriang"
+        clsTriangularDist.strQFunctionName = "qtriang"
+        clsTriangularDist.strDFunctionName = "dtriang"
+        clsTriangularDist.strPackagName = "mc2d"
+        clsTriangularDist.AddParameter("min ", "Minimum", -1)
+        clsTriangularDist.AddParameter("mode ", "Mode", 0)
+        clsTriangularDist.AddParameter("max ", "Maximum", 1)
+        lstAllDistributions.Add(clsTriangularDist)
 
         ' Lognormal Distribution
         clsLogNormDist.strNameTag = "Lognormal"
@@ -443,19 +479,11 @@ Public Class ucrDistributions
         clsLogNormDist.strQFunctionName = "qlnorm"
         clsLogNormDist.strDFunctionName = "dlnorm"
         clsLogNormDist.AddParameter("meanlog", "Meanlog", 0)
-        clsLogNormDist.AddParameter("sdlog", "SDlog", 1)
         lstAllDistributions.Add(clsLogNormDist)
 
         'TODO Categorical distribution
         clsCategoricalDist.strNameTag = "Categorical"
-        clsCategoricalDist.strRName = ""
-        clsCategoricalDist.strRFunctionName = ""
-        clsCategoricalDist.strPFunctionName = ""
-        clsCategoricalDist.strQFunctionName = ""
-        clsCategoricalDist.strDFunctionName = ""
         clsCategoricalDist.bIsContinuous = False
-        clsCategoricalDist.AddParameter("", "", "")
-        clsCategoricalDist.AddParameter("", "", )
         lstAllDistributions.Add(clsCategoricalDist)
 
         'Gamma With Shape and Scale distribution
@@ -506,8 +534,33 @@ Public Class ucrDistributions
         clsGamma.bIsContinuous = True
         lstAllDistributions.Add(clsGamma)
 
+        'Negative Binomial distribution
+        clsGlmNegativeBinomialDist.strNameTag = "Negative_Binomial_GLM"
+        clsGlmNegativeBinomialDist.strRName = "glm.nb"
+        clsGlmNegativeBinomialDist.strPackagName = "MASS"
+        clsGlmNegativeBinomialDist.strGLMFunctionName = "glm.nb"
+        clsGlmNegativeBinomialDist.bNumeric = True
+        'clsGlmNegativeBinomialDist.bIsExact = True
+        lstAllDistributions.Add(clsGlmNegativeBinomialDist)
+
+        'ordered factor
+        clsPolarDist.strNameTag = "Ordered_Logistic"
+        clsPolarDist.strPackagName = "MASS"
+        clsPolarDist.strRName = "polr"
+        clsPolarDist.bFactor = True
+        clsPolarDist.bIsContinuous = False
+        clsPolarDist.strGLMFunctionName = "polr"
+        lstAllDistributions.Add(clsPolarDist)
+
+        'multinomial distribution
+        clsMultinomDist.strNameTag = "Multinomial"
+        clsMultinomDist.strPackagName = "nnet"
+        clsMultinomDist.strGLMFunctionName = "multinom"
+        clsMultinomDist.strRName = "multinom"
+        clsMultinomDist.bFactor = True
+        lstAllDistributions.Add(clsMultinomDist)
+
         'Gamma with Zeros distribution
-        'TODO Paramaters 
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
         clsGammaWithZerosDist.strRName = "gamma"
         clsGammaWithZerosDist.strPackagName = "stats"
@@ -522,7 +575,6 @@ Public Class ucrDistributions
 
         'Inverse Gaussian distribution
         clsInverseGaussianDist.strNameTag = "Inverse_Gaussian"
-        clsInverseGaussianDist.strRName = ""
         clsInverseGaussianDist.strGLMFunctionName = "inverse.gaussian"
         clsInverseGaussianDist.bNumeric = True
         clsInverseGaussianDist.bIsContinuous = True
@@ -530,30 +582,62 @@ Public Class ucrDistributions
 
         'Quasi distribution
         clsQuasiDist.strNameTag = "Quasi"
-        clsQuasiDist.strRName = ""
         clsQuasiDist.strGLMFunctionName = "quasi"
         clsQuasiDist.bNumeric = True
-        'clsQuasiDist.bIsContinuous = 
         lstAllDistributions.Add(clsQuasiDist)
 
         'Quasibinomial distribution
         clsQuasibinomialDist.strNameTag = "Quasibinomial"
         clsQuasibinomialDist.strGLMFunctionName = "quasibinomial"
         clsQuasibinomialDist.bTwoLevelFactor = True
-        'clsQuasibinomialDist.bIsContinuous = 
         lstAllDistributions.Add(clsQuasibinomialDist)
 
         'Quasipoisson distribution
         clsQuasipoissonDist.strNameTag = "Quasipoisson"
-        clsQuasipoissonDist.strRName = ""
         clsQuasipoissonDist.strGLMFunctionName = "quasipoisson"
-        'clsQuasipoissonDist.bIsContinuous = 
         clsQuasipoissonDist.bPositiveInt = True
         lstAllDistributions.Add(clsQuasipoissonDist)
         bDistributionsSet = True
 
-        ' No Distribution
-        clsNoDist.strNameTag = "No_Distribution" ' TODO: Add in this name
+        ' Extreme value distribution
+        clsExtremeValueDist.SetNameTag("Extreme_Value")
+        clsExtremeValueDist.SetRName("gev")
+        clsExtremeValueDist.SetPackageName("texmex")
+        clsExtremeValueDist.SetRFunctionName("rgev")
+        clsExtremeValueDist.SetPFunctionName("pgev")
+        clsExtremeValueDist.SetQFunctionName("qgev")
+        clsExtremeValueDist.SetDFunctionName("dgev")
+        clsExtremeValueDist.AddParameter("xi", "Shape", 0)
+        clsExtremeValueDist.AddParameter("sigma", "Scale", 1)
+        clsExtremeValueDist.AddParameter("mu", "Location", 0)
+        lstAllDistributions.Add(clsExtremeValueDist)
+
+        'Generalized pareto distribution
+        clsGeneralizedParetoDist.SetNameTag("Generalized_Pareto")
+        clsGeneralizedParetoDist.SetRName("gpd")
+        clsGeneralizedParetoDist.SetPackageName("texmex")
+        clsGeneralizedParetoDist.SetRFunctionName("rgpd")
+        clsGeneralizedParetoDist.SetPFunctionName("pgpd")
+        clsGeneralizedParetoDist.SetQFunctionName("qgpd")
+        clsGeneralizedParetoDist.SetDFunctionName("dgpd")
+        clsGeneralizedParetoDist.AddParameter("xi", "Shape", 0)
+        clsGeneralizedParetoDist.AddParameter("sigma", "Scale", 1)
+        lstAllDistributions.Add(clsGeneralizedParetoDist)
+
+        'Gumbel distribution
+        clsGumbelDist.SetNameTag("Gumbel")
+        clsGumbelDist.SetRName("gumbel")
+        clsGumbelDist.SetPackageName("texmex")
+        clsGumbelDist.SetRFunctionName("rgumbel")
+        clsGumbelDist.SetPFunctionName("pgumbel")
+        clsGumbelDist.SetQFunctionName("qgumbel")
+        clsGumbelDist.SetDFunctionName("dgumbel")
+        clsGumbelDist.AddParameter("mu", "Location", 0)
+        clsGumbelDist.AddParameter("sigma", "Scale", 1)
+        lstAllDistributions.Add(clsGumbelDist)
+
+        ' No distribution
+        clsNoDist.SetNameTag("No_Distribution") ' TODO: Add in this name
         clsNoDist.strRName = ""
         clsNoDist.bIsExact = True
         clsNoDist.strExactName = "none"
@@ -664,7 +748,7 @@ Public Class ucrDistributions
             End If
         End If
         If clsNewCurrentDist IsNot Nothing Then
-            ucrInputDistributions.SetName(translate(clsNewCurrentDist.strNameTag))
+            ucrInputDistributions.SetName(GetTranslation(clsNewCurrentDist.strNameTag))
         Else
             If bErrorIfNotFound Then
                 MsgBox("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")

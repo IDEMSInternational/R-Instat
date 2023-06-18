@@ -71,7 +71,7 @@ Partial Class dlgPICSACrops
         'lblSelectedSet
         '
         Me.lblSelectedSet.AutoSize = True
-        Me.lblSelectedSet.Location = New System.Drawing.Point(255, 21)
+        Me.lblSelectedSet.Location = New System.Drawing.Point(232, 21)
         Me.lblSelectedSet.Name = "lblSelectedSet"
         Me.lblSelectedSet.Size = New System.Drawing.Size(43, 13)
         Me.lblSelectedSet.TabIndex = 15
@@ -81,7 +81,7 @@ Partial Class dlgPICSACrops
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(413, 21)
+        Me.Label2.Location = New System.Drawing.Point(365, 21)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(32, 13)
         Me.Label2.TabIndex = 21
@@ -91,7 +91,7 @@ Partial Class dlgPICSACrops
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(413, 66)
+        Me.Label3.Location = New System.Drawing.Point(365, 66)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(65, 13)
         Me.Label3.TabIndex = 22
@@ -101,7 +101,7 @@ Partial Class dlgPICSACrops
         'lblRain
         '
         Me.lblRain.AutoSize = True
-        Me.lblRain.Location = New System.Drawing.Point(256, 66)
+        Me.lblRain.Location = New System.Drawing.Point(232, 66)
         Me.lblRain.Name = "lblRain"
         Me.lblRain.Size = New System.Drawing.Size(32, 13)
         Me.lblRain.TabIndex = 23
@@ -121,7 +121,7 @@ Partial Class dlgPICSACrops
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(163, 19)
+        Me.Label6.Location = New System.Drawing.Point(139, 19)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(32, 13)
         Me.Label6.TabIndex = 25
@@ -145,15 +145,16 @@ Partial Class dlgPICSACrops
         Me.grpSeasonReceivers.Controls.Add(Me.ucrReceiverStart)
         Me.grpSeasonReceivers.Controls.Add(Me.Label6)
         Me.grpSeasonReceivers.Controls.Add(Me.ucrReceiverEnd)
-        Me.grpSeasonReceivers.Location = New System.Drawing.Point(248, 111)
+        Me.grpSeasonReceivers.Location = New System.Drawing.Point(226, 111)
         Me.grpSeasonReceivers.Name = "grpSeasonReceivers"
-        Me.grpSeasonReceivers.Size = New System.Drawing.Size(298, 66)
+        Me.grpSeasonReceivers.Size = New System.Drawing.Size(272, 66)
         Me.grpSeasonReceivers.TabIndex = 38
         Me.grpSeasonReceivers.TabStop = False
         Me.grpSeasonReceivers.Text = "Season Dates"
         '
         'ucrReceiverStart
         '
+        Me.ucrReceiverStart.AutoSize = True
         Me.ucrReceiverStart.frmParent = Me
         Me.ucrReceiverStart.Location = New System.Drawing.Point(10, 34)
         Me.ucrReceiverStart.Margin = New System.Windows.Forms.Padding(0)
@@ -166,8 +167,9 @@ Partial Class dlgPICSACrops
         '
         'ucrReceiverEnd
         '
+        Me.ucrReceiverEnd.AutoSize = True
         Me.ucrReceiverEnd.frmParent = Me
-        Me.ucrReceiverEnd.Location = New System.Drawing.Point(166, 34)
+        Me.ucrReceiverEnd.Location = New System.Drawing.Point(142, 34)
         Me.ucrReceiverEnd.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEnd.Name = "ucrReceiverEnd"
         Me.ucrReceiverEnd.Selector = Nothing
@@ -221,15 +223,18 @@ Partial Class dlgPICSACrops
         '
         'ucrChkRequirePlantingDays
         '
+        Me.ucrChkRequirePlantingDays.AutoSize = True
         Me.ucrChkRequirePlantingDays.Checked = False
         Me.ucrChkRequirePlantingDays.Location = New System.Drawing.Point(6, 18)
         Me.ucrChkRequirePlantingDays.Name = "ucrChkRequirePlantingDays"
-        Me.ucrChkRequirePlantingDays.Size = New System.Drawing.Size(204, 20)
+        Me.ucrChkRequirePlantingDays.Size = New System.Drawing.Size(286, 23)
         Me.ucrChkRequirePlantingDays.TabIndex = 39
         '
         'ucrInputCropLengths
         '
         Me.ucrInputCropLengths.AddQuotesIfUnrecognised = True
+        Me.ucrInputCropLengths.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCropLengths.GetSetSelectedIndex = -1
         Me.ucrInputCropLengths.IsReadOnly = False
         Me.ucrInputCropLengths.Location = New System.Drawing.Point(172, 126)
         Me.ucrInputCropLengths.Name = "ucrInputCropLengths"
@@ -239,6 +244,8 @@ Partial Class dlgPICSACrops
         'ucrInputWaterAmounts
         '
         Me.ucrInputWaterAmounts.AddQuotesIfUnrecognised = True
+        Me.ucrInputWaterAmounts.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputWaterAmounts.GetSetSelectedIndex = -1
         Me.ucrInputWaterAmounts.IsReadOnly = False
         Me.ucrInputWaterAmounts.Location = New System.Drawing.Point(172, 89)
         Me.ucrInputWaterAmounts.Name = "ucrInputWaterAmounts"
@@ -248,6 +255,8 @@ Partial Class dlgPICSACrops
         'ucrInputPlantingDates
         '
         Me.ucrInputPlantingDates.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlantingDates.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPlantingDates.GetSetSelectedIndex = -1
         Me.ucrInputPlantingDates.IsReadOnly = False
         Me.ucrInputPlantingDates.Location = New System.Drawing.Point(172, 51)
         Me.ucrInputPlantingDates.Name = "ucrInputPlantingDates"
@@ -256,24 +265,27 @@ Partial Class dlgPICSACrops
         '
         'ucrChkDataProp
         '
+        Me.ucrChkDataProp.AutoSize = True
         Me.ucrChkDataProp.Checked = False
         Me.ucrChkDataProp.Location = New System.Drawing.Point(10, 358)
         Me.ucrChkDataProp.Name = "ucrChkDataProp"
-        Me.ucrChkDataProp.Size = New System.Drawing.Size(172, 20)
+        Me.ucrChkDataProp.Size = New System.Drawing.Size(172, 23)
         Me.ucrChkDataProp.TabIndex = 37
         '
         'ucrChkPrintDataProp
         '
+        Me.ucrChkPrintDataProp.AutoSize = True
         Me.ucrChkPrintDataProp.Checked = False
         Me.ucrChkPrintDataProp.Location = New System.Drawing.Point(188, 358)
         Me.ucrChkPrintDataProp.Name = "ucrChkPrintDataProp"
-        Me.ucrChkPrintDataProp.Size = New System.Drawing.Size(164, 20)
+        Me.ucrChkPrintDataProp.Size = New System.Drawing.Size(255, 23)
         Me.ucrChkPrintDataProp.TabIndex = 36
         '
         'ucrReceiverRainfall
         '
+        Me.ucrReceiverRainfall.AutoSize = True
         Me.ucrReceiverRainfall.frmParent = Me
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(258, 81)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(236, 81)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
@@ -284,8 +296,9 @@ Partial Class dlgPICSACrops
         '
         'ucrReceiverDay
         '
+        Me.ucrReceiverDay.AutoSize = True
         Me.ucrReceiverDay.frmParent = Me
-        Me.ucrReceiverDay.Location = New System.Drawing.Point(415, 81)
+        Me.ucrReceiverDay.Location = New System.Drawing.Point(368, 81)
         Me.ucrReceiverDay.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDay.Name = "ucrReceiverDay"
         Me.ucrReceiverDay.Selector = Nothing
@@ -296,8 +309,9 @@ Partial Class dlgPICSACrops
         '
         'ucrReceiverYear
         '
+        Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(415, 37)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(368, 37)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -308,8 +322,9 @@ Partial Class dlgPICSACrops
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(258, 37)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(236, 37)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -320,27 +335,31 @@ Partial Class dlgPICSACrops
         '
         'ucrSelectorForCrops
         '
+        Me.ucrSelectorForCrops.AutoSize = True
         Me.ucrSelectorForCrops.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCrops.bShowHiddenColumns = False
         Me.ucrSelectorForCrops.bUseCurrentFilter = True
         Me.ucrSelectorForCrops.Location = New System.Drawing.Point(6, 5)
         Me.ucrSelectorForCrops.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForCrops.Name = "ucrSelectorForCrops"
-        Me.ucrSelectorForCrops.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForCrops.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorForCrops.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 392)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgPICSACrops
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(556, 449)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(504, 449)
         Me.Controls.Add(Me.grpCropDefinitions)
         Me.Controls.Add(Me.grpSeasonReceivers)
         Me.Controls.Add(Me.ucrChkDataProp)

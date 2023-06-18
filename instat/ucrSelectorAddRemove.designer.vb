@@ -35,42 +35,97 @@ Partial Class ucrSelectorAddRemove
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelectorAddRemove))
-        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.contextMenuStripAdd = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripAddSelected = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripAddAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparatorContext = New System.Windows.Forms.ToolStripSeparator()
+        Me.toolStripHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnAdd = New instat.ucrSplitButton()
+        Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
         '
         'lstAvailableVariable
         '
-        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
-        '
-        'btnAdd
-        '
-        resources.ApplyResources(Me.btnAdd, "btnAdd")
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Tag = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
         '
         'cmdOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
+        Me.cmdOptions.Location = New System.Drawing.Point(230, 144)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(86, 51)
+        Me.cmdOptions.TabIndex = 84
         Me.cmdOptions.Tag = "Data_Options"
+        Me.cmdOptions.Text = "Data Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripAdd
+        '
+        Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripAddSelected, Me.toolStripAddAll, Me.ToolStripSeparatorContext, Me.toolStripHelp})
+        Me.contextMenuStripAdd.Name = "SelectionMenuStrip"
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(190, 106)
+        '
+        'toolStripAddSelected
+        '
+        Me.toolStripAddSelected.Name = "toolStripAddSelected"
+        Me.toolStripAddSelected.Size = New System.Drawing.Size(189, 32)
+        Me.toolStripAddSelected.Tag = "Add_selected"
+        Me.toolStripAddSelected.Text = "Add Selected"
+        '
+        'toolStripAddAll
+        '
+        Me.toolStripAddAll.Name = "toolStripAddAll"
+        Me.toolStripAddAll.Size = New System.Drawing.Size(189, 32)
+        Me.toolStripAddAll.Text = "Add All"
+        '
+        'ToolStripSeparatorContext
+        '
+        Me.ToolStripSeparatorContext.Name = "ToolStripSeparatorContext"
+        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(186, 6)
+        '
+        'toolStripHelp
+        '
+        Me.toolStripHelp.Name = "toolStripHelp"
+        Me.toolStripHelp.Size = New System.Drawing.Size(189, 32)
+        Me.toolStripHelp.Text = "Help"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.AutoSize = True
+        Me.btnAdd.ContextMenuStrip = Me.contextMenuStripAdd
+        Me.btnAdd.Location = New System.Drawing.Point(228, 21)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(88, 51)
+        Me.btnAdd.SplitMenuStrip = Me.contextMenuStripAdd
+        Me.btnAdd.TabIndex = 86
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'ucrSelectorAddRemove
         '
-        resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.cmdOptions)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Name = "ucrSelectorAddRemove"
+        Me.Size = New System.Drawing.Size(336, 296)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
-        Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.cmdOptions, 0)
+        Me.Controls.SetChildIndex(Me.btnAdd, 0)
+        Me.contextMenuStripAdd.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnAdd As Button
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents contextMenuStripAdd As ContextMenuStrip
+    Friend WithEvents toolStripAddSelected As ToolStripMenuItem
+    Friend WithEvents toolStripAddAll As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparatorContext As ToolStripSeparator
+    Friend WithEvents toolStripHelp As ToolStripMenuItem
+    Friend WithEvents btnAdd As ucrSplitButton
 End Class

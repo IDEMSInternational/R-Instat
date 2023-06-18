@@ -24,7 +24,6 @@ Public Class dlgDefineRedFlags
     Private clsRedFlag As New RFunction
 
     Private Sub dlgDefineRedFlags_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -38,6 +37,7 @@ Public Class dlgDefineRedFlags
         SetRCodeForControls(bReset)
         SetRedFlagColumnsInReceiver()
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetDefaults()

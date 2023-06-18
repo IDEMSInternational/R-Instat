@@ -38,34 +38,47 @@ Partial Class dlgCalculator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCalculator))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrCalc = New instat.ucrCalculator()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 359)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 175
         '
         'ucrCalc
         '
-        resources.ApplyResources(Me.ucrCalc, "ucrCalc")
+        Me.ucrCalc.AutoSize = True
+        Me.ucrCalc.Location = New System.Drawing.Point(10, 5)
+        Me.ucrCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrCalc.Name = "ucrCalc"
+        Me.ucrCalc.Size = New System.Drawing.Size(860, 358)
+        Me.ucrCalc.TabIndex = 174
         '
         'dlgCalculator
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(507, 421)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrCalc)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCalculator"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Calculations"
+        Me.Text = "Calculations"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrCalc As ucrCalculator

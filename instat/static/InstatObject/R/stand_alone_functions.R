@@ -13,15 +13,24 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
     if(!format_decimal_places) decimal_places=rep(NA, ncol(data))
     else if(missing(decimal_places)) decimal_places = sapply(data, get_default_significant_figures)
     i = 1
-    for(curr_col in colnames(data)) {
-      if(is.na(decimal_places[i])) {
-        out[,i] <- as.character(data[[i]])
+    for (curr_col in colnames(data)) {
+      #if its a geometry list-column then convert to text using sf package.
+      #see issue #7165
+      if ("sfc" %in% class(data[[i]])) {
+        out[, i] <- sf::st_as_text(data[[i]])
+      } else if (is.na(decimal_places[i])) {
+        #use as.character() for non numeric column vales because format() adds extra spaces to the text
+        #which are recognised oddly by the R.Net
+        out[, i] <- as.character(data[[i]])
+      } else {
+        temp_data <- c()
+        for(val in data[[i]]){
+          temp_data <- append(temp_data, format(val, digits = decimal_places[i], scientific = is_scientific[i]))
+        }
+        out[, i] <- temp_data
       }
-      else {
-        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
-      }
-      if(!is.null(na_display)) {
-        out[is.na(data[[i]]),i] <- na_display
+      if (!is.null(na_display)) {
+        out[is.na(data[[i]]), i] <- na_display
       }
       i = i + 1
     }
@@ -611,16 +620,17 @@ multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_
   nc_list <- list()
   
   n_files <- length(filepaths)
-  pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
+  is_win <- Sys.info()['sysname'] == "Windows"
+  if (is_win) pb <- winProgressBar(title = "Reading files", min = 0, max = n_files)
   for(i in seq_along(filepaths)) {
     nc <- ncdf4::nc_open(filename = filepaths[i])
     dat <- nc_as_data_frame(nc = nc, vars = vars, keep_raw_time = keep_raw_time, include_metadata = include_metadata, boundary = boundary, lon_points = lon_points, lat_points = lat_points, id_points = id_points, show_requested_points = show_requested_points, great_circle_dist = great_circle_dist)
     nc_list[[length(nc_list) + 1]] <- dat
     ncdf4::nc_close(nc)
     info <- paste0("Reading file ", i, " of ", n_files, " - ", round(100*i/n_files), "%")
-    setWinProgressBar(pb, value = i, title = info, label = info)
+    if (is_win) setWinProgressBar(pb, value = i, title = info, label = info)
   }
-  close(pb)
+  if (is_win) close(pb)
   names(nc_list) <- tools::file_path_sans_ext(filenames)
   merged_data <- dplyr::bind_rows(nc_list, .id = id)
   return(merged_data)
@@ -1232,6 +1242,11 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   return(decdeg)
 }
 
+convert_yy_to_yyyy <- function (x, base) {
+    if(missing(base))  stop("base year must be supplied")
+    dplyr::if_else(x+2000 <= base, x+2000, x+1900)
+}
+
 create_av_packs <- function() {
   av_packs <<- available.packages(repos = "https://cran.rstudio.com/")
   av_packs <<- data.frame(av_packs)
@@ -1239,30 +1254,33 @@ create_av_packs <- function() {
 
 package_check <- function(package) {
   out <- c()
-  if(!exists("av_packs")) {
-    create_av_packs()
-  }
-  if(package %in% rownames(installed.packages())) {
-    out[[1]] <- "1"
-    v_machine <- as.character(packageVersion(package))
-    v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
-    out[[2]] <- compareVersion(v_machine, v_web)
-    out[[3]] <- v_machine
-    out[[4]] <- v_web
-    return(out)
-  }
-  else {
-    #check if the package name is typed right
-    if(package %in% av_packs$Package) {
-      out[[1]] <- "2"
-      return(out)
+  if  (!pingr::is_online())  out[[1]] <- "5" 
+  else{
+    if(!exists("av_packs")) {
+      create_av_packs()
     }
-    else {
-      #wrong  spelling check you spelling
-      out[[1]] <- "0"
-      return(out)
+    #CHECK the Package is a CRAN package	
+    if (package %in% av_packs$Package){
+      #PACKAGE IS INSTALLED 
+      if (package %in% rownames(installed.packages())){
+        out[[1]] <- "1"
+        v_machine <- as.character(packageVersion(package))
+        v_web <- as.character(av_packs[av_packs$Package == package, "Version"])
+        out[[2]] <- compareVersion(v_machine, v_web)
+        out[[3]] <- v_machine
+        out[[4]] <- v_web			
+      }
+      else  out[[1]] <- "2"	
     }
+    else{
+      #PACKAGE IS INSTALLED BUT NOT IN THE CRAN REPO
+      if (package %in% rownames(installed.packages())) out[[1]] <- "3"			
+      #PACKAGE IS NOT INSTALLED AND NOT IN THE CRAN REPO
+      else out[[1]] <- "4"	
+    }
+    
   }
+  return(out)
 }
               
 in_top_n <- function(x, n = 10, wt, fun = sum) {
@@ -1407,9 +1425,9 @@ climatic_missing <- function(data, date, elements = ..., stations,
   
   
 climatic_details <- function(data, date, elements = ..., stations,
-                 order = FALSE,
-                 day = TRUE,
-                 month = FALSE,
+                 order = TRUE,
+                 day = FALSE,
+                 month = TRUE,
                  year = FALSE, level = FALSE){
   
   
@@ -1593,9 +1611,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
          paste(which(!unique(data[[link]]) %in% station_data[[wmo_number]]), collapse = ", "))
   }
   if (!missing(wmo_number)) {
-    print(station_data[[wmo_number]])
     station_data[[wmo_number]] <- as.numeric(station_data[[wmo_number]])
-    print(station_data[[wmo_number]])
     station_data[[wmo_number]] <- ifelse(is.na(station_data[[wmo_number]]),
                                          "", sprintf("%05d", station_data[[wmo_number]]))
   } else {
@@ -1733,8 +1749,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
                                   station_data[[height_barometer]][i]))
     lines <- append(lines, paste0("WIGOS Station Identifier (WSI):", strrep(" ", 8),
                                   station_data[[wigos_identifier]][i]))
-    lines <- append(lines, "")
     if (!missing(mean_station_pressure)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(2) Mean Station Pressure (precision to tenths of hPa)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1748,6 +1764,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_sea_level_pressure)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(3) Mean Sea Level Pressure (precision to tenths of hPa)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1761,6 +1778,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_temp)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(4) Mean Daily Air Temperature (precision to tenths of degrees Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1774,6 +1792,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(total_precip)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(5) Total Precipitation (precision to tenths of mm)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1787,6 +1806,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_max_temp)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(6) Mean Daily Maximum Air Temperature (precision to tenths of degree Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1800,6 +1820,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_min_temp)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(7) Mean Daily Minimum Air Temperature (precision to tenths of degree Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -1813,6 +1834,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_rel_hum)) {
+      lines <- append(lines, "")
       lines <- append(lines, "(8) Mean of the Daily Relative Humidity (whole percent)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
@@ -2279,3 +2301,607 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
     }
   }
 }
+
+#This function creates a wrapper around functions from openair package
+other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name, wd_col_name, ws_col_name, main_method, single_pollutant, multiple_pollutant, ...) {
+  type <- "default"
+  if (!missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- c(type1_col_name, type2_col_name)
+  }
+  if (missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- type2_col_name
+  }
+  if (!missing(type1_col_name) && missing(type2_col_name)) {
+    type <- type1_col_name
+  }
+  if (!main_method %in% c("percentile_rose", "polar_plot", "polar_annulus", "polar_cluster", "polar_frequency")) stop("Method must be either percentile_rose, polar_plot, polar_annulus, polar_cluster or polar_frequency.")
+  if (missing(data)) stop("Data is missing with no default.")
+  col_names <- colnames(data)
+  fun_col_names <- c(date_col_name, wd_col_name)
+  if (!all(fun_col_names %in% col_names)) stop(paste(fun_col_names[!fun_col_names %in% col_names], ","), " column(s) missing in the dataframe.")
+  if (!"date" %in% col_names) data <- dplyr::rename(data, date = !!date_col_name)
+  if (!"wd" %in% col_names) data <- dplyr::rename(data, wd = !!wd_col_name)
+  if (main_method == "percentile_rose") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::percentileRose(mydata = data, type = type, pollutant = multiple_pollutant, ...)
+  } else if (main_method == "polar_plot") {
+    openair::polarPlot(mydata = data, type = type, pollutant = multiple_pollutant,  ...)
+  } else if (main_method == "polar_annulus") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::polarAnnulus(mydata = data, type = type, pollutant = multiple_pollutant,  ...)
+  } else if (main_method == "polar_cluster") {
+    openair::polarCluster(mydata = data, type = type, pollutant = single_pollutant, ...)
+  } else if (main_method == "polar_frequency") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::polarFreq(mydata = data, type = type, pollutant = single_pollutant, ...)
+  }
+}
+
+#This function creates a wrapper around windRose and pollutionRose functions from openair package
+wind_pollution_rose <- function(mydata, date_name, pollutant, type1_col_name, type2_col_name, ...) {
+  type <-  "default"
+  if (!missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- c(type1_col_name, type2_col_name)
+  }
+  if (missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- type2_col_name
+  }
+  if (!missing(type1_col_name) && missing(type2_col_name)) {
+    type <- type1_col_name
+  }
+  if (!("date" %in% colnames(mydata))) {
+    mydata <- dplyr::rename(mydata, date = !!date_name)
+  }
+  if (missing(pollutant)) {
+    openair::windRose(mydata = mydata, type = type, ...)
+  } else {
+    openair::pollutionRose(mydata = mydata, type = type, pollutant, ...)
+  }
+}
+
+n_non_numeric <- function(x) {
+  x <- as.character(x)
+  sum(is.na(x) != is.na(suppressWarnings(as.numeric(x))))
+}
+
+# This function creates a wrapper around grDevices::recordPlot() to enable non-ggplot graphs to be saved as recorded_plot objects.
+# It also handles graphics devices carefully.
+record_graph <- function(x) {
+  # store current device, which could be png
+  d <- dev.cur()
+  # create a new device, to ensure graph is displayed in device that recordPlot() can capture
+  dev.new()
+  # store the new device, so it can be turned off later
+  d2 <- dev.cur()
+  # Display graph to be captured by recordPlot()
+  x
+  y <- grDevices::recordPlot()
+  # set device back to current, to ensure code after this run correctly
+  dev.set(d)
+  # turn off the new graphics device
+  dev.off(which = d2)
+  return(y)
+}
+# this is a "theme" essentially. So we can create it as a theme and add that
+slopegraph_theme <- function(x_text_size = 12){
+  list(scale_x_discrete(position = "top"), 
+                  ggplot2::theme(legend.position = "none"),
+                  ggplot2::theme(axis.text.y = ggplot2::element_blank()),
+                  ggplot2::theme(panel.border = ggplot2::element_blank()), 
+                  ggplot2::theme(panel.grid.major.y = ggplot2::element_blank()),
+                  ggplot2::theme(panel.grid.minor.y = ggplot2::element_blank()), 
+                  ggplot2::theme(axis.title.x = ggplot2::element_blank()),
+                  ggplot2::theme(panel.grid.major.x = ggplot2::element_blank()), 
+                  ggplot2::theme(axis.text.x.top = ggplot2::element_text(size = x_text_size, face = "bold")),
+                  ggplot2::theme(axis.ticks = ggplot2::element_blank()))
+}
+
+
+# slightly amended the "newggslopegraph" function in the CGPfunctions package
+slopegraph <- function(data, x, y, colour, data_label = NULL, 
+          y_text_size = 3, 
+          line_thickness = 1, line_colour = "ByGroup", 
+          data_text_size = 2.5, data_text_colour = "black", data_label_padding = 0.05, 
+          data_label_line_size = 0, data_label_fill_colour = "white", 
+          reverse_x_axis = FALSE, 
+          remove_missing = TRUE){
+  
+  
+  if (length(match.call()) <= 4) {
+    stop("Not enough arguments passed requires a dataframe, plus at least three variables")
+  }
+  argList <- as.list(match.call()[-1])
+  if (!hasArg(data)) {
+    stop("You didn't specify a dataframe to use", call. = FALSE)
+  }
+  Nx <- deparse(substitute(x))
+  Ny <- deparse(substitute(y))
+  Ncolour <- deparse(substitute(colour))
+  if (is.null(argList$data_label)) {
+    Ndata_label <- deparse(substitute(y))
+    data_label <- argList$y
+  }
+  else {
+    Ndata_label <- deparse(substitute(data_label))
+  }
+  Ndata <- argList$data
+  if (!is(data, "data.frame")) {
+    stop(paste0("'", Ndata, "' does not appear to be a data frame"))
+  }
+  if (!Nx %in% names(data)) {
+    stop(paste0("'", Nx, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (anyNA(data[[Nx]])) {
+    stop(paste0("'", Nx, "' can not have missing data please remove those rows"), 
+         call. = FALSE)
+  }
+  if (!Ny %in% names(data)) {
+    stop(paste0("'", Ny, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (!Ncolour %in% names(data)) {
+    stop(paste0("'", Ncolour, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (!Ndata_label %in% names(data)) {
+    stop(paste0("'", Ndata_label, "' is not the name of a variable in the dataframe"), 
+         call. = FALSE)
+  }
+  if (anyNA(data[[Ncolour]])) {
+    stop(paste0("'", Ncolour, "' can not have missing data please remove those rows"), 
+         call. = FALSE)
+  }
+  if (!class(data[[Ny]]) %in% c("integer", "numeric")) {
+    stop(paste0("Variable '", 
+                Ny, "' needs to be numeric"), call. = FALSE)
+  }
+  if (!"ordered" %in% class(data[[Nx]])) {
+    if (!"character" %in% class(data[[Nx]])) {
+      if ("factor" %in% class(data[[Nx]])) {
+        message(paste0("\nConverting '", Nx, 
+                       "' to an ordered factor\n"))
+        data[[Nx]] <- factor(data[[Nx]], 
+                                      ordered = TRUE)
+      }
+      else {
+        stop(paste0("Variable '", 
+                    Nx, "' needs to be of class character, factor or ordered"), 
+             call. = FALSE)
+      }
+    }
+  }
+  data_label <- enquo(data_label)
+  if (reverse_x_axis) {
+    data[[Nx]] <- forcats::fct_rev(data[[Nx]])
+  }
+  NumbOfLevels <- nlevels(factor(data[[Nx]]))
+  if (length(line_colour) > 1) {
+    if (length(line_colour) < length(unique(data[[Ncolour]]))) {
+      message(paste0("\nGiven ", length(line_colour), 
+                     " colours. Recycling colours because there are ", 
+                     length(unique(data[[Ncolour]])), " ", 
+                     Ncolour, "s\n"))
+      line_colour <- rep(line_colour, length.out = length(unique(data[[Ncolour]])))
+    }
+    LineGeom <- list(ggplot2::geom_line(ggplot2::aes(colour = {{colour}}), size = line_thickness), 
+                     scale_colour_manual(values = line_colour))
+  }
+  else {
+    if (line_colour == "ByGroup") {
+      LineGeom <- list(ggplot2::geom_line(ggplot2::aes(colour = {{colour}}, 
+                                      alpha = 1), size = line_thickness))
+    }
+    else {
+      LineGeom <- list(ggplot2::geom_line(ggplot2::aes_(), size = line_thickness, 
+                                 colour = line_colour))
+    }
+  }
+  if (anyNA(data[[Ny]])) {
+    if (remove_missing) {
+      data <- data %>% group_by({{colour}}) %>% 
+        dplyr::filter(!anyNA({{y}})) %>% droplevels()
+    }
+    else {
+      data <- data %>% dplyr::filter(!is.na({{y}}))
+    }
+  }
+  data %>% ggplot2::ggplot(ggplot2::aes(group = {{colour}}, y = {{y}}, x = {{x}})) +
+    LineGeom +
+    
+    # note: this may conflict with other label in R, in which case we need to rewrite this
+    ggrepel::geom_text_repel(data = . %>% dplyr::filter({{x}} == min({{x}})), ggplot2::aes(label = {{colour}}),
+                    hjust = "left", box.padding = 0.1, point.padding = 0.1, 
+                    segment.colour = "gray", segment.alpha = 0.6, fontface = "bold", 
+                    size = y_text_size, nudge_x = -1.95, direction = "y", 
+                    force = 0.5, max.iter = 3000) +
+    ggrepel::geom_text_repel(data = . %>% dplyr::filter({{x}} == max({{x}})), ggplot2::aes(label = {{colour}}),
+                    hjust = "right", box.padding = 0.1, point.padding = 0.1, 
+                    segment.colour = "gray", segment.alpha = 0.6, fontface = "bold", 
+                    size = y_text_size, nudge_x = 1.95, direction = "y",
+                    force = 0.5, max.iter = 3000) +
+    ggplot2::geom_label(ggplot2::aes_string(label = Ndata_label), size = data_text_size, label.padding = unit(data_label_padding, "lines"),
+               label.size = data_label_line_size, colour = data_text_colour, fill = data_label_fill_colour)
+}
+
+# Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
+get_quarter_label <-   function(quarter, start_month){
+  if (!start_month %in% 1:12) stop(start_month, " is an invalid start month, must be in range of 1:12")
+  if (!all(quarter %in% 1:4)) stop(quarter, " is an invalid quarter, must be in range of 1:4")
+  mabb <- rep(substr(month.abb, 1, 1), times = 2)[start_month:(11 + start_month)]
+  qtr <- sapply(quarter, function(x){start_pos <- 1 + ((x-1) * 3)
+  paste(mabb[start_pos:(start_pos+2)], collapse = "")})
+  return(factor(x = qtr, levels = unique(qtr)))
+}
+
+is.containVariableLabel <- function(x){
+  return(isTRUE(sjlabelled::get_label(x) != ""))
+}
+
+is.emptyvariable <- function(x){
+ return(isTRUE(length(x) == sum(x == "")))
+}
+
+is.NAvariable <- function(x){
+  return(isTRUE(length(x) == sum(is.na(x))))
+}
+
+is.levelscount <- function(x, n){
+ return(isTRUE(sum(levels(x)) == n))
+}
+
+is.containValueLabel <- function(x){
+  return(labels_label %in% names(attributes(x)))
+}
+
+
+read_corpora <- function(data){
+  data_all <- NULL
+  description <- NULL
+  # check different data types that are in the rcorpora package
+  # first check if it is a data frame outright. If it is, then we just need to return the data
+  if (is.data.frame(data)){
+    return(data)
+  } 
+  # If it isn't a data frame, we check each element of the `data` argument
+  data_unlist <- NULL
+  for (i in 1:length(data)){
+  # first, check for description and metadata
+    if (!is.null(names(data[i])) && names(data[i]) == "description") {
+      description <- data[i][[1]]
+    } else if (!is.null(names(data[i])) && names(data[i]) == "meta"){
+      data_unlist[[i]] <- NULL
+      # then check if the element is a vector, matrix, data frame, or list.
+    } else if (class(data[[i]]) %in% c("character", "factor", "logical", "numeric", "integer")){
+      data_unlist[[i]] <- data.frame(list = data[[i]])
+    } else if ("matrix" %in% class(data[[i]])){
+      data_unlist[[i]] <- data.frame(list = do.call(paste, c(data.frame(data[[i]]), sep="-")))
+    } else if (class(data[[i]]) == "data.frame"){
+      data_unlist[[i]] <- data.frame(list = data[[i]])
+    } else if (class(data[[i]]) == "list"){
+      if (length(data[[i]]) == 0) {
+        data_unlist[[i]] <- data.frame(NA)
+        } else {
+          # unlist the list, to create a data frame with two elements: list name ("rowname") and value
+	     # if there are nested lists, the "rowname" variable combines the different lists together.
+	     # We want to separate these into separate variables to make the data more usable and readable.
+	     # We do this by `str_split_fixed`, and `gsub`.
+          new_data <- tidyr::as_tibble(unlist(data), rownames = "rowname")
+          split <- stringr::str_split_fixed(string=new_data$rowname, pattern=stringr::coll(pattern="."), n=Inf)
+          split <- gsub("[0-9]$|[0-9][0-9]$","",split)
+	     # add in the separated list to the value variable, and rename the variables
+          data_unlist[[i]] <- cbind(data.frame(split), value = new_data$value)
+          names(data_unlist[[i]]) <- c(paste0("variable", 1:(length(data_unlist[[i]])-1)), "list")
+        } # end of ifelse lists
+      } # end of list
+    } # end of for loop
+  names(data_unlist) <- names(data[1:length(data_unlist)])
+  data_all <- plyr::ldply(data_unlist, .id = "variable1")
+  
+  if (!is.null(description)){
+    return (data.frame(description = description, data_all))
+  } 
+  return (data.frame(data_all))
+}
+
+
+# Bind two data frames
+# and remove any duplicates from data frame x that are in data frame y
+# x = our data to remove duplicates from
+# y = data frame that contains variables in cols argument
+# cols = columns to bind into data1
+cbind_unique <- function(x, y, cols){
+  x <- x %>% dplyr::select(c(setdiff(names(x), cols)))
+  x <- dplyr::bind_cols(x = x, y = dplyr::select(y, tidyselect::all_of(cols)))
+}
+
+#object is the object to be displayed
+#object_format is the display format. If supplied, then returns file name of the object
+#if not then it prints the object
+view_object_data <- function(object, object_format = NULL) {
+  file_name <- ""
+  if (identical(object_format, "image")) {
+    file_name <- view_graph_object(object)
+  } else if (identical(object_format, "text")) {
+    file_name <- view_text_object(object)
+  } else if (identical(object_format, "html")) {
+    file_name <- view_html_object(object)
+  }else{
+    print(object)
+  }
+  return(file_name)
+}
+
+view_object <- function(data_book_object) {
+  return(
+    view_object_data(
+      object = data_book_object$object,
+      object_format = data_book_object$object_format
+    )
+  )
+}
+
+#displays the graph object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_graph_object <- function(graph_object){
+  #get object class names
+  object_class_names <- class(graph_object)
+  
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- base::getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #TODO. When print command is called in R-Studio, a temp file is automatically created
+    #Investigate how that can be done in R-Instat
+    #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    if ("grob" %in% object_class_names){
+      #for grob objects draw them first
+      grid::grid.draw(graph_object)
+    }
+    return(graph_object)
+  }
+  
+ 
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewgraph", fileext = ".png")
+  
+  #save the object as a graph file depending on the object type
+  grDevices::png(file = file_name, width = 4000, height = 4000, res = 500)
+  if ("grob" %in% object_class_names) {
+    grid::grid.draw(graph_object)
+  }else{
+    print(graph_object)
+  }
+  dev.off() #todo. use graphics.off() which one is better?
+
+  
+  #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
+  #investigate if it will help with resolution and scaling?
+  # if ("ggplot" %in% object_class_names) {
+  # } else if ("ggmultiplot" %in% object_class_names) {
+  # } else if ("openair" %in% object_class_names) {
+  # } else if ("ggsurvplot" %in% object_class_names) {
+  # } else if ("recordedplot" %in% object_class_names) {
+  # }
+  
+  message("R viewer not detected. File saved in location ", file_name)
+  return(file_name)
+  
+}
+
+#displays the object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_text_object <- function(text_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- base::getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #TODO. When print command is called in R-Studio, a temp file is
+    #automatically created. Investigate how that can be done in R-Instat
+    #as of 07/09/2022 just return output. Important for RStudio to display the object
+    return(utils::capture.output(text_object))
+  }
+  
+  
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewtext", fileext = ".txt")
+  
+  #todo. should we use respective package "convenience" functions to save the objects as text files depending on the class names
+  #get object class names
+  #object_class_names <- class(text_object)
+  
+  #save the object as a text file 
+  utils::capture.output(text_object, file = file_name)
+  
+  message("R viewer not detected. File saved in location ", file_name)
+  return(file_name)
+  
+}
+
+#displays the html object in the set R "viewer".
+#if the viewer is not available then 
+#it saves the object as a file in the temporary folder
+#and returns the file path.
+view_html_object <- function(html_object){
+  #if there is a viewer, like in the case of RStudio then just print the object
+  #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
+  r_viewer <- base::getOption("viewer")
+  if (!is.null(r_viewer)) {
+    #When print command is called in R-Studio, a temp file is
+    #automatically created. TODO. Investigate how that can be done in R-Instat. 
+    #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    return(html_object)
+  }
+  
+  
+  file_name <- ""
+  #get a vector of available class names
+  object_class_names <- class(html_object)
+  #get a unique temporary file name from the tempdir path
+  file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
+  
+  #save the object as a html file depending on the object type
+  if ("htmlwidget" %in% object_class_names) {
+    #Note. When selfcontained is set to True 
+    #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
+    #when saving an rpivotTable 
+    #TODO. Investigate how to solve it then. 
+    htmlwidgets::saveWidget(html_object, file = file_name, selfcontained = FALSE)
+  } else if ("sjTable" %in% object_class_names) {
+    #"sjTable" objects are not compatible with "htmlwidgets" package. So they have to be saved differently
+    #"sjplot" package produces "sjTable" objects 
+    html_object$file = file_name
+    #TODO. Is there any other function that can save an sjTable to a html file?
+    print(html_object)
+  } else if ("gt_tbl" %in% object_class_names) {
+    #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
+    #"mmtable2" package produces "gt_tbl" objects 
+    gt::gtsave(html_object,filename = file_name)
+  }
+  
+  message("R viewer not detected. File saved in location ", file_name)
+  return(file_name)
+} 
+
+#tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
+#applicable to base graphs only
+check_graph <- function(graph_object){
+ 
+  out <- graph_object
+  
+  if (is.null(out)) {
+    out <- tryCatch({
+      message("Recording plot")
+      recordPlot()
+    },
+    error = function(cond) {
+      message("Graph object does not exist:")
+      message(cond)
+      # Choose a return value in case of error
+      return(NULL)
+    },
+    warning = function(cond) {
+      message("Warning message:")
+      message(cond)
+      return(NULL)
+    },
+    finally = {
+      message("Plot recorded")
+    })
+  }
+  
+  return(out)
+} 
+
+
+get_data_book_output_object_names <- function(output_object_list,
+                                              object_type_label = NULL, 
+                                              excluded_items = c(), 
+                                              as_list = FALSE, 
+                                              list_label = NULL){
+  
+  if(is.null(object_type_label)){
+    out <- names(output_object_list)
+  }else{ 
+    out <- names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
+  }
+  
+  if(length(out) == 0){
+    return(out)
+  } 
+  
+  if(length(excluded_items) > 0) {
+    #get indices of items to exclude
+    excluded_indices <- which(out %in% excluded_items)
+    
+    #remove the excluded items from the list
+    if(length(excluded_indices) > 0){
+      out <- out[-excluded_indices]
+    }
+    
+  }
+  
+  if(as_list) {
+    #convert the character vector list
+    lst <- list()
+    if(!is.null(list_label)){
+      lst[[list_label]] <- out
+    }else{
+      lst <- as.list(out)
+    }
+   
+    return(lst)
+  }else{
+    #return as a character vector
+    return(out)
+  }
+  
+}
+
+get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE) 
+{   
+  oneLink <- function(s) {
+    if (length(s) == 0L) 
+      return(character(0L))
+    title <- s[, "Title"]
+    if (port > 0L) 
+      prefix <- sprintf("/library/%s/doc", pkg)
+    else prefix <- sprintf("file://%s/doc", s[, "Dir"])
+    src <- s[, "File"]
+    pdf <- s[, "PDF"]
+    rcode <- s[, "R"]
+    pdfext <- sub("^.*\\.", "", pdf)
+    sprintf("  <li>%s  -  \n    %s  \n    %s  \n    %s \n  </li>\n", 
+            title, ifelse(nzchar(pdf), sprintf("<a href='%s/%s'>%s</a>&nbsp;", 
+                                               prefix, pdf, toupper(pdfext)), ""), sprintf("<a href='%s/%s'>source</a>&nbsp;", 
+                                                                                           prefix, src), ifelse(nzchar(rcode), sprintf("<a href='%s/%s'>R code</a>&nbsp;", 
+                                                                                                                                       prefix, rcode), ""))
+  }
+  
+  port <- tools::startDynamicHelp(NA)
+  file <- tempfile("Rvig.", fileext = ".html")
+  print(file)
+  sink(file = file, type = "output")
+  vinfo <- tools::getVignetteInfo(package, lib.loc, all)
+  pkgs <- unique(vinfo[, "Package"])
+  db <- lapply(pkgs, function(p) vinfo[vinfo[, "Package"] == 
+                                         p, , drop = FALSE])
+  names(db) <- pkgs
+  attr(db, "call") <- sys.call()
+  attr(db, "footer") <- if (all) 
+    ""
+  else sprintf(gettext("Use <code> %s </code> \n to list the vignettes in all <strong>available</strong> packages."), 
+               "browseVignettes(all = TRUE)")
+  if (port > 0L) 
+    css_file <- "/doc/html/R.css"
+  else css_file <- file.path(R.home("doc"), "html", 
+                             "R.css")
+  cat(sprintf("<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>\n<html>\n<head>\n<title>R Vignettes</title>\n<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes' />\n<link rel='stylesheet' type='text/css' href='%s'>\n</head><body><div class='container'>\n", 
+              css_file))
+  
+  cat(sprintf("<center><h3>Vignettes found by <code><q>%s</q></code></h3></center>", 
+              deparse1(attr(db, "call"))))
+  cat("<div class=\"vignettes\">")
+  for (pkg in names(db)) {
+    cat(sprintf("<h4>Vignettes in package <code>%s</code></h4>\n", 
+                pkg))
+    cat("<ul>\n")
+    links <- oneLink(db[[pkg]])
+    cat(paste(links), collapse = "\n")
+    cat("\n</ul>\n")
+  }
+  cat("</div>")
+  sink()
+  if (port > 0L){
+    return(sprintf("http://127.0.0.1:%d/session/%s", 
+                   port, basename(file)))}
+  else return(sprintf("file://%s", file))
+}
+
+
+
+

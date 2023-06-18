@@ -26,14 +26,13 @@ Public Class dlgCorruptionFitModel
     Private clsCorruptionModel, clsBinomialModel As New RFunction
     Private clsFormula, clsExplanatoryVariables As New ROperator
     'Function for display sub dialog
-    Public clsVisReg, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
+    Public clsVisReg, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgFitCorruptionModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -46,6 +45,7 @@ Public Class dlgCorruptionFitModel
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

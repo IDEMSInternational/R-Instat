@@ -19,7 +19,6 @@ Public Class dlgExportforPICSA
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgExportforPICSA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -28,6 +27,7 @@ Public Class dlgExportforPICSA
         End If
         TestOKEnabled()
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

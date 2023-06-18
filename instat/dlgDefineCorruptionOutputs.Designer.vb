@@ -38,7 +38,6 @@ Partial Class dlgCorruptionDefineOutputs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCorruptionDefineOutputs))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverCorruptionOutputs = New instat.ucrReceiverMultiple()
         Me.ucrSelectorCorruptionOutputs = New instat.ucrSelectorByDataFrameAddRemove()
@@ -47,35 +46,54 @@ Partial Class dlgCorruptionDefineOutputs
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 199)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverCorruptionOutputs
         '
+        Me.ucrReceiverCorruptionOutputs.AutoSize = True
         Me.ucrReceiverCorruptionOutputs.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverCorruptionOutputs, "ucrReceiverCorruptionOutputs")
+        Me.ucrReceiverCorruptionOutputs.Location = New System.Drawing.Point(271, 60)
+        Me.ucrReceiverCorruptionOutputs.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCorruptionOutputs.Name = "ucrReceiverCorruptionOutputs"
         Me.ucrReceiverCorruptionOutputs.Selector = Nothing
+        Me.ucrReceiverCorruptionOutputs.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverCorruptionOutputs.strNcFilePath = ""
+        Me.ucrReceiverCorruptionOutputs.TabIndex = 2
         Me.ucrReceiverCorruptionOutputs.ucrSelector = Nothing
         '
         'ucrSelectorCorruptionOutputs
         '
+        Me.ucrSelectorCorruptionOutputs.AutoSize = True
         Me.ucrSelectorCorruptionOutputs.bDropUnusedFilterLevels = False
         Me.ucrSelectorCorruptionOutputs.bShowHiddenColumns = False
         Me.ucrSelectorCorruptionOutputs.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorCorruptionOutputs, "ucrSelectorCorruptionOutputs")
+        Me.ucrSelectorCorruptionOutputs.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorCorruptionOutputs.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCorruptionOutputs.Name = "ucrSelectorCorruptionOutputs"
+        Me.ucrSelectorCorruptionOutputs.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorCorruptionOutputs.TabIndex = 0
         '
         'lblCorruptionOutputs
         '
-        resources.ApplyResources(Me.lblCorruptionOutputs, "lblCorruptionOutputs")
+        Me.lblCorruptionOutputs.AutoSize = True
+        Me.lblCorruptionOutputs.Location = New System.Drawing.Point(271, 45)
         Me.lblCorruptionOutputs.Name = "lblCorruptionOutputs"
+        Me.lblCorruptionOutputs.Size = New System.Drawing.Size(98, 13)
+        Me.lblCorruptionOutputs.TabIndex = 1
+        Me.lblCorruptionOutputs.Text = "Corruption Outputs:"
         '
         'dlgCorruptionDefineOutputs
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(422, 260)
         Me.Controls.Add(Me.lblCorruptionOutputs)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverCorruptionOutputs)
@@ -84,6 +102,8 @@ Partial Class dlgCorruptionDefineOutputs
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCorruptionDefineOutputs"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Define Corruption Indicators"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

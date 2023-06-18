@@ -64,10 +64,11 @@ Public Class dlgCombine
 
         ' Input Column Name
         ucrNewColName.SetIsComboBox()
-        ucrNewColName.SetPrefix("Interact")
+        ucrNewColName.SetPrefix("interact")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
+        ucrNewColName.setLinkedReceiver(ucrFactorsReceiver)
 
         'chkbox
         ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))

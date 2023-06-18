@@ -96,35 +96,43 @@ Partial Class dlgAlignment
         '
         'ucrMultiple
         '
+        Me.ucrMultiple.AutoSize = True
         Me.ucrMultiple.frmParent = Me
         Me.ucrMultiple.Location = New System.Drawing.Point(256, 60)
         Me.ucrMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrMultiple.Name = "ucrMultiple"
         Me.ucrMultiple.Selector = Nothing
         Me.ucrMultiple.Size = New System.Drawing.Size(127, 106)
+        Me.ucrMultiple.strNcFilePath = ""
         Me.ucrMultiple.TabIndex = 6
+        Me.ucrMultiple.ucrSelector = Nothing
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 282)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrSelectorAlignment
         '
+        Me.ucrSelectorAlignment.AutoSize = True
+        Me.ucrSelectorAlignment.bDropUnusedFilterLevels = False
         Me.ucrSelectorAlignment.bShowHiddenColumns = False
         Me.ucrSelectorAlignment.bUseCurrentFilter = True
         Me.ucrSelectorAlignment.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorAlignment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAlignment.Name = "ucrSelectorAlignment"
-        Me.ucrSelectorAlignment.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorAlignment.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorAlignment.TabIndex = 9
         '
         'dlgAlignment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 340)
         Me.Controls.Add(Me.ucrSelectorAlignment)
         Me.Controls.Add(Me.ucrBase)

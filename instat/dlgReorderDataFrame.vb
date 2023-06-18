@@ -33,7 +33,6 @@ Public Class dlgReorderDataFrame
     Private bFirstLoad As Boolean = True
     Private clsReorderDataFrame As New RFunction
     Private Sub dlgReorderDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -44,19 +43,19 @@ Public Class dlgReorderDataFrame
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 62
 
         ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
-        ucrDataFrameToReorder.setDataType("data frame")
+        ucrDataFrameToReorder.setDataType("dataframe")
+
     End Sub
 
     Private Sub SetDefaults()
         clsReorderDataFrame = New RFunction
-
-        ucrDataFrameToReorder.Reset()
 
         clsReorderDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorderDataFrame)
@@ -67,11 +66,7 @@ Public Class dlgReorderDataFrame
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrDataFrameToReorder.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrDataFrameToReorder.IsEmpty AndAlso ucrDataFrameToReorder.Count > 1)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

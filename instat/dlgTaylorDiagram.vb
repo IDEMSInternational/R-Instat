@@ -20,7 +20,6 @@ Public Class dlgTaylorDiagram
     Private bReset As Boolean = True
     Private clsTaylorDiagramFunction As New RFunction
     Private Sub dlgTaylorDiagram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgTaylorDiagram
 
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -40,35 +40,36 @@ Public Class dlgTaylorDiagram
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
         ucrSelectorTaylorDiagram.SetParameterIsrfunction()
 
-        ucrReceiverSingleStation.SetParameter(New RParameter("type", 3))
-        ucrReceiverSingleStation.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleStation.SetParameterIsString()
-        ucrReceiverSingleStation.bExcludeFromSelector = True
-        ucrReceiverSingleStation.SetClimaticType("station")
-        ucrReceiverSingleStation.bAutoFill = True
+        ucrReceiverObserved.SetParameter(New RParameter("obs", 1))
+        ucrReceiverObserved.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverObserved.SetParameterIsString()
+        ucrReceiverObserved.SetIncludedDataTypes({"numeric"})
+        ucrReceiverObserved.strSelectorHeading = "Numerics"
 
-        ucrReceiverSingleObserved.SetParameter(New RParameter("obs", 0))
-        ucrReceiverSingleObserved.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleObserved.SetParameterIsString()
-        ucrReceiverSingleObserved.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEstimated.SetParameter(New RParameter("mod", 2))
+        ucrReceiverEstimated.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverEstimated.SetParameterIsString()
+        ucrReceiverEstimated.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEstimated.strSelectorHeading = "Numerics"
 
-        ucrReceiverSingleEstimate.SetParameter(New RParameter("mod", 1))
-        ucrReceiverSingleEstimate.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleEstimate.SetParameterIsString()
-        ucrReceiverSingleEstimate.SetIncludedDataTypes({"numeric"})
+        ucrReceiverGroup.SetParameter(New RParameter("group", 3))
+        ucrReceiverGroup.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverGroup.SetParameterIsString()
+        ucrReceiverGroup.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverGroup.strSelectorHeading = "Factors & Characters"
+        ucrReceiverGroup.bExcludeFromSelector = True
 
-        ucrReceiverMultipleGroup.SetParameter(New RParameter("group", 2))
-        ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverMultipleGroup.SetParameterIsString()
-        ucrReceiverMultipleGroup.SetIncludedDataTypes({"factor", "character"})
-        ucrReceiverMultipleGroup.bExcludeFromSelector = True
+        ucrReceiverType.SetParameter(New RParameter("type", 4))
+        ucrReceiverType.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverType.SetParameterIsString()
+        ucrReceiverType.bExcludeFromSelector = True
 
-        ucrChkNormalise.SetParameter(New RParameter("normalise", 3))
+        ucrChkNormalise.SetParameter(New RParameter("normalise", 5))
         ucrChkNormalise.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkNormalise.SetText("Normalise")
         ucrChkNormalise.SetRDefault("FALSE")
 
-        ucrSavePlot.SetPrefix("taylordiagram")
+        ucrSavePlot.SetPrefix("taylor_diagram_plot")
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
@@ -81,10 +82,11 @@ Public Class dlgTaylorDiagram
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
-        ucrReceiverSingleStation.SetMeAsReceiver()
+        ucrReceiverObserved.SetMeAsReceiver()
 
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
+        clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
     End Sub
@@ -100,14 +102,26 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverSingleObserved.IsEmpty() OrElse ucrReceiverSingleEstimate.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse ucrReceiverEstimated.Count > 2 OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub ucrReceiverSingleObserved_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverSingleEstimate.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverEstimated_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimated.ControlContentsChanged
+        If ucrReceiverEstimated.Count > 2 Then
+            MsgBox("Note: estimated variables can only be two i.e. two lots of model predictions. Extra variables will be removed.", MsgBoxStyle.Exclamation)
+            For i As Integer = ucrReceiverEstimated.Count - 1 To 0 Step -1
+                If i > 1 Then
+                    ucrReceiverEstimated.lstSelectedVariables.Items(i).Remove()
+                End If
+            Next
+            TestOkEnabled()
+        End If
     End Sub
 End Class

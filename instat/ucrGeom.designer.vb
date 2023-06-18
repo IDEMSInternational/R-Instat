@@ -38,30 +38,39 @@ Partial Class ucrGeom
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrGeom))
         Me.lblTypeofLayer = New System.Windows.Forms.Label()
         Me.ucrInputGeoms = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblTypeofLayer
         '
-        resources.ApplyResources(Me.lblTypeofLayer, "lblTypeofLayer")
+        Me.lblTypeofLayer.AutoSize = True
+        Me.lblTypeofLayer.Location = New System.Drawing.Point(4, 4)
         Me.lblTypeofLayer.Name = "lblTypeofLayer"
+        Me.lblTypeofLayer.Size = New System.Drawing.Size(112, 13)
+        Me.lblTypeofLayer.TabIndex = 1
+        Me.lblTypeofLayer.Text = "Type of Layer (Geom):"
+        Me.lblTypeofLayer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'ucrInputGeoms
         '
         Me.ucrInputGeoms.AddQuotesIfUnrecognised = True
+        Me.ucrInputGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputGeoms.GetSetSelectedIndex = -1
         Me.ucrInputGeoms.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGeoms, "ucrInputGeoms")
+        Me.ucrInputGeoms.Location = New System.Drawing.Point(7, 22)
         Me.ucrInputGeoms.Name = "ucrInputGeoms"
+        Me.ucrInputGeoms.Size = New System.Drawing.Size(151, 21)
+        Me.ucrInputGeoms.TabIndex = 2
         '
         'ucrGeom
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.ucrInputGeoms)
         Me.Controls.Add(Me.lblTypeofLayer)
         Me.Name = "ucrGeom"
+        Me.Size = New System.Drawing.Size(168, 50)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

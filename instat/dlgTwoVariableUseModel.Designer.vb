@@ -72,9 +72,9 @@ Partial Class dlgTwoVariableUseModel
         '
         Me.cmdPredict.Enabled = False
         Me.cmdPredict.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPredict.Location = New System.Drawing.Point(300, 168)
+        Me.cmdPredict.Location = New System.Drawing.Point(278, 168)
         Me.cmdPredict.Name = "cmdPredict"
-        Me.cmdPredict.Size = New System.Drawing.Size(110, 23)
+        Me.cmdPredict.Size = New System.Drawing.Size(132, 23)
         Me.cmdPredict.TabIndex = 3
         Me.cmdPredict.Tag = "Predict..."
         Me.cmdPredict.Text = "Predict..."
@@ -83,9 +83,9 @@ Partial Class dlgTwoVariableUseModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 197)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(278, 197)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(132, 23)
         Me.cmdDisplayOptions.TabIndex = 6
         Me.cmdDisplayOptions.Tag = "Display_Options..."
         Me.cmdDisplayOptions.Text = "Display Options..."
@@ -94,15 +94,17 @@ Partial Class dlgTwoVariableUseModel
         'ucrModel
         '
         Me.ucrModel.AddQuotesIfUnrecognised = True
+        Me.ucrModel.AutoSize = True
         Me.ucrModel.IsMultiline = False
         Me.ucrModel.IsReadOnly = False
-        Me.ucrModel.Location = New System.Drawing.Point(97, 199)
+        Me.ucrModel.Location = New System.Drawing.Point(118, 198)
         Me.ucrModel.Name = "ucrModel"
-        Me.ucrModel.Size = New System.Drawing.Size(158, 21)
+        Me.ucrModel.Size = New System.Drawing.Size(154, 21)
         Me.ucrModel.TabIndex = 5
         '
         'ucrReceiverUseModel
         '
+        Me.ucrReceiverUseModel.AutoSize = True
         Me.ucrReceiverUseModel.frmParent = Me
         Me.ucrReceiverUseModel.Location = New System.Drawing.Point(256, 52)
         Me.ucrReceiverUseModel.Margin = New System.Windows.Forms.Padding(0)
@@ -115,25 +117,30 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrSelectorUseModel
         '
+        Me.ucrSelectorUseModel.AutoSize = True
+        Me.ucrSelectorUseModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseModel.bShowHiddenColumns = False
         Me.ucrSelectorUseModel.bUseCurrentFilter = True
         Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorUseModel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorUseModel.Name = "ucrSelectorUseModel"
-        Me.ucrSelectorUseModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorUseModel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorUseModel.TabIndex = 0
         '
         'ucrBaseUseModel
         '
+        Me.ucrBaseUseModel.AutoSize = True
+        Me.ucrBaseUseModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBaseUseModel.Location = New System.Drawing.Point(10, 226)
         Me.ucrBaseUseModel.Name = "ucrBaseUseModel"
-        Me.ucrBaseUseModel.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBaseUseModel.Size = New System.Drawing.Size(405, 52)
         Me.ucrBaseUseModel.TabIndex = 7
         '
         'dlgTwoVariableUseModel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 283)
         Me.Controls.Add(Me.ucrModel)
         Me.Controls.Add(Me.lblModelFormula)

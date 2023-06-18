@@ -36,7 +36,6 @@ Partial Class ucrReceiverMultiple
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrReceiverMultiple))
         Me.lstSelectedVariables = New System.Windows.Forms.ListView()
         Me.MenuStripDelete = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -48,12 +47,16 @@ Partial Class ucrReceiverMultiple
         '
         Me.lstSelectedVariables.Activation = System.Windows.Forms.ItemActivation.TwoClick
         Me.lstSelectedVariables.ContextMenuStrip = Me.MenuStripDelete
-        resources.ApplyResources(Me.lstSelectedVariables, "lstSelectedVariables")
+        Me.lstSelectedVariables.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstSelectedVariables.FullRowSelect = True
         Me.lstSelectedVariables.GridLines = True
         Me.lstSelectedVariables.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lstSelectedVariables.HideSelection = False
+        Me.lstSelectedVariables.Location = New System.Drawing.Point(0, 0)
         Me.lstSelectedVariables.Name = "lstSelectedVariables"
         Me.lstSelectedVariables.ShowItemToolTips = True
+        Me.lstSelectedVariables.Size = New System.Drawing.Size(120, 100)
+        Me.lstSelectedVariables.TabIndex = 1
         Me.lstSelectedVariables.UseCompatibleStateImageBehavior = False
         Me.lstSelectedVariables.View = System.Windows.Forms.View.Details
         '
@@ -61,24 +64,29 @@ Partial Class ucrReceiverMultiple
         '
         Me.MenuStripDelete.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.ClearToolStripMenuItem})
         Me.MenuStripDelete.Name = "ContextMenuStrip1"
-        resources.ApplyResources(Me.MenuStripDelete, "MenuStripDelete")
+        Me.MenuStripDelete.Size = New System.Drawing.Size(118, 48)
         '
         'RemoveToolStripMenuItem
         '
         Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
-        resources.ApplyResources(Me.RemoveToolStripMenuItem, "RemoveToolStripMenuItem")
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.RemoveToolStripMenuItem.Tag = "remove"
+        Me.RemoveToolStripMenuItem.Text = "Remove"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        resources.ApplyResources(Me.ClearToolStripMenuItem, "ClearToolStripMenuItem")
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'ucrReceiverMultiple
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.lstSelectedVariables)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrReceiverMultiple"
+        Me.Size = New System.Drawing.Size(120, 100)
         Me.MenuStripDelete.ResumeLayout(False)
         Me.ResumeLayout(False)
 

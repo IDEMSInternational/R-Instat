@@ -49,7 +49,7 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         Dim clsGetDataType As New RFunction
-        Dim strCurrentItemType As String
+        Dim strCurrentItemType As String = ""
         Dim expColumnType As SymbolicExpression
         Dim bRemove As Boolean = False
 
@@ -65,11 +65,7 @@ Public Class ucrReceiverSingle
         End If
         MyBase.Add(strItem, strDataFrame)
 
-        If bTypeSet Then
-            strCurrentItemType = strType
-        Else
-            strCurrentItemType = Selector.GetItemType()
-        End If
+        strCurrentItemType = If(bTypeSet, strType, Selector?.GetItemType())
         clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetDataType.AddParameter("property", "data_type_label")
         If txtReceiverSingle.Enabled Then
@@ -122,7 +118,9 @@ Public Class ucrReceiverSingle
             End If
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
-            Selector.AddToVariablesList(strItem, strDataFrameName)
+            If Selector IsNot Nothing Then
+                Selector.AddToVariablesList(strItem, strDataFrameName)
+            End If
             If bRemove Then
                 RemoveSelected()
             End If
@@ -204,18 +202,15 @@ Public Class ucrReceiverSingle
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
-                Case "object"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                Case "object",
+                     RObjectTypeLabel.Graph,
+                     RObjectTypeLabel.Table,
+                     RObjectTypeLabel.Model,
+                     RObjectTypeLabel.Summary,
+                     RObjectTypeLabel.StructureLabel
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
                     clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
-                Case "graph"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
-                    If Not bPrintGraph Then
-                        clsGetVariablesFunc.AddParameter("print_graph", "FALSE")
-                    End If
-                Case "model"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("as_file", "FALSE")
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
@@ -229,9 +224,9 @@ Public Class ucrReceiverSingle
 
             'TODO make this an option set in Options menu
             If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
-                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignToObject(strRObjectToAssignTo:=strDataFrameName & "." & txtReceiverSingle.Text)
             Else
-                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignToObject(strRObjectToAssignTo:=txtReceiverSingle.Text)
             End If
             Return clsGetVariablesFunc
         Else

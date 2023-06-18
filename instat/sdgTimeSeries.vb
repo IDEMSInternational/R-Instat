@@ -420,11 +420,11 @@ Public Class sdgTimeSeries
             If rdoComparison.Checked Then
                 grpComparisonSummaries.Visible = True
                 grpIndividualSummaries.Visible = False
-                lblPositionReference.Text = "Position:"
+                lblPositionReference.Text = GetTranslation("Position:")
             ElseIf rdoIndividual.Checked Then
                 grpComparisonSummaries.Visible = False
                 grpIndividualSummaries.Visible = True
-                lblPositionReference.Text = "Position - Reference:"
+                lblPositionReference.Text = GetTranslation("Position - Reference:")
             End If
             IndividualCheckBoxesCheck()
             ComparisonCheckBoxesCheck()

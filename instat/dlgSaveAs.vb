@@ -75,7 +75,7 @@ Public Class dlgSaveAs
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         frmMain.strSaveFilePath = ucrFilePath.FilePath
-        frmMain.clsRecentItems.addToMenu(Replace(ucrFilePath.FilePath, "/", "\"))
+        frmMain.clsRecentItems.addToMenu(Replace(ucrFilePath.FilePath, "\", "/"))
         frmMain.bDataSaved = True
     End Sub
 

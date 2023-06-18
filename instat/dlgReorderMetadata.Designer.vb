@@ -38,7 +38,6 @@ Partial Class dlgReorderMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReorderMetadata))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameReoderMetadata = New instat.ucrDataFrame()
         Me.lblMetataDataColumns = New System.Windows.Forms.Label()
@@ -47,31 +46,48 @@ Partial Class dlgReorderMetadata
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrDataFrameReoderMetadata
         '
+        Me.ucrDataFrameReoderMetadata.AutoSize = True
+        Me.ucrDataFrameReoderMetadata.bDropUnusedFilterLevels = False
         Me.ucrDataFrameReoderMetadata.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrameReoderMetadata, "ucrDataFrameReoderMetadata")
+        Me.ucrDataFrameReoderMetadata.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameReoderMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameReoderMetadata.Name = "ucrDataFrameReoderMetadata"
+        Me.ucrDataFrameReoderMetadata.Size = New System.Drawing.Size(152, 50)
+        Me.ucrDataFrameReoderMetadata.TabIndex = 0
         '
         'lblMetataDataColumns
         '
-        resources.ApplyResources(Me.lblMetataDataColumns, "lblMetataDataColumns")
+        Me.lblMetataDataColumns.AutoSize = True
+        Me.lblMetataDataColumns.Location = New System.Drawing.Point(173, 25)
         Me.lblMetataDataColumns.Name = "lblMetataDataColumns"
+        Me.lblMetataDataColumns.Size = New System.Drawing.Size(98, 13)
+        Me.lblMetataDataColumns.TabIndex = 1
+        Me.lblMetataDataColumns.Text = "Metadata Columns:"
         '
         'ucrReorderMetadata
         '
-        resources.ApplyResources(Me.ucrReorderMetadata, "ucrReorderMetadata")
+        Me.ucrReorderMetadata.Location = New System.Drawing.Point(173, 40)
         Me.ucrReorderMetadata.Name = "ucrReorderMetadata"
+        Me.ucrReorderMetadata.Size = New System.Drawing.Size(209, 181)
+        Me.ucrReorderMetadata.TabIndex = 2
         Me.ucrReorderMetadata.ucrDataFrameList = Nothing
         Me.ucrReorderMetadata.ucrReceiver = Nothing
         '
         'dlgReorderMetadata
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(416, 284)
         Me.Controls.Add(Me.lblMetataDataColumns)
         Me.Controls.Add(Me.ucrDataFrameReoderMetadata)
         Me.Controls.Add(Me.ucrBase)
@@ -80,7 +96,9 @@ Partial Class dlgReorderMetadata
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReorderMetadata"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Reoder_Metadata"
+        Me.Text = "Reoder Metadata"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

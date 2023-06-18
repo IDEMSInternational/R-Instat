@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,6 +19,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>C:\Users\deaspo\Desktop\applications\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,8 +34,8 @@
     <ProductName>Missing Tool</ProductName>
     <PublisherName>Polycarp</PublisherName>
     <SuiteName>Testing Instat</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>5.5.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -108,10 +113,29 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.104.4.240\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.Common.104.4.240\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms, Version=104.4.240.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\packages\CefSharp.WinForms.104.4.240\lib\net452\CefSharp.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="DynamicInterop, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicInterop.0.9.1\lib\netstandard2.0\DynamicInterop.dll</HintPath>
@@ -123,16 +147,31 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.1.0\lib\net46\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -146,9 +185,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="TranslateWinForm, Version=0.1.1.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TranslateWinForm.1.1.4\lib\net461\TranslateWinForm.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
-    <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\unvell.ReoGrid.dll.2.1.0.0\lib\20\unvell.ReoGrid.dll</HintPath>
+    <Reference Include="unvell.ReoGrid, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\unvell.ReoGrid.dll.3.0.0\lib\net40\unvell.ReoGrid.dll</HintPath>
     </Reference>
     <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -173,12 +215,110 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="clsFileUrlUtilities.vb" />
+    <Compile Include="dlgApsimx.Designer.vb">
+      <DependentUpon>dlgApsimx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgApsimx.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClusterAnalysis.Designer.vb">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgEdit.Designer.vb">
+      <DependentUpon>dlgEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFindInVariableOrFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.Designer.vb">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromPostgres.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportFromRapidPro.Designer.vb">
+      <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportFromRapidPro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRandomSplit.Designer.vb">
+      <DependentUpon>dlgRandomSplit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgUseTable.Designer.vb">
+      <DependentUpon>dlgUseTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUseTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Enum\RObjectFormat.vb" />
+    <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgPairPlotOptions.Designer.vb">
+      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgSummaryThemes.Designer.vb">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgSummaryThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmMaximiseOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSearch.Designer.vb">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWordwrap.Designer.vb">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWordwrap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\IColumnMetaDataGrid.vb" />
+    <Compile Include="Interface\IDataframeMetaDataGrid.vb" />
+    <Compile Include="Interface\IDataViewGrid.vb" />
+    <Compile Include="Interface\IGrid.vb" />
+    <Compile Include="frmOutputWindow.Designer.vb">
+      <DependentUpon>frmOutputWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOutputWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
+    <Compile Include="Model\DataFrame\clsDataBook.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrame.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameFilter.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameMetaData.vb" />
+    <Compile Include="Model\DataFrame\clsDataFramePage.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />
@@ -251,6 +391,12 @@
     <Compile Include="dlgClimsoftWizard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCluster.Designer.vb">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCluster.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareSummary.Designer.vb">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </Compile>
@@ -263,10 +409,32 @@
     <Compile Include="dlgConditionalQuantilePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySheet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySheet.sw-KE.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.sw-KE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.Designer.vb">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDisplayTopN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportToClimsoft.Designer.vb">
+      <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToWWR.Designer.vb">
@@ -281,10 +449,28 @@
     <Compile Include="dlgHomogenization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportERA5Data.Designer.vb">
+      <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportERA5Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInfillMissingValues.Designer.vb">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgInfillMissingValues.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.Designer.vb">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgMachineLearning.Designer.vb">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgMachineLearning.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
@@ -305,10 +491,34 @@
     <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPasteSpecial.Designer.vb">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteSpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgScript.Designer.vb">
+      <DependentUpon>dlgScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSeasonalPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSelectColumns.Designer.vb">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSelectColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSetupForDataEntry.Designer.vb">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSetupForDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
@@ -329,16 +539,59 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Enum\OutputType.vb" />
+    <Compile Include="frmConvertToNumeric.Designer.vb">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConvertToNumeric.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
+    <Compile Include="Model\Options\OutputFont.vb" />
+    <Compile Include="Model\Output\clsOutputElement.vb" />
+    <Compile Include="Model\Output\clsOutputList.vb" />
+    <Compile Include="Model\Output\clsOutputLogger.vb" />
+    <Compile Include="Model\Output\clsRScriptElement.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariablePivotTable.Designer.vb">
+      <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariablePivotTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCommentForDataEntry.Designer.vb">
+      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCommentForDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.Designer.vb">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgConstructRegexExpression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDistributionOptions.Designer.vb">
@@ -429,6 +682,18 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.Designer.vb">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFormatSummaryTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgImportFromRapidPro.Designer.vb">
+      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromRapidPro.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
@@ -852,12 +1117,6 @@
     <Compile Include="dlgFlatFrequencyTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgFrequency.Designer.vb">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
     </Compile>
@@ -996,10 +1255,10 @@
     <Compile Include="dlgRenameDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRugPlot.Designer.vb">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <Compile Include="dlgHeatMapPlot.Designer.vb">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRugPlot.vb">
+    <Compile Include="dlgHeatMapPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgShowModel.Designer.vb">
@@ -1084,18 +1343,6 @@
       <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGraphDisplay.Designer.vb">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmGraphDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmOutputWindow.Designer.vb">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmOutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
@@ -1309,6 +1556,12 @@
     <Compile Include="sdgVerificationSummaries.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgWindowNumber.Designer.vb">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgWindowNumber.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
@@ -1319,6 +1572,12 @@
       <DependentUpon>dlgUseModel.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgUseModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMissingOptionsEvapotranspiration.Designer.vb">
+      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMissingOptionsEvapotranspiration.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -1543,12 +1802,6 @@
     <Compile Include="dlgPermuteColumn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPopulationPyramids.Designer.vb">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPopulationPyramids.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgPrincipalComponentAnalysis.Designer.vb">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </Compile>
@@ -1721,12 +1974,6 @@
       <DependentUpon>dlgRecodeFactor.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRecodeFactor.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCanonicalCorrelation.Designer.vb">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCanonicalCorrelation.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgCreateFilter.Designer.vb">
@@ -2167,10 +2414,10 @@
     <Compile Include="dlgRandomSample.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRank.Designer.vb">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <Compile Include="dlgTransform.Designer.vb">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRank.vb">
+    <Compile Include="dlgTransform.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReferenceLevel.Designer.vb">
@@ -2365,12 +2612,6 @@
     <Compile Include="dlgNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLog.Designer.vb">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmLog.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -2381,12 +2622,6 @@
       <DependentUpon>frmMetaData.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMetaData.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmScript.Designer.vb">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmScript.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmVariables.designer.vb">
@@ -2401,11 +2636,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -2512,12 +2742,6 @@
     <Compile Include="ucrLayerParamsControls.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrLog.Designer.vb">
-      <DependentUpon>ucrLog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrLog.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -2596,18 +2820,6 @@
     <Compile Include="ucrSave.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSaveGraph.Designer.vb">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveGraph.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrSaveModel.Designer.vb">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSaveModel.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrScript.Designer.vb">
       <DependentUpon>ucrScript.vb</DependentUpon>
     </Compile>
@@ -2650,6 +2862,9 @@
     <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSplitButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ucrTry.Designer.vb">
       <DependentUpon>ucrTry.vb</DependentUpon>
     </Compile>
@@ -2668,19 +2883,97 @@
     <Compile Include="ucrVariablesAsFactor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrWPFRichTextBox.xaml.vb">
-      <DependentUpon>ucrWPFRichTextBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UcrPanel.Designer.vb">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </Compile>
     <Compile Include="UcrPanel.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\DataGrid\clsWorksheetAdapter.vb" />
+    <Compile Include="UserControls\DataGrid\Linux\ucrColumnMetadataLinuxGrid.Designer.vb">
+      <DependentUpon>ucrColumnMetadataLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrColumnMetadataLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataframeMetadataLinuxGrid.Designer.vb">
+      <DependentUpon>ucrDataframeMetadataLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataframeMetadataLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrColumnMetadataReoGrid.Designer.vb">
+      <DependentUpon>ucrColumnMetadataReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrColumnMetadataReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataframeMetadataReoGrid.Designer.vb">
+      <DependentUpon>ucrDataframeMetadataReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataframeMetadataReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataViewLinuxGrid.Designer.vb">
+      <DependentUpon>ucrDataViewLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrDataViewLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataViewReoGrid.Designer.vb">
+      <DependentUpon>ucrDataViewReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrDataViewReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrLinuxGrid.Designer.vb">
+      <DependentUpon>ucrLinuxGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\Linux\ucrLinuxGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.Designer.vb">
+      <DependentUpon>ucrReoGrid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucrImageViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucrTextViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\Webview\Windows\CefRuntimeWrapper.vb" />
+    <Compile Include="UserControls\Webview\Windows\ucrWebViewer.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPage.Designer.vb">
+      <DependentUpon>ucrOutputPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPages.Designer.vb">
+      <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucrOutputPages.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="dlgApsimx.resx">
+      <DependentUpon>dlgApsimx.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgAugment.resx">
       <DependentUpon>dlgAugment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxPlot.resx">
+      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
+      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
@@ -2712,24 +3005,57 @@
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCluster.resx">
+      <DependentUpon>dlgCluster.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClusterAnalysis.resx">
+      <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConditionalQuantilePlot.resx">
       <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySpecial.resx">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgEdit.resx">
+      <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToClimsoft.resx">
+      <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFindInVariableOrFilter.resx">
+      <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportERA5Data.resx">
+      <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromPostgres.resx">
+      <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportFromRapidPro.resx">
+      <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgMachineLearning.resx">
+      <DependentUpon>dlgMachineLearning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
@@ -2740,23 +3066,81 @@
     <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
       <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteSpecial.resx">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRandomSplit.resx">
+      <DependentUpon>dlgRandomSplit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgScript.resx">
+      <DependentUpon>dlgScript.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSearch.resx">
+      <DependentUpon>dlgSearch.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSelectColumns.resx">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSetupForDataEntry.resx">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSubset.resx">
+      <DependentUpon>dlgSubset.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeSummaries.resx">
+      <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUseTable.resx">
+      <DependentUpon>dlgUseTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgWordwrap.resx">
+      <DependentUpon>dlgWordwrap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConvertToNumeric.resx">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
+      <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPairPlotOptions.resx">
+      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgSummaryThemes.resx">
+      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
+      <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOutputWindow.resx">
+      <DependentUpon>frmOutputWindow.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntryOptions.resx">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCommentForDataEntry.resx">
+      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgConstructRegexExpression.resx">
+      <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
@@ -2803,6 +3187,12 @@
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgFormatSummaryTables.resx">
+      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromRapidPro.resx">
+      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
       <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
     </EmbeddedResource>
@@ -2814,15 +3204,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddComment.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddComment.sw-KE.resx">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddKey.resx">
       <DependentUpon>dlgAddKey.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.sw-KE.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
@@ -2874,18 +3267,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBarAndPieChart.sw-KE.resx">
       <DependentUpon>dlgBarAndPieChart.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.sw-KE.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxplotCountVariable.resx">
-      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxplotCountVariable.sw-KE.resx">
-      <DependentUpon>dlgBoxplotCountVariable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgBoxplotMethod.resx">
       <DependentUpon>dlgBoxplotMethod.vb</DependentUpon>
@@ -3126,9 +3511,6 @@
     <EmbeddedResource Include="dlgFreezeColumns.sw-KE.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.sw-KE.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgHelpVignettes.resx">
       <DependentUpon>dlgHelpVignettes.vb</DependentUpon>
     </EmbeddedResource>
@@ -3234,8 +3616,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.sw-KE.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.sw-KE.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.sw-KE.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFindNonnumericValues.resx">
       <DependentUpon>dlgFindNonnumericValues.vb</DependentUpon>
@@ -3402,11 +3784,9 @@
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFrequency.resx">
-      <DependentUpon>dlgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.sw-KE.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
@@ -3534,12 +3914,6 @@
     <EmbeddedResource Include="dlgPICSATemperature.resx">
       <DependentUpon>dlgPICSATemperature.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPopulationPyramids.resx">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPopulationPyramids.sw-KE.resx">
-      <DependentUpon>dlgPopulationPyramids.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgPrincipalComponentAnalysis.resx">
       <DependentUpon>dlgPrincipalComponentAnalysis.vb</DependentUpon>
     </EmbeddedResource>
@@ -3621,8 +3995,8 @@
     <EmbeddedResource Include="dlgRowNamesOrNumbers.resx">
       <DependentUpon>dlgRowNamesOrNumbers.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRugPlot.resx">
-      <DependentUpon>dlgRugPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgHeatMapPlot.resx">
+      <DependentUpon>dlgHeatMapPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScatterPlot.resx">
       <DependentUpon>dlgScatterPlot.vb</DependentUpon>
@@ -3765,18 +4139,6 @@
     <EmbeddedResource Include="dlgColumnStructures.sw-KE.resx">
       <DependentUpon>dlgColumnStructures.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGraphDisplay.sw-KE.resx">
-      <DependentUpon>frmGraphDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputWindow.resx">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputWindow.sw-KE.resx">
-      <DependentUpon>frmOutputWindow.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPackageIssues.resx">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </EmbeddedResource>
@@ -3818,12 +4180,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgCalculationsSummmary.sw-KE.resx">
       <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCanonicalCorrelation.resx">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCanonicalCorrelation.sw-KE.resx">
-      <DependentUpon>sdgCanonicalCorrelation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimdexIndices.resx">
       <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
@@ -4029,6 +4385,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumns.resx">
       <DependentUpon>dlgConvertColumns.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgConvertColumns.sw-KE.resx">
       <DependentUpon>dlgConvertColumns.vb</DependentUpon>
@@ -4280,11 +4637,11 @@
     <EmbeddedResource Include="dlgRandomSample.sw-KE.resx">
       <DependentUpon>dlgRandomSample.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRank.sw-KE.resx">
-      <DependentUpon>dlgRank.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransform.sw-KE.resx">
+      <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReferenceLevel.resx">
       <DependentUpon>dlgReferenceLevel.vb</DependentUpon>
@@ -4401,9 +4758,6 @@
     <EmbeddedResource Include="dlgStartofRains.sw-KE.resx">
       <DependentUpon>dlgStartofRains.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgBoxPlot.resx">
-      <DependentUpon>dlgBoxPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgStemAndLeaf.resx">
       <DependentUpon>dlgStemAndLeaf.vb</DependentUpon>
     </EmbeddedResource>
@@ -4453,12 +4807,6 @@
     <EmbeddedResource Include="dlgNewDataFrame.sw-KE.resx">
       <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLog.sw-KE.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -4472,12 +4820,6 @@
     <EmbeddedResource Include="frmMetaData.sw-KE.resx">
       <DependentUpon>frmMetaData.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmScript.sw-KE.resx">
-      <DependentUpon>frmScript.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmVariables.resx">
       <DependentUpon>frmVariables.vb</DependentUpon>
     </EmbeddedResource>
@@ -4486,9 +4828,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx">
       <SubType>Designer</SubType>
@@ -4529,6 +4871,9 @@
     <EmbeddedResource Include="sdgVerificationSummaries.resx">
       <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgWindowNumber.resx">
+      <DependentUpon>sdgWindowNumber.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgWindrose.resx">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </EmbeddedResource>
@@ -4537,6 +4882,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseModel.resx">
       <DependentUpon>dlgUseModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMissingOptionsEvapotranspiration.resx">
+      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
@@ -4676,6 +5024,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.sw-KE.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
@@ -4710,6 +5059,9 @@
     <EmbeddedResource Include="ucrInputConfidenceLimit.sw-KE.resx">
       <DependentUpon>ucrInputConfidenceLimit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrInputFactorLevels.resx">
+      <DependentUpon>ucrInputFactorLevels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrInputTextBox.resx">
       <DependentUpon>ucrInputTextBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -4727,12 +5079,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrLog.resx">
-      <DependentUpon>ucrLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrLog.sw-KE.resx">
-      <DependentUpon>ucrLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
@@ -4794,6 +5140,9 @@
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrReceiverSingleNew.resx">
+      <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
@@ -4805,18 +5154,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSave.sw-KE.resx">
       <DependentUpon>ucrSave.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveGraph.resx">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveGraph.sw-KE.resx">
-      <DependentUpon>ucrSaveGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
-      <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrScript.resx">
       <DependentUpon>ucrScript.vb</DependentUpon>
@@ -4872,11 +5209,28 @@
     <EmbeddedResource Include="UcrPanel.resx">
       <DependentUpon>UcrPanel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataGrid\Linux\ucrLinuxGrid.resx">
+      <DependentUpon>ucrLinuxGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DataGrid\ReoGrid\ucrReoGrid.resx">
+      <DependentUpon>ucrReoGrid.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPage.resx">
+      <DependentUpon>ucrOutputPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
+      <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENCE">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.manifest" />
+    <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
+    <Content Include="Resources\upward-arrow1.png" />
+    <Content Include="translations\translateDynamic.txt" />
+    <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -4897,6 +5251,12 @@
     <None Include="lib\RDotNet.NativeLibrary.dll" />
     <None Include="lib\unvell.ReoGrid.dll" />
     <None Include="lib\unvell.ReoScript.dll" />
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -4919,6 +5279,7 @@
     <None Include="Resources\reset3.png" />
     <None Include="Resources\help2.png" />
     <None Include="Resources\lastgraph.png" />
+    <None Include="Resources\lan_btn.png" />
     <Content Include="Resources\rinstat_icon_Hih_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -5239,6 +5600,9 @@
     <Content Include="static\InstatObject\R\Backend_Components\NCMP\P7_Summary.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="translations\rInstatTranslations.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
@@ -5271,15 +5635,21 @@
     <XliffResource Include="MultilingualResources\instat.sw-KE.xlf" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ucrWPFRichTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets'))" />
+  </Target>
+  <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

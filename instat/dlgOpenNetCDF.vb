@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Runtime.InteropServices
 Imports instat.Translations
 Imports System.IO
 Imports RDotNet
@@ -34,7 +35,7 @@ Public Class dlgOpenNetCDF
     Private bCloseFile As Boolean = False
     Private strFileAssignName As String = "nc"
     Private iExpandedWidth As Integer
-    Private strLibraryPath As String = Path.Combine(frmMain.strStaticPath, "Library", "Climatic", "_Satellite/")
+    Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library" & "\" & "Climatic" & "\" & "_Satellite" & "\"
     Private bFromLibrary As Boolean = False
     Private bSubDialogOKEnabled As Boolean = True
     Private bMultiImport As Boolean = False
@@ -51,7 +52,6 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub dlgOpenNetCDF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -68,6 +68,7 @@ Public Class dlgOpenNetCDF
         End If
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub OpenFile()
@@ -170,11 +171,24 @@ Public Class dlgOpenNetCDF
             dlgOpen.Filter = "All Data files|*.nc|NetCDF files|*.nc"
             dlgOpen.Title = "Open Data from file"
             If bFromLibrary Then
-                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(strLibraryPath, "/", "\"))
+                ' TODO There should be a way of using Path.GetDirectoryName to avoid needing the If but couldn't get this to work
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(strLibraryPath, "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = Path.GetDirectoryName(strLibraryPath)
+                End If
             ElseIf Not ucrInputPath.IsEmpty() Then
-                dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputPath.GetText(), "/", "\"))
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(Path.GetDirectoryName(ucrInputPath.GetText()), "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputPath.GetText(), "/", "\"))
+                End If
             Else
-                dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+                    dlgOpen.InitialDirectory = Replace(frmMain.clsInstatOptions.strWorkingDirectory, "\", "/")
+                Else
+                    dlgOpen.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                End If
             End If
 
             If dlgOpen.ShowDialog() = DialogResult.OK Then
@@ -238,7 +252,6 @@ Public Class dlgOpenNetCDF
                 If strFiles.Count > 0 Then
                     CheckCloseFile()
                     clsNcOpenFunction.AddParameter("filename", Chr(34) & Replace(strFiles(0), "\", "/") & Chr(34))
-                    clsNcOpenFunction.bToBeAssigned = True
                     clsNcOpenFunction.ToScript(strTemp)
                     frmMain.clsRLink.RunScript(strTemp, strComment:="Opening connection to first NetCDF file", bUpdateGrids:=False)
                     bCloseFile = True
@@ -256,6 +269,7 @@ Public Class dlgOpenNetCDF
                 End If
             End If
         End Using
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetNFilesInFolder(strPath As String)
@@ -285,9 +299,10 @@ Public Class dlgOpenNetCDF
             Me.Size = New Size(iExpandedWidth, Me.Height)
             cmdDetails.Text = "Hide Details <<"
         Else
-            Me.Size = New Size(iExpandedWidth / 1.8, Me.Height)
+            Me.Size = New Size(iExpandedWidth / 1.7, Me.Height)
             cmdDetails.Text = "Show Details >>"
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub FileDetails()
@@ -332,6 +347,7 @@ Public Class dlgOpenNetCDF
             ucrInputFileDetails.Text = strLong
         Else
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub DescriptionButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoShort.CheckedChanged, rdoMedium.CheckedChanged, rdoLong.CheckedChanged

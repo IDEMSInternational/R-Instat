@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgTwoSampleNonparametricTest
     Public bFirstLoad As Boolean = True
     Private Sub dlgTwoSampleNonparametricTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         ucrReceiverVariable.Selector = ucrTwoSampleSelector
         ucrReceiverFactor.Selector = ucrTwoSampleSelector
         ucrReceiverFactor.SetDataType("factor")
@@ -26,6 +25,7 @@ Public Class dlgTwoSampleNonparametricTest
         If bFirstLoad Then
             'setDeafaults
         End If
+        autoTranslate(Me)
     End Sub
     Private Sub SetDefaults()
         ucrTwoSampleSelector.Reset()

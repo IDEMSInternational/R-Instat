@@ -17,11 +17,11 @@
 Imports instat.Translations
 Public Class dlgFormat
     Private Sub dlgFormat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         ucrMultiple.Selector = ucrAddRemove
         ucrMultiple.SetMeAsReceiver()
         ucrBase.OKEnabled(False)
         defaultSettings()
+        autoTranslate(Me)
     End Sub
 
     Private Sub defaultSettings()

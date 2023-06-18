@@ -38,7 +38,6 @@ Partial Class dlgViewAndRemoveKeys
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgViewAndRemoveKeys))
         Me.lblSelectedKey = New System.Windows.Forms.Label()
         Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
         Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
@@ -50,53 +49,83 @@ Partial Class dlgViewAndRemoveKeys
         '
         'lblSelectedKey
         '
-        resources.ApplyResources(Me.lblSelectedKey, "lblSelectedKey")
+        Me.lblSelectedKey.AutoSize = True
+        Me.lblSelectedKey.Location = New System.Drawing.Point(266, 45)
         Me.lblSelectedKey.Name = "lblSelectedKey"
+        Me.lblSelectedKey.Size = New System.Drawing.Size(73, 13)
+        Me.lblSelectedKey.TabIndex = 1
+        Me.lblSelectedKey.Text = "Selected Key:"
         '
         'ucrReceiverSelectedKey
         '
+        Me.ucrReceiverSelectedKey.AutoSize = True
         Me.ucrReceiverSelectedKey.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSelectedKey, "ucrReceiverSelectedKey")
+        Me.ucrReceiverSelectedKey.Location = New System.Drawing.Point(266, 60)
+        Me.ucrReceiverSelectedKey.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedKey.Name = "ucrReceiverSelectedKey"
         Me.ucrReceiverSelectedKey.Selector = Nothing
+        Me.ucrReceiverSelectedKey.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSelectedKey.strNcFilePath = ""
+        Me.ucrReceiverSelectedKey.TabIndex = 2
         Me.ucrReceiverSelectedKey.ucrSelector = Nothing
         '
         'ucrSelectorKeys
         '
+        Me.ucrSelectorKeys.AutoSize = True
+        Me.ucrSelectorKeys.bDropUnusedFilterLevels = False
         Me.ucrSelectorKeys.bShowHiddenColumns = False
         Me.ucrSelectorKeys.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorKeys, "ucrSelectorKeys")
+        Me.ucrSelectorKeys.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorKeys.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorKeys.Name = "ucrSelectorKeys"
+        Me.ucrSelectorKeys.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorKeys.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 203)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'rdoDeleteKey
         '
-        resources.ApplyResources(Me.rdoDeleteKey, "rdoDeleteKey")
+        Me.rdoDeleteKey.AutoSize = True
+        Me.rdoDeleteKey.Location = New System.Drawing.Point(266, 125)
         Me.rdoDeleteKey.Name = "rdoDeleteKey"
+        Me.rdoDeleteKey.Size = New System.Drawing.Size(77, 17)
+        Me.rdoDeleteKey.TabIndex = 9
         Me.rdoDeleteKey.TabStop = True
+        Me.rdoDeleteKey.Text = "Delete Key"
         Me.rdoDeleteKey.UseVisualStyleBackColor = True
         '
         'rdoViewKey
         '
-        resources.ApplyResources(Me.rdoViewKey, "rdoViewKey")
+        Me.rdoViewKey.AutoSize = True
+        Me.rdoViewKey.Location = New System.Drawing.Point(266, 102)
         Me.rdoViewKey.Name = "rdoViewKey"
+        Me.rdoViewKey.Size = New System.Drawing.Size(69, 17)
+        Me.rdoViewKey.TabIndex = 8
         Me.rdoViewKey.TabStop = True
+        Me.rdoViewKey.Text = "View Key"
         Me.rdoViewKey.UseVisualStyleBackColor = True
         '
         'ucrPnlKeys
         '
-        resources.ApplyResources(Me.ucrPnlKeys, "ucrPnlKeys")
+        Me.ucrPnlKeys.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlKeys.Location = New System.Drawing.Point(266, 94)
         Me.ucrPnlKeys.Name = "ucrPnlKeys"
+        Me.ucrPnlKeys.Size = New System.Drawing.Size(130, 62)
+        Me.ucrPnlKeys.TabIndex = 7
         '
         'dlgViewAndRemoveKeys
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(424, 260)
         Me.Controls.Add(Me.rdoDeleteKey)
         Me.Controls.Add(Me.rdoViewKey)
         Me.Controls.Add(Me.ucrPnlKeys)
@@ -108,6 +137,8 @@ Partial Class dlgViewAndRemoveKeys
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewAndRemoveKeys"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "View and Remove Keys"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

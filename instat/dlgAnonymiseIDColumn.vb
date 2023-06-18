@@ -57,11 +57,12 @@ Public Class dlgAnonymiseIDColumn
         ucrInputAlgorithm.SetItems(dctAlgorithm)
         ucrInputAlgorithm.SetDropDownStyleAsNonEditable()
 
-        ucrSaveAnonymisedColumn.SetPrefix("Hash")
+        ucrSaveAnonymisedColumn.SetPrefix("hash")
         ucrSaveAnonymisedColumn.SetSaveTypeAsColumn()
         ucrSaveAnonymisedColumn.SetDataFrameSelector(ucrSelectorAnonymiseIDColumn.ucrAvailableDataFrames)
         ucrSaveAnonymisedColumn.SetIsTextBox()
         ucrSaveAnonymisedColumn.SetLabelText("Column Name:")
+        ucrSaveAnonymisedColumn.setLinkedReceiver(ucrReceiverIDColumn)
     End Sub
 
     Private Sub SetDefaults()

@@ -1,4 +1,4 @@
-' R- Instat
+﻿' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,6 @@ Public Class dlgOneVarCompareModels
     Private clsChisqtableOperator, clsChisqbreaksOperator As New ROperator
 
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -35,6 +34,7 @@ Public Class dlgOneVarCompareModels
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

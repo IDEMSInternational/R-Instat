@@ -24,6 +24,8 @@ Public Class sdgMissingOptions
     End Sub
 
     Public Sub InitialiseControls()
+        ucrBase.iHelpTopicID = 292
+
         Dim lstCheckboxes As New List(Of ucrCheck)
         ucrChkMaxNumMissing.AddToLinkedControls({ucrNudNumber}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkMaxPercMissing.AddToLinkedControls({ucrInputPercentage}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)

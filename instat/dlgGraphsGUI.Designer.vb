@@ -30,20 +30,23 @@ Partial Class dlgGraphsGUI
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(0, 218)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 2
         '
         'ucrSelectorGraphGUI
         '
+        Me.ucrSelectorGraphGUI.AutoSize = True
         Me.ucrSelectorGraphGUI.bDropUnusedFilterLevels = False
         Me.ucrSelectorGraphGUI.bShowHiddenColumns = False
         Me.ucrSelectorGraphGUI.bUseCurrentFilter = True
         Me.ucrSelectorGraphGUI.Location = New System.Drawing.Point(9, 9)
         Me.ucrSelectorGraphGUI.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGraphGUI.Name = "ucrSelectorGraphGUI"
-        Me.ucrSelectorGraphGUI.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorGraphGUI.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorGraphGUI.TabIndex = 3
         '
         'lblGraphGUI
@@ -57,6 +60,7 @@ Partial Class dlgGraphsGUI
         '
         'ucrReceiverGraphs
         '
+        Me.ucrReceiverGraphs.AutoSize = True
         Me.ucrReceiverGraphs.frmParent = Me
         Me.ucrReceiverGraphs.Location = New System.Drawing.Point(252, 67)
         Me.ucrReceiverGraphs.Margin = New System.Windows.Forms.Padding(0)
@@ -69,8 +73,9 @@ Partial Class dlgGraphsGUI
         '
         'dlgGraphsGUI
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(410, 279)
         Me.Controls.Add(Me.ucrReceiverGraphs)
         Me.Controls.Add(Me.lblGraphGUI)

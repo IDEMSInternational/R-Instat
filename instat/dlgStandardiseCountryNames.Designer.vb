@@ -55,13 +55,16 @@ Partial Class dlgStandardiseCountryNames
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 198)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverCountryNames
         '
+        Me.ucrReceiverCountryNames.AutoSize = True
         Me.ucrReceiverCountryNames.frmParent = Me
         Me.ucrReceiverCountryNames.Location = New System.Drawing.Point(267, 60)
         Me.ucrReceiverCountryNames.Margin = New System.Windows.Forms.Padding(0)
@@ -74,18 +77,21 @@ Partial Class dlgStandardiseCountryNames
         '
         'ucrSelectorStandardiseCountry
         '
+        Me.ucrSelectorStandardiseCountry.AutoSize = True
+        Me.ucrSelectorStandardiseCountry.bDropUnusedFilterLevels = False
         Me.ucrSelectorStandardiseCountry.bShowHiddenColumns = False
         Me.ucrSelectorStandardiseCountry.bUseCurrentFilter = True
         Me.ucrSelectorStandardiseCountry.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorStandardiseCountry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStandardiseCountry.Name = "ucrSelectorStandardiseCountry"
-        Me.ucrSelectorStandardiseCountry.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStandardiseCountry.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorStandardiseCountry.TabIndex = 0
         '
         'dlgStandardiseCountryNames
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 253)
         Me.Controls.Add(Me.lblCountryNames)
         Me.Controls.Add(Me.ucrBase)

@@ -35,8 +35,8 @@ Public Class dlgDefineCorruption
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         AutoFillReceivers()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

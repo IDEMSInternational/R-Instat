@@ -32,7 +32,6 @@ Public Class dlgDisplayDailyData
     Private clsLabelWrapGenFunction As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         bRCodeSet = False
         If bFirstLoad Then
             iBasicHeight = Me.Height
@@ -49,6 +48,7 @@ Public Class dlgDisplayDailyData
         DialogSize()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -177,10 +177,10 @@ Public Class dlgDisplayDailyData
 
         lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR, ucrChkSumMissing})
 
-        ucrChkMissing.SetParameter(ucrInputComboMissing.GetParameter)
         ucrChkMissing.AddParameterPresentCondition(True, "Misscode")
         ucrChkMissing.AddParameterPresentCondition(False, "Misscode", False)
         ucrChkMissing.SetText("Missing Values")
+
         ucrInputComboMissing.SetParameter(New RParameter("Misscode", 5))
         dctMissingvalues.Add("m", Chr(34) & "m" & Chr(34))
         dctMissingvalues.Add("miss", Chr(34) & "miss" & Chr(34))
@@ -210,7 +210,7 @@ Public Class dlgDisplayDailyData
         ucrInputFacetBy.SetLinkedDisplayControl(lblFacetby)
         ucrInputFacetBy.SetDropDownStyleAsNonEditable()
 
-        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetPrefix("graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
         ucrSaveGraph.SetIsComboBox()
@@ -226,7 +226,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrInputFacetBy, ucrChkNumberOfColumns}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale, ucrInputGraphRugColur}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkMissing, {rdoTable}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
@@ -240,7 +240,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
 
 
-        ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedUpdateFunction:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="m")
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
         ucrChkZero.AddToLinkedControls({ucrInputComboZero}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="--")
         ucrNudUpperYaxis.SetLinkedDisplayControl(grpGraph)
@@ -345,7 +345,6 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_graph")
         clsDisplayDailyTable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_table")
         clsDisplayDailyTable.AddParameter("monstats", clsRFunctionParameter:=clsConcFunction, iPosition:=8)
-        clsDisplayDailyTable.AddParameter("Misscode", Chr(34) & "m" & Chr(34), iPosition:=5)
         clsDisplayDailyGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$display_daily_graph")
 
         clsDisplayDailyGraphOperator.AddParameter("daily_graph", clsRFunctionParameter:=clsDisplayDailyGraphFunction)
@@ -386,7 +385,6 @@ Public Class dlgDisplayDailyData
         ucrChkMissing.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboZero.SetRCode(clsDisplayDailyTable, bReset)
         ucrInputComboTrace.SetRCode(clsDisplayDailyTable, bReset)
-        ucrInputComboMissing.SetRCode(clsDisplayDailyTable, bReset)
         ucrReceiverDate.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverStations.SetRCode(clsDisplayDailyGraphFunction, bReset)
         ucrReceiverDayOfYear.SetRCode(clsDisplayDailyGraphFunction, bReset)
@@ -442,9 +440,9 @@ Public Class dlgDisplayDailyData
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
         If rdoGraphByYear.Checked Then
-            ucrSaveGraph.SetPrefix("Graph_by_Year")
+            ucrSaveGraph.SetPrefix("graph_by_year")
         ElseIf rdoGraph.checked Then
-            ucrSaveGraph.SetPrefix("Graph")
+            ucrSaveGraph.SetPrefix("graph")
         End If
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3

@@ -38,30 +38,37 @@ Partial Class ucrNewColumnName
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrNewColumnName))
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.cboColumnName = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'lblColumnName
         '
-        resources.ApplyResources(Me.lblColumnName, "lblColumnName")
+        Me.lblColumnName.AutoSize = True
+        Me.lblColumnName.Location = New System.Drawing.Point(3, 10)
         Me.lblColumnName.Name = "lblColumnName"
+        Me.lblColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblColumnName.TabIndex = 0
         Me.lblColumnName.Tag = "new_column_name:"
+        Me.lblColumnName.Text = "New Column Name:"
         '
         'cboColumnName
         '
         Me.cboColumnName.FormattingEnabled = True
-        resources.ApplyResources(Me.cboColumnName, "cboColumnName")
+        Me.cboColumnName.Location = New System.Drawing.Point(107, 7)
         Me.cboColumnName.Name = "cboColumnName"
+        Me.cboColumnName.Size = New System.Drawing.Size(257, 21)
+        Me.cboColumnName.TabIndex = 1
         '
         'ucrNewColumnName
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.cboColumnName)
         Me.Controls.Add(Me.lblColumnName)
         Me.Name = "ucrNewColumnName"
+        Me.Size = New System.Drawing.Size(367, 35)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

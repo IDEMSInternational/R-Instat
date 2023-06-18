@@ -22,7 +22,6 @@ Partial Class dlgGlance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGlance))
         Me.lblModels = New System.Windows.Forms.Label()
         Me.ucrModelSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrModelReceiver = New instat.ucrReceiverMultiple()
@@ -35,59 +34,98 @@ Partial Class dlgGlance
         '
         'lblModels
         '
-        resources.ApplyResources(Me.lblModels, "lblModels")
+        Me.lblModels.AutoSize = True
+        Me.lblModels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblModels.Location = New System.Drawing.Point(260, 26)
+        Me.lblModels.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblModels.Name = "lblModels"
+        Me.lblModels.Size = New System.Drawing.Size(44, 13)
+        Me.lblModels.TabIndex = 3
+        Me.lblModels.Text = "Models:"
         '
         'ucrModelSelector
         '
+        Me.ucrModelSelector.AutoSize = True
         Me.ucrModelSelector.bDropUnusedFilterLevels = False
         Me.ucrModelSelector.bShowHiddenColumns = False
         Me.ucrModelSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrModelSelector, "ucrModelSelector")
+        Me.ucrModelSelector.Location = New System.Drawing.Point(4, 9)
+        Me.ucrModelSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrModelSelector.Name = "ucrModelSelector"
+        Me.ucrModelSelector.Size = New System.Drawing.Size(221, 192)
+        Me.ucrModelSelector.TabIndex = 6
         '
         'ucrModelReceiver
         '
+        Me.ucrModelReceiver.AutoSize = True
         Me.ucrModelReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrModelReceiver, "ucrModelReceiver")
+        Me.ucrModelReceiver.Location = New System.Drawing.Point(259, 43)
+        Me.ucrModelReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrModelReceiver.Name = "ucrModelReceiver"
         Me.ucrModelReceiver.Selector = Nothing
+        Me.ucrModelReceiver.Size = New System.Drawing.Size(130, 105)
         Me.ucrModelReceiver.strNcFilePath = ""
+        Me.ucrModelReceiver.TabIndex = 2
         Me.ucrModelReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(7, 292)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'ucrPnlOptions
         '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(4, 211)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(221, 68)
+        Me.ucrPnlOptions.TabIndex = 7
         '
         'rdoDisplayInOutput
         '
-        resources.ApplyResources(Me.rdoDisplayInOutput, "rdoDisplayInOutput")
+        Me.rdoDisplayInOutput.AutoSize = True
+        Me.rdoDisplayInOutput.Location = New System.Drawing.Point(11, 219)
+        Me.rdoDisplayInOutput.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoDisplayInOutput.Name = "rdoDisplayInOutput"
+        Me.rdoDisplayInOutput.Size = New System.Drawing.Size(106, 17)
+        Me.rdoDisplayInOutput.TabIndex = 8
         Me.rdoDisplayInOutput.TabStop = True
+        Me.rdoDisplayInOutput.Text = "Display In Output"
         Me.rdoDisplayInOutput.UseVisualStyleBackColor = True
         '
         'rdoNewDataFrameName
         '
-        resources.ApplyResources(Me.rdoNewDataFrameName, "rdoNewDataFrameName")
+        Me.rdoNewDataFrameName.AutoSize = True
+        Me.rdoNewDataFrameName.Location = New System.Drawing.Point(11, 249)
+        Me.rdoNewDataFrameName.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoNewDataFrameName.Name = "rdoNewDataFrameName"
+        Me.rdoNewDataFrameName.Size = New System.Drawing.Size(139, 17)
+        Me.rdoNewDataFrameName.TabIndex = 9
         Me.rdoNewDataFrameName.TabStop = True
+        Me.rdoNewDataFrameName.Text = "New Data Frame Name:"
         Me.rdoNewDataFrameName.UseVisualStyleBackColor = True
         '
         'ucrSaveNewDataFrame
         '
-        resources.ApplyResources(Me.ucrSaveNewDataFrame, "ucrSaveNewDataFrame")
+        Me.ucrSaveNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(228, 245)
+        Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
+        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(161, 34)
+        Me.ucrSaveNewDataFrame.TabIndex = 10
         '
         'dlgGlance
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(414, 348)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.rdoNewDataFrameName)
         Me.Controls.Add(Me.rdoDisplayInOutput)
@@ -97,9 +135,12 @@ Partial Class dlgGlance
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgGlance"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Glance"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgCreateClimateObject
     Public bFirstLoad As Boolean = True
     Private Sub dlgCreateClimateObject_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -27,6 +26,7 @@ Public Class dlgCreateClimateObject
         End If
         TestOKEnabled()
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

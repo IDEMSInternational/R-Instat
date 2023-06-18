@@ -20,7 +20,6 @@ Public Class dlgFlatFrequencyTable
     Private bReset As Boolean = True
     Private clsFTable, clsTable, clsAddMargin As New RFunction
     Private Sub dlgFlatFrequencyTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -31,6 +30,7 @@ Public Class dlgFlatFrequencyTable
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -34,7 +34,6 @@ Public Class dlgFromLibrary
     Private clsImportFunction As New RFunction 'the base function that call on import R-Instat function
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -54,6 +53,7 @@ Public Class dlgFromLibrary
         bReset = False
         TestOkEnabled()
         EnableHelp()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -129,7 +129,7 @@ Public Class dlgFromLibrary
         dlgImportDataset.bFromLibrary = True 'set flag that this should open from library
         dlgImportDataset.bStartOpenDialog = True
         dlgImportDataset.ShowDialog()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
@@ -210,22 +210,30 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Function CheckString(ByVal strValue As String)
-        Dim strLength As Integer = strValue.IndexOf(" ")
-        If strLength = -1 Then
+        Dim iLength As Integer = strValue.IndexOf(" ")
+        If iLength = -1 Then
             Return strValue
         Else
-            Return strValue.Substring(0, strLength)
+            Return strValue.Substring(0, iLength)
+        End If
+    End Function
+
+    Private Function FindStringInBracket(ByVal strValue As String)
+        Dim iStartIndex As Integer = strValue.IndexOf("(") + 1
+        Dim iLength As Integer = strValue.IndexOf(")") - iStartIndex
+        If iLength = -1 Then
+            Return strValue
+        Else
+            Return strValue.Substring(iStartIndex, iLength)
         End If
     End Function
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
-        clsHelp.AddParameter("package", Chr(34) & ucrInputPackages.cboInput.SelectedItem & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset. Generated from dialog Open Dataset from Library", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+        Dim strPackageName As String = ucrInputPackages.cboInput.SelectedItem
+        Dim strTopic As String = lstCollection.SelectedItems(0).Text
+        If strPackageName <> "" AndAlso strTopic <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
+        End If
     End Sub
 
     Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged
@@ -241,7 +249,8 @@ Public Class dlgFromLibrary
     ''' in importing datasets of different R types 
     ''' </summary>
     Private Sub SetParameterValues()
-        Dim strSelectedDataName As String
+        Dim strSelectedText As String = Nothing
+        Dim strSelectedDataName, strDataNameFromBracket As String
         Dim strVecOutput As CharacterVector
         Dim strRClass As String = ""
 
@@ -249,8 +258,16 @@ Public Class dlgFromLibrary
             Exit Sub
         End If
 
-        strSelectedDataName = CheckString(lstCollection.SelectedItems(0).SubItems(0).Text)
-        clsDataFunction.AddParameter("X", strSelectedDataName)
+        strSelectedText = lstCollection.SelectedItems(0).SubItems(0).Text
+
+        strDataNameFromBracket = FindStringInBracket(strSelectedText)
+        strSelectedDataName = CheckString(strSelectedText)
+
+        If strSelectedText.Contains("(") Then
+            clsDataFunction.AddParameter("X", strDataNameFromBracket)
+        Else
+            clsDataFunction.AddParameter("X", strSelectedDataName)
+        End If
 
         'calling RunInternalScriptGetOutput() twice because currently it can't execute multiple lines
         frmMain.clsRLink.RunInternalScriptGetOutput(clsDataFunction.Clone.ToScript(), bSilent:=True)
@@ -260,7 +277,13 @@ Public Class dlgFromLibrary
         End If
 
         If strRClass = "list" Then
-            clsImportFunction.AddParameter("data_tables", strParameterValue:=strSelectedDataName)
+            'some lists could be supplied in formats that R-Instat doesn't directly recognise as data frames
+            'so always explicitly coerce the supplied list of data to type data.frame
+            Dim clsLApplyFunction As New RFunction
+            clsLApplyFunction.SetRCommand("lapply")
+            clsLApplyFunction.AddParameter("X", strParameterValue:=strSelectedDataName, iPosition:=0)
+            clsLApplyFunction.AddParameter("FUN", strParameterValue:="data.frame", iPosition:=1)
+            clsImportFunction.AddParameter("data_tables", clsRFunctionParameter:=clsLApplyFunction, iPosition:=0)
         Else
             Dim clsListFunction As New RFunction 'defines the list function. list(x=x)
             Dim clsListParameterFunction As New RFunction 'defines the function that act as list parameters e.g list(y=fortify.zoo(x))
@@ -301,4 +324,9 @@ Public Class dlgFromLibrary
         End If
     End Sub
 
+    Private Sub lstCollection_DoubleClick(sender As Object, e As EventArgs) Handles lstCollection.DoubleClick
+        If ucrBase.cmdOk.Enabled Then
+            ucrBase.cmdOk.PerformClick()
+        End If
+    End Sub
 End Class

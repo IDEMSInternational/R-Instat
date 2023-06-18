@@ -38,7 +38,6 @@ Partial Class dlgCalculationsSummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCalculationsSummary))
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
@@ -50,50 +49,75 @@ Partial Class dlgCalculationsSummary
         '
         'cmdDelete
         '
-        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
+        Me.cmdDelete.Location = New System.Drawing.Point(143, 114)
         Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDelete.TabIndex = 11
+        Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdEdit
         '
-        resources.ApplyResources(Me.cmdEdit, "cmdEdit")
+        Me.cmdEdit.Location = New System.Drawing.Point(143, 85)
         Me.cmdEdit.Name = "cmdEdit"
+        Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdEdit.TabIndex = 12
+        Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
         'cmdAdd
         '
-        resources.ApplyResources(Me.cmdAdd, "cmdAdd")
+        Me.cmdAdd.Location = New System.Drawing.Point(143, 56)
         Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAdd.TabIndex = 13
+        Me.cmdAdd.Text = "Add"
         Me.cmdAdd.UseVisualStyleBackColor = True
         '
         'lblCalculations
         '
-        resources.ApplyResources(Me.lblCalculations, "lblCalculations")
+        Me.lblCalculations.AutoSize = True
+        Me.lblCalculations.Location = New System.Drawing.Point(13, 21)
         Me.lblCalculations.Name = "lblCalculations"
+        Me.lblCalculations.Size = New System.Drawing.Size(67, 13)
+        Me.lblCalculations.TabIndex = 10
+        Me.lblCalculations.Text = "Calculations:"
         '
         'lstCalculations
         '
         Me.lstCalculations.FullRowSelect = True
-        resources.ApplyResources(Me.lstCalculations, "lstCalculations")
+        Me.lstCalculations.HideSelection = False
+        Me.lstCalculations.Location = New System.Drawing.Point(12, 36)
         Me.lstCalculations.Name = "lstCalculations"
+        Me.lstCalculations.Size = New System.Drawing.Size(125, 149)
+        Me.lstCalculations.TabIndex = 9
         Me.lstCalculations.UseCompatibleStateImageBehavior = False
         Me.lstCalculations.View = System.Windows.Forms.View.List
         '
         'cmdDuplicate
         '
-        resources.ApplyResources(Me.cmdDuplicate, "cmdDuplicate")
+        Me.cmdDuplicate.Location = New System.Drawing.Point(143, 143)
         Me.cmdDuplicate.Name = "cmdDuplicate"
+        Me.cmdDuplicate.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDuplicate.TabIndex = 14
+        Me.cmdDuplicate.Text = "Duplicate"
         Me.cmdDuplicate.UseVisualStyleBackColor = True
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(12, 191)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgCalculationsSummary
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(420, 247)
         Me.Controls.Add(Me.cmdDuplicate)
         Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdEdit)
@@ -105,6 +129,8 @@ Partial Class dlgCalculationsSummary
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCalculationsSummary"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "General Summaries"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

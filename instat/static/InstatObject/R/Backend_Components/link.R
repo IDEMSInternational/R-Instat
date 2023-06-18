@@ -134,6 +134,13 @@ DataBook$set("public", "add_link", function(from_data_frame, to_data_frame, link
       }
     }
   }
+  if (from_data_frame != to_data_frame){
+    cat(paste("Link name:", link_name),
+        paste("From data frame:", from_data_frame),
+        paste("To data frame:", to_data_frame),
+        paste("Link columns:", paste(names(link_pairs), "=", link_pairs, collapse = ", ")),
+        sep = "\n")
+  }
 }
 )
 
@@ -369,7 +376,7 @@ DataBook$set("public", "view_link", function(link_name) {
                       paste("Link name:", link_name),
                       paste("From data frame:", temp_link$from_data_frame),
                       paste("To data frame:", temp_link$to_data_frame),
-                      paste("Link Columns:", paste(names(temp_link$link_columns), "=", temp_link$link_columns, collapse = ", ")), sep = "\n"))
+                      paste("Link columns:", paste(names(temp_link$link_columns), "=", temp_link$link_columns, collapse = ", ")), sep = "\n"))
   }
 }
 )

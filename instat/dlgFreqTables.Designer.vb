@@ -163,6 +163,7 @@ Partial Class dlgFreqTables
         '
         'ucrReceiverMultiple
         '
+        Me.ucrReceiverMultiple.AutoSize = True
         Me.ucrReceiverMultiple.frmParent = Me
         Me.ucrReceiverMultiple.Location = New System.Drawing.Point(213, 45)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
@@ -175,24 +176,28 @@ Partial Class dlgFreqTables
         '
         'ucrAddRemove
         '
+        Me.ucrAddRemove.AutoSize = True
         Me.ucrAddRemove.bShowHiddenColumns = False
         Me.ucrAddRemove.Location = New System.Drawing.Point(3, 28)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(204, 132)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(213, 133)
         Me.ucrAddRemove.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(51, 310)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 55)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgFreqTables
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(506, 366)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.grpDisplayMargins)

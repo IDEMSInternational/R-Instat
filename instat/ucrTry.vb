@@ -22,10 +22,11 @@ Public Class ucrTry
     Private CommandModel As String = ""
     Private bIsModel As Boolean
     Private strError As String
-    Private WithEvents ucrReceiverScript As New ucrReceiverExpression
-    Private WithEvents ucrModelPreview As New ucrInputTextBox
+    Private WithEvents ucrReceiverScript As ucrReceiverExpression
     Private clsRSyntax As RSyntax
     Private bstrVecOutput As Boolean
+    Private arrAssociatedControls As ucrCore()
+    Public Property RunCommandAsMultipleLines As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -38,14 +39,8 @@ Public Class ucrTry
         bstrVecOutput = False
     End Sub
 
-    Public Sub SetReceiver(Optional ucrNewReceiverScript As ucrReceiverExpression = Nothing, Optional ucrNewInputTextBox As ucrInputTextBox = Nothing)
-        If ucrNewReceiverScript IsNot Nothing Then
-            ucrReceiverScript = ucrNewReceiverScript
-        End If
-
-        If ucrNewInputTextBox IsNot Nothing Then
-            ucrModelPreview = ucrNewInputTextBox
-        End If
+    Public Sub SetReceiver(Optional ucrNewReceiverScript As ucrReceiverExpression = Nothing)
+        ucrReceiverScript = ucrNewReceiverScript
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
@@ -64,7 +59,12 @@ Public Class ucrTry
         bIsCommand = True
     End Sub
 
-    Private Sub setToCommandOrModel()
+    Public Sub ClearTryText()
+        ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
+    End Sub
+
+    Private Sub SetToCommandOrModel()
         If bIsCommand Then
             CommandModel = "Command"
         ElseIf bIsModel Then
@@ -82,99 +82,118 @@ Public Class ucrTry
         End If
     End Sub
 
-
     Private Sub TryScript()
-        Dim strTempScript As String = ""
         Dim strErrorDetail As String = ""
-        Dim strVecOutput As CharacterVector
-
         Dim lstScripts As New List(Of String)
-        Dim strBeforeAfterScript As String
-        Dim strBeforeAfterTemp As String
-        Dim clsCodeClone As RCodeStructure
-
-        Dim strTemp As String = ""
-        Dim strScript As String = ""
-        Dim clsMainCode As RCodeStructure = Nothing
 
         ucrInputTryMessage.txtInput.Controls.Clear()
-
         Try
-            setToCommandOrModel()
-            If (ucrReceiverScript.IsEmpty() AndAlso ucrModelPreview.IsEmpty()) Then
+            SetToCommandOrModel()
+            If Not IsNothing(ucrReceiverScript) AndAlso ucrReceiverScript.IsEmpty() Then
+                ucrInputTryMessage.SetName("")
+            ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl() Then
                 ucrInputTryMessage.SetName("")
             Else
-
                 For Each clsTempCode In clsRSyntax.lstBeforeCodes
-                    clsCodeClone = clsTempCode.Clone()
-                    strBeforeAfterScript = ""
-                    strBeforeAfterTemp = clsCodeClone.ToScript(strBeforeAfterScript)
-                    'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
-                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                    Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
+                    Dim strBeforeAfterScript As String = ""
+                    Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
+                    'Sometimes the output of the R-command we deal with should not be part of the script...
+                    'That's only the case when this output has already been assigned.
+                    If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.IsAssigned() Then
                         lstScripts.Add(strBeforeAfterScript)
                     Else
                         lstScripts.Add(strBeforeAfterScript & strBeforeAfterTemp)
                     End If
                 Next
                 If lstScripts.Count > 0 Then
-                    strTempScript = String.Join(vbNewLine, lstScripts)
-                    frmMain.clsRLink.RunInternalScript(strTempScript, bSilent:=True)
+                    frmMain.clsRLink.RunInternalScript(String.Join(Environment.NewLine, lstScripts), bSilent:=True)
                 End If
 
+                Dim clsMainCode As RCodeStructure = Nothing
+                Dim strCommandString As String = ""
                 If clsRSyntax.bUseBaseFunction Then
                     clsMainCode = clsRSyntax.clsBaseFunction.Clone()
                 ElseIf clsRSyntax.bUseBaseOperator Then
                     clsMainCode = clsRSyntax.clsBaseOperator.Clone()
                 ElseIf clsRSyntax.bUseCommandString Then
                     clsMainCode = clsRSyntax.clsBaseCommandString.Clone()
+                    strCommandString = clsRSyntax.strCommandString
                 End If
                 If clsMainCode IsNot Nothing Then
                     clsMainCode.RemoveAssignTo()
-                    strTemp = clsMainCode.ToScript(strScript, clsRSyntax.strCommandString)
-                    strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
-                    If strVecOutput IsNot Nothing Then
-                        If bstrVecOutput Then
-                            If strVecOutput.Length > 1 Then
-                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                            Else
-                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
+                    Dim vecOutput As CharacterVector = Nothing
+                    Dim strTemp As String = clsMainCode.ToScript(strScript:="", strTemp:=strCommandString)
+                    Dim bValid As Boolean = False
+                    If RunCommandAsMultipleLines Then
+                        Dim arrScriptCommandLines As String() = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
+                        For Each str As String In arrScriptCommandLines
+                            vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True, strError:=strErrorDetail)
+                            'any command line that throws an error means the entire script code is not valid
+                            If vecOutput Is Nothing Then
+                                bValid = False
+                                Exit For
                             End If
+
+                            'todo. for data frames output, length is expected to be > 0(even though that is a bonus check)
+                            'todo SJL. not sure if other output types will have length > 0
+                            'todo. as at 07/08/2021. this block is only being used by dlgNewDataframe ONLY
+                            bValid = vecOutput.Length > 0
+                            'don't break the if, we probably want to loop through to the last command checking validity? 
+                        Next
+                    Else
+                        vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
+                        bValid = vecOutput IsNot Nothing
+                    End If
+
+                    If bValid Then
+                        If bstrVecOutput Then
+                            ucrInputTryMessage.SetName(If(vecOutput.Length > 1, Mid(vecOutput(0), 5) & "...", Mid(vecOutput(0), 5)))
+                            ucrInputTryMessage.txtInput.BackColor = Color.White
                         Else
-                            If strVecOutput.Length > 1 Then
-                                ucrInputTryMessage.SetName(CommandModel & " runs without error")
+                            If bIsCommand Then
+                                ucrInputTryMessage.SetName(Translations.GetTranslation(CommandModel & " runs without error"))
+                                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                            ElseIf bIsModel Then
+                                ucrInputTryMessage.SetName(Translations.GetTranslation(CommandModel & " runs ok"))
                                 ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
                             End If
                         End If
-
                     Else
-                        ucrInputTryMessage.SetName(CommandModel & " produced an error or no output to display.")
-                        ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
-                        strError = strErrorDetail
-                        AddButtonInTryTextBox()
+                        If bIsCommand Then
+                            ucrInputTryMessage.SetName(Translations.GetTranslation(CommandModel & " produced an error or no output to display."))
+                            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                            strError = strErrorDetail
+                            AddButtonInTryTextBox()
+                        ElseIf bIsModel Then
+                            ucrInputTryMessage.SetName(Translations.GetTranslation("Problem detected running " & CommandModel & " or no output to display."))
+                            ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
+                            strError = strErrorDetail
+                            AddButtonInTryTextBox()
+                        End If
                     End If
-                End If
+                    End If
             End If
         Catch ex As Exception
-            ucrInputTryMessage.SetName(CommandModel & "produced an error. Modify input before running.")
+            ucrInputTryMessage.SetName(Translations.GetTranslation(CommandModel & " produced an error. Modify input before running."))
             strError = strErrorDetail
             ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
             AddButtonInTryTextBox()
         Finally
             lstScripts = New List(Of String)
             For Each clsTempCode In clsRSyntax.lstAfterCodes
-                clsCodeClone = clsTempCode.Clone()
-                strBeforeAfterScript = ""
-                strBeforeAfterTemp = clsCodeClone.ToScript(strBeforeAfterScript)
-                'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
-                If clsCodeClone.bExcludeAssignedFunctionOutput AndAlso clsCodeClone.bIsAssigned Then
+                Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
+                Dim strBeforeAfterScript As String = ""
+                Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
+                'Sometimes the output of the R-command we deal with should not be part of the script... 
+                If clsCodeClone.bExcludeAssignedFunctionOutput Then
                     lstScripts.Add(strBeforeAfterScript)
                 Else
                     lstScripts.Add(strBeforeAfterScript & strBeforeAfterTemp)
                 End If
             Next
             If lstScripts.Count > 0 Then
-                strTempScript = String.Join(vbNewLine, lstScripts)
-                frmMain.clsRLink.RunInternalScriptGetOutput(strTempScript, bSilent:=True)
+                frmMain.clsRLink.RunInternalScriptGetOutput(String.Join(Environment.NewLine, lstScripts), bSilent:=True)
             End If
         End Try
     End Sub
@@ -228,13 +247,40 @@ Public Class ucrTry
                                      End Sub
     End Sub
 
-    Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
-        ResetInputTryMessage()
+    Public Sub AssociatedControls(lstOfAssociatedControls As ucrCore())
+        arrAssociatedControls = lstOfAssociatedControls
+        For Each corecontrol In lstOfAssociatedControls
+            If Not IsNothing(TryCast(corecontrol, ucrInputComboBox)) Then
+                AddHandler TryCast(corecontrol, ucrInputComboBox).SelectionIndexChanged, AddressOf TextSelectionChanged
+            ElseIf Not IsNothing(TryCast(corecontrol, ucrReceiverSingle)) Then
+                AddHandler TryCast(corecontrol, ucrReceiverSingle).SelectionChanged, AddressOf TextSelectionChanged
+            End If
+        Next
     End Sub
-    Private Sub ucrModelPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModelPreview.ControlValueChanged
+
+    Private Function CheckForEmptyInputControl() As Boolean
+        If Not IsNothing(arrAssociatedControls) Then
+            For Each ucrControl As ucrCore In arrAssociatedControls
+                If Not IsNothing(TryCast(ucrControl, ucrReceiverSingle)) Then
+                    If TryCast(ucrControl, ucrReceiverSingle).IsEmpty Then
+                        Return True
+                        Exit For
+                    End If
+                End If
+            Next
+            Return False
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Sub TextSelectionChanged()
         ResetInputTryMessage()
     End Sub
 
+    Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
+        ResetInputTryMessage()
+    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary> Clears the ucrInputTryMessage textbox and sets its colour to white incase the 

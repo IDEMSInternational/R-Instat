@@ -61,6 +61,9 @@ Public Class dlgOptionsByContextBoxplot
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
 
+    Private clsScaleFillViridisFunction As New RFunction
+    Private clsScaleColourViridisFunction As New RFunction
+    Private clsAnnotateFunction As New RFunction
     Private Sub dlgOptionsByContextBoxplot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -270,6 +273,9 @@ Public Class dlgOptionsByContextBoxplot
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
+        clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
+        clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         clsRaesBoxplotFunction = GgplotDefaults.clsAesFunction.Clone()
 
@@ -325,22 +331,6 @@ Public Class dlgOptionsByContextBoxplot
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesGlobalFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorPlot, bReset:=bResetSubdialog)
-        'this is a temporary fix because we have facets done on the main dialog
-        sdgPlots.tbpFacet.Enabled = False
-        sdgPlots.ShowDialog()
-        SetRCodeForControls(False)
-        bResetSubdialog = False
-    End Sub
-
-    Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsBoxplotViolinGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.ShowDialog()
-        SetRCodeForControls(False)
-        bResetBoxLayerSubdialog = False
-    End Sub
-
     Private Sub ucrChkVerticalXTickMarkers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkVerticalXTickMarkers.ControlValueChanged
         If ucrChkVerticalXTickMarkers.Checked Then
             dctThemeFunctions("axis.text.x").AddParameter("angle", "90", iPosition:=0)
@@ -356,16 +346,6 @@ Public Class dlgOptionsByContextBoxplot
             clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
         Else
             clsBaseOperator.RemoveParameterByName("theme")
-        End If
-    End Sub
-
-    Private Sub ucrPnlPlotType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlotType.ControlValueChanged
-        If rdoBoxplot.Checked Then
-            clsBoxplotViolinGeom.SetRCommand("geom_boxplot")
-            cmdBoxPlotOptions.Text = "Boxplot Options"
-        ElseIf rdoViolin.Checked Then
-            clsBoxplotViolinGeom.SetRCommand("geom_violin")
-            cmdBoxPlotOptions.Text = "Violin Plot Options"
         End If
     End Sub
 
@@ -386,6 +366,15 @@ Public Class dlgOptionsByContextBoxplot
             clsBaseOperator.RemoveParameterByName("geom_jitter")
         End If
         cmdPointOptions.Visible = ucrChkIncludePoints.Checked
+    End Sub
+
+    Private Sub ucrPnlPlotType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlotType.ControlValueChanged
+        If rdoBoxplot.Checked Then
+            clsBoxplotViolinGeom.SetRCommand("geom_boxplot")
+        ElseIf rdoViolin.Checked Then
+            clsBoxplotViolinGeom.SetRCommand("geom_violin")
+        End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrChkIncludeHline_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeHline.ControlValueChanged
@@ -503,5 +492,30 @@ Public Class dlgOptionsByContextBoxplot
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrChkIncludePoints.ControlContentsChanged, ucrInputJitter.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged, ucrChkIncludeHline.ControlContentsChanged, ucrInputHlineValue.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
+        sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesGlobalFunction,
+                                 clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
+                                 clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYLabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                                 clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorPlot, bReset:=bResetSubdialog)
+        'this is a temporary fix because we have facets done on the main dialog
+        sdgPlots.tbpFacet.Enabled = False
+        sdgPlots.ShowDialog()
+        SetRCodeForControls(False)
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrReceiverMeasurement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMeasurement.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlPlotType.ControlValueChanged, ucrReceiverContext1.ControlValueChanged
+        cmdOptions.Enabled = True
+        toolStripMenuItemBoxplotOptions.Enabled = rdoBoxplot.Checked
+        toolStripMenuItemViolinplotOptions.Enabled = rdoViolin.Checked
+    End Sub
+
+    Private Sub toolStripMenuItemBoxplotOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBoxplotOptions.Click, toolStripMenuItemViolinplotOptions.Click
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsBoxplotViolinGeom, clsNewGlobalAesFunc:=clsRaesGlobalFunction, clsNewLocalAes:=clsRaesBoxplotFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        SetRCodeForControls(False)
+        bResetBoxLayerSubdialog = False
     End Sub
 End Class

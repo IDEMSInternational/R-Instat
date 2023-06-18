@@ -21,6 +21,10 @@ Imports System.Threading
 Imports instat.Translations
 Imports unvell.ReoGrid.Events
 
+''' <summary>
+''' todo. As of 22/04/2022 this form is not used anywhere in R-instat
+''' Should it be deleted?
+''' </summary>
 Public Class frmEditor
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
@@ -62,7 +66,7 @@ Public Class frmEditor
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
             e.Cancel = True
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 
@@ -326,7 +330,6 @@ Public Class frmEditor
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
             UpdateRFunctionDataFrameParameters()
-            frmMain.strCurrentDataFrame = grdCurrSheet.Name
             frmMain.tstatus.Text = grdCurrSheet.Name
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
@@ -338,6 +341,7 @@ Public Class frmEditor
             frmMain.tstatus.Text = "No data loaded"
             lblRowDisplay.Text = ""
         End If
+        autoTranslate(Me)
     End Sub
 
     'TODO discuss validation for cell editing
@@ -673,12 +677,17 @@ Public Class frmEditor
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
+    Private Function GetFirstSelectedRow() As String
+        Return grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
+    End Function
+
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow())
         dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
-        dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
         dlgAddComment.ShowDialog()
     End Sub
 End Class

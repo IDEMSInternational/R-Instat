@@ -28,13 +28,13 @@ Public Class dlgOptionsByContextFitModel
     Public bDefaultsSet As Boolean = False
 
     Public clsFamilyFunction, clsVisReg As New RFunction
-    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
-    Public clsModelFormula As ROperator
+    Public clsModelFormula As New ROperator
     Private clsOverallInteractions As New ROperator
     Private clsContextsInteractions As New ROperator
     Private clsBlockingContextsAddition As New ROperator
@@ -45,7 +45,6 @@ Public Class dlgOptionsByContextFitModel
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgOptionsByContextFItModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -56,6 +55,7 @@ Public Class dlgOptionsByContextFitModel
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

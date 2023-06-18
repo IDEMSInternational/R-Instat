@@ -68,23 +68,28 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'ucrSelectorOneWayAnovaNonParam
         '
+        Me.ucrSelectorOneWayAnovaNonParam.AutoSize = True
+        Me.ucrSelectorOneWayAnovaNonParam.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneWayAnovaNonParam.bShowHiddenColumns = False
         Me.ucrSelectorOneWayAnovaNonParam.bUseCurrentFilter = True
         Me.ucrSelectorOneWayAnovaNonParam.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorOneWayAnovaNonParam.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneWayAnovaNonParam.Name = "ucrSelectorOneWayAnovaNonParam"
-        Me.ucrSelectorOneWayAnovaNonParam.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneWayAnovaNonParam.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorOneWayAnovaNonParam.TabIndex = 0
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 197)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 5
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(241, 99)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
@@ -97,6 +102,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'ucrReceiverYVariate
         '
+        Me.ucrReceiverYVariate.AutoSize = True
         Me.ucrReceiverYVariate.frmParent = Me
         Me.ucrReceiverYVariate.Location = New System.Drawing.Point(240, 43)
         Me.ucrReceiverYVariate.Margin = New System.Windows.Forms.Padding(0)
@@ -109,8 +115,9 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'dlgNon_ParametricOneWayANOVA
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(423, 255)
         Me.Controls.Add(Me.ucrSelectorOneWayAnovaNonParam)
         Me.Controls.Add(Me.lblFactor)

@@ -232,10 +232,10 @@ Public Class dlgCalculateTreatmentDifferences
     Private Sub ucrInputBreakPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBreakPoints.ControlValueChanged
         If Not ucrInputBreakPoints.IsEmpty() Then
             clsCut.AddParameter("breaks", clsRFunctionParameter:=ucrInputBreakPoints.clsRList, iPosition:=1)
-            lblLabels.Text = "Labels (" & ucrInputBreakPoints.clsRList.clsParameters.Count - 1 & "):"
+            lblLabels.Text = GetTranslation("Labels (") & ucrInputBreakPoints.clsRList.clsParameters.Count - 1 & "):"
         Else
             clsCut.RemoveParameterByName("breaks")
-            lblLabels.Text = "Labels:"
+            lblLabels.Text = GetTranslation("Labels:")
         End If
         CutCheck()
     End Sub

@@ -32,8 +32,8 @@ Imports instat.Translations
 Public Class dlgDuplicateColumns
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDuplicateFunction As RFunction
-    Private clsConvertFunction As RFunction
+    Private clsDuplicateFunction As New RFunction
+    Private clsConvertFunction As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
@@ -84,8 +84,8 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertTo.AddRadioButton(rdoConvertToCharacter, Chr(34) & "character" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoConvertToInteger, Chr(34) & "integer" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoConvertToLogical, Chr(34) & "logical" & Chr(34))
-        ucrPnlConvertTo.AddToLinkedControls(ucrChkConvertSpecifyDecimalsToDisplay, {rdoConvertToFactor, rdoConvertToOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlConvertTo.AddToLinkedControls(ucrPnlConvertFactorToNumericOptions, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoConvertDefault)
+        ucrPnlConvertTo.AddToLinkedControls(ucrPnlConvertFactorToNumericOptions, {rdoConvertToFactor, rdoConvertToOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlConvertTo.AddToLinkedControls(ucrChkConvertSpecifyDecimalsToDisplay, {rdoConvertToNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
 
         ucrPnlConvertFactorToNumericOptions.SetParameter(New RParameter("factor_values", 3))
         ucrPnlConvertFactorToNumericOptions.AddRadioButton(rdoConvertDefault, "NULL")
@@ -95,7 +95,7 @@ Public Class dlgDuplicateColumns
         ucrPnlConvertFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
         ucrChkConvertSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_decimals", 4))
-        ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
+        ucrChkConvertSpecifyDecimalsToDisplay.SetText("Specify Decimals (if Numeric)")
         ucrChkConvertSpecifyDecimalsToDisplay.SetRDefault("FALSE")
         ucrChkConvertSpecifyDecimalsToDisplay.AddToLinkedControls(ucrNudConvertDisplayDecimals, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -218,6 +218,4 @@ Public Class dlgDuplicateColumns
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudConvertDisplayDecimals.ControlContentsChanged, ucrChkConvertSpecifyDecimalsToDisplay.ControlContentsChanged, ucrChkChangeType.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-
 End Class

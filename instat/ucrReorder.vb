@@ -22,6 +22,8 @@ Public Class ucrReorder
     Private strDataType As String = ""
     Public bWithQuotes As Boolean = True
     Public bIsDataType As Boolean = True
+    'Summaries can not be loaded from the data frame, so the updating list of summaries is done in the dialogue
+    Public bDataIsSummaries As Boolean = False
     Public Event SelectedIndexChanged(sender As Object, e As EventArgs)
 
     ''' <summary>
@@ -42,8 +44,8 @@ Public Class ucrReorder
                 lstAvailableData.Columns.Add("Variables")
             Case "factor"
                 lstAvailableData.Columns.Add("Levels")
-            Case "data frame"
-                lstAvailableData.Columns.Add("Data Frame")
+            Case "dataframe"
+                lstAvailableData.Columns.Add("Data Frames")
             Case "metadata"
                 lstAvailableData.Columns.Add("Metadata")
             Case "object"
@@ -172,7 +174,7 @@ Public Class ucrReorder
                     If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType.Contains("factor") Then
                         vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
                     End If
-                Case "data frame"
+                Case "dataframe"
                     vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
                 Case "metadata"
                     If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
@@ -196,7 +198,7 @@ Public Class ucrReorder
                 lstAvailableData.Items.Add(vecNames(i))
             Next
             RaiseEvent OrderChanged()
-        Else
+        ElseIf Not bDataIsSummaries Then
             lstAvailableData.Items.Clear()
         End If
     End Sub
@@ -213,7 +215,7 @@ Public Class ucrReorder
         End If
     End Sub
 
-    Private Sub ucrDataFrameList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameList.DataFrameChanged
+    Private Sub ucrDataFrameList_ControlValueChanged(sender As Object) Handles ucrDataFrameList.ControlValueChanged
         LoadList()
     End Sub
 
@@ -233,6 +235,10 @@ Public Class ucrReorder
     Public Sub Reset()
         lstAvailableData.Items.Clear()
     End Sub
+
+    Public Function Count() As Integer
+        Return lstAvailableData.Items.Count
+    End Function
 
     Protected Overrides Sub SetControlValue()
         Dim lstCurrentVariables As String()

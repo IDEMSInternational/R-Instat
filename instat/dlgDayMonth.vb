@@ -19,7 +19,6 @@ Public Class dlgDayMonth
     Public bFirstLoad As Boolean = True
     Private Sub dlgDayMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -30,6 +29,7 @@ Public Class dlgDayMonth
         End If
 
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("climate_obj$day_month()")

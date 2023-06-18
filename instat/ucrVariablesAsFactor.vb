@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
@@ -130,7 +131,7 @@ Public Class ucrVariablesAsFactor
         'The associated factor receiver will then be set to StackedFactorMode, which makes it disabled with fixed content "variables". This is done in SetMeasureVars() below.
         If bSingleVariable Then
             'need to translate correctly
-            cmdVariables.Text = "Single Variable"
+            cmdVariables.Text = GetTranslation("Single Variable")
             cmdVariables.FlatStyle = FlatStyle.Popup
             ucrSingleVariable.Visible = True
             ucrMultipleVariables.Visible = False
@@ -149,7 +150,7 @@ Public Class ucrVariablesAsFactor
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
             'TODO need to translate correctly
-            cmdVariables.Text = "Multiple Variables"
+            cmdVariables.Text = GetTranslation("Multiple Variables")
             cmdVariables.FlatStyle = FlatStyle.Flat
             If ucrVariableSelector IsNot Nothing Then
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("stack_data", "TRUE")

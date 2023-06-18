@@ -76,7 +76,7 @@ Public Class dlgWindrose
         ucrInputSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputCaption.SetParameter(New RParameter("caption"))
 
-        ucrSaveGraph.SetPrefix("windrose")
+        ucrSaveGraph.SetPrefix("wind_rose")
         ucrSaveGraph.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
@@ -176,4 +176,5 @@ Public Class dlgWindrose
     Private Sub ucrReceiverWindSpeed_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrNudNoOfColumns.ControlContentsChanged, ucrReceiverFacet.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class

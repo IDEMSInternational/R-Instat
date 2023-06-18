@@ -39,224 +39,330 @@ Partial Class ucrScript
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.txtScript = New System.Windows.Forms.TextBox()
         Me.mnuContextScript = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRedo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuUndo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRedo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RToolStripMenuItem = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuRunCurrentLine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClear = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuRunCurrentLineSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRunAllText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOpenScriptasFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLoadScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSaveScript = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdRun = New System.Windows.Forms.Button()
-        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel = New System.Windows.Forms.Panel()
+        Me.cmdSave = New System.Windows.Forms.Button()
+        Me.cmdLoadScript = New System.Windows.Forms.Button()
+        Me.cmdRemoveTab = New System.Windows.Forms.Button()
+        Me.cmdAddTab = New System.Windows.Forms.Button()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdRunAll = New System.Windows.Forms.Button()
+        Me.cmdRunLineSelection = New System.Windows.Forms.Button()
+        Me.TabControl = New System.Windows.Forms.TabControl()
+        Me.toolTipScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
+        Me.Panel.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtScript
-        '
-        Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtScript.ContextMenuStrip = Me.mnuContextScript
-        Me.txtScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtScript.Location = New System.Drawing.Point(3, 56)
-        Me.txtScript.Multiline = True
-        Me.txtScript.Name = "txtScript"
-        Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtScript.ShortcutsEnabled = False
-        Me.txtScript.Size = New System.Drawing.Size(405, 255)
-        Me.txtScript.TabIndex = 0
-        Me.txtScript.WordWrap = False
         '
         'mnuContextScript
         '
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuUndo, Me.mnuRedo, Me.RToolStripMenuItem, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAllText, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.ToolStripSeparator1, Me.mnuHelp})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuRunCurrentLineSelection, Me.mnuRunAllText, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(230, 302)
+        Me.mnuContextScript.Size = New System.Drawing.Size(274, 314)
+        '
+        'mnuUndo
+        '
+        Me.mnuUndo.Name = "mnuUndo"
+        Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.mnuUndo.Size = New System.Drawing.Size(273, 22)
+        Me.mnuUndo.Text = "Undo"
+        '
+        'mnuRedo
+        '
+        Me.mnuRedo.Name = "mnuRedo"
+        Me.mnuRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
+        Me.mnuRedo.Size = New System.Drawing.Size(273, 22)
+        Me.mnuRedo.Text = "Redo"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(270, 6)
         '
         'mnuCut
         '
         Me.mnuCut.Name = "mnuCut"
         Me.mnuCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuCut.Size = New System.Drawing.Size(229, 22)
+        Me.mnuCut.Size = New System.Drawing.Size(273, 22)
         Me.mnuCut.Text = "Cut"
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
         Me.mnuCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuCopy.Size = New System.Drawing.Size(229, 22)
+        Me.mnuCopy.Size = New System.Drawing.Size(273, 22)
         Me.mnuCopy.Text = "Copy"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
         Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuPaste.Size = New System.Drawing.Size(229, 22)
+        Me.mnuPaste.Size = New System.Drawing.Size(273, 22)
         Me.mnuPaste.Text = "Paste"
         '
-        'mnuUndo
+        'mnuSelectAll
         '
-        Me.mnuUndo.Name = "mnuUndo"
-        Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuUndo.Size = New System.Drawing.Size(229, 22)
-        Me.mnuUndo.Text = "Undo"
+        Me.mnuSelectAll.Name = "mnuSelectAll"
+        Me.mnuSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.mnuSelectAll.Size = New System.Drawing.Size(273, 22)
+        Me.mnuSelectAll.Text = "Select All"
         '
-        'mnuRedo
+        'mnuClear
         '
-        Me.mnuRedo.Name = "mnuRedo"
-        Me.mnuRedo.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-            Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuRedo.Size = New System.Drawing.Size(229, 22)
-        Me.mnuRedo.Text = "Redo"
+        Me.mnuClear.Name = "mnuClear"
+        Me.mnuClear.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
+        Me.mnuClear.Size = New System.Drawing.Size(273, 22)
+        Me.mnuClear.Text = "Clear All"
         '
-        'RToolStripMenuItem
+        'ToolStripSeparator2
         '
-        Me.RToolStripMenuItem.Name = "RToolStripMenuItem"
-        Me.RToolStripMenuItem.Size = New System.Drawing.Size(226, 6)
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(270, 6)
         '
-        'mnuRunCurrentLine
+        'mnuRunCurrentLineSelection
         '
-        Me.mnuRunCurrentLine.Name = "mnuRunCurrentLine"
-        Me.mnuRunCurrentLine.Size = New System.Drawing.Size(229, 22)
-        Me.mnuRunCurrentLine.Text = "Run Current Line"
-        '
-        'mnuRunSelectedText
-        '
-        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
-        Me.mnuRunSelectedText.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuRunSelectedText.Size = New System.Drawing.Size(229, 22)
-        Me.mnuRunSelectedText.Text = "Run Selected Text"
+        Me.mnuRunCurrentLineSelection.Name = "mnuRunCurrentLineSelection"
+        Me.mnuRunCurrentLineSelection.Size = New System.Drawing.Size(273, 22)
+        Me.mnuRunCurrentLineSelection.Text = "Run Current Line/Selection Ctrl+Enter"
         '
         'mnuRunAllText
         '
         Me.mnuRunAllText.Name = "mnuRunAllText"
         Me.mnuRunAllText.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.mnuRunAllText.Size = New System.Drawing.Size(229, 22)
+        Me.mnuRunAllText.Size = New System.Drawing.Size(273, 22)
         Me.mnuRunAllText.Text = "Run All Text"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(270, 6)
         '
         'mnuOpenScriptasFile
         '
         Me.mnuOpenScriptasFile.Name = "mnuOpenScriptasFile"
-        Me.mnuOpenScriptasFile.Size = New System.Drawing.Size(229, 22)
+        Me.mnuOpenScriptasFile.Size = New System.Drawing.Size(273, 22)
         Me.mnuOpenScriptasFile.Text = "Open Script as File"
         '
         'mnuLoadScriptFromFile
         '
         Me.mnuLoadScriptFromFile.Name = "mnuLoadScriptFromFile"
-        Me.mnuLoadScriptFromFile.Size = New System.Drawing.Size(229, 22)
+        Me.mnuLoadScriptFromFile.Size = New System.Drawing.Size(273, 22)
         Me.mnuLoadScriptFromFile.Text = "Load Script from File..."
         '
         'mnuSaveScript
         '
         Me.mnuSaveScript.Name = "mnuSaveScript"
-        Me.mnuSaveScript.Size = New System.Drawing.Size(229, 22)
+        Me.mnuSaveScript.Size = New System.Drawing.Size(273, 22)
         Me.mnuSaveScript.Text = "Save Script..."
         '
-        'mnuClearContents
+        'ToolStripSeparator4
         '
-        Me.mnuClearContents.Name = "mnuClearContents"
-        Me.mnuClearContents.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.mnuClearContents.Size = New System.Drawing.Size(229, 22)
-        Me.mnuClearContents.Text = "Clear Script"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(226, 6)
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(270, 6)
         '
         'mnuHelp
         '
         Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(229, 22)
+        Me.mnuHelp.Size = New System.Drawing.Size(273, 22)
         Me.mnuHelp.Text = "Help"
         '
-        'cmdRun
+        'lblHeaderScript
         '
-        Me.cmdRun.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmdRun.Location = New System.Drawing.Point(3, 23)
-        Me.cmdRun.Name = "cmdRun"
-        Me.cmdRun.Size = New System.Drawing.Size(405, 27)
-        Me.cmdRun.TabIndex = 1
-        Me.cmdRun.Text = "Run All"
-        Me.cmdRun.UseVisualStyleBackColor = True
-        '
-        'lblHeader
-        '
-        Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
-        Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(405, 20)
-        Me.lblHeader.TabIndex = 8
-        Me.lblHeader.Text = "Script Window"
-        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblHeaderScript.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.lblHeaderScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeaderScript.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblHeaderScript.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeaderScript.Location = New System.Drawing.Point(3, 0)
+        Me.lblHeaderScript.Name = "lblHeaderScript"
+        Me.lblHeaderScript.Size = New System.Drawing.Size(664, 20)
+        Me.lblHeaderScript.TabIndex = 0
+        Me.lblHeaderScript.Text = "Script Window"
+        Me.lblHeaderScript.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
-        Me.tlpTableContainer.Controls.Add(Me.cmdRun, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
+        Me.tlpTableContainer.Controls.Add(Me.Panel, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.TabControl, 0, 2)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 225.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
+        Me.tlpTableContainer.Size = New System.Drawing.Size(670, 500)
         Me.tlpTableContainer.TabIndex = 9
+        '
+        'Panel
+        '
+        Me.Panel.Controls.Add(Me.cmdSave)
+        Me.Panel.Controls.Add(Me.cmdLoadScript)
+        Me.Panel.Controls.Add(Me.cmdRemoveTab)
+        Me.Panel.Controls.Add(Me.cmdAddTab)
+        Me.Panel.Controls.Add(Me.cmdHelp)
+        Me.Panel.Controls.Add(Me.cmdClear)
+        Me.Panel.Controls.Add(Me.cmdRunAll)
+        Me.Panel.Controls.Add(Me.cmdRunLineSelection)
+        Me.Panel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel.Location = New System.Drawing.Point(3, 23)
+        Me.Panel.Name = "Panel"
+        Me.Panel.Size = New System.Drawing.Size(664, 27)
+        Me.Panel.TabIndex = 10
+        '
+        'cmdSave
+        '
+        Me.cmdSave.Location = New System.Drawing.Point(186, 1)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(55, 23)
+        Me.cmdSave.TabIndex = 3
+        Me.cmdSave.Text = "Save"
+        Me.cmdSave.UseVisualStyleBackColor = True
+        '
+        'cmdLoadScript
+        '
+        Me.cmdLoadScript.Location = New System.Drawing.Point(129, 1)
+        Me.cmdLoadScript.Name = "cmdLoadScript"
+        Me.cmdLoadScript.Size = New System.Drawing.Size(55, 23)
+        Me.cmdLoadScript.TabIndex = 2
+        Me.cmdLoadScript.Text = "Load"
+        Me.cmdLoadScript.UseVisualStyleBackColor = True
+        '
+        'cmdRemoveTab
+        '
+        Me.cmdRemoveTab.Location = New System.Drawing.Point(334, 1)
+        Me.cmdRemoveTab.Name = "cmdRemoveTab"
+        Me.cmdRemoveTab.Size = New System.Drawing.Size(75, 23)
+        Me.cmdRemoveTab.TabIndex = 5
+        Me.cmdRemoveTab.Text = "Remove"
+        Me.cmdRemoveTab.UseVisualStyleBackColor = True
+        '
+        'cmdAddTab
+        '
+        Me.cmdAddTab.Location = New System.Drawing.Point(257, 1)
+        Me.cmdAddTab.Name = "cmdAddTab"
+        Me.cmdAddTab.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAddTab.TabIndex = 4
+        Me.cmdAddTab.Text = "Add"
+        Me.cmdAddTab.UseVisualStyleBackColor = True
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(502, 1)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(55, 23)
+        Me.cmdHelp.TabIndex = 7
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Location = New System.Drawing.Point(411, 1)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(80, 23)
+        Me.cmdClear.TabIndex = 6
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdRunAll
+        '
+        Me.cmdRunAll.Location = New System.Drawing.Point(58, 1)
+        Me.cmdRunAll.Name = "cmdRunAll"
+        Me.cmdRunAll.Size = New System.Drawing.Size(55, 23)
+        Me.cmdRunAll.TabIndex = 1
+        Me.cmdRunAll.Text = "Run All"
+        Me.cmdRunAll.UseVisualStyleBackColor = True
+        '
+        'cmdRunLineSelection
+        '
+        Me.cmdRunLineSelection.Location = New System.Drawing.Point(2, 1)
+        Me.cmdRunLineSelection.Name = "cmdRunLineSelection"
+        Me.cmdRunLineSelection.Size = New System.Drawing.Size(55, 23)
+        Me.cmdRunLineSelection.TabIndex = 0
+        Me.cmdRunLineSelection.Text = "Run"
+        Me.cmdRunLineSelection.UseVisualStyleBackColor = True
+        '
+        'TabControl
+        '
+        Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl.Location = New System.Drawing.Point(3, 56)
+        Me.TabControl.Name = "TabControl"
+        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.Size = New System.Drawing.Size(664, 441)
+        Me.TabControl.TabIndex = 1
         '
         'ucrScript
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrScript"
-        Me.Size = New System.Drawing.Size(411, 314)
+        Me.Size = New System.Drawing.Size(670, 500)
         Me.Tag = "Script_Window"
         Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
-        Me.tlpTableContainer.PerformLayout()
+        Me.Panel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents txtScript As TextBox
-    Friend WithEvents cmdRun As Button
-    Friend WithEvents lblHeader As Label
+    Friend WithEvents lblHeaderScript As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuContextScript As ContextMenuStrip
-    Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
-    Friend WithEvents mnuClearContents As ToolStripMenuItem
+    Friend WithEvents mnuClear As ToolStripMenuItem
     Friend WithEvents mnuOpenScriptasFile As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
     Friend WithEvents mnuLoadScriptFromFile As ToolStripMenuItem
     Friend WithEvents mnuCopy As ToolStripMenuItem
     Friend WithEvents mnuCut As ToolStripMenuItem
     Friend WithEvents mnuPaste As ToolStripMenuItem
-    Friend WithEvents mnuUndo As ToolStripMenuItem
-    Friend WithEvents RToolStripMenuItem As ToolStripSeparator
     Friend WithEvents mnuRunAllText As ToolStripMenuItem
-    Friend WithEvents mnuRunCurrentLine As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents mnuRunCurrentLineSelection As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
+    Friend WithEvents Panel As Panel
+    Friend WithEvents cmdRunAll As Button
+    Friend WithEvents cmdRunLineSelection As Button
+    Friend WithEvents toolTipScriptWindow As ToolTip
+    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdHelp As Button
+    Friend WithEvents mnuUndo As ToolStripMenuItem
     Friend WithEvents mnuRedo As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents mnuSelectAll As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents TabControl As TabControl
+    Friend WithEvents cmdAddTab As Button
+    Friend WithEvents cmdRemoveTab As Button
+    Friend WithEvents cmdSave As Button
+    Friend WithEvents cmdLoadScript As Button
 End Class

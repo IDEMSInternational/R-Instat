@@ -38,7 +38,6 @@ Partial Class dlgDefineRedFlags
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineRedFlags))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverRedFlag = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDefineRedFlag = New instat.ucrSelectorByDataFrameAddRemove()
@@ -47,34 +46,53 @@ Partial Class dlgDefineRedFlags
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 202)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverRedFlag
         '
+        Me.ucrReceiverRedFlag.AutoSize = True
         Me.ucrReceiverRedFlag.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverRedFlag, "ucrReceiverRedFlag")
+        Me.ucrReceiverRedFlag.Location = New System.Drawing.Point(271, 60)
+        Me.ucrReceiverRedFlag.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRedFlag.Name = "ucrReceiverRedFlag"
         Me.ucrReceiverRedFlag.Selector = Nothing
+        Me.ucrReceiverRedFlag.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverRedFlag.strNcFilePath = ""
+        Me.ucrReceiverRedFlag.TabIndex = 2
         Me.ucrReceiverRedFlag.ucrSelector = Nothing
         '
         'ucrSelectorDefineRedFlag
         '
+        Me.ucrSelectorDefineRedFlag.AutoSize = True
+        Me.ucrSelectorDefineRedFlag.bDropUnusedFilterLevels = False
         Me.ucrSelectorDefineRedFlag.bShowHiddenColumns = False
         Me.ucrSelectorDefineRedFlag.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorDefineRedFlag, "ucrSelectorDefineRedFlag")
+        Me.ucrSelectorDefineRedFlag.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDefineRedFlag.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDefineRedFlag.Name = "ucrSelectorDefineRedFlag"
+        Me.ucrSelectorDefineRedFlag.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorDefineRedFlag.TabIndex = 0
         '
         'lblRedFlags
         '
-        resources.ApplyResources(Me.lblRedFlags, "lblRedFlags")
+        Me.lblRedFlags.AutoSize = True
+        Me.lblRedFlags.Location = New System.Drawing.Point(271, 45)
         Me.lblRedFlags.Name = "lblRedFlags"
+        Me.lblRedFlags.Size = New System.Drawing.Size(58, 13)
+        Me.lblRedFlags.TabIndex = 1
+        Me.lblRedFlags.Text = "Red Flags:"
         '
         'dlgDefineRedFlags
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(420, 260)
         Me.Controls.Add(Me.lblRedFlags)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverRedFlag)
@@ -83,6 +101,8 @@ Partial Class dlgDefineRedFlags
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineRedFlags"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Define Red Flags"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

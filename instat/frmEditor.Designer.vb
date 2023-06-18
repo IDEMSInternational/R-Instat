@@ -424,8 +424,8 @@ Partial Class frmEditor
         '
         'frmEditor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(444, 284)
         Me.Controls.Add(Me.lblRowDisplay)
         Me.Controls.Add(Me.grdData)

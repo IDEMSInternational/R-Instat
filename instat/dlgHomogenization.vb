@@ -22,7 +22,6 @@ Public Class dlgHomogenization
     Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction, clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsCompleteCasesFunction As New RFunction
     Private clsBracketsOperator, clsLeftBracketOperator, clsRightBracketOperator As New ROperator
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +33,7 @@ Public Class dlgHomogenization
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -231,7 +231,7 @@ Public Class dlgHomogenization
         clsTapplyFunction.AddParameter("INDEX", clsROperatorParameter:=clsRightBracketOperator, iPosition:=1)
         clsTapplyFunction.AddParameter("FUN", clsROperatorParameter:=clsBracketsOperator, iPosition:=2)
 
-        clsBracketsOperator.SetOperation(")")
+        clsBracketsOperator.SetOperation(") ")
         clsBracketsOperator.AddParameter("left", "function(X", iPosition:=0)
         clsBracketsOperator.bSpaceAroundOperation = False
 

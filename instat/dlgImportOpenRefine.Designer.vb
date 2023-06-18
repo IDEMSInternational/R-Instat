@@ -38,7 +38,6 @@ Partial Class dlgImportOpenRefine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportOpenRefine))
         Me.lblNameDataSet = New System.Windows.Forms.Label()
         Me.ucrInputProjectName = New instat.ucrInputTextBox()
         Me.lblFormat = New System.Windows.Forms.Label()
@@ -51,56 +50,88 @@ Partial Class dlgImportOpenRefine
         '
         'lblNameDataSet
         '
-        resources.ApplyResources(Me.lblNameDataSet, "lblNameDataSet")
+        Me.lblNameDataSet.AutoSize = True
+        Me.lblNameDataSet.Location = New System.Drawing.Point(12, 14)
         Me.lblNameDataSet.Name = "lblNameDataSet"
+        Me.lblNameDataSet.Size = New System.Drawing.Size(74, 13)
+        Me.lblNameDataSet.TabIndex = 0
+        Me.lblNameDataSet.Text = "Project Name:"
         '
         'ucrInputProjectName
         '
         Me.ucrInputProjectName.AddQuotesIfUnrecognised = True
+        Me.ucrInputProjectName.AutoSize = True
         Me.ucrInputProjectName.IsMultiline = False
         Me.ucrInputProjectName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputProjectName, "ucrInputProjectName")
+        Me.ucrInputProjectName.Location = New System.Drawing.Point(93, 12)
         Me.ucrInputProjectName.Name = "ucrInputProjectName"
+        Me.ucrInputProjectName.Size = New System.Drawing.Size(186, 21)
+        Me.ucrInputProjectName.TabIndex = 1
         '
         'lblFormat
         '
-        resources.ApplyResources(Me.lblFormat, "lblFormat")
+        Me.lblFormat.AutoSize = True
+        Me.lblFormat.Location = New System.Drawing.Point(12, 70)
         Me.lblFormat.Name = "lblFormat"
+        Me.lblFormat.Size = New System.Drawing.Size(42, 13)
+        Me.lblFormat.TabIndex = 4
+        Me.lblFormat.Text = "Format:"
         '
         'ucrInputFormat
         '
         Me.ucrInputFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFormat.GetSetSelectedIndex = -1
         Me.ucrInputFormat.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFormat, "ucrInputFormat")
+        Me.ucrInputFormat.Location = New System.Drawing.Point(93, 66)
         Me.ucrInputFormat.Name = "ucrInputFormat"
+        Me.ucrInputFormat.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFormat.TabIndex = 5
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(12, 122)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 7
         '
         'ucrNewDataFrameName
         '
-        resources.ApplyResources(Me.ucrNewDataFrameName, "ucrNewDataFrameName")
+        Me.ucrNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(12, 95)
+        Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(301, 24)
+        Me.ucrNewDataFrameName.TabIndex = 6
         '
         'Label1
         '
-        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 41)
         Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(57, 13)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Project ID:"
         '
         'ucrInputProjectID
         '
         Me.ucrInputProjectID.AddQuotesIfUnrecognised = True
+        Me.ucrInputProjectID.AutoSize = True
         Me.ucrInputProjectID.IsMultiline = False
         Me.ucrInputProjectID.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputProjectID, "ucrInputProjectID")
+        Me.ucrInputProjectID.Location = New System.Drawing.Point(93, 39)
         Me.ucrInputProjectID.Name = "ucrInputProjectID"
+        Me.ucrInputProjectID.Size = New System.Drawing.Size(186, 21)
+        Me.ucrInputProjectID.TabIndex = 3
         '
         'dlgImportOpenRefine
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(419, 178)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrInputProjectID)
         Me.Controls.Add(Me.ucrNewDataFrameName)
@@ -113,6 +144,8 @@ Partial Class dlgImportOpenRefine
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportOpenRefine"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Import from OpenRefine"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

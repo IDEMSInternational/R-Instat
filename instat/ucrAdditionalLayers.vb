@@ -32,7 +32,6 @@ Public Class ucrAdditionalLayers
     'Deciding if the first layer needs to be used for global aesthetics. 
     'Question to be discussed: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
     Public Event NumberOfLayersChanged() 'This event is raised when the number of Layers in the lstLayers on ucrAdditionalLayers has been changed, then handled by testOkEnabled On GeneralForGraphics. 
-
     Public Sub SetRCodeForControl(Optional clsNewBaseOperator As ROperator = Nothing, Optional clsRNewggplotFunc As RFunction = Nothing, Optional clsNewAesFunc As RFunction = Nothing, Optional strNewGlobalDataFrame As String = "", Optional strMainDialogGeomParameterNames() As String = Nothing, Optional bReset As Boolean = False)
         clsBaseOperator = clsNewBaseOperator
         clsGlobalAesFunction = clsNewAesFunc
@@ -50,6 +49,8 @@ Public Class ucrAdditionalLayers
         lstLayers.Clear()
         lstLayerComplete.Clear()
         lstLayers.HideSelection = False
+        'Disabling of the Edit and Delete buttons when the list of Layers is cleared
+        SetEditDeleteEnabled()
 
         ' Sort parameters first so layers are in correct order
         clsBaseOperator.SortParameters()
@@ -117,7 +118,7 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub SetEditDeleteEnabled()
-        If lstLayers.SelectedItems.Count = 1 Then
+        If lstLayers.Items.Count > 0 AndAlso lstLayers.SelectedItems.Count = 1 Then
             cmdDelete.Enabled = True
             cmdEdit.Enabled = True
         Else
@@ -162,7 +163,7 @@ Public Class ucrAdditionalLayers
             End If
 
             'Warning: sdgLayerOptions should not be setup using dlgGeneralForGraphics' fields !! These fields should be given through to the ucrAdditionalLayers (which should have all these) 
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataFrame:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=False, iTabToDisplay:=0)
+            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataFrame:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=True, iTabToDisplay:=0)
             'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
             ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
             sdgLayerOptions.ShowDialog()

@@ -29,6 +29,7 @@ Public Class dlgOptions
     Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
+    Private strCurrLang As String
     'Define the Fonts dialog (only one)
     Dim dlgFont As New FontDialog
     Dim bFirstLoad As Boolean = True
@@ -36,13 +37,14 @@ Public Class dlgOptions
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
         LoadInstatOptions()
         ApplyEnabled(False)
+        autoTranslate(Me)
+        lversion.Text = "v. " + My.Application.Info.Version.ToString
     End Sub
 
     Private Sub InitialiseDialog()
@@ -65,17 +67,13 @@ Public Class dlgOptions
         rtbOutputPreview.Text = strPreviewText
         SetView()
 
-        'temp disabled as not functioning yet
-        rdoSpanish.Enabled = False
-        rdoKiswahili.Enabled = False
-
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkViewStructuredMenu.SetText("Show Structured Menu")
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
         ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
         ucrChkViewOptionsByContextMenu.SetText("Show Options By Context Menu")
-        ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
+        ucrChkShowRCommandsinOutputWindow.SetText("Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
@@ -86,10 +84,18 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
-        ucrPnlLanguage.AddRadioButton(rdoKiswahili)
-        ucrPnlLanguage.AddRadioButton(rdoEnglish)
-        ucrPnlLanguage.AddRadioButton(rdoSpanish)
-        ucrPnlLanguage.AddRadioButton(rdoFrench)
+        ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
+        ucrInputLanguage.SetItems({"English", "French", "Italian", "Kiswahili", "Portuguese", "Russian", "Spanish"})
+        ucrInputLanguage.SetDropDownStyleAsNonEditable()
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
+
+        ucrChkMaxOutputsHeight.Checked = False
+        ucrChkMaxOutputsHeight.SetText("Set maximum height for outputs")
+        ucrNudMaxOutputsHeight.Visible = False
+        ucrNudMaxOutputsHeight.Minimum = 0
+        ucrNudMaxOutputsHeight.Maximum = 1000
+
+        SetVisibleLanButton()
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -120,19 +126,28 @@ Public Class dlgOptions
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
         ucrInputPort.SetName(frmMain.clsInstatOptions.strClimsoftPort)
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
+
+        'maximum heights for output
+        ucrChkMaxOutputsHeight.Checked = frmMain.clsInstatOptions.iMaxOutputsHeight > -1
+        ucrNudMaxOutputsHeight.Value = If(frmMain.clsInstatOptions.iMaxOutputsHeight > -1, frmMain.clsInstatOptions.iMaxOutputsHeight, clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight)
+
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
-                rdoEnglish.Checked = True
+                ucrInputLanguage.SetText("English")
             Case "fr-FR"
-                rdoFrench.Checked = True
+                ucrInputLanguage.SetText("French")
+            Case "it-IT"
+                ucrInputLanguage.SetText("Italian")
             Case "sw-KE"
-                rdoKiswahili.Checked = True
-                ' temp disabled as not functioning
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
-            Case Else
-                rdoEnglish.Checked = True
+                ucrInputLanguage.SetText("Kiswahili")
+            Case "pt-PT"
+                ucrInputLanguage.SetText("Portuguese")
+            Case "ru-RU"
+                ucrInputLanguage.SetText("Russian")
+            Case "es-ES"
+                ucrInputLanguage.SetText("Spanish")
         End Select
+
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
 
         If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
@@ -174,6 +189,9 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
         frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
+        frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaxOutputsHeight.Checked, ucrNudMaxOutputsHeight.Value, -1))
+
+        frmMain.clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub SetView()
@@ -240,30 +258,48 @@ Public Class dlgOptions
         cmdHelp.Enabled = False
         SetInstatOptions()
         autoTranslate(Me)
+        SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
+
+        If strCurrLanguageCulture <> strPrevLanguageCulture Then
+            Dim strCommentNewLanguage = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
+            frmMain.clsInstatOptions.SetComment(strCommentNewLanguage)
+            ucrInputComment.SetName(strCommentNewLanguage)
+        End If
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
+
+        frmMain.SetLanButtonVisibility(frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB")
+
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
         cmdCancel.Enabled = True
         cmdHelp.Enabled = True
         ApplyEnabled(False)
+        SetVisibleLanButton()
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
-        If rdoKiswahili.Checked Then
-            strCurrLanguageCulture = "sw-KE"
-        ElseIf rdoFrench.Checked Then
-            strCurrLanguageCulture = "fr-FR"
-        ElseIf rdoEnglish.Checked Then
-            strCurrLanguageCulture = "en-GB"
-        ElseIf rdoSpanish.Checked Then
-            strCurrLanguageCulture = "es-ES"
-        End If
+    Private Sub ucrInputLanguage_ControlValueChanged() Handles ucrInputLanguage.ControlValueChanged
+        Select Case ucrInputLanguage.GetText
+            Case "English"
+                strCurrLanguageCulture = "en-GB"
+            Case "French"
+                strCurrLanguageCulture = "fr-FR"
+            Case "Italian"
+                strCurrLanguageCulture = "it-IT"
+            Case "Kiswahili"
+                strCurrLanguageCulture = "sw-KE"
+            Case "Portuguese"
+                strCurrLanguageCulture = "pt-PT"
+            Case "Russian"
+                strCurrLanguageCulture = "ru-RU"
+            Case "Spanish"
+                strCurrLanguageCulture = "es-ES"
+        End Select
         ApplyEnabled(True)
     End Sub
 
@@ -271,8 +307,8 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsRLink.fScript
-        dlgFont.Color = frmMain.clsRLink.clrScript
+        dlgFont.Font = fntCommand
+        dlgFont.Color = clrCommand
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetCommandFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)
@@ -297,8 +333,8 @@ Public Class dlgOptions
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsRLink.fComments
-        dlgFont.Color = frmMain.clsRLink.clrComments
+        dlgFont.Font = fntComment
+        dlgFont.Color = clrComment
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetCommentFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)
@@ -311,8 +347,8 @@ Public Class dlgOptions
         'dlgFont.ShowEffects = False
         dlgFont.MaxSize = 50
         dlgFont.MinSize = 8
-        dlgFont.Font = frmMain.clsGrids.fntText
-        dlgFont.Color = frmMain.clsGrids.clrText
+        dlgFont.Font = fntEditor
+        dlgFont.Color = clrEditor
         If dlgFont.ShowDialog = DialogResult.OK Then
             SetEditorFont(dlgFont.Font, dlgFont.Color)
             ApplyEnabled(True)
@@ -321,7 +357,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
@@ -343,6 +379,10 @@ Public Class dlgOptions
         Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "336")
     End Sub
 
+    Private Sub ucrChkMaxOutputHeight_ControlValueChanged() Handles ucrChkMaxOutputsHeight.ControlValueChanged
+        ucrNudMaxOutputsHeight.Visible = ucrChkMaxOutputsHeight.Checked
+    End Sub
+
     Private Sub ucrChkAutoSave_ControlValueChanged() Handles ucrChkAutoSave.ControlValueChanged
         If ucrChkAutoSave.Checked Then
             lblEvery.Visible = True
@@ -360,8 +400,18 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
 
+        Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
+        frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        autoTranslate(Me)
+        SetView()
+        frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
@@ -374,6 +424,22 @@ Public Class dlgOptions
         End If
         ApplyEnabled(True)
     End Sub
+
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged
+
+    End Sub
+
+    Private Sub SetVisibleLanButton()
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdLanguage.Visible = True
+            Else
+                cmdLanguage.Visible = False
+            End If
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+    End Sub
+
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew

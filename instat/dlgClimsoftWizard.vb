@@ -21,7 +21,7 @@ Public Class dlgClimsoftWizard
 
     'used as the R command by the 2 wizard steps. import stations and import elements data
     'this is also be used as the base function
-    Private clsRImportFromClimsoft As RFunction
+    Private clsRImportFromClimsoft As New RFunction
 
     'holds all the wizard steps objects, used in going from step to step
     Private lstWizardSteps As New List(Of IWizStep)
@@ -29,13 +29,13 @@ Public Class dlgClimsoftWizard
     'used to track the position of the selected wizard step
     Private iCurrentStep As Integer = 0
     Private Sub dlgClimsoftWizard_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         lstWizardSteps.Item(iCurrentStep).Show()
+        autoTranslate(Me)
     End Sub
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
         'todo. temporary. the translation is changing the "Finish" to "Ok"
@@ -264,6 +264,7 @@ Public Class dlgClimsoftWizard
                 parentControls.ucrTxtUserName.Enabled = True
                 parentControls.chkRememberCredentials.Enabled = True
             End If
+            autoTranslate(parentControls)
         End Sub
 
         Private Sub Disconnect()
@@ -413,9 +414,10 @@ Public Class dlgClimsoftWizard
 
             'include observation data checkbox
             parentControls.ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
-            parentControls.ucrChkObservationData.Text = "Include Observation Data"
+            parentControls.ucrChkObservationData.SetText("Include Observation Data")
             parentControls.ucrChkObservationData.SetRDefault("FALSE")
 
+            autoTranslate(parentControls)
         End Sub
 
         Public Sub SetDefaults()
@@ -541,21 +543,21 @@ Public Class dlgClimsoftWizard
             parentControls.ucrReceiverMultipleElements.SetLinkedDisplayControl(parentControls.lblElements)
 
             'include flags data checkbox
-            parentControls.ucrChkFlagsData.Text = "Include Observation Flags"
+            parentControls.ucrChkFlagsData.SetText("Include Observation Flags")
             parentControls.ucrChkFlagsData.SetParameter(New RParameter("include_observation_flags", 4))
             parentControls.ucrChkFlagsData.SetRDefault("FALSE")
 
             'include Unstack data checkbox. 
             'parameter attached to it is determined by elements receiver no. of contents. Thus not directly set by the control 
-            parentControls.ucrChkUnstackData.Text = "Unstack Data"
+            parentControls.ucrChkUnstackData.SetText("Unstack Data")
 
             'elements info checkbox
             parentControls.ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
-            parentControls.ucrChkElements.Text = "Include Elements Information"
+            parentControls.ucrChkElements.SetText("Include Elements Information")
             parentControls.ucrChkElements.SetRDefault("FALSE")
 
             'date range checkbox
-            parentControls.ucrChkDateRange.Text = "Select Date Range"
+            parentControls.ucrChkDateRange.SetText("Select Date Range")
 
             'todo. datepicker control have a problem of default date. 
             'its NOT set by default until the user changes select date
@@ -574,6 +576,7 @@ Public Class dlgClimsoftWizard
             parentControls.ucrChkDateRange.AddToLinkedControls({parentControls.ucrDtpStartdate, parentControls.ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
             parentControls.ucrChkDateRange.OnControlValueChanged()
+            autoTranslate(parentControls)
         End Sub
 
         Public Sub SetDefaults()

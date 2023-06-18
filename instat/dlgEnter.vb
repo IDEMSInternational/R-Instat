@@ -23,10 +23,10 @@ Public Class dlgEnter
     Dim clsLength As New RFunction
     Public bFirstLoad As Boolean = True
     Public strOutput As String
+    Private strPackageName As String
     Public clsCommands As New RFunction
 
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,6 +35,7 @@ Public Class dlgEnter
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub SetEntryHistory()
         ucrReceiverForEnterCalculation.AddtoCombobox(ucrReceiverForEnterCalculation.GetText)
@@ -51,10 +52,10 @@ Public Class dlgEnter
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
         ucrSaveEnterResultInto.SetPrefix("enter")
-        ucrSaveEnterResultInto.SetIsComboBox()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
+        ucrSaveEnterResultInto.SetIsComboBox()
+        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
         ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
 
         'Adding tooltips for the buttons
@@ -374,5 +375,12 @@ Public Class dlgEnter
 
     Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("runif( )", 2)
+    End Sub
+
+    Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, ToolStripMenuBase.Click
+        strPackageName = "base"
+        If Not String.IsNullOrEmpty(strPackageName) Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
     End Sub
 End Class

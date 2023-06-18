@@ -27,7 +27,7 @@ Public Class frmCommand
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
             e.Cancel = True
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 
@@ -54,7 +54,7 @@ Public Class frmCommand
     End Sub
 
     Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
-        frmMain.mnuViewOutputWindow.Checked = Me.Visible
+        frmMain.mnuViewOutput.Checked = Me.Visible
     End Sub
 
 End Class

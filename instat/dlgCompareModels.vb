@@ -21,7 +21,6 @@ Public Class dlgCompareModels
     Public clsPlotDist As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub dlgCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -30,6 +29,7 @@ Public Class dlgCompareModels
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         clsPlotDist.SetRCommand("plotDist")

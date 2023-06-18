@@ -131,59 +131,77 @@ Partial Class dlgGeneralANOVA
         '
         'ucrModelName
         '
+        Me.ucrModelName.AutoSize = True
         Me.ucrModelName.Location = New System.Drawing.Point(101, 256)
         Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(149, 23)
+        Me.ucrModelName.Size = New System.Drawing.Size(149, 26)
         Me.ucrModelName.TabIndex = 11
         '
         'ucrReceiverYVariable
         '
+        Me.ucrReceiverYVariable.AutoSize = True
+        Me.ucrReceiverYVariable.frmParent = Me
         Me.ucrReceiverYVariable.Location = New System.Drawing.Point(255, 85)
         Me.ucrReceiverYVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYVariable.Name = "ucrReceiverYVariable"
         Me.ucrReceiverYVariable.Selector = Nothing
         Me.ucrReceiverYVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYVariable.strNcFilePath = ""
         Me.ucrReceiverYVariable.TabIndex = 6
+        Me.ucrReceiverYVariable.ucrSelector = Nothing
         '
         'ucrReceiverTreatmentStructure
         '
+        Me.ucrReceiverTreatmentStructure.AutoSize = True
+        Me.ucrReceiverTreatmentStructure.frmParent = Me
         Me.ucrReceiverTreatmentStructure.Location = New System.Drawing.Point(255, 127)
         Me.ucrReceiverTreatmentStructure.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTreatmentStructure.Name = "ucrReceiverTreatmentStructure"
         Me.ucrReceiverTreatmentStructure.Selector = Nothing
         Me.ucrReceiverTreatmentStructure.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTreatmentStructure.strNcFilePath = ""
         Me.ucrReceiverTreatmentStructure.TabIndex = 5
+        Me.ucrReceiverTreatmentStructure.ucrSelector = Nothing
         '
         'ucrReceiverLayout
         '
+        Me.ucrReceiverLayout.AutoSize = True
+        Me.ucrReceiverLayout.frmParent = Me
         Me.ucrReceiverLayout.Location = New System.Drawing.Point(255, 169)
         Me.ucrReceiverLayout.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLayout.Name = "ucrReceiverLayout"
         Me.ucrReceiverLayout.Selector = Nothing
         Me.ucrReceiverLayout.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLayout.strNcFilePath = ""
         Me.ucrReceiverLayout.TabIndex = 4
+        Me.ucrReceiverLayout.ucrSelector = Nothing
         '
         'ucrSelectorGeneralANOVA
         '
+        Me.ucrSelectorGeneralANOVA.AutoSize = True
+        Me.ucrSelectorGeneralANOVA.bDropUnusedFilterLevels = False
         Me.ucrSelectorGeneralANOVA.bShowHiddenColumns = False
-        Me.ucrSelectorGeneralANOVA.bUseCurrentFilter = False
+        Me.ucrSelectorGeneralANOVA.bUseCurrentFilter = True
         Me.ucrSelectorGeneralANOVA.Location = New System.Drawing.Point(10, 31)
         Me.ucrSelectorGeneralANOVA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGeneralANOVA.Name = "ucrSelectorGeneralANOVA"
-        Me.ucrSelectorGeneralANOVA.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorGeneralANOVA.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorGeneralANOVA.TabIndex = 3
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 286)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'dlgGeneralANOVA
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(419, 340)
         Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.ucrModelName)

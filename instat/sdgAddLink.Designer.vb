@@ -38,25 +38,32 @@ Partial Class sdgAddLink
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgAddLink))
         Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
         '
-        resources.ApplyResources(Me.ucrBaseSubdialogue, "ucrBaseSubdialogue")
+        Me.ucrBaseSubdialogue.AutoSize = True
+        Me.ucrBaseSubdialogue.Location = New System.Drawing.Point(54, 219)
         Me.ucrBaseSubdialogue.Name = "ucrBaseSubdialogue"
+        Me.ucrBaseSubdialogue.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSubdialogue.TabIndex = 0
         '
         'sdgAddLink
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(284, 261)
         Me.Controls.Add(Me.ucrBaseSubdialogue)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgAddLink"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Add Link"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

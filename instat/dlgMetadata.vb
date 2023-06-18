@@ -23,7 +23,6 @@ Public Class dlgMetadata
     Private clsLayerParam As New LayerParameter
 
     Private Sub dlgMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -33,6 +32,7 @@ Public Class dlgMetadata
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()

@@ -22,7 +22,6 @@ Public Class dlgExtremeEvents
 
 
 
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -32,6 +31,7 @@ Public Class dlgExtremeEvents
         TestOKEnabled()
 
 
+        autoTranslate(Me)
     End Sub
     Private Sub TestOKEnabled()
 
@@ -58,7 +58,7 @@ Public Class dlgExtremeEvents
         'TODO fix this to update grids instead of calling FillData which no longer exists
         '        frmMain.FillData("climate_obj$climate_data_objects[[1]]$data")
         '        frmMain.FillData("climate_obj$used_data_objects[[1]]$data")
-        Me.Hide()
+        Me.Close()
     End Sub
     Private Sub SetDefaults()
 

@@ -21,6 +21,7 @@ Public Class dlgRandomSample
     Private clsMultipleSamplesFunction As New RFunction
     Private clsDistributionFunction As New RFunction
     Private clsSetSeed As New RFunction
+    Private clsRNGKindFunction As New RFunction
     Private bReset As Boolean = True
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,21 +32,23 @@ Public Class dlgRandomSample
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctRNGKind As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 376
 
         ucrNudNumberOfSamples.SetParameter(New RParameter("n", 0))
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
 
-        ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrSampleSize.SetDataFrameSelector(ucrDataFrameRandomSamples)
 
-        ucrSelectorRandomSamples.bUseCurrentFilter = False
+        ucrDataFrameRandomSamples.bUseCurrentFilter = False
 
         ucrChkSetSeed.SetText("Set Seed")
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
@@ -55,49 +58,79 @@ Public Class dlgRandomSample
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
-        ucrSaveRandomSamples.SetSaveTypeAsColumn()
-        ucrSaveRandomSamples.SetDataFrameSelector(ucrSelectorRandomSamples)
-        ucrSaveRandomSamples.SetIsComboBox()
+        ucrChkRngKind.SetText("RNG Kind")
+        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(True, {"RNGkind"})
+        ucrChkRngKind.AddRSyntaxContainsFunctionNamesCondition(False, {"RNGkind"}, False)
+        ucrChkRngKind.AddToLinkedControls(ucrInputRngKind, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Default")
+
+        ucrInputRngKind.SetParameter(New RParameter("kind", 0))
+        dctRNGKind.Add("Default", Chr(34) & "default" & Chr(34))
+        dctRNGKind.Add("Mersenne-Twister", Chr(34) & "Mersenne-Twister" & Chr(34))
+        dctRNGKind.Add("Wichmann-Hill", Chr(34) & "Wichmann-Hill" & Chr(34))
+        dctRNGKind.Add("Marsaglia-Multicarry", Chr(34) & "Marsaglia-Multicarry" & Chr(34))
+        dctRNGKind.Add("Super-Duper", Chr(34) & "Super-Duper" & Chr(34))
+        dctRNGKind.Add("Knuth-TAOCP-2002", Chr(34) & "Knuth-TAOCP-2002" & Chr(34))
+        dctRNGKind.Add("Knuth-TAOCP", Chr(34) & "Knuth-TAOCP" & Chr(34))
+        dctRNGKind.Add("L'Ecuyer-CMRG", Chr(34) & "L'Ecuyer-CMRG" & Chr(34))
+        ucrInputRngKind.SetItems(dctRNGKind)
+        ucrInputRngKind.SetDropDownStyleAsNonEditable()
+
+        ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
+
+        ucrSaveRandomSample.SetSaveTypeAsColumn()
+        ucrSaveRandomSample.SetDataFrameSelector(ucrDataFrameRandomSamples)
+        ucrSaveRandomSample.SetIsComboBox()
     End Sub
 
     Private Sub SetDefaults()
         clsSetSeed = New RFunction
         clsMultipleSamplesFunction = New RFunction
         clsDistributionFunction = New RFunction
+        clsRNGKindFunction = New RFunction
+
         ucrBase.clsRsyntax.ClearCodes()
-        ucrSelectorRandomSamples.Reset()
-        ucrSaveRandomSamples.Reset()
+        ucrDataFrameRandomSamples.Reset()
+        ucrSaveRandomSample.Reset()
         SetNewColumName()
 
         clsSetSeed.SetRCommand("set.seed")
+
+        clsRNGKindFunction.SetRCommand("RNGkind")
 
         ucrDistWithParameters.SetRDistributions()
         ucrDistWithParameters.SetParameters()
 
         clsMultipleSamplesFunction.SetRCommand("replicate")
-        clsMultipleSamplesFunction.AddParameter("n", 1)
+        clsMultipleSamplesFunction.AddParameter("n", 1, iPosition:=0)
 
         clsDistributionFunction = ucrDistWithParameters.clsCurrRFunction
 
-        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction)
+        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
+
+        clsMultipleSamplesFunction.SetAssignToColumnObject(ucrSaveRandomSample.GetText(),
+                                                    ucrSaveRandomSample.GetText,
+                                                    ucrDataFrameRandomSamples.cboAvailableDataFrames.Text,
+                                                    bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
         SetDataFrameAndDistributionParameters()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
+        ucrSaveRandomSample.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
+        ucrInputRngKind.SetRCode(clsRNGKindFunction, bReset)
+        ucrChkRngKind.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If ((ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "") AndAlso
-           ((Not ucrChkSetSeed.Checked) OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) _
-            AndAlso ucrSaveRandomSamples.IsComplete) Then
+           ((Not ucrChkSetSeed.Checked) OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) AndAlso
+           ((Not ucrChkRngKind.Checked) OrElse (ucrChkRngKind.Checked AndAlso ucrInputRngKind.GetText <> "")) AndAlso
+             ucrSaveRandomSample.IsComplete) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -106,33 +139,33 @@ Public Class dlgRandomSample
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(True)
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
     Private Sub SetNewColumName()
         If ucrNudNumberOfSamples.Value = 1 Then
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
-            ucrSaveRandomSamples.SetLabelText("New Column Name:")
-            If Not ucrSaveRandomSamples.bUserTyped Then
-                ucrSaveRandomSamples.SetPrefix("random_sample")
+            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSaveRandomSample.SetLabelText("New Column Name:")
+            If Not ucrSaveRandomSample.bUserTyped Then
+                ucrSaveRandomSample.SetPrefix("random_sample")
             End If
         Else
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-            ucrSaveRandomSamples.SetLabelText("Prefix for New Columns:")
-            If Not ucrSaveRandomSamples.bUserTyped Then
-                ucrSaveRandomSamples.SetPrefix("")
-                ucrSaveRandomSamples.SetName("random_sample")
+            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSaveRandomSample.SetLabelText("Prefix for New Columns:")
+            If Not ucrSaveRandomSample.bUserTyped Then
+                ucrSaveRandomSample.SetPrefix("")
+                ucrSaveRandomSample.SetName("random_sample")
             End If
         End If
     End Sub
 
     Private Sub SetDataFrameAndDistributionParameters()
         If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
-            clsDistributionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("nn", ucrDataFrameRandomSamples.iDataFrameLength)
         Else
             clsDistributionFunction.RemoveParameterByName("nn")
-            clsDistributionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("n", ucrDataFrameRandomSamples.iDataFrameLength)
         End If
     End Sub
 
@@ -145,11 +178,13 @@ Public Class dlgRandomSample
         SetNewColumName()
     End Sub
 
-    Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged
+    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrDataFrameRandomSamples.ControlContentsChanged,
+        ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged,
+        ucrChkRngKind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
+    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameRandomSamples.ControlValueChanged
         SetDataFrameAndDistributionParameters()
     End Sub
 
@@ -159,9 +194,17 @@ Public Class dlgRandomSample
 
     Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetSeed.ControlValueChanged
         If ucrChkSetSeed.Checked Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeed, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeed, iPosition:=1)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeed)
+        End If
+    End Sub
+
+    Private Sub ucrChkRngKind_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRngKind.ControlValueChanged
+        If ucrChkRngKind.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsRNGKindFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRNGKindFunction)
         End If
     End Sub
 End Class

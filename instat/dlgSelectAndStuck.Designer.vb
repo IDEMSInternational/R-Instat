@@ -62,28 +62,35 @@ Partial Class dlgSelectAndStuck
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(45, 272)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(413, 61)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrAddRemove1
         '
+        Me.ucrAddRemove1.AutoSize = True
         Me.ucrAddRemove1.bShowHiddenColumns = False
         Me.ucrAddRemove1.Location = New System.Drawing.Point(10, 12)
         Me.ucrAddRemove1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove1.Name = "ucrAddRemove1"
-        Me.ucrAddRemove1.Size = New System.Drawing.Size(203, 109)
+        Me.ucrAddRemove1.Size = New System.Drawing.Size(213, 133)
         Me.ucrAddRemove1.TabIndex = 1
         '
         'ucrReceiverSelectAndStuck
         '
+        Me.ucrReceiverSelectAndStuck.AutoSize = True
+        Me.ucrReceiverSelectAndStuck.frmParent = Me
         Me.ucrReceiverSelectAndStuck.Location = New System.Drawing.Point(219, 12)
         Me.ucrReceiverSelectAndStuck.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectAndStuck.Name = "ucrReceiverSelectAndStuck"
         Me.ucrReceiverSelectAndStuck.Selector = Nothing
         Me.ucrReceiverSelectAndStuck.Size = New System.Drawing.Size(121, 109)
+        Me.ucrReceiverSelectAndStuck.strNcFilePath = ""
         Me.ucrReceiverSelectAndStuck.TabIndex = 2
+        Me.ucrReceiverSelectAndStuck.ucrSelector = Nothing
         '
         'grpAppend
         '
@@ -237,8 +244,9 @@ Partial Class dlgSelectAndStuck
         '
         'dlgSelectAndStuck
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(500, 329)
         Me.Controls.Add(Me.lblCarryInto)
         Me.Controls.Add(Me.lblCarry)

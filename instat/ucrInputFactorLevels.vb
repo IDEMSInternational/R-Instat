@@ -20,6 +20,13 @@ Public Class ucrInputFactorLevels
     Private WithEvents ucrReceiverFactor As ucrReceiverSingle
     Private clsLevels As New RFunction
     Public strQuotes As String = Chr(34)
+    ''' <summary> Should the first level be selected by default? </summary>
+    Public bFirstLevelDefault As Boolean = False
+
+    ''' <summary>
+    ''' holds last selected level displayed by the control
+    ''' </summary>
+    Private strLastSelectedLevel As String = ""
 
     Public Sub New()
 
@@ -37,12 +44,28 @@ Public Class ucrInputFactorLevels
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        SelectFactorLevel()
+    End Sub
+
+    Private Sub ucrInputFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles Me.ControlValueChanged
+        If Not String.IsNullOrEmpty(GetText) Then
+            strLastSelectedLevel = GetText()
+        End If
+    End Sub
+
+    Public Overrides Sub Reset()
+        MyBase.Reset()
+        strLastSelectedLevel = ""
+        SelectFactorLevel()
+    End Sub
+
+    Private Sub SelectFactorLevel()
         Dim expTemp As SymbolicExpression
         Dim strLevels() As String
         Dim lstLevels As New List(Of String)
         Dim clsFactor As RFunction
 
-        If ucrReceiverFactor.IsEmpty Then
+        If ucrReceiverFactor Is Nothing OrElse ucrReceiverFactor.IsEmpty Then
             SetItems()
             Enabled = False
         Else
@@ -63,8 +86,17 @@ Public Class ucrInputFactorLevels
                 For i As Integer = 0 To strLevels.Count - 1
                     lstLevels.Add(strQuotes & strLevels(i) & strQuotes)
                 Next
+
                 SetItems(lstLevels.ToArray())
+
+                'restore last selected level if its still contained in the new list of retrieved levels
+                If strLastSelectedLevel <> "" AndAlso lstLevels.Contains(strLastSelectedLevel) Then
+                    SetName(strLastSelectedLevel)
+                ElseIf bFirstLevelDefault AndAlso lstLevels.Count > 0 Then
+                    GetSetSelectedIndex = 0
+                End If
             End If
         End If
     End Sub
+
 End Class

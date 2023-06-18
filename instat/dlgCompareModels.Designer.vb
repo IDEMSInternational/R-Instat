@@ -47,6 +47,10 @@ Partial Class dlgCompareModels
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.cmdAddNewDistributions = New System.Windows.Forms.Button()
         Me.grpPlotOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoDensity = New System.Windows.Forms.RadioButton()
+        Me.rdoqq = New System.Windows.Forms.RadioButton()
+        Me.rdoCDF = New System.Windows.Forms.RadioButton()
+        Me.rdoHistogram = New System.Windows.Forms.RadioButton()
         Me.grpChangeLimits = New System.Windows.Forms.GroupBox()
         Me.nudYlimMax = New System.Windows.Forms.NumericUpDown()
         Me.nudXlimMax = New System.Windows.Forms.NumericUpDown()
@@ -54,10 +58,6 @@ Partial Class dlgCompareModels
         Me.nudXlimMin = New System.Windows.Forms.NumericUpDown()
         Me.lblYlim = New System.Windows.Forms.Label()
         Me.lblXlim = New System.Windows.Forms.Label()
-        Me.rdoHistogram = New System.Windows.Forms.RadioButton()
-        Me.rdoCDF = New System.Windows.Forms.RadioButton()
-        Me.rdoqq = New System.Windows.Forms.RadioButton()
-        Me.rdoDensity = New System.Windows.Forms.RadioButton()
         Me.grpPlotGraphs.SuspendLayout()
         CType(Me.nudNumberofColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpPlotOptions.SuspendLayout()
@@ -70,16 +70,19 @@ Partial Class dlgCompareModels
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(12, 320)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 0
         '
         'ucrDistributionForCompareModels
         '
+        Me.ucrDistributionForCompareModels.AutoSize = True
         Me.ucrDistributionForCompareModels.Location = New System.Drawing.Point(13, 13)
         Me.ucrDistributionForCompareModels.Name = "ucrDistributionForCompareModels"
-        Me.ucrDistributionForCompareModels.Size = New System.Drawing.Size(221, 194)
+        Me.ucrDistributionForCompareModels.Size = New System.Drawing.Size(1037, 194)
         Me.ucrDistributionForCompareModels.TabIndex = 1
         '
         'grpPlotGraphs
@@ -154,6 +157,50 @@ Partial Class dlgCompareModels
         Me.grpPlotOptions.TabIndex = 4
         Me.grpPlotOptions.TabStop = False
         '
+        'rdoDensity
+        '
+        Me.rdoDensity.AutoSize = True
+        Me.rdoDensity.Location = New System.Drawing.Point(6, 10)
+        Me.rdoDensity.Name = "rdoDensity"
+        Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
+        Me.rdoDensity.TabIndex = 6
+        Me.rdoDensity.TabStop = True
+        Me.rdoDensity.Text = "Density"
+        Me.rdoDensity.UseVisualStyleBackColor = True
+        '
+        'rdoqq
+        '
+        Me.rdoqq.AutoSize = True
+        Me.rdoqq.Location = New System.Drawing.Point(6, 79)
+        Me.rdoqq.Name = "rdoqq"
+        Me.rdoqq.Size = New System.Drawing.Size(37, 17)
+        Me.rdoqq.TabIndex = 5
+        Me.rdoqq.TabStop = True
+        Me.rdoqq.Text = "qq"
+        Me.rdoqq.UseVisualStyleBackColor = True
+        '
+        'rdoCDF
+        '
+        Me.rdoCDF.AutoSize = True
+        Me.rdoCDF.Location = New System.Drawing.Point(6, 56)
+        Me.rdoCDF.Name = "rdoCDF"
+        Me.rdoCDF.Size = New System.Drawing.Size(46, 17)
+        Me.rdoCDF.TabIndex = 4
+        Me.rdoCDF.TabStop = True
+        Me.rdoCDF.Text = "CDF"
+        Me.rdoCDF.UseVisualStyleBackColor = True
+        '
+        'rdoHistogram
+        '
+        Me.rdoHistogram.AutoSize = True
+        Me.rdoHistogram.Location = New System.Drawing.Point(6, 33)
+        Me.rdoHistogram.Name = "rdoHistogram"
+        Me.rdoHistogram.Size = New System.Drawing.Size(72, 17)
+        Me.rdoHistogram.TabIndex = 3
+        Me.rdoHistogram.TabStop = True
+        Me.rdoHistogram.Text = "Histogram"
+        Me.rdoHistogram.UseVisualStyleBackColor = True
+        '
         'grpChangeLimits
         '
         Me.grpChangeLimits.Controls.Add(Me.nudYlimMax)
@@ -215,54 +262,10 @@ Partial Class dlgCompareModels
         Me.lblXlim.TabIndex = 0
         Me.lblXlim.Text = "Xlim"
         '
-        'rdoHistogram
-        '
-        Me.rdoHistogram.AutoSize = True
-        Me.rdoHistogram.Location = New System.Drawing.Point(6, 33)
-        Me.rdoHistogram.Name = "rdoHistogram"
-        Me.rdoHistogram.Size = New System.Drawing.Size(72, 17)
-        Me.rdoHistogram.TabIndex = 3
-        Me.rdoHistogram.TabStop = True
-        Me.rdoHistogram.Text = "Histogram"
-        Me.rdoHistogram.UseVisualStyleBackColor = True
-        '
-        'rdoCDF
-        '
-        Me.rdoCDF.AutoSize = True
-        Me.rdoCDF.Location = New System.Drawing.Point(6, 56)
-        Me.rdoCDF.Name = "rdoCDF"
-        Me.rdoCDF.Size = New System.Drawing.Size(46, 17)
-        Me.rdoCDF.TabIndex = 4
-        Me.rdoCDF.TabStop = True
-        Me.rdoCDF.Text = "CDF"
-        Me.rdoCDF.UseVisualStyleBackColor = True
-        '
-        'rdoqq
-        '
-        Me.rdoqq.AutoSize = True
-        Me.rdoqq.Location = New System.Drawing.Point(6, 79)
-        Me.rdoqq.Name = "rdoqq"
-        Me.rdoqq.Size = New System.Drawing.Size(37, 17)
-        Me.rdoqq.TabIndex = 5
-        Me.rdoqq.TabStop = True
-        Me.rdoqq.Text = "qq"
-        Me.rdoqq.UseVisualStyleBackColor = True
-        '
-        'rdoDensity
-        '
-        Me.rdoDensity.AutoSize = True
-        Me.rdoDensity.Location = New System.Drawing.Point(6, 10)
-        Me.rdoDensity.Name = "rdoDensity"
-        Me.rdoDensity.Size = New System.Drawing.Size(60, 17)
-        Me.rdoDensity.TabIndex = 6
-        Me.rdoDensity.TabStop = True
-        Me.rdoDensity.Text = "Density"
-        Me.rdoDensity.UseVisualStyleBackColor = True
-        '
         'dlgCompareModels
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(436, 384)
         Me.Controls.Add(Me.grpChangeLimits)
         Me.Controls.Add(Me.grpPlotOptions)
@@ -288,6 +291,7 @@ Partial Class dlgCompareModels
         CType(Me.nudYlimMin, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudXlimMin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

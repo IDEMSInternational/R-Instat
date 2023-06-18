@@ -26,30 +26,18 @@ Public Class ucrSelectorByDataFrame
         End If
     End Sub
 
-    Private Sub ucrAvailableDataFrames_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableDataFrames.DataFrameChanged
+    Private Sub ucrAvailableDataFrames_ControlValueChanged(sender As Object) Handles ucrAvailableDataFrames.ControlValueChanged
         strCurrentDataFrame = ucrAvailableDataFrames.cboAvailableDataFrames.Text
         If CurrentReceiver Is Nothing OrElse CurrentReceiver.bAttachedToPrimaryDataFrame Then
             strPrimaryDataFrame = strCurrentDataFrame
         End If
         LoadList()
-        If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
-            OnDataFrameChanged()
-        End If
+        OnDataFrameChanged()
     End Sub
 
     Public Overrides Sub Reset()
         ucrAvailableDataFrames.Reset()
         MyBase.Reset()
-    End Sub
-
-    Private Sub ucrSelectorByDataFrame_DataFrameChanged() Handles Me.DataFrameChanged
-        LoadList()
-    End Sub
-
-    Public Overrides Sub SetIncludeOverall(bInclude As Boolean)
-        MyBase.SetIncludeOverall(bInclude)
-        ucrAvailableDataFrames.SetIncludeOverall(bIncludeOverall)
-        LoadList()
     End Sub
 
     Public Overrides Sub SetDataframe(strDataframe As String, Optional bEnableDataframe As Boolean = True, Optional bSilent As Boolean = False)
@@ -167,4 +155,12 @@ Public Class ucrSelectorByDataFrame
     Public Overrides Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
         ucrAvailableDataFrames.SetPrimaryDataFrameOptions(strNewPrimaryDataFrame:=strNewPrimaryDataFrame, bNewOnlyLinkedToPrimaryDataFrames:=bNewOnlyLinkedToPrimaryDataFrames, bNewIncludePrimaryDataFrameAsLinked:=bNewIncludePrimaryDataFrameAsLinked)
     End Sub
+
+    Public Function IsEmpty() As Boolean
+        If ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class

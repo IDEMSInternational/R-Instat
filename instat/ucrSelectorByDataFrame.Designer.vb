@@ -38,29 +38,37 @@ Partial Class ucrSelectorByDataFrame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelectorByDataFrame))
         Me.ucrAvailableDataFrames = New instat.ucrDataFrame()
         Me.SuspendLayout()
         '
         'lstAvailableVariable
         '
-        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
+        Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 50)
+        Me.lstAvailableVariable.Margin = New System.Windows.Forms.Padding(0)
         '
         'ucrAvailableDataFrames
         '
+        Me.ucrAvailableDataFrames.AutoSize = True
+        Me.ucrAvailableDataFrames.bDropUnusedFilterLevels = False
         Me.ucrAvailableDataFrames.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrAvailableDataFrames, "ucrAvailableDataFrames")
+        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(0, 0)
+        Me.ucrAvailableDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"
+        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(151, 50)
+        Me.ucrAvailableDataFrames.TabIndex = 84
         '
         'ucrSelectorByDataFrame
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.ucrAvailableDataFrames)
         Me.Name = "ucrSelectorByDataFrame"
+        Me.Size = New System.Drawing.Size(151, 180)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

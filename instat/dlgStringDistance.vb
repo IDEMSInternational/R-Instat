@@ -78,11 +78,11 @@ Public Class dlgStringDistance
         ucrInputComboBoxMethod.SetItems(dctMethod)
         ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
 
-        ucrSaveStringDistance.SetPrefix("Dist")
+        ucrSaveStringDistance.SetPrefix("dist")
         ucrSaveStringDistance.SetSaveTypeAsColumn()
         ucrSaveStringDistance.SetDataFrameSelector(ucrSelectorStringDistance.ucrAvailableDataFrames)
         ucrSaveStringDistance.SetIsComboBox()
-        ucrSaveStringDistance.SetLabelText("Save Result:")
+        ucrSaveStringDistance.SetLabelText("New Column:")
         ucrSaveStringDistance.setLinkedReceiver(ucrReceiverStringDistance)
     End Sub
 

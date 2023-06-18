@@ -35,21 +35,30 @@ Partial Class UcrPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UcrPanel))
         Me.pnlRadios = New System.Windows.Forms.Panel()
         Me.SuspendLayout()
         '
         'pnlRadios
         '
-        resources.ApplyResources(Me.pnlRadios, "pnlRadios")
+        Me.pnlRadios.AutoSize = True
+        Me.pnlRadios.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnlRadios.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlRadios.Location = New System.Drawing.Point(0, 0)
         Me.pnlRadios.Name = "pnlRadios"
+        Me.pnlRadios.Size = New System.Drawing.Size(187, 20)
+        Me.pnlRadios.TabIndex = 0
         '
         'UcrPanel
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = False
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Controls.Add(Me.pnlRadios)
         Me.Name = "UcrPanel"
+        Me.Size = New System.Drawing.Size(187, 20)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

@@ -38,7 +38,6 @@ Partial Class ucrAdditionalLayers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrAdditionalLayers))
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
@@ -48,45 +47,63 @@ Partial Class ucrAdditionalLayers
         '
         'cmdDelete
         '
-        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
+        Me.cmdDelete.Location = New System.Drawing.Point(134, 121)
         Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDelete.TabIndex = 6
+        Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdEdit
         '
-        resources.ApplyResources(Me.cmdEdit, "cmdEdit")
+        Me.cmdEdit.Location = New System.Drawing.Point(134, 92)
         Me.cmdEdit.Name = "cmdEdit"
+        Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdEdit.TabIndex = 7
+        Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
         'cmdAdd
         '
-        resources.ApplyResources(Me.cmdAdd, "cmdAdd")
+        Me.cmdAdd.Location = New System.Drawing.Point(134, 63)
         Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAdd.TabIndex = 8
+        Me.cmdAdd.Text = "Add"
         Me.cmdAdd.UseVisualStyleBackColor = True
         '
         'lblLayers
         '
-        resources.ApplyResources(Me.lblLayers, "lblLayers")
+        Me.lblLayers.AutoSize = True
+        Me.lblLayers.Location = New System.Drawing.Point(4, 13)
         Me.lblLayers.Name = "lblLayers"
+        Me.lblLayers.Size = New System.Drawing.Size(41, 13)
+        Me.lblLayers.TabIndex = 5
+        Me.lblLayers.Text = "Layers:"
         '
         'lstLayers
         '
         Me.lstLayers.FullRowSelect = True
-        resources.ApplyResources(Me.lstLayers, "lstLayers")
+        Me.lstLayers.HideSelection = False
+        Me.lstLayers.Location = New System.Drawing.Point(3, 28)
         Me.lstLayers.Name = "lstLayers"
+        Me.lstLayers.Size = New System.Drawing.Size(125, 149)
+        Me.lstLayers.TabIndex = 4
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
         '
         'ucrAdditionalLayers
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdEdit)
         Me.Controls.Add(Me.cmdAdd)
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
         Me.Name = "ucrAdditionalLayers"
+        Me.Size = New System.Drawing.Size(213, 180)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -120,6 +120,7 @@ Partial Class dlgVariableSets
         'ucrInputSetNewName
         '
         Me.ucrInputSetNewName.AddQuotesIfUnrecognised = True
+        Me.ucrInputSetNewName.AutoSize = True
         Me.ucrInputSetNewName.IsMultiline = False
         Me.ucrInputSetNewName.IsReadOnly = False
         Me.ucrInputSetNewName.Location = New System.Drawing.Point(246, 234)
@@ -130,6 +131,7 @@ Partial Class dlgVariableSets
         '
         'ucrReceiverSelectedSet
         '
+        Me.ucrReceiverSelectedSet.AutoSize = True
         Me.ucrReceiverSelectedSet.frmParent = Me
         Me.ucrReceiverSelectedSet.Location = New System.Drawing.Point(244, 62)
         Me.ucrReceiverSelectedSet.Margin = New System.Windows.Forms.Padding(0)
@@ -142,6 +144,7 @@ Partial Class dlgVariableSets
         '
         'ucrReceiverMultipleVariables
         '
+        Me.ucrReceiverMultipleVariables.AutoSize = True
         Me.ucrReceiverMultipleVariables.frmParent = Me
         Me.ucrReceiverMultipleVariables.Location = New System.Drawing.Point(244, 110)
         Me.ucrReceiverMultipleVariables.Margin = New System.Windows.Forms.Padding(0)
@@ -154,24 +157,29 @@ Partial Class dlgVariableSets
         '
         'ucrSelectorVariableSets
         '
+        Me.ucrSelectorVariableSets.AutoSize = True
+        Me.ucrSelectorVariableSets.bDropUnusedFilterLevels = False
         Me.ucrSelectorVariableSets.bShowHiddenColumns = False
         Me.ucrSelectorVariableSets.bUseCurrentFilter = True
         Me.ucrSelectorVariableSets.Location = New System.Drawing.Point(10, 47)
         Me.ucrSelectorVariableSets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVariableSets.Name = "ucrSelectorVariableSets"
-        Me.ucrSelectorVariableSets.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVariableSets.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorVariableSets.TabIndex = 13
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 259)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 16
         '
         'ucrPnlOptions
         '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlOptions.Location = New System.Drawing.Point(21, 3)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
@@ -180,8 +188,9 @@ Partial Class dlgVariableSets
         '
         'dlgVariableSets
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(424, 315)
         Me.Controls.Add(Me.lblSelectedSet)
         Me.Controls.Add(Me.ucrInputSetNewName)
@@ -196,7 +205,7 @@ Partial Class dlgVariableSets
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgVariableSets"

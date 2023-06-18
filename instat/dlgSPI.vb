@@ -44,6 +44,7 @@ Public Class dlgSPI
 
         ucrSelectorVariable.SetParameterIsrfunction()
         ucrSelectorVariable.SetParameter(New RParameter("data", 0))
+        ucrSelectorVariable.bUseCurrentFilter = False
 
         'receivers
         ucrReceiverStation.SetParameterIsString()
@@ -51,24 +52,28 @@ Public Class dlgSPI
         ucrReceiverStation.Selector = ucrSelectorVariable
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.bUseFilteredData = False
 
         ucrReceiverYear.SetParameterIsString()
         ucrReceiverYear.SetParameter(New RParameter("year", 2))
         ucrReceiverYear.Selector = ucrSelectorVariable
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.bUseFilteredData = False
 
         ucrReceiverMonth.SetParameterIsString()
         ucrReceiverMonth.SetParameter(New RParameter("month", 3))
         ucrReceiverMonth.Selector = ucrSelectorVariable
         ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
+        ucrReceiverMonth.bUseFilteredData = False
 
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.SetParameter(New RParameter("element", 4))
         ucrReceiverElement.SetClimaticType("rain")
         ucrReceiverElement.Selector = ucrSelectorVariable
         ucrReceiverElement.bAutoFill = True
+        ucrReceiverElement.bUseFilteredData = False
 
         'setting up Nuds
         ucrNudTimeScale.SetParameter(New RParameter("scale", 1))

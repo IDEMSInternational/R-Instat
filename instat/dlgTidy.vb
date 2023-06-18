@@ -1,5 +1,4 @@
-﻿
-Imports instat
+﻿Imports instat
 Imports instat.Translations
 Public Class dlgTidy
     Public bfirstload As Boolean = True
@@ -9,7 +8,6 @@ Public Class dlgTidy
     Private clsTidy, clsMap_df As New RFunction
 
     Private Sub dlgTidy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bfirstload Then
             InitialiseDialog()
             bfirstload = False
@@ -20,6 +18,7 @@ Public Class dlgTidy
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

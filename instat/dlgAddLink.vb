@@ -20,10 +20,9 @@ Imports RDotNet
 Public Class dlgAddLink
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsAddLink As RFunction
+    Private clsAddLink As New RFunction
 
     Private Sub dlgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -36,10 +35,12 @@ Public Class dlgAddLink
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 506
+        ucrBase.clsRsyntax.iCallType = 2
         cmdSpecifyLink.Enabled = False ' temporarily disabled
 
         ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
@@ -48,10 +49,16 @@ Public Class dlgAddLink
         ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 1))
         ucrDataSelectorTo.SetParameterIsString()
 
-        ucrInputLinkName.SetParameter(New RParameter("link_name", 4))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
         ucrInputSelectedKey.IsReadOnly = True
+
+        ucrSaveLink.SetParameter(New RParameter("link_name", 4))
+        ucrSaveLink.SetSaveTypeAsLink()
+        ucrSaveLink.SetDataFrameSelector(ucrDataSelectorFrom)
+        ucrSaveLink.SetLabelText("Link Name:")
+        ucrSaveLink.SetIsTextBox()
+        ucrSaveLink.SetPrefix("link")
     End Sub
 
     Private Sub SetDefaults()
@@ -59,7 +66,7 @@ Public Class dlgAddLink
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
-        ucrInputLinkName.SetName("")
+        ucrSaveLink.Reset()
 
         UpdateKeys()
 
@@ -74,7 +81,8 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
+        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso
+             ucrSaveLink.IsComplete AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -104,7 +112,7 @@ Public Class dlgAddLink
         If ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" Then
             lvwLinkViewBox.Items.Clear()
 
-            lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & " Keys:"
+            lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & GetTranslation(" Keys:")
             clsGetKeys.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
             clsGetKeys.AddParameter("data_name", Chr(34) & ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & Chr(34))
             lstKeys = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeys.ToScript).AsList
@@ -165,7 +173,7 @@ Public Class dlgAddLink
         UpdateKeys()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrDataSelectorTo.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrDataSelectorTo.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

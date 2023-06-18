@@ -38,7 +38,6 @@ Partial Class dlgExportToOpenRefine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportToOpenRefine))
         Me.lblNameDataSet = New System.Windows.Forms.Label()
         Me.ucrDataFrameOpenRefine = New instat.ucrDataFrame()
         Me.ucrChkOpenBrowser = New instat.ucrCheck()
@@ -48,39 +47,59 @@ Partial Class dlgExportToOpenRefine
         '
         'lblNameDataSet
         '
-        resources.ApplyResources(Me.lblNameDataSet, "lblNameDataSet")
+        Me.lblNameDataSet.AutoSize = True
+        Me.lblNameDataSet.Location = New System.Drawing.Point(10, 62)
         Me.lblNameDataSet.Name = "lblNameDataSet"
+        Me.lblNameDataSet.Size = New System.Drawing.Size(78, 13)
+        Me.lblNameDataSet.TabIndex = 1
+        Me.lblNameDataSet.Text = "Dataset Name:"
         '
         'ucrDataFrameOpenRefine
         '
+        Me.ucrDataFrameOpenRefine.AutoSize = True
         Me.ucrDataFrameOpenRefine.bDropUnusedFilterLevels = False
         Me.ucrDataFrameOpenRefine.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrameOpenRefine, "ucrDataFrameOpenRefine")
+        Me.ucrDataFrameOpenRefine.Location = New System.Drawing.Point(10, 10)
+        Me.ucrDataFrameOpenRefine.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameOpenRefine.Name = "ucrDataFrameOpenRefine"
+        Me.ucrDataFrameOpenRefine.Size = New System.Drawing.Size(153, 43)
+        Me.ucrDataFrameOpenRefine.TabIndex = 0
         '
         'ucrChkOpenBrowser
         '
+        Me.ucrChkOpenBrowser.AutoSize = True
         Me.ucrChkOpenBrowser.Checked = False
-        resources.ApplyResources(Me.ucrChkOpenBrowser, "ucrChkOpenBrowser")
+        Me.ucrChkOpenBrowser.Location = New System.Drawing.Point(10, 86)
         Me.ucrChkOpenBrowser.Name = "ucrChkOpenBrowser"
+        Me.ucrChkOpenBrowser.Size = New System.Drawing.Size(318, 23)
+        Me.ucrChkOpenBrowser.TabIndex = 3
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(6, 112)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'ucrInputDatasetName
         '
         Me.ucrInputDatasetName.AddQuotesIfUnrecognised = True
+        Me.ucrInputDatasetName.AutoSize = True
         Me.ucrInputDatasetName.IsMultiline = False
         Me.ucrInputDatasetName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDatasetName, "ucrInputDatasetName")
+        Me.ucrInputDatasetName.Location = New System.Drawing.Point(169, 59)
         Me.ucrInputDatasetName.Name = "ucrInputDatasetName"
+        Me.ucrInputDatasetName.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputDatasetName.TabIndex = 2
         '
         'dlgExportToOpenRefine
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(415, 170)
         Me.Controls.Add(Me.ucrDataFrameOpenRefine)
         Me.Controls.Add(Me.ucrChkOpenBrowser)
         Me.Controls.Add(Me.lblNameDataSet)
@@ -90,6 +109,8 @@ Partial Class dlgExportToOpenRefine
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportToOpenRefine"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Export to OpenRefine"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

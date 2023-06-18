@@ -38,7 +38,6 @@ Partial Class dlgJitter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgJitter))
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.grpMaximumAndMinimumValues = New System.Windows.Forms.GroupBox()
         Me.ucrInputMaximum = New instat.ucrInputTextBox()
@@ -56,8 +55,12 @@ Partial Class dlgJitter
         '
         'lblSelectedVariable
         '
-        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
+        Me.lblSelectedVariable.AutoSize = True
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(242, 35)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
+        Me.lblSelectedVariable.TabIndex = 1
+        Me.lblSelectedVariable.Text = "Selected Variable:"
         '
         'grpMaximumAndMinimumValues
         '
@@ -67,83 +70,124 @@ Partial Class dlgJitter
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.rdoMinimumAndMaximum)
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.rdoMaximumDistanceFromZero)
         Me.grpMaximumAndMinimumValues.Controls.Add(Me.ucrPnlDistance)
-        resources.ApplyResources(Me.grpMaximumAndMinimumValues, "grpMaximumAndMinimumValues")
+        Me.grpMaximumAndMinimumValues.Location = New System.Drawing.Point(241, 73)
         Me.grpMaximumAndMinimumValues.Name = "grpMaximumAndMinimumValues"
+        Me.grpMaximumAndMinimumValues.Size = New System.Drawing.Size(167, 140)
+        Me.grpMaximumAndMinimumValues.TabIndex = 3
         Me.grpMaximumAndMinimumValues.TabStop = False
         '
         'ucrInputMaximum
         '
         Me.ucrInputMaximum.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaximum.AutoSize = True
         Me.ucrInputMaximum.IsMultiline = False
         Me.ucrInputMaximum.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaximum, "ucrInputMaximum")
+        Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 112)
         Me.ucrInputMaximum.Name = "ucrInputMaximum"
+        Me.ucrInputMaximum.Size = New System.Drawing.Size(59, 21)
+        Me.ucrInputMaximum.TabIndex = 4
         '
         'ucrInputMinimum
         '
         Me.ucrInputMinimum.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinimum.AutoSize = True
         Me.ucrInputMinimum.IsMultiline = False
         Me.ucrInputMinimum.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinimum, "ucrInputMinimum")
+        Me.ucrInputMinimum.Location = New System.Drawing.Point(7, 86)
         Me.ucrInputMinimum.Name = "ucrInputMinimum"
+        Me.ucrInputMinimum.Size = New System.Drawing.Size(59, 21)
+        Me.ucrInputMinimum.TabIndex = 3
         '
         'ucrInputMaximumDistanceFromZero
         '
         Me.ucrInputMaximumDistanceFromZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaximumDistanceFromZero.AutoSize = True
         Me.ucrInputMaximumDistanceFromZero.IsMultiline = False
         Me.ucrInputMaximumDistanceFromZero.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaximumDistanceFromZero, "ucrInputMaximumDistanceFromZero")
+        Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 35)
         Me.ucrInputMaximumDistanceFromZero.Name = "ucrInputMaximumDistanceFromZero"
+        Me.ucrInputMaximumDistanceFromZero.Size = New System.Drawing.Size(59, 21)
+        Me.ucrInputMaximumDistanceFromZero.TabIndex = 1
         '
         'rdoMinimumAndMaximum
         '
-        resources.ApplyResources(Me.rdoMinimumAndMaximum, "rdoMinimumAndMaximum")
+        Me.rdoMinimumAndMaximum.AutoSize = True
+        Me.rdoMinimumAndMaximum.Location = New System.Drawing.Point(7, 63)
         Me.rdoMinimumAndMaximum.Name = "rdoMinimumAndMaximum"
+        Me.rdoMinimumAndMaximum.Size = New System.Drawing.Size(134, 17)
+        Me.rdoMinimumAndMaximum.TabIndex = 2
         Me.rdoMinimumAndMaximum.TabStop = True
+        Me.rdoMinimumAndMaximum.Text = "Minimum and Maximum"
         Me.rdoMinimumAndMaximum.UseVisualStyleBackColor = True
         '
         'rdoMaximumDistanceFromZero
         '
-        resources.ApplyResources(Me.rdoMaximumDistanceFromZero, "rdoMaximumDistanceFromZero")
+        Me.rdoMaximumDistanceFromZero.AutoSize = True
+        Me.rdoMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 11)
         Me.rdoMaximumDistanceFromZero.Name = "rdoMaximumDistanceFromZero"
+        Me.rdoMaximumDistanceFromZero.Size = New System.Drawing.Size(146, 17)
+        Me.rdoMaximumDistanceFromZero.TabIndex = 0
         Me.rdoMaximumDistanceFromZero.TabStop = True
+        Me.rdoMaximumDistanceFromZero.Text = "Maximum Distance from 0"
         Me.rdoMaximumDistanceFromZero.UseVisualStyleBackColor = True
         '
         'ucrPnlDistance
         '
-        resources.ApplyResources(Me.ucrPnlDistance, "ucrPnlDistance")
+        Me.ucrPnlDistance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlDistance.Location = New System.Drawing.Point(4, 11)
         Me.ucrPnlDistance.Name = "ucrPnlDistance"
+        Me.ucrPnlDistance.Size = New System.Drawing.Size(157, 122)
+        Me.ucrPnlDistance.TabIndex = 7
         '
         'ucrReceiverJitter
         '
+        Me.ucrReceiverJitter.AutoSize = True
         Me.ucrReceiverJitter.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverJitter, "ucrReceiverJitter")
+        Me.ucrReceiverJitter.Location = New System.Drawing.Point(241, 50)
+        Me.ucrReceiverJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverJitter.Name = "ucrReceiverJitter"
         Me.ucrReceiverJitter.Selector = Nothing
+        Me.ucrReceiverJitter.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverJitter.strNcFilePath = ""
+        Me.ucrReceiverJitter.TabIndex = 2
         Me.ucrReceiverJitter.ucrSelector = Nothing
         '
         'ucrSelectorForJitter
         '
+        Me.ucrSelectorForJitter.AutoSize = True
+        Me.ucrSelectorForJitter.bDropUnusedFilterLevels = False
         Me.ucrSelectorForJitter.bShowHiddenColumns = False
         Me.ucrSelectorForJitter.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForJitter, "ucrSelectorForJitter")
+        Me.ucrSelectorForJitter.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForJitter.Name = "ucrSelectorForJitter"
+        Me.ucrSelectorForJitter.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForJitter.TabIndex = 0
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 246)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 6
         '
         'ucrInputNewColName
         '
-        resources.ApplyResources(Me.ucrInputNewColName, "ucrInputNewColName")
+        Me.ucrInputNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputNewColName.Location = New System.Drawing.Point(0, 0)
+        Me.ucrInputNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputNewColName.Name = "ucrInputNewColName"
+        Me.ucrInputNewColName.Size = New System.Drawing.Size(423, 24)
+        Me.ucrInputNewColName.TabIndex = 0
         '
         'dlgJitter
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(419, 302)
         Me.Controls.Add(Me.ucrInputNewColName)
         Me.Controls.Add(Me.grpMaximumAndMinimumValues)
         Me.Controls.Add(Me.lblSelectedVariable)
@@ -154,7 +198,9 @@ Partial Class dlgJitter
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgJitter"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Jitter"
+        Me.Text = "Jitter"
         Me.grpMaximumAndMinimumValues.ResumeLayout(False)
         Me.grpMaximumAndMinimumValues.PerformLayout()
         Me.ResumeLayout(False)

@@ -22,7 +22,6 @@ Public Class dlgViewAndRemoveLinks
     Private clsDeleteLinks As New RFunction
 
     Private Sub dlgViewAndRemoveLinks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -35,6 +34,7 @@ Public Class dlgViewAndRemoveLinks
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

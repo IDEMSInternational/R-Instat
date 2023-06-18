@@ -42,23 +42,23 @@ Partial Class sdgWindrose
         Me.ucrButtonsSdgWindrose = New instat.ucrButtonsSubdialogue()
         Me.tbpColours = New System.Windows.Forms.TabPage()
         Me.grpColours = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlColourPalette = New instat.UcrPanel()
-        Me.rdoDiverging = New System.Windows.Forms.RadioButton()
-        Me.rdoSequential = New System.Windows.Forms.RadioButton()
-        Me.rdoQualitative = New System.Windows.Forms.RadioButton()
-        Me.ucrInputPalettes = New instat.ucrInputComboBox()
         Me.lblPalette = New System.Windows.Forms.Label()
+        Me.ucrInputPalettes = New instat.ucrInputComboBox()
+        Me.rdoQualitative = New System.Windows.Forms.RadioButton()
+        Me.rdoSequential = New System.Windows.Forms.RadioButton()
+        Me.rdoDiverging = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColourPalette = New instat.UcrPanel()
         Me.tbpOptions = New System.Windows.Forms.TabPage()
-        Me.lblNoOfSpeeds = New System.Windows.Forms.Label()
-        Me.lblNoofDirections = New System.Windows.Forms.Label()
-        Me.lblCalmWind = New System.Windows.Forms.Label()
-        Me.ucrNudCalmWind = New instat.ucrNud()
-        Me.lblSpeedCuts = New System.Windows.Forms.Label()
-        Me.ucrNudNoOfSpeeds = New instat.ucrNud()
-        Me.lblTheme = New System.Windows.Forms.Label()
-        Me.ucrNudNoOfDirections = New instat.ucrNud()
-        Me.ucrInputTheme = New instat.ucrInputComboBox()
         Me.ucrInputSpeedCuts = New instat.ucrInputTextBox()
+        Me.ucrInputTheme = New instat.ucrInputComboBox()
+        Me.ucrNudNoOfDirections = New instat.ucrNud()
+        Me.lblTheme = New System.Windows.Forms.Label()
+        Me.ucrNudNoOfSpeeds = New instat.ucrNud()
+        Me.lblSpeedCuts = New System.Windows.Forms.Label()
+        Me.ucrNudCalmWind = New instat.ucrNud()
+        Me.lblCalmWind = New System.Windows.Forms.Label()
+        Me.lblNoofDirections = New System.Windows.Forms.Label()
+        Me.lblNoOfSpeeds = New System.Windows.Forms.Label()
         Me.tbpWindRoseOptions = New System.Windows.Forms.TabControl()
         Me.tbpColours.SuspendLayout()
         Me.grpColours.SuspendLayout()
@@ -90,32 +90,18 @@ Partial Class sdgWindrose
         Me.grpColours.Name = "grpColours"
         Me.grpColours.TabStop = False
         '
-        'ucrPnlColourPalette
+        'lblPalette
         '
-        resources.ApplyResources(Me.ucrPnlColourPalette, "ucrPnlColourPalette")
-        Me.ucrPnlColourPalette.Name = "ucrPnlColourPalette"
+        resources.ApplyResources(Me.lblPalette, "lblPalette")
+        Me.lblPalette.Name = "lblPalette"
         '
-        'rdoDiverging
+        'ucrInputPalettes
         '
-        resources.ApplyResources(Me.rdoDiverging, "rdoDiverging")
-        Me.rdoDiverging.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoDiverging.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDiverging.FlatAppearance.BorderSize = 2
-        Me.rdoDiverging.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDiverging.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoDiverging.Name = "rdoDiverging"
-        Me.rdoDiverging.UseVisualStyleBackColor = True
-        '
-        'rdoSequential
-        '
-        resources.ApplyResources(Me.rdoSequential, "rdoSequential")
-        Me.rdoSequential.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSequential.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSequential.FlatAppearance.BorderSize = 2
-        Me.rdoSequential.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSequential.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSequential.Name = "rdoSequential"
-        Me.rdoSequential.UseVisualStyleBackColor = True
+        Me.ucrInputPalettes.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputPalettes, "ucrInputPalettes")
+        Me.ucrInputPalettes.GetSetSelectedIndex = -1
+        Me.ucrInputPalettes.IsReadOnly = False
+        Me.ucrInputPalettes.Name = "ucrInputPalettes"
         '
         'rdoQualitative
         '
@@ -128,17 +114,32 @@ Partial Class sdgWindrose
         Me.rdoQualitative.Name = "rdoQualitative"
         Me.rdoQualitative.UseVisualStyleBackColor = True
         '
-        'ucrInputPalettes
+        'rdoSequential
         '
-        Me.ucrInputPalettes.AddQuotesIfUnrecognised = True
-        Me.ucrInputPalettes.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPalettes, "ucrInputPalettes")
-        Me.ucrInputPalettes.Name = "ucrInputPalettes"
+        resources.ApplyResources(Me.rdoSequential, "rdoSequential")
+        Me.rdoSequential.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSequential.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSequential.FlatAppearance.BorderSize = 2
+        Me.rdoSequential.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSequential.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoSequential.Name = "rdoSequential"
+        Me.rdoSequential.UseVisualStyleBackColor = True
         '
-        'lblPalette
+        'rdoDiverging
         '
-        resources.ApplyResources(Me.lblPalette, "lblPalette")
-        Me.lblPalette.Name = "lblPalette"
+        resources.ApplyResources(Me.rdoDiverging, "rdoDiverging")
+        Me.rdoDiverging.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoDiverging.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDiverging.FlatAppearance.BorderSize = 2
+        Me.rdoDiverging.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDiverging.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoDiverging.Name = "rdoDiverging"
+        Me.rdoDiverging.UseVisualStyleBackColor = True
+        '
+        'ucrPnlColourPalette
+        '
+        resources.ApplyResources(Me.ucrPnlColourPalette, "ucrPnlColourPalette")
+        Me.ucrPnlColourPalette.Name = "ucrPnlColourPalette"
         '
         'tbpOptions
         '
@@ -156,75 +157,76 @@ Partial Class sdgWindrose
         Me.tbpOptions.Name = "tbpOptions"
         Me.tbpOptions.UseVisualStyleBackColor = True
         '
-        'lblNoOfSpeeds
+        'ucrInputSpeedCuts
         '
-        resources.ApplyResources(Me.lblNoOfSpeeds, "lblNoOfSpeeds")
-        Me.lblNoOfSpeeds.Name = "lblNoOfSpeeds"
+        Me.ucrInputSpeedCuts.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputSpeedCuts, "ucrInputSpeedCuts")
+        Me.ucrInputSpeedCuts.IsMultiline = False
+        Me.ucrInputSpeedCuts.IsReadOnly = False
+        Me.ucrInputSpeedCuts.Name = "ucrInputSpeedCuts"
         '
-        'lblNoofDirections
+        'ucrInputTheme
         '
-        resources.ApplyResources(Me.lblNoofDirections, "lblNoofDirections")
-        Me.lblNoofDirections.Name = "lblNoofDirections"
+        Me.ucrInputTheme.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputTheme, "ucrInputTheme")
+        Me.ucrInputTheme.GetSetSelectedIndex = -1
+        Me.ucrInputTheme.IsReadOnly = False
+        Me.ucrInputTheme.Name = "ucrInputTheme"
         '
-        'lblCalmWind
+        'ucrNudNoOfDirections
         '
-        resources.ApplyResources(Me.lblCalmWind, "lblCalmWind")
-        Me.lblCalmWind.Name = "lblCalmWind"
-        '
-        'ucrNudCalmWind
-        '
-        Me.ucrNudCalmWind.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCalmWind.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCalmWind, "ucrNudCalmWind")
-        Me.ucrNudCalmWind.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCalmWind.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCalmWind.Name = "ucrNudCalmWind"
-        Me.ucrNudCalmWind.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSpeedCuts
-        '
-        resources.ApplyResources(Me.lblSpeedCuts, "lblSpeedCuts")
-        Me.lblSpeedCuts.Name = "lblSpeedCuts"
-        '
-        'ucrNudNoOfSpeeds
-        '
-        Me.ucrNudNoOfSpeeds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoOfSpeeds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNoOfSpeeds, "ucrNudNoOfSpeeds")
-        Me.ucrNudNoOfSpeeds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNoOfSpeeds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoOfSpeeds.Name = "ucrNudNoOfSpeeds"
-        Me.ucrNudNoOfSpeeds.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNoOfDirections, "ucrNudNoOfDirections")
+        Me.ucrNudNoOfDirections.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoOfDirections.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNoOfDirections.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNoOfDirections.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoOfDirections.Name = "ucrNudNoOfDirections"
+        Me.ucrNudNoOfDirections.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblTheme
         '
         resources.ApplyResources(Me.lblTheme, "lblTheme")
         Me.lblTheme.Name = "lblTheme"
         '
-        'ucrNudNoOfDirections
+        'ucrNudNoOfSpeeds
         '
-        Me.ucrNudNoOfDirections.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoOfDirections.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNoOfDirections, "ucrNudNoOfDirections")
-        Me.ucrNudNoOfDirections.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNoOfDirections.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNoOfDirections.Name = "ucrNudNoOfDirections"
-        Me.ucrNudNoOfDirections.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNoOfSpeeds, "ucrNudNoOfSpeeds")
+        Me.ucrNudNoOfSpeeds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoOfSpeeds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNoOfSpeeds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNoOfSpeeds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNoOfSpeeds.Name = "ucrNudNoOfSpeeds"
+        Me.ucrNudNoOfSpeeds.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputTheme
+        'lblSpeedCuts
         '
-        Me.ucrInputTheme.AddQuotesIfUnrecognised = True
-        Me.ucrInputTheme.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTheme, "ucrInputTheme")
-        Me.ucrInputTheme.Name = "ucrInputTheme"
+        resources.ApplyResources(Me.lblSpeedCuts, "lblSpeedCuts")
+        Me.lblSpeedCuts.Name = "lblSpeedCuts"
         '
-        'ucrInputSpeedCuts
+        'ucrNudCalmWind
         '
-        Me.ucrInputSpeedCuts.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpeedCuts.IsMultiline = False
-        Me.ucrInputSpeedCuts.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSpeedCuts, "ucrInputSpeedCuts")
-        Me.ucrInputSpeedCuts.Name = "ucrInputSpeedCuts"
+        resources.ApplyResources(Me.ucrNudCalmWind, "ucrNudCalmWind")
+        Me.ucrNudCalmWind.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCalmWind.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCalmWind.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCalmWind.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCalmWind.Name = "ucrNudCalmWind"
+        Me.ucrNudCalmWind.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblCalmWind
+        '
+        resources.ApplyResources(Me.lblCalmWind, "lblCalmWind")
+        Me.lblCalmWind.Name = "lblCalmWind"
+        '
+        'lblNoofDirections
+        '
+        resources.ApplyResources(Me.lblNoofDirections, "lblNoofDirections")
+        Me.lblNoofDirections.Name = "lblNoofDirections"
+        '
+        'lblNoOfSpeeds
+        '
+        resources.ApplyResources(Me.lblNoOfSpeeds, "lblNoOfSpeeds")
+        Me.lblNoOfSpeeds.Name = "lblNoOfSpeeds"
         '
         'tbpWindRoseOptions
         '
@@ -237,7 +239,7 @@ Partial Class sdgWindrose
         'sdgWindrose
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.tbpWindRoseOptions)
         Me.Controls.Add(Me.ucrButtonsSdgWindrose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
@@ -251,6 +253,7 @@ Partial Class sdgWindrose
         Me.tbpOptions.PerformLayout()
         Me.tbpWindRoseOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

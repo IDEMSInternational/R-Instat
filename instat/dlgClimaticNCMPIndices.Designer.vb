@@ -39,10 +39,10 @@ Partial Class dlgClimaticNCMPIndices
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudNYBR = New instat.ucrNud()
         Me.lblNYBR = New System.Windows.Forms.Label()
+        Me.lblNYER = New System.Windows.Forms.Label()
+        Me.ucrNudNYER = New instat.ucrNud()
         Me.ucrNudQCPR = New instat.ucrNud()
         Me.lblQCPR = New System.Windows.Forms.Label()
-        Me.ucrNudNYER = New instat.ucrNud()
-        Me.lblNYER = New System.Windows.Forms.Label()
         Me.ucrSaveIndices = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
@@ -50,6 +50,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrReceiverTmin
         '
+        Me.ucrReceiverTmin.AutoSize = True
         Me.ucrReceiverTmin.frmParent = Me
         Me.ucrReceiverTmin.Location = New System.Drawing.Point(267, 166)
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
@@ -62,6 +63,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrReceiverTmax
         '
+        Me.ucrReceiverTmax.AutoSize = True
         Me.ucrReceiverTmax.frmParent = Me
         Me.ucrReceiverTmax.Location = New System.Drawing.Point(267, 210)
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
@@ -84,6 +86,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrReceiverRain
         '
+        Me.ucrReceiverRain.AutoSize = True
         Me.ucrReceiverRain.frmParent = Me
         Me.ucrReceiverRain.Location = New System.Drawing.Point(267, 122)
         Me.ucrReceiverRain.Margin = New System.Windows.Forms.Padding(0)
@@ -106,6 +109,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrReceiverDate
         '
+        Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
         Me.ucrReceiverDate.Location = New System.Drawing.Point(267, 78)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
@@ -138,6 +142,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrReceiverStation
         '
+        Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
         Me.ucrReceiverStation.Location = New System.Drawing.Point(267, 34)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
@@ -150,13 +155,14 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrSelectorIndices
         '
+        Me.ucrSelectorIndices.AutoSize = True
         Me.ucrSelectorIndices.bDropUnusedFilterLevels = False
         Me.ucrSelectorIndices.bShowHiddenColumns = False
         Me.ucrSelectorIndices.bUseCurrentFilter = True
         Me.ucrSelectorIndices.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorIndices.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIndices.Name = "ucrSelectorIndices"
-        Me.ucrSelectorIndices.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorIndices.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorIndices.TabIndex = 0
         '
         'lblStation
@@ -172,9 +178,9 @@ Partial Class dlgClimaticNCMPIndices
         'cmdStationMetadata
         '
         Me.cmdStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(267, 245)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(248, 239)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(155, 23)
         Me.cmdStationMetadata.TabIndex = 11
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
@@ -191,6 +197,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrNudQCT
         '
+        Me.ucrNudQCT.AutoSize = True
         Me.ucrNudQCT.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQCT.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudQCT.Location = New System.Drawing.Point(191, 22)
@@ -220,6 +227,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrNudNYBR
         '
+        Me.ucrNudNYBR.AutoSize = True
         Me.ucrNudNYBR.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYBR.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNYBR.Location = New System.Drawing.Point(191, 74)
@@ -240,8 +248,32 @@ Partial Class dlgClimaticNCMPIndices
         Me.lblNYBR.TabIndex = 4
         Me.lblNYBR.Text = "Start Year for Climatological Period:"
         '
+        'lblNYER
+        '
+        Me.lblNYER.AutoSize = True
+        Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNYER.Location = New System.Drawing.Point(4, 102)
+        Me.lblNYER.Name = "lblNYER"
+        Me.lblNYER.Size = New System.Drawing.Size(169, 13)
+        Me.lblNYER.TabIndex = 14
+        Me.lblNYER.Text = "End Year for Climatological Period:"
+        '
+        'ucrNudNYER
+        '
+        Me.ucrNudNYER.AutoSize = True
+        Me.ucrNudNYER.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYER.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNYER.Location = New System.Drawing.Point(191, 100)
+        Me.ucrNudNYER.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNYER.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYER.Name = "ucrNudNYER"
+        Me.ucrNudNYER.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNYER.TabIndex = 15
+        Me.ucrNudNYER.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudQCPR
         '
+        Me.ucrNudQCPR.AutoSize = True
         Me.ucrNudQCPR.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQCPR.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudQCPR.Location = New System.Drawing.Point(191, 48)
@@ -262,38 +294,19 @@ Partial Class dlgClimaticNCMPIndices
         Me.lblQCPR.TabIndex = 2
         Me.lblQCPR.Text = "Quality Control Level for Rain:"
         '
-        'ucrNudNYER
-        '
-        Me.ucrNudNYER.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYER.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYER.Location = New System.Drawing.Point(191, 100)
-        Me.ucrNudNYER.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYER.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYER.Name = "ucrNudNYER"
-        Me.ucrNudNYER.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYER.TabIndex = 15
-        Me.ucrNudNYER.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblNYER
-        '
-        Me.lblNYER.AutoSize = True
-        Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYER.Location = New System.Drawing.Point(4, 102)
-        Me.lblNYER.Name = "lblNYER"
-        Me.lblNYER.Size = New System.Drawing.Size(169, 13)
-        Me.lblNYER.TabIndex = 14
-        Me.lblNYER.Text = "End Year for Climatological Period:"
-        '
         'ucrSaveIndices
         '
+        Me.ucrSaveIndices.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveIndices.Location = New System.Drawing.Point(10, 276)
         Me.ucrSaveIndices.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveIndices.Name = "ucrSaveIndices"
-        Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveIndices.Size = New System.Drawing.Size(377, 24)
         Me.ucrSaveIndices.TabIndex = 1
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 306)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
@@ -301,8 +314,9 @@ Partial Class dlgClimaticNCMPIndices
         '
         'dlgClimaticNCMPIndices
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 365)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdStationMetadata)

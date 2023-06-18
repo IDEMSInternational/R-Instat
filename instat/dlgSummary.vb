@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgSummary
     Public bFirstLoad As Boolean = True
     Private Sub dlgSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -27,6 +26,7 @@ Public Class dlgSummary
         End If
         TestOKEnabled()
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

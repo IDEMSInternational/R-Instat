@@ -38,48 +38,100 @@ Partial Class ucrSelectorByDataFrameAddRemove
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrSelectorByDataFrameAddRemove))
-        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
         Me.btnDataOptions = New System.Windows.Forms.Button()
+        Me.btnAdd = New instat.ucrSplitButton()
+        Me.contextMenuStripAdd = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripAddSelected = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripAddAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparatorContext = New System.Windows.Forms.ToolStripSeparator()
+        Me.toolStripHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrAvailableDataFrames
         '
-        resources.ApplyResources(Me.ucrAvailableDataFrames, "ucrAvailableDataFrames")
+        Me.ucrAvailableDataFrames.TabIndex = 0
         '
         'lstAvailableVariable
         '
-        resources.ApplyResources(Me.lstAvailableVariable, "lstAvailableVariable")
-        '
-        'btnAdd
-        '
-        resources.ApplyResources(Me.btnAdd, "btnAdd")
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Tag = "add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.lstAvailableVariable.TabIndex = 2
         '
         'btnDataOptions
         '
-        resources.ApplyResources(Me.btnDataOptions, "btnDataOptions")
+        Me.btnDataOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
+        Me.btnDataOptions.Location = New System.Drawing.Point(153, 146)
         Me.btnDataOptions.Name = "btnDataOptions"
+        Me.btnDataOptions.Size = New System.Drawing.Size(57, 34)
+        Me.btnDataOptions.TabIndex = 4
         Me.btnDataOptions.Tag = "Data_Options"
+        Me.btnDataOptions.Text = "Data Options"
         Me.btnDataOptions.UseVisualStyleBackColor = True
+        '
+        'btnAdd
+        '
+        Me.btnAdd.AutoSize = True
+        Me.btnAdd.ContextMenuStrip = Me.contextMenuStripAdd
+        Me.btnAdd.Location = New System.Drawing.Point(151, 45)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(59, 34)
+        Me.btnAdd.SplitMenuStrip = Me.contextMenuStripAdd
+        Me.btnAdd.TabIndex = 5
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripAdd
+        '
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripAddSelected, Me.toolStripAddAll, Me.ToolStripSeparatorContext, Me.toolStripHelp})
+        Me.contextMenuStripAdd.Name = "SelectionMenuStrip"
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(181, 98)
+        '
+        'toolStripAddSelected
+        '
+        Me.toolStripAddSelected.Name = "toolStripAddSelected"
+        Me.toolStripAddSelected.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripAddSelected.Tag = "Add_selected"
+        Me.toolStripAddSelected.Text = "Add Selected"
+        '
+        'toolStripAddAll
+        '
+        Me.toolStripAddAll.Name = "toolStripAddAll"
+        Me.toolStripAddAll.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripAddAll.Text = "Add All"
+        '
+        'ToolStripSeparatorContext
+        '
+        Me.ToolStripSeparatorContext.Name = "ToolStripSeparatorContext"
+        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(177, 6)
+        '
+        'toolStripHelp
+        '
+        Me.toolStripHelp.Name = "toolStripHelp"
+        Me.toolStripHelp.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripHelp.Text = "Help"
         '
         'ucrSelectorByDataFrameAddRemove
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnDataOptions)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.btnDataOptions)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
+        Me.Size = New System.Drawing.Size(270, 183)
+        Me.Controls.SetChildIndex(Me.btnDataOptions, 0)
+        Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
-        Me.Controls.SetChildIndex(Me.btnAdd, 0)
-        Me.Controls.SetChildIndex(Me.btnDataOptions, 0)
+        Me.contextMenuStripAdd.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnAdd As Button
     Friend WithEvents btnDataOptions As Button
+    Friend WithEvents btnAdd As ucrSplitButton
+    Friend WithEvents contextMenuStripAdd As ContextMenuStrip
+    Friend WithEvents toolStripAddSelected As ToolStripMenuItem
+    Friend WithEvents toolStripAddAll As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparatorContext As ToolStripSeparator
+    Friend WithEvents toolStripHelp As ToolStripMenuItem
 End Class

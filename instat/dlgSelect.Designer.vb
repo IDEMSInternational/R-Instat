@@ -19,7 +19,7 @@ Partial Class dlgSelect
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,254 +36,202 @@ Partial Class dlgSelect
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
+        Me.rdoApplyAsSelect = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlApplyOptions = New instat.UcrPanel()
+        Me.lblSelection = New System.Windows.Forms.Label()
+        Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
+        Me.lblFilterPreview = New System.Windows.Forms.Label()
+        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.ucrInputNewDataFrameName = New instat.ucrInputComboBox()
+        Me.ucrInputSelectPreview = New instat.ucrInputTextBox()
+        Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpSelectCriteria = New System.Windows.Forms.GroupBox()
-        Me.rdoSelectbyfactor = New System.Windows.Forms.RadioButton()
-        Me.rdoSelectbycondition = New System.Windows.Forms.RadioButton()
-        Me.txtInto = New System.Windows.Forms.TextBox()
-        Me.lblInto = New System.Windows.Forms.Label()
-        Me.UcrSelectorAddRemove1 = New instat.ucrSelectorAddRemove()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
-        Me.chkTranspose = New System.Windows.Forms.CheckBox()
-        Me.chkAppend = New System.Windows.Forms.CheckBox()
-        Me.grpCondition = New System.Windows.Forms.GroupBox()
-        Me.chkShowCalculator = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.grpFactor = New System.Windows.Forms.GroupBox()
-        Me.txtFactorLevels = New System.Windows.Forms.TextBox()
-        Me.lblFactorLevels = New System.Windows.Forms.Label()
-        Me.lblFactor = New System.Windows.Forms.Label()
-        Me.cmbFactors = New System.Windows.Forms.ComboBox()
-        Me.grpSelectCriteria.SuspendLayout()
-        Me.grpCondition.SuspendLayout()
-        Me.grpFactor.SuspendLayout()
+        Me.grpApplyOptions.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'grpApplyOptions
+        '
+        Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSubset)
+        Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSelect)
+        Me.grpApplyOptions.Controls.Add(Me.ucrPnlApplyOptions)
+        Me.grpApplyOptions.Location = New System.Drawing.Point(11, 207)
+        Me.grpApplyOptions.Name = "grpApplyOptions"
+        Me.grpApplyOptions.Size = New System.Drawing.Size(404, 53)
+        Me.grpApplyOptions.TabIndex = 4
+        Me.grpApplyOptions.TabStop = False
+        Me.grpApplyOptions.Text = "Apply"
+        '
+        'rdoApplyAsSubset
+        '
+        Me.rdoApplyAsSubset.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(174, 22)
+        Me.rdoApplyAsSubset.Name = "rdoApplyAsSubset"
+        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(190, 17)
+        Me.rdoApplyAsSubset.TabIndex = 1
+        Me.rdoApplyAsSubset.TabStop = True
+        Me.rdoApplyAsSubset.Text = "As Subset"
+        Me.rdoApplyAsSubset.UseVisualStyleBackColor = True
+        '
+        'rdoApplyAsSelect
+        '
+        Me.rdoApplyAsSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoApplyAsSelect.Location = New System.Drawing.Point(6, 22)
+        Me.rdoApplyAsSelect.Name = "rdoApplyAsSelect"
+        Me.rdoApplyAsSelect.Size = New System.Drawing.Size(154, 17)
+        Me.rdoApplyAsSelect.TabIndex = 0
+        Me.rdoApplyAsSelect.TabStop = True
+        Me.rdoApplyAsSelect.Text = "Apply As Selected Columns"
+        Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
+        '
+        'ucrPnlApplyOptions
+        '
+        Me.ucrPnlApplyOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(4, 15)
+        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(392, 32)
+        Me.ucrPnlApplyOptions.TabIndex = 2
+        '
+        'lblSelection
+        '
+        Me.lblSelection.AutoSize = True
+        Me.lblSelection.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelection.Location = New System.Drawing.Point(250, 55)
+        Me.lblSelection.Name = "lblSelection"
+        Me.lblSelection.Size = New System.Drawing.Size(54, 13)
+        Me.lblSelection.TabIndex = 1
+        Me.lblSelection.Text = "Selection:"
+        '
+        'cmdDefineNewSelect
+        '
+        Me.cmdDefineNewSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDefineNewSelect.Location = New System.Drawing.Point(250, 98)
+        Me.cmdDefineNewSelect.Name = "cmdDefineNewSelect"
+        Me.cmdDefineNewSelect.Size = New System.Drawing.Size(157, 30)
+        Me.cmdDefineNewSelect.TabIndex = 3
+        Me.cmdDefineNewSelect.Tag = ""
+        Me.cmdDefineNewSelect.Text = "Define New Selection"
+        Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
+        '
+        'lblFilterPreview
+        '
+        Me.lblFilterPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFilterPreview.Location = New System.Drawing.Point(11, 303)
+        Me.lblFilterPreview.Name = "lblFilterPreview"
+        Me.lblFilterPreview.Size = New System.Drawing.Size(143, 22)
+        Me.lblFilterPreview.TabIndex = 7
+        Me.lblFilterPreview.Text = "Selection Preview:"
+        Me.lblFilterPreview.Visible = False
+        '
+        'lblNewDataFrameName
+        '
+        Me.lblNewDataFrameName.AutoSize = True
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(21, 266)
+        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
+        Me.lblNewDataFrameName.Size = New System.Drawing.Size(121, 13)
+        Me.lblNewDataFrameName.TabIndex = 5
+        Me.lblNewDataFrameName.Text = "New Data Frame Name:"
+        '
+        'ucrInputNewDataFrameName
+        '
+        Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputNewDataFrameName.GetSetSelectedIndex = -1
+        Me.ucrInputNewDataFrameName.IsReadOnly = False
+        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(146, 261)
+        Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
+        Me.ucrInputNewDataFrameName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNewDataFrameName.TabIndex = 6
+        '
+        'ucrInputSelectPreview
+        '
+        Me.ucrInputSelectPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectPreview.AutoSize = True
+        Me.ucrInputSelectPreview.IsMultiline = True
+        Me.ucrInputSelectPreview.IsReadOnly = False
+        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(160, 294)
+        Me.ucrInputSelectPreview.Name = "ucrInputSelectPreview"
+        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(255, 43)
+        Me.ucrInputSelectPreview.TabIndex = 8
+        Me.ucrInputSelectPreview.Visible = False
+        '
+        'ucrReceiverSelect
+        '
+        Me.ucrReceiverSelect.AutoSize = True
+        Me.ucrReceiverSelect.frmParent = Me
+        Me.ucrReceiverSelect.Location = New System.Drawing.Point(251, 70)
+        Me.ucrReceiverSelect.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSelect.Name = "ucrReceiverSelect"
+        Me.ucrReceiverSelect.Selector = Nothing
+        Me.ucrReceiverSelect.Size = New System.Drawing.Size(156, 20)
+        Me.ucrReceiverSelect.strNcFilePath = ""
+        Me.ucrReceiverSelect.TabIndex = 2
+        Me.ucrReceiverSelect.ucrSelector = Nothing
+        '
+        'ucrSelectorForSelectColumns
+        '
+        Me.ucrSelectorForSelectColumns.AutoSize = True
+        Me.ucrSelectorForSelectColumns.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForSelectColumns.bShowHiddenColumns = False
+        Me.ucrSelectorForSelectColumns.bUseCurrentFilter = True
+        Me.ucrSelectorForSelectColumns.Location = New System.Drawing.Point(11, 20)
+        Me.ucrSelectorForSelectColumns.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForSelectColumns.Name = "ucrSelectorForSelectColumns"
+        Me.ucrSelectorForSelectColumns.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForSelectColumns.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 229)
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(11, 343)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
-        Me.ucrBase.TabIndex = 0
-        '
-        'grpSelectCriteria
-        '
-        Me.grpSelectCriteria.Controls.Add(Me.rdoSelectbyfactor)
-        Me.grpSelectCriteria.Controls.Add(Me.rdoSelectbycondition)
-        Me.grpSelectCriteria.Location = New System.Drawing.Point(12, 2)
-        Me.grpSelectCriteria.Name = "grpSelectCriteria"
-        Me.grpSelectCriteria.Size = New System.Drawing.Size(406, 32)
-        Me.grpSelectCriteria.TabIndex = 5
-        Me.grpSelectCriteria.TabStop = False
-        '
-        'rdoSelectbyfactor
-        '
-        Me.rdoSelectbyfactor.AutoSize = True
-        Me.rdoSelectbyfactor.Location = New System.Drawing.Point(249, 11)
-        Me.rdoSelectbyfactor.Name = "rdoSelectbyfactor"
-        Me.rdoSelectbyfactor.Size = New System.Drawing.Size(133, 17)
-        Me.rdoSelectbyfactor.TabIndex = 1
-        Me.rdoSelectbyfactor.TabStop = True
-        Me.rdoSelectbyfactor.Tag = "Select_by_factor_values"
-        Me.rdoSelectbyfactor.Text = "Select by factor values"
-        Me.rdoSelectbyfactor.UseVisualStyleBackColor = True
-        '
-        'rdoSelectbycondition
-        '
-        Me.rdoSelectbycondition.AutoSize = True
-        Me.rdoSelectbycondition.Location = New System.Drawing.Point(6, 11)
-        Me.rdoSelectbycondition.Name = "rdoSelectbycondition"
-        Me.rdoSelectbycondition.Size = New System.Drawing.Size(115, 17)
-        Me.rdoSelectbycondition.TabIndex = 0
-        Me.rdoSelectbycondition.TabStop = True
-        Me.rdoSelectbycondition.Tag = "Select_by_condition"
-        Me.rdoSelectbycondition.Text = "Select by condition"
-        Me.rdoSelectbycondition.UseVisualStyleBackColor = True
-        '
-        'txtInto
-        '
-        Me.txtInto.Location = New System.Drawing.Point(327, 56)
-        Me.txtInto.Name = "txtInto"
-        Me.txtInto.Size = New System.Drawing.Size(95, 20)
-        Me.txtInto.TabIndex = 9
-        '
-        'lblInto
-        '
-        Me.lblInto.AutoSize = True
-        Me.lblInto.Location = New System.Drawing.Point(358, 40)
-        Me.lblInto.Name = "lblInto"
-        Me.lblInto.Size = New System.Drawing.Size(25, 13)
-        Me.lblInto.TabIndex = 8
-        Me.lblInto.Tag = "Into"
-        Me.lblInto.Text = "Into"
-        '
-        'UcrSelectorAddRemove1
-        '
-        Me.UcrSelectorAddRemove1.Location = New System.Drawing.Point(1, 40)
-        Me.UcrSelectorAddRemove1.Name = "UcrSelectorAddRemove1"
-        Me.UcrSelectorAddRemove1.Size = New System.Drawing.Size(203, 127)
-        Me.UcrSelectorAddRemove1.TabIndex = 10
-        '
-        'UcrReceiverMultiple1
-        '
-        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(200, 40)
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(121, 128)
-        Me.UcrReceiverMultiple1.TabIndex = 11
-        '
-        'chkTranspose
-        '
-        Me.chkTranspose.AutoSize = True
-        Me.chkTranspose.Location = New System.Drawing.Point(328, 83)
-        Me.chkTranspose.Name = "chkTranspose"
-        Me.chkTranspose.Size = New System.Drawing.Size(76, 17)
-        Me.chkTranspose.TabIndex = 12
-        Me.chkTranspose.Tag = "Transpose"
-        Me.chkTranspose.Text = "Transpose"
-        Me.chkTranspose.UseVisualStyleBackColor = True
-        '
-        'chkAppend
-        '
-        Me.chkAppend.AutoSize = True
-        Me.chkAppend.Location = New System.Drawing.Point(328, 107)
-        Me.chkAppend.Name = "chkAppend"
-        Me.chkAppend.Size = New System.Drawing.Size(63, 17)
-        Me.chkAppend.TabIndex = 13
-        Me.chkAppend.Tag = "Append"
-        Me.chkAppend.Text = "Append"
-        Me.chkAppend.UseVisualStyleBackColor = True
-        '
-        'grpCondition
-        '
-        Me.grpCondition.Controls.Add(Me.chkShowCalculator)
-        Me.grpCondition.Controls.Add(Me.ComboBox1)
-        Me.grpCondition.Location = New System.Drawing.Point(27, 174)
-        Me.grpCondition.Name = "grpCondition"
-        Me.grpCondition.Size = New System.Drawing.Size(356, 49)
-        Me.grpCondition.TabIndex = 14
-        Me.grpCondition.TabStop = False
-        Me.grpCondition.Tag = "Condition_for_Selection"
-        Me.grpCondition.Text = "Condition for Selection"
-        '
-        'chkShowCalculator
-        '
-        Me.chkShowCalculator.AutoSize = True
-        Me.chkShowCalculator.Location = New System.Drawing.Point(216, 19)
-        Me.chkShowCalculator.Name = "chkShowCalculator"
-        Me.chkShowCalculator.Size = New System.Drawing.Size(103, 17)
-        Me.chkShowCalculator.TabIndex = 1
-        Me.chkShowCalculator.Tag = "Show_Calculator"
-        Me.chkShowCalculator.Text = "Show Calculator"
-        Me.chkShowCalculator.UseVisualStyleBackColor = True
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(16, 19)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 0
-        '
-        'grpFactor
-        '
-        Me.grpFactor.Controls.Add(Me.txtFactorLevels)
-        Me.grpFactor.Controls.Add(Me.lblFactorLevels)
-        Me.grpFactor.Controls.Add(Me.lblFactor)
-        Me.grpFactor.Controls.Add(Me.cmbFactors)
-        Me.grpFactor.Location = New System.Drawing.Point(18, 174)
-        Me.grpFactor.Name = "grpFactor"
-        Me.grpFactor.Size = New System.Drawing.Size(354, 52)
-        Me.grpFactor.TabIndex = 15
-        Me.grpFactor.TabStop = False
-        Me.grpFactor.Tag = "Factor_Values_for_Selection"
-        Me.grpFactor.Text = "Factor Values for Selection"
-        '
-        'txtFactorLevels
-        '
-        Me.txtFactorLevels.Location = New System.Drawing.Point(224, 19)
-        Me.txtFactorLevels.Name = "txtFactorLevels"
-        Me.txtFactorLevels.Size = New System.Drawing.Size(100, 20)
-        Me.txtFactorLevels.TabIndex = 4
-        '
-        'lblFactorLevels
-        '
-        Me.lblFactorLevels.AutoSize = True
-        Me.lblFactorLevels.Location = New System.Drawing.Point(173, 15)
-        Me.lblFactorLevels.Name = "lblFactorLevels"
-        Me.lblFactorLevels.Size = New System.Drawing.Size(43, 26)
-        Me.lblFactorLevels.TabIndex = 3
-        Me.lblFactorLevels.Tag = "Factor_Levels"
-        Me.lblFactorLevels.Text = "Factor  " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Levels"
-        '
-        'lblFactor
-        '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(6, 23)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(37, 13)
-        Me.lblFactor.TabIndex = 2
-        Me.lblFactor.Tag = "Factor"
-        Me.lblFactor.Text = "Factor"
-        '
-        'cmbFactors
-        '
-        Me.cmbFactors.FormattingEnabled = True
-        Me.cmbFactors.Location = New System.Drawing.Point(49, 20)
-        Me.cmbFactors.Name = "cmbFactors"
-        Me.cmbFactors.Size = New System.Drawing.Size(85, 21)
-        Me.cmbFactors.TabIndex = 0
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 9
         '
         'dlgSelect
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 286)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpCondition)
-        Me.Controls.Add(Me.chkAppend)
-        Me.Controls.Add(Me.chkTranspose)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
-        Me.Controls.Add(Me.UcrSelectorAddRemove1)
-        Me.Controls.Add(Me.txtInto)
-        Me.Controls.Add(Me.lblInto)
-        Me.Controls.Add(Me.grpSelectCriteria)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(429, 401)
+        Me.Controls.Add(Me.ucrInputNewDataFrameName)
+        Me.Controls.Add(Me.lblNewDataFrameName)
+        Me.Controls.Add(Me.lblFilterPreview)
+        Me.Controls.Add(Me.grpApplyOptions)
+        Me.Controls.Add(Me.ucrInputSelectPreview)
+        Me.Controls.Add(Me.ucrReceiverSelect)
+        Me.Controls.Add(Me.lblSelection)
+        Me.Controls.Add(Me.ucrSelectorForSelectColumns)
+        Me.Controls.Add(Me.cmdDefineNewSelect)
         Me.Controls.Add(Me.ucrBase)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Select"
-        Me.Text = "Select"
-        Me.grpSelectCriteria.ResumeLayout(False)
-        Me.grpSelectCriteria.PerformLayout()
-        Me.grpCondition.ResumeLayout(False)
-        Me.grpCondition.PerformLayout()
-        Me.grpFactor.ResumeLayout(False)
-        Me.grpFactor.PerformLayout()
+        Me.Text = "Column Selection"
+        Me.grpApplyOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
+    Friend WithEvents grpApplyOptions As GroupBox
+    Friend WithEvents rdoApplyAsSubset As RadioButton
+    Friend WithEvents rdoApplyAsSelect As RadioButton
+    Friend WithEvents ucrInputSelectPreview As ucrInputTextBox
+    Friend WithEvents ucrReceiverSelect As ucrReceiverSingle
+    Friend WithEvents lblSelection As Label
+    Friend WithEvents ucrSelectorForSelectColumns As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdDefineNewSelect As Button
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpSelectCriteria As GroupBox
-    Friend WithEvents rdoSelectbyfactor As RadioButton
-    Friend WithEvents rdoSelectbycondition As RadioButton
-    Friend WithEvents txtInto As TextBox
-    Friend WithEvents lblInto As Label
-    Friend WithEvents UcrSelectorAddRemove1 As ucrSelectorAddRemove
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
-    Friend WithEvents chkTranspose As CheckBox
-    Friend WithEvents chkAppend As CheckBox
-    Friend WithEvents grpCondition As GroupBox
-    Friend WithEvents grpFactor As GroupBox
-    Friend WithEvents txtFactorLevels As TextBox
-    Friend WithEvents lblFactorLevels As Label
-    Friend WithEvents lblFactor As Label
-    Friend WithEvents cmbFactors As ComboBox
-    Friend WithEvents chkShowCalculator As CheckBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrPnlApplyOptions As UcrPanel
+    Friend WithEvents ucrInputNewDataFrameName As ucrInputComboBox
+    Friend WithEvents lblNewDataFrameName As Label
 End Class

@@ -87,7 +87,7 @@ Public Class dlgJitter
         ucrInputNewColName.SetSaveTypeAsColumn()
         ucrInputNewColName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
         ucrInputNewColName.SetLabelText("Column Name:")
-        ucrInputNewColName.SetPrefix("Jitter_values")
+        ucrInputNewColName.SetPrefix("jitter_values")
 
     End Sub
 

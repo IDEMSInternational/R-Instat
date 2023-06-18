@@ -35,23 +35,27 @@ Partial Class dlgHelpVignettes
         'ucrInputComboPackage
         '
         Me.ucrInputComboPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboPackage.IsReadOnly = False
-        Me.ucrInputComboPackage.Location = New System.Drawing.Point(133, 58)
+        Me.ucrInputComboPackage.Location = New System.Drawing.Point(175, 62)
         Me.ucrInputComboPackage.Name = "ucrInputComboPackage"
         Me.ucrInputComboPackage.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputComboPackage.TabIndex = 4
         '
         'ucrBase
         '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 145)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 7
         '
         'lblPackage
         '
         Me.lblPackage.AutoSize = True
-        Me.lblPackage.Location = New System.Drawing.Point(23, 62)
+        Me.lblPackage.Location = New System.Drawing.Point(20, 62)
         Me.lblPackage.Name = "lblPackage"
         Me.lblPackage.Size = New System.Drawing.Size(84, 13)
         Me.lblPackage.TabIndex = 3
@@ -93,6 +97,7 @@ Partial Class dlgHelpVignettes
         '
         'ucrPnlHelpVignettes
         '
+        Me.ucrPnlHelpVignettes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlHelpVignettes.Location = New System.Drawing.Point(103, 8)
         Me.ucrPnlHelpVignettes.Name = "ucrPnlHelpVignettes"
         Me.ucrPnlHelpVignettes.Size = New System.Drawing.Size(231, 36)
@@ -101,25 +106,28 @@ Partial Class dlgHelpVignettes
         'ucrInputFunctionName
         '
         Me.ucrInputFunctionName.AddQuotesIfUnrecognised = True
+        Me.ucrInputFunctionName.AutoSize = True
         Me.ucrInputFunctionName.IsMultiline = False
         Me.ucrInputFunctionName.IsReadOnly = False
-        Me.ucrInputFunctionName.Location = New System.Drawing.Point(133, 99)
+        Me.ucrInputFunctionName.Location = New System.Drawing.Point(175, 100)
         Me.ucrInputFunctionName.Name = "ucrInputFunctionName"
         Me.ucrInputFunctionName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputFunctionName.TabIndex = 6
         '
         'ucrChkFunction
         '
+        Me.ucrChkFunction.AutoSize = True
         Me.ucrChkFunction.Checked = False
         Me.ucrChkFunction.Location = New System.Drawing.Point(23, 100)
         Me.ucrChkFunction.Name = "ucrChkFunction"
-        Me.ucrChkFunction.Size = New System.Drawing.Size(107, 20)
+        Me.ucrChkFunction.Size = New System.Drawing.Size(146, 23)
         Me.ucrChkFunction.TabIndex = 5
         '
         'dlgHelpVignettes
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(436, 207)
         Me.Controls.Add(Me.ucrInputFunctionName)
         Me.Controls.Add(Me.ucrChkFunction)

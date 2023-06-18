@@ -38,18 +38,13 @@ Partial Class dlgDummyVariables
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDummyVariables))
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.lblVariate = New System.Windows.Forms.Label()
         Me.grpLevelOmitted = New System.Windows.Forms.GroupBox()
-        Me.rdoLevelNumber = New System.Windows.Forms.RadioButton()
-        Me.rdoLast = New System.Windows.Forms.RadioButton()
+        Me.rdoMostFrequent = New System.Windows.Forms.RadioButton()
         Me.rdoFirst = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLevelOmitted = New instat.UcrPanel()
-        Me.ucrChkWithXVariable = New instat.ucrCheck()
         Me.ucrSelectorDummyVariable = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrVariateReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpLevelOmitted.SuspendLayout()
@@ -57,111 +52,118 @@ Partial Class dlgDummyVariables
         '
         'lblSelected
         '
-        resources.ApplyResources(Me.lblSelected, "lblSelected")
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelected.Location = New System.Drawing.Point(284, 45)
         Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(90, 13)
+        Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = "Selected"
-        '
-        'lblVariate
-        '
-        resources.ApplyResources(Me.lblVariate, "lblVariate")
-        Me.lblVariate.Name = "lblVariate"
-        Me.lblVariate.Tag = "Variate"
+        Me.lblSelected.Text = "Selected Column:"
         '
         'grpLevelOmitted
         '
-        Me.grpLevelOmitted.Controls.Add(Me.rdoLevelNumber)
-        Me.grpLevelOmitted.Controls.Add(Me.rdoLast)
+        Me.grpLevelOmitted.Controls.Add(Me.rdoMostFrequent)
         Me.grpLevelOmitted.Controls.Add(Me.rdoFirst)
         Me.grpLevelOmitted.Controls.Add(Me.rdoNone)
         Me.grpLevelOmitted.Controls.Add(Me.ucrPnlLevelOmitted)
-        resources.ApplyResources(Me.grpLevelOmitted, "grpLevelOmitted")
+        Me.grpLevelOmitted.Location = New System.Drawing.Point(284, 86)
         Me.grpLevelOmitted.Name = "grpLevelOmitted"
+        Me.grpLevelOmitted.Size = New System.Drawing.Size(120, 92)
+        Me.grpLevelOmitted.TabIndex = 3
         Me.grpLevelOmitted.TabStop = False
         Me.grpLevelOmitted.Tag = "Level Omitted"
+        Me.grpLevelOmitted.Text = "Level Omitted"
         '
-        'rdoLevelNumber
+        'rdoMostFrequent
         '
-        resources.ApplyResources(Me.rdoLevelNumber, "rdoLevelNumber")
-        Me.rdoLevelNumber.Name = "rdoLevelNumber"
-        Me.rdoLevelNumber.TabStop = True
-        Me.rdoLevelNumber.Tag = "Level"
-        Me.rdoLevelNumber.UseVisualStyleBackColor = True
-        '
-        'rdoLast
-        '
-        resources.ApplyResources(Me.rdoLast, "rdoLast")
-        Me.rdoLast.Name = "rdoLast"
-        Me.rdoLast.TabStop = True
-        Me.rdoLast.Tag = "Last"
-        Me.rdoLast.UseVisualStyleBackColor = True
+        Me.rdoMostFrequent.AutoSize = True
+        Me.rdoMostFrequent.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMostFrequent.Location = New System.Drawing.Point(11, 66)
+        Me.rdoMostFrequent.Name = "rdoMostFrequent"
+        Me.rdoMostFrequent.Size = New System.Drawing.Size(93, 17)
+        Me.rdoMostFrequent.TabIndex = 3
+        Me.rdoMostFrequent.TabStop = True
+        Me.rdoMostFrequent.Tag = "Most_Frequent"
+        Me.rdoMostFrequent.Text = "Most Frequent"
+        Me.rdoMostFrequent.UseVisualStyleBackColor = True
         '
         'rdoFirst
         '
-        resources.ApplyResources(Me.rdoFirst, "rdoFirst")
+        Me.rdoFirst.AutoSize = True
+        Me.rdoFirst.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoFirst.Location = New System.Drawing.Point(11, 43)
         Me.rdoFirst.Name = "rdoFirst"
+        Me.rdoFirst.Size = New System.Drawing.Size(44, 17)
+        Me.rdoFirst.TabIndex = 2
         Me.rdoFirst.TabStop = True
         Me.rdoFirst.Tag = "First"
+        Me.rdoFirst.Text = "First"
         Me.rdoFirst.UseVisualStyleBackColor = True
         '
         'rdoNone
         '
-        resources.ApplyResources(Me.rdoNone, "rdoNone")
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNone.Location = New System.Drawing.Point(11, 20)
         Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
+        Me.rdoNone.TabIndex = 1
         Me.rdoNone.TabStop = True
         Me.rdoNone.Tag = "None"
+        Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
         'ucrPnlLevelOmitted
         '
-        resources.ApplyResources(Me.ucrPnlLevelOmitted, "ucrPnlLevelOmitted")
+        Me.ucrPnlLevelOmitted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlLevelOmitted.Location = New System.Drawing.Point(6, 16)
         Me.ucrPnlLevelOmitted.Name = "ucrPnlLevelOmitted"
-        '
-        'ucrChkWithXVariable
-        '
-        Me.ucrChkWithXVariable.Checked = False
-        resources.ApplyResources(Me.ucrChkWithXVariable, "ucrChkWithXVariable")
-        Me.ucrChkWithXVariable.Name = "ucrChkWithXVariable"
+        Me.ucrPnlLevelOmitted.Size = New System.Drawing.Size(108, 70)
+        Me.ucrPnlLevelOmitted.TabIndex = 0
         '
         'ucrSelectorDummyVariable
         '
+        Me.ucrSelectorDummyVariable.AutoSize = True
         Me.ucrSelectorDummyVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorDummyVariable.bShowHiddenColumns = False
         Me.ucrSelectorDummyVariable.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorDummyVariable, "ucrSelectorDummyVariable")
+        Me.ucrSelectorDummyVariable.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorDummyVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDummyVariable.Name = "ucrSelectorDummyVariable"
-        '
-        'ucrVariateReceiver
-        '
-        Me.ucrVariateReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrVariateReceiver, "ucrVariateReceiver")
-        Me.ucrVariateReceiver.Name = "ucrVariateReceiver"
-        Me.ucrVariateReceiver.Selector = Nothing
-        Me.ucrVariateReceiver.strNcFilePath = ""
-        Me.ucrVariateReceiver.ucrSelector = Nothing
+        Me.ucrSelectorDummyVariable.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorDummyVariable.TabIndex = 0
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFactor, "ucrReceiverFactor")
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(284, 60)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 2
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrBase
         '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 205)
         Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 4
         '
         'dlgDummyVariables
         '
-        resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkWithXVariable)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(419, 258)
         Me.Controls.Add(Me.grpLevelOmitted)
         Me.Controls.Add(Me.ucrSelectorDummyVariable)
-        Me.Controls.Add(Me.ucrVariateReceiver)
-        Me.Controls.Add(Me.lblVariate)
         Me.Controls.Add(Me.ucrReceiverFactor)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrBase)
@@ -169,8 +171,9 @@ Partial Class dlgDummyVariables
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDummyVariables"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Dummy_Variables"
-        Me.TopMost = True
+        Me.Text = "Dummy Variables"
         Me.grpLevelOmitted.ResumeLayout(False)
         Me.grpLevelOmitted.PerformLayout()
         Me.ResumeLayout(False)
@@ -182,13 +185,9 @@ Partial Class dlgDummyVariables
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents ucrSelectorDummyVariable As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblVariate As Label
-    Friend WithEvents ucrVariateReceiver As ucrReceiverSingle
     Friend WithEvents grpLevelOmitted As GroupBox
-    Friend WithEvents rdoLevelNumber As RadioButton
-    Friend WithEvents rdoLast As RadioButton
+    Friend WithEvents rdoMostFrequent As RadioButton
     Friend WithEvents rdoFirst As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlLevelOmitted As UcrPanel
-    Friend WithEvents ucrChkWithXVariable As ucrCheck
 End Class

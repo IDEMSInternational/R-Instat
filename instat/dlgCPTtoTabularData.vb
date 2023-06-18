@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgCPTtoTabularData
     Public bFirstLoad As Boolean = True
     Private Sub dlgCPTtoTabularData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -29,6 +28,7 @@ Public Class dlgCPTtoTabularData
         End If
 
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetFunction("climate_obj$SST_domain()")
