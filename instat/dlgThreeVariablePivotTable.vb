@@ -58,7 +58,10 @@ Public Class dlgThreeVariablePivotTable
 
         ucrReceiverInitialRowFactors.SetParameter(New RParameter("rows", iNewPosition:=1))
         ucrReceiverInitialRowFactors.SetParameterIsString()
+        ucrReceiverInitialRowFactors.strSelectorHeading = "Numerics"
+        ucrReceiverInitialRowFactors.SetIncludedDataTypes({"numeric"})
         ucrReceiverInitialRowFactors.Selector = ucrSelectorPivot
+
 
         ucrReceiverInitialColumnFactor.SetParameter(New RParameter("cols", iNewPosition:=2))
         ucrReceiverInitialColumnFactor.SetParameterIsString()
@@ -68,7 +71,6 @@ Public Class dlgThreeVariablePivotTable
 
         ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
         ucrReceiverAdditionalRowFactor.SetParameterIsString()
-        'ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
         ucrReceiverAdditionalRowFactor.Selector = ucrSelectorPivot
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
@@ -76,7 +78,6 @@ Public Class dlgThreeVariablePivotTable
 
 
         ucrReceiverFactorLevels.SetParameter(New RParameter("variable", iNewPosition:=1))
-        'ucrReceiverFactorLevels.SetDataType("factor")
         ucrReceiverFactorLevels.SetParameterIsString()
         ucrReceiverFactorLevels.bWithQuotes = False
         ucrReceiverFactorLevels.Selector = ucrSelectorPivot
@@ -335,12 +336,6 @@ Public Class dlgThreeVariablePivotTable
                 strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
                 strYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "year_label")
                 strDayCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "day_label")
-                'If Not String.IsNullOrEmpty(strTempCol) Then
-                '    ucrReceiverElement.Add(strTempCol, strDataFrame)
-                'Else
-                '    ucrReceiverElement.Add(strRainCol, strDataFrame)
-
-                'End If
                 If strRainCol <> "" Then
                     ucrReceiverAdditionalRowFactor.Add(strRainCol, strDataFrame)
                 End If
@@ -352,23 +347,6 @@ Public Class dlgThreeVariablePivotTable
                 If strDayCol <> "" Then
                     ucrReceiverInitialColumnFactor.Add(strDayCol, strDataFrame)
                 End If
-
-                'If strYearCol <> "" Then
-                '    ucrReceiverInitialRowFactors.Add(strYearCol, strDataFrame)
-                'End If
-
-                'ucrReceiverInitialRowFactors.SetClimaticType("year")
-                'ucrReceiverInitialRowFactors.SetClimaticType("month_abbr")
-                'ucrReceiverInitialRowFactors.bAutoFill = True
-
-                'ucrReceiverInitialColumnFactor.SetClimaticType("day_in_month")
-                'ucrReceiverInitialColumnFactor.bAutoFill = True
-
-                'ucrReceiverFactorLevels.SetClimaticType("month_abbr")
-                'ucrReceiverFactorLevels.bAutoFill = True
-
-                'ucrReceiverAdditionalRowFactor.SetClimaticType("rain")
-                'ucrReceiverAdditionalRowFactor.bAutoFill = True
         End Select
     End Sub
 
