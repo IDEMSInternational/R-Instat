@@ -174,6 +174,7 @@ Public Class DlgDefineClimaticData
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorDefineClimaticData.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
+                        'To strip out any non-word characters and underscores
                         If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
