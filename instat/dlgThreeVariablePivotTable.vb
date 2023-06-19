@@ -221,9 +221,6 @@ Public Class dlgThreeVariablePivotTable
         End If
     End Sub
 
-    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -354,5 +351,17 @@ Public Class dlgThreeVariablePivotTable
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
             ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged
+        If ucrChkNumericVariable.Checked Then
+            clsRPivotTableFunction.AddParameter("val", ucrReceiverAdditionalRowFactor.GetVariableNames(), iPosition:=3)
+            clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & ucrInputTableChart.GetText() & Chr(34), iPosition:=4)
+            clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & ucrInputSummary.GetText() & Chr(34), iPosition:=5)
+        Else
+            clsRPivotTableFunction.RemoveParameterByName("val")
+            clsRPivotTableFunction.RemoveParameterByName("rendererName")
+            clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
+        End If
     End Sub
 End Class
