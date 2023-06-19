@@ -342,11 +342,14 @@ Public Class dlgThreeVariablePivotTable
 
                 If strMonthCol <> "" Then
                     ucrReceiverFactorLevels.Add(strMonthCol, strDataFrame)
+                    ucrReceiverInitialColumnFactor.Add(strMonthCol, strDataFrame)
                 End If
 
-                If strDayCol <> "" Then
-                    ucrReceiverInitialColumnFactor.Add(strDayCol, strDataFrame)
+                If strYearCol <> "" Then
+                    ucrReceiverInitialColumnFactor.SetClimaticType("year")
+                    ucrReceiverInitialRowFactors.Add(strYearCol, strDataFrame)
                 End If
+
         End Select
     End Sub
 
