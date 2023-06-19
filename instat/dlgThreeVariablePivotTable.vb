@@ -29,7 +29,7 @@ Public Class dlgThreeVariablePivotTable
     Private clsConcatenateFunction, clsFlattenFunction,
          clsLevelsFunction, clsPasteFunction,
         clsRelevelPasteFunction, clsRPivotTableFunction,
-        clsSelectFunction As New RFunction
+        clsSelectFunction, clsDummyFunction As New RFunction
     Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
 
 
@@ -94,8 +94,8 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
 
         ucrChkNumericVariable.SetText("Numeric Variable (Optional):")
-        ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName")
-        ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", False)
+        ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", "False")
+        ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName", "True")
         ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                   bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrChkNumericVariable.AddToLinkedControls({ucrInputTableChart}, {True}, bNewLinkedHideIfParameterMissing:=True,
@@ -135,6 +135,7 @@ Public Class dlgThreeVariablePivotTable
         clsRelevelPasteFunction = New RFunction
         clsRPivotTableFunction = New RFunction
         clsSelectFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         clsLevelsDollarOperator = New ROperator
         clsPipeOperator = New ROperator
@@ -143,6 +144,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
 
+        clsDummyFunction.AddParameter("rendererName", "False", iPosition:=0)
 
         clsLevelsDollarOperator.SetOperation("$")
 
@@ -200,7 +202,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverFactorLevels.SetRCode(clsLevelsDollarOperator, bReset)
-        ucrChkNumericVariable.SetRCode(clsRPivotTableFunction, bReset)
+        ucrChkNumericVariable.SetRCode(clsDummyFunction, bReset)
         ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
         ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
