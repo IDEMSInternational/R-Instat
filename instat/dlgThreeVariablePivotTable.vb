@@ -254,7 +254,6 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged,
         ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverAdditionalRowFactor.ControlValueChanged, ucrReceiverFactorLevels.ControlValueChanged
-        'AutofillMode()
         If Not bRcodeSet Then
             Exit Sub
         End If
