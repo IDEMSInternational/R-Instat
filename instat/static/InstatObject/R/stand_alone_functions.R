@@ -2902,6 +2902,35 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
   else return(sprintf("file://%s", file))
 }
 
+# for issue 8342 - adding in a count of the number of elements that have missing values by period (and station)
+cumulative_inventory <- function(data, station = NULL, from, to){
+  if (is.null(station)){
+    data <- data %>%
+      dplyr::group_by(.data[[from]], .data[[to]]) %>%
+      dplyr::mutate(cum=dplyr::n())
+    data <- data %>%
+      dplyr::group_by(.data[[from]]) %>%
+      dplyr::mutate(cum1 = dplyr::n()) %>% 
+      dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
+                                  yes = cum,  
+                                  no = ifelse(cum == max(cum),
+                                              cum,
+                                              max(cum) + 0.5)))
+  } else {
+      data <- data %>%
+        dplyr::group_by(.data[[station]], .data[[from]], .data[[to]]) %>%
+        dplyr::mutate(cum=dplyr::n())
+      data <- data %>%
+        dplyr::group_by(.data[[station]], .data[[from]]) %>%
+        dplyr::mutate(cum1 = dplyr::n()) %>% 
+        dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
+                                    yes = cum,  
+                                    no = ifelse(cum == max(cum),
+                                                cum,
+                                                max(cum) + 0.5)))
+    }
+    return(data)
+}
 
 
 
