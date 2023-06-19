@@ -94,8 +94,9 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
 
         ucrChkNumericVariable.SetText("Numeric Variable (Optional):")
-        ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", "False")
-        ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName", "True")
+        ucrChkNumericVariable.SetParameter(New RParameter("subtotals", iNewPosition:=0))
+        ucrChkNumericVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkNumericVariable.SetRDefault("TRUE")
         ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                   bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrChkNumericVariable.AddToLinkedControls({ucrInputTableChart}, {True}, bNewLinkedHideIfParameterMissing:=True,
@@ -109,6 +110,7 @@ Public Class dlgThreeVariablePivotTable
         ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
          "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
          "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
+        ucrInputTableChart.SetText("Table")
         ucrInputTableChart.SetLinkedDisplayControl(lblTableChart)
 
         ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
@@ -117,6 +119,7 @@ Public Class dlgThreeVariablePivotTable
                                     "Maximum", "First", "Last", "Sum over Sum", "80% Upper Bound", "80% Lower Bound",
                                     "Sum as Fraction of Totals", "Sum as Fraction of Rows", "Sum as Fraction of Columns",
                                     "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
+        ucrInputSummary.SetText("Average")
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
 
         ucrSavePivot.SetPrefix("pivot_table")
@@ -144,7 +147,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
 
-        clsDummyFunction.AddParameter("rendererName", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("subtotals", "TRUE", iPosition:=0)
 
         clsLevelsDollarOperator.SetOperation("$")
 
@@ -218,6 +221,10 @@ Public Class dlgThreeVariablePivotTable
         End If
     End Sub
 
+    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         AutofillMode()
@@ -229,11 +236,7 @@ Public Class dlgThreeVariablePivotTable
         If ucrChkSelectedVariable.Checked Then
             ucrReceiverSelectedVariable.SetMeAsReceiver()
         Else
-            If ucrChkNumericVariable.Checked Then
-                ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
-            Else
-                ucrReceiverInitialRowFactors.SetMeAsReceiver()
-            End If
+            ucrReceiverInitialRowFactors.SetMeAsReceiver()
         End If
         ChangeDataParameterValue()
     End Sub
@@ -351,15 +354,5 @@ Public Class dlgThreeVariablePivotTable
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
             ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged
-        If ucrChkNumericVariable.Checked Then
-            ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
-        ElseIf Not ucrChkNumericVariable.Checked AndAlso ucrChkSelectedVariable.Checked Then
-            ucrReceiverSelectedVariable.SetMeAsReceiver()
-        Else
-            ucrReceiverInitialRowFactors.SetMeAsReceiver()
-        End If
     End Sub
 End Class
