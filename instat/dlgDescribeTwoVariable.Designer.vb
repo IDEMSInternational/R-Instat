@@ -45,10 +45,12 @@ Partial Class dlgDescribeTwoVariable
         Me.lbSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.grpColumnFactor = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
         Me.rdoVariableFactor = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColumnFactor = New instat.UcrPanel()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.lblFirstType = New System.Windows.Forms.Label()
         Me.lblSecondBy = New System.Windows.Forms.Label()
@@ -65,8 +67,6 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
-        Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
-        Me.ucrPnlColumnFactor = New instat.UcrPanel()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverThreeVariableThirdVariable = New instat.ucrReceiverSingle()
@@ -110,7 +110,7 @@ Partial Class dlgDescribeTwoVariable
         'lblThreeVariableSecondFactor
         '
         Me.lblThreeVariableSecondFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblThreeVariableSecondFactor.Location = New System.Drawing.Point(303, 150)
+        Me.lblThreeVariableSecondFactor.Location = New System.Drawing.Point(306, 150)
         Me.lblThreeVariableSecondFactor.Name = "lblThreeVariableSecondFactor"
         Me.lblThreeVariableSecondFactor.Size = New System.Drawing.Size(100, 15)
         Me.lblThreeVariableSecondFactor.TabIndex = 35
@@ -163,6 +163,19 @@ Partial Class dlgDescribeTwoVariable
         Me.grpColumnFactor.TabStop = False
         Me.grpColumnFactor.Text = "Columns"
         '
+        'ucrReceiverColumnFactor
+        '
+        Me.ucrReceiverColumnFactor.AutoSize = True
+        Me.ucrReceiverColumnFactor.frmParent = Me
+        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(131, 59)
+        Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
+        Me.ucrReceiverColumnFactor.Selector = Nothing
+        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverColumnFactor.strNcFilePath = ""
+        Me.ucrReceiverColumnFactor.TabIndex = 52
+        Me.ucrReceiverColumnFactor.ucrSelector = Nothing
+        '
         'rdoVariableFactor
         '
         Me.rdoVariableFactor.AutoSize = True
@@ -206,6 +219,14 @@ Partial Class dlgDescribeTwoVariable
         Me.rdoNoColumnFactor.TabStop = True
         Me.rdoNoColumnFactor.Text = "No Column Factor"
         Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
+        '
+        'ucrPnlColumnFactor
+        '
+        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 15)
+        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(119, 88)
+        Me.ucrPnlColumnFactor.TabIndex = 48
         '
         'grpSummaries
         '
@@ -292,7 +313,7 @@ Partial Class dlgDescribeTwoVariable
         'lblFirstGroupByFactor
         '
         Me.lblFirstGroupByFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstGroupByFactor.Location = New System.Drawing.Point(302, 149)
+        Me.lblFirstGroupByFactor.Location = New System.Drawing.Point(306, 149)
         Me.lblFirstGroupByFactor.Name = "lblFirstGroupByFactor"
         Me.lblFirstGroupByFactor.Size = New System.Drawing.Size(100, 15)
         Me.lblFirstGroupByFactor.TabIndex = 29
@@ -379,27 +400,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkOmitMissing.TabIndex = 0
-        '
-        'ucrReceiverColumnFactor
-        '
-        Me.ucrReceiverColumnFactor.AutoSize = True
-        Me.ucrReceiverColumnFactor.frmParent = Nothing
-        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(131, 59)
-        Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
-        Me.ucrReceiverColumnFactor.Selector = Nothing
-        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverColumnFactor.strNcFilePath = ""
-        Me.ucrReceiverColumnFactor.TabIndex = 52
-        Me.ucrReceiverColumnFactor.ucrSelector = Nothing
-        '
-        'ucrPnlColumnFactor
-        '
-        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 15)
-        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
-        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(119, 88)
-        Me.ucrPnlColumnFactor.TabIndex = 48
         '
         'ucrSaveTable
         '
@@ -542,11 +542,11 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.rdoTwoVariable)
         Me.Controls.Add(Me.rdoSkim)
         Me.Controls.Add(Me.ucrPnlDescribe)
-        Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrReceiverSkimrGroupByFactor)
         Me.Controls.Add(Me.lblThirdVariable)
         Me.Controls.Add(Me.lblSecondGroupByFactor)
+        Me.Controls.Add(Me.lbSecondVariable)
         Me.Controls.Add(Me.lblFirstGroupByFactor)
         Me.Controls.Add(Me.lblThreeVariableSecondFactor)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

@@ -108,6 +108,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
+        'ucrChkOmitMissing.SetLinkedDisplayControl(cmdMissingOptions)
 
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
@@ -115,6 +116,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoTwoVariable, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
         ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
+        rdoThreeVariable.Enabled=False
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableThirdVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
@@ -239,7 +241,7 @@ Public Class dlgDescribeTwoVariable
         clsGroupByFunction.SetRCommand("group_by")
 
         clsSkimrFunction.SetPackageName("skimr")
-        clsSkimrFunction.SetRCommand("skim")
+        clsSkimrFunction.SetRCommand("skim_without_charts")
 
         clsCombineFunction.SetRCommand("c")
 
@@ -425,13 +427,14 @@ Public Class dlgDescribeTwoVariable
         grpColumnFactor.Visible = IsFactorByFactor() OrElse IsNumericByFactor()
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso IsNumericByFactor()
+            'cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
             ucrChkOmitMissing.Visible = False
-            cmdMissingOptions.Visible = False
+            'cmdMissingOptions.Visible = False
         End If
+        cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
     End Sub
 
     Private Sub ChangeBaseRCode()
