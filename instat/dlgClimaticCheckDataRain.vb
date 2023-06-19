@@ -142,6 +142,8 @@ Public Class dlgClimaticCheckDataRain
 
         ucrReceiverElement.SetParameter(New RParameter("left", 0, bNewIncludeArgumentName:=False))
         ucrReceiverElement.Selector = ucrSelectorRain
+        ucrReceiverElement.SetClimaticType("rain")
+        ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
 

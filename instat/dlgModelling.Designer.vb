@@ -22,6 +22,7 @@ Partial Class dlgModelling
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblModel = New System.Windows.Forms.Label()
         Me.cmdspline = New System.Windows.Forms.Button()
         Me.cmdarima = New System.Windows.Forms.Button()
@@ -68,8 +69,25 @@ Partial Class dlgModelling
         Me.cmdmca = New System.Windows.Forms.Button()
         Me.cmdlqs = New System.Windows.Forms.Button()
         Me.cmdlda = New System.Windows.Forms.Button()
-        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRpackage = New System.Windows.Forms.Label()
+        Me.ContextMenuStripStats = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuStats = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripExtRemes = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuExtRemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripLme4 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuLme4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripMASS = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuMASS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.grpRstanarm = New System.Windows.Forms.GroupBox()
+        Me.cmdstanpolr = New System.Windows.Forms.Button()
+        Me.cmdstanglm = New System.Windows.Forms.Button()
+        Me.grpArm = New System.Windows.Forms.GroupBox()
+        Me.cmdbayespolr = New System.Windows.Forms.Button()
+        Me.cmdbayesglm = New System.Windows.Forms.Button()
+        Me.cmdRHelpMASS = New instat.ucrSplitButton()
+        Me.cmdRHelpLme4 = New instat.ucrSplitButton()
+        Me.cmdRHelpExtRemes = New instat.ucrSplitButton()
+        Me.cmdRHelpStats = New instat.ucrSplitButton()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrChkIncludeArguments = New instat.ucrCheck()
         Me.ucrSaveResult = New instat.ucrSave()
@@ -77,11 +95,25 @@ Partial Class dlgModelling
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrSelectorModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdRHelpRstanam = New instat.ucrSplitButton()
+        Me.ContextMenuStripRstanam = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuRstanam = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRHelpArm = New instat.ucrSplitButton()
+        Me.ContextMenuStripArm = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuIArm = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpStats.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpextRemes.SuspendLayout()
         Me.grplme4.SuspendLayout()
         Me.grpMASS.SuspendLayout()
+        Me.ContextMenuStripStats.SuspendLayout()
+        Me.ContextMenuStripExtRemes.SuspendLayout()
+        Me.ContextMenuStripLme4.SuspendLayout()
+        Me.ContextMenuStripMASS.SuspendLayout()
+        Me.grpRstanarm.SuspendLayout()
+        Me.grpArm.SuspendLayout()
+        Me.ContextMenuStripRstanam.SuspendLayout()
+        Me.ContextMenuStripArm.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblModel
@@ -633,16 +665,6 @@ Partial Class dlgModelling
         Me.cmdlda.Text = "lda"
         Me.cmdlda.UseVisualStyleBackColor = True
         '
-        'cmdHelp
-        '
-        Me.cmdHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHelp.Location = New System.Drawing.Point(493, 38)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(60, 23)
-        Me.cmdHelp.TabIndex = 7
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
         'lblRpackage
         '
         Me.lblRpackage.AutoSize = True
@@ -653,13 +675,180 @@ Partial Class dlgModelling
         Me.lblRpackage.TabIndex = 3
         Me.lblRpackage.Text = "R package:"
         '
+        'ContextMenuStripStats
+        '
+        Me.ContextMenuStripStats.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuStats})
+        Me.ContextMenuStripStats.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripStats.Size = New System.Drawing.Size(99, 26)
+        '
+        'ToolStripMenuStats
+        '
+        Me.ToolStripMenuStats.Name = "ToolStripMenuStats"
+        Me.ToolStripMenuStats.Size = New System.Drawing.Size(98, 22)
+        Me.ToolStripMenuStats.Text = "stats"
+        '
+        'ContextMenuStripExtRemes
+        '
+        Me.ContextMenuStripExtRemes.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuExtRemes})
+        Me.ContextMenuStripExtRemes.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripExtRemes.Size = New System.Drawing.Size(126, 26)
+        '
+        'ToolStripMenuExtRemes
+        '
+        Me.ToolStripMenuExtRemes.Name = "ToolStripMenuExtRemes"
+        Me.ToolStripMenuExtRemes.Size = New System.Drawing.Size(125, 22)
+        Me.ToolStripMenuExtRemes.Text = "extRemes"
+        '
+        'ContextMenuStripLme4
+        '
+        Me.ContextMenuStripLme4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuLme4})
+        Me.ContextMenuStripLme4.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripLme4.Size = New System.Drawing.Size(101, 26)
+        '
+        'ToolStripMenuLme4
+        '
+        Me.ToolStripMenuLme4.Name = "ToolStripMenuLme4"
+        Me.ToolStripMenuLme4.Size = New System.Drawing.Size(100, 22)
+        Me.ToolStripMenuLme4.Text = "lme4"
+        '
+        'ContextMenuStripMASS
+        '
+        Me.ContextMenuStripMASS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuMASS})
+        Me.ContextMenuStripMASS.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripMASS.Size = New System.Drawing.Size(106, 26)
+        '
+        'ToolStripMenuMASS
+        '
+        Me.ToolStripMenuMASS.Name = "ToolStripMenuMASS"
+        Me.ToolStripMenuMASS.Size = New System.Drawing.Size(105, 22)
+        Me.ToolStripMenuMASS.Text = "MASS"
+        '
+        'grpRstanarm
+        '
+        Me.grpRstanarm.Controls.Add(Me.cmdstanpolr)
+        Me.grpRstanarm.Controls.Add(Me.cmdstanglm)
+        Me.grpRstanarm.Location = New System.Drawing.Point(291, 64)
+        Me.grpRstanarm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpRstanarm.Name = "grpRstanarm"
+        Me.grpRstanarm.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpRstanarm.Size = New System.Drawing.Size(213, 47)
+        Me.grpRstanarm.TabIndex = 154
+        Me.grpRstanarm.TabStop = False
+        Me.grpRstanarm.Text = "Rstanarm"
+        '
+        'cmdstanpolr
+        '
+        Me.cmdstanpolr.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdstanpolr.Location = New System.Drawing.Point(72, 14)
+        Me.cmdstanpolr.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdstanpolr.Name = "cmdstanpolr"
+        Me.cmdstanpolr.Size = New System.Drawing.Size(69, 30)
+        Me.cmdstanpolr.TabIndex = 126
+        Me.cmdstanpolr.Text = "stanpolr"
+        Me.cmdstanpolr.UseVisualStyleBackColor = True
+        '
+        'cmdstanglm
+        '
+        Me.cmdstanglm.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdstanglm.Location = New System.Drawing.Point(4, 14)
+        Me.cmdstanglm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdstanglm.Name = "cmdstanglm"
+        Me.cmdstanglm.Size = New System.Drawing.Size(69, 30)
+        Me.cmdstanglm.TabIndex = 124
+        Me.cmdstanglm.Text = "stanglm"
+        Me.cmdstanglm.UseVisualStyleBackColor = True
+        '
+        'grpArm
+        '
+        Me.grpArm.Controls.Add(Me.cmdbayespolr)
+        Me.grpArm.Controls.Add(Me.cmdbayesglm)
+        Me.grpArm.Location = New System.Drawing.Point(287, 72)
+        Me.grpArm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpArm.Name = "grpArm"
+        Me.grpArm.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.grpArm.Size = New System.Drawing.Size(154, 47)
+        Me.grpArm.TabIndex = 154
+        Me.grpArm.TabStop = False
+        Me.grpArm.Text = "arm"
+        '
+        'cmdbayespolr
+        '
+        Me.cmdbayespolr.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdbayespolr.Location = New System.Drawing.Point(72, 14)
+        Me.cmdbayespolr.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdbayespolr.Name = "cmdbayespolr"
+        Me.cmdbayespolr.Size = New System.Drawing.Size(69, 30)
+        Me.cmdbayespolr.TabIndex = 126
+        Me.cmdbayespolr.Text = "bayespolr"
+        Me.cmdbayespolr.UseVisualStyleBackColor = True
+        '
+        'cmdbayesglm
+        '
+        Me.cmdbayesglm.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdbayesglm.Location = New System.Drawing.Point(4, 14)
+        Me.cmdbayesglm.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdbayesglm.Name = "cmdbayesglm"
+        Me.cmdbayesglm.Size = New System.Drawing.Size(69, 30)
+        Me.cmdbayesglm.TabIndex = 124
+        Me.cmdbayesglm.Text = "bayesglm"
+        Me.cmdbayesglm.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpMASS
+        '
+        Me.cmdRHelpMASS.AutoSize = True
+        Me.cmdRHelpMASS.ContextMenuStrip = Me.ContextMenuStripMASS
+        Me.cmdRHelpMASS.Location = New System.Drawing.Point(493, 39)
+        Me.cmdRHelpMASS.Name = "cmdRHelpMASS"
+        Me.cmdRHelpMASS.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpMASS.SplitMenuStrip = Me.ContextMenuStripMASS
+        Me.cmdRHelpMASS.TabIndex = 218
+        Me.cmdRHelpMASS.Text = "R Help"
+        Me.cmdRHelpMASS.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpLme4
+        '
+        Me.cmdRHelpLme4.AutoSize = True
+        Me.cmdRHelpLme4.ContextMenuStrip = Me.ContextMenuStripLme4
+        Me.cmdRHelpLme4.Location = New System.Drawing.Point(493, 39)
+        Me.cmdRHelpLme4.Name = "cmdRHelpLme4"
+        Me.cmdRHelpLme4.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpLme4.SplitMenuStrip = Me.ContextMenuStripLme4
+        Me.cmdRHelpLme4.TabIndex = 217
+        Me.cmdRHelpLme4.Text = "R Help"
+        Me.cmdRHelpLme4.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpExtRemes
+        '
+        Me.cmdRHelpExtRemes.AutoSize = True
+        Me.cmdRHelpExtRemes.ContextMenuStrip = Me.ContextMenuStripExtRemes
+        Me.cmdRHelpExtRemes.Location = New System.Drawing.Point(493, 39)
+        Me.cmdRHelpExtRemes.Name = "cmdRHelpExtRemes"
+        Me.cmdRHelpExtRemes.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpExtRemes.SplitMenuStrip = Me.ContextMenuStripExtRemes
+        Me.cmdRHelpExtRemes.TabIndex = 216
+        Me.cmdRHelpExtRemes.Text = "R Help"
+        Me.cmdRHelpExtRemes.UseVisualStyleBackColor = True
+        '
+        'cmdRHelpStats
+        '
+        Me.cmdRHelpStats.AutoSize = True
+        Me.cmdRHelpStats.ContextMenuStrip = Me.ContextMenuStripStats
+        Me.cmdRHelpStats.Location = New System.Drawing.Point(493, 39)
+        Me.cmdRHelpStats.Name = "cmdRHelpStats"
+        Me.cmdRHelpStats.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpStats.SplitMenuStrip = Me.ContextMenuStripStats
+        Me.cmdRHelpStats.TabIndex = 214
+        Me.cmdRHelpStats.Text = "R Help"
+        Me.cmdRHelpStats.UseVisualStyleBackColor = True
+        '
         'ucrTryModelling
         '
         Me.ucrTryModelling.AutoSize = True
         Me.ucrTryModelling.Location = New System.Drawing.Point(4, 314)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
-        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 33)
+        Me.ucrTryModelling.Size = New System.Drawing.Size(480, 37)
         Me.ucrTryModelling.TabIndex = 21
         '
         'ucrChkIncludeArguments
@@ -667,6 +856,7 @@ Partial Class dlgModelling
         Me.ucrChkIncludeArguments.AutoSize = True
         Me.ucrChkIncludeArguments.Checked = False
         Me.ucrChkIncludeArguments.Location = New System.Drawing.Point(442, 13)
+        Me.ucrChkIncludeArguments.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkIncludeArguments.Name = "ucrChkIncludeArguments"
         Me.ucrChkIncludeArguments.Size = New System.Drawing.Size(131, 23)
         Me.ucrChkIncludeArguments.TabIndex = 2
@@ -687,6 +877,7 @@ Partial Class dlgModelling
         Me.ucrInputComboRPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboRPackage.IsReadOnly = False
         Me.ucrInputComboRPackage.Location = New System.Drawing.Point(364, 39)
+        Me.ucrInputComboRPackage.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(123, 21)
         Me.ucrInputComboRPackage.TabIndex = 4
@@ -721,9 +912,58 @@ Partial Class dlgModelling
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(13, 387)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
+        '
+        'cmdRHelpRstanam
+        '
+        Me.cmdRHelpRstanam.AutoSize = True
+        Me.cmdRHelpRstanam.ContextMenuStrip = Me.ContextMenuStripRstanam
+        Me.cmdRHelpRstanam.Location = New System.Drawing.Point(493, 38)
+        Me.cmdRHelpRstanam.Name = "cmdRHelpRstanam"
+        Me.cmdRHelpRstanam.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpRstanam.SplitMenuStrip = Me.ContextMenuStripRstanam
+        Me.cmdRHelpRstanam.TabIndex = 219
+        Me.cmdRHelpRstanam.Text = "R Help"
+        Me.cmdRHelpRstanam.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripRstanam
+        '
+        Me.ContextMenuStripRstanam.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuRstanam})
+        Me.ContextMenuStripRstanam.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripRstanam.Size = New System.Drawing.Size(181, 48)
+        '
+        'ToolStripMenuRstanam
+        '
+        Me.ToolStripMenuRstanam.Name = "ToolStripMenuRstanam"
+        Me.ToolStripMenuRstanam.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuRstanam.Text = "rstanam"
+        '
+        'cmdRHelpArm
+        '
+        Me.cmdRHelpArm.AutoSize = True
+        Me.cmdRHelpArm.ContextMenuStrip = Me.ContextMenuStripArm
+        Me.cmdRHelpArm.Location = New System.Drawing.Point(493, 39)
+        Me.cmdRHelpArm.Name = "cmdRHelpArm"
+        Me.cmdRHelpArm.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpArm.SplitMenuStrip = Me.ContextMenuStripArm
+        Me.cmdRHelpArm.TabIndex = 220
+        Me.cmdRHelpArm.Text = "R Help"
+        Me.cmdRHelpArm.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripArm
+        '
+        Me.ContextMenuStripArm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuIArm})
+        Me.ContextMenuStripArm.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripArm.Size = New System.Drawing.Size(96, 26)
+        '
+        'ToolStripMenuIArm
+        '
+        Me.ToolStripMenuIArm.Name = "ToolStripMenuIArm"
+        Me.ToolStripMenuIArm.Size = New System.Drawing.Size(95, 22)
+        Me.ToolStripMenuIArm.Text = "arm"
         '
         'dlgModelling
         '
@@ -731,13 +971,20 @@ Partial Class dlgModelling
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(566, 442)
-        Me.Controls.Add(Me.ucrTryModelling)
+        Me.Controls.Add(Me.cmdRHelpArm)
+        Me.Controls.Add(Me.cmdRHelpRstanam)
+        Me.Controls.Add(Me.grpRstanarm)
+        Me.Controls.Add(Me.grpArm)
         Me.Controls.Add(Me.grplme4)
+        Me.Controls.Add(Me.cmdRHelpMASS)
+        Me.Controls.Add(Me.cmdRHelpLme4)
+        Me.Controls.Add(Me.cmdRHelpExtRemes)
+        Me.Controls.Add(Me.cmdRHelpStats)
+        Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpMASS)
         Me.Controls.Add(Me.grpextRemes)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.lblRpackage)
-        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.cmdPredict)
         Me.Controls.Add(Me.cmdClear)
@@ -760,6 +1007,14 @@ Partial Class dlgModelling
         Me.grpextRemes.ResumeLayout(False)
         Me.grplme4.ResumeLayout(False)
         Me.grpMASS.ResumeLayout(False)
+        Me.ContextMenuStripStats.ResumeLayout(False)
+        Me.ContextMenuStripExtRemes.ResumeLayout(False)
+        Me.ContextMenuStripLme4.ResumeLayout(False)
+        Me.ContextMenuStripMASS.ResumeLayout(False)
+        Me.grpRstanarm.ResumeLayout(False)
+        Me.grpArm.ResumeLayout(False)
+        Me.ContextMenuStripRstanam.ResumeLayout(False)
+        Me.ContextMenuStripArm.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -808,7 +1063,6 @@ Partial Class dlgModelling
     Friend WithEvents cmdglmmPQL As Button
     Friend WithEvents cmdglmnb As Button
     Friend WithEvents cmdrlm As Button
-    Friend WithEvents cmdHelp As Button
     Friend WithEvents lblRpackage As Label
     Friend WithEvents ucrChkIncludeArguments As ucrCheck
     Friend WithEvents cmdTilda As Button
@@ -820,4 +1074,28 @@ Partial Class dlgModelling
     Friend WithEvents cmdmca As Button
     Friend WithEvents cmdqda As Button
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents cmdRHelpStats As ucrSplitButton
+    Friend WithEvents cmdRHelpExtRemes As ucrSplitButton
+    Friend WithEvents ContextMenuStripStats As ContextMenuStrip
+    Friend WithEvents ToolStripMenuStats As ToolStripMenuItem
+    Friend WithEvents cmdRHelpMASS As ucrSplitButton
+    Friend WithEvents ContextMenuStripMASS As ContextMenuStrip
+    Friend WithEvents ToolStripMenuMASS As ToolStripMenuItem
+    Friend WithEvents cmdRHelpLme4 As ucrSplitButton
+    Friend WithEvents ContextMenuStripLme4 As ContextMenuStrip
+    Friend WithEvents ToolStripMenuLme4 As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripExtRemes As ContextMenuStrip
+    Friend WithEvents ToolStripMenuExtRemes As ToolStripMenuItem
+    Friend WithEvents grpArm As GroupBox
+    Friend WithEvents cmdbayespolr As Button
+    Friend WithEvents cmdbayesglm As Button
+    Friend WithEvents grpRstanarm As GroupBox
+    Friend WithEvents cmdstanpolr As Button
+    Friend WithEvents cmdstanglm As Button
+    Friend WithEvents cmdRHelpArm As ucrSplitButton
+    Friend WithEvents cmdRHelpRstanam As ucrSplitButton
+    Friend WithEvents ContextMenuStripArm As ContextMenuStrip
+    Friend WithEvents ToolStripMenuIArm As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripRstanam As ContextMenuStrip
+    Friend WithEvents ToolStripMenuRstanam As ToolStripMenuItem
 End Class
