@@ -46,6 +46,8 @@ Partial Class dlgSPI
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkPlot = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpKernel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -201,7 +203,7 @@ Partial Class dlgSPI
         'ucrSaveModel
         '
         Me.ucrSaveModel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 365)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 366)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(320, 24)
@@ -210,10 +212,10 @@ Partial Class dlgSPI
         'ucrSaveIndex
         '
         Me.ucrSaveIndex.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveIndex.Location = New System.Drawing.Point(10, 394)
+        Me.ucrSaveIndex.Location = New System.Drawing.Point(10, 422)
         Me.ucrSaveIndex.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveIndex.Name = "ucrSaveIndex"
-        Me.ucrSaveIndex.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveIndex.Size = New System.Drawing.Size(349, 24)
         Me.ucrSaveIndex.TabIndex = 17
         '
         'ucrNudTimeScale
@@ -242,9 +244,9 @@ Partial Class dlgSPI
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 423)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 480)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 18
         '
         'ucrReceiverElement
@@ -311,12 +313,31 @@ Partial Class dlgSPI
         Me.ucrSelectorVariable.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorVariable.TabIndex = 3
         '
+        'ucrChkPlot
+        '
+        Me.ucrChkPlot.AutoSize = True
+        Me.ucrChkPlot.Checked = False
+        Me.ucrChkPlot.Location = New System.Drawing.Point(10, 395)
+        Me.ucrChkPlot.Name = "ucrChkPlot"
+        Me.ucrChkPlot.Size = New System.Drawing.Size(256, 23)
+        Me.ucrChkPlot.TabIndex = 19
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 449)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(339, 24)
+        Me.ucrSaveGraph.TabIndex = 29
+        '
         'dlgSPI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(412, 478)
+        Me.ClientSize = New System.Drawing.Size(412, 545)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoSPEI)
         Me.Controls.Add(Me.rdoSPI)
         Me.Controls.Add(Me.ucrPnlIndex)
@@ -336,6 +357,7 @@ Partial Class dlgSPI
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSelectorVariable)
+        Me.Controls.Add(Me.ucrChkPlot)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -372,4 +394,6 @@ Partial Class dlgSPI
     Friend WithEvents ucrSaveModel As ucrSave
     Friend WithEvents lblType As Label
     Friend WithEvents ucrInputType As ucrInputComboBox
+    Friend WithEvents ucrChkPlot As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

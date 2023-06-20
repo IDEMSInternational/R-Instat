@@ -68,7 +68,6 @@ Public Class dlgOneVariableSummarise
 
         ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
         ucrNudMaxSum.SetMinMax(1, 12)
-        ucrNudMaxSum.SetRDefault(12)
         ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
 
         ucrPnlSummaries.AddRadioButton(rdoDefault)
@@ -77,8 +76,7 @@ Public Class dlgOneVariableSummarise
         ucrPnlSummaries.AddParameterValuesCondition(rdoCustomised, "checked_radio", "customised")
         ucrPnlSummaries.AddParameterValuesCondition(rdoDefault, "checked_radio", "defaults")
         ucrPnlSummaries.AddParameterValuesCondition(rdoSkim, "checked_radio", "skim")
-        ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True,
-                                            bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=12)
+        ucrPnlSummaries.AddToLinkedControls(ucrNudMaxSum, {rdoDefault}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaries.AddToLinkedControls({ucrChkOmitMissing, ucrPnlColumnFactor, ucrReorderSummary, ucrChkDisplayMissing},
                                             {rdoCustomised}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -247,7 +245,7 @@ Public Class dlgOneVariableSummarise
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
         clsSummaryFunction.SetRCommand("summary")
-        clsSummaryFunction.AddParameter("maxsum", "12")
+        clsSummaryFunction.AddParameter("maxsum", "12", iPosition:=2)
         clsSummaryFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSummaryFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsSummaryFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
