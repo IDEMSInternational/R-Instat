@@ -62,12 +62,13 @@ Public Class ucrFilter
     Private Sub InitialiseControl()
         ucrFilterPreview.txtInput.ReadOnly = True
         ucrFilterByReceiver.Selector = ucrSelectorForFitler
-        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"})
+        ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na", "is.empty", "! is.empty"})
         ucrFilterOperation.SetDropDownStyleAsNonEditable()
-        ucrFactorLevels.SetAsMultipleSelector()
-        ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
-        ucrFactorLevels.SetIncludeLevels(False)
-        ucrFactorLevels.bIncludeNA = True
+
+        ucrFactorLevels.SetAsMultipleSelectorGrid(ucrFilterByReceiver,
+                                                  hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                  bIncludeNALevel:=True)
+
         clsFilterOperator.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
@@ -90,25 +91,26 @@ Public Class ucrFilter
         VariableTypeProperties()
     End Sub
 
+    'todo. currently, this subroutine is called even before load event of this control is called
+    'the visibility setting it's toggling affects how load events of controls it contains are called
+    'this may cause unintended 'load' bugs to some controls like reogrids
+    'when refactoring the sequence of events that call this,
+    'making sure that this is only called during this control's loading event should be prioritised
+    'See issue #7408 comments
+
     Private Sub VariableTypeProperties()
         ucrReceiverExpression.Visible = False
-        lblSelectLevels.Visible = False
         ucrFactorLevels.Visible = False
-        cmdToggleSelectAll.Visible = False
         ucrFilterOperation.Visible = False
         ucrLogicalCombobox.Visible = False
         ucrDatePicker.Visible = False
         grpNumeric.Visible = False
         If Not ucrFilterByReceiver.IsEmpty() Then
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
-                lblSelectLevels.Visible = True
                 ucrFactorLevels.Visible = True
-                cmdToggleSelectAll.Visible = True
-                'ucrFactorLevels.SetSelectionAllLevels(False) 'by default don't select any factors
-                SetToggleButtonSettings()
             Else
                 ucrFilterOperation.Visible = True
-                If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" Then
+                If ucrFilterOperation.GetText() <> "is.na" AndAlso ucrFilterOperation.GetText() <> "! is.na" AndAlso ucrFilterOperation.GetText() <> "is.empty" AndAlso ucrFilterOperation.GetText() <> "! is.empty" Then
                     Select Case ucrFilterByReceiver.strCurrDataType.ToLower
                         Case "logical"
                             ucrLogicalCombobox.Visible = True
@@ -128,10 +130,10 @@ Public Class ucrFilter
             cmdAddCondition.Enabled = False
         Else
             If ucrFilterByReceiver.strCurrDataType.ToLower.Contains("factor") Then
-                cmdAddCondition.Enabled = Not String.IsNullOrEmpty(ucrFactorLevels.GetSelectedLevels())
+                cmdAddCondition.Enabled = ucrFactorLevels.IsAnyGridRowSelected
             Else
                 Select Case ucrFilterOperation.GetText()
-                    Case "is.na", "! is.na"
+                    Case "is.na", "! is.na", "is.empty", "! is.empty"
                         cmdAddCondition.Enabled = True
                     Case Else
                         Select Case ucrFilterByReceiver.strCurrDataType.ToLower
@@ -147,16 +149,6 @@ Public Class ucrFilter
         End If
     End Sub
 
-    Private Sub SetToggleButtonSettings()
-        If ucrFactorLevels.IsAllSelected() Then
-            cmdToggleSelectAll.Text = "Deselect All Levels"
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Flat
-        Else
-            cmdToggleSelectAll.Text = "Select All Levels"
-            cmdToggleSelectAll.FlatStyle = FlatStyle.Popup
-        End If
-    End Sub
-
     Private Sub ucrValueForFilter_ContentsChanged()
         CheckAddEnabled()
     End Sub
@@ -164,7 +156,7 @@ Public Class ucrFilter
     Private Sub ucrFilterReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterByReceiver.ControlContentsChanged
         'for logical columns add {"==", "is.na", "!is.na"} only
         Dim selectedIndex As Integer = ucrFilterOperation.GetSetSelectedIndex
-        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na"}))
+        ucrFilterOperation.SetItems(If(ucrFilterByReceiver.strCurrDataType.ToLower = "logical", {"==", "is.na", "! is.na"}, {"==", "<", "<=", ">", ">=", "!=", "is.na", "! is.na", "is.empty", "! is.empty"}))
         If ucrFilterByReceiver.strCurrDataType.ToLower IsNot "logical" AndAlso selectedIndex < ucrFilterOperation.GetItemsCount Then
             ucrFilterOperation.GetSetSelectedIndex = selectedIndex
         Else
@@ -196,11 +188,11 @@ Public Class ucrFilter
         If ucrFilterByReceiver.strCurrDataType.Contains("factor") Then
             clsCurrentOperator.SetOperation("%in%")
             clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
-            strCondition = ucrFactorLevels.GetSelectedLevels()
+            strCondition = mdlCoreControl.GetRVector(ucrFactorLevels.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True), bOnlyIfMultipleElement:=True)
         Else
             clsCurrentOperator.SetOperation(ucrFilterOperation.GetText())
             clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
-            If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "! is.na" Then
+            If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "! is.na" OrElse ucrFilterOperation.GetText() = "is.empty" OrElse ucrFilterOperation.GetText() = "! is.empty" Then
                 strCondition = ""
             Else
                 If ucrFilterByReceiver.strCurrDataType.ToLower = "character" Then
@@ -235,12 +227,7 @@ Public Class ucrFilter
         RaiseEvent FilterChanged()
     End Sub
 
-    Private Sub cmdToggleSelectAll_Click(sender As Object, e As EventArgs) Handles cmdToggleSelectAll.Click
-        ucrFactorLevels.SetSelectionAllLevels(Not ucrFactorLevels.IsAllSelected())
-    End Sub
-
-    Private Sub ucrFactorLevels_SelectedLevelChanged() Handles ucrFactorLevels.SelectedLevelChanged
-        SetToggleButtonSettings()
+    Private Sub ucrFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLevels.ControlValueChanged
         CheckAddEnabled()
     End Sub
 
@@ -426,4 +413,5 @@ Public Class ucrFilter
         End If
         ucrFilterPreview.SetName(strFilter)
     End Sub
+
 End Class

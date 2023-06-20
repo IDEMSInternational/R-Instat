@@ -94,8 +94,6 @@ Public Class RSyntax
     ''' </list> </summary>
     Public iCallType As Integer = 0 'TODO SJL 07/04/20 Use enumeration?
 
-    ''' <summary>   TODO SJL 07/04/20 Not used. Remove? </summary>
-    Public bHTMLOutput As Boolean = False
 
     ''' <summary>   The script associated with the base R code. </summary>
     Public strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
@@ -415,10 +413,13 @@ Public Class RSyntax
         ElseIf bUseCommandString Then
             strTemp = clsBaseCommandString.ToScript(strScript, strCommandString)
         End If
+
         If bExcludeAssignedFunctionOutput Then
-            'Sometimes the output of the R-command we deal with should not be part of the script... 
-            ' That's only the case when this output has already been assigned.
-            If (bUseBaseFunction AndAlso clsBaseFunction.bIsAssigned) OrElse (bUseBaseOperator AndAlso clsBaseOperator.bIsAssigned) OrElse (bUseCommandString AndAlso clsBaseCommandString.bIsAssigned) Then
+            'Sometimes the output of the R-command we deal with should not be part of the script...  
+            'That's only the case when this output has already been assigned.
+            If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
+                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
+                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
                 Return strScript
             End If
         End If
@@ -445,8 +446,8 @@ Public Class RSyntax
         For Each clsTempCode In lstCodes
             strScript = ""
             strTemp = clsTempCode.ToScript(strScript)
-            'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
-            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso clsTempCode.bIsAssigned Then
+            'Sometimes the output of the R-command we deal with should not be part of the script... 
+            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
                 lstScripts.Add(strScript)
             Else
                 lstScripts.Add(strScript & strTemp)
@@ -577,40 +578,6 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetbIsAssigned() As Boolean
-        If bUseBaseFunction Then
-            Return clsBaseFunction.bIsAssigned
-        ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.bIsAssigned
-        ElseIf bUseCommandString Then
-            Return clsBaseCommandString.bIsAssigned
-        Else
-            Return False
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetbToBeAssigned() As Boolean
-        If bUseBaseFunction Then
-            Return clsBaseFunction.bToBeAssigned
-        ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.bToBeAssigned
-        ElseIf bUseCommandString Then
-            Return clsBaseCommandString.bToBeAssigned
-        Else
-            Return False
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   If the output from the R command needs to be assigned, then returns
     '''             the part of the script to the left of the assignment operator ('&lt;-').
     '''             If the output from the R command doesn't to be assigned, then returns an empty 
@@ -623,124 +590,15 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     Public Function GetstrAssignTo() As String
         If bUseBaseFunction Then
-            Return clsBaseFunction.strAssignTo
+            Return clsBaseFunction.GetRObjectToAssignTo()
         ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.strAssignTo
+            Return clsBaseOperator.GetRObjectToAssignTo()
         ElseIf bUseCommandString Then
-            Return clsBaseCommandString.strAssignTo
+            Return clsBaseCommandString.GetRObjectToAssignTo()
         Else
             Return ""
         End If
     End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <returns>   A String. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetstrAssignToColumn() As String
-        If bUseBaseFunction Then
-            Return clsBaseFunction.strAssignToColumn
-        ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.strAssignToColumn
-        ElseIf bUseCommandString Then
-            Return clsBaseCommandString.strAssignToColumn
-        Else
-            Return ""
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <returns>   A String. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetstrAssignToDataFrame() As String
-        If bUseBaseFunction Then
-            Return clsBaseFunction.strAssignToDataFrame
-        ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.strAssignToDataFrame
-        ElseIf bUseCommandString Then
-            Return clsBaseCommandString.strAssignToDataFrame
-        Else
-            Return ""
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="bNew"> True to new. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetbIsAssigned(bNew As Boolean)
-        If bUseBaseFunction Then
-            clsBaseFunction.bIsAssigned = bNew
-        ElseIf bUseBaseOperator Then
-            clsBaseOperator.bIsAssigned = bNew
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.bIsAssigned = bNew
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="bNew"> True to new. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetbToBeAssigned(bNew As Boolean)
-        If bUseBaseFunction Then
-            clsBaseFunction.bToBeAssigned = bNew
-        ElseIf bUseBaseOperator Then
-            clsBaseOperator.bToBeAssigned = bNew
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.bToBeAssigned = bNew
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strNew">   The new. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetstrAssignTo(strNew As String)
-        If bUseBaseFunction Then
-            clsBaseFunction.strAssignTo = strNew
-        ElseIf bUseBaseOperator Then
-            clsBaseOperator.strAssignTo = strNew
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.strAssignTo = strNew
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strNew">   The new. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetstrAssignToColumn(strNew As String)
-        If bUseBaseFunction Then
-            clsBaseFunction.strAssignToColumn = strNew
-        ElseIf bUseBaseOperator Then
-            clsBaseOperator.strAssignToColumn = strNew
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.strAssignToColumn = strNew
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strNew">   The new. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetstrAssignToDataFrame(strNew As String)
-        If bUseBaseFunction Then
-            clsBaseFunction.strAssignToDataFrame = strNew
-        ElseIf bUseBaseOperator Then
-            clsBaseOperator.strAssignToDataFrame = strNew
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.strAssignToDataFrame = strNew
-        End If
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns true if <paramref name="clsNewRCode"/> is in the list of 'before' R

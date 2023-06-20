@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License 
+' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''--------------------------------------------------------------------------------------------
@@ -32,29 +32,29 @@ Public Class ROperator
     Inherits RCodeStructure
 
     'TODO Danny Parsons 15/04/20:
-    ' There is some tidying of the code that can be done around this class relating to its 
+    ' There is some tidying of the code that can be done around this class relating to its
     ' inheritance from RCodeStructure.
-    ' 
-    ' There are a number of functions which have both an RFunction And an ROperator as optional 
-    ' parameters, with the idea that you usually pass in one or the other. These could be 
-    ' replaced with a single RCodeStructure parameter. There are also classes which may store both 
-    ' an RFunction and an ROperator but only ever expect one, so this may be able to be replaced 
+    '
+    ' There are a number of functions which have both an RFunction And an ROperator as optional
+    ' parameters, with the idea that you usually pass in one or the other. These could be
+    ' replaced with a single RCodeStructure parameter. There are also classes which may store both
+    ' an RFunction and an ROperator but only ever expect one, so this may be able to be replaced
     ' by an RCodeStructure.
-    ' 
-    ' There may be some functions within the RFunction And ROperator classes which could be pushed 
-    ' down to the RCodeStructure because they actually do the same thing regardless of which one it 
-    ' is. I think this has mostly already been done but I think I remember seeing one example of 
+    '
+    ' There may be some functions within the RFunction And ROperator classes which could be pushed
+    ' down to the RCodeStructure because they actually do the same thing regardless of which one it
+    ' is. I think this has mostly already been done but I think I remember seeing one example of
     ' this recently. <-- Note from Lloyd - GetParameter?
     '
-    ' Both of these things exist because originally these two classes were separate before we 
-    ' realised they should inherit from a common class. So  RCodeStructure was created later as the 
+    ' Both of these things exist because originally these two classes were separate before we
+    ' realised they should inherit from a common class. So  RCodeStructure was created later as the
     ' parent class, so I think you can see the remains of this sort of being done backwards.
     '
-    ' Another reason this hasn't been done is that much of this tidying up could affect every single 
-    ' dialog so it's not clear how we coordinate this with all developers so that it doesn't cause a 
+    ' Another reason this hasn't been done is that much of this tidying up could affect every single
+    ' dialog so it's not clear how we coordinate this with all developers so that it doesn't cause a
     ' huge number of conflicts. But it's something we should do at some point to improve the code.
 
-    ''' <summary>   If true then include the operation symbol in the script even if there's 
+    ''' <summary>   If true then include the operation symbol in the script even if there's
     '''             only a single parameter (e.g. to create a script such as '!x').
     '''             Else don't include the operation symbol in a script with only one parameter.
     '''             </summary>
@@ -88,23 +88,23 @@ Public Class ROperator
     '''             operation parameter in brackets. </summary>
     '''
     ''' <param name="strTemp">          The operation symbol (e.g. "+"). </param>
-    ''' <param name="bBracketsTemp">    (Optional) If true then enclose first parameter in brackets. 
+    ''' <param name="bBracketsTemp">    (Optional) If true then enclose first parameter in brackets.
     '''                                 </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
         bBrackets = bBracketsTemp
-        bIsAssigned = False
+        'bIsAssigned = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
-    '''     Creates, updates and returns the script that generates the expected output for this 
+    '''     Creates, updates and returns the script that generates the expected output for this
     '''     operation. An operation will have an operation symbol (e.g. '+') and parameters.
     '''     <para>
-    '''     This function aims to create a human-readable script. It appends the first parameter 
-    '''     to <paramref name="strTemp"/> and then appends the operation symbol (e.g. appends'x+'). 
-    '''     It then appends the remaining parameters using the same symbol (e.g. 'x+y+z'). 
+    '''     This function aims to create a human-readable script. It appends the first parameter
+    '''     to <paramref name="strTemp"/> and then appends the operation symbol (e.g. appends'x+').
+    '''     It then appends the remaining parameters using the same symbol (e.g. 'x+y+z').
     '''     Finally it calls the 'ToScript' function of the base class. This completes the script
     '''     by adding the assignment part.
     '''     </para><para>
@@ -117,21 +117,21 @@ Public Class ROperator
     '''     </description></item><item><description>
     '''         Each parameter may be surrounded by brackets '()'.
     '''     </description></item><item><description>
-    '''         "There is one further use of the operator which has proved really useful. That 
-    '''         is the use of the ',' operator to define additional optional parameters. This Is 
-    '''         sort of a cheat because of course it is not an operator in R but there are a number 
-    '''         of cases where it has been useful to manage a set of parameters together. This also 
-    '''         provides the reason why in that context it can make sense for that operator to have 
+    '''         "There is one further use of the operator which has proved really useful. That
+    '''         is the use of the ',' operator to define additional optional parameters. This Is
+    '''         sort of a cheat because of course it is not an operator in R but there are a number
+    '''         of cases where it has been useful to manage a set of parameters together. This also
+    '''         provides the reason why in that context it can make sense for that operator to have
     '''         no operator symbols and no parameters!" - David Stern 15/04/20
     '''     </description></item>
     ''' </list></summary>
     ''' <param name="strScript">    [in,out] (Optional) The existing script including any
-    '''                             assignment part. 
-    '''                             This script is passed to the 'ToScript' function of the base 
-    '''                             class. This script is also passed to the 'ToScript' function 
+    '''                             assignment part.
+    '''                             This script is passed to the 'ToScript' function of the base
+    '''                             class. This script is also passed to the 'ToScript' function
     '''                             of the operator's parameters. </param>
-    ''' <param name="strTemp">      (Optional) The current expression to assign. The script for 
-    '''                             this operation is appended to this parameter and then passed 
+    ''' <param name="strTemp">      (Optional) The current expression to assign. The script for
+    '''                             this operation is appended to this parameter and then passed
     '''                             to the 'ToScript' function of the base class. </param>
     '''
     ''' <returns> If object needs to be assigned to, then returns the complete assign-to script.
@@ -164,7 +164,7 @@ Public Class ROperator
 
                 'if there is only one parameter, and we need to include the operation symbol
                 If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
-                    'if parameter's position is 0 then put parameter's script on left side 
+                    'if parameter's position is 0 then put parameter's script on left side
                     If clsParameters(0).Position = 0 Then
                         strTemp = strTemp & strAdjustedOperation
                     Else 'else put parameter's script on right side
@@ -196,13 +196,13 @@ Public Class ROperator
                 'if string is intended to be assigned to a script then raise error (because modified script will no longer suitable for this)
                 'TODO SJL 03/04/20 if we only allow these 3 flags to be accessed through 'set/get' functions then we can guarantee that this error situation doesn't occur
                 'TODO Legacy comment:'should also check assignment of parameters'
-                If bToBeAssigned OrElse bIsAssigned Then
+                If IsAssigned() Then
                     MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
                 End If
 
                 'replace double quotes with single quotes
-                '  Note : Can't have double quotes ("") in the string because strTemp will be wrapped 
-                '         with "". In most cases single quotes (') will give the same functionality, 
+                '  Note : Can't have double quotes ("") in the string because strTemp will be wrapped
+                '         with "". In most cases single quotes (') will give the same functionality,
                 '         though it's preferable to avoid this when constructing the RFunction.
                 strTemp = strTemp.Replace(Chr(34), Chr(39))
 
@@ -211,30 +211,30 @@ Public Class ROperator
             End If
         End If
 
-        'if object needs to be assigned to, then create/update the assignment script (if needed) 
+        'if object needs to be assigned to, then create/update the assignment script (if needed)
         '    and return the assignment script. Otherwise just return 'strTemp'.
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
-    '''     If the object already has a parameter with the same name then changes the parameter's 
-    '''     value to the value in <paramref name="clsParam"/>. Else adds <paramref name="clsParam"/> 
+    '''     If the object already has a parameter with the same name then changes the parameter's
+    '''     value to the value in <paramref name="clsParam"/>. Else adds <paramref name="clsParam"/>
     '''     to the object as a new parameter.
     '''     <para>
     '''     This function also ensures that there is no existing parameter with the same position as
     '''     the newly added/updated parameter.
     '''     </para><para>
-    '''     Note about parameter names for operators: They are not named in the display when you do 
-    '''     ToScript() on an ROperator compared to an RFunction, but they are named within this 
-    '''     class since the naming is used to be able to identify them for the purpose of adding 
-    '''     and removing. We usually use the naming convention "0", "1", "2"... for ROperator 
-    '''     parameters so that there is no confusion about the order. 
+    '''     Note about parameter names for operators: They are not named in the display when you do
+    '''     ToScript() on an ROperator compared to an RFunction, but they are named within this
+    '''     class since the naming is used to be able to identify them for the purpose of adding
+    '''     and removing. We usually use the naming convention "0", "1", "2"... for ROperator
+    '''     parameters so that there is no confusion about the order.
     '''     </para><para>
-    '''     Note about parameter position for operators: By default, when the script for this 
+    '''     Note about parameter position for operators: By default, when the script for this
     '''     operator is created then the operator is placed after the parameter (e.g. 'x + ').
     '''     However, if an operator has only one parameter, and that parameter's position is 0,
-    '''     then this parameter will be put on the left side of the operation symbol (e.g. '!x'). 
+    '''     then this parameter will be put on the left side of the operation symbol (e.g. '!x').
     '''     </para></summary>
     '''
     ''' <param name="clsParam"> The new parameter to add. </param>
@@ -267,7 +267,7 @@ Public Class ROperator
     ''' <summary>   Removes all additional parameters. </summary>
     Public Sub RemoveAllAdditionalParameters()
         'TODO SJL 03/04/20 this function is only used by 1 dialog. This hints that there may be an alternative way of doing the same thing.
-        '   It's also suspicious that the other RCodeStructure classes don't have such a function. Why is it only needed for an operator? 
+        '   It's also suspicious that the other RCodeStructure classes don't have such a function. Why is it only needed for an operator?
         '   Can this function be removed?
         SortParameters() 'This is used to bring the parameter with position 0 to the front if it exists, then clear all the others using range.
         If clsParameters(0).Position = 0 Then
@@ -297,14 +297,12 @@ Public Class ROperator
         Dim clsRParam As RParameter
 
         'RCode properties
-        clsTempROperator.strAssignTo = strAssignTo
-        clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
-        clsTempROperator.strAssignToColumn = strAssignToColumn
-        clsTempROperator.strAssignToModel = strAssignToModel
-        clsTempROperator.strAssignToGraph = strAssignToGraph
-        clsTempROperator.strAssignToTable = strAssignToTable
-        clsTempROperator.bToBeAssigned = bToBeAssigned
-        clsTempROperator.bIsAssigned = bIsAssigned
+        'todo. why not use the MyBase.Clone() for some of these inherited from the parent properties?
+        clsTempROperator._strAssignToObject = _strAssignToObject
+        clsTempROperator._strAssignToName = _strAssignToName
+        clsTempROperator._strAssignToObjectTypeLabel = _strAssignToObjectTypeLabel
+        clsTempROperator._strAssignToObjectFormat = _strAssignToObjectFormat
+        clsTempROperator._strDataFrameNameToAddAssignToObject = _strDataFrameNameToAddAssignToObject
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
         clsTempROperator.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         clsTempROperator.bInsertColumnBefore = bInsertColumnBefore

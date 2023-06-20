@@ -202,18 +202,15 @@ Public Class ucrReceiverSingle
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
                     clsGetVariablesFunc.AddParameter("filter_name", GetVariableNames())
-                Case "object"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+                Case "object",
+                     RObjectTypeLabel.Graph,
+                     RObjectTypeLabel.Table,
+                     RObjectTypeLabel.Model,
+                     RObjectTypeLabel.Summary,
+                     RObjectTypeLabel.StructureLabel
+                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
                     clsGetVariablesFunc.AddParameter("object_name", GetVariableNames())
-                Case "graph"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-                    clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
-                    If Not bPrintGraph Then
-                        clsGetVariablesFunc.AddParameter("print_graph", "FALSE")
-                    End If
-                Case "model"
-                    clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-                    clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("as_file", "FALSE")
                 Case "dataframe"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                     clsGetVariablesFunc.AddParameter("data_name", GetVariableNames())
@@ -227,9 +224,9 @@ Public Class ucrReceiverSingle
 
             'TODO make this an option set in Options menu
             If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
-                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignToObject(strRObjectToAssignTo:=strDataFrameName & "." & txtReceiverSingle.Text)
             Else
-                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+                clsGetVariablesFunc.SetAssignToObject(strRObjectToAssignTo:=txtReceiverSingle.Text)
             End If
             Return clsGetVariablesFunc
         Else

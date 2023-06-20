@@ -16,10 +16,10 @@
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrDataFrameLength
-    Inherits instat.ucrCore
+    Inherits instat.ucrInputTextBox
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,30 +36,19 @@ Partial Class ucrDataFrameLength
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.txtLength = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
-        '
-        'txtLength
-        '
-        Me.txtLength.Enabled = False
-        Me.txtLength.Location = New System.Drawing.Point(0, 0)
-        Me.txtLength.Name = "txtLength"
-        Me.txtLength.Size = New System.Drawing.Size(51, 20)
-        Me.txtLength.TabIndex = 0
         '
         'ucrDataFrameLength
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.txtLength)
+        Me.IsReadOnly = True
         Me.Name = "ucrDataFrameLength"
         Me.Size = New System.Drawing.Size(54, 23)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtLength As TextBox
 End Class

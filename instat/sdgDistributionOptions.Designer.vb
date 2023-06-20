@@ -59,7 +59,7 @@ Partial Class sdgDistributionOptions
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(60, 155)
+        Me.ucrBase.Location = New System.Drawing.Point(30, 155)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 0

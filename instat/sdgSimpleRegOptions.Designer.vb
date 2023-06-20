@@ -613,7 +613,7 @@ Partial Class sdgSimpleRegOptions
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(106, 347)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(66, 347)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgButtons.TabIndex = 1

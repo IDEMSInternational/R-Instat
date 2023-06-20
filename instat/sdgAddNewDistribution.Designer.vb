@@ -64,7 +64,7 @@ Partial Class sdgAddNewDistribution
         'ucrBaseSubDialog
         '
         Me.ucrBaseSubDialog.AutoSize = True
-        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(13, 344)
+        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(82, 344)
         Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
         Me.ucrBaseSubDialog.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubDialog.TabIndex = 6

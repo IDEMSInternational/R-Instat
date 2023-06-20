@@ -60,7 +60,6 @@ Public Class dlgOneVarFitModel
         Dim lstCommandButtons As New List(Of Control)
 
         ucrBase.iHelpTopicID = 296
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
@@ -320,6 +319,11 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModelFunction.SetRCommand("fitdist")
         clsROneVarFitModelFunction.AddParameter("method", Chr(34) & "mle" & Chr(34), iPosition:=1)
         clsROneVarFitModelFunction.AddParameter("data", clsRFunctionParameter:=clsRConvertIntegerFunction, iPosition:=0)
+        clsROneVarFitModelFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarFitMod.strCurrentDataFrame,
+                                           strObjectName:="last_model")
 
         clsNaExcludeFunction.SetPackageName("stats")
         clsNaExcludeFunction.SetRCommand("na.exclude")
@@ -340,42 +344,50 @@ Public Class dlgOneVarFitModel
         'Display Options/Functions
         clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
-        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=0)
-        clsRplotFunction.iCallType = 3
         clsRplotFunction.bExcludeAssignedFunctionOutput = False
+        clsRplotFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarFitMod.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         clsRplotPPCompFunction.SetPackageName("fitdistrplus")
         clsRplotPPCompFunction.SetRCommand("ppcomp")
         clsRplotPPCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotPPCompFunction.iCallType = 3
         clsRplotPPCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotPPCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotPPCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRplotCdfCompFunction.SetPackageName("fitdistrplus")
         clsRplotCdfCompFunction.SetRCommand("cdfcomp")
         clsRplotCdfCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotCdfCompFunction.iCallType = 3
         clsRplotCdfCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotCdfCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotCdfCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRplotQqCompFunction.SetPackageName("fitdistrplus")
         clsRplotQqCompFunction.SetRCommand("qqcomp")
         clsRplotQqCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotQqCompFunction.iCallType = 3
         clsRplotQqCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotQqCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotQqCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRplotDensCompFunction.SetPackageName("fitdistrplus")
         clsRplotDensCompFunction.SetRCommand("denscomp")
         clsRplotDensCompFunction.bExcludeAssignedFunctionOutput = False
         clsRplotDensCompFunction.iCallType = 3
         clsRplotDensCompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34), iPosition:=0)
-        clsRplotDensCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
+        'clsRplotDensCompFunction.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=1)
 
         clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
         clsRLogLikFunction.iCallType = 3
         clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=0)
+        clsRLogLikFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarFitMod.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
 
         'Test
         clsBionomialFunction.SetPackageName("mosaic")
@@ -447,7 +459,6 @@ Public Class dlgOneVarFitModel
         clsMeanCIFunction.AddParameter("conf.level", "0.95", iPosition:=1)
         clsMeanCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=2)
 
-
         clsMedianCIFunction.SetPackageName("DescTools")
         clsMedianCIFunction.SetRCommand("MedianCI ")
         clsMedianCIFunction.AddParameter("method", Chr(34) & "exact" & Chr(34), iPosition:=2)
@@ -469,8 +480,6 @@ Public Class dlgOneVarFitModel
         clsQuantileCIFunction.AddParameter("minLength", "FALSE", iPosition:=6)
         clsQuantileCIFunction.AddParameter("bootci.type", Chr(34) & "norm" & Chr(34), iPosition:=5)
 
-
-
         clsSdCIFunction.SetPackageName("MKinfer")
         clsSdCIFunction.SetRCommand("sdCI")
         clsSdCIFunction.AddParameter("boot", "FALSE", iPosition:=2)
@@ -482,14 +491,18 @@ Public Class dlgOneVarFitModel
         clsVarCIFunction.SetRCommand("VarCI")
         clsVarCIFunction.AddParameter("method", Chr(34) & "classic" & Chr(34), iPosition:=1)
 
-        clsROneVarFitModelFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
-        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_likelihood")
-        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModelFunction)
         bResetFittingOptions = True
         bResetFitModDisplay = True
+    End Sub
+
+    Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlValueChanged
+        clsRplotFunction.AddParameter("x", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=0)
+        clsRplotPPCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+        clsRplotCdfCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+        clsRplotQqCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
+        clsRplotDensCompFunction.AddParameter("ft", strParameterValue:=clsROneVarFitModelFunction.GetRObjectToAssignTo(), iPosition:=1)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)

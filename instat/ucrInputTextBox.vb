@@ -54,7 +54,11 @@ Public Class ucrInputTextBox
         Else
             e.Cancel = Not ValidateText(strCurrent)
         End If
-        If Not e.Cancel Then OnNameChanged()
+        If Not e.Cancel Then
+            'Note. calling this subroutine internally raises
+            'ControlContentsChanged and ControlValueChanged events
+            OnNameChanged()
+        End If
     End Sub
 
     Public Overrides Function GetText() As String
@@ -74,7 +78,8 @@ Public Class ucrInputTextBox
     End Function
 
     Private Sub txtInput_TextChanged(sender As Object, e As EventArgs) Handles txtInput.TextChanged
-        OnContentsChanged()
+        'shouldn't we be raising OnControlValueChanged instead? see issue #7367
+        OnControlContentsChanged()
     End Sub
 
     Private Sub txtInput_Click(sender As Object, e As EventArgs) Handles txtInput.Click

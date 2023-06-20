@@ -150,6 +150,26 @@ Public Class clsPrepareFunctionsForGrids
         End If
         _RLink.RunScript(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
+
+    ''' <summary>
+    '''  Check if the column factor contains labels.
+    ''' </summary>
+    Public Function CheckHasLabels(strColumnName As String) As Boolean
+        Dim clsColmnLabelsRFunction = New RFunction
+        Dim clsGetColumnsFromData As New RFunction
+
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFromData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
+        clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
+        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.AddParameter("col_names", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=1)
+
+        Return frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True).AsLogical(0)
+    End Function
+
     ''' <summary>
     ''' View dataframe the whole dataframe within a pop up
     ''' </summary>
@@ -297,7 +317,8 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="strColumnName"></param>
     ''' <param name="strRowText"></param>
     ''' <param name="bWithQuotes"></param>
-    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean)
+    ''' <param name="bListOfVector"></param>
+    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False, Optional bAddOutputInInternalViewer As Boolean = True)
         Dim clsReplaceValue As New RFunction
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
@@ -305,6 +326,9 @@ Public Class clsPrepareFunctionsForGrids
         clsReplaceValue.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
         clsReplaceValue.AddParameter("col_name", Chr(34) & strColumnName & Chr(34))
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowText & Chr(34))
+        If bListOfVector Then
+            strNewValue = "list(c(" & strNewValue & "))"
+        End If
         If bWithQuotes Then
             clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
         Else
@@ -312,6 +336,7 @@ Public Class clsPrepareFunctionsForGrids
         End If
         _RLink.RunScript(clsReplaceValue.ToScript(), strComment:="Replace Value In Data")
     End Sub
+
     ''' <summary>
     ''' Get the column type for a given column
     ''' </summary>
@@ -321,5 +346,20 @@ Public Class clsPrepareFunctionsForGrids
         Return _RLink.GetColumnType(_strDataFrame, strColumnName)
     End Function
 
+    ''' <summary>
+    '''  Description: To Delete one or many cells 
+    ''' the delete cell function is to be used to Replace selected values with NA 
+    ''' in the dataframe.
+    '''</summary>
+    ''' <param name="lstColumnNames"></param>
+    ''' <param name="lstRowNames"></param>
+    Public Sub DeleteCells(lstRowNames As List(Of String), lstColumnNames As List(Of String))
+        Dim clsDeleteCells As New RFunction
+        clsDeleteCells.SetRCommand(_RLink.strInstatDataObject & "$replace_values_with_NA")
+        clsDeleteCells.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsDeleteCells.AddParameter("column_index", _RLink.GetListAsRString(lstColumnNames, bWithQuotes:=False))
+        clsDeleteCells.AddParameter("row_index", _RLink.GetListAsRString(lstRowNames, bWithQuotes:=False))
+        _RLink.RunScript(clsDeleteCells.ToScript(), strComment:="Right click menu: Delete Cell(s)")
+    End Sub
 End Class
 

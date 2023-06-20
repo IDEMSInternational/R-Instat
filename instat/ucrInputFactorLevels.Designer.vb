@@ -28,9 +28,8 @@ Partial Class ucrInputFactorLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.Name = "ucrInputFactorLevels"
-        Me.Size = New System.Drawing.Size(0, 0)
+        Me.Size = New System.Drawing.Size(164, 21)
         Me.ResumeLayout(False)
 
     End Sub

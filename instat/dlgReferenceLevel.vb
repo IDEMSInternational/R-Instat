@@ -48,10 +48,16 @@ Public Class dlgReferenceLevel
         ucrReceiverReferenceLevels.strSelectorHeading = "Factors"
         ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
 
+
+        Dim dctParamAndColNames As New Dictionary(Of String, String)
+        dctParamAndColNames.Add("new_ref_level", ucrFactor.DefaultColumnNames.Label)
+
         ucrFactorReferenceLevels.SetParameter(New RParameter("new_ref_level", 2))
-        ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
-        ucrFactorReferenceLevels.SetAsSingleSelector()
-        ucrFactorReferenceLevels.SetIncludeLevels(False)
+        ucrFactorReferenceLevels.SetAsSingleSelectorGrid(ucrReceiverReferenceLevels,
+                                                  dctParamAndColNames:=dctParamAndColNames,
+                                                  hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                  bIncludeNALevel:=False)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -63,15 +69,13 @@ Public Class dlgReferenceLevel
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorForReferenceLevels.SetRCode(clsSetRefLevel, bReset)
+        ucrReceiverReferenceLevels.SetRCode(clsSetRefLevel, bReset)
+        ucrFactorReferenceLevels.SetRCode(clsSetRefLevel, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverReferenceLevels.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverReferenceLevels.IsEmpty AndAlso ucrFactorReferenceLevels.IsAnyGridRowSelected)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -80,14 +84,7 @@ Public Class dlgReferenceLevel
         TestOKEnabled()
     End Sub
 
-    Private Sub SetDefaultDataFrame()
-        If strDefaultDataFrame <> "" Then
-            ucrSelectorForReferenceLevels.SetDataframe(strDefaultDataFrame)
-        End If
-        strDefaultDataFrame = ""
-    End Sub
-
-    Private Sub ucrReceiverReferenceLevels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReferenceLevels.ControlContentsChanged
+    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReferenceLevels.ControlValueChanged, ucrFactorReferenceLevels.ControlValueChanged
         TestOKEnabled()
     End Sub
 End Class

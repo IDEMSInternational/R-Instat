@@ -634,7 +634,7 @@ Public Class dlgEndOfRainsSeason
         clsIfElseRainMaxFunction.bToScriptAsRString = True
         clsIfElseRainMaxFunction.SetRCommand("ifelse")
         clsIfElseRainMaxFunction.AddParameter("test", clsRFunctionParameter:=clsEndSeasonIsNaRain, iPosition:=0)
-        clsIfElseRainMaxFunction.AddParameter("yes", iCapacityDefault, iPosition:=0)
+        clsIfElseRainMaxFunction.AddParameter("yes", 100, iPosition:=0)
 
         'Pmax
         clsPMaxFunction.SetRCommand("pmax")

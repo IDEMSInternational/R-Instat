@@ -213,7 +213,7 @@ Partial Class ucrAxes
         Me.ucrChkLabels.Checked = False
         Me.ucrChkLabels.Location = New System.Drawing.Point(5, 133)
         Me.ucrChkLabels.Name = "ucrChkLabels"
-        Me.ucrChkLabels.Size = New System.Drawing.Size(65, 23)
+        Me.ucrChkLabels.Size = New System.Drawing.Size(87, 23)
         Me.ucrChkLabels.TabIndex = 22
         '
         'ucrInputMajorBreaksLabels
@@ -222,9 +222,9 @@ Partial Class ucrAxes
         Me.ucrInputMajorBreaksLabels.AutoSize = True
         Me.ucrInputMajorBreaksLabels.IsMultiline = False
         Me.ucrInputMajorBreaksLabels.IsReadOnly = False
-        Me.ucrInputMajorBreaksLabels.Location = New System.Drawing.Point(74, 132)
+        Me.ucrInputMajorBreaksLabels.Location = New System.Drawing.Point(98, 132)
         Me.ucrInputMajorBreaksLabels.Name = "ucrInputMajorBreaksLabels"
-        Me.ucrInputMajorBreaksLabels.Size = New System.Drawing.Size(170, 21)
+        Me.ucrInputMajorBreaksLabels.Size = New System.Drawing.Size(146, 21)
         Me.ucrInputMajorBreaksLabels.TabIndex = 4
         '
         'rdoMajorBreaksSeq
@@ -255,7 +255,7 @@ Partial Class ucrAxes
         Me.ucrInputMajorBreaksInStepsOf.AutoSize = True
         Me.ucrInputMajorBreaksInStepsOf.IsMultiline = False
         Me.ucrInputMajorBreaksInStepsOf.IsReadOnly = False
-        Me.ucrInputMajorBreaksInStepsOf.Location = New System.Drawing.Point(74, 99)
+        Me.ucrInputMajorBreaksInStepsOf.Location = New System.Drawing.Point(114, 99)
         Me.ucrInputMajorBreaksInStepsOf.Name = "ucrInputMajorBreaksInStepsOf"
         Me.ucrInputMajorBreaksInStepsOf.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputMajorBreaksInStepsOf.TabIndex = 19
@@ -277,7 +277,7 @@ Partial Class ucrAxes
         Me.ucrInputMajorBreaksTo.AutoSize = True
         Me.ucrInputMajorBreaksTo.IsMultiline = False
         Me.ucrInputMajorBreaksTo.IsReadOnly = False
-        Me.ucrInputMajorBreaksTo.Location = New System.Drawing.Point(74, 72)
+        Me.ucrInputMajorBreaksTo.Location = New System.Drawing.Point(114, 72)
         Me.ucrInputMajorBreaksTo.Name = "ucrInputMajorBreaksTo"
         Me.ucrInputMajorBreaksTo.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputMajorBreaksTo.TabIndex = 19
@@ -288,7 +288,7 @@ Partial Class ucrAxes
         Me.ucrInputMajorBreaksFrom.AutoSize = True
         Me.ucrInputMajorBreaksFrom.IsMultiline = False
         Me.ucrInputMajorBreaksFrom.IsReadOnly = False
-        Me.ucrInputMajorBreaksFrom.Location = New System.Drawing.Point(74, 46)
+        Me.ucrInputMajorBreaksFrom.Location = New System.Drawing.Point(114, 46)
         Me.ucrInputMajorBreaksFrom.Name = "ucrInputMajorBreaksFrom"
         Me.ucrInputMajorBreaksFrom.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputMajorBreaksFrom.TabIndex = 19
@@ -380,9 +380,9 @@ Partial Class ucrAxes
         Me.ucrInputRelaceMissingvalues.AutoSize = True
         Me.ucrInputRelaceMissingvalues.IsMultiline = False
         Me.ucrInputRelaceMissingvalues.IsReadOnly = False
-        Me.ucrInputRelaceMissingvalues.Location = New System.Drawing.Point(112, 103)
+        Me.ucrInputRelaceMissingvalues.Location = New System.Drawing.Point(191, 103)
         Me.ucrInputRelaceMissingvalues.Name = "ucrInputRelaceMissingvalues"
-        Me.ucrInputRelaceMissingvalues.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputRelaceMissingvalues.Size = New System.Drawing.Size(78, 22)
         Me.ucrInputRelaceMissingvalues.TabIndex = 27
         '
         'ucrInputExpand
@@ -391,9 +391,9 @@ Partial Class ucrAxes
         Me.ucrInputExpand.AutoSize = True
         Me.ucrInputExpand.IsMultiline = False
         Me.ucrInputExpand.IsReadOnly = False
-        Me.ucrInputExpand.Location = New System.Drawing.Point(112, 187)
+        Me.ucrInputExpand.Location = New System.Drawing.Point(191, 187)
         Me.ucrInputExpand.Name = "ucrInputExpand"
-        Me.ucrInputExpand.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputExpand.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputExpand.TabIndex = 27
         '
         'ucrInputTransformation
@@ -402,9 +402,9 @@ Partial Class ucrAxes
         Me.ucrInputTransformation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTransformation.GetSetSelectedIndex = -1
         Me.ucrInputTransformation.IsReadOnly = False
-        Me.ucrInputTransformation.Location = New System.Drawing.Point(112, 159)
+        Me.ucrInputTransformation.Location = New System.Drawing.Point(191, 159)
         Me.ucrInputTransformation.Name = "ucrInputTransformation"
-        Me.ucrInputTransformation.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputTransformation.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputTransformation.TabIndex = 26
         '
         'ucrInputPosition
@@ -413,9 +413,9 @@ Partial Class ucrAxes
         Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(112, 131)
+        Me.ucrInputPosition.Location = New System.Drawing.Point(191, 131)
         Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputPosition.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputPosition.TabIndex = 26
         '
         'ucrChkExpand
@@ -424,7 +424,7 @@ Partial Class ucrAxes
         Me.ucrChkExpand.Checked = False
         Me.ucrChkExpand.Location = New System.Drawing.Point(6, 187)
         Me.ucrChkExpand.Name = "ucrChkExpand"
-        Me.ucrChkExpand.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkExpand.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkExpand.TabIndex = 23
         '
         'ucrChkTransformation
@@ -433,7 +433,7 @@ Partial Class ucrAxes
         Me.ucrChkTransformation.Checked = False
         Me.ucrChkTransformation.Location = New System.Drawing.Point(6, 159)
         Me.ucrChkTransformation.Name = "ucrChkTransformation"
-        Me.ucrChkTransformation.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkTransformation.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkTransformation.TabIndex = 23
         '
         'ucrChkPosition
@@ -442,7 +442,7 @@ Partial Class ucrAxes
         Me.ucrChkPosition.Checked = False
         Me.ucrChkPosition.Location = New System.Drawing.Point(6, 131)
         Me.ucrChkPosition.Name = "ucrChkPosition"
-        Me.ucrChkPosition.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPosition.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkPosition.TabIndex = 23
         '
         'ucrChkNaValue
@@ -451,7 +451,7 @@ Partial Class ucrAxes
         Me.ucrChkNaValue.Checked = False
         Me.ucrChkNaValue.Location = New System.Drawing.Point(6, 103)
         Me.ucrChkNaValue.Name = "ucrChkNaValue"
-        Me.ucrChkNaValue.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkNaValue.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkNaValue.TabIndex = 23
         '
         'ucrInputUpperLimit
@@ -709,7 +709,7 @@ Partial Class ucrAxes
         Me.ucrInputMinorBreaksFrom.AutoSize = True
         Me.ucrInputMinorBreaksFrom.IsMultiline = False
         Me.ucrInputMinorBreaksFrom.IsReadOnly = False
-        Me.ucrInputMinorBreaksFrom.Location = New System.Drawing.Point(74, 45)
+        Me.ucrInputMinorBreaksFrom.Location = New System.Drawing.Point(125, 43)
         Me.ucrInputMinorBreaksFrom.Name = "ucrInputMinorBreaksFrom"
         Me.ucrInputMinorBreaksFrom.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputMinorBreaksFrom.TabIndex = 30
@@ -770,12 +770,12 @@ Partial Class ucrAxes
         Me.grpMinorBreaks.Controls.Add(Me.lblMinorBreaksInStepsOf)
         Me.grpMinorBreaks.Controls.Add(Me.rdoMinorBreaksSeq)
         Me.grpMinorBreaks.Controls.Add(Me.lblMinorBreaksTo)
-        Me.grpMinorBreaks.Controls.Add(Me.ucrInputMinorBreaksCustom)
         Me.grpMinorBreaks.Controls.Add(Me.rdoMinorBreaksCustom)
         Me.grpMinorBreaks.Controls.Add(Me.ucrPnlMinorBreaks)
         Me.grpMinorBreaks.Controls.Add(Me.ucrInputMinorBreaksFrom)
         Me.grpMinorBreaks.Controls.Add(Me.ucrInputMinorBreaksInStepsOf)
         Me.grpMinorBreaks.Controls.Add(Me.ucrInputMinorBreaksTo)
+        Me.grpMinorBreaks.Controls.Add(Me.ucrInputMinorBreaksCustom)
         Me.grpMinorBreaks.Location = New System.Drawing.Point(310, 197)
         Me.grpMinorBreaks.Name = "grpMinorBreaks"
         Me.grpMinorBreaks.Size = New System.Drawing.Size(354, 121)
@@ -807,10 +807,10 @@ Partial Class ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpMinorBreaks)
         Me.Controls.Add(Me.ucrInputAxisType)
-        Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMajorBreaks)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"

@@ -19,6 +19,8 @@ Public Class ucrColumnMetadataLinuxGrid
 
     Private _lstNonEditableColumns As New List(Of String)
 
+    Event DeleteLabels(strColumnName As String) Implements IColumnMetaDataGrid.DeleteLabels
+
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
     Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns

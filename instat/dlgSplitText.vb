@@ -54,7 +54,6 @@ Public Class dlgSplitText
         ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split_fixed")
 
         ucrPnlTextComponents.AddToLinkedControls(ucrNudPieces, {rdoFixedNumberOfComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=2, bNewLinkedChangeParameterValue:=True)
-        ucrPnlSplitText.AddToLinkedControls(ucrSaveColumn, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoTextComponents}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrPnlTextComponents, {rdoTextComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFixedNumberOfComponents)
         ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrInputRegexPattern, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -85,12 +84,10 @@ Public Class dlgSplitText
         ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked(True, False)
         ucrChkIncludeRegularExpressions.SetRDefault("FALSE")
 
-
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
         ucrSaveColumn.SetIsComboBox()
-        ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrSaveColumn.setLinkedReceiver(ucrReceiverSplitTextColumn)
     End Sub
 
@@ -103,6 +100,7 @@ Public Class dlgSplitText
         clsPatternDummyFunction = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
+        ucrSaveColumn.Reset()
 
         ucrInputRegexPattern.SetName("")
 
@@ -128,7 +126,7 @@ Public Class dlgSplitText
         clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
         clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
 
-        clsTextComponentsFixed.SetAssignTo(strTemp:="split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
+        clsTextComponentsFixed.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
@@ -137,7 +135,10 @@ Public Class dlgSplitText
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
-        ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, bReset)
+
+        ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, iAdditionalPairNo:=1)
+        ucrSaveColumn.AddAdditionalRCode(clsBinaryColumns, iAdditionalPairNo:=2)
+
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
         ucrInputPattern.SetRCode(clsPatternDummyFunction, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
@@ -168,20 +169,14 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub ucrPnlSplitText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSplitText.ControlValueChanged
-        If rdoBinaryColumns.Checked Then
-            cmdAddkeyboard.Visible = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-        ElseIf rdoTextComponents.Checked Then
-            SplitTextOptions()
-        End If
-
         SetVisibleAddKeyboardButton()
         ChangeParametersValues()
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrPnlTextComponents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextComponents.ControlValueChanged
-        SplitTextOptions()
         ChangeParametersValues()
+        SetBaseFunction()
     End Sub
 
     Private Sub SetVisibleAddKeyboardButton()
@@ -213,11 +208,16 @@ Public Class dlgSplitText
         End If
     End Sub
 
-    Private Sub SplitTextOptions()
-        If rdoFixedNumberOfComponents.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-        ElseIf rdoMaximumNumberOfComponents.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+    Private Sub SetBaseFunction()
+        If rdoBinaryColumns.Checked Then
+            cmdAddkeyboard.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+        Else
+            If rdoFixedNumberOfComponents.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+            ElseIf rdoMaximumNumberOfComponents.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+            End If
         End If
     End Sub
 

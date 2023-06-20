@@ -82,25 +82,23 @@ Partial Class dlgCalculateTreatmentDifferences
         'ucrInputFactorOption2
         '
         Me.ucrInputFactorOption2.AddQuotesIfUnrecognised = True
-        Me.ucrInputFactorOption2.AutoSize = True
         Me.ucrInputFactorOption2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFactorOption2.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption2.IsReadOnly = False
         Me.ucrInputFactorOption2.Location = New System.Drawing.Point(272, 164)
         Me.ucrInputFactorOption2.Name = "ucrInputFactorOption2"
-        Me.ucrInputFactorOption2.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputFactorOption2.Size = New System.Drawing.Size(120, 24)
         Me.ucrInputFactorOption2.TabIndex = 24
         '
         'ucrInputFactorOption1
         '
         Me.ucrInputFactorOption1.AddQuotesIfUnrecognised = True
-        Me.ucrInputFactorOption1.AutoSize = True
         Me.ucrInputFactorOption1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFactorOption1.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption1.IsReadOnly = False
         Me.ucrInputFactorOption1.Location = New System.Drawing.Point(272, 122)
         Me.ucrInputFactorOption1.Name = "ucrInputFactorOption1"
-        Me.ucrInputFactorOption1.Size = New System.Drawing.Size(0, 0)
+        Me.ucrInputFactorOption1.Size = New System.Drawing.Size(120, 24)
         Me.ucrInputFactorOption1.TabIndex = 22
         '
         'ucrReceiverID

@@ -49,7 +49,7 @@ Partial Class sdgFactorDataFrame
         'ucrBaseFactorSubdlg
         '
         Me.ucrBaseFactorSubdlg.AutoSize = True
-        Me.ucrBaseFactorSubdlg.Location = New System.Drawing.Point(120, 228)
+        Me.ucrBaseFactorSubdlg.Location = New System.Drawing.Point(86, 228)
         Me.ucrBaseFactorSubdlg.Name = "ucrBaseFactorSubdlg"
         Me.ucrBaseFactorSubdlg.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseFactorSubdlg.TabIndex = 0

@@ -34,6 +34,7 @@ Public Class dlgDeleteObjects
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        CountLevels()
         TestOKEnabled()
     End Sub
 
@@ -53,6 +54,7 @@ Public Class dlgDeleteObjects
         ucrInputComboType.SetParameter(New RParameter("object_type", 2))
         dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
         dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
+        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
         dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
         dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
         dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
@@ -60,6 +62,7 @@ Public Class dlgDeleteObjects
         ucrInputComboType.SetItems(dctTypes)
         ucrInputComboType.SetDropDownStyleAsNonEditable()
 
+        lblDeleteNumber.ForeColor = Color.Red
     End Sub
 
     Private Sub SetDefaults()
@@ -107,5 +110,11 @@ Public Class dlgDeleteObjects
 
     Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
         TestOKEnabled()
+        CountLevels()
+    End Sub
+
+    Private Sub CountLevels()
+        lblDeleteNumber.Text = " " & ucrReceiverObjectsToDelete.Count
+        lblDeleteNumber.Visible = ucrReceiverObjectsToDelete.Count > 0
     End Sub
 End Class

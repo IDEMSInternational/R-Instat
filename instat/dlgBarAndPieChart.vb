@@ -17,6 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgBarAndPieChart
+    Private bResetLineLayerSubdialog As Boolean = True
     Private clsRggplotFunction As New RFunction
     Private clsRgeomBarFunction As New RFunction
     Private clsRgeomBarFunction1 As New RFunction
@@ -74,11 +75,20 @@ Public Class dlgBarAndPieChart
     Private clsGeomTextWordcloudFunction As New RFunction
     Private clsGeomTextWordcloudAesFunction As New RFunction
     Private clsScaleSizeAreaFunction As New RFunction
+    Private clsDummyFunction As New RFunction
+    Private clsPointsFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
     Private ReadOnly strReverse As String = "Reverse"
     Private ReadOnly strNone As String = "None"
+
+    'Parameter names for geoms
+    Private strFirstParameterName As String = "geomfunc"
+    Private strStatSummaryParameterName As String = "stat_summary"
+    Private strAdditionalPointsParameterName As String = "add_jitter"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
+
 
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -92,7 +102,6 @@ Public Class dlgBarAndPieChart
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
-        ChangeButtonsText()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -119,13 +128,13 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoWordCloud)
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, {"coordpolar", "geom_bar", "geom_text"})
-        ucrPnlOptions.AddFunctionNamesCondition(rdoValue, {"coordpolar", "geom_bar", "geom_text"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoValue, {"coordpolar", "geom_bar", "geom_text", "geom_lollipop"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor, ucrInputAddReorder, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrInputReorderValue, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrInputReorderX, {rdoFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrChkReorderValue, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrChkReorderFrequency, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize, ucrChkIncreaseSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
@@ -221,17 +230,18 @@ Public Class dlgBarAndPieChart
         ucrChkPolarCoordinates.SetParameter(New RParameter("theta"))
         ucrChkPolarCoordinates.SetValueIfChecked(Chr(34) & "y" & Chr(34))
         ucrChkPolarCoordinates.AddToLinkedControls({ucrPnlPolar}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        
+
         ucrPnlPolar.AddRadioButton(rdoPie)
         ucrPnlPolar.AddRadioButton(rdoDonut)
 
         ucrInputBarChartPositions.SetParameter(New RParameter("position", 0))
-        dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
-        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
+        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
+        dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
+        dctPositionPairs.Add("Fill in reverse", "position_fill(reverse = TRUE)")
         ucrInputBarChartPositions.SetItems(dctPositionPairs)
         ucrInputBarChartPositions.SetDropDownStyleAsNonEditable()
         ucrInputBarChartPositions.SetRDefault(Chr(34) & "stack" & Chr(34))
@@ -244,7 +254,7 @@ Public Class dlgBarAndPieChart
 
         ucrInputLabelPosition.SetParameter(New RParameter("vjust", 2))
         dctLabelPositions.Add("Out", "-0.25")
-        dctLabelPositions.Add("In", "5")
+        dctLabelPositions.Add("In", "1.5")
         ucrInputLabelPosition.SetItems(dctLabelPositions)
         ucrInputLabelPosition.SetDropDownStyleAsNonEditable()
 
@@ -305,11 +315,18 @@ Public Class dlgBarAndPieChart
 
         ucrInputReorderX.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputReorderX.SetDropDownStyleAsNonEditable()
-        ucrInputReorderX.SetLinkedDisplayControl(lblReorderX)
 
         ucrInputReorderValue.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputReorderValue.SetDropDownStyleAsNonEditable()
-        ucrInputReorderValue.SetLinkedDisplayControl(lblReorderValue)
+        ucrChkReorderValue.SetText("Reorder")
+        ucrChkReorderValue.AddFunctionNamesCondition(True, "reorder", True)
+        ucrChkReorderValue.AddFunctionNamesCondition(False, "reorder", False)
+        ucrChkReorderValue.AddToLinkedControls(ucrInputReorderValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkReorderFrequency.SetText("Reorder")
+        ucrChkReorderFrequency.SetParameter(New RParameter("Checked", iNewPosition:=0))
+        ucrChkReorderFrequency.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkReorderFrequency.AddToLinkedControls(ucrInputReorderX, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrInputLayout.SetParameter(New RParameter("layout", 2))
         dctLayout.Add("Squarified", Chr(34) & "squarified" & Chr(34))
@@ -351,6 +368,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetDefaults()
+        bResetLineLayerSubdialog = True
         clsBaseOperator = New ROperator
         clsIsEqualToOperator1 = New ROperator
         clsIsEqualToOperator2 = New ROperator
@@ -388,6 +406,8 @@ Public Class dlgBarAndPieChart
         clsGeomTextWordcloudFunction = New RFunction
         clsGeomTextWordcloudAesFunction = New RFunction
         clsScaleSizeAreaFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsPointsFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -397,16 +417,16 @@ Public Class dlgBarAndPieChart
         bResetBarLayerSubdialog = True
 
         ucrInputAddReorder.SetText(strNone)
-        ucrInputAddReorder.bUpdateRCodeFromControl = True
 
         ucrInputReorderX.SetText(strNone)
         ucrInputReorderX.bUpdateRCodeFromControl = True
 
         ucrInputReorderValue.SetText(strNone)
-        ucrInputReorderValue.bUpdateRCodeFromControl = True
         'Temp fix: Set panel conditions properly!
         rdoPie.Checked = True
         rdoFrequency.Checked = True
+
+        clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -423,7 +443,7 @@ Public Class dlgBarAndPieChart
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
-        clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("position", Chr(34) & "stack" & Chr(34), iPosition:=0)
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
@@ -456,9 +476,7 @@ Public Class dlgBarAndPieChart
         clsForecatsInfreqValue.SetRCommand("fct_infreq")
 
         clsReorderFunctionValue.SetRCommand("reorder")
-        clsReorderFunctionValue.SetRCommand("reorder")
 
-        clsReorderFunction.SetRCommand("reorder")
         clsReorderFunction.SetRCommand("reorder")
 
         clsAesFunction1.SetRCommand("aes")
@@ -466,6 +484,11 @@ Public Class dlgBarAndPieChart
         clsAesFunction2.SetRCommand("aes")
 
         clsLevelsFunction.SetRCommand("levels")
+
+        clsPointsFunction.SetPackageName("ggplot2")
+        clsPointsFunction.SetRCommand("geom_point")
+        clsPointsFunction.AddParameter("size", "3")
+        clsPointsFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
         clsIsEqualToOperator1.SetOperation("==")
         clsIsEqualToOperator1.AddParameter("right", clsROperatorParameter:=clsOpeningSubsetOperator1, iPosition:=1)
@@ -587,6 +610,7 @@ Public Class dlgBarAndPieChart
         ucrChkPolarCoordinates.SetRCode(clsPolarCoordFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkBacktoback.SetRCode(clsScaleYSymmetricFunction, bReset)
+        ucrChkReorderValue.SetRCode(clsReorderFunctionValue, bReset)
         ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
         ucrChkAddLabelsText.SetRCode(clsBaseOperator, bReset)
@@ -610,6 +634,7 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
+        ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -646,55 +671,80 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        If rdoValue.Checked Or rdoFrequency.Checked Then
-            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsBarAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog, bNewEnableDiscrete:=False)
-        Else
-            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsPieAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog)
-        End If
-        sdgPlots.ShowDialog()
-        bResetSubdialog = False
-        'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsLabelAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector,
+                                   bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
+
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsLabelAesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverX.Clear()
+                Else
+                    ucrReceiverX.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBarChart.bSingleVariable) Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrVariablesAsFactorForBarChart.Clear()
+                Else
+                    ucrReceiverWordcloudSize.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrReceiverByFactor.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
     End Sub
 
-    Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        'What should global and local aes be?
-        If rdoValue.Checked Or rdoFrequency.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
-            sdgLayerOptions.ShowDialog()
-            bResetBarLayerSubdialog = False
-            If clsBarAesFunction.ContainsParameter("x") Then
-                ucrVariablesAsFactorForBarChart.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
-            Else
-                ucrVariablesAsFactorForBarChart.Clear()
-            End If
-            If clsBarAesFunction.ContainsParameter("fill") Then
-                ucrReceiverByFactor.Add(clsBarAesFunction.GetParameter("fill").strArgumentValue)
-            Else
-                ucrReceiverByFactor.Clear()
-            End If
-            'Allows for sync with the layer parameters
-            ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
-            TestOkEnabled()
-        End If
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                                clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
+                                clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsLabelAesFunction, ucrNewBaseSelector:=ucrBarChartSelector,
+                                clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
+                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
+    End Sub
 
-        If rdoTreeMap.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomTreemapFunction, clsNewGlobalAesFunc:=clsGeomTreemapAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
-            sdgLayerOptions.ShowDialog()
-            bResetBarLayerSubdialog = False
-        End If
+    Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
+        openSdgLayerOptions(clsRgeomBarFunction1)
+    End Sub
 
-        If rdoWordCloud.Checked Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsGeomTextWordcloudFunction, clsNewGlobalAesFunc:=clsGeomTextWordcloudAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
-            sdgLayerOptions.ShowDialog()
-            bResetBarLayerSubdialog = False
-        End If
+    Private Sub toolStripMenuItemLollipopOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLollipopOptions.Click
+        openSdgLayerOptions(clsGeomLollipopFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemTreemapOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTreemapOptions.Click
+        openSdgLayerOptions(clsGeomTreemapFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemWordcloudOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemWordcloudOptions.Click
+        openSdgLayerOptions(clsGeomTextWordcloudFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
+        openSdgLayerOptions(clsPointsFunction)
     End Sub
 
     Private Sub SetDialogOptions()
         If rdoValue.Checked Or rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            cmdBarChartOptions.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_col")
             If Not ucrSaveBar.bUserTyped Then
@@ -702,6 +752,9 @@ Public Class dlgBarAndPieChart
             End If
             ucrVariablesAsFactorForBarChart.RemoveIncludedMetadataProperty("class")
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
+
+            ucrInputBarChartPositions.Visible = Not ucrReceiverByFactor.IsEmpty()
+
         ElseIf rdoTreeMap.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
         Else
@@ -710,25 +763,23 @@ Public Class dlgBarAndPieChart
 
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
         If rdoFrequency.Checked Then
-            ucrChkLollipop.Checked = False
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-                ucrInputReorderX.Visible = True
-                ucrInputAddReorder.Visible = True
+                ucrInputAddReorder.Visible = Not ucrReceiverByFactor.IsEmpty()
+                If Not ucrInputAddReorder.Visible Then
+                    ucrInputAddReorder.SetText(strNone)
+                End If
             Else
-                ucrInputReorderX.Visible = False
                 ucrInputReorderX.SetText(strNone)
-                ucrInputAddReorder.Visible = False
-                ucrInputAddReorder.SetText(strNone)
             End If
         ElseIf rdoValue.Checked Then
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-                ucrInputReorderValue.Visible = True
-                ucrInputAddReorder.Visible = True
+                ucrChkReorderValue.Visible = True
+                ucrInputAddReorder.Visible = Not ucrReceiverByFactor.IsEmpty()
+                If Not ucrInputAddReorder.Visible Then
+                    ucrInputAddReorder.SetText(strNone)
+                End If
             Else
-                ucrInputReorderValue.Visible = False
-                ucrInputReorderValue.SetText(strNone)
-                ucrInputAddReorder.Visible = False
-                ucrInputAddReorder.SetText(strNone)
+                ucrChkReorderValue.Visible = False
             End If
         End If
     End Sub
@@ -738,8 +789,8 @@ Public Class dlgBarAndPieChart
         Dim strChangedTextValue As String = ucrInputAddReorder.GetText()
         Dim strChangeTextReorder As String = ucrInputReorderValue.GetText()
         If rdoFrequency.Checked Then
-            clsForecatsInfreq.AddParameter("f", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
-            clsForecatsInfreqValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+            clsForecatsInfreq.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+            clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrReceiverByFactor.GetVariableNames(False) & ")", iPosition:=0)
             Select Case strChangedTextFreq
                 Case strAscending
                     clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
@@ -787,22 +838,6 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ChangeButtonsText()
-        If rdoValue.Checked Then
-            If ucrChkLollipop.Checked Then
-                cmdBarChartOptions.Text = "Lollipop Options"
-            Else
-                cmdBarChartOptions.Text = "Bar Chart Options"
-            End If
-        ElseIf rdoFrequency.Checked Then
-            cmdBarChartOptions.Text = "Bar Chart Options"
-        ElseIf rdoTreeMap.Checked Then
-            cmdBarChartOptions.Text = "Treemap Options"
-        ElseIf rdoWordCloud.Checked Then
-            cmdBarChartOptions.Text = "Wordcloud Options"
-        End If
-    End Sub
-
     Private Sub ChangeParameterName()
         clsBarAesFunction.RemoveParameterByName("x")
         clsBarAesFunction.RemoveParameterByName("y")
@@ -836,6 +871,10 @@ Public Class dlgBarAndPieChart
             End If
             If ucrChkLollipop.Checked Then
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
+                clsBaseOperator.RemoveParameterByName("geom_bar")
+            End If
+            If ucrChkBacktoback.Checked Then
+                clsBaseOperator.RemoveParameterByName("geom_bar")
             Else
                 clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
@@ -874,11 +913,13 @@ Public Class dlgBarAndPieChart
             End If
         End If
         UpdateParameter()
-        ChangeButtonsText()
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged,
-    ucrInputReorderX.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged, ucrChkIncreaseSize.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged,
+        ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverLabel.ControlValueChanged,
+        ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
+        ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
+        ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
@@ -887,7 +928,6 @@ Public Class dlgBarAndPieChart
         If rdoWordCloud.Checked Then
             ucrReceiverWordcloudLabel.SetMeAsReceiver()
         End If
-        ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
     End Sub
 
     Private Sub ucrReceiverByFactor_ControlContentsChanged() Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
@@ -900,7 +940,8 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrChkLollipop.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged,
+        ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
         If rdoFrequency.Checked OrElse rdoValue.Checked Then
             clsBaseOperator.RemoveParameterByName("geom_bar1")
             clsBaseOperator.RemoveParameterByName("geom_bar2")
@@ -908,6 +949,7 @@ Public Class dlgBarAndPieChart
             clsAesFunction1.RemoveParameterByName("y")
             clsAesFunction2.RemoveParameterByName("y")
             clsRgeomBarFunction2.RemoveParameterByName("aes")
+            clsRgeomBarFunction1.RemoveParameterByName("aes")
             ucrChkPolarCoordinates.Enabled = True
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
@@ -965,16 +1007,18 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetGeomTextOptions()
-        If ucrInputBarChartPositions.GetText = "Dodge" Then
-            clsGeomTextFunction.AddParameter("position", "position_dodge(width = 0.9)", iPosition:=2)
+        If ucrInputBarChartPositions.GetText = "Stack" Then
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Fill" Then
             clsGeomTextFunction.AddParameter("position", "position_fill(vjust = 0.9)", iPosition:=2)
-        ElseIf ucrInputBarChartPositions.GetText = "Stack" Then
-            clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Dodge" Then
+            clsGeomTextFunction.AddParameter("position", "position_dodge(width = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Jitter" Then
             clsGeomTextFunction.AddParameter("position", "position_jitter(width = 0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
             clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.5, reverse = TRUE)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Fill in reverse" Then
+            clsGeomTextFunction.AddParameter("position", "position_fill(reverse = TRUE)", iPosition:=2)
         Else
             clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
         End If
@@ -991,8 +1035,13 @@ Public Class dlgBarAndPieChart
         SetGeomTextOptions()
     End Sub
 
-    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged, ucrReceiverArea.ControlContentsChanged,
-        ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged, ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged, ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged, ucrChkIncreaseSize.ControlContentsChanged
+    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged,
+        ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged,
+        ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged,
+        ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged,
+        ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged,
+        ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged,
+        ucrChkIncreaseSize.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1003,4 +1052,5 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
+
 End Class

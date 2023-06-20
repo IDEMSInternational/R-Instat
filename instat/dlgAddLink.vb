@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class dlgAddLink
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsAddLink As RFunction
+    Private clsAddLink As New RFunction
 
     Private Sub dlgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

@@ -19,7 +19,7 @@ Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bShowMessageBox As Boolean
-    Private clsDownloadFromIRIFunction As RFunction
+    Private clsDownloadFromIRIFunction As New RFunction
     Private dctDownloadPairs, dctFiles As New Dictionary(Of String, String)
     Private Sub dlgImportGriddedData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

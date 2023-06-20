@@ -62,8 +62,8 @@ Partial Class sdgClimaticDataEntry
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdTransform)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgBaseButtons)
-        Me.SplitContainer1.Size = New System.Drawing.Size(647, 295)
-        Me.SplitContainer1.SplitterDistance = 251
+        Me.SplitContainer1.Size = New System.Drawing.Size(710, 430)
+        Me.SplitContainer1.SplitterDistance = 365
         Me.SplitContainer1.TabIndex = 0
         '
         'grdDataEntry
@@ -82,7 +82,7 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.SheetTabVisible = True
         Me.grdDataEntry.SheetTabWidth = 154
         Me.grdDataEntry.ShowScrollEndSpacing = True
-        Me.grdDataEntry.Size = New System.Drawing.Size(647, 251)
+        Me.grdDataEntry.Size = New System.Drawing.Size(710, 365)
         Me.grdDataEntry.TabIndex = 3
         Me.grdDataEntry.Text = "Variables"
         '
@@ -127,7 +127,7 @@ Partial Class sdgClimaticDataEntry
         '
         Me.ucrChkAddFlagFieldData.AutoSize = True
         Me.ucrChkAddFlagFieldData.Checked = False
-        Me.ucrChkAddFlagFieldData.Location = New System.Drawing.Point(231, 9)
+        Me.ucrChkAddFlagFieldData.Location = New System.Drawing.Point(12, 8)
         Me.ucrChkAddFlagFieldData.Name = "ucrChkAddFlagFieldData"
         Me.ucrChkAddFlagFieldData.Size = New System.Drawing.Size(130, 23)
         Me.ucrChkAddFlagFieldData.TabIndex = 91
@@ -135,7 +135,7 @@ Partial Class sdgClimaticDataEntry
         'cmdComment
         '
         Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComment.Location = New System.Drawing.Point(364, 7)
+        Me.cmdComment.Location = New System.Drawing.Point(200, 3)
         Me.cmdComment.Name = "cmdComment"
         Me.cmdComment.Size = New System.Drawing.Size(90, 24)
         Me.cmdComment.TabIndex = 90
@@ -146,7 +146,7 @@ Partial Class sdgClimaticDataEntry
         '
         Me.cmdTransform.Enabled = False
         Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTransform.Location = New System.Drawing.Point(457, 7)
+        Me.cmdTransform.Location = New System.Drawing.Point(388, 3)
         Me.cmdTransform.Name = "cmdTransform"
         Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
         Me.cmdTransform.TabIndex = 89
@@ -157,7 +157,7 @@ Partial Class sdgClimaticDataEntry
         'cmdReset
         '
         Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdReset.Location = New System.Drawing.Point(564, 7)
+        Me.cmdReset.Location = New System.Drawing.Point(576, 7)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(72, 24)
         Me.cmdReset.TabIndex = 88
@@ -168,7 +168,7 @@ Partial Class sdgClimaticDataEntry
         'ucrSdgBaseButtons
         '
         Me.ucrSdgBaseButtons.AutoSize = True
-        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(5, 6)
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(229, 27)
         Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
@@ -185,7 +185,7 @@ Partial Class sdgClimaticDataEntry
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(647, 295)
+        Me.ClientSize = New System.Drawing.Size(710, 430)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "sdgClimaticDataEntry"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent

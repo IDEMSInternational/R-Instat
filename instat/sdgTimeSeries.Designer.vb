@@ -182,7 +182,7 @@ Partial Class sdgTimeSeries
         'ucrButtonsSummaries
         '
         Me.ucrButtonsSummaries.AutoSize = True
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(87, 312)
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(52, 312)
         Me.ucrButtonsSummaries.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(224, 31)

@@ -104,6 +104,7 @@ Public Class dlgInfill
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$infill_missing_dates")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        AutoFillStation()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -133,7 +134,18 @@ Public Class dlgInfill
         End Select
     End Sub
 
+    Private Sub AutoFillStation()
+        If ucrInfillSelector.CurrentReceiver IsNot Nothing Then
+            ucrInfillSelector.CurrentReceiver.SetMeAsReceiver()
+        End If
+        ucrReceiverFactors.AddItemsWithMetadataProperty(ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInfillSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInfillSelector.ControlValueChanged
+        AutoFillStation()
     End Sub
 End Class

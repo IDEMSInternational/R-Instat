@@ -121,11 +121,10 @@ Public Class dlgSurvivalObject
         ucrModifyEventLogical.SetRDefault("TRUE")
         ucrModifyEventLogical.SetDropDownStyleAsNonEditable()
 
-        'ucrFactorLevels
-        ucrModifyEventFactor.strSelectorColumnName = "Event Occurs"
-        ucrModifyEventFactor.SetReceiver(ucrReceiverEvent)
-        ucrModifyEventFactor.SetAsMultipleSelector()
-        ucrModifyEventFactor.SetIncludeLevels(False)
+        'ucrFactorLevels 
+        ucrModifyEventFactor.SetAsMultipleSelectorGrid(ucrReceiverEvent,
+                                                  hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
+                                                  bIncludeNALevel:=True)
 
         ucrSaveObject.SetPrefix("surv")
         ucrSaveObject.SetSaveTypeAsSurv()
@@ -211,7 +210,11 @@ Public Class dlgSurvivalObject
             ucrBase.OKEnabled(False)
         Else
             If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked) Then
-                If ucrReceiverEvent.IsEmpty() OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventFactor.GetSelectedLevels = "") Then
+                If ucrReceiverEvent.IsEmpty() _
+                        OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") _
+                                AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") _
+                        OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked _
+                                AndAlso ucrModifyEventFactor.IsAnyGridRowSelected) Then
                     ucrBase.OKEnabled(False)
                 Else
                     If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoMstate.Checked) Then
@@ -292,12 +295,14 @@ Public Class dlgSurvivalObject
 
                 If ucrReceiverEvent.strCurrDataType = "factor" Then
                     Me.Size = New System.Drawing.Size(662, Me.Height)
-                    clsModifyOperation.RemoveParameterByName("c_function")
-                    clsModifyOperation.AddParameter("factor_value", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False, iPosition:=1)
-
                     ucrModifyEventNumeric.Visible = False
                     ucrModifyEventFactor.Visible = True
                     ucrModifyEventLogical.Visible = False
+
+                    clsModifyOperation.RemoveParameterByName("c_function")
+                    clsModifyOperation.AddParameter("factor_value",
+                                                   mdlCoreControl.GetRVector(ucrModifyEventFactor.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True)),
+                                                   bIncludeArgumentName:=False, iPosition:=1)
 
                 Else
                     Me.Size = New System.Drawing.Size(523, Me.Height)

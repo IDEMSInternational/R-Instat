@@ -25,12 +25,12 @@ Public Class dlgFourVariableModelling
     Public bResetSecondFunction As Boolean = False
     Public bResetThirdFunction As Boolean = False
     Public clsRCIFunction, clsRConvert, clsFamilyFunction, clsVisReg As New RFunction
-    Public clsRSingleModelFunction, clsRNumeric, clsGLM, clsLM, clsFormulaFunction, clsSummaryFunction, clsConfint As RFunction
+    Public clsRSingleModelFunction, clsRNumeric, clsGLM, clsLM, clsFormulaFunction, clsSummaryFunction, clsConfint As New RFunction
     Public clsFormulaOperator As ROperator
     Private clsFirstPowerOperator, clsSecondPowerOperator, clsThirdPowerOperator As ROperator
     Public clsSecoandndThirdExplanatoryOpertor, clsOverallExplanatoryOperator As New ROperator
     Private clsAnovaFunction, clsLMOrGLM, clsLmer, clsGlmer As RFunction
-    Private clsFirstTransformFunction, clsSecondTransformFunction, clsThirdTransformFunction As RFunction
+    Private clsFirstTransformFunction, clsSecondTransformFunction, clsThirdTransformFunction As New RFunction
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
     'Saving Operators/Functions

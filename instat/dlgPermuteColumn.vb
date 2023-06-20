@@ -50,6 +50,11 @@ Public Class dlgPermuteColumn
         ucrNudNumberofColumns.Maximum = Integer.MaxValue
         ucrNudNumberofColumns.Minimum = 1
 
+        ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
+        ucrChkWithReplacement.SetText("With Replacement")
+        ucrChkWithReplacement.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkWithReplacement.SetRDefault("FALSE")
+
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
@@ -74,8 +79,7 @@ Public Class dlgPermuteColumn
         SetNewColumName()
 
         clsSetSampleFunction.SetRCommand("sample")
-        clsSetSampleFunction.AddParameter("replace", "FALSE")
-        clsSetSampleFunction.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength)
+        clsSetSampleFunction.AddParameter("size", ucrPermuteRowsSelector.ucrAvailableDataFrames.iDataFrameLength, iPosition:=2)
 
         clsSetSeedFunction.SetRCommand("set.seed")
 
@@ -90,9 +94,9 @@ Public Class dlgPermuteColumn
         ucrNudNumberofColumns.SetRCode(clsOverallFunction, bReset)
         ucrReceiverPermuteRows.SetRCode(clsSetSampleFunction, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeedFunction, bReset)
-        ucrChkSetSeed.SetRCode(clsSetSeedFunction, bReset)
         ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrSavePermute.SetRCode(clsOverallFunction, bReset)
+        ucrChkWithReplacement.SetRCode(clsSetSampleFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -107,15 +111,6 @@ Public Class dlgPermuteColumn
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If ucrChkSetSeed.Checked Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, iPosition:=0)
-        Else
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
-
-        End If
     End Sub
 
     Private Sub SetNewColumName()
@@ -143,7 +138,15 @@ Public Class dlgPermuteColumn
         SetNewColumName()
     End Sub
 
-    Private Sub ucrReceiverPermuteRows_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPermuteRows.ControlContentsChanged, ucrSavePermute.ControlContentsChanged
+    Private Sub ucrReceiverPermuteRows_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPermuteRows.ControlContentsChanged, ucrSavePermute.ControlContentsChanged, ucrChkWithReplacement.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetSeed.ControlValueChanged
+        If ucrChkSetSeed.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
+        End If
     End Sub
 End Class

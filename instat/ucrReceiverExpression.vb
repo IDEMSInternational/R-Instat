@@ -110,6 +110,7 @@ Public Class ucrReceiverExpression
                 Next
             End If
             cboExpression.Text = ""
+            cboExpression.Focus()
         End If
         MyBase.RemoveSelected()
     End Sub

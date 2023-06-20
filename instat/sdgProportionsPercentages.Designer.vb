@@ -164,7 +164,7 @@ Partial Class sdgProportionsPercentages
         'ucrButtonsProportionsPercentiles
         '
         Me.ucrButtonsProportionsPercentiles.AutoSize = True
-        Me.ucrButtonsProportionsPercentiles.Location = New System.Drawing.Point(124, 368)
+        Me.ucrButtonsProportionsPercentiles.Location = New System.Drawing.Point(101, 368)
         Me.ucrButtonsProportionsPercentiles.Name = "ucrButtonsProportionsPercentiles"
         Me.ucrButtonsProportionsPercentiles.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsProportionsPercentiles.TabIndex = 13

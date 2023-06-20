@@ -94,14 +94,14 @@ Partial Class sdgLayerOptions
         Me.ucrLayerParameter.AutoSize = True
         Me.ucrLayerParameter.Location = New System.Drawing.Point(3, 3)
         Me.ucrLayerParameter.Name = "ucrLayerParameter"
-        Me.ucrLayerParameter.Size = New System.Drawing.Size(347, 481)
+        Me.ucrLayerParameter.Size = New System.Drawing.Size(347, 486)
         Me.ucrLayerParameter.TabIndex = 0
         Me.ucrLayerParameter.ucrGeomWithAes = Nothing
         '
         'ucrSdgLayerBase
         '
         Me.ucrSdgLayerBase.AutoSize = True
-        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(173, 525)
+        Me.ucrSdgLayerBase.Location = New System.Drawing.Point(134, 526)
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
         Me.ucrSdgLayerBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgLayerBase.TabIndex = 1

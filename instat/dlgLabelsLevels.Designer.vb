@@ -116,13 +116,10 @@ Partial Class dlgLabelsLevels
         '
         Me.ucrFactorLabels.AutoSize = True
         Me.ucrFactorLabels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLabels.clsReceiver = Nothing
         Me.ucrFactorLabels.Location = New System.Drawing.Point(256, 66)
         Me.ucrFactorLabels.Name = "ucrFactorLabels"
-        Me.ucrFactorLabels.shtCurrSheet = Nothing
         Me.ucrFactorLabels.Size = New System.Drawing.Size(336, 299)
         Me.ucrFactorLabels.TabIndex = 2
-        Me.ucrFactorLabels.ucrChkLevels = Nothing
         '
         'ucrSelectorForLabels
         '

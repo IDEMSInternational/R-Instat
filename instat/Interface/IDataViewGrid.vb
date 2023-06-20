@@ -23,6 +23,8 @@ Public Interface IDataViewGrid
 
     Event ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
 
+    Event DeleteValuesToDataframe()
+
     Event WorksheetChanged()
 
     Event WorksheetRemoved(worksheet As clsWorksheetAdapter)

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOptionsByContextBoxplot
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class dlgOptionsByContextBoxplot
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.cmdHLineOptions = New System.Windows.Forms.Button()
         Me.cmdPointOptions = New System.Windows.Forms.Button()
@@ -51,15 +52,19 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrReceiverContext1 = New instat.ucrReceiverSingle()
         Me.lblXAxis = New System.Windows.Forms.Label()
         Me.lblMeasurement = New System.Windows.Forms.Label()
-        Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
-        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverMeasurement = New instat.ucrReceiverSingle()
         Me.ucrSelectorPlot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemBoxplotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemViolinplotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
         Me.grpOptions.SuspendLayout()
         Me.grpContexts.SuspendLayout()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpOptions
@@ -389,28 +394,6 @@ Partial Class dlgOptionsByContextBoxplot
         Me.lblMeasurement.TabIndex = 1
         Me.lblMeasurement.Text = "Measurement Y axis:"
         '
-        'cmdBoxPlotOptions
-        '
-        Me.cmdBoxPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 208)
-        Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
-        Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 6
-        Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
-        Me.cmdBoxPlotOptions.Text = "Boxplot Options"
-        Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 239)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
         'ucrSavePlot
         '
         Me.ucrSavePlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -426,7 +409,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 526)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 1
         '
         'ucrReceiverX
@@ -467,13 +450,49 @@ Partial Class dlgOptionsByContextBoxplot
         Me.ucrSelectorPlot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorPlot.TabIndex = 0
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxplotOptions, Me.toolStripMenuItemViolinplotOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 92)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemBoxplotOptions
+        '
+        Me.toolStripMenuItemBoxplotOptions.Name = "toolStripMenuItemBoxplotOptions"
+        Me.toolStripMenuItemBoxplotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemBoxplotOptions.Text = "Boxplot Options"
+        '
+        'toolStripMenuItemViolinplotOptions
+        '
+        Me.toolStripMenuItemViolinplotOptions.Name = "toolStripMenuItemViolinplotOptions"
+        Me.toolStripMenuItemViolinplotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemViolinplotOptions.Text = "Violin Options"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 196)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(147, 23)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 12
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgOptionsByContextBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(543, 582)
-        Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSavePlot)
         Me.Controls.Add(Me.ucrBase)
@@ -494,6 +513,7 @@ Partial Class dlgOptionsByContextBoxplot
         Me.grpOptions.PerformLayout()
         Me.grpContexts.ResumeLayout(False)
         Me.grpContexts.PerformLayout()
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -523,8 +543,6 @@ Partial Class dlgOptionsByContextBoxplot
     Friend WithEvents ucrReceiverContext1 As ucrReceiverSingle
     Friend WithEvents ucrSavePlot As ucrSave
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents cmdBoxPlotOptions As Button
-    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrChkVerticalXTickMarkers As ucrCheck
     Friend WithEvents ucrChkHorizontalBoxplot As ucrCheck
     Friend WithEvents ucrChkVarWidth As ucrCheck
@@ -535,4 +553,9 @@ Partial Class dlgOptionsByContextBoxplot
     Friend WithEvents ucrPnlPlotType As UcrPanel
     Friend WithEvents cmdHLineOptions As Button
     Friend WithEvents cmdPointOptions As Button
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemBoxplotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemViolinplotOptions As ToolStripMenuItem
 End Class

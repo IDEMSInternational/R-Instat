@@ -43,32 +43,32 @@ Partial Class sdgTwoWayFrequencies
         Me.tbpTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
         Me.lblNumberOfDecimals = New System.Windows.Forms.Label()
-        Me.lblGraphTitle = New System.Windows.Forms.Label()
-        Me.tbpGraph = New System.Windows.Forms.TabPage()
-        Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.lblHjust = New System.Windows.Forms.Label()
-        Me.lblVjust = New System.Windows.Forms.Label()
-        Me.grpGraphType = New System.Windows.Forms.GroupBox()
-        Me.rdoLineGraph = New System.Windows.Forms.RadioButton()
-        Me.rdoViolinPlot = New System.Windows.Forms.RadioButton()
-        Me.rdoBoxPlot = New System.Windows.Forms.RadioButton()
-        Me.rdoDot = New System.Windows.Forms.RadioButton()
-        Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrNudDecimalPlaces = New instat.ucrNud()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
         Me.ucrInputTableTitle = New instat.ucrInputTextBox()
         Me.ucrChkTotalColumnName = New instat.ucrCheck()
         Me.ucrInputTotalsName = New instat.ucrInputTextBox()
         Me.ucrChkMissingValues = New instat.ucrCheck()
         Me.ucrChkBackgroundColour = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
+        Me.tbpGraph = New System.Windows.Forms.TabPage()
+        Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkStack = New instat.ucrCheck()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblHjust = New System.Windows.Forms.Label()
+        Me.lblVjust = New System.Windows.Forms.Label()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.ucrInputHorizontalLabels = New instat.ucrInputComboBox()
         Me.ucrInputVerticalLabels = New instat.ucrInputComboBox()
         Me.ucrChkShowModelSummary = New instat.ucrCheck()
         Me.ucrChkShowPercentage = New instat.ucrCheck()
         Me.ucrChkShowCount = New instat.ucrCheck()
+        Me.rdoViolinPlot = New System.Windows.Forms.RadioButton()
+        Me.grpGraphType = New System.Windows.Forms.GroupBox()
+        Me.rdoLineGraph = New System.Windows.Forms.RadioButton()
+        Me.rdoBoxPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoDot = New System.Windows.Forms.RadioButton()
+        Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseSubDialogue = New instat.ucrButtonsSubdialogue()
         Me.tbpTwoWayFrequencies.SuspendLayout()
@@ -114,97 +114,6 @@ Partial Class sdgTwoWayFrequencies
         resources.ApplyResources(Me.lblNumberOfDecimals, "lblNumberOfDecimals")
         Me.lblNumberOfDecimals.Name = "lblNumberOfDecimals"
         '
-        'lblGraphTitle
-        '
-        resources.ApplyResources(Me.lblGraphTitle, "lblGraphTitle")
-        Me.lblGraphTitle.Name = "lblGraphTitle"
-        '
-        'tbpGraph
-        '
-        Me.tbpGraph.Controls.Add(Me.grpGraphOptions)
-        Me.tbpGraph.Controls.Add(Me.rdoViolinPlot)
-        Me.tbpGraph.Controls.Add(Me.grpGraphType)
-        resources.ApplyResources(Me.tbpGraph, "tbpGraph")
-        Me.tbpGraph.Name = "tbpGraph"
-        Me.tbpGraph.UseVisualStyleBackColor = True
-        '
-        'grpGraphOptions
-        '
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkStack)
-        Me.grpGraphOptions.Controls.Add(Me.lblTitle)
-        Me.grpGraphOptions.Controls.Add(Me.lblHjust)
-        Me.grpGraphOptions.Controls.Add(Me.lblVjust)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputGraphTitle)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputHorizontalLabels)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputVerticalLabels)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowModelSummary)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowPercentage)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowCount)
-        resources.ApplyResources(Me.grpGraphOptions, "grpGraphOptions")
-        Me.grpGraphOptions.Name = "grpGraphOptions"
-        Me.grpGraphOptions.TabStop = False
-        '
-        'lblTitle
-        '
-        resources.ApplyResources(Me.lblTitle, "lblTitle")
-        Me.lblTitle.Name = "lblTitle"
-        '
-        'lblHjust
-        '
-        resources.ApplyResources(Me.lblHjust, "lblHjust")
-        Me.lblHjust.Name = "lblHjust"
-        '
-        'lblVjust
-        '
-        resources.ApplyResources(Me.lblVjust, "lblVjust")
-        Me.lblVjust.Name = "lblVjust"
-        '
-        'grpGraphType
-        '
-        Me.grpGraphType.Controls.Add(Me.rdoLineGraph)
-        Me.grpGraphType.Controls.Add(Me.rdoBoxPlot)
-        Me.grpGraphType.Controls.Add(Me.rdoDot)
-        Me.grpGraphType.Controls.Add(Me.rdoBar)
-        Me.grpGraphType.Controls.Add(Me.ucrPnlGraphType)
-        resources.ApplyResources(Me.grpGraphType, "grpGraphType")
-        Me.grpGraphType.Name = "grpGraphType"
-        Me.grpGraphType.TabStop = False
-        '
-        'rdoLineGraph
-        '
-        resources.ApplyResources(Me.rdoLineGraph, "rdoLineGraph")
-        Me.rdoLineGraph.Name = "rdoLineGraph"
-        Me.rdoLineGraph.TabStop = True
-        Me.rdoLineGraph.UseVisualStyleBackColor = True
-        '
-        'rdoViolinPlot
-        '
-        resources.ApplyResources(Me.rdoViolinPlot, "rdoViolinPlot")
-        Me.rdoViolinPlot.Name = "rdoViolinPlot"
-        Me.rdoViolinPlot.TabStop = True
-        Me.rdoViolinPlot.UseVisualStyleBackColor = True
-        '
-        'rdoBoxPlot
-        '
-        resources.ApplyResources(Me.rdoBoxPlot, "rdoBoxPlot")
-        Me.rdoBoxPlot.Name = "rdoBoxPlot"
-        Me.rdoBoxPlot.TabStop = True
-        Me.rdoBoxPlot.UseVisualStyleBackColor = True
-        '
-        'rdoDot
-        '
-        resources.ApplyResources(Me.rdoDot, "rdoDot")
-        Me.rdoDot.Name = "rdoDot"
-        Me.rdoDot.TabStop = True
-        Me.rdoDot.UseVisualStyleBackColor = True
-        '
-        'rdoBar
-        '
-        resources.ApplyResources(Me.rdoBar, "rdoBar")
-        Me.rdoBar.Name = "rdoBar"
-        Me.rdoBar.TabStop = True
-        Me.rdoBar.UseVisualStyleBackColor = True
-        '
         'ucrNudDecimalPlaces
         '
         resources.ApplyResources(Me.ucrNudDecimalPlaces, "ucrNudDecimalPlaces")
@@ -214,6 +123,11 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
         Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblGraphTitle
+        '
+        resources.ApplyResources(Me.lblGraphTitle, "lblGraphTitle")
+        Me.lblGraphTitle.Name = "lblGraphTitle"
         '
         'ucrInputTableTitle
         '
@@ -255,11 +169,51 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrChkShowSummary.Checked = False
         Me.ucrChkShowSummary.Name = "ucrChkShowSummary"
         '
+        'tbpGraph
+        '
+        Me.tbpGraph.Controls.Add(Me.grpGraphOptions)
+        Me.tbpGraph.Controls.Add(Me.rdoViolinPlot)
+        Me.tbpGraph.Controls.Add(Me.grpGraphType)
+        resources.ApplyResources(Me.tbpGraph, "tbpGraph")
+        Me.tbpGraph.Name = "tbpGraph"
+        Me.tbpGraph.UseVisualStyleBackColor = True
+        '
+        'grpGraphOptions
+        '
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkStack)
+        Me.grpGraphOptions.Controls.Add(Me.lblTitle)
+        Me.grpGraphOptions.Controls.Add(Me.lblHjust)
+        Me.grpGraphOptions.Controls.Add(Me.lblVjust)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputGraphTitle)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputHorizontalLabels)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputVerticalLabels)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowModelSummary)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowPercentage)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowCount)
+        resources.ApplyResources(Me.grpGraphOptions, "grpGraphOptions")
+        Me.grpGraphOptions.Name = "grpGraphOptions"
+        Me.grpGraphOptions.TabStop = False
+        '
         'ucrChkStack
         '
         resources.ApplyResources(Me.ucrChkStack, "ucrChkStack")
         Me.ucrChkStack.Checked = False
         Me.ucrChkStack.Name = "ucrChkStack"
+        '
+        'lblTitle
+        '
+        resources.ApplyResources(Me.lblTitle, "lblTitle")
+        Me.lblTitle.Name = "lblTitle"
+        '
+        'lblHjust
+        '
+        resources.ApplyResources(Me.lblHjust, "lblHjust")
+        Me.lblHjust.Name = "lblHjust"
+        '
+        'lblVjust
+        '
+        resources.ApplyResources(Me.lblVjust, "lblVjust")
+        Me.lblVjust.Name = "lblVjust"
         '
         'ucrInputGraphTitle
         '
@@ -302,6 +256,52 @@ Partial Class sdgTwoWayFrequencies
         resources.ApplyResources(Me.ucrChkShowCount, "ucrChkShowCount")
         Me.ucrChkShowCount.Checked = False
         Me.ucrChkShowCount.Name = "ucrChkShowCount"
+        '
+        'rdoViolinPlot
+        '
+        resources.ApplyResources(Me.rdoViolinPlot, "rdoViolinPlot")
+        Me.rdoViolinPlot.Name = "rdoViolinPlot"
+        Me.rdoViolinPlot.TabStop = True
+        Me.rdoViolinPlot.UseVisualStyleBackColor = True
+        '
+        'grpGraphType
+        '
+        Me.grpGraphType.Controls.Add(Me.rdoLineGraph)
+        Me.grpGraphType.Controls.Add(Me.rdoBoxPlot)
+        Me.grpGraphType.Controls.Add(Me.rdoDot)
+        Me.grpGraphType.Controls.Add(Me.rdoBar)
+        Me.grpGraphType.Controls.Add(Me.ucrPnlGraphType)
+        resources.ApplyResources(Me.grpGraphType, "grpGraphType")
+        Me.grpGraphType.Name = "grpGraphType"
+        Me.grpGraphType.TabStop = False
+        '
+        'rdoLineGraph
+        '
+        resources.ApplyResources(Me.rdoLineGraph, "rdoLineGraph")
+        Me.rdoLineGraph.Name = "rdoLineGraph"
+        Me.rdoLineGraph.TabStop = True
+        Me.rdoLineGraph.UseVisualStyleBackColor = True
+        '
+        'rdoBoxPlot
+        '
+        resources.ApplyResources(Me.rdoBoxPlot, "rdoBoxPlot")
+        Me.rdoBoxPlot.Name = "rdoBoxPlot"
+        Me.rdoBoxPlot.TabStop = True
+        Me.rdoBoxPlot.UseVisualStyleBackColor = True
+        '
+        'rdoDot
+        '
+        resources.ApplyResources(Me.rdoDot, "rdoDot")
+        Me.rdoDot.Name = "rdoDot"
+        Me.rdoDot.TabStop = True
+        Me.rdoDot.UseVisualStyleBackColor = True
+        '
+        'rdoBar
+        '
+        resources.ApplyResources(Me.rdoBar, "rdoBar")
+        Me.rdoBar.Name = "rdoBar"
+        Me.rdoBar.TabStop = True
+        Me.rdoBar.UseVisualStyleBackColor = True
         '
         'ucrPnlGraphType
         '

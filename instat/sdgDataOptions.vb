@@ -58,9 +58,9 @@ Public Class sdgDataOptions
         ucrReceiverFilter.SetMeAsReceiver()
         ucrReceiverFilter.strSelectorHeading = "Filters"
 
-        ucrSelectorFilters.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorFilters.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
-        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsButton(bDataOptionsVisible:=False)
+        ucrSelectorForSelectColumns.HideShowAddOrDataOptionsOrListView(bDataOptionsVisible:=False)
 
         ucrReceiverSelect.Selector = ucrSelectorForSelectColumns
         ucrReceiverSelect.SetMeAsReceiver()
@@ -108,7 +108,7 @@ Public Class sdgDataOptions
                 clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
                 clsSetCurrentColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
                 clsSetCurrentColumnSelection.AddParameter("name", ucrReceiverSelect.GetVariableNames())
-                frmMain.clsRLink.RunScript(clsSetCurrentColumnSelection.ToScript(), strComment:="Data Options subdialog: Set the current column selection")
+                frmMain.clsRLink.RunScript(clsSetCurrentColumnSelection.ToScript(), strComment:="Data Options subdialog: Set the current column selection", iCallType:=2)
             Else
                 'TODO: Set Local column selection
             End If
@@ -148,8 +148,8 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        dlgSelectColumns.SetDefaultDataFrame(strCurrentDataFrame)
         dlgSelectColumns.ShowDialog()
-        ucrReceiverSelect.Add(dlgSelectColumns.ucrInputSelectName.GetText)
         ucrSelectorForSelectColumns.LoadList()
     End Sub
 

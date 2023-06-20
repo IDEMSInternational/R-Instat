@@ -23,19 +23,10 @@ Partial Class dlgConditionalQuantilePlot
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrConditionalQuantilePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverObservations = New instat.ucrReceiverSingle()
         Me.lblObservations = New System.Windows.Forms.Label()
         Me.lblPredictions = New System.Windows.Forms.Label()
-        Me.ucrReceiverPredictions = New instat.ucrReceiverSingle()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrNudBin = New instat.ucrNud()
-        Me.ucrSavePlot = New instat.ucrSave()
         Me.lblTypes = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleFacet = New instat.ucrReceiverMultiple()
-        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
-        Me.ucrNudColumns = New instat.ucrNud()
         Me.ttConditionalQuatilePlot = New System.Windows.Forms.ToolTip(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblColNumber = New System.Windows.Forms.Label()
@@ -43,51 +34,26 @@ Partial Class dlgConditionalQuantilePlot
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
         Me.rdoEvaluation = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrReceiverMultiplePred = New instat.ucrReceiverMultiple()
         Me.lblType = New System.Windows.Forms.Label()
-        Me.ucrReceiverType = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMultipleObs = New instat.ucrReceiverMultiple()
         Me.lblVarObserved = New System.Windows.Forms.Label()
         Me.lblStatistics = New System.Windows.Forms.Label()
         Me.lblVarPredicted = New System.Windows.Forms.Label()
-        Me.ucrReceiverStatistics = New instat.ucrReceiverSingle()
         Me.ucrNudMinNumPoints = New instat.ucrNud()
+        Me.ucrReceiverStatistics = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMultipleObs = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverType = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMultiplePred = New instat.ucrReceiverMultiple()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrNudColumns = New instat.ucrNud()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrReceiverMultipleFacet = New instat.ucrReceiverMultiple()
+        Me.ucrSavePlot = New instat.ucrSave()
+        Me.ucrNudBin = New instat.ucrNud()
+        Me.ucrReceiverPredictions = New instat.ucrReceiverSingle()
+        Me.ucrReceiverObservations = New instat.ucrReceiverSingle()
+        Me.ucrConditionalQuantilePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 437)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrConditionalQuantilePlotSelector
-        '
-        Me.ucrConditionalQuantilePlotSelector.AutoSize = True
-        Me.ucrConditionalQuantilePlotSelector.bDropUnusedFilterLevels = False
-        Me.ucrConditionalQuantilePlotSelector.bShowHiddenColumns = False
-        Me.ucrConditionalQuantilePlotSelector.bUseCurrentFilter = True
-        Me.ucrConditionalQuantilePlotSelector.Location = New System.Drawing.Point(9, 43)
-        Me.ucrConditionalQuantilePlotSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrConditionalQuantilePlotSelector.Name = "ucrConditionalQuantilePlotSelector"
-        Me.ucrConditionalQuantilePlotSelector.Size = New System.Drawing.Size(213, 183)
-        Me.ucrConditionalQuantilePlotSelector.TabIndex = 3
-        '
-        'ucrReceiverObservations
-        '
-        Me.ucrReceiverObservations.AutoSize = True
-        Me.ucrReceiverObservations.frmParent = Me
-        Me.ucrReceiverObservations.Location = New System.Drawing.Point(282, 78)
-        Me.ucrReceiverObservations.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverObservations.Name = "ucrReceiverObservations"
-        Me.ucrReceiverObservations.Selector = Nothing
-        Me.ucrReceiverObservations.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverObservations.strNcFilePath = ""
-        Me.ucrReceiverObservations.TabIndex = 5
-        Me.ucrReceiverObservations.ucrSelector = Nothing
         '
         'lblObservations
         '
@@ -109,19 +75,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.lblPredictions.TabIndex = 6
         Me.lblPredictions.Text = "Predictions:"
         '
-        'ucrReceiverPredictions
-        '
-        Me.ucrReceiverPredictions.AutoSize = True
-        Me.ucrReceiverPredictions.frmParent = Me
-        Me.ucrReceiverPredictions.Location = New System.Drawing.Point(282, 129)
-        Me.ucrReceiverPredictions.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPredictions.Name = "ucrReceiverPredictions"
-        Me.ucrReceiverPredictions.Selector = Nothing
-        Me.ucrReceiverPredictions.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPredictions.strNcFilePath = ""
-        Me.ucrReceiverPredictions.TabIndex = 7
-        Me.ucrReceiverPredictions.ucrSelector = Nothing
-        '
         'cmdPlotOptions
         '
         Me.cmdPlotOptions.Enabled = False
@@ -133,28 +86,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.cmdPlotOptions.Text = "Conditional Quantile Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrNudBin
-        '
-        Me.ucrNudBin.AutoSize = True
-        Me.ucrNudBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBin.Location = New System.Drawing.Point(165, 265)
-        Me.ucrNudBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBin.Name = "ucrNudBin"
-        Me.ucrNudBin.Size = New System.Drawing.Size(40, 20)
-        Me.ucrNudBin.TabIndex = 68
-        Me.ucrNudBin.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSavePlot
-        '
-        Me.ucrSavePlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 413)
-        Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(320, 22)
-        Me.ucrSavePlot.TabIndex = 72
-        '
         'lblTypes
         '
         Me.lblTypes.AutoSize = True
@@ -164,43 +95,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.lblTypes.Size = New System.Drawing.Size(100, 13)
         Me.lblTypes.TabIndex = 8
         Me.lblTypes.Text = "Facet By (Optional):"
-        '
-        'ucrReceiverMultipleFacet
-        '
-        Me.ucrReceiverMultipleFacet.AutoSize = True
-        Me.ucrReceiverMultipleFacet.frmParent = Me
-        Me.ucrReceiverMultipleFacet.Location = New System.Drawing.Point(282, 180)
-        Me.ucrReceiverMultipleFacet.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleFacet.Name = "ucrReceiverMultipleFacet"
-        Me.ucrReceiverMultipleFacet.Selector = Nothing
-        Me.ucrReceiverMultipleFacet.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleFacet.strNcFilePath = ""
-        Me.ucrReceiverMultipleFacet.TabIndex = 9
-        Me.ucrReceiverMultipleFacet.ucrSelector = Nothing
-        '
-        'ucrInputLegendPosition
-        '
-        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
-        Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(165, 317)
-        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
-        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(89, 21)
-        Me.ucrInputLegendPosition.TabIndex = 75
-        '
-        'ucrNudColumns
-        '
-        Me.ucrNudColumns.AutoSize = True
-        Me.ucrNudColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumns.Location = New System.Drawing.Point(315, 318)
-        Me.ucrNudColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumns.Name = "ucrNudColumns"
-        Me.ucrNudColumns.Size = New System.Drawing.Size(40, 20)
-        Me.ucrNudColumns.TabIndex = 76
-        Me.ucrNudColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ttConditionalQuatilePlot
         '
@@ -282,27 +176,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.rdoEvaluation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoEvaluation.UseVisualStyleBackColor = True
         '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(72, 3)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
-        Me.ucrPnlOptions.TabIndex = 85
-        '
-        'ucrReceiverMultiplePred
-        '
-        Me.ucrReceiverMultiplePred.AutoSize = True
-        Me.ucrReceiverMultiplePred.frmParent = Me
-        Me.ucrReceiverMultiplePred.Location = New System.Drawing.Point(282, 309)
-        Me.ucrReceiverMultiplePred.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultiplePred.Name = "ucrReceiverMultiplePred"
-        Me.ucrReceiverMultiplePred.Selector = Nothing
-        Me.ucrReceiverMultiplePred.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultiplePred.strNcFilePath = ""
-        Me.ucrReceiverMultiplePred.TabIndex = 11
-        Me.ucrReceiverMultiplePred.ucrSelector = Nothing
-        '
         'lblType
         '
         Me.lblType.AutoSize = True
@@ -312,32 +185,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.lblType.Size = New System.Drawing.Size(34, 13)
         Me.lblType.TabIndex = 12
         Me.lblType.Text = "Type:"
-        '
-        'ucrReceiverType
-        '
-        Me.ucrReceiverType.AutoSize = True
-        Me.ucrReceiverType.frmParent = Me
-        Me.ucrReceiverType.Location = New System.Drawing.Point(49, 293)
-        Me.ucrReceiverType.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverType.Name = "ucrReceiverType"
-        Me.ucrReceiverType.Selector = Nothing
-        Me.ucrReceiverType.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverType.strNcFilePath = ""
-        Me.ucrReceiverType.TabIndex = 13
-        Me.ucrReceiverType.ucrSelector = Nothing
-        '
-        'ucrReceiverMultipleObs
-        '
-        Me.ucrReceiverMultipleObs.AutoSize = True
-        Me.ucrReceiverMultipleObs.frmParent = Me
-        Me.ucrReceiverMultipleObs.Location = New System.Drawing.Point(282, 180)
-        Me.ucrReceiverMultipleObs.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleObs.Name = "ucrReceiverMultipleObs"
-        Me.ucrReceiverMultipleObs.Selector = Nothing
-        Me.ucrReceiverMultipleObs.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleObs.strNcFilePath = ""
-        Me.ucrReceiverMultipleObs.TabIndex = 9
-        Me.ucrReceiverMultipleObs.ucrSelector = Nothing
         '
         'lblVarObserved
         '
@@ -369,19 +216,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.lblVarPredicted.TabIndex = 10
         Me.lblVarPredicted.Text = "Other Predicted Variables:"
         '
-        'ucrReceiverStatistics
-        '
-        Me.ucrReceiverStatistics.AutoSize = True
-        Me.ucrReceiverStatistics.frmParent = Me
-        Me.ucrReceiverStatistics.Location = New System.Drawing.Point(64, 339)
-        Me.ucrReceiverStatistics.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStatistics.Name = "ucrReceiverStatistics"
-        Me.ucrReceiverStatistics.Selector = Nothing
-        Me.ucrReceiverStatistics.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStatistics.strNcFilePath = ""
-        Me.ucrReceiverStatistics.TabIndex = 15
-        Me.ucrReceiverStatistics.ucrSelector = Nothing
-        '
         'ucrNudMinNumPoints
         '
         Me.ucrNudMinNumPoints.AutoSize = True
@@ -395,11 +229,178 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrNudMinNumPoints.TabIndex = 86
         Me.ucrNudMinNumPoints.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrReceiverStatistics
+        '
+        Me.ucrReceiverStatistics.AutoSize = True
+        Me.ucrReceiverStatistics.frmParent = Me
+        Me.ucrReceiverStatistics.Location = New System.Drawing.Point(64, 339)
+        Me.ucrReceiverStatistics.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStatistics.Name = "ucrReceiverStatistics"
+        Me.ucrReceiverStatistics.Selector = Nothing
+        Me.ucrReceiverStatistics.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStatistics.strNcFilePath = ""
+        Me.ucrReceiverStatistics.TabIndex = 15
+        Me.ucrReceiverStatistics.ucrSelector = Nothing
+        '
+        'ucrReceiverMultipleObs
+        '
+        Me.ucrReceiverMultipleObs.AutoSize = True
+        Me.ucrReceiverMultipleObs.frmParent = Me
+        Me.ucrReceiverMultipleObs.Location = New System.Drawing.Point(282, 180)
+        Me.ucrReceiverMultipleObs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleObs.Name = "ucrReceiverMultipleObs"
+        Me.ucrReceiverMultipleObs.Selector = Nothing
+        Me.ucrReceiverMultipleObs.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleObs.strNcFilePath = ""
+        Me.ucrReceiverMultipleObs.TabIndex = 9
+        Me.ucrReceiverMultipleObs.ucrSelector = Nothing
+        '
+        'ucrReceiverType
+        '
+        Me.ucrReceiverType.AutoSize = True
+        Me.ucrReceiverType.frmParent = Me
+        Me.ucrReceiverType.Location = New System.Drawing.Point(49, 293)
+        Me.ucrReceiverType.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverType.Name = "ucrReceiverType"
+        Me.ucrReceiverType.Selector = Nothing
+        Me.ucrReceiverType.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverType.strNcFilePath = ""
+        Me.ucrReceiverType.TabIndex = 13
+        Me.ucrReceiverType.ucrSelector = Nothing
+        '
+        'ucrReceiverMultiplePred
+        '
+        Me.ucrReceiverMultiplePred.AutoSize = True
+        Me.ucrReceiverMultiplePred.frmParent = Me
+        Me.ucrReceiverMultiplePred.Location = New System.Drawing.Point(282, 309)
+        Me.ucrReceiverMultiplePred.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiplePred.Name = "ucrReceiverMultiplePred"
+        Me.ucrReceiverMultiplePred.Selector = Nothing
+        Me.ucrReceiverMultiplePred.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultiplePred.strNcFilePath = ""
+        Me.ucrReceiverMultiplePred.TabIndex = 11
+        Me.ucrReceiverMultiplePred.ucrSelector = Nothing
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(72, 3)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
+        Me.ucrPnlOptions.TabIndex = 85
+        '
+        'ucrNudColumns
+        '
+        Me.ucrNudColumns.AutoSize = True
+        Me.ucrNudColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumns.Location = New System.Drawing.Point(315, 318)
+        Me.ucrNudColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumns.Name = "ucrNudColumns"
+        Me.ucrNudColumns.Size = New System.Drawing.Size(40, 20)
+        Me.ucrNudColumns.TabIndex = 76
+        Me.ucrNudColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(165, 317)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputLegendPosition.TabIndex = 75
+        '
+        'ucrReceiverMultipleFacet
+        '
+        Me.ucrReceiverMultipleFacet.AutoSize = True
+        Me.ucrReceiverMultipleFacet.frmParent = Me
+        Me.ucrReceiverMultipleFacet.Location = New System.Drawing.Point(282, 180)
+        Me.ucrReceiverMultipleFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleFacet.Name = "ucrReceiverMultipleFacet"
+        Me.ucrReceiverMultipleFacet.Selector = Nothing
+        Me.ucrReceiverMultipleFacet.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleFacet.strNcFilePath = ""
+        Me.ucrReceiverMultipleFacet.TabIndex = 9
+        Me.ucrReceiverMultipleFacet.ucrSelector = Nothing
+        '
+        'ucrSavePlot
+        '
+        Me.ucrSavePlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 413)
+        Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSavePlot.Name = "ucrSavePlot"
+        Me.ucrSavePlot.Size = New System.Drawing.Size(320, 22)
+        Me.ucrSavePlot.TabIndex = 72
+        '
+        'ucrNudBin
+        '
+        Me.ucrNudBin.AutoSize = True
+        Me.ucrNudBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudBin.Location = New System.Drawing.Point(165, 265)
+        Me.ucrNudBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBin.Name = "ucrNudBin"
+        Me.ucrNudBin.Size = New System.Drawing.Size(40, 20)
+        Me.ucrNudBin.TabIndex = 68
+        Me.ucrNudBin.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiverPredictions
+        '
+        Me.ucrReceiverPredictions.AutoSize = True
+        Me.ucrReceiverPredictions.frmParent = Me
+        Me.ucrReceiverPredictions.Location = New System.Drawing.Point(282, 129)
+        Me.ucrReceiverPredictions.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPredictions.Name = "ucrReceiverPredictions"
+        Me.ucrReceiverPredictions.Selector = Nothing
+        Me.ucrReceiverPredictions.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPredictions.strNcFilePath = ""
+        Me.ucrReceiverPredictions.TabIndex = 7
+        Me.ucrReceiverPredictions.ucrSelector = Nothing
+        '
+        'ucrReceiverObservations
+        '
+        Me.ucrReceiverObservations.AutoSize = True
+        Me.ucrReceiverObservations.frmParent = Me
+        Me.ucrReceiverObservations.Location = New System.Drawing.Point(282, 78)
+        Me.ucrReceiverObservations.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverObservations.Name = "ucrReceiverObservations"
+        Me.ucrReceiverObservations.Selector = Nothing
+        Me.ucrReceiverObservations.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverObservations.strNcFilePath = ""
+        Me.ucrReceiverObservations.TabIndex = 5
+        Me.ucrReceiverObservations.ucrSelector = Nothing
+        '
+        'ucrConditionalQuantilePlotSelector
+        '
+        Me.ucrConditionalQuantilePlotSelector.AutoSize = True
+        Me.ucrConditionalQuantilePlotSelector.bDropUnusedFilterLevels = False
+        Me.ucrConditionalQuantilePlotSelector.bShowHiddenColumns = False
+        Me.ucrConditionalQuantilePlotSelector.bUseCurrentFilter = True
+        Me.ucrConditionalQuantilePlotSelector.Location = New System.Drawing.Point(9, 43)
+        Me.ucrConditionalQuantilePlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrConditionalQuantilePlotSelector.Name = "ucrConditionalQuantilePlotSelector"
+        Me.ucrConditionalQuantilePlotSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrConditionalQuantilePlotSelector.TabIndex = 3
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(7, 437)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 0
+        '
         'dlgConditionalQuantilePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(415, 490)
         Me.Controls.Add(Me.ucrNudMinNumPoints)
         Me.Controls.Add(Me.ucrReceiverStatistics)

@@ -290,7 +290,7 @@ Partial Class sdgCombineGraphOptions
         'ucrsdgLayoutBase
         '
         Me.ucrsdgLayoutBase.AutoSize = True
-        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(120, 426)
+        Me.ucrsdgLayoutBase.Location = New System.Drawing.Point(77, 426)
         Me.ucrsdgLayoutBase.Name = "ucrsdgLayoutBase"
         Me.ucrsdgLayoutBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrsdgLayoutBase.TabIndex = 0

@@ -27,13 +27,12 @@ Partial Class sdgFiltersFromFactor
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.ucrFactorLevels = New instat.ucrFactor()
-        Me.cmdSelectAll = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(201, 304)
+        Me.ucrBase.Location = New System.Drawing.Point(164, 304)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 0
@@ -75,22 +74,10 @@ Partial Class sdgFiltersFromFactor
         '
         Me.ucrFactorLevels.AutoSize = True
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.clsReceiver = Nothing
         Me.ucrFactorLevels.Location = New System.Drawing.Point(267, 57)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.shtCurrSheet = Nothing
         Me.ucrFactorLevels.Size = New System.Drawing.Size(270, 208)
         Me.ucrFactorLevels.TabIndex = 1
-        Me.ucrFactorLevels.ucrChkLevels = Nothing
-        '
-        'cmdSelectAll
-        '
-        Me.cmdSelectAll.Location = New System.Drawing.Point(462, 268)
-        Me.cmdSelectAll.Name = "cmdSelectAll"
-        Me.cmdSelectAll.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSelectAll.TabIndex = 0
-        Me.cmdSelectAll.Text = "Select All"
-        Me.cmdSelectAll.UseVisualStyleBackColor = True
         '
         'sdgFiltersFromFactor
         '
@@ -98,7 +85,6 @@ Partial Class sdgFiltersFromFactor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(545, 337)
-        Me.Controls.Add(Me.cmdSelectAll)
         Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactor)
@@ -120,5 +106,4 @@ Partial Class sdgFiltersFromFactor
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents lblFactors As Label
     Friend WithEvents ucrFactorLevels As ucrFactor
-    Friend WithEvents cmdSelectAll As Button
 End Class

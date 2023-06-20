@@ -19,7 +19,7 @@ Partial Class dlgContrasts
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class dlgContrasts
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblFactorReceiver = New System.Windows.Forms.Label()
         Me.lblSelectContrastName = New System.Windows.Forms.Label()
@@ -71,9 +71,9 @@ Partial Class dlgContrasts
         Me.lblDefineContrast.AutoSize = True
         Me.lblDefineContrast.Location = New System.Drawing.Point(445, 20)
         Me.lblDefineContrast.Name = "lblDefineContrast"
-        Me.lblDefineContrast.Size = New System.Drawing.Size(92, 13)
+        Me.lblDefineContrast.Size = New System.Drawing.Size(88, 13)
         Me.lblDefineContrast.TabIndex = 5
-        Me.lblDefineContrast.Text = "Define a Contrast:"
+        Me.lblDefineContrast.Text = "Define Contrasts:"
         '
         'grdLayoutForContrasts
         '
@@ -91,6 +91,7 @@ Partial Class dlgContrasts
         Me.grdLayoutForContrasts.ShowScrollEndSpacing = True
         Me.grdLayoutForContrasts.Size = New System.Drawing.Size(333, 207)
         Me.grdLayoutForContrasts.TabIndex = 6
+        Me.grdLayoutForContrasts.Text = "Define Contrasts:"
         '
         'ucrInputContrastName
         '

@@ -52,6 +52,8 @@ Public Class sdgOpenNetCDF
         clsAsDateMin.SetRCommand("as.Date")
         clsAsDateMax.SetRCommand("as.Date")
 
+        ucrBase.iHelpTopicID = 117
+
         ucrInputFileDetails.txtInput.ScrollBars = ScrollBars.Vertical
 
         ucrInputMinX.SetParameter(New RParameter("min", 0, bNewIncludeArgumentName:=False))

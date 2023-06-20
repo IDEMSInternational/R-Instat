@@ -33,18 +33,17 @@ Partial Class dlgImportShapeFiles
         '
         'lblFile
         '
-        Me.lblFile.AutoSize = True
         Me.lblFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFile.Location = New System.Drawing.Point(7, 23)
         Me.lblFile.Name = "lblFile"
-        Me.lblFile.Size = New System.Drawing.Size(26, 13)
+        Me.lblFile.Size = New System.Drawing.Size(41, 14)
         Me.lblFile.TabIndex = 0
         Me.lblFile.Text = "File:"
         '
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(291, 18)
+        Me.cmdBrowse.Location = New System.Drawing.Point(291, 17)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(122, 23)
         Me.cmdBrowse.TabIndex = 2
@@ -87,7 +86,7 @@ Partial Class dlgImportShapeFiles
         Me.ucrBase.Location = New System.Drawing.Point(7, 120)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 6
         '
         'ucrInputFilePath
@@ -96,10 +95,10 @@ Partial Class dlgImportShapeFiles
         Me.ucrInputFilePath.AutoSize = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(49, 18)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(52, 18)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(239, 23)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(236, 23)
         Me.ucrInputFilePath.TabIndex = 1
         '
         'dlgImportShapeFiles

@@ -1021,7 +1021,7 @@ Partial Class sdgInventoryPlot
         'ucrButtonsInventoryplot
         '
         Me.ucrButtonsInventoryplot.AutoSize = True
-        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(197, 307)
+        Me.ucrButtonsInventoryplot.Location = New System.Drawing.Point(157, 307)
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
         Me.ucrButtonsInventoryplot.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsInventoryplot.TabIndex = 1

@@ -517,7 +517,7 @@ Public Class ucrCore
     ''' <summary> Returns true if the control's R code can be safely updated. </summary>
     ''' <returns> True if the primary parameter is defined but is not part of the control's R code. 
     '''           Else returns false. </returns>
-    Protected Overridable Function CanUpdate()
+    Protected Overridable Function CanUpdate() As Boolean
         Return (clsParameter IsNot Nothing AndAlso (Not clsRCode.ContainsParameter(clsParameter.strArgumentName)) AndAlso clsParameter.HasValue())
     End Function
 

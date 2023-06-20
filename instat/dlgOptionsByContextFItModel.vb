@@ -28,13 +28,13 @@ Public Class dlgOptionsByContextFitModel
     Public bDefaultsSet As Boolean = False
 
     Public clsFamilyFunction, clsVisReg As New RFunction
-    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
-    Public clsModelFormula As ROperator
+    Public clsModelFormula As New ROperator
     Private clsOverallInteractions As New ROperator
     Private clsContextsInteractions As New ROperator
     Private clsBlockingContextsAddition As New ROperator

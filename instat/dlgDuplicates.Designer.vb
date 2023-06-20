@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgDuplicates
+Partial Class dlgDuplicateRows
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -59,7 +59,7 @@ Partial Class dlgDuplicates
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDataFrame.Location = New System.Drawing.Point(11, 12)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(142, 12)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(135, 27)
         Me.rdoDataFrame.TabIndex = 1
@@ -76,7 +76,7 @@ Partial Class dlgDuplicates
         Me.rdoSelectedVariables.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSelectedVariables.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSelectedVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSelectedVariables.Location = New System.Drawing.Point(144, 12)
+        Me.rdoSelectedVariables.Location = New System.Drawing.Point(11, 12)
         Me.rdoSelectedVariables.Name = "rdoSelectedVariables"
         Me.rdoSelectedVariables.Size = New System.Drawing.Size(135, 27)
         Me.rdoSelectedVariables.TabIndex = 2
@@ -327,7 +327,7 @@ Partial Class dlgDuplicates
         Me.ucrSelectorDuplicateswithVariables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorDuplicateswithVariables.TabIndex = 4
         '
-        'dlgDuplicates
+        'dlgDuplicateRows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -355,9 +355,9 @@ Partial Class dlgDuplicates
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgDuplicates"
+        Me.Name = "dlgDuplicateRows"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Duplicates"
+        Me.Text = "Duplicate Rows"
         Me.grpOptions.ResumeLayout(False)
         Me.grpOptions.PerformLayout()
         Me.ResumeLayout(False)

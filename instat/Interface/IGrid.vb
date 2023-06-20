@@ -28,6 +28,8 @@ Public Interface IGrid
 
     Function GetSelectedRows() As List(Of String)
 
+    Function GetSelectedColumnIndexes() As List(Of String)
+
     Function GetWorksheet(strName As String) As clsWorksheetAdapter
 
     Sub RemoveOldWorksheets()
@@ -41,6 +43,8 @@ Public Interface IGrid
     Sub SetCurrentDataFrame(iIndex As Integer)
 
     Sub UpdateAllWorksheetStyles()
+
+    Sub ReOrderWorksheets(strCurrWorksheet As String)
 
     Sub UpdateWorksheetStyle(worksheet As clsWorksheetAdapter)
 End Interface

@@ -55,14 +55,15 @@ Public Class ucrColumnMetadata
         End If
 
         _grid.CurrentWorksheet = fillWorksheet
+        _grid.UpdateWorksheetStyle(fillWorksheet)
         _grid.AddColumns(dataFrame.clsColumnMetaData)
         _grid.AddRowData(dataFrame.clsColumnMetaData)
-        _grid.UpdateWorksheetStyle(fillWorksheet)
         dataFrame.clsColumnMetaData.HasChanged = False
     End Sub
 
     Private Sub AddAndUpdateWorksheets()
         Dim firstAddedWorksheet As clsWorksheetAdapter = Nothing
+        Dim strCurrWorksheet As String = If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
         For Each clsDataFrame In _clsDataBook.DataFrames
             Dim worksheet As clsWorksheetAdapter = _grid.GetWorksheet(clsDataFrame.strName)
             If worksheet Is Nothing Then
@@ -73,6 +74,9 @@ Public Class ucrColumnMetadata
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
         Next
+        If strCurrWorksheet IsNot Nothing Then
+            _grid.ReOrderWorksheets(strCurrWorksheet)
+        End If
         If firstAddedWorksheet IsNot Nothing Then
             _grid.CurrentWorksheet = firstAddedWorksheet
         End If
@@ -91,7 +95,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub loadForm()
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
+        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
 
         'DEBUG
         ' If True Then
@@ -111,6 +115,7 @@ Public Class ucrColumnMetadata
         _grid.SetNonEditableColumns(lstNonEditableColumns)
         _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
         AddHandler _grid.EditValue, AddressOf EditValue
+        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
         autoTranslate(Me)
     End Sub
 
@@ -122,13 +127,34 @@ Public Class ucrColumnMetadata
         _grid.SetCurrentDataFrame(iIndex)
     End Sub
 
+    Private Sub DeleteLables(strColumnName As String)
+        Dim clsDeleteLabelsFunction As New RFunction
+
+        If strColumnName = strLabelsLabel Then
+            If MsgBox("This will delete the selected label(s) and replace with (NA)." &
+                                Environment.NewLine & "Continue?",
+                                MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
+
+                clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
+                clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & _grid.CurrentWorksheet.Name & Chr(34), iPosition:=0)
+                clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns), iPosition:=1)
+                clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
+                clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
+                frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript())
+            End If
+        Else
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine &
+                   "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+        End If
+    End Sub
+
     Private Sub EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
         Dim strScript As String
         Dim strComment As String
         Dim strNameColumn As String
         Dim iTemp As Integer
         Dim strNewValue As String
-        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE"}
+        Dim strBooleanValsAllowed As String() = {"T", "TR", "TRU", "TRUE", "F", "FA", "FAL", "FALS", "FALSE", "N", "NA"}
 
         strNameColumn = _grid.GetCellValue(iRow, strNameLabel)
         If strNameColumn = "" Then
@@ -146,14 +172,17 @@ Public Class ucrColumnMetadata
         ElseIf strColumnName = strLabelsScientific Then
             newValue = newValue.ToString.ToUpper
             If strBooleanValsAllowed.Contains(newValue) Then
-                If newValue(0) = "F" Then
-                    newValue = "FALSE"
-                Else
-                    newValue = "TRUE"
-                End If
+                Select Case newValue(0)
+                    Case "F"
+                        newValue = "FALSE"
+                    Case "T"
+                        newValue = "TRUE"
+                    Case "N"
+                        newValue = "NA"
+                End Select
                 strNewValue = newValue
             Else
-                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display", MsgBoxStyle.Information)
+                MsgBox("Type TRUE/T to change to scientific display and FALSE/F back to numeric display and NA/N for a mixture", MsgBoxStyle.Information)
                 Exit Sub
             End If
         Else
@@ -298,7 +327,7 @@ Public Class ucrColumnMetadata
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilter.Click
+    Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
         dlgRestrict.bIsSubsetDialog = False
         dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
         dlgRestrict.ShowDialog()
@@ -352,8 +381,8 @@ Public Class ucrColumnMetadata
             mnuInsertColsBefore.Text = "Insert " & _grid.GetSelectedColumns.Count & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & _grid.GetSelectedColumns.Count & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilter.bFilterApplied
-        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilter.bColumnSelectionApplied
+        mnuClearColumnFilter.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied
+        mnuColumnContextRemoveCurrentColumnSelection.Enabled = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
@@ -425,7 +454,7 @@ Public Class ucrColumnMetadata
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextColumnSelection.Click
+    Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextSelectColumns.Click
         dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
         dlgSelect.ShowDialog()
     End Sub
@@ -434,5 +463,9 @@ Public Class ucrColumnMetadata
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentColumnSelection()
         EndWait()
+    End Sub
+
+    Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click, mnuHelp2.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
     End Sub
 End Class

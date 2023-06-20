@@ -36,7 +36,7 @@ Partial Class sdgMissingOptions
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(81, 145)
+        Me.ucrBase.Location = New System.Drawing.Point(49, 145)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 0

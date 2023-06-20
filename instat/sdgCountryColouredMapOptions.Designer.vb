@@ -251,7 +251,7 @@ Partial Class sdgCountryColouredMapOptions
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(102, 217)
+        Me.ucrBase.Location = New System.Drawing.Point(58, 219)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 1

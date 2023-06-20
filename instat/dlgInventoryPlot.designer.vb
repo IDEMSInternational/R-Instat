@@ -284,7 +284,7 @@ Partial Class dlgInventoryPlot
         Me.ucrSaveDetails.Location = New System.Drawing.Point(6, 86)
         Me.ucrSaveDetails.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDetails.Name = "ucrSaveDetails"
-        Me.ucrSaveDetails.Size = New System.Drawing.Size(262, 21)
+        Me.ucrSaveDetails.Size = New System.Drawing.Size(369, 21)
         Me.ucrSaveDetails.TabIndex = 20
         '
         'ucrChkSecond
@@ -445,7 +445,7 @@ Partial Class dlgInventoryPlot
         Me.ucrSaveGraph.Location = New System.Drawing.Point(14, 407)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(369, 24)
         Me.ucrSaveGraph.TabIndex = 60
         '
         'ucrChkFlipCoordinates
@@ -522,7 +522,7 @@ Partial Class dlgInventoryPlot
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(7, 435)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
         '
         'dlgInventoryPlot

@@ -185,7 +185,7 @@ Partial Class sdgOneVarGraph
         'ucrButtonsOneVarGraph
         '
         Me.ucrButtonsOneVarGraph.AutoSize = True
-        Me.ucrButtonsOneVarGraph.Location = New System.Drawing.Point(45, 181)
+        Me.ucrButtonsOneVarGraph.Location = New System.Drawing.Point(17, 182)
         Me.ucrButtonsOneVarGraph.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
         Me.ucrButtonsOneVarGraph.Name = "ucrButtonsOneVarGraph"
         Me.ucrButtonsOneVarGraph.Size = New System.Drawing.Size(224, 30)

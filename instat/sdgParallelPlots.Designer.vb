@@ -32,7 +32,7 @@ Partial Class sdgParallelPlots
         'ucrBaseSdgParallelPlot
         '
         Me.ucrBaseSdgParallelPlot.AutoSize = True
-        Me.ucrBaseSdgParallelPlot.Location = New System.Drawing.Point(29, 89)
+        Me.ucrBaseSdgParallelPlot.Location = New System.Drawing.Point(1, 89)
         Me.ucrBaseSdgParallelPlot.Name = "ucrBaseSdgParallelPlot"
         Me.ucrBaseSdgParallelPlot.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdgParallelPlot.TabIndex = 4

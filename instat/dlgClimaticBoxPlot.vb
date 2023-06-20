@@ -54,6 +54,7 @@ Public Class dlgClimaticBoxPlot
     Private strNone As String = "None"
 
     Private bUpdateComboOptions As Boolean = True
+    Private bContainsFacet As Boolean = False
     Private bUpdatingParameters As Boolean = False
     Private dctComboReceiver As New Dictionary(Of ucrInputComboBox, ucrReceiverSingle)
 
@@ -336,6 +337,9 @@ Public Class dlgClimaticBoxPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        If Not IsNothing(clsBaseOperator.GetParameter("facets")) Then
+            bContainsFacet = True
+        End If
         sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
                          clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction,
                          clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
@@ -349,6 +353,11 @@ Public Class dlgClimaticBoxPlot
         sdgPlots.tbpFacet.Enabled = True
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         bResetSubdialog = False
+
+        If bContainsFacet Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            bContainsFacet = False
+        End If
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
@@ -411,13 +420,17 @@ Public Class dlgClimaticBoxPlot
         Dim strMonthCol As String
         Dim strDataFrame As String
         Dim strRainCol As String
+        Dim strTempCol As String
 
         strDataFrame = ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         strMonthCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "month_label")
         strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
-
-        If strRainCol <> "" Then
+        strTempCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "temp_min_label")
+        If Not String.IsNullOrEmpty(strTempCol) Then
+            ucrReceiverElement.Add(strTempCol, strDataFrame)
+        Else
             ucrReceiverElement.Add(strRainCol, strDataFrame)
+
         End If
         If strMonthCol <> "" Then
             ucrReceiverWithinYear.Add(strMonthCol, strDataFrame)
@@ -570,4 +583,5 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged
         AddRemoveFacets()
     End Sub
+
 End Class

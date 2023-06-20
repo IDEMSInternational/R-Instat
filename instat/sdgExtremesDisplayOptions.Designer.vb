@@ -189,7 +189,7 @@ Partial Class sdgExtremesDisplayOptions
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(66, 193)
+        Me.ucrBase.Location = New System.Drawing.Point(35, 193)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 2

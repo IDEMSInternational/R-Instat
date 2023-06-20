@@ -48,11 +48,13 @@ Partial Class dlgOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
         Me.cmdFactoryReset = New System.Windows.Forms.Button()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpLanguages = New System.Windows.Forms.TabPage()
+        Me.lversion = New System.Windows.Forms.Label()
         Me.lblLanguage = New System.Windows.Forms.Label()
         Me.ucrInputLanguage = New instat.ucrInputComboBox()
         Me.tbpComments = New System.Windows.Forms.TabPage()
@@ -64,6 +66,8 @@ Partial Class dlgOptions
         Me.ucrNudPreviewRows = New instat.ucrNud()
         Me.pnImportData = New System.Windows.Forms.Panel()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.ucrNudMaxOutputsHeight = New instat.ucrNud()
+        Me.ucrChkMaxOutputsHeight = New instat.ucrCheck()
         Me.ucrChkShowRCommandsinOutputWindow = New instat.ucrCheck()
         Me.ucrChkIncludeCommentsbyDefault = New instat.ucrCheck()
         Me.grpROptions = New System.Windows.Forms.GroupBox()
@@ -122,7 +126,6 @@ Partial Class dlgOptions
         Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
-        Me.cmdLanguage = New System.Windows.Forms.Button()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -184,6 +187,17 @@ Partial Class dlgOptions
         Me.cmdOk.Tag = "Ok"
         Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
+        '
+        'cmdLanguage
+        '
+        Me.cmdLanguage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLanguage.Location = New System.Drawing.Point(545, 324)
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Size = New System.Drawing.Size(37, 23)
+        Me.cmdLanguage.TabIndex = 13
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.Text = "Lang"
+        Me.cmdLanguage.UseVisualStyleBackColor = True
         '
         'spltControls
         '
@@ -265,6 +279,7 @@ Partial Class dlgOptions
         '
         'tbpLanguages
         '
+        Me.tbpLanguages.Controls.Add(Me.lversion)
         Me.tbpLanguages.Controls.Add(Me.lblLanguage)
         Me.tbpLanguages.Controls.Add(Me.ucrInputLanguage)
         Me.tbpLanguages.Location = New System.Drawing.Point(4, 22)
@@ -275,6 +290,16 @@ Partial Class dlgOptions
         Me.tbpLanguages.Tag = "Languages"
         Me.tbpLanguages.Text = "Languages"
         Me.tbpLanguages.UseVisualStyleBackColor = True
+        '
+        'lversion
+        '
+        Me.lversion.Location = New System.Drawing.Point(306, 267)
+        Me.lversion.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lversion.Name = "lversion"
+        Me.lversion.Size = New System.Drawing.Size(254, 18)
+        Me.lversion.TabIndex = 4
+        Me.lversion.Text = "v. "
+        Me.lversion.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblLanguage
         '
@@ -292,6 +317,7 @@ Partial Class dlgOptions
         Me.ucrInputLanguage.GetSetSelectedIndex = -1
         Me.ucrInputLanguage.IsReadOnly = False
         Me.ucrInputLanguage.Location = New System.Drawing.Point(75, 15)
+        Me.ucrInputLanguage.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputLanguage.Name = "ucrInputLanguage"
         Me.ucrInputLanguage.Size = New System.Drawing.Size(110, 21)
         Me.ucrInputLanguage.TabIndex = 2
@@ -325,6 +351,7 @@ Partial Class dlgOptions
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
         Me.ucrInputComment.Location = New System.Drawing.Point(96, 5)
+        Me.ucrInputComment.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputComment.Name = "ucrInputComment"
         Me.ucrInputComment.Size = New System.Drawing.Size(292, 21)
         Me.ucrInputComment.TabIndex = 1
@@ -365,7 +392,8 @@ Partial Class dlgOptions
         Me.ucrNudPreviewRows.AutoSize = True
         Me.ucrNudPreviewRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPreviewRows.Location = New System.Drawing.Point(133, 5)
+        Me.ucrNudPreviewRows.Location = New System.Drawing.Point(270, 5)
+        Me.ucrNudPreviewRows.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPreviewRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPreviewRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewRows.Name = "ucrNudPreviewRows"
@@ -384,6 +412,8 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.ucrNudMaxOutputsHeight)
+        Me.tbpOutputWindow.Controls.Add(Me.ucrChkMaxOutputsHeight)
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkShowRCommandsinOutputWindow)
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.grpROptions)
@@ -396,22 +426,48 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
         '
+        'ucrNudMaxOutputsHeight
+        '
+        Me.ucrNudMaxOutputsHeight.AutoSize = True
+        Me.ucrNudMaxOutputsHeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxOutputsHeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxOutputsHeight.Location = New System.Drawing.Point(506, 135)
+        Me.ucrNudMaxOutputsHeight.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrNudMaxOutputsHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxOutputsHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxOutputsHeight.Name = "ucrNudMaxOutputsHeight"
+        Me.ucrNudMaxOutputsHeight.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxOutputsHeight.TabIndex = 29
+        Me.ucrNudMaxOutputsHeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMaxOutputsHeight
+        '
+        Me.ucrChkMaxOutputsHeight.AutoSize = True
+        Me.ucrChkMaxOutputsHeight.Checked = False
+        Me.ucrChkMaxOutputsHeight.Location = New System.Drawing.Point(300, 135)
+        Me.ucrChkMaxOutputsHeight.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkMaxOutputsHeight.Name = "ucrChkMaxOutputsHeight"
+        Me.ucrChkMaxOutputsHeight.Size = New System.Drawing.Size(196, 23)
+        Me.ucrChkMaxOutputsHeight.TabIndex = 28
+        '
         'ucrChkShowRCommandsinOutputWindow
         '
         Me.ucrChkShowRCommandsinOutputWindow.AutoSize = True
         Me.ucrChkShowRCommandsinOutputWindow.Checked = False
-        Me.ucrChkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.ucrChkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 160)
+        Me.ucrChkShowRCommandsinOutputWindow.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkShowRCommandsinOutputWindow.Name = "ucrChkShowRCommandsinOutputWindow"
-        Me.ucrChkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(388, 23)
+        Me.ucrChkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(271, 24)
         Me.ucrChkShowRCommandsinOutputWindow.TabIndex = 27
         '
         'ucrChkIncludeCommentsbyDefault
         '
         Me.ucrChkIncludeCommentsbyDefault.AutoSize = True
         Me.ucrChkIncludeCommentsbyDefault.Checked = False
-        Me.ucrChkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
+        Me.ucrChkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 135)
+        Me.ucrChkIncludeCommentsbyDefault.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeCommentsbyDefault.Name = "ucrChkIncludeCommentsbyDefault"
-        Me.ucrChkIncludeCommentsbyDefault.Size = New System.Drawing.Size(391, 23)
+        Me.ucrChkIncludeCommentsbyDefault.Size = New System.Drawing.Size(271, 23)
         Me.ucrChkIncludeCommentsbyDefault.TabIndex = 26
         '
         'grpROptions
@@ -431,8 +487,9 @@ Partial Class dlgOptions
         Me.ucrChkShowSignifStars.AutoSize = True
         Me.ucrChkShowSignifStars.Checked = False
         Me.ucrChkShowSignifStars.Location = New System.Drawing.Point(7, 49)
+        Me.ucrChkShowSignifStars.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkShowSignifStars.Name = "ucrChkShowSignifStars"
-        Me.ucrChkShowSignifStars.Size = New System.Drawing.Size(255, 23)
+        Me.ucrChkShowSignifStars.Size = New System.Drawing.Size(255, 29)
         Me.ucrChkShowSignifStars.TabIndex = 28
         '
         'ucrNudDigits
@@ -441,6 +498,7 @@ Partial Class dlgOptions
         Me.ucrNudDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDigits.Location = New System.Drawing.Point(177, 23)
+        Me.ucrNudDigits.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDigits.Name = "ucrNudDigits"
@@ -626,8 +684,9 @@ Partial Class dlgOptions
         Me.ucrChkShowWaitDialog.AutoSize = True
         Me.ucrChkShowWaitDialog.Checked = False
         Me.ucrChkShowWaitDialog.Location = New System.Drawing.Point(6, 47)
+        Me.ucrChkShowWaitDialog.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkShowWaitDialog.Name = "ucrChkShowWaitDialog"
-        Me.ucrChkShowWaitDialog.Size = New System.Drawing.Size(337, 23)
+        Me.ucrChkShowWaitDialog.Size = New System.Drawing.Size(337, 29)
         Me.ucrChkShowWaitDialog.TabIndex = 6
         '
         'ucrNudWaitSeconds
@@ -636,6 +695,7 @@ Partial Class dlgOptions
         Me.ucrNudWaitSeconds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWaitSeconds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudWaitSeconds.Location = New System.Drawing.Point(349, 45)
+        Me.ucrNudWaitSeconds.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudWaitSeconds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWaitSeconds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWaitSeconds.Name = "ucrNudWaitSeconds"
@@ -648,8 +708,9 @@ Partial Class dlgOptions
         Me.ucrChkIncludeDefaultParams.AutoSize = True
         Me.ucrChkIncludeDefaultParams.Checked = False
         Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkIncludeDefaultParams.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkIncludeDefaultParams.Name = "ucrChkIncludeDefaultParams"
-        Me.ucrChkIncludeDefaultParams.Size = New System.Drawing.Size(398, 23)
+        Me.ucrChkIncludeDefaultParams.Size = New System.Drawing.Size(398, 29)
         Me.ucrChkIncludeDefaultParams.TabIndex = 3
         '
         'tbpDataView
@@ -674,7 +735,7 @@ Partial Class dlgOptions
         'lblEvery
         '
         Me.lblEvery.AutoSize = True
-        Me.lblEvery.Location = New System.Drawing.Point(236, 102)
+        Me.lblEvery.Location = New System.Drawing.Point(237, 109)
         Me.lblEvery.Name = "lblEvery"
         Me.lblEvery.Size = New System.Drawing.Size(33, 13)
         Me.lblEvery.TabIndex = 4
@@ -683,7 +744,7 @@ Partial Class dlgOptions
         'lblMinutes
         '
         Me.lblMinutes.AutoSize = True
-        Me.lblMinutes.Location = New System.Drawing.Point(341, 102)
+        Me.lblMinutes.Location = New System.Drawing.Point(344, 109)
         Me.lblMinutes.Name = "lblMinutes"
         Me.lblMinutes.Size = New System.Drawing.Size(43, 13)
         Me.lblMinutes.TabIndex = 4
@@ -693,9 +754,10 @@ Partial Class dlgOptions
         '
         Me.ucrChkAutoSave.AutoSize = True
         Me.ucrChkAutoSave.Checked = False
-        Me.ucrChkAutoSave.Location = New System.Drawing.Point(13, 104)
+        Me.ucrChkAutoSave.Location = New System.Drawing.Point(13, 108)
+        Me.ucrChkAutoSave.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAutoSave.Name = "ucrChkAutoSave"
-        Me.ucrChkAutoSave.Size = New System.Drawing.Size(217, 23)
+        Me.ucrChkAutoSave.Size = New System.Drawing.Size(217, 27)
         Me.ucrChkAutoSave.TabIndex = 3
         '
         'ucrChkShowDataonGrid
@@ -703,6 +765,7 @@ Partial Class dlgOptions
         Me.ucrChkShowDataonGrid.AutoSize = True
         Me.ucrChkShowDataonGrid.Checked = False
         Me.ucrChkShowDataonGrid.Location = New System.Drawing.Point(13, 78)
+        Me.ucrChkShowDataonGrid.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkShowDataonGrid.Name = "ucrChkShowDataonGrid"
         Me.ucrChkShowDataonGrid.Size = New System.Drawing.Size(393, 23)
         Me.ucrChkShowDataonGrid.TabIndex = 3
@@ -712,7 +775,8 @@ Partial Class dlgOptions
         Me.ucrNudAutoSaveMinutes.AutoSize = True
         Me.ucrNudAutoSaveMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAutoSaveMinutes.Location = New System.Drawing.Point(285, 99)
+        Me.ucrNudAutoSaveMinutes.Location = New System.Drawing.Point(288, 106)
+        Me.ucrNudAutoSaveMinutes.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudAutoSaveMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAutoSaveMinutes.Name = "ucrNudAutoSaveMinutes"
@@ -726,6 +790,7 @@ Partial Class dlgOptions
         Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudMaxCols.Location = New System.Drawing.Point(268, 41)
+        Me.ucrNudMaxCols.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
@@ -748,6 +813,7 @@ Partial Class dlgOptions
         Me.ucrNudMaxRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudMaxRows.Location = New System.Drawing.Point(268, 15)
+        Me.ucrNudMaxRows.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudMaxRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRows.Name = "ucrNudMaxRows"
@@ -802,6 +868,7 @@ Partial Class dlgOptions
         Me.ucrWorkingDirectory.IsMultiline = False
         Me.ucrWorkingDirectory.IsReadOnly = False
         Me.ucrWorkingDirectory.Location = New System.Drawing.Point(138, 17)
+        Me.ucrWorkingDirectory.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
         Me.ucrWorkingDirectory.Size = New System.Drawing.Size(255, 21)
         Me.ucrWorkingDirectory.TabIndex = 1
@@ -856,6 +923,7 @@ Partial Class dlgOptions
         '
         Me.ucrPnlGraphDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlGraphDisplay.Location = New System.Drawing.Point(0, 3)
+        Me.ucrPnlGraphDisplay.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlGraphDisplay.Name = "ucrPnlGraphDisplay"
         Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(365, 66)
         Me.ucrPnlGraphDisplay.TabIndex = 3
@@ -879,8 +947,9 @@ Partial Class dlgOptions
         Me.ucrChkViewStructuredMenu.AutoSize = True
         Me.ucrChkViewStructuredMenu.Checked = False
         Me.ucrChkViewStructuredMenu.Location = New System.Drawing.Point(7, 12)
+        Me.ucrChkViewStructuredMenu.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkViewStructuredMenu.Name = "ucrChkViewStructuredMenu"
-        Me.ucrChkViewStructuredMenu.Size = New System.Drawing.Size(378, 23)
+        Me.ucrChkViewStructuredMenu.Size = New System.Drawing.Size(378, 29)
         Me.ucrChkViewStructuredMenu.TabIndex = 2
         '
         'ucrChkViewOptionsByContextMenu
@@ -888,8 +957,9 @@ Partial Class dlgOptions
         Me.ucrChkViewOptionsByContextMenu.AutoSize = True
         Me.ucrChkViewOptionsByContextMenu.Checked = False
         Me.ucrChkViewOptionsByContextMenu.Location = New System.Drawing.Point(7, 90)
+        Me.ucrChkViewOptionsByContextMenu.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkViewOptionsByContextMenu.Name = "ucrChkViewOptionsByContextMenu"
-        Me.ucrChkViewOptionsByContextMenu.Size = New System.Drawing.Size(413, 23)
+        Me.ucrChkViewOptionsByContextMenu.Size = New System.Drawing.Size(413, 29)
         Me.ucrChkViewOptionsByContextMenu.TabIndex = 1
         '
         'ucrChkViewProcurementMenu
@@ -897,8 +967,9 @@ Partial Class dlgOptions
         Me.ucrChkViewProcurementMenu.AutoSize = True
         Me.ucrChkViewProcurementMenu.Checked = False
         Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(7, 64)
+        Me.ucrChkViewProcurementMenu.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkViewProcurementMenu.Name = "ucrChkViewProcurementMenu"
-        Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(413, 23)
+        Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(413, 29)
         Me.ucrChkViewProcurementMenu.TabIndex = 0
         '
         'ucrChkViewClimaticMenu
@@ -906,8 +977,9 @@ Partial Class dlgOptions
         Me.ucrChkViewClimaticMenu.AutoSize = True
         Me.ucrChkViewClimaticMenu.Checked = False
         Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(7, 38)
+        Me.ucrChkViewClimaticMenu.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
-        Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(407, 23)
+        Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(407, 29)
         Me.ucrChkViewClimaticMenu.TabIndex = 0
         '
         'tbpClimsoft
@@ -975,6 +1047,7 @@ Partial Class dlgOptions
         Me.ucrInputUserName.IsMultiline = False
         Me.ucrInputUserName.IsReadOnly = False
         Me.ucrInputUserName.Location = New System.Drawing.Point(168, 96)
+        Me.ucrInputUserName.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputUserName.Name = "ucrInputUserName"
         Me.ucrInputUserName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputUserName.TabIndex = 15
@@ -986,6 +1059,7 @@ Partial Class dlgOptions
         Me.ucrInputPort.IsMultiline = False
         Me.ucrInputPort.IsReadOnly = False
         Me.ucrInputPort.Location = New System.Drawing.Point(168, 69)
+        Me.ucrInputPort.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputPort.Name = "ucrInputPort"
         Me.ucrInputPort.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPort.TabIndex = 14
@@ -997,6 +1071,7 @@ Partial Class dlgOptions
         Me.ucrInputHost.IsMultiline = False
         Me.ucrInputHost.IsReadOnly = False
         Me.ucrInputHost.Location = New System.Drawing.Point(168, 43)
+        Me.ucrInputHost.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputHost.Name = "ucrInputHost"
         Me.ucrInputHost.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputHost.TabIndex = 13
@@ -1008,6 +1083,7 @@ Partial Class dlgOptions
         Me.ucrInputDatabaseName.IsMultiline = False
         Me.ucrInputDatabaseName.IsReadOnly = False
         Me.ucrInputDatabaseName.Location = New System.Drawing.Point(168, 17)
+        Me.ucrInputDatabaseName.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         Me.ucrInputDatabaseName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDatabaseName.TabIndex = 12
@@ -1158,4 +1234,7 @@ Partial Class dlgOptions
     Friend WithEvents lblLanguage As Label
     Friend WithEvents ucrInputLanguage As ucrInputComboBox
     Friend WithEvents cmdLanguage As Button
+    Friend WithEvents ucrChkMaxOutputsHeight As ucrCheck
+    Friend WithEvents ucrNudMaxOutputsHeight As ucrNud
+    Friend WithEvents lversion As Label
 End Class

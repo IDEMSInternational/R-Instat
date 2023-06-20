@@ -19,6 +19,8 @@ Public Interface IColumnMetaDataGrid
 
     Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object)
 
+    Event DeleteLabels(strColumnName As String)
+
     Sub AddColumns(columnMetaData As clsColumnMetaData)
 
     Sub AddRowData(columnMetaData As clsColumnMetaData)

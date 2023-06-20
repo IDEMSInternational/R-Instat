@@ -98,7 +98,7 @@ Partial Class dlgInsertColumn
         Me.grpInsert.Controls.Add(Me.ucrPnlInsertColumns)
         Me.grpInsert.Location = New System.Drawing.Point(235, 85)
         Me.grpInsert.Name = "grpInsert"
-        Me.grpInsert.Size = New System.Drawing.Size(286, 122)
+        Me.grpInsert.Size = New System.Drawing.Size(271, 122)
         Me.grpInsert.TabIndex = 6
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
@@ -172,9 +172,9 @@ Partial Class dlgInsertColumn
         'ucrPnlInsertColumns
         '
         Me.ucrPnlInsertColumns.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlInsertColumns.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlInsertColumns.Location = New System.Drawing.Point(2, 17)
         Me.ucrPnlInsertColumns.Name = "ucrPnlInsertColumns"
-        Me.ucrPnlInsertColumns.Size = New System.Drawing.Size(277, 101)
+        Me.ucrPnlInsertColumns.Size = New System.Drawing.Size(265, 99)
         Me.ucrPnlInsertColumns.TabIndex = 5
         '
         'grpOptions
@@ -231,9 +231,9 @@ Partial Class dlgInsertColumn
         '
         Me.lblDefaultValue.Location = New System.Drawing.Point(11, 263)
         Me.lblDefaultValue.Name = "lblDefaultValue"
-        Me.lblDefaultValue.Size = New System.Drawing.Size(202, 13)
+        Me.lblDefaultValue.Size = New System.Drawing.Size(218, 13)
         Me.lblDefaultValue.TabIndex = 14
-        Me.lblDefaultValue.Text = "Default Value:"
+        Me.lblDefaultValue.Text = "Value:"
         '
         'rdoInsertColumns
         '
@@ -271,9 +271,9 @@ Partial Class dlgInsertColumn
         '
         Me.lblInputColumnPrefix.Location = New System.Drawing.Point(11, 289)
         Me.lblInputColumnPrefix.Name = "lblInputColumnPrefix"
-        Me.lblInputColumnPrefix.Size = New System.Drawing.Size(203, 13)
+        Me.lblInputColumnPrefix.Size = New System.Drawing.Size(218, 13)
         Me.lblInputColumnPrefix.TabIndex = 16
-        Me.lblInputColumnPrefix.Text = "Prefix For Inserted Column(s):"
+        Me.lblInputColumnPrefix.Text = "Column(s) Name/Prefix:"
         '
         'ucrSelectorInsertColumns
         '
@@ -325,7 +325,7 @@ Partial Class dlgInsertColumn
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 313)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 1
         '
         'ucrNudNumberOfRows
@@ -370,7 +370,7 @@ Partial Class dlgInsertColumn
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(526, 369)
+        Me.ClientSize = New System.Drawing.Size(510, 369)
         Me.Controls.Add(Me.ucrInputDefaultValue)
         Me.Controls.Add(Me.lblInputColumnPrefix)
         Me.Controls.Add(Me.ucrInputPrefixForNewColumn)

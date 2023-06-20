@@ -5,17 +5,18 @@ Imports instat.Translations
 
 Public Class dlgImportDataset
 
-    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
-    Private clsGetExcelSheetNames As RFunction
-    Private clsRangeOperator As ROperator
+    Private clsImportTextFileFormats, clsImportCSVFileFormats, clsImportRDS, clsReadRDS, clsImportExcel, clsImport, clsImportfromJSON As New RFunction
+    Private clsGetExcelSheetNames As New RFunction
+    Private clsJsonDataFrameFunction As New RFunction
+    Private clsRangeOperator As New ROperator
     ''' <summary>   
     ''' Ensures that any file paths containing special characters (e.g. accents) are 
     ''' correctly encoded.
     ''' </summary>
-    Private clsEnc2Native As RFunction
+    Private clsEnc2Native As New RFunction
     'functions for multi Excel sheet impoty
-    Private clsImportExcelMulti As RFunction
-    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As RFunction
+    Private clsImportExcelMulti As New RFunction
+    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As New RFunction
     'functions for importing multiple files
     Private bFirstLoad As Boolean = True
     Public bFromLibrary As Boolean = False
@@ -29,6 +30,7 @@ Public Class dlgImportDataset
     Private strFilePathSystemTemp As String = ""
     Private strFilePathR As String = ""
     Private strCurrentDirectory As String = ""
+    Private strDirectoryPathTemp As String = ""
     Private bImportFromFolder As Boolean = False
     Private strFileName As String = ""
     Private strlastFileName As String = ""
@@ -61,6 +63,7 @@ Public Class dlgImportDataset
                 strFileExtension = "" 'reset
             End If
             SetDialogStateFromFile(strFileToOpenOn, strFileExtension)
+            strDirectoryPathTemp = strFileToOpenOn
             strFileToOpenOn = ""
             bStartOpenDialog = False
         ElseIf bStartOpenDialog Then
@@ -80,9 +83,10 @@ Public Class dlgImportDataset
                 End If
             End If
         End If
-
+        HideDropEmptyCheckBox()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -114,6 +118,7 @@ Public Class dlgImportDataset
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
+        ucrNudPreviewLines.Maximum = 1000
 
         '##############################################################
         'RDS Controls
@@ -279,6 +284,8 @@ Public Class dlgImportDataset
         ucrChkDropEmptyCols.SetText("Drop Empty Rows and Columns")
         ucrChkDropEmptyCols.SetParameter(New RParameter("isRFunction", 0))
         ucrChkDropEmptyCols.SetValuesCheckedAndUnchecked("True", "False")
+
+        ttCmdStepBack.SetToolTip(cmdStepBack, "Up to previous folder step 1.")
     End Sub
 
     Private Sub SetDefaults()
@@ -291,6 +298,8 @@ Public Class dlgImportDataset
         clsImportExcel = New RFunction
         clsImport = New RFunction
         clsReadRDS = New RFunction
+        clsImportfromJSON = New RFunction
+        clsJsonDataFrameFunction = New RFunction
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
@@ -303,6 +312,7 @@ Public Class dlgImportDataset
         clsEmptyDummyFunction = New RFunction
 
         ucrChkDropEmptyCols.Visible = False
+        cmdStepBack.Visible = False
 
         clsImportTextFileFormats.SetPackageName("readr")
         clsImportTextFileFormats.SetRCommand("read_table")
@@ -325,6 +335,12 @@ Public Class dlgImportDataset
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.SetAssignTo("new_RDS")
 
+        clsImportfromJSON.SetPackageName("jsonlite")
+        clsImportfromJSON.SetRCommand("fromJSON")
+
+        clsJsonDataFrameFunction.SetRCommand("as.data.frame")
+        clsJsonDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsImportfromJSON, iPosition:=0)
+
         'This R command ensures that any file paths containing special characters (e.g. accents) 
         'are correctly encoded
         clsEnc2Native.SetRCommand("enc2native")
@@ -343,8 +359,9 @@ Public Class dlgImportDataset
 
         'commands for multiple files
         clsGetFilesList.SetRCommand("list.files")
-        clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
-        clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
+        clsGetFilesList.AddParameter("recursive", "TRUE", iPosition:=2)
+        clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=3)
+        clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=4)
 
         clsImportMultipleFiles.SetPackageName("rio")
         clsImportMultipleFiles.SetRCommand("import_list")
@@ -381,7 +398,6 @@ Public Class dlgImportDataset
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
-
         dctSelectedExcelSheets.Clear()
         clbSheets.Items.Clear() 'reset this here. Not set by R code
         ucrInputMissingValueStringExcel.SetName("") 'reset this here. Not set by R code 
@@ -398,11 +414,15 @@ Public Class dlgImportDataset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        HideDropEmptyCheckBox()
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOkEnabled()
         If bImportFromFolder Then
             ucrBase.OKEnabled(GetDirectoryFiles(False).Count > 0)
+        ElseIf ucrInputFilePath.IsEmpty Then
+            ucrBase.OKEnabled(False)
         Else
             If IsExcelFileFormat() Then
                 ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0 AndAlso bCanImport)
@@ -441,7 +461,8 @@ Public Class dlgImportDataset
                 Else
                     dctSelectedExcelSheets.Clear()
                     clbSheets.Items.Clear()
-                    SetDialogStateFromFile(dlgOpen.FileName)
+                    strDirectoryPathTemp = dlgOpen.FileName
+                    SetDialogStateFromFile(strDirectoryPathTemp)
                 End If
             End If
         End Using
@@ -456,6 +477,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=6)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=7)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsFileNamesWithExt, New RParameter("path", 0), iAdditionalPairNo:=8)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportfromJSON, New RParameter("txt", 0), iAdditionalPairNo:=9)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
         'Save control
@@ -466,6 +488,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
         ucrSaveFile.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=7)
+        ucrSaveFile.AddAdditionalRCode(clsJsonDataFrameFunction, iAdditionalPairNo:=8)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'todo. commented temporarily until we are able to add an OR condition for the panel
@@ -574,7 +597,7 @@ Public Class dlgImportDataset
                 strlastFileName = Path.GetFileNameWithoutExtension(strFileOrFolderPath)
                 strCurrentDirectory = Path.GetDirectoryName(strFileOrFolderPath)
                 strFileExtension = Path.GetExtension(strFileOrFolderPath).ToLower 'extension check is done in lower case
-                            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
+            ElseIf Directory.Exists(strFileOrFolderPath) AndAlso strFolderFileExt <> "" Then
                 strCurrentDirectory = strFileOrFolderPath
                 strFileExtension = strFolderFileExt.ToLower 'extension check is done in lower case
                 bImportFromFolder = True
@@ -662,6 +685,8 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(If(clbSheets.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
                 ExcelSheetsPreviewVisible(True)
                 FillExcelSheets()
+            ElseIf IsJSONFileFormat() Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsJsonDataFrameFunction)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
             End If
@@ -682,15 +707,15 @@ Public Class dlgImportDataset
             End If
 
             If strFileExtension = ".r" Then
-                If Not frmMain.mnuViewScriptWindow.Checked Then
-                    frmMain.mnuViewScriptWindow.Checked = True
+                If Not frmMain.mnuViewLogScript.Checked Then
+                    frmMain.mnuViewLogScript.Checked = True
                     frmMain.UpdateLayout()
                 End If
-                If frmMain.ucrScriptWindow.txtScript.TextLength = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
+                If frmMain.ucrScriptWindow.strActiveTabText.Length = 0 OrElse MessageBox.Show("Loading a script from file will clear your current script" &
                               Environment.NewLine & "Do you still want to load?",
                               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
-                        frmMain.ucrScriptWindow.txtScript.Text = File.ReadAllText(strFilePathSystem)
+                        frmMain.ucrScriptWindow.strActiveTabText = File.ReadAllText(strFilePathSystem)
                     Catch
                         MessageBox.Show("Could not load the script from file." &
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -701,6 +726,8 @@ Public Class dlgImportDataset
                 Me.Close()
             End If
         End If
+
+        cmdStepBack.Enabled = If(strCurrentDirectory.Count(Function(x) x = GetCorrectSeparatorInPath()) <= 1, False, True) 'Disable the button to avoid getting the path not needed e.g D:
 
         TryTextPreview()
         TryGridPreview()
@@ -729,7 +756,8 @@ Public Class dlgImportDataset
             Dim iLinesToPreview As Integer = ucrNudPreviewLines.Value + If(IsCSVFileFormat(), ucrNudRowsToSkipCSV.Value, ucrNudRowsToSkipText.Value)
             lblTextFilePreview.Text = "Text File Preview:"
             Try
-                Using sReader As New StreamReader(strFilePathSystem)
+                Using sReader As New StreamReader(
+                        strFilePathSystem.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
                     For k = 0 To iLinesToPreview
                         txtTextFilePreview.Text &= sReader.ReadLine() & Environment.NewLine
                         If sReader.Peek() = -1 Then
@@ -760,7 +788,7 @@ Public Class dlgImportDataset
         bCanImport = False
 
         'grid preview is only supported for a few file formats. It is also not supported for folders
-        If bImportFromFolder OrElse Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat()) Then
+        If bImportFromFolder OrElse Not (IsTextFileFormat() OrElse IsCSVFileFormat() OrElse IsExcelFileFormat() OrElse IsJSONFileFormat()) Then
             lblNoPreview.Show()
             bCanImport = True 'assume its true if preview is not supported for the file
             Exit Sub
@@ -770,6 +798,8 @@ Public Class dlgImportDataset
         If IsTextFileFormat() Then
             strRowMaxParamName = If(rdoSeparatortext.Checked, "nrows", "n_max")
         ElseIf IsCSVFileFormat() Then
+            strRowMaxParamName = "nrows"
+        ElseIf IsJSONFileFormat() Then
             strRowMaxParamName = "nrows"
         ElseIf IsExcelFileFormat() Then
             If dctSelectedExcelSheets.Count = 0 Then
@@ -897,14 +927,30 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Sub HideDropEmptyCheckBox()
+        If ucrInputFilePath.IsEmpty Then
+            ucrChkDropEmptyCols.Visible = False
+            ucrChkMultipleFiles.Visible = False
+            lblNoPreview.Text = "No file selected."
+        Else
+            ucrChkDropEmptyCols.Visible = True
+            ucrChkMultipleFiles.Visible = True
+            lblNoPreview.Text = "Preview not yet implemented for this file type"
+        End If
+    End Sub
+
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged,
-        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged,
+        ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrChkDropEmptyCols.ControlValueChanged, ucrInputFilePath.ControlValueChanged,
         ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         TryGridPreview()
         TestOkEnabled()
+        HideDropEmptyCheckBox()
     End Sub
 
-    Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged
+    Private Sub MissingValuesInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMissingValueStringText.ControlContentsChanged, ucrInputMissingValueStringCSV.ControlContentsChanged, ucrInputMissingValueStringExcel.ControlContentsChanged
+        'todo. as of 11/04/2022, control rasing the event is passed in as the event  parameter.
+        'Refactor code to use control checks for updating the below R parameter?
+
         'currently we have no way of knowing which control has raised this event and therefore can't do that check
         'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
         If IsExcelFileFormat() Then
@@ -1059,12 +1105,33 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Function GetCorrectSeparatorInPath() As String
+        Dim strSeparator As String = ""
+        If strCurrentDirectory.Contains("/") Then
+            strSeparator = "/"
+        ElseIf strCurrentDirectory.Contains("\") Then
+            strSeparator = "\"
+        End If
+        Return strSeparator
+    End Function
+
+    Private Sub cmdStepBack_Click(sender As Object, e As EventArgs) Handles cmdStepBack.Click
+        If GetCorrectSeparatorInPath() <> "" Then
+            SetDialogStateFromFile(Strings.Left(strCurrentDirectory, InStrRev(strCurrentDirectory, GetCorrectSeparatorInPath()) - 1), strFileExtension)
+        Else
+            SetDialogStateFromFile("")
+        End If
+    End Sub
+
     Private Sub ucrChkMultipleFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultipleFiles.ControlValueChanged
         If ucrChkMultipleFiles.Checked Then
             SetDialogStateFromFile(strCurrentDirectory, strFileExtension)
+            cmdStepBack.Visible = True
         Else
-            SetDialogStateFromFile(strCurrentDirectory & "\" & strlastFileName & strFileExtension)
+            SetDialogStateFromFile(strDirectoryPathTemp)
+            cmdStepBack.Visible = False
         End If
+
         TestOkEnabled()
     End Sub
 
@@ -1115,7 +1182,7 @@ Public Class dlgImportDataset
         Dim lstFileNames As New List(Of String)
         Dim arrFilePathsAndNames() As String
         If strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) Then
-            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension)
+            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension, SearchOption.AllDirectories)
             If bOnlyCleanedFileNames Then
                 For Each strFilePathName As String In arrFilePathsAndNames
                     lstFileNames.Add(GetCleanFileName(strFilePathName))
@@ -1147,6 +1214,10 @@ Public Class dlgImportDataset
 
     Private Function IsExcelFileFormat() As Boolean
         Return {".xlsx", ".xls"}.Contains(strFileExtension)
+    End Function
+
+    Private Function IsJSONFileFormat() As Boolean
+        Return {".json"}.Contains(strFileExtension)
     End Function
 
     Private Sub RemoveMissingValues()

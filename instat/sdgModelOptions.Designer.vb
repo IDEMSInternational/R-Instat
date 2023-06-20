@@ -194,7 +194,7 @@ Partial Class sdgModelOptions
         'ucrButtonsSDGModelOptions
         '
         Me.ucrButtonsSDGModelOptions.AutoSize = True
-        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(45, 167)
+        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(19, 171)
         Me.ucrButtonsSDGModelOptions.Name = "ucrButtonsSDGModelOptions"
         Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsSDGModelOptions.TabIndex = 2

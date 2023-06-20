@@ -42,24 +42,24 @@ Public Class dlgTimeSeriesPlot
     ' df <- df %>% 
     '   mutate(gauge = ifelse(is.na(estimate), NA, gauge),
     '          estimate = ifelse(is.na(gauge), NA, estimate))
-    Private clsAdjustNAOperator As ROperator
-    Private clsAdjustNAMutateParameter As RParameter
-    Private clsAdjustNAMutate As RFunction
-    Private clsIfElseReference As RFunction
-    Private clsIsNaReference As RFunction
-    Private clsIfElseEstimates As RFunction
-    Private clsIsNaEstimates As RFunction
+    Private clsAdjustNAOperator As New ROperator
+    Private clsAdjustNAMutateParameter As New RParameter
+    Private clsAdjustNAMutate As New RFunction
+    Private clsIfElseReference As New RFunction
+    Private clsIsNaReference As New RFunction
+    Private clsIfElseEstimates As New RFunction
+    Private clsIsNaEstimates As New RFunction
 
     ' Stack data
     ' These functions construct the R code below. This stacks the two columns which is needed for plotting.
     ' df_stack <- df %>% 
     '   pivot_longer(cols = c(gauge, estimate), names_to = "data", values_to = "value", names_ptypes = list(data = factor(levels = c("gauge", "estimates"))))
-    Private clsStackOperator As ROperator
-    Private clsPivotLonger As RFunction
-    Private clsPivotCFunction As RFunction
-    Private clsPivotListFunction As RFunction
-    Private clsPivotFactorFunction As RFunction
-    Private clsPivotFactorLevelsCFunction As RFunction
+    Private clsStackOperator As New ROperator
+    Private clsPivotLonger As New RFunction
+    Private clsPivotCFunction As New RFunction
+    Private clsPivotListFunction As New RFunction
+    Private clsPivotFactorFunction As New RFunction
+    Private clsPivotFactorLevelsCFunction As New RFunction
 
     ' Calculate Individual Summaries.
     ' These functions construct the R code below if mean lines and/or if annotated individual summaries are added.
@@ -67,20 +67,20 @@ Public Class dlgTimeSeriesPlot
     '   group_by(station, data) %>%
     '   summarise(mean = mean(value, na.rm = TRUE)
     '             sd = sd(value, na.rm = TRUE))
-    Private clsIndividualSummariesOperator As ROperator
-    Private clsIndividualSummariesGroupBy As RFunction
-    Private clsIndividualSummariesSummarise As RFunction
-    Private clsNIndividual As RFunction
-    Private clsMean As RFunction
-    Private clsSd As RFunction
-    Private clsSlope As RFunction
-    Private clsPasteNIndividual As RFunction
-    Private clsPasteMean As RFunction
-    Private clsPasteSd As RFunction
-    Private clsPasteSlope As RFunction
-    Private clsSignifMean As RFunction
-    Private clsRoundSd As RFunction
-    Private clsSignifSlope As RFunction
+    Private clsIndividualSummariesOperator As New ROperator
+    Private clsIndividualSummariesGroupBy As New RFunction
+    Private clsIndividualSummariesSummarise As New RFunction
+    Private clsNIndividual As New RFunction
+    Private clsMean As New RFunction
+    Private clsSd As New RFunction
+    Private clsSlope As New RFunction
+    Private clsPasteNIndividual As New RFunction
+    Private clsPasteMean As New RFunction
+    Private clsPasteSd As New RFunction
+    Private clsPasteSlope As New RFunction
+    Private clsSignifMean As New RFunction
+    Private clsRoundSd As New RFunction
+    Private clsSignifSlope As New RFunction
 
     ' Calculate Comparison Summaries
     ' These functions construct the R code below if annotated comparison summaries are added.
@@ -90,32 +90,32 @@ Public Class dlgTimeSeriesPlot
     '              cor = cor(estimate, gauge, use = "na.or.complete"),
     '              me = hydroGOF : Me(estimate, gauge),
     '              mae = hydroGOF:mae(estimate, gauge))
-    Private clsComparisonSummariesOperator As ROperator
-    Private clsComparisonSummariesGroupBy As RFunction
-    Private clsComparisonSummariesSummarise As RFunction
-    Private clsNComparison As RFunction
-    Private clsCor As RFunction
-    Private clsMe As RFunction
-    Private clsMae As RFunction
-    Private clsRmse As RFunction
-    Private clsPbias As RFunction
-    Private clsRSd As RFunction
-    Private clsKge As RFunction
-    Private clsPasteN As RFunction
-    Private clsPasteCor As RFunction
-    Private clsPasteMe As RFunction
-    Private clsPasteMae As RFunction
-    Private clsPasteRmse As RFunction
-    Private clsPastePbias As RFunction
-    Private clsPasteRSd As RFunction
-    Private clsPasteKge As RFunction
-    Private clsRoundCor As RFunction
-    Private clsSignifMe As RFunction
-    Private clsSignifMae As RFunction
-    Private clsSignifRmse As RFunction
-    Private clsRoundPbias As RFunction
-    Private clsRoundRSd As RFunction
-    Private clsRoundKge As RFunction
+    Private clsComparisonSummariesOperator As New ROperator
+    Private clsComparisonSummariesGroupBy As New RFunction
+    Private clsComparisonSummariesSummarise As New RFunction
+    Private clsNComparison As New RFunction
+    Private clsCor As New RFunction
+    Private clsMe As New RFunction
+    Private clsMae As New RFunction
+    Private clsRmse As New RFunction
+    Private clsPbias As New RFunction
+    Private clsRSd As New RFunction
+    Private clsKge As New RFunction
+    Private clsPasteN As New RFunction
+    Private clsPasteCor As New RFunction
+    Private clsPasteMe As New RFunction
+    Private clsPasteMae As New RFunction
+    Private clsPasteRmse As New RFunction
+    Private clsPastePbias As New RFunction
+    Private clsPasteRSd As New RFunction
+    Private clsPasteKge As New RFunction
+    Private clsRoundCor As New RFunction
+    Private clsSignifMe As New RFunction
+    Private clsSignifMae As New RFunction
+    Private clsSignifRmse As New RFunction
+    Private clsRoundPbias As New RFunction
+    Private clsRoundRSd As New RFunction
+    Private clsRoundKge As New RFunction
 
     ' Dictionaries of the comparison/individual summary functions above. 
     ' The key is the summary name in lower case e.g. "bias"
@@ -133,29 +133,29 @@ Public Class dlgTimeSeriesPlot
     Private dctIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
     ' ggplot functions
-    Private clsGgplotOperator As ROperator
-    Private clsGgplotFunction As RFunction
-    Private clsGgplotAes As RFunction
-    Private clsGeomLine As RFunction
-    Private clsGeomPointParameter As RParameter
-    Private clsGeomPoint As RFunction
-    Private clsGeomHLineParameter As RParameter
-    Private clsGeomHLine As RFunction
-    Private clsGeomHLineAes As RFunction
-    Private clsComparisonGeomText As RFunction
-    Private clsComparisonGeomTextAes As RFunction
-    Private clsComparisonPasteLabel As RFunction
-    Private clsGeomSmoothParameter As RParameter
-    Private clsGeomSmooth As RFunction
+    Private clsGgplotOperator As New ROperator
+    Private clsGgplotFunction As New RFunction
+    Private clsGgplotAes As New RFunction
+    Private clsGeomLine As New RFunction
+    Private clsGeomPointParameter As New RParameter
+    Private clsGeomPoint As New RFunction
+    Private clsGeomHLineParameter As New RParameter
+    Private clsGeomHLine As New RFunction
+    Private clsGeomHLineAes As New RFunction
+    Private clsComparisonGeomText As New RFunction
+    Private clsComparisonGeomTextAes As New RFunction
+    Private clsComparisonPasteLabel As New RFunction
+    Private clsGeomSmoothParameter As New RParameter
+    Private clsGeomSmooth As New RFunction
 
-    Private clsReferenceGeomText As RFunction
-    Private clsReferenceGeomTextAes As RFunction
-    Private clsReferencePasteLabel As RFunction
-    Private clsReferenceFilter As RFunction
-    Private clsEstimatesGeomText As RFunction
-    Private clsEstimatesGeomTextAes As RFunction
-    Private clsEstimatesPasteLabel As RFunction
-    Private clsEstimatesFilter As RFunction
+    Private clsReferenceGeomText As New RFunction
+    Private clsReferenceGeomTextAes As New RFunction
+    Private clsReferencePasteLabel As New RFunction
+    Private clsReferenceFilter As New RFunction
+    Private clsEstimatesGeomText As New RFunction
+    Private clsEstimatesGeomTextAes As New RFunction
+    Private clsEstimatesPasteLabel As New RFunction
+    Private clsEstimatesFilter As New RFunction
 
     ' These will be needed when the dialog implements the Plot Options subdialog
     'Private clsLabsFunction As New RFunction

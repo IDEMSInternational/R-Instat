@@ -53,7 +53,7 @@ Public Class frmOutputWindow
     End Sub
 
     Private Sub frmCommand_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
-        frmMain.mnuViewOutputWindow.Checked = Me.Visible
+        frmMain.mnuViewOutput.Checked = Me.Visible
     End Sub
 
     Private Sub mnuContextRTB_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextRTB.Opening
@@ -80,8 +80,8 @@ Public Class frmOutputWindow
 
     Private Sub CopyImageRTB_Click(sender As Object, e As EventArgs) Handles CopyImageRTB.Click
         'Copies the first selected image into the clipboard.
-        Dim prphTemp As System.Windows.Documents.Paragraph
-        Dim conImage As System.Windows.Documents.InlineUIContainer
+        'Dim prphTemp As System.Windows.Documents.Paragraph
+        'Dim conImage As System.Windows.Documents.InlineUIContainer
         'For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
         'If TypeOf (block) Is System.Windows.Documents.Paragraph Then
         'prphTemp = block

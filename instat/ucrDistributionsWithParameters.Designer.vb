@@ -38,6 +38,7 @@ Partial Class ucrDistributionsWithParameters
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblDistributionParameters = New System.Windows.Forms.Label()
         Me.lblParameter1 = New System.Windows.Forms.Label()
         Me.lblParameter2 = New System.Windows.Forms.Label()
@@ -47,6 +48,7 @@ Partial Class ucrDistributionsWithParameters
         Me.ucrInputParameter2 = New instat.ucrInputTextBox()
         Me.ucrInputParameter3 = New instat.ucrInputTextBox()
         Me.ucrInputParameter4 = New instat.ucrInputTextBox()
+        Me.ttEmpirical = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'lblDistributionParameters
@@ -173,4 +175,5 @@ Partial Class ucrDistributionsWithParameters
     Friend WithEvents ucrInputParameter2 As ucrInputTextBox
     Friend WithEvents ucrInputParameter3 As ucrInputTextBox
     Friend WithEvents ucrInputParameter4 As ucrInputTextBox
+    Friend WithEvents ttEmpirical As ToolTip
 End Class

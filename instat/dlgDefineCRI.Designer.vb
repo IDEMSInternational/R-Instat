@@ -169,14 +169,11 @@ Partial Class dlgCorruptionDefineCRI
         '
         Me.ucrGridWeights.AutoSize = True
         Me.ucrGridWeights.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrGridWeights.clsReceiver = Nothing
         Me.ucrGridWeights.Location = New System.Drawing.Point(226, 121)
         Me.ucrGridWeights.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrGridWeights.Name = "ucrGridWeights"
-        Me.ucrGridWeights.shtCurrSheet = Nothing
         Me.ucrGridWeights.Size = New System.Drawing.Size(263, 202)
         Me.ucrGridWeights.TabIndex = 5
-        Me.ucrGridWeights.ucrChkLevels = Nothing
         '
         'ucrReceiverRedFlag
         '

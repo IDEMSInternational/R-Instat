@@ -124,7 +124,7 @@ Partial Class sdgMergeColumnstoInclude
         'ucrSubBase
         '
         Me.ucrSubBase.AutoSize = True
-        Me.ucrSubBase.Location = New System.Drawing.Point(159, 381)
+        Me.ucrSubBase.Location = New System.Drawing.Point(136, 381)
         Me.ucrSubBase.Name = "ucrSubBase"
         Me.ucrSubBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrSubBase.TabIndex = 8

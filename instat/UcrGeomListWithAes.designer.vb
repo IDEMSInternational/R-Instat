@@ -91,7 +91,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam1
         '
-        Me.ucrReceiverParam1.AutoSize = True
         Me.ucrReceiverParam1.frmParent = Nothing
         Me.ucrReceiverParam1.Location = New System.Drawing.Point(97, 25)
         Me.ucrReceiverParam1.Margin = New System.Windows.Forms.Padding(0)
@@ -104,7 +103,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam2
         '
-        Me.ucrReceiverParam2.AutoSize = True
         Me.ucrReceiverParam2.frmParent = Nothing
         Me.ucrReceiverParam2.Location = New System.Drawing.Point(97, 51)
         Me.ucrReceiverParam2.Margin = New System.Windows.Forms.Padding(0)
@@ -117,7 +115,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam3
         '
-        Me.ucrReceiverParam3.AutoSize = True
         Me.ucrReceiverParam3.frmParent = Nothing
         Me.ucrReceiverParam3.Location = New System.Drawing.Point(97, 77)
         Me.ucrReceiverParam3.Margin = New System.Windows.Forms.Padding(0)
@@ -130,7 +127,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam4
         '
-        Me.ucrReceiverParam4.AutoSize = True
         Me.ucrReceiverParam4.frmParent = Nothing
         Me.ucrReceiverParam4.Location = New System.Drawing.Point(97, 103)
         Me.ucrReceiverParam4.Margin = New System.Windows.Forms.Padding(0)
@@ -143,7 +139,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam5
         '
-        Me.ucrReceiverParam5.AutoSize = True
         Me.ucrReceiverParam5.frmParent = Nothing
         Me.ucrReceiverParam5.Location = New System.Drawing.Point(97, 129)
         Me.ucrReceiverParam5.Margin = New System.Windows.Forms.Padding(0)
@@ -200,7 +195,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam13
         '
-        Me.ucrReceiverParam13.AutoSize = True
         Me.ucrReceiverParam13.frmParent = Nothing
         Me.ucrReceiverParam13.Location = New System.Drawing.Point(97, 337)
         Me.ucrReceiverParam13.Margin = New System.Windows.Forms.Padding(0)
@@ -222,7 +216,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam12
         '
-        Me.ucrReceiverParam12.AutoSize = True
         Me.ucrReceiverParam12.frmParent = Nothing
         Me.ucrReceiverParam12.Location = New System.Drawing.Point(97, 311)
         Me.ucrReceiverParam12.Margin = New System.Windows.Forms.Padding(0)
@@ -244,7 +237,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam11
         '
-        Me.ucrReceiverParam11.AutoSize = True
         Me.ucrReceiverParam11.frmParent = Nothing
         Me.ucrReceiverParam11.Location = New System.Drawing.Point(97, 285)
         Me.ucrReceiverParam11.Margin = New System.Windows.Forms.Padding(0)
@@ -347,7 +339,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam10
         '
-        Me.ucrReceiverParam10.AutoSize = True
         Me.ucrReceiverParam10.frmParent = Nothing
         Me.ucrReceiverParam10.Location = New System.Drawing.Point(97, 259)
         Me.ucrReceiverParam10.Margin = New System.Windows.Forms.Padding(0)
@@ -360,7 +351,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam9
         '
-        Me.ucrReceiverParam9.AutoSize = True
         Me.ucrReceiverParam9.frmParent = Nothing
         Me.ucrReceiverParam9.Location = New System.Drawing.Point(97, 233)
         Me.ucrReceiverParam9.Margin = New System.Windows.Forms.Padding(0)
@@ -373,7 +363,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam8
         '
-        Me.ucrReceiverParam8.AutoSize = True
         Me.ucrReceiverParam8.frmParent = Nothing
         Me.ucrReceiverParam8.Location = New System.Drawing.Point(97, 207)
         Me.ucrReceiverParam8.Margin = New System.Windows.Forms.Padding(0)
@@ -386,7 +375,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam7
         '
-        Me.ucrReceiverParam7.AutoSize = True
         Me.ucrReceiverParam7.frmParent = Nothing
         Me.ucrReceiverParam7.Location = New System.Drawing.Point(97, 181)
         Me.ucrReceiverParam7.Margin = New System.Windows.Forms.Padding(0)
@@ -399,7 +387,6 @@ Partial Class ucrGeomListWithParameters
         '
         'ucrReceiverParam6
         '
-        Me.ucrReceiverParam6.AutoSize = True
         Me.ucrReceiverParam6.frmParent = Nothing
         Me.ucrReceiverParam6.Location = New System.Drawing.Point(97, 155)
         Me.ucrReceiverParam6.Margin = New System.Windows.Forms.Padding(0)
@@ -432,6 +419,7 @@ Partial Class ucrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = False
         Me.Controls.Add(Me.ucrChkApplyOnAllLayers)
         Me.Controls.Add(Me.ucrChkIgnoreGlobalAes)
         Me.Controls.Add(Me.grpAesList)

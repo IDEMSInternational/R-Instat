@@ -23,6 +23,7 @@ Public Class ucrColumnMetadataReoGrid
     Private _lstNonEditableColumns As New List(Of String)
     Private strPreviousCellText As String
 
+    Public Event DeleteLabels(strColumnName As String) Implements IColumnMetaDataGrid.DeleteLabels
     Public Event EditValue(iRow As Integer, strColumnName As String, strPreviousValue As String, newValue As Object) Implements IColumnMetaDataGrid.EditValue
 
     Public Sub AddColumns(columnMetaData As clsColumnMetaData) Implements IColumnMetaDataGrid.AddColumns
@@ -39,13 +40,40 @@ Public Class ucrColumnMetadataReoGrid
         rngDataRange = New RangePosition(0, 0, grdData.CurrentWorksheet.Rows, grdData.CurrentWorksheet.Columns)
         grdData.CurrentWorksheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
 
+        Dim iColumnIndex As Integer = GetColumnIndex("Signif_Figures")
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 grdData.CurrentWorksheet(row:=i, col:=j) = columnMetaData.Data(i, j)
+                If grdData.CurrentWorksheet.Item(row:=i, col:=j) = "list" AndAlso iColumnIndex >= 0 Then
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=iColumnIndex).IsReadOnly = True
+                End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = columnMetaData.strRowName(i)
         Next
+
+        Dim clsDataFrame As clsDataFrame = _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name)
+        If clsDataFrame.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            For i = 0 To clsDataFrame.clsVisibleDataFramePage.lstColumns.Count - 1
+                For j = 0 To grdData.CurrentWorksheet.Rows - 1
+                    Dim strRowValue As String = grdData.CurrentWorksheet(row:=j, col:=0)
+                    If strRowValue = clsDataFrame.clsVisibleDataFramePage.lstColumns(i).strName Then
+                        grdData.CurrentWorksheet.Cells(row:=j, col:=0).Style.TextColor = Color.Red
+                    End If
+                Next
+            Next
+        End If
     End Sub
+
+    Private Function GetColumnIndex(strColName As String) As Integer
+        If grdData.CurrentWorksheet IsNot Nothing Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.Columns - 1
+                If grdData.CurrentWorksheet.ColumnHeaders(i).Text = strColName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
 
     Public Function GetSelectedColumns() As List(Of String) Implements IColumnMetaDataGrid.GetSelectedColumns
         Dim lstColumns As New List(Of String)
@@ -66,7 +94,7 @@ Public Class ucrColumnMetadataReoGrid
         AddHandler worksheet.BeforeCut, AddressOf Worksheet_BeforeCut
         AddHandler worksheet.BeforePaste, AddressOf Worksheet_BeforePaste
         AddHandler worksheet.BeforeRangeMove, AddressOf Worksheet_BeforeRangeMove
-        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDown
+        AddHandler worksheet.BeforeCellKeyDown, AddressOf Worksheet_BeforeCellKeyDownColumnMetadata
     End Sub
 
     Private Sub Worksheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs)
@@ -89,6 +117,13 @@ Public Class ucrColumnMetadataReoGrid
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions.", MsgBoxStyle.Information, "Cannot paste")
         e.IsCancelled = True
+    End Sub
+
+    Protected Sub Worksheet_BeforeCellKeyDownColumnMetadata(sender As Object, e As BeforeCellKeyDownEventArgs)
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            RaiseEvent DeleteLabels(grdData.CurrentWorksheet.ColumnHeaders(e.Cell.Column).Text)
+            e.IsCancelled = True
+        End If
     End Sub
 
 End Class

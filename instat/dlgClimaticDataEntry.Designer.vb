@@ -37,6 +37,11 @@ Partial Class dlgClimaticDataEntry
         Me.cmdCheckData = New System.Windows.Forms.Button()
         Me.ttCmdCheckData = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttucrChkDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblNbRowsChanged = New System.Windows.Forms.Label()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
+        Me.lblNbCommentEntered = New System.Windows.Forms.Label()
+        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
         Me.ucrEndDate = New instat.ucrDateTimePicker()
         Me.ucrStartDate = New instat.ucrDateTimePicker()
         Me.ucrInputType = New instat.ucrInputComboBox()
@@ -47,11 +52,6 @@ Partial Class dlgClimaticDataEntry
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblNbRowsChanged = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
-        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
-        Me.lblNbCommentEntered = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -205,6 +205,54 @@ Partial Class dlgClimaticDataEntry
         Me.ttucrChkDefaultValue.InitialDelay = 500
         Me.ttucrChkDefaultValue.ReshowDelay = 100
         '
+        'lblNbRowsChanged
+        '
+        Me.lblNbRowsChanged.AutoSize = True
+        Me.lblNbRowsChanged.Location = New System.Drawing.Point(253, -57)
+        Me.lblNbRowsChanged.Name = "lblNbRowsChanged"
+        Me.lblNbRowsChanged.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbRowsChanged.TabIndex = 88
+        Me.lblNbRowsChanged.Text = "Label3"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(7, 337)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(106, 24)
+        Me.cmdOptions.TabIndex = 89
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'lblNbRowsChanged1
+        '
+        Me.lblNbRowsChanged1.AutoSize = True
+        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(7, 405)
+        Me.lblNbRowsChanged1.Name = "lblNbRowsChanged1"
+        Me.lblNbRowsChanged1.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbRowsChanged1.TabIndex = 90
+        Me.lblNbRowsChanged1.Text = "Label3"
+        '
+        'lblNbCommentEntered
+        '
+        Me.lblNbCommentEntered.AutoSize = True
+        Me.lblNbCommentEntered.Location = New System.Drawing.Point(7, 429)
+        Me.lblNbCommentEntered.Name = "lblNbCommentEntered"
+        Me.lblNbCommentEntered.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbCommentEntered.TabIndex = 92
+        Me.lblNbCommentEntered.Text = "Label4"
+        '
+        'ucrInputSelectStation
+        '
+        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
+        Me.ucrInputSelectStation.IsReadOnly = False
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 127)
+        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 23)
+        Me.ucrInputSelectStation.TabIndex = 91
+        '
         'ucrEndDate
         '
         Me.ucrEndDate.AutoSize = True
@@ -321,55 +369,6 @@ Partial Class dlgClimaticDataEntry
         Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
         Me.ucrPnlOptions.TabIndex = 26
         '
-        'lblNbRowsChanged
-        '
-        Me.lblNbRowsChanged.AutoSize = True
-        Me.lblNbRowsChanged.Location = New System.Drawing.Point(253, -57)
-        Me.lblNbRowsChanged.Name = "lblNbRowsChanged"
-        Me.lblNbRowsChanged.Size = New System.Drawing.Size(39, 13)
-        Me.lblNbRowsChanged.TabIndex = 88
-        Me.lblNbRowsChanged.Text = "Label3"
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(7, 337)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(106, 24)
-        Me.cmdOptions.TabIndex = 89
-        Me.cmdOptions.Text = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'lblNbRowsChanged1
-        '
-        Me.lblNbRowsChanged1.AutoSize = True
-        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(7, 405)
-        Me.lblNbRowsChanged1.Name = "lblNbRowsChanged1"
-        Me.lblNbRowsChanged1.Size = New System.Drawing.Size(39, 13)
-        Me.lblNbRowsChanged1.TabIndex = 90
-        Me.lblNbRowsChanged1.Text = "Label3"
-        '
-        'ucrInputSelectStation
-        '
-        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectStation.AutoSize = True
-        Me.ucrInputSelectStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
-        Me.ucrInputSelectStation.IsReadOnly = False
-        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 127)
-        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
-        Me.ucrInputSelectStation.Size = New System.Drawing.Size(0, 0)
-        Me.ucrInputSelectStation.TabIndex = 91
-        '
-        'lblNbCommentEntered
-        '
-        Me.lblNbCommentEntered.AutoSize = True
-        Me.lblNbCommentEntered.Location = New System.Drawing.Point(7, 429)
-        Me.lblNbCommentEntered.Name = "lblNbCommentEntered"
-        Me.lblNbCommentEntered.Size = New System.Drawing.Size(39, 13)
-        Me.lblNbCommentEntered.TabIndex = 92
-        Me.lblNbCommentEntered.Text = "Label4"
-        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -406,7 +405,7 @@ Partial Class dlgClimaticDataEntry
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgClimaticDataEntry"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Daily Data Entry"
+        Me.Text = "Daily Data Editing/Entry"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

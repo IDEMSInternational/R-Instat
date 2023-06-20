@@ -41,18 +41,15 @@ Partial Class sdgSelectMonth
         '
         Me.ucrMonthAsFactor.AutoSize = True
         Me.ucrMonthAsFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrMonthAsFactor.clsReceiver = Nothing
         Me.ucrMonthAsFactor.Location = New System.Drawing.Point(14, 40)
         Me.ucrMonthAsFactor.Name = "ucrMonthAsFactor"
-        Me.ucrMonthAsFactor.shtCurrSheet = Nothing
         Me.ucrMonthAsFactor.Size = New System.Drawing.Size(231, 219)
         Me.ucrMonthAsFactor.TabIndex = 3
-        Me.ucrMonthAsFactor.ucrChkLevels = Nothing
         '
         'ucrBaseSdg
         '
         Me.ucrBaseSdg.AutoSize = True
-        Me.ucrBaseSdg.Location = New System.Drawing.Point(53, 265)
+        Me.ucrBaseSdg.Location = New System.Drawing.Point(19, 267)
         Me.ucrBaseSdg.Name = "ucrBaseSdg"
         Me.ucrBaseSdg.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdg.TabIndex = 0

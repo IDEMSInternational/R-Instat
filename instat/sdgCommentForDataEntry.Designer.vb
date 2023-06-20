@@ -190,7 +190,7 @@ Partial Class sdgCommentForDataEntry
         'ucrSdgBaseButtons
         '
         Me.ucrSdgBaseButtons.AutoSize = True
-        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(178, 291)
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(156, 291)
         Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
@@ -199,7 +199,7 @@ Partial Class sdgCommentForDataEntry
         'cmdAddComment
         '
         Me.cmdAddComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAddComment.Location = New System.Drawing.Point(62, 293)
+        Me.cmdAddComment.Location = New System.Drawing.Point(43, 293)
         Me.cmdAddComment.Name = "cmdAddComment"
         Me.cmdAddComment.Size = New System.Drawing.Size(90, 24)
         Me.cmdAddComment.TabIndex = 101

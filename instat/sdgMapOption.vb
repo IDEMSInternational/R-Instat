@@ -33,6 +33,7 @@ Public Class sdgMapOption
         ucrInputLongMin.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
         ucrInputLongMin.AddQuotesIfUnrecognised = False
 
+        ucrBase.iHelpTopicID = 645
         ucrInputLongMax.SetParameter(New RParameter("longmax", bNewIncludeArgumentName:=False))
         ucrInputLongMax.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
         ucrInputLongMax.AddQuotesIfUnrecognised = False

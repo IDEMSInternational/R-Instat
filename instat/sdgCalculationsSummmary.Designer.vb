@@ -408,7 +408,7 @@ Partial Class sdgCalculationsSummmary
         'ucrBaseSubDialog
         '
         Me.ucrBaseSubDialog.AutoSize = True
-        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(332, 533)
+        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(307, 533)
         Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
         Me.ucrBaseSubDialog.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubDialog.TabIndex = 0

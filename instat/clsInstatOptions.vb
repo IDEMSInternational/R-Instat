@@ -51,6 +51,7 @@ Imports RDotNet
     Public strClimsoftHost As String
     Public strClimsoftPort As String
     Public strClimsoftUsername As String
+    Public iMaxOutputsHeight As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -72,7 +73,7 @@ Imports RDotNet
         iPreviewRows = clsInstatOptionsDefaults.DEFAULTiPreviewRows
         iMaxRows = clsInstatOptionsDefaults.DEFAULTiMaxRows
         iMaxCols = clsInstatOptionsDefaults.DEFAULTiMaxCols
-        strComment = clsInstatOptionsDefaults.DEFAULTstrComment
+        strComment = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
         strGraphDisplayOption = clsInstatOptionsDefaults.DEFAULTstrGraphDisplayOption
         strLanguageCultureCode = clsInstatOptionsDefaults.DEFAULTstrLanguageCultureCode
         strWorkingDirectory = clsInstatOptionsDefaults.DEFAULTstrWorkingDirectory
@@ -89,12 +90,16 @@ Imports RDotNet
         strClimsoftHost = clsInstatOptionsDefaults.DEFAULTstrClimsoftHost
         strClimsoftPort = clsInstatOptionsDefaults.DEFAULTstrClimsoftPort
         strClimsoftUsername = clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername
+        iMaxOutputsHeight = clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight
         If bSetOptions Then
-            SetOptions()
+            SetDefaultValuesToOptionsNotSet()
         End If
     End Sub
 
-    Public Sub SetOptions()
+    ''' <summary>
+    ''' sets the default values to options that have not been set with values
+    ''' </summary>
+    Public Sub SetDefaultValuesToOptionsNotSet()
         If fntOutput IsNot Nothing AndAlso clrOutput <> Color.Empty Then
             SetFormatOutput(fntOutput, clrOutput)
         Else
@@ -143,10 +148,8 @@ Imports RDotNet
             SetCommandInOutpt(clsInstatOptionsDefaults.DEFAULTbCommandsinOutput)
         End If
 
-        If strComment IsNot Nothing Then
-            SetComment(strComment)
-        Else
-            SetComment(clsInstatOptionsDefaults.DEFAULTstrComment)
+        If strComment Is Nothing Then
+            SetComment(Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment))
         End If
 
         If strGraphDisplayOption IsNot Nothing Then
@@ -280,7 +283,56 @@ Imports RDotNet
         Else
             SetClimsoftUsername(clsInstatOptionsDefaults.DEFAULTstrClimsoftUsername)
         End If
+
+        SetMaximumOutputsHeight(If(iMaxOutputsHeight Is Nothing, clsInstatOptionsDefaults.DEFAULTiMaxOutputsHeight, iMaxOutputsHeight))
+
     End Sub
+
+    ''' <summary>
+    ''' executes the set R options if they have been changed or not set in the R environment
+    ''' </summary>
+    Public Sub ExecuteRGlobalOptions()
+        Dim clsOptionsFunction As New RFunction
+        Dim strROption As String
+
+        clsOptionsFunction.SetRCommand("options")
+
+        'add "digits" as options parameter of its been changed
+        strROption = GetROption("digits")
+        If strROption Is Nothing OrElse strROption <> iDigits.ToString Then
+            clsOptionsFunction.AddParameter("digits", iDigits)
+        End If
+
+        'add "show.signif.stars" as options parameter of its been changed
+        strROption = GetROption("show.signif.stars")
+        If strROption Is Nothing OrElse strROption <> bShowSignifStars.ToString Then
+            clsOptionsFunction.AddParameter("show.signif.stars", If(bShowSignifStars, "TRUE", "FALSE"))
+        End If
+
+        'add "dplyr.summarise.inform"" as options parameter of it was not set as FALSE
+        strROption = GetROption("dplyr.summarise.inform")
+        If strROption Is Nothing OrElse strROption <> False.ToString Then
+            clsOptionsFunction.AddParameter("dplyr.summarise.inform", "FALSE")
+        End If
+
+        frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(),
+                                   strComment:="Setting display options (e.g Number of significant digits)")
+
+    End Sub
+
+    ''' <summary>
+    ''' gets an option from R environment if it's been set
+    ''' </summary>
+    ''' <param name="strOptionName"></param>
+    ''' <returns>string representation of the R option</returns>
+    Private Function GetROption(strOptionName As String) As String
+        Dim expression As SymbolicExpression
+        Dim clsGetOptionFunction As New RFunction
+        clsGetOptionFunction.SetRCommand("getOption")
+        clsGetOptionFunction.AddParameter("x", Chr(34) & strOptionName & Chr(34))
+        expression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetOptionFunction.ToScript(), bSilent:=True)
+        Return If(expression Is Nothing OrElse expression.Type = Internals.SymbolicExpressionType.Null, Nothing, expression.AsCharacter(0))
+    End Function
 
     Public Sub SetMaxRows(iRows As Integer)
         iMaxRows = iRows
@@ -407,43 +459,15 @@ Imports RDotNet
     End Sub
 
     Public Sub SetDigits(iNewDigits As Integer)
-        Dim clsOptionsFunction As New RFunction
-        Dim clsGetOptionFunction As New RFunction
-        Dim expCurrDigits As SymbolicExpression
-
         If iNewDigits > 22 OrElse iNewDigits < 0 Then
             MsgBox("Cannot set digits to: " & iNewDigits & ". Digits must be an integer between 0 and 22.", MsgBoxStyle.Critical, "Error setting digits")
         Else
             iDigits = iNewDigits
-            clsGetOptionFunction.SetRCommand("getOption")
-            clsGetOptionFunction.AddParameter("x", Chr(34) & "digits" & Chr(34))
-            expCurrDigits = frmMain.clsRLink.RunInternalScriptGetValue(clsGetOptionFunction.ToScript(), bSilent:=True)
-            If (expCurrDigits IsNot Nothing AndAlso expCurrDigits.Type <> Internals.SymbolicExpressionType.Null AndAlso expCurrDigits.AsInteger(0) <> iDigits) OrElse expCurrDigits Is Nothing Then
-                clsOptionsFunction.SetRCommand("options")
-                clsOptionsFunction.AddParameter("digits", iDigits)
-                frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(), strComment:="Option: Number of digits to display")
-            End If
         End If
     End Sub
 
     Public Sub SetSignifStars(bShowStars As Boolean)
-        Dim clsOptionsFunction As New RFunction
-        Dim clsGetOptionsFunction As New RFunction
-        Dim expCurrStars As SymbolicExpression
-
         bShowSignifStars = bShowStars
-        clsGetOptionsFunction.SetRCommand("getOption")
-        clsGetOptionsFunction.AddParameter("x", Chr(34) & "show.signif.stars" & Chr(34))
-        clsOptionsFunction.SetRCommand("options")
-        expCurrStars = frmMain.clsRLink.RunInternalScriptGetValue(clsGetOptionsFunction.ToScript(), bSilent:=True)
-        If (expCurrStars IsNot Nothing AndAlso expCurrStars.Type <> Internals.SymbolicExpressionType.Null AndAlso expCurrStars.AsLogical(0) <> bShowSignifStars) OrElse expCurrStars Is Nothing Then
-            If bShowSignifStars Then
-                clsOptionsFunction.AddParameter("show.signif.stars", "TRUE")
-            Else
-                clsOptionsFunction.AddParameter("show.signif.stars", "FALSE")
-            End If
-            frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(), strComment:="Option: Show stars on summary tables of coefficients")
-        End If
     End Sub
 
     Public Sub SetChangeDataFrame(bNewChange As Boolean)
@@ -517,4 +541,9 @@ Imports RDotNet
     Public Sub SetClimsoftUsername(strNewClimsoftUsername As String)
         strClimsoftUsername = strNewClimsoftUsername
     End Sub
+
+    Public Sub SetMaximumOutputsHeight(iNewMaxOutputsHeight As Integer)
+        iMaxOutputsHeight = iNewMaxOutputsHeight
+    End Sub
+
 End Class

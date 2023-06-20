@@ -21,7 +21,7 @@ Public Class dlgClimsoftWizard
 
     'used as the R command by the 2 wizard steps. import stations and import elements data
     'this is also be used as the base function
-    Private clsRImportFromClimsoft As RFunction
+    Private clsRImportFromClimsoft As New RFunction
 
     'holds all the wizard steps objects, used in going from step to step
     Private lstWizardSteps As New List(Of IWizStep)

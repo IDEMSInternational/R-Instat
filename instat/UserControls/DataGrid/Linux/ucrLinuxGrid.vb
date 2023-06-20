@@ -25,9 +25,13 @@ Public MustInherit Class ucrLinuxGrid
     Private _rowContextMenuStrip As ContextMenuStrip
     Private _tabContextMenuStrip As ContextMenuStrip
 
+    ''' <summary>
+    ''' Gets current worksheet adapter
+    ''' </summary>
+    ''' <returns>Worksheet adapter if a tab is selected, else nothing</returns>
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
-            Return New clsWorksheetAdapter(tcTabs.SelectedTab)
+            Return If(tcTabs.SelectedTab Is Nothing, Nothing, New clsWorksheetAdapter(tcTabs.SelectedTab))
         End Get
         Set(value As clsWorksheetAdapter)
             For Each tabPage As TabPage In tcTabs.TabPages
@@ -78,6 +82,48 @@ Public MustInherit Class ucrLinuxGrid
         Return New clsWorksheetAdapter(tab)
     End Function
 
+    ''' <summary>
+    ''' Reorder the worksheets
+    ''' </summary>
+    Private Sub ReOrderWorksheets(strCurrWorksheet As String) Implements IGrid.ReOrderWorksheets
+        'assuming the databook will always have all the data frames 
+        'and the grid may not have all the data frame worksheets equivalent
+        'and all data frames in the data book have changed their order positions 
+        'get data frames sheets in the grid based on the databook data frames position order
+        'and add it to the list.
+        Dim lstWorkSheetsFound As New List(Of TabPage)
+        For Each clsDataframe In _clsDataBook.DataFrames
+            Dim fillWorkSheet As TabPage = GetTabPage(clsDataframe.strName)
+            If fillWorkSheet IsNot Nothing Then
+                lstWorkSheetsFound.Add(fillWorkSheet)
+            End If
+        Next
+
+        'in the second condition we check if all data frames in the data book
+        'have the same order positions with all data frame sheets in the grid
+        'if not this check will return False which means the data frames in the data book are reordered
+        If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(tcTabs.Controls.OfType(Of TabPage).Select(Function(x) x.Text).ToList) Then
+            'reorder the worksheets based on the filled list
+            For i As Integer = 0 To lstWorkSheetsFound.Count - 1
+                tcTabs.TabPages.Remove(lstWorkSheetsFound(i))
+                tcTabs.TabPages.Insert(i, lstWorkSheetsFound(i))
+            Next
+            tcTabs.SelectedTab = GetTabPage(strCurrWorksheet) 'set the selected sheet back active before reordering
+        End If
+    End Sub
+
+    Private Function GetTabPage(strName As String) As TabPage
+        Dim tab As TabPage = Nothing
+        For i As Integer = 0 To tcTabs.TabPages.Count - 1
+            If tcTabs.TabPages(i).Text = strName Then
+                tab = tcTabs.TabPages(i)
+                Exit For
+            End If
+        Next
+        Return tab
+    End Function
+
     Public Sub CopyRange() Implements IGrid.CopyRange
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
@@ -112,10 +158,28 @@ Public MustInherit Class ucrLinuxGrid
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows
         Dim lstSelectedRows As New List(Of String)
         Dim dataGrid = GetGrid(tcTabs.SelectedTab)
-        For Each row As DataGridViewRow In dataGrid.SelectedRows
-            lstSelectedRows.Add(row.HeaderCell.Value)
+        'For Each row As DataGridViewRow In dataGrid.SelectedRows
+        '    lstSelectedRows.Add(row.HeaderCell.Value)
+        'Next
+        For i As Integer = 0 To dataGrid.GetCellCount(DataGridViewElementStates.Selected) - 1
+            lstSelectedRows.Add(dataGrid.SelectedCells(i).RowIndex.ToString + 1)
         Next
+        lstSelectedRows = lstSelectedRows.Distinct.ToList
         Return lstSelectedRows
+    End Function
+
+
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        Dim dataGrid = GetGrid(tcTabs.SelectedTab)
+        'For Each column As DataGridViewColumn In dataGrid.SelectedColumns
+        '    lstSelectedColumnIndexes.Add(column.HeaderCell.Value)
+        'Next
+        For i As Integer = 0 To dataGrid.GetCellCount(DataGridViewElementStates.Selected) - 1
+            lstSelectedColumnIndexes.Add(dataGrid.SelectedCells(i).ColumnIndex.ToString + 1)
+        Next
+        lstSelectedColumnIndexes = lstSelectedColumnIndexes.Distinct.ToList
+        Return lstSelectedColumnIndexes
     End Function
 
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet

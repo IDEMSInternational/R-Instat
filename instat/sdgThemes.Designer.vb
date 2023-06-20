@@ -172,7 +172,7 @@ Partial Class sdgThemes
         'ucrBaseSubdialogue
         '
         Me.ucrBaseSubdialogue.AutoSize = True
-        Me.ucrBaseSubdialogue.Location = New System.Drawing.Point(344, 621)
+        Me.ucrBaseSubdialogue.Location = New System.Drawing.Point(306, 621)
         Me.ucrBaseSubdialogue.Name = "ucrBaseSubdialogue"
         Me.ucrBaseSubdialogue.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubdialogue.TabIndex = 1

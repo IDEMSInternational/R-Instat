@@ -317,7 +317,7 @@ Partial Class sdgVariableTransformations
         'ucrButtonsSDGVarTransform
         '
         Me.ucrButtonsSDGVarTransform.AutoSize = True
-        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(56, 318)
+        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(21, 318)
         Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
         Me.ucrButtonsSDGVarTransform.Size = New System.Drawing.Size(224, 30)
         Me.ucrButtonsSDGVarTransform.TabIndex = 2

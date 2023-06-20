@@ -270,7 +270,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrInputWithinYear.IsReadOnly = False
         Me.ucrInputWithinYear.Location = New System.Drawing.Point(367, 278)
         Me.ucrInputWithinYear.Name = "ucrInputWithinYear"
-        Me.ucrInputWithinYear.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputWithinYear.Size = New System.Drawing.Size(88, 21)
         Me.ucrInputWithinYear.TabIndex = 19
         '
         'ucrInputYear
@@ -281,7 +281,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrInputYear.IsReadOnly = False
         Me.ucrInputYear.Location = New System.Drawing.Point(367, 235)
         Me.ucrInputYear.Name = "ucrInputYear"
-        Me.ucrInputYear.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputYear.Size = New System.Drawing.Size(88, 21)
         Me.ucrInputYear.TabIndex = 16
         '
         'ucrInputStation
@@ -292,7 +292,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrInputStation.IsReadOnly = False
         Me.ucrInputStation.Location = New System.Drawing.Point(367, 80)
         Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputStation.Size = New System.Drawing.Size(88, 21)
         Me.ucrInputStation.TabIndex = 7
         '
         'ucrPnlPlots
@@ -309,7 +309,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 394)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 26
         '
         'ucrSavePlot
@@ -378,7 +378,7 @@ Partial Class dlgClimaticBoxPlot
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(455, 458)
+        Me.ClientSize = New System.Drawing.Size(461, 458)
         Me.Controls.Add(Me.ucrNudOutlierCoefficient)
         Me.Controls.Add(Me.lblOutlierCoefficient)
         Me.Controls.Add(Me.ucrReceiverWithinYear)

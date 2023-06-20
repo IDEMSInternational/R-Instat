@@ -85,13 +85,10 @@ Partial Class dlgReferenceLevel
         '
         Me.ucrFactorReferenceLevels.AutoSize = True
         Me.ucrFactorReferenceLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorReferenceLevels.clsReceiver = Nothing
         Me.ucrFactorReferenceLevels.Location = New System.Drawing.Point(255, 58)
         Me.ucrFactorReferenceLevels.Name = "ucrFactorReferenceLevels"
-        Me.ucrFactorReferenceLevels.shtCurrSheet = Nothing
         Me.ucrFactorReferenceLevels.Size = New System.Drawing.Size(267, 181)
         Me.ucrFactorReferenceLevels.TabIndex = 3
-        Me.ucrFactorReferenceLevels.ucrChkLevels = Nothing
         '
         'ucrBase
         '

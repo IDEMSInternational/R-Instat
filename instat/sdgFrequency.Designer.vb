@@ -50,7 +50,7 @@ Partial Class sdgFrequency
         'ucrBaseSubDialog
         '
         Me.ucrBaseSubDialog.AutoSize = True
-        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(62, 178)
+        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(33, 178)
         Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
         Me.ucrBaseSubDialog.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubDialog.TabIndex = 7

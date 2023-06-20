@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports System.IO
 Imports instat.Translations
 
@@ -53,8 +54,8 @@ Public Class ucrFilePath
         Get
             Return btnBrowse.Text
         End Get
-        Set(ByVal value As String)
-            btnBrowse.Text = GetTranslation(value)
+        Set(value As String)
+            btnBrowse.Text = If(DesignMode, value, GetTranslation(value))
         End Set
     End Property
 
@@ -71,8 +72,8 @@ Public Class ucrFilePath
         Get
             Return lblName.Text
         End Get
-        Set(ByVal value As String)
-            lblName.Text = GetTranslation(value)
+        Set(value As String)
+            lblName.Text = If(DesignMode, value, GetTranslation(value))
         End Set
     End Property
 
@@ -82,17 +83,36 @@ Public Class ucrFilePath
     Public Property FilePathDialogTitle As String = "Save As"
 
     ''' <summary>
-    ''' used to set the allowed file filters or file extensions 
+    ''' Used to set the allowed file filters or file extensions 
+    ''' <para>Format example; Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS</para>
+    ''' <para> Note. this should be set before setting FilePath property.
+    ''' the first file filter or extension set here overwrites the set FilePath extension</para>
     ''' </summary> 
     Public Property FilePathDialogFilter As String
         Get
             Return strFilePathDialogFilter
         End Get
-        Set(ByVal value As String)
+        Set(value As String)
             strFilePathDialogFilter = value
-            'reset the filter index(start index is 1). 
+            'reset the filter index(start index is based on 1). 
             'its safer To, just incase number of filters set are different from previously set
             SelectedFileFilterIndex = 1
+
+            If String.IsNullOrEmpty(strFilePathDialogFilter) OrElse FolderBrowse OrElse String.IsNullOrEmpty(FilePath) Then
+                Exit Property
+            End If
+
+            'for file browse, if file path name was already set,
+            'change the extension set to use the new one.
+            'get the new file extension from the list of filter names in strFilePathDialogFilter
+            'for instance if strFilePathDialogFilter is
+            'Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS
+            'the new file path will have .xls as its extension
+            Dim arrStr() As String = strFilePathDialogFilter.Split({"|"}, StringSplitOptions.RemoveEmptyEntries)
+                arrStr = arrStr(1).Split({";"}, StringSplitOptions.RemoveEmptyEntries)
+                FilePath = Path.GetDirectoryName(FilePath) & "\" &
+                    Path.GetFileNameWithoutExtension(FilePath) & arrStr(0).Substring(1)
+
         End Set
     End Property
 
@@ -104,10 +124,20 @@ Public Class ucrFilePath
     Public Property SelectedFileFilterIndex As Integer
 
     ''' <summary>
-    ''' used to set the suggested name if no file name was set before
+    ''' used to set the suggested name if no file name was set before by the user
+    ''' Note. The name should not have a file extension
     ''' </summary>
     ''' <returns></returns>
     Public Property DefaultFileSuggestionName As String = ""
+
+    ''' <summary>
+    ''' holds last user set file name, without the path and extension
+    ''' value is set when the user browses the file system
+    ''' </summary>
+    ''' <returns></returns>
+    <Browsable(False)>
+    Private Property UserSetFilePathName As String = ""
+
 
     ''' <summary>
     ''' gets or sets the input file path used by the FolderBrowseDialog or SaveFileDialog prompt 
@@ -117,28 +147,54 @@ Public Class ucrFilePath
         Get
             Return PathControl().GetText()
         End Get
-        Set(ByVal value As String)
+        Set(value As String)
             'first replace backward slashed with forward slashes cause of R path formats
             PathControl().SetName(value.Replace("\", "/"))
-            If value <> "" Then
-                'to be safe, always replace the forward slashes with back slashes. values will be used by vb.net sialog prompts
-                PreviousSelectedWindowsFilePath = value.Replace("/", "\")
-            End If
             RaiseEvent FilePathChanged()
         End Set
     End Property
 
     ''' <summary>
-    ''' gets or sets the previously set path. This is never cleared when sub clear() is called.
-    ''' its used internally to set initial directories of the folder or save dialogs prompts even when path was extenally cleared
-    ''' the path will always be in windows backslash convention format i.e uses "\" instead of "/"
-    ''' </summary> 
-    Private Property PreviousSelectedWindowsFilePath As String = ""
+    ''' gets the file path directory. if file path is directory, 
+    ''' then the last directory will also be included
+    ''' </summary>
+    ''' <returns></returns>
+    <Browsable(False)>
+    Public ReadOnly Property FilePathDirectory() As String
+        Get
+            If IsEmpty() Then
+                Return ""
+            Else
+                'check for extension to determine if its a directory
+                'GetDirectoryName omits the last directory
+                'yet here we need it as path of the directory path
+                If String.IsNullOrEmpty(Path.GetExtension(FilePath)) Then
+                    Return FilePath
+                Else
+                    Return Path.GetDirectoryName(FilePath)
+                End If
+            End If
+        End Get
+    End Property
+
+    <Browsable(False)>
+    Public ReadOnly Property SuggestionNameWithoutExtension() As String
+        Get
+            If Not String.IsNullOrEmpty(UserSetFilePathName) Then
+                Return Path.GetFileNameWithoutExtension(UserSetFilePathName)
+            ElseIf Not String.IsNullOrEmpty(DefaultFileSuggestionName) Then
+                Return DefaultFileSuggestionName
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 
     ''' <summary>
     ''' gets the control that contains the input file path and name
     ''' </summary>
-    ''' <returns>ucrInputTextBox</returns>    
+    ''' <returns>ucrInputTextBox</returns>   
+    <Browsable(False)>
     Public ReadOnly Property PathControl() As ucrInputTextBox
         Get
             Return ucrInputFilePath
@@ -194,11 +250,10 @@ Public Class ucrFilePath
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
         If FolderBrowse Then
             Using dlgFolderBrowse As New FolderBrowserDialog
-                If String.IsNullOrEmpty(PreviousSelectedWindowsFilePath) Then
+                If IsEmpty() Then
                     dlgFolderBrowse.SelectedPath = frmMain.clsInstatOptions.strWorkingDirectory
                 Else
-                    'use the file path in windows backslash convention format 
-                    dlgFolderBrowse.SelectedPath = Path.GetDirectoryName(PreviousSelectedWindowsFilePath)
+                    dlgFolderBrowse.SelectedPath = FilePathDirectory 'Path.GetDirectoryName(FilePath)
                 End If
                 If DialogResult.OK = dlgFolderBrowse.ShowDialog() Then
                     FilePath = dlgFolderBrowse.SelectedPath
@@ -210,30 +265,30 @@ Public Class ucrFilePath
             Using dlgSaveFile As New SaveFileDialog
                 dlgSaveFile.Title = FilePathDialogTitle
                 dlgSaveFile.Filter = FilePathDialogFilter
-                If String.IsNullOrEmpty(PreviousSelectedWindowsFilePath) Then
-                    dlgSaveFile.FileName = DefaultFileSuggestionName
+                If IsEmpty() Then
+                    dlgSaveFile.FileName = SuggestionNameWithoutExtension()
                     dlgSaveFile.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
                 Else
                     'if there is no current file path and there is a default suggested name, then use the default suggestion
                     'else check if previous selected path has an extension to determine if the previous path included a file name and use it
                     'else leave the FileName as empty(it's the default)
-                    If IsEmpty() AndAlso Not String.IsNullOrEmpty(DefaultFileSuggestionName) Then
-                        dlgSaveFile.FileName = DefaultFileSuggestionName
-                    ElseIf Not String.IsNullOrEmpty(Path.GetExtension(PreviousSelectedWindowsFilePath)) Then
-                        dlgSaveFile.FileName = Path.GetFileNameWithoutExtension(PreviousSelectedWindowsFilePath)
+                    If Not String.IsNullOrEmpty(Path.GetExtension(FilePath)) Then
+                        dlgSaveFile.FileName = Path.GetFileNameWithoutExtension(FilePath)
+                    ElseIf Not String.IsNullOrEmpty(SuggestionNameWithoutExtension()) Then
+                        dlgSaveFile.FileName = SuggestionNameWithoutExtension()
                     End If
-
-                    dlgSaveFile.InitialDirectory = Path.GetDirectoryName(PreviousSelectedWindowsFilePath)
+                    dlgSaveFile.InitialDirectory = Path.GetDirectoryName(FilePath)
                     dlgSaveFile.FilterIndex = SelectedFileFilterIndex
-
                 End If
                 If DialogResult.OK = dlgSaveFile.ShowDialog() Then
                     FilePath = dlgSaveFile.FileName
                     SelectedFileFilterIndex = dlgSaveFile.FilterIndex
+                    UserSetFilePathName = dlgSaveFile.FileName
                 End If
             End Using
         End If
     End Sub
+
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         btnBrowse.PerformClick()

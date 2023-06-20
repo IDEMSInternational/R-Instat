@@ -22,9 +22,13 @@ Public MustInherit Class ucrReoGrid
 
     Protected _clsDataBook As clsDataBook
 
+    ''' <summary>
+    ''' Gets current worksheet adapter
+    ''' </summary>
+    ''' <returns>Worksheet adapter if a worksheet is selected, else nothing</returns>
     Public Property CurrentWorksheet As clsWorksheetAdapter Implements IGrid.CurrentWorksheet
         Get
-            Return New clsWorksheetAdapter(grdData.CurrentWorksheet)
+            Return If(grdData.CurrentWorksheet Is Nothing, Nothing, New clsWorksheetAdapter(grdData.CurrentWorksheet))
         End Get
         Set(value As clsWorksheetAdapter)
             grdData.CurrentWorksheet = grdData.Worksheets.Where(Function(x) x.Name = value.Name).FirstOrDefault
@@ -62,12 +66,46 @@ Public MustInherit Class ucrReoGrid
         fillWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
         AttachEventsToWorksheet(fillWorkSheet)
         Return New clsWorksheetAdapter(fillWorkSheet)
     End Function
 
+    ''' <summary>
+    ''' Reorder the worksheets
+    ''' </summary>
+    Private Sub ReOrderWorksheets(strCurrWorksheet As String) Implements IGrid.ReOrderWorksheets
+        'assuming the databook will always have all the data frames 
+        'and the grid may not have all the data frame worksheets equivalent
+        'and all data frames in the data book have changed their order positions 
+        'get data frames sheets in the grid based on the databook data frames position order
+        'and add it to the list.
+        Dim lstWorkSheetsFound As New List(Of Worksheet)
+        For Each clsDataframe In _clsDataBook.DataFrames
+            Dim fillWorkSheet As Worksheet = grdData.GetWorksheetByName(clsDataframe.strName)
+            If fillWorkSheet IsNot Nothing Then
+                lstWorkSheetsFound.Add(fillWorkSheet)
+            End If
+        Next
+
+        'in the second condition we check if all data frames in the data book
+        'have the same order positions with all data frame sheets in the grid
+        'if not this check will return False which means the data frames in the data book are reordered
+        If lstWorkSheetsFound.Count > 1 AndAlso Not _clsDataBook.DataFrames.Select(Function(x) x.strName).ToList().
+                                                       SequenceEqual(grdData.Worksheets.Select(Function(x) x.Name).ToList()) Then
+            'reorder the worksheets based on the filled list
+            For i As Integer = 0 To lstWorkSheetsFound.Count - 1
+                grdData.MoveWorksheet(lstWorkSheetsFound(i), i)
+            Next
+            grdData.CurrentWorksheet = grdData.GetWorksheetByName(strCurrWorksheet) 'set the selected sheet back active before reordering
+        End If
+    End Sub
+
     Public Sub CopyRange() Implements IGrid.CopyRange
-        grdData.CurrentWorksheet.Copy()
+        If Not IsNothing(grdData) _
+                AndAlso Not IsNothing(grdData.CurrentWorksheet) Then
+            grdData.CurrentWorksheet.Copy()
+        End If
     End Sub
 
     Public Function GetSelectedRows() As List(Of String) Implements IGrid.GetSelectedRows
@@ -76,6 +114,15 @@ Public MustInherit Class ucrReoGrid
             lstSelectedRows.Add(grdData.CurrentWorksheet.RowHeaders.Item(i).Text)
         Next
         Return lstSelectedRows
+    End Function
+
+    Public Function GetSelectedColumnIndexes() As List(Of String) Implements IGrid.GetSelectedColumnIndexes
+        Dim lstSelectedColumnIndexes As New List(Of String)
+        Dim clsRange As RangePosition = grdData.CurrentWorksheet.SelectionRange
+        For i As Integer = clsRange.Col To clsRange.Col + clsRange.Cols - 1
+            lstSelectedColumnIndexes.Add(grdData.CurrentWorksheet.ColumnHeaders.Item(i).Index + 1)
+        Next
+        Return lstSelectedColumnIndexes
     End Function
 
     Public Function GetWorksheet(name As String) As clsWorksheetAdapter Implements IGrid.GetWorksheet
@@ -168,7 +215,11 @@ Public MustInherit Class ucrReoGrid
 
     Private Function GetCellValue(iRow As Integer, strColumn As String) As String Implements IGrid.GetCellValue
         For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
-            If grdData.CurrentWorksheet.ColumnHeaders(i).Text = strColumn Then
+            Dim strColumnHeader As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
+            If strColumnHeader.Contains("(") Then
+                strColumnHeader = strColumnHeader.Split("(")(0)
+            End If
+            If strColumnHeader.Trim = strColumn Then
                 Return grdData.CurrentWorksheet(iRow, i).ToString()
             End If
         Next
@@ -176,15 +227,24 @@ Public MustInherit Class ucrReoGrid
     End Function
 
     Private Sub UpdateWorksheetStyle(workSheet As Worksheet)
+        'issue with reo grid that means if RangePosition.EntireRange is used then the back color 
+        'changes. This would then override the back color set in R
         If frmMain.clsInstatOptions IsNot Nothing Then
-            workSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+            'Set enitre range apart from top row
+            workSheet.SetRangeStyles(New RangePosition(1, 0, workSheet.RowCount, workSheet.ColumnCount), New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
+            'Set top row
+            workSheet.SetRangeStyles(New RangePosition(0, 0, 1, workSheet.ColumnCount), New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
                                 .FontName = frmMain.clsInstatOptions.fntEditor.Name
                                 })
         End If
-
     End Sub
 
     Private Sub ucrReoGrid_Load(sender As Object, e As EventArgs) Handles MyBase.Load

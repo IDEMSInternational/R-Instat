@@ -60,7 +60,7 @@ Partial Class dlgSaveAs
         Me.ucrBase.Location = New System.Drawing.Point(10, 63)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrFilePath
