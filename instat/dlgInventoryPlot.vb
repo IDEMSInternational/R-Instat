@@ -356,7 +356,6 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
-
         If ucrChkDetails.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticDetails, iPosition:=2)
             ucrBase.clsRsyntax.AddToAfterCodes(clsCumulativeInventoryFunction, iPosition:=3)
@@ -397,6 +396,13 @@ Public Class dlgInventoryPlot
             clsAddKeyFunction.AddParameter("data_name", Chr(34) & ucrSaveDetails.GetText & Chr(34), iPosition:=0)
         Else
             clsAddKeyFunction.RemoveParameterByName("data_name")
+        End If
+        If ucrSaveDetails.ucrChkSave.Checked Then
+            clsCumulativeInventoryFunction.SetAssignTo(ucrSaveDetails.GetText())
+            clsCumulativeInventoryFunction.iCallType = 0
+        Else
+            clsCumulativeInventoryFunction.RemoveAssignTo()
+            clsCumulativeInventoryFunction.iCallType = 2
         End If
     End Sub
 
