@@ -27,9 +27,11 @@ jobs:
     env:
       Solution_Name: Instat.sln                        
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+         
       
     # check out r-instat
-    steps:
+    steps:   
+    
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -166,6 +168,9 @@ jobs:
       run: |
         ROBOCOPY R-RInstat\32Bit\ instat\bin\Release\static\ /E
       continue-on-error: true 
+     
+    - name: Set R-tools
+      uses: r-windows/install-rtools@master 
      
     - name: Install R packages (64 bit)
       run: |

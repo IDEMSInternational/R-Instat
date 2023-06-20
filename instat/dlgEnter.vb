@@ -23,6 +23,7 @@ Public Class dlgEnter
     Dim clsLength As New RFunction
     Public bFirstLoad As Boolean = True
     Public strOutput As String
+    Private strPackageName As String
     Public clsCommands As New RFunction
 
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -374,5 +375,12 @@ Public Class dlgEnter
 
     Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("runif( )", 2)
+    End Sub
+
+    Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, ToolStripMenuBase.Click
+        strPackageName = "base"
+        If Not String.IsNullOrEmpty(strPackageName) Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
     End Sub
 End Class
