@@ -1922,10 +1922,6 @@ Public Class frmMain
         dlgReplaceValues.ShowDialog()
     End Sub
 
-    'Private Sub mnuClimaticTidyandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs)
-    '    dlgOneVariableSummarise.ShowDialog()
-    'End Sub
-
     Private Sub mnuClimaticPrepareLengthOfSeason_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareLengthOfSeason.Click
         dlgClimaticLengthOfSeason.ShowDialog()
     End Sub
@@ -2012,14 +2008,6 @@ Public Class frmMain
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
-
-    'Private Sub mnuClimaticTidyandExamineOneVariableGraph_Click(sender As Object, e As EventArgs)
-    '    dlgOneVariableGraph.ShowDialog()
-    'End Sub
-
-    'Private Sub mnuClimaticTidyandExamineOneVariableFrequencies_Click(sender As Object, e As EventArgs)
-    '    dlgOneWayFrequencies.ShowDialog()
-    'End Sub
 
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicateRows.Click
         dlgDuplicateRows.ShowDialog()
@@ -2337,11 +2325,6 @@ Public Class frmMain
     Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
         dlgCircularDensityPlot.ShowDialog()
     End Sub
-
-    Private Sub mnuTidyandExamineClimaticDataEntry_Click(sender As Object, e As EventArgs)
-        dlgClimaticDataEntry.ShowDialog()
-    End Sub
-
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
     End Sub
@@ -2361,10 +2344,6 @@ Public Class frmMain
     Private Sub mnuClimaticFileImportfromClimateDataStore_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromClimateDataStore.Click
         dlgImportERA5Data.ShowDialog()
     End Sub
-
-    'Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs)
-    '    dlgSetupForDataEntry.ShowDialog()
-    'End Sub
 
     Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
         dlgPasteNewDataFrame.ShowDialog()
@@ -2412,10 +2391,6 @@ Public Class frmMain
     Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
         dlgExportToClimsoft.ShowDialog()
     End Sub
-
-    'Private Sub mnuClimaticTidyandExamineCompareColumns_Click(sender As Object, e As EventArgs)
-    '    dlgCompareColumns.ShowDialog()
-    'End Sub
 
     Private Sub mnuPrepareDataReshapeScaleOrDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeScaleOrDistance.Click
         dlgCluster.ShowDialog()

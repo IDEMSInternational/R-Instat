@@ -19,7 +19,7 @@ Public Class dlgThreeVariablePivotTable
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
 
-    Public enumPivotMode As String = PivotMode.Describe
+    Public enumPivotMode As PivotMode = PivotMode.Describe
 
     Public Enum PivotMode
         Describe
@@ -337,11 +337,11 @@ Public Class dlgThreeVariablePivotTable
                 strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
                 strYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "year_label")
                 strDayCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "day_label")
-                If strRainCol <> "" Then
+                If Not String.IsNullOrEmpty(strRainCol) Then
                     ucrReceiverAdditionalRowFactor.Add(strRainCol, strDataFrame)
                 End If
 
-                If strMonthCol <> "" Then
+                If Not String.IsNullOrEmpty(strMonthCol) Then
                     ucrReceiverFactorLevels.Add(strMonthCol, strDataFrame)
                     ucrReceiverInitialColumnFactor.Add(strMonthCol, strDataFrame)
                 End If
