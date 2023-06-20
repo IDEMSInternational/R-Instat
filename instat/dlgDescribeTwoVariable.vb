@@ -79,6 +79,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverFirstVars.SetParameterIsString()
         ucrReceiverFirstVars.Selector = ucrSelectorDescribeTwoVar
+        ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
 
         ucrReceiverSecondTwoVariableFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverSecondTwoVariableFactor.SetParameterIsString()
@@ -524,15 +525,17 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
         ucrReceiverFirstVars.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
-        ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
+
         If rdoSkim.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
         ElseIf rdoThreeVariable.Checked Then
+            ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
             lblThreeVariableCategorical.Visible = True
             lblThreeVariableCategorical.Location = New Point(106, 18)
             lblSecondType.Location = New Point(12, 33)
             lblSecondBy.Visible = True
         Else
+            ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
             lblThreeVariableCategorical.Visible = False
             lblThreeVariableCategorical.Location = New Point(12, 33)
             lblSecondType.Location = New Point(106, 18)
@@ -806,8 +809,8 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged,
-        ucrReceiverFirstVars.ControlContentsChanged
+    Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
+        'ucrReceiverFirstVars.ControlContentsChanged()
         ChangeFirstTypeLabel()
         ChangeSumaryLabelText()
         UpdateSummaryTableFunction()
