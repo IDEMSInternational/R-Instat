@@ -210,6 +210,7 @@ Public Class dlgInventoryPlot
 
         clsClimaticMissing.SetRCommand("climatic_missing")
         clsClimaticDetails.SetRCommand("climatic_details")
+        clsClimaticDetails.SetAssignTo("detail")
 
         clsNewCAddKeyFunction.SetRCommand("c")
         clsNewCAddKeyFunction.AddParameter("from", Chr(34) & "From" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
