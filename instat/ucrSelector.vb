@@ -226,7 +226,7 @@ Public Class ucrSelector
         End If
         If conReceiver IsNot Nothing Then
             CurrentReceiver = conReceiver
-            CurrentReceiver.SetColor()
+            If CurrentReceiver.bAsReceiver Then CurrentReceiver.SetColor()
             SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame AndAlso CurrentReceiver.bOnlyLinkedToPrimaryDataFrames)
             If Not CurrentReceiver.IsEmpty Then
                 lstReceiverDataFrames = CurrentReceiver.GetItemsDataFrames()
