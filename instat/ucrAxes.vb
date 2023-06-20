@@ -485,7 +485,6 @@ Public Class ucrAxes
 
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrChkLabelsDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         bRCodeSet = True
         If bReset Then
@@ -501,6 +500,7 @@ Public Class ucrAxes
             ucrChkExpandDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrChkNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrInputNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkLabelsDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
         SetLabel()
         AddRemoveContinuousXYScales()
@@ -684,7 +684,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub SetLabelsDiscreteParameter()
-        If ucrChkLabelsDiscrete.Checked Then
+        If ucrChkLabelsDiscrete.Checked AndAlso Not ucrInputMajorBreaksLabelsDiscrete.IsEmpty Then
             'TODO add functionality to input control to do this automatically for a list
             clsXYScaleDiscreteFunction.AddParameter("labels", ucrInputMajorBreaksLabelsDiscrete.clsRList.ToScript())
         Else
