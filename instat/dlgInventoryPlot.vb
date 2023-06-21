@@ -227,7 +227,6 @@ Public Class dlgInventoryPlot
         clsCumulativeInventoryFunction.SetRCommand("cumulative_inventory")
         clsCumulativeInventoryFunction.AddParameter("from", Chr(34) & "From" & Chr(34), iPosition:=1)
         clsCumulativeInventoryFunction.AddParameter("to", Chr(34) & "To" & Chr(34), iPosition:=2)
-        'clsCumulativeInventoryFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
         clsDataFramaFunction.SetRCommand("data.frame")
         clsDataFramaFunction.AddParameter("x", clsRFunctionParameter:=clsCumulativeInventoryFunction, bIncludeArgumentName:=False, iPosition:=0)
