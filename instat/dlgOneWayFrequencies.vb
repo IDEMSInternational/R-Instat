@@ -94,7 +94,7 @@ Public Class dlgOneWayFrequencies
         ucrChkTableGraphGroupData.SetText("Group Data")
         ucrChkTableGraphGroupData.AddToLinkedControls(ucrNudTableGraphGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
-        ucrNudTableGraphGroups.SetParameter(New RParameter("auto.grp", 9))
+        ucrNudTableGraphGroups.SetParameter(New RParameter("auto.group", 9))
         ucrNudTableGraphGroups.SetMinMax(2, 100)
         ucrNudTableGraphGroups.Increment = 5
 
@@ -221,7 +221,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverFreq.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
 
         ucrPnlFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveFreq.SetRCode(clsGraphGridAsGGplotRFunction, bReset)
+        ucrSaveFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrReceiverFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         '-------------------------
 
@@ -261,7 +261,7 @@ Public Class dlgOneWayFrequencies
     Private Sub ucrPnlFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged
         If rdoFrqTable.Checked OrElse rdoFrqGraph.Checked Then
             ucrChkTableGraphWeights.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("weight.by") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("weight.by")
-            ucrChkTableGraphGroupData.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("auto.grp") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("auto.grp")
+            ucrChkTableGraphGroupData.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("auto.group") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("auto.grp")
 
             If rdoFrqTable.Checked Then
                 'the ideal way to determine the checked radio button would be to use AddFunctionNamesCondition()
