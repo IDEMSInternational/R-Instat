@@ -25,6 +25,7 @@ Public Class dlgInventoryPlot
     Private clsNewCAddKeyFunction As New RFunction
     Private clsCumulativeInventoryFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsDataFramaFunction As New RFunction
     Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -192,6 +193,7 @@ Public Class dlgInventoryPlot
         clsAddKeyFunction = New RFunction
         clsNewCAddKeyFunction = New RFunction
         clsCumulativeInventoryFunction = New RFunction
+        clsDataFramaFunction = New RFunction
 
         ucrInventoryPlotSelector.Reset()
         ucrReceiverElements.SetMeAsReceiver()
@@ -225,7 +227,11 @@ Public Class dlgInventoryPlot
         clsCumulativeInventoryFunction.SetRCommand("cumulative_inventory")
         clsCumulativeInventoryFunction.AddParameter("from", Chr(34) & "From" & Chr(34), iPosition:=1)
         clsCumulativeInventoryFunction.AddParameter("to", Chr(34) & "To" & Chr(34), iPosition:=2)
-        clsCumulativeInventoryFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
+        'clsCumulativeInventoryFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
+
+        clsDataFramaFunction.SetRCommand("data.frame")
+        clsDataFramaFunction.AddParameter("x", clsRFunctionParameter:=clsCumulativeInventoryFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsDataFramaFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
@@ -261,7 +267,7 @@ Public Class dlgInventoryPlot
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
         ucrChkMonth.SetRCode(clsClimaticDetails, bReset)
         ucrChkDay.SetRCode(clsClimaticDetails, bReset)
-        ucrSaveDetails.SetRCode(clsCumulativeInventoryFunction, bReset)
+        ucrSaveDetails.SetRCode(clsDataFramaFunction, bReset)
         ucrChkOmitStart.SetRCode(clsClimaticMissing, bReset)
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
         ucrPnlOrder.SetRCode(clsClimaticDetails, bReset)
@@ -358,12 +364,12 @@ Public Class dlgInventoryPlot
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
         If ucrChkDetails.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticDetails, iPosition:=2)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsCumulativeInventoryFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDataFramaFunction, iPosition:=3)
             clsCumulativeInventoryFunction.AddParameter("data", clsRFunctionParameter:=clsClimaticDetails, iPosition:=0)
             clsClimaticDetails.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticDetails)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCumulativeInventoryFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDataFramaFunction)
         End If
 
     End Sub
@@ -398,11 +404,11 @@ Public Class dlgInventoryPlot
             clsAddKeyFunction.RemoveParameterByName("data_name")
         End If
         If ucrSaveDetails.ucrChkSave.Checked Then
-            clsCumulativeInventoryFunction.SetAssignTo(ucrSaveDetails.GetText())
-            clsCumulativeInventoryFunction.iCallType = 0
+            clsDataFramaFunction.SetAssignTo(ucrSaveDetails.GetText())
+            clsDataFramaFunction.iCallType = 0
         Else
-            clsCumulativeInventoryFunction.RemoveAssignTo()
-            clsCumulativeInventoryFunction.iCallType = 2
+            clsDataFramaFunction.RemoveAssignTo()
+            clsDataFramaFunction.iCallType = 2
         End If
     End Sub
 
