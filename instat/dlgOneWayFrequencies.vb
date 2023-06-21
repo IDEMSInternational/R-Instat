@@ -98,8 +98,7 @@ Public Class dlgOneWayFrequencies
         ucrNudTableGraphGroups.SetMinMax(2, 100)
         ucrNudTableGraphGroups.Increment = 5
 
-        ucrPnlTableGraphSort.SetLinkedDisplayControl(cmdOptions)
-        ucrPnlTableGraphSort.SetLinkedDisplayControl(grpTableGraphSort)
+        ucrPnlTableGraphSort.SetLinkedDisplayControl(New List(Of Control)({grpTableGraphSort, cmdOptions}))
         '----------------------------------
         'table controls
         ucrPnlTableOutput.AddRadioButton(rdoTableAsOutput)
