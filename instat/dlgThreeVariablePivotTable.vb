@@ -32,7 +32,6 @@ Public Class dlgThreeVariablePivotTable
         clsSelectFunction, clsDummyFunction As New RFunction
     Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
 
-
     Private Sub dlgThreeVariablePivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -41,10 +40,10 @@ Public Class dlgThreeVariablePivotTable
 
         If bReset Then
             SetDefaults()
-            AutofillMode()
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        AutofillMode()
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
@@ -60,8 +59,9 @@ Public Class dlgThreeVariablePivotTable
         ucrReceiverInitialRowFactors.SetParameterIsString()
         ucrReceiverInitialRowFactors.strSelectorHeading = "Numerics"
         ucrReceiverInitialRowFactors.SetIncludedDataTypes({"numeric"})
+        'ucrReceiverInitialRowFactors.SetClimaticType("element")
+        'ucrReceiverInitialRowFactors.bAutoFill = True
         ucrReceiverInitialRowFactors.Selector = ucrSelectorPivot
-
 
         ucrReceiverInitialColumnFactor.SetParameter(New RParameter("cols", iNewPosition:=2))
         ucrReceiverInitialColumnFactor.SetParameterIsString()
@@ -75,7 +75,6 @@ Public Class dlgThreeVariablePivotTable
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(True, "data", False)
-
 
         ucrReceiverFactorLevels.SetParameter(New RParameter("variable", iNewPosition:=1))
         ucrReceiverFactorLevels.SetParameterIsString()
@@ -167,12 +166,10 @@ Public Class dlgThreeVariablePivotTable
         clsFlattenFunction.AddParameter("string", clsRFunctionParameter:=clsPasteFunction, iPosition:=0)
         clsFlattenFunction.SetAssignTo("survey_levels")
 
-
         clsRelevelPasteFunction.SetRCommand("paste0")
         clsRelevelPasteFunction.AddParameter("first_paramete", Chr(34) & "function(attr) {  var sortAs = $.pivotUtilities.sortAs;  return sortAs([" & Chr(34) & ", survey_levels," & Chr(34) & "]); }" & Chr(34),
                                             bIncludeArgumentName:=False, iPosition:=0)
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
-
 
         clsConcatenateFunction.SetRCommand("c")
 
@@ -221,7 +218,6 @@ Public Class dlgThreeVariablePivotTable
         End If
     End Sub
 
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         AutofillMode()
@@ -253,10 +249,7 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged,
-        ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverAdditionalRowFactor.ControlValueChanged, ucrReceiverFactorLevels.ControlValueChanged
-        If Not bRcodeSet Then
-            Exit Sub
-        End If
+        ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverAdditionalRowFactor.ControlValueChanged, ucrReceiverFactorLevels.ControlValueChanged, ucrChkNumericVariable.ControlValueChanged
 
         If ucrChkSelectedVariable.Checked Then
             Dim lstColumns As New List(Of String)
@@ -288,17 +281,27 @@ Public Class dlgThreeVariablePivotTable
                 Not lstColumns.Contains(strFactorLevelsVariable) Then
                 clsConcatenateFunction.AddParameter("factor_level", strFactorLevelsVariable,
                                   bIncludeArgumentName:=False, iPosition:=iPosition)
+
             End If
         End If
 
-        If ucrChangedControls Is ucrReceiverFactorLevels Then
-            If ucrReceiverFactorLevels.IsEmpty Then
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFlattenFunction)
-                clsRPivotTableFunction.RemoveParameterByName("sorters")
-            Else
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsFlattenFunction, 0)
-                clsRPivotTableFunction.AddParameter(strParameterName:="sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
-            End If
+        If enumPivotMode = PivotMode.Climatic Then
+            clsRPivotTableFunction.RemoveParameterByName("sorters")
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFlattenFunction)
+
+        Else
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsFlattenFunction, 0)
+            clsRPivotTableFunction.AddParameter(strParameterName:="sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
+        End If
+
+        If ucrChkNumericVariable.Checked AndAlso enumPivotMode = PivotMode.Climatic Then
+            clsRPivotTableFunction.AddParameter("val", ucrReceiverAdditionalRowFactor.GetVariableNames(), iPosition:=3)
+            clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & ucrInputTableChart.GetText() & Chr(34), iPosition:=4)
+            clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & ucrInputSummary.GetText() & Chr(34), iPosition:=5)
+        Else
+            clsRPivotTableFunction.RemoveParameterByName("val")
+            clsRPivotTableFunction.RemoveParameterByName("rendererName")
+            clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
         End If
     End Sub
 
@@ -351,17 +354,5 @@ Public Class dlgThreeVariablePivotTable
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
             ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged
-        If ucrChkNumericVariable.Checked Then
-            clsRPivotTableFunction.AddParameter("val", ucrReceiverAdditionalRowFactor.GetVariableNames(), iPosition:=3)
-            clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & ucrInputTableChart.GetText() & Chr(34), iPosition:=4)
-            clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & ucrInputSummary.GetText() & Chr(34), iPosition:=5)
-        Else
-            clsRPivotTableFunction.RemoveParameterByName("val")
-            clsRPivotTableFunction.RemoveParameterByName("rendererName")
-            clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
-        End If
     End Sub
 End Class
