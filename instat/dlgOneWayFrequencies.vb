@@ -53,11 +53,10 @@ Public Class dlgOneWayFrequencies
 
         'setting rdoGraph, rdoTable and rdoStemLeaf
         ucrPnlFreq.AddFunctionNamesCondition(rdoFrqTable, {"frq", "as.data.frame"}, bNewIsPositive:=True)
-        ucrPnlFreq.AddFunctionNamesCondition(rdoFrqGraph, "as.ggplot", bNewIsPositive:=True)
+        ucrPnlFreq.AddFunctionNamesCondition(rdoFrqGraph, {"plot_frq", "as.ggplot"}, bNewIsPositive:=True)
         ucrPnlFreq.AddFunctionNamesCondition(rdoFrqStemLeaf, "capture.output", bNewIsPositive:=True)
-        'TODO. the both options can be added here when we are able to have panels conditions across multiple functions
 
-        ucrPnlFreq.AddToLinkedControls({ucrPnlTableGraphSort, ucrChkTableGraphWeights, ucrChkTableGraphGroupData, ucrReceiverFreq}, {rdoFrqTable, rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFreq.AddToLinkedControls({ucrPnlTableGraphSort, ucrChkTableGraphWeights, ucrChkTableGraphGroupData}, {rdoFrqTable, rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFreq.AddToLinkedControls({ucrPnlTableOutput, ucrChkTableMinFrq}, {rdoFrqTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreq.AddToLinkedControls(ucrChkGraphFlipCoordinates, {rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFreq.AddToLinkedControls({ucrChkStemLeafScale, ucrChkStemLeafWidth}, {rdoFrqStemLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -68,14 +67,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverFreq.Selector = ucrSelectorFreq
         ucrReceiverFreq.strSelectorHeading = "Variables"
         ucrReceiverFreq.bDropUnusedFilterLevels = True
-        'temp fix to bug in sjPlot
-        ucrReceiverFreq.bRemoveLabels = True
-
-        'ucrReceiverStemAndLeaf.SetParameter(New RParameter("x", 0))
-        'ucrReceiverStemAndLeaf.SetParameterIsString()
-        'ucrReceiverStemAndLeaf.bWithQuotes = False
-        'ucrReceiverStemAndLeaf.Selector = ucrSelectorOneWayFreq
-        'ucrReceiverStemAndLeaf.SetIncludedDataTypes({"numeric"})
+        ucrReceiverFreq.bRemoveLabels = True  'temp fix to bug in sjPlot
 
         ucrSaveFreq.SetDataFrameSelector(ucrSelectorFreq.ucrAvailableDataFrames)
         ucrSaveFreq.SetIsComboBox()
@@ -102,13 +94,14 @@ Public Class dlgOneWayFrequencies
         ucrPnlTableGraphSort.SetRDefault(Chr(34) & "none" & Chr(34))
 
         ucrChkTableGraphGroupData.SetText("Group Data")
+        ucrChkTableGraphGroupData.AddToLinkedControls(ucrNudTableGraphGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
+
         ucrNudTableGraphGroups.SetParameter(New RParameter("auto.grp", 9))
         ucrNudTableGraphGroups.SetMinMax(2, 100)
         ucrNudTableGraphGroups.Increment = 5
-        ucrChkTableGraphGroupData.AddToLinkedControls(ucrNudTableGraphGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
         'ucrChkTableGraphGroupData.SetParameter(ucrNudTableGraphGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        'ucrChkTableGraphGroupData.AddParameterPresentCondition(True, "auto.group")
+        ''ucrChkTableGraphGroupData.AddParameterPresentCondition(True, "auto.group")
         'ucrChkTableGraphGroupData.AddParameterPresentCondition(False, "auto.group", False)
 
         ucrPnlTableGraphSort.SetLinkedDisplayControl(cmdOptions)
@@ -118,20 +111,18 @@ Public Class dlgOneWayFrequencies
         ucrPnlTableOutput.AddRadioButton(rdoTableAsOutput)
         ucrPnlTableOutput.AddRadioButton(rdoTableAsDataFrame)
 
-        ucrPnlTableOutput.AddFunctionNamesCondition(rdoTableAsOutput, "frq", bNewIsPositive:=True)
-        ucrPnlTableOutput.AddFunctionNamesCondition(rdoTableAsDataFrame, "as.data.frame", bNewIsPositive:=True)
-
         ucrPnlTableOutput.SetLinkedDisplayControl(grpTableGraphOutput)
 
         '----------------------------------
         'table controls
         ucrChkTableMinFrq.SetText("Min Frequency")
-        ucrChkTableMinFrq.AddToLinkedControls(ucrNudTableMinFreq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkTableMinFrq.AddParameterPresentCondition(True, "min.frq", True)
-        'ucrChkTableMinFrq.AddParameterPresentCondition(False, "min.frq", False)
+        ucrChkTableMinFrq.AddToLinkedControls(ucrNudTableMinFreq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkTableMinFrq.AddParameterPresentCondition(True, "min.frq", True)
+        ucrChkTableMinFrq.AddParameterPresentCondition(False, "min.frq", False)
+
         ucrNudTableMinFreq.SetParameter(New RParameter("min.frq", 10))
         ucrNudTableMinFreq.SetMinMax(iNewMin:=0)
-        ucrNudTableMinFreq.SetRDefault(0)
+        'ucrNudTableMinFreq.SetRDefault(0)
 
         '----------------------------------
         'graph controls
@@ -177,6 +168,7 @@ Public Class dlgOneWayFrequencies
         ucrSelectorFreq.Reset()
         ucrReceiverFreq.SetMeAsReceiver()
         ucrSaveFreq.Reset()
+
 
         '-------------------------
         'table functions
@@ -286,11 +278,12 @@ Public Class dlgOneWayFrequencies
 
         '-------------------------
         'stem leaf controls
-        'ucrChkStemLeafScale.SetRCode(clsStemLeafRFunction, bReset)
-        ucrNudStemLeafScale.SetRCode(clsStemLeafRFunction, bReset)
 
         'ucrChkStemLeafScale.SetRCode(clsStemLeafRFunction, bReset)
         ucrNudStemLeafScale.SetRCode(clsStemLeafRFunction, bReset)
+
+        'ucrChkStemLeafWidht.SetRCode(clsStemLeafRFunction, bReset)
+        ucrNudStemLeafWidth.SetRCode(clsStemLeafRFunction, bReset)
 
         '-------------------------
 
@@ -319,9 +312,22 @@ Public Class dlgOneWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged, ucrPnlTableOutput.ControlValueChanged
-        ChangeSaveControlProperties()
-        SetBaseFunction()
+    Private Sub ucrPnlFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged
+        If rdoFrqTable.Checked Then
+            If clsTableSjMiscFrqRFunction.strRCommand = "as.data.frame" Then
+                rdoTableAsDataFrame.Checked = True
+            Else
+                rdoTableAsOutput.Checked = True
+            End If
+            'the idea way to determine the checked radio button would have as shown below
+            'but the panel does not have the feature to do it when using Function names that are of different RFunctions objects
+            'ucrPnlTableOutput.AddFunctionNamesCondition(rdoTableAsOutput, "frq", bNewIsPositive:=True)
+            'ucrPnlTableOutput.AddFunctionNamesCondition(rdoTableAsDataFrame, "as.data.frame", bNewIsPositive:=True)
+        End If
+    End Sub
+
+    Private Sub outputChangeControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged, ucrPnlTableOutput.ControlValueChanged, ucrReceiverFreq.ControlValueChanged
+        ChangeDialogProperties()
     End Sub
 
 
@@ -329,7 +335,6 @@ Public Class dlgOneWayFrequencies
         Dim strRVector As String = ucrReceiverFreq.GetVariableNames
         clsGraphGridRFunction.AddParameter("tags", strParameterValue:=strRVector, iPosition:=1)
         clsStemLeafPurrMapRFunction.AddParameter(".x", strParameterValue:=strRVector, bIncludeArgumentName:=False, iPosition:=0)
-        SetBaseFunction()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlContentsChanged,
@@ -341,11 +346,9 @@ Public Class dlgOneWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub SetBaseFunction()
 
-    End Sub
 
-    Private Sub ChangeSaveControlProperties()
+    Private Sub ChangeDialogProperties()
         If rdoFrqTable.Checked Then
 
             If rdoTableAsOutput.Checked Then
@@ -354,7 +357,7 @@ Public Class dlgOneWayFrequencies
                 ucrSaveFreq.SetCheckBoxText("Save Summary")
                 ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
-
+                'restore assign to
                 clsTableSjMiscFrqRFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                               strRObjectFormatToAssignTo:=RObjectFormat.Text,
@@ -368,7 +371,7 @@ Public Class dlgOneWayFrequencies
                 ucrSaveFreq.SetSaveType(strRObjectType:=RObjectTypeLabel.Dataframe)
                 ucrSaveFreq.SetAssignToIfUncheckedValue("one_way_freq")
 
-
+                'remove assign to because clsTableSjMiscFrqRFunction will be wrapped into clsTableAsDataFrameRFunction
                 clsTableSjMiscFrqRFunction.RemoveAssignTo()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTableAsDataFrameRFunction)
 
@@ -380,11 +383,18 @@ Public Class dlgOneWayFrequencies
             ucrSaveFreq.SetPrefix("freq_graph")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_graph")
 
-            If ucrReceiverFreq.GetVariableNamesAsList().Count = 0 Then
+            If ucrReceiverFreq.GetVariableNamesAsList().Count > 1 Then
+                'remove assign to because clsGraphSjGGFreqPlotRFunction will be wrapped into clsGraphGridAsGGplotRFunction
                 clsGraphSjGGFreqPlotRFunction.RemoveAssignTo()
-                ucrBase.clsRsyntax.SetBaseRFunction(clsGraphSjGGFreqPlotRFunction)
-            Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsGraphGridAsGGplotRFunction)
+            Else
+                'restore assign to
+                clsGraphSjGGFreqPlotRFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                                              strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                                              strRDataFrameNameToAddObjectTo:=ucrSelectorFreq.strCurrentDataFrame,
+                                                              strObjectName:="last_graph")
+                ucrBase.clsRsyntax.SetBaseRFunction(clsGraphSjGGFreqPlotRFunction)
             End If
 
         ElseIf rdoFrqStemLeaf.Checked Then
@@ -394,6 +404,11 @@ Public Class dlgOneWayFrequencies
             ucrSaveFreq.SetCheckBoxText("Save Summary")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
+            clsStemLeafCaptureOutputFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                                              strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                                              strRDataFrameNameToAddObjectTo:=ucrSelectorFreq.strCurrentDataFrame,
+                                                              strObjectName:="last_summary")
             ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafCaptureOutputFunction)
 
         End If
