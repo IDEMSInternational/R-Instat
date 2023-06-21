@@ -77,6 +77,9 @@ Public Class dlgBarAndPieChart
     Private clsScaleSizeAreaFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
+    Private clsPointsAesFunction As New RFunction
+    Private clsGeomLollipopAesFunction As New RFunction
+    Private clsPieFunction As New RFunction
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -88,7 +91,6 @@ Public Class dlgBarAndPieChart
     Private strStatSummaryParameterName As String = "stat_summary"
     Private strAdditionalPointsParameterName As String = "add_jitter"
     Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
-
 
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -408,6 +410,9 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
+        clsPointsAesFunction = New RFunction
+        clsGeomLollipopAesFunction = New RFunction
+        clsPieFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -455,13 +460,19 @@ Public Class dlgBarAndPieChart
         clsGeomLollipopFunction.AddParameter("point.colour", "steelblue", iPosition:=0)
         clsGeomLollipopFunction.AddParameter("point.size", "1", iPosition:=1)
 
+        clsGeomLollipopAesFunction.SetPackageName("ggplot2")
+        clsGeomLollipopAesFunction.SetRCommand("aes")
+
         clsBarAesFunction.SetPackageName("ggplot2")
         clsBarAesFunction.SetRCommand("aes")
 
+        clsPieFunction.SetPackageName("ggplot2")
+        clsPieFunction.SetRCommand("aes")
+        clsPieFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsPieFunction.AddParameter("y", Chr(34) & Chr(34))
+
         clsPieAesFunction.SetPackageName("ggplot2")
         clsPieAesFunction.SetRCommand("aes")
-        clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
-        clsPieAesFunction.AddParameter("y", Chr(34) & Chr(34))
 
         clsForecatsReverse.SetPackageName("forcats")
         clsForecatsReverse.SetRCommand("fct_rev")
@@ -487,8 +498,11 @@ Public Class dlgBarAndPieChart
 
         clsPointsFunction.SetPackageName("ggplot2")
         clsPointsFunction.SetRCommand("geom_point")
-        clsPointsFunction.AddParameter("size", "3")
-        clsPointsFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        clsPointsFunction.AddParameter("size", "3", iPosition:=0)
+        clsPointsFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+
+        clsPointsAesFunction.SetPackageName("ggplot2")
+        clsPointsAesFunction.SetRCommand("aes")
 
         clsIsEqualToOperator1.SetOperation("==")
         clsIsEqualToOperator1.AddParameter("right", clsROperatorParameter:=clsOpeningSubsetOperator1, iPosition:=1)
@@ -547,6 +561,7 @@ Public Class dlgBarAndPieChart
 
         clsGeomTreemapAesFunction.SetPackageName("ggplot2")
         clsGeomTreemapAesFunction.SetRCommand("aes")
+
         clsGeomTreemapAesFunction.AddParameter("area", clsRFunctionParameter:=clsAsNumericFunction, iPosition:=0)
 
         clsAsNumericFunction.SetRCommand("as.numeric")
@@ -554,7 +569,8 @@ Public Class dlgBarAndPieChart
 
         clsGeomTreemapTextAesFunction.SetPackageName("ggplot2")
         clsGeomTreemapTextAesFunction.SetRCommand("aes")
-        clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=0)
+        clsGeomTreemapTextAesFunction.AddParameter("label", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
+
 
         clsGeomTextWordcloudAesFunction.SetPackageName("ggplot2")
         clsGeomTextWordcloudAesFunction.SetRCommand("aes")
@@ -593,14 +609,17 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction1, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=1)
         ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction2, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrReceiverByFactor.GetParameter(), iAdditionalPairNo:=1)
-        ucrVariablesAsFactorForBarChart.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrVariablesAsFactorForBarChart.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsIsEqualToOperator1, New RParameter("left", 0), iAdditionalPairNo:=2)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsIsEqualToOperator2, New RParameter("left", 0), iAdditionalPairNo:=3)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsReorderFunctionValue, New RParameter("x", 0), iAdditionalPairNo:=5)
+        ucrVariablesAsFactorForBarChart.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrVariablesAsFactorForBarChart.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverFill.AddAdditionalCodeParameterPair(clsGeomTreemapTextAesFunction, New RParameter("label", 0), iAdditionalPairNo:=1)
+        ucrReceiverFill.AddAdditionalCodeParameterPair(clsGeomTreemapTextAesFunction, New RParameter("label", 1), iAdditionalPairNo:=1)
+        ucrReceiverArea.AddAdditionalCodeParameterPair(clsGeomTreemapTextAesFunction, New RParameter("area", 0), iAdditionalPairNo:=1)
         ucrInputLayout.AddAdditionalCodeParameterPair(clsGeomTreemapTextFunction, New RParameter("layout", 1), iAdditionalPairNo:=1)
+        ucrInputLollipopColour.AddAdditionalCodeParameterPair(clsPointsFunction, New RParameter("colour", 1), iAdditionalPairNo:=1)
+        ucrNudLollipopSize.AddAdditionalCodeParameterPair(clsPointsFunction, New RParameter("size", 0), iAdditionalPairNo:=1)
 
         ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
@@ -623,9 +642,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverFill.SetRCode(clsGeomTreemapAesFunction, bReset)
         ucrReceiverLabel.SetRCode(clsGeomTreemapTextAesFunction, bReset)
         ucrInputLayout.SetRCode(clsGeomTreemapFunction, bReset)
-        ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
         ucrInputStart.SetRCode(clsGeomTreemapFunction, bReset)
-        ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
         ucrInputPlace.SetRCode(clsGeomTreemapTextFunction, bReset)
         ucrReceiverWordcloudLabel.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrReceiverWordcloudSize.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
@@ -635,6 +652,11 @@ Public Class dlgBarAndPieChart
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
+
+        If bReset Then
+            ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
+            ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -671,9 +693,9 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
-    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
-                                   clsNewGlobalAesFunc:=clsLabelAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   clsNewGlobalAesFunc:=clsNewAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
                                    bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector,
                                    bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -723,23 +745,23 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
-        openSdgLayerOptions(clsRgeomBarFunction1)
+        openSdgLayerOptions(clsRgeomBarFunction, clsBarAesFunction)
     End Sub
 
     Private Sub toolStripMenuItemLollipopOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLollipopOptions.Click
-        openSdgLayerOptions(clsGeomLollipopFunction)
+        openSdgLayerOptions(clsGeomLollipopFunction, clsGeomLollipopAesFunction)
     End Sub
 
     Private Sub toolStripMenuItemTreemapOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTreemapOptions.Click
-        openSdgLayerOptions(clsGeomTreemapFunction)
+        openSdgLayerOptions(clsGeomTreemapFunction, clsGeomTreemapAesFunction)
     End Sub
 
     Private Sub toolStripMenuItemWordcloudOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemWordcloudOptions.Click
-        openSdgLayerOptions(clsGeomTextWordcloudFunction)
+        openSdgLayerOptions(clsGeomTextWordcloudFunction, clsGeomTextWordcloudAesFunction)
     End Sub
 
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPointOptions.Click
-        openSdgLayerOptions(clsPointsFunction)
+        openSdgLayerOptions(clsPointsFunction, clsPointsAesFunction)
     End Sub
 
     Private Sub SetDialogOptions()
@@ -760,7 +782,6 @@ Public Class dlgBarAndPieChart
         Else
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextWordcloudAesFunction, iPosition:=1)
         End If
-
         ucrChkLollipop.Enabled = If(rdoValue.Checked, True, False)
         If rdoFrequency.Checked Then
             If ucrVariablesAsFactorForBarChart.bSingleVariable Then
@@ -839,18 +860,22 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ChangeParameterName()
+        clsBaseOperator.RemoveParameterByName("geom_lollipop")
         clsBarAesFunction.RemoveParameterByName("x")
         clsBarAesFunction.RemoveParameterByName("y")
         clsPieAesFunction.RemoveParameterByName("x")
         clsPieAesFunction.RemoveParameterByName("y")
-        clsBaseOperator.RemoveParameterByName("geom_lollipop")
+        clsPieAesFunction.RemoveParameterByName("fill")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+            clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
             clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsPieAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-            clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
             clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+            clsGeomLollipopAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            clsGeomLollipopAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+            clsGeomLollipopAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
             clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=2)
             clsRgeomBarFunction2.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
@@ -870,6 +895,7 @@ Public Class dlgBarAndPieChart
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
             End If
             If ucrChkLollipop.Checked Then
+                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomLollipopAesFunction, iPosition:=1)
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
                 clsBaseOperator.RemoveParameterByName("geom_bar")
             End If
@@ -879,21 +905,43 @@ Public Class dlgBarAndPieChart
                 clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
         ElseIf rdoFrequency.Checked Then
-            If ucrVariablesAsFactorForBarChart.IsEmpty Then
-                clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-                clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+            If ucrChkPolarCoordinates.Checked Then
+                If rdoPie.Checked Then
+                    If ucrReceiverByFactor.IsEmpty Then
+                        clsPieAesFunction.AddParameter("x", "1", iPosition:=0)
+                        clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=2)
+                    Else
+                        clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+                        clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
+                    End If
+                Else
+                    If ucrReceiverByFactor.IsEmpty Then
+                        clsPieAesFunction.AddParameter("x", "1", iPosition:=0)
+                        clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=2)
+                    Else
+                        clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+                        clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                    End If
+                End If
+                clsRggplotFunction.RemoveParameterByName("mapping")
+                clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                If ucrVariablesAsFactorForBarChart.IsEmpty Then
+                    clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+                Else
+                    clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+
+                End If
+                If ucrReceiverByFactor.IsEmpty Then
+                    clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
+                Else
+                    clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
+                End If
+                clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
+                clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
+                clsRgeomBarFunction2.RemoveParameterByName("stat")
+                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             End If
-            If ucrReceiverByFactor.IsEmpty Then
-                clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
-                clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
-            End If
-            clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
-            clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
-            clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
-            clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
-            clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
-            clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
-            clsRgeomBarFunction2.RemoveParameterByName("stat")
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
         ElseIf rdoTreeMap.Checked Then
@@ -979,18 +1027,14 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkPolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPolarCoordinates.ControlValueChanged, ucrPnlPolar.ControlValueChanged
+        ' adding coordpolar geom
         clsBaseOperator.RemoveParameterByName("coordpolar")
         ChangeParameterName()
         If Not rdoDonut.Checked OrElse Not ucrChkPolarCoordinates.Checked Then
             clsBaseOperator.RemoveParameterByName("scale")
         End If
-        If Not rdoDonut.Checked OrElse Not rdoPie.Checked Then
-            ChangeParameterName()
-        End If
         If ucrChkPolarCoordinates.Checked Then
             ucrChkBacktoback.Checked = Not ucrChkPolarCoordinates.Checked
-            clsRggplotFunction.RemoveParameterByName("mapping")
-            clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
             If rdoDonut.Checked Then
                 clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsScaleXdiscretFunction, iPosition:=4, bIncludeArgumentName:=False)
             End If
@@ -1052,5 +1096,4 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
-
 End Class

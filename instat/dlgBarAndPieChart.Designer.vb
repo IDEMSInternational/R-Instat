@@ -766,9 +766,9 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkStart.AutoSize = True
         Me.ucrChkStart.Checked = False
-        Me.ucrChkStart.Location = New System.Drawing.Point(10, 317)
+        Me.ucrChkStart.Location = New System.Drawing.Point(10, 316)
         Me.ucrChkStart.Name = "ucrChkStart"
-        Me.ucrChkStart.Size = New System.Drawing.Size(108, 23)
+        Me.ucrChkStart.Size = New System.Drawing.Size(83, 23)
         Me.ucrChkStart.TabIndex = 28
         '
         'ucrInputStart
@@ -777,7 +777,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStart.GetSetSelectedIndex = -1
         Me.ucrInputStart.IsReadOnly = False
-        Me.ucrInputStart.Location = New System.Drawing.Point(79, 315)
+        Me.ucrInputStart.Location = New System.Drawing.Point(104, 315)
         Me.ucrInputStart.Name = "ucrInputStart"
         Me.ucrInputStart.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputStart.TabIndex = 30
@@ -806,7 +806,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkBacktoback.Checked = False
         Me.ucrChkBacktoback.Location = New System.Drawing.Point(10, 293)
         Me.ucrChkBacktoback.Name = "ucrChkBacktoback"
-        Me.ucrChkBacktoback.Size = New System.Drawing.Size(166, 23)
+        Me.ucrChkBacktoback.Size = New System.Drawing.Size(93, 23)
         Me.ucrChkBacktoback.TabIndex = 27
         '
         'ucrChkPolarCoordinates
@@ -913,7 +913,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblWordcloudAngle)
         Me.Controls.Add(Me.ucrInputReorderX)
-        Me.Controls.Add(Me.ucrChkIncreaseSize)
         Me.Controls.Add(Me.ucrInputAddReorder)
         Me.Controls.Add(Me.lblLabelPosition)
         Me.Controls.Add(Me.ucrPnlPolar)
@@ -922,7 +921,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrInputStart)
         Me.Controls.Add(Me.ucrChkLayout)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
-        Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.ucrChkPolarCoordinates)
         Me.Controls.Add(Me.lblWordcloudLabel)
         Me.Controls.Add(Me.lblArea)
@@ -931,6 +929,8 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrReceiverWordcloudAngle)
         Me.Controls.Add(Me.ucrChkAddLabelsText)
         Me.Controls.Add(Me.ucrChkAddLabelsTreemap)
+        Me.Controls.Add(Me.ucrChkBacktoback)
+        Me.Controls.Add(Me.ucrChkIncreaseSize)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
