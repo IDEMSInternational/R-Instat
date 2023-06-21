@@ -59,8 +59,6 @@ Public Class dlgThreeVariablePivotTable
         ucrReceiverInitialRowFactors.SetParameterIsString()
         ucrReceiverInitialRowFactors.strSelectorHeading = "Numerics"
         ucrReceiverInitialRowFactors.SetIncludedDataTypes({"numeric"})
-        'ucrReceiverInitialRowFactors.SetClimaticType("element")
-        'ucrReceiverInitialRowFactors.bAutoFill = True
         ucrReceiverInitialRowFactors.Selector = ucrSelectorPivot
 
         ucrReceiverInitialColumnFactor.SetParameter(New RParameter("cols", iNewPosition:=2))
@@ -354,5 +352,21 @@ Public Class dlgThreeVariablePivotTable
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
             ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSummary.ControlValueChanged
+        If ucrChkNumericVariable.Checked AndAlso Not ucrInputSummary.IsEmpty Then
+            clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & ucrInputSummary.GetText() & Chr(34), iPosition:=5)
+        Else
+            clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
+        End If
+    End Sub
+
+    Private Sub ucrInputTableChart_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTableChart.ControlValueChanged
+        If ucrChkNumericVariable.Checked AndAlso Not ucrInputTableChart.IsEmpty Then
+            clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & ucrInputTableChart.GetText() & Chr(34), iPosition:=4)
+        Else
+            clsRPivotTableFunction.RemoveParameterByName("rendererName")
+        End If
     End Sub
 End Class
