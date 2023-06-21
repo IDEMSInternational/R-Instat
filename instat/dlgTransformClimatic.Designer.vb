@@ -114,6 +114,8 @@ Partial Class dlgTransformClimatic
         Me.ttRdoHdd = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttRdoGdd = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttRdoMgdd = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkWB = New instat.ucrCheck()
+        Me.ucrNudWB = New instat.ucrNud()
         Me.grpTransform.SuspendLayout()
         Me.grpDegree.SuspendLayout()
         Me.SuspendLayout()
@@ -199,6 +201,8 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.ucrNudWB)
+        Me.grpTransform.Controls.Add(Me.ucrChkWB)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
         Me.grpTransform.Controls.Add(Me.ucrChkOptions)
         Me.grpTransform.Controls.Add(Me.ucrReceiverEvap)
@@ -670,6 +674,22 @@ Partial Class dlgTransformClimatic
         Me.ucrChkUseMaxMin.Checked = True
         Me.ucrChkUseMaxMin.Name = "ucrChkUseMaxMin"
         '
+        'ucrChkWB
+        '
+        resources.ApplyResources(Me.ucrChkWB, "ucrChkWB")
+        Me.ucrChkWB.Checked = False
+        Me.ucrChkWB.Name = "ucrChkWB"
+        '
+        'ucrNudWB
+        '
+        resources.ApplyResources(Me.ucrNudWB, "ucrNudWB")
+        Me.ucrNudWB.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWB.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWB.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWB.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWB.Name = "ucrNudWB"
+        Me.ucrNudWB.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
@@ -789,4 +809,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ttRdoHdd As ToolTip
     Friend WithEvents ttRdoGdd As ToolTip
     Friend WithEvents ttRdoMgdd As ToolTip
+    Friend WithEvents ucrNudWB As ucrNud
+    Friend WithEvents ucrChkWB As ucrCheck
 End Class
