@@ -57,6 +57,10 @@ Public Class dlgEdit
 
         ucrSelectValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectValues.SetParameterIsString()
+        ucrSelectValues.ucrAvailableDataFrames.Enabled = False
+        ucrSelectValues.lstAvailableVariable.Visible = False
+        ucrSelectValues.btnAdd.Visible = False
+        ucrSelectValues.btnDataOptions.Visible = False
 
         ucrReceiverName.SetParameter(New RParameter("column_name", 1))
         ucrReceiverName.SetParameterIsString()
@@ -121,6 +125,11 @@ Public Class dlgEdit
         ucrDate.ControlContentsChanged, ucrInputogical.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Sub SetCurrentDataframe(strDataframe As String)
+        ucrSelectValues.SetDataframe(strDataframe, True)
+    End Sub
+
 
     Public Sub SetCurrentColumn(strColumn As String, strRowContents As String, strRowNumber As String)
         strSelectedColumn = strColumn
