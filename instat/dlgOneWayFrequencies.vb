@@ -172,7 +172,6 @@ Public Class dlgOneWayFrequencies
         clsGraphSjGGFreqPlotRFunction.SetPackageName("sjPlot")
         clsGraphSjGGFreqPlotRFunction.SetRCommand("plot_frq")
         clsGraphSjGGFreqPlotRFunction.AddParameter("geom.size", 0.5, iPosition:=14)
-        'clsGraphSjGGFreqPlotRFunction.SetAssignTo("one_way_plot") 'can be multiple plots
 
         'grids multuple sjplots 
         clsGraphGridRFunction.SetPackageName("sjPlot")
@@ -207,7 +206,6 @@ Public Class dlgOneWayFrequencies
         clsStemLeafTildeROperator.bForceIncludeOperation = True
 
         clsStemLeafRFunction.SetRCommand("stem")
-        clsStemLeafRFunction.AddParameter("x", ucrSelectorFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[.x]]", bIncludeArgumentName:=False, iPosition:=0)
         '-------------------------
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsTableSjMiscFrqRFunction)
@@ -286,8 +284,6 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    'raised by controls that change dialog level components like base function and save control properties 
-    'important to have it raised first in this dialog before other events that rely on the components modified
     Private Sub outPutChangeControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged, ucrPnlTableOutput.ControlValueChanged, ucrReceiverFreq.ControlValueChanged
         If rdoFrqTable.Checked Then
             If rdoTableAsOutput.Checked Then
@@ -353,7 +349,18 @@ Public Class dlgOneWayFrequencies
     Private Sub ucrReceiverFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFreq.ControlValueChanged
         Dim strRVector As String = ucrReceiverFreq.GetVariableNames
         clsGraphGridRFunction.AddParameter("tags", strParameterValue:=strRVector, iPosition:=1)
-        clsStemLeafPurrMapRFunction.AddParameter(".x", strParameterValue:=strRVector, bIncludeArgumentName:=True, iPosition:=0)
+        clsStemLeafPurrMapRFunction.AddParameter(".x", strParameterValue:=strRVector, iPosition:=0)
+
+        'manually construct the data_book$get_data_frame(data_name="data_name")" command from the data frame selector
+        Dim clsRFunction As New RFunction
+        Dim strtemp As String = ""
+        clsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsRFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsRFunction.SetAssignTo(ucrSelectorFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsRFunction.ToScript(strtemp)
+
+        clsStemLeafRFunction.AddParameter("x", strtemp.Trim() & "[[.x]]", bIncludeArgumentName:=False, iPosition:=0)
+
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlContentsChanged,
