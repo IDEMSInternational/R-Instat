@@ -15,6 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+Imports unvell.ReoGrid
+Imports unvell.ReoGrid.Events
 
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
@@ -29,6 +32,7 @@ Public Class sdgFormatSummaryTables
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
+    Private WithEvents grdCurrentWorkSheet As Worksheet
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -456,4 +460,86 @@ Public Class sdgFormatSummaryTables
             e.Cancel = True
         End If
     End Sub
+
+    Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
+        If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
+            MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    'Private Sub UpdateGrid()
+    '    Dim vecColumns As GenericVector = Nothing
+    '    Dim chrCurrColumns As CharacterVector
+    '    Dim clsGetItems As New RFunction
+    '    Dim clsGetColumnLabels As New RFunction
+    '    Dim strCurrColumnLables() As String
+    '    'Dim expItems As SymbolicExpression
+
+    '    'grdRenameColumns.Worksheets.Clear()
+    '    'dctRowsNewNameChanged.Clear()
+    '    'dctNameRowsValues.Clear()
+    '    'dctRowsNewLabelChanged.Clear()
+
+    '    'grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
+    '    'grdCurrentWorkSheet.ColumnCount = 3
+
+    '    grdCurrentWorkSheet.ColumnHeaders(0).Text = "Current Name"
+    '    grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
+    '    'grdCurrentWorkSheet.ColumnHeaders(2).Text = "Label"
+    '    grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
+
+    '    'If rdoMultiple.Checked Then
+    '    If ucrSelect IsNot Nothing Then
+    '        clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+    '        clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+    '        clsGetItems.AddParameter("as_list", "TRUE")
+    '        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+    '        If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+    '            vecColumns = expItems.AsList
+    '            For i As Integer = 0 To vecColumns.Count - 1
+    '                chrCurrColumns = vecColumns(i).AsCharacter
+    '                Dim strText As String = vecColumns.Names(i)
+
+    '                If chrCurrColumns IsNot Nothing Then
+    '                    grdCurrentWorkSheet.RowCount = chrCurrColumns.Count
+    '                    For j As Integer = 0 To chrCurrColumns.Count - 1
+    '                        grdCurrentWorkSheet.Item(row:=j, col:=0) = chrCurrColumns(j)
+    '                        grdCurrentWorkSheet.GetCell(row:=j, col:=0).IsReadOnly = True
+    '                        grdCurrentWorkSheet.Item(row:=j, col:=1) = chrCurrColumns(j)
+    '                    Next
+    '                    clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+    '                    clsGetColumnLabels.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
+    '                    clsGetColumnLabels.AddParameter("columns", frmMain.clsRLink.GetListAsRString(chrCurrColumns.ToList))
+    '                    expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnLabels.ToScript())
+    '                    If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+    '                        strCurrColumnLables = expItems.AsCharacter.ToArray
+    '                    Else
+    '                        strCurrColumnLables = New String(chrCurrColumns.Count - 1) {}
+    '                    End If
+    '                    For j = 0 To chrCurrColumns.Count - 1
+    '                        grdCurrentWorkSheet.Item(row:=j, col:=2) = strCurrColumnLables(j)
+    '                    Next
+    '                End If
+    '            Next
+    '        End If
+
+    '        'For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+    '        '    AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
+    '        'Next
+    '    End If
+    '    'End If
+
+    '    grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+    '    grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+    '    grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+    '    grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+    '    grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
+
+    '    'grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
+    '    'grdRenameColumns.SheetTabNewButtonVisible = False
+    '    'grdRenameColumns.SheetTabWidth = 450
+
+    '    'MakeLabelColumnVisible()
+    'End Sub
 End Class
