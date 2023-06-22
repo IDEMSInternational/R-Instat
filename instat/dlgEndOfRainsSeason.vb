@@ -305,6 +305,7 @@ Public Class dlgEndOfRainsSeason
 
         ucrNudWB.SetParameter(New RParameter("WB_evap_value"))
         ucrNudWB.SetMinMax(0, 1)
+        ucrNudWB.DecimalPlaces = 0.01
         ucrNudWB.Increment = 0.01
 
         'linking controls
