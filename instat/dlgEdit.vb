@@ -76,7 +76,7 @@ Public Class dlgEdit
 
 
         ucrInputLogical.SetItems({"TRUE", "FALSE", "NA"})
-        ucrInputLogical.bAllowNonConditionValues = True
+        ucrInputLogical.bAllowNonConditionValues = False
     End Sub
 
     Private Sub SetDefaults()
