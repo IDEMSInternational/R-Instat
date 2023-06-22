@@ -770,6 +770,13 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
         }
+        # remove key
+        if (self$get_variables_metadata() %>% dplyr::filter(Name == curr_col_name) %>% dplyr::pull(Is_Key)){
+          active_keys <- self$get_keys()
+          keys_to_delete <- which(grepl(curr_col_name, active_keys))
+          keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+          purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+        }
         # Need to use private$data here because changing names of data field
         names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
