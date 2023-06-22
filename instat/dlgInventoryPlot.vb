@@ -193,7 +193,7 @@ Public Class dlgInventoryPlot
         clsAddKeyFunction = New RFunction
         clsNewCAddKeyFunction = New RFunction
         clsCumulativeInventoryFunction = New RFunction
-        clsDataFramaFunction = New RFunction
+        clsDataFrameFunction = New RFunction
 
         ucrInventoryPlotSelector.Reset()
         ucrReceiverElements.SetMeAsReceiver()
