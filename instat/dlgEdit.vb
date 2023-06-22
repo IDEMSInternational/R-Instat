@@ -75,8 +75,8 @@ Public Class dlgEdit
         ucrDate.SetParameterIsRDate()
 
 
-        ucrInputogical.SetItems({"TRUE", "FALSE", "NA"})
-        ucrInputogical.bAllowNonConditionValues = True
+        ucrInputLogical.SetItems({"TRUE", "FALSE", "NA"})
+        ucrInputLogical.bAllowNonConditionValues = True
     End Sub
 
     Private Sub SetDefaults()
@@ -86,7 +86,7 @@ Public Class dlgEdit
         bFirstLevelDefault = True
         ucrDate.Format = DateTimePickerFormat.Custom
         ucrDate.Format = "yyyy-MM-dd"
-        ucrInputogical.GetSetSelectedIndex = 0
+        ucrInputLogical.GetSetSelectedIndex = 0
         ucrBase.cmdReset.Enabled = False
 
         clsReplaceValue.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
@@ -94,7 +94,7 @@ Public Class dlgEdit
         clsReplaceValue.AddParameter("col_name", Chr(34) & strSelectedColumn & Chr(34), iPosition:=1)
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowIndex & Chr(34), iPosition:=2)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceValue)
-        VariableTypeProperties()
+        SetControlProperties()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -117,12 +117,12 @@ Public Class dlgEdit
         ucrRowNumber.SetName(strRowIndex)
         ucrNewName.SetName(strRowText)
         ucrInputRows.SetName(strRowText)
-        ucrInputogical.SetName(strRowText)
+        ucrInputLogical.SetName(strRowText)
         bUseSelectedColumn = False
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrRowNumber.ControlContentsChanged, ucrInputRows.ControlContentsChanged, ucrReceiverRow.ControlContentsChanged,
-        ucrDate.ControlContentsChanged, ucrInputogical.ControlContentsChanged
+        ucrDate.ControlContentsChanged, ucrInputLogical.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -179,7 +179,7 @@ Public Class dlgEdit
                 End If
             End If
         End If
-        VariableTypeProperties()
+        SetControlProperties()
     End Sub
 
     Private Sub ucrNewName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewName.ControlValueChanged
@@ -207,11 +207,11 @@ Public Class dlgEdit
         End If
     End Sub
 
-    Private Sub VariableTypeProperties()
+    Private Sub SetControlProperties()
         ucrInputRows.Visible = False
         ucrDate.Visible = False
         ucrNewName.Visible = False
-        ucrInputogical.Visible = False
+        ucrInputLogical.Visible = False
         If Not ucrReceiverName.IsEmpty() Then
             Select Case ucrReceiverName.strCurrDataType.ToLower
                 Case "factor"
@@ -231,7 +231,7 @@ Public Class dlgEdit
                         ucrDate.DateValue = New Date(strDate(0), strDate(1), strDate(2))
                     End If
                 Case "logical"
-                    ucrInputogical.Visible = True
+                    ucrInputLogical.Visible = True
                     bInputRow = False
                     bInputLogical = True
                     bDate = False
@@ -252,14 +252,14 @@ Public Class dlgEdit
         End If
     End Sub
 
-    Private Sub ucrInputogical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputogical.ControlValueChanged
+    Private Sub ucrInputogical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLogical.ControlValueChanged
         If bInputLogical Then
-            Dim strValue As String = ucrInputogical.GetValue
+            Dim strValue As String = ucrInputLogical.GetValue
             clsReplaceValue.AddParameter("new_value", strValue, iPosition:=3)
         End If
     End Sub
 
     Private Sub ucrRowNumber_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrRowNumber.ControlValueChanged
-        VariableTypeProperties()
+        SetControlProperties()
     End Sub
 End Class
