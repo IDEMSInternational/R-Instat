@@ -156,8 +156,8 @@ pkgs <-
     "agriTutorial", 
     "arm", 
     "rstanarm", 
-    "statsr"
-
+    "statsr",
+    "statquotes"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
