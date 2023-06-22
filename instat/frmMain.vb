@@ -2517,4 +2517,8 @@ Public Class frmMain
     Private Sub mnuExamineEditDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataCompareColumns.Click
         dlgCompareColumns.ShowDialog()
     End Sub
+
+    Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
+        dlgSurvey.ShowDialog()
+    End Sub
 End Class

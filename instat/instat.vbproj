@@ -258,6 +258,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSurvey.Designer.vb">
+      <DependentUpon>dlgSurvey.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSurvey.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
@@ -3089,6 +3095,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSubset.resx">
       <DependentUpon>dlgSubset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSurvey.resx">
+      <DependentUpon>dlgSurvey.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
