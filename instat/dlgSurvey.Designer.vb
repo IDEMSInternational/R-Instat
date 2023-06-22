@@ -58,7 +58,7 @@ Partial Class dlgSurvey
         Me.lblFormula.Name = "lblFormula"
         Me.lblFormula.Size = New System.Drawing.Size(91, 16)
         Me.lblFormula.TabIndex = 67
-        Me.lblFormula.Text = "Formula(Factor):"
+        Me.lblFormula.Text = "Formula:"
         '
         'ucrReceiverMultipleContTable
         '
@@ -158,7 +158,7 @@ Partial Class dlgSurvey
         Me.lblInputID.Name = "lblInputID"
         Me.lblInputID.Size = New System.Drawing.Size(80, 14)
         Me.lblInputID.TabIndex = 56
-        Me.lblInputID.Text = "Ids(Numeric):"
+        Me.lblInputID.Text = "Ids:"
         '
         'lblXFormula
         '
@@ -189,7 +189,7 @@ Partial Class dlgSurvey
         Me.lblStrata.Name = "lblStrata"
         Me.lblStrata.Size = New System.Drawing.Size(123, 13)
         Me.lblStrata.TabIndex = 53
-        Me.lblStrata.Text = "Strata(Factor):"
+        Me.lblStrata.Text = "Strata:"
         '
         'rdoClustered
         '
@@ -249,7 +249,7 @@ Partial Class dlgSurvey
         Me.lblFPC.Name = "lblFPC"
         Me.lblFPC.Size = New System.Drawing.Size(80, 15)
         Me.lblFPC.TabIndex = 43
-        Me.lblFPC.Text = "FPC(Numeric):"
+        Me.lblFPC.Text = "FPC:"
         '
         'ucrReceiverFPC
         '
@@ -292,7 +292,7 @@ Partial Class dlgSurvey
         Me.lblId.Name = "lblId"
         Me.lblId.Size = New System.Drawing.Size(80, 14)
         Me.lblId.TabIndex = 45
-        Me.lblId.Text = "Ids(Numeric):"
+        Me.lblId.Text = "Ids:"
         '
         'lblWeights
         '
@@ -301,7 +301,7 @@ Partial Class dlgSurvey
         Me.lblWeights.Name = "lblWeights"
         Me.lblWeights.Size = New System.Drawing.Size(123, 13)
         Me.lblWeights.TabIndex = 47
-        Me.lblWeights.Text = "Weights(Numeric):"
+        Me.lblWeights.Text = "Weights:"
         '
         'ucrReceiverWeights
         '
