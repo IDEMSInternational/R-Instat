@@ -18,13 +18,19 @@ Public Class dlgOneWayFrequencies
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
+
+    'table option functions
     Private clsTableSjMiscFrqRFunction, clsTableAsDataFrameRFunction As New RFunction
+
+    'graph option functions
     Private clsGraphSjGGFreqPlotRFunction, clsGraphGridRFunction, clsGraphGridAsGGplotRFunction As New RFunction
-    Private clsStemLeafCaptureOutputFunction, clsStemLeafPurrMapRFunction, clsStemLeafRFunction As New RFunction
+
+    'stem and leaf functions
+    Private clsStemLeafNoQuotes, clsStemLeafCaptureOutputFunction, clsStemLeafPurrMapRFunction, clsStemLeafRFunction As New RFunction
     Private clsStemLeafTildeROperator As New ROperator
+
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
-    Private clsStemLeafNoQuotes As New RFunction
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,7 +60,7 @@ Public Class dlgOneWayFrequencies
         'setting rdoGraph, rdoTable and rdoStemLeaf
         ucrPnlFreq.AddFunctionNamesCondition(rdoFrqTable, {"frq", "as.data.frame"}, bNewIsPositive:=True)
         ucrPnlFreq.AddFunctionNamesCondition(rdoFrqGraph, {"plot_frq", "as.ggplot"}, bNewIsPositive:=True)
-        ucrPnlFreq.AddFunctionNamesCondition(rdoFrqStemLeaf, "capture.output", bNewIsPositive:=True)
+        ucrPnlFreq.AddFunctionNamesCondition(rdoFrqStemLeaf, "noquote", bNewIsPositive:=True)
 
         ucrPnlFreq.AddToLinkedControls({ucrPnlTableGraphSort, ucrChkTableGraphWeights, ucrChkTableGraphGroupData}, {rdoFrqTable, rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFreq.AddToLinkedControls({ucrPnlTableOutput, ucrChkTableMinFrq}, {rdoFrqTable}, bNewLinkedHideIfParameterMissing:=True)
