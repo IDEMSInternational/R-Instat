@@ -1550,8 +1550,8 @@ DataSheet$set("public", "reorder_factor_levels", function(col_name, new_level_na
 }
 )
 
-DataSheet$set("public", "get_column_count", function(col_name, new_level_names) {
-  return(ncol(private$data))
+DataSheet$set("public", "get_column_count", function(use_column_selection = FALSE) {
+  return(ncol(self$get_data_frame(use_column_selection = use_column_selection)))
 }
 )
 

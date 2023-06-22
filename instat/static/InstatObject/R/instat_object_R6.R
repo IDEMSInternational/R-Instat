@@ -1103,8 +1103,8 @@ DataBook$set("public", "set_factor_reference_level", function(data_name, col_nam
 } 
 )
 
-DataBook$set("public", "get_column_count", function(data_name) {
-  return(self$get_data_objects(data_name)$get_column_count())
+DataBook$set("public", "get_column_count", function(data_name, use_column_selection = FALSE) {
+  return(self$get_data_objects(data_name)$get_column_count(use_column_selection))
 } 
 )
 
