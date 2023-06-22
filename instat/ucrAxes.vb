@@ -583,6 +583,7 @@ Public Class ucrAxes
         grpScaleDiscrete.Hide()
         grpScaleXDate.Hide()
         If strAxisType.ToLower = "continuous" Then
+            cmdOptions.Visible = False
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
             grpMajorBreaks.Show()
@@ -600,6 +601,7 @@ Public Class ucrAxes
             grpMajorBreaksDiscrete.Show()
         ElseIf strAxisType.ToLower = "date" Then
             'show date panels
+            cmdOptions.Visible = False
             grpScaleXDate.Show()
             grpMajorBreaks.Hide()
             grpMinorBreaks.Hide()
@@ -690,6 +692,11 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("labels")
         End If
+        If ucrChkLabelsDiscrete.Checked Then
+            cmdOptions.Visible = True
+        Else
+            cmdOptions.Visible = False
+        End If
         AddRemoveDiscreteXYScales()
     End Sub
 
@@ -758,5 +765,9 @@ Public Class ucrAxes
 
     Private Sub ucrInputLimitDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLimitDiscrete.ControlValueChanged
         SetLimitsDiscrete()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        dlgRecodeFactor.ShowDialog()
     End Sub
 End Class

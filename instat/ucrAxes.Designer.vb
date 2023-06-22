@@ -121,6 +121,7 @@ Partial Class ucrAxes
         Me.ucrInputAxisType = New instat.ucrInputComboBox()
         Me.grpAxisTitle = New System.Windows.Forms.GroupBox()
         Me.grpMajorBreaks = New System.Windows.Forms.GroupBox()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpScaleDiscrete.SuspendLayout()
         Me.grpMajorBreaksDiscrete.SuspendLayout()
         Me.grpScaleXDate.SuspendLayout()
@@ -353,7 +354,7 @@ Partial Class ucrAxes
         Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputMajorBreaksLabelsDiscrete)
         Me.grpMajorBreaksDiscrete.Location = New System.Drawing.Point(417, 35)
         Me.grpMajorBreaksDiscrete.Name = "grpMajorBreaksDiscrete"
-        Me.grpMajorBreaksDiscrete.Size = New System.Drawing.Size(354, 51)
+        Me.grpMajorBreaksDiscrete.Size = New System.Drawing.Size(354, 67)
         Me.grpMajorBreaksDiscrete.TabIndex = 39
         Me.grpMajorBreaksDiscrete.TabStop = False
         Me.grpMajorBreaksDiscrete.Text = "Label "
@@ -1042,18 +1043,28 @@ Partial Class ucrAxes
         Me.grpMajorBreaks.TabStop = False
         Me.grpMajorBreaks.Text = "Major Tick Marks"
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(517, 75)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOptions.TabIndex = 43
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpScaleDiscrete)
         Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMinorBreaks)
         Me.Controls.Add(Me.ucrInputAxisType)
         Me.Controls.Add(Me.grpAxisTitle)
-        Me.Controls.Add(Me.grpMajorBreaks)
         Me.Controls.Add(Me.grpMajorBreaksDiscrete)
+        Me.Controls.Add(Me.grpMajorBreaks)
         Me.Name = "ucrAxes"
         Me.Size = New System.Drawing.Size(774, 334)
         Me.grpScaleDiscrete.ResumeLayout(False)
@@ -1157,4 +1168,5 @@ Partial Class ucrAxes
     Friend WithEvents ucrInputAxisType As ucrInputComboBox
     Friend WithEvents grpAxisTitle As GroupBox
     Friend WithEvents grpMajorBreaks As GroupBox
+    Friend WithEvents cmdOptions As Button
 End Class
