@@ -588,6 +588,7 @@ Partial Class frmMain
         Me.mnuStructuredClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredOptionByContext = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredSurvey = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
@@ -680,7 +681,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredSurvey = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -4427,6 +4427,13 @@ Partial Class frmMain
         Me.mnuStructuredOptionByContext.Text = "Options by Context..."
         Me.mnuStructuredOptionByContext.Visible = False
         '
+        'mnuStructuredSurvey
+        '
+        Me.mnuStructuredSurvey.Name = "mnuStructuredSurvey"
+        Me.mnuStructuredSurvey.Size = New System.Drawing.Size(186, 22)
+        Me.mnuStructuredSurvey.Text = "Survey"
+        Me.mnuStructuredSurvey.Visible = False
+        '
         'mnuProcurement
         '
         Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementOpenFromLibrary, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.mnuProcurementMapping, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
@@ -5093,12 +5100,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuStructuredSurvey
-        '
-        Me.mnuStructuredSurvey.Name = "mnuStructuredSurvey"
-        Me.mnuStructuredSurvey.Size = New System.Drawing.Size(186, 22)
-        Me.mnuStructuredSurvey.Text = "Survey"
         '
         'frmMain
         '
