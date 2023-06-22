@@ -322,37 +322,26 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdHSMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdHSMissingOptions.Click
-        sdgHSMissingOptions.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
-        bResetSubdialog = False
-        sdgHSMissingOptions.ShowDialog()
+
     End Sub
 
     Private Sub cmdPMConstants_Click(sender As Object, e As EventArgs) Handles cmdPMConstants.Click
-        sdgPMConstants.SetRFunction(clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
-        sdgPMConstants.ShowDialog()
-        bResetSubdialog = False
-        TestOKEnabled()
+
     End Sub
 
     Private Sub cmdHSConstants_Click(sender As Object, e As EventArgs) Handles cmdHSConstants.Click
         sdgHSConstants.SetRFunction(clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgHSConstants.ShowDialog()
         bResetSubdialog = False
-        TestOKEnabled()
-    End Sub
 
-    Private Sub cmdLocation_Click(sender As Object, e As EventArgs) Handles cmdLocation.Click
         sdgLocation.SetRFunction(clsNewVarnamesVectorHS:=clsVarnamesVectorHS, clsNewVarnamesVectorPM:=clsVarnamesVectorPM, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgLocation.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
     End Sub
 
-    Private Sub DialogSize()
-        If rdoPenmanMonteith.Checked Then
-            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
-            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
-            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
+
+        ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
             cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
             cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation)
         ElseIf rdoHargreavesSamani.Checked Then
