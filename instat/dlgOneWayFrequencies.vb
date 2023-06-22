@@ -24,6 +24,7 @@ Public Class dlgOneWayFrequencies
     Private clsStemLeafTildeROperator As New ROperator
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
+    Private clsStemLeafNoQuotes As New RFunction
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -150,7 +151,8 @@ Public Class dlgOneWayFrequencies
         clsStemLeafRFunction = New RFunction
         clsStemLeafPurrMapRFunction = New RFunction
         clsStemLeafTildeROperator = New ROperator
-
+        clsStemLeafCaptureOutputFunction = New RFunction
+        clsStemLeafNoQuotes = New RFunction
         ucrSelectorFreq.Reset()
         ucrReceiverFreq.SetMeAsReceiver()
         ucrSaveFreq.Reset()
@@ -192,7 +194,9 @@ Public Class dlgOneWayFrequencies
         clsStemLeafCaptureOutputFunction.SetPackageName("utils")
         clsStemLeafCaptureOutputFunction.SetRCommand("capture.output")
         clsStemLeafCaptureOutputFunction.AddParameter("x", clsRFunctionParameter:=clsStemLeafPurrMapRFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsStemLeafCaptureOutputFunction.SetAssignTo("result")
+        clsStemLeafNoQuotes.SetAssignTo("result")
+        clsStemLeafNoQuotes.SetRCommand("noquote")
+        clsStemLeafNoQuotes.AddParameter("x", clsRFunctionParameter:=clsStemLeafCaptureOutputFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsStemLeafPurrMapRFunction.SetPackageName("purrr")
         clsStemLeafPurrMapRFunction.SetRCommand("map")
@@ -334,12 +338,12 @@ Public Class dlgOneWayFrequencies
             ucrSaveFreq.SetCheckBoxText("Save Summary")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
-            clsStemLeafCaptureOutputFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+            clsStemLeafNoQuotes.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                               strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                               strRDataFrameNameToAddObjectTo:=ucrSelectorFreq.strCurrentDataFrame,
                                                               strObjectName:="last_summary")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafCaptureOutputFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafNoQuotes)
         End If
     End Sub
 
