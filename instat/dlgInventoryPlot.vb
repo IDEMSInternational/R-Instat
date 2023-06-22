@@ -25,7 +25,7 @@ Public Class dlgInventoryPlot
     Private clsNewCAddKeyFunction As New RFunction
     Private clsCumulativeInventoryFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsDataFramaFunction As New RFunction
+    Private clsDataFrameFunction As New RFunction
     Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -228,9 +228,9 @@ Public Class dlgInventoryPlot
         clsCumulativeInventoryFunction.AddParameter("from", Chr(34) & "From" & Chr(34), iPosition:=1)
         clsCumulativeInventoryFunction.AddParameter("to", Chr(34) & "To" & Chr(34), iPosition:=2)
 
-        clsDataFramaFunction.SetRCommand("data.frame")
-        clsDataFramaFunction.AddParameter("x", clsRFunctionParameter:=clsCumulativeInventoryFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsDataFramaFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
+        clsDataFrameFunction.SetRCommand("data.frame")
+        clsDataFrameFunction.AddParameter("x", clsRFunctionParameter:=clsCumulativeInventoryFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsDataFrameFunction.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
@@ -266,7 +266,7 @@ Public Class dlgInventoryPlot
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
         ucrChkMonth.SetRCode(clsClimaticDetails, bReset)
         ucrChkDay.SetRCode(clsClimaticDetails, bReset)
-        ucrSaveDetails.SetRCode(clsDataFramaFunction, bReset)
+        ucrSaveDetails.SetRCode(clsDataFrameFunction, bReset)
         ucrChkOmitStart.SetRCode(clsClimaticMissing, bReset)
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
         ucrPnlOrder.SetRCode(clsClimaticDetails, bReset)
@@ -363,12 +363,12 @@ Public Class dlgInventoryPlot
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
         If ucrChkDetails.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticDetails, iPosition:=2)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDataFramaFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDataFrameFunction, iPosition:=3)
             clsCumulativeInventoryFunction.AddParameter("data", clsRFunctionParameter:=clsClimaticDetails, iPosition:=0)
             clsClimaticDetails.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticDetails)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDataFramaFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDataFrameFunction)
         End If
 
     End Sub
@@ -403,11 +403,11 @@ Public Class dlgInventoryPlot
             clsAddKeyFunction.RemoveParameterByName("data_name")
         End If
         If ucrSaveDetails.ucrChkSave.Checked Then
-            clsDataFramaFunction.SetAssignTo(ucrSaveDetails.GetText())
-            clsDataFramaFunction.iCallType = 0
+            clsDataFrameFunction.SetAssignTo(ucrSaveDetails.GetText())
+            clsDataFrameFunction.iCallType = 0
         Else
-            clsDataFramaFunction.RemoveAssignTo()
-            clsDataFramaFunction.iCallType = 2
+            clsDataFrameFunction.RemoveAssignTo()
+            clsDataFrameFunction.iCallType = 2
         End If
     End Sub
 
