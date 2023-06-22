@@ -24,6 +24,7 @@ Public Class dlgOneWayFrequencies
     Private clsStemLeafTildeROperator As New ROperator
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
+    Private clsStemLeafNoQuotes As New RFunction
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -94,12 +95,11 @@ Public Class dlgOneWayFrequencies
         ucrChkTableGraphGroupData.SetText("Group Data")
         ucrChkTableGraphGroupData.AddToLinkedControls(ucrNudTableGraphGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
-        ucrNudTableGraphGroups.SetParameter(New RParameter("auto.grp", 9))
+        ucrNudTableGraphGroups.SetParameter(New RParameter("auto.group", 9))
         ucrNudTableGraphGroups.SetMinMax(2, 100)
         ucrNudTableGraphGroups.Increment = 5
 
-        ucrPnlTableGraphSort.SetLinkedDisplayControl(cmdOptions)
-        ucrPnlTableGraphSort.SetLinkedDisplayControl(grpTableGraphSort)
+        ucrPnlTableGraphSort.SetLinkedDisplayControl(New List(Of Control)({grpTableGraphSort, cmdOptions}))
         '----------------------------------
         'table controls
         ucrPnlTableOutput.AddRadioButton(rdoTableAsOutput)
@@ -151,7 +151,8 @@ Public Class dlgOneWayFrequencies
         clsStemLeafRFunction = New RFunction
         clsStemLeafPurrMapRFunction = New RFunction
         clsStemLeafTildeROperator = New ROperator
-
+        clsStemLeafCaptureOutputFunction = New RFunction
+        clsStemLeafNoQuotes = New RFunction
         ucrSelectorFreq.Reset()
         ucrReceiverFreq.SetMeAsReceiver()
         ucrSaveFreq.Reset()
@@ -193,7 +194,9 @@ Public Class dlgOneWayFrequencies
         clsStemLeafCaptureOutputFunction.SetPackageName("utils")
         clsStemLeafCaptureOutputFunction.SetRCommand("capture.output")
         clsStemLeafCaptureOutputFunction.AddParameter("x", clsRFunctionParameter:=clsStemLeafPurrMapRFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsStemLeafCaptureOutputFunction.SetAssignTo("result")
+        clsStemLeafNoQuotes.SetAssignTo("result")
+        clsStemLeafNoQuotes.SetRCommand("noquote")
+        clsStemLeafNoQuotes.AddParameter("x", clsRFunctionParameter:=clsStemLeafCaptureOutputFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsStemLeafPurrMapRFunction.SetPackageName("purrr")
         clsStemLeafPurrMapRFunction.SetRCommand("map")
@@ -221,7 +224,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverFreq.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
 
         ucrPnlFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveFreq.SetRCode(clsGraphGridAsGGplotRFunction, bReset)
+        ucrSaveFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrReceiverFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         '-------------------------
 
@@ -261,7 +264,7 @@ Public Class dlgOneWayFrequencies
     Private Sub ucrPnlFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged
         If rdoFrqTable.Checked OrElse rdoFrqGraph.Checked Then
             ucrChkTableGraphWeights.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("weight.by") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("weight.by")
-            ucrChkTableGraphGroupData.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("auto.grp") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("auto.grp")
+            ucrChkTableGraphGroupData.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("auto.group") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("auto.grp")
 
             If rdoFrqTable.Checked Then
                 'the ideal way to determine the checked radio button would be to use AddFunctionNamesCondition()
@@ -335,12 +338,12 @@ Public Class dlgOneWayFrequencies
             ucrSaveFreq.SetCheckBoxText("Save Summary")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
-            clsStemLeafCaptureOutputFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+            clsStemLeafNoQuotes.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                               strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                               strRDataFrameNameToAddObjectTo:=ucrSelectorFreq.strCurrentDataFrame,
                                                               strObjectName:="last_summary")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafCaptureOutputFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafNoQuotes)
         End If
     End Sub
 

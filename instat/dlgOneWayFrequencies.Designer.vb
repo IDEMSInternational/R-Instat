@@ -241,7 +241,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudStemLeafWidth.AutoSize = True
         Me.ucrNudStemLeafWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStemLeafWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudStemLeafWidth.Location = New System.Drawing.Point(142, 260)
+        Me.ucrNudStemLeafWidth.Location = New System.Drawing.Point(140, 289)
         Me.ucrNudStemLeafWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudStemLeafWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStemLeafWidth.Name = "ucrNudStemLeafWidth"
@@ -254,7 +254,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudStemLeafScale.AutoSize = True
         Me.ucrNudStemLeafScale.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStemLeafScale.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudStemLeafScale.Location = New System.Drawing.Point(142, 235)
+        Me.ucrNudStemLeafScale.Location = New System.Drawing.Point(139, 254)
         Me.ucrNudStemLeafScale.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudStemLeafScale.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudStemLeafScale.Name = "ucrNudStemLeafScale"
@@ -352,7 +352,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.ucrChkStemLeafScale.AutoSize = True
         Me.ucrChkStemLeafScale.Checked = False
-        Me.ucrChkStemLeafScale.Location = New System.Drawing.Point(10, 235)
+        Me.ucrChkStemLeafScale.Location = New System.Drawing.Point(10, 254)
         Me.ucrChkStemLeafScale.Name = "ucrChkStemLeafScale"
         Me.ucrChkStemLeafScale.Size = New System.Drawing.Size(126, 23)
         Me.ucrChkStemLeafScale.TabIndex = 12
@@ -379,7 +379,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.ucrChkStemLeafWidth.AutoSize = True
         Me.ucrChkStemLeafWidth.Checked = False
-        Me.ucrChkStemLeafWidth.Location = New System.Drawing.Point(10, 260)
+        Me.ucrChkStemLeafWidth.Location = New System.Drawing.Point(10, 287)
         Me.ucrChkStemLeafWidth.Name = "ucrChkStemLeafWidth"
         Me.ucrChkStemLeafWidth.Size = New System.Drawing.Size(126, 23)
         Me.ucrChkStemLeafWidth.TabIndex = 15
@@ -431,10 +431,10 @@ Partial Class dlgOneWayFrequencies
         Me.Controls.Add(Me.ucrChkGraphFlipCoordinates)
         Me.Controls.Add(Me.ucrChkStemLeafScale)
         Me.Controls.Add(Me.ucrChkTableMinFrq)
-        Me.Controls.Add(Me.ucrChkTableGraphWeights)
         Me.Controls.Add(Me.ucrChkStemLeafWidth)
         Me.Controls.Add(Me.ucrChkTableGraphGroupData)
         Me.Controls.Add(Me.ucrReceiverFreq)
+        Me.Controls.Add(Me.ucrChkTableGraphWeights)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
