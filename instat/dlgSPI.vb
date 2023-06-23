@@ -23,6 +23,9 @@ Public Class dlgSPI
     Private clsListFunction As New RFunction
     Private clsSpeiInputFunction As New RFunction
     Private clsSpeiOutputFunction As New RFunction
+    Private clsPlotFunction As New RFunction
+    Private clsDummyFunction As New RFunction
+    Private clsGetObjectRFunction As New RFunction
 
     Private Sub dlgSPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -97,6 +100,12 @@ Public Class dlgSPI
         ucrNudKernelShift.SetParameter(New RParameter("shift", 1))
         ucrNudKernelShift.SetMinMax(0, 24)
 
+        'plot
+        ucrChkPlot.SetText("Plot")
+        ucrChkPlot.AddParameterValuesCondition(True, "plot", "True")
+        ucrChkPlot.AddParameterValuesCondition(False, "plot", "False")
+        ucrChkPlot.AddToLinkedControls(ucrSaveGraph, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         'ucrpnlInd
         ucrPnlIndex.AddRadioButton(rdoSPI)
         ucrPnlIndex.AddRadioButton(rdoSPEI)
@@ -114,6 +123,14 @@ Public Class dlgSPI
         ucrSaveModel.SetCheckBoxText("Save Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+
+        ucrSaveGraph.SetPrefix("SPI_plot")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -122,19 +139,27 @@ Public Class dlgSPI
         clsListFunction = New RFunction
         clsSpeiInputFunction = New RFunction
         clsSpeiOutputFunction = New RFunction
+        clsPlotFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsGetObjectRFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrSelectorVariable.Reset()
         ucrSaveIndex.Reset()
         ucrSaveModel.Reset()
+        ucrSaveGraph.Reset()
+
         ucrReceiverElement.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("plot", "False", iPosition:=0)
 
         clsListFunction.SetRCommand("list")
         clsListFunction.AddParameter("type", Chr(39) & "rectangular" & Chr(39), iPosition:=0)
         clsListFunction.AddParameter("shift", 0, iPosition:=1)
 
         clsSpiFunction.SetPackageName("SPEI")
+
         clsSpiFunction.SetRCommand("spi")
         clsSpiFunction.AddParameter("data", clsRFunctionParameter:=clsSpeiInputFunction, iPosition:=0)
         clsSpiFunction.AddParameter("scale", 1, iPosition:=1)
@@ -154,7 +179,11 @@ Public Class dlgSPI
         clsSpeiInputFunction.SetAssignTo("data_ts")
 
         clsSpeiOutputFunction.SetRCommand("spei_output")
-        clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
+        clsPlotFunction.SetRCommand("plot")
+
+        clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetObjectRFunction.AddParameter("as_file", "TRUE", iPosition:=3)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSpeiOutputFunction)
     End Sub
@@ -181,6 +210,10 @@ Public Class dlgSPI
         ucrNudKernelShift.SetRCode(clsListFunction, bReset)
         ucrSaveIndex.SetRCode(clsSpeiOutputFunction, bReset)
         ucrSaveModel.SetRCode(clsSpeiFunction, bReset)
+        ucrSaveGraph.SetRCode(clsPlotFunction, bReset)
+        If bReset Then
+            ucrChkPlot.SetRCode(clsDummyFunction, bReset)
+        End If
         SetShiftMax()
     End Sub
 
@@ -200,11 +233,11 @@ Public Class dlgSPI
 
     Private Sub ucrPnlIndex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlIndex.ControlContentsChanged
         If rdoSPI.Checked Then
-            clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSpiFunction)
             ucrSaveIndex.SetPrefix("spi")
             ucrSaveModel.SetPrefix("spi_mod")
         ElseIf rdoSPEI.Checked Then
-            clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSpeiFunction)
             ucrSaveIndex.SetPrefix("spei")
             ucrSaveModel.SetPrefix("spei_mod")
         End If
@@ -225,4 +258,33 @@ Public Class dlgSPI
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged, ucrSaveModel.ControlContentsChanged, ucrNudTimeScale.ControlContentsChanged, ucrNudKernelShift.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrSaveModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlValueChanged
+        If ucrSaveModel.ucrChkSave.Checked Then
+            clsSpeiOutputFunction.AddParameter("x", ucrSaveModel.GetText, iPosition:=0)
+            clsPlotFunction.AddParameter("plot", ucrSaveModel.GetText, bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsSpeiOutputFunction.AddParameter("x", "last_model", iPosition:=0)
+            clsPlotFunction.AddParameter("plot", "last_model", bIncludeArgumentName:=False, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrChkPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPlot.ControlValueChanged, ucrSaveGraph.ControlValueChanged
+        If ucrChkPlot.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsPlotFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
+            clsPlotFunction.iCallType = 3
+            clsGetObjectRFunction.iCallType = 3
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsPlotFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
+        End If
+
+        If ucrSaveGraph.ucrChkSave.Checked Then
+            clsGetObjectRFunction.AddParameter("object_name", Chr(34) & ucrSaveGraph.GetText & Chr(34), iPosition:=1)
+        Else
+            clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        End If
+    End Sub
+
 End Class
