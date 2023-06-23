@@ -67,7 +67,8 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkTableGraphWeights = New instat.ucrCheck()
         Me.ucrChkStemLeafWidth = New instat.ucrCheck()
         Me.ucrChkTableGraphGroupData = New instat.ucrCheck()
-        Me.ucrReceiverFreq = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverTableGraph = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverMultiple()
         Me.grpTableGraphSort.SuspendLayout()
         Me.grpTableGraphOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -393,18 +394,31 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkTableGraphGroupData.Size = New System.Drawing.Size(145, 23)
         Me.ucrChkTableGraphGroupData.TabIndex = 17
         '
-        'ucrReceiverFreq
+        'ucrReceiverTableGraph
         '
-        Me.ucrReceiverFreq.AutoSize = True
-        Me.ucrReceiverFreq.frmParent = Me
-        Me.ucrReceiverFreq.Location = New System.Drawing.Point(258, 80)
-        Me.ucrReceiverFreq.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFreq.Name = "ucrReceiverFreq"
-        Me.ucrReceiverFreq.Selector = Nothing
-        Me.ucrReceiverFreq.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFreq.strNcFilePath = ""
-        Me.ucrReceiverFreq.TabIndex = 8
-        Me.ucrReceiverFreq.ucrSelector = Nothing
+        Me.ucrReceiverTableGraph.AutoSize = True
+        Me.ucrReceiverTableGraph.frmParent = Me
+        Me.ucrReceiverTableGraph.Location = New System.Drawing.Point(258, 80)
+        Me.ucrReceiverTableGraph.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTableGraph.Name = "ucrReceiverTableGraph"
+        Me.ucrReceiverTableGraph.Selector = Nothing
+        Me.ucrReceiverTableGraph.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverTableGraph.strNcFilePath = ""
+        Me.ucrReceiverTableGraph.TabIndex = 8
+        Me.ucrReceiverTableGraph.ucrSelector = Nothing
+        '
+        'ucrReceiverStemAndLeaf
+        '
+        Me.ucrReceiverStemAndLeaf.AutoSize = True
+        Me.ucrReceiverStemAndLeaf.frmParent = Me
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(257, 79)
+        Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
+        Me.ucrReceiverStemAndLeaf.Selector = Nothing
+        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverStemAndLeaf.strNcFilePath = ""
+        Me.ucrReceiverStemAndLeaf.TabIndex = 25
+        Me.ucrReceiverStemAndLeaf.ucrSelector = Nothing
         '
         'dlgOneWayFrequencies
         '
@@ -412,6 +426,7 @@ Partial Class dlgOneWayFrequencies
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(435, 456)
+        Me.Controls.Add(Me.ucrReceiverStemAndLeaf)
         Me.Controls.Add(Me.ucrNudStemLeafWidth)
         Me.Controls.Add(Me.ucrNudStemLeafScale)
         Me.Controls.Add(Me.rdoFrqStemLeaf)
@@ -433,7 +448,7 @@ Partial Class dlgOneWayFrequencies
         Me.Controls.Add(Me.ucrChkTableMinFrq)
         Me.Controls.Add(Me.ucrChkStemLeafWidth)
         Me.Controls.Add(Me.ucrChkTableGraphGroupData)
-        Me.Controls.Add(Me.ucrReceiverFreq)
+        Me.Controls.Add(Me.ucrReceiverTableGraph)
         Me.Controls.Add(Me.ucrChkTableGraphWeights)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -466,7 +481,7 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoFrqGraph As RadioButton
     Friend WithEvents rdoFrqTable As RadioButton
     Friend WithEvents ucrPnlFreq As UcrPanel
-    Friend WithEvents ucrReceiverFreq As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverTableGraph As ucrReceiverMultiple
     Friend WithEvents ucrSaveFreq As ucrSave
     Friend WithEvents grpTableGraphOutput As GroupBox
     Friend WithEvents rdoTableAsOutput As RadioButton
@@ -479,4 +494,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrChkStemLeafScale As ucrCheck
     Friend WithEvents ucrNudStemLeafWidth As ucrNud
     Friend WithEvents ucrChkStemLeafWidth As ucrCheck
+    Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverMultiple
 End Class

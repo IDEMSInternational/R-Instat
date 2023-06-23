@@ -62,18 +62,18 @@ Public Class dlgOneWayFrequencies
         ucrPnlFreq.AddFunctionNamesCondition(rdoFrqGraph, {"plot_frq", "as.ggplot"}, bNewIsPositive:=True)
         ucrPnlFreq.AddFunctionNamesCondition(rdoFrqStemLeaf, "noquote", bNewIsPositive:=True)
 
-        ucrPnlFreq.AddToLinkedControls({ucrPnlTableGraphSort, ucrChkTableGraphWeights, ucrChkTableGraphGroupData}, {rdoFrqTable, rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFreq.AddToLinkedControls({ucrReceiverTableGraph, ucrPnlTableGraphSort, ucrChkTableGraphWeights, ucrChkTableGraphGroupData}, {rdoFrqTable, rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFreq.AddToLinkedControls({ucrPnlTableOutput, ucrChkTableMinFrq}, {rdoFrqTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreq.AddToLinkedControls(ucrChkGraphFlipCoordinates, {rdoFrqGraph}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlFreq.AddToLinkedControls({ucrChkStemLeafScale, ucrChkStemLeafWidth}, {rdoFrqStemLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFreq.AddToLinkedControls({ucrReceiverStemAndLeaf, ucrChkStemLeafScale, ucrChkStemLeafWidth}, {rdoFrqStemLeaf}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrReceiverFreq.SetParameter(New RParameter("x", 0))
-        ucrReceiverFreq.SetParameterIsRFunction()
-        ucrReceiverFreq.bForceAsDataFrame = True
-        ucrReceiverFreq.Selector = ucrSelectorFreq
-        ucrReceiverFreq.strSelectorHeading = "Variables"
-        ucrReceiverFreq.bDropUnusedFilterLevels = True
-        ucrReceiverFreq.bRemoveLabels = True  'temp fix to bug in sjPlot
+        ucrReceiverTableGraph.SetParameter(New RParameter("x", 0))
+        ucrReceiverTableGraph.SetParameterIsRFunction()
+        ucrReceiverTableGraph.bForceAsDataFrame = True
+        ucrReceiverTableGraph.Selector = ucrSelectorFreq
+        ucrReceiverTableGraph.strSelectorHeading = "Variables"
+        ucrReceiverTableGraph.bDropUnusedFilterLevels = True
+        ucrReceiverTableGraph.bRemoveLabels = True  'temp fix to bug in sjPlot
 
         ucrSaveFreq.SetDataFrameSelector(ucrSelectorFreq.ucrAvailableDataFrames)
         ucrSaveFreq.SetIsComboBox()
@@ -127,7 +127,14 @@ Public Class dlgOneWayFrequencies
         ucrChkGraphFlipCoordinates.SetRDefault("FALSE")
 
         '----------------------------------
-        'stema and leaf controls
+        'stem and leaf controls
+
+        ucrReceiverStemAndLeaf.SetParameter(New RParameter(".x", 0))
+        ucrReceiverStemAndLeaf.SetParameterIsString()
+        ucrReceiverStemAndLeaf.Selector = ucrSelectorFreq
+        ucrReceiverStemAndLeaf.SetDataType = ("numeric")
+        ucrReceiverStemAndLeaf.strSelectorHeading = "Variables"
+
         ucrChkStemLeafScale.SetText("Scale")
         ucrChkStemLeafScale.AddToLinkedControls(ucrNudStemLeafScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
@@ -160,7 +167,7 @@ Public Class dlgOneWayFrequencies
         clsStemLeafCaptureOutputFunction = New RFunction
         clsStemLeafNoQuotes = New RFunction
         ucrSelectorFreq.Reset()
-        ucrReceiverFreq.SetMeAsReceiver()
+        ucrReceiverTableGraph.SetMeAsReceiver()
         ucrSaveFreq.Reset()
 
         '-------------------------
@@ -227,21 +234,20 @@ Public Class dlgOneWayFrequencies
         ucrSaveFreq.AddAdditionalRCode(clsGraphGridAsGGplotRFunction)
         ucrSaveFreq.AddAdditionalRCode(clsGraphSjGGFreqPlotRFunction)
 
-        ucrReceiverFreq.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
-
         ucrPnlFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
-        ucrReceiverFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         '-------------------------
 
         '-------------------------
-        'table graph controls
+        'table and graph controls
 
+        ucrReceiverTableGraph.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
         'reuse the same parameter because we want the same values for table and graph option
         ucrPnlTableGraphSort.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, ucrPnlTableGraphSort.GetParameter(), iAdditionalPairNo:=1)
         ucrNudTableGraphGroups.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, ucrNudTableGraphGroups.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverTableGraphWeights.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, ucrReceiverTableGraphWeights.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrReceiverTableGraph.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrPnlTableGraphSort.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrNudTableGraphGroups.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrReceiverTableGraphWeights.SetRCode(clsTableSjMiscFrqRFunction, bReset)
@@ -250,21 +256,19 @@ Public Class dlgOneWayFrequencies
         '-------------------------
         'table controls
         ucrNudTableMinFreq.SetRCode(clsTableSjMiscFrqRFunction, bReset)
-
         '-------------------------
 
         '-------------------------
         'graph controls
         ucrChkGraphFlipCoordinates.SetRCode(clsGraphSjGGFreqPlotRFunction, bReset)
-
         '-------------------------
 
         '-------------------------
         'stem leaf controls
+        ucrReceiverStemAndLeaf.SetRCode(clsStemLeafPurrMapRFunction, bReset)
         ucrNudStemLeafScale.SetRCode(clsStemLeafRFunction, bReset)
         ucrNudStemLeafWidth.SetRCode(clsStemLeafRFunction, bReset)
         '-------------------------
-
     End Sub
 
     Private Sub ucrPnlFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged
@@ -291,7 +295,7 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub outPutChangeControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged, ucrPnlTableOutput.ControlValueChanged, ucrReceiverFreq.ControlValueChanged
+    Private Sub outPutChangeControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged, ucrPnlTableOutput.ControlValueChanged, ucrReceiverTableGraph.ControlValueChanged
         If rdoFrqTable.Checked Then
             If rdoTableAsOutput.Checked Then
                 ucrSaveFreq.SetSaveType(strRObjectType:=RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
@@ -324,7 +328,7 @@ Public Class dlgOneWayFrequencies
             ucrSaveFreq.SetPrefix("freq_graph")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_graph")
 
-            If ucrReceiverFreq.GetVariableNamesAsList().Count > 1 Then
+            If ucrReceiverTableGraph.GetVariableNamesAsList().Count > 1 Then
                 'remove assign to because clsGraphSjGGFreqPlotRFunction will be wrapped into clsGraphGridAsGGplotRFunction
                 clsGraphSjGGFreqPlotRFunction.RemoveAssignTo()
                 ucrBase.clsRsyntax.SetBaseRFunction(clsGraphGridAsGGplotRFunction)
@@ -353,10 +357,15 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub ucrReceiverFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFreq.ControlValueChanged
-        Dim strRVector As String = ucrReceiverFreq.GetVariableNames
-        clsGraphGridRFunction.AddParameter("tags", strParameterValue:=strRVector, iPosition:=1)
-        clsStemLeafPurrMapRFunction.AddParameter(".x", strParameterValue:=strRVector, iPosition:=0)
+
+    Private Sub ucrReceiverFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTableGraph.ControlValueChanged
+        'set the tags parameter with an R vector of variables names 
+        clsGraphGridRFunction.AddParameter("tags", strParameterValue:=ucrReceiverTableGraph.GetVariableNames(), iPosition:=1)
+    End Sub
+
+    Private Sub ucrReceiverStemAndLeaf_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStemAndLeaf.ControlValueChanged
+        'Dim strRVector As String = ucrReceiverStemAndLeaf.GetVariableNames
+        'clsStemLeafPurrMapRFunction.AddParameter(".x", strParameterValue:=strRVector, iPosition:=0)
 
         'manually construct the data_book$get_data_frame(data_name="data_name")" command from the data frame selector
         Dim clsRFunction As New RFunction
@@ -370,14 +379,13 @@ Public Class dlgOneWayFrequencies
 
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlContentsChanged,
-        ucrReceiverFreq.ControlContentsChanged, ucrSaveFreq.ControlContentsChanged,
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlContentsChanged, ucrSaveFreq.ControlContentsChanged,
+         ucrReceiverTableGraph.ControlContentsChanged,
         ucrChkTableGraphWeights.ControlContentsChanged, ucrReceiverTableGraphWeights.ControlContentsChanged,
         ucrChkTableGraphGroupData.ControlContentsChanged, ucrNudTableGraphGroups.ControlContentsChanged,
-        ucrChkTableMinFrq.ControlContentsChanged, ucrNudTableMinFreq.ControlContentsChanged,
-        ucrPnlTableOutput.ControlContentsChanged,
-        ucrChkStemLeafWidth.ControlContentsChanged, ucrNudStemLeafWidth.ControlContentsChanged,
-         ucrChkStemLeafScale.ControlContentsChanged, ucrNudStemLeafScale.ControlContentsChanged
+        ucrChkTableMinFrq.ControlContentsChanged, ucrNudTableMinFreq.ControlContentsChanged, ucrPnlTableOutput.ControlContentsChanged,
+        ucrReceiverStemAndLeaf.ControlContentsChanged, ucrChkStemLeafWidth.ControlContentsChanged, ucrNudStemLeafWidth.ControlContentsChanged,
+        ucrChkStemLeafScale.ControlContentsChanged, ucrNudStemLeafScale.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -385,7 +393,7 @@ Public Class dlgOneWayFrequencies
         If ucrChkTableGraphWeights.Checked Then
             ucrReceiverTableGraphWeights.SetMeAsReceiver()
         Else
-            ucrReceiverFreq.SetMeAsReceiver()
+            ucrReceiverTableGraph.SetMeAsReceiver()
         End If
     End Sub
 
@@ -404,11 +412,10 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean = True
-
-        If ucrReceiverFreq.IsEmpty() Then
-            bOkEnabled = False
-        ElseIf rdoFrqTable.Checked OrElse rdoFrqGraph.Checked Then
-            If ucrChkTableGraphWeights.Checked AndAlso ucrReceiverTableGraphWeights.IsEmpty Then
+        If rdoFrqTable.Checked OrElse rdoFrqGraph.Checked Then
+            If ucrReceiverTableGraph.IsEmpty() Then
+                bOkEnabled = False
+            ElseIf ucrChkTableGraphWeights.Checked AndAlso ucrReceiverTableGraphWeights.IsEmpty Then
                 bOkEnabled = False
             ElseIf ucrChkTableGraphGroupData.Checked AndAlso ucrNudTableGraphGroups.IsEmpty Then
                 bOkEnabled = False
@@ -416,13 +423,14 @@ Public Class dlgOneWayFrequencies
                 bOkEnabled = False
             End If
         ElseIf rdoFrqStemLeaf.Checked Then
-            If ucrChkStemLeafWidth.Checked AndAlso ucrNudStemLeafWidth.IsEmpty Then
-                bOkEnabled = False
-            ElseIf ucrChkStemLeafScale.Checked AndAlso ucrNudStemLeafScale.IsEmpty Then
+            If ucrReceiverStemAndLeaf.IsEmpty() OrElse
+                (ucrChkStemLeafWidth.Checked AndAlso ucrNudStemLeafWidth.IsEmpty) OrElse
+                (ucrChkStemLeafScale.Checked AndAlso ucrNudStemLeafScale.IsEmpty) Then
                 bOkEnabled = False
             End If
+        Else
+            bOkEnabled = False
         End If
-
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
@@ -432,7 +440,7 @@ Public Class dlgOneWayFrequencies
         End If
         If strDefaultColumns IsNot Nothing Then
             For Each strVar As String In strDefaultColumns
-                ucrReceiverFreq.Add(strVar, strDefaultDataFrame)
+                ucrReceiverTableGraph.Add(strVar, strDefaultDataFrame)
             Next
         End If
         strDefaultDataFrame = ""
