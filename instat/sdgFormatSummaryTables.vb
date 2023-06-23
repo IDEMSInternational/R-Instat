@@ -20,6 +20,7 @@ Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class sdgFormatSummaryTables
+    Private bReset As Boolean = True
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
         clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
         clsFootnoteCellBodyFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
@@ -40,6 +41,9 @@ Public Class sdgFormatSummaryTables
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
         UpdateGrid()
     End Sub
 
@@ -141,6 +145,13 @@ Public Class sdgFormatSummaryTables
         bControlsInitialised = True
     End Sub
 
+    Private Sub SetDefaults()
+        clsRenamingOperator = New ROperator
+
+        clsRenamingOperator.SetOperation("%>%")
+    End Sub
+
+
     Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
                         clsNewTableSourcenoteFunction As RFunction, clsNewTabStyleFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewPipeOperator As ROperator, clsNewFootnoteTitleLocationFunction As RFunction, clsNewFootnoteSubtitleLocationFunction As RFunction,
@@ -149,7 +160,7 @@ Public Class sdgFormatSummaryTables
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
                         clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction, Optional clsNewAsListFunction As RFunction = Nothing,
                         Optional clsNewSetNameFunction As RFunction = Nothing,
-                        Optional clsNewGtColsLabelFunction As RFunction = Nothing, Optional clsNewRenamingOperator As ROperator = Nothing,
+                        Optional clsNewGtColsLabelFunction As RFunction = Nothing,
                         Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "")
 
         If Not bControlsInitialised Then
@@ -183,11 +194,10 @@ Public Class sdgFormatSummaryTables
         clsAsListFunction = clsNewAsListFunction
         clsSetNameFunction = clsNewSetNameFunction
 
-        If clsNewGtColsLabelFunction Is Nothing AndAlso clsNewRenamingOperator Is Nothing Then
+        If clsNewGtColsLabelFunction Is Nothing Then
             tbpFormatOptions.TabPages(4).Enabled = False
         Else
             tbpFormatOptions.TabPages(4).Enabled = True
-            clsRenamingOperator = clsNewRenamingOperator
             clsGtColsLabelFunction = clsNewGtColsLabelFunction
         End If
 
@@ -530,8 +540,8 @@ Public Class sdgFormatSummaryTables
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         Dim strData As String = grdCurrentWorkSheet(row:=e.Cell.Row, col:=0).ToString
         AddChangedNewNameRows(strData, e.NewData)
-            clsAsListFunction.AddParameter("new", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Values.ToList), bIncludeArgumentName:=False)
-            clsSetNameFunction.AddParameter("old", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Keys.ToList), bIncludeArgumentName:=False)
+        clsAsListFunction.AddParameter("new", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Values.ToList), bIncludeArgumentName:=False)
+        clsSetNameFunction.AddParameter("old", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Keys.ToList), bIncludeArgumentName:=False)
         GetRenamedColumns()
     End Sub
 
