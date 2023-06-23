@@ -132,7 +132,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverStemAndLeaf.SetParameter(New RParameter(".x", 0))
         ucrReceiverStemAndLeaf.SetParameterIsString()
         ucrReceiverStemAndLeaf.Selector = ucrSelectorFreq
-        ucrReceiverStemAndLeaf.SetDataType = ("numeric")
+        ucrReceiverStemAndLeaf.SetDataType("numeric", True)
         ucrReceiverStemAndLeaf.strSelectorHeading = "Variables"
 
         ucrChkStemLeafScale.SetText("Scale")
