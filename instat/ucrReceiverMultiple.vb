@@ -31,7 +31,6 @@ Public Class ucrReceiverMultiple
             'by default multiple receivers will not be autoswitched on selection change
             bAutoSwitchFromReceiver = False
             bFirstLoad = False
-            lblNumber.ForeColor = Color.Red
         End If
     End Sub
 
@@ -523,14 +522,4 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetItemsDataFrames() As List(Of String)
         Return GetCurrGroupNames()
     End Function
-
-    Private Sub CountLevels()
-
-        lblNumber.Text = " " & lstSelectedVariables.Items.Count
-        lblNumber.Visible = lstSelectedVariables.Items.Count > 0
-    End Sub
-
-    Private Sub ucrReceiverMultiple_ControlContentsChanged(ucrChangedControl As ucrCore) Handles Me.ControlContentsChanged
-        CountLevels()
-    End Sub
 End Class
