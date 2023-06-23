@@ -27,15 +27,20 @@ Public Class sdgFormatSummaryTables
     'The dummy Function is used by input controls that add the parameter manually,
     'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
-    Public clsThemesTabOptionsFunction, clsgtExtrasThemesFunction As New RFunction
-    Private clsPipeOperator, clsJoiningOperator As New ROperator
+    Public clsThemesTabOptionsFunction, clsgtExtrasThemesFunction, clsAsListFunction, clsSetNameFunction, clsGtColsLabelFunction As New RFunction
+    Private clsPipeOperator, clsJoiningOperator, clsRenamingOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
     Private WithEvents grdCurrentWorkSheet As Worksheet
+    Private chrMatrixData As CharacterMatrix
+    Private strDataName As String = ""
+    Private dctRowsNewNameChanged As New Dictionary(Of String, String)
+
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        UpdateGrid()
     End Sub
 
     Public Sub InitialiseControls()
@@ -142,12 +147,19 @@ Public Class sdgFormatSummaryTables
                         clsNewTabFootnoteSubtitleFunction As RFunction, clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator,
                         clsNewSecondFootnoteCellFunction As RFunction, clsNewTabStyleCellTextFunction As RFunction,
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
-                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction)
+                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction, Optional clsNewAsListFunction As RFunction = Nothing,
+                        Optional clsNewSetNameFunction As RFunction = Nothing,
+                        Optional clsNewGtColsLabelFunction As RFunction = Nothing, Optional clsNewRenamingOperator As ROperator = Nothing,
+                        Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "")
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         AddRemoveManualTheme()
+        dctRowsNewNameChanged.Clear()
+
+        Me.chrMatrixData = dfEditData
+        Me.strDataName = strDataFrameName
 
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
@@ -168,6 +180,16 @@ Public Class sdgFormatSummaryTables
         clsDummyFunction = clsNewDummyFunction
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
+        clsAsListFunction = clsNewAsListFunction
+        clsSetNameFunction = clsNewSetNameFunction
+
+        If clsNewGtColsLabelFunction Is Nothing AndAlso clsNewRenamingOperator Is Nothing Then
+            tbpFormatOptions.TabPages(4).Enabled = False
+        Else
+            tbpFormatOptions.TabPages(4).Enabled = True
+            clsRenamingOperator = clsNewRenamingOperator
+            clsGtColsLabelFunction = clsNewGtColsLabelFunction
+        End If
 
         If bReset Then
             ucrInputSelectThemes.SetText("Dark Theme")
@@ -196,6 +218,42 @@ Public Class sdgFormatSummaryTables
 
         bRCodeSet = True
     End Sub
+
+    Private Sub UpdateGrid()
+
+        If chrMatrixData Is Nothing AndAlso String.IsNullOrEmpty(Me.strDataName) Then
+            Exit Sub
+        End If
+
+        grdColumnFormat.Worksheets.Clear()
+
+        grdCurrentWorkSheet = grdColumnFormat.CreateWorksheet(Me.strDataName)
+        grdCurrentWorkSheet.ColumnCount = 2
+
+        grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
+        grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
+        grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
+
+
+
+        grdCurrentWorkSheet.RowCount = chrMatrixData.ItemCount
+        For i As Integer = 0 To chrMatrixData.RowCount - 1
+            grdCurrentWorkSheet.Item(row:=i, col:=0) = chrMatrixData(i, 0)
+            grdCurrentWorkSheet.GetCell(row:=i, col:=0).IsReadOnly = True
+            grdCurrentWorkSheet.Item(row:=i, col:=1) = chrMatrixData(i, 0)
+        Next
+
+        grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+        grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
+
+        grdColumnFormat.AddWorksheet(grdCurrentWorkSheet)
+        grdColumnFormat.SheetTabNewButtonVisible = False
+        grdColumnFormat.SheetTabWidth = 450
+    End Sub
+
 
     Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
         AddTableTitle()
@@ -456,90 +514,34 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
-        If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Or e.TabPageIndex = 3 Then
+        If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Then
             e.Cancel = True
         End If
     End Sub
 
-    Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
-        If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
-            MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
-            e.IsCancelled = True
+    Private Sub AddChangedNewNameRows(strData As String, strNewData As String)
+        If Not dctRowsNewNameChanged.ContainsKey(strData) Then
+            dctRowsNewNameChanged.Add(strData, strNewData)
+        Else
+            dctRowsNewNameChanged(strData) = strNewData
         End If
     End Sub
 
-    'Private Sub UpdateGrid()
-    '    Dim vecColumns As GenericVector = Nothing
-    '    Dim chrCurrColumns As CharacterVector
-    '    Dim clsGetItems As New RFunction
-    '    Dim clsGetColumnLabels As New RFunction
-    '    Dim strCurrColumnLables() As String
-    '    'Dim expItems As SymbolicExpression
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        Dim strData As String = grdCurrentWorkSheet(row:=e.Cell.Row, col:=0).ToString
+        AddChangedNewNameRows(strData, e.NewData)
+            clsAsListFunction.AddParameter("new", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Values.ToList), bIncludeArgumentName:=False)
+            clsSetNameFunction.AddParameter("old", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Keys.ToList), bIncludeArgumentName:=False)
+        GetRenamedColumns()
+    End Sub
 
-    '    'grdRenameColumns.Worksheets.Clear()
-    '    'dctRowsNewNameChanged.Clear()
-    '    'dctNameRowsValues.Clear()
-    '    'dctRowsNewLabelChanged.Clear()
+    Private Sub GetRenamedColumns()
+        If clsAsListFunction.ContainsParameter("new") Then
+            clsRenamingOperator.AddParameter("x", clsRFunctionParameter:=clsAsListFunction, iPosition:=0)
+            clsRenamingOperator.AddParameter("y", clsRFunctionParameter:=clsSetNameFunction, iPosition:=1)
+            clsRenamingOperator.SetAssignTo("col_list")
 
-    '    'grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
-    '    'grdCurrentWorkSheet.ColumnCount = 3
-
-    '    grdCurrentWorkSheet.ColumnHeaders(0).Text = "Current Name"
-    '    grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
-    '    'grdCurrentWorkSheet.ColumnHeaders(2).Text = "Label"
-    '    grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
-
-    '    'If rdoMultiple.Checked Then
-    '    If ucrSelect IsNot Nothing Then
-    '        clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-    '        clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
-    '        clsGetItems.AddParameter("as_list", "TRUE")
-    '        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
-    '        If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
-    '            vecColumns = expItems.AsList
-    '            For i As Integer = 0 To vecColumns.Count - 1
-    '                chrCurrColumns = vecColumns(i).AsCharacter
-    '                Dim strText As String = vecColumns.Names(i)
-
-    '                If chrCurrColumns IsNot Nothing Then
-    '                    grdCurrentWorkSheet.RowCount = chrCurrColumns.Count
-    '                    For j As Integer = 0 To chrCurrColumns.Count - 1
-    '                        grdCurrentWorkSheet.Item(row:=j, col:=0) = chrCurrColumns(j)
-    '                        grdCurrentWorkSheet.GetCell(row:=j, col:=0).IsReadOnly = True
-    '                        grdCurrentWorkSheet.Item(row:=j, col:=1) = chrCurrColumns(j)
-    '                    Next
-    '                    clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
-    '                    clsGetColumnLabels.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
-    '                    clsGetColumnLabels.AddParameter("columns", frmMain.clsRLink.GetListAsRString(chrCurrColumns.ToList))
-    '                    expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnLabels.ToScript())
-    '                    If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
-    '                        strCurrColumnLables = expItems.AsCharacter.ToArray
-    '                    Else
-    '                        strCurrColumnLables = New String(chrCurrColumns.Count - 1) {}
-    '                    End If
-    '                    For j = 0 To chrCurrColumns.Count - 1
-    '                        grdCurrentWorkSheet.Item(row:=j, col:=2) = strCurrColumnLables(j)
-    '                    Next
-    '                End If
-    '            Next
-    '        End If
-
-    '        'For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
-    '        '    AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
-    '        'Next
-    '    End If
-    '    'End If
-
-    '    grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
-    '    grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-    '    grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-    '    grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-    '    grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
-
-    '    'grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
-    '    'grdRenameColumns.SheetTabNewButtonVisible = False
-    '    'grdRenameColumns.SheetTabWidth = 450
-
-    '    'MakeLabelColumnVisible()
-    'End Sub
+            clsGtColsLabelFunction.AddParameter(".list", clsROperatorParameter:=clsRenamingOperator, iPosition:=0)
+        End If
+    End Sub
 End Class

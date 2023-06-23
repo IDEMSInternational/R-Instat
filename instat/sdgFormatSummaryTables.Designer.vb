@@ -59,6 +59,7 @@ Partial Class sdgFormatSummaryTables
         Me.tbpFacets = New System.Windows.Forms.TabPage()
         Me.tbpRows = New System.Windows.Forms.TabPage()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
+        Me.grdColumnFormat = New unvell.ReoGrid.ReoGridControl()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
         Me.ucrInputSelectThemes = New instat.ucrInputComboBox()
         Me.cmdManualTheme = New System.Windows.Forms.Button()
@@ -66,7 +67,7 @@ Partial Class sdgFormatSummaryTables
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.grdColumnFormat = New unvell.ReoGrid.ReoGridControl()
+        Me.lblRenameTableCols = New System.Windows.Forms.Label()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpSecondFootnote.SuspendLayout()
@@ -496,6 +497,7 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpColumns
         '
+        Me.tbpColumns.Controls.Add(Me.lblRenameTableCols)
         Me.tbpColumns.Controls.Add(Me.grdColumnFormat)
         Me.tbpColumns.Location = New System.Drawing.Point(4, 22)
         Me.tbpColumns.Name = "tbpColumns"
@@ -503,6 +505,24 @@ Partial Class sdgFormatSummaryTables
         Me.tbpColumns.TabIndex = 5
         Me.tbpColumns.Text = "Columns"
         Me.tbpColumns.UseVisualStyleBackColor = True
+        '
+        'grdColumnFormat
+        '
+        Me.grdColumnFormat.BackColor = System.Drawing.Color.White
+        Me.grdColumnFormat.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdColumnFormat.LeadHeaderContextMenuStrip = Nothing
+        Me.grdColumnFormat.Location = New System.Drawing.Point(27, 49)
+        Me.grdColumnFormat.Name = "grdColumnFormat"
+        Me.grdColumnFormat.RowHeaderContextMenuStrip = Nothing
+        Me.grdColumnFormat.Script = Nothing
+        Me.grdColumnFormat.SheetTabContextMenuStrip = Nothing
+        Me.grdColumnFormat.SheetTabNewButtonVisible = True
+        Me.grdColumnFormat.SheetTabVisible = True
+        Me.grdColumnFormat.SheetTabWidth = 154
+        Me.grdColumnFormat.ShowScrollEndSpacing = True
+        Me.grdColumnFormat.Size = New System.Drawing.Size(270, 210)
+        Me.grdColumnFormat.TabIndex = 19
+        Me.grdColumnFormat.Text = "Variables"
         '
         'tbpThemes
         '
@@ -579,23 +599,14 @@ Partial Class sdgFormatSummaryTables
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 3
         '
-        'grdColumnFormat
+        'lblRenameTableCols
         '
-        Me.grdColumnFormat.BackColor = System.Drawing.Color.White
-        Me.grdColumnFormat.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdColumnFormat.LeadHeaderContextMenuStrip = Nothing
-        Me.grdColumnFormat.Location = New System.Drawing.Point(27, 49)
-        Me.grdColumnFormat.Name = "grdColumnFormat"
-        Me.grdColumnFormat.RowHeaderContextMenuStrip = Nothing
-        Me.grdColumnFormat.Script = Nothing
-        Me.grdColumnFormat.SheetTabContextMenuStrip = Nothing
-        Me.grdColumnFormat.SheetTabNewButtonVisible = True
-        Me.grdColumnFormat.SheetTabVisible = True
-        Me.grdColumnFormat.SheetTabWidth = 154
-        Me.grdColumnFormat.ShowScrollEndSpacing = True
-        Me.grdColumnFormat.Size = New System.Drawing.Size(349, 210)
-        Me.grdColumnFormat.TabIndex = 19
-        Me.grdColumnFormat.Text = "Variables"
+        Me.lblRenameTableCols.AutoSize = True
+        Me.lblRenameTableCols.Location = New System.Drawing.Point(28, 31)
+        Me.lblRenameTableCols.Name = "lblRenameTableCols"
+        Me.lblRenameTableCols.Size = New System.Drawing.Size(123, 13)
+        Me.lblRenameTableCols.TabIndex = 20
+        Me.lblRenameTableCols.Text = "Rename Table Columns:"
         '
         'sdgFormatSummaryTables
         '
@@ -621,6 +632,7 @@ Partial Class sdgFormatSummaryTables
         Me.grpTitleSubtitle.ResumeLayout(False)
         Me.grpTitleSubtitle.PerformLayout()
         Me.tbpColumns.ResumeLayout(False)
+        Me.tbpColumns.PerformLayout()
         Me.tbpThemes.ResumeLayout(False)
         Me.tbpThemes.PerformLayout()
         Me.ResumeLayout(False)
@@ -673,4 +685,5 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputSelectThemes As ucrInputComboBox
     Friend WithEvents ucrPnlThemesPanel As UcrPanel
     Friend WithEvents grdColumnFormat As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents lblRenameTableCols As Label
 End Class
