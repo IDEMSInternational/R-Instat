@@ -26,7 +26,7 @@ Public Class dlgOneWayFrequencies
     Private clsGraphSjGGFreqPlotRFunction, clsGraphGridRFunction, clsGraphGridAsGGplotRFunction As New RFunction
 
     'stem and leaf functions
-    Private clsStemLeafNoQuotes, clsStemLeafCaptureOutputFunction, clsStemLeafPurrMapRFunction, clsStemLeafRFunction As New RFunction
+    Private clsStemLeafNoQuotesRFunction, clsStemLeafCaptureOutputRFunction, clsStemLeafPurrMapRFunction, clsStemLeafRFunction As New RFunction
     Private clsStemLeafTildeROperator As New ROperator
 
     Public strDefaultDataFrame As String = ""
@@ -164,8 +164,8 @@ Public Class dlgOneWayFrequencies
         clsStemLeafRFunction = New RFunction
         clsStemLeafPurrMapRFunction = New RFunction
         clsStemLeafTildeROperator = New ROperator
-        clsStemLeafCaptureOutputFunction = New RFunction
-        clsStemLeafNoQuotes = New RFunction
+        clsStemLeafCaptureOutputRFunction = New RFunction
+        clsStemLeafNoQuotesRFunction = New RFunction
         ucrSelectorFreq.Reset()
         ucrReceiverTableGraph.SetMeAsReceiver()
         ucrSaveFreq.Reset()
@@ -204,12 +204,12 @@ Public Class dlgOneWayFrequencies
 
         '-------------------------
         'stem leaf functions
-        clsStemLeafCaptureOutputFunction.SetPackageName("utils")
-        clsStemLeafCaptureOutputFunction.SetRCommand("capture.output")
-        clsStemLeafCaptureOutputFunction.AddParameter("x", clsRFunctionParameter:=clsStemLeafPurrMapRFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsStemLeafNoQuotes.SetAssignTo("result")
-        clsStemLeafNoQuotes.SetRCommand("noquote")
-        clsStemLeafNoQuotes.AddParameter("x", clsRFunctionParameter:=clsStemLeafCaptureOutputFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsStemLeafCaptureOutputRFunction.SetPackageName("utils")
+        clsStemLeafCaptureOutputRFunction.SetRCommand("capture.output")
+        clsStemLeafCaptureOutputRFunction.AddParameter("x", clsRFunctionParameter:=clsStemLeafPurrMapRFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsStemLeafNoQuotesRFunction.SetAssignTo("result")
+        clsStemLeafNoQuotesRFunction.SetRCommand("noquote")
+        clsStemLeafNoQuotesRFunction.AddParameter("x", clsRFunctionParameter:=clsStemLeafCaptureOutputRFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsStemLeafPurrMapRFunction.SetPackageName("purrr")
         clsStemLeafPurrMapRFunction.SetRCommand("map")
@@ -348,12 +348,12 @@ Public Class dlgOneWayFrequencies
             ucrSaveFreq.SetCheckBoxText("Save Summary")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
-            clsStemLeafNoQuotes.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+            clsStemLeafNoQuotesRFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
                                                               strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                               strRDataFrameNameToAddObjectTo:=ucrSelectorFreq.strCurrentDataFrame,
                                                               strObjectName:="last_summary")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafNoQuotes)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStemLeafNoQuotesRFunction)
         End If
     End Sub
 
