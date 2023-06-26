@@ -277,7 +277,7 @@ Partial Class sdgPMConstants
         Me.MinimizeBox = False
         Me.Name = "sdgPMConstants"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "PM Constants"
+        Me.Text = "Penman Monteith Constants"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

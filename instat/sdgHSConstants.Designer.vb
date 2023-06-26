@@ -117,7 +117,7 @@ Partial Class sdgHSConstants
         Me.MinimizeBox = False
         Me.Name = "sdgHSConstants"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "HS Constants"
+        Me.Text = "Hargreaves Samani Constants"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
