@@ -19,7 +19,7 @@ Public Class sdgMissingOptionsEvapotranspiration
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsReadInputs, clsMissingDataVector As New RFunction
-    Private Sub sdgMissingOptionsEvapotranspiration_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
+    Private Sub sdgMissingOptionsEvapotranspiration_Load(sender As Object, e As EventArgs) 
         autoTranslate(Me)
     End Sub
 
