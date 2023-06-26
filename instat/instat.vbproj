@@ -272,6 +272,12 @@
     <Compile Include="sdgHSConstants.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgHSMissingOptions.Designer.vb">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgLocation.Designer.vb">
       <DependentUpon>sdgLocation.vb</DependentUpon>
     </Compile>
@@ -3134,6 +3140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHSConstants.resx">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSMissingOptions.resx">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
