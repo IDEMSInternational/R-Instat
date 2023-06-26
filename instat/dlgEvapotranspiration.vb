@@ -340,18 +340,21 @@ Public Class dlgEvapotranspiration
         TestOKEnabled()
     End Sub
 
-
-        ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
-            cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
-            cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation)
+    Private Sub DialogSize()
+        If rdoPenmanMonteith.Checked Then
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY)
+        cmdEvapOptions.Location = New Point(cmdEvapOptions.Location.X, iEvapOptions)
+        cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation)
         ElseIf rdoHargreavesSamani.Checked Then
-            ucrReceiverDate.SetMeAsReceiver()
-            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
-            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
-            ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
-            cmdHSMissingOptions.Location = New Point(cmdHSMissingOptions.Location.X, iHSMissingOptions / 1.187)
-            cmdHSConstants.Location = New Point(cmdHSConstants.Location.X, iHSConstants / 1.187)
-            cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation / 1.187)
+        ucrReceiverDate.SetMeAsReceiver()
+        Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.9)
+        ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.15)
+        ucrNewColName.Location = New Point(ucrNewColName.Location.X, iSaveMaxY / 1.183)
+        cmdHSMissingOptions.Location = New Point(cmdHSMissingOptions.Location.X, iHSMissingOptions / 1.187)
+        cmdHSConstants.Location = New Point(cmdHSConstants.Location.X, iHSConstants / 1.187)
+        cmdLocation.Location = New Point(cmdLocation.Location.X, iLocation / 1.187)
         End If
     End Sub
 
