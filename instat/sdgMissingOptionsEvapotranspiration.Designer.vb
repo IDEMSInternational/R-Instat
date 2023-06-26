@@ -40,7 +40,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'lblMaxPerctMissindData
         '
         Me.lblMaxPerctMissindData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxPerctMissindData.Location = New System.Drawing.Point(2, 47)
+        Me.lblMaxPerctMissindData.Location = New System.Drawing.Point(5, 60)
         Me.lblMaxPerctMissindData.Name = "lblMaxPerctMissindData"
         Me.lblMaxPerctMissindData.Size = New System.Drawing.Size(169, 19)
         Me.lblMaxPerctMissindData.TabIndex = 39
@@ -49,7 +49,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'lblMaxDurationMissingData
         '
         Me.lblMaxDurationMissingData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxDurationMissingData.Location = New System.Drawing.Point(2, 23)
+        Me.lblMaxDurationMissingData.Location = New System.Drawing.Point(5, 36)
         Me.lblMaxDurationMissingData.Name = "lblMaxDurationMissingData"
         Me.lblMaxDurationMissingData.Size = New System.Drawing.Size(160, 20)
         Me.lblMaxDurationMissingData.TabIndex = 37
@@ -58,7 +58,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'lblMaxMissingDays
         '
         Me.lblMaxMissingDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMaxMissingDays.Location = New System.Drawing.Point(2, 0)
+        Me.lblMaxMissingDays.Location = New System.Drawing.Point(5, 13)
         Me.lblMaxMissingDays.Name = "lblMaxMissingDays"
         Me.lblMaxMissingDays.Size = New System.Drawing.Size(169, 20)
         Me.lblMaxMissingDays.TabIndex = 35
@@ -68,7 +68,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         '
         Me.grpMissingDataOpts.Controls.Add(Me.ucrChkInterpMissingEntries)
         Me.grpMissingDataOpts.Controls.Add(Me.ucrChkInterpMissingDays)
-        Me.grpMissingDataOpts.Location = New System.Drawing.Point(2, 117)
+        Me.grpMissingDataOpts.Location = New System.Drawing.Point(5, 121)
         Me.grpMissingDataOpts.Name = "grpMissingDataOpts"
         Me.grpMissingDataOpts.Size = New System.Drawing.Size(198, 66)
         Me.grpMissingDataOpts.TabIndex = 41
@@ -79,7 +79,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         '
         Me.ucrChkInterpMissingEntries.AutoSize = True
         Me.ucrChkInterpMissingEntries.Checked = False
-        Me.ucrChkInterpMissingEntries.Location = New System.Drawing.Point(2, 38)
+        Me.ucrChkInterpMissingEntries.Location = New System.Drawing.Point(5, 36)
         Me.ucrChkInterpMissingEntries.Name = "ucrChkInterpMissingEntries"
         Me.ucrChkInterpMissingEntries.Size = New System.Drawing.Size(188, 23)
         Me.ucrChkInterpMissingEntries.TabIndex = 5
@@ -88,7 +88,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         '
         Me.ucrChkInterpMissingDays.AutoSize = True
         Me.ucrChkInterpMissingDays.Checked = False
-        Me.ucrChkInterpMissingDays.Location = New System.Drawing.Point(2, 16)
+        Me.ucrChkInterpMissingDays.Location = New System.Drawing.Point(5, 14)
         Me.ucrChkInterpMissingDays.Name = "ucrChkInterpMissingDays"
         Me.ucrChkInterpMissingDays.Size = New System.Drawing.Size(168, 23)
         Me.ucrChkInterpMissingDays.TabIndex = 6
@@ -99,7 +99,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.ucrInputMissingMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMissingMethod.GetSetSelectedIndex = -1
         Me.ucrInputMissingMethod.IsReadOnly = False
-        Me.ucrInputMissingMethod.Location = New System.Drawing.Point(90, 75)
+        Me.ucrInputMissingMethod.Location = New System.Drawing.Point(93, 88)
         Me.ucrInputMissingMethod.Name = "ucrInputMissingMethod"
         Me.ucrInputMissingMethod.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputMissingMethod.TabIndex = 43
@@ -107,7 +107,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'lblMissingMethod
         '
         Me.lblMissingMethod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMissingMethod.Location = New System.Drawing.Point(-1, 77)
+        Me.lblMissingMethod.Location = New System.Drawing.Point(2, 90)
         Me.lblMissingMethod.Name = "lblMissingMethod"
         Me.lblMissingMethod.Size = New System.Drawing.Size(90, 19)
         Me.lblMissingMethod.TabIndex = 42
@@ -118,7 +118,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.ucrNudMaxDurationMissingData.AutoSize = True
         Me.ucrNudMaxDurationMissingData.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxDurationMissingData.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxDurationMissingData.Location = New System.Drawing.Point(177, 47)
+        Me.ucrNudMaxDurationMissingData.Location = New System.Drawing.Point(180, 60)
         Me.ucrNudMaxDurationMissingData.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxDurationMissingData.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxDurationMissingData.Name = "ucrNudMaxDurationMissingData"
@@ -131,7 +131,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.ucrNudMaxMissingDays.AutoSize = True
         Me.ucrNudMaxMissingDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxMissingDays.Location = New System.Drawing.Point(177, 0)
+        Me.ucrNudMaxMissingDays.Location = New System.Drawing.Point(180, 13)
         Me.ucrNudMaxMissingDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxMissingDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingDays.Name = "ucrNudMaxMissingDays"
@@ -144,7 +144,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         Me.ucrNudMaxMissingData.AutoSize = True
         Me.ucrNudMaxMissingData.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingData.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxMissingData.Location = New System.Drawing.Point(177, 23)
+        Me.ucrNudMaxMissingData.Location = New System.Drawing.Point(180, 36)
         Me.ucrNudMaxMissingData.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxMissingData.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxMissingData.Name = "ucrNudMaxMissingData"
@@ -155,7 +155,7 @@ Partial Class sdgMissingOptionsEvapotranspiration
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.AutoSize = True
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(-7, 200)
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(-4, 198)
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(259, 29)
         Me.ucrSdgButtons.TabIndex = 34
