@@ -53,6 +53,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorEvapotranspiration = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoPriestleyTaylor = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'cmdHSConstants
@@ -136,7 +137,7 @@ Partial Class dlgEvapotranspiration
         Me.rdoHargreavesSamani.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoHargreavesSamani.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoHargreavesSamani.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoHargreavesSamani.Location = New System.Drawing.Point(215, 10)
+        Me.rdoHargreavesSamani.Location = New System.Drawing.Point(150, 10)
         Me.rdoHargreavesSamani.Name = "rdoHargreavesSamani"
         Me.rdoHargreavesSamani.Size = New System.Drawing.Size(131, 27)
         Me.rdoHargreavesSamani.TabIndex = 43
@@ -153,7 +154,7 @@ Partial Class dlgEvapotranspiration
         Me.rdoPenmanMonteith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPenmanMonteith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPenmanMonteith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPenmanMonteith.Location = New System.Drawing.Point(108, 10)
+        Me.rdoPenmanMonteith.Location = New System.Drawing.Point(43, 10)
         Me.rdoPenmanMonteith.Name = "rdoPenmanMonteith"
         Me.rdoPenmanMonteith.Size = New System.Drawing.Size(109, 27)
         Me.rdoPenmanMonteith.TabIndex = 41
@@ -251,10 +252,10 @@ Partial Class dlgEvapotranspiration
         'ucrPnlMethod
         '
         Me.ucrPnlMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(107, 8)
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(41, 8)
         Me.ucrPnlMethod.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(244, 37)
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(397, 37)
         Me.ucrPnlMethod.TabIndex = 40
         '
         'lblCrop
@@ -397,12 +398,30 @@ Partial Class dlgEvapotranspiration
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 64
         '
+        'rdoPriestleyTaylor
+        '
+        Me.rdoPriestleyTaylor.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPriestleyTaylor.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPriestleyTaylor.FlatAppearance.BorderSize = 2
+        Me.rdoPriestleyTaylor.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPriestleyTaylor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPriestleyTaylor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPriestleyTaylor.Location = New System.Drawing.Point(279, 10)
+        Me.rdoPriestleyTaylor.Name = "rdoPriestleyTaylor"
+        Me.rdoPriestleyTaylor.Size = New System.Drawing.Size(131, 27)
+        Me.rdoPriestleyTaylor.TabIndex = 70
+        Me.rdoPriestleyTaylor.TabStop = True
+        Me.rdoPriestleyTaylor.Text = "Priestley-Taylor"
+        Me.rdoPriestleyTaylor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPriestleyTaylor.UseVisualStyleBackColor = True
+        '
         'dlgEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(453, 478)
+        Me.Controls.Add(Me.rdoPriestleyTaylor)
         Me.Controls.Add(Me.cmdHSConstants)
         Me.Controls.Add(Me.cmdLocation)
         Me.Controls.Add(Me.cmdPMConstants)
@@ -476,4 +495,5 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents ucrReceiverTmax As ucrReceiverSingle
     Friend WithEvents ucrSelectorEvapotranspiration As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents rdoPriestleyTaylor As RadioButton
 End Class

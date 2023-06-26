@@ -60,6 +60,7 @@ Public Class dlgEvapotranspiration
         ucrReceiverDate.Selector = ucrSelectorEvapotranspiration
         ucrReceiverTmax.Selector = ucrSelectorEvapotranspiration
         ucrReceiverTmin.Selector = ucrSelectorEvapotranspiration
+        ucrReceiverExtraRadiation.Selector = ucrSelectorEvapotranspiration
         ucrReceiverHumidityMax.Selector = ucrSelectorEvapotranspiration
         ucrReceiverHumidityMin.Selector = ucrSelectorEvapotranspiration
         ucrReceiverRadiation.Selector = ucrSelectorEvapotranspiration
@@ -79,6 +80,10 @@ Public Class dlgEvapotranspiration
         ucrReceiverTmin.SetParameterIsRFunction()
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
+
+        ucrReceiverExtraRadiation.SetParameter(New RParameter("R_a", 4))
+        ucrReceiverExtraRadiation.SetParameterIsRFunction()
+        ucrReceiverExtraRadiation.SetClimaticType("R_a")
 
         ucrReceiverHumidityMax.SetParameter(New RParameter("RHmax", 4))
         ucrReceiverHumidityMax.SetParameterIsRFunction()
@@ -121,6 +126,12 @@ Public Class dlgEvapotranspiration
         ucrChkWind.SetValuesCheckedAndUnchecked(Chr(34) & "yes" & Chr(34), Chr(34) & "no" & Chr(34))
         ucrChkWind.SetRDefault(Chr(34) & "yes" & Chr(34))
 
+        ucrNudAlpha.SetParameter(New RParameter("alpha", 4))
+        ucrNudAlpha.SetMinMax(0, 1)
+        ucrNudAlpha.DecimalPlaces = 2
+        ucrNudAlpha.Increment = 0.05
+        ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
+
         'panel setting
         ucrPnlMethod.AddRadioButton(rdoPenmanMonteith)
         ucrPnlMethod.AddRadioButton(rdoHargreavesSamani)
@@ -136,6 +147,7 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrChkWind, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrInputSolar, {rdoPenmanMonteith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrReceiverExtraRadiation.SetLinkedDisplayControl(lblRa)
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)
