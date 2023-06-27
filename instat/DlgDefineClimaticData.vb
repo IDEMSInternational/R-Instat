@@ -137,7 +137,7 @@ Public Class DlgDefineClimaticData
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) 
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
@@ -206,11 +206,11 @@ Public Class DlgDefineClimaticData
         Return lstValues
     End Function
 
-    Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlContentsChanged
+    Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) 
         AutoFillReceivers()
     End Sub
 
-    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
+    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) 
         Dim iAnyDuplicated As Integer
 
         Try
@@ -253,7 +253,7 @@ Public Class DlgDefineClimaticData
         bIsUnique = True
     End Sub
 
-    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged, ucrReceiverStationName.ControlValueChanged
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) 
         EnableDisableCheckUniqueBtn()
         If Not ucrReceiverStationName.IsEmpty Then
             clsConcFunction.AddParameter("x1", ucrReceiverStationName.GetVariableNames, bIncludeArgumentName:=False)
@@ -267,12 +267,12 @@ Public Class DlgDefineClimaticData
         End If
     End Sub
 
-    Private Sub ucrSelectorDefineClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlValueChanged
+    Private Sub ucrSelectorDefineClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) 
         strCurrentDataframeName = ucrSelectorDefineClimaticData.strCurrentDataFrame
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) 
         TestOKEnabled()
     End Sub
 End Class
