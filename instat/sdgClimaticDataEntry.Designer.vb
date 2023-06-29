@@ -37,6 +37,7 @@ Partial Class sdgClimaticDataEntry
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.ttCmds = New System.Windows.Forms.ToolTip(Me.components)
+        Me.mnuDelete = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -89,9 +90,9 @@ Partial Class sdgClimaticDataEntry
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuCopy, Me.mnuPaste, Me.ToolStripSeparator5, Me.mnuComment})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuCopy, Me.mnuPaste, Me.ToolStripSeparator5, Me.mnuComment, Me.mnuDelete})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(145, 82)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(145, 104)
         '
         'ToolStripSeparator3
         '
@@ -180,6 +181,12 @@ Partial Class sdgClimaticDataEntry
         Me.ttCmds.InitialDelay = 500
         Me.ttCmds.ReshowDelay = 100
         '
+        'mnuDelete
+        '
+        Me.mnuDelete.Name = "mnuDelete"
+        Me.mnuDelete.Size = New System.Drawing.Size(144, 22)
+        Me.mnuDelete.Text = "Delete"
+        '
         'sdgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -214,4 +221,5 @@ Partial Class sdgClimaticDataEntry
     Friend WithEvents mnuPaste As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuComment As ToolStripMenuItem
+    Friend WithEvents mnuDelete As ToolStripMenuItem
 End Class
