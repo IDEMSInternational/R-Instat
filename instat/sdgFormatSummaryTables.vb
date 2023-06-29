@@ -37,6 +37,7 @@ Public Class sdgFormatSummaryTables
     Private chrMatrixData As CharacterMatrix
     Private strDataName As String = ""
     Private dctRowsNewNameChanged As New Dictionary(Of String, String)
+    Private tbPage As TabPage
 
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -147,8 +148,15 @@ Public Class sdgFormatSummaryTables
 
     Private Sub SetDefaults()
         clsRenamingOperator = New ROperator
+        clsAsListFunction = New RFunction
+        clsSetNameFunction = New RFunction
 
         clsRenamingOperator.SetOperation("%>%")
+
+        clsAsListFunction.SetRCommand("as.list")
+
+        clsSetNameFunction.SetPackageName("purrr")
+        clsSetNameFunction.SetRCommand("set_names")
     End Sub
 
 
@@ -158,8 +166,7 @@ Public Class sdgFormatSummaryTables
                         clsNewTabFootnoteSubtitleFunction As RFunction, clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator,
                         clsNewSecondFootnoteCellFunction As RFunction, clsNewTabStyleCellTextFunction As RFunction,
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
-                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction, Optional clsNewAsListFunction As RFunction = Nothing,
-                        Optional clsNewSetNameFunction As RFunction = Nothing,
+                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction,
                         Optional clsNewGtColsLabelFunction As RFunction = Nothing,
                         Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "")
 
@@ -191,14 +198,14 @@ Public Class sdgFormatSummaryTables
         clsDummyFunction = clsNewDummyFunction
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
-        clsAsListFunction = clsNewAsListFunction
-        clsSetNameFunction = clsNewSetNameFunction
+
+        ' tbPage = tbpFormatOptions.TabPages()
 
         If clsNewGtColsLabelFunction Is Nothing Then
-            tbpFormatOptions.TabPages(4).Enabled = False
-        Else
-            tbpFormatOptions.TabPages(4).Enabled = True
+            tbpFormatOptions.TabPages.Remove(tbpColumns)
+        ElseIf clsNewGtColsLabelFunction IsNot Nothing AndAlso Not tbpFormatOptions.TabPages.Contains(tbpColumns) Then
             clsGtColsLabelFunction = clsNewGtColsLabelFunction
+            tbpFormatOptions.TabPages.Add(tbpColumns)
         End If
 
         If bReset Then
