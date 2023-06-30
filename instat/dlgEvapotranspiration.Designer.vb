@@ -58,6 +58,7 @@ Partial Class dlgEvapotranspiration
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverExtraRadiation = New instat.ucrReceiverSingle()
         Me.ucrNudAlpha = New instat.ucrNud()
+        Me.cmdPTConstants = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdHSConstants
@@ -463,6 +464,16 @@ Partial Class dlgEvapotranspiration
         Me.ucrNudAlpha.TabIndex = 71
         Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'cmdPTConstants
+        '
+        Me.cmdPTConstants.Location = New System.Drawing.Point(171, 341)
+        Me.cmdPTConstants.Name = "cmdPTConstants"
+        Me.cmdPTConstants.Size = New System.Drawing.Size(123, 23)
+        Me.cmdPTConstants.TabIndex = 72
+        Me.cmdPTConstants.Tag = "Options"
+        Me.cmdPTConstants.Text = "Constants"
+        Me.cmdPTConstants.UseVisualStyleBackColor = True
+        '
         'dlgEvapotranspiration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -505,6 +516,7 @@ Partial Class dlgEvapotranspiration
         Me.Controls.Add(Me.lblRA)
         Me.Controls.Add(Me.ucrReceiverExtraRadiation)
         Me.Controls.Add(Me.lblAlpha)
+        Me.Controls.Add(Me.cmdPTConstants)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -552,4 +564,5 @@ Partial Class dlgEvapotranspiration
     Friend WithEvents lblRA As Label
     Friend WithEvents ucrNudAlpha As ucrNud
     Friend WithEvents lblAlpha As Label
+    Friend WithEvents cmdPTConstants As Button
 End Class

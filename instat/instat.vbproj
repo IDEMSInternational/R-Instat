@@ -296,6 +296,12 @@
     <Compile Include="sdgPMConstants.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgPTConstants.Designer.vb">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPTConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </Compile>
@@ -3152,6 +3158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPMConstants.resx">
       <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPTConstants.resx">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>

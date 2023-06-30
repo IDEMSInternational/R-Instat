@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class sdgPMConstants
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsListFunction As New RFunction
 
@@ -60,12 +61,14 @@ Public Class sdgPMConstants
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        ucrNudHeigth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSoilFlux.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputAs.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        If bReset Then
+            ucrNudHeigth.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputSoilFlux.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputAs.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        End If
     End Sub
 End Class

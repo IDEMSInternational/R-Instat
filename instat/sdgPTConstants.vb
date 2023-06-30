@@ -15,39 +15,60 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class sdgHSConstants
+Public Class sdgPTConstants
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsListFunction As New RFunction
-    Private Sub sdgHSConstants_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
+
+    Private Sub sdgPTConstants_Load(sender As Object, e As EventArgs) Handles UcrButtonsSubdialogue1.Load
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
         ucrInputLambda.SetParameter(New RParameter("lambda", 1))
         ucrInputLambda.AddQuotesIfUnrecognised = False
-        'ucrInputLambda.IsReadOnly = True
-        ucrInputLambda.SetLinkedDisplayControl(lbllambda)
-        'ucrInputLambda.SetRDefault(2.45)
+        ucrInputLambda.SetLinkedDisplayControl(lblLambda)
+
+        ucrInputSigma.SetParameter(New RParameter("sigma", 4))
+        ucrInputSigma.AddQuotesIfUnrecognised = False
 
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))
         ucrInputSolarConstant.AddQuotesIfUnrecognised = False
         ucrInputSolarConstant.SetLinkedDisplayControl(lblSolarConstant)
-        'ucrInputSolarConstant.SetRDefault(0.082)
+
+        ucrInputAlphaPT.SetParameter(New RParameter("alphaPT", 5))
+        ucrInputAlphaPT.AddQuotesIfUnrecognised = False
+        ucrInputAlphaPT.SetLinkedDisplayControl(lblAlphaPT)
+
+        ucrInputSoilFlux.SetParameter(New RParameter("G", 6))
+        ucrInputSoilFlux.AddQuotesIfUnrecognised = False
+        ucrInputSoilFlux.SetLinkedDisplayControl(lblSoilFlux)
+
+        ucrInputAs.SetParameter(New RParameter("as", 7))
+        ucrInputAs.AddQuotesIfUnrecognised = False
+        ucrInputAs.SetLinkedDisplayControl(lblAS)
+
+        ucrInputBS.SetParameter(New RParameter("bs", 8))
+        ucrInputBS.AddQuotesIfUnrecognised = False
+        ucrInputBS.SetLinkedDisplayControl(lblBS)
 
         bControlsInitialised = True
     End Sub
 
     Public Sub SetRFunction(clsNewListFunction As RFunction, Optional bReset As Boolean = False)
         clsListFunction = clsNewListFunction
-
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         If bReset Then
+            ucrInputAlphaPT.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputSoilFlux.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputAs.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         End If
     End Sub
 End Class
