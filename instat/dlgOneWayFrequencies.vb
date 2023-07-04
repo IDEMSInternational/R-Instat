@@ -273,6 +273,7 @@ Public Class dlgOneWayFrequencies
 
     Private Sub ucrPnlFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreq.ControlValueChanged
         If rdoFrqTable.Checked OrElse rdoFrqGraph.Checked Then
+            ucrReceiverTableGraph.SetMeAsReceiver()
             ucrChkTableGraphWeights.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("weight.by") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("weight.by")
             ucrChkTableGraphGroupData.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("auto.group") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("auto.grp")
 
@@ -290,6 +291,7 @@ Public Class dlgOneWayFrequencies
             End If
 
         ElseIf rdoFrqStemLeaf.Checked Then
+            ucrReceiverStemAndLeaf.SetMeAsReceiver()
             ucrChkStemLeafWidth.Checked = clsStemLeafRFunction.ContainsParameter("width")
             ucrChkStemLeafScale.Checked = clsStemLeafRFunction.ContainsParameter("scale")
         End If
