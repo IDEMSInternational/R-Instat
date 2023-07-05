@@ -770,6 +770,13 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
         }
+        # remove key
+        if (self$get_variables_metadata() %>% dplyr::filter(Name == curr_col_name) %>% dplyr::pull(Is_Key)){
+          active_keys <- self$get_keys()
+          keys_to_delete <- which(grepl(curr_col_name, active_keys))
+          keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+          purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+        }
         # Need to use private$data here because changing names of data field
         names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
@@ -831,8 +838,7 @@ DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delet
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
       warning("You are deleting all columns in the data frame.")
-    }
-    else {
+    } else {
       stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
     }
   }
@@ -840,15 +846,21 @@ DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delet
     # Column name must be character
     if(!is.character(col_name)) {
       stop("Column name must be of type: character")
-    }
-    else if(!(col_name %in% self$get_column_names())) {
+    } else if (!(col_name %in% self$get_column_names())) {
       stop(paste0("Column :'", col_name, " was not found in the data."))
+    } else {
+      if (self$get_variables_metadata() %>% dplyr::filter(Name == col_name) %>% dplyr::pull(Is_Key)){
+       active_keys <- self$get_keys()
+        keys_to_delete <- which(grepl(col_name, active_keys))
+        keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+            purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+      }
+      private$data[[col_name]] <- NULL
     }
-    else private$data[[col_name]] <- NULL
+    self$append_to_changes(list(Removed_col, cols))
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
   }
-  self$append_to_changes(list(Removed_col, cols))
-  self$data_changed <- TRUE
-  self$variables_metadata_changed <- TRUE
 }
 )
 
@@ -1550,8 +1562,8 @@ DataSheet$set("public", "reorder_factor_levels", function(col_name, new_level_na
 }
 )
 
-DataSheet$set("public", "get_column_count", function(col_name, new_level_names) {
-  return(ncol(private$data))
+DataSheet$set("public", "get_column_count", function(use_column_selection = FALSE) {
+  return(ncol(self$get_data_frame(use_column_selection = use_column_selection)))
 }
 )
 
