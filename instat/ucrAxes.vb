@@ -155,6 +155,23 @@ Public Class ucrAxes
         ucrChkBreakDiscret.AddToLinkedControls(ucrInputBreaksDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrInputBreaksDiscrete.SetValidationTypeAsList()
 
+        ucrChkLimitsFrom.SetText("From")
+        ucrChkLimitsFrom.AddParameterPresentCondition(True, "from")
+        ucrChkLimitsFrom.AddParameterPresentCondition(False, "from", False)
+        ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrNudFrom.SetMinMax(1, Integer.MaxValue)
+
+        ucrChkLimitsTo.SetText("From")
+        ucrChkLimitsTo.AddParameterPresentCondition(True, "to")
+        ucrChkLimitsTo.AddParameterPresentCondition(False, "to", False)
+        ucrChkLimitsTo.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrNudTo.SetMinMax(1, Integer.MaxValue)
+
+        ucrChkLimitsBy.SetText("From")
+        ucrChkLimitsBy.AddParameterPresentCondition(True, "by")
+        ucrChkLimitsBy.AddParameterPresentCondition(False, "by", False)
+        ucrChkLimitsBy.AddToLinkedControls(ucrNudBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrNudBy.SetMinMax(1, Integer.MaxValue)
 
         'Scales section
         ucrPnlScales.AddRadioButton(rdoScalesAuto)
@@ -346,6 +363,7 @@ Public Class ucrAxes
         clsXYScaleDateLimitFunction.SetRCommand("c")
         clsXYScaleDateLimitFunction.AddParameter("from", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=0)
         clsXYScaleDateLimitFunction.AddParameter("to", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=1)
+
 
         clsXYScaleDateBreakOperator = New ROperator
         clsXYScaleDateBreakOperator.SetOperation(" ")
@@ -753,4 +771,5 @@ Public Class ucrAxes
     Private Sub ucrChkBreakDiscret_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBreakDiscret.ControlValueChanged, ucrInputBreaksDiscrete.ControlValueChanged
         SetBreaksDiscrete()
     End Sub
+
 End Class
