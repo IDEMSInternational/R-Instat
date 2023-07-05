@@ -86,7 +86,9 @@ Public Class ucrDataViewReoGrid
             End If
         Next
 
-        grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
+            grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
+        End If
 
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.

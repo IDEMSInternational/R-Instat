@@ -219,7 +219,7 @@ Public Class dlgClimaticSummary
     Private Sub SetRCodeForControls(bReset As Boolean)
         'This is currently not working. Selector should be able to pass additional parameter pairs!
         'ucrSelectorVariable.AddAdditionalCodeParameterPair(clsAddDateFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-
+        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFromConditionOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.SetRCode(clsToConditionOperator, bReset)
         ucrChkAddDateColumn.SetRCode(clsAddDateFunction, bReset)
 

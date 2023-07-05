@@ -89,6 +89,7 @@ Public Class dlgDeleteRowsOrColums
         clsRemoveEmptyColumns = New RFunction
         clsConcFunction = New RFunction
         clsDummyFunction = New RFunction
+        ucrBase.clsRsyntax.iCallType = 2
 
         ucrSelectorForDeleteColumns.Reset()
 

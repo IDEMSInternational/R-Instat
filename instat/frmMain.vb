@@ -443,7 +443,7 @@ Public Class frmMain
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
-        mnuTbLogScript.Checked = False
+        mnuLogScript.Checked = False
         UpdateLayout()
     End Sub
 
@@ -587,7 +587,7 @@ Public Class frmMain
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutput.Checked
-        mnuTbLogScript.Checked = mnuViewLogScript.Checked
+        mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Sub UpdateSwapDataAndMetadata()
@@ -610,9 +610,9 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTbLogScript.Click, mnuViewLogScript.Click
+    Private Sub mnuLogScript_Click(sender As Object, e As EventArgs) Handles mnuLogScript.Click, mnuViewLogScript.Click, mnuTbLogScript.ButtonClick
         mnuViewLogScript.Checked = Not mnuViewLogScript.Checked
-        mnuTbLogScript.Checked = mnuViewLogScript.Checked
+        mnuLogScript.Checked = mnuViewLogScript.Checked
         UpdateLayout()
     End Sub
 
@@ -664,7 +664,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.Click
+    Private Sub mnuTbSave_Click(sender As Object, e As EventArgs) Handles mnuTbSave.ButtonClick, mnuSaveData.Click
         mnuFileSave_Click(sender, e)
     End Sub
 
@@ -1054,15 +1054,15 @@ Public Class frmMain
         dlgAppend.ShowDialog()
     End Sub
 
-    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click
+    Private Sub mnuFileSaveAsOutputAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsOutputAs.Click, mnuSaveOutput.Click
         ucrOutput.UcrOutputPages.SaveTab()
     End Sub
 
-    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click
+    Private Sub mnuFileSaveAsLogAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsLogAs.Click, mnuSaveLog.Click
         ucrScriptWindow.SaveScript(True)
     End Sub
 
-    Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click
+    Private Sub mnuFileSaveAsScriptAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAsScriptAs.Click, mnuSaveScript.Click
         ucrScriptWindow.SaveScript(False)
     End Sub
 
@@ -1922,10 +1922,6 @@ Public Class frmMain
         dlgReplaceValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineOneVariableSummarize_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableSummarize.Click
-        dlgOneVariableSummarise.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPrepareLengthOfSeason_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareLengthOfSeason.Click
         dlgClimaticLengthOfSeason.ShowDialog()
     End Sub
@@ -2011,14 +2007,6 @@ Public Class frmMain
 
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
-    End Sub
-
-    Private Sub mnuClimaticTidyandExamineOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableGraph.Click
-        dlgOneVariableGraph.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticTidyandExamineOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineOneVariableFrequencies.Click
-        dlgOneWayFrequencies.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicateRows.Click
@@ -2337,11 +2325,6 @@ Public Class frmMain
     Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
         dlgCircularDensityPlot.ShowDialog()
     End Sub
-
-    Private Sub mnuTidyandExamineClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuTidyandExamineClimaticDataEntry.Click
-        dlgClimaticDataEntry.ShowDialog()
-    End Sub
-
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
     End Sub
@@ -2360,10 +2343,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileImportfromClimateDataStore_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromClimateDataStore.Click
         dlgImportERA5Data.ShowDialog()
-    End Sub
-
-    Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs) Handles mnuSetupForDataEntry.Click
-        dlgSetupForDataEntry.ShowDialog()
     End Sub
 
     Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
@@ -2389,7 +2368,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.ButtonClick, mnuSubTbCopy.Click, mnuEditCopy.Click
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
         ElseIf ctrActive.Equals(ucrColumnMeta) Then
@@ -2399,21 +2378,6 @@ Public Class frmMain
         ElseIf ctrActive.Equals(ucrScriptWindow) Then
             ucrScriptWindow.CopyText()
         End If
-    End Sub
-
-    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbCopySpecial.Click, mnuEditCopySpecial.Click
-        dlgCopySpecial.ShowDialog()
-    End Sub
-
-    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuTbPaste.ButtonClick, mnuSubTbPaste.Click, mnuEditPaste.Click
-        'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
-        If ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.PasteText()
-        End If
-    End Sub
-
-    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuSubTbPasteSpecial.Click, mnuPasteSpecial.Click
-        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
@@ -2426,10 +2390,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileExportToClimsoft_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimsoft.Click
         dlgExportToClimsoft.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticTidyandExamineCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineCompareColumns.Click
-        dlgCompareColumns.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareDataReshapeScaleOrDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeScaleOrDistance.Click
@@ -2467,6 +2427,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeTwoThreeVariablesPivotTableSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoThreeVariablesPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
@@ -2518,5 +2479,46 @@ Public Class frmMain
 
     Private Sub mnuDescribeUseTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeUseTable.Click
         dlgUseTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineTransformText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTransformText.Click
+        dlgTransformText.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineSplitText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineSplitText.Click
+        dlgRandomSplit.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableGraph.Click
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableFrequencies.Click
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataSetupForDataEditing_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataSetupForDataEditing.Click
+        dlgSetupForDataEntry.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataDailyDataEditing_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataDailyDataEditing.Click
+        dlgClimaticDataEntry.ShowDialog()
+    End Sub
+
+    Private Sub mnuExamineEditDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataCompareColumns.Click
+        dlgCompareColumns.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
+        dlgSurvey.ShowDialog()
     End Sub
 End Class
