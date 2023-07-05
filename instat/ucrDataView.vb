@@ -88,6 +88,7 @@ Public Class ucrDataView
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
+        AddHandler _grid.FindRow, AddressOf FindRow
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -888,6 +889,11 @@ Public Class ucrDataView
         ResizeLabels()
     End Sub
 
+    Public Sub SearchInGrid(strVariable As String, Optional iRow As Integer = 0,
+                            Optional bCellOrRow As Boolean = False)
+        _grid.SearchInGrid(strVariable, iRow, bCellOrRow)
+    End Sub
+
     Private Sub DeleteCell_Click()
         Dim deleteCell = MsgBox("This will replace the selected cells with missing values (NA)." &
                                 Environment.NewLine & "Continue?",
@@ -907,6 +913,11 @@ Public Class ucrDataView
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
+    Public Sub GoToSpecificRowPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
@@ -920,9 +931,14 @@ Public Class ucrDataView
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
 
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            'GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
+            'RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificRowPage(sdgWindowNumber.iPage)
         End If
+    End Sub
+
+    Private Sub FindRow()
+        dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click

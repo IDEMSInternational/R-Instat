@@ -28,6 +28,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
 
+    Public Event FindRow() Implements IDataViewGrid.FindRow
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -152,6 +154,12 @@ Public Class ucrDataViewReoGrid
         RaiseEvent WorksheetChanged()
     End Sub
 
+    Private Sub Worksheet_AfterCellKeyDownEventArgs(sender As Object, e As KeyEventArgs) Handles grdData.KeyDown
+        If (e.KeyCode And Not Keys.Modifiers) = Keys.F AndAlso e.Modifiers = Keys.Control Then
+            RaiseEvent FindRow()
+        End If
+    End Sub
+
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
         RaiseEvent WorksheetRemoved(New clsWorksheetAdapter(e.Worksheet))
     End Sub
@@ -204,4 +212,71 @@ Public Class ucrDataViewReoGrid
         End If
     End Sub
 
+    Private Sub SetCellBackgroundColor(currWorkSheet As Worksheet, rowIndex As Integer, colIndex As Integer, color As Color)
+        ' Set the background color style to the specific cell
+        currWorkSheet.Cells(rowIndex, colIndex).Style.BackColor = color
+    End Sub
+
+    Private Sub SetRowBackgroundColor(currWorkSheet As Worksheet, rowIndex As Integer, colIndex As Integer, color As Color)
+        ' Get the range of the entire row
+        Dim rowRange As RangePosition = New RangePosition(rowIndex, 0, 1, colIndex)
+
+        ' Create a new style object to set the background color
+        Dim style As WorksheetRangeStyle = New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = color
+        }
+
+        ' Apply the style to the row range
+        currWorkSheet.SetRangeStyles(rowRange, style)
+    End Sub
+
+    Private Function GetColumnIndex(currWorkSheet As Worksheet, strColName As String) As Integer
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To currWorkSheet.Columns - 1
+                Dim strCol As String = currWorkSheet.ColumnHeaders(i).Text
+                If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowIndex(currWorkSheet As Worksheet, strRowName As String) As Integer
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To currWorkSheet.Rows - 1
+                Dim strCol As String = currWorkSheet.RowHeaders(i).Text
+                If strCol = strRowName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer)
+        currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+        currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
+    End Sub
+
+    Public Sub SearchInGrid(strColumn As String, Optional iRow As Integer = 0,
+                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+
+        Dim currSheet = grdData.CurrentWorksheet
+
+        If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+            Dim iRowIndex = GetRowIndex(currSheet, iRow)
+            Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
+            If bCellOrRow Then
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
+                SetCellBackgroundColor(currWorkSheet:=currSheet, rowIndex:=iRowIndex,
+                                      colIndex:=iColIndex, color:=Color.LightGreen)
+            Else
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
+                SetRowBackgroundColor(currWorkSheet:=currSheet, rowIndex:=iRowIndex,
+                                     colIndex:=currSheet.ColumnCount, color:=Color.LightGreen)
+            End If
+        End If
+    End Sub
 End Class
