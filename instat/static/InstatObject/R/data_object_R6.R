@@ -772,11 +772,13 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         }
         # remove key
         if (!is.null(self$get_variables_metadata()$Is_Key)){
-          if (self$get_variables_metadata() %>% dplyr::filter(Name == col_name) %>% dplyr::pull(Is_Key)){
-            active_keys <- self$get_keys()
-            keys_to_delete <- which(grepl(col_name, active_keys))
-            keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
-            purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+          if (!is.na(self$get_variables_metadata() %>% dplyr::filter(Name == col_name))$Is_Key)){
+              if ((self$get_variables_metadata() %>% dplyr::filter(Name == col_name))$Is_Key){
+                  active_keys <- self$get_keys()
+                  keys_to_delete <- which(grepl(col_name, active_keys))
+                  keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+                  purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+              }
           }
         }
         # Need to use private$data here because changing names of data field
@@ -852,11 +854,13 @@ DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delet
       stop(paste0("Column :'", col_name, " was not found in the data."))
     } else {
       if (!is.null(self$get_variables_metadata()$Is_Key)){
-        if (self$get_variables_metadata() %>% dplyr::filter(Name == col_name) %>% dplyr::pull(Is_Key)){
-          active_keys <- self$get_keys()
-          keys_to_delete <- which(grepl(col_name, active_keys))
-          keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
-          purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+        if (!is.na(self$get_variables_metadata() %>% dplyr::filter(Name == col_name))$Is_Key){
+          if ((self$get_variables_metadata() %>% dplyr::filter(Name == col_name))$Is_Key){
+            active_keys <- self$get_keys()
+            keys_to_delete <- which(grepl(col_name, active_keys))
+            keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+            purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+          }
         }
       }
       private$data[[col_name]] <- NULL
