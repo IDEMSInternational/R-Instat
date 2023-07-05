@@ -29,6 +29,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
 
+    Public Event EditCell() Implements IDataViewGrid.EditCell
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
