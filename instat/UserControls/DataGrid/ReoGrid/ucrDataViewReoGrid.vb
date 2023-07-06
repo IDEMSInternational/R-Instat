@@ -236,6 +236,21 @@ Public Class ucrDataViewReoGrid
         Return -1
     End Function
 
+    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of String)) As List(Of String)
+        Dim lstRowsIndexes As New List(Of String)
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To lstRows.Count - 1
+                For j As Integer = 0 To currWorkSheet.Rows - 1
+                    Dim strCol As String = currWorkSheet.RowHeaders(j).Text
+                    If strCol = lstRows(i) Then
+                        lstRowsIndexes.Add(j)
+                    End If
+                Next
+            Next
+        End If
+        Return lstRowsIndexes
+    End Function
+
     Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer)
         currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
         currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
@@ -250,15 +265,13 @@ Public Class ucrDataViewReoGrid
 
         ' Iterate over the row numbers and apply the style to each row
         For Each rowNumber As Integer In rowNumbers
-            ' Adjust the row index to zero-based index
-            Dim rowIndex As Integer = rowNumber - 1
             ' Check if the row index is within the valid range
-            If rowIndex >= 0 AndAlso rowIndex < currWorkSheet.RowCount Then
+            If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
                 If bCellOrRow Then
                     ' Apply the row style to the entire row
-                    currWorkSheet.Cells(rowIndex, colIndex).Style.BackColor = color
+                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
                 Else
-                    currWorkSheet.SetRangeStyles(New RangePosition(rowIndex, 0, 1, colIndex), rowStyle)
+                    currWorkSheet.SetRangeStyles(New RangePosition(rowNumber, 0, 1, colIndex), rowStyle)
                 End If
             End If
         Next
@@ -273,11 +286,11 @@ Public Class ucrDataViewReoGrid
             Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
             If bCellOrRow Then
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
-                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=rowNumbers,
+                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
                                      colIndex:=iColIndex, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
             Else
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
-                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=rowNumbers,
+                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
                                      colIndex:=currSheet.ColumnCount, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
             End If
         End If
