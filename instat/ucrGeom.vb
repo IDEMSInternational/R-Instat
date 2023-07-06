@@ -870,10 +870,11 @@ Public Class ucrGeom
         clsgeom_density_ridges.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("jittered_points", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
-        clsgeom_density_ridges.AddLayerParameter("scale", "numeric", "1")
+        clsgeom_density_ridges.AddLayerParameter("scale", "numeric", "1", lstParameterStrings:={1, 0, 5})
         clsgeom_density_ridges.AddLayerParameter("point_shape", "editablelist", "|", lstParameterStrings:={"|", "/", "$", "#", "*", "?", "!"})
         clsgeom_density_ridges.AddLayerParameter("point_size", "numeric", "3")
         clsgeom_density_ridges.AddLayerParameter("point_alpha", "numeric", "1", lstParameterStrings:={1, 0})
+        clsgeom_density_ridges.AddLayerParameter("rel_min_height", "numeric", "0.01", lstParameterStrings:={3, 0, 0.1})
         lstAllGeoms.Add(clsgeom_density_ridges)
 
         Dim clsgeom_density_ridges2 As New Geoms
@@ -946,6 +947,7 @@ Public Class ucrGeom
         clsgeom_density_ridges_gradient.AddLayerParameter("gradient_lwd", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_density_ridges_gradient.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density_ridges_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("rel_min_height", "numeric", "0.01", lstParameterStrings:={3, 0, 0.1})
 
         lstAllGeoms.Add(clsgeom_density_ridges_gradient)
 
@@ -1353,8 +1355,8 @@ Public Class ucrGeom
         clsgeom_label_repel.AddLayerParameter("label.r", "numeric", "0.15", lstParameterStrings:={2, 0})
         clsgeom_label_repel.AddLayerParameter("min.segment.length", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_label_repel.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
-        clsgeom_label_repel.AddLayerParameter("max.time", "numeric", "0.5")
-        clsgeom_label_repel.AddLayerParameter("max.iter", "numeric", "1000", lstParameterStrings:={0, 1})
+        clsgeom_label_repel.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={1, 1})
+        clsgeom_label_repel.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_label_repel.AddLayerParameter("max.overlaps", "numeric", "10", lstParameterStrings:={0, 1})
         clsgeom_label_repel.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
         clsgeom_label_repel.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
@@ -2080,8 +2082,8 @@ Public Class ucrGeom
         clsgeom_text_repel.AddLayerParameter("point.padding", "numeric", "0", lstParameterStrings:={2, 0})
         clsgeom_text_repel.AddLayerParameter("min.segment.length", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_text_repel.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
-        clsgeom_text_repel.AddLayerParameter("max.time", "numeric", "0.5")
-        clsgeom_text_repel.AddLayerParameter("max.iter", "numeric", "1000", lstParameterStrings:={0, 1})
+        clsgeom_text_repel.AddLayerParameter("size", "numeric", "5", lstParameterStrings:={1, 0})
+        clsgeom_text_repel.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_text_repel.AddLayerParameter("max.overlaps", "numeric", "10", lstParameterStrings:={0, 1})
         clsgeom_text_repel.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
         clsgeom_text_repel.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})

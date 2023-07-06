@@ -83,7 +83,7 @@ Partial Class ucrSave
         Me.ucrInputTextSave.AutoSize = True
         Me.ucrInputTextSave.IsMultiline = False
         Me.ucrInputTextSave.IsReadOnly = False
-        Me.ucrInputTextSave.Location = New System.Drawing.Point(182, 0)
+        Me.ucrInputTextSave.Location = New System.Drawing.Point(194, 0)
         Me.ucrInputTextSave.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
         Me.ucrInputTextSave.Size = New System.Drawing.Size(155, 34)
