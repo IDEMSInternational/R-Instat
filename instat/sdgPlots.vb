@@ -203,12 +203,15 @@ Public Class sdgPlots
 
         ucrNudTitleSize.SetParameter(New RParameter("size"))
         ucrNudTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudTitleSize.SetRDefault(20)
 
         ucrNudSubTitleSize.SetParameter(New RParameter("size"))
         ucrNudSubTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudSubTitleSize.SetRDefault(15)
 
         ucrNudCaptionSize.SetParameter(New RParameter("size"))
         ucrNudCaptionSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudCaptionSize.SetRDefault(8)
 
         ucrNudTagSize.SetParameter(New RParameter("size"))
         ucrNudTagSize.SetMinMax(0, Integer.MaxValue)
@@ -216,7 +219,7 @@ Public Class sdgPlots
 
         ucrNudLegendSize.SetParameter(New RParameter("size"))
         ucrNudLegendSize.SetMinMax(0, Integer.MaxValue)
-
+        ucrNudLegendSize.SetRDefault(18)
 
         ucrChkTag.SetText("Tag")
         ucrChkTag.AddToLinkedControls(ucrNudTagSize, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -672,26 +675,15 @@ Public Class sdgPlots
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
         If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction) Then
-            clsPlotElementCaptionFunction.AddParameter("size", 8)
             clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
         End If
 
         If dctThemeFunctions.TryGetValue("title", clsPlotElementTitleFunction) Then
-            clsPlotElementTitleFunction.AddParameter("size", 20)
             clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
         End If
 
         If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction) Then
-            clsPlotElementSubTitleFunction.AddParameter("size", 15)
             clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
-        End If
-
-        If dctThemeFunctions.TryGetValue("tag", clsPlotElementTagFunction) Then
-            clsPlotElementTagFunction.AddParameter("size", 15)
-        End If
-
-        If dctThemeFunctions.TryGetValue("colour", clsPlotLegendTitleFunction) Then
-            clsPlotLegendTitleFunction.AddParameter("size", 18)
         End If
 
         If clsFacetFunction.ContainsParameter("facets") Then
@@ -1015,7 +1007,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
-        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged
+        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrNudTitleSize.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
