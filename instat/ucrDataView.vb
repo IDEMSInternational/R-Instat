@@ -889,9 +889,9 @@ Public Class ucrDataView
         ResizeLabels()
     End Sub
 
-    Public Sub SearchInGrid(strVariable As String, Optional iRow As Integer = 0,
+    Public Sub SearchInGrid(rowNumbers As List(Of String), strVariable As String, Optional iRow As Integer = 0,
                             Optional bCellOrRow As Boolean = False)
-        _grid.SearchInGrid(strVariable, iRow, bCellOrRow)
+        _grid.SearchInGrid(rowNumbers, strVariable, iRow, bCellOrRow)
     End Sub
 
     Private Sub DeleteCell_Click()

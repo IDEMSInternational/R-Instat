@@ -23,7 +23,6 @@ Public Class dlgFindInVariableOrFilter
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
     Private clsGetDataFrame As New RFunction
-    Private lstRowNumbers As List(Of String)
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -83,6 +82,7 @@ Public Class dlgFindInVariableOrFilter
 
         ucrSelectorFind.Reset()
         ucrInputPattern.SetName("TRUE")
+        lblMatching.Visible = False
 
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
@@ -119,10 +119,14 @@ Public Class dlgFindInVariableOrFilter
         Try
             Dim strPattern As String = ucrInputPattern.GetText
             If strPattern <> "" Then
-                lstRowNumbers = New List(Of String)
+                Dim lstRowNumbers As New List(Of String)
                 lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
+                lblMatching.Visible = False
 
                 If lstRowNumbers.Count <= 0 Then
+                    lblMatching.ForeColor = Color.Red
+                    lblMatching.Text = "There are no entries matching " & ucrInputPattern.GetText
+                    lblMatching.Visible = True
                     Exit Sub
                 End If
 
@@ -131,10 +135,14 @@ Public Class dlgFindInVariableOrFilter
                 Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
                 frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
 
-                frmMain.ucrDataViewer.SearchInGrid(strVariable:=ucrReceiverVariable.GetVariableNames,
+                frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
                                                    iRow:=iRow, bCellOrRow:=rdoCell.Checked)
 
-                If lstRowNumbers.Count > iFisrtRow Then iFisrtRow += 1
+                If lstRowNumbers.Count > iFisrtRow Then
+                    iFisrtRow += 1
+                Else
+                    iFisrtRow = 1
+                End If
             End If
 
         Catch ex As Exception

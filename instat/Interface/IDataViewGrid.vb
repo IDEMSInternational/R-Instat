@@ -35,7 +35,7 @@ Public Interface IDataViewGrid
 
     Sub AddRowData(dataFrame As clsDataFrame)
 
-    Sub SearchInGrid(strColumn As String, Optional iRow As Integer = 0,
+    Sub SearchInGrid(rowNumbers As List(Of String), strColumn As String, Optional iRow As Integer = 0,
                             Optional bCellOrRow As Boolean = False)
 
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)

@@ -212,25 +212,6 @@ Public Class ucrDataViewReoGrid
         End If
     End Sub
 
-    Private Sub SetCellBackgroundColor(currWorkSheet As Worksheet, rowIndex As Integer, colIndex As Integer, color As Color)
-        ' Set the background color style to the specific cell
-        currWorkSheet.Cells(rowIndex, colIndex).Style.BackColor = color
-    End Sub
-
-    Private Sub SetRowBackgroundColor(currWorkSheet As Worksheet, rowIndex As Integer, colIndex As Integer, color As Color)
-        ' Get the range of the entire row
-        Dim rowRange As RangePosition = New RangePosition(rowIndex, 0, 1, colIndex)
-
-        ' Create a new style object to set the background color
-        Dim style As WorksheetRangeStyle = New WorksheetRangeStyle With {
-            .Flag = PlainStyleFlag.BackColor,
-            .BackColor = color
-        }
-
-        ' Apply the style to the row range
-        currWorkSheet.SetRangeStyles(rowRange, style)
-    End Sub
-
     Private Function GetColumnIndex(currWorkSheet As Worksheet, strColName As String) As Integer
         If currWorkSheet IsNot Nothing Then
             For i As Integer = 0 To currWorkSheet.Columns - 1
@@ -260,9 +241,31 @@ Public Class ucrDataViewReoGrid
         currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
     End Sub
 
-    Public Sub SearchInGrid(strColumn As String, Optional iRow As Integer = 0,
-                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of String), colIndex As Integer, bCellOrRow As Boolean, color As Color)
+        ' Create a new style object for the row background color
+        Dim rowStyle As WorksheetRangeStyle = New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = color
+        }
 
+        ' Iterate over the row numbers and apply the style to each row
+        For Each rowNumber As Integer In rowNumbers
+            ' Adjust the row index to zero-based index
+            Dim rowIndex As Integer = rowNumber - 1
+            ' Check if the row index is within the valid range
+            If rowIndex >= 0 AndAlso rowIndex < currWorkSheet.RowCount Then
+                If bCellOrRow Then
+                    ' Apply the row style to the entire row
+                    currWorkSheet.Cells(rowIndex, colIndex).Style.BackColor = color
+                Else
+                    currWorkSheet.SetRangeStyles(New RangePosition(rowIndex, 0, 1, colIndex), rowStyle)
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub SearchInGrid(rowNumbers As List(Of String), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
         Dim currSheet = grdData.CurrentWorksheet
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
@@ -270,12 +273,12 @@ Public Class ucrDataViewReoGrid
             Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
             If bCellOrRow Then
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
-                SetCellBackgroundColor(currWorkSheet:=currSheet, rowIndex:=iRowIndex,
-                                      colIndex:=iColIndex, color:=Color.LightGreen)
+                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=rowNumbers,
+                                     colIndex:=iColIndex, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
             Else
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
-                SetRowBackgroundColor(currWorkSheet:=currSheet, rowIndex:=iRowIndex,
-                                     colIndex:=currSheet.ColumnCount, color:=Color.LightGreen)
+                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=rowNumbers,
+                                     colIndex:=currSheet.ColumnCount, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
             End If
         End If
     End Sub

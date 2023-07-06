@@ -155,7 +155,7 @@ Public Class ucrDataViewLinuxGrid
         dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
 
-    Public Sub SearchInGrid(strColumn As String, Optional iRow As Integer = 0,
+    Public Sub SearchInGrid(rowNumbers As List(Of String), strColumn As String, Optional iRow As Integer = 0,
                             Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
 
     End Sub
