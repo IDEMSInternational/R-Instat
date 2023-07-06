@@ -1103,8 +1103,8 @@ DataBook$set("public", "set_factor_reference_level", function(data_name, col_nam
 } 
 )
 
-DataBook$set("public", "get_column_count", function(data_name) {
-  return(self$get_data_objects(data_name)$get_column_count())
+DataBook$set("public", "get_column_count", function(data_name, use_column_selection = FALSE) {
+  return(self$get_data_objects(data_name)$get_column_count(use_column_selection))
 } 
 )
 
@@ -2121,7 +2121,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 #' yearcols[60,4:6] <- NA
 #' tidy_climatic_data(x = yearcols, format = "years", stack_cols = c("X2000", "X2001", "X2002", "X2003"), element_name = "tmin")
 
-DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day, month, year, stack_years, station, element, element_name, ignore_invalid = FALSE, silent = FALSE, unstack_elements = TRUE, new_name) {
+DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day, month, year, stack_years, station, element, element_name="value", ignore_invalid = FALSE, silent = FALSE, unstack_elements = TRUE, new_name) {
   
   if(!format %in% c("days", "months", "years")) stop("format must be either 'days', 'months' or 'years'")
   if(!all(stack_cols %in% names(x))) stop("Some of the stack_cols were not found in x.")

@@ -22,7 +22,7 @@ Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataFrame As String
-    Private clsSjTableFunction, clsSelectFunction, clsDeleteLabelsFunction As New RFunction
+    Private clsSjTableFunction, clsSelectFunction, clsSelectVariablesFunction, clsDeleteLabelsFunction As New RFunction
     Private clsDummyDataFunction As New RFunction
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -48,7 +48,6 @@ Public Class dlgViewFactorLabels
 
         ucrReceiverVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverVariables.SetParameterIsString()
-        ucrReceiverVariables.SetParameterIncludeArgumentName(False)
         ucrReceiverVariables.Selector = ucrSelectorViewLabelsAndLevels
         ucrReceiverVariables.SetMeAsReceiver()
 
@@ -120,6 +119,7 @@ Public Class dlgViewFactorLabels
         clsSelectFunction = New RFunction
         clsDeleteLabelsFunction = New RFunction
         clsDummyDataFunction = New RFunction
+        clsSelectVariablesFunction = New RFunction
 
         'Reset
         ucrSelectorViewLabelsAndLevels.Reset()
@@ -130,13 +130,15 @@ Public Class dlgViewFactorLabels
         clsDummyDataFunction.AddParameter("checked", "data", iPosition:=0)
         clsDummyDataFunction.AddParameter("check", "FALSE", iPosition:=1)
 
-        clsSelectFunction.SetAssignTo("selected_variables")
+        clsSelectVariablesFunction.SetAssignTo("selected_variables")
+        clsSelectVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsSelectVariablesFunction.AddParameter("force_as_data_frame", "TRUE", iPosition:=2)
 
         clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
         clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
 
-        clsSjTableFunction.AddParameter("x", clsRFunctionParameter:=clsSelectFunction, iPosition:=0)
+        clsSjTableFunction.AddParameter("x", clsRFunctionParameter:=clsSelectVariablesFunction, iPosition:=0)
         clsSjTableFunction.AddParameter("show.frq", "TRUE")
         clsSjTableFunction.AddParameter("show.id", "FALSE")
         clsSjTableFunction.SetAssignTo("variables_sjTable")
@@ -165,7 +167,7 @@ Public Class dlgViewFactorLabels
         ucrChkShowValues.SetRCode(clsSjTableFunction, bReset)
         ucrChkMaxLabels.SetRCode(clsDummyDataFunction, bReset)
         ucrNudMaxLength.SetRCode(clsSjTableFunction, bReset)
-        ucrReceiverVariables.SetRCode(clsSelectFunction, bReset)
+        ucrReceiverVariables.SetRCode(clsSelectVariablesFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyDataFunction, bReset)
     End Sub
 
@@ -203,10 +205,8 @@ Public Class dlgViewFactorLabels
     Private Sub ucrPnlSelectData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverVariables.ControlValueChanged
         SetReceiverVariableVisible()
         If rdoViewLabels.Checked Then
-            ucrReceiverVariables.SetParameterIsRFunction()
             ucrReceiverVariables.Location = New System.Drawing.Point(295, 84)
             ucrSelectorViewLabelsAndLevels.HideShowAddOrDataOptionsOrListView(True, True, True)
-            ucrReceiverVariables.bWithQuotes = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTableFunction)
         Else
             ucrReceiverVariables.Location = New System.Drawing.Point(302, 109)
@@ -222,6 +222,10 @@ Public Class dlgViewFactorLabels
                 clsDeleteLabelsFunction.AddParameter("col_names", ucrReceiverVariables.GetVariableNames(bWithQuotes:=True), iPosition:=1)
             End If
         End If
+    End Sub
+
+    Private Sub ucrSelectorViewLabelsAndLevels_DataFrameChanged() Handles ucrSelectorViewLabelsAndLevels.DataFrameChanged
+        clsSelectVariablesFunction.AddParameter("data_name", Chr(34) & ucrSelectorViewLabelsAndLevels.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged,
