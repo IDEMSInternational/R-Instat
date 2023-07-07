@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOutputWindowFunction, clsHTMLFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction, clsViewAllFunction As New RFunction
+    Private clsOutputWindowFunction, clsHTMLFunction, clsAsHtmlwidgetFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction, clsViewAllFunction As New RFunction
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -118,11 +118,12 @@ Public Class dlgView
         clsViewAllFunction = New RFunction
         clsGetObjectDataFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsAsHtmlwidgetFunction = New RFunction
 
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
 
-        clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
 
         clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
@@ -137,12 +138,15 @@ Public Class dlgView
                                                strObjectName:="last_table")
 
 
-        clsHTMLFunction.SetPackageName("sjPlot")
-        clsHTMLFunction.SetRCommand("tab_df")
-        clsHTMLFunction.AddParameter("show.type", "FALSE", iPosition:=1)
-        clsHTMLFunction.AddParameter("alternate.rows", "TRUE", iPosition:=2)
-        clsHTMLFunction.AddParameter("use.viewer", "TRUE", iPosition:=4)
-        clsHTMLFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+        clsHTMLFunction.SetPackageName("formattable")
+        clsHTMLFunction.SetRCommand("formattable")
+        clsHTMLFunction.AddParameter("align", Chr(34) & "l" & Chr(34), iPosition:=1)
+
+
+        clsAsHtmlwidgetFunction.SetPackageName("formattable")
+        clsAsHtmlwidgetFunction.SetRCommand("as.htmlwidget")
+        clsAsHtmlwidgetFunction.AddParameter("x", clsRFunctionParameter:=clsHTMLFunction, iPosition:=0)
+        clsAsHtmlwidgetFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorForView.strCurrentDataFrame,
@@ -180,7 +184,7 @@ Public Class dlgView
         ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrSelectorForView.SetRCode(clsViewAllFunction, bReset)
         ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveData.SetRCode(clsHTMLFunction, bReset)
+        ucrSaveData.SetRCode(clsAsHtmlwidgetFunction, bReset)
 
         DataFrameLength()
         ChangeFunctionParameters()
@@ -258,7 +262,7 @@ Public Class dlgView
                 ucrSaveData.Visible = False
             Else
                 clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlwidgetFunction)
                 ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveData.Visible = True
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
@@ -323,9 +327,13 @@ Public Class dlgView
             Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
             clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
         ElseIf rdoHTMLOutputWindow.Checked Then
-            Dim strPrefix As String = clsHTMLFunction.GetRObjectToAssignTo
+            Dim strPrefix As String = clsAsHtmlwidgetFunction.GetRObjectToAssignTo
             clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
         End If
     End Sub
 
+    Private Sub ucrSelectorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+    End Sub
 End Class
