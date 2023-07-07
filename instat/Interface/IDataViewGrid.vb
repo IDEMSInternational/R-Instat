@@ -25,6 +25,8 @@ Public Interface IDataViewGrid
 
     Event DeleteValuesToDataframe()
 
+    Event EditCell()
+
     Event WorksheetChanged()
 
     Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
