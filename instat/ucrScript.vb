@@ -236,7 +236,6 @@ Public Class ucrScript
     Private Sub EnableDisableButtons()
 
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
-        Dim bScriptselected = clsScriptActive.SelectedText.Length > 0
         Dim bScriptExists = clsScriptActive.TextLength > 0
 
         cmdRunLineSelection.Enabled = bScriptExists
