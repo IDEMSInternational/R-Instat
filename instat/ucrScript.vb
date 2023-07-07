@@ -257,7 +257,7 @@ Public Class ucrScript
     ''' Enables or disables all right click menu options
     ''' </summary>
     ''' <param name="bEnable">If true, enables all right click options,false otherwise</param>
-    Private Sub EnableRightClickMenuOptions(bEnable)
+    Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
         mnuUndo.Enabled = bEnable
         mnuRedo.Enabled = bEnable
         mnuCut.Enabled = bEnable
