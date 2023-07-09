@@ -24,7 +24,7 @@ Public Class dlgFindInVariableOrFilter
     Private clsGetRowsFunction As New RFunction
     Private clsGetDataFrame As New RFunction
 
-    Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs)
+    Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -115,8 +115,39 @@ Public Class dlgFindInVariableOrFilter
         End If
     End Sub
 
-    Private Sub cmdFind_Click(sender As Object, e As EventArgs)
+    Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
+        Try
+            Dim strPattern As String = ucrInputPattern.GetText
+            If strPattern <> "" Then
+                Dim lstRowNumbers As New List(Of String)
+                lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
+                lblMatching.Visible = False
 
+                If lstRowNumbers.Count <= 0 Then
+                    lblMatching.ForeColor = Color.Red
+                    lblMatching.Text = "There are no entries matching " & ucrInputPattern.GetText
+                    lblMatching.Visible = True
+                    Exit Sub
+                End If
+
+                Dim iEndRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+                Dim iRow As Integer = lstRowNumbers(iFisrtRow - 1)
+                Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
+                frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
+
+                frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
+                                                   iRow:=iRow, bCellOrRow:=rdoCell.Checked)
+
+                If lstRowNumbers.Count > iFisrtRow Then
+                    iFisrtRow += 1
+                Else
+                    iFisrtRow = 1
+                End If
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     'Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
@@ -133,12 +164,14 @@ Public Class dlgFindInVariableOrFilter
     '    End If
     'End Sub
 
-    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs)
-
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
+        sdgConstructRegexExpression.ShowDialog()
+        ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
     End Sub
 
-    Private Sub ucrSelectorFind_DataFrameChanged()
-
+    Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
+        cmdFindNext.Enabled = False
+        iFisrtRow = 1
     End Sub
 
     'Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -147,24 +180,29 @@ Public Class dlgFindInVariableOrFilter
     '    TestOkEnabled()
     'End Sub
 
-    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs)
+    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
         iFisrtRow = 1
     End Sub
 
-    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore)
-
+    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
+        clsGetRowsFunction.AddParameter("searchText", Chr(34) & ucrInputPattern.GetText() & Chr(34), iPosition:=2)
+        cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
     End Sub
 
-    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         iFisrtRow = 1
     End Sub
 
-    Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlSelect_ControlValueChanged(ucrChangedControl As ucrCore)
-
+    Private Sub ucrPnlSelect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelect.ControlValueChanged
+        If rdoCell.Checked Then
+            clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
+        Else
+            clsDummyFunction.AddParameter("select", "row", iPosition:=1)
+        End If
     End Sub
 End Class
