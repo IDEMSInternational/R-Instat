@@ -22,6 +22,7 @@ Partial Class dlgFindInVariableOrFilter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.lblMatching = New System.Windows.Forms.Label()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrChkIgnoreCase = New instat.ucrCheck()
@@ -44,13 +45,22 @@ Partial Class dlgFindInVariableOrFilter
         Me.grpSelect.SuspendLayout()
         Me.SuspendLayout()
         '
+        'lblMatching
+        '
+        Me.lblMatching.AutoSize = True
+        Me.lblMatching.Location = New System.Drawing.Point(362, 280)
+        Me.lblMatching.Name = "lblMatching"
+        Me.lblMatching.Size = New System.Drawing.Size(57, 20)
+        Me.lblMatching.TabIndex = 69
+        Me.lblMatching.Text = "Label1"
+        '
         'cmdAddkeyboard
         '
-        Me.cmdAddkeyboard.Location = New System.Drawing.Point(387, 390)
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(388, 394)
         Me.cmdAddkeyboard.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.Size = New System.Drawing.Size(150, 34)
-        Me.cmdAddkeyboard.TabIndex = 51
+        Me.cmdAddkeyboard.TabIndex = 68
         Me.cmdAddkeyboard.Text = "Add Keyboard"
         Me.cmdAddkeyboard.UseVisualStyleBackColor = True
         '
@@ -58,21 +68,21 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrChkIncludeRegularExpressions.AutoSize = True
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(9, 390)
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(10, 394)
         Me.ucrChkIncludeRegularExpressions.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(358, 34)
-        Me.ucrChkIncludeRegularExpressions.TabIndex = 50
+        Me.ucrChkIncludeRegularExpressions.TabIndex = 67
         '
         'ucrChkIgnoreCase
         '
         Me.ucrChkIgnoreCase.AutoSize = True
         Me.ucrChkIgnoreCase.Checked = False
-        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(9, 341)
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(10, 345)
         Me.ucrChkIgnoreCase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
         Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(196, 34)
-        Me.ucrChkIgnoreCase.TabIndex = 49
+        Me.ucrChkIgnoreCase.TabIndex = 66
         '
         'ucrInputPattern
         '
@@ -80,21 +90,21 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrInputPattern.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPattern.GetSetSelectedIndex = -1
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(413, 161)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(414, 158)
         Me.ucrInputPattern.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(191, 32)
-        Me.ucrInputPattern.TabIndex = 48
+        Me.ucrInputPattern.TabIndex = 65
         '
         'grpSelect
         '
         Me.grpSelect.Controls.Add(Me.rdoRow)
         Me.grpSelect.Controls.Add(Me.rdoCell)
         Me.grpSelect.Controls.Add(Me.ucrPnlSelect)
-        Me.grpSelect.Location = New System.Drawing.Point(413, 203)
+        Me.grpSelect.Location = New System.Drawing.Point(414, 200)
         Me.grpSelect.Name = "grpSelect"
         Me.grpSelect.Size = New System.Drawing.Size(200, 73)
-        Me.grpSelect.TabIndex = 47
+        Me.grpSelect.TabIndex = 64
         Me.grpSelect.TabStop = False
         Me.grpSelect.Text = "Selecting Option"
         '
@@ -132,18 +142,18 @@ Partial Class dlgFindInVariableOrFilter
         'lblFilter
         '
         Me.lblFilter.AutoSize = True
-        Me.lblFilter.Location = New System.Drawing.Point(413, 141)
+        Me.lblFilter.Location = New System.Drawing.Point(414, 138)
         Me.lblFilter.Name = "lblFilter"
         Me.lblFilter.Size = New System.Drawing.Size(48, 20)
-        Me.lblFilter.TabIndex = 46
+        Me.lblFilter.TabIndex = 63
         Me.lblFilter.Text = "Filter:"
         '
         'cmdFindNext
         '
-        Me.cmdFindNext.Location = New System.Drawing.Point(413, 326)
+        Me.cmdFindNext.Location = New System.Drawing.Point(414, 346)
         Me.cmdFindNext.Name = "cmdFindNext"
         Me.cmdFindNext.Size = New System.Drawing.Size(180, 36)
-        Me.cmdFindNext.TabIndex = 44
+        Me.cmdFindNext.TabIndex = 61
         Me.cmdFindNext.Text = "Find Next"
         Me.cmdFindNext.UseVisualStyleBackColor = True
         Me.cmdFindNext.Visible = False
@@ -157,11 +167,11 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoVariable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVariable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoVariable.Location = New System.Drawing.Point(115, 10)
+        Me.rdoVariable.Location = New System.Drawing.Point(107, 14)
         Me.rdoVariable.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoVariable.Name = "rdoVariable"
         Me.rdoVariable.Size = New System.Drawing.Size(202, 40)
-        Me.rdoVariable.TabIndex = 37
+        Me.rdoVariable.TabIndex = 54
         Me.rdoVariable.Text = "Variable"
         Me.rdoVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoVariable.UseVisualStyleBackColor = True
@@ -174,11 +184,11 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoInFilter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoInFilter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoInFilter.Location = New System.Drawing.Point(314, 10)
+        Me.rdoInFilter.Location = New System.Drawing.Point(306, 14)
         Me.rdoInFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoInFilter.Name = "rdoInFilter"
         Me.rdoInFilter.Size = New System.Drawing.Size(202, 40)
-        Me.rdoInFilter.TabIndex = 38
+        Me.rdoInFilter.TabIndex = 55
         Me.rdoInFilter.Text = "In Filter"
         Me.rdoInFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInFilter.UseVisualStyleBackColor = True
@@ -186,11 +196,11 @@ Partial Class dlgFindInVariableOrFilter
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(107, 8)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(99, 12)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(417, 52)
-        Me.ucrPnlOptions.TabIndex = 36
+        Me.ucrPnlOptions.TabIndex = 53
         '
         'ucrSelectorFind
         '
@@ -198,49 +208,49 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrSelectorFind.bDropUnusedFilterLevels = False
         Me.ucrSelectorFind.bShowHiddenColumns = False
         Me.ucrSelectorFind.bUseCurrentFilter = True
-        Me.ucrSelectorFind.Location = New System.Drawing.Point(9, 61)
+        Me.ucrSelectorFind.Location = New System.Drawing.Point(10, 65)
         Me.ucrSelectorFind.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFind.Name = "ucrSelectorFind"
         Me.ucrSelectorFind.Size = New System.Drawing.Size(320, 274)
-        Me.ucrSelectorFind.TabIndex = 39
+        Me.ucrSelectorFind.TabIndex = 56
         '
         'ucrReceiverVariable
         '
         Me.ucrReceiverVariable.AutoSize = True
         Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(413, 104)
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(414, 101)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
-        Me.ucrReceiverVariable.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverVariable.Size = New System.Drawing.Size(191, 30)
         Me.ucrReceiverVariable.strNcFilePath = ""
-        Me.ucrReceiverVariable.TabIndex = 41
+        Me.ucrReceiverVariable.TabIndex = 58
         Me.ucrReceiverVariable.ucrSelector = Nothing
         '
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(413, 141)
+        Me.lblPattern.Location = New System.Drawing.Point(414, 138)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(65, 20)
-        Me.lblPattern.TabIndex = 42
+        Me.lblPattern.TabIndex = 59
         Me.lblPattern.Text = "Pattern:"
         '
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(413, 81)
+        Me.lblVariable.Location = New System.Drawing.Point(414, 78)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(71, 20)
-        Me.lblVariable.TabIndex = 40
+        Me.lblVariable.TabIndex = 57
         Me.lblVariable.Text = "Variable:"
         '
         'cmdFind
         '
-        Me.cmdFind.Location = New System.Drawing.Point(413, 286)
+        Me.cmdFind.Location = New System.Drawing.Point(414, 306)
         Me.cmdFind.Name = "cmdFind"
         Me.cmdFind.Size = New System.Drawing.Size(180, 36)
-        Me.cmdFind.TabIndex = 43
+        Me.cmdFind.TabIndex = 60
         Me.cmdFind.Text = "Find"
         Me.cmdFind.UseVisualStyleBackColor = True
         '
@@ -248,13 +258,13 @@ Partial Class dlgFindInVariableOrFilter
         '
         Me.ucrReceiverFilter.AutoSize = True
         Me.ucrReceiverFilter.frmParent = Me
-        Me.ucrReceiverFilter.Location = New System.Drawing.Point(413, 163)
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(414, 160)
         Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
         Me.ucrReceiverFilter.Selector = Nothing
         Me.ucrReceiverFilter.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverFilter.strNcFilePath = ""
-        Me.ucrReceiverFilter.TabIndex = 45
+        Me.ucrReceiverFilter.TabIndex = 62
         Me.ucrReceiverFilter.ucrSelector = Nothing
         '
         'dlgFindInVariableOrFilter
@@ -263,6 +273,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(625, 440)
+        Me.Controls.Add(Me.lblMatching)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.ucrChkIgnoreCase)
@@ -290,6 +301,7 @@ Partial Class dlgFindInVariableOrFilter
 
     End Sub
 
+    Friend WithEvents lblMatching As Label
     Friend WithEvents cmdAddkeyboard As Button
     Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents ucrChkIgnoreCase As ucrCheck

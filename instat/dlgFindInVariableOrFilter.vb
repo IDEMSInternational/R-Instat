@@ -24,7 +24,7 @@ Public Class dlgFindInVariableOrFilter
     Private clsGetRowsFunction As New RFunction
     Private clsGetDataFrame As New RFunction
 
-    Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) 
+    Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -115,7 +115,7 @@ Public Class dlgFindInVariableOrFilter
         End If
     End Sub
 
-    Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
+    Private Sub cmdFind_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -133,11 +133,11 @@ Public Class dlgFindInVariableOrFilter
     '    End If
     'End Sub
 
-    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
+    Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
+    Private Sub ucrSelectorFind_DataFrameChanged()
 
     End Sub
 
@@ -147,24 +147,24 @@ Public Class dlgFindInVariableOrFilter
     '    TestOkEnabled()
     'End Sub
 
-    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
+    Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs)
         cmdFindNext.Enabled = False
         iFisrtRow = 1
     End Sub
 
-    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
+    Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore)
 
     End Sub
 
-    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
+    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore)
         iFisrtRow = 1
     End Sub
 
-    Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
+    Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlSelect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelect.ControlValueChanged
+    Private Sub ucrPnlSelect_ControlValueChanged(ucrChangedControl As ucrCore)
 
     End Sub
 End Class
