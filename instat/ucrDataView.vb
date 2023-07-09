@@ -89,6 +89,7 @@ Public Class ucrDataView
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
         AddHandler _grid.EditCell, AddressOf EditCell
+        AddHandler _grid.FindRow, AddressOf FindRow
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -908,6 +909,11 @@ Public Class ucrDataView
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
+    Public Sub GoToSpecificRowPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
@@ -921,8 +927,7 @@ Public Class ucrDataView
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
 
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificRowPage(sdgWindowNumber.iPage)
         End If
     End Sub
 
@@ -982,4 +987,14 @@ Public Class ucrDataView
     Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
         EditCell()
     End Sub
+
+    Private Sub FindRow()
+        dlgFindInVariableOrFilter.ShowDialog()
+    End Sub
+
+    Public Sub SearchInGrid(rowNumbers As List(Of String), strVariable As String, Optional iRow As Integer = 0,
+                           Optional bCellOrRow As Boolean = False)
+        _grid.SearchInGrid(rowNumbers, strVariable, iRow, bCellOrRow)
+    End Sub
+
 End Class

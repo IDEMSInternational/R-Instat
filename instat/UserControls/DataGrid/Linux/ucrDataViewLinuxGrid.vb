@@ -31,6 +31,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event EditCell() Implements IDataViewGrid.EditCell
 
+    Public Event FindRow() Implements IDataViewGrid.FindRow
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -153,5 +155,9 @@ Public Class ucrDataViewLinuxGrid
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
+    End Sub
+
+    Public Sub SearchInGrid(rowNumbers As List(Of String), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
     End Sub
 End Class
