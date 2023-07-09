@@ -30,6 +30,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event FindRow() Implements IDataViewGrid.FindRow
 
+    Public Event EditCell() Implements IDataViewGrid.EditCell
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -295,4 +297,13 @@ Public Class ucrDataViewReoGrid
             End If
         End If
     End Sub
+
+    Private Sub Worksheet_AfterCellKeyDownEventArgs(sender As Object, e As KeyEventArgs) Handles grdData.KeyDown
+
+        If (e.KeyCode And Not Keys.Modifiers) = Keys.E AndAlso e.Modifiers = Keys.Control Then
+            'e.IsCancelled = True
+            RaiseEvent EditCell()
+        End If
+    End Sub
+
 End Class

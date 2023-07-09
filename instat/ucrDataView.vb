@@ -89,6 +89,7 @@ Public Class ucrDataView
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
         AddHandler _grid.FindRow, AddressOf FindRow
+        AddHandler _grid.EditCell, AddressOf EditCell
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -988,8 +989,13 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+    Private Sub EditCell()
+        dlgEdit.SetCurrentDataframe(GetCurrentDataFrameNameFocus)
         dlgEdit.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.GetCellValue(GetFirstSelectedRow() - 1, GetFirstSelectedColumnName), GetFirstSelectedRow())
         dlgEdit.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+        EditCell()
     End Sub
 End Class

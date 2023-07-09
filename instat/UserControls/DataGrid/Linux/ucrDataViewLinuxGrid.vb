@@ -29,7 +29,10 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
 
+
     Public Event FindRow() Implements IDataViewGrid.FindRow
+
+    Public Event EditCell() Implements IDataViewGrid.EditCell
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
