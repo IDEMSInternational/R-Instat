@@ -418,7 +418,7 @@ Public Class ucrOutputPage
     Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
         Select Case element.OutputType
             Case OutputType.Script
-                FillRichTextBoxWithFormatedRScript(richText, element.FormattedRScript)
+                FillRichTextWithRScriptBasedOnSettings(richText, element.FormattedRScript)
             Case OutputType.TextOutput
                 'todo. check if output is file or not. if file, read the contents of the file
                 AddFormatedTextToRichTextBox(richText, element.Output, OutputFont.ROutputFont, OutputFont.ROutputColour)
