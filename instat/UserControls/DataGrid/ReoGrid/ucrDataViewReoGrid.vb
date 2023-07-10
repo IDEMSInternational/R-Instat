@@ -298,12 +298,11 @@ Public Class ucrDataViewReoGrid
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
             Dim iRowIndex = GetRowIndex(currSheet, iRow)
             Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
+            ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
             If bCellOrRow Then
-                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
                 SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
                                      colIndex:=iColIndex, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
             Else
-                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
                 SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
                                      colIndex:=currSheet.ColumnCount, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
             End If
