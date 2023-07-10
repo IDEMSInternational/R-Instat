@@ -76,6 +76,14 @@ Public Class ucrDataViewLinuxGrid
         Return tcTabs.SelectedTab.Text
     End Function
 
+    Public Function GetFirstRowHeader() As String Implements IDataViewGrid.GetFirstRowHeader
+
+    End Function
+
+    Public Function GetLastRowHeader() As String Implements IDataViewGrid.GetLastRowHeader
+
+    End Function
+
     Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
         Return tcTabs.TabPages.Count()
     End Function

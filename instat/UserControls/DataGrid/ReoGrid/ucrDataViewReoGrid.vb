@@ -125,6 +125,14 @@ Public Class ucrDataViewReoGrid
         Return lstColumns
     End Function
 
+    Public Function GetFirstRowHeader() As String Implements IDataViewGrid.GetFirstRowHeader
+        Return grdData.CurrentWorksheet.RowHeaders(0).Text
+    End Function
+
+    Public Function GetLastRowHeader() As String Implements IDataViewGrid.GetLastRowHeader
+        Return grdData.CurrentWorksheet.RowHeaders(grdData.CurrentWorksheet.RowCount - 1).Text
+    End Function
+
     Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
         Return grdData.Worksheets.Count
     End Function
@@ -301,6 +309,4 @@ Public Class ucrDataViewReoGrid
             End If
         End If
     End Sub
-
-
 End Class

@@ -42,6 +42,10 @@ Public Interface IDataViewGrid
 
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 
+    Function GetFirstRowHeader() As String
+
+    Function GetLastRowHeader() As String
+
     Function GetWorksheetCount() As Integer
 
 End Interface

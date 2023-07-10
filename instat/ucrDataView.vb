@@ -246,6 +246,14 @@ Public Class ucrDataView
         RefreshDisplayInformation()
     End Sub
 
+    Public Function GetFirstRowHeader() As String
+        Return _grid.GetFirstRowHeader
+    End Function
+
+    Public Function GetLastRowHeader() As String
+        Return _grid.GetLastRowHeader
+    End Function
+
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function

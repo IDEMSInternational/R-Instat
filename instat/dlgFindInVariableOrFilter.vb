@@ -59,7 +59,7 @@ Public Class dlgFindInVariableOrFilter
         ucrReceiverVariable.bUseFilteredData = False
         ucrReceiverVariable.Selector = ucrSelectorFind
 
-        ucrInputPattern.SetItems({"TRUE", "FALSE"})
+        ucrInputPattern.SetItems({"NA", "TRUE", "FALSE"})
 
         ucrChkIgnoreCase.SetText("Ignore Case")
         ucrChkIgnoreCase.SetParameter(New RParameter("ignore_case", 3))
@@ -81,7 +81,7 @@ Public Class dlgFindInVariableOrFilter
         clsGetDataFrame = New RFunction
 
         ucrSelectorFind.Reset()
-        ucrInputPattern.SetName("TRUE")
+        ucrInputPattern.SetName("")
         lblMatching.Visible = False
 
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
@@ -130,21 +130,27 @@ Public Class dlgFindInVariableOrFilter
                     Exit Sub
                 End If
 
-                Dim iEndRow As Integer = frmMain.ucrDataViewer.GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
+                Dim iStartRowHeader As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
+                Dim iEndRowHeader As Integer = frmMain.ucrDataViewer.GetLastRowHeader
+                For i As Integer = 1 To lstRowNumbers.Count
+                    Dim iRowIndex As Integer = lstRowNumbers(i - 1)
+                    If ((iRowIndex >= iStartRowHeader AndAlso iRowIndex <= iEndRowHeader) OrElse iRowIndex > iEndRowHeader) AndAlso
+                        (CInt(lstRowNumbers(iFisrtRow - 1)) < iRowIndex) Then
+                        iFisrtRow = i
+                        Exit For
+                    End If
+                Next
+                If lstRowNumbers.Count = iFisrtRow Then
+                    iFisrtRow = 1
+                End If
+
                 Dim iRow As Integer = lstRowNumbers(iFisrtRow - 1)
                 Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
                 frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
-
                 frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
-                                                   iRow:=iRow, bCellOrRow:=rdoCell.Checked)
+                                                       iRow:=iRow, bCellOrRow:=rdoCell.Checked)
 
-                If lstRowNumbers.Count > iFisrtRow Then
-                    iFisrtRow += 1
-                Else
-                    iFisrtRow = 1
-                End If
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
