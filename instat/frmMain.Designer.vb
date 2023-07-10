@@ -1005,7 +1005,7 @@ Partial Class frmMain
         Me.mnuDescribeMultivariateClusterAnalysis.Name = "mnuDescribeMultivariateClusterAnalysis"
         Me.mnuDescribeMultivariateClusterAnalysis.Size = New System.Drawing.Size(203, 22)
         Me.mnuDescribeMultivariateClusterAnalysis.Text = "Cluster Analysis..."
-        Me.mnuDescribeMultivariateClusterAnalysis.ToolTipText = "Partitioning or Hierarchical "
+        Me.mnuDescribeMultivariateClusterAnalysis.ToolTipText = "Partitioning or Hierarchical"
         '
         'ToolStripSeparator13
         '
