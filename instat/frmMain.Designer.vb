@@ -871,7 +871,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificLineSmoothPlot.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificLineSmoothPlot.Tag = "Line_Plot..."
         Me.mnuDescribeSpecificLineSmoothPlot.Text = "Line Plot..."
-        Me.mnuDescribeSpecificLineSmoothPlot.ToolTipText = " Line Plots, Smoothed Plots, Dumbbell and Slope Plots"
+        Me.mnuDescribeSpecificLineSmoothPlot.ToolTipText = "Line Plots, Smoothed Plots, Dumbbell and Slope Plots"
         '
         'ToolStripSeparator26
         '
