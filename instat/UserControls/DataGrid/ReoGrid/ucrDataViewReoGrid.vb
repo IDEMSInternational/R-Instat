@@ -28,6 +28,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
 
+    Public Event EditCell() Implements IDataViewGrid.EditCell
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -86,7 +88,9 @@ Public Class ucrDataViewReoGrid
             End If
         Next
 
-        grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
+            grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
+        End If
 
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.
@@ -199,6 +203,14 @@ Public Class ucrDataViewReoGrid
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
             e.IsCancelled = True
             RaiseEvent DeleteValueToDataframe()
+        End If
+    End Sub
+
+    Private Sub Worksheet_AfterCellKeyDownEventArgs(sender As Object, e As KeyEventArgs) Handles grdData.KeyDown
+
+        If (e.KeyCode And Not Keys.Modifiers) = Keys.E AndAlso e.Modifiers = Keys.Control Then
+            'e.IsCancelled = True
+            RaiseEvent EditCell()
         End If
     End Sub
 
