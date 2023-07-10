@@ -110,4 +110,8 @@ Public Class frmMaximiseOutput
         End Using
 
     End Sub
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "590")
+    End Sub
+
 End Class

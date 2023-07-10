@@ -26,6 +26,7 @@ Partial Class frmMaximiseOutput
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.panelControl = New System.Windows.Forms.Panel()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,11 +64,21 @@ Partial Class frmMaximiseOutput
         Me.panelControl.Size = New System.Drawing.Size(528, 262)
         Me.panelControl.TabIndex = 1
         '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(46, 0)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(55, 23)
+        Me.cmdHelp.TabIndex = 4
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'frmMaximiseOutput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(533, 292)
+        Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.panelControl)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -86,4 +97,5 @@ Partial Class frmMaximiseOutput
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuSave As ToolStripMenuItem
     Friend WithEvents panelControl As Panel
+    Friend WithEvents cmdHelp As Button
 End Class
