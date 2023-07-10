@@ -1007,7 +1007,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
-        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrNudTitleSize.ControlValueChanged
+        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
@@ -1236,7 +1236,7 @@ Public Class sdgPlots
         End Select
     End Sub
 
-    Private Sub ucrChkTag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTag.ControlValueChanged, ucrInputTag.ControlValueChanged, ucrNudTagSize.ControlValueChanged
+    Private Sub ucrChkTag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTag.ControlValueChanged, ucrInputTag.ControlValueChanged
         If ucrChkTag.Checked AndAlso Not ucrInputTag.IsEmpty Then
             clsLabsFunction.AddParameter("tag", Chr(34) & ucrInputTag.GetText & Chr(34))
             clsThemeFunction.AddParameter("plot.tag", clsRFunctionParameter:=clsPlotElementTagFunction)
@@ -1246,7 +1246,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrNudLegendSize.ControlValueChanged
+    Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged
         If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty Then
             clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
             clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
@@ -1258,4 +1258,23 @@ Public Class sdgPlots
         End If
     End Sub
 
+    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
+        clsPlotElementCaptionFunction.AddParameter("size", ucrNudCaptionSize.GetText)
+    End Sub
+
+    Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
+        clsPlotElementTitleFunction.AddParameter("size", ucrNudTitleSize.GetText)
+    End Sub
+
+    Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
+        clsPlotElementSubTitleFunction.AddParameter("size", ucrNudSubTitleSize.GetText)
+    End Sub
+
+    Private Sub ucrNudTagSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTagSize.ControlValueChanged
+        clsPlotElementTagFunction.AddParameter("size", ucrNudTagSize.GetText)
+    End Sub
+
+    Private Sub ucrNudLegendSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudLegendSize.ControlValueChanged
+        clsPlotLegendTitleFunction.AddParameter("size", ucrNudLegendSize.GetText)
+    End Sub
 End Class
