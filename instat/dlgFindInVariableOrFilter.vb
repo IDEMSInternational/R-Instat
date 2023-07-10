@@ -156,20 +156,6 @@ Public Class dlgFindInVariableOrFilter
         End Try
     End Sub
 
-    'Private Sub cmdFindNext_Click(sender As Object, e As EventArgs) Handles cmdFindNext.Click
-    '    If iClick <= lstRowNumbers.Count Then
-    '        If iFindNext > 1 Then
-    '            iClick = lstRowNumbers.IndexOf(iFindNext)
-    '            iFindNext = 1
-    '        End If
-    '        iClick += 1
-    '        frmMain.ucrDataViewer.SearchInGrid(lstRows:=lstRowNumbers,
-    '                               strVariable:=ucrReceiverVariable.GetVariableNames,
-    '                               bFindNext:=True,
-    '                               iClick:=iClick)
-    '    End If
-    'End Sub
-
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
         ucrInputPattern.SetName(sdgConstructRegexExpression.ucrReceiverForRegex.GetText())
@@ -180,19 +166,17 @@ Public Class dlgFindInVariableOrFilter
         iFisrtRow = 1
     End Sub
 
-    'Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '    SetDefaults()
-    '    SetRcodeForControls(True)
-    '    TestOkEnabled()
-    'End Sub
-
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
         iFisrtRow = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
-        clsGetRowsFunction.AddParameter("searchText", Chr(34) & ucrInputPattern.GetText() & Chr(34), iPosition:=2)
+        Dim strPattern As String = ucrInputPattern.GetText
+        If ucrInputPattern.GetText <> "NA" Then
+            strPattern = Chr(34) & strPattern & Chr(34)
+        End If
+        clsGetRowsFunction.AddParameter("searchText", strPattern, iPosition:=2)
         cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
     End Sub
 
