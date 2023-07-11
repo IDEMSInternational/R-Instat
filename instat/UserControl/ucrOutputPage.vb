@@ -420,8 +420,15 @@ Public Class ucrOutputPage
             Case OutputType.Script
                 FillRichTextWithRScriptBasedOnSettings(richText, element.FormattedRScript)
             Case OutputType.TextOutput
-                'todo. check if output is file or not. if file, read the contents of the file
-                AddFormatedTextToRichTextBox(richText, element.Output, OutputFont.ROutputFont, OutputFont.ROutputColour)
+                Dim strOutput As String = ""
+                If element.IsFile Then
+                    For Each strLine As String In IO.File.ReadLines(element.Output)
+                        strOutput = strOutput & strLine & Environment.NewLine
+                    Next strLine
+                Else
+                    strOutput = element.Output
+                End If
+                AddFormatedTextToRichTextBox(richText, strOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
             Case OutputType.ImageOutput
                 Clipboard.Clear()
                 'todo. instead of copy paste, add image to rtf directly from file?
