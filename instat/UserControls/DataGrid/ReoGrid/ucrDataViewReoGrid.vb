@@ -270,7 +270,7 @@ Public Class ucrDataViewReoGrid
         currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
     End Sub
 
-    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of String), colIndex As Integer, bCellOrRow As Boolean, color As Color)
+    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of Integer), colIndex As Integer, bApplyToRow As Boolean, color As Color)
         ' Create a new style object for the row background color
         Dim rowStyle As WorksheetRangeStyle = New WorksheetRangeStyle With {
             .Flag = PlainStyleFlag.BackColor,
