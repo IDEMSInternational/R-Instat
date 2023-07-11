@@ -77,36 +77,47 @@ Public Class clsOutputLogger
             Exit Sub
         End If
 
-        Dim outputType As OutputType
-        If String.IsNullOrEmpty(strOutput) Then
-            outputType = OutputType.Script
-        ElseIf Not bAsFile Then
-            outputType = OutputType.TextOutput
-        Else
-            Dim strFileExtension As String = Path.GetExtension(strOutput).ToLower
-            Select Case strFileExtension
-                Case ".png"
-                    outputType = OutputType.ImageOutput
-                Case ".html"
-                    outputType = OutputType.HtmlOutput
-                Case ".txt"
-                    outputType = OutputType.TextOutput
-                Case Else
-                    MessageBox.Show("The file type to be added is currently not suported",
-                                "Developer Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error)
-                    Exit Sub
-            End Select
+        'add the R script as an output element
+        Dim rScriptElement As New clsOutputElement
+        rScriptElement.SetContent(strScript, OutputType.Script, "")
+        _outputElements.Add(rScriptElement)
+        'raise event for output pages
+        RaiseEvent NewOutputAdded(rScriptElement, False)
+
+
+        If Not String.IsNullOrEmpty(strOutput) Then
+            Dim outputElement As New clsOutputElement
+            Dim outputType As OutputType
+            If bAsFile Then
+                Dim strFileExtension As String = Path.GetExtension(strOutput).ToLower
+                Select Case strFileExtension
+                    Case ".png"
+                        outputType = OutputType.ImageOutput
+                    Case ".html"
+                        outputType = OutputType.HtmlOutput
+                    Case ".txt"
+                        outputType = OutputType.TextOutput
+                    Case Else
+                        MessageBox.Show("The file type to be added is currently not suported",
+                                    "Developer Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error)
+                        Exit Sub
+                End Select
+            Else
+                outputType = OutputType.TextOutput
+            End If
+
+            'add the output with it's R script as another output element
+            outputElement.SetContent("", outputType, strOutput)
+            '_outputElements.Add(outputElement)
+            'raise event for output pages
+            RaiseEvent NewOutputAdded(outputElement, bDisplayOutputInExternalViewer)
+
         End If
 
-        Dim outputElement As New clsOutputElement
-        outputElement.SetContent(strScript, outputType, strOutput)
 
-        _outputElements.Add(outputElement)
 
-        'raise event for output pages
-        RaiseEvent NewOutputAdded(outputElement, bDisplayOutputInExternalViewer)
     End Sub
 
     ''' <summary>
