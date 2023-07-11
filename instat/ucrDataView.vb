@@ -1000,7 +1000,7 @@ Public Class ucrDataView
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of String), strVariable As String, Optional iRow As Integer = 0,
+    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strVariable As String, Optional iRow As Integer = 0,
                            Optional bCellOrRow As Boolean = False)
         _grid.SearchInGrid(rowNumbers, strVariable, iRow, bCellOrRow)
     End Sub

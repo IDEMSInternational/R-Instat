@@ -250,7 +250,7 @@ Public Class ucrDataViewReoGrid
         Return -1
     End Function
 
-    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of Integer)) As List(Of String)
+    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of Integer)) As List(Of Integer)
         Dim lstRowsIndexes As New List(Of Integer)
         If currWorkSheet IsNot Nothing Then
             For i As Integer = 0 To lstRows.Count - 1
@@ -281,7 +281,7 @@ Public Class ucrDataViewReoGrid
         For Each rowNumber As Integer In rowNumbers
             ' Check if the row index is within the valid range
             If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
-                If bCellOrRow Then
+                If bApplyToRow Then
                     ' Apply the row style to the entire row
                     currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
                 Else
@@ -291,20 +291,22 @@ Public Class ucrDataViewReoGrid
         Next
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of String), strColumn As String, Optional iRow As Integer = 0,
+    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
                             Optional bApplyToRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
         Dim currSheet = grdData.CurrentWorksheet
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
-            Dim iRowIndex = as Integer GetRowIndex(currSheet, iRow)
+            Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
             Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
-            ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
-            If bCellOrRow Then
-                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
-                                     colIndex:=iColIndex, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
-            Else
-                SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
-                                     colIndex:=currSheet.ColumnCount, bCellOrRow:=bCellOrRow, color:=Color.LightGreen)
+            If iRowIndex > -1 AndAlso iColIndex > -1 Then
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
+                If bApplyToRow Then
+                    SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
+                                         colIndex:=iColIndex, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
+                Else
+                    SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
+                                         colIndex:=currSheet.ColumnCount, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
+                End If
             End If
         End If
     End Sub

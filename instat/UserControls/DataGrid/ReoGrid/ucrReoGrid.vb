@@ -231,8 +231,9 @@ Public MustInherit Class ucrReoGrid
             If strColumnHeader.Contains("(") Then
                 strColumnHeader = strColumnHeader.Split("(")(0)
             End If
-            If strColumnHeader.Trim = strColumn Then
-                Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow) + 1
+            Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow) + 1
+            If strColumnHeader.Trim = strColumn _
+                AndAlso iRowIndex > -1 Then
                 Return grdData.CurrentWorksheet(iRowIndex, i).ToString()
             End If
         Next

@@ -19,7 +19,8 @@ Imports RDotNet
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iFirstRow As Integer
+    Private iFisrtRow As Integer
+    Private iCountClick As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
     Private clsGetDataFrameFunction As New RFunction
@@ -78,7 +79,7 @@ Public Class dlgFindInVariableOrFilter
     Private Sub SetDefaults()
         clsDummyFunction = New RFunction
         clsGetRowsFunction = New RFunction
-        clsGetDataFrame = New RFunction
+        clsGetDataFrameFunction = New RFunction
 
         ucrSelectorFind.Reset()
         ucrInputPattern.SetName("")
@@ -87,10 +88,10 @@ Public Class dlgFindInVariableOrFilter
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
 
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsGetRowsFunction.SetRCommand("getRowHeadersWithText")
-        clsGetRowsFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0)
+        clsGetRowsFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
         clsGetRowsFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)
         clsGetRowsFunction.AddParameter("use_regex", "FALSE", iPosition:=4)
 
@@ -99,7 +100,7 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorFind.SetRCode(clsGetDataFrame, bReset)
+        ucrSelectorFind.SetRCode(clsGetDataFrameFunction, bReset)
         ucrReceiverVariable.SetRCode(clsGetRowsFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsGetRowsFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsGetRowsFunction, bReset)
@@ -108,7 +109,7 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub TestOkEnabled()
-        cmdFind.Enabled =  Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty
+        cmdFind.Enabled = Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
@@ -116,38 +117,40 @@ Public Class dlgFindInVariableOrFilter
             If String.IsNullOrEmpty(ucrInputPattern.GetText) Then
                 Exit Sub
             End If
-                Dim lstRowNumbers As New List(Of String)
-                lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
-                lblMatching.Visible = False
+            Dim lstRowNumbers As New List(Of Integer)
+            lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsInteger.ToList
+            lblMatching.Visible = False
 
-                If lstRowNumbers.Count <= 0 Then
-                    lblMatching.ForeColor = Color.Red
-                    lblMatching.Text = "There are no entries matching " & ucrInputPattern.GetText
-                    lblMatching.Visible = True
-                    Exit Sub
-                End If
-
-                Dim iStartRowHeader As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
-                Dim iEndRowHeader As Integer = frmMain.ucrDataViewer.GetLastRowHeader
-                For i As Integer = 1 To lstRowNumbers.Count
-                    Dim iRowIndex As Integer = lstRowNumbers(i - 1)
-                    If iRowIndex >= iStartRowHeader \
-                        AndAlso CInt(lstRowNumbers(iFisrtRow - 1)) < iRowIndex Then
-                        iFisrtRow = i
-                        Exit For
-                    End If
-                Next
-                If lstRowNumbers.Count = iFisrtRow Then
-                    iFisrtRow = 1
-                End If
-
-                Dim iRow As Integer = lstRowNumbers(iFisrtRow - 1)
-                Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
-                frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
-                frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
-                                                       iRow:=iRow, bCellOrRow:=rdoCell.Checked)
-
+            If lstRowNumbers.Count <= 0 Then
+                lblMatching.ForeColor = Color.Red
+                lblMatching.Text = "There are no entries matching " & ucrInputPattern.GetText
+                lblMatching.Visible = True
+                Exit Sub
             End If
+
+            Dim iStartRowHeader As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
+            Dim iEndRowHeader As Integer = frmMain.ucrDataViewer.GetLastRowHeader
+            ' Iterate over the list of row numbers to find the page where the row is displayed.
+            For i As Integer = 1 To lstRowNumbers.Count
+                Dim iRowIndex As Integer = lstRowNumbers(i - 1)
+                If iRowIndex >= iStartRowHeader _
+                        AndAlso CInt(lstRowNumbers(iFisrtRow - 1)) < iRowIndex Then
+                    iFisrtRow = i
+                    Exit For
+                End If
+            Next
+
+            iCountClick += 1
+            If iFisrtRow < iCountClick Then
+                iFisrtRow = 1
+                iCountClick = 1
+            End If
+
+            Dim iRow As Integer = lstRowNumbers(iFisrtRow - 1)
+            Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
+            frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
+            frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
+                                                       iRow:=iRow, bCellOrRow:=rdoCell.Checked)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -161,11 +164,13 @@ Public Class dlgFindInVariableOrFilter
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
         iFisrtRow = 1
+        iCountClick = 1
     End Sub
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
         iFisrtRow = 1
+        iCountClick = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
@@ -179,6 +184,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         iFisrtRow = 1
+        iCountClick = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
