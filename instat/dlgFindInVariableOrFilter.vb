@@ -22,7 +22,7 @@ Public Class dlgFindInVariableOrFilter
     Private iFirstRow As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
-    Private clsGetDataFrame As New RFunction
+    Private clsGetDataFrameFunction As New RFunction
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
