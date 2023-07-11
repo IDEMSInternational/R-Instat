@@ -292,7 +292,7 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Public Sub SearchInGrid(rowNumbers As List(Of String), strColumn As String, Optional iRow As Integer = 0,
-                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+                            Optional bApplyToRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
         Dim currSheet = grdData.CurrentWorksheet
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
