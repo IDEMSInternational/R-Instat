@@ -250,8 +250,8 @@ Public Class ucrDataViewReoGrid
         Return -1
     End Function
 
-    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of String)) As List(Of String)
-        Dim lstRowsIndexes As New List(Of String)
+    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of Integer)) As List(Of String)
+        Dim lstRowsIndexes As New List(Of Integer)
         If currWorkSheet IsNot Nothing Then
             For i As Integer = 0 To lstRows.Count - 1
                 For j As Integer = 0 To currWorkSheet.Rows - 1
