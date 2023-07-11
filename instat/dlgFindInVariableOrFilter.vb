@@ -112,6 +112,15 @@ Public Class dlgFindInVariableOrFilter
         cmdFind.Enabled = Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty
     End Sub
 
+    Private Function GetIndexInList(iValue As Integer, lstOfRows As List(Of Integer)) As Integer
+        For i As Integer = 0 To lstOfRows.Count - 1
+            If lstOfRows(i) = iValue Then
+                Return i
+            End If
+        Next
+        Return -1
+    End Function
+
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
             If String.IsNullOrEmpty(ucrInputPattern.GetText) Then
@@ -130,18 +139,21 @@ Public Class dlgFindInVariableOrFilter
 
             Dim iStartRowHeader As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
             Dim iEndRowHeader As Integer = frmMain.ucrDataViewer.GetLastRowHeader
+            Dim iRowValue As Integer = CInt(lstRowNumbers(iFisrtRow - 1))
             ' Iterate over the list of row numbers to find the page where the row is displayed.
             For i As Integer = 1 To lstRowNumbers.Count
                 Dim iRowIndex As Integer = lstRowNumbers(i - 1)
                 If iRowIndex >= iStartRowHeader _
-                        AndAlso CInt(lstRowNumbers(iFisrtRow - 1)) < iRowIndex Then
+                        AndAlso iRowValue < iRowIndex Then
                     iFisrtRow = i
                     Exit For
                 End If
             Next
 
-            iCountClick += 1
-            If iFisrtRow < iCountClick Then
+            If CInt(lstRowNumbers(iFisrtRow - 1)) = lstRowNumbers.Max _
+                                AndAlso iFisrtRow > iCountClick Then
+                iCountClick = iFisrtRow
+            ElseIf iFisrtRow < iCountClick Then
                 iFisrtRow = 1
                 iCountClick = 1
             End If
@@ -151,6 +163,7 @@ Public Class dlgFindInVariableOrFilter
             frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
             frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
                                                        iRow:=iRow, bCellOrRow:=rdoCell.Checked)
+            iCountClick += 1
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
