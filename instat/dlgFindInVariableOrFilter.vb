@@ -150,7 +150,7 @@ Public Class dlgFindInVariableOrFilter
                 End If
             Next
 
-            If CInt(lstRowNumbers(iFisrtRow - 1)) = lstRowNumbers.Max _
+            If iRowValue = lstRowNumbers.Max _
                                 AndAlso iFisrtRow > iCountClick Then
                 iCountClick = iFisrtRow
             ElseIf iFisrtRow < iCountClick Then
