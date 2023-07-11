@@ -1701,6 +1701,7 @@ Public Class ucrGeom
         clsgeom_ribbon.AddLayerParameter("size", "numeric", "1")
         clsgeom_ribbon.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_ribbon.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_ribbon.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_ribbon.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_ribbon.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", "x", "y"})
         clsgeom_ribbon.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
