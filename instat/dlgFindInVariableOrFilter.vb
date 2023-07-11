@@ -135,8 +135,8 @@ Public Class dlgFindInVariableOrFilter
                 Dim iEndRowHeader As Integer = frmMain.ucrDataViewer.GetLastRowHeader
                 For i As Integer = 1 To lstRowNumbers.Count
                     Dim iRowIndex As Integer = lstRowNumbers(i - 1)
-                    If ((iRowIndex >= iStartRowHeader AndAlso iRowIndex <= iEndRowHeader) OrElse iRowIndex > iEndRowHeader) AndAlso
-                        (CInt(lstRowNumbers(iFisrtRow - 1)) < iRowIndex) Then
+                    If iRowIndex >= iStartRowHeader \
+                        AndAlso CInt(lstRowNumbers(iFisrtRow - 1)) < iRowIndex Then
                         iFisrtRow = i
                         Exit For
                     End If
