@@ -19,7 +19,7 @@ Imports RDotNet
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iFisrtRow As Integer
+    Private iFirstRow As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
     Private clsGetDataFrame As New RFunction
