@@ -108,11 +108,7 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty Then
-            cmdFind.Enabled = True
-        Else
-            cmdFind.Enabled = False
-        End If
+        cmdFind.Enabled =  Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
