@@ -117,8 +117,9 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
-            Dim strPattern As String = ucrInputPattern.GetText
-            If strPattern <> "" Then
+            If String.IsNullOrEmpty(ucrInputPattern.GetText) Then
+                Exit Sub
+            End If
                 Dim lstRowNumbers As New List(Of String)
                 lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
                 lblMatching.Visible = False
