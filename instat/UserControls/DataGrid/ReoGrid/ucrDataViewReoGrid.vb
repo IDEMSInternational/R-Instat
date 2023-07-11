@@ -191,7 +191,6 @@ Public Class ucrDataViewReoGrid
         RefreshSingleCell(e.Cell.Column, e.Cell.Row)
     End Sub
 
-
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         e.IsCancelled = True 'prevents pasted data from being added directly into the data view
         'validate columns
