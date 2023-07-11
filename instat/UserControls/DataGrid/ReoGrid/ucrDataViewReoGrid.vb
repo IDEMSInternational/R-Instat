@@ -296,7 +296,7 @@ Public Class ucrDataViewReoGrid
         Dim currSheet = grdData.CurrentWorksheet
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
-            Dim iRowIndex = GetRowIndex(currSheet, iRow)
+            Dim iRowIndex = as Integer GetRowIndex(currSheet, iRow)
             Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
             ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
             If bCellOrRow Then
