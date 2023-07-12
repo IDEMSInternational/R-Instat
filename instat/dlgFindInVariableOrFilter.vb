@@ -19,6 +19,7 @@ Imports RDotNet
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private iFirstRowFoundOnPage As Integer
     Private iCountClick As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
@@ -127,11 +128,28 @@ Public Class dlgFindInVariableOrFilter
                 Exit Sub
             End If
 
-            If iCountClick >= lstRowNumbers.Count + 1 Then
-                iCountClick = 1
+            Dim iFirstRowOnPage As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
+            Dim iRowValue As Integer = lstRowNumbers(iFirstRowFoundOnPage - 1)
+            ' Iterate over the list of row numbers to find the page where the row is displayed.
+            For i As Integer = 1 To lstRowNumbers.Count
+                Dim iRowIndex As Integer = lstRowNumbers(i - 1)
+                If iRowIndex >= iFirstRowOnPage _
+                        AndAlso (iRowValue < iRowIndex OrElse iCountClick = 1) Then
+                    iFirstRowFoundOnPage = i
+                    Exit For
+                End If
+            Next
+
+            If iRowValue = lstRowNumbers.Max Then
+                If iFirstRowFoundOnPage > iCountClick Then
+                    iCountClick = iFirstRowFoundOnPage
+                Else
+                    iCountClick = 1
+                End If
+                iFirstRowFoundOnPage = 1
             End If
 
-            Dim iRow As Integer = lstRowNumbers(iCountClick - 1)
+            Dim iRow As Integer = lstRowNumbers(iFirstRowFoundOnPage - 1)
             Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
             frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
             frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
@@ -150,11 +168,13 @@ Public Class dlgFindInVariableOrFilter
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
         iCountClick = 1
+        iFirstRowFoundOnPage = 1
     End Sub
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
         iCountClick = 1
+        iFirstRowFoundOnPage = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
@@ -168,6 +188,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         iCountClick = 1
+        iFirstRowFoundOnPage = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
