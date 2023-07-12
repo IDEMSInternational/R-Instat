@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 
-Public Class dlgGeneralForGraphics
+Public Class dlgDescribeGraphics
     Public clsGgplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True

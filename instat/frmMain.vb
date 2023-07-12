@@ -801,10 +801,6 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
-        dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
@@ -1175,10 +1171,6 @@ Public Class frmMain
         dlgCompareModels.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
-        dlgColumnStats.ShowDialog()
-    End Sub
-
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
         dlgUseDate.ShowDialog()
     End Sub
@@ -1507,9 +1499,6 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralUseSummaries.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
@@ -2520,5 +2509,9 @@ Public Class frmMain
 
     Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
         dlgSurvey.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphics.Click
+        dlgDescribeGraphics.ShowDialog()
     End Sub
 End Class

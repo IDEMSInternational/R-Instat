@@ -63,20 +63,14 @@ Partial Class frmMain
         Me.mnuDescribeSpecificHistogramDensityFrequencyPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificPointPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificLineSmoothPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeSpecificMapPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuDescribeGraphics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificParallelCoordinatePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTables = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeGeneralGraphics = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeGeneralUseSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeMultivariate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeMultivariateCorrelations = New System.Windows.Forms.ToolStripMenuItem()
@@ -704,7 +698,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeSpecificTables, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseTable, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeSpecificTables, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseTable, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         Me.mnuDescribe.Size = New System.Drawing.Size(64, 22)
         Me.mnuDescribe.Tag = "Describe"
@@ -827,7 +821,7 @@ Partial Class frmMain
         '
         'mnuDescribeSpecificTablesGraphs
         '
-        Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.ToolStripSeparator26, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
+        Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.ToolStripSeparator26, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeGraphics, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
         Me.mnuDescribeSpecificTablesGraphs.Name = "mnuDescribeSpecificTablesGraphs"
         Me.mnuDescribeSpecificTablesGraphs.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificTablesGraphs.Tag = "Graph_Dialogs"
@@ -873,17 +867,23 @@ Partial Class frmMain
         Me.mnuDescribeSpecificLineSmoothPlot.Text = "Line Plot..."
         Me.mnuDescribeSpecificLineSmoothPlot.ToolTipText = "Line Plots, Smoothed Plots, Dumbbell and Slope Plots"
         '
-        'ToolStripSeparator26
-        '
-        Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
-        Me.ToolStripSeparator26.Size = New System.Drawing.Size(206, 6)
-        '
         'mnuDescribeSpecificMapPlot
         '
         Me.mnuDescribeSpecificMapPlot.Name = "mnuDescribeSpecificMapPlot"
         Me.mnuDescribeSpecificMapPlot.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificMapPlot.Text = "Heatmap..."
         Me.mnuDescribeSpecificMapPlot.ToolTipText = "Heat Map and Chorolopleth Map"
+        '
+        'ToolStripSeparator26
+        '
+        Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
+        Me.ToolStripSeparator26.Size = New System.Drawing.Size(206, 6)
+        '
+        'mnuDescribeGraphics
+        '
+        Me.mnuDescribeGraphics.Name = "mnuDescribeGraphics"
+        Me.mnuDescribeGraphics.Size = New System.Drawing.Size(209, 22)
+        Me.mnuDescribeGraphics.Text = "Graphics..."
         '
         'mnuDescribeSpecificDotPlot
         '
@@ -893,11 +893,6 @@ Partial Class frmMain
         Me.mnuDescribeSpecificDotPlot.Tag = "Dotplot..."
         Me.mnuDescribeSpecificDotPlot.Text = "Dot Plot..."
         Me.mnuDescribeSpecificDotPlot.Visible = False
-        '
-        'ToolStripSeparator27
-        '
-        Me.ToolStripSeparator27.Name = "ToolStripSeparator27"
-        Me.ToolStripSeparator27.Size = New System.Drawing.Size(206, 6)
         '
         'mnuDescribeSpecificMosaic
         '
@@ -926,48 +921,6 @@ Partial Class frmMain
         Me.mnuDescribeSpecificTables.Tag = "Table_Dialogs"
         Me.mnuDescribeSpecificTables.Text = "Tables..."
         Me.mnuDescribeSpecificTables.ToolTipText = "Frequency tables and Summary tables"
-        '
-        'mnuDescribeGeneral
-        '
-        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.mnuDescribeGeneralTabulation, Me.mnuDescribeGeneralGraphics, Me.ToolStripSeparator38, Me.mnuDescribeGeneralUseSummaries})
-        Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
-        Me.mnuDescribeGeneral.Size = New System.Drawing.Size(180, 22)
-        Me.mnuDescribeGeneral.Tag = "General"
-        Me.mnuDescribeGeneral.Text = "General"
-        '
-        'mnuDescribeGeneralColumnSummaries
-        '
-        Me.mnuDescribeGeneralColumnSummaries.Name = "mnuDescribeGeneralColumnSummaries"
-        Me.mnuDescribeGeneralColumnSummaries.Size = New System.Drawing.Size(188, 22)
-        Me.mnuDescribeGeneralColumnSummaries.Tag = "Column_Summaries..."
-        Me.mnuDescribeGeneralColumnSummaries.Text = "Column Summaries..."
-        '
-        'mnuDescribeGeneralTabulation
-        '
-        Me.mnuDescribeGeneralTabulation.Enabled = False
-        Me.mnuDescribeGeneralTabulation.Name = "mnuDescribeGeneralTabulation"
-        Me.mnuDescribeGeneralTabulation.Size = New System.Drawing.Size(188, 22)
-        Me.mnuDescribeGeneralTabulation.Tag = "Tabulation..."
-        Me.mnuDescribeGeneralTabulation.Text = "Tabulation..."
-        Me.mnuDescribeGeneralTabulation.Visible = False
-        '
-        'mnuDescribeGeneralGraphics
-        '
-        Me.mnuDescribeGeneralGraphics.Name = "mnuDescribeGeneralGraphics"
-        Me.mnuDescribeGeneralGraphics.Size = New System.Drawing.Size(188, 22)
-        Me.mnuDescribeGeneralGraphics.Tag = "Graphics..."
-        Me.mnuDescribeGeneralGraphics.Text = "Graphics..."
-        '
-        'ToolStripSeparator38
-        '
-        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
-        Me.ToolStripSeparator38.Size = New System.Drawing.Size(185, 6)
-        '
-        'mnuDescribeGeneralUseSummaries
-        '
-        Me.mnuDescribeGeneralUseSummaries.Name = "mnuDescribeGeneralUseSummaries"
-        Me.mnuDescribeGeneralUseSummaries.Size = New System.Drawing.Size(188, 22)
-        Me.mnuDescribeGeneralUseSummaries.Text = "Use Summaries..."
         '
         'ToolStripSeparator9
         '
@@ -5300,10 +5253,6 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeTwoVariablesSummarise As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesTabulate As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesGraph As ToolStripMenuItem
-    Friend WithEvents mnuDescribeGeneral As ToolStripMenuItem
-    Friend WithEvents mnuDescribeGeneralColumnSummaries As ToolStripMenuItem
-    Friend WithEvents mnuDescribeGeneralTabulation As ToolStripMenuItem
-    Friend WithEvents mnuDescribeGeneralGraphics As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificTablesGraphs As ToolStripMenuItem
     Friend WithEvents mnuModelProbabilityDistributions As ToolStripMenuItem
     Friend WithEvents mnuModelProbabilityDistributionsCompareModels As ToolStripMenuItem
@@ -5526,8 +5475,6 @@ Partial Class frmMain
     Friend WithEvents mnuFileExportExportRWorkspace As ToolStripMenuItem
     Friend WithEvents mnuFileExportExportGraphAsImage As ToolStripMenuItem
     Friend WithEvents mnuFileExportExportRObjectsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuDescribeGeneralUseSummaries As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator38 As ToolStripSeparator
     Friend WithEvents mnuClimaticDescribeWindSpeedDirectionWindRose As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificCummulativeDistribution As ToolStripMenuItem
     Friend WithEvents mnuProcurementUseCRISummariseCRIbyCountry As ToolStripMenuItem
@@ -5746,7 +5693,6 @@ Partial Class frmMain
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuRViewer As ToolStripMenuItem
     Friend WithEvents mnuploty As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
     Friend WithEvents mnuEditScript As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
@@ -5813,4 +5759,5 @@ Partial Class frmMain
     Friend WithEvents mnuExamineEditDataDailyDataEditing As ToolStripMenuItem
     Friend WithEvents mnuExamineEditDataCompareColumns As ToolStripMenuItem
     Friend WithEvents mnuStructuredSurvey As ToolStripMenuItem
+    Friend WithEvents mnuDescribeGraphics As ToolStripMenuItem
 End Class
