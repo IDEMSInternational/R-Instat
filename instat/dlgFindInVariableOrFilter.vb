@@ -132,7 +132,7 @@ Public Class dlgFindInVariableOrFilter
             Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
             ' Iterate over the list of row numbers to find the page where the row is displayed.
             For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
-                Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1) 'iRowIndex is row number of loop occurence
+                Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1)
                 If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
                         AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
                     iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
