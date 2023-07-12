@@ -19,7 +19,7 @@ Imports RDotNet
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iFirstRowFoundOnPage As Integer
+    Private iCurrentOccurenceIndex As Integer
     Private iCountClick As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
@@ -128,28 +128,28 @@ Public Class dlgFindInVariableOrFilter
                 Exit Sub
             End If
 
-            Dim iFirstRowOnPage As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
-            Dim iRowValue As Integer = lstRowNumbers(iFirstRowFoundOnPage - 1)
+            Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
+            Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5. iRowValue is row number of one of the 5 occurences
             ' Iterate over the list of row numbers to find the page where the row is displayed.
-            For i As Integer = 1 To lstRowNumbers.Count
-                Dim iRowIndex As Integer = lstRowNumbers(i - 1)
-                If iRowIndex >= iFirstRowOnPage _
-                        AndAlso (iRowValue < iRowIndex OrElse iCountClick = 1) Then
-                    iFirstRowFoundOnPage = i
+            For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
+                Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1) 'iRowIndex is row number of loop occurence
+                If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
+                        AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
+                    iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
                     Exit For
                 End If
             Next
 
-            If iRowValue = lstRowNumbers.Max Then
-                If iFirstRowFoundOnPage > iCountClick Then
-                    iCountClick = iFirstRowFoundOnPage
+            If iCurrentOccurenceRowNumber = lstRowNumbers.Max Then
+                If iCurrentOccurenceIndex > iCountClick Then
+                    iCountClick = iCurrentOccurenceIndex
                 Else
                     iCountClick = 1
                 End If
-                iFirstRowFoundOnPage = 1
+                iCurrentOccurenceIndex = 1
             End If
 
-            Dim iRow As Integer = lstRowNumbers(iFirstRowFoundOnPage - 1)
+            Dim iRow As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1)
             Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
             frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
             frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
@@ -168,13 +168,13 @@ Public Class dlgFindInVariableOrFilter
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
         iCountClick = 1
-        iFirstRowFoundOnPage = 1
+        iCurrentOccurenceIndex = 1
     End Sub
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
         iCountClick = 1
-        iFirstRowFoundOnPage = 1
+        iCurrentOccurenceIndex = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlValueChanged, ucrChkIncludeRegularExpressions.ControlValueChanged
@@ -188,7 +188,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
         iCountClick = 1
-        iFirstRowFoundOnPage = 1
+        iCurrentOccurenceIndex = 1
     End Sub
 
     Private Sub ucrInputPattern_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlContentsChanged, ucrInputPattern.ControlContentsChanged
