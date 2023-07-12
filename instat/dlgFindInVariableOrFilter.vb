@@ -19,7 +19,6 @@ Imports RDotNet
 Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iFisrtRow As Integer
     Private iCountClick As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction As New RFunction
@@ -112,15 +111,6 @@ Public Class dlgFindInVariableOrFilter
         cmdFind.Enabled = Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty
     End Sub
 
-    Private Function GetIndexInList(iValue As Integer, lstOfRows As List(Of Integer)) As Integer
-        For i As Integer = 0 To lstOfRows.Count - 1
-            If lstOfRows(i) = iValue Then
-                Return i
-            End If
-        Next
-        Return -1
-    End Function
-
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
             If String.IsNullOrEmpty(ucrInputPattern.GetText) Then
@@ -137,30 +127,11 @@ Public Class dlgFindInVariableOrFilter
                 Exit Sub
             End If
 
-            Dim iStartRowHeader As Integer = frmMain.ucrDataViewer.GetFirstRowHeader
-            Dim iEndRowHeader As Integer = frmMain.ucrDataViewer.GetLastRowHeader
-            Dim iRowValue As Integer = CInt(lstRowNumbers(iFisrtRow - 1))
-            ' Iterate over the list of row numbers to find the page where the row is displayed.
-            For i As Integer = 1 To lstRowNumbers.Count
-                Dim iRowIndex As Integer = lstRowNumbers(i - 1)
-                If iRowIndex >= iStartRowHeader _
-                        AndAlso (iRowValue < iRowIndex OrElse iCountClick = 1) Then
-                    iFisrtRow = i
-                    Exit For
-                End If
-            Next
-
-            If iRowValue = lstRowNumbers.Max Then
-                If iFisrtRow > iCountClick Then
-                    iCountClick = iFisrtRow
-                    iFisrtRow = 1
-                Else
-                    iFisrtRow = 1
-                    iCountClick = 1
-                End If
+            If iCountClick >= lstRowNumbers.Count + 1 Then
+                iCountClick = 1
             End If
 
-            Dim iRow As Integer = lstRowNumbers(iFisrtRow - 1)
+            Dim iRow As Integer = lstRowNumbers(iCountClick - 1)
             Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
             frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
             frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
@@ -178,13 +149,11 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
-        iFisrtRow = 1
         iCountClick = 1
     End Sub
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
-        iFisrtRow = 1
         iCountClick = 1
     End Sub
 
@@ -198,7 +167,6 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
-        iFisrtRow = 1
         iCountClick = 1
     End Sub
 
