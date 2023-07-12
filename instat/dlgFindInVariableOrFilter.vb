@@ -144,18 +144,20 @@ Public Class dlgFindInVariableOrFilter
             For i As Integer = 1 To lstRowNumbers.Count
                 Dim iRowIndex As Integer = lstRowNumbers(i - 1)
                 If iRowIndex >= iStartRowHeader _
-                        AndAlso iRowValue < iRowIndex Then
+                        AndAlso (iRowValue < iRowIndex OrElse iCountClick = 1) Then
                     iFisrtRow = i
                     Exit For
                 End If
             Next
 
-            If iRowValue = lstRowNumbers.Max _
-                                AndAlso iFisrtRow > iCountClick Then
-                iCountClick = iFisrtRow
-            ElseIf iFisrtRow < iCountClick Then
-                iFisrtRow = 1
-                iCountClick = 1
+            If iRowValue = lstRowNumbers.Max Then
+                If iFisrtRow > iCountClick Then
+                    iCountClick = iFisrtRow
+                    iFisrtRow = 1
+                Else
+                    iFisrtRow = 1
+                    iCountClick = 1
+                End If
             End If
 
             Dim iRow As Integer = lstRowNumbers(iFisrtRow - 1)
