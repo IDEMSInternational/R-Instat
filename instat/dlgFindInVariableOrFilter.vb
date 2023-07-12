@@ -129,7 +129,7 @@ Public Class dlgFindInVariableOrFilter
             End If
 
             Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
-            Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5. iRowValue is row number of one of the 5 occurences
+            Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
             ' Iterate over the list of row numbers to find the page where the row is displayed.
             For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
                 Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1) 'iRowIndex is row number of loop occurence
