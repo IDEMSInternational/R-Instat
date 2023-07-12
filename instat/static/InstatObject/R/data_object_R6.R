@@ -771,7 +771,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
         }
         # remove key
-        get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == col_name)
+        get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == curr_col_name)
         if (!is.null(get_key$Is_Key)){
           if (!is.na(get_key$Is_Key) && get_key$Is_Key){
             active_keys <- self$get_keys()
