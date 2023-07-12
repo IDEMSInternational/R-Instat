@@ -37,7 +37,7 @@ Partial Class ucrOutputPages
         Me.tabControl = New System.Windows.Forms.TabControl()
         Me.tpMain = New System.Windows.Forms.TabPage()
         Me.ucrMainOutputPage = New instat.ucrOutputPage()
-        Me.tbHelp = New System.Windows.Forms.ToolStripLabel()
+        Me.tbHelp = New System.Windows.Forms.ToolStripButton()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tsButtons.SuspendLayout()
         Me.tabControl.SuspendLayout()
@@ -54,7 +54,7 @@ Partial Class ucrOutputPages
         Me.TableLayoutPanel1.Controls.Add(Me.tabControl, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
@@ -157,7 +157,7 @@ Partial Class ucrOutputPages
         Me.tabControl.Controls.Add(Me.tpMain)
         Me.tabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControl.Location = New System.Drawing.Point(2, 28)
-        Me.tabControl.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tabControl.Margin = New System.Windows.Forms.Padding(2)
         Me.tabControl.Name = "tabControl"
         Me.tabControl.SelectedIndex = 0
         Me.tabControl.Size = New System.Drawing.Size(467, 256)
@@ -167,9 +167,9 @@ Partial Class ucrOutputPages
         '
         Me.tpMain.Controls.Add(Me.ucrMainOutputPage)
         Me.tpMain.Location = New System.Drawing.Point(4, 22)
-        Me.tpMain.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tpMain.Margin = New System.Windows.Forms.Padding(2)
         Me.tpMain.Name = "tpMain"
-        Me.tpMain.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tpMain.Padding = New System.Windows.Forms.Padding(2)
         Me.tpMain.Size = New System.Drawing.Size(459, 230)
         Me.tpMain.TabIndex = 0
         Me.tpMain.Text = "Main"
@@ -190,8 +190,11 @@ Partial Class ucrOutputPages
         '
         'tbHelp
         '
+        Me.tbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tbHelp.Image = CType(resources.GetObject("tbHelp.Image"), System.Drawing.Image)
+        Me.tbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tbHelp.Name = "tbHelp"
-        Me.tbHelp.Size = New System.Drawing.Size(32, 15)
+        Me.tbHelp.Size = New System.Drawing.Size(36, 19)
         Me.tbHelp.Text = "Help"
         '
         'ucrOutputPages
@@ -200,7 +203,7 @@ Partial Class ucrOutputPages
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrOutputPages"
         Me.Size = New System.Drawing.Size(471, 286)
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -228,5 +231,5 @@ Partial Class ucrOutputPages
     Friend WithEvents tbRename As ToolStripButton
     Friend WithEvents tbSave As ToolStripButton
     Public WithEvents tsButtons As ToolStrip
-    Friend WithEvents tbHelp As ToolStripLabel
+    Friend WithEvents tbHelp As ToolStripButton
 End Class
