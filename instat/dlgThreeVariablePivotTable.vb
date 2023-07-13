@@ -331,7 +331,8 @@ Public Class dlgThreeVariablePivotTable
                     ucrReceiverFactorLevels.Add(strMonthCol, strDataFrame)
                     ucrReceiverInitialColumnFactor.Add(strMonthCol, strDataFrame)
                 End If
-                If ucrSelectorPivot.lstAvailableVariable.Items.Count > 0 Then
+                If ucrSelectorPivot.lstAvailableVariable.Items.Count > 0 AndAlso
+                   Not String.IsNullOrEmpty(strYearCol) AndAlso Not String.IsNullOrEmpty(strDayCol) Then
                     Dim lstItems(1) As KeyValuePair(Of String, String)
                     lstItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strYearCol)
                     lstItems(1) = New KeyValuePair(Of String, String)(strDataFrame, strDayCol)
