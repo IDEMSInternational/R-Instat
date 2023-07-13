@@ -77,11 +77,11 @@ Public Class ucrDataViewLinuxGrid
     End Function
 
     Public Function GetFirstRowHeader() As String Implements IDataViewGrid.GetFirstRowHeader
-
+        Return ""
     End Function
 
     Public Function GetLastRowHeader() As String Implements IDataViewGrid.GetLastRowHeader
-
+        Return ""
     End Function
 
     Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
