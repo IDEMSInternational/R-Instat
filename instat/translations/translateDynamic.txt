@@ -45,7 +45,7 @@
 #     !dlgGlance\_%
 #     !dlgTidy\_%
 # 
-# then these lines will be used to construct the following SQL command (for conciseness ESCAPE 
+# then these lines will be used to construct an SQL command similar to (for conciseness ESCAPE 
 # specifications not shown):
 # 
 #     UPDATE form_controls SET id_text = 'ReplaceWithDynamicTranslation' WHERE 
