@@ -68,7 +68,7 @@ Partial Class dlgBarAndPieChart
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemBarchartOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLollipopOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTextOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTreemapOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemWordcloudOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
@@ -97,7 +97,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrReceiverWordcloudColor = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrInputReorderX = New instat.ucrInputComboBox()
-        Me.ucrChkIncreaseSize = New instat.ucrCheck()
         Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.ucrPnlPolar = New instat.UcrPanel()
         Me.ucrInputLabelColour = New instat.ucrInputComboBox()
@@ -105,12 +104,13 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputStart = New instat.ucrInputComboBox()
         Me.ucrChkLayout = New instat.ucrCheck()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
-        Me.ucrChkBacktoback = New instat.ucrCheck()
         Me.ucrChkPolarCoordinates = New instat.ucrCheck()
         Me.ucrVariablesAsFactorForBarChart = New instat.ucrVariablesAsFactor()
         Me.ucrReceiverWordcloudAngle = New instat.ucrReceiverSingle()
         Me.ucrChkAddLabelsText = New instat.ucrCheck()
         Me.ucrChkAddLabelsTreemap = New instat.ucrCheck()
+        Me.ucrChkBacktoback = New instat.ucrCheck()
+        Me.ucrChkIncreaseSize = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -387,44 +387,44 @@ Partial Class dlgBarAndPieChart
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemLollipopOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemTreemapOptions, Me.toolStripMenuItemWordcloudOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemLollipopOptions, Me.toolStripMenuItemTextOptions, Me.toolStripMenuItemTreemapOptions, Me.toolStripMenuItemWordcloudOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(179, 136)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(178, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemBarchartOptions
         '
         Me.toolStripMenuItemBarchartOptions.Name = "toolStripMenuItemBarchartOptions"
-        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(178, 22)
+        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemBarchartOptions.Text = "BarChart Options"
         '
         'toolStripMenuItemLollipopOptions
         '
         Me.toolStripMenuItemLollipopOptions.Name = "toolStripMenuItemLollipopOptions"
-        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(178, 22)
+        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemLollipopOptions.Text = "Lollipop Options"
         '
-        'toolStripMenuItemPointOptions
+        'toolStripMenuItemTextOptions
         '
-        Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
-        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(178, 22)
-        Me.toolStripMenuItemPointOptions.Text = "Point Options"
+        Me.toolStripMenuItemTextOptions.Name = "toolStripMenuItemTextOptions"
+        Me.toolStripMenuItemTextOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTextOptions.Text = "Text Options"
         '
         'toolStripMenuItemTreemapOptions
         '
         Me.toolStripMenuItemTreemapOptions.Name = "toolStripMenuItemTreemapOptions"
-        Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(178, 22)
+        Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemTreemapOptions.Text = "Treemap Options"
         '
         'toolStripMenuItemWordcloudOptions
         '
         Me.toolStripMenuItemWordcloudOptions.Name = "toolStripMenuItemWordcloudOptions"
-        Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(178, 22)
+        Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemWordcloudOptions.Text = "Wordcloud Options"
         '
         'cmdOptions
@@ -723,15 +723,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputReorderX.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputReorderX.TabIndex = 12
         '
-        'ucrChkIncreaseSize
-        '
-        Me.ucrChkIncreaseSize.AutoSize = True
-        Me.ucrChkIncreaseSize.Checked = False
-        Me.ucrChkIncreaseSize.Location = New System.Drawing.Point(10, 317)
-        Me.ucrChkIncreaseSize.Name = "ucrChkIncreaseSize"
-        Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(88, 23)
-        Me.ucrChkIncreaseSize.TabIndex = 63
-        '
         'ucrInputAddReorder
         '
         Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
@@ -800,15 +791,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(166, 23)
         Me.ucrChkFlipCoordinates.TabIndex = 29
         '
-        'ucrChkBacktoback
-        '
-        Me.ucrChkBacktoback.AutoSize = True
-        Me.ucrChkBacktoback.Checked = False
-        Me.ucrChkBacktoback.Location = New System.Drawing.Point(10, 293)
-        Me.ucrChkBacktoback.Name = "ucrChkBacktoback"
-        Me.ucrChkBacktoback.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkBacktoback.TabIndex = 27
-        '
         'ucrChkPolarCoordinates
         '
         Me.ucrChkPolarCoordinates.AutoSize = True
@@ -861,6 +843,24 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkAddLabelsTreemap.Name = "ucrChkAddLabelsTreemap"
         Me.ucrChkAddLabelsTreemap.Size = New System.Drawing.Size(129, 24)
         Me.ucrChkAddLabelsTreemap.TabIndex = 61
+        '
+        'ucrChkBacktoback
+        '
+        Me.ucrChkBacktoback.AutoSize = True
+        Me.ucrChkBacktoback.Checked = False
+        Me.ucrChkBacktoback.Location = New System.Drawing.Point(10, 293)
+        Me.ucrChkBacktoback.Name = "ucrChkBacktoback"
+        Me.ucrChkBacktoback.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkBacktoback.TabIndex = 27
+        '
+        'ucrChkIncreaseSize
+        '
+        Me.ucrChkIncreaseSize.AutoSize = True
+        Me.ucrChkIncreaseSize.Checked = False
+        Me.ucrChkIncreaseSize.Location = New System.Drawing.Point(10, 317)
+        Me.ucrChkIncreaseSize.Name = "ucrChkIncreaseSize"
+        Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkIncreaseSize.TabIndex = 63
         '
         'dlgBarAndPieChart
         '
@@ -1011,7 +1011,7 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents contextMenuStripOptions As ContextMenuStrip
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemBarchartOptions As ToolStripMenuItem
-    Friend WithEvents toolStripMenuItemPointOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTextOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTreemapOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemWordcloudOptions As ToolStripMenuItem
     Friend WithEvents cmdOptions As ucrSplitButton
