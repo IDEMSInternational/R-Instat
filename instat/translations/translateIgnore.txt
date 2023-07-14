@@ -67,7 +67,7 @@ frmMain
 
 # Single receivers normally contain column names, and these should not be translated
 # Fixes issue 6519
-%\\_txtReceiverSingle
+%\_txtReceiverSingle
 
 # In the 'New data Frame' dialog, the user may enter the 'New Data Frame Name'. 
 # This is a literal that should not be translated.
