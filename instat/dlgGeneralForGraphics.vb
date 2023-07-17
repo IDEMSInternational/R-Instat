@@ -87,6 +87,17 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
+        'ucrReceiverX.SetLinkedDisplayControl(ucrChkUseasNumeric)
+
+        ucrChkUseasNumeric.SetParameter(New RParameter("circular", 4))
+        ucrChkUseasNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkUseasNumeric.SetText("Use as Numeric")
+        ucrChkUseasNumeric.SetLinkedDisplayControl(ucrChkDisplayasFactor)
+
+        ucrChkDisplayasFactor.SetParameter(New RParameter("circular", 4))
+        ucrChkDisplayasFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDisplayasFactor.SetText("Display as Factor")
+        'ucrChkDisplayasFactor.SetLinkedDisplayControl(ucrChkDisplayasFactor)
 
         ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
         ucrFillOrColourReceiver.SetIncludedDataTypes({"factor"})
@@ -100,6 +111,7 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+        'VariableXType()
     End Sub
 
     Private Sub SetDefaults()
@@ -157,12 +169,16 @@ Public Class dlgGeneralForGraphics
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
         ucrVariablesAsFactorForGraphics.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
+        ucrChkUseasNumeric.SetRCode(clsGlobalAesFunction, bReset)
+        ucrChkDisplayasFactor.SetRCode(clsGlobalAesFunction, bReset)
         ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
+        VariableXType()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        VariableXType()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
@@ -219,12 +235,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.EnableLayersTab()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
-        If Not ucrReceiverX.IsEmpty Then
-            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-        Else
-            clsGlobalAesFunction.RemoveParameterByName("x")
-        End If
+    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
         If Not ucrVariablesAsFactorForGraphics.IsEmpty Then
             clsGlobalAesFunction.AddParameter("y", ucrVariablesAsFactorForGraphics.GetVariableNames(False), iPosition:=1)
         Else
@@ -237,7 +248,34 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlValueChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrChkUseasNumeric.ControlValueChanged, ucrChkDisplayasFactor.ControlValueChanged
         TestOKEnabled()
+        VariableXType()
     End Sub
+
+    Private Sub VariableXType()
+        'ucrChkDisplayasFactor.Visible = False
+        'ucrChkUseasNumeric.Visible = False
+        If Not ucrReceiverX.IsEmpty Then
+            'clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            'If {"factor", "character"}.Contains(ucrReceiverX.strCurrDataType) Then
+            '    ucrChkUseasNumeric.Visible = True
+            'ElseIf {"numeric", "integer"}.Contains(ucrReceiverX.strCurrDataType) OrElse {"date"}.Contains(ucrReceiverX.strCurrDataType) Then
+            '    ucrChkUseasNumeric.Visible = False
+            'End If
+            If ucrReceiverX.strCurrDataType = "numeric" Then
+                ucrChkUseasNumeric.Checked = True
+                ucrChkUseasNumeric.Visible = True
+            Else
+                ucrChkUseasNumeric.Visible = False
+            End If
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("x")
+            ucrChkDisplayasFactor.Visible = False
+            ucrChkUseasNumeric.Visible = False
+        End If
+
+    End Sub
+
+
 End Class
