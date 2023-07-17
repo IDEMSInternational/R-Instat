@@ -32,6 +32,7 @@ Public Class ucrReceiverMultiple
             bAutoSwitchFromReceiver = False
             bFirstLoad = False
         End If
+        ReopenDialog()
     End Sub
 
     Public Overrides Sub AddSelected()
@@ -520,4 +521,9 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetItemsDataFrames() As List(Of String)
         Return GetCurrGroupNames()
     End Function
+
+    Private Sub ReopenDialog()
+        Clear()
+    End Sub
+
 End Class
