@@ -72,8 +72,6 @@ Public Class ucrDataViewReoGrid
             textColour = Color.DarkBlue
         End If
 
-        Dim iMaxWidth As Integer = 0
-
         strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
@@ -82,11 +80,6 @@ Public Class ucrDataViewReoGrid
                     strData = GetInnerBracketedString(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
-                Dim cellWidth As Integer = TextRenderer.MeasureText(strData, Me.Font).Width
-
-                If cellWidth > iMaxWidth Then
-                    iMaxWidth = cellWidth
-                End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
@@ -101,15 +94,34 @@ Public Class ucrDataViewReoGrid
             grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
         End If
 
-        ' Set the column width to the calculated width
-        grdData.CurrentWorksheet.SetColumnsWidth(0, 0, iMaxWidth)
-
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.
         'get pixel size equivalent of the longest row header text
         'and use it as the row header width.
         'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
+    End Sub
+
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
+        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColumn)
+        If iColumnIndex < 0 Then
+            Exit Sub
+        End If
+
+        If bApplyWrap Then
+            For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
+                If i = iColumnIndex Then
+                    grdData.CurrentWorksheet.AutoFitColumnWidth(i)
+                    Exit For
+                End If
+            Next
+            For i As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
+                grdData.CurrentWorksheet.AutoFitRowHeight(i)
+            Next
+        Else
+            grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
+            grdData.CurrentWorksheet.SetColumnsWidth(0, grdData.CurrentWorksheet.ColumnCount, 70)
+        End If
     End Sub
 
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)

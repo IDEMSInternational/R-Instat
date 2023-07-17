@@ -148,4 +148,10 @@ Public Class dlgWordwrap
     Private Sub ucrReceiverWrapText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWrapText.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If sender Is ucrBase.cmdOk OrElse sender Is ucrBase.toolStripMenuItemOkClose OrElse sender Is ucrBase.toolStripMenuItemOkKeep Then
+            frmMain.ucrDataViewer.AdjustColumnWidthAfterWrapping(ucrReceiverWrapText.GetVariableNames(False), rdoWrapText.Checked)
+        End If
+    End Sub
 End Class

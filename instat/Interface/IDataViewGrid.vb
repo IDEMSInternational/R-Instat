@@ -40,6 +40,8 @@ Public Interface IDataViewGrid
     Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
                             Optional bCellOrRow As Boolean = False)
 
+    Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
+
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 
     Function GetFirstRowHeader() As String
