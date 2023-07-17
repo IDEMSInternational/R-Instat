@@ -72,6 +72,8 @@ Public Class ucrDataViewReoGrid
             textColour = Color.DarkBlue
         End If
 
+        Dim iMaxWidth As Integer = 0
+
         strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
@@ -80,6 +82,11 @@ Public Class ucrDataViewReoGrid
                     strData = GetInnerBracketedString(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
+                Dim cellWidth As Integer = TextRenderer.MeasureText(strData, Me.Font).Width
+
+                If cellWidth > iMaxWidth Then
+                    iMaxWidth = cellWidth
+                End If
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
@@ -93,6 +100,9 @@ Public Class ucrDataViewReoGrid
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
         End If
+
+        ' Set the column width to the calculated width
+        grdData.CurrentWorksheet.SetColumnsWidth(0, 0, iMaxWidth)
 
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.
