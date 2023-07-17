@@ -24,7 +24,7 @@ Public Class dlgGeneralForGraphics
     'list of completed layers.
     Private iLayerIndex As Integer
     'current layer
-    Private clsGlobalAesFunction As New RFunction
+    Private clsGlobalAesFunction, clsAsNumericFunction, clsScaleContinuousFunction, clsLevelsFunction As New RFunction
     Private clsBaseOperator As ROperator
     Private strGlobalDataFrame As String
     Public bDataFrameSet As Boolean
@@ -89,14 +89,17 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.bAddParameterIfEmpty = True
         'ucrReceiverX.SetLinkedDisplayControl(ucrChkUseasNumeric)
 
-        ucrChkUseasNumeric.SetParameter(New RParameter("circular", 4))
+        ucrChkUseasNumeric.SetParameter(New RParameter("check", 4))
         ucrChkUseasNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkUseasNumeric.SetText("Use as Numeric")
         ucrChkUseasNumeric.SetLinkedDisplayControl(ucrChkDisplayasFactor)
+        ucrChkUseasNumeric.SetRDefault("FALSE")
 
-        ucrChkDisplayasFactor.SetParameter(New RParameter("circular", 4))
+        ucrChkDisplayasFactor.SetParameter(New RParameter("check", 5))
         ucrChkDisplayasFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDisplayasFactor.SetText("Display as Factor")
+        ucrChkDisplayasFactor.SetRDefault("FALSE")
+
         'ucrChkDisplayasFactor.SetLinkedDisplayControl(ucrChkDisplayasFactor)
 
         ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
@@ -111,13 +114,16 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
-        'VariableXType()
     End Sub
 
     Private Sub SetDefaults()
         clsGgplotFunction = New RFunction
         clsGlobalAesFunction = New RFunction
+        clsAsNumericFunction = New RFunction
+        clsScaleContinuousFunction = New RFunction
+        clsLevelsFunction = New RFunction
         clsBaseOperator = New ROperator
+        'clsDollarOperator = New ROperator
 
         ucrSave.Reset()
 
@@ -137,6 +143,26 @@ Public Class dlgGeneralForGraphics
 
         clsGlobalAesFunction.SetPackageName("ggplot2")
         clsGlobalAesFunction.SetRCommand("aes")
+
+        clsAsNumericFunction.SetRCommand("as.numeric")
+
+        clsLevelsFunction.SetPackageName("base")
+        clsLevelsFunction.SetRCommand("levels")
+        clsLevelsFunction.AddParameter("y", ucrReceiverX.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsScaleContinuousFunction.SetPackageName("ggplot2")
+        clsScaleContinuousFunction.SetRCommand("scale_x_continuous")
+        clsScaleContinuousFunction.AddParameter("breaks", "1:12", iPosition:=1)
+        clsScaleContinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsLevelsFunction, iPosition:=2)
+        'clsDollarOperator.SetOperation("$")
+        'clsDollarOperator.bSpaceAroundOperation = False
+        'clsDollarOperator.AddParameter("left", ucrGraphicsSelector.strCurrentDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        'clsDollarOperator.AddParameter("right", ucrReceiverX.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=1)
+
+
+
+        'clsScaleContinuousFunction.AddParameter("vjust", "-0.25", iPosition:=3)
+        'clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
 
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -166,11 +192,13 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverX.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", ucrReceiverX.GetVariableNames(False), bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverX.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("y", ucrReceiverX.GetVariableNames(False), bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
         ucrVariablesAsFactorForGraphics.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
         ucrChkUseasNumeric.SetRCode(clsGlobalAesFunction, bReset)
-        ucrChkDisplayasFactor.SetRCode(clsGlobalAesFunction, bReset)
+        ucrChkDisplayasFactor.SetRCode(clsScaleContinuousFunction, bReset)
         ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         VariableXType()
@@ -178,7 +206,6 @@ Public Class dlgGeneralForGraphics
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        VariableXType()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
@@ -248,34 +275,51 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlValueChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrChkUseasNumeric.ControlValueChanged, ucrChkDisplayasFactor.ControlValueChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrChkUseasNumeric.ControlContentsChanged, ucrChkDisplayasFactor.ControlContentsChanged
         TestOKEnabled()
-        VariableXType()
     End Sub
 
     Private Sub VariableXType()
-        'ucrChkDisplayasFactor.Visible = False
-        'ucrChkUseasNumeric.Visible = False
+        ucrChkDisplayasFactor.Visible = False
+        ucrChkUseasNumeric.Visible = False
         If Not ucrReceiverX.IsEmpty Then
-            'clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             'If {"factor", "character"}.Contains(ucrReceiverX.strCurrDataType) Then
             '    ucrChkUseasNumeric.Visible = True
             'ElseIf {"numeric", "integer"}.Contains(ucrReceiverX.strCurrDataType) OrElse {"date"}.Contains(ucrReceiverX.strCurrDataType) Then
             '    ucrChkUseasNumeric.Visible = False
             'End If
-            If ucrReceiverX.strCurrDataType = "numeric" Then
-                ucrChkUseasNumeric.Checked = True
+            If ucrReceiverX.strCurrDataType = "factor" Then
                 ucrChkUseasNumeric.Visible = True
             Else
                 ucrChkUseasNumeric.Visible = False
             End If
+            If ucrChkUseasNumeric.Checked Then
+                clsGlobalAesFunction.AddParameter("x", clsRFunctionParameter:=clsAsNumericFunction, iPosition:=0)
+                clsGlobalAesFunction.RemoveParameterByName("check")
+                ucrChkDisplayasFactor.Visible = True
+            Else
+                clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+
+                ucrChkDisplayasFactor.Visible = False
+            End If
+            If ucrChkDisplayasFactor.Checked Then
+                clsBaseOperator.AddParameter("scale_continuous", clsRFunctionParameter:=clsScaleContinuousFunction, iPosition:=3)
+                clsScaleContinuousFunction.RemoveParameterByName("check")
+            Else
+                clsBaseOperator.RemoveParameterByName("scale_continuous")
+            End If
         Else
             clsGlobalAesFunction.RemoveParameterByName("x")
-            ucrChkDisplayasFactor.Visible = False
-            ucrChkUseasNumeric.Visible = False
+            'ucrChkDisplayasFactor.Visible = False
+            ' ucrChkUseasNumeric.Visible = False
         End If
 
     End Sub
 
 
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrChkUseasNumeric.ControlValueChanged, ucrChkDisplayasFactor.ControlValueChanged
+        VariableXType()
+    End Sub
 End Class
