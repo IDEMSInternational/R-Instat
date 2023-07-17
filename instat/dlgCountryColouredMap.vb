@@ -57,6 +57,9 @@ Public Class dlgCountryColouredMap
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
 
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
+
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
@@ -113,6 +116,8 @@ Public Class dlgCountryColouredMap
         clsCoordMap = New RFunction
         clsRaesFunc = New RFunction
 
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
 
         ucrSelectorCountryColouredMap.Reset()
         ucrSelectorCountryColouredMap.SetGgplotFunction(clsBaseOperator)
@@ -230,6 +235,7 @@ Public Class dlgCountryColouredMap
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
                           clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
+                          clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                           clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunc,
                           clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
                           clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,

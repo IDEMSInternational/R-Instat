@@ -41,6 +41,8 @@ Public Class sdgPlots
     Public clsScaleFillViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Public clsBaseOperator As New ROperator
+    Public clsOperator1 As New ROperator
+    Public clsOperator2 As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
@@ -582,7 +584,7 @@ Public Class sdgPlots
         grpColourScale.Visible = False
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewYScaleDiscreteFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewXScaleDiscreteFunction As RFunction, clsNewLabsFunction As RFunction,
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewOperator1 As ROperator, clsNewOperator2 As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewYScaleDiscreteFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewXScaleDiscreteFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
@@ -613,6 +615,8 @@ Public Class sdgPlots
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
+        clsOperator1 = clsNewOperator1
+        clsOperator2 = clsNewOperator2
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
@@ -686,8 +690,8 @@ Public Class sdgPlots
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewOperator1:=clsOperator1, clsNewOperator2:=clsOperator2, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewOperator1:=clsOperator1, clsNewOperator2:=clsOperator2, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)

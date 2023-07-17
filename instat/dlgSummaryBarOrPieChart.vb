@@ -45,6 +45,9 @@ Public Class dlgSummaryBarOrPieChart
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
+
     Private bResetSummaryBarLayerSubdialog As Boolean = True
 
     Private Sub dlgSummaryBarOrPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -146,6 +149,9 @@ Public Class dlgSummaryBarOrPieChart
         clsRaesFunction = New RFunction
         clsAesFunction = New RFunction
         clsRoundFunction = New RFunction
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
+
         clsLabelGeomFunction.Clear()
 
         ucrSummaryBarSelector.Reset()
@@ -238,7 +244,7 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                           clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions,
                           ucrNewBaseSelector:=ucrSummaryBarSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,

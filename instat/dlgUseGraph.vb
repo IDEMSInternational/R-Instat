@@ -37,6 +37,8 @@ Public Class dlgUseGraph
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -95,6 +97,8 @@ Public Class dlgUseGraph
     Private Sub SetDefaults()
         clsUseGraphFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
 
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
@@ -157,7 +161,7 @@ Public Class dlgUseGraph
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions,
-                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                           clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction,

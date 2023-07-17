@@ -34,6 +34,9 @@ Public Class dlgHeatMapPlot
     Private clsYScaleDiscreteFunction As New RFunction
     Private clsXScaleDiscreteFunction As New RFunction
 
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
+
     Private clsCoordPolarFunction, clsAnnotateFunction, clsLocalRaesFunction, clsXScaleDateFunction, clsYScaleDateFunction,
     clsScaleFillViridisFunction, clsScaleColourViridisFunction, clsGeomTextFunction,
     clsLabelAesFunction, clsColourPaletteFunction, clsForecatsReverseFunction,
@@ -242,6 +245,9 @@ Public Class dlgHeatMapPlot
         clsGroupByFunction = New RFunction
         clsSummariseFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
+
 
         ucrSaveGraph.Reset()
         ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
@@ -483,6 +489,7 @@ Public Class dlgHeatMapPlot
              clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
              clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
              strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
+             clsNewOperator1:=clsOperator1, clsNewOperator2:=clsOperator2,
              clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False

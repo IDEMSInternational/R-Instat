@@ -44,6 +44,8 @@ Public Class dlgMosaicPlot
     Private clsYScaleDateFunction As New RFunction
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bRCodeSet As Boolean = True
@@ -145,6 +147,8 @@ Public Class dlgMosaicPlot
         clsMosaicGeomFunction = New RFunction
         clsAesFunction = New RFunction
         clsLocalAesFunction = New RFunction
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
 
         clsXElementLabels = New RFunction
 
@@ -300,7 +304,7 @@ Public Class dlgMosaicPlot
 
     Private Sub PlotOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemPlotOptions.Click, cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsAesFunction,
-                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                          clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
                          clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
                          clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,

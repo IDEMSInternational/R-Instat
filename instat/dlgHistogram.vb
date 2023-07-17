@@ -45,6 +45,8 @@ Public Class dlgHistogram
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -141,6 +143,9 @@ Public Class dlgHistogram
         clsRaesFunction = New RFunction
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
+        clsOperator2 = New ROperator
+        clsOperator1 = New ROperator
+
         ucrHistogramSelector.Reset()
         ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveHist.Reset()
@@ -318,6 +323,7 @@ Public Class dlgHistogram
                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                          clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrHistogramSelector,
                          clsNewGlobalAesFunction:=clsRaesFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                         clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False

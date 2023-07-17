@@ -19,6 +19,8 @@ Imports instat.Translations
 
 Public Class dlgTreemap
     Private clsBaseOperator As New ROperator
+    Private clsOperator1 As New ROperator
+    Private clsOperator2 As New ROperator
 
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
@@ -168,6 +170,8 @@ Public Class dlgTreemap
         clsYScalecontinuousFunction = New RFunction
         clsRFacetFunction = New RFunction
         clsThemeFuction = New RFunction
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
         dctThemeFunctions = New Dictionary(Of String, RFunction)
 
         bResetSubdialog = True
@@ -445,7 +449,7 @@ Public Class dlgTreemap
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
-                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
+                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                           clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
                           clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsGeomTreemapAesFunction,

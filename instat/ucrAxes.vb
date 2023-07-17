@@ -31,6 +31,8 @@ Public Class ucrAxes
     Public clsMinorBreaksSeqDiscreteFunction As New RFunction
     Public clsXYScaleDateBreakOperator As New ROperator
     Public clsXYScaleDateLimitFunction As New RFunction
+    Public clsOperator1 As New ROperator
+    Public clsOperator2 As New ROperator
     Public strAxis As String
     'e.g. discrete, continuous
     Public strAxisType As String
@@ -158,10 +160,10 @@ Public Class ucrAxes
         ucrChkLimitsFrom.SetText("From")
         ucrChkLimitsFrom.AddParameterPresentCondition(True, "from")
         ucrChkLimitsFrom.AddParameterPresentCondition(False, "from", False)
-        ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrNudFrom.SetMinMax(1, Integer.MaxValue)
 
-        ucrChkLimitsTo.SetText("From")
+        ucrChkLimitsTo.SetText("To")
         ucrChkLimitsTo.AddParameterPresentCondition(True, "to")
         ucrChkLimitsTo.AddParameterPresentCondition(False, "to", False)
         ucrChkLimitsTo.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
@@ -323,7 +325,7 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYScaleDiscreteFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYScaleDiscreteFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional clsNewOperator1 As ROperator = Nothing, Optional clsNewOperator2 As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -374,6 +376,8 @@ Public Class ucrAxes
         clsXYScaleDateFunction = clsNewXYScaleDateFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
         clsXYScaleDiscreteFunction = clsNewXYScaleDiscreteFunction
+        clsOperator1 = clsNewOperator1
+        clsOperator2 = clsNewOperator2
 
         'TODO these could be passed through as a dictionary of scale functions instead of searched
         If clsXYScaleContinuousFunction.ContainsParameter("limits") AndAlso clsXYScaleContinuousFunction.GetParameter("limits").clsArgumentCodeStructure IsNot Nothing Then
@@ -501,8 +505,14 @@ Public Class ucrAxes
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
 
+        ucrNudFrom.SetRCode(clsOperator1, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrNudTo.SetRCode(clsOperator2, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
         bRCodeSet = True
         If bReset Then
+            ucrChkLimitsFrom.SetRCode(clsOperator1, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkLimitsTo.SetRCode(clsOperator2, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
             ucrInputPositionDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrChkPositionDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrInputLimitDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -772,4 +782,15 @@ Public Class ucrAxes
         SetBreaksDiscrete()
     End Sub
 
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged
+        If ucrChkLimitsFrom.Checked AndAlso Not ucrNudFrom.IsEmpty Then
+            clsOperator1.AddParameter("right", ucrNudFrom.GetText & "]", bIncludeArgumentName:=False)
+        End If
+    End Sub
+
+    Private Sub ucrChkLimitsTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsTo.ControlValueChanged, ucrNudTo.ControlValueChanged
+        If ucrChkLimitsTo.Checked AndAlso Not ucrNudTo.IsEmpty Then
+            clsOperator2.AddParameter("right", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+        End If
+    End Sub
 End Class
