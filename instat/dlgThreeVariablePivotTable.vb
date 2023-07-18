@@ -23,7 +23,12 @@ Public Class dlgThreeVariablePivotTable
         clsRelevelPasteFunction, clsRPivotTableFunction,
         clsSelectFunction As New RFunction
     Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
+    Public enumPivotMode As PivotMode = PivotMode.Describe
 
+    Public Enum PivotMode
+        Describe
+        Climatic
+    End Enum
 
     Private Sub dlgThreeVariablePivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,6 +43,7 @@ Public Class dlgThreeVariablePivotTable
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        AutofillMode()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -81,7 +87,6 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetText("Subtotals")
         ucrChkIncludeSubTotals.SetParameter(New RParameter("subtotals", iNewPosition:=3))
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkIncludeSubTotals.SetRDefault("FALSE")
 
         ucrChkNumericVariable.SetText("Numeric Variable (Optional):")
         ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName")
@@ -208,6 +213,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        AutofillMode()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
@@ -227,6 +233,7 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrSelectorPivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPivot.ControlValueChanged
         ChangeDataParameterValue()
+        AutofillMode()
         clsRPivotTableFunction._strDataFrameNameToAddAssignToObject = ucrSelectorPivot.strCurrentDataFrame
     End Sub
 
@@ -286,6 +293,52 @@ Public Class dlgThreeVariablePivotTable
                 clsRPivotTableFunction.AddParameter(strParameterName:="sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
             End If
         End If
+    End Sub
+
+    Private Sub AutofillMode()
+        Select Case enumPivotMode
+            Case PivotMode.Describe
+                ucrReceiverInitialRowFactors.bAutoFill = False
+
+                ucrReceiverInitialColumnFactor.bAutoFill = False
+
+                ucrReceiverFactorLevels.SetDataType("factor")
+                ucrReceiverFactorLevels.bAutoFill = False
+
+                ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
+                ucrReceiverAdditionalRowFactor.bAutoFill = False
+                ucrChkNumericVariable.Checked = False
+            Case PivotMode.Climatic
+                Dim strMonthCol As String
+                Dim strDataFrame As String
+                Dim strRainCol As String
+                Dim strYearCol As String
+                Dim strDayCol As String
+
+                strDataFrame = ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+                strMonthCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "month_label")
+                strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
+                strYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "year_label")
+                strDayCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "day_label")
+                If Not String.IsNullOrEmpty(strRainCol) Then
+                    ucrChkNumericVariable.Checked = True
+                    ucrReceiverAdditionalRowFactor.Add(strRainCol, strDataFrame)
+                Else
+                    ucrChkNumericVariable.Checked = False
+                End If
+
+                If Not String.IsNullOrEmpty(strMonthCol) Then
+                    ucrReceiverFactorLevels.Add(strMonthCol, strDataFrame)
+                    ucrReceiverInitialColumnFactor.Add(strMonthCol, strDataFrame)
+                End If
+                If ucrSelectorPivot.lstAvailableVariable.Items.Count > 0 AndAlso
+                   Not String.IsNullOrEmpty(strYearCol) AndAlso Not String.IsNullOrEmpty(strDayCol) Then
+                    Dim lstItems(1) As KeyValuePair(Of String, String)
+                    lstItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strYearCol)
+                    lstItems(1) = New KeyValuePair(Of String, String)(strDataFrame, strDayCol)
+                    ucrReceiverInitialRowFactors.AddMultiple(lstItems)
+                End If
+        End Select
     End Sub
 
     Private Sub CheckForDuplication(lstNewColumns As List(Of String), ucrNewReceiver As ucrReceiverMultiple, ByRef iNewposition As Integer)

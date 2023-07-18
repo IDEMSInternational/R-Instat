@@ -782,63 +782,63 @@ summary_quantile <- function(x, na.rm = FALSE, weights = NULL, probs, na_type = 
 }
 
 # p10 function
-p10 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.1)
+p10 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.1, na_max_prop = na_max_prop, ...)
 }
 
 # p20 function
-p20 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.2)
+p20 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL,...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.2, na_max_prop = na_max_prop, ...)
 }
 
 # p25 function
-p25 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.25)
+p25 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.25, na_max_prop = na_max_prop, ...)
 }
 
 # p30 function
-p30 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.3)
+p30 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.3, na_max_prop = na_max_prop, ...)
 }
 
 # p33 function
-p33 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.33)
+p33 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.33, na_max_prop = na_max_prop, ...)
 }
 
 # p40 function
-p40 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.4)
+p40 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.4, na_max_prop = na_max_prop, ...)
 }
 
 # p60 function
-p60 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.6)
+p60 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.6, na_max_prop = na_max_prop, ...)
 }
 
 # p67 function
-p67 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.67)
+p67 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.67, na_max_prop = na_max_prop, ...)
 }
 
 # p70 function
-p70 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.7)
+p70 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.7, na_max_prop = na_max_prop, ...)
 }
 
 # p75 function
-p75 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.75)
+p75 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.75, na_max_prop = na_max_prop, ...)
 }
 
 # p80 function
-p80 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.8)
+p80 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.8, na_max_prop = na_max_prop, ...)
 }
 
 # p90 function
-p90 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.9)
+p90 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, na_max_prop = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.9, na_max_prop = na_max_prop, ...)
 }
 
 # Skewness e1071 function
