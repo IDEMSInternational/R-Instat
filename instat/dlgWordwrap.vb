@@ -18,11 +18,10 @@ Imports instat.Translations
 
 
 Public Class dlgWordwrap
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsWrapFunction, clsReplaceFunction As New RFunction
-    Private clsAddWrapColumnToDataFunction, clsAddUnWrapColumnToDataFunction As New RFunction
-    Private clsDummyFunction As New RFunction
+    Private clsWrapOrUnwrapFunction As New RFunction
+    Private clsAddWrapOrUnwrapColumnToDataFunction As New RFunction
 
     Private Sub dlgWordwrap_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -47,7 +46,7 @@ Public Class dlgWordwrap
         ucrBase.clsRsyntax.bUseBaseFunction = True
 
         'ucrReceiver
-        ucrReceiverWrapText.SetParameter(New RParameter("string", 0))
+        ucrReceiverWrapText.SetParameter(New RParameter("data", 0))
         ucrReceiverWrapText.SetParameterIsRFunction()
         ucrReceiverWrapText.Selector = ucrSelectorForWrapText
         ucrReceiverWrapText.bUseFilteredData = False
@@ -55,62 +54,41 @@ Public Class dlgWordwrap
         ucrReceiverWrapText.strSelectorHeading = "Variables"
 
         'ucrRdoOptions
-        ucrPnlTextWrap.AddRadioButton(rdoWrapText)
-        ucrPnlTextWrap.AddRadioButton(rdoUnWrapText)
+        ucrPnlTextWrap.SetParameter(New RParameter("wrap", 2))
+        ucrPnlTextWrap.AddRadioButton(rdoWrapText, "TRUE")
+        ucrPnlTextWrap.AddRadioButton(rdoUnWrapText, "FALSE")
 
-        ucrPnlTextWrap.AddParameterValuesCondition(rdoWrapText, "click", "str_wrap")
-        ucrPnlTextWrap.AddParameterValuesCondition(rdoUnWrapText, "click", "str_replace_all")
+        ucrPnlTextWrap.AddParameterValuesCondition(rdoWrapText, "wrap", "TRUE")
+        ucrPnlTextWrap.AddParameterValuesCondition(rdoUnWrapText, "wrap", "FALSE")
         ucrPnlTextWrap.AddToLinkedControls(ucrNudWidthWrap, {rdoWrapText}, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrNudWidthWrap
-        ucrNudWidthWrap.SetParameter(New RParameter("width", 1))
         ucrNudWidthWrap.SetLinkedDisplayControl(lblWidthWrap)
         ucrNudWidthWrap.SetMinMax(1, 100)
         ucrNudWidthWrap.Increment = 1.0
-
     End Sub
 
     Private Sub SetDefaults()
-        clsWrapFunction = New RFunction
-        clsReplaceFunction = New RFunction
-        clsAddWrapColumnToDataFunction = New RFunction
-        clsAddWrapColumnToDataFunction = New RFunction
-        clsDummyFunction = New RFunction
+        clsWrapOrUnwrapFunction = New RFunction
+        clsAddWrapOrUnwrapColumnToDataFunction = New RFunction
 
         ucrSelectorForWrapText.Reset()
+        ucrNudWidthWrap.SetText("40")
 
-        clsDummyFunction.AddParameter("click", "str_wrap", iPosition:=0)
+        clsWrapOrUnwrapFunction.SetRCommand("wrapOrunwrapData")
+        clsWrapOrUnwrapFunction.AddParameter("width", "40", iPosition:=1)
+        clsWrapOrUnwrapFunction.AddParameter("wrap", "TRUE", iPosition:=2)
+        clsWrapOrUnwrapFunction.SetAssignTo("wrap_Or_unwrapData")
 
-        clsReplaceFunction.SetPackageName("stringr")
-        clsReplaceFunction.SetRCommand("str_replace_all")
-        clsReplaceFunction.AddParameter("pattern", Chr(34) & "\n" & Chr(34), iPosition:=2)
-        clsReplaceFunction.AddParameter("replacement", Chr(34) & " " & Chr(34), iPosition:=3)
-        clsReplaceFunction.SetAssignTo("unwrap_column")
+        clsAddWrapOrUnwrapColumnToDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsAddWrapOrUnwrapColumnToDataFunction.AddParameter("col_data", clsRFunctionParameter:=clsWrapOrUnwrapFunction, iPosition:=2)
+        clsAddWrapOrUnwrapColumnToDataFunction.AddParameter("before", "FALSE", iPosition:=3)
 
-        clsWrapFunction.SetPackageName("stringr")
-        clsWrapFunction.SetRCommand("str_wrap")
-        clsWrapFunction.AddParameter("width", "40", iPosition:=1)
-        clsWrapFunction.SetAssignTo("wrap_column")
-
-        clsAddWrapColumnToDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsAddWrapColumnToDataFunction.AddParameter("col_data", clsRFunctionParameter:=clsWrapFunction, iPosition:=2)
-        clsAddWrapColumnToDataFunction.AddParameter("before", "FALSE", iPosition:=3)
-
-        clsAddUnWrapColumnToDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsAddUnWrapColumnToDataFunction.AddParameter("col_data", clsRFunctionParameter:=clsReplaceFunction, iPosition:=2)
-        clsAddUnWrapColumnToDataFunction.AddParameter("before", "FALSE", iPosition:=3)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsAddWrapColumnToDataFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddWrapOrUnwrapColumnToDataFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverWrapText.AddAdditionalCodeParameterPair(clsReplaceFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=1)
-
-        ucrReceiverWrapText.SetRCode(clsWrapFunction, bReset)
-
-        ucrPnlTextWrap.SetRCode(clsDummyFunction, bReset)
-
-        ucrNudWidthWrap.SetRCode(clsWrapFunction, bReset)
+        ucrReceiverWrapText.SetRCode(clsWrapOrUnwrapFunction, bReset)
+        ucrPnlTextWrap.SetRCode(clsWrapOrUnwrapFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -128,20 +106,15 @@ Public Class dlgWordwrap
     End Sub
 
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForWrapText.ControlValueChanged, ucrReceiverWrapText.ControlValueChanged
-        clsAddWrapColumnToDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWrapText.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
-        clsAddUnWrapColumnToDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWrapText.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
-        clsAddUnWrapColumnToDataFunction.AddParameter("col_name", ucrReceiverWrapText.GetVariableNames(True), iPosition:=1)
-        clsAddWrapColumnToDataFunction.AddParameter("col_name", ucrReceiverWrapText.GetVariableNames(True), iPosition:=1)
+        clsAddWrapOrUnwrapColumnToDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWrapText.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsAddWrapOrUnwrapColumnToDataFunction.AddParameter("col_name", ucrReceiverWrapText.GetVariableNames(True), iPosition:=1)
     End Sub
 
-    Private Sub ucrPnlTextWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextWrap.ControlValueChanged
+    Private Sub ucrPnlTextWrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTextWrap.ControlValueChanged, ucrNudWidthWrap.ControlValueChanged
         If rdoWrapText.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsAddWrapColumnToDataFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsAddUnWrapColumnToDataFunction, 0)
-
+            clsWrapOrUnwrapFunction.AddParameter("width", ucrNudWidthWrap.GetText, iPosition:=1)
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsAddUnWrapColumnToDataFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAddUnWrapColumnToDataFunction)
+            clsWrapOrUnwrapFunction.AddParameter("width", "NULL", iPosition:=1)
         End If
     End Sub
 

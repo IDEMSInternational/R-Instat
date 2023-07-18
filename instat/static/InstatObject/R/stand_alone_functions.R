@@ -2947,3 +2947,27 @@ getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_reg
   # Return the row headers
   return(rowHeaders)
 }
+
+wrapOrunwrapData <- function(data, width, wrap = TRUE) {
+  # Store the original data type of the column
+  original_type <- class(data)
+  not_desired_types <- c("factor", "numeric", "Date", "character", "integer", "list", "double")
+  if(!original_type %in% not_desired_types) stop("The format of the data cannot be recognised.")
+
+  # Apply str_replace_all if "\n" is detected in the data
+  if (any(stringr::str_detect(data, "\n"))) {
+    data <- stringr::str_replace_all(data, "\n", " ")
+  }
+  
+  # Apply str_wrap if width is specified
+  if (!is.null(width) && wrap) {
+    data <- stringr::str_wrap(data, width = width)
+  }
+  
+  # Convert back to the original data type if necessary
+  if (original_type != class(data)) {
+    data <- as(data, original_type)
+  }
+  
+  return(data)
+}
