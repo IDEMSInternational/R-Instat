@@ -87,7 +87,6 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
-        'ucrReceiverX.SetLinkedDisplayControl(ucrChkUseasNumeric)
 
         ucrChkUseasNumeric.SetParameter(New RParameter("check", 4))
         ucrChkUseasNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -99,8 +98,6 @@ Public Class dlgGeneralForGraphics
         ucrChkDisplayasFactor.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDisplayasFactor.SetText("Display as Factor")
         ucrChkDisplayasFactor.SetRDefault("FALSE")
-
-        'ucrChkDisplayasFactor.SetLinkedDisplayControl(ucrChkDisplayasFactor)
 
         ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
         ucrFillOrColourReceiver.SetIncludedDataTypes({"factor"})
@@ -123,7 +120,6 @@ Public Class dlgGeneralForGraphics
         clsScaleContinuousFunction = New RFunction
         clsLevelsFunction = New RFunction
         clsBaseOperator = New ROperator
-        'clsDollarOperator = New ROperator
 
         ucrSave.Reset()
 
@@ -154,15 +150,6 @@ Public Class dlgGeneralForGraphics
         clsScaleContinuousFunction.SetRCommand("scale_x_continuous")
         clsScaleContinuousFunction.AddParameter("breaks", "1:12", iPosition:=1)
         clsScaleContinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsLevelsFunction, iPosition:=2)
-        'clsDollarOperator.SetOperation("$")
-        'clsDollarOperator.bSpaceAroundOperation = False
-        'clsDollarOperator.AddParameter("left", ucrGraphicsSelector.strCurrentDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        'clsDollarOperator.AddParameter("right", ucrReceiverX.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=1)
-
-
-
-        'clsScaleContinuousFunction.AddParameter("vjust", "-0.25", iPosition:=3)
-        'clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
 
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -284,11 +271,6 @@ Public Class dlgGeneralForGraphics
         ucrChkUseasNumeric.Visible = False
         If Not ucrReceiverX.IsEmpty Then
             clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-            'If {"factor", "character"}.Contains(ucrReceiverX.strCurrDataType) Then
-            '    ucrChkUseasNumeric.Visible = True
-            'ElseIf {"numeric", "integer"}.Contains(ucrReceiverX.strCurrDataType) OrElse {"date"}.Contains(ucrReceiverX.strCurrDataType) Then
-            '    ucrChkUseasNumeric.Visible = False
-            'End If
             If ucrReceiverX.strCurrDataType = "factor" Then
                 ucrChkUseasNumeric.Visible = True
             Else
@@ -311,13 +293,9 @@ Public Class dlgGeneralForGraphics
             End If
         Else
             clsGlobalAesFunction.RemoveParameterByName("x")
-            'ucrChkDisplayasFactor.Visible = False
-            ' ucrChkUseasNumeric.Visible = False
         End If
 
     End Sub
-
-
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrChkUseasNumeric.ControlValueChanged, ucrChkDisplayasFactor.ControlValueChanged
         VariableXType()

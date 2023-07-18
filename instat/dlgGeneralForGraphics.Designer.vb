@@ -192,7 +192,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkUseasNumeric.Checked = False
         Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(262, 233)
         Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
-        Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(125, 23)
         Me.ucrChkUseasNumeric.TabIndex = 20
         '
         'ucrChkDisplayasFactor
@@ -201,7 +201,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkDisplayasFactor.Checked = False
         Me.ucrChkDisplayasFactor.Location = New System.Drawing.Point(262, 280)
         Me.ucrChkDisplayasFactor.Name = "ucrChkDisplayasFactor"
-        Me.ucrChkDisplayasFactor.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkDisplayasFactor.Size = New System.Drawing.Size(125, 23)
         Me.ucrChkDisplayasFactor.TabIndex = 21
         '
         'dlgGeneralForGraphics
