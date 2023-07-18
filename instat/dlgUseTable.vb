@@ -76,7 +76,6 @@ Public Class dlgUseTable
         ucrSaveTable.SetDataFrameSelector(ucrTablesSelector.ucrAvailableDataFrames)
         ucrSaveTable.SetCheckBoxText("Save New Table")
         ucrSaveTable.SetIsComboBox()
-        ' ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
     End Sub
 
     Private Sub SetDefaults()
@@ -192,7 +191,6 @@ Public Class dlgUseTable
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
-        clsJoiningPipeOperator.SetAssignTo("last_table")
 
         clsGtColsLabelFunction.SetPackageName("gt")
         clsGtColsLabelFunction.SetRCommand("cols_label")
@@ -200,12 +198,9 @@ Public Class dlgUseTable
         clsColumnRenameOperator.SetOperation("%>%")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-        'SetBaseFunction()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrSaveTable.AddAdditionalRCode(clsColumnRenameOperator, bReset)
-
         ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
         ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
         ucrSaveTable.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
@@ -233,7 +228,8 @@ Public Class dlgUseTable
                                         clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
                                         clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
-                                        clsNewGtColsLabelFunction:=clsGtColsLabelFunction, dfEditData:=GetSelectedDataFrame, strDataFrameName:=ucrTablesSelector.strCurrentDataFrame, bReset:=bReset)
+                                        clsNewGtColsLabelFunction:=clsGtColsLabelFunction, dfEditData:=GetSelectedDataFrame, strDataFrameName:=ucrTablesSelector.strCurrentDataFrame,
+                                        bUseTable:=True, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
         SetBaseFunction()
     End Sub
@@ -244,10 +240,8 @@ Public Class dlgUseTable
         Dim clsDataFrameFunction As New RFunction
         Dim clsNamesFunction As New RFunction
 
-        ' clsUseTableFunction.RemoveAssignTo()
         clsDataFrameFunction.SetRCommand("as.data.frame")
         clsDataFrameFunction.AddParameter("data", clsRFunctionParameter:=clsUseTableFunction, bIncludeArgumentName:=False)
-        'clsDataFrameFunction.SetAssignTo("last_data")
 
         clsNamesFunction.SetRCommand("names")
         clsNamesFunction.AddParameter("name", clsRFunctionParameter:=clsDataFrameFunction, bIncludeArgumentName:=False)
@@ -261,23 +255,25 @@ Public Class dlgUseTable
 
     Private Sub SetBaseFunction()
         If clsGtColsLabelFunction.ContainsParameter(".list") Then
-            'clsJoiningPipeOperator.RemoveAssignTo()
+            clsJoiningPipeOperator.RemoveAssignTo()
+            clsJoiningPipeOperator.SetAssignTo("format_table")
             clsColumnRenameOperator.AddParameter("x", clsROperatorParameter:=clsJoiningPipeOperator, iPosition:=0)
             clsColumnRenameOperator.AddParameter("y", clsRFunctionParameter:=clsGtColsLabelFunction, iPosition:=1)
-            ucrBase.clsRsyntax.SetBaseROperator(clsColumnRenameOperator)
             clsColumnRenameOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table_renamed",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                   strRDataFrameNameToAddObjectTo:=ucrTablesSelector.strCurrentDataFrame,
                                                   strObjectName:="last_table_renamed")
+            ucrBase.clsRsyntax.SetBaseROperator(clsColumnRenameOperator)
 
         Else
-            ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+
             clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                   strRDataFrameNameToAddObjectTo:=ucrTablesSelector.strCurrentDataFrame,
                                                   strObjectName:="last_table")
+            ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
         End If
     End Sub
 
@@ -296,16 +292,4 @@ Public Class dlgUseTable
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsLaTex)
         End If
     End Sub
-
-    'Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged
-    '    If ucrSaveTable.ucrChkSave.Checked Then
-    '        clsColumnRenameOperator.AddParameter("x", ucrSaveTable.GetText, iPosition:=0)
-    '    Else
-    '        clsColumnRenameOperator.AddParameter("x", "last_table", iPosition:=0)
-    '    End If
-    'End Sub
-
-    'Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlValueChanged
-    '    SetBaseFunction()
-    'End Sub
 End Class

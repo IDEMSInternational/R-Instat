@@ -37,7 +37,7 @@ Public Class sdgFormatSummaryTables
     Private chrMatrixData As CharacterMatrix
     Private strDataName As String = ""
     Private dctRowsNewNameChanged As New Dictionary(Of String, String)
-    Private tbPage As TabPage
+    Private bUseTable As Boolean = False
 
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -168,7 +168,7 @@ Public Class sdgFormatSummaryTables
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
                         clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction,
                         Optional clsNewGtColsLabelFunction As RFunction = Nothing,
-                        Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "")
+                        Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "", Optional bUseTable As Boolean = False)
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -178,6 +178,7 @@ Public Class sdgFormatSummaryTables
 
         Me.chrMatrixData = dfEditData
         Me.strDataName = strDataFrameName
+        Me.bUseTable = bUseTable
 
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
@@ -199,13 +200,15 @@ Public Class sdgFormatSummaryTables
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
 
-        ' tbPage = tbpFormatOptions.TabPages()
+        Dim tbPageColumns As TabPage = tbpColumns
 
-        If clsNewGtColsLabelFunction Is Nothing Then
-            tbpFormatOptions.TabPages.Remove(tbpColumns)
-        ElseIf clsNewGtColsLabelFunction IsNot Nothing AndAlso Not tbpFormatOptions.TabPages.Contains(tbpColumns) Then
+        If bUseTable Then
             clsGtColsLabelFunction = clsNewGtColsLabelFunction
-            tbpFormatOptions.TabPages.Add(tbpColumns)
+            If Not tbpFormatOptions.TabPages.Contains(tbPageColumns) Then
+                tbpFormatOptions.TabPages.Add(tbPageColumns)
+            End If
+        ElseIf Not bUseTable Then
+                tbpFormatOptions.TabPages.Remove(tbPageColumns)
         End If
 
         If bReset Then
