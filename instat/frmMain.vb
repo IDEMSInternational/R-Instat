@@ -1173,10 +1173,6 @@ Public Class frmMain
         dlgCompareModels.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
-        dlgColumnStats.ShowDialog()
-    End Sub
-
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
         dlgUseDate.ShowDialog()
     End Sub
@@ -1505,9 +1501,6 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralUseSummaries.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
@@ -2518,5 +2511,18 @@ Public Class frmMain
 
     Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
         dlgSurvey.ShowDialog()
+    End Sub
+
+    Private Sub PivotTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphics.Click
+        dlgGeneralForGraphics.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGeneralTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralTables.Click
+        dlgSummaryTables.ShowDialog()
     End Sub
 End Class
