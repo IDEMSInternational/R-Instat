@@ -59,6 +59,7 @@ Partial Class sdgFormatSummaryTables
         Me.tbpFacets = New System.Windows.Forms.TabPage()
         Me.tbpRows = New System.Windows.Forms.TabPage()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
+        Me.grdColumnFormat = New unvell.ReoGrid.ReoGridControl()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
         Me.ucrInputSelectThemes = New instat.ucrInputComboBox()
         Me.cmdManualTheme = New System.Windows.Forms.Button()
@@ -66,7 +67,8 @@ Partial Class sdgFormatSummaryTables
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.grdColumnFormat = New unvell.ReoGrid.ReoGridControl()
+        Me.ucrChkAlignColumns = New instat.ucrCheck()
+        Me.ucrInputAlignColumn = New instat.ucrInputComboBox()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpSecondFootnote.SuspendLayout()
@@ -496,6 +498,8 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpColumns
         '
+        Me.tbpColumns.Controls.Add(Me.ucrInputAlignColumn)
+        Me.tbpColumns.Controls.Add(Me.ucrChkAlignColumns)
         Me.tbpColumns.Controls.Add(Me.grdColumnFormat)
         Me.tbpColumns.Location = New System.Drawing.Point(4, 22)
         Me.tbpColumns.Name = "tbpColumns"
@@ -503,6 +507,24 @@ Partial Class sdgFormatSummaryTables
         Me.tbpColumns.TabIndex = 5
         Me.tbpColumns.Text = "Columns"
         Me.tbpColumns.UseVisualStyleBackColor = True
+        '
+        'grdColumnFormat
+        '
+        Me.grdColumnFormat.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.grdColumnFormat.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdColumnFormat.LeadHeaderContextMenuStrip = Nothing
+        Me.grdColumnFormat.Location = New System.Drawing.Point(22, 25)
+        Me.grdColumnFormat.Name = "grdColumnFormat"
+        Me.grdColumnFormat.RowHeaderContextMenuStrip = Nothing
+        Me.grdColumnFormat.Script = Nothing
+        Me.grdColumnFormat.SheetTabContextMenuStrip = Nothing
+        Me.grdColumnFormat.SheetTabNewButtonVisible = True
+        Me.grdColumnFormat.SheetTabVisible = True
+        Me.grdColumnFormat.SheetTabWidth = 60
+        Me.grdColumnFormat.ShowScrollEndSpacing = True
+        Me.grdColumnFormat.Size = New System.Drawing.Size(226, 175)
+        Me.grdColumnFormat.TabIndex = 0
+        Me.grdColumnFormat.Text = "Variables"
         '
         'tbpThemes
         '
@@ -579,23 +601,25 @@ Partial Class sdgFormatSummaryTables
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 3
         '
-        'grdColumnFormat
+        'ucrChkAlignColumns
         '
-        Me.grdColumnFormat.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.grdColumnFormat.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdColumnFormat.LeadHeaderContextMenuStrip = Nothing
-        Me.grdColumnFormat.Location = New System.Drawing.Point(22, 25)
-        Me.grdColumnFormat.Name = "grdColumnFormat"
-        Me.grdColumnFormat.RowHeaderContextMenuStrip = Nothing
-        Me.grdColumnFormat.Script = Nothing
-        Me.grdColumnFormat.SheetTabContextMenuStrip = Nothing
-        Me.grdColumnFormat.SheetTabNewButtonVisible = True
-        Me.grdColumnFormat.SheetTabVisible = True
-        Me.grdColumnFormat.SheetTabWidth = 60
-        Me.grdColumnFormat.ShowScrollEndSpacing = True
-        Me.grdColumnFormat.Size = New System.Drawing.Size(226, 175)
-        Me.grdColumnFormat.TabIndex = 0
-        Me.grdColumnFormat.Text = "Variables"
+        Me.ucrChkAlignColumns.AutoSize = True
+        Me.ucrChkAlignColumns.Checked = False
+        Me.ucrChkAlignColumns.Location = New System.Drawing.Point(22, 221)
+        Me.ucrChkAlignColumns.Name = "ucrChkAlignColumns"
+        Me.ucrChkAlignColumns.Size = New System.Drawing.Size(138, 23)
+        Me.ucrChkAlignColumns.TabIndex = 1
+        '
+        'ucrInputAlignColumn
+        '
+        Me.ucrInputAlignColumn.AddQuotesIfUnrecognised = True
+        Me.ucrInputAlignColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAlignColumn.GetSetSelectedIndex = -1
+        Me.ucrInputAlignColumn.IsReadOnly = False
+        Me.ucrInputAlignColumn.Location = New System.Drawing.Point(166, 222)
+        Me.ucrInputAlignColumn.Name = "ucrInputAlignColumn"
+        Me.ucrInputAlignColumn.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputAlignColumn.TabIndex = 2
         '
         'sdgFormatSummaryTables
         '
@@ -621,6 +645,7 @@ Partial Class sdgFormatSummaryTables
         Me.grpTitleSubtitle.ResumeLayout(False)
         Me.grpTitleSubtitle.PerformLayout()
         Me.tbpColumns.ResumeLayout(False)
+        Me.tbpColumns.PerformLayout()
         Me.tbpThemes.ResumeLayout(False)
         Me.tbpThemes.PerformLayout()
         Me.ResumeLayout(False)
@@ -673,4 +698,6 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrInputSelectThemes As ucrInputComboBox
     Friend WithEvents ucrPnlThemesPanel As UcrPanel
     Friend WithEvents grdColumnFormat As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents ucrInputAlignColumn As ucrInputComboBox
+    Friend WithEvents ucrChkAlignColumns As ucrCheck
 End Class

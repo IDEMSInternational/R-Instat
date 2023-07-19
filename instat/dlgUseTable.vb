@@ -27,7 +27,7 @@ Public Class dlgUseTable
                                        clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
                                         clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction, clsGtFunction,
-                                       clsgtExtraThemesFunction, clsGtColsLabelFunction As New RFunction
+                                       clsgtExtraThemesFunction, clsGtColsLabelFunction, clsgtAlignColsFunction As New RFunction
 
     Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator, clsColumnRenameOperator As New ROperator
 
@@ -108,6 +108,7 @@ Public Class dlgUseTable
         clsColumnRenameOperator = New ROperator
         clsGtColsLabelFunction = New RFunction
         clsGtFunction = New RFunction
+        clsgtAlignColsFunction = New RFunction
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
@@ -195,6 +196,11 @@ Public Class dlgUseTable
         clsGtColsLabelFunction.SetPackageName("gt")
         clsGtColsLabelFunction.SetRCommand("cols_label")
 
+        clsgtAlignColsFunction.SetPackageName("gt")
+        clsgtAlignColsFunction.SetRCommand("cols_align")
+        clsgtAlignColsFunction.AddParameter("align", Chr(34) & "auto" & Chr(34), iPosition:=0)
+        clsgtAlignColsFunction.AddParameter("columns", "everything()", iPosition:=1)
+
         clsColumnRenameOperator.SetOperation("%>%")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
@@ -227,7 +233,7 @@ Public Class dlgUseTable
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                         clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
+                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, clsNewgtAlignColsFunction:=clsgtAlignColsFunction,
                                         clsNewGtColsLabelFunction:=clsGtColsLabelFunction, dfEditData:=GetSelectedDataFrame, strDataFrameName:=ucrTablesSelector.strCurrentDataFrame,
                                         bUseTable:=True, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()

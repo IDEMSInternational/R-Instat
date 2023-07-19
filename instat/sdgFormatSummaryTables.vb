@@ -28,7 +28,7 @@ Public Class sdgFormatSummaryTables
     'The dummy Function is used by input controls that add the parameter manually,
     'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
-    Public clsThemesTabOptionsFunction, clsgtExtrasThemesFunction, clsAsListFunction, clsSetNameFunction, clsGtColsLabelFunction As New RFunction
+    Private clsThemesTabOptionsFunction, clsgtExtrasThemesFunction, clsAsListFunction, clsSetNameFunction, clsGtColsLabelFunction, clsgtAlignColsFunction As New RFunction
     Private clsPipeOperator, clsJoiningOperator, clsRenamingOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
@@ -49,7 +49,7 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Public Sub InitialiseControls()
-        Dim dctgtExtraThemes As New Dictionary(Of String, String)
+        Dim dctgtAlignColumns As New Dictionary(Of String, String)
 
         'Themes
         ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
@@ -143,6 +143,19 @@ Public Class sdgFormatSummaryTables
         ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
         ucrChkAddSourcenote.AddParameterPresentCondition(False, "source_note", False)
 
+        ucrChkAlignColumns.SetText("Align Columns")
+        ucrChkAlignColumns.AddToLinkedControls(ucrInputAlignColumn, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAlignColumns.AddParameterPresentCondition(True, "align")
+        ucrChkAlignColumns.AddParameterPresentCondition(False, "align", False)
+
+        ucrInputAlignColumn.SetParameter(New RParameter("align", iNewPosition:=0))
+        dctgtAlignColumns.Add("auto", Chr(34) & "auto" & Chr(34))
+        dctgtAlignColumns.Add("left", Chr(34) & "left" & Chr(34))
+        dctgtAlignColumns.Add("center", Chr(34) & "center" & Chr(34))
+        dctgtAlignColumns.Add("right", Chr(34) & "right" & Chr(34))
+        ucrInputAlignColumn.SetItems(dctgtAlignColumns)
+        'ucrInputAlignColumn.SetRDefault("auto")
+
         bControlsInitialised = True
     End Sub
 
@@ -167,7 +180,7 @@ Public Class sdgFormatSummaryTables
                         clsNewSecondFootnoteCellFunction As RFunction, clsNewTabStyleCellTextFunction As RFunction,
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
                         clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction,
-                        Optional clsNewGtColsLabelFunction As RFunction = Nothing,
+                        Optional clsNewgtAlignColsFunction As RFunction = Nothing, Optional clsNewGtColsLabelFunction As RFunction = Nothing,
                         Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "", Optional bUseTable As Boolean = False)
 
         If Not bControlsInitialised Then
@@ -199,6 +212,7 @@ Public Class sdgFormatSummaryTables
         clsDummyFunction = clsNewDummyFunction
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
+        clsgtAlignColsFunction = clsNewgtAlignColsFunction
 
         Dim tbPageColumns As TabPage = tbpColumns
 
@@ -235,6 +249,8 @@ Public Class sdgFormatSummaryTables
         ucrInputTitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSubtitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlThemesPanel.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputAlignColumn.SetRCode(clsgtAlignColsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkAlignColumns.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
     End Sub
@@ -562,6 +578,14 @@ Public Class sdgFormatSummaryTables
             clsRenamingOperator.SetAssignTo("col_list")
 
             clsGtColsLabelFunction.AddParameter(".list", clsROperatorParameter:=clsRenamingOperator, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrChkAlignColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAlignColumns.ControlValueChanged
+        If ucrChkAlignColumns.Checked Then
+            clsJoiningOperator.AddParameter("align", clsRFunctionParameter:=clsgtAlignColsFunction, iPosition:=7)
+        Else
+            clsJoiningOperator.RemoveParameterByName("align")
         End If
     End Sub
 End Class
