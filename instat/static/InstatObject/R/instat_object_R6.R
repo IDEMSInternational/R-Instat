@@ -2722,7 +2722,9 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
     
     # Convert back to the original data type if necessary
     if (original_type != class(column_data)) {
-      column_data <- as(column_data, original_type)
+      if (original_type %in% c("factor", "ordered_factor")){
+        column_data <- make_factor(column_data)
+      }else{ column_data <- as(column_data, original_type) }
     }
     self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
   }
