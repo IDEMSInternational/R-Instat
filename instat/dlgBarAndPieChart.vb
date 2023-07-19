@@ -80,6 +80,7 @@ Public Class dlgBarAndPieChart
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
     Private clsConcantenateFunction As New RFunction
+    Private clsAttachFunction As New RFunction
     Private clsOperator1 As New ROperator
     Private clsOperator2 As New ROperator
     Private clsOperator As New ROperator
@@ -498,15 +499,22 @@ Public Class dlgBarAndPieChart
 
         clsOperator1.SetOperation("[")
         clsOperator1.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
-        clsOperator1.AddParameter("right", "2]")
+        'clsOperator1.AddParameter("right", "1]")
+        clsOperator1.bBrackets = False
+        clsOperator1.bSpaceAroundOperation = False
 
-        clsOperator2.SetOperation("[")
-        clsOperator2.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
-        clsOperator2.AddParameter("right", "10]")
+
+
+        clsOperator2.SetOperation("]")
+        'clsOperator2.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
+        clsOperator2.bSpaceAroundOperation = False
+
+        'clsOperator2.AddParameter("right", "2]")
 
         clsOperator.SetOperation(":")
         clsOperator.AddParameter("left", clsROperatorParameter:=clsOperator1)
         clsOperator.AddParameter("right", clsROperatorParameter:=clsOperator2)
+        clsOperator.bBrackets = False
 
         clsConcantenateFunction.SetRCommand("c")
         clsConcantenateFunction.AddParameter("x", clsROperatorParameter:=clsOperator, bIncludeArgumentName:=False)
@@ -591,6 +599,9 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction.SetPackageName("ggplot2")
         clsScaleSizeAreaFunction.SetRCommand("scale_size_area")
 
+        clsAttachFunction.SetRCommand("attach")
+        clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
+
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -614,6 +625,7 @@ Public Class dlgBarAndPieChart
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
 
         clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -972,7 +984,7 @@ Public Class dlgBarAndPieChart
 
     Private Sub AddLevels()
         If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-            clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames, bIncludeArgumentName:=False)
+            clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
         End If
     End Sub
 

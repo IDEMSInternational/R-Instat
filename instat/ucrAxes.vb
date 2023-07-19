@@ -160,19 +160,19 @@ Public Class ucrAxes
         ucrChkLimitsFrom.SetText("From")
         ucrChkLimitsFrom.AddParameterPresentCondition(True, "from")
         ucrChkLimitsFrom.AddParameterPresentCondition(False, "from", False)
-        ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrNudFrom.SetMinMax(1, Integer.MaxValue)
 
         ucrChkLimitsTo.SetText("To")
         ucrChkLimitsTo.AddParameterPresentCondition(True, "to")
         ucrChkLimitsTo.AddParameterPresentCondition(False, "to", False)
-        ucrChkLimitsTo.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkLimitsTo.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrNudTo.SetMinMax(1, Integer.MaxValue)
 
         ucrChkLimitsBy.SetText("From")
         ucrChkLimitsBy.AddParameterPresentCondition(True, "by")
         ucrChkLimitsBy.AddParameterPresentCondition(False, "by", False)
-        ucrChkLimitsBy.AddToLinkedControls(ucrNudBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkLimitsBy.AddToLinkedControls(ucrNudBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrNudBy.SetMinMax(1, Integer.MaxValue)
 
         'Scales section
@@ -784,13 +784,13 @@ Public Class ucrAxes
 
     Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged
         If ucrChkLimitsFrom.Checked AndAlso Not ucrNudFrom.IsEmpty Then
-            clsOperator1.AddParameter("right", ucrNudFrom.GetText & "]", bIncludeArgumentName:=False)
+            clsOperator1.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
         End If
     End Sub
 
     Private Sub ucrChkLimitsTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsTo.ControlValueChanged, ucrNudTo.ControlValueChanged
         If ucrChkLimitsTo.Checked AndAlso Not ucrNudTo.IsEmpty Then
-            clsOperator2.AddParameter("right", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+            clsOperator2.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
         End If
     End Sub
 End Class
