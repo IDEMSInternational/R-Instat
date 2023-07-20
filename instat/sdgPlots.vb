@@ -40,6 +40,11 @@ Public Class sdgPlots
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsPlotElementTitleFunction As New RFunction
+    Private clsPlotElementSubTitleFunction As New RFunction
+    Private clsPlotElementCaptionFunction As New RFunction
+    Private clsPlotElementTagFunction As New RFunction
+    Private clsPlotLegendTitleFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Public clsOperator1 As New ROperator
     Public clsOperator2 As New ROperator
@@ -670,6 +675,12 @@ Public Class sdgPlots
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElemetText)
+        dctThemeFunctions.TryGetValue("title", clsPlotElementTitleFunction)
+        dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction)
+        dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction)
+        dctThemeFunctions.TryGetValue("tag", clsPlotElementTagFunction)
+        dctThemeFunctions.TryGetValue("colour", clsPlotLegendTitleFunction)
+
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
 
@@ -711,6 +722,12 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        If bReset Then
+            ucrChkNewLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        End If
         ucrInputThemes.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
@@ -772,6 +789,15 @@ Public Class sdgPlots
         ucrChkFillDiscrete.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColourDiscrete.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        'labels
+        If bReset Then
+            ucrNudTitleSize.SetRCode(clsPlotElementTitleFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitleFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudCaptionSize.SetRCode(clsPlotElementCaptionFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudLegendSize.SetRCode(clsPlotLegendTitleFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudTagSize.SetRCode(clsPlotElementTagFunction, bReset, bCloneIfNeeded:=True)
+        End If
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
