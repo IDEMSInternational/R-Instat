@@ -496,20 +496,13 @@ Public Class dlgBarAndPieChart
 
         clsLevelsFunction.SetRCommand("levels")
 
-
         clsOperator1.SetOperation("[")
         clsOperator1.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
-        'clsOperator1.AddParameter("right", "1]")
         clsOperator1.bBrackets = False
         clsOperator1.bSpaceAroundOperation = False
 
-
-
         clsOperator2.SetOperation("]")
-        'clsOperator2.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
         clsOperator2.bSpaceAroundOperation = False
-
-        'clsOperator2.AddParameter("right", "2]")
 
         clsOperator.SetOperation(":")
         clsOperator.AddParameter("left", clsROperatorParameter:=clsOperator1)
@@ -624,7 +617,7 @@ Public Class dlgBarAndPieChart
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
 
-        clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
+        'clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -983,8 +976,12 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub AddLevels()
-        If ucrVariablesAsFactorForBarChart.bSingleVariable Then
+        If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
+            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
+
+        Else
+            clsXScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
     End Sub
 

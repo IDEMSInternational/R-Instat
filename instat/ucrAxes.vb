@@ -169,11 +169,6 @@ Public Class ucrAxes
         ucrChkLimitsTo.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
         ucrNudTo.SetMinMax(1, Integer.MaxValue)
 
-        ucrChkLimitsBy.SetText("From")
-        ucrChkLimitsBy.AddParameterPresentCondition(True, "by")
-        ucrChkLimitsBy.AddParameterPresentCondition(False, "by", False)
-        ucrChkLimitsBy.AddToLinkedControls(ucrNudBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrNudBy.SetMinMax(1, Integer.MaxValue)
 
         'Scales section
         ucrPnlScales.AddRadioButton(rdoScalesAuto)
