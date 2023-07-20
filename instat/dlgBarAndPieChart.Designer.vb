@@ -71,6 +71,9 @@ Partial Class dlgBarAndPieChart
         Me.toolStripMenuItemPointOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTreemapOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemWordcloudOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegendPosition = New instat.ucrCheck()
+        Me.ucrChkReverse = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkReorderValue = New instat.ucrCheck()
         Me.ucrChkReorderFrequency = New instat.ucrCheck()
@@ -426,6 +429,35 @@ Partial Class dlgBarAndPieChart
         Me.toolStripMenuItemWordcloudOptions.Name = "toolStripMenuItemWordcloudOptions"
         Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(178, 22)
         Me.toolStripMenuItemWordcloudOptions.Text = "Wordcloud Options"
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(126, 271)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputLegendPosition.TabIndex = 8
+        '
+        'ucrChkLegendPosition
+        '
+        Me.ucrChkLegendPosition.AutoSize = True
+        Me.ucrChkLegendPosition.Checked = False
+        Me.ucrChkLegendPosition.Location = New System.Drawing.Point(10, 269)
+        Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
+        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(139, 23)
+        Me.ucrChkLegendPosition.TabIndex = 7
+        '
+        'ucrChkReverse
+        '
+        Me.ucrChkReverse.AutoSize = True
+        Me.ucrChkReverse.Checked = False
+        Me.ucrChkReverse.Location = New System.Drawing.Point(127, 293)
+        Me.ucrChkReverse.Name = "ucrChkReverse"
+        Me.ucrChkReverse.Size = New System.Drawing.Size(110, 23)
+        Me.ucrChkReverse.TabIndex = 69
         '
         'cmdOptions
         '
@@ -868,6 +900,9 @@ Partial Class dlgBarAndPieChart
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 547)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegendPosition)
+        Me.Controls.Add(Me.ucrChkReverse)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkReorderValue)
         Me.Controls.Add(Me.ucrChkReorderFrequency)
@@ -1016,4 +1051,7 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents toolStripMenuItemWordcloudOptions As ToolStripMenuItem
     Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents toolStripMenuItemLollipopOptions As ToolStripMenuItem
+    Friend WithEvents ucrChkReverse As ucrCheck
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegendPosition As ucrCheck
 End Class

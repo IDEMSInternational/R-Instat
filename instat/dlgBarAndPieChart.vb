@@ -77,6 +77,10 @@ Public Class dlgBarAndPieChart
     Private clsScaleSizeAreaFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
+    Private clsGuidelegend As New RFunction
+    Private clsGuideFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -113,6 +117,7 @@ Public Class dlgBarAndPieChart
         Dim dctLabelColours As New Dictionary(Of String, String)
         Dim dctLollipopColours As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctLabelSizes As New Dictionary(Of String, String)
         Dim dctLayout As New Dictionary(Of String, String)
         Dim dctStart As New Dictionary(Of String, String)
@@ -296,6 +301,23 @@ Public Class dlgBarAndPieChart
         ucrInputLollipopColour.SetItems(dctLollipopColours)
         ucrInputLollipopColour.bAllowNonConditionValues = True
 
+        ucrChkReverse.SetText("Add Reverse")
+
+        'Theme Tab Checkboxes under grpCommonOptions
+        ucrChkLegendPosition.SetText("Legend Position")
+        ucrChkLegendPosition.AddToLinkedControls({ucrInputLegendPosition, ucrChkReverse}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
+
+
         ucrNudLollipopSize.SetParameter(New RParameter("point.size", 1))
         ucrNudLollipopSize.DecimalPlaces = 0
         ucrNudLollipopSize.Increment = 1
@@ -408,6 +430,10 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
+        clsGuidelegend = New RFunction
+        clsGuideFunction = New RFunction
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
+
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -428,9 +454,15 @@ Public Class dlgBarAndPieChart
 
         clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
 
+        clsGuidelegend.SetRCommand("guide_legend")
+        clsGuidelegend.AddParameter("reverse", "TRUE")
+
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+
+        clsGuideFunction.SetRCommand("guides")
+        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuidelegend)
 
         clsScaleXdiscretFunction.SetRCommand("scale_x_discrete")
         clsScaleXdiscretFunction.AddParameter("expand", clsRFunctionParameter:=clsExpansionFunction, iPosition:=0)
@@ -635,6 +667,9 @@ Public Class dlgBarAndPieChart
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
+        ucrChkReverse.SetRCode(clsBaseOperator, bReset)
+        ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -1041,7 +1076,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverArea.ControlContentsChanged, ucrReceiverFill.ControlContentsChanged, ucrReceiverLabel.ControlContentsChanged,
         ucrChkAddLabelsText.ControlContentsChanged, ucrChkAddLabelsTreemap.ControlContentsChanged, ucrReceiverWordcloudLabel.ControlContentsChanged,
         ucrReceiverWordcloudSize.ControlContentsChanged, ucrReceiverWordcloudColor.ControlContentsChanged, ucrReceiverWordcloudAngle.ControlContentsChanged,
-        ucrChkIncreaseSize.ControlContentsChanged
+        ucrChkIncreaseSize.ControlContentsChanged, ucrChkReverse.ControlContentsChanged, ucrChkLegendPosition.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1051,6 +1086,26 @@ Public Class dlgBarAndPieChart
         Else
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
+    End Sub
+
+    Private Sub ucrChkAddLegends_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReverse.ControlValueChanged
+        If ucrChkReverse.Checked Then
+            clsBaseOperator.AddParameter("guides", clsRFunctionParameter:=clsGuideFunction, iPosition:=2)
+        Else
+            clsBaseOperator.RemoveParameterByName("guides")
+        End If
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged
+        AddRemoveTheme()
     End Sub
 
 End Class
