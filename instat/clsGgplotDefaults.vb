@@ -24,6 +24,7 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("title", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("subtitle", Chr(34) & Chr(34))
             clsTempFunc.AddParameter("caption", Chr(34) & Chr(34))
+
             Return clsTempFunc
         End Get
     End Property
@@ -241,6 +242,8 @@ Public Class GgplotDefaults
             dctTemp.Add("title", clsElementText.Clone())
             dctTemp.Add("sub.title", clsElementText.Clone())
             dctTemp.Add("caption", clsElementText.Clone())
+            dctTemp.Add("tag", clsElementText.Clone())
+            dctTemp.Add("colour", clsElementText.Clone())
             'dctTemp.Add("aspect.ratio", clsElementText.Clone())
             dctTemp.Add("axis.title", clsElementText.Clone())
             dctTemp.Add("axis.title.x", clsElementText.Clone())
