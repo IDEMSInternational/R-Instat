@@ -2711,7 +2711,7 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
   desired_types <- c("factor", "numeric", "Date", "character", "integer", "list", "double")
   if(original_type %in% desired_types){
     # Apply str_replace_all if "\n" is detected in the column_data
-    if (any(stringr::str_detect(column_data, "\n"))) {
+    if (any(!is.na(stringr::str_detect(column_data, "\n")))) {
       column_data <- stringr::str_replace_all(column_data, "\n", " ")
     }
     

@@ -88,7 +88,7 @@ Partial Class dlgWordwrap
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 327)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 303)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -159,7 +159,7 @@ Partial Class dlgWordwrap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(677, 421)
+        Me.ClientSize = New System.Drawing.Size(660, 392)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrNudWidthWrap)

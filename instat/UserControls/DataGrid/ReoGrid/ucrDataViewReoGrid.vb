@@ -105,7 +105,7 @@ Public Class ucrDataViewReoGrid
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
         Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
-            MsgBox("Cannot wrap or unwrap this type of varaible.")
+            MsgBox("Cannot wrap or unwrap this type of variable.")
             Exit Sub
         End If
 
