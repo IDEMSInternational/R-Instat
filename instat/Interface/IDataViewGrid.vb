@@ -25,15 +25,26 @@ Public Interface IDataViewGrid
 
     Event DeleteValuesToDataframe()
 
+    Event EditCell()
+
     Event WorksheetChanged()
 
     Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
+
+    Event FindRow()
 
     Sub AddColumns(visiblePage As clsDataFramePage)
 
     Sub AddRowData(dataFrame As clsDataFrame)
 
+    Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bCellOrRow As Boolean = False)
+
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
+
+    Function GetFirstRowHeader() As String
+
+    Function GetLastRowHeader() As String
 
     Function GetWorksheetCount() As Integer
 
