@@ -25,8 +25,6 @@ Public Class dlgDescribeTwoVarGraph
             clsScaleColourViridisFunction, clsPairThemesFunction As New RFunction
     Private clsYScaleDiscreteFunction As New RFunction
     Private clsXScaleDiscreteFunction As New RFunction
-    Private clsOperator1 As New ROperator
-    Private clsOperator2 As New ROperator
 
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
@@ -332,9 +330,6 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
         clsBaseOperator = New ROperator
-        clsOperator1 = New ROperator
-        clsOperator2 = New ROperator
-
         bResetSubdialog = True
 
         'Reset
@@ -861,7 +856,6 @@ Public Class dlgDescribeTwoVarGraph
                           clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                           clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewFacetFunction:=clsRFacet, clsNewCoordPolarFunction:=clsCoordPolarFunction,
                           clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorTwoVarGraph,
-                          clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                           clsNewAnnotateFunction:=clsAnnotateFunction, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()

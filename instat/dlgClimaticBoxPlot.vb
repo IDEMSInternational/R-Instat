@@ -47,8 +47,6 @@ Public Class dlgClimaticBoxPlot
     Private clsYScaleDateFunction As New RFunction
     Private clsYScaleDiscreteFunction As New RFunction
     Private clsXScaleDiscreteFunction As New RFunction
-    Private clsOperator1 As New ROperator
-    Private clsOperator2 As New ROperator
 
     Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
@@ -219,9 +217,6 @@ Public Class dlgClimaticBoxPlot
         clsFacetOp = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
-        clsOperator1 = New ROperator
-        clsOperator2 = New ROperator
-
 
         clsFilteredDataOperator = New ROperator
         clsFilterElementOperator = New ROperator
@@ -350,7 +345,7 @@ Public Class dlgClimaticBoxPlot
             bContainsFacet = True
         End If
         sdgPlots.SetRCode(clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-                         clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
+                         clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction,
                          clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
                          clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction,
                          clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,

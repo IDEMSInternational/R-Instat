@@ -58,9 +58,6 @@ Public Class dlgBoxplot
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
 
-    Private clsOperator1 As New ROperator
-    Private clsOperator2 As New ROperator
-
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strStatSummaryParameterName As String = "stat_summary"
@@ -196,8 +193,6 @@ Public Class dlgBoxplot
     Private Sub SetDefaults()
         bResetLineLayerSubdialog = True
         clsBaseOperator = New ROperator
-        clsOperator2 = New ROperator
-        clsOperator1 = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
@@ -425,7 +420,6 @@ Public Class dlgBoxplot
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                clsNewOperator2:=clsOperator2, clsNewOperator1:=clsOperator1,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False

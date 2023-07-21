@@ -79,11 +79,11 @@ Public Class dlgBarAndPieChart
     Private clsScaleSizeAreaFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
-    Private clsConcantenateFunction As New RFunction
+    Private clsConcatenateFunction As New RFunction
     Private clsAttachFunction As New RFunction
-    Private clsOperator1 As New ROperator
-    Private clsOperator2 As New ROperator
-    Private clsOperator As New ROperator
+    Private clsLeftBracketOperator As New ROperator
+    Private clsRightBracketOperator As New ROperator
+    Private clsSequenceOperator As New ROperator
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
@@ -415,10 +415,10 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
-        clsConcantenateFunction = New RFunction
-        clsOperator1 = New ROperator
-        clsOperator2 = New ROperator
-        clsOperator = New ROperator
+        clsConcatenateFunction = New RFunction
+        clsLeftBracketOperator = New ROperator
+        clsRightBracketOperator = New ROperator
+        clsSequenceOperator = New ROperator
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -496,21 +496,21 @@ Public Class dlgBarAndPieChart
 
         clsLevelsFunction.SetRCommand("levels")
 
-        clsOperator1.SetOperation("[")
-        clsOperator1.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
-        clsOperator1.bBrackets = False
-        clsOperator1.bSpaceAroundOperation = False
+        clsLeftBracketOperator.SetOperation("[")
+        clsLeftBracketOperator.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction)
+        clsLeftBracketOperator.bBrackets = False
+        clsLeftBracketOperator.bSpaceAroundOperation = False
 
-        clsOperator2.SetOperation("]")
-        clsOperator2.bSpaceAroundOperation = False
+        clsRightBracketOperator.SetOperation("]")
+        clsRightBracketOperator.bSpaceAroundOperation = False
 
-        clsOperator.SetOperation(":")
-        clsOperator.AddParameter("left", clsROperatorParameter:=clsOperator1)
-        clsOperator.AddParameter("right", clsROperatorParameter:=clsOperator2)
-        clsOperator.bBrackets = False
+        clsSequenceOperator.SetOperation(":")
+        clsSequenceOperator.AddParameter("left", clsROperatorParameter:=clsLeftBracketOperator)
+        clsSequenceOperator.AddParameter("right", clsROperatorParameter:=clsRightBracketOperator)
+        clsSequenceOperator.bBrackets = False
 
-        clsConcantenateFunction.SetRCommand("c")
-        clsConcantenateFunction.AddParameter("x", clsROperatorParameter:=clsOperator, bIncludeArgumentName:=False)
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("x", clsROperatorParameter:=clsSequenceOperator, bIncludeArgumentName:=False)
 
         clsPointsFunction.SetPackageName("ggplot2")
         clsPointsFunction.SetRCommand("geom_point")
@@ -755,7 +755,7 @@ Public Class dlgBarAndPieChart
                                 clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsLabelAesFunction, ucrNewBaseSelector:=ucrBarChartSelector,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                clsNewOperator1:=clsOperator1, clsNewOperator2:=clsOperator2,
+                                clsNewLeftBracketOperator:=clsLeftBracketOperator, clsNewRightBracketOperator:=clsRightBracketOperator,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
@@ -976,10 +976,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub AddLevels()
-        If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" Then
+        If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
-            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
-
+            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
