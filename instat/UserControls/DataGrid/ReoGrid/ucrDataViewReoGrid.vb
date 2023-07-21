@@ -110,12 +110,7 @@ Public Class ucrDataViewReoGrid
         End If
 
         If bApplyWrap Then
-            For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
-                If i = iColumnIndex Then
-                    grdData.CurrentWorksheet.AutoFitColumnWidth(i)
-                    Exit For
-                End If
-            Next
+            grdData.CurrentWorksheet.AutoFitColumnWidth(iColumnIndex)
             For i As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
                 grdData.CurrentWorksheet.AutoFitRowHeight(i)
             Next
