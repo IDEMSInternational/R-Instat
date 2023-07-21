@@ -61,14 +61,12 @@ Public Class sdgPTConstants
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        If bReset Then
-            ucrInputAlphaPT.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputSoilFlux.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputAs.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        End If
+        ucrInputAlphaPT.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputSigma.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputSoilFlux.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputAs.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputBS.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 End Class

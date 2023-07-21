@@ -256,10 +256,6 @@ Public Class dlgEvapotranspiration
 
         clsListFunction.ClearParameters()
         clsListFunction.SetRCommand("list")
-        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-        clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
-        clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
-        clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
         clsListFunction.SetAssignTo("constants")
 
         clsETPenmanMonteith.SetPackageName("Evapotranspiration")
@@ -300,7 +296,6 @@ Public Class dlgEvapotranspiration
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsListFunction, iPosition:=1)
-        Constants()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -332,7 +327,6 @@ Public Class dlgEvapotranspiration
         If bReset Then
             ucrInputSolar.SetRCode(clsETPenmanMonteith, bReset)
         End If
-        Constants()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -404,7 +398,7 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdLocation_Click(sender As Object, e As EventArgs) Handles cmdLocation.Click
-        sdgLocation.SetRFunction(clsNewVarnamesVectorHS:=clsVarnamesVectorHS, clsNewVarnamesVectorPM:=clsVarnamesVectorPM, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        sdgLocation.SetRFunction(clsNewVarnamesVectorHS:=clsVarnamesVectorHS, clsNewVarnamesVectorPM:=clsVarnamesVectorPM, clsNewVarnamesVectorPT:=clsVarnamesVectorPT, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgLocation.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
@@ -509,8 +503,12 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("G", 0, iPosition:=6)
             clsListFunction.AddParameter("as", 0.25, iPosition:=7)
             clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
+            clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
+            clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
         ElseIf rdoHargreavesSamani.Checked Then
+            clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
+            clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
             clsListFunction.RemoveParameterByName("sigma")
             clsListFunction.RemoveParameterByName("z")
@@ -518,6 +516,8 @@ Public Class dlgEvapotranspiration
             clsListFunction.RemoveParameterByName("as")
             clsListFunction.RemoveParameterByName("bs")
         Else
+            clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
+            clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
             clsListFunction.AddParameter("as", 0.25, iPosition:=7)

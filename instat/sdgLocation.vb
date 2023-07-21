@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgLocation
     Private bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
-    Private clsVarnamesVectorPM, clsVarnamesVectorHS, clsListFunction As New RFunction
+    Private clsVarnamesVectorPM, clsVarnamesVectorHS, clsVarnamesVectorPT, clsListFunction As New RFunction
 
     Private Sub sdgLocation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -28,6 +28,9 @@ Public Class sdgLocation
             EnableDesableSelector()
             bFirstLoad = False
         End If
+
+        SetDefaults()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -73,11 +76,15 @@ Public Class sdgLocation
 
         bControlsInitialised = True
     End Sub
-
-    Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, Optional bReset As Boolean = False)
+    Private Sub SetDefaults()
+        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
+        clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
+    End Sub
+    Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, clsNewVarnamesVectorPT As RFunction, Optional bReset As Boolean = False)
         clsListFunction = clsNewListFunction
         clsVarnamesVectorPM = clsNewVarnamesVectorPM
         clsVarnamesVectorHS = clsNewVarnamesVectorHS
+        clsVarnamesVectorPM = clsNewVarnamesVectorPT
 
         If Not bControlsInitialised Then
             InitialiseDialog()
@@ -85,6 +92,10 @@ Public Class sdgLocation
 
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
         ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("lon", 3), iAdditionalPairNo:=2)
+        ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("lon", 3), iAdditionalPairNo:=2)
+        ucrSelectorLocation.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("data", 0), iAdditionalPairNo:=1)
+        ucrSelectorLocation.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("data", 0), iAdditionalPairNo:=2)
 
         ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
         ucrReceiverStation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
@@ -115,11 +126,29 @@ Public Class sdgLocation
         EnableDesableSelector()
     End Sub
 
-    Private Sub ucrInputElevation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputElevation.ControlValueChanged, ucrInputLatitude.ControlValueChanged, ucrInputLongitude.ControlValueChanged
+    Private Sub ucrInputElevation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputElevation.ControlValueChanged
         EnableDesableSelector()
+        If Not ucrInputElevation.IsEmpty Then
+            clsListFunction.AddParameter("Elev", ucrInputElevation.GetText(), iPosition:=0)
+        Else
+            clsListFunction.RemoveParameterByName("Elev")
+        End If
     End Sub
 
     Private Sub ucrSelectorLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLocation.ControlValueChanged
+        EnableDesableSelector()
+    End Sub
+
+    Private Sub ucrInputLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatitude.ControlValueChanged
+        EnableDesableSelector()
+        If Not ucrInputLatitude.IsEmpty Then
+            clsListFunction.AddParameter("lat_rad", ucrInputLatitude.GetText(), iPosition:=2)
+        Else
+            clsListFunction.RemoveParameterByName("lat_rad")
+        End If
+    End Sub
+
+    Private Sub ucrInputLongitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLongitude.ControlValueChanged
         EnableDesableSelector()
     End Sub
 End Class

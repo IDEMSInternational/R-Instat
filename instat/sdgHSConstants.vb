@@ -29,12 +29,10 @@ Public Class sdgHSConstants
         ucrInputLambda.AddQuotesIfUnrecognised = False
         'ucrInputLambda.IsReadOnly = True
         ucrInputLambda.SetLinkedDisplayControl(lbllambda)
-        'ucrInputLambda.SetRDefault(2.45)
 
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))
         ucrInputSolarConstant.AddQuotesIfUnrecognised = False
         ucrInputSolarConstant.SetLinkedDisplayControl(lblSolarConstant)
-        'ucrInputSolarConstant.SetRDefault(0.082)
 
         bControlsInitialised = True
     End Sub
@@ -45,9 +43,7 @@ Public Class sdgHSConstants
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        If bReset Then
-            ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        End If
+        ucrInputLambda.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputSolarConstant.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 End Class
