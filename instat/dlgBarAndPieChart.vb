@@ -415,10 +415,10 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
-        clsConcatenateFunction = New RFunction
-        clsLeftBracketOperator = New ROperator
-        clsRightBracketOperator = New ROperator
-        clsSequenceOperator = New ROperator
+        clsConcantenateFunction = New RFunction
+        clsOperator1 = New ROperator
+        clsOperator2 = New ROperator
+        clsOperator = New ROperator
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -617,7 +617,6 @@ Public Class dlgBarAndPieChart
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
 
-        'clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -978,7 +977,8 @@ Public Class dlgBarAndPieChart
     Private Sub AddLevels()
         If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
-            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
+            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
+
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
