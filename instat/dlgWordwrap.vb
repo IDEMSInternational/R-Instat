@@ -84,11 +84,7 @@ Public Class dlgWordwrap
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverWrapText.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverWrapText.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
