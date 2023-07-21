@@ -477,34 +477,34 @@ Public Class ucrReceiverMultiple
                         Clear()
                     End If
                     SetSelectorHeading("Variables")
-                    ElseIf strVariableTypes.Count > 0 Then
-                        If bCategoricalNumeric Then
-                            If strVariableTypes.Contains("categorical") Then
-                                SetIncludedDataTypes({"factor", "character", "logical"}, bStrict:=True)
-                                SetSelectorHeading("Categorical Variables")
-                            ElseIf strVariableTypes.Contains("numeric") Then
-                                SetExcludedDataTypes({"factor", "character"})
-                                SetSelectorHeading("Numerics")
-                            Else
-                                ' Else it is logical only
-                                RemoveIncludedMetadataProperty(strProperty:="class")
-                                RemoveExcludedMetadataProperty(strProperty:="class")
-                                SetSelectorHeading("Variables")
-                            End If
+                ElseIf strVariableTypes.Count > 0 Then
+                    If bCategoricalNumeric Then
+                        If strVariableTypes.Contains("categorical") Then
+                            SetIncludedDataTypes({"factor", "character", "logical"}, bStrict:=True)
+                            SetSelectorHeading("Categorical Variables")
+                        ElseIf strVariableTypes.Contains("numeric") Then
+                            SetExcludedDataTypes({"factor", "character"})
+                            SetSelectorHeading("Numerics")
                         Else
-                            If strVariableTypes(0) = "integer" OrElse strVariableTypes(0) = "numeric" Then
-                                SetDataType("numeric", bStrict:=True)
-                                SetSelectorHeading("Numerics")
-                            ElseIf strVariableTypes(0) = "ordered,factor" OrElse strVariableTypes(0) = "factor" Then
-                                SetDataType("factor", bStrict:=True)
-                                SetSelectorHeading("Factors")
-                            Else
-                                SetDataType(strVariableTypes(0), bStrict:=True)
-                                SetSelectorHeading(strVariableTypes(0) & " Variables")
-                            End If
+                            ' Else it is logical only
+                            RemoveIncludedMetadataProperty(strProperty:="class")
+                            RemoveExcludedMetadataProperty(strProperty:="class")
+                            SetSelectorHeading("Variables")
                         End If
                     Else
-                        RemoveIncludedMetadataProperty(strProperty:="class")
+                        If strVariableTypes(0) = "integer" OrElse strVariableTypes(0) = "numeric" Then
+                            SetDataType("numeric", bStrict:=True)
+                            SetSelectorHeading("Numerics")
+                        ElseIf strVariableTypes(0) = "ordered,factor" OrElse strVariableTypes(0) = "factor" Then
+                            SetDataType("factor", bStrict:=True)
+                            SetSelectorHeading("Factors")
+                        Else
+                            SetDataType(strVariableTypes(0), bStrict:=True)
+                            SetSelectorHeading(strVariableTypes(0) & " Variables")
+                        End If
+                    End If
+                Else
+                    RemoveIncludedMetadataProperty(strProperty:="class")
                     RemoveExcludedMetadataProperty(strProperty:="class")
                     SetSelectorHeading("Variables")
                 End If
@@ -529,9 +529,5 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetItemsDataFrames() As List(Of String)
         Return GetCurrGroupNames()
     End Function
-
-    Private Sub ReopenDialog()
-        Clear()
-    End Sub
 
 End Class
