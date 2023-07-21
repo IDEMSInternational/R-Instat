@@ -116,6 +116,10 @@ Public Class ucrDataViewLinuxGrid
         RefreshSingleCell(dataGrid.CurrentCell.ColumnIndex, dataGrid.CurrentCell.RowIndex)
     End Sub
 
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
+
+    End Sub
+
     'ToDo allow editing
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs)
         RaiseEvent CellDataChanged()
