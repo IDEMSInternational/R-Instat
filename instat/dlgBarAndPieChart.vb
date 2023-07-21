@@ -79,7 +79,7 @@ Public Class dlgBarAndPieChart
     Private clsScaleSizeAreaFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
-    Private clsConcatenateFunction As New RFunction
+    Private clsConcantenateFunction As New RFunction
     Private clsAttachFunction As New RFunction
     Private clsLeftBracketOperator As New ROperator
     Private clsRightBracketOperator As New ROperator
@@ -370,8 +370,11 @@ Public Class dlgBarAndPieChart
         ucrNudMaxSize.SetParameter(New RParameter("max_size", 0))
         ucrChkIncreaseSize.SetText("Increase size")
         ucrChkIncreaseSize.AddToLinkedControls(ucrNudMaxSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
-        ucrChkIncreaseSize.AddParameterPresentCondition(True, "max_size")
-        ucrChkIncreaseSize.AddParameterPresentCondition(False, "max_size", False)
+        'ucrChkIncreaseSize.AddParameterPresentCondition(True, "max_size")
+        'ucrChkIncreaseSize.AddParameterPresentCondition(False, "max_size", False)
+
+        ucrChkIncreaseSize.AddParameterValuesCondition(True, "check", "TRUE")
+        ucrChkIncreaseSize.AddParameterValuesCondition(False, "check", "FALSE")
     End Sub
 
     Private Sub SetDefaults()
@@ -416,9 +419,12 @@ Public Class dlgBarAndPieChart
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
         clsConcantenateFunction = New RFunction
-        clsOperator1 = New ROperator
-        clsOperator2 = New ROperator
-        clsOperator = New ROperator
+        clsLeftBracketOperator = New ROperator
+        clsRightBracketOperator = New ROperator
+        clsConcantenateFunction = New RFunction
+        clsLeftBracketOperator = New ROperator
+        clsRightBracketOperator= New ROperator
+        clsSequenceOperator = New ROperator
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -438,6 +444,7 @@ Public Class dlgBarAndPieChart
         rdoFrequency.Checked = True
 
         clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
+        clsDummyFunction.AddParameter("check", "TRUE", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -509,8 +516,8 @@ Public Class dlgBarAndPieChart
         clsSequenceOperator.AddParameter("right", clsROperatorParameter:=clsRightBracketOperator)
         clsSequenceOperator.bBrackets = False
 
-        clsConcatenateFunction.SetRCommand("c")
-        clsConcatenateFunction.AddParameter("x", clsROperatorParameter:=clsSequenceOperator, bIncludeArgumentName:=False)
+        clsConcantenateFunction.SetRCommand("c")
+        clsConcantenateFunction.AddParameter("x", clsROperatorParameter:=clsSequenceOperator, bIncludeArgumentName:=False)
 
         clsPointsFunction.SetPackageName("ggplot2")
         clsPointsFunction.SetRCommand("geom_point")
@@ -669,7 +676,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudAngle.SetRCode(clsGeomTextWordcloudAesFunction, bReset)
         ucrChkAddLabelsTreemap.SetRCode(clsBaseOperator, bReset)
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
-        ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
+        ucrChkIncreaseSize.SetRCode(clsDummyFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
     End Sub
 
@@ -978,7 +985,6 @@ Public Class dlgBarAndPieChart
         If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
-
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
