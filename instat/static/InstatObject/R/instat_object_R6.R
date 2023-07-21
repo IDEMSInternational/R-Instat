@@ -2704,3 +2704,29 @@ DataBook$set("public","has_labels", function(data_name, col_names) {
   self$get_data_objects(data_name)$has_labels(col_names)
 }
 )
+
+DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, column_data, width, wrap = TRUE) {
+  # Store the original data type of the column
+  original_type <- class(column_data)
+  desired_types <- c("factor", "numeric", "Date", "character", "integer", "list", "double")
+  if(original_type %in% desired_types){
+    # Apply str_replace_all if "\n" is detected in the column_data
+    if (any(!is.na(stringr::str_detect(column_data, "\n")))) {
+      column_data <- stringr::str_replace_all(column_data, "\n", " ")
+    }
+    
+    # Apply str_wrap if width is specified
+    if (!is.null(width) && wrap) {
+      column_data <- stringr::str_wrap(column_data, width = width)
+    }
+    
+    # Convert back to the original data type if necessary
+    if (original_type != class(column_data)) {
+      if (original_type %in% c("factor", "ordered_factor")){
+        column_data <- make_factor(column_data)
+      }else{ column_data <- as(column_data, original_type) }
+    }
+    self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
+  }
+}
+)

@@ -258,6 +258,10 @@ Public Class ucrDataView
         Return _grid.GetWorksheetCount
     End Function
 
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
+        _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
+    End Sub
+
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name

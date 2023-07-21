@@ -715,7 +715,6 @@ Partial Class frmMain
         Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableVisualiseData, Me.ToolStripSeparator72, Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies, Me.mnuDescribeOneVariableRatingData})
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
         Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
         Me.mnuDescribeOneVariable.Text = "One Variable"
         '
@@ -769,7 +768,6 @@ Partial Class frmMain
         Me.mnuDescribeTwoThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoThreeVariablesPivotTable, Me.ToolStripSeparator36, Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoThreeVariablesCorrelations, Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies, Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies})
         Me.mnuDescribeTwoThreeVariables.Name = "mnuDescribeTwoThreeVariables"
         Me.mnuDescribeTwoThreeVariables.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeTwoThreeVariables.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeTwoThreeVariables.Tag = "Two_Variables"
         Me.mnuDescribeTwoThreeVariables.Text = "Two/Three Variables"
         '
@@ -832,7 +830,6 @@ Partial Class frmMain
         Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.ToolStripSeparator26, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.ToolStripSeparator27, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
         Me.mnuDescribeSpecificTablesGraphs.Name = "mnuDescribeSpecificTablesGraphs"
         Me.mnuDescribeSpecificTablesGraphs.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeSpecificTablesGraphs.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificTablesGraphs.Tag = "Graph_Dialogs"
         Me.mnuDescribeSpecificTablesGraphs.Text = "Graphs"
         '
@@ -926,7 +923,6 @@ Partial Class frmMain
         '
         Me.mnuDescribeSpecificTables.Name = "mnuDescribeSpecificTables"
         Me.mnuDescribeSpecificTables.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeSpecificTables.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificTables.Tag = "Table_Dialogs"
         Me.mnuDescribeSpecificTables.Text = "Tables..."
         Me.mnuDescribeSpecificTables.ToolTipText = "Frequency tables and Summary tables"
@@ -936,7 +932,6 @@ Partial Class frmMain
         Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.mnuDescribeGeneralTabulation, Me.mnuDescribeGeneralGraphics, Me.ToolStripSeparator38, Me.mnuDescribeGeneralUseSummaries})
         Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
         Me.mnuDescribeGeneral.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeGeneral.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeGeneral.Tag = "General"
         Me.mnuDescribeGeneral.Text = "General"
         '
@@ -978,14 +973,12 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
         Me.ToolStripSeparator9.Size = New System.Drawing.Size(268, 6)
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(177, 6)
         '
         'mnuDescribeMultivariate
         '
         Me.mnuDescribeMultivariate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeMultivariateCorrelations, Me.mnuDescribeMultivariateprincipalComponents, Me.mnuDescribeMultivariateCanonicalCorrelations, Me.mnuDescribeMultivariateClusterAnalysis})
         Me.mnuDescribeMultivariate.Name = "mnuDescribeMultivariate"
         Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeMultivariate.Text = "Multivariate"
         '
         'mnuDescribeMultivariateCorrelations
@@ -1018,27 +1011,23 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
         Me.ToolStripSeparator13.Size = New System.Drawing.Size(268, 6)
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(177, 6)
         '
         'mnuDescribeUseTable
         '
         Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
         Me.mnuDescribeUseTable.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeUseTable.Text = "Use Table..."
         '
         'mnuDescribeUseGraph
         '
         Me.mnuDescribeUseGraph.Name = "mnuDescribeUseGraph"
         Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeUseGraph.Text = "Use Graph..."
         '
         'mnuDescribeCombineGraph
         '
         Me.mnuDescribeCombineGraph.Name = "mnuDescribeCombineGraph"
         Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeCombineGraph.Text = "Combine Graphs..."
         '
         'mnuDescribeThemes
@@ -1046,7 +1035,6 @@ Partial Class frmMain
         Me.mnuDescribeThemes.Enabled = False
         Me.mnuDescribeThemes.Name = "mnuDescribeThemes"
         Me.mnuDescribeThemes.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeThemes.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeThemes.Text = "Themes..."
         Me.mnuDescribeThemes.Visible = False
         '
@@ -1054,7 +1042,6 @@ Partial Class frmMain
         '
         Me.mnuDescribeViewGraph.Name = "mnuDescribeViewGraph"
         Me.mnuDescribeViewGraph.Size = New System.Drawing.Size(271, 34)
-        Me.mnuDescribeViewGraph.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeViewGraph.Text = "View Graph..."
         '
         'mnuModel
@@ -2978,7 +2965,6 @@ Partial Class frmMain
         '
         'mnuEditWordwrap
         '
-        Me.mnuEditWordwrap.Enabled = False
         Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
         Me.mnuEditWordwrap.Size = New System.Drawing.Size(366, 34)
         Me.mnuEditWordwrap.Text = "Wordwrap"
@@ -3285,7 +3271,6 @@ Partial Class frmMain
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
-        Me.mnuBar.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.ShowItemToolTips = True
         Me.mnuBar.Size = New System.Drawing.Size(1251, 33)
@@ -4959,7 +4944,7 @@ Partial Class frmMain
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splOverall.Location = New System.Drawing.Point(0, 72)
-        Me.splOverall.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splOverall.Margin = New System.Windows.Forms.Padding(4)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -4982,7 +4967,7 @@ Partial Class frmMain
         Me.splExtraWindows.BackColor = System.Drawing.Color.LightGray
         Me.splExtraWindows.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splExtraWindows.Location = New System.Drawing.Point(0, 0)
-        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(4)
         Me.splExtraWindows.Name = "splExtraWindows"
         '
         'splExtraWindows.Panel1
@@ -5004,7 +4989,7 @@ Partial Class frmMain
         Me.splMetadata.BackColor = System.Drawing.Color.LightGray
         Me.splMetadata.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splMetadata.Location = New System.Drawing.Point(0, 0)
-        Me.splMetadata.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splMetadata.Margin = New System.Windows.Forms.Padding(4)
         Me.splMetadata.Name = "splMetadata"
         '
         'splMetadata.Panel1
@@ -5061,7 +5046,7 @@ Partial Class frmMain
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
         Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
-        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.splDataOutput.Name = "splDataOutput"
         '
         'splDataOutput.Panel1
@@ -5149,7 +5134,7 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmMain"
         Me.Text = "R-Instat  .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
