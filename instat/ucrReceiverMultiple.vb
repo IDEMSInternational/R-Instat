@@ -32,7 +32,6 @@ Public Class ucrReceiverMultiple
             bAutoSwitchFromReceiver = False
             bFirstLoad = False
         End If
-        ReopenDialog()
     End Sub
 
     Public Overrides Sub AddSelected()
@@ -461,42 +460,53 @@ Public Class ucrReceiverMultiple
 
     Public Sub CheckSingleType()
         Dim strVariableTypes As List(Of String)
+        Dim strFirstVariablesType As String
 
+        strFirstVariablesType = GetCurrentItemTypes().FirstOrDefault()
         If bSingleType Then
             If (Not IsEmpty()) Then
                 strVariableTypes = GetCurrentItemTypes(True, bCategoricalNumeric)
                 If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) AndAlso Not (bCategoricalNumeric AndAlso strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("logical")) Then
-                    MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
-                    Clear()
+                    'MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
+                    'Clear()
+                    If strFirstVariablesType.Contains("factor") Then
+                        SetIncludedDataTypes({"factor", "character", "logical"}, bStrict:=True)
+                        SetSelectorHeading("Categorical Variables")
+                    ElseIf strFirstVariablesType.Contains("numeric") Then
+                        SetExcludedDataTypes({"factor", "character"})
+                        SetSelectorHeading("Numerics")
+                    Else
+                        Clear()
+                    End If
                     SetSelectorHeading("Variables")
-                ElseIf strVariableTypes.Count > 0 Then
-                    If bCategoricalNumeric Then
-                        If strVariableTypes.Contains("categorical") Then
-                            SetIncludedDataTypes({"factor", "character", "logical"}, bStrict:=True)
-                            SetSelectorHeading("Categorical Variables")
-                        ElseIf strVariableTypes.Contains("numeric") Then
-                            SetExcludedDataTypes({"factor", "character"})
-                            SetSelectorHeading("Numerics")
+                    ElseIf strVariableTypes.Count > 0 Then
+                        If bCategoricalNumeric Then
+                            If strVariableTypes.Contains("categorical") Then
+                                SetIncludedDataTypes({"factor", "character", "logical"}, bStrict:=True)
+                                SetSelectorHeading("Categorical Variables")
+                            ElseIf strVariableTypes.Contains("numeric") Then
+                                SetExcludedDataTypes({"factor", "character"})
+                                SetSelectorHeading("Numerics")
+                            Else
+                                ' Else it is logical only
+                                RemoveIncludedMetadataProperty(strProperty:="class")
+                                RemoveExcludedMetadataProperty(strProperty:="class")
+                                SetSelectorHeading("Variables")
+                            End If
                         Else
-                            ' Else it is logical only
-                            RemoveIncludedMetadataProperty(strProperty:="class")
-                            RemoveExcludedMetadataProperty(strProperty:="class")
-                            SetSelectorHeading("Variables")
+                            If strVariableTypes(0) = "integer" OrElse strVariableTypes(0) = "numeric" Then
+                                SetDataType("numeric", bStrict:=True)
+                                SetSelectorHeading("Numerics")
+                            ElseIf strVariableTypes(0) = "ordered,factor" OrElse strVariableTypes(0) = "factor" Then
+                                SetDataType("factor", bStrict:=True)
+                                SetSelectorHeading("Factors")
+                            Else
+                                SetDataType(strVariableTypes(0), bStrict:=True)
+                                SetSelectorHeading(strVariableTypes(0) & " Variables")
+                            End If
                         End If
                     Else
-                        If strVariableTypes(0) = "integer" OrElse strVariableTypes(0) = "numeric" Then
-                            SetDataType("numeric", bStrict:=True)
-                            SetSelectorHeading("Numerics")
-                        ElseIf strVariableTypes(0) = "ordered,factor" OrElse strVariableTypes(0) = "factor" Then
-                            SetDataType("factor", bStrict:=True)
-                            SetSelectorHeading("Factors")
-                        Else
-                            SetDataType(strVariableTypes(0), bStrict:=True)
-                            SetSelectorHeading(strVariableTypes(0) & " Variables")
-                        End If
-                    End If
-                Else
-                    RemoveIncludedMetadataProperty(strProperty:="class")
+                        RemoveIncludedMetadataProperty(strProperty:="class")
                     RemoveExcludedMetadataProperty(strProperty:="class")
                     SetSelectorHeading("Variables")
                 End If
