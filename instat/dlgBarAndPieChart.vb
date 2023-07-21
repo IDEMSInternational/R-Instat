@@ -416,9 +416,9 @@ Public Class dlgBarAndPieChart
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
         clsConcantenateFunction = New RFunction
-        clsOperator1 = New ROperator
-        clsOperator2 = New ROperator
-        clsOperator = New ROperator
+        clsLeftBracketOperator= New ROperator
+        clsRightBracketOperator= New ROperator
+        clsSequenceOperator = New ROperator
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
