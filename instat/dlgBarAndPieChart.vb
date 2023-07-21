@@ -978,7 +978,6 @@ Public Class dlgBarAndPieChart
         If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
-
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
