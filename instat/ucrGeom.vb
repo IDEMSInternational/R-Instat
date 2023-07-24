@@ -864,6 +864,8 @@ Public Class ucrGeom
         'adding layer parameters
         clsgeom_density_ridges.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
         clsgeom_density_ridges.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34), Chr(34) & "points_jitter" & Chr(34), Chr(34) & "raincloud" & Chr(34)})
+        clsgeom_density_ridges.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_density_ridges.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_density_ridges.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
