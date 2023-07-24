@@ -54,6 +54,7 @@ Public Class dlgDisplayTopN
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Dim clsCoordFlipFunc As New RFunction

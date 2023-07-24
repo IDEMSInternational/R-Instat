@@ -48,7 +48,6 @@ Public Class dlgClimaticStationMaps
     Private clsRemoveFunc As New RFunction
     Private clsDummyFunction As New RFunction
 
-
     Private Sub dlgClimaticMaps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()

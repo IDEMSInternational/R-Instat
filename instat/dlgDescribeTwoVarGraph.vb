@@ -325,6 +325,7 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
         clsBaseOperator = New ROperator
+
         bResetSubdialog = True
 
         'Reset

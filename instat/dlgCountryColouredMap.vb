@@ -43,7 +43,6 @@ Public Class dlgCountryColouredMap
     Private clsYlabFunction As New RFunction
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
-
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
