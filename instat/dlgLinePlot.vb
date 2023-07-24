@@ -119,10 +119,10 @@ Public Class dlgLinePlot
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
-        ucrReceiverGroup.SetParameter(New RParameter("group", 2))
-        ucrReceiverGroup.Selector = ucrLinePlotSelector
-        ucrReceiverGroup.bWithQuotes = False
-        ucrReceiverGroup.SetParameterIsString()
+        'ucrReceiverGroup.SetParameter(New RParameter("group", 2))
+        'ucrReceiverGroup.Selector = ucrLinePlotSelector
+        'ucrReceiverGroup.bWithQuotes = False
+        'ucrReceiverGroup.SetParameterIsString()
 
         ucrReceiverSlopeX.SetParameter(New RParameter("x", 1))
         ucrReceiverSlopeX.Selector = ucrLinePlotSelector
@@ -177,14 +177,14 @@ Public Class dlgLinePlot
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        clsPeaksFunction.SetPackageName("ggpmisc")
-        clsPeaksFunction.SetRCommand("stat_peaks")
-        clsPeaksParam.SetArgumentName(strPeaksPointsParameterName)
-        clsPeaksParam.SetArgument(clsPeaksFunction)
-        clsPeaksFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-        clsPeaksFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
-        ucrChkPeak.SetText("Add Peaks")
-        ucrChkPeak.SetParameter(clsPeaksParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        'clsPeaksFunction.SetPackageName("ggpmisc")
+        'clsPeaksFunction.SetRCommand("stat_peaks")
+        'clsPeaksParam.SetArgumentName(strPeaksPointsParameterName)
+        'clsPeaksParam.SetArgument(clsPeaksFunction)
+        'clsPeaksFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+        'clsPeaksFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
+        'ucrChkPeak.SetText("Add Peaks")
+        'ucrChkPeak.SetParameter(clsPeaksParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         clsValleysFunction.SetPackageName("ggpmisc")
         clsValleysFunction.SetRCommand("stat_valleys")
@@ -382,8 +382,8 @@ Public Class dlgLinePlot
         ucrChkSlopeLegend.AddParameterPresentCondition(True, "slopetheme")
         ucrChkSlopeLegend.AddParameterPresentCondition(False, "slopetheme", False)
 
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ' ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkArea, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd, ucrChkDumbbellColour, ucrChkDumbbellSize}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -418,7 +418,7 @@ Public Class dlgLinePlot
         ucrReceiverSlopeY.SetLinkedDisplayControl(lblSlopeY)
         ucrReceiverSlopeColour.SetLinkedDisplayControl(lblSlopeColour)
         ucrReceiverSlopeX.SetLinkedDisplayControl(lblSlopeX)
-        ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
+        ' ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
         ucrFactorOptionalReceiver.SetLinkedDisplayControl(lblFactorOptional)
         ucrInputDumbbellX.SetLinkedDisplayControl(lblXColour)
         ucrInputDumbbellXEnd.SetLinkedDisplayControl(lblXEndColour)
@@ -568,7 +568,7 @@ Public Class dlgLinePlot
         ucrChkAddLine.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
         ucrChkAddSE.SetRCode(clsOptionsFunction, bReset)
-        ucrChkPeak.SetRCode(clsBaseOperator, bReset)
+        'ucrChkPeak.SetRCode(clsBaseOperator, bReset)
         ucrChkValley.SetRCode(clsBaseOperator, bReset)
         ucrChkPathOrStep.SetRCode(clsOptionsFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
@@ -636,32 +636,32 @@ Public Class dlgLinePlot
                     ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
                 End If
             ElseIf clsParam.strArgumentName = "colour" Then
-                ucrReceiverGroup.Add(clsParam.strArgumentValue)
+                'ucrReceiverGroup.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
-        SetGroupParam()
-    End Sub
+    'Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    '    SetGroupParam()
+    'End Sub
 
-    Private Sub SetGroupParam()
-        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
-            If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("group", "1", iPosition:=3)
-                ucrReceiverGroup.Enabled = False
-            ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-                ucrReceiverGroup.Enabled = True
-                ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
-                clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
-            Else
-                clsRaesFunction.RemoveParameterByName("group")
-            End If
-        Else
-            clsRaesFunction.RemoveParameterByName("group")
-        End If
-    End Sub
+    'Private Sub SetGroupParam()
+    '    If rdoLine.Checked OrElse rdoSmoothing.Checked Then
+    '        If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
+    '            clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+    '            ucrReceiverGroup.Enabled = False
+    '        ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+    '            ucrReceiverGroup.Enabled = True
+    '            ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+    '            clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
+    '        Else
+    '            clsRaesFunction.RemoveParameterByName("group")
+    '        End If
+    '    Else
+    '        clsRaesFunction.RemoveParameterByName("group")
+    '    End If
+    'End Sub
 
     Private Sub SetGraphPrefixAndRcommand()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()

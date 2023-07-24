@@ -58,7 +58,6 @@ Partial Class dlgLinePlot
         Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.rdoSlope = New System.Windows.Forms.RadioButton()
-        Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
         Me.lblXEnd = New System.Windows.Forms.Label()
         Me.lblSlopeY = New System.Windows.Forms.Label()
         Me.lblSlopeX = New System.Windows.Forms.Label()
@@ -97,13 +96,11 @@ Partial Class dlgLinePlot
         Me.ucrNudDumbbellXEnd = New instat.ucrNud()
         Me.ucrNudDumbbellX = New instat.ucrNud()
         Me.ucrChkDumbbellSize = New instat.ucrCheck()
-        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeY = New instat.ucrReceiverSingle()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlStepOrPath = New instat.UcrPanel()
         Me.ucrChkPathOrStep = New instat.ucrCheck()
-        Me.ucrChkPeak = New instat.ucrCheck()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
@@ -128,6 +125,9 @@ Partial Class dlgLinePlot
         Me.ucrChkValley = New instat.ucrCheck()
         Me.ucrReceiverXEnd = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeColour = New instat.ucrReceiverSingle()
+        Me.ucrChkArea = New instat.ucrCheck()
+        Me.rdoDumbbell = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.grpSmoothOptions.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -206,9 +206,9 @@ Partial Class dlgLinePlot
         Me.rdoLine.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoLine.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLine.Location = New System.Drawing.Point(37, 15)
+        Me.rdoLine.Location = New System.Drawing.Point(13, 15)
         Me.rdoLine.Name = "rdoLine"
-        Me.rdoLine.Size = New System.Drawing.Size(84, 28)
+        Me.rdoLine.Size = New System.Drawing.Size(80, 28)
         Me.rdoLine.TabIndex = 2
         Me.rdoLine.TabStop = True
         Me.rdoLine.Tag = "linepathstep"
@@ -225,9 +225,9 @@ Partial Class dlgLinePlot
         Me.rdoSmoothing.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSmoothing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSmoothing.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSmoothing.Location = New System.Drawing.Point(119, 15)
+        Me.rdoSmoothing.Location = New System.Drawing.Point(91, 15)
         Me.rdoSmoothing.Name = "rdoSmoothing"
-        Me.rdoSmoothing.Size = New System.Drawing.Size(84, 28)
+        Me.rdoSmoothing.Size = New System.Drawing.Size(80, 28)
         Me.rdoSmoothing.TabIndex = 3
         Me.rdoSmoothing.TabStop = True
         Me.rdoSmoothing.Tag = "Smooth"
@@ -355,34 +355,15 @@ Partial Class dlgLinePlot
         Me.rdoSlope.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSlope.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSlope.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSlope.Location = New System.Drawing.Point(283, 15)
+        Me.rdoSlope.Location = New System.Drawing.Point(325, 15)
         Me.rdoSlope.Name = "rdoSlope"
-        Me.rdoSlope.Size = New System.Drawing.Size(84, 28)
+        Me.rdoSlope.Size = New System.Drawing.Size(80, 28)
         Me.rdoSlope.TabIndex = 5
         Me.rdoSlope.TabStop = True
         Me.rdoSlope.Tag = "Slope"
         Me.rdoSlope.Text = "Slope"
         Me.rdoSlope.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSlope.UseVisualStyleBackColor = False
-        '
-        'rdoDumbbell
-        '
-        Me.rdoDumbbell.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoDumbbell.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoDumbbell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDumbbell.FlatAppearance.BorderSize = 2
-        Me.rdoDumbbell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDumbbell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDumbbell.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDumbbell.Location = New System.Drawing.Point(201, 15)
-        Me.rdoDumbbell.Name = "rdoDumbbell"
-        Me.rdoDumbbell.Size = New System.Drawing.Size(84, 28)
-        Me.rdoDumbbell.TabIndex = 4
-        Me.rdoDumbbell.TabStop = True
-        Me.rdoDumbbell.Tag = "linepathstep"
-        Me.rdoDumbbell.Text = "Dumbbell"
-        Me.rdoDumbbell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoDumbbell.UseVisualStyleBackColor = False
         '
         'lblXEnd
         '
@@ -742,19 +723,6 @@ Partial Class dlgLinePlot
         Me.ucrChkDumbbellSize.Size = New System.Drawing.Size(80, 24)
         Me.ucrChkDumbbellSize.TabIndex = 44
         '
-        'ucrReceiverGroup
-        '
-        Me.ucrReceiverGroup.AutoSize = True
-        Me.ucrReceiverGroup.frmParent = Me
-        Me.ucrReceiverGroup.Location = New System.Drawing.Point(249, 327)
-        Me.ucrReceiverGroup.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
-        Me.ucrReceiverGroup.Selector = Nothing
-        Me.ucrReceiverGroup.Size = New System.Drawing.Size(125, 20)
-        Me.ucrReceiverGroup.strNcFilePath = ""
-        Me.ucrReceiverGroup.TabIndex = 20
-        Me.ucrReceiverGroup.ucrSelector = Nothing
-        '
         'ucrReceiverSlopeY
         '
         Me.ucrReceiverSlopeY.AutoSize = True
@@ -780,9 +748,9 @@ Partial Class dlgLinePlot
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(30, 7)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(9, 7)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(363, 44)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(409, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrPnlStepOrPath
@@ -801,15 +769,6 @@ Partial Class dlgLinePlot
         Me.ucrChkPathOrStep.Name = "ucrChkPathOrStep"
         Me.ucrChkPathOrStep.Size = New System.Drawing.Size(148, 23)
         Me.ucrChkPathOrStep.TabIndex = 32
-        '
-        'ucrChkPeak
-        '
-        Me.ucrChkPeak.AutoSize = True
-        Me.ucrChkPeak.Checked = False
-        Me.ucrChkPeak.Location = New System.Drawing.Point(9, 389)
-        Me.ucrChkPeak.Name = "ucrChkPeak"
-        Me.ucrChkPeak.Size = New System.Drawing.Size(149, 23)
-        Me.ucrChkPeak.TabIndex = 33
         '
         'ucrChkWithSE
         '
@@ -1078,11 +1037,60 @@ Partial Class dlgLinePlot
         Me.ucrReceiverSlopeColour.TabIndex = 43
         Me.ucrReceiverSlopeColour.ucrSelector = Nothing
         '
+        'ucrChkArea
+        '
+        Me.ucrChkArea.AutoSize = True
+        Me.ucrChkArea.Checked = False
+        Me.ucrChkArea.Location = New System.Drawing.Point(9, 389)
+        Me.ucrChkArea.Name = "ucrChkArea"
+        Me.ucrChkArea.Size = New System.Drawing.Size(149, 23)
+        Me.ucrChkArea.TabIndex = 79
+        '
+        'rdoDumbbell
+        '
+        Me.rdoDumbbell.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoDumbbell.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoDumbbell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDumbbell.FlatAppearance.BorderSize = 2
+        Me.rdoDumbbell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDumbbell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoDumbbell.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDumbbell.Location = New System.Drawing.Point(247, 15)
+        Me.rdoDumbbell.Name = "rdoDumbbell"
+        Me.rdoDumbbell.Size = New System.Drawing.Size(80, 28)
+        Me.rdoDumbbell.TabIndex = 4
+        Me.rdoDumbbell.TabStop = True
+        Me.rdoDumbbell.Tag = "linepathstep"
+        Me.rdoDumbbell.Text = "Dumbbell"
+        Me.rdoDumbbell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoDumbbell.UseVisualStyleBackColor = False
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.Appearance = System.Windows.Forms.Appearance.Button
+        Me.RadioButton1.BackColor = System.Drawing.SystemColors.Control
+        Me.RadioButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton1.FlatAppearance.BorderSize = 2
+        Me.RadioButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.RadioButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RadioButton1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.RadioButton1.Location = New System.Drawing.Point(169, 15)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(80, 28)
+        Me.RadioButton1.TabIndex = 80
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Tag = "linepathstep"
+        Me.RadioButton1.Text = "Linerange"
+        Me.RadioButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.RadioButton1.UseVisualStyleBackColor = False
+        '
         'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(423, 523)
+        Me.Controls.Add(Me.RadioButton1)
+        Me.Controls.Add(Me.ucrChkArea)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkSlopeLegend)
         Me.Controls.Add(Me.lblSlopeLineColour)
@@ -1103,7 +1111,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrNudDumbbellXEnd)
         Me.Controls.Add(Me.ucrNudDumbbellX)
         Me.Controls.Add(Me.ucrChkDumbbellSize)
-        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.lblSlopeColour)
         Me.Controls.Add(Me.lblSlopeX)
         Me.Controls.Add(Me.ucrReceiverSlopeY)
@@ -1119,7 +1126,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrPnlStepOrPath)
         Me.Controls.Add(Me.ucrChkPathOrStep)
         Me.Controls.Add(Me.lblGroupLine)
-        Me.Controls.Add(Me.ucrChkPeak)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
         Me.Controls.Add(Me.ucrSave)
@@ -1179,9 +1185,7 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents ucrChkLineofBestFit As ucrCheck
     Friend WithEvents ucrChkWithSE As ucrCheck
-    Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
     Friend WithEvents ucrChkValley As ucrCheck
-    Friend WithEvents ucrChkPeak As ucrCheck
     Friend WithEvents lblGroupLine As Label
     Friend WithEvents ucrChkPathOrStep As ucrCheck
     Friend WithEvents ucrPnlStepOrPath As UcrPanel
@@ -1202,7 +1206,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrChkSpan As ucrCheck
     Friend WithEvents grpSmoothOptions As GroupBox
     Friend WithEvents rdoSlope As RadioButton
-    Friend WithEvents rdoDumbbell As RadioButton
     Friend WithEvents lblXEnd As Label
     Friend WithEvents ucrReceiverXEnd As ucrReceiverSingle
     Friend WithEvents ucrReceiverSlopeX As ucrReceiverSingle
@@ -1256,4 +1259,7 @@ Partial Class dlgLinePlot
     Friend WithEvents StepOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PeakOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ValleyOptionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ucrChkArea As ucrCheck
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents rdoDumbbell As RadioButton
 End Class
