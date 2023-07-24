@@ -271,7 +271,7 @@ Partial Class ucrScript
         Me.cmdAddTab.Name = "cmdAddTab"
         Me.cmdAddTab.Size = New System.Drawing.Size(75, 23)
         Me.cmdAddTab.TabIndex = 4
-        Me.cmdAddTab.Text = "Add"
+        Me.cmdAddTab.Text = "New"
         Me.cmdAddTab.UseVisualStyleBackColor = True
         '
         'cmdHelp
