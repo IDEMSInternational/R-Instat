@@ -107,7 +107,6 @@ Public Class dlgGeneralForGraphics
         clsGlobalAesFunction = New RFunction
         clsBaseOperator = New ROperator
 
-
         ucrSave.Reset()
 
         ucrGraphicsSelector.Reset()

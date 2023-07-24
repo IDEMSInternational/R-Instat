@@ -118,7 +118,6 @@ Public Class dlgPICSARainfall
     Private clsPasteUpperTercileY As New RFunction
     Private clsFormatUpperTercileY As New RFunction
 
-
     Private clsAsDate As New RFunction
     Private clsAsNumeric As New RFunction
     Private clsCoordPolarFunction As New RFunction
@@ -279,7 +278,6 @@ Public Class dlgPICSARainfall
         clsGeomTextLabelUpperTercileLine = New RFunction
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
-
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True

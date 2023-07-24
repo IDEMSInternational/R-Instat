@@ -79,7 +79,7 @@ Public Class dlgBarAndPieChart
     Private clsScaleSizeAreaFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
-    Private clsConcantenateFunction As New RFunction
+    Private clsConcatenateFunction As New RFunction
     Private clsAttachFunction As New RFunction
     Private clsLeftBracketOperator As New ROperator
     Private clsRightBracketOperator As New ROperator
@@ -418,9 +418,9 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
-        clsConcantenateFunction = New RFunction
+        clsConcatenateFunction = New RFunction
         clsLeftBracketOperator = New ROperator
-        clsRightBracketOperator= New ROperator
+        clsRightBracketOperator = New ROperator
         clsSequenceOperator = New ROperator
 
         ucrBarChartSelector.Reset()
@@ -513,8 +513,8 @@ Public Class dlgBarAndPieChart
         clsSequenceOperator.AddParameter("right", clsROperatorParameter:=clsRightBracketOperator)
         clsSequenceOperator.bBrackets = False
 
-        clsConcantenateFunction.SetRCommand("c")
-        clsConcantenateFunction.AddParameter("x", clsROperatorParameter:=clsSequenceOperator, bIncludeArgumentName:=False)
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("x", clsROperatorParameter:=clsSequenceOperator, bIncludeArgumentName:=False)
 
         clsPointsFunction.SetPackageName("ggplot2")
         clsPointsFunction.SetRCommand("geom_point")
@@ -981,7 +981,7 @@ Public Class dlgBarAndPieChart
     Private Sub AddLevels()
         If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
-            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcantenateFunction)
+            clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
         End If

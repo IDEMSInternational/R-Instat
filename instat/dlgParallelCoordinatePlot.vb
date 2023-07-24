@@ -37,7 +37,6 @@ Public Class dlgParallelCoordinatePlot
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
 
-
     Private Sub dlgParallelCoordinatePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()

@@ -32,7 +32,6 @@ Public Class dlgHeatMapPlot
 
     Private clsCoordPolarStartOperator, clsBaseOperator, clsPipeOperator As New ROperator
 
-
     Private clsCoordPolarFunction, clsAnnotateFunction, clsLocalRaesFunction, clsXScaleDateFunction, clsYScaleDateFunction,
     clsScaleFillViridisFunction, clsScaleColourViridisFunction, clsGeomTextFunction,
     clsLabelAesFunction, clsColourPaletteFunction, clsForecatsReverseFunction,

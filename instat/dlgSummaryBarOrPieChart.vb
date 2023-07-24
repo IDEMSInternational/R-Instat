@@ -43,7 +43,6 @@ Public Class dlgSummaryBarOrPieChart
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
-
     Private bResetSummaryBarLayerSubdialog As Boolean = True
 
     Private Sub dlgSummaryBarOrPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -145,7 +144,6 @@ Public Class dlgSummaryBarOrPieChart
         clsRaesFunction = New RFunction
         clsAesFunction = New RFunction
         clsRoundFunction = New RFunction
-
         clsLabelGeomFunction.Clear()
 
         ucrSummaryBarSelector.Reset()

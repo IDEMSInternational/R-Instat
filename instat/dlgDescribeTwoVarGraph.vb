@@ -23,7 +23,6 @@ Public Class dlgDescribeTwoVarGraph
             clsXScaleContinuousFunction, clsYScaleContinuousFunction, clsCoordPolarFunction,
             clsXScaleDateFunction, clsYScaleDateFunction, clsScaleFillViridisFunction,
             clsScaleColourViridisFunction, clsPairThemesFunction As New RFunction
-
     'Geoms
     Private clsGeomJitter, clsGeomViolin, clsGeomBar, clsGeomMosaic, clsGeomBoxplot,
             clsGeomPoint, clsGeomLine, clsStatSummaryHline, clsStatSummaryCrossbar,

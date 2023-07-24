@@ -42,7 +42,6 @@ Public Class dlgScatterPlot
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsGeomRugFunction As New RFunction
-
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
