@@ -37,6 +37,7 @@ Public Class dlgFindInVariableOrFilter
 
         bReset = False
         TestOkEnabled()
+        AddToMenu()
         autoTranslate(Me)
     End Sub
 
@@ -199,6 +200,12 @@ Public Class dlgFindInVariableOrFilter
         End If
         clsGetRowHeadersFunction.AddParameter("searchText", strPattern, iPosition:=2)
         cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
+    End Sub
+
+    Private Sub AddToMenu()
+        If frmMain.clsRecentItems IsNot Nothing Then
+            frmMain.clsRecentItems.addToMenu(Me)
+        End If
     End Sub
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
