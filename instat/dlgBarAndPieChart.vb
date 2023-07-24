@@ -420,9 +420,6 @@ Public Class dlgBarAndPieChart
         clsPointsFunction = New RFunction
         clsConcantenateFunction = New RFunction
         clsLeftBracketOperator = New ROperator
-        clsRightBracketOperator = New ROperator
-        clsConcantenateFunction = New RFunction
-        clsLeftBracketOperator = New ROperator
         clsRightBracketOperator= New ROperator
         clsSequenceOperator = New ROperator
 

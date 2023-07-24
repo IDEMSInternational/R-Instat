@@ -31,8 +31,6 @@ Public Class dlgHeatMapPlot
     Private ReadOnly strNone As String = "None"
 
     Private clsCoordPolarStartOperator, clsBaseOperator, clsPipeOperator As New ROperator
-    Private clsYScaleDiscreteFunction As New RFunction
-    Private clsXScaleDiscreteFunction As New RFunction
 
 
     Private clsCoordPolarFunction, clsAnnotateFunction, clsLocalRaesFunction, clsXScaleDateFunction, clsYScaleDateFunction,
@@ -371,8 +369,6 @@ Public Class dlgHeatMapPlot
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
-        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -480,7 +476,6 @@ Public Class dlgHeatMapPlot
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
              clsNewGlobalAesFunction:=If(rdoHeatMap.Checked, clsHeatmapAesFunction, clsChoroplethAesFunction), clsNewXLabsTitleFunction:=clsXlabsFunction,
-             clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction,
              clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
              clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
              strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
