@@ -267,7 +267,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgFindInVariableOrFilter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Find In Variable Or Filter"
+        Me.Text = "Find Rows or Columns"
         Me.grpSelect.ResumeLayout(False)
         Me.grpSelect.PerformLayout()
         Me.ResumeLayout(False)
