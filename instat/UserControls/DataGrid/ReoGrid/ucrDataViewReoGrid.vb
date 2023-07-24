@@ -314,7 +314,11 @@ Public Class ucrDataViewReoGrid
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
             Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
-            Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
+            Dim iColIndex As Integer = 0
+            If strColumn <> "filter" Then
+                iColIndex = GetColumnIndex(currSheet, strColumn)
+            End If
+
             If iRowIndex > -1 AndAlso iColIndex > -1 Then
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
                 If bApplyToRow Then
