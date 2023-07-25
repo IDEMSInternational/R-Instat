@@ -31,9 +31,7 @@ Public Class sdgPlots
     Public clsFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
-    Public clsXScaleDiscreteFunction As New RFunction
     Public clsYScalecontinuousFunction As New RFunction
-    Public clsYScaleDiscreteFunction As New RFunction
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
@@ -46,8 +44,6 @@ Public Class sdgPlots
     Private clsPlotElementTagFunction As New RFunction
     Private clsPlotLegendTitleFunction As New RFunction
     Public clsBaseOperator As New ROperator
-    Public clsLeftBracketOperator As New ROperator
-    Public clsRightBracketOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
@@ -174,7 +170,6 @@ Public Class sdgPlots
         ucrChkLabeler.SetValuesCheckedAndUnchecked("label_both", "label_value")
         ucrChkLabeler.SetRDefault("label_value")
 
-
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
@@ -242,7 +237,6 @@ Public Class sdgPlots
         ucrInputLegendTitle.SetLinkedDisplayControl(lblLegendTitle)
         ucrNudTagSize.SetLinkedDisplayControl(lblTagSize)
         ucrNudLegendSize.SetLinkedDisplayControl(lblLegendSize)
-
 
         'TODO what about the subtitle argument of labs?
         'TODO what about the caption argument of labs?
@@ -654,15 +648,11 @@ Public Class sdgPlots
         clsXLabFunction = clsNewXLabsTitleFunction
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
-        clsXScaleDiscreteFunction = clsNewXScaleDiscreteFunction
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
-        clsYScaleDiscreteFunction = clsNewYScaleDiscreteFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
-        clsLeftBracketOperator = clsNewLeftBracketOperator
-        clsRightBracketOperator = clsNewRightBracketOperator
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
@@ -683,7 +673,6 @@ Public Class sdgPlots
 
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
-
         If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction) Then
             clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
         End If
@@ -695,7 +684,6 @@ Public Class sdgPlots
         If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction) Then
             clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
         End If
-
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
@@ -728,10 +716,10 @@ Public Class sdgPlots
         If bReset Then
             ucrChkNewLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         End If
+
         ucrInputThemes.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
-        'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
         ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
@@ -761,8 +749,8 @@ Public Class sdgPlots
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewLeftBracketOperator:=clsLeftBracketOperator, clsNewRightBracketOperator:=clsRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewLeftBracketOperator:=clsLeftBracketOperator, clsNewRightBracketOperator:=clsRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsNewXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewLeftBracketOperator:=clsNewLeftBracketOperator, clsNewRightBracketOperator:=clsNewRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsNewYScaleDiscreteFunction, clsNewLeftBracketOperator:=clsNewLeftBracketOperator, clsNewRightBracketOperator:=clsNewRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
@@ -1083,6 +1071,7 @@ Public Class sdgPlots
         End If
         AddRemoveTheme()
     End Sub
+
     Private Sub AddRemoveXElementTitle()
         If clsXElementTitle.iParameterCount > 0 Then
             clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
@@ -1286,5 +1275,4 @@ Public Class sdgPlots
     Private Sub ucrNudLegendSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudLegendSize.ControlValueChanged
         clsPlotLegendTitleFunction.AddParameter("size", ucrNudLegendSize.GetText)
     End Sub
-
 End Class

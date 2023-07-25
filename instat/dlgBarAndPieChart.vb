@@ -370,9 +370,6 @@ Public Class dlgBarAndPieChart
         ucrNudMaxSize.SetParameter(New RParameter("max_size", 0))
         ucrChkIncreaseSize.SetText("Increase size")
         ucrChkIncreaseSize.AddToLinkedControls(ucrNudMaxSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
-        'ucrChkIncreaseSize.AddParameterPresentCondition(True, "max_size")
-        'ucrChkIncreaseSize.AddParameterPresentCondition(False, "max_size", False)
-
         ucrChkIncreaseSize.AddParameterValuesCondition(True, "check", "TRUE")
         ucrChkIncreaseSize.AddParameterValuesCondition(False, "check", "FALSE")
     End Sub
@@ -419,6 +416,7 @@ Public Class dlgBarAndPieChart
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
         clsConcatenateFunction = New RFunction
+        clsAttachFunction = New RFunction
         clsLeftBracketOperator = New ROperator
         clsRightBracketOperator = New ROperator
         clsSequenceOperator = New ROperator
@@ -604,8 +602,8 @@ Public Class dlgBarAndPieChart
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
-        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone()
-        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone()
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -979,7 +977,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub AddLevels()
-        If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
+        If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso
+            (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse
+            ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
             clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else

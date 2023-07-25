@@ -449,10 +449,10 @@ Public Class GgplotDefaults
 
     Public Shared ReadOnly Property dctDropUnusedLevels As Dictionary(Of String, String)
         Get
-            Dim dcttempDropUnusedLevels As New Dictionary(Of String, String)
-            dcttempDropUnusedLevels.Add("TRUE", Chr(34) & "TRUE" & Chr(34))
+            Dim dctTempDropUnusedLevels As New Dictionary(Of String, String)
+            dctTempDropUnusedLevels.Add("TRUE", Chr(34) & "TRUE" & Chr(34))
             dcttempDropUnusedLevels.Add("FALSE", Chr(34) & "FALSE" & Chr(34))
-            Return dcttempDropUnusedLevels
+            Return dctTempDropUnusedLevels
         End Get
     End Property
 
