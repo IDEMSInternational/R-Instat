@@ -90,12 +90,11 @@ Public Class dlgPasteNewColumns
 
         clsReadClipBoardDataRFunction.SetPackageName("clipr")
         clsReadClipBoardDataRFunction.SetRCommand("read_clip_tbl")
-        'todo. change to false
-        clsReadClipBoardDataRFunction.AddParameter("header", "FALSE", iPosition:=1)
+        clsReadClipBoardDataRFunction.AddParameter("header", "TRUE", iPosition:=1)
 
         clsImportColsToExistingDFRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadClipBoardDataRFunction, iPosition:=1)
-        clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
+        'clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
 
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsReadClipBoardDataRFunction)
