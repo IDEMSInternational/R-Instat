@@ -18,13 +18,13 @@ Imports instat.Translations
 Public Class dlgPasteNewColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsPasteFunction As RFunction
+    'Private clsImportColsToNewDFRFunction, clsImportNewDataListRFunction As New RFunction
+    Private clsReadClipBoardDataRFunction As New RFunction
+    Private clsImportColsToExistingDFRFunction As RFunction
     'used to prevent TestOkEnabled from being called multiple times when loading the dialog. 
-    Private bIsOnDialogLoad As Boolean
+    Private bValidatePasteData As Boolean = False
 
     Private Sub dlgPasteNewColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        bIsOnDialogLoad = True
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,57 +32,181 @@ Public Class dlgPasteNewColumns
         If bReset Then
             SetDefaults()
         End If
-        'reset the clip board data parameter value
-        SetClipBoardDataParameter()
+        SetClipBoardDataParameter()  'reset the clip board data parameter value
         SetRCodeForControls(bReset)
         bReset = False
-        bIsOnDialogLoad = False
+        bValidatePasteData = True
         TestOkEnabled()
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub dlgPasteNewColumns_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        bValidatePasteData = False
     End Sub
 
     Private Sub InitialiseDialog()
         'todo. attach the help id later
-        'ucrBase.iHelpTopicID = 332
+        'ucrBase.iHelpTopicID = 
 
-        ucrDataFrameSelected.SetText("Paste copied data to:")
-        ucrDataFrameSelected.SetParameter(New RParameter("data_name", 0))
-        ucrDataFrameSelected.SetParameterIsString()
+        '----------------------------
+        ucrPnl.AddRadioButton(rdoDataFrame)
+        ucrPnl.AddRadioButton(rdoColumns)
+        ucrPnl.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=False)
+        ucrPnl.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=True)
+        ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnl.AddToLinkedControls(ucrDFSelected, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRowHeader.SetText("First row is header")
-        ucrChkRowHeader.SetParameter(New RParameter("first_clip_row_is_header", 1))
+        ucrChkRowHeader.SetParameter(New RParameter("header", 1))
+
+        ucrNudPreviewLines.SetMinMax(iNewMin:=10, iNewMax:=1000)
+        '----------------------------
+
+        'paste as data frame
+        '----------------------------
+        ucrSaveNewDFName.SetIsTextBox()
+        ucrSaveNewDFName.SetSaveTypeAsDataFrame()
+        ucrSaveNewDFName.SetLabelText("New Data Frame Name:")
+        ucrSaveNewDFName.SetPrefix("data")
+        '----------------------------
+
+        'paste as column
+        '----------------------------
+        ucrDFSelected.SetText("Paste copied data to:")
+        ucrDFSelected.SetParameter(New RParameter("data_name", 0))
+        ucrDFSelected.SetParameterIsString()
+        '----------------------------
 
         ucrNudPreviewLines.Minimum = 10
     End Sub
 
     Private Sub SetDefaults()
-        clsPasteFunction = New RFunction
+        clsImportColsToExistingDFRFunction = New RFunction
+        clsReadClipBoardDataRFunction = New RFunction
 
         ucrNudPreviewLines.Value = 10
-        ucrDataFrameSelected.Reset()
+        ucrSaveNewDFName.Reset()
+        ucrDFSelected.Reset()
 
-        clsPasteFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$paste_from_clipboard")
-        clsPasteFunction.AddParameter("first_clip_row_is_header", "TRUE", iPosition:=0)
-        SetClipBoardDataParameter()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsPasteFunction)
+        clsReadClipBoardDataRFunction.SetPackageName("clipr")
+        clsReadClipBoardDataRFunction.SetRCommand("read_clip_tbl")
+        'todo. change to false
+        clsReadClipBoardDataRFunction.AddParameter("header", "FALSE", iPosition:=1)
+
+        clsImportColsToExistingDFRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadClipBoardDataRFunction, iPosition:=1)
+        clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
+
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReadClipBoardDataRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrDataFrameSelected.SetRCode(clsPasteFunction, bReset)
-        ucrChkRowHeader.SetRCode(clsPasteFunction, bReset)
+        ucrChkRowHeader.SetRCode(clsReadClipBoardDataRFunction, bReset)
+        ucrDFSelected.SetRCode(clsImportColsToExistingDFRFunction, bReset)
+        ucrSaveNewDFName.SetRCode(clsReadClipBoardDataRFunction, bReset)
+
+        ucrPnl.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(Not String.IsNullOrEmpty(ucrDataFrameSelected.strCurrDataFrame) AndAlso ValidateAndPreviewCopiedData())
+    Private Sub SetClipBoardDataParameter()
+        'please note addition of this parameter makes the execution of the R code take longer
+        'compared to letting R read from the clipboard.
+        'However this has been added to achieve reproducibility in future
+        Try
+            'clipboard data may have an empty line which is ignored by clipr so just trim it here to get accurate length
+            'escape any double quotes because of how clipr is implemented. See issue #7199 for more details
+            Dim clipBoardText As String = My.Computer.Clipboard.GetText.Trim().Replace("""", "\""")
+            Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+            If arrStrTemp.Length > 1000 Then
+                MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
+                clsReadClipBoardDataRFunction.AddParameter("x", Chr(34) & "" & Chr(34), iPosition:=0)
+            Else
+                clsReadClipBoardDataRFunction.AddParameter("x", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
+            End If
+        Catch ex As Exception
+            'this error could be due to large clipboard data 
+            MsgBox("Requested clipboard operation did not succeed. Large data detected")
+        End Try
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
+
+    ''' <summary>
+    ''' validates copied data and displays it for preview.
+    ''' </summary>
+    ''' <returns>returns true if copied data can be pasted to the selected data frame or false if not</returns>
+    Private Function ValidateAndPreviewCopiedData() As Boolean
+        Try
+            'reset feedback controls default states
+            panelNoDataPreview.Visible = True
+            lblConfirmText.Text = ""
+            lblConfirmText.ForeColor = Color.Red
+
+            Dim clsTempReadClipBoardDataRFunction As RFunction = clsReadClipBoardDataRFunction.Clone()
+
+            clsTempReadClipBoardDataRFunction.AddParameter("nrows", ucrNudPreviewLines.Value)  'limit the rows to those set in the ucrNudPreviewLines control
+            clsTempReadClipBoardDataRFunction.RemoveAssignTo() 'remove assign to before getting the script
+            Dim dfTemp As DataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsTempReadClipBoardDataRFunction.ToScript(), bSilent:=True)?.AsDataFrame
+            If dfTemp Is Nothing OrElse dfTemp.RowCount = 0 Then
+                Return False
+            End If
+
+            'try to show preview the data only
+            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
+            lblConfirmText.Text = "Number of columns: " & dfTemp.ColumnCount & Environment.NewLine &
+                                  "Number of rows: " & dfTemp.RowCount & Environment.NewLine
+
+            If rdoDataFrame.Checked Then
+                lblConfirmText.Text = lblConfirmText.Text & "Click Ok to paste data to new data frame."
+            ElseIf rdoColumns.Checked Then
+                'validate allowed number of rows
+                If dfTemp.RowCount < ucrDFSelected.iDataFrameLength Then
+                    lblConfirmText.Text = lblConfirmText.Text & "Too few rows to paste into this data frame. This data frame requires " & ucrDFSelected.iDataFrameLength & " rows."
+                    'please note, we could allow few rows to be pasted. we can do that ammending add columns R code
+                    'but as stated in issue #5991 by Danny this is unlikely to be the correct solution.
+                    'Left here for reference
+                    'lblConfirmText.Text = lblConfirmText.Text & Environment.NewLine &  (ucrDataFrameSelected.iDataFrameLength - dfTemp.RowCount) & " missing values will be added."
+                    Return False
+                ElseIf dfTemp.RowCount > ucrDFSelected.iDataFrameLength Then
+                    lblConfirmText.Text = lblConfirmText.Text & "Too many rows to paste into this data frame. This data frame requires " & ucrDFSelected.iDataFrameLength & " rows."
+                    Return False
+                Else
+                    lblConfirmText.Text = lblConfirmText.Text & "Click Ok to paste data to selected data frame."
+                End If
+            End If
+            lblConfirmText.ForeColor = Color.Green
+            panelNoDataPreview.Visible = False
+            Return True
+        Catch ex As Exception
+            lblConfirmText.Text = "Could not preview data. Data cannot be pasted."
+            panelNoDataPreview.Visible = True
+            Return False
+        End Try
+
+    End Function
+
+    Private Sub TestOkEnabled(Optional bValidateCopiedData As Boolean = True)
+        Dim enableOK As Boolean = False
+        If rdoDataFrame.Checked Then
+            enableOK = ucrSaveNewDFName.IsComplete()
+        ElseIf rdoColumns.Checked Then
+            enableOK = Not String.IsNullOrEmpty(ucrDFSelected.strCurrDataFrame)
+        End If
+        If bValidateCopiedData Then
+            enableOK = ValidateAndPreviewCopiedData()
+        End If
+        ucrBase.OKEnabled(enableOK)
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrDataFrameSelected.ControlContentsChanged, ucrChkRowHeader.ControlContentsChanged, ucrNudPreviewLines.ControlContentsChanged
-        If Not bIsOnDialogLoad Then
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnl.ControlValueChanged
+        If rdoDataFrame.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReadClipBoardDataRFunction)
+        ElseIf rdoColumns.Checked Then
+            clsReadClipBoardDataRFunction.SetAssignToObject("data")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
+        End If
+
+        If bValidatePasteData Then
             TestOkEnabled()
         End If
     End Sub
@@ -92,95 +216,21 @@ Public Class dlgPasteNewColumns
         TestOkEnabled()
     End Sub
 
-    Public Sub SetClipBoardDataParameter()
-        'please note addition of 'clip_board_text'  parameter makes the execution of the R code take longer
-        'compared to letting R read from the clipboard dierectly.
-        'However this has been added to achieve reproducibility in future
-        Try
-            'clipboard data may have an empty line which is ignored by clipr so just trim it here to get accurate length
-            'escape any double quotes because of how clipr is implemented. See issue #7199 for more details
-            Dim clipBoardText As String = My.Computer.Clipboard.GetText().Replace("""", "\""").Trim()
-            Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
-            If arrStrTemp.Length > 1000 Then
-                MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
-                clsPasteFunction.AddParameter("clip_board_text", Chr(34) & "" & Chr(34), iPosition:=1)
-            Else
-                clsPasteFunction.AddParameter("clip_board_text", Chr(34) & clipBoardText & Chr(34), iPosition:=1)
-            End If
-        Catch ex As Exception
-            'this error could be due to large clipboard data 
-            MsgBox("Requested clipboard operation did not succeed. Large data detected")
-        End Try
+    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkRowHeader.ControlContentsChanged, ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged, ucrNudPreviewLines.ControlContentsChanged
+        If bValidatePasteData Then
+            'disabled unnecessary validation of copied data because it may take long for large datasets
+            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrNudPreviewLines)
+        End If
     End Sub
 
-    ''' <summary>
-    ''' validates copied data and displays it for preview.
-    ''' returns true if copied data can be pasted to the selected data frame or false if not
-    ''' </summary>
-    ''' <returns></returns>
-    Private Function ValidateAndPreviewCopiedData() As Boolean
-        Try
-            'set feedback controls default states
-            panelNoDataPreview.Visible = True
-            lblConfirmText.Text = "Could not preview data. Cannot be pasted."
-            lblConfirmText.ForeColor = Color.Red
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        bValidatePasteData = False
+        SetDefaults()
+        SetClipBoardDataParameter()
+        SetRCodeForControls(True)
+        bValidatePasteData = True
+        TestOkEnabled()
+    End Sub
 
-            'use clipr package to check if structure of data can be pasted to a data frame 
-            Dim dfTemp As DataFrame
-            Dim clsTempImport As New RFunction
-            clsTempImport.SetPackageName("clipr")
-            clsTempImport.SetRCommand("read_clip_tbl")
-            clsTempImport.AddParameter("x", clsPasteFunction.GetParameter("clip_board_text").strArgumentValue, iPosition:=0)
-            clsTempImport.AddParameter("header", If(ucrChkRowHeader.Checked, "TRUE", "FALSE"), iPosition:=1)
-
-            'get the pasted data produced by clipr  
-            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsTempImport.ToScript(), bSilent:=True)?.AsDataFrame
-            If dfTemp Is Nothing Then
-                Return False
-            End If
-
-            'parameter 'nrows' commented out for future reference.
-            'not added here because we are already limiting data pasting to 1000 rows
-            'the lines preview is enforced at the sheet levet
-            'clsTempImport.AddParameter("nrows", ucrNudPreviewLines.Value, iPosition:=2)
-
-            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsTempImport.ToScript(), bSilent:=True)?.AsDataFrame
-            'show the data preview only. Limit the rows to those set in the ucrNudPreviewLines control
-            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False,
-                                       iColMax:=frmMain.clsGrids.iMaxCols, iRowMax:=ucrNudPreviewLines.Value)
-
-            panelNoDataPreview.Visible = False
-            lblConfirmText.Text = "Number of columns: " & dfTemp.ColumnCount & Environment.NewLine &
-                                  "Number of rows: " & dfTemp.RowCount & Environment.NewLine & Environment.NewLine
-
-            'validate allowed number of rows
-            If dfTemp.RowCount = 0 Then
-                lblConfirmText.Text = lblConfirmText.Text & "No copied data detected."
-                Return False
-            ElseIf dfTemp.RowCount < ucrDataFrameSelected.iDataFrameLength Then
-                lblConfirmText.Text = lblConfirmText.Text & "Too few rows to paste into this data frame. This data frame requires " & ucrDataFrameSelected.iDataFrameLength & " rows."
-                'please note, we could allow few rows to be pasted. the R code is already set up to allow
-                'but as stated in issue #5991 by Danny this is unlikely to be the correct solution.
-                'Left here for reference
-                'lblConfirmText.Text = lblConfirmText.Text & Environment.NewLine &
-                '                   (ucrDataFrameSelected.iDataFrameLength - dfTemp.RowCount) & " missing values will be added."
-                Return False
-            ElseIf dfTemp.RowCount > ucrDataFrameSelected.iDataFrameLength Then
-                lblConfirmText.Text = lblConfirmText.Text & "Too many rows to paste into this data frame. This data frame requires " & ucrDataFrameSelected.iDataFrameLength & " rows."
-                Return False
-            Else
-                lblConfirmText.Text = lblConfirmText.Text & "Correct length."
-            End If
-
-
-            lblConfirmText.ForeColor = Color.Green
-
-            Return True
-        Catch ex As Exception
-            lblConfirmText.Text = "Could not preview data. Cannot be pasted."
-            panelNoDataPreview.Visible = True
-            Return False
-        End Try
-    End Function
 
 End Class

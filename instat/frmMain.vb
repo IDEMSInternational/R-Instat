@@ -2343,8 +2343,8 @@ Public Class frmMain
         dlgImportERA5Data.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
-        dlgPasteNewDataFrame.ShowDialog()
+    Private Sub mnuEditPasteNewCols_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewCols.Click
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
