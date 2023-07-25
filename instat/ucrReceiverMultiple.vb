@@ -460,22 +460,12 @@ Public Class ucrReceiverMultiple
 
     Public Sub CheckSingleType()
         Dim strVariableTypes As List(Of String)
-        Dim strFirstVariablesType As String
 
-        strFirstVariablesType = GetCurrentItemTypes().FirstOrDefault()
         If bSingleType Then
             If (Not IsEmpty()) Then
                 strVariableTypes = GetCurrentItemTypes(True, bCategoricalNumeric)
                 If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) AndAlso Not (bCategoricalNumeric AndAlso strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("logical")) Then
-                    If strFirstVariablesType.Contains("factor") Then
-                        SetIncludedDataTypes({"factor", "character", "logical"}, bStrict:=True)
-                        SetSelectorHeading("Categorical Variables")
-                    ElseIf strFirstVariablesType.Contains("numeric") Then
-                        SetExcludedDataTypes({"factor", "character"})
-                        SetSelectorHeading("Numerics")
-                    Else
-                        Clear()
-                    End If
+                    Clear()
                     SetSelectorHeading("Variables")
                 ElseIf strVariableTypes.Count > 0 Then
                     If bCategoricalNumeric Then
