@@ -102,6 +102,24 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
+        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColumn)
+        If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
+            MsgBox("Cannot wrap or unwrap this type of variable.")
+            Exit Sub
+        End If
+
+        If bApplyWrap Then
+            grdData.CurrentWorksheet.AutoFitColumnWidth(iColumnIndex)
+            For i As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
+                grdData.CurrentWorksheet.AutoFitRowHeight(i)
+            Next
+        Else
+            grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
+            grdData.CurrentWorksheet.SetColumnsWidth(0, grdData.CurrentWorksheet.ColumnCount, 70)
+        End If
+    End Sub
+
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
@@ -296,7 +314,11 @@ Public Class ucrDataViewReoGrid
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
             Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
-            Dim iColIndex As Integer = GetColumnIndex(currSheet, strColumn)
+            Dim iColIndex As Integer = 0
+            If strColumn <> "filter" Then
+                iColIndex = GetColumnIndex(currSheet, strColumn)
+            End If
+
             If iRowIndex > -1 AndAlso iColIndex > -1 Then
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
                 If bApplyToRow Then

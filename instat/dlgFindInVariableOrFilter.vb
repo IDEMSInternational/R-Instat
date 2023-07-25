@@ -22,7 +22,7 @@ Public Class dlgFindInVariableOrFilter
     Private iCurrentOccurenceIndex As Integer
     Private iCountClick As Integer
     Private clsDummyFunction As New RFunction
-    Private clsGetRowsFunction As New RFunction
+    Private clsGetRowsFunction, clsGetRowHeadersFunction, clsGetFilterRowNamesFunction As New RFunction
     Private clsGetDataFrameFunction As New RFunction
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -37,6 +37,7 @@ Public Class dlgFindInVariableOrFilter
 
         bReset = False
         TestOkEnabled()
+        AddToMenu()
         autoTranslate(Me)
     End Sub
 
@@ -46,12 +47,13 @@ Public Class dlgFindInVariableOrFilter
 
         ucrPnlOptions.AddRadioButton(rdoVariable)
         ucrPnlOptions.AddRadioButton(rdoInFilter)
-        rdoInFilter.Enabled = False
+        ucrPnlOptions.SetParameter(New RParameter("check", 0))
         ucrPnlOptions.AddParameterValuesCondition(rdoVariable, "check", "variable")
         ucrPnlOptions.AddParameterValuesCondition(rdoInFilter, "check", "filter")
 
         ucrPnlSelect.AddRadioButton(rdoCell)
         ucrPnlSelect.AddRadioButton(rdoRow)
+        ucrPnlSelect.SetParameter(New RParameter("select", 1))
         ucrPnlSelect.AddParameterValuesCondition(rdoCell, "select", "cell")
         ucrPnlSelect.AddParameterValuesCondition(rdoRow, "select", "row")
 
@@ -70,15 +72,17 @@ Public Class dlgFindInVariableOrFilter
         ucrChkIncludeRegularExpressions.SetParameter(New RParameter("use_regex", 4))
         ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverFilter, {rdoInFilter}, bNewLinkedHideIfParameterMissing:=True)
-        ucrReceiverFilter.SetLinkedDisplayControl(lblFilter)
+        'ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputPattern, ucrPnlSelect, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
+        ucrPnlSelect.SetLinkedDisplayControl(grpSelect)
     End Sub
 
     Private Sub SetDefaults()
         clsDummyFunction = New RFunction
         clsGetRowsFunction = New RFunction
+        clsGetRowHeadersFunction = New RFunction
+        clsGetFilterRowNamesFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
 
         ucrSelectorFind.Reset()
@@ -88,33 +92,38 @@ Public Class dlgFindInVariableOrFilter
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
 
+        clsGetFilterRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_row_names")
+
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
-        clsGetRowsFunction.SetRCommand("getRowHeadersWithText")
-        clsGetRowsFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
-        clsGetRowsFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)
-        clsGetRowsFunction.AddParameter("use_regex", "FALSE", iPosition:=4)
+        clsGetRowHeadersFunction.SetRCommand("getRowHeadersWithText")
+        clsGetRowHeadersFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsGetRowHeadersFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)
+        clsGetRowHeadersFunction.AddParameter("use_regex", "FALSE", iPosition:=4)
 
         ucrReceiverVariable.SetMeAsReceiver()
         cmdFindNext.Enabled = False
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
+        ucrSelectorFind.AddAdditionalCodeParameterPair(clsGetFilterRowNamesFunction, ucrSelectorFind.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsGetFilterRowNamesFunction, New RParameter("filter_name"), iAdditionalPairNo:=1)
         ucrSelectorFind.SetRCode(clsGetDataFrameFunction, bReset)
-        ucrReceiverVariable.SetRCode(clsGetRowsFunction, bReset)
-        ucrChkIgnoreCase.SetRCode(clsGetRowsFunction, bReset)
-        ucrChkIncludeRegularExpressions.SetRCode(clsGetRowsFunction, bReset)
+        ucrReceiverVariable.SetRCode(clsGetRowHeadersFunction, bReset)
+        ucrChkIgnoreCase.SetRCode(clsGetRowHeadersFunction, bReset)
+        ucrChkIncludeRegularExpressions.SetRCode(clsGetRowHeadersFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         ucrPnlSelect.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        cmdFind.Enabled = Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty
+        cmdFind.Enabled = (rdoVariable.Checked AndAlso Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty) OrElse
+            (rdoInFilter.Checked AndAlso Not ucrReceiverVariable.IsEmpty)
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
-            If String.IsNullOrEmpty(ucrInputPattern.GetText) Then
+            If (rdoVariable.Checked AndAlso String.IsNullOrEmpty(ucrInputPattern.GetText)) Then
                 Exit Sub
             End If
             Dim lstRowNumbers As New List(Of Integer)
@@ -149,11 +158,18 @@ Public Class dlgFindInVariableOrFilter
                 iCurrentOccurenceIndex = 1
             End If
 
+            Dim strColumn As String = "filter"
+
+            If rdoVariable.Checked Then
+                strColumn = ucrReceiverVariable.GetVariableNames
+            End If
+
             Dim iRow As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1)
             Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
             frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
-            frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strVariable:=ucrReceiverVariable.GetVariableNames,
-                                                       iRow:=iRow, bCellOrRow:=rdoCell.Checked)
+            Dim bApplyCell As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
+            frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
+                                                       iRow:=iRow, bCellOrRow:=Not bApplyCell)
             iCountClick += 1
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -182,8 +198,14 @@ Public Class dlgFindInVariableOrFilter
         If ucrInputPattern.GetText <> "NA" Then
             strPattern = Chr(34) & strPattern & Chr(34)
         End If
-        clsGetRowsFunction.AddParameter("searchText", strPattern, iPosition:=2)
+        clsGetRowHeadersFunction.AddParameter("searchText", strPattern, iPosition:=2)
         cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
+    End Sub
+
+    Private Sub AddToMenu()
+        If frmMain.clsRecentItems IsNot Nothing Then
+            frmMain.clsRecentItems.addToMenu(Me)
+        End If
     End Sub
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
@@ -200,6 +222,24 @@ Public Class dlgFindInVariableOrFilter
             clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
         Else
             clsDummyFunction.AddParameter("select", "row", iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        ucrReceiverVariable.Clear()
+        lblMatching.Visible = False
+        If rdoVariable.Checked Then
+            clsGetRowsFunction = clsGetRowHeadersFunction
+            clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
+            ucrReceiverVariable.SetItemType("column")
+            ucrReceiverVariable.strSelectorHeading = "Variables"
+            lblVariable.Text = "Variable:"
+        ElseIf rdoInFilter.Checked Then
+            clsGetRowsFunction = clsGetFilterRowNamesFunction
+            clsDummyFunction.AddParameter("check", "filter", iPosition:=0)
+            ucrReceiverVariable.SetItemType("filter")
+            ucrReceiverVariable.strSelectorHeading = "Filters"
+            lblVariable.Text = "Filter:"
         End If
     End Sub
 End Class

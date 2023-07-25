@@ -258,6 +258,10 @@ Public Class ucrDataView
         Return _grid.GetWorksheetCount
     End Function
 
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
+        _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
+    End Sub
+
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
@@ -1000,9 +1004,9 @@ Public Class ucrDataView
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strVariable As String, Optional iRow As Integer = 0,
+    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
                            Optional bCellOrRow As Boolean = False)
-        _grid.SearchInGrid(rowNumbers, strVariable, iRow, bCellOrRow)
+        _grid.SearchInGrid(rowNumbers, strColumn, iRow, bCellOrRow)
     End Sub
 
 End Class

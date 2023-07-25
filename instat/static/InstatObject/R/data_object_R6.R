@@ -339,7 +339,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       for(col_name in names(out)) {
         for(attr_name in names(attributes(private$data[[col_name]]))) {
           if(!attr_name %in% c("class", "levels")) {
-            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]][1:nrow(out)], attr_name)
           }
         }
       }
