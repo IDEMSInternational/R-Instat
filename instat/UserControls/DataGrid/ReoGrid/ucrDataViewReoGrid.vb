@@ -30,6 +30,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event EditCell() Implements IDataViewGrid.EditCell
 
+    Public Event FindRow() Implements IDataViewGrid.FindRow
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -100,6 +102,24 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
+        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColumn)
+        If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
+            MsgBox("Cannot wrap or unwrap this type of variable.")
+            Exit Sub
+        End If
+
+        If bApplyWrap Then
+            grdData.CurrentWorksheet.AutoFitColumnWidth(iColumnIndex)
+            For i As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
+                grdData.CurrentWorksheet.AutoFitRowHeight(i)
+            Next
+        Else
+            grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
+            grdData.CurrentWorksheet.SetColumnsWidth(0, grdData.CurrentWorksheet.ColumnCount, 70)
+        End If
+    End Sub
+
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
@@ -121,6 +141,14 @@ Public Class ucrDataViewReoGrid
             lstColumns.Add(GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(i))
         Next
         Return lstColumns
+    End Function
+
+    Public Function GetFirstRowHeader() As String Implements IDataViewGrid.GetFirstRowHeader
+        Return grdData.CurrentWorksheet.RowHeaders(0).Text
+    End Function
+
+    Public Function GetLastRowHeader() As String Implements IDataViewGrid.GetLastRowHeader
+        Return grdData.CurrentWorksheet.RowHeaders(grdData.CurrentWorksheet.RowCount - 1).Text
     End Function
 
     Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
@@ -181,7 +209,6 @@ Public Class ucrDataViewReoGrid
         RefreshSingleCell(e.Cell.Column, e.Cell.Row)
     End Sub
 
-
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         e.IsCancelled = True 'prevents pasted data from being added directly into the data view
         'validate columns
@@ -211,7 +238,97 @@ Public Class ucrDataViewReoGrid
         If (e.KeyCode And Not Keys.Modifiers) = Keys.E AndAlso e.Modifiers = Keys.Control Then
             'e.IsCancelled = True
             RaiseEvent EditCell()
+        ElseIf (e.KeyCode And Not Keys.Modifiers) = Keys.F AndAlso e.Modifiers = Keys.Control Then
+            RaiseEvent FindRow()
         End If
     End Sub
 
+    Private Function GetColumnIndex(currWorkSheet As Worksheet, strColName As String) As Integer
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To currWorkSheet.Columns - 1
+                Dim strCol As String = currWorkSheet.ColumnHeaders(i).Text
+                If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowIndex(currWorkSheet As Worksheet, strRowName As String) As Integer
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To currWorkSheet.Rows - 1
+                Dim strCol As String = currWorkSheet.RowHeaders(i).Text
+                If strCol = strRowName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of Integer)) As List(Of Integer)
+        Dim lstRowsIndexes As New List(Of Integer)
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To lstRows.Count - 1
+                For j As Integer = 0 To currWorkSheet.Rows - 1
+                    Dim strCol As String = currWorkSheet.RowHeaders(j).Text
+                    If strCol = lstRows(i) Then
+                        lstRowsIndexes.Add(j)
+                    End If
+                Next
+            Next
+        End If
+        Return lstRowsIndexes
+    End Function
+
+    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer)
+        currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+        currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
+    End Sub
+
+    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of Integer), colIndex As Integer, bApplyToRow As Boolean, color As Color)
+        ' Create a new style object for the row background color
+        Dim rowStyle As WorksheetRangeStyle = New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = color
+        }
+
+        ' Iterate over the row numbers and apply the style to each row
+        For Each rowNumber As Integer In rowNumbers
+            ' Check if the row index is within the valid range
+            If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
+                If bApplyToRow Then
+                    ' Apply the row style to the entire row
+                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
+                Else
+                    currWorkSheet.SetRangeStyles(New RangePosition(rowNumber, 0, 1, colIndex), rowStyle)
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bApplyToRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+        Dim currSheet = grdData.CurrentWorksheet
+
+        If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+            Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
+            Dim iColIndex As Integer = 0
+            If strColumn <> "filter" Then
+                iColIndex = GetColumnIndex(currSheet, strColumn)
+            End If
+
+            If iRowIndex > -1 AndAlso iColIndex > -1 Then
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
+                If bApplyToRow Then
+                    SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
+                                         colIndex:=iColIndex, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
+                Else
+                    SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
+                                         colIndex:=currSheet.ColumnCount, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
+                End If
+            End If
+        End If
+    End Sub
 End Class

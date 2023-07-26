@@ -31,6 +31,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event EditCell() Implements IDataViewGrid.EditCell
 
+    Public Event FindRow() Implements IDataViewGrid.FindRow
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -74,6 +76,14 @@ Public Class ucrDataViewLinuxGrid
         Return tcTabs.SelectedTab.Text
     End Function
 
+    Public Function GetFirstRowHeader() As String Implements IDataViewGrid.GetFirstRowHeader
+        Return ""
+    End Function
+
+    Public Function GetLastRowHeader() As String Implements IDataViewGrid.GetLastRowHeader
+        Return ""
+    End Function
+
     Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
         Return tcTabs.TabPages.Count()
     End Function
@@ -104,6 +114,10 @@ Public Class ucrDataViewLinuxGrid
                         GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(dataGrid.CurrentCell.ColumnIndex).strName,
                         GetCurrentDataFrameFocus().clsVisibleDataFramePage.RowNames()(dataGrid.CurrentCell.RowIndex))
         RefreshSingleCell(dataGrid.CurrentCell.ColumnIndex, dataGrid.CurrentCell.RowIndex)
+    End Sub
+
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
+
     End Sub
 
     'ToDo allow editing
@@ -153,5 +167,9 @@ Public Class ucrDataViewLinuxGrid
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         Dim dataGrid = GetDataGridFromSelectedTab()
         dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
+    End Sub
+
+    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
     End Sub
 End Class
