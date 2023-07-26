@@ -22,15 +22,17 @@ Public Class ucrScript
 
     Private bIsTextChanged = False
     Private iMaxLineNumberCharLength As Integer = 0
+    Private Const iTabIndexLog As Integer = 0
     Private Const strComment As String = "Code run from Script Window"
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
     Friend WithEvents clsScriptActive As Scintilla
+    Friend WithEvents clsScriptLog As Scintilla
 
     ''' <summary>
     '''     The current text in the active tab. 
     ''' </summary>
-    Public Property strText As String
+    Public Property strActiveTabText As String
         Get
             Return If(IsNothing(clsScriptActive), Nothing, clsScriptActive.Text)
         End Get
@@ -42,7 +44,7 @@ Public Class ucrScript
     End Property
 
     ''' <summary>
-    '''     Appends <paramref name="strText"/> to the end of the text in the active tab.    ''' 
+    '''     Appends <paramref name="strText"/> to the end of the text in the active tab.
     ''' </summary>
     ''' <param name="strText"> The text to append to the contents of the active tab.</param>
     Public Sub AppendText(strText As String)
@@ -55,6 +57,11 @@ Public Class ucrScript
     ''' Removes the selected text from the active tab, and copies the removed text to the clipboard.
     ''' </summary>
     Public Sub CutText()
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only cut from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Cut from log tab")
+            Exit Sub
+        End If
+
         If clsScriptActive.SelectedText.Length > 0 Then
             clsScriptActive.Cut()
             EnableDisableButtons()
@@ -72,15 +79,101 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
+    ''' If script tab is already selected, then returns True.
+    ''' If log tab is selected and there is only one script tab, then selects script tab and 
+    ''' returns True.
+    ''' If log tab is selected and there is more than one script tab, then displays a message 
+    ''' box and returns False.
+    ''' </summary>
+    ''' <returns>True if a script tab is selected, or if there is only one script tab; else 
+    '''          returns False.</returns>
+    Public Function IsScriptTabSelected() As Boolean
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            If TabControl.TabCount = 2 Then
+                TabControl.SelectTab(1)
+            Else
+                MsgBox("No script tab selected. Please first select the tab of the script you wish to write to.", vbExclamation, "Script Tab Not Selected")
+                Return False
+            End If
+        End If
+        Return True
+    End Function
+
+
+    ''' <summary>
+    '''     Appends <paramref name="strText"/> to the end of the text in the log tab.
+    ''' </summary>
+    ''' <param name="strText"> The text to append to the contents of the log tab.</param>
+    Public Sub LogText(strText As String)
+        clsScriptLog.ReadOnly = False
+        clsScriptLog.AppendText(Environment.NewLine & strText)
+        clsScriptLog.ReadOnly = True
+        clsScriptLog.GotoPosition(clsScriptLog.TextLength)
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            EnableDisableButtons()
+        End If
+    End Sub
+
+    ''' <summary>
     ''' Pastes the contents of the clipboard into the active tab.
     ''' </summary>
     Public Sub PasteText()
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only paste to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Paste to log tab")
+            Exit Sub
+        End If
+
         If Clipboard.ContainsData(DataFormats.Text) Then
             clsScriptActive.Paste()
             EnableDisableButtons()
         Else
             MsgBox("You can only paste text data on the script window.", MsgBoxStyle.Exclamation, "Paste to Script Window")
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Displays a file save dialog; allows the user to specify a folder and file name; and saves 
+    ''' the log/script to the specified file.
+    ''' </summary>
+    ''' <param name="bIsLog"> True if the script to be saved is the log file.</param>
+    Public Sub SaveScript(bIsLog As Boolean, Optional bOpenAsFile As Boolean = False)
+        If Not bIsLog AndAlso TabControl.SelectedIndex = iTabIndexLog Then
+            If TabControl.TabCount = 2 Then
+                TabControl.SelectTab(1)
+            Else
+                MsgBox("No script tab selected. Please first select the tab of the script you wish to save.", vbExclamation, "Save Script")
+                Exit Sub
+            End If
+        End If
+
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+
+            'Ensure that dialog opens in correct folder.
+            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
+            'not work (I think a bug in WinForms).So we need to use static variables instead.
+            Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
+            Static strInitialDirectoryLog As String = frmMain.clsInstatOptions.strWorkingDirectory
+            dlgSave.InitialDirectory = If(bIsLog, strInitialDirectoryLog, strInitialDirectory)
+
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                Try
+                    File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
+                    bIsTextChanged = False
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    If bIsLog Then
+                        strInitialDirectoryLog = Path.GetDirectoryName(dlgSave.FileName)
+                    Else
+                        strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
+                    End If
+                Catch
+                    MsgBox("Could not save the " & If(bIsLog, "Log", "Script") & " file." & Environment.NewLine &
+                           "The file may be in use by another program or you may not have access to write to the specified location.",
+                           vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
+                End Try
+            End If
+        End Using
     End Sub
 
     ''' <summary>
@@ -91,25 +184,49 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub addTab()
+    Private Sub AddTab(Optional bIsLogTab As Boolean = False)
         clsScriptActive = NewScriptEditor()
         SetLineNumberMarginWidth(1, True)
 
         Dim tabPageAdded = New TabPage
         tabPageAdded.Controls.Add(clsScriptActive)
-        tabPageAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        tabPageAdded.ForeColor = System.Drawing.SystemColors.ControlText
-        tabPageAdded.Location = New System.Drawing.Point(4, 22)
+        tabPageAdded.Font = New Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        tabPageAdded.ForeColor = SystemColors.ControlText
+        tabPageAdded.Location = New Point(4, 22)
         tabPageAdded.Name = "TabPageAdded"
-        tabPageAdded.Padding = New System.Windows.Forms.Padding(3)
-        tabPageAdded.Size = New System.Drawing.Size(397, 415)
+        tabPageAdded.Padding = New Padding(3)
+        tabPageAdded.Size = New Size(397, 415)
         tabPageAdded.TabIndex = 0
         tabPageAdded.UseVisualStyleBackColor = True
 
+        If bIsLogTab Then
+            tabPageAdded.Text = "Log"
+            clsScriptLog = clsScriptActive
+            clsScriptLog.Styles(Style.Default).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Default).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Comment).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.KWord).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.BaseKWord).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.OtherKWord).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Number).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.String).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.String2).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Operator).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Identifier).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.Infix).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.R.InfixEol).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.BraceLight).BackColor = Color.DarkGray
+            clsScriptLog.Styles(Style.BraceBad).BackColor = Color.Gainsboro
+            clsScriptLog.Styles(Style.LineNumber).BackColor = Color.DarkGray
+            clsScriptLog.SetFoldMarginColor(True, Color.DarkGray)
+            clsScriptLog.ReadOnly = True
+        Else
+            Static iTabCounter As Integer = 1
+            tabPageAdded.Text = "Untitled" & iTabCounter
+            iTabCounter += 1
+        End If
+
         TabControl.TabPages.Add(tabPageAdded)
-        Static iTabCounter As Integer = 1
-        tabPageAdded.Text = "Untitled" & iTabCounter
-        iTabCounter += 1
 
         TabControl.SelectedTab = tabPageAdded
         bIsTextChanged = False
@@ -117,35 +234,41 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableDisableButtons()
-        mnuUndo.Enabled = clsScriptActive.CanUndo
-        mnuRedo.Enabled = clsScriptActive.CanRedo
 
-        Dim bScriptselected = clsScriptActive.SelectedText.Length > 0
-        Dim bScriptExists = clsScriptActive.TextLength > 0
-
-        mnuCut.Enabled = bScriptselected
-        mnuCopy.Enabled = bScriptselected
-        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
-        mnuSelectAll.Enabled = bScriptExists
-        mnuClear.Enabled = bScriptExists
-
-        mnuRunCurrentLineSelection.Enabled = bScriptExists
-        mnuRunAllText.Enabled = bScriptExists
-
-        mnuOpenScriptasFile.Enabled = bScriptExists
-        mnuSaveScript.Enabled = bScriptExists
+        Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
 
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
+        cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
-        cmdClear.Enabled = bScriptExists
+        cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
 
-        cmdRemoveTab.Enabled = TabControl.TabCount > 1
+        cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
     End Sub
 
     Private Sub EnableRunButtons(bEnable As Boolean)
         cmdRunLineSelection.Enabled = bEnable
         cmdRunAll.Enabled = bEnable
+    End Sub
+
+    ''' <summary>
+    ''' Enables or disables all right click menu options
+    ''' </summary>
+    ''' <param name="bEnable">If true, enables all right click options,false otherwise</param>
+    Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
+        mnuUndo.Enabled = bEnable
+        mnuRedo.Enabled = bEnable
+        mnuCut.Enabled = bEnable
+        mnuCopy.Enabled = bEnable
+        mnuPaste.Enabled = bEnable
+        mnuSelectAll.Enabled = bEnable
+        mnuClear.Enabled = bEnable
+        mnuRunCurrentLineSelection.Enabled = bEnable
+        mnuRunAllText.Enabled = bEnable
+        mnuLoadScriptFromFile.Enabled = bEnable
+        mnuOpenScriptasFile.Enabled = bEnable
+        mnuSaveScript.Enabled = bEnable
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -311,6 +434,11 @@ Public Class ucrScript
     End Function
 
     Private Sub LoadScript()
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only load script to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Load to log tab")
+            Exit Sub
+        End If
+
         If clsScriptActive.TextLength > 0 _
                 AndAlso MsgBox("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
@@ -339,7 +467,7 @@ Public Class ucrScript
                 bIsTextChanged = False
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
-                       "The file may be in use by another program or you may not have access to write to the specified location.",
+                       "The file may be in use by another program or you may not have access to read from the specified location.",
                        vbExclamation, "Load Script")
             End Try
         End Using
@@ -441,32 +569,6 @@ Public Class ucrScript
                   "")
     End Function
 
-    Private Sub SaveScript()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Script To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-
-            'Ensure that dialog opens in correct folder.
-            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
-            'not work (I think a bug in WinForms).So we need to use a static variable instead.
-            Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
-            dlgSave.InitialDirectory = strInitialDirectory
-
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                Try
-                    File.WriteAllText(dlgSave.FileName, clsScriptActive.Text)
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
-                    strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
-                    bIsTextChanged = False
-                Catch
-                    MsgBox("Could not save the script file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save Script")
-                End Try
-            End If
-        End Using
-    End Sub
-
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     '''     Sets the margin used to display line numbers to the correct width so that line numbers 
@@ -509,7 +611,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdAddTab_Click(sender As Object, e As EventArgs) Handles cmdAddTab.Click
-        addTab()
+        AddTab()
     End Sub
 
     Private Sub cmdLoadScript_Click(sender As Object, e As EventArgs) Handles cmdLoadScript.Click
@@ -517,7 +619,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
-        'never remove last tab
+        'never remove last script tab
         If TabControl.TabCount < 2 Then
             Exit Sub
         End If
@@ -538,7 +640,61 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+
+    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
+        'enable and disable menu options based on the active script properties before the user views them
+
+        Dim bScriptSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+
+        'initially disable all the right click menu options
+        EnableRightClickMenuOptions(False)
+
+        'if active tab is not log tab then enable the options based on active tab state
+        'below are options that are not to be used in the log tab
+        If TabControl.SelectedIndex <> iTabIndexLog Then
+            mnuUndo.Enabled = clsScriptActive.CanUndo
+            mnuRedo.Enabled = clsScriptActive.CanRedo
+            mnuCut.Enabled = bScriptSelected
+            mnuCopy.Enabled = bScriptSelected
+            mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
+            mnuClear.Enabled = bScriptExists
+            mnuLoadScriptFromFile.Enabled = True
+        End If
+
+        'enable remaining options based on tab state
+        mnuSelectAll.Enabled = bScriptExists
+        mnuRunCurrentLineSelection.Enabled = bScriptExists
+        mnuRunAllText.Enabled = bScriptExists
+        mnuOpenScriptasFile.Enabled = bScriptExists
+        mnuSaveScript.Enabled = bScriptExists
+    End Sub
+
+    Private Sub mnuContextScript_Closing(sender As Object, e As EventArgs) Handles mnuContextScript.Closing
+        'On closing menu context, just enable all the menu options to restore their short cut keys
+        'validations of the options actions is done by the functions that the events call.
+        EnableRightClickMenuOptions(True)
+    End Sub
+
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        CutText()
+    End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        CopyText()
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteText()
+    End Sub
+
     Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClear.Click, cmdClear.Click
+
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only clear a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Clear log tab")
+            Exit Sub
+        End If
+
         If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to clear the contents of the script window?",
                                vbYesNo, "Clear") = vbNo Then
@@ -546,18 +702,6 @@ Public Class ucrScript
         End If
         clsScriptActive.ClearAll()
         EnableDisableButtons()
-    End Sub
-
-    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
-        EnableDisableButtons()
-    End Sub
-
-    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        CopyText()
-    End Sub
-
-    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        CutText()
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -570,31 +714,35 @@ Public Class ucrScript
 
     Private Sub mnuOpenScriptasFile_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Try
+            Dim bIsLog As Boolean = TabControl.SelectedIndex = iTabIndexLog
+
             If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
                 Directory.CreateDirectory(strRInstatLogFilesFolderPath)
             End If
-            Dim strScriptFilename As String = "RInstatScript.R"
+            Dim strScriptFilename As String = If(bIsLog, "RInstatLog.R", "RInstatScript.R")
             Dim i As Integer = 0
             While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
                 i += 1
-                strScriptFilename = "RInstatScript" & i & ".R"
+                strScriptFilename = If(bIsLog, "RInstatLog", "RInstatScript") & i & ".R"
             End While
             File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename),
-                              frmMain.clsRLink.GetRSetupScript() & clsScriptActive.Text)
+                              If(bIsLog, clsScriptLog.Text,
+                                 frmMain.clsRLink.GetRSetupScript() & vbCrLf & clsScriptActive.Text))
             Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strScriptFilename))
             TabControl.SelectedTab.Text = strScriptFilename
         Catch
             MsgBox("Could not save the script file." & Environment.NewLine &
                    "The file may be in use by another program or you may not have access to write to the specified location.",
-                   vbExclamation, "Open Script")
+                   vbExclamation, "Open Script as File")
         End Try
     End Sub
 
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteText()
-    End Sub
-
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only redo in a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Redo log tab")
+            Exit Sub
+        End If
+
         'Determine if last operation can be redone in text box.   
         If clsScriptActive.CanRedo Then
             clsScriptActive.Redo()
@@ -610,27 +758,31 @@ Public Class ucrScript
         End If
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
+        EnableRightClickMenuOptions(False)
         RunText(clsScriptActive.Text)
         EnableRunButtons(True)
+        EnableRightClickMenuOptions(True)
     End Sub
 
     Private Sub mnuRunCurrentLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
         'temporarily disable the buttons in case its a long operation
         EnableRunButtons(False)
+        EnableRightClickMenuOptions(False)
         If clsScriptActive.SelectedText.Length > 0 Then
             RunText(clsScriptActive.SelectedText)
         Else
             RunCurrentLine()
         End If
         EnableRunButtons(True)
+        EnableRightClickMenuOptions(True)
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-        SaveScript()
+        SaveScript(TabControl.SelectedIndex = iTabIndexLog)
     End Sub
 
     Private Sub mnuSaveScript_Click(sender As Object, e As EventArgs) Handles mnuSaveScript.Click
-        SaveScript()
+        SaveScript(TabControl.SelectedIndex = iTabIndexLog)
     End Sub
 
     Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
@@ -638,6 +790,11 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only undo from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
+            Exit Sub
+        End If
+
         'Determine if last operation can be undone in text box.   
         If clsScriptActive.CanUndo Then
             clsScriptActive.Undo() 'Undo the last operation.
@@ -693,7 +850,15 @@ Public Class ucrScript
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
-        addTab()
+
+        'Create log tab
+        AddTab(bIsLogTab:=True)
+
+        'Create script tab
+        AddTab()
+
+        'Make the log tab the selected tab
+        TabControl.SelectTab(iTabIndexLog)
     End Sub
 
 End Class

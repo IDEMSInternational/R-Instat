@@ -20,9 +20,10 @@
 #       (e.g. 'dlgAugment_ucrModelReceiver_txtReceiverSingle')
 # 
 #     - A group of controls to ignore. The group is specified using SQLite pattern matching 
-#       (see https://www.sqlite.org/lang_expr.html). Examples:
-#         - 'dlgAugment_%' do not translate any of the controls in the 'dlgAugment' dialog
-#         - '%_txtReceiverSingle' do not translate any text in single receivers
+#       (see https://www.sqlite.org/lang_expr.html). Examples (note that the '_' character must be 
+#       escaped because otherwise it acts as a wild card):
+#         - 'dlgAugment\_%' do not translate any of the controls in the 'dlgAugment' dialog
+#         - '%\_txtReceiverSingle' do not translate any text in single receivers
 # 
 #     - An exclamation point ('!') at the start of the line negates the pattern. Any control in that 
 #       pattern that was previously excluded (ignored) becomes included again. 
@@ -31,8 +32,8 @@
 #       Negation can be useful if you want to ignore a group of controls with a few specific exceptions. 
 #       For example, the lines below ignore all the controls in the 'dlgBarChart' dialog apart from 
 #       the 'lblTitle' label:
-#         'dlgBarChart_%'
-#         '!dlgBarChart_%_lblTitle'
+#         'dlgBarChart\_%'
+#         '!dlgBarChart\_%\_lblTitle'
 #
 #     - Blank lines are ignored, they can be used as separators for readability
 #
@@ -46,51 +47,77 @@
 #
 # For example, if this file contains:
 # 
-#     %_lblModels
-#     %_lblModelpreview
-#     !dlgGlance_%
-#     !dlgTidy_%
+#     %\_lblModels
+#     %\_lblModelpreview
+#     !dlgGlance\_%
+#     !dlgTidy\_%
 # 
-# then these lines will be used to construct the following SQL command:
+# then these lines will be used to construct an SQL command similar to (for conciseness ESCAPE 
+# specifications not shown):
 # 
 #     UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE 
-#         (control_name LIKE '%_lblModels' OR control_name like '%_lblModelpreview') 
+#         (control_name LIKE '%\_lblModels' OR control_name LIKE '%\_lblModelpreview') 
 #         AND NOT 
-#         (control_name LIKE 'dlgGlance_%' OR control_name LIKE 'dlgTidy_%')
+#         (control_name LIKE 'dlgGlance\_%' OR control\_name LIKE 'dlgTidy\_%')
 # 
 ####################################################################################################
 
+# Ensure 'R-Instat <version number>' in top left does not translate (see PR #8356)
+frmMain
+
 # Single receivers normally contain column names, and these should not be translated
 # Fixes issue 6519
-%_txtReceiverSingle
+%\_txtReceiverSingle
 
 # In the 'New data Frame' dialog, the user may enter the 'New Data Frame Name'. 
 # This is a literal that should not be translated.
 # Fixes issue #6581
 # TODO Can we assume that the name the user specifies for saving should never be translated 
 #      in any dialog (e.g. '%_ucrInputTextSave%')?
-dlgNewDataFrame_%_ucrInputTextSave%
+dlgNewDataFrame\_%\_ucrInputTextSave%
 
 # In the 'Split Text' dialog, the user may specify how to split the column (by space, comma, 
 # period etc.). This string should not be translated.
 # Fixes issue #6532
-dlgSplitText_ucrInputPattern%
+dlgSplitText\_ucrInputPattern%
 
 # In the 'Filter' dialog, the 'Selected Filter Preview' should not be translated.
 # Fixes issue #6949, related to PR #6956
-dlgRestrict_ucrInputFilterPreview%
+dlgRestrict\_ucrInputFilterPreview%
 
 # In the 'Evapotranspiration' dialog, the 'Penman-Monteith' and 'Hargreaves-Samani' buttons should not be translated.
 # Partially fixes issue #7026, related to PR #7035
-dlgEvapotranspiration_%_rdoPenmanMonteith
-dlgEvapotranspiration_%_rdoHargreavesSamani
+dlgEvapotranspiration\_%\_rdoPenmanMonteith
+dlgEvapotranspiration\_%\_rdoHargreavesSamani
 
 # In the 'Boxplot' dialog, the selected 'Facet' either for Station, Year or Within Year should not be translated
 # Fixes issue #6185, item a), related to PR #7058
-dlgClimaticBoxPlot_ucrInputStation%
-dlgClimaticBoxPlot_ucrInputYear%
-dlgClimaticBoxPlot_ucrInputWithinYear%
+dlgClimaticBoxPlot\_ucrInputStation%
+dlgClimaticBoxPlot\_ucrInputYear%
+dlgClimaticBoxPlot\_ucrInputWithinYear%
 
 # In the 'InventoryPlot' dialog, the selected 'Facet' should not be translated
 # Partially fixes issue #6989, related to PR #7070
-dlgInventoryPlot_ucrInputFacetBy%
+dlgInventoryPlot\_ucrInputFacetBy%
+
+# In any dialog, input text should not be translated
+# Fixes issue #8275
+# TODO If by 2024, this line has not caused any problems, then delete ucrInput controls specified above (already covered by this pattern)
+%\_ucrInput%
+
+# Shows a dynamically created range of page numbers
+%sdgWindowNumber\_lblPages
+
+# Contain variable dates
+sdgOpenNetCDF\_tbNetCDF\_tbSubset\_dtpMinT%
+sdgOpenNetCDF\_tbNetCDF\_tbSubset\_dtpMaxT%
+
+# Mathematical symbols
+sdgConstructRegexExpression\_grpSymbols\_cmdNumbers%
+sdgCalculationsSummmary\_tbSummaryCalcs\_tbMain\_ucrCalcSummary\_grpSymbols\_cmdNumbers%
+dlgCalculator\_ucrCalc\_grpSymbols\_cmdNumbers%
+
+# Tab headings in Log/Script window
+ucrScriptWindow\_tlpTableContainer\_TabControl
+ucrScriptWindow\_tlpTableContainer\_TabControl\_TabPageAdded
+ucrScriptWindow\_tlpTableContainer\_TabControl\_TabPageAdded\_txtScriptAdded

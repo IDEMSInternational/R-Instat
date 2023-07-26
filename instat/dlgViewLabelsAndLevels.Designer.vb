@@ -44,6 +44,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkShowFrequencies = New instat.ucrCheck()
         Me.ucrChkShowMissingValues = New instat.ucrCheck()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrNudMaxLength = New instat.ucrNud()
         Me.ucrChkMaxLabels = New instat.ucrCheck()
         Me.ucrChkSortByName = New instat.ucrCheck()
         Me.ucrChkAlternateColour = New instat.ucrCheck()
@@ -61,7 +62,6 @@ Partial Class dlgViewFactorLabels
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorViewLabelsAndLevels = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrNudMaxLength = New instat.ucrNud()
         Me.grpSummaryStatistics.SuspendLayout()
         Me.grpDisplayOptions.SuspendLayout()
         Me.grpLabels.SuspendLayout()
@@ -129,6 +129,19 @@ Partial Class dlgViewFactorLabels
         Me.grpDisplayOptions.TabIndex = 5
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Text = "Display Options"
+        '
+        'ucrNudMaxLength
+        '
+        Me.ucrNudMaxLength.AutoSize = True
+        Me.ucrNudMaxLength.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLength.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxLength.Location = New System.Drawing.Point(94, 88)
+        Me.ucrNudMaxLength.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxLength.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLength.Name = "ucrNudMaxLength"
+        Me.ucrNudMaxLength.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxLength.TabIndex = 13
+        Me.ucrNudMaxLength.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkMaxLabels
         '
@@ -280,7 +293,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 345)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 6
         '
         'ucrReceiverVariables
@@ -307,19 +320,6 @@ Partial Class dlgViewFactorLabels
         Me.ucrSelectorViewLabelsAndLevels.Name = "ucrSelectorViewLabelsAndLevels"
         Me.ucrSelectorViewLabelsAndLevels.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorViewLabelsAndLevels.TabIndex = 0
-        '
-        'ucrNudMaxLength
-        '
-        Me.ucrNudMaxLength.AutoSize = True
-        Me.ucrNudMaxLength.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLength.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLength.Location = New System.Drawing.Point(94, 88)
-        Me.ucrNudMaxLength.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxLength.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLength.Name = "ucrNudMaxLength"
-        Me.ucrNudMaxLength.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxLength.TabIndex = 13
-        Me.ucrNudMaxLength.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgViewFactorLabels
         '

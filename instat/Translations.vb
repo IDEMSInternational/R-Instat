@@ -49,10 +49,15 @@ Public Class Translations
         ' It only needs be uncommented and executed once, prior to each new release.
         'WriteCsvFile()
 
-        ' The 'SetTranslateIgnore' function call below should normally be commented out.
-        ' It only needs be uncommented when the 'translateIgnore.txt' file is updated, and the 
-        ' changes need to be applied to the database.
-        'SetTranslateIgnore()
+        ' The function calls below should normally be commented out.
+        ' They only need to be uncommented when changes need to be applied to the database.
+        'UpdateTranslationDatabase("translateDynamic.txt", "ReplaceWithDynamicTranslation")
+        'UpdateTranslationDatabase("translateIgnore.txt", "DoNotTranslate")
+
+        'The lines above should only be used by developers to update the translation database.
+        'Therefore, exit the application with a message to ensure that this sub is not run 
+        'accidentally in the release version. 
+        'Application.Exit()
 
         If IsNothing(tsCollection) OrElse IsNothing(ctrParent) OrElse IsNothing(TryCast(ctrParent, Form)) Then
             Exit Sub
@@ -63,6 +68,16 @@ Public Class Translations
         Dim strLanguageCode = GetLanguageCode()
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(ctrParent, strDbPath, strLanguageCode))
 
+        'The list of 10 most recent dialogs is dynamic and isn't translated as part of the main
+        '    form. So translate manually.
+        For Each clsMenuItem As ToolStripItem In frmMain.mnuTbLast10Dialogs.DropDownItems
+            clsMenuItem.Text = GetTranslation(clsMenuItem.Text)
+        Next
+
+        'The data grid status bar is dynamic and isn't translated as part of the main form.
+        '    So translate manually.
+        frmMain.ucrDataViewer.SetDisplayLabels()
+
         'The right mouse button menus for the 6 output windows are not accessible via 
         '    the control lists. Therefore, translate these menus explicitly
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.UcrOutputPages.tsButtons.Items, strDbPath, strLanguageCode))
@@ -71,9 +86,8 @@ Public Class Translations
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.statusColumnMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrLogWindow.Name, frmMain.ucrLogWindow.mnuContextLogFile.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.rowContextMenu.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.RowContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.ColumnContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.CellContextMenu.Items, strDbPath, strLanguageCode))
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.SheetTabContextMenu.Items, strDbPath, strLanguageCode))
@@ -202,7 +216,6 @@ Public Class Translations
         strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrColumnMeta, frmMain.ucrColumnMeta.statusColumnMenu.Items)
         strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataFrameMeta, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items)
         strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataFrameMeta, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items)
-        strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrLogWindow, frmMain.ucrLogWindow.mnuContextLogFile.Items)
         strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrScriptWindow, frmMain.ucrScriptWindow.mnuContextScript.Items)
         strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataViewer, frmMain.ucrDataViewer.RowContextMenu.Items)
         strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataViewer, frmMain.ucrDataViewer.ColumnContextMenu.Items)
@@ -231,70 +244,69 @@ Public Class Translations
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
     '''    Updates the `TranslateWinForm` library database based on the specifications in the 
-    '''    'translateIgnore.txt' file. This file provides a way to ignore specified WinForm 
-    '''    controls when the application or dialog is translated into a different language.
+    '''    <paramref name="strFileName"/> file. This file provides a way to set the type of 
+    '''    translation for specified WinForm controls to <paramref name="strIdText"/> when the 
+    '''    application or dialog is translated into a different language.
     '''    <para>
     '''    For example, this file can be used to ensure that text that references pre-existing data 
     '''    or meta data (e.g. a file name, data frame name, column name, cell value etc.) stays the 
     '''    same, even when the rest of the dialog is translated into French or Portuguese.
     '''    </para><para>
-    '''    This sub should be executed prior to each release to ensure that the `TranslateWinForm` 
-    '''    database specifies all the controls to ignore during the translation.  </para>  
+    '''    This sub should be executed prior to each release.  </para>  
     ''' </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Shared Sub SetTranslateIgnore()
-        Dim lstIgnore As New List(Of String)
-        Dim lstIgnoreNegations As New List(Of String)
+    Private Shared Sub UpdateTranslationDatabase(strFileName As String, strIdText As String)
+        Dim lstPatterns As New List(Of String)
+        Dim lstPatternNegations As New List(Of String)
 
-        'For each line in the ignore file
+        'For each line in the file
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        Dim strFileName As String = "translateIgnore.txt"
-        Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
+        Dim strPath As String = Path.Combine(strDesktopPath, strFileName)
         Using clsReader As New StreamReader(strPath)
             Do While clsReader.Peek() >= 0
-                Dim strIgnoreFileLine = clsReader.ReadLine().Trim()
-                If String.IsNullOrEmpty(strIgnoreFileLine) Then
+                Dim strFileLine = clsReader.ReadLine().Trim()
+                If String.IsNullOrEmpty(strFileLine) Then
                     Continue Do
                 End If
 
-                Select Case (strIgnoreFileLine(0))
+                Select Case (strFileLine(0))
                     Case "#"
                         'Ignore comment lines
                     Case "!"
-                        'Add negation pattern to negation list
-                        lstIgnoreNegations.Add(strIgnoreFileLine.Substring(1)) 'remove leading '!'
+                        'Add negation pattern to list
+                        lstPatternNegations.Add(strFileLine.Substring(1)) 'remove leading '!'
                     Case Else
-                        'Add pattern to ignore list
-                        lstIgnore.Add(strIgnoreFileLine)
+                        'Add pattern to list
+                        lstPatterns.Add(strFileLine)
                 End Select
             Loop
         End Using
 
-        'If the ignore file didn't contain any specifications, then exit
-        If lstIgnore.Count <= 0 AndAlso lstIgnoreNegations.Count <= 0 Then
-            MsgBox("The " & strPath & " ignore file was processed. No ignore specifications were found. " &
+        'If the file didn't contain any specifications, then exit
+        If lstPatterns.Count <= 0 AndAlso lstPatternNegations.Count <= 0 Then
+            MsgBox("The " & strFileName & " file was processed. No specifications were found. " &
                    "The database was not updated. The application will now exit.", MsgBoxStyle.Exclamation)
             Application.Exit()
         End If
 
         'create the SQL command to update the database
-        Dim strSqlUpdate As String = "UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE "
+        Dim strSqlUpdate As String = "UPDATE form_controls SET id_text = '" & strIdText & "' WHERE "
 
-        If lstIgnore.Count > 0 Then
+        If lstPatterns.Count > 0 Then
             strSqlUpdate &= "("
-            For iListPos As Integer = 0 To lstIgnore.Count - 1
+            For iListPos As Integer = 0 To lstPatterns.Count - 1
                 strSqlUpdate &= If(iListPos > 0, " OR ", "")
-                strSqlUpdate &= "control_name LIKE '" & lstIgnore.Item(iListPos) & "'"
+                strSqlUpdate &= "control_name LIKE '" & lstPatterns.Item(iListPos) & "' ESCAPE '\'"
             Next iListPos
             strSqlUpdate &= ")"
         End If
 
-        If lstIgnoreNegations.Count > 0 Then
-            strSqlUpdate &= If(lstIgnore.Count > 0, " AND ", "")
+        If lstPatternNegations.Count > 0 Then
+            strSqlUpdate &= If(lstPatterns.Count > 0, " AND ", "")
             strSqlUpdate &= "NOT ("
-            For iListPos As Integer = 0 To lstIgnoreNegations.Count - 1
+            For iListPos As Integer = 0 To lstPatternNegations.Count - 1
                 strSqlUpdate &= If(iListPos > 0, " OR ", "")
-                strSqlUpdate &= "control_name LIKE '" & lstIgnoreNegations.Item(iListPos) & "'"
+                strSqlUpdate &= "control_name LIKE '" & lstPatternNegations.Item(iListPos) & "' ESCAPE '\'"
             Next iListPos
             strSqlUpdate &= ")"
         End If
@@ -316,20 +328,14 @@ Public Class Translations
                     clsConnection.Open()
                     Dim iRowsUpdated As Integer = clsSqliteCmd.ExecuteNonQuery()
                     clsConnection.Close()
-                    MsgBox("The " & strPath & " ignore file was processed. " &
+                    MsgBox("The " & strPath & " file was processed. " &
                            iRowsUpdated & " database rows were updated. " &
                            "The application will now exit.", MsgBoxStyle.Exclamation)
                 End Using
             End Using
         Catch e As Exception
-            MsgBox(e.Message & Environment.NewLine & "An error occured processing ignore file: " &
-                   strPath, MsgBoxStyle.Exclamation)
+            MsgBox(e.Message & Environment.NewLine & "An error occured processing " & strFileName, MsgBoxStyle.Exclamation)
         End Try
-
-        'This sub should only be used by developers to process the translation ignore file.
-        'Therefore, exit the application with a message to ensure that this sub is not run 
-        'accidentally in the release version. 
-        Application.Exit()
     End Sub
 
 End Class

@@ -18,6 +18,7 @@ Imports RDotNet
 
 Public Class ucrInputFactorLevels
     Private WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Private bAddNA As Boolean = False
     Private clsLevels As New RFunction
     Public strQuotes As String = Chr(34)
     ''' <summary> Should the first level be selected by default? </summary>
@@ -39,8 +40,9 @@ Public Class ucrInputFactorLevels
         bAllowNonConditionValues = True
     End Sub
 
-    Public Sub SetFactorReceiver(ucrNewReceiverFactor As ucrReceiverSingle)
+    Public Sub SetFactorReceiver(ucrNewReceiverFactor As ucrReceiverSingle, Optional bNewAddNA As Boolean = False)
         ucrReceiverFactor = ucrNewReceiverFactor
+        bAddNA = bNewAddNA
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
@@ -86,7 +88,7 @@ Public Class ucrInputFactorLevels
                 For i As Integer = 0 To strLevels.Count - 1
                     lstLevels.Add(strQuotes & strLevels(i) & strQuotes)
                 Next
-
+                If bAddNA Then lstLevels.Add("NA")
                 SetItems(lstLevels.ToArray())
 
                 'restore last selected level if its still contained in the new list of retrieved levels

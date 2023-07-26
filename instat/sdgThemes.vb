@@ -56,10 +56,10 @@ Public Class sdgThemes
         ucrLegendKey.SetLabel("Background underneath legend keys")
         ucrLegendBoxBackground.SetLabel("Background of legend area")
 
-        ucrLegendSpacing.setLabel("Spacing between legends")
-        ucrLegendSpacingXAxis.setLabel("Horizontal spacing between legends")
-        ucrLegendSpacingYAxis.setLabel("Horizontal spacing between legends")
-        ucrLegendBoxSpacing.setLabel("Space between plot area legend box")
+        ucrLegendSpacing.SetLabel("Spacing between legends")
+        ucrLegendSpacingXAxis.SetLabel("Horizontal spacing between legends")
+        ucrLegendSpacingYAxis.SetLabel("Horizontal spacing between legends")
+        ucrLegendBoxSpacing.SetLabel("Space between plot area legend box")
 
         ucrPanelGridMajorXAxis.SetLabel("Vertical major grid lines ")
         ucrPanelGridMajorYAxis.SetLabel("Horizontal major grid lines ")
@@ -68,7 +68,7 @@ Public Class sdgThemes
 
         ucrPanelGrid.SetLabel("Grid lines")
         ucrPanelGridMajor.SetLabel("Major grid lines ")
-        ucrPanelGridMinor.SetLabel("Major grid lines ")
+        ucrPanelGridMinor.SetLabel("Minor grid lines ")
         ucrPanelBorder.SetLabel("Panel border")
         ucrPanelBackGround.SetLabel("Panel background")
 
@@ -82,19 +82,19 @@ Public Class sdgThemes
         ucrStripTextXAxis.SetLabel("Facet labels along horizontal direction")
         ucrStripTextYAxis.SetLabel("Facet labels along vertical direction")
 
-        ucrTickLength.setLabel("Length of tick marks")
-        ucrPlotMargin.setLabel("Margin around entire plot")
+        ucrTickLength.SetLabel("Length of tick marks")
+        ucrPlotMargin.SetLabel("Margin around entire plot")
 
-        ucrLegendKeySize.setLabel("Size of legend keys")
-        ucrLegendKeyHeight.setLabel("Key background height")
-        ucrLegendKeyWidth.setLabel("Key background width")
+        ucrLegendKeySize.SetLabel("Size of legend keys")
+        ucrLegendKeyHeight.SetLabel("Key background height")
+        ucrLegendKeyWidth.SetLabel("Key background width")
 
-        ucrPanelSpacing.setLabel("Spacing between facet panels ")
-        ucrPanelSpacingXAxis.setLabel("Horizontal spacing between facet panels")
-        ucrPanelSpacingYAxis.setLabel("Vertical spacing between facet panels")
+        ucrPanelSpacing.SetLabel("Spacing between facet panels ")
+        ucrPanelSpacingXAxis.SetLabel("Horizontal spacing between facet panels")
+        ucrPanelSpacingYAxis.SetLabel("Vertical spacing between facet panels")
 
-        ucrStripsSpaceGrid.setLabel("When strips are switched (Grid)")
-        ucrStripsSpaceWrap.setLabel("when strips are switched (wrap)")
+        ucrStripsSpaceGrid.SetLabel("When strips are switched (Grid)")
+        ucrStripsSpaceWrap.SetLabel("when strips are switched (wrap)")
 
         ' TODO: Find what this means: "two-element numeric vector"
         urChkLegendPosition.SetText("Legend Position")
