@@ -1626,13 +1626,18 @@ Public Class RLink
     '''
     ''' <returns>   The number of columns in the <paramref name="strDataFrameName"/> data frame. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Function GetDataFrameColumnCount(strDataFrameName As String) As Integer
+    Public Function GetDataFrameColumnCount(strDataFrameName As String, Optional bUseCurrentSelection As Boolean = False) As Integer
         Dim iColumnCount As Integer
         Dim clsDataFrameColCount As New RFunction
         Dim expCount As SymbolicExpression
 
         clsDataFrameColCount.SetRCommand(strInstatDataObject & "$get_column_count")
         clsDataFrameColCount.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        If bUseCurrentSelection Then
+            clsDataFrameColCount.AddParameter("use_column_selection", "TRUE")
+        Else
+            clsDataFrameColCount.AddParameter("use_column_selection", "FALSE")
+        End If
         expCount = RunInternalScriptGetValue(clsDataFrameColCount.ToScript(), bSilent:=True)
         If expCount IsNot Nothing AndAlso Not expCount.Type = Internals.SymbolicExpressionType.Null Then
             iColumnCount = expCount.AsInteger(0)
