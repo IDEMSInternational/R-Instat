@@ -810,10 +810,9 @@ Public Class RLink
                     bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 ElseIf iCallType = 1 OrElse iCallType = 4 Then
-                    'todo. this is used by the calculator dialog
-                    'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
+                    'this is used by the calculator dialog
                     'else if script output should be stored in a temp variable
-                    ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
+                    ' TODO SJL In RInstat, iCallType only seems to be -1, 0, 1, 2 or 3. Is icallType 4 used?
                     bAsFile = False
                     Dim strTempAssignTo As String = ".temp_val"
                     'TODO check this is valid syntax in all cases
@@ -822,6 +821,14 @@ Public Class RLink
                     Dim expTemp As RDotNet.SymbolicExpression = GetSymbol(strTempAssignTo)
                     If expTemp IsNot Nothing Then
                         strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
+                    End If
+                ElseIf iCallType = 5 Then
+                    'else if script comes from script window
+                    Dim bSuccess As Boolean = Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+
+                    'if not an assignment operation, then capture the output
+                    If Not strScript.Contains("<-") AndAlso bSuccess Then
+                        strOutput = GetFileOutput("view_object_data(object = " & strScript & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                     End If
                 Else
                     'else if script output should not be ignored or not stored as an object or variable
@@ -949,11 +956,7 @@ Public Class RLink
             End If
 
             'else execute command
-            Dim iCallType As Integer = 5
-            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
-                iCallType = 3
-            End If
-            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            RunScript(strScriptCmd.Trim(vbLf), iCallType:=5, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
             strScriptCmd = ""
             strNewComment = ""
         Next
