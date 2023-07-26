@@ -915,9 +915,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
-        dlgFind.currWindow = ActiveMdiChild
-        dlgFind.Owner = Me
-        dlgFind.Show()
+        dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
     Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click

@@ -296,7 +296,7 @@ Public Class Translations
             strSqlUpdate &= "("
             For iListPos As Integer = 0 To lstPatterns.Count - 1
                 strSqlUpdate &= If(iListPos > 0, " OR ", "")
-                strSqlUpdate &= "control_name LIKE '" & lstPatterns.Item(iListPos) & "'"
+                strSqlUpdate &= "control_name LIKE '" & lstPatterns.Item(iListPos) & "' ESCAPE '\'"
             Next iListPos
             strSqlUpdate &= ")"
         End If
@@ -306,7 +306,7 @@ Public Class Translations
             strSqlUpdate &= "NOT ("
             For iListPos As Integer = 0 To lstPatternNegations.Count - 1
                 strSqlUpdate &= If(iListPos > 0, " OR ", "")
-                strSqlUpdate &= "control_name LIKE '" & lstPatternNegations.Item(iListPos) & "'"
+                strSqlUpdate &= "control_name LIKE '" & lstPatternNegations.Item(iListPos) & "' ESCAPE '\'"
             Next iListPos
             strSqlUpdate &= ")"
         End If
