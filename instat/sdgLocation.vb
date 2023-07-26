@@ -28,9 +28,6 @@ Public Class sdgLocation
             EnableDesableSelector()
             bFirstLoad = False
         End If
-
-        SetDefaults()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -52,6 +49,7 @@ Public Class sdgLocation
         ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
         ucrInputLatitude.AddQuotesIfUnrecognised = False
         ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
+        ucrInputLatitude.SetRDefault("0")
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 3))
         ucrReceiverLongitude.SetParameterIsRFunction()
@@ -73,13 +71,11 @@ Public Class sdgLocation
         ucrInputElevation.SetParameter(New RParameter("Elev", 4))
         ucrInputElevation.AddQuotesIfUnrecognised = False
         ucrInputElevation.SetLinkedDisplayControl(lblLatitude)
+        ucrInputElevation.SetRDefault("0")
 
         bControlsInitialised = True
     End Sub
-    Private Sub SetDefaults()
-        clsListFunction.AddParameter("Elev", 0, iPosition:=0)
-        clsListFunction.AddParameter("lat_rad", 0, iPosition:=2)
-    End Sub
+
     Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, clsNewVarnamesVectorPT As RFunction, Optional bReset As Boolean = False)
         clsListFunction = clsNewListFunction
         clsVarnamesVectorPM = clsNewVarnamesVectorPM
@@ -94,14 +90,11 @@ Public Class sdgLocation
         ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
         ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("lon", 3), iAdditionalPairNo:=2)
         ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("lon", 3), iAdditionalPairNo:=2)
-        ucrSelectorLocation.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("data", 0), iAdditionalPairNo:=1)
-        ucrSelectorLocation.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("data", 0), iAdditionalPairNo:=2)
 
         ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
         ucrReceiverStation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
         ucrReceiverLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverAltitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             ucrInputElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)

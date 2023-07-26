@@ -241,7 +241,6 @@ Public Class dlgEvapotranspiration
         clsVarnamesVectorPM.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
         clsVarnamesVectorPM.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), bIncludeArgumentName:=False)
         clsVarnamesVectorPM.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPM.AddParameter("lon", 0, iPosition:=3)
 
         clsVarnamesVectorHS.SetRCommand("c")
         clsVarnamesVectorHS.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
@@ -498,6 +497,7 @@ Public Class dlgEvapotranspiration
 
     Private Sub Constants()
         If rdoPenmanMonteith.Checked Then
+            clsVarnamesVectorPM.RemoveParameterByName("lon")
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("z", 2, iPosition:=4)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
@@ -507,6 +507,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
         ElseIf rdoHargreavesSamani.Checked Then
+            clsVarnamesVectorHS.RemoveParameterByName("lon")
             clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
@@ -516,6 +517,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.RemoveParameterByName("as")
             clsListFunction.RemoveParameterByName("bs")
         Else
+            clsVarnamesVectorPT.RemoveParameterByName("lon")
             clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
