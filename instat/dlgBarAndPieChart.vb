@@ -77,7 +77,7 @@ Public Class dlgBarAndPieChart
     Private clsScaleSizeAreaFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsPointsFunction As New RFunction
-    Private clsGuidelegend As New RFunction
+    Private clsGuideLegendFunction As New RFunction
     Private clsGuideFunction As New RFunction
     Private clsThemeFunction As New RFunction
 
@@ -137,7 +137,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback, ucrChkLegendPosition, ucrChkReverse}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrChkReorderValue, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkReorderFrequency, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -305,7 +305,7 @@ Public Class dlgBarAndPieChart
 
         'Theme Tab Checkboxes under grpCommonOptions
         ucrChkLegendPosition.SetText("Legend Position")
-        ucrChkLegendPosition.AddToLinkedControls({ucrInputLegendPosition, ucrChkReverse}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrChkLegendPosition.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
         dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
@@ -430,7 +430,7 @@ Public Class dlgBarAndPieChart
         clsScaleSizeAreaFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPointsFunction = New RFunction
-        clsGuidelegend = New RFunction
+        clsGuideLegendFunction = New RFunction
         clsGuideFunction = New RFunction
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
@@ -454,15 +454,15 @@ Public Class dlgBarAndPieChart
 
         clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
 
-        clsGuidelegend.SetRCommand("guide_legend")
-        clsGuidelegend.AddParameter("reverse", "TRUE")
+        clsGuideLegendFunction.SetRCommand("guide_legend")
+        clsGuideLegendFunction.AddParameter("reverse", "TRUE")
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
 
         clsGuideFunction.SetRCommand("guides")
-        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuidelegend)
+        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuideLegendFunction)
 
         clsScaleXdiscretFunction.SetRCommand("scale_x_discrete")
         clsScaleXdiscretFunction.AddParameter("expand", clsRFunctionParameter:=clsExpansionFunction, iPosition:=0)
@@ -789,6 +789,7 @@ Public Class dlgBarAndPieChart
             ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
 
             ucrInputBarChartPositions.Visible = Not ucrReceiverByFactor.IsEmpty()
+            ucrChkReverse.Visible = Not ucrReceiverByFactor.IsEmpty()
 
         ElseIf rdoTreeMap.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTreemapAesFunction, iPosition:=1)
