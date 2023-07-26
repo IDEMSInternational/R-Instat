@@ -31,10 +31,11 @@ Public Class dlgTwoVariableFitModel
     'Tests
     Private clsNumericTtestFunction, clsTtestFunction, clsNumericWilcoxTestFunction, clsWilcoxTestFunction,
         clsNumericVarTestFunction, clsVarTestFunction, clsAnsariTestFunction, clsNumericAnsariTestFuntion,
-        clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction,
+        clsMoodTestFunction, clsNumericMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsConcatenateFunction, clsConcatenateBetaFuction,
         clsNumericKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction, clsNumericBarletteTestFunction,
         clsMcnemarTestFunction, clsFlignerTestFunction, clsNumericFlignerTestFunction, clsFisherTestFunction,
-        clsXchisgTestFunction, clsPropTestFunction As New RFunction
+        clsXchisgTestFunction, clsPropTestFunction, clsConvertToColumnTypeFunction, clsGetFactorLevelFunction,
+        clsConfintBas, clsBayesInferenceFunction, clsColumnNameFunction As New RFunction
 
     Private clsTtestOperator, clsWilcoxTestOperator, clsVarTestOperator, clsAnsariTestOperator,
         clsMoodTestOperator, clsKruskalTestOperator, clsBarletteTestOperator,
@@ -44,7 +45,9 @@ Public Class dlgTwoVariableFitModel
 
     'General case codes
     Private clsFormulaOperator As New ROperator
-    Private clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
+    Private clsGLM, clsLM, clsGLMNB, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc, clsGLMBayes As New RFunction
+
+
     Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
@@ -53,16 +56,21 @@ Public Class dlgTwoVariableFitModel
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
 
     'Display options codes
-    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint, clsConfintBasFunction, clsCoefFunction As New RFunction
 
-    Private bRCodeSet As Boolean
+    'Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+
+
+    Private bRCodeSet As Boolean = True
     Private bReset As Boolean = True
     Public bResetOptionsSubDialog As Boolean = False
     Public bResetFirstFunction As Boolean = False
+    Private bResetSubdialog As Boolean = False
+
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
     Public StrMedianValue As String = ""
 
-    Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -78,6 +86,10 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub InitialiseDialog()
         Dim dctConfidenceInterval As New Dictionary(Of String, String)
+        Dim dctStatistic As New Dictionary(Of String, String)
+        Dim dctType As New Dictionary(Of String, String)
+        Dim dctMethod As New Dictionary(Of String, String)
+        Dim dctCredibleLevel As New Dictionary(Of String, String)
         Dim lstControl As New List(Of Control)(New Control() {lblTest, lblFirstVariable, lblFirstVariableType,
              lblSecondVariable, lblSecondVariableType})
 
@@ -98,11 +110,11 @@ Public Class dlgTwoVariableFitModel
         ucrPnlModelType.AddFunctionNamesCondition(rdoTest, {"t.test", "wilcox.test", "var.test", "ansari.test",
                                                   "mood.test", "cor.test", "cor", "kruskal.test", "bartlett.test",
                                                   "fligner.test", "fisher.test", "xchisq.test", "prop.test", "aov",
-                                                   "mcnemar.test"})
+                                                   "mcnemar.test", "bayes_inference"})
         ucrPnlModelType.AddFunctionNamesCondition(rdoGeneralCase, {"t.test", "wilcox.test", "var.test", "ansari.test",
                                                   "mood.test", "cor.test", "cor", "kruskal.test", "bartlett.test",
                                                   "fligner.test", "fisher.test", "xchisq.test", "prop.test", "aov",
-                                                  "mcnemar.test"}, False)
+                                                  "mcnemar.test", "bayes_inference"}, False)
         ucrPnlModelType.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlModelType.AddToLinkedControls(ucrChkConvertToVariate, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlModelType.AddToLinkedControls(ucrInputTest, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -110,7 +122,7 @@ Public Class dlgTwoVariableFitModel
 
         ucrInputTest.SetItems({"t", "t paired", "wilcox", "var", "ansari", "mood",
                                   "cor", "kruskal", "bartlett", "fligner", "fisher", "chisq",
-                                  "propotion", "mcnemar"})
+                                  "propotion", "mcnemar", "bayes:mean", "bayes:proportion"})
         ucrInputTest.SetDropDownStyleAsNonEditable()
 
         'General case controls
@@ -122,10 +134,12 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.Selector = ucrSelectorSimpleReg
         ucrReceiverResponse.SetParameterIsString()
         ucrReceiverResponse.bWithQuotes = False
+        ucrReceiverResponse.SetIncludedDataTypes({"numeric", "dates", "logical", "factor"}, bStrict:=True)
 
         ucrReceiverExplanatory.SetParameter(New RParameter("x", 1))
         ucrReceiverExplanatory.Selector = ucrSelectorSimpleReg
         ucrReceiverExplanatory.SetParameterIsString()
+        ucrReceiverExplanatory.SetIncludedDataTypes({"numeric", "dates", "logical", "factor"}, bStrict:=True)
         ucrReceiverExplanatory.bWithQuotes = False
 
         ucrChkConvertToVariate.SetText("Convert to Numeric")
@@ -144,6 +158,32 @@ Public Class dlgTwoVariableFitModel
         ucrInputConfidenceInterval.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
         ucrInputConfidenceInterval.bAllowNonConditionValues = True
 
+        ucrInputType.SetParameter(New RParameter("type", 6))
+        dctType.Add("credible interval", Chr(34) & "ci" & Chr(34))
+        dctType.Add("hypothesis test", Chr(34) & "ht" & Chr(34))
+        ucrInputType.SetDropDownStyleAsNonEditable()
+        ucrInputType.SetItems(dctType)
+        ucrInputTest.AddToLinkedControls(ucrInputType, {"bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="credible interval")
+
+        ucrInputMethod.SetParameter(New RParameter("method", 7))
+        dctMethod.Add("theoretical", Chr(34) & "theoretical" & Chr(34))
+        dctMethod.Add("simulation", Chr(34) & "simulation" & Chr(34))
+        ucrInputMethod.SetDropDownStyleAsNonEditable()
+        ucrInputMethod.SetItems(dctMethod)
+        ucrInputTest.AddToLinkedControls(ucrInputMethod, {"bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theoretical")
+
+        ucrInputCredibleLevel.SetParameter(New RParameter("cred_level", 10))
+        dctCredibleLevel.Add("0.900", "0.90")
+        dctCredibleLevel.Add("0.950", "0.95")
+        dctCredibleLevel.Add("0.980", "0.98")
+        dctCredibleLevel.Add("0.990", "0.99")
+        dctCredibleLevel.Add("0.999", "0.999")
+        ucrInputCredibleLevel.SetItems(dctCredibleLevel)
+        ucrInputCredibleLevel.AddQuotesIfUnrecognised = False
+        ucrInputCredibleLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
+        ucrInputCredibleLevel.bAllowNonConditionValues = True
+        ucrInputType.AddToLinkedControls(ucrInputCredibleLevel, {"credible interval"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.95")
+
         ucrInputNullHypothesis.SetParameter(New RParameter("mu", 3))
         ucrInputNullHypothesis.SetValidationTypeAsNumeric()
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
@@ -155,6 +195,10 @@ Public Class dlgTwoVariableFitModel
         ucrInputConfidenceInterval.SetLinkedDisplayControl(lblConfidenceLevel)
         ucrInputTest.SetLinkedDisplayControl(lstControl)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
+        ucrInputType.SetLinkedDisplayControl(lblType)
+        ucrInputSuccess.SetLinkedDisplayControl(lblSuccess)
+        ucrInputMethod.SetLinkedDisplayControl(lblMethodInference)
+        ucrInputCredibleLevel.SetLinkedDisplayControl(lblCredibleLevel)
 
         ucrSaveModels.SetPrefix("two_var")
         ucrSaveModels.SetSaveTypeAsModel()
@@ -171,10 +215,14 @@ Public Class dlgTwoVariableFitModel
         clsPolynomialFunc = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
+        clsGLMBayes = New RFunction
+        clsGLMNB = New RFunction
         clsAsNumeric = New RFunction
         clsFamilyFunction = New RFunction
         clsFormulaFunction = New RFunction
         clsConfint = New RFunction
+        clsConfintBas = New RFunction
+        clsCoefFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
@@ -209,12 +257,19 @@ Public Class dlgTwoVariableFitModel
         clsPropTestFunction = New RFunction
         clsNumericTtestFunction = New RFunction
         clsTtestFunction = New RFunction
+        clsBayesInferenceFunction = New RFunction
         clsMcnemarTestFunction = New RFunction
         clsAnsariTestFunction = New RFunction
         clsMoodTestFunction = New RFunction
         clsKruskalTestFunction = New RFunction
         clsBarletteTestFunction = New RFunction
         clsFlignerTestFunction = New RFunction
+        clsConvertToColumnTypeFunction = New RFunction
+        clsGetFactorLevelFunction = New RFunction
+        clsColumnNameFunction = New RFunction
+        clsConcatenateFunction = New RFunction
+        clsConcatenateBetaFuction = New RFunction
+
         clsAnsariTestOperator = New ROperator
         clsMoodTestOperator = New ROperator
         clsKruskalTestOperator = New ROperator
@@ -254,8 +309,23 @@ Public Class dlgTwoVariableFitModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorSimpleReg.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
+        clsGLMNB = clsRegressionDefaults.clsDefaultGLmNBFunction.Clone
+        clsGLMNB.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+
+        clsGLMBayes = clsRegressionDefaults.clsDefaultGLmBayesFunction.Clone
+        clsGLMBayes.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMBayes.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsGLMBayes.AddParameter("method", Chr(34) & "BAS" & Chr(34), iPosition:=5)
+        clsGLMBayes.AddParameter("modelprior", "BAS::beta.binomial(1, 1)", iPosition:=6)
+        clsGLMBayes.AddParameter("prior", Chr(34) & "ZS-null" & Chr(34), iPosition:=7)
+
         clsPolynomialFunc.SetRCommand("poly")
 
+        clsGetFactorLevelFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
+
+        clsConvertToColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+
+        clsColumnNameFunction.SetRCommand("c")
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
 
@@ -266,6 +336,11 @@ Public Class dlgTwoVariableFitModel
         clsVisReg.AddParameter("gg", "TRUE")
         clsVisReg.bExcludeAssignedFunctionOutput = False
 
+        'coef lm
+        clsCoefFunction.SetRCommand("coef")
+        clsCoefFunction.AddParameter("object", clsRFunctionParameter:=clsGLMBayes, iPosition:=0)
+
+        'Model
         clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
 
         'Summary
@@ -280,13 +355,19 @@ Public Class dlgTwoVariableFitModel
         clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
         clsConfint.bExcludeAssignedFunctionOutput = False
 
+        'confidence Bayes
+        clsConfintBas = clsRegressionDefaults.clsDefaultConfintBas
+        clsConfintBas.iCallType = 2
+
         clsAsNumeric.SetRCommand("as.numeric")
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
+        clsLM.SetAssignTo("last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
 
         clsLMOrGLM = clsLM
+        clsLMOrGLM = clsGLMBayes
 
         clsResidualFunction.SetRCommand("residuals")
         clsFittedValuesFunction.SetRCommand("fitted.values")
@@ -397,6 +478,29 @@ Public Class dlgTwoVariableFitModel
         clsTtestFunction.AddParameter("conf.level", "0.95", iPosition:=2)
         clsTtestFunction.AddParameter("mu", "0", iPosition:=3)
 
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
+
+        clsConcatenateBetaFuction.SetRCommand("c")
+        clsConcatenateBetaFuction.AddParameter("a", 1, iPosition:=0)
+        clsConcatenateBetaFuction.AddParameter("b", 1, iPosition:=1)
+
+        clsBayesInferenceFunction.SetRCommand("bayes_inference")
+        clsBayesInferenceFunction.SetPackageName("statsr")
+        clsBayesInferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=1)
+        clsBayesInferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=2)
+        clsBayesInferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=3)
+        clsBayesInferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
+        clsBayesInferenceFunction.AddParameter("n_0", 1, iPosition:=10)
+        clsBayesInferenceFunction.AddParameter("s_0", 0, iPosition:=11)
+        clsBayesInferenceFunction.AddParameter("v_0", -1, iPosition:=12)
+        clsBayesInferenceFunction.AddParameter("rscale", 1, iPosition:=13)
+        clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+        clsBayesInferenceFunction.AddParameter("beta_prior2", clsRFunctionParameter:=clsConcatenateBetaFuction, iPosition:=15)
+
+
+
         clsTtestOperator.SetOperation("~")
         clsTtestOperator.bSpaceAroundOperation = True
 
@@ -412,6 +516,7 @@ Public Class dlgTwoVariableFitModel
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         bResetOptionsSubDialog = True
         bResetFirstFunction = True
+        bResetSubdialog = True
     End Sub
 
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModels.ControlValueChanged
@@ -518,6 +623,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=27)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=28)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=29)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBayesInferenceFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=30)
 
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
@@ -541,6 +647,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=20)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=21)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=22)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBayesInferenceFunction, New RParameter("y", iNewPosition:=0), iAdditionalPairNo:=23)
 
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
@@ -566,6 +673,8 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsKruskalTestFunction, iAdditionalPairNo:=21)
         ucrSaveModels.AddAdditionalRCode(clsBarletteTestFunction, iAdditionalPairNo:=22)
         ucrSaveModels.AddAdditionalRCode(clsFlignerTestFunction, iAdditionalPairNo:=23)
+        ucrSaveModels.AddAdditionalRCode(clsGLMBayes, iAdditionalPairNo:=24)
+        ucrSaveModels.AddAdditionalRCode(clsGLMNB, iAdditionalPairNo:=25)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
@@ -579,18 +688,26 @@ Public Class dlgTwoVariableFitModel
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=10)
 
         ucrInputConfidenceInterval.SetRCode(clsTtestFunction, bReset)
+        ucrInputType.SetRCode(clsBayesInferenceFunction, bReset)
+        ucrInputMethod.SetRCode(clsBayesInferenceFunction, bReset)
+        ucrInputCredibleLevel.SetRCode(clsBayesInferenceFunction, bReset)
 
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("mu", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
         'General case controls 
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
+        ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLMBayes, ucrSelectorSimpleReg.GetParameter(), 2)
+        ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLMNB, ucrSelectorSimpleReg.GetParameter(), 3)
+
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
-        ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorSimpleReg.SetRCode(clsLM, bReset)
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator)
         ucrSaveModels.SetRCode(clsLM, bReset)
-        ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
+        If bReset Then
+            ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
+            ucrPnlModelType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
         bRCodeSet = True
     End Sub
 
@@ -634,6 +751,27 @@ Public Class dlgTwoVariableFitModel
         UpdatePreview()
     End Sub
 
+    Private Sub cmdPrior_Click(sender As Object, e As EventArgs) Handles cmdPrior.Click
+        sdgPriorParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesInferenceFunction,
+                                        clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorParameters.ShowDialog()
+    End Sub
+
+    Private Sub cmdEstimation_Click(sender As Object, e As EventArgs) Handles cmdEstimation.Click
+        sdgEstimationParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesInferenceFunction,
+                                        clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgEstimationParameters.ShowDialog()
+    End Sub
+
+    Private Sub cmdProprtionPriors_Click(sender As Object, e As EventArgs) Handles cmdProprtionPriors.Click
+        sdgPriorProportions.SetRFunction(clsNewConcatenateFunction:=clsConcatenateFunction,
+                                                 clsNewConcatenateBetaFuction:=clsConcatenateBetaFuction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorProportions.ShowDialog()
+    End Sub
+
     Private Sub UpdatePreview()
         If Not ucrReceiverResponse.IsEmpty AndAlso Not ucrReceiverExplanatory.IsEmpty Then
             ucrModelPreview.SetName(clsFormulaOperator.ToScript())
@@ -644,14 +782,35 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub SetBaseFunction()
         If rdoGeneralCase.Checked Then
+            ChooseAnovaFunction()
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
                 clsLMOrGLM = clsLM
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bayes") Then
+                clsLMOrGLM = clsGLMBayes
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Negative_Binomial_GLM") Then
+                clsLMOrGLM = clsGLMNB
             Else
                 clsLMOrGLM = clsGLM
             End If
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
+            'Update display functions to contain correct model
+            clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
+            clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsConfintBas.AddParameter("object", clsRFunctionParameter:=clsCoefFunction)
+            clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
+
+            For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+                kvp.Value.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            Next
+
+            clsResidualFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+    
         ElseIf rdoTest.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
@@ -722,6 +881,10 @@ Public Class dlgTwoVariableFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFisherTestFunction)
                 Case "chisq"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsXchisgTestFunction)
+                Case "bayes:proportion"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
+                Case "bayes:mean"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
                 Case "proportion"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPropTestFunction)
                 Case "mcnemar"
@@ -767,8 +930,19 @@ Public Class dlgTwoVariableFitModel
         End If
         UpdatePreview()
         ReceiverColumnType()
+        AddFactorLevels()
     End Sub
 
+    Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
+        GraphAssignTo()
+        AddFactorLevels()
+    End Sub
+
+    'temp fix for graph display problem with RDotNet
+    'correct solution is to have save controls linked to each graph
+    Private Sub GraphAssignTo()
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+    End Sub
 
     Private Sub ucrReceiverExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
         If bRCodeSet Then
@@ -786,6 +960,7 @@ Public Class dlgTwoVariableFitModel
             cmdExplanatoryFunction.Enabled = False
         End If
         ReceiverColumnType()
+        AddFactorLevels()
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -827,6 +1002,9 @@ Public Class dlgTwoVariableFitModel
         cmdExplanatoryFunction.Visible = rdoGeneralCase.Checked
         SetBaseFunction()
         ReceiverColumnType()
+        AddFactorLevels()
+        ChooseAnovaFunction()
+        PrioirsVisisbility()
     End Sub
 
     Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
@@ -850,8 +1028,20 @@ Public Class dlgTwoVariableFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Public Sub ChooseAnovaFunction()
+        If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bayes") Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsConfintBas, 1)
+            cmdDisplayOptions.Enabled = False
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConfintBas)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+            cmdDisplayOptions.Enabled = True
+        End If
     End Sub
 
     Private Sub ReceiverColumnType()
@@ -911,6 +1101,67 @@ Public Class dlgTwoVariableFitModel
         End If
     End Function
 
+    ''' <summary> 
+    '''Lists the factor levels of the selected factor or logical column into the success combobox
+    ''' </summary>
+    Private Sub AddFactorLevels()
+        If Not bRCodeSet Then
+            Exit Sub
+        End If
+
+        Dim bDatatype As Boolean = ucrReceiverResponse.strCurrDataType.ToLower = "two level factor" Or ucrReceiverResponse.strCurrDataType.ToLower = "factor"
+        Dim bTest As Boolean = ucrInputTest.GetText() = "bayes:proportion"
+        Dim bTypeIsNumeric As Boolean = ucrReceiverResponse.strCurrDataType = "numeric"
+
+        If Not ucrReceiverResponse.IsEmpty AndAlso rdoTest.Checked AndAlso
+                  (bDatatype OrElse bTypeIsNumeric) AndAlso bTest Then
+            FindLevels()
+        Else
+            ucrInputSuccess.Visible = False
+            clsBayesInferenceFunction.RemoveParameterByName("success")
+        End If
+    End Sub
+
+    ''' <summary> 
+    '''Lists the levels in a column to the success combobox and removes success parameter
+    ''' </summary>
+    Private Sub FindLevels()
+        Dim chrCurrentFactorLevels As CharacterVector
+        Dim lstFactor As List(Of String) = New List(Of String)()
+        Dim bTypeIsNumeric As Boolean = ucrReceiverResponse.strCurrDataType.ToLower = "numeric"
+
+        'Converting the numeric column to factor
+        If bTypeIsNumeric Then
+            clsConvertToColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+            clsConvertToColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=1)
+            clsConvertToColumnTypeFunction.AddParameter("col_names", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=2)
+            clsColumnNameFunction.AddParameter("column", ucrReceiverResponse.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+            frmMain.clsRLink.RunInternalScript(clsConvertToColumnTypeFunction.ToScript(), bSilent:=True)
+        End If
+
+        clsGetFactorLevelFunction.AddParameter("data_name", Chr(34) & ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverResponse.GetVariableNames(), iPosition:=1)
+        chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevelFunction.ToScript()).AsCharacter
+
+        For Each factor In chrCurrentFactorLevels
+            lstFactor.Add(Chr(34) & factor & Chr(34))
+        Next
+
+        'converting back to Numeric 
+        If bTypeIsNumeric Then
+            clsConvertToColumnTypeFunction.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=1)
+            frmMain.clsRLink.RunInternalScript(clsConvertToColumnTypeFunction.ToScript(), bSilent:=True)
+        End If
+
+        If lstFactor.ToArray.Count = 0 Then
+            MsgBox("Developer error: there are no factor levels to be displayed" & Chr(34) & vbNewLine & "Success combobox will be displayed with no inputs")
+        Else
+            ucrInputSuccess.SetItems(lstFactor.ToArray)
+            ucrInputSuccess.SetText(lstFactor(0))
+            ucrInputSuccess.Visible = True
+        End If
+    End Sub
+
     Private Sub UpdatingTests()
         If strFirstVariableType = "numeric" Then
             If strSecondVariableType = "numeric" Then
@@ -919,8 +1170,8 @@ Public Class dlgTwoVariableFitModel
                 ucrInputTest.SetText("t")
             ElseIf strSecondVariableType = "categorical" Then
                 If iNumberOfSecondFactorLevels = 2 Then
-                    ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood", "________",
-                      "oneway", "kruskal", "bartlett", "fligner"})
+                    ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood",
+                      "________", "bayes:mean", "________", "oneway", "kruskal", "bartlett", "fligner"})
                     ucrInputTest.SetText("t")
                 ElseIf iNumberOfSecondFactorLevels > 2 Then
                     ucrInputTest.SetItems({"oneway", "kruskal", "bartlett", "fligner"})
@@ -935,7 +1186,7 @@ Public Class dlgTwoVariableFitModel
             If strSecondVariableType = "categorical" Then
                 If iNumberOfFirstFactorLevels = 2 Then
                     If strSecondVariableType = "categorical" AndAlso iNumberOfSecondFactorLevels = 2 Then
-                        ucrInputTest.SetItems({"proportion", "chisq", "fisher", "mcnemar"})
+                        ucrInputTest.SetItems({"proportion", "chisq", "fisher", "mcnemar", "bayes:proportion"})
                         ucrInputTest.SetText("proportion")
                     Else
                         ucrInputTest.SetItems({"None"})
@@ -953,9 +1204,59 @@ Public Class dlgTwoVariableFitModel
             ucrInputTest.SetItems({"None"})
             ucrInputTest.SetText("None")
         End If
+
     End Sub
 
     Private Sub ucrInputTest_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTest.ControlValueChanged
         SetBaseFunction()
+        SampleStatistic()
+        AddFactorLevels()
+        PrioirsVisisbility()
+        GetNullValue()
+    End Sub
+
+    Private Sub GetNullValue()
+        If bRCodeSet Then
+            If ucrInputType.GetText = "credible interval" Then
+                clsBayesInferenceFunction.RemoveParameterByName("null")
+                clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
+            Else
+                clsBayesInferenceFunction.AddParameter("null", 0, iPosition:=7)
+                clsBayesInferenceFunction.RemoveParameterByName("mu_0")
+            End If
+        End If
+    End Sub
+
+    Private Sub PrioirsVisisbility()
+        cmdPrior.Visible = rdoTest.Checked AndAlso (
+                ucrInputTest.GetText() = "bayes:mean" AndAlso
+                ucrInputType.GetText = "hypothesis test")
+        cmdEstimation.Visible = rdoTest.Checked AndAlso (
+                ucrInputTest.GetText() = "bayes:mean" AndAlso
+                ucrInputType.GetText = "credible interval")
+        cmdProprtionPriors.Visible = rdoTest.Checked AndAlso (
+            ucrInputTest.GetText() = "bayes:proportion")
+    End Sub
+
+    Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
+        GetNullValue()
+        PrioirsVisisbility()
+    End Sub
+
+    Private Sub SampleStatistic()
+        clsBayesInferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
+        If ucrInputTest.GetText() = "bayes:mean" Then
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
+        ElseIf ucrInputTest.GetText() = "bayes:proportion" Then
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
+        End If
+    End Sub
+
+    Private Sub ucrInputSuccess_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSuccess.ControlValueChanged
+        If ucrInputSuccess.Visible Then
+            clsBayesInferenceFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=6)
+        Else
+            clsBayesInferenceFunction.RemoveParameterByName("success")
+        End If
     End Sub
 End Class

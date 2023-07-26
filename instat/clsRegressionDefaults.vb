@@ -57,6 +57,18 @@ Public Class clsRegressionDefaults
             Return clsMultinomFunction
         End Get
     End Property
+
+    Public Shared ReadOnly Property clsDefaultGLmBayesFunction As RFunction
+        Get
+
+            Dim clsBayesFunction As New RFunction
+
+            clsBayesFunction.SetRCommand("bas.lm")
+            clsBayesFunction.SetPackageName("BAS")
+            Return clsBayesFunction
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsDefaultGlmFunction As RFunction
         Get
 
@@ -100,6 +112,14 @@ Public Class clsRegressionDefaults
         Get
             Dim clsDefaultRConfint As New RFunction
             clsDefaultRConfint.SetPackageName("stats")
+            clsDefaultRConfint.SetRCommand("confint")
+            Return clsDefaultRConfint
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsDefaultConfintBas As RFunction
+        Get
+            Dim clsDefaultRConfint As New RFunction
             clsDefaultRConfint.SetRCommand("confint")
             Return clsDefaultRConfint
         End Get

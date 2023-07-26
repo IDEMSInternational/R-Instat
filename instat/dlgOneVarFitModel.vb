@@ -22,12 +22,18 @@ Public Class dlgOneVarFitModel
     Private clsRplotFunction, clsRplotPPCompFunction, clsRplotCdfCompFunction, clsRplotQqCompFunction, clsRplotDensCompFunction As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
-    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsColumnNameFunction As New RFunction
+    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsConcatenateFunction, clsConcatenateBetaFuction, clsDummyFunction,
+        clsBayesInferenceFunction, clsColumnNameFunction As New RFunction
+
     Private WithEvents ucrDistribution As ucrDistributions
+
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
+    Private bResetSubdialog As Boolean = False
+
     Private bRCodeSet As Boolean = True
     Private ReadOnly strSeparator As String = "---------------------"
 
@@ -57,6 +63,11 @@ Public Class dlgOneVarFitModel
         Dim dctConfidence As New Dictionary(Of String, String)
         Dim dctQMethod As New Dictionary(Of String, String)
         Dim dctConfidenceInterval As New Dictionary(Of String, String)
+        Dim dctStatistic As New Dictionary(Of String, String)
+        Dim dctAlternative As New Dictionary(Of String, String)
+        Dim dctType As New Dictionary(Of String, String)
+        Dim dctCredibleLevel As New Dictionary(Of String, String)
+        Dim dctMethod As New Dictionary(Of String, String)
         Dim lstCommandButtons As New List(Of Control)
 
         ucrBase.iHelpTopicID = 296
@@ -67,8 +78,8 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddRadioButton(rdoEstimate)
 
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
-        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, {"binom.test", "prop.test", "SignTest", "t.test", "wilcox.test", "ZTest", "BartelsRankTest", "br.test", "RunsTest", "sens.slope", "serialCorrelationTest", "snh.test", "ad.test", "cvm.test", "lillie.test", "pearson.test", "sf.test"})
-        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, {"MeanCI", "MedianCI ", "normCI", "quantileCI", "sdCI", "VarCI"})
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, {"binom.test", "prop.test", "SignTest", "t.test", "wilcox.test", "ZTest", "BartelsRankTest", "br.test", "RunsTest", "sens.slope", "serialCorrelationTest", "snh.test", "ad.test", "cvm.test", "lillie.test", "pearson.test", "sf.test", "bayes_inference"})
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, {"MeanCI", "MedianCI ", "normCI", "quantileCI", "sdCI", "VarCI", "bayes_inference"})
 
         ucrSelectorOneVarFitMod.SetParameter(New RParameter("data_name", 0))
         ucrSelectorOneVarFitMod.SetParameterIsString()
@@ -77,6 +88,7 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.Selector = ucrSelectorOneVarFitMod
         ucrReceiverVariable.SetParameterIsRFunction()
         ucrReceiverVariable.SetMeAsReceiver()
+        ucrReceiverVariable.SetIncludedDataTypes({"numeric", "dates", "logical", "factor"}, bStrict:=True)
 
         ucrChkConvertVariate.SetText("Convert to Numeric")
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
@@ -92,10 +104,10 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", strSeparator, "Bartel", "br", "runs", "Sen", "serial corr", "snh", strSeparator, "ad", "cvm", "lillie", "pearson", "sf"})
+        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", strSeparator, "Bayes:Mean", "Bayes:Proportion", strSeparator, "Bartel", "br", "runs", "Sen", "serial corr", "snh", strSeparator, "ad", "cvm", "lillie", "pearson", "sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
-        ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance"})
+        ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance", strSeparator, "bayes:mean", "bayes:proportion"})
         ucrInputComboEstimate.SetDropDownStyleAsNonEditable()
 
         ucrInputMeanCIMethod.SetParameter(New RParameter("method", 3))
@@ -210,6 +222,30 @@ Public Class dlgOneVarFitModel
         ucrInputConfidenceInterval.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
         ucrInputConfidenceInterval.bAllowNonConditionValues = True
 
+        ucrInputMethod.SetParameter(New RParameter("method", 7))
+        dctMethod.Add("theoretical", Chr(34) & "theoretical" & Chr(34))
+        dctMethod.Add("simulation", Chr(34) & "simulation" & Chr(34))
+        ucrInputMethod.SetDropDownStyleAsNonEditable()
+        ucrInputMethod.SetItems(dctMethod)
+        ucrInputComboTests.AddToLinkedControls(ucrInputMethod, {"Bayes:Mean", "Bayes:Proportion", "bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theoretical")
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputMethod, {"bayes:mean", "bayes:proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theoretical")
+
+        ucrInputNullValue.SetParameter(New RParameter("null", 8))
+        ucrInputNullValue.SetValidationTypeAsNumeric()
+        ucrInputNullValue.AddQuotesIfUnrecognised = False
+        ucrInputComboTests.AddToLinkedControls(ucrInputNullValue, {"Bayes:Mean", "Bayes:Proportion"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.0")
+
+        ucrInputCredibleLevel.SetParameter(New RParameter("cred_level", 10))
+        dctCredibleLevel.Add("0.900", "0.90")
+        dctCredibleLevel.Add("0.950", "0.95")
+        dctCredibleLevel.Add("0.980", "0.98")
+        dctCredibleLevel.Add("0.990", "0.99")
+        dctCredibleLevel.Add("0.999", "0.999")
+        ucrInputCredibleLevel.SetItems(dctCredibleLevel)
+        ucrInputCredibleLevel.AddQuotesIfUnrecognised = False
+        ucrInputCredibleLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
+        ucrInputCredibleLevel.bAllowNonConditionValues = True
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputCredibleLevel, {"bayes:mean", "bayes:proportion"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.95")
 
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboTests, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Binomial")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mean")
@@ -251,6 +287,9 @@ Public Class dlgOneVarFitModel
         ucrInputComboQMethod.SetLinkedDisplayControl(lblQMethod)
         ucrInputConfidenceInterval.SetLinkedDisplayControl(lblConfidenceLevel)
         ucrInputSuccess.SetLinkedDisplayControl(lblSuccess)
+        ucrInputMethod.SetLinkedDisplayControl(lblMethodInference)
+        ucrInputNullValue.SetLinkedDisplayControl(lblNullValue)
+        ucrInputCredibleLevel.SetLinkedDisplayControl(lblCredibleLevel)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -291,7 +330,10 @@ Public Class dlgOneVarFitModel
         clsLillieFunction = New RFunction
         clsPearsonFunction = New RFunction
         clsSfFunction = New RFunction
-
+        clsBayesInferenceFunction = New RFunction
+        clsConcatenateFunction = New RFunction
+        clsConcatenateBetaFuction = New RFunction
+        clsDummyFunction = New RFunction
 
         clsMeanCIFunction = New RFunction
         clsMedianCIFunction = New RFunction
@@ -307,11 +349,14 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
 
+
         ucrChkConvertVariate.Visible = False 'hide convert to numeric checkbox by default
 
         clsGetFactorLevelFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
 
         clsConvertToColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+
+        clsDummyFunction.AddParameter("check", "False", iPosition:=0)
 
         clsColumnNameFunction.SetRCommand("c")
         'General Case
@@ -330,7 +375,6 @@ Public Class dlgOneVarFitModel
 
         clsRConvertNumericFunction.SetRCommand("as.numeric")
         clsRConvertNumericFunction.AddParameter("x", clsRFunctionParameter:=clsNaExcludeFunction, iPosition:=0)
-
 
         clsRConvertIntegerFunction.SetRCommand("as.integer")
         clsRConvertIntegerFunction.AddParameter("x", clsRFunctionParameter:=clsNaExcludeFunction, iPosition:=0)
@@ -412,7 +456,6 @@ Public Class dlgOneVarFitModel
         clsWilcoxonFunction.SetRCommand("wilcox.test")
         clsWilcoxonFunction.AddParameter("mu", "0", iPosition:=1)
 
-
         clsZTestFunction.SetPackageName("DescTools")
         clsZTestFunction.SetRCommand("ZTest")
         clsZTestFunction.AddParameter("sd_pop", "1", iPosition:=2)
@@ -453,6 +496,26 @@ Public Class dlgOneVarFitModel
         clsSfFunction.SetPackageName("nortest")
         clsSfFunction.SetRCommand("sf.test")
 
+        clsConcatenateFunction.SetRCommand("c")
+        clsConcatenateFunction.AddParameter("H1", 0.5, iPosition:=0)
+
+        clsConcatenateBetaFuction.SetRCommand("c")
+        clsConcatenateBetaFuction.AddParameter("a", 1, iPosition:=0)
+        clsConcatenateBetaFuction.AddParameter("b", 1, iPosition:=1)
+
+
+        clsBayesInferenceFunction.SetRCommand("bayes_inference")
+        clsBayesInferenceFunction.SetPackageName("statsr")
+        clsBayesInferenceFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsBayesInferenceFunction.AddParameter("show_plot", "FALSE", iPosition:=1)
+        clsBayesInferenceFunction.AddParameter("hypothesis_prior", clsRFunctionParameter:=clsConcatenateFunction, iPosition:=9)
+        clsBayesInferenceFunction.AddParameter("n_0", 1, iPosition:=10)
+        clsBayesInferenceFunction.AddParameter("s_0", 0, iPosition:=11)
+        clsBayesInferenceFunction.AddParameter("v_0", -1, iPosition:=12)
+        clsBayesInferenceFunction.AddParameter("rscale", 1, iPosition:=13)
+        clsBayesInferenceFunction.AddParameter("prior", Chr(34) & "JZS" & Chr(34), iPosition:=14)
+        clsBayesInferenceFunction.AddParameter("beta_prior", clsRFunctionParameter:=clsConcatenateBetaFuction, iPosition:=15)
+
         'Estimate
         clsMeanCIFunction.SetPackageName("DescTools")
         clsMeanCIFunction.SetRCommand("MeanCI")
@@ -470,7 +533,6 @@ Public Class dlgOneVarFitModel
         clsNormCIFunction.AddParameter("boot", "FALSE", iPosition:=4)
         clsNormCIFunction.AddParameter("R", "9999", iPosition:=5)
         clsNormCIFunction.AddParameter("bootci.type", Chr(34) & "all" & Chr(34), iPosition:=6)
-
 
         clsQuantileCIFunction.SetPackageName("MKinfer")
         clsQuantileCIFunction.SetRCommand("quantileCI")
@@ -495,6 +557,7 @@ Public Class dlgOneVarFitModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModelFunction)
         bResetFittingOptions = True
         bResetFitModDisplay = True
+        bResetSubdialog = True
     End Sub
 
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlValueChanged
@@ -508,7 +571,8 @@ Public Class dlgOneVarFitModel
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("col_name", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBayesInferenceFunction, New RParameter("y", 0), iAdditionalPairNo:=3)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("col_name", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSdCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=3)
@@ -558,9 +622,12 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.AddAdditionalRCode(clsSdCIFunction, iAdditionalPairNo:=21)
         ucrSaveModel.AddAdditionalRCode(clsVarCIFunction, iAdditionalPairNo:=22)
 
+        If bReset Then
+            ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
 
-        ucrPnlGeneralExactCase.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverVariable.SetRCode(clsNaExcludeFunction, bReset)
+
         ucrChkConvertVariate.SetRCode(clsROneVarFitModelFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsMeanCIFunction, bReset)
         ucrInputNullHypothesis.SetRCode(clsBionomialFunction, bReset)
@@ -577,11 +644,13 @@ Public Class dlgOneVarFitModel
         ucrInputTxtHypothesis.SetRCode(clsSignTestFunction, bReset)
         ucrInputComboQMethod.SetRCode(clsQuantileCIFunction, bReset)
         ucrInputNulHypothesis.SetRCode(clsTtestFunction, bReset)
+        ucrInputMethod.SetRCode(clsBayesInferenceFunction, bReset)
+        ucrInputCredibleLevel.SetRCode(clsBayesInferenceFunction, bReset)
+        ucrInputNullValue.SetRCode(clsBayesInferenceFunction, bReset)
         ucrInputTextM.SetRCode(clsBrFunction)
         ucrSelectorOneVarFitMod.SetRCode(clsGetFactorLevelFunction, bReset)
 
         ucrSaveModel.SetRCode(clsROneVarFitModelFunction, bReset)
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -649,6 +718,28 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.ShowDialog()
     End Sub
 
+    Private Sub cmdPrior_Click(sender As Object, e As EventArgs) Handles cmdPrior.Click
+        sdgPriorParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesInferenceFunction,
+                                        clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorParameters.ShowDialog()
+    End Sub
+
+    Private Sub cmdEstimation_Click(sender As Object, e As EventArgs) Handles cmdEstimation.Click
+        sdgEstimationParameters.SetRFunction(clsNewBayesIferenceFunction:=clsBayesInferenceFunction,
+                                               clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgEstimationParameters.ShowDialog()
+    End Sub
+
+    Private Sub cmdProportionPrioirs_Click(sender As Object, e As EventArgs) Handles cmdProportionPrioirs.Click
+        sdgPriorProportions.SetRFunction(clsNewConcatenateFunction:=clsConcatenateFunction,
+                                         clsNewConcatenateBetaFuction:=clsConcatenateBetaFuction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgPriorProportions.ShowDialog()
+    End Sub
+
+
     Private Sub SetSaveLabelTextAndPrefix()
         If rdoGeneralCase.Checked Then
             ucrSaveModel.SetCheckBoxText("Save Model")
@@ -675,6 +766,7 @@ Public Class dlgOneVarFitModel
         AddAsNumeric()
         EstimatesAsNumeric()
         AddFactorLevels()
+        PriorsVisibility()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -688,7 +780,9 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub EnableDisableConvertVariate()
-        If ucrReceiverVariable.strCurrDataType = "numeric" Then
+        If ucrReceiverVariable.strCurrDataType = "numeric" OrElse
+                ucrInputComboTests.GetText() = "Bayes:Mean" OrElse
+                ucrInputComboTests.GetText() = "Bayes:Proportion" Then
             ucrChkConvertVariate.Checked = False
             ucrChkConvertVariate.Visible = False
         Else
@@ -776,7 +870,7 @@ Public Class dlgOneVarFitModel
                         clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "Sen"
                         tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen's slope for linear rate of change")
-            clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                        clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "serial corr"
                         clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVectorFunction, iPosition:=0)
 
@@ -887,6 +981,10 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPearsonFunction)
                 Case "sf"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSfFunction)
+                Case "Bayes:Mean"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
+                Case "Bayes:Proportion"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
 
             End Select
         ElseIf rdoEstimate.Checked Then
@@ -904,6 +1002,10 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSdCIFunction)
                 Case "variance"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsVarCIFunction)
+                Case "bayes:mean"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
+                Case "bayes:proportion"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsBayesInferenceFunction)
                 Case Else
                     MsgBox("Developer error: there is no Estimate called" & Chr(34) & ucrInputComboEstimate.GetValue() & Chr(34) & vbNewLine & "Default Estimate will be selected.")
             End Select
@@ -919,15 +1021,22 @@ Public Class dlgOneVarFitModel
         End If
 
         Dim bDatatype As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor"
-        Dim bTest As Boolean = ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion"
+        Dim bTest As Boolean = ucrInputComboTests.GetText() = "binomial"
         Dim bTypeIsNumeric As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "numeric"
         If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked AndAlso
                 (bDatatype OrElse bTypeIsNumeric) AndAlso bTest Then
+            FindLevels()
+        ElseIf Not ucrReceiverVariable.IsEmpty AndAlso rdoEstimate.Checked AndAlso ucrInputComboEstimate.GetText() = "bayes:proportion" AndAlso
+              (bDatatype) Then
+            FindLevels()
+        ElseIf Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked AndAlso ucrInputComboTests.GetText() = "Bayes:Proportion" AndAlso
+          (bDatatype) Then
             FindLevels()
         Else
             ucrInputSuccess.Visible = False
             clsBionomialFunction.RemoveParameterByName("success")
             clsProportionFunction.RemoveParameterByName("success")
+            clsBayesInferenceFunction.RemoveParameterByName("success")
         End If
     End Sub
 
@@ -968,8 +1077,6 @@ Public Class dlgOneVarFitModel
             ucrInputSuccess.SetText(lstFactor(0))
             ucrInputSuccess.Visible = True
         End If
-
-
     End Sub
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
@@ -978,6 +1085,11 @@ Public Class dlgOneVarFitModel
         AddAsNumeric()
         EstimatesAsNumeric()
         AddFactorLevels()
+        SampleStatistic()
+        TypeStatistic()
+        CredibleInterval()
+        EnableDisableConvertVariate()
+        PriorsVisibility()
         If ucrInputComboTests.GetText = strSeparator Then
             ucrInputComboTests.cboInput.SelectedIndex = 0
         End If
@@ -991,6 +1103,71 @@ Public Class dlgOneVarFitModel
         If ucrInputSuccess.Visible Then
             clsBionomialFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=4)
             clsProportionFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=4)
+            clsBayesInferenceFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=3)
+        Else
+            clsBayesInferenceFunction.RemoveParameterByName("success")
+            clsBionomialFunction.RemoveParameterByName("success")
+            clsProportionFunction.RemoveParameterByName("success")
         End If
+        CredibleInterval()
+        SampleStatistic()
+    End Sub
+
+    Private Sub SampleStatistic()
+        If ucrInputComboTests.GetText() = "Bayes:Mean" Then
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
+            clsBayesInferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
+            ucrInputNullValue.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=Integer.MaxValue, bIncludeMax:=True)
+
+        ElseIf ucrInputComboTests.GetText() = "Bayes:Proportion" Then
+            ucrInputNullValue.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
+            clsBayesInferenceFunction.AddParameter("alternative", Chr(34) & "twosided" & Chr(34), iPosition:=5)
+        End If
+    End Sub
+
+    Private Sub TypeStatistic()
+        If rdoTest.Checked Then
+            If ucrInputComboTests.GetText() = "Bayes:Mean" OrElse ucrInputComboTests.GetText() = "Bayes:Proportion" Then
+                clsBayesInferenceFunction.AddParameter("type", Chr(34) & "ht" & Chr(34), iPosition:=6)
+            Else
+                clsBayesInferenceFunction.RemoveParameterByName("type")
+            End If
+        ElseIf rdoEstimate.Checked Then
+            If ucrInputComboEstimate.GetText() = "bayes:mean" OrElse ucrInputComboEstimate.GetText() = "bayes:proportion" Then
+                clsBayesInferenceFunction.AddParameter("type", Chr(34) & "ci" & Chr(34), iPosition:=6)
+                clsBayesInferenceFunction.AddParameter("mu_0", 0, iPosition:=15)
+            Else
+                clsBayesInferenceFunction.RemoveParameterByName("mu_0")
+                clsBayesInferenceFunction.RemoveParameterByName("type")
+            End If
+        End If
+    End Sub
+
+    Private Sub CredibleInterval()
+        If ucrInputComboEstimate.GetText() = "bayes:mean" Then
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=4)
+        ElseIf ucrInputComboEstimate.GetText() = "bayes:proportion" Then
+            clsBayesInferenceFunction.AddParameter("statistic", Chr(34) & "proportion" & Chr(34), iPosition:=4)
+        End If
+    End Sub
+
+    Private Sub PriorsVisibility()
+        cmdPrior.Visible = rdoTest.Checked AndAlso (
+                ucrInputComboTests.GetText() = "Bayes:Mean")
+        'ucrInputComboTests.GetText() = "Bayes:Proportion")
+        cmdEstimation.Visible = rdoEstimate.Checked AndAlso (
+                ucrInputComboEstimate.GetText() = "bayes:mean")
+        'ucrInputComboEstimate.GetText() = "bayes:proportion")
+        cmdProportionPrioirs.Visible = rdoTest.Checked AndAlso (
+                 ucrInputComboTests.GetText() = "Bayes:Proportion") OrElse
+                 rdoEstimate.Checked AndAlso (
+                ucrInputComboEstimate.GetText() = "bayes:proportion")
+
+    End Sub
+
+    Private Sub ucrInputNullValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNullValue.ControlValueChanged
+        TypeStatistic()
+        CredibleInterval()
     End Sub
 End Class

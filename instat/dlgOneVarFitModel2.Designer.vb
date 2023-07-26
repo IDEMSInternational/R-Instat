@@ -64,6 +64,13 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
         Me.tttests = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblSuccess = New System.Windows.Forms.Label()
+        Me.lblMethodInference = New System.Windows.Forms.Label()
+        Me.lblNullValue = New System.Windows.Forms.Label()
+        Me.lblCredibleLevel = New System.Windows.Forms.Label()
+        Me.cmdPrior = New System.Windows.Forms.Button()
+        Me.cmdEstimation = New System.Windows.Forms.Button()
+        Me.ucrInputCredibleLevel = New instat.ucrInputComboBox()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputSuccess = New instat.ucrInputComboBox()
         Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
         Me.ucrInputComboQMethod = New instat.ucrInputComboBox()
@@ -90,6 +97,8 @@ Partial Class dlgOneVarFitModel
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputNullValue = New instat.ucrInputTextBox()
+        Me.cmdProportionPrioirs = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LblVariable
@@ -133,7 +142,7 @@ Partial Class dlgOneVarFitModel
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(295, 323)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(295, 331)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(127, 23)
         Me.cmdDisplayOptions.TabIndex = 44
@@ -142,7 +151,7 @@ Partial Class dlgOneVarFitModel
         '
         'cmdFittingOptions
         '
-        Me.cmdFittingOptions.Location = New System.Drawing.Point(295, 298)
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(295, 306)
         Me.cmdFittingOptions.Name = "cmdFittingOptions"
         Me.cmdFittingOptions.Size = New System.Drawing.Size(127, 23)
         Me.cmdFittingOptions.TabIndex = 43
@@ -325,11 +334,80 @@ Partial Class dlgOneVarFitModel
         'lblSuccess
         '
         Me.lblSuccess.AutoSize = True
-        Me.lblSuccess.Location = New System.Drawing.Point(232, 229)
+        Me.lblSuccess.Location = New System.Drawing.Point(273, 229)
         Me.lblSuccess.Name = "lblSuccess"
         Me.lblSuccess.Size = New System.Drawing.Size(51, 13)
         Me.lblSuccess.TabIndex = 87
         Me.lblSuccess.Text = "Success:"
+        '
+        'lblMethodInference
+        '
+        Me.lblMethodInference.AutoSize = True
+        Me.lblMethodInference.Location = New System.Drawing.Point(278, 197)
+        Me.lblMethodInference.Name = "lblMethodInference"
+        Me.lblMethodInference.Size = New System.Drawing.Size(46, 13)
+        Me.lblMethodInference.TabIndex = 105
+        Me.lblMethodInference.Text = "Method:"
+        '
+        'lblNullValue
+        '
+        Me.lblNullValue.AutoSize = True
+        Me.lblNullValue.Location = New System.Drawing.Point(266, 254)
+        Me.lblNullValue.Name = "lblNullValue"
+        Me.lblNullValue.Size = New System.Drawing.Size(58, 13)
+        Me.lblNullValue.TabIndex = 109
+        Me.lblNullValue.Text = "Null Value:"
+        '
+        'lblCredibleLevel
+        '
+        Me.lblCredibleLevel.AutoSize = True
+        Me.lblCredibleLevel.Location = New System.Drawing.Point(247, 144)
+        Me.lblCredibleLevel.Name = "lblCredibleLevel"
+        Me.lblCredibleLevel.Size = New System.Drawing.Size(77, 13)
+        Me.lblCredibleLevel.TabIndex = 115
+        Me.lblCredibleLevel.Text = "Credible Level:"
+        '
+        'cmdPrior
+        '
+        Me.cmdPrior.Location = New System.Drawing.Point(324, 164)
+        Me.cmdPrior.Name = "cmdPrior"
+        Me.cmdPrior.Size = New System.Drawing.Size(101, 23)
+        Me.cmdPrior.TabIndex = 117
+        Me.cmdPrior.Text = "Hypothesis Priors"
+        Me.cmdPrior.UseVisualStyleBackColor = True
+        '
+        'cmdEstimation
+        '
+        Me.cmdEstimation.Location = New System.Drawing.Point(324, 165)
+        Me.cmdEstimation.Name = "cmdEstimation"
+        Me.cmdEstimation.Size = New System.Drawing.Size(100, 23)
+        Me.cmdEstimation.TabIndex = 118
+        Me.cmdEstimation.Text = "Estimation Priors"
+        Me.cmdEstimation.UseVisualStyleBackColor = True
+        '
+        'ucrInputCredibleLevel
+        '
+        Me.ucrInputCredibleLevel.AddQuotesIfUnrecognised = True
+        Me.ucrInputCredibleLevel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCredibleLevel.GetSetSelectedIndex = -1
+        Me.ucrInputCredibleLevel.IsReadOnly = False
+        Me.ucrInputCredibleLevel.Location = New System.Drawing.Point(326, 140)
+        Me.ucrInputCredibleLevel.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputCredibleLevel.Name = "ucrInputCredibleLevel"
+        Me.ucrInputCredibleLevel.Size = New System.Drawing.Size(71, 21)
+        Me.ucrInputCredibleLevel.TabIndex = 116
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(326, 193)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputMethod.TabIndex = 104
         '
         'ucrInputSuccess
         '
@@ -337,7 +415,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrInputSuccess.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSuccess.GetSetSelectedIndex = -1
         Me.ucrInputSuccess.IsReadOnly = False
-        Me.ucrInputSuccess.Location = New System.Drawing.Point(350, 225)
+        Me.ucrInputSuccess.Location = New System.Drawing.Point(326, 225)
         Me.ucrInputSuccess.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrInputSuccess.Name = "ucrInputSuccess"
         Me.ucrInputSuccess.Size = New System.Drawing.Size(71, 21)
@@ -619,18 +697,45 @@ Partial Class dlgOneVarFitModel
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 353)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 361)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
+        '
+        'ucrInputNullValue
+        '
+        Me.ucrInputNullValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputNullValue.AutoSize = True
+        Me.ucrInputNullValue.IsMultiline = False
+        Me.ucrInputNullValue.IsReadOnly = False
+        Me.ucrInputNullValue.Location = New System.Drawing.Point(326, 251)
+        Me.ucrInputNullValue.Name = "ucrInputNullValue"
+        Me.ucrInputNullValue.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputNullValue.TabIndex = 114
+        '
+        'cmdProportionPrioirs
+        '
+        Me.cmdProportionPrioirs.Location = New System.Drawing.Point(325, 164)
+        Me.cmdProportionPrioirs.Name = "cmdProportionPrioirs"
+        Me.cmdProportionPrioirs.Size = New System.Drawing.Size(101, 23)
+        Me.cmdProportionPrioirs.TabIndex = 119
+        Me.cmdProportionPrioirs.Text = "Proportion Prioirs"
+        Me.cmdProportionPrioirs.UseVisualStyleBackColor = True
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(428, 420)
+        Me.ClientSize = New System.Drawing.Size(428, 422)
+        Me.Controls.Add(Me.cmdProportionPrioirs)
+        Me.Controls.Add(Me.cmdPrior)
+        Me.Controls.Add(Me.ucrInputCredibleLevel)
+        Me.Controls.Add(Me.lblCredibleLevel)
+        Me.Controls.Add(Me.lblNullValue)
+        Me.Controls.Add(Me.lblMethodInference)
+        Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrInputSuccess)
         Me.Controls.Add(Me.ucrInputConfidenceInterval)
         Me.Controls.Add(Me.ucrInputComboQMethod)
@@ -681,6 +786,8 @@ Partial Class dlgOneVarFitModel
         Me.Controls.Add(Me.lblNullHyp)
         Me.Controls.Add(Me.lblSuccess)
         Me.Controls.Add(Me.lblQMethod)
+        Me.Controls.Add(Me.ucrInputNullValue)
+        Me.Controls.Add(Me.cmdEstimation)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -744,4 +851,13 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents tttests As ToolTip
     Friend WithEvents ucrInputSuccess As ucrInputComboBox
     Friend WithEvents lblSuccess As Label
+    Friend WithEvents lblMethodInference As Label
+    Friend WithEvents ucrInputMethod As ucrInputComboBox
+    Friend WithEvents lblNullValue As Label
+    Friend WithEvents ucrInputNullValue As ucrInputTextBox
+    Friend WithEvents ucrInputCredibleLevel As ucrInputComboBox
+    Friend WithEvents lblCredibleLevel As Label
+    Friend WithEvents cmdPrior As Button
+    Friend WithEvents cmdEstimation As Button
+    Friend WithEvents cmdProportionPrioirs As Button
 End Class
