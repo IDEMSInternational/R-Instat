@@ -101,11 +101,16 @@ Partial Class ucrAxes
         Me.grpMinorBreaks = New System.Windows.Forms.GroupBox()
         Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
         Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
+        Me.grpSecondAxis = New System.Windows.Forms.GroupBox()
+        Me.ucrChckTransformation = New instat.ucrCheck()
+        Me.ucrInputSecondaryAxis = New instat.ucrInputComboBox()
+        Me.ucrInputTextSecondAxis = New instat.ucrInputTextBox()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
         Me.grpScaleXDate.SuspendLayout()
         Me.grpMinorBreaks.SuspendLayout()
+        Me.grpSecondAxis.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAxisTitle
@@ -803,10 +808,54 @@ Partial Class ucrAxes
         Me.rdoMinorBreaksNone.Text = "None"
         Me.rdoMinorBreaksNone.UseVisualStyleBackColor = True
         '
+        'grpSecondAxis
+        '
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputTextSecondAxis)
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputSecondaryAxis)
+        Me.grpSecondAxis.Controls.Add(Me.ucrChckTransformation)
+        Me.grpSecondAxis.Location = New System.Drawing.Point(9, 334)
+        Me.grpSecondAxis.Name = "grpSecondAxis"
+        Me.grpSecondAxis.Size = New System.Drawing.Size(315, 67)
+        Me.grpSecondAxis.TabIndex = 35
+        Me.grpSecondAxis.TabStop = False
+        Me.grpSecondAxis.Text = "Secondary Axis"
+        '
+        'ucrChckTransformation
+        '
+        Me.ucrChckTransformation.AutoSize = True
+        Me.ucrChckTransformation.Checked = False
+        Me.ucrChckTransformation.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChckTransformation.Name = "ucrChckTransformation"
+        Me.ucrChckTransformation.Size = New System.Drawing.Size(124, 23)
+        Me.ucrChckTransformation.TabIndex = 24
+        '
+        'ucrInputSecondaryAxis
+        '
+        Me.ucrInputSecondaryAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputSecondaryAxis.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSecondaryAxis.GetSetSelectedIndex = -1
+        Me.ucrInputSecondaryAxis.IsReadOnly = False
+        Me.ucrInputSecondaryAxis.Location = New System.Drawing.Point(109, 19)
+        Me.ucrInputSecondaryAxis.Name = "ucrInputSecondaryAxis"
+        Me.ucrInputSecondaryAxis.Size = New System.Drawing.Size(78, 23)
+        Me.ucrInputSecondaryAxis.TabIndex = 27
+        '
+        'ucrInputTextSecondAxis
+        '
+        Me.ucrInputTextSecondAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextSecondAxis.AutoSize = True
+        Me.ucrInputTextSecondAxis.IsMultiline = False
+        Me.ucrInputTextSecondAxis.IsReadOnly = False
+        Me.ucrInputTextSecondAxis.Location = New System.Drawing.Point(208, 21)
+        Me.ucrInputTextSecondAxis.Name = "ucrInputTextSecondAxis"
+        Me.ucrInputTextSecondAxis.Size = New System.Drawing.Size(79, 21)
+        Me.ucrInputTextSecondAxis.TabIndex = 28
+        '
         'ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.grpSecondAxis)
         Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpMinorBreaks)
@@ -814,7 +863,7 @@ Partial Class ucrAxes
         Me.Controls.Add(Me.grpMajorBreaks)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"
-        Me.Size = New System.Drawing.Size(667, 334)
+        Me.Size = New System.Drawing.Size(667, 422)
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
         Me.grpMajorBreaks.ResumeLayout(False)
@@ -825,6 +874,8 @@ Partial Class ucrAxes
         Me.grpScaleXDate.PerformLayout()
         Me.grpMinorBreaks.ResumeLayout(False)
         Me.grpMinorBreaks.PerformLayout()
+        Me.grpSecondAxis.ResumeLayout(False)
+        Me.grpSecondAxis.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -893,4 +944,8 @@ Partial Class ucrAxes
     Friend WithEvents ucrInputComboDateBreak As ucrInputComboBox
     Friend WithEvents ucrChkDateLabels As ucrCheck
     Friend WithEvents ucrInputComboDateLabel As ucrInputComboBox
+    Friend WithEvents grpSecondAxis As GroupBox
+    Friend WithEvents ucrInputTextSecondAxis As ucrInputTextBox
+    Friend WithEvents ucrInputSecondaryAxis As ucrInputComboBox
+    Friend WithEvents ucrChckTransformation As ucrCheck
 End Class
