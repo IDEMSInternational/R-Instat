@@ -47,8 +47,9 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub ucrColumnMetadata_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        'todo. a temporary useful fix because of wide data sets
         'the grid may not have the latest contents because of being hidden
-        'so refresh the grid data
+        'once 'paging' feature is implemented, this block can be removed.
         RefreshGridData()
     End Sub
 
@@ -94,8 +95,9 @@ Public Class ucrColumnMetadata
     End Sub
 
     Public Sub RefreshGridData()
+        'todo. a temporary useful fix because of wide data sets
         'only refresh the grid when the data book is initialised and the grid is visible
-        'very useful for wide data sets.
+        'in the long term, this window should have paging feature similar to the data viewer
         If _clsDataBook IsNot Nothing And Visible Then
             _grid.RemoveOldWorksheets()
             AddAndUpdateWorksheets()
