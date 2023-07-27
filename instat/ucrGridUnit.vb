@@ -85,7 +85,7 @@ Public Class ucrGridUnit
         AddRemoveElementLineAxis()
     End Sub
 
-    Public Sub setLabel(strlabel As String)
+    Public Sub SetLabel(strlabel As String)
         grpUnits.Text = GetTranslation(strlabel)
     End Sub
 
