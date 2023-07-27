@@ -103,7 +103,7 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
-        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColumn)
+        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
             MsgBox("Cannot wrap or unwrap this type of variable.")
             Exit Sub
@@ -282,8 +282,13 @@ Public Class ucrDataViewReoGrid
         Return lstRowsIndexes
     End Function
 
-    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer)
-        currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer, bApplyToRow As Boolean)
+
+        If bApplyToRow Then
+            currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+        Else
+            currWorkSheet.SelectRows(iRow, 1)
+        End If
         currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
     End Sub
 
@@ -308,19 +313,16 @@ Public Class ucrDataViewReoGrid
         Next
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                            Optional bApplyToRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bApplyToRow As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
         Dim currSheet = grdData.CurrentWorksheet
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
             Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
-            Dim iColIndex As Integer = 0
-            If strColumn <> "filter" Then
-                iColIndex = GetColumnIndex(currSheet, strColumn)
-            End If
+            Dim iColIndex As Integer = If(strColumn = Chr(34) & "filter" & Chr(34), 0, GetColumnIndex(currSheet, strColName:=strColumn))
 
             If iRowIndex > -1 AndAlso iColIndex > -1 Then
-                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex, bApplyToRow:=bApplyToRow)
                 If bApplyToRow Then
                     SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
                                          colIndex:=iColIndex, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
@@ -330,5 +332,38 @@ Public Class ucrDataViewReoGrid
                 End If
             End If
         End If
+    End Sub
+
+    Private Function ColumnNumberToAlpha(ByVal columnNumber As Integer) As String
+        Dim dividend As Integer = columnNumber
+        Dim columnName As String = String.Empty
+        Dim modulo As Integer
+
+        While dividend > 0
+            modulo = (dividend - 1) Mod 26
+            columnName = Convert.ToChar(65 + modulo) & columnName
+            dividend = CInt((dividend - modulo) / 26)
+        End While
+
+        Return columnName
+    End Function
+
+
+    Public Sub SearchColumnInGrid(iColumn As Integer) Implements IDataViewGrid.SearchColumnInGrid
+        Dim currSheet = grdData.CurrentWorksheet
+        Dim strColumn As String = ColumnNumberToAlpha(iColumn) & "1"
+
+        If String.IsNullOrEmpty(strColumn) Then
+            Exit Sub
+        End If
+
+        currSheet.ScrollToCell(strColumn)
+        Dim iColIndex As Integer = iColumn - 1
+        currSheet.SelectColumns(iColIndex, 1)
+        ' Set the background color for the entire column
+        currSheet.SetRangeStyles(0, iColIndex, currSheet.RowCount, 1, New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = Color.LightGreen
+        })
     End Sub
 End Class

@@ -943,6 +943,11 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Sub GoToSpecificColumnPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
@@ -955,8 +960,7 @@ Public Class ucrDataView
             sdgWindowNumber.iTotalRowOrColumn = iTotalCol
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificColumnPage(sdgWindowNumber.iPage)
         End If
     End Sub
 
@@ -1004,9 +1008,13 @@ Public Class ucrDataView
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
                            Optional bCellOrRow As Boolean = False)
-        _grid.SearchInGrid(rowNumbers, strColumn, iRow, bCellOrRow)
+        _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bCellOrRow)
+    End Sub
+
+    Public Sub SearchColumnInGrid(iColumn As Integer)
+        _grid.SearchColumnInGrid(iColumn)
     End Sub
 
 End Class

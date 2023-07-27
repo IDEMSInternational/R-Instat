@@ -133,50 +133,59 @@ Public Class dlgFindInVariableOrFilter
             If (rdoVariable.Checked AndAlso String.IsNullOrEmpty(ucrInputPattern.GetText)) Then
                 Exit Sub
             End If
-            Dim lstRowNumbers As New List(Of Integer)
-            lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsInteger.ToList
+            Dim lstRowOrColumnsNumbers As New List(Of Integer)
+            lstRowOrColumnsNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsInteger.ToList
             lblMatching.Visible = False
 
-            If lstRowNumbers.Count <= 0 Then
+            If lstRowOrColumnsNumbers.Count <= 0 Then
                 lblMatching.ForeColor = Color.Red
-                lblMatching.Text = "There are no entries matching " & ucrInputPattern.GetText
+                Dim strMAtching As String = "There are no entries matching "
+                If rdoVariable.Checked Then strMAtching &= ucrInputPattern.GetText
+
+                lblMatching.Text = strMAtching
                 lblMatching.Visible = True
                 Exit Sub
             End If
 
-            Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
-            Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
-            ' Iterate over the list of row numbers to find the page where the row is displayed.
-            For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
-                Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1)
-                If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
+            If rdoVariable.Checked OrElse rdoInFilter.Checked Then
+                Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
+                Dim iCurrentOccurenceRowNumber As Integer = lstRowOrColumnsNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
+                ' Iterate over the list of row numbers to find the page where the row is displayed.
+                For i As Integer = 1 To lstRowOrColumnsNumbers.Count 'loop through occurences
+                    Dim iLoopOccurenceRowNumber As Integer = lstRowOrColumnsNumbers(i - 1)
+                    If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
                         AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
-                    iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
-                    Exit For
-                End If
-            Next
+                        iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
+                        Exit For
+                    End If
+                Next
 
-            If iCurrentOccurenceRowNumber = lstRowNumbers.Max Then
-                If iCurrentOccurenceIndex > iCountClick Then
-                    iCountClick = iCurrentOccurenceIndex
-                Else
+                If iCurrentOccurenceRowNumber = lstRowOrColumnsNumbers.Max Then
+                    If iCurrentOccurenceIndex > iCountClick Then
+                        iCountClick = iCurrentOccurenceIndex
+                    Else
+                        iCountClick = 1
+                    End If
+                    iCurrentOccurenceIndex = 1
+                End If
+
+                Dim strColumn As String = ucrReceiverVariable.GetVariableNames
+
+                Dim iRow As Integer = lstRowOrColumnsNumbers(iCurrentOccurenceIndex - 1)
+                Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
+                frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
+                Dim bApplyCell As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
+                frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowOrColumnsNumbers, strColumn:=strColumn,
+                                                       iRow:=iRow, bCellOrRow:=Not bApplyCell)
+            Else
+                If iCountClick > lstRowOrColumnsNumbers.Count Then
                     iCountClick = 1
                 End If
-                iCurrentOccurenceIndex = 1
+                Dim iColumn As Integer = lstRowOrColumnsNumbers(iCountClick - 1)
+                Dim iColPage As Integer = Math.Ceiling(CDbl(iColumn / frmMain.clsInstatOptions.iMaxCols))
+                frmMain.ucrDataViewer.GoToSpecificColumnPage(iColPage)
+                frmMain.ucrDataViewer.SearchColumnInGrid(iColumn)
             End If
-
-            Dim strColumn As String = "filter"
-
-            If rdoVariable.Checked Then
-                strColumn = ucrReceiverVariable.GetVariableNames
-            End If
-
-            Dim iRow As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1)
-            Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
-            frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
-            Dim bApplyCell As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
-            frmMain.ucrDataViewer.SearchInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
-                                                       iRow:=iRow, bCellOrRow:=Not bApplyCell)
             iCountClick += 1
         Catch ex As Exception
             MsgBox(ex.Message)
