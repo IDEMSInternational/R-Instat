@@ -783,8 +783,7 @@ DataBook$set("public", "get_current_filter", function(data_name) {
 DataBook$set("public", "get_filter_row_names", function(data_name, filter_name) {
   row_names <- row.names(self$get_data_frame(data_name, convert_to_character = FALSE, stack_data = FALSE,
                                              include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = filter_name, 
-                                             use_column_selection = TRUE, column_selection_name = "", remove_attr = FALSE, retain_attr = FALSE, 
-                                             drop_unused_filter_levels = FALSE))
+                                             remove_attr = FALSE, retain_attr = FALSE, drop_unused_filter_levels = FALSE))
   
   return(row_names)
 }
@@ -851,6 +850,11 @@ DataBook$set("public", "get_column_selection", function(data_name, name) {
 
 DataBook$set("public", "get_column_selection_column_names", function(data_name, filter_name) {
   return(self$get_data_objects(data_name)$get_filter_as_logical(filter_name))
+}
+)
+
+DataBook$set("public", "get_column_selection_column_indexes", function(data_name, column_selection_name = "") {
+  return(self$get_data_objects(data_name)$get_column_selection_column_indexes(column_selection_name = column_selection_name))
 }
 )
 

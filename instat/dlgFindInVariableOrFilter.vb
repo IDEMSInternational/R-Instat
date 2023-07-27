@@ -22,7 +22,8 @@ Public Class dlgFindInVariableOrFilter
     Private iCurrentOccurenceIndex As Integer
     Private iCountClick As Integer
     Private clsDummyFunction As New RFunction
-    Private clsGetRowsFunction, clsGetRowHeadersFunction, clsGetFilterRowNamesFunction As New RFunction
+    Private clsGetRowsFunction, clsGetRowHeadersFunction,
+             clsGetFilterRowNamesFunction, clsGetColSelectionNamesFunction As New RFunction
     Private clsGetDataFrameFunction As New RFunction
 
     Private Sub dlgFindInVariableOrFilter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,9 +48,11 @@ Public Class dlgFindInVariableOrFilter
 
         ucrPnlOptions.AddRadioButton(rdoVariable)
         ucrPnlOptions.AddRadioButton(rdoInFilter)
+        ucrPnlOptions.AddRadioButton(rdoSelect)
         ucrPnlOptions.SetParameter(New RParameter("check", 0))
         ucrPnlOptions.AddParameterValuesCondition(rdoVariable, "check", "variable")
         ucrPnlOptions.AddParameterValuesCondition(rdoInFilter, "check", "filter")
+        ucrPnlOptions.AddParameterValuesCondition(rdoSelect, "check", "select")
 
         ucrPnlSelect.AddRadioButton(rdoCell)
         ucrPnlSelect.AddRadioButton(rdoRow)
@@ -72,7 +75,6 @@ Public Class dlgFindInVariableOrFilter
         ucrChkIncludeRegularExpressions.SetParameter(New RParameter("use_regex", 4))
         ucrChkIncludeRegularExpressions.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        'ucrPnlOptions.AddToLinkedControls(ucrInputPattern, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputPattern, ucrPnlSelect, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrPnlSelect.SetLinkedDisplayControl(grpSelect)
@@ -83,6 +85,7 @@ Public Class dlgFindInVariableOrFilter
         clsGetRowsFunction = New RFunction
         clsGetRowHeadersFunction = New RFunction
         clsGetFilterRowNamesFunction = New RFunction
+        clsGetColSelectionNamesFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
 
         ucrSelectorFind.Reset()
@@ -93,6 +96,8 @@ Public Class dlgFindInVariableOrFilter
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
 
         clsGetFilterRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_row_names")
+
+        clsGetColSelectionNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_selection_column_indexes")
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
@@ -106,8 +111,10 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorFind.AddAdditionalCodeParameterPair(clsGetFilterRowNamesFunction, ucrSelectorFind.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorFind.AddAdditionalCodeParameterPair(clsGetColSelectionNamesFunction, ucrSelectorFind.GetParameter, iAdditionalPairNo:=1)
+        ucrSelectorFind.AddAdditionalCodeParameterPair(clsGetFilterRowNamesFunction, ucrSelectorFind.GetParameter, iAdditionalPairNo:=2)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsGetFilterRowNamesFunction, New RParameter("filter_name"), iAdditionalPairNo:=1)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsGetColSelectionNamesFunction, New RParameter("column_selection_name"), iAdditionalPairNo:=2)
         ucrSelectorFind.SetRCode(clsGetDataFrameFunction, bReset)
         ucrReceiverVariable.SetRCode(clsGetRowHeadersFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsGetRowHeadersFunction, bReset)
@@ -118,7 +125,7 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub TestOkEnabled()
         cmdFind.Enabled = (rdoVariable.Checked AndAlso Not ucrReceiverVariable.IsEmpty AndAlso Not ucrInputPattern.IsEmpty) OrElse
-            (rdoInFilter.Checked AndAlso Not ucrReceiverVariable.IsEmpty)
+            ((rdoInFilter.Checked OrElse rdoSelect.Checked) AndAlso Not ucrReceiverVariable.IsEmpty)
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
@@ -240,6 +247,12 @@ Public Class dlgFindInVariableOrFilter
             ucrReceiverVariable.SetItemType("filter")
             ucrReceiverVariable.strSelectorHeading = "Filters"
             lblVariable.Text = "Filter:"
+        Else
+            clsGetRowsFunction = clsGetColSelectionNamesFunction
+            clsDummyFunction.AddParameter("check", "select", iPosition:=0)
+            ucrReceiverVariable.SetItemType("column_selection")
+            ucrReceiverVariable.strSelectorHeading = "Column selections"
+            lblVariable.Text = "Select:"
         End If
     End Sub
 End Class
