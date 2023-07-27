@@ -97,7 +97,8 @@ Public Class ucrColumnMetadata
     Public Sub RefreshGridData()
         'todo. a temporary useful fix because of wide data sets
         'only refresh the grid when the data book is initialised and the grid is visible
-        'in the long term, this window should have paging feature similar to the data viewer
+        'displaying more than a 1000 rows takes a lot of time
+        'in the long term, this window should have 'paging' feature similar to the data viewer to display 11000 rows only.
         If _clsDataBook IsNot Nothing And Visible Then
             _grid.RemoveOldWorksheets()
             AddAndUpdateWorksheets()
