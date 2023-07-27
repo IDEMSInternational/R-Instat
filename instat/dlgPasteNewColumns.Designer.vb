@@ -45,7 +45,7 @@ Partial Class dlgPasteNewColumns
         Me.ucrDFSelected.AutoSize = True
         Me.ucrDFSelected.bDropUnusedFilterLevels = False
         Me.ucrDFSelected.bUseCurrentFilter = True
-        Me.ucrDFSelected.Location = New System.Drawing.Point(5, 269)
+        Me.ucrDFSelected.Location = New System.Drawing.Point(5, 261)
         Me.ucrDFSelected.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDFSelected.Name = "ucrDFSelected"
         Me.ucrDFSelected.Size = New System.Drawing.Size(177, 50)
@@ -71,11 +71,12 @@ Partial Class dlgPasteNewColumns
         '
         'lblConfirmText
         '
+        Me.lblConfirmText.AutoSize = True
         Me.lblConfirmText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirmText.Location = New System.Drawing.Point(328, 262)
+        Me.lblConfirmText.Location = New System.Drawing.Point(277, 280)
         Me.lblConfirmText.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirmText.Name = "lblConfirmText"
-        Me.lblConfirmText.Size = New System.Drawing.Size(249, 68)
+        Me.lblConfirmText.Size = New System.Drawing.Size(200, 13)
         Me.lblConfirmText.TabIndex = 35
         Me.lblConfirmText.Text = "Click Ok to paste data to new data frame"
         '
@@ -132,7 +133,7 @@ Partial Class dlgPasteNewColumns
         Me.ucrSaveNewDFName.Location = New System.Drawing.Point(5, 269)
         Me.ucrSaveNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
-        Me.ucrSaveNewDFName.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveNewDFName.Size = New System.Drawing.Size(263, 24)
         Me.ucrSaveNewDFName.TabIndex = 30
         '
         'ucrNudPreviewLines
@@ -162,7 +163,7 @@ Partial Class dlgPasteNewColumns
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(62, 339)
+        Me.ucrBase.Location = New System.Drawing.Point(62, 320)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 31
@@ -214,7 +215,7 @@ Partial Class dlgPasteNewColumns
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(585, 396)
+        Me.ClientSize = New System.Drawing.Size(585, 376)
         Me.Controls.Add(Me.rdoColumns)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrPnl)

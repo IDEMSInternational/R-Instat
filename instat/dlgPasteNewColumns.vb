@@ -58,6 +58,7 @@ Public Class dlgPasteNewColumns
 
         ucrChkRowHeader.SetText("First row is header")
         ucrChkRowHeader.SetParameter(New RParameter("header", 1))
+        ucrChkRowHeader.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNudPreviewLines.SetMinMax(iNewMin:=10, iNewMax:=1000)
         '----------------------------
@@ -152,27 +153,7 @@ Public Class dlgPasteNewColumns
 
             'try to show preview the data only
             frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
-            lblConfirmText.Text = "Number of columns: " & dfTemp.ColumnCount & Environment.NewLine &
-                                  "Number of rows: " & dfTemp.RowCount & Environment.NewLine
-
-            If rdoDataFrame.Checked Then
-                lblConfirmText.Text = lblConfirmText.Text & "Click Ok to paste data to new data frame."
-            ElseIf rdoColumns.Checked Then
-                'validate allowed number of rows
-                If dfTemp.RowCount < ucrDFSelected.iDataFrameLength Then
-                    lblConfirmText.Text = lblConfirmText.Text & "Too few rows to paste into this data frame. This data frame requires " & ucrDFSelected.iDataFrameLength & " rows."
-                    'please note, we could allow few rows to be pasted. we can do that ammending add columns R code
-                    'but as stated in issue #5991 by Danny this is unlikely to be the correct solution.
-                    'Left here for reference
-                    'lblConfirmText.Text = lblConfirmText.Text & Environment.NewLine &  (ucrDataFrameSelected.iDataFrameLength - dfTemp.RowCount) & " missing values will be added."
-                    Return False
-                ElseIf dfTemp.RowCount > ucrDFSelected.iDataFrameLength Then
-                    lblConfirmText.Text = lblConfirmText.Text & "Too many rows to paste into this data frame. This data frame requires " & ucrDFSelected.iDataFrameLength & " rows."
-                    Return False
-                Else
-                    lblConfirmText.Text = lblConfirmText.Text & "Click Ok to paste data to selected data frame."
-                End If
-            End If
+            lblConfirmText.Text = If(rdoDataFrame.Checked, lblConfirmText.Text & "Click Ok to paste data to new data frame.", "Click Ok to paste data to selected data frame.")
             lblConfirmText.ForeColor = Color.Green
             panelNoDataPreview.Visible = False
             Return True
@@ -206,7 +187,7 @@ Public Class dlgPasteNewColumns
         End If
 
         If bValidatePasteData Then
-            TestOkEnabled()
+            TestOkEnabled(bValidateCopiedData:=False)
         End If
     End Sub
 
@@ -215,10 +196,16 @@ Public Class dlgPasteNewColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkRowHeader.ControlContentsChanged, ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged, ucrNudPreviewLines.ControlContentsChanged
+    Private Sub ucrPreviewControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRowHeader.ControlValueChanged, ucrNudPreviewLines.ControlValueChanged
+        If bValidatePasteData Then
+            TestOkEnabled(bValidateCopiedData:=ucrChangedControl IsNot ucrNudPreviewLines)
+        End If
+    End Sub
+
+    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged
         If bValidatePasteData Then
             'disabled unnecessary validation of copied data because it may take long for large datasets
-            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrNudPreviewLines)
+            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrDFSelected)
         End If
     End Sub
 
