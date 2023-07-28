@@ -977,10 +977,8 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub AddLevels()
-        If ucrVariablesAsFactorForBarChart.bSingleVariable AndAlso
-            (ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "factor" OrElse
-            ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "ordered,factor") Then
-            clsLevelsFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), bIncludeArgumentName:=False)
+        If ucrVariablesAsFactorForBarChart.bSingleVariable Then
+            clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
