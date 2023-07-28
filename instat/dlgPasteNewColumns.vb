@@ -19,7 +19,7 @@ Public Class dlgPasteNewColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     'Private clsImportColsToNewDFRFunction, clsImportNewDataListRFunction As New RFunction
-    Private clsReadClipBoardDataRFunction As New RFunction
+    Private clsReadDataDataRFunction As New RFunction
     Private clsImportColsToExistingDFRFunction As RFunction
     'used to prevent TestOkEnabled from being called multiple times when loading the dialog. 
     Private bValidatePasteData As Boolean = False
@@ -53,11 +53,11 @@ Public Class dlgPasteNewColumns
         ucrPnl.AddRadioButton(rdoColumns)
         ucrPnl.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=False)
         ucrPnl.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=True)
-        ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnl.AddToLinkedControls({ucrDFSelected, ucrChkKeepExstingCols}, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnl.AddToLinkedControls({ucrDFSelected, ucrChkKeepExstingCols}, {rdoColumns}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRowHeader.SetText("First row is header")
-        ucrChkRowHeader.SetParameter(New RParameter("header", 1))
+        ucrChkRowHeader.SetParameter(New RParameter("col_names", 1))
         ucrChkRowHeader.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNudPreviewLines.SetMinMax(iNewMin:=10, iNewMax:=1000)
@@ -87,28 +87,28 @@ Public Class dlgPasteNewColumns
 
     Private Sub SetDefaults()
         clsImportColsToExistingDFRFunction = New RFunction
-        clsReadClipBoardDataRFunction = New RFunction
+        clsReadDataDataRFunction = New RFunction
 
         ucrNudPreviewLines.Value = 10
         ucrSaveNewDFName.Reset()
         ucrDFSelected.Reset()
 
-        clsReadClipBoardDataRFunction.SetPackageName("clipr")
-        clsReadClipBoardDataRFunction.SetRCommand("read_clip_tbl")
-        clsReadClipBoardDataRFunction.AddParameter("header", strParameterValue:="TRUE", iPosition:=1)
+        clsReadDataDataRFunction.SetPackageName("readr")
+        clsReadDataDataRFunction.SetRCommand("read_delim")
+        clsReadDataDataRFunction.AddParameter("col_names", strParameterValue:="TRUE", iPosition:=1)
 
         clsImportColsToExistingDFRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadClipBoardDataRFunction, iPosition:=1)
+        clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadDataDataRFunction, iPosition:=1)
         clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
 
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsReadClipBoardDataRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataDataRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkRowHeader.SetRCode(clsReadClipBoardDataRFunction, bReset)
+        ucrChkRowHeader.SetRCode(clsReadDataDataRFunction, bReset)
 
-        ucrSaveNewDFName.SetRCode(clsReadClipBoardDataRFunction, bReset)
+        ucrSaveNewDFName.SetRCode(clsReadDataDataRFunction, bReset)
 
         ucrDFSelected.SetRCode(clsImportColsToExistingDFRFunction, bReset)
         ucrChkKeepExstingCols.SetRCode(clsImportColsToExistingDFRFunction, bReset)
@@ -127,10 +127,9 @@ Public Class dlgPasteNewColumns
             Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
             If arrStrTemp.Length > 1000 Then
                 MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
-                clsReadClipBoardDataRFunction.AddParameter("x", Chr(34) & "" & Chr(34), iPosition:=0)
-            Else
-                clsReadClipBoardDataRFunction.AddParameter("x", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
+                clipBoardText = ""
             End If
+            clsReadDataDataRFunction.AddParameter("file", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
         Catch ex As Exception
             'this error could be due to large clipboard data 
             MsgBox("Requested clipboard operation did not succeed. Large data detected")
@@ -149,7 +148,7 @@ Public Class dlgPasteNewColumns
             lblConfirmText.Text = ""
             lblConfirmText.ForeColor = Color.Red
 
-            Dim clsTempReadClipBoardDataRFunction As RFunction = clsReadClipBoardDataRFunction.Clone()
+            Dim clsTempReadClipBoardDataRFunction As RFunction = clsReadDataDataRFunction.Clone()
 
             clsTempReadClipBoardDataRFunction.RemoveAssignTo() 'remove assign to before getting the script
             Dim dfTemp As DataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsTempReadClipBoardDataRFunction.ToScript(), bSilent:=True)?.AsDataFrame
@@ -186,9 +185,9 @@ Public Class dlgPasteNewColumns
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnl.ControlValueChanged
         If rdoDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReadClipBoardDataRFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataDataRFunction)
         ElseIf rdoColumns.Checked Then
-            clsReadClipBoardDataRFunction.SetAssignToObject("data")
+            clsReadDataDataRFunction.SetAssignToObject("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
         End If
 
