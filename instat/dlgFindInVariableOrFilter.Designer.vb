@@ -28,6 +28,7 @@ Partial Class dlgFindInVariableOrFilter
         Me.grpSelect = New System.Windows.Forms.GroupBox()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSelect = New instat.UcrPanel()
         Me.lblLabel = New System.Windows.Forms.Label()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoInFilter = New System.Windows.Forms.RadioButton()
@@ -43,7 +44,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrChkIgnoreCase = New instat.ucrCheck()
-        Me.ucrPnlSelect = New instat.UcrPanel()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSelectorFind = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
@@ -104,10 +104,19 @@ Partial Class dlgFindInVariableOrFilter
         Me.rdoCell.Text = "Cell"
         Me.rdoCell.UseVisualStyleBackColor = True
         '
+        'ucrPnlSelect
+        '
+        Me.ucrPnlSelect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSelect.Location = New System.Drawing.Point(9, 20)
+        Me.ucrPnlSelect.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlSelect.Name = "ucrPnlSelect"
+        Me.ucrPnlSelect.Size = New System.Drawing.Size(182, 47)
+        Me.ucrPnlSelect.TabIndex = 0
+        '
         'lblLabel
         '
         Me.lblLabel.AutoSize = True
-        Me.lblLabel.Location = New System.Drawing.Point(414, 196)
+        Me.lblLabel.Location = New System.Drawing.Point(413, 198)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(57, 20)
         Me.lblLabel.TabIndex = 75
@@ -204,7 +213,7 @@ Partial Class dlgFindInVariableOrFilter
         'lblVariableFound
         '
         Me.lblVariableFound.AutoSize = True
-        Me.lblVariableFound.Location = New System.Drawing.Point(414, 137)
+        Me.lblVariableFound.Location = New System.Drawing.Point(413, 138)
         Me.lblVariableFound.Name = "lblVariableFound"
         Me.lblVariableFound.Size = New System.Drawing.Size(57, 20)
         Me.lblVariableFound.TabIndex = 73
@@ -213,7 +222,7 @@ Partial Class dlgFindInVariableOrFilter
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(414, 166)
+        Me.lblName.Location = New System.Drawing.Point(413, 166)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(57, 20)
         Me.lblName.TabIndex = 74
@@ -258,15 +267,6 @@ Partial Class dlgFindInVariableOrFilter
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
         Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(196, 34)
         Me.ucrChkIgnoreCase.TabIndex = 66
-        '
-        'ucrPnlSelect
-        '
-        Me.ucrPnlSelect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSelect.Location = New System.Drawing.Point(9, 20)
-        Me.ucrPnlSelect.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrPnlSelect.Name = "ucrPnlSelect"
-        Me.ucrPnlSelect.Size = New System.Drawing.Size(182, 47)
-        Me.ucrPnlSelect.TabIndex = 0
         '
         'ucrPnlOptions
         '
