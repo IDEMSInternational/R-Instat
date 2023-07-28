@@ -73,10 +73,10 @@ Partial Class dlgPasteNewColumns
         'lblConfirmText
         '
         Me.lblConfirmText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirmText.Location = New System.Drawing.Point(358, 269)
+        Me.lblConfirmText.Location = New System.Drawing.Point(358, 271)
         Me.lblConfirmText.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirmText.Name = "lblConfirmText"
-        Me.lblConfirmText.Size = New System.Drawing.Size(219, 48)
+        Me.lblConfirmText.Size = New System.Drawing.Size(219, 46)
         Me.lblConfirmText.TabIndex = 35
         Me.lblConfirmText.Text = "Click Ok to paste data to new data frame"
         '
@@ -163,7 +163,7 @@ Partial Class dlgPasteNewColumns
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(62, 325)
+        Me.ucrBase.Location = New System.Drawing.Point(62, 323)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 31
