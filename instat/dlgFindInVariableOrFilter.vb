@@ -135,6 +135,27 @@ Public Class dlgFindInVariableOrFilter
             ((rdoInFilter.Checked OrElse rdoSelect.Checked) AndAlso Not ucrReceiverVariable.IsEmpty)
     End Sub
 
+    Private Sub TruncateLabelText(label As Label, strName As String, maximumWidth As Integer)
+        Dim graphics As Graphics = label.CreateGraphics()
+        Dim originalText As String = strName
+        Dim font As Font = label.Font
+        Dim originalWidth As Integer = CInt(graphics.MeasureString(originalText, font).Width)
+        If originalWidth > maximumWidth Then
+            Dim truncatedText As String = originalText
+            Dim truncatedWidth As Integer = originalWidth
+
+            While truncatedWidth > maximumWidth AndAlso truncatedText.Length > 0
+                truncatedText = truncatedText.Substring(0, truncatedText.Length - 1)
+                truncatedWidth = CInt(graphics.MeasureString(truncatedText & "...", font).Width)
+            End While
+
+            label.Text = truncatedText & "..."
+        Else
+            label.Text = strName
+        End If
+    End Sub
+
+
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
             If rdoVariable.Checked OrElse rdoInFilter.Checked Then
@@ -183,7 +204,6 @@ Public Class dlgFindInVariableOrFilter
                 frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
                                                        iRow:=iRow, bCellOrRow:=Not bApplyCell)
                 lblFoundRow.Text = "Found Row: " & iRow
-                lblFoundRow.ForeColor = Color.Green
                 lblFoundRow.Visible = True
                 iCountRowClick += 1
                 SetControlsVisible(False)
@@ -200,14 +220,20 @@ Public Class dlgFindInVariableOrFilter
                 frmMain.ucrDataViewer.GoToSpecificColumnPage(iColPage)
                 frmMain.ucrDataViewer.SearchColumnInGrid(strColumn)
 
-                lblVariableFound.Text = "Found Variable: " & strColumn
-                lblName.Text = "Name: " & strColumn
-                lblLabel.Text = "Label: " & GetColLabel(strColumn)
-                lblVariableFound.ForeColor = Color.Green
-                lblName.ForeColor = Color.Green
-                lblLabel.ForeColor = Color.Green
+                lblVariableFound.Text = "Found Variable: " & GetColumnIndex(strColumn) + 1
+                Dim strName = "Name: " & strColumn
+                TruncateLabelText(lblName, strName, 135)
+                Dim strLabel = "Label: " & GetColLabel(strColumn)
+                TruncateLabelText(lblLabel, strLabel, 135)
                 SetControlsVisible(True)
                 lblFoundRow.Visible = False
+
+                ' Create a ToolTip instance.
+                Dim tooltip As New ToolTip()
+
+                ' Set the tooltip texts for the labels.
+                tooltip.SetToolTip(lblName, strColumn)
+                tooltip.SetToolTip(lblLabel, GetColLabel(strColumn))
                 iColumnClick += 1
             End If
 
