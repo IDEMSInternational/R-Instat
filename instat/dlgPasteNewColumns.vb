@@ -45,8 +45,8 @@ Public Class dlgPasteNewColumns
     End Sub
 
     Private Sub InitialiseDialog()
-        'todo. attach the help id later
-        'ucrBase.iHelpTopicID = 
+
+        ucrBase.iHelpTopicID = 160
 
         '----------------------------
         ucrPnl.AddRadioButton(rdoDataFrame)
@@ -54,7 +54,7 @@ Public Class dlgPasteNewColumns
         ucrPnl.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=False)
         ucrPnl.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=True)
         ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnl.AddToLinkedControls(ucrDFSelected, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnl.AddToLinkedControls({ucrDFSelected, ucrChkKeepExstingCols}, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRowHeader.SetText("First row is header")
         ucrChkRowHeader.SetParameter(New RParameter("header", 1))
@@ -76,6 +76,10 @@ Public Class dlgPasteNewColumns
         ucrDFSelected.SetText("Paste copied data to:")
         ucrDFSelected.SetParameter(New RParameter("data_name", 0))
         ucrDFSelected.SetParameterIsString()
+
+        ucrChkKeepExstingCols.SetText("Keep existing columns")
+        ucrChkKeepExstingCols.SetParameter(New RParameter("use_col_name_as_prefix", 2))
+        ucrChkKeepExstingCols.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         '----------------------------
 
         ucrNudPreviewLines.Minimum = 10
@@ -91,11 +95,11 @@ Public Class dlgPasteNewColumns
 
         clsReadClipBoardDataRFunction.SetPackageName("clipr")
         clsReadClipBoardDataRFunction.SetRCommand("read_clip_tbl")
-        clsReadClipBoardDataRFunction.AddParameter("header", "TRUE", iPosition:=1)
+        clsReadClipBoardDataRFunction.AddParameter("header", strParameterValue:="TRUE", iPosition:=1)
 
         clsImportColsToExistingDFRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadClipBoardDataRFunction, iPosition:=1)
-        'clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
+        clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
 
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsReadClipBoardDataRFunction)
@@ -103,8 +107,11 @@ Public Class dlgPasteNewColumns
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkRowHeader.SetRCode(clsReadClipBoardDataRFunction, bReset)
-        ucrDFSelected.SetRCode(clsImportColsToExistingDFRFunction, bReset)
+
         ucrSaveNewDFName.SetRCode(clsReadClipBoardDataRFunction, bReset)
+
+        ucrDFSelected.SetRCode(clsImportColsToExistingDFRFunction, bReset)
+        ucrChkKeepExstingCols.SetRCode(clsImportColsToExistingDFRFunction, bReset)
 
         ucrPnl.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
@@ -144,7 +151,6 @@ Public Class dlgPasteNewColumns
 
             Dim clsTempReadClipBoardDataRFunction As RFunction = clsReadClipBoardDataRFunction.Clone()
 
-            clsTempReadClipBoardDataRFunction.AddParameter("nrows", ucrNudPreviewLines.Value)  'limit the rows to those set in the ucrNudPreviewLines control
             clsTempReadClipBoardDataRFunction.RemoveAssignTo() 'remove assign to before getting the script
             Dim dfTemp As DataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsTempReadClipBoardDataRFunction.ToScript(), bSilent:=True)?.AsDataFrame
             If dfTemp Is Nothing OrElse dfTemp.RowCount = 0 Then
@@ -152,8 +158,8 @@ Public Class dlgPasteNewColumns
             End If
 
             'try to show preview the data only
-            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
-            lblConfirmText.Text = If(rdoDataFrame.Checked, lblConfirmText.Text & "Click Ok to paste data to new data frame.", "Click Ok to paste data to selected data frame.")
+            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols, iRowMax:=ucrNudPreviewLines.Value)
+            lblConfirmText.Text = "Columns: " & dfTemp.ColumnCount & " | Rows: " & dfTemp.RowCount & Environment.NewLine & "Click Ok to paste data."
             lblConfirmText.ForeColor = Color.Green
             panelNoDataPreview.Visible = False
             Return True
@@ -202,10 +208,10 @@ Public Class dlgPasteNewColumns
         End If
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged, ucrChkKeepExstingCols.ControlContentsChanged
         If bValidatePasteData Then
             'disabled unnecessary validation of copied data because it may take long for large datasets
-            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrDFSelected)
+            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrDFSelected AndAlso ucrchangedControl IsNot ucrChkKeepExstingCols)
         End If
     End Sub
 
@@ -217,6 +223,5 @@ Public Class dlgPasteNewColumns
         bValidatePasteData = True
         TestOkEnabled()
     End Sub
-
 
 End Class

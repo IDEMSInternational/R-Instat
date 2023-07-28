@@ -370,7 +370,7 @@ Partial Class frmMain
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditPasteNewCols = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPasteNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
@@ -2880,7 +2880,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditPasteNewCols, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 22)
         Me.mnuEdit.Tag = "Edit"
@@ -2944,12 +2944,12 @@ Partial Class frmMain
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
         '
-        'mnuEditPasteNewCols
+        'mnuEditPasteNew
         '
-        Me.mnuEditPasteNewCols.Name = "mnuEditPasteNewCols"
-        Me.mnuEditPasteNewCols.Size = New System.Drawing.Size(207, 22)
-        Me.mnuEditPasteNewCols.Tag = "Paste"
-        Me.mnuEditPasteNewCols.Text = "Paste New Columns"
+        Me.mnuEditPasteNew.Name = "mnuEditPasteNew"
+        Me.mnuEditPasteNew.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditPasteNew.Tag = "Paste"
+        Me.mnuEditPasteNew.Text = "Paste New"
         '
         'mnuEditWordwrap
         '
@@ -5726,7 +5726,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator70 As ToolStripSeparator
     Friend WithEvents mnuClimaticCheckDataCheckStationLocations As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportfromClimateDataStore As ToolStripMenuItem
-    Friend WithEvents mnuEditPasteNewCols As ToolStripMenuItem
+    Friend WithEvents mnuEditPasteNew As ToolStripMenuItem
     Friend WithEvents mnuTbLan As ToolStripButton
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuRViewer As ToolStripMenuItem

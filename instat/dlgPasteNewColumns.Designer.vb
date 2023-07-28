@@ -37,6 +37,7 @@ Partial Class dlgPasteNewColumns
         Me.rdoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
         Me.ucrPnl = New instat.UcrPanel()
+        Me.ucrChkKeepExstingCols = New instat.ucrCheck()
         Me.panelNoDataPreview.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -45,7 +46,7 @@ Partial Class dlgPasteNewColumns
         Me.ucrDFSelected.AutoSize = True
         Me.ucrDFSelected.bDropUnusedFilterLevels = False
         Me.ucrDFSelected.bUseCurrentFilter = True
-        Me.ucrDFSelected.Location = New System.Drawing.Point(5, 261)
+        Me.ucrDFSelected.Location = New System.Drawing.Point(5, 265)
         Me.ucrDFSelected.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDFSelected.Name = "ucrDFSelected"
         Me.ucrDFSelected.Size = New System.Drawing.Size(177, 50)
@@ -71,12 +72,11 @@ Partial Class dlgPasteNewColumns
         '
         'lblConfirmText
         '
-        Me.lblConfirmText.AutoSize = True
         Me.lblConfirmText.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblConfirmText.Location = New System.Drawing.Point(277, 280)
+        Me.lblConfirmText.Location = New System.Drawing.Point(358, 269)
         Me.lblConfirmText.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblConfirmText.Name = "lblConfirmText"
-        Me.lblConfirmText.Size = New System.Drawing.Size(200, 13)
+        Me.lblConfirmText.Size = New System.Drawing.Size(219, 48)
         Me.lblConfirmText.TabIndex = 35
         Me.lblConfirmText.Text = "Click Ok to paste data to new data frame"
         '
@@ -163,7 +163,7 @@ Partial Class dlgPasteNewColumns
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(62, 320)
+        Me.ucrBase.Location = New System.Drawing.Point(62, 325)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 31
@@ -181,7 +181,7 @@ Partial Class dlgPasteNewColumns
         Me.rdoColumns.Size = New System.Drawing.Size(99, 27)
         Me.rdoColumns.TabIndex = 39
         Me.rdoColumns.TabStop = True
-        Me.rdoColumns.Text = "As Columns"
+        Me.rdoColumns.Text = "Columns"
         Me.rdoColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoColumns.UseVisualStyleBackColor = True
         '
@@ -198,7 +198,7 @@ Partial Class dlgPasteNewColumns
         Me.rdoDataFrame.Size = New System.Drawing.Size(105, 27)
         Me.rdoDataFrame.TabIndex = 38
         Me.rdoDataFrame.TabStop = True
-        Me.rdoDataFrame.Text = "As Data Frame"
+        Me.rdoDataFrame.Text = "Data Frame"
         Me.rdoDataFrame.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDataFrame.UseVisualStyleBackColor = True
         '
@@ -210,12 +210,22 @@ Partial Class dlgPasteNewColumns
         Me.ucrPnl.Size = New System.Drawing.Size(286, 29)
         Me.ucrPnl.TabIndex = 37
         '
+        'ucrChkKeepExstingCols
+        '
+        Me.ucrChkKeepExstingCols.AutoSize = True
+        Me.ucrChkKeepExstingCols.Checked = False
+        Me.ucrChkKeepExstingCols.Location = New System.Drawing.Point(170, 287)
+        Me.ucrChkKeepExstingCols.Name = "ucrChkKeepExstingCols"
+        Me.ucrChkKeepExstingCols.Size = New System.Drawing.Size(183, 23)
+        Me.ucrChkKeepExstingCols.TabIndex = 40
+        '
         'dlgPasteNewColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(585, 376)
+        Me.ClientSize = New System.Drawing.Size(585, 383)
+        Me.Controls.Add(Me.ucrChkKeepExstingCols)
         Me.Controls.Add(Me.rdoColumns)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrPnl)
@@ -234,7 +244,7 @@ Partial Class dlgPasteNewColumns
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "dlgPasteNewColumns"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Paste Data"
+        Me.Text = "Paste New"
         Me.panelNoDataPreview.ResumeLayout(False)
         Me.panelNoDataPreview.PerformLayout()
         Me.ResumeLayout(False)
@@ -257,4 +267,5 @@ Partial Class dlgPasteNewColumns
     Friend WithEvents rdoColumns As RadioButton
     Friend WithEvents rdoDataFrame As RadioButton
     Friend WithEvents ucrPnl As UcrPanel
+    Friend WithEvents ucrChkKeepExstingCols As ucrCheck
 End Class
