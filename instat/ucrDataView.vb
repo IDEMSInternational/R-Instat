@@ -1013,8 +1013,8 @@ Public Class ucrDataView
         _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bCellOrRow)
     End Sub
 
-    Public Sub SearchColumnInGrid(iColumn As Integer)
-        _grid.SearchColumnInGrid(iColumn)
+    Public Sub SearchColumnInGrid(strColumn As String)
+        _grid.SearchColumnInGrid(strColumn)
     End Sub
 
 End Class

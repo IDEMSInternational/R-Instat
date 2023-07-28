@@ -853,8 +853,8 @@ DataBook$set("public", "get_column_selection_column_names", function(data_name, 
 }
 )
 
-DataBook$set("public", "get_column_selection_column_indexes", function(data_name, column_selection_name = "") {
-  return(self$get_data_objects(data_name)$get_column_selection_column_indexes(column_selection_name = column_selection_name))
+DataBook$set("public", "get_column_selected_column_names", function(data_name, column_selection_name = "") {
+  return(self$get_data_objects(data_name)$get_column_selected_column_names(column_selection_name))
 }
 )
 

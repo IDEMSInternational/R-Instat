@@ -173,7 +173,7 @@ Public Class ucrDataViewLinuxGrid
                             Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
     End Sub
 
-    Public Sub SearchColumnInGrid(iColumn As Integer) Implements IDataViewGrid.SearchColumnInGrid
+    Public Sub SearchColumnInGrid(strColumn As String) Implements IDataViewGrid.SearchColumnInGrid
 
     End Sub
 End Class

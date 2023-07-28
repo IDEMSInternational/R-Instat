@@ -2038,12 +2038,10 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
   return(all_column_names[out])
 })
 
-DataSheet$set("public", "get_column_selection_column_indexes", function(data_name, column_selection_name = "") {
+DataSheet$set("public", "get_column_selected_column_names", function(column_selection_name = "") {
   if(column_selection_name != "") {
   selected_columns <- self$get_column_selection_column_names(column_selection_name)
-  curr_df <- self$get_data_frame(use_column_selection = FALSE)
-  out <- match(selected_columns, names(curr_df))
-  return(out)
+  return(selected_columns)
   }
 }
 )

@@ -103,7 +103,7 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
-        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColName:=strColumn)
+        Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
             MsgBox("Cannot wrap or unwrap this type of variable.")
             Exit Sub
@@ -243,10 +243,11 @@ Public Class ucrDataViewReoGrid
         End If
     End Sub
 
-    Private Function GetColumnIndex(currWorkSheet As Worksheet, strColName As String) As Integer
-        If currWorkSheet IsNot Nothing Then
-            For i As Integer = 0 To currWorkSheet.Columns - 1
-                Dim strCol As String = currWorkSheet.ColumnHeaders(i).Text
+    Private Function GetColumnIndex(strColName As String) As Integer
+        Dim currWorksheet = grdData.CurrentWorksheet
+        If currWorksheet IsNot Nothing Then
+            For i As Integer = 0 To currWorksheet.Columns - 1
+                Dim strCol As String = currWorksheet.ColumnHeaders(i).Text
                 If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
                     Return i
                 End If
@@ -319,7 +320,7 @@ Public Class ucrDataViewReoGrid
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
             Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
-            Dim iColIndex As Integer = If(strColumn = Chr(34) & "filter" & Chr(34), 0, GetColumnIndex(currSheet, strColName:=strColumn))
+            Dim iColIndex As Integer = If(strColumn = Chr(34) & "filter" & Chr(34), 0, GetColumnIndex( strColName:=strColumn))
 
             If iRowIndex > -1 AndAlso iColIndex > -1 Then
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex, bApplyToRow:=bApplyToRow)
@@ -334,7 +335,7 @@ Public Class ucrDataViewReoGrid
         End If
     End Sub
 
-    Private Function ColumnNumberToAlpha(ByVal columnNumber As Integer) As String
+    Private Function ColumnNumberToAlpha(columnNumber As Integer) As String
         Dim dividend As Integer = columnNumber
         Dim columnName As String = String.Empty
         Dim modulo As Integer
@@ -349,19 +350,19 @@ Public Class ucrDataViewReoGrid
     End Function
 
 
-    Public Sub SearchColumnInGrid(iColumn As Integer) Implements IDataViewGrid.SearchColumnInGrid
+    Public Sub SearchColumnInGrid(strColumn As String) Implements IDataViewGrid.SearchColumnInGrid
         Dim currSheet = grdData.CurrentWorksheet
-        Dim strColumn As String = ColumnNumberToAlpha(iColumn) & "1"
 
         If String.IsNullOrEmpty(strColumn) Then
             Exit Sub
         End If
+        Dim iColumn As Integer = grdData.CurrentWorksheet.ColumnHeaders.Where(Function(col) col.Text.Split("(")(0).Trim = strColumn).FirstOrDefault().Index
 
-        currSheet.ScrollToCell(strColumn)
-        Dim iColIndex As Integer = iColumn - 1
-        currSheet.SelectColumns(iColIndex, 1)
+        Dim strOriginalColumnName As String = ColumnNumberToAlpha(iColumn + 1) & "1"
+        currSheet.ScrollToCell(strOriginalColumnName)
+        currSheet.SelectColumns(iColumn, 1)
         ' Set the background color for the entire column
-        currSheet.SetRangeStyles(0, iColIndex, currSheet.RowCount, 1, New WorksheetRangeStyle With {
+        currSheet.SetRangeStyles(0, iColumn, currSheet.RowCount, 1, New WorksheetRangeStyle With {
             .Flag = PlainStyleFlag.BackColor,
             .BackColor = Color.LightGreen
         })

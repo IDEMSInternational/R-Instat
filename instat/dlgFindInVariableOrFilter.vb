@@ -20,7 +20,7 @@ Public Class dlgFindInVariableOrFilter
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iCurrentOccurenceIndex As Integer
-    Private iCountClick As Integer
+    Private iCountRowClick, iColumnClick As Integer
     Private clsDummyFunction As New RFunction
     Private clsGetRowsFunction, clsGetRowHeadersFunction,
              clsGetFilterRowNamesFunction, clsGetColSelectionNamesFunction As New RFunction
@@ -43,6 +43,8 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 50
+
         ucrSelectorFind.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFind.SetParameterIsString()
 
@@ -78,6 +80,9 @@ Public Class dlgFindInVariableOrFilter
         ucrPnlOptions.AddToLinkedControls({ucrInputPattern, ucrPnlSelect, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrPnlSelect.SetLinkedDisplayControl(grpSelect)
+
+        ucrBase.OKEnabled(False)
+        ucrBase.cmdReset.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -91,13 +96,15 @@ Public Class dlgFindInVariableOrFilter
         ucrSelectorFind.Reset()
         ucrInputPattern.SetName("")
         lblMatching.Visible = False
+        lblFoundRow.Visible = False
+        iColumnClick = 1
 
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
 
         clsGetFilterRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter_row_names")
 
-        clsGetColSelectionNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_selection_column_indexes")
+        clsGetColSelectionNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_selected_column_names")
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
@@ -130,67 +137,119 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
-            If (rdoVariable.Checked AndAlso String.IsNullOrEmpty(ucrInputPattern.GetText)) Then
-                Exit Sub
-            End If
-            Dim lstRowOrColumnsNumbers As New List(Of Integer)
-            lstRowOrColumnsNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsInteger.ToList
-            lblMatching.Visible = False
-
-            If lstRowOrColumnsNumbers.Count <= 0 Then
-                lblMatching.ForeColor = Color.Red
-                Dim strMAtching As String = "There are no entries matching "
-                If rdoVariable.Checked Then strMAtching &= ucrInputPattern.GetText
-
-                lblMatching.Text = strMAtching
-                lblMatching.Visible = True
-                Exit Sub
-            End If
-
             If rdoVariable.Checked OrElse rdoInFilter.Checked Then
+                Dim lstRowNumbers As New List(Of Integer)
+                lstRowNumbers = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsInteger.ToList
+                lblMatching.Visible = False
+
+                If lstRowNumbers.Count <= 0 Then
+                    lblMatching.ForeColor = Color.Red
+                    Dim strMAtching As String = "There are no entries matching "
+                    If rdoVariable.Checked Then strMAtching &= ucrInputPattern.GetText
+
+                    lblMatching.Text = strMAtching
+                    lblMatching.Visible = True
+                    lblFoundRow.Visible = False
+                    Exit Sub
+                End If
+
                 Dim iFirstRowOnPageRowNumber As Integer = frmMain.ucrDataViewer.GetFirstRowHeader ' e.g. 1 for first page, 1001, for second page etc.
-                Dim iCurrentOccurenceRowNumber As Integer = lstRowOrColumnsNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
+                Dim iCurrentOccurenceRowNumber As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1) ' e.g. if 5 occurences of "Chris", then iCurrentOccurenceIndex is a value between 1 and 5
                 ' Iterate over the list of row numbers to find the page where the row is displayed.
-                For i As Integer = 1 To lstRowOrColumnsNumbers.Count 'loop through occurences
-                    Dim iLoopOccurenceRowNumber As Integer = lstRowOrColumnsNumbers(i - 1)
+                For i As Integer = 1 To lstRowNumbers.Count 'loop through occurences
+                    Dim iLoopOccurenceRowNumber As Integer = lstRowNumbers(i - 1)
                     If iLoopOccurenceRowNumber >= iFirstRowOnPageRowNumber _ 'if row number of loop occurence is on or after current page
-                        AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
+                        AndAlso (iCurrentOccurenceRowNumber < iLoopOccurenceRowNumber OrElse iCountRowClick = 1) Then 'And row number of previous occurence < row number of loop occurence. Or this is the first time we are clicking
                         iCurrentOccurenceIndex = i 'set the current occurence to be loop occurence
                         Exit For
                     End If
                 Next
 
-                If iCurrentOccurenceRowNumber = lstRowOrColumnsNumbers.Max Then
-                    If iCurrentOccurenceIndex > iCountClick Then
-                        iCountClick = iCurrentOccurenceIndex
+                If iCurrentOccurenceRowNumber = lstRowNumbers.Max Then
+                    If iCurrentOccurenceIndex > iCountRowClick Then
+                        iCountRowClick = iCurrentOccurenceIndex
                     Else
-                        iCountClick = 1
+                        iCountRowClick = 1
                     End If
                     iCurrentOccurenceIndex = 1
                 End If
 
                 Dim strColumn As String = ucrReceiverVariable.GetVariableNames
 
-                Dim iRow As Integer = lstRowOrColumnsNumbers(iCurrentOccurenceIndex - 1)
+                Dim iRow As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1)
                 Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
                 frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
                 Dim bApplyCell As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
-                frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowOrColumnsNumbers, strColumn:=strColumn,
+                frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
                                                        iRow:=iRow, bCellOrRow:=Not bApplyCell)
+                lblFoundRow.Text = "Found Row: " & iRow
+                lblFoundRow.ForeColor = Color.Green
+                lblFoundRow.Visible = True
+                iCountRowClick += 1
+                SetControlsVisible(False)
             Else
-                If iCountClick > lstRowOrColumnsNumbers.Count Then
-                    iCountClick = 1
+                Dim lstColumnNames As New List(Of String)
+                lstColumnNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList
+                If iColumnClick > lstColumnNames.Count Then
+                    iColumnClick = 1
                 End If
-                Dim iColumn As Integer = lstRowOrColumnsNumbers(iCountClick - 1)
+
+                Dim strColumn As String = lstColumnNames(iColumnClick - 1)
+                Dim iColumn As Integer = GetColumnIndex(strColumn)
                 Dim iColPage As Integer = Math.Ceiling(CDbl(iColumn / frmMain.clsInstatOptions.iMaxCols))
                 frmMain.ucrDataViewer.GoToSpecificColumnPage(iColPage)
-                frmMain.ucrDataViewer.SearchColumnInGrid(iColumn)
+                frmMain.ucrDataViewer.SearchColumnInGrid(strColumn)
+
+                lblVariableFound.Text = "Found Variable: " & strColumn
+                lblName.Text = "Name: " & strColumn
+                lblLabel.Text = "Label: " & GetColLabel(strColumn)
+                lblVariableFound.ForeColor = Color.Green
+                lblName.ForeColor = Color.Green
+                lblLabel.ForeColor = Color.Green
+                SetControlsVisible(True)
+                lblFoundRow.Visible = False
+                iColumnClick += 1
             End If
-            iCountClick += 1
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    Private Function GetColumnIndex(strColumn As String) As Integer
+        Dim clsGetItems As New RFunction
+        clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+        clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectorFind.strCurrentDataFrame & Chr(34))
+        Dim lstColumns = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript()).AsCharacter.ToList
+
+        Return lstColumns.IndexOf(strColumn)
+    End Function
+
+    Private Function GetColLabel(strColumn As String)
+        Dim strColLabel As String = ""
+        Dim clsColmnLabelsRFunction = New RFunction
+        Dim expItems As SymbolicExpression
+
+        clsColmnLabelsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+        clsColmnLabelsRFunction.AddParameter("data_name", Chr(34) & ucrSelectorFind.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsColmnLabelsRFunction.AddParameter("columns", Chr(34) & strColumn & Chr(34), iPosition:=1)
+
+        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsColmnLabelsRFunction.ToScript(), bSilent:=True)
+
+        If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
+            Dim strArr As String() = expItems.AsCharacter.ToArray
+            If strArr IsNot Nothing Then
+                'the number of labels for a column expected is 1
+                If strArr.Length = 1 Then
+                    strColLabel = strArr(0)
+                ElseIf strArr.Length > 1 Then
+                    MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    strColLabel = strArr(strArr.Length - 1)
+                End If
+            End If
+        End If
+        Return strColLabel
+    End Function
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
@@ -199,13 +258,13 @@ Public Class dlgFindInVariableOrFilter
 
     Private Sub ucrSelectorFind_DataFrameChanged() Handles ucrSelectorFind.DataFrameChanged
         cmdFindNext.Enabled = False
-        iCountClick = 1
+        iCountRowClick = 1
         iCurrentOccurenceIndex = 1
     End Sub
 
     Private Sub ucrInputPattern_TextChanged(sender As Object, e As EventArgs) Handles ucrInputPattern.TextChanged
         cmdFindNext.Enabled = False
-        iCountClick = 1
+        iCountRowClick = 1
         iCurrentOccurenceIndex = 1
     End Sub
 
@@ -225,7 +284,7 @@ Public Class dlgFindInVariableOrFilter
     End Sub
 
     Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
-        iCountClick = 1
+        iCountRowClick = 1
         iCurrentOccurenceIndex = 1
     End Sub
 
@@ -241,21 +300,31 @@ Public Class dlgFindInVariableOrFilter
         End If
     End Sub
 
+    Private Sub SetControlsVisible(bVisible As Boolean)
+        lblLabel.Visible = bVisible
+        lblName.Visible = bVisible
+        lblVariableFound.Visible = bVisible
+    End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         ucrReceiverVariable.Clear()
         lblMatching.Visible = False
+        lblFoundRow.Visible = False
+
         If rdoVariable.Checked Then
             clsGetRowsFunction = clsGetRowHeadersFunction
             clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
             ucrReceiverVariable.SetItemType("column")
             ucrReceiverVariable.strSelectorHeading = "Variables"
             lblVariable.Text = "Variable:"
+            SetControlsVisible(False)
         ElseIf rdoInFilter.Checked Then
             clsGetRowsFunction = clsGetFilterRowNamesFunction
             clsDummyFunction.AddParameter("check", "filter", iPosition:=0)
             ucrReceiverVariable.SetItemType("filter")
             ucrReceiverVariable.strSelectorHeading = "Filters"
             lblVariable.Text = "Filter:"
+            SetControlsVisible(False)
         Else
             clsGetRowsFunction = clsGetColSelectionNamesFunction
             clsDummyFunction.AddParameter("check", "select", iPosition:=0)
