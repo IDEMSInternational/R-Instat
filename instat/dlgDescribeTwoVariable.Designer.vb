@@ -77,6 +77,9 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrPnlDescribe = New instat.UcrPanel()
         Me.ucrReceiverThreeVariableSecondFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverSkimrGroupByFactor = New instat.ucrReceiverSingle()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.lblMarginName = New System.Windows.Forms.Label()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.grpColumnFactor.SuspendLayout()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +103,7 @@ Partial Class dlgDescribeTwoVariable
         'cmdFormatTable
         '
         Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFormatTable.Location = New System.Drawing.Point(317, 421)
+        Me.cmdFormatTable.Location = New System.Drawing.Point(317, 423)
         Me.cmdFormatTable.Name = "cmdFormatTable"
         Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
         Me.cmdFormatTable.TabIndex = 44
@@ -156,7 +159,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpColumnFactor.Controls.Add(Me.rdoVariable)
         Me.grpColumnFactor.Controls.Add(Me.rdoNoColumnFactor)
         Me.grpColumnFactor.Controls.Add(Me.ucrPnlColumnFactor)
-        Me.grpColumnFactor.Location = New System.Drawing.Point(5, 321)
+        Me.grpColumnFactor.Location = New System.Drawing.Point(5, 336)
         Me.grpColumnFactor.Name = "grpColumnFactor"
         Me.grpColumnFactor.Size = New System.Drawing.Size(255, 110)
         Me.grpColumnFactor.TabIndex = 51
@@ -385,9 +388,9 @@ Partial Class dlgDescribeTwoVariable
         '
         'ucrReorderSummary
         '
-        Me.ucrReorderSummary.Location = New System.Drawing.Point(266, 252)
+        Me.ucrReorderSummary.Location = New System.Drawing.Point(266, 258)
         Me.ucrReorderSummary.Name = "ucrReorderSummary"
-        Me.ucrReorderSummary.Size = New System.Drawing.Size(194, 163)
+        Me.ucrReorderSummary.Size = New System.Drawing.Size(194, 156)
         Me.ucrReorderSummary.TabIndex = 52
         Me.ucrReorderSummary.ucrDataFrameList = Nothing
         Me.ucrReorderSummary.ucrReceiver = Nothing
@@ -517,12 +520,45 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSkimrGroupByFactor.TabIndex = 32
         Me.ucrReceiverSkimrGroupByFactor.ucrSelector = Nothing
         '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.AutoSize = True
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(7, 296)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkDisplayMargins.TabIndex = 53
+        '
+        'lblMarginName
+        '
+        Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMarginName.Location = New System.Drawing.Point(14, 318)
+        Me.lblMarginName.Name = "lblMarginName"
+        Me.lblMarginName.Size = New System.Drawing.Size(62, 15)
+        Me.lblMarginName.TabIndex = 54
+        Me.lblMarginName.Tag = ""
+        Me.lblMarginName.Text = "Name:"
+        '
+        'ucrInputMarginName
+        '
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.AutoSize = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(88, 316)
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(158, 21)
+        Me.ucrInputMarginName.TabIndex = 55
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(482, 548)
+        Me.Controls.Add(Me.ucrInputMarginName)
+        Me.Controls.Add(Me.lblMarginName)
+        Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.ucrChkOmitMissing)
@@ -603,4 +639,7 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents cmdSummaries As Button
     Friend WithEvents rdoVariableFactor As RadioButton
     Friend WithEvents ucrReceiverColumnFactor As ucrReceiverSingle
+    Friend WithEvents ucrInputMarginName As ucrInputTextBox
+    Friend WithEvents lblMarginName As Label
+    Friend WithEvents ucrChkDisplayMargins As ucrCheck
 End Class
