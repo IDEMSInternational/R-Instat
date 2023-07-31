@@ -102,9 +102,11 @@ Partial Class ucrAxes
         Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
         Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
         Me.grpSecondAxis = New System.Windows.Forms.GroupBox()
-        Me.ucrChckTransformation = New instat.ucrCheck()
-        Me.ucrInputSecondaryAxis = New instat.ucrInputComboBox()
+        Me.ucrInputTextNameSAxis = New instat.ucrInputTextBox()
         Me.ucrInputTextSecondAxis = New instat.ucrInputTextBox()
+        Me.ucrInputSecondaryAxis = New instat.ucrInputComboBox()
+        Me.ucrChkSecondaryAxis = New instat.ucrCheck()
+        Me.lblTitleSA = New System.Windows.Forms.Label()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -810,24 +812,39 @@ Partial Class ucrAxes
         '
         'grpSecondAxis
         '
+        Me.grpSecondAxis.Controls.Add(Me.lblTitleSA)
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputTextNameSAxis)
         Me.grpSecondAxis.Controls.Add(Me.ucrInputTextSecondAxis)
         Me.grpSecondAxis.Controls.Add(Me.ucrInputSecondaryAxis)
-        Me.grpSecondAxis.Controls.Add(Me.ucrChckTransformation)
+        Me.grpSecondAxis.Controls.Add(Me.ucrChkSecondaryAxis)
         Me.grpSecondAxis.Location = New System.Drawing.Point(9, 334)
         Me.grpSecondAxis.Name = "grpSecondAxis"
-        Me.grpSecondAxis.Size = New System.Drawing.Size(315, 67)
+        Me.grpSecondAxis.Size = New System.Drawing.Size(441, 67)
         Me.grpSecondAxis.TabIndex = 35
         Me.grpSecondAxis.TabStop = False
         Me.grpSecondAxis.Text = "Secondary Axis"
         '
-        'ucrChckTransformation
+        'ucrInputTextNameSAxis
         '
-        Me.ucrChckTransformation.AutoSize = True
-        Me.ucrChckTransformation.Checked = False
-        Me.ucrChckTransformation.Location = New System.Drawing.Point(6, 19)
-        Me.ucrChckTransformation.Name = "ucrChckTransformation"
-        Me.ucrChckTransformation.Size = New System.Drawing.Size(124, 23)
-        Me.ucrChckTransformation.TabIndex = 24
+        Me.ucrInputTextNameSAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextNameSAxis.AutoSize = True
+        Me.ucrInputTextNameSAxis.IsMultiline = False
+        Me.ucrInputTextNameSAxis.IsReadOnly = False
+        Me.ucrInputTextNameSAxis.Location = New System.Drawing.Point(340, 19)
+        Me.ucrInputTextNameSAxis.Name = "ucrInputTextNameSAxis"
+        Me.ucrInputTextNameSAxis.Size = New System.Drawing.Size(79, 21)
+        Me.ucrInputTextNameSAxis.TabIndex = 29
+        '
+        'ucrInputTextSecondAxis
+        '
+        Me.ucrInputTextSecondAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextSecondAxis.AutoSize = True
+        Me.ucrInputTextSecondAxis.IsMultiline = False
+        Me.ucrInputTextSecondAxis.IsReadOnly = False
+        Me.ucrInputTextSecondAxis.Location = New System.Drawing.Point(208, 19)
+        Me.ucrInputTextSecondAxis.Name = "ucrInputTextSecondAxis"
+        Me.ucrInputTextSecondAxis.Size = New System.Drawing.Size(79, 21)
+        Me.ucrInputTextSecondAxis.TabIndex = 28
         '
         'ucrInputSecondaryAxis
         '
@@ -840,16 +857,23 @@ Partial Class ucrAxes
         Me.ucrInputSecondaryAxis.Size = New System.Drawing.Size(78, 23)
         Me.ucrInputSecondaryAxis.TabIndex = 27
         '
-        'ucrInputTextSecondAxis
+        'ucrChkSecondaryAxis
         '
-        Me.ucrInputTextSecondAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputTextSecondAxis.AutoSize = True
-        Me.ucrInputTextSecondAxis.IsMultiline = False
-        Me.ucrInputTextSecondAxis.IsReadOnly = False
-        Me.ucrInputTextSecondAxis.Location = New System.Drawing.Point(208, 21)
-        Me.ucrInputTextSecondAxis.Name = "ucrInputTextSecondAxis"
-        Me.ucrInputTextSecondAxis.Size = New System.Drawing.Size(79, 21)
-        Me.ucrInputTextSecondAxis.TabIndex = 28
+        Me.ucrChkSecondaryAxis.AutoSize = True
+        Me.ucrChkSecondaryAxis.Checked = False
+        Me.ucrChkSecondaryAxis.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkSecondaryAxis.Name = "ucrChkSecondaryAxis"
+        Me.ucrChkSecondaryAxis.Size = New System.Drawing.Size(124, 23)
+        Me.ucrChkSecondaryAxis.TabIndex = 24
+        '
+        'lblTitleSA
+        '
+        Me.lblTitleSA.AutoSize = True
+        Me.lblTitleSA.Location = New System.Drawing.Point(304, 22)
+        Me.lblTitleSA.Name = "lblTitleSA"
+        Me.lblTitleSA.Size = New System.Drawing.Size(30, 13)
+        Me.lblTitleSA.TabIndex = 30
+        Me.lblTitleSA.Text = "Title:"
         '
         'ucrAxes
         '
@@ -947,5 +971,7 @@ Partial Class ucrAxes
     Friend WithEvents grpSecondAxis As GroupBox
     Friend WithEvents ucrInputTextSecondAxis As ucrInputTextBox
     Friend WithEvents ucrInputSecondaryAxis As ucrInputComboBox
-    Friend WithEvents ucrChckTransformation As ucrCheck
+    Friend WithEvents ucrChkSecondaryAxis As ucrCheck
+    Friend WithEvents ucrInputTextNameSAxis As ucrInputTextBox
+    Friend WithEvents lblTitleSA As Label
 End Class
