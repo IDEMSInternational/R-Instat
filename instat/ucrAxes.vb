@@ -515,11 +515,14 @@ Public Class ucrAxes
         grpMinorBreaks.Hide()
         grpScales.Hide()
         grpScaleXDate.Hide()
+        grpSecondAxis.Hide()
+
         If strAxisType.ToLower = "continuous" Then
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
             grpMajorBreaks.Show()
             grpMinorBreaks.Show()
+            grpSecondAxis.Show()
             grpScales.Show()
         ElseIf strAxisType.ToLower = "discrete" Then
             'show discrete panels
@@ -598,17 +601,13 @@ Public Class ucrAxes
     End Sub
 
     Private Sub SecondaryAxis()
-        If ucrInputAxisType.GetText = "continuous" Then
-            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "continuous", clsRFunctionParameter:=clsXYScaleContinuousFunction)
-            If ucrChkSecondaryAxis.Checked Then
-                clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTextSecondAxis.GetText, bIncludeArgumentName:=False, iPosition:=0)
-
-                'clsXYSecondaryAxisFunction.AddParameter("name", Chr(34) & ucrInputTextNameSAxis.GetText() & Chr(34), bIncludeArgumentName:=True)
-                clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
-            Else
-                clsXYScaleContinuousFunction.RemoveParameterByName("sec.axis")
-            End If
-            End If
+        If ucrChkSecondaryAxis.Checked Then
+            clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTextSecondAxis.GetText, bIncludeArgumentName:=False, iPosition:=0)
+            clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
+        Else
+            clsXYScaleContinuousFunction.RemoveParameterByName("sec.axis")
+        End If
+        AddRemoveContinuousXYScales()
     End Sub
 
 
@@ -622,36 +621,17 @@ Public Class ucrAxes
             End If
         End If
     End Sub
-
-    Private Sub ucrChkSecondaryAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSecondaryAxis.ControlValueChanged, ucrInputSecondaryAxis.ControlValueChanged, ucrInputTextSecondAxis.ControlValueChanged
-        SecondaryAxis()
-    End Sub
-
-    'Private Sub AddRemoveName()
-    '    If bRCodeSet Then
-    '        If rdoSecondAxisNoTitle.Checked Then
-    '            clsXYlabTitleFunction.AddParameter("label", Chr(34) & ucrInputTextNameSAxis.GetText() & Chr(34))
-    '            clsBaseOperator.AddParameter(strAxis & "lab", clsRFunctionParameter:=clsXYlabTitleFunction)
-    '        ElseIf rdoSecondAxisSpecifyTitle.Checked AndAlso Not ucrInputTextNameSAxis.IsEmpty Then
-    '            clsXYlabTitleFunction.AddParameter("label", Chr(34) & Chr(34))
-    '            clsBaseOperator.AddParameter(strAxis & "lab", clsRFunctionParameter:=clsXYlabTitleFunction)
-    '        Else
-    '            clsBaseOperator.RemoveParameterByName(strAxis & "lab")
-    '        End If
-    '    End If
-    'End Sub
-
     Private Sub SetNameSecondaryAxis()
-
         clsXYSecondaryAxisFunction.RemoveParameterByName("name")
         If rdoSecondAxisNoTitle.Checked Then
             clsXYSecondaryAxisFunction.AddParameter("name", Chr(34) & Chr(34), iPosition:=1)
         ElseIf rdoSecondAxisSpecifyTitle.Checked AndAlso Not ucrInputTextNameSAxis.IsEmpty Then
             clsXYSecondaryAxisFunction.AddParameter("name", Chr(34) & ucrInputTextNameSAxis.GetText() & Chr(34), iPosition:=1)
         End If
-
     End Sub
-    Private Sub ucrPnlSecondAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSecondAxisTitle.ControlValueChanged, ucrInputTextNameSAxis.ControlValueChanged
+
+    Private Sub ucrChkSecondaryAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSecondaryAxis.ControlValueChanged, ucrInputSecondaryAxis.ControlValueChanged, ucrInputTextSecondAxis.ControlValueChanged, ucrPnlSecondAxisTitle.ControlValueChanged, ucrInputTextNameSAxis.ControlValueChanged
         SetNameSecondaryAxis()
+        SecondaryAxis()
     End Sub
 End Class
