@@ -2907,4 +2907,3 @@ stat_summary_fun <- function(y) {
   out <- boxplot.stats(y)$out; if(length(out) == 0) NA else out
 }
 
-

@@ -350,14 +350,17 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
-        If ucrChkSummary.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
-            clsClimaticMissing.iCallType = 2
+        If rdoMissing.Checked Then
+            If ucrChkSummary.Checked Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
+                clsClimaticMissing.iCallType = 2
+            Else
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
+            End If
+            AddOrRemoveKeyFunctions()
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
         End If
-        AddOrRemoveKeyFunctions()
-
     End Sub
 
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
