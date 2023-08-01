@@ -918,10 +918,6 @@ Public Class frmMain
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
-        mnuEditFind_Click(sender, e)
-    End Sub
-
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataframeColourByProperty.Click
         'TODO change this dialog
         '     dlgMetadata should be separate
@@ -2358,12 +2354,6 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strCurrLang
         translateMenu(mnuBar.Items, Me)
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
-    End Sub
-
-    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
-        If ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.CutText()
-        End If
     End Sub
 
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
