@@ -155,7 +155,6 @@ Public Class dlgFindInVariableOrFilter
         End If
     End Sub
 
-
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
             If rdoVariable.Checked OrElse rdoInFilter.Checked Then
