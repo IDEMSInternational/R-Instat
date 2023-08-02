@@ -2902,48 +2902,26 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
   else return(sprintf("file://%s", file))
 }
 
-# for issue 8342 - adding in a count of the number of elements that have missing values by period (and station)
-cumulative_inventory <- function(data, station = NULL, from, to){
-  if (is.null(station)){
-    data <- data %>%
-      dplyr::group_by(.data[[from]], .data[[to]]) %>%
-      dplyr::mutate(cum=dplyr::n())
-    data <- data %>%
-      dplyr::group_by(.data[[from]]) %>%
-      dplyr::mutate(cum1 = dplyr::n()) %>% 
-      dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
-                                  yes = cum,  
-                                  no = ifelse(cum == max(cum),
-                                              cum,
-                                              max(cum) + 0.5)))
+WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rain){
+  if (water_balance >= frac*capacity){
+    evaporation <- evaporation_value
   } else {
-      data <- data %>%
-        dplyr::group_by(.data[[station]], .data[[from]], .data[[to]]) %>%
-        dplyr::mutate(cum=dplyr::n())
-      data <- data %>%
-        dplyr::group_by(.data[[station]], .data[[from]]) %>%
-        dplyr::mutate(cum1 = dplyr::n()) %>% 
-        dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
-                                    yes = cum,  
-                                    no = ifelse(cum == max(cum),
-                                                cum,
-                                                max(cum) + 0.5)))
+    if (rain == 0){
+      evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+    } else {
+      if (water_balance < frac*capacity){
+        if (rain > evaporation_value){
+          evaporation <- evaporation_value
+        } else {
+          evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+          evaporation <- evaporation + ((evaporation_value - evaporation)*(rain/evaporation_value))
+        }
+      } else {
+        evaporation <- evaporation_value
+        }
     }
-    return(data)
+  }
+  return(evaporation)
 }
 
-getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
-  if(use_regex){
-    # Find the rows that match the search text using regex
-    matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
-  }else if (is.na(searchText)){
-    matchingRows <- apply(data, 1, function(row) any(is.na(row)))
-  }else{
-    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
-  }
-  # Get the row headers where the search text is found
-  rowHeaders <- rownames(data)[matchingRows]
-  
-  # Return the row headers
-  return(rowHeaders)
-}
+
