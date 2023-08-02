@@ -170,10 +170,10 @@ Public Class ucrDataViewLinuxGrid
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
+                            Optional bApplyToRows As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
     End Sub
 
-    Public Sub SearchColumnInGrid(strColumn As String) Implements IDataViewGrid.SearchColumnInGrid
+    Public Sub SelectColumnInGrid(strColumn As String) Implements IDataViewGrid.SelectColumnInGrid
 
     End Sub
 End Class

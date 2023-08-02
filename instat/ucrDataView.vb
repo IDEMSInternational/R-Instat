@@ -1009,12 +1009,12 @@ Public Class ucrDataView
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                           Optional bCellOrRow As Boolean = False)
-        _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bCellOrRow)
+                           Optional bApplyToRows As Boolean = False)
+        _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bApplyToRows)
     End Sub
 
-    Public Sub SearchColumnInGrid(strColumn As String)
-        _grid.SearchColumnInGrid(strColumn)
+    Public Sub SelectColumnInGrid(strColumn As String)
+        _grid.SelectColumnInGrid(strColumn)
     End Sub
 
 End Class

@@ -38,9 +38,9 @@ Public Interface IDataViewGrid
     Sub AddRowData(dataFrame As clsDataFrame)
 
     Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                            Optional bCellOrRow As Boolean = False)
+                            Optional bApplyToRows As Boolean = False)
 
-    Sub SearchColumnInGrid(strColumn As String)
+    Sub SelectColumnInGrid(strColumn As String)
 
     Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
 

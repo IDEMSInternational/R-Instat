@@ -98,6 +98,7 @@ Public Class dlgFindInVariableOrFilter
         lblMatching.Visible = False
         lblFoundRow.Visible = False
         iColumnClick = 1
+        iCountRowClick = 1
 
         clsDummyFunction.AddParameter("check", "variable", iPosition:=0)
         clsDummyFunction.AddParameter("select", "cell", iPosition:=1)
@@ -137,11 +138,10 @@ Public Class dlgFindInVariableOrFilter
 
     Private Function TruncateLabelText(label As Label, strName As String, maximumWidth As Integer) As String
         Dim graphics As Graphics = label.CreateGraphics()
-        Dim originalText As String = strName
         Dim font As Font = label.Font
-        Dim originalWidth As Integer = CInt(graphics.MeasureString(originalText, font).Width)
+        Dim originalWidth As Integer = CInt(graphics.MeasureString(strName, font).Width)
         If originalWidth > maximumWidth Then
-            Dim truncatedText As String = originalText
+            Dim truncatedText As String = strName
             Dim truncatedWidth As Integer = originalWidth
 
             While truncatedWidth > maximumWidth AndAlso truncatedText.Length > 0
@@ -153,7 +153,7 @@ Public Class dlgFindInVariableOrFilter
         Else
             Return strName
         End If
-    End Sub
+    End Function
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
@@ -199,9 +199,9 @@ Public Class dlgFindInVariableOrFilter
                 Dim iRow As Integer = lstRowNumbers(iCurrentOccurenceIndex - 1)
                 Dim iRowPage As Integer = Math.Ceiling(CDbl(iRow / frmMain.clsInstatOptions.iMaxRows))
                 frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
-                Dim bApplyCell As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
+                Dim bApplyToRows As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
                 frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
-                                                       iRow:=iRow, bCellOrRow:=Not bApplyCell)
+                                                       iRow:=iRow, bApplyToRows:=Not bApplyToRows)
                 lblFoundRow.Text = "Found Row: " & iRow
                 lblFoundRow.Visible = True
                 iCountRowClick += 1
@@ -217,7 +217,7 @@ Public Class dlgFindInVariableOrFilter
                 Dim iColumn As Integer = GetColumnIndex(strColumn)
                 Dim iColPage As Integer = Math.Ceiling(CDbl(iColumn / frmMain.clsInstatOptions.iMaxCols))
                 frmMain.ucrDataViewer.GoToSpecificColumnPage(iColPage)
-                frmMain.ucrDataViewer.SearchColumnInGrid(strColumn)
+                frmMain.ucrDataViewer.SelectColumnInGrid(strColumn)
 
                 lblVariableFound.Text = "Found Variable: " & GetColumnIndex(strColumn) + 1
                 Dim strName = "Name: " & strColumn
