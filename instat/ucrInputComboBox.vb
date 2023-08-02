@@ -18,6 +18,7 @@ Imports System.ComponentModel
 
 Public Class ucrInputComboBox
     Private _strRObjectItemsTypeLabel As String = ""
+    Public bKeyPress As Boolean = True
 
     Public Sub New()
 
@@ -225,7 +226,7 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
-        bUserTyped = True
+        bUserTyped = bKeyPress
     End Sub
 
     'Public Sub SetEditable(bEditable As Boolean)
