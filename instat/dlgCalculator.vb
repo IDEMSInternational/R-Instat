@@ -89,7 +89,6 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetIsComboBox()
         ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result")
         ucrCalc.ucrSaveResultInto.SetAssignToIfUncheckedValue("last_calc")
-        ucrCalc.ucrSaveResultInto.ucrInputComboSave.bKeyPress = False
 
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
