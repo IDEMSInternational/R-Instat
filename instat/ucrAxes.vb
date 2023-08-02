@@ -41,6 +41,8 @@ Public Class ucrAxes
         Dim dctTickMarkers As New Dictionary(Of String, String)
         Dim dctDateFormat As New Dictionary(Of String, String)
         Dim dctTempSecondaryAxis As New Dictionary(Of String, String)
+        Dim dctOffset As New Dictionary(Of String, String)
+        Dim dctTransValue As New Dictionary(Of String, String)
 
         'Axis Section
         ucrPnlAxisTitle.AddRadioButton(rdoTitleAuto)
@@ -203,12 +205,13 @@ Public Class ucrAxes
         ucrPnlSecondAxisTitle.AddParameterValuesCondition(rdoSecondAxisSpecifyTitle, "name", "title")
         ucrPnlSecondAxisTitle.AddToLinkedControls(ucrInputTextNameSAxis, {rdoSecondAxisSpecifyTitle}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkSecondaryAxis.SetParameter(New RParameter("sec.axis"))
         ucrChkSecondaryAxis.SetText("Transformation")
-        ucrChkSecondaryAxis.AddParameterPresentCondition(True, "sec.axis", True)
-        ucrChkSecondaryAxis.AddParameterPresentCondition(False, "sec.axis", False)
+        ucrChkSecondaryAxis.AddParameterPresentCondition(True, True)
+        ucrChkSecondaryAxis.AddParameterPresentCondition(False, False)
         ucrChkSecondaryAxis.AddToLinkedControls(ucrInputSecondaryAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="*")
-        ucrChkSecondaryAxis.AddToLinkedControls(ucrInputTextSecondAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
+        ucrChkSecondaryAxis.AddToLinkedControls(ucrInputTrans, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
+        ucrChkSecondaryAxis.AddToLinkedControls(ucrPnlSecondAxisTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSecondaryAxis.AddToLinkedControls(ucrChkOffset, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputSecondaryAxis.SetParameter(New RParameter("trans", bNewIncludeArgumentName:=False))
         dctTempSecondaryAxis.Add("*", "*")
@@ -218,10 +221,39 @@ Public Class ucrAxes
         ucrInputSecondaryAxis.SetItems(dctTempSecondaryAxis)
         ucrInputSecondaryAxis.SetDropDownStyleAsNonEditable()
 
-        ucrInputTextSecondAxis.SetParameter(New RParameter("number", bNewIncludeArgumentName:=False))
-        ucrInputTextSecondAxis.SetParameterIncludeArgumentName(False)
-        ucrInputTextSecondAxis.SetValidationTypeAsNumeric()
-        ucrInputTextSecondAxis.AddQuotesIfUnrecognised = False
+        ucrChkOffset.SetText("Offset")
+        ucrChkOffset.AddParameterPresentCondition(True, True)
+        ucrChkOffset.AddParameterPresentCondition(False, False)
+        ucrChkOffset.AddToLinkedControls(ucrInputOffset, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+
+        ucrInputOffset.SetParameter(New RParameter("signe", bNewIncludeArgumentName:=False))
+        dctOffset.Add("0", "0")
+        dctOffset.Add("32", "32")
+        dctOffset.Add("-32", "-32")
+        ucrInputOffset.SetItems(dctOffset)
+        ucrInputOffset.SetDropDownStyleAsNonEditable()
+
+        ucrInputTrans.SetParameter(New RParameter("number", bNewIncludeArgumentName:=False))
+        dctTransValue.Add("1", "1")
+        dctTransValue.Add("1.09361", "1.09361")
+        dctTransValue.Add("1.34", "1.34")
+        dctTransValue.Add("1.8", "1.8")
+        dctTransValue.Add("2.20462", "2.20462")
+        dctTransValue.Add("2.54", "2.54")
+        dctTransValue.Add("7", "7")
+        dctTransValue.Add("9.632", "9.632")
+        dctTransValue.Add("10.15", "10.15")
+        dctTransValue.Add("13", "13")
+        dctTransValue.Add("20", "20")
+        dctTransValue.Add("25.0128", "25.0128")
+        dctTransValue.Add("100", "100")
+        dctTransValue.Add("30.6682", "30.6682")
+        dctTransValue.Add("40", "40")
+        dctTransValue.Add("600.26", "600.26")
+        dctTransValue.Add("1000", "1000")
+        ucrInputTrans.SetItems(dctTransValue)
+        ucrInputTrans.SetDropDownStyleAsNonEditable()
+        ucrInputTrans.SetDropDownStyleAsEditable(True)
 
         ucrInputTextNameSAxis.SetLinkedDisplayControl(lblTitleSA)
 
@@ -326,7 +358,6 @@ Public Class ucrAxes
         clsXYScaleDateBreakOperator.bToScriptAsRString = True
 
         clsDummyFunction = New RFunction
-        clsDummyFunction.AddParameter("sec.axis", "TRUE", iPosition:=0)
         clsDummyFunction.AddParameter("name", "auto", iPosition:=1)
 
         clsXYSecondaryAxisFunction = New RFunction
@@ -386,7 +417,7 @@ Public Class ucrAxes
 
         If bReset Then
             ucrPnlSecondAxisTitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-            ucrChkSecondaryAxis.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkSecondaryAxis.SetRCode(clsXYSecondaryAxisFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrInputSecondaryAxis.SetRCode(clsXYSecondaryAxisFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
 
@@ -587,8 +618,22 @@ Public Class ucrAxes
 
     Private Sub SecondaryAxis()
         If ucrChkSecondaryAxis.Checked Then
-            clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTextSecondAxis.GetText, bIncludeArgumentName:=False, iPosition:=0)
-            clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
+            If ucrChkOffset.Checked Then
+                If ucrInputOffset.GetText = "0" Then
+                    clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTrans.GetText, bIncludeArgumentName:=False, iPosition:=0)
+                    clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
+                ElseIf ucrInputOffset.GetText = "-32" Then
+                    clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTrans.GetText & ucrInputOffset.GetText, bIncludeArgumentName:=False, iPosition:=0)
+                    clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
+                ElseIf ucrInputOffset.GetText = "32" Then
+                    clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTrans.GetText & "+" & ucrInputOffset.GetText, bIncludeArgumentName:=False, iPosition:=0)
+                    clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
+                End If
+            Else
+                clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTrans.GetText, bIncludeArgumentName:=False, iPosition:=0)
+                clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
+
+            End If
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("sec.axis")
         End If
@@ -615,7 +660,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrChkSecondaryAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSecondaryAxis.ControlValueChanged, ucrInputSecondaryAxis.ControlValueChanged, ucrInputTextSecondAxis.ControlValueChanged, ucrPnlSecondAxisTitle.ControlValueChanged, ucrInputTextNameSAxis.ControlValueChanged
+    Private Sub ucrChkSecondaryAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSecondaryAxis.ControlValueChanged, ucrInputSecondaryAxis.ControlValueChanged, ucrPnlSecondAxisTitle.ControlValueChanged, ucrInputTextNameSAxis.ControlValueChanged, ucrInputTrans.ControlValueChanged, ucrChkOffset.ControlValueChanged, ucrInputOffset.ControlValueChanged
         SetNameSecondaryAxis()
         SecondaryAxis()
     End Sub
