@@ -222,9 +222,9 @@ Public Class dlgFindInVariableOrFilter
 
                 lblVariableFound.Text = "Found Variable: " & GetColumnIndex(strColumn) + 1
                 Dim strName = "Name: " & strColumn
-                TruncateLabelText(lblName, strName, 135)
+                lblName.Text = TruncateLabelText(lblName, strName, 135)
                 Dim strLabel = "Label: " & GetColLabel(strColumn)
-                TruncateLabelText(lblLabel, strLabel, 135)
+                lblLabel.Text = TruncateLabelText(lblLabel, strLabel, 135)
                 SetControlsVisible(True)
                 lblFoundRow.Visible = False
 
