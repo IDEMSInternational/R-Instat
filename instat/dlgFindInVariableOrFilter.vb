@@ -135,7 +135,7 @@ Public Class dlgFindInVariableOrFilter
             ((rdoInFilter.Checked OrElse rdoSelect.Checked) AndAlso Not ucrReceiverVariable.IsEmpty)
     End Sub
 
-    Private Sub TruncateLabelText(label As Label, strName As String, maximumWidth As Integer)
+    Private Function TruncateLabelText(label As Label, strName As String, maximumWidth As Integer) As String
         Dim graphics As Graphics = label.CreateGraphics()
         Dim originalText As String = strName
         Dim font As Font = label.Font
