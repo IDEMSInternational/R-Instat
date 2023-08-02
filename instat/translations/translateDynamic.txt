@@ -128,7 +128,7 @@ sdgSaveColumnPosition\_ucrChkKeepExistingPos%
 %\_cmdPlotOptions%
 %\_cmdTransform%
 %\_cmdVariables%
-%\_dlgPICSARainfall%
+dlgPICSARainfall
 %\_frmMain%
 %\_grdCurrentWorkSheet%
 %\_grpCSV%
