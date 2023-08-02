@@ -149,9 +149,9 @@ Public Class dlgFindInVariableOrFilter
                 truncatedWidth = CInt(graphics.MeasureString(truncatedText & "...", font).Width)
             End While
 
-            label.Text = truncatedText & "..."
+            Return truncatedText & "..."
         Else
-            label.Text = strName
+            Return strName
         End If
     End Sub
 
