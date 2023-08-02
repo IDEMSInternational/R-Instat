@@ -770,7 +770,6 @@ Public Class ucrAxes
     Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged
         If ucrChkLimitsFrom.Checked AndAlso Not ucrNudFrom.IsEmpty Then
             clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
-            'clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
             clsLeftBracketOperator.RemoveParameterByName("right")
@@ -780,8 +779,6 @@ Public Class ucrAxes
 
     Private Sub ucrChkLimitsTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsTo.ControlValueChanged, ucrNudTo.ControlValueChanged
         If ucrChkLimitsTo.Checked AndAlso Not ucrNudTo.IsEmpty Then
-            'clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
-
             clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("limits")

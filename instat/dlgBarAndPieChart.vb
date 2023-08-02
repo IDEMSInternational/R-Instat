@@ -623,7 +623,6 @@ Public Class dlgBarAndPieChart
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        Re0rderLevels()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -674,7 +673,6 @@ Public Class dlgBarAndPieChart
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkIncreaseSize.SetRCode(clsDummyFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
-        Re0rderLevels()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -996,7 +994,7 @@ Public Class dlgBarAndPieChart
                     clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                 Case strNone
                     clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
-
+                    clsBarAesFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
             End Select
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
