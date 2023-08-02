@@ -32,6 +32,7 @@ Public Class sdgPlots
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
     Public clsYScalecontinuousFunction As New RFunction
+    Public clsXScaleDiscreteFunction As New RFunction
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
@@ -626,7 +627,8 @@ Public Class sdgPlots
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewXScaleDiscreteFunction As RFunction = Nothing, Optional clsNewYScaleDiscreteFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewXScaleDiscreteFunction As RFunction = Nothing,
+                        Optional clsNewYScaleDiscreteFunction As RFunction = Nothing, Optional clsNewConcatenateFunction As RFunction = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional clsNewLeftBracketOperator As ROperator = Nothing, Optional clsNewRightBracketOperator As ROperator = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
@@ -649,6 +651,7 @@ Public Class sdgPlots
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
+        clsXScaleDiscreteFunction = clsNewXScaleDiscreteFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
@@ -749,8 +752,8 @@ Public Class sdgPlots
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsNewXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewLeftBracketOperator:=clsNewLeftBracketOperator, clsNewRightBracketOperator:=clsNewRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsNewYScaleDiscreteFunction, clsNewLeftBracketOperator:=clsNewLeftBracketOperator, clsNewRightBracketOperator:=clsNewRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewLeftBracketOperator:=clsNewLeftBracketOperator, clsNewRightBracketOperator:=clsNewRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsNewYScaleDiscreteFunction, clsNewLeftBracketOperator:=clsNewLeftBracketOperator, clsNewConcatenateFunction:=clsNewConcatenateFunction, clsNewRightBracketOperator:=clsNewRightBracketOperator, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)

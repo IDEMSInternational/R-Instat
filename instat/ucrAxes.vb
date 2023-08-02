@@ -31,6 +31,7 @@ Public Class ucrAxes
     Public clsMinorBreaksSeqDiscreteFunction As New RFunction
     Public clsXYScaleDateBreakOperator As New ROperator
     Public clsXYScaleDateLimitFunction As New RFunction
+    Public clsConcatenateFunction As New RFunction
     Public clsLeftBracketOperator As New ROperator
     Public clsRightBracketOperator As New ROperator
     Public strAxis As String
@@ -317,7 +318,8 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYScaleDiscreteFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional clsNewLeftBracketOperator As ROperator = Nothing, Optional clsNewRightBracketOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYScaleDiscreteFunction As RFunction = Nothing, Optional clsNewConcatenateFunction As RFunction = Nothing,
+                                  Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional clsNewLeftBracketOperator As ROperator = Nothing, Optional clsNewRightBracketOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -367,6 +369,7 @@ Public Class ucrAxes
         clsXYScaleDateFunction = clsNewXYScaleDateFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
         clsXYScaleDiscreteFunction = clsNewXYScaleDiscreteFunction
+        clsConcatenateFunction = clsNewConcatenateFunction
         clsLeftBracketOperator = clsNewLeftBracketOperator
         clsRightBracketOperator = clsNewRightBracketOperator
 
@@ -767,12 +770,23 @@ Public Class ucrAxes
     Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged
         If ucrChkLimitsFrom.Checked AndAlso Not ucrNudFrom.IsEmpty Then
             clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
+            'clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+            clsLeftBracketOperator.RemoveParameterByName("right")
         End If
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub ucrChkLimitsTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsTo.ControlValueChanged, ucrNudTo.ControlValueChanged
         If ucrChkLimitsTo.Checked AndAlso Not ucrNudTo.IsEmpty Then
+            'clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
+
             clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+            clsRightBracketOperator.RemoveParameterByName("left")
         End If
+        AddRemoveDiscreteXYScales()
     End Sub
 End Class

@@ -623,6 +623,7 @@ Public Class dlgBarAndPieChart
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        Re0rderLevels()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -673,6 +674,7 @@ Public Class dlgBarAndPieChart
         ucrNudMaxSize.SetRCode(clsScaleSizeAreaFunction, bReset)
         ucrChkIncreaseSize.SetRCode(clsDummyFunction, bReset)
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
+        Re0rderLevels()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -756,8 +758,9 @@ Public Class dlgBarAndPieChart
                                 clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsLabelAesFunction, ucrNewBaseSelector:=ucrBarChartSelector,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                clsNewLeftBracketOperator:=clsLeftBracketOperator, clsNewRightBracketOperator:=clsRightBracketOperator,
+                                clsNewLeftBracketOperator:=clsLeftBracketOperator, clsNewRightBracketOperator:=clsRightBracketOperator, clsNewConcatenateFunction:=clsConcatenateFunction,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        Re0rderLevels()
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -838,7 +841,7 @@ Public Class dlgBarAndPieChart
                 Case strDescending
                     clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
                 Case strReverse
-                    clsForecatsReverse.AddParameter("f", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+                    clsForecatsReverse.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
                     clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
             End Select
             Select Case strChangedTextValue
@@ -962,7 +965,7 @@ Public Class dlgBarAndPieChart
         ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
-        AddLevels()
+        Re0rderLevels()
 
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
@@ -976,9 +979,25 @@ Public Class dlgBarAndPieChart
         ucrChkBacktoback.Enabled = If(Not ucrReceiverByFactor.IsEmpty AndAlso (rdoFrequency.Checked OrElse rdoValue.Checked), True, False)
     End Sub
 
-    Private Sub AddLevels()
+    Private Sub Re0rderLevels()
+        Dim strChangedTextFreq As String = ucrInputReorderX.GetText()
+
         If ucrVariablesAsFactorForBarChart.bSingleVariable Then
-            clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
+            clsForecatsInfreq.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+
+            Select Case strChangedTextFreq
+                Case strAscending
+                    clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+                    clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                Case strDescending
+                    clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+                Case strReverse
+                    clsForecatsReverse.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+                    clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                Case strNone
+                    clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
+
+            End Select
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
@@ -1103,5 +1122,4 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
-
 End Class
