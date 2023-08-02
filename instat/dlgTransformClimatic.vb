@@ -731,7 +731,7 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
@@ -767,7 +767,7 @@ Public Class dlgTransformClimatic
         End Select
     End Sub
 
-    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlDegree.ControlValueChanged
+    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore)
         If rdoCumulative.Checked Then
             CumulativeFunctions()
             clsRTransform.RemoveParameterByName("sub_calculations")
@@ -923,7 +923,7 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
     End Sub
 
-    Private Sub ucrSelectorTransform_ControlValueChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlValueChanged
+    Private Sub ucrSelectorTransform_ControlValueChanged(ucrchangedControl As ucrCore)
         strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         RainDays()
         GroupByYear()
@@ -933,36 +933,38 @@ Public Class dlgTransformClimatic
         AddCalculate()
     End Sub
 
-    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
+    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore)
         InputConditionOptions()
     End Sub
 
-    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrReceiverEvap.ControlValueChanged
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore)
         RainDays()
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore)
         GroupByStation()
     End Sub
 
-    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
+    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore)
         GroupByYear()
         CheckGroupByYearEnabled()
     End Sub
 
-    Private Sub ucrInputSum_ControlValueChanged(ucrchangedControl As ucrCore) Handles ucrInputSum.ControlValueChanged
+    Private Sub ucrInputSum_ControlValueChanged(ucrchangedControl As ucrCore)
         MovingColNames()
     End Sub
 
-    Private Sub ucrChkGroupByYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGroupByYear.ControlValueChanged
+    Private Sub ucrChkGroupByYear_ControlValueChanged(ucrChangedControl As ucrCore)
         GroupByYear()
         CheckGroupByYearEnabled()
     End Sub
 
-    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged, ucrPnlEvap.ControlContentsChanged
+    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore)
         ReduceWaterBalance()
     End Sub
+
+
 
     Private Sub RasterFunction()
         If rdoMoving.Checked Then
@@ -1044,8 +1046,7 @@ Public Class dlgTransformClimatic
                                        "," & strCurrDataName & "=" & ucrReceiverTMin.GetVariableNames & ")")
         End If
     End Sub
-    Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrPnlTransform.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudMultSpells.ControlContentsChanged,
-        ucrChkUseMaxMin.ControlContentsChanged, ucrReceiverTMin.ControlContentsChanged, ucrReceiverTMean.ControlContentsChanged, ucrReceiverTMax.ControlContentsChanged, ucrPnlDegree.ControlContentsChanged, ucrNudGDD.ControlContentsChanged, ucrNudHDD.ControlContentsChanged, ucrNudMgdd.ControlContentsChanged
+    Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -1081,17 +1082,18 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrChkUseMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseMaxMin.ControlValueChanged, ucrNudGDD.ControlValueChanged, ucrNudHDD.ControlValueChanged, ucrNudMgdd.ControlValueChanged
+    Private Sub ucrChkUseMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseMaxMin.ControlValueChanged
         AddRemoveMeanOperator()
         SetAsReceiver()
         ChangeFunctions()
     End Sub
 
-    Private Sub ucrReceiverTMax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTMax.ControlValueChanged, ucrReceiverTMean.ControlValueChanged, ucrReceiverTMin.ControlValueChanged
+    Private Sub ucrReceiverTMax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTMax.ControlValueChanged
         ChangeFunctions()
         AddRemoveMeanOperator()
         AddCalculate()
     End Sub
+
     Private Sub ReduceWaterBalance()
         If rdoWaterBalance.Checked Then
             If rdoEvapValue.Checked Then
@@ -1122,8 +1124,7 @@ Public Class dlgTransformClimatic
     Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged
         ReduceWaterBalance()
     End Sub
-
-    Private Sub rdoEvapValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEvapValue.CheckedChanged, rdoEvapVariable.CheckedChanged
+    Private Sub rdoEvapValue_CheckedChanged(sender As Object, e As EventArgs) Handles rdoEvapValue.CheckedChanged
         ReduceWaterBalance()
     End Sub
 End Class
