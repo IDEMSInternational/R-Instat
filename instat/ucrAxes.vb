@@ -157,17 +157,17 @@ Public Class ucrAxes
         ucrChkBreakDiscret.AddToLinkedControls(ucrInputBreaksDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrInputBreaksDiscrete.SetValidationTypeAsList()
 
-        ucrChkLimitsFrom.SetText("From")
+        ucrChkLimitsFrom.SetText("Limits")
         ucrChkLimitsFrom.AddParameterPresentCondition(True, "from")
         ucrChkLimitsFrom.AddParameterPresentCondition(False, "from", False)
         ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrNudFrom.SetMinMax(1, Integer.MaxValue)
+        ucrChkLimitsFrom.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
 
-        ucrChkLimitsTo.SetText("To")
-        ucrChkLimitsTo.AddParameterPresentCondition(True, "to")
-        ucrChkLimitsTo.AddParameterPresentCondition(False, "to", False)
-        ucrChkLimitsTo.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrNudFrom.SetMinMax(1, Integer.MaxValue)
         ucrNudTo.SetMinMax(1, Integer.MaxValue)
+
+        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrNudTo.SetLinkedDisplayControl(lblTo)
 
         'Scales section
         ucrPnlScales.AddRadioButton(rdoScalesAuto)
@@ -501,8 +501,7 @@ Public Class ucrAxes
 
         bRCodeSet = True
         If bReset Then
-            ucrChkLimitsFrom.SetRCode(clsLeftBracketOperator, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-            ucrChkLimitsTo.SetRCode(clsRightBracketOperator, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkLimitsFrom.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
             ucrInputPositionDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrChkPositionDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -767,23 +766,21 @@ Public Class ucrAxes
         SetBreaksDiscrete()
     End Sub
 
-    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged
-        If ucrChkLimitsFrom.Checked AndAlso Not ucrNudFrom.IsEmpty Then
-            clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
+        If ucrChkLimitsFrom.Checked Then
+            clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
+            If Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
+                clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
+                clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+            Else
+                clsLeftBracketOperator.RemoveParameterByName("right")
+                clsRightBracketOperator.RemoveParameterByName("left")
+                clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+            End If
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
-            clsLeftBracketOperator.RemoveParameterByName("right")
         End If
         AddRemoveDiscreteXYScales()
     End Sub
 
-    Private Sub ucrChkLimitsTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsTo.ControlValueChanged, ucrNudTo.ControlValueChanged
-        If ucrChkLimitsTo.Checked AndAlso Not ucrNudTo.IsEmpty Then
-            clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
-        Else
-            clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
-            clsRightBracketOperator.RemoveParameterByName("left")
-        End If
-        AddRemoveDiscreteXYScales()
-    End Sub
 End Class

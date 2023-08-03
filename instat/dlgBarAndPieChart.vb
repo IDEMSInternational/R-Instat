@@ -982,20 +982,24 @@ Public Class dlgBarAndPieChart
 
         If ucrVariablesAsFactorForBarChart.bSingleVariable Then
             clsForecatsInfreq.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
-
-            Select Case strChangedTextFreq
-                Case strAscending
-                    clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
-                    clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                Case strDescending
-                    clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
-                Case strReverse
-                    clsForecatsReverse.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
-                    clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                Case strNone
-                    clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
-                    clsBarAesFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
-            End Select
+            If ucrChkReorderFrequency.Checked Then
+                Select Case strChangedTextFreq
+                    Case strAscending
+                        clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+                        clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                    Case strDescending
+                        clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+                    Case strReverse
+                        clsForecatsReverse.AddParameter("f", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+                        clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                    Case strNone
+                        clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
+                        clsBarAesFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+                End Select
+            Else
+                clsLevelsFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", bIncludeArgumentName:=False)
+                clsBarAesFunction.AddParameter("x", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=0)
+            End If
             clsXScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
         Else
             clsXScaleDiscreteFunction.RemoveParameterByName("limits")
