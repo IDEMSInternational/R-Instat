@@ -649,6 +649,7 @@ Public Class ucrAxes
             End If
         End If
     End Sub
+
     Private Sub SetNameSecondaryAxis()
         clsXYSecondaryAxisFunction.RemoveParameterByName("name")
         If rdoSecondAxisNoTitle.Checked Then
