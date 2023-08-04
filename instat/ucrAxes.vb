@@ -639,7 +639,6 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-
     Private Sub ScaleDateFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimits.ControlValueChanged, ucrChkBreaks.ControlValueChanged
         If bRCodeSet Then
             If ucrChkLimits.Checked Then
