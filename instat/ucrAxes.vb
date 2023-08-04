@@ -632,7 +632,6 @@ Public Class ucrAxes
             Else
                 clsXYSecondaryAxisFunction.AddParameter("trans", "~." & ucrInputSecondaryAxis.GetText & ucrInputTrans.GetText, bIncludeArgumentName:=False, iPosition:=0)
                 clsXYScaleContinuousFunction.AddParameter("sec.axis", clsRFunctionParameter:=clsXYSecondaryAxisFunction, bIncludeArgumentName:=True)
-
             End If
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("sec.axis")
