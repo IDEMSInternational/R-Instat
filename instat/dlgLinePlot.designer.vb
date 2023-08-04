@@ -54,8 +54,8 @@ Partial Class dlgLinePlot
         Me.ucrChkFormula = New instat.ucrCheck()
         Me.ucrChkAddSE = New instat.ucrCheck()
         Me.ucrNudSpan = New instat.ucrNud()
-        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.rdoRibbon = New System.Windows.Forms.RadioButton()
         Me.rdoPointrange = New System.Windows.Forms.RadioButton()
         Me.rdoErrorbar = New System.Windows.Forms.RadioButton()
@@ -134,9 +134,11 @@ Partial Class dlgLinePlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverXEnd = New instat.ucrReceiverSingle()
         Me.ucrReceiverSlopeColour = New instat.ucrReceiverSingle()
-        Me.ucrChkArea = New instat.ucrCheck()
         Me.ucrReceiverSlopeX = New instat.ucrReceiverSingle()
         Me.ucrPnlLinerangeOptions = New instat.UcrPanel()
+        Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
+        Me.lblGroupLine = New System.Windows.Forms.Label()
+        Me.rdoArea = New System.Windows.Forms.RadioButton()
         Me.grpSmoothOptions.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -176,7 +178,7 @@ Partial Class dlgLinePlot
         '
         Me.rdoPath.AutoSize = True
         Me.rdoPath.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPath.Location = New System.Drawing.Point(165, 417)
+        Me.rdoPath.Location = New System.Drawing.Point(246, 420)
         Me.rdoPath.Name = "rdoPath"
         Me.rdoPath.Size = New System.Drawing.Size(47, 17)
         Me.rdoPath.TabIndex = 67
@@ -188,7 +190,7 @@ Partial Class dlgLinePlot
         '
         Me.rdoStep.AutoSize = True
         Me.rdoStep.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStep.Location = New System.Drawing.Point(220, 417)
+        Me.rdoStep.Location = New System.Drawing.Point(314, 420)
         Me.rdoStep.Name = "rdoStep"
         Me.rdoStep.Size = New System.Drawing.Size(47, 17)
         Me.rdoStep.TabIndex = 68
@@ -323,17 +325,6 @@ Partial Class dlgLinePlot
         Me.ucrNudSpan.TabIndex = 6
         Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrFamilyInput
-        '
-        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
-        Me.ucrFamilyInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrFamilyInput.GetSetSelectedIndex = -1
-        Me.ucrFamilyInput.IsReadOnly = False
-        Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
-        Me.ucrFamilyInput.Name = "ucrFamilyInput"
-        Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
-        Me.ucrFamilyInput.TabIndex = 5
-        '
         'ucrInputMethod
         '
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
@@ -344,6 +335,17 @@ Partial Class dlgLinePlot
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(90, 21)
         Me.ucrInputMethod.TabIndex = 2
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        Me.ucrFamilyInput.Location = New System.Drawing.Point(210, 20)
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
+        Me.ucrFamilyInput.Size = New System.Drawing.Size(110, 24)
+        Me.ucrFamilyInput.TabIndex = 5
         '
         'rdoRibbon
         '
@@ -905,9 +907,9 @@ Partial Class dlgLinePlot
         'ucrPnlStepOrPath
         '
         Me.ucrPnlStepOrPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStepOrPath.Location = New System.Drawing.Point(150, 411)
+        Me.ucrPnlStepOrPath.Location = New System.Drawing.Point(168, 414)
         Me.ucrPnlStepOrPath.Name = "ucrPnlStepOrPath"
-        Me.ucrPnlStepOrPath.Size = New System.Drawing.Size(148, 29)
+        Me.ucrPnlStepOrPath.Size = New System.Drawing.Size(222, 29)
         Me.ucrPnlStepOrPath.TabIndex = 66
         '
         'ucrChkPathOrStep
@@ -1175,15 +1177,6 @@ Partial Class dlgLinePlot
         Me.ucrReceiverSlopeColour.TabIndex = 43
         Me.ucrReceiverSlopeColour.ucrSelector = Nothing
         '
-        'ucrChkArea
-        '
-        Me.ucrChkArea.AutoSize = True
-        Me.ucrChkArea.Checked = False
-        Me.ucrChkArea.Location = New System.Drawing.Point(9, 389)
-        Me.ucrChkArea.Name = "ucrChkArea"
-        Me.ucrChkArea.Size = New System.Drawing.Size(149, 23)
-        Me.ucrChkArea.TabIndex = 29
-        '
         'ucrReceiverSlopeX
         '
         Me.ucrReceiverSlopeX.AutoSize = True
@@ -1205,11 +1198,50 @@ Partial Class dlgLinePlot
         Me.ucrPnlLinerangeOptions.Size = New System.Drawing.Size(385, 33)
         Me.ucrPnlLinerangeOptions.TabIndex = 2
         '
+        'ucrReceiverGroup
+        '
+        Me.ucrReceiverGroup.AutoSize = True
+        Me.ucrReceiverGroup.frmParent = Me
+        Me.ucrReceiverGroup.Location = New System.Drawing.Point(284, 334)
+        Me.ucrReceiverGroup.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
+        Me.ucrReceiverGroup.Selector = Nothing
+        Me.ucrReceiverGroup.Size = New System.Drawing.Size(128, 26)
+        Me.ucrReceiverGroup.strNcFilePath = ""
+        Me.ucrReceiverGroup.TabIndex = 76
+        Me.ucrReceiverGroup.ucrSelector = Nothing
+        '
+        'lblGroupLine
+        '
+        Me.lblGroupLine.AutoSize = True
+        Me.lblGroupLine.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGroupLine.Location = New System.Drawing.Point(284, 320)
+        Me.lblGroupLine.Name = "lblGroupLine"
+        Me.lblGroupLine.Size = New System.Drawing.Size(39, 13)
+        Me.lblGroupLine.TabIndex = 77
+        Me.lblGroupLine.Tag = ""
+        Me.lblGroupLine.Text = "Group:"
+        '
+        'rdoArea
+        '
+        Me.rdoArea.AutoSize = True
+        Me.rdoArea.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoArea.Location = New System.Drawing.Point(178, 420)
+        Me.rdoArea.Name = "rdoArea"
+        Me.rdoArea.Size = New System.Drawing.Size(47, 17)
+        Me.rdoArea.TabIndex = 78
+        Me.rdoArea.TabStop = True
+        Me.rdoArea.Text = "Area"
+        Me.rdoArea.UseVisualStyleBackColor = True
+        '
         'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(423, 523)
+        Me.Controls.Add(Me.rdoArea)
+        Me.Controls.Add(Me.lblGroupLine)
+        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.rdoErrorbar)
         Me.Controls.Add(Me.rdoPointrange)
         Me.Controls.Add(Me.rdoRibbon)
@@ -1253,7 +1285,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.rdoStep)
         Me.Controls.Add(Me.rdoPath)
-        Me.Controls.Add(Me.ucrPnlStepOrPath)
         Me.Controls.Add(Me.ucrChkPathOrStep)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
@@ -1286,10 +1317,10 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.ucrReceiverXEnd)
         Me.Controls.Add(Me.ucrReceiverSlopeColour)
-        Me.Controls.Add(Me.ucrChkArea)
         Me.Controls.Add(Me.ucrReceiverSlopeX)
         Me.Controls.Add(Me.ucrPnlLinerangeOptions)
         Me.Controls.Add(Me.grpSmoothOptions)
+        Me.Controls.Add(Me.ucrPnlStepOrPath)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1387,7 +1418,6 @@ Partial Class dlgLinePlot
     Friend WithEvents PathOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StepOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AreaOptionsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ucrChkArea As ucrCheck
     Friend WithEvents rdoLinerange As RadioButton
     Friend WithEvents rdoDumbbell As RadioButton
     Friend WithEvents ucrReceiverYMax As ucrReceiverSingle
@@ -1402,4 +1432,7 @@ Partial Class dlgLinePlot
     Friend WithEvents rdoErrorbar As RadioButton
     Friend WithEvents lblYVar As Label
     Friend WithEvents ucrReceiverYVar As ucrReceiverSingle
+    Friend WithEvents lblGroupLine As Label
+    Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
+    Friend WithEvents rdoArea As RadioButton
 End Class

@@ -61,7 +61,7 @@ Public Class dlgLinePlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strgeomSmoothParameterName As String = "geom_smooth"
-    Private strgeomAreaParameterName As String = "geom_area"
+    ' Private strgeomAreaParameterName As String = "geom_area"
     Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName}
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -83,8 +83,8 @@ Public Class dlgLinePlot
         Dim clsGeomPointParam As New RParameter
         Dim clsGeomLineFunction As New RFunction
         Dim clsGeomLineParameter As New RParameter
-        Dim clsGeomAreaFunc As New RFunction
-        Dim clsGeomAreaParameter As New RParameter
+        ' Dim clsGeomAreaFunc As New RFunction
+        ' Dim clsGeomAreaParameter As New RParameter
         Dim dctMethodOptions As New Dictionary(Of String, String)
         Dim dctFamilyOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
@@ -117,6 +117,11 @@ Public Class dlgLinePlot
         ucrFactorOptionalReceiver.strSelectorHeading = "Factors"
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
+
+        ucrReceiverGroup.SetParameter(New RParameter("group", 2))
+        ucrReceiverGroup.Selector = ucrLinePlotSelector
+        ucrReceiverGroup.bWithQuotes = False
+        ucrReceiverGroup.SetParameterIsString()
 
         ucrReceiverSlopeX.SetParameter(New RParameter("x", 1))
         ucrReceiverSlopeX.Selector = ucrLinePlotSelector
@@ -189,13 +194,13 @@ Public Class dlgLinePlot
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        clsGeomAreaFunc.SetPackageName("ggplot2")
-        clsGeomAreaFunc.SetRCommand("geom_area")
-        clsGeomAreaParameter.SetArgumentName("geom_area")
-        clsGeomAreaParameter.SetArgument(clsGeomAreaFunc)
-        clsGeomAreaParameter.Position = 5
-        ucrChkArea.SetText("Area")
-        ucrChkArea.SetParameter(clsGeomAreaParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        'clsGeomAreaFunc.SetPackageName("ggplot2")
+        'clsGeomAreaFunc.SetRCommand("geom_area")
+        'clsGeomAreaParameter.SetArgumentName("geom_area")
+        'clsGeomAreaParameter.SetArgument(clsGeomAreaFunc)
+        'clsGeomAreaParameter.Position = 5
+        'ucrChkArea.SetText("Area")
+        'ucrChkArea.SetParameter(clsGeomAreaParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("Add SE")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
@@ -213,15 +218,17 @@ Public Class dlgLinePlot
         ucrSave.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
 
-        ucrPnlStepOrPath.AddRadioButton(rdoStep)
+        ucrPnlStepOrPath.AddRadioButton(rdoArea)
         ucrPnlStepOrPath.AddRadioButton(rdoPath)
+        ucrPnlStepOrPath.AddRadioButton(rdoStep)
+        ucrPnlStepOrPath.AddFunctionNamesCondition(rdoArea, "geom_area")
         ucrPnlStepOrPath.AddFunctionNamesCondition(rdoPath, "geom_path")
         ucrPnlStepOrPath.AddFunctionNamesCondition(rdoStep, "geom_step")
         ucrChkPathOrStep.AddToLinkedControls(ucrPnlStepOrPath, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPathOrStep.SetText("Path or Step")
-        ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_step", "geom_path"})
-        ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_step", "geom_path"}, False)
+        ucrChkPathOrStep.SetText("Area/ Path/ Step")
+        ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_area", "geom_step", "geom_path"})
+        ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_area", "geom_step", "geom_path"}, False)
 
         ucrPnlLinerangeOptions.AddRadioButton(rdoRibbon)
         ucrPnlLinerangeOptions.AddRadioButton(rdoPointrange)
@@ -400,11 +407,12 @@ Public Class dlgLinePlot
         ucrChkSlopeLegend.AddParameterPresentCondition(True, "slopetheme")
         ucrChkSlopeLegend.AddParameterPresentCondition(False, "slopetheme", False)
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkArea, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd, ucrChkDumbbellColour, ucrChkDumbbellSize}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkAddPoints}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddPoints}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -440,6 +448,7 @@ Public Class dlgLinePlot
         ucrReceiverYMin.SetLinkedDisplayControl(lblYMin)
         ucrReceiverYVar.SetLinkedDisplayControl(lblYVar)
         ucrFactorOptionalReceiver.SetLinkedDisplayControl(lblFactorOptional)
+        ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
         ucrInputDumbbellX.SetLinkedDisplayControl(lblXColour)
         ucrInputDumbbellXEnd.SetLinkedDisplayControl(lblXEndColour)
         ucrInputDumbbellLine.SetLinkedDisplayControl(lblLineColour)
@@ -481,7 +490,7 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
-        rdoPath.Checked = True
+        rdoArea.Checked = True
         rdoRibbon.Checked = True
 
         ucrInputFormula.SetText("y ~ x")
@@ -591,7 +600,7 @@ Public Class dlgLinePlot
         ucrChkAddLine.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
         ucrChkAddSE.SetRCode(clsOptionsFunction, bReset)
-        ucrChkArea.SetRCode(clsBaseOperator, bReset)
+        'ucrChkArea.SetRCode(clsBaseOperator, bReset)
         ucrReceiverYMax.SetRCode(clsAesLinerangeFunction, bReset)
         ucrReceiverYMin.SetRCode(clsAesLinerangeFunction, bReset)
         ucrChkPathOrStep.SetRCode(clsOptionsFunction, bReset)
@@ -660,9 +669,33 @@ Public Class dlgLinePlot
                 Else
                     ucrVariablesAsFactorForLinePlot.Add(clsParam.strArgumentValue)
                 End If
+            ElseIf clsParam.strArgumentName = "colour" Then
+                ucrReceiverGroup.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged,
+        ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverGroup.ControlValueChanged
+        SetGroupParam()
+    End Sub
+
+    Private Sub SetGroupParam()
+        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
+            If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+                'ucrReceiverGroup.Enabled = False
+            ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
+                'ucrReceiverGroup.Enabled = True
+                ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
+                clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
+            Else
+                clsRaesFunction.RemoveParameterByName("group")
+            End If
+        Else
+            clsRaesFunction.RemoveParameterByName("group")
+        End If
     End Sub
 
     Private Sub SetGraphPrefixAndRcommand()
@@ -682,6 +715,9 @@ Public Class dlgLinePlot
                 If rdoStep.Checked Then
                     ucrSave.SetPrefix("step_plot")
                     clsOptionsFunction.SetRCommand("geom_step")
+                ElseIf rdoArea.Checked Then
+                    ucrSave.SetPrefix("area_plot")
+                    clsOptionsFunction.SetRCommand("geom_area")
                 Else
                     ucrSave.SetPrefix("path_plot")
                     clsOptionsFunction.SetRCommand("geom_path")
@@ -695,7 +731,7 @@ Public Class dlgLinePlot
             clsOptionsFunction.SetRCommand("geom_smooth")
         ElseIf rdoLinerange.Checked Then
             ucrReceiverYVar.SetMeAsReceiver()
-            ucrReceiverX.SetIncludedDataTypes({"numeric"})
+            'ucrReceiverX.SetIncludedDataTypes({"numeric"})
             clsOptionsFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsOptionsFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
             clsOptionsFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
