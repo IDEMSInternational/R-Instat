@@ -201,7 +201,7 @@ Public Class dlgFindInVariableOrFilter
                 frmMain.ucrDataViewer.GoToSpecificRowPage(iRowPage)
                 Dim bApplyToRows As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
                 frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
-                                                       iRow:=iRow, bApplyToRows:=Not bApplyToRows)
+                                                       iRow:=iRow, bApplyToRows:=bApplyToRows)
                 lblFoundRow.Text = "Found Row: " & iRow
                 lblFoundRow.Visible = True
                 iCountRowClick += 1

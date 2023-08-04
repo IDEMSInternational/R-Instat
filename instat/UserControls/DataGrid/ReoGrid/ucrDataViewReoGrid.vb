@@ -326,10 +326,10 @@ Public Class ucrDataViewReoGrid
                 ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex, bApplyToRows:=bApplyToRows)
                 If bApplyToRows Then
                     SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
-                                         colIndex:=iColIndex, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
+                                         colIndex:=currSheet.ColumnCount, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
                 Else
                     SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
-                                         colIndex:=currSheet.ColumnCount, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
+                                         colIndex:=iColIndex, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
                 End If
             End If
         End If
