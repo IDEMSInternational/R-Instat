@@ -18,7 +18,6 @@ Imports System.ComponentModel
 
 Public Class ucrInputComboBox
     Private _strRObjectItemsTypeLabel As String = ""
-    Public bKeyPress As Boolean = True
 
     Public Sub New()
 
