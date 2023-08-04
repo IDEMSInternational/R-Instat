@@ -286,9 +286,9 @@ Public Class ucrDataViewReoGrid
     Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer, bApplyToRows As Boolean)
 
         If bApplyToRows Then
-            currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
-        Else
             currWorkSheet.SelectRows(iRow, 1)
+        Else
+            currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
         End If
         currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
     End Sub
