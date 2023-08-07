@@ -2937,7 +2937,7 @@ getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_reg
     # Find the rows that match the search text using regex
     matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
   }else if (is.na(searchText)){
-    matchingRows <- apply(data, 1, function(row) any(is.na(row)))
+    matchingRows <- apply(data[, column, drop = FALSE], 1, function(row) any(is.na(row)))
   }else{
     matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
   }

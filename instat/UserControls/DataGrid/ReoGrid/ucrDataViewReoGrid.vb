@@ -103,7 +103,7 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
-        Dim iColumnIndex As Integer = GetColumnIndex(grdData.CurrentWorksheet, strColumn)
+        Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
             MsgBox("Cannot wrap or unwrap this type of variable.")
             Exit Sub
@@ -243,10 +243,11 @@ Public Class ucrDataViewReoGrid
         End If
     End Sub
 
-    Private Function GetColumnIndex(currWorkSheet As Worksheet, strColName As String) As Integer
-        If currWorkSheet IsNot Nothing Then
-            For i As Integer = 0 To currWorkSheet.Columns - 1
-                Dim strCol As String = currWorkSheet.ColumnHeaders(i).Text
+    Private Function GetColumnIndex(strColName As String) As Integer
+        Dim currWorksheet = grdData.CurrentWorksheet
+        If currWorksheet IsNot Nothing Then
+            For i As Integer = 0 To currWorksheet.Columns - 1
+                Dim strCol As String = currWorksheet.ColumnHeaders(i).Text
                 If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
                     Return i
                 End If
@@ -282,12 +283,17 @@ Public Class ucrDataViewReoGrid
         Return lstRowsIndexes
     End Function
 
-    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer)
-        currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer, bApplyToRows As Boolean)
+
+        If bApplyToRows Then
+            currWorkSheet.SelectRows(iRow, 1)
+        Else
+            currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+        End If
         currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
     End Sub
 
-    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of Integer), colIndex As Integer, bApplyToRow As Boolean, color As Color)
+    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of Integer), colIndex As Integer, bApplyToRows As Boolean, color As Color)
         ' Create a new style object for the row background color
         Dim rowStyle As WorksheetRangeStyle = New WorksheetRangeStyle With {
             .Flag = PlainStyleFlag.BackColor,
@@ -298,7 +304,7 @@ Public Class ucrDataViewReoGrid
         For Each rowNumber As Integer In rowNumbers
             ' Check if the row index is within the valid range
             If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
-                If bApplyToRow Then
+                If bApplyToRows Then
                     ' Apply the row style to the entire row
                     currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
                 Else
@@ -308,27 +314,65 @@ Public Class ucrDataViewReoGrid
         Next
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                            Optional bApplyToRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bApplyToRows As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
         Dim currSheet = grdData.CurrentWorksheet
 
         If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
             Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
-            Dim iColIndex As Integer = 0
-            If strColumn <> "filter" Then
-                iColIndex = GetColumnIndex(currSheet, strColumn)
-            End If
+            Dim iColIndex As Integer = If(strColumn = Chr(34) & "filter" & Chr(34), 0, GetColumnIndex(strColName:=strColumn))
 
             If iRowIndex > -1 AndAlso iColIndex > -1 Then
-                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex)
-                If bApplyToRow Then
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex, bApplyToRows:=bApplyToRows)
+                If bApplyToRows Then
                     SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
-                                         colIndex:=iColIndex, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
+                                         colIndex:=currSheet.ColumnCount, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
                 Else
                     SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
-                                         colIndex:=currSheet.ColumnCount, bApplyToRow:=bApplyToRow, color:=Color.LightGreen)
+                                         colIndex:=iColIndex, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
                 End If
             End If
         End If
+    End Sub
+
+    ''' <summary>
+    ''' This function takes an integer columnNumber as input and returns a string representing the corresponding Reogrid-style column letter. 
+    ''' For example, 1 will be converted to "A", 26 to "Z", 27 to "AA", 28 to "AB", and so on.
+    ''' </summary>
+    ''' <param name="columnNumber"></param>
+    ''' <returns></returns>
+    Private Function ColumnNumberToAlpha(columnNumber As Integer) As String
+        Dim dividend As Integer = columnNumber
+        Dim columnName As String = String.Empty
+        Dim modulo As Integer
+
+        While dividend > 0
+            modulo = (dividend - 1) Mod 26
+            columnName = Convert.ToChar(65 + modulo) & columnName
+            dividend = CInt((dividend - modulo) / 26)
+        End While
+
+        Return columnName
+    End Function
+
+    Public Sub SelectColumnInGrid(strColumn As String) Implements IDataViewGrid.SelectColumnInGrid
+
+        If String.IsNullOrEmpty(strColumn) Then
+            Exit Sub
+        End If
+
+        Dim currSheet = grdData.CurrentWorksheet
+        Dim iColumn As Integer = grdData.CurrentWorksheet.ColumnHeaders.
+                                      Where(Function(col) col.Text.Split("(")(0).Trim = strColumn).
+                                      FirstOrDefault().Index ' Get the correspond index of a column from a column name.
+
+        Dim strOriginalColumnName As String = ColumnNumberToAlpha(iColumn + 1) & "1"
+        currSheet.ScrollToCell(strOriginalColumnName)
+        currSheet.SelectColumns(iColumn, 1)
+        ' Set the background color for the entire column
+        currSheet.SetRangeStyles(0, iColumn, currSheet.RowCount, 1, New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = Color.LightGreen
+        })
     End Sub
 End Class
