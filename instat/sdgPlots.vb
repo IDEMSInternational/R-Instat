@@ -132,7 +132,6 @@ Public Class sdgPlots
         ucrChkIncludeTitles.AddParameterPresentCondition(True, "titles", True)
         ucrChkIncludeTitles.AddParameterPresentCondition(False, "titles", False)
 
-
         ucrChkMargin.SetText("Margins")
         ucrChkMargin.SetParameter(New RParameter("margins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -249,8 +248,6 @@ Public Class sdgPlots
         ucrInputLegendTitle.SetLinkedDisplayControl(lblLegendTitle)
         ucrNudTagSize.SetLinkedDisplayControl(lblTagSize)
         ucrNudLegendSize.SetLinkedDisplayControl(lblLegendSize)
-
-
 
         ucrChkIncludeTitles.AddToLinkedControls(ucrChkTag, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeTitles.AddToLinkedControls(ucrChkNewLegend, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -1024,6 +1021,7 @@ Public Class sdgPlots
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
             If ucrChkIncludeTitles.Checked Then
+                clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
                 If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
                     clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
                 Else
@@ -1031,6 +1029,7 @@ Public Class sdgPlots
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("labs")
+                clsBaseOperator.RemoveParameterByName("theme")
             End If
         End If
     End Sub
