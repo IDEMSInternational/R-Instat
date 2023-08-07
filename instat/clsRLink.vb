@@ -828,7 +828,10 @@ Public Class RLink
 
                     'if not an assignment operation, then capture the output
                     If Not strScript.Contains("<-") AndAlso bSuccess Then
-                        strOutput = GetFileOutput("view_object_data(object = " & strScript & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
+                        Dim strScriptAsSingleLine As String = strScript.Replace(vbCrLf, String.Empty)
+                        strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbCr, String.Empty)
+                        strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbLf, String.Empty)
+                        strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                     End If
                 Else
                     'else if script output should not be ignored or not stored as an object or variable
