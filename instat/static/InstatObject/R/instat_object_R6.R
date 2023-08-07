@@ -2738,8 +2738,13 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
     if (original_type != class(column_data)) {
       if (original_type %in% c("factor", "ordered_factor")){
         column_data <- make_factor(column_data)
+      }else if(original_type == "list"){
+        column_data <- lapply(column_data, convert_to_list)
       }else{ column_data <- as(column_data, original_type) }
     }
+    curr_data <- self$get_data_frame(data_name=data_name, retain_attr = TRUE)
+    # retain the attributes of the column after wrapping or unwrapping
+    attributes(column_data) <- attributes(curr_data[[col_name]])
     self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
   }
 }

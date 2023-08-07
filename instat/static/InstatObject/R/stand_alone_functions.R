@@ -2947,3 +2947,18 @@ getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_reg
   # Return the row headers
   return(rowHeaders)
 }
+
+# Function to convert character strings to lists
+convert_to_list <- function(x) {
+  if (startsWith(x, "c(") && endsWith(x, ")")) {
+    x <- substring(x, 3, nchar(x) - 1) # Remove the 'c(' and ')' characters
+    return(as.list(as.numeric(unlist(strsplit(x, ", ")))))
+  } else if (grepl(":", x)){
+    x <- gsub(":", ",", x, fixed = TRUE)  # Replace ':' with ','
+    return(as.list(as.numeric(unlist(strsplit(x, "[, ]+")))))
+  } else if (x == "numeric(0)") {
+    return(list())
+  } else {
+    return(as.list(as.numeric(x)))
+  }
+}
