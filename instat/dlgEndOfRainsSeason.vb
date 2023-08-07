@@ -1013,9 +1013,6 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub Evaporation()
         If rdoEndOfSeasons.Checked Then
-            clsEndSeasonFirstDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
-            clsEndRainsLastDateSummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames() & ")", iPosition:=3)
-
             If rdoValueEvaporation.Checked Then
                 ucrReceiverRainfall.SetMeAsReceiver()
                 clsWBMinEvapOperator.RemoveParameterByName("variable")
