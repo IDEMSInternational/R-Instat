@@ -124,6 +124,27 @@ Partial Class ucrAxes
         Me.grpMajorBreaks = New System.Windows.Forms.GroupBox()
         Me.grpScaleDiscrete.SuspendLayout()
         Me.grpMajorBreaksDiscrete.SuspendLayout()
+        Me.lblMinorBreaksInStepsOf = New System.Windows.Forms.Label()
+        Me.lblMinorBreaksTo = New System.Windows.Forms.Label()
+        Me.ucrPnlMinorBreaks = New instat.UcrPanel()
+        Me.grpMinorBreaks = New System.Windows.Forms.GroupBox()
+        Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
+        Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
+        Me.grpSecondAxis = New System.Windows.Forms.GroupBox()
+        Me.ucrInputOffset = New instat.ucrInputComboBox()
+        Me.ucrChkOffset = New instat.ucrCheck()
+        Me.rdoSecondAxisSpecifyTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSecondAxisNoTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSecondAxisTitleAuto = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSecondAxisTitle = New instat.UcrPanel()
+        Me.lblTitleSA = New System.Windows.Forms.Label()
+        Me.ucrInputTextNameSAxis = New instat.ucrInputTextBox()
+        Me.ucrInputSecondaryAxis = New instat.ucrInputComboBox()
+        Me.ucrChkSecondaryAxis = New instat.ucrCheck()
+        Me.ucrInputTrans = New instat.ucrInputComboBox()
+        Me.grpAxisTitle.SuspendLayout()
+        Me.grpMajorBreaks.SuspendLayout()
+        Me.grpScales.SuspendLayout()
         Me.grpScaleXDate.SuspendLayout()
         Me.grpScales.SuspendLayout()
         Me.grpMinorBreaks.SuspendLayout()
@@ -285,6 +306,65 @@ Partial Class ucrAxes
         Me.ucrChkNaValueDiscrete.Name = "ucrChkNaValueDiscrete"
         Me.ucrChkNaValueDiscrete.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkNaValueDiscrete.TabIndex = 23
+        Me.grpSecondAxis.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'grpAxisTitle
+        '
+        Me.grpAxisTitle.Controls.Add(Me.lblTitle)
+        Me.grpAxisTitle.Controls.Add(Me.rdoSpecifyTitle)
+        Me.grpAxisTitle.Controls.Add(Me.rdoNoTitle)
+        Me.grpAxisTitle.Controls.Add(Me.rdoTitleAuto)
+        Me.grpAxisTitle.Controls.Add(Me.ucrInputTitle)
+        Me.grpAxisTitle.Controls.Add(Me.ucrPnlAxisTitle)
+        Me.grpAxisTitle.Location = New System.Drawing.Point(3, 1)
+        Me.grpAxisTitle.Name = "grpAxisTitle"
+        Me.grpAxisTitle.Size = New System.Drawing.Size(301, 83)
+        Me.grpAxisTitle.TabIndex = 0
+        Me.grpAxisTitle.TabStop = False
+        Me.grpAxisTitle.Text = "Axis Title"
+        '
+        'lblTitle
+        '
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(4, 51)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(30, 13)
+        Me.lblTitle.TabIndex = 20
+        Me.lblTitle.Text = "Title:"
+        '
+        'rdoSpecifyTitle
+        '
+        Me.rdoSpecifyTitle.AutoSize = True
+        Me.rdoSpecifyTitle.Location = New System.Drawing.Point(94, 21)
+        Me.rdoSpecifyTitle.Name = "rdoSpecifyTitle"
+        Me.rdoSpecifyTitle.Size = New System.Drawing.Size(83, 17)
+        Me.rdoSpecifyTitle.TabIndex = 3
+        Me.rdoSpecifyTitle.TabStop = True
+        Me.rdoSpecifyTitle.Text = "Specify Title"
+        Me.rdoSpecifyTitle.UseVisualStyleBackColor = True
+        '
+        'rdoNoTitle
+        '
+        Me.rdoNoTitle.AutoSize = True
+        Me.rdoNoTitle.Location = New System.Drawing.Point(215, 21)
+        Me.rdoNoTitle.Name = "rdoNoTitle"
+        Me.rdoNoTitle.Size = New System.Drawing.Size(62, 17)
+        Me.rdoNoTitle.TabIndex = 3
+        Me.rdoNoTitle.TabStop = True
+        Me.rdoNoTitle.Text = "No Title"
+        Me.rdoNoTitle.UseVisualStyleBackColor = True
+        '
+        'rdoTitleAuto
+        '
+        Me.rdoTitleAuto.AutoSize = True
+        Me.rdoTitleAuto.Location = New System.Drawing.Point(7, 21)
+        Me.rdoTitleAuto.Name = "rdoTitleAuto"
+        Me.rdoTitleAuto.Size = New System.Drawing.Size(47, 17)
+        Me.rdoTitleAuto.TabIndex = 2
+        Me.rdoTitleAuto.TabStop = True
+        Me.rdoTitleAuto.Text = "Auto"
+        Me.rdoTitleAuto.UseVisualStyleBackColor = True
         '
         'ucrInputRelaceMissingvalues
         '
@@ -1056,11 +1136,145 @@ Partial Class ucrAxes
         Me.grpMajorBreaks.TabStop = False
         Me.grpMajorBreaks.Text = "Major Tick Marks"
         '
+        'grpSecondAxis
+        '
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputTrans)
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputOffset)
+        Me.grpSecondAxis.Controls.Add(Me.rdoSecondAxisSpecifyTitle)
+        Me.grpSecondAxis.Controls.Add(Me.rdoSecondAxisNoTitle)
+        Me.grpSecondAxis.Controls.Add(Me.rdoSecondAxisTitleAuto)
+        Me.grpSecondAxis.Controls.Add(Me.ucrPnlSecondAxisTitle)
+        Me.grpSecondAxis.Controls.Add(Me.lblTitleSA)
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputTextNameSAxis)
+        Me.grpSecondAxis.Controls.Add(Me.ucrInputSecondaryAxis)
+        Me.grpSecondAxis.Controls.Add(Me.ucrChkSecondaryAxis)
+        Me.grpSecondAxis.Controls.Add(Me.ucrChkOffset)
+        Me.grpSecondAxis.Location = New System.Drawing.Point(3, 324)
+        Me.grpSecondAxis.Name = "grpSecondAxis"
+        Me.grpSecondAxis.Size = New System.Drawing.Size(384, 109)
+        Me.grpSecondAxis.TabIndex = 35
+        Me.grpSecondAxis.TabStop = False
+        Me.grpSecondAxis.Text = "Secondary Axis"
+        '
+        'ucrInputOffset
+        '
+        Me.ucrInputOffset.AddQuotesIfUnrecognised = True
+        Me.ucrInputOffset.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputOffset.GetSetSelectedIndex = -1
+        Me.ucrInputOffset.IsReadOnly = False
+        Me.ucrInputOffset.Location = New System.Drawing.Point(325, 16)
+        Me.ucrInputOffset.Name = "ucrInputOffset"
+        Me.ucrInputOffset.Size = New System.Drawing.Size(40, 23)
+        Me.ucrInputOffset.TabIndex = 35
+        '
+        'ucrChkOffset
+        '
+        Me.ucrChkOffset.AutoSize = True
+        Me.ucrChkOffset.Checked = False
+        Me.ucrChkOffset.Location = New System.Drawing.Point(267, 17)
+        Me.ucrChkOffset.Name = "ucrChkOffset"
+        Me.ucrChkOffset.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkOffset.TabIndex = 36
+        '
+        'rdoSecondAxisSpecifyTitle
+        '
+        Me.rdoSecondAxisSpecifyTitle.AutoSize = True
+        Me.rdoSecondAxisSpecifyTitle.Location = New System.Drawing.Point(94, 53)
+        Me.rdoSecondAxisSpecifyTitle.Name = "rdoSecondAxisSpecifyTitle"
+        Me.rdoSecondAxisSpecifyTitle.Size = New System.Drawing.Size(83, 17)
+        Me.rdoSecondAxisSpecifyTitle.TabIndex = 32
+        Me.rdoSecondAxisSpecifyTitle.TabStop = True
+        Me.rdoSecondAxisSpecifyTitle.Text = "Specify Title"
+        Me.rdoSecondAxisSpecifyTitle.UseVisualStyleBackColor = True
+        '
+        'rdoSecondAxisNoTitle
+        '
+        Me.rdoSecondAxisNoTitle.AutoSize = True
+        Me.rdoSecondAxisNoTitle.Location = New System.Drawing.Point(215, 53)
+        Me.rdoSecondAxisNoTitle.Name = "rdoSecondAxisNoTitle"
+        Me.rdoSecondAxisNoTitle.Size = New System.Drawing.Size(62, 17)
+        Me.rdoSecondAxisNoTitle.TabIndex = 33
+        Me.rdoSecondAxisNoTitle.TabStop = True
+        Me.rdoSecondAxisNoTitle.Text = "No Title"
+        Me.rdoSecondAxisNoTitle.UseVisualStyleBackColor = True
+        '
+        'rdoSecondAxisTitleAuto
+        '
+        Me.rdoSecondAxisTitleAuto.AutoSize = True
+        Me.rdoSecondAxisTitleAuto.Location = New System.Drawing.Point(7, 53)
+        Me.rdoSecondAxisTitleAuto.Name = "rdoSecondAxisTitleAuto"
+        Me.rdoSecondAxisTitleAuto.Size = New System.Drawing.Size(47, 17)
+        Me.rdoSecondAxisTitleAuto.TabIndex = 31
+        Me.rdoSecondAxisTitleAuto.TabStop = True
+        Me.rdoSecondAxisTitleAuto.Text = "Auto"
+        Me.rdoSecondAxisTitleAuto.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSecondAxisTitle
+        '
+        Me.ucrPnlSecondAxisTitle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlSecondAxisTitle.Location = New System.Drawing.Point(6, 50)
+        Me.ucrPnlSecondAxisTitle.Name = "ucrPnlSecondAxisTitle"
+        Me.ucrPnlSecondAxisTitle.Size = New System.Drawing.Size(290, 23)
+        Me.ucrPnlSecondAxisTitle.TabIndex = 34
+        '
+        'lblTitleSA
+        '
+        Me.lblTitleSA.AutoSize = True
+        Me.lblTitleSA.Location = New System.Drawing.Point(4, 83)
+        Me.lblTitleSA.Name = "lblTitleSA"
+        Me.lblTitleSA.Size = New System.Drawing.Size(30, 13)
+        Me.lblTitleSA.TabIndex = 30
+        Me.lblTitleSA.Text = "Title:"
+        '
+        'ucrInputTextNameSAxis
+        '
+        Me.ucrInputTextNameSAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextNameSAxis.AutoSize = True
+        Me.ucrInputTextNameSAxis.IsMultiline = False
+        Me.ucrInputTextNameSAxis.IsReadOnly = False
+        Me.ucrInputTextNameSAxis.Location = New System.Drawing.Point(62, 80)
+        Me.ucrInputTextNameSAxis.Name = "ucrInputTextNameSAxis"
+        Me.ucrInputTextNameSAxis.Size = New System.Drawing.Size(131, 21)
+        Me.ucrInputTextNameSAxis.TabIndex = 29
+        '
+        'ucrInputSecondaryAxis
+        '
+        Me.ucrInputSecondaryAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputSecondaryAxis.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSecondaryAxis.GetSetSelectedIndex = -1
+        Me.ucrInputSecondaryAxis.IsReadOnly = False
+        Me.ucrInputSecondaryAxis.Location = New System.Drawing.Point(107, 15)
+        Me.ucrInputSecondaryAxis.Name = "ucrInputSecondaryAxis"
+        Me.ucrInputSecondaryAxis.Size = New System.Drawing.Size(40, 23)
+        Me.ucrInputSecondaryAxis.TabIndex = 27
+        '
+        'ucrChkSecondaryAxis
+        '
+        Me.ucrChkSecondaryAxis.AutoSize = True
+        Me.ucrChkSecondaryAxis.Checked = False
+        Me.ucrChkSecondaryAxis.Location = New System.Drawing.Point(9, 17)
+        Me.ucrChkSecondaryAxis.Name = "ucrChkSecondaryAxis"
+        Me.ucrChkSecondaryAxis.Size = New System.Drawing.Size(124, 23)
+        Me.ucrChkSecondaryAxis.TabIndex = 24
+        '
+        'ucrInputTrans
+        '
+        Me.ucrInputTrans.AddQuotesIfUnrecognised = True
+        Me.ucrInputTrans.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputTrans.GetSetSelectedIndex = -1
+        Me.ucrInputTrans.IsReadOnly = False
+        Me.ucrInputTrans.Location = New System.Drawing.Point(170, 15)
+        Me.ucrInputTrans.Name = "ucrInputTrans"
+        Me.ucrInputTrans.Size = New System.Drawing.Size(78, 23)
+        Me.ucrInputTrans.TabIndex = 37
+        '
         'ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.grpScaleDiscrete)
+        Me.Controls.Add(Me.grpSecondAxis)
+        Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMinorBreaks)
@@ -1074,6 +1288,13 @@ Partial Class ucrAxes
         Me.grpScaleDiscrete.PerformLayout()
         Me.grpMajorBreaksDiscrete.ResumeLayout(False)
         Me.grpMajorBreaksDiscrete.PerformLayout()
+        Me.Size = New System.Drawing.Size(670, 489)
+        Me.grpAxisTitle.ResumeLayout(False)
+        Me.grpAxisTitle.PerformLayout()
+        Me.grpMajorBreaks.ResumeLayout(False)
+        Me.grpMajorBreaks.PerformLayout()
+        Me.grpScales.ResumeLayout(False)
+        Me.grpScales.PerformLayout()
         Me.grpScaleXDate.ResumeLayout(False)
         Me.grpScaleXDate.PerformLayout()
         Me.grpScales.ResumeLayout(False)
@@ -1084,6 +1305,8 @@ Partial Class ucrAxes
         Me.grpAxisTitle.PerformLayout()
         Me.grpMajorBreaks.ResumeLayout(False)
         Me.grpMajorBreaks.PerformLayout()
+        Me.grpSecondAxis.ResumeLayout(False)
+        Me.grpSecondAxis.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1172,4 +1395,42 @@ Partial Class ucrAxes
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
+    Friend WithEvents lblMinorBreaksInStepsOf As Label
+    Friend WithEvents lblMinorBreaksTo As Label
+    Friend WithEvents ucrPnlMinorBreaks As UcrPanel
+    Friend WithEvents grpMinorBreaks As GroupBox
+    Friend WithEvents lblMinorBreaksFrom As Label
+    Friend WithEvents rdoMinorBreaksNone As RadioButton
+    Friend WithEvents ucrChkLabels As ucrCheck
+    Friend WithEvents ucrInputTransformation As ucrInputComboBox
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents ucrChkNaValue As ucrCheck
+    Friend WithEvents ucrInputExpand As ucrInputTextBox
+    Friend WithEvents ucrInputRelaceMissingvalues As ucrInputTextBox
+    Friend WithEvents ucrChkPosition As ucrCheck
+    Friend WithEvents ucrChkExpand As ucrCheck
+    Friend WithEvents ucrChkTransformation As ucrCheck
+    Friend WithEvents grpScaleXDate As GroupBox
+    Friend WithEvents ucrChkLimits As ucrCheck
+    Friend WithEvents ucrChkBreaks As ucrCheck
+    Friend WithEvents lbXscaleDateLowerLimit As Label
+    Friend WithEvents lblXScalDateUpperLimit As Label
+    Friend WithEvents ucrNudDateBreak As ucrNud
+    Friend WithEvents ucrDtpLowerLimit As ucrDateTimePicker
+    Friend WithEvents ucrDtpUpperLimit As ucrDateTimePicker
+    Friend WithEvents ucrInputComboDateBreak As ucrInputComboBox
+    Friend WithEvents ucrChkDateLabels As ucrCheck
+    Friend WithEvents ucrInputComboDateLabel As ucrInputComboBox
+    Friend WithEvents grpSecondAxis As GroupBox
+    Friend WithEvents ucrInputSecondaryAxis As ucrInputComboBox
+    Friend WithEvents ucrChkSecondaryAxis As ucrCheck
+    Friend WithEvents ucrInputTextNameSAxis As ucrInputTextBox
+    Friend WithEvents lblTitleSA As Label
+    Friend WithEvents rdoSecondAxisSpecifyTitle As RadioButton
+    Friend WithEvents rdoSecondAxisNoTitle As RadioButton
+    Friend WithEvents rdoSecondAxisTitleAuto As RadioButton
+    Friend WithEvents ucrPnlSecondAxisTitle As UcrPanel
+    Friend WithEvents ucrChkOffset As ucrCheck
+    Friend WithEvents ucrInputOffset As ucrInputComboBox
+    Friend WithEvents ucrInputTrans As ucrInputComboBox
 End Class

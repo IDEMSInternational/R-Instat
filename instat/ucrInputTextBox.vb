@@ -31,7 +31,7 @@ Public Class ucrInputTextBox
     End Sub
 
     Private Sub txtInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtInput.KeyPress
-        bUserTyped = True
+        bUserTyped = False
     End Sub
 
     Private Sub txtInput_Validating(sender As Object, e As CancelEventArgs) Handles txtInput.Validating

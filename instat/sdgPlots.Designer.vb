@@ -62,12 +62,7 @@ Partial Class sdgPlots
         Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.tbpTitles = New System.Windows.Forms.TabPage()
         Me.lblLegendSize = New System.Windows.Forms.Label()
-        Me.ucrNudLegendSize = New instat.ucrNud()
         Me.lblTagSize = New System.Windows.Forms.Label()
-        Me.ucrNudTagSize = New instat.ucrNud()
-        Me.ucrChkTag = New instat.ucrCheck()
-        Me.ucrChkNewLegend = New instat.ucrCheck()
-        Me.ucrInputGraphCaption = New instat.ucrInputTextBox()
         Me.lblCaptionSize = New System.Windows.Forms.Label()
         Me.lblSubTitleSize = New System.Windows.Forms.Label()
         Me.lblTitleSize = New System.Windows.Forms.Label()
@@ -83,6 +78,11 @@ Partial Class sdgPlots
         Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
         Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLegendTitle = New instat.UcrPanel()
+        Me.ucrNudLegendSize = New instat.ucrNud()
+        Me.ucrNudTagSize = New instat.ucrNud()
+        Me.ucrChkTag = New instat.ucrCheck()
+        Me.ucrChkNewLegend = New instat.ucrCheck()
+        Me.ucrInputGraphCaption = New instat.ucrInputTextBox()
         Me.ucrNudCaptionSize = New instat.ucrNud()
         Me.ucrNudSubTitleSize = New instat.ucrNud()
         Me.ucrNudTitleSize = New instat.ucrNud()
@@ -231,6 +231,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
         Me.tbpPlotsOptions.Size = New System.Drawing.Size(781, 449)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(677, 481)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -256,6 +257,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpFacet.Size = New System.Drawing.Size(727, 423)
+        Me.tbpFacet.Size = New System.Drawing.Size(669, 455)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -462,12 +464,7 @@ Partial Class sdgPlots
         'tbpTitles
         '
         Me.tbpTitles.Controls.Add(Me.lblLegendSize)
-        Me.tbpTitles.Controls.Add(Me.ucrNudLegendSize)
         Me.tbpTitles.Controls.Add(Me.lblTagSize)
-        Me.tbpTitles.Controls.Add(Me.ucrNudTagSize)
-        Me.tbpTitles.Controls.Add(Me.ucrChkTag)
-        Me.tbpTitles.Controls.Add(Me.ucrChkNewLegend)
-        Me.tbpTitles.Controls.Add(Me.ucrInputGraphCaption)
         Me.tbpTitles.Controls.Add(Me.lblCaptionSize)
         Me.tbpTitles.Controls.Add(Me.lblSubTitleSize)
         Me.tbpTitles.Controls.Add(Me.lblTitleSize)
@@ -477,6 +474,11 @@ Partial Class sdgPlots
         Me.tbpTitles.Controls.Add(Me.lblSubTitle)
         Me.tbpTitles.Controls.Add(Me.Label1)
         Me.tbpTitles.Controls.Add(Me.grpLegendTitle)
+        Me.tbpTitles.Controls.Add(Me.ucrNudLegendSize)
+        Me.tbpTitles.Controls.Add(Me.ucrNudTagSize)
+        Me.tbpTitles.Controls.Add(Me.ucrChkTag)
+        Me.tbpTitles.Controls.Add(Me.ucrChkNewLegend)
+        Me.tbpTitles.Controls.Add(Me.ucrInputGraphCaption)
         Me.tbpTitles.Controls.Add(Me.ucrNudCaptionSize)
         Me.tbpTitles.Controls.Add(Me.ucrNudSubTitleSize)
         Me.tbpTitles.Controls.Add(Me.ucrNudTitleSize)
@@ -503,20 +505,6 @@ Partial Class sdgPlots
         Me.lblLegendSize.TabIndex = 54
         Me.lblLegendSize.Text = "Legend Size:"
         '
-        'ucrNudLegendSize
-        '
-        Me.ucrNudLegendSize.AutoSize = True
-        Me.ucrNudLegendSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLegendSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLegendSize.Location = New System.Drawing.Point(434, 179)
-        Me.ucrNudLegendSize.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrNudLegendSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLegendSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLegendSize.Name = "ucrNudLegendSize"
-        Me.ucrNudLegendSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLegendSize.TabIndex = 53
-        Me.ucrNudLegendSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblTagSize
         '
         Me.lblTagSize.AutoSize = True
@@ -526,50 +514,6 @@ Partial Class sdgPlots
         Me.lblTagSize.Size = New System.Drawing.Size(52, 13)
         Me.lblTagSize.TabIndex = 52
         Me.lblTagSize.Text = "Tag Size:"
-        '
-        'ucrNudTagSize
-        '
-        Me.ucrNudTagSize.AutoSize = True
-        Me.ucrNudTagSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTagSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTagSize.Location = New System.Drawing.Point(434, 141)
-        Me.ucrNudTagSize.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrNudTagSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTagSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTagSize.Name = "ucrNudTagSize"
-        Me.ucrNudTagSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTagSize.TabIndex = 51
-        Me.ucrNudTagSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkTag
-        '
-        Me.ucrChkTag.AutoSize = True
-        Me.ucrChkTag.Checked = False
-        Me.ucrChkTag.Location = New System.Drawing.Point(6, 141)
-        Me.ucrChkTag.Name = "ucrChkTag"
-        Me.ucrChkTag.Size = New System.Drawing.Size(104, 23)
-        Me.ucrChkTag.TabIndex = 50
-        '
-        'ucrChkNewLegend
-        '
-        Me.ucrChkNewLegend.AutoSize = True
-        Me.ucrChkNewLegend.Checked = False
-        Me.ucrChkNewLegend.Location = New System.Drawing.Point(6, 179)
-        Me.ucrChkNewLegend.Name = "ucrChkNewLegend"
-        Me.ucrChkNewLegend.Size = New System.Drawing.Size(125, 23)
-        Me.ucrChkNewLegend.TabIndex = 49
-        '
-        'ucrInputGraphCaption
-        '
-        Me.ucrInputGraphCaption.AddQuotesIfUnrecognised = True
-        Me.ucrInputGraphCaption.AutoSize = True
-        Me.ucrInputGraphCaption.IsMultiline = True
-        Me.ucrInputGraphCaption.IsReadOnly = False
-        Me.ucrInputGraphCaption.Location = New System.Drawing.Point(126, 72)
-        Me.ucrInputGraphCaption.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrInputGraphCaption.Name = "ucrInputGraphCaption"
-        Me.ucrInputGraphCaption.Size = New System.Drawing.Size(181, 53)
-        Me.ucrInputGraphCaption.TabIndex = 48
         '
         'lblCaptionSize
         '
@@ -728,6 +672,64 @@ Partial Class sdgPlots
         Me.ucrPnlLegendTitle.Size = New System.Drawing.Size(117, 25)
         Me.ucrPnlLegendTitle.TabIndex = 12
         '
+        'ucrNudLegendSize
+        '
+        Me.ucrNudLegendSize.AutoSize = True
+        Me.ucrNudLegendSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLegendSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLegendSize.Location = New System.Drawing.Point(434, 179)
+        Me.ucrNudLegendSize.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrNudLegendSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLegendSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLegendSize.Name = "ucrNudLegendSize"
+        Me.ucrNudLegendSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLegendSize.TabIndex = 53
+        Me.ucrNudLegendSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTagSize
+        '
+        Me.ucrNudTagSize.AutoSize = True
+        Me.ucrNudTagSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTagSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTagSize.Location = New System.Drawing.Point(434, 141)
+        Me.ucrNudTagSize.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrNudTagSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTagSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTagSize.Name = "ucrNudTagSize"
+        Me.ucrNudTagSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTagSize.TabIndex = 51
+        Me.ucrNudTagSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkTag
+        '
+        Me.ucrChkTag.AutoSize = True
+        Me.ucrChkTag.Checked = False
+        Me.ucrChkTag.Location = New System.Drawing.Point(6, 141)
+        Me.ucrChkTag.Name = "ucrChkTag"
+        Me.ucrChkTag.Size = New System.Drawing.Size(104, 23)
+        Me.ucrChkTag.TabIndex = 50
+        '
+        'ucrChkNewLegend
+        '
+        Me.ucrChkNewLegend.AutoSize = True
+        Me.ucrChkNewLegend.Checked = False
+        Me.ucrChkNewLegend.Location = New System.Drawing.Point(6, 179)
+        Me.ucrChkNewLegend.Name = "ucrChkNewLegend"
+        Me.ucrChkNewLegend.Size = New System.Drawing.Size(125, 23)
+        Me.ucrChkNewLegend.TabIndex = 49
+        '
+        'ucrInputGraphCaption
+        '
+        Me.ucrInputGraphCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphCaption.AutoSize = True
+        Me.ucrInputGraphCaption.IsMultiline = True
+        Me.ucrInputGraphCaption.IsReadOnly = False
+        Me.ucrInputGraphCaption.Location = New System.Drawing.Point(126, 72)
+        Me.ucrInputGraphCaption.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
+        Me.ucrInputGraphCaption.Name = "ucrInputGraphCaption"
+        Me.ucrInputGraphCaption.Size = New System.Drawing.Size(181, 53)
+        Me.ucrInputGraphCaption.TabIndex = 48
+        '
         'ucrNudCaptionSize
         '
         Me.ucrNudCaptionSize.AutoSize = True
@@ -833,6 +835,7 @@ Partial Class sdgPlots
         Me.ucrXAxis.Location = New System.Drawing.Point(-4, 3)
         Me.ucrXAxis.Name = "ucrXAxis"
         Me.ucrXAxis.Size = New System.Drawing.Size(774, 436)
+        Me.ucrXAxis.Size = New System.Drawing.Size(669, 463)
         Me.ucrXAxis.TabIndex = 0
         '
         'tbpYAxis
@@ -852,6 +855,7 @@ Partial Class sdgPlots
         Me.ucrYAxis.Location = New System.Drawing.Point(0, 1)
         Me.ucrYAxis.Name = "ucrYAxis"
         Me.ucrYAxis.Size = New System.Drawing.Size(774, 416)
+        Me.ucrYAxis.Size = New System.Drawing.Size(669, 463)
         Me.ucrYAxis.TabIndex = 0
         '
         'tbpTheme
@@ -2037,7 +2041,7 @@ Partial Class sdgPlots
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 470)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 490)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 1
@@ -2048,6 +2052,7 @@ Partial Class sdgPlots
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(800, 502)
+        Me.ClientSize = New System.Drawing.Size(687, 529)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
