@@ -18,8 +18,7 @@ Imports instat.Translations
 Public Class dlgPasteNewColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    'Private clsImportColsToNewDFRFunction, clsImportNewDataListRFunction As New RFunction
-    Private clsReadDataDataRFunction As New RFunction
+    Private clsReadDataRFunction As New RFunction
     Private clsImportColsToExistingDFRFunction As RFunction
     'used to prevent TestOkEnabled from being called multiple times when loading the dialog. 
     Private bValidatePasteData As Boolean = False
@@ -87,28 +86,28 @@ Public Class dlgPasteNewColumns
 
     Private Sub SetDefaults()
         clsImportColsToExistingDFRFunction = New RFunction
-        clsReadDataDataRFunction = New RFunction
+        clsReadDataRFunction = New RFunction
 
         ucrNudPreviewLines.Value = 10
         ucrSaveNewDFName.Reset()
         ucrDFSelected.Reset()
 
-        clsReadDataDataRFunction.SetPackageName("readr")
-        clsReadDataDataRFunction.SetRCommand("read_delim")
-        clsReadDataDataRFunction.AddParameter("col_names", strParameterValue:="TRUE", iPosition:=1)
+        clsReadDataRFunction.SetPackageName("readr")
+        clsReadDataRFunction.SetRCommand("read_delim")
+        clsReadDataRFunction.AddParameter("col_names", strParameterValue:="TRUE", iPosition:=1)
 
         clsImportColsToExistingDFRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadDataDataRFunction, iPosition:=1)
+        clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadDataRFunction, iPosition:=1)
         clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
 
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataDataRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkRowHeader.SetRCode(clsReadDataDataRFunction, bReset)
+        ucrChkRowHeader.SetRCode(clsReadDataRFunction, bReset)
 
-        ucrSaveNewDFName.SetRCode(clsReadDataDataRFunction, bReset)
+        ucrSaveNewDFName.SetRCode(clsReadDataRFunction, bReset)
 
         ucrDFSelected.SetRCode(clsImportColsToExistingDFRFunction, bReset)
         ucrChkKeepExstingCols.SetRCode(clsImportColsToExistingDFRFunction, bReset)
@@ -129,7 +128,7 @@ Public Class dlgPasteNewColumns
                 MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
                 clipBoardText = ""
             End If
-            clsReadDataDataRFunction.AddParameter("file", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
+            clsReadDataRFunction.AddParameter("file", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
         Catch ex As Exception
             'this error could be due to large clipboard data 
             MsgBox("Requested clipboard operation did not succeed. Large data detected")
@@ -148,7 +147,7 @@ Public Class dlgPasteNewColumns
             lblConfirmText.Text = ""
             lblConfirmText.ForeColor = Color.Red
 
-            Dim clsTempReadClipBoardDataRFunction As RFunction = clsReadDataDataRFunction.Clone()
+            Dim clsTempReadClipBoardDataRFunction As RFunction = clsReadDataRFunction.Clone()
 
             clsTempReadClipBoardDataRFunction.RemoveAssignTo() 'remove assign to before getting the script
             Dim dfTemp As DataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsTempReadClipBoardDataRFunction.ToScript(), bSilent:=True)?.AsDataFrame
@@ -156,7 +155,7 @@ Public Class dlgPasteNewColumns
                 Return False
             End If
 
-            'try to show preview the data only
+            'preview data
             frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols, iRowMax:=ucrNudPreviewLines.Value)
             lblConfirmText.Text = "Columns: " & dfTemp.ColumnCount & " | Rows: " & dfTemp.RowCount & Environment.NewLine & "Click Ok to paste data."
             lblConfirmText.ForeColor = Color.Green
@@ -185,9 +184,9 @@ Public Class dlgPasteNewColumns
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnl.ControlValueChanged
         If rdoDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataDataRFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataRFunction)
         ElseIf rdoColumns.Checked Then
-            clsReadDataDataRFunction.SetAssignToObject("data")
+            clsReadDataRFunction.SetAssignToObject("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
         End If
 
