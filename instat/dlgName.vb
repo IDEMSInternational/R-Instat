@@ -30,11 +30,13 @@ Public Class dlgName
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsStartwithFunction, clsEndswithFunction, clsMatchesFunction, clsContainsFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
     Private dctCaseOptions As New Dictionary(Of String, String)
+    Private dctReplace As New Dictionary(Of String, String)
     Private bCurrentCell As Boolean = False
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -86,6 +88,7 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoMakeCleanNames, "janitor::make_clean_names")
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
+        ucrPnlCase.AddRadioButton(rdoReplace, "stringr::str_replace")
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -113,12 +116,30 @@ Public Class dlgName
         ucrInputCase.SetDropDownStyleAsNonEditable()
         ucrInputCase.SetItems(dctCaseOptions)
 
+        ucrInputEdit.SetParameter(New RParameter("edit", 7))
+        dctReplace.Add("Starts With", Chr(34) & "starts_with" & Chr(34))
+        dctReplace.Add("Ends With", Chr(34) & "ends_with" & Chr(34))
+        dctReplace.Add("Matches", Chr(34) & "matches" & Chr(34))
+        dctReplace.Add("Contains", Chr(34) & "contains" & Chr(34))
+        ucrInputEdit.SetDropDownStyleAsNonEditable()
+        ucrInputEdit.SetItems(dctReplace)
+
+        ucrInputBy.SetParameter(New RParameter("replacement", 2))
+        ucrInputBy.SetValidationTypeAsRVariable()
+
+        ucrInputReplace.SetParameter(New RParameter("pattern", 2))
+        ucrInputReplace.SetValidationTypeAsRVariable()
+
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
         ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="8")
+        ucrPnlCase.AddToLinkedControls(ucrInputReplace, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCase.AddToLinkedControls(ucrInputBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrPnlCase.AddToLinkedControls(ucrInputEdit, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Starts With")
+
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
@@ -126,6 +147,8 @@ Public Class dlgName
         ucrInputCase.SetLinkedDisplayControl(lblCase)
         ucrPnlCase.SetLinkedDisplayControl(grpOptions)
         ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
+        ucrInputBy.SetLinkedDisplayControl(lblBy)
+        ucrInputReplace.SetLinkedDisplayControl(lblReplace)
     End Sub
 
     Private Sub SetDefaults()
@@ -133,6 +156,10 @@ Public Class dlgName
         clsNewColNameDataframeFunction = New RFunction
         clsNewLabelDataframeFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsStartwithFunction = New RFunction
+        clsEndswithFunction = New RFunction
+        clsMatchesFunction = New RFunction
+        clsContainsFunction = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
@@ -147,6 +174,22 @@ Public Class dlgName
         clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
         clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
         clsDefaultRFunction.AddParameter("minlength", "8", iPosition:=10)
+
+        clsContainsFunction.SetPackageName("tidyselect")
+        clsContainsFunction.SetRCommand("contains")
+        clsContainsFunction.AddParameter("match", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsMatchesFunction.SetPackageName("tidyselect")
+        clsMatchesFunction.SetRCommand("matches")
+        clsMatchesFunction.AddParameter("match", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsEndswithFunction.SetPackageName("tidyselect")
+        clsEndswithFunction.SetRCommand("ends_with")
+        clsEndswithFunction.AddParameter("match", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsStartwithFunction.SetPackageName("tidyselect")
+        clsStartwithFunction.SetRCommand("starts_with")
+        clsStartwithFunction.AddParameter("match", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
@@ -164,6 +207,8 @@ Public Class dlgName
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
+        ucrInputReplace.SetRCode(clsDefaultRFunction)
+        ucrInputBy.SetRCode(clsDefaultRFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -555,6 +600,23 @@ Public Class dlgName
             If Not strNewData.ToLower.Equals("t") AndAlso Not strNewData.ToLower.Equals("f") AndAlso Not IsNumeric(strNewData) AndAlso Not Boolean.TryParse(strNewData, parsedValue) Then
                 RenameColumns(strNewData, e.Cell.Row, iCol)
                 ValidateNamesFromDictionary(iCol)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
+        If rdoReplace.Checked Then
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+            clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=4)
+            If ucrInputEdit.GetText = "Starts With" Then
+                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
+            ElseIf ucrInputEdit.GetText = "Ends With" Then
+                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
+            ElseIf ucrInputEdit.GetText = "Matches" Then
+                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
+            ElseIf ucrInputEdit.GetText = "Contains" Then
+                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
             End If
         End If
     End Sub
