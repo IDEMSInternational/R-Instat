@@ -187,6 +187,7 @@ Public Class dlgPasteNewColumns
             clsReadDataRFunction.RemoveAssignTo()
             ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataRFunction)
             ucrSaveNewDFName.Visible = True 'todo. can this be done through the custom panel control?
+            ucrSaveNewDFName.Reset()
         ElseIf rdoColumns.Checked Then
             clsReadDataRFunction.SetAssignToObject("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
