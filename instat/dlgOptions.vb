@@ -359,6 +359,8 @@ Public Class dlgOptions
 
     Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged
         ApplyEnabled(True)
+        frmMain.mnuShowRCommand.Checked = ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
+        frmMain.mnuIncludeComments.Checked = ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
     Private Sub ApplyEnabled(bEnable As Boolean)
