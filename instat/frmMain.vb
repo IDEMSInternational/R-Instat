@@ -151,8 +151,6 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
-        mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
-        mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
         strCurrLang = clsInstatOptions.strLanguageCultureCode
         '---------------------------------------
@@ -444,7 +442,7 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
 
         mnuTbDataView.Checked = True
-        mnuOutputWindow.Checked = True
+        mnuTbOutput.Checked = True
         mnuLogScript.Checked = False
         UpdateLayout()
     End Sub
@@ -588,7 +586,7 @@ Public Class frmMain
             End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
-        mnuOutputWindow.Checked = mnuViewOutput.Checked
+        mnuTbOutput.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
@@ -625,20 +623,6 @@ Public Class frmMain
     Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
         mnuViewDataView.Checked = Not mnuViewDataView.Checked
         UpdateLayout()
-    End Sub
-
-    Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
-        mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
-        Me.clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
-        dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked = mnuShowRCommand.Checked
-        Me.clsInstatOptions.ExecuteRGlobalOptions()
-    End Sub
-
-    Private Sub mnuIncludeComments_Click(sender As Object, e As EventArgs) Handles mnuIncludeComments.Click
-        mnuIncludeComments.Checked = Not mnuIncludeComments.Checked
-        Me.clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
-        dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked = mnuIncludeComments.Checked
-        Me.clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
@@ -1642,8 +1626,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.ButtonClick, mnuOutputWindow.Click
-        mnuOutputWindow.Checked = mnuViewOutput.Checked
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
         mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
