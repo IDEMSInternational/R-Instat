@@ -29,7 +29,7 @@
 
 Imports instat.Translations
 Public Class sdgSaveColumnPosition
-    Private clsColPosFunction As RFunction
+    Private clsColPosFunction As New RFunction
     Public bControlsNotInitialised As Boolean = True
     Public bUserSelected As Boolean = False
     Public bRcodeFlag As Boolean = False

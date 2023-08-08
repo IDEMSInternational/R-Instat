@@ -169,7 +169,11 @@ Public Class ucrDataViewLinuxGrid
         dataGrid.Rows(iRow).Cells(iColumn).Value = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                            Optional bCellOrRow As Boolean = False) Implements IDataViewGrid.SearchInGrid
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bApplyToRows As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
+    End Sub
+
+    Public Sub SelectColumnInGrid(strColumn As String) Implements IDataViewGrid.SelectColumnInGrid
+
     End Sub
 End Class
