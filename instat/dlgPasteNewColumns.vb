@@ -50,9 +50,9 @@ Public Class dlgPasteNewColumns
         '----------------------------
         ucrPnl.AddRadioButton(rdoDataFrame)
         ucrPnl.AddRadioButton(rdoColumns)
-        ucrPnl.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=False)
+        ucrPnl.AddFunctionNamesCondition(rdoDataFrame, "read_delim", bNewIsPositive:=True)
         ucrPnl.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=True)
-        ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=False)
         ucrPnl.AddToLinkedControls({ucrDFSelected, ucrChkKeepExstingCols}, {rdoColumns}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRowHeader.SetText("First row is header")
@@ -184,10 +184,13 @@ Public Class dlgPasteNewColumns
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnl.ControlValueChanged
         If rdoDataFrame.Checked Then
+            clsReadDataRFunction.RemoveAssignTo()
             ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataRFunction)
+            ucrSaveNewDFName.Visible = True 'todo. can this be done through the custom panel control?
         ElseIf rdoColumns.Checked Then
             clsReadDataRFunction.SetAssignToObject("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
+            ucrSaveNewDFName.Visible = False 'todo. can this be done through the custom panel control?
         End If
 
         If bValidatePasteData Then
