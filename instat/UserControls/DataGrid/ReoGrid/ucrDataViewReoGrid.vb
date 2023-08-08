@@ -78,7 +78,7 @@ Public Class ucrDataViewReoGrid
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
                     strData = GetInnerBracketedString(strData)
-                    strData = If(strData.Contains(":"), strData.Replace(":", " ,"), strData)
+                    strData = If(strData.Contains(":"), strData.Replace(":", ", "), strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
