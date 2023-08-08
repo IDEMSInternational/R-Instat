@@ -339,7 +339,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       for(col_name in names(out)) {
         for(attr_name in names(attributes(private$data[[col_name]]))) {
           if(!attr_name %in% c("class", "levels")) {
-            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]][1:nrow(out)], attr_name)
           }
         }
       }
@@ -771,7 +771,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
         }
         # remove key
-        get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == col_name)
+        get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == curr_col_name)
         if (!is.null(get_key$Is_Key)){
           if (!is.na(get_key$Is_Key) && get_key$Is_Key){
             active_keys <- self$get_keys()
@@ -2037,6 +2037,14 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
   }
   return(all_column_names[out])
 })
+
+DataSheet$set("public", "get_column_selected_column_names", function(column_selection_name = "") {
+  if(column_selection_name != "") {
+  selected_columns <- self$get_column_selection_column_names(column_selection_name)
+  return(selected_columns)
+  }
+}
+)
 
 DataSheet$set("public", "column_selection_applied", function() {
   curr_sel <- private$.current_column_selection
