@@ -647,14 +647,12 @@ Public Class frmMain
     Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
         mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
         Me.clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
-        dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked = mnuShowRCommand.Checked
         Me.clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuIncludeComments_Click(sender As Object, e As EventArgs) Handles mnuIncludeComments.Click
         mnuIncludeComments.Checked = Not mnuIncludeComments.Checked
         Me.clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
-        dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked = mnuIncludeComments.Checked
         Me.clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
@@ -841,6 +839,8 @@ Public Class frmMain
 
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
         dlgOptions.ShowDialog()
+        Me.mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
+        Me.mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
     Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameHideColumns.Click
