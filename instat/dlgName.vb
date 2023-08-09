@@ -562,9 +562,9 @@ Public Class dlgName
                 ucrReceiverColumns.Visible = False
             End If
         End If
-            ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso (rdoAbbreviate.Checked OrElse rdoToLower.Checked OrElse rdoMakeCleanNames.Checked)), True, False)
-        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso (rdoAbbreviate.Checked OrElse rdoToLower.Checked OrElse rdoMakeCleanNames.Checked)), True, False)
-        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso (rdoAbbreviate.Checked OrElse rdoToLower.Checked OrElse rdoMakeCleanNames.Checked)), True, False)
+        ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
+        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
+        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
 
         UpdateGrid()
         RemoveParameters()
