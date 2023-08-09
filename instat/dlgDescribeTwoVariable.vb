@@ -480,23 +480,23 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelationFunction)
-                'ucrSaveTable.Visible = False
+                ucrSaveTable.Visible = False
             ElseIf IsFactorByNumeric() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
-                'ucrSaveTable.Visible = False
+                ucrSaveTable.Visible = False
             ElseIf IsNumericByFactor() Then
-                'ucrSaveTable.Visible = True
+                ucrSaveTable.Visible = True
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-                ' ucrSaveTable.SetPrefix("summary_table")
+                ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
                 ucrSaveTable.SetCheckBoxText("Save Table")
             ElseIf IsFactorByFactor() Then
-                'ucrSaveTable.Visible = True
+                ucrSaveTable.Visible = True
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-                ' ucrSaveTable.SetPrefix("frequency_table")
+                ucrSaveTable.SetPrefix("frequency_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
                 ucrSaveTable.SetCheckBoxText("Save Table")

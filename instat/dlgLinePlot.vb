@@ -746,7 +746,7 @@ Public Class dlgLinePlot
     Private Sub PeakOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PeakOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsPeakFunction)
     End Sub
-    
+
     Private Sub DumbbellOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DumbbellOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomDumbbellFunction)
     End Sub
@@ -754,7 +754,7 @@ Public Class dlgLinePlot
     Private Sub LineOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LineOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomLineFunction)
     End Sub
-    
+
     Private Sub SmoothOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomSmoothFunction)
     End Sub
@@ -766,7 +766,7 @@ Public Class dlgLinePlot
     Private Sub PathOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PathOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsPathFunction)
     End Sub
-    
+
     Private Sub StepOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StepOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomStepFunction)
     End Sub
