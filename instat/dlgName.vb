@@ -53,6 +53,7 @@ Public Class dlgName
             SetSelectedColumn()
         End If
         autoTranslate(Me)
+        DialogueSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -149,6 +150,7 @@ Public Class dlgName
         ucrChkIncludeVariable.SetLinkedDisplayControl(grdRenameColumns)
         ucrInputBy.SetLinkedDisplayControl(lblBy)
         ucrInputReplace.SetLinkedDisplayControl(lblReplace)
+        DialogueSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -556,11 +558,7 @@ Public Class dlgName
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
-            If Not rdoReplace.Checked Then
-                ucrReceiverColumns.SetMeAsReceiver()
-            Else
-                ucrReceiverColumns.Visible = False
-            End If
+            ucrReceiverColumns.SetMeAsReceiver()
         End If
         ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
         ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
@@ -568,7 +566,19 @@ Public Class dlgName
 
         UpdateGrid()
         RemoveParameters()
+        DialogueSize()
     End Sub
+
+    Private Sub DialogueSize()
+        If rdoSingle.Checked OrElse rdoMultiple.Checked Then
+            Me.Size = New Size(561, 391)
+            Me.ucrBase.Location = New Point(12, 296)
+        Else
+            Me.Size = New Size(561, 504)
+            Me.ucrBase.Location = New Point(9, 405)
+        End If
+    End Sub
+
 
     Private Sub MakeLabelColumnVisible()
         If ucrChkIncludeVariable.Checked Then

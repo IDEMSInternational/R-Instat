@@ -410,7 +410,7 @@ Partial Class dlgName
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 417)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 405)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 12
@@ -428,7 +428,7 @@ Partial Class dlgName
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 479)
+        Me.ClientSize = New System.Drawing.Size(545, 465)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
         Me.Controls.Add(Me.rdoRenameWith)
