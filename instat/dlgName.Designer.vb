@@ -48,6 +48,12 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblBy = New System.Windows.Forms.Label()
+        Me.lblReplace = New System.Windows.Forms.Label()
+        Me.ucrInputBy = New instat.ucrInputTextBox()
+        Me.ucrInputReplace = New instat.ucrInputTextBox()
+        Me.ucrInputEdit = New instat.ucrInputComboBox()
+        Me.rdoReplace = New System.Windows.Forms.RadioButton()
         Me.ucrNudAbbreviate = New instat.ucrNud()
         Me.rdoAbbreviate = New System.Windows.Forms.RadioButton()
         Me.ucrInputCase = New instat.ucrInputComboBox()
@@ -62,12 +68,6 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.rdoReplace = New System.Windows.Forms.RadioButton()
-        Me.ucrInputEdit = New instat.ucrInputComboBox()
-        Me.ucrInputReplace = New instat.ucrInputTextBox()
-        Me.ucrInputBy = New instat.ucrInputTextBox()
-        Me.lblReplace = New System.Windows.Forms.Label()
-        Me.lblBy = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -194,6 +194,68 @@ Partial Class dlgName
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Rename Options"
+        '
+        'lblBy
+        '
+        Me.lblBy.AutoSize = True
+        Me.lblBy.Location = New System.Drawing.Point(4, 160)
+        Me.lblBy.Name = "lblBy"
+        Me.lblBy.Size = New System.Drawing.Size(22, 13)
+        Me.lblBy.TabIndex = 29
+        Me.lblBy.Text = "By:"
+        '
+        'lblReplace
+        '
+        Me.lblReplace.AutoSize = True
+        Me.lblReplace.Location = New System.Drawing.Point(4, 129)
+        Me.lblReplace.Name = "lblReplace"
+        Me.lblReplace.Size = New System.Drawing.Size(50, 13)
+        Me.lblReplace.TabIndex = 28
+        Me.lblReplace.Text = "Replace:"
+        '
+        'ucrInputBy
+        '
+        Me.ucrInputBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputBy.AutoSize = True
+        Me.ucrInputBy.IsMultiline = False
+        Me.ucrInputBy.IsReadOnly = False
+        Me.ucrInputBy.Location = New System.Drawing.Point(96, 152)
+        Me.ucrInputBy.Name = "ucrInputBy"
+        Me.ucrInputBy.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputBy.TabIndex = 27
+        '
+        'ucrInputReplace
+        '
+        Me.ucrInputReplace.AddQuotesIfUnrecognised = True
+        Me.ucrInputReplace.AutoSize = True
+        Me.ucrInputReplace.IsMultiline = False
+        Me.ucrInputReplace.IsReadOnly = False
+        Me.ucrInputReplace.Location = New System.Drawing.Point(96, 123)
+        Me.ucrInputReplace.Name = "ucrInputReplace"
+        Me.ucrInputReplace.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputReplace.TabIndex = 26
+        '
+        'ucrInputEdit
+        '
+        Me.ucrInputEdit.AddQuotesIfUnrecognised = True
+        Me.ucrInputEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputEdit.GetSetSelectedIndex = -1
+        Me.ucrInputEdit.IsReadOnly = False
+        Me.ucrInputEdit.Location = New System.Drawing.Point(96, 93)
+        Me.ucrInputEdit.Name = "ucrInputEdit"
+        Me.ucrInputEdit.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputEdit.TabIndex = 25
+        '
+        'rdoReplace
+        '
+        Me.rdoReplace.AutoSize = True
+        Me.rdoReplace.Location = New System.Drawing.Point(7, 93)
+        Me.rdoReplace.Name = "rdoReplace"
+        Me.rdoReplace.Size = New System.Drawing.Size(46, 17)
+        Me.rdoReplace.TabIndex = 24
+        Me.rdoReplace.TabStop = True
+        Me.rdoReplace.Text = "Edit "
+        Me.rdoReplace.UseVisualStyleBackColor = True
         '
         'ucrNudAbbreviate
         '
@@ -360,68 +422,6 @@ Partial Class dlgName
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
         Me.ucrPnlOptions.TabIndex = 0
-        '
-        'rdoReplace
-        '
-        Me.rdoReplace.AutoSize = True
-        Me.rdoReplace.Location = New System.Drawing.Point(7, 93)
-        Me.rdoReplace.Name = "rdoReplace"
-        Me.rdoReplace.Size = New System.Drawing.Size(46, 17)
-        Me.rdoReplace.TabIndex = 24
-        Me.rdoReplace.TabStop = True
-        Me.rdoReplace.Text = "Edit "
-        Me.rdoReplace.UseVisualStyleBackColor = True
-        '
-        'ucrInputEdit
-        '
-        Me.ucrInputEdit.AddQuotesIfUnrecognised = True
-        Me.ucrInputEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputEdit.GetSetSelectedIndex = -1
-        Me.ucrInputEdit.IsReadOnly = False
-        Me.ucrInputEdit.Location = New System.Drawing.Point(96, 93)
-        Me.ucrInputEdit.Name = "ucrInputEdit"
-        Me.ucrInputEdit.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputEdit.TabIndex = 25
-        '
-        'ucrInputReplace
-        '
-        Me.ucrInputReplace.AddQuotesIfUnrecognised = True
-        Me.ucrInputReplace.AutoSize = True
-        Me.ucrInputReplace.IsMultiline = False
-        Me.ucrInputReplace.IsReadOnly = False
-        Me.ucrInputReplace.Location = New System.Drawing.Point(96, 123)
-        Me.ucrInputReplace.Name = "ucrInputReplace"
-        Me.ucrInputReplace.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputReplace.TabIndex = 26
-        '
-        'ucrInputBy
-        '
-        Me.ucrInputBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputBy.AutoSize = True
-        Me.ucrInputBy.IsMultiline = False
-        Me.ucrInputBy.IsReadOnly = False
-        Me.ucrInputBy.Location = New System.Drawing.Point(96, 152)
-        Me.ucrInputBy.Name = "ucrInputBy"
-        Me.ucrInputBy.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputBy.TabIndex = 27
-        '
-        'lblReplace
-        '
-        Me.lblReplace.AutoSize = True
-        Me.lblReplace.Location = New System.Drawing.Point(4, 129)
-        Me.lblReplace.Name = "lblReplace"
-        Me.lblReplace.Size = New System.Drawing.Size(50, 13)
-        Me.lblReplace.TabIndex = 28
-        Me.lblReplace.Text = "Replace:"
-        '
-        'lblBy
-        '
-        Me.lblBy.AutoSize = True
-        Me.lblBy.Location = New System.Drawing.Point(4, 160)
-        Me.lblBy.Name = "lblBy"
-        Me.lblBy.Size = New System.Drawing.Size(22, 13)
-        Me.lblBy.TabIndex = 29
-        Me.lblBy.Text = "By:"
         '
         'dlgName
         '

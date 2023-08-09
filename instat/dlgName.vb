@@ -30,7 +30,7 @@ Public Class dlgName
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsStartwithFunction, clsEndswithFunction, clsMatchesFunction, clsContainsFunction, clsReplaceFunction As New RFunction
+    Private clsStartwithFunction, clsEndswithFunction, clsMatchesFunction, clsContainsFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
@@ -160,7 +160,6 @@ Public Class dlgName
         clsEndswithFunction = New RFunction
         clsMatchesFunction = New RFunction
         clsContainsFunction = New RFunction
-        clsReplaceFunction = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
@@ -192,17 +191,14 @@ Public Class dlgName
         clsStartwithFunction.SetRCommand("starts_with")
         clsStartwithFunction.AddParameter("match", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
 
-        clsReplaceFunction.SetPackageName("stringr")
-        clsReplaceFunction.SetRCommand("str_replace")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputReplace.AddAdditionalCodeParameterPair(clsStartwithFunction, New RParameter("match"), iAdditionalPairNo:=1)
-        ucrInputReplace.AddAdditionalCodeParameterPair(clsEndswithFunction, New RParameter("match"), iAdditionalPairNo:=2)
-        ucrInputReplace.AddAdditionalCodeParameterPair(clsMatchesFunction, New RParameter("match"), iAdditionalPairNo:=3)
-        ucrInputReplace.AddAdditionalCodeParameterPair(clsContainsFunction, New RParameter("match"), iAdditionalPairNo:=4)
+        ucrInputReplace.AddAdditionalCodeParameterPair(clsStartwithFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrInputReplace.AddAdditionalCodeParameterPair(clsEndswithFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrInputReplace.AddAdditionalCodeParameterPair(clsMatchesFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrInputReplace.AddAdditionalCodeParameterPair(clsContainsFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
 
         ucrSelectVariables.SetRCode(clsDefaultRFunction, bReset)
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
@@ -560,11 +556,15 @@ Public Class dlgName
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
-            ucrReceiverColumns.SetMeAsReceiver()
+            If Not rdoReplace.Checked Then
+                ucrReceiverColumns.SetMeAsReceiver()
+            Else
+                ucrReceiverColumns.Visible = False
+            End If
         End If
-        ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
-        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
-        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
+            ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso (rdoAbbreviate.Checked OrElse rdoToLower.Checked OrElse rdoMakeCleanNames.Checked)), True, False)
+        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso (rdoAbbreviate.Checked OrElse rdoToLower.Checked OrElse rdoMakeCleanNames.Checked)), True, False)
+        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso (rdoAbbreviate.Checked OrElse rdoToLower.Checked OrElse rdoMakeCleanNames.Checked)), True, False)
 
         UpdateGrid()
         RemoveParameters()
@@ -615,9 +615,9 @@ Public Class dlgName
 
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
         If rdoReplace.Checked Then
+            ucrReceiverColumns.Visible = False
             clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
             clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-            'clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
             clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
             If ucrInputEdit.GetText = "Starts With" Then
                 clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
