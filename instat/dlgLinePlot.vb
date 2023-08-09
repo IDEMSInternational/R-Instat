@@ -150,11 +150,11 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForLinePlot.bAddParameterIfEmpty = True
 
-        ucrReceiverYVar.SetParameter(New RParameter("y", 1))
-        ucrReceiverYVar.Selector = ucrLinePlotSelector
-        ucrReceiverYVar.bWithQuotes = False
-        ucrReceiverYVar.SetParameterIsString()
-        ucrReceiverYVar.SetIncludedDataTypes({"numeric"})
+        'ucrReceiverYVar.SetParameter(New RParameter("y", 1))
+        'ucrReceiverYVar.Selector = ucrLinePlotSelector
+        'ucrReceiverYVar.bWithQuotes = False
+        'ucrReceiverYVar.SetParameterIsString()
+        'ucrReceiverYVar.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverYMax.SetParameter(New RParameter("ymax", 0))
         ucrReceiverYMax.Selector = ucrLinePlotSelector
@@ -414,11 +414,11 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd, ucrChkDumbbellColour, ucrChkDumbbellSize}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddPoints}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeColour, ucrChkSlopeLabelOptions, ucrChkSlopeTextOptions, ucrChkSlopeLineOptions, ucrChkSlopeLegend}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverYVar, ucrReceiverYMax, ucrReceiverYMin, ucrChkRibbon}, {rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverYMax, ucrReceiverYMin, ucrChkRibbon}, {rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Orange")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellXEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
@@ -446,7 +446,6 @@ Public Class dlgLinePlot
         ucrReceiverSlopeX.SetLinkedDisplayControl(lblSlopeX)
         ucrReceiverYMax.SetLinkedDisplayControl(lblYMax)
         ucrReceiverYMin.SetLinkedDisplayControl(lblYMin)
-        ucrReceiverYVar.SetLinkedDisplayControl(lblYVar)
         ucrFactorOptionalReceiver.SetLinkedDisplayControl(lblFactorOptional)
         ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
         ucrInputDumbbellX.SetLinkedDisplayControl(lblXColour)
@@ -505,8 +504,8 @@ Public Class dlgLinePlot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
+        ' clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+        ' clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
         clsAesLinerangeFunction.SetRCommand("aes")
 
@@ -584,7 +583,7 @@ Public Class dlgLinePlot
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsGgSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverSlopeY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
-        ucrReceiverYVar.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
+        'ucrReceiverYVar.AddAdditionalCodeParameterPair(clsRaesFunction, ucrReceiverYVar.GetParameter, iAdditionalPairNo:=1)
 
         ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
@@ -623,7 +622,7 @@ Public Class dlgLinePlot
             (rdoDumbbell.Checked AndAlso (ucrReceiverX.IsEmpty() OrElse ucrReceiverSlopeY.IsEmpty() OrElse
             ucrReceiverXEnd.IsEmpty())) OrElse (rdoSlope.Checked AndAlso (ucrReceiverSlopeX.IsEmpty() OrElse
             ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverSlopeColour.IsEmpty())) OrElse (rdoLinerange.Checked AndAlso
-            (ucrReceiverYVar.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) Then
+            (ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -682,12 +681,12 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub SetGroupParam()
-        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
+        If rdoLine.Checked OrElse rdoSmoothing.Checked OrElse rdoLinerange.Checked Then
             If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
                 clsRaesFunction.AddParameter("group", "1", iPosition:=3)
-                'ucrReceiverGroup.Enabled = False
+                ucrReceiverGroup.Enabled = False
             ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-                'ucrReceiverGroup.Enabled = True
+                ucrReceiverGroup.Enabled = True
                 ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
                 clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
             Else
@@ -730,7 +729,7 @@ Public Class dlgLinePlot
             ucrSave.SetPrefix("smooth")
             clsOptionsFunction.SetRCommand("geom_smooth")
         ElseIf rdoLinerange.Checked Then
-            ucrReceiverYVar.SetMeAsReceiver()
+            ucrReceiverSlopeY.SetMeAsReceiver()
             'ucrReceiverX.SetIncludedDataTypes({"numeric"})
             clsOptionsFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsOptionsFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
@@ -782,7 +781,7 @@ Public Class dlgLinePlot
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
         ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged,
         ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged,
-        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYVar.ControlContentsChanged
+        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged ', ucrReceiverYVar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 

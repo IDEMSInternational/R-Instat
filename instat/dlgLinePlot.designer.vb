@@ -92,8 +92,6 @@ Partial Class dlgLinePlot
         Me.rdoLinerange = New System.Windows.Forms.RadioButton()
         Me.lblYMax = New System.Windows.Forms.Label()
         Me.lblYMin = New System.Windows.Forms.Label()
-        Me.lblYVar = New System.Windows.Forms.Label()
-        Me.ucrReceiverYVar = New instat.ucrReceiverSingle()
         Me.ucrChkRibbon = New instat.ucrCheck()
         Me.ucrReceiverYMin = New instat.ucrReceiverSingle()
         Me.ucrReceiverYMax = New instat.ucrReceiverSingle()
@@ -712,30 +710,6 @@ Partial Class dlgLinePlot
         Me.lblYMin.Tag = "X_Slope_Variable:"
         Me.lblYMin.Text = "Y min:"
         '
-        'lblYVar
-        '
-        Me.lblYVar.AutoSize = True
-        Me.lblYVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYVar.Location = New System.Drawing.Point(284, 90)
-        Me.lblYVar.Name = "lblYVar"
-        Me.lblYVar.Size = New System.Drawing.Size(58, 13)
-        Me.lblYVar.TabIndex = 8
-        Me.lblYVar.Tag = "Y_Slope_Variable:"
-        Me.lblYVar.Text = "Y Variable:"
-        '
-        'ucrReceiverYVar
-        '
-        Me.ucrReceiverYVar.AutoSize = True
-        Me.ucrReceiverYVar.frmParent = Me
-        Me.ucrReceiverYVar.Location = New System.Drawing.Point(284, 104)
-        Me.ucrReceiverYVar.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYVar.Name = "ucrReceiverYVar"
-        Me.ucrReceiverYVar.Selector = Nothing
-        Me.ucrReceiverYVar.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverYVar.strNcFilePath = ""
-        Me.ucrReceiverYVar.TabIndex = 9
-        Me.ucrReceiverYVar.ucrSelector = Nothing
-        '
         'ucrChkRibbon
         '
         Me.ucrChkRibbon.AutoSize = True
@@ -1246,8 +1220,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.rdoPointrange)
         Me.Controls.Add(Me.rdoRibbon)
         Me.Controls.Add(Me.rdoCrossbar)
-        Me.Controls.Add(Me.lblYVar)
-        Me.Controls.Add(Me.ucrReceiverYVar)
         Me.Controls.Add(Me.ucrChkRibbon)
         Me.Controls.Add(Me.lblYMin)
         Me.Controls.Add(Me.ucrReceiverYMin)
@@ -1276,7 +1248,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.lblSlopeColour)
         Me.Controls.Add(Me.lblSlopeX)
         Me.Controls.Add(Me.ucrReceiverSlopeY)
-        Me.Controls.Add(Me.lblSlopeY)
         Me.Controls.Add(Me.rdoSlope)
         Me.Controls.Add(Me.rdoDumbbell)
         Me.Controls.Add(Me.ucrChkAddLine)
@@ -1321,6 +1292,7 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrPnlLinerangeOptions)
         Me.Controls.Add(Me.grpSmoothOptions)
         Me.Controls.Add(Me.ucrPnlStepOrPath)
+        Me.Controls.Add(Me.lblSlopeY)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1430,8 +1402,6 @@ Partial Class dlgLinePlot
     Friend WithEvents rdoPointrange As RadioButton
     Friend WithEvents rdoCrossbar As RadioButton
     Friend WithEvents rdoErrorbar As RadioButton
-    Friend WithEvents lblYVar As Label
-    Friend WithEvents ucrReceiverYVar As ucrReceiverSingle
     Friend WithEvents lblGroupLine As Label
     Friend WithEvents ucrReceiverGroup As ucrReceiverSingle
     Friend WithEvents rdoArea As RadioButton
