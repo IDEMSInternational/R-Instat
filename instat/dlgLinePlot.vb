@@ -250,7 +250,7 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddRadioButton(rdoDumbbell)
         ucrPnlOptions.AddRadioButton(rdoSlope)
 
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_path", "geom_step"})
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_area", "geom_path", "geom_step"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSmoothing, strFirstParameterName, {"geom_smooth"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLinerange, strFirstParameterName, {"geom_linerange", "geom_ribbon", "geom_pointrange", "geom_crossbar", "geom_errorbar"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDumbbell, "dumbbellplot", {"geom_dumbbell"})
@@ -568,9 +568,6 @@ Public Class dlgLinePlot
         clsPointsFunction.AddParameter("size", "3")
         clsPointsFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
-        clsPeakFunction.SetPackageName("ggpmisc")
-        clsPeakFunction.SetRCommand("stat_peaks")
-
         clsAreaFunction.SetPackageName("ggplot2")
         clsAreaFunction.SetRCommand("geom_area")
 
@@ -838,5 +835,9 @@ Public Class dlgLinePlot
 
     Private Sub StepOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StepOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomStepFunction)
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYMax.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
     End Sub
 End Class

@@ -176,7 +176,7 @@ Partial Class dlgLinePlot
         '
         Me.rdoPath.AutoSize = True
         Me.rdoPath.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPath.Location = New System.Drawing.Point(246, 420)
+        Me.rdoPath.Location = New System.Drawing.Point(129, 416)
         Me.rdoPath.Name = "rdoPath"
         Me.rdoPath.Size = New System.Drawing.Size(47, 17)
         Me.rdoPath.TabIndex = 67
@@ -188,7 +188,7 @@ Partial Class dlgLinePlot
         '
         Me.rdoStep.AutoSize = True
         Me.rdoStep.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStep.Location = New System.Drawing.Point(314, 420)
+        Me.rdoStep.Location = New System.Drawing.Point(203, 416)
         Me.rdoStep.Name = "rdoStep"
         Me.rdoStep.Size = New System.Drawing.Size(47, 17)
         Me.rdoStep.TabIndex = 68
@@ -265,7 +265,7 @@ Partial Class dlgLinePlot
         Me.grpSmoothOptions.Controls.Add(Me.ucrInputMethod)
         Me.grpSmoothOptions.Controls.Add(Me.lblMethod)
         Me.grpSmoothOptions.Controls.Add(Me.ucrFamilyInput)
-        Me.grpSmoothOptions.Location = New System.Drawing.Point(8, 360)
+        Me.grpSmoothOptions.Location = New System.Drawing.Point(8, 193)
         Me.grpSmoothOptions.Name = "grpSmoothOptions"
         Me.grpSmoothOptions.Size = New System.Drawing.Size(402, 77)
         Me.grpSmoothOptions.TabIndex = 25
@@ -881,7 +881,7 @@ Partial Class dlgLinePlot
         'ucrPnlStepOrPath
         '
         Me.ucrPnlStepOrPath.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStepOrPath.Location = New System.Drawing.Point(168, 414)
+        Me.ucrPnlStepOrPath.Location = New System.Drawing.Point(42, 412)
         Me.ucrPnlStepOrPath.Name = "ucrPnlStepOrPath"
         Me.ucrPnlStepOrPath.Size = New System.Drawing.Size(222, 29)
         Me.ucrPnlStepOrPath.TabIndex = 66
@@ -890,7 +890,7 @@ Partial Class dlgLinePlot
         '
         Me.ucrChkPathOrStep.AutoSize = True
         Me.ucrChkPathOrStep.Checked = False
-        Me.ucrChkPathOrStep.Location = New System.Drawing.Point(9, 415)
+        Me.ucrChkPathOrStep.Location = New System.Drawing.Point(9, 389)
         Me.ucrChkPathOrStep.Name = "ucrChkPathOrStep"
         Me.ucrChkPathOrStep.Size = New System.Drawing.Size(148, 23)
         Me.ucrChkPathOrStep.TabIndex = 30
@@ -1200,7 +1200,7 @@ Partial Class dlgLinePlot
         '
         Me.rdoArea.AutoSize = True
         Me.rdoArea.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoArea.Location = New System.Drawing.Point(178, 420)
+        Me.rdoArea.Location = New System.Drawing.Point(55, 416)
         Me.rdoArea.Name = "rdoArea"
         Me.rdoArea.Size = New System.Drawing.Size(47, 17)
         Me.rdoArea.TabIndex = 78
@@ -1289,10 +1289,10 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrReceiverXEnd)
         Me.Controls.Add(Me.ucrReceiverSlopeColour)
         Me.Controls.Add(Me.ucrReceiverSlopeX)
-        Me.Controls.Add(Me.ucrPnlLinerangeOptions)
         Me.Controls.Add(Me.grpSmoothOptions)
         Me.Controls.Add(Me.ucrPnlStepOrPath)
         Me.Controls.Add(Me.lblSlopeY)
+        Me.Controls.Add(Me.ucrPnlLinerangeOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
