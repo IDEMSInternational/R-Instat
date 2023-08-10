@@ -2524,4 +2524,9 @@ Public Class frmMain
     Private Sub mnuDescribeGeneralTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralTables.Click
         dlgSummaryTables.ShowDialog()
     End Sub
+
+    Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
 End Class
