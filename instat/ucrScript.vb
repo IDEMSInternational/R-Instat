@@ -236,38 +236,39 @@ Public Class ucrScript
     Private Sub EnableDisableButtons()
 
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
-
-        mnuUndo.Enabled = clsScriptActive.CanUndo AndAlso Not bIslogTab
-        mnuRedo.Enabled = clsScriptActive.CanRedo AndAlso Not bIslogTab
-
-        Dim bScriptselected = clsScriptActive.SelectedText.Length > 0
-        Dim bScriptExists = clsScriptActive.TextLength > 0
-
-        mnuCut.Enabled = bScriptselected AndAlso Not bIsLogTab
-        mnuCopy.Enabled = bScriptselected
-        mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text) AndAlso Not bIslogTab
-        mnuSelectAll.Enabled = bScriptExists
-        mnuClear.Enabled = bScriptExists AndAlso Not bIslogTab
-
-        mnuRunCurrentLineSelection.Enabled = bScriptExists
-        mnuRunAllText.Enabled = bScriptExists
-
-        mnuOpenScriptasFile.Enabled = bScriptExists
-        mnuLoadScriptFromFile.Enabled = Not bIsLogTab
-        mnuSaveScript.Enabled = bScriptExists
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
 
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
-        cmdClear.Enabled = bScriptExists AndAlso Not bIslogTab
+        cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
 
-        cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIslogTab
+        cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
     End Sub
 
     Private Sub EnableRunButtons(bEnable As Boolean)
         cmdRunLineSelection.Enabled = bEnable
         cmdRunAll.Enabled = bEnable
+    End Sub
+
+    ''' <summary>
+    ''' Enables or disables all right click menu options
+    ''' </summary>
+    ''' <param name="bEnable">If true, enables all right click options,false otherwise</param>
+    Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
+        mnuUndo.Enabled = bEnable
+        mnuRedo.Enabled = bEnable
+        mnuCut.Enabled = bEnable
+        mnuCopy.Enabled = bEnable
+        mnuPaste.Enabled = bEnable
+        mnuSelectAll.Enabled = bEnable
+        mnuClear.Enabled = bEnable
+        mnuRunCurrentLineSelection.Enabled = bEnable
+        mnuRunAllText.Enabled = bEnable
+        mnuLoadScriptFromFile.Enabled = bEnable
+        mnuOpenScriptasFile.Enabled = bEnable
+        mnuSaveScript.Enabled = bEnable
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -433,6 +434,11 @@ Public Class ucrScript
     End Function
 
     Private Sub LoadScript()
+        If TabControl.SelectedIndex = iTabIndexLog Then
+            MsgBox("You can only load script to a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Load to log tab")
+            Exit Sub
+        End If
+
         If clsScriptActive.TextLength > 0 _
                 AndAlso MsgBox("Loading a script from file will clear your current script" _
                                & Environment.NewLine & "Do you still want to load?",
@@ -634,6 +640,54 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+
+    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
+        'enable and disable menu options based on the active script properties before the user views them
+
+        Dim bScriptSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+        Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+
+        'initially disable all the right click menu options
+        EnableRightClickMenuOptions(False)
+
+        'if active tab is not log tab then enable the options based on active tab state
+        'below are options that are not to be used in the log tab
+        If TabControl.SelectedIndex <> iTabIndexLog Then
+            mnuUndo.Enabled = clsScriptActive.CanUndo
+            mnuRedo.Enabled = clsScriptActive.CanRedo
+            mnuCut.Enabled = bScriptSelected
+            mnuCopy.Enabled = bScriptSelected
+            mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
+            mnuClear.Enabled = bScriptExists
+            mnuLoadScriptFromFile.Enabled = True
+        End If
+
+        'enable remaining options based on tab state
+        mnuSelectAll.Enabled = bScriptExists
+        mnuRunCurrentLineSelection.Enabled = bScriptExists
+        mnuRunAllText.Enabled = bScriptExists
+        mnuOpenScriptasFile.Enabled = bScriptExists
+        mnuSaveScript.Enabled = bScriptExists
+    End Sub
+
+    Private Sub mnuContextScript_Closing(sender As Object, e As EventArgs) Handles mnuContextScript.Closing
+        'On closing menu context, just enable all the menu options to restore their short cut keys
+        'validations of the options actions is done by the functions that the events call.
+        EnableRightClickMenuOptions(True)
+    End Sub
+
+    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+        CutText()
+    End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        CopyText()
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteText()
+    End Sub
+
     Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClear.Click, cmdClear.Click
 
         If TabControl.SelectedIndex = iTabIndexLog Then
@@ -648,18 +702,6 @@ Public Class ucrScript
         End If
         clsScriptActive.ClearAll()
         EnableDisableButtons()
-    End Sub
-
-    Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
-        EnableDisableButtons()
-    End Sub
-
-    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        CopyText()
-    End Sub
-
-    Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-        CutText()
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -695,10 +737,6 @@ Public Class ucrScript
         End Try
     End Sub
 
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteText()
-    End Sub
-
     Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
         If TabControl.SelectedIndex = iTabIndexLog Then
             MsgBox("You can only redo in a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Redo log tab")
@@ -720,19 +758,23 @@ Public Class ucrScript
         End If
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
+        EnableRightClickMenuOptions(False)
         RunText(clsScriptActive.Text)
         EnableRunButtons(True)
+        EnableRightClickMenuOptions(True)
     End Sub
 
     Private Sub mnuRunCurrentLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
         'temporarily disable the buttons in case its a long operation
         EnableRunButtons(False)
+        EnableRightClickMenuOptions(False)
         If clsScriptActive.SelectedText.Length > 0 Then
             RunText(clsScriptActive.SelectedText)
         Else
             RunCurrentLine()
         End If
         EnableRunButtons(True)
+        EnableRightClickMenuOptions(True)
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click

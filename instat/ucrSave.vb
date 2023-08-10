@@ -775,6 +775,14 @@ Public Class ucrSave
         End If
     End Function
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the adjacent column name from the Save Column Position Sub Dialogue. </summary>
+    '''
+    ''' <returns>   The adjacent column name from the Save Column Position Sub Dialogue. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function AdjacentColumnName() As String
+        Return sdgSaveColumnPosition.AdjacentColumn
+    End Function
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   True if the user has entered text into the text/combo box, else false. </summary>
     '''
     ''' <value>     True if the user has entered text into the text/combo box, else false. </value>
