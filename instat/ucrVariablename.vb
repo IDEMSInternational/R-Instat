@@ -24,7 +24,7 @@ Public Class ucrVariableName
     Public Event NameChanged()
     'TODO this has a bug if using for setting default values in textbox if user does not use keyboard
     Private Sub txtValidation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtValidation.KeyPress
-        bUserTyped = True
+        bUserTyped = False
     End Sub
 
 

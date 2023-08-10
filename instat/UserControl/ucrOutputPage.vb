@@ -131,7 +131,12 @@ Public Class ucrOutputPage
     Public Sub AddNewOutput(outputElement As clsOutputElement, Optional bDisplayOutputInExternalViewer As Boolean = False)
         'add the script first. This applies to whether the output has an output or not or
         'whether it's just a script output
-        AddNewScript(outputElement)
+
+        'todo. temporary fix. Output element should always have an R script
+        If outputElement.FormattedRScript IsNot Nothing Then
+            AddNewScript(outputElement)
+        End If
+
 
         'then add the output of the script if there is an output
         If Not String.IsNullOrEmpty(outputElement.Output) Then
@@ -160,28 +165,7 @@ Public Class ucrOutputPage
         }
 
         'if settings are not available or both show commands and comments settings are enabled then just show the whole script
-        If frmMain.clsInstatOptions Is Nothing OrElse (frmMain.clsInstatOptions.bIncludeCommentDefault AndAlso frmMain.clsInstatOptions.bCommandsinOutput) Then
-            FillRichTextBoxWithFormatedRScript(richTextBox, outputElement.FormattedRScript)
-        Else
-
-            'if either show commands or comments settings is enabled show the script that corresponds to either
-            If frmMain.clsInstatOptions.bIncludeCommentDefault Then
-                'show comments only
-                For Each line As clsRScriptElement In outputElement.FormattedRScript
-                    If line.Type = clsRToken.typToken.RComment Then
-                        AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
-                    End If
-                Next
-
-            ElseIf frmMain.clsInstatOptions.bCommandsinOutput Then
-                'show command lines that are not comments
-                For Each line As clsRScriptElement In outputElement.FormattedRScript
-                    If Not (line.Type = clsRToken.typToken.RComment) Then
-                        AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
-                    End If
-                Next
-            End If
-        End If
+        FillRichTextWithRScriptBasedOnSettings(richTextBox, outputElement.FormattedRScript)
 
         'if no contents added just exit sub
         If richTextBox.TextLength = 0 Then
@@ -195,6 +179,37 @@ Public Class ucrOutputPage
         AddHandler richTextBox.KeyUp, AddressOf richTextBox_CopySelectedText
         AddHandler richTextBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
+
+
+    'fills rich textbox with r script provided based on the global options provided
+    'if all disabled then richtext will not be filled
+    Private Sub FillRichTextWithRScriptBasedOnSettings(richTextBox As RichTextBox, formattedRScript As List(Of clsRScriptElement))
+        'if settings are not available or both show commands and comments settings are enabled then just show the whole script
+        If frmMain.clsInstatOptions Is Nothing OrElse (frmMain.clsInstatOptions.bIncludeCommentDefault AndAlso frmMain.clsInstatOptions.bCommandsinOutput) Then
+            FillRichTextBoxWithFormatedRScript(richTextBox, formattedRScript)
+        Else
+            'if either show commands or comments settings is enabled show the script that corresponds to either
+            If frmMain.clsInstatOptions.bIncludeCommentDefault Then
+                'show comments only
+                For Each line As clsRScriptElement In formattedRScript
+                    If line.Type = clsRToken.typToken.RComment Then
+                        AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
+                    End If
+                Next
+
+            ElseIf frmMain.clsInstatOptions.bCommandsinOutput Then
+                'show command lines that are not comments
+                For Each line As clsRScriptElement In formattedRScript
+                    If Not (line.Type = clsRToken.typToken.RComment) Then
+                        AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
+                    End If
+                Next
+            End If
+
+        End If
+    End Sub
+
+
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
         Dim panel As Panel = AddElementPanel(outputElement)
@@ -403,10 +418,17 @@ Public Class ucrOutputPage
     Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
         Select Case element.OutputType
             Case OutputType.Script
-                FillRichTextBoxWithFormatedRScript(richText, element.FormattedRScript)
+                FillRichTextWithRScriptBasedOnSettings(richText, element.FormattedRScript)
             Case OutputType.TextOutput
-                'todo. check if output is file or not. if file, read the contents of the file
-                AddFormatedTextToRichTextBox(richText, element.Output, OutputFont.ROutputFont, OutputFont.ROutputColour)
+                Dim strOutput As String = ""
+                If element.IsFile Then
+                    For Each strLine As String In IO.File.ReadLines(element.Output)
+                        strOutput = strOutput & strLine & Environment.NewLine
+                    Next strLine
+                Else
+                    strOutput = element.Output
+                End If
+                AddFormatedTextToRichTextBox(richText, strOutput, OutputFont.ROutputFont, OutputFont.ROutputColour)
             Case OutputType.ImageOutput
                 Clipboard.Clear()
                 'todo. instead of copy paste, add image to rtf directly from file?
@@ -418,11 +440,7 @@ Public Class ucrOutputPage
     End Sub
 
     Private Function GetBitmapFromFile(strFilename As String) As Bitmap
-        Dim image As Bitmap
-        Using fs As New IO.FileStream(strFilename, IO.FileMode.Open)
-            image = New Bitmap(Drawing.Image.FromStream(fs))
-        End Using
-        Return image
+        Return New Bitmap(strFilename)
     End Function
 
     Private Sub AddFormatedTextToRichTextBox(richTextBox As RichTextBox, text As String, font As Font, colour As Color)

@@ -213,14 +213,28 @@ Public MustInherit Class ucrReoGrid
         e.IsCancelled = True
     End Sub
 
+    Private Function GetRowIndex(currWorkSheet As Worksheet, strRowName As String) As Integer
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To currWorkSheet.Rows - 1
+                Dim strCol As String = currWorkSheet.RowHeaders(i).Text
+                If strCol = strRowName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
     Private Function GetCellValue(iRow As Integer, strColumn As String) As String Implements IGrid.GetCellValue
         For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
             Dim strColumnHeader As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
             If strColumnHeader.Contains("(") Then
                 strColumnHeader = strColumnHeader.Split("(")(0)
             End If
-            If strColumnHeader.Trim = strColumn Then
-                Return grdData.CurrentWorksheet(iRow, i).ToString()
+            Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow) + 1
+            If strColumnHeader.Trim = strColumn _
+                AndAlso iRowIndex > -1 Then
+                Return grdData.CurrentWorksheet(iRowIndex, i).ToString()
             End If
         Next
         Return ""
