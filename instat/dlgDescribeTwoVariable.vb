@@ -584,7 +584,7 @@ Public Class dlgDescribeTwoVariable
 
         If rdoSkim.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
-            ucrSaveTable.Location = New Point(10, 286)
+            ucrSaveTable.Location = New Point(23, 286)
         ElseIf rdoThreeVariable.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
             lblThreeVariableCategorical.Visible = True
@@ -592,7 +592,7 @@ Public Class dlgDescribeTwoVariable
             lblSecondType.Location = New Point(12, 33)
             lblSecondBy.Visible = True
         Else
-            ucrSaveTable.Location = New Point(23, 686)
+            ucrSaveTable.Location = New Point(23, 450)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
             lblThreeVariableCategorical.Visible = False
             lblThreeVariableCategorical.Location = New Point(12, 33)
