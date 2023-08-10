@@ -625,7 +625,6 @@ Public Class dlgName
 
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
         If rdoReplace.Checked Then
-            ucrReceiverColumns.Visible = False
             clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
             clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
             clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
