@@ -69,6 +69,7 @@ Partial Class frmMain
         Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificParallelCoordinatePlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeGraphGraphics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificTables = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
@@ -681,7 +682,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuPrepareCheckDataPivotTable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -915,6 +917,11 @@ Partial Class frmMain
         Me.mnuDescribeSpecificParallelCoordinatePlot.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeSpecificParallelCoordinatePlot.Text = "Parallel Coordinate Plot..."
         '
+        'ToolStripSeparator38
+        '
+        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
+        Me.ToolStripSeparator38.Size = New System.Drawing.Size(206, 6)
+        '
         'mnuDescribeGraphGraphics
         '
         Me.mnuDescribeGraphGraphics.Name = "mnuDescribeGraphGraphics"
@@ -940,19 +947,19 @@ Partial Class frmMain
         'mnuDescribeGeneralPivotTable
         '
         Me.mnuDescribeGeneralPivotTable.Name = "mnuDescribeGeneralPivotTable"
-        Me.mnuDescribeGeneralPivotTable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeGeneralPivotTable.Size = New System.Drawing.Size(140, 22)
         Me.mnuDescribeGeneralPivotTable.Text = "Pivot Table..."
         '
         'ToolStripSeparator27
         '
         Me.ToolStripSeparator27.Name = "ToolStripSeparator27"
-        Me.ToolStripSeparator27.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator27.Size = New System.Drawing.Size(137, 6)
         '
         'mnuDescribeGeneralTabulation
         '
         Me.mnuDescribeGeneralTabulation.Enabled = False
         Me.mnuDescribeGeneralTabulation.Name = "mnuDescribeGeneralTabulation"
-        Me.mnuDescribeGeneralTabulation.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeGeneralTabulation.Size = New System.Drawing.Size(140, 22)
         Me.mnuDescribeGeneralTabulation.Tag = "Tabulation..."
         Me.mnuDescribeGeneralTabulation.Text = "Tabulation..."
         Me.mnuDescribeGeneralTabulation.Visible = False
@@ -960,14 +967,14 @@ Partial Class frmMain
         'mnuDescribeGeneralGraphics
         '
         Me.mnuDescribeGeneralGraphics.Name = "mnuDescribeGeneralGraphics"
-        Me.mnuDescribeGeneralGraphics.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeGeneralGraphics.Size = New System.Drawing.Size(140, 22)
         Me.mnuDescribeGeneralGraphics.Tag = "Graphics..."
         Me.mnuDescribeGeneralGraphics.Text = "Graphics..."
         '
         'mnuDescribeGeneralTables
         '
         Me.mnuDescribeGeneralTables.Name = "mnuDescribeGeneralTables"
-        Me.mnuDescribeGeneralTables.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeGeneralTables.Size = New System.Drawing.Size(140, 22)
         Me.mnuDescribeGeneralTables.Text = "Tables..."
         '
         'ToolStripSeparator9
@@ -3558,7 +3565,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataVisualiseData, Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.mnuPrepareCheckDataViewDeleteLabels, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataVisualiseData, Me.mnuPrepareCheckDataPivotTable, Me.ToolStripSeparator50, Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.mnuPrepareCheckDataViewDeleteLabels, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         Me.mnuPrepareCheckData.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareCheckData.Text = "Check Data"
@@ -5117,10 +5124,16 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'ToolStripSeparator38
+        'mnuPrepareCheckDataPivotTable
         '
-        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
-        Me.ToolStripSeparator38.Size = New System.Drawing.Size(206, 6)
+        Me.mnuPrepareCheckDataPivotTable.Name = "mnuPrepareCheckDataPivotTable"
+        Me.mnuPrepareCheckDataPivotTable.Size = New System.Drawing.Size(245, 22)
+        Me.mnuPrepareCheckDataPivotTable.Text = "Pivot Table..."
+        '
+        'ToolStripSeparator50
+        '
+        Me.ToolStripSeparator50.Name = "ToolStripSeparator50"
+        Me.ToolStripSeparator50.Size = New System.Drawing.Size(242, 6)
         '
         'frmMain
         '
@@ -5817,4 +5830,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents mnuDescribeGeneralTables As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator38 As ToolStripSeparator
+    Friend WithEvents mnuPrepareCheckDataPivotTable As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
 End Class
