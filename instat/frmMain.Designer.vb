@@ -685,6 +685,10 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+
+        Me.mnuPrepareCheckDataPivotTable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
+
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3588,7 +3592,7 @@ Partial Class frmMain
         'mnuPrepareCheckData
         '
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataVisualiseData, Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.mnuPrepareCheckDataViewDeleteLabels, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
+        Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataVisualiseData, Me.mnuPrepareCheckDataPivotTable, Me.ToolStripSeparator50, Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.mnuPrepareCheckDataViewDeleteLabels, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
         Me.mnuPrepareCheckData.Size = New System.Drawing.Size(186, 22)
         Me.mnuPrepareCheckData.Text = "Check Data"
@@ -5147,6 +5151,19 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+
+        'mnuPrepareCheckDataPivotTable
+        '
+        Me.mnuPrepareCheckDataPivotTable.Name = "mnuPrepareCheckDataPivotTable"
+        Me.mnuPrepareCheckDataPivotTable.Size = New System.Drawing.Size(245, 22)
+        Me.mnuPrepareCheckDataPivotTable.Text = "Pivot Table..."
+        '
+        'ToolStripSeparator50
+        '
+        Me.ToolStripSeparator50.Name = "ToolStripSeparator50"
+        Me.ToolStripSeparator50.Size = New System.Drawing.Size(242, 6)
+        '
+
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5841,8 +5858,13 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents mnuDescribeGeneralTables As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator38 As ToolStripSeparator
+
     Friend WithEvents mnuTbOutput As ToolStripSplitButton
     Friend WithEvents mnuOutputWindow As ToolStripMenuItem
     Friend WithEvents mnuShowRCommand As ToolStripMenuItem
     Friend WithEvents mnuIncludeComments As ToolStripMenuItem
+
+    Friend WithEvents mnuPrepareCheckDataPivotTable As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
+
 End Class
