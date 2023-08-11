@@ -299,7 +299,7 @@ Imports RDotNet
 
         clsOptionsFunction.SetRCommand("options")
 
-        'add "digits" as options pasrameter of its been changed
+        'add "digits" as options parameter of its been changed
         strROption = GetROption("digits")
         If strROption Is Nothing OrElse strROption <> iDigits.ToString Then
             clsOptionsFunction.AddParameter("digits", iDigits)
