@@ -2947,3 +2947,16 @@ getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_reg
   # Return the row headers
   return(rowHeaders)
 }
+
+# Custom function to convert character to list of numeric vector
+convert_to_list <- function(x) {
+  if (grepl("^c\\(", x)) {
+    x <- gsub("^c\\(|\\)$", "", x)  # Remove 'c(' and ')'
+    return(as.numeric(unlist(strsplit(x, ","))))
+  } else if (grepl(":", x)) {
+    x <- gsub(":", ",", x, fixed = TRUE)  # Replace ':' with ','
+    return(as.numeric(unlist(strsplit(x, ","))))
+  } else {
+    return(as.numeric(x))
+  }
+}
