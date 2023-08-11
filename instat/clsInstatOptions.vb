@@ -41,8 +41,6 @@ Imports RDotNet
     Public bShowOptionsByContextMenu As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
-    Public bShowComments As Nullable(Of Boolean)
-    Public bShowCommands As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
     Public bAutoSaveData As Nullable(Of Boolean)
     Public iAutoSaveDataMinutes As Nullable(Of Integer)
@@ -82,8 +80,6 @@ Imports RDotNet
         lstColourPalette = clsInstatOptionsDefaults.DEFAULTlstColourPalette
         iDigits = clsInstatOptionsDefaults.DEFAULTiDigits
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
-        bShowCommands = clsInstatOptionsDefaults.DEFAULTbShowRCommands
-        bShowComments = clsInstatOptionsDefaults.DEFAULTbShowComments
         bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
         bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
         iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
@@ -184,18 +180,6 @@ Imports RDotNet
             SetSignifStars(bShowSignifStars)
         Else
             SetSignifStars(clsInstatOptionsDefaults.DEFAULTbShowSignifStars)
-        End If
-
-        If bShowCommands.HasValue Then
-            SetRCommands(bShowCommands)
-        Else
-            SetRCommands(clsInstatOptionsDefaults.DEFAULTbShowRCommands)
-        End If
-
-        If bShowComments.HasValue Then
-            SetShowComments(bShowComments)
-        Else
-            SetShowComments(clsInstatOptionsDefaults.DEFAULTbShowComments)
         End If
 
         If bChangeDataFrame.HasValue Then
@@ -502,14 +486,6 @@ Imports RDotNet
 
     Public Sub SetSignifStars(bShowStars As Boolean)
         bShowSignifStars = bShowStars
-    End Sub
-
-    Public Sub SetRCommands(bShowRCommands As Boolean)
-        bShowCommands = bShowRCommands
-    End Sub
-
-    Public Sub SetShowComments(bRComments As Boolean)
-        bShowComments = bRComments
     End Sub
 
     Public Sub SetChangeDataFrame(bNewChange As Boolean)
