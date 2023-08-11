@@ -41,6 +41,8 @@ Imports RDotNet
     Public bShowOptionsByContextMenu As Nullable(Of Boolean)
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
+    Public bShowComments As Nullable(Of Boolean)
+    Public bShowCommands As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
     Public bAutoSaveData As Nullable(Of Boolean)
     Public iAutoSaveDataMinutes As Nullable(Of Integer)
@@ -80,6 +82,8 @@ Imports RDotNet
         lstColourPalette = clsInstatOptionsDefaults.DEFAULTlstColourPalette
         iDigits = clsInstatOptionsDefaults.DEFAULTiDigits
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
+        bShowCommands = clsInstatOptionsDefaults.DEFAULTbShowRCommands
+        bShowComments = clsInstatOptionsDefaults.DEFAULTbShowComments
         bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
         bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
         iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
@@ -180,6 +184,18 @@ Imports RDotNet
             SetSignifStars(bShowSignifStars)
         Else
             SetSignifStars(clsInstatOptionsDefaults.DEFAULTbShowSignifStars)
+        End If
+
+        If bShowCommands.HasValue Then
+            SetRCommands(bShowCommands)
+        Else
+            SetRCommands(clsInstatOptionsDefaults.DEFAULTbShowRCommands)
+        End If
+
+        If bShowComments.HasValue Then
+            SetShowComments(bShowComments)
+        Else
+            SetShowComments(clsInstatOptionsDefaults.DEFAULTbShowComments)
         End If
 
         If bChangeDataFrame.HasValue Then
@@ -294,10 +310,12 @@ Imports RDotNet
     Public Sub ExecuteRGlobalOptions()
         Dim clsOptionsFunction As New RFunction
         Dim strROption As String
+        Dim strRCommands As String
+        Dim strRComments As String
 
         clsOptionsFunction.SetRCommand("options")
 
-        'add "digits" as options parameter of its been changed
+        'add "digits" as options pasrameter of its been changed
         strROption = GetROption("digits")
         If strROption Is Nothing OrElse strROption <> iDigits.ToString Then
             clsOptionsFunction.AddParameter("digits", iDigits)
@@ -313,6 +331,22 @@ Imports RDotNet
         strROption = GetROption("dplyr.summarise.inform")
         If strROption Is Nothing OrElse strROption <> False.ToString Then
             clsOptionsFunction.AddParameter("dplyr.summarise.inform", "FALSE")
+        End If
+
+        'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
+        strRCommands = GetROption("R.commands.displayed.in.the.output.window")
+        If frmMain.mnuShowRCommand.Checked Then
+            clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "TRUE")
+        Else
+            clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "FALSE")
+        End If
+
+        'add "Comments.from.dialogs.displayed.in.the.output.window" as options parameter of its been changed
+        strRComments = GetROption("Comments.from.dialogs.displayed.in.the.output.window")
+        If frmMain.mnuIncludeComments.Checked Then
+            clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "TRUE")
+        Else
+            clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "FALSE")
         End If
 
         frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(),
@@ -468,6 +502,14 @@ Imports RDotNet
 
     Public Sub SetSignifStars(bShowStars As Boolean)
         bShowSignifStars = bShowStars
+    End Sub
+
+    Public Sub SetRCommands(bShowRCommands As Boolean)
+        bShowCommands = bShowRCommands
+    End Sub
+
+    Public Sub SetShowComments(bRComments As Boolean)
+        bShowComments = bRComments
     End Sub
 
     Public Sub SetChangeDataFrame(bNewChange As Boolean)
