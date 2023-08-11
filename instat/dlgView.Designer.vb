@@ -80,7 +80,7 @@ Partial Class dlgView
         Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(210, 17)
         Me.rdoDispSepOutputWindow.TabIndex = 6
         Me.rdoDispSepOutputWindow.TabStop = True
-        Me.rdoDispSepOutputWindow.Text = "Display in R-Viewer Window"
+        Me.rdoDispSepOutputWindow.Text = "Display in R Viewer Window"
         Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoDispOutputWindow
