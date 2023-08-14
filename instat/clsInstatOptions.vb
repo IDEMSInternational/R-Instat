@@ -294,8 +294,6 @@ Imports RDotNet
     Public Sub ExecuteRGlobalOptions()
         Dim clsOptionsFunction As New RFunction
         Dim strROption As String
-        Dim strRCommands As String
-        Dim strRComments As String
 
         clsOptionsFunction.SetRCommand("options")
 
@@ -318,7 +316,6 @@ Imports RDotNet
         End If
 
         'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
-        strRCommands = GetROption("R.commands.displayed.in.the.output.window")
         If frmMain.mnuShowRCommand.Checked Then
             clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "TRUE")
         Else
@@ -326,7 +323,6 @@ Imports RDotNet
         End If
 
         'add "Comments.from.dialogs.displayed.in.the.output.window" as options parameter of its been changed
-        strRComments = GetROption("Comments.from.dialogs.displayed.in.the.output.window")
         If frmMain.mnuIncludeComments.Checked Then
             clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "TRUE")
         Else

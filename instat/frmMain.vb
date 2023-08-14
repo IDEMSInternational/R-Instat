@@ -646,14 +646,14 @@ Public Class frmMain
 
     Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
         mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
-        Me.clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
-        Me.clsInstatOptions.ExecuteRGlobalOptions()
+        clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuIncludeComments_Click(sender As Object, e As EventArgs) Handles mnuIncludeComments.Click
         mnuIncludeComments.Checked = Not mnuIncludeComments.Checked
-        Me.clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
-        Me.clsInstatOptions.ExecuteRGlobalOptions()
+        clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuPrepareSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameInsertColumnsRows.Click
@@ -839,8 +839,8 @@ Public Class frmMain
 
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
         dlgOptions.ShowDialog()
-        Me.mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
-        Me.mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
+        mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
+        mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
     Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameHideColumns.Click
@@ -1643,7 +1643,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.ButtonClick, mnuOutputWindow.Click
-        mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
