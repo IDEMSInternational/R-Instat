@@ -118,7 +118,7 @@ Public Class dlgView
         clsViewAllFunction = New RFunction
         clsGetObjectDataFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsAsHtmlwidgetFunction = New RFunction
+        clsAsHtmlWidgetFunction = New RFunction
 
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
@@ -143,10 +143,10 @@ Public Class dlgView
         clsHTMLFunction.AddParameter("align", Chr(34) & "l" & Chr(34), iPosition:=1)
 
 
-        clsAsHtmlwidgetFunction.SetPackageName("formattable")
-        clsAsHtmlwidgetFunction.SetRCommand("as.htmlwidget")
-        clsAsHtmlwidgetFunction.AddParameter("x", clsRFunctionParameter:=clsHTMLFunction, iPosition:=0)
-        clsAsHtmlwidgetFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+        clsAsHtmlWidgetFunction.SetPackageName("formattable")
+        clsAsHtmlWidgetFunction.SetRCommand("as.htmlwidget")
+        clsAsHtmlWidgetFunction.AddParameter("x", clsRFunctionParameter:=clsHTMLFunction, iPosition:=0)
+        clsAsHtmlWidgetFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                strRDataFrameNameToAddObjectTo:=ucrSelectorForView.strCurrentDataFrame,
@@ -184,7 +184,7 @@ Public Class dlgView
         ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrSelectorForView.SetRCode(clsViewAllFunction, bReset)
         ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveData.SetRCode(clsAsHtmlwidgetFunction, bReset)
+        ucrSaveData.SetRCode(clsAsHtmlWidgetFunction, bReset)
 
         DataFrameLength()
         ChangeFunctionParameters()
@@ -262,7 +262,7 @@ Public Class dlgView
                 ucrSaveData.Visible = False
             Else
                 clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlwidgetFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlWidgetFunction)
                 ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveData.Visible = True
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
@@ -326,7 +326,7 @@ Public Class dlgView
             Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
             clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
         ElseIf rdoHTMLOutputWindow.Checked Then
-            Dim strPrefix As String = clsAsHtmlwidgetFunction.GetRObjectToAssignTo
+            Dim strPrefix As String = clsAsHtmlWidgetFunction.GetRObjectToAssignTo
             clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
         End If
     End Sub
