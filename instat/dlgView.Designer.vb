@@ -48,6 +48,7 @@ Partial Class dlgView
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoViewAll = New System.Windows.Forms.RadioButton()
         Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveData = New instat.ucrSave()
         Me.ucrPnlViewData = New instat.UcrPanel()
         Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
         Me.ucrChkSortColumn = New instat.ucrCheck()
@@ -74,12 +75,12 @@ Partial Class dlgView
         'rdoDispSepOutputWindow
         '
         Me.rdoDispSepOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 238)
+        Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 284)
         Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
         Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(210, 17)
         Me.rdoDispSepOutputWindow.TabIndex = 6
         Me.rdoDispSepOutputWindow.TabStop = True
-        Me.rdoDispSepOutputWindow.Text = "Display in Separate Window"
+        Me.rdoDispSepOutputWindow.Text = "Display in R Viewer Window"
         Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
         '
         'rdoDispOutputWindow
@@ -142,7 +143,7 @@ Partial Class dlgView
         'rdoHTMLOutputWindow
         '
         Me.rdoHTMLOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 284)
+        Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 238)
         Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
         Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(210, 17)
         Me.rdoHTMLOutputWindow.TabIndex = 8
@@ -181,6 +182,15 @@ Partial Class dlgView
         Me.rdoViewSelectedColumnsRows.Text = "Choose Columns"
         Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
+        '
+        'ucrSaveData
+        '
+        Me.ucrSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveData.Location = New System.Drawing.Point(10, 309)
+        Me.ucrSaveData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveData.Name = "ucrSaveData"
+        Me.ucrSaveData.Size = New System.Drawing.Size(308, 27)
+        Me.ucrSaveData.TabIndex = 18
         '
         'ucrPnlViewData
         '
@@ -279,9 +289,9 @@ Partial Class dlgView
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 324)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 343)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
         'dlgView
@@ -289,7 +299,8 @@ Partial Class dlgView
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(416, 386)
+        Me.ClientSize = New System.Drawing.Size(416, 393)
+        Me.Controls.Add(Me.ucrSaveData)
         Me.Controls.Add(Me.rdoViewAll)
         Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
         Me.Controls.Add(Me.ucrPnlViewData)
@@ -341,4 +352,5 @@ Partial Class dlgView
     Friend WithEvents rdoViewAll As RadioButton
     Friend WithEvents rdoViewSelectedColumnsRows As RadioButton
     Friend WithEvents ucrPnlViewData As UcrPanel
+    Friend WithEvents ucrSaveData As ucrSave
 End Class
