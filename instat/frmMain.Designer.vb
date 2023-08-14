@@ -365,9 +365,6 @@ Partial Class frmMain
         Me.mnuFIleExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditFind = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditFindNext = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditReplace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
@@ -458,6 +455,8 @@ Partial Class frmMain
         Me.mnuPrepareDataframeColourByProperty = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrepareCheckDataPivotTable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareCheckDataDuplicates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataCompareColumns = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareCheckDataNonNumericCases = New System.Windows.Forms.ToolStripMenuItem()
@@ -685,10 +684,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-
-        Me.mnuPrepareCheckDataPivotTable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
-
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2894,7 +2889,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 22)
         Me.mnuEdit.Tag = "Edit"
@@ -2907,29 +2902,6 @@ Partial Class frmMain
         Me.mnuEditFind.Size = New System.Drawing.Size(244, 22)
         Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find"
-        '
-        'mnuEditFindNext
-        '
-        Me.mnuEditFindNext.Enabled = False
-        Me.mnuEditFindNext.Name = "mnuEditFindNext"
-        Me.mnuEditFindNext.Size = New System.Drawing.Size(244, 22)
-        Me.mnuEditFindNext.Text = "Find Next"
-        '
-        'mnuEditReplace
-        '
-        Me.mnuEditReplace.Enabled = False
-        Me.mnuEditReplace.Name = "mnuEditReplace"
-        Me.mnuEditReplace.Size = New System.Drawing.Size(244, 22)
-        Me.mnuEditReplace.Tag = "Replace"
-        Me.mnuEditReplace.Text = "Replace"
-        '
-        'mnuEditCut
-        '
-        Me.mnuEditCut.Name = "mnuEditCut"
-        Me.mnuEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuEditCut.Size = New System.Drawing.Size(244, 22)
-        Me.mnuEditCut.Tag = "Cut"
-        Me.mnuEditCut.Text = "Cut"
         '
         'mnuEditCopy
         '
@@ -3142,21 +3114,21 @@ Partial Class frmMain
         '
         Me.mnuOutputWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuOutputWindow.Name = "mnuOutputWindow"
-        Me.mnuOutputWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOutputWindow.Size = New System.Drawing.Size(178, 22)
         Me.mnuOutputWindow.Text = "Output Window"
         '
         'mnuShowRCommand
         '
         Me.mnuShowRCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuShowRCommand.Name = "mnuShowRCommand"
-        Me.mnuShowRCommand.Size = New System.Drawing.Size(180, 22)
+        Me.mnuShowRCommand.Size = New System.Drawing.Size(178, 22)
         Me.mnuShowRCommand.Text = "Show R Commands"
         '
         'mnuIncludeComments
         '
         Me.mnuIncludeComments.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuIncludeComments.Name = "mnuIncludeComments"
-        Me.mnuIncludeComments.Size = New System.Drawing.Size(180, 22)
+        Me.mnuIncludeComments.Size = New System.Drawing.Size(178, 22)
         Me.mnuIncludeComments.Text = "Show Comments"
         '
         'ToolStripSeparator74
@@ -3602,6 +3574,17 @@ Partial Class frmMain
         Me.mnuPrepareCheckDataVisualiseData.Name = "mnuPrepareCheckDataVisualiseData"
         Me.mnuPrepareCheckDataVisualiseData.Size = New System.Drawing.Size(245, 22)
         Me.mnuPrepareCheckDataVisualiseData.Text = "Visualise Data..."
+        '
+        'mnuPrepareCheckDataPivotTable
+        '
+        Me.mnuPrepareCheckDataPivotTable.Name = "mnuPrepareCheckDataPivotTable"
+        Me.mnuPrepareCheckDataPivotTable.Size = New System.Drawing.Size(245, 22)
+        Me.mnuPrepareCheckDataPivotTable.Text = "Pivot Table..."
+        '
+        'ToolStripSeparator50
+        '
+        Me.ToolStripSeparator50.Name = "ToolStripSeparator50"
+        Me.ToolStripSeparator50.Size = New System.Drawing.Size(242, 6)
         '
         'mnuPrepareCheckDataDuplicates
         '
@@ -5151,19 +5134,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-
-        'mnuPrepareCheckDataPivotTable
-        '
-        Me.mnuPrepareCheckDataPivotTable.Name = "mnuPrepareCheckDataPivotTable"
-        Me.mnuPrepareCheckDataPivotTable.Size = New System.Drawing.Size(245, 22)
-        Me.mnuPrepareCheckDataPivotTable.Text = "Pivot Table..."
-        '
-        'ToolStripSeparator50
-        '
-        Me.ToolStripSeparator50.Name = "ToolStripSeparator50"
-        Me.ToolStripSeparator50.Size = New System.Drawing.Size(242, 6)
-        '
-
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5240,13 +5210,11 @@ Partial Class frmMain
     Friend WithEvents tlSeparatorFile3 As ToolStripSeparator
     Friend WithEvents mnuFIleExit As ToolStripMenuItem
     Friend WithEvents mnuEdit As ToolStripMenuItem
-    Friend WithEvents mnuEditCut As ToolStripMenuItem
     Friend WithEvents mnuEditCopy As ToolStripMenuItem
     Friend WithEvents mnuEditCopySpecial As ToolStripMenuItem
     Friend WithEvents mnuEditPaste As ToolStripMenuItem
     Friend WithEvents mnuEditSelectAll As ToolStripMenuItem
     Friend WithEvents mnuEditFind As ToolStripMenuItem
-    Friend WithEvents mnuEditReplace As ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents stsStrip As StatusStrip
     Friend WithEvents tstatus As ToolStripStatusLabel
@@ -5318,7 +5286,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareColumnTextTransform As ToolStripMenuItem
     Friend WithEvents mnuTools As ToolStripMenuItem
     Friend WithEvents mnuToolsOptions As ToolStripMenuItem
-    Friend WithEvents mnuEditFindNext As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameRowNumbersNames As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuPrepareDataFrameReplaceValues As ToolStripMenuItem
