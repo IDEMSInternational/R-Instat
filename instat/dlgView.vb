@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOutputWindowFunction, clsHTMLFunction, clsAsHtmlwidgetFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction, clsViewAllFunction As New RFunction
+    Private clsOutputWindowFunction, clsHTMLFunction, clsAsHtmlWidgetFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction, clsViewAllFunction As New RFunction
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
