@@ -322,6 +322,7 @@ Public Class dlgView
         'clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
         GetObjectName()
     End Sub
+
     Private Sub GetObjectName()
         If rdoDispOutputWindow.Checked Then
             Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
