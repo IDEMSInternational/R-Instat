@@ -744,7 +744,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
-        openSdgLayerOptions(clsRgeomBarFunction, clsBarAesFunction)
+        openSdgLayerOptions(clsRgeomBarFunction1, clsBarAesFunction)
     End Sub
 
     Private Sub toolStripMenuItemLollipopOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLollipopOptions.Click
@@ -757,6 +757,10 @@ Public Class dlgBarAndPieChart
 
     Private Sub toolStripMenuItemWordcloudOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemWordcloudOptions.Click
         openSdgLayerOptions(clsGeomTextWordcloudFunction, clsGeomTextWordcloudAesFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemTreemapTextOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTreemapTextOptionsOptions.Click
+        openSdgLayerOptions(clsGeomTreemapTextFunction, clsGeomTreemapTextAesFunction)
     End Sub
 
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextOptions.Click

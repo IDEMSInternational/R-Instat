@@ -111,6 +111,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkAddLabelsTreemap = New instat.ucrCheck()
         Me.ucrChkBacktoback = New instat.ucrCheck()
         Me.ucrChkIncreaseSize = New instat.ucrCheck()
+        Me.toolStripMenuItemTreemapTextOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -387,44 +388,44 @@ Partial Class dlgBarAndPieChart
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemLollipopOptions, Me.toolStripMenuItemTextOptions, Me.toolStripMenuItemTreemapOptions, Me.toolStripMenuItemWordcloudOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTextOptions, Me.toolStripMenuItemLollipopOptions, Me.toolStripMenuItemTreemapOptions, Me.toolStripMenuItemTreemapTextOptionsOptions, Me.toolStripMenuItemWordcloudOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(189, 180)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemBarchartOptions
         '
         Me.toolStripMenuItemBarchartOptions.Name = "toolStripMenuItemBarchartOptions"
-        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemBarchartOptions.Text = "BarChart Options"
         '
         'toolStripMenuItemLollipopOptions
         '
         Me.toolStripMenuItemLollipopOptions.Name = "toolStripMenuItemLollipopOptions"
-        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemLollipopOptions.Text = "Lollipop Options"
         '
         'toolStripMenuItemTextOptions
         '
         Me.toolStripMenuItemTextOptions.Name = "toolStripMenuItemTextOptions"
-        Me.toolStripMenuItemTextOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTextOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemTextOptions.Text = "Text Options"
         '
         'toolStripMenuItemTreemapOptions
         '
         Me.toolStripMenuItemTreemapOptions.Name = "toolStripMenuItemTreemapOptions"
-        Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemTreemapOptions.Text = "Treemap Options"
         '
         'toolStripMenuItemWordcloudOptions
         '
         Me.toolStripMenuItemWordcloudOptions.Name = "toolStripMenuItemWordcloudOptions"
-        Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemWordcloudOptions.Text = "Wordcloud Options"
         '
         'cmdOptions
@@ -862,6 +863,12 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(88, 23)
         Me.ucrChkIncreaseSize.TabIndex = 63
         '
+        'toolStripMenuItemTreemapTextOptionsOptions
+        '
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Name = "toolStripMenuItemTreemapTextOptionsOptions"
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Text = "Treemap Text Options"
+        '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1016,4 +1023,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents toolStripMenuItemWordcloudOptions As ToolStripMenuItem
     Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents toolStripMenuItemLollipopOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTreemapTextOptionsOptions As ToolStripMenuItem
 End Class
