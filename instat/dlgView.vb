@@ -318,8 +318,6 @@ Public Class dlgView
     End Sub
 
     Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlValueChanged
-        'Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
-        'clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
         GetObjectName()
     End Sub
 
