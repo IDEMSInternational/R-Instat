@@ -815,10 +815,6 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
-        dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
@@ -2528,21 +2524,13 @@ Public Class frmMain
         dlgSurvey.ShowDialog()
     End Sub
 
-    Private Sub PivotTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralPivotTable.Click
-        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
-        dlgThreeVariablePivotTable.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeGraphGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphGraphics.Click
+    Private Sub mnuDescribeGraphGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneral.Click
         dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeGeneralTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralTables.Click
-        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
         dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
+
 End Class
