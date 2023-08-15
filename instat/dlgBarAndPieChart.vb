@@ -59,7 +59,6 @@ Public Class dlgBarAndPieChart
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
-    Private clsGeomTextAesFunction As New RFunction
     Private clsLabelAesFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsForecatsInfreq As New RFunction
@@ -393,7 +392,6 @@ Public Class dlgBarAndPieChart
         clsScaleXdiscretFunction = New RFunction
         clsExpansionFunction = New RFunction
         clsGeomTextFunction = New RFunction
-        clsGeomTextAesFunction = New RFunction
         clsLabelAesFunction = New RFunction
         clsForecatsInfreq = New RFunction
         clsForecatsReverse = New RFunction
@@ -544,9 +542,6 @@ Public Class dlgBarAndPieChart
         clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
         clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
         clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
-
-        clsGeomTextAesFunction.SetPackageName("ggplot2")
-        clsGeomTextAesFunction.SetRCommand("aes")
 
         clsLabelAesFunction.SetPackageName("ggplot2")
         clsLabelAesFunction.SetRCommand("aes")
@@ -764,7 +759,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextOptions.Click
-        openSdgLayerOptions(clsGeomTextFunction, clsGeomTextAesFunction)
+        openSdgLayerOptions(clsGeomTextFunction, clsLabelAesFunction)
     End Sub
 
     Private Sub SetDialogOptions()
