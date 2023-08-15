@@ -34,6 +34,8 @@ Public Class ucrReceiver
     Public WithEvents frmParent As Form
     Public bRemoveLabels As Boolean = False
 
+    Public bAsReceiver As Boolean = True
+
     Public strDatabaseQuery As String = ""
 
     Private strPrvNcFilePath As String = ""
