@@ -910,7 +910,7 @@ Public Class RLink
     Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
 
         'for each R statement in script TODO
-        Dim strRStatement As String = "todo" 'todo set to string version of R statement
+        Dim strRStatement As String = strNewScript 'todo set to string version of R statement
         RunScript(strRStatement.Trim(vbLf), iCallType:=5, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
         strNewComment = ""
         'Next

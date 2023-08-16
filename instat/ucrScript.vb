@@ -16,6 +16,7 @@
 
 Imports System.IO
 Imports System.Windows.Controls
+Imports RScript
 Imports ScintillaNET
 
 Public Class ucrScript
@@ -551,9 +552,34 @@ Public Class ucrScript
     End Function
 
     Private Sub RunCurrentStatement()
-        'todo
-        Dim strScriptRStatement = "#todo"
-        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strScriptRStatement, strNewComment:=strComment)
+
+        If clsScriptActive.TextLength <= 0 Then
+            Exit Sub
+        End If
+
+        'TODO
+        'Dim rScript As New clsRScript(clsScriptActive.Text)
+        'Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+        'insert carriage return to ensure that statement starts on new line
+        'Dim strStatement As String = vbCrLf & rScript.GetCurrentStatement(iCaretPos)
+        'Dim iNextStatementPos As Integer = rScript.GetNextStatementPos(iCaretPos)
+        Dim strStatement As String = vbCrLf & clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
+        Dim iNextStatementPos As Integer = If(clsScriptActive.CurrentLine = clsScriptActive.Lines.Count - 1,
+                clsScriptActive.TextLength,
+                clsScriptActive.Lines(clsScriptActive.CurrentLine + 1).Position)
+
+        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strStatement, strNewComment:=strComment)
+
+        ' if we executed the last statement and there is no blank line after, then add blank line
+        If iNextStatementPos >= clsScriptActive.TextLength _
+                AndAlso Not (clsScriptActive.Text.EndsWith(vbCr) _
+                             OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
+            clsScriptActive.AppendText(vbCrLf)
+            iNextStatementPos = clsScriptActive.TextLength
+        End If
+        clsScriptActive.GotoPosition(iNextStatementPos)
+
+        'TODO
         'Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
         'If clsScriptActive.TextLength > 0 Then
