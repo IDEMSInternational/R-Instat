@@ -181,7 +181,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(6, 464)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
         'dlgGeneralForGraphics
@@ -208,7 +208,7 @@ Partial Class dlgGeneralForGraphics
         Me.Name = "dlgGeneralForGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "
-        Me.Text = "Graphics"
+        Me.Text = "General Graphics"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
