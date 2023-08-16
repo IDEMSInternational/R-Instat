@@ -696,34 +696,38 @@ Public Class dlgBarAndPieChart
         bResetLineLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
         '  One then needs to display these modifications on the dlgScatteredPlot.
+        Try
+            'The aesthetics parameters on the main dialog are repopulated as required.
+            For Each clsParam In clsNewAesFunction.clsParameters
+                If clsParam.strArgumentName = "x" Then
+                    If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        ucrReceiverX.Clear()
+                    Else
+                        ucrReceiverX.Add(clsParam.strArgumentValue)
+                    End If
+                    'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                    '  case is "value", however that one shouldn't be written in the multiple 
+                    '  variables receiver (otherwise it would stack all variables and the stack 
+                    '  ("value") itself!).
+                    'Warning: what if someone used the name value for one of it's variables 
+                    '  independently from the multiple variables method? Here if the receiver is 
+                    '  actually in single mode, the variable "value" will still be given back, which 
+                    '  throws the problem back to the creation of "value" in the multiple receiver case.
+                ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBarChart.bSingleVariable) Then
+                    'Still might be in the case of bSingleVariable with mapping y="".
+                    If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                        ucrVariablesAsFactorForBarChart.Clear()
+                    Else
+                        ucrReceiverWordcloudSize.Add(clsParam.strArgumentValue)
+                    End If
+                ElseIf clsParam.strArgumentName = "colour" Then
+                    ucrReceiverByFactor.Add(clsParam.strArgumentValue)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
-        'The aesthetics parameters on the main dialog are repopulated as required.
-        For Each clsParam In clsLabelAesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrReceiverX.Clear()
-                Else
-                    ucrReceiverX.Add(clsParam.strArgumentValue)
-                End If
-                'In the y case, the value stored in the clsReasFunction in the multiple variables 
-                '  case is "value", however that one shouldn't be written in the multiple 
-                '  variables receiver (otherwise it would stack all variables and the stack 
-                '  ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables 
-                '  independently from the multiple variables method? Here if the receiver is 
-                '  actually in single mode, the variable "value" will still be given back, which 
-                '  throws the problem back to the creation of "value" in the multiple receiver case.
-            ElseIf clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBarChart.bSingleVariable) Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrVariablesAsFactorForBarChart.Clear()
-                Else
-                    ucrReceiverWordcloudSize.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrReceiverByFactor.Add(clsParam.strArgumentValue)
-            End If
-        Next
         TestOkEnabled()
     End Sub
 
@@ -897,6 +901,8 @@ Public Class dlgBarAndPieChart
         clsPieAesFunction.RemoveParameterByName("x")
         clsPieAesFunction.RemoveParameterByName("y")
         clsPieAesFunction.RemoveParameterByName("fill")
+        clsRggplotFunction.RemoveParameterByName("mapping")
+        clsRggplotFunction.RemoveParameterByName("aes")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
@@ -927,6 +933,9 @@ Public Class dlgBarAndPieChart
             End If
             If ucrChkLollipop.Checked Then
                 clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomLollipopAesFunction, iPosition:=1)
+                If ucrChkAddLabelsText.Checked Then
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+                End If
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
                 clsBaseOperator.RemoveParameterByName("geom_bar")
             End If
@@ -948,21 +957,31 @@ Public Class dlgBarAndPieChart
                 End If
                 clsRggplotFunction.RemoveParameterByName("mapping")
                 clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
+                If ucrChkAddLabelsText.Checked Then
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+                End If
             Else
                 If ucrVariablesAsFactorForBarChart.IsEmpty Then
                     clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+                    clsLabelAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 Else
                     clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+                    clsLabelAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 End If
                 If ucrReceiverByFactor.IsEmpty Then
                     clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
+                    clsLabelAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
                 Else
                     clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
+                    clsLabelAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                 End If
                 clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
                 clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
                 clsRgeomBarFunction2.RemoveParameterByName("stat")
                 clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+                If ucrChkAddLabelsText.Checked Then
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+                End If
             End If
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsBaseOperator.RemoveParameterByName("geom_treemap")
@@ -1050,7 +1069,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkPolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPolarCoordinates.ControlValueChanged, ucrPnlPolar.ControlValueChanged,
-        ucrChkReorderValue.ControlValueChanged, ucrChkReorderFrequency.ControlValueChanged
+        ucrChkReorderValue.ControlValueChanged, ucrChkReorderFrequency.ControlValueChanged, ucrChkAddLabelsText.ControlValueChanged
         ' adding coordpolar geom
         clsBaseOperator.RemoveParameterByName("coordpolar")
         ChangeParameterName()
@@ -1071,6 +1090,7 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
         Else
             clsBaseOperator.RemoveParameterByName("geom_text")
+            clsRggplotFunction.RemoveParameterByName("mapping")
         End If
     End Sub
 
