@@ -31,6 +31,8 @@ Public Class dlgName
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsStartwithFunction, clsEndswithFunction, clsMatchesFunction, clsContainsFunction As New RFunction
+    'Public clsAddColumnSelection As New RFunction
+    'Private clsConditionsList As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
@@ -71,8 +73,10 @@ Public Class dlgName
         ucrInputNewName.SetValidationTypeAsRVariable()
 
         ucrChkIncludeVariable.SetText("Include Variable Labels")
-        ucrChkIncludeVariable.SetParameter(New RParameter("checked", 0))
-        ucrChkIncludeVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkIncludeVariable.SetParameter(New RParameter("checked", 0))
+        'ucrChkIncludeVariable.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkIncludeVariable.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkIncludeVariable.AddParameterValuesCondition(False, "checked", "False")
 
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
@@ -90,6 +94,10 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoToLower, "tolower")
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
         ucrPnlCase.AddRadioButton(rdoReplace, "stringr::str_replace")
+
+        ucrPnlSelectData.SetParameter(New RParameter("data", 0))
+        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "x")
+        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "y")
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -132,14 +140,17 @@ Public Class dlgName
         ucrInputReplace.SetValidationTypeAsRVariable()
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ' ucrPnlOptions.AddToLinkedControls(ucrReceiverColumns, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrPnlCase, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrPnlCase, ucrPnlSelectData}, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
         ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="8")
         ucrPnlCase.AddToLinkedControls(ucrInputReplace, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrPnlCase.AddToLinkedControls(ucrInputEdit, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Starts With")
+        ucrPnlSelectData.AddToLinkedControls(ucrReceiverColumns, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
 
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
@@ -162,6 +173,8 @@ Public Class dlgName
         clsEndswithFunction = New RFunction
         clsMatchesFunction = New RFunction
         clsContainsFunction = New RFunction
+        'clsAddColumnSelection = New RFunction
+        'clsConditionsList = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
@@ -170,6 +183,16 @@ Public Class dlgName
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
+
+        clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
+        clsDummyFunction.AddParameter("data", "x", iPosition:=1)
+
+        'clsConditionsList.SetRCommand("list")
+        'clsConditionsList.AddParameter("list", ucrReceiverColumns.GetVariableNames, iPosition:=0)
+
+        'clsAddColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_column_selection")
+        'clsAddColumnSelection.AddParameter("column_selection", clsRFunctionParameter:=clsConditionsList, iPosition:=2)
+        'clsAddColumnSelection.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
@@ -197,6 +220,7 @@ Public Class dlgName
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        'ucrReceiverColumns.AddAdditionalCodeParameterPair(clsConditionsList, New RParameter("list", bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrInputReplace.AddAdditionalCodeParameterPair(clsStartwithFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrInputReplace.AddAdditionalCodeParameterPair(clsEndswithFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrInputReplace.AddAdditionalCodeParameterPair(clsMatchesFunction, New RParameter("match", bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
@@ -216,6 +240,7 @@ Public Class dlgName
         ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
         ucrInputReplace.SetRCode(clsDefaultRFunction)
         ucrInputBy.SetRCode(clsDefaultRFunction, bReset)
+        ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -226,7 +251,11 @@ Public Class dlgName
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoRenameWith.Checked Then
-            ucrBase.OKEnabled(True)
+            If rdoWholeDataFrame.Checked Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdoSelectedColumn.Checked AndAlso Not ucrReceiverColumns.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(bCurrentCell)
         End If
@@ -554,15 +583,19 @@ Public Class dlgName
         Return strColLabel
     End Function
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlCase.ControlValueChanged, ucrInputCase.ControlValueChanged, ucrNudAbbreviate.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlCase.ControlValueChanged, ucrPnlSelectData.ControlValueChanged, ucrInputCase.ControlValueChanged, ucrNudAbbreviate.ControlValueChanged, ucrReceiverColumns.ControlValueChanged
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
-            ucrReceiverColumns.SetMeAsReceiver()
+            If rdoSelectedColumn.Checked Then
+                ucrReceiverColumns.SetMeAsReceiver()
+            Else
+                ucrReceiverColumns.Visible = False
+            End If
         End If
-        ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
-        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
-        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse rdoRenameWith.Checked, True, False)
+        ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
+        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
+        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
 
         UpdateGrid()
         RemoveParameters()
@@ -574,11 +607,10 @@ Public Class dlgName
             Me.Size = New Size(561, 391)
             Me.ucrBase.Location = New Point(12, 296)
         Else
-            Me.Size = New Size(561, 504)
-            Me.ucrBase.Location = New Point(9, 405)
+            Me.Size = New Size(561, 529)
+            Me.ucrBase.Location = New Point(9, 428)
         End If
     End Sub
-
 
     Private Sub MakeLabelColumnVisible()
         If ucrChkIncludeVariable.Checked Then
@@ -607,7 +639,7 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -624,19 +656,59 @@ Public Class dlgName
     End Sub
 
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
-        If rdoReplace.Checked Then
-            clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
-            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-            clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
-            If ucrInputEdit.GetText = "Starts With" Then
-                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
-            ElseIf ucrInputEdit.GetText = "Ends With" Then
-                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
-            ElseIf ucrInputEdit.GetText = "Matches" Then
-                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
-            ElseIf ucrInputEdit.GetText = "Contains" Then
-                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
+        If rdoRenameWith.Checked Then
+            If rdoWholeDataFrame.Checked AndAlso rdoReplace.Checked Then
+                clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+                clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
+                clsDefaultRFunction.RemoveParameterByName("label")
+                If ucrInputEdit.GetText = "Starts With" Then
+                    clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
+                ElseIf ucrInputEdit.GetText = "Ends With" Then
+                    clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
+                ElseIf ucrInputEdit.GetText = "Matches" Then
+                    clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
+                ElseIf ucrInputEdit.GetText = "Contains" Then
+                    clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
+                End If
+            ElseIf rdoSelectedColumn.Checked AndAlso rdoReplace.Checked Then
+                ucrReceiverName.SetMeAsReceiver()
+                clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+                clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
+                clsDefaultRFunction.RemoveParameterByName("label")
+                ' If ucrInputEdit.GetText = "Starts With" OrElse ucrInputEdit.GetText = "Ends With" Then
+                clsDefaultRFunction.AddParameter(".cols", ucrReceiverColumns.GetVariableNames(bWithQuotes:=True), iPosition:=3)
+                'ElseIf ucrInputEdit.GetText = "Matches" Then
+                '    clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
+                'ElseIf ucrInputEdit.GetText = "Contains" Then
+                '    clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
+                'End If
+
             End If
         End If
+
+        'Selection()
     End Sub
+
+    'Private Sub Selection()
+    '    If rdoSelectedColumn.Checked Then
+    '        ucrReceiverColumns.SetMeAsReceiver()
+    '        If rdoReplace.Checked Then
+    '            'clsDefaultRFunction.AddParameter("data_name", clsRFunctionParameter:=clsAddColumnSelection, iPosition:=0)
+    '            clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+    '            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+    '            clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
+    '            If ucrInputEdit.GetText = "Starts With" Then
+    '                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
+    '            ElseIf ucrInputEdit.GetText = "Ends With" Then
+    '                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
+    '            ElseIf ucrInputEdit.GetText = "Matches" Then
+    '                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
+    '            ElseIf ucrInputEdit.GetText = "Contains" Then
+    '                clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
 End Class
