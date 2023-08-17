@@ -1122,7 +1122,7 @@ Public Class dlgBarAndPieChart
                 clsTextAesFunction.AddParameter("label", "..count..", iPosition:=0)
             End If
         Else
-                clsGeomTextFunction.RemoveParameterByName("stat")
+            clsGeomTextFunction.RemoveParameterByName("stat")
             clsTextAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
         End If
     End Sub
