@@ -767,7 +767,6 @@ Public Class dlgLinePlot
             clsOptionsFunction.SetRCommand("geom_smooth")
         ElseIf rdoLinerange.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
-            'ucrReceiverX.SetIncludedDataTypes({"numeric"})
             clsRaesFunction.RemoveParameterByName("fill")
             clsOptionsFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsOptionsFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
