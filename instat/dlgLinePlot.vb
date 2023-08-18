@@ -700,7 +700,6 @@ Public Class dlgLinePlot
                 clsRaesFunction.RemoveParameterByName("group")
             End If
         Else
-            ' ucrReceiverGroup.Visible = False
             clsRaesFunction.RemoveParameterByName("group")
         End If
     End Sub
