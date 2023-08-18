@@ -88,8 +88,6 @@ Public Class dlgLinePlot
         Dim clsGeomPointParam As New RParameter
         Dim clsGeomLineFunction As New RFunction
         Dim clsGeomLineParameter As New RParameter
-        ' Dim clsGeomAreaFunc As New RFunction
-        ' Dim clsGeomAreaParameter As New RParameter
         Dim dctMethodOptions As New Dictionary(Of String, String)
         Dim dctFamilyOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
