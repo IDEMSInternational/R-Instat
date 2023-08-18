@@ -306,33 +306,33 @@ Public Class ucrInput
                     Case "NumericList"
                         MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
                 End Select
-            Case 2
-                Select Case strValidationType
-                    Case "RVariable"
-                        MsgBox("This name cannot start with " & strText(0), vbOKOnly)
-                    Case "Numeric"
-                        MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
-                    Case "NumericList"
-                        MsgBox("Each item in the list must be numeric.", vbOKOnly, "Validation Error")
-                End Select
-            Case 3
-                Select Case strValidationType
-                    Case "RVariable"
-                        MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
-                    Case "NumericList"
-                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
-                End Select
+            'Case 2
+            '    Select Case strValidationType
+            '        Case "RVariable"
+            '            MsgBox("This name cannot start with " & strText(0), vbOKOnly)
+            '        Case "Numeric"
+            '            MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
+            '        Case "NumericList"
+            '            MsgBox("Each item in the list must be numeric.", vbOKOnly, "Validation Error")
+            '    End Select
+            'Case 3
+            '    Select Case strValidationType
+            '        Case "RVariable"
+            '            MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+            '        Case "NumericList"
+            '            MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
+            '    End Select
             Case 4
                 Select Case strValidationType
                     Case "RVariable"
                         MsgBox("This name cannot contain a space", vbOKOnly)
                 End Select
-            Case 5
-                Select Case strValidationType
-                    Case "RVariable"
-                        MsgBox("This name contains an invalid character", vbOKOnly)
+                'Case 5
+                '    Select Case strValidationType
+                '        Case "RVariable"
+                '            MsgBox("This name contains an invalid character", vbOKOnly)
 
-                End Select
+                '    End Select
         End Select
         Return (iValidationCode = 0)
 

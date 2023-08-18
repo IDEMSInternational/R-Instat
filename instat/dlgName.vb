@@ -324,34 +324,34 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Private Function ValidateRVariable(strText As String, iCol As Integer) As String
-        'TODO this need to be implemented in the appropriare ucrControl
-        Dim strNewDataText As String = strText
-        If iCol = 1 Then
-            For Each chrCurr In strNewDataText
-                If Not Char.IsLetterOrDigit(chrCurr) AndAlso Not chrCurr = "." AndAlso Not chrCurr = "_" Then
-                    strNewDataText = strNewDataText.Replace(chrCurr, ".")
-                End If
-            Next
-        End If
-        Return strNewDataText
-    End Function
+    'Private Function ValidateRVariable(strText As String, iCol As Integer) As String
+    '    'TODO this need to be implemented in the appropriare ucrControl
+    '    Dim strNewDataText As String = strText
+    '    If iCol = 1 Then
+    '        For Each chrCurr In strNewDataText
+    '            If Not Char.IsLetterOrDigit(chrCurr) AndAlso Not chrCurr = "." AndAlso Not chrCurr = "_" Then
+    '                strNewDataText = strNewDataText.Replace(chrCurr, ".")
+    '            End If
+    '        Next
+    '    End If
+    '    Return strNewDataText
+    'End Function
 
-    Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
-        Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
-        Dim iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
+    'Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
+    '    Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
+    '    Dim iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
 
-        If e.Range.Rows > 1 Then
-            For iRow As Integer = iStartRowIndex To grdCurrentWorkSheet.SelectionRange.EndRow
-                Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex), iColIndex)
-                RenameColumns(strNewData, iRow, iColIndex)
-            Next
-        Else
-            Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=e.Range.Row, col:=iColIndex), iColIndex)
-            RenameColumns(strNewData, iStartRowIndex, iColIndex)
-        End If
-        ValidateNamesFromDictionary(iColIndex)
-    End Sub
+    '    If e.Range.Rows > 1 Then
+    '        For iRow As Integer = iStartRowIndex To grdCurrentWorkSheet.SelectionRange.EndRow
+    '            Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex), iColIndex)
+    '            RenameColumns(strNewData, iRow, iColIndex)
+    '        Next
+    '    Else
+    '        Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=e.Range.Row, col:=iColIndex), iColIndex)
+    '        RenameColumns(strNewData, iStartRowIndex, iColIndex)
+    '    End If
+    '    ValidateNamesFromDictionary(iColIndex)
+    'End Sub
 
     Private Sub GetSelectedRows()
         For i As Integer = grdCurrentWorkSheet.SelectionRange.Row To grdCurrentWorkSheet.SelectionRange.Row + grdCurrentWorkSheet.SelectionRange.Rows - 1
@@ -394,12 +394,12 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        Dim iCol As Integer = e.Cell.Column
-        Dim strNewData As String = ValidateRVariable(e.NewData, iCol)
-        RenameColumns(strNewData, e.Cell.Row, iCol)
-        ValidateNamesFromDictionary(iCol)
-    End Sub
+    'Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+    '    Dim iCol As Integer = e.Cell.Column
+    '    'Dim strNewData As String = ValidateRVariable(e.NewData, iCol)
+    '    RenameColumns(strNewData, e.Cell.Row, iCol)
+    '    ValidateNamesFromDictionary(iCol)
+    'End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
         If rdoMultiple.Checked Then
@@ -643,17 +643,17 @@ Public Class dlgName
         TestOKEnabled()
     End Sub
 
-    Private Sub grdCurrentWorkSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
-        If grdCurrentWorkSheet.ColumnCount > 0 Then
-            Dim iCol As Integer = e.Cell.Column
-            Dim parsedValue As Boolean
-            Dim strNewData As String = ValidateRVariable(e.Text, iCol)
-            If Not strNewData.ToLower.Equals("t") AndAlso Not strNewData.ToLower.Equals("f") AndAlso Not IsNumeric(strNewData) AndAlso Not Boolean.TryParse(strNewData, parsedValue) Then
-                RenameColumns(strNewData, e.Cell.Row, iCol)
-                ValidateNamesFromDictionary(iCol)
-            End If
-        End If
-    End Sub
+    'Private Sub grdCurrentWorkSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles grdCurrentWorkSheet.CellEditTextChanging
+    '    If grdCurrentWorkSheet.ColumnCount > 0 Then
+    '        Dim iCol As Integer = e.Cell.Column
+    '        'Dim parsedValue As Boolean
+    '        'Dim strNewData As String = ValidateRVariable(e.Text, iCol)
+    '        If Not strNewData.ToLower.Equals("t") AndAlso Not strNewData.ToLower.Equals("f") AndAlso Not IsNumeric(strNewData) AndAlso Not Boolean.TryParse(strNewData, parsedValue) Then
+    '            RenameColumns(strNewData, e.Cell.Row, iCol)
+    '            ValidateNamesFromDictionary(iCol)
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
         If rdoRenameWith.Checked Then

@@ -57,19 +57,19 @@ Public Class ucrVariableName
             Return 1
         End If
         firstChar = strText(0)
-        If Not Char.IsLetter(firstChar) Then
-            If firstChar <> "." Then
-                Return 2
-            Else
-                If txtValidation.Text.Length > 1 Then
-                    If Char.IsNumber(txtValidation.Text(1)) Then
-                        Return 3
-                    End If
-                Else
-                    Return 3
-                End If
-            End If
-        End If
+        'If Not Char.IsLetter(firstChar) Then
+        '    If firstChar <> "." Then
+        '        Return 2
+        '    Else
+        '        If txtValidation.Text.Length > 1 Then
+        '            If Char.IsNumber(txtValidation.Text(1)) Then
+        '                Return 3
+        '            End If
+        '        Else
+        '            Return 3
+        '        End If
+        '    End If
+        'End If
 
         For Each CurrChar In txtValidation.Text
             bAcceptableString = Char.IsLetterOrDigit(CurrChar) Or CurrChar = "." Or CurrChar = "_"
@@ -94,12 +94,12 @@ Public Class ucrVariableName
             Case 1
                 MsgBox(Chr(34) & txtValidation.Text & Chr(34) & " is a reserved word in R and cannot be used.", vbOKOnly)
                 txtValidation.Focus()
-            Case 2
-                MsgBox("This name cannot start with " & firstChar, vbOKOnly)
-                txtValidation.Focus()
-            Case 3
-                MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
-                txtValidation.Focus()
+            'Case 2
+            '    MsgBox("This name cannot start with " & firstChar, vbOKOnly)
+            '    txtValidation.Focus()
+            'Case 3
+            '    MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+            '    txtValidation.Focus()
             Case 4
                 MsgBox("This name cannot contain a space", vbOKOnly)
                 txtValidation.Focus()
