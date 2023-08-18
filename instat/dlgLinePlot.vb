@@ -152,12 +152,6 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForLinePlot.bAddParameterIfEmpty = True
 
-        'ucrReceiverYVar.SetParameter(New RParameter("y", 1))
-        'ucrReceiverYVar.Selector = ucrLinePlotSelector
-        'ucrReceiverYVar.bWithQuotes = False
-        'ucrReceiverYVar.SetParameterIsString()
-        'ucrReceiverYVar.SetIncludedDataTypes({"numeric"})
-
         ucrReceiverYMax.SetParameter(New RParameter("ymax", 0))
         ucrReceiverYMax.Selector = ucrLinePlotSelector
         ucrReceiverYMax.bWithQuotes = False
