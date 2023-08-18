@@ -43,8 +43,6 @@ Public Class dlgLinePlot
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsGeomSmoothFunc As New RFunction
     Private clsGeomSmoothParameter As New RParameter
-    Private clsPeaksFunction As New RFunction
-    Private clsValleysFunction As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
@@ -57,13 +55,18 @@ Public Class dlgLinePlot
     Private clsGgSlopeFunction As New RFunction
     Private clsSlopeThemeFunction As New RFunction
     Private clsDumbbellFunction As New RFunction
+    Private clsGeomAreaFunction As New RFunction
+    Private clsAesLinerangeFunction As New RFunction
+    Private clsGeomLinerangeFunction As New RFunction
+    Private clsGeomRibbonFunction As New RFunction
+    Private clsGeomCrossbarFunction As New RFunction
+    Private clsGeomErrorbarFunction As New RFunction
+    Private clsGeomPointrangeFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strgeomSmoothParameterName As String = "geom_smooth"
-    Private strPeaksPointsParameterName As String = "stat_peaks"
-    Private strValleysPointsParameterName As String = "stat_valleys"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName, strPeaksPointsParameterName, strValleysPointsParameterName}
+    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName}
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -84,8 +87,6 @@ Public Class dlgLinePlot
         Dim clsGeomPointParam As New RParameter
         Dim clsGeomLineFunction As New RFunction
         Dim clsGeomLineParameter As New RParameter
-        Dim clsPeaksParam As New RParameter
-        Dim clsValleysParam As New RParameter
         Dim dctMethodOptions As New Dictionary(Of String, String)
         Dim dctFamilyOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
@@ -151,6 +152,18 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForLinePlot.bAddParameterIfEmpty = True
 
+        ucrReceiverYMax.SetParameter(New RParameter("ymax", 0))
+        ucrReceiverYMax.Selector = ucrLinePlotSelector
+        ucrReceiverYMax.bWithQuotes = False
+        ucrReceiverYMax.SetParameterIsString()
+        ucrReceiverYMax.SetIncludedDataTypes({"numeric"})
+
+        ucrReceiverYMin.SetParameter(New RParameter("ymin", 1))
+        ucrReceiverYMin.Selector = ucrLinePlotSelector
+        ucrReceiverYMin.bWithQuotes = False
+        ucrReceiverYMin.SetParameterIsString()
+        ucrReceiverYMin.SetIncludedDataTypes({"numeric"})
+
         clsGeomPointFunc.SetPackageName("ggplot2")
         clsGeomPointFunc.SetRCommand("geom_point")
         clsGeomPointParam.SetArgumentName("geom_point")
@@ -177,23 +190,6 @@ Public Class dlgLinePlot
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        clsPeaksFunction.SetPackageName("ggpmisc")
-        clsPeaksFunction.SetRCommand("stat_peaks")
-        clsPeaksParam.SetArgumentName(strPeaksPointsParameterName)
-        clsPeaksParam.SetArgument(clsPeaksFunction)
-        clsPeaksFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-        clsPeaksFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
-        ucrChkPeak.SetText("Add Peaks")
-        ucrChkPeak.SetParameter(clsPeaksParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
-        clsValleysFunction.SetPackageName("ggpmisc")
-        clsValleysFunction.SetRCommand("stat_valleys")
-        clsValleysParam.SetArgumentName(strValleysPointsParameterName)
-        clsValleysParam.SetArgument(clsValleysFunction)
-        clsValleysFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-        clsValleysFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
-        ucrChkValley.SetText("Add Valleys")
-        ucrChkValley.SetParameter(clsValleysParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("Add SE")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
@@ -211,23 +207,41 @@ Public Class dlgLinePlot
         ucrSave.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
 
-        ucrPnlStepOrPath.AddRadioButton(rdoStep)
+        ucrPnlStepOrPath.AddRadioButton(rdoArea)
         ucrPnlStepOrPath.AddRadioButton(rdoPath)
+        ucrPnlStepOrPath.AddRadioButton(rdoStep)
+        ucrPnlStepOrPath.AddFunctionNamesCondition(rdoArea, "geom_area")
         ucrPnlStepOrPath.AddFunctionNamesCondition(rdoPath, "geom_path")
         ucrPnlStepOrPath.AddFunctionNamesCondition(rdoStep, "geom_step")
         ucrChkPathOrStep.AddToLinkedControls(ucrPnlStepOrPath, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPathOrStep.SetText("Path or Step")
-        ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_step", "geom_path"})
-        ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_step", "geom_path"}, False)
+        ucrChkPathOrStep.SetText("Area/ Path/ Step")
+        ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_area", "geom_step", "geom_path"})
+        ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_area", "geom_step", "geom_path"}, False)
 
-        ucrPnlOptions.AddRadioButton(rdoSmoothing)
+        ucrPnlLinerangeOptions.AddRadioButton(rdoRibbon)
+        ucrPnlLinerangeOptions.AddRadioButton(rdoPointrange)
+        ucrPnlLinerangeOptions.AddRadioButton(rdoCrossbar)
+        ucrPnlLinerangeOptions.AddRadioButton(rdoErrorbar)
+        ucrPnlLinerangeOptions.AddFunctionNamesCondition(rdoRibbon, "geom_ribbon")
+        ucrPnlLinerangeOptions.AddFunctionNamesCondition(rdoPointrange, "geom_pointrange")
+        ucrPnlLinerangeOptions.AddFunctionNamesCondition(rdoCrossbar, "geom_crossbar")
+        ucrPnlLinerangeOptions.AddFunctionNamesCondition(rdoErrorbar, "geom_errorbar")
+
+        ucrChkRibbon.SetText("Ribbon/ Point/ Bar")
+        ucrChkRibbon.AddFunctionNamesCondition(True, {"geom_ribbon", "geom_pointrange", "geom_crossbar", "geom_errorbar"})
+        ucrChkRibbon.AddFunctionNamesCondition(False, {"geom_ribbon", "geom_pointrange", "geom_crossbar", "geom_errorbar"}, False)
+        ucrChkRibbon.AddToLinkedControls(ucrPnlLinerangeOptions, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlOptions.AddRadioButton(rdoLine)
+        ucrPnlOptions.AddRadioButton(rdoSmoothing)
+        ucrPnlOptions.AddRadioButton(rdoLinerange)
         ucrPnlOptions.AddRadioButton(rdoDumbbell)
         ucrPnlOptions.AddRadioButton(rdoSlope)
 
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_path", "geom_step"})
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_area", "geom_path", "geom_step"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSmoothing, strFirstParameterName, {"geom_smooth"})
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLinerange, strFirstParameterName, {"geom_linerange", "geom_ribbon", "geom_pointrange", "geom_crossbar", "geom_errorbar"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDumbbell, "dumbbellplot", {"geom_dumbbell"})
         ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSlope, "slopeplot", {"slopegraph", "slopegraph_theme"})
 
@@ -382,17 +396,17 @@ Public Class dlgLinePlot
         ucrChkSlopeLegend.AddParameterPresentCondition(True, "slopetheme")
         ucrChkSlopeLegend.AddParameterPresentCondition(False, "slopetheme", False)
 
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverGroup}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrPnlOptions.AddToLinkedControls({ucrReceiverXEnd, ucrChkDumbbellColour, ucrChkDumbbellSize}, {rdoDumbbell}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkAddPoints}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot}, {rdoLine, rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddPoints}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrFactorOptionalReceiver}, {rdoLine, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeColour, ucrChkSlopeLabelOptions, ucrChkSlopeTextOptions, ucrChkSlopeLineOptions, ucrChkSlopeLegend}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverYMax, ucrReceiverYMin, ucrChkRibbon}, {rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Orange")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellXEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
@@ -418,8 +432,10 @@ Public Class dlgLinePlot
         ucrReceiverSlopeY.SetLinkedDisplayControl(lblSlopeY)
         ucrReceiverSlopeColour.SetLinkedDisplayControl(lblSlopeColour)
         ucrReceiverSlopeX.SetLinkedDisplayControl(lblSlopeX)
-        ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
+        ucrReceiverYMax.SetLinkedDisplayControl(lblYMax)
+        ucrReceiverYMin.SetLinkedDisplayControl(lblYMin)
         ucrFactorOptionalReceiver.SetLinkedDisplayControl(lblFactorOptional)
+        ucrReceiverGroup.SetLinkedDisplayControl(lblGroupLine)
         ucrInputDumbbellX.SetLinkedDisplayControl(lblXColour)
         ucrInputDumbbellXEnd.SetLinkedDisplayControl(lblXEndColour)
         ucrInputDumbbellLine.SetLinkedDisplayControl(lblLineColour)
@@ -450,10 +466,15 @@ Public Class dlgLinePlot
         clsGeomLineFunction = New RFunction
         clsGeomSmoothFunction = New RFunction
         clsGeomDumbbellFunction = New RFunction
-        clsPeakFunction = New RFunction
         clsPathFunction = New RFunction
         clsGeomStepFunction = New RFunction
-        clsValleysFunction = New RFunction
+        clsGeomAreaFunction = New RFunction
+        clsAesLinerangeFunction = New RFunction
+        clsGeomCrossbarFunction = New RFunction
+        clsGeomErrorbarFunction = New RFunction
+        clsGeomLinerangeFunction = New RFunction
+        clsGeomPointrangeFunction = New RFunction
+        clsGeomRibbonFunction = New RFunction
 
         ucrLinePlotSelector.Reset()
         ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
@@ -461,7 +482,9 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
-        rdoPath.Checked = True
+        rdoArea.Checked = True
+        rdoRibbon.Checked = True
+        ucrReceiverGroup.Visible = False
 
         ucrInputFormula.SetText("y ~ x")
 
@@ -475,12 +498,11 @@ Public Class dlgLinePlot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
+
+        clsAesLinerangeFunction.SetRCommand("aes")
 
         clsOptionsFunction.SetPackageName("ggplot2")
         clsOptionsFunction.SetRCommand("geom_line")
-        'clsOptionsFunction.AddParameter("span", 0.75, iPosition:=4)
         clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsDumbbellFunction.SetPackageName("ggalt")
@@ -523,9 +545,6 @@ Public Class dlgLinePlot
         clsGeomStepFunction.SetPackageName("ggplot2")
         clsGeomStepFunction.SetRCommand("geom_step")
 
-        clsValleysFunction.SetPackageName("ggpmisc")
-        clsValleysFunction.SetRCommand("stat_valleys")
-
         clsGeomSmoothFunction.SetPackageName("ggplot2")
         clsGeomSmoothFunction.SetRCommand("geom_smooth")
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
@@ -541,8 +560,23 @@ Public Class dlgLinePlot
         clsPointsFunction.AddParameter("size", "3")
         clsPointsFunction.AddParameter("colour", Chr(34) & "red" & Chr(34))
 
-        clsPeakFunction.SetPackageName("ggpmisc")
-        clsPeakFunction.SetRCommand("stat_peaks")
+        clsGeomAreaFunction.SetPackageName("ggplot2")
+        clsGeomAreaFunction.SetRCommand("geom_area")
+
+        clsGeomLinerangeFunction.SetPackageName("ggplot2")
+        clsGeomLinerangeFunction.SetRCommand("geom_linerange")
+
+        clsGeomRibbonFunction.SetPackageName("ggplot2")
+        clsGeomRibbonFunction.SetRCommand("geom_ribbon")
+
+        clsGeomCrossbarFunction.SetPackageName("ggplot2")
+        clsGeomCrossbarFunction.SetRCommand("geom_crossbar")
+
+        clsGeomErrorbarFunction.SetPackageName("ggplot2")
+        clsGeomErrorbarFunction.SetRCommand("geom_errorbar")
+
+        clsGeomPointrangeFunction.SetPackageName("ggplot2")
+        clsGeomPointrangeFunction.SetRCommand("geom_pointrange")
 
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
         clsBaseOperator.RemoveParameterByName("geom_point")
@@ -568,8 +602,8 @@ Public Class dlgLinePlot
         ucrChkAddLine.SetRCode(clsBaseOperator, bReset)
         ucrChkWithSE.SetRCode(clsGeomSmoothFunc, bReset)
         ucrChkAddSE.SetRCode(clsOptionsFunction, bReset)
-        ucrChkPeak.SetRCode(clsBaseOperator, bReset)
-        ucrChkValley.SetRCode(clsBaseOperator, bReset)
+        ucrReceiverYMax.SetRCode(clsAesLinerangeFunction, bReset)
+        ucrReceiverYMin.SetRCode(clsAesLinerangeFunction, bReset)
         ucrChkPathOrStep.SetRCode(clsOptionsFunction, bReset)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
@@ -581,6 +615,9 @@ Public Class dlgLinePlot
         ucrChkSlopeLabelOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeTextOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
+        If bReset Then
+            ucrChkRibbon.SetRCode(clsOptionsFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -589,7 +626,8 @@ Public Class dlgLinePlot
             (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty())) OrElse
             (rdoDumbbell.Checked AndAlso (ucrReceiverX.IsEmpty() OrElse ucrReceiverSlopeY.IsEmpty() OrElse
             ucrReceiverXEnd.IsEmpty())) OrElse (rdoSlope.Checked AndAlso (ucrReceiverSlopeX.IsEmpty() OrElse
-            ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverSlopeColour.IsEmpty())) Then
+            ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverSlopeColour.IsEmpty())) OrElse (rdoLinerange.Checked AndAlso
+            (ucrReceiverSlopeY.IsEmpty() OrElse ucrReceiverYMax.IsEmpty() OrElse ucrReceiverYMin.IsEmpty() OrElse ucrReceiverX.IsEmpty())) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -642,20 +680,23 @@ Public Class dlgLinePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged,
+        ucrFactorOptionalReceiver.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrReceiverGroup.ControlValueChanged
         SetGroupParam()
     End Sub
 
     Private Sub SetGroupParam()
-        If rdoLine.Checked OrElse rdoSmoothing.Checked Then
+        If rdoLine.Checked OrElse rdoSmoothing.Checked OrElse rdoLinerange.Checked Then
+            ucrReceiverGroup.Visible = False
             If (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso ucrFactorOptionalReceiver.IsEmpty Then
                 clsRaesFunction.AddParameter("group", "1", iPosition:=3)
-                ucrReceiverGroup.Enabled = False
+                ucrReceiverGroup.Visible = False
             ElseIf (Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor")) AndAlso Not ucrFactorOptionalReceiver.IsEmpty Then
-                ucrReceiverGroup.Enabled = True
+                ucrReceiverGroup.Visible = True
                 ucrReceiverGroup.SetText(ucrFactorOptionalReceiver.GetVariableNames(False))
                 clsRaesFunction.AddParameter("group", ucrReceiverGroup.GetVariableNames(False), iPosition:=3)
             Else
+                ucrReceiverGroup.Visible = False
                 clsRaesFunction.RemoveParameterByName("group")
             End If
         Else
@@ -669,32 +710,72 @@ Public Class dlgLinePlot
         clsBaseOperator.RemoveParameterByName("slopeplot")
         clsBaseOperator.RemoveParameterByName("slopetheme")
         clsBaseOperator.RemoveParameterByName("dumbbellplot")
+        clsOptionsFunction.RemoveParameterByName("stat")
+        clsOptionsFunction.RemoveParameterByName("position")
+        clsOptionsFunction.RemoveParameterByName("aes")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=1)
         clsOptionsFunction.SetPackageName("ggplot2")
         If rdoLine.Checked Then
             If ucrChkPathOrStep.Checked Then
-                If rdoStep.Checked Then
+                If rdoArea.Checked Then
+                    ucrSave.SetPrefix("area_plot")
+                    clsRaesFunction.RemoveParameterByName("colour")
+                    clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
+                    clsOptionsFunction.SetRCommand("geom_area")
+                ElseIf rdoStep.Checked Then
                     ucrSave.SetPrefix("step_plot")
+                    clsRaesFunction.RemoveParameterByName("fill")
+                    clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
                     clsOptionsFunction.SetRCommand("geom_step")
                 Else
                     ucrSave.SetPrefix("path_plot")
+                    clsRaesFunction.RemoveParameterByName("fill")
+                    clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
                     clsOptionsFunction.SetRCommand("geom_path")
                 End If
             Else
                 ucrSave.SetPrefix("line_plot")
+                clsRaesFunction.RemoveParameterByName("fill")
                 clsOptionsFunction.SetRCommand("geom_line")
             End If
         ElseIf rdoSmoothing.Checked Then
+            clsRaesFunction.RemoveParameterByName("fill")
             ucrSave.SetPrefix("smooth")
             clsOptionsFunction.SetRCommand("geom_smooth")
+        ElseIf rdoLinerange.Checked Then
+            ucrReceiverSlopeY.SetMeAsReceiver()
+            clsRaesFunction.RemoveParameterByName("fill")
+            clsOptionsFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+            clsOptionsFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+            clsOptionsFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+            If ucrChkRibbon.Checked Then
+                If rdoRibbon.Checked Then
+                    ucrSave.SetPrefix("ribbon")
+                    clsOptionsFunction.SetRCommand("geom_ribbon")
+                ElseIf rdoPointrange.Checked Then
+                    ucrSave.SetPrefix("pointrange")
+                    clsOptionsFunction.SetRCommand("geom_pointrange")
+                ElseIf rdoCrossbar.Checked Then
+                    ucrSave.SetPrefix("crossbar")
+                    clsOptionsFunction.SetRCommand("geom_crossbar")
+                Else
+                    ucrSave.SetPrefix("errorbar")
+                    clsOptionsFunction.SetRCommand("geom_errorbar")
+                End If
+            Else
+                ucrSave.SetPrefix("linerange")
+                clsOptionsFunction.SetRCommand("geom_linerange")
+            End If
         ElseIf rdoDumbbell.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
+            clsRaesFunction.RemoveParameterByName("fill")
             ucrSave.SetPrefix("dumbbell")
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
             clsBaseOperator.AddParameter("dumbbellplot", clsRFunctionParameter:=clsDumbbellFunction, iPosition:=1)
         ElseIf rdoSlope.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
+            clsRaesFunction.RemoveParameterByName("fill")
             cmdOptions.Visible = False
             ucrSave.SetPrefix("slope")
             clsBaseOperator.RemoveParameterByName("ggplot")
@@ -708,11 +789,16 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged
+    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged,
+        ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged,
+        ucrPnlLinerangeOptions.ControlValueChanged, ucrChkRibbon.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
         SetGraphPrefixAndRcommand()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
+        ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged,
+        ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged,
+        ucrReceiverYMax.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged ', ucrReceiverYVar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -743,10 +829,10 @@ Public Class dlgLinePlot
         bResetSubdialog = False
     End Sub
 
-    Private Sub PeakOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PeakOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsPeakFunction)
+    Private Sub AreaOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AreaOptionsToolStripMenuItem.Click
+        openSdgLayerOptions(clsGeomAreaFunction)
     End Sub
-    
+
     Private Sub DumbbellOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DumbbellOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomDumbbellFunction)
     End Sub
@@ -754,7 +840,7 @@ Public Class dlgLinePlot
     Private Sub LineOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LineOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomLineFunction)
     End Sub
-    
+
     Private Sub SmoothOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomSmoothFunction)
     End Sub
@@ -766,12 +852,28 @@ Public Class dlgLinePlot
     Private Sub PathOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PathOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsPathFunction)
     End Sub
-    
+
     Private Sub StepOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StepOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomStepFunction)
     End Sub
 
-    Private Sub ValleyOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ValleyOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsValleysFunction)
+    Private Sub CrossbarOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrossbarOptionsToolStripMenuItem.Click
+        openSdgLayerOptions(clsGeomCrossbarFunction)
+    End Sub
+
+    Private Sub ErrorbarOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ErrorbarOptionsToolStripMenuItem.Click
+        openSdgLayerOptions(clsGeomErrorbarFunction)
+    End Sub
+
+    Private Sub LinerangeOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LinerangeOptionsToolStripMenuItem.Click
+        openSdgLayerOptions(clsGeomLinerangeFunction)
+    End Sub
+
+    Private Sub PointrangeOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PointrangeOptionsToolStripMenuItem.Click
+        openSdgLayerOptions(clsGeomPointrangeFunction)
+    End Sub
+
+    Private Sub RibbonOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RibbonOptionsToolStripMenuItem.Click
+        openSdgLayerOptions(clsGeomRibbonFunction)
     End Sub
 End Class
