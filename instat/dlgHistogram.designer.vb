@@ -51,10 +51,8 @@ Partial Class dlgHistogram
         Me.toolStripMenuItemDensityOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemDensityRidgesOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemFrequencyPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblPosition = New System.Windows.Forms.Label()
         Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
         Me.ucrChkReverse = New instat.ucrCheck()
-        Me.ucrInputPositions = New instat.ucrInputComboBox()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
         Me.ucrChkRidges = New instat.ucrCheck()
@@ -65,6 +63,8 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.lblReorder = New System.Windows.Forms.Label()
+        Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -181,16 +181,6 @@ Partial Class dlgHistogram
         Me.toolStripMenuItemFrequencyPolygonOptions.Size = New System.Drawing.Size(221, 22)
         Me.toolStripMenuItemFrequencyPolygonOptions.Text = "Frequency Polygon Options"
         '
-        'lblPosition
-        '
-        Me.lblPosition.AutoSize = True
-        Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosition.Location = New System.Drawing.Point(283, 333)
-        Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
-        Me.lblPosition.TabIndex = 40
-        Me.lblPosition.Text = "Position:"
-        '
         'ucrVariablesAsFactorforHist
         '
         Me.ucrVariablesAsFactorforHist.AutoSize = True
@@ -213,18 +203,6 @@ Partial Class dlgHistogram
         Me.ucrChkReverse.Name = "ucrChkReverse"
         Me.ucrChkReverse.Size = New System.Drawing.Size(126, 23)
         Me.ucrChkReverse.TabIndex = 42
-        '
-        'ucrInputPositions
-        '
-        Me.ucrInputPositions.AddQuotesIfUnrecognised = True
-        Me.ucrInputPositions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPositions.GetSetSelectedIndex = -1
-        Me.ucrInputPositions.IsReadOnly = False
-        Me.ucrInputPositions.Location = New System.Drawing.Point(281, 350)
-        Me.ucrInputPositions.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrInputPositions.Name = "ucrInputPositions"
-        Me.ucrInputPositions.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputPositions.TabIndex = 41
         '
         'cmdOptions
         '
@@ -334,16 +312,37 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions.Size = New System.Drawing.Size(433, 30)
         Me.ucrPnlOptions.TabIndex = 0
         '
+        'lblReorder
+        '
+        Me.lblReorder.AutoSize = True
+        Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblReorder.Location = New System.Drawing.Point(284, 332)
+        Me.lblReorder.Name = "lblReorder"
+        Me.lblReorder.Size = New System.Drawing.Size(48, 13)
+        Me.lblReorder.TabIndex = 44
+        Me.lblReorder.Text = "Reorder:"
+        '
+        'ucrInputAddReorder
+        '
+        Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAddReorder.GetSetSelectedIndex = -1
+        Me.ucrInputAddReorder.IsReadOnly = False
+        Me.ucrInputAddReorder.Location = New System.Drawing.Point(283, 348)
+        Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
+        Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputAddReorder.TabIndex = 45
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 476)
+        Me.Controls.Add(Me.ucrInputAddReorder)
+        Me.Controls.Add(Me.lblReorder)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrChkReverse)
-        Me.Controls.Add(Me.ucrInputPositions)
-        Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkDisplayAsDotPlot)
         Me.Controls.Add(Me.ucrChkRidges)
@@ -393,8 +392,8 @@ Partial Class dlgHistogram
     Friend WithEvents toolStripMenuItemDensityRidgesOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemFrequencyPolygonOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemDotOptions As ToolStripMenuItem
-    Friend WithEvents lblPosition As Label
-    Friend WithEvents ucrInputPositions As ucrInputComboBox
     Friend WithEvents ucrChkReverse As ucrCheck
     Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor
+    Friend WithEvents lblReorder As Label
+    Friend WithEvents ucrInputAddReorder As ucrInputComboBox
 End Class
