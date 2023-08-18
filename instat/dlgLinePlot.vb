@@ -66,7 +66,6 @@ Public Class dlgLinePlot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strgeomSmoothParameterName As String = "geom_smooth"
-    ' Private strgeomAreaParameterName As String = "geom_area"
     Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName}
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
