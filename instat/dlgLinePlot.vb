@@ -713,7 +713,6 @@ Public Class dlgLinePlot
         clsOptionsFunction.RemoveParameterByName("stat")
         clsOptionsFunction.RemoveParameterByName("position")
         clsOptionsFunction.RemoveParameterByName("aes")
-        'clsRaesFunction.RemoveParameterByName("fill")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=1)
         clsOptionsFunction.SetPackageName("ggplot2")
