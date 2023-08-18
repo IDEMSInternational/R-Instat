@@ -587,7 +587,6 @@ Public Class dlgLinePlot
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorOptionalReceiver.AddAdditionalCodeParameterPair(clsGgSlopeFunction, New RParameter("colour", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverSlopeY.AddAdditionalCodeParameterPair(clsRaesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
-        'ucrReceiverYVar.AddAdditionalCodeParameterPair(clsRaesFunction, ucrReceiverYVar.GetParameter, iAdditionalPairNo:=1)
 
         ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
