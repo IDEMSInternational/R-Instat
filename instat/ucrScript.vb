@@ -568,7 +568,7 @@ Public Class ucrScript
                 clsScriptActive.TextLength,
                 clsScriptActive.Lines(clsScriptActive.CurrentLine + 1).Position)
 
-        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strStatement, strNewComment:=strComment)
+        frmMain.clsRLink.RunScript(strStatement.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
 
         ' if we executed the last statement and there is no blank line after, then add blank line
         If iNextStatementPos >= clsScriptActive.TextLength _
@@ -782,7 +782,8 @@ Public Class ucrScript
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
         EnableRightClickMenuOptions(False)
-        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=clsScriptActive.Text, strNewComment:=strComment)
+        frmMain.clsRLink.RunScript(clsScriptActive.Text.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+
         EnableRunButtons(True)
         EnableRightClickMenuOptions(True)
     End Sub
@@ -792,7 +793,7 @@ Public Class ucrScript
         EnableRunButtons(False)
         EnableRightClickMenuOptions(False)
         If clsScriptActive.SelectedText.Length > 0 Then
-            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=clsScriptActive.SelectedText, strNewComment:=strComment)
+            frmMain.clsRLink.RunScript(clsScriptActive.SelectedText.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
         Else
             RunCurrentStatement()
         End If

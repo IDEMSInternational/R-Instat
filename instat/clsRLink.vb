@@ -823,7 +823,7 @@ Public Class RLink
                         strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                     End If
                 ElseIf iCallType = 5 Then
-                    'else if script comes from script window
+                    'else if script is a single R statement from script window
                     Dim bSuccess As Boolean = Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
 
                     'if not an assignment operation, then capture the output
@@ -895,72 +895,6 @@ Public Class RLink
         End If
         Return strFilePath
     End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
-    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
-    '''           <para>R statements may be split over multiple lines. 
-    '''           This function is named '...FromWindow' because it's designed to execute scripts 
-    '''           entered by a human from a dialog window (e.g. a script window). </para>
-    ''' </summary>
-    ''' <param name="strNewScript">    The R script to execute.</param>
-    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
-    '''                                <paramref name="strNewScript"/> as the comment.</param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub RunScriptFromWindow(strNewScript As String, strNewComment As String)
-
-        'for each R statement in script TODO
-        Dim strRStatement As String = strNewScript 'todo set to string version of R statement
-        RunScript(strRStatement.Trim(vbLf), iCallType:=5, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
-        strNewComment = ""
-        'Next
-
-        'Dim strScriptCmd As String = ""
-        ''for each line in script
-        'For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
-        '    'remove any comments (character '#' and anything after)
-        '    Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
-        '    Select Case iCommentPos
-        '        Case 0      'a normal comment line (starts with '#')
-        '            Continue For
-        '        Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
-        '            strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
-        '    End Select
-
-        '    'if line is empty or only whitespace then ignore line
-        '    Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
-        '    If strTrimmedLine.Length <= 0 Then
-        '        Continue For
-        '    End If
-
-        '    'else append line of script to command
-        '    strScriptCmd &= strScriptLine
-
-        '    'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
-        '    '    then assume command is not complete
-        '    Dim cLastChar As Char = strTrimmedLine.Last
-        '    Dim strLast3Chars As String = ""
-        '    Dim iNumOpenRound As Integer = strScriptCmd.Where(Function(c) c = "("c).Count
-        '    Dim iNumClosedRound As Integer = strScriptCmd.Where(Function(c) c = ")"c).Count
-        '    Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
-        '    Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
-        '    Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
-        '    If strTrimmedLine.Length >= 3 Then
-        '        strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
-        '    End If
-        '    If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" _
-        '            OrElse iNumOpenRound <> iNumClosedRound _
-        '            OrElse iNumOpenCurlies <> iNumClosedCurlies _
-        '            OrElse iNumDoubleQuotes Mod 2 Then
-        '        Continue For
-        '    End If
-
-        '    'else execute command
-        '    RunScript(strScriptCmd.Trim(vbLf), iCallType:=5, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
-        '    strScriptCmd = ""
-        '    strNewComment = ""
-        'Next
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Executes the the <paramref name="strScript"/> R script and returns the result 
