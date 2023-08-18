@@ -498,8 +498,6 @@ Public Class dlgLinePlot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        ' clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-        ' clsRaesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
         clsAesLinerangeFunction.SetRCommand("aes")
 
