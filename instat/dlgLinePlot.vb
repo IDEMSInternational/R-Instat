@@ -190,13 +190,6 @@ Public Class dlgLinePlot
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        'clsGeomAreaFunc.SetPackageName("ggplot2")
-        'clsGeomAreaFunc.SetRCommand("geom_area")
-        'clsGeomAreaParameter.SetArgumentName("geom_area")
-        'clsGeomAreaParameter.SetArgument(clsGeomAreaFunc)
-        'clsGeomAreaParameter.Position = 5
-        'ucrChkArea.SetText("Area")
-        'ucrChkArea.SetParameter(clsGeomAreaParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkWithSE.SetText("Add SE")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
