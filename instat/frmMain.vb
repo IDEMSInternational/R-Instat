@@ -151,6 +151,8 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
+        mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
         strCurrLang = clsInstatOptions.strLanguageCultureCode
         '---------------------------------------
@@ -442,7 +444,7 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
 
         mnuTbDataView.Checked = True
-        mnuTbOutput.Checked = True
+        mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
         UpdateLayout()
     End Sub
@@ -586,7 +588,7 @@ Public Class frmMain
             End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
-        mnuTbOutput.Checked = mnuViewOutput.Checked
+        mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
@@ -640,6 +642,18 @@ Public Class frmMain
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuViewColumnMetadata.Checked = True
         UpdateLayout()
+    End Sub
+
+    Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
+        mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
+        clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
+    End Sub
+
+    Private Sub mnuIncludeComments_Click(sender As Object, e As EventArgs) Handles mnuIncludeComments.Click
+        mnuIncludeComments.Checked = Not mnuIncludeComments.Checked
+        clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuPrepareSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameInsertColumnsRows.Click
@@ -801,10 +815,6 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
-        dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
@@ -825,6 +835,8 @@ Public Class frmMain
 
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
         dlgOptions.ShowDialog()
+        mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
+        mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
     Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameHideColumns.Click
@@ -915,13 +927,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
-        dlgFind.currWindow = ActiveMdiChild
-        dlgFind.Owner = Me
-        dlgFind.Show()
-    End Sub
-
-    Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
-        mnuEditFind_Click(sender, e)
+        dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataframeColourByProperty.Click
@@ -1126,7 +1132,6 @@ Public Class frmMain
         dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
-
     Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificPointPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
@@ -1173,10 +1178,6 @@ Public Class frmMain
 
     Private Sub mnuModelProbabilityDistributionsCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsCompareModels.Click
         dlgCompareModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
-        dlgColumnStats.ShowDialog()
     End Sub
 
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
@@ -1507,9 +1508,6 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralUseSummaries.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
@@ -1636,7 +1634,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.ButtonClick, mnuOutputWindow.Click
         mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
@@ -2362,12 +2360,6 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
-    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
-        If ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.CutText()
-        End If
-    End Sub
-
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
@@ -2521,4 +2513,14 @@ Public Class frmMain
     Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
         dlgSurvey.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeGraphGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneral.Click
+        dlgGeneralForGraphics.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
 End Class

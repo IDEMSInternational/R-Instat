@@ -864,6 +864,8 @@ Public Class ucrGeom
         'adding layer parameters
         clsgeom_density_ridges.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
         clsgeom_density_ridges.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34), Chr(34) & "points_jitter" & Chr(34), Chr(34) & "raincloud" & Chr(34)})
+        clsgeom_density_ridges.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_density_ridges.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_density_ridges.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
@@ -1544,20 +1546,20 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_point)
 
-        'clsgeom_pointrange.strGeomName = "geom_pointrange"
-        'clsgeom_pointrange.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_pointrange.AddAesParameter("ymax", bIsMandatory:=TRUE)
-        'clsgeom_pointrange.AddAesParameter("ymin", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_pointrange.AddAesParameter("alpha")
-        'clsgeom_pointrange.AddAesParameter("colour")
-        'clsgeom_pointrange.AddAesParameter("linetype")
-        'clsgeom_pointrange.AddAesParameter("size")
-        ''adding layer parameters
-        'clsgeom_pointrange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_pointrange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_pointrange.strGeomName = "geom_pointrange"
+        clsgeom_pointrange.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_pointrange.AddAesParameter("ymax", bIsMandatory:=True)
+        clsgeom_pointrange.AddAesParameter("ymin", bIsMandatory:=True)
+        'optional
+        clsgeom_pointrange.AddAesParameter("alpha")
+        clsgeom_pointrange.AddAesParameter("colour")
+        clsgeom_pointrange.AddAesParameter("linetype")
+        clsgeom_pointrange.AddAesParameter("size")
+        'adding layer parameters
+        clsgeom_pointrange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_pointrange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
 
-        'lstAllGeoms.Add(clsgeom_pointrange)
+        lstAllGeoms.Add(clsgeom_pointrange)
 
         clsgeom_polygon.strGeomName = "geom_polygon"
         clsgeom_polygon.AddAesParameter("x", bIsMandatory:=True)
@@ -1689,6 +1691,7 @@ Public Class ucrGeom
         'optional
         clsgeom_ribbon.AddAesParameter("alpha")
         clsgeom_ribbon.AddAesParameter("colour")
+        clsgeom_ribbon.AddAesParameter("fill")
         clsgeom_ribbon.AddAesParameter("group")
         clsgeom_ribbon.AddAesParameter("linetype")
         clsgeom_ribbon.AddAesParameter("size")
@@ -1699,6 +1702,8 @@ Public Class ucrGeom
         clsgeom_ribbon.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_ribbon.AddLayerParameter("size", "numeric", "1")
         clsgeom_ribbon.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_ribbon.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_ribbon.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         clsgeom_ribbon.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_ribbon.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", "x", "y"})
         clsgeom_ribbon.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
