@@ -1546,20 +1546,20 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_point)
 
-        'clsgeom_pointrange.strGeomName = "geom_pointrange"
-        'clsgeom_pointrange.AddAesParameter("x", bIsMandatory:=TRUE)
-        'clsgeom_pointrange.AddAesParameter("ymax", bIsMandatory:=TRUE)
-        'clsgeom_pointrange.AddAesParameter("ymin", bIsMandatory:=TRUE)
-        ''optional
-        'clsgeom_pointrange.AddAesParameter("alpha")
-        'clsgeom_pointrange.AddAesParameter("colour")
-        'clsgeom_pointrange.AddAesParameter("linetype")
-        'clsgeom_pointrange.AddAesParameter("size")
-        ''adding layer parameters
-        'clsgeom_pointrange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
-        'clsgeom_pointrange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_pointrange.strGeomName = "geom_pointrange"
+        clsgeom_pointrange.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_pointrange.AddAesParameter("ymax", bIsMandatory:=True)
+        clsgeom_pointrange.AddAesParameter("ymin", bIsMandatory:=True)
+        'optional
+        clsgeom_pointrange.AddAesParameter("alpha")
+        clsgeom_pointrange.AddAesParameter("colour")
+        clsgeom_pointrange.AddAesParameter("linetype")
+        clsgeom_pointrange.AddAesParameter("size")
+        'adding layer parameters
+        clsgeom_pointrange.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
+        clsgeom_pointrange.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34))
 
-        'lstAllGeoms.Add(clsgeom_pointrange)
+        lstAllGeoms.Add(clsgeom_pointrange)
 
         clsgeom_polygon.strGeomName = "geom_polygon"
         clsgeom_polygon.AddAesParameter("x", bIsMandatory:=True)
