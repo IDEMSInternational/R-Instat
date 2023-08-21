@@ -127,14 +127,14 @@ Partial Class ucrAxes
         Me.ucrChkNaValueDiscrete = New instat.ucrCheck()
         Me.ucrInputDropUnusedLevels = New instat.ucrInputComboBox()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
-        Me.UcrPanel1 = New instat.UcrPanel()
-        Me.ucrInputMajorBreaksLabelsDiscrete = New instat.ucrInputTextBox()
-        Me.ucrChkLabelsDiscrete = New instat.ucrCheck()
-        Me.ucrInputLimitDiscrete = New instat.ucrInputTextBox()
-        Me.ucrChkLimit = New instat.ucrCheck()
-        Me.ucrInputBreaksDiscrete = New instat.ucrInputTextBox()
-        Me.ucrChkBreakDiscret = New instat.ucrCheck()
         Me.grpMajorBreaksDiscrete = New System.Windows.Forms.GroupBox()
+        Me.ucrChkBreakDiscret = New instat.ucrCheck()
+        Me.ucrInputBreaksDiscrete = New instat.ucrInputTextBox()
+        Me.ucrChkLimit = New instat.ucrCheck()
+        Me.ucrInputLimitDiscrete = New instat.ucrInputTextBox()
+        Me.ucrChkLabelsDiscrete = New instat.ucrCheck()
+        Me.ucrInputMajorBreaksLabelsDiscrete = New instat.ucrInputTextBox()
+        Me.UcrPanel1 = New instat.UcrPanel()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -237,7 +237,6 @@ Partial Class ucrAxes
         Me.grpMajorBreaks.Controls.Add(Me.lblMajorBreaksTo)
         Me.grpMajorBreaks.Controls.Add(Me.ucrPnlMajorBreaks)
         Me.grpMajorBreaks.Controls.Add(Me.ucrInputMajorBreaksCustom)
-        Me.grpMajorBreaks.Controls.Add(Me.grpMajorBreaksDiscrete)
         Me.grpMajorBreaks.Location = New System.Drawing.Point(310, 29)
         Me.grpMajorBreaks.Name = "grpMajorBreaks"
         Me.grpMajorBreaks.Size = New System.Drawing.Size(354, 162)
@@ -1128,53 +1127,30 @@ Partial Class ucrAxes
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkDropUnusedLevels.TabIndex = 28
         '
-        'UcrPanel1
+        'grpMajorBreaksDiscrete
         '
-        Me.UcrPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrPanel1.Location = New System.Drawing.Point(3, 19)
-        Me.UcrPanel1.Name = "UcrPanel1"
-        Me.UcrPanel1.Size = New System.Drawing.Size(335, 23)
-        Me.UcrPanel1.TabIndex = 18
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkBreakDiscret)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputBreaksDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkLimit)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputLimitDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkLabelsDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputMajorBreaksLabelsDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.UcrPanel1)
+        Me.grpMajorBreaksDiscrete.Location = New System.Drawing.Point(314, 33)
+        Me.grpMajorBreaksDiscrete.Name = "grpMajorBreaksDiscrete"
+        Me.grpMajorBreaksDiscrete.Size = New System.Drawing.Size(309, 148)
+        Me.grpMajorBreaksDiscrete.TabIndex = 38
+        Me.grpMajorBreaksDiscrete.TabStop = False
+        Me.grpMajorBreaksDiscrete.Text = "labels"
         '
-        'ucrInputMajorBreaksLabelsDiscrete
+        'ucrChkBreakDiscret
         '
-        Me.ucrInputMajorBreaksLabelsDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputMajorBreaksLabelsDiscrete.AutoSize = True
-        Me.ucrInputMajorBreaksLabelsDiscrete.IsMultiline = False
-        Me.ucrInputMajorBreaksLabelsDiscrete.IsReadOnly = False
-        Me.ucrInputMajorBreaksLabelsDiscrete.Location = New System.Drawing.Point(98, 97)
-        Me.ucrInputMajorBreaksLabelsDiscrete.Name = "ucrInputMajorBreaksLabelsDiscrete"
-        Me.ucrInputMajorBreaksLabelsDiscrete.Size = New System.Drawing.Size(146, 21)
-        Me.ucrInputMajorBreaksLabelsDiscrete.TabIndex = 4
-        '
-        'ucrChkLabelsDiscrete
-        '
-        Me.ucrChkLabelsDiscrete.AutoSize = True
-        Me.ucrChkLabelsDiscrete.Checked = False
-        Me.ucrChkLabelsDiscrete.Location = New System.Drawing.Point(5, 98)
-        Me.ucrChkLabelsDiscrete.Name = "ucrChkLabelsDiscrete"
-        Me.ucrChkLabelsDiscrete.Size = New System.Drawing.Size(87, 23)
-        Me.ucrChkLabelsDiscrete.TabIndex = 22
-        '
-        'ucrInputLimitDiscrete
-        '
-        Me.ucrInputLimitDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputLimitDiscrete.AutoSize = True
-        Me.ucrInputLimitDiscrete.IsMultiline = False
-        Me.ucrInputLimitDiscrete.IsReadOnly = False
-        Me.ucrInputLimitDiscrete.Location = New System.Drawing.Point(97, 56)
-        Me.ucrInputLimitDiscrete.Name = "ucrInputLimitDiscrete"
-        Me.ucrInputLimitDiscrete.Size = New System.Drawing.Size(146, 21)
-        Me.ucrInputLimitDiscrete.TabIndex = 23
-        '
-        'ucrChkLimit
-        '
-        Me.ucrChkLimit.AutoSize = True
-        Me.ucrChkLimit.Checked = False
-        Me.ucrChkLimit.Location = New System.Drawing.Point(4, 57)
-        Me.ucrChkLimit.Name = "ucrChkLimit"
-        Me.ucrChkLimit.Size = New System.Drawing.Size(87, 23)
-        Me.ucrChkLimit.TabIndex = 24
+        Me.ucrChkBreakDiscret.AutoSize = True
+        Me.ucrChkBreakDiscret.Checked = False
+        Me.ucrChkBreakDiscret.Location = New System.Drawing.Point(5, 24)
+        Me.ucrChkBreakDiscret.Name = "ucrChkBreakDiscret"
+        Me.ucrChkBreakDiscret.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkBreakDiscret.TabIndex = 26
         '
         'ucrInputBreaksDiscrete
         '
@@ -1187,35 +1163,59 @@ Partial Class ucrAxes
         Me.ucrInputBreaksDiscrete.Size = New System.Drawing.Size(146, 21)
         Me.ucrInputBreaksDiscrete.TabIndex = 25
         '
-        'ucrChkBreakDiscret
+        'ucrChkLimit
         '
-        Me.ucrChkBreakDiscret.AutoSize = True
-        Me.ucrChkBreakDiscret.Checked = False
-        Me.ucrChkBreakDiscret.Location = New System.Drawing.Point(5, 24)
-        Me.ucrChkBreakDiscret.Name = "ucrChkBreakDiscret"
-        Me.ucrChkBreakDiscret.Size = New System.Drawing.Size(87, 23)
-        Me.ucrChkBreakDiscret.TabIndex = 26
+        Me.ucrChkLimit.AutoSize = True
+        Me.ucrChkLimit.Checked = False
+        Me.ucrChkLimit.Location = New System.Drawing.Point(4, 57)
+        Me.ucrChkLimit.Name = "ucrChkLimit"
+        Me.ucrChkLimit.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkLimit.TabIndex = 24
         '
-        'grpMajorBreaksDiscrete
+        'ucrInputLimitDiscrete
         '
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkBreakDiscret)
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputBreaksDiscrete)
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkLimit)
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputLimitDiscrete)
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkLabelsDiscrete)
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputMajorBreaksLabelsDiscrete)
-        Me.grpMajorBreaksDiscrete.Controls.Add(Me.UcrPanel1)
-        Me.grpMajorBreaksDiscrete.Location = New System.Drawing.Point(23, 7)
-        Me.grpMajorBreaksDiscrete.Name = "grpMajorBreaksDiscrete"
-        Me.grpMajorBreaksDiscrete.Size = New System.Drawing.Size(309, 148)
-        Me.grpMajorBreaksDiscrete.TabIndex = 38
-        Me.grpMajorBreaksDiscrete.TabStop = False
-        Me.grpMajorBreaksDiscrete.Text = "labels"
+        Me.ucrInputLimitDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimitDiscrete.AutoSize = True
+        Me.ucrInputLimitDiscrete.IsMultiline = False
+        Me.ucrInputLimitDiscrete.IsReadOnly = False
+        Me.ucrInputLimitDiscrete.Location = New System.Drawing.Point(97, 56)
+        Me.ucrInputLimitDiscrete.Name = "ucrInputLimitDiscrete"
+        Me.ucrInputLimitDiscrete.Size = New System.Drawing.Size(146, 21)
+        Me.ucrInputLimitDiscrete.TabIndex = 23
+        '
+        'ucrChkLabelsDiscrete
+        '
+        Me.ucrChkLabelsDiscrete.AutoSize = True
+        Me.ucrChkLabelsDiscrete.Checked = False
+        Me.ucrChkLabelsDiscrete.Location = New System.Drawing.Point(5, 98)
+        Me.ucrChkLabelsDiscrete.Name = "ucrChkLabelsDiscrete"
+        Me.ucrChkLabelsDiscrete.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkLabelsDiscrete.TabIndex = 22
+        '
+        'ucrInputMajorBreaksLabelsDiscrete
+        '
+        Me.ucrInputMajorBreaksLabelsDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputMajorBreaksLabelsDiscrete.AutoSize = True
+        Me.ucrInputMajorBreaksLabelsDiscrete.IsMultiline = False
+        Me.ucrInputMajorBreaksLabelsDiscrete.IsReadOnly = False
+        Me.ucrInputMajorBreaksLabelsDiscrete.Location = New System.Drawing.Point(98, 97)
+        Me.ucrInputMajorBreaksLabelsDiscrete.Name = "ucrInputMajorBreaksLabelsDiscrete"
+        Me.ucrInputMajorBreaksLabelsDiscrete.Size = New System.Drawing.Size(146, 21)
+        Me.ucrInputMajorBreaksLabelsDiscrete.TabIndex = 4
+        '
+        'UcrPanel1
+        '
+        Me.UcrPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.UcrPanel1.Location = New System.Drawing.Point(3, 19)
+        Me.UcrPanel1.Name = "UcrPanel1"
+        Me.UcrPanel1.Size = New System.Drawing.Size(335, 23)
+        Me.UcrPanel1.TabIndex = 18
         '
         'ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.grpMajorBreaksDiscrete)
         Me.Controls.Add(Me.grpSecondAxis)
         Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMinorBreaks)
@@ -1225,7 +1225,7 @@ Partial Class ucrAxes
         Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpScaleDiscrete)
         Me.Name = "ucrAxes"
-        Me.Size = New System.Drawing.Size(807, 566)
+        Me.Size = New System.Drawing.Size(742, 504)
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
         Me.grpMajorBreaks.ResumeLayout(False)

@@ -879,7 +879,7 @@ Public Class dlgLinePlot
                 clsYLeftBracketOperator.RemoveParameterByName("left")
                 clsYLevelsFunction.RemoveParameterByName("y")
             End If
-        ElseIf rdoDumbbell.Checked OrElse rdoSlope.Checked Then
+        ElseIf rdoDumbbell.Checked OrElse rdoSlope.Checked OrElse rdoLinerange.Checked Then
             If Not ucrReceiverX.IsEmpty AndAlso (ucrReceiverX.strCurrDataType = "factor" OrElse ucrReceiverX.strCurrDataType = "ordered,factor") Then
                 clsXLevelsFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), bIncludeArgumentName:=False)
                 clsXLeftBracketOperator.AddParameter("left", clsRFunctionParameter:=clsXLevelsFunction, iPosition:=0)
@@ -981,5 +981,9 @@ Public Class dlgLinePlot
 
     Private Sub RibbonOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RibbonOptionsToolStripMenuItem.Click
         openSdgLayerOptions(clsGeomRibbonFunction)
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForLinePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+        AddDiscreteScale()
     End Sub
 End Class

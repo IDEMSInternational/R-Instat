@@ -654,11 +654,16 @@ Public Class ucrAxes
     Private Sub AddRemoveScaleFunctions()
         If strAxisType = "continuous" Then
             AddRemoveContinuousXYScales()
+            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "continuous", clsRFunctionParameter:=clsXYScaleContinuousFunction)
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "date")
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "discrete")
         ElseIf strAxisType = "date" Then
             clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "date", clsRFunctionParameter:=clsXYScaleDateFunction)
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "discrete")
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "continuous")
-        Else
+        ElseIf strAxisType = "discrete" Then
+            AddRemoveDiscreteXYScales()
+            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "discrete", clsRFunctionParameter:=clsXYScaleDiscreteFunction)
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "continuous")
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "date")
         End If
@@ -751,7 +756,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkNaValue.ControlValueChanged, ucrChkTransformation.ControlValueChanged
+    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkNaValue.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkLimitsFrom.ControlValueChanged
         AddRemoveContinuousXYScales()
         AddRemoveDiscreteXYScales()
         AddRemoveScaleFunctions()
@@ -854,19 +859,19 @@ Public Class ucrAxes
         AddRemoveDiscreteXYScales()
     End Sub
 
-    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged, ucrInputMajorBreaksLabelsDiscrete.ControlValueChanged
+    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged
         SetLabelsDiscreteParameter()
     End Sub
 
-    Private Sub ucrChkLimit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimit.ControlValueChanged, ucrInputLimitDiscrete.ControlValueChanged
+    Private Sub ucrChkLimit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimit.ControlValueChanged
         SetLimitsDiscrete()
     End Sub
 
-    Private Sub ucrChkBreakDiscret_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBreakDiscret.ControlValueChanged, ucrInputBreaksDiscrete.ControlValueChanged
+    Private Sub ucrChkBreakDiscret_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBreakDiscret.ControlValueChanged
         SetBreaksDiscrete()
     End Sub
 
-    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
         AddRemoveLimits()
     End Sub
 
@@ -912,5 +917,4 @@ Public Class ucrAxes
         SetNameSecondaryAxis()
         SecondaryAxis()
     End Sub
-
 End Class
