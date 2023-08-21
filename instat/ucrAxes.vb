@@ -751,7 +751,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkNaValue.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpandDiscrete.ControlValueChanged, ucrChkPositionDiscrete.ControlValueChanged, ucrChkNaValueDiscrete.ControlValueChanged, ucrChkDropUnusedLevels.ControlValueChanged, ucrInputPositionDiscrete.ControlValueChanged, ucrChkLimitsFrom.ControlValueChanged
+    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkNaValue.ControlValueChanged, ucrChkTransformation.ControlValueChanged
         AddRemoveContinuousXYScales()
         AddRemoveDiscreteXYScales()
         AddRemoveScaleFunctions()
@@ -848,8 +848,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged,
-        ucrInputExpandDiscrete.ControlValueChanged
+    Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged
         ExpandControl()
         AddRemoveScaleFunctions()
         AddRemoveDiscreteXYScales()
@@ -867,7 +866,7 @@ Public Class ucrAxes
         SetBreaksDiscrete()
     End Sub
 
-    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged
         AddRemoveLimits()
     End Sub
 
