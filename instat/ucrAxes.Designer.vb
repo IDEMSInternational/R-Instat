@@ -61,6 +61,20 @@ Partial Class ucrAxes
         Me.ucrPnlMajorBreaks = New instat.UcrPanel()
         Me.ucrInputMajorBreaksCustom = New instat.ucrInputTextBox()
         Me.grpScales = New System.Windows.Forms.GroupBox()
+        Me.grpScaleDiscrete = New System.Windows.Forms.GroupBox()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrChkLimitsFrom = New instat.ucrCheck()
+        Me.ucrInputNaValueDiscrete = New instat.ucrInputTextBox()
+        Me.ucrInputExpandDiscrete = New instat.ucrInputTextBox()
+        Me.ucrInputPositionDiscrete = New instat.ucrInputComboBox()
+        Me.ucrChkExpandDiscrete = New instat.ucrCheck()
+        Me.ucrChkPositionDiscrete = New instat.ucrCheck()
+        Me.ucrChkNaValueDiscrete = New instat.ucrCheck()
+        Me.ucrInputDropUnusedLevels = New instat.ucrInputComboBox()
+        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.ucrInputRelaceMissingvalues = New instat.ucrInputTextBox()
         Me.ucrInputExpand = New instat.ucrInputTextBox()
         Me.ucrInputTransformation = New instat.ucrInputComboBox()
@@ -113,27 +127,22 @@ Partial Class ucrAxes
         Me.ucrInputSecondaryAxis = New instat.ucrInputComboBox()
         Me.ucrChkSecondaryAxis = New instat.ucrCheck()
         Me.ucrChkOffset = New instat.ucrCheck()
-        Me.grpScaleDiscrete = New System.Windows.Forms.GroupBox()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.lblFrom = New System.Windows.Forms.Label()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrChkLimitsFrom = New instat.ucrCheck()
-        Me.ucrInputNaValueDiscrete = New instat.ucrInputTextBox()
-        Me.ucrInputExpandDiscrete = New instat.ucrInputTextBox()
-        Me.ucrInputPositionDiscrete = New instat.ucrInputComboBox()
-        Me.ucrChkExpandDiscrete = New instat.ucrCheck()
-        Me.ucrChkPositionDiscrete = New instat.ucrCheck()
-        Me.ucrChkNaValueDiscrete = New instat.ucrCheck()
-        Me.ucrInputDropUnusedLevels = New instat.ucrInputComboBox()
-        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.grpMajorBreaksDiscrete = New System.Windows.Forms.GroupBox()
+        Me.ucrChkBreakDiscret = New instat.ucrCheck()
+        Me.ucrInputBreaksDiscrete = New instat.ucrInputTextBox()
+        Me.ucrChkLimit = New instat.ucrCheck()
+        Me.ucrInputLimitDiscrete = New instat.ucrInputTextBox()
+        Me.ucrChkLabelsDiscrete = New instat.ucrCheck()
+        Me.ucrInputMajorBreaksLabelsDiscrete = New instat.ucrInputTextBox()
+        Me.UcrPanel1 = New instat.UcrPanel()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
+        Me.grpScaleDiscrete.SuspendLayout()
         Me.grpScaleXDate.SuspendLayout()
         Me.grpMinorBreaks.SuspendLayout()
         Me.grpSecondAxis.SuspendLayout()
-        Me.grpScaleDiscrete.SuspendLayout()
+        Me.grpMajorBreaksDiscrete.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAxisTitle
@@ -214,6 +223,7 @@ Partial Class ucrAxes
         '
         'grpMajorBreaks
         '
+        Me.grpMajorBreaks.Controls.Add(Me.grpMajorBreaksDiscrete)
         Me.grpMajorBreaks.Controls.Add(Me.ucrChkLabels)
         Me.grpMajorBreaks.Controls.Add(Me.ucrInputMajorBreaksLabels)
         Me.grpMajorBreaks.Controls.Add(Me.rdoMajorBreaksSeq)
@@ -402,6 +412,161 @@ Partial Class ucrAxes
         Me.grpScales.TabIndex = 2
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
+        '
+        'grpScaleDiscrete
+        '
+        Me.grpScaleDiscrete.Controls.Add(Me.lblTo)
+        Me.grpScaleDiscrete.Controls.Add(Me.lblFrom)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrNudTo)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrNudFrom)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkLimitsFrom)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputNaValueDiscrete)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputExpandDiscrete)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputPositionDiscrete)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkExpandDiscrete)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkPositionDiscrete)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkNaValueDiscrete)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputDropUnusedLevels)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkDropUnusedLevels)
+        Me.grpScaleDiscrete.Location = New System.Drawing.Point(4, 3)
+        Me.grpScaleDiscrete.Name = "grpScaleDiscrete"
+        Me.grpScaleDiscrete.Size = New System.Drawing.Size(289, 176)
+        Me.grpScaleDiscrete.TabIndex = 37
+        Me.grpScaleDiscrete.TabStop = False
+        Me.grpScaleDiscrete.Text = "Scales"
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(199, 22)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.TabIndex = 34
+        Me.lblTo.Text = "To:"
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(98, 24)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblFrom.TabIndex = 33
+        Me.lblFrom.Text = "From:"
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.AutoSize = True
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(229, 19)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 32
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.AutoSize = True
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(143, 19)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 31
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkLimitsFrom
+        '
+        Me.ucrChkLimitsFrom.AutoSize = True
+        Me.ucrChkLimitsFrom.Checked = False
+        Me.ucrChkLimitsFrom.Location = New System.Drawing.Point(7, 22)
+        Me.ucrChkLimitsFrom.Name = "ucrChkLimitsFrom"
+        Me.ucrChkLimitsFrom.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkLimitsFrom.TabIndex = 30
+        '
+        'ucrInputNaValueDiscrete
+        '
+        Me.ucrInputNaValueDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputNaValueDiscrete.AutoSize = True
+        Me.ucrInputNaValueDiscrete.IsMultiline = False
+        Me.ucrInputNaValueDiscrete.IsReadOnly = False
+        Me.ucrInputNaValueDiscrete.Location = New System.Drawing.Point(191, 51)
+        Me.ucrInputNaValueDiscrete.Name = "ucrInputNaValueDiscrete"
+        Me.ucrInputNaValueDiscrete.Size = New System.Drawing.Size(78, 22)
+        Me.ucrInputNaValueDiscrete.TabIndex = 27
+        '
+        'ucrInputExpandDiscrete
+        '
+        Me.ucrInputExpandDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputExpandDiscrete.AutoSize = True
+        Me.ucrInputExpandDiscrete.IsMultiline = False
+        Me.ucrInputExpandDiscrete.IsReadOnly = False
+        Me.ucrInputExpandDiscrete.Location = New System.Drawing.Point(191, 136)
+        Me.ucrInputExpandDiscrete.Name = "ucrInputExpandDiscrete"
+        Me.ucrInputExpandDiscrete.Size = New System.Drawing.Size(78, 23)
+        Me.ucrInputExpandDiscrete.TabIndex = 27
+        '
+        'ucrInputPositionDiscrete
+        '
+        Me.ucrInputPositionDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputPositionDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPositionDiscrete.GetSetSelectedIndex = -1
+        Me.ucrInputPositionDiscrete.IsReadOnly = False
+        Me.ucrInputPositionDiscrete.Location = New System.Drawing.Point(191, 79)
+        Me.ucrInputPositionDiscrete.Name = "ucrInputPositionDiscrete"
+        Me.ucrInputPositionDiscrete.Size = New System.Drawing.Size(78, 23)
+        Me.ucrInputPositionDiscrete.TabIndex = 26
+        '
+        'ucrChkExpandDiscrete
+        '
+        Me.ucrChkExpandDiscrete.AutoSize = True
+        Me.ucrChkExpandDiscrete.Checked = False
+        Me.ucrChkExpandDiscrete.Location = New System.Drawing.Point(6, 136)
+        Me.ucrChkExpandDiscrete.Name = "ucrChkExpandDiscrete"
+        Me.ucrChkExpandDiscrete.Size = New System.Drawing.Size(202, 23)
+        Me.ucrChkExpandDiscrete.TabIndex = 23
+        '
+        'ucrChkPositionDiscrete
+        '
+        Me.ucrChkPositionDiscrete.AutoSize = True
+        Me.ucrChkPositionDiscrete.Checked = False
+        Me.ucrChkPositionDiscrete.Location = New System.Drawing.Point(6, 79)
+        Me.ucrChkPositionDiscrete.Name = "ucrChkPositionDiscrete"
+        Me.ucrChkPositionDiscrete.Size = New System.Drawing.Size(202, 23)
+        Me.ucrChkPositionDiscrete.TabIndex = 23
+        '
+        'ucrChkNaValueDiscrete
+        '
+        Me.ucrChkNaValueDiscrete.AutoSize = True
+        Me.ucrChkNaValueDiscrete.Checked = False
+        Me.ucrChkNaValueDiscrete.Location = New System.Drawing.Point(6, 51)
+        Me.ucrChkNaValueDiscrete.Name = "ucrChkNaValueDiscrete"
+        Me.ucrChkNaValueDiscrete.Size = New System.Drawing.Size(202, 23)
+        Me.ucrChkNaValueDiscrete.TabIndex = 23
+        '
+        'ucrInputDropUnusedLevels
+        '
+        Me.ucrInputDropUnusedLevels.AddQuotesIfUnrecognised = True
+        Me.ucrInputDropUnusedLevels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDropUnusedLevels.GetSetSelectedIndex = -1
+        Me.ucrInputDropUnusedLevels.IsReadOnly = False
+        Me.ucrInputDropUnusedLevels.Location = New System.Drawing.Point(191, 107)
+        Me.ucrInputDropUnusedLevels.Name = "ucrInputDropUnusedLevels"
+        Me.ucrInputDropUnusedLevels.Size = New System.Drawing.Size(78, 23)
+        Me.ucrInputDropUnusedLevels.TabIndex = 29
+        '
+        'ucrChkDropUnusedLevels
+        '
+        Me.ucrChkDropUnusedLevels.AutoSize = True
+        Me.ucrChkDropUnusedLevels.Checked = False
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 108)
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(202, 23)
+        Me.ucrChkDropUnusedLevels.TabIndex = 28
         '
         'ucrInputRelaceMissingvalues
         '
@@ -964,160 +1129,89 @@ Partial Class ucrAxes
         Me.ucrChkOffset.Size = New System.Drawing.Size(93, 23)
         Me.ucrChkOffset.TabIndex = 36
         '
-        'grpScaleDiscrete
+        'grpMajorBreaksDiscrete
         '
-        Me.grpScaleDiscrete.Controls.Add(Me.lblTo)
-        Me.grpScaleDiscrete.Controls.Add(Me.lblFrom)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrNudTo)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrNudFrom)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkLimitsFrom)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputNaValueDiscrete)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputExpandDiscrete)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputPositionDiscrete)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkExpandDiscrete)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkPositionDiscrete)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkNaValueDiscrete)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrInputDropUnusedLevels)
-        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpScaleDiscrete.Location = New System.Drawing.Point(4, 3)
-        Me.grpScaleDiscrete.Name = "grpScaleDiscrete"
-        Me.grpScaleDiscrete.Size = New System.Drawing.Size(289, 176)
-        Me.grpScaleDiscrete.TabIndex = 37
-        Me.grpScaleDiscrete.TabStop = False
-        Me.grpScaleDiscrete.Text = "Scales"
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkBreakDiscret)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputBreaksDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkLimit)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputLimitDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkLabelsDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrInputMajorBreaksLabelsDiscrete)
+        Me.grpMajorBreaksDiscrete.Controls.Add(Me.UcrPanel1)
+        Me.grpMajorBreaksDiscrete.Location = New System.Drawing.Point(23, 7)
+        Me.grpMajorBreaksDiscrete.Name = "grpMajorBreaksDiscrete"
+        Me.grpMajorBreaksDiscrete.Size = New System.Drawing.Size(309, 148)
+        Me.grpMajorBreaksDiscrete.TabIndex = 38
+        Me.grpMajorBreaksDiscrete.TabStop = False
+        Me.grpMajorBreaksDiscrete.Text = "labels"
         '
-        'lblTo
+        'ucrChkBreakDiscret
         '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(199, 22)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 34
-        Me.lblTo.Text = "To:"
+        Me.ucrChkBreakDiscret.AutoSize = True
+        Me.ucrChkBreakDiscret.Checked = False
+        Me.ucrChkBreakDiscret.Location = New System.Drawing.Point(5, 24)
+        Me.ucrChkBreakDiscret.Name = "ucrChkBreakDiscret"
+        Me.ucrChkBreakDiscret.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkBreakDiscret.TabIndex = 26
         '
-        'lblFrom
+        'ucrInputBreaksDiscrete
         '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(98, 24)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 33
-        Me.lblFrom.Text = "From:"
+        Me.ucrInputBreaksDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputBreaksDiscrete.AutoSize = True
+        Me.ucrInputBreaksDiscrete.IsMultiline = False
+        Me.ucrInputBreaksDiscrete.IsReadOnly = False
+        Me.ucrInputBreaksDiscrete.Location = New System.Drawing.Point(98, 23)
+        Me.ucrInputBreaksDiscrete.Name = "ucrInputBreaksDiscrete"
+        Me.ucrInputBreaksDiscrete.Size = New System.Drawing.Size(146, 21)
+        Me.ucrInputBreaksDiscrete.TabIndex = 25
         '
-        'ucrNudTo
+        'ucrChkLimit
         '
-        Me.ucrNudTo.AutoSize = True
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(229, 19)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 32
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrChkLimit.AutoSize = True
+        Me.ucrChkLimit.Checked = False
+        Me.ucrChkLimit.Location = New System.Drawing.Point(4, 57)
+        Me.ucrChkLimit.Name = "ucrChkLimit"
+        Me.ucrChkLimit.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkLimit.TabIndex = 24
         '
-        'ucrNudFrom
+        'ucrInputLimitDiscrete
         '
-        Me.ucrNudFrom.AutoSize = True
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(143, 19)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 31
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputLimitDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimitDiscrete.AutoSize = True
+        Me.ucrInputLimitDiscrete.IsMultiline = False
+        Me.ucrInputLimitDiscrete.IsReadOnly = False
+        Me.ucrInputLimitDiscrete.Location = New System.Drawing.Point(97, 56)
+        Me.ucrInputLimitDiscrete.Name = "ucrInputLimitDiscrete"
+        Me.ucrInputLimitDiscrete.Size = New System.Drawing.Size(146, 21)
+        Me.ucrInputLimitDiscrete.TabIndex = 23
         '
-        'ucrChkLimitsFrom
+        'ucrChkLabelsDiscrete
         '
-        Me.ucrChkLimitsFrom.AutoSize = True
-        Me.ucrChkLimitsFrom.Checked = False
-        Me.ucrChkLimitsFrom.Location = New System.Drawing.Point(7, 22)
-        Me.ucrChkLimitsFrom.Name = "ucrChkLimitsFrom"
-        Me.ucrChkLimitsFrom.Size = New System.Drawing.Size(120, 23)
-        Me.ucrChkLimitsFrom.TabIndex = 30
+        Me.ucrChkLabelsDiscrete.AutoSize = True
+        Me.ucrChkLabelsDiscrete.Checked = False
+        Me.ucrChkLabelsDiscrete.Location = New System.Drawing.Point(5, 98)
+        Me.ucrChkLabelsDiscrete.Name = "ucrChkLabelsDiscrete"
+        Me.ucrChkLabelsDiscrete.Size = New System.Drawing.Size(87, 23)
+        Me.ucrChkLabelsDiscrete.TabIndex = 22
         '
-        'ucrInputNaValueDiscrete
+        'ucrInputMajorBreaksLabelsDiscrete
         '
-        Me.ucrInputNaValueDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputNaValueDiscrete.AutoSize = True
-        Me.ucrInputNaValueDiscrete.IsMultiline = False
-        Me.ucrInputNaValueDiscrete.IsReadOnly = False
-        Me.ucrInputNaValueDiscrete.Location = New System.Drawing.Point(191, 51)
-        Me.ucrInputNaValueDiscrete.Name = "ucrInputNaValueDiscrete"
-        Me.ucrInputNaValueDiscrete.Size = New System.Drawing.Size(78, 22)
-        Me.ucrInputNaValueDiscrete.TabIndex = 27
+        Me.ucrInputMajorBreaksLabelsDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputMajorBreaksLabelsDiscrete.AutoSize = True
+        Me.ucrInputMajorBreaksLabelsDiscrete.IsMultiline = False
+        Me.ucrInputMajorBreaksLabelsDiscrete.IsReadOnly = False
+        Me.ucrInputMajorBreaksLabelsDiscrete.Location = New System.Drawing.Point(98, 97)
+        Me.ucrInputMajorBreaksLabelsDiscrete.Name = "ucrInputMajorBreaksLabelsDiscrete"
+        Me.ucrInputMajorBreaksLabelsDiscrete.Size = New System.Drawing.Size(146, 21)
+        Me.ucrInputMajorBreaksLabelsDiscrete.TabIndex = 4
         '
-        'ucrInputExpandDiscrete
+        'UcrPanel1
         '
-        Me.ucrInputExpandDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputExpandDiscrete.AutoSize = True
-        Me.ucrInputExpandDiscrete.IsMultiline = False
-        Me.ucrInputExpandDiscrete.IsReadOnly = False
-        Me.ucrInputExpandDiscrete.Location = New System.Drawing.Point(191, 136)
-        Me.ucrInputExpandDiscrete.Name = "ucrInputExpandDiscrete"
-        Me.ucrInputExpandDiscrete.Size = New System.Drawing.Size(78, 23)
-        Me.ucrInputExpandDiscrete.TabIndex = 27
-        '
-        'ucrInputPositionDiscrete
-        '
-        Me.ucrInputPositionDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputPositionDiscrete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPositionDiscrete.GetSetSelectedIndex = -1
-        Me.ucrInputPositionDiscrete.IsReadOnly = False
-        Me.ucrInputPositionDiscrete.Location = New System.Drawing.Point(191, 79)
-        Me.ucrInputPositionDiscrete.Name = "ucrInputPositionDiscrete"
-        Me.ucrInputPositionDiscrete.Size = New System.Drawing.Size(78, 23)
-        Me.ucrInputPositionDiscrete.TabIndex = 26
-        '
-        'ucrChkExpandDiscrete
-        '
-        Me.ucrChkExpandDiscrete.AutoSize = True
-        Me.ucrChkExpandDiscrete.Checked = False
-        Me.ucrChkExpandDiscrete.Location = New System.Drawing.Point(6, 136)
-        Me.ucrChkExpandDiscrete.Name = "ucrChkExpandDiscrete"
-        Me.ucrChkExpandDiscrete.Size = New System.Drawing.Size(202, 23)
-        Me.ucrChkExpandDiscrete.TabIndex = 23
-        '
-        'ucrChkPositionDiscrete
-        '
-        Me.ucrChkPositionDiscrete.AutoSize = True
-        Me.ucrChkPositionDiscrete.Checked = False
-        Me.ucrChkPositionDiscrete.Location = New System.Drawing.Point(6, 79)
-        Me.ucrChkPositionDiscrete.Name = "ucrChkPositionDiscrete"
-        Me.ucrChkPositionDiscrete.Size = New System.Drawing.Size(202, 23)
-        Me.ucrChkPositionDiscrete.TabIndex = 23
-        '
-        'ucrChkNaValueDiscrete
-        '
-        Me.ucrChkNaValueDiscrete.AutoSize = True
-        Me.ucrChkNaValueDiscrete.Checked = False
-        Me.ucrChkNaValueDiscrete.Location = New System.Drawing.Point(6, 51)
-        Me.ucrChkNaValueDiscrete.Name = "ucrChkNaValueDiscrete"
-        Me.ucrChkNaValueDiscrete.Size = New System.Drawing.Size(202, 23)
-        Me.ucrChkNaValueDiscrete.TabIndex = 23
-        '
-        'ucrInputDropUnusedLevels
-        '
-        Me.ucrInputDropUnusedLevels.AddQuotesIfUnrecognised = True
-        Me.ucrInputDropUnusedLevels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDropUnusedLevels.GetSetSelectedIndex = -1
-        Me.ucrInputDropUnusedLevels.IsReadOnly = False
-        Me.ucrInputDropUnusedLevels.Location = New System.Drawing.Point(191, 107)
-        Me.ucrInputDropUnusedLevels.Name = "ucrInputDropUnusedLevels"
-        Me.ucrInputDropUnusedLevels.Size = New System.Drawing.Size(78, 23)
-        Me.ucrInputDropUnusedLevels.TabIndex = 29
-        '
-        'ucrChkDropUnusedLevels
-        '
-        Me.ucrChkDropUnusedLevels.AutoSize = True
-        Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 108)
-        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(202, 23)
-        Me.ucrChkDropUnusedLevels.TabIndex = 28
+        Me.UcrPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.UcrPanel1.Location = New System.Drawing.Point(3, 19)
+        Me.UcrPanel1.Name = "UcrPanel1"
+        Me.UcrPanel1.Size = New System.Drawing.Size(335, 23)
+        Me.UcrPanel1.TabIndex = 18
         '
         'ucrAxes
         '
@@ -1138,14 +1232,16 @@ Partial Class ucrAxes
         Me.grpMajorBreaks.PerformLayout()
         Me.grpScales.ResumeLayout(False)
         Me.grpScales.PerformLayout()
+        Me.grpScaleDiscrete.ResumeLayout(False)
+        Me.grpScaleDiscrete.PerformLayout()
         Me.grpScaleXDate.ResumeLayout(False)
         Me.grpScaleXDate.PerformLayout()
         Me.grpMinorBreaks.ResumeLayout(False)
         Me.grpMinorBreaks.PerformLayout()
         Me.grpSecondAxis.ResumeLayout(False)
         Me.grpSecondAxis.PerformLayout()
-        Me.grpScaleDiscrete.ResumeLayout(False)
-        Me.grpScaleDiscrete.PerformLayout()
+        Me.grpMajorBreaksDiscrete.ResumeLayout(False)
+        Me.grpMajorBreaksDiscrete.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1240,4 +1336,12 @@ Partial Class ucrAxes
     Friend WithEvents ucrChkNaValueDiscrete As ucrCheck
     Friend WithEvents ucrInputDropUnusedLevels As ucrInputComboBox
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
+    Friend WithEvents grpMajorBreaksDiscrete As GroupBox
+    Friend WithEvents ucrChkBreakDiscret As ucrCheck
+    Friend WithEvents ucrInputBreaksDiscrete As ucrInputTextBox
+    Friend WithEvents ucrChkLimit As ucrCheck
+    Friend WithEvents ucrInputLimitDiscrete As ucrInputTextBox
+    Friend WithEvents ucrChkLabelsDiscrete As ucrCheck
+    Friend WithEvents ucrInputMajorBreaksLabelsDiscrete As ucrInputTextBox
+    Friend WithEvents UcrPanel1 As UcrPanel
 End Class
