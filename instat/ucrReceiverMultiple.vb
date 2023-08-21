@@ -437,7 +437,6 @@ Public Class ucrReceiverMultiple
             If (Not IsEmpty()) Then
                 strVariableTypes = GetCurrentItemTypes(True, bCategoricalNumeric)
                 If strVariableTypes.Count > 1 AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("numeric") AndAlso strVariableTypes.Contains("integer")) AndAlso Not (strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("factor") AndAlso strVariableTypes.Contains("ordered,factor")) AndAlso Not (bCategoricalNumeric AndAlso strVariableTypes.Count = 2 AndAlso strVariableTypes.Contains("logical")) Then
-                    MsgBox("Cannot add these variables. All variables must be of the same data type.", MsgBoxStyle.OkOnly, "Cannot add variables.")
                     Clear()
                     SetSelectorHeading("Variables")
                 ElseIf strVariableTypes.Count > 0 Then
@@ -498,4 +497,5 @@ Public Class ucrReceiverMultiple
         Next
         Return strHeaders
     End Function
+
 End Class

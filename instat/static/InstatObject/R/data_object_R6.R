@@ -335,15 +335,20 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     
     # If a filter has been done, some column attributes are lost.
     # This ensures they are present in the returned data.
-    if(retain_attr) {
-      for(col_name in names(out)) {
-        for(attr_name in names(attributes(private$data[[col_name]]))) {
-          if(!attr_name %in% c("class", "levels")) {
-            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]][1:nrow(out)], attr_name)
+    if (retain_attr) {
+      for (col_name in names(out)) {
+        private_attr_names <- names(attributes(private$data[[col_name]]))
+        for (attr_name in private_attr_names) {
+          if (!attr_name %in% c("class", "names")) {
+            private_attr <- attr(private$data[[col_name]], attr_name)
+            if (!is.null(private_attr)) {
+              attr(out[[col_name]], attr_name) <- private_attr
+            }
           }
         }
       }
     }
+    
     # If there is a start column, return columns from start onwards
     if (!missing(start_col) && start_col <= ncol(out)) #out <- out[start_col:max_cols]
     {
@@ -2039,6 +2044,14 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
   }
   return(all_column_names[out])
 })
+
+DataSheet$set("public", "get_column_selected_column_names", function(column_selection_name = "") {
+  if(column_selection_name != "") {
+  selected_columns <- self$get_column_selection_column_names(column_selection_name)
+  return(selected_columns)
+  }
+}
+)
 
 DataSheet$set("public", "column_selection_applied", function() {
   curr_sel <- private$.current_column_selection
