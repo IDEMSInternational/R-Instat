@@ -216,7 +216,7 @@ Public Class dlgName
         ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
         If bReset Then
             ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
-            ucrInputReplace.SetRCode(clsDefaultRFunction)
+            ucrInputReplace.SetRCode(clsDefaultRFunction, bReset)
         End If
         ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
