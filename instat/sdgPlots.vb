@@ -32,17 +32,29 @@ Public Class sdgPlots
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
     Public clsYScalecontinuousFunction As New RFunction
+    Public clsXScaleDiscreteFunction As New RFunction
+    Public clsYScaleDiscreteFunction As New RFunction
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
+    Public clsYLevelsFunction As New RFunction
+    Public clsXLevelsFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsPlotElementTitleFunction As New RFunction
     Private clsPlotElementSubTitleFunction As New RFunction
     Private clsPlotElementCaptionFunction As New RFunction
     Private clsPlotElementTagFunction As New RFunction
     Private clsPlotLegendTitleFunction As New RFunction
+    Public clsXConcatenateFunction As New RFunction
+    Public clsXLeftBracketOperator As New ROperator
+    Public clsXRightBracketOperator As New ROperator
+    Public clsYConcatenateFunction As New RFunction
+    Public clsYLeftBracketOperator As New ROperator
+    Public clsYRightBracketOperator As New ROperator
+    Public clsXSequenceOperator As New ROperator
+    Public clsYSequenceOperator As New ROperator
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -174,7 +186,6 @@ Public Class sdgPlots
         ucrChkLabeler.SetValuesCheckedAndUnchecked("label_both", "label_value")
         ucrChkLabeler.SetRDefault("label_value")
 
-
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
@@ -202,6 +213,7 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
         ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+
         ucrInputTag.SetParameter(New RParameter("tag"))
         ucrInputLegendTitle.SetParameter(New RParameter("colour"))
 
@@ -640,16 +652,16 @@ Public Class sdgPlots
         ucrChkAddColour.AddParameterPresentCondition(True, "scale_colour", True)
         ucrChkAddColour.AddParameterPresentCondition(False, "scale_colour", False)
 
-        ttCaptionTitle.SetToolTip(ucrInputGraphCaption.txtInput, "Type \n where you would like a new-line")
-
         grpFillScale.Visible = False
         grpColourScale.Visible = False
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
-                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewXScaleDiscreteFunction As RFunction = Nothing,
+                        Optional clsNewYScaleDiscreteFunction As RFunction = Nothing, Optional clsXNewConcatenateFunction As RFunction = Nothing, Optional clsNewYLevelsFunction As RFunction = Nothing, Optional clsNewXLevelsFunction As RFunction = Nothing,
+                        Optional clsYNewConcatenateFunction As RFunction = Nothing, Optional clsYNewLeftBracketOperator As ROperator = Nothing, Optional clsYNewRightBracketOperator As ROperator = Nothing, Optional clsYNewSequenceOperator As ROperator = Nothing, Optional clsXNewSequenceOperator As ROperator = Nothing,
+                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional clsXNewLeftBracketOperator As ROperator = Nothing, Optional clsXNewRightBracketOperator As ROperator = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
         bRCodeSet = False
@@ -671,6 +683,8 @@ Public Class sdgPlots
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
+        clsXScaleDiscreteFunction = clsNewXScaleDiscreteFunction
+        clsYScaleDiscreteFunction = clsNewYScaleDiscreteFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
@@ -678,7 +692,17 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
-
+        clsYLevelsFunction = clsNewYLevelsFunction
+        clsXLevelsFunction = clsNewXLevelsFunction
+        clsXConcatenateFunction = clsXNewConcatenateFunction
+        clsXLeftBracketOperator = clsXNewLeftBracketOperator
+        clsXRightBracketOperator = clsXNewRightBracketOperator
+        clsXLevelsFunction = clsNewXLevelsFunction
+        clsYConcatenateFunction = clsYNewConcatenateFunction
+        clsYLeftBracketOperator = clsYNewLeftBracketOperator
+        clsYRightBracketOperator = clsYNewRightBracketOperator
+        clsXSequenceOperator = clsXNewSequenceOperator
+        clsYSequenceOperator = clsYNewSequenceOperator
 
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
@@ -772,8 +796,8 @@ Public Class sdgPlots
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsXNewConcatenateFunction:=clsXConcatenateFunction, clsXNewLeftBracketOperator:=clsXLeftBracketOperator, clsXNewRightBracketOperator:=clsXRightBracketOperator, clsNewXLevelsFunction:=clsXLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsXNewSequenceOperator:=clsXSequenceOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsYNewLeftBracketOperator:=clsYLeftBracketOperator, clsYNewConcatenateFunction:=clsYConcatenateFunction, clsYNewRightBracketOperator:=clsYRightBracketOperator, clsNewYLevelsFunction:=clsYLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, clsYNewSequenceOperator:=clsYSequenceOperator, bCloneIfNeeded:=True)
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
@@ -1020,22 +1044,24 @@ Public Class sdgPlots
 
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
-            If ucrChkIncludeTitles.Checked Then
-                clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
-                If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
-                    clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() Then
+                clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+                If ucrChkIncludeTitles.Checked Then
+                    clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+                    If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
+                        clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+                    Else
+                        clsBaseOperator.RemoveParameterByName("labs")
+                    End If
                 Else
                     clsBaseOperator.RemoveParameterByName("labs")
+                    clsBaseOperator.RemoveParameterByName("theme")
                 End If
-            Else
-                clsBaseOperator.RemoveParameterByName("labs")
-                clsBaseOperator.RemoveParameterByName("theme")
             End If
         End If
     End Sub
 
-    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
-        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged
+    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
