@@ -868,8 +868,6 @@ Public Class dlgEndOfRainsSeason
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
 
-        ucrReceiverEvaporation.SetRCode(clsIsNaEvaporation, bReset)
-
         ucrInputEndRainDoy.SetRCode(clsEndRainsLastDoySummaryCalc, bReset)
         ucrInputEndofRainsDate.SetRCode(clsEndRainsLastDateSummaryCalc, bReset)
         ucrInputEndofRainsOccurence.SetRCode(clsEndRainsStatusSummaryCalc, bReset)
@@ -884,8 +882,11 @@ Public Class dlgEndOfRainsSeason
 
         ucrNudWBLessThan.SetRCode(clsEndSeasonWBConditionOperator, bReset)
 
-        ucrPnlEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
-        ucrInputEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
+        If bReset Then
+            ucrPnlEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
+            ucrInputEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
+            ucrReceiverEvaporation.SetRCode(clsIsNaEvaporation, bReset)
+        End If
         ucrNudCapacity.SetRCode(clsIfElseRainMaxFunction, bReset)
         ucrInputReplaceNA.SetRCode(clsIfElseVariableEvaporation, bReset)
 
@@ -1014,7 +1015,7 @@ Public Class dlgEndOfRainsSeason
     Private Sub Evaporation()
         If rdoEndOfSeasons.Checked Then
             If rdoValueEvaporation.Checked Then
-                ucrReceiverRainfall.SetMeAsReceiver()
+                'ucrReceiverRainfall.SetMeAsReceiver()
                 clsWBMinEvapOperator.RemoveParameterByName("variable")
                 clsWBMaxEvapOperator.RemoveParameterByName("variable")
                 If ucrChkWB.Checked Then
@@ -1031,13 +1032,28 @@ Public Class dlgEndOfRainsSeason
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsWBMaxEvapOperator.AddParameter("value", "5", iPosition:=1)
+                    clsWBMinEvapOperator.AddParameter("value", "5", iPosition:=1)
                 End If
             ElseIf rdoVariableEvaporation.Checked Then
                 ucrReceiverEvaporation.SetMeAsReceiver()
-                clsWBMinEvapOperator.AddParameter("variable", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=1, bIncludeArgumentName:=False)
-                clsWBMinEvapOperator.RemoveParameterByName("value")
-                clsWBMaxEvapOperator.AddParameter("variable", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=1, bIncludeArgumentName:=False)
-                clsWBMaxEvapOperator.RemoveParameterByName("value")
+                clsWBMinEvapOperator.RemoveParameterByName("variable")
+                clsWBMaxEvapOperator.RemoveParameterByName("variable")
+                If ucrChkWB.Checked Then
+                    clsWBEvaporationMinFunction.AddParameter("WB_evap_value", ucrNudWB.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+                    clsWBEvaporationMinFunction.AddParameter("yes", ucrNudCapacity.GetText(), iPosition:=2, bIncludeArgumentName:=False)
+                    clsWBEvaporationMinFunction.AddParameter("value", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=3, bIncludeArgumentName:=False)
+                    clsPMaxFunction.AddParameter("wb", clsROperatorParameter:=clsWBOperator1, iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMaxFunction.RemoveParameterByName("0")
+                    clsPMaxFunction.RemoveParameterByName("0")
+                    clsWBMaxEvapOperator.RemoveParameterByName("value")
+                    clsWBMinEvapOperator.RemoveParameterByName("value")
+                Else
+                    clsPMaxFunction.AddParameter("0", "x + y", iPosition:=0, bIncludeArgumentName:=False)
+                    clsPMaxFunction.RemoveParameterByName("wb")
+                    clsPMaxFunction.RemoveParameterByName("wb")
+                    clsWBMaxEvapOperator.AddParameter("value", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=1)
+                    clsWBMinEvapOperator.AddParameter("value", clsRFunctionParameter:=clsIfElseVariableEvaporation, iPosition:=1)
+                End If
             End If
 
         End If
