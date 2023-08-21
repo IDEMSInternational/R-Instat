@@ -663,4 +663,12 @@ Public Class ucrAxes
         SetNameSecondaryAxis()
         SecondaryAxis()
     End Sub
+
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
 End Class
