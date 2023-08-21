@@ -20,13 +20,28 @@ Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
     Public clsXYScaleContinuousFunction As New RFunction
+    Public clsXYScaleDiscreteFunction As New RFunction
     Public clsXYScaleDateFunction As New RFunction
     Public clsLimitsFunction As New RFunction
+    Public clsLimitsFunctionDiscrete As New RFunction
     Public clsBaseOperator As New ROperator
     Public clsMajorBreaksSeqFunction As New RFunction
     Public clsMinorBreaksSeqFunction As New RFunction
+    Public clsMajorBreaksSeqDiscreteFunction As New RFunction
+    Public clsMinorBreaksSeqDiscreteFunction As New RFunction
     Public clsXYScaleDateBreakOperator As New ROperator
     Public clsXYScaleDateLimitFunction As New RFunction
+    Public clsXConcatenateFunction As New RFunction
+    Public clsXLeftBracketOperator As New ROperator
+    Public clsXRightBracketOperator As New ROperator
+    Public clsYConcatenateFunction As New RFunction
+    Public clsYLeftBracketOperator As New ROperator
+    Public clsYRightBracketOperator As New ROperator
+    Public clsXSequenceOperator As New ROperator
+    Public clsYSequenceOperator As New ROperator
+    Public clsYLevelsFunction As New RFunction
+    Public clsXLevelsFunction As New RFunction
+
     Public clsXYSecondaryAxisFunction As New RFunction
     Public clsDummyFunction As New RFunction
     Public strAxis As String
@@ -138,6 +153,36 @@ Public Class ucrAxes
         ucrInputMinorBreaksFrom.AddQuotesIfUnrecognised = False
         ucrInputMinorBreaksFrom.SetLinkedDisplayControl(lblMinorBreaksFrom)
 
+        ucrChkLabelsDiscrete.SetText("Labels")
+        ucrChkLabelsDiscrete.AddParameterPresentCondition(True, "labels")
+        ucrChkLabelsDiscrete.AddParameterPresentCondition(False, "labels", False)
+        ucrChkLabelsDiscrete.AddToLinkedControls(ucrInputMajorBreaksLabelsDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputMajorBreaksLabelsDiscrete.SetValidationTypeAsList()
+
+        ucrChkLimit.SetText("Limits")
+        ucrChkLimit.AddParameterPresentCondition(True, "labels")
+        ucrChkLimit.AddParameterPresentCondition(False, "labels", False)
+        ucrChkLimit.AddToLinkedControls(ucrInputLimitDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputLimitDiscrete.SetValidationTypeAsList()
+
+        ucrChkBreakDiscret.SetText("Breaks")
+        ucrChkBreakDiscret.AddParameterPresentCondition(True, "breaks")
+        ucrChkBreakDiscret.AddParameterPresentCondition(False, "breaks", False)
+        ucrChkBreakDiscret.AddToLinkedControls(ucrInputBreaksDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputBreaksDiscrete.SetValidationTypeAsList()
+
+        ucrChkLimitsFrom.SetText("Limits")
+        ucrChkLimitsFrom.AddParameterPresentCondition(True, "from")
+        ucrChkLimitsFrom.AddParameterPresentCondition(False, "from", False)
+        ucrChkLimitsFrom.AddToLinkedControls(ucrNudFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkLimitsFrom.AddToLinkedControls(ucrNudTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+
+        ucrNudFrom.SetMinMax(1, Integer.MaxValue)
+        ucrNudTo.SetMinMax(1, Integer.MaxValue)
+
+        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrNudTo.SetLinkedDisplayControl(lblTo)
+
         'Scales section
         ucrPnlScales.AddRadioButton(rdoScalesAuto)
         ucrPnlScales.AddRadioButton(rdoScalesCustom)
@@ -174,6 +219,17 @@ Public Class ucrAxes
         ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
         ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
+        ucrInputNaValueDiscrete.SetParameter(New RParameter("na.value"))
+        ucrInputNaValueDiscrete.SetValidationTypeAsNumeric()
+        ucrInputNaValueDiscrete.bAddRemoveParameter = False
+        ucrInputNaValueDiscrete.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValueDiscrete.SetText("Replace Missing Values")
+        ucrChkNaValueDiscrete.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValueDiscrete.AddParameterPresentCondition(False, "na.value", False)
+        ucrChkNaValueDiscrete.AddToLinkedControls(ucrInputNaValueDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+
+
         ucrChkTransformation.SetText("Transformation")
         ucrInputTransformation.SetParameter(New RParameter("trans"))
         ucrChkTransformation.AddParameterPresentCondition(True, "trans")
@@ -182,6 +238,14 @@ Public Class ucrAxes
         ucrInputTransformation.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctTransformations))
         ucrInputTransformation.SetDropDownStyleAsNonEditable()
 
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels:")
+        ucrInputDropUnusedLevels.SetParameter(New RParameter("drop"))
+        ucrChkDropUnusedLevels.AddParameterPresentCondition(True, "drop")
+        ucrChkDropUnusedLevels.AddParameterPresentCondition(False, "drop", False)
+        ucrChkDropUnusedLevels.AddToLinkedControls(ucrInputDropUnusedLevels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="TRUE")
+        ucrInputDropUnusedLevels.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctDropUnusedLevels))
+        ucrInputDropUnusedLevels.SetDropDownStyleAsNonEditable()
+
         ucrChkPosition.SetText("Position")
         ucrInputPosition.SetParameter(New RParameter("position"))
         ucrInputPosition.SetDropDownStyleAsNonEditable()
@@ -189,11 +253,24 @@ Public Class ucrAxes
         ucrChkPosition.AddParameterPresentCondition(False, "position", False)
         ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Nothing)
 
+        ucrChkPositionDiscrete.SetText("Position")
+        ucrInputPositionDiscrete.SetParameter(New RParameter("position"))
+        ucrInputPositionDiscrete.SetDropDownStyleAsNonEditable()
+        ucrChkPositionDiscrete.AddParameterPresentCondition(True, "position")
+        ucrChkPositionDiscrete.AddParameterPresentCondition(False, "position", False)
+        ucrChkPositionDiscrete.AddToLinkedControls(ucrInputPositionDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Nothing)
+
         ucrChkExpand.SetText("Expand")
         ucrChkExpand.AddParameterPresentCondition(True, "expand")
         ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
         ucrChkExpand.AddToLinkedControls(ucrInputExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
         ucrInputExpand.SetValidationTypeAsNumericList()
+
+        ucrChkExpandDiscrete.SetText("Expand")
+        ucrChkExpandDiscrete.AddParameterPresentCondition(True, "expand")
+        ucrChkExpandDiscrete.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpandDiscrete.AddToLinkedControls(ucrInputExpandDiscrete, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputExpandDiscrete.SetValidationTypeAsNumericList()
 
         'secondary axis'
         ucrPnlSecondAxisTitle.SetParameter(New RParameter("name", iNewPosition:=1))
@@ -318,10 +395,11 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYSecondaryAxisFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYScaleDiscreteFunction As RFunction = Nothing, Optional clsXNewConcatenateFunction As RFunction = Nothing, Optional clsNewYLevelsFunction As RFunction = Nothing, Optional clsNewXYSecondaryAxisFunction As RFunction = Nothing,
+                                  Optional clsNewXLevelsFunction As RFunction = Nothing, Optional clsYNewLeftBracketOperator As ROperator = Nothing, Optional clsYNewConcatenateFunction As RFunction = Nothing, Optional clsYNewRightBracketOperator As ROperator = Nothing, Optional clsXNewSequenceOperator As ROperator = Nothing, Optional clsYNewSequenceOperator As ROperator = Nothing,
+                                  Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional clsXNewLeftBracketOperator As ROperator = Nothing, Optional clsXNewRightBracketOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
-
         bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControl()
@@ -347,6 +425,14 @@ Public Class ucrAxes
         End If
         ucrInputAxisType.SetName(strAxisType)
 
+        If bIsX Then
+            ucrInputPositionDiscrete.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
+            ucrInputPositionDiscrete.SetDefaultState("Bottom")
+        Else
+            ucrInputPositionDiscrete.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
+            ucrInputPositionDiscrete.SetDefaultState("Left")
+        End If
+
         clsXYScaleDateLimitFunction = New RFunction
         clsXYScaleDateLimitFunction.SetRCommand("c")
         clsXYScaleDateLimitFunction.AddParameter("from", clsRFunctionParameter:=ucrDtpLowerLimit.ValueAsRDate(), iPosition:=0)
@@ -366,6 +452,17 @@ Public Class ucrAxes
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
         clsXYScaleDateFunction = clsNewXYScaleDateFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
+        clsXYScaleDiscreteFunction = clsNewXYScaleDiscreteFunction
+        clsXConcatenateFunction = clsXNewConcatenateFunction
+        clsXLeftBracketOperator = clsXNewLeftBracketOperator
+        clsXRightBracketOperator = clsXNewRightBracketOperator
+        clsXLevelsFunction = clsNewXLevelsFunction
+        clsYLevelsFunction = clsNewYLevelsFunction
+        clsYConcatenateFunction = clsYNewConcatenateFunction
+        clsYLeftBracketOperator = clsYNewLeftBracketOperator
+        clsYRightBracketOperator = clsYNewRightBracketOperator
+        clsXSequenceOperator = clsXNewSequenceOperator
+        clsYSequenceOperator = clsYNewSequenceOperator
 
         'TODO these could be passed through as a dictionary of scale functions instead of searched
         If clsXYScaleContinuousFunction.ContainsParameter("limits") AndAlso clsXYScaleContinuousFunction.GetParameter("limits").clsArgumentCodeStructure IsNot Nothing Then
@@ -388,6 +485,20 @@ Public Class ucrAxes
         Else
             clsMajorBreaksSeqFunction = New RFunction
             clsMajorBreaksSeqFunction.SetRCommand("seq")
+        End If
+
+        If clsXYScaleDiscreteFunction.ContainsParameter("breaks") Then
+            clsTempBreaksParam = clsXYScaleDiscreteFunction.GetParameter("breaks")
+            If clsTempBreaksParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsMajorBreaksSeqDiscreteFunction = clsTempBreaksParam.clsArgumentCodeStructure
+            Else
+                'TODO move to ggplot defaults
+                clsMajorBreaksSeqDiscreteFunction = New RFunction
+                clsMajorBreaksSeqDiscreteFunction.SetRCommand("seq")
+            End If
+        Else
+            clsMajorBreaksSeqDiscreteFunction = New RFunction
+            clsMajorBreaksSeqDiscreteFunction.SetRCommand("seq")
         End If
 
         If clsXYScaleContinuousFunction.ContainsParameter("minor_breaks") Then
@@ -441,6 +552,9 @@ Public Class ucrAxes
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
+        ucrInputMajorBreaksLabelsDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
+
         'Scale_x_Date
         ucrChkDateLabels.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrInputComboDateLabel.SetRCode(clsXYScaleDateFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -465,9 +579,33 @@ Public Class ucrAxes
         ucrInputMinorBreaksInStepsOf.SetRCode(clsMinorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
+        ucrNudFrom.SetRCode(clsXLeftBracketOperator, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrNudTo.SetRCode(clsXRightBracketOperator, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+
         bRCodeSet = True
+
+        If bReset Then
+            ucrChkLimitsFrom.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputPositionDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkPositionDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputLimitDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputBreaksDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkDropUnusedLevels.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputDropUnusedLevels.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputAxisType.SetName(strAxisType)
+            ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkExpandDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrInputNaValueDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkLabelsDiscrete.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkLimit.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrChkBreakDiscret.SetRCode(clsXYScaleDiscreteFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        End If
         SetLabel()
         AddRemoveContinuousXYScales()
+        AddRemoveDiscreteXYScales()
+        AddRemoveLimits()
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -505,6 +643,14 @@ Public Class ucrAxes
         End If
     End Sub
 
+    Private Sub AddRemoveDiscreteXYScales()
+        If clsXYScaleDiscreteFunction.clsParameters.Count > 0 Then
+            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "discrete", clsRFunctionParameter:=clsXYScaleDiscreteFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "discrete")
+        End If
+    End Sub
+
     Private Sub AddRemoveScaleFunctions()
         If strAxisType = "continuous" Then
             AddRemoveContinuousXYScales()
@@ -528,26 +674,33 @@ Public Class ucrAxes
         strAxisType = ucrInputAxisType.GetText()
         'hide all axis type lanels
         grpMajorBreaks.Hide()
-        grpMinorBreaks.Hide()
         grpScales.Hide()
+        grpScaleDiscrete.Hide()
         grpScaleXDate.Hide()
-        grpSecondAxis.Hide()
-
         If strAxisType.ToLower = "continuous" Then
             'show continous panels
             'TODO put controls in panels so group boxes can be used for multiple cases
             grpMajorBreaks.Show()
             grpMinorBreaks.Show()
-            grpSecondAxis.Show()
             grpScales.Show()
+            grpScaleDiscrete.Hide()
+            grpMajorBreaksDiscrete.Hide()
         ElseIf strAxisType.ToLower = "discrete" Then
             'show discrete panels
+            grpScaleDiscrete.Show()
+            grpScaleXDate.Hide()
+            grpMajorBreaks.Hide()
+            grpMinorBreaks.Hide()
+            grpScales.Hide()
+            grpMajorBreaksDiscrete.Show()
         ElseIf strAxisType.ToLower = "date" Then
             'show date panels
             grpScaleXDate.Show()
             grpMajorBreaks.Hide()
             grpMinorBreaks.Hide()
             grpScales.Hide()
+            grpScaleDiscrete.Hide()
+            grpMajorBreaksDiscrete.Hide()
         End If
     End Sub
 
@@ -598,8 +751,11 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged, ucrChkNaValue.ControlValueChanged
+    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkNaValue.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpandDiscrete.ControlValueChanged, ucrChkPositionDiscrete.ControlValueChanged, ucrChkNaValueDiscrete.ControlValueChanged, ucrChkDropUnusedLevels.ControlValueChanged, ucrInputPositionDiscrete.ControlValueChanged, ucrChkLimitsFrom.ControlValueChanged
         AddRemoveContinuousXYScales()
+        AddRemoveDiscreteXYScales()
+        AddRemoveScaleFunctions()
+        AddRemoveLimits()
     End Sub
 
     Private Sub LabelsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabels.ControlValueChanged, ucrInputMajorBreaksLabels.ControlValueChanged
@@ -614,6 +770,36 @@ Public Class ucrAxes
             clsXYScaleContinuousFunction.RemoveParameterByName("labels")
         End If
         AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub SetLabelsDiscreteParameter()
+        If ucrChkLabelsDiscrete.Checked AndAlso Not ucrInputMajorBreaksLabelsDiscrete.IsEmpty Then
+            'TODO add functionality to input control to do this automatically for a list
+            clsXYScaleDiscreteFunction.AddParameter("labels", ucrInputMajorBreaksLabelsDiscrete.clsRList.ToScript())
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("labels")
+        End If
+        AddRemoveDiscreteXYScales()
+    End Sub
+
+    Private Sub SetBreaksDiscrete()
+        If ucrChkBreakDiscret.Checked AndAlso Not ucrInputBreaksDiscrete.IsEmpty() Then
+            'TODO add functionality to input control to do this automatically for a list
+            clsXYScaleDiscreteFunction.AddParameter("breaks", ucrInputBreaksDiscrete.clsRList.ToScript())
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("breaks")
+        End If
+        AddRemoveDiscreteXYScales()
+    End Sub
+
+    Private Sub SetLimitsDiscrete()
+        If ucrChkLimit.Checked AndAlso Not ucrInputLimitDiscrete.IsEmpty() Then
+            'TODO add functionality to input control to do this automatically for a list
+            clsXYScaleDiscreteFunction.AddParameter("limit", ucrInputLimitDiscrete.clsRList.ToScript())
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("limit")
+        End If
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SecondaryAxis()
@@ -650,6 +836,70 @@ Public Class ucrAxes
         End If
     End Sub
 
+    Private Sub ExpandControl()
+        If strAxisType = "discrete" Then
+            If ucrChkExpandDiscrete.Checked AndAlso Not ucrInputExpandDiscrete.IsEmpty Then
+                clsXYScaleDiscreteFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpandDiscrete.clsRList)
+            Else
+                clsXYScaleDiscreteFunction.RemoveParameterByName("expand")
+            End If
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("expand")
+        End If
+    End Sub
+
+    Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged,
+        ucrInputExpandDiscrete.ControlValueChanged
+        ExpandControl()
+        AddRemoveScaleFunctions()
+        AddRemoveDiscreteXYScales()
+    End Sub
+
+    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged, ucrInputMajorBreaksLabelsDiscrete.ControlValueChanged
+        SetLabelsDiscreteParameter()
+    End Sub
+
+    Private Sub ucrChkLimit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimit.ControlValueChanged, ucrInputLimitDiscrete.ControlValueChanged
+        SetLimitsDiscrete()
+    End Sub
+
+    Private Sub ucrChkBreakDiscret_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBreakDiscret.ControlValueChanged, ucrInputBreaksDiscrete.ControlValueChanged
+        SetBreaksDiscrete()
+    End Sub
+
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
+        AddRemoveLimits()
+    End Sub
+
+    Private Sub AddRemoveLimits()
+        If ucrChkLimitsFrom.Checked Then
+            If bIsX Then
+                If Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
+                    clsXLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
+                    clsXRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+                    clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsXConcatenateFunction)
+                Else
+                    clsXLeftBracketOperator.RemoveParameterByName("right")
+                    clsXRightBracketOperator.RemoveParameterByName("left")
+                    clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+                End If
+            Else
+                If Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
+                    clsYLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
+                    clsYRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+                    clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsYConcatenateFunction)
+                Else
+                    clsYLeftBracketOperator.RemoveParameterByName("right")
+                    clsYRightBracketOperator.RemoveParameterByName("left")
+                    clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+                End If
+            End If
+        Else
+            clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+        End If
+        AddRemoveDiscreteXYScales()
+    End Sub
+
     Private Sub SetNameSecondaryAxis()
         clsXYSecondaryAxisFunction.RemoveParameterByName("name")
         If rdoSecondAxisNoTitle.Checked Then
@@ -664,11 +914,4 @@ Public Class ucrAxes
         SecondaryAxis()
     End Sub
 
-    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
-
-    Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
 End Class
