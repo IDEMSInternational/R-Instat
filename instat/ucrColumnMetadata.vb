@@ -33,17 +33,19 @@ Public Class ucrColumnMetadata
     Private strLabelsScientific As String = "Scientific"
     Private _Refreshed As Boolean = False
 
-    Public WriteOnly Property DataBook() As clsDataBook
-        Set(ByVal value As clsDataBook)
-            _clsDataBook = value
-            _grid.DataBook = value
-        End Set
-    End Property
+    Public Sub New()
 
-    Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
-        loadForm()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        SetupInitialLayoutAndGrid()
+    End Sub
+
+    Private Sub ucrColumnMetadata_Load(sender As Object, e As EventArgs) Handles Me.Load
         mnuInsertColsAfter.Visible = False
         mnuInsertColsBefore.Visible = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrColumnMetadata_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -52,6 +54,37 @@ Public Class ucrColumnMetadata
         'once 'paging' feature is implemented, this block can be removed.
         RefreshGridData()
     End Sub
+
+    Private Sub SetupInitialLayoutAndGrid()
+        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
+
+        'DEBUG
+        ' If True Then
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+            _grid = ucrLinuxGrid
+            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Percent
+            tlpTableContainer.ColumnStyles(0).Width = 100
+            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Absolute
+            tlpTableContainer.ColumnStyles(1).Width = 0
+        Else
+            _grid = ucrReoGrid
+            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
+            tlpTableContainer.ColumnStyles(0).Width = 0
+            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
+            tlpTableContainer.ColumnStyles(1).Width = 100
+        End If
+        _grid.SetNonEditableColumns(lstNonEditableColumns)
+        _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
+        AddHandler _grid.EditValue, AddressOf EditValue
+        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
+    End Sub
+
+    Public WriteOnly Property DataBook() As clsDataBook
+        Set(ByVal value As clsDataBook)
+            _clsDataBook = value
+            _grid.DataBook = value
+        End Set
+    End Property
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
         Return _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name)
@@ -111,31 +144,6 @@ Public Class ucrColumnMetadata
             AddAndUpdateWorksheets()
             _grid.bVisible = _clsDataBook.DataFrames.Count > 0
         End If
-    End Sub
-
-    Private Sub loadForm()
-        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
-
-        'DEBUG
-        ' If True Then
-        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            _grid = ucrLinuxGrid
-            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Percent
-            tlpTableContainer.ColumnStyles(0).Width = 100
-            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Absolute
-            tlpTableContainer.ColumnStyles(1).Width = 0
-        Else
-            _grid = ucrReoGrid
-            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
-            tlpTableContainer.ColumnStyles(0).Width = 0
-            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
-            tlpTableContainer.ColumnStyles(1).Width = 100
-        End If
-        _grid.SetNonEditableColumns(lstNonEditableColumns)
-        _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
-        AddHandler _grid.EditValue, AddressOf EditValue
-        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
-        autoTranslate(Me)
     End Sub
 
     Public Sub SetCurrentDataFrame(strDataName As String)
