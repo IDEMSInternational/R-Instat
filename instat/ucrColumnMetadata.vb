@@ -62,6 +62,13 @@ Public Class ucrColumnMetadata
             Exit Sub
         End If
 
+        'todo. this check is necessary for wide data sets
+        'once the "paging" feature is implemented, then the check can be removed.
+        If dataFrame.clsColumnMetaData.iRowCount > 1000 AndAlso
+            DialogResult.No = MessageBox.Show(Me, "Are you sure you need " & dataFrame.strName & " column metadata?  If so, be patient.  It, will be slow to load the first time", dataFrame.strName & " Column Metadata", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+            Exit Sub
+        End If
+
         _grid.CurrentWorksheet = fillWorksheet
         _grid.UpdateWorksheetStyle(fillWorksheet)
         _grid.AddColumns(dataFrame.clsColumnMetaData)
