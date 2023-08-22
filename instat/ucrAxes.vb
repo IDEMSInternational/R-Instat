@@ -423,7 +423,7 @@ Public Class ucrAxes
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
             ucrInputPosition.SetDefaultState("Left")
         End If
-        ucrInputAxisType.SetName(strAxisType)
+        'ucrInputAxisType.SetName(strAxisType)
 
         If bIsX Then
             ucrInputPositionDiscrete.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
@@ -673,6 +673,7 @@ Public Class ucrAxes
         SetAxisTypeControls()
         AddRemoveScaleFunctions()
         SecondaryAxis()
+        AddRemoveLimits()
     End Sub
 
     Private Sub SetAxisTypeControls()
@@ -859,15 +860,15 @@ Public Class ucrAxes
         AddRemoveDiscreteXYScales()
     End Sub
 
-    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged
+    Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged, ucrInputMajorBreaksLabelsDiscrete.ControlValueChanged
         SetLabelsDiscreteParameter()
     End Sub
 
-    Private Sub ucrChkLimit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimit.ControlValueChanged
+    Private Sub ucrChkLimit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimit.ControlValueChanged, ucrInputLimitDiscrete.ControlValueChanged
         SetLimitsDiscrete()
     End Sub
 
-    Private Sub ucrChkBreakDiscret_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBreakDiscret.ControlValueChanged
+    Private Sub ucrChkBreakDiscret_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBreakDiscret.ControlValueChanged, ucrInputBreaksDiscrete.ControlValueChanged
         SetBreaksDiscrete()
     End Sub
 
