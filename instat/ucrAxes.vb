@@ -903,6 +903,7 @@ Public Class ucrAxes
             clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
         AddRemoveDiscreteXYScales()
+        AddRemoveContinuousXYScales()
     End Sub
 
     Private Sub SetNameSecondaryAxis()
