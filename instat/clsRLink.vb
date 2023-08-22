@@ -723,6 +723,9 @@ Public Class RLink
         End If
 
         frmMain.ucrScriptWindow.LogText(strScript.TrimEnd(vbCr, vbLf))
+        If Not IsRunnableScript(strScript) Then
+
+        End If
 
         Try
             Dim strOutput As String = ""
@@ -731,9 +734,8 @@ Public Class RLink
 
             'if not an assignment operation, then capture the output
             If Not strScript.Contains("<-") AndAlso bSuccess Then
-                Dim strScriptAsSingleLine As String = strScript.Replace(vbCrLf, String.Empty)
-                strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbCr, String.Empty)
-                strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbLf, String.Empty)
+                Dim strScriptAsSingleLine As String = strScript.Replace(vbCr, String.Empty).
+                                                                Replace(vbLf, String.Empty)
                 strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine &
                                           " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
