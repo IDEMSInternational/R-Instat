@@ -715,6 +715,45 @@ Public Class RLink
 
     End Function
 
+    Public Sub RunRStatement(strScript As String)
+
+        'if there is no script to run then just ignore and exit sub
+        If String.IsNullOrWhiteSpace(strScript) Then
+            Exit Sub
+        End If
+
+        frmMain.ucrScriptWindow.LogText(strScript.TrimEnd(vbCr, vbLf))
+
+        Try
+            Dim strOutput As String = ""
+            Dim bSuccess As Boolean = Evaluate(strScript, bSilent:=False, bSeparateThread:=False,
+                                               bShowWaitDialogOverride:=Nothing)
+
+            'if not an assignment operation, then capture the output
+            If Not strScript.Contains("<-") AndAlso bSuccess Then
+                Dim strScriptAsSingleLine As String = strScript.Replace(vbCrLf, String.Empty)
+                strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbCr, String.Empty)
+                strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbLf, String.Empty)
+                strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine &
+                                          " , object_format = 'text' )", bSilent:=False,
+                                          bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            End If
+
+            'log script and output
+            clsOutputLogger.AddOutput(strScript, strOutput, bAsFile:=True,
+                                      bDisplayOutputInExternalViewer:=False)
+
+        Catch e As Exception
+            MsgBox(e.Message & Environment.NewLine &
+                   "The error occurred in attempting to run the following R command:" &
+                   Environment.NewLine & strScript, MsgBoxStyle.Critical,
+                   "Error running R command(s)")
+        End Try
+
+        AppendToAutoSaveLog(strScript)
+        frmMain.UpdateAllGrids()
+    End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
     ''' This method executes the <paramref name="strScript"/> R script(s) and displays the output. The

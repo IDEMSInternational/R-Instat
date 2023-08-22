@@ -563,12 +563,12 @@ Public Class ucrScript
         'insert carriage return to ensure that statement starts on new line
         'Dim strStatement As String = vbCrLf & rScript.GetCurrentStatement(iCaretPos)
         'Dim iNextStatementPos As Integer = rScript.GetNextStatementPos(iCaretPos)
-        Dim strStatement As String = vbCrLf & clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
+        Dim strStatement As String = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
         Dim iNextStatementPos As Integer = If(clsScriptActive.CurrentLine = clsScriptActive.Lines.Count - 1,
                 clsScriptActive.TextLength,
                 clsScriptActive.Lines(clsScriptActive.CurrentLine + 1).Position)
 
-        frmMain.clsRLink.RunScript(strStatement.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+        frmMain.clsRLink.RunRStatement(strStatement)
 
         ' if we executed the last statement and there is no blank line after, then add blank line
         If iNextStatementPos >= clsScriptActive.TextLength _
