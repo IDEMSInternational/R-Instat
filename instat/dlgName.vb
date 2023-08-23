@@ -575,27 +575,15 @@ Public Class dlgName
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
+            ucrInputBy.Visible = rdoWholeDataFrame.Checked AndAlso rdoReplace.Checked
+            ucrInputEdit.Visible = ucrInputBy.Visible
+            ucrInputReplace.Visible = ucrInputBy.Visible
+            ucrChkRegular.Visible = ucrInputBy.Visible
+            rdoReplace.Visible = rdoWholeDataFrame.Checked
             If rdoWholeDataFrame.Checked Then
-                rdoReplace.Visible = True
                 ucrReceiverColumns.Visible = False
-                If rdoReplace.Checked Then
-                    ucrInputBy.Visible = True
-                    ucrInputEdit.Visible = True
-                    ucrInputReplace.Visible = True
-                    ucrChkRegular.Visible = True
-                Else
-                    ucrInputBy.Visible = False
-                    ucrInputEdit.Visible = False
-                    ucrInputReplace.Visible = False
-                    ucrChkRegular.Visible = False
-                End If
             Else
                 ucrReceiverColumns.SetMeAsReceiver()
-                rdoReplace.Visible = False
-                ucrInputBy.Visible = False
-                ucrInputEdit.Visible = False
-                ucrInputReplace.Visible = False
-                ucrChkRegular.Visible = False
                 If rdoReplace.Checked Then
                     rdoMakeCleanNames.Checked = True
                 End If
