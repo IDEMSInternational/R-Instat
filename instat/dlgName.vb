@@ -601,9 +601,9 @@ Public Class dlgName
                 End If
             End If
         End If
-        ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
-        ucrSelectVariables.btnAdd.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
-        ucrSelectVariables.btnDataOptions.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
+        ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked)
+        ucrSelectVariables.btnAdd.Visible = ucrSelectVariables.lstAvailableVariable.Visible
+        ucrSelectVariables.btnDataOptions.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         UpdateGrid()
         RemoveParameters()
         DialogueSize()
