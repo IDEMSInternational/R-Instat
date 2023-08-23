@@ -454,7 +454,7 @@ Public Class ucrReceiver
         If clsTempParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsTempParameter.bIsString Then
-                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
+                    If (strValuesToIgnore IsNot Nothing AndAlso strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) OrElse Not String.IsNullOrEmpty(clsTempParameter.strArgumentValue) Then
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue, strPackageName:=strVariablesListPackageName, strFunctionName:=strVariablesListFunctionName)
                     End If
                     'TODO how to recover the data frame name in this case

@@ -32,6 +32,7 @@ Public Class ucrColumnMetadata
     Private strLabelsLabel As String = "labels"
     Private strLabelsScientific As String = "Scientific"
     Private _Refreshed As Boolean = False
+    Private bWideDataSetPromptResponse As DialogResult = DialogResult.None
 
     Public WriteOnly Property DataBook() As clsDataBook
         Set(ByVal value As clsDataBook)
@@ -62,17 +63,32 @@ Public Class ucrColumnMetadata
             Exit Sub
         End If
 
+        Dim bFillData As Boolean = True
+
+        'check for wide data sets and prompt users about it
         'todo. this check is necessary for wide data sets
         'once the "paging" feature is implemented, then the check can be removed.
-        If dataFrame.clsColumnMetaData.iRowCount > 1000 AndAlso
-            DialogResult.No = MessageBox.Show(Me, "Are you sure you need " & dataFrame.strName & " column metadata?  If so, be patient.  It, will be slow to load the first time", dataFrame.strName & " Column Metadata", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-            Exit Sub
+        'see issue #7161 and PR #8465 for more discussions
+        If dataFrame.clsColumnMetaData.iRowCount > 1000 e Then
+            'if not asked or no response before then prompt for a response
+            If bWideDataSetPromptResponse = DialogResult.None OrElse bWideDataSetPromptResponse = DialogResult.Cancel Then
+                bWideDataSetPromptResponse = MessageBox.Show(Me, "Are you sure you need wide data set(s) column metadata?  If so, be patient.  It, will be slow to load the first time", "Wide Data Set(s) Detected",
+                                                             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning)
+            End If
+
+            'if response is no or no response given then don't fill the worksheet with data
+            If bWideDataSetPromptResponse = DialogResult.No OrElse bWideDataSetPromptResponse = DialogResult.Cancel Then
+                bFillData = False
+            End If
         End If
 
-        _grid.CurrentWorksheet = fillWorksheet
-        _grid.UpdateWorksheetStyle(fillWorksheet)
-        _grid.AddColumns(dataFrame.clsColumnMetaData)
-        _grid.AddRowData(dataFrame.clsColumnMetaData)
+        If bFillData Then
+            _grid.CurrentWorksheet = fillWorksheet
+            _grid.UpdateWorksheetStyle(fillWorksheet)
+            _grid.AddColumns(dataFrame.clsColumnMetaData)
+            _grid.AddRowData(dataFrame.clsColumnMetaData)
+        End If
+
         dataFrame.clsColumnMetaData.HasChanged = False
     End Sub
 
@@ -150,19 +166,19 @@ Public Class ucrColumnMetadata
         Dim clsDeleteLabelsFunction As New RFunction
 
         If strColumnName = strLabelsLabel Then
-            If MsgBox("This will delete the selected label(s) and replace with (NA)." &
+            If MsgBox("This will delete the selected label(s) And Replace Then With (NA)." &
                                 Environment.NewLine & "Continue?",
                                 MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
 
                 clsDeleteLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
                 clsDeleteLabelsFunction.AddParameter("data_name", Chr(34) & _grid.CurrentWorksheet.Name & Chr(34), iPosition:=0)
                 clsDeleteLabelsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(_grid.GetSelectedColumns), iPosition:=1)
-                clsDeleteLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
+                clsDeleteLabelsFunction.AddParameter("Property", Chr(34) & "labels" & Chr(34), iPosition:=2)
                 clsDeleteLabelsFunction.AddParameter("new_val", Chr(34) & Chr(34), iPosition:=3)
                 frmMain.clsRLink.RunScript(clsDeleteLabelsFunction.ToScript())
             End If
         Else
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine &
+            MsgBox("Deleting cells Is currently disabled. This feature will be included In future versions." & Environment.NewLine &
                    "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
         End If
     End Sub
@@ -389,7 +405,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
-        If IsOnlyOneDataFrameColumnSeleted() Then
+        If IsOnlyOneDataframeColumnSeleted() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedDataFrameColumnAFactor()
             mnuDeleteCol.Text = GetTranslation("Delete Column")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")

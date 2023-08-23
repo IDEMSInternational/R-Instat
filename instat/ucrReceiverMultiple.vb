@@ -52,6 +52,10 @@ Public Class ucrReceiverMultiple
             End If
         Next
 
+        If lstActualItemsToAdd.Count = 0 Then
+            Exit Sub
+        End If
+
         'then add the new items
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstActualItemsToAdd
             lstSelectedVariables.Items.Add(New ListViewItem With {
@@ -117,11 +121,10 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Public Overrides Sub Clear()
-
+        'as of 23/08/2023. this block can be called several times. to prevent recursive events just exit sub if already empty
         If lstSelectedVariables.Items.Count = 0 AndAlso lstSelectedVariables.Groups.Count = 0 Then
             Exit Sub
         End If
-
         lstSelectedVariables.Items.Clear()
         lstSelectedVariables.Groups.Clear()
         OnSelectionChanged()
@@ -141,8 +144,7 @@ Public Class ucrReceiverMultiple
             End If
         Next
 
-        'if there are no items to remove then just exit the sub. No need to raise any events
-        'this checks helps prevent raising of events recursively
+        'as of 23/08/2023. this subroutine can be called several times. to prevent recursive events just exit sub if there is nothing to remove
         If lstItemsToRemove.Count = 0 Then
             Exit Sub
         End If
@@ -162,7 +164,7 @@ Public Class ucrReceiverMultiple
         End If
 
         'show count selection at the header of the receiver
-        'todo. support this feature for receivers that have 1 data frame only.
+        'todo. support this feature for receivers that may have more than 1 data frame later
         'it's not clear when the receiver will ever have more than one data frame
 
         'reset the header text with the name
