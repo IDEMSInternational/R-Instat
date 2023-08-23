@@ -69,7 +69,7 @@ Public Class ucrColumnMetadata
         'todo. this check is necessary for wide data sets
         'once the "paging" feature is implemented, then the check can be removed.
         'see issue #7161 and PR #8465 for more discussions
-        If dataFrame.clsColumnMetaData.iRowCount > 1000 e Then
+        If dataFrame.clsColumnMetaData.iRowCount > 1000 Then
             'if not asked or no response before then prompt for a response
             If bWideDataSetPromptResponse = DialogResult.None OrElse bWideDataSetPromptResponse = DialogResult.Cancel Then
                 bWideDataSetPromptResponse = MessageBox.Show(Me, "Are you sure you need wide data set(s) column metadata?  If so, be patient.  It, will be slow to load the first time", "Wide Data Set(s) Detected",
