@@ -76,7 +76,6 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Items.Remove(objItem)
                 Selector.RemoveFromVariablesList(objItem.Text, objItem.Tag)
             Next
-            lstSelectedVariables.Groups(0).Header = Selector.strCurrentDataFrame & " " & "(" & GetCount() & ")"
         End If
         OnSelectionChanged()
         MyBase.RemoveSelected()
@@ -358,7 +357,6 @@ Public Class ucrReceiverMultiple
                 Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
             End If
         Next
-        grpCurr.Header = lstItems(0).Key & " " & "(" & GetCount() & ")"
         OnSelectionChanged()
     End Sub
 
