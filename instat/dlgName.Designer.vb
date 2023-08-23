@@ -48,9 +48,9 @@ Partial Class dlgName
         Me.rdoMakeCleanNames = New System.Windows.Forms.RadioButton()
         Me.lblCase = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.rdoReplace = New System.Windows.Forms.RadioButton()
         Me.lblBy = New System.Windows.Forms.Label()
         Me.lblReplace = New System.Windows.Forms.Label()
-        Me.rdoReplace = New System.Windows.Forms.RadioButton()
         Me.rdoAbbreviate = New System.Windows.Forms.RadioButton()
         Me.rdoRenameWith = New System.Windows.Forms.RadioButton()
         Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
@@ -65,8 +65,8 @@ Partial Class dlgName
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkRegular = New instat.ucrCheck()
         Me.ucrInputBy = New instat.ucrInputTextBox()
-        Me.ucrInputReplace = New instat.ucrInputTextBox()
         Me.ucrInputEdit = New instat.ucrInputComboBox()
+        Me.ucrInputReplace = New instat.ucrInputTextBox()
         Me.ucrNudAbbreviate = New instat.ucrNud()
         Me.ucrInputCase = New instat.ucrInputComboBox()
         Me.ucrPnlCase = New instat.UcrPanel()
@@ -179,13 +179,13 @@ Partial Class dlgName
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.rdoReplace)
         Me.grpOptions.Controls.Add(Me.ucrChkRegular)
         Me.grpOptions.Controls.Add(Me.lblBy)
         Me.grpOptions.Controls.Add(Me.lblReplace)
         Me.grpOptions.Controls.Add(Me.ucrInputBy)
-        Me.grpOptions.Controls.Add(Me.ucrInputReplace)
         Me.grpOptions.Controls.Add(Me.ucrInputEdit)
-        Me.grpOptions.Controls.Add(Me.rdoReplace)
+        Me.grpOptions.Controls.Add(Me.ucrInputReplace)
         Me.grpOptions.Controls.Add(Me.ucrNudAbbreviate)
         Me.grpOptions.Controls.Add(Me.rdoAbbreviate)
         Me.grpOptions.Controls.Add(Me.ucrInputCase)
@@ -199,6 +199,17 @@ Partial Class dlgName
         Me.grpOptions.TabIndex = 11
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Rename Options"
+        '
+        'rdoReplace
+        '
+        Me.rdoReplace.AutoSize = True
+        Me.rdoReplace.Location = New System.Drawing.Point(7, 91)
+        Me.rdoReplace.Name = "rdoReplace"
+        Me.rdoReplace.Size = New System.Drawing.Size(46, 17)
+        Me.rdoReplace.TabIndex = 24
+        Me.rdoReplace.TabStop = True
+        Me.rdoReplace.Text = "Edit "
+        Me.rdoReplace.UseVisualStyleBackColor = True
         '
         'lblBy
         '
@@ -217,17 +228,6 @@ Partial Class dlgName
         Me.lblReplace.Size = New System.Drawing.Size(50, 13)
         Me.lblReplace.TabIndex = 28
         Me.lblReplace.Text = "Replace:"
-        '
-        'rdoReplace
-        '
-        Me.rdoReplace.AutoSize = True
-        Me.rdoReplace.Location = New System.Drawing.Point(7, 93)
-        Me.rdoReplace.Name = "rdoReplace"
-        Me.rdoReplace.Size = New System.Drawing.Size(46, 17)
-        Me.rdoReplace.TabIndex = 24
-        Me.rdoReplace.TabStop = True
-        Me.rdoReplace.Text = "Edit "
-        Me.rdoReplace.UseVisualStyleBackColor = True
         '
         'rdoAbbreviate
         '
@@ -391,6 +391,17 @@ Partial Class dlgName
         Me.ucrInputBy.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBy.TabIndex = 27
         '
+        'ucrInputEdit
+        '
+        Me.ucrInputEdit.AddQuotesIfUnrecognised = True
+        Me.ucrInputEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputEdit.GetSetSelectedIndex = -1
+        Me.ucrInputEdit.IsReadOnly = False
+        Me.ucrInputEdit.Location = New System.Drawing.Point(96, 91)
+        Me.ucrInputEdit.Name = "ucrInputEdit"
+        Me.ucrInputEdit.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputEdit.TabIndex = 25
+        '
         'ucrInputReplace
         '
         Me.ucrInputReplace.AddQuotesIfUnrecognised = True
@@ -401,17 +412,6 @@ Partial Class dlgName
         Me.ucrInputReplace.Name = "ucrInputReplace"
         Me.ucrInputReplace.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputReplace.TabIndex = 26
-        '
-        'ucrInputEdit
-        '
-        Me.ucrInputEdit.AddQuotesIfUnrecognised = True
-        Me.ucrInputEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputEdit.GetSetSelectedIndex = -1
-        Me.ucrInputEdit.IsReadOnly = False
-        Me.ucrInputEdit.Location = New System.Drawing.Point(96, 93)
-        Me.ucrInputEdit.Name = "ucrInputEdit"
-        Me.ucrInputEdit.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputEdit.TabIndex = 25
         '
         'ucrNudAbbreviate
         '
@@ -442,7 +442,7 @@ Partial Class dlgName
         Me.ucrPnlCase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlCase.Location = New System.Drawing.Point(3, 13)
         Me.ucrPnlCase.Name = "ucrPnlCase"
-        Me.ucrPnlCase.Size = New System.Drawing.Size(260, 113)
+        Me.ucrPnlCase.Size = New System.Drawing.Size(260, 104)
         Me.ucrPnlCase.TabIndex = 17
         '
         'ucrReceiverColumns

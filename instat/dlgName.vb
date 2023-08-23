@@ -78,7 +78,6 @@ Public Class dlgName
         ucrChkIncludeVariable.AddParameterValuesCondition(True, "check", "True")
         ucrChkIncludeVariable.AddParameterValuesCondition(False, "check", "False")
 
-
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
@@ -135,11 +134,9 @@ Public Class dlgName
         ucrInputEdit.SetItems(dctReplace)
 
         ucrInputBy.SetParameter(New RParameter("replacement", 2))
-        'ucrInputBy.SetValidationTypeAsRVariable()
         ucrInputBy.SetLinkedDisplayControl(lblBy)
 
         ucrInputReplace.SetParameter(New RParameter("pattern", 2))
-        ' ucrInputReplace.SetValidationTypeAsRVariable()
         ucrInputReplace.SetLinkedDisplayControl(lblReplace)
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -189,7 +186,6 @@ Public Class dlgName
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
         clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
-        'clsDefaultRFunction.AddParameter("",, iPosition:=)
         clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
         clsDefaultRFunction.AddParameter("minlength", "8", iPosition:=10)
 
@@ -227,7 +223,6 @@ Public Class dlgName
         ucrReceiverName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputNewName.SetRCode(clsDefaultRFunction, bReset)
         ucrInputVariableLabel.SetRCode(clsDefaultRFunction, bReset)
-        ucrReceiverColumns.SetRCode(clsDefaultRFunction, bReset)
         If bReset Then
             ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
             ucrInputReplace.SetRCode(clsDefaultRFunction, bReset)
@@ -581,8 +576,8 @@ Public Class dlgName
             ucrReceiverName.SetMeAsReceiver()
         ElseIf rdoRenameWith.Checked Then
             If rdoWholeDataFrame.Checked Then
-                ucrReceiverColumns.Visible = False
                 rdoReplace.Visible = True
+                ucrReceiverColumns.Visible = False
                 If rdoReplace.Checked Then
                     ucrInputBy.Visible = True
                     ucrInputEdit.Visible = True
@@ -601,6 +596,9 @@ Public Class dlgName
                 ucrInputEdit.Visible = False
                 ucrInputReplace.Visible = False
                 ucrChkRegular.Visible = False
+                If rdoReplace.Checked Then
+                    rdoMakeCleanNames.Checked = True
+                End If
             End If
         End If
         ucrSelectVariables.lstAvailableVariable.Visible = If(rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked), True, False)
@@ -609,7 +607,7 @@ Public Class dlgName
         UpdateGrid()
         RemoveParameters()
         DialogueSize()
-        ' RemovePattern()
+        RemovePattern()
     End Sub
 
     Private Sub DialogueSize()
@@ -622,15 +620,15 @@ Public Class dlgName
                 Me.ucrBase.Location = New Point(37, 351)
                 Me.grpOptions.Size = New Size(269, 221)
                 Me.grpOptions.Location = New Point(227, 107)
-                Me.ucrPnlCase.Location = New Point(4, 13)
-                Me.ucrPnlCase.Size = New Size(260, 113)
+                Me.ucrPnlCase.Size = New Size(260, 104)
+                Me.ucrPnlCase.Location = New Point(3, 13)
             Else
-                Me.Size = New Size(561, 440)
-                Me.ucrBase.Location = New Point(37, 340)
+                Me.Size = New Size(561, 453)
+                Me.ucrBase.Location = New Point(37, 357)
                 Me.grpOptions.Location = New Point(251, 224)
-                Me.grpOptions.Size = New Size(282, 92)
-                Me.ucrPnlCase.Location = New Point(4, 13)
-                Me.ucrPnlCase.Size = New Size(265, 73)
+                Me.grpOptions.Size = New Size(269, 93)
+                Me.ucrPnlCase.Size = New Size(260, 72)
+                Me.ucrPnlCase.Location = New Point(3, 13)
             End If
         End If
     End Sub
@@ -678,8 +676,7 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged, ucrChkRegular.ControlValueChanged
-        'If rdoRenameWith.Checked Then
+    Private Sub RemovePattern()
         If rdoWholeDataFrame.Checked Then
             If rdoReplace.Checked Then
                 clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
@@ -703,10 +700,14 @@ Public Class dlgName
             Else
                 clsDefaultRFunction.RemoveParameterByName("pattern")
                 clsDefaultRFunction.RemoveParameterByName("replacement")
+                clsDefaultRFunction.RemoveParameterByName(".cols")
             End If
         Else
-            clsDefaultRFunction.AddParameter(".cols",, iPosition:=3)
+            clsDefaultRFunction.AddParameter(".cols", ucrReceiverColumns.GetVariableNames, iPosition:=3)
         End If
-        ' End If
+    End Sub
+
+    Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged, ucrChkRegular.ControlValueChanged
+        RemovePattern()
     End Sub
 End Class
