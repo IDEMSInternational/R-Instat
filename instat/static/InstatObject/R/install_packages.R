@@ -159,6 +159,7 @@ pkgs <-
     "statsr",
     "statquotes",
     "rsplit",
+    "desplot",
     #applying formatting on vectors and data frames to make data presentation easier, richer, more flexible and hopefully convey more information
     "formattable"
  )
