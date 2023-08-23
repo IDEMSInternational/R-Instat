@@ -922,12 +922,16 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
+        Dim bIsFactor As Boolean = False
+        If ucrReceiverX.strCurrDataType = "factor" Then
+            bIsFactor = True
+        End If
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                                 clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
                                 clsNewYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewXScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXLevelsFunction:=clsXLevelsFunction, clsNewYLevelsFunction:=clsYLevelsFunction,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
-                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewChangeScales:=bIsFactor,
                                 clsXNewLeftBracketOperator:=clsXLeftBracketOperator, clsXNewRightBracketOperator:=clsXRightBracketOperator, clsXNewConcatenateFunction:=clsXConcatenateFunction, clsYNewLeftBracketOperator:=clsYLeftBracketOperator,
                                 clsYNewRightBracketOperator:=clsYRightBracketOperator, clsYNewConcatenateFunction:=clsYConcatenateFunction, clsYNewSequenceOperator:=clsYSequenceOperator, clsXNewSequenceOperator:=clsXSequenceOperator,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)

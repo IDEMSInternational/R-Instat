@@ -662,7 +662,7 @@ Public Class sdgPlots
                         Optional clsNewYScaleDiscreteFunction As RFunction = Nothing, Optional clsXNewConcatenateFunction As RFunction = Nothing, Optional clsNewYLevelsFunction As RFunction = Nothing, Optional clsNewXLevelsFunction As RFunction = Nothing,
                         Optional clsYNewConcatenateFunction As RFunction = Nothing, Optional clsYNewLeftBracketOperator As ROperator = Nothing, Optional clsYNewRightBracketOperator As ROperator = Nothing, Optional clsYNewSequenceOperator As ROperator = Nothing, Optional clsXNewSequenceOperator As ROperator = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional clsXNewLeftBracketOperator As ROperator = Nothing, Optional clsXNewRightBracketOperator As ROperator = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
-                        Optional bNewEnableFill As Boolean = True, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
+                        Optional bNewEnableFill As Boolean = True, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
         bRCodeSet = False
 
@@ -796,9 +796,8 @@ Public Class sdgPlots
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsXNewConcatenateFunction:=clsXConcatenateFunction, clsXNewLeftBracketOperator:=clsXLeftBracketOperator, clsXNewRightBracketOperator:=clsXRightBracketOperator, clsNewXLevelsFunction:=clsXLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsXNewSequenceOperator:=clsXSequenceOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=If(bNewChangeScales, "discrete", GetAxisType(True)), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsXNewConcatenateFunction:=clsXConcatenateFunction, clsXNewLeftBracketOperator:=clsXLeftBracketOperator, clsXNewRightBracketOperator:=clsXRightBracketOperator, clsNewXLevelsFunction:=clsXLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsXNewSequenceOperator:=clsXSequenceOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsYNewLeftBracketOperator:=clsYLeftBracketOperator, clsYNewConcatenateFunction:=clsYConcatenateFunction, clsYNewRightBracketOperator:=clsYRightBracketOperator, clsNewYLevelsFunction:=clsYLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, clsYNewSequenceOperator:=clsYSequenceOperator, bCloneIfNeeded:=True)
-
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
