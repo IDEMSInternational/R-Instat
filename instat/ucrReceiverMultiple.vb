@@ -117,6 +117,11 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Public Overrides Sub Clear()
+
+        If lstSelectedVariables.Items.Count = 0 AndAlso lstSelectedVariables.Groups.Count = 0 Then
+            Exit Sub
+        End If
+
         lstSelectedVariables.Items.Clear()
         lstSelectedVariables.Groups.Clear()
         OnSelectionChanged()
@@ -136,6 +141,12 @@ Public Class ucrReceiverMultiple
             End If
         Next
 
+        'if there are no items to remove then just exit the sub. No need to raise any events
+        'this checks helps prevent raising of events recursively
+        If lstItemsToRemove.Count = 0 Then
+            Exit Sub
+        End If
+
         For Each lvi As ListViewItem In lstItemsToRemove
             lstSelectedVariables.Items.Remove(lvi)
         Next
@@ -145,6 +156,11 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Private Sub SetGroupHeaderVariablesCount()
+
+        If lstSelectedVariables.Groups.Count = 0 Then
+            Exit Sub
+        End If
+
         'show count selection at the header of the receiver
         'todo. support this feature for receivers that have 1 data frame only.
         'it's not clear when the receiver will ever have more than one data frame
