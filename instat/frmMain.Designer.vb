@@ -3068,7 +3068,7 @@ Partial Class frmMain
         Me.mnuOutputWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuOutputWindow.Name = "mnuOutputWindow"
         Me.mnuOutputWindow.Size = New System.Drawing.Size(180, 22)
-        Me.mnuOutputWindow.Text = "Show Output "
+        Me.mnuOutputWindow.Text = "Show Output"
         '
         'mnuShowRCommand
         '
