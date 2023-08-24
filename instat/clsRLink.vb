@@ -715,44 +715,41 @@ Public Class RLink
 
     End Function
 
-    Public Sub RunRStatement(strScript As String)
+    Public Sub RunRStatement(clsRStatement As clsRStatement)
+
+        Dim strRStatement = clsRStatement.GetAsExecutableScript()
 
         'if there is no script to run then just ignore and exit sub
-        If String.IsNullOrWhiteSpace(strScript) Then
+        If String.IsNullOrWhiteSpace(strRStatement) Then
             Exit Sub
         End If
 
-        frmMain.ucrScriptWindow.LogText(strScript.TrimEnd(vbCr, vbLf))
-        If Not IsRunnableScript(strScript) Then
-
-        End If
-
+        frmMain.ucrScriptWindow.LogText(strRStatement.TrimEnd(vbCr, vbLf))
         Try
             Dim strOutput As String = ""
-            Dim bSuccess As Boolean = Evaluate(strScript, bSilent:=False, bSeparateThread:=False,
+            Dim bSuccess As Boolean = Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False,
                                                bShowWaitDialogOverride:=Nothing)
 
             'if not an assignment operation, then capture the output
-            If Not strScript.Contains("<-") AndAlso bSuccess Then
-                Dim strScriptAsSingleLine As String = strScript.Replace(vbCr, String.Empty).
-                                                                Replace(vbLf, String.Empty)
+            If clsRStatement.clsAssignment IsNot Nothing AndAlso bSuccess Then
+                Dim strScriptAsSingleLine As String = clsRStatement.GetAsExecutableScript(bIncludeFormatting = False)
                 strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine &
                                           " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             End If
 
             'log script and output
-            clsOutputLogger.AddOutput(strScript, strOutput, bAsFile:=True,
+            clsOutputLogger.AddOutput(strRStatement, strOutput, bAsFile:=True,
                                       bDisplayOutputInExternalViewer:=False)
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine &
                    "The error occurred in attempting to run the following R command:" &
-                   Environment.NewLine & strScript, MsgBoxStyle.Critical,
-                   "Error running R command(s)")
+                   Environment.NewLine & strRStatement, MsgBoxStyle.Critical,
+                   "Error running R command")
         End Try
 
-        AppendToAutoSaveLog(strScript)
+        AppendToAutoSaveLog(strRStatement)
         frmMain.UpdateAllGrids()
     End Sub
 
