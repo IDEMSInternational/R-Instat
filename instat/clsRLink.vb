@@ -732,7 +732,7 @@ Public Class RLink
 
             'if not an assignment operation, then capture the output
             If clsRStatement.clsAssignment IsNot Nothing AndAlso bSuccess Then
-                Dim strScriptAsSingleLine As String = clsRStatement.GetAsExecutableScript(bIncludeFormatting = False)
+                Dim strScriptAsSingleLine As String = clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
                 strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine &
                                           " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)

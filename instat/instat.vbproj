@@ -155,8 +155,9 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript, Version=0.1.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RScript.1.0.6\lib\net461\RScript.dll</HintPath>
+    <Reference Include="RScript, Version=0.1.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\RScript.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -5238,6 +5239,7 @@
     <None Include="app.manifest" />
     <None Include="bin\Debug\static\Library\Climatic\Niger\Niger_4stations_corrections.R" />
     <Content Include="Resources\upward-arrow1.png" />
+    <Content Include="RScript.dll" />
     <Content Include="translations\translateDynamic.txt" />
     <Content Include="translations\translateIgnore.txt" />
     <None Include="instat.licenseheader" />
