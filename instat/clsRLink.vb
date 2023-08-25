@@ -731,9 +731,9 @@ Public Class RLink
                                                bShowWaitDialogOverride:=Nothing)
 
             'if not an assignment operation, then capture the output
-            If clsRStatement.clsAssignment IsNot Nothing AndAlso bSuccess Then
-                Dim strScriptAsSingleLine As String = clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
-                strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine &
+            If clsRStatement.clsAssignment Is Nothing AndAlso bSuccess Then
+                strOutput = GetFileOutput("view_object_data(object = " &
+                                          clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False) &
                                           " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             End If
