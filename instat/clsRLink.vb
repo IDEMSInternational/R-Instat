@@ -910,7 +910,8 @@ Public Class RLink
     ''' <summary>
     ''' Gets the file path name if file is available and has contents, else returns an empty string
     ''' </summary>
-    ''' <param name="strScript">Script that produces a file output</param>
+    ''' <param name="strScript">Script that produces a file output. The last line of the script 
+    '''     must be a single line R statement that generates output.</param>
     ''' <param name="bSilent"></param>
     ''' <param name="bSeparateThread"></param>
     ''' <param name="bShowWaitDialogOverride"></param>
