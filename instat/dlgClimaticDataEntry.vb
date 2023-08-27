@@ -181,7 +181,7 @@ Public Class dlgClimaticDataEntry
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
-            ucrBase.OKEnabled(clsSaveDataEntryFunction.ContainsParameter("rows_changed") OrElse clsCommentsListFunction.ContainsParameter("comment"))
+            ucrBase.OKEnabled(clsSaveDataEntryFunction.ContainsParameter("rows_changed") OrElse clsSaveDataEntryFunction.ContainsParameter("comments_list"))
             cmdEnterData.Enabled = True
             If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
                 cmdEnterData.Enabled = False
