@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports System.Net
 Imports System.IO
 Imports System.Globalization
 Imports System.Threading
@@ -54,6 +55,7 @@ Public Class frmMain
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
+    Private strLatestVersion As String = ""
 
     Public isMinimised As Boolean = False
     Public isMaximised As Boolean = False
@@ -216,6 +218,25 @@ Public Class frmMain
         '---------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+
+        CheckForUpdates()
+    End Sub
+
+    Private Sub CheckForUpdates()
+        Dim webClient As New WebClient()
+
+        Try
+            ' Download the version information file from the website
+            strLatestVersion = webClient.DownloadString("https://n-thony.github.io/r-instat-web-site/version.txt")
+
+            ' Compare with the current version of your app
+            If strLatestVersion > My.Application.Info.Version.ToString() Then
+                ' New version available, show a notification
+                MessageBox.Show("A new version is available! Visit the website to download it.")
+            End If
+        Catch ex As Exception
+            ' Handle any errors (e.g., network issues, website not accessible)
+        End Try
     End Sub
 
     Private Function GetSavedRInstatOptions() As InstatOptions
