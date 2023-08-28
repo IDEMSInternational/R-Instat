@@ -540,7 +540,6 @@ Public Class sdgClimaticDataEntry
                 i = i + 1
             Next
             clsSaveDataEntryFunction.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
-            'clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
         End If
@@ -554,14 +553,12 @@ Public Class sdgClimaticDataEntry
                     bFound = True
                 End If
                 If strRow IsNot Nothing AndAlso bFound Then
-                    clsEditDataFrameFunction.AddParameter("row", strRow, bIncludeArgumentName:=False, iPosition:=0)
                     clsSaveDataEntryFunction.AddParameter("rows_changed", strRow, iPosition:=2)
                     clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
                     Exit For
                 End If
             Next
         Else
-            'clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
             clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
         End If
     End Sub
