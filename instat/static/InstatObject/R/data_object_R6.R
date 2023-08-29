@@ -4343,7 +4343,7 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
     # This affects factor columns only  - we need to find out why and how to solve it best
     self$add_defaults_variables_metadata(self$get_column_names())
     self$data_changed <- TRUE
-   }
+  }
 })
 
 DataSheet$set("public", "add_flag_fields", function(col_names) {
