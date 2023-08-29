@@ -230,12 +230,14 @@ Public Class frmMain
             strLatestVersion = webClient.DownloadString("https://n-thony.github.io/r-instat-web-site/version.txt")
 
             ' Compare with the current version of your app
-            If strLatestVersion > My.Application.Info.Version.ToString() Then
+            If strLatestVersion > My.Application.Info.Version.ToString() AndAlso
+                clsInstatOptions.bRemindLaterOption Then
                 ' New version available, show a notification
-                MessageBox.Show("A new version is available! Visit the website to download it.")
+                Dim result As DialogResult = MessageBox.Show("A new version is available! Visit the website to download it. \n Remind me later?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                clsInstatOptions.SetRemindLaterOption(result = DialogResult.Yes)
             End If
         Catch ex As Exception
-            ' Handle any errors (e.g., network issues, website not accessible)
+            MsgBox("Network issues or website not accessible")
         End Try
     End Sub
 
