@@ -2653,6 +2653,7 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
     if(!("column" %in% names(com))){
       com[["column"]] <- ""
     }
+    if(length(comments_list) > 0) cat("Comments added:", length(comments_list), "\n")
     self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
   }
     }
