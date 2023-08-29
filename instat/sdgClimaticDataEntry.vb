@@ -544,20 +544,7 @@ Public Class sdgClimaticDataEntry
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
         End If
         If clsListFunction.clsParameters.Count > 0 Then
-            Dim strRow As String = Nothing
-            Dim bFound As Boolean = False
-            For Each clsParam In clsCommentsListFunction.clsParameters
-                If clsParam.strArgumentName = "row" AndAlso Not String.IsNullOrEmpty(clsParam.strArgumentValue.Trim("""")) Then
-                    strRow = clsParam.strArgumentValue
-                ElseIf clsParam.strArgumentName = "comment" AndAlso Not String.IsNullOrEmpty(clsParam.strArgumentValue.Trim("""")) Then
-                    bFound = True
-                End If
-                If strRow IsNot Nothing AndAlso bFound Then
-                    clsSaveDataEntryFunction.AddParameter("rows_changed", strRow, iPosition:=2)
-                    clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
-                    Exit For
-                End If
-            Next
+            clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
             clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
         End If

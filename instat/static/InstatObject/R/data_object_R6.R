@@ -4315,7 +4315,7 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
 })
 
 DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed, add_flags = FALSE, ...) {
-  if (!nrow(new_data) == 0) {
+  if (ncol(new_data) > 1) {
   if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   changed_data <- curr_data
