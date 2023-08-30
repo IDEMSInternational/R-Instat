@@ -1125,14 +1125,17 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
 
 DataSheet$set("public", "append_to_changes", function(value) {
   
-  if(missing(value)) {
-    stop("value arguements must be specified.")
-  }else {
+  #functionality disabled temporarily
+  #see PR #8465 and issue #7161 comments
+  
+  #if(missing(value)) {
+  #  stop("value arguements must be specified.")
+  #}else {
     #see comments in issue #7161 that explain more about why list() was used
     #primary reason was because of performance when it comes to wide data sets
     #private$changes[[length(private$changes)+1]] <- value 
-    private$changes<-list(private$changes, value)
-  }
+    #private$changes<-list(private$changes, value)
+  #}
 }
 )
 
