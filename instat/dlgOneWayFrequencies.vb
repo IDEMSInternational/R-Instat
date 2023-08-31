@@ -19,6 +19,9 @@ Public Class dlgOneWayFrequencies
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
 
+    'HTML Option functions
+    Private clsHTMLFunction, clsAsHtmlWidgetFunction As New RFunction
+
     'table option functions
     Private clsTableSjMiscFrqRFunction, clsTableAsDataFrameRFunction As New RFunction
 
@@ -110,6 +113,7 @@ Public Class dlgOneWayFrequencies
         'table controls
         ucrPnlTableOutput.AddRadioButton(rdoTableAsOutput)
         ucrPnlTableOutput.AddRadioButton(rdoTableAsDataFrame)
+        ucrPnlTableOutput.AddRadioButton(rdoHTMLoutput)
         ucrPnlTableOutput.SetLinkedDisplayControl(grpTableGraphOutput)
 
         ucrChkTableMinFrq.SetText("Min Frequency")
@@ -156,11 +160,11 @@ Public Class dlgOneWayFrequencies
     Private Sub SetDefaults()
         clsTableSjMiscFrqRFunction = New RFunction
         clsTableAsDataFrameRFunction = New RFunction
-
         clsGraphSjGGFreqPlotRFunction = New RFunction
         clsGraphGridRFunction = New RFunction
         clsGraphGridAsGGplotRFunction = New RFunction
-
+        clsHTMLFunction = New RFunction
+        clsAsHtmlWidgetFunction = New RFunction
         clsStemLeafRFunction = New RFunction
         clsStemLeafPurrMapRFunction = New RFunction
         clsStemLeafTildeROperator = New ROperator
@@ -222,6 +226,19 @@ Public Class dlgOneWayFrequencies
         clsStemLeafRFunction.SetRCommand("stem")
         '-------------------------
 
+        '-------------------------
+        'HTML Option functions
+        clsHTMLFunction.SetPackageName("formattable")
+        clsHTMLFunction.SetRCommand("formattable")
+        clsHTMLFunction.AddParameter("align", Chr(34) & "l" & Chr(34), iPosition:=1)
+
+
+        clsAsHtmlWidgetFunction.SetPackageName("formattable")
+        clsAsHtmlWidgetFunction.SetRCommand("as.htmlwidget")
+        clsAsHtmlWidgetFunction.AddParameter("x", clsRFunctionParameter:=clsHTMLFunction, iPosition:=0)
+
+        '-------------------------
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsTableSjMiscFrqRFunction)
         bResetSubdialog = True
     End Sub
@@ -246,7 +263,7 @@ Public Class dlgOneWayFrequencies
         ucrPnlTableGraphSort.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, ucrPnlTableGraphSort.GetParameter(), iAdditionalPairNo:=1)
         ucrNudTableGraphGroups.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, ucrNudTableGraphGroups.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverTableGraphWeights.AddAdditionalCodeParameterPair(clsGraphSjGGFreqPlotRFunction, ucrReceiverTableGraphWeights.GetParameter(), iAdditionalPairNo:=1)
-
+        ucrReceiverTableGraph.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("x"), iAdditionalPairNo:=1)
         ucrReceiverTableGraph.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrPnlTableGraphSort.SetRCode(clsTableSjMiscFrqRFunction, bReset)
         ucrNudTableGraphGroups.SetRCode(clsTableSjMiscFrqRFunction, bReset)
@@ -313,6 +330,15 @@ Public Class dlgOneWayFrequencies
                                                               strObjectName:="last_summary")
 
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTableSjMiscFrqRFunction)
+            ElseIf rdoHTMLoutput.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlWidgetFunction)
+                ucrSaveFreq.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+                ucrSaveFreq.Visible = True
+                clsAsHtmlWidgetFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                              strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                              strRDataFrameNameToAddObjectTo:=ucrSelectorFreq.strCurrentDataFrame,
+                                              strObjectName:="last_table")
             Else
                 ucrSaveFreq.SetPrefix("one_way_freq")
                 ucrSaveFreq.SetCheckBoxText("Save Data Frame")

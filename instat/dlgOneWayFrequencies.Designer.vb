@@ -42,7 +42,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlTableGraphSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoFrqGraph = New System.Windows.Forms.RadioButton()
@@ -50,25 +49,27 @@ Partial Class dlgOneWayFrequencies
         Me.grpTableGraphOutput = New System.Windows.Forms.GroupBox()
         Me.rdoTableAsOutput = New System.Windows.Forms.RadioButton()
         Me.rdoTableAsDataFrame = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlTableOutput = New instat.UcrPanel()
         Me.rdoFrqStemLeaf = New System.Windows.Forms.RadioButton()
+        Me.rdoHTMLoutput = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverMultiple()
         Me.ucrNudStemLeafWidth = New instat.ucrNud()
         Me.ucrNudStemLeafScale = New instat.ucrNud()
         Me.ucrNudTableMinFreq = New instat.ucrNud()
+        Me.ucrPnlTableOutput = New instat.UcrPanel()
         Me.ucrSaveFreq = New instat.ucrSave()
         Me.ucrNudTableGraphGroups = New instat.ucrNud()
         Me.ucrPnlFreq = New instat.UcrPanel()
         Me.ucrReceiverTableGraphWeights = New instat.ucrReceiverSingle()
+        Me.ucrPnlTableGraphSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkGraphFlipCoordinates = New instat.ucrCheck()
         Me.ucrChkStemLeafScale = New instat.ucrCheck()
         Me.ucrChkTableMinFrq = New instat.ucrCheck()
-        Me.ucrChkTableGraphWeights = New instat.ucrCheck()
         Me.ucrChkStemLeafWidth = New instat.ucrCheck()
         Me.ucrChkTableGraphGroupData = New instat.ucrCheck()
         Me.ucrReceiverTableGraph = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverStemAndLeaf = New instat.ucrReceiverMultiple()
+        Me.ucrChkTableGraphWeights = New instat.ucrCheck()
         Me.grpTableGraphSort.SuspendLayout()
         Me.grpTableGraphOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -118,14 +119,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.TabStop = True
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
-        '
-        'ucrPnlTableGraphSort
-        '
-        Me.ucrPnlTableGraphSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTableGraphSort.Location = New System.Drawing.Point(3, 14)
-        Me.ucrPnlTableGraphSort.Name = "ucrPnlTableGraphSort"
-        Me.ucrPnlTableGraphSort.Size = New System.Drawing.Size(158, 69)
-        Me.ucrPnlTableGraphSort.TabIndex = 0
         '
         'cmdOptions
         '
@@ -181,12 +174,13 @@ Partial Class dlgOneWayFrequencies
         '
         'grpTableGraphOutput
         '
+        Me.grpTableGraphOutput.Controls.Add(Me.rdoHTMLoutput)
         Me.grpTableGraphOutput.Controls.Add(Me.rdoTableAsOutput)
         Me.grpTableGraphOutput.Controls.Add(Me.rdoTableAsDataFrame)
         Me.grpTableGraphOutput.Controls.Add(Me.ucrPnlTableOutput)
         Me.grpTableGraphOutput.Location = New System.Drawing.Point(258, 275)
         Me.grpTableGraphOutput.Name = "grpTableGraphOutput"
-        Me.grpTableGraphOutput.Size = New System.Drawing.Size(165, 75)
+        Me.grpTableGraphOutput.Size = New System.Drawing.Size(167, 93)
         Me.grpTableGraphOutput.TabIndex = 10
         Me.grpTableGraphOutput.TabStop = False
         Me.grpTableGraphOutput.Text = "Output "
@@ -213,14 +207,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoTableAsDataFrame.Text = "As DataFrame"
         Me.rdoTableAsDataFrame.UseVisualStyleBackColor = True
         '
-        'ucrPnlTableOutput
-        '
-        Me.ucrPnlTableOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTableOutput.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlTableOutput.Name = "ucrPnlTableOutput"
-        Me.ucrPnlTableOutput.Size = New System.Drawing.Size(150, 53)
-        Me.ucrPnlTableOutput.TabIndex = 0
-        '
         'rdoFrqStemLeaf
         '
         Me.rdoFrqStemLeaf.Appearance = System.Windows.Forms.Appearance.Button
@@ -236,6 +222,30 @@ Partial Class dlgOneWayFrequencies
         Me.rdoFrqStemLeaf.Text = "Stem and Leaf"
         Me.rdoFrqStemLeaf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoFrqStemLeaf.UseVisualStyleBackColor = True
+        '
+        'rdoHTMLoutput
+        '
+        Me.rdoHTMLoutput.AutoSize = True
+        Me.rdoHTMLoutput.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoHTMLoutput.Location = New System.Drawing.Point(6, 68)
+        Me.rdoHTMLoutput.Name = "rdoHTMLoutput"
+        Me.rdoHTMLoutput.Size = New System.Drawing.Size(70, 17)
+        Me.rdoHTMLoutput.TabIndex = 3
+        Me.rdoHTMLoutput.Text = "As HTML"
+        Me.rdoHTMLoutput.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverStemAndLeaf
+        '
+        Me.ucrReceiverStemAndLeaf.AutoSize = True
+        Me.ucrReceiverStemAndLeaf.frmParent = Me
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(257, 79)
+        Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
+        Me.ucrReceiverStemAndLeaf.Selector = Nothing
+        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverStemAndLeaf.strNcFilePath = ""
+        Me.ucrReceiverStemAndLeaf.TabIndex = 25
+        Me.ucrReceiverStemAndLeaf.ucrSelector = Nothing
         '
         'ucrNudStemLeafWidth
         '
@@ -275,6 +285,14 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudTableMinFreq.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudTableMinFreq.TabIndex = 21
         Me.ucrNudTableMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlTableOutput
+        '
+        Me.ucrPnlTableOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTableOutput.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlTableOutput.Name = "ucrPnlTableOutput"
+        Me.ucrPnlTableOutput.Size = New System.Drawing.Size(150, 69)
+        Me.ucrPnlTableOutput.TabIndex = 0
         '
         'ucrSaveFreq
         '
@@ -318,6 +336,14 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverTableGraphWeights.strNcFilePath = ""
         Me.ucrReceiverTableGraphWeights.TabIndex = 15
         Me.ucrReceiverTableGraphWeights.ucrSelector = Nothing
+        '
+        'ucrPnlTableGraphSort
+        '
+        Me.ucrPnlTableGraphSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlTableGraphSort.Location = New System.Drawing.Point(3, 14)
+        Me.ucrPnlTableGraphSort.Name = "ucrPnlTableGraphSort"
+        Me.ucrPnlTableGraphSort.Size = New System.Drawing.Size(158, 69)
+        Me.ucrPnlTableGraphSort.TabIndex = 0
         '
         'ucrBase
         '
@@ -367,15 +393,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkTableMinFrq.Size = New System.Drawing.Size(210, 23)
         Me.ucrChkTableMinFrq.TabIndex = 20
         '
-        'ucrChkTableGraphWeights
-        '
-        Me.ucrChkTableGraphWeights.AutoSize = True
-        Me.ucrChkTableGraphWeights.Checked = False
-        Me.ucrChkTableGraphWeights.Location = New System.Drawing.Point(10, 256)
-        Me.ucrChkTableGraphWeights.Name = "ucrChkTableGraphWeights"
-        Me.ucrChkTableGraphWeights.Size = New System.Drawing.Size(145, 23)
-        Me.ucrChkTableGraphWeights.TabIndex = 14
-        '
         'ucrChkStemLeafWidth
         '
         Me.ucrChkStemLeafWidth.AutoSize = True
@@ -407,18 +424,14 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverTableGraph.TabIndex = 8
         Me.ucrReceiverTableGraph.ucrSelector = Nothing
         '
-        'ucrReceiverStemAndLeaf
+        'ucrChkTableGraphWeights
         '
-        Me.ucrReceiverStemAndLeaf.AutoSize = True
-        Me.ucrReceiverStemAndLeaf.frmParent = Me
-        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(257, 79)
-        Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
-        Me.ucrReceiverStemAndLeaf.Selector = Nothing
-        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverStemAndLeaf.strNcFilePath = ""
-        Me.ucrReceiverStemAndLeaf.TabIndex = 25
-        Me.ucrReceiverStemAndLeaf.ucrSelector = Nothing
+        Me.ucrChkTableGraphWeights.AutoSize = True
+        Me.ucrChkTableGraphWeights.Checked = False
+        Me.ucrChkTableGraphWeights.Location = New System.Drawing.Point(10, 256)
+        Me.ucrChkTableGraphWeights.Name = "ucrChkTableGraphWeights"
+        Me.ucrChkTableGraphWeights.Size = New System.Drawing.Size(145, 23)
+        Me.ucrChkTableGraphWeights.TabIndex = 14
         '
         'dlgOneWayFrequencies
         '
@@ -495,4 +508,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrNudStemLeafWidth As ucrNud
     Friend WithEvents ucrChkStemLeafWidth As ucrCheck
     Friend WithEvents ucrReceiverStemAndLeaf As ucrReceiverMultiple
+    Friend WithEvents rdoHTMLoutput As RadioButton
 End Class
