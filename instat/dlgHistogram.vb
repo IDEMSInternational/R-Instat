@@ -43,6 +43,18 @@ Public Class dlgHistogram
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsReorderFunction As New RFunction
+    Private clsReorderValueFunction As New RFunction
+    Private clsGeomTextFunction As New RFunction
+    Private clsForecatsReverseValue As New RFunction
+    Private clsForecatsInfreqValue As New RFunction
+    Private clsForecatsInfreq As New RFunction
+    Private clsForecatsReverse As New RFunction
+
+    Private clsDummyRev As New RFunction
+    Private ReadOnly strAscending As String = "Ascending"
+    Private ReadOnly strDescending As String = "Descending"
+    Private ReadOnly strNone As String = "None"
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -62,7 +74,6 @@ Public Class dlgHistogram
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
-        DialogueSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -99,7 +110,7 @@ Public Class dlgHistogram
         ucrInputStats.SetLinkedDisplayControl(lblStats)
         ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPercentages.SetText("percentages")
+        ucrChkPercentages.SetText("Percentages")
         ucrChkPercentages.AddParameterPresentCondition(True, "scale")
         ucrChkPercentages.AddParameterPresentCondition(False, "scale", False)
 
@@ -119,6 +130,14 @@ Public Class dlgHistogram
         ucrVariablesAsFactorforHist.bWithQuotes = False
         ucrVariablesAsFactorforHist.SetParameterIsString()
 
+        ucrInputAddReorder.SetItems({strAscending, strDescending, strNone})
+        ucrInputAddReorder.SetDropDownStyleAsNonEditable()
+        ucrInputAddReorder.SetLinkedDisplayControl(lblReorder)
+
+        ucrInputReorderValue.SetItems({strAscending, strDescending, strNone})
+        ucrInputReorderValue.SetDropDownStyleAsNonEditable()
+        ucrInputReorderValue.SetLinkedDisplayControl(lblReorderValue)
+
         ucrPnlOptions.AddToLinkedControls({ucrChkDisplayAsDotPlot}, {rdoHistogram}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity_ridges}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True)
@@ -129,7 +148,6 @@ Public Class dlgHistogram
         ucrSaveHist.SetCheckBoxText("Save Graph")
         ucrSaveHist.SetSaveTypeAsGraph()
         ucrSaveHist.SetAssignToIfUncheckedValue("last_graph")
-        DialogueSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -139,12 +157,23 @@ Public Class dlgHistogram
         clsRaesFunction = New RFunction
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
+        clsGeomTextFunction = New RFunction
+        clsForecatsReverseValue = New RFunction
+        clsDummyRev = New RFunction
+        clsReorderFunction = New RFunction
+        clsReorderValueFunction = New RFunction
+        clsForecatsInfreqValue = New RFunction
+        clsForecatsInfreq = New RFunction
+        clsForecatsReverse = New RFunction
+
         ucrHistogramSelector.Reset()
         ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveHist.Reset()
         ucrVariablesAsFactorforHist.SetMeAsReceiver()
         bResetSubdialog = True
         bResetHistLayerSubdialog = True
+
+        clsDummyRev.AddParameter("reverse", "FALSE", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -153,6 +182,11 @@ Public Class dlgHistogram
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+
+        ucrInputAddReorder.SetText(strNone)
+
+        ucrInputReorderValue.SetText(strNone)
+        ucrInputReorderValue.bUpdateRCodeFromControl = True
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
@@ -167,6 +201,29 @@ Public Class dlgHistogram
 
         clsPercentage.SetPackageName("scales")
         clsPercentage.SetRCommand("percent_format")
+
+        clsGeomTextFunction.SetPackageName("ggplot2")
+        clsGeomTextFunction.SetRCommand("geom_text")
+        'clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+        clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
+        clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
+        clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
+
+        clsForecatsReverseValue.SetPackageName("forcats")
+        clsForecatsReverseValue.SetRCommand("fct_rev")
+
+        clsReorderFunction.SetRCommand("reorder")
+
+        clsReorderValueFunction.SetRCommand("reorder")
+
+        clsForecatsInfreqValue.SetPackageName("forcats")
+        clsForecatsInfreqValue.SetRCommand("fct_infreq")
+
+        clsForecatsInfreq.SetPackageName("forcats")
+        clsForecatsInfreq.SetRCommand("fct_infreq")
+
+        clsForecatsReverse.SetPackageName("forcats")
+        clsForecatsReverse.SetRCommand("fct_rev")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -200,6 +257,8 @@ Public Class dlgHistogram
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
+        ucrFactorReceiver.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrVariablesAsFactorforHist.AddAdditionalCodeParameterPair(clsReorderValueFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         If bReset Then
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
         End If
@@ -207,7 +266,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'Tests when ok can be enabled
-        If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete OrElse (ucrChkRidges.Checked AndAlso (ucrFactorReceiver.IsEmpty OrElse ucrFactorReceiver.Enabled = False)) Then
+        If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete OrElse ucrFactorReceiver.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -225,6 +284,7 @@ Public Class dlgHistogram
         clsHistAesFunction.RemoveParameterByName("y")
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
+        ucrInputAddReorder.Visible = Not ucrFactorReceiver.IsEmpty()
         If rdoHistogram.Checked Then
             If ucrChkDisplayAsDotPlot.Checked Then
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
@@ -232,9 +292,27 @@ Public Class dlgHistogram
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
             End If
             ucrFactorReceiver.ChangeParameterName("fill")
-            If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
+            '    If ucrChkReverse.Checked Then
+            '        clsForecatsReverseValue.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+            '        clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=1)
+            '    Else
+            '        clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=1)
+            '    End If
+            '    If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
+            '    ucrChkReverse.Visible = Not ucrFactorReceiver.IsEmpty()
         End If
         If rdoDensity_ridges.Checked Then
+            ucrFactorReceiver.ChangeParameterName("fill")
+            'If ucrChkReverse.Checked Then
+            '    clsForecatsReverseValue.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+            '    clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=1)
+            'Else
+            '    clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=1)
+            'End If
+            'ucrChkReverse.Visible = Not ucrFactorReceiver.IsEmpty()
+            If Not ucrSaveHist.bUserTyped Then
+                ucrSaveHist.SetPrefix("density_ridges")
+            End If
             If ucrChkRidges.Checked Then
                 ucrFactorReceiver.ChangeParameterName("y")
                 clsHistAesFunction.RemoveParameterByName("y")
@@ -242,34 +320,36 @@ Public Class dlgHistogram
                 clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
                 clsRgeomPlotFunction.SetPackageName("ggridges")
                 clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
-                If Not ucrSaveHist.bUserTyped Then
-                    ucrSaveHist.SetPrefix("density_ridges")
-                End If
             Else
                 ucrFactorReceiver.ChangeParameterName("colour")
                 clsRgeomPlotFunction.SetRCommand("geom_density")
-                If Not ucrSaveHist.bUserTyped Then
-                    ucrSaveHist.SetPrefix("density")
-                End If
             End If
         ElseIf rdoFrequencyPolygon.Checked Then
             ucrFactorReceiver.ChangeParameterName("colour")
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             If Not ucrSaveHist.bUserTyped Then
+                ucrSaveHist.SetPrefix("density")
+            End If
+            ucrFactorReceiver.ChangeParameterName("fill")
+            'If ucrChkReverse.Checked Then
+            '    clsForecatsReverseValue.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+            '    clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=1)
+            'Else
+            '    clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=1)
+            'End If
+            'ucrChkReverse.Visible = Not ucrFactorReceiver.IsEmpty()
+            If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
         End If
         autoTranslate(Me)
+        UpdateParameter()
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
-        toolStripMenuItemHistogramOptions.Enabled = rdoHistogram.Checked AndAlso Not ucrChkDisplayAsDotPlot.Checked
-        toolStripMenuItemDotOptions.Enabled = rdoHistogram.Checked AndAlso ucrChkDisplayAsDotPlot.Checked
-        toolStripMenuItemDensityOptions.Enabled = rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked
-        toolStripMenuItemDensityRidgesOptions.Enabled = rdoDensity_ridges.Checked AndAlso ucrChkRidges.Checked
-        toolStripMenuItemFrequencyPolygonOptions.Enabled = rdoFrequencyPolygon.Checked
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged,
+        ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged,
+        ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged
         SetDialogOptions()
-        DialogueSize()
     End Sub
 
     Private Sub Adding_Percentages(ucrChangedControl As ucrCore) Handles ucrInputStats.ControlValueChanged, ucrChkPercentages.ControlValueChanged
@@ -363,9 +443,17 @@ Public Class dlgHistogram
         SetDialogOptions()
     End Sub
 
+    Private Sub SetGeomTextOptions()
+        If rdoHistogram.Checked Then
+            clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+        Else
+            clsGeomTextFunction.RemoveParameterByName("stat")
+        End If
+    End Sub
+
     Private Sub DialogueSize()
         If rdoHistogram.Checked Then
-            Me.Size = New Size(464, 409)
+            Me.Size = New Size(464, 480)
             Me.ucrSaveHist.Location = New Point(10, 284)
             Me.ucrBase.Location = New Point(10, 314)
         ElseIf rdoDensity_ridges.Checked Then
@@ -381,5 +469,36 @@ Public Class dlgHistogram
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub UpdateParameter()
+        If rdoHistogram.Checked OrElse rdoDensity_ridges.Checked OrElse rdoFrequencyPolygon.Checked Then
+            Dim strChangedTextFreq As String = ucrInputReorderValue.GetText()
+            Dim strChangedTextValue As String = ucrInputAddReorder.GetText()
+            clsForecatsInfreq.AddParameter("f", "as.factor(" & ucrVariablesAsFactorforHist.GetVariableNames(False) & ")", iPosition:=0)
+            clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrFactorReceiver.GetVariableNames(False) & ")", iPosition:=0)
+            Select Case strChangedTextFreq
+                Case strAscending
+                    clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+                    clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                Case strDescending
+                    clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+            End Select
+            Select Case strChangedTextValue
+                Case strAscending
+                    clsForecatsReverseValue.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                    clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=1)
+                Case strDescending
+                    clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=1)
+            End Select
+        End If
+    End Sub
+    Private Sub ucrPnlOptions_Control(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrFactorReceiver.ControlValueChanged,
+        ucrChkRidges.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged,
+        ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged
+        UpdateParameter()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged
     End Sub
 End Class
