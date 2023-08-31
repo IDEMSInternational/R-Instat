@@ -807,18 +807,40 @@ Public Class dlgBarAndPieChart
                     Case strAscending
                         clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=2)
+                        clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strDescending
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
-                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=2)
+                        clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
                     Case strReverse
                         clsForecatsReverse.AddParameter("f", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=2)
+                        clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strNone
                         clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-                        clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=2)
+                        clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 End Select
+            Else
+                clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+            End If
+            If ucrChkPolarCoordinates.Checked Then
+                If rdoPie.Checked OrElse rdoDonut.Checked Then
+                    If ucrReceiverByFactor.IsEmpty Then
+                        clsPieAesFunction.AddParameter("x", "1", iPosition:=0)
+                        Select Case strChangedTextFreq
+                            Case strAscending
+                                clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=0)
+                                clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=2)
+                            Case strDescending
+                                clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreq, iPosition:=2)
+                            Case strReverse
+                                clsForecatsReverse.AddParameter("f", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+                                clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=2)
+                            Case strNone
+                                clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=2)
+                        End Select
+                    End If
+                End If
             End If
             If Not ucrReceiverByFactor.IsEmpty Then
                 Select Case strChangedTextValue
@@ -839,7 +861,8 @@ Public Class dlgBarAndPieChart
                 End Select
             End If
         ElseIf rdoValue.Checked Then
-            If ucrChkReorderValue.Checked AndAlso strChangeTextReorder <> strNone Then
+            If ucrChkReorderValue.Checked Then
+                clsReorderFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 Select Case strChangeTextReorder
                     Case strAscending
                         clsReorderFunction.AddParameter("X", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
@@ -852,26 +875,50 @@ Public Class dlgBarAndPieChart
                     Case strReverse
                         clsForecatsReverse.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                        clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
+                        clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strNone
                         clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=1)
-                        clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=2)
+                        clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                 End Select
+            Else
+                clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=1)
+                clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             End If
-            If Not ucrReceiverByFactor.IsEmpty AndAlso strChangedTextValue <> strNone Then
+            If ucrChkPolarCoordinates.Checked Then
+                If rdoPie.Checked OrElse rdoDonut.Checked Then
+                    If ucrReceiverByFactor.IsEmpty Then
+                        clsPieAesFunction.AddParameter("x", "1", iPosition:=0)
+                        Select Case strChangedTextValue
+                            Case strAscending
+                                clsReorderFunctionValue.AddParameter("X", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                                clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
+                            Case strDescending
+                                clsReorderFunctionValue.AddParameter("X", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                                clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
+                            Case strReverse
+                                clsForecatsReverseValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+                                clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=2)
+                            Case strNone
+                                clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                        End Select
+                    End If
+                End If
+            End If
+            If Not ucrReceiverByFactor.IsEmpty Then
+                clsReorderFunctionValue.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 Select Case strChangedTextValue
                     Case strAscending
                         clsReorderFunctionValue.AddParameter("X", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-                        clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunction, iPosition:=2)
-                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunction, iPosition:=2)
+                        clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
+                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                     Case strDescending
                         clsReorderFunctionValue.AddParameter("X", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-                        clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunction, iPosition:=2)
+                        clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                         clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                     Case strReverse
                         clsForecatsReverseValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
-                        clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=2)
-                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunction, iPosition:=2)
+                        clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=2)
+                        clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=2)
                     Case strNone
                         clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                         clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
@@ -930,15 +977,6 @@ Public Class dlgBarAndPieChart
         ElseIf rdoFrequency.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             If ucrChkPolarCoordinates.Checked Then
-                If rdoPie.Checked OrElse rdoDonut.Checked Then
-                    If ucrReceiverByFactor.IsEmpty Then
-                        clsPieAesFunction.AddParameter("x", "1", iPosition:=0)
-                        clsPieAesFunction.AddParameter("fill", "as.factor(" & ucrVariablesAsFactorForBarChart.GetVariableNames(False) & ")", iPosition:=2)
-                    Else
-                        clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
-                        clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-                    End If
-                End If
                 clsRggplotFunction.RemoveParameterByName("mapping")
                 clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
                 If ucrChkAddLabelsText.Checked Then
@@ -966,6 +1004,7 @@ Public Class dlgBarAndPieChart
                     clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextAesFunction, iPosition:=1)
                 End If
             End If
+            clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
