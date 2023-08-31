@@ -4315,33 +4315,35 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
 })
 
 DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed, add_flags = FALSE, ...) {
-  if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
-  curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  changed_data <- curr_data
-  for (i in seq_along(rows_changed)) {
-    for (k in seq_along(names(new_data))) {
-      changed_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
-    }
-  }
-  if (add_flags) {
-    for (i in names(new_data)[-c(1:2)]) {
-      col1 <- curr_data[, i]
-      col2 <- changed_data[, i]
-      if (paste0(i, "_fl") %in% colnames(changed_data)) {
-        flag_col1 <- changed_data[, paste0(i, "_fl")]
-        flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
-        changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
-      } else {
-        changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+  if (ncol(new_data) > 1) {
+    if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
+    curr_data <- self$get_data_frame(use_current_filter = FALSE)
+    changed_data <- curr_data
+    for (i in seq_along(rows_changed)) {
+      for (k in seq_along(names(new_data))) {
+        changed_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
       }
     }
+    if (add_flags) {
+      for (i in names(new_data)[-c(1:2)]) {
+        col1 <- curr_data[, i]
+        col2 <- changed_data[, i]
+        if (paste0(i, "_fl") %in% colnames(changed_data)) {
+          flag_col1 <- changed_data[, paste0(i, "_fl")]
+          flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+          changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
+        } else {
+          changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+        }
+      }
+    }
+    if(length(nrow(new_data)) > 0) cat("Row(s) updated: ", nrow(new_data), "\n")
+    self$set_data(changed_data)
+    # Added this line to fix the bug of having the variable names in the metadata changing to NA
+    # This affects factor columns only  - we need to find out why and how to solve it best
+    self$add_defaults_variables_metadata(self$get_column_names())
+    self$data_changed <- TRUE
   }
-  cat("Values updated in:", length(rows_changed), "row(s)\n")
-  self$set_data(changed_data)
-  # Added this line to fix the bug of having the variable names in the metadata changing to NA
-  # This affects factor columns only  - we need to find out why and how to solve it best
-  self$add_defaults_variables_metadata(self$get_column_names())
-  self$data_changed <- TRUE
 })
 
 DataSheet$set("public", "add_flag_fields", function(col_names) {
