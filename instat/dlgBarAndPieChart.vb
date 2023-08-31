@@ -604,8 +604,6 @@ Public Class dlgBarAndPieChart
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrInputLayout.AddAdditionalCodeParameterPair(clsGeomTreemapTextFunction, New RParameter("layout", 1), iAdditionalPairNo:=1)
 
-        'ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
-        'ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrChkPolarCoordinates.SetRCode(clsPolarCoordFunction, bReset)
