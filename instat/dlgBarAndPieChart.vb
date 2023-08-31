@@ -165,7 +165,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverByFactor.strSelectorHeading = "Factors"
-        ucrReceiverByFactor.SetParameter(New RParameter("fill", 2))
+        'ucrReceiverByFactor.SetParameter(New RParameter("fill", 2))
         ucrReceiverByFactor.bWithQuotes = False
         ucrReceiverByFactor.SetParameterIsString()
 
@@ -604,8 +604,8 @@ Public Class dlgBarAndPieChart
         ucrReceiverX.AddAdditionalCodeParameterPair(clsReorderFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrInputLayout.AddAdditionalCodeParameterPair(clsGeomTreemapTextFunction, New RParameter("layout", 1), iAdditionalPairNo:=1)
 
-        ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
-        ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
+        'ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
+        'ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrChkPolarCoordinates.SetRCode(clsPolarCoordFunction, bReset)
@@ -638,7 +638,7 @@ Public Class dlgBarAndPieChart
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
-            ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
+            'ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         End If
     End Sub
 
@@ -692,7 +692,7 @@ Public Class dlgBarAndPieChart
                     If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                         ucrReceiverX.Clear()
                     Else
-                        ucrReceiverX.Add(clsParam.strArgumentValue)
+                        'ucrReceiverX.Add(clsParam.strArgumentValue)
                     End If
                     'In the y case, the value stored in the clsReasFunction in the multiple variables 
                     '  case is "value", however that one shouldn't be written in the multiple 
@@ -816,11 +816,11 @@ Public Class dlgBarAndPieChart
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                         clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strNone
-                        clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                        clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                         clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 End Select
             Else
-                clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 clsPieAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
             End If
             If ucrChkPolarCoordinates.Checked Then
@@ -877,7 +877,7 @@ Public Class dlgBarAndPieChart
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                         clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strNone
-                        clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=1)
+                        clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                         clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                 End Select
             Else
@@ -987,7 +987,6 @@ Public Class dlgBarAndPieChart
                     clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                     clsTextAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 Else
-                    clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                     clsTextAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 End If
                 If ucrReceiverByFactor.IsEmpty Then
