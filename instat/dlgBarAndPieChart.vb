@@ -165,7 +165,6 @@ Public Class dlgBarAndPieChart
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverByFactor.strSelectorHeading = "Factors"
-        'ucrReceiverByFactor.SetParameter(New RParameter("fill", 2))
         ucrReceiverByFactor.bWithQuotes = False
         ucrReceiverByFactor.SetParameterIsString()
 
@@ -636,7 +635,6 @@ Public Class dlgBarAndPieChart
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
-            'ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         End If
     End Sub
 
