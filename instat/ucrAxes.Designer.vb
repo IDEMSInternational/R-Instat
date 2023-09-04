@@ -135,6 +135,12 @@ Partial Class ucrAxes
         Me.ucrChkLabelsDiscrete = New instat.ucrCheck()
         Me.ucrInputMajorBreaksLabelsDiscrete = New instat.ucrInputTextBox()
         Me.UcrPanel1 = New instat.UcrPanel()
+        Me.ucrChkLongLabels = New instat.ucrCheck()
+        Me.rdoWrap = New System.Windows.Forms.RadioButton()
+        Me.rdoDodge = New System.Windows.Forms.RadioButton()
+        Me.rdoAbbr = New System.Windows.Forms.RadioButton()
+        Me.ucrNudWrap = New instat.ucrNud()
+        Me.ucrPnlLongLabels = New instat.UcrPanel()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -974,6 +980,11 @@ Partial Class ucrAxes
         '
         'grpScaleDiscrete
         '
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrNudWrap)
+        Me.grpScaleDiscrete.Controls.Add(Me.rdoAbbr)
+        Me.grpScaleDiscrete.Controls.Add(Me.rdoDodge)
+        Me.grpScaleDiscrete.Controls.Add(Me.rdoWrap)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrChkLongLabels)
         Me.grpScaleDiscrete.Controls.Add(Me.lblTo)
         Me.grpScaleDiscrete.Controls.Add(Me.lblFrom)
         Me.grpScaleDiscrete.Controls.Add(Me.ucrNudTo)
@@ -987,9 +998,10 @@ Partial Class ucrAxes
         Me.grpScaleDiscrete.Controls.Add(Me.ucrChkNaValueDiscrete)
         Me.grpScaleDiscrete.Controls.Add(Me.ucrInputDropUnusedLevels)
         Me.grpScaleDiscrete.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpScaleDiscrete.Location = New System.Drawing.Point(6, 108)
+        Me.grpScaleDiscrete.Controls.Add(Me.ucrPnlLongLabels)
+        Me.grpScaleDiscrete.Location = New System.Drawing.Point(6, 90)
         Me.grpScaleDiscrete.Name = "grpScaleDiscrete"
-        Me.grpScaleDiscrete.Size = New System.Drawing.Size(289, 176)
+        Me.grpScaleDiscrete.Size = New System.Drawing.Size(289, 228)
         Me.grpScaleDiscrete.TabIndex = 37
         Me.grpScaleDiscrete.TabStop = False
         Me.grpScaleDiscrete.Text = "Scales"
@@ -1211,19 +1223,82 @@ Partial Class ucrAxes
         Me.UcrPanel1.Size = New System.Drawing.Size(335, 23)
         Me.UcrPanel1.TabIndex = 18
         '
+        'ucrChkLongLabels
+        '
+        Me.ucrChkLongLabels.AutoSize = True
+        Me.ucrChkLongLabels.Checked = False
+        Me.ucrChkLongLabels.Location = New System.Drawing.Point(7, 157)
+        Me.ucrChkLongLabels.Name = "ucrChkLongLabels"
+        Me.ucrChkLongLabels.Size = New System.Drawing.Size(202, 23)
+        Me.ucrChkLongLabels.TabIndex = 35
+        '
+        'rdoWrap
+        '
+        Me.rdoWrap.AutoSize = True
+        Me.rdoWrap.Location = New System.Drawing.Point(150, 179)
+        Me.rdoWrap.Name = "rdoWrap"
+        Me.rdoWrap.Size = New System.Drawing.Size(51, 17)
+        Me.rdoWrap.TabIndex = 36
+        Me.rdoWrap.TabStop = True
+        Me.rdoWrap.Text = "Wrap"
+        Me.rdoWrap.UseVisualStyleBackColor = True
+        '
+        'rdoDodge
+        '
+        Me.rdoDodge.AutoSize = True
+        Me.rdoDodge.Location = New System.Drawing.Point(84, 179)
+        Me.rdoDodge.Name = "rdoDodge"
+        Me.rdoDodge.Size = New System.Drawing.Size(57, 17)
+        Me.rdoDodge.TabIndex = 37
+        Me.rdoDodge.TabStop = True
+        Me.rdoDodge.Text = "Dodge"
+        Me.rdoDodge.UseVisualStyleBackColor = True
+        '
+        'rdoAbbr
+        '
+        Me.rdoAbbr.AutoSize = True
+        Me.rdoAbbr.Location = New System.Drawing.Point(13, 179)
+        Me.rdoAbbr.Name = "rdoAbbr"
+        Me.rdoAbbr.Size = New System.Drawing.Size(47, 17)
+        Me.rdoAbbr.TabIndex = 38
+        Me.rdoAbbr.TabStop = True
+        Me.rdoAbbr.Text = "Abbr"
+        Me.rdoAbbr.UseVisualStyleBackColor = True
+        '
+        'ucrNudWrap
+        '
+        Me.ucrNudWrap.AutoSize = True
+        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWrap.Location = New System.Drawing.Point(226, 178)
+        Me.ucrNudWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWrap.Name = "ucrNudWrap"
+        Me.ucrNudWrap.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWrap.TabIndex = 39
+        Me.ucrNudWrap.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlLongLabels
+        '
+        Me.ucrPnlLongLabels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlLongLabels.Location = New System.Drawing.Point(9, 177)
+        Me.ucrPnlLongLabels.Name = "ucrPnlLongLabels"
+        Me.ucrPnlLongLabels.Size = New System.Drawing.Size(271, 23)
+        Me.ucrPnlLongLabels.TabIndex = 40
+        '
         'ucrAxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.grpMajorBreaksDiscrete)
         Me.Controls.Add(Me.grpSecondAxis)
-        Me.Controls.Add(Me.grpScales)
         Me.Controls.Add(Me.grpMinorBreaks)
         Me.Controls.Add(Me.ucrInputAxisType)
         Me.Controls.Add(Me.grpMajorBreaks)
         Me.Controls.Add(Me.grpAxisTitle)
-        Me.Controls.Add(Me.grpScaleXDate)
         Me.Controls.Add(Me.grpScaleDiscrete)
+        Me.Controls.Add(Me.grpScales)
+        Me.Controls.Add(Me.grpScaleXDate)
         Me.Name = "ucrAxes"
         Me.Size = New System.Drawing.Size(742, 504)
         Me.grpAxisTitle.ResumeLayout(False)
@@ -1344,4 +1419,10 @@ Partial Class ucrAxes
     Friend WithEvents ucrChkLabelsDiscrete As ucrCheck
     Friend WithEvents ucrInputMajorBreaksLabelsDiscrete As ucrInputTextBox
     Friend WithEvents UcrPanel1 As UcrPanel
+    Friend WithEvents ucrNudWrap As ucrNud
+    Friend WithEvents rdoAbbr As RadioButton
+    Friend WithEvents rdoDodge As RadioButton
+    Friend WithEvents rdoWrap As RadioButton
+    Friend WithEvents ucrChkLongLabels As ucrCheck
+    Friend WithEvents ucrPnlLongLabels As UcrPanel
 End Class

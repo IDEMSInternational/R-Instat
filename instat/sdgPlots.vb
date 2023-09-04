@@ -37,24 +37,15 @@ Public Class sdgPlots
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsAttachFunction As New RFunction
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
-    Public clsYLevelsFunction As New RFunction
-    Public clsXLevelsFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsPlotElementTitleFunction As New RFunction
     Private clsPlotElementSubTitleFunction As New RFunction
     Private clsPlotElementCaptionFunction As New RFunction
     Private clsPlotElementTagFunction As New RFunction
     Private clsPlotLegendTitleFunction As New RFunction
-    Public clsXConcatenateFunction As New RFunction
-    Public clsXLeftBracketOperator As New ROperator
-    Public clsXRightBracketOperator As New ROperator
-    Public clsYConcatenateFunction As New RFunction
-    Public clsYLeftBracketOperator As New ROperator
-    Public clsYRightBracketOperator As New ROperator
-    Public clsXSequenceOperator As New ROperator
-    Public clsYSequenceOperator As New ROperator
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -69,7 +60,7 @@ Public Class sdgPlots
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
-    Private ucrBaseSelector As ucrSelector
+    Public ucrBaseSelector As ucrSelector
 
     'Themes 
     'X axis angle
@@ -658,10 +649,8 @@ Public Class sdgPlots
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewXScaleDiscreteFunction As RFunction = Nothing,
-                        Optional clsNewYScaleDiscreteFunction As RFunction = Nothing, Optional clsXNewConcatenateFunction As RFunction = Nothing, Optional clsNewYLevelsFunction As RFunction = Nothing, Optional clsNewXLevelsFunction As RFunction = Nothing,
-                        Optional clsYNewConcatenateFunction As RFunction = Nothing, Optional clsYNewLeftBracketOperator As ROperator = Nothing, Optional clsYNewRightBracketOperator As ROperator = Nothing, Optional clsYNewSequenceOperator As ROperator = Nothing, Optional clsXNewSequenceOperator As ROperator = Nothing,
-                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional clsXNewLeftBracketOperator As ROperator = Nothing, Optional clsXNewRightBracketOperator As ROperator = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewXScaleDiscreteFunction As RFunction = Nothing, Optional clsNewYScaleDiscreteFunction As RFunction = Nothing,
+                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
         bRCodeSet = False
@@ -674,6 +663,11 @@ Public Class sdgPlots
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
+        clsAttachFunction = New RFunction
+        clsAttachFunction.SetRCommand("attach")
+        clsAttachFunction.AddParameter("what", strDataFrame)
+        clsRsyntax.AddToAfterCodes(clsAttachFunction)
+
         ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsYScaleDateFunction = clsNewYScaleDateFunction
         clsXScaleDateFunction = clsNewXScaleDateFunction
@@ -692,21 +686,11 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
-        clsYLevelsFunction = clsNewYLevelsFunction
-        clsXLevelsFunction = clsNewXLevelsFunction
-        clsXConcatenateFunction = clsXNewConcatenateFunction
-        clsXLeftBracketOperator = clsXNewLeftBracketOperator
-        clsXRightBracketOperator = clsXNewRightBracketOperator
-        clsXLevelsFunction = clsNewXLevelsFunction
-        clsYConcatenateFunction = clsYNewConcatenateFunction
-        clsYLeftBracketOperator = clsYNewLeftBracketOperator
-        clsYRightBracketOperator = clsYNewRightBracketOperator
-        clsXSequenceOperator = clsXNewSequenceOperator
-        clsYSequenceOperator = clsYNewSequenceOperator
 
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
         End If
+
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
@@ -795,9 +779,13 @@ Public Class sdgPlots
         ucrInputXmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+
+        Dim strVariable As String = ""
+
+
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=If(bNewChangeScales, "discrete", GetAxisType(True)), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsXNewConcatenateFunction:=clsXConcatenateFunction, clsXNewLeftBracketOperator:=clsXLeftBracketOperator, clsXNewRightBracketOperator:=clsXRightBracketOperator, clsNewXLevelsFunction:=clsXLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsXNewSequenceOperator:=clsXSequenceOperator, bReset:=bReset, bCloneIfNeeded:=True)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsYNewLeftBracketOperator:=clsYLeftBracketOperator, clsYNewConcatenateFunction:=clsYConcatenateFunction, clsYNewRightBracketOperator:=clsYRightBracketOperator, clsNewYLevelsFunction:=clsYLevelsFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, clsYNewSequenceOperator:=clsYSequenceOperator, bCloneIfNeeded:=True)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
@@ -850,6 +838,52 @@ Public Class sdgPlots
         ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
         ucrChkFillDiscrete.Enabled = bNewEnableDiscrete
     End Sub
+
+    Private Function GetAesParameterArgValue(strAes As String) As String
+        Dim strVariable As String = ""
+        If clsGlobalAesFunction.ContainsParameter(strAes) Then
+            strVariable = clsGlobalAesFunction.GetParameter(strAes).strArgumentValue
+        End If
+
+        Return strVariable
+    End Function
+
+    Private Function IsFactor(bIsX As Boolean, strVariable As String) As Boolean
+        Dim strAes As String
+
+        If bIsX Then
+            strAes = "x"
+        Else
+            strAes = "y"
+        End If
+
+        Dim bIsFactor As Boolean = False
+        If clsGlobalAesFunction.ContainsParameter(strAes) Then
+
+            Dim strCurrDataType As String = ""
+            Dim clsGetDataType As New RFunction
+            Dim expColumnType As SymbolicExpression
+
+            clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+            clsGetDataType.AddParameter("property", "data_type_label")
+            clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsGetDataType.AddParameter("column", Chr(34) & strVariable & Chr(34))
+
+            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+            If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                If expColumnType.AsCharacter.Count > 1 Then
+                    strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
+                Else
+                    strCurrDataType = expColumnType.AsCharacter(0)
+                End If
+            End If
+
+            bIsFactor = If({"factor", "ordered,factor"}.Contains(strCurrDataType), True, False)
+
+        End If
+
+        Return bIsFactor
+    End Function
 
     Private Sub SetFacetParameters()
         'Depending on the settings on the dialog, this function sets the Facets command, stored within clsRFacetFunction.
@@ -1068,7 +1102,7 @@ Public Class sdgPlots
         SetFacetParameters()
     End Sub
 
-    Private Function GetAxisType(bIsX As Boolean) As String
+    Private Function GetAxisType(bIsX As Boolean, Optional bStrictDiscrete As Boolean = False) As String
         Dim strAes As String
 
         If bIsX Then
@@ -1077,7 +1111,8 @@ Public Class sdgPlots
             strAes = "y"
         End If
         If clsGlobalAesFunction IsNot Nothing Then
-            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) _
+                AndAlso Not bStrictDiscrete Then
                 'Run R code to determine type
                 'Temp default to continuous
                 Return "continuous"
