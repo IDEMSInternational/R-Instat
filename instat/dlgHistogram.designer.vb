@@ -51,6 +51,8 @@ Partial Class dlgHistogram
         Me.toolStripMenuItemDensityOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemDensityRidgesOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemFrequencyPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblReorder = New System.Windows.Forms.Label()
+        Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
         Me.ucrChkReverse = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
@@ -63,8 +65,6 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.lblReorder = New System.Windows.Forms.Label()
-        Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -181,6 +181,27 @@ Partial Class dlgHistogram
         Me.toolStripMenuItemFrequencyPolygonOptions.Size = New System.Drawing.Size(221, 22)
         Me.toolStripMenuItemFrequencyPolygonOptions.Text = "Frequency Polygon Options"
         '
+        'lblReorder
+        '
+        Me.lblReorder.AutoSize = True
+        Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblReorder.Location = New System.Drawing.Point(284, 332)
+        Me.lblReorder.Name = "lblReorder"
+        Me.lblReorder.Size = New System.Drawing.Size(48, 13)
+        Me.lblReorder.TabIndex = 44
+        Me.lblReorder.Text = "Reorder:"
+        '
+        'ucrInputAddReorder
+        '
+        Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAddReorder.GetSetSelectedIndex = -1
+        Me.ucrInputAddReorder.IsReadOnly = False
+        Me.ucrInputAddReorder.Location = New System.Drawing.Point(283, 348)
+        Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
+        Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputAddReorder.TabIndex = 45
+        '
         'ucrVariablesAsFactorforHist
         '
         Me.ucrVariablesAsFactorforHist.AutoSize = True
@@ -188,7 +209,7 @@ Partial Class dlgHistogram
         Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(283, 64)
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Selector = Nothing
-        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 141)
+        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 108)
         Me.ucrVariablesAsFactorforHist.strNcFilePath = ""
         Me.ucrVariablesAsFactorforHist.TabIndex = 43
         Me.ucrVariablesAsFactorforHist.ucrSelector = Nothing
@@ -311,27 +332,6 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(433, 30)
         Me.ucrPnlOptions.TabIndex = 0
-        '
-        'lblReorder
-        '
-        Me.lblReorder.AutoSize = True
-        Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReorder.Location = New System.Drawing.Point(284, 332)
-        Me.lblReorder.Name = "lblReorder"
-        Me.lblReorder.Size = New System.Drawing.Size(48, 13)
-        Me.lblReorder.TabIndex = 44
-        Me.lblReorder.Text = "Reorder:"
-        '
-        'ucrInputAddReorder
-        '
-        Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
-        Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputAddReorder.GetSetSelectedIndex = -1
-        Me.ucrInputAddReorder.IsReadOnly = False
-        Me.ucrInputAddReorder.Location = New System.Drawing.Point(283, 348)
-        Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
-        Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputAddReorder.TabIndex = 45
         '
         'dlgHistogram
         '
