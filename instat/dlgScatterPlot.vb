@@ -42,6 +42,8 @@ Public Class dlgScatterPlot
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsGeomRugFunction As New RFunction
+    Private clsGeomJitterFunction As New RFunction
+    Private clsPositionJitterFunction As New RFunction
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
@@ -117,6 +119,11 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.AddParameterPresentCondition(False, "geom_rug", False)
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkJitter.SetText("Jitter")
+        ucrChkJitter.AddParameterPresentCondition(True, "  geom_jitter")
+        ucrChkJitter.AddParameterPresentCondition(False, "  geom_jitter", False)
+        ucrChkJitter.AddToLinkedControls({ucrNudHeigth, ucrNudWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.40")
+
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
         ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
                                        strRObjectFormat:=RObjectFormat.Image)
@@ -128,6 +135,18 @@ Public Class dlgScatterPlot
         ucrNudSize.SetParameter(New RParameter("size", 0))
         ucrNudSize.Increment = 0.1
         ucrNudSize.DecimalPlaces = 1
+
+        ucrNudHeigth.SetParameter(New RParameter("height", 5))
+        ucrNudHeigth.Maximum = 0.5
+        ucrNudHeigth.Minimum = 0.00
+        ucrNudHeigth.Increment = 0.01
+        ucrNudHeigth.DecimalPlaces = 2
+
+        ucrNudWidth.SetParameter(New RParameter("width", 6))
+        ucrNudWidth.Maximum = 0.5
+        ucrNudWidth.Minimum = 0.00
+        ucrNudWidth.Increment = 0.01
+        ucrNudWidth.DecimalPlaces = 2
 
         ucrInputSides.SetParameter(New RParameter("sides", 1))
         dctSidesOptions.Add("Bottom and left", Chr(34) & "bl" & Chr(34))
@@ -149,6 +168,8 @@ Public Class dlgScatterPlot
         ucrInputSides.SetDropDownStyleAsNonEditable()
 
         ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrNudWidth.SetLinkedDisplayControl(lblWidth)
+        ucrNudHeigth.SetLinkedDisplayControl(lblHeith)
         ucrInputSides.SetLinkedDisplayControl(lblSides)
     End Sub
 
@@ -160,6 +181,8 @@ Public Class dlgScatterPlot
         clsRaesFunction = New RFunction
         clsGeomSmoothFunction = New RFunction
         clsGeomRugFunction = New RFunction
+        clsGeomJitterFunction = New RFunction
+        clsPositionJitterFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
@@ -195,6 +218,14 @@ Public Class dlgScatterPlot
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("size", 0.5, iPosition:=0)
+
+        clsPositionJitterFunction.SetRCommand("position_jitter")
+        clsPositionJitterFunction.AddParameter("width", 0.4, iPosition:=0)
+        clsPositionJitterFunction.AddParameter("height", 0.4, iPosition:=1)
+
+        clsGeomJitterFunction.SetPackageName("ggplot2")
+        clsGeomJitterFunction.SetRCommand("geom_jitter")
+        clsGeomJitterFunction.AddParameter("position", clsRFunctionParameter:=clsPositionJitterFunction, iPosition:=0)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -239,6 +270,11 @@ Public Class dlgScatterPlot
         ucrChkWithSE.SetRCode(clsGeomSmoothFunction, bReset)
         ucrChkAddRugPlot.SetRCode(clsBaseOperator, bReset)
         ucrNudSize.SetRCode(clsGeomRugFunction, bReset)
+        If bReset Then
+            ucrChkJitter.SetRCode(clsGeomJitterFunction, bReset)
+        End If
+        ucrNudHeigth.SetRCode(clsPositionJitterFunction, bReset)
+        ucrNudWidth.SetRCode(clsPositionJitterFunction, bReset)
         ucrInputSides.SetRCode(clsGeomRugFunction, bReset)
     End Sub
 
@@ -354,5 +390,17 @@ Public Class dlgScatterPlot
             clsBaseOperator.AddParameter(strGeomTextRepelParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
         End If
         toolStripMenuItemTextrepelOptions.Enabled = Not ucrReceiverLabel.IsEmpty
+    End Sub
+
+    Private Sub ucrChkJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkJitter.ControlValueChanged
+        If ucrChkJitter.Checked Then
+            clsPositionJitterFunction.AddParameter("width", ucrNudWidth.GetText, iPosition:=0)
+            clsPositionJitterFunction.AddParameter("height", ucrNudHeigth.GetText, iPosition:=1)
+            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitterFunction, iPosition:=2)
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
+        Else
+            clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRScatterGeomFunction, iPosition:=2)
+            clsBaseOperator.RemoveParameterByName("geom_jitter")
+        End If
     End Sub
 End Class
