@@ -139,11 +139,7 @@ Public Class ucrReceiverExpression
     End Sub
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String
-        If bWithQuotes Then
-            Return Chr(34) & cboExpression.Text & Chr(34)
-        Else
-            Return cboExpression.Text
-        End If
+        Return If(bWithQuotes, strQuotes & cboExpression.Text & strQuotes, cboExpression.Text)
     End Function
 
     Private Sub cboExpression_GotFocus(sender As Object, e As EventArgs) Handles cboExpression.GotFocus
