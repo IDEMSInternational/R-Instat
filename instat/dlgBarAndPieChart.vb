@@ -976,7 +976,7 @@ Public Class dlgBarAndPieChart
             If ucrChkLollipop.Checked Then
                 clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomLollipopAesFunction, iPosition:=1)
                 If ucrChkAddLabelsText.Checked Then
-                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextAesFunction, iPosition:=1)
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=1)
                 End If
                 clsBaseOperator.AddParameter("geom_lollipop", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
                 clsBaseOperator.RemoveParameterByName("geom_bar")
@@ -987,27 +987,27 @@ Public Class dlgBarAndPieChart
                 clsRggplotFunction.RemoveParameterByName("mapping")
                 clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
                 If ucrChkAddLabelsText.Checked Then
-                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextAesFunction, iPosition:=1)
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=1)
                 End If
             Else
                 If ucrVariablesAsFactorForBarChart.IsEmpty Then
                     clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-                    clsTextAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+                    ' clsTextAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 Else
-                    clsTextAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+                    ' clsTextAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
                 End If
                 If ucrReceiverByFactor.IsEmpty Then
                     clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
-                    clsTextAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
+                    ' clsTextAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
                 Else
                     clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
-                    clsTextAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
+                    ' clsTextAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                 End If
                 clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
                 clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
                 clsRgeomBarFunction2.RemoveParameterByName("stat")
                 If ucrChkAddLabelsText.Checked Then
-                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsTextAesFunction, iPosition:=1)
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=1)
                 End If
             End If
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
