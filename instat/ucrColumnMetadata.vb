@@ -166,7 +166,7 @@ Public Class ucrColumnMetadata
         Dim clsDeleteLabelsFunction As New RFunction
 
         If strColumnName = strLabelsLabel Then
-            If MsgBox("This will delete the selected label(s) And Replace Then With (NA)." &
+            If MsgBox("This will delete the selected label(s) and replace them with (NA)." &
                                 Environment.NewLine & "Continue?",
                                 MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
 
