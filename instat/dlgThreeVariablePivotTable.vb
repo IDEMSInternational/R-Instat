@@ -307,7 +307,6 @@ Public Class dlgThreeVariablePivotTable
 
                 ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
                 ucrReceiverAdditionalRowFactor.bAutoFill = False
-                ucrChkNumericVariable.Checked = False
             Case PivotMode.Climatic
                 Dim strMonthCol As String
                 Dim strDataFrame As String
