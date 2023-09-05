@@ -43,12 +43,12 @@ Public Class dlgScatterPlot
     Private clsAnnotateFunction As New RFunction
     Private clsGeomRugFunction As New RFunction
     Private clsGeomJitterFunction As New RFunction
-    Private clsPositionJitterFunction As New RFunction
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
     Private strGeomTextRepelParameterName As String = "geom_text_repel"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName, strGeomTextRepelParameterName}
+    Private strGeomJitterParameterName As String = "geom_jitter"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strGeomJitterParameterName, strGeomSmoothParameterName, strGeomTextRepelParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -182,7 +182,6 @@ Public Class dlgScatterPlot
         clsGeomSmoothFunction = New RFunction
         clsGeomRugFunction = New RFunction
         clsGeomJitterFunction = New RFunction
-        clsPositionJitterFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
@@ -195,6 +194,7 @@ Public Class dlgScatterPlot
         toolStripMenuItemRugOptions.Enabled = False
         toolStripMenuItemSmoothOptions.Enabled = False
         toolStripMenuItemTextrepelOptions.Enabled = False
+        toolStripMenuItemJitterOptions.Enabled = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -219,13 +219,10 @@ Public Class dlgScatterPlot
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("size", 0.5, iPosition:=0)
 
-        clsPositionJitterFunction.SetRCommand("position_jitter")
-        clsPositionJitterFunction.AddParameter("width", 0.4, iPosition:=0)
-        clsPositionJitterFunction.AddParameter("height", 0.4, iPosition:=1)
-
         clsGeomJitterFunction.SetPackageName("ggplot2")
         clsGeomJitterFunction.SetRCommand("geom_jitter")
-        clsGeomJitterFunction.AddParameter("position", clsRFunctionParameter:=clsPositionJitterFunction, iPosition:=0)
+        clsGeomJitterFunction.AddParameter("width", 0.4, iPosition:=0)
+        clsGeomJitterFunction.AddParameter("height", 0.4, iPosition:=1)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -271,10 +268,10 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.SetRCode(clsBaseOperator, bReset)
         ucrNudSize.SetRCode(clsGeomRugFunction, bReset)
         If bReset Then
-            ucrChkJitter.SetRCode(clsGeomJitterFunction, bReset)
+            ucrChkJitter.SetRCode(clsBaseOperator, bReset)
         End If
-        ucrNudHeigth.SetRCode(clsPositionJitterFunction, bReset)
-        ucrNudWidth.SetRCode(clsPositionJitterFunction, bReset)
+        ucrNudHeigth.SetRCode(clsGeomJitterFunction, bReset)
+        ucrNudWidth.SetRCode(clsGeomJitterFunction, bReset)
         ucrInputSides.SetRCode(clsGeomRugFunction, bReset)
     End Sub
 
@@ -311,6 +308,19 @@ Public Class dlgScatterPlot
         toolStripMenuItemRugOptions.Enabled = ucrChkAddRugPlot.Checked
     End Sub
 
+    Private Sub ucrChkJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkJitter.ControlValueChanged
+        If ucrChkJitter.Checked Then
+            clsGeomJitterFunction.AddParameter("width", ucrNudWidth.GetText, iPosition:=0)
+            clsGeomJitterFunction.AddParameter("height", ucrNudHeigth.GetText, iPosition:=1)
+            clsBaseOperator.AddParameter(strGeomJitterParameterName, clsRFunctionParameter:=clsGeomJitterFunction, iPosition:=2)
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
+        Else
+            clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRScatterGeomFunction, iPosition:=2)
+            clsBaseOperator.RemoveParameterByName(strGeomJitterParameterName)
+        End If
+        toolStripMenuItemJitterOptions.Enabled = ucrChkJitter.Checked
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction,
                           clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
@@ -338,6 +348,10 @@ Public Class dlgScatterPlot
 
     Private Sub toolStripMenuItemTextrepelOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextrepelOptions.Click
         EnableDisableOptions(clsLabelFunction)
+    End Sub
+
+    Private Sub toolStripMenuItemJitterOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemJitterOptions.Click
+        EnableDisableOptions(clsGeomJitterFunction)
     End Sub
 
     Private Sub EnableDisableOptions(clsTempFunction As RFunction)
@@ -390,17 +404,5 @@ Public Class dlgScatterPlot
             clsBaseOperator.AddParameter(strGeomTextRepelParameterName, clsRFunctionParameter:=clsLabelFunction, iPosition:=3)
         End If
         toolStripMenuItemTextrepelOptions.Enabled = Not ucrReceiverLabel.IsEmpty
-    End Sub
-
-    Private Sub ucrChkJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkJitter.ControlValueChanged
-        If ucrChkJitter.Checked Then
-            clsPositionJitterFunction.AddParameter("width", ucrNudWidth.GetText, iPosition:=0)
-            clsPositionJitterFunction.AddParameter("height", ucrNudHeigth.GetText, iPosition:=1)
-            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitterFunction, iPosition:=2)
-            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
-        Else
-            clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRScatterGeomFunction, iPosition:=2)
-            clsBaseOperator.RemoveParameterByName("geom_jitter")
-        End If
     End Sub
 End Class
