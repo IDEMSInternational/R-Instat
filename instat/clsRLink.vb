@@ -251,6 +251,8 @@ Public Class RLink
     Public Function GetRSetupScript() As String
         Dim clsSetWd As New RFunction
         Dim clsSource As New RFunction
+        Dim clsCommands As New RFunction
+        Dim clsComments As New RFunction
         Dim strScript As String = ""
 
         clsSetWd.SetRCommand("setwd")
@@ -258,8 +260,27 @@ Public Class RLink
         clsSource.SetRCommand("source")
         clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
 
+        clsCommands.SetRCommand("R commands")
+        'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
+        If frmMain.mnuShowRCommand.Checked Then
+            clsCommands.AddParameter("R.commands.displayed.in.the.output.window", "TRUE")
+        Else
+            clsCommands.AddParameter("R.commands.displayed.in.the.output.window", "FALSE")
+        End If
+
+        clsComments.SetRCommand("Include Comments")
+        'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
+        'add "Comments.from.dialogs.displayed.in.the.output.window" as options parameter of its been changed
+        If frmMain.mnuIncludeComments.Checked Then
+            clsComments.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "TRUE")
+        Else
+            clsComments.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "FALSE")
+        End If
+
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
         strScript = strScript & clsSource.ToScript() & Environment.NewLine
+        strScript = strScript & clsCommands.ToScript() & Environment.NewLine
+        strScript = strScript & clsComments.ToScript() & Environment.NewLine
         strScript = strScript & GetCreateNewDatabookObjectRScript() & Environment.NewLine
 
         Return strScript
