@@ -140,7 +140,7 @@ Public Class dlgTransposeColumns
         ClearSelector()
         If Not ucrReceiverColumnsToTranspose.IsEmpty Then
             '-------------------------
-            'todo. this cod block below requires more refactoring.
+            'todo. this code block below requires more refactoring.
             'it should use the selector functions for adding items instead of accessing the selector controls
             Dim arrItems As String() = ucrReceiverColumnsToTranspose.GetVariableNamesList(False)
             If arrItems.Count > 1 Then
