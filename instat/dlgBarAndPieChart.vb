@@ -936,6 +936,9 @@ Public Class dlgBarAndPieChart
         clsPieAesFunction.RemoveParameterByName("fill")
         clsRggplotFunction.RemoveParameterByName("mapping")
         clsRggplotFunction.RemoveParameterByName("aes")
+        clsGeomLollipopAesFunction.RemoveParameterByName("x")
+        clsGeomLollipopAesFunction.RemoveParameterByName("y")
+        clsGeomLollipopAesFunction.RemoveParameterByName("fill")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
