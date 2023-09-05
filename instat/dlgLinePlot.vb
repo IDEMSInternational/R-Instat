@@ -62,10 +62,8 @@ Public Class dlgLinePlot
     Private clsGeomCrossbarFunction As New RFunction
     Private clsGeomErrorbarFunction As New RFunction
     Private clsGeomPointrangeFunction As New RFunction
-    Private clsLevelsFunction As New RFunction
     Private clsYScaleDiscreteFunction As New RFunction
     Private clsXScaleDiscreteFunction As New RFunction
-    Private clsAttachFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -479,8 +477,6 @@ Public Class dlgLinePlot
         clsGeomLinerangeFunction = New RFunction
         clsGeomPointrangeFunction = New RFunction
         clsGeomRibbonFunction = New RFunction
-        clsLevelsFunction = New RFunction
-        clsAttachFunction = New RFunction
 
         ucrLinePlotSelector.Reset()
         ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
@@ -518,11 +514,6 @@ Public Class dlgLinePlot
         clsGgSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSlopeThemeFunction.SetRCommand("slopegraph_theme")
-
-        clsAttachFunction.SetRCommand("attach")
-        clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-
-        clsLevelsFunction.SetRCommand("levels")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -595,7 +586,6 @@ Public Class dlgLinePlot
         clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)

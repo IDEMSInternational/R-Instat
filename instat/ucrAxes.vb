@@ -695,10 +695,11 @@ Public Class ucrAxes
     End Sub
 
     Private Sub AddRemoveDiscreteXYScales()
+        Dim strScaleParam As String = $"scale_{strAxis}_discrete"
         If clsXYScaleDiscreteFunction.clsParameters.Count > 0 Then
-            clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "discrete", clsRFunctionParameter:=clsXYScaleDiscreteFunction)
+            clsBaseOperator.AddParameter(strScaleParam, clsRFunctionParameter:=clsXYScaleDiscreteFunction)
         Else
-            clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "discrete")
+            clsBaseOperator.RemoveParameterByName(strScaleParam)
         End If
     End Sub
 
@@ -743,8 +744,10 @@ Public Class ucrAxes
             grpScales.Show()
             grpScaleDiscrete.Hide()
             grpMajorBreaksDiscrete.Hide()
+            grpSecondAxis.Show()
         ElseIf strAxisType.ToLower = "discrete" Then
             'show discrete panels
+            grpSecondAxis.Hide()
             grpScaleDiscrete.Show()
             grpScaleXDate.Hide()
             grpMajorBreaks.Hide()
@@ -759,6 +762,7 @@ Public Class ucrAxes
             grpScales.Hide()
             grpScaleDiscrete.Hide()
             grpMajorBreaksDiscrete.Hide()
+            grpSecondAxis.Show()
         End If
     End Sub
 

@@ -114,6 +114,11 @@ Partial Class ucrAxes
         Me.ucrChkSecondaryAxis = New instat.ucrCheck()
         Me.ucrChkOffset = New instat.ucrCheck()
         Me.grpScaleDiscrete = New System.Windows.Forms.GroupBox()
+        Me.ucrNudWrap = New instat.ucrNud()
+        Me.rdoAbbr = New System.Windows.Forms.RadioButton()
+        Me.rdoDodge = New System.Windows.Forms.RadioButton()
+        Me.rdoWrap = New System.Windows.Forms.RadioButton()
+        Me.ucrChkLongLabels = New instat.ucrCheck()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.ucrNudTo = New instat.ucrNud()
@@ -127,6 +132,7 @@ Partial Class ucrAxes
         Me.ucrChkNaValueDiscrete = New instat.ucrCheck()
         Me.ucrInputDropUnusedLevels = New instat.ucrInputComboBox()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
+        Me.ucrPnlLongLabels = New instat.UcrPanel()
         Me.grpMajorBreaksDiscrete = New System.Windows.Forms.GroupBox()
         Me.ucrChkBreakDiscret = New instat.ucrCheck()
         Me.ucrInputBreaksDiscrete = New instat.ucrInputTextBox()
@@ -135,12 +141,6 @@ Partial Class ucrAxes
         Me.ucrChkLabelsDiscrete = New instat.ucrCheck()
         Me.ucrInputMajorBreaksLabelsDiscrete = New instat.ucrInputTextBox()
         Me.UcrPanel1 = New instat.UcrPanel()
-        Me.ucrChkLongLabels = New instat.ucrCheck()
-        Me.rdoWrap = New System.Windows.Forms.RadioButton()
-        Me.rdoDodge = New System.Windows.Forms.RadioButton()
-        Me.rdoAbbr = New System.Windows.Forms.RadioButton()
-        Me.ucrNudWrap = New instat.ucrNud()
-        Me.ucrPnlLongLabels = New instat.UcrPanel()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -1006,6 +1006,61 @@ Partial Class ucrAxes
         Me.grpScaleDiscrete.TabStop = False
         Me.grpScaleDiscrete.Text = "Scales"
         '
+        'ucrNudWrap
+        '
+        Me.ucrNudWrap.AutoSize = True
+        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWrap.Location = New System.Drawing.Point(226, 186)
+        Me.ucrNudWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWrap.Name = "ucrNudWrap"
+        Me.ucrNudWrap.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWrap.TabIndex = 39
+        Me.ucrNudWrap.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoAbbr
+        '
+        Me.rdoAbbr.AutoSize = True
+        Me.rdoAbbr.Location = New System.Drawing.Point(15, 186)
+        Me.rdoAbbr.Name = "rdoAbbr"
+        Me.rdoAbbr.Size = New System.Drawing.Size(47, 17)
+        Me.rdoAbbr.TabIndex = 38
+        Me.rdoAbbr.TabStop = True
+        Me.rdoAbbr.Text = "Abbr"
+        Me.rdoAbbr.UseVisualStyleBackColor = True
+        '
+        'rdoDodge
+        '
+        Me.rdoDodge.AutoSize = True
+        Me.rdoDodge.Location = New System.Drawing.Point(85, 186)
+        Me.rdoDodge.Name = "rdoDodge"
+        Me.rdoDodge.Size = New System.Drawing.Size(57, 17)
+        Me.rdoDodge.TabIndex = 37
+        Me.rdoDodge.TabStop = True
+        Me.rdoDodge.Text = "Dodge"
+        Me.rdoDodge.UseVisualStyleBackColor = True
+        '
+        'rdoWrap
+        '
+        Me.rdoWrap.AutoSize = True
+        Me.rdoWrap.Location = New System.Drawing.Point(154, 186)
+        Me.rdoWrap.Name = "rdoWrap"
+        Me.rdoWrap.Size = New System.Drawing.Size(51, 17)
+        Me.rdoWrap.TabIndex = 36
+        Me.rdoWrap.TabStop = True
+        Me.rdoWrap.Text = "Wrap"
+        Me.rdoWrap.UseVisualStyleBackColor = True
+        '
+        'ucrChkLongLabels
+        '
+        Me.ucrChkLongLabels.AutoSize = True
+        Me.ucrChkLongLabels.Checked = False
+        Me.ucrChkLongLabels.Location = New System.Drawing.Point(6, 164)
+        Me.ucrChkLongLabels.Name = "ucrChkLongLabels"
+        Me.ucrChkLongLabels.Size = New System.Drawing.Size(202, 23)
+        Me.ucrChkLongLabels.TabIndex = 35
+        '
         'lblTo
         '
         Me.lblTo.AutoSize = True
@@ -1054,7 +1109,7 @@ Partial Class ucrAxes
         '
         Me.ucrChkLimitsFrom.AutoSize = True
         Me.ucrChkLimitsFrom.Checked = False
-        Me.ucrChkLimitsFrom.Location = New System.Drawing.Point(7, 22)
+        Me.ucrChkLimitsFrom.Location = New System.Drawing.Point(6, 22)
         Me.ucrChkLimitsFrom.Name = "ucrChkLimitsFrom"
         Me.ucrChkLimitsFrom.Size = New System.Drawing.Size(120, 23)
         Me.ucrChkLimitsFrom.TabIndex = 30
@@ -1139,6 +1194,14 @@ Partial Class ucrAxes
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(202, 23)
         Me.ucrChkDropUnusedLevels.TabIndex = 28
         '
+        'ucrPnlLongLabels
+        '
+        Me.ucrPnlLongLabels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlLongLabels.Location = New System.Drawing.Point(9, 185)
+        Me.ucrPnlLongLabels.Name = "ucrPnlLongLabels"
+        Me.ucrPnlLongLabels.Size = New System.Drawing.Size(271, 23)
+        Me.ucrPnlLongLabels.TabIndex = 40
+        '
         'grpMajorBreaksDiscrete
         '
         Me.grpMajorBreaksDiscrete.Controls.Add(Me.ucrChkBreakDiscret)
@@ -1222,69 +1285,6 @@ Partial Class ucrAxes
         Me.UcrPanel1.Name = "UcrPanel1"
         Me.UcrPanel1.Size = New System.Drawing.Size(335, 23)
         Me.UcrPanel1.TabIndex = 18
-        '
-        'ucrChkLongLabels
-        '
-        Me.ucrChkLongLabels.AutoSize = True
-        Me.ucrChkLongLabels.Checked = False
-        Me.ucrChkLongLabels.Location = New System.Drawing.Point(7, 157)
-        Me.ucrChkLongLabels.Name = "ucrChkLongLabels"
-        Me.ucrChkLongLabels.Size = New System.Drawing.Size(202, 23)
-        Me.ucrChkLongLabels.TabIndex = 35
-        '
-        'rdoWrap
-        '
-        Me.rdoWrap.AutoSize = True
-        Me.rdoWrap.Location = New System.Drawing.Point(150, 179)
-        Me.rdoWrap.Name = "rdoWrap"
-        Me.rdoWrap.Size = New System.Drawing.Size(51, 17)
-        Me.rdoWrap.TabIndex = 36
-        Me.rdoWrap.TabStop = True
-        Me.rdoWrap.Text = "Wrap"
-        Me.rdoWrap.UseVisualStyleBackColor = True
-        '
-        'rdoDodge
-        '
-        Me.rdoDodge.AutoSize = True
-        Me.rdoDodge.Location = New System.Drawing.Point(84, 179)
-        Me.rdoDodge.Name = "rdoDodge"
-        Me.rdoDodge.Size = New System.Drawing.Size(57, 17)
-        Me.rdoDodge.TabIndex = 37
-        Me.rdoDodge.TabStop = True
-        Me.rdoDodge.Text = "Dodge"
-        Me.rdoDodge.UseVisualStyleBackColor = True
-        '
-        'rdoAbbr
-        '
-        Me.rdoAbbr.AutoSize = True
-        Me.rdoAbbr.Location = New System.Drawing.Point(13, 179)
-        Me.rdoAbbr.Name = "rdoAbbr"
-        Me.rdoAbbr.Size = New System.Drawing.Size(47, 17)
-        Me.rdoAbbr.TabIndex = 38
-        Me.rdoAbbr.TabStop = True
-        Me.rdoAbbr.Text = "Abbr"
-        Me.rdoAbbr.UseVisualStyleBackColor = True
-        '
-        'ucrNudWrap
-        '
-        Me.ucrNudWrap.AutoSize = True
-        Me.ucrNudWrap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWrap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWrap.Location = New System.Drawing.Point(226, 178)
-        Me.ucrNudWrap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWrap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWrap.Name = "ucrNudWrap"
-        Me.ucrNudWrap.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWrap.TabIndex = 39
-        Me.ucrNudWrap.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlLongLabels
-        '
-        Me.ucrPnlLongLabels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlLongLabels.Location = New System.Drawing.Point(9, 177)
-        Me.ucrPnlLongLabels.Name = "ucrPnlLongLabels"
-        Me.ucrPnlLongLabels.Size = New System.Drawing.Size(271, 23)
-        Me.ucrPnlLongLabels.TabIndex = 40
         '
         'ucrAxes
         '
