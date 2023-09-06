@@ -405,7 +405,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
-        If IsOnlyOneDataframeColumnSeleted() Then
+        If IsOnlyOneDataframeColumnSelected() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedDataFrameColumnAFactor()
             mnuDeleteCol.Text = GetTranslation("Delete Column")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
