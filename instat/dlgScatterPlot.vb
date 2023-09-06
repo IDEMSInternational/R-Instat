@@ -138,13 +138,13 @@ Public Class dlgScatterPlot
 
         ucrNudHeigth.SetParameter(New RParameter("height", 5))
         ucrNudHeigth.Maximum = 0.5
-        ucrNudHeigth.Minimum = 0.00
+        ucrNudHeigth.Minimum = 0
         ucrNudHeigth.Increment = 0.01
         ucrNudHeigth.DecimalPlaces = 2
 
         ucrNudWidth.SetParameter(New RParameter("width", 6))
         ucrNudWidth.Maximum = 0.5
-        ucrNudWidth.Minimum = 0.00
+        ucrNudWidth.Minimum = 0
         ucrNudWidth.Increment = 0.01
         ucrNudWidth.DecimalPlaces = 2
 
