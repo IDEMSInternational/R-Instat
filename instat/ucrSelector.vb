@@ -316,15 +316,6 @@ Public Class ucrSelector
         ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
 
-    'Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
-    'Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
-    '    If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
-    '        lstVariablesInReceivers.Add(New Tuple(Of String, String)(strVariable, strDataFrame))
-    '        If ucrLinkedSelector IsNot Nothing Then
-    '            ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
-    '        End If
-    '    End If
-    'End Sub
 
     'Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
     '    For i As Integer = lstVariablesInReceivers.Count - 1 To 0 Step -1
