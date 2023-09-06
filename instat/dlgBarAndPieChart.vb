@@ -964,7 +964,6 @@ Public Class dlgBarAndPieChart
             If ucrReceiverX.IsEmpty Then
                 clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-                clsRgeomBarFunction.RemoveParameterByName("position")
             End If
             If ucrVariablesAsFactorForBarChart.IsEmpty Then
                 clsBarAesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
@@ -973,6 +972,7 @@ Public Class dlgBarAndPieChart
             If ucrReceiverByFactor.IsEmpty Then
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
+                clsRgeomBarFunction.RemoveParameterByName("position")
             End If
             If ucrChkLollipop.Checked Then
                 clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomLollipopAesFunction, iPosition:=1)
@@ -995,10 +995,10 @@ Public Class dlgBarAndPieChart
                 If ucrReceiverByFactor.IsEmpty Then
                     clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
                     clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=1)
+                    clsRgeomBarFunction.RemoveParameterByName("position")
                 Else
                     clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                     clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
-                    clsRgeomBarFunction.RemoveParameterByName("position")
                 End If
                 clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
                 clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
