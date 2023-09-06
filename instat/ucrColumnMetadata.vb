@@ -342,7 +342,7 @@ Public Class ucrColumnMetadata
         Return selectedDataframeColumns
     End Function
 
-    Private Function IsOnlyOneDataframeColumnSeleted() As Boolean
+    Private Function IsOnlyOneDataframeColumnSelected() As Boolean
         Return _grid.GetSelectedRows().Count = 1
     End Function
 
