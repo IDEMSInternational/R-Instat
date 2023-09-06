@@ -54,7 +54,6 @@ Partial Class dlgHistogram
         Me.lblReorder = New System.Windows.Forms.Label()
         Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
-        Me.ucrChkReverse = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkDisplayAsDotPlot = New instat.ucrCheck()
         Me.ucrChkRidges = New instat.ucrCheck()
@@ -123,7 +122,7 @@ Partial Class dlgHistogram
         'lblfactor
         '
         Me.lblfactor.AutoSize = True
-        Me.lblfactor.Location = New System.Drawing.Point(283, 212)
+        Me.lblfactor.Location = New System.Drawing.Point(283, 154)
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Size = New System.Drawing.Size(85, 13)
         Me.lblfactor.TabIndex = 6
@@ -185,7 +184,7 @@ Partial Class dlgHistogram
         '
         Me.lblReorder.AutoSize = True
         Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReorder.Location = New System.Drawing.Point(284, 332)
+        Me.lblReorder.Location = New System.Drawing.Point(284, 271)
         Me.lblReorder.Name = "lblReorder"
         Me.lblReorder.Size = New System.Drawing.Size(48, 13)
         Me.lblReorder.TabIndex = 44
@@ -197,7 +196,7 @@ Partial Class dlgHistogram
         Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddReorder.GetSetSelectedIndex = -1
         Me.ucrInputAddReorder.IsReadOnly = False
-        Me.ucrInputAddReorder.Location = New System.Drawing.Point(283, 348)
+        Me.ucrInputAddReorder.Location = New System.Drawing.Point(283, 287)
         Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
         Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputAddReorder.TabIndex = 45
@@ -206,24 +205,14 @@ Partial Class dlgHistogram
         '
         Me.ucrVariablesAsFactorforHist.AutoSize = True
         Me.ucrVariablesAsFactorforHist.frmParent = Me
-        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(283, 64)
+        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(283, 63)
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Selector = Nothing
-        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 108)
+        Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 87)
         Me.ucrVariablesAsFactorforHist.strNcFilePath = ""
         Me.ucrVariablesAsFactorforHist.TabIndex = 43
         Me.ucrVariablesAsFactorforHist.ucrSelector = Nothing
         Me.ucrVariablesAsFactorforHist.ucrVariableSelector = Nothing
-        '
-        'ucrChkReverse
-        '
-        Me.ucrChkReverse.AutoSize = True
-        Me.ucrChkReverse.Checked = False
-        Me.ucrChkReverse.Location = New System.Drawing.Point(283, 304)
-        Me.ucrChkReverse.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrChkReverse.Name = "ucrChkReverse"
-        Me.ucrChkReverse.Size = New System.Drawing.Size(126, 23)
-        Me.ucrChkReverse.TabIndex = 42
         '
         'cmdOptions
         '
@@ -242,7 +231,7 @@ Partial Class dlgHistogram
         '
         Me.ucrChkDisplayAsDotPlot.AutoSize = True
         Me.ucrChkDisplayAsDotPlot.Checked = False
-        Me.ucrChkDisplayAsDotPlot.Location = New System.Drawing.Point(283, 256)
+        Me.ucrChkDisplayAsDotPlot.Location = New System.Drawing.Point(282, 214)
         Me.ucrChkDisplayAsDotPlot.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkDisplayAsDotPlot.Name = "ucrChkDisplayAsDotPlot"
         Me.ucrChkDisplayAsDotPlot.Size = New System.Drawing.Size(153, 23)
@@ -252,7 +241,7 @@ Partial Class dlgHistogram
         '
         Me.ucrChkRidges.AutoSize = True
         Me.ucrChkRidges.Checked = False
-        Me.ucrChkRidges.Location = New System.Drawing.Point(283, 256)
+        Me.ucrChkRidges.Location = New System.Drawing.Point(283, 212)
         Me.ucrChkRidges.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkRidges.Name = "ucrChkRidges"
         Me.ucrChkRidges.Size = New System.Drawing.Size(100, 23)
@@ -274,7 +263,7 @@ Partial Class dlgHistogram
         '
         Me.ucrChkPercentages.AutoSize = True
         Me.ucrChkPercentages.Checked = False
-        Me.ucrChkPercentages.Location = New System.Drawing.Point(283, 280)
+        Me.ucrChkPercentages.Location = New System.Drawing.Point(283, 244)
         Me.ucrChkPercentages.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkPercentages.Name = "ucrChkPercentages"
         Me.ucrChkPercentages.Size = New System.Drawing.Size(100, 23)
@@ -283,17 +272,17 @@ Partial Class dlgHistogram
         'ucrSaveHist
         '
         Me.ucrSaveHist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 385)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 363)
         Me.ucrSaveHist.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrSaveHist.Name = "ucrSaveHist"
-        Me.ucrSaveHist.Size = New System.Drawing.Size(322, 24)
+        Me.ucrSaveHist.Size = New System.Drawing.Size(322, 32)
         Me.ucrSaveHist.TabIndex = 13
         '
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.AutoSize = True
         Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(283, 228)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(283, 170)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
@@ -318,7 +307,7 @@ Partial Class dlgHistogram
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 419)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 398)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -338,11 +327,10 @@ Partial Class dlgHistogram
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(448, 476)
+        Me.ClientSize = New System.Drawing.Size(448, 449)
         Me.Controls.Add(Me.ucrInputAddReorder)
         Me.Controls.Add(Me.lblReorder)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
-        Me.Controls.Add(Me.ucrChkReverse)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkDisplayAsDotPlot)
         Me.Controls.Add(Me.ucrChkRidges)
@@ -392,7 +380,6 @@ Partial Class dlgHistogram
     Friend WithEvents toolStripMenuItemDensityRidgesOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemFrequencyPolygonOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemDotOptions As ToolStripMenuItem
-    Friend WithEvents ucrChkReverse As ucrCheck
     Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor
     Friend WithEvents lblReorder As Label
     Friend WithEvents ucrInputAddReorder As ucrInputComboBox

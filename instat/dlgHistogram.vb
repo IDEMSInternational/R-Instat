@@ -45,7 +45,6 @@ Public Class dlgHistogram
     Private clsAnnotateFunction As New RFunction
     Private clsReorderFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
-    Private clsForecatsReverseValue As New RFunction
     Private clsForecatsInfreqValue As New RFunction
     Private clsForecatsInfreq As New RFunction
     Private clsForecatsReverse As New RFunction
@@ -53,6 +52,7 @@ Public Class dlgHistogram
     Private clsDummyRev As New RFunction
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
+    Private ReadOnly strReverse As String = "Reverse"
     Private ReadOnly strNone As String = "None"
 
     'Parameter names for geoms
@@ -129,7 +129,7 @@ Public Class dlgHistogram
         ucrVariablesAsFactorforHist.bWithQuotes = False
         ucrVariablesAsFactorforHist.SetParameterIsString()
 
-        ucrInputAddReorder.SetItems({strAscending, strDescending, strNone})
+        ucrInputAddReorder.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputAddReorder.SetDropDownStyleAsNonEditable()
         ucrInputAddReorder.SetLinkedDisplayControl(lblReorder)
 
@@ -153,7 +153,7 @@ Public Class dlgHistogram
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
         clsGeomTextFunction = New RFunction
-        clsForecatsReverseValue = New RFunction
+        clsForecatsReverse = New RFunction
         clsDummyRev = New RFunction
         clsReorderFunction = New RFunction
         clsForecatsInfreqValue = New RFunction
@@ -200,8 +200,8 @@ Public Class dlgHistogram
         clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
         clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
 
-        clsForecatsReverseValue.SetPackageName("forcats")
-        clsForecatsReverseValue.SetRCommand("fct_rev")
+        clsForecatsReverse.SetPackageName("forcats")
+        clsForecatsReverse.SetRCommand("fct_rev")
 
         clsReorderFunction.SetRCommand("reorder")
 
@@ -254,7 +254,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'Tests when ok can be enabled
-        If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete OrElse ucrFactorReceiver.IsEmpty Then
+        If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -466,10 +466,13 @@ Public Class dlgHistogram
             clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrFactorReceiver.GetVariableNames(False) & ")", iPosition:=0)
             Select Case strChangedTextValue
                 Case strAscending
-                    clsForecatsReverseValue.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                    clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=1)
+                    clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                    clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=1)
                 Case strDescending
                     clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=1)
+                Case strReverse
+                    clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+                    clsHistAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
             End Select
         End If
     End Sub
