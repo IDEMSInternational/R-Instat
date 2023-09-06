@@ -120,8 +120,8 @@ Public Class dlgScatterPlot
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkJitter.SetText("Jitter")
-        ucrChkJitter.AddParameterPresentCondition(True, "  geom_jitter")
-        ucrChkJitter.AddParameterPresentCondition(False, "  geom_jitter", False)
+        ucrChkJitter.AddParameterPresentCondition(True, "geom_jitter")
+        ucrChkJitter.AddParameterPresentCondition(False, "geom_jitter", False)
         ucrChkJitter.AddToLinkedControls({ucrNudHeigth, ucrNudWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.40")
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
