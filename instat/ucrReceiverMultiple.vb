@@ -289,7 +289,7 @@ Public Class ucrReceiverMultiple
         Return lstColumnFunctions
     End Function
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strTempBuilder As New Text.StringBuilder
         Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
 

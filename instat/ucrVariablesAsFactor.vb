@@ -62,7 +62,7 @@ Public Class ucrVariablesAsFactor
         OnSelectionChanged()
     End Sub
 
-    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
         'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
         Dim strVariables As String = ""

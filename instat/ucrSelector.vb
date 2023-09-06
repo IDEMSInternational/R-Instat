@@ -202,7 +202,6 @@ Public Class ucrSelector
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
-        'lstVariablesInReceivers.Clear()
         LoadList()
     End Sub
 
@@ -317,26 +316,7 @@ Public Class ucrSelector
         ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
 
-    'Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
-    'Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
-    '    If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
-    '        lstVariablesInReceivers.Add(New Tuple(Of String, String)(strVariable, strDataFrame))
-    '        If ucrLinkedSelector IsNot Nothing Then
-    '            ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
-    '        End If
-    '    End If
-    'End Sub
 
-    'Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
-    '    For i As Integer = lstVariablesInReceivers.Count - 1 To 0 Step -1
-    '        If lstVariablesInReceivers(i).Item1 = strVariable AndAlso (strDataFrame = "" OrElse lstVariablesInReceivers(i).Item2 = strDataFrame) Then
-    '            lstVariablesInReceivers.RemoveAt(i)
-    '        End If
-    '    Next
-    '    If ucrLinkedSelector IsNot Nothing Then
-    '        ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
-    '    End If
-    'End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
