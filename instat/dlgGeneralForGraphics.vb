@@ -214,6 +214,7 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         'TestOKEnabled()
+        VariableXType()
     End Sub
 
     Private Sub cmdFacets_Click(sender As Object, e As EventArgs) Handles cmdFacets.Click
