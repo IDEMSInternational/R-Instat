@@ -317,16 +317,6 @@ Public Class ucrSelector
     End Sub
 
 
-    'Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
-    '    For i As Integer = lstVariablesInReceivers.Count - 1 To 0 Step -1
-    '        If lstVariablesInReceivers(i).Item1 = strVariable AndAlso (strDataFrame = "" OrElse lstVariablesInReceivers(i).Item2 = strDataFrame) Then
-    '            lstVariablesInReceivers.RemoveAt(i)
-    '        End If
-    '    Next
-    '    If ucrLinkedSelector IsNot Nothing Then
-    '        ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
-    '    End If
-    'End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
