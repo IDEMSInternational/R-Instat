@@ -558,16 +558,21 @@ Public Class ucrScript
         End If
 
         'TODO
-        'Dim rScript As New clsRScript(clsScriptActive.Text)
-        'Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
-        'insert carriage return to ensure that statement starts on new line
-        'Dim strStatement As String = vbCrLf & rScript.GetCurrentStatement(iCaretPos)
-        'Dim iNextStatementPos As Integer = rScript.GetNextStatementPos(iCaretPos)
-        Dim clsRScript As New clsRScript(clsScriptActive.Lines(clsScriptActive.CurrentLine).Text)
-        Dim clsRStatement As clsRStatement = clsRScript.lstRStatements(0)
-        Dim iNextStatementPos As Integer = If(clsScriptActive.CurrentLine = clsScriptActive.Lines.Count - 1,
-                clsScriptActive.TextLength,
-                clsScriptActive.Lines(clsScriptActive.CurrentLine + 1).Position)
+        Dim clsRScript As New clsRScript(clsScriptActive.Text)
+        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+        clsRScript.
+        Dim lstScriptPos = clsRScript.dctRStatements.Keys
+        Assert.Equal(4, lstScriptPos.Count)
+        Assert.Equal(0, lstScriptPos(0))
+
+
+        Dim strStatement As String = vbCrLf & clsRScript.GetCurrentStatement(iCaretPos)
+        Dim iNextStatementPos As Integer = clsRScript.GetNextStatementPos(iCaretPos)
+        'Dim clsRScript As New clsRScript(clsScriptActive.Lines(clsScriptActive.CurrentLine).Text)
+        'Dim clsRStatement As clsRStatement = clsRScript.lstRStatements(0)
+        'Dim iNextStatementPos As Integer = If(clsScriptActive.CurrentLine = clsScriptActive.Lines.Count - 1,
+        '        clsScriptActive.TextLength,
+        '        clsScriptActive.Lines(clsScriptActive.CurrentLine + 1).Position)
 
         frmMain.clsRLink.RunRStatement(clsRStatement)
 
