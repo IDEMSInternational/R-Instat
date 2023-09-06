@@ -202,7 +202,6 @@ Public Class ucrSelector
 
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
-        'lstVariablesInReceivers.Clear()
         LoadList()
     End Sub
 
