@@ -22,9 +22,6 @@ Public Class dlgRowNamesOrNumbers
     Private clsGetRowNamesFunction As New RFunction
     Private clsSetRowNamesFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
-    Private clsAsBaseFunction As New RFunction
-    Private clsAsSapplyFunction As New RFunction
-    Private clsAsRownamesFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -107,9 +104,6 @@ Public Class dlgRowNamesOrNumbers
         clsAddKeyFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSetRowNamesFunction = New RFunction
-        clsAsBaseFunction = New RFunction
-        clsAsSapplyFunction = New RFunction
-        clsAsRownamesFunction = New RFunction
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
@@ -118,23 +112,12 @@ Public Class dlgRowNamesOrNumbers
         clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
         clsDummyFunction.AddParameter("add_key", "TRUE", iPosition:=2)
 
-        clsAsRownamesFunction.SetRCommand("rownames")
-        clsAsRownamesFunction.AddParameter("data", ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bIncludeArgumentName:=False)
-
-        clsAsSapplyFunction.SetRCommand("sapply")
-        clsAsSapplyFunction.AddParameter("x", clsRFunctionParameter:=clsAsRownamesFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsAsSapplyFunction.AddParameter("numeric", "is.numeric", bIncludeArgumentName:=False, iPosition:=1)
-
-        clsAsBaseFunction.SetRCommand("all")
-        clsAsBaseFunction.AddParameter("all", clsRFunctionParameter:=clsAsSapplyFunction, bIncludeArgumentName:=False, iPosition:=0)
-
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
 
         clsGetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
         clsGetRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
 
         clsSetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAsBaseFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
     End Sub
 
