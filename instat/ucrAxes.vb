@@ -37,7 +37,6 @@ Public Class ucrAxes
     Public clsRightBracketOperator As New ROperator
     Public clsSequenceOperator As New ROperator
     Public clsLevelsFunction As New RFunction
-    Public clsGetVariableFromDataFunction As New RFunction
 
     Public clsXYSecondaryAxisFunction As New RFunction
     Public clsGuideAxisFunction As New RFunction
@@ -51,6 +50,7 @@ Public Class ucrAxes
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
+    Private strScaleParam As String = $"scale_{strAxis}_discrete"
 
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
@@ -482,7 +482,7 @@ Public Class ucrAxes
         clsLabelWrapFunction.SetPackageName("scales")
         clsLabelWrapFunction.SetRCommand("label_wrap")
 
-        clsGetVariableFromDataFunction = New RFunction
+        Dim clsGetVariableFromDataFunction As New RFunction
         clsGetVariableFromDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetVariableFromDataFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
         clsGetVariableFromDataFunction.AddParameter("col_name", Chr(34) & strVariable & Chr(34), iPosition:=1)
@@ -493,7 +493,6 @@ Public Class ucrAxes
 
         If Not String.IsNullOrEmpty(strVariable) Then
             clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariableFromDataFunction, bIncludeArgumentName:=False)
-            clsLeftBracketOperator.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction, iPosition:=0)
         End If
 
         clsLeftBracketOperator.SetOperation("[")
@@ -511,6 +510,7 @@ Public Class ucrAxes
 
         clsConcatenateFunction.SetRCommand("c")
         clsConcatenateFunction.AddParameter("x", clsROperatorParameter:=clsSequenceOperator, bIncludeArgumentName:=False)
+
 
         'TODO these could be passed through as a dictionary of scale functions instead of searched
         If clsXYScaleContinuousFunction.ContainsParameter("limits") AndAlso clsXYScaleContinuousFunction.GetParameter("limits").clsArgumentCodeStructure IsNot Nothing Then
@@ -533,20 +533,6 @@ Public Class ucrAxes
         Else
             clsMajorBreaksSeqFunction = New RFunction
             clsMajorBreaksSeqFunction.SetRCommand("seq")
-        End If
-
-        If clsXYScaleDiscreteFunction.ContainsParameter("breaks") Then
-            clsTempBreaksParam = clsXYScaleDiscreteFunction.GetParameter("breaks")
-            If clsTempBreaksParam.clsArgumentCodeStructure IsNot Nothing Then
-                clsMajorBreaksSeqDiscreteFunction = clsTempBreaksParam.clsArgumentCodeStructure
-            Else
-                'TODO move to ggplot defaults
-                clsMajorBreaksSeqDiscreteFunction = New RFunction
-                clsMajorBreaksSeqDiscreteFunction.SetRCommand("seq")
-            End If
-        Else
-            clsMajorBreaksSeqDiscreteFunction = New RFunction
-            clsMajorBreaksSeqDiscreteFunction.SetRCommand("seq")
         End If
 
         If clsXYScaleContinuousFunction.ContainsParameter("minor_breaks") Then
@@ -695,7 +681,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub AddRemoveDiscreteXYScales()
-        Dim strScaleParam As String = $"scale_{strAxis}_discrete"
+        'Dim strScaleParam As String = $"scale_{strAxis}_discrete"
         If clsXYScaleDiscreteFunction.clsParameters.Count > 0 Then
             clsBaseOperator.AddParameter(strScaleParam, clsRFunctionParameter:=clsXYScaleDiscreteFunction)
         Else
@@ -930,26 +916,25 @@ Public Class ucrAxes
         SetBreaksDiscrete()
     End Sub
 
-    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
-        AddRemoveLimits()
-    End Sub
-
     Private Sub AddRemoveLimits()
         If ucrChkLimitsFrom.Checked Then
             If Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
                 clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
                 clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
                 clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
+                'clsBaseOperator.AddParameter(strScaleParam, clsRFunctionParameter:=clsXYScaleDiscreteFunction)
             Else
                 clsLeftBracketOperator.RemoveParameterByName("right")
                 clsRightBracketOperator.RemoveParameterByName("left")
                 clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
+                'clsBaseOperator.RemoveParameterByName(strScaleParam)
             End If
-        Else
-            clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
         AddRemoveDiscreteXYScales()
-        AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
+        AddRemoveLimits()
     End Sub
 
     Private Sub SetNameSecondaryAxis()
