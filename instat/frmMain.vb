@@ -227,13 +227,13 @@ Public Class frmMain
 
         Try
             ' Download the version information file from the website
-            strLatestVersion = webClient.DownloadString("https://n-thony.github.io/r-instat-web-site/version.txt")
+            strLatestVersion = webClient.DownloadString("https://r-instat.org/version.txt")
 
             ' Compare with the current version of your app
             If strLatestVersion > My.Application.Info.Version.ToString() AndAlso
-                clsInstatOptions.bRemindLaterOption Then
+                Not clsInstatOptions.bRemindLaterOption Then
                 ' New version available, show a notification
-                Dim result As DialogResult = MessageBox.Show("A new version is available! Visit the website to download it. \n Remind me later?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                Dim result As DialogResult = MessageBox.Show("A new version is available! Visit the website to download it. Remind me later?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 clsInstatOptions.SetRemindLaterOption(result = DialogResult.Yes)
             End If
         Catch ex As Exception
