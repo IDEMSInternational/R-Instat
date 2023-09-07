@@ -62,8 +62,6 @@ Public Class dlgLinePlot
     Private clsGeomCrossbarFunction As New RFunction
     Private clsGeomErrorbarFunction As New RFunction
     Private clsGeomPointrangeFunction As New RFunction
-    Private clsYScaleDiscreteFunction As New RFunction
-    Private clsXScaleDiscreteFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
