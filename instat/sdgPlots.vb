@@ -649,7 +649,7 @@ Public Class sdgPlots
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewXScaleDiscreteFunction As RFunction = Nothing, Optional clsNewYScaleDiscreteFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
@@ -676,9 +676,7 @@ Public Class sdgPlots
         clsXLabFunction = clsNewXLabsTitleFunction
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
-        clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
-        clsXScaleDiscreteFunction = clsNewXScaleDiscreteFunction
-        clsYScaleDiscreteFunction = clsNewYScaleDiscreteFunction
+        ' clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
@@ -737,8 +735,6 @@ Public Class sdgPlots
         If Not clsBaseOperator.ContainsParameter("theme_name") Then
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         End If
-        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone
-        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone
 
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
@@ -783,12 +779,10 @@ Public Class sdgPlots
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
 
-        Dim strVariable As String = ""
-
 
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsXScaleDiscreteFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewXYScaleDiscreteFunction:=clsYScaleDiscreteFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab

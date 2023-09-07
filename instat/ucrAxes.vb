@@ -421,7 +421,7 @@ Public Class ucrAxes
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
         clsXYScaleDateFunction = clsNewXYScaleDateFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
-        clsXYScaleDiscreteFunction = clsNewXYScaleDiscreteFunction
+        'clsXYScaleDiscreteFunction = clsNewXYScaleDiscreteFunction
         clsGlobalAesFunction = clsNewGlobalAesFunction
 
         bRCodeSet = False
@@ -439,6 +439,10 @@ Public Class ucrAxes
             bIsX = False
             strAxis = "y"
         End If
+
+        clsXYScaleDiscreteFunction = New RFunction
+        clsXYScaleDiscreteFunction.SetPackageName("ggplot2")
+        clsXYScaleDiscreteFunction.SetRCommand($"scale_{strAxis}_discrete")
 
         If bIsX Then
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
@@ -640,7 +644,7 @@ Public Class ucrAxes
         End If
         SetLabel()
         AddRemoveContinuousXYScales()
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
         AddRemoveLimits()
         AddRemoveLonglabels()
     End Sub
@@ -681,7 +685,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub AddRemoveDiscreteXYScales()
-        'Dim strScaleParam As String = $"scale_{strAxis}_discrete"
+        Dim strScaleParam As String = $"scale_{strAxis}_discrete"
         If clsXYScaleDiscreteFunction.clsParameters.Count > 0 Then
             clsBaseOperator.AddParameter(strScaleParam, clsRFunctionParameter:=clsXYScaleDiscreteFunction)
         Else
@@ -829,7 +833,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("labels")
         End If
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SetBreaksDiscrete()
@@ -839,7 +843,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("breaks")
         End If
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SetLimitsDiscrete()
@@ -849,7 +853,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("limit")
         End If
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SecondaryAxis()
@@ -901,7 +905,7 @@ Public Class ucrAxes
     Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged
         ExpandControl()
         AddRemoveScaleFunctions()
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged, ucrInputMajorBreaksLabelsDiscrete.ControlValueChanged
@@ -930,7 +934,7 @@ Public Class ucrAxes
                 'clsBaseOperator.RemoveParameterByName(strScaleParam)
             End If
         End If
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
@@ -959,7 +963,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("labels")
         End If
-        AddRemoveDiscreteXYScales()
+        'AddRemoveDiscreteXYScales()
     End Sub
     Private Sub ucrChkSecondaryAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSecondaryAxis.ControlValueChanged, ucrInputSecondaryAxis.ControlValueChanged, ucrPnlSecondAxisTitle.ControlValueChanged, ucrInputTextNameSAxis.ControlValueChanged, ucrInputTrans.ControlValueChanged, ucrChkOffset.ControlValueChanged, ucrInputOffset.ControlValueChanged
         SetNameSecondaryAxis()
