@@ -261,10 +261,6 @@ Public Class dlgGeneralForGraphics
         TestOKEnabled()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrChkUseasNumeric.ControlContentsChanged
-
-    End Sub
-
     Private Sub VariableXType()
         ucrChkUseasNumeric.Visible = False
         If Not ucrReceiverX.IsEmpty Then
