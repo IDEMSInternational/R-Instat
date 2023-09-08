@@ -269,11 +269,7 @@ Public Class dlgGeneralForGraphics
         ucrChkUseasNumeric.Visible = False
         If Not ucrReceiverX.IsEmpty Then
             clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-            If ucrReceiverX.strCurrDataType = "factor" Then
-                ucrChkUseasNumeric.Visible = True
-            Else
-                ucrChkUseasNumeric.Visible = False
-            End If
+            ucrChkUseasNumeric.Visible = ucrReceiverX.strCurrDataType = "factor"
             If ucrChkUseasNumeric.Checked Then
                 clsGlobalAesFunction.AddParameter("group", "1", iPosition:=2)
             Else
