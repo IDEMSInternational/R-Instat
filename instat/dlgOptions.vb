@@ -79,7 +79,7 @@ Public Class dlgOptions
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrChkAutoSave.SetText("Auto save a backup of data")
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
-        ucrChkReminder.SetText("Check R-Instat new version available")
+        ucrChkReminder.SetText("Remind me later when R-Instat new version available")
         ucrChkAutoSave.AddToLinkedControls(ucrNudAutoSaveMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudAutoSaveMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
