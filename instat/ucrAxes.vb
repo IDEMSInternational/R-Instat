@@ -50,7 +50,6 @@ Public Class ucrAxes
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
-    Private strScaleParam As String = $"scale_{strAxis}_discrete"
 
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
@@ -421,7 +420,6 @@ Public Class ucrAxes
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
         clsXYScaleDateFunction = clsNewXYScaleDateFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
-        'clsXYScaleDiscreteFunction = clsNewXYScaleDiscreteFunction
         clsGlobalAesFunction = clsNewGlobalAesFunction
 
         bRCodeSet = False
@@ -644,7 +642,7 @@ Public Class ucrAxes
         End If
         SetLabel()
         AddRemoveContinuousXYScales()
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
         AddRemoveLimits()
         AddRemoveLonglabels()
     End Sub
@@ -804,7 +802,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkNaValue.ControlValueChanged, ucrChkTransformation.ControlValueChanged,
-        ucrChkLimitsFrom.ControlValueChanged, ucrChkLongLabels.ControlValueChanged
+        ucrChkLimitsFrom.ControlValueChanged, ucrChkLongLabels.ControlValueChanged, ucrChkDropUnusedLevels.ControlValueChanged
         AddRemoveContinuousXYScales()
         AddRemoveDiscreteXYScales()
         AddRemoveScaleFunctions()
@@ -833,7 +831,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("labels")
         End If
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SetBreaksDiscrete()
@@ -843,7 +841,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("breaks")
         End If
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SetLimitsDiscrete()
@@ -853,7 +851,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("limit")
         End If
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub SecondaryAxis()
@@ -905,7 +903,7 @@ Public Class ucrAxes
     Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged
         ExpandControl()
         AddRemoveScaleFunctions()
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub ucrChkLabelsDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelsDiscrete.ControlValueChanged, ucrInputMajorBreaksLabelsDiscrete.ControlValueChanged
@@ -921,20 +919,16 @@ Public Class ucrAxes
     End Sub
 
     Private Sub AddRemoveLimits()
-        If ucrChkLimitsFrom.Checked Then
-            If Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
-                clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
-                clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
-                clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
-                'clsBaseOperator.AddParameter(strScaleParam, clsRFunctionParameter:=clsXYScaleDiscreteFunction)
-            Else
-                clsLeftBracketOperator.RemoveParameterByName("right")
-                clsRightBracketOperator.RemoveParameterByName("left")
-                clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
-                'clsBaseOperator.RemoveParameterByName(strScaleParam)
-            End If
+        If ucrChkLimitsFrom.Checked AndAlso Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
+            clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
+            clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
+            clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)
+        Else
+            clsLeftBracketOperator.RemoveParameterByName("right")
+            clsRightBracketOperator.RemoveParameterByName("left")
+            clsXYScaleDiscreteFunction.RemoveParameterByName("limits")
         End If
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
     End Sub
 
     Private Sub ucrChkLimitsFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLimitsFrom.ControlValueChanged, ucrNudFrom.ControlValueChanged, ucrNudTo.ControlValueChanged
@@ -963,7 +957,7 @@ Public Class ucrAxes
         Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("labels")
         End If
-        'AddRemoveDiscreteXYScales()
+        AddRemoveDiscreteXYScales()
     End Sub
     Private Sub ucrChkSecondaryAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSecondaryAxis.ControlValueChanged, ucrInputSecondaryAxis.ControlValueChanged, ucrPnlSecondAxisTitle.ControlValueChanged, ucrInputTextNameSAxis.ControlValueChanged, ucrInputTrans.ControlValueChanged, ucrChkOffset.ControlValueChanged, ucrInputOffset.ControlValueChanged
         SetNameSecondaryAxis()
@@ -973,4 +967,5 @@ Public Class ucrAxes
     Private Sub ucrPnlLongLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLongLabels.ControlValueChanged, ucrChkLongLabels.ControlValueChanged, ucrNudWrap.ControlValueChanged
         AddRemoveLonglabels()
     End Sub
+
 End Class

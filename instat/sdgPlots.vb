@@ -676,7 +676,7 @@ Public Class sdgPlots
         clsXLabFunction = clsNewXLabsTitleFunction
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
-        ' clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
+        clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
