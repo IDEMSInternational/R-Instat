@@ -50,6 +50,10 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdYAxis = New System.Windows.Forms.Button()
+        Me.cmdXAxis = New System.Windows.Forms.Button()
+        Me.cmdTitles = New System.Windows.Forms.Button()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -57,7 +61,7 @@ Partial Class dlgGeneralForGraphics
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(137, 25)
+        Me.cmdOptions.Size = New System.Drawing.Size(78, 25)
         Me.cmdOptions.TabIndex = 6
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
@@ -88,9 +92,9 @@ Partial Class dlgGeneralForGraphics
         'cmdFacets
         '
         Me.cmdFacets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFacets.Location = New System.Drawing.Point(146, 401)
+        Me.cmdFacets.Location = New System.Drawing.Point(83, 401)
         Me.cmdFacets.Name = "cmdFacets"
-        Me.cmdFacets.Size = New System.Drawing.Size(110, 25)
+        Me.cmdFacets.Size = New System.Drawing.Size(64, 25)
         Me.cmdFacets.TabIndex = 18
         Me.cmdFacets.Tag = "Facets"
         Me.cmdFacets.Text = "Facets"
@@ -99,9 +103,9 @@ Partial Class dlgGeneralForGraphics
         'cmdTheme
         '
         Me.cmdTheme.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTheme.Location = New System.Drawing.Point(258, 401)
+        Me.cmdTheme.Location = New System.Drawing.Point(329, 401)
         Me.cmdTheme.Name = "cmdTheme"
-        Me.cmdTheme.Size = New System.Drawing.Size(110, 25)
+        Me.cmdTheme.Size = New System.Drawing.Size(71, 25)
         Me.cmdTheme.TabIndex = 19
         Me.cmdTheme.Tag = "Theme"
         Me.cmdTheme.Text = "Theme"
@@ -184,12 +188,58 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'cmdYAxis
+        '
+        Me.cmdYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdYAxis.Location = New System.Drawing.Point(260, 401)
+        Me.cmdYAxis.Name = "cmdYAxis"
+        Me.cmdYAxis.Size = New System.Drawing.Size(70, 25)
+        Me.cmdYAxis.TabIndex = 20
+        Me.cmdYAxis.Tag = ""
+        Me.cmdYAxis.Text = "Y-Axis"
+        Me.cmdYAxis.UseVisualStyleBackColor = True
+        '
+        'cmdXAxis
+        '
+        Me.cmdXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdXAxis.Location = New System.Drawing.Point(199, 401)
+        Me.cmdXAxis.Name = "cmdXAxis"
+        Me.cmdXAxis.Size = New System.Drawing.Size(62, 25)
+        Me.cmdXAxis.TabIndex = 21
+        Me.cmdXAxis.Tag = ""
+        Me.cmdXAxis.Text = "X-Axis"
+        Me.cmdXAxis.UseVisualStyleBackColor = True
+        '
+        'cmdTitles
+        '
+        Me.cmdTitles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTitles.Location = New System.Drawing.Point(147, 401)
+        Me.cmdTitles.Name = "cmdTitles"
+        Me.cmdTitles.Size = New System.Drawing.Size(53, 25)
+        Me.cmdTitles.TabIndex = 22
+        Me.cmdTitles.Tag = ""
+        Me.cmdTitles.Text = "Titles"
+        Me.cmdTitles.UseVisualStyleBackColor = True
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(262, 279)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkLegend.TabIndex = 23
+        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 519)
+        Me.Controls.Add(Me.ucrChkLegend)
+        Me.Controls.Add(Me.cmdTitles)
+        Me.Controls.Add(Me.cmdXAxis)
+        Me.Controls.Add(Me.cmdYAxis)
         Me.Controls.Add(Me.cmdTheme)
         Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
@@ -226,4 +276,8 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents cmdTheme As Button
     Friend WithEvents cmdFacets As Button
+    Friend WithEvents cmdTitles As Button
+    Friend WithEvents cmdXAxis As Button
+    Friend WithEvents cmdYAxis As Button
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class
