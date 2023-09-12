@@ -258,6 +258,10 @@ Public Class ucrDataView
         Return _grid.GetWorksheetCount
     End Function
 
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
+        _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
+    End Sub
+
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
@@ -939,6 +943,11 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Sub GoToSpecificColumnPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
@@ -951,8 +960,7 @@ Public Class ucrDataView
             sdgWindowNumber.iTotalRowOrColumn = iTotalCol
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificColumnPage(sdgWindowNumber.iPage)
         End If
     End Sub
 
@@ -1000,9 +1008,13 @@ Public Class ucrDataView
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strVariable As String, Optional iRow As Integer = 0,
-                           Optional bCellOrRow As Boolean = False)
-        _grid.SearchInGrid(rowNumbers, strVariable, iRow, bCellOrRow)
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                           Optional bApplyToRows As Boolean = False)
+        _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bApplyToRows)
+    End Sub
+
+    Public Sub SelectColumnInGrid(strColumn As String)
+        _grid.SelectColumnInGrid(strColumn)
     End Sub
 
 End Class
