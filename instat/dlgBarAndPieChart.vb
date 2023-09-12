@@ -304,7 +304,7 @@ Public Class dlgBarAndPieChart
         ucrChkReverse.SetText("Add Reverse")
 
         'Theme Tab Checkboxes under grpCommonOptions
-        ucrChkLegendPosition.SetText("Legend Position")
+        ucrChkLegendPosition.SetText("Legend:")
         ucrChkLegendPosition.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))

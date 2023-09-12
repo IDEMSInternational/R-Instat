@@ -436,9 +436,9 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(126, 465)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(99, 465)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
-        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(100, 24)
         Me.ucrInputLegendPosition.TabIndex = 8
         '
         'ucrChkLegendPosition
@@ -454,7 +454,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkReverse.AutoSize = True
         Me.ucrChkReverse.Checked = False
-        Me.ucrChkReverse.Location = New System.Drawing.Point(240, 466)
+        Me.ucrChkReverse.Location = New System.Drawing.Point(229, 466)
         Me.ucrChkReverse.Name = "ucrChkReverse"
         Me.ucrChkReverse.Size = New System.Drawing.Size(110, 23)
         Me.ucrChkReverse.TabIndex = 69
