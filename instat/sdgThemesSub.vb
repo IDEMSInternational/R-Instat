@@ -50,7 +50,7 @@ Public Class sdgThemesSub
         ucrYAxisLines.SetLabel("Y-Axis Line")
 
         ucrPanelGridMajor.SetLabel("Major Grid Lines")
-        ucrPanelGridMinor.SetLabel("Major Grid Lines")
+        ucrPanelGridMinor.SetLabel("Minor Grid Lines")
         ucrPanelBorder.SetLabel("Panel Border")
         ucrPanelBackground.SetLabel("Panel Background")
         ucrChkRemoveLegend.SetText("Remove Legend")

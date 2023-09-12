@@ -396,68 +396,57 @@ Public Class sdgClimaticDataEntry
 
     Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-
-            If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
-                MsgBox("Deleting cells in multiple columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try deleting from one column cells at a time.", MsgBoxStyle.Information, "Cannot delete cells in multiple columns")
+            If Not DeleteSelectedValues() Then
                 e.IsCancelled = True
-                Exit Sub
             End If
-
-            If e.Cell.IsReadOnly Then
-                MsgBox("Deleting read only cells is currently disabled.", MsgBoxStyle.Information, "Cannot delete read only cells")
-                e.IsCancelled = True
-                Exit Sub
-            End If
-
-            'delete operation applies to all selected cells for the column
-            Dim iEndRow As Integer = grdCurrentWorkSheet.SelectionRange.EndRow
-
-            If strEntryType = "Month" AndAlso grdCurrentWorkSheet.SelectionRange.EndRow = grdCurrentWorkSheet.Rows - 1 Then
-                'exclude calculated and difference 
-                iEndRow = iEndRow - 2
-            End If
-
-            'validate new delete entries to all cells first
-            For iRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row To iEndRow
-                If Not ValidateValue("", grdCurrentWorkSheet.GetCell(row:=iRowIndex, col:=e.Cell.Column)) Then
-                    e.IsCancelled = True
-                    Exit Sub
-                End If
-            Next
-
-            'if all valid then proceed with saving NA's as the change
-            For iRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row To iEndRow
-                'forces the cell to have blank data values 
-                grdCurrentWorkSheet.Item(row:=iRowIndex, col:=e.Cell.Column) = ""
-                ValidateAndSaveValueChanged(iRowIndex, e.Cell.Column, "NA")
-            Next
-
         End If
     End Sub
 
-    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
-        ''todo. do this disabling of data entry be done when setting up the grid. Not here
-        'If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
-        '    e.IsCancelled = True
-        'End If
-        'If InStr(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text, "(view)") Then
-        '    e.IsCancelled = True
-        'End If
+    Private Sub mnuDelete_Click(sender As Object, e As EventArgs) Handles mnuDelete.Click
+        DeleteSelectedValues()
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        'If Not bAllowEdits Then
-        '    'todo. set a better feedback message 
-        '    MsgBox("Edits not allowed", MsgBoxStyle.Information, "No edits allowed.")
-        '    e.EndReason = EndEditReason.Cancel
-        '    Exit Sub
-        'End If
-
         If Not ValidateAndSaveValueChanged(e.Cell, If(e.NewData = "", "NA", e.NewData)) Then
             e.EndReason = EndEditReason.Cancel
             'grdCurrentWorkSheet.FocusPos = New CellPosition(e.Cell.Address)
         End If
     End Sub
+
+    Private Function DeleteSelectedValues() As Boolean
+        'if no selection then just return false
+        If grdCurrentWorkSheet.SelectionRange.Cols = 0 Then
+            Return False
+        End If
+
+        'cells are read only at column level so check if any of the columns is read only by just checking the first cell
+        For iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col To grdCurrentWorkSheet.SelectionRange.EndCol
+            If grdCurrentWorkSheet.Cells.Item(grdCurrentWorkSheet.SelectionRange.Row, iColIndex).IsReadOnly Then
+                MsgBox("Deleting read only cells is currently disabled.", MsgBoxStyle.Information, "Cannot delete read only cells")
+                Return False
+            End If
+        Next
+
+        'delete operation applies to all selected cells for the column
+        Dim iEndRow As Integer = grdCurrentWorkSheet.SelectionRange.EndRow
+
+        If strEntryType = "Month" AndAlso grdCurrentWorkSheet.SelectionRange.EndRow = grdCurrentWorkSheet.Rows - 1 Then
+            'exclude calculated and difference 
+            iEndRow = iEndRow - 2
+        End If
+
+        For iRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row To iEndRow
+            For iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col To grdCurrentWorkSheet.SelectionRange.EndCol
+                'if valid proceed with saving NA as the change
+                If Not ValidateAndSaveValueChanged(iRowIndex, iColIndex, "NA") Then
+                    Return False
+                End If
+                'set the cell to blank 
+                grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColIndex) = ""
+            Next
+        Next
+        Return True
+    End Function
 
     Private Function ValidateAndSaveValueChanged(cell As Cell, newValue As String) As Boolean
         If ValidateValue(newValue, cell) Then
@@ -551,28 +540,13 @@ Public Class sdgClimaticDataEntry
                 i = i + 1
             Next
             clsSaveDataEntryFunction.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
+        Else
+            clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+        End If
+        If clsListFunction.clsParameters.Count > 0 Then
             clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
-            If clsCommentsListFunction.clsParameters.Count > 0 Then
-                Dim strRow As String = Nothing
-                Dim bFound As Boolean = False
-                For Each clsParam In clsCommentsListFunction.clsParameters
-                    If clsParam.strArgumentName = "row" AndAlso clsParam.strArgumentValue <> "" Then
-                        strRow = clsParam.strArgumentValue
-                    ElseIf clsParam.strArgumentName = "comment" AndAlso clsParam.strArgumentValue <> "" Then
-                        bFound = True
-                    End If
-                    If strRow IsNot Nothing AndAlso bFound Then
-                        clsEditDataFrameFunction.AddParameter("row", strRow, bIncludeArgumentName:=False, iPosition:=0)
-                        clsSaveDataEntryFunction.AddParameter("rows_changed", strRow, iPosition:=2)
-                        clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
-                        Exit For
-                    End If
-                Next
-            Else
-                clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
-                clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
-            End If
+            clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
         End If
     End Sub
 
@@ -654,7 +628,7 @@ Public Class sdgClimaticDataEntry
             End If
 
             'assume trace values to be 0 (for data entry uses) here
-            If strValue.ToUpper = "T" Then
+            If strValue IsNot Nothing AndAlso strValue.ToUpper = "T" Then
                 strValue = "0"
             End If
 
@@ -700,6 +674,5 @@ Public Class sdgClimaticDataEntry
         End If
 
     End Sub
-
 
 End Class

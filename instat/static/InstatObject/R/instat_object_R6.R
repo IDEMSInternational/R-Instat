@@ -780,6 +780,15 @@ DataBook$set("public", "get_current_filter", function(data_name) {
 }
 )
 
+DataBook$set("public", "get_filter_row_names", function(data_name, filter_name) {
+  row_names <- row.names(self$get_data_frame(data_name, convert_to_character = FALSE, stack_data = FALSE,
+                                             include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = filter_name, 
+                                             remove_attr = FALSE, retain_attr = FALSE, drop_unused_filter_levels = FALSE))
+  
+  return(row_names)
+}
+)
+
 DataBook$set("public", "get_current_filter_name", function(data_name) {
   self$get_data_objects(data_name)$get_current_filter()$name
 }
@@ -841,6 +850,11 @@ DataBook$set("public", "get_column_selection", function(data_name, name) {
 
 DataBook$set("public", "get_column_selection_column_names", function(data_name, filter_name) {
   return(self$get_data_objects(data_name)$get_filter_as_logical(filter_name))
+}
+)
+
+DataBook$set("public", "get_column_selected_column_names", function(data_name, column_selection_name = "") {
+  return(self$get_data_objects(data_name)$get_column_selected_column_names(column_selection_name))
 }
 )
 
@@ -1103,8 +1117,8 @@ DataBook$set("public", "set_factor_reference_level", function(data_name, col_nam
 } 
 )
 
-DataBook$set("public", "get_column_count", function(data_name) {
-  return(self$get_data_objects(data_name)$get_column_count())
+DataBook$set("public", "get_column_count", function(data_name, use_column_selection = FALSE) {
+  return(self$get_data_objects(data_name)$get_column_count(use_column_selection))
 } 
 )
 
@@ -2639,6 +2653,7 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
     if(!("column" %in% names(com))){
       com[["column"]] <- ""
     }
+    if(length(comments_list) > 0) cat("Comments added:", length(comments_list), "\n")
     self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
   }
     }
@@ -2702,5 +2717,37 @@ DataBook$set("public", "replace_values_with_NA", function(data_name, row_index, 
 
 DataBook$set("public","has_labels", function(data_name, col_names) {
   self$get_data_objects(data_name)$has_labels(col_names)
+}
+)
+
+DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, column_data, width, wrap = TRUE) {
+  # Store the original data type of the column
+  original_type <- class(column_data)
+  desired_types <- c("factor", "numeric", "Date", "character", "integer", "list", "double")
+  if(original_type %in% desired_types){
+    # Apply str_replace_all if "\n" is detected in the column_data
+    if (any(!is.na(stringr::str_detect(column_data, "\n")))) {
+      column_data <- stringr::str_replace_all(column_data, "\n", " ")
+    }
+    
+    # Apply str_wrap if width is specified
+    if (!is.null(width) && wrap) {
+      column_data <- stringr::str_wrap(column_data, width = width)
+    }
+    curr_data <- self$get_data_frame(data_name=data_name, retain_attr = TRUE)
+    # Convert back to the original data type if necessary
+    if (original_type != class(column_data)) {
+      if (original_type %in% c("factor", "ordered_factor")){
+        column_data <- make_factor(column_data)
+      }else if(original_type == "list"){
+        result <- curr_data %>%
+          dplyr::mutate(list_column = lapply(column_data, convert_to_list))
+        column_data <- result$list_column
+      }else{ column_data <- as(column_data, original_type) }
+    }
+    # retain the attributes of the column after wrapping or unwrapping
+    attributes(column_data) <- attributes(curr_data[[col_name]])
+    self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
+  }
 }
 )

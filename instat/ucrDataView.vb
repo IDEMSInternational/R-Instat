@@ -88,6 +88,8 @@ Public Class ucrDataView
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
         AddHandler _grid.CellDataChanged, AddressOf CellDataChanged
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
+        AddHandler _grid.EditCell, AddressOf EditCell
+        AddHandler _grid.FindRow, AddressOf FindRow
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -244,9 +246,21 @@ Public Class ucrDataView
         RefreshDisplayInformation()
     End Sub
 
+    Public Function GetFirstRowHeader() As String
+        Return _grid.GetFirstRowHeader
+    End Function
+
+    Public Function GetLastRowHeader() As String
+        Return _grid.GetLastRowHeader
+    End Function
+
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
+
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
+        _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
+    End Sub
 
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
@@ -334,7 +348,7 @@ Public Class ucrDataView
         lblColDisplay.Text = GetTranslation("Columns") 'don't change this code line, the scripts that create the translation database expect this exact format
         lblColDisplay.Text &= strColLabel
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
-            lblColDisplay.Text &= GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn &
+            lblColDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount &
                                 "/" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
         Else
             lblColDisplay.Text &= GetCurrentDataFrameFocus().iTotalColumnCount & ")"
@@ -907,33 +921,59 @@ Public Class ucrDataView
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
+    Public Sub GoToSpecificRowPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblRowDisplay_Click(sender As Object, e As EventArgs) Handles lblRowDisplay.Click
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Row
-            sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalRowCount
+            Dim iTotalRow As Integer
+            If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
+                iTotalRow = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount
+            Else
+                iTotalRow = GetCurrentDataFrameFocus().iTotalRowCount
+            End If
+            sdgWindowNumber.iTotalRowOrColumn = iTotalRow
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
             sdgWindowNumber.ShowDialog()
 
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificRowPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificRowPage(sdgWindowNumber.iPage)
         End If
+    End Sub
+
+    Public Sub GoToSpecificColumnPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
     End Sub
 
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
-            sdgWindowNumber.iTotalRowOrColumn = GetCurrentDataFrameFocus().iTotalColumnCount
+            Dim iTotalCol As Integer
+            If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
+                iTotalCol = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount
+            Else
+                iTotalCol = GetCurrentDataFrameFocus().iTotalColumnCount
+            End If
+            sdgWindowNumber.iTotalRowOrColumn = iTotalCol
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificColumnPage(sdgWindowNumber.iPage)
         End If
     End Sub
 
     Private Sub lblRowDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblRowDisplay.MouseHover
         If lblRowNext.Enabled OrElse lblRowBack.Enabled Then
+            Dim iTotalRow As Integer
+            If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
+                iTotalRow = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount
+            Else
+                iTotalRow = GetCurrentDataFrameFocus().iTotalRowCount
+            End If
             ttGoToRowOrColPage.SetToolTip(lblRowDisplay, GetTranslation("Click to go to a specific window 1-") &
-                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalRowCount / frmMain.clsInstatOptions.iMaxRows)))
+                    Math.Ceiling(CDbl(iTotalRow / frmMain.clsInstatOptions.iMaxRows)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If
@@ -941,15 +981,40 @@ Public Class ucrDataView
 
     Private Sub lblColDisplay_MouseHover(sender As Object, e As EventArgs) Handles lblColDisplay.MouseHover
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
+            Dim iTotalCol As Integer
+            If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
+                iTotalCol = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount
+            Else
+                iTotalCol = GetCurrentDataFrameFocus().iTotalColumnCount
+            End If
             ttGoToRowOrColPage.SetToolTip(lblColDisplay, GetTranslation("Click to go to a specific window 1-") &
-                    Math.Ceiling(CDbl(GetCurrentDataFrameFocus().iTotalColumnCount / frmMain.clsInstatOptions.iMaxCols)))
+                    Math.Ceiling(CDbl(iTotalCol / frmMain.clsInstatOptions.iMaxCols)))
         Else
             ttGoToRowOrColPage.RemoveAll()
         End If
     End Sub
 
-    Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+    Private Sub EditCell()
+        dlgEdit.SetCurrentDataframe(GetCurrentDataFrameNameFocus)
         dlgEdit.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.GetCellValue(GetFirstSelectedRow() - 1, GetFirstSelectedColumnName), GetFirstSelectedRow())
         dlgEdit.ShowDialog()
     End Sub
+
+    Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
+        EditCell()
+    End Sub
+
+    Private Sub FindRow()
+        dlgFindInVariableOrFilter.ShowDialog()
+    End Sub
+
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                           Optional bApplyToRows As Boolean = False)
+        _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bApplyToRows)
+    End Sub
+
+    Public Sub SelectColumnInGrid(strColumn As String)
+        _grid.SelectColumnInGrid(strColumn)
+    End Sub
+
 End Class

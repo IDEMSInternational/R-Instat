@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgOneWayFrequencies
     Public bControlsInitialised As Boolean = False
-    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayPlotGrid, clsOneWayListPlot As New RFunction
+    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayGrid As New RFunction
 
     Private Sub sdgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -120,14 +120,13 @@ Public Class sdgOneWayFrequencies
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, clsNewPlotGrid As RFunction, clsNewSjPlotList As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewTableFreq As RFunction, clsNewGraphFrq As RFunction, clsNewGrid As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsOneWayTableFreq = clsNewSjtFreq
-        clsOneWayGraphFreq = clsNewSjpFrq
-        clsOneWayPlotGrid = clsNewPlotGrid
-        clsOneWayListPlot = clsNewSjPlotList
+        clsOneWayTableFreq = clsNewTableFreq
+        clsOneWayGraphFreq = clsNewGraphFrq
+        clsOneWayGrid = clsNewGrid
 
         ucrChkShowStrings.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
         ucrInputTitle.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)

@@ -225,7 +225,7 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
-        bUserTyped = True
+        bUserTyped = False
     End Sub
 
     'Public Sub SetEditable(bEditable As Boolean)

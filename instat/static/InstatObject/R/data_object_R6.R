@@ -335,15 +335,20 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     
     # If a filter has been done, some column attributes are lost.
     # This ensures they are present in the returned data.
-    if(retain_attr) {
-      for(col_name in names(out)) {
-        for(attr_name in names(attributes(private$data[[col_name]]))) {
-          if(!attr_name %in% c("class", "levels")) {
-            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+    if (retain_attr) {
+      for (col_name in names(out)) {
+        private_attr_names <- names(attributes(private$data[[col_name]]))
+        for (attr_name in private_attr_names) {
+          if (!attr_name %in% c("class", "names")) {
+            private_attr <- attr(private$data[[col_name]], attr_name)
+            if (!is.null(private_attr)) {
+              attr(out[[col_name]], attr_name) <- private_attr
+            }
           }
         }
       }
     }
+    
     # If there is a start column, return columns from start onwards
     if (!missing(start_col) && start_col <= ncol(out)) #out <- out[start_col:max_cols]
     {
@@ -770,6 +775,16 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
         }
+        # remove key
+        get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == curr_col_name)
+        if (!is.null(get_key$Is_Key)){
+          if (!is.na(get_key$Is_Key) && get_key$Is_Key){
+            active_keys <- self$get_keys()
+            keys_to_delete <- which(grepl(curr_col_name, active_keys))
+            keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+            purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+          }
+        }
         # Need to use private$data here because changing names of data field
         names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
@@ -809,11 +824,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
-      private$data <- curr_data |>
-
+    private$data <- curr_data |>
+      
       dplyr::rename_with(
-         .fn = .fn,
-         .cols = {{ .cols }}, ...
+        .fn = .fn,
+        .cols = {{ .cols }}, ...
       )
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
@@ -827,28 +842,38 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   }
 })
 
+
+
 DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
       warning("You are deleting all columns in the data frame.")
-    }
-    else {
+    } else {
       stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
     }
   }
   for(col_name in cols) {
-    # Column name must be character
-    if(!is.character(col_name)) {
-      stop("Column name must be of type: character")
+  # Column name must be character
+  if(!is.character(col_name)) {
+    stop("Column name must be of type: character")
+  } else if (!(col_name %in% self$get_column_names())) {
+    stop(paste0("Column :'", col_name, " was not found in the data."))
+  } else {
+    get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == col_name)
+    if (!is.null(get_key$Is_Key)){
+      if (!is.na(get_key$Is_Key) && get_key$Is_Key){
+        active_keys <- self$get_keys()
+        keys_to_delete <- which(grepl(col_name, active_keys))
+        keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+        purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+      }
     }
-    else if(!(col_name %in% self$get_column_names())) {
-      stop(paste0("Column :'", col_name, " was not found in the data."))
-    }
-    else private$data[[col_name]] <- NULL
+    private$data[[col_name]] <- NULL
   }
   self$append_to_changes(list(Removed_col, cols))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
+}
 }
 )
 
@@ -1100,12 +1125,17 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
 
 DataSheet$set("public", "append_to_changes", function(value) {
   
-  if(missing(value)) {
-    stop("value arguements must be specified.")
-  }
-  else {
-    private$changes[[length(private$changes)+1]] <- value 
-  }
+  #functionality disabled temporarily
+  #see PR #8465 and issue #7161 comments
+  
+  #if(missing(value)) {
+  #  stop("value arguements must be specified.")
+  #}else {
+    #see comments in issue #7161 that explain more about why list() was used
+    #primary reason was because of performance when it comes to wide data sets
+    #private$changes[[length(private$changes)+1]] <- value 
+    #private$changes<-list(private$changes, value)
+  #}
 }
 )
 
@@ -1550,8 +1580,8 @@ DataSheet$set("public", "reorder_factor_levels", function(col_name, new_level_na
 }
 )
 
-DataSheet$set("public", "get_column_count", function(col_name, new_level_names) {
-  return(ncol(private$data))
+DataSheet$set("public", "get_column_count", function(use_column_selection = FALSE) {
+  return(ncol(self$get_data_frame(use_column_selection = use_column_selection)))
 }
 )
 
@@ -2017,6 +2047,14 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
   }
   return(all_column_names[out])
 })
+
+DataSheet$set("public", "get_column_selected_column_names", function(column_selection_name = "") {
+  if(column_selection_name != "") {
+  selected_columns <- self$get_column_selection_column_names(column_selection_name)
+  return(selected_columns)
+  }
+}
+)
 
 DataSheet$set("public", "column_selection_applied", function() {
   curr_sel <- private$.current_column_selection
@@ -4282,33 +4320,35 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
 })
 
 DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed, add_flags = FALSE, ...) {
-  if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
-  curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  changed_data <- curr_data
-  for (i in seq_along(rows_changed)) {
-    for (k in seq_along(names(new_data))) {
-      changed_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
-    }
-  }
-  if (add_flags) {
-    for (i in names(new_data)[-c(1:2)]) {
-      col1 <- curr_data[, i]
-      col2 <- changed_data[, i]
-      if (paste0(i, "_fl") %in% colnames(changed_data)) {
-        flag_col1 <- changed_data[, paste0(i, "_fl")]
-        flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
-        changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
-      } else {
-        changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+  if (ncol(new_data) > 1) {
+    if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
+    curr_data <- self$get_data_frame(use_current_filter = FALSE)
+    changed_data <- curr_data
+    for (i in seq_along(rows_changed)) {
+      for (k in seq_along(names(new_data))) {
+        changed_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
       }
     }
+    if (add_flags) {
+      for (i in names(new_data)[-c(1:2)]) {
+        col1 <- curr_data[, i]
+        col2 <- changed_data[, i]
+        if (paste0(i, "_fl") %in% colnames(changed_data)) {
+          flag_col1 <- changed_data[, paste0(i, "_fl")]
+          flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+          changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
+        } else {
+          changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+        }
+      }
+    }
+    if(length(nrow(new_data)) > 0) cat("Row(s) updated: ", nrow(new_data), "\n")
+    self$set_data(changed_data)
+    # Added this line to fix the bug of having the variable names in the metadata changing to NA
+    # This affects factor columns only  - we need to find out why and how to solve it best
+    self$add_defaults_variables_metadata(self$get_column_names())
+    self$data_changed <- TRUE
   }
-  cat("Values updated in:", length(rows_changed), "row(s)\n")
-  self$set_data(changed_data)
-  # Added this line to fix the bug of having the variable names in the metadata changing to NA
-  # This affects factor columns only  - we need to find out why and how to solve it best
-  self$add_defaults_variables_metadata(self$get_column_names())
-  self$data_changed <- TRUE
 })
 
 DataSheet$set("public", "add_flag_fields", function(col_names) {

@@ -101,7 +101,7 @@ Public Class clsDataFrameFilterOrColumnSelection
 
     Public Sub RefreshData()
         _iFilteredRowCount = _RLink.GetDataFrameLength(_strDataFrameName, True)
-        _iSelectedColumnCount = _RLink.GetDataFrameColumnCount(_strDataFrameName)
+        _iSelectedColumnCount = _RLink.GetDataFrameColumnCount(_strDataFrameName, True)
         _bFilterApplied = GetFilterAppliedFromRCommand()
         _bColumnSelectionApplied = GetColumnSelectionAppliedFromRCommand()
         _strFilterName = GetFilterNameFromRCommand()

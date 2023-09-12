@@ -24,6 +24,7 @@ Public Class ucrOutputPages
     Private _clsInstatOptions As InstatOptions
     Private _outputLogger As clsOutputLogger
     Private _selectedOutputPage As ucrOutputPage
+    Private _strSaveDirectory As String
     Public Sub New()
 
         ' This call is required by the designer.
@@ -57,10 +58,11 @@ Public Class ucrOutputPages
             dlgSaveFile.Title = "Save Output Window"
             dlgSaveFile.Filter = "Rich Text Format (*.rtf)|*.rtf"
             dlgSaveFile.FileName = Path.GetFileName(SelectedTab)
-            dlgSaveFile.InitialDirectory = _clsInstatOptions.strWorkingDirectory
+            dlgSaveFile.InitialDirectory = If(String.IsNullOrEmpty(_strSaveDirectory), _clsInstatOptions.strWorkingDirectory, _strSaveDirectory)
             If DialogResult.OK = dlgSaveFile.ShowDialog() Then
                 Try
                     _selectedOutputPage.Save(dlgSaveFile.FileName)
+                    _strSaveDirectory = Path.GetDirectoryName(dlgSaveFile.FileName)
                 Catch
                     MsgBox("Could not save the output window." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -282,6 +284,10 @@ Public Class ucrOutputPages
 
     Private Sub tbSave_Click(sender As Object, e As EventArgs) Handles tbSave.Click
         SaveTab()
+    End Sub
+
+    Private Sub tbHelp_Click(sender As Object, e As EventArgs) Handles tbHelp.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "540")
     End Sub
 
     Private Sub UpdateTabsInDropDown()

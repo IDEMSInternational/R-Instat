@@ -280,6 +280,8 @@ Public Class clsDataFramePage
             columnHeader.strTypeShortCode = "(LT)"
         ElseIf strHeaderType.Contains("complex") Then
             columnHeader.strTypeShortCode = "(CX)"
+        ElseIf strHeaderType.Contains("sfc_MULTIPOLYGON") OrElse strHeaderType.Contains("sfc") Then
+            columnHeader.strTypeShortCode = "(G)"
             ' Types of data for specific Application areas e.g. survival are coded with "(A)"
             ' No examples implemented yet.
             'ElseIf strType.Contains() Then

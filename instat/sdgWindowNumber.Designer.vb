@@ -49,8 +49,8 @@ Partial Class sdgWindowNumber
         'ucrBaseWindowNumber
         '
         Me.ucrBaseWindowNumber.AutoSize = True
-        Me.ucrBaseWindowNumber.Location = New System.Drawing.Point(4, 47)
-        Me.ucrBaseWindowNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBaseWindowNumber.Location = New System.Drawing.Point(31, 47)
+        Me.ucrBaseWindowNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBaseWindowNumber.Name = "ucrBaseWindowNumber"
         Me.ucrBaseWindowNumber.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseWindowNumber.TabIndex = 31
@@ -60,12 +60,12 @@ Partial Class sdgWindowNumber
         Me.ucrNudPageNumber.AutoSize = True
         Me.ucrNudPageNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPageNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPageNumber.Location = New System.Drawing.Point(158, 18)
-        Me.ucrNudPageNumber.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrNudPageNumber.Location = New System.Drawing.Point(180, 18)
+        Me.ucrNudPageNumber.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPageNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPageNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPageNumber.Name = "ucrNudPageNumber"
-        Me.ucrNudPageNumber.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPageNumber.Size = New System.Drawing.Size(93, 20)
         Me.ucrNudPageNumber.TabIndex = 29
         Me.ucrNudPageNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -73,7 +73,7 @@ Partial Class sdgWindowNumber
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(231, 81)
+        Me.ClientSize = New System.Drawing.Size(280, 81)
         Me.Controls.Add(Me.lblPages)
         Me.Controls.Add(Me.ucrBaseWindowNumber)
         Me.Controls.Add(Me.lblTitleSize)
