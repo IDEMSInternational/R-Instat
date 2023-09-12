@@ -286,6 +286,10 @@ Public Class ucrOutputPages
         SaveTab()
     End Sub
 
+    Private Sub tbHelp_Click(sender As Object, e As EventArgs) Handles tbHelp.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
+
     Private Sub UpdateTabsInDropDown()
         tdbAddToExisting.DropDownItems.Clear()
         For Each list In _outputLogger.FilteredOutputs

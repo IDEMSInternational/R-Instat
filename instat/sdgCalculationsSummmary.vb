@@ -351,8 +351,10 @@ Public Class sdgCalculationsSummmary
                 clsCalculationFunction.RemoveParameterByName("function_exp")
             End If
 
-            If ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers.Count > 0 Then
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers, ucrCalcSummary.ucrSelectorForCalculations))
+            If Not ucrCalcSummary.ucrSelectorForCalculations.CurrentReceiver.IsEmpty Then
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
+                                                    ucrCalcSummary.ucrSelectorForCalculations.CurrentReceiver.GetVariableNamesList(bWithQuotes:=False),
+                                                     ucrCalcSummary.ucrSelectorForCalculations))
             Else
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             End If
@@ -364,29 +366,22 @@ Public Class sdgCalculationsSummmary
             If ucrReceiverByOrSort.IsEmpty Then
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrSelectorBy.lstVariablesInReceivers, ucrSelectorBy))
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
+                                                    ucrSelectorBy.CurrentReceiver.GetVariableNamesList(bWithQuotes:=False), ucrSelectorBy))
             End If
         End If
     End Sub
 
     'Need to do this instead of with RFunctions because the calculated_from list can have multiple items with the same label
-    Private Function CreateCalcFromList(lstVariables As List(Of Tuple(Of String, String)), ucrCurrentSelector As ucrSelectorByDataFrame) As String
+    Private Function CreateCalcFromList(lstVariables As String(), ucrCurrentSelector As ucrSelectorByDataFrame) As String
         Dim strCalcFromList As String
-        Dim strColumn As String
-        Dim strDataFrame As String
 
         strCalcFromList = "list("
         For i = 0 To lstVariables.Count - 1
-            strColumn = lstVariables(i).Item1
-            If lstVariables(i).Item1 = "" Then
-                strDataFrame = ucrCurrentSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            Else
-                strDataFrame = lstVariables(i).Item2
-            End If
             If i > 0 Then
                 strCalcFromList = strCalcFromList & ","
             End If
-            strCalcFromList = strCalcFromList & strDataFrame & " = " & Chr(34) & strColumn & Chr(34)
+            strCalcFromList = strCalcFromList & ucrCurrentSelector.strCurrentDataFrame & " = " & Chr(34) & lstVariables(i) & Chr(34)
         Next
         strCalcFromList = strCalcFromList & ")"
         Return strCalcFromList
@@ -399,7 +394,9 @@ Public Class sdgCalculationsSummmary
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
                 clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrDefineFilter.ucrFilterPreview.GetText() & Chr(34))
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrDefineFilter.ucrSelectorForFitler.lstVariablesInReceivers, ucrDefineFilter.ucrSelectorForFitler))
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
+                                                    ucrDefineFilter.ucrSelectorForFitler.CurrentReceiver.GetVariableNamesList(bWithQuotes:=False),
+                                                    ucrDefineFilter.ucrSelectorForFitler))
             End If
         End If
     End Sub
