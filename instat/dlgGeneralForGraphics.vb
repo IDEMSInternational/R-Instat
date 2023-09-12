@@ -47,6 +47,8 @@ Public Class dlgGeneralForGraphics
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Public clsXYSecondaryAxisFunction As New RFunction
+    Public clsDummyFunction As New RFunction
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -73,14 +75,6 @@ Public Class dlgGeneralForGraphics
         ucrGraphicsSelector.SetParameter(New RParameter("data", 0))
         ucrGraphicsSelector.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForGraphics.SetFactorReceiver(ucrFillOrColourReceiver)
-        ucrVariablesAsFactorForGraphics.Selector = ucrGraphicsSelector
-        ucrVariablesAsFactorForGraphics.strSelectorHeading = "Variables"
-        ucrVariablesAsFactorForGraphics.SetParameterIsString()
-        ucrVariablesAsFactorForGraphics.bWithQuotes = False
-        ucrVariablesAsFactorForGraphics.SetValuesToIgnore({Chr(34) & Chr(34)})
-        ucrVariablesAsFactorForGraphics.bAddParameterIfEmpty = True
-
         ucrReceiverX.Selector = ucrGraphicsSelector
         ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.bWithQuotes = False
@@ -88,11 +82,26 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrReceiverY.Selector = ucrGraphicsSelector
+        ucrReceiverY.strSelectorHeading = "Variables"
+        ucrReceiverY.bWithQuotes = False
+        ucrReceiverY.SetParameterIsString()
+        ucrReceiverY.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrReceiverY.bAddParameterIfEmpty = True
+
         ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
         ucrFillOrColourReceiver.SetIncludedDataTypes({"factor"})
         ucrFillOrColourReceiver.strSelectorHeading = "Factors"
         ucrFillOrColourReceiver.bWithQuotes = False
         ucrFillOrColourReceiver.SetParameterIsString()
+
+        ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        ucrChkFlipCoordinates.SetRDefault("FALSE")
+
+        ucrChkSecondY.SetText("2nd Y Variable")
+        ucrChkSecondY.AddParameterPresentCondition(True, True)
+        ucrChkSecondY.AddParameterPresentCondition(False, False)
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -111,7 +120,7 @@ Public Class dlgGeneralForGraphics
 
         ucrGraphicsSelector.Reset()
         ucrGraphicsSelector.SetGgplotFunction(clsBaseOperator)
-        ucrVariablesAsFactorForGraphics.SetMeAsReceiver()
+        ucrReceiverX.SetMeAsReceiver()
         bDataFrameSet = False
         bResetOptionsSubdialog = True
 
@@ -155,9 +164,10 @@ Public Class dlgGeneralForGraphics
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
-        ucrVariablesAsFactorForGraphics.SetRCode(clsGlobalAesFunction, bReset)
+        ucrReceiverY.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
         ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
+        ucrChkFlipCoordinates.SetRCode(clsGlobalAesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
     End Sub
 
@@ -168,7 +178,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrSave.IsComplete OrElse (ucrReceiverX.IsEmpty AndAlso ucrVariablesAsFactorForGraphics.IsEmpty) Then
+        If Not ucrSave.IsComplete OrElse (ucrReceiverX.IsEmpty AndAlso ucrReceiverY.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -219,14 +229,57 @@ Public Class dlgGeneralForGraphics
         sdgPlots.EnableLayersTab()
     End Sub
 
-    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
+    Private Sub cmdTitles_Click(sender As Object, e As EventArgs) Handles cmdTitles.Click
+        sdgPlots.DisableLayersTab()
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
+                          clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
+        sdgPlots.tbpPlotsOptions.SelectedIndex = 2
+        sdgPlots.ShowDialog()
+        bResetOptionsSubdialog = False
+        sdgPlots.EnableLayersTab()
+    End Sub
+
+    Private Sub cmdXAxis_Click(sender As Object, e As EventArgs) Handles cmdXAxis.Click
+        sdgPlots.DisableLayersTab()
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
+                          clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
+        sdgPlots.tbpPlotsOptions.SelectedIndex = 3
+        sdgPlots.ShowDialog()
+        bResetOptionsSubdialog = False
+        sdgPlots.EnableLayersTab()
+    End Sub
+
+    Private Sub cmdYAxis_Click(sender As Object, e As EventArgs) Handles cmdYAxis.Click
+        sdgPlots.DisableLayersTab()
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
+                          clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
+        sdgPlots.tbpPlotsOptions.SelectedIndex = 4
+        sdgPlots.ShowDialog()
+        bResetOptionsSubdialog = False
+        sdgPlots.EnableLayersTab()
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSave.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
         If Not ucrReceiverX.IsEmpty Then
             clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
         Else
             clsGlobalAesFunction.RemoveParameterByName("x")
         End If
-        If Not ucrVariablesAsFactorForGraphics.IsEmpty Then
-            clsGlobalAesFunction.AddParameter("y", ucrVariablesAsFactorForGraphics.GetVariableNames(False), iPosition:=1)
+        If Not ucrReceiverY.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False), iPosition:=1)
         Else
             clsGlobalAesFunction.RemoveParameterByName("y")
         End If
@@ -235,9 +288,5 @@ Public Class dlgGeneralForGraphics
         Else
             clsGlobalAesFunction.RemoveParameterByName("colour")
         End If
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 End Class
