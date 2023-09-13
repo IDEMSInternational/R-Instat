@@ -25,7 +25,7 @@ Public Class dlgGeneralForGraphics
     Private iLayerIndex As Integer
     'current layer
     Private clsGlobalAesFunction As New RFunction
-    Private clsBaseOperator As ROperator
+    Private clsBaseOperator As New ROperator
     Private strGlobalDataFrame As String
     Public bDataFrameSet As Boolean
     Private bResetOptionsSubdialog As Boolean = True
@@ -65,6 +65,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctLegendPosition As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 420
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
@@ -99,9 +100,18 @@ Public Class dlgGeneralForGraphics
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetRDefault("FALSE")
 
-        ucrChkSecondY.SetText("2nd Y Variable")
-        ucrChkSecondY.AddParameterPresentCondition(True, True)
-        ucrChkSecondY.AddParameterPresentCondition(False, False)
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -120,7 +130,7 @@ Public Class dlgGeneralForGraphics
 
         ucrGraphicsSelector.Reset()
         ucrGraphicsSelector.SetGgplotFunction(clsBaseOperator)
-        ucrReceiverX.SetMeAsReceiver()
+        ucrReceiverY.SetMeAsReceiver()
         bDataFrameSet = False
         bResetOptionsSubdialog = True
 
@@ -155,7 +165,7 @@ Public Class dlgGeneralForGraphics
         clsBaseOperator.bExcludeAssignedFunctionOutput = False
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=ucrGraphicsSelector.strCurrentDataFrame, bReset:=True)
+        'ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=ucrGraphicsSelector.strCurrentDataFrame, bReset:=True)
 
         sdgPlots.Reset()
         'Warning/to be discussed: sdgPlots doesn't work like sdgLayerOptions. Information actually stays on the dialogue, as it cannot be editted on the general for graphics (yet) I think that sdgPlots should work like LayerOptions and be filled in at load, thanks to a setup function and setsettings sub. 
@@ -168,6 +178,8 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
         ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsGlobalAesFunction, bReset)
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrSave.SetRCode(clsBaseOperator, bReset)
     End Sub
 
@@ -268,11 +280,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.EnableLayersTab()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSave.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
+    Private Sub ucrReceiverY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverY.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
         If Not ucrReceiverX.IsEmpty Then
             clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
         Else
@@ -288,5 +296,21 @@ Public Class dlgGeneralForGraphics
         Else
             clsGlobalAesFunction.RemoveParameterByName("colour")
         End If
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkLegend.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
     End Sub
 End Class

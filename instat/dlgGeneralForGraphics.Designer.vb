@@ -43,22 +43,20 @@ Partial Class dlgGeneralForGraphics
         Me.lblFillOrColor = New System.Windows.Forms.Label()
         Me.cmdFacets = New System.Windows.Forms.Button()
         Me.cmdTheme = New System.Windows.Forms.Button()
+        Me.cmdYAxis = New System.Windows.Forms.Button()
+        Me.cmdXAxis = New System.Windows.Forms.Button()
+        Me.cmdTitles = New System.Windows.Forms.Button()
+        Me.lblYVariable = New System.Windows.Forms.Label()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
         Me.ucrFillOrColourReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdYAxis = New System.Windows.Forms.Button()
-        Me.cmdXAxis = New System.Windows.Forms.Button()
-        Me.cmdTitles = New System.Windows.Forms.Button()
-        Me.ucrChkLegend = New instat.ucrCheck()
-        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
-        Me.lblYVariable = New System.Windows.Forms.Label()
-        Me.ucrChkSecondY = New instat.ucrCheck()
-        Me.lblSecondYVariable = New System.Windows.Forms.Label()
-        Me.ucrReceiverSecondYVariable = New instat.ucrReceiverSingle()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -67,7 +65,7 @@ Partial Class dlgGeneralForGraphics
         Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(135, 25)
-        Me.cmdOptions.TabIndex = 6
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -76,10 +74,10 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(259, 21)
+        Me.lblXVariable.Location = New System.Drawing.Point(254, 81)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 2
+        Me.lblXVariable.TabIndex = 3
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
         '
@@ -87,10 +85,10 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lblFillOrColor.AutoSize = True
         Me.lblFillOrColor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillOrColor.Location = New System.Drawing.Point(259, 130)
+        Me.lblFillOrColor.Location = New System.Drawing.Point(254, 122)
         Me.lblFillOrColor.Name = "lblFillOrColor"
         Me.lblFillOrColor.Size = New System.Drawing.Size(57, 13)
-        Me.lblFillOrColor.TabIndex = 4
+        Me.lblFillOrColor.TabIndex = 5
         Me.lblFillOrColor.Tag = "Fill_Colour:"
         Me.lblFillOrColor.Text = "Fill/Colour:"
         '
@@ -100,7 +98,7 @@ Partial Class dlgGeneralForGraphics
         Me.cmdFacets.Location = New System.Drawing.Point(139, 401)
         Me.cmdFacets.Name = "cmdFacets"
         Me.cmdFacets.Size = New System.Drawing.Size(64, 25)
-        Me.cmdFacets.TabIndex = 18
+        Me.cmdFacets.TabIndex = 17
         Me.cmdFacets.Tag = "Facets"
         Me.cmdFacets.Text = "Facets"
         Me.cmdFacets.UseVisualStyleBackColor = True
@@ -111,10 +109,96 @@ Partial Class dlgGeneralForGraphics
         Me.cmdTheme.Location = New System.Drawing.Point(360, 401)
         Me.cmdTheme.Name = "cmdTheme"
         Me.cmdTheme.Size = New System.Drawing.Size(51, 25)
-        Me.cmdTheme.TabIndex = 19
+        Me.cmdTheme.TabIndex = 21
         Me.cmdTheme.Tag = "Theme"
         Me.cmdTheme.Text = "Theme"
         Me.cmdTheme.UseVisualStyleBackColor = True
+        '
+        'cmdYAxis
+        '
+        Me.cmdYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdYAxis.Location = New System.Drawing.Point(306, 401)
+        Me.cmdYAxis.Name = "cmdYAxis"
+        Me.cmdYAxis.Size = New System.Drawing.Size(56, 25)
+        Me.cmdYAxis.TabIndex = 20
+        Me.cmdYAxis.Tag = ""
+        Me.cmdYAxis.Text = "Y-Axis"
+        Me.cmdYAxis.UseVisualStyleBackColor = True
+        '
+        'cmdXAxis
+        '
+        Me.cmdXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdXAxis.Location = New System.Drawing.Point(252, 401)
+        Me.cmdXAxis.Name = "cmdXAxis"
+        Me.cmdXAxis.Size = New System.Drawing.Size(56, 25)
+        Me.cmdXAxis.TabIndex = 19
+        Me.cmdXAxis.Tag = ""
+        Me.cmdXAxis.Text = "X-Axis"
+        Me.cmdXAxis.UseVisualStyleBackColor = True
+        '
+        'cmdTitles
+        '
+        Me.cmdTitles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTitles.Location = New System.Drawing.Point(201, 401)
+        Me.cmdTitles.Name = "cmdTitles"
+        Me.cmdTitles.Size = New System.Drawing.Size(53, 25)
+        Me.cmdTitles.TabIndex = 18
+        Me.cmdTitles.Tag = ""
+        Me.cmdTitles.Text = "Titles"
+        Me.cmdTitles.UseVisualStyleBackColor = True
+        '
+        'lblYVariable
+        '
+        Me.lblYVariable.AutoSize = True
+        Me.lblYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYVariable.Location = New System.Drawing.Point(254, 38)
+        Me.lblYVariable.Name = "lblYVariable"
+        Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblYVariable.TabIndex = 1
+        Me.lblYVariable.Tag = "Y_Variable:"
+        Me.lblYVariable.Text = "Y Variable:"
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(252, 360)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLegendPosition.TabIndex = 15
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.AutoSize = True
+        Me.ucrReceiverY.frmParent = Me
+        Me.ucrReceiverY.Location = New System.Drawing.Point(252, 51)
+        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.Size = New System.Drawing.Size(125, 20)
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.TabIndex = 2
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
+        'ucrChkFlipCoordinates
+        '
+        Me.ucrChkFlipCoordinates.AutoSize = True
+        Me.ucrChkFlipCoordinates.Checked = False
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(257, 300)
+        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkFlipCoordinates.TabIndex = 13
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(257, 335)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkLegend.TabIndex = 14
         '
         'ucrSave
         '
@@ -123,32 +207,32 @@ Partial Class dlgGeneralForGraphics
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(346, 24)
-        Me.ucrSave.TabIndex = 17
+        Me.ucrSave.TabIndex = 16
         '
         'ucrFillOrColourReceiver
         '
         Me.ucrFillOrColourReceiver.AutoSize = True
         Me.ucrFillOrColourReceiver.frmParent = Me
-        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(257, 145)
+        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(252, 138)
         Me.ucrFillOrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillOrColourReceiver.Name = "ucrFillOrColourReceiver"
         Me.ucrFillOrColourReceiver.Selector = Nothing
-        Me.ucrFillOrColourReceiver.Size = New System.Drawing.Size(125, 26)
+        Me.ucrFillOrColourReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrFillOrColourReceiver.strNcFilePath = ""
-        Me.ucrFillOrColourReceiver.TabIndex = 5
+        Me.ucrFillOrColourReceiver.TabIndex = 6
         Me.ucrFillOrColourReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(257, 36)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(252, 95)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 26)
+        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 27)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 3
+        Me.ucrReceiverX.TabIndex = 4
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrGraphicsSelector
@@ -169,7 +253,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 213)
         Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
         Me.ucrAdditionalLayers.Size = New System.Drawing.Size(218, 182)
-        Me.ucrAdditionalLayers.TabIndex = 7
+        Me.ucrAdditionalLayers.TabIndex = 8
         '
         'ucrBase
         '
@@ -180,124 +264,14 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
-        'cmdYAxis
-        '
-        Me.cmdYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYAxis.Location = New System.Drawing.Point(306, 401)
-        Me.cmdYAxis.Name = "cmdYAxis"
-        Me.cmdYAxis.Size = New System.Drawing.Size(56, 25)
-        Me.cmdYAxis.TabIndex = 20
-        Me.cmdYAxis.Tag = ""
-        Me.cmdYAxis.Text = "Y-Axis"
-        Me.cmdYAxis.UseVisualStyleBackColor = True
-        '
-        'cmdXAxis
-        '
-        Me.cmdXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdXAxis.Location = New System.Drawing.Point(252, 401)
-        Me.cmdXAxis.Name = "cmdXAxis"
-        Me.cmdXAxis.Size = New System.Drawing.Size(56, 25)
-        Me.cmdXAxis.TabIndex = 21
-        Me.cmdXAxis.Tag = ""
-        Me.cmdXAxis.Text = "X-Axis"
-        Me.cmdXAxis.UseVisualStyleBackColor = True
-        '
-        'cmdTitles
-        '
-        Me.cmdTitles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTitles.Location = New System.Drawing.Point(201, 401)
-        Me.cmdTitles.Name = "cmdTitles"
-        Me.cmdTitles.Size = New System.Drawing.Size(53, 25)
-        Me.cmdTitles.TabIndex = 22
-        Me.cmdTitles.Tag = ""
-        Me.cmdTitles.Text = "Titles"
-        Me.cmdTitles.UseVisualStyleBackColor = True
-        '
-        'ucrChkLegend
-        '
-        Me.ucrChkLegend.AutoSize = True
-        Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(257, 259)
-        Me.ucrChkLegend.Name = "ucrChkLegend"
-        Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
-        Me.ucrChkLegend.TabIndex = 23
-        '
-        'ucrChkFlipCoordinates
-        '
-        Me.ucrChkFlipCoordinates.AutoSize = True
-        Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(257, 290)
-        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
-        Me.ucrChkFlipCoordinates.TabIndex = 24
-        '
-        'lblYVariable
-        '
-        Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYVariable.Location = New System.Drawing.Point(259, 76)
-        Me.lblYVariable.Name = "lblYVariable"
-        Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblYVariable.TabIndex = 25
-        Me.lblYVariable.Tag = "Y_Variable:"
-        Me.lblYVariable.Text = "Y Variable:"
-        '
-        'ucrChkSecondY
-        '
-        Me.ucrChkSecondY.AutoSize = True
-        Me.ucrChkSecondY.Checked = False
-        Me.ucrChkSecondY.Location = New System.Drawing.Point(257, 181)
-        Me.ucrChkSecondY.Name = "ucrChkSecondY"
-        Me.ucrChkSecondY.Size = New System.Drawing.Size(125, 24)
-        Me.ucrChkSecondY.TabIndex = 27
-        '
-        'lblSecondYVariable
-        '
-        Me.lblSecondYVariable.AutoSize = True
-        Me.lblSecondYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSecondYVariable.Location = New System.Drawing.Point(254, 213)
-        Me.lblSecondYVariable.Name = "lblSecondYVariable"
-        Me.lblSecondYVariable.Size = New System.Drawing.Size(79, 13)
-        Me.lblSecondYVariable.TabIndex = 28
-        Me.lblSecondYVariable.Tag = ""
-        Me.lblSecondYVariable.Text = "2nd Y Variable:"
-        '
-        'ucrReceiverSecondYVariable
-        '
-        Me.ucrReceiverSecondYVariable.AutoSize = True
-        Me.ucrReceiverSecondYVariable.frmParent = Me
-        Me.ucrReceiverSecondYVariable.Location = New System.Drawing.Point(252, 228)
-        Me.ucrReceiverSecondYVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSecondYVariable.Name = "ucrReceiverSecondYVariable"
-        Me.ucrReceiverSecondYVariable.Selector = Nothing
-        Me.ucrReceiverSecondYVariable.Size = New System.Drawing.Size(125, 26)
-        Me.ucrReceiverSecondYVariable.strNcFilePath = ""
-        Me.ucrReceiverSecondYVariable.TabIndex = 29
-        Me.ucrReceiverSecondYVariable.ucrSelector = Nothing
-        '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.AutoSize = True
-        Me.ucrReceiverY.frmParent = Me
-        Me.ucrReceiverY.Location = New System.Drawing.Point(257, 89)
-        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.Size = New System.Drawing.Size(125, 20)
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 30
-        Me.ucrReceiverY.ucrSelector = Nothing
-        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 519)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrReceiverY)
-        Me.Controls.Add(Me.lblSecondYVariable)
-        Me.Controls.Add(Me.ucrReceiverSecondYVariable)
-        Me.Controls.Add(Me.ucrChkSecondY)
         Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.ucrChkLegend)
@@ -344,8 +318,6 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents lblYVariable As Label
-    Friend WithEvents lblSecondYVariable As Label
-    Friend WithEvents ucrReceiverSecondYVariable As ucrReceiverSingle
-    Friend WithEvents ucrChkSecondY As ucrCheck
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
 End Class
