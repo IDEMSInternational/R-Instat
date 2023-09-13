@@ -912,17 +912,8 @@ Public Class RLink
     Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
         Dim strScriptCmd As String = ""
 
-
         'for each line in script
         For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
-            'remove any comments (character '#' and anything after)
-            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
-            Select Case iCommentPos
-                Case 0      'a normal comment line (starts with '#')
-                    Continue For
-                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
-                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
-            End Select
 
             'if line is empty or only whitespace then ignore line
             Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
