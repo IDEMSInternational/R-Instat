@@ -270,7 +270,6 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=2)
-        ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
@@ -282,6 +281,7 @@ Public Class dlgOneVariableSummarise
         If bReset Then
             ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
             ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
+            ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         End If
         bRCodeSet = True
         FillListView()
