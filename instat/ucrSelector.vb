@@ -17,9 +17,8 @@ Public Class ucrSelector
     Public CurrentReceiver As ucrReceiver
     Public Event ResetAll()
     Public Event ResetReceivers()
-    Public Event VariablesInReceiversChanged()
     Public Event DataFrameChanged()
-    Public lstVariablesInReceivers As List(Of Tuple(Of String, String))
+
     Public bFirstLoad As Boolean
     Public strCurrentDataFrame As String = ""
     ' If a dialog has receivers which can have columns from multiple data frames
@@ -50,7 +49,6 @@ Public Class ucrSelector
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        lstVariablesInReceivers = New List(Of Tuple(Of String, String))
         bFirstLoad = True
         'bIncludeOverall = False 
         lstIncludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
@@ -115,7 +113,7 @@ Public Class ucrSelector
 
         lstCombinedMetadataLists = CombineMetadataLists(CurrentReceiver.lstIncludedMetadataProperties, CurrentReceiver.lstExcludedMetadataProperties)
         If CurrentReceiver.bExcludeFromSelector Then
-            arrStrExclud = GetVariablesInReceiver().ToArray
+            arrStrExclud = CurrentReceiver.GetVariableNamesList(bWithQuotes:=False)
         End If
 
         'set the type of 'elements' to show. If current receiver is set to a particular 'element' type then use it  
@@ -151,7 +149,7 @@ Public Class ucrSelector
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
                                       strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         If Not CurrentReceiver.bExcludeFromSelector Then
-            CurrentReceiver.RemoveAnyVariablesNotInList() 'this needed for the multiple receiver(s) where the autofill is not applied
+            CurrentReceiver.RemoveAnyVariablesNotInSelector() 'this needed for the multiple receiver(s) where the autofill is not applied
         End If
         EnableDataOptions(strCurrentType)
 
@@ -202,20 +200,9 @@ Public Class ucrSelector
         Return strSelectorFillCondition
     End Function
 
-    Private Function GetVariablesInReceiver() As List(Of String)
-        Dim lstVars As New List(Of String)
-
-        For Each tplTemp As Tuple(Of String, String) In lstVariablesInReceivers
-            lstVars.Add(tplTemp.Item1)
-        Next
-        Return lstVars
-    End Function
-
     Public Overridable Sub Reset()
         RaiseEvent ResetReceivers()
-        lstVariablesInReceivers.Clear()
         LoadList()
-        'lstItemsInReceivers.Clear()
     End Sub
 
     Public Sub SetCurrentReceiver(conReceiver As ucrReceiver)
@@ -261,7 +248,7 @@ Public Class ucrSelector
 
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
-            CurrentReceiver.AddSelected()
+            CurrentReceiver.AddSelectedSelectorVariables()
             'sets current focus enabling correct tab navigation
             CurrentReceiver.Focus()
             'check if autoswitching from the receiver is allowed before doing an autoswitch. 
@@ -329,27 +316,7 @@ Public Class ucrSelector
         ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
 
-    Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
-        If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
-            lstVariablesInReceivers.Add(New Tuple(Of String, String)(strVariable, strDataFrame))
-            If ucrLinkedSelector IsNot Nothing Then
-                ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
-            End If
-            RaiseEvent VariablesInReceiversChanged()
-        End If
-    End Sub
 
-    Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
-        For i As Integer = lstVariablesInReceivers.Count - 1 To 0 Step -1
-            If lstVariablesInReceivers(i).Item1 = strVariable AndAlso (strDataFrame = "" OrElse lstVariablesInReceivers(i).Item2 = strDataFrame) Then
-                lstVariablesInReceivers.RemoveAt(i)
-            End If
-        Next
-        If ucrLinkedSelector IsNot Nothing Then
-            ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
-        End If
-        RaiseEvent VariablesInReceiversChanged()
-    End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
         Dim iIncludeIndex As Integer
