@@ -757,7 +757,9 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 )
 
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
-  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  curr_data <- self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)
+  self$remove_current_column_selection() # temporary fix the bug reported in issue #8488
+  
   # Column name must be character
   if (type == "single") {
     if (new_col_name != curr_col_name) {
