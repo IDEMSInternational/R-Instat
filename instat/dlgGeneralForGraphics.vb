@@ -63,6 +63,8 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
         Dim dctLegendPosition As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 420
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
@@ -94,9 +96,17 @@ Public Class dlgGeneralForGraphics
         ucrFillOrColourReceiver.bWithQuotes = False
         ucrFillOrColourReceiver.SetParameterIsString()
 
-        ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
-        ucrChkFlipCoordinates.SetRDefault("FALSE")
+        ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+
+        'ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        'ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        'ucrChkFlipCoordinates.SetRDefault("FALSE")
 
         ucrChkLegend.SetText("Legend:")
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
@@ -175,7 +185,7 @@ Public Class dlgGeneralForGraphics
         ucrReceiverY.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
         ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
-        ucrChkFlipCoordinates.SetRCode(clsGlobalAesFunction, bReset)
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrSave.SetRCode(clsBaseOperator, bReset)
@@ -310,5 +320,9 @@ Public Class dlgGeneralForGraphics
 
     Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         AddRemoveTheme()
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkLegend.ControlContentsChanged
+
     End Sub
 End Class

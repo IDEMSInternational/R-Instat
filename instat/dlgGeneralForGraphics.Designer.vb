@@ -74,7 +74,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(254, 81)
+        Me.lblXVariable.Location = New System.Drawing.Point(245, 81)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 3
@@ -85,7 +85,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lblFillOrColor.AutoSize = True
         Me.lblFillOrColor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillOrColor.Location = New System.Drawing.Point(254, 122)
+        Me.lblFillOrColor.Location = New System.Drawing.Point(245, 122)
         Me.lblFillOrColor.Name = "lblFillOrColor"
         Me.lblFillOrColor.Size = New System.Drawing.Size(57, 13)
         Me.lblFillOrColor.TabIndex = 5
@@ -151,7 +151,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lblYVariable.AutoSize = True
         Me.lblYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYVariable.Location = New System.Drawing.Point(254, 38)
+        Me.lblYVariable.Location = New System.Drawing.Point(245, 38)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblYVariable.TabIndex = 1
@@ -164,7 +164,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(252, 360)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(243, 360)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLegendPosition.TabIndex = 15
@@ -173,7 +173,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrReceiverY.AutoSize = True
         Me.ucrReceiverY.frmParent = Me
-        Me.ucrReceiverY.Location = New System.Drawing.Point(252, 51)
+        Me.ucrReceiverY.Location = New System.Drawing.Point(243, 51)
         Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverY.Name = "ucrReceiverY"
         Me.ucrReceiverY.Selector = Nothing
@@ -186,16 +186,16 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkFlipCoordinates.AutoSize = True
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(257, 300)
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(243, 305)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(156, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
         '
         'ucrChkLegend
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(257, 335)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(243, 335)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
         Me.ucrChkLegend.TabIndex = 14
@@ -206,14 +206,14 @@ Partial Class dlgGeneralForGraphics
         Me.ucrSave.Location = New System.Drawing.Point(6, 434)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(346, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(397, 24)
         Me.ucrSave.TabIndex = 16
         '
         'ucrFillOrColourReceiver
         '
         Me.ucrFillOrColourReceiver.AutoSize = True
         Me.ucrFillOrColourReceiver.frmParent = Me
-        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(252, 138)
+        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(243, 138)
         Me.ucrFillOrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillOrColourReceiver.Name = "ucrFillOrColourReceiver"
         Me.ucrFillOrColourReceiver.Selector = Nothing
@@ -226,7 +226,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(252, 95)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(243, 95)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
