@@ -912,6 +912,7 @@ Public Class RLink
     Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
         Dim strScriptCmd As String = ""
 
+
         'for each line in script
         For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
             'remove any comments (character '#' and anything after)
