@@ -103,11 +103,6 @@ Public Class dlgGeneralForGraphics
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-
-        'ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        'ucrChkFlipCoordinates.SetText("Flip Coordinates")
-        'ucrChkFlipCoordinates.SetRDefault("FALSE")
-
         ucrChkLegend.SetText("Legend:")
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
