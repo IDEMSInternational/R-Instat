@@ -579,6 +579,10 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Sub InsertTextToScriptWindow(strText As String)
+        ucrScriptWindow.InsertText(strText)
+    End Sub
+
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgNewDataFrame.ShowDialog()
     End Sub

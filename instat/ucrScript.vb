@@ -103,6 +103,10 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+    Public Sub InsertText(strText As String)
+        clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText)
+    End Sub
+
     ''' <summary>
     ''' Removes the selected text from the active tab, and copies the removed text to the clipboard.
     ''' </summary>
@@ -690,6 +694,10 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+    Private Sub AddScript()
+        dlgScript.ShowDialog()
+    End Sub
+
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
         'enable and disable menu options based on the active script properties before the user views them
@@ -873,4 +881,7 @@ Public Class ucrScript
         End If
     End Sub
 
+    Private Sub cmdAddScript_Click(sender As Object, e As EventArgs) Handles cmdInsertScript.Click
+        AddScript()
+    End Sub
 End Class

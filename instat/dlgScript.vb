@@ -110,9 +110,9 @@ Public Class dlgScript
         ucrSaveModel.SetLinkedDisplayControl(btnSaveModel)
 
         'hide base button comment controls
-        ucrBase.chkComment.Checked = False
-        ucrBase.chkComment.Visible = False
-        ucrBase.txtComment.Visible = False
+        'ucrBase.chkComment.Checked = False
+        'ucrBase.chkComment.Visible = False
+        'ucrBase.txtComment.Visible = False
 
 
     End Sub
@@ -172,7 +172,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(txtScript.Text.Length > 0)
+        'ucrBase.OKEnabled(txtScript.Text.Length > 0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -186,14 +186,14 @@ Public Class dlgScript
         ucrSaveModel.SetRCode(clsSaveModelFunction, bReset)
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-    End Sub
+    'Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    '    SetDefaults()
+    '    SetRCodeForControls(True)
+    'End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=txtScript.Text, strNewComment:=strComment)
-    End Sub
+    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    frmMain.clsRLink.RunScriptFromWindow(strNewScript:=txtScript.Text, strNewComment:=strComment)
+    'End Sub
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
         ucrComboGetPackage.SetVisible(False)
@@ -335,6 +335,13 @@ Public Class dlgScript
         AddAssignToString(ucrSaveTable.GetText)
     End Sub
 
+    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
+        If txtScript.Text.Length < 1 Then
+            Exit Sub
+        End If
+        frmMain.InsertTextToScriptWindow(txtScript.Text)
+    End Sub
+
     Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
 
         If Not ucrSaveModel.IsComplete Then
@@ -363,7 +370,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
-        ucrBase.clsRsyntax.SetCommandString(txtScript.Text)
+        ' ucrBase.clsRsyntax.SetCommandString(txtScript.Text)
         TestOKEnabled()
     End Sub
 
