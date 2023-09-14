@@ -877,7 +877,7 @@ Public Class RLink
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
         Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
         'get file path. If not found then silently return nothing
-        expTemp = GetSymbol(strTempAssignTo, bSilent:=False)
+        expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
             'get the file path name, check if it exists and whether it has contents
@@ -914,6 +914,14 @@ Public Class RLink
 
         'for each line in script
         For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
+            'remove any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
+            End Select
 
             'if line is empty or only whitespace then ignore line
             Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
