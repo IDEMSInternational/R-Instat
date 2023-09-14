@@ -884,4 +884,30 @@ Public Class ucrScript
     Private Sub cmdAddScript_Click(sender As Object, e As EventArgs) Handles cmdInsertScript.Click
         AddScript()
     End Sub
+
+    Private Sub TabControl_DoubleClick(sender As Object, e As EventArgs) Handles TabControl.DoubleClick
+        Dim rectangle = TabControl.GetTabRect(TabControl.SelectedIndex())
+        rectangle = TabControl.RectangleToScreen(rectangle)
+        rectangle = TabControl.Parent.RectangleToClient(rectangle)
+        Dim textbox As New System.Windows.Forms.TextBox
+
+        AddHandler textbox.Leave, AddressOf RenameTextboxLeave
+        AddHandler textbox.KeyDown, AddressOf RenameTextboxKeyDown
+        textbox.SetBounds(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height)
+        Me.Controls.Add(textbox)
+        textbox.BringToFront()
+        textbox.Focus()
+    End Sub
+
+    Private Sub RenameTextboxKeyDown(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            TabControl.SelectedTab.Text = sender.text
+            'Move focus from the textbox - this will make it dispose
+            TabControl.SelectedTab.Focus()
+        End If
+    End Sub
+
+    Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
+        Dim unused = sender.dispose()
+    End Sub
 End Class
