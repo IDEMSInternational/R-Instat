@@ -332,7 +332,6 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
           all_columns[!(all_columns %in% selected_columns)]
         self$append_to_variables_metadata(hidden_cols, is_hidden_label, TRUE)
         private$.variables_metadata_changed <- TRUE
-        print(head(out))
       }
     }
     if(!is.data.frame(out)) {
