@@ -34,85 +34,148 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
-    Public Overrides Sub AddSelected()
-        Dim lstItems(Selector.lstAvailableVariable.SelectedItems.Count - 1) As KeyValuePair(Of String, String)
-        Dim lviTemp As ListViewItem
-        Dim i As Integer = 0
-
-        For Each lviTemp In Selector.lstAvailableVariable.SelectedItems
-            lstItems(i) = New KeyValuePair(Of String, String)(lviTemp.Tag, lviTemp.Text)
-            i = i + 1
+    Public Overrides Sub AddSelectedSelectorVariables()
+        Dim lstItems As New List(Of KeyValuePair(Of String, String))
+        For Each lviTemp As ListViewItem In Selector.lstAvailableVariable.SelectedItems
+            lstItems.Add(New KeyValuePair(Of String, String)(lviTemp.Tag, lviTemp.Text))
         Next
         AddMultiple(lstItems)
     End Sub
 
-    Private Function GetCurrItemNames() As List(Of String)
-        Dim strItemNames As New List(Of String)
-        Dim currItem As ListViewItem
-
-        For Each currItem In lstSelectedVariables.Items
-            strItemNames.Add(currItem.Text)
+    Public Sub AddMultiple(lstItems As IEnumerable(Of KeyValuePair(Of String, String)))
+        Dim lstActualItemsToAdd As New List(Of KeyValuePair(Of String, String))
+        'first eliminate all items that already exist
+        'this improves perfomance significantly for wide data sets
+        For Each kvpTempItem As KeyValuePair(Of String, String) In lstItems
+            If lstSelectedVariables.FindItemWithText(kvpTempItem.Value) Is Nothing Then
+                lstActualItemsToAdd.Add(kvpTempItem)
+            End If
         Next
-        Return strItemNames
+
+        If lstActualItemsToAdd.Count = 0 Then
+            Exit Sub
+        End If
+
+        'then add the new items
+        For Each kvpTempItem As KeyValuePair(Of String, String) In lstActualItemsToAdd
+            lstSelectedVariables.Items.Add(New ListViewItem With {
+                    .Name = kvpTempItem.Value,
+                    .Text = kvpTempItem.Value,
+                    .ToolTipText = kvpTempItem.Value,
+                    .Tag = kvpTempItem.Key,
+                    .Group = AddGroupName(kvpTempItem.Key)
+                })
+        Next
+
+        SetGroupHeaderVariablesCount()
+
+        OnSelectionChanged()
+    End Sub
+
+    'add new group if it exist and return it
+    'support of multiple groups assumes that the receiver may have variables from more than one data frame
+    'this feature is not yet supported fully
+    Private Function AddGroupName(strNewGroupName As String) As ListViewGroup
+        For Each grp In lstSelectedVariables.Groups
+            If grp.Name = strNewGroupName Then
+                Return grp
+            End If
+        Next
+        Dim newGrp As New ListViewGroup(key:=strNewGroupName, headerText:=strNewGroupName)
+        lstSelectedVariables.Groups.Add(newGrp)
+        Return newGrp
     End Function
 
-    Private Function GetCurrGroupNames() As List(Of String)
-        Dim strHeaders As New List(Of String)
-        Dim grpTemp As ListViewGroup
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixreceiver As Boolean = False)
+        Dim kvpItems(0) As KeyValuePair(Of String, String)
+        If strDataFrame = "" Then
+            Dim lvi As ListViewItem = Selector.lstAvailableVariable.FindItemWithText(strItem)
+            If lvi IsNot Nothing Then
+                strDataFrame = lvi.Tag
+            End If
+        End If
+        kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
+        AddMultiple(kvpItems)
 
-        For Each grpTemp In lstSelectedVariables.Groups
-            strHeaders.Add(grpTemp.Name)
-        Next
-        Return strHeaders
-    End Function
+        RemoveAnyVariablesNotInSelector() 'needed due to the Autofill option
+
+        lstSelectedVariables.Enabled = Not bFixreceiver
+    End Sub
 
     Public Overrides Sub RemoveSelected()
-        Dim objItem As ListViewItem
-        Dim tempObjects(lstSelectedVariables.SelectedItems.Count - 1) As Object
-
-        If lstSelectedVariables.SelectedItems.Count > 0 Then
-            lstSelectedVariables.SelectedItems.CopyTo(tempObjects, 0)
-            For Each objItem In tempObjects
-                lstSelectedVariables.Items.Remove(objItem)
-                Selector.RemoveFromVariablesList(objItem.Text, objItem.Tag)
-            Next
-        End If
+        For Each lvi As ListViewItem In lstSelectedVariables.SelectedItems
+            lstSelectedVariables.Items.Remove(lvi)
+        Next
+        SetGroupHeaderVariablesCount()
         OnSelectionChanged()
         MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Remove(strItems() As String)
-        MyBase.Remove(strItems)
-
-        If strItems.Count > 0 Then
-            For Each strTempItem In strItems
-                lstSelectedVariables.Items.RemoveByKey(strTempItem)
-                'TODO pass data frame for variables
-                Selector.RemoveFromVariablesList(strTempItem)
-            Next
-            OnSelectionChanged()
-            MyBase.RemoveSelected()
-        End If
+        For Each strTempItem In strItems
+            lstSelectedVariables.Items.RemoveByKey(strTempItem)
+        Next
+        SetGroupHeaderVariablesCount()
+        OnSelectionChanged()
+        MyBase.RemoveSelected()
     End Sub
 
     Public Overrides Sub Clear()
-        Dim lviVar As ListViewItem
-        Dim strItems As New List(Of String)
+        'as of 23/08/2023. this block can be called several times. to prevent recursive events just exit sub if already empty
+        If lstSelectedVariables.Items.Count = 0 AndAlso lstSelectedVariables.Groups.Count = 0 Then
+            Exit Sub
+        End If
+        lstSelectedVariables.Items.Clear()
+        lstSelectedVariables.Groups.Clear()
+        OnSelectionChanged()
+        MyBase.RemoveSelected()
+    End Sub
 
-        For Each lviVar In lstSelectedVariables.Items
-            strItems.Add(lviVar.Text)
+
+    ''' <summary>
+    ''' Removes any variable in the multiple receiver
+    ''' that is not in the list of variables of the selector
+    ''' </summary>
+    Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        Dim lstItemsToRemove As New List(Of ListViewItem)
+        For Each lvi As ListViewItem In lstSelectedVariables.Items
+            If Selector.lstAvailableVariable.FindItemWithText(lvi.Text) Is Nothing Then
+                lstItemsToRemove.Add(lvi)
+            End If
         Next
-        Remove(strItems.ToArray())
+
+        'as of 23/08/2023. this subroutine can be called several times. to prevent recursive events just exit sub if there is nothing to remove
+        If lstItemsToRemove.Count = 0 Then
+            Exit Sub
+        End If
+
+        For Each lvi As ListViewItem In lstItemsToRemove
+            lstSelectedVariables.Items.Remove(lvi)
+        Next
+
+        OnSelectionChanged()
+        MyBase.RemoveSelected()
+    End Sub
+
+    Private Sub SetGroupHeaderVariablesCount()
+
+        If lstSelectedVariables.Groups.Count = 0 Then
+            Exit Sub
+        End If
+
+        'show count selection at the header of the receiver
+        'todo. support this feature for receivers that may have more than 1 data frame later
+        'it's not clear when the receiver will ever have more than one data frame
+
+        'reset the header text with the name
+        lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Name
+        If lstSelectedVariables.Groups.Count = 1 AndAlso lstSelectedVariables.Items.Count > 0 Then
+            lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Header & " (" & lstSelectedVariables.Items.Count & ")"
+        End If
     End Sub
 
     Public Overrides Function IsEmpty() As Boolean
-
-        If lstSelectedVariables.Items.Count > 0 Then
-            Return False
-        Else
-            Return True
-        End If
-
+        Return lstSelectedVariables.Items.Count = 0
     End Function
 
     Public Function Count() As Integer
@@ -196,6 +259,8 @@ Public Class ucrReceiverMultiple
         Return clsGetVariablesFunc
     End Function
 
+    'todo. this function is used by dlgCombineText dialog only. 
+    'after refactoring the dialog, remove it from here.
     Public Function GetVariablesAsList() As List(Of RFunction)
         Dim lstColumnFunctions As New List(Of RFunction)
         Dim strColumn As String
@@ -225,70 +290,45 @@ Public Class ucrReceiverMultiple
     End Function
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Dim strTemp As String = ""
-        Dim i As Integer
-        If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
-            If bWithQuotes Then
-                strTemp = Chr(34) & lstSelectedVariables.Items(0).Text & Chr(34)
-            Else
-                strTemp = lstSelectedVariables.Items(0).Text
-            End If
-        ElseIf lstSelectedVariables.Items.Count > 1 OrElse bForceVariablesAsList Then
-            If strVariablesListPackageName <> "" Then
-                strTemp = strVariablesListPackageName & "::"
-            End If
-            strTemp = strTemp & strVariablesListFunctionName & "("
-            For i = 0 To lstSelectedVariables.Items.Count - 1
-                If i > 0 Then
-                    strTemp = strTemp & ","
-                End If
-                If lstSelectedVariables.Items(i).Text <> "" Then
-                    If bWithQuotes Then
-                        strTemp = strTemp & Chr(34) & lstSelectedVariables.Items(i).Text & Chr(34)
-                    Else
-                        strTemp = strTemp & lstSelectedVariables.Items(i).Text
-                    End If
-                End If
-            Next
-            strTemp = strTemp & ")"
-        End If
+        Dim strTempBuilder As New Text.StringBuilder
+        Dim strQuoteHolder As String = If(bWithQuotes, Chr(34), "")
 
-        Return strTemp
+        If lstSelectedVariables.Items.Count = 1 AndAlso Not bForceVariablesAsList Then
+            strTempBuilder.Append(strQuoteHolder).Append(lstSelectedVariables.Items(0).Text).Append(strQuoteHolder)
+        ElseIf lstSelectedVariables.Items.Count > 1 OrElse bForceVariablesAsList Then
+            strTempBuilder.Append(If(strVariablesListPackageName <> "", strVariablesListPackageName & "::", ""))
+            strTempBuilder.Append(strVariablesListFunctionName).Append("(")
+            For Each lvi As ListViewItem In lstSelectedVariables.Items
+                strTempBuilder.Append(strQuoteHolder).Append(lvi.Text).Append(strQuoteHolder).Append(",")
+            Next
+            strTempBuilder.Length -= 1 'remove last comma
+            strTempBuilder.Append(")")
+        End If
+        Return strTempBuilder.ToString()
     End Function
 
     Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim lstItems As String()
-
-        ReDim lstItems(0 To lstSelectedVariables.Items.Count - 1)
+        Dim arrItems(lstSelectedVariables.Items.Count) As String
+        Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
         For i = 0 To lstSelectedVariables.Items.Count - 1
-            If bWithQuotes Then
-                lstItems(i) = strQuotes & lstSelectedVariables.Items(i).Text & strQuotes
-            Else
-                lstItems(i) = lstSelectedVariables.Items(i).Text
-            End If
+            arrItems(i) = strQuoteHolder & lstSelectedVariables.Items(i).Text & strQuoteHolder
         Next
-        Return lstItems
+        Return arrItems
     End Function
 
     Public Function GetVariableNamesAsList() As List(Of String)
-        Dim lstItems As New List(Of String)
-
-        For i = 0 To lstSelectedVariables.Items.Count - 1
-            lstItems.Add(lstSelectedVariables.Items(i).Text)
+        Dim lstItems As New List(Of String)(lstSelectedVariables.Items.Count)
+        For Each lvi As ListViewItem In lstSelectedVariables.Items
+            lstItems.Add(lvi.Text)
         Next
         Return lstItems
     End Function
 
     Public Function GetDataFrameNames() As List(Of String)
         Dim strDataFrames As New List(Of String)
-        Dim CurrObj As ListViewItem
-
-        For Each CurrObj In lstSelectedVariables.Items
-            If Not strDataFrames.Contains(CurrObj.Group.Header) Then
-                strDataFrames.Add(CurrObj.Group.Header)
-            End If
+        For Each CurrObj As ListViewGroup In lstSelectedVariables.Groups
+            strDataFrames.Add(CurrObj.Name)
         Next
-
         Return strDataFrames
     End Function
 
@@ -300,17 +340,6 @@ Public Class ucrReceiverMultiple
         lstSelectedVariables.BackColor = Color.White
     End Sub
 
-    ''' <summary>
-    ''' Removes any variable in the multiple receiver
-    ''' that is not in the list of variables of the selector
-    ''' </summary>
-    Public Overrides Sub RemoveAnyVariablesNotInList()
-        For Each strVar In GetVariableNamesAsList()
-            If Selector.lstAvailableVariable.FindItemWithText(strVar) Is Nothing Then
-                Remove({strVar})
-            End If
-        Next
-    End Sub
 
     Private Sub lstSelectedVariables_KeyDown(sender As Object, e As KeyEventArgs) Handles lstSelectedVariables.KeyDown
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
@@ -337,45 +366,6 @@ Public Class ucrReceiverMultiple
             Return 0
         End If
     End Function
-
-    Public Sub AddMultiple(lstItems As KeyValuePair(Of String, String)())
-        Dim kvpTempItem As KeyValuePair(Of String, String)
-        Dim grpCurr As New ListViewGroup
-
-        For Each kvpTempItem In lstItems
-            If Not GetCurrItemNames().Contains(kvpTempItem.Value) Then
-                If Not GetCurrGroupNames().Contains(kvpTempItem.Key) Then
-                    grpCurr = New ListViewGroup(key:=kvpTempItem.Key, headerText:=kvpTempItem.Key)
-                    lstSelectedVariables.Groups.Add(grpCurr)
-                Else
-                    grpCurr = lstSelectedVariables.Groups(GetCurrGroupNames().IndexOf(kvpTempItem.Key))
-                End If
-                lstSelectedVariables.Items.Add(kvpTempItem.Value).Group = grpCurr
-                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Tag = kvpTempItem.Key
-                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).Name = kvpTempItem.Value
-                lstSelectedVariables.Items(lstSelectedVariables.Items.Count - 1).ToolTipText = kvpTempItem.Value
-                Selector.AddToVariablesList(kvpTempItem.Value, kvpTempItem.Key)
-            End If
-        Next
-        OnSelectionChanged()
-    End Sub
-
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixreceiver As Boolean = False)
-        Dim kvpItems(0) As KeyValuePair(Of String, String)
-        If strDataFrame = "" Then
-            For i = 0 To Selector.lstAvailableVariable.Items.Count - 1
-                If Selector.lstAvailableVariable.Items(i).Text = strItem Then
-                    strDataFrame = Selector.lstAvailableVariable.Items(i).Tag
-                End If
-            Next
-        End If
-        kvpItems(0) = New KeyValuePair(Of String, String)(strDataFrame, strItem)
-        AddMultiple(kvpItems)
-
-        RemoveAnyVariablesNotInList() 'needed due to the Autofill option
-
-        lstSelectedVariables.Enabled = Not bFixreceiver
-    End Sub
 
     Public Function GetCurrentItemTypes(Optional bUnique As Boolean = False, Optional bIsCategoricalNumeric As Boolean = False) As List(Of String)
         Dim clsGetDataType As New RFunction
@@ -517,7 +507,13 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Public Overrides Function GetItemsDataFrames() As List(Of String)
-        Return GetCurrGroupNames()
+        Dim strHeaders As New List(Of String)
+        Dim grpTemp As ListViewGroup
+
+        For Each grpTemp In lstSelectedVariables.Groups
+            strHeaders.Add(grpTemp.Name)
+        Next
+        Return strHeaders
     End Function
 
 End Class
