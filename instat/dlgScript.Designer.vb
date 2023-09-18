@@ -101,12 +101,14 @@ Partial Class dlgScript
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(669, 682)
+        Me.TabControl1.Size = New System.Drawing.Size(669, 711)
         Me.TabControl1.TabIndex = 31
         '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.rdoGetObject)
+        Me.TabPage2.Controls.Add(Me.Label1)
+        Me.TabPage2.Controls.Add(Me.txtScript)
         Me.TabPage2.Controls.Add(Me.lblGet)
         Me.TabPage2.Controls.Add(Me.btnGet)
         Me.TabPage2.Controls.Add(Me.ucrReceiverGet)
@@ -128,7 +130,7 @@ Partial Class dlgScript
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage2.Size = New System.Drawing.Size(661, 649)
+        Me.TabPage2.Size = New System.Drawing.Size(661, 678)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Get Data"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -354,7 +356,7 @@ Partial Class dlgScript
         Me.ucrSelectorGet.Location = New System.Drawing.Point(28, 82)
         Me.ucrSelectorGet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGet.Name = "ucrSelectorGet"
-        Me.ucrSelectorGet.Size = New System.Drawing.Size(480, 411)
+        Me.ucrSelectorGet.Size = New System.Drawing.Size(480, 308)
         Me.ucrSelectorGet.TabIndex = 34
         '
         'btnGetPackage
@@ -597,7 +599,7 @@ Partial Class dlgScript
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(690, 16)
+        Me.Label1.Location = New System.Drawing.Point(8, 365)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(54, 20)
@@ -606,18 +608,18 @@ Partial Class dlgScript
         '
         'txtScript
         '
-        Me.txtScript.Location = New System.Drawing.Point(684, 44)
+        Me.txtScript.Location = New System.Drawing.Point(9, 389)
         Me.txtScript.Margin = New System.Windows.Forms.Padding(4)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtScript.Size = New System.Drawing.Size(862, 642)
+        Me.txtScript.Size = New System.Drawing.Size(644, 280)
         Me.txtScript.TabIndex = 32
         '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(577, 719)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(163, 729)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
@@ -628,10 +630,8 @@ Partial Class dlgScript
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1563, 794)
+        Me.ClientSize = New System.Drawing.Size(689, 774)
         Me.Controls.Add(Me.ucrBaseSubdialog)
-        Me.Controls.Add(Me.txtScript)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
