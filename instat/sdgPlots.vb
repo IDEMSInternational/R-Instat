@@ -45,6 +45,9 @@ Public Class sdgPlots
     Private clsPlotLegendTitleFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
+    Private clsFillPaletteFunction As New RFunction
+    Private clsColourPaletteFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
     Public bFirstLoad As Boolean = True
@@ -78,6 +81,9 @@ Public Class sdgPlots
 
     'See bLayersDefaultIsGolobal below.
     Private dctTheta As New Dictionary(Of String, String)
+    Private dctSequatailPairs As New Dictionary(Of String, String)
+    Private dctDivergingPairs As New Dictionary(Of String, String)
+    Private dctQualititivePairs As New Dictionary(Of String, String)
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -550,6 +556,74 @@ Public Class sdgPlots
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
         'Colour
+        ucrPnlColourPalette.AddRadioButton(rdoSequential)
+        ucrPnlColourPalette.AddRadioButton(rdoDiverging)
+        ucrPnlColourPalette.AddRadioButton(rdoQualitative)
+        ucrPnlColourPalette.AddRadioButton(rdoViridis)
+        ucrPnlColourPalette.SetRDefault(rdoSequential)
+
+        ucrInputPalettes.SetParameter(New RParameter("palette", 7))
+        ucrInputPalettes.bAllowNonConditionValues = True
+
+        dctSequatailPairs.Add("Blues", Chr(34) & "Blues" & Chr(34))
+        dctSequatailPairs.Add("Greens", Chr(34) & "Greens" & Chr(34))
+        dctSequatailPairs.Add("Greys", Chr(34) & "Greys" & Chr(34))
+        dctSequatailPairs.Add("Oranges", Chr(34) & "Oranges" & Chr(34))
+        dctSequatailPairs.Add("Purples", Chr(34) & "Purples" & Chr(34))
+        dctSequatailPairs.Add("Reds", Chr(34) & "Reds" & Chr(34))
+        dctSequatailPairs.Add("BuGn", Chr(34) & "BuGn" & Chr(34))
+        dctSequatailPairs.Add("BuPu", Chr(34) & "BuPu" & Chr(34))
+        dctSequatailPairs.Add("GnBu", Chr(34) & "GnBu" & Chr(34))
+        dctSequatailPairs.Add("OrRd", Chr(34) & "OrRd" & Chr(34))
+        dctSequatailPairs.Add("PuBu", Chr(34) & "PuBu" & Chr(34))
+        dctSequatailPairs.Add("PuBuGn", Chr(34) & "PuBuGn" & Chr(34))
+        dctSequatailPairs.Add("PuRd", Chr(34) & "PuRd" & Chr(34))
+        dctSequatailPairs.Add("RdPu", Chr(34) & "RdPu" & Chr(34))
+        dctSequatailPairs.Add("YlGn", Chr(34) & "YlGn" & Chr(34))
+        dctSequatailPairs.Add("YlGnBu", Chr(34) & "YlGnBu" & Chr(34))
+        dctSequatailPairs.Add("YlOrBr", Chr(34) & "YlOrBr" & Chr(34))
+        dctSequatailPairs.Add("YlOrRd", Chr(34) & "YlOrRd" & Chr(34))
+        ucrInputPalettes.SetItems(dctSequatailPairs)
+        ucrInputPalettes.SetDropDownStyleAsNonEditable()
+        ucrInputPalettes.SetLinkedDisplayControl(lblPalette)
+
+        dctDivergingPairs.Add("Spectral", Chr(34) & "Spectral" & Chr(34))
+        dctDivergingPairs.Add("BrBG", Chr(34) & "BrBG" & Chr(34))
+        dctDivergingPairs.Add("PiYG", Chr(34) & "PiYG" & Chr(34))
+        dctDivergingPairs.Add("PRGn", Chr(34) & "PRGn" & Chr(34))
+        dctDivergingPairs.Add("PuOr", Chr(34) & "PuOr" & Chr(34))
+        dctDivergingPairs.Add("RdBu", Chr(34) & "RdBu" & Chr(34))
+        dctDivergingPairs.Add("RdGy", Chr(34) & "RdGy" & Chr(34))
+        dctDivergingPairs.Add("RdYlBu", Chr(34) & "RdYlBu" & Chr(34))
+        dctDivergingPairs.Add("RdYlGn", Chr(34) & "RdYlGn" & Chr(34))
+
+        dctQualititivePairs.Add("Accent", Chr(34) & "Accent" & Chr(34))
+        dctQualititivePairs.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
+        dctQualititivePairs.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
+        dctQualititivePairs.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
+        dctQualititivePairs.Add("Set1", Chr(34) & "Set1" & Chr(34))
+        dctQualititivePairs.Add("Set2", Chr(34) & "Set2" & Chr(34))
+        dctQualititivePairs.Add("Set3", Chr(34) & "Set3" & Chr(34))
+
+        ucrInputColourPalette.SetParameter(New RParameter("option", iNewPosition:=0))
+        dctColourOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
+        dctColourOptions.Add("magma", Chr(34) & "magma" & Chr(34))
+        dctColourOptions.Add("inferno", Chr(34) & "inferno" & Chr(34))
+        dctColourOptions.Add("plasma", Chr(34) & "plasma" & Chr(34))
+        dctColourOptions.Add("cividis", Chr(34) & "cividis" & Chr(34))
+        ucrInputColourPalette.SetRDefault(Chr(34) & "viridis" & Chr(34))
+        ucrInputColourPalette.SetItems(dctColourOptions)
+        ucrInputColourPalette.SetLinkedDisplayControl(lblColourPalette)
+
+        'ucrPnlColourPalette.SetParameter(New RParameter("palette", 0))
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoSequential, "palette", "sequential")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoDiverging, "palette", "diverging")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoQualitative, "palette", "qualitative")
+        ucrPnlColourPalette.AddParameterValuesCondition(rdoViridis, "option", "viridis")
+        ucrChkPalette.SetText("Use Colour/Fill Palette:")
+        ucrChkPalette.AddParameterPresentCondition(True, "checked", True)
+        ucrChkPalette.AddParameterPresentCondition(False, "checked", False)
+
         ucrInputFillScaleColour.SetParameter(New RParameter("option", iNewPosition:=0))
         dctFillOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
         dctFillOptions.Add("magma", Chr(34) & "magma" & Chr(34))
@@ -590,15 +664,15 @@ Public Class sdgPlots
         ucrChkAddFillScale.AddParameterPresentCondition(True, "scale_fill", True)
         ucrChkAddFillScale.AddParameterPresentCondition(False, "scale_fill", False)
 
-        ucrInputColourScalePalette.SetParameter(New RParameter("option", iNewPosition:=0))
-        dctColourOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
-        dctColourOptions.Add("magma", Chr(34) & "magma" & Chr(34))
-        dctColourOptions.Add("inferno", Chr(34) & "inferno" & Chr(34))
-        dctColourOptions.Add("plasma", Chr(34) & "plasma" & Chr(34))
-        dctColourOptions.Add("cividis", Chr(34) & "cividis" & Chr(34))
-        ucrInputColourScalePalette.SetRDefault(Chr(34) & "viridis" & Chr(34))
-        ucrInputColourScalePalette.SetItems(dctColourOptions)
-        ucrInputColourScalePalette.SetLinkedDisplayControl(lblColourScalePalette)
+        'ucrInputColourScalePalette.SetParameter(New RParameter("option", iNewPosition:=0))
+        'dctColourOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
+        'dctColourOptions.Add("magma", Chr(34) & "magma" & Chr(34))
+        'dctColourOptions.Add("inferno", Chr(34) & "inferno" & Chr(34))
+        'dctColourOptions.Add("plasma", Chr(34) & "plasma" & Chr(34))
+        'dctColourOptions.Add("cividis", Chr(34) & "cividis" & Chr(34))
+        'ucrInputColourScalePalette.SetRDefault(Chr(34) & "viridis" & Chr(34))
+        'ucrInputColourScalePalette.SetItems(dctColourOptions)
+        'ucrInputColourScalePalette.SetLinkedDisplayControl(lblColourScalePalette)
 
         ucrNudColourScaleTransparency.SetParameter(New RParameter("alpha", iNewPosition:=1))
         ucrNudColourScaleTransparency.SetMinMax(0, 1)
@@ -650,6 +724,7 @@ Public Class sdgPlots
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
+                        Optional clsNewFillPaletteFunction As RFunction = Nothing, Optional clsNewColourPaletteFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
         bRCodeSet = False
@@ -678,7 +753,11 @@ Public Class sdgPlots
         clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
+        clsFillPaletteFunction = clsNewFillPaletteFunction
+        clsColourPaletteFunction = clsNewColourPaletteFunction
+        clsDummyFunction = New RFunction
 
+        clsDummyFunction.AddParameter("palette", "sequential", iPosition:=0)
 
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
@@ -786,13 +865,14 @@ Public Class sdgPlots
         ucrInputPolarCoordinates.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
 
         'colour
+        ucrInputPalettes.AddAdditionalCodeParameterPair(clsColourPaletteFunction, New RParameter("palette", 7), iAdditionalPairNo:=1)
         ucrInputFillScaleColour.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFillScaleTransparency.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFillScaleMapBegins.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFillScaleMapEnds.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFillScaleReverseColourOrder.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddFillScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        ucrInputColourScalePalette.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        'ucrInputColourScalePalette.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudColourScaleTransparency.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudColourScaleMapBegins.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudColourScaleMapEnds.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
@@ -800,6 +880,10 @@ Public Class sdgPlots
         ucrChkFillDiscrete.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColourDiscrete.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrPnlColourPalette.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputPalettes.SetRCode(clsFillPaletteFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPalette.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputColourPalette.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
 
         'labels
         If bReset Then
@@ -1308,5 +1392,31 @@ Public Class sdgPlots
 
     Private Sub ucrChkIncludeTitles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlValueChanged
         AddRemoveLabs()
+    End Sub
+    Private Sub SetComboBoxItems()
+        If rdoDiverging.Checked Then
+            ucrInputPalettes.SetItems(dctDivergingPairs, bClearExisting:=True)
+            ucrInputPalettes.SetName(dctDivergingPairs.Keys.First)
+        ElseIf rdoQualitative.Checked Then
+            ucrInputPalettes.SetItems(dctQualititivePairs, bClearExisting:=True)
+            ucrInputPalettes.SetName(dctQualititivePairs.Keys.First)
+        ElseIf rdoSequential.Checked Then
+            ucrInputPalettes.SetItems(dctSequatailPairs, bClearExisting:=True)
+            ucrInputPalettes.SetName(dctSequatailPairs.Keys.First)
+        End If
+    End Sub
+
+    Private Sub ucrPnlColourPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColourPalette.ControlValueChanged
+        SetComboBoxItems()
+    End Sub
+
+    Private Sub ucrChkPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPalette.ControlValueChanged
+        If Not ucrChkPalette.Checked Then
+            clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillPaletteFunction, iPosition:=15)
+            clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
+        Else
+            clsBaseOperator.AddParameter("scale_colour_brewer", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=15)
+            clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+        End If
     End Sub
 End Class
