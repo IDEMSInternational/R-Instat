@@ -583,6 +583,10 @@ Public Class frmMain
         ucrScriptWindow.InsertText(strText)
     End Sub
 
+    Public Sub RenameScript(strNewName As String)
+        ucrScriptWindow.RenameScript(strNewName)
+    End Sub
+
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgNewDataFrame.ShowDialog()
     End Sub

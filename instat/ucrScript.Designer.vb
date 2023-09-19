@@ -60,6 +60,7 @@ Partial Class ucrScript
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel = New System.Windows.Forms.Panel()
+        Me.cmdInsertScript = New System.Windows.Forms.Button()
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdLoadScript = New System.Windows.Forms.Button()
         Me.cmdRemoveTab = New System.Windows.Forms.Button()
@@ -70,7 +71,7 @@ Partial Class ucrScript
         Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.toolTipScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cmdInsertScript = New System.Windows.Forms.Button()
+        Me.cmdRenameScript = New System.Windows.Forms.Button()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
@@ -213,7 +214,7 @@ Partial Class ucrScript
         Me.tlpTableContainer.Controls.Add(Me.TabControl, 0, 2)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
-        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tlpTableContainer.Margin = New System.Windows.Forms.Padding(4)
         Me.tlpTableContainer.Name = "tlpTableContainer"
         Me.tlpTableContainer.RowCount = 3
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
@@ -227,6 +228,7 @@ Partial Class ucrScript
         '
         'Panel
         '
+        Me.Panel.Controls.Add(Me.cmdRenameScript)
         Me.Panel.Controls.Add(Me.cmdInsertScript)
         Me.Panel.Controls.Add(Me.cmdSave)
         Me.Panel.Controls.Add(Me.cmdLoadScript)
@@ -238,100 +240,10 @@ Partial Class ucrScript
         Me.Panel.Controls.Add(Me.cmdRunLineSelection)
         Me.Panel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel.Location = New System.Drawing.Point(4, 34)
-        Me.Panel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel.Name = "Panel"
         Me.Panel.Size = New System.Drawing.Size(997, 42)
         Me.Panel.TabIndex = 10
-        '
-        'cmdSave
-        '
-        Me.cmdSave.Location = New System.Drawing.Point(279, 2)
-        Me.cmdSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdSave.Name = "cmdSave"
-        Me.cmdSave.Size = New System.Drawing.Size(82, 34)
-        Me.cmdSave.TabIndex = 3
-        Me.cmdSave.Text = "Save"
-        Me.cmdSave.UseVisualStyleBackColor = True
-        '
-        'cmdLoadScript
-        '
-        Me.cmdLoadScript.Location = New System.Drawing.Point(194, 2)
-        Me.cmdLoadScript.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdLoadScript.Name = "cmdLoadScript"
-        Me.cmdLoadScript.Size = New System.Drawing.Size(82, 34)
-        Me.cmdLoadScript.TabIndex = 2
-        Me.cmdLoadScript.Text = "Load"
-        Me.cmdLoadScript.UseVisualStyleBackColor = True
-        '
-        'cmdRemoveTab
-        '
-        Me.cmdRemoveTab.Location = New System.Drawing.Point(566, 2)
-        Me.cmdRemoveTab.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdRemoveTab.Name = "cmdRemoveTab"
-        Me.cmdRemoveTab.Size = New System.Drawing.Size(82, 34)
-        Me.cmdRemoveTab.TabIndex = 5
-        Me.cmdRemoveTab.Text = "Remove"
-        Me.cmdRemoveTab.UseVisualStyleBackColor = True
-        '
-        'cmdAddTab
-        '
-        Me.cmdAddTab.Location = New System.Drawing.Point(389, 2)
-        Me.cmdAddTab.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdAddTab.Name = "cmdAddTab"
-        Me.cmdAddTab.Size = New System.Drawing.Size(82, 34)
-        Me.cmdAddTab.TabIndex = 4
-        Me.cmdAddTab.Text = "New"
-        Me.cmdAddTab.UseVisualStyleBackColor = True
-        '
-        'cmdHelp
-        '
-        Me.cmdHelp.Location = New System.Drawing.Point(767, 2)
-        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(82, 34)
-        Me.cmdHelp.TabIndex = 7
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
-        'cmdClear
-        '
-        Me.cmdClear.Location = New System.Drawing.Point(658, 2)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(82, 34)
-        Me.cmdClear.TabIndex = 6
-        Me.cmdClear.Text = "Clear"
-        Me.cmdClear.UseVisualStyleBackColor = True
-        '
-        'cmdRunAll
-        '
-        Me.cmdRunAll.Location = New System.Drawing.Point(87, 2)
-        Me.cmdRunAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdRunAll.Name = "cmdRunAll"
-        Me.cmdRunAll.Size = New System.Drawing.Size(82, 34)
-        Me.cmdRunAll.TabIndex = 1
-        Me.cmdRunAll.Text = "Run All"
-        Me.cmdRunAll.UseVisualStyleBackColor = True
-        '
-        'cmdRunLineSelection
-        '
-        Me.cmdRunLineSelection.Location = New System.Drawing.Point(3, 2)
-        Me.cmdRunLineSelection.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.cmdRunLineSelection.Name = "cmdRunLineSelection"
-        Me.cmdRunLineSelection.Size = New System.Drawing.Size(82, 34)
-        Me.cmdRunLineSelection.TabIndex = 0
-        Me.cmdRunLineSelection.Text = "Run"
-        Me.cmdRunLineSelection.UseVisualStyleBackColor = True
-        '
-        'TabControl
-        '
-        Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl.Location = New System.Drawing.Point(4, 84)
-        Me.TabControl.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(997, 662)
-        Me.TabControl.TabIndex = 1
         '
         'cmdInsertScript
         '
@@ -343,13 +255,113 @@ Partial Class ucrScript
         Me.cmdInsertScript.Text = "Insert"
         Me.cmdInsertScript.UseVisualStyleBackColor = True
         '
+        'cmdSave
+        '
+        Me.cmdSave.Location = New System.Drawing.Point(279, 2)
+        Me.cmdSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(82, 34)
+        Me.cmdSave.TabIndex = 3
+        Me.cmdSave.Text = "Save"
+        Me.cmdSave.UseVisualStyleBackColor = True
+        '
+        'cmdLoadScript
+        '
+        Me.cmdLoadScript.Location = New System.Drawing.Point(194, 2)
+        Me.cmdLoadScript.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdLoadScript.Name = "cmdLoadScript"
+        Me.cmdLoadScript.Size = New System.Drawing.Size(82, 34)
+        Me.cmdLoadScript.TabIndex = 2
+        Me.cmdLoadScript.Text = "Load"
+        Me.cmdLoadScript.UseVisualStyleBackColor = True
+        '
+        'cmdRemoveTab
+        '
+        Me.cmdRemoveTab.Location = New System.Drawing.Point(566, 2)
+        Me.cmdRemoveTab.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdRemoveTab.Name = "cmdRemoveTab"
+        Me.cmdRemoveTab.Size = New System.Drawing.Size(82, 34)
+        Me.cmdRemoveTab.TabIndex = 5
+        Me.cmdRemoveTab.Text = "Remove"
+        Me.cmdRemoveTab.UseVisualStyleBackColor = True
+        '
+        'cmdAddTab
+        '
+        Me.cmdAddTab.Location = New System.Drawing.Point(389, 2)
+        Me.cmdAddTab.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdAddTab.Name = "cmdAddTab"
+        Me.cmdAddTab.Size = New System.Drawing.Size(82, 34)
+        Me.cmdAddTab.TabIndex = 4
+        Me.cmdAddTab.Text = "New"
+        Me.cmdAddTab.UseVisualStyleBackColor = True
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(887, 2)
+        Me.cmdHelp.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(82, 34)
+        Me.cmdHelp.TabIndex = 7
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Location = New System.Drawing.Point(778, 2)
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(82, 34)
+        Me.cmdClear.TabIndex = 6
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdRunAll
+        '
+        Me.cmdRunAll.Location = New System.Drawing.Point(87, 2)
+        Me.cmdRunAll.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdRunAll.Name = "cmdRunAll"
+        Me.cmdRunAll.Size = New System.Drawing.Size(82, 34)
+        Me.cmdRunAll.TabIndex = 1
+        Me.cmdRunAll.Text = "Run All"
+        Me.cmdRunAll.UseVisualStyleBackColor = True
+        '
+        'cmdRunLineSelection
+        '
+        Me.cmdRunLineSelection.Location = New System.Drawing.Point(3, 2)
+        Me.cmdRunLineSelection.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdRunLineSelection.Name = "cmdRunLineSelection"
+        Me.cmdRunLineSelection.Size = New System.Drawing.Size(82, 34)
+        Me.cmdRunLineSelection.TabIndex = 0
+        Me.cmdRunLineSelection.Text = "Run"
+        Me.cmdRunLineSelection.UseVisualStyleBackColor = True
+        '
+        'TabControl
+        '
+        Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl.Location = New System.Drawing.Point(4, 84)
+        Me.TabControl.Margin = New System.Windows.Forms.Padding(4)
+        Me.TabControl.Name = "TabControl"
+        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.Size = New System.Drawing.Size(997, 662)
+        Me.TabControl.TabIndex = 1
+        '
+        'cmdRenameScript
+        '
+        Me.cmdRenameScript.Location = New System.Drawing.Point(656, 2)
+        Me.cmdRenameScript.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdRenameScript.Name = "cmdRenameScript"
+        Me.cmdRenameScript.Size = New System.Drawing.Size(82, 34)
+        Me.cmdRenameScript.TabIndex = 9
+        Me.cmdRenameScript.Text = "Rename"
+        Me.cmdRenameScript.UseVisualStyleBackColor = True
+        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.Controls.Add(Me.tlpTableContainer)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ucrScript"
         Me.Size = New System.Drawing.Size(1005, 750)
         Me.Tag = "Script_Window"
@@ -391,4 +403,5 @@ Partial Class ucrScript
     Friend WithEvents cmdSave As Button
     Friend WithEvents cmdLoadScript As Button
     Friend WithEvents cmdInsertScript As Button
+    Friend WithEvents cmdRenameScript As Button
 End Class

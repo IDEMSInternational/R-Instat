@@ -103,8 +103,22 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
+    ''' <summary>
+    ''' Insert <paramref name="strText"/> to the current cursor position in the active tab.
+    ''' </summary>
+    ''' <param name="strText"> The text to insert to the contents of the active tab.</param>
     Public Sub InsertText(strText As String)
         clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText)
+    End Sub
+
+    ''' <summary>
+    ''' Rename the script which correspond to the tab with <paramref name="strNewName"/>
+    ''' </summary>
+    ''' <param name="strNewName"> The new name to rename the active tab.</param>
+    Public Sub RenameScript(strNewName As String)
+        If strNewName <> "" Then
+            TabControl.SelectedTab.Text = strNewName
+        End If
     End Sub
 
     ''' <summary>
@@ -295,10 +309,12 @@ Public Class ucrScript
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdLoadScript.Enabled = Not bIsLogTab
+        cmdRenameScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
         cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
 
         cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
+
     End Sub
 
     Private Sub EnableRunButtons(bEnable As Boolean)
@@ -909,5 +925,10 @@ Public Class ucrScript
 
     Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
         Dim unused = sender.dispose()
+    End Sub
+
+    Private Sub cmdRenameScript_Click(sender As Object, e As EventArgs) Handles cmdRenameScript.Click
+        sdgRenameScript.strCurrentScriptName = TabControl.SelectedTab.Text
+        sdgRenameScript.ShowDialog()
     End Sub
 End Class
