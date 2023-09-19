@@ -2142,13 +2142,13 @@ Public Class RLink
             'check to remove the [1] notation before some parameter values
             If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
                 Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).lstRStatements(0).clsElement
+                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).dctRStatements(0).clsElement
             Else
                 'Empty String are Not accepted hence the modification below
                 If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").dctRStatements(0).clsElement
                 Else
-                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).dctRStatements(0).clsElement
                 End If
 
             End If

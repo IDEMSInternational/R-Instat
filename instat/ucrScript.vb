@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Windows.Controls
 Imports RScript
@@ -557,45 +558,34 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        'TODO
-        Dim clsRScript As New clsRScript(clsScriptActive.Text)
+        Dim dctRStatements As OrderedDictionary = New clsRScript(clsScriptActive.Text).dctRStatements
+        If dctRStatements.Count = 0 Then
+            Exit Sub
+        End If
+
         Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
-        clsRScript.
-        Dim lstScriptPos = clsRScript.dctRStatements.Keys
-        Assert.Equal(4, lstScriptPos.Count)
-        Assert.Equal(0, lstScriptPos(0))
+        Dim iNextStatementPos As Integer = 0
+        Dim clsRStatement As clsRStatement = Nothing
 
-
-        Dim strStatement As String = vbCrLf & clsRScript.GetCurrentStatement(iCaretPos)
-        Dim iNextStatementPos As Integer = clsRScript.GetNextStatementPos(iCaretPos)
-        'Dim clsRScript As New clsRScript(clsScriptActive.Lines(clsScriptActive.CurrentLine).Text)
-        'Dim clsRStatement As clsRStatement = clsRScript.lstRStatements(0)
-        'Dim iNextStatementPos As Integer = If(clsScriptActive.CurrentLine = clsScriptActive.Lines.Count - 1,
-        '        clsScriptActive.TextLength,
-        '        clsScriptActive.Lines(clsScriptActive.CurrentLine + 1).Position)
+        For Each iScriptPos As Integer In dctRStatements.Keys
+            If iScriptPos > iCaretPos Then
+                iNextStatementPos = iScriptPos
+                Exit For
+            End If
+            clsRStatement = dctRStatements(iScriptPos)
+        Next
 
         frmMain.clsRLink.RunRStatement(clsRStatement)
 
-        ' if we executed the last statement and there is no blank line after, then add blank line
-        If iNextStatementPos >= clsScriptActive.TextLength _
+        ' if we executed the only/last statement and there is no blank line after, then add blank line
+        If iNextStatementPos = 0 _
                 AndAlso Not (clsScriptActive.Text.EndsWith(vbCr) _
                              OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
             clsScriptActive.AppendText(vbCrLf)
             iNextStatementPos = clsScriptActive.TextLength
         End If
+
         clsScriptActive.GotoPosition(iNextStatementPos)
-
-        'TODO
-        'Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
-
-        'If clsScriptActive.TextLength > 0 Then
-        '    Dim strLineTextString = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
-        '    strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
-        '    strScriptCmd = RunText(strScriptCmd)
-
-        '    Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
-        '    clsScriptActive.GotoPosition(iNextLinePos)
-        'End If
     End Sub
 
     '''--------------------------------------------------------------------------------------------
