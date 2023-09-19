@@ -342,6 +342,12 @@ Public Class dlgScript
         frmMain.InsertTextToScriptWindow(txtScript.Text)
     End Sub
 
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        If txtScript.TextLength > 0 Then
+            txtScript.Clear()
+        End If
+    End Sub
+
     Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
 
         If Not ucrSaveModel.IsComplete Then
