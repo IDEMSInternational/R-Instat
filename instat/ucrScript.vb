@@ -49,6 +49,8 @@ Public Class ucrScript
         toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
         toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
         toolTipScriptWindow.SetToolTip(cmdHelp, "Display the Script Window help information.")
+        toolTipScriptWindow.SetToolTip(cmdRenameScript, "Rename a tab.")
+        toolTipScriptWindow.SetToolTip(cmdInsertScript, "Insert new line in the current tab.")
 
         mnuUndo.ToolTipText = "Undo the last change. (Ctrl+Z)"
         mnuRedo.ToolTipText = "Redo the last change. (Ctrl+Y)"
@@ -67,8 +69,8 @@ Public Class ucrScript
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
-        'Make the log tab the selected tab
-        TabControl.SelectTab(iTabIndexLog)
+        'Make the script tab the selected tab
+        TabControl.SelectTab(1)
     End Sub
 
     Private Sub SetupInitialLayout()
@@ -217,6 +219,7 @@ Public Class ucrScript
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
             dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.FileName = TabControl.SelectedTab.Text
 
             'Ensure that dialog opens in correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
@@ -229,7 +232,7 @@ Public Class ucrScript
                 Try
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
                     bIsTextChanged = False
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
                     If bIsLog Then
                         strInitialDirectoryLog = Path.GetDirectoryName(dlgSave.FileName)
                     Else

@@ -24,9 +24,7 @@ Partial Class sdgRenameScript
     Private Sub InitializeComponent()
         Me.lblCurrentName = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
-        Me.lblScriptLabel = New System.Windows.Forms.Label()
         Me.ucrInputCurrentName = New instat.ucrInputTextBox()
-        Me.ucrInputScriptLabel = New instat.ucrInputTextBox()
         Me.ucrInputNewName = New instat.ucrInputTextBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.SuspendLayout()
@@ -43,20 +41,11 @@ Partial Class sdgRenameScript
         'lblNewName
         '
         Me.lblNewName.AutoSize = True
-        Me.lblNewName.Location = New System.Drawing.Point(270, 24)
+        Me.lblNewName.Location = New System.Drawing.Point(18, 93)
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Size = New System.Drawing.Size(86, 20)
         Me.lblNewName.TabIndex = 36
         Me.lblNewName.Text = "New Name"
-        '
-        'lblScriptLabel
-        '
-        Me.lblScriptLabel.AutoSize = True
-        Me.lblScriptLabel.Location = New System.Drawing.Point(270, 100)
-        Me.lblScriptLabel.Name = "lblScriptLabel"
-        Me.lblScriptLabel.Size = New System.Drawing.Size(93, 20)
-        Me.lblScriptLabel.TabIndex = 39
-        Me.lblScriptLabel.Text = "Script Label"
         '
         'ucrInputCurrentName
         '
@@ -70,25 +59,13 @@ Partial Class sdgRenameScript
         Me.ucrInputCurrentName.Size = New System.Drawing.Size(206, 32)
         Me.ucrInputCurrentName.TabIndex = 40
         '
-        'ucrInputScriptLabel
-        '
-        Me.ucrInputScriptLabel.AddQuotesIfUnrecognised = True
-        Me.ucrInputScriptLabel.AutoSize = True
-        Me.ucrInputScriptLabel.IsMultiline = False
-        Me.ucrInputScriptLabel.IsReadOnly = False
-        Me.ucrInputScriptLabel.Location = New System.Drawing.Point(270, 129)
-        Me.ucrInputScriptLabel.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.ucrInputScriptLabel.Name = "ucrInputScriptLabel"
-        Me.ucrInputScriptLabel.Size = New System.Drawing.Size(206, 32)
-        Me.ucrInputScriptLabel.TabIndex = 38
-        '
         'ucrInputNewName
         '
         Me.ucrInputNewName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewName.AutoSize = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(270, 53)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(18, 122)
         Me.ucrInputNewName.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(206, 32)
@@ -97,7 +74,7 @@ Partial Class sdgRenameScript
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(89, 178)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(15, 164)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
@@ -108,10 +85,8 @@ Partial Class sdgRenameScript
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(516, 236)
+        Me.ClientSize = New System.Drawing.Size(366, 220)
         Me.Controls.Add(Me.ucrInputCurrentName)
-        Me.Controls.Add(Me.lblScriptLabel)
-        Me.Controls.Add(Me.ucrInputScriptLabel)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblNewName)
         Me.Controls.Add(Me.lblCurrentName)
@@ -129,7 +104,5 @@ Partial Class sdgRenameScript
     Friend WithEvents lblCurrentName As Label
     Friend WithEvents lblNewName As Label
     Friend WithEvents ucrInputNewName As ucrInputTextBox
-    Friend WithEvents ucrInputScriptLabel As ucrInputTextBox
-    Friend WithEvents lblScriptLabel As Label
     Friend WithEvents ucrInputCurrentName As ucrInputTextBox
 End Class

@@ -24,7 +24,6 @@ Public Class sdgRenameScript
         ucrInputCurrentName.IsReadOnly = True
         ucrInputCurrentName.SetText(strCurrentScriptName)
         ucrInputNewName.SetText(strCurrentScriptName)
-        ucrInputScriptLabel.Enabled = False 'temporary disabled
     End Sub
 
     Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
