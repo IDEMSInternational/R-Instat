@@ -165,7 +165,7 @@ Public Class dlgScript
         rdoGetGraph.Checked = True
         'ucrReceiverGetObject.SetItemType("graph")
 
-        TabControl1.TabPages(4).Visible = False
+        'TabControl1.TabPages(4).Visible = False
 
         'save controls reset
         rdoSaveDataFrame.Checked = True
