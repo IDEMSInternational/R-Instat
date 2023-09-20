@@ -22,6 +22,7 @@ Public Class dlgScript
     Private bReset As Boolean = True
     Private clsLibraryFunction, clsGetDataFrameFunction, clsSaveColumnFunction, clsConstantDummyFunction,
             clsSaveGraphFunction, clsImportNewDataFrame, clsRFunctionList, clsSaveTableFunction, clsSaveModelFunction As New RFunction
+    Private clsTempFunction As New RFunction
     Private lstAssignToStrings As New List(Of String)
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -86,17 +87,11 @@ Public Class dlgScript
         ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame, btnSaveDataframe}))
 
         ucrChkPreviewLibrary.SetText("Preview")
-        ucrChkPreviewLibrary.AddParameterValuesCondition(True, "preview", "FALSE")
-        ucrChkPreviewLibrary.AddParameterValuesCondition(False, "preview", "TRUE")
+        ucrChkPreviewLibrary.SetParameter(New RParameter("preview", 0))
         ucrChkPreviewLibrary.AddToLinkedControls({ucrInputPreviewLibrary, ucrChkEditLibrary}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPreviewDataFrame.SetText("Preview")
-        ucrChkPreviewDataFrame.AddParameterValuesCondition(True, "preview", "FALSE")
-        ucrChkPreviewDataFrame.AddParameterValuesCondition(False, "preview", "TRUE")
-        ucrChkPreviewDataFrame.AddToLinkedControls({ucrInputPreviewDataframe, ucrChkEditDataframe}, {True}, bNewLinkedHideIfParameterMissing:=True)
-
         ucrChkEditLibrary.SetText("Edit")
-        ucrChkEditDataframe.SetText("Edit")
+        ucrChkPreviewLibrary.SetParameter(New RParameter("edit", 1))
 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
@@ -153,6 +148,7 @@ Public Class dlgScript
         clsConstantDummyFunction = New RFunction
         clsImportNewDataFrame = New RFunction
         clsRFunctionList = New RFunction
+        clsTempFunction = New RFunction
 
         lstAssignToStrings.Clear()
 
@@ -185,9 +181,10 @@ Public Class dlgScript
         'global function resets
         clsLibraryFunction.SetRCommand("library")
         clsLibraryFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
+        clsTempFunction = clsLibraryFunction
 
-        clsConstantDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
-        clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
+        clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=0)
+        clsConstantDummyFunction.AddParameter("edit", "TRUE", iPosition:=1)
 
         clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
         clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrDataFrameGet.strCurrDataFrame & Chr(34))
@@ -199,8 +196,7 @@ Public Class dlgScript
 
         ucrChkEditLibrary.SetRCode(clsConstantDummyFunction)
         ucrChkPreviewLibrary.SetRCode(clsConstantDummyFunction)
-        ucrChkEditDataframe.SetRCode(clsConstantDummyFunction)
-        ucrChkPreviewDataFrame.SetRCode(clsConstantDummyFunction)
+
 
         'saving results
         ucrSaveColumn.SetRCode(clsSaveColumnFunction, bReset)
@@ -283,7 +279,8 @@ Public Class dlgScript
         Dim strAssignedScript As String = ""
         clsGetDataFrameFunction.SetAssignTo(ucrDataFrameGet.cboAvailableDataFrames.Text)
         Dim strAssignedTo As String = clsGetDataFrameFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AppendTextScript(strAssignedScript)
+        'AppendTextScript(strAssignedScript)
+        frmMain.InsertTextToScriptWindow(strAssignedScript)
         AddAssignToString(strAssignedTo)
     End Sub
 
@@ -312,6 +309,7 @@ Public Class dlgScript
             strAssignTo = ucrInputSaveDataFrame.GetText
         End If
 
+        clsTempFunction = clsImportNewDataFrame
         frmMain.ucrScriptWindow.InsertText(strAssignTo & " <- " & clsImportNewDataFrame.ToScript)
     End Sub
 
@@ -360,6 +358,11 @@ Public Class dlgScript
         End If
     End Sub
 
+    Private Sub ucrDataFrameGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGet.ControlValueChanged
+        clsTempFunction = clsGetDataFrameFunction
+        ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetDataFrameFunction))
+    End Sub
+
     Private Sub ucrInputSaveDataFrame_TextChanged(sender As Object, e As EventArgs) Handles ucrInputDataFrame.TextChanged, ucrInputSaveDataFrame.TextChanged
         clsRFunctionList.ClearParameters()
         Dim strData As String = ""
@@ -370,34 +373,25 @@ Public Class dlgScript
         End If
         clsRFunctionList.AddParameter(strData, strData)
         clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
-        ucrInputPreviewDataframe.SetText(GetPreviewText(clsImportNewDataFrame))
+        ucrInputPreviewLibrary.SetText(GetPreviewText(clsImportNewDataFrame))
     End Sub
 
-    Private Sub ucrChkPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreviewLibrary.ControlValueChanged, ucrChkPreviewDataFrame.ControlValueChanged
-        If ucrChangedControl Is ucrChkPreviewLibrary Then
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction))
-        ElseIf ucrChangedControl Is ucrChkPreviewDataFrame Then
-            ucrInputPreviewDataframe.SetText(GetPreviewText(clsImportNewDataFrame))
+    Private Sub ucrChkPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreviewLibrary.ControlValueChanged
+        If ucrChkEditLibrary.Checked Then
+            clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
+            ucrInputPreviewLibrary.SetText(GetPreviewText(clsTempFunction))
+        Else
+            clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=1)
         End If
     End Sub
 
-    Private Sub ucrChkEditLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditLibrary.ControlValueChanged, ucrChkEditDataframe.ControlValueChanged
-        If ucrChangedControl Is ucrChkEditLibrary Then
-            If ucrChkPreviewLibrary.Checked Then
-                clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=1)
-                ucrInputPreviewLibrary.IsReadOnly = Not ucrChkEditLibrary.Checked
-            Else
-                clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
-            End If
-        ElseIf ucrChangedControl Is ucrChkEditDataframe Then
-            If ucrChkPreviewDataFrame.Checked Then
-                clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=1)
-                ucrInputPreviewDataframe.IsReadOnly = Not ucrChkEditDataframe.Checked
-            Else
-                clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
-            End If
+    Private Sub ucrChkEditLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditLibrary.ControlValueChanged
+        If ucrChkEditLibrary.Checked Then
+            clsConstantDummyFunction.AddParameter("edit", "TRUE", iPosition:=1)
+        Else
+            clsConstantDummyFunction.AddParameter("edit", "FALSE", iPosition:=1)
         End If
-
+        ucrInputPreviewLibrary.IsReadOnly = Not ucrChkEditLibrary.Checked
     End Sub
 
     Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click

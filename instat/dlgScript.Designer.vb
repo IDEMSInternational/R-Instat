@@ -25,17 +25,11 @@ Partial Class dlgScript
         Me.btnGetDataFrame = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.ucrChkPreviewLibrary = New instat.ucrCheck()
-        Me.ucrChkEditLibrary = New instat.ucrCheck()
-        Me.ucrInputPreviewLibrary = New instat.ucrInputTextBox()
         Me.btnGetPackage = New System.Windows.Forms.Button()
         Me.lblGetPackage = New System.Windows.Forms.Label()
         Me.ucrComboGetPackage = New instat.ucrInputComboBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.lblDataFrame = New System.Windows.Forms.Label()
-        Me.ucrChkPreviewDataFrame = New instat.ucrCheck()
-        Me.ucrChkEditDataframe = New instat.ucrCheck()
-        Me.ucrInputPreviewDataframe = New instat.ucrInputTextBox()
         Me.btnDataframe = New System.Windows.Forms.Button()
         Me.ucrInputDataFrame = New instat.ucrInputTextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -73,6 +67,9 @@ Partial Class dlgScript
         Me.ucrPnlSaveData = New instat.UcrPanel()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.btnRemoveObjects = New System.Windows.Forms.Button()
+        Me.ucrChkPreviewLibrary = New instat.ucrCheck()
+        Me.ucrChkEditLibrary = New instat.ucrCheck()
+        Me.ucrInputPreviewLibrary = New instat.ucrInputTextBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -104,56 +101,21 @@ Partial Class dlgScript
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(669, 623)
+        Me.TabControl1.Size = New System.Drawing.Size(669, 393)
         Me.TabControl1.TabIndex = 31
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.ucrChkPreviewLibrary)
-        Me.TabPage1.Controls.Add(Me.ucrChkEditLibrary)
-        Me.TabPage1.Controls.Add(Me.ucrInputPreviewLibrary)
         Me.TabPage1.Controls.Add(Me.btnGetPackage)
         Me.TabPage1.Controls.Add(Me.lblGetPackage)
         Me.TabPage1.Controls.Add(Me.ucrComboGetPackage)
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage1.Size = New System.Drawing.Size(661, 360)
         Me.TabPage1.TabIndex = 4
         Me.TabPage1.Text = "Library"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'ucrChkPreviewLibrary
-        '
-        Me.ucrChkPreviewLibrary.AutoSize = True
-        Me.ucrChkPreviewLibrary.Checked = False
-        Me.ucrChkPreviewLibrary.Location = New System.Drawing.Point(11, 121)
-        Me.ucrChkPreviewLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkPreviewLibrary.Name = "ucrChkPreviewLibrary"
-        Me.ucrChkPreviewLibrary.Size = New System.Drawing.Size(118, 34)
-        Me.ucrChkPreviewLibrary.TabIndex = 49
-        '
-        'ucrChkEditLibrary
-        '
-        Me.ucrChkEditLibrary.AutoSize = True
-        Me.ucrChkEditLibrary.Checked = False
-        Me.ucrChkEditLibrary.Location = New System.Drawing.Point(510, 121)
-        Me.ucrChkEditLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkEditLibrary.Name = "ucrChkEditLibrary"
-        Me.ucrChkEditLibrary.Size = New System.Drawing.Size(126, 34)
-        Me.ucrChkEditLibrary.TabIndex = 48
-        '
-        'ucrInputPreviewLibrary
-        '
-        Me.ucrInputPreviewLibrary.AddQuotesIfUnrecognised = True
-        Me.ucrInputPreviewLibrary.AutoSize = True
-        Me.ucrInputPreviewLibrary.IsMultiline = False
-        Me.ucrInputPreviewLibrary.IsReadOnly = True
-        Me.ucrInputPreviewLibrary.Location = New System.Drawing.Point(132, 121)
-        Me.ucrInputPreviewLibrary.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.ucrInputPreviewLibrary.Name = "ucrInputPreviewLibrary"
-        Me.ucrInputPreviewLibrary.Size = New System.Drawing.Size(371, 44)
-        Me.ucrInputPreviewLibrary.TabIndex = 47
         '
         'btnGetPackage
         '
@@ -191,15 +153,12 @@ Partial Class dlgScript
         'TabPage5
         '
         Me.TabPage5.Controls.Add(Me.lblDataFrame)
-        Me.TabPage5.Controls.Add(Me.ucrChkPreviewDataFrame)
-        Me.TabPage5.Controls.Add(Me.ucrChkEditDataframe)
-        Me.TabPage5.Controls.Add(Me.ucrInputPreviewDataframe)
         Me.TabPage5.Controls.Add(Me.btnDataframe)
         Me.TabPage5.Controls.Add(Me.ucrInputDataFrame)
         Me.TabPage5.Location = New System.Drawing.Point(4, 29)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage5.Size = New System.Drawing.Size(661, 360)
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "Dataframe"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -215,38 +174,6 @@ Partial Class dlgScript
         Me.lblDataFrame.TabIndex = 53
         Me.lblDataFrame.Tag = ""
         Me.lblDataFrame.Text = "Data Frame Name:"
-        '
-        'ucrChkPreviewDataFrame
-        '
-        Me.ucrChkPreviewDataFrame.AutoSize = True
-        Me.ucrChkPreviewDataFrame.Checked = False
-        Me.ucrChkPreviewDataFrame.Location = New System.Drawing.Point(7, 96)
-        Me.ucrChkPreviewDataFrame.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkPreviewDataFrame.Name = "ucrChkPreviewDataFrame"
-        Me.ucrChkPreviewDataFrame.Size = New System.Drawing.Size(118, 34)
-        Me.ucrChkPreviewDataFrame.TabIndex = 52
-        '
-        'ucrChkEditDataframe
-        '
-        Me.ucrChkEditDataframe.AutoSize = True
-        Me.ucrChkEditDataframe.Checked = False
-        Me.ucrChkEditDataframe.Location = New System.Drawing.Point(509, 96)
-        Me.ucrChkEditDataframe.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkEditDataframe.Name = "ucrChkEditDataframe"
-        Me.ucrChkEditDataframe.Size = New System.Drawing.Size(126, 34)
-        Me.ucrChkEditDataframe.TabIndex = 51
-        '
-        'ucrInputPreviewDataframe
-        '
-        Me.ucrInputPreviewDataframe.AddQuotesIfUnrecognised = True
-        Me.ucrInputPreviewDataframe.AutoSize = True
-        Me.ucrInputPreviewDataframe.IsMultiline = False
-        Me.ucrInputPreviewDataframe.IsReadOnly = True
-        Me.ucrInputPreviewDataframe.Location = New System.Drawing.Point(131, 96)
-        Me.ucrInputPreviewDataframe.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.ucrInputPreviewDataframe.Name = "ucrInputPreviewDataframe"
-        Me.ucrInputPreviewDataframe.Size = New System.Drawing.Size(371, 44)
-        Me.ucrInputPreviewDataframe.TabIndex = 50
         '
         'btnDataframe
         '
@@ -287,13 +214,13 @@ Partial Class dlgScript
         Me.TabPage2.Controls.Add(Me.rdoGetGraph)
         Me.TabPage2.Controls.Add(Me.ucrPnlGetObject)
         Me.TabPage2.Controls.Add(Me.ucrDataFrameGet)
-        Me.TabPage2.Controls.Add(Me.ucrSelectorGet)
         Me.TabPage2.Controls.Add(Me.btnGetDataFrame)
+        Me.TabPage2.Controls.Add(Me.ucrSelectorGet)
         Me.TabPage2.Location = New System.Drawing.Point(4, 29)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage2.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage2.Size = New System.Drawing.Size(661, 360)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Get Data"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -524,7 +451,7 @@ Partial Class dlgScript
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
         Me.TabPage3.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage3.Size = New System.Drawing.Size(661, 360)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Save Results"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -724,7 +651,7 @@ Partial Class dlgScript
         Me.TabPage4.Location = New System.Drawing.Point(4, 29)
         Me.TabPage4.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage4.Size = New System.Drawing.Size(661, 360)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Finally"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -739,10 +666,42 @@ Partial Class dlgScript
         Me.btnRemoveObjects.Text = "Remove Objects"
         Me.btnRemoveObjects.UseVisualStyleBackColor = True
         '
+        'ucrChkPreviewLibrary
+        '
+        Me.ucrChkPreviewLibrary.AutoSize = True
+        Me.ucrChkPreviewLibrary.Checked = False
+        Me.ucrChkPreviewLibrary.Location = New System.Drawing.Point(36, 414)
+        Me.ucrChkPreviewLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkPreviewLibrary.Name = "ucrChkPreviewLibrary"
+        Me.ucrChkPreviewLibrary.Size = New System.Drawing.Size(118, 34)
+        Me.ucrChkPreviewLibrary.TabIndex = 49
+        '
+        'ucrChkEditLibrary
+        '
+        Me.ucrChkEditLibrary.AutoSize = True
+        Me.ucrChkEditLibrary.Checked = False
+        Me.ucrChkEditLibrary.Location = New System.Drawing.Point(535, 414)
+        Me.ucrChkEditLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkEditLibrary.Name = "ucrChkEditLibrary"
+        Me.ucrChkEditLibrary.Size = New System.Drawing.Size(126, 34)
+        Me.ucrChkEditLibrary.TabIndex = 48
+        '
+        'ucrInputPreviewLibrary
+        '
+        Me.ucrInputPreviewLibrary.AddQuotesIfUnrecognised = True
+        Me.ucrInputPreviewLibrary.AutoSize = True
+        Me.ucrInputPreviewLibrary.IsMultiline = False
+        Me.ucrInputPreviewLibrary.IsReadOnly = True
+        Me.ucrInputPreviewLibrary.Location = New System.Drawing.Point(157, 414)
+        Me.ucrInputPreviewLibrary.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputPreviewLibrary.Name = "ucrInputPreviewLibrary"
+        Me.ucrInputPreviewLibrary.Size = New System.Drawing.Size(371, 44)
+        Me.ucrInputPreviewLibrary.TabIndex = 47
+        '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(168, 645)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(157, 465)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
@@ -753,9 +712,12 @@ Partial Class dlgScript
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(689, 698)
+        Me.ClientSize = New System.Drawing.Size(689, 518)
+        Me.Controls.Add(Me.ucrChkPreviewLibrary)
         Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.ucrChkEditLibrary)
         Me.Controls.Add(Me.ucrBaseSubdialog)
+        Me.Controls.Add(Me.ucrInputPreviewLibrary)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
@@ -824,9 +786,6 @@ Partial Class dlgScript
     Friend WithEvents btnDataframe As Button
     Friend WithEvents ucrInputDataFrame As ucrInputTextBox
     Friend WithEvents lblDataFrame As Label
-    Friend WithEvents ucrChkPreviewDataFrame As ucrCheck
-    Friend WithEvents ucrChkEditDataframe As ucrCheck
-    Friend WithEvents ucrInputPreviewDataframe As ucrInputTextBox
     Friend WithEvents lblSaveDataFrame As Label
     Friend WithEvents btnSaveDataframe As Button
     Friend WithEvents ucrInputSaveDataFrame As ucrInputTextBox
