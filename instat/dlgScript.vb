@@ -165,6 +165,7 @@ Public Class dlgScript
         rdoGetGraph.Checked = True
         'ucrReceiverGetObject.SetItemType("graph")
 
+        TabControl1.TabPages(4).Visible = False
 
         'save controls reset
         rdoSaveDataFrame.Checked = True
@@ -322,7 +323,8 @@ Public Class dlgScript
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AppendTextScript(strAssignedScript)
+        ' AppendTextScript(strAssignedScript)
+        frmMain.ucrScriptWindow.InsertText(strAssignedTo)
         AddAssignToString(ucrSaveColumn.GetText)
     End Sub
 
@@ -334,7 +336,8 @@ Public Class dlgScript
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        frmMain.ucrScriptWindow.InsertText(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        ' AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
         AddAssignToString(ucrSaveGraph.GetText)
     End Sub
 
@@ -346,7 +349,8 @@ Public Class dlgScript
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        frmMain.ucrScriptWindow.InsertText(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        'AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
         AddAssignToString(ucrSaveTable.GetText)
     End Sub
 
@@ -405,7 +409,8 @@ Public Class dlgScript
         Dim strAssignedScript As String = ""
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
-        AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        ' AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
+        frmMain.ucrScriptWindow.InsertText(strAssignedScript.Trim & Environment.NewLine & strGetScript)
         AddAssignToString(ucrSaveModel.GetText)
     End Sub
 
