@@ -438,9 +438,7 @@ Public Class dlgBarAndPieChart
         clsGuideFunction = New RFunction
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
-
         clsGeomLollipopAesFunction = New RFunction
-
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
