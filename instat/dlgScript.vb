@@ -82,8 +82,8 @@ Public Class dlgScript
         ucrPnlSaveData.AddRadioButton(rdoSaveColumn)
         ucrPnlSaveData.AddRadioButton(rdoSaveObject)
 
-        ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
-        ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame, btnSaveDataframe}))
+        ucrInputDataFrame.SetValidationTypeAsRVariable()
+        ucrInputDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblDataFrame, btnDataframe}))
 
         ucrChkPreviewLibrary.SetText("Preview")
         ucrChkPreviewLibrary.AddParameterValuesCondition(True, "preview", "FALSE")
@@ -168,7 +168,7 @@ Public Class dlgScript
 
         'save controls reset
         rdoSaveDataFrame.Checked = True
-        ucrInputSaveDataFrame.SetName("")
+        ucrInputDataFrame.SetName("")
         ucrDataFrameSave.Reset()
         ucrSaveColumn.Reset()
         ucrSaveGraph.Reset()
@@ -245,14 +245,14 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged
-        ucrInputSaveDataFrame.SetVisible(False)
+        ucrInputDataFrame.SetVisible(False)
         ucrDataFrameSave.SetVisible(False)
         ucrSaveColumn.SetVisible(False)
         ucrSaveGraph.SetVisible(False)
         ucrSaveTable.SetVisible(False)
         ucrSaveModel.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
-            ucrInputSaveDataFrame.SetVisible(True)
+            ucrInputDataFrame.SetVisible(True)
         ElseIf rdoSaveColumn.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveColumn.SetVisible(True)
@@ -298,12 +298,12 @@ Public Class dlgScript
         AddAssignToString(strAssignedTo)
     End Sub
 
-    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveDataframe.Click
-        If ucrInputSaveDataFrame.IsEmpty Then
+    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnDataframe.Click
+        If ucrInputDataFrame.IsEmpty Then
             Exit Sub
         End If
 
-        frmMain.ucrScriptWindow.InsertText(ucrInputSaveDataFrame.GetText() & "<-" & clsImportNewDataFrame.ToScript)
+        frmMain.ucrScriptWindow.InsertText(ucrInputDataFrame.GetText() & "<-" & clsImportNewDataFrame.ToScript)
     End Sub
 
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
@@ -348,9 +348,13 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrInputSaveDataFrame_TextChanged(sender As Object, e As EventArgs) Handles ucrInputSaveDataFrame.TextChanged
+    Private Sub btnSaveDataframe_Click(sender As Object, e As EventArgs) Handles btnSaveDataframe.Click
+
+    End Sub
+
+    Private Sub ucrInputSaveDataFrame_TextChanged(sender As Object, e As EventArgs) Handles ucrInputDataFrame.TextChanged
         clsRFunctionList.ClearParameters()
-        clsRFunctionList.AddParameter(ucrInputSaveDataFrame.GetText(), ucrInputSaveDataFrame.GetText())
+        clsRFunctionList.AddParameter(ucrInputDataFrame.GetText(), ucrInputDataFrame.GetText())
         clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
         ucrInputPreviewDataframe.SetText(GetPreviewText(clsImportNewDataFrame))
     End Sub
