@@ -23,8 +23,21 @@ Partial Class dlgScript
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnGetDataFrame = New System.Windows.Forms.Button()
-        Me.btnSaveDataframe = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ucrChkPreviewLibrary = New instat.ucrCheck()
+        Me.ucrChkEditLibrary = New instat.ucrCheck()
+        Me.ucrInputPreviewLibrary = New instat.ucrInputTextBox()
+        Me.btnGetPackage = New System.Windows.Forms.Button()
+        Me.lblGetPackage = New System.Windows.Forms.Label()
+        Me.ucrComboGetPackage = New instat.ucrInputComboBox()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.lblSaveDataFrame = New System.Windows.Forms.Label()
+        Me.ucrChkPreviewDataFrame = New instat.ucrCheck()
+        Me.ucrChkEditDataframe = New instat.ucrCheck()
+        Me.ucrInputPreviewDataframe = New instat.ucrInputTextBox()
+        Me.btnSaveDataframe = New System.Windows.Forms.Button()
+        Me.ucrInputSaveDataFrame = New instat.ucrInputTextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.rdoGetObject = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -34,21 +47,16 @@ Partial Class dlgScript
         Me.ucrReceiverGet = New instat.ucrReceiverSingle()
         Me.rdoGetDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoGetColumn = New System.Windows.Forms.RadioButton()
-        Me.rdoGetPackage = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.rdoGetTable = New System.Windows.Forms.RadioButton()
         Me.rdoGetModel = New System.Windows.Forms.RadioButton()
         Me.rdoGetGraph = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGetObject = New instat.UcrPanel()
         Me.ucrDataFrameGet = New instat.ucrDataFrame()
-        Me.ucrComboGetPackage = New instat.ucrInputComboBox()
-        Me.lblGetPackage = New System.Windows.Forms.Label()
         Me.ucrSelectorGet = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.btnGetPackage = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.btnSaveModel = New System.Windows.Forms.Button()
         Me.btnSaveTable = New System.Windows.Forms.Button()
-        Me.lblSaveDataFrame = New System.Windows.Forms.Label()
         Me.btnSaveGraph = New System.Windows.Forms.Button()
         Me.rdoSaveObject = New System.Windows.Forms.RadioButton()
         Me.rdoSaveDataFrame = New System.Windows.Forms.RadioButton()
@@ -58,14 +66,17 @@ Partial Class dlgScript
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrDataFrameSave = New instat.ucrDataFrame()
-        Me.ucrInputSaveDataFrame = New instat.ucrInputTextBox()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlSaveData = New instat.UcrPanel()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.btnRemoveObjects = New System.Windows.Forms.Button()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
         Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
@@ -82,19 +93,10 @@ Partial Class dlgScript
         Me.btnGetDataFrame.Text = "Add"
         Me.btnGetDataFrame.UseVisualStyleBackColor = True
         '
-        'btnSaveDataframe
-        '
-        Me.btnSaveDataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSaveDataframe.Location = New System.Drawing.Point(507, 88)
-        Me.btnSaveDataframe.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.btnSaveDataframe.Name = "btnSaveDataframe"
-        Me.btnSaveDataframe.Size = New System.Drawing.Size(111, 34)
-        Me.btnSaveDataframe.TabIndex = 32
-        Me.btnSaveDataframe.Text = "Add"
-        Me.btnSaveDataframe.UseVisualStyleBackColor = True
-        '
         'TabControl1
         '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
@@ -105,9 +107,172 @@ Partial Class dlgScript
         Me.TabControl1.Size = New System.Drawing.Size(669, 623)
         Me.TabControl1.TabIndex = 31
         '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.ucrChkPreviewLibrary)
+        Me.TabPage1.Controls.Add(Me.ucrChkEditLibrary)
+        Me.TabPage1.Controls.Add(Me.ucrInputPreviewLibrary)
+        Me.TabPage1.Controls.Add(Me.btnGetPackage)
+        Me.TabPage1.Controls.Add(Me.lblGetPackage)
+        Me.TabPage1.Controls.Add(Me.ucrComboGetPackage)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage1.TabIndex = 4
+        Me.TabPage1.Text = "Library"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'ucrChkPreviewLibrary
+        '
+        Me.ucrChkPreviewLibrary.AutoSize = True
+        Me.ucrChkPreviewLibrary.Checked = False
+        Me.ucrChkPreviewLibrary.Location = New System.Drawing.Point(11, 121)
+        Me.ucrChkPreviewLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkPreviewLibrary.Name = "ucrChkPreviewLibrary"
+        Me.ucrChkPreviewLibrary.Size = New System.Drawing.Size(118, 34)
+        Me.ucrChkPreviewLibrary.TabIndex = 49
+        '
+        'ucrChkEditLibrary
+        '
+        Me.ucrChkEditLibrary.AutoSize = True
+        Me.ucrChkEditLibrary.Checked = False
+        Me.ucrChkEditLibrary.Location = New System.Drawing.Point(510, 121)
+        Me.ucrChkEditLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkEditLibrary.Name = "ucrChkEditLibrary"
+        Me.ucrChkEditLibrary.Size = New System.Drawing.Size(126, 34)
+        Me.ucrChkEditLibrary.TabIndex = 48
+        '
+        'ucrInputPreviewLibrary
+        '
+        Me.ucrInputPreviewLibrary.AddQuotesIfUnrecognised = True
+        Me.ucrInputPreviewLibrary.AutoSize = True
+        Me.ucrInputPreviewLibrary.IsMultiline = False
+        Me.ucrInputPreviewLibrary.IsReadOnly = True
+        Me.ucrInputPreviewLibrary.Location = New System.Drawing.Point(132, 121)
+        Me.ucrInputPreviewLibrary.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputPreviewLibrary.Name = "ucrInputPreviewLibrary"
+        Me.ucrInputPreviewLibrary.Size = New System.Drawing.Size(371, 44)
+        Me.ucrInputPreviewLibrary.TabIndex = 47
+        '
+        'btnGetPackage
+        '
+        Me.btnGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnGetPackage.Location = New System.Drawing.Point(255, 56)
+        Me.btnGetPackage.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnGetPackage.Name = "btnGetPackage"
+        Me.btnGetPackage.Size = New System.Drawing.Size(111, 34)
+        Me.btnGetPackage.TabIndex = 43
+        Me.btnGetPackage.Text = "Add"
+        Me.btnGetPackage.UseVisualStyleBackColor = True
+        '
+        'lblGetPackage
+        '
+        Me.lblGetPackage.AutoSize = True
+        Me.lblGetPackage.Location = New System.Drawing.Point(11, 35)
+        Me.lblGetPackage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblGetPackage.Name = "lblGetPackage"
+        Me.lblGetPackage.Size = New System.Drawing.Size(106, 20)
+        Me.lblGetPackage.TabIndex = 42
+        Me.lblGetPackage.Text = "Get Package:"
+        '
+        'ucrComboGetPackage
+        '
+        Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
+        Me.ucrComboGetPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrComboGetPackage.GetSetSelectedIndex = -1
+        Me.ucrComboGetPackage.IsReadOnly = False
+        Me.ucrComboGetPackage.Location = New System.Drawing.Point(11, 60)
+        Me.ucrComboGetPackage.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrComboGetPackage.Name = "ucrComboGetPackage"
+        Me.ucrComboGetPackage.Size = New System.Drawing.Size(206, 32)
+        Me.ucrComboGetPackage.TabIndex = 41
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.lblSaveDataFrame)
+        Me.TabPage5.Controls.Add(Me.ucrChkPreviewDataFrame)
+        Me.TabPage5.Controls.Add(Me.ucrChkEditDataframe)
+        Me.TabPage5.Controls.Add(Me.ucrInputPreviewDataframe)
+        Me.TabPage5.Controls.Add(Me.btnSaveDataframe)
+        Me.TabPage5.Controls.Add(Me.ucrInputSaveDataFrame)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(661, 590)
+        Me.TabPage5.TabIndex = 5
+        Me.TabPage5.Text = "Dataframe"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'lblSaveDataFrame
+        '
+        Me.lblSaveDataFrame.AutoSize = True
+        Me.lblSaveDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSaveDataFrame.Location = New System.Drawing.Point(7, 33)
+        Me.lblSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSaveDataFrame.Name = "lblSaveDataFrame"
+        Me.lblSaveDataFrame.Size = New System.Drawing.Size(144, 20)
+        Me.lblSaveDataFrame.TabIndex = 53
+        Me.lblSaveDataFrame.Tag = ""
+        Me.lblSaveDataFrame.Text = "Data Frame Name:"
+        '
+        'ucrChkPreviewDataFrame
+        '
+        Me.ucrChkPreviewDataFrame.AutoSize = True
+        Me.ucrChkPreviewDataFrame.Checked = False
+        Me.ucrChkPreviewDataFrame.Location = New System.Drawing.Point(7, 96)
+        Me.ucrChkPreviewDataFrame.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkPreviewDataFrame.Name = "ucrChkPreviewDataFrame"
+        Me.ucrChkPreviewDataFrame.Size = New System.Drawing.Size(118, 34)
+        Me.ucrChkPreviewDataFrame.TabIndex = 52
+        '
+        'ucrChkEditDataframe
+        '
+        Me.ucrChkEditDataframe.AutoSize = True
+        Me.ucrChkEditDataframe.Checked = False
+        Me.ucrChkEditDataframe.Location = New System.Drawing.Point(509, 96)
+        Me.ucrChkEditDataframe.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkEditDataframe.Name = "ucrChkEditDataframe"
+        Me.ucrChkEditDataframe.Size = New System.Drawing.Size(126, 34)
+        Me.ucrChkEditDataframe.TabIndex = 51
+        '
+        'ucrInputPreviewDataframe
+        '
+        Me.ucrInputPreviewDataframe.AddQuotesIfUnrecognised = True
+        Me.ucrInputPreviewDataframe.AutoSize = True
+        Me.ucrInputPreviewDataframe.IsMultiline = False
+        Me.ucrInputPreviewDataframe.IsReadOnly = True
+        Me.ucrInputPreviewDataframe.Location = New System.Drawing.Point(131, 96)
+        Me.ucrInputPreviewDataframe.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputPreviewDataframe.Name = "ucrInputPreviewDataframe"
+        Me.ucrInputPreviewDataframe.Size = New System.Drawing.Size(371, 44)
+        Me.ucrInputPreviewDataframe.TabIndex = 50
+        '
+        'btnSaveDataframe
+        '
+        Me.btnSaveDataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSaveDataframe.Location = New System.Drawing.Point(428, 25)
+        Me.btnSaveDataframe.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnSaveDataframe.Name = "btnSaveDataframe"
+        Me.btnSaveDataframe.Size = New System.Drawing.Size(111, 34)
+        Me.btnSaveDataframe.TabIndex = 34
+        Me.btnSaveDataframe.Text = "Add"
+        Me.btnSaveDataframe.UseVisualStyleBackColor = True
+        '
+        'ucrInputSaveDataFrame
+        '
+        Me.ucrInputSaveDataFrame.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveDataFrame.AutoSize = True
+        Me.ucrInputSaveDataFrame.IsMultiline = False
+        Me.ucrInputSaveDataFrame.IsReadOnly = False
+        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(205, 29)
+        Me.ucrInputSaveDataFrame.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputSaveDataFrame.Name = "ucrInputSaveDataFrame"
+        Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputSaveDataFrame.TabIndex = 33
+        '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.cmdClear)
         Me.TabPage2.Controls.Add(Me.rdoGetObject)
         Me.TabPage2.Controls.Add(Me.Label1)
         Me.TabPage2.Controls.Add(Me.txtScript)
@@ -116,18 +281,14 @@ Partial Class dlgScript
         Me.TabPage2.Controls.Add(Me.ucrReceiverGet)
         Me.TabPage2.Controls.Add(Me.rdoGetDataFrame)
         Me.TabPage2.Controls.Add(Me.rdoGetColumn)
-        Me.TabPage2.Controls.Add(Me.rdoGetPackage)
         Me.TabPage2.Controls.Add(Me.ucrPnlGetData)
         Me.TabPage2.Controls.Add(Me.rdoGetTable)
         Me.TabPage2.Controls.Add(Me.rdoGetModel)
         Me.TabPage2.Controls.Add(Me.rdoGetGraph)
         Me.TabPage2.Controls.Add(Me.ucrPnlGetObject)
         Me.TabPage2.Controls.Add(Me.ucrDataFrameGet)
-        Me.TabPage2.Controls.Add(Me.ucrComboGetPackage)
-        Me.TabPage2.Controls.Add(Me.lblGetPackage)
         Me.TabPage2.Controls.Add(Me.ucrSelectorGet)
         Me.TabPage2.Controls.Add(Me.btnGetDataFrame)
-        Me.TabPage2.Controls.Add(Me.btnGetPackage)
         Me.TabPage2.Location = New System.Drawing.Point(4, 29)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
@@ -247,31 +408,13 @@ Partial Class dlgScript
         Me.rdoGetColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGetColumn.UseVisualStyleBackColor = True
         '
-        'rdoGetPackage
-        '
-        Me.rdoGetPackage.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGetPackage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetPackage.FlatAppearance.BorderSize = 2
-        Me.rdoGetPackage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGetPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGetPackage.Location = New System.Drawing.Point(40, 18)
-        Me.rdoGetPackage.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoGetPackage.Name = "rdoGetPackage"
-        Me.rdoGetPackage.Size = New System.Drawing.Size(129, 45)
-        Me.rdoGetPackage.TabIndex = 43
-        Me.rdoGetPackage.TabStop = True
-        Me.rdoGetPackage.Text = "Package"
-        Me.rdoGetPackage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGetPackage.UseVisualStyleBackColor = True
-        '
         'ucrPnlGetData
         '
         Me.ucrPnlGetData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlGetData.Location = New System.Drawing.Point(9, 15)
+        Me.ucrPnlGetData.Location = New System.Drawing.Point(115, 15)
         Me.ucrPnlGetData.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlGetData.Name = "ucrPnlGetData"
-        Me.ucrPnlGetData.Size = New System.Drawing.Size(603, 54)
+        Me.ucrPnlGetData.Size = New System.Drawing.Size(497, 54)
         Me.ucrPnlGetData.TabIndex = 42
         '
         'rdoGetTable
@@ -331,10 +474,10 @@ Partial Class dlgScript
         'ucrPnlGetObject
         '
         Me.ucrPnlGetObject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlGetObject.Location = New System.Drawing.Point(13, 76)
+        Me.ucrPnlGetObject.Location = New System.Drawing.Point(71, 76)
         Me.ucrPnlGetObject.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlGetObject.Name = "ucrPnlGetObject"
-        Me.ucrPnlGetObject.Size = New System.Drawing.Size(603, 54)
+        Me.ucrPnlGetObject.Size = New System.Drawing.Size(405, 54)
         Me.ucrPnlGetObject.TabIndex = 30
         '
         'ucrDataFrameGet
@@ -348,28 +491,6 @@ Partial Class dlgScript
         Me.ucrDataFrameGet.Size = New System.Drawing.Size(238, 88)
         Me.ucrDataFrameGet.TabIndex = 31
         '
-        'ucrComboGetPackage
-        '
-        Me.ucrComboGetPackage.AddQuotesIfUnrecognised = True
-        Me.ucrComboGetPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrComboGetPackage.GetSetSelectedIndex = -1
-        Me.ucrComboGetPackage.IsReadOnly = False
-        Me.ucrComboGetPackage.Location = New System.Drawing.Point(13, 102)
-        Me.ucrComboGetPackage.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrComboGetPackage.Name = "ucrComboGetPackage"
-        Me.ucrComboGetPackage.Size = New System.Drawing.Size(206, 32)
-        Me.ucrComboGetPackage.TabIndex = 40
-        '
-        'lblGetPackage
-        '
-        Me.lblGetPackage.AutoSize = True
-        Me.lblGetPackage.Location = New System.Drawing.Point(24, 78)
-        Me.lblGetPackage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblGetPackage.Name = "lblGetPackage"
-        Me.lblGetPackage.Size = New System.Drawing.Size(106, 20)
-        Me.lblGetPackage.TabIndex = 39
-        Me.lblGetPackage.Text = "Get Package:"
-        '
         'ucrSelectorGet
         '
         Me.ucrSelectorGet.AutoSize = True
@@ -382,25 +503,15 @@ Partial Class dlgScript
         Me.ucrSelectorGet.Size = New System.Drawing.Size(480, 308)
         Me.ucrSelectorGet.TabIndex = 34
         '
-        'btnGetPackage
-        '
-        Me.btnGetPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnGetPackage.Location = New System.Drawing.Point(264, 102)
-        Me.btnGetPackage.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.btnGetPackage.Name = "btnGetPackage"
-        Me.btnGetPackage.Size = New System.Drawing.Size(111, 34)
-        Me.btnGetPackage.TabIndex = 41
-        Me.btnGetPackage.Text = "Add"
-        Me.btnGetPackage.UseVisualStyleBackColor = True
-        '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.Label2)
+        Me.TabPage3.Controls.Add(Me.Button1)
+        Me.TabPage3.Controls.Add(Me.UcrInputTextBox1)
         Me.TabPage3.Controls.Add(Me.btnSaveModel)
         Me.TabPage3.Controls.Add(Me.btnSaveTable)
-        Me.TabPage3.Controls.Add(Me.lblSaveDataFrame)
         Me.TabPage3.Controls.Add(Me.btnSaveGraph)
         Me.TabPage3.Controls.Add(Me.rdoSaveObject)
-        Me.TabPage3.Controls.Add(Me.btnSaveDataframe)
         Me.TabPage3.Controls.Add(Me.rdoSaveDataFrame)
         Me.TabPage3.Controls.Add(Me.rdoSaveColumn)
         Me.TabPage3.Controls.Add(Me.btnSaveColumn)
@@ -408,7 +519,6 @@ Partial Class dlgScript
         Me.TabPage3.Controls.Add(Me.ucrSaveTable)
         Me.TabPage3.Controls.Add(Me.ucrSaveColumn)
         Me.TabPage3.Controls.Add(Me.ucrDataFrameSave)
-        Me.TabPage3.Controls.Add(Me.ucrInputSaveDataFrame)
         Me.TabPage3.Controls.Add(Me.ucrSaveGraph)
         Me.TabPage3.Controls.Add(Me.ucrPnlSaveData)
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
@@ -440,18 +550,6 @@ Partial Class dlgScript
         Me.btnSaveTable.TabIndex = 31
         Me.btnSaveTable.Text = "Add"
         Me.btnSaveTable.UseVisualStyleBackColor = True
-        '
-        'lblSaveDataFrame
-        '
-        Me.lblSaveDataFrame.AutoSize = True
-        Me.lblSaveDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveDataFrame.Location = New System.Drawing.Point(21, 96)
-        Me.lblSaveDataFrame.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSaveDataFrame.Name = "lblSaveDataFrame"
-        Me.lblSaveDataFrame.Size = New System.Drawing.Size(144, 20)
-        Me.lblSaveDataFrame.TabIndex = 21
-        Me.lblSaveDataFrame.Tag = ""
-        Me.lblSaveDataFrame.Text = "Data Frame Name:"
         '
         'btnSaveGraph
         '
@@ -567,18 +665,6 @@ Partial Class dlgScript
         Me.ucrDataFrameSave.Size = New System.Drawing.Size(252, 59)
         Me.ucrDataFrameSave.TabIndex = 29
         '
-        'ucrInputSaveDataFrame
-        '
-        Me.ucrInputSaveDataFrame.AddQuotesIfUnrecognised = True
-        Me.ucrInputSaveDataFrame.AutoSize = True
-        Me.ucrInputSaveDataFrame.IsMultiline = False
-        Me.ucrInputSaveDataFrame.IsReadOnly = False
-        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(283, 88)
-        Me.ucrInputSaveDataFrame.Margin = New System.Windows.Forms.Padding(14)
-        Me.ucrInputSaveDataFrame.Name = "ucrInputSaveDataFrame"
-        Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(206, 32)
-        Me.ucrInputSaveDataFrame.TabIndex = 31
-        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -627,16 +713,40 @@ Partial Class dlgScript
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
         Me.ucrBaseSubdialog.TabIndex = 33
         '
-        'cmdClear
+        'Label2
         '
-        Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(511, 234)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(101, 34)
-        Me.cmdClear.TabIndex = 47
-        Me.cmdClear.Text = "Clear"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.Label2.AutoSize = True
+        Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label2.Location = New System.Drawing.Point(22, 88)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(144, 20)
+        Me.Label2.TabIndex = 56
+        Me.Label2.Tag = ""
+        Me.Label2.Text = "Data Frame Name:"
+        '
+        'Button1
+        '
+        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button1.Location = New System.Drawing.Point(443, 80)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(111, 34)
+        Me.Button1.TabIndex = 55
+        Me.Button1.Text = "Add"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'UcrInputTextBox1
+        '
+        Me.UcrInputTextBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputTextBox1.AutoSize = True
+        Me.UcrInputTextBox1.IsMultiline = False
+        Me.UcrInputTextBox1.IsReadOnly = False
+        Me.UcrInputTextBox1.Location = New System.Drawing.Point(220, 84)
+        Me.UcrInputTextBox1.Margin = New System.Windows.Forms.Padding(14)
+        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
+        Me.UcrInputTextBox1.Size = New System.Drawing.Size(206, 32)
+        Me.UcrInputTextBox1.TabIndex = 54
         '
         'dlgScript
         '
@@ -644,8 +754,8 @@ Partial Class dlgScript
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(689, 698)
-        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
@@ -654,6 +764,10 @@ Partial Class dlgScript
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Insert Line"
         Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
@@ -664,9 +778,7 @@ Partial Class dlgScript
 
     End Sub
     Friend WithEvents ucrDataFrameGet As ucrDataFrame
-    Friend WithEvents ucrInputSaveDataFrame As ucrInputTextBox
     Friend WithEvents btnGetDataFrame As Button
-    Friend WithEvents btnSaveDataframe As Button
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
@@ -681,7 +793,6 @@ Partial Class dlgScript
     Friend WithEvents ucrSaveModel As ucrSave
     Friend WithEvents btnSaveTable As Button
     Friend WithEvents ucrSaveTable As ucrSave
-    Friend WithEvents lblSaveDataFrame As Label
     Friend WithEvents ucrSelectorGet As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSelectorGetObject As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblGet As Label
@@ -692,13 +803,9 @@ Partial Class dlgScript
     Friend WithEvents rdoGetModel As RadioButton
     Friend WithEvents rdoGetGraph As RadioButton
     Friend WithEvents btnRemoveObjects As Button
-    Friend WithEvents lblGetPackage As Label
-    Friend WithEvents ucrComboGetPackage As ucrInputComboBox
-    Friend WithEvents btnGetPackage As Button
     Friend WithEvents ucrPnlGetData As UcrPanel
     Friend WithEvents rdoGetDataFrame As RadioButton
     Friend WithEvents rdoGetColumn As RadioButton
-    Friend WithEvents rdoGetPackage As RadioButton
     Friend WithEvents rdoGetObject As RadioButton
     Friend WithEvents rdoSaveObject As RadioButton
     Friend WithEvents rdoSaveDataFrame As RadioButton
@@ -706,5 +813,21 @@ Partial Class dlgScript
     Friend WithEvents ucrPnlSaveData As UcrPanel
     Friend WithEvents txtScript As TextBox
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
-    Friend WithEvents cmdClear As Button
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents lblGetPackage As Label
+    Friend WithEvents ucrComboGetPackage As ucrInputComboBox
+    Friend WithEvents btnGetPackage As Button
+    Friend WithEvents ucrInputPreviewLibrary As ucrInputTextBox
+    Friend WithEvents ucrChkPreviewLibrary As ucrCheck
+    Friend WithEvents ucrChkEditLibrary As ucrCheck
+    Friend WithEvents btnSaveDataframe As Button
+    Friend WithEvents ucrInputSaveDataFrame As ucrInputTextBox
+    Friend WithEvents lblSaveDataFrame As Label
+    Friend WithEvents ucrChkPreviewDataFrame As ucrCheck
+    Friend WithEvents ucrChkEditDataframe As ucrCheck
+    Friend WithEvents ucrInputPreviewDataframe As ucrInputTextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
 End Class

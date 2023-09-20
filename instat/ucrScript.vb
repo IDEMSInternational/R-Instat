@@ -110,6 +110,7 @@ Public Class ucrScript
     ''' </summary>
     ''' <param name="strText"> The text to insert to the contents of the active tab.</param>
     Public Sub InsertText(strText As String)
+        strText = strText & Environment.NewLine
         clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText)
     End Sub
 
