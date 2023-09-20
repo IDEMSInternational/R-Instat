@@ -463,14 +463,14 @@ Public Class dlgBarAndPieChart
         clsDummyFunction.AddParameter("Checked", "FALSE", iPosition:=0)
 
         clsGuideLegendFunction.SetRCommand("guide_legend")
-        clsGuideLegendFunction.AddParameter("reverse", "TRUE")
+        clsGuideLegendFunction.AddParameter("reverse", "TRUE", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
 
         clsGuideFunction.SetRCommand("guides")
-        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuideLegendFunction)
+        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0)
 
         clsScaleXdiscretFunction.SetRCommand("scale_x_discrete")
         clsScaleXdiscretFunction.AddParameter("expand", clsRFunctionParameter:=clsExpansionFunction, iPosition:=0)
