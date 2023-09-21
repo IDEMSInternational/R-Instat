@@ -216,7 +216,7 @@ Public Class dlgScript
         If rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
             clsTempFunction = clsGetDataFrameFunction
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetDataFrameFunction))
+            ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetDataFrameFunction, False))
         ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
             ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
@@ -266,11 +266,18 @@ Public Class dlgScript
     End Sub
 
     Private Sub btnGetPackage_Click(sender As Object, e As EventArgs) Handles btnGetPackage.Click
-        frmMain.InsertTextToScriptWindow(clsLibraryFunction.Clone.ToScript)
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            frmMain.InsertTextToScriptWindow(clsLibraryFunction.Clone.ToScript)
+        End If
+
     End Sub
 
-    Private Function GetPreviewText(clsTempFunction As RFunction) As String
-        clsTempFunction.RemoveAssignTo()
+    Private Function GetPreviewText(clsTempFunction As RFunction, Optional bSave As Boolean = True) As String
+        If Not bSave Then
+            clsTempFunction.RemoveAssignTo()
+        End If
         Dim strScript As String = clsTempFunction.Clone.ToScript
         Return strScript
     End Function
@@ -282,9 +289,13 @@ Public Class dlgScript
 
         Dim strAssignedScript As String = ""
         clsGetDataFrameFunction.SetAssignTo(ucrDataFrameGet.cboAvailableDataFrames.Text)
-        Dim strAssignedTo As String = clsGetDataFrameFunction.Clone.ToScript(strScript:=strAssignedScript)
-        frmMain.InsertTextToScriptWindow(strAssignedScript)
-        AddAssignToString(strAssignedTo)
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            Dim strAssignedTo As String = clsGetDataFrameFunction.Clone.ToScript(strScript:=strAssignedScript)
+            frmMain.InsertTextToScriptWindow(strAssignedScript)
+            AddAssignToString(strAssignedTo)
+        End If
     End Sub
 
     Private Sub btnGetObject_Click(sender As Object, e As EventArgs) Handles btnGet.Click
@@ -294,9 +305,13 @@ Public Class dlgScript
 
         Dim strAssignedScript As String = ""
         clsGetColumnFunction.SetAssignTo(ucrReceiverGet.GetVariableNames(False))
-        Dim strAssignedTo As String = clsGetColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
-        frmMain.InsertTextToScriptWindow(strAssignedScript)
-        AddAssignToString(strAssignedTo)
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            Dim strAssignedTo As String = clsGetColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
+            frmMain.InsertTextToScriptWindow(strAssignedScript)
+            AddAssignToString(strAssignedTo)
+        End If
     End Sub
 
     Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnDataframe.Click, btnSaveDataframe.Click
@@ -313,23 +328,13 @@ Public Class dlgScript
         End If
 
         clsTempFunction = clsImportNewDataFrame
-        Dim strAssignedScript As String = strAssignTo & " <- " & clsImportNewDataFrame.ToScript
-        frmMain.InsertTextToScriptWindow(strAssignedScript)
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            Dim strAssignedScript As String = strAssignTo & " <- " & clsImportNewDataFrame.ToScript
+            frmMain.InsertTextToScriptWindow(strAssignedScript)
+        End If
     End Sub
-
-    'Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
-    '    If Not ucrSaveColumn.IsComplete Then
-    '        Exit Sub
-    '    End If
-
-    '    Dim strAssignedScript As String = ""
-    '    clsSaveColumnFunction.SetAssignTo(ucrSaveColumn.GetText)
-    '    'clone the function first because the ToScript function modifies the contents of the function.
-    '    Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
-    '    ' AppendTextScript(strAssignedScript)
-    '    frmMain.InsertTextToScriptWindow(strAssignedScript)
-    '    AddAssignToString(strAssignedTo)
-    'End Sub
 
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
         If Not ucrSaveColumn.IsComplete Then
@@ -341,8 +346,11 @@ Public Class dlgScript
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
         strAssignedTo = strAssign & " <- " & strAssignedTo
-        frmMain.InsertTextToScriptWindow(strAssignedTo.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
-        'AppendTextScript(strAssignedScript)
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            frmMain.InsertTextToScriptWindow(strAssignedTo.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
+        End If
         AddAssignToString(strAssign)
     End Sub
 
@@ -356,8 +364,12 @@ Public Class dlgScript
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
         strGetScript = strAssign & " <- " & strGetScript
-        frmMain.InsertTextToScriptWindow(strAssignedScript.Trim & Environment.NewLine & strGetScript)
-        AddAssignToString(strGetScript)
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            frmMain.InsertTextToScriptWindow(strGetScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
+        End If
+        AddAssignToString(strAssign)
     End Sub
 
     Private Sub btnSaveNewTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
@@ -366,12 +378,17 @@ Public Class dlgScript
         End If
 
         Dim strAssignedScript As String = ""
-        clsSaveTableFunction.SetAssignTo(ucrSaveTable.GetText)
+        Dim strAssign As String = ucrSaveTable.GetText
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
-        frmMain.InsertTextToScriptWindow(strAssignedScript.Trim & Environment.NewLine & strGetScript)
-        'AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
-        AddAssignToString(strGetScript)
+        strGetScript = strAssign & " <- " & strGetScript
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            frmMain.InsertTextToScriptWindow(strGetScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
+        End If
+
+        AddAssignToString(strAssign)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs)
@@ -405,11 +422,16 @@ Public Class dlgScript
         End If
 
         Dim strAssignedScript As String = ""
+        Dim strAssign As String = ucrSaveModel.GetText
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
-        ' AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
-        frmMain.InsertTextToScriptWindow(strAssignedScript.Trim & Environment.NewLine & strGetScript)
-        AddAssignToString(ucrSaveModel.GetText)
+        strGetScript = strAssign & " <- " & strGetScript
+        If ucrChkEditLibrary.Checked Then
+            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
+        Else
+            frmMain.InsertTextToScriptWindow(strGetScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
+        End If
+        AddAssignToString(strAssign)
     End Sub
 
     Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs) Handles btnRemoveObjects.Click
@@ -440,13 +462,13 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrComboGetPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackage.ControlValueChanged
-        ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction))
+        ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction, False))
     End Sub
 
     Private Sub ucrReceiverGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGet.ControlValueChanged
         clsGetColumnFunction = ucrReceiverGet.GetVariables
         clsTempFunction = clsGetColumnFunction
-        ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetColumnFunction))
+        ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetColumnFunction, False))
     End Sub
 
     Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrSaveColumn.ControlValueChanged
@@ -457,8 +479,8 @@ Public Class dlgScript
             clsTempFunction = clsSaveModelFunction
             ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveModelFunction))
         ElseIf ucrChangedControl Is ucrSaveColumn Then
-            'clsTempFunction = clsSaveColumnFunction
-            'ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveColumnFunction))
+            clsTempFunction = clsSaveColumnFunction
+            ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveColumnFunction))
         Else
             clsTempFunction = clsSaveTableFunction
             ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveTableFunction))
@@ -475,6 +497,6 @@ Public Class dlgScript
         End If
         clsRFunctionList.AddParameter(strData, strData)
         clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
-        ucrInputPreviewLibrary.SetText(GetPreviewText(clsImportNewDataFrame))
+        ucrInputPreviewLibrary.SetText(GetPreviewText(clsImportNewDataFrame, False))
     End Sub
 End Class
