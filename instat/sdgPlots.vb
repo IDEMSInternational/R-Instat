@@ -998,11 +998,11 @@ Public Class sdgPlots
         ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFillDiscrete.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColourDiscrete.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        ucrPnlColourPalette.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputPalettes.SetRCode(clsFillPaletteFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkPalette.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         If bReset Then
+            ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+            ucrPnlColourPalette.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputPalettes.SetRCode(clsFillPaletteFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkPalette.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
             ucrChkDropUnusedLevels.SetRCode(clsScaleFillColorblindFunction, bReset, bCloneIfNeeded:=True)
             ucrInputPosition.SetRCode(clsScaleFillColorblindFunction, bReset, bCloneIfNeeded:=True)
             ucrChkPosition.SetRCode(clsScaleFillColorblindFunction, bReset, bCloneIfNeeded:=True)
@@ -1410,43 +1410,6 @@ Public Class sdgPlots
         End If
     End Sub
 
-    'Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
-    '    If ucrChkAddFillScale.Checked Then
-    '        If rdoViridis.Checked Then
-    '            clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
-    '            grpFillScale.Visible = True
-    '            'grpFillScaleggthemes.Visible=False
-    '        ElseIf rdoGgthemes.Checked Then
-    '            clsBaseOperator.AddParameter("scale_fill_colorblind", clsRFunctionParameter:=clsScaleFillColorblindFunction, iPosition:=3)
-    '            grpFillScaleggthemes.Visible = True
-    '        End If
-    '    Else
-    '        clsBaseOperator.RemoveParameterByName("scale_fill_colorblind")
-    '        clsBaseOperator.RemoveParameterByName("scale_fill")
-    '        grpFillScale.Visible = False
-    '        grpFillScaleggthemes.Visible = False
-    '    End If
-    'End Sub
-
-    'Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColour.ControlValueChanged
-    '    'If ucrChkAddColour.Checked Then
-    '    '    If rdoViridis.Checked Then
-    '    '        clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
-    '    '        grpColourScale.Visible = True
-    '    '        'grpFillScaleggthemes.Visible=False
-    '    '    ElseIf rdoGgthemes.Checked Then
-    '    '        clsBaseOperator.AddParameter("scale_color_colorblind", clsRFunctionParameter:=clsScaleFillColorblindFunction, iPosition:=3)
-    '    '        grpColourScaleGgthemes.Visible = True
-    '    '    End If
-    '    'Else
-    '    '    clsBaseOperator.RemoveParameterByName("scale_colour")
-    '    '    clsBaseOperator.RemoveParameterByName("scale_color_colorblind")
-    '    '    grpColourScale.Visible = False
-    '    '    grpColourScaleGgthemes.Visible = False
-    '    'End If
-    '    ShowScaleColorGrp()
-    'End Sub
-
     Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
         ShowScaleColorGrp()
     End Sub
@@ -1561,7 +1524,9 @@ Public Class sdgPlots
     Private Sub ucrChkIncludeTitles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlValueChanged
         AddRemoveLabs()
     End Sub
+
     Private Sub SetComboBoxItems()
+        palette()
         If rdoDiverging.Checked Then
             ucrInputPalettes.SetItems(dctDivergingPairs, bClearExisting:=True)
             ucrInputPalettes.SetName(dctDivergingPairs.Keys.First)
@@ -1624,14 +1589,23 @@ Public Class sdgPlots
         ShowScaleColorGrp()
     End Sub
 
-    Private Sub ucrChkPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPalette.ControlValueChanged
-        If Not ucrChkPalette.Checked Then
-            clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillPaletteFunction, iPosition:=15)
-            clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
+    Private Sub palette()
+        If rdoDiverging.Checked OrElse rdoQualitative.Checked OrElse rdoSequential.Checked Then
+            If Not ucrChkPalette.Checked Then
+                clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillPaletteFunction, iPosition:=15)
+                clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
+            Else
+                clsBaseOperator.AddParameter("scale_colour_brewer", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=15)
+                clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+            End If
         Else
-            clsBaseOperator.AddParameter("scale_colour_brewer", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=15)
+            clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
             clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
         End If
+    End Sub
+
+    Private Sub ucrChkPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPalette.ControlValueChanged
+        palette()
     End Sub
 
     Private Sub ucrChkDropUnusedLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropUnusedLevels.ControlValueChanged, ucrInputDropUnusedLevels.ControlValueChanged
