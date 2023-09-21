@@ -567,22 +567,33 @@ Public Class ucrScript
         Dim iNextStatementPos As Integer = 0
         Dim clsRStatement As clsRStatement = Nothing
 
-        For Each iScriptPos As Integer In dctRStatements.Keys
-            If iScriptPos > iCaretPos Then
-                iNextStatementPos = iScriptPos
+        For Each kvpDictEntry As DictionaryEntry In dctRStatements
+            If kvpDictEntry.Key > iCaretPos Then
+                iNextStatementPos = kvpDictEntry.Key
                 Exit For
             End If
-            clsRStatement = dctRStatements(iScriptPos)
+            clsRStatement = kvpDictEntry.Value
         Next
 
         frmMain.clsRLink.RunRStatement(clsRStatement)
 
-        ' if we executed the only/last statement and there is no blank line after, then add blank line
-        If iNextStatementPos = 0 _
-                AndAlso Not (clsScriptActive.Text.EndsWith(vbCr) _
-                             OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
-            clsScriptActive.AppendText(vbCrLf)
+        ' if we executed the only/last statement
+        If iNextStatementPos = 0 Then
+            ' if there is no blank line at end of text, then add blank line
+            If Not (clsScriptActive.Text.EndsWith(vbCr) _
+                    OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
+                clsScriptActive.AppendText(vbCrLf)
+            End If
             iNextStatementPos = clsScriptActive.TextLength
+
+        Else 'else move caret to first non-blank line of next statement
+            For iTextPos As Integer = iNextStatementPos To clsScriptActive.Text.Length - 1
+                Dim chrNext As Char = clsScriptActive.Text.Chars(iTextPos)
+                If chrNext <> vbLf AndAlso chrNext <> vbCr Then
+                    iNextStatementPos = iTextPos
+                    Exit For
+                End If
+            Next
         End If
 
         clsScriptActive.GotoPosition(iNextStatementPos)
