@@ -253,7 +253,7 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         ucrInputAddReorder.Visible = Not ucrFactorReceiver.IsEmpty()
-        ucrChkRidges.Visible = ucrFactorReceiver.IsEmpty()
+        ucrChkRidges.Visible = Not ucrFactorReceiver.IsEmpty()
 
         If rdoHistogram.Checked Then
             If ucrChkDisplayAsDotPlot.Checked Then
