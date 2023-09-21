@@ -317,18 +317,33 @@ Public Class dlgScript
         frmMain.InsertTextToScriptWindow(strAssignedScript)
     End Sub
 
+    'Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
+    '    If Not ucrSaveColumn.IsComplete Then
+    '        Exit Sub
+    '    End If
+
+    '    Dim strAssignedScript As String = ""
+    '    clsSaveColumnFunction.SetAssignTo(ucrSaveColumn.GetText)
+    '    'clone the function first because the ToScript function modifies the contents of the function.
+    '    Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
+    '    ' AppendTextScript(strAssignedScript)
+    '    frmMain.InsertTextToScriptWindow(strAssignedScript)
+    '    AddAssignToString(strAssignedTo)
+    'End Sub
+
     Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
         If Not ucrSaveColumn.IsComplete Then
             Exit Sub
         End If
 
         Dim strAssignedScript As String = ""
-        clsSaveColumnFunction.SetAssignTo(ucrSaveColumn.GetText)
+        Dim strAssign As String = ucrSaveColumn.GetText
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
-        ' AppendTextScript(strAssignedScript)
-        frmMain.InsertTextToScriptWindow(strAssignedScript)
-        AddAssignToString(strAssignedTo)
+        strAssignedTo = strAssign & " <- " & strAssignedTo
+        frmMain.InsertTextToScriptWindow(strAssignedTo.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
+        'AppendTextScript(strAssignedScript)
+        AddAssignToString(strAssign)
     End Sub
 
     Private Sub btnSaveNewGraph_Click(sender As Object, e As EventArgs) Handles btnSaveGraph.Click
@@ -337,11 +352,11 @@ Public Class dlgScript
         End If
 
         Dim strAssignedScript As String = ""
-        clsSaveGraphFunction.SetAssignTo(ucrSaveGraph.GetText)
+        Dim strAssign As String = ucrSaveGraph.GetText
         'clone the function first because the ToScript function modifies the contents of the function.
         Dim strGetScript As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
+        strGetScript = strAssign & " <- " & strGetScript
         frmMain.InsertTextToScriptWindow(strAssignedScript.Trim & Environment.NewLine & strGetScript)
-        ' AppendTextScript(strAssignedScript.Trim & Environment.NewLine & strGetScript)
         AddAssignToString(strGetScript)
     End Sub
 
@@ -442,8 +457,8 @@ Public Class dlgScript
             clsTempFunction = clsSaveModelFunction
             ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveModelFunction))
         ElseIf ucrChangedControl Is ucrSaveColumn Then
-            clsTempFunction = clsSaveColumnFunction
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveColumnFunction))
+            'clsTempFunction = clsSaveColumnFunction
+            'ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveColumnFunction))
         Else
             clsTempFunction = clsSaveTableFunction
             ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveTableFunction))
