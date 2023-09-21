@@ -824,15 +824,8 @@ Public Class RLink
                     End If
                 ElseIf iCallType = 5 Then
                     'else if script comes from script window
-                    Dim bSuccess As Boolean = Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-
-                    'if not an assignment operation, then capture the output
-                    If Not strScript.Contains("<-") AndAlso bSuccess Then
-                        Dim strScriptAsSingleLine As String = strScript.Replace(vbCrLf, String.Empty)
-                        strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbCr, String.Empty)
-                        strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbLf, String.Empty)
-                        strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
-                    End If
+                    'wrap command inside view_object_data just incase there is an output object
+                    strOutput = GetFileOutput("view_object_data(object = " & strScript & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                 Else
                     'else if script output should not be ignored or not stored as an object or variable
 
@@ -883,7 +876,8 @@ Public Class RLink
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
         Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-        expTemp = GetSymbol(strTempAssignTo, bSilent:=bSilent)
+        'get file path. If not found then silently return nothing
+        expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
             'get the file path name, check if it exists and whether it has contents

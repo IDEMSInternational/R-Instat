@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -47,6 +47,7 @@ Public Class dlgGeneralForGraphics
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -122,12 +123,16 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+        VariableXType()
     End Sub
 
     Private Sub SetDefaults()
         clsGgplotFunction = New RFunction
         clsGlobalAesFunction = New RFunction
+        clsScaleContinuousFunction = New RFunction
+        clsLevelsFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsDummyFunction = New RFunction
 
         ucrSave.Reset()
 
@@ -136,6 +141,8 @@ Public Class dlgGeneralForGraphics
         ucrReceiverY.SetMeAsReceiver()
         bDataFrameSet = False
         bResetOptionsSubdialog = True
+
+        clsDummyFunction.AddParameter("group", "false", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
@@ -147,6 +154,15 @@ Public Class dlgGeneralForGraphics
 
         clsGlobalAesFunction.SetPackageName("ggplot2")
         clsGlobalAesFunction.SetRCommand("aes")
+
+        clsLevelsFunction.SetPackageName("base")
+        clsLevelsFunction.SetRCommand("levels")
+        clsLevelsFunction.AddParameter("y", ucrReceiverX.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsScaleContinuousFunction.SetPackageName("ggplot2")
+        clsScaleContinuousFunction.SetRCommand("scale_x_continuous")
+        clsScaleContinuousFunction.AddParameter("breaks", "1:12", iPosition:=1)
+        clsScaleContinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsLevelsFunction, iPosition:=2)
 
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -176,6 +192,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverX.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("y", ucrReceiverX.GetVariableNames(False), bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
         ucrReceiverY.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
@@ -215,6 +232,7 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         'TestOKEnabled()
+        VariableXType()
     End Sub
 
     Private Sub cmdFacets_Click(sender As Object, e As EventArgs) Handles cmdFacets.Click
@@ -300,7 +318,7 @@ Public Class dlgGeneralForGraphics
             clsGlobalAesFunction.RemoveParameterByName("colour")
         End If
     End Sub
-
+  
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkLegend.ControlContentsChanged
         TestOKEnabled()
     End Sub

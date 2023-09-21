@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -57,6 +57,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkUseasNumeric = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -263,6 +264,15 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
+        '
+        'ucrChkUseasNumeric
+        '
+        Me.ucrChkUseasNumeric.AutoSize = True
+        Me.ucrChkUseasNumeric.Checked = False
+        Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(262, 241)
+        Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
+        Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(125, 23)
+        Me.ucrChkUseasNumeric.TabIndex = 20
         '
         'dlgGeneralForGraphics
         '
