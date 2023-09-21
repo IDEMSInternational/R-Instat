@@ -191,7 +191,7 @@ Public Class ucrGeom
         clsgeom_scale_fill_viridis_c.AddLayerParameter("begin", "numeric", "0", lstParameterStrings:={1, 0})
         clsgeom_scale_fill_viridis_c.AddLayerParameter("end", "numeric", "1", lstParameterStrings:={1, 0})
         clsgeom_scale_fill_viridis_c.AddLayerParameter("panel_scaling", "list", "1", lstParameterStrings:={"1", "-1"})
-        clsgeom_scale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34)})
+        clsgeom_scale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34), Chr(34) & "mako" & Chr(34), Chr(34) & "rocket" & Chr(34), Chr(34) & "turbo" & Chr(34)})
         clsgeom_scale_fill_viridis_c.AddLayerParameter("values", "numeric", "0", lstParameterStrings:={1, 0})
         clsgeom_scale_fill_viridis_c.AddLayerParameter("Space", "list", Chr(34) & "Lab" & Chr(34), lstParameterStrings:={Chr(34) & "Lab" & Chr(34)})
         clsgeom_scale_fill_viridis_c.AddLayerParameter("na.value", "list", Chr(34) & "grey50" & Chr(34), lstParameterStrings:={Chr(34) & "grey50" & Chr(34)})

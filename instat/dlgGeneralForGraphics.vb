@@ -45,8 +45,6 @@ Public Class dlgGeneralForGraphics
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
     Private clsScaleFillViridisFunction As New RFunction
-    Private clsFillPaletteFunction As New RFunction
-    Private clsColourPaletteFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
 
@@ -141,8 +139,6 @@ Public Class dlgGeneralForGraphics
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
-        clsFillPaletteFunction = GgplotDefaults.clsFillPaletteFunction
-        clsColourPaletteFunction = GgplotDefaults.clsColourPaletteFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
@@ -184,8 +180,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
-                          clsNewFillPaletteFunction:=clsFillPaletteFunction, clsNewColourPaletteFunction:=clsColourPaletteFunction,
-                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
+        clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetOptionsSubdialog = False
@@ -202,7 +197,6 @@ Public Class dlgGeneralForGraphics
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
-                          clsNewFillPaletteFunction:=clsFillPaletteFunction, clsNewColourPaletteFunction:=clsColourPaletteFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
@@ -216,7 +210,6 @@ Public Class dlgGeneralForGraphics
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
-                          clsNewFillPaletteFunction:=clsFillPaletteFunction, clsNewColourPaletteFunction:=clsColourPaletteFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 5

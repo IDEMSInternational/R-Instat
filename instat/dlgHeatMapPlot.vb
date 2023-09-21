@@ -173,6 +173,9 @@ Public Class dlgHeatMapPlot
         dctColourPallette.Add("Inferno", Chr(34) & "inferno" & Chr(34))
         dctColourPallette.Add("Plasma", Chr(34) & "plasma" & Chr(34))
         dctColourPallette.Add("Cividis", Chr(34) & "cividis" & Chr(34))
+        dctColourPallette.Add("mako", Chr(34) & "mako" & Chr(34))
+        dctColourPallette.Add("rocket", Chr(34) & "rocket" & Chr(34))
+        dctColourPallette.Add("turbo", Chr(34) & "turbo" & Chr(34))
         ucrInputColourPalette.SetItems(dctColourPallette)
         ucrInputColourPalette.SetDropDownStyleAsNonEditable()
 
