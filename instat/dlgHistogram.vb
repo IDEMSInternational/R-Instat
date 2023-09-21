@@ -303,33 +303,52 @@ Public Class dlgHistogram
         clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrFactorReceiver.GetVariableNames(False) & ")", iPosition:=0)
 
         If rdoHistogram.Checked Then
-            Select Case strChangedTextFreq
-                Case strAscending
-                    clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                    clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                Case strDescending
-                    clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                Case strReverse
-                    clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-                    clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                Case strNone
-                    clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-            End Select
-        ElseIf rdoDensity_ridges.Checked Then
-            If ucrChkRidges.Checked Then
+            If Not ucrFactorReceiver.IsEmpty Then
                 Select Case strChangedTextFreq
                     Case strAscending
                         clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strDescending
-                        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                        clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
                     Case strReverse
                         clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-                        clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                     Case strNone
-                        clsRaesFunction.AddParameter("y", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+                        clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
                 End Select
-            Else
+            End If
+        ElseIf rdoDensity_ridges.Checked Then
+            If Not ucrFactorReceiver.IsEmpty Then
+                If ucrChkRidges.Checked Then
+                    Select Case strChangedTextFreq
+                        Case strAscending
+                            clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                            clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        Case strDescending
+                            clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                        Case strReverse
+                            clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+                            clsRaesFunction.AddParameter("y", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        Case strNone
+                            clsRaesFunction.AddParameter("y", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+                    End Select
+                Else
+                    Select Case strChangedTextFreq
+                        Case strAscending
+                            clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                            clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        Case strDescending
+                            clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
+                        Case strReverse
+                            clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+                            clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        Case strNone
+                            clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
+                    End Select
+                End If
+            End If
+        Else
+            If Not ucrFactorReceiver.IsEmpty Then
                 Select Case strChangedTextFreq
                     Case strAscending
                         clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
@@ -343,19 +362,6 @@ Public Class dlgHistogram
                         clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
                 End Select
             End If
-        Else
-            Select Case strChangedTextFreq
-                Case strAscending
-                    clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                    clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                Case strDescending
-                    clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                Case strReverse
-                    clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-                    clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                Case strNone
-                    clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-            End Select
         End If
     End Sub
 
