@@ -88,13 +88,9 @@ Public Class dlgScript
         ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame, btnSaveDataframe}))
 
         ucrChkPreviewLibrary.SetText("Preview")
-        ucrChkPreviewLibrary.SetParameter(New RParameter("preview", 0))
-        ucrChkPreviewLibrary.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkPreviewLibrary.AddToLinkedControls({ucrInputPreviewLibrary, ucrChkEditLibrary}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPreviewLibrary.AddToLinkedControls({ucrInputPreviewLibrary}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkEditLibrary.SetText("Edit")
-        ucrChkEditLibrary.SetParameter(New RParameter("edit", 1))
-        ucrChkEditLibrary.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
@@ -169,6 +165,7 @@ Public Class dlgScript
 
         'save controls reset
         rdoSaveDataFrame.Checked = True
+        ucrInputPreviewLibrary.Visible = False
         ucrInputDataFrame.SetName("")
         ucrDataFrameSave.Reset()
         ucrSaveColumn.Reset()
@@ -198,9 +195,6 @@ Public Class dlgScript
         ucrComboGetPackage.SetRCode(clsLibraryFunction, bReset)
         ucrDataFrameGet.SetRCode(clsGetDataFrameFunction, bReset)
 
-        ucrChkEditLibrary.SetRCode(clsConstantDummyFunction)
-        ucrChkPreviewLibrary.SetRCode(clsConstantDummyFunction)
-
         'saving results
         ucrSaveColumn.SetRCode(clsSaveColumnFunction, bReset)
         ucrSaveGraph.SetRCode(clsSaveGraphFunction, bReset)
@@ -208,7 +202,7 @@ Public Class dlgScript
         ucrSaveModel.SetRCode(clsSaveModelFunction, bReset)
     End Sub
 
-    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged, ucrDataFrameGet.ControlValueChanged
+    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged, ucrDataFrameGet.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
         ucrDataFrameGet.SetVisible(False)
         ucrSelectorGet.SetVisible(False)
         ucrPnlGetObject.SetVisible(False)
@@ -216,12 +210,16 @@ Public Class dlgScript
         SetGetReceiverItemType()
         If rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
-            clsTempFunction = clsGetDataFrameFunction
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetDataFrameFunction, False))
+            If TabControl1.SelectedTab Is TabPage2 Then
+                SetPreview(clsGetDataFrameFunction, False)
+            End If
         ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
             ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
             ucrReceiverGet.SetVisible(True)
+            If TabControl1.SelectedTab Is TabPage2 Then
+                SetPreview(clsGetColumnFunction, False)
+            End If
         End If
     End Sub
 
@@ -246,7 +244,7 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged, ucrSaveColumn.ControlValueChanged
+    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged, ucrSaveColumn.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
         ucrInputSaveDataFrame.SetVisible(False)
         ucrDataFrameSave.SetVisible(False)
         ucrSaveColumn.SetVisible(False)
@@ -255,16 +253,27 @@ Public Class dlgScript
         ucrSaveModel.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
             ucrInputSaveDataFrame.SetVisible(True)
+            If TabControl1.SelectedTab Is TabPage3 Then
+                SetPreview(clsImportNewDataFrame)
+            End If
         ElseIf rdoSaveColumn.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveColumn.SetVisible(True)
             clsTempFunction = clsSaveColumnFunction
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveColumnFunction))
+            If TabControl1.SelectedTab Is TabPage3 Then
+                SetPreview(clsSaveColumnFunction)
+            End If
         ElseIf rdoSaveObject.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveGraph.SetVisible(True)
             ucrSaveTable.SetVisible(True)
             ucrSaveModel.SetVisible(True)
+        End If
+    End Sub
+
+    Private Sub SetPreview(clsTempFunction As RFunction, Optional bSave As Boolean = True)
+        If ucrChkPreviewLibrary.Checked Then
+            ucrInputPreviewLibrary.SetText(GetPreviewText(clsTempFunction, bSave))
         End If
     End Sub
 
@@ -274,7 +283,6 @@ Public Class dlgScript
         Else
             frmMain.InsertTextToScriptWindow(clsLibraryFunction.Clone.ToScript)
         End If
-
     End Sub
 
     Private Function GetPreviewText(clsTempFunction As RFunction, Optional bSave As Boolean = True) As String
@@ -400,26 +408,17 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrChkPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreviewLibrary.ControlValueChanged
-        If ucrChkPreviewLibrary.Checked Then
-            clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsTempFunction))
-        Else
-            clsConstantDummyFunction.AddParameter("preview", "FALSE", iPosition:=1)
-        End If
-    End Sub
-
     Private Sub ucrChkEditLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditLibrary.ControlValueChanged
-        If ucrChkEditLibrary.Checked Then
-            clsConstantDummyFunction.AddParameter("edit", "TRUE", iPosition:=1)
-        Else
-            clsConstantDummyFunction.AddParameter("edit", "FALSE", iPosition:=1)
-        End If
         ucrInputPreviewLibrary.IsReadOnly = Not ucrChkEditLibrary.Checked
     End Sub
 
-    Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        ucrChkPreviewLibrary.Checked = False
+        ucrChkEditLibrary.Checked = False
+        ucrInputPreviewLibrary.txtInput.Clear()
+    End Sub
 
+    Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
         If Not ucrSaveModel.IsComplete Then
             Exit Sub
         End If
@@ -464,9 +463,11 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrComboGetPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackage.ControlValueChanged
+    Private Sub ucrComboGetPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackage.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
         If TabControl1.SelectedTab Is TabPage1 Then
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction, False))
+            If ucrComboGetPackage.GetText <> "datasets" Then
+                ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction, False))
+            End If
         End If
     End Sub
 
@@ -478,31 +479,34 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged
+    Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
         If TabControl1.SelectedTab Is TabPage3 AndAlso rdoSaveObject.Checked Then
             If ucrChangedControl Is ucrSaveGraph Then
-                clsTempFunction = clsSaveGraphFunction
-                ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveGraphFunction))
+                If ucrChkPreviewLibrary.Checked Then
+                    SetPreview(clsSaveGraphFunction)
+                End If
             ElseIf ucrChangedControl Is ucrSaveModel Then
-                clsTempFunction = clsSaveModelFunction
-                ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveModelFunction))
-
+                If ucrChkPreviewLibrary.Checked Then
+                    SetPreview(clsSaveModelFunction)
+                End If
             ElseIf ucrChangedControl Is ucrSaveTable Then
-                clsTempFunction = clsSaveTableFunction
-                ucrInputPreviewLibrary.SetText(GetPreviewText(clsSaveTableFunction))
+                If ucrChkPreviewLibrary.Checked Then
+                    SetPreview(clsSaveTableFunction)
+                End If
             End If
         End If
     End Sub
 
-    Private Sub ucrInputDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrame.ControlContentsChanged
+    Private Sub ucrInputDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrame.ControlContentsChanged, ucrChkPreviewLibrary.ControlValueChanged
         Dim strData As String = ""
         If TabControl1.SelectedTab Is TabPage5 Then
             strData = ucrInputDataFrame.GetText()
             clsRFunctionList.ClearParameters()
             clsRFunctionList.AddParameter(strData, strData)
             clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsImportNewDataFrame, False))
-            clsTempFunction = clsImportNewDataFrame
+            If ucrChkPreviewLibrary.Checked Then
+                SetPreview(clsImportNewDataFrame)
+            End If
         End If
     End Sub
 
@@ -516,5 +520,4 @@ Public Class dlgScript
             clsTempFunction = clsImportNewDataFrame
         End If
     End Sub
-
 End Class
