@@ -317,9 +317,9 @@ Public Class dlgHistogram
                         clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
                 End Select
             End If
-        ElseIf rdoDensity_ridges.Checked Then
+        Else
             If Not ucrFactorReceiver.IsEmpty Then
-                If ucrChkRidges.Checked Then
+                If rdoDensity_ridges.Checked AndAlso ucrChkRidges.Checked Then
                     Select Case strChangedTextFreq
                         Case strAscending
                             clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
@@ -346,21 +346,6 @@ Public Class dlgHistogram
                             clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
                     End Select
                 End If
-            End If
-        Else
-            If Not ucrFactorReceiver.IsEmpty Then
-                Select Case strChangedTextFreq
-                    Case strAscending
-                        clsForecatsReverse.AddParameter("f", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                        clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                    Case strDescending
-                        clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsInfreqValue, iPosition:=0)
-                    Case strReverse
-                        clsForecatsReverse.AddParameter("f", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-                        clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
-                    Case strNone
-                        clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False), iPosition:=0)
-                End Select
             End If
         End If
     End Sub
