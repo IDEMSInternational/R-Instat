@@ -24,7 +24,7 @@ Public Class dlgGeneralForGraphics
     'list of completed layers.
     Private iLayerIndex As Integer
     'current layer
-    Private clsGlobalAesFunction As New RFunction
+    Private clsGlobalAesFunction, clsScaleContinuousFunction, clsLevelsFunction As New RFunction
     Private clsBaseOperator As ROperator
     Private strGlobalDataFrame As String
     Public bDataFrameSet As Boolean
@@ -49,6 +49,7 @@ Public Class dlgGeneralForGraphics
     Private clsAnnotateFunction As New RFunction
     Private clsYScaleDiscreteFunction As New RFunction
     Private clsXScaleDiscreteFunction As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -90,6 +91,10 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrChkUseasNumeric.SetText("Group X")
+        ucrChkUseasNumeric.AddParameterValuesCondition(True, "group", "True")
+        ucrChkUseasNumeric.AddParameterValuesCondition(False, "group", "False")
+
         ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
         ucrFillOrColourReceiver.SetIncludedDataTypes({"factor"})
         ucrFillOrColourReceiver.strSelectorHeading = "Factors"
@@ -102,12 +107,16 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+        VariableXType()
     End Sub
 
     Private Sub SetDefaults()
         clsGgplotFunction = New RFunction
         clsGlobalAesFunction = New RFunction
+        clsScaleContinuousFunction = New RFunction
+        clsLevelsFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsDummyFunction = New RFunction
 
         ucrSave.Reset()
 
@@ -117,6 +126,8 @@ Public Class dlgGeneralForGraphics
         bDataFrameSet = False
         bResetOptionsSubdialog = True
         bResetSubdialog = True
+
+        clsDummyFunction.AddParameter("group", "false", iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
@@ -128,6 +139,15 @@ Public Class dlgGeneralForGraphics
 
         clsGlobalAesFunction.SetPackageName("ggplot2")
         clsGlobalAesFunction.SetRCommand("aes")
+
+        clsLevelsFunction.SetPackageName("base")
+        clsLevelsFunction.SetRCommand("levels")
+        clsLevelsFunction.AddParameter("y", ucrReceiverX.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsScaleContinuousFunction.SetPackageName("ggplot2")
+        clsScaleContinuousFunction.SetRCommand("scale_x_continuous")
+        clsScaleContinuousFunction.AddParameter("breaks", "1:12", iPosition:=1)
+        clsScaleContinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsLevelsFunction, iPosition:=2)
 
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -159,8 +179,12 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverX.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("y", ucrReceiverX.GetVariableNames(False), bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
         ucrVariablesAsFactorForGraphics.SetRCode(clsGlobalAesFunction, bReset)
+        If bReset Then
+            ucrChkUseasNumeric.SetRCode(clsDummyFunction, bReset)
+        End If
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
         ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
@@ -196,6 +220,7 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         'TestOKEnabled()
+        VariableXType()
     End Sub
 
     Private Sub cmdFacets_Click(sender As Object, e As EventArgs) Handles cmdFacets.Click
@@ -227,12 +252,7 @@ Public Class dlgGeneralForGraphics
         bResetSubdialog = False
     End Sub
 
-    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
-        If Not ucrReceiverX.IsEmpty Then
-            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-        Else
-            clsGlobalAesFunction.RemoveParameterByName("x")
-        End If
+    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
         If Not ucrVariablesAsFactorForGraphics.IsEmpty Then
             clsGlobalAesFunction.AddParameter("y", ucrVariablesAsFactorForGraphics.GetVariableNames(False), iPosition:=1)
         Else
@@ -245,7 +265,26 @@ Public Class dlgGeneralForGraphics
         End If
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrChkUseasNumeric.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub VariableXType()
+        ucrChkUseasNumeric.Visible = False
+        If Not ucrReceiverX.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            ucrChkUseasNumeric.Visible = ucrReceiverX.strCurrDataType = "factor"
+            If ucrChkUseasNumeric.Checked Then
+                clsGlobalAesFunction.AddParameter("group", "1", iPosition:=2)
+            Else
+                clsGlobalAesFunction.RemoveParameterByName("group")
+            End If
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrChkUseasNumeric.ControlValueChanged
+        VariableXType()
     End Sub
 End Class
