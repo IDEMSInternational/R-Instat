@@ -14,8 +14,10 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Windows.Controls
+Imports RScript
 Imports ScintillaNET
 
 Public Class ucrScript
@@ -41,7 +43,7 @@ Public Class ucrScript
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        toolTipScriptWindow.SetToolTip(cmdRunLineSelection, "Run the current line or selection. (Ctrl+Enter)")
+        toolTipScriptWindow.SetToolTip(cmdRunStatementSelection, "Run the current statement or selection. (Ctrl+Enter)")
         toolTipScriptWindow.SetToolTip(cmdRunAll, "Run all the text in the tab. (Ctrl+Alt+R)")
         toolTipScriptWindow.SetToolTip(cmdLoadScript, "Load a script from file into the current tab.")
         toolTipScriptWindow.SetToolTip(cmdSave, "Save the script in the current tab to a file.")
@@ -57,7 +59,7 @@ Public Class ucrScript
         mnuPaste.ToolTipText = "Paste the contents of the clipboard into the current tab. (Ctrl+V)"
         mnuSelectAll.ToolTipText = "Select all the contents of the current tab. (Ctrl+A)"
         mnuClear.ToolTipText = "Clear the contents of the current tab. (Ctrl+L)"
-        mnuRunCurrentLineSelection.ToolTipText = "Run the current line or selection. (Ctrl+Enter)"
+        mnuRunCurrentStatementSelection.ToolTipText = "Run the current statement or selection. (Ctrl+Enter)"
         mnuRunAllText.ToolTipText = "Run all the text in the tab. (Ctrl+Alt+R)"
         mnuOpenScriptasFile.ToolTipText = "Save file to log folder and open file in external editor."
         mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
@@ -65,7 +67,7 @@ Public Class ucrScript
         mnuHelp.ToolTipText = "Display the Script Window help information."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
-        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+        mnuRunCurrentStatementSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
         'Make the log tab the selected tab
         TabControl.SelectTab(iTabIndexLog)
@@ -288,7 +290,7 @@ Public Class ucrScript
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
 
-        cmdRunLineSelection.Enabled = bScriptExists
+        cmdRunStatementSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
@@ -298,7 +300,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub EnableRunButtons(bEnable As Boolean)
-        cmdRunLineSelection.Enabled = bEnable
+        cmdRunStatementSelection.Enabled = bEnable
         cmdRunAll.Enabled = bEnable
     End Sub
 
@@ -314,7 +316,7 @@ Public Class ucrScript
         mnuPaste.Enabled = bEnable
         mnuSelectAll.Enabled = bEnable
         mnuClear.Enabled = bEnable
-        mnuRunCurrentLineSelection.Enabled = bEnable
+        mnuRunCurrentStatementSelection.Enabled = bEnable
         mnuRunAllText.Enabled = bEnable
         mnuLoadScriptFromFile.Enabled = bEnable
         mnuOpenScriptasFile.Enabled = bEnable
@@ -600,24 +602,52 @@ Public Class ucrScript
         Return clsNewScript
     End Function
 
-    Private Sub RunCurrentLine()
-        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
+    Private Sub RunCurrentStatement()
 
-        If clsScriptActive.TextLength > 0 Then
-            Dim strLineTextString = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
-            strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
-            strScriptCmd = RunText(strScriptCmd)
-
-            Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
-            clsScriptActive.GotoPosition(iNextLinePos)
+        If clsScriptActive.TextLength <= 0 Then
+            Exit Sub
         End If
-    End Sub
 
-    Private Function RunText(strText As String) As String
-        Return If(Not String.IsNullOrEmpty(strText),
-                  frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment),
-                  "")
-    End Function
+        Dim dctRStatements As OrderedDictionary = New clsRScript(clsScriptActive.Text).dctRStatements
+        If dctRStatements.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+        Dim iNextStatementPos As Integer = 0
+        Dim clsRStatement As clsRStatement = Nothing
+
+        For Each kvpDictEntry As DictionaryEntry In dctRStatements
+            If kvpDictEntry.Key > iCaretPos Then
+                iNextStatementPos = kvpDictEntry.Key
+                Exit For
+            End If
+            clsRStatement = kvpDictEntry.Value
+        Next
+
+        frmMain.clsRLink.RunRStatement(clsRStatement)
+
+        ' if we executed the only/last statement
+        If iNextStatementPos = 0 Then
+            ' if there is no blank line at end of text, then add blank line
+            If Not (clsScriptActive.Text.EndsWith(vbCr) _
+                    OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
+                clsScriptActive.AppendText(vbCrLf)
+            End If
+            iNextStatementPos = clsScriptActive.TextLength
+
+        Else 'else move caret to first non-blank line of next statement
+            For iTextPos As Integer = iNextStatementPos To clsScriptActive.Text.Length - 1
+                Dim chrNext As Char = clsScriptActive.Text.Chars(iTextPos)
+                If chrNext <> vbLf AndAlso chrNext <> vbCr Then
+                    iNextStatementPos = iTextPos
+                    Exit For
+                End If
+            Next
+        End If
+
+        clsScriptActive.GotoPosition(iNextStatementPos)
+    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -714,7 +744,7 @@ Public Class ucrScript
 
         'enable remaining options based on tab state
         mnuSelectAll.Enabled = bScriptExists
-        mnuRunCurrentLineSelection.Enabled = bScriptExists
+        mnuRunCurrentStatementSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
         mnuOpenScriptasFile.Enabled = bScriptExists
         mnuSaveScript.Enabled = bScriptExists
@@ -809,19 +839,19 @@ Public Class ucrScript
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
         EnableRightClickMenuOptions(False)
-        RunText(clsScriptActive.Text)
+        frmMain.clsRLink.RunScript(clsScriptActive.Text.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
         EnableRunButtons(True)
         EnableRightClickMenuOptions(True)
     End Sub
 
-    Private Sub mnuRunCurrentLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
+    Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
         'temporarily disable the buttons in case its a long operation
         EnableRunButtons(False)
         EnableRightClickMenuOptions(False)
         If clsScriptActive.SelectedText.Length > 0 Then
-            RunText(clsScriptActive.SelectedText)
+            frmMain.clsRLink.RunScript(clsScriptActive.SelectedText.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
         Else
-            RunCurrentLine()
+            RunCurrentStatement()
         End If
         EnableRunButtons(True)
         EnableRightClickMenuOptions(True)
@@ -869,7 +899,7 @@ Public Class ucrScript
         Next
 
         If IsNothing(clsScriptActive) Then
-            MsgBox("Developer error: could not find editor winfow in tab.")
+            MsgBox("Developer error: could not find editor window in tab.")
         End If
     End Sub
 
