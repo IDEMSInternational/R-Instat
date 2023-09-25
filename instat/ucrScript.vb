@@ -25,7 +25,6 @@ Public Class ucrScript
     Private bIsTextChanged = False
     Private iMaxLineNumberCharLength As Integer = 0
     Private Const iTabIndexLog As Integer = 0
-    Private Const strComment As String = "Code run from Script Window"
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
     Friend WithEvents clsScriptActive As Scintilla
@@ -839,7 +838,7 @@ Public Class ucrScript
 
         EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
         EnableRightClickMenuOptions(False)
-        frmMain.clsRLink.RunScript(clsScriptActive.Text.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+        frmMain.clsRLink.RunScriptFromWindow(clsScriptActive.Text.Trim(vbLf), "Code run from Script Window (all text)")
         EnableRunButtons(True)
         EnableRightClickMenuOptions(True)
     End Sub
@@ -849,7 +848,7 @@ Public Class ucrScript
         EnableRunButtons(False)
         EnableRightClickMenuOptions(False)
         If clsScriptActive.SelectedText.Length > 0 Then
-            frmMain.clsRLink.RunScript(clsScriptActive.SelectedText.Trim(vbLf), iCallType:=5, strComment:=strComment, bSeparateThread:=False, bSilent:=False)
+            frmMain.clsRLink.RunScriptFromWindow(clsScriptActive.SelectedText.Trim(vbLf), "Code run from Script Window (selected text)")
         Else
             RunCurrentStatement()
         End If
