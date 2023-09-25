@@ -54,6 +54,8 @@ Public Class sdgPlots
     Private strFirstVariable As String
     Private strSecondvariable As String
     Private clsThemeFunction As New RFunction
+    Private clsGuideLegendFunction As New RFunction
+    Private clsGuideFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
@@ -331,7 +333,7 @@ Public Class sdgPlots
         bControlsInitialised = True
 
         'Theme Tab Checkboxes under grpCommonOptions
-        ucrChkLegendPosition.SetText("Legend Position")
+        ucrChkLegendPosition.SetText("Legend")
         ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
@@ -640,6 +642,8 @@ Public Class sdgPlots
         ucrChkAddColour.AddParameterPresentCondition(True, "scale_colour", True)
         ucrChkAddColour.AddParameterPresentCondition(False, "scale_colour", False)
 
+        ucrChkReverse.SetText("Reverse")
+
         ttCaptionTitle.SetToolTip(ucrInputGraphCaption.txtInput, "Type \n where you would like a new-line")
 
         grpFillScale.Visible = False
@@ -672,6 +676,8 @@ Public Class sdgPlots
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
+        clsGuideLegendFunction = New RFunction
+        clsGuideFunction = New RFunction
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
@@ -728,6 +734,12 @@ Public Class sdgPlots
         If Not clsBaseOperator.ContainsParameter("theme_name") Then
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         End If
+
+        clsGuideLegendFunction.SetRCommand("guide_legend")
+        clsGuideLegendFunction.AddParameter("reverse", "TRUE", iPosition:=0)
+
+        clsGuideFunction.SetRCommand("guides")
+        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0)
 
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
@@ -808,6 +820,7 @@ Public Class sdgPlots
             ucrNudCaptionSize.SetRCode(clsPlotElementCaptionFunction, bReset, bCloneIfNeeded:=True)
             ucrNudLegendSize.SetRCode(clsPlotLegendTitleFunction, bReset, bCloneIfNeeded:=True)
             ucrNudTagSize.SetRCode(clsPlotElementTagFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkReverse.SetRCode(clsBaseOperator, bReset)
         End If
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
@@ -1309,4 +1322,12 @@ Public Class sdgPlots
     Private Sub ucrChkIncludeTitles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlValueChanged
         AddRemoveLabs()
     End Sub
-End Class
+
+    Private Sub ucrChkAddLegends_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReverse.ControlValueChanged
+        If ucrChkReverse.Checked Then
+            clsBaseOperator.AddParameter("guides", clsRFunctionParameter:=clsGuideFunction, iPosition:=2)
+        Else
+            clsBaseOperator.RemoveParameterByName("guides")
+        End If
+    End Sub
+    End Class

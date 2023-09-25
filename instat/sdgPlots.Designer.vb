@@ -199,6 +199,7 @@ Partial Class sdgPlots
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkReverse = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -894,6 +895,7 @@ Partial Class sdgPlots
         '
         'grpCommonOptions
         '
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkReverse)
         Me.grpCommonOptions.Controls.Add(Me.ucrNudYaxisMarkSize)
         Me.grpCommonOptions.Controls.Add(Me.ucrNudXaxisMarkSize)
         Me.grpCommonOptions.Controls.Add(Me.ucrNudYSize)
@@ -984,7 +986,7 @@ Partial Class sdgPlots
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(246, 25)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(164, 25)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLegendPosition.TabIndex = 6
@@ -2053,6 +2055,15 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'ucrChkReverse
+        '
+        Me.ucrChkReverse.AutoSize = True
+        Me.ucrChkReverse.Checked = False
+        Me.ucrChkReverse.Location = New System.Drawing.Point(339, 25)
+        Me.ucrChkReverse.Name = "ucrChkReverse"
+        Me.ucrChkReverse.Size = New System.Drawing.Size(110, 23)
+        Me.ucrChkReverse.TabIndex = 108
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -2266,6 +2277,7 @@ Partial Class sdgPlots
     Friend WithEvents lblLegendSize As Label
     Friend WithEvents ucrNudLegendSize As ucrNud
     Friend WithEvents ucrChkIncludeTitles As ucrCheck
+    Friend WithEvents ucrChkReverse As ucrCheck
 End Class
 
 
