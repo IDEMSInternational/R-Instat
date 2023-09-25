@@ -305,10 +305,10 @@ Public Class dlgBarAndPieChart
         ucrInputLollipopColour.SetItems(dctLollipopColours)
         ucrInputLollipopColour.bAllowNonConditionValues = True
 
-        ucrChkReverse.SetText("Add Reverse")
+        ucrChkReverse.SetText("Reverse")
 
         'Theme Tab Checkboxes under grpCommonOptions
-        ucrChkLegendPosition.SetText("Legend:")
+        ucrChkLegendPosition.SetText("Legend")
         ucrChkLegendPosition.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))

@@ -443,7 +443,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(92, 465)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(77, 465)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(100, 24)
         Me.ucrInputLegendPosition.TabIndex = 8
