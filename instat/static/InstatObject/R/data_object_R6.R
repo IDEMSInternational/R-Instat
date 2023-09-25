@@ -4373,7 +4373,7 @@ DataSheet$set("public", "add_flag_fields", function(col_names) {
 })
 
 DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
-  curr_data <- self$get_data_frame(use_column_selection = FALSE)
+  curr_data <- self$get_data_frame()
   old_metadata <- attributes(curr_data)
   new_df <- curr_data |>
     janitor::remove_empty(which = which)
@@ -4396,6 +4396,17 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
         attr(new_df[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
       }
     }
+  }
+  if(self$column_selection_applied()){
+    df_with_Selection <- self$get_data_frame()
+    df_without_Selection <- self$get_data_frame(use_column_selection = FALSE)
+    # Check for missing columns in B and remove them from A
+    missing_columns <- setdiff(names(df_with_Selection), names(new_df))
+    if (length(missing_columns) > 0) {
+      new_df <- df_without_Selection[, !names(df_without_Selection) %in% missing_columns]
+      self$remove_current_column_selection()
+    }
+    
   }
   self$set_data(new_df)
   self$data_changed <- TRUE
