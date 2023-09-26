@@ -62,6 +62,8 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.lblReorder = New System.Windows.Forms.Label()
+        Me.ucrInputAddReorder = New instat.ucrInputComboBox()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -234,7 +236,7 @@ Partial Class dlgHistogram
         'ucrSaveHist
         '
         Me.ucrSaveHist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 311)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 342)
         Me.ucrSaveHist.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(322, 24)
@@ -283,7 +285,7 @@ Partial Class dlgHistogram
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 334)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 365)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -298,12 +300,35 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions.Size = New System.Drawing.Size(433, 30)
         Me.ucrPnlOptions.TabIndex = 0
         '
+        'lblReorder
+        '
+        Me.lblReorder.AutoSize = True
+        Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblReorder.Location = New System.Drawing.Point(286, 298)
+        Me.lblReorder.Name = "lblReorder"
+        Me.lblReorder.Size = New System.Drawing.Size(48, 13)
+        Me.lblReorder.TabIndex = 38
+        Me.lblReorder.Text = "Reorder:"
+        '
+        'ucrInputAddReorder
+        '
+        Me.ucrInputAddReorder.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAddReorder.GetSetSelectedIndex = -1
+        Me.ucrInputAddReorder.IsReadOnly = False
+        Me.ucrInputAddReorder.Location = New System.Drawing.Point(287, 314)
+        Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
+        Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputAddReorder.TabIndex = 39
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(448, 394)
+        Me.ClientSize = New System.Drawing.Size(448, 422)
+        Me.Controls.Add(Me.lblReorder)
+        Me.Controls.Add(Me.ucrInputAddReorder)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkDisplayAsDotPlot)
         Me.Controls.Add(Me.ucrChkRidges)
@@ -355,4 +380,6 @@ Partial Class dlgHistogram
     Friend WithEvents toolStripMenuItemDensityRidgesOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemFrequencyPolygonOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemDotOptions As ToolStripMenuItem
+    Friend WithEvents lblReorder As Label
+    Friend WithEvents ucrInputAddReorder As ucrInputComboBox
 End Class
