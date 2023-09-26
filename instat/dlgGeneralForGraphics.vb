@@ -47,6 +47,8 @@ Public Class dlgGeneralForGraphics
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsYScaleDiscreteFunction As New RFunction
+    Private clsXScaleDiscreteFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -123,6 +125,7 @@ Public Class dlgGeneralForGraphics
         ucrVariablesAsFactorForGraphics.SetMeAsReceiver()
         bDataFrameSet = False
         bResetOptionsSubdialog = True
+        bResetSubdialog = True
 
         clsDummyFunction.AddParameter("group", "false", iPosition:=0)
 
@@ -151,6 +154,8 @@ Public Class dlgGeneralForGraphics
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsYScaleDiscreteFunction = GgplotDefaults.clsYScaleDiscreteFunction.Clone
+        clsXScaleDiscreteFunction = GgplotDefaults.clsXScaleDiscreteFunction.Clone
         clsFacetsFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
@@ -209,6 +214,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.ShowDialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
@@ -221,20 +227,21 @@ Public Class dlgGeneralForGraphics
         sdgPlots.DisableLayersTab()
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
-                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.ShowDialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
+        bResetSubdialog = False
     End Sub
 
     Private Sub cmdTheme_Click(sender As Object, e As EventArgs) Handles cmdTheme.Click
         sdgPlots.DisableLayersTab()
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
                           clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
-                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsGlobalAesFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 5
@@ -242,6 +249,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
