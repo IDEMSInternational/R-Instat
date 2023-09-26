@@ -150,9 +150,10 @@ Public Class ucrDataView
         'refresh of that cell will be done manually 
         If Not bOnlyUpdateOneCell Then
             AddAndUpdateWorksheets()
-            _grid.RemoveOldWorksheets()
             If _clsDataBook.DataFrames.Count = 0 Then
                 RefreshDisplayInformation()
+            Else
+                _grid.RemoveOldWorksheets()
             End If
         End If
     End Sub
