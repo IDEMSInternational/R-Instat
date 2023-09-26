@@ -328,11 +328,6 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub ucrReceiverY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverY.ControlValueChanged, ucrReceiverX.ControlValueChanged
-        'If Not ucrReceiverX.IsEmpty Then
-        '    clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-        'Else
-        '    clsGlobalAesFunction.RemoveParameterByName("x")
-        'End If
         If Not ucrReceiverY.IsEmpty Then
             clsGlobalAesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False), iPosition:=1)
         Else

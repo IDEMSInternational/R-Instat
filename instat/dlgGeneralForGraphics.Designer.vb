@@ -40,17 +40,23 @@ Partial Class dlgGeneralForGraphics
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.lblXVariable = New System.Windows.Forms.Label()
         Me.cmdFacets = New System.Windows.Forms.Button()
         Me.cmdTheme = New System.Windows.Forms.Button()
         Me.cmdYAxis = New System.Windows.Forms.Button()
         Me.cmdXAxis = New System.Windows.Forms.Button()
         Me.cmdTitles = New System.Windows.Forms.Button()
-        Me.lblYVariable = New System.Windows.Forms.Label()
         Me.grpAethetics = New System.Windows.Forms.GroupBox()
+        Me.ucrChkUseasNumeric = New instat.ucrCheck()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.lblYVariable = New System.Windows.Forms.Label()
+        Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ucrLabelReceiver = New instat.ucrReceiverSingle()
         Me.lblColour = New System.Windows.Forms.Label()
+        Me.ucrColourReceiver = New instat.ucrReceiverSingle()
         Me.lblFill = New System.Windows.Forms.Label()
+        Me.ucrFillReceiver = New instat.ucrReceiverSingle()
         Me.ContextMenuPackagesList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ListBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeomtextpathToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,16 +83,10 @@ Partial Class dlgGeneralForGraphics
         Me.GgthemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GgwordbuildToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRHelp = New instat.ucrSplitButton()
-        Me.ucrLabelReceiver = New instat.ucrReceiverSingle()
-        Me.ucrColourReceiver = New instat.ucrReceiverSingle()
-        Me.ucrFillReceiver = New instat.ucrReceiverSingle()
-        Me.ucrChkUseasNumeric = New instat.ucrCheck()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrChkLegend = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
-        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
@@ -104,17 +104,6 @@ Partial Class dlgGeneralForGraphics
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'lblXVariable
-        '
-        Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(303, 80)
-        Me.lblXVariable.Name = "lblXVariable"
-        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 3
-        Me.lblXVariable.Tag = "X_Variable:"
-        Me.lblXVariable.Text = "X Variable:"
         '
         'cmdFacets
         '
@@ -171,233 +160,99 @@ Partial Class dlgGeneralForGraphics
         Me.cmdTitles.Text = "Titles"
         Me.cmdTitles.UseVisualStyleBackColor = True
         '
-        'lblYVariable
-        '
-        Me.lblYVariable.AutoSize = True
-        Me.lblYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYVariable.Location = New System.Drawing.Point(303, 43)
-        Me.lblYVariable.Name = "lblYVariable"
-        Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblYVariable.TabIndex = 1
-        Me.lblYVariable.Tag = "Y_Variable:"
-        Me.lblYVariable.Text = "Y Variable:"
-        '
         'grpAethetics
         '
+        Me.grpAethetics.Controls.Add(Me.ucrChkUseasNumeric)
+        Me.grpAethetics.Controls.Add(Me.ucrReceiverY)
+        Me.grpAethetics.Controls.Add(Me.lblYVariable)
+        Me.grpAethetics.Controls.Add(Me.lblXVariable)
+        Me.grpAethetics.Controls.Add(Me.ucrReceiverX)
         Me.grpAethetics.Controls.Add(Me.lblLabel)
         Me.grpAethetics.Controls.Add(Me.ucrLabelReceiver)
         Me.grpAethetics.Controls.Add(Me.lblColour)
         Me.grpAethetics.Controls.Add(Me.ucrColourReceiver)
         Me.grpAethetics.Controls.Add(Me.lblFill)
         Me.grpAethetics.Controls.Add(Me.ucrFillReceiver)
-        Me.grpAethetics.Location = New System.Drawing.Point(277, 152)
+        Me.grpAethetics.Location = New System.Drawing.Point(277, 41)
         Me.grpAethetics.Name = "grpAethetics"
-        Me.grpAethetics.Size = New System.Drawing.Size(174, 146)
+        Me.grpAethetics.Size = New System.Drawing.Size(174, 257)
         Me.grpAethetics.TabIndex = 23
         Me.grpAethetics.TabStop = False
         Me.grpAethetics.Text = "Aethetics:"
+        '
+        'ucrChkUseasNumeric
+        '
+        Me.ucrChkUseasNumeric.AutoSize = True
+        Me.ucrChkUseasNumeric.Checked = False
+        Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(24, 107)
+        Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
+        Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(126, 24)
+        Me.ucrChkUseasNumeric.TabIndex = 35
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.AutoSize = True
+        Me.ucrReceiverY.frmParent = Me
+        Me.ucrReceiverY.Location = New System.Drawing.Point(24, 36)
+        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.Size = New System.Drawing.Size(125, 20)
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.TabIndex = 32
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
+        'lblYVariable
+        '
+        Me.lblYVariable.AutoSize = True
+        Me.lblYVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYVariable.Location = New System.Drawing.Point(26, 23)
+        Me.lblYVariable.Name = "lblYVariable"
+        Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblYVariable.TabIndex = 31
+        Me.lblYVariable.Tag = "Y_Variable:"
+        Me.lblYVariable.Text = "Y Variable:"
+        '
+        'lblXVariable
+        '
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXVariable.Location = New System.Drawing.Point(26, 67)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXVariable.TabIndex = 33
+        Me.lblXVariable.Tag = "X_Variable:"
+        Me.lblXVariable.Text = "X Variable:"
+        '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.AutoSize = True
+        Me.ucrReceiverX.frmParent = Me
+        Me.ucrReceiverX.Location = New System.Drawing.Point(24, 81)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 27)
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.TabIndex = 34
+        Me.ucrReceiverX.ucrSelector = Nothing
         '
         'lblLabel
         '
         Me.lblLabel.AutoSize = True
         Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabel.Location = New System.Drawing.Point(27, 95)
+        Me.lblLabel.Location = New System.Drawing.Point(27, 213)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(36, 13)
         Me.lblLabel.TabIndex = 29
         Me.lblLabel.Tag = "Label:"
         Me.lblLabel.Text = "Label:"
         '
-        'lblColour
-        '
-        Me.lblColour.AutoSize = True
-        Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColour.Location = New System.Drawing.Point(27, 55)
-        Me.lblColour.Name = "lblColour"
-        Me.lblColour.Size = New System.Drawing.Size(40, 13)
-        Me.lblColour.TabIndex = 27
-        Me.lblColour.Tag = "Fill_Colour:"
-        Me.lblColour.Text = "Colour:"
-        '
-        'lblFill
-        '
-        Me.lblFill.AutoSize = True
-        Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFill.Location = New System.Drawing.Point(27, 16)
-        Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(19, 13)
-        Me.lblFill.TabIndex = 25
-        Me.lblFill.Tag = "Fill_Colour:"
-        Me.lblFill.Text = "Fill"
-        '
-        'ContextMenuPackagesList
-        '
-        Me.ContextMenuPackagesList.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuPackagesList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListBaseToolStripMenuItem, Me.GeomtextpathToolStripMenuItem, Me.GGallyToolStripMenuItem, Me.GgaltToolStripMenuItem, Me.GgdendroToolStripMenuItem, Me.GgeffectsToolStripMenuItem, Me.GgfittextToolStripMenuItem, Me.GgforceToolStripMenuItem, Me.GgformulaToolStripMenuItem, Me.GgfortifyToolStripMenuItem, Me.GgmcmcToolStripMenuItem, Me.GgmosaicToolStripMenuItem, Me.GgplotifyToolStripMenuItem, Me.GgpmiscToolStripMenuItem, Me.GgppToolStripMenuItem, Me.GgpubrToolStripMenuItem, Me.GgrepelToolStripMenuItem, Me.GgridgesToolStripMenuItem, Me.GgsciToolStripMenuItem, Me.GgsignifToolStripMenuItem, Me.GgstanceToolStripMenuItem, Me.GgtextToolStripMenuItem, Me.GgthemesToolStripMenuItem, Me.GgwordbuildToolStripMenuItem})
-        Me.ContextMenuPackagesList.Name = "ContextMenuStrip1"
-        Me.ContextMenuPackagesList.Size = New System.Drawing.Size(181, 554)
-        '
-        'ListBaseToolStripMenuItem
-        '
-        Me.ListBaseToolStripMenuItem.Name = "ListBaseToolStripMenuItem"
-        Me.ListBaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ListBaseToolStripMenuItem.Text = "ggplot2"
-        '
-        'GeomtextpathToolStripMenuItem
-        '
-        Me.GeomtextpathToolStripMenuItem.Name = "GeomtextpathToolStripMenuItem"
-        Me.GeomtextpathToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GeomtextpathToolStripMenuItem.Text = "geomtextpath"
-        '
-        'GGallyToolStripMenuItem
-        '
-        Me.GGallyToolStripMenuItem.Name = "GGallyToolStripMenuItem"
-        Me.GGallyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GGallyToolStripMenuItem.Text = "GGally"
-        '
-        'GgaltToolStripMenuItem
-        '
-        Me.GgaltToolStripMenuItem.Name = "GgaltToolStripMenuItem"
-        Me.GgaltToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgaltToolStripMenuItem.Text = "ggalt"
-        '
-        'GgdendroToolStripMenuItem
-        '
-        Me.GgdendroToolStripMenuItem.Name = "GgdendroToolStripMenuItem"
-        Me.GgdendroToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgdendroToolStripMenuItem.Text = "ggdendro"
-        '
-        'GgeffectsToolStripMenuItem
-        '
-        Me.GgeffectsToolStripMenuItem.Name = "GgeffectsToolStripMenuItem"
-        Me.GgeffectsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgeffectsToolStripMenuItem.Text = "ggeffects"
-        '
-        'GgfittextToolStripMenuItem
-        '
-        Me.GgfittextToolStripMenuItem.Name = "GgfittextToolStripMenuItem"
-        Me.GgfittextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgfittextToolStripMenuItem.Text = "ggfittext"
-        '
-        'GgforceToolStripMenuItem
-        '
-        Me.GgforceToolStripMenuItem.Name = "GgforceToolStripMenuItem"
-        Me.GgforceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgforceToolStripMenuItem.Text = "ggforce"
-        '
-        'GgformulaToolStripMenuItem
-        '
-        Me.GgformulaToolStripMenuItem.Name = "GgformulaToolStripMenuItem"
-        Me.GgformulaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgformulaToolStripMenuItem.Text = "ggformula"
-        '
-        'GgfortifyToolStripMenuItem
-        '
-        Me.GgfortifyToolStripMenuItem.Name = "GgfortifyToolStripMenuItem"
-        Me.GgfortifyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgfortifyToolStripMenuItem.Text = "ggfortify"
-        '
-        'GgmcmcToolStripMenuItem
-        '
-        Me.GgmcmcToolStripMenuItem.Name = "GgmcmcToolStripMenuItem"
-        Me.GgmcmcToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgmcmcToolStripMenuItem.Text = "ggmcmc"
-        '
-        'GgmosaicToolStripMenuItem
-        '
-        Me.GgmosaicToolStripMenuItem.Name = "GgmosaicToolStripMenuItem"
-        Me.GgmosaicToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgmosaicToolStripMenuItem.Text = "ggmosaic"
-        '
-        'GgplotifyToolStripMenuItem
-        '
-        Me.GgplotifyToolStripMenuItem.Name = "GgplotifyToolStripMenuItem"
-        Me.GgplotifyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgplotifyToolStripMenuItem.Text = "ggplotify"
-        '
-        'GgpmiscToolStripMenuItem
-        '
-        Me.GgpmiscToolStripMenuItem.Name = "GgpmiscToolStripMenuItem"
-        Me.GgpmiscToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgpmiscToolStripMenuItem.Text = "ggpmisc"
-        '
-        'GgppToolStripMenuItem
-        '
-        Me.GgppToolStripMenuItem.Name = "GgppToolStripMenuItem"
-        Me.GgppToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgppToolStripMenuItem.Text = "ggpp"
-        '
-        'GgpubrToolStripMenuItem
-        '
-        Me.GgpubrToolStripMenuItem.Name = "GgpubrToolStripMenuItem"
-        Me.GgpubrToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgpubrToolStripMenuItem.Text = "ggpubr"
-        '
-        'GgrepelToolStripMenuItem
-        '
-        Me.GgrepelToolStripMenuItem.Name = "GgrepelToolStripMenuItem"
-        Me.GgrepelToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgrepelToolStripMenuItem.Text = "ggrepel"
-        '
-        'GgridgesToolStripMenuItem
-        '
-        Me.GgridgesToolStripMenuItem.Name = "GgridgesToolStripMenuItem"
-        Me.GgridgesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgridgesToolStripMenuItem.Text = "ggridges"
-        '
-        'GgsciToolStripMenuItem
-        '
-        Me.GgsciToolStripMenuItem.Name = "GgsciToolStripMenuItem"
-        Me.GgsciToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgsciToolStripMenuItem.Text = "ggsci"
-        '
-        'GgsignifToolStripMenuItem
-        '
-        Me.GgsignifToolStripMenuItem.Name = "GgsignifToolStripMenuItem"
-        Me.GgsignifToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgsignifToolStripMenuItem.Text = "ggsignif"
-        '
-        'GgstanceToolStripMenuItem
-        '
-        Me.GgstanceToolStripMenuItem.Name = "GgstanceToolStripMenuItem"
-        Me.GgstanceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgstanceToolStripMenuItem.Text = "ggstance"
-        '
-        'GgtextToolStripMenuItem
-        '
-        Me.GgtextToolStripMenuItem.Name = "GgtextToolStripMenuItem"
-        Me.GgtextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgtextToolStripMenuItem.Text = "ggtext"
-        '
-        'GgthemesToolStripMenuItem
-        '
-        Me.GgthemesToolStripMenuItem.Name = "GgthemesToolStripMenuItem"
-        Me.GgthemesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgthemesToolStripMenuItem.Text = "ggthemes"
-        '
-        'GgwordbuildToolStripMenuItem
-        '
-        Me.GgwordbuildToolStripMenuItem.Name = "GgwordbuildToolStripMenuItem"
-        Me.GgwordbuildToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GgwordbuildToolStripMenuItem.Text = " ggwordbuild"
-        '
-        'cmdRHelp
-        '
-        Me.cmdRHelp.AutoSize = True
-        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuPackagesList
-        Me.cmdRHelp.Location = New System.Drawing.Point(371, 430)
-        Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(91, 30)
-        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuPackagesList
-        Me.cmdRHelp.TabIndex = 213
-        Me.cmdRHelp.Text = "R Help"
-        Me.cmdRHelp.UseVisualStyleBackColor = True
-        '
         'ucrLabelReceiver
         '
         Me.ucrLabelReceiver.AutoSize = True
-        Me.ucrLabelReceiver.frmParent = Nothing
-        Me.ucrLabelReceiver.Location = New System.Drawing.Point(25, 111)
+        Me.ucrLabelReceiver.frmParent = Me
+        Me.ucrLabelReceiver.Location = New System.Drawing.Point(25, 229)
         Me.ucrLabelReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrLabelReceiver.Name = "ucrLabelReceiver"
         Me.ucrLabelReceiver.Selector = Nothing
@@ -406,11 +261,22 @@ Partial Class dlgGeneralForGraphics
         Me.ucrLabelReceiver.TabIndex = 30
         Me.ucrLabelReceiver.ucrSelector = Nothing
         '
+        'lblColour
+        '
+        Me.lblColour.AutoSize = True
+        Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColour.Location = New System.Drawing.Point(27, 173)
+        Me.lblColour.Name = "lblColour"
+        Me.lblColour.Size = New System.Drawing.Size(40, 13)
+        Me.lblColour.TabIndex = 27
+        Me.lblColour.Tag = "Fill_Colour:"
+        Me.lblColour.Text = "Colour:"
+        '
         'ucrColourReceiver
         '
         Me.ucrColourReceiver.AutoSize = True
-        Me.ucrColourReceiver.frmParent = Nothing
-        Me.ucrColourReceiver.Location = New System.Drawing.Point(25, 71)
+        Me.ucrColourReceiver.frmParent = Me
+        Me.ucrColourReceiver.Location = New System.Drawing.Point(25, 189)
         Me.ucrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColourReceiver.Name = "ucrColourReceiver"
         Me.ucrColourReceiver.Selector = Nothing
@@ -419,11 +285,22 @@ Partial Class dlgGeneralForGraphics
         Me.ucrColourReceiver.TabIndex = 28
         Me.ucrColourReceiver.ucrSelector = Nothing
         '
+        'lblFill
+        '
+        Me.lblFill.AutoSize = True
+        Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFill.Location = New System.Drawing.Point(27, 134)
+        Me.lblFill.Name = "lblFill"
+        Me.lblFill.Size = New System.Drawing.Size(22, 13)
+        Me.lblFill.TabIndex = 25
+        Me.lblFill.Tag = "Fill_Colour:"
+        Me.lblFill.Text = "Fill:"
+        '
         'ucrFillReceiver
         '
         Me.ucrFillReceiver.AutoSize = True
-        Me.ucrFillReceiver.frmParent = Nothing
-        Me.ucrFillReceiver.Location = New System.Drawing.Point(25, 32)
+        Me.ucrFillReceiver.frmParent = Me
+        Me.ucrFillReceiver.Location = New System.Drawing.Point(25, 150)
         Me.ucrFillReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillReceiver.Name = "ucrFillReceiver"
         Me.ucrFillReceiver.Selector = Nothing
@@ -432,14 +309,168 @@ Partial Class dlgGeneralForGraphics
         Me.ucrFillReceiver.TabIndex = 26
         Me.ucrFillReceiver.ucrSelector = Nothing
         '
-        'ucrChkUseasNumeric
+        'ContextMenuPackagesList
         '
-        Me.ucrChkUseasNumeric.AutoSize = True
-        Me.ucrChkUseasNumeric.Checked = False
-        Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(301, 122)
-        Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
-        Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(126, 24)
-        Me.ucrChkUseasNumeric.TabIndex = 22
+        Me.ContextMenuPackagesList.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuPackagesList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListBaseToolStripMenuItem, Me.GeomtextpathToolStripMenuItem, Me.GGallyToolStripMenuItem, Me.GgaltToolStripMenuItem, Me.GgdendroToolStripMenuItem, Me.GgeffectsToolStripMenuItem, Me.GgfittextToolStripMenuItem, Me.GgforceToolStripMenuItem, Me.GgformulaToolStripMenuItem, Me.GgfortifyToolStripMenuItem, Me.GgmcmcToolStripMenuItem, Me.GgmosaicToolStripMenuItem, Me.GgplotifyToolStripMenuItem, Me.GgpmiscToolStripMenuItem, Me.GgppToolStripMenuItem, Me.GgpubrToolStripMenuItem, Me.GgrepelToolStripMenuItem, Me.GgridgesToolStripMenuItem, Me.GgsciToolStripMenuItem, Me.GgsignifToolStripMenuItem, Me.GgstanceToolStripMenuItem, Me.GgtextToolStripMenuItem, Me.GgthemesToolStripMenuItem, Me.GgwordbuildToolStripMenuItem})
+        Me.ContextMenuPackagesList.Name = "ContextMenuStrip1"
+        Me.ContextMenuPackagesList.Size = New System.Drawing.Size(150, 532)
+        '
+        'ListBaseToolStripMenuItem
+        '
+        Me.ListBaseToolStripMenuItem.Name = "ListBaseToolStripMenuItem"
+        Me.ListBaseToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ListBaseToolStripMenuItem.Text = "ggplot2"
+        '
+        'GeomtextpathToolStripMenuItem
+        '
+        Me.GeomtextpathToolStripMenuItem.Name = "GeomtextpathToolStripMenuItem"
+        Me.GeomtextpathToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GeomtextpathToolStripMenuItem.Text = "geomtextpath"
+        '
+        'GGallyToolStripMenuItem
+        '
+        Me.GGallyToolStripMenuItem.Name = "GGallyToolStripMenuItem"
+        Me.GGallyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GGallyToolStripMenuItem.Text = "GGally"
+        '
+        'GgaltToolStripMenuItem
+        '
+        Me.GgaltToolStripMenuItem.Name = "GgaltToolStripMenuItem"
+        Me.GgaltToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgaltToolStripMenuItem.Text = "ggalt"
+        '
+        'GgdendroToolStripMenuItem
+        '
+        Me.GgdendroToolStripMenuItem.Name = "GgdendroToolStripMenuItem"
+        Me.GgdendroToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgdendroToolStripMenuItem.Text = "ggdendro"
+        '
+        'GgeffectsToolStripMenuItem
+        '
+        Me.GgeffectsToolStripMenuItem.Name = "GgeffectsToolStripMenuItem"
+        Me.GgeffectsToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgeffectsToolStripMenuItem.Text = "ggeffects"
+        '
+        'GgfittextToolStripMenuItem
+        '
+        Me.GgfittextToolStripMenuItem.Name = "GgfittextToolStripMenuItem"
+        Me.GgfittextToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgfittextToolStripMenuItem.Text = "ggfittext"
+        '
+        'GgforceToolStripMenuItem
+        '
+        Me.GgforceToolStripMenuItem.Name = "GgforceToolStripMenuItem"
+        Me.GgforceToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgforceToolStripMenuItem.Text = "ggforce"
+        '
+        'GgformulaToolStripMenuItem
+        '
+        Me.GgformulaToolStripMenuItem.Name = "GgformulaToolStripMenuItem"
+        Me.GgformulaToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgformulaToolStripMenuItem.Text = "ggformula"
+        '
+        'GgfortifyToolStripMenuItem
+        '
+        Me.GgfortifyToolStripMenuItem.Name = "GgfortifyToolStripMenuItem"
+        Me.GgfortifyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgfortifyToolStripMenuItem.Text = "ggfortify"
+        '
+        'GgmcmcToolStripMenuItem
+        '
+        Me.GgmcmcToolStripMenuItem.Name = "GgmcmcToolStripMenuItem"
+        Me.GgmcmcToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgmcmcToolStripMenuItem.Text = "ggmcmc"
+        '
+        'GgmosaicToolStripMenuItem
+        '
+        Me.GgmosaicToolStripMenuItem.Name = "GgmosaicToolStripMenuItem"
+        Me.GgmosaicToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgmosaicToolStripMenuItem.Text = "ggmosaic"
+        '
+        'GgplotifyToolStripMenuItem
+        '
+        Me.GgplotifyToolStripMenuItem.Name = "GgplotifyToolStripMenuItem"
+        Me.GgplotifyToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgplotifyToolStripMenuItem.Text = "ggplotify"
+        '
+        'GgpmiscToolStripMenuItem
+        '
+        Me.GgpmiscToolStripMenuItem.Name = "GgpmiscToolStripMenuItem"
+        Me.GgpmiscToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgpmiscToolStripMenuItem.Text = "ggpmisc"
+        '
+        'GgppToolStripMenuItem
+        '
+        Me.GgppToolStripMenuItem.Name = "GgppToolStripMenuItem"
+        Me.GgppToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgppToolStripMenuItem.Text = "ggpp"
+        '
+        'GgpubrToolStripMenuItem
+        '
+        Me.GgpubrToolStripMenuItem.Name = "GgpubrToolStripMenuItem"
+        Me.GgpubrToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgpubrToolStripMenuItem.Text = "ggpubr"
+        '
+        'GgrepelToolStripMenuItem
+        '
+        Me.GgrepelToolStripMenuItem.Name = "GgrepelToolStripMenuItem"
+        Me.GgrepelToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgrepelToolStripMenuItem.Text = "ggrepel"
+        '
+        'GgridgesToolStripMenuItem
+        '
+        Me.GgridgesToolStripMenuItem.Name = "GgridgesToolStripMenuItem"
+        Me.GgridgesToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgridgesToolStripMenuItem.Text = "ggridges"
+        '
+        'GgsciToolStripMenuItem
+        '
+        Me.GgsciToolStripMenuItem.Name = "GgsciToolStripMenuItem"
+        Me.GgsciToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgsciToolStripMenuItem.Text = "ggsci"
+        '
+        'GgsignifToolStripMenuItem
+        '
+        Me.GgsignifToolStripMenuItem.Name = "GgsignifToolStripMenuItem"
+        Me.GgsignifToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgsignifToolStripMenuItem.Text = "ggsignif"
+        '
+        'GgstanceToolStripMenuItem
+        '
+        Me.GgstanceToolStripMenuItem.Name = "GgstanceToolStripMenuItem"
+        Me.GgstanceToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgstanceToolStripMenuItem.Text = "ggstance"
+        '
+        'GgtextToolStripMenuItem
+        '
+        Me.GgtextToolStripMenuItem.Name = "GgtextToolStripMenuItem"
+        Me.GgtextToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgtextToolStripMenuItem.Text = "ggtext"
+        '
+        'GgthemesToolStripMenuItem
+        '
+        Me.GgthemesToolStripMenuItem.Name = "GgthemesToolStripMenuItem"
+        Me.GgthemesToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgthemesToolStripMenuItem.Text = "ggthemes"
+        '
+        'GgwordbuildToolStripMenuItem
+        '
+        Me.GgwordbuildToolStripMenuItem.Name = "GgwordbuildToolStripMenuItem"
+        Me.GgwordbuildToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.GgwordbuildToolStripMenuItem.Text = " ggwordbuild"
+        '
+        'cmdRHelp
+        '
+        Me.cmdRHelp.AutoSize = True
+        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuPackagesList
+        Me.cmdRHelp.Location = New System.Drawing.Point(371, 439)
+        Me.cmdRHelp.Name = "cmdRHelp"
+        Me.cmdRHelp.Size = New System.Drawing.Size(91, 30)
+        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuPackagesList
+        Me.cmdRHelp.TabIndex = 213
+        Me.cmdRHelp.Text = "R Help"
+        Me.cmdRHelp.UseVisualStyleBackColor = True
         '
         'ucrInputLegendPosition
         '
@@ -447,29 +478,16 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(302, 360)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(302, 364)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(125, 21)
         Me.ucrInputLegendPosition.TabIndex = 15
-        '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.AutoSize = True
-        Me.ucrReceiverY.frmParent = Me
-        Me.ucrReceiverY.Location = New System.Drawing.Point(301, 56)
-        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.Size = New System.Drawing.Size(125, 20)
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 2
-        Me.ucrReceiverY.ucrSelector = Nothing
         '
         'ucrChkFlipCoordinates
         '
         Me.ucrChkFlipCoordinates.AutoSize = True
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 304)
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 308)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
@@ -478,7 +496,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(301, 334)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(301, 338)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
         Me.ucrChkLegend.TabIndex = 14
@@ -486,24 +504,11 @@ Partial Class dlgGeneralForGraphics
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(6, 434)
+        Me.ucrSave.Location = New System.Drawing.Point(6, 443)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(204, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(282, 24)
         Me.ucrSave.TabIndex = 16
-        '
-        'ucrReceiverX
-        '
-        Me.ucrReceiverX.AutoSize = True
-        Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(301, 94)
-        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverX.Name = "ucrReceiverX"
-        Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 27)
-        Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 4
-        Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrGraphicsSelector
         '
@@ -529,7 +534,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 464)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 483)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
@@ -539,13 +544,10 @@ Partial Class dlgGeneralForGraphics
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(478, 519)
+        Me.ClientSize = New System.Drawing.Size(478, 547)
         Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.grpAethetics)
-        Me.Controls.Add(Me.ucrChkUseasNumeric)
         Me.Controls.Add(Me.ucrInputLegendPosition)
-        Me.Controls.Add(Me.ucrReceiverY)
-        Me.Controls.Add(Me.lblYVariable)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.cmdTitles)
@@ -554,8 +556,6 @@ Partial Class dlgGeneralForGraphics
         Me.Controls.Add(Me.cmdTheme)
         Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
-        Me.Controls.Add(Me.lblXVariable)
-        Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrGraphicsSelector)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
@@ -579,8 +579,6 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrGraphicsSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverX As ucrReceiverSingle
-    Friend WithEvents lblXVariable As Label
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents cmdTheme As Button
     Friend WithEvents cmdFacets As Button
@@ -589,10 +587,7 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents cmdYAxis As Button
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
-    Friend WithEvents lblYVariable As Label
-    Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
-    Friend WithEvents ucrChkUseasNumeric As ucrCheck
     Friend WithEvents grpAethetics As GroupBox
     Friend WithEvents lblColour As Label
     Friend WithEvents ucrColourReceiver As ucrReceiverSingle
@@ -626,4 +621,9 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents GgtextToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GgthemesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GgwordbuildToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ucrChkUseasNumeric As ucrCheck
+    Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents lblYVariable As Label
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
 End Class
