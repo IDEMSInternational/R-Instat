@@ -24,7 +24,7 @@ Public Class dlgGeneralForGraphics
     'list of completed layers.
     Private iLayerIndex As Integer
     'current layer
-    Private clsGlobalAesFunction As New RFunction
+    Private clsGlobalAesFunction, clsScaleContinuousFunction, clsLevelsFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private strGlobalDataFrame As String
     Public bDataFrameSet As Boolean
@@ -48,6 +48,7 @@ Public Class dlgGeneralForGraphics
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private strPackageName As String
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -84,6 +85,10 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrChkUseasNumeric.SetText("Group X")
+        ucrChkUseasNumeric.AddParameterValuesCondition(True, "group", "True")
+        ucrChkUseasNumeric.AddParameterValuesCondition(False, "group", "False")
+
         ucrReceiverY.Selector = ucrGraphicsSelector
         ucrReceiverY.strSelectorHeading = "Variables"
         ucrReceiverY.bWithQuotes = False
@@ -91,11 +96,26 @@ Public Class dlgGeneralForGraphics
         ucrReceiverY.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverY.bAddParameterIfEmpty = True
 
-        ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
-        ucrFillOrColourReceiver.SetIncludedDataTypes({"factor"})
-        ucrFillOrColourReceiver.strSelectorHeading = "Factors"
-        ucrFillOrColourReceiver.bWithQuotes = False
-        ucrFillOrColourReceiver.SetParameterIsString()
+        ucrFillReceiver.SetParameter(New RParameter("fill", 3))
+        ucrFillReceiver.Selector = ucrGraphicsSelector
+        ucrFillReceiver.SetIncludedDataTypes({"factor"})
+        ucrFillReceiver.strSelectorHeading = "Factors"
+        ucrFillReceiver.bWithQuotes = False
+        ucrFillReceiver.SetParameterIsString()
+
+        ucrColourReceiver.SetParameter(New RParameter("colour", 4))
+        ucrColourReceiver.Selector = ucrGraphicsSelector
+        ucrColourReceiver.SetIncludedDataTypes({"factor"})
+        ucrColourReceiver.strSelectorHeading = "Factors"
+        ucrColourReceiver.bWithQuotes = False
+        ucrColourReceiver.SetParameterIsString()
+
+        ucrLabelReceiver.SetParameter(New RParameter("label", 5))
+        ucrLabelReceiver.Selector = ucrGraphicsSelector
+        ucrLabelReceiver.SetIncludedDataTypes({"factor"})
+        ucrLabelReceiver.strSelectorHeading = "Factors"
+        ucrLabelReceiver.bWithQuotes = False
+        ucrLabelReceiver.SetParameterIsString()
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
@@ -120,7 +140,7 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetCheckBoxText("Save Graph")
+        ucrSave.SetCheckBoxText("Save")
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
         VariableXType()
@@ -129,10 +149,10 @@ Public Class dlgGeneralForGraphics
     Private Sub SetDefaults()
         clsGgplotFunction = New RFunction
         clsGlobalAesFunction = New RFunction
-        clsScaleContinuousFunction = New RFunction
-        clsLevelsFunction = New RFunction
         clsBaseOperator = New ROperator
         clsDummyFunction = New RFunction
+        clsScaleContinuousFunction = New RFunction
+        clsLevelsFunction = New RFunction
 
         ucrSave.Reset()
 
@@ -143,6 +163,7 @@ Public Class dlgGeneralForGraphics
         bResetOptionsSubdialog = True
 
         clsDummyFunction.AddParameter("group", "false", iPosition:=0)
+        clsDummyFunction.AddParameter("group", "false", iPosition:=1)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
@@ -196,7 +217,12 @@ Public Class dlgGeneralForGraphics
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
         ucrReceiverY.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
-        ucrFillOrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
+        If bReset Then
+            ucrChkUseasNumeric.SetRCode(clsDummyFunction, bReset)
+        End If
+        ucrFillReceiver.SetRCode(clsGlobalAesFunction, bReset)
+        ucrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
+        ucrLabelReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
@@ -301,25 +327,35 @@ Public Class dlgGeneralForGraphics
         sdgPlots.EnableLayersTab()
     End Sub
 
-    Private Sub ucrReceiverY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverY.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
-        If Not ucrReceiverX.IsEmpty Then
-            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-        Else
-            clsGlobalAesFunction.RemoveParameterByName("x")
-        End If
+    Private Sub ucrReceiverY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverY.ControlValueChanged, ucrReceiverX.ControlValueChanged
+        'If Not ucrReceiverX.IsEmpty Then
+        '    clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+        'Else
+        '    clsGlobalAesFunction.RemoveParameterByName("x")
+        'End If
         If Not ucrReceiverY.IsEmpty Then
             clsGlobalAesFunction.AddParameter("y", ucrReceiverY.GetVariableNames(False), iPosition:=1)
         Else
             clsGlobalAesFunction.RemoveParameterByName("y")
         End If
-        If Not ucrFillOrColourReceiver.IsEmpty Then
-            clsGlobalAesFunction.AddParameter("colour", ucrFillOrColourReceiver.GetVariableNames(False), iPosition:=2)
+        If Not ucrFillReceiver.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("fill", ucrFillReceiver.GetVariableNames(False), iPosition:=2)
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("fill")
+        End If
+        If Not ucrColourReceiver.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("colour", ucrColourReceiver.GetVariableNames(False), iPosition:=3)
         Else
             clsGlobalAesFunction.RemoveParameterByName("colour")
         End If
+        If Not ucrLabelReceiver.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("label", ucrLabelReceiver.GetVariableNames(False), iPosition:=3)
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("label")
+        End If
     End Sub
-  
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkLegend.ControlContentsChanged
+
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkLegend.ControlContentsChanged, ucrChkUseasNumeric.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -333,5 +369,128 @@ Public Class dlgGeneralForGraphics
 
     Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         AddRemoveTheme()
+    End Sub
+
+    Private Sub VariableXType()
+        ucrChkUseasNumeric.Visible = False
+        If Not ucrReceiverX.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+            ucrChkUseasNumeric.Visible = ucrReceiverX.strCurrDataType = "factor"
+            If ucrChkUseasNumeric.Checked Then
+                clsGlobalAesFunction.AddParameter("group", "1", iPosition:=2)
+            Else
+                clsGlobalAesFunction.RemoveParameterByName("group")
+            End If
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
+    Private Sub OpenHelpPage()
+        If strPackageName <> "" Then
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
+        End If
+    End Sub
+
+    Private Sub cmdRHelp_Click(sender As Object, e As EventArgs) Handles cmdRHelp.Click, ListBaseToolStripMenuItem.Click
+        strPackageName = "ggplot2"
+        OpenHelpPage()
+    End Sub
+
+    Private Sub GGallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GGallyToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgaltToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgaltToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgdendroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgdendroToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgeffectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgeffectsToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgfittextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgfittextToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgforceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgforceToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgformulaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgformulaToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgfortifyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgfortifyToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgmcmcToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgmcmcToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgmosaicToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgmosaicToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgplotifyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgplotifyToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgpmiscToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgpmiscToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgppToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgppToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgpubrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgpubrToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgrepelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgrepelToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgridgesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgridgesToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgsciToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgsciToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgsignifToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgsignifToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgstanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgstanceToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgtextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgtextToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgthemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgthemesToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GgwordbuildToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgwordbuildToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub GeomtextpathToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeomtextpathToolStripMenuItem.Click
+        strPackageName = "geomtextpath"
+        OpenHelpPage()
+    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrChkUseasNumeric.ControlValueChanged
+        VariableXType()
     End Sub
 End Class

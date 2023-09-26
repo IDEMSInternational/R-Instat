@@ -131,7 +131,7 @@ Public Class ucrAdditionalLayers
         SetEditDeleteEnabled()
     End Sub
 
-    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs)
         If lstLayers.SelectedItems.Count = 1 Then
             If strMainDialogGeomNames Is Nothing OrElse Not strMainDialogGeomNames.Contains(lstLayers.SelectedItems(0).Tag) Then
                 clsBaseOperator.RemoveParameterByName(lstLayers.SelectedItems(0).Tag)
@@ -145,7 +145,7 @@ Public Class ucrAdditionalLayers
         End If
     End Sub
 
-    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs)
         Dim clsSelectedGeomParameter As RParameter
         Dim clsSelectedGeomFunction As RFunction
         Dim clsLocalAes As RFunction
