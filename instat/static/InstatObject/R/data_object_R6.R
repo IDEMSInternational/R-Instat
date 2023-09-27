@@ -4385,6 +4385,20 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
     cat(row_message, "\n")
     cat(cols_message)
   }
+  
+  if(self$column_selection_applied()){
+    df_with_Selection <- self$get_data_frame()
+    df_without_Selection <- self$get_data_frame(use_column_selection = FALSE)
+    # Check for missing columns in new_df and remove them from df_with_Selection
+    missing_columns <- setdiff(names(df_with_Selection), names(new_df))
+    if (length(missing_columns) > 0) {
+      self$remove_current_column_selection()
+      new_df <- df_without_Selection[, !names(df_without_Selection) %in% missing_columns]
+    }
+    
+  }
+  
+  
   for (name in names(old_metadata)) {
     if (!(name %in% c("names", "class", "row.names"))) {
       attr(new_df, name) <- old_metadata[[name]]
@@ -4397,17 +4411,7 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
       }
     }
   }
-  if(self$column_selection_applied()){
-    df_with_Selection <- self$get_data_frame()
-    df_without_Selection <- self$get_data_frame(use_column_selection = FALSE)
-    # Check for missing columns in new_df and remove them from df_with_Selection
-    missing_columns <- setdiff(names(df_with_Selection), names(new_df))
-    if (length(missing_columns) > 0) {
-      new_df <- df_without_Selection[, !names(df_without_Selection) %in% missing_columns]
-      self$remove_current_column_selection()
-    }
-    
-  }
+  
   self$set_data(new_df)
   self$data_changed <- TRUE
   private$.variables_metadata_changed <- TRUE
