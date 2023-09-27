@@ -4386,18 +4386,18 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
     cat(cols_message)
   }
   
+
   if(self$column_selection_applied()){
-    df_with_Selection <- self$get_data_frame()
     df_without_Selection <- self$get_data_frame(use_column_selection = FALSE)
+    df_with_Selection <- self$get_data_frame()
     # Check for missing columns in new_df and remove them from df_with_Selection
     missing_columns <- setdiff(names(df_with_Selection), names(new_df))
-    if (length(missing_columns) > 0) {
-      self$remove_current_column_selection()
+    self$remove_current_column_selection()
+    if (length(missing_columns) > 0 && ncol(df_with_Selection) != ncol(new_df)) {
       new_df <- df_without_Selection[, !names(df_without_Selection) %in% missing_columns]
-    }
+    }else{ new_df <- df_without_Selection }
     
   }
-  
   
   for (name in names(old_metadata)) {
     if (!(name %in% c("names", "class", "row.names"))) {
