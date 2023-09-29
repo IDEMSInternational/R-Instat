@@ -55,7 +55,6 @@ Public Class dlgScript
         ucrComboGetPackage.SetParameter(New RParameter("package", 0))
         ucrComboGetPackage.SetItems(GetPackages(), bAddConditions:=True)
         ucrComboGetPackage.SetDropDownStyleAsNonEditable()
-        'ucrComboGetPackage.SetLinkedDisplayControl(New List(Of Control)({lblGetPackage, btnGetPackage}))
 
         ucrDataFrameGet.SetLabelText("Get Data Frame:")
         ucrDataFrameGet.SetParameter(New RParameter("data_name", 0))
@@ -250,10 +249,6 @@ Public Class dlgScript
         ElseIf rdoSaveColumn.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveColumn.SetVisible(True)
-            'clsTempFunction = clsSaveColumnFunction
-            'If TabControl1.SelectedTab Is TabPage3 Then
-            '    SetPreview(clsSaveColumnFunction)
-            'End If
         ElseIf rdoSaveObject.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveGraph.SetVisible(True)
@@ -329,17 +324,17 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged
-        If TabControl1.SelectedTab Is TabPage3 AndAlso rdoSaveObject.Checked Then
-            If ucrChangedControl Is ucrSaveGraph Then
-                SetPreview(clsSaveGraphFunction)
-            ElseIf ucrChangedControl Is ucrSaveModel Then
-                SetPreview(clsSaveModelFunction)
-            ElseIf ucrChangedControl Is ucrSaveTable Then
-                SetPreview(clsSaveTableFunction)
-            End If
-        End If
-    End Sub
+    'Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged
+    '    If TabControl1.SelectedTab Is TabPage3 AndAlso rdoSaveObject.Checked Then
+    '        If ucrChangedControl Is ucrSaveGraph Then
+    '            SetPreview(clsSaveGraphFunction)
+    '        ElseIf ucrChangedControl Is ucrSaveModel Then
+    '            SetPreview(clsSaveModelFunction)
+    '        ElseIf ucrChangedControl Is ucrSaveTable Then
+    '            SetPreview(clsSaveTableFunction)
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub ucrInputDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrame.ControlContentsChanged
         If TabControl1.SelectedTab Is TabPage5 Then
@@ -398,18 +393,18 @@ Public Class dlgScript
         ElseIf ucrSaveGraph.IsComplete AndAlso ucrChangedControl Is ucrSaveGraph Then
             clsTempFunction = clsSaveGraphFunction
             strAssign = ucrSaveGraph.GetText
-            ucrSaveModel.SetText("")
-            ucrSaveTable.SetText("")
+            ucrSaveModel.ucrInputComboSave.SetText("")
+            ucrSaveTable.ucrInputComboSave.SetText("")
         ElseIf ucrSaveModel.IsComplete AndAlso ucrChangedControl Is ucrSaveModel Then
             clsTempFunction = clsSaveModelFunction
             strAssign = ucrSaveModel.GetText
-            ucrSaveGraph.SetText("")
-            ucrSaveTable.SetText("")
+            ucrSaveGraph.ucrInputComboSave.SetText("")
+            ucrSaveTable.ucrInputComboSave.SetText("")
         ElseIf ucrSaveTable.IsComplete AndAlso ucrChangedControl Is ucrSaveTable Then
             clsTempFunction = clsSaveTableFunction
             strAssign = ucrSaveTable.GetText
-            ucrSaveGraph.SetText("")
-            ucrSaveModel.SetText("")
+            ucrSaveGraph.ucrInputComboSave.SetText("")
+            ucrSaveModel.ucrInputComboSave.SetText("")
         End If
 
         If clsTempFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(strAssign) Then
@@ -421,5 +416,10 @@ Public Class dlgScript
             ucrInputPreviewLibrary.SetText(strScript)
             AddAssignToString(strAssignedTo)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        TabControl1.TabIndex = 1
+        ucrComboGetPackage.SetText("datasets")
     End Sub
 End Class
