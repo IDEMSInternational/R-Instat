@@ -2389,7 +2389,7 @@ Public Class frmMain
         dlgImportERA5Data.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNew.Click
+    Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs)
         dlgPasteNewColumns.ShowDialog()
     End Sub
 
