@@ -62,13 +62,8 @@ Public Class dlgScript
 
         ucrSelectorGet.SetParameterIsString()
 
-        'get object controls
-        ucrPnlGetObject.AddRadioButton(rdoGetGraph)
-        ucrPnlGetObject.AddRadioButton(rdoGetTable)
-        ucrPnlGetObject.AddRadioButton(rdoGetModel)
-
         ucrReceiverGet.SetParameter(New RParameter("string", 0))
-        ucrReceiverGet.SetParameterIsRFunction()
+        ucrReceiverGet.SetParameterIsString()
         ucrReceiverGet.Selector = ucrSelectorGet
         ucrReceiverGet.bUseFilteredData = False
         ucrReceiverGet.SetItemType("column")
@@ -148,7 +143,6 @@ Public Class dlgScript
         ucrDataFrameGet.Reset()
         ucrSelectorGet.Reset()
         'ucrReceiverGetCol.SetMeAsReceiver()
-        rdoGetGraph.Checked = True
         'ucrReceiverGetObject.SetItemType("graph")
 
         'save controls reset
@@ -192,20 +186,14 @@ Public Class dlgScript
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged, ucrDataFrameGet.ControlValueChanged
         ucrDataFrameGet.SetVisible(False)
         ucrSelectorGet.SetVisible(False)
-        ucrPnlGetObject.SetVisible(False)
         ucrReceiverGet.SetVisible(False)
-        SetGetReceiverItemType()
         If rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
         ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
-            ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
             ucrReceiverGet.SetVisible(True)
+            SetGetReceiverItemType()
         End If
-    End Sub
-
-    Private Sub ucrPnlGetObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetObject.ControlValueChanged
-        SetGetReceiverItemType()
     End Sub
 
     Private Sub SetGetReceiverItemType()
@@ -213,15 +201,11 @@ Public Class dlgScript
         If rdoGetColumn.Checked Then
             lblGet.Text = "Selected Column:"
             ucrReceiverGet.SetItemType("column")
-        ElseIf rdoGetGraph.Checked Then
-            lblGet.Text = "Selected Graph:"
-            ucrReceiverGet.SetItemType("graph")
-        ElseIf rdoGetTable.Checked Then
-            lblGet.Text = "Selected Table:"
-            ucrReceiverGet.SetItemType("table")
-        ElseIf rdoGetModel.Checked Then
-            lblGet.Text = "Selected Model:"
-            ucrReceiverGet.SetItemType("model")
+            ucrReceiverGet.strSelectorHeading = "Variables"
+        ElseIf rdoGetObject.Checked Then
+            lblGet.Text = "Selected Object:"
+            ucrReceiverGet.SetItemType("object")
+            ucrReceiverGet.strSelectorHeading = "Objects"
         End If
     End Sub
 
@@ -409,5 +393,19 @@ Public Class dlgScript
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputRemoveObject_LostFocus(sender As Object, e As EventArgs) Handles ucrInputRemoveObject.LostFocus
+        If String.IsNullOrWhiteSpace(ucrInputRemoveObject.txtInput.Text) Then
+            ucrInputRemoveObject.txtInput.Text = "Object1, Object2, Object2,..."
+            ucrInputRemoveObject.txtInput.ForeColor = SystemColors.GrayText
+        End If
+    End Sub
+
+    Private Sub ucrInputRemoveObject_GotFocus(sender As Object, e As EventArgs) Handles ucrInputRemoveObject.GotFocus
+        If ucrInputRemoveObject.txtInput.Text = "Object1, Object2, Object2,..." Then
+            ucrInputRemoveObject.txtInput.Text = ""
+            ucrInputRemoveObject.ForeColor = SystemColors.GrayText
+        End If
     End Sub
 End Class
