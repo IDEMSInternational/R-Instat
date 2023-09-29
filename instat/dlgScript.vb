@@ -22,8 +22,8 @@ Public Class dlgScript
     Private bReset As Boolean = True
     Private clsLibraryFunction, clsGetDataFrameFunction, clsSaveColumnFunction, clsConstantDummyFunction, clsGetColumnFunction,
             clsSaveGraphFunction, clsImportNewDataFrame, clsRFunctionList, clsSaveTableFunction, clsSaveModelFunction As New RFunction
-    Private clsTempFunction As New RFunction
     Private lstAssignToStrings As New List(Of String)
+    Public iCurrentPos As Integer
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -60,7 +60,6 @@ Public Class dlgScript
         ucrDataFrameGet.SetLabelText("Get Data Frame:")
         ucrDataFrameGet.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameGet.SetParameterIsString()
-        ucrDataFrameGet.SetLinkedDisplayControl(btnGetDataFrame)
 
         ucrSelectorGet.SetParameterIsString()
 
@@ -85,36 +84,29 @@ Public Class dlgScript
         ucrPnlSaveData.AddRadioButton(rdoSaveObject)
 
         ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
-        ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame, btnSaveDataframe}))
+        ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame}))
 
-        ucrChkPreviewLibrary.SetText("Preview")
-        ucrChkPreviewLibrary.AddToLinkedControls({ucrInputPreviewLibrary}, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkEditLibrary.SetText("Edit")
+        ucrChkEditLibrary.SetText("Edit Line")
 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetLabelText("Column Name:")
-        ucrSaveColumn.SetLinkedDisplayControl(btnSaveColumn)
 
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetLabelText("Graph Name:")
-        ucrSaveGraph.SetLinkedDisplayControl(btnSaveGraph)
 
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetLabelText("Table Name:")
-        ucrSaveTable.SetLinkedDisplayControl(btnSaveTable)
 
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrDataFrameSave)
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetLabelText("Model Name:")
-        ucrSaveModel.SetLinkedDisplayControl(btnSaveModel)
 
         'hide base button comment controls
         'ucrBase.chkComment.Checked = False
@@ -147,7 +139,6 @@ Public Class dlgScript
         clsConstantDummyFunction = New RFunction
         clsImportNewDataFrame = New RFunction
         clsRFunctionList = New RFunction
-        clsTempFunction = New RFunction
         clsGetColumnFunction = New RFunction
 
         lstAssignToStrings.Clear()
@@ -165,7 +156,6 @@ Public Class dlgScript
 
         'save controls reset
         rdoSaveDataFrame.Checked = True
-        ucrInputPreviewLibrary.Visible = False
         ucrInputDataFrame.SetName("")
         ucrDataFrameSave.Reset()
         ucrSaveColumn.Reset()
@@ -202,7 +192,7 @@ Public Class dlgScript
         ucrSaveModel.SetRCode(clsSaveModelFunction, bReset)
     End Sub
 
-    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged, ucrDataFrameGet.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
+    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged, ucrDataFrameGet.ControlValueChanged
         ucrDataFrameGet.SetVisible(False)
         ucrSelectorGet.SetVisible(False)
         ucrPnlGetObject.SetVisible(False)
@@ -210,16 +200,17 @@ Public Class dlgScript
         SetGetReceiverItemType()
         If rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
-            If TabControl1.SelectedTab Is TabPage2 Then
-                SetPreview(clsGetDataFrameFunction, False)
-            End If
+            'If TabControl1.SelectedTab Is TabPage2 Then
+            '    Dim strAssignTo = ucrDataFrameGet.strCurrDataFrame
+            '    clsGetDataFrameFunction.SetAssignTo(strAssignTo)
+            '    Dim strAssignedScript = ""
+            '    Dim strAssignedTo As String = clsGetDataFrameFunction.ToScript(strScript:=strAssignedScript)
+            '    ucrInputPreviewLibrary.SetText(strAssignedScript)
+            'End If
         ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
             ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
             ucrReceiverGet.SetVisible(True)
-            If TabControl1.SelectedTab Is TabPage2 Then
-                SetPreview(clsGetColumnFunction, False)
-            End If
         End If
     End Sub
 
@@ -244,7 +235,7 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged, ucrSaveColumn.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
+    Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged
         ucrInputSaveDataFrame.SetVisible(False)
         ucrDataFrameSave.SetVisible(False)
         ucrSaveColumn.SetVisible(False)
@@ -253,16 +244,16 @@ Public Class dlgScript
         ucrSaveModel.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
             ucrInputSaveDataFrame.SetVisible(True)
-            If TabControl1.SelectedTab Is TabPage3 Then
-                SetPreview(clsImportNewDataFrame)
-            End If
+            'If TabControl1.SelectedTab Is TabPage3 Then
+            '    SetPreview(clsImportNewDataFrame)
+            'End If
         ElseIf rdoSaveColumn.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveColumn.SetVisible(True)
-            clsTempFunction = clsSaveColumnFunction
-            If TabControl1.SelectedTab Is TabPage3 Then
-                SetPreview(clsSaveColumnFunction)
-            End If
+            'clsTempFunction = clsSaveColumnFunction
+            'If TabControl1.SelectedTab Is TabPage3 Then
+            '    SetPreview(clsSaveColumnFunction)
+            'End If
         ElseIf rdoSaveObject.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveGraph.SetVisible(True)
@@ -271,172 +262,29 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub SetPreview(clsTempFunction As RFunction, Optional bSave As Boolean = True)
-        If ucrChkPreviewLibrary.Checked Then
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsTempFunction, bSave))
-        End If
+    Private Sub SetPreview(clsTempFunction As RFunction)
+        ucrInputPreviewLibrary.SetText(GetPreviewText(clsTempFunction))
     End Sub
 
-    Private Sub btnGetPackage_Click(sender As Object, e As EventArgs) Handles btnGetPackage.Click
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            frmMain.InsertTextToScriptWindow(clsLibraryFunction.Clone.ToScript)
-        End If
-    End Sub
-
-    Private Function GetPreviewText(clsTempFunction As RFunction, Optional bSave As Boolean = True) As String
-        If Not bSave Then
-            clsTempFunction.RemoveAssignTo()
-        End If
+    Private Function GetPreviewText(clsTempFunction As RFunction) As String
         Dim strScript As String = clsTempFunction.Clone.ToScript
         Return strScript
     End Function
-
-    Private Sub btnGetDataFrame_Click(sender As Object, e As EventArgs) Handles btnGetDataFrame.Click
-        If ucrDataFrameGet.cboAvailableDataFrames.Text.Length < 1 Then
-            Exit Sub
-        End If
-
-        Dim strAssignedScript As String = ""
-        clsGetDataFrameFunction.SetAssignTo(ucrDataFrameGet.cboAvailableDataFrames.Text)
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            Dim strAssignedTo As String = clsGetDataFrameFunction.Clone.ToScript(strScript:=strAssignedScript)
-            frmMain.InsertTextToScriptWindow(strAssignedScript)
-            AddAssignToString(strAssignedTo)
-        End If
-    End Sub
-
-    Private Sub btnGetObject_Click(sender As Object, e As EventArgs) Handles btnGet.Click
-        If ucrReceiverGet.IsEmpty Then
-            Exit Sub
-        End If
-
-        Dim strAssignedScript As String = ""
-        clsGetColumnFunction.SetAssignTo(ucrReceiverGet.GetVariableNames(False))
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            Dim strAssignedTo As String = clsGetColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
-            frmMain.InsertTextToScriptWindow(strAssignedScript)
-            AddAssignToString(strAssignedTo)
-        End If
-    End Sub
-
-    Private Sub btnSaveNewDataframe_Click(sender As Object, e As EventArgs) Handles btnDataframe.Click, btnSaveDataframe.Click
-        If (ucrInputDataFrame.IsEmpty AndAlso sender Is btnDataframe) OrElse
-        (ucrInputSaveDataFrame.IsEmpty AndAlso sender Is btnSaveDataframe) Then
-            Exit Sub
-        End If
-
-        Dim strAssignTo As String = ""
-        If sender Is btnDataframe Then
-            strAssignTo = ucrInputDataFrame.GetText()
-        Else
-            strAssignTo = ucrInputSaveDataFrame.GetText
-        End If
-
-        clsTempFunction = clsImportNewDataFrame
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            Dim strAssignedScript As String = strAssignTo & " <- " & clsImportNewDataFrame.ToScript
-            frmMain.InsertTextToScriptWindow(strAssignedScript)
-        End If
-    End Sub
-
-    Private Sub btnSaveNewColumn_Click(sender As Object, e As EventArgs) Handles btnSaveColumn.Click
-        If Not ucrSaveColumn.IsComplete Then
-            Exit Sub
-        End If
-
-        Dim strAssignedScript As String = ""
-        Dim strAssign As String = ucrSaveColumn.GetText
-        'clone the function first because the ToScript function modifies the contents of the function.
-        Dim strAssignedTo As String = clsSaveColumnFunction.Clone.ToScript(strScript:=strAssignedScript)
-        strAssignedTo = strAssign & " <- " & strAssignedTo
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            frmMain.InsertTextToScriptWindow(strAssignedTo.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
-        End If
-        AddAssignToString(strAssign)
-    End Sub
-
-    Private Sub btnSaveNewGraph_Click(sender As Object, e As EventArgs) Handles btnSaveGraph.Click
-        If Not ucrSaveGraph.IsComplete Then
-            Exit Sub
-        End If
-
-        Dim strAssignedScript As String = ""
-        Dim strAssign As String = ucrSaveGraph.GetText
-        'clone the function first because the ToScript function modifies the contents of the function.
-        Dim strGetScript As String = clsSaveGraphFunction.Clone.ToScript(strScript:=strAssignedScript)
-        strGetScript = strAssign & " <- " & strGetScript
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            frmMain.InsertTextToScriptWindow(strGetScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
-        End If
-        AddAssignToString(strAssign)
-    End Sub
-
-    Private Sub btnSaveNewTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
-        If Not ucrSaveTable.IsComplete Then
-            Exit Sub
-        End If
-
-        Dim strAssignedScript As String = ""
-        Dim strAssign As String = ucrSaveTable.GetText
-        'clone the function first because the ToScript function modifies the contents of the function.
-        Dim strGetScript As String = clsSaveTableFunction.Clone.ToScript(strScript:=strAssignedScript)
-        strGetScript = strAssign & " <- " & strGetScript
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            frmMain.InsertTextToScriptWindow(strGetScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
-        End If
-
-        AddAssignToString(strAssign)
-    End Sub
-
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs)
-        If txtScript.TextLength > 0 Then
-            txtScript.Clear()
-        End If
-    End Sub
 
     Private Sub ucrChkEditLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEditLibrary.ControlValueChanged
         ucrInputPreviewLibrary.IsReadOnly = Not ucrChkEditLibrary.Checked
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
-        ucrChkPreviewLibrary.Checked = False
-        ucrChkEditLibrary.Checked = False
-        ucrInputPreviewLibrary.txtInput.Clear()
+        'ucrChkEditLibrary.Checked = False
+        'ucrInputPreviewLibrary.txtInput.Clear()
     End Sub
 
-    Private Sub btnSaveNewModel_Click(sender As Object, e As EventArgs) Handles btnSaveModel.Click
-        If Not ucrSaveModel.IsComplete Then
-            Exit Sub
-        End If
-
-        Dim strAssignedScript As String = ""
-        Dim strAssign As String = ucrSaveModel.GetText
-        'clone the function first because the ToScript function modifies the contents of the function.
-        Dim strGetScript As String = clsSaveModelFunction.Clone.ToScript(strScript:=strAssignedScript)
-        strGetScript = strAssign & " <- " & strGetScript
-        If ucrChkEditLibrary.Checked Then
-            frmMain.InsertTextToScriptWindow(ucrInputPreviewLibrary.GetText)
-        Else
-            frmMain.InsertTextToScriptWindow(strGetScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim)
-        End If
-        AddAssignToString(strAssign)
+    Private Sub ucrInputRemoveObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRemoveObject.ControlContentsChanged
+        ucrInputPreviewLibrary.SetText(ucrInputRemoveObject.GetText)
     End Sub
 
-    Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs) Handles btnRemoveObjects.Click
+    Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs)
         'create function to remove the objects added in the script
         Dim clsRemoveFunc As New RFunction
         Dim clsRemoveListFun As New RFunction
@@ -463,50 +311,46 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrComboGetPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackage.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
+    Private Sub ucrComboGetPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackage.ControlValueChanged
         If TabControl1.SelectedTab Is TabPage1 Then
             If ucrComboGetPackage.GetText <> "datasets" Then
-                ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction, False))
+                ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction))
             End If
         End If
     End Sub
 
     Private Sub ucrReceiverGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGet.ControlValueChanged
         If TabControl1.SelectedTab Is TabPage2 Then
-            clsGetColumnFunction = ucrReceiverGet.GetVariables
-            clsTempFunction = clsGetColumnFunction
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsGetColumnFunction, False))
+            Dim strAssignedScript As String = ""
+            Dim clsGetColumnFunction As RFunction = ucrReceiverGet.GetVariables
+            clsGetColumnFunction.SetAssignTo(ucrReceiverGet.GetVariableNames(False))
+            Dim strAssignedTo As String = clsGetColumnFunction.ToScript(strScript:=strAssignedScript)
+            ucrInputPreviewLibrary.SetText(strAssignedScript)
         End If
     End Sub
 
-    Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged, ucrChkPreviewLibrary.ControlValueChanged
+    Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged
         If TabControl1.SelectedTab Is TabPage3 AndAlso rdoSaveObject.Checked Then
             If ucrChangedControl Is ucrSaveGraph Then
-                If ucrChkPreviewLibrary.Checked Then
-                    SetPreview(clsSaveGraphFunction)
-                End If
+                SetPreview(clsSaveGraphFunction)
             ElseIf ucrChangedControl Is ucrSaveModel Then
-                If ucrChkPreviewLibrary.Checked Then
-                    SetPreview(clsSaveModelFunction)
-                End If
+                SetPreview(clsSaveModelFunction)
             ElseIf ucrChangedControl Is ucrSaveTable Then
-                If ucrChkPreviewLibrary.Checked Then
-                    SetPreview(clsSaveTableFunction)
-                End If
+                SetPreview(clsSaveTableFunction)
             End If
         End If
     End Sub
 
-    Private Sub ucrInputDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrame.ControlContentsChanged, ucrChkPreviewLibrary.ControlValueChanged
-        Dim strData As String = ""
+    Private Sub ucrInputDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrame.ControlContentsChanged
         If TabControl1.SelectedTab Is TabPage5 Then
-            strData = ucrInputDataFrame.GetText()
+            Dim strData = ucrInputDataFrame.GetText()
             clsRFunctionList.ClearParameters()
             clsRFunctionList.AddParameter(strData, strData)
             clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
-            If ucrChkPreviewLibrary.Checked Then
-                SetPreview(clsImportNewDataFrame)
-            End If
+            clsImportNewDataFrame.SetAssignTo(strData)
+            Dim strAssignedScript = ""
+            Dim strAssignedTo As String = clsImportNewDataFrame.ToScript(strScript:=strAssignedScript)
+            ucrInputPreviewLibrary.SetText(strAssignedScript)
         End If
     End Sub
 
@@ -516,8 +360,66 @@ Public Class dlgScript
             clsRFunctionList.ClearParameters()
             clsRFunctionList.AddParameter(strData, strData)
             clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
-            ucrInputPreviewLibrary.SetText(GetPreviewText(clsImportNewDataFrame, False))
-            clsTempFunction = clsImportNewDataFrame
+            clsImportNewDataFrame.SetAssignTo(strData)
+            Dim strAssignedScript = ""
+            Dim strAssignedTo As String = clsImportNewDataFrame.ToScript(strScript:=strAssignedScript)
+            ucrInputPreviewLibrary.SetText(strAssignedScript)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        If TabControl1.SelectedTab Is TabPage4 AndAlso Not String.IsNullOrEmpty(ucrInputRemoveObject.GetText) Then
+            frmMain.RemoveLineToScriptWindow(ucrInputRemoveObject.GetText.Split(","))
+        Else
+            frmMain.InsertTextToScriptWindow(iCurrentPos, ucrInputPreviewLibrary.GetText)
+        End If
+    End Sub
+
+    Private Sub ucrDataFrameGet_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGet.ControlContentsChanged
+        If TabControl1.SelectedTab Is TabPage2 Then
+            Dim strAssignTo = ucrDataFrameGet.strCurrDataFrame
+            clsGetDataFrameFunction.SetAssignTo(strAssignTo)
+            Dim strAssignedScript = ""
+            Dim strAssignedTo As String = clsGetDataFrameFunction.ToScript(strScript:=strAssignedScript)
+            ucrInputPreviewLibrary.SetText(strAssignedScript)
+        End If
+    End Sub
+
+    Private Sub ucrSaveColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged
+        If TabControl1.SelectedTab IsNot TabPage3 Then
+            Exit Sub
+        End If
+
+        Dim clsTempFunction As New RFunction
+        Dim strAssign As String = ""
+        If ucrSaveColumn.IsComplete AndAlso ucrChangedControl Is ucrSaveColumn Then
+            clsTempFunction = clsSaveColumnFunction
+            strAssign = ucrSaveColumn.GetText
+        ElseIf ucrSaveGraph.IsComplete AndAlso ucrChangedControl Is ucrSaveGraph Then
+            clsTempFunction = clsSaveGraphFunction
+            strAssign = ucrSaveGraph.GetText
+            ucrSaveModel.SetText("")
+            ucrSaveTable.SetText("")
+        ElseIf ucrSaveModel.IsComplete AndAlso ucrChangedControl Is ucrSaveModel Then
+            clsTempFunction = clsSaveModelFunction
+            strAssign = ucrSaveModel.GetText
+            ucrSaveGraph.SetText("")
+            ucrSaveTable.SetText("")
+        ElseIf ucrSaveTable.IsComplete AndAlso ucrChangedControl Is ucrSaveTable Then
+            clsTempFunction = clsSaveTableFunction
+            strAssign = ucrSaveTable.GetText
+            ucrSaveGraph.SetText("")
+            ucrSaveModel.SetText("")
+        End If
+
+        If clsTempFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(strAssign) Then
+            Dim strAssignedScript As String = ""
+            'clone the function first because the ToScript function modifies the contents of the function.
+            Dim strAssignedTo As String = clsTempFunction.Clone.ToScript(strScript:=strAssignedScript)
+            Dim strScript = strAssign & " <- " & strAssignedTo
+            strScript = strScript.Trim & Environment.NewLine & strAssignedScript.Split(vbCrLf)(1).Trim
+            ucrInputPreviewLibrary.SetText(strScript)
+            AddAssignToString(strAssignedTo)
         End If
     End Sub
 End Class

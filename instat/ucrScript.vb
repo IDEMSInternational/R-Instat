@@ -49,7 +49,6 @@ Public Class ucrScript
         toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
         toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
         toolTipScriptWindow.SetToolTip(cmdHelp, "Display the Script Window help information.")
-        toolTipScriptWindow.SetToolTip(cmdRenameScript, "Rename a tab.")
         toolTipScriptWindow.SetToolTip(cmdInsertScript, "Insert new line in the current tab.")
 
         mnuUndo.ToolTipText = "Undo the last change. (Ctrl+Z)"
@@ -65,6 +64,7 @@ Public Class ucrScript
         mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
         mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
         mnuHelp.ToolTipText = "Display the Script Window help information."
+        mnuInsertScript.ToolTipText = "Insert script in the current tab."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
@@ -108,10 +108,26 @@ Public Class ucrScript
     ''' <summary>
     ''' Insert <paramref name="strText"/> to the current cursor position in the active tab.
     ''' </summary>
+    ''' <param name="iCurrentPosition"> The current cursor position in the active tab.</param>
     ''' <param name="strText"> The text to insert to the contents of the active tab.</param>
-    Public Sub InsertText(strText As String)
+    Public Sub InsertText(iCurrentPosition As Integer, strText As String)
         strText = strText & Environment.NewLine
-        clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText)
+        clsScriptActive.InsertText(iCurrentPosition, strText)
+    End Sub
+
+    Public Sub RemoveLine(strObjects As String())
+        For i As Integer = 0 To clsScriptActive.Lines.Count - 1
+            Dim lineText As String = clsScriptActive.Lines(i).Text
+
+            ' Check if the line starts with any string from the dictionary.
+            For Each str As String In strObjects
+                If lineText.StartsWith(str) Then
+                    ' Remove the line if it starts with the string.
+                    clsScriptActive.DeleteRange(i, clsScriptActive.Lines(i).Text.Length)
+                    Exit For ' Exit the loop after removing the line.
+                End If
+            Next
+        Next
     End Sub
 
     ''' <summary>
@@ -313,7 +329,6 @@ Public Class ucrScript
         cmdRunLineSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdLoadScript.Enabled = Not bIsLogTab
-        cmdRenameScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
         cmdClear.Enabled = bScriptExists AndAlso Not bIsLogTab
 
@@ -931,8 +946,8 @@ Public Class ucrScript
         Dim unused = sender.dispose()
     End Sub
 
-    Private Sub cmdRenameScript_Click(sender As Object, e As EventArgs) Handles cmdRenameScript.Click
-        sdgRenameScript.strCurrentScriptName = TabControl.SelectedTab.Text
-        sdgRenameScript.ShowDialog()
+    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click
+        dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
+        dlgScript.ShowDialog()
     End Sub
 End Class

@@ -579,8 +579,12 @@ Public Class frmMain
         End If
     End Sub
 
-    Public Sub InsertTextToScriptWindow(strText As String)
-        ucrScriptWindow.InsertText(strText)
+    Public Sub InsertTextToScriptWindow(iCurrentPos As Integer, strText As String)
+        ucrScriptWindow.InsertText(iCurrentPos, strText)
+    End Sub
+
+    Public Sub RemoveLineToScriptWindow(strObjects As String())
+        ucrScriptWindow.RemoveLine(strObjects)
     End Sub
 
     Public Sub RenameScript(strNewName As String)
