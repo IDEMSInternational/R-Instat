@@ -358,6 +358,10 @@ Public Class dlgScript
         End If
     End Sub
 
+    Private Sub ucrInputPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreviewLibrary.ControlValueChanged
+        TestOkEnabled()
+    End Sub
+
     Private Sub ucrDataFrameGet_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGet.ControlContentsChanged
         If TabControl1.SelectedTab Is TabPage2 Then
             Dim strAssignTo = ucrDataFrameGet.strCurrDataFrame
@@ -406,8 +410,17 @@ Public Class dlgScript
         End If
     End Sub
 
+    Private Sub TestOkEnabled()
+        ucrBase.OKEnabled(Not ucrInputPreviewLibrary.IsEmpty)
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        TabControl1.TabIndex = 1
+        TabControl1.SelectedIndex = 0
+        ucrChkEditLibrary.Checked = False
         ucrComboGetPackage.SetText("datasets")
+        ucrInputPreviewLibrary.txtInput.Clear()
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 End Class
