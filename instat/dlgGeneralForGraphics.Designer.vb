@@ -50,6 +50,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkUseasNumeric = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -78,7 +79,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.lblFillOrColor.AutoSize = True
         Me.lblFillOrColor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillOrColor.Location = New System.Drawing.Point(264, 231)
+        Me.lblFillOrColor.Location = New System.Drawing.Point(264, 280)
         Me.lblFillOrColor.Name = "lblFillOrColor"
         Me.lblFillOrColor.Size = New System.Drawing.Size(57, 13)
         Me.lblFillOrColor.TabIndex = 4
@@ -133,7 +134,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrFillOrColourReceiver.AutoSize = True
         Me.ucrFillOrColourReceiver.frmParent = Me
-        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(262, 246)
+        Me.ucrFillOrColourReceiver.Location = New System.Drawing.Point(262, 295)
         Me.ucrFillOrColourReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFillOrColourReceiver.Name = "ucrFillOrColourReceiver"
         Me.ucrFillOrColourReceiver.Selector = Nothing
@@ -181,8 +182,17 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(6, 464)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
+        '
+        'ucrChkUseasNumeric
+        '
+        Me.ucrChkUseasNumeric.AutoSize = True
+        Me.ucrChkUseasNumeric.Checked = False
+        Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(262, 241)
+        Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
+        Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(125, 23)
+        Me.ucrChkUseasNumeric.TabIndex = 20
         '
         'dlgGeneralForGraphics
         '
@@ -190,6 +200,7 @@ Partial Class dlgGeneralForGraphics
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 519)
+        Me.Controls.Add(Me.ucrChkUseasNumeric)
         Me.Controls.Add(Me.cmdTheme)
         Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
@@ -208,7 +219,7 @@ Partial Class dlgGeneralForGraphics
         Me.Name = "dlgGeneralForGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "
-        Me.Text = "Graphics"
+        Me.Text = "General Graphics"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -226,4 +237,5 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents cmdTheme As Button
     Friend WithEvents cmdFacets As Button
+    Friend WithEvents ucrChkUseasNumeric As ucrCheck
 End Class

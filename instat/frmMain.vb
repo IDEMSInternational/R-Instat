@@ -80,6 +80,10 @@ Public Class frmMain
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+        'set controls layout
+        SetupInitialLayout()
+
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
@@ -128,8 +132,6 @@ Public Class frmMain
 
         ucrOutput.SetLogger(clsOutputLogger)
 
-        SetToDefaultLayout()
-
         '---------------------------------------
         'set up R-Instat options (settings)
         'load any saved options if available
@@ -151,6 +153,8 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
+        mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
         strCurrLang = clsInstatOptions.strLanguageCultureCode
         '---------------------------------------
@@ -214,6 +218,114 @@ Public Class frmMain
         '---------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Private Sub SetupInitialLayout()
+        'splOverall has 2 panels
+        'splOverall.Panel1 contains splExtraWindows
+        'splOverall.Panel2 contains splDataOutput
+
+        'splExtraWindows has 2 panels
+        'splExtraWindows.Panel1 contains splMetadata
+        'splExtraWindows.Panel2 contains script window
+
+        'splMetadata has 2 panels
+        'splMetadata.Panel1 contains data frame
+        'splMetadata.Panel2 contains column metadata
+
+        'splDataOutput has 2 panels
+        'splDataOutput.Panel1 contains data viewer window
+        'splDataOutput.Panel2 contains output window
+
+        'collaspe all the panels initially (on application startup)
+        splOverall.Panel1Collapsed = True
+        splOverall.Panel2Collapsed = True
+
+        splExtraWindows.Panel1Collapsed = True
+        splExtraWindows.Panel2Collapsed = True
+
+        splMetadata.Panel1Collapsed = True
+        splMetadata.Panel2Collapsed = True
+
+        splDataOutput.Panel1Collapsed = True
+        splDataOutput.Panel2Collapsed = True
+
+        SetToDefaultLayout()
+    End Sub
+
+    Private Sub SetToDefaultLayout()
+        splOverall.SplitterDistance = splOverall.Height / 4
+        splDataOutput.SplitterDistance = splDataOutput.Width / 2
+        splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
+        splMetadata.SplitterDistance = splMetadata.Width / 2
+
+        mnuViewDataView.Checked = True
+        mnuViewOutput.Checked = True
+        mnuViewDataFrameMetadata.Checked = False
+        mnuViewColumnMetadata.Checked = False
+        mnuViewLogScript.Checked = False
+        mnuViewSwapDataAndMetadata.Checked = False
+        mnuColumnMetadat.Checked = False
+        mnuDataFrameMetadat.Checked = False
+
+        mnuTbDataView.Checked = True
+        mnuOutputWindow.Checked = True
+        mnuLogScript.Checked = False
+        UpdateLayout()
+    End Sub
+
+    Public Sub UpdateLayout()
+
+        If Not mnuViewDataView.Checked _
+                AndAlso Not mnuViewOutput.Checked _
+                AndAlso Not mnuViewColumnMetadata.Checked _
+                AndAlso Not mnuViewDataFrameMetadata.Checked _
+                AndAlso Not mnuViewLogScript.Checked _
+                AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
+            splOverall.Hide()
+        Else
+            splOverall.Show()
+
+            'determine splOverall contents visibility 
+
+            '-------------------------------
+            'determine splOverall.Panel1 and it's contents visibility
+
+            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogScript.Checked Then
+                'expand panel 1
+                splOverall.Panel1Collapsed = False
+                'change splOverall.Panel1Collapsed contents visibilty
+                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
+                    splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
+                    splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
+                    splExtraWindows.Panel1Collapsed = False
+                Else
+                    splExtraWindows.Panel1Collapsed = True
+                End If
+                'expand panel 2 based on log script menu item checked status
+                splExtraWindows.Panel2Collapsed = Not mnuViewLogScript.Checked
+            Else
+                splOverall.Panel1Collapsed = True
+            End If
+            '-------------------------------
+
+            '-------------------------------
+            'determine splOverall.Panel2 and it's contents visibility
+
+            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
+                splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
+                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
+                splOverall.Panel2Collapsed = False
+            Else
+                splOverall.Panel2Collapsed = True
+            End If
+            '-------------------------------
+
+
+        End If
+        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuOutputWindow.Checked = mnuViewOutput.Checked
+        mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Function GetSavedRInstatOptions() As InstatOptions
@@ -424,28 +536,20 @@ Public Class frmMain
         End If
     End Sub
 
-
-
-    Private Sub SetToDefaultLayout()
-        splOverall.SplitterDistance = splOverall.Height / 4
-        splDataOutput.SplitterDistance = splDataOutput.Width / 2
-        splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
-        splMetadata.SplitterDistance = splMetadata.Width / 2
-
-        mnuViewDataView.Checked = True
-        mnuViewOutput.Checked = True
-        mnuViewDataFrameMetadata.Checked = False
-        mnuViewColumnMetadata.Checked = False
-        mnuViewLogScript.Checked = False
-        mnuViewSwapDataAndMetadata.Checked = False
-        mnuColumnMetadat.Checked = False
-        mnuDataFrameMetadat.Checked = False
-
-        mnuTbDataView.Checked = True
-        mnuTbOutput.Checked = True
-        mnuLogScript.Checked = False
-        UpdateLayout()
+    Private Sub UpdateSwapDataAndMetadata()
+        If mnuViewSwapDataAndMetadata.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+            splMetadata.Panel1.Controls.Add(ucrDataViewer)
+            mnuViewColumnMetadata.Text = "Data View"
+            mnuViewDataView.Text = "Column Metadata"
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splMetadata.Panel1.Controls.Add(ucrColumnMeta)
+            mnuViewColumnMetadata.Text = "Column Metadata"
+            mnuViewDataView.Text = "Data View"
+        End If
     End Sub
+
 
     Public Sub SaveInstatOptions(strFilePath As String)
         Dim serializer As New BinaryFormatter()
@@ -548,62 +652,6 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
-    Public Sub UpdateLayout()
-        If Not mnuViewDataView.Checked _
-                AndAlso Not mnuViewOutput.Checked _
-                AndAlso Not mnuViewColumnMetadata.Checked _
-                AndAlso Not mnuViewDataFrameMetadata.Checked _
-                AndAlso Not mnuViewLogScript.Checked _
-                AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
-            splOverall.Hide()
-        Else
-            splOverall.Show()
-            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
-                splOverall.Panel2Collapsed = False
-                splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
-                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
-            Else
-                splOverall.Panel2Collapsed = True
-            End If
-            If mnuViewColumnMetadata.Checked _
-                    OrElse mnuViewDataFrameMetadata.Checked _
-                    OrElse mnuViewLogScript.Checked Then
-                splOverall.Panel1Collapsed = False
-                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
-                    splExtraWindows.Panel1Collapsed = False
-                    splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
-                    splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
-                Else
-                    splExtraWindows.Panel1Collapsed = True
-                End If
-                If mnuViewLogScript.Checked Then
-                    splExtraWindows.Panel2Collapsed = False
-                Else
-                    splExtraWindows.Panel2Collapsed = True
-                End If
-            Else
-                splOverall.Panel1Collapsed = True
-            End If
-        End If
-        mnuTbDataView.Checked = mnuViewDataView.Checked
-        mnuTbOutput.Checked = mnuViewOutput.Checked
-        mnuLogScript.Checked = mnuViewLogScript.Checked
-    End Sub
-
-    Private Sub UpdateSwapDataAndMetadata()
-        If mnuViewSwapDataAndMetadata.Checked Then
-            splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
-            splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            mnuViewColumnMetadata.Text = "Data View"
-            mnuViewDataView.Text = "Column Metadata"
-        Else
-            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
-            splMetadata.Panel1.Controls.Add(ucrColumnMeta)
-            mnuViewColumnMetadata.Text = "Column Metadata"
-            mnuViewDataView.Text = "Data View"
-        End If
-    End Sub
-
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
@@ -638,8 +686,20 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        mnuViewColumnMetadata.Checked = True
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         UpdateLayout()
+    End Sub
+
+    Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
+        mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
+        clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
+    End Sub
+
+    Private Sub mnuIncludeComments_Click(sender As Object, e As EventArgs) Handles mnuIncludeComments.Click
+        mnuIncludeComments.Checked = Not mnuIncludeComments.Checked
+        clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuPrepareSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameInsertColumnsRows.Click
@@ -801,10 +861,6 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
-        dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
@@ -825,6 +881,8 @@ Public Class frmMain
 
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
         dlgOptions.ShowDialog()
+        mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
+        mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
     Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameHideColumns.Click
@@ -916,10 +974,6 @@ Public Class frmMain
 
     Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
         dlgFindInVariableOrFilter.ShowDialog()
-    End Sub
-
-    Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
-        mnuEditFind_Click(sender, e)
     End Sub
 
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataframeColourByProperty.Click
@@ -1626,7 +1680,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.ButtonClick, mnuOutputWindow.Click
         mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
@@ -2352,12 +2406,6 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
 
-    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
-        If ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.CutText()
-        End If
-    End Sub
-
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
         If ctrActive.Equals(ucrDataViewer) Then
             ucrDataViewer.CopyRange()
@@ -2512,16 +2560,13 @@ Public Class frmMain
         dlgSurvey.ShowDialog()
     End Sub
 
-    Private Sub PivotTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralPivotTable.Click
+    Private Sub mnuDescribeGraphGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneral.Click
+        dlgGeneralForGraphics.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
         dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeGraphGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphGraphics.Click
-        dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeGeneralTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralTables.Click
-        dlgSummaryTables.ShowDialog()
-    End Sub
 End Class

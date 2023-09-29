@@ -76,8 +76,10 @@ Public Class ucrDataViewReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
-                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") AndAlso
+                    strData IsNot Nothing Then
                     strData = GetInnerBracketedString(strData)
+                    strData = If(strData.Contains(":"), strData.Replace(":", ", "), strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -129,6 +131,8 @@ Public Class ucrDataViewReoGrid
         Dim intLastLeftBracket As Integer = InStrRev(strData, "(")
         If intFirstRightBracket = 0 Or intLastLeftBracket = 0 Then
             Return strData
+        ElseIf strData = "numeric(0)" Then
+            Return String.Empty
         Else
             Dim strOutput As String = Mid(strData, intLastLeftBracket + 1, intFirstRightBracket - intLastLeftBracket - 1)
             Return strOutput

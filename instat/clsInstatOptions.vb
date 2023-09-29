@@ -315,6 +315,20 @@ Imports RDotNet
             clsOptionsFunction.AddParameter("dplyr.summarise.inform", "FALSE")
         End If
 
+        'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
+        If frmMain.mnuShowRCommand.Checked Then
+            clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "TRUE")
+        Else
+            clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "FALSE")
+        End If
+
+        'add "Comments.from.dialogs.displayed.in.the.output.window" as options parameter of its been changed
+        If frmMain.mnuIncludeComments.Checked Then
+            clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "TRUE")
+        Else
+            clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "FALSE")
+        End If
+
         frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(),
                                    strComment:="Setting display options (e.g Number of significant digits)")
 

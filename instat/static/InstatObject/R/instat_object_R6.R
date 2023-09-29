@@ -2653,6 +2653,7 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
     if(!("column" %in% names(com))){
       com[["column"]] <- ""
     }
+    if(length(comments_list) > 0) cat("Comments added:", length(comments_list), "\n")
     self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
   }
     }
@@ -2733,13 +2734,19 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
     if (!is.null(width) && wrap) {
       column_data <- stringr::str_wrap(column_data, width = width)
     }
-    
+    curr_data <- self$get_data_frame(data_name=data_name, retain_attr = TRUE)
     # Convert back to the original data type if necessary
     if (original_type != class(column_data)) {
       if (original_type %in% c("factor", "ordered_factor")){
         column_data <- make_factor(column_data)
+      }else if(original_type == "list"){
+        result <- curr_data %>%
+          dplyr::mutate(list_column = lapply(column_data, convert_to_list))
+        column_data <- result$list_column
       }else{ column_data <- as(column_data, original_type) }
     }
+    # retain the attributes of the column after wrapping or unwrapping
+    attributes(column_data) <- attributes(curr_data[[col_name]])
     self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
   }
 }

@@ -810,10 +810,9 @@ Public Class RLink
                     bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 ElseIf iCallType = 1 OrElse iCallType = 4 Then
-                    'todo. this is used by the calculator dialog
-                    'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
+                    'this is used by the calculator dialog
                     'else if script output should be stored in a temp variable
-                    ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
+                    ' TODO SJL In RInstat, iCallType only seems to be -1, 0, 1, 2 or 3. Is icallType 4 used?
                     bAsFile = False
                     Dim strTempAssignTo As String = ".temp_val"
                     'TODO check this is valid syntax in all cases
@@ -823,6 +822,10 @@ Public Class RLink
                     If expTemp IsNot Nothing Then
                         strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                     End If
+                ElseIf iCallType = 5 Then
+                    'else if script comes from script window
+                    'wrap command inside view_object_data just incase there is an output object
+                    strOutput = GetFileOutput("view_object_data(object = " & strScript & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                 Else
                     'else if script output should not be ignored or not stored as an object or variable
 
@@ -873,7 +876,8 @@ Public Class RLink
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
         Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-        expTemp = GetSymbol(strTempAssignTo, bSilent:=bSilent)
+        'get file path. If not found then silently return nothing
+        expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
             'get the file path name, check if it exists and whether it has contents
@@ -949,11 +953,7 @@ Public Class RLink
             End If
 
             'else execute command
-            Dim iCallType As Integer = 5
-            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
-                iCallType = 3
-            End If
-            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
+            RunScript(strScriptCmd.Trim(vbLf), iCallType:=5, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
             strScriptCmd = ""
             strNewComment = ""
         Next
