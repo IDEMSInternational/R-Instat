@@ -74,7 +74,7 @@ Public Class dlgScript
         ucrReceiverGet.bUseFilteredData = False
         ucrReceiverGet.SetItemType("column")
         ucrReceiverGet.SetMeAsReceiver()
-        ucrReceiverGet.SetLinkedDisplayControl(New List(Of Control)({lblGet, btnGet}))
+        ucrReceiverGet.SetLinkedDisplayControl(New List(Of Control)({lblGet}))
 
 
         '---------------------------------------------------
