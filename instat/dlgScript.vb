@@ -151,8 +151,6 @@ Public Class dlgScript
         rdoGetGraph.Checked = True
         'ucrReceiverGetObject.SetItemType("graph")
 
-        'TabControl1.TabPages(4).Visible = False
-
         'save controls reset
         rdoSaveDataFrame.Checked = True
         ucrInputDataFrame.SetName("")
@@ -199,13 +197,6 @@ Public Class dlgScript
         SetGetReceiverItemType()
         If rdoGetDataFrame.Checked Then
             ucrDataFrameGet.SetVisible(True)
-            'If TabControl1.SelectedTab Is TabPage2 Then
-            '    Dim strAssignTo = ucrDataFrameGet.strCurrDataFrame
-            '    clsGetDataFrameFunction.SetAssignTo(strAssignTo)
-            '    Dim strAssignedScript = ""
-            '    Dim strAssignedTo As String = clsGetDataFrameFunction.ToScript(strScript:=strAssignedScript)
-            '    ucrInputPreviewLibrary.SetText(strAssignedScript)
-            'End If
         ElseIf rdoGetColumn.Checked OrElse rdoGetObject.Checked Then
             ucrPnlGetObject.SetVisible(False)
             ucrSelectorGet.SetVisible(True)
@@ -243,9 +234,6 @@ Public Class dlgScript
         ucrSaveModel.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
             ucrInputSaveDataFrame.SetVisible(True)
-            'If TabControl1.SelectedTab Is TabPage3 Then
-            '    SetPreview(clsImportNewDataFrame)
-            'End If
         ElseIf rdoSaveColumn.Checked Then
             ucrDataFrameSave.SetVisible(True)
             ucrSaveColumn.SetVisible(True)
@@ -271,8 +259,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
-        'ucrChkEditLibrary.Checked = False
-        'ucrInputPreviewLibrary.txtInput.Clear()
+        ucrInputPreviewLibrary.txtInput.Clear()
     End Sub
 
     Private Sub ucrInputRemoveObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRemoveObject.ControlContentsChanged
