@@ -324,18 +324,6 @@ Public Class dlgScript
         End If
     End Sub
 
-    'Private Sub ucrSaveTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveTable.ControlValueChanged, ucrSaveGraph.ControlValueChanged, ucrSaveModel.ControlValueChanged, ucrPnlSaveData.ControlValueChanged
-    '    If TabControl1.SelectedTab Is TabPage3 AndAlso rdoSaveObject.Checked Then
-    '        If ucrChangedControl Is ucrSaveGraph Then
-    '            SetPreview(clsSaveGraphFunction)
-    '        ElseIf ucrChangedControl Is ucrSaveModel Then
-    '            SetPreview(clsSaveModelFunction)
-    '        ElseIf ucrChangedControl Is ucrSaveTable Then
-    '            SetPreview(clsSaveTableFunction)
-    '        End If
-    '    End If
-    'End Sub
-
     Private Sub ucrInputDataFrame_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataFrame.ControlContentsChanged
         If TabControl1.SelectedTab Is TabPage5 Then
             Dim strData = ucrInputDataFrame.GetText()
