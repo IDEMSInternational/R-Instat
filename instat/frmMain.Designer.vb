@@ -362,6 +362,7 @@ Partial Class frmMain
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPasteNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
@@ -2840,7 +2841,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 22)
         Me.mnuEdit.Tag = "Edit"
@@ -2875,11 +2876,18 @@ Partial Class frmMain
         '
         'mnuEditPaste
         '
+        Me.mnuEditPaste.Enabled = False
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
         Me.mnuEditPaste.Size = New System.Drawing.Size(207, 22)
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
+        '
+        'mnuEditPasteNew
+        '
+        Me.mnuEditPasteNew.Name = "mnuEditPasteNew"
+        Me.mnuEditPasteNew.Size = New System.Drawing.Size(207, 22)
+        Me.mnuEditPasteNew.Text = "Paste New"
         '
         'mnuEditWordwrap
         '
@@ -3047,21 +3055,21 @@ Partial Class frmMain
         '
         Me.mnuOutputWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuOutputWindow.Name = "mnuOutputWindow"
-        Me.mnuOutputWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOutputWindow.Size = New System.Drawing.Size(178, 22)
         Me.mnuOutputWindow.Text = "Show Output"
         '
         'mnuShowRCommand
         '
         Me.mnuShowRCommand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuShowRCommand.Name = "mnuShowRCommand"
-        Me.mnuShowRCommand.Size = New System.Drawing.Size(180, 22)
+        Me.mnuShowRCommand.Size = New System.Drawing.Size(178, 22)
         Me.mnuShowRCommand.Text = "Show R Commands"
         '
         'mnuIncludeComments
         '
         Me.mnuIncludeComments.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuIncludeComments.Name = "mnuIncludeComments"
-        Me.mnuIncludeComments.Size = New System.Drawing.Size(180, 22)
+        Me.mnuIncludeComments.Size = New System.Drawing.Size(178, 22)
         Me.mnuIncludeComments.Text = "Show Comments"
         '
         'ToolStripSeparator74
@@ -5758,4 +5766,5 @@ Partial Class frmMain
 
     Friend WithEvents mnuPrepareCheckDataPivotTable As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator50 As ToolStripSeparator
+    Friend WithEvents mnuEditPasteNew As ToolStripMenuItem
 End Class

@@ -2389,10 +2389,6 @@ Public Class frmMain
         dlgImportERA5Data.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs)
-        dlgPasteNewColumns.ShowDialog()
-    End Sub
-
     Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
         If strCurrLang <> "en-GB" Then
             strCurrLang = "en-GB"
@@ -2416,6 +2412,10 @@ Public Class frmMain
         ElseIf ctrActive.Equals(ucrScriptWindow) Then
             ucrScriptWindow.CopyText()
         End If
+    End Sub
+
+    Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNew.Click
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
