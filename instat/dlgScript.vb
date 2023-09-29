@@ -352,13 +352,13 @@ Public Class dlgScript
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If TabControl1.SelectedTab Is TabPage4 AndAlso Not String.IsNullOrEmpty(ucrInputRemoveObject.GetText) Then
-            frmMain.RemoveLineToScriptWindow(ucrInputRemoveObject.GetText.Split(","))
+            frmMain.RemoveLineToScriptWindow(ucrInputPreviewLibrary.GetText.Split(","))
         Else
             frmMain.InsertTextToScriptWindow(iCurrentPos, ucrInputPreviewLibrary.GetText)
         End If
     End Sub
 
-    Private Sub ucrInputPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreviewLibrary.ControlValueChanged
+    Private Sub ucrInputPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreviewLibrary.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
