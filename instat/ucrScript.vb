@@ -472,6 +472,12 @@ Public Class ucrScript
     End Sub
 
     Private Function IsBracket(iNewChar As Integer) As Boolean
+        'the `Chr()` function may throw an exception for higher value integers,
+        '    so check value in a reasonable range. Note: 40 = `(` and 125 = `}`
+        If iNewChar < 40 OrElse iNewChar > 125 Then
+            Return False
+        End If
+
         Dim arrRBrackets() As String = {"(", ")", "{", "}", "[", "]"}
         Return arrRBrackets.Contains(Chr(iNewChar))
     End Function
