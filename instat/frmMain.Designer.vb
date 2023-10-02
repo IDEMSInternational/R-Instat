@@ -2876,7 +2876,6 @@ Partial Class frmMain
         '
         'mnuEditPaste
         '
-        Me.mnuEditPaste.Enabled = False
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
         Me.mnuEditPaste.Size = New System.Drawing.Size(207, 22)

@@ -2414,6 +2414,18 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click
+        If ctrActive.Equals(ucrDataViewer) Then
+            ucrDataViewer.PasteValuesToDataFrame()
+        ElseIf ctrActive.Equals(ucrColumnMeta) Then
+            'todo
+        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+            'todo
+        ElseIf ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.PasteText()
+        End If
+    End Sub
+
     Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNew.Click
         dlgPasteNewColumns.ShowDialog()
     End Sub
@@ -2568,5 +2580,4 @@ Public Class frmMain
         dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
-
 End Class

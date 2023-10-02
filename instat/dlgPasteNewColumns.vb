@@ -50,13 +50,12 @@ Public Class dlgPasteNewColumns
         '----------------------------
         ucrPnl.AddRadioButton(rdoDataFrame)
         ucrPnl.AddRadioButton(rdoColumns)
-        ucrPnl.AddFunctionNamesCondition(rdoDataFrame, "read_delim", bNewIsPositive:=True)
+        ucrPnl.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=False)
         ucrPnl.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=True)
-        'ucrPnl.AddToLinkedControls(ucrSaveNewDFName, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=False)
         ucrPnl.AddToLinkedControls({ucrDFSelected, ucrChkKeepExstingCols}, {rdoColumns}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRowHeader.SetText("First row is header")
-        ucrChkRowHeader.SetParameter(New RParameter("col_names", 1))
+        ucrChkRowHeader.SetParameter(New RParameter("header", 1))
         ucrChkRowHeader.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrNudPreviewLines.SetMinMax(iNewMin:=10, iNewMax:=1000)
@@ -92,14 +91,20 @@ Public Class dlgPasteNewColumns
         ucrSaveNewDFName.Reset()
         ucrDFSelected.Reset()
 
-        clsReadDataRFunction.SetPackageName("readr")
-        clsReadDataRFunction.SetRCommand("read_delim")
-        clsReadDataRFunction.AddParameter("col_names", strParameterValue:="TRUE", iPosition:=1)
+        'todo. some clip data values work well with read_delim R function.
+        'taht's why readr references have been left here for future testing and reference.
+
+        'clsReadDataRFunction.SetPackageName("readr")
+        'clsReadDataRFunction.SetRCommand("read_delim")
+        'clsReadDataRFunction.AddParameter("col_names", strParameterValue:="TRUE", iPosition:=1)
+
+        clsReadDataRFunction.SetPackageName("clipr")
+        clsReadDataRFunction.SetRCommand("read_clip_tbl")
+        clsReadDataRFunction.AddParameter("header", strParameterValue:="TRUE", iPosition:=1)
 
         clsImportColsToExistingDFRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsImportColsToExistingDFRFunction.AddParameter("col_data", clsRFunctionParameter:=clsReadDataRFunction, iPosition:=1)
         clsImportColsToExistingDFRFunction.AddParameter("use_col_name_as_prefix", strParameterValue:="TRUE", iPosition:=2)
-
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsReadDataRFunction)
     End Sub
@@ -128,7 +133,7 @@ Public Class dlgPasteNewColumns
                 MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
                 clipBoardText = ""
             End If
-            clsReadDataRFunction.AddParameter("file", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
+            clsReadDataRFunction.AddParameter("x", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
         Catch ex As Exception
             'this error could be due to large clipboard data 
             MsgBox("Requested clipboard operation did not succeed. Large data detected")
@@ -193,6 +198,8 @@ Public Class dlgPasteNewColumns
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
             ucrSaveNewDFName.Visible = False 'todo. can this be done through the custom panel control?
         End If
+
+
 
         If bValidatePasteData Then
             TestOkEnabled(bValidateCopiedData:=False)
