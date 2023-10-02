@@ -132,6 +132,7 @@ Public Class ucrDataView
                 End If
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
+            _grid.RemoveOldWorksheets()
         Next
         If strCurrWorksheet IsNot Nothing Then
             _grid.ReOrderWorksheets(strCurrWorksheet)
@@ -150,7 +151,6 @@ Public Class ucrDataView
         'refresh of that cell will be done manually 
         If Not bOnlyUpdateOneCell Then
             AddAndUpdateWorksheets()
-            _grid.RemoveOldWorksheets()
             If _clsDataBook.DataFrames.Count = 0 Then
                 RefreshDisplayInformation()
             End If

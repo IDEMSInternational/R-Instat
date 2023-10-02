@@ -325,7 +325,7 @@ Public Class frmMain
 
             End If
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
 
         mnuTbDataView.Checked = mnuViewDataView.Checked
