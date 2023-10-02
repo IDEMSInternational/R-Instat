@@ -197,9 +197,8 @@ Public Class dlgPasteNewColumns
             clsReadDataRFunction.SetAssignToObject("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportColsToExistingDFRFunction)
             ucrSaveNewDFName.Visible = False 'todo. can this be done through the custom panel control?
+            ucrSaveNewDFName.SetName("") 'forces the save control to not include import function
         End If
-
-
 
         If bValidatePasteData Then
             TestOkEnabled(bValidateCopiedData:=False)
