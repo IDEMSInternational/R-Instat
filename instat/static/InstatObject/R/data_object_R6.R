@@ -798,6 +798,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
             purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
           }
         }
+        if(self$column_selection_applied()) self$remove_current_column_selection()
         # Need to use private$data here because changing names of data field
         names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
@@ -818,6 +819,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       curr_col_names <- names(private$data)
       curr_col_names[cols_changed_index] <- new_col_names
       if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
+      if(self$column_selection_applied()) self$remove_current_column_selection()
       names(private$data)[cols_changed_index] <- new_col_names
       for (i in seq_along(cols_changed_index)) {
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
@@ -843,6 +845,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         .fn = .fn,
         .cols = {{ .cols }}, ...
       )
+    if(self$column_selection_applied()) self$remove_current_column_selection()
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
       new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
