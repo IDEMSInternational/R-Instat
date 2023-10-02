@@ -46,6 +46,7 @@ Public Class dlgSummaryTables
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
+        DialogueSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -181,6 +182,7 @@ Public Class dlgSummaryTables
 
         ucrReorderSummary.bDataIsSummaries = True
         grpDisplay.Visible = Not rdoFrequencyTable.Checked
+        DialogueSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -324,6 +326,7 @@ Public Class dlgSummaryTables
 
         bResetSubdialog = True
         bResetFormatSubdialog = True
+        TestOKEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -427,9 +430,10 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged,
-        ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged,
+        ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged,
         ucrPnlSummaryFrequencyTables.ControlContentsChanged, ucrPnlColumnFactor.ControlContentsChanged, ucrReceiverColumnFactor.ControlContentsChanged
         TestOKEnabled()
+        DialogueSize()
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged,
@@ -438,12 +442,14 @@ Public Class dlgSummaryTables
         cmdSummaries.Visible = rdoSummaryTable.Checked
         cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
         If rdoFrequencyTable.Checked Then
+            grpDisplay.Visible = False
             rdoVariable.Visible = False
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
             ucrSaveTable.SetPrefix("frequency_table")
             rdoSummaryVariable.Text = "Summary-Variable"
         Else
+            grpDisplay.Visible = True
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=1)
             ucrSaveTable.SetPrefix("summary_table")
@@ -533,6 +539,22 @@ Public Class dlgSummaryTables
         End If
     End Sub
 
+    Private Sub DialogueSize()
+        If rdoFrequencyTable.Checked Then
+            Me.Size = New Size(464, 409)
+            Me.ucrNudSigFigs.Location = New Point(119, 304)
+            Me.lblSigFigs.Location = New Point(7, 307)
+            Me.ucrSaveTable.Location = New Point(10, 340)
+            Me.ucrBase.Location = New Point(10, 370)
+        Else
+            Me.Size = New Size(505, 620)
+            Me.ucrNudSigFigs.Location = New Point(119, 356)
+            Me.lblSigFigs.Location = New Point(7, 359)
+            Me.ucrSaveTable.Location = New Point(10, 495)
+            Me.ucrBase.Location = New Point(10, 524)
+        End If
+    End Sub
+
     Private Sub AddingColumnFactor()
         Dim lstVariables As New List(Of String)
         Dim iXVarCount As Integer
@@ -555,6 +577,7 @@ Public Class dlgSummaryTables
             If ucrReceiverFactors.lstSelectedVariables.Items.Count >= 1 Then
                 Dim iIndex = ucrReceiverFactors.lstSelectedVariables.Items.Count - 1
                 ucrReceiverPercentages.Add(ucrReceiverFactors.lstSelectedVariables.Items(iIndex).Text)
+                ucrReceiverFactors.SetMeAsReceiver()
             End If
         End If
     End Sub
