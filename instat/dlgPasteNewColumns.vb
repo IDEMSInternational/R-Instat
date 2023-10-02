@@ -44,7 +44,6 @@ Public Class dlgPasteNewColumns
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrBase.iHelpTopicID = 160
 
         '----------------------------
@@ -92,8 +91,7 @@ Public Class dlgPasteNewColumns
         ucrDFSelected.Reset()
 
         'todo. some clip data values work well with read_delim R function.
-        'taht's why readr references have been left here for future testing and reference.
-
+        'that's why readr references have been left here for future testing and reference.
         'clsReadDataRFunction.SetPackageName("readr")
         'clsReadDataRFunction.SetRCommand("read_delim")
         'clsReadDataRFunction.AddParameter("col_names", strParameterValue:="TRUE", iPosition:=1)
