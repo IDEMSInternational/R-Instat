@@ -115,7 +115,7 @@ Partial Class dlgSummaryTables
         '
         Me.lblSigFigs.AutoSize = True
         Me.lblSigFigs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSigFigs.Location = New System.Drawing.Point(8, 17)
+        Me.lblSigFigs.Location = New System.Drawing.Point(8, 21)
         Me.lblSigFigs.Name = "lblSigFigs"
         Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
         Me.lblSigFigs.TabIndex = 4
@@ -209,7 +209,7 @@ Partial Class dlgSummaryTables
         Me.ucrNudSigFigs.AutoSize = True
         Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigFigs.Location = New System.Drawing.Point(111, 14)
+        Me.ucrNudSigFigs.Location = New System.Drawing.Point(111, 18)
         Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Name = "ucrNudSigFigs"

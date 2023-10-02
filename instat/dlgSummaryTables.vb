@@ -180,6 +180,7 @@ Public Class dlgSummaryTables
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrReorderSummary.bDataIsSummaries = True
+        grpDisplay.Visible = Not rdoFrequencyTable.Checked
     End Sub
 
     Private Sub SetDefaults()
@@ -351,8 +352,6 @@ Public Class dlgSummaryTables
         End If
         bRCodeSet = True
         FillListView()
-
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -553,6 +552,10 @@ Public Class dlgSummaryTables
                 ucrReceiverColumnFactor.Clear()
             End If
             lstVariables = ucrReceiverFactors.GetVariableNamesAsList()
+            If ucrReceiverFactors.lstSelectedVariables.Items.Count >= 1 Then
+                Dim iIndex = ucrReceiverFactors.lstSelectedVariables.Items.Count - 1
+                ucrReceiverPercentages.Add(ucrReceiverFactors.lstSelectedVariables.Items(iIndex).Text)
+            End If
         End If
     End Sub
 End Class
