@@ -276,53 +276,58 @@ Public Class frmMain
 
     Public Sub UpdateLayout()
 
-        If Not mnuViewDataView.Checked _
-                AndAlso Not mnuViewOutput.Checked _
-                AndAlso Not mnuViewColumnMetadata.Checked _
-                AndAlso Not mnuViewDataFrameMetadata.Checked _
-                AndAlso Not mnuViewLogScript.Checked _
-                AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
-            splOverall.Hide()
-        Else
-            splOverall.Show()
+        Try
+            If Not mnuViewDataView.Checked _
+                            AndAlso Not mnuViewOutput.Checked _
+                            AndAlso Not mnuViewColumnMetadata.Checked _
+                            AndAlso Not mnuViewDataFrameMetadata.Checked _
+                            AndAlso Not mnuViewLogScript.Checked _
+                            AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
+                splOverall.Hide()
+            Else
+                splOverall.Show()
 
-            'determine splOverall contents visibility 
+                'determine splOverall contents visibility 
 
-            '-------------------------------
-            'determine splOverall.Panel1 and it's contents visibility
+                '-------------------------------
+                'determine splOverall.Panel1 and it's contents visibility
 
-            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogScript.Checked Then
-                'expand panel 1
-                splOverall.Panel1Collapsed = False
-                'change splOverall.Panel1Collapsed contents visibilty
-                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
-                    splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
-                    splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
-                    splExtraWindows.Panel1Collapsed = False
+                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogScript.Checked Then
+                    'expand panel 1
+                    splOverall.Panel1Collapsed = False
+                    'change splOverall.Panel1Collapsed contents visibilty
+                    If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
+                        splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
+                        splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
+                        splExtraWindows.Panel1Collapsed = False
+                    Else
+                        splExtraWindows.Panel1Collapsed = True
+                    End If
+                    'expand panel 2 based on log script menu item checked status
+                    splExtraWindows.Panel2Collapsed = Not mnuViewLogScript.Checked
                 Else
-                    splExtraWindows.Panel1Collapsed = True
+                    splOverall.Panel1Collapsed = True
                 End If
-                'expand panel 2 based on log script menu item checked status
-                splExtraWindows.Panel2Collapsed = Not mnuViewLogScript.Checked
-            Else
-                splOverall.Panel1Collapsed = True
+                '-------------------------------
+
+                '-------------------------------
+                'determine splOverall.Panel2 and it's contents visibility
+
+                If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
+                    splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
+                    splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
+                    splOverall.Panel2Collapsed = False
+                Else
+                    splOverall.Panel2Collapsed = True
+                End If
+                '-------------------------------
+
+
             End If
-            '-------------------------------
+        Catch ex As Exception
 
-            '-------------------------------
-            'determine splOverall.Panel2 and it's contents visibility
+        End Try
 
-            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
-                splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
-                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
-                splOverall.Panel2Collapsed = False
-            Else
-                splOverall.Panel2Collapsed = True
-            End If
-            '-------------------------------
-
-
-        End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
