@@ -463,8 +463,8 @@ DataSheet$set("public", "get_variables_metadata", function(data_type = "all", co
       if(self$column_selection_applied()) cols <- self$current_column_selection
       curr_data <- private$data[column]
     }
-    for(i in seq_along(cols)) {
-      col <- curr_data[[i]]
+    for(c in cols) {
+      col <- curr_data[[c]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
@@ -487,7 +487,7 @@ DataSheet$set("public", "get_variables_metadata", function(data_type = "all", co
       #  col_attributes <- data.frame(class = NA)
       #}
       col_attributes <- data.frame(col_attributes, stringsAsFactors = FALSE)
-      out[[i]] <- col_attributes
+      out[[c]] <- col_attributes
     }
     #RLink crashes with bind_rows for some data frames with ~50+ columns
     #rbind.fill safer alternative currently
