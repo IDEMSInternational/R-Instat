@@ -442,14 +442,12 @@ Public Class dlgSummaryTables
         cmdSummaries.Visible = rdoSummaryTable.Checked
         cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
         If rdoFrequencyTable.Checked Then
-            grpDisplay.Visible = False
             rdoVariable.Visible = False
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
             ucrSaveTable.SetPrefix("frequency_table")
             rdoSummaryVariable.Text = "Summary-Variable"
         Else
-            grpDisplay.Visible = True
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=1)
             ucrSaveTable.SetPrefix("summary_table")

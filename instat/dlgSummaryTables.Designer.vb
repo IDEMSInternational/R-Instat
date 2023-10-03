@@ -345,10 +345,10 @@ Partial Class dlgSummaryTables
         Me.lblFactorsAsPercentage.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFactorsAsPercentage.Location = New System.Drawing.Point(18, 44)
         Me.lblFactorsAsPercentage.Name = "lblFactorsAsPercentage"
-        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(102, 13)
+        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(100, 13)
         Me.lblFactorsAsPercentage.TabIndex = 1
         Me.lblFactorsAsPercentage.Tag = "Factors as Percentage:"
-        Me.lblFactorsAsPercentage.Text = "Of Factor (Optional):"
+        Me.lblFactorsAsPercentage.Text = "of Factor (Optional):"
         '
         'ucrChkPercentageProportion
         '
