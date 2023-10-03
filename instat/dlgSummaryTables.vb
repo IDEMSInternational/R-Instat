@@ -143,6 +143,7 @@ Public Class dlgSummaryTables
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkDisplayMargins}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkFrequencyDisplayMargins}, {rdoFrequencyTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkOmitMissing}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrPnlColumnFactor}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 2))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -181,7 +182,6 @@ Public Class dlgSummaryTables
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrReorderSummary.bDataIsSummaries = True
-        grpDisplay.Visible = Not rdoFrequencyTable.Checked
         DialogueSize()
     End Sub
 
@@ -222,7 +222,7 @@ Public Class dlgSummaryTables
 
         clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
-        clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=2)
+        clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
 
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.bBrackets = False

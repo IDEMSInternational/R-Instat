@@ -164,6 +164,7 @@ Partial Class dlgSummaryTables
         'rdoFactorVariable
         '
         Me.rdoFactorVariable.AutoSize = True
+        Me.rdoFactorVariable.Checked = True
         Me.rdoFactorVariable.Location = New System.Drawing.Point(14, 36)
         Me.rdoFactorVariable.Name = "rdoFactorVariable"
         Me.rdoFactorVariable.Size = New System.Drawing.Size(96, 17)
@@ -179,7 +180,6 @@ Partial Class dlgSummaryTables
         Me.rdoNoColumnFactor.Name = "rdoNoColumnFactor"
         Me.rdoNoColumnFactor.Size = New System.Drawing.Size(110, 17)
         Me.rdoNoColumnFactor.TabIndex = 29
-        Me.rdoNoColumnFactor.TabStop = True
         Me.rdoNoColumnFactor.Text = "No Column Factor"
         Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
         '
@@ -197,9 +197,9 @@ Partial Class dlgSummaryTables
         Me.grpMargin.Controls.Add(Me.rdoSummary)
         Me.grpMargin.Controls.Add(Me.rdoOuter)
         Me.grpMargin.Controls.Add(Me.ucrPnlMargin)
-        Me.grpMargin.Location = New System.Drawing.Point(10, 312)
+        Me.grpMargin.Location = New System.Drawing.Point(10, 313)
         Me.grpMargin.Name = "grpMargin"
-        Me.grpMargin.Size = New System.Drawing.Size(203, 38)
+        Me.grpMargin.Size = New System.Drawing.Size(213, 40)
         Me.grpMargin.TabIndex = 13
         Me.grpMargin.TabStop = False
         '
@@ -207,7 +207,7 @@ Partial Class dlgSummaryTables
         '
         Me.rdoBoth.AutoSize = True
         Me.rdoBoth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoBoth.Location = New System.Drawing.Point(140, 11)
+        Me.rdoBoth.Location = New System.Drawing.Point(140, 17)
         Me.rdoBoth.Name = "rdoBoth"
         Me.rdoBoth.Size = New System.Drawing.Size(47, 17)
         Me.rdoBoth.TabIndex = 16
@@ -219,7 +219,7 @@ Partial Class dlgSummaryTables
         '
         Me.rdoSummary.AutoSize = True
         Me.rdoSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummary.Location = New System.Drawing.Point(67, 11)
+        Me.rdoSummary.Location = New System.Drawing.Point(67, 17)
         Me.rdoSummary.Name = "rdoSummary"
         Me.rdoSummary.Size = New System.Drawing.Size(68, 17)
         Me.rdoSummary.TabIndex = 16
@@ -231,7 +231,7 @@ Partial Class dlgSummaryTables
         '
         Me.rdoOuter.AutoSize = True
         Me.rdoOuter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoOuter.Location = New System.Drawing.Point(10, 11)
+        Me.rdoOuter.Location = New System.Drawing.Point(10, 17)
         Me.rdoOuter.Name = "rdoOuter"
         Me.rdoOuter.Size = New System.Drawing.Size(51, 17)
         Me.rdoOuter.TabIndex = 15
