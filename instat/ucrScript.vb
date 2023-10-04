@@ -25,9 +25,14 @@ Public Class ucrScript
     Private Const iTabIndexLog As Integer = 0
     Private Const strComment As String = "Code run from Script Window"
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+    Private strRecentFilesPath As String
 
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
+
+    'Public Sub New(strAppDataPath As String)
+    '    strRecentFilesPath = Path.Combine(strAppDataPath, "recent.mru")
+    'End Sub
 
     Public Sub New()
         ' This call is required by the designer.
@@ -212,6 +217,8 @@ Public Class ucrScript
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
                     bIsTextChanged = False
                     TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
+                    frmMain.bDataSaved = True
                     If bIsLog Then
                         strInitialDirectoryLog = Path.GetDirectoryName(dlgSave.FileName)
                     Else
@@ -515,6 +522,8 @@ Public Class ucrScript
                 TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
                 strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
                 bIsTextChanged = False
+                frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
+                frmMain.bDataSaved = True
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to read from the specified location.",
