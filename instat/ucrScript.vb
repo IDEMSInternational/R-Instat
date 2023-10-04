@@ -25,14 +25,9 @@ Public Class ucrScript
     Private Const iTabIndexLog As Integer = 0
     Private Const strComment As String = "Code run from Script Window"
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
-    Private strRecentFilesPath As String
 
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
-
-    'Public Sub New(strAppDataPath As String)
-    '    strRecentFilesPath = Path.Combine(strAppDataPath, "recent.mru")
-    'End Sub
 
     Public Sub New()
         ' This call is required by the designer.
