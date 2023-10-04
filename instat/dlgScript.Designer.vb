@@ -77,7 +77,7 @@ Partial Class dlgScript
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(729, 393)
+        Me.TabControl1.Size = New System.Drawing.Size(698, 393)
         Me.TabControl1.TabIndex = 31
         '
         'TabPage1
@@ -87,7 +87,7 @@ Partial Class dlgScript
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(721, 360)
+        Me.TabPage1.Size = New System.Drawing.Size(690, 360)
         Me.TabPage1.TabIndex = 4
         Me.TabPage1.Text = "Library"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -109,7 +109,7 @@ Partial Class dlgScript
         Me.TabPage5.Location = New System.Drawing.Point(4, 29)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(728, 360)
+        Me.TabPage5.Size = New System.Drawing.Size(690, 360)
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "Dataframe"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -142,7 +142,7 @@ Partial Class dlgScript
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage2.Size = New System.Drawing.Size(728, 360)
+        Me.TabPage2.Size = New System.Drawing.Size(690, 360)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Get Data"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -249,7 +249,7 @@ Partial Class dlgScript
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
         Me.TabPage3.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(728, 360)
+        Me.TabPage3.Size = New System.Drawing.Size(690, 360)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Save Results"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -327,7 +327,7 @@ Partial Class dlgScript
         Me.TabPage4.Location = New System.Drawing.Point(4, 29)
         Me.TabPage4.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(728, 360)
+        Me.TabPage4.Size = New System.Drawing.Size(690, 360)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Remove"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -345,7 +345,7 @@ Partial Class dlgScript
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(17, 499)
+        Me.ucrBase.Location = New System.Drawing.Point(20, 503)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -507,7 +507,7 @@ Partial Class dlgScript
         Me.ucrChkEditLibrary.Location = New System.Drawing.Point(13, 414)
         Me.ucrChkEditLibrary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkEditLibrary.Name = "ucrChkEditLibrary"
-        Me.ucrChkEditLibrary.Size = New System.Drawing.Size(164, 34)
+        Me.ucrChkEditLibrary.Size = New System.Drawing.Size(130, 58)
         Me.ucrChkEditLibrary.TabIndex = 48
         '
         'ucrInputPreviewLibrary
@@ -517,7 +517,7 @@ Partial Class dlgScript
         Me.ucrInputPreviewLibrary.AutoSize = True
         Me.ucrInputPreviewLibrary.IsMultiline = True
         Me.ucrInputPreviewLibrary.IsReadOnly = True
-        Me.ucrInputPreviewLibrary.Location = New System.Drawing.Point(187, 406)
+        Me.ucrInputPreviewLibrary.Location = New System.Drawing.Point(149, 408)
         Me.ucrInputPreviewLibrary.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputPreviewLibrary.Name = "ucrInputPreviewLibrary"
         Me.ucrInputPreviewLibrary.Size = New System.Drawing.Size(548, 90)
@@ -528,7 +528,7 @@ Partial Class dlgScript
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(746, 583)
+        Me.ClientSize = New System.Drawing.Size(714, 583)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.ucrChkEditLibrary)
