@@ -394,18 +394,4 @@ Public Class dlgScript
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrInputRemoveObject_LostFocus(sender As Object, e As EventArgs) Handles ucrInputRemoveObject.LostFocus
-        If String.IsNullOrWhiteSpace(ucrInputRemoveObject.txtInput.Text) Then
-            ucrInputRemoveObject.txtInput.Text = "Object1, Object2, Object2,..."
-            ucrInputRemoveObject.txtInput.ForeColor = SystemColors.GrayText
-        End If
-    End Sub
-
-    Private Sub ucrInputRemoveObject_GotFocus(sender As Object, e As EventArgs) Handles ucrInputRemoveObject.GotFocus
-        If ucrInputRemoveObject.txtInput.Text = "Object1, Object2, Object2,..." Then
-            ucrInputRemoveObject.txtInput.Text = ""
-            ucrInputRemoveObject.ForeColor = SystemColors.GrayText
-        End If
-    End Sub
 End Class

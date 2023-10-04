@@ -943,7 +943,8 @@ Public Class ucrScript
     End Sub
 
     Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
-        Dim unused = sender.dispose()
+        TabControl.SelectedTab.Text = sender.text
+        sender.Dispose()
     End Sub
 
     Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click
