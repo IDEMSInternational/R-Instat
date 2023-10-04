@@ -80,7 +80,7 @@ Public Class dlgScript
         ucrInputSaveDataFrame.SetValidationTypeAsRVariable()
         ucrInputSaveDataFrame.SetLinkedDisplayControl(New List(Of Control)({lblSaveDataFrame}))
 
-        ucrChkEditLibrary.SetText("Modifier la ligne")
+        ucrChkEditLibrary.SetText("Edit")
 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrDataFrameSave)
@@ -421,8 +421,6 @@ Public Class dlgScript
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         TabControl1.SelectedIndex = 0
         ucrChkEditLibrary.Checked = False
-        'ucrComboGetPackage.SetText(" datasets")
-        'ucrInputPreviewLibrary.txtInput.Clear()
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()

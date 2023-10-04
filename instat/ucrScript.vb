@@ -113,6 +113,8 @@ Public Class ucrScript
     Public Sub InsertText(iCurrentPosition As Integer, strText As String)
         strText = strText & Environment.NewLine
         clsScriptActive.InsertText(iCurrentPosition, strText)
+        Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
+        clsScriptActive.GotoPosition(iNextLinePos)
     End Sub
 
     Public Sub RemoveLine(strObjects As String())
@@ -729,11 +731,6 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-    Private Sub AddScript()
-        dlgScript.ShowDialog()
-    End Sub
-
-
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
         'enable and disable menu options based on the active script properties before the user views them
 
@@ -916,10 +913,6 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub cmdAddScript_Click(sender As Object, e As EventArgs) Handles cmdInsertScript.Click
-        AddScript()
-    End Sub
-
     Private Sub TabControl_DoubleClick(sender As Object, e As EventArgs) Handles TabControl.DoubleClick
         Dim rectangle = TabControl.GetTabRect(TabControl.SelectedIndex())
         rectangle = TabControl.RectangleToScreen(rectangle)
@@ -947,7 +940,7 @@ Public Class ucrScript
         sender.Dispose()
     End Sub
 
-    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click
+    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
         dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
         dlgScript.ShowDialog()
     End Sub
