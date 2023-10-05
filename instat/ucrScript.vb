@@ -298,15 +298,10 @@ Public Class ucrScript
         cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
     End Sub
 
-    Private Sub EnableRunButtons(bEnable As Boolean)
-        cmdRunStatementSelection.Enabled = bEnable
-        cmdRunAll.Enabled = bEnable
-    End Sub
-
     ''' <summary>
     ''' Enables or disables all right click menu options
     ''' </summary>
-    ''' <param name="bEnable">If true, enables all right click options,false otherwise</param>
+    ''' <param name="bEnable">If true, enables all right click options, false disables them</param>
     Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
         mnuUndo.Enabled = bEnable
         mnuRedo.Enabled = bEnable
@@ -320,6 +315,16 @@ Public Class ucrScript
         mnuLoadScriptFromFile.Enabled = bEnable
         mnuOpenScriptasFile.Enabled = bEnable
         mnuSaveScript.Enabled = bEnable
+    End Sub
+
+    ''' <summary>
+    ''' Enables or disables the run buttons and all right click menu options
+    ''' </summary>
+    ''' <param name="bEnable">If true, enables buttons/options, false disables them</param>
+    Private Sub EnableRunOptions(bEnable As Boolean)
+        cmdRunStatementSelection.Enabled = bEnable
+        cmdRunAll.Enabled = bEnable
+        EnableRightClickMenuOptions(bEnable)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -613,45 +618,95 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        Dim dctRStatements As OrderedDictionary = New clsRScript(clsScriptActive.Text).dctRStatements
-        If dctRStatements.Count = 0 Then
-            Exit Sub
-        End If
+        'temporarily disable the buttons in case its a long operation
+        EnableRunOptions(False)
 
-        Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
-        Dim iNextStatementPos As Integer = 0
-        Dim clsRStatement As clsRStatement = Nothing
+        Try
+            Dim dctRStatements As OrderedDictionary
+            Try
+                dctRStatements = New clsRScript(clsScriptActive.Text).dctRStatements
+            Catch ex As Exception
+                MsgBox("R script parsing failed with message below. " _
+                   & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method." _
+                   & Environment.NewLine & Environment.NewLine & ex.Message & Environment.NewLine,
+                   MsgBoxStyle.Information, "Could not execute current statement")
+                Exit Sub
+            End Try
 
-        For Each kvpDictEntry As DictionaryEntry In dctRStatements
-            If kvpDictEntry.Key > iCaretPos Then
-                iNextStatementPos = kvpDictEntry.Key
-                Exit For
+            If IsNothing(dctRStatements) OrElse dctRStatements.Count = 0 Then
+                Exit Sub
             End If
-            clsRStatement = kvpDictEntry.Value
-        Next
 
-        frmMain.clsRLink.RunRStatement(clsRStatement)
+            Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+            Dim iNextStatementPos As Integer = 0
+            Dim clsRStatement As clsRStatement = Nothing
 
-        ' if we executed the only/last statement
-        If iNextStatementPos = 0 Then
-            ' if there is no blank line at end of text, then add blank line
-            If Not (clsScriptActive.Text.EndsWith(vbCr) _
-                    OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
-                clsScriptActive.AppendText(vbCrLf)
-            End If
-            iNextStatementPos = clsScriptActive.TextLength
-
-        Else 'else move caret to first non-blank line of next statement
-            For iTextPos As Integer = iNextStatementPos To clsScriptActive.Text.Length - 1
-                Dim chrNext As Char = clsScriptActive.Text.Chars(iTextPos)
-                If chrNext <> vbLf AndAlso chrNext <> vbCr Then
-                    iNextStatementPos = iTextPos
+            For Each kvpDictEntry As DictionaryEntry In dctRStatements
+                If kvpDictEntry.Key > iCaretPos Then
+                    iNextStatementPos = kvpDictEntry.Key
                     Exit For
                 End If
+                clsRStatement = kvpDictEntry.Value
+            Next
+
+            ' if we will execute the only/last statement
+            If iNextStatementPos = 0 Then
+                ' if there is no blank line at end of text, then add blank line
+                If Not (clsScriptActive.Text.EndsWith(vbCr) _
+                    OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
+                    clsScriptActive.AppendText(vbCrLf)
+                End If
+                iNextStatementPos = clsScriptActive.TextLength
+
+            Else 'else move caret to first non-blank line of next statement
+                For iTextPos As Integer = iNextStatementPos To clsScriptActive.Text.Length - 1
+                    Dim chrNext As Char = clsScriptActive.Text.Chars(iTextPos)
+                    If chrNext <> vbLf AndAlso chrNext <> vbCr Then
+                        iNextStatementPos = iTextPos
+                        Exit For
+                    End If
+                Next
+            End If
+
+            clsScriptActive.GotoPosition(iNextStatementPos)
+
+            frmMain.clsRLink.RunRStatement(clsRStatement)
+        Finally
+            EnableRunOptions(True)
+        End Try
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     Executes the <paramref name="strScript"/> R script.
+    ''' </summary>
+    ''' <param name="strScript"> The R script to execute.</param>
+    ''' <param name="strComment">Converted into an R comment and prefixed to the script.</param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub RunScript(strScript As String, strComment As String)
+
+        EnableRunOptions(False) 'temporarily disable the run buttons in case its a long operation
+
+        Dim dctRStatements As OrderedDictionary
+        Try
+            dctRStatements = New clsRScript(frmMain.clsRLink.GetFormattedComment(strComment) _
+                                            & Environment.NewLine & strScript).dctRStatements
+        Catch ex As Exception
+            MsgBox("R script parsing failed with message:" & Environment.NewLine _
+                   & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
+                   & "R-Instat will now attempt to execute the script using a less strict method.",
+                   MsgBoxStyle.Information, "Could Not Parse R Script")
+            frmMain.clsRLink.RunScriptFromWindow(strScript.Trim(vbLf), strComment)
+            dctRStatements = Nothing
+        End Try
+
+        If Not IsNothing(dctRStatements) Then
+            For Each kvpDictEntry As DictionaryEntry In dctRStatements
+                frmMain.clsRLink.RunRStatement(kvpDictEntry.Value)
             Next
         End If
 
-        clsScriptActive.GotoPosition(iNextStatementPos)
+        EnableRunOptions(True)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -724,7 +779,6 @@ Public Class ucrScript
         TabControl.SelectedTab = TabControl.TabPages(iTabNewSelected)
         EnableDisableButtons()
     End Sub
-
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
         'enable and disable menu options based on the active script properties before the user views them
@@ -842,24 +896,15 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
-        EnableRightClickMenuOptions(False)
-        frmMain.clsRLink.RunScriptFromWindow(clsScriptActive.Text.Trim(vbLf), "Code run from Script Window (all text)")
-        EnableRunButtons(True)
-        EnableRightClickMenuOptions(True)
+        RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
-        'temporarily disable the buttons in case its a long operation
-        EnableRunButtons(False)
-        EnableRightClickMenuOptions(False)
         If clsScriptActive.SelectedText.Length > 0 Then
-            frmMain.clsRLink.RunScriptFromWindow(clsScriptActive.SelectedText.Trim(vbLf), "Code run from Script Window (selected text)")
+            RunScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
         Else
             RunCurrentStatement()
         End If
-        EnableRunButtons(True)
-        EnableRightClickMenuOptions(True)
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
@@ -876,7 +921,7 @@ Public Class ucrScript
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBox("You can only undo from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
+            MsgBox("You can only undo from a script tab, Not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
             Exit Sub
         End If
 
@@ -904,7 +949,7 @@ Public Class ucrScript
         Next
 
         If IsNothing(clsScriptActive) Then
-            MsgBox("Developer error: could not find editor window in tab.")
+            MsgBox("Developer error: could Not find editor window in tab.")
         End If
     End Sub
 

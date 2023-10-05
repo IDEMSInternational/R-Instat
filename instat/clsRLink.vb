@@ -733,15 +733,16 @@ Public Class RLink
         frmMain.ucrScriptWindow.LogText(strRStatement.TrimEnd(vbCr, vbLf))
         Try
             Dim strOutput As String = ""
-            Dim bSuccess As Boolean = Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False,
-                                               bShowWaitDialogOverride:=Nothing)
 
             'if not an assignment operation, then capture the output
-            If clsRStatement.clsAssignment Is Nothing AndAlso bSuccess Then
+            If clsRStatement.clsAssignment Is Nothing Then
                 strOutput = GetFileOutput("view_object_data(object = " &
                                           clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False) &
                                           " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            Else
+                Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False,
+                         bShowWaitDialogOverride:=Nothing)
             End If
 
             'log script and output
@@ -759,6 +760,13 @@ Public Class RLink
         frmMain.UpdateAllGrids()
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   TODO.
+    '''             </summary>
+    '''
+    ''' <param name="strScript">  TODO. </param>
+    ''' <param name="strComment">  TODO. </param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub RunScriptFromWindow(strScript As String, strComment As String)
 
         If String.IsNullOrWhiteSpace(strScript) Then
@@ -856,55 +864,6 @@ Public Class RLink
         'log script and output
         Dim strScriptWithComment As String = If(String.IsNullOrEmpty(strComment), strScript, GetFormattedComment(strComment) & Environment.NewLine & strScript)
         frmMain.ucrScriptWindow.LogText(strScriptWithComment & Environment.NewLine)
-
-        ''Prefix comment to script
-        'Dim strScriptWithComment As String = If(String.IsNullOrEmpty(strComment), strScript, GetFormattedComment(strComment) & Environment.NewLine & strScript)
-
-        'frmMain.ucrScriptWindow.LogText(strScriptWithComment & Environment.NewLine)
-
-        'Try
-        '    Dim strOutput As String = ""
-        '    Dim bAsFile As Boolean = True
-        '    Dim bDisplayOutputInExternalViewer As Boolean = False
-
-        '    'exclude lines not needed for execution e.g comments, empty lines.
-        '    Dim arrExecutableRScriptLines() As String = GetRunnableCommandLines(strScript)
-        '    If arrExecutableRScriptLines.Length > 0 Then
-        '        'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
-        '        Dim strLastScript As String = arrExecutableRScriptLines.Last()
-        '        If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") _
-        '                OrElse strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") _
-        '                OrElse strLastScript.StartsWith("view_object_data") Then
-        '            strOutput = GetFileOutput(strScript, False, False, Nothing)
-        '            'if last function is view_object then display in external viewer (maximised)
-        '            bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
-
-        '        ElseIf strLastScript.StartsWith("print") Then
-        '            bAsFile = False
-        '            Evaluate(strScript, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
-        '        Else
-        '            'else if script comes from script window
-        '            Dim bSuccess As Boolean = Evaluate(strScript, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
-
-        '            'if not an assignment operation, then capture the output
-        '            If Not strScript.Contains("<-") AndAlso bSuccess Then
-        '                Dim strScriptAsSingleLine As String = strScript.Replace(vbCrLf, String.Empty)
-        '                strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbCr, String.Empty)
-        '                strScriptAsSingleLine = strScriptAsSingleLine.Replace(vbLf, String.Empty)
-        '                'wrap final command inside view_object_data just incase there is an output object
-        '                strOutput = GetFileOutput("view_object_data(object = " & strScriptAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
-        '            End If
-        '        End If
-        '    End If
-
-
-        '    'log script and output
-        '    clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
-
-        'Catch e As Exception
-        '    MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
-        'End Try
-
     End Sub
 
     '''--------------------------------------------------------------------------------------------
