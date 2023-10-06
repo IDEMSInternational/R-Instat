@@ -782,7 +782,7 @@ Public Class RLink
                 Continue For
             End If
 
-            'remove any comments (character '#' and anything after)
+            'find any comments (character '#' and anything after)
             Dim iCommentPos As Integer = strTrimmedLine.IndexOf("#")
             Select Case iCommentPos
                 Case 0      'a normal comment line (starts with '#')
@@ -841,9 +841,9 @@ Public Class RLink
                     Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
                 End If
 
-                clsOutputLogger.AddOutput(strRStatementComment _
-                        & If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) _
-                        & strRStatement, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+                clsOutputLogger.AddOutput(If(String.IsNullOrEmpty(strRStatementComment), "",
+                        strRStatementComment & Environment.NewLine) & strRStatement,
+                        strOutput, bAsFile, bDisplayOutputInExternalViewer)
                 LogScript(strRStatement, strRStatementComment)
 
             Catch e As Exception
@@ -1515,8 +1515,7 @@ Public Class RLink
 
         Dim strScriptWithComment As String =
                 If(String.IsNullOrWhiteSpace(strComment),
-                    "",
-                    GetFormattedComment(strComment) & Environment.NewLine) &
+                    "", strComment & Environment.NewLine) &
                 If(String.IsNullOrWhiteSpace(strScript),
                     "",
                     strScript & Environment.NewLine)
