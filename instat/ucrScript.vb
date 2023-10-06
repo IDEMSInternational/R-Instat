@@ -626,9 +626,9 @@ Public Class ucrScript
             Try
                 dctRStatements = New clsRScript(clsScriptActive.Text).dctRStatements
             Catch ex As Exception
-                MsgBox("R script parsing failed with message below. " _
-                   & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method." _
-                   & Environment.NewLine & Environment.NewLine & ex.Message & Environment.NewLine,
+                MsgBox("R script parsing failed with message:" & Environment.NewLine _
+                   & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
+                   & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method.",
                    MsgBoxStyle.Information, "Could not execute current statement")
                 Exit Sub
             End Try
@@ -671,6 +671,7 @@ Public Class ucrScript
             clsScriptActive.GotoPosition(iNextStatementPos)
 
             frmMain.clsRLink.RunRStatement(clsRStatement)
+            frmMain.UpdateAllGrids()
         Finally
             EnableRunOptions(True)
         End Try
@@ -704,6 +705,7 @@ Public Class ucrScript
             For Each kvpDictEntry As DictionaryEntry In dctRStatements
                 frmMain.clsRLink.RunRStatement(kvpDictEntry.Value)
             Next
+            frmMain.UpdateAllGrids()
         End If
 
         EnableRunOptions(True)
@@ -949,7 +951,7 @@ Public Class ucrScript
         Next
 
         If IsNothing(clsScriptActive) Then
-            MsgBox("Developer error: could Not find editor window in tab.")
+            MsgBox("Developer error: could not find editor window in tab.")
         End If
     End Sub
 

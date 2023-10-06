@@ -730,7 +730,6 @@ Public Class RLink
             Exit Sub
         End If
 
-        frmMain.ucrScriptWindow.LogText(strRStatement.TrimEnd(vbCr, vbLf))
         Try
             Dim strOutput As String = ""
 
@@ -745,9 +744,9 @@ Public Class RLink
                          bShowWaitDialogOverride:=Nothing)
             End If
 
-            'log script and output
             clsOutputLogger.AddOutput(strRStatement, strOutput, bAsFile:=True,
                                       bDisplayOutputInExternalViewer:=False)
+            LogScript(strRStatement.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine &
@@ -755,9 +754,6 @@ Public Class RLink
                    Environment.NewLine & strRStatement, MsgBoxStyle.Critical,
                    "Error running R command")
         End Try
-
-        AppendToAutoSaveLog(strRStatement)
-        frmMain.UpdateAllGrids()
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -845,7 +841,10 @@ Public Class RLink
                     Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
                 End If
 
-                clsOutputLogger.AddOutput(strRStatementComment & If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) & strRStatement, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+                clsOutputLogger.AddOutput(strRStatementComment _
+                        & If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) _
+                        & strRStatement, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+                LogScript(strRStatement, strRStatementComment)
 
             Catch e As Exception
                 MsgBox(e.Message & Environment.NewLine &
@@ -854,16 +853,11 @@ Public Class RLink
                        strRStatement, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
 
-            AppendToAutoSaveLog(strRStatementComment & If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) & strRStatement & Environment.NewLine)
-            frmMain.UpdateAllGrids()
-
             strRStatement = ""
             strRStatementComment = ""
         Next
 
-        'log script and output
-        Dim strScriptWithComment As String = If(String.IsNullOrEmpty(strComment), strScript, GetFormattedComment(strComment) & Environment.NewLine & strScript)
-        frmMain.ucrScriptWindow.LogText(strScriptWithComment & Environment.NewLine)
+        frmMain.UpdateAllGrids()
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -1515,6 +1509,24 @@ Public Class RLink
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub LogScript(strScript As String, Optional strComment As String = "")
+
+        Dim strScriptWithComment As String =
+                If(String.IsNullOrWhiteSpace(strComment),
+                    "",
+                    GetFormattedComment(strComment) & Environment.NewLine) &
+                If(String.IsNullOrWhiteSpace(strScript),
+                    "",
+                    strScript & Environment.NewLine)
+
+        If String.IsNullOrWhiteSpace(strScriptWithComment) Then
+            Exit Sub
+        End If
+
+        frmMain.ucrScriptWindow.LogText(strScriptWithComment)
+        AppendToAutoSaveLog(strScriptWithComment)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
