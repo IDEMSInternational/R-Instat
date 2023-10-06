@@ -923,7 +923,7 @@ Public Class ucrScript
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         If TabControl.SelectedIndex = iTabIndexLog Then
-            MsgBox("You can only undo from a script tab, Not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
+            MsgBox("You can only undo from a script tab, not the log tab.", MsgBoxStyle.Exclamation, "Undo log tab")
             Exit Sub
         End If
 
