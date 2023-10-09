@@ -25,6 +25,7 @@ Public Class dlgSummaryTables
     Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction, clsConcFunction As New RFunction
     Private bRCodeSet As Boolean = True
     Private clsStubHeadFunction, clsPivotWiderFunction As New RFunction
+    Private iUcrBaseXLocation, iDialogueXsize As Integer
 
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
             clsTabFootnoteSubtitleFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
@@ -53,6 +54,9 @@ Public Class dlgSummaryTables
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        iUcrBaseXLocation = ucrBase.Location.X
+        iDialogueXsize = Me.Height
 
         'summary_name = NA - 8
         ucrSelectorSummaryTables.SetParameter(New RParameter("data_name", 0))
@@ -182,7 +186,6 @@ Public Class dlgSummaryTables
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrReorderSummary.bDataIsSummaries = True
-        DialogueSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -433,7 +436,6 @@ Public Class dlgSummaryTables
         ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged,
         ucrPnlSummaryFrequencyTables.ControlContentsChanged, ucrPnlColumnFactor.ControlContentsChanged, ucrReceiverColumnFactor.ControlContentsChanged
         TestOKEnabled()
-        DialogueSize()
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged,
@@ -442,12 +444,14 @@ Public Class dlgSummaryTables
         cmdSummaries.Visible = rdoSummaryTable.Checked
         cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
         If rdoFrequencyTable.Checked Then
+            grpDisplay.Visible = False
             rdoVariable.Visible = False
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
             ucrSaveTable.SetPrefix("frequency_table")
             rdoSummaryVariable.Text = "Summary-Variable"
         Else
+            grpDisplay.Visible = True
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=1)
             ucrSaveTable.SetPrefix("summary_table")
@@ -497,6 +501,7 @@ Public Class dlgSummaryTables
             End If
         End If
         AddingColumnFactor()
+        DialogueSize()
     End Sub
 
     Private Sub FillListView()
@@ -535,21 +540,22 @@ Public Class dlgSummaryTables
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If
+        DialogueSize()
     End Sub
 
     Private Sub DialogueSize()
         If rdoFrequencyTable.Checked Then
-            Me.Size = New Size(464, 409)
+            Me.Size = New Size(505, iDialogueXsize * 0.75)
             Me.ucrNudSigFigs.Location = New Point(119, 304)
             Me.lblSigFigs.Location = New Point(7, 307)
             Me.ucrSaveTable.Location = New Point(10, 340)
-            Me.ucrBase.Location = New Point(10, 370)
+            Me.ucrBase.Location = New Point(iUcrBaseXLocation, 370)
         Else
-            Me.Size = New Size(505, 620)
+            Me.Size = New Size(505, iDialogueXsize)
             Me.ucrNudSigFigs.Location = New Point(119, 356)
             Me.lblSigFigs.Location = New Point(7, 359)
             Me.ucrSaveTable.Location = New Point(10, 495)
-            Me.ucrBase.Location = New Point(10, 524)
+            Me.ucrBase.Location = New Point(iUcrBaseXLocation, 524)
         End If
     End Sub
 
@@ -579,4 +585,5 @@ Public Class dlgSummaryTables
             End If
         End If
     End Sub
+
 End Class
