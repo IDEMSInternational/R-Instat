@@ -320,7 +320,7 @@ Public Class ucrScript
     ''' <summary>
     ''' Enables or disables the run buttons and all right click menu options
     ''' </summary>
-    ''' <param name="bEnable">If true, enables buttons/options, false disables them</param>
+    ''' <param name="bEnable">If true, enables buttons/options, else disables them</param>
     Private Sub EnableRunOptions(bEnable As Boolean)
         cmdRunStatementSelection.Enabled = bEnable
         cmdRunAll.Enabled = bEnable
@@ -478,7 +478,7 @@ Public Class ucrScript
 
     Private Function IsBracket(iNewChar As Integer) As Boolean
         'the `Chr()` function may throw an exception for higher value integers,
-        '    so check value in a reasonable range. Note: 40 = `(` and 125 = `}`
+        '    so check value is in a reasonable range. Note: 40 = `(` and 125 = `}`
         If iNewChar < 40 OrElse iNewChar > 125 Then
             Return False
         End If
@@ -629,7 +629,7 @@ Public Class ucrScript
                 MsgBox("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
                    & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method.",
-                   MsgBoxStyle.Information, "Could not execute current statement")
+                   MsgBoxStyle.Information, "Could not parse R script")
                 Exit Sub
             End Try
 
@@ -649,7 +649,7 @@ Public Class ucrScript
                 clsRStatement = kvpDictEntry.Value
             Next
 
-            ' if we will execute the only/last statement
+            'if we will execute the only/last statement
             If iNextStatementPos = 0 Then
                 ' if there is no blank line at end of text, then add blank line
                 If Not (clsScriptActive.Text.EndsWith(vbCr) _
@@ -661,7 +661,7 @@ Public Class ucrScript
             Else 'else move caret to first non-blank line of next statement
                 For iTextPos As Integer = iNextStatementPos To clsScriptActive.Text.Length - 1
                     Dim chrNext As Char = clsScriptActive.Text.Chars(iTextPos)
-                    If chrNext <> vbLf AndAlso chrNext <> vbCr Then
+                    If chrNext <> vbLf AndAlso chrNext <> vbCr AndAlso Not Char.IsWhiteSpace(chrNext) Then
                         iNextStatementPos = iTextPos
                         Exit For
                     End If
