@@ -716,10 +716,10 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO.
-    '''             </summary>
+    ''' <summary>   Executes <paramref name="clsRStatement"/>. If it is not an assignment 
+    '''             statement, then attempts to display the output.</summary>
     '''
-    ''' <param name="clsRStatement">  TODO. </param>
+    ''' <param name="clsRStatement">  The R code statement to execute </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RunRStatement(clsRStatement As clsRStatement)
 
@@ -757,11 +757,19 @@ Public Class RLink
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO.
-    '''             </summary>
-    '''
-    ''' <param name="strScript">  TODO. </param>
-    ''' <param name="strComment">  TODO. </param>
+    ''' <summary> This method executes the <paramref name="strScript"/> R script and displays 
+    '''           the output as text or graph (determined by <paramref name="strScript"/>).
+    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
+    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more brackets/
+    '''           quotations that have not been closed.
+    '''           This function is named '...FromWindow' because it's designed to execute scripts 
+    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
+    '''           may contain R commands split over multiple lines to make the commands more 
+    '''           readable.</para><para>
+    '''           </para>
+    ''' </summary>
+    ''' <param name="strScript">    The R script to execute.</param>
+    ''' <param name="strComment">   The comment to prefix to the script.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RunScriptFromWindow(strScript As String, strComment As String)
 
@@ -798,7 +806,7 @@ Public Class RLink
             'else append line of script to command
             strRStatement &= If(String.IsNullOrEmpty(strRStatement), "", Environment.NewLine) & strTrimmedLine
 
-            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
+            'if line ends in a '+', ',', or '%>%'; or there are open brackets; or open quotations, 
             '    then assume command is not complete
             Dim cLastChar As Char = strTrimmedLine.Last
             Dim strLast3Chars As String = ""
