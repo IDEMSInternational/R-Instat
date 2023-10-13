@@ -218,8 +218,6 @@ Public Class frmMain
         '---------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
-
-        CheckForUpdates()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -2546,4 +2544,7 @@ Public Class frmMain
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
+    Private Sub mnuToolsCheckForUpdates_Click(sender As Object, e As EventArgs) Handles mnuToolsCheckForUpdates.Click
+        CheckForUpdates()
+    End Sub
 End Class
