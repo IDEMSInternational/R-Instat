@@ -35,7 +35,7 @@ Public Class ucrReceiverSingle
         strCurrDataType = ""
     End Sub
 
-    Public Overrides Sub AddSelected()
+    Public Overrides Sub AddSelectedSelectorVariables()
         'Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
 
         If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
@@ -53,16 +53,6 @@ Public Class ucrReceiverSingle
         Dim expColumnType As SymbolicExpression
         Dim bRemove As Boolean = False
 
-        'Would prefer to have remove selected but that will first clear the receiver
-        'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
-        'Because it modifies the list of parameters it is looping through when clearing first, crashing
-        'Below is the part from RemoveSelected() that is needed
-        'This is only an issue with single receiver
-        'If RemoveSelected() later contains other things, this may need to be updated.
-        'RemoveSelected()
-        If Selector IsNot Nothing Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrame)
-        End If
         MyBase.Add(strItem, strDataFrame)
 
         strCurrentItemType = If(bTypeSet, strType, Selector?.GetItemType())
@@ -118,9 +108,6 @@ Public Class ucrReceiverSingle
             End If
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
-            If Selector IsNot Nothing Then
-                Selector.AddToVariablesList(strItem, strDataFrameName)
-            End If
             If bRemove Then
                 RemoveSelected()
             End If
@@ -130,9 +117,6 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub RemoveSelected()
         If txtReceiverSingle.Enabled Then
-            If Selector IsNot Nothing Then
-                Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrameName)
-            End If
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
@@ -235,21 +219,15 @@ Public Class ucrReceiverSingle
     End Function
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Dim strTemp As String = ""
-        If txtReceiverSingle.Text <> "" Then
-            If bWithQuotes Then
-                strTemp = Chr(34) & txtReceiverSingle.Text & Chr(34)
-            Else
-                strTemp = txtReceiverSingle.Text
-            End If
-        End If
-        Return strTemp
+        Return If(bWithQuotes, Chr(34) & txtReceiverSingle.Text & Chr(34), txtReceiverSingle.Text)
     End Function
 
     Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim arrTemp As String() = Nothing
-        arrTemp = {GetVariableNames()}
-        Return arrTemp
+        If bWithQuotes Then
+            Return {strQuotes & txtReceiverSingle.Text & strQuotes}
+        Else
+            Return {txtReceiverSingle.Text}
+        End If
     End Function
 
     Public Function GetDataName() As String
@@ -281,7 +259,6 @@ Public Class ucrReceiverSingle
         If bDisableReceiver Then
             Add("variable", "")
             Me.Enabled = False
-            Selector.RemoveFromVariablesList("variable")
         Else
             Me.Enabled = True
             If txtReceiverSingle.Text = "variable" Then

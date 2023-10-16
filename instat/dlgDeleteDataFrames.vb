@@ -31,13 +31,12 @@ Public Class dlgDeleteDataFrames
             SetDefaults()
         End If
         ReopenDialog()
+        SetRCodeForControls(bReset)
         If bUseSelectedDataFrame Then
             SetDefaultDataFrame()
         End If
-        SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
-        CountLevels()
         autoTranslate(Me)
     End Sub
 
@@ -64,7 +63,7 @@ Public Class dlgDeleteDataFrames
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverDataFrames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -110,11 +109,5 @@ Public Class dlgDeleteDataFrames
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDataFrames.ControlContentsChanged
         TestOKEnabled()
-        CountLevels()
-    End Sub
-
-    Private Sub CountLevels()
-        lblDeleteNumber.Text = " " & ucrReceiverDataFrames.Count
-        lblDeleteNumber.Visible = ucrReceiverDataFrames.Count > 0
     End Sub
 End Class
