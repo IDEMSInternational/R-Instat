@@ -228,13 +228,18 @@ Public Class frmMain
         Try
             ' Download the version information file from the website
             strLatestVersion = webClient.DownloadString("https://r-instat.org/version.txt")
+            Dim strCurrVersion = My.Application.Info.Version.ToString()
 
             ' Compare with the current version of your app
-            If strLatestVersion > My.Application.Info.Version.ToString() AndAlso
-                Not clsInstatOptions.bRemindLaterOption Then
+            If strLatestVersion > strCurrVersion Then
                 ' New version available, show a notification
-                Dim result As DialogResult = MessageBox.Show("A new version is available! Visit the website to download it. Remind me later?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                clsInstatOptions.SetRemindLaterOption(result = DialogResult.Yes)
+                Dim result As DialogResult = MessageBox.Show("R-Instat " & strLatestVersion & " is now available -- you have " & strCurrVersion & Environment.NewLine & "Do you want to dowload it?", "A new version of R-Instat Available!",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                If result = DialogResult.Yes Then
+                    Dim myProcess = New System.Diagnostics.Process
+                    myProcess.StartInfo.FileName = "https://r-instat.org/"
+                    myProcess.Start()
+                End If
             End If
         Catch ex As Exception
             MsgBox("Network issues or website not accessible")
