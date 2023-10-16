@@ -1425,9 +1425,9 @@ climatic_missing <- function(data, date, elements = ..., stations,
   
   
 climatic_details <- function(data, date, elements = ..., stations,
-                 order = FALSE,
-                 day = TRUE,
-                 month = FALSE,
+                 order = TRUE,
+                 day = FALSE,
+                 month = TRUE,
                  year = FALSE, level = FALSE){
   
   
@@ -2616,8 +2616,9 @@ cbind_unique <- function(x, y, cols){
 }
 
 #object is the object to be displayed
-#object_format is the display format
-view_object <- function(object, object_format) {
+#object_format is the display format. If supplied, then returns file name of the object
+#if not then it prints the object
+view_object_data <- function(object, object_format = NULL) {
   file_name <- ""
   if (identical(object_format, "image")) {
     file_name <- view_graph_object(object)
@@ -2631,11 +2632,23 @@ view_object <- function(object, object_format) {
   return(file_name)
 }
 
+view_object <- function(data_book_object) {
+  return(
+    view_object_data(
+      object = data_book_object$object,
+      object_format = data_book_object$object_format
+    )
+  )
+}
+
 #displays the graph object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
 #and returns the file path.
 view_graph_object <- function(graph_object){
+  #get object class names
+  object_class_names <- class(graph_object)
+  
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
@@ -2643,32 +2656,34 @@ view_graph_object <- function(graph_object){
     #TODO. When print command is called in R-Studio, a temp file is automatically created
     #Investigate how that can be done in R-Instat
     #as of 07/09/2022 just return the object. Important for RStudio to display the object
+    if ("grob" %in% object_class_names){
+      #for grob objects draw them first
+      grid::grid.draw(graph_object)
+    }
     return(graph_object)
   }
   
-  #get object class names
-  object_class_names <- class(graph_object)
+ 
   #get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewgraph", fileext = ".png")
   
-  #save the object as a html file depending on the object type
+  #save the object as a graph file depending on the object type
   grDevices::png(file = file_name, width = 4000, height = 4000, res = 500)
-  print(graph_object)
+  if ("grob" %in% object_class_names) {
+    grid::grid.draw(graph_object)
+  }else{
+    print(graph_object)
+  }
   dev.off() #todo. use graphics.off() which one is better?
+
   
   #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
-  #investigate if thatwill that help with resolution and scaling?
-  
+  #investigate if it will help with resolution and scaling?
   # if ("ggplot" %in% object_class_names) {
-  #   
   # } else if ("ggmultiplot" %in% object_class_names) {
-  #   
   # } else if ("openair" %in% object_class_names) {
-  #   
   # } else if ("ggsurvplot" %in% object_class_names) {
-  #   
   # } else if ("recordedplot" %in% object_class_names) {
-  #   
   # }
   
   message("R viewer not detected. File saved in location ", file_name)
@@ -2691,12 +2706,13 @@ view_text_object <- function(text_object){
     return(utils::capture.output(text_object))
   }
   
-  #get object class names
-  object_class_names <- class(text_object)
+  
   #get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewtext", fileext = ".txt")
   
   #todo. should we use respective package "convenience" functions to save the objects as text files depending on the class names
+  #get object class names
+  #object_class_names <- class(text_object)
   
   #save the object as a text file 
   utils::capture.output(text_object, file = file_name)
@@ -2750,3 +2766,197 @@ view_html_object <- function(html_object){
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
 } 
+
+#tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
+#applicable to base graphs only
+check_graph <- function(graph_object){
+ 
+  out <- graph_object
+  
+  if (is.null(out)) {
+    out <- tryCatch({
+      message("Recording plot")
+      recordPlot()
+    },
+    error = function(cond) {
+      message("Graph object does not exist:")
+      message(cond)
+      # Choose a return value in case of error
+      return(NULL)
+    },
+    warning = function(cond) {
+      message("Warning message:")
+      message(cond)
+      return(NULL)
+    },
+    finally = {
+      message("Plot recorded")
+    })
+  }
+  
+  return(out)
+} 
+
+
+get_data_book_output_object_names <- function(output_object_list,
+                                              object_type_label = NULL, 
+                                              excluded_items = c(), 
+                                              as_list = FALSE, 
+                                              list_label = NULL){
+  
+  if(is.null(object_type_label)){
+    out <- names(output_object_list)
+  }else{ 
+    out <- names(output_object_list)[sapply(output_object_list, function(x) any( identical(x$object_type_label, object_type_label) ))]
+  }
+  
+  if(length(out) == 0){
+    return(out)
+  } 
+  
+  if(length(excluded_items) > 0) {
+    #get indices of items to exclude
+    excluded_indices <- which(out %in% excluded_items)
+    
+    #remove the excluded items from the list
+    if(length(excluded_indices) > 0){
+      out <- out[-excluded_indices]
+    }
+    
+  }
+  
+  if(as_list) {
+    #convert the character vector list
+    lst <- list()
+    if(!is.null(list_label)){
+      lst[[list_label]] <- out
+    }else{
+      lst <- as.list(out)
+    }
+   
+    return(lst)
+  }else{
+    #return as a character vector
+    return(out)
+  }
+  
+}
+
+get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE) 
+{   
+  oneLink <- function(s) {
+    if (length(s) == 0L) 
+      return(character(0L))
+    title <- s[, "Title"]
+    if (port > 0L) 
+      prefix <- sprintf("/library/%s/doc", pkg)
+    else prefix <- sprintf("file://%s/doc", s[, "Dir"])
+    src <- s[, "File"]
+    pdf <- s[, "PDF"]
+    rcode <- s[, "R"]
+    pdfext <- sub("^.*\\.", "", pdf)
+    sprintf("  <li>%s  -  \n    %s  \n    %s  \n    %s \n  </li>\n", 
+            title, ifelse(nzchar(pdf), sprintf("<a href='%s/%s'>%s</a>&nbsp;", 
+                                               prefix, pdf, toupper(pdfext)), ""), sprintf("<a href='%s/%s'>source</a>&nbsp;", 
+                                                                                           prefix, src), ifelse(nzchar(rcode), sprintf("<a href='%s/%s'>R code</a>&nbsp;", 
+                                                                                                                                       prefix, rcode), ""))
+  }
+  
+  port <- tools::startDynamicHelp(NA)
+  file <- tempfile("Rvig.", fileext = ".html")
+  print(file)
+  sink(file = file, type = "output")
+  vinfo <- tools::getVignetteInfo(package, lib.loc, all)
+  pkgs <- unique(vinfo[, "Package"])
+  db <- lapply(pkgs, function(p) vinfo[vinfo[, "Package"] == 
+                                         p, , drop = FALSE])
+  names(db) <- pkgs
+  attr(db, "call") <- sys.call()
+  attr(db, "footer") <- if (all) 
+    ""
+  else sprintf(gettext("Use <code> %s </code> \n to list the vignettes in all <strong>available</strong> packages."), 
+               "browseVignettes(all = TRUE)")
+  if (port > 0L) 
+    css_file <- "/doc/html/R.css"
+  else css_file <- file.path(R.home("doc"), "html", 
+                             "R.css")
+  cat(sprintf("<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>\n<html>\n<head>\n<title>R Vignettes</title>\n<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes' />\n<link rel='stylesheet' type='text/css' href='%s'>\n</head><body><div class='container'>\n", 
+              css_file))
+  
+  cat(sprintf("<center><h3>Vignettes found by <code><q>%s</q></code></h3></center>", 
+              deparse1(attr(db, "call"))))
+  cat("<div class=\"vignettes\">")
+  for (pkg in names(db)) {
+    cat(sprintf("<h4>Vignettes in package <code>%s</code></h4>\n", 
+                pkg))
+    cat("<ul>\n")
+    links <- oneLink(db[[pkg]])
+    cat(paste(links), collapse = "\n")
+    cat("\n</ul>\n")
+  }
+  cat("</div>")
+  sink()
+  if (port > 0L){
+    return(sprintf("http://127.0.0.1:%d/session/%s", 
+                   port, basename(file)))}
+  else return(sprintf("file://%s", file))
+}
+
+# for issue 8342 - adding in a count of the number of elements that have missing values by period (and station)
+cumulative_inventory <- function(data, station = NULL, from, to){
+  if (is.null(station)){
+    data <- data %>%
+      dplyr::group_by(.data[[from]], .data[[to]]) %>%
+      dplyr::mutate(cum=dplyr::n())
+    data <- data %>%
+      dplyr::group_by(.data[[from]]) %>%
+      dplyr::mutate(cum1 = dplyr::n()) %>% 
+      dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
+                                  yes = cum,  
+                                  no = ifelse(cum == max(cum),
+                                              cum,
+                                              max(cum) + 0.5)))
+  } else {
+      data <- data %>%
+        dplyr::group_by(.data[[station]], .data[[from]], .data[[to]]) %>%
+        dplyr::mutate(cum=dplyr::n())
+      data <- data %>%
+        dplyr::group_by(.data[[station]], .data[[from]]) %>%
+        dplyr::mutate(cum1 = dplyr::n()) %>% 
+        dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
+                                    yes = cum,  
+                                    no = ifelse(cum == max(cum),
+                                                cum,
+                                                max(cum) + 0.5)))
+    }
+    return(data)
+}
+
+getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
+  if(use_regex){
+    # Find the rows that match the search text using regex
+    matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
+  }else if (is.na(searchText)){
+    matchingRows <- apply(data[, column, drop = FALSE], 1, function(row) any(is.na(row)))
+  }else{
+    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
+  }
+  # Get the row headers where the search text is found
+  rowHeaders <- rownames(data)[matchingRows]
+  
+  # Return the row headers
+  return(rowHeaders)
+}
+
+# Custom function to convert character to list of numeric vector
+convert_to_list <- function(x) {
+  if (grepl("^c\\(", x)) {
+    x <- gsub("^c\\(|\\)$", "", x)  # Remove 'c(' and ')'
+    return(as.numeric(unlist(strsplit(x, ","))))
+  } else if (grepl(":", x)) {
+    x <- gsub(":", ",", x, fixed = TRUE)  # Replace ':' with ','
+    return(as.numeric(unlist(strsplit(x, ","))))
+  } else {
+    return(as.numeric(x))
+  }
+}

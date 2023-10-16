@@ -46,9 +46,9 @@ Public Class dlgRandomSample
         ucrNudNumberOfSamples.SetParameter(New RParameter("n", 0))
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
 
-        ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrSampleSize.SetDataFrameSelector(ucrDataFrameRandomSamples)
 
-        ucrSelectorRandomSamples.bUseCurrentFilter = False
+        ucrDataFrameRandomSamples.bUseCurrentFilter = False
 
         ucrChkSetSeed.SetText("Set Seed")
         ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
@@ -78,7 +78,7 @@ Public Class dlgRandomSample
         ttRngKind.SetToolTip(ucrChkRngKind.chkCheck, "Chooses a different Random Number Generator. Can usually be ignored.")
 
         ucrSaveRandomSample.SetSaveTypeAsColumn()
-        ucrSaveRandomSample.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrSaveRandomSample.SetDataFrameSelector(ucrDataFrameRandomSamples)
         ucrSaveRandomSample.SetIsComboBox()
     End Sub
 
@@ -89,7 +89,7 @@ Public Class dlgRandomSample
         clsRNGKindFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrSelectorRandomSamples.Reset()
+        ucrDataFrameRandomSamples.Reset()
         ucrSaveRandomSample.Reset()
         SetNewColumName()
 
@@ -107,8 +107,12 @@ Public Class dlgRandomSample
 
         clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
 
+        clsMultipleSamplesFunction.SetAssignToColumnObject(ucrSaveRandomSample.GetText(),
+                                                    ucrSaveRandomSample.GetText,
+                                                    ucrDataFrameRandomSamples.cboAvailableDataFrames.Text,
+                                                    bAssignToIsPrefix:=True)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText, bAssignToIsPrefix:=True)
         SetDataFrameAndDistributionParameters()
     End Sub
 
@@ -158,10 +162,10 @@ Public Class dlgRandomSample
 
     Private Sub SetDataFrameAndDistributionParameters()
         If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
-            clsDistributionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("nn", ucrDataFrameRandomSamples.iDataFrameLength)
         Else
             clsDistributionFunction.RemoveParameterByName("nn")
-            clsDistributionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("n", ucrDataFrameRandomSamples.iDataFrameLength)
         End If
     End Sub
 
@@ -174,13 +178,13 @@ Public Class dlgRandomSample
         SetNewColumName()
     End Sub
 
-    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged,
+    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrDataFrameRandomSamples.ControlContentsChanged,
         ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrInputRngKind.ControlContentsChanged,
         ucrChkRngKind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
+    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameRandomSamples.ControlValueChanged
         SetDataFrameAndDistributionParameters()
     End Sub
 

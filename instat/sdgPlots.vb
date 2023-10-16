@@ -38,6 +38,11 @@ Public Class sdgPlots
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsPlotElementTitleFunction As New RFunction
+    Private clsPlotElementSubTitleFunction As New RFunction
+    Private clsPlotElementCaptionFunction As New RFunction
+    Private clsPlotElementTagFunction As New RFunction
+    Private clsPlotLegendTitleFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -123,6 +128,10 @@ Public Class sdgPlots
         ucrChkIncludeFacets.AddParameterPresentCondition(True, "facets", True)
         ucrChkIncludeFacets.AddParameterPresentCondition(False, "facets", False)
 
+        ucrChkIncludeTitles.SetText("Include Titles")
+        ucrChkIncludeTitles.AddParameterPresentCondition(True, "titles", True)
+        ucrChkIncludeTitles.AddParameterPresentCondition(False, "titles", False)
+
         ucrChkMargin.SetText("Margins")
         ucrChkMargin.SetParameter(New RParameter("margins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -193,6 +202,61 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
         ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+        ucrInputTag.SetParameter(New RParameter("tag"))
+        ucrInputLegendTitle.SetParameter(New RParameter("colour"))
+
+        ucrInputGraphTitle.SetLinkedDisplayControl(lblTitle)
+        ucrInputGraphSubTitle.SetLinkedDisplayControl(lblSubTitle)
+        ucrInputGraphCaption.SetLinkedDisplayControl(lblCaption)
+
+        ucrNudTitleSize.SetParameter(New RParameter("size"))
+        ucrNudTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudTitleSize.SetRDefault(20)
+        ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
+
+        ucrNudSubTitleSize.SetParameter(New RParameter("size"))
+        ucrNudSubTitleSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudSubTitleSize.SetRDefault(15)
+        ucrNudSubTitleSize.SetLinkedDisplayControl(lblSubTitleSize)
+
+        ucrNudCaptionSize.SetParameter(New RParameter("size"))
+        ucrNudCaptionSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudCaptionSize.SetRDefault(8)
+        ucrNudCaptionSize.SetLinkedDisplayControl(lblCaptionSize)
+
+        ucrNudTagSize.SetParameter(New RParameter("size"))
+        ucrNudTagSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudTagSize.SetRDefault(20)
+
+        ucrNudLegendSize.SetParameter(New RParameter("size"))
+        ucrNudLegendSize.SetMinMax(0, Integer.MaxValue)
+        ucrNudLegendSize.SetRDefault(18)
+
+        ucrChkTag.SetText("Tag")
+        ucrChkTag.AddToLinkedControls(ucrNudTagSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTag.AddToLinkedControls(ucrInputTag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="A")
+        ucrChkTag.AddParameterPresentCondition(True, "tag", True)
+        ucrChkTag.AddParameterPresentCondition(False, "tag", False)
+
+        ucrChkNewLegend.SetText("New Legend ")
+        ucrChkNewLegend.AddToLinkedControls(ucrInputLegendTitle, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="new_title")
+        ucrChkNewLegend.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkNewLegend.AddParameterPresentCondition(True, {"colour", "fill"}, True)
+        ucrChkNewLegend.AddParameterPresentCondition(False, {"colour", "fill"}, False)
+
+        ucrInputTag.SetLinkedDisplayControl(lblTag)
+        ucrInputLegendTitle.SetLinkedDisplayControl(lblLegendTitle)
+        ucrNudTagSize.SetLinkedDisplayControl(lblTagSize)
+        ucrNudLegendSize.SetLinkedDisplayControl(lblLegendSize)
+
+        ucrChkIncludeTitles.AddToLinkedControls(ucrChkTag, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrChkNewLegend, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphTitle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphSubTitle, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrInputGraphCaption, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrNudTitleSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrNudSubTitleSize, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.AddToLinkedControls(ucrNudCaptionSize, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'TODO what about the subtitle argument of labs?
         'TODO what about the caption argument of labs?
@@ -576,6 +640,8 @@ Public Class sdgPlots
         ucrChkAddColour.AddParameterPresentCondition(True, "scale_colour", True)
         ucrChkAddColour.AddParameterPresentCondition(False, "scale_colour", False)
 
+        ttCaptionTitle.SetToolTip(ucrInputGraphCaption.txtInput, "Type \n where you would like a new-line")
+
         grpFillScale.Visible = False
         grpColourScale.Visible = False
     End Sub
@@ -621,8 +687,25 @@ Public Class sdgPlots
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElemetText)
+        dctThemeFunctions.TryGetValue("title", clsPlotElementTitleFunction)
+        dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction)
+        dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction)
+        dctThemeFunctions.TryGetValue("tag", clsPlotElementTagFunction)
+        dctThemeFunctions.TryGetValue("colour", clsPlotLegendTitleFunction)
+
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
 
+        If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction) Then
+            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
+        End If
+
+        If dctThemeFunctions.TryGetValue("title", clsPlotElementTitleFunction) Then
+            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
+        End If
+
+        If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction) Then
+            clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
+        End If
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
@@ -649,10 +732,17 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkTag.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        If bReset Then
+            ucrChkNewLegend.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkIncludeTitles.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        End If
+
         ucrInputThemes.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
-        'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
         ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
@@ -710,6 +800,15 @@ Public Class sdgPlots
         ucrChkFillDiscrete.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColourDiscrete.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        'labels
+        If bReset Then
+            ucrNudTitleSize.SetRCode(clsPlotElementTitleFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudSubTitleSize.SetRCode(clsPlotElementSubTitleFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudCaptionSize.SetRCode(clsPlotElementCaptionFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudLegendSize.SetRCode(clsPlotLegendTitleFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudTagSize.SetRCode(clsPlotElementTagFunction, bReset, bCloneIfNeeded:=True)
+        End If
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -921,15 +1020,22 @@ Public Class sdgPlots
 
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
-            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() Then
-                clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+            If ucrChkIncludeTitles.Checked Then
+                clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+                If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
+                    clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+                Else
+                    clsBaseOperator.RemoveParameterByName("labs")
+                End If
             Else
                 clsBaseOperator.RemoveParameterByName("labs")
+                clsBaseOperator.RemoveParameterByName("theme")
             End If
         End If
     End Sub
 
-    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
+        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
@@ -995,6 +1101,7 @@ Public Class sdgPlots
         End If
         AddRemoveTheme()
     End Sub
+
     Private Sub AddRemoveXElementTitle()
         If clsXElementTitle.iParameterCount > 0 Then
             clsThemeFunction.AddParameter("axis.title.x", clsRFunctionParameter:=clsXElementTitle)
@@ -1155,5 +1262,51 @@ Public Class sdgPlots
             Case Else
                 clsAnnotateFunction.RemoveParameterByName("label")
         End Select
+    End Sub
+
+    Private Sub ucrChkTag_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTag.ControlValueChanged, ucrInputTag.ControlValueChanged
+        If ucrChkTag.Checked AndAlso Not ucrInputTag.IsEmpty Then
+            clsLabsFunction.AddParameter("tag", Chr(34) & ucrInputTag.GetText & Chr(34))
+            clsThemeFunction.AddParameter("plot.tag", clsRFunctionParameter:=clsPlotElementTagFunction)
+        Else
+            clsLabsFunction.RemoveParameterByName("tag")
+            clsThemeFunction.RemoveParameterByName("plot.tag")
+        End If
+    End Sub
+
+    Private Sub ucrChkNewLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewLegend.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged
+        If ucrChkNewLegend.Checked AndAlso Not ucrInputLegendTitle.IsEmpty Then
+            clsLabsFunction.AddParameter("colour", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
+            clsLabsFunction.AddParameter("fill", Chr(34) & ucrInputLegendTitle.GetText & Chr(34))
+            clsThemeFunction.AddParameter("legend.title", clsRFunctionParameter:=clsPlotLegendTitleFunction)
+        Else
+            clsLabsFunction.RemoveParameterByName("colour")
+            clsLabsFunction.RemoveParameterByName("fill")
+            clsThemeFunction.RemoveParameterByName("legend.title")
+        End If
+    End Sub
+
+    Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
+        clsPlotElementCaptionFunction.AddParameter("size", ucrNudCaptionSize.GetText)
+    End Sub
+
+    Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
+        clsPlotElementTitleFunction.AddParameter("size", ucrNudTitleSize.GetText)
+    End Sub
+
+    Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
+        clsPlotElementSubTitleFunction.AddParameter("size", ucrNudSubTitleSize.GetText)
+    End Sub
+
+    Private Sub ucrNudTagSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTagSize.ControlValueChanged
+        clsPlotElementTagFunction.AddParameter("size", ucrNudTagSize.GetText)
+    End Sub
+
+    Private Sub ucrNudLegendSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudLegendSize.ControlValueChanged
+        clsPlotLegendTitleFunction.AddParameter("size", ucrNudLegendSize.GetText)
+    End Sub
+
+    Private Sub ucrChkIncludeTitles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlValueChanged
+        AddRemoveLabs()
     End Sub
 End Class

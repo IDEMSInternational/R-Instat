@@ -272,9 +272,16 @@ Public Class clsDataFramePage
             columnHeader.strTypeShortCode = "(T)"
         ElseIf strHeaderType.Contains("logical") Then
             columnHeader.strTypeShortCode = "(L)"
-            ' Structured columns e.g. "circular" are coded with "(S)"
-        ElseIf strHeaderType.Contains("circular") Then
+            ' Structured columns e.g. "circular or bigz or bigq " are coded with "(S)"
+        ElseIf strHeaderType.Contains("circular") OrElse strHeaderType.Contains("bigz") OrElse
+               strHeaderType.Contains("bigq") Then
             columnHeader.strTypeShortCode = "(S)"
+        ElseIf strHeaderType.Contains("list") Then
+            columnHeader.strTypeShortCode = "(LT)"
+        ElseIf strHeaderType.Contains("complex") Then
+            columnHeader.strTypeShortCode = "(CX)"
+        ElseIf strHeaderType.Contains("sfc_MULTIPOLYGON") OrElse strHeaderType.Contains("sfc") Then
+            columnHeader.strTypeShortCode = "(G)"
             ' Types of data for specific Application areas e.g. survival are coded with "(A)"
             ' No examples implemented yet.
             'ElseIf strType.Contains() Then

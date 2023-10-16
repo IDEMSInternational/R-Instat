@@ -47,6 +47,8 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 415
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         ucrChkWeights.Enabled = False ' temporary because of bug in R functions being used
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
@@ -122,9 +124,10 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
         'TODO have conditions on multiple functions for both option
+        'and also requires multiple output support. So for now diesable
+        rdoBoth.Enabled = False
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -144,11 +147,8 @@ Public Class dlgThreeVariableFrequencies
 
         ' ucrSaveGraph.Enabled = False 'temporary for now
         ucrSaveGraph.SetPrefix("three_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
@@ -172,12 +172,18 @@ Public Class dlgThreeVariableFrequencies
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
         clsTableBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=3)
         clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTabFunction, iPosition:=4)
+        clsTableBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
+                                                     strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
+                                                     strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                     strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
+                                                     strObjectName:="last_summary")
 
         clsGraphBaseOperator.SetOperation("%>%")
+        'iPosition should follow in the folowing order for this operator
         clsGraphBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
         clsGraphBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
         clsGraphBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=3)
-        clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlotFunction, iPosition:=3)
+        clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlotFunction, iPosition:=4)
 
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
@@ -200,10 +206,17 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlotFunction.AddParameter("show.n", "TRUE")
 
         clsGridArrangeFunction.SetPackageName("gridExtra")
-        clsGridArrangeFunction.SetRCommand("grid.arrange")
+        'use arrangeGrob() instead of grid.arrange() because arrangeGrob() returns a grob without drawing on the current device.
+        'read package ocumentation for more information
+        'clsGridArrangeFunction.SetRCommand("grid.arrange") 'left here for future reference only
+        clsGridArrangeFunction.SetRCommand("arrangeGrob")
         clsGridArrangeFunction.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
+        clsGridArrangeFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                                       strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                                       strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                                       strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableFrequencies.strCurrentDataFrame,
+                                                       strObjectName:="last_graph")
 
-        clsGridArrangeFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         clsCurrBaseCode = clsTableBaseOperator
         bResetSubdialog = True
@@ -212,6 +225,9 @@ Public Class dlgThreeVariableFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         Dim clsTempParamX As RParameter
         Dim clsTempParamY As RParameter
+
+        ucrSaveGraph.AddAdditionalRCode(clsTableBaseOperator, iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalRCode(clsGridArrangeFunction, iAdditionalPairNo:=2)
 
         clsTempParamX = New RParameter("x", 3)
         ucrReceiverGroupsBy1st.AddAdditionalCodeParameterPair(clsSelectFunction, clsTempParamX, iAdditionalPairNo:=1)
@@ -249,7 +265,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
+        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrSaveGraph.IsComplete OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
@@ -273,27 +289,28 @@ Public Class dlgThreeVariableFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
-            clsCurrBaseCode = clsTableBaseOperator
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
+            ucrSaveGraph.SetCheckBoxText("Save Summary")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrangeFunction)
-            clsCurrBaseCode = clsGraphBaseOperator
-            ucrBase.clsRsyntax.iCallType = 3
+            ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+            ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+            ucrSaveGraph.SetCheckBoxText("Save Graph")
         End If
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        Dim strGraph As String
-        Dim strTempScript As String = ""
-        'Dim bIsAssigned As Boolean
-        'Dim bToBeAssigned As Boolean
-        'Dim strAssignTo As String
+    'todo. Both option disabled
+    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    Dim strGraph As String
+    '    Dim strTempScript As String = ""
 
-        If rdoBoth.Checked Then
-            strGraph = clsGridArrangeFunction.ToScript(strTempScript)
-            frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
-        End If
-    End Sub
+
+    '    If rdoBoth.Checked Then
+    '        strGraph = clsGridArrangeFunction.ToScript(strTempScript)
+    '        frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
+    '    End If
+    'End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgTwoWayFrequencies.SetRCode(clsSjTabFunction, clsSjPlotFunction, clsGraphBaseOperator, bResetSubdialog, bNewUseTitle:=False)

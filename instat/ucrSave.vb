@@ -655,7 +655,8 @@ Public Class ucrSave
                             Case RObjectTypeLabel.Graph,
                                  RObjectTypeLabel.Summary,
                                  RObjectTypeLabel.Table,
-                                 RObjectTypeLabel.Model
+                                 RObjectTypeLabel.Model,
+                                 RObjectTypeLabel.StructureLabel
                                 If (_strRObjectLabel = RObjectTypeLabel.Table OrElse _strRObjectLabel = RObjectTypeLabel.Model) AndAlso
                                     String.IsNullOrEmpty(_strRObjectFormat) Then
                                     'todo. temporary check until all table and model dialogs are modified to set _strRObjectFormat  
@@ -670,8 +671,6 @@ Public Class ucrSave
                                                                    strRDataFrameNameToAddObjectTo:=strDataName,
                                                                    strObjectName:=strSaveName)
                                 End If
-                            Case "surv"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempSurv:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
                     Else
                         clsTempCode.RemoveAssignTo()
@@ -774,6 +773,14 @@ Public Class ucrSave
         Else
             Return ucrInputTextSave.GetText()
         End If
+    End Function
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the adjacent column name from the Save Column Position Sub Dialogue. </summary>
+    '''
+    ''' <returns>   The adjacent column name from the Save Column Position Sub Dialogue. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function AdjacentColumnName() As String
+        Return sdgSaveColumnPosition.AdjacentColumn
     End Function
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   True if the user has entered text into the text/combo box, else false. </summary>

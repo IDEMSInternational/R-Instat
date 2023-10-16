@@ -103,6 +103,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrChkAddLabelsText = New instat.ucrCheck()
         Me.lblLabelPosition = New System.Windows.Forms.Label()
         Me.ucrInputLabelColour = New instat.ucrInputComboBox()
+        Me.cmdPairOptions = New System.Windows.Forms.Button()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -113,7 +114,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(138, 23)
         Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Tag = "Options..."
         Me.cmdOptions.Text = "Plot Options"
@@ -747,7 +748,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 460)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrReceiverFirstVars
@@ -835,6 +836,17 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrInputLabelColour.Size = New System.Drawing.Size(57, 21)
         Me.ucrInputLabelColour.TabIndex = 63
         '
+        'cmdPairOptions
+        '
+        Me.cmdPairOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPairOptions.Location = New System.Drawing.Point(11, 226)
+        Me.cmdPairOptions.Name = "cmdPairOptions"
+        Me.cmdPairOptions.Size = New System.Drawing.Size(137, 24)
+        Me.cmdPairOptions.TabIndex = 66
+        Me.cmdPairOptions.Tag = "Options..."
+        Me.cmdPairOptions.Text = "Pair Plot Options"
+        Me.cmdPairOptions.UseVisualStyleBackColor = True
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -864,6 +876,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.cmdPairOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -946,4 +959,5 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrChkAddLabelsText As ucrCheck
     Friend WithEvents lblLabelPosition As Label
     Friend WithEvents ucrInputLabelColour As ucrInputComboBox
+    Friend WithEvents cmdPairOptions As Button
 End Class

@@ -335,15 +335,20 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     
     # If a filter has been done, some column attributes are lost.
     # This ensures they are present in the returned data.
-    if(retain_attr) {
-      for(col_name in names(out)) {
-        for(attr_name in names(attributes(private$data[[col_name]]))) {
-          if(!attr_name %in% c("class", "levels")) {
-            attr(out[[col_name]], attr_name) <- attr(private$data[[col_name]], attr_name)
+    if (retain_attr) {
+      for (col_name in names(out)) {
+        private_attr_names <- names(attributes(private$data[[col_name]]))
+        for (attr_name in private_attr_names) {
+          if (!attr_name %in% c("class", "names")) {
+            private_attr <- attr(private$data[[col_name]], attr_name)
+            if (!is.null(private_attr)) {
+              attr(out[[col_name]], attr_name) <- private_attr
+            }
           }
         }
       }
     }
+    
     # If there is a start column, return columns from start onwards
     if (!missing(start_col) && start_col <= ncol(out)) #out <- out[start_col:max_cols]
     {
@@ -413,7 +418,8 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
       } else { 
         out <- out[1:max_rows, ]  
       }
-    } 
+    }
+
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE) 
       scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
@@ -769,6 +775,16 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
           # Should never happen since column names must be unique
           warning("Multiple columns have name: '", curr_col_name, "'. All such columns will be renamed.")
         }
+        # remove key
+        get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == curr_col_name)
+        if (!is.null(get_key$Is_Key)){
+          if (!is.na(get_key$Is_Key) && get_key$Is_Key){
+            active_keys <- self$get_keys()
+            keys_to_delete <- which(grepl(curr_col_name, active_keys))
+            keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+            purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+          }
+        }
         # Need to use private$data here because changing names of data field
         names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
@@ -808,11 +824,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
-      private$data <- curr_data |>
-
+    private$data <- curr_data |>
+      
       dplyr::rename_with(
-         .fn = .fn,
-         .cols = {{ .cols }}, ...
+        .fn = .fn,
+        .cols = {{ .cols }}, ...
       )
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
@@ -826,28 +842,38 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   }
 })
 
+
+
 DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
       warning("You are deleting all columns in the data frame.")
-    }
-    else {
+    } else {
       stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
     }
   }
   for(col_name in cols) {
-    # Column name must be character
-    if(!is.character(col_name)) {
-      stop("Column name must be of type: character")
+  # Column name must be character
+  if(!is.character(col_name)) {
+    stop("Column name must be of type: character")
+  } else if (!(col_name %in% self$get_column_names())) {
+    stop(paste0("Column :'", col_name, " was not found in the data."))
+  } else {
+    get_key <- self$get_variables_metadata() %>% dplyr::filter(Name == col_name)
+    if (!is.null(get_key$Is_Key)){
+      if (!is.na(get_key$Is_Key) && get_key$Is_Key){
+        active_keys <- self$get_keys()
+        keys_to_delete <- which(grepl(col_name, active_keys))
+        keys_to_delete <- purrr::map_chr(.x = keys_to_delete, .f = ~names(active_keys[.x]))
+        purrr::map(.x = keys_to_delete, .f = ~self$remove_key(key_name = names(active_keys[.x])))
+      }
     }
-    else if(!(col_name %in% self$get_column_names())) {
-      stop(paste0("Column :'", col_name, " was not found in the data."))
-    }
-    else private$data[[col_name]] <- NULL
+    private$data[[col_name]] <- NULL
   }
   self$append_to_changes(list(Removed_col, cols))
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
+}
 }
 )
 
@@ -1549,8 +1575,8 @@ DataSheet$set("public", "reorder_factor_levels", function(col_name, new_level_na
 }
 )
 
-DataSheet$set("public", "get_column_count", function(col_name, new_level_names) {
-  return(ncol(private$data))
+DataSheet$set("public", "get_column_count", function(use_column_selection = FALSE) {
+  return(ncol(self$get_data_frame(use_column_selection = use_column_selection)))
 }
 )
 
@@ -2017,6 +2043,14 @@ DataSheet$set("public", "get_column_selection_column_names", function(name) {
   return(all_column_names[out])
 })
 
+DataSheet$set("public", "get_column_selected_column_names", function(column_selection_name = "") {
+  if(column_selection_name != "") {
+  selected_columns <- self$get_column_selection_column_names(column_selection_name)
+  return(selected_columns)
+  }
+}
+)
+
 DataSheet$set("public", "column_selection_applied", function() {
   curr_sel <- private$.current_column_selection
   if (is.null(curr_sel) || length(curr_sel) == 0) {
@@ -2049,11 +2083,11 @@ DataSheet$set("public", "get_variables_metadata_fields", function(as_list = FALS
 )
 
 #objects names are expected to be unique. Objects are in a nested list. 
-#see comments in issue #7808 for further details
+#see comments in issue #7808 for more details
 DataSheet$set("public", "add_object", function(object_name, object_type_label, object_format, object) {
   
     if(missing(object_name)){
-      object_name = next_default_item("object", names(private$objects))
+      object_name <- next_default_item("object", names(private$objects))
     } 
     
     if(object_name %in% names(private$objects)){
@@ -2063,93 +2097,38 @@ DataSheet$set("public", "add_object", function(object_name, object_type_label, o
     #add the object with its metadata to the list of objects and add an "Added_object" change 
     private$objects[[object_name]] <- list(object_type_label = object_type_label, object_format = object_format, object = object)
     self$append_to_changes(list(Added_object, object_name))
-    
-    #if the object is a graph then set it's name as the last graph name added. 
-    if(identical(object_type_label, "graph")){
-      private$.last_graph <- object_name
-    }
+}
+)
+
+DataSheet$set("public", "get_object_names", function(object_type_label = NULL,
+                                                     as_list = FALSE) {
+  
+  out <- get_data_book_output_object_names(output_object_list = private$objects, 
+                                           object_type_label = object_type_label,  
+                                           as_list = as_list, 
+                                           list_label= self$get_metadata(data_name_label) )
+  return(out)
   
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, object_type_label, force_as_list = FALSE, silent = FALSE) {
-  curr_objects = private$objects[self$get_object_names(object_type_label = object_type_label)]
-  if(length(curr_objects) == 0) return(curr_objects)
-  if(missing(object_name)) return(curr_objects)
-  if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) {
-    if (silent) return(NULL)
-    else stop(object_name, " not found in objects")
-  }
-  if(length(object_name) == 1) {
-    if(force_as_list) return(curr_objects[object_name])
-    else return(curr_objects[[object_name]])
-  }
-  else return(curr_objects[object_name])
+DataSheet$set("public", "get_objects", function(object_type_label = NULL) {
+  out <-
+    private$objects[self$get_object_names(object_type_label = object_type_label)]
+  return(out)
 }
 )
 
-#object name must be supplied
+#object name must be character
 #returns NULL if object is not found
 DataSheet$set("public", "get_object", function(object_name) {
   #make sure supplied object name is a character, prevents return of unexpected object
-  if(!missing(object_name) && is.character(object_name) ){
+  if(is.character(object_name) ){
     return(private$objects[[object_name]])
   }else{
     return(NULL)
   }
  
-}
-)
-
-DataSheet$set("public", "get_object_names", function(object_type_label, as_list = FALSE, excluded_items = c()) {
-    if(missing(object_type_label)){
-      out = names(private$objects)
-    }else{ 
-      #todo. has a bug. the object_type_label cannot be accessed directly
-      out = names(private$objects)[sapply(private$objects, function(x) any( identical(x$object_type_label, object_type_label) ))]
-    }
-    
-    if(length(out) == 0){
-      return(out)
-    } 
-      
-    
-    if(length(excluded_items) > 0) {
-      excluded_indices = which(out %in% excluded_items)
-      
-      #notify user
-      if(length(excluded_indices) != length(excluded_items)){
-        warning("Some of the excluded_items were not found in the list of objects")
-      } 
-      
-      #remove the excluded items from the list
-      if(length(excluded_indices) > 0){
-        out = out[-excluded_indices]
-      }
-      
-    }
-    
-    if(as_list) {
-      lst = list()
-      lst[[self$get_metadata(data_name_label)]] <- out
-      return(lst)
-    }else{
-      return(out)
-    } 
-    
-}
-)
-
-DataSheet$set("public", "get_last_graph_name", function() {
-  return(private$.last_graph)
-}
-)
-
-DataSheet$set("public", "get_last_graph", function() {
-  if(!is.null(private$.last_graph)) {
-    self$get_objects(object_name = private$.last_graph, object_type = graph_label, type = graph_label)
-  }
 }
 )
 

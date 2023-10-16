@@ -421,7 +421,6 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrVariableAsFactorForHeatMap)
         Me.Controls.Add(Me.ucrInputReorderVariableX)
         Me.Controls.Add(Me.ucrInputSize)
-        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.Controls.Add(Me.lblLabelPosition)
         Me.Controls.Add(Me.ucrInputPosition)
         Me.Controls.Add(Me.lblLabelColour)
@@ -430,6 +429,7 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblReorderVariableX)
         Me.Controls.Add(Me.ucrReceiverGroup)
+        Me.Controls.Add(Me.ucrChkAddLabels)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

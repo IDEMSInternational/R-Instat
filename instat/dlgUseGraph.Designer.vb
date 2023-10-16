@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgRenameGraph
+Partial Class dlgUseGraph
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -142,7 +142,7 @@ Partial Class dlgRenameGraph
         Me.grpLegend.TabStop = False
         Me.grpLegend.Text = "Legend"
         '
-        'dlgRenameGraph
+        'dlgUseGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -158,7 +158,7 @@ Partial Class dlgRenameGraph
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgRenameGraph"
+        Me.Name = "dlgUseGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Use_Graph"
         Me.Text = "Use Graph"

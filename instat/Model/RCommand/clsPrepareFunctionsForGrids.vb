@@ -317,7 +317,8 @@ Public Class clsPrepareFunctionsForGrids
     ''' <param name="strColumnName"></param>
     ''' <param name="strRowText"></param>
     ''' <param name="bWithQuotes"></param>
-    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean)
+    ''' <param name="bListOfVector"></param>
+    Public Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String, bWithQuotes As Boolean, Optional bListOfVector As Boolean = False, Optional bAddOutputInInternalViewer As Boolean = True)
         Dim clsReplaceValue As New RFunction
         'trim white space from ends of value
         strNewValue = strNewValue.Trim()
@@ -325,6 +326,9 @@ Public Class clsPrepareFunctionsForGrids
         clsReplaceValue.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
         clsReplaceValue.AddParameter("col_name", Chr(34) & strColumnName & Chr(34))
         clsReplaceValue.AddParameter("rows", Chr(34) & strRowText & Chr(34))
+        If bListOfVector Then
+            strNewValue = "list(c(" & strNewValue & "))"
+        End If
         If bWithQuotes Then
             clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
         Else

@@ -27,7 +27,7 @@ Public Class frmMaximiseOutput
     'todo. to be used by the output page to remember paths selected by user when saving outputs
     Public _strFileDestinationDirectory As String = ""
 
-    Public Overloads Sub Show(strFileName As String)
+    Public Overloads Sub Show(strFileName As String, Optional bReplace As Boolean = True)
         Me._strDisplayedFileName = strFileName
         Dim strFileExtension As String = Path.GetExtension(_strDisplayedFileName).ToLower
         Me.panelControl.Controls.Clear()
@@ -51,7 +51,7 @@ Public Class frmMaximiseOutput
                 If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) AndAlso CefRuntimeWrapper.IsCefInitilised Then
                     _strFileFilter = "html (*.html)|*.html"
                     Dim ucrWebView As New ucrWebViewer
-                    ucrWebView.LoadHtmlFile(_strDisplayedFileName)
+                    ucrWebView.LoadHtmlFile(strFileName:=_strDisplayedFileName, bReplace:=bReplace)
                     Me.panelControl.Controls.Add(ucrWebView)
                     ucrWebView.Dock = DockStyle.Fill
                 Else
@@ -70,10 +70,14 @@ Public Class frmMaximiseOutput
                 Return
         End Select
 
-        MyBase.Show()
+        'todo. how else can we attach the main form to have this form be displayed infront of it (top most)
+        'this is an issue when this function is called after click ok of a dialog
+        'MyBase.Show()
+        MyBase.Show(frmMain)
     End Sub
 
     Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
+        'copies displayed file to the destination folder selected by user
         Using dlgSaveFile As New SaveFileDialog
             dlgSaveFile.Title = "Save Output"
             dlgSaveFile.Filter = _strFileFilter
@@ -83,22 +87,32 @@ Public Class frmMaximiseOutput
 
                 _strFileDestinationDirectory = Path.GetDirectoryName(dlgSaveFile.FileName)
 
-                'for htmls copy the html file with it's associated directory; css, javascript files etc
                 If Path.GetExtension(_strDisplayedFileName).ToLower = ".html" Then
-                    For Each foundDirectory As String In My.Computer.FileSystem.GetDirectories(
+                    'for html copy the html file associated directories, css, javascript files etc
+                    For Each strFoundDirectory As String In My.Computer.FileSystem.GetDirectories(
                                                            Path.GetDirectoryName(_strDisplayedFileName),
                                                            FileIO.SearchOption.SearchTopLevelOnly,
                                                            "*" & Path.GetFileNameWithoutExtension(_strDisplayedFileName) & "*")
-                        My.Computer.FileSystem.CopyDirectory(foundDirectory, _strFileDestinationDirectory, True)
+
+                        'create the destination folder first
+                        Dim strDestDir As String = Path.Combine(_strFileDestinationDirectory,
+                                                             Path.GetFileName(strFoundDirectory))
+                        If Not Directory.Exists(strDestDir) Then
+                            Directory.CreateDirectory(strDestDir)
+                        End If
+                        My.Computer.FileSystem.CopyDirectory(strFoundDirectory, strDestDir, True)
                     Next
-                Else
-                    My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
                 End If
+
+                'then copy the file
+                My.Computer.FileSystem.CopyFile(_strDisplayedFileName, dlgSaveFile.FileName, True)
             End If
-
-
         End Using
 
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "590")
     End Sub
 
 End Class

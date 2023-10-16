@@ -61,7 +61,6 @@ overall_label="[Overall]"
 graph_label="graph"
 table_label="table"
 model_label="model"
-structure_label = "structure"
 summary_label = "summary"
 
 #link labels

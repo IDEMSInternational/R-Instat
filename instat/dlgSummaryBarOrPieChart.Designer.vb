@@ -47,6 +47,8 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrChkLabel = New instat.ucrCheck()
         Me.ucrSaveSummaryBar = New instat.ucrSave()
         Me.ucrReceiverSecondFactor = New instat.ucrReceiverSingle()
@@ -55,8 +57,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
-        Me.lblPosition = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -86,7 +86,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdBarChartOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdBarChartOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdBarChartOptions.Name = "cmdBarChartOptions"
-        Me.cmdBarChartOptions.Size = New System.Drawing.Size(149, 23)
+        Me.cmdBarChartOptions.Size = New System.Drawing.Size(209, 23)
         Me.cmdBarChartOptions.TabIndex = 8
         Me.cmdBarChartOptions.Tag = "Bar_Chart_Options"
         Me.cmdBarChartOptions.Text = "Bar Options"
@@ -97,7 +97,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(10, 257)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(149, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(209, 25)
         Me.cmdOptions.TabIndex = 15
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
@@ -119,7 +119,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdPieChartOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPieChartOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
-        Me.cmdPieChartOptions.Size = New System.Drawing.Size(149, 23)
+        Me.cmdPieChartOptions.Size = New System.Drawing.Size(209, 23)
         Me.cmdPieChartOptions.TabIndex = 14
         Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
         Me.cmdPieChartOptions.Text = "Pie Options"
@@ -177,6 +177,29 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoTable.Text = "Tables"
         Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTable.UseVisualStyleBackColor = True
+        '
+        'lblPosition
+        '
+        Me.lblPosition.AutoSize = True
+        Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPosition.Location = New System.Drawing.Point(259, 195)
+        Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Size = New System.Drawing.Size(45, 13)
+        Me.lblPosition.TabIndex = 11
+        Me.lblPosition.Tag = "Position:"
+        Me.lblPosition.Text = "Postion:"
+        '
+        'ucrInputBarChartPosition
+        '
+        Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarChartPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputBarChartPosition.GetSetSelectedIndex = -1
+        Me.ucrInputBarChartPosition.IsReadOnly = False
+        Me.ucrInputBarChartPosition.Location = New System.Drawing.Point(259, 210)
+        Me.ucrInputBarChartPosition.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
+        Me.ucrInputBarChartPosition.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputBarChartPosition.TabIndex = 12
         '
         'ucrChkLabel
         '
@@ -253,7 +276,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(12, 322)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
         'ucrPnlOptions
@@ -263,29 +286,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(349, 35)
         Me.ucrPnlOptions.TabIndex = 0
-        '
-        'ucrInputBarChartPosition
-        '
-        Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarChartPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputBarChartPosition.GetSetSelectedIndex = -1
-        Me.ucrInputBarChartPosition.IsReadOnly = False
-        Me.ucrInputBarChartPosition.Location = New System.Drawing.Point(259, 210)
-        Me.ucrInputBarChartPosition.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
-        Me.ucrInputBarChartPosition.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputBarChartPosition.TabIndex = 12
-        '
-        'lblPosition
-        '
-        Me.lblPosition.AutoSize = True
-        Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosition.Location = New System.Drawing.Point(259, 195)
-        Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(45, 13)
-        Me.lblPosition.TabIndex = 11
-        Me.lblPosition.Tag = "Position:"
-        Me.lblPosition.Text = "Postion:"
         '
         'dlgSummaryBarOrPieChart
         '

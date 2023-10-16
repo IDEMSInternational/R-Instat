@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgRenameGraph
+Public Class dlgUseGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsUseGraphFunction As New RFunction
@@ -60,11 +60,11 @@ Public Class dlgRenameGraph
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
         ucrGraphsSelector.SetParameterIsString()
 
-        ucrGraphReceiver.SetParameter(New RParameter("graph_name", 1))
+        ucrGraphReceiver.SetParameter(New RParameter("object_name", 1))
         ucrGraphReceiver.Selector = ucrGraphsSelector
         ucrGraphReceiver.strSelectorHeading = "Graphs"
         ucrGraphReceiver.SetParameterIsString()
-        ucrGraphReceiver.SetItemType("graph")
+        ucrGraphReceiver.SetItemType(RObjectTypeLabel.Graph)
 
         'Theme Tab Checkboxes under grpCommonOptions
         ucrChkLegendPosition.SetText("Legend Position")
@@ -82,7 +82,8 @@ Public Class dlgRenameGraph
         ucrChkLegendPosition.SetLinkedDisplayControl(grpLegend)
 
         ucrSaveGraph.SetPrefix("use_graph")
-        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
+                                 strRObjectFormat:=RObjectFormat.Image)
         ucrSaveGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save New Graph")
         ucrSaveGraph.SetIsComboBox()
@@ -117,9 +118,13 @@ Public Class dlgRenameGraph
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
-        clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_graph",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Image,
+                                           strRDataFrameNameToAddObjectTo:=ucrGraphsSelector.strCurrentDataFrame,
+                                           strObjectName:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TestOkEnabled()
     End Sub

@@ -147,7 +147,12 @@ Public Class ucrSelector
         End If
 
         'todo, for columns, the list view should be field with variables from the .Net metadata object
-        frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+        frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1),
+                                      strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
+                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+        If Not CurrentReceiver.bExcludeFromSelector Then
+            CurrentReceiver.RemoveAnyVariablesNotInList() 'this needed for the multiple receiver(s) where the autofill is not applied
+        End If
         EnableDataOptions(strCurrentType)
 
     End Sub
@@ -221,7 +226,7 @@ Public Class ucrSelector
         End If
         If conReceiver IsNot Nothing Then
             CurrentReceiver = conReceiver
-            CurrentReceiver.SetColor()
+            If CurrentReceiver.bAsReceiver Then CurrentReceiver.SetColor()
             SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame AndAlso CurrentReceiver.bOnlyLinkedToPrimaryDataFrames)
             If Not CurrentReceiver.IsEmpty Then
                 lstReceiverDataFrames = CurrentReceiver.GetItemsDataFrames()
