@@ -91,6 +91,7 @@ Public Class dlgHelpVignettes
         If strPackageName <> "" Then
             Dim strURL = clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic,
                                                           bVignette:=rdoVignettes.Checked)
+            Dim frmMaximiseOutput As New frmMaximiseOutput
             frmMaximiseOutput.Show(strFileName:=strURL, bReplace:=False)
         End If
     End Sub
