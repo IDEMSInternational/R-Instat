@@ -250,11 +250,11 @@ Public Class dlgClimaticBoxPlot
         bResetBoxLayerSubdialog = True
         ucrReceiverElement.SetMeAsReceiver()
 
-        ucrInputStation.SetText(strNone)
+        ucrInputStation.SetName("None")
         ucrInputStation.bUpdateRCodeFromControl = True
-        ucrInputYear.SetText(strNone)
+        ucrInputYear.SetName("None")
         ucrInputYear.bUpdateRCodeFromControl = True
-        ucrInputWithinYear.SetText(strXAxis)
+        ucrInputWithinYear.SetName("X Axis")
         ucrInputWithinYear.bUpdateRCodeFromControl = True
 
         clsBaseOperator.SetOperation("+")
