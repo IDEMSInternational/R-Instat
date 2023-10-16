@@ -155,17 +155,17 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableSecondFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverThreeVariableSecondFactor.SetLinkedDisplayControl(lblThreeVariableSecondFactor)
 
-        ucrPnlColumnFactor.AddRadioButton(rdoSummaryVariable)
-        ucrPnlColumnFactor.AddRadioButton(rdoVariableFactor)
-        ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
-        ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
-        ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummaryVariable, "factor_cols", "Sum")
-        ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariableFactor, "factor_cols", "FactorVar")
-        ucrPnlColumnFactor.AddToLinkedControls(ucrReceiverColumnFactor, {rdoVariableFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlColumnFactor.AddRadioButton(rdoSummaryVariable)
+        'ucrPnlColumnFactor.AddRadioButton(rdoVariableFactor)
+        'ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
+        'ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
+        'ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummaryVariable, "factor_cols", "Sum")
+        'ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariableFactor, "factor_cols", "FactorVar")
+        'ucrPnlColumnFactor.AddToLinkedControls(ucrReceiverColumnFactor, {rdoVariableFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverColumnFactor.SetParameter(New RParameter("names_from", 0))
-        ucrReceiverColumnFactor.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverColumnFactor.SetDataType("factor")
+        'ucrReceiverColumnFactor.SetParameter(New RParameter("names_from", 0))
+        'ucrReceiverColumnFactor.Selector = ucrSelectorDescribeTwoVar
+        'ucrReceiverColumnFactor.SetDataType("factor")
 
         'ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetDataFrameSelector(ucrSelectorDescribeTwoVar.ucrAvailableDataFrames)
@@ -378,7 +378,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
-        ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
+        'ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrSaveTable.SetRCode(clsGroupByPipeOperator, bReset)
         bRcodeSet = True
@@ -446,7 +446,7 @@ Public Class dlgDescribeTwoVariable
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked
         ucrReorderSummary.Visible = IsNumericByFactor()
         cmdSummaries.Visible = IsNumericByFactor()
-        grpColumnFactor.Visible = IsFactorByFactor() OrElse IsNumericByFactor()
+        'grpColumnFactor.Visible = IsFactorByFactor() OrElse IsNumericByFactor()
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
@@ -495,7 +495,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetCheckBoxText("Save Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                      strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                     strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                     strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                      strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                      strObjectName:="last_table")
             ElseIf IsFactorByFactor() Then
@@ -508,7 +508,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetCheckBoxText("Save Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                  strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                   strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                   strObjectName:="last_table")
             End If
@@ -653,26 +653,44 @@ Public Class dlgDescribeTwoVariable
         'ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked
     End Sub
 
-    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged, ucrReceiverColumnFactor.ControlValueChanged
+    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore)
         FactorColumns()
     End Sub
 
     Private Sub FactorColumns()
-        If rdoNoColumnFactor.Checked Then
-            clsSummaryOperator.RemoveParameterByName("col_factor")
-            clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
-        Else
-            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-            If rdoSummaryVariable.Checked Then
-                clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+        'If rdoNoColumnFactor.Checked Then
+        '    clsSummaryOperator.RemoveParameterByName("col_factor")
+        '    clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
+        'Else
+        '    clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+        '    If rdoSummaryVariable.Checked Then
+        '        clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+        '        clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+        '    ElseIf rdoVariableFactor.Checked Then
+        '        ucrReceiverColumnFactor.SetMeAsReceiver()
+        '        clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
+        '        clsPivotWiderFunction.AddParameter("names_from", ucrReceiverColumnFactor.GetVariableNames(False), iPosition:=0)
+        '    End If
+        'End If
+        AddingColumnFactor()
+        If rdoTwoVariable.Checked Then
+            If IsFactorByFactor() Then
+                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If ucrReceiverFirstVars.lstSelectedVariables.Items.Count >= 1 Then
+                    'ucrReceiverSecondTwoVariableFactor.Add(ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text)
+                    'clsSummaryTableFunction.AddParameter("factors", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & ucrReceiverSecondTwoVariableFactor.GetVariableNames, iPosition:=2)
+                    clsSummaryTableFunction.AddParameter("factors", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverSecondTwoVariableFactor.GetVariableNames & ")")
+                    clsSummaryTableFunction.AddParameter("columns_to_summarise", Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34))
+
+                End If
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text, iPosition:=0)
+            Else
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
-            ElseIf rdoVariableFactor.Checked Then
-                ucrReceiverColumnFactor.SetMeAsReceiver()
-                clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
-                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverColumnFactor.GetVariableNames(False), iPosition:=0)
+                clsSummaryTableFunction.RemoveParameterByName("columns_to_summarise")
+                clsSummaryTableFunction.RemoveParameterByName("factors")
+
             End If
         End If
-        AddingColumnFactor()
     End Sub
 
     Private Sub AddRemoveFrequencyParameters()
@@ -839,6 +857,7 @@ Public Class dlgDescribeTwoVariable
         HideFormatTableButton()
         ManageControlsVisibility()
         'TestOKEnabled()
+        FactorColumns()
     End Sub
 
     Private Sub ChangeFirstTypeLabel()
@@ -882,6 +901,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveNAParameter()
         HideFormatTableButton()
         'TestOKEnabled()
+        FactorColumns()
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
@@ -1011,20 +1031,20 @@ Public Class dlgDescribeTwoVariable
         Dim iXVarCount As Integer
 
         iXVarCount = lstVariables.Count
-        If bRcodeSet Then
-            If lstVariables.Contains(ucrReceiverColumnFactor.GetVariableNames(False)) OrElse
-                Not ucrReceiverSecondTwoVariableFactor.GetVariableNames().Contains(ucrReceiverColumnFactor.GetVariableNames(False)) Then
-                ucrReceiverColumnFactor.Clear()
-                ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
-            End If
-            If iXVarCount = 0 AndAlso Not ucrReceiverSecondTwoVariableFactor.IsEmpty AndAlso
-                ucrReceiverColumnFactor.IsEmpty() Then
-                ucrReceiverColumnFactor.SetText(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
-                ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
-            ElseIf ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                ucrReceiverColumnFactor.Clear()
-            End If
-            'lstVariables = ucrReceiverSecondTwoVariableFactor.GetVariableNamesAsList()
-        End If
+        'If bRcodeSet Then
+        '    If lstVariables.Contains(ucrReceiverColumnFactor.GetVariableNames(False)) OrElse
+        '        Not ucrReceiverSecondTwoVariableFactor.GetVariableNames().Contains(ucrReceiverColumnFactor.GetVariableNames(False)) Then
+        '        ucrReceiverColumnFactor.Clear()
+        '        ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
+        '    End If
+        '    If iXVarCount = 0 AndAlso Not ucrReceiverSecondTwoVariableFactor.IsEmpty AndAlso
+        '        ucrReceiverColumnFactor.IsEmpty() Then
+        '        ucrReceiverColumnFactor.SetText(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
+        '        ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
+        '    ElseIf ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+        '        ucrReceiverColumnFactor.Clear()
+        '    End If
+        '    'lstVariables = ucrReceiverSecondTwoVariableFactor.GetVariableNamesAsList()
+        'End If
     End Sub
 End Class
