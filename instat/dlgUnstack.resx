@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactorToUnstackBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 66</value>
+    <value>284, 66</value>
   </data>
   <data name="lblFactorToUnstackBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -265,7 +265,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMultipleColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 110</value>
+    <value>288, 110</value>
   </data>
   <data name="lblMultipleColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -295,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 109</value>
+    <value>284, 109</value>
   </data>
   <data name="lblColumnToUnstack.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
@@ -346,13 +346,13 @@
     <value>True</value>
   </data>
   <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 235</value>
+    <value>284, 235</value>
   </data>
   <data name="ucrChkCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrChkCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>147, 23</value>
   </data>
   <data name="ucrChkCarryColumns.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -439,7 +439,7 @@
     <value>True</value>
   </data>
   <data name="ucrReceiverCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 262</value>
+    <value>284, 262</value>
   </data>
   <data name="ucrReceiverCarryColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -466,7 +466,7 @@
     <value>True</value>
   </data>
   <data name="ucrReceiverFactorToUnstackby.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 83</value>
+    <value>284, 83</value>
   </data>
   <data name="ucrReceiverFactorToUnstackby.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -526,7 +526,7 @@
     <value>9, 412</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 52</value>
+    <value>408, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -571,7 +571,7 @@
     <value>True</value>
   </data>
   <data name="ucrMultipleColumnsReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 128</value>
+    <value>284, 128</value>
   </data>
   <data name="ucrMultipleColumnsReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -642,9 +642,6 @@
   <data name="&gt;&gt;ucrChkAddPrefix.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -658,7 +655,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 127</value>
+    <value>285, 127</value>
   </data>
   <data name="ucrReceiverColumnToUnstack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
