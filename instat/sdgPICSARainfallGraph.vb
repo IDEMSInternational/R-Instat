@@ -1386,7 +1386,6 @@ Public Class sdgPICSARainfallGraph
 
         Select Case dlgPICSARainfall.enumPICSAMode
             Case dlgPICSARainfall.PICSAMode.Temperature
-                Me.Text = "PICSA Temperature Graphs"
                 tbPICSA.TabPages.Remove(tpLines)
                 If Not bSlope AndAlso Not tbPICSA.TabPages.Contains(tbPageSlope) Then
                     tbPICSA.TabPages.Add(tbPageSlope)
@@ -1394,7 +1393,6 @@ Public Class sdgPICSARainfallGraph
                     bLine = False
                 End If
             Case dlgPICSARainfall.PICSAMode.Rainfall
-                Me.Text = "PICSA Rainfall Graphs"
                 tbPICSA.TabPages.Remove(tbSlope)
                 If Not bLine AndAlso Not tbPICSA.TabPages.Contains(tbPageLines) Then
                     tbPICSA.TabPages.Add(tbPageLines)
@@ -1402,7 +1400,6 @@ Public Class sdgPICSARainfallGraph
                     bSlope = False
                 End If
             Case dlgPICSARainfall.PICSAMode.General
-                Me.Text = "PICSA General Graphs"
                 tbPICSA.TabPages.Remove(tpLines)
                 tbPICSA.TabPages.Remove(tbSlope)
                 If Not tbPICSA.TabPages.Contains(tbPageSlope) Then
