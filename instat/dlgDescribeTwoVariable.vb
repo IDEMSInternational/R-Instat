@@ -462,10 +462,12 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ChangeBaseRCode()
+        ucrSaveTable.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
 
             ucrSaveTable.Visible = True
+            ucrSaveTable.Location = New Point(23, 286)
             ucrSaveTable.SetPrefix("summary_table")
             ucrSaveTable.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveTable.SetAssignToIfUncheckedValue("last_summary")
@@ -487,6 +489,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = False
             ElseIf IsNumericByFactor() Then
                 ucrSaveTable.Visible = True
+                ucrSaveTable.Location = New Point(23, 450)
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("summary_table")
@@ -500,6 +503,7 @@ Public Class dlgDescribeTwoVariable
                                      strObjectName:="last_table")
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
+                ucrSaveTable.Location = New Point(23, 350)
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("frequency_table")
@@ -584,7 +588,7 @@ Public Class dlgDescribeTwoVariable
 
         If rdoSkim.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
-            ucrSaveTable.Location = New Point(23, 286)
+            'ucrSaveTable.Location = New Point(23, 286)
         ElseIf rdoThreeVariable.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
             lblThreeVariableCategorical.Visible = True
@@ -592,7 +596,7 @@ Public Class dlgDescribeTwoVariable
             lblSecondType.Location = New Point(12, 33)
             lblSecondBy.Visible = True
         Else
-            ucrSaveTable.Location = New Point(23, 450)
+            'ucrSaveTable.Location = New Point(23, 450)
             ucrReceiverFirstVars.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
             lblThreeVariableCategorical.Visible = False
             lblThreeVariableCategorical.Location = New Point(12, 33)
@@ -621,13 +625,18 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ChangeLocations()
-        If IsNumericByFactor() OrElse IsFactorByFactor() _
+        If IsNumericByFactor() _
                 OrElse (IsFactorByNumeric() AndAlso rdoThreeVariable.Checked) Then
             ucrBase.Location = New Point(iUcrBaseXLocation, 487)
             Me.Size = New Point(iDialogueXsize, 580)
+            cmdFormatTable.Location = New Point(326, 423)
         ElseIf IsFactorByNumeric() Then
             ucrBase.Location = New Point(iUcrBaseXLocation, 319)
             Me.Size = New Point(iDialogueXsize, 415)
+        ElseIf IsFactorByFactor() Then
+            ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+            Me.Size = New Point(iDialogueXsize, 460)
+            cmdFormatTable.Location = New Point(326, 325)
         Else
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
             Me.Size = New Point(iDialogueXsize, 425)
