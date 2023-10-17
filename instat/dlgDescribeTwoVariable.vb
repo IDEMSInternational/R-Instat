@@ -611,6 +611,7 @@ Public Class dlgDescribeTwoVariable
         EnableDisableFrequencyControls()
         AddRemoveNAParameter()
         HideFormatTableButton()
+        FactorColumns()
     End Sub
 
     Private Sub HideFormatTableButton()
@@ -676,18 +677,14 @@ Public Class dlgDescribeTwoVariable
         If rdoTwoVariable.Checked Then
             If IsFactorByFactor() Then
                 clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-                If ucrReceiverFirstVars.lstSelectedVariables.Items.Count >= 1 Then
-                    'ucrReceiverSecondTwoVariableFactor.Add(ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text)
-                    'clsSummaryTableFunction.AddParameter("factors", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & ucrReceiverSecondTwoVariableFactor.GetVariableNames, iPosition:=2)
-                    clsSummaryTableFunction.AddParameter("factors", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverSecondTwoVariableFactor.GetVariableNames & ")")
-                    clsSummaryTableFunction.AddParameter("columns_to_summarise", Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34))
+                clsSummaryTableFunction.AddParameter("factors", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverSecondTwoVariableFactor.GetVariableNames & ")")
+                clsSummaryTableFunction.AddParameter("columns_to_summarise", Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34))
 
-                End If
-                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text, iPosition:=0)
-            Else
+                    clsPivotWiderFunction.AddParameter("names_from", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text, iPosition:=0)
+                Else
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
-                clsSummaryTableFunction.RemoveParameterByName("columns_to_summarise")
-                clsSummaryTableFunction.RemoveParameterByName("factors")
+                clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
+                clsSummaryTableFunction.AddParameter("factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames)
 
             End If
         End If
