@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports System.Net
 Imports System.IO
 Imports System.Globalization
 Imports System.Threading
@@ -54,6 +55,7 @@ Public Class frmMain
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
+    Private strLatestVersion As String = ""
 
     Public isMinimised As Boolean = False
     Public isMaximised As Boolean = False
@@ -218,6 +220,30 @@ Public Class frmMain
         '---------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Private Sub CheckForUpdates()
+        Dim webClient As New WebClient()
+
+        Try
+            ' Download the version information file from the website
+            strLatestVersion = webClient.DownloadString("https://r-instat.org/version.txt")
+            Dim strCurrVersion = My.Application.Info.Version.ToString()
+
+            ' Compare with the current version of your app
+            If strLatestVersion > strCurrVersion Then
+                ' New version available, show a notification
+                Dim result As DialogResult = MessageBox.Show("R-Instat " & strLatestVersion & " is now available -- you have " & strCurrVersion & Environment.NewLine & "Do you want to dowload it?", "A new version of R-Instat Available!",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                If result = DialogResult.Yes Then
+                    Dim myProcess = New System.Diagnostics.Process
+                    myProcess.StartInfo.FileName = "https://r-instat.org/"
+                    myProcess.Start()
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("Network issues or website not accessible")
+        End Try
     End Sub
 
     Private Sub SetupInitialLayout()
@@ -2574,4 +2600,7 @@ Public Class frmMain
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
+    Private Sub mnuToolsCheckForUpdates_Click(sender As Object, e As EventArgs) Handles mnuToolsCheckForUpdates.Click
+        CheckForUpdates()
+    End Sub
 End Class

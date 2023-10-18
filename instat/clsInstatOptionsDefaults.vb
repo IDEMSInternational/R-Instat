@@ -54,4 +54,5 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTstrClimsoftPort As String = "3308"
     Public Shared ReadOnly DEFAULTstrClimsoftUsername As String = "root"
     Public Shared ReadOnly DEFAULTiMaxOutputsHeight As Integer = 500
+    Public Shared ReadOnly DEFAULTbRemindLaterOption As Boolean = False
 End Class
