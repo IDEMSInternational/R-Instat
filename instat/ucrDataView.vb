@@ -132,6 +132,7 @@ Public Class ucrDataView
                 End If
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
+
         Next
         If strCurrWorksheet IsNot Nothing Then
             _grid.ReOrderWorksheets(strCurrWorksheet)
