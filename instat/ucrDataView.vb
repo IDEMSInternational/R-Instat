@@ -149,9 +149,9 @@ Public Class ucrDataView
         _clsDataBook.RefreshData()
         'If we are updating one cell we do not need to refresh the grid and the 
         'refresh of that cell will be done manually 
-        _grid.RemoveOldWorksheets()
         If Not bOnlyUpdateOneCell Then
             AddAndUpdateWorksheets()
+            _grid.RemoveOldWorksheets()
             If _clsDataBook.DataFrames.Count = 0 Then
                 RefreshDisplayInformation()
             End If
