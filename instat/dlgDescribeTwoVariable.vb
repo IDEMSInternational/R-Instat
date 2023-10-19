@@ -135,6 +135,10 @@ Public Class dlgDescribeTwoVariable
         ucrChkPercentageProportion.SetText("Display as Decimal")
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
+        ucrChkSummariesRowCol.SetText("Summaries in Rows/Columns")
+        ucrChkSummariesRowCol.AddParameterValuesCondition(True, "row_sum", "True")
+        ucrChkSummariesRowCol.AddParameterValuesCondition(False, "row_sum", "False")
+
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
         ucrPnlDescribe.AddRadioButton(rdoThreeVariable)
@@ -211,6 +215,7 @@ Public Class dlgDescribeTwoVariable
         clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
         clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
         clsDummyFunction.AddParameter("theme", "select", iPosition:=2)
+        clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
 
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
@@ -360,6 +365,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverPercentages.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrChkPercentageProportion.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
+        ucrChkSummariesRowCol.SetRCode(clsDummyFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         'ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
@@ -432,6 +438,7 @@ Public Class dlgDescribeTwoVariable
         cmdSummaries.Visible = IsNumericByFactor()
         'grpColumnFactor.Visible = IsFactorByFactor() OrElse IsNumericByFactor()
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
+        ucrChkSummariesRowCol.Visible = rdoTwoVariable.Checked AndAlso IsNumericByFactor()
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
 
@@ -596,6 +603,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveNAParameter()
         HideFormatTableButton()
         FactorColumns()
+        SummariesInRowsOrCols()
     End Sub
 
     Private Sub HideFormatTableButton()
@@ -712,7 +720,7 @@ Public Class dlgDescribeTwoVariable
             clsCombineFrequencyParametersFunction.RemoveParameterByName("margin_name")
             'clsThreeVariableCombineFrequencyParametersFunction.RemoveParameterByName("margin_name")
         End If
-
+        FactorColumns()
         AddRemoveFrequencyParameters()
     End Sub
 
@@ -812,6 +820,16 @@ Public Class dlgDescribeTwoVariable
         ManageControlsVisibility()
     End Sub
 
+    Private Sub SummariesInRowsOrCols()
+        If ucrChkSummariesRowCol.Checked Then
+            clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(False), iPosition:=0)
+        Else
+            clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+
+        End If
+
+    End Sub
+
     Private Sub ucrReceiverSecondTwoVariableFactor_ValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondTwoVariableFactor.ControlValueChanged,
             ucrReceiverSecondTwoVariableFactor.ControlContentsChanged
         AssignSecondVariableType()
@@ -824,6 +842,7 @@ Public Class dlgDescribeTwoVariable
         ManageControlsVisibility()
         'TestOKEnabled()
         FactorColumns()
+        SummariesInRowsOrCols()
     End Sub
 
     Private Sub ChangeFirstTypeLabel()
@@ -868,6 +887,7 @@ Public Class dlgDescribeTwoVariable
         HideFormatTableButton()
         'TestOKEnabled()
         FactorColumns()
+        SummariesInRowsOrCols()
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
@@ -992,4 +1012,8 @@ Public Class dlgDescribeTwoVariable
         Next
     End Sub
 
+    Private Sub ucrChkSummariesRowCol_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummariesRowCol.ControlValueChanged
+        SummariesInRowsOrCols()
+        ManageControlsVisibility()
+    End Sub
 End Class
