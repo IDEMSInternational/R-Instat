@@ -38,39 +38,14 @@ Partial Class ucrAdditionalLayers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.lblLayers = New System.Windows.Forms.Label()
+        Me.lstLayers = New System.Windows.Forms.ListView()
+        Me.grpGeoms = New System.Windows.Forms.GroupBox()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
         Me.cmdAdd = New System.Windows.Forms.Button()
-        Me.lblLayers = New System.Windows.Forms.Label()
-        Me.lstLayers = New System.Windows.Forms.ListView()
+        Me.grpGeoms.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdDelete
-        '
-        Me.cmdDelete.Location = New System.Drawing.Point(134, 121)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
-        Me.cmdDelete.TabIndex = 6
-        Me.cmdDelete.Text = "Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
-        '
-        'cmdEdit
-        '
-        Me.cmdEdit.Location = New System.Drawing.Point(134, 92)
-        Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
-        Me.cmdEdit.TabIndex = 7
-        Me.cmdEdit.Text = "Edit"
-        Me.cmdEdit.UseVisualStyleBackColor = True
-        '
-        'cmdAdd
-        '
-        Me.cmdAdd.Location = New System.Drawing.Point(134, 63)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAdd.TabIndex = 8
-        Me.cmdAdd.Text = "Add"
-        Me.cmdAdd.UseVisualStyleBackColor = True
         '
         'lblLayers
         '
@@ -92,26 +67,64 @@ Partial Class ucrAdditionalLayers
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
         '
+        'grpGeoms
+        '
+        Me.grpGeoms.Controls.Add(Me.cmdDelete)
+        Me.grpGeoms.Controls.Add(Me.cmdEdit)
+        Me.grpGeoms.Controls.Add(Me.cmdAdd)
+        Me.grpGeoms.Location = New System.Drawing.Point(134, 53)
+        Me.grpGeoms.Name = "grpGeoms"
+        Me.grpGeoms.Size = New System.Drawing.Size(106, 100)
+        Me.grpGeoms.TabIndex = 9
+        Me.grpGeoms.TabStop = False
+        Me.grpGeoms.Text = "Geoms:"
+        '
+        'cmdDelete
+        '
+        Me.cmdDelete.Location = New System.Drawing.Point(16, 72)
+        Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDelete.TabIndex = 9
+        Me.cmdDelete.Text = "Delete"
+        Me.cmdDelete.UseVisualStyleBackColor = True
+        '
+        'cmdEdit
+        '
+        Me.cmdEdit.Location = New System.Drawing.Point(16, 43)
+        Me.cmdEdit.Name = "cmdEdit"
+        Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdEdit.TabIndex = 10
+        Me.cmdEdit.Text = "Edit"
+        Me.cmdEdit.UseVisualStyleBackColor = True
+        '
+        'cmdAdd
+        '
+        Me.cmdAdd.Location = New System.Drawing.Point(16, 14)
+        Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAdd.TabIndex = 11
+        Me.cmdAdd.Text = "Add"
+        Me.cmdAdd.UseVisualStyleBackColor = True
+        '
         'ucrAdditionalLayers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.cmdDelete)
-        Me.Controls.Add(Me.cmdEdit)
-        Me.Controls.Add(Me.cmdAdd)
+        Me.Controls.Add(Me.grpGeoms)
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
         Me.Name = "ucrAdditionalLayers"
-        Me.Size = New System.Drawing.Size(213, 180)
+        Me.Size = New System.Drawing.Size(249, 180)
+        Me.grpGeoms.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
+    Friend WithEvents lblLayers As Label
+    Friend WithEvents lstLayers As ListView
+    Friend WithEvents grpGeoms As GroupBox
     Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdEdit As Button
     Friend WithEvents cmdAdd As Button
-    Friend WithEvents lblLayers As Label
-    Friend WithEvents lstLayers As ListView
 End Class
