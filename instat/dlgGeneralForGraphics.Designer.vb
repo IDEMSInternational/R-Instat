@@ -489,7 +489,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkFlipCoordinates.Checked = False
         Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 308)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(165, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
         '
         'ucrChkLegend

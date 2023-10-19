@@ -38,13 +38,30 @@ Partial Class ucrAdditionalLayers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblLayers = New System.Windows.Forms.Label()
         Me.lstLayers = New System.Windows.Forms.ListView()
         Me.grpGeoms = New System.Windows.Forms.GroupBox()
+        Me.btnAdd = New instat.ucrSplitButton()
+        Me.contextMenuStripAdd = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripAddSelected = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripAddAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DensityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DensityridgesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.JitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LlabelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LabelrepelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LineToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PointToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RugSmoothToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TextrepelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
-        Me.cmdAdd = New System.Windows.Forms.Button()
         Me.grpGeoms.SuspendLayout()
+        Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblLayers
@@ -69,15 +86,119 @@ Partial Class ucrAdditionalLayers
         '
         'grpGeoms
         '
+        Me.grpGeoms.Controls.Add(Me.btnAdd)
         Me.grpGeoms.Controls.Add(Me.cmdDelete)
         Me.grpGeoms.Controls.Add(Me.cmdEdit)
-        Me.grpGeoms.Controls.Add(Me.cmdAdd)
         Me.grpGeoms.Location = New System.Drawing.Point(134, 53)
         Me.grpGeoms.Name = "grpGeoms"
         Me.grpGeoms.Size = New System.Drawing.Size(106, 100)
         Me.grpGeoms.TabIndex = 9
         Me.grpGeoms.TabStop = False
         Me.grpGeoms.Text = "Geoms:"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.AutoSize = True
+        Me.btnAdd.ContextMenuStrip = Me.contextMenuStripAdd
+        Me.btnAdd.Location = New System.Drawing.Point(16, 15)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.SplitMenuStrip = Me.contextMenuStripAdd
+        Me.btnAdd.TabIndex = 87
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripAdd
+        '
+        Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripAddSelected, Me.toolStripAddAll, Me.toolStripHelp, Me.CountToolStripMenuItem, Me.DensityToolStripMenuItem, Me.DensityridgesToolStripMenuItem, Me.JitterToolStripMenuItem, Me.LlabelToolStripMenuItem, Me.LabelrepelToolStripMenuItem, Me.LineToolStripMenuItem, Me.PointToolStripMenuItem, Me.RugSmoothToolStripMenuItem, Me.TextToolStripMenuItem, Me.TextrepelToolStripMenuItem})
+        Me.contextMenuStripAdd.Name = "SelectionMenuStrip"
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(186, 334)
+        '
+        'toolStripAddSelected
+        '
+        Me.toolStripAddSelected.Name = "toolStripAddSelected"
+        Me.toolStripAddSelected.Size = New System.Drawing.Size(185, 22)
+        Me.toolStripAddSelected.Tag = "Add_selected"
+        Me.toolStripAddSelected.Text = " geom_bar"
+        '
+        'toolStripAddAll
+        '
+        Me.toolStripAddAll.Name = "toolStripAddAll"
+        Me.toolStripAddAll.Size = New System.Drawing.Size(185, 22)
+        Me.toolStripAddAll.Text = "geom_boxplot"
+        '
+        'toolStripHelp
+        '
+        Me.toolStripHelp.Name = "toolStripHelp"
+        Me.toolStripHelp.Size = New System.Drawing.Size(185, 22)
+        Me.toolStripHelp.Text = "geom_col"
+        '
+        'CountToolStripMenuItem
+        '
+        Me.CountToolStripMenuItem.Name = "CountToolStripMenuItem"
+        Me.CountToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.CountToolStripMenuItem.Text = "geom_count"
+        '
+        'DensityToolStripMenuItem
+        '
+        Me.DensityToolStripMenuItem.Name = "DensityToolStripMenuItem"
+        Me.DensityToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.DensityToolStripMenuItem.Text = "geom_density"
+        '
+        'DensityridgesToolStripMenuItem
+        '
+        Me.DensityridgesToolStripMenuItem.Name = "DensityridgesToolStripMenuItem"
+        Me.DensityridgesToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.DensityridgesToolStripMenuItem.Text = "geom_density-ridges"
+        '
+        'JitterToolStripMenuItem
+        '
+        Me.JitterToolStripMenuItem.Name = "JitterToolStripMenuItem"
+        Me.JitterToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.JitterToolStripMenuItem.Text = "geom_ jitter"
+        '
+        'LlabelToolStripMenuItem
+        '
+        Me.LlabelToolStripMenuItem.Name = "LlabelToolStripMenuItem"
+        Me.LlabelToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.LlabelToolStripMenuItem.Text = "geom_label"
+        '
+        'LabelrepelToolStripMenuItem
+        '
+        Me.LabelrepelToolStripMenuItem.Name = "LabelrepelToolStripMenuItem"
+        Me.LabelrepelToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.LabelrepelToolStripMenuItem.Text = "geom_label_repel"
+        '
+        'LineToolStripMenuItem
+        '
+        Me.LineToolStripMenuItem.Name = "LineToolStripMenuItem"
+        Me.LineToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.LineToolStripMenuItem.Text = "geom_line"
+        '
+        'PointToolStripMenuItem
+        '
+        Me.PointToolStripMenuItem.Name = "PointToolStripMenuItem"
+        Me.PointToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.PointToolStripMenuItem.Text = " geom_point"
+        '
+        'RugSmoothToolStripMenuItem
+        '
+        Me.RugSmoothToolStripMenuItem.Name = "RugSmoothToolStripMenuItem"
+        Me.RugSmoothToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.RugSmoothToolStripMenuItem.Text = "geom_rug smooth"
+        '
+        'TextToolStripMenuItem
+        '
+        Me.TextToolStripMenuItem.Name = "TextToolStripMenuItem"
+        Me.TextToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TextToolStripMenuItem.Text = " geom_text"
+        '
+        'TextrepelToolStripMenuItem
+        '
+        Me.TextrepelToolStripMenuItem.Name = "TextrepelToolStripMenuItem"
+        Me.TextrepelToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TextrepelToolStripMenuItem.Text = "geom_text_repel"
         '
         'cmdDelete
         '
@@ -97,15 +218,6 @@ Partial Class ucrAdditionalLayers
         Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
-        'cmdAdd
-        '
-        Me.cmdAdd.Location = New System.Drawing.Point(16, 14)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAdd.TabIndex = 11
-        Me.cmdAdd.Text = "Add"
-        Me.cmdAdd.UseVisualStyleBackColor = True
-        '
         'ucrAdditionalLayers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -117,6 +229,8 @@ Partial Class ucrAdditionalLayers
         Me.Name = "ucrAdditionalLayers"
         Me.Size = New System.Drawing.Size(249, 180)
         Me.grpGeoms.ResumeLayout(False)
+        Me.grpGeoms.PerformLayout()
+        Me.contextMenuStripAdd.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -126,5 +240,20 @@ Partial Class ucrAdditionalLayers
     Friend WithEvents grpGeoms As GroupBox
     Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdEdit As Button
-    Friend WithEvents cmdAdd As Button
+    Friend WithEvents contextMenuStripAdd As ContextMenuStrip
+    Friend WithEvents toolStripAddSelected As ToolStripMenuItem
+    Friend WithEvents toolStripAddAll As ToolStripMenuItem
+    Friend WithEvents toolStripHelp As ToolStripMenuItem
+    Friend WithEvents btnAdd As ucrSplitButton
+    Friend WithEvents CountToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DensityToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DensityridgesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents JitterToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LlabelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LabelrepelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LineToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PointToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RugSmoothToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TextToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TextrepelToolStripMenuItem As ToolStripMenuItem
 End Class
