@@ -83,7 +83,7 @@ Public Class sdgFormatSummaryTables
         ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
 
         ucrChkAddTitleSubtitle.SetText("Include titles")
-        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, UcrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputTitleFootnote.SetLinkedDisplayControl(lblTitlefnText)
 
         ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title_subtitle")
@@ -180,7 +180,7 @@ Public Class sdgFormatSummaryTables
         ucrInputTitleFont.SetRCode(clsTabStyleCellTextFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTitleSize.SetRCode(clsTabStylePxFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSubtitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        UcrInputSubtitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputCellFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSecondCellFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputFootnoteColumnLocation.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
@@ -201,7 +201,7 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub AddTableTitle()
-        If ucrChkAddTitleSubtitle.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty) Then
+        If ucrChkAddTitleSubtitle.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not UcrInputSubtitle.IsEmpty) Then
             clsPipeOperator.AddParameter("title_subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
             clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
         Else
@@ -221,8 +221,8 @@ Public Class sdgFormatSummaryTables
 
     Private Sub ucrInputSubtitle_ControlValueChanged(ucrChangedControl As ucrCore)
         AddTableTitle()
-        If Not ucrInputSubtitle.IsEmpty Then
-            clsTableTitleFunction.AddParameter("subtitle", Chr(34) & ucrInputSubtitle.GetText() & Chr(34), iPosition:=1)
+        If Not UcrInputSubtitle.IsEmpty Then
+            clsTableTitleFunction.AddParameter("subtitle", Chr(34) & UcrInputSubtitle.GetText() & Chr(34), iPosition:=1)
         Else
             clsTableTitleFunction.RemoveParameterByName("subtitle")
         End If
@@ -304,7 +304,7 @@ Public Class sdgFormatSummaryTables
 
         If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChKAddSecondFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse
             ucrChKAddSecondFootnote.Checked Then
-            If ucrInputTitle.IsEmpty AndAlso ucrInputSubtitle.IsEmpty AndAlso ucrInputTitleFootnote.IsEmpty AndAlso
+            If ucrInputTitle.IsEmpty AndAlso UcrInputSubtitle.IsEmpty AndAlso ucrInputTitleFootnote.IsEmpty AndAlso
                 ucrInputSubtitleFootnote.IsEmpty AndAlso ucrInputAddSourceNote.IsEmpty AndAlso ucrInputCellFootnote.IsEmpty AndAlso ucrInputSecondCellFootnote.IsEmpty Then
                 clsJoiningOperator.RemoveParameterByName("pipe")
             Else
@@ -452,9 +452,9 @@ Public Class sdgFormatSummaryTables
         cmdManualTheme.Visible = rdoManualTheme.Checked
     End Sub
 
-    Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
-        If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Or e.TabPageIndex = 3 Then
-            e.Cancel = True
-        End If
-    End Sub
+    'Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
+    '    If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Or e.TabPageIndex = 3 Then
+    '        e.Cancel = True
+    '    End If
+    'End Sub
 End Class
