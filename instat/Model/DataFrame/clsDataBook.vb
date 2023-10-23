@@ -156,7 +156,7 @@ Public Class clsDataBook
             'if data not refreshed successfully, remove the data frame from the data book
             If Not dataFrame.RefreshData() Then
                 MessageBox.Show("Error: Sorry R-Instat can not retrieve the: " & strDataFrameName & " data from R.",
-                                Environment.NewLine, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                "Cannot retrieve data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 _lstDataFrames.Remove(dataFrame)
                 DeleteDataFrames(strDataFrameName)
             End If
