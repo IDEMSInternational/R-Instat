@@ -60,7 +60,7 @@ Public Class sdgFormatSummaryTables
 
         ucrChkTitleFootnote.SetText("Add title footnote")
         ucrChkTitleFootnote.AddToLinkedControls(ucrInputTitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTitleFootnote.SetLinkedDisplayControl(grpTitleSubtitle)
+        ucrChkTitleFootnote.SetLinkedDisplayControl(grpTitle)
 
         ucrChkTitleFootnote.AddParameterPresentCondition(True, "title_footnote")
         ucrChkTitleFootnote.AddParameterPresentCondition(False, "title_footnote", False)
@@ -69,7 +69,7 @@ Public Class sdgFormatSummaryTables
 
         ucrChkSubtitleFootnote.SetText("Add subtitle footnote")
         ucrChkSubtitleFootnote.AddToLinkedControls(ucrInputSubtitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkSubtitleFootnote.SetLinkedDisplayControl(grpSubtitle)
         ucrChkSubtitleFootnote.AddParameterPresentCondition(True, "subtitle_footnote")
         ucrChkSubtitleFootnote.AddParameterPresentCondition(False, "subtitle_footnote", False)
 
@@ -82,11 +82,13 @@ Public Class sdgFormatSummaryTables
         ucrNudTitleSize.SetMinMax(1)
         ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
 
-        ucrChkAddTitleSubtitle.SetText("Add title/subtitle")
+        ucrChkAddTitleSubtitle.SetText("Include titles")
         ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputTitleFootnote.SetLinkedDisplayControl(lblTitlefnText)
 
         ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title_subtitle")
         ucrChkAddTitleSubtitle.AddParameterPresentCondition(False, "title_subtitle", False)
+        ucrInputSubtitleFootnote.SetLinkedDisplayControl(lblSubtitleFnText)
 
         ucrInputFootnoteColumnLocation.SetParameter(New RParameter("col_location", 5))
         ucrInputFootnoteColumnLocation.SetValidationTypeAsNumericList()
@@ -217,7 +219,7 @@ Public Class sdgFormatSummaryTables
         End If
     End Sub
 
-    Private Sub ucrInputSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSubtitle.ControlValueChanged
+    Private Sub ucrInputSubtitle_ControlValueChanged(ucrChangedControl As ucrCore)
         AddTableTitle()
         If Not ucrInputSubtitle.IsEmpty Then
             clsTableTitleFunction.AddParameter("subtitle", Chr(34) & ucrInputSubtitle.GetText() & Chr(34), iPosition:=1)
@@ -261,7 +263,7 @@ Public Class sdgFormatSummaryTables
         AddFootnote()
     End Sub
 
-    Private Sub ucrChkSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSubtitleFootnote.ControlValueChanged
+    Private Sub ucrChkSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkSubtitleFootnote.Checked Then
             clsTabFootnoteSubtitleFunction.AddParameter("locations", clsRFunctionParameter:=clsFootnoteSubtitleLocationFunction, iPosition:=2)
             clsFootnoteSubtitleLocationFunction.AddParameter("groups", Chr(34) & "subtitle" & Chr(34), iPosition:=0)
@@ -281,7 +283,7 @@ Public Class sdgFormatSummaryTables
         AddFootnote()
     End Sub
 
-    Private Sub ucrInputSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSubtitleFootnote.ControlValueChanged
+    Private Sub ucrInputSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore)
         If Not ucrInputSubtitleFootnote.IsEmpty Then
             clsTabFootnoteSubtitleFunction.AddParameter("footnote", Chr(34) & ucrInputSubtitleFootnote.GetText & Chr(34), iPosition:=1)
         Else
@@ -297,8 +299,7 @@ Public Class sdgFormatSummaryTables
 
     Private Sub PipeOperator_controlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlContentsChanged,
             ucrChkAddFootnote.ControlContentsChanged, ucrChKAddSecondFootnote.ControlContentsChanged, ucrChkAddSourcenote.ControlContentsChanged,
-            ucrInputTitle.ControlContentsChanged, ucrInputSubtitle.ControlContentsChanged, ucrInputTitleFootnote.ControlContentsChanged,
-            ucrInputSubtitleFootnote.ControlContentsChanged, ucrInputAddSourceNote.ControlContentsChanged,
+            ucrInputTitle.ControlContentsChanged, ucrInputTitleFootnote.ControlContentsChanged, ucrInputAddSourceNote.ControlContentsChanged,
             ucrInputCellFootnote.ControlContentsChanged, ucrInputSecondCellFootnote.ControlContentsChanged
 
         If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChKAddSecondFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse
