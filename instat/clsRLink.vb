@@ -734,10 +734,13 @@ Public Class RLink
             Dim strOutput As String = ""
 
             'if not an assignment operation, then capture the output
-            If clsRStatement.clsAssignment Is Nothing Then
-                strOutput = GetFileOutput("view_object_data(object = " &
-                                          clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False) &
-                                          " , object_format = 'text' )", bSilent:=False,
+            Dim strRStatementNoFormatting As String =
+                    clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
+            If clsRStatement.clsAssignment Is Nothing _
+                    AndAlso Not String.IsNullOrWhiteSpace(strRStatementNoFormatting) Then
+                strOutput = GetFileOutput("view_object_data(object = " _
+                                          & strRStatementNoFormatting _
+                                          & " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             Else
                 Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False,
