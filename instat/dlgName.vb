@@ -221,11 +221,11 @@ Public Class dlgName
         If bReset Then
             ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
             ucrInputReplace.SetRCode(clsDefaultRFunction, bReset)
+            ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
-        ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
         ucrInputBy.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
     End Sub
