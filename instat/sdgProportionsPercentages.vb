@@ -52,8 +52,7 @@ Public Class sdgProportionsPercentages
         ucrChkProportionsPercentages.SetRDefault(Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
 
-        ucrPnlBY.AddToLinkedControls(ucrReceiverByFactor, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlBY.AddToLinkedControls(ucrChkDisplayAsDecimal, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlBY.AddToLinkedControls({ucrReceiverByFactor, ucrChkDisplayAsDecimal}, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkProportionsPercentages.AddToLinkedControls(ucrPnlBY, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoByFactors)
         ucrChkProportionsPercentages.AddToLinkedControls(ucrSelectorProportionsPercentiles, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlBY.AddToLinkedControls(ucrReceiverColumn, objValues:={rdoByColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
