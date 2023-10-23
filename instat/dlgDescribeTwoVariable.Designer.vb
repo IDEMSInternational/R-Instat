@@ -535,10 +535,9 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkSummariesRowCol.AutoSize = True
         Me.ucrChkSummariesRowCol.Checked = False
-        Me.ucrChkSummariesRowCol.Location = New System.Drawing.Point(18, 352)
-        Me.ucrChkSummariesRowCol.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkSummariesRowCol.Location = New System.Drawing.Point(15, 337)
         Me.ucrChkSummariesRowCol.Name = "ucrChkSummariesRowCol"
-        Me.ucrChkSummariesRowCol.Size = New System.Drawing.Size(245, 23)
+        Me.ucrChkSummariesRowCol.Size = New System.Drawing.Size(180, 23)
         Me.ucrChkSummariesRowCol.TabIndex = 59
         '
         'dlgDescribeTwoVariable
@@ -547,7 +546,6 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(482, 499)
-        Me.Controls.Add(Me.ucrChkSummariesRowCol)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.grpDisplay)
@@ -577,6 +575,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.lblFirstGroupByFactor)
         Me.Controls.Add(Me.lblThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrChkOmitMissing)
+        Me.Controls.Add(Me.ucrChkSummariesRowCol)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

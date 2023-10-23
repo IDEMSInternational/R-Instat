@@ -149,7 +149,7 @@ Public Class dlgDescribeTwoVariable
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableThirdVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondTwoVariableFactor}, {rdoTwoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondTwoVariableFactor, ucrChkSummariesRowCol}, {rdoTwoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableSecondFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
@@ -438,12 +438,12 @@ Public Class dlgDescribeTwoVariable
         cmdSummaries.Visible = IsNumericByFactor()
         'grpColumnFactor.Visible = IsFactorByFactor() OrElse IsNumericByFactor()
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
-        ucrChkSummariesRowCol.Visible = rdoTwoVariable.Checked AndAlso IsNumericByFactor()
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
-
+        ucrChkSummariesRowCol.Visible = False
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
+            ucrChkSummariesRowCol.Visible = IsNumericByFactor()
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
@@ -592,6 +592,7 @@ Public Class dlgDescribeTwoVariable
             lblSecondType.Location = New Point(106, 18)
             lblSecondBy.Visible = False
         End If
+
         ChangeFirstTypeLabel()
         AssignSecondVariableType()
         ChangeBaseRCode()
@@ -662,7 +663,6 @@ Public Class dlgDescribeTwoVariable
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
                 clsSummaryTableFunction.AddParameter("factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames)
-
             End If
         End If
     End Sub
@@ -823,15 +823,16 @@ Public Class dlgDescribeTwoVariable
     Private Sub SummariesInRowsOrCols()
         If ucrChkSummariesRowCol.Checked Then
             clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(False), iPosition:=0)
+            clsDummyFunction.AddParameter("row_sum", "True", iPosition:=3)
         Else
             clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
-
+            clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
         End If
-
+        ManageControlsVisibility()
     End Sub
 
     Private Sub ucrReceiverSecondTwoVariableFactor_ValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondTwoVariableFactor.ControlValueChanged,
-            ucrReceiverSecondTwoVariableFactor.ControlContentsChanged
+        ucrReceiverSecondTwoVariableFactor.ControlContentsChanged
         AssignSecondVariableType()
         ChangeBaseRCode()
         UpdateSummaryTableFunction()
@@ -1014,6 +1015,5 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrChkSummariesRowCol_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummariesRowCol.ControlValueChanged
         SummariesInRowsOrCols()
-        ManageControlsVisibility()
     End Sub
 End Class
