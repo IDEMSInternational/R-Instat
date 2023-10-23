@@ -90,21 +90,45 @@ Public Class ucrAdditionalLayers
         SetEditDeleteEnabled()
     End Sub
 
-    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click, toolStripMenuItemGeomBar.Click, toolStripMenuItemGeomBoxPlot.Click, toolStripMenuItemGeomCol.Click, toolStripMenuItemGeomCount.Click,
+            toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomEncircle.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomPath.Click, toolStripMenuItemGeomDumbbell.Click
         Dim clsNewLocalAesFunction As New RFunction
         Dim clsNewGeomFunction As New RFunction
         Dim clsNewGeomParameter As RParameter
+        Dim strGeomName As String = "geom_boxplot"
+        Dim bShowLayerOption As Boolean = False
 
         clsNewLocalAesFunction = GgplotDefaults.clsAesFunction.Clone()
+        If sender Is toolStripMenuItemGeomBar Then
+            strGeomName = "geom_bar"
+        ElseIf sender Is toolStripMenuItemGeomCount Then
+            strGeomName = "geom_count"
+        ElseIf sender Is toolStripMenuItemGeomCol Then
+            strGeomName = "geom_col"
+        ElseIf sender Is toolStripMenuItemGeomDensity Then
+            strGeomName = "geom_density"
+        ElseIf sender Is toolStripMenuItemGeomEncircle Then
+            strGeomName = "geom_encircle"
+        ElseIf sender Is toolStripMenuItemGeomJitter Then
+            strGeomName = "geom_jitter"
+        ElseIf sender Is toolStripMenuItemGeomPath Then
+            strGeomName = "geom_path"
+        ElseIf sender Is toolStripMenuItemGeomDumbbell Then
+            strGeomName = "geom_dumbbell"
+        ElseIf sender Is cmdAdd Then
+            bShowLayerOption = True
+        End If
 
         clsNewGeomFunction.SetPackageName("ggplot2")
-        clsNewGeomFunction.SetRCommand("geom_boxplot")
-
+        clsNewGeomFunction.SetRCommand(strGeomName)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataFrame:=strGlobalDataFrame)
-        ParentForm.SendToBack()
-        sdgLayerOptions.tbcLayers.SelectedIndex = 0
-        sdgLayerOptions.ShowDialog()
-        strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
+
+        If bShowLayerOption Then
+            ParentForm.SendToBack()
+            sdgLayerOptions.tbcLayers.SelectedIndex = 0
+            sdgLayerOptions.ShowDialog()
+            strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
+        End If
 
         clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
         iMaxParameterPosition = iMaxParameterPosition + 1
