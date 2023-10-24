@@ -269,7 +269,12 @@ Public Class dlgScript
 
         For Each line As String In inputLines
             If Not String.IsNullOrEmpty(line) Then
-                Dim strTrimmedLine = line.Substring(line.IndexOf(" ")).Trim
+                Dim strTrimmedLine = ""
+                If strSelectedPackage <> "datasets" Then
+                    strTrimmedLine = line.Substring(line.IndexOf("##D") + 4).Trim
+                Else
+                    strTrimmedLine = line.Substring(line.IndexOf(" ")).Trim
+                End If
                 exampleCode.AppendLine(strTrimmedLine) ' Append the code
             End If
         Next
