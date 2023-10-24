@@ -368,7 +368,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkSummariesRowCol.SetRCode(clsDummyFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
-        'ucrPnlColumnFactor.SetRCode(clsDummyFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrSaveTable.SetRCode(clsGroupByPipeOperator, bReset)
         bRcodeSet = True
@@ -516,6 +515,7 @@ Public Class dlgDescribeTwoVariable
         End If
         FactorColumns()
         'ChangePrefix()
+
     End Sub
 
     'Private Sub ChangePrefix()
@@ -604,7 +604,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveNAParameter()
         HideFormatTableButton()
         FactorColumns()
-        SummariesInRowsOrCols()
     End Sub
 
     Private Sub HideFormatTableButton()
@@ -662,7 +661,7 @@ Public Class dlgDescribeTwoVariable
             Else
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
-                clsSummaryTableFunction.AddParameter("factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames)
+                SummariesInRowsOrCols()
             End If
         End If
     End Sub
@@ -763,7 +762,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFrequencyParameters()
         AddRemoveNAParameter()
         HideFormatTableButton()
-        ' TestOKEnabled()
     End Sub
 
     Private Sub ChangeSumaryLabelText()
@@ -843,7 +841,7 @@ Public Class dlgDescribeTwoVariable
         ManageControlsVisibility()
         'TestOKEnabled()
         FactorColumns()
-        SummariesInRowsOrCols()
+        'SummariesInRowsOrCols()
     End Sub
 
     Private Sub ChangeFirstTypeLabel()
@@ -873,8 +871,8 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged
-        'ucrReceiverFirstVars.ControlContentsChanged()
+    Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged,
+        ucrReceiverFirstVars.ControlContentsChanged
         ChangeFirstTypeLabel()
         ChangeSumaryLabelText()
         UpdateSummaryTableFunction()
@@ -888,7 +886,7 @@ Public Class dlgDescribeTwoVariable
         HideFormatTableButton()
         'TestOKEnabled()
         FactorColumns()
-        SummariesInRowsOrCols()
+        'SummariesInRowsOrCols()
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
@@ -1014,6 +1012,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrChkSummariesRowCol_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummariesRowCol.ControlValueChanged
+        ManageControlsVisibility()
         SummariesInRowsOrCols()
     End Sub
 End Class
