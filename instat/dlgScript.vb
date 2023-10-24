@@ -268,11 +268,9 @@ Public Class dlgScript
         Dim exampleCode As New System.Text.StringBuilder()
 
         For Each line As String In inputLines
-            If line.Contains("##D") Then
-                Dim strTrimmedLine = line.Substring(line.IndexOf("##D") + 4).Trim
-                If Not String.IsNullOrEmpty(strTrimmedLine) Then
-                    exampleCode.AppendLine(strTrimmedLine) ' Append the code
-                End If
+            If Not String.IsNullOrEmpty(line) Then
+                Dim strTrimmedLine = line.Substring(line.IndexOf(" ")).Trim
+                exampleCode.AppendLine(strTrimmedLine) ' Append the code
             End If
         Next
 
@@ -282,8 +280,7 @@ Public Class dlgScript
 
     Private Sub lstCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCollection.SelectedIndexChanged
         Try
-            If lstCollection.SelectedItems.Count > 0 AndAlso TabControl1.SelectedTab Is TabPage6 AndAlso
-                                             strSelectedPackage <> "datasets" Then
+            If lstCollection.SelectedItems.Count > 0 AndAlso TabControl1.SelectedTab Is TabPage6 Then
                 Dim strTopic = lstCollection.SelectedItems(0).SubItems(0).Text
                 clsLibraryExpFunction.AddParameter("topic", Chr(34) & strTopic & Chr(34), iPosition:=0)
                 Dim strScript As String = "capture.output(" & clsLibraryExpFunction.ToScript() & ")"
@@ -389,7 +386,11 @@ Public Class dlgScript
     Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackages.ControlValueChanged
         If strSelectedPackage <> ucrComboGetPackages.GetText() Then
             strSelectedPackage = ucrComboGetPackages.GetText()
-            clsLibraryExpFunction.AddParameter("package", Chr(34) & strSelectedPackage & Chr(34), iPosition:=1)
+            If strSelectedPackage <> "datasets" Then
+                clsLibraryExpFunction.AddParameter("package", Chr(34) & strSelectedPackage & Chr(34), iPosition:=1)
+            Else
+                clsLibraryExampleFunction.RemoveParameterByName("package")
+            End If
             LoadDatasets(strSelectedPackage)
             TestOkEnabled()
         End If
