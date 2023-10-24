@@ -268,8 +268,8 @@ Public Class dlgScript
         Dim exampleCode As New System.Text.StringBuilder()
 
         For Each line As String In inputLines
-            If line.Contains("##D") AndAlso line.Length >= 14 Then
-                Dim strTrimmedLine = line.Substring(14).Trim
+            If line.Contains("##D") Then
+                Dim strTrimmedLine = line.Substring(line.IndexOf("##D") + 4).Trim
                 If Not String.IsNullOrEmpty(strTrimmedLine) Then
                     exampleCode.AppendLine(strTrimmedLine) ' Append the code
                 End If
