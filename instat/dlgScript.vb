@@ -107,6 +107,8 @@ Public Class dlgScript
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetLabelText("Model Name:")
 
+        ucrInputPreviewLibrary.txtInput.ScrollBars = ScrollBars.Vertical
+
         'hide base button comment controls
         ucrBase.chkComment.Checked = False
         ucrBase.chkComment.Enabled = False
@@ -270,7 +272,7 @@ Public Class dlgScript
         For Each line As String In inputLines
             If Not String.IsNullOrEmpty(line) Then
                 Dim strTrimmedLine = ""
-                If strSelectedPackage <> "datasets" Then
+                If strSelectedPackage <> "datasets" AndAlso line.Contains("##D") Then
                     strTrimmedLine = line.Substring(line.IndexOf("##D") + 4).Trim
                 Else
                     strTrimmedLine = line.Substring(line.IndexOf(" ")).Trim
@@ -394,7 +396,7 @@ Public Class dlgScript
             If strSelectedPackage <> "datasets" Then
                 clsLibraryExpFunction.AddParameter("package", Chr(34) & strSelectedPackage & Chr(34), iPosition:=1)
             Else
-                clsLibraryExampleFunction.RemoveParameterByName("package")
+                clsLibraryExpFunction.RemoveParameterByName("package")
             End If
             LoadDatasets(strSelectedPackage)
             TestOkEnabled()
