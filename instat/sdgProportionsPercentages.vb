@@ -82,4 +82,10 @@ Public Class sdgProportionsPercentages
             ucrReceiverColumn.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Sub ucrChkProportionsPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkProportionsPercentages.ControlContentsChanged
+        If ucrChkProportionsPercentages.Checked Then
+            rdoByFactors.Checked = True
+        End If
+    End Sub
 End Class
