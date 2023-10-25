@@ -84,8 +84,10 @@ Public Class sdgProportionsPercentages
     End Sub
 
     Private Sub ucrChkProportionsPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkProportionsPercentages.ControlContentsChanged
+        'temporarily fixes issue #8588
         If ucrChkProportionsPercentages.Checked Then
             rdoByFactors.Checked = True
         End If
     End Sub
+
 End Class
