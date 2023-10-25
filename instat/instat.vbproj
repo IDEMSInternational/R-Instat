@@ -491,18 +491,6 @@
     <Compile Include="dlgPasteNewColumns.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPasteNewDataFrame.Designer.vb">
-      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPasteNewDataFrame.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPasteSpecial.Designer.vb">
-      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPasteSpecial.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgScript.Designer.vb">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </Compile>
@@ -3068,12 +3056,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteNewColumns.resx">
       <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
-      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPasteSpecial.resx">
-      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>

@@ -85,11 +85,15 @@ Public Class clsOutputElement
         _strOutput = strOutput
     End Sub
 
-    ''' <summary>
+    ''' <summary> 
     ''' Gets formatted R Script, split into R Script Elements
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property FormattedRScript As List(Of clsRScriptElement)
+
+        'todo.
+        'this function may end up being called multiple times. For long scripts initialising clsRScript And getting tokens takes  lot of time. You can test this effect by pasting new data frame that has many columns.
+        'should the operation of getting tokens be done just once then stored to be reused f need be?
         Get
             Dim _lstRScriptElements As New List(Of clsRScriptElement)
             Try
