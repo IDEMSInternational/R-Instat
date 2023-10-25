@@ -69,8 +69,8 @@ Public Class ucrScript
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
-        'Make the log tab the selected tab
-        TabControl.SelectTab(iTabIndexLog)
+        'Make the script tab the selected tab
+        TabControl.SelectTab(1)
     End Sub
 
     Private Sub SetupInitialLayout()
