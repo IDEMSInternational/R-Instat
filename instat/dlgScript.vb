@@ -52,6 +52,11 @@ Public Class dlgScript
         ucrPnlGetData.AddRadioButton(rdoGetColumn)
         ucrPnlGetData.AddRadioButton(rdoGetObject)
 
+        ucrPnlExample.AddRadioButton(rdoData)
+        ucrPnlExample.AddRadioButton(rdoFunction)
+
+        ucrPnlExample.AddToLinkedControls(ucrInputFunction, {rdoFunction}, bNewLinkedHideIfParameterMissing:=True)
+
         'todo. this combobox can be a custom package control in future. Its also needed in dlgHelpVignettes
         ucrComboGetPackage.SetParameter(New RParameter("package", 0))
         ucrComboGetPackage.SetItems(GetPackages(), bAddConditions:=True)
@@ -147,6 +152,7 @@ Public Class dlgScript
 
         'get controls reset
         rdoGetDataFrame.Checked = True
+        rdoData.Checked = True
         ucrComboGetPackage.Reset()
         ucrComboGetPackages.Reset()
         ucrDataFrameGet.Reset()
@@ -274,9 +280,13 @@ Public Class dlgScript
     End Function
 
     Private Sub lstCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCollection.SelectedIndexChanged
+        Dim strTopic = lstCollection.SelectedItems(0).SubItems(0).Text
+        GetExample(strTopic)
+    End Sub
+
+    Private Sub GetExample(strTopic As String)
         Try
-            If lstCollection.SelectedItems.Count > 0 AndAlso TabControl1.SelectedTab Is TabPage6 Then
-                Dim strTopic = lstCollection.SelectedItems(0).SubItems(0).Text
+            If Not String.IsNullOrEmpty(strTopic) Then
                 clsLibraryExpFunction.AddParameter("topic", Chr(34) & strTopic & Chr(34), iPosition:=0)
                 If clsLibraryExpFunction IsNot Nothing Then
                     Dim strExampe = frmMain.clsRLink.RunInternalScriptGetValue(clsLibraryExpFunction.ToScript(), bSilent:=True).AsCharacter(0)
@@ -377,6 +387,16 @@ Public Class dlgScript
         clsRFunctionList.AddParameter(strData, strData)
         clsImportNewDataFrame.AddParameter("data_tables", clsRFunctionList.ToScript)
         SetPreviewScript(clsImportNewDataFrame, strData)
+    End Sub
+
+    Private Sub ucrPnlExample_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExample.ControlContentsChanged, ucrInputFunction.ControlContentsChanged
+        If rdoData.Checked Then
+            lstCollection.Visible = True
+        Else
+            lstCollection.Visible = False
+            Dim strTopic = ucrInputFunction.GetText
+            GetExample(strTopic)
+        End If
     End Sub
 
     Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackages.ControlValueChanged
