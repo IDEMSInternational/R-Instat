@@ -174,12 +174,13 @@ Public Class dlgPasteNewColumns
 
     Private Sub TestOkEnabled(Optional bValidateCopiedData As Boolean = True)
         Dim enableOK As Boolean = False
-        If bValidateCopiedData Then
-            enableOK = ValidateAndPreviewCopiedData()
-        ElseIf rdoDataFrame.Checked Then
+        If rdoDataFrame.Checked Then
             enableOK = ucrSaveNewDFName.IsComplete()
         ElseIf rdoColumns.Checked Then
             enableOK = Not String.IsNullOrEmpty(ucrDFSelected.strCurrDataFrame)
+        End If
+        If bValidateCopiedData Then
+            enableOK = ValidateAndPreviewCopiedData()
         End If
         ucrBase.OKEnabled(enableOK)
     End Sub
