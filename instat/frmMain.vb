@@ -2603,4 +2603,17 @@ Public Class frmMain
     Private Sub mnuToolsCheckForUpdates_Click(sender As Object, e As EventArgs) Handles mnuToolsCheckForUpdates.Click
         CheckForUpdates()
     End Sub
+
+    Public Sub InsertTextToScriptWindow(iCurrentPos As Integer, strText As String)
+        ucrScriptWindow.InsertText(iCurrentPos, strText)
+    End Sub
+
+    Public Sub RemoveLineToScriptWindow(strObjects As String())
+        ucrScriptWindow.RemoveLine(strObjects)
+    End Sub
+
+    Public Sub RenameScript(strNewName As String)
+        ucrScriptWindow.RenameScript(strNewName)
+    End Sub
+
 End Class
