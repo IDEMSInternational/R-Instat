@@ -127,16 +127,22 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Function GetInnerBracketedString(strData As String) As String
-        Dim intFirstRightBracket As Integer = InStr(strData, ")")
-        Dim intLastLeftBracket As Integer = InStrRev(strData, "(")
-        If intFirstRightBracket = 0 Or intLastLeftBracket = 0 Then
-            Return strData
-        ElseIf strData = "numeric(0)" Then
+        If strData.Contains("numeric(0)") Then
             Return String.Empty
-        Else
-            Dim strOutput As String = Mid(strData, intLastLeftBracket + 1, intFirstRightBracket - intLastLeftBracket - 1)
-            Return strOutput
         End If
+
+        Dim startPos As Integer = InStr(strData, "c(")
+        If startPos > 0 Then
+            ' Find the position of the first ')' after 'c('
+            Dim endPos As Integer = InStr(startPos, strData, ")")
+
+            If endPos > 0 Then
+                ' Extract the substring between 'c(' and ')'
+                Return Mid(strData, startPos + 2, endPos - startPos - 2)
+            End If
+        End If
+
+        Return strData
     End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
