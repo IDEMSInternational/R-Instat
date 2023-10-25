@@ -155,11 +155,10 @@ Public Class clsDataBook
             End If
             'if data not refreshed successfully, remove the data frame from the data book
             If Not dataFrame.RefreshData() Then
-                MessageBox.Show("Error: Could not retrieve data frame:" & strDataFrameName & " from R" &
-                                Environment.NewLine & "Data displayed in spreadsheet may not be up to date." &
-                                Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.",
+                MessageBox.Show("Error: Sorry R-Instat can not retrieve the: " & strDataFrameName & " data from R.",
                                 "Cannot retrieve data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 _lstDataFrames.Remove(dataFrame)
+                DeleteDataFrames(strDataFrameName)
             End If
         Next
         If lstOfCurrentRDataFrameNames.Count = _lstDataFrames.Count Then
@@ -188,6 +187,13 @@ Public Class clsDataBook
         End If
         Return listOfDataFrames
     End Function
+
+    Private Sub DeleteDataFrames(strDataName As String)
+        Dim clsDeleteFunction As New RFunction
+        clsDeleteFunction.SetRCommand(_RLink.strInstatDataObject & "$delete_dataframes")
+        clsDeleteFunction.AddParameter("data_names", Chr(34) & strDataName & Chr(34))
+        _RLink.RunScript(clsDeleteFunction.ToScript(), strComment:="Delete DataFrame(s)")
+    End Sub
 
 End Class
 
