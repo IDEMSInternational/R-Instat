@@ -320,9 +320,9 @@ Partial Class dlgScript
         Me.TabPage3.Controls.Add(Me.ucrSaveModel)
         Me.TabPage3.Controls.Add(Me.ucrSaveTable)
         Me.TabPage3.Controls.Add(Me.ucrSaveColumn)
-        Me.TabPage3.Controls.Add(Me.ucrDataFrameSave)
         Me.TabPage3.Controls.Add(Me.ucrSaveGraph)
         Me.TabPage3.Controls.Add(Me.ucrPnlSaveData)
+        Me.TabPage3.Controls.Add(Me.ucrDataFrameSave)
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
         Me.TabPage3.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage3.Name = "TabPage3"
