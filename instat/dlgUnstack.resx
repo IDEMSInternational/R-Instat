@@ -352,7 +352,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrChkCarryColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>135, 23</value>
   </data>
   <data name="ucrChkCarryColumns.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -373,7 +373,7 @@
     <value>True</value>
   </data>
   <data name="ucrNudValuesFill.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 279</value>
+    <value>172, 279</value>
   </data>
   <data name="ucrNudValuesFill.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -526,7 +526,7 @@
     <value>9, 412</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 52</value>
+    <value>408, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -641,9 +641,6 @@
   </data>
   <data name="&gt;&gt;ucrChkAddPrefix.ZOrder" xml:space="preserve">
     <value>18</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
