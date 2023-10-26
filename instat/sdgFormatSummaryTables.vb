@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class sdgFormatSummaryTables
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
+    Private clsTableTitleFunction, clsStubFunction, clsTabFootnoteTitleFunction, clsStubFootnoteFunction, clsStubCellsFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
         clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
         clsFootnoteCellBodyFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
         clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
@@ -53,6 +53,7 @@ Public Class sdgFormatSummaryTables
         ucrInputTitle.SetParameter(New RParameter("title", iNewPosition:=0))
         ucrInputTitle.SetLinkedDisplayControl(lblTitle)
 
+
         ucrInputSubtitle.SetParameter(New RParameter("subtitle", iNewPosition:=1))
         ucrInputSubtitle.SetLinkedDisplayControl(lblSubtitle)
 
@@ -65,8 +66,15 @@ Public Class sdgFormatSummaryTables
         ucrChkTitleFootnote.AddParameterPresentCondition(True, "title_footnote")
         ucrChkTitleFootnote.AddParameterPresentCondition(False, "title_footnote", False)
 
-        ucrInputSubtitleFootnote.SetParameter(New RParameter("subtitle_footnote", iNewPosition:=3))
+        ucrChkFootNote.SetText("Add footnote")
+        ucrChkFootNote.AddToLinkedControls(ucrInputStubsFootNote, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFootNote.SetLinkedDisplayControl(grpStubs)
 
+        ucrChkFootNote.AddParameterPresentCondition(True, "title_stub_footnote")
+        ucrChkFootNote.AddParameterPresentCondition(False, "title_stub_footnote", False)
+
+
+        ucrInputSubtitleFootnote.SetParameter(New RParameter("subtitle_footnote", iNewPosition:=3))
         ucrChkSubtitleFootnote.SetText("Add subtitle footnote")
         ucrChkSubtitleFootnote.AddToLinkedControls(ucrInputSubtitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSubtitleFootnote.SetLinkedDisplayControl(grpSubtitle)
@@ -82,66 +90,77 @@ Public Class sdgFormatSummaryTables
         ucrNudTitleSize.SetMinMax(1)
         ucrNudTitleSize.SetLinkedDisplayControl(lblTitleSize)
 
-        ucrChkAddTitleSubtitle.SetText("Include titles")
-        ucrChkAddTitleSubtitle.AddToLinkedControls({ucrInputTitle, UcrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeTitles.SetText("Include titles")
+        ucrChkIncludeTitles.AddToLinkedControls({ucrInputTitle, ucrInputSubtitle, ucrChkTitleFootnote, ucrChkSubtitleFootnote, ucrInputTitleFont, ucrNudTitleSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputTitleFootnote.SetLinkedDisplayControl(lblTitlefnText)
 
-        ucrChkAddTitleSubtitle.AddParameterPresentCondition(True, "title_subtitle")
-        ucrChkAddTitleSubtitle.AddParameterPresentCondition(False, "title_subtitle", False)
+        ucrChkIncludeTitles.AddParameterPresentCondition(True, "title_subtitle")
+        ucrChkIncludeTitles.AddParameterPresentCondition(False, "title_subtitle", False)
         ucrInputSubtitleFootnote.SetLinkedDisplayControl(lblSubtitleFnText)
 
-        ucrInputFootnoteColumnLocation.SetParameter(New RParameter("col_location", 5))
-        ucrInputFootnoteColumnLocation.SetValidationTypeAsNumericList()
+        ucrChkStubs.SetText("Include Stub")
+        ucrChkStubs.AddToLinkedControls({ucrInputStubs, ucrChkFootNote}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputFootnoteRowLocation.SetParameter(New RParameter("row_location", iNewPosition:=6))
-        ucrInputFootnoteRowLocation.SetValidationTypeAsNumericList()
-        ucrInputFootnoteRowLocation.SetLinkedDisplayControl(grpLocation)
+        ucrChkStubs.AddParameterPresentCondition(True, "title_stub")
+        ucrChkStubs.AddParameterPresentCondition(False, "title_stub", False)
 
-        ucrInputCellFootnote.SetParameter(New RParameter("cell_footnote", iNewPosition:=4))
-        ucrInputCellFootnote.SetLinkedDisplayControl(lblFootnote)
+        ucrInputStubs.SetParameter(New RParameter("Stub", iNewPosition:=0))
+        ucrInputStubs.SetLinkedDisplayControl(lblStubs)
 
-        ucrChkAddFootnote.SetText("Add footnote")
-        ucrChkAddFootnote.AddToLinkedControls({ucrInputCellFootnote, ucrInputFootnoteColumnLocation, ucrInputFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputStubsFootNote.SetParameter(New RParameter("Stub_footnote", iNewPosition:=0))
+        ucrInputStubsFootNote.SetLinkedDisplayControl(lblStubsFootNote)
 
-        ucrChkAddFootnote.AddParameterPresentCondition(True, "cell_footnote")
-        ucrChkAddFootnote.AddParameterPresentCondition(False, "cell_footnote", False)
+        'ucrInputFootnoteColumnLocation.SetParameter(New RParameter("col_location", 5))
+        'ucrInputFootnoteColumnLocation.SetValidationTypeAsNumericList()
 
-        ucrChKAddSecondFootnote.SetText("Add second footnote")
-        ucrChKAddSecondFootnote.AddToLinkedControls({ucrInputSecondCellFootnote, ucrInputSecondFootnoteColumnLocation, ucrInputSecondFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputFootnoteRowLocation.SetParameter(New RParameter("row_location", iNewPosition:=6))
+        'ucrInputFootnoteRowLocation.SetValidationTypeAsNumericList()
+        'ucrInputFootnoteRowLocation.SetLinkedDisplayControl(grpLocation)
 
-        ucrInputSecondFootnoteRowLocation.SetParameter(New RParameter("second_row_location", iNewPosition:=7))
-        ucrInputSecondFootnoteRowLocation.SetValidationTypeAsNumericList()
+        'ucrInputCellFootnote.SetParameter(New RParameter("cell_footnote", iNewPosition:=4))
+        'ucrInputCellFootnote.SetLinkedDisplayControl(lblFootnote)
 
-        ucrInputSecondFootnoteColumnLocation.SetParameter(New RParameter("second_col_location", iNewPosition:=6))
-        ucrInputSecondFootnoteColumnLocation.SetValidationTypeAsNumericList()
+        'ucrChkAddFootnote.SetText("Add footnote")
+        'ucrChkAddFootnote.AddToLinkedControls({ucrInputCellFootnote, ucrInputFootnoteColumnLocation, ucrInputFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputSecondCellFootnote.SetParameter(New RParameter("second_footnote", iNewPosition:=4))
-        ucrInputSecondCellFootnote.SetLinkedDisplayControl(lblSecondFootnote)
+        'ucrChkAddFootnote.AddParameterPresentCondition(True, "cell_footnote")
+        'ucrChkAddFootnote.AddParameterPresentCondition(False, "cell_footnote", False)
 
-        ucrInputSecondFootnoteColumnLocation.SetLinkedDisplayControl(grpSecondFootnote)
+        'ucrChKAddSecondFootnote.SetText("Add second footnote")
+        'ucrChKAddSecondFootnote.AddToLinkedControls({ucrInputSecondCellFootnote, ucrInputSecondFootnoteColumnLocation, ucrInputSecondFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChKAddSecondFootnote.AddParameterPresentCondition(True, "second_cellfootnote")
-        ucrChKAddSecondFootnote.AddParameterPresentCondition(False, "second_cellfootnote", False)
+        'ucrInputSecondFootnoteRowLocation.SetParameter(New RParameter("second_row_location", iNewPosition:=7))
+        'ucrInputSecondFootnoteRowLocation.SetValidationTypeAsNumericList()
 
-        ucrInputAddSourceNote.SetParameter(New RParameter("source_note", iNewPosition:=8))
+        'ucrInputSecondFootnoteColumnLocation.SetParameter(New RParameter("second_col_location", iNewPosition:=6))
+        'ucrInputSecondFootnoteColumnLocation.SetValidationTypeAsNumericList()
 
-        ucrChkAddSourcenote.SetText("Add source")
-        ucrChkAddSourcenote.AddToLinkedControls(ucrInputAddSourceNote, {True}, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputSecondCellFootnote.SetParameter(New RParameter("second_footnote", iNewPosition:=4))
+        'ucrInputSecondCellFootnote.SetLinkedDisplayControl(lblSecondFootnote)
 
-        ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
-        ucrChkAddSourcenote.AddParameterPresentCondition(False, "source_note", False)
+        'ucrInputSecondFootnoteColumnLocation.SetLinkedDisplayControl(grpSecondFootnote)
+
+        'ucrChKAddSecondFootnote.AddParameterPresentCondition(True, "second_cellfootnote")
+        'ucrChKAddSecondFootnote.AddParameterPresentCondition(False, "second_cellfootnote", False)
+
+        'ucrInputAddSourceNote.SetParameter(New RParameter("source_note", iNewPosition:=8))
+
+        'ucrChkAddSourcenote.SetText("Add source")
+        'ucrChkAddSourcenote.AddToLinkedControls(ucrInputAddSourceNote, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
+        'ucrChkAddSourcenote.AddParameterPresentCondition(False, "source_note", False)
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
+    Public Sub SetRCode(bReset As Boolean, clsNewStubFunction As RFunction, clsNewTableTitleFunction As RFunction, clsNewStubFootnoteFunction As RFunction, clsNewStubCellsFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
                         clsNewTableSourcenoteFunction As RFunction, clsNewTabStyleFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewPipeOperator As ROperator, clsNewFootnoteTitleLocationFunction As RFunction, clsNewFootnoteSubtitleLocationFunction As RFunction,
                         clsNewTabFootnoteSubtitleFunction As RFunction, clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator,
                         clsNewSecondFootnoteCellFunction As RFunction, clsNewTabStyleCellTextFunction As RFunction,
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
                         clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction)
-
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -149,7 +168,10 @@ Public Class sdgFormatSummaryTables
 
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
+        clsStubFunction = clsNewStubFunction
         clsTabFootnoteTitleFunction = clsNewTabFootnoteTitleFunction
+        clsStubFootnoteFunction = clsNewStubFootnoteFunction
+        clsStubCellsFunction = clsNewStubCellsFunction
         clsTabFootnoteSubtitleFunction = clsNewTabFootnoteSubtitleFunction
         clsTableSourcenoteFunction = clsNewTableSourcenoteFunction
         clsFootnoteSubtitleLocationFunction = clsNewFootnoteSubtitleLocationFunction
@@ -171,42 +193,57 @@ Public Class sdgFormatSummaryTables
             ucrInputSelectThemes.SetText("Dark Theme")
         End If
 
-        ucrChkAddTitleSubtitle.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeTitles.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
         ucrChkTitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkAddFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChKAddSecondFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrChkStubs.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkFootNote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+
         ucrChkSubtitleFootnote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkAddSourcenote.SetRCode(clsPipeOperator, bReset, bCloneIfNeeded:=True)
+
         ucrInputTitleFont.SetRCode(clsTabStyleCellTextFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTitleSize.SetRCode(clsTabStylePxFunction, bReset, bCloneIfNeeded:=True)
         ucrInputTitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        UcrInputSubtitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputCellFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSecondCellFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputFootnoteColumnLocation.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputFootnoteRowLocation.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSecondFootnoteColumnLocation.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSecondFootnoteRowLocation.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputAddSourceNote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputSubtitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+
         ucrInputTitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSubtitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlThemesPanel.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
+        ucrInputStubs.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputStubsFootNote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+
         bRCodeSet = True
     End Sub
 
-    Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
+    Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlValueChanged
         AddTableTitle()
         AddFootnote()
     End Sub
 
     Private Sub AddTableTitle()
-        If ucrChkAddTitleSubtitle.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not UcrInputSubtitle.IsEmpty) Then
+        If ucrChkIncludeTitles.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty) Then
             clsPipeOperator.AddParameter("title_subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
             clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
         Else
             clsPipeOperator.RemoveParameterByName("title_subtitle")
             clsPipeOperator.RemoveParameterByName("title_font")
+        End If
+    End Sub
+
+    Private Sub AddStub()
+        If ucrChkStubs.Checked AndAlso Not ucrInputStubs.IsEmpty Then
+            clsPipeOperator.AddParameter("title_stub", clsRFunctionParameter:=clsStubFunction, iPosition:=1)
+        Else
+            clsPipeOperator.RemoveParameterByName("title_stub")
+        End If
+    End Sub
+
+    Private Sub AddStubFootnote()
+        If ucrChkFootNote.Checked AndAlso Not ucrInputStubsFootNote.IsEmpty Then
+            clsPipeOperator.AddParameter("title_stub_footnote", clsRFunctionParameter:=clsStubFootnoteFunction, iPosition:=1)
+        Else
+            clsPipeOperator.RemoveParameterByName("title_stub_footnote")
         End If
     End Sub
 
@@ -219,10 +256,10 @@ Public Class sdgFormatSummaryTables
         End If
     End Sub
 
-    Private Sub ucrInputSubtitle_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSubtitle.ControlValueChanged
         AddTableTitle()
-        If Not UcrInputSubtitle.IsEmpty Then
-            clsTableTitleFunction.AddParameter("subtitle", Chr(34) & UcrInputSubtitle.GetText() & Chr(34), iPosition:=1)
+        If Not ucrInputSubtitle.IsEmpty Then
+            clsTableTitleFunction.AddParameter("subtitle", Chr(34) & ucrInputSubtitle.GetText() & Chr(34), iPosition:=1)
         Else
             clsTableTitleFunction.RemoveParameterByName("subtitle")
         End If
@@ -263,17 +300,6 @@ Public Class sdgFormatSummaryTables
         AddFootnote()
     End Sub
 
-    Private Sub ucrChkSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore)
-        If ucrChkSubtitleFootnote.Checked Then
-            clsTabFootnoteSubtitleFunction.AddParameter("locations", clsRFunctionParameter:=clsFootnoteSubtitleLocationFunction, iPosition:=2)
-            clsFootnoteSubtitleLocationFunction.AddParameter("groups", Chr(34) & "subtitle" & Chr(34), iPosition:=0)
-        Else
-            clsFootnoteSubtitleLocationFunction.RemoveParameterByName("groups")
-            clsTabFootnoteSubtitleFunction.RemoveParameterByName("locations")
-        End If
-        AddFootnote()
-    End Sub
-
     Private Sub ucrInputTitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTitleFootnote.ControlValueChanged
         If Not ucrInputTitleFootnote.IsEmpty Then
             clsTabFootnoteTitleFunction.AddParameter("footnote", Chr(34) & ucrInputTitleFootnote.GetText() & Chr(34), iPosition:=1)
@@ -283,7 +309,7 @@ Public Class sdgFormatSummaryTables
         AddFootnote()
     End Sub
 
-    Private Sub ucrInputSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrInputSubtitleFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSubtitleFootnote.ControlValueChanged
         If Not ucrInputSubtitleFootnote.IsEmpty Then
             clsTabFootnoteSubtitleFunction.AddParameter("footnote", Chr(34) & ucrInputSubtitleFootnote.GetText & Chr(34), iPosition:=1)
         Else
@@ -292,127 +318,18 @@ Public Class sdgFormatSummaryTables
         AddFootnote()
     End Sub
 
-    Private Sub ucrInputAddSourceNote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAddSourceNote.ControlValueChanged
-        AddRemoveSourceNoteParameter()
-        AddSourceNote()
-    End Sub
+    Private Sub PipeOperator_controlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlContentsChanged,
+            ucrInputTitle.ControlContentsChanged, ucrInputTitleFootnote.ControlContentsChanged
 
-    Private Sub PipeOperator_controlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlContentsChanged,
-            ucrChkAddFootnote.ControlContentsChanged, ucrChKAddSecondFootnote.ControlContentsChanged, ucrChkAddSourcenote.ControlContentsChanged,
-            ucrInputTitle.ControlContentsChanged, ucrInputTitleFootnote.ControlContentsChanged, ucrInputAddSourceNote.ControlContentsChanged,
-            ucrInputCellFootnote.ControlContentsChanged, ucrInputSecondCellFootnote.ControlContentsChanged
-
-        If ucrChkAddTitleSubtitle.Checked OrElse ucrChkAddFootnote.Checked OrElse ucrChKAddSecondFootnote.Checked OrElse ucrChkAddSourcenote.Checked OrElse
-            ucrChKAddSecondFootnote.Checked Then
-            If ucrInputTitle.IsEmpty AndAlso UcrInputSubtitle.IsEmpty AndAlso ucrInputTitleFootnote.IsEmpty AndAlso
-                ucrInputSubtitleFootnote.IsEmpty AndAlso ucrInputAddSourceNote.IsEmpty AndAlso ucrInputCellFootnote.IsEmpty AndAlso ucrInputSecondCellFootnote.IsEmpty Then
+        If ucrChkIncludeTitles.Checked Then
+            If ucrInputTitle.IsEmpty AndAlso ucrInputSubtitle.IsEmpty AndAlso ucrInputTitleFootnote.IsEmpty AndAlso
+                ucrInputSubtitleFootnote.IsEmpty Then
                 clsJoiningOperator.RemoveParameterByName("pipe")
             Else
                 clsJoiningOperator.AddParameter("pipe", clsROperatorParameter:=clsPipeOperator, iPosition:=1)
             End If
         Else
             clsJoiningOperator.RemoveParameterByName("pipe")
-        End If
-    End Sub
-
-    Private Sub AddCellFootnote()
-        If Not bRCodeSet Then
-            Exit Sub
-        End If
-        If ucrChkAddFootnote.Checked AndAlso Not ucrInputCellFootnote.IsEmpty Then
-            clsPipeOperator.AddParameter("cell_footnote", clsRFunctionParameter:=clsFootnoteCellFunction, iPosition:=3)
-        Else
-            clsPipeOperator.RemoveParameterByName("cell_footnote")
-        End If
-
-        If ucrChKAddSecondFootnote.Checked AndAlso Not ucrInputSecondCellFootnote.IsEmpty Then
-            clsPipeOperator.AddParameter("second_cellfootnote", clsRFunctionParameter:=clsSecondFootnoteCellFunction, iPosition:=3)
-        Else
-            clsPipeOperator.RemoveParameterByName("second_cellfootnote")
-        End If
-    End Sub
-
-    Private Sub AddFootnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFootnote.ControlValueChanged, ucrChKAddSecondFootnote.ControlValueChanged
-        If ucrChkAddFootnote.Checked Then
-            clsFootnoteCellFunction.AddParameter("locations", clsRFunctionParameter:=clsFootnoteCellBodyFunction, iPosition:=3)
-        Else
-            clsFootnoteCellFunction.RemoveParameterByName("locations")
-        End If
-
-        If ucrChKAddSecondFootnote.Checked Then
-            clsSecondFootnoteCellFunction.AddParameter("locations", clsRFunctionParameter:=clsSecondFootnoteCellBodyFunction, iPosition:=3)
-        Else
-            clsSecondFootnoteCellFunction.RemoveParameterByName("locations")
-        End If
-        AddRemoveFootnote()
-        AddCellFootnote()
-    End Sub
-
-    Private Sub ColumnLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFootnoteColumnLocation.ControlValueChanged, ucrInputSecondFootnoteColumnLocation.ControlValueChanged
-        If Not ucrInputFootnoteColumnLocation.IsEmpty Then
-            clsFootnoteCellBodyFunction.AddParameter("columns", clsRFunctionParameter:=ucrInputFootnoteColumnLocation.clsRList, iPosition:=0)
-        Else
-            clsFootnoteCellBodyFunction.AddParameter("columns", "everything()", iPosition:=0)
-        End If
-
-        If Not ucrInputSecondFootnoteColumnLocation.IsEmpty Then
-            clsSecondFootnoteCellBodyFunction.AddParameter("columns", clsRFunctionParameter:=ucrInputSecondFootnoteColumnLocation.clsRList, iPosition:=0)
-        Else
-            clsSecondFootnoteCellBodyFunction.AddParameter("columns", "everything()", iPosition:=0)
-        End If
-    End Sub
-
-    Private Sub RowLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFootnoteRowLocation.ControlValueChanged, ucrInputSecondFootnoteRowLocation.ControlValueChanged
-        If Not ucrInputFootnoteRowLocation.IsEmpty Then
-            clsFootnoteCellBodyFunction.AddParameter("rows", clsRFunctionParameter:=ucrInputFootnoteRowLocation.clsRList, iPosition:=1)
-        Else
-            clsFootnoteCellBodyFunction.AddParameter("rows", "everything()", iPosition:=1)
-        End If
-
-        If Not ucrInputSecondFootnoteRowLocation.IsEmpty Then
-            clsSecondFootnoteCellBodyFunction.AddParameter("rows", clsRFunctionParameter:=ucrInputSecondFootnoteRowLocation.clsRList, iPosition:=1)
-        Else
-            clsSecondFootnoteCellBodyFunction.AddParameter("rows", "everything()", iPosition:=1)
-        End If
-    End Sub
-
-    Private Sub Footnote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCellFootnote.ControlValueChanged, ucrInputSecondCellFootnote.ControlValueChanged
-        AddRemoveFootnote()
-        AddCellFootnote()
-    End Sub
-
-    Private Sub AddRemoveFootnote()
-        If Not ucrInputCellFootnote.IsEmpty Then
-            clsFootnoteCellFunction.AddParameter("footnote", Chr(34) & ucrInputCellFootnote.GetText() & Chr(34), iPosition:=2)
-        Else
-            clsFootnoteCellFunction.RemoveParameterByName("footnote")
-        End If
-
-        If Not ucrInputSecondCellFootnote.IsEmpty Then
-            clsSecondFootnoteCellFunction.AddParameter("footnote", Chr(34) & ucrInputSecondCellFootnote.GetText() & Chr(34), iPosition:=2)
-        Else
-            clsSecondFootnoteCellFunction.RemoveParameterByName("footnote")
-        End If
-    End Sub
-
-    Private Sub AddSourceNote()
-        If ucrChkAddSourcenote.Checked AndAlso Not ucrInputAddSourceNote.IsEmpty Then
-            clsPipeOperator.AddParameter("source_note", iPosition:=4, clsRFunctionParameter:=clsTableSourcenoteFunction)
-        Else
-            clsPipeOperator.RemoveParameterByName("source_note")
-        End If
-    End Sub
-
-    Private Sub ucrChkAddSourcenote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddSourcenote.ControlValueChanged
-        AddSourceNote()
-        AddRemoveSourceNoteParameter()
-    End Sub
-
-    Private Sub AddRemoveSourceNoteParameter()
-        If Not ucrInputAddSourceNote.IsEmpty Then
-            clsTableSourcenoteFunction.AddParameter("source_note", Chr(34) & ucrInputAddSourceNote.GetText() & Chr(34), iPosition:=1)
-        Else
-            clsTableSourcenoteFunction.RemoveParameterByName("source_note")
         End If
     End Sub
 
@@ -450,6 +367,37 @@ Public Class sdgFormatSummaryTables
 
     Private Sub AddRemoveManualTheme()
         cmdManualTheme.Visible = rdoManualTheme.Checked
+    End Sub
+
+    Private Sub ucrInputStubs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStubs.ControlValueChanged
+        If Not ucrInputStubs.IsEmpty Then
+            clsStubFunction.AddParameter("label", Chr(34) & ucrInputStubs.GetText() & Chr(34), iPosition:=0)
+        Else
+            clsStubFunction.RemoveParameterByName("label")
+        End If
+        AddStub()
+    End Sub
+
+    Private Sub ucrInputStubsFootNote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStubsFootNote.ControlValueChanged
+        If Not ucrInputStubsFootNote.IsEmpty Then
+            clsStubFootnoteFunction.AddParameter("footnote", Chr(34) & ucrInputStubsFootNote.GetText() & Chr(34), iPosition:=0)
+        Else
+            clsStubFootnoteFunction.RemoveParameterByName("footnote")
+        End If
+        AddStubFootnote()
+    End Sub
+
+    Private Sub ucrChkFootNote_ControlValueChanged(ucrChangedControl As ucrCore)
+        If ucrChkFootNote.Checked AndAlso Not ucrInputStubsFootNote.IsEmpty Then
+            clsStubFootnoteFunction.AddParameter("locations", clsRFunctionParameter:=clsStubCellsFunction)
+        Else
+            clsStubFootnoteFunction.RemoveParameterByName("locations")
+        End If
+        AddStubFootnote()
+    End Sub
+
+    Private Sub ucrChkStubs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStubs.ControlValueChanged
+        AddStub()
     End Sub
 
     'Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
