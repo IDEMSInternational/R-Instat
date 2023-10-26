@@ -167,6 +167,7 @@ pkgs <-
     "formattable",
     #A 'ggplot2' extension that allows text to follow curved paths.
     "geomtextpath",
+    "moderndive",
     "collapse"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)

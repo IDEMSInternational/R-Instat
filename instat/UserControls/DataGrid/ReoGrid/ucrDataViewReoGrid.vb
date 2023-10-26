@@ -309,10 +309,12 @@ Public Class ucrDataViewReoGrid
             ' Check if the row index is within the valid range
             If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
                 If bApplyToRows Then
-                    ' Apply the row style to the entire row
-                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
+                    For i As Integer = 0 To currWorkSheet.ColumnCount - 1
+                        ' Apply the row style to the entire row
+                        currWorkSheet.Cells(rowNumber, i).Style.BackColor = color
+                    Next
                 Else
-                    currWorkSheet.SetRangeStyles(New RangePosition(rowNumber, 0, 1, colIndex), rowStyle)
+                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
                 End If
             End If
         Next
