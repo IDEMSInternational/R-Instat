@@ -55,8 +55,6 @@ Public Class dlgScript
         ucrPnlExample.AddRadioButton(rdoData)
         ucrPnlExample.AddRadioButton(rdoFunction)
 
-        ucrPnlExample.AddToLinkedControls(ucrInputFunction, {rdoFunction}, bNewLinkedHideIfParameterMissing:=True)
-
         'todo. this combobox can be a custom package control in future. Its also needed in dlgHelpVignettes
         ucrComboGetPackage.SetParameter(New RParameter("package", 0))
         ucrComboGetPackage.SetItems(GetPackages(), bAddConditions:=True)
@@ -225,7 +223,7 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub FillListView(dfDataframe As DataFrame)
+    Private Sub FillListViewWithDatasets(dfDataframe As DataFrame)
         Dim lstItem As ListViewItem
 
         lstCollection.Items.Clear()
@@ -239,6 +237,34 @@ Public Class dlgScript
                 End If
             Next
             lstCollection.Select()
+            lstCollection.Columns(0).Text = "Data"
+        End If
+    End Sub
+
+    Private Sub FillListViewWithFunctions(lstFunctions As List(Of String))
+        Dim lstItem As ListViewItem
+        lstCollection.Items.Clear()
+        If lstFunctions IsNot Nothing Then
+            For i As Integer = 0 To lstFunctions.Count - 1
+                lstItem = lstCollection.Items.Add(lstFunctions(i))
+                lstItem.SubItems.Add("")
+            Next
+            lstCollection.Select()
+            lstCollection.Columns(0).Text = "Functions"
+        End If
+    End Sub
+
+    Private Sub LoadFunctions(strPackage As String)
+        Dim expTemp As SymbolicExpression
+        Dim lstFunction As New List(Of String)
+        If strPackage IsNot Nothing Then
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue("ls(pos = asNamespace(" & Chr(34) & strPackage & Chr(34) & "))", bSilent:=True)
+            If expTemp IsNot Nothing Then
+                For i = 0 To expTemp.AsList.Length - 1
+                    lstFunction.Add(expTemp.AsList.AsCharacter(i))
+                Next
+            End If
+            FillListViewWithFunctions(lstFunction)
         End If
     End Sub
 
@@ -252,7 +278,7 @@ Public Class dlgScript
                 dfPackage = expTemp.AsDataFrame
             End If
         End If
-        FillListView(dfDataframe:=dfPackage)
+        FillListViewWithDatasets(dfDataframe:=dfPackage)
     End Sub
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged, ucrDataFrameGet.ControlValueChanged
@@ -280,8 +306,10 @@ Public Class dlgScript
     End Function
 
     Private Sub lstCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCollection.SelectedIndexChanged
-        Dim strTopic = lstCollection.SelectedItems(0).SubItems(0).Text
-        GetExample(strTopic)
+        If lstCollection.SelectedItems.Count > 0 Then
+            Dim strTopic = lstCollection.SelectedItems(0).SubItems(0).Text
+            GetExample(strTopic)
+        End If
     End Sub
 
     Private Sub GetExample(strTopic As String)
@@ -291,11 +319,11 @@ Public Class dlgScript
                 If clsLibraryExpFunction IsNot Nothing Then
                     Dim strExampe = frmMain.clsRLink.RunInternalScriptGetValue(clsLibraryExpFunction.ToScript(), bSilent:=True).AsCharacter(0)
                     Dim strResult = RemoveDoubleHashD(strExampe)
-                    ucrInputPreviewLibrary.SetText(If(String.IsNullOrEmpty(strResult), "No Example", strResult))
+                    ucrInputPreviewLibrary.SetText(strResult)
                 End If
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(strTopic & " has a help file but no examples.")
         End Try
     End Sub
 
@@ -389,17 +417,7 @@ Public Class dlgScript
         SetPreviewScript(clsImportNewDataFrame, strData)
     End Sub
 
-    Private Sub ucrPnlExample_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExample.ControlContentsChanged, ucrInputFunction.ControlContentsChanged
-        If rdoData.Checked Then
-            lstCollection.Visible = True
-        Else
-            lstCollection.Visible = False
-            Dim strTopic = ucrInputFunction.GetText
-            GetExample(strTopic)
-        End If
-    End Sub
-
-    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackages.ControlValueChanged
+    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
         If strSelectedPackage <> ucrComboGetPackages.GetText() Then
             strSelectedPackage = ucrComboGetPackages.GetText()
             If strSelectedPackage <> "datasets" Then
@@ -407,8 +425,14 @@ Public Class dlgScript
             Else
                 clsLibraryExpFunction.RemoveParameterByName("package")
             End If
-            LoadDatasets(strSelectedPackage)
             TestOkEnabled()
+        End If
+        ucrInputPreviewLibrary.txtInput.Clear()
+
+        If rdoData.Checked Then
+            LoadDatasets(strSelectedPackage)
+        Else
+            LoadFunctions(strSelectedPackage)
         End If
     End Sub
 
