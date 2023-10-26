@@ -90,32 +90,32 @@ Public Class ucrAdditionalLayers
         SetEditDeleteEnabled()
     End Sub
 
-    'Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-    '    Dim clsNewLocalAesFunction As New RFunction
-    '    Dim clsNewGeomFunction As New RFunction
-    '    Dim clsNewGeomParameter As RParameter
+    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        Dim clsNewLocalAesFunction As New RFunction
+        Dim clsNewGeomFunction As New RFunction
+        Dim clsNewGeomParameter As RParameter
 
-    '    clsNewLocalAesFunction = GgplotDefaults.clsAesFunction.Clone()
+        clsNewLocalAesFunction = GgplotDefaults.clsAesFunction.Clone()
 
-    '    clsNewGeomFunction.SetPackageName("ggplot2")
-    '    clsNewGeomFunction.SetRCommand("geom_boxplot")
+        clsNewGeomFunction.SetPackageName("ggplot2")
+        clsNewGeomFunction.SetRCommand("geom_boxplot")
 
-    '    sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataFrame:=strGlobalDataFrame)
-    '    ParentForm.SendToBack()
-    '    sdgLayerOptions.tbcLayers.SelectedIndex = 0
-    '    sdgLayerOptions.ShowDialog()
-    '    strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataFrame:=strGlobalDataFrame)
+        ParentForm.SendToBack()
+        sdgLayerOptions.tbcLayers.SelectedIndex = 0
+        sdgLayerOptions.ShowDialog()
+        strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
 
-    '    clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
-    '    iMaxParameterPosition = iMaxParameterPosition + 1
+        clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
+        iMaxParameterPosition = iMaxParameterPosition + 1
 
-    '    clsNewGeomParameter = New RParameter()
-    '    clsNewGeomParameter.SetArgumentName(clsNewGeomFunction.strRCommand & iMaxParameterPosition)
-    '    clsNewGeomParameter.SetArgument(clsNewGeomFunction)
-    '    clsNewGeomParameter.Position = iMaxParameterPosition
-    '    clsBaseOperator.AddParameter(clsNewGeomParameter)
-    '    AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
-    'End Sub
+        clsNewGeomParameter = New RParameter()
+        clsNewGeomParameter.SetArgumentName(clsNewGeomFunction.strRCommand & iMaxParameterPosition)
+        clsNewGeomParameter.SetArgument(clsNewGeomFunction)
+        clsNewGeomParameter.Position = iMaxParameterPosition
+        clsBaseOperator.AddParameter(clsNewGeomParameter)
+        AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
+    End Sub
 
     Private Sub SetEditDeleteEnabled()
         If lstLayers.Items.Count > 0 AndAlso lstLayers.SelectedItems.Count = 1 Then
@@ -189,31 +189,4 @@ Public Class ucrAdditionalLayers
         End If
         Return strGeom
     End Function
-
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        Dim clsNewLocalAesFunction As New RFunction
-        Dim clsNewGeomFunction As New RFunction
-        Dim clsNewGeomParameter As RParameter
-
-        clsNewLocalAesFunction = GgplotDefaults.clsAesFunction.Clone()
-
-        clsNewGeomFunction.SetPackageName("ggplot2")
-        clsNewGeomFunction.SetRCommand("geom_boxplot")
-
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataFrame:=strGlobalDataFrame)
-        ParentForm.SendToBack()
-        sdgLayerOptions.tbcLayers.SelectedIndex = 0
-        sdgLayerOptions.ShowDialog()
-        strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
-
-        clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
-        iMaxParameterPosition = iMaxParameterPosition + 1
-
-        clsNewGeomParameter = New RParameter()
-        clsNewGeomParameter.SetArgumentName(clsNewGeomFunction.strRCommand & iMaxParameterPosition)
-        clsNewGeomParameter.SetArgument(clsNewGeomFunction)
-        clsNewGeomParameter.Position = iMaxParameterPosition
-        clsBaseOperator.AddParameter(clsNewGeomParameter)
-        AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
-    End Sub
 End Class
