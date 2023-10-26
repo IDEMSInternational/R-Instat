@@ -736,8 +736,13 @@ Public Class RLink
             'if not an assignment operation, then capture the output
             Dim strRStatementNoFormatting As String =
                     clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
-            If clsRStatement.clsAssignment Is Nothing _
-                    AndAlso Not String.IsNullOrWhiteSpace(strRStatementNoFormatting) Then
+            If strRStatementNoFormatting.StartsWith(strInstatDataObject & "$get_object_data") _
+                        OrElse strRStatementNoFormatting.StartsWith(strInstatDataObject & "$get_last_object_data") _
+                        OrElse strRStatementNoFormatting.StartsWith("view_object_data") Then
+                strOutput = GetFileOutput(strRStatementNoFormatting, bSilent:=False,
+                                      bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            ElseIf clsRStatement.clsAssignment Is Nothing _
+                AndAlso Not String.IsNullOrWhiteSpace(strRStatementNoFormatting) Then
                 strOutput = GetFileOutput("view_object_data(object = " _
                                           & strRStatementNoFormatting _
                                           & " , object_format = 'text' )", bSilent:=False,
@@ -748,7 +753,7 @@ Public Class RLink
             End If
 
             clsOutputLogger.AddOutput(strRStatement, strOutput, bAsFile:=True,
-                                      bDisplayOutputInExternalViewer:=False)
+                    bDisplayOutputInExternalViewer:=strRStatementNoFormatting.StartsWith("view_object_data"))
             LogScript(strRStatement.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
