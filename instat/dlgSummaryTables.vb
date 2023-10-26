@@ -27,7 +27,7 @@ Public Class dlgSummaryTables
     Private clsStubHeadFunction, clsPivotWiderFunction As New RFunction
     Private iUcrBaseXLocation, iDialogueXsize As Integer
 
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
+    Private clsTableTitleFunction, clsStubFunction, clsStubCellsFunction, clsTabFootnoteTitleFunction, clsStubFootnoteFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction,
             clsTabFootnoteSubtitleFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsDummyFunction,
             clsTabStyleCellTextFunction, clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesTabOptionsFunction,
@@ -194,7 +194,10 @@ Public Class dlgSummaryTables
         clsSummariesList = New RFunction
         clsConcFunction = New RFunction
         clsTableTitleFunction = New RFunction
+        clsStubFunction = New RFunction
+        clsStubCellsFunction = New RFunction
         clsTabFootnoteTitleFunction = New RFunction
+        clsStubFootnoteFunction = New RFunction
         clsTableSourcenoteFunction = New RFunction
         clsFootnoteTitleLocationFunction = New RFunction
         clsFootnoteSubtitleLocationFunction = New RFunction
@@ -293,8 +296,17 @@ Public Class dlgSummaryTables
         clsTableTitleFunction.SetPackageName("gt")
         clsTableTitleFunction.SetRCommand("tab_header")
 
+        clsStubFunction.SetPackageName("gt")
+        clsStubFunction.SetRCommand("tab_stubhead")
+
+        clsStubCellsFunction.SetPackageName("gt")
+        clsStubCellsFunction.SetRCommand("cells_stubhead")
+
         clsTabFootnoteTitleFunction.SetPackageName("gt")
         clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
+
+        clsStubFootnoteFunction.SetPackageName("gt")
+        clsStubFootnoteFunction.SetRCommand("tab_footnote")
 
         clsTabFootnoteSubtitleFunction.SetPackageName("gt")
         clsTabFootnoteSubtitleFunction.SetRCommand("tab_footnote")
@@ -397,7 +409,7 @@ Public Class dlgSummaryTables
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
         If rdoSummaryTable.Checked Then
-            sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+            sdgFormatSummaryTables.SetRCode(clsNewStubCellsFunction:=clsStubCellsFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewStubFunction:=clsStubFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                          clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
@@ -405,7 +417,7 @@ Public Class dlgSummaryTables
                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         Else
-            sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+            sdgFormatSummaryTables.SetRCode(clsNewStubCellsFunction:=clsStubCellsFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewStubFunction:=clsStubFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                      clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
