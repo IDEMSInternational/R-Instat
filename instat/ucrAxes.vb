@@ -889,15 +889,11 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ExpandControl()
-        If strAxisType = "discrete" Then
-            If ucrChkExpandDiscrete.Checked AndAlso Not ucrInputExpandDiscrete.IsEmpty Then
-                clsXYScaleDiscreteFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpandDiscrete.clsRList)
-            Else
-                clsXYScaleDiscreteFunction.RemoveParameterByName("expand")
-            End If
-        Else
+ If strAxisType = "discrete" AndAlso ucrChkExpandDiscrete.Checked AndAlso Not ucrInputExpandDiscrete.IsEmpty Then
+            clsXYScaleDiscreteFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpandDiscrete.clsRList)
+       Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("expand")
-        End If
+  End If
     End Sub
 
     Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged
