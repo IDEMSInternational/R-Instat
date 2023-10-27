@@ -862,13 +862,9 @@ Public Class sdgPlots
             clsGetDataType.AddParameter("column", Chr(34) & strVariable & Chr(34))
 
             expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
-            If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
-                If expColumnType.AsCharacter.Count > 1 Then
-                    strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
-                Else
-                    strCurrDataType = expColumnType.AsCharacter(0)
-                End If
-            End If
+ If expColumnType?.Type <> Internals.SymbolicExpressionType.Null Then
+                strCurrDataType = If(expColumnType.AsCharacter.Count > 1, Join(expColumnType.AsCharacter.ToArray, ","), expColumnType.AsCharacter(0))
+ End If
 
             bIsFactor = If({"factor", "ordered,factor"}.Contains(strCurrDataType), True, False)
 
