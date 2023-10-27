@@ -409,7 +409,6 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-
     Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYScaleDiscreteFunction As RFunction = Nothing, Optional clsNewXYSecondaryAxisFunction As RFunction = Nothing,
                                   Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional strDataFrame As String = "",
                                   Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewXYScaleDateFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False, Optional strNewVariable As String = "")
@@ -718,40 +717,41 @@ Public Class ucrAxes
     End Sub
 
     Private Sub SetAxisTypeControls()
-        strAxisType = ucrInputAxisType.GetText()
+        Dim strAxisType As String = ucrInputAxisType.GetText()
         'hide all axis type lanels
         grpMajorBreaks.Hide()
         grpScales.Hide()
         grpScaleDiscrete.Hide()
         grpScaleXDate.Hide()
-        If strAxisType.ToLower = "continuous" Then
-            'show continous panels
-            'TODO put controls in panels so group boxes can be used for multiple cases
-            grpMajorBreaks.Show()
-            grpMinorBreaks.Show()
-            grpScales.Show()
-            grpScaleDiscrete.Hide()
-            grpMajorBreaksDiscrete.Hide()
-            grpSecondAxis.Show()
-        ElseIf strAxisType.ToLower = "discrete" Then
-            'show discrete panels
-            grpSecondAxis.Hide()
-            grpScaleDiscrete.Show()
-            grpScaleXDate.Hide()
-            grpMajorBreaks.Hide()
-            grpMinorBreaks.Hide()
-            grpScales.Hide()
-            grpMajorBreaksDiscrete.Show()
-        ElseIf strAxisType.ToLower = "date" Then
-            'show date panels
-            grpScaleXDate.Show()
-            grpMajorBreaks.Hide()
-            grpMinorBreaks.Hide()
-            grpScales.Hide()
-            grpScaleDiscrete.Hide()
-            grpMajorBreaksDiscrete.Hide()
-            grpSecondAxis.Show()
-        End If
+        Select Case strAxisType
+            Case "continuous"
+                'show continous panels
+                'TODO put controls in panels so group boxes can be used for multiple cases
+                grpMajorBreaks.Show()
+                grpMinorBreaks.Show()
+                grpScales.Show()
+                grpScaleDiscrete.Hide()
+                grpMajorBreaksDiscrete.Hide()
+                grpSecondAxis.Show()
+            Case "discrete"
+                'show discrete panels
+                grpSecondAxis.Hide()
+                grpScaleDiscrete.Show()
+                grpScaleXDate.Hide()
+                grpMajorBreaks.Hide()
+                grpMinorBreaks.Hide()
+                grpScales.Hide()
+                grpMajorBreaksDiscrete.Show()
+            Case "date"
+                'show date panels
+                grpScaleXDate.Show()
+                grpMajorBreaks.Hide()
+                grpMinorBreaks.Hide()
+                grpScales.Hide()
+                grpScaleDiscrete.Hide()
+                grpMajorBreaksDiscrete.Hide()
+                grpSecondAxis.Show()
+        End Select
     End Sub
 
     Private Sub BreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMajorBreaks.ControlValueChanged, ucrInputMajorBreaksCustom.ControlValueChanged
@@ -889,11 +889,11 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ExpandControl()
- If strAxisType = "discrete" AndAlso ucrChkExpandDiscrete.Checked AndAlso Not ucrInputExpandDiscrete.IsEmpty Then
+        If strAxisType = "discrete" AndAlso ucrChkExpandDiscrete.Checked AndAlso Not ucrInputExpandDiscrete.IsEmpty Then
             clsXYScaleDiscreteFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpandDiscrete.clsRList)
-       Else
+        Else
             clsXYScaleDiscreteFunction.RemoveParameterByName("expand")
-  End If
+        End If
     End Sub
 
     Private Sub ucrChkExpandDiscrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpandDiscrete.ControlValueChanged
@@ -915,7 +915,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub AddRemoveLimits()
-        If ucrChkLimitsFrom.Checked AndAlso Not (ucrNudFrom.IsEmpty AndAlso ucrNudTo.IsEmpty) Then
+        If ucrChkLimitsFrom.Checked AndAlso Not ucrNudFrom.IsEmpty AndAlso Not ucrNudTo.IsEmpty Then
             clsLeftBracketOperator.AddParameter("right", ucrNudFrom.GetText, bIncludeArgumentName:=False)
             clsRightBracketOperator.AddParameter("left", ucrNudTo.GetText & "]", bIncludeArgumentName:=False)
             clsXYScaleDiscreteFunction.AddParameter("limits", clsRFunctionParameter:=clsConcatenateFunction)

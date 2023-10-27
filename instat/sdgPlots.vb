@@ -847,7 +847,7 @@ Public Class sdgPlots
 
     Private Function IsFactor(bIsX As Boolean, strVariable As String) As Boolean
         Dim strAes As String
-    strAes = If(bIsX, "x", "y")
+        strAes = If(bIsX, "x", "y")
 
         Dim bIsFactor As Boolean = False
         If clsGlobalAesFunction.ContainsParameter(strAes) Then
@@ -862,9 +862,9 @@ Public Class sdgPlots
             clsGetDataType.AddParameter("column", Chr(34) & strVariable & Chr(34))
 
             expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
- If expColumnType?.Type <> Internals.SymbolicExpressionType.Null Then
+            If expColumnType?.Type <> Internals.SymbolicExpressionType.Null Then
                 strCurrDataType = If(expColumnType.AsCharacter.Count > 1, Join(expColumnType.AsCharacter.ToArray, ","), expColumnType.AsCharacter(0))
- End If
+            End If
 
             bIsFactor = If({"factor", "ordered,factor"}.Contains(strCurrDataType), True, False)
 
@@ -1065,19 +1065,16 @@ Public Class sdgPlots
 
     Private Sub AddRemoveLabs()
         If bRCodeSet Then
-            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() Then
-                clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
-                If ucrChkIncludeTitles.Checked Then
-                    clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
-                    If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
-                        clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
-                    Else
-                        clsBaseOperator.RemoveParameterByName("labs")
-                    End If
+            If ucrChkIncludeTitles.Checked Then
+                clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+                If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() OrElse Not ucrInputTag.IsEmpty OrElse Not ucrInputLegendTitle.IsEmpty Then
+                    clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
                 Else
                     clsBaseOperator.RemoveParameterByName("labs")
-                    clsBaseOperator.RemoveParameterByName("theme")
                 End If
+            Else
+                clsBaseOperator.RemoveParameterByName("labs")
+                clsBaseOperator.RemoveParameterByName("theme")
             End If
         End If
     End Sub

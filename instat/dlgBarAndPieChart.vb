@@ -719,7 +719,7 @@ Public Class dlgBarAndPieChart
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         Dim clsTempGlobalAesFunction As New RFunction
         If rdoValue.Checked OrElse rdoFrequency.Checked Then
-        clsTempGlobalAesFunction = If(ucrChkPolarCoordinates.Checked, clsPieAesFunction, clsBarAesFunction)
+            clsTempGlobalAesFunction = If(ucrChkPolarCoordinates.Checked, clsPieAesFunction, clsBarAesFunction)
         End If
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                                 clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
