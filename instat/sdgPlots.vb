@@ -60,7 +60,7 @@ Public Class sdgPlots
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
-    Public ucrBaseSelector As ucrSelector
+    Private ucrBaseSelector As ucrSelector
 
     'Themes 
     'X axis angle
