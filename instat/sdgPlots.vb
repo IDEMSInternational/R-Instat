@@ -847,12 +847,7 @@ Public Class sdgPlots
 
     Private Function IsFactor(bIsX As Boolean, strVariable As String) As Boolean
         Dim strAes As String
-
-        If bIsX Then
-            strAes = "x"
-        Else
-            strAes = "y"
-        End If
+    strAes = If(bIsX, "x", "y")
 
         Dim bIsFactor As Boolean = False
         If clsGlobalAesFunction.ContainsParameter(strAes) Then
