@@ -1099,8 +1099,7 @@ Public Class sdgPlots
             strAes = "y"
         End If
         If clsGlobalAesFunction IsNot Nothing Then
-            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) _
-                AndAlso Not bStrictDiscrete Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) AndAlso Not bStrictDiscrete Then
                 'Run R code to determine type
                 'Temp default to continuous
                 Return "continuous"
