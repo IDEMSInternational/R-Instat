@@ -102,47 +102,6 @@ Public Class sdgFormatSummaryTables
         ucrInputStubsFootNote.SetParameter(New RParameter("Stub_footnote", iNewPosition:=0))
         ucrInputStubsFootNote.SetLinkedDisplayControl(lblStubsFootNote)
 
-        'ucrInputFootnoteColumnLocation.SetParameter(New RParameter("col_location", 5))
-        'ucrInputFootnoteColumnLocation.SetValidationTypeAsNumericList()
-
-        'ucrInputFootnoteRowLocation.SetParameter(New RParameter("row_location", iNewPosition:=6))
-        'ucrInputFootnoteRowLocation.SetValidationTypeAsNumericList()
-        'ucrInputFootnoteRowLocation.SetLinkedDisplayControl(grpLocation)
-
-        'ucrInputCellFootnote.SetParameter(New RParameter("cell_footnote", iNewPosition:=4))
-        'ucrInputCellFootnote.SetLinkedDisplayControl(lblFootnote)
-
-        'ucrChkAddFootnote.SetText("Add footnote")
-        'ucrChkAddFootnote.AddToLinkedControls({ucrInputCellFootnote, ucrInputFootnoteColumnLocation, ucrInputFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkAddFootnote.AddParameterPresentCondition(True, "cell_footnote")
-        'ucrChkAddFootnote.AddParameterPresentCondition(False, "cell_footnote", False)
-
-        'ucrChKAddSecondFootnote.SetText("Add second footnote")
-        'ucrChKAddSecondFootnote.AddToLinkedControls({ucrInputSecondCellFootnote, ucrInputSecondFootnoteColumnLocation, ucrInputSecondFootnoteRowLocation}, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrInputSecondFootnoteRowLocation.SetParameter(New RParameter("second_row_location", iNewPosition:=7))
-        'ucrInputSecondFootnoteRowLocation.SetValidationTypeAsNumericList()
-
-        'ucrInputSecondFootnoteColumnLocation.SetParameter(New RParameter("second_col_location", iNewPosition:=6))
-        'ucrInputSecondFootnoteColumnLocation.SetValidationTypeAsNumericList()
-
-        'ucrInputSecondCellFootnote.SetParameter(New RParameter("second_footnote", iNewPosition:=4))
-        'ucrInputSecondCellFootnote.SetLinkedDisplayControl(lblSecondFootnote)
-
-        'ucrInputSecondFootnoteColumnLocation.SetLinkedDisplayControl(grpSecondFootnote)
-
-        'ucrChKAddSecondFootnote.AddParameterPresentCondition(True, "second_cellfootnote")
-        'ucrChKAddSecondFootnote.AddParameterPresentCondition(False, "second_cellfootnote", False)
-
-        'ucrInputAddSourceNote.SetParameter(New RParameter("source_note", iNewPosition:=8))
-
-        'ucrChkAddSourcenote.SetText("Add source")
-        'ucrChkAddSourcenote.AddToLinkedControls(ucrInputAddSourceNote, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
-        'ucrChkAddSourcenote.AddParameterPresentCondition(False, "source_note", False)
-
         bControlsInitialised = True
     End Sub
 
@@ -355,24 +314,8 @@ Public Class sdgFormatSummaryTables
                 Else
                     clsJoiningOperator.RemoveParameterByName("pipe")
                 End If
-            Else
-                'clsJoiningOperator.RemoveParameterByName("pipe")
             End If
         End If
-
-
-
-
-
-        'If ucrChkStubs.Checked Then
-        '    If ucrInputStubs.IsEmpty AndAlso ucrInputStubsFootNote.IsEmpty Then
-        '        clsJoiningOperator.RemoveParameterByName("pipe")
-        '    Else
-        '        clsJoiningOperator.AddParameter("pipe", clsROperatorParameter:=clsPipeOperator, iPosition:=1)
-        '    End If
-        'Else
-        '    clsJoiningOperator.RemoveParameterByName("pipe")
-        'End If
     End Sub
 
     Private Sub AddRemoveOperatorStub()
@@ -389,7 +332,6 @@ Public Class sdgFormatSummaryTables
             End If
         Else
             clsPipeOperator.RemoveParameterByName("title_stub_footnote")
-            'clsJoiningOperator.RemoveParameterByName("pipe")
         End If
 
     End Sub
@@ -473,10 +415,4 @@ Public Class sdgFormatSummaryTables
         AddStub()
         AddRemoveOperatorStub()
     End Sub
-
-    'Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
-    '    If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Or e.TabPageIndex = 3 Then
-    '        e.Cancel = True
-    '    End If
-    'End Sub
 End Class
