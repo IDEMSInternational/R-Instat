@@ -364,8 +364,6 @@ Partial Class frmMain
         Me.mnuEditPasteNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator71 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuEditScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -2840,7 +2838,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.ToolStripSeparator71, Me.mnuEditScript})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(58, 29)
         Me.mnuEdit.Tag = "Edit"
@@ -2889,17 +2887,6 @@ Partial Class frmMain
         Me.mnuEditSelectAll.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
-        '
-        'ToolStripSeparator71
-        '
-        Me.ToolStripSeparator71.Name = "ToolStripSeparator71"
-        Me.ToolStripSeparator71.Size = New System.Drawing.Size(267, 6)
-        '
-        'mnuEditScript
-        '
-        Me.mnuEditScript.Name = "mnuEditScript"
-        Me.mnuEditScript.Size = New System.Drawing.Size(270, 34)
-        Me.mnuEditScript.Text = "Script"
         '
         'stsStrip
         '
@@ -5681,8 +5668,6 @@ Partial Class frmMain
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuRViewer As ToolStripMenuItem
     Friend WithEvents mnuploty As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator71 As ToolStripSeparator
-    Friend WithEvents mnuEditScript As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameSelectColumns As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileExportToClimsoft As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrameDuplicateColumn As ToolStripMenuItem
