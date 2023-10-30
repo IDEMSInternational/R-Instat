@@ -92,52 +92,63 @@ Public Class ucrAdditionalLayers
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click, toolStripMenuItemGeomBar.Click, toolStripMenuItemGeomBoxPlot.Click, toolStripMenuItemGeomCol.Click, toolStripMenuItemGeomCount.Click,
             toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomEncircle.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomPath.Click, toolStripMenuItemGeomDumbbell.Click
-        Dim clsNewLocalAesFunction As New RFunction
-        Dim clsNewGeomFunction As New RFunction
-        Dim clsNewGeomParameter As RParameter
-        Dim strGeomName As String = "geom_boxplot"
-        Dim bShowLayerOption As Boolean = False
 
-        clsNewLocalAesFunction = GgplotDefaults.clsAesFunction.Clone()
+        'setup the geom function to use
+        Dim clsNewGeomFunction As New RFunction
+        Dim strGeomRCommand As String = "geom_boxplot"
+        Dim bShowLayerSubdialog As Boolean = False
+
         If sender Is toolStripMenuItemGeomBar Then
-            strGeomName = "geom_bar"
+            strGeomRCommand = "geom_bar"
         ElseIf sender Is toolStripMenuItemGeomCount Then
-            strGeomName = "geom_count"
+            strGeomRCommand = "geom_count"
         ElseIf sender Is toolStripMenuItemGeomCol Then
-            strGeomName = "geom_col"
+            strGeomRCommand = "geom_col"
         ElseIf sender Is toolStripMenuItemGeomDensity Then
-            strGeomName = "geom_density"
+            strGeomRCommand = "geom_density"
         ElseIf sender Is toolStripMenuItemGeomEncircle Then
-            strGeomName = "geom_encircle"
+            strGeomRCommand = "geom_encircle"
         ElseIf sender Is toolStripMenuItemGeomJitter Then
-            strGeomName = "geom_jitter"
+            strGeomRCommand = "geom_jitter"
         ElseIf sender Is toolStripMenuItemGeomPath Then
-            strGeomName = "geom_path"
+            strGeomRCommand = "geom_path"
         ElseIf sender Is toolStripMenuItemGeomDumbbell Then
-            strGeomName = "geom_dumbbell"
+            strGeomRCommand = "geom_dumbbell"
         ElseIf sender Is cmdAdd Then
-            bShowLayerOption = True
+            bShowLayerSubdialog = True
         End If
 
         clsNewGeomFunction.SetPackageName("ggplot2")
-        clsNewGeomFunction.SetRCommand(strGeomName)
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataFrame:=strGlobalDataFrame)
+        clsNewGeomFunction.SetRCommand(strGeomRCommand)
 
-        If bShowLayerOption Then
+        'if no specific geom command selected then show the layer subdialog for geom command selection
+        If bShowLayerSubdialog Then
+            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction,
+                                   clsNewGeomFunc:=clsNewGeomFunction,
+                                   clsNewGlobalAesFunc:=clsGlobalAesFunction,
+                                   clsNewLocalAes:=GgplotDefaults.clsAesFunction,
+                                   bFixGeom:=False,
+                                   ucrNewBaseSelector:=Nothing,
+                                   bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0),
+                                   iTabToDisplay:=0,
+                                   strDataFrame:=strGlobalDataFrame)
             ParentForm.SendToBack()
-            sdgLayerOptions.tbcLayers.SelectedIndex = 0
             sdgLayerOptions.ShowDialog()
+            'get the new options from the subdialog
+            'todo. Should what should happen if a user clicks on Cancel in the sub dialog?
             strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
+            clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
         End If
 
-        clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
-        iMaxParameterPosition = iMaxParameterPosition + 1
+        'incremnet the dialog parameter position to get unique argument name
+        iMaxParameterPosition += 1
 
-        clsNewGeomParameter = New RParameter()
-        clsNewGeomParameter.SetArgumentName(clsNewGeomFunction.strRCommand & iMaxParameterPosition)
-        clsNewGeomParameter.SetArgument(clsNewGeomFunction)
-        clsNewGeomParameter.Position = iMaxParameterPosition
+        'add the geom function as a new parameter of the dialog base operator
+        Dim clsNewGeomParameter As New RParameter(clsNewGeomFunction.strRCommand & iMaxParameterPosition,
+                                                  clsNewGeomFunction, iNewPosition:=iMaxParameterPosition)
         clsBaseOperator.AddParameter(clsNewGeomParameter)
+
+        'add the parameter to the list of layers
         AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
     End Sub
 
