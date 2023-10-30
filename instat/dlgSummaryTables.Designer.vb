@@ -41,7 +41,6 @@ Partial Class dlgSummaryTables
         Me.components = New System.ComponentModel.Container()
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdSummaries = New System.Windows.Forms.Button()
-        Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
@@ -49,7 +48,6 @@ Partial Class dlgSummaryTables
         Me.rdoFactorVariable = New System.Windows.Forms.RadioButton()
         Me.rdoNoColumnFactor = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColumnFactor = New instat.UcrPanel()
-        Me.ucrNudSigFigs = New instat.ucrNud()
         Me.grpMargin = New System.Windows.Forms.GroupBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
@@ -85,6 +83,8 @@ Partial Class dlgSummaryTables
         Me.ttMultipleResponse = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrNudSigFigs = New instat.ucrNud()
+        Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.grpPercentages.SuspendLayout()
@@ -111,17 +111,6 @@ Partial Class dlgSummaryTables
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
-        'lblSigFigs
-        '
-        Me.lblSigFigs.AutoSize = True
-        Me.lblSigFigs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSigFigs.Location = New System.Drawing.Point(8, 17)
-        Me.lblSigFigs.Name = "lblSigFigs"
-        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
-        Me.lblSigFigs.TabIndex = 4
-        Me.lblSigFigs.Tag = "Significant_Figures:"
-        Me.lblSigFigs.Text = "Significant Figures:"
-        '
         'grpDisplay
         '
         Me.grpDisplay.Controls.Add(Me.ucrReceiverColumnFactor)
@@ -130,11 +119,9 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.Controls.Add(Me.rdoFactorVariable)
         Me.grpDisplay.Controls.Add(Me.rdoNoColumnFactor)
         Me.grpDisplay.Controls.Add(Me.ucrPnlColumnFactor)
-        Me.grpDisplay.Controls.Add(Me.ucrNudSigFigs)
-        Me.grpDisplay.Controls.Add(Me.lblSigFigs)
-        Me.grpDisplay.Location = New System.Drawing.Point(10, 353)
+        Me.grpDisplay.Location = New System.Drawing.Point(10, 379)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(270, 126)
+        Me.grpDisplay.Size = New System.Drawing.Size(270, 103)
         Me.grpDisplay.TabIndex = 11
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display Column Factors"
@@ -143,7 +130,7 @@ Partial Class dlgSummaryTables
         '
         Me.ucrReceiverColumnFactor.AutoSize = True
         Me.ucrReceiverColumnFactor.frmParent = Me
-        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(140, 61)
+        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(140, 35)
         Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
         Me.ucrReceiverColumnFactor.Selector = Nothing
@@ -155,7 +142,7 @@ Partial Class dlgSummaryTables
         'rdoVariable
         '
         Me.rdoVariable.AutoSize = True
-        Me.rdoVariable.Location = New System.Drawing.Point(14, 99)
+        Me.rdoVariable.Location = New System.Drawing.Point(14, 74)
         Me.rdoVariable.Name = "rdoVariable"
         Me.rdoVariable.Size = New System.Drawing.Size(63, 17)
         Me.rdoVariable.TabIndex = 32
@@ -166,7 +153,7 @@ Partial Class dlgSummaryTables
         'rdoSummaryVariable
         '
         Me.rdoSummaryVariable.AutoSize = True
-        Me.rdoSummaryVariable.Location = New System.Drawing.Point(14, 80)
+        Me.rdoSummaryVariable.Location = New System.Drawing.Point(14, 55)
         Me.rdoSummaryVariable.Name = "rdoSummaryVariable"
         Me.rdoSummaryVariable.Size = New System.Drawing.Size(109, 17)
         Me.rdoSummaryVariable.TabIndex = 31
@@ -177,7 +164,8 @@ Partial Class dlgSummaryTables
         'rdoFactorVariable
         '
         Me.rdoFactorVariable.AutoSize = True
-        Me.rdoFactorVariable.Location = New System.Drawing.Point(14, 61)
+        Me.rdoFactorVariable.Checked = True
+        Me.rdoFactorVariable.Location = New System.Drawing.Point(14, 36)
         Me.rdoFactorVariable.Name = "rdoFactorVariable"
         Me.rdoFactorVariable.Size = New System.Drawing.Size(96, 17)
         Me.rdoFactorVariable.TabIndex = 30
@@ -188,34 +176,20 @@ Partial Class dlgSummaryTables
         'rdoNoColumnFactor
         '
         Me.rdoNoColumnFactor.AutoSize = True
-        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(14, 42)
+        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(14, 17)
         Me.rdoNoColumnFactor.Name = "rdoNoColumnFactor"
         Me.rdoNoColumnFactor.Size = New System.Drawing.Size(110, 17)
         Me.rdoNoColumnFactor.TabIndex = 29
-        Me.rdoNoColumnFactor.TabStop = True
         Me.rdoNoColumnFactor.Text = "No Column Factor"
         Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
         '
         'ucrPnlColumnFactor
         '
         Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(11, 40)
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(11, 17)
         Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
         Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(124, 80)
         Me.ucrPnlColumnFactor.TabIndex = 29
-        '
-        'ucrNudSigFigs
-        '
-        Me.ucrNudSigFigs.AutoSize = True
-        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigFigs.Location = New System.Drawing.Point(111, 14)
-        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSigFigs.TabIndex = 5
-        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpMargin
         '
@@ -223,9 +197,9 @@ Partial Class dlgSummaryTables
         Me.grpMargin.Controls.Add(Me.rdoSummary)
         Me.grpMargin.Controls.Add(Me.rdoOuter)
         Me.grpMargin.Controls.Add(Me.ucrPnlMargin)
-        Me.grpMargin.Location = New System.Drawing.Point(10, 311)
+        Me.grpMargin.Location = New System.Drawing.Point(10, 313)
         Me.grpMargin.Name = "grpMargin"
-        Me.grpMargin.Size = New System.Drawing.Size(203, 37)
+        Me.grpMargin.Size = New System.Drawing.Size(213, 40)
         Me.grpMargin.TabIndex = 13
         Me.grpMargin.TabStop = False
         '
@@ -371,10 +345,10 @@ Partial Class dlgSummaryTables
         Me.lblFactorsAsPercentage.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFactorsAsPercentage.Location = New System.Drawing.Point(18, 44)
         Me.lblFactorsAsPercentage.Name = "lblFactorsAsPercentage"
-        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(102, 13)
+        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(100, 13)
         Me.lblFactorsAsPercentage.TabIndex = 1
         Me.lblFactorsAsPercentage.Tag = "Factors as Percentage:"
-        Me.lblFactorsAsPercentage.Text = "Of Factor (Optional):"
+        Me.lblFactorsAsPercentage.Text = "of Factor (Optional):"
         '
         'ucrChkPercentageProportion
         '
@@ -596,12 +570,38 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorSummaryTables.TabIndex = 0
         '
+        'ucrNudSigFigs
+        '
+        Me.ucrNudSigFigs.AutoSize = True
+        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSigFigs.Location = New System.Drawing.Point(118, 356)
+        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
+        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSigFigs.TabIndex = 30
+        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSigFigs
+        '
+        Me.lblSigFigs.AutoSize = True
+        Me.lblSigFigs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSigFigs.Location = New System.Drawing.Point(15, 359)
+        Me.lblSigFigs.Name = "lblSigFigs"
+        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
+        Me.lblSigFigs.TabIndex = 29
+        Me.lblSigFigs.Tag = "Significant_Figures:"
+        Me.lblSigFigs.Text = "Significant Figures:"
+        '
         'dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(489, 571)
+        Me.Controls.Add(Me.ucrNudSigFigs)
+        Me.Controls.Add(Me.lblSigFigs)
         Me.Controls.Add(Me.rdoMultipleResponse)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.ucrChkFrequencyDisplayMargins)
@@ -662,8 +662,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents grpDisplay As GroupBox
-    Friend WithEvents ucrNudSigFigs As ucrNud
-    Friend WithEvents lblSigFigs As Label
     Friend WithEvents grpMargin As GroupBox
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoSummary As RadioButton
@@ -694,4 +692,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents rdoFactorVariable As RadioButton
     Friend WithEvents rdoNoColumnFactor As RadioButton
     Friend WithEvents ucrPnlColumnFactor As UcrPanel
+    Friend WithEvents ucrNudSigFigs As ucrNud
+    Friend WithEvents lblSigFigs As Label
 End Class
