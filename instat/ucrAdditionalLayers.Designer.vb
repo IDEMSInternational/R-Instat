@@ -68,6 +68,7 @@ Partial Class ucrAdditionalLayers
         Me.toolStripMenuItemGeomviolin = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
+        Me.toolStripMenuItemGeomcategoricalmodel = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeoms.SuspendLayout()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
@@ -120,7 +121,7 @@ Partial Class ucrAdditionalLayers
         '
         Me.contextMenuStripAdd.AutoSize = False
         Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripmenuItemGeomBar, Me.toolStripMenuItemGeomBoxplot, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomcontour, Me.toolStripMenuItemDensity, Me.toolStripMenuItemDensityridges, Me.toolStripMenuItemGeomdotplot, Me.ToolStripMenuItemGeomhistogram, Me.toolStripMenuItemJitter, Me.toolStripMenuItemLabel, Me.toolStripMenuItemLabelrepel, Me.toolStripMenuItemLine, Me.toolStripMenuItemGeommosaic, Me.toolStripMenuItemGeomparallelslopes, Me.toolStripMenuItemPoint, Me.toolStripMenuItemRugSmooth, Me.toolStripMenuItemGeomSmooth, Me.toolStripMenuItemText, Me.toolStripMenuItemTextrepel, Me.toolStripMenuItemGeomtile, Me.toolStripMenuItemGeomviolin})
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripmenuItemGeomBar, Me.toolStripMenuItemGeomBoxplot, Me.toolStripMenuItemGeomcategoricalmodel, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomcontour, Me.toolStripMenuItemDensity, Me.toolStripMenuItemDensityridges, Me.toolStripMenuItemGeomdotplot, Me.ToolStripMenuItemGeomhistogram, Me.toolStripMenuItemJitter, Me.toolStripMenuItemLabel, Me.toolStripMenuItemLabelrepel, Me.toolStripMenuItemLine, Me.toolStripMenuItemGeommosaic, Me.toolStripMenuItemGeomparallelslopes, Me.toolStripMenuItemPoint, Me.toolStripMenuItemRugSmooth, Me.toolStripMenuItemGeomSmooth, Me.toolStripMenuItemText, Me.toolStripMenuItemTextrepel, Me.toolStripMenuItemGeomtile, Me.toolStripMenuItemGeomviolin})
         Me.contextMenuStripAdd.Name = "SelectionMenuStrip"
         Me.contextMenuStripAdd.Size = New System.Drawing.Size(187, 447)
         '
@@ -297,6 +298,13 @@ Partial Class ucrAdditionalLayers
         Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
+        'toolStripMenuItemGeomcategoricalmodel
+        '
+        Me.toolStripMenuItemGeomcategoricalmodel.AutoSize = False
+        Me.toolStripMenuItemGeomcategoricalmodel.Name = "toolStripMenuItemGeomcategoricalmodel"
+        Me.toolStripMenuItemGeomcategoricalmodel.Size = New System.Drawing.Size(207, 18)
+        Me.toolStripMenuItemGeomcategoricalmodel.Text = "geom_categorical_model"
+        '
         'ucrAdditionalLayers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -343,4 +351,5 @@ Partial Class ucrAdditionalLayers
     Friend WithEvents toolStripMenuItemGeomtile As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomviolin As ToolStripMenuItem
     Friend WithEvents cmdAdd As ucrSplitButton
+    Friend WithEvents toolStripMenuItemGeomcategoricalmodel As ToolStripMenuItem
 End Class

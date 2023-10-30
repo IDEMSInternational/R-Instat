@@ -502,6 +502,11 @@ Public Class dlgGeneralForGraphics
         OpenHelpPage()
     End Sub
 
+    Private Sub ModerndiveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModerndiveToolStripMenuItem.Click
+        strPackageName = "moderndive"
+        OpenHelpPage()
+    End Sub
+
     Private Sub GgwordbuildToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgwordbuildToolStripMenuItem.Click
         strPackageName = "ggwordbluid"
         OpenHelpPage()
