@@ -1227,7 +1227,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
+    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) 
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
             grpFillScale.Visible = True
@@ -1237,7 +1237,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColour.ControlValueChanged
+    Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore) 
         If ucrChkAddColour.Checked Then
             clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=8)
             grpColourScale.Visible = True
