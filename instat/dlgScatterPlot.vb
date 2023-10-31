@@ -71,7 +71,6 @@ Public Class dlgScatterPlot
         Dim dctSidesOptions As New Dictionary(Of String, String)
         Dim dctShapePoint As New Dictionary(Of String, String)
         Dim dctPositioncount As New Dictionary(Of String, String)
-        Dim dctLegendcount As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 433
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -132,8 +131,9 @@ Public Class dlgScatterPlot
         ucrPnlGeoms.AddParameterValuesCondition(rdoCount, "checked", "geom_count")
         ucrPnlGeoms.AddParameterValuesCondition(rdoJitter, "checked", "geom_jitter")
         ucrPnlGeoms.AddToLinkedControls({ucrNudWidth, ucrNudHeigth}, {rdoJitter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.40")
-        ucrPnlGeoms.AddToLinkedControls({ucrNudPointsize, ucrInputShape}, {rdoPoint}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1.5")
-        ucrPnlGeoms.AddToLinkedControls({ucrInputLegend, ucrInputPosition}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        ucrPnlGeoms.AddToLinkedControls({ucrNudPointsize, ucrInputShape}, {rdoPoint}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeoms.AddToLinkedControls(ucrInputPosition, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeoms.AddToLinkedControls(ucrInputLegend, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
         ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
@@ -146,6 +146,7 @@ Public Class dlgScatterPlot
         ucrNudSize.SetParameter(New RParameter("size", 0))
         ucrNudSize.Increment = 0.1
         ucrNudSize.DecimalPlaces = 1
+        ucrNudSize.SetRDefault("0.5")
 
         ucrNudHeigth.SetParameter(New RParameter("height", 5))
         ucrNudHeigth.Maximum = 0.5
@@ -208,12 +209,9 @@ Public Class dlgScatterPlot
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
         ucrInputLegend.SetParameter(New RParameter("show.legend", 11))
-        dctLegendcount.Add("NA", Chr(34) & "NA" & Chr(34))
-        dctLegendcount.Add("TRUE", Chr(34) & "TRUE" & Chr(34))
-        dctLegendcount.Add("FALSE", Chr(34) & "FALSE" & Chr(34))
-        ucrInputLegend.SetItems(dctLegendcount)
-        ucrInputLegend.SetRDefault(Chr(34) & "NA" & Chr(34))
+        ucrInputLegend.SetItems({"NA", "TRUE", "FALSE"})
         ucrInputLegend.SetDropDownStyleAsNonEditable()
+        ucrInputLegend.AddQuotesIfUnrecognised = False
 
         ucrInputSides.SetParameter(New RParameter("sides", 1))
         dctSidesOptions.Add("Bottom and left", Chr(34) & "bl" & Chr(34))
