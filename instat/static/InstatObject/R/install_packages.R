@@ -168,6 +168,12 @@ pkgs <-
     #A 'ggplot2' extension that allows text to follow curved paths.
     "geomtextpath",
     "moderndive",
+    # Data Sets Useful for Modeling Examples
+    "modeldata",
+    # Data for an Introduction to Statistical Learning with Applications in R
+    "ISLR",
+    # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
+    "fivethirtyeight",
     "collapse"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
