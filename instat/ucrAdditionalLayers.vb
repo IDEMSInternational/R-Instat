@@ -97,6 +97,7 @@ Public Class ucrAdditionalLayers
         'setup the geom function to use
         Dim clsNewGeomFunction As New RFunction
         Dim strGeomRCommand As String = "geom_boxplot"
+        Dim strPackage As String = "ggplot2"
         Dim bShowLayerSubdialog As Boolean = False
 
         If sender Is toolStripMenuItemGeomBoxPlot Then
@@ -110,18 +111,22 @@ Public Class ucrAdditionalLayers
         ElseIf sender Is toolStripMenuItemGeomDensity Then
             strGeomRCommand = "geom_density"
         ElseIf sender Is toolStripMenuItemGeomEncircle Then
+            strPackage = "ggalt"
             strGeomRCommand = "geom_encircle"
         ElseIf sender Is toolStripMenuItemGeomJitter Then
             strGeomRCommand = "geom_jitter"
         ElseIf sender Is toolStripMenuItemGeomPath Then
             strGeomRCommand = "geom_path"
         ElseIf sender Is toolStripMenuItemGeomDumbbell Then
+            strPackage = "ggalt"
             strGeomRCommand = "geom_dumbbell"
         ElseIf sender Is toolStripMenuItemGeomDensityRidges Then
+            strPackage = "ggridges"
             strGeomRCommand = "geom_density_ridges"
         ElseIf sender Is toolStripMenuItemGeomLabel Then
             strGeomRCommand = "geom_label"
         ElseIf sender Is toolStripMenuItemGeomLabelRepel Then
+            strPackage = "ggrepel"
             strGeomRCommand = "geom_label_repel"
         ElseIf sender Is toolStripMenuItemGeomLine Then
             strGeomRCommand = "geom_line"
@@ -132,12 +137,13 @@ Public Class ucrAdditionalLayers
         ElseIf sender Is toolStripMenuItemGeomText Then
             strGeomRCommand = "geom_text"
         ElseIf sender Is toolStripMenuItemGeomTextRepel Then
+            strPackage = "ggrepel"
             strGeomRCommand = "geom_text_repel"
         ElseIf sender Is cmdAdd Then
             bShowLayerSubdialog = True
         End If
 
-        clsNewGeomFunction.SetPackageName("ggplot2")
+        clsNewGeomFunction.SetPackageName(strPackage)
         clsNewGeomFunction.SetRCommand(strGeomRCommand)
 
         'if no specific geom command selected then show the layer subdialog for geom command selection
