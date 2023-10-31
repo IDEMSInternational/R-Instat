@@ -197,7 +197,7 @@ Public Class dlgScatterPlot
         ucrInputShape.SetDropDownStyleAsNonEditable()
 
         ucrInputPosition.SetParameter(New RParameter("position", 10))
-        ucrInputPosition.SetItems({"identity", "stack", "dodge", "jitter", "fill", "position_dodge"})
+        ucrInputPosition.SetItems({"identity", "stack", "dodge", "jitter", "fill", "position_dodge", "position_jitter(width=0.2,height=0.0)"})
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
         ucrInputLegend.SetParameter(New RParameter("show.legend", 11))
@@ -505,7 +505,7 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub ChangePositionCount()
-        If ucrInputPosition.GetText = "Jitter" Then
+        If ucrInputPosition.GetText = "position_jitter(width=0.2,height=0.0)" Then
             clsCountGeomFunction.AddParameter("position", "position_jitter(width=0.2,height=0.0)", iPosition:=0)
         Else
             clsCountGeomFunction.AddParameter("position", Chr(34) & ucrInputPosition.GetText & Chr(34), iPosition:=0)
