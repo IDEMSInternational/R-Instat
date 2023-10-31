@@ -736,9 +736,7 @@ Public Class RLink
             'if not an assignment operation, then capture the output
             Dim strRStatementNoFormatting As String =
                     clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
-            If strRStatementNoFormatting.StartsWith(strInstatDataObject & "$get_object_data") _
-                        OrElse strRStatementNoFormatting.StartsWith(strInstatDataObject & "$get_last_object_data") _
-                        OrElse strRStatementNoFormatting.StartsWith("view_object_data") Then
+            If IsStatementViewObject(strRStatementNoFormatting) Then
                 strOutput = GetFileOutput(strRStatementNoFormatting, bSilent:=False,
                                       bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             ElseIf clsRStatement.clsAssignment Is Nothing _
@@ -839,16 +837,14 @@ Public Class RLink
                 Dim bAsFile As Boolean = True
                 Dim bDisplayOutputInExternalViewer As Boolean = False
 
-                If strRStatement.StartsWith(strInstatDataObject & "$get_object_data") _
-                            OrElse strRStatement.StartsWith(strInstatDataObject & "$get_last_object_data") _
-                            OrElse strRStatement.StartsWith("view_object_data") Then
+                If IsStatementViewObject(strRStatement) Then
                     strOutput = GetFileOutput(strRStatement, False, False, Nothing)
                     'if statement generates a view_object then display in external viewer (maximised)
                     bDisplayOutputInExternalViewer = strRStatement.Contains("view_object_data")
-                ElseIf strRStatement.StartsWith("print") Then
+                ElseIf IsStatementPrint(strRStatement) Then
                     bAsFile = False
                     Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
-                ElseIf Not strRStatement.Contains("<-") Then 'if not an assignment operation, then capture the output
+                ElseIf Not IsStatementAssignment(strRStatement) Then 'if not an assignment operation, then capture the output
                     Dim strRStatementAsSingleLine As String = strRStatement.Replace(vbCr, String.Empty)
                     strRStatementAsSingleLine = strRStatementAsSingleLine.Replace(vbLf, String.Empty)
                     'wrap final command inside view_object_data just in case there is an output object
@@ -955,14 +951,11 @@ Public Class RLink
             If arrExecutableRScriptLines.Length > 0 Then
                 'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
                 Dim strLastScript As String = arrExecutableRScriptLines.Last()
-                If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") _
-                        OrElse strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") _
-                        OrElse strLastScript.StartsWith("view_object_data") Then
+                If IsStatementViewObject(strLastScript) Then
                     strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                     'if last function is view_object then display in external viewer (maximised)
                     bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
-
-                ElseIf strLastScript.StartsWith("print") Then
+                ElseIf IsStatementPrint(strLastScript) Then
                     bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 ElseIf iCallType = 0 Then
@@ -986,7 +979,7 @@ Public Class RLink
                     'else if script output should not be ignored or not stored as an object or variable
 
                     'if output should be stored as a variable just execute the script
-                    If arrExecutableRScriptLines.Last().Contains("<-") Then
+                    If IsStatementAssignment(arrExecutableRScriptLines.Last()) Then
                         Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     Else
                         'else capture the output as plain text
@@ -2298,4 +2291,26 @@ Public Class RLink
 
         Return lstRParameters
     End Function
+
+    Private Function IsStatementAssignment(strRStatement As String) As Boolean
+        Return strRStatement.Contains("<-")
+    End Function
+
+    Private Function IsStatementPrint(strRStatement As String) As Boolean
+        Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
+        Return strRStatementTrimmed.StartsWith("print")
+    End Function
+
+    Private Function IsStatementViewObject(strRStatement As String) As Boolean
+        Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
+        Return strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_object_data") _
+               OrElse strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_last_object_data") _
+               OrElse strRStatementTrimmed.StartsWith("view_object_data")
+    End Function
+
+    Private Function TrimStartRStatement(strRStatement As String) As String
+        Dim arrTrimChars As Char() = {" "c, vbTab, vbLf, vbCr}
+        Return strRStatement.TrimStart(arrTrimChars)
+    End Function
+
 End Class
