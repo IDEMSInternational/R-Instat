@@ -68,12 +68,13 @@ Public Class dlgRenameObjects
 
         ucrInputType.SetParameter(New RParameter("object_type", 3))
         dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
-        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
-        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
-        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        dctTypes.Add("Summaries", Chr(34) & "summary" & Chr(34))
         dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
         dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
         dctTypes.Add("Models", Chr(34) & "model" & Chr(34))
+        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
+        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
+        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
         ucrInputType.SetItems(dctTypes)
         ucrInputType.SetDropDownStyleAsNonEditable()
     End Sub

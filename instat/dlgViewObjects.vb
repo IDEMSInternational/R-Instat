@@ -20,7 +20,8 @@ Imports RDotNet
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsStructureRFunction, clsPrintRFunction As New RFunction
+    Private clsStructureRFunction, clsPrintRFunction, clsDummyFunction As New RFunction
+    Private dctTypes As New Dictionary(Of String, String)
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -40,10 +41,11 @@ Public Class dlgViewObjects
         ucrBase.iHelpTopicID = 349
         'todo. temporary to have the str() output captured as text
         ucrBase.clsRsyntax.iCallType = -1
+        ucrSelectorForViewObject.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForViewObject.SetParameterIsString()
 
         ' ucr receiver
-        ucrReceiverSelectedObject.SetParameter(New RParameter("x", 1))
-        ucrReceiverSelectedObject.SetParameterIsRFunction()
+        ucrReceiverSelectedObject.SetParameter(New RParameter("object_name", 1))
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
         ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
@@ -51,17 +53,25 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.bAutoFill = True
 
         'todo. disabling and hiding this for now until they're working correctly.
-        'calling print via a dialog currently does not work correctly
-        rdoPrint.Enabled = False
         rdoAllContents.Visible = False
         rdoComponent.Visible = False
 
         'add radio buttons to the panel rdo's
-        'ucrPnlContentsToView.AddRadioButton(rdoPrint)
+        ucrPnlContentsToView.AddRadioButton(rdoPrint)
         ucrPnlContentsToView.AddRadioButton(rdoStructure)
 
-        'ucrPnlContentsToView.AddFunctionNamesCondition(rdoPrint, "print")
-        ucrPnlContentsToView.AddFunctionNamesCondition(rdoStructure, "str")
+        ucrPnlContentsToView.AddParameterValuesCondition(rdoPrint, "check", "print")
+        ucrPnlContentsToView.AddParameterValuesCondition(rdoStructure, "check", "str")
+
+        ucrInputObjectType.SetParameter(New RParameter("object_type", 0))
+        dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
+        dctTypes.Add("Summaries", RObjectTypeLabel.Summary)
+        dctTypes.Add("Tables", RObjectTypeLabel.Table)
+        dctTypes.Add("Graphs", RObjectTypeLabel.Graph)
+        dctTypes.Add("Models", RObjectTypeLabel.Model)
+        dctTypes.Add("Structured", RObjectTypeLabel.StructureLabel)
+        ucrInputObjectType.SetItems(dctTypes)
+        ucrInputObjectType.SetDropDownStyleAsNonEditable()
 
     End Sub
 
@@ -69,24 +79,31 @@ Public Class dlgViewObjects
         'initialise the Rfunctions
         clsStructureRFunction = New RFunction
         clsPrintRFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         'reset controls to default states
         ucrSelectorForViewObject.Reset()
-        rdoStructure.Checked = True
+
+        clsDummyFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=0)
+        clsDummyFunction.AddParameter("check", "print", iPosition:=1)
+
+        'as of 02/3/2023 get object data is used instead of print command because the print command is not yet supported for html formats.
+        clsPrintRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsPrintRFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
         'set R function for showing selected object structure
-        clsPrintRFunction.SetRCommand("print")
         clsStructureRFunction.SetRCommand("str")
 
-
         'set the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsStructureRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverSelectedObject.AddAdditionalCodeParameterPair(clsStructureRFunction, New RParameter("object", 1))
+        ucrSelectorForViewObject.SetRCode(clsPrintRFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsPrintRFunction, bReset)
-        ucrPnlContentsToView.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputObjectType.SetRCode(clsDummyFunction, bReset)
+        ucrPnlContentsToView.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -96,8 +113,12 @@ Public Class dlgViewObjects
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
         'set the appropriate Base RFunction
         If rdoPrint.Checked Then
+            ucrReceiverSelectedObject.SetParameterIsString()
+            clsDummyFunction.AddParameter("check", "print", iPosition:=1)
             ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
         ElseIf rdoStructure.Checked Then
+            ucrReceiverSelectedObject.SetParameterIsRFunction()
+            clsDummyFunction.AddParameter("check", "str", iPosition:=1)
             ucrBase.clsRsyntax.SetBaseRFunction(clsStructureRFunction)
         End If
     End Sub
@@ -112,5 +133,15 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputObjectType.ControlValueChanged
+        'Checks whether the item in the receiver is contained in the selector. I.e when a selected object is renamed, the receiver clears.
+        If Not ucrReceiverSelectedObject.IsEmpty AndAlso ucrSelectorForViewObject.lstAvailableVariable.FindItemWithText(ucrReceiverSelectedObject.GetVariableNames(False), True, 0, False) Is Nothing Then
+            ucrReceiverSelectedObject.SetText("")
+        End If
 
+        If dctTypes.ContainsKey(ucrInputObjectType.cboInput.Text) Then
+            ucrReceiverSelectedObject.strSelectorHeading = ucrInputObjectType.cboInput.Text
+            ucrReceiverSelectedObject.SetItemType(dctTypes.Item(ucrInputObjectType.cboInput.Text).Replace(Chr(34), ""))
+        End If
+    End Sub
 End Class
