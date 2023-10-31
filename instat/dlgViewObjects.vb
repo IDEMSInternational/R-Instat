@@ -42,11 +42,11 @@ Public Class dlgViewObjects
         'todo. temporary to have the str() output captured as text
         ucrBase.clsRsyntax.iCallType = -1
 
-        'ucrPnlOptions.AddRadioButton(rdoOutputObjects)
-        'ucrPnlOptions.AddRadioButton(rdoDataObjects)
-        'rdoDataObjects.Enabled = False
-
-        'ucrPnlOptions.AddFunctionNamesCondition(rdoOutputObjects, {frmMain.clsRLink.strInstatDataObject & "$get_object_data", "str"})
+        ucrPnlOptions.AddRadioButton(rdoOutputObjects)
+        ucrPnlOptions.AddRadioButton(rdoDataObjects)
+        'todo disabled until functionality of viewing data objects is implemented
+        rdoDataObjects.Enabled = False
+        ucrPnlOptions.AddFunctionNamesCondition(rdoOutputObjects, {frmMain.clsRLink.strInstatDataObject & "$get_object_data", "str"})
 
         ucrSelectorForViewObject.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForViewObject.SetParameterIsString()
@@ -100,7 +100,7 @@ Public Class dlgViewObjects
         ucrSelectorForViewObject.SetRCode(clsPrintRFunction, bReset)
         ucrReceiverSelectedObject.SetRCode(clsPrintRFunction, bReset)
         ucrPnlContentsToView.SetRCode(ucrBase.clsRsyntax.clsBaseFunction)
-        'ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub TestOKEnabled()

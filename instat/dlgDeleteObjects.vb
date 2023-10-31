@@ -19,7 +19,7 @@ Public Class dlgDeleteObjects
     Private bFirstLoad As Boolean = True
     Private dctTypes As New Dictionary(Of String, String)
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsDeleteRFunction As New RFunction
 
     Private Sub dlgDeleteObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -64,20 +64,20 @@ Public Class dlgDeleteObjects
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsDeleteRFunction = New RFunction
 
         ucrSelectorDeleteObject.Reset()
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
-        clsDefaultFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=2)
+        clsDeleteRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
+        clsDeleteRFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteRFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorDeleteObject.SetRCode(clsDefaultFunction, bReset)
-        ucrInputComboType.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverObjectsToDelete.SetRCode(clsDefaultFunction, bReset)
+        ucrSelectorDeleteObject.SetRCode(clsDeleteRFunction, bReset)
+        ucrInputComboType.SetRCode(clsDeleteRFunction, bReset)
+        ucrReceiverObjectsToDelete.SetRCode(clsDeleteRFunction, bReset)
         'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
