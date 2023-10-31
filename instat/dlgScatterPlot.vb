@@ -132,7 +132,7 @@ Public Class dlgScatterPlot
         ucrPnlGeoms.AddParameterValuesCondition(rdoJitter, "checked", "geom_jitter")
         ucrPnlGeoms.AddToLinkedControls({ucrNudWidth, ucrNudHeigth}, {rdoJitter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.40")
         ucrPnlGeoms.AddToLinkedControls({ucrNudPointsize, ucrInputShape}, {rdoPoint}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeoms.AddToLinkedControls(ucrInputPosition, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeoms.AddToLinkedControls(ucrInputPosition, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="identity")
         ucrPnlGeoms.AddToLinkedControls(ucrInputLegend, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
@@ -197,15 +197,7 @@ Public Class dlgScatterPlot
         ucrInputShape.SetDropDownStyleAsNonEditable()
 
         ucrInputPosition.SetParameter(New RParameter("position", 10))
-        dctPositioncount.Add("Identity", Chr(34) & "identity" & Chr(34))
-        dctPositioncount.Add("Stack", Chr(34) & "stack" & Chr(34))
-        dctPositioncount.Add("Dodge", Chr(34) & "dodge" & Chr(34))
-        dctPositioncount.Add("Dodge2", Chr(34) & "dodge2" & Chr(34))
-        dctPositioncount.Add("Jitter", Chr(34) & "jitter" & Chr(34))
-        dctPositioncount.Add("Fill", Chr(34) & "fill" & Chr(34))
-        dctPositioncount.Add("PositionDodge", Chr(34) & "position_dodge" & Chr(34))
-        ucrInputPosition.SetItems(dctPositioncount)
-        ucrInputPosition.SetRDefault(Chr(34) & "identity" & Chr(34))
+        ucrInputPosition.SetItems({"identity", "stack", "dodge", "jitter", "fill", "position_dodge"})
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
         ucrInputLegend.SetParameter(New RParameter("show.legend", 11))
@@ -503,11 +495,20 @@ Public Class dlgScatterPlot
             clsBaseOperator.RemoveParameterByName(strGeomJitterParameterName)
             clsBaseOperator.RemoveParameterByName(strGeomCountParameterName)
         ElseIf rdoCount.Checked Then
+            ChangePositionCount()
             clsBaseOperator.AddParameter(strGeomCountParameterName, clsRFunctionParameter:=clsCountGeomFunction, iPosition:=2)
             clsBaseOperator.RemoveParameterByName(strGeomJitterParameterName)
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
         End If
         toolStripMenuItemJitterOptions.Enabled = rdoJitter.Checked
         toolStripMenuItemCountOptions.Enabled = rdoCount.Checked
+    End Sub
+
+    Private Sub ChangePositionCount()
+        If ucrInputPosition.GetText = "Jitter" Then
+            clsCountGeomFunction.AddParameter("position", "position_jitter(width=0.2,height=0.0)", iPosition:=0)
+        Else
+            clsCountGeomFunction.AddParameter("position", Chr(34) & ucrInputPosition.GetText & Chr(34), iPosition:=0)
+        End If
     End Sub
 End Class
