@@ -41,27 +41,12 @@ Partial Class sdgPlots
         Me.components = New System.ComponentModel.Container()
         Me.tbpPlotsOptions = New System.Windows.Forms.TabControl()
         Me.tbpFacet = New System.Windows.Forms.TabPage()
-        Me.ucrChkDrop = New instat.ucrCheck()
-        Me.ucrNudNumberofRows = New instat.ucrNud()
-        Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
-        Me.ucrChkIncludeFacets = New instat.ucrCheck()
-        Me.ucrChkLabeler = New instat.ucrCheck()
-        Me.ucrChkFreeSpace = New instat.ucrCheck()
-        Me.ucrChkFreeScalesY = New instat.ucrCheck()
-        Me.ucrChkFreeScalesX = New instat.ucrCheck()
-        Me.ucrChkMargin = New instat.ucrCheck()
-        Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.lblFactor2 = New System.Windows.Forms.Label()
         Me.lblFactor1 = New System.Windows.Forms.Label()
-        Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
-        Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
         Me.tbpLayers = New System.Windows.Forms.TabPage()
-        Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.tbpTitles = New System.Windows.Forms.TabPage()
-        Me.ucrChkIncludeTitles = New instat.ucrCheck()
         Me.lblLegendSize = New System.Windows.Forms.Label()
         Me.lblTagSize = New System.Windows.Forms.Label()
         Me.lblCaptionSize = New System.Windows.Forms.Label()
@@ -73,11 +58,74 @@ Partial Class sdgPlots
         Me.lblSubTitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
+        Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
+        Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
+        Me.tbpXAxis = New System.Windows.Forms.TabPage()
+        Me.tbpYAxis = New System.Windows.Forms.TabPage()
+        Me.tbpTheme = New System.Windows.Forms.TabPage()
+        Me.cmdSimpleOptions = New System.Windows.Forms.Button()
+        Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
+        Me.lblFont = New System.Windows.Forms.Label()
+        Me.cmdAllOptions = New System.Windows.Forms.Button()
+        Me.tbpCoordinates = New System.Windows.Forms.TabPage()
+        Me.grpPolarCordinates = New System.Windows.Forms.GroupBox()
+        Me.lblPolarCoordinate = New System.Windows.Forms.Label()
+        Me.lblStartingAngle = New System.Windows.Forms.Label()
+        Me.lblPi = New System.Windows.Forms.Label()
+        Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.grpColourScale = New System.Windows.Forms.GroupBox()
+        Me.lblColourScaleMapEnds = New System.Windows.Forms.Label()
+        Me.lblColourScaleMapBegins = New System.Windows.Forms.Label()
+        Me.lblColourScalePalette = New System.Windows.Forms.Label()
+        Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
+        Me.grpFillScale = New System.Windows.Forms.GroupBox()
+        Me.lblFillScaleMapEnds = New System.Windows.Forms.Label()
+        Me.lblFillScaleBeginColour = New System.Windows.Forms.Label()
+        Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
+        Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
+        Me.tbpAnnotation = New System.Windows.Forms.TabPage()
+        Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.lblCurvature = New System.Windows.Forms.Label()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.lblLineend = New System.Windows.Forms.Label()
+        Me.lblAngle = New System.Windows.Forms.Label()
+        Me.lblShape = New System.Windows.Forms.Label()
+        Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.lblColour = New System.Windows.Forms.Label()
+        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblX = New System.Windows.Forms.Label()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.lblXmax = New System.Windows.Forms.Label()
+        Me.lblYmin = New System.Windows.Forms.Label()
+        Me.lblXmin = New System.Windows.Forms.Label()
+        Me.lblXend = New System.Windows.Forms.Label()
+        Me.lblYmax = New System.Windows.Forms.Label()
+        Me.lblYend = New System.Windows.Forms.Label()
+        Me.lblLinetype = New System.Windows.Forms.Label()
+        Me.lblPointrangeFatten = New System.Windows.Forms.Label()
+        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
+        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkDrop = New instat.ucrCheck()
+        Me.ucrNudNumberofRows = New instat.ucrNud()
+        Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
+        Me.ucrChkIncludeFacets = New instat.ucrCheck()
+        Me.ucrChkLabeler = New instat.ucrCheck()
+        Me.ucrChkFreeSpace = New instat.ucrCheck()
+        Me.ucrChkFreeScalesY = New instat.ucrCheck()
+        Me.ucrChkFreeScalesX = New instat.ucrCheck()
+        Me.ucrChkMargin = New instat.ucrCheck()
+        Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
+        Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
+        Me.ucrChkIncludeTitles = New instat.ucrCheck()
         Me.ucrChkOverwriteLegendTitle = New instat.ucrCheck()
         Me.ucrChkDisplayLegendTitle = New instat.ucrCheck()
         Me.ucrInputLegend = New instat.ucrInputTextBox()
-        Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
-        Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLegendTitle = New instat.UcrPanel()
         Me.ucrNudLegendSize = New instat.ucrNud()
         Me.ucrNudTagSize = New instat.ucrNud()
@@ -91,13 +139,8 @@ Partial Class sdgPlots
         Me.ucrInputTag = New instat.ucrInputTextBox()
         Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
-        Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.ucrXAxis = New instat.ucrAxes()
-        Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
-        Me.tbpTheme = New System.Windows.Forms.TabPage()
-        Me.cmdSimpleOptions = New System.Windows.Forms.Button()
-        Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudYaxisMarkSize = New instat.ucrNud()
         Me.ucrNudXaxisMarkSize = New instat.ucrNud()
         Me.ucrNudYSize = New instat.ucrNud()
@@ -110,95 +153,52 @@ Partial Class sdgPlots
         Me.ucrChkXaxisSize = New instat.ucrCheck()
         Me.ucrChkXaxisAngle = New instat.ucrCheck()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
-        Me.lblFont = New System.Windows.Forms.Label()
-        Me.cmdAllOptions = New System.Windows.Forms.Button()
         Me.urChkSelectTheme = New instat.ucrCheck()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
-        Me.tbpCoordinates = New System.Windows.Forms.TabPage()
-        Me.grpPolarCordinates = New System.Windows.Forms.GroupBox()
         Me.ucrInputPolarCoordinates = New instat.ucrInputComboBox()
-        Me.lblPolarCoordinate = New System.Windows.Forms.Label()
-        Me.lblStartingAngle = New System.Windows.Forms.Label()
         Me.ucrChkUsePolarCoordinates = New instat.ucrCheck()
-        Me.lblPi = New System.Windows.Forms.Label()
         Me.ucrChkDirectionAnticlockwise = New instat.ucrCheck()
         Me.ucrInputStartingAngle = New instat.ucrInputTextBox()
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
-        Me.tbpColour = New System.Windows.Forms.TabPage()
         Me.ucrChkAddColour = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
-        Me.grpColourScale = New System.Windows.Forms.GroupBox()
         Me.ucrChkColourDiscrete = New instat.ucrCheck()
         Me.ucrNudColourScaleTransparency = New instat.ucrNud()
         Me.ucrInputColourScalePalette = New instat.ucrInputComboBox()
         Me.ucrNudColourScaleMapEnds = New instat.ucrNud()
         Me.ucrNudColourScaleMapBegins = New instat.ucrNud()
         Me.ucrChkColourScaleReverseOrder = New instat.ucrCheck()
-        Me.lblColourScaleMapEnds = New System.Windows.Forms.Label()
-        Me.lblColourScaleMapBegins = New System.Windows.Forms.Label()
-        Me.lblColourScalePalette = New System.Windows.Forms.Label()
-        Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
-        Me.grpFillScale = New System.Windows.Forms.GroupBox()
         Me.ucrChkFillDiscrete = New instat.ucrCheck()
         Me.ucrNudFillScaleTransparency = New instat.ucrNud()
         Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
         Me.ucrNudFillScaleMapBegins = New instat.ucrNud()
         Me.ucrInputFillScaleColour = New instat.ucrInputComboBox()
         Me.ucrChkFillScaleReverseColourOrder = New instat.ucrCheck()
-        Me.lblFillScaleMapEnds = New System.Windows.Forms.Label()
-        Me.lblFillScaleBeginColour = New System.Windows.Forms.Label()
-        Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
-        Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
-        Me.tbpAnnotation = New System.Windows.Forms.TabPage()
         Me.ucrChkAnnotation = New instat.ucrCheck()
-        Me.grpAnnotation = New System.Windows.Forms.GroupBox()
         Me.ucrChkParse = New instat.ucrCheck()
         Me.ucrInputFill = New instat.ucrColors()
         Me.ucrInputColour = New instat.ucrColors()
-        Me.lblCurvature = New System.Windows.Forms.Label()
         Me.ucrNudAlpha = New instat.ucrNud()
-        Me.lblAlpha = New System.Windows.Forms.Label()
-        Me.lblLineend = New System.Windows.Forms.Label()
-        Me.lblAngle = New System.Windows.Forms.Label()
         Me.ucrNudAngle = New instat.ucrNud()
-        Me.lblShape = New System.Windows.Forms.Label()
-        Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
         Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
-        Me.lblSize = New System.Windows.Forms.Label()
         Me.ucrNudSize = New instat.ucrNud()
-        Me.lblColour = New System.Windows.Forms.Label()
-        Me.lblY = New System.Windows.Forms.Label()
-        Me.lblX = New System.Windows.Forms.Label()
-        Me.lblFill = New System.Windows.Forms.Label()
-        Me.lblXmax = New System.Windows.Forms.Label()
         Me.ucrInputXmax = New instat.ucrInputTextBox()
         Me.ucrInputYmin = New instat.ucrInputTextBox()
         Me.ucrInputXmin = New instat.ucrInputTextBox()
-        Me.lblYmin = New System.Windows.Forms.Label()
-        Me.lblXmin = New System.Windows.Forms.Label()
-        Me.lblXend = New System.Windows.Forms.Label()
-        Me.lblYmax = New System.Windows.Forms.Label()
         Me.ucrInputYmax = New instat.ucrInputTextBox()
         Me.ucrInputYend = New instat.ucrInputTextBox()
         Me.ucrInputXend = New instat.ucrInputTextBox()
-        Me.lblYend = New System.Windows.Forms.Label()
         Me.ucrNudLinetype = New instat.ucrNud()
-        Me.lblLinetype = New System.Windows.Forms.Label()
-        Me.lblPointrangeFatten = New System.Windows.Forms.Label()
         Me.ucrNudPointrangeFatten = New instat.ucrNud()
         Me.ucrNudCrossbarFatten = New instat.ucrNud()
-        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
         Me.ucrNudCurvature = New instat.ucrNud()
         Me.ucrNudShape = New instat.ucrNud()
-        Me.lblLabel = New System.Windows.Forms.Label()
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.ucrInputLineend = New instat.ucrInputComboBox()
         Me.ucrInputY = New instat.ucrInputTextBox()
         Me.ucrInputX = New instat.ucrInputTextBox()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -262,103 +262,6 @@ Partial Class sdgPlots
         Me.tbpFacet.Text = "Facets"
         Me.tbpFacet.UseVisualStyleBackColor = True
         '
-        'ucrChkDrop
-        '
-        Me.ucrChkDrop.AutoSize = True
-        Me.ucrChkDrop.Checked = False
-        Me.ucrChkDrop.Location = New System.Drawing.Point(273, 269)
-        Me.ucrChkDrop.Name = "ucrChkDrop"
-        Me.ucrChkDrop.Size = New System.Drawing.Size(257, 23)
-        Me.ucrChkDrop.TabIndex = 11
-        '
-        'ucrNudNumberofRows
-        '
-        Me.ucrNudNumberofRows.AutoSize = True
-        Me.ucrNudNumberofRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberofRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberofRows.Location = New System.Drawing.Point(169, 252)
-        Me.ucrNudNumberofRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberofRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberofRows.Name = "ucrNudNumberofRows"
-        Me.ucrNudNumberofRows.Size = New System.Drawing.Size(46, 20)
-        Me.ucrNudNumberofRows.TabIndex = 15
-        Me.ucrNudNumberofRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkNoOfRowsOrColumns
-        '
-        Me.ucrChkNoOfRowsOrColumns.AutoSize = True
-        Me.ucrChkNoOfRowsOrColumns.Checked = False
-        Me.ucrChkNoOfRowsOrColumns.Location = New System.Drawing.Point(7, 254)
-        Me.ucrChkNoOfRowsOrColumns.Name = "ucrChkNoOfRowsOrColumns"
-        Me.ucrChkNoOfRowsOrColumns.Size = New System.Drawing.Size(156, 23)
-        Me.ucrChkNoOfRowsOrColumns.TabIndex = 14
-        '
-        'ucrChkIncludeFacets
-        '
-        Me.ucrChkIncludeFacets.AutoSize = True
-        Me.ucrChkIncludeFacets.Checked = False
-        Me.ucrChkIncludeFacets.Location = New System.Drawing.Point(8, 13)
-        Me.ucrChkIncludeFacets.Name = "ucrChkIncludeFacets"
-        Me.ucrChkIncludeFacets.Size = New System.Drawing.Size(121, 23)
-        Me.ucrChkIncludeFacets.TabIndex = 0
-        '
-        'ucrChkLabeler
-        '
-        Me.ucrChkLabeler.AutoSize = True
-        Me.ucrChkLabeler.Checked = False
-        Me.ucrChkLabeler.Location = New System.Drawing.Point(273, 245)
-        Me.ucrChkLabeler.Name = "ucrChkLabeler"
-        Me.ucrChkLabeler.Size = New System.Drawing.Size(257, 23)
-        Me.ucrChkLabeler.TabIndex = 10
-        '
-        'ucrChkFreeSpace
-        '
-        Me.ucrChkFreeSpace.AutoSize = True
-        Me.ucrChkFreeSpace.Checked = False
-        Me.ucrChkFreeSpace.Location = New System.Drawing.Point(273, 221)
-        Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
-        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(257, 23)
-        Me.ucrChkFreeSpace.TabIndex = 9
-        '
-        'ucrChkFreeScalesY
-        '
-        Me.ucrChkFreeScalesY.AutoSize = True
-        Me.ucrChkFreeScalesY.Checked = False
-        Me.ucrChkFreeScalesY.Location = New System.Drawing.Point(273, 197)
-        Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
-        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(257, 23)
-        Me.ucrChkFreeScalesY.TabIndex = 8
-        '
-        'ucrChkFreeScalesX
-        '
-        Me.ucrChkFreeScalesX.AutoSize = True
-        Me.ucrChkFreeScalesX.Checked = False
-        Me.ucrChkFreeScalesX.Location = New System.Drawing.Point(273, 173)
-        Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
-        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(257, 23)
-        Me.ucrChkFreeScalesX.TabIndex = 7
-        '
-        'ucrChkMargin
-        '
-        Me.ucrChkMargin.AutoSize = True
-        Me.ucrChkMargin.Checked = False
-        Me.ucrChkMargin.Location = New System.Drawing.Point(273, 149)
-        Me.ucrChkMargin.Name = "ucrChkMargin"
-        Me.ucrChkMargin.Size = New System.Drawing.Size(257, 23)
-        Me.ucrChkMargin.TabIndex = 6
-        '
-        'ucrFacetSelector
-        '
-        Me.ucrFacetSelector.AutoSize = True
-        Me.ucrFacetSelector.bDropUnusedFilterLevels = False
-        Me.ucrFacetSelector.bShowHiddenColumns = False
-        Me.ucrFacetSelector.bUseCurrentFilter = True
-        Me.ucrFacetSelector.Location = New System.Drawing.Point(8, 36)
-        Me.ucrFacetSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFacetSelector.Name = "ucrFacetSelector"
-        Me.ucrFacetSelector.Size = New System.Drawing.Size(213, 183)
-        Me.ucrFacetSelector.TabIndex = 1
-        '
         'rdoHorizontal
         '
         Me.rdoHorizontal.AutoSize = True
@@ -406,40 +309,6 @@ Partial Class sdgPlots
         Me.lblFactor1.Tag = ""
         Me.lblFactor1.Text = "1st Factor:"
         '
-        'ucr2ndFactorReceiver
-        '
-        Me.ucr2ndFactorReceiver.AutoSize = True
-        Me.ucr2ndFactorReceiver.frmParent = Nothing
-        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(273, 114)
-        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
-        Me.ucr2ndFactorReceiver.Selector = Nothing
-        Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucr2ndFactorReceiver.strNcFilePath = ""
-        Me.ucr2ndFactorReceiver.TabIndex = 5
-        Me.ucr2ndFactorReceiver.ucrSelector = Nothing
-        '
-        'ucr1stFactorReceiver
-        '
-        Me.ucr1stFactorReceiver.AutoSize = True
-        Me.ucr1stFactorReceiver.frmParent = Nothing
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(273, 59)
-        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
-        Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
-        Me.ucr1stFactorReceiver.strNcFilePath = ""
-        Me.ucr1stFactorReceiver.TabIndex = 3
-        Me.ucr1stFactorReceiver.ucrSelector = Nothing
-        '
-        'ucrPnlHorizonatalVertical
-        '
-        Me.ucrPnlHorizonatalVertical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlHorizonatalVertical.Location = New System.Drawing.Point(8, 228)
-        Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
-        Me.ucrPnlHorizonatalVertical.Size = New System.Drawing.Size(165, 20)
-        Me.ucrPnlHorizonatalVertical.TabIndex = 30
-        '
         'tbpLayers
         '
         Me.tbpLayers.Controls.Add(Me.ucrPlotsAdditionalLayers)
@@ -451,14 +320,6 @@ Partial Class sdgPlots
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
         Me.tbpLayers.UseVisualStyleBackColor = True
-        '
-        'ucrPlotsAdditionalLayers
-        '
-        Me.ucrPlotsAdditionalLayers.AutoSize = True
-        Me.ucrPlotsAdditionalLayers.Location = New System.Drawing.Point(7, 6)
-        Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
-        Me.ucrPlotsAdditionalLayers.Size = New System.Drawing.Size(218, 191)
-        Me.ucrPlotsAdditionalLayers.TabIndex = 0
         '
         'tbpTitles
         '
@@ -494,15 +355,6 @@ Partial Class sdgPlots
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
         Me.tbpTitles.UseVisualStyleBackColor = True
-        '
-        'ucrChkIncludeTitles
-        '
-        Me.ucrChkIncludeTitles.AutoSize = True
-        Me.ucrChkIncludeTitles.Checked = False
-        Me.ucrChkIncludeTitles.Location = New System.Drawing.Point(6, 10)
-        Me.ucrChkIncludeTitles.Name = "ucrChkIncludeTitles"
-        Me.ucrChkIncludeTitles.Size = New System.Drawing.Size(121, 23)
-        Me.ucrChkIncludeTitles.TabIndex = 55
         '
         'lblLegendSize
         '
@@ -620,6 +472,748 @@ Partial Class sdgPlots
         Me.grpLegendTitle.Text = "Legend Title"
         Me.grpLegendTitle.Visible = False
         '
+        'rdoLegendTitleCustom
+        '
+        Me.rdoLegendTitleCustom.AutoSize = True
+        Me.rdoLegendTitleCustom.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLegendTitleCustom.Location = New System.Drawing.Point(73, 23)
+        Me.rdoLegendTitleCustom.Name = "rdoLegendTitleCustom"
+        Me.rdoLegendTitleCustom.Size = New System.Drawing.Size(60, 17)
+        Me.rdoLegendTitleCustom.TabIndex = 10
+        Me.rdoLegendTitleCustom.TabStop = True
+        Me.rdoLegendTitleCustom.Text = "Custom"
+        Me.rdoLegendTitleCustom.UseVisualStyleBackColor = True
+        '
+        'rdoLegendTitleAuto
+        '
+        Me.rdoLegendTitleAuto.AutoSize = True
+        Me.rdoLegendTitleAuto.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLegendTitleAuto.Location = New System.Drawing.Point(6, 23)
+        Me.rdoLegendTitleAuto.Name = "rdoLegendTitleAuto"
+        Me.rdoLegendTitleAuto.Size = New System.Drawing.Size(47, 17)
+        Me.rdoLegendTitleAuto.TabIndex = 9
+        Me.rdoLegendTitleAuto.TabStop = True
+        Me.rdoLegendTitleAuto.Text = "Auto"
+        Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
+        '
+        'tbpXAxis
+        '
+        Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
+        Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
+        Me.tbpXAxis.Name = "tbpXAxis"
+        Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpXAxis.Size = New System.Drawing.Size(669, 455)
+        Me.tbpXAxis.TabIndex = 5
+        Me.tbpXAxis.Text = "X-Axis"
+        Me.tbpXAxis.UseVisualStyleBackColor = True
+        '
+        'tbpYAxis
+        '
+        Me.tbpYAxis.Controls.Add(Me.ucrYAxis)
+        Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
+        Me.tbpYAxis.Name = "tbpYAxis"
+        Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpYAxis.Size = New System.Drawing.Size(669, 455)
+        Me.tbpYAxis.TabIndex = 6
+        Me.tbpYAxis.Text = "Y-Axis"
+        Me.tbpYAxis.UseVisualStyleBackColor = True
+        '
+        'tbpTheme
+        '
+        Me.tbpTheme.Controls.Add(Me.cmdSimpleOptions)
+        Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
+        Me.tbpTheme.Controls.Add(Me.lblFont)
+        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
+        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
+        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
+        Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTheme.Name = "tbpTheme"
+        Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTheme.Size = New System.Drawing.Size(669, 455)
+        Me.tbpTheme.TabIndex = 1
+        Me.tbpTheme.Tag = "Theme"
+        Me.tbpTheme.Text = "Themes"
+        Me.tbpTheme.UseVisualStyleBackColor = True
+        '
+        'cmdSimpleOptions
+        '
+        Me.cmdSimpleOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSimpleOptions.Location = New System.Drawing.Point(174, 49)
+        Me.cmdSimpleOptions.Name = "cmdSimpleOptions"
+        Me.cmdSimpleOptions.Size = New System.Drawing.Size(135, 23)
+        Me.cmdSimpleOptions.TabIndex = 107
+        Me.cmdSimpleOptions.Text = "Simple Options"
+        Me.cmdSimpleOptions.UseVisualStyleBackColor = True
+        '
+        'grpCommonOptions
+        '
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudYaxisMarkSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudXaxisMarkSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudYSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudXSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrNudXAngle)
+        Me.grpCommonOptions.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisTickMarkLabelSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisTickMarkLabelSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisSize)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisAngle)
+        Me.grpCommonOptions.Controls.Add(Me.ucrChkLegendPosition)
+        Me.grpCommonOptions.Location = New System.Drawing.Point(7, 81)
+        Me.grpCommonOptions.Name = "grpCommonOptions"
+        Me.grpCommonOptions.Size = New System.Drawing.Size(497, 243)
+        Me.grpCommonOptions.TabIndex = 5
+        Me.grpCommonOptions.TabStop = False
+        Me.grpCommonOptions.Text = "Common Options"
+        '
+        'lblFont
+        '
+        Me.lblFont.AutoSize = True
+        Me.lblFont.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFont.Location = New System.Drawing.Point(233, 49)
+        Me.lblFont.Name = "lblFont"
+        Me.lblFont.Size = New System.Drawing.Size(0, 13)
+        Me.lblFont.TabIndex = 4
+        '
+        'cmdAllOptions
+        '
+        Me.cmdAllOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAllOptions.Location = New System.Drawing.Point(29, 49)
+        Me.cmdAllOptions.Name = "cmdAllOptions"
+        Me.cmdAllOptions.Size = New System.Drawing.Size(139, 23)
+        Me.cmdAllOptions.TabIndex = 2
+        Me.cmdAllOptions.Text = "All Options"
+        Me.cmdAllOptions.UseVisualStyleBackColor = True
+        '
+        'tbpCoordinates
+        '
+        Me.tbpCoordinates.Controls.Add(Me.grpPolarCordinates)
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkSameScale)
+        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalPlot)
+        Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
+        Me.tbpCoordinates.Name = "tbpCoordinates"
+        Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 455)
+        Me.tbpCoordinates.TabIndex = 7
+        Me.tbpCoordinates.Text = "Coordinates"
+        Me.tbpCoordinates.UseVisualStyleBackColor = True
+        '
+        'grpPolarCordinates
+        '
+        Me.grpPolarCordinates.Controls.Add(Me.ucrInputPolarCoordinates)
+        Me.grpPolarCordinates.Controls.Add(Me.lblPolarCoordinate)
+        Me.grpPolarCordinates.Controls.Add(Me.lblStartingAngle)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
+        Me.grpPolarCordinates.Controls.Add(Me.lblPi)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrChkDirectionAnticlockwise)
+        Me.grpPolarCordinates.Controls.Add(Me.ucrInputStartingAngle)
+        Me.grpPolarCordinates.Location = New System.Drawing.Point(3, 67)
+        Me.grpPolarCordinates.Name = "grpPolarCordinates"
+        Me.grpPolarCordinates.Size = New System.Drawing.Size(300, 136)
+        Me.grpPolarCordinates.TabIndex = 22
+        Me.grpPolarCordinates.TabStop = False
+        Me.grpPolarCordinates.Text = "Polar Cordinates"
+        '
+        'lblPolarCoordinate
+        '
+        Me.lblPolarCoordinate.AutoSize = True
+        Me.lblPolarCoordinate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPolarCoordinate.Location = New System.Drawing.Point(10, 46)
+        Me.lblPolarCoordinate.Name = "lblPolarCoordinate"
+        Me.lblPolarCoordinate.Size = New System.Drawing.Size(88, 13)
+        Me.lblPolarCoordinate.TabIndex = 23
+        Me.lblPolarCoordinate.Text = "Polar Coordinate:"
+        '
+        'lblStartingAngle
+        '
+        Me.lblStartingAngle.AutoSize = True
+        Me.lblStartingAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStartingAngle.Location = New System.Drawing.Point(10, 99)
+        Me.lblStartingAngle.Name = "lblStartingAngle"
+        Me.lblStartingAngle.Size = New System.Drawing.Size(76, 13)
+        Me.lblStartingAngle.TabIndex = 22
+        Me.lblStartingAngle.Text = "Starting Angle:"
+        '
+        'lblPi
+        '
+        Me.lblPi.AutoSize = True
+        Me.lblPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPi.Location = New System.Drawing.Point(191, 103)
+        Me.lblPi.Name = "lblPi"
+        Me.lblPi.Size = New System.Drawing.Size(15, 13)
+        Me.lblPi.TabIndex = 21
+        Me.lblPi.Tag = ""
+        Me.lblPi.Text = "pi"
+        '
+        'tbpColour
+        '
+        Me.tbpColour.Controls.Add(Me.ucrChkAddColour)
+        Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
+        Me.tbpColour.Controls.Add(Me.grpColourScale)
+        Me.tbpColour.Controls.Add(Me.grpFillScale)
+        Me.tbpColour.Location = New System.Drawing.Point(4, 22)
+        Me.tbpColour.Name = "tbpColour"
+        Me.tbpColour.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpColour.Size = New System.Drawing.Size(669, 455)
+        Me.tbpColour.TabIndex = 8
+        Me.tbpColour.Text = "Colour"
+        Me.tbpColour.UseVisualStyleBackColor = True
+        '
+        'grpColourScale
+        '
+        Me.grpColourScale.Controls.Add(Me.ucrChkColourDiscrete)
+        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleTransparency)
+        Me.grpColourScale.Controls.Add(Me.ucrInputColourScalePalette)
+        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapEnds)
+        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapBegins)
+        Me.grpColourScale.Controls.Add(Me.ucrChkColourScaleReverseOrder)
+        Me.grpColourScale.Controls.Add(Me.lblColourScaleMapEnds)
+        Me.grpColourScale.Controls.Add(Me.lblColourScaleMapBegins)
+        Me.grpColourScale.Controls.Add(Me.lblColourScalePalette)
+        Me.grpColourScale.Controls.Add(Me.lblColourScaleTransparency)
+        Me.grpColourScale.Location = New System.Drawing.Point(13, 236)
+        Me.grpColourScale.Name = "grpColourScale"
+        Me.grpColourScale.Size = New System.Drawing.Size(444, 181)
+        Me.grpColourScale.TabIndex = 25
+        Me.grpColourScale.TabStop = False
+        Me.grpColourScale.Text = "Colour Scale"
+        '
+        'lblColourScaleMapEnds
+        '
+        Me.lblColourScaleMapEnds.AutoSize = True
+        Me.lblColourScaleMapEnds.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColourScaleMapEnds.Location = New System.Drawing.Point(7, 100)
+        Me.lblColourScaleMapEnds.Name = "lblColourScaleMapEnds"
+        Me.lblColourScaleMapEnds.Size = New System.Drawing.Size(198, 13)
+        Me.lblColourScaleMapEnds.TabIndex = 3
+        Me.lblColourScaleMapEnds.Text = "Corrected Hue Where Colour Map Ends:"
+        '
+        'lblColourScaleMapBegins
+        '
+        Me.lblColourScaleMapBegins.AutoSize = True
+        Me.lblColourScaleMapBegins.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColourScaleMapBegins.Location = New System.Drawing.Point(7, 75)
+        Me.lblColourScaleMapBegins.Name = "lblColourScaleMapBegins"
+        Me.lblColourScaleMapBegins.Size = New System.Drawing.Size(206, 13)
+        Me.lblColourScaleMapBegins.TabIndex = 2
+        Me.lblColourScaleMapBegins.Text = "Corrected Hue Where Colour Map Begins:"
+        '
+        'lblColourScalePalette
+        '
+        Me.lblColourScalePalette.AutoSize = True
+        Me.lblColourScalePalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColourScalePalette.Location = New System.Drawing.Point(7, 25)
+        Me.lblColourScalePalette.Name = "lblColourScalePalette"
+        Me.lblColourScalePalette.Size = New System.Drawing.Size(76, 13)
+        Me.lblColourScalePalette.TabIndex = 1
+        Me.lblColourScalePalette.Text = "Colour Palette:"
+        '
+        'lblColourScaleTransparency
+        '
+        Me.lblColourScaleTransparency.AutoSize = True
+        Me.lblColourScaleTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColourScaleTransparency.Location = New System.Drawing.Point(7, 50)
+        Me.lblColourScaleTransparency.Name = "lblColourScaleTransparency"
+        Me.lblColourScaleTransparency.Size = New System.Drawing.Size(75, 13)
+        Me.lblColourScaleTransparency.TabIndex = 0
+        Me.lblColourScaleTransparency.Text = "Transparency:"
+        '
+        'grpFillScale
+        '
+        Me.grpFillScale.Controls.Add(Me.ucrChkFillDiscrete)
+        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleTransparency)
+        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapEnds)
+        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapBegins)
+        Me.grpFillScale.Controls.Add(Me.ucrInputFillScaleColour)
+        Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleReverseColourOrder)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleMapEnds)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleBeginColour)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleColourPalettte)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleTransparency)
+        Me.grpFillScale.Location = New System.Drawing.Point(13, 30)
+        Me.grpFillScale.Name = "grpFillScale"
+        Me.grpFillScale.Size = New System.Drawing.Size(444, 174)
+        Me.grpFillScale.TabIndex = 23
+        Me.grpFillScale.TabStop = False
+        Me.grpFillScale.Text = "Fill Scale"
+        '
+        'lblFillScaleMapEnds
+        '
+        Me.lblFillScaleMapEnds.AutoSize = True
+        Me.lblFillScaleMapEnds.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFillScaleMapEnds.Location = New System.Drawing.Point(7, 98)
+        Me.lblFillScaleMapEnds.Name = "lblFillScaleMapEnds"
+        Me.lblFillScaleMapEnds.Size = New System.Drawing.Size(198, 13)
+        Me.lblFillScaleMapEnds.TabIndex = 3
+        Me.lblFillScaleMapEnds.Text = "Corrected Hue Where Colour Map Ends:"
+        '
+        'lblFillScaleBeginColour
+        '
+        Me.lblFillScaleBeginColour.AutoSize = True
+        Me.lblFillScaleBeginColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFillScaleBeginColour.Location = New System.Drawing.Point(7, 73)
+        Me.lblFillScaleBeginColour.Name = "lblFillScaleBeginColour"
+        Me.lblFillScaleBeginColour.Size = New System.Drawing.Size(206, 13)
+        Me.lblFillScaleBeginColour.TabIndex = 2
+        Me.lblFillScaleBeginColour.Text = "Corrected Hue Where Colour Map Begins:"
+        '
+        'lblFillScaleColourPalettte
+        '
+        Me.lblFillScaleColourPalettte.AutoSize = True
+        Me.lblFillScaleColourPalettte.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFillScaleColourPalettte.Location = New System.Drawing.Point(7, 23)
+        Me.lblFillScaleColourPalettte.Name = "lblFillScaleColourPalettte"
+        Me.lblFillScaleColourPalettte.Size = New System.Drawing.Size(76, 13)
+        Me.lblFillScaleColourPalettte.TabIndex = 1
+        Me.lblFillScaleColourPalettte.Text = "Colour Palette:"
+        '
+        'lblFillScaleTransparency
+        '
+        Me.lblFillScaleTransparency.AutoSize = True
+        Me.lblFillScaleTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFillScaleTransparency.Location = New System.Drawing.Point(7, 48)
+        Me.lblFillScaleTransparency.Name = "lblFillScaleTransparency"
+        Me.lblFillScaleTransparency.Size = New System.Drawing.Size(75, 13)
+        Me.lblFillScaleTransparency.TabIndex = 0
+        Me.lblFillScaleTransparency.Text = "Transparency:"
+        '
+        'tbpAnnotation
+        '
+        Me.tbpAnnotation.Controls.Add(Me.ucrChkAnnotation)
+        Me.tbpAnnotation.Controls.Add(Me.grpAnnotation)
+        Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
+        Me.tbpAnnotation.Name = "tbpAnnotation"
+        Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 455)
+        Me.tbpAnnotation.TabIndex = 9
+        Me.tbpAnnotation.Text = "Annotation"
+        Me.tbpAnnotation.UseVisualStyleBackColor = True
+        '
+        'grpAnnotation
+        '
+        Me.grpAnnotation.Controls.Add(Me.ucrChkParse)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
+        Me.grpAnnotation.Controls.Add(Me.lblCurvature)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
+        Me.grpAnnotation.Controls.Add(Me.lblAlpha)
+        Me.grpAnnotation.Controls.Add(Me.lblLineend)
+        Me.grpAnnotation.Controls.Add(Me.lblAngle)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudAngle)
+        Me.grpAnnotation.Controls.Add(Me.lblShape)
+        Me.grpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
+        Me.grpAnnotation.Controls.Add(Me.lblSize)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
+        Me.grpAnnotation.Controls.Add(Me.lblColour)
+        Me.grpAnnotation.Controls.Add(Me.lblY)
+        Me.grpAnnotation.Controls.Add(Me.lblX)
+        Me.grpAnnotation.Controls.Add(Me.lblFill)
+        Me.grpAnnotation.Controls.Add(Me.lblXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXmin)
+        Me.grpAnnotation.Controls.Add(Me.lblYmin)
+        Me.grpAnnotation.Controls.Add(Me.lblXmin)
+        Me.grpAnnotation.Controls.Add(Me.lblXend)
+        Me.grpAnnotation.Controls.Add(Me.lblYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXend)
+        Me.grpAnnotation.Controls.Add(Me.lblYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudLinetype)
+        Me.grpAnnotation.Controls.Add(Me.lblLinetype)
+        Me.grpAnnotation.Controls.Add(Me.lblPointrangeFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudPointrangeFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
+        Me.grpAnnotation.Controls.Add(Me.lblCrossbarFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudCurvature)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudShape)
+        Me.grpAnnotation.Controls.Add(Me.lblLabel)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
+        Me.grpAnnotation.Location = New System.Drawing.Point(7, 43)
+        Me.grpAnnotation.Name = "grpAnnotation"
+        Me.grpAnnotation.Size = New System.Drawing.Size(459, 374)
+        Me.grpAnnotation.TabIndex = 43
+        Me.grpAnnotation.TabStop = False
+        Me.grpAnnotation.Text = "Annotation"
+        '
+        'lblCurvature
+        '
+        Me.lblCurvature.AutoSize = True
+        Me.lblCurvature.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCurvature.Location = New System.Drawing.Point(7, 184)
+        Me.lblCurvature.Name = "lblCurvature"
+        Me.lblCurvature.Size = New System.Drawing.Size(58, 13)
+        Me.lblCurvature.TabIndex = 85
+        Me.lblCurvature.Text = "curvature :"
+        '
+        'lblAlpha
+        '
+        Me.lblAlpha.AutoSize = True
+        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAlpha.Location = New System.Drawing.Point(26, 135)
+        Me.lblAlpha.Name = "lblAlpha"
+        Me.lblAlpha.Size = New System.Drawing.Size(39, 13)
+        Me.lblAlpha.TabIndex = 19
+        Me.lblAlpha.Text = "alpha :"
+        '
+        'lblLineend
+        '
+        Me.lblLineend.AutoSize = True
+        Me.lblLineend.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLineend.Location = New System.Drawing.Point(18, 184)
+        Me.lblLineend.Name = "lblLineend"
+        Me.lblLineend.Size = New System.Drawing.Size(47, 13)
+        Me.lblLineend.TabIndex = 83
+        Me.lblLineend.Text = "lineend :"
+        '
+        'lblAngle
+        '
+        Me.lblAngle.AutoSize = True
+        Me.lblAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAngle.Location = New System.Drawing.Point(26, 208)
+        Me.lblAngle.Name = "lblAngle"
+        Me.lblAngle.Size = New System.Drawing.Size(39, 13)
+        Me.lblAngle.TabIndex = 80
+        Me.lblAngle.Text = "angle :"
+        '
+        'lblShape
+        '
+        Me.lblShape.AutoSize = True
+        Me.lblShape.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblShape.Location = New System.Drawing.Point(23, 210)
+        Me.lblShape.Name = "lblShape"
+        Me.lblShape.Size = New System.Drawing.Size(42, 13)
+        Me.lblShape.TabIndex = 79
+        Me.lblShape.Text = "shape :"
+        '
+        'lblAnnotationGeoms
+        '
+        Me.lblAnnotationGeoms.AutoSize = True
+        Me.lblAnnotationGeoms.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAnnotationGeoms.Location = New System.Drawing.Point(25, 24)
+        Me.lblAnnotationGeoms.Name = "lblAnnotationGeoms"
+        Me.lblAnnotationGeoms.Size = New System.Drawing.Size(41, 13)
+        Me.lblAnnotationGeoms.TabIndex = 77
+        Me.lblAnnotationGeoms.Text = "Geom :"
+        '
+        'lblSize
+        '
+        Me.lblSize.AutoSize = True
+        Me.lblSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSize.Location = New System.Drawing.Point(34, 111)
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Size = New System.Drawing.Size(31, 13)
+        Me.lblSize.TabIndex = 75
+        Me.lblSize.Text = "size :"
+        '
+        'lblColour
+        '
+        Me.lblColour.AutoSize = True
+        Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColour.Location = New System.Drawing.Point(23, 87)
+        Me.lblColour.Name = "lblColour"
+        Me.lblColour.Size = New System.Drawing.Size(42, 13)
+        Me.lblColour.TabIndex = 73
+        Me.lblColour.Text = "colour :"
+        '
+        'lblY
+        '
+        Me.lblY.AutoSize = True
+        Me.lblY.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblY.Location = New System.Drawing.Point(291, 56)
+        Me.lblY.Name = "lblY"
+        Me.lblY.Size = New System.Drawing.Size(18, 13)
+        Me.lblY.TabIndex = 69
+        Me.lblY.Text = "y :"
+        '
+        'lblX
+        '
+        Me.lblX.AutoSize = True
+        Me.lblX.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblX.Location = New System.Drawing.Point(294, 31)
+        Me.lblX.Name = "lblX"
+        Me.lblX.Size = New System.Drawing.Size(15, 13)
+        Me.lblX.TabIndex = 68
+        Me.lblX.Text = "x:"
+        '
+        'lblFill
+        '
+        Me.lblFill.AutoSize = True
+        Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFill.Location = New System.Drawing.Point(43, 184)
+        Me.lblFill.Name = "lblFill"
+        Me.lblFill.Size = New System.Drawing.Size(22, 13)
+        Me.lblFill.TabIndex = 61
+        Me.lblFill.Text = "fill :"
+        '
+        'lblXmax
+        '
+        Me.lblXmax.AutoSize = True
+        Me.lblXmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXmax.Location = New System.Drawing.Point(272, 132)
+        Me.lblXmax.Name = "lblXmax"
+        Me.lblXmax.Size = New System.Drawing.Size(37, 13)
+        Me.lblXmax.TabIndex = 51
+        Me.lblXmax.Text = "xmax :"
+        '
+        'lblYmin
+        '
+        Me.lblYmin.AutoSize = True
+        Me.lblYmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYmin.Location = New System.Drawing.Point(275, 106)
+        Me.lblYmin.Name = "lblYmin"
+        Me.lblYmin.Size = New System.Drawing.Size(34, 13)
+        Me.lblYmin.TabIndex = 47
+        Me.lblYmin.Text = "ymin :"
+        '
+        'lblXmin
+        '
+        Me.lblXmin.AutoSize = True
+        Me.lblXmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXmin.Location = New System.Drawing.Point(275, 81)
+        Me.lblXmin.Name = "lblXmin"
+        Me.lblXmin.Size = New System.Drawing.Size(34, 13)
+        Me.lblXmin.TabIndex = 46
+        Me.lblXmin.Text = "xmin :"
+        '
+        'lblXend
+        '
+        Me.lblXend.AutoSize = True
+        Me.lblXend.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXend.Location = New System.Drawing.Point(273, 181)
+        Me.lblXend.Name = "lblXend"
+        Me.lblXend.Size = New System.Drawing.Size(36, 13)
+        Me.lblXend.TabIndex = 40
+        Me.lblXend.Text = "xend :"
+        '
+        'lblYmax
+        '
+        Me.lblYmax.AutoSize = True
+        Me.lblYmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYmax.Location = New System.Drawing.Point(272, 156)
+        Me.lblYmax.Name = "lblYmax"
+        Me.lblYmax.Size = New System.Drawing.Size(37, 13)
+        Me.lblYmax.TabIndex = 39
+        Me.lblYmax.Text = "ymax :"
+        '
+        'lblYend
+        '
+        Me.lblYend.AutoSize = True
+        Me.lblYend.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYend.Location = New System.Drawing.Point(273, 206)
+        Me.lblYend.Name = "lblYend"
+        Me.lblYend.Size = New System.Drawing.Size(36, 13)
+        Me.lblYend.TabIndex = 35
+        Me.lblYend.Text = "yend :"
+        '
+        'lblLinetype
+        '
+        Me.lblLinetype.AutoSize = True
+        Me.lblLinetype.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLinetype.Location = New System.Drawing.Point(16, 159)
+        Me.lblLinetype.Name = "lblLinetype"
+        Me.lblLinetype.Size = New System.Drawing.Size(49, 13)
+        Me.lblLinetype.TabIndex = 63
+        Me.lblLinetype.Text = "linetype :"
+        '
+        'lblPointrangeFatten
+        '
+        Me.lblPointrangeFatten.AutoSize = True
+        Me.lblPointrangeFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPointrangeFatten.Location = New System.Drawing.Point(25, 184)
+        Me.lblPointrangeFatten.Name = "lblPointrangeFatten"
+        Me.lblPointrangeFatten.Size = New System.Drawing.Size(40, 13)
+        Me.lblPointrangeFatten.TabIndex = 89
+        Me.lblPointrangeFatten.Text = "fatten :"
+        '
+        'lblCrossbarFatten
+        '
+        Me.lblCrossbarFatten.AutoSize = True
+        Me.lblCrossbarFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCrossbarFatten.Location = New System.Drawing.Point(25, 184)
+        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
+        Me.lblCrossbarFatten.Size = New System.Drawing.Size(40, 13)
+        Me.lblCrossbarFatten.TabIndex = 86
+        Me.lblCrossbarFatten.Text = "fatten :"
+        '
+        'lblLabel
+        '
+        Me.lblLabel.AutoSize = True
+        Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLabel.Location = New System.Drawing.Point(30, 159)
+        Me.lblLabel.Name = "lblLabel"
+        Me.lblLabel.Size = New System.Drawing.Size(35, 13)
+        Me.lblLabel.TabIndex = 91
+        Me.lblLabel.Text = "label :"
+        '
+        'ttCaptionTitle
+        '
+        Me.ttCaptionTitle.AutoPopDelay = 10000
+        Me.ttCaptionTitle.InitialDelay = 500
+        Me.ttCaptionTitle.ReshowDelay = 100
+        '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.AutoSize = True
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 490)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSubdialog.TabIndex = 1
+        '
+        'ucrChkDrop
+        '
+        Me.ucrChkDrop.AutoSize = True
+        Me.ucrChkDrop.Checked = False
+        Me.ucrChkDrop.Location = New System.Drawing.Point(273, 269)
+        Me.ucrChkDrop.Name = "ucrChkDrop"
+        Me.ucrChkDrop.Size = New System.Drawing.Size(257, 23)
+        Me.ucrChkDrop.TabIndex = 11
+        '
+        'ucrNudNumberofRows
+        '
+        Me.ucrNudNumberofRows.AutoSize = True
+        Me.ucrNudNumberofRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberofRows.Location = New System.Drawing.Point(169, 252)
+        Me.ucrNudNumberofRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberofRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRows.Name = "ucrNudNumberofRows"
+        Me.ucrNudNumberofRows.Size = New System.Drawing.Size(46, 20)
+        Me.ucrNudNumberofRows.TabIndex = 15
+        Me.ucrNudNumberofRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkNoOfRowsOrColumns
+        '
+        Me.ucrChkNoOfRowsOrColumns.AutoSize = True
+        Me.ucrChkNoOfRowsOrColumns.Checked = False
+        Me.ucrChkNoOfRowsOrColumns.Location = New System.Drawing.Point(7, 254)
+        Me.ucrChkNoOfRowsOrColumns.Name = "ucrChkNoOfRowsOrColumns"
+        Me.ucrChkNoOfRowsOrColumns.Size = New System.Drawing.Size(156, 23)
+        Me.ucrChkNoOfRowsOrColumns.TabIndex = 14
+        '
+        'ucrChkIncludeFacets
+        '
+        Me.ucrChkIncludeFacets.AutoSize = True
+        Me.ucrChkIncludeFacets.Checked = False
+        Me.ucrChkIncludeFacets.Location = New System.Drawing.Point(8, 13)
+        Me.ucrChkIncludeFacets.Name = "ucrChkIncludeFacets"
+        Me.ucrChkIncludeFacets.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkIncludeFacets.TabIndex = 0
+        '
+        'ucrChkLabeler
+        '
+        Me.ucrChkLabeler.AutoSize = True
+        Me.ucrChkLabeler.Checked = False
+        Me.ucrChkLabeler.Location = New System.Drawing.Point(273, 245)
+        Me.ucrChkLabeler.Name = "ucrChkLabeler"
+        Me.ucrChkLabeler.Size = New System.Drawing.Size(257, 23)
+        Me.ucrChkLabeler.TabIndex = 10
+        '
+        'ucrChkFreeSpace
+        '
+        Me.ucrChkFreeSpace.AutoSize = True
+        Me.ucrChkFreeSpace.Checked = False
+        Me.ucrChkFreeSpace.Location = New System.Drawing.Point(273, 221)
+        Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
+        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(257, 23)
+        Me.ucrChkFreeSpace.TabIndex = 9
+        '
+        'ucrChkFreeScalesY
+        '
+        Me.ucrChkFreeScalesY.AutoSize = True
+        Me.ucrChkFreeScalesY.Checked = False
+        Me.ucrChkFreeScalesY.Location = New System.Drawing.Point(273, 197)
+        Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
+        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(257, 23)
+        Me.ucrChkFreeScalesY.TabIndex = 8
+        '
+        'ucrChkFreeScalesX
+        '
+        Me.ucrChkFreeScalesX.AutoSize = True
+        Me.ucrChkFreeScalesX.Checked = False
+        Me.ucrChkFreeScalesX.Location = New System.Drawing.Point(273, 173)
+        Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
+        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(257, 23)
+        Me.ucrChkFreeScalesX.TabIndex = 7
+        '
+        'ucrChkMargin
+        '
+        Me.ucrChkMargin.AutoSize = True
+        Me.ucrChkMargin.Checked = False
+        Me.ucrChkMargin.Location = New System.Drawing.Point(273, 149)
+        Me.ucrChkMargin.Name = "ucrChkMargin"
+        Me.ucrChkMargin.Size = New System.Drawing.Size(257, 23)
+        Me.ucrChkMargin.TabIndex = 6
+        '
+        'ucrFacetSelector
+        '
+        Me.ucrFacetSelector.AutoSize = True
+        Me.ucrFacetSelector.bDropUnusedFilterLevels = False
+        Me.ucrFacetSelector.bShowHiddenColumns = False
+        Me.ucrFacetSelector.bUseCurrentFilter = True
+        Me.ucrFacetSelector.Location = New System.Drawing.Point(8, 36)
+        Me.ucrFacetSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrFacetSelector.Name = "ucrFacetSelector"
+        Me.ucrFacetSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrFacetSelector.TabIndex = 1
+        '
+        'ucr2ndFactorReceiver
+        '
+        Me.ucr2ndFactorReceiver.AutoSize = True
+        Me.ucr2ndFactorReceiver.frmParent = Nothing
+        Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(273, 114)
+        Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
+        Me.ucr2ndFactorReceiver.Selector = Nothing
+        Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr2ndFactorReceiver.strNcFilePath = ""
+        Me.ucr2ndFactorReceiver.TabIndex = 5
+        Me.ucr2ndFactorReceiver.ucrSelector = Nothing
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Nothing
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(273, 59)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 3
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrPnlHorizonatalVertical
+        '
+        Me.ucrPnlHorizonatalVertical.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlHorizonatalVertical.Location = New System.Drawing.Point(8, 228)
+        Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
+        Me.ucrPnlHorizonatalVertical.Size = New System.Drawing.Size(165, 20)
+        Me.ucrPnlHorizonatalVertical.TabIndex = 30
+        '
+        'ucrPlotsAdditionalLayers
+        '
+        Me.ucrPlotsAdditionalLayers.AutoSize = True
+        Me.ucrPlotsAdditionalLayers.Location = New System.Drawing.Point(7, 6)
+        Me.ucrPlotsAdditionalLayers.Name = "ucrPlotsAdditionalLayers"
+        Me.ucrPlotsAdditionalLayers.Size = New System.Drawing.Size(218, 191)
+        Me.ucrPlotsAdditionalLayers.TabIndex = 0
+        '
+        'ucrChkIncludeTitles
+        '
+        Me.ucrChkIncludeTitles.AutoSize = True
+        Me.ucrChkIncludeTitles.Checked = False
+        Me.ucrChkIncludeTitles.Location = New System.Drawing.Point(6, 10)
+        Me.ucrChkIncludeTitles.Name = "ucrChkIncludeTitles"
+        Me.ucrChkIncludeTitles.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkIncludeTitles.TabIndex = 55
+        '
         'ucrChkOverwriteLegendTitle
         '
         Me.ucrChkOverwriteLegendTitle.AutoSize = True
@@ -648,30 +1242,6 @@ Partial Class sdgPlots
         Me.ucrInputLegend.Name = "ucrInputLegend"
         Me.ucrInputLegend.Size = New System.Drawing.Size(160, 21)
         Me.ucrInputLegend.TabIndex = 11
-        '
-        'rdoLegendTitleCustom
-        '
-        Me.rdoLegendTitleCustom.AutoSize = True
-        Me.rdoLegendTitleCustom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLegendTitleCustom.Location = New System.Drawing.Point(73, 23)
-        Me.rdoLegendTitleCustom.Name = "rdoLegendTitleCustom"
-        Me.rdoLegendTitleCustom.Size = New System.Drawing.Size(60, 17)
-        Me.rdoLegendTitleCustom.TabIndex = 10
-        Me.rdoLegendTitleCustom.TabStop = True
-        Me.rdoLegendTitleCustom.Text = "Custom"
-        Me.rdoLegendTitleCustom.UseVisualStyleBackColor = True
-        '
-        'rdoLegendTitleAuto
-        '
-        Me.rdoLegendTitleAuto.AutoSize = True
-        Me.rdoLegendTitleAuto.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLegendTitleAuto.Location = New System.Drawing.Point(6, 23)
-        Me.rdoLegendTitleAuto.Name = "rdoLegendTitleAuto"
-        Me.rdoLegendTitleAuto.Size = New System.Drawing.Size(47, 17)
-        Me.rdoLegendTitleAuto.TabIndex = 9
-        Me.rdoLegendTitleAuto.TabStop = True
-        Me.rdoLegendTitleAuto.Text = "Auto"
-        Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
         '
         'ucrPnlLegendTitle
         '
@@ -827,17 +1397,6 @@ Partial Class sdgPlots
         Me.ucrInputGraphTitle.Size = New System.Drawing.Size(166, 21)
         Me.ucrInputGraphTitle.TabIndex = 9
         '
-        'tbpXAxis
-        '
-        Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
-        Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
-        Me.tbpXAxis.Name = "tbpXAxis"
-        Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(669, 455)
-        Me.tbpXAxis.TabIndex = 5
-        Me.tbpXAxis.Text = "X-Axis"
-        Me.tbpXAxis.UseVisualStyleBackColor = True
-        '
         'ucrXAxis
         '
         Me.ucrXAxis.AutoSize = True
@@ -846,17 +1405,6 @@ Partial Class sdgPlots
         Me.ucrXAxis.Size = New System.Drawing.Size(669, 463)
         Me.ucrXAxis.TabIndex = 0
         '
-        'tbpYAxis
-        '
-        Me.tbpYAxis.Controls.Add(Me.ucrYAxis)
-        Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
-        Me.tbpYAxis.Name = "tbpYAxis"
-        Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(669, 455)
-        Me.tbpYAxis.TabIndex = 6
-        Me.tbpYAxis.Text = "Y-Axis"
-        Me.tbpYAxis.UseVisualStyleBackColor = True
-        '
         'ucrYAxis
         '
         Me.ucrYAxis.AutoSize = True
@@ -864,54 +1412,6 @@ Partial Class sdgPlots
         Me.ucrYAxis.Name = "ucrYAxis"
         Me.ucrYAxis.Size = New System.Drawing.Size(669, 463)
         Me.ucrYAxis.TabIndex = 0
-        '
-        'tbpTheme
-        '
-        Me.tbpTheme.Controls.Add(Me.cmdSimpleOptions)
-        Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
-        Me.tbpTheme.Controls.Add(Me.lblFont)
-        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
-        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
-        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
-        Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
-        Me.tbpTheme.Name = "tbpTheme"
-        Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(669, 455)
-        Me.tbpTheme.TabIndex = 1
-        Me.tbpTheme.Tag = "Theme"
-        Me.tbpTheme.Text = "Themes"
-        Me.tbpTheme.UseVisualStyleBackColor = True
-        '
-        'cmdSimpleOptions
-        '
-        Me.cmdSimpleOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSimpleOptions.Location = New System.Drawing.Point(174, 49)
-        Me.cmdSimpleOptions.Name = "cmdSimpleOptions"
-        Me.cmdSimpleOptions.Size = New System.Drawing.Size(135, 23)
-        Me.cmdSimpleOptions.TabIndex = 107
-        Me.cmdSimpleOptions.Text = "Simple Options"
-        Me.cmdSimpleOptions.UseVisualStyleBackColor = True
-        '
-        'grpCommonOptions
-        '
-        Me.grpCommonOptions.Controls.Add(Me.ucrNudYaxisMarkSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrNudXaxisMarkSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrNudYSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrNudXSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrNudXAngle)
-        Me.grpCommonOptions.Controls.Add(Me.ucrInputLegendPosition)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisTickMarkLabelSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisTickMarkLabelSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkYaxisSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisSize)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkXaxisAngle)
-        Me.grpCommonOptions.Controls.Add(Me.ucrChkLegendPosition)
-        Me.grpCommonOptions.Location = New System.Drawing.Point(7, 81)
-        Me.grpCommonOptions.Name = "grpCommonOptions"
-        Me.grpCommonOptions.Size = New System.Drawing.Size(497, 243)
-        Me.grpCommonOptions.TabIndex = 5
-        Me.grpCommonOptions.TabStop = False
-        Me.grpCommonOptions.Text = "Common Options"
         '
         'ucrNudYaxisMarkSize
         '
@@ -1043,25 +1543,6 @@ Partial Class sdgPlots
         Me.ucrChkLegendPosition.Size = New System.Drawing.Size(234, 23)
         Me.ucrChkLegendPosition.TabIndex = 0
         '
-        'lblFont
-        '
-        Me.lblFont.AutoSize = True
-        Me.lblFont.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFont.Location = New System.Drawing.Point(233, 49)
-        Me.lblFont.Name = "lblFont"
-        Me.lblFont.Size = New System.Drawing.Size(0, 13)
-        Me.lblFont.TabIndex = 4
-        '
-        'cmdAllOptions
-        '
-        Me.cmdAllOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAllOptions.Location = New System.Drawing.Point(29, 49)
-        Me.cmdAllOptions.Name = "cmdAllOptions"
-        Me.cmdAllOptions.Size = New System.Drawing.Size(139, 23)
-        Me.cmdAllOptions.TabIndex = 2
-        Me.cmdAllOptions.Text = "All Options"
-        Me.cmdAllOptions.UseVisualStyleBackColor = True
-        '
         'urChkSelectTheme
         '
         Me.urChkSelectTheme.AutoSize = True
@@ -1082,35 +1563,6 @@ Partial Class sdgPlots
         Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
         Me.ucrInputThemes.TabIndex = 1
         '
-        'tbpCoordinates
-        '
-        Me.tbpCoordinates.Controls.Add(Me.grpPolarCordinates)
-        Me.tbpCoordinates.Controls.Add(Me.ucrChkSameScale)
-        Me.tbpCoordinates.Controls.Add(Me.ucrChkHorizontalPlot)
-        Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
-        Me.tbpCoordinates.Name = "tbpCoordinates"
-        Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 455)
-        Me.tbpCoordinates.TabIndex = 7
-        Me.tbpCoordinates.Text = "Coordinates"
-        Me.tbpCoordinates.UseVisualStyleBackColor = True
-        '
-        'grpPolarCordinates
-        '
-        Me.grpPolarCordinates.Controls.Add(Me.ucrInputPolarCoordinates)
-        Me.grpPolarCordinates.Controls.Add(Me.lblPolarCoordinate)
-        Me.grpPolarCordinates.Controls.Add(Me.lblStartingAngle)
-        Me.grpPolarCordinates.Controls.Add(Me.ucrChkUsePolarCoordinates)
-        Me.grpPolarCordinates.Controls.Add(Me.lblPi)
-        Me.grpPolarCordinates.Controls.Add(Me.ucrChkDirectionAnticlockwise)
-        Me.grpPolarCordinates.Controls.Add(Me.ucrInputStartingAngle)
-        Me.grpPolarCordinates.Location = New System.Drawing.Point(3, 67)
-        Me.grpPolarCordinates.Name = "grpPolarCordinates"
-        Me.grpPolarCordinates.Size = New System.Drawing.Size(300, 136)
-        Me.grpPolarCordinates.TabIndex = 22
-        Me.grpPolarCordinates.TabStop = False
-        Me.grpPolarCordinates.Text = "Polar Cordinates"
-        '
         'ucrInputPolarCoordinates
         '
         Me.ucrInputPolarCoordinates.AddQuotesIfUnrecognised = True
@@ -1122,26 +1574,6 @@ Partial Class sdgPlots
         Me.ucrInputPolarCoordinates.Size = New System.Drawing.Size(65, 21)
         Me.ucrInputPolarCoordinates.TabIndex = 24
         '
-        'lblPolarCoordinate
-        '
-        Me.lblPolarCoordinate.AutoSize = True
-        Me.lblPolarCoordinate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPolarCoordinate.Location = New System.Drawing.Point(10, 46)
-        Me.lblPolarCoordinate.Name = "lblPolarCoordinate"
-        Me.lblPolarCoordinate.Size = New System.Drawing.Size(88, 13)
-        Me.lblPolarCoordinate.TabIndex = 23
-        Me.lblPolarCoordinate.Text = "Polar Coordinate:"
-        '
-        'lblStartingAngle
-        '
-        Me.lblStartingAngle.AutoSize = True
-        Me.lblStartingAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStartingAngle.Location = New System.Drawing.Point(10, 99)
-        Me.lblStartingAngle.Name = "lblStartingAngle"
-        Me.lblStartingAngle.Size = New System.Drawing.Size(76, 13)
-        Me.lblStartingAngle.TabIndex = 22
-        Me.lblStartingAngle.Text = "Starting Angle:"
-        '
         'ucrChkUsePolarCoordinates
         '
         Me.ucrChkUsePolarCoordinates.AutoSize = True
@@ -1150,17 +1582,6 @@ Partial Class sdgPlots
         Me.ucrChkUsePolarCoordinates.Name = "ucrChkUsePolarCoordinates"
         Me.ucrChkUsePolarCoordinates.Size = New System.Drawing.Size(194, 23)
         Me.ucrChkUsePolarCoordinates.TabIndex = 16
-        '
-        'lblPi
-        '
-        Me.lblPi.AutoSize = True
-        Me.lblPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPi.Location = New System.Drawing.Point(191, 103)
-        Me.lblPi.Name = "lblPi"
-        Me.lblPi.Size = New System.Drawing.Size(15, 13)
-        Me.lblPi.TabIndex = 21
-        Me.lblPi.Tag = ""
-        Me.lblPi.Text = "pi"
         '
         'ucrChkDirectionAnticlockwise
         '
@@ -1200,20 +1621,6 @@ Partial Class sdgPlots
         Me.ucrChkHorizontalPlot.Size = New System.Drawing.Size(233, 23)
         Me.ucrChkHorizontalPlot.TabIndex = 14
         '
-        'tbpColour
-        '
-        Me.tbpColour.Controls.Add(Me.ucrChkAddColour)
-        Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
-        Me.tbpColour.Controls.Add(Me.grpColourScale)
-        Me.tbpColour.Controls.Add(Me.grpFillScale)
-        Me.tbpColour.Location = New System.Drawing.Point(4, 22)
-        Me.tbpColour.Name = "tbpColour"
-        Me.tbpColour.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpColour.Size = New System.Drawing.Size(669, 455)
-        Me.tbpColour.TabIndex = 8
-        Me.tbpColour.Text = "Colour"
-        Me.tbpColour.UseVisualStyleBackColor = True
-        '
         'ucrChkAddColour
         '
         Me.ucrChkAddColour.AutoSize = True
@@ -1231,25 +1638,6 @@ Partial Class sdgPlots
         Me.ucrChkAddFillScale.Name = "ucrChkAddFillScale"
         Me.ucrChkAddFillScale.Size = New System.Drawing.Size(326, 23)
         Me.ucrChkAddFillScale.TabIndex = 26
-        '
-        'grpColourScale
-        '
-        Me.grpColourScale.Controls.Add(Me.ucrChkColourDiscrete)
-        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleTransparency)
-        Me.grpColourScale.Controls.Add(Me.ucrInputColourScalePalette)
-        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapEnds)
-        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapBegins)
-        Me.grpColourScale.Controls.Add(Me.ucrChkColourScaleReverseOrder)
-        Me.grpColourScale.Controls.Add(Me.lblColourScaleMapEnds)
-        Me.grpColourScale.Controls.Add(Me.lblColourScaleMapBegins)
-        Me.grpColourScale.Controls.Add(Me.lblColourScalePalette)
-        Me.grpColourScale.Controls.Add(Me.lblColourScaleTransparency)
-        Me.grpColourScale.Location = New System.Drawing.Point(13, 236)
-        Me.grpColourScale.Name = "grpColourScale"
-        Me.grpColourScale.Size = New System.Drawing.Size(444, 181)
-        Me.grpColourScale.TabIndex = 25
-        Me.grpColourScale.TabStop = False
-        Me.grpColourScale.Text = "Colour Scale"
         '
         'ucrChkColourDiscrete
         '
@@ -1319,65 +1707,6 @@ Partial Class sdgPlots
         Me.ucrChkColourScaleReverseOrder.Size = New System.Drawing.Size(352, 23)
         Me.ucrChkColourScaleReverseOrder.TabIndex = 5
         '
-        'lblColourScaleMapEnds
-        '
-        Me.lblColourScaleMapEnds.AutoSize = True
-        Me.lblColourScaleMapEnds.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColourScaleMapEnds.Location = New System.Drawing.Point(7, 100)
-        Me.lblColourScaleMapEnds.Name = "lblColourScaleMapEnds"
-        Me.lblColourScaleMapEnds.Size = New System.Drawing.Size(198, 13)
-        Me.lblColourScaleMapEnds.TabIndex = 3
-        Me.lblColourScaleMapEnds.Text = "Corrected Hue Where Colour Map Ends:"
-        '
-        'lblColourScaleMapBegins
-        '
-        Me.lblColourScaleMapBegins.AutoSize = True
-        Me.lblColourScaleMapBegins.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColourScaleMapBegins.Location = New System.Drawing.Point(7, 75)
-        Me.lblColourScaleMapBegins.Name = "lblColourScaleMapBegins"
-        Me.lblColourScaleMapBegins.Size = New System.Drawing.Size(206, 13)
-        Me.lblColourScaleMapBegins.TabIndex = 2
-        Me.lblColourScaleMapBegins.Text = "Corrected Hue Where Colour Map Begins:"
-        '
-        'lblColourScalePalette
-        '
-        Me.lblColourScalePalette.AutoSize = True
-        Me.lblColourScalePalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColourScalePalette.Location = New System.Drawing.Point(7, 25)
-        Me.lblColourScalePalette.Name = "lblColourScalePalette"
-        Me.lblColourScalePalette.Size = New System.Drawing.Size(76, 13)
-        Me.lblColourScalePalette.TabIndex = 1
-        Me.lblColourScalePalette.Text = "Colour Palette:"
-        '
-        'lblColourScaleTransparency
-        '
-        Me.lblColourScaleTransparency.AutoSize = True
-        Me.lblColourScaleTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColourScaleTransparency.Location = New System.Drawing.Point(7, 50)
-        Me.lblColourScaleTransparency.Name = "lblColourScaleTransparency"
-        Me.lblColourScaleTransparency.Size = New System.Drawing.Size(75, 13)
-        Me.lblColourScaleTransparency.TabIndex = 0
-        Me.lblColourScaleTransparency.Text = "Transparency:"
-        '
-        'grpFillScale
-        '
-        Me.grpFillScale.Controls.Add(Me.ucrChkFillDiscrete)
-        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleTransparency)
-        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapEnds)
-        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapBegins)
-        Me.grpFillScale.Controls.Add(Me.ucrInputFillScaleColour)
-        Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleReverseColourOrder)
-        Me.grpFillScale.Controls.Add(Me.lblFillScaleMapEnds)
-        Me.grpFillScale.Controls.Add(Me.lblFillScaleBeginColour)
-        Me.grpFillScale.Controls.Add(Me.lblFillScaleColourPalettte)
-        Me.grpFillScale.Controls.Add(Me.lblFillScaleTransparency)
-        Me.grpFillScale.Location = New System.Drawing.Point(13, 30)
-        Me.grpFillScale.Name = "grpFillScale"
-        Me.grpFillScale.Size = New System.Drawing.Size(444, 174)
-        Me.grpFillScale.TabIndex = 23
-        Me.grpFillScale.TabStop = False
-        Me.grpFillScale.Text = "Fill Scale"
-        '
         'ucrChkFillDiscrete
         '
         Me.ucrChkFillDiscrete.AutoSize = True
@@ -1446,58 +1775,6 @@ Partial Class sdgPlots
         Me.ucrChkFillScaleReverseColourOrder.Size = New System.Drawing.Size(352, 23)
         Me.ucrChkFillScaleReverseColourOrder.TabIndex = 5
         '
-        'lblFillScaleMapEnds
-        '
-        Me.lblFillScaleMapEnds.AutoSize = True
-        Me.lblFillScaleMapEnds.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillScaleMapEnds.Location = New System.Drawing.Point(7, 98)
-        Me.lblFillScaleMapEnds.Name = "lblFillScaleMapEnds"
-        Me.lblFillScaleMapEnds.Size = New System.Drawing.Size(198, 13)
-        Me.lblFillScaleMapEnds.TabIndex = 3
-        Me.lblFillScaleMapEnds.Text = "Corrected Hue Where Colour Map Ends:"
-        '
-        'lblFillScaleBeginColour
-        '
-        Me.lblFillScaleBeginColour.AutoSize = True
-        Me.lblFillScaleBeginColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillScaleBeginColour.Location = New System.Drawing.Point(7, 73)
-        Me.lblFillScaleBeginColour.Name = "lblFillScaleBeginColour"
-        Me.lblFillScaleBeginColour.Size = New System.Drawing.Size(206, 13)
-        Me.lblFillScaleBeginColour.TabIndex = 2
-        Me.lblFillScaleBeginColour.Text = "Corrected Hue Where Colour Map Begins:"
-        '
-        'lblFillScaleColourPalettte
-        '
-        Me.lblFillScaleColourPalettte.AutoSize = True
-        Me.lblFillScaleColourPalettte.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillScaleColourPalettte.Location = New System.Drawing.Point(7, 23)
-        Me.lblFillScaleColourPalettte.Name = "lblFillScaleColourPalettte"
-        Me.lblFillScaleColourPalettte.Size = New System.Drawing.Size(76, 13)
-        Me.lblFillScaleColourPalettte.TabIndex = 1
-        Me.lblFillScaleColourPalettte.Text = "Colour Palette:"
-        '
-        'lblFillScaleTransparency
-        '
-        Me.lblFillScaleTransparency.AutoSize = True
-        Me.lblFillScaleTransparency.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillScaleTransparency.Location = New System.Drawing.Point(7, 48)
-        Me.lblFillScaleTransparency.Name = "lblFillScaleTransparency"
-        Me.lblFillScaleTransparency.Size = New System.Drawing.Size(75, 13)
-        Me.lblFillScaleTransparency.TabIndex = 0
-        Me.lblFillScaleTransparency.Text = "Transparency:"
-        '
-        'tbpAnnotation
-        '
-        Me.tbpAnnotation.Controls.Add(Me.ucrChkAnnotation)
-        Me.tbpAnnotation.Controls.Add(Me.grpAnnotation)
-        Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
-        Me.tbpAnnotation.Name = "tbpAnnotation"
-        Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 455)
-        Me.tbpAnnotation.TabIndex = 9
-        Me.tbpAnnotation.Text = "Annotation"
-        Me.tbpAnnotation.UseVisualStyleBackColor = True
-        '
         'ucrChkAnnotation
         '
         Me.ucrChkAnnotation.AutoSize = True
@@ -1506,59 +1783,6 @@ Partial Class sdgPlots
         Me.ucrChkAnnotation.Name = "ucrChkAnnotation"
         Me.ucrChkAnnotation.Size = New System.Drawing.Size(278, 23)
         Me.ucrChkAnnotation.TabIndex = 44
-        '
-        'grpAnnotation
-        '
-        Me.grpAnnotation.Controls.Add(Me.ucrChkParse)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
-        Me.grpAnnotation.Controls.Add(Me.lblCurvature)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
-        Me.grpAnnotation.Controls.Add(Me.lblAlpha)
-        Me.grpAnnotation.Controls.Add(Me.lblLineend)
-        Me.grpAnnotation.Controls.Add(Me.lblAngle)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudAngle)
-        Me.grpAnnotation.Controls.Add(Me.lblShape)
-        Me.grpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
-        Me.grpAnnotation.Controls.Add(Me.lblSize)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
-        Me.grpAnnotation.Controls.Add(Me.lblColour)
-        Me.grpAnnotation.Controls.Add(Me.lblY)
-        Me.grpAnnotation.Controls.Add(Me.lblX)
-        Me.grpAnnotation.Controls.Add(Me.lblFill)
-        Me.grpAnnotation.Controls.Add(Me.lblXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputYmin)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputXmin)
-        Me.grpAnnotation.Controls.Add(Me.lblYmin)
-        Me.grpAnnotation.Controls.Add(Me.lblXmin)
-        Me.grpAnnotation.Controls.Add(Me.lblXend)
-        Me.grpAnnotation.Controls.Add(Me.lblYmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputYmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputYend)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputXend)
-        Me.grpAnnotation.Controls.Add(Me.lblYend)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudLinetype)
-        Me.grpAnnotation.Controls.Add(Me.lblLinetype)
-        Me.grpAnnotation.Controls.Add(Me.lblPointrangeFatten)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudPointrangeFatten)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
-        Me.grpAnnotation.Controls.Add(Me.lblCrossbarFatten)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudCurvature)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudShape)
-        Me.grpAnnotation.Controls.Add(Me.lblLabel)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
-        Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
-        Me.grpAnnotation.Location = New System.Drawing.Point(7, 43)
-        Me.grpAnnotation.Name = "grpAnnotation"
-        Me.grpAnnotation.Size = New System.Drawing.Size(459, 374)
-        Me.grpAnnotation.TabIndex = 43
-        Me.grpAnnotation.TabStop = False
-        Me.grpAnnotation.Text = "Annotation"
         '
         'ucrChkParse
         '
@@ -1591,16 +1815,6 @@ Partial Class sdgPlots
         Me.ucrInputColour.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputColour.TabIndex = 100
         '
-        'lblCurvature
-        '
-        Me.lblCurvature.AutoSize = True
-        Me.lblCurvature.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCurvature.Location = New System.Drawing.Point(7, 184)
-        Me.lblCurvature.Name = "lblCurvature"
-        Me.lblCurvature.Size = New System.Drawing.Size(58, 13)
-        Me.lblCurvature.TabIndex = 85
-        Me.lblCurvature.Text = "curvature :"
-        '
         'ucrNudAlpha
         '
         Me.ucrNudAlpha.AutoSize = True
@@ -1613,36 +1827,6 @@ Partial Class sdgPlots
         Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudAlpha.TabIndex = 20
         Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblAlpha
-        '
-        Me.lblAlpha.AutoSize = True
-        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlpha.Location = New System.Drawing.Point(26, 135)
-        Me.lblAlpha.Name = "lblAlpha"
-        Me.lblAlpha.Size = New System.Drawing.Size(39, 13)
-        Me.lblAlpha.TabIndex = 19
-        Me.lblAlpha.Text = "alpha :"
-        '
-        'lblLineend
-        '
-        Me.lblLineend.AutoSize = True
-        Me.lblLineend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLineend.Location = New System.Drawing.Point(18, 184)
-        Me.lblLineend.Name = "lblLineend"
-        Me.lblLineend.Size = New System.Drawing.Size(47, 13)
-        Me.lblLineend.TabIndex = 83
-        Me.lblLineend.Text = "lineend :"
-        '
-        'lblAngle
-        '
-        Me.lblAngle.AutoSize = True
-        Me.lblAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAngle.Location = New System.Drawing.Point(26, 208)
-        Me.lblAngle.Name = "lblAngle"
-        Me.lblAngle.Size = New System.Drawing.Size(39, 13)
-        Me.lblAngle.TabIndex = 80
-        Me.lblAngle.Text = "angle :"
         '
         'ucrNudAngle
         '
@@ -1657,26 +1841,6 @@ Partial Class sdgPlots
         Me.ucrNudAngle.TabIndex = 78
         Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblShape
-        '
-        Me.lblShape.AutoSize = True
-        Me.lblShape.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblShape.Location = New System.Drawing.Point(23, 210)
-        Me.lblShape.Name = "lblShape"
-        Me.lblShape.Size = New System.Drawing.Size(42, 13)
-        Me.lblShape.TabIndex = 79
-        Me.lblShape.Text = "shape :"
-        '
-        'lblAnnotationGeoms
-        '
-        Me.lblAnnotationGeoms.AutoSize = True
-        Me.lblAnnotationGeoms.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAnnotationGeoms.Location = New System.Drawing.Point(25, 24)
-        Me.lblAnnotationGeoms.Name = "lblAnnotationGeoms"
-        Me.lblAnnotationGeoms.Size = New System.Drawing.Size(41, 13)
-        Me.lblAnnotationGeoms.TabIndex = 77
-        Me.lblAnnotationGeoms.Text = "Geom :"
-        '
         'ucrInputAnnotationGeoms
         '
         Me.ucrInputAnnotationGeoms.AddQuotesIfUnrecognised = True
@@ -1687,16 +1851,6 @@ Partial Class sdgPlots
         Me.ucrInputAnnotationGeoms.Name = "ucrInputAnnotationGeoms"
         Me.ucrInputAnnotationGeoms.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputAnnotationGeoms.TabIndex = 76
-        '
-        'lblSize
-        '
-        Me.lblSize.AutoSize = True
-        Me.lblSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSize.Location = New System.Drawing.Point(34, 111)
-        Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(31, 13)
-        Me.lblSize.TabIndex = 75
-        Me.lblSize.Text = "size :"
         '
         'ucrNudSize
         '
@@ -1710,56 +1864,6 @@ Partial Class sdgPlots
         Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudSize.TabIndex = 74
         Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblColour
-        '
-        Me.lblColour.AutoSize = True
-        Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColour.Location = New System.Drawing.Point(23, 87)
-        Me.lblColour.Name = "lblColour"
-        Me.lblColour.Size = New System.Drawing.Size(42, 13)
-        Me.lblColour.TabIndex = 73
-        Me.lblColour.Text = "colour :"
-        '
-        'lblY
-        '
-        Me.lblY.AutoSize = True
-        Me.lblY.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblY.Location = New System.Drawing.Point(291, 56)
-        Me.lblY.Name = "lblY"
-        Me.lblY.Size = New System.Drawing.Size(18, 13)
-        Me.lblY.TabIndex = 69
-        Me.lblY.Text = "y :"
-        '
-        'lblX
-        '
-        Me.lblX.AutoSize = True
-        Me.lblX.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblX.Location = New System.Drawing.Point(294, 31)
-        Me.lblX.Name = "lblX"
-        Me.lblX.Size = New System.Drawing.Size(15, 13)
-        Me.lblX.TabIndex = 68
-        Me.lblX.Text = "x:"
-        '
-        'lblFill
-        '
-        Me.lblFill.AutoSize = True
-        Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFill.Location = New System.Drawing.Point(43, 184)
-        Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(22, 13)
-        Me.lblFill.TabIndex = 61
-        Me.lblFill.Text = "fill :"
-        '
-        'lblXmax
-        '
-        Me.lblXmax.AutoSize = True
-        Me.lblXmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXmax.Location = New System.Drawing.Point(272, 132)
-        Me.lblXmax.Name = "lblXmax"
-        Me.lblXmax.Size = New System.Drawing.Size(37, 13)
-        Me.lblXmax.TabIndex = 51
-        Me.lblXmax.Text = "xmax :"
         '
         'ucrInputXmax
         '
@@ -1794,46 +1898,6 @@ Partial Class sdgPlots
         Me.ucrInputXmin.Size = New System.Drawing.Size(116, 21)
         Me.ucrInputXmin.TabIndex = 48
         '
-        'lblYmin
-        '
-        Me.lblYmin.AutoSize = True
-        Me.lblYmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYmin.Location = New System.Drawing.Point(275, 106)
-        Me.lblYmin.Name = "lblYmin"
-        Me.lblYmin.Size = New System.Drawing.Size(34, 13)
-        Me.lblYmin.TabIndex = 47
-        Me.lblYmin.Text = "ymin :"
-        '
-        'lblXmin
-        '
-        Me.lblXmin.AutoSize = True
-        Me.lblXmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXmin.Location = New System.Drawing.Point(275, 81)
-        Me.lblXmin.Name = "lblXmin"
-        Me.lblXmin.Size = New System.Drawing.Size(34, 13)
-        Me.lblXmin.TabIndex = 46
-        Me.lblXmin.Text = "xmin :"
-        '
-        'lblXend
-        '
-        Me.lblXend.AutoSize = True
-        Me.lblXend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXend.Location = New System.Drawing.Point(273, 181)
-        Me.lblXend.Name = "lblXend"
-        Me.lblXend.Size = New System.Drawing.Size(36, 13)
-        Me.lblXend.TabIndex = 40
-        Me.lblXend.Text = "xend :"
-        '
-        'lblYmax
-        '
-        Me.lblYmax.AutoSize = True
-        Me.lblYmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYmax.Location = New System.Drawing.Point(272, 156)
-        Me.lblYmax.Name = "lblYmax"
-        Me.lblYmax.Size = New System.Drawing.Size(37, 13)
-        Me.lblYmax.TabIndex = 39
-        Me.lblYmax.Text = "ymax :"
-        '
         'ucrInputYmax
         '
         Me.ucrInputYmax.AddQuotesIfUnrecognised = True
@@ -1867,16 +1931,6 @@ Partial Class sdgPlots
         Me.ucrInputXend.Size = New System.Drawing.Size(115, 21)
         Me.ucrInputXend.TabIndex = 36
         '
-        'lblYend
-        '
-        Me.lblYend.AutoSize = True
-        Me.lblYend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYend.Location = New System.Drawing.Point(273, 206)
-        Me.lblYend.Name = "lblYend"
-        Me.lblYend.Size = New System.Drawing.Size(36, 13)
-        Me.lblYend.TabIndex = 35
-        Me.lblYend.Text = "yend :"
-        '
         'ucrNudLinetype
         '
         Me.ucrNudLinetype.AutoSize = True
@@ -1889,26 +1943,6 @@ Partial Class sdgPlots
         Me.ucrNudLinetype.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudLinetype.TabIndex = 62
         Me.ucrNudLinetype.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblLinetype
-        '
-        Me.lblLinetype.AutoSize = True
-        Me.lblLinetype.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLinetype.Location = New System.Drawing.Point(16, 159)
-        Me.lblLinetype.Name = "lblLinetype"
-        Me.lblLinetype.Size = New System.Drawing.Size(49, 13)
-        Me.lblLinetype.TabIndex = 63
-        Me.lblLinetype.Text = "linetype :"
-        '
-        'lblPointrangeFatten
-        '
-        Me.lblPointrangeFatten.AutoSize = True
-        Me.lblPointrangeFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPointrangeFatten.Location = New System.Drawing.Point(25, 184)
-        Me.lblPointrangeFatten.Name = "lblPointrangeFatten"
-        Me.lblPointrangeFatten.Size = New System.Drawing.Size(40, 13)
-        Me.lblPointrangeFatten.TabIndex = 89
-        Me.lblPointrangeFatten.Text = "fatten :"
         '
         'ucrNudPointrangeFatten
         '
@@ -1936,16 +1970,6 @@ Partial Class sdgPlots
         Me.ucrNudCrossbarFatten.TabIndex = 87
         Me.ucrNudCrossbarFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblCrossbarFatten
-        '
-        Me.lblCrossbarFatten.AutoSize = True
-        Me.lblCrossbarFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCrossbarFatten.Location = New System.Drawing.Point(25, 184)
-        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
-        Me.lblCrossbarFatten.Size = New System.Drawing.Size(40, 13)
-        Me.lblCrossbarFatten.TabIndex = 86
-        Me.lblCrossbarFatten.Text = "fatten :"
-        '
         'ucrNudCurvature
         '
         Me.ucrNudCurvature.AutoSize = True
@@ -1971,16 +1995,6 @@ Partial Class sdgPlots
         Me.ucrNudShape.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudShape.TabIndex = 81
         Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblLabel
-        '
-        Me.lblLabel.AutoSize = True
-        Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabel.Location = New System.Drawing.Point(30, 159)
-        Me.lblLabel.Name = "lblLabel"
-        Me.lblLabel.Size = New System.Drawing.Size(35, 13)
-        Me.lblLabel.TabIndex = 91
-        Me.lblLabel.Text = "label :"
         '
         'ucrInputLabel
         '
@@ -2038,20 +2052,6 @@ Partial Class sdgPlots
         Me.ucrReceiverY.strNcFilePath = ""
         Me.ucrReceiverY.TabIndex = 99
         Me.ucrReceiverY.ucrSelector = Nothing
-        '
-        'ttCaptionTitle
-        '
-        Me.ttCaptionTitle.AutoPopDelay = 10000
-        Me.ttCaptionTitle.InitialDelay = 500
-        Me.ttCaptionTitle.ReshowDelay = 100
-        '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 490)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
-        Me.ucrBaseSubdialog.TabIndex = 1
         '
         'sdgPlots
         '

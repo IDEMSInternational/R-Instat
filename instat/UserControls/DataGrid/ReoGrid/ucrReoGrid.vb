@@ -139,8 +139,11 @@ Public MustInherit Class ucrReoGrid
         For i = grdData.Worksheets.Count - 1 To 0 Step -1
             Dim iGridWorkheetsPosition As Integer = i 'Needed to prevent warning
             If _clsDataBook.DataFrames.Where(Function(x) x.strName = grdData.Worksheets(iGridWorkheetsPosition).Name).Count = 0 Then
-                grdData.RemoveWorksheet(i)
-                bDeleted = True
+                ' Check if we are deleting the last worksheet
+                If grdData.Worksheets.Count > 1 Then
+                    grdData.RemoveWorksheet(i)
+                    bDeleted = True
+                End If
             End If
         Next
         ' Force the grid to refresh if a sheet has been deleted as there is sometimes a UI problem otherwise.
