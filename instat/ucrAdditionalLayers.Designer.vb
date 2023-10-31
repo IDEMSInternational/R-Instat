@@ -19,7 +19,7 @@ Partial Class ucrAdditionalLayers
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,23 +36,44 @@ Partial Class ucrAdditionalLayers
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblLayers = New System.Windows.Forms.Label()
         Me.lstLayers = New System.Windows.Forms.ListView()
         Me.grpGeoms = New System.Windows.Forms.GroupBox()
         Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdAdd = New instat.ucrSplitButton()
+        Me.contextMenuStripAdd = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemGeomBoxPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomBar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomCol = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomCount = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomDensity = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomJitter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomPath = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomEncircle = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomDumbbell = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdEdit = New System.Windows.Forms.Button()
-        Me.cmdAdd = New System.Windows.Forms.Button()
+        Me.toolStripMenuItemGeomDensityRidges = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomLabel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomLabelRepel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomLine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomPoint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomRugSmooth = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomTextRepel = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeoms.SuspendLayout()
+        Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblLayers
         '
         Me.lblLayers.AutoSize = True
-        Me.lblLayers.Location = New System.Drawing.Point(4, 13)
+        Me.lblLayers.Location = New System.Drawing.Point(6, 20)
+        Me.lblLayers.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLayers.Name = "lblLayers"
-        Me.lblLayers.Size = New System.Drawing.Size(41, 13)
+        Me.lblLayers.Size = New System.Drawing.Size(60, 20)
         Me.lblLayers.TabIndex = 5
         Me.lblLayers.Text = "Layers:"
         '
@@ -60,9 +81,10 @@ Partial Class ucrAdditionalLayers
         '
         Me.lstLayers.FullRowSelect = True
         Me.lstLayers.HideSelection = False
-        Me.lstLayers.Location = New System.Drawing.Point(3, 28)
+        Me.lstLayers.Location = New System.Drawing.Point(4, 42)
+        Me.lstLayers.Margin = New System.Windows.Forms.Padding(4)
         Me.lstLayers.Name = "lstLayers"
-        Me.lstLayers.Size = New System.Drawing.Size(125, 149)
+        Me.lstLayers.Size = New System.Drawing.Size(186, 222)
         Me.lstLayers.TabIndex = 4
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
@@ -70,53 +92,174 @@ Partial Class ucrAdditionalLayers
         'grpGeoms
         '
         Me.grpGeoms.Controls.Add(Me.cmdDelete)
-        Me.grpGeoms.Controls.Add(Me.cmdEdit)
         Me.grpGeoms.Controls.Add(Me.cmdAdd)
-        Me.grpGeoms.Location = New System.Drawing.Point(134, 53)
+        Me.grpGeoms.Controls.Add(Me.cmdEdit)
+        Me.grpGeoms.Location = New System.Drawing.Point(201, 80)
+        Me.grpGeoms.Margin = New System.Windows.Forms.Padding(4)
         Me.grpGeoms.Name = "grpGeoms"
-        Me.grpGeoms.Size = New System.Drawing.Size(106, 100)
+        Me.grpGeoms.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpGeoms.Size = New System.Drawing.Size(159, 150)
         Me.grpGeoms.TabIndex = 9
         Me.grpGeoms.TabStop = False
         Me.grpGeoms.Text = "Geoms:"
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(16, 72)
+        Me.cmdDelete.Location = New System.Drawing.Point(24, 108)
+        Me.cmdDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDelete.Size = New System.Drawing.Size(112, 34)
         Me.cmdDelete.TabIndex = 9
         Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
+        'cmdAdd
+        '
+        Me.cmdAdd.AutoSize = True
+        Me.cmdAdd.ContextMenuStrip = Me.contextMenuStripAdd
+        Me.cmdAdd.Location = New System.Drawing.Point(24, 22)
+        Me.cmdAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(112, 34)
+        Me.cmdAdd.SplitMenuStrip = Me.contextMenuStripAdd
+        Me.cmdAdd.TabIndex = 11
+        Me.cmdAdd.Tag = "Add"
+        Me.cmdAdd.Text = "Add"
+        Me.cmdAdd.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripAdd
+        '
+        Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemGeomBoxPlot, Me.toolStripMenuItemGeomBar, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomDensity, Me.toolStripMenuItemGeomDensityRidges, Me.toolStripMenuItemGeomJitter, Me.toolStripMenuItemGeomPath, Me.toolStripMenuItemGeomEncircle, Me.toolStripMenuItemGeomDumbbell, Me.toolStripMenuItemGeomLabel, Me.toolStripMenuItemGeomLabelRepel, Me.toolStripMenuItemGeomLine, Me.toolStripMenuItemGeomPoint, Me.toolStripMenuItemGeomRugSmooth, Me.toolStripMenuItemGeomText, Me.toolStripMenuItemGeomTextRepel})
+        Me.contextMenuStripAdd.Name = "contextMenuStripOk"
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(252, 581)
+        '
+        'toolStripMenuItemGeomBoxPlot
+        '
+        Me.toolStripMenuItemGeomBoxPlot.Name = "toolStripMenuItemGeomBoxPlot"
+        Me.toolStripMenuItemGeomBoxPlot.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomBoxPlot.Text = "geom_boxplot"
+        '
+        'toolStripMenuItemGeomBar
+        '
+        Me.toolStripMenuItemGeomBar.Name = "toolStripMenuItemGeomBar"
+        Me.toolStripMenuItemGeomBar.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomBar.Text = "geom_bar"
+        '
+        'toolStripMenuItemGeomCol
+        '
+        Me.toolStripMenuItemGeomCol.Name = "toolStripMenuItemGeomCol"
+        Me.toolStripMenuItemGeomCol.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomCol.Text = "geom_col"
+        '
+        'toolStripMenuItemGeomCount
+        '
+        Me.toolStripMenuItemGeomCount.Name = "toolStripMenuItemGeomCount"
+        Me.toolStripMenuItemGeomCount.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomCount.Text = "geom_count"
+        '
+        'toolStripMenuItemGeomDensity
+        '
+        Me.toolStripMenuItemGeomDensity.Name = "toolStripMenuItemGeomDensity"
+        Me.toolStripMenuItemGeomDensity.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomDensity.Text = "geom_density"
+        '
+        'toolStripMenuItemGeomJitter
+        '
+        Me.toolStripMenuItemGeomJitter.Name = "toolStripMenuItemGeomJitter"
+        Me.toolStripMenuItemGeomJitter.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomJitter.Text = "geom_jitter"
+        '
+        'toolStripMenuItemGeomPath
+        '
+        Me.toolStripMenuItemGeomPath.Name = "toolStripMenuItemGeomPath"
+        Me.toolStripMenuItemGeomPath.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomPath.Text = "geom_path"
+        '
+        'toolStripMenuItemGeomEncircle
+        '
+        Me.toolStripMenuItemGeomEncircle.Name = "toolStripMenuItemGeomEncircle"
+        Me.toolStripMenuItemGeomEncircle.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomEncircle.Text = "geom_encircle"
+        '
+        'toolStripMenuItemGeomDumbbell
+        '
+        Me.toolStripMenuItemGeomDumbbell.Name = "toolStripMenuItemGeomDumbbell"
+        Me.toolStripMenuItemGeomDumbbell.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomDumbbell.Text = "geom_dumbbell"
+        '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(16, 43)
+        Me.cmdEdit.Location = New System.Drawing.Point(24, 64)
+        Me.cmdEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdEdit.Size = New System.Drawing.Size(112, 34)
         Me.cmdEdit.TabIndex = 10
         Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
-        'cmdAdd
+        'toolStripMenuItemGeomDensityRidges
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(16, 14)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAdd.TabIndex = 11
-        Me.cmdAdd.Text = "Add"
-        Me.cmdAdd.UseVisualStyleBackColor = True
+        Me.toolStripMenuItemGeomDensityRidges.Name = "toolStripMenuItemGeomDensityRidges"
+        Me.toolStripMenuItemGeomDensityRidges.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomDensityRidges.Text = "geom_density_ridges"
+        '
+        'toolStripMenuItemGeomLabel
+        '
+        Me.toolStripMenuItemGeomLabel.Name = "toolStripMenuItemGeomLabel"
+        Me.toolStripMenuItemGeomLabel.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomLabel.Text = "geom_label"
+        '
+        'toolStripMenuItemGeomLabelRepel
+        '
+        Me.toolStripMenuItemGeomLabelRepel.Name = "toolStripMenuItemGeomLabelRepel"
+        Me.toolStripMenuItemGeomLabelRepel.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomLabelRepel.Text = "geom_label_repel"
+        '
+        'toolStripMenuItemGeomLine
+        '
+        Me.toolStripMenuItemGeomLine.Name = "toolStripMenuItemGeomLine"
+        Me.toolStripMenuItemGeomLine.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomLine.Text = "geom_line"
+        '
+        'toolStripMenuItemGeomPoint
+        '
+        Me.toolStripMenuItemGeomPoint.Name = "toolStripMenuItemGeomPoint"
+        Me.toolStripMenuItemGeomPoint.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomPoint.Text = "geom_point"
+        '
+        'toolStripMenuItemGeomRugSmooth
+        '
+        Me.toolStripMenuItemGeomRugSmooth.Name = "toolStripMenuItemGeomRugSmooth"
+        Me.toolStripMenuItemGeomRugSmooth.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomRugSmooth.Text = "geom_rug_smooth"
+        '
+        'toolStripMenuItemGeomText
+        '
+        Me.toolStripMenuItemGeomText.Name = "toolStripMenuItemGeomText"
+        Me.toolStripMenuItemGeomText.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomText.Text = "geom_text"
+        '
+        'toolStripMenuItemGeomTextRepel
+        '
+        Me.toolStripMenuItemGeomTextRepel.Name = "toolStripMenuItemGeomTextRepel"
+        Me.toolStripMenuItemGeomTextRepel.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomTextRepel.Text = "geom_text_repel"
         '
         'ucrAdditionalLayers
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.Controls.Add(Me.grpGeoms)
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ucrAdditionalLayers"
-        Me.Size = New System.Drawing.Size(249, 180)
+        Me.Size = New System.Drawing.Size(374, 270)
         Me.grpGeoms.ResumeLayout(False)
+        Me.grpGeoms.PerformLayout()
+        Me.contextMenuStripAdd.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -126,5 +269,23 @@ Partial Class ucrAdditionalLayers
     Friend WithEvents grpGeoms As GroupBox
     Friend WithEvents cmdDelete As Button
     Friend WithEvents cmdEdit As Button
-    Friend WithEvents cmdAdd As Button
+    Friend WithEvents cmdAdd As ucrSplitButton
+    Friend WithEvents contextMenuStripAdd As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemGeomBar As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomBoxPlot As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomCol As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomCount As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomDensity As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomJitter As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomPath As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomEncircle As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomDumbbell As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomDensityRidges As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomLabel As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomLabelRepel As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomLine As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomPoint As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomRugSmooth As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomText As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomTextRepel As ToolStripMenuItem
 End Class
