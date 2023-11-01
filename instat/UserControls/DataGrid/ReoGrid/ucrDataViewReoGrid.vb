@@ -81,6 +81,7 @@ Public Class ucrDataViewReoGrid
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    'LT coulmn data may need to be transformed for user friendly viewing
                     strData = GetTransformedLTColumnContents(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
