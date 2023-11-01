@@ -456,13 +456,15 @@ DataSheet$set("public", "get_variables_metadata", function(data_type = "all", co
     if(missing(column)) {
       curr_data <- private$data
       cols <- names(curr_data)
+      if(self$column_selection_applied()) cols <- self$current_column_selection
     }
     else {
       cols <- column
+      if(self$column_selection_applied()) cols <- self$current_column_selection
       curr_data <- private$data[column]
     }
-    for(i in seq_along(cols)) {
-      col <- curr_data[[i]]
+    for (i in seq_along(cols)) {
+      col <- curr_data[[cols[i]]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
