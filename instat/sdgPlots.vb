@@ -110,7 +110,6 @@ Public Class sdgPlots
     Public strAxisType As String
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Tapsize()
         autoTranslate(Me)
     End Sub
 
@@ -2177,7 +2176,6 @@ Public Class sdgPlots
         ucrInputCanvasFillPalette.Visible = False
         ucrInputcontinuouscolor.Visible = False
         ucrInputContinousfill.Visible = False
-        Tapsize()
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
@@ -2468,7 +2466,7 @@ Public Class sdgPlots
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
-        ' ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
+
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
@@ -5745,96 +5743,4 @@ Public Class sdgPlots
     Private Sub ucrInputcontinuouscolor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputcontinuouscolor.ControlValueChanged, ucrInputContinousfill.ControlValueChanged
         ShowScaleColorGrp()
     End Sub
-
-    Private Sub Tapsize()
-        Dim tbPageSlope As TabPage = tbpColour
-        Dim tbPageFacets As TabPage = tbpFacet
-        'If tbPICSA.TabPages.Contains(tbPageSlope) Then
-        If tbpPlotsOptions.TabPages.Contains(tbPageSlope) Then
-            Me.tbpPlotsOptions.Size = New Size(677, 736)
-            Me.ucrBaseSubdialog.Location = New Point(232, 688)
-            Me.Size = New Size(703, 823)
-        ElseIf tbpPlotsOptions.TabPages.Contains(tbPageFacets) Then
-            Me.tbpPlotsOptions.Size = New Size(677, 490)
-            Me.ucrBaseSubdialog.Location = New Point(232, 490)
-            Me.Size = New Size(703, 568)
-        End If
-        'If tbpPlotsOptions.SelectedIndex = 7 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 736)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 688)
-        '    Me.Size = New Size(703, 823)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 8 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 6 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 5 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 4 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 3 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 2 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 1 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'ElseIf tbpPlotsOptions.SelectedIndex = 0 Then
-        '    Me.tbpPlotsOptions.Size = New Size(677, 490)
-        '    Me.ucrBaseSubdialog.Location = New Point(232, 490)
-        '    Me.Size = New Size(703, 568)
-        'End If
-    End Sub
-
-    'Private Sub tbpPlotsOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpPlotsOptions.Selecting
-    '    If e.TabPageIndex = 0 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 1 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 2 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 3 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 4 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 5 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 6 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    ElseIf e.TabPageIndex = 7 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 736)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 688)
-    '        Me.Size = New Size(703, 823)
-    '    ElseIf e.TabPageIndex = 8 Then
-    '        Me.tbpPlotsOptions.Size = New Size(677, 490)
-    '        Me.ucrBaseSubdialog.Location = New Point(232, 490)
-    '        Me.Size = New Size(703, 568)
-    '    End If
-    'End Sub
 End Class
