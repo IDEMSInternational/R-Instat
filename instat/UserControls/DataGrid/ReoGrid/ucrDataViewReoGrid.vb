@@ -105,7 +105,8 @@ Public Class ucrDataViewReoGrid
 
     ''' <summary>
     ''' Transforms contents of LT column(s) that have structured R-like data into a more readable and user-friendly format that is consistent with R Viewer.
-    ''' For example, content like list(Birmingham = list(IATA = c("BHM", NA, NA, NA), Hartford = list(IATA = "BDL", ICAO = "KBDL")) will be transformed to BHM, NA, NA, NA,BDL,KBDL
+    ''' For example, content like list(Birmingham = list(IATA = c("BHM", NA, NA, NA), Hartford = list(IATA = "BDL", ICAO = "KBDL")) 
+    ''' will be transformed to BHM, NA, NA, NA,BDL,KBDL
     ''' </summary>
     ''' <param name="strLstData">Data from column type LT</param>
     ''' <returns>Transformed data</returns>
