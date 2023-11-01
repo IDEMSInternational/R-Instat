@@ -199,7 +199,6 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_scale_fill_viridis_c)
 
-
         clsgeom_stat_density_ridges.SetGeomPackage("ggridges")
         clsgeom_stat_density_ridges.strGeomName = "stat_density_ridges"
         'Mandatory Aesthetics
