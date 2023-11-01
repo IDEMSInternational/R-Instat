@@ -32,6 +32,8 @@ Partial Class dlgClimaticBoxPlot
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
+        Me.lblOutlierCoefficient = New System.Windows.Forms.Label()
+        Me.ucrNudOutlierCoefficient = New instat.ucrNud()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -48,8 +50,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblOutlierCoefficient = New System.Windows.Forms.Label()
-        Me.ucrNudOutlierCoefficient = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'cmdBoxPlotOptions
@@ -174,6 +174,28 @@ Partial Class dlgClimaticBoxPlot
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 5
         Me.lblStation.Text = "Station:"
+        '
+        'lblOutlierCoefficient
+        '
+        Me.lblOutlierCoefficient.AutoSize = True
+        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(243, 317)
+        Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
+        Me.lblOutlierCoefficient.Size = New System.Drawing.Size(102, 13)
+        Me.lblOutlierCoefficient.TabIndex = 27
+        Me.lblOutlierCoefficient.Text = "Outlier Coefficiennt :"
+        '
+        'ucrNudOutlierCoefficient
+        '
+        Me.ucrNudOutlierCoefficient.AutoSize = True
+        Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(401, 313)
+        Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Name = "ucrNudOutlierCoefficient"
+        Me.ucrNudOutlierCoefficient.Size = New System.Drawing.Size(48, 20)
+        Me.ucrNudOutlierCoefficient.TabIndex = 28
+        Me.ucrNudOutlierCoefficient.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverWithinYear
         '
@@ -350,28 +372,6 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrSelectorClimaticBoxPlot.Name = "ucrSelectorClimaticBoxPlot"
         Me.ucrSelectorClimaticBoxPlot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClimaticBoxPlot.TabIndex = 4
-        '
-        'lblOutlierCoefficient
-        '
-        Me.lblOutlierCoefficient.AutoSize = True
-        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(243, 317)
-        Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
-        Me.lblOutlierCoefficient.Size = New System.Drawing.Size(102, 13)
-        Me.lblOutlierCoefficient.TabIndex = 27
-        Me.lblOutlierCoefficient.Text = "Outlier Coefficiennt :"
-        '
-        'ucrNudOutlierCoefficient
-        '
-        Me.ucrNudOutlierCoefficient.AutoSize = True
-        Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(383, 311)
-        Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Name = "ucrNudOutlierCoefficient"
-        Me.ucrNudOutlierCoefficient.Size = New System.Drawing.Size(48, 20)
-        Me.ucrNudOutlierCoefficient.TabIndex = 28
-        Me.ucrNudOutlierCoefficient.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgClimaticBoxPlot
         '

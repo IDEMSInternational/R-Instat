@@ -133,7 +133,7 @@ Public Class ucrOutputPage
         'whether it's just a script output
 
         'todo. temporary fix. Output element should always have an R script
-        If outputElement.FormattedRScript IsNot Nothing Then
+        If outputElement.Script IsNot Nothing Then
             AddNewScript(outputElement)
         End If
 
