@@ -730,7 +730,7 @@ Public Class sdgPlots
 
         ucrInputAxisType.SetItems({"continuous", "discrete"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
-        ucrInputAxisType.SetRDefault("discrete")
+        'ucrInputAxisType.SetRDefault("discrete")
 
         ucrChkPositionColor.SetText("Position")
         ucrChkPositionColor.AddToLinkedControls(ucrInputPositionColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
@@ -2467,6 +2467,7 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
 
+        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))))
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab

@@ -50,12 +50,11 @@ Partial Class ucrAdditionalLayers
         Me.toolStripMenuItemGeomCol = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomCount = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomDensity = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomDensityRidges = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomJitter = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomPath = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomEncircle = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomDumbbell = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdEdit = New System.Windows.Forms.Button()
-        Me.toolStripMenuItemGeomDensityRidges = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomLabel = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomLabelRepel = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomLine = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,6 +62,9 @@ Partial Class ucrAdditionalLayers
         Me.toolStripMenuItemGeomRugSmooth = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomText = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomTextRepel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdEdit = New System.Windows.Forms.Button()
+        Me.toolStripMenuItemGeomParallelSlopes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemGeomCatModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeoms.SuspendLayout()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
@@ -130,63 +132,111 @@ Partial Class ucrAdditionalLayers
         'contextMenuStripAdd
         '
         Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemGeomBoxPlot, Me.toolStripMenuItemGeomBar, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomDensity, Me.toolStripMenuItemGeomDensityRidges, Me.toolStripMenuItemGeomJitter, Me.toolStripMenuItemGeomPath, Me.toolStripMenuItemGeomEncircle, Me.toolStripMenuItemGeomDumbbell, Me.toolStripMenuItemGeomLabel, Me.toolStripMenuItemGeomLabelRepel, Me.toolStripMenuItemGeomLine, Me.toolStripMenuItemGeomPoint, Me.toolStripMenuItemGeomRugSmooth, Me.toolStripMenuItemGeomText, Me.toolStripMenuItemGeomTextRepel})
+        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemGeomBoxPlot, Me.toolStripMenuItemGeomBar, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomDensity, Me.toolStripMenuItemGeomDensityRidges, Me.toolStripMenuItemGeomJitter, Me.toolStripMenuItemGeomPath, Me.toolStripMenuItemGeomEncircle, Me.toolStripMenuItemGeomDumbbell, Me.toolStripMenuItemGeomLabel, Me.toolStripMenuItemGeomLabelRepel, Me.toolStripMenuItemGeomLine, Me.toolStripMenuItemGeomPoint, Me.toolStripMenuItemGeomRugSmooth, Me.toolStripMenuItemGeomText, Me.toolStripMenuItemGeomTextRepel, Me.toolStripMenuItemGeomParallelSlopes, Me.toolStripMenuItemGeomCatModel})
         Me.contextMenuStripAdd.Name = "contextMenuStripOk"
-        Me.contextMenuStripAdd.Size = New System.Drawing.Size(252, 581)
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(282, 645)
         '
         'toolStripMenuItemGeomBoxPlot
         '
         Me.toolStripMenuItemGeomBoxPlot.Name = "toolStripMenuItemGeomBoxPlot"
-        Me.toolStripMenuItemGeomBoxPlot.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomBoxPlot.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomBoxPlot.Text = "geom_boxplot"
         '
         'toolStripMenuItemGeomBar
         '
         Me.toolStripMenuItemGeomBar.Name = "toolStripMenuItemGeomBar"
-        Me.toolStripMenuItemGeomBar.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomBar.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomBar.Text = "geom_bar"
         '
         'toolStripMenuItemGeomCol
         '
         Me.toolStripMenuItemGeomCol.Name = "toolStripMenuItemGeomCol"
-        Me.toolStripMenuItemGeomCol.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomCol.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomCol.Text = "geom_col"
         '
         'toolStripMenuItemGeomCount
         '
         Me.toolStripMenuItemGeomCount.Name = "toolStripMenuItemGeomCount"
-        Me.toolStripMenuItemGeomCount.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomCount.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomCount.Text = "geom_count"
         '
         'toolStripMenuItemGeomDensity
         '
         Me.toolStripMenuItemGeomDensity.Name = "toolStripMenuItemGeomDensity"
-        Me.toolStripMenuItemGeomDensity.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomDensity.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomDensity.Text = "geom_density"
+        '
+        'toolStripMenuItemGeomDensityRidges
+        '
+        Me.toolStripMenuItemGeomDensityRidges.Name = "toolStripMenuItemGeomDensityRidges"
+        Me.toolStripMenuItemGeomDensityRidges.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomDensityRidges.Text = "geom_density_ridges"
         '
         'toolStripMenuItemGeomJitter
         '
         Me.toolStripMenuItemGeomJitter.Name = "toolStripMenuItemGeomJitter"
-        Me.toolStripMenuItemGeomJitter.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomJitter.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomJitter.Text = "geom_jitter"
         '
         'toolStripMenuItemGeomPath
         '
         Me.toolStripMenuItemGeomPath.Name = "toolStripMenuItemGeomPath"
-        Me.toolStripMenuItemGeomPath.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomPath.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomPath.Text = "geom_path"
         '
         'toolStripMenuItemGeomEncircle
         '
         Me.toolStripMenuItemGeomEncircle.Name = "toolStripMenuItemGeomEncircle"
-        Me.toolStripMenuItemGeomEncircle.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomEncircle.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomEncircle.Text = "geom_encircle"
         '
         'toolStripMenuItemGeomDumbbell
         '
         Me.toolStripMenuItemGeomDumbbell.Name = "toolStripMenuItemGeomDumbbell"
-        Me.toolStripMenuItemGeomDumbbell.Size = New System.Drawing.Size(251, 32)
+        Me.toolStripMenuItemGeomDumbbell.Size = New System.Drawing.Size(281, 32)
         Me.toolStripMenuItemGeomDumbbell.Text = "geom_dumbbell"
+        '
+        'toolStripMenuItemGeomLabel
+        '
+        Me.toolStripMenuItemGeomLabel.Name = "toolStripMenuItemGeomLabel"
+        Me.toolStripMenuItemGeomLabel.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomLabel.Text = "geom_label"
+        '
+        'toolStripMenuItemGeomLabelRepel
+        '
+        Me.toolStripMenuItemGeomLabelRepel.Name = "toolStripMenuItemGeomLabelRepel"
+        Me.toolStripMenuItemGeomLabelRepel.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomLabelRepel.Text = "geom_label_repel"
+        '
+        'toolStripMenuItemGeomLine
+        '
+        Me.toolStripMenuItemGeomLine.Name = "toolStripMenuItemGeomLine"
+        Me.toolStripMenuItemGeomLine.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomLine.Text = "geom_line"
+        '
+        'toolStripMenuItemGeomPoint
+        '
+        Me.toolStripMenuItemGeomPoint.Name = "toolStripMenuItemGeomPoint"
+        Me.toolStripMenuItemGeomPoint.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomPoint.Text = "geom_point"
+        '
+        'toolStripMenuItemGeomRugSmooth
+        '
+        Me.toolStripMenuItemGeomRugSmooth.Name = "toolStripMenuItemGeomRugSmooth"
+        Me.toolStripMenuItemGeomRugSmooth.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomRugSmooth.Text = "geom_rug_smooth"
+        '
+        'toolStripMenuItemGeomText
+        '
+        Me.toolStripMenuItemGeomText.Name = "toolStripMenuItemGeomText"
+        Me.toolStripMenuItemGeomText.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomText.Text = "geom_text"
+        '
+        'toolStripMenuItemGeomTextRepel
+        '
+        Me.toolStripMenuItemGeomTextRepel.Name = "toolStripMenuItemGeomTextRepel"
+        Me.toolStripMenuItemGeomTextRepel.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomTextRepel.Text = "geom_text_repel"
         '
         'cmdEdit
         '
@@ -198,53 +248,17 @@ Partial Class ucrAdditionalLayers
         Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
-        'toolStripMenuItemGeomDensityRidges
+        'toolStripMenuItemGeomParallelSlopes
         '
-        Me.toolStripMenuItemGeomDensityRidges.Name = "toolStripMenuItemGeomDensityRidges"
-        Me.toolStripMenuItemGeomDensityRidges.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomDensityRidges.Text = "geom_density_ridges"
+        Me.toolStripMenuItemGeomParallelSlopes.Name = "toolStripMenuItemGeomParallelSlopes"
+        Me.toolStripMenuItemGeomParallelSlopes.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomParallelSlopes.Text = "geom_parallel_slopes"
         '
-        'toolStripMenuItemGeomLabel
+        'toolStripMenuItemGeomCatModel
         '
-        Me.toolStripMenuItemGeomLabel.Name = "toolStripMenuItemGeomLabel"
-        Me.toolStripMenuItemGeomLabel.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomLabel.Text = "geom_label"
-        '
-        'toolStripMenuItemGeomLabelRepel
-        '
-        Me.toolStripMenuItemGeomLabelRepel.Name = "toolStripMenuItemGeomLabelRepel"
-        Me.toolStripMenuItemGeomLabelRepel.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomLabelRepel.Text = "geom_label_repel"
-        '
-        'toolStripMenuItemGeomLine
-        '
-        Me.toolStripMenuItemGeomLine.Name = "toolStripMenuItemGeomLine"
-        Me.toolStripMenuItemGeomLine.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomLine.Text = "geom_line"
-        '
-        'toolStripMenuItemGeomPoint
-        '
-        Me.toolStripMenuItemGeomPoint.Name = "toolStripMenuItemGeomPoint"
-        Me.toolStripMenuItemGeomPoint.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomPoint.Text = "geom_point"
-        '
-        'toolStripMenuItemGeomRugSmooth
-        '
-        Me.toolStripMenuItemGeomRugSmooth.Name = "toolStripMenuItemGeomRugSmooth"
-        Me.toolStripMenuItemGeomRugSmooth.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomRugSmooth.Text = "geom_rug_smooth"
-        '
-        'toolStripMenuItemGeomText
-        '
-        Me.toolStripMenuItemGeomText.Name = "toolStripMenuItemGeomText"
-        Me.toolStripMenuItemGeomText.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomText.Text = "geom_text"
-        '
-        'toolStripMenuItemGeomTextRepel
-        '
-        Me.toolStripMenuItemGeomTextRepel.Name = "toolStripMenuItemGeomTextRepel"
-        Me.toolStripMenuItemGeomTextRepel.Size = New System.Drawing.Size(251, 32)
-        Me.toolStripMenuItemGeomTextRepel.Text = "geom_text_repel"
+        Me.toolStripMenuItemGeomCatModel.Name = "toolStripMenuItemGeomCatModel"
+        Me.toolStripMenuItemGeomCatModel.Size = New System.Drawing.Size(281, 32)
+        Me.toolStripMenuItemGeomCatModel.Text = "geom_categorical_model"
         '
         'ucrAdditionalLayers
         '
@@ -288,4 +302,6 @@ Partial Class ucrAdditionalLayers
     Friend WithEvents toolStripMenuItemGeomRugSmooth As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomText As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomTextRepel As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomParallelSlopes As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemGeomCatModel As ToolStripMenuItem
 End Class
