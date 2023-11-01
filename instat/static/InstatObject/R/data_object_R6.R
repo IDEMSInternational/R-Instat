@@ -2160,7 +2160,8 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
   if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
 
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
-  if (object_type %in% c("object", "graph", "table","model","structure","Summary")){
+  if (object_type %in% c("object", "graph", "table","model","structure","summary")){
+
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
     if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$objects)[names(private$objects) == object_name] <- new_name
