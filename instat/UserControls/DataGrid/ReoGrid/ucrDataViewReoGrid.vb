@@ -75,11 +75,11 @@ Public Class ucrDataViewReoGrid
         strRowNames = dataFrame.DisplayedRowNames()
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
-                Dim strData As String = dataFrame.DisplayedData(i, j)
+                Dim strData = dataFrame.DisplayedData(i, j)
                 If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") AndAlso
                     strData IsNot Nothing Then
                     strData = GetInnerBracketedString(strData)
-                    strData = If(strData.Contains(":"), strData.Replace(":", ", "), strData)
+                    'strData = If(strData.Contains(":"), strData.Replace(":", ", "), strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -128,7 +128,7 @@ Public Class ucrDataViewReoGrid
 
     Private Function GetInnerBracketedString(strData As String) As String
         If strData.Contains("numeric(0)") Then
-            Return String.Empty
+            Return Nothing
         End If
 
         Dim startPos As Integer = InStr(strData, "c(")
@@ -138,7 +138,9 @@ Public Class ucrDataViewReoGrid
 
             If endPos > 0 Then
                 ' Extract the substring between 'c(' and ')'
-                Return Mid(strData, startPos + 2, endPos - startPos - 2)
+                Dim strTempData = Mid(strData, startPos + 2, endPos - startPos - 2)
+                Dim items As String() = strTempData.Split(","c).Select(Function(item) item.Trim().Trim(""""c)).ToArray()
+                Return String.Join(", ", items)
             End If
         End If
 
