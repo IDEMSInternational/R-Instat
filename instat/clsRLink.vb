@@ -797,7 +797,6 @@ Public Class RLink
                 If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
                 strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
                 strLastScript.StartsWith("view_object_data") Then
-
                     strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                     'if last function is view_object then display in external viewer (maximised)
                     bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")

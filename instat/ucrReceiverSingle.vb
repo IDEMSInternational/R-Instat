@@ -123,6 +123,16 @@ Public Class ucrReceiverSingle
         MyBase.RemoveSelected()
     End Sub
 
+    ''' <summary>
+    ''' Removes any variable in the single receiver
+    ''' that is not in the list of variables of the selector
+    ''' </summary>
+    Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        If Not IsEmpty() AndAlso Selector?.lstAvailableVariable.FindItemWithText(txtReceiverSingle.Text) Is Nothing Then
+            Clear()
+        End If
+    End Sub
+
     Public Overrides Sub Clear()
         RemoveSelected()
     End Sub
