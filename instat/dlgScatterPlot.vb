@@ -381,19 +381,6 @@ Public Class dlgScatterPlot
         toolStripMenuItemRugOptions.Enabled = ucrChkAddRugPlot.Checked
     End Sub
 
-    'Private Sub ucrChkJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkJitter.ControlValueChanged
-    '    If ucrChkJitter.Checked Then
-    '        clsGeomJitterFunction.AddParameter("width", ucrNudWidth.GetText, iPosition:=0)
-    '        clsGeomJitterFunction.AddParameter("height", ucrNudHeigth.GetText, iPosition:=1)
-    '        clsBaseOperator.AddParameter(strGeomJitterParameterName, clsRFunctionParameter:=clsGeomJitterFunction, iPosition:=2)
-    '        clsBaseOperator.RemoveParameterByName(strFirstParameterName)
-    '    Else
-    '        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRScatterGeomFunction, iPosition:=2)
-    '        clsBaseOperator.RemoveParameterByName(strGeomJitterParameterName)
-    '    End If
-    '    toolStripMenuItemJitterOptions.Enabled = ucrChkJitter.Checked
-    'End Sub
-
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction,
                           clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
