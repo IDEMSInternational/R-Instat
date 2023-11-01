@@ -149,8 +149,6 @@ Public Class ucrDataViewReoGrid
         Return strExtractedContents
     End Function
 
-
-
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
         Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
