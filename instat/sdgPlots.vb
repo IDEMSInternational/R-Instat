@@ -3433,7 +3433,6 @@ Public Class sdgPlots
             ucrInputFillFunction.Hide()
             ucrInputcontinuouscolor.Hide()
             ucrInputContinousfill.Hide()
-            '  AddRemovePaletteDiscrete()
             GroupeColorScale()
             GroupeFillScale()
         ElseIf ucrInputAxisType.GetText = "continuous" Then
@@ -3472,7 +3471,6 @@ Public Class sdgPlots
             ucrInputColorFunctions.Hide()
             ucrInputFillFunction.Hide()
             ucrInputCanvasColorPalette.Hide()
-            ' AddRemoveContinuousPalatte()
             If rdoViridis.Checked Then
                 ucrInputcontinuouscolor.Hide()
                 ucrInputContinousfill.Hide()
@@ -3518,73 +3516,74 @@ Public Class sdgPlots
     End Sub
 
     Private Sub AddRemovePaletteDiscrete()
-        clsBaseOperator.RemoveParameterByName("scale_color_gradient_tableau")
-        clsBaseOperator.RemoveParameterByName("scale_fill_gradient_tableau")
-        clsBaseOperator.RemoveParameterByName("scale_color_distiller")
-        clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
-        If rdoDiverging.Checked OrElse rdoVertical.Checked OrElse rdoSequential.Checked Then
-            If ucrChkUseColor.Checked AndAlso Not ucrInputPalettes.IsEmpty Then
-                clsColourPaletteFunction.AddParameter("palette", Chr(34) & ucrInputPalettes.GetText & Chr(34), iPosition:=0)
-                clsBaseOperator.AddParameter("scale_colour_brewer", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=15)
-            Else
-                clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
+        If ucrInputAxisType.GetText = "discrete" Then
+            clsBaseOperator.RemoveParameterByName("scale_color_gradient_tableau")
+            clsBaseOperator.RemoveParameterByName("scale_fill_gradient_tableau")
+            clsBaseOperator.RemoveParameterByName("scale_color_distiller")
+            clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
+            If rdoDiverging.Checked OrElse rdoVertical.Checked OrElse rdoSequential.Checked Then
+                If ucrChkUseColor.Checked AndAlso Not ucrInputPalettes.IsEmpty Then
+                    clsColourPaletteFunction.AddParameter("palette", Chr(34) & ucrInputPalettes.GetText & Chr(34), iPosition:=0)
+                    clsBaseOperator.AddParameter("scale_colour_brewer", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=15)
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
+                End If
+                If ucrChkUseFill.Checked AndAlso Not ucrInputPalettes.IsEmpty Then
+                    clsFillPaletteFunction.AddParameter("palette", Chr(34) & ucrInputPalettes.GetText & Chr(34), iPosition:=0)
+                    clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillPaletteFunction, iPosition:=16)
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+                End If
             End If
-            If ucrChkUseFill.Checked AndAlso Not ucrInputPalettes.IsEmpty Then
-                clsFillPaletteFunction.AddParameter("palette", Chr(34) & ucrInputPalettes.GetText & Chr(34), iPosition:=0)
-                clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillPaletteFunction, iPosition:=16)
-            Else
-                clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+        ElseIf ucrInputAxisType.GetText = "continuous" Then
+            clsBaseOperator.RemoveParameterByName("scale_color_solarized")
+            clsBaseOperator.RemoveParameterByName("scale_color_stata")
+            clsBaseOperator.RemoveParameterByName("scale_color_hc")
+            clsBaseOperator.RemoveParameterByName("scale_color_pander")
+            clsBaseOperator.RemoveParameterByName("scale_color_colorblind")
+            clsBaseOperator.RemoveParameterByName("scale_color_calc")
+            clsBaseOperator.RemoveParameterByName("scale_color_canva")
+            clsBaseOperator.RemoveParameterByName("scale_color_economist")
+            clsBaseOperator.RemoveParameterByName("scale_color_excel")
+            clsBaseOperator.RemoveParameterByName("scale_color_excel_new")
+            clsBaseOperator.RemoveParameterByName("scale_color_few")
+            clsBaseOperator.RemoveParameterByName("scale_color_fivethirtyeight")
+            clsBaseOperator.RemoveParameterByName("scale_color_gdocs")
+            clsBaseOperator.RemoveParameterByName("scale_color_ptol")
+            clsBaseOperator.RemoveParameterByName("scale_color_wsj")
+            clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
+            clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+            clsBaseOperator.RemoveParameterByName("scale_fill_wsj")
+            clsBaseOperator.RemoveParameterByName("scale_fill_stata")
+            clsBaseOperator.RemoveParameterByName("scale_fill_solarized")
+            clsBaseOperator.RemoveParameterByName("scale_fill_pander")
+            clsBaseOperator.RemoveParameterByName("scale_fill_colorblind")
+            clsBaseOperator.RemoveParameterByName("scale_fill_economist")
+            clsBaseOperator.RemoveParameterByName("scale_fill_canva")
+            clsBaseOperator.RemoveParameterByName("scale_fill_excel")
+            clsBaseOperator.RemoveParameterByName("scale_fill_excel_new")
+            clsBaseOperator.RemoveParameterByName("scale_fill_few")
+            clsBaseOperator.RemoveParameterByName("scale_fill_calc")
+            clsBaseOperator.RemoveParameterByName("scale_fill_fivethirtyeight")
+            clsBaseOperator.RemoveParameterByName("scale_fill_gdocs")
+            clsBaseOperator.RemoveParameterByName("scale_fill_hc")
+            clsBaseOperator.RemoveParameterByName("scale_fill_ptol")
+            If rdoDiverging.Checked OrElse rdoQualitative.Checked OrElse rdoSequential.Checked Then
+                If ucrChkUseColor.Checked AndAlso Not ucrInputPaletteContinuous.IsEmpty Then
+                    clsScaleColorDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPaletteContinuous.GetText & Chr(34), iPosition:=0)
+                    clsBaseOperator.AddParameter("scale_color_distiller", clsRFunctionParameter:=clsScaleColorDistillerFunction, iPosition:=15)
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_color_distiller")
+                End If
+                If ucrChkUseFill.Checked AndAlso Not ucrInputPaletteContinuous.IsEmpty Then
+                    clsScaleFillDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPaletteContinuous.GetText & Chr(34), iPosition:=0)
+                    clsBaseOperator.AddParameter("scale_fill_distiller", clsRFunctionParameter:=clsScaleFillDistillerFunction, iPosition:=16)
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
+                End If
             End If
         End If
-    End Sub
 
-    Private Sub AddRemoveContinuousPalatte()
-        clsBaseOperator.RemoveParameterByName("scale_color_solarized")
-        clsBaseOperator.RemoveParameterByName("scale_color_stata")
-        clsBaseOperator.RemoveParameterByName("scale_color_hc")
-        clsBaseOperator.RemoveParameterByName("scale_color_pander")
-        clsBaseOperator.RemoveParameterByName("scale_color_colorblind")
-        clsBaseOperator.RemoveParameterByName("scale_color_calc")
-        clsBaseOperator.RemoveParameterByName("scale_color_canva")
-        clsBaseOperator.RemoveParameterByName("scale_color_economist")
-        clsBaseOperator.RemoveParameterByName("scale_color_excel")
-        clsBaseOperator.RemoveParameterByName("scale_color_excel_new")
-        clsBaseOperator.RemoveParameterByName("scale_color_few")
-        clsBaseOperator.RemoveParameterByName("scale_color_fivethirtyeight")
-        clsBaseOperator.RemoveParameterByName("scale_color_gdocs")
-        clsBaseOperator.RemoveParameterByName("scale_color_ptol")
-        clsBaseOperator.RemoveParameterByName("scale_color_wsj")
-        clsBaseOperator.RemoveParameterByName("scale_colour_brewer")
-        clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
-        clsBaseOperator.RemoveParameterByName("scale_fill_wsj")
-        clsBaseOperator.RemoveParameterByName("scale_fill_stata")
-        clsBaseOperator.RemoveParameterByName("scale_fill_solarized")
-        clsBaseOperator.RemoveParameterByName("scale_fill_pander")
-        clsBaseOperator.RemoveParameterByName("scale_fill_colorblind")
-        clsBaseOperator.RemoveParameterByName("scale_fill_economist")
-        clsBaseOperator.RemoveParameterByName("scale_fill_canva")
-        clsBaseOperator.RemoveParameterByName("scale_fill_excel")
-        clsBaseOperator.RemoveParameterByName("scale_fill_excel_new")
-        clsBaseOperator.RemoveParameterByName("scale_fill_few")
-        clsBaseOperator.RemoveParameterByName("scale_fill_calc")
-        clsBaseOperator.RemoveParameterByName("scale_fill_fivethirtyeight")
-        clsBaseOperator.RemoveParameterByName("scale_fill_gdocs")
-        clsBaseOperator.RemoveParameterByName("scale_fill_hc")
-        clsBaseOperator.RemoveParameterByName("scale_fill_ptol")
-        If rdoDiverging.Checked OrElse rdoQualitative.Checked OrElse rdoSequential.Checked Then
-            If ucrChkUseColor.Checked AndAlso Not ucrInputPaletteContinuous.IsEmpty Then
-                clsScaleColorDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPaletteContinuous.GetText & Chr(34), iPosition:=0)
-                clsBaseOperator.AddParameter("scale_color_distiller", clsRFunctionParameter:=clsScaleColorDistillerFunction, iPosition:=15)
-            Else
-                clsBaseOperator.RemoveParameterByName("scale_color_distiller")
-            End If
-            If ucrChkUseFill.Checked AndAlso Not ucrInputPaletteContinuous.IsEmpty Then
-                clsScaleFillDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPaletteContinuous.GetText & Chr(34), iPosition:=0)
-                clsBaseOperator.AddParameter("scale_fill_distiller", clsRFunctionParameter:=clsScaleFillDistillerFunction, iPosition:=16)
-            Else
-                clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
-            End If
-        End If
     End Sub
 
     Private Sub ucrPnlColourPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColourPalette.ControlValueChanged
@@ -3816,10 +3815,9 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrInputColorType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged, ucrChkUseColor.ControlValueChanged, ucrChkUseFill.ControlValueChanged
+    Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged, ucrChkUseColor.ControlValueChanged, ucrChkUseFill.ControlValueChanged
         ShowScaleColorGrp()
         AddRemovePaletteDiscrete()
-        AddRemoveContinuousPalatte()
     End Sub
 
     Private Sub GroupeColorScale()
@@ -5764,6 +5762,6 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrInputPaletteContinuous_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPaletteContinuous.ControlValueChanged
-        AddRemoveContinuousPalatte()
+        AddRemovePaletteDiscrete()
     End Sub
 End Class
