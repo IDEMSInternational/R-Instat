@@ -746,7 +746,7 @@ Public Class ucrDataView
         Dim tooltip As New ToolTip()
 
         ' Set the tooltip texts for the labels.
-        'tooltip.SetToolTip(linkMenuItem, linkMenuItem.Text)
+        tooltip.SetToolTip(linkMenuItem, linkMenuItem.Text)
 
         'add the link control.
         panelRecentMenuItems.Controls.Add(linkMenuItem)
