@@ -24,6 +24,11 @@ Partial Class sdgFormatSummaryTables
     Private Sub InitializeComponent()
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpTitle = New System.Windows.Forms.TabPage()
+        Me.grpSubtitle = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSubtitleFootnote = New instat.ucrInputTextBox()
+        Me.ucrChkSubtitleFootnote = New instat.ucrCheck()
+        Me.ucrInputSubtitle = New instat.ucrInputTextBox()
+        Me.lblSubtitle = New System.Windows.Forms.Label()
         Me.ucrChkIncludeTitles = New instat.ucrCheck()
         Me.grpTitle = New System.Windows.Forms.GroupBox()
         Me.ucrInputTitleFootnote = New instat.ucrInputTextBox()
@@ -31,6 +36,12 @@ Partial Class sdgFormatSummaryTables
         Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.tbpStub = New System.Windows.Forms.TabPage()
+        Me.ucrChkStub = New instat.ucrCheck()
+        Me.grpStub = New System.Windows.Forms.GroupBox()
+        Me.ucrInputStubFootnote = New instat.ucrInputTextBox()
+        Me.ucrChkStubFootnote = New instat.ucrCheck()
+        Me.ucrInputStub = New instat.ucrInputTextBox()
+        Me.lblStubs = New System.Windows.Forms.Label()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
         Me.ucrInputSelectThemes = New instat.ucrInputComboBox()
         Me.cmdManualTheme = New System.Windows.Forms.Button()
@@ -38,23 +49,16 @@ Partial Class sdgFormatSummaryTables
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.grpSubtitle = New System.Windows.Forms.GroupBox()
-        Me.ucrInputSubtitleFootnote = New instat.ucrInputTextBox()
-        Me.ucrChkSubtitleFootnote = New instat.ucrCheck()
-        Me.ucrInputSubtitle = New instat.ucrInputTextBox()
-        Me.lblSubtitle = New System.Windows.Forms.Label()
-        Me.grpStub = New System.Windows.Forms.GroupBox()
-        Me.ucrInputStubFootnote = New instat.ucrInputTextBox()
-        Me.ucrChkStubFootnote = New instat.ucrCheck()
-        Me.ucrInputStub = New instat.ucrInputTextBox()
-        Me.lblStubs = New System.Windows.Forms.Label()
+        Me.lblTitleFootnote = New System.Windows.Forms.Label()
+        Me.lblSubtitleFootnote = New System.Windows.Forms.Label()
+        Me.lblStubFootnote = New System.Windows.Forms.Label()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
+        Me.grpSubtitle.SuspendLayout()
         Me.grpTitle.SuspendLayout()
         Me.tbpStub.SuspendLayout()
-        Me.tbpThemes.SuspendLayout()
-        Me.grpSubtitle.SuspendLayout()
         Me.grpStub.SuspendLayout()
+        Me.tbpThemes.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -81,6 +85,64 @@ Partial Class sdgFormatSummaryTables
         Me.tbpTitle.Text = "Title"
         Me.tbpTitle.UseVisualStyleBackColor = True
         '
+        'grpSubtitle
+        '
+        Me.grpSubtitle.Controls.Add(Me.lblSubtitleFootnote)
+        Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
+        Me.grpSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
+        Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitle)
+        Me.grpSubtitle.Controls.Add(Me.lblSubtitle)
+        Me.grpSubtitle.Location = New System.Drawing.Point(12, 223)
+        Me.grpSubtitle.Name = "grpSubtitle"
+        Me.grpSubtitle.Size = New System.Drawing.Size(479, 120)
+        Me.grpSubtitle.TabIndex = 10
+        Me.grpSubtitle.TabStop = False
+        Me.grpSubtitle.Text = "Subtitle"
+        '
+        'ucrInputSubtitleFootnote
+        '
+        Me.ucrInputSubtitleFootnote.AddQuotesIfUnrecognised = True
+        Me.ucrInputSubtitleFootnote.AutoSize = True
+        Me.ucrInputSubtitleFootnote.IsMultiline = False
+        Me.ucrInputSubtitleFootnote.IsReadOnly = False
+        Me.ucrInputSubtitleFootnote.Location = New System.Drawing.Point(68, 87)
+        Me.ucrInputSubtitleFootnote.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputSubtitleFootnote.Name = "ucrInputSubtitleFootnote"
+        Me.ucrInputSubtitleFootnote.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputSubtitleFootnote.TabIndex = 11
+        '
+        'ucrChkSubtitleFootnote
+        '
+        Me.ucrChkSubtitleFootnote.AutoSize = True
+        Me.ucrChkSubtitleFootnote.Checked = False
+        Me.ucrChkSubtitleFootnote.Location = New System.Drawing.Point(70, 46)
+        Me.ucrChkSubtitleFootnote.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkSubtitleFootnote.Name = "ucrChkSubtitleFootnote"
+        Me.ucrChkSubtitleFootnote.Size = New System.Drawing.Size(124, 34)
+        Me.ucrChkSubtitleFootnote.TabIndex = 10
+        '
+        'ucrInputSubtitle
+        '
+        Me.ucrInputSubtitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputSubtitle.AutoSize = True
+        Me.ucrInputSubtitle.IsMultiline = False
+        Me.ucrInputSubtitle.IsReadOnly = False
+        Me.ucrInputSubtitle.Location = New System.Drawing.Point(70, 18)
+        Me.ucrInputSubtitle.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputSubtitle.Name = "ucrInputSubtitle"
+        Me.ucrInputSubtitle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSubtitle.TabIndex = 9
+        '
+        'lblSubtitle
+        '
+        Me.lblSubtitle.AutoSize = True
+        Me.lblSubtitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSubtitle.Location = New System.Drawing.Point(16, 23)
+        Me.lblSubtitle.Name = "lblSubtitle"
+        Me.lblSubtitle.Size = New System.Drawing.Size(31, 13)
+        Me.lblSubtitle.TabIndex = 8
+        Me.lblSubtitle.Text = "Text:"
+        '
         'ucrChkIncludeTitles
         '
         Me.ucrChkIncludeTitles.AutoSize = True
@@ -93,6 +155,7 @@ Partial Class sdgFormatSummaryTables
         '
         'grpTitle
         '
+        Me.grpTitle.Controls.Add(Me.lblTitleFootnote)
         Me.grpTitle.Controls.Add(Me.ucrInputTitleFootnote)
         Me.grpTitle.Controls.Add(Me.ucrChkTitleFootnote)
         Me.grpTitle.Controls.Add(Me.ucrInputTitle)
@@ -150,6 +213,7 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpStub
         '
+        Me.tbpStub.Controls.Add(Me.ucrChkStub)
         Me.tbpStub.Controls.Add(Me.grpStub)
         Me.tbpStub.Location = New System.Drawing.Point(4, 22)
         Me.tbpStub.Name = "tbpStub"
@@ -157,6 +221,74 @@ Partial Class sdgFormatSummaryTables
         Me.tbpStub.TabIndex = 5
         Me.tbpStub.Text = "Stub"
         Me.tbpStub.UseVisualStyleBackColor = True
+        '
+        'ucrChkStub
+        '
+        Me.ucrChkStub.AutoSize = True
+        Me.ucrChkStub.Checked = False
+        Me.ucrChkStub.Location = New System.Drawing.Point(10, 18)
+        Me.ucrChkStub.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkStub.Name = "ucrChkStub"
+        Me.ucrChkStub.Size = New System.Drawing.Size(156, 34)
+        Me.ucrChkStub.TabIndex = 2
+        '
+        'grpStub
+        '
+        Me.grpStub.Controls.Add(Me.lblStubFootnote)
+        Me.grpStub.Controls.Add(Me.ucrInputStubFootnote)
+        Me.grpStub.Controls.Add(Me.ucrChkStubFootnote)
+        Me.grpStub.Controls.Add(Me.ucrInputStub)
+        Me.grpStub.Controls.Add(Me.lblStubs)
+        Me.grpStub.Location = New System.Drawing.Point(10, 71)
+        Me.grpStub.Name = "grpStub"
+        Me.grpStub.Size = New System.Drawing.Size(479, 120)
+        Me.grpStub.TabIndex = 1
+        Me.grpStub.TabStop = False
+        Me.grpStub.Text = "Stub"
+        '
+        'ucrInputStubFootnote
+        '
+        Me.ucrInputStubFootnote.AddQuotesIfUnrecognised = True
+        Me.ucrInputStubFootnote.AutoSize = True
+        Me.ucrInputStubFootnote.IsMultiline = False
+        Me.ucrInputStubFootnote.IsReadOnly = False
+        Me.ucrInputStubFootnote.Location = New System.Drawing.Point(69, 87)
+        Me.ucrInputStubFootnote.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputStubFootnote.Name = "ucrInputStubFootnote"
+        Me.ucrInputStubFootnote.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputStubFootnote.TabIndex = 6
+        '
+        'ucrChkStubFootnote
+        '
+        Me.ucrChkStubFootnote.AutoSize = True
+        Me.ucrChkStubFootnote.Checked = False
+        Me.ucrChkStubFootnote.Location = New System.Drawing.Point(71, 51)
+        Me.ucrChkStubFootnote.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkStubFootnote.Name = "ucrChkStubFootnote"
+        Me.ucrChkStubFootnote.Size = New System.Drawing.Size(124, 34)
+        Me.ucrChkStubFootnote.TabIndex = 4
+        '
+        'ucrInputStub
+        '
+        Me.ucrInputStub.AddQuotesIfUnrecognised = True
+        Me.ucrInputStub.AutoSize = True
+        Me.ucrInputStub.IsMultiline = False
+        Me.ucrInputStub.IsReadOnly = False
+        Me.ucrInputStub.Location = New System.Drawing.Point(69, 25)
+        Me.ucrInputStub.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputStub.Name = "ucrInputStub"
+        Me.ucrInputStub.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStub.TabIndex = 2
+        '
+        'lblStubs
+        '
+        Me.lblStubs.AutoSize = True
+        Me.lblStubs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStubs.Location = New System.Drawing.Point(15, 25)
+        Me.lblStubs.Name = "lblStubs"
+        Me.lblStubs.Size = New System.Drawing.Size(31, 13)
+        Me.lblStubs.TabIndex = 0
+        Me.lblStubs.Text = "Text:"
         '
         'tbpThemes
         '
@@ -233,119 +365,35 @@ Partial Class sdgFormatSummaryTables
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 3
         '
-        'grpSubtitle
+        'lblTitleFootnote
         '
-        Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
-        Me.grpSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
-        Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitle)
-        Me.grpSubtitle.Controls.Add(Me.lblSubtitle)
-        Me.grpSubtitle.Location = New System.Drawing.Point(12, 223)
-        Me.grpSubtitle.Name = "grpSubtitle"
-        Me.grpSubtitle.Size = New System.Drawing.Size(479, 120)
-        Me.grpSubtitle.TabIndex = 10
-        Me.grpSubtitle.TabStop = False
-        Me.grpSubtitle.Text = "Subtitle"
+        Me.lblTitleFootnote.AutoSize = True
+        Me.lblTitleFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTitleFootnote.Location = New System.Drawing.Point(22, 87)
+        Me.lblTitleFootnote.Name = "lblTitleFootnote"
+        Me.lblTitleFootnote.Size = New System.Drawing.Size(31, 13)
+        Me.lblTitleFootnote.TabIndex = 7
+        Me.lblTitleFootnote.Text = "Text:"
         '
-        'ucrInputSubtitleFootnote
+        'lblSubtitleFootnote
         '
-        Me.ucrInputSubtitleFootnote.AddQuotesIfUnrecognised = True
-        Me.ucrInputSubtitleFootnote.AutoSize = True
-        Me.ucrInputSubtitleFootnote.IsMultiline = False
-        Me.ucrInputSubtitleFootnote.IsReadOnly = False
-        Me.ucrInputSubtitleFootnote.Location = New System.Drawing.Point(68, 87)
-        Me.ucrInputSubtitleFootnote.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputSubtitleFootnote.Name = "ucrInputSubtitleFootnote"
-        Me.ucrInputSubtitleFootnote.Size = New System.Drawing.Size(119, 21)
-        Me.ucrInputSubtitleFootnote.TabIndex = 11
+        Me.lblSubtitleFootnote.AutoSize = True
+        Me.lblSubtitleFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSubtitleFootnote.Location = New System.Drawing.Point(16, 95)
+        Me.lblSubtitleFootnote.Name = "lblSubtitleFootnote"
+        Me.lblSubtitleFootnote.Size = New System.Drawing.Size(31, 13)
+        Me.lblSubtitleFootnote.TabIndex = 12
+        Me.lblSubtitleFootnote.Text = "Text:"
         '
-        'ucrChkSubtitleFootnote
+        'lblStubFootnote
         '
-        Me.ucrChkSubtitleFootnote.AutoSize = True
-        Me.ucrChkSubtitleFootnote.Checked = False
-        Me.ucrChkSubtitleFootnote.Location = New System.Drawing.Point(70, 46)
-        Me.ucrChkSubtitleFootnote.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkSubtitleFootnote.Name = "ucrChkSubtitleFootnote"
-        Me.ucrChkSubtitleFootnote.Size = New System.Drawing.Size(124, 34)
-        Me.ucrChkSubtitleFootnote.TabIndex = 10
-        '
-        'ucrInputSubtitle
-        '
-        Me.ucrInputSubtitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputSubtitle.AutoSize = True
-        Me.ucrInputSubtitle.IsMultiline = False
-        Me.ucrInputSubtitle.IsReadOnly = False
-        Me.ucrInputSubtitle.Location = New System.Drawing.Point(70, 18)
-        Me.ucrInputSubtitle.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputSubtitle.Name = "ucrInputSubtitle"
-        Me.ucrInputSubtitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSubtitle.TabIndex = 9
-        '
-        'lblSubtitle
-        '
-        Me.lblSubtitle.AutoSize = True
-        Me.lblSubtitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSubtitle.Location = New System.Drawing.Point(16, 23)
-        Me.lblSubtitle.Name = "lblSubtitle"
-        Me.lblSubtitle.Size = New System.Drawing.Size(31, 13)
-        Me.lblSubtitle.TabIndex = 8
-        Me.lblSubtitle.Text = "Text:"
-        '
-        'grpStub
-        '
-        Me.grpStub.Controls.Add(Me.ucrInputStubFootnote)
-        Me.grpStub.Controls.Add(Me.ucrChkStubFootnote)
-        Me.grpStub.Controls.Add(Me.ucrInputStub)
-        Me.grpStub.Controls.Add(Me.lblStubs)
-        Me.grpStub.Location = New System.Drawing.Point(10, 8)
-        Me.grpStub.Name = "grpStub"
-        Me.grpStub.Size = New System.Drawing.Size(479, 120)
-        Me.grpStub.TabIndex = 1
-        Me.grpStub.TabStop = False
-        Me.grpStub.Text = "Stub"
-        '
-        'ucrInputStubFootnote
-        '
-        Me.ucrInputStubFootnote.AddQuotesIfUnrecognised = True
-        Me.ucrInputStubFootnote.AutoSize = True
-        Me.ucrInputStubFootnote.IsMultiline = False
-        Me.ucrInputStubFootnote.IsReadOnly = False
-        Me.ucrInputStubFootnote.Location = New System.Drawing.Point(69, 87)
-        Me.ucrInputStubFootnote.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputStubFootnote.Name = "ucrInputStubFootnote"
-        Me.ucrInputStubFootnote.Size = New System.Drawing.Size(119, 21)
-        Me.ucrInputStubFootnote.TabIndex = 6
-        '
-        'ucrChkStubFootnote
-        '
-        Me.ucrChkStubFootnote.AutoSize = True
-        Me.ucrChkStubFootnote.Checked = False
-        Me.ucrChkStubFootnote.Location = New System.Drawing.Point(71, 51)
-        Me.ucrChkStubFootnote.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrChkStubFootnote.Name = "ucrChkStubFootnote"
-        Me.ucrChkStubFootnote.Size = New System.Drawing.Size(124, 34)
-        Me.ucrChkStubFootnote.TabIndex = 4
-        '
-        'ucrInputStub
-        '
-        Me.ucrInputStub.AddQuotesIfUnrecognised = True
-        Me.ucrInputStub.AutoSize = True
-        Me.ucrInputStub.IsMultiline = False
-        Me.ucrInputStub.IsReadOnly = False
-        Me.ucrInputStub.Location = New System.Drawing.Point(69, 25)
-        Me.ucrInputStub.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputStub.Name = "ucrInputStub"
-        Me.ucrInputStub.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputStub.TabIndex = 2
-        '
-        'lblStubs
-        '
-        Me.lblStubs.AutoSize = True
-        Me.lblStubs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStubs.Location = New System.Drawing.Point(15, 25)
-        Me.lblStubs.Name = "lblStubs"
-        Me.lblStubs.Size = New System.Drawing.Size(31, 13)
-        Me.lblStubs.TabIndex = 0
-        Me.lblStubs.Text = "Text:"
+        Me.lblStubFootnote.AutoSize = True
+        Me.lblStubFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStubFootnote.Location = New System.Drawing.Point(15, 90)
+        Me.lblStubFootnote.Name = "lblStubFootnote"
+        Me.lblStubFootnote.Size = New System.Drawing.Size(31, 13)
+        Me.lblStubFootnote.TabIndex = 7
+        Me.lblStubFootnote.Text = "Text:"
         '
         'sdgFormatSummaryTables
         '
@@ -364,15 +412,16 @@ Partial Class sdgFormatSummaryTables
         Me.tbpFormatOptions.ResumeLayout(False)
         Me.tbpTitle.ResumeLayout(False)
         Me.tbpTitle.PerformLayout()
+        Me.grpSubtitle.ResumeLayout(False)
+        Me.grpSubtitle.PerformLayout()
         Me.grpTitle.ResumeLayout(False)
         Me.grpTitle.PerformLayout()
         Me.tbpStub.ResumeLayout(False)
-        Me.tbpThemes.ResumeLayout(False)
-        Me.tbpThemes.PerformLayout()
-        Me.grpSubtitle.ResumeLayout(False)
-        Me.grpSubtitle.PerformLayout()
+        Me.tbpStub.PerformLayout()
         Me.grpStub.ResumeLayout(False)
         Me.grpStub.PerformLayout()
+        Me.tbpThemes.ResumeLayout(False)
+        Me.tbpThemes.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -404,4 +453,8 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents ucrChkStubFootnote As ucrCheck
     Friend WithEvents ucrInputStub As ucrInputTextBox
     Friend WithEvents lblStubs As Label
+    Friend WithEvents ucrChkStub As ucrCheck
+    Friend WithEvents lblSubtitleFootnote As Label
+    Friend WithEvents lblTitleFootnote As Label
+    Friend WithEvents lblStubFootnote As Label
 End Class
