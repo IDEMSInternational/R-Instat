@@ -59,13 +59,6 @@ Partial Class ucrAdditionalLayers
         Me.toolStripMenuItemGeomRugSmooth = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomText = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemGeomTextRepel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemGeomParallelSlopes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemGeomCatModel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdEdit = New System.Windows.Forms.Button()
-        Me.GeomsmoothToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemGeomtile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemGeomhistogram = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemGeomcontour = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeoms.SuspendLayout()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
@@ -127,7 +120,6 @@ Partial Class ucrAdditionalLayers
         'contextMenuStripAdd
         '
         Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemGeomBar, Me.toolStripMenuItemGeomBoxPlot, Me.toolStripMenuItemGeomCatModel, Me.toolStripMenuItemGeomCol, Me.toolStripMenuItemGeomcontour, Me.toolStripMenuItemGeomCount, Me.toolStripMenuItemGeomDensity, Me.toolStripMenuItemGeomDensityRidges, Me.toolStripMenuItemGeomhistogram, Me.toolStripMenuItemGeomJitter, Me.toolStripMenuItemGeomLabel, Me.toolStripMenuItemGeomLabelRepel, Me.toolStripMenuItemGeomLine, Me.toolStripMenuItemGeomParallelSlopes, Me.toolStripMenuItemGeomPoint, Me.toolStripMenuItemGeomRugSmooth, Me.GeomsmoothToolStripMenuItem, Me.toolStripMenuItemGeomText, Me.toolStripMenuItemGeomTextRepel, Me.toolStripMenuItemGeomtile})
         Me.contextMenuStripAdd.Name = "contextMenuStripOk"
         Me.contextMenuStripAdd.Size = New System.Drawing.Size(208, 466)
         '
@@ -215,18 +207,6 @@ Partial Class ucrAdditionalLayers
         Me.toolStripMenuItemGeomTextRepel.Size = New System.Drawing.Size(207, 22)
         Me.toolStripMenuItemGeomTextRepel.Text = "geom_text_repel"
         '
-        'toolStripMenuItemGeomParallelSlopes
-        '
-        Me.toolStripMenuItemGeomParallelSlopes.Name = "toolStripMenuItemGeomParallelSlopes"
-        Me.toolStripMenuItemGeomParallelSlopes.Size = New System.Drawing.Size(207, 22)
-        Me.toolStripMenuItemGeomParallelSlopes.Text = "geom_parallel_slopes"
-        '
-        'toolStripMenuItemGeomCatModel
-        '
-        Me.toolStripMenuItemGeomCatModel.Name = "toolStripMenuItemGeomCatModel"
-        Me.toolStripMenuItemGeomCatModel.Size = New System.Drawing.Size(207, 22)
-        Me.toolStripMenuItemGeomCatModel.Text = "geom_categorical_model"
-        '
         'cmdEdit
         '
         Me.cmdEdit.Location = New System.Drawing.Point(16, 43)
@@ -235,12 +215,6 @@ Partial Class ucrAdditionalLayers
         Me.cmdEdit.TabIndex = 10
         Me.cmdEdit.Text = "Edit"
         Me.cmdEdit.UseVisualStyleBackColor = True
-        '
-        'GeomsmoothToolStripMenuItem
-        '
-        Me.GeomsmoothToolStripMenuItem.Name = "GeomsmoothToolStripMenuItem"
-        Me.GeomsmoothToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
-        Me.GeomsmoothToolStripMenuItem.Text = "geom_smooth"
         '
         'toolStripMenuItemGeomtile
         '
@@ -252,7 +226,6 @@ Partial Class ucrAdditionalLayers
         '
         Me.toolStripMenuItemGeomhistogram.Name = "toolStripMenuItemGeomhistogram"
         Me.toolStripMenuItemGeomhistogram.Size = New System.Drawing.Size(207, 22)
-        Me.toolStripMenuItemGeomhistogram.Text = "geom_histogram"
         '
         'toolStripMenuItemGeomcontour
         '
@@ -298,10 +271,6 @@ Partial Class ucrAdditionalLayers
     Friend WithEvents toolStripMenuItemGeomRugSmooth As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomText As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomTextRepel As ToolStripMenuItem
-    Friend WithEvents toolStripMenuItemGeomParallelSlopes As ToolStripMenuItem
-    Friend WithEvents toolStripMenuItemGeomCatModel As ToolStripMenuItem
-    Friend WithEvents toolStripMenuItemGeomcontour As ToolStripMenuItem
-    Friend WithEvents toolStripMenuItemGeomhistogram As ToolStripMenuItem
     Friend WithEvents GeomsmoothToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemGeomtile As ToolStripMenuItem
 End Class
