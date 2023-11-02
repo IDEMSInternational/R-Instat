@@ -263,6 +263,7 @@ Public Class clsRecentFiles
 
                 'create new ToolStripItem, displaying the name of the file...
                 If mnuFile IsNot Nothing Then
+                    Dim linkMenuItem As LinkLabel = New LinkLabel
                     Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
                     clsItem.ToolTipText = strPath
                     'set the tag - will be used to identify the ToolStripItem as a most recent(MRU) item 
@@ -272,6 +273,7 @@ Public Class clsRecentFiles
                     AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                     'insert into DropDownItems list...
                     mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
+                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 135)
                 End If
 
                 If mnuFileIcon IsNot Nothing Then
@@ -353,4 +355,22 @@ Public Class clsRecentFiles
         End If
     End Sub
 
+    Private Function TruncateLabelText(label As Label, strName As String, maximumWidth As Integer) As String
+        Dim graphics As Graphics = label.CreateGraphics()
+        Dim font As Font = label.Font
+        Dim originalWidth As Integer = CInt(graphics.MeasureString(strName, font).Width)
+        If originalWidth > maximumWidth Then
+            Dim truncatedText As String = strName
+            Dim truncatedWidth As Integer = originalWidth
+
+            While truncatedWidth > maximumWidth AndAlso truncatedText.Length > 0
+                truncatedText = truncatedText.Substring(0, truncatedText.Length - 1)
+                truncatedWidth = CInt(graphics.MeasureString(truncatedText & "...", font).Width)
+            End While
+
+            Return truncatedText & "..."
+        Else
+            Return strName
+        End If
+    End Function
 End Class

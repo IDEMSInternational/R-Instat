@@ -740,7 +740,7 @@ Public Class ucrDataView
         linkMenuItem.Height = 13
         linkMenuItem.LinkBehavior = LinkBehavior.NeverUnderline
         linkMenuItem.AutoSize = True
-        linkMenuItem.Text = TruncateLabelText(linkMenuItem, linkMenuItem.Text, 130)
+        linkMenuItem.Text = TruncateLabelText(linkMenuItem, linkMenuItem.Text, 135)
 
         ' Create a ToolTip instance.
         Dim tooltip As New ToolTip()
