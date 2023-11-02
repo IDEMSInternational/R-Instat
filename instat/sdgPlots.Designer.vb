@@ -126,55 +126,6 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
-        Me.tbpAnnotation = New System.Windows.Forms.TabPage()
-        Me.ucrChkAnnotation = New instat.ucrCheck()
-        Me.grpAnnotation = New System.Windows.Forms.GroupBox()
-        Me.ucrChkParse = New instat.ucrCheck()
-        Me.ucrInputFill = New instat.ucrColors()
-        Me.ucrInputColour = New instat.ucrColors()
-        Me.lblCurvature = New System.Windows.Forms.Label()
-        Me.ucrNudAlpha = New instat.ucrNud()
-        Me.lblAlpha = New System.Windows.Forms.Label()
-        Me.lblLineend = New System.Windows.Forms.Label()
-        Me.lblAngle = New System.Windows.Forms.Label()
-        Me.ucrNudAngle = New instat.ucrNud()
-        Me.lblShape = New System.Windows.Forms.Label()
-        Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
-        Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
-        Me.lblSize = New System.Windows.Forms.Label()
-        Me.ucrNudSize = New instat.ucrNud()
-        Me.lblColour = New System.Windows.Forms.Label()
-        Me.lblY = New System.Windows.Forms.Label()
-        Me.lblX = New System.Windows.Forms.Label()
-        Me.lblFill = New System.Windows.Forms.Label()
-        Me.lblXmax = New System.Windows.Forms.Label()
-        Me.ucrInputXmax = New instat.ucrInputTextBox()
-        Me.ucrInputYmin = New instat.ucrInputTextBox()
-        Me.ucrInputXmin = New instat.ucrInputTextBox()
-        Me.lblYmin = New System.Windows.Forms.Label()
-        Me.lblXmin = New System.Windows.Forms.Label()
-        Me.lblXend = New System.Windows.Forms.Label()
-        Me.lblYmax = New System.Windows.Forms.Label()
-        Me.ucrInputYmax = New instat.ucrInputTextBox()
-        Me.ucrInputYend = New instat.ucrInputTextBox()
-        Me.ucrInputXend = New instat.ucrInputTextBox()
-        Me.lblYend = New System.Windows.Forms.Label()
-        Me.ucrNudLinetype = New instat.ucrNud()
-        Me.lblLinetype = New System.Windows.Forms.Label()
-        Me.lblPointrangeFatten = New System.Windows.Forms.Label()
-        Me.ucrNudPointrangeFatten = New instat.ucrNud()
-        Me.ucrNudCrossbarFatten = New instat.ucrNud()
-        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
-        Me.ucrNudCurvature = New instat.ucrNud()
-        Me.ucrNudShape = New instat.ucrNud()
-        Me.lblLabel = New System.Windows.Forms.Label()
-        Me.ucrInputLabel = New instat.ucrInputTextBox()
-        Me.ucrInputLineend = New instat.ucrInputComboBox()
-        Me.ucrInputY = New instat.ucrInputTextBox()
-        Me.ucrInputX = New instat.ucrInputTextBox()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.grpScalecolorpt = New System.Windows.Forms.GroupBox()
         Me.ucrInputTextBreaksColorpt = New instat.ucrInputTextBox()
         Me.ucrInputTextNaValueColorpt = New instat.ucrInputTextBox()
@@ -595,6 +546,68 @@ Partial Class sdgPlots
         Me.ucrInputContinousfill = New instat.ucrInputComboBox()
         Me.lblPalcontinuouscolor = New System.Windows.Forms.Label()
         Me.ucrInputcontinuouscolor = New instat.ucrInputComboBox()
+        Me.tbpAnnotation = New System.Windows.Forms.TabPage()
+        Me.ucrChkAnnotation = New instat.ucrCheck()
+        Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.ucrChkParse = New instat.ucrCheck()
+        Me.ucrInputFill = New instat.ucrColors()
+        Me.ucrInputColour = New instat.ucrColors()
+        Me.lblCurvature = New System.Windows.Forms.Label()
+        Me.ucrNudAlpha = New instat.ucrNud()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.lblLineend = New System.Windows.Forms.Label()
+        Me.lblAngle = New System.Windows.Forms.Label()
+        Me.ucrNudAngle = New instat.ucrNud()
+        Me.lblShape = New System.Windows.Forms.Label()
+        Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
+        Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.lblColour = New System.Windows.Forms.Label()
+        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblX = New System.Windows.Forms.Label()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.lblXmax = New System.Windows.Forms.Label()
+        Me.ucrInputXmax = New instat.ucrInputTextBox()
+        Me.ucrInputYmin = New instat.ucrInputTextBox()
+        Me.ucrInputXmin = New instat.ucrInputTextBox()
+        Me.lblYmin = New System.Windows.Forms.Label()
+        Me.lblXmin = New System.Windows.Forms.Label()
+        Me.lblXend = New System.Windows.Forms.Label()
+        Me.lblYmax = New System.Windows.Forms.Label()
+        Me.ucrInputYmax = New instat.ucrInputTextBox()
+        Me.ucrInputYend = New instat.ucrInputTextBox()
+        Me.ucrInputXend = New instat.ucrInputTextBox()
+        Me.lblYend = New System.Windows.Forms.Label()
+        Me.ucrNudLinetype = New instat.ucrNud()
+        Me.lblLinetype = New System.Windows.Forms.Label()
+        Me.lblPointrangeFatten = New System.Windows.Forms.Label()
+        Me.ucrNudPointrangeFatten = New instat.ucrNud()
+        Me.ucrNudCrossbarFatten = New instat.ucrNud()
+        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
+        Me.ucrNudCurvature = New instat.ucrNud()
+        Me.ucrNudShape = New instat.ucrNud()
+        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ucrInputLabel = New instat.ucrInputTextBox()
+        Me.ucrInputLineend = New instat.ucrInputComboBox()
+        Me.ucrInputY = New instat.ucrInputTextBox()
+        Me.ucrInputX = New instat.ucrInputTextBox()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.grpScalefillg = New System.Windows.Forms.GroupBox()
+        Me.ucrInputTextBreaksg = New instat.ucrInputTextBox()
+        Me.ucrInputTextNaValueg = New instat.ucrInputTextBox()
+        Me.ucrInputTextLimitg = New instat.ucrInputTextBox()
+        Me.ucrInputTextExpandg = New instat.ucrInputTextBox()
+        Me.ucrInputPositiong = New instat.ucrInputComboBox()
+        Me.ucrInputDropUnusedLevelsg = New instat.ucrInputComboBox()
+        Me.ucrChkExpandg = New instat.ucrCheck()
+        Me.ucrChkPositiong = New instat.ucrCheck()
+        Me.ucrChkLimitg = New instat.ucrCheck()
+        Me.ucrChkBreaksg = New instat.ucrCheck()
+        Me.ucrChkNaValueg = New instat.ucrCheck()
+        Me.ucrChkDropUnusedLevelsg = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -607,8 +620,6 @@ Partial Class sdgPlots
         Me.tbpCoordinates.SuspendLayout()
         Me.grpPolarCordinates.SuspendLayout()
         Me.tbpColour.SuspendLayout()
-        Me.tbpAnnotation.SuspendLayout()
-        Me.grpAnnotation.SuspendLayout()
         Me.grpScalecolorpt.SuspendLayout()
         Me.grpScaleColorfiv.SuspendLayout()
         Me.grpScalecolorExn.SuspendLayout()
@@ -638,6 +649,9 @@ Partial Class sdgPlots
         Me.grpScaleColorw.SuspendLayout()
         Me.grpColourScale.SuspendLayout()
         Me.grpFillScale.SuspendLayout()
+        Me.tbpAnnotation.SuspendLayout()
+        Me.grpAnnotation.SuspendLayout()
+        Me.grpScalefillg.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpPlotsOptions
@@ -679,7 +693,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFacet.Size = New System.Drawing.Size(669, 455)
+        Me.tbpFacet.Size = New System.Drawing.Size(669, 641)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -869,7 +883,7 @@ Partial Class sdgPlots
         Me.tbpLayers.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayers.Size = New System.Drawing.Size(669, 455)
+        Me.tbpLayers.Size = New System.Drawing.Size(669, 641)
         Me.tbpLayers.TabIndex = 4
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
@@ -912,7 +926,7 @@ Partial Class sdgPlots
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(669, 455)
+        Me.tbpTitles.Size = New System.Drawing.Size(669, 641)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
@@ -1256,7 +1270,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(669, 455)
+        Me.tbpXAxis.Size = New System.Drawing.Size(669, 641)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -1275,7 +1289,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(669, 455)
+        Me.tbpYAxis.Size = New System.Drawing.Size(669, 641)
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
@@ -1299,7 +1313,7 @@ Partial Class sdgPlots
         Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(669, 455)
+        Me.tbpTheme.Size = New System.Drawing.Size(669, 641)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.Text = "Themes"
@@ -1513,7 +1527,7 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 455)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 641)
         Me.tbpCoordinates.TabIndex = 7
         Me.tbpCoordinates.Text = "Coordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
@@ -1625,6 +1639,7 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
+        Me.tbpColour.Controls.Add(Me.grpScalefillg)
         Me.tbpColour.Controls.Add(Me.grpScalecolorpt)
         Me.tbpColour.Controls.Add(Me.grpScaleColorfiv)
         Me.tbpColour.Controls.Add(Me.grpScalecolorExn)
@@ -1688,573 +1703,6 @@ Partial Class sdgPlots
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
-        '
-        'tbpAnnotation
-        '
-        Me.tbpAnnotation.Controls.Add(Me.ucrChkAnnotation)
-        Me.tbpAnnotation.Controls.Add(Me.grpAnnotation)
-        Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
-        Me.tbpAnnotation.Name = "tbpAnnotation"
-        Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 455)
-        Me.tbpAnnotation.TabIndex = 9
-        Me.tbpAnnotation.Text = "Annotation"
-        Me.tbpAnnotation.UseVisualStyleBackColor = True
-        '
-        'ucrChkAnnotation
-        '
-        Me.ucrChkAnnotation.AutoSize = True
-        Me.ucrChkAnnotation.Checked = False
-        Me.ucrChkAnnotation.Location = New System.Drawing.Point(7, 17)
-        Me.ucrChkAnnotation.Name = "ucrChkAnnotation"
-        Me.ucrChkAnnotation.Size = New System.Drawing.Size(278, 23)
-        Me.ucrChkAnnotation.TabIndex = 44
-        '
-        'grpAnnotation
-        '
-        Me.grpAnnotation.Controls.Add(Me.ucrChkParse)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
-        Me.grpAnnotation.Controls.Add(Me.lblCurvature)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
-        Me.grpAnnotation.Controls.Add(Me.lblAlpha)
-        Me.grpAnnotation.Controls.Add(Me.lblLineend)
-        Me.grpAnnotation.Controls.Add(Me.lblAngle)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudAngle)
-        Me.grpAnnotation.Controls.Add(Me.lblShape)
-        Me.grpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
-        Me.grpAnnotation.Controls.Add(Me.lblSize)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
-        Me.grpAnnotation.Controls.Add(Me.lblColour)
-        Me.grpAnnotation.Controls.Add(Me.lblY)
-        Me.grpAnnotation.Controls.Add(Me.lblX)
-        Me.grpAnnotation.Controls.Add(Me.lblFill)
-        Me.grpAnnotation.Controls.Add(Me.lblXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputYmin)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputXmin)
-        Me.grpAnnotation.Controls.Add(Me.lblYmin)
-        Me.grpAnnotation.Controls.Add(Me.lblXmin)
-        Me.grpAnnotation.Controls.Add(Me.lblXend)
-        Me.grpAnnotation.Controls.Add(Me.lblYmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputYmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputYend)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputXend)
-        Me.grpAnnotation.Controls.Add(Me.lblYend)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudLinetype)
-        Me.grpAnnotation.Controls.Add(Me.lblLinetype)
-        Me.grpAnnotation.Controls.Add(Me.lblPointrangeFatten)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudPointrangeFatten)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
-        Me.grpAnnotation.Controls.Add(Me.lblCrossbarFatten)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudCurvature)
-        Me.grpAnnotation.Controls.Add(Me.ucrNudShape)
-        Me.grpAnnotation.Controls.Add(Me.lblLabel)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
-        Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
-        Me.grpAnnotation.Location = New System.Drawing.Point(7, 43)
-        Me.grpAnnotation.Name = "grpAnnotation"
-        Me.grpAnnotation.Size = New System.Drawing.Size(459, 374)
-        Me.grpAnnotation.TabIndex = 43
-        Me.grpAnnotation.TabStop = False
-        Me.grpAnnotation.Text = "Annotation"
-        '
-        'ucrChkParse
-        '
-        Me.ucrChkParse.AutoSize = True
-        Me.ucrChkParse.Checked = False
-        Me.ucrChkParse.Location = New System.Drawing.Point(75, 230)
-        Me.ucrChkParse.Name = "ucrChkParse"
-        Me.ucrChkParse.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkParse.TabIndex = 102
-        '
-        'ucrInputFill
-        '
-        Me.ucrInputFill.AddQuotesIfUnrecognised = True
-        Me.ucrInputFill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputFill.GetSetSelectedIndex = -1
-        Me.ucrInputFill.IsReadOnly = False
-        Me.ucrInputFill.Location = New System.Drawing.Point(75, 179)
-        Me.ucrInputFill.Name = "ucrInputFill"
-        Me.ucrInputFill.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFill.TabIndex = 101
-        '
-        'ucrInputColour
-        '
-        Me.ucrInputColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputColour.GetSetSelectedIndex = -1
-        Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(75, 81)
-        Me.ucrInputColour.Name = "ucrInputColour"
-        Me.ucrInputColour.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColour.TabIndex = 100
-        '
-        'lblCurvature
-        '
-        Me.lblCurvature.AutoSize = True
-        Me.lblCurvature.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCurvature.Location = New System.Drawing.Point(7, 184)
-        Me.lblCurvature.Name = "lblCurvature"
-        Me.lblCurvature.Size = New System.Drawing.Size(58, 13)
-        Me.lblCurvature.TabIndex = 85
-        Me.lblCurvature.Text = "curvature :"
-        '
-        'ucrNudAlpha
-        '
-        Me.ucrNudAlpha.AutoSize = True
-        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(75, 130)
-        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Name = "ucrNudAlpha"
-        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlpha.TabIndex = 20
-        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblAlpha
-        '
-        Me.lblAlpha.AutoSize = True
-        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAlpha.Location = New System.Drawing.Point(26, 135)
-        Me.lblAlpha.Name = "lblAlpha"
-        Me.lblAlpha.Size = New System.Drawing.Size(39, 13)
-        Me.lblAlpha.TabIndex = 19
-        Me.lblAlpha.Text = "alpha :"
-        '
-        'lblLineend
-        '
-        Me.lblLineend.AutoSize = True
-        Me.lblLineend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLineend.Location = New System.Drawing.Point(18, 184)
-        Me.lblLineend.Name = "lblLineend"
-        Me.lblLineend.Size = New System.Drawing.Size(47, 13)
-        Me.lblLineend.TabIndex = 83
-        Me.lblLineend.Text = "lineend :"
-        '
-        'lblAngle
-        '
-        Me.lblAngle.AutoSize = True
-        Me.lblAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAngle.Location = New System.Drawing.Point(26, 208)
-        Me.lblAngle.Name = "lblAngle"
-        Me.lblAngle.Size = New System.Drawing.Size(39, 13)
-        Me.lblAngle.TabIndex = 80
-        Me.lblAngle.Text = "angle :"
-        '
-        'ucrNudAngle
-        '
-        Me.ucrNudAngle.AutoSize = True
-        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngle.Location = New System.Drawing.Point(75, 204)
-        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngle.Name = "ucrNudAngle"
-        Me.ucrNudAngle.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAngle.TabIndex = 78
-        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblShape
-        '
-        Me.lblShape.AutoSize = True
-        Me.lblShape.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblShape.Location = New System.Drawing.Point(23, 210)
-        Me.lblShape.Name = "lblShape"
-        Me.lblShape.Size = New System.Drawing.Size(42, 13)
-        Me.lblShape.TabIndex = 79
-        Me.lblShape.Text = "shape :"
-        '
-        'lblAnnotationGeoms
-        '
-        Me.lblAnnotationGeoms.AutoSize = True
-        Me.lblAnnotationGeoms.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAnnotationGeoms.Location = New System.Drawing.Point(25, 24)
-        Me.lblAnnotationGeoms.Name = "lblAnnotationGeoms"
-        Me.lblAnnotationGeoms.Size = New System.Drawing.Size(41, 13)
-        Me.lblAnnotationGeoms.TabIndex = 77
-        Me.lblAnnotationGeoms.Text = "Geom :"
-        '
-        'ucrInputAnnotationGeoms
-        '
-        Me.ucrInputAnnotationGeoms.AddQuotesIfUnrecognised = True
-        Me.ucrInputAnnotationGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputAnnotationGeoms.GetSetSelectedIndex = -1
-        Me.ucrInputAnnotationGeoms.IsReadOnly = False
-        Me.ucrInputAnnotationGeoms.Location = New System.Drawing.Point(75, 19)
-        Me.ucrInputAnnotationGeoms.Name = "ucrInputAnnotationGeoms"
-        Me.ucrInputAnnotationGeoms.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputAnnotationGeoms.TabIndex = 76
-        '
-        'lblSize
-        '
-        Me.lblSize.AutoSize = True
-        Me.lblSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSize.Location = New System.Drawing.Point(34, 111)
-        Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(31, 13)
-        Me.lblSize.TabIndex = 75
-        Me.lblSize.Text = "size :"
-        '
-        'ucrNudSize
-        '
-        Me.ucrNudSize.AutoSize = True
-        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(75, 106)
-        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSize.TabIndex = 74
-        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblColour
-        '
-        Me.lblColour.AutoSize = True
-        Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColour.Location = New System.Drawing.Point(23, 87)
-        Me.lblColour.Name = "lblColour"
-        Me.lblColour.Size = New System.Drawing.Size(42, 13)
-        Me.lblColour.TabIndex = 73
-        Me.lblColour.Text = "colour :"
-        '
-        'lblY
-        '
-        Me.lblY.AutoSize = True
-        Me.lblY.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblY.Location = New System.Drawing.Point(291, 56)
-        Me.lblY.Name = "lblY"
-        Me.lblY.Size = New System.Drawing.Size(18, 13)
-        Me.lblY.TabIndex = 69
-        Me.lblY.Text = "y :"
-        '
-        'lblX
-        '
-        Me.lblX.AutoSize = True
-        Me.lblX.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblX.Location = New System.Drawing.Point(294, 31)
-        Me.lblX.Name = "lblX"
-        Me.lblX.Size = New System.Drawing.Size(15, 13)
-        Me.lblX.TabIndex = 68
-        Me.lblX.Text = "x:"
-        '
-        'lblFill
-        '
-        Me.lblFill.AutoSize = True
-        Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFill.Location = New System.Drawing.Point(43, 184)
-        Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(22, 13)
-        Me.lblFill.TabIndex = 61
-        Me.lblFill.Text = "fill :"
-        '
-        'lblXmax
-        '
-        Me.lblXmax.AutoSize = True
-        Me.lblXmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXmax.Location = New System.Drawing.Point(272, 132)
-        Me.lblXmax.Name = "lblXmax"
-        Me.lblXmax.Size = New System.Drawing.Size(37, 13)
-        Me.lblXmax.TabIndex = 51
-        Me.lblXmax.Text = "xmax :"
-        '
-        'ucrInputXmax
-        '
-        Me.ucrInputXmax.AddQuotesIfUnrecognised = True
-        Me.ucrInputXmax.AutoSize = True
-        Me.ucrInputXmax.IsMultiline = False
-        Me.ucrInputXmax.IsReadOnly = False
-        Me.ucrInputXmax.Location = New System.Drawing.Point(318, 127)
-        Me.ucrInputXmax.Name = "ucrInputXmax"
-        Me.ucrInputXmax.Size = New System.Drawing.Size(116, 21)
-        Me.ucrInputXmax.TabIndex = 50
-        '
-        'ucrInputYmin
-        '
-        Me.ucrInputYmin.AddQuotesIfUnrecognised = True
-        Me.ucrInputYmin.AutoSize = True
-        Me.ucrInputYmin.IsMultiline = False
-        Me.ucrInputYmin.IsReadOnly = False
-        Me.ucrInputYmin.Location = New System.Drawing.Point(318, 102)
-        Me.ucrInputYmin.Name = "ucrInputYmin"
-        Me.ucrInputYmin.Size = New System.Drawing.Size(116, 21)
-        Me.ucrInputYmin.TabIndex = 49
-        '
-        'ucrInputXmin
-        '
-        Me.ucrInputXmin.AddQuotesIfUnrecognised = True
-        Me.ucrInputXmin.AutoSize = True
-        Me.ucrInputXmin.IsMultiline = False
-        Me.ucrInputXmin.IsReadOnly = False
-        Me.ucrInputXmin.Location = New System.Drawing.Point(318, 77)
-        Me.ucrInputXmin.Name = "ucrInputXmin"
-        Me.ucrInputXmin.Size = New System.Drawing.Size(116, 21)
-        Me.ucrInputXmin.TabIndex = 48
-        '
-        'lblYmin
-        '
-        Me.lblYmin.AutoSize = True
-        Me.lblYmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYmin.Location = New System.Drawing.Point(275, 106)
-        Me.lblYmin.Name = "lblYmin"
-        Me.lblYmin.Size = New System.Drawing.Size(34, 13)
-        Me.lblYmin.TabIndex = 47
-        Me.lblYmin.Text = "ymin :"
-        '
-        'lblXmin
-        '
-        Me.lblXmin.AutoSize = True
-        Me.lblXmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXmin.Location = New System.Drawing.Point(275, 81)
-        Me.lblXmin.Name = "lblXmin"
-        Me.lblXmin.Size = New System.Drawing.Size(34, 13)
-        Me.lblXmin.TabIndex = 46
-        Me.lblXmin.Text = "xmin :"
-        '
-        'lblXend
-        '
-        Me.lblXend.AutoSize = True
-        Me.lblXend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXend.Location = New System.Drawing.Point(273, 181)
-        Me.lblXend.Name = "lblXend"
-        Me.lblXend.Size = New System.Drawing.Size(36, 13)
-        Me.lblXend.TabIndex = 40
-        Me.lblXend.Text = "xend :"
-        '
-        'lblYmax
-        '
-        Me.lblYmax.AutoSize = True
-        Me.lblYmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYmax.Location = New System.Drawing.Point(272, 156)
-        Me.lblYmax.Name = "lblYmax"
-        Me.lblYmax.Size = New System.Drawing.Size(37, 13)
-        Me.lblYmax.TabIndex = 39
-        Me.lblYmax.Text = "ymax :"
-        '
-        'ucrInputYmax
-        '
-        Me.ucrInputYmax.AddQuotesIfUnrecognised = True
-        Me.ucrInputYmax.AutoSize = True
-        Me.ucrInputYmax.IsMultiline = False
-        Me.ucrInputYmax.IsReadOnly = False
-        Me.ucrInputYmax.Location = New System.Drawing.Point(319, 152)
-        Me.ucrInputYmax.Name = "ucrInputYmax"
-        Me.ucrInputYmax.Size = New System.Drawing.Size(115, 21)
-        Me.ucrInputYmax.TabIndex = 38
-        '
-        'ucrInputYend
-        '
-        Me.ucrInputYend.AddQuotesIfUnrecognised = True
-        Me.ucrInputYend.AutoSize = True
-        Me.ucrInputYend.IsMultiline = False
-        Me.ucrInputYend.IsReadOnly = False
-        Me.ucrInputYend.Location = New System.Drawing.Point(319, 202)
-        Me.ucrInputYend.Name = "ucrInputYend"
-        Me.ucrInputYend.Size = New System.Drawing.Size(115, 21)
-        Me.ucrInputYend.TabIndex = 37
-        '
-        'ucrInputXend
-        '
-        Me.ucrInputXend.AddQuotesIfUnrecognised = True
-        Me.ucrInputXend.AutoSize = True
-        Me.ucrInputXend.IsMultiline = False
-        Me.ucrInputXend.IsReadOnly = False
-        Me.ucrInputXend.Location = New System.Drawing.Point(319, 177)
-        Me.ucrInputXend.Name = "ucrInputXend"
-        Me.ucrInputXend.Size = New System.Drawing.Size(115, 21)
-        Me.ucrInputXend.TabIndex = 36
-        '
-        'lblYend
-        '
-        Me.lblYend.AutoSize = True
-        Me.lblYend.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYend.Location = New System.Drawing.Point(273, 206)
-        Me.lblYend.Name = "lblYend"
-        Me.lblYend.Size = New System.Drawing.Size(36, 13)
-        Me.lblYend.TabIndex = 35
-        Me.lblYend.Text = "yend :"
-        '
-        'ucrNudLinetype
-        '
-        Me.ucrNudLinetype.AutoSize = True
-        Me.ucrNudLinetype.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinetype.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLinetype.Location = New System.Drawing.Point(75, 154)
-        Me.ucrNudLinetype.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLinetype.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinetype.Name = "ucrNudLinetype"
-        Me.ucrNudLinetype.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLinetype.TabIndex = 62
-        Me.ucrNudLinetype.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblLinetype
-        '
-        Me.lblLinetype.AutoSize = True
-        Me.lblLinetype.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLinetype.Location = New System.Drawing.Point(16, 159)
-        Me.lblLinetype.Name = "lblLinetype"
-        Me.lblLinetype.Size = New System.Drawing.Size(49, 13)
-        Me.lblLinetype.TabIndex = 63
-        Me.lblLinetype.Text = "linetype :"
-        '
-        'lblPointrangeFatten
-        '
-        Me.lblPointrangeFatten.AutoSize = True
-        Me.lblPointrangeFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPointrangeFatten.Location = New System.Drawing.Point(25, 184)
-        Me.lblPointrangeFatten.Name = "lblPointrangeFatten"
-        Me.lblPointrangeFatten.Size = New System.Drawing.Size(40, 13)
-        Me.lblPointrangeFatten.TabIndex = 89
-        Me.lblPointrangeFatten.Text = "fatten :"
-        '
-        'ucrNudPointrangeFatten
-        '
-        Me.ucrNudPointrangeFatten.AutoSize = True
-        Me.ucrNudPointrangeFatten.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPointrangeFatten.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPointrangeFatten.Location = New System.Drawing.Point(75, 179)
-        Me.ucrNudPointrangeFatten.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPointrangeFatten.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPointrangeFatten.Name = "ucrNudPointrangeFatten"
-        Me.ucrNudPointrangeFatten.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPointrangeFatten.TabIndex = 88
-        Me.ucrNudPointrangeFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudCrossbarFatten
-        '
-        Me.ucrNudCrossbarFatten.AutoSize = True
-        Me.ucrNudCrossbarFatten.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCrossbarFatten.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCrossbarFatten.Location = New System.Drawing.Point(75, 179)
-        Me.ucrNudCrossbarFatten.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCrossbarFatten.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCrossbarFatten.Name = "ucrNudCrossbarFatten"
-        Me.ucrNudCrossbarFatten.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCrossbarFatten.TabIndex = 87
-        Me.ucrNudCrossbarFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblCrossbarFatten
-        '
-        Me.lblCrossbarFatten.AutoSize = True
-        Me.lblCrossbarFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCrossbarFatten.Location = New System.Drawing.Point(25, 184)
-        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
-        Me.lblCrossbarFatten.Size = New System.Drawing.Size(40, 13)
-        Me.lblCrossbarFatten.TabIndex = 86
-        Me.lblCrossbarFatten.Text = "fatten :"
-        '
-        'ucrNudCurvature
-        '
-        Me.ucrNudCurvature.AutoSize = True
-        Me.ucrNudCurvature.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCurvature.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCurvature.Location = New System.Drawing.Point(75, 179)
-        Me.ucrNudCurvature.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCurvature.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCurvature.Name = "ucrNudCurvature"
-        Me.ucrNudCurvature.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCurvature.TabIndex = 84
-        Me.ucrNudCurvature.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudShape
-        '
-        Me.ucrNudShape.AutoSize = True
-        Me.ucrNudShape.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShape.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShape.Location = New System.Drawing.Point(75, 204)
-        Me.ucrNudShape.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShape.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShape.Name = "ucrNudShape"
-        Me.ucrNudShape.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudShape.TabIndex = 81
-        Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblLabel
-        '
-        Me.lblLabel.AutoSize = True
-        Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabel.Location = New System.Drawing.Point(30, 159)
-        Me.lblLabel.Name = "lblLabel"
-        Me.lblLabel.Size = New System.Drawing.Size(35, 13)
-        Me.lblLabel.TabIndex = 91
-        Me.lblLabel.Text = "label :"
-        '
-        'ucrInputLabel
-        '
-        Me.ucrInputLabel.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabel.AutoSize = True
-        Me.ucrInputLabel.IsMultiline = False
-        Me.ucrInputLabel.IsReadOnly = False
-        Me.ucrInputLabel.Location = New System.Drawing.Point(75, 154)
-        Me.ucrInputLabel.Name = "ucrInputLabel"
-        Me.ucrInputLabel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLabel.TabIndex = 90
-        '
-        'ucrInputLineend
-        '
-        Me.ucrInputLineend.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLineend.GetSetSelectedIndex = -1
-        Me.ucrInputLineend.IsReadOnly = False
-        Me.ucrInputLineend.Location = New System.Drawing.Point(75, 179)
-        Me.ucrInputLineend.Name = "ucrInputLineend"
-        Me.ucrInputLineend.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineend.TabIndex = 82
-        '
-        'ucrInputY
-        '
-        Me.ucrInputY.AddQuotesIfUnrecognised = True
-        Me.ucrInputY.AutoSize = True
-        Me.ucrInputY.IsMultiline = False
-        Me.ucrInputY.IsReadOnly = False
-        Me.ucrInputY.Location = New System.Drawing.Point(318, 52)
-        Me.ucrInputY.Name = "ucrInputY"
-        Me.ucrInputY.Size = New System.Drawing.Size(116, 21)
-        Me.ucrInputY.TabIndex = 70
-        '
-        'ucrInputX
-        '
-        Me.ucrInputX.AddQuotesIfUnrecognised = True
-        Me.ucrInputX.AutoSize = True
-        Me.ucrInputX.IsMultiline = False
-        Me.ucrInputX.IsReadOnly = False
-        Me.ucrInputX.Location = New System.Drawing.Point(318, 27)
-        Me.ucrInputX.Name = "ucrInputX"
-        Me.ucrInputX.Size = New System.Drawing.Size(116, 21)
-        Me.ucrInputX.TabIndex = 71
-        '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.AutoSize = True
-        Me.ucrReceiverY.frmParent = Nothing
-        Me.ucrReceiverY.Location = New System.Drawing.Point(318, 52)
-        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.Size = New System.Drawing.Size(116, 21)
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 99
-        Me.ucrReceiverY.ucrSelector = Nothing
-        '
-        'ttCaptionTitle
-        '
-        Me.ttCaptionTitle.AutoPopDelay = 10000
-        Me.ttCaptionTitle.InitialDelay = 500
-        Me.ttCaptionTitle.ReshowDelay = 100
-        '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 629)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
-        Me.ucrBaseSubdialog.TabIndex = 1
         '
         'grpScalecolorpt
         '
@@ -6860,6 +6308,714 @@ Partial Class sdgPlots
         Me.ucrInputcontinuouscolor.Size = New System.Drawing.Size(146, 26)
         Me.ucrInputcontinuouscolor.TabIndex = 292
         '
+        'tbpAnnotation
+        '
+        Me.tbpAnnotation.Controls.Add(Me.ucrChkAnnotation)
+        Me.tbpAnnotation.Controls.Add(Me.grpAnnotation)
+        Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
+        Me.tbpAnnotation.Name = "tbpAnnotation"
+        Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 641)
+        Me.tbpAnnotation.TabIndex = 9
+        Me.tbpAnnotation.Text = "Annotation"
+        Me.tbpAnnotation.UseVisualStyleBackColor = True
+        '
+        'ucrChkAnnotation
+        '
+        Me.ucrChkAnnotation.AutoSize = True
+        Me.ucrChkAnnotation.Checked = False
+        Me.ucrChkAnnotation.Location = New System.Drawing.Point(7, 17)
+        Me.ucrChkAnnotation.Name = "ucrChkAnnotation"
+        Me.ucrChkAnnotation.Size = New System.Drawing.Size(278, 23)
+        Me.ucrChkAnnotation.TabIndex = 44
+        '
+        'grpAnnotation
+        '
+        Me.grpAnnotation.Controls.Add(Me.ucrChkParse)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
+        Me.grpAnnotation.Controls.Add(Me.lblCurvature)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
+        Me.grpAnnotation.Controls.Add(Me.lblAlpha)
+        Me.grpAnnotation.Controls.Add(Me.lblLineend)
+        Me.grpAnnotation.Controls.Add(Me.lblAngle)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudAngle)
+        Me.grpAnnotation.Controls.Add(Me.lblShape)
+        Me.grpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
+        Me.grpAnnotation.Controls.Add(Me.lblSize)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
+        Me.grpAnnotation.Controls.Add(Me.lblColour)
+        Me.grpAnnotation.Controls.Add(Me.lblY)
+        Me.grpAnnotation.Controls.Add(Me.lblX)
+        Me.grpAnnotation.Controls.Add(Me.lblFill)
+        Me.grpAnnotation.Controls.Add(Me.lblXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXmin)
+        Me.grpAnnotation.Controls.Add(Me.lblYmin)
+        Me.grpAnnotation.Controls.Add(Me.lblXmin)
+        Me.grpAnnotation.Controls.Add(Me.lblXend)
+        Me.grpAnnotation.Controls.Add(Me.lblYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXend)
+        Me.grpAnnotation.Controls.Add(Me.lblYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudLinetype)
+        Me.grpAnnotation.Controls.Add(Me.lblLinetype)
+        Me.grpAnnotation.Controls.Add(Me.lblPointrangeFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudPointrangeFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
+        Me.grpAnnotation.Controls.Add(Me.lblCrossbarFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudCurvature)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudShape)
+        Me.grpAnnotation.Controls.Add(Me.lblLabel)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
+        Me.grpAnnotation.Location = New System.Drawing.Point(7, 43)
+        Me.grpAnnotation.Name = "grpAnnotation"
+        Me.grpAnnotation.Size = New System.Drawing.Size(459, 374)
+        Me.grpAnnotation.TabIndex = 43
+        Me.grpAnnotation.TabStop = False
+        Me.grpAnnotation.Text = "Annotation"
+        '
+        'ucrChkParse
+        '
+        Me.ucrChkParse.AutoSize = True
+        Me.ucrChkParse.Checked = False
+        Me.ucrChkParse.Location = New System.Drawing.Point(75, 230)
+        Me.ucrChkParse.Name = "ucrChkParse"
+        Me.ucrChkParse.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkParse.TabIndex = 102
+        '
+        'ucrInputFill
+        '
+        Me.ucrInputFill.AddQuotesIfUnrecognised = True
+        Me.ucrInputFill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFill.GetSetSelectedIndex = -1
+        Me.ucrInputFill.IsReadOnly = False
+        Me.ucrInputFill.Location = New System.Drawing.Point(75, 179)
+        Me.ucrInputFill.Name = "ucrInputFill"
+        Me.ucrInputFill.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFill.TabIndex = 101
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(75, 81)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColour.TabIndex = 100
+        '
+        'lblCurvature
+        '
+        Me.lblCurvature.AutoSize = True
+        Me.lblCurvature.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCurvature.Location = New System.Drawing.Point(7, 184)
+        Me.lblCurvature.Name = "lblCurvature"
+        Me.lblCurvature.Size = New System.Drawing.Size(58, 13)
+        Me.lblCurvature.TabIndex = 85
+        Me.lblCurvature.Text = "curvature :"
+        '
+        'ucrNudAlpha
+        '
+        Me.ucrNudAlpha.AutoSize = True
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(75, 130)
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlpha.TabIndex = 20
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblAlpha
+        '
+        Me.lblAlpha.AutoSize = True
+        Me.lblAlpha.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAlpha.Location = New System.Drawing.Point(26, 135)
+        Me.lblAlpha.Name = "lblAlpha"
+        Me.lblAlpha.Size = New System.Drawing.Size(39, 13)
+        Me.lblAlpha.TabIndex = 19
+        Me.lblAlpha.Text = "alpha :"
+        '
+        'lblLineend
+        '
+        Me.lblLineend.AutoSize = True
+        Me.lblLineend.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLineend.Location = New System.Drawing.Point(18, 184)
+        Me.lblLineend.Name = "lblLineend"
+        Me.lblLineend.Size = New System.Drawing.Size(47, 13)
+        Me.lblLineend.TabIndex = 83
+        Me.lblLineend.Text = "lineend :"
+        '
+        'lblAngle
+        '
+        Me.lblAngle.AutoSize = True
+        Me.lblAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAngle.Location = New System.Drawing.Point(26, 208)
+        Me.lblAngle.Name = "lblAngle"
+        Me.lblAngle.Size = New System.Drawing.Size(39, 13)
+        Me.lblAngle.TabIndex = 80
+        Me.lblAngle.Text = "angle :"
+        '
+        'ucrNudAngle
+        '
+        Me.ucrNudAngle.AutoSize = True
+        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAngle.Location = New System.Drawing.Point(75, 204)
+        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Name = "ucrNudAngle"
+        Me.ucrNudAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAngle.TabIndex = 78
+        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblShape
+        '
+        Me.lblShape.AutoSize = True
+        Me.lblShape.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblShape.Location = New System.Drawing.Point(23, 210)
+        Me.lblShape.Name = "lblShape"
+        Me.lblShape.Size = New System.Drawing.Size(42, 13)
+        Me.lblShape.TabIndex = 79
+        Me.lblShape.Text = "shape :"
+        '
+        'lblAnnotationGeoms
+        '
+        Me.lblAnnotationGeoms.AutoSize = True
+        Me.lblAnnotationGeoms.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblAnnotationGeoms.Location = New System.Drawing.Point(25, 24)
+        Me.lblAnnotationGeoms.Name = "lblAnnotationGeoms"
+        Me.lblAnnotationGeoms.Size = New System.Drawing.Size(41, 13)
+        Me.lblAnnotationGeoms.TabIndex = 77
+        Me.lblAnnotationGeoms.Text = "Geom :"
+        '
+        'ucrInputAnnotationGeoms
+        '
+        Me.ucrInputAnnotationGeoms.AddQuotesIfUnrecognised = True
+        Me.ucrInputAnnotationGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAnnotationGeoms.GetSetSelectedIndex = -1
+        Me.ucrInputAnnotationGeoms.IsReadOnly = False
+        Me.ucrInputAnnotationGeoms.Location = New System.Drawing.Point(75, 19)
+        Me.ucrInputAnnotationGeoms.Name = "ucrInputAnnotationGeoms"
+        Me.ucrInputAnnotationGeoms.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputAnnotationGeoms.TabIndex = 76
+        '
+        'lblSize
+        '
+        Me.lblSize.AutoSize = True
+        Me.lblSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSize.Location = New System.Drawing.Point(34, 111)
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Size = New System.Drawing.Size(31, 13)
+        Me.lblSize.TabIndex = 75
+        Me.lblSize.Text = "size :"
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.AutoSize = True
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(75, 106)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSize.TabIndex = 74
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblColour
+        '
+        Me.lblColour.AutoSize = True
+        Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColour.Location = New System.Drawing.Point(23, 87)
+        Me.lblColour.Name = "lblColour"
+        Me.lblColour.Size = New System.Drawing.Size(42, 13)
+        Me.lblColour.TabIndex = 73
+        Me.lblColour.Text = "colour :"
+        '
+        'lblY
+        '
+        Me.lblY.AutoSize = True
+        Me.lblY.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblY.Location = New System.Drawing.Point(291, 56)
+        Me.lblY.Name = "lblY"
+        Me.lblY.Size = New System.Drawing.Size(18, 13)
+        Me.lblY.TabIndex = 69
+        Me.lblY.Text = "y :"
+        '
+        'lblX
+        '
+        Me.lblX.AutoSize = True
+        Me.lblX.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblX.Location = New System.Drawing.Point(294, 31)
+        Me.lblX.Name = "lblX"
+        Me.lblX.Size = New System.Drawing.Size(15, 13)
+        Me.lblX.TabIndex = 68
+        Me.lblX.Text = "x:"
+        '
+        'lblFill
+        '
+        Me.lblFill.AutoSize = True
+        Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFill.Location = New System.Drawing.Point(43, 184)
+        Me.lblFill.Name = "lblFill"
+        Me.lblFill.Size = New System.Drawing.Size(22, 13)
+        Me.lblFill.TabIndex = 61
+        Me.lblFill.Text = "fill :"
+        '
+        'lblXmax
+        '
+        Me.lblXmax.AutoSize = True
+        Me.lblXmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXmax.Location = New System.Drawing.Point(272, 132)
+        Me.lblXmax.Name = "lblXmax"
+        Me.lblXmax.Size = New System.Drawing.Size(37, 13)
+        Me.lblXmax.TabIndex = 51
+        Me.lblXmax.Text = "xmax :"
+        '
+        'ucrInputXmax
+        '
+        Me.ucrInputXmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputXmax.AutoSize = True
+        Me.ucrInputXmax.IsMultiline = False
+        Me.ucrInputXmax.IsReadOnly = False
+        Me.ucrInputXmax.Location = New System.Drawing.Point(318, 127)
+        Me.ucrInputXmax.Name = "ucrInputXmax"
+        Me.ucrInputXmax.Size = New System.Drawing.Size(116, 21)
+        Me.ucrInputXmax.TabIndex = 50
+        '
+        'ucrInputYmin
+        '
+        Me.ucrInputYmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputYmin.AutoSize = True
+        Me.ucrInputYmin.IsMultiline = False
+        Me.ucrInputYmin.IsReadOnly = False
+        Me.ucrInputYmin.Location = New System.Drawing.Point(318, 102)
+        Me.ucrInputYmin.Name = "ucrInputYmin"
+        Me.ucrInputYmin.Size = New System.Drawing.Size(116, 21)
+        Me.ucrInputYmin.TabIndex = 49
+        '
+        'ucrInputXmin
+        '
+        Me.ucrInputXmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputXmin.AutoSize = True
+        Me.ucrInputXmin.IsMultiline = False
+        Me.ucrInputXmin.IsReadOnly = False
+        Me.ucrInputXmin.Location = New System.Drawing.Point(318, 77)
+        Me.ucrInputXmin.Name = "ucrInputXmin"
+        Me.ucrInputXmin.Size = New System.Drawing.Size(116, 21)
+        Me.ucrInputXmin.TabIndex = 48
+        '
+        'lblYmin
+        '
+        Me.lblYmin.AutoSize = True
+        Me.lblYmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYmin.Location = New System.Drawing.Point(275, 106)
+        Me.lblYmin.Name = "lblYmin"
+        Me.lblYmin.Size = New System.Drawing.Size(34, 13)
+        Me.lblYmin.TabIndex = 47
+        Me.lblYmin.Text = "ymin :"
+        '
+        'lblXmin
+        '
+        Me.lblXmin.AutoSize = True
+        Me.lblXmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXmin.Location = New System.Drawing.Point(275, 81)
+        Me.lblXmin.Name = "lblXmin"
+        Me.lblXmin.Size = New System.Drawing.Size(34, 13)
+        Me.lblXmin.TabIndex = 46
+        Me.lblXmin.Text = "xmin :"
+        '
+        'lblXend
+        '
+        Me.lblXend.AutoSize = True
+        Me.lblXend.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblXend.Location = New System.Drawing.Point(273, 181)
+        Me.lblXend.Name = "lblXend"
+        Me.lblXend.Size = New System.Drawing.Size(36, 13)
+        Me.lblXend.TabIndex = 40
+        Me.lblXend.Text = "xend :"
+        '
+        'lblYmax
+        '
+        Me.lblYmax.AutoSize = True
+        Me.lblYmax.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYmax.Location = New System.Drawing.Point(272, 156)
+        Me.lblYmax.Name = "lblYmax"
+        Me.lblYmax.Size = New System.Drawing.Size(37, 13)
+        Me.lblYmax.TabIndex = 39
+        Me.lblYmax.Text = "ymax :"
+        '
+        'ucrInputYmax
+        '
+        Me.ucrInputYmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputYmax.AutoSize = True
+        Me.ucrInputYmax.IsMultiline = False
+        Me.ucrInputYmax.IsReadOnly = False
+        Me.ucrInputYmax.Location = New System.Drawing.Point(319, 152)
+        Me.ucrInputYmax.Name = "ucrInputYmax"
+        Me.ucrInputYmax.Size = New System.Drawing.Size(115, 21)
+        Me.ucrInputYmax.TabIndex = 38
+        '
+        'ucrInputYend
+        '
+        Me.ucrInputYend.AddQuotesIfUnrecognised = True
+        Me.ucrInputYend.AutoSize = True
+        Me.ucrInputYend.IsMultiline = False
+        Me.ucrInputYend.IsReadOnly = False
+        Me.ucrInputYend.Location = New System.Drawing.Point(319, 202)
+        Me.ucrInputYend.Name = "ucrInputYend"
+        Me.ucrInputYend.Size = New System.Drawing.Size(115, 21)
+        Me.ucrInputYend.TabIndex = 37
+        '
+        'ucrInputXend
+        '
+        Me.ucrInputXend.AddQuotesIfUnrecognised = True
+        Me.ucrInputXend.AutoSize = True
+        Me.ucrInputXend.IsMultiline = False
+        Me.ucrInputXend.IsReadOnly = False
+        Me.ucrInputXend.Location = New System.Drawing.Point(319, 177)
+        Me.ucrInputXend.Name = "ucrInputXend"
+        Me.ucrInputXend.Size = New System.Drawing.Size(115, 21)
+        Me.ucrInputXend.TabIndex = 36
+        '
+        'lblYend
+        '
+        Me.lblYend.AutoSize = True
+        Me.lblYend.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYend.Location = New System.Drawing.Point(273, 206)
+        Me.lblYend.Name = "lblYend"
+        Me.lblYend.Size = New System.Drawing.Size(36, 13)
+        Me.lblYend.TabIndex = 35
+        Me.lblYend.Text = "yend :"
+        '
+        'ucrNudLinetype
+        '
+        Me.ucrNudLinetype.AutoSize = True
+        Me.ucrNudLinetype.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinetype.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLinetype.Location = New System.Drawing.Point(75, 154)
+        Me.ucrNudLinetype.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLinetype.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinetype.Name = "ucrNudLinetype"
+        Me.ucrNudLinetype.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLinetype.TabIndex = 62
+        Me.ucrNudLinetype.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblLinetype
+        '
+        Me.lblLinetype.AutoSize = True
+        Me.lblLinetype.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLinetype.Location = New System.Drawing.Point(16, 159)
+        Me.lblLinetype.Name = "lblLinetype"
+        Me.lblLinetype.Size = New System.Drawing.Size(49, 13)
+        Me.lblLinetype.TabIndex = 63
+        Me.lblLinetype.Text = "linetype :"
+        '
+        'lblPointrangeFatten
+        '
+        Me.lblPointrangeFatten.AutoSize = True
+        Me.lblPointrangeFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPointrangeFatten.Location = New System.Drawing.Point(25, 184)
+        Me.lblPointrangeFatten.Name = "lblPointrangeFatten"
+        Me.lblPointrangeFatten.Size = New System.Drawing.Size(40, 13)
+        Me.lblPointrangeFatten.TabIndex = 89
+        Me.lblPointrangeFatten.Text = "fatten :"
+        '
+        'ucrNudPointrangeFatten
+        '
+        Me.ucrNudPointrangeFatten.AutoSize = True
+        Me.ucrNudPointrangeFatten.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPointrangeFatten.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPointrangeFatten.Location = New System.Drawing.Point(75, 179)
+        Me.ucrNudPointrangeFatten.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPointrangeFatten.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPointrangeFatten.Name = "ucrNudPointrangeFatten"
+        Me.ucrNudPointrangeFatten.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPointrangeFatten.TabIndex = 88
+        Me.ucrNudPointrangeFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudCrossbarFatten
+        '
+        Me.ucrNudCrossbarFatten.AutoSize = True
+        Me.ucrNudCrossbarFatten.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Location = New System.Drawing.Point(75, 179)
+        Me.ucrNudCrossbarFatten.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Name = "ucrNudCrossbarFatten"
+        Me.ucrNudCrossbarFatten.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCrossbarFatten.TabIndex = 87
+        Me.ucrNudCrossbarFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblCrossbarFatten
+        '
+        Me.lblCrossbarFatten.AutoSize = True
+        Me.lblCrossbarFatten.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblCrossbarFatten.Location = New System.Drawing.Point(25, 184)
+        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
+        Me.lblCrossbarFatten.Size = New System.Drawing.Size(40, 13)
+        Me.lblCrossbarFatten.TabIndex = 86
+        Me.lblCrossbarFatten.Text = "fatten :"
+        '
+        'ucrNudCurvature
+        '
+        Me.ucrNudCurvature.AutoSize = True
+        Me.ucrNudCurvature.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCurvature.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCurvature.Location = New System.Drawing.Point(75, 179)
+        Me.ucrNudCurvature.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCurvature.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCurvature.Name = "ucrNudCurvature"
+        Me.ucrNudCurvature.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCurvature.TabIndex = 84
+        Me.ucrNudCurvature.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudShape
+        '
+        Me.ucrNudShape.AutoSize = True
+        Me.ucrNudShape.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShape.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudShape.Location = New System.Drawing.Point(75, 204)
+        Me.ucrNudShape.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudShape.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShape.Name = "ucrNudShape"
+        Me.ucrNudShape.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudShape.TabIndex = 81
+        Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblLabel
+        '
+        Me.lblLabel.AutoSize = True
+        Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLabel.Location = New System.Drawing.Point(30, 159)
+        Me.lblLabel.Name = "lblLabel"
+        Me.lblLabel.Size = New System.Drawing.Size(35, 13)
+        Me.lblLabel.TabIndex = 91
+        Me.lblLabel.Text = "label :"
+        '
+        'ucrInputLabel
+        '
+        Me.ucrInputLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel.AutoSize = True
+        Me.ucrInputLabel.IsMultiline = False
+        Me.ucrInputLabel.IsReadOnly = False
+        Me.ucrInputLabel.Location = New System.Drawing.Point(75, 154)
+        Me.ucrInputLabel.Name = "ucrInputLabel"
+        Me.ucrInputLabel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLabel.TabIndex = 90
+        '
+        'ucrInputLineend
+        '
+        Me.ucrInputLineend.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLineend.GetSetSelectedIndex = -1
+        Me.ucrInputLineend.IsReadOnly = False
+        Me.ucrInputLineend.Location = New System.Drawing.Point(75, 179)
+        Me.ucrInputLineend.Name = "ucrInputLineend"
+        Me.ucrInputLineend.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineend.TabIndex = 82
+        '
+        'ucrInputY
+        '
+        Me.ucrInputY.AddQuotesIfUnrecognised = True
+        Me.ucrInputY.AutoSize = True
+        Me.ucrInputY.IsMultiline = False
+        Me.ucrInputY.IsReadOnly = False
+        Me.ucrInputY.Location = New System.Drawing.Point(318, 52)
+        Me.ucrInputY.Name = "ucrInputY"
+        Me.ucrInputY.Size = New System.Drawing.Size(116, 21)
+        Me.ucrInputY.TabIndex = 70
+        '
+        'ucrInputX
+        '
+        Me.ucrInputX.AddQuotesIfUnrecognised = True
+        Me.ucrInputX.AutoSize = True
+        Me.ucrInputX.IsMultiline = False
+        Me.ucrInputX.IsReadOnly = False
+        Me.ucrInputX.Location = New System.Drawing.Point(318, 27)
+        Me.ucrInputX.Name = "ucrInputX"
+        Me.ucrInputX.Size = New System.Drawing.Size(116, 21)
+        Me.ucrInputX.TabIndex = 71
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.AutoSize = True
+        Me.ucrReceiverY.frmParent = Nothing
+        Me.ucrReceiverY.Location = New System.Drawing.Point(318, 52)
+        Me.ucrReceiverY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.Size = New System.Drawing.Size(116, 21)
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.TabIndex = 99
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
+        'ttCaptionTitle
+        '
+        Me.ttCaptionTitle.AutoPopDelay = 10000
+        Me.ttCaptionTitle.InitialDelay = 500
+        Me.ttCaptionTitle.ReshowDelay = 100
+        '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.AutoSize = True
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 629)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSubdialog.TabIndex = 1
+        '
+        'grpScalefillg
+        '
+        Me.grpScalefillg.Controls.Add(Me.ucrInputTextBreaksg)
+        Me.grpScalefillg.Controls.Add(Me.ucrInputTextNaValueg)
+        Me.grpScalefillg.Controls.Add(Me.ucrInputTextLimitg)
+        Me.grpScalefillg.Controls.Add(Me.ucrInputTextExpandg)
+        Me.grpScalefillg.Controls.Add(Me.ucrInputPositiong)
+        Me.grpScalefillg.Controls.Add(Me.ucrInputDropUnusedLevelsg)
+        Me.grpScalefillg.Controls.Add(Me.ucrChkExpandg)
+        Me.grpScalefillg.Controls.Add(Me.ucrChkPositiong)
+        Me.grpScalefillg.Controls.Add(Me.ucrChkLimitg)
+        Me.grpScalefillg.Controls.Add(Me.ucrChkBreaksg)
+        Me.grpScalefillg.Controls.Add(Me.ucrChkNaValueg)
+        Me.grpScalefillg.Controls.Add(Me.ucrChkDropUnusedLevelsg)
+        Me.grpScalefillg.Location = New System.Drawing.Point(16, 165)
+        Me.grpScalefillg.Name = "grpScalefillg"
+        Me.grpScalefillg.Size = New System.Drawing.Size(444, 184)
+        Me.grpScalefillg.TabIndex = 323
+        Me.grpScalefillg.TabStop = False
+        Me.grpScalefillg.Text = "Fill Scale"
+        '
+        'ucrInputTextBreaksg
+        '
+        Me.ucrInputTextBreaksg.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextBreaksg.AutoSize = True
+        Me.ucrInputTextBreaksg.IsMultiline = False
+        Me.ucrInputTextBreaksg.IsReadOnly = False
+        Me.ucrInputTextBreaksg.Location = New System.Drawing.Point(285, 41)
+        Me.ucrInputTextBreaksg.Name = "ucrInputTextBreaksg"
+        Me.ucrInputTextBreaksg.Size = New System.Drawing.Size(137, 23)
+        Me.ucrInputTextBreaksg.TabIndex = 121
+        '
+        'ucrInputTextNaValueg
+        '
+        Me.ucrInputTextNaValueg.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextNaValueg.AutoSize = True
+        Me.ucrInputTextNaValueg.IsMultiline = False
+        Me.ucrInputTextNaValueg.IsReadOnly = False
+        Me.ucrInputTextNaValueg.Location = New System.Drawing.Point(285, 146)
+        Me.ucrInputTextNaValueg.Name = "ucrInputTextNaValueg"
+        Me.ucrInputTextNaValueg.Size = New System.Drawing.Size(137, 23)
+        Me.ucrInputTextNaValueg.TabIndex = 120
+        '
+        'ucrInputTextLimitg
+        '
+        Me.ucrInputTextLimitg.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextLimitg.AutoSize = True
+        Me.ucrInputTextLimitg.IsMultiline = False
+        Me.ucrInputTextLimitg.IsReadOnly = False
+        Me.ucrInputTextLimitg.Location = New System.Drawing.Point(285, 67)
+        Me.ucrInputTextLimitg.Name = "ucrInputTextLimitg"
+        Me.ucrInputTextLimitg.Size = New System.Drawing.Size(137, 23)
+        Me.ucrInputTextLimitg.TabIndex = 119
+        '
+        'ucrInputTextExpandg
+        '
+        Me.ucrInputTextExpandg.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextExpandg.AutoSize = True
+        Me.ucrInputTextExpandg.IsMultiline = False
+        Me.ucrInputTextExpandg.IsReadOnly = False
+        Me.ucrInputTextExpandg.Location = New System.Drawing.Point(285, 120)
+        Me.ucrInputTextExpandg.Name = "ucrInputTextExpandg"
+        Me.ucrInputTextExpandg.Size = New System.Drawing.Size(137, 23)
+        Me.ucrInputTextExpandg.TabIndex = 118
+        '
+        'ucrInputPositiong
+        '
+        Me.ucrInputPositiong.AddQuotesIfUnrecognised = True
+        Me.ucrInputPositiong.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPositiong.GetSetSelectedIndex = -1
+        Me.ucrInputPositiong.IsReadOnly = False
+        Me.ucrInputPositiong.Location = New System.Drawing.Point(285, 92)
+        Me.ucrInputPositiong.Name = "ucrInputPositiong"
+        Me.ucrInputPositiong.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPositiong.TabIndex = 117
+        '
+        'ucrInputDropUnusedLevelsg
+        '
+        Me.ucrInputDropUnusedLevelsg.AddQuotesIfUnrecognised = True
+        Me.ucrInputDropUnusedLevelsg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputDropUnusedLevelsg.GetSetSelectedIndex = -1
+        Me.ucrInputDropUnusedLevelsg.IsReadOnly = False
+        Me.ucrInputDropUnusedLevelsg.Location = New System.Drawing.Point(285, 13)
+        Me.ucrInputDropUnusedLevelsg.Name = "ucrInputDropUnusedLevelsg"
+        Me.ucrInputDropUnusedLevelsg.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDropUnusedLevelsg.TabIndex = 116
+        '
+        'ucrChkExpandg
+        '
+        Me.ucrChkExpandg.AutoSize = True
+        Me.ucrChkExpandg.Checked = False
+        Me.ucrChkExpandg.Location = New System.Drawing.Point(8, 123)
+        Me.ucrChkExpandg.Name = "ucrChkExpandg"
+        Me.ucrChkExpandg.Size = New System.Drawing.Size(214, 23)
+        Me.ucrChkExpandg.TabIndex = 115
+        '
+        'ucrChkPositiong
+        '
+        Me.ucrChkPositiong.AutoSize = True
+        Me.ucrChkPositiong.Checked = False
+        Me.ucrChkPositiong.Location = New System.Drawing.Point(8, 96)
+        Me.ucrChkPositiong.Name = "ucrChkPositiong"
+        Me.ucrChkPositiong.Size = New System.Drawing.Size(233, 23)
+        Me.ucrChkPositiong.TabIndex = 114
+        '
+        'ucrChkLimitg
+        '
+        Me.ucrChkLimitg.AutoSize = True
+        Me.ucrChkLimitg.Checked = False
+        Me.ucrChkLimitg.Location = New System.Drawing.Point(8, 71)
+        Me.ucrChkLimitg.Name = "ucrChkLimitg"
+        Me.ucrChkLimitg.Size = New System.Drawing.Size(246, 23)
+        Me.ucrChkLimitg.TabIndex = 113
+        '
+        'ucrChkBreaksg
+        '
+        Me.ucrChkBreaksg.AutoSize = True
+        Me.ucrChkBreaksg.Checked = False
+        Me.ucrChkBreaksg.Location = New System.Drawing.Point(8, 45)
+        Me.ucrChkBreaksg.Name = "ucrChkBreaksg"
+        Me.ucrChkBreaksg.Size = New System.Drawing.Size(233, 23)
+        Me.ucrChkBreaksg.TabIndex = 112
+        '
+        'ucrChkNaValueg
+        '
+        Me.ucrChkNaValueg.AutoSize = True
+        Me.ucrChkNaValueg.Checked = False
+        Me.ucrChkNaValueg.Location = New System.Drawing.Point(7, 149)
+        Me.ucrChkNaValueg.Name = "ucrChkNaValueg"
+        Me.ucrChkNaValueg.Size = New System.Drawing.Size(233, 23)
+        Me.ucrChkNaValueg.TabIndex = 111
+        '
+        'ucrChkDropUnusedLevelsg
+        '
+        Me.ucrChkDropUnusedLevelsg.AutoSize = True
+        Me.ucrChkDropUnusedLevelsg.Checked = False
+        Me.ucrChkDropUnusedLevelsg.Location = New System.Drawing.Point(8, 20)
+        Me.ucrChkDropUnusedLevelsg.Name = "ucrChkDropUnusedLevelsg"
+        Me.ucrChkDropUnusedLevelsg.Size = New System.Drawing.Size(246, 23)
+        Me.ucrChkDropUnusedLevelsg.TabIndex = 110
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -6898,10 +7054,6 @@ Partial Class sdgPlots
         Me.grpPolarCordinates.PerformLayout()
         Me.tbpColour.ResumeLayout(False)
         Me.tbpColour.PerformLayout()
-        Me.tbpAnnotation.ResumeLayout(False)
-        Me.tbpAnnotation.PerformLayout()
-        Me.grpAnnotation.ResumeLayout(False)
-        Me.grpAnnotation.PerformLayout()
         Me.grpScalecolorpt.ResumeLayout(False)
         Me.grpScalecolorpt.PerformLayout()
         Me.grpScaleColorfiv.ResumeLayout(False)
@@ -6960,6 +7112,12 @@ Partial Class sdgPlots
         Me.grpColourScale.PerformLayout()
         Me.grpFillScale.ResumeLayout(False)
         Me.grpFillScale.PerformLayout()
+        Me.tbpAnnotation.ResumeLayout(False)
+        Me.tbpAnnotation.PerformLayout()
+        Me.grpAnnotation.ResumeLayout(False)
+        Me.grpAnnotation.PerformLayout()
+        Me.grpScalefillg.ResumeLayout(False)
+        Me.grpScalefillg.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -7523,6 +7681,19 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputContinousfill As ucrInputComboBox
     Friend WithEvents lblPalcontinuouscolor As Label
     Friend WithEvents ucrInputcontinuouscolor As ucrInputComboBox
+    Friend WithEvents grpScalefillg As GroupBox
+    Friend WithEvents ucrInputTextBreaksg As ucrInputTextBox
+    Friend WithEvents ucrInputTextNaValueg As ucrInputTextBox
+    Friend WithEvents ucrInputTextLimitg As ucrInputTextBox
+    Friend WithEvents ucrInputTextExpandg As ucrInputTextBox
+    Friend WithEvents ucrInputPositiong As ucrInputComboBox
+    Friend WithEvents ucrInputDropUnusedLevelsg As ucrInputComboBox
+    Friend WithEvents ucrChkExpandg As ucrCheck
+    Friend WithEvents ucrChkPositiong As ucrCheck
+    Friend WithEvents ucrChkLimitg As ucrCheck
+    Friend WithEvents ucrChkBreaksg As ucrCheck
+    Friend WithEvents ucrChkNaValueg As ucrCheck
+    Friend WithEvents ucrChkDropUnusedLevelsg As ucrCheck
 End Class
 
 
