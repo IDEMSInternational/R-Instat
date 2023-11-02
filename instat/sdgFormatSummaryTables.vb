@@ -171,35 +171,28 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub AddTableTitle()
-        If ucrChkIncludeTitles.Checked AndAlso Not ucrInputTitle.IsEmpty Then
-            cmdTitleFont.Visible = True
-        Else
-            cmdTitleFont.Visible = False
-        End If
-        If ucrChkIncludeTitles.Checked AndAlso Not ucrInputTitleFootnote.IsEmpty Then
-            cmdTitleFormat.Visible = True
-        Else
-            cmdTitleFormat.Visible = False
-        End If
-    End Sub
-
-    Private Sub AddSubtitle()
-        If ucrChkIncludeTitles.Checked AndAlso Not ucrInputSubtitle.IsEmpty Then
+        If ucrChkIncludeTitles.Checked Then
+            If ucrInputTitle.IsEmpty Then
+                cmdTitleFont.Visible = True
+            End If
+        ElseIf ucrInputSubtitle.IsEmpty Then
             cmdSubtitleFont.Visible = True
+        End If
+        If ucrChkIncludeTitles.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty) Then
+            clsPipeOperator.AddParameter("title_subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
+            clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
         Else
             cmdSubtitleFont.Visible = False
-        End If
-        If ucrChkIncludeTitles.Checked AndAlso Not ucrInputStubFootnote.IsEmpty Then
-            cmdSubtitleFormat.Visible = True
-        Else
-            cmdSubtitleFormat.Visible = False
+            cmdTitleFont.Visible = False
+            clsPipeOperator.RemoveParameterByName("title_subtitle")
+            clsPipeOperator.RemoveParameterByName("title_font")
         End If
     End Sub
 
     Private Sub AddStub()
         If ucrChkStub.Checked AndAlso Not ucrInputStub.IsEmpty Then
-            clsPipeOperator.AddParameter("title_stub", clsRFunctionParameter:=clsStubFunction, iPosition:=1)
             cmdStubFont.Visible = True
+            clsPipeOperator.AddParameter("title_stub", clsRFunctionParameter:=clsStubFunction, iPosition:=1)
         Else
             cmdStubFont.Visible = False
             clsPipeOperator.RemoveParameterByName("title_stub")
@@ -214,10 +207,9 @@ Public Class sdgFormatSummaryTables
             If ucrChkStubFootnote.Checked AndAlso Not ucrInputStubFootnote.IsEmpty Then
                 cmdStubFormat.Visible = True
                 clsPipeOperator.AddParameter("title_stub_footnote", clsRFunctionParameter:=clsStubFootnoteFunction, iPosition:=1)
-            Else
-                cmdStubFormat.Visible = False
             End If
         Else
+            cmdStubFormat.Visible = False
             clsPipeOperator.RemoveParameterByName("title_stub_footnote")
         End If
         AddRemoveOperatorStub()
@@ -251,12 +243,20 @@ Public Class sdgFormatSummaryTables
         End If
         If ucrChkIncludeTitles.Checked Then
             If ucrChkTitleFootnote.Checked AndAlso Not ucrInputTitleFootnote.IsEmpty Then
+                cmdTitleFormat.Visible = True
+            End If
+            If ucrChkSubtitleFootnote.Checked AndAlso Not ucrInputSubtitleFootnote.IsEmpty Then
+                cmdSubtitleFormat.Visible = True
+            End If
+            If ucrChkTitleFootnote.Checked AndAlso Not ucrInputTitleFootnote.IsEmpty Then
                 clsPipeOperator.AddParameter("title_footnote", clsRFunctionParameter:=clsTabFootnoteTitleFunction, iPosition:=2)
             End If
             If ucrChkSubtitleFootnote.Checked AndAlso Not ucrInputSubtitleFootnote.IsEmpty Then
                 clsPipeOperator.AddParameter("subtitle_footnote", clsRFunctionParameter:=clsTabFootnoteSubtitleFunction, iPosition:=2)
             End If
         Else
+            cmdTitleFormat.Visible = False
+            cmdSubtitleFormat.Visible = False
             clsPipeOperator.RemoveParameterByName("title_footnote")
             clsPipeOperator.RemoveParameterByName("subtitle_footnote")
         End If
@@ -288,6 +288,7 @@ Public Class sdgFormatSummaryTables
                 clsTabFootnoteTitleFunction.RemoveParameterByName("footnote")
             End If
         End If
+
         AddFootnote()
     End Sub
 
