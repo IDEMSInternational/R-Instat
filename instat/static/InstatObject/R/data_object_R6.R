@@ -456,13 +456,15 @@ DataSheet$set("public", "get_variables_metadata", function(data_type = "all", co
     if(missing(column)) {
       curr_data <- private$data
       cols <- names(curr_data)
+      if(self$column_selection_applied()) cols <- self$current_column_selection
     }
     else {
       cols <- column
+      if(self$column_selection_applied()) cols <- self$current_column_selection
       curr_data <- private$data[column]
     }
-    for(i in seq_along(cols)) {
-      col <- curr_data[[i]]
+    for (i in seq_along(cols)) {
+      col <- curr_data[[cols[i]]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
@@ -2157,9 +2159,11 @@ DataSheet$set("public", "get_object", function(object_name) {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
-  if (object_type %in% c("object", "graph", "table","model")){
+  if (object_type %in% c("object", "graph", "table","model","structure","summary")){
+
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
     if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$objects)[names(private$objects) == object_name] <- new_name
@@ -2187,8 +2191,10 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
-  if(any(object_type %in% c("object", "graph", "table","model"))){
+  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+
+  if(any(object_type %in% c("object", "graph", "table","model","structure","summary"))){
+
       if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
       private$objects[names(private$objects) %in% object_names] <- NULL
     }else if(object_type == "filter"){
