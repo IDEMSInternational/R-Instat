@@ -173,10 +173,8 @@ Public Class sdgFormatSummaryTables
     Private Sub AddTableTitle()
         If ucrChkIncludeTitles.Checked AndAlso (Not ucrInputTitle.IsEmpty OrElse Not ucrInputSubtitle.IsEmpty) Then
             clsPipeOperator.AddParameter("title_subtitle", clsRFunctionParameter:=clsTableTitleFunction, iPosition:=1)
-            clsPipeOperator.AddParameter("title_font", clsRFunctionParameter:=clsTabStyleFunction, iPosition:=5)
         Else
             clsPipeOperator.RemoveParameterByName("title_subtitle")
-            clsPipeOperator.RemoveParameterByName("title_font")
         End If
     End Sub
 
