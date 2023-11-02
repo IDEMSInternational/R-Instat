@@ -32,9 +32,12 @@ Public Class sdgPlots
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
     Public clsYScalecontinuousFunction As New RFunction
+    Public clsXScaleDiscreteFunction As New RFunction
+    Public clsYScaleDiscreteFunction As New RFunction
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsAttachFunction As New RFunction
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
@@ -174,7 +177,6 @@ Public Class sdgPlots
         ucrChkLabeler.SetValuesCheckedAndUnchecked("label_both", "label_value")
         ucrChkLabeler.SetRDefault("label_value")
 
-
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir", 1))
@@ -202,6 +204,7 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
         ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+
         ucrInputTag.SetParameter(New RParameter("tag"))
         ucrInputLegendTitle.SetParameter(New RParameter("colour"))
 
@@ -640,8 +643,6 @@ Public Class sdgPlots
         ucrChkAddColour.AddParameterPresentCondition(True, "scale_colour", True)
         ucrChkAddColour.AddParameterPresentCondition(False, "scale_colour", False)
 
-        ttCaptionTitle.SetToolTip(ucrInputGraphCaption.txtInput, "Type \n where you would like a new-line")
-
         grpFillScale.Visible = False
         grpColourScale.Visible = False
     End Sub
@@ -650,7 +651,7 @@ Public Class sdgPlots
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
-                        Optional bNewEnableFill As Boolean = True, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
+                        Optional bNewEnableFill As Boolean = True, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
         bRCodeSet = False
 
@@ -662,6 +663,11 @@ Public Class sdgPlots
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
+        clsAttachFunction = New RFunction
+        clsAttachFunction.SetRCommand("attach")
+        clsAttachFunction.AddParameter("what", strDataFrame)
+        clsRsyntax.AddToAfterCodes(clsAttachFunction)
+
         ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsYScaleDateFunction = clsNewYScaleDateFunction
         clsXScaleDateFunction = clsNewXScaleDateFunction
@@ -683,6 +689,7 @@ Public Class sdgPlots
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
         End If
+
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
@@ -771,10 +778,11 @@ Public Class sdgPlots
         ucrInputXmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
 
+
+        'axis controls
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
@@ -827,6 +835,43 @@ Public Class sdgPlots
         ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
         ucrChkFillDiscrete.Enabled = bNewEnableDiscrete
     End Sub
+
+    Private Function GetAesParameterArgValue(strAes As String) As String
+        Dim strVariable As String = ""
+        If clsGlobalAesFunction.ContainsParameter(strAes) Then
+            strVariable = clsGlobalAesFunction.GetParameter(strAes).strArgumentValue
+        End If
+
+        Return strVariable
+    End Function
+
+    Private Function IsFactor(bIsX As Boolean, strVariable As String) As Boolean
+        Dim strAes As String
+        strAes = If(bIsX, "x", "y")
+
+        Dim bIsFactor As Boolean = False
+        If clsGlobalAesFunction.ContainsParameter(strAes) Then
+
+            Dim strCurrDataType As String = ""
+            Dim clsGetDataType As New RFunction
+            Dim expColumnType As SymbolicExpression
+
+            clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+            clsGetDataType.AddParameter("property", "data_type_label")
+            clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsGetDataType.AddParameter("column", Chr(34) & strVariable & Chr(34))
+
+            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+            If expColumnType?.Type <> Internals.SymbolicExpressionType.Null Then
+                strCurrDataType = If(expColumnType.AsCharacter.Count > 1, Join(expColumnType.AsCharacter.ToArray, ","), expColumnType.AsCharacter(0))
+            End If
+
+            bIsFactor = If({"factor", "ordered,factor"}.Contains(strCurrDataType), True, False)
+
+        End If
+
+        Return bIsFactor
+    End Function
 
     Private Sub SetFacetParameters()
         'Depending on the settings on the dialog, this function sets the Facets command, stored within clsRFacetFunction.
@@ -1034,8 +1079,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged,
-        ucrInputGraphCaption.ControlValueChanged, ucrInputLegendTitle.ControlValueChanged, ucrInputTag.ControlValueChanged
+    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
         AddRemoveLabs()
     End Sub
 
@@ -1043,7 +1087,7 @@ Public Class sdgPlots
         SetFacetParameters()
     End Sub
 
-    Private Function GetAxisType(bIsX As Boolean) As String
+    Private Function GetAxisType(bIsX As Boolean, Optional bStrictDiscrete As Boolean = False) As String
         Dim strAes As String
 
         If bIsX Then
@@ -1052,7 +1096,7 @@ Public Class sdgPlots
             strAes = "y"
         End If
         If clsGlobalAesFunction IsNot Nothing Then
-            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) AndAlso Not bStrictDiscrete Then
                 'Run R code to determine type
                 'Temp default to continuous
                 Return "continuous"

@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports System.Net
 Imports System.IO
 Imports System.Globalization
 Imports System.Threading
@@ -54,6 +55,7 @@ Public Class frmMain
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
+    Private strLatestVersion As String = ""
 
     Public isMinimised As Boolean = False
     Public isMaximised As Boolean = False
@@ -220,6 +222,30 @@ Public Class frmMain
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
+    Private Sub CheckForUpdates()
+        Dim webClient As New WebClient()
+
+        Try
+            ' Download the version information file from the website
+            strLatestVersion = webClient.DownloadString("https://r-instat.org/version.txt")
+            Dim strCurrVersion = My.Application.Info.Version.ToString()
+
+            ' Compare with the current version of your app
+            If strLatestVersion > strCurrVersion Then
+                ' New version available, show a notification
+                Dim result As DialogResult = MessageBox.Show("R-Instat " & strLatestVersion & " is now available -- you have " & strCurrVersion & Environment.NewLine & "Do you want to dowload it?", "A new version of R-Instat Available!",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                If result = DialogResult.Yes Then
+                    Dim myProcess = New System.Diagnostics.Process
+                    myProcess.StartInfo.FileName = "https://r-instat.org/"
+                    myProcess.Start()
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("Network issues or website not accessible")
+        End Try
+    End Sub
+
     Private Sub SetupInitialLayout()
         'splOverall has 2 panels
         'splOverall.Panel1 contains splExtraWindows
@@ -276,53 +302,58 @@ Public Class frmMain
 
     Public Sub UpdateLayout()
 
-        If Not mnuViewDataView.Checked _
-                AndAlso Not mnuViewOutput.Checked _
-                AndAlso Not mnuViewColumnMetadata.Checked _
-                AndAlso Not mnuViewDataFrameMetadata.Checked _
-                AndAlso Not mnuViewLogScript.Checked _
-                AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
-            splOverall.Hide()
-        Else
-            splOverall.Show()
+        Try
+            If Not mnuViewDataView.Checked _
+                            AndAlso Not mnuViewOutput.Checked _
+                            AndAlso Not mnuViewColumnMetadata.Checked _
+                            AndAlso Not mnuViewDataFrameMetadata.Checked _
+                            AndAlso Not mnuViewLogScript.Checked _
+                            AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
+                splOverall.Hide()
+            Else
+                splOverall.Show()
 
-            'determine splOverall contents visibility 
+                'determine splOverall contents visibility 
 
-            '-------------------------------
-            'determine splOverall.Panel1 and it's contents visibility
+                '-------------------------------
+                'determine splOverall.Panel1 and it's contents visibility
 
-            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogScript.Checked Then
-                'expand panel 1
-                splOverall.Panel1Collapsed = False
-                'change splOverall.Panel1Collapsed contents visibilty
-                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
-                    splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
-                    splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
-                    splExtraWindows.Panel1Collapsed = False
+                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogScript.Checked Then
+                    'expand panel 1
+                    splOverall.Panel1Collapsed = False
+                    'change splOverall.Panel1Collapsed contents visibilty
+                    If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
+                        splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
+                        splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
+                        splExtraWindows.Panel1Collapsed = False
+                    Else
+                        splExtraWindows.Panel1Collapsed = True
+                    End If
+                    'expand panel 2 based on log script menu item checked status
+                    splExtraWindows.Panel2Collapsed = Not mnuViewLogScript.Checked
                 Else
-                    splExtraWindows.Panel1Collapsed = True
+                    splOverall.Panel1Collapsed = True
                 End If
-                'expand panel 2 based on log script menu item checked status
-                splExtraWindows.Panel2Collapsed = Not mnuViewLogScript.Checked
-            Else
-                splOverall.Panel1Collapsed = True
+                '-------------------------------
+
+                '-------------------------------
+                'determine splOverall.Panel2 and it's contents visibility
+
+                If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
+                    splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
+                    splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
+                    splOverall.Panel2Collapsed = False
+                Else
+                    splOverall.Panel2Collapsed = True
+                End If
+                '-------------------------------
+
+
             End If
-            '-------------------------------
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
-            '-------------------------------
-            'determine splOverall.Panel2 and it's contents visibility
-
-            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
-                splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
-                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
-                splOverall.Panel2Collapsed = False
-            Else
-                splOverall.Panel2Collapsed = True
-            End If
-            '-------------------------------
-
-
-        End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
@@ -2389,10 +2420,6 @@ Public Class frmMain
         dlgImportERA5Data.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
-        dlgPasteNewDataFrame.ShowDialog()
-    End Sub
-
     Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
         If strCurrLang <> "en-GB" Then
             strCurrLang = "en-GB"
@@ -2418,8 +2445,20 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
-        dlgScript.ShowDialog()
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click
+        If ctrActive.Equals(ucrDataViewer) Then
+            ucrDataViewer.PasteValuesToDataFrame()
+        ElseIf ctrActive.Equals(ucrColumnMeta) Then
+            'todo
+        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+            'todo
+        ElseIf ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.PasteText()
+        End If
+    End Sub
+
+    Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNew.Click
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
@@ -2567,6 +2606,10 @@ Public Class frmMain
     Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
         dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
         dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuToolsCheckForUpdates_Click(sender As Object, e As EventArgs) Handles mnuToolsCheckForUpdates.Click
+        CheckForUpdates()
     End Sub
 
 End Class

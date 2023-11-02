@@ -158,13 +158,26 @@ pkgs <-
     "rstanarm", 
     "statsr",
     "statquotes",
-    "rsplit",
+    # Statistical Analysis and Data Display: Heiberger and Holland
+    "HH",
+    #Datasets from the Datasaurus Dozen
+    "datasauRus",
     "desplot",
     #applying formatting on vectors and data frames to make data presentation easier, richer, more flexible and hopefully convey more information
-    "formattable"
+    "formattable",
+    #A 'ggplot2' extension that allows text to follow curved paths.
+    "geomtextpath",
+    "moderndive",
+    # Data Sets Useful for Modeling Examples
+    "modeldata",
+    # Data for an Introduction to Statistical Learning with Applications in R
+    "ISLR",
+    # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
+    "fivethirtyeight",
+    "collapse"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
-pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
+pth <- "C:/Users/Antoine/Documents/RPackages"
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")
 
 #add extra packages to location
