@@ -273,7 +273,7 @@ Public Class clsRecentFiles
                     AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                     'insert into DropDownItems list...
                     mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
-                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 135)
+                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 145)
                 End If
 
                 If mnuFileIcon IsNot Nothing Then
