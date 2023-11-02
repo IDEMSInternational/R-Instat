@@ -91,8 +91,8 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click, toolStripMenuItemGeomBar.Click, toolStripMenuItemGeomBoxPlot.Click, toolStripMenuItemGeomCol.Click, toolStripMenuItemGeomCount.Click,
-            toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomEncircle.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomPath.Click, toolStripMenuItemGeomDumbbell.Click, toolStripMenuItemGeomLabel.Click,
-            toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRugSmooth.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click,
+            toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomLabel.Click, toolStripMenuItemGeomcontour.Click, toolStripMenuItemGeomhistogram.Click, toolStripMenuItemGeomtile.Click,
+        toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRugSmooth.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click,
             toolStripMenuItemGeomDensityRidges.Click, toolStripMenuItemGeomCatModel.Click, toolStripMenuItemGeomParallelSlopes.Click
 
         'setup the geom function to use
@@ -111,16 +111,8 @@ Public Class ucrAdditionalLayers
             strGeomRCommand = "geom_col"
         ElseIf sender Is toolStripMenuItemGeomDensity Then
             strGeomRCommand = "geom_density"
-        ElseIf sender Is toolStripMenuItemGeomEncircle Then
-            strPackage = "ggalt"
-            strGeomRCommand = "geom_encircle"
         ElseIf sender Is toolStripMenuItemGeomJitter Then
             strGeomRCommand = "geom_jitter"
-        ElseIf sender Is toolStripMenuItemGeomPath Then
-            strGeomRCommand = "geom_path"
-        ElseIf sender Is toolStripMenuItemGeomDumbbell Then
-            strPackage = "ggalt"
-            strGeomRCommand = "geom_dumbbell"
         ElseIf sender Is toolStripMenuItemGeomDensityRidges Then
             strPackage = "ggridges"
             strGeomRCommand = "geom_density_ridges"
@@ -141,9 +133,17 @@ Public Class ucrAdditionalLayers
             strPackage = "ggrepel"
             strGeomRCommand = "geom_text_repel"
         ElseIf sender Is toolStripMenuItemGeomParallelSlopes Then
+            strPackage = "moderndive"
             strGeomRCommand = "geom_parallel_slopes"
         ElseIf sender Is toolStripMenuItemGeomCatModel Then
+            strPackage = "moderndive"
             strGeomRCommand = "geom_categorical_model"
+        ElseIf sender Is toolStripMenuItemGeomtile Then
+            strGeomRCommand = "geom_tile"
+        ElseIf sender Is toolStripMenuItemGeomhistogram Then
+            strGeomRCommand = "geom_Histogram"
+        ElseIf sender Is toolStripMenuItemGeomcontour Then
+            strGeomRCommand = "geom_contour"
         ElseIf sender Is cmdAdd Then
             bShowLayerSubdialog = True
         End If
