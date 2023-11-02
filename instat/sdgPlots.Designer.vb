@@ -668,7 +668,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(7, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
-        Me.tbpPlotsOptions.Size = New System.Drawing.Size(677, 736)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(677, 667)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -883,7 +883,7 @@ Partial Class sdgPlots
         Me.tbpLayers.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayers.Size = New System.Drawing.Size(669, 710)
+        Me.tbpLayers.Size = New System.Drawing.Size(669, 589)
         Me.tbpLayers.TabIndex = 4
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
@@ -926,7 +926,7 @@ Partial Class sdgPlots
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(669, 710)
+        Me.tbpTitles.Size = New System.Drawing.Size(669, 589)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
@@ -1270,7 +1270,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(669, 710)
+        Me.tbpXAxis.Size = New System.Drawing.Size(669, 589)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -1289,7 +1289,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(669, 710)
+        Me.tbpYAxis.Size = New System.Drawing.Size(669, 589)
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
@@ -1313,7 +1313,7 @@ Partial Class sdgPlots
         Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(669, 710)
+        Me.tbpTheme.Size = New System.Drawing.Size(669, 589)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.Text = "Themes"
@@ -1527,7 +1527,7 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 710)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(669, 589)
         Me.tbpCoordinates.TabIndex = 7
         Me.tbpCoordinates.Text = "Coordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
@@ -1651,6 +1651,8 @@ Partial Class sdgPlots
         Me.tbpColour.Controls.Add(Me.grpScalecolorsol)
         Me.tbpColour.Controls.Add(Me.grpScalecolorfew)
         Me.tbpColour.Controls.Add(Me.grpScalecolorhc)
+        Me.tbpColour.Controls.Add(Me.ucrInputCanvasFillPalette)
+        Me.tbpColour.Controls.Add(Me.lblCanvasFillPalette)
         Me.tbpColour.Controls.Add(Me.grpScalecolorcal)
         Me.tbpColour.Controls.Add(Me.grpScaleFillfiv)
         Me.tbpColour.Controls.Add(Me.grpScalefillpt)
@@ -1673,8 +1675,6 @@ Partial Class sdgPlots
         Me.tbpColour.Controls.Add(Me.ucrInputColorFunctions)
         Me.tbpColour.Controls.Add(Me.lblFillFunction)
         Me.tbpColour.Controls.Add(Me.ucrInputFillFunction)
-        Me.tbpColour.Controls.Add(Me.lblCanvasFillPalette)
-        Me.tbpColour.Controls.Add(Me.ucrInputCanvasFillPalette)
         Me.tbpColour.Controls.Add(Me.ucrChkUseFill)
         Me.tbpColour.Controls.Add(Me.ucrChkUseColor)
         Me.tbpColour.Controls.Add(Me.rdoGgthemes)
@@ -1690,16 +1690,16 @@ Partial Class sdgPlots
         Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
         Me.tbpColour.Controls.Add(Me.grpColourScale)
         Me.tbpColour.Controls.Add(Me.grpFillScale)
-        Me.tbpColour.Controls.Add(Me.lblPalcontinuouscolor)
-        Me.tbpColour.Controls.Add(Me.ucrInputcontinuouscolor)
-        Me.tbpColour.Controls.Add(Me.lblPaletteContinuousfill)
-        Me.tbpColour.Controls.Add(Me.ucrInputContinousfill)
         Me.tbpColour.Controls.Add(Me.lblPaletteContinuous)
         Me.tbpColour.Controls.Add(Me.ucrInputPaletteContinuous)
+        Me.tbpColour.Controls.Add(Me.lblPaletteContinuousfill)
+        Me.tbpColour.Controls.Add(Me.ucrInputContinousfill)
+        Me.tbpColour.Controls.Add(Me.lblPalcontinuouscolor)
+        Me.tbpColour.Controls.Add(Me.ucrInputcontinuouscolor)
         Me.tbpColour.Location = New System.Drawing.Point(4, 22)
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpColour.Size = New System.Drawing.Size(669, 710)
+        Me.tbpColour.Size = New System.Drawing.Size(669, 641)
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
@@ -1718,7 +1718,7 @@ Partial Class sdgPlots
         Me.grpScalecolorpt.Controls.Add(Me.ucrChkBreaksColorpt)
         Me.grpScalecolorpt.Controls.Add(Me.ucrChkNaValueColorpt)
         Me.grpScalecolorpt.Controls.Add(Me.ucrChkDropUnusedLevelsColorpt)
-        Me.grpScalecolorpt.Location = New System.Drawing.Point(10, 460)
+        Me.grpScalecolorpt.Location = New System.Drawing.Point(10, 392)
         Me.grpScalecolorpt.Name = "grpScalecolorpt"
         Me.grpScalecolorpt.Size = New System.Drawing.Size(447, 170)
         Me.grpScalecolorpt.TabIndex = 266
@@ -1859,7 +1859,7 @@ Partial Class sdgPlots
         Me.grpScaleColorfiv.Controls.Add(Me.ucrChkBreaksColorfiv)
         Me.grpScaleColorfiv.Controls.Add(Me.ucrChkNaValueColorfiv)
         Me.grpScaleColorfiv.Controls.Add(Me.ucrChkDropUnusedLevelsColorfiv)
-        Me.grpScaleColorfiv.Location = New System.Drawing.Point(14, 465)
+        Me.grpScaleColorfiv.Location = New System.Drawing.Point(14, 392)
         Me.grpScaleColorfiv.Name = "grpScaleColorfiv"
         Me.grpScaleColorfiv.Size = New System.Drawing.Size(444, 178)
         Me.grpScaleColorfiv.TabIndex = 263
@@ -2002,7 +2002,7 @@ Partial Class sdgPlots
         Me.grpScalecolorExn.Controls.Add(Me.ucrChkBreaksColorExn)
         Me.grpScalecolorExn.Controls.Add(Me.ucrChkExpandColorExn)
         Me.grpScalecolorExn.Controls.Add(Me.ucrChkDropUnusedLevelsColorExn)
-        Me.grpScalecolorExn.Location = New System.Drawing.Point(11, 466)
+        Me.grpScalecolorExn.Location = New System.Drawing.Point(11, 398)
         Me.grpScalecolorExn.Name = "grpScalecolorExn"
         Me.grpScalecolorExn.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorExn.TabIndex = 254
@@ -2165,7 +2165,7 @@ Partial Class sdgPlots
         Me.grpScalecolorst.Controls.Add(Me.ucrChkBreaksColorst)
         Me.grpScalecolorst.Controls.Add(Me.ucrChkNaValueColorst)
         Me.grpScalecolorst.Controls.Add(Me.ucrChkDropUnusedLevelsColorst)
-        Me.grpScalecolorst.Location = New System.Drawing.Point(10, 464)
+        Me.grpScalecolorst.Location = New System.Drawing.Point(10, 394)
         Me.grpScalecolorst.Name = "grpScalecolorst"
         Me.grpScalecolorst.Size = New System.Drawing.Size(444, 178)
         Me.grpScalecolorst.TabIndex = 262
@@ -2326,7 +2326,7 @@ Partial Class sdgPlots
         Me.grpScalecolorEcon.Controls.Add(Me.ucrChkBreaksColorEcon)
         Me.grpScalecolorEcon.Controls.Add(Me.ucrChkNaValueColorEcon)
         Me.grpScalecolorEcon.Controls.Add(Me.ucrChkDropUnusedLevelsColorEcon)
-        Me.grpScalecolorEcon.Location = New System.Drawing.Point(11, 466)
+        Me.grpScalecolorEcon.Location = New System.Drawing.Point(11, 398)
         Me.grpScalecolorEcon.Name = "grpScalecolorEcon"
         Me.grpScalecolorEcon.Size = New System.Drawing.Size(444, 178)
         Me.grpScalecolorEcon.TabIndex = 261
@@ -2467,7 +2467,7 @@ Partial Class sdgPlots
         Me.grpScalecolorEx.Controls.Add(Me.ucrChkBreaksColorEx)
         Me.grpScalecolorEx.Controls.Add(Me.ucrChkNaValueColorEx)
         Me.grpScalecolorEx.Controls.Add(Me.ucrChkDropUnusedLevelsColorEx)
-        Me.grpScalecolorEx.Location = New System.Drawing.Point(11, 464)
+        Me.grpScalecolorEx.Location = New System.Drawing.Point(11, 398)
         Me.grpScalecolorEx.Name = "grpScalecolorEx"
         Me.grpScalecolorEx.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorEx.TabIndex = 260
@@ -2608,7 +2608,7 @@ Partial Class sdgPlots
         Me.grpColourScaleGgthemes.Controls.Add(Me.ucrChkBreaksColor)
         Me.grpColourScaleGgthemes.Controls.Add(Me.ucrChkNaValueColor)
         Me.grpColourScaleGgthemes.Controls.Add(Me.ucrChkDropUnusedLevelsColor)
-        Me.grpColourScaleGgthemes.Location = New System.Drawing.Point(12, 462)
+        Me.grpColourScaleGgthemes.Location = New System.Drawing.Point(12, 396)
         Me.grpColourScaleGgthemes.Name = "grpColourScaleGgthemes"
         Me.grpColourScaleGgthemes.Size = New System.Drawing.Size(447, 175)
         Me.grpColourScaleGgthemes.TabIndex = 259
@@ -2749,7 +2749,7 @@ Partial Class sdgPlots
         Me.grpScalecolorg.Controls.Add(Me.ucrChkBreaksColorg)
         Me.grpScalecolorg.Controls.Add(Me.ucrChkNaValueColorg)
         Me.grpScalecolorg.Controls.Add(Me.ucrChkDropUnusedLevelsColorg)
-        Me.grpScalecolorg.Location = New System.Drawing.Point(13, 464)
+        Me.grpScalecolorg.Location = New System.Drawing.Point(13, 393)
         Me.grpScalecolorg.Name = "grpScalecolorg"
         Me.grpScalecolorg.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorg.TabIndex = 257
@@ -2890,7 +2890,7 @@ Partial Class sdgPlots
         Me.grpScalecolorpan.Controls.Add(Me.ucrChkBreaksColorpan)
         Me.grpScalecolorpan.Controls.Add(Me.ucrChkNaValueColorpan)
         Me.grpScalecolorpan.Controls.Add(Me.ucrChkDropUnusedLevelsColorpan)
-        Me.grpScalecolorpan.Location = New System.Drawing.Point(13, 462)
+        Me.grpScalecolorpan.Location = New System.Drawing.Point(13, 398)
         Me.grpScalecolorpan.Name = "grpScalecolorpan"
         Me.grpScalecolorpan.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorpan.TabIndex = 256
@@ -3031,7 +3031,7 @@ Partial Class sdgPlots
         Me.grpScalecolorsol.Controls.Add(Me.ucrChkBreaksColorsol)
         Me.grpScalecolorsol.Controls.Add(Me.ucrChkNaValueColorsol)
         Me.grpScalecolorsol.Controls.Add(Me.ucrChkDropUnusedLevelsColorsol)
-        Me.grpScalecolorsol.Location = New System.Drawing.Point(11, 459)
+        Me.grpScalecolorsol.Location = New System.Drawing.Point(11, 399)
         Me.grpScalecolorsol.Name = "grpScalecolorsol"
         Me.grpScalecolorsol.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorsol.TabIndex = 255
@@ -3174,7 +3174,7 @@ Partial Class sdgPlots
         Me.grpScalecolorfew.Controls.Add(Me.ucrChkBreaksColorfew)
         Me.grpScalecolorfew.Controls.Add(Me.ucrChkExpandColorfew)
         Me.grpScalecolorfew.Controls.Add(Me.ucrChkDropUnusedLevelsColorfew)
-        Me.grpScalecolorfew.Location = New System.Drawing.Point(13, 456)
+        Me.grpScalecolorfew.Location = New System.Drawing.Point(13, 391)
         Me.grpScalecolorfew.Name = "grpScalecolorfew"
         Me.grpScalecolorfew.Size = New System.Drawing.Size(444, 178)
         Me.grpScalecolorfew.TabIndex = 253
@@ -3337,7 +3337,7 @@ Partial Class sdgPlots
         Me.grpScalecolorhc.Controls.Add(Me.ucrChkBreaksColorhc)
         Me.grpScalecolorhc.Controls.Add(Me.ucrChkNaValueColorhc)
         Me.grpScalecolorhc.Controls.Add(Me.ucrChkDropUnusedLevelsColorhc)
-        Me.grpScalecolorhc.Location = New System.Drawing.Point(12, 460)
+        Me.grpScalecolorhc.Location = New System.Drawing.Point(12, 403)
         Me.grpScalecolorhc.Name = "grpScalecolorhc"
         Me.grpScalecolorhc.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorhc.TabIndex = 252
@@ -3498,7 +3498,7 @@ Partial Class sdgPlots
         Me.grpScalecolorcal.Controls.Add(Me.ucrChkBreaksColorCal)
         Me.grpScalecolorcal.Controls.Add(Me.ucrChkNaValueColorCal)
         Me.grpScalecolorcal.Controls.Add(Me.ucrChkDropUnusedLevelsColorCal)
-        Me.grpScalecolorcal.Location = New System.Drawing.Point(11, 460)
+        Me.grpScalecolorcal.Location = New System.Drawing.Point(11, 406)
         Me.grpScalecolorcal.Name = "grpScalecolorcal"
         Me.grpScalecolorcal.Size = New System.Drawing.Size(447, 175)
         Me.grpScalecolorcal.TabIndex = 251
@@ -3639,7 +3639,7 @@ Partial Class sdgPlots
         Me.grpScaleFillfiv.Controls.Add(Me.ucrChkBreaksfiv)
         Me.grpScaleFillfiv.Controls.Add(Me.ucrChkNaValuefiv)
         Me.grpScaleFillfiv.Controls.Add(Me.ucrChkDropUnusedLevelsfiv)
-        Me.grpScaleFillfiv.Location = New System.Drawing.Point(14, 200)
+        Me.grpScaleFillfiv.Location = New System.Drawing.Point(14, 164)
         Me.grpScaleFillfiv.Name = "grpScaleFillfiv"
         Me.grpScaleFillfiv.Size = New System.Drawing.Size(444, 184)
         Me.grpScaleFillfiv.TabIndex = 240
@@ -3780,7 +3780,7 @@ Partial Class sdgPlots
         Me.grpScalefillpt.Controls.Add(Me.ucrChkBreakspt)
         Me.grpScalefillpt.Controls.Add(Me.ucrChkNaValuept)
         Me.grpScalefillpt.Controls.Add(Me.ucrChkDropUnusedLevelspt)
-        Me.grpScalefillpt.Location = New System.Drawing.Point(14, 200)
+        Me.grpScalefillpt.Location = New System.Drawing.Point(14, 169)
         Me.grpScalefillpt.Name = "grpScalefillpt"
         Me.grpScalefillpt.Size = New System.Drawing.Size(444, 178)
         Me.grpScalefillpt.TabIndex = 250
@@ -3923,7 +3923,7 @@ Partial Class sdgPlots
         Me.grpScalefillw.Controls.Add(Me.ucrChkBreaksw)
         Me.grpScalefillw.Controls.Add(Me.ucrChkNaValuew)
         Me.grpScalefillw.Controls.Add(Me.ucrChkDropUnusedLevelsw)
-        Me.grpScalefillw.Location = New System.Drawing.Point(13, 200)
+        Me.grpScalefillw.Location = New System.Drawing.Point(13, 172)
         Me.grpScalefillw.Name = "grpScalefillw"
         Me.grpScalefillw.Size = New System.Drawing.Size(444, 176)
         Me.grpScalefillw.TabIndex = 242
@@ -4086,7 +4086,7 @@ Partial Class sdgPlots
         Me.grpScalefillst.Controls.Add(Me.ucrChkBreaksst)
         Me.grpScalefillst.Controls.Add(Me.ucrChkNaValuest)
         Me.grpScalefillst.Controls.Add(Me.ucrChkDropUnusedLevelsst)
-        Me.grpScalefillst.Location = New System.Drawing.Point(17, 197)
+        Me.grpScalefillst.Location = New System.Drawing.Point(17, 169)
         Me.grpScalefillst.Name = "grpScalefillst"
         Me.grpScalefillst.Size = New System.Drawing.Size(444, 178)
         Me.grpScalefillst.TabIndex = 246
@@ -4247,7 +4247,7 @@ Partial Class sdgPlots
         Me.grpScalefillpan.Controls.Add(Me.ucrChkBreakspan)
         Me.grpScalefillpan.Controls.Add(Me.ucrChkNaValuepan)
         Me.grpScalefillpan.Controls.Add(Me.ucrChkDropUnusedLevelspan)
-        Me.grpScalefillpan.Location = New System.Drawing.Point(17, 199)
+        Me.grpScalefillpan.Location = New System.Drawing.Point(17, 169)
         Me.grpScalefillpan.Name = "grpScalefillpan"
         Me.grpScalefillpan.Size = New System.Drawing.Size(444, 178)
         Me.grpScalefillpan.TabIndex = 249
@@ -4388,7 +4388,7 @@ Partial Class sdgPlots
         Me.grpScalefillCal.Controls.Add(Me.ucrChkLimitCal)
         Me.grpScalefillCal.Controls.Add(Me.ucrInputTextBreaksCal)
         Me.grpScalefillCal.Controls.Add(Me.ucrInputTextNaValueCal)
-        Me.grpScalefillCal.Location = New System.Drawing.Point(16, 198)
+        Me.grpScalefillCal.Location = New System.Drawing.Point(16, 165)
         Me.grpScalefillCal.Name = "grpScalefillCal"
         Me.grpScalefillCal.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillCal.TabIndex = 248
@@ -4529,7 +4529,7 @@ Partial Class sdgPlots
         Me.grpScalefillg.Controls.Add(Me.ucrChkBreaksg)
         Me.grpScalefillg.Controls.Add(Me.ucrChkNaValueg)
         Me.grpScalefillg.Controls.Add(Me.ucrChkDropUnusedLevelsg)
-        Me.grpScalefillg.Location = New System.Drawing.Point(16, 198)
+        Me.grpScalefillg.Location = New System.Drawing.Point(16, 165)
         Me.grpScalefillg.Name = "grpScalefillg"
         Me.grpScalefillg.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillg.TabIndex = 247
@@ -4670,7 +4670,7 @@ Partial Class sdgPlots
         Me.grpScalefillEx.Controls.Add(Me.ucrChkBreaksEx)
         Me.grpScalefillEx.Controls.Add(Me.ucrChkNaValueEx)
         Me.grpScalefillEx.Controls.Add(Me.ucrChkDropUnusedLevelsEx)
-        Me.grpScalefillEx.Location = New System.Drawing.Point(16, 199)
+        Me.grpScalefillEx.Location = New System.Drawing.Point(16, 161)
         Me.grpScalefillEx.Name = "grpScalefillEx"
         Me.grpScalefillEx.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillEx.TabIndex = 245
@@ -4811,7 +4811,7 @@ Partial Class sdgPlots
         Me.grpScalefillEcon.Controls.Add(Me.ucrChkBreaksEcon)
         Me.grpScalefillEcon.Controls.Add(Me.ucrChkNaValueEcon)
         Me.grpScalefillEcon.Controls.Add(Me.ucrChkDropUnusedLevelsEcon)
-        Me.grpScalefillEcon.Location = New System.Drawing.Point(17, 198)
+        Me.grpScalefillEcon.Location = New System.Drawing.Point(17, 164)
         Me.grpScalefillEcon.Name = "grpScalefillEcon"
         Me.grpScalefillEcon.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillEcon.TabIndex = 244
@@ -4954,7 +4954,7 @@ Partial Class sdgPlots
         Me.grpScalefillExn.Controls.Add(Me.ucrChkBreaksExn)
         Me.grpScalefillExn.Controls.Add(Me.ucrChkNaValueExn)
         Me.grpScalefillExn.Controls.Add(Me.ucrChkDropUnusedLevelsExn)
-        Me.grpScalefillExn.Location = New System.Drawing.Point(17, 198)
+        Me.grpScalefillExn.Location = New System.Drawing.Point(17, 163)
         Me.grpScalefillExn.Name = "grpScalefillExn"
         Me.grpScalefillExn.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillExn.TabIndex = 243
@@ -5115,7 +5115,7 @@ Partial Class sdgPlots
         Me.grpScalefillsol.Controls.Add(Me.ucrChkBreakssol)
         Me.grpScalefillsol.Controls.Add(Me.ucrChkNaValuesol)
         Me.grpScalefillsol.Controls.Add(Me.ucrChkDropUnusedLevelssol)
-        Me.grpScalefillsol.Location = New System.Drawing.Point(16, 196)
+        Me.grpScalefillsol.Location = New System.Drawing.Point(16, 164)
         Me.grpScalefillsol.Name = "grpScalefillsol"
         Me.grpScalefillsol.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillsol.TabIndex = 241
@@ -5256,7 +5256,7 @@ Partial Class sdgPlots
         Me.grpFillScaleggthemes.Controls.Add(Me.ucrChkBreaks)
         Me.grpFillScaleggthemes.Controls.Add(Me.ucrChkNaValue)
         Me.grpFillScaleggthemes.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpFillScaleggthemes.Location = New System.Drawing.Point(16, 194)
+        Me.grpFillScaleggthemes.Location = New System.Drawing.Point(16, 164)
         Me.grpFillScaleggthemes.Name = "grpFillScaleggthemes"
         Me.grpFillScaleggthemes.Size = New System.Drawing.Size(444, 184)
         Me.grpFillScaleggthemes.TabIndex = 238
@@ -5399,7 +5399,7 @@ Partial Class sdgPlots
         Me.grpScalefillfew.Controls.Add(Me.ucrChkBreaksfew)
         Me.grpScalefillfew.Controls.Add(Me.ucrChkNaValuefew)
         Me.grpScalefillfew.Controls.Add(Me.ucrChkDropUnusedLevelsfew)
-        Me.grpScalefillfew.Location = New System.Drawing.Point(15, 194)
+        Me.grpScalefillfew.Location = New System.Drawing.Point(15, 164)
         Me.grpScalefillfew.Name = "grpScalefillfew"
         Me.grpScalefillfew.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillfew.TabIndex = 239
@@ -5562,7 +5562,7 @@ Partial Class sdgPlots
         Me.grpScalefillhc.Controls.Add(Me.ucrChkBreakshc)
         Me.grpScalefillhc.Controls.Add(Me.ucrChkNaValuehc)
         Me.grpScalefillhc.Controls.Add(Me.ucrChkDropUnusedLevelshc)
-        Me.grpScalefillhc.Location = New System.Drawing.Point(13, 202)
+        Me.grpScalefillhc.Location = New System.Drawing.Point(13, 162)
         Me.grpScalefillhc.Name = "grpScalefillhc"
         Me.grpScalefillhc.Size = New System.Drawing.Size(444, 184)
         Me.grpScalefillhc.TabIndex = 232
@@ -5725,7 +5725,7 @@ Partial Class sdgPlots
         Me.grpScaleColorw.Controls.Add(Me.ucrChkBreaksColorw)
         Me.grpScaleColorw.Controls.Add(Me.ucrChkNaValueColorw)
         Me.grpScaleColorw.Controls.Add(Me.ucrChkDropUnusedLevelsColorw)
-        Me.grpScaleColorw.Location = New System.Drawing.Point(13, 459)
+        Me.grpScaleColorw.Location = New System.Drawing.Point(13, 406)
         Me.grpScaleColorw.Name = "grpScaleColorw"
         Me.grpScaleColorw.Size = New System.Drawing.Size(447, 175)
         Me.grpScaleColorw.TabIndex = 233
@@ -5876,7 +5876,7 @@ Partial Class sdgPlots
         '
         Me.lblCanvasColorPalette.AutoSize = True
         Me.lblCanvasColorPalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCanvasColorPalette.Location = New System.Drawing.Point(32, 431)
+        Me.lblCanvasColorPalette.Location = New System.Drawing.Point(172, 365)
         Me.lblCanvasColorPalette.Name = "lblCanvasColorPalette"
         Me.lblCanvasColorPalette.Size = New System.Drawing.Size(43, 13)
         Me.lblCanvasColorPalette.TabIndex = 72
@@ -5888,7 +5888,7 @@ Partial Class sdgPlots
         Me.ucrInputCanvasColorPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCanvasColorPalette.GetSetSelectedIndex = -1
         Me.ucrInputCanvasColorPalette.IsReadOnly = False
-        Me.ucrInputCanvasColorPalette.Location = New System.Drawing.Point(81, 427)
+        Me.ucrInputCanvasColorPalette.Location = New System.Drawing.Point(221, 361)
         Me.ucrInputCanvasColorPalette.Name = "ucrInputCanvasColorPalette"
         Me.ucrInputCanvasColorPalette.Size = New System.Drawing.Size(146, 26)
         Me.ucrInputCanvasColorPalette.TabIndex = 71
@@ -5897,7 +5897,7 @@ Partial Class sdgPlots
         '
         Me.lblGgthemesFunctions.AutoSize = True
         Me.lblGgthemesFunctions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGgthemesFunctions.Location = New System.Drawing.Point(365, 395)
+        Me.lblGgthemesFunctions.Location = New System.Drawing.Point(384, 361)
         Me.lblGgthemesFunctions.Name = "lblGgthemesFunctions"
         Me.lblGgthemesFunctions.Size = New System.Drawing.Size(83, 13)
         Me.lblGgthemesFunctions.TabIndex = 70
@@ -5909,16 +5909,16 @@ Partial Class sdgPlots
         Me.ucrInputColorFunctions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColorFunctions.GetSetSelectedIndex = -1
         Me.ucrInputColorFunctions.IsReadOnly = False
-        Me.ucrInputColorFunctions.Location = New System.Drawing.Point(470, 391)
+        Me.ucrInputColorFunctions.Location = New System.Drawing.Point(489, 357)
         Me.ucrInputColorFunctions.Name = "ucrInputColorFunctions"
-        Me.ucrInputColorFunctions.Size = New System.Drawing.Size(167, 26)
+        Me.ucrInputColorFunctions.Size = New System.Drawing.Size(148, 26)
         Me.ucrInputColorFunctions.TabIndex = 69
         '
         'lblFillFunction
         '
         Me.lblFillFunction.AutoSize = True
         Me.lblFillFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFillFunction.Location = New System.Drawing.Point(369, 140)
+        Me.lblFillFunction.Location = New System.Drawing.Point(388, 140)
         Me.lblFillFunction.Name = "lblFillFunction"
         Me.lblFillFunction.Size = New System.Drawing.Size(71, 13)
         Me.lblFillFunction.TabIndex = 68
@@ -5930,16 +5930,16 @@ Partial Class sdgPlots
         Me.ucrInputFillFunction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputFillFunction.GetSetSelectedIndex = -1
         Me.ucrInputFillFunction.IsReadOnly = False
-        Me.ucrInputFillFunction.Location = New System.Drawing.Point(470, 135)
+        Me.ucrInputFillFunction.Location = New System.Drawing.Point(489, 135)
         Me.ucrInputFillFunction.Name = "ucrInputFillFunction"
-        Me.ucrInputFillFunction.Size = New System.Drawing.Size(167, 26)
+        Me.ucrInputFillFunction.Size = New System.Drawing.Size(148, 26)
         Me.ucrInputFillFunction.TabIndex = 67
         '
         'lblCanvasFillPalette
         '
         Me.lblCanvasFillPalette.AutoSize = True
         Me.lblCanvasFillPalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCanvasFillPalette.Location = New System.Drawing.Point(32, 171)
+        Me.lblCanvasFillPalette.Location = New System.Drawing.Point(172, 139)
         Me.lblCanvasFillPalette.Name = "lblCanvasFillPalette"
         Me.lblCanvasFillPalette.Size = New System.Drawing.Size(43, 13)
         Me.lblCanvasFillPalette.TabIndex = 66
@@ -5951,7 +5951,7 @@ Partial Class sdgPlots
         Me.ucrInputCanvasFillPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputCanvasFillPalette.GetSetSelectedIndex = -1
         Me.ucrInputCanvasFillPalette.IsReadOnly = False
-        Me.ucrInputCanvasFillPalette.Location = New System.Drawing.Point(81, 167)
+        Me.ucrInputCanvasFillPalette.Location = New System.Drawing.Point(221, 135)
         Me.ucrInputCanvasFillPalette.Name = "ucrInputCanvasFillPalette"
         Me.ucrInputCanvasFillPalette.Size = New System.Drawing.Size(146, 26)
         Me.ucrInputCanvasFillPalette.TabIndex = 65
@@ -5962,14 +5962,14 @@ Partial Class sdgPlots
         Me.ucrChkUseFill.Checked = False
         Me.ucrChkUseFill.Location = New System.Drawing.Point(32, 107)
         Me.ucrChkUseFill.Name = "ucrChkUseFill"
-        Me.ucrChkUseFill.Size = New System.Drawing.Size(256, 23)
+        Me.ucrChkUseFill.Size = New System.Drawing.Size(159, 23)
         Me.ucrChkUseFill.TabIndex = 64
         '
         'ucrChkUseColor
         '
         Me.ucrChkUseColor.AutoSize = True
         Me.ucrChkUseColor.Checked = False
-        Me.ucrChkUseColor.Location = New System.Drawing.Point(368, 96)
+        Me.ucrChkUseColor.Location = New System.Drawing.Point(387, 96)
         Me.ucrChkUseColor.Name = "ucrChkUseColor"
         Me.ucrChkUseColor.Size = New System.Drawing.Size(265, 23)
         Me.ucrChkUseColor.TabIndex = 63
@@ -6118,9 +6118,9 @@ Partial Class sdgPlots
         '
         Me.ucrChkAddColour.AutoSize = True
         Me.ucrChkAddColour.Checked = False
-        Me.ucrChkAddColour.Location = New System.Drawing.Point(32, 396)
+        Me.ucrChkAddColour.Location = New System.Drawing.Point(32, 362)
         Me.ucrChkAddColour.Name = "ucrChkAddColour"
-        Me.ucrChkAddColour.Size = New System.Drawing.Size(326, 23)
+        Me.ucrChkAddColour.Size = New System.Drawing.Size(134, 23)
         Me.ucrChkAddColour.TabIndex = 54
         '
         'ucrChkAddFillScale
@@ -6129,7 +6129,7 @@ Partial Class sdgPlots
         Me.ucrChkAddFillScale.Checked = False
         Me.ucrChkAddFillScale.Location = New System.Drawing.Point(32, 138)
         Me.ucrChkAddFillScale.Name = "ucrChkAddFillScale"
-        Me.ucrChkAddFillScale.Size = New System.Drawing.Size(256, 23)
+        Me.ucrChkAddFillScale.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkAddFillScale.TabIndex = 53
         '
         'grpColourScale
@@ -6144,7 +6144,7 @@ Partial Class sdgPlots
         Me.grpColourScale.Controls.Add(Me.lblColourScaleMapBegins)
         Me.grpColourScale.Controls.Add(Me.lblColourScalePalette)
         Me.grpColourScale.Controls.Add(Me.lblColourScaleTransparency)
-        Me.grpColourScale.Location = New System.Drawing.Point(13, 466)
+        Me.grpColourScale.Location = New System.Drawing.Point(13, 402)
         Me.grpColourScale.Name = "grpColourScale"
         Me.grpColourScale.Size = New System.Drawing.Size(444, 181)
         Me.grpColourScale.TabIndex = 25
@@ -6271,7 +6271,7 @@ Partial Class sdgPlots
         Me.grpFillScale.Controls.Add(Me.lblFillScaleBeginColour)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleColourPalettte)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleTransparency)
-        Me.grpFillScale.Location = New System.Drawing.Point(13, 202)
+        Me.grpFillScale.Location = New System.Drawing.Point(13, 178)
         Me.grpFillScale.Name = "grpFillScale"
         Me.grpFillScale.Size = New System.Drawing.Size(444, 174)
         Me.grpFillScale.TabIndex = 23
@@ -6390,7 +6390,7 @@ Partial Class sdgPlots
         '
         Me.lblPalcontinuouscolor.AutoSize = True
         Me.lblPalcontinuouscolor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPalcontinuouscolor.Location = New System.Drawing.Point(32, 429)
+        Me.lblPalcontinuouscolor.Location = New System.Drawing.Point(172, 365)
         Me.lblPalcontinuouscolor.Name = "lblPalcontinuouscolor"
         Me.lblPalcontinuouscolor.Size = New System.Drawing.Size(43, 13)
         Me.lblPalcontinuouscolor.TabIndex = 231
@@ -6402,7 +6402,7 @@ Partial Class sdgPlots
         Me.ucrInputcontinuouscolor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputcontinuouscolor.GetSetSelectedIndex = -1
         Me.ucrInputcontinuouscolor.IsReadOnly = False
-        Me.ucrInputcontinuouscolor.Location = New System.Drawing.Point(81, 425)
+        Me.ucrInputcontinuouscolor.Location = New System.Drawing.Point(221, 361)
         Me.ucrInputcontinuouscolor.Name = "ucrInputcontinuouscolor"
         Me.ucrInputcontinuouscolor.Size = New System.Drawing.Size(146, 26)
         Me.ucrInputcontinuouscolor.TabIndex = 230
@@ -6411,7 +6411,7 @@ Partial Class sdgPlots
         '
         Me.lblPaletteContinuousfill.AutoSize = True
         Me.lblPaletteContinuousfill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPaletteContinuousfill.Location = New System.Drawing.Point(32, 171)
+        Me.lblPaletteContinuousfill.Location = New System.Drawing.Point(172, 139)
         Me.lblPaletteContinuousfill.Name = "lblPaletteContinuousfill"
         Me.lblPaletteContinuousfill.Size = New System.Drawing.Size(43, 13)
         Me.lblPaletteContinuousfill.TabIndex = 229
@@ -6423,7 +6423,7 @@ Partial Class sdgPlots
         Me.ucrInputContinousfill.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputContinousfill.GetSetSelectedIndex = -1
         Me.ucrInputContinousfill.IsReadOnly = False
-        Me.ucrInputContinousfill.Location = New System.Drawing.Point(81, 167)
+        Me.ucrInputContinousfill.Location = New System.Drawing.Point(221, 135)
         Me.ucrInputContinousfill.Name = "ucrInputContinousfill"
         Me.ucrInputContinousfill.Size = New System.Drawing.Size(146, 26)
         Me.ucrInputContinousfill.TabIndex = 228
@@ -6456,7 +6456,7 @@ Partial Class sdgPlots
         Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 710)
+        Me.tbpAnnotation.Size = New System.Drawing.Size(669, 589)
         Me.tbpAnnotation.TabIndex = 9
         Me.tbpAnnotation.Text = "Annotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
@@ -7011,7 +7011,7 @@ Partial Class sdgPlots
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 688)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(232, 625)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 1
@@ -7021,7 +7021,7 @@ Partial Class sdgPlots
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(687, 784)
+        Me.ClientSize = New System.Drawing.Size(687, 673)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
