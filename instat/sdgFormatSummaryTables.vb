@@ -206,13 +206,13 @@ Public Class sdgFormatSummaryTables
         AddTableTitle()
         If ucrChkIncludeTitles.Checked Then
             If Not ucrInputTitle.IsEmpty Then
-                cmdTitleFont.Visible = True
+                cmdTitleFormat.Visible = True
                 clsTableTitleFunction.AddParameter("title", Chr(34) & ucrInputTitle.GetText() & Chr(34), iPosition:=0)
             Else
                 clsTableTitleFunction.RemoveParameterByName("title")
             End If
         Else
-            cmdTitleFont.Visible = False
+            cmdTitleFormat.Visible = False
         End If
     End Sub
 
@@ -375,13 +375,13 @@ Public Class sdgFormatSummaryTables
     Private Sub ucrInputStubs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStub.ControlValueChanged
         If ucrChkStub.Visible Then
             If Not ucrInputStub.IsEmpty Then
-                cmdStubsFont.Visible = True
+                cmdStubFont.Visible = True
                 clsStubFunction.AddParameter("label", Chr(34) & ucrInputStub.GetText() & Chr(34), iPosition:=0)
             Else
                 clsStubFunction.RemoveParameterByName("label")
             End If
         Else
-            cmdStubsFont.Visible = False
+            cmdStubFont.Visible = False
         End If
         AddStub()
     End Sub
@@ -389,14 +389,14 @@ Public Class sdgFormatSummaryTables
     Private Sub ucrInputStubsFootNote_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStubFootnote.ControlValueChanged
         If ucrChkStub.Checked Then
             If Not ucrInputStubFootnote.IsEmpty Then
-                cmdStubsFormat.Visible = True
+                cmdStubFormat.Visible = True
                 clsStubFootnoteFunction.AddParameter("footnote", Chr(34) & ucrInputStubFootnote.GetText() & Chr(34), iPosition:=0)
             Else
                 clsStubFootnoteFunction.RemoveParameterByName("footnote")
             End If
         Else
 
-            cmdStubsFormat.Visible = False
+            cmdStubFormat.Visible = False
         End If
         AddStubFootnote()
         AddRemoveOperatorStub()

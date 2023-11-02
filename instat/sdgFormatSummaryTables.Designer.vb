@@ -25,12 +25,18 @@ Partial Class sdgFormatSummaryTables
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpTitle = New System.Windows.Forms.TabPage()
         Me.grpSubtitle = New System.Windows.Forms.GroupBox()
+        Me.cmdSubtitleFont = New System.Windows.Forms.Button()
+        Me.cmdSubtitleFormat = New System.Windows.Forms.Button()
+        Me.lblSubtitleFootnote = New System.Windows.Forms.Label()
         Me.ucrInputSubtitleFootnote = New instat.ucrInputTextBox()
         Me.ucrChkSubtitleFootnote = New instat.ucrCheck()
         Me.ucrInputSubtitle = New instat.ucrInputTextBox()
         Me.lblSubtitle = New System.Windows.Forms.Label()
         Me.ucrChkIncludeTitles = New instat.ucrCheck()
         Me.grpTitle = New System.Windows.Forms.GroupBox()
+        Me.cmdTitleFont = New System.Windows.Forms.Button()
+        Me.cmdTitleFormat = New System.Windows.Forms.Button()
+        Me.lblTitleFootnote = New System.Windows.Forms.Label()
         Me.ucrInputTitleFootnote = New instat.ucrInputTextBox()
         Me.ucrChkTitleFootnote = New instat.ucrCheck()
         Me.ucrInputTitle = New instat.ucrInputTextBox()
@@ -38,6 +44,9 @@ Partial Class sdgFormatSummaryTables
         Me.tbpStub = New System.Windows.Forms.TabPage()
         Me.ucrChkStub = New instat.ucrCheck()
         Me.grpStub = New System.Windows.Forms.GroupBox()
+        Me.cmdStubFont = New System.Windows.Forms.Button()
+        Me.cmdStubFormat = New System.Windows.Forms.Button()
+        Me.lblStubFootnote = New System.Windows.Forms.Label()
         Me.ucrInputStubFootnote = New instat.ucrInputTextBox()
         Me.ucrChkStubFootnote = New instat.ucrCheck()
         Me.ucrInputStub = New instat.ucrInputTextBox()
@@ -49,9 +58,6 @@ Partial Class sdgFormatSummaryTables
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.lblTitleFootnote = New System.Windows.Forms.Label()
-        Me.lblSubtitleFootnote = New System.Windows.Forms.Label()
-        Me.lblStubFootnote = New System.Windows.Forms.Label()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpTitle.SuspendLayout()
         Me.grpSubtitle.SuspendLayout()
@@ -87,6 +93,8 @@ Partial Class sdgFormatSummaryTables
         '
         'grpSubtitle
         '
+        Me.grpSubtitle.Controls.Add(Me.cmdSubtitleFont)
+        Me.grpSubtitle.Controls.Add(Me.cmdSubtitleFormat)
         Me.grpSubtitle.Controls.Add(Me.lblSubtitleFootnote)
         Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
         Me.grpSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
@@ -98,6 +106,38 @@ Partial Class sdgFormatSummaryTables
         Me.grpSubtitle.TabIndex = 10
         Me.grpSubtitle.TabStop = False
         Me.grpSubtitle.Text = "Subtitle"
+        '
+        'cmdSubtitleFont
+        '
+        Me.cmdSubtitleFont.Enabled = False
+        Me.cmdSubtitleFont.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSubtitleFont.Location = New System.Drawing.Point(343, 16)
+        Me.cmdSubtitleFont.Name = "cmdSubtitleFont"
+        Me.cmdSubtitleFont.Size = New System.Drawing.Size(104, 23)
+        Me.cmdSubtitleFont.TabIndex = 20
+        Me.cmdSubtitleFont.Text = "Font"
+        Me.cmdSubtitleFont.UseVisualStyleBackColor = True
+        '
+        'cmdSubtitleFormat
+        '
+        Me.cmdSubtitleFormat.Enabled = False
+        Me.cmdSubtitleFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdSubtitleFormat.Location = New System.Drawing.Point(343, 85)
+        Me.cmdSubtitleFormat.Name = "cmdSubtitleFormat"
+        Me.cmdSubtitleFormat.Size = New System.Drawing.Size(104, 23)
+        Me.cmdSubtitleFormat.TabIndex = 19
+        Me.cmdSubtitleFormat.Text = "Format"
+        Me.cmdSubtitleFormat.UseVisualStyleBackColor = True
+        '
+        'lblSubtitleFootnote
+        '
+        Me.lblSubtitleFootnote.AutoSize = True
+        Me.lblSubtitleFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSubtitleFootnote.Location = New System.Drawing.Point(16, 95)
+        Me.lblSubtitleFootnote.Name = "lblSubtitleFootnote"
+        Me.lblSubtitleFootnote.Size = New System.Drawing.Size(31, 13)
+        Me.lblSubtitleFootnote.TabIndex = 12
+        Me.lblSubtitleFootnote.Text = "Text:"
         '
         'ucrInputSubtitleFootnote
         '
@@ -155,6 +195,8 @@ Partial Class sdgFormatSummaryTables
         '
         'grpTitle
         '
+        Me.grpTitle.Controls.Add(Me.cmdTitleFont)
+        Me.grpTitle.Controls.Add(Me.cmdTitleFormat)
         Me.grpTitle.Controls.Add(Me.lblTitleFootnote)
         Me.grpTitle.Controls.Add(Me.ucrInputTitleFootnote)
         Me.grpTitle.Controls.Add(Me.ucrChkTitleFootnote)
@@ -166,6 +208,38 @@ Partial Class sdgFormatSummaryTables
         Me.grpTitle.TabIndex = 0
         Me.grpTitle.TabStop = False
         Me.grpTitle.Text = "Title"
+        '
+        'cmdTitleFont
+        '
+        Me.cmdTitleFont.Enabled = False
+        Me.cmdTitleFont.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTitleFont.Location = New System.Drawing.Point(350, 25)
+        Me.cmdTitleFont.Name = "cmdTitleFont"
+        Me.cmdTitleFont.Size = New System.Drawing.Size(104, 23)
+        Me.cmdTitleFont.TabIndex = 20
+        Me.cmdTitleFont.Text = "Font"
+        Me.cmdTitleFont.UseVisualStyleBackColor = True
+        '
+        'cmdTitleFormat
+        '
+        Me.cmdTitleFormat.Enabled = False
+        Me.cmdTitleFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTitleFormat.Location = New System.Drawing.Point(349, 86)
+        Me.cmdTitleFormat.Name = "cmdTitleFormat"
+        Me.cmdTitleFormat.Size = New System.Drawing.Size(104, 23)
+        Me.cmdTitleFormat.TabIndex = 19
+        Me.cmdTitleFormat.Text = "Format"
+        Me.cmdTitleFormat.UseVisualStyleBackColor = True
+        '
+        'lblTitleFootnote
+        '
+        Me.lblTitleFootnote.AutoSize = True
+        Me.lblTitleFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTitleFootnote.Location = New System.Drawing.Point(22, 87)
+        Me.lblTitleFootnote.Name = "lblTitleFootnote"
+        Me.lblTitleFootnote.Size = New System.Drawing.Size(31, 13)
+        Me.lblTitleFootnote.TabIndex = 7
+        Me.lblTitleFootnote.Text = "Text:"
         '
         'ucrInputTitleFootnote
         '
@@ -234,6 +308,8 @@ Partial Class sdgFormatSummaryTables
         '
         'grpStub
         '
+        Me.grpStub.Controls.Add(Me.cmdStubFont)
+        Me.grpStub.Controls.Add(Me.cmdStubFormat)
         Me.grpStub.Controls.Add(Me.lblStubFootnote)
         Me.grpStub.Controls.Add(Me.ucrInputStubFootnote)
         Me.grpStub.Controls.Add(Me.ucrChkStubFootnote)
@@ -245,6 +321,38 @@ Partial Class sdgFormatSummaryTables
         Me.grpStub.TabIndex = 1
         Me.grpStub.TabStop = False
         Me.grpStub.Text = "Stub"
+        '
+        'cmdStubFont
+        '
+        Me.cmdStubFont.Enabled = False
+        Me.cmdStubFont.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdStubFont.Location = New System.Drawing.Point(331, 25)
+        Me.cmdStubFont.Name = "cmdStubFont"
+        Me.cmdStubFont.Size = New System.Drawing.Size(104, 23)
+        Me.cmdStubFont.TabIndex = 20
+        Me.cmdStubFont.Text = "Font"
+        Me.cmdStubFont.UseVisualStyleBackColor = True
+        '
+        'cmdStubFormat
+        '
+        Me.cmdStubFormat.Enabled = False
+        Me.cmdStubFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdStubFormat.Location = New System.Drawing.Point(331, 84)
+        Me.cmdStubFormat.Name = "cmdStubFormat"
+        Me.cmdStubFormat.Size = New System.Drawing.Size(104, 23)
+        Me.cmdStubFormat.TabIndex = 19
+        Me.cmdStubFormat.Text = "Format"
+        Me.cmdStubFormat.UseVisualStyleBackColor = True
+        '
+        'lblStubFootnote
+        '
+        Me.lblStubFootnote.AutoSize = True
+        Me.lblStubFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStubFootnote.Location = New System.Drawing.Point(15, 90)
+        Me.lblStubFootnote.Name = "lblStubFootnote"
+        Me.lblStubFootnote.Size = New System.Drawing.Size(31, 13)
+        Me.lblStubFootnote.TabIndex = 7
+        Me.lblStubFootnote.Text = "Text:"
         '
         'ucrInputStubFootnote
         '
@@ -365,36 +473,6 @@ Partial Class sdgFormatSummaryTables
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 3
         '
-        'lblTitleFootnote
-        '
-        Me.lblTitleFootnote.AutoSize = True
-        Me.lblTitleFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTitleFootnote.Location = New System.Drawing.Point(22, 87)
-        Me.lblTitleFootnote.Name = "lblTitleFootnote"
-        Me.lblTitleFootnote.Size = New System.Drawing.Size(31, 13)
-        Me.lblTitleFootnote.TabIndex = 7
-        Me.lblTitleFootnote.Text = "Text:"
-        '
-        'lblSubtitleFootnote
-        '
-        Me.lblSubtitleFootnote.AutoSize = True
-        Me.lblSubtitleFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSubtitleFootnote.Location = New System.Drawing.Point(16, 95)
-        Me.lblSubtitleFootnote.Name = "lblSubtitleFootnote"
-        Me.lblSubtitleFootnote.Size = New System.Drawing.Size(31, 13)
-        Me.lblSubtitleFootnote.TabIndex = 12
-        Me.lblSubtitleFootnote.Text = "Text:"
-        '
-        'lblStubFootnote
-        '
-        Me.lblStubFootnote.AutoSize = True
-        Me.lblStubFootnote.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStubFootnote.Location = New System.Drawing.Point(15, 90)
-        Me.lblStubFootnote.Name = "lblStubFootnote"
-        Me.lblStubFootnote.Size = New System.Drawing.Size(31, 13)
-        Me.lblStubFootnote.TabIndex = 7
-        Me.lblStubFootnote.Text = "Text:"
-        '
         'sdgFormatSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -457,4 +535,10 @@ Partial Class sdgFormatSummaryTables
     Friend WithEvents lblSubtitleFootnote As Label
     Friend WithEvents lblTitleFootnote As Label
     Friend WithEvents lblStubFootnote As Label
+    Friend WithEvents cmdSubtitleFont As Button
+    Friend WithEvents cmdSubtitleFormat As Button
+    Friend WithEvents cmdTitleFont As Button
+    Friend WithEvents cmdTitleFormat As Button
+    Friend WithEvents cmdStubFont As Button
+    Friend WithEvents cmdStubFormat As Button
 End Class
