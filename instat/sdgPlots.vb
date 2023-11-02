@@ -1227,7 +1227,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
+    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
             grpFillScale.Visible = True
@@ -1237,7 +1237,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColour.ControlValueChanged
+    Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkAddColour.Checked Then
             clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=8)
             grpColourScale.Visible = True
@@ -1352,5 +1352,69 @@ Public Class sdgPlots
 
     Private Sub ucrChkIncludeTitles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeTitles.ControlValueChanged
         AddRemoveLabs()
+    End Sub
+
+    Private Sub ucrChkBreaksCal_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkNaValue_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkLimitCal_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputTextExpand_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkPosition_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkDropUnusedLevelsCal_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrChkPalettecolorw_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputCanvasfillPalette_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputCanvasColorPalette_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputColorFunctions_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputFillFunction_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputColorType_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputPalettes_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrPnlColourPalette_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputPaletteContinuous_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputcontinuouscolor_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 End Class
