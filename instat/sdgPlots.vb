@@ -3433,7 +3433,7 @@ Public Class sdgPlots
             ucrInputFillFunction.Hide()
             ucrInputcontinuouscolor.Hide()
             ucrInputContinousfill.Hide()
-            AddRemovePaletteDiscrete()
+            '  AddRemovePaletteDiscrete()
             GroupeColorScale()
             GroupeFillScale()
         ElseIf ucrInputAxisType.GetText = "continuous" Then
@@ -3472,7 +3472,7 @@ Public Class sdgPlots
             ucrInputColorFunctions.Hide()
             ucrInputFillFunction.Hide()
             ucrInputCanvasColorPalette.Hide()
-            AddRemoveContinuousPalatte()
+            ' AddRemoveContinuousPalatte()
             If rdoViridis.Checked Then
                 ucrInputcontinuouscolor.Hide()
                 ucrInputContinousfill.Hide()
