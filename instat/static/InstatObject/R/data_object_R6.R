@@ -456,13 +456,15 @@ DataSheet$set("public", "get_variables_metadata", function(data_type = "all", co
     if(missing(column)) {
       curr_data <- private$data
       cols <- names(curr_data)
+      if(self$column_selection_applied()) cols <- self$current_column_selection
     }
     else {
       cols <- column
+      if(self$column_selection_applied()) cols <- self$current_column_selection
       curr_data <- private$data[column]
     }
-    for(i in seq_along(cols)) {
-      col <- curr_data[[i]]
+    for (i in seq_along(cols)) {
+      col <- curr_data[[cols[i]]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
@@ -635,9 +637,6 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       use_col_name_as_prefix = TRUE
     }
   }
-  if(use_col_name_as_prefix && length(col_name) > 1) {
-    stop("Cannot use col_name as prefix when col_name is a vector.")
-  }
   
   if(length(col_name) != num_cols) {
     use_col_name_as_prefix = TRUE
@@ -658,7 +657,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       if(require_correct_length) stop("Length of new column must be divisible by the length of the data frame")
       else curr_col <- rep(curr_col, length.out = self$get_data_frame_length())
     }
-    if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
+    if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name[[i]])
     else curr_col_name = col_name[[i]]
     curr_col_name <- make.names(iconv(curr_col_name, to = "ASCII//TRANSLIT", sub = "."))
     new_col_names <- c(new_col_names, curr_col_name)
@@ -1019,23 +1018,45 @@ DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_v
 }
 )
 
+#reads passed clipboard data and saves it to selected data frame
 DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = FALSE, clip_board_text) {
-  #reads data from clipboard and saves it to selected columns
+
   #get the clipboard text contents as a data frame
   clip_tbl <- clipr::read_clip_tbl(x = clip_board_text, header = first_clip_row_is_header)
-  current_tbl <- self$get_data_frame(use_current_filter = FALSE)
   
-  #check if number of copied columns and selected columns are equal
-  if(ncol(clip_tbl) != length(col_names)){
-    stop(paste("number of columns are not the same.",
-               "Selected columns:", length(col_names), ". Copied columns:", ncol(clip_tbl)) )
-  }
+  #get the selected data frame
+  current_tbl <- self$get_data_frame(use_current_filter = FALSE)
   
   #check if copied data rows are more than current data rows
   if( nrow(clip_tbl) > nrow(current_tbl) ){
     stop(paste("rows copied cannot be more than number of rows in the data frame.",
                "Current data frame rows:", nrow(current_tbl), ". Copied rows:", nrow(clip_tbl)) )
   }
+  
+ 
+  #if column names are missing then just add the clip data as new columns and quit function
+  if( missing(col_names) ){
+    #append missing values if rows are less than the selected data frame. 
+    #new column rows should be equal to existing column rows
+    if( nrow(clip_tbl) < nrow(current_tbl) ){
+      empty_values_df <- data.frame(data = matrix(data = NA, nrow = ( nrow(current_tbl) - nrow(clip_tbl) ), ncol = ncol(clip_tbl) ))
+      names(empty_values_df) <- names(clip_tbl)
+      clip_tbl <- rbind(clip_tbl, empty_values_df)
+    }
+    new_col_names <- colnames(clip_tbl)
+    for(index in seq_along(new_col_names)){
+      self$add_columns_to_data(col_name = new_col_names[index], col_data = clip_tbl[, index])
+    }
+    return()
+  }
+  
+  #for existing column names
+  #check if number of copied columns and selected columns are equal
+  if(ncol(clip_tbl) != length(col_names)){
+    stop(paste("number of columns are not the same.",
+               "Selected columns:", length(col_names), ". Copied columns:", ncol(clip_tbl)) )
+  }
+  
   
   #check copied data integrity
   for(index in seq_along(col_names)){
@@ -2138,9 +2159,11 @@ DataSheet$set("public", "get_object", function(object_name) {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
-  if (object_type %in% c("object", "graph", "table","model")){
+  if (object_type %in% c("object", "graph", "table","model","structure","summary")){
+
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
     if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$objects)[names(private$objects) == object_name] <- new_name
@@ -2168,8 +2191,10 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
-  if(any(object_type %in% c("object", "graph", "table","model"))){
+  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+
+  if(any(object_type %in% c("object", "graph", "table","model","structure","summary"))){
+
       if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
       private$objects[names(private$objects) %in% object_names] <- NULL
     }else if(object_type == "filter"){
