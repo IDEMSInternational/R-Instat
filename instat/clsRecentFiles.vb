@@ -273,15 +273,17 @@ Public Class clsRecentFiles
                     AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                     'insert into DropDownItems list...
                     mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
-                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 145)
+                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 235)
                 End If
 
                 If mnuFileIcon IsNot Nothing Then
+                    Dim linkMenuItem As LinkLabel = New LinkLabel
                     Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
                     clsItem.ToolTipText = strPath
                     clsItem.Tag = "MRU:" & strPath
                     AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                     mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItem)
+                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 235)
                 End If
 
                 If ucrDataViewWindow IsNot Nothing Then
