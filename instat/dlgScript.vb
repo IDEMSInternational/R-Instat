@@ -192,7 +192,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsRLink.RunScriptFromWindow(strNewScript:=txtScript.Text, strNewComment:=strComment)
+        frmMain.clsRLink.RunScriptFromWindow(txtScript.Text.Trim(vbLf), strComment:=strComment)
     End Sub
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
