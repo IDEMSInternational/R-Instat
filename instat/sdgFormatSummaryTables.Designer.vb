@@ -80,9 +80,9 @@ Partial Class sdgFormatSummaryTables
         '
         'tbpTitle
         '
-        Me.tbpTitle.Controls.Add(Me.grpSubtitle)
         Me.tbpTitle.Controls.Add(Me.ucrChkIncludeTitles)
         Me.tbpTitle.Controls.Add(Me.grpTitle)
+        Me.tbpTitle.Controls.Add(Me.grpSubtitle)
         Me.tbpTitle.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitle.Name = "tbpTitle"
         Me.tbpTitle.Padding = New System.Windows.Forms.Padding(3)
@@ -93,16 +93,16 @@ Partial Class sdgFormatSummaryTables
         '
         'grpSubtitle
         '
-        Me.grpSubtitle.Controls.Add(Me.cmdSubtitleFont)
         Me.grpSubtitle.Controls.Add(Me.cmdSubtitleFormat)
         Me.grpSubtitle.Controls.Add(Me.lblSubtitleFootnote)
         Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitleFootnote)
         Me.grpSubtitle.Controls.Add(Me.ucrChkSubtitleFootnote)
         Me.grpSubtitle.Controls.Add(Me.ucrInputSubtitle)
         Me.grpSubtitle.Controls.Add(Me.lblSubtitle)
-        Me.grpSubtitle.Location = New System.Drawing.Point(12, 223)
+        Me.grpSubtitle.Controls.Add(Me.cmdSubtitleFont)
+        Me.grpSubtitle.Location = New System.Drawing.Point(12, 224)
         Me.grpSubtitle.Name = "grpSubtitle"
-        Me.grpSubtitle.Size = New System.Drawing.Size(479, 120)
+        Me.grpSubtitle.Size = New System.Drawing.Size(479, 119)
         Me.grpSubtitle.TabIndex = 10
         Me.grpSubtitle.TabStop = False
         Me.grpSubtitle.Text = "Subtitle"
@@ -190,7 +190,7 @@ Partial Class sdgFormatSummaryTables
         Me.ucrChkIncludeTitles.Location = New System.Drawing.Point(9, 18)
         Me.ucrChkIncludeTitles.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkIncludeTitles.Name = "ucrChkIncludeTitles"
-        Me.ucrChkIncludeTitles.Size = New System.Drawing.Size(156, 34)
+        Me.ucrChkIncludeTitles.Size = New System.Drawing.Size(156, 26)
         Me.ucrChkIncludeTitles.TabIndex = 1
         '
         'grpTitle

@@ -127,6 +127,9 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction = New RFunction
         clsSummaryOperator = New ROperator
         clsPivotWiderFunction = New RFunction
+        clsStubFunction = New RFunction
+        clsStubCellsFunction = New RFunction
+        clsStubFootnoteFunction = New RFunction
 
         clsTableTitleFunction = New RFunction
         clsTabFootnoteTitleFunction = New RFunction
@@ -161,6 +164,15 @@ Public Class dlgOneVariableSummarise
         clsTabStyleFunction.SetPackageName("gt")
         clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
         clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
+
+        clsStubFunction.SetPackageName("gt")
+        clsStubFunction.SetRCommand("tab_stubhead")
+
+        clsStubCellsFunction.SetPackageName("gt")
+        clsStubCellsFunction.SetRCommand("cells_stubhead")
+
+        clsStubFootnoteFunction.SetPackageName("gt")
+        clsStubFootnoteFunction.SetRCommand("tab_footnote")
 
         clsTabStyleCellTitleFunction.SetPackageName("gt")
         clsTabStyleCellTitleFunction.SetRCommand("cells_title")
