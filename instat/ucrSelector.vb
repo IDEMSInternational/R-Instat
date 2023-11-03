@@ -149,6 +149,8 @@ Public Class ucrSelector
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
                                       strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
         If Not CurrentReceiver.bExcludeFromSelector Then
+            'TODO. Investigate why this has to be called here instead of just being called in ucrReceiver control.SetControlValue()
+            'See PR #8605 for related comments added in ucrReceiver.
             CurrentReceiver.RemoveAnyVariablesNotInSelector() 'this needed for the multiple receiver(s) where the autofill is not applied
         End If
         EnableDataOptions(strCurrentType)
