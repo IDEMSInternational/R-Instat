@@ -187,7 +187,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(24, 107)
         Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
         Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(126, 24)
-        Me.ucrChkUseasNumeric.TabIndex = 35
+        Me.ucrChkUseasNumeric.TabIndex = 4
         '
         'ucrReceiverY
         '
@@ -199,7 +199,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrReceiverY.Selector = Nothing
         Me.ucrReceiverY.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 32
+        Me.ucrReceiverY.TabIndex = 1
         Me.ucrReceiverY.ucrSelector = Nothing
         '
         'lblYVariable
@@ -209,7 +209,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblYVariable.Location = New System.Drawing.Point(26, 23)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblYVariable.TabIndex = 31
+        Me.lblYVariable.TabIndex = 0
         Me.lblYVariable.Tag = "Y_Variable:"
         Me.lblYVariable.Text = "Y Variable:"
         '
@@ -220,7 +220,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblXVariable.Location = New System.Drawing.Point(26, 67)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 33
+        Me.lblXVariable.TabIndex = 2
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
         '
@@ -234,7 +234,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(125, 27)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 34
+        Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'lblLabel
@@ -244,7 +244,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblLabel.Location = New System.Drawing.Point(27, 213)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(36, 13)
-        Me.lblLabel.TabIndex = 29
+        Me.lblLabel.TabIndex = 8
         Me.lblLabel.Tag = "Label:"
         Me.lblLabel.Text = "Label:"
         '
@@ -258,7 +258,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrLabelReceiver.Selector = Nothing
         Me.ucrLabelReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrLabelReceiver.strNcFilePath = ""
-        Me.ucrLabelReceiver.TabIndex = 30
+        Me.ucrLabelReceiver.TabIndex = 9
         Me.ucrLabelReceiver.ucrSelector = Nothing
         '
         'lblColour
@@ -268,7 +268,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblColour.Location = New System.Drawing.Point(27, 173)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(40, 13)
-        Me.lblColour.TabIndex = 27
+        Me.lblColour.TabIndex = 6
         Me.lblColour.Tag = "Fill_Colour:"
         Me.lblColour.Text = "Colour:"
         '
@@ -282,7 +282,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrColourReceiver.Selector = Nothing
         Me.ucrColourReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrColourReceiver.strNcFilePath = ""
-        Me.ucrColourReceiver.TabIndex = 28
+        Me.ucrColourReceiver.TabIndex = 7
         Me.ucrColourReceiver.ucrSelector = Nothing
         '
         'lblFill
@@ -292,7 +292,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblFill.Location = New System.Drawing.Point(27, 134)
         Me.lblFill.Name = "lblFill"
         Me.lblFill.Size = New System.Drawing.Size(22, 13)
-        Me.lblFill.TabIndex = 25
+        Me.lblFill.TabIndex = 4
         Me.lblFill.Tag = "Fill_Colour:"
         Me.lblFill.Text = "Fill:"
         '
@@ -306,7 +306,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrFillReceiver.Selector = Nothing
         Me.ucrFillReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrFillReceiver.strNcFilePath = ""
-        Me.ucrFillReceiver.TabIndex = 26
+        Me.ucrFillReceiver.TabIndex = 5
         Me.ucrFillReceiver.ucrSelector = Nothing
         '
         'ContextMenuPackagesList
@@ -489,7 +489,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkFlipCoordinates.Checked = False
         Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 308)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(174, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
         '
         'ucrChkLegend
