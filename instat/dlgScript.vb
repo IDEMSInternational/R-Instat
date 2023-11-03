@@ -203,39 +203,26 @@ Public Class dlgScript
     End Sub
 
     Private Sub SetData()
-
+        ucrDataFrameGet.SetVisible(False)
+        ucrSelectorGet.SetVisible(False)
+        ucrReceiverGet.SetVisible(False)
+        If rdoGetDataFrame.Checked Then
+            ucrDataFrameGet.SetVisible(True)
+            Dim strAssignTo = ucrDataFrameGet.strCurrDataFrame
+            SetPreviewScript(clsGetDataFrameFunction, strAssignTo)
+        Else
+            ucrSelectorGet.SetVisible(True)
+            ucrReceiverGet.SetVisible(True)
+            SetGetReceiverItemType()
+            Dim strAssignTo = ucrReceiverGet.GetVariableNames(False)
+            If Not String.IsNullOrEmpty(strAssignTo) Then
+                Dim clsGetColumnFunction As RFunction = ucrReceiverGet.GetVariables
+                SetPreviewScript(clsGetColumnFunction, strAssignTo)
+            Else
+                ucrInputPreviewLibrary.txtInput.Clear()
+            End If
+        End If
     End Sub
-    'Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '    SetDefaults()
-    '    SetRCodeForControls(True)
-    'End Sub
-
-    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    frmMain.clsRLink.RunScriptFromWindow(txtScript.Text.Trim(vbLf), strComment:=strComment)
-    'End Sub
-
-    'Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
-    '    ucrComboGetPackage.SetVisible(False)
-    '    ucrDataFrameGet.SetVisible(False)
-    '    ucrSelectorGet.SetVisible(False)
-    '    ucrReceiverGet.SetVisible(False)
-    '    If rdoGetDataFrame.Checked Then
-    '        ucrDataFrameGet.SetVisible(True)
-    '        Dim strAssignTo = ucrDataFrameGet.strCurrDataFrame
-    '        SetPreviewScript(clsGetDataFrameFunction, strAssignTo)
-    '    Else
-    '        ucrSelectorGet.SetVisible(True)
-    '        ucrReceiverGet.SetVisible(True)
-    '        SetGetReceiverItemType()
-    '        Dim strAssignTo = ucrReceiverGet.GetVariableNames(False)
-    '        If Not String.IsNullOrEmpty(strAssignTo) Then
-    '            Dim clsGetColumnFunction As RFunction = ucrReceiverGet.GetVariables
-    '            SetPreviewScript(clsGetColumnFunction, strAssignTo)
-    '        Else
-    '            ucrInputPreviewLibrary.txtInput.Clear()
-    '        End If
-    '    End If
-    'End Sub
 
     Private Sub FillListViewWithDatasets(dfDataframe As DataFrame)
         Dim lstItem As ListViewItem
@@ -383,7 +370,9 @@ Public Class dlgScript
     End Sub
 
     Private Sub SetPackage(strPackage As String)
-        ucrInputPreviewLibrary.SetText(GetPreviewText(clsLibraryFunction))
+        Dim strPreview = GetPreviewText(clsLibraryFunction)
+
+        ucrInputPreviewLibrary.SetText(strPreview)
     End Sub
 
     Private Sub ucrComboGetPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboGetPackage.ControlValueChanged
@@ -448,7 +437,9 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrInputPreviewLibrary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPreviewLibrary.ControlContentsChanged
-        clsTempPreviewFunction.AddParameter("text", ucrInputPreviewLibrary.GetText)
+        If ucrInputPreviewLibrary.GetText <> "" Then
+            clsTempPreviewFunction.AddParameter("text", ucrInputPreviewLibrary.GetText, iPosition:=0)
+        End If
         TestOkEnabled()
     End Sub
 
