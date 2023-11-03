@@ -64,12 +64,13 @@ Public Class ucrScript
         mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
         mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
         mnuHelp.ToolTipText = "Display the Script Window help information."
+        mnuInsertScript.ToolTipText = "Insert script in the current tab."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentStatementSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
-        'Make the log tab the selected tab
-        TabControl.SelectTab(iTabIndexLog)
+        'Make the script tab the selected tab
+        TabControl.SelectTab(1)
     End Sub
 
     Private Sub SetupInitialLayout()
@@ -212,7 +213,7 @@ Public Class ucrScript
                 Try
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
                     bIsTextChanged = False
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
                     frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
                     frmMain.bDataSaved = True
                     If bIsLog Then
@@ -526,7 +527,7 @@ Public Class ucrScript
 
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
+                TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgLoad.FileName)
                 strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
                 bIsTextChanged = False
                 frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
@@ -958,5 +959,51 @@ Public Class ucrScript
             MsgBox("Developer error: could not find editor window in tab.")
         End If
     End Sub
+
+
+    Private Sub TabControl_DoubleClick(sender As Object, e As EventArgs) Handles TabControl.DoubleClick
+        Dim rectangle = TabControl.GetTabRect(TabControl.SelectedIndex())
+        rectangle = TabControl.RectangleToScreen(rectangle)
+        rectangle = TabControl.Parent.RectangleToClient(rectangle)
+        Dim textbox As New System.Windows.Forms.TextBox
+
+        AddHandler textbox.Leave, AddressOf RenameTextboxLeave
+        AddHandler textbox.KeyDown, AddressOf RenameTextboxKeyDown
+        textbox.SetBounds(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height)
+        Me.Controls.Add(textbox)
+        textbox.BringToFront()
+        textbox.Focus()
+    End Sub
+
+    Private Sub RenameTextboxKeyDown(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            TabControl.SelectedTab.Text = sender.text
+            'Move focus from the textbox - this will make it dispose
+            TabControl.SelectedTab.Focus()
+        End If
+    End Sub
+
+    Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
+        TabControl.SelectedTab.Text = sender.text
+        sender.Dispose()
+    End Sub
+
+    ''' <summary>
+    ''' Insert <paramref name="strText"/> to the current cursor position in the active tab.
+    ''' </summary>
+    ''' <param name="iCurrentPosition"> The current cursor position in the active tab.</param>
+    ''' <param name="strText"> The text to insert to the contents of the active tab.</param>
+    Public Sub InsertText(iCurrentPosition As Integer, strText As String)
+        strText = strText & Environment.NewLine
+        clsScriptActive.InsertText(iCurrentPosition, strText)
+        Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
+        clsScriptActive.GotoPosition(iNextLinePos)
+    End Sub
+
+    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
+        dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
+        dlgScript.ShowDialog()
+    End Sub
+
 
 End Class
