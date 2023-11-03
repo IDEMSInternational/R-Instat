@@ -38,6 +38,13 @@ Public Class dlgReorderObjects
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 351
 
+        ucrPnlOptions.AddRadioButton(rdoOutputObjects)
+        ucrPnlOptions.AddRadioButton(rdoDataObjects)
+        'todo disabled until functionality of viewing data objects is implemented
+        rdoDataObjects.Enabled = False
+        ucrPnlOptions.AddFunctionNamesCondition(rdoOutputObjects, frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
+
+
         ' ucrSelector DataFrame
         ucrDataFrameReorder.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameReorder.SetParameterIsString()

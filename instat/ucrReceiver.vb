@@ -486,14 +486,18 @@ Public Class ucrReceiver
                         Next
 
                         DirectCast(Me, ucrReceiverMultiple).AddMultiple(lstItems)
+                        'TODO. In PR #8605, this subroutine was found to also be called in the selector control when LoadList is called (CurrentReceiver.RemoveAnyVariablesNotInSelector()).
+                        'This can lead to slow perfomance in dialogs when it comes to wide datasets
                         RemoveAnyVariablesNotInSelector() 'needed due to the Autofill option
                     Else
                         For Each strTemp As String In lstCurrentVariables
                             'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
                             '     Needs to change eventually.
+                            'TODO. This subroutine call also makes the single receiver automatically clear deleted columns when dialogs are reopened
+                            'However, it does not clear output objects and other data objects. What causes clearing of such objects is  
+                            'when CurrentReceiver.RemoveAnyVariablesNotInSelector() is called in the LoadList() of selector control
                             Add(strTemp, strTempDataName)
                         Next
-
                     End If
 
 

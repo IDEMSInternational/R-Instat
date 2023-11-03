@@ -202,6 +202,17 @@ Public Class dlgScript
     End Sub
 
     Private Sub SetData()
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.clsRLink.RunScriptFromWindow(txtScript.Text.Trim(vbLf), strComment:=strComment)
+    End Sub
+
+    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
+        ucrComboGetPackage.SetVisible(False)
         ucrDataFrameGet.SetVisible(False)
         ucrSelectorGet.SetVisible(False)
         ucrReceiverGet.SetVisible(False)

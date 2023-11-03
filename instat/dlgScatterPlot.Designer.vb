@@ -51,11 +51,24 @@ Partial Class dlgScatterPlot
         Me.toolStripMenuItemSmoothOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTextrepelOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemJitterOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblWidth = New System.Windows.Forms.Label()
+        Me.toolStripMenuItemCountOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.grpGeom = New System.Windows.Forms.GroupBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrInputLegend = New instat.ucrInputComboBox()
+        Me.lblLegend = New System.Windows.Forms.Label()
+        Me.ucrInputShape = New instat.ucrInputComboBox()
+        Me.lblPointsize = New System.Windows.Forms.Label()
+        Me.ucrNudPointsize = New instat.ucrNud()
+        Me.lblShape = New System.Windows.Forms.Label()
+        Me.rdoCount = New System.Windows.Forms.RadioButton()
+        Me.rdoPoint = New System.Windows.Forms.RadioButton()
         Me.lblHeith = New System.Windows.Forms.Label()
         Me.ucrNudHeigth = New instat.ucrNud()
+        Me.lblWidth = New System.Windows.Forms.Label()
         Me.ucrNudWidth = New instat.ucrNud()
-        Me.ucrChkJitter = New instat.ucrCheck()
+        Me.rdoJitter = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlGeoms = New instat.UcrPanel()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputSides = New instat.ucrInputComboBox()
         Me.ucrNudSize = New instat.ucrNud()
@@ -70,13 +83,14 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.contextMenuStripOptions.SuspendLayout()
+        Me.grpGeom.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblFactorOptional
         '
         Me.lblFactorOptional.AutoSize = True
         Me.lblFactorOptional.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorOptional.Location = New System.Drawing.Point(334, 224)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(347, 224)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(111, 13)
         Me.lblFactorOptional.TabIndex = 4
@@ -87,7 +101,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblXVariable.AutoSize = True
         Me.lblXVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXVariable.Location = New System.Drawing.Point(334, 175)
+        Me.lblXVariable.Location = New System.Drawing.Point(347, 175)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 2
@@ -98,7 +112,7 @@ Partial Class dlgScatterPlot
         '
         Me.lblVariable.AutoSize = True
         Me.lblVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVariable.Location = New System.Drawing.Point(334, 273)
+        Me.lblVariable.Location = New System.Drawing.Point(347, 273)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(125, 13)
         Me.lblVariable.TabIndex = 6
@@ -125,62 +139,188 @@ Partial Class dlgScatterPlot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemRugOptions, Me.toolStripMenuItemSmoothOptions, Me.toolStripMenuItemTextrepelOptions, Me.toolStripMenuItemJitterOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemPointOptions, Me.toolStripMenuItemRugOptions, Me.toolStripMenuItemSmoothOptions, Me.toolStripMenuItemTextrepelOptions, Me.toolStripMenuItemJitterOptions, Me.toolStripMenuItemCountOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(172, 158)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(171, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemPointOptions
         '
         Me.toolStripMenuItemPointOptions.Name = "toolStripMenuItemPointOptions"
-        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPointOptions.Size = New System.Drawing.Size(171, 22)
         Me.toolStripMenuItemPointOptions.Text = "Point Options"
         '
         'toolStripMenuItemRugOptions
         '
         Me.toolStripMenuItemRugOptions.Name = "toolStripMenuItemRugOptions"
-        Me.toolStripMenuItemRugOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemRugOptions.Size = New System.Drawing.Size(171, 22)
         Me.toolStripMenuItemRugOptions.Text = "Rug Options"
         '
         'toolStripMenuItemSmoothOptions
         '
         Me.toolStripMenuItemSmoothOptions.Name = "toolStripMenuItemSmoothOptions"
-        Me.toolStripMenuItemSmoothOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemSmoothOptions.Size = New System.Drawing.Size(171, 22)
         Me.toolStripMenuItemSmoothOptions.Text = "Smooth Options"
         '
         'toolStripMenuItemTextrepelOptions
         '
         Me.toolStripMenuItemTextrepelOptions.Name = "toolStripMenuItemTextrepelOptions"
-        Me.toolStripMenuItemTextrepelOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTextrepelOptions.Size = New System.Drawing.Size(171, 22)
         Me.toolStripMenuItemTextrepelOptions.Text = "Text_repel Options"
         '
         'toolStripMenuItemJitterOptions
         '
         Me.toolStripMenuItemJitterOptions.Name = "toolStripMenuItemJitterOptions"
-        Me.toolStripMenuItemJitterOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemJitterOptions.Size = New System.Drawing.Size(171, 22)
         Me.toolStripMenuItemJitterOptions.Text = "Jitter Options"
         '
-        'lblWidth
+        'toolStripMenuItemCountOptions
         '
-        Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(111, 314)
-        Me.lblWidth.Name = "lblWidth"
-        Me.lblWidth.Size = New System.Drawing.Size(38, 13)
-        Me.lblWidth.TabIndex = 19
-        Me.lblWidth.Text = "Width:"
+        Me.toolStripMenuItemCountOptions.Name = "toolStripMenuItemCountOptions"
+        Me.toolStripMenuItemCountOptions.Size = New System.Drawing.Size(171, 22)
+        Me.toolStripMenuItemCountOptions.Text = "Count Options"
+        '
+        'grpGeom
+        '
+        Me.grpGeom.Controls.Add(Me.ucrInputPosition)
+        Me.grpGeom.Controls.Add(Me.lblPosition)
+        Me.grpGeom.Controls.Add(Me.ucrInputLegend)
+        Me.grpGeom.Controls.Add(Me.lblLegend)
+        Me.grpGeom.Controls.Add(Me.ucrInputShape)
+        Me.grpGeom.Controls.Add(Me.lblPointsize)
+        Me.grpGeom.Controls.Add(Me.ucrNudPointsize)
+        Me.grpGeom.Controls.Add(Me.lblShape)
+        Me.grpGeom.Controls.Add(Me.rdoCount)
+        Me.grpGeom.Controls.Add(Me.rdoPoint)
+        Me.grpGeom.Controls.Add(Me.lblHeith)
+        Me.grpGeom.Controls.Add(Me.ucrNudHeigth)
+        Me.grpGeom.Controls.Add(Me.lblWidth)
+        Me.grpGeom.Controls.Add(Me.ucrNudWidth)
+        Me.grpGeom.Controls.Add(Me.rdoJitter)
+        Me.grpGeom.Controls.Add(Me.ucrPnlGeoms)
+        Me.grpGeom.Location = New System.Drawing.Point(10, 298)
+        Me.grpGeom.Name = "grpGeom"
+        Me.grpGeom.Size = New System.Drawing.Size(334, 122)
+        Me.grpGeom.TabIndex = 23
+        Me.grpGeom.TabStop = False
+        Me.grpGeom.Text = "Geoms"
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        Me.ucrInputPosition.Location = New System.Drawing.Point(240, 52)
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(83, 21)
+        Me.ucrInputPosition.TabIndex = 39
+        '
+        'lblPosition
+        '
+        Me.lblPosition.AutoSize = True
+        Me.lblPosition.Location = New System.Drawing.Point(192, 57)
+        Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
+        Me.lblPosition.TabIndex = 38
+        Me.lblPosition.Text = "Position:"
+        '
+        'ucrInputLegend
+        '
+        Me.ucrInputLegend.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegend.GetSetSelectedIndex = -1
+        Me.ucrInputLegend.IsReadOnly = False
+        Me.ucrInputLegend.Location = New System.Drawing.Point(113, 52)
+        Me.ucrInputLegend.Name = "ucrInputLegend"
+        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputLegend.TabIndex = 37
+        '
+        'lblLegend
+        '
+        Me.lblLegend.AutoSize = True
+        Me.lblLegend.Location = New System.Drawing.Point(59, 57)
+        Me.lblLegend.Name = "lblLegend"
+        Me.lblLegend.Size = New System.Drawing.Size(46, 13)
+        Me.lblLegend.TabIndex = 36
+        Me.lblLegend.Text = "Legend:"
+        '
+        'ucrInputShape
+        '
+        Me.ucrInputShape.AddQuotesIfUnrecognised = True
+        Me.ucrInputShape.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputShape.GetSetSelectedIndex = -1
+        Me.ucrInputShape.IsReadOnly = False
+        Me.ucrInputShape.Location = New System.Drawing.Point(227, 16)
+        Me.ucrInputShape.Name = "ucrInputShape"
+        Me.ucrInputShape.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputShape.TabIndex = 35
+        '
+        'lblPointsize
+        '
+        Me.lblPointsize.AutoSize = True
+        Me.lblPointsize.Location = New System.Drawing.Point(59, 21)
+        Me.lblPointsize.Name = "lblPointsize"
+        Me.lblPointsize.Size = New System.Drawing.Size(30, 13)
+        Me.lblPointsize.TabIndex = 33
+        Me.lblPointsize.Text = "Size:"
+        '
+        'ucrNudPointsize
+        '
+        Me.ucrNudPointsize.AutoSize = True
+        Me.ucrNudPointsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPointsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPointsize.Location = New System.Drawing.Point(113, 17)
+        Me.ucrNudPointsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPointsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPointsize.Name = "ucrNudPointsize"
+        Me.ucrNudPointsize.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudPointsize.TabIndex = 34
+        Me.ucrNudPointsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblShape
+        '
+        Me.lblShape.AutoSize = True
+        Me.lblShape.Location = New System.Drawing.Point(186, 21)
+        Me.lblShape.Name = "lblShape"
+        Me.lblShape.Size = New System.Drawing.Size(41, 13)
+        Me.lblShape.TabIndex = 31
+        Me.lblShape.Text = "Shape:"
+        '
+        'rdoCount
+        '
+        Me.rdoCount.AutoSize = True
+        Me.rdoCount.Location = New System.Drawing.Point(4, 55)
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
+        Me.rdoCount.TabIndex = 30
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
+        'rdoPoint
+        '
+        Me.rdoPoint.AutoSize = True
+        Me.rdoPoint.Location = New System.Drawing.Point(4, 20)
+        Me.rdoPoint.Name = "rdoPoint"
+        Me.rdoPoint.Size = New System.Drawing.Size(49, 17)
+        Me.rdoPoint.TabIndex = 29
+        Me.rdoPoint.TabStop = True
+        Me.rdoPoint.Text = "Point"
+        Me.rdoPoint.UseVisualStyleBackColor = True
         '
         'lblHeith
         '
         Me.lblHeith.AutoSize = True
-        Me.lblHeith.Location = New System.Drawing.Point(221, 314)
+        Me.lblHeith.Location = New System.Drawing.Point(182, 92)
         Me.lblHeith.Name = "lblHeith"
         Me.lblHeith.Size = New System.Drawing.Size(41, 13)
-        Me.lblHeith.TabIndex = 21
+        Me.lblHeith.TabIndex = 27
         Me.lblHeith.Text = "Heigth:"
         '
         'ucrNudHeigth
@@ -188,35 +328,54 @@ Partial Class dlgScatterPlot
         Me.ucrNudHeigth.AutoSize = True
         Me.ucrNudHeigth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHeigth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHeigth.Location = New System.Drawing.Point(262, 312)
+        Me.ucrNudHeigth.Location = New System.Drawing.Point(223, 90)
         Me.ucrNudHeigth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudHeigth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHeigth.Name = "ucrNudHeigth"
         Me.ucrNudHeigth.Size = New System.Drawing.Size(45, 20)
-        Me.ucrNudHeigth.TabIndex = 22
+        Me.ucrNudHeigth.TabIndex = 28
         Me.ucrNudHeigth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblWidth
+        '
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.Location = New System.Drawing.Point(59, 92)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(38, 13)
+        Me.lblWidth.TabIndex = 25
+        Me.lblWidth.Text = "Width:"
         '
         'ucrNudWidth
         '
         Me.ucrNudWidth.AutoSize = True
         Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(152, 312)
+        Me.ucrNudWidth.Location = New System.Drawing.Point(113, 90)
         Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Name = "ucrNudWidth"
         Me.ucrNudWidth.Size = New System.Drawing.Size(45, 20)
-        Me.ucrNudWidth.TabIndex = 20
+        Me.ucrNudWidth.TabIndex = 26
         Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkJitter
+        'rdoJitter
         '
-        Me.ucrChkJitter.AutoSize = True
-        Me.ucrChkJitter.Checked = False
-        Me.ucrChkJitter.Location = New System.Drawing.Point(10, 312)
-        Me.ucrChkJitter.Name = "ucrChkJitter"
-        Me.ucrChkJitter.Size = New System.Drawing.Size(89, 23)
-        Me.ucrChkJitter.TabIndex = 18
+        Me.rdoJitter.AutoSize = True
+        Me.rdoJitter.Location = New System.Drawing.Point(4, 90)
+        Me.rdoJitter.Name = "rdoJitter"
+        Me.rdoJitter.Size = New System.Drawing.Size(47, 17)
+        Me.rdoJitter.TabIndex = 24
+        Me.rdoJitter.TabStop = True
+        Me.rdoJitter.Text = "Jitter"
+        Me.rdoJitter.UseVisualStyleBackColor = True
+        '
+        'ucrPnlGeoms
+        '
+        Me.ucrPnlGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlGeoms.Location = New System.Drawing.Point(2, 14)
+        Me.ucrPnlGeoms.Name = "ucrPnlGeoms"
+        Me.ucrPnlGeoms.Size = New System.Drawing.Size(321, 102)
+        Me.ucrPnlGeoms.TabIndex = 24
         '
         'cmdOptions
         '
@@ -268,7 +427,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrReceiverLabel.AutoSize = True
         Me.ucrReceiverLabel.frmParent = Me
-        Me.ucrReceiverLabel.Location = New System.Drawing.Point(334, 289)
+        Me.ucrReceiverLabel.Location = New System.Drawing.Point(347, 289)
         Me.ucrReceiverLabel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
         Me.ucrReceiverLabel.Selector = Nothing
@@ -298,7 +457,7 @@ Partial Class dlgScatterPlot
         'ucrSaveScatterPlot
         '
         Me.ucrSaveScatterPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 346)
+        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 428)
         Me.ucrSaveScatterPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
         Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(312, 24)
@@ -320,7 +479,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrVariablesAsFactorForScatter.AutoSize = True
         Me.ucrVariablesAsFactorForScatter.frmParent = Me
-        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(334, 30)
+        Me.ucrVariablesAsFactorForScatter.Location = New System.Drawing.Point(347, 30)
         Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
         Me.ucrVariablesAsFactorForScatter.Selector = Nothing
         Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
@@ -333,7 +492,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrFactorOptionalReceiver.AutoSize = True
         Me.ucrFactorOptionalReceiver.frmParent = Me
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(334, 237)
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(347, 237)
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
@@ -346,7 +505,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(334, 188)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(347, 188)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
@@ -359,7 +518,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 377)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 459)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
@@ -369,12 +528,8 @@ Partial Class dlgScatterPlot
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(477, 438)
-        Me.Controls.Add(Me.lblHeith)
-        Me.Controls.Add(Me.ucrNudHeigth)
-        Me.Controls.Add(Me.lblWidth)
-        Me.Controls.Add(Me.ucrNudWidth)
-        Me.Controls.Add(Me.ucrChkJitter)
+        Me.ClientSize = New System.Drawing.Size(483, 521)
+        Me.Controls.Add(Me.grpGeom)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputSides)
         Me.Controls.Add(Me.lblSides)
@@ -398,8 +553,10 @@ Partial Class dlgScatterPlot
         Me.MinimizeBox = False
         Me.Name = "dlgScatterPlot"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Point Plot"
+        Me.Text = "Scatter Plot"
         Me.contextMenuStripOptions.ResumeLayout(False)
+        Me.grpGeom.ResumeLayout(False)
+        Me.grpGeom.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -429,10 +586,23 @@ Partial Class dlgScatterPlot
     Friend WithEvents toolStripMenuItemRugOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemSmoothOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTextrepelOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemJitterOptions As ToolStripMenuItem
+    Friend WithEvents grpGeom As GroupBox
     Friend WithEvents lblHeith As Label
     Friend WithEvents ucrNudHeigth As ucrNud
     Friend WithEvents lblWidth As Label
     Friend WithEvents ucrNudWidth As ucrNud
-    Friend WithEvents ucrChkJitter As ucrCheck
-    Friend WithEvents toolStripMenuItemJitterOptions As ToolStripMenuItem
+    Friend WithEvents rdoJitter As RadioButton
+    Friend WithEvents ucrPnlGeoms As UcrPanel
+    Friend WithEvents rdoCount As RadioButton
+    Friend WithEvents rdoPoint As RadioButton
+    Friend WithEvents toolStripMenuItemCountOptions As ToolStripMenuItem
+    Friend WithEvents lblPointsize As Label
+    Friend WithEvents ucrNudPointsize As ucrNud
+    Friend WithEvents lblShape As Label
+    Friend WithEvents ucrInputShape As ucrInputComboBox
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrInputLegend As ucrInputComboBox
+    Friend WithEvents lblLegend As Label
 End Class
