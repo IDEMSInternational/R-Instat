@@ -740,13 +740,6 @@ Public Class ucrDataView
         linkMenuItem.Height = 13
         linkMenuItem.LinkBehavior = LinkBehavior.NeverUnderline
         linkMenuItem.AutoSize = True
-        linkMenuItem.Text = TruncateLabelText(linkMenuItem, linkMenuItem.Text, 235)
-
-        ' Create a ToolTip instance.
-        Dim tooltip As New ToolTip()
-
-        ' Set the tooltip texts for the labels.
-        tooltip.SetToolTip(linkMenuItem, linkMenuItem.Text)
 
         'add the link control.
         panelRecentMenuItems.Controls.Add(linkMenuItem)
@@ -1010,22 +1003,4 @@ Public Class ucrDataView
         _grid.SelectColumnInGrid(strColumn)
     End Sub
 
-    Private Function TruncateLabelText(label As Label, strName As String, maximumWidth As Integer) As String
-        Dim graphics As Graphics = label.CreateGraphics()
-        Dim font As Font = label.Font
-        Dim originalWidth As Integer = CInt(graphics.MeasureString(strName, font).Width)
-        If originalWidth > maximumWidth Then
-            Dim truncatedText As String = strName
-            Dim truncatedWidth As Integer = originalWidth
-
-            While truncatedWidth > maximumWidth AndAlso truncatedText.Length > 0
-                truncatedText = truncatedText.Substring(0, truncatedText.Length - 1)
-                truncatedWidth = CInt(graphics.MeasureString(truncatedText & "...", font).Width)
-            End While
-
-            Return truncatedText & "..."
-        Else
-            Return strName
-        End If
-    End Function
 End Class
