@@ -292,11 +292,6 @@ Public Class clsRecentFiles
                     linkMenuItem.Text = strFileName
                     linkMenuItem.Text = TruncateLabelText(linkMenuItem, strFileName, 235)
 
-                    ' Create a ToolTip instance.
-                    Dim tooltip As New ToolTip()
-
-                    ' Set the tooltip texts for the labels.
-                    tooltip.SetToolTip(linkMenuItem, strFileName)
                     linkMenuItem.Tag = strPath 'path used when the link is clicked
                     'attach link click event handler for opening the file
                     AddHandler linkMenuItem.Click, AddressOf OnMnuRecentOpenedFile_Click
