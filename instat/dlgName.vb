@@ -95,8 +95,10 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoReplace, "stringr::str_replace")
 
         ucrPnlSelectData.SetParameter(New RParameter("data", 0))
-        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "x")
-        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "y")
+        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
+        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
+        ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
+        ucrPnlSelectData.AddParameterValuesCondition(rdoSelectedColumn, "checked", "selected")
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -179,7 +181,7 @@ Public Class dlgName
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
-        clsDummyFunction.AddParameter("data", "x", iPosition:=1)
+        clsDummyFunction.AddParameter("checked", "whole", iPosition:=1)
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
@@ -219,11 +221,11 @@ Public Class dlgName
         If bReset Then
             ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
             ucrInputReplace.SetRCode(clsDefaultRFunction, bReset)
+            ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
-        ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
         ucrInputBy.SetRCode(clsDefaultRFunction, bReset)
         ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
     End Sub

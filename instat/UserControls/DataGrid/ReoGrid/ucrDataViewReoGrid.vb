@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Text.RegularExpressions
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
@@ -76,10 +77,8 @@ Public Class ucrDataViewReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
-                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") AndAlso
-                    strData IsNot Nothing Then
-                    strData = GetInnerBracketedString(strData)
-                    strData = If(strData.Contains(":"), strData.Replace(":", ", "), strData)
+                If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    strData = GetTransformedLTColumnContents(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -104,6 +103,50 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
+    ''' <summary>
+    ''' Transforms contents of LT column(s) that have structured R-like data into a more readable and user-friendly format that is consistent with R Viewer.
+    ''' For example, content like list(Birmingham = list(IATA = c("BHM", NA, NA, NA), Hartford = list(IATA = "BDL", ICAO = "KBDL")) 
+    ''' will be transformed to BHM, NA, NA, NA,BDL,KBDL
+    ''' </summary>
+    ''' <param name="strLstData">Data from column type LT</param>
+    ''' <returns>Transformed data</returns>
+    Private Function GetTransformedLTColumnContents(strLstData As String) As String
+        ' Check if strLstData is "numeric(0)", 
+        If strLstData = "numeric(0)" Then
+            '"numeric(0)" represents an empty data set in R so just return an empty output
+            Return String.Empty
+        End If
+
+        ' Check if strLstData contains "list(" or "c(". These are patterns found in R list and vector data structures.
+        If Not strLstData.Contains("list(") AndAlso Not strLstData.Contains("c(") Then
+            Return strLstData
+        End If
+
+        ' Regular expression pattern to match values inside c(...) or "..."
+        Dim pattern As String = "c\(([^)]+)\)|""([^""]+)"""
+        Dim matches As MatchCollection = Regex.Matches(strLstData, pattern)
+        Dim lstExtractedContents As New List(Of String)
+
+        ' Iterate through matches
+        For Each match As Match In matches
+            ' If it's a c(...) match, extracts the content inside the parentheses. Split the extracted content by commas, trimm extra spaces and double quotes then added to a list of extracted contents.
+            ' if it's a string "..." match, directly add the content (minus the double quotes) to the list of extracted contents.
+
+            Dim strInnerListContent As String = If(match.Value.Contains("c("), match.Groups(1).Value, match.Value)
+            Dim arrInnerListContentTrimmed As String() = strInnerListContent.Split(","c).Select(Function(item) item.Trim().Trim(""""c)).ToArray()
+            lstExtractedContents.AddRange(arrInnerListContentTrimmed)
+        Next
+
+        ' Join the extracted contents
+        Dim strExtractedContents As String = String.Join(", ", lstExtractedContents)
+
+        ' Replace ":" with ", " because, in R data structure format, colons are often used to separate key-value pairs. 
+        ' Replacing colons with commas and spaces make the data more user-friendly.
+        strExtractedContents = strExtractedContents.Replace(":", ", ")
+
+        Return strExtractedContents
+    End Function
+
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
         Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
         If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
@@ -125,19 +168,6 @@ Public Class ucrDataViewReoGrid
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
-
-    Private Function GetInnerBracketedString(strData As String) As String
-        Dim intFirstRightBracket As Integer = InStr(strData, ")")
-        Dim intLastLeftBracket As Integer = InStrRev(strData, "(")
-        If intFirstRightBracket = 0 Or intLastLeftBracket = 0 Then
-            Return strData
-        ElseIf strData = "numeric(0)" Then
-            Return String.Empty
-        Else
-            Dim strOutput As String = Mid(strData, intLastLeftBracket + 1, intFirstRightBracket - intLastLeftBracket - 1)
-            Return strOutput
-        End If
-    End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
@@ -309,10 +339,12 @@ Public Class ucrDataViewReoGrid
             ' Check if the row index is within the valid range
             If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
                 If bApplyToRows Then
-                    ' Apply the row style to the entire row
-                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
+                    For i As Integer = 0 To currWorkSheet.ColumnCount - 1
+                        ' Apply the row style to the entire row
+                        currWorkSheet.Cells(rowNumber, i).Style.BackColor = color
+                    Next
                 Else
-                    currWorkSheet.SetRangeStyles(New RangePosition(rowNumber, 0, 1, colIndex), rowStyle)
+                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
                 End If
             End If
         Next
