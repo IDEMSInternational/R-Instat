@@ -50,6 +50,7 @@ Public Class ucrScript
         toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
         toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
         toolTipScriptWindow.SetToolTip(cmdHelp, "Display the Script Window help information.")
+        toolTipScriptWindow.SetToolTip(cmdInsertScript, "Insert new line in the current tab.")
 
         mnuUndo.ToolTipText = "Undo the last change. (Ctrl+Z)"
         mnuRedo.ToolTipText = "Redo the last change. (Ctrl+Y)"
@@ -64,12 +65,13 @@ Public Class ucrScript
         mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
         mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
         mnuHelp.ToolTipText = "Display the Script Window help information."
+        mnuInsertScript.ToolTipText = "Insert script in the current tab."
 
         'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
         mnuRunCurrentStatementSelection.ShortcutKeys = Keys.Enter Or Keys.Control
 
-        'Make the log tab the selected tab
-        TabControl.SelectTab(iTabIndexLog)
+        'Make the script tab the selected tab
+        TabControl.SelectTab(1)
     End Sub
 
     Private Sub SetupInitialLayout()
@@ -200,6 +202,7 @@ Public Class ucrScript
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
             dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.FileName = TabControl.SelectedTab.Text
 
             'Ensure that dialog opens in correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
@@ -212,7 +215,7 @@ Public Class ucrScript
                 Try
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
                     bIsTextChanged = False
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
                     frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
                     frmMain.bDataSaved = True
                     If bIsLog Then
@@ -526,7 +529,7 @@ Public Class ucrScript
 
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
+                TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgLoad.FileName)
                 strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
                 bIsTextChanged = False
                 frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
@@ -938,6 +941,43 @@ Public Class ucrScript
         End If
     End Sub
 
+    ''' <summary>
+    ''' Insert <paramref name="strText"/> to the current cursor position in the active tab.
+    ''' </summary>
+    ''' <param name="iCurrentPosition"> The current cursor position in the active tab.</param>
+    ''' <param name="strText"> The text to insert to the contents of the active tab.</param>
+    Public Sub InsertText(iCurrentPosition As Integer, strText As String)
+        strText = strText & Environment.NewLine
+        clsScriptActive.InsertText(iCurrentPosition, strText)
+        Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
+        clsScriptActive.GotoPosition(iNextLinePos)
+    End Sub
+
+    Public Sub RemoveLine(strObjects As String())
+        For i As Integer = 0 To clsScriptActive.Lines.Count - 1
+            Dim lineText As String = clsScriptActive.Lines(i).Text
+
+            ' Check if the line starts with any string from the dictionary.
+            For Each str As String In strObjects
+                If lineText.StartsWith(str) Then
+                    ' Remove the line if it starts with the string.
+                    clsScriptActive.DeleteRange(i, clsScriptActive.Lines(i).Text.Length)
+                    Exit For ' Exit the loop after removing the line.
+                End If
+            Next
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Rename the script which correspond to the tab with <paramref name="strNewName"/>
+    ''' </summary>
+    ''' <param name="strNewName"> The new name to rename the active tab.</param>
+    Public Sub RenameScript(strNewName As String)
+        If strNewName <> "" Then
+            TabControl.SelectedTab.Text = strNewName
+        End If
+    End Sub
+
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
@@ -957,6 +997,38 @@ Public Class ucrScript
         If IsNothing(clsScriptActive) Then
             MsgBox("Developer error: could not find editor window in tab.")
         End If
+    End Sub
+
+    Private Sub TabControl_DoubleClick(sender As Object, e As EventArgs) Handles TabControl.DoubleClick
+        Dim rectangle = TabControl.GetTabRect(TabControl.SelectedIndex())
+        rectangle = TabControl.RectangleToScreen(rectangle)
+        rectangle = TabControl.Parent.RectangleToClient(rectangle)
+        Dim textbox As New System.Windows.Forms.TextBox
+
+        AddHandler textbox.Leave, AddressOf RenameTextboxLeave
+        AddHandler textbox.KeyDown, AddressOf RenameTextboxKeyDown
+        textbox.SetBounds(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height)
+        Me.Controls.Add(textbox)
+        textbox.BringToFront()
+        textbox.Focus()
+    End Sub
+
+    Private Sub RenameTextboxKeyDown(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            TabControl.SelectedTab.Text = sender.text
+            'Move focus from the textbox - this will make it dispose
+            TabControl.SelectedTab.Focus()
+        End If
+    End Sub
+
+    Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
+        TabControl.SelectedTab.Text = sender.text
+        sender.Dispose()
+    End Sub
+
+    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
+        dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
+        dlgScript.ShowDialog()
     End Sub
 
 End Class
