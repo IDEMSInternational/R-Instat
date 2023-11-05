@@ -553,6 +553,10 @@ Public Class frmMain
         Tool_strip.Enabled = bEnabled
     End Sub
 
+    Public Sub InsertTextToScriptWindow(iCurrentPos As Integer, strText As String)
+        ucrScriptWindow.InsertText(iCurrentPos, strText)
+    End Sub
+
     Private Sub Application_Idle(sender As Object, e As EventArgs)
         If clsInstatOptions.bAutoSaveData AndAlso Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
             AutoSaveData()
