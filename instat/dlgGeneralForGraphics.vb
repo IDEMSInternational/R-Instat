@@ -100,15 +100,13 @@ Public Class dlgGeneralForGraphics
 
         ucrFillReceiver.SetParameter(New RParameter("fill", 3))
         ucrFillReceiver.Selector = ucrGraphicsSelector
-        ucrFillReceiver.SetIncludedDataTypes({"factor"})
-        ucrFillReceiver.strSelectorHeading = "Factors"
+        ucrFillReceiver.strSelectorHeading = "Variables"
         ucrFillReceiver.bWithQuotes = False
         ucrFillReceiver.SetParameterIsString()
 
         ucrColourReceiver.SetParameter(New RParameter("colour", 4))
         ucrColourReceiver.Selector = ucrGraphicsSelector
-        ucrColourReceiver.SetIncludedDataTypes({"factor"})
-        ucrColourReceiver.strSelectorHeading = "Factors"
+        ucrColourReceiver.strSelectorHeading = "Variables"
         ucrColourReceiver.bWithQuotes = False
         ucrColourReceiver.SetParameterIsString()
 
