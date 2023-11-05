@@ -22,7 +22,7 @@ Partial Class dlgScript
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TbFeatures = New System.Windows.Forms.TabControl()
+        Me.tbFeatures = New System.Windows.Forms.TabControl()
         Me.tbPageLibrary = New System.Windows.Forms.TabPage()
         Me.ucrCboLibPackage = New instat.ucrInputComboBox()
         Me.lblGetPackage = New System.Windows.Forms.Label()
@@ -49,29 +49,29 @@ Partial Class dlgScript
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbPageFinally = New System.Windows.Forms.TabPage()
+        Me.lblRemoveObject = New System.Windows.Forms.Label()
+        Me.ucrInputRemoveObjects = New instat.ucrInputTextBox()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputFinallyRemoveObject = New instat.ucrInputTextBox()
-        Me.lblFinallyRemoveObject = New System.Windows.Forms.Label()
-        Me.TbFeatures.SuspendLayout()
+        Me.tbFeatures.SuspendLayout()
         Me.tbPageLibrary.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
         Me.tbPageFinally.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TbFeatures
+        'tbFeatures
         '
-        Me.TbFeatures.Controls.Add(Me.tbPageLibrary)
-        Me.TbFeatures.Controls.Add(Me.tbPageSaveData)
-        Me.TbFeatures.Controls.Add(Me.tbPageGetData)
-        Me.TbFeatures.Controls.Add(Me.tbPageFinally)
-        Me.TbFeatures.Location = New System.Drawing.Point(8, 7)
-        Me.TbFeatures.Name = "TbFeatures"
-        Me.TbFeatures.SelectedIndex = 0
-        Me.TbFeatures.Size = New System.Drawing.Size(446, 271)
-        Me.TbFeatures.TabIndex = 31
+        Me.tbFeatures.Controls.Add(Me.tbPageLibrary)
+        Me.tbFeatures.Controls.Add(Me.tbPageSaveData)
+        Me.tbFeatures.Controls.Add(Me.tbPageGetData)
+        Me.tbFeatures.Controls.Add(Me.tbPageFinally)
+        Me.tbFeatures.Location = New System.Drawing.Point(8, 7)
+        Me.tbFeatures.Name = "tbFeatures"
+        Me.tbFeatures.SelectedIndex = 0
+        Me.tbFeatures.Size = New System.Drawing.Size(446, 271)
+        Me.tbFeatures.TabIndex = 31
         '
         'tbPageLibrary
         '
@@ -392,14 +392,34 @@ Partial Class dlgScript
         '
         'tbPageFinally
         '
-        Me.tbPageFinally.Controls.Add(Me.lblFinallyRemoveObject)
-        Me.tbPageFinally.Controls.Add(Me.ucrInputFinallyRemoveObject)
+        Me.tbPageFinally.Controls.Add(Me.lblRemoveObject)
+        Me.tbPageFinally.Controls.Add(Me.ucrInputRemoveObjects)
         Me.tbPageFinally.Location = New System.Drawing.Point(4, 22)
         Me.tbPageFinally.Name = "tbPageFinally"
         Me.tbPageFinally.Size = New System.Drawing.Size(438, 245)
         Me.tbPageFinally.TabIndex = 3
         Me.tbPageFinally.Text = "Finally"
         Me.tbPageFinally.UseVisualStyleBackColor = True
+        '
+        'lblRemoveObject
+        '
+        Me.lblRemoveObject.AutoSize = True
+        Me.lblRemoveObject.Location = New System.Drawing.Point(14, 14)
+        Me.lblRemoveObject.Name = "lblRemoveObject"
+        Me.lblRemoveObject.Size = New System.Drawing.Size(95, 13)
+        Me.lblRemoveObject.TabIndex = 3
+        Me.lblRemoveObject.Text = "Remove Object(s):"
+        '
+        'ucrInputRemoveObjects
+        '
+        Me.ucrInputRemoveObjects.AddQuotesIfUnrecognised = True
+        Me.ucrInputRemoveObjects.AutoSize = True
+        Me.ucrInputRemoveObjects.IsMultiline = False
+        Me.ucrInputRemoveObjects.IsReadOnly = False
+        Me.ucrInputRemoveObjects.Location = New System.Drawing.Point(17, 30)
+        Me.ucrInputRemoveObjects.Name = "ucrInputRemoveObjects"
+        Me.ucrInputRemoveObjects.Size = New System.Drawing.Size(197, 21)
+        Me.ucrInputRemoveObjects.TabIndex = 2
         '
         'lblPreview
         '
@@ -430,26 +450,6 @@ Partial Class dlgScript
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
         '
-        'ucrInputFinallyRemoveObject
-        '
-        Me.ucrInputFinallyRemoveObject.AddQuotesIfUnrecognised = True
-        Me.ucrInputFinallyRemoveObject.AutoSize = True
-        Me.ucrInputFinallyRemoveObject.IsMultiline = False
-        Me.ucrInputFinallyRemoveObject.IsReadOnly = False
-        Me.ucrInputFinallyRemoveObject.Location = New System.Drawing.Point(17, 30)
-        Me.ucrInputFinallyRemoveObject.Name = "ucrInputFinallyRemoveObject"
-        Me.ucrInputFinallyRemoveObject.Size = New System.Drawing.Size(197, 21)
-        Me.ucrInputFinallyRemoveObject.TabIndex = 2
-        '
-        'lblFinallyRemoveObject
-        '
-        Me.lblFinallyRemoveObject.AutoSize = True
-        Me.lblFinallyRemoveObject.Location = New System.Drawing.Point(14, 14)
-        Me.lblFinallyRemoveObject.Name = "lblFinallyRemoveObject"
-        Me.lblFinallyRemoveObject.Size = New System.Drawing.Size(95, 13)
-        Me.lblFinallyRemoveObject.TabIndex = 3
-        Me.lblFinallyRemoveObject.Text = "Remove Object(s):"
-        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -458,7 +458,7 @@ Partial Class dlgScript
         Me.ClientSize = New System.Drawing.Size(458, 458)
         Me.Controls.Add(Me.txtScript)
         Me.Controls.Add(Me.lblPreview)
-        Me.Controls.Add(Me.TbFeatures)
+        Me.Controls.Add(Me.tbFeatures)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -466,7 +466,7 @@ Partial Class dlgScript
         Me.Name = "dlgScript"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Script"
-        Me.TbFeatures.ResumeLayout(False)
+        Me.tbFeatures.ResumeLayout(False)
         Me.tbPageLibrary.ResumeLayout(False)
         Me.tbPageLibrary.PerformLayout()
         Me.tbPageSaveData.ResumeLayout(False)
@@ -482,7 +482,7 @@ Partial Class dlgScript
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrameGetDF As ucrDataFrame
-    Friend WithEvents TbFeatures As TabControl
+    Friend WithEvents tbFeatures As TabControl
     Friend WithEvents tbPageGetData As TabPage
     Friend WithEvents tbPageSaveData As TabPage
     Friend WithEvents lblPreview As Label
@@ -510,6 +510,6 @@ Partial Class dlgScript
     Friend WithEvents ucrCboSaveOutputObjectType As ucrInputComboBox
     Friend WithEvents lblSaveObjectFormat As Label
     Friend WithEvents ucrCboSaveOutputObjectFormat As ucrInputComboBox
-    Friend WithEvents lblFinallyRemoveObject As Label
-    Friend WithEvents ucrInputFinallyRemoveObject As ucrInputTextBox
+    Friend WithEvents lblRemoveObject As Label
+    Friend WithEvents ucrInputRemoveObjects As ucrInputTextBox
 End Class
