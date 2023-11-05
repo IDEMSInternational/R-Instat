@@ -49,10 +49,11 @@ Partial Class dlgScript
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbPageFinally = New System.Windows.Forms.TabPage()
-        Me.btnRemoveObjects = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputFinallyRemoveObject = New instat.ucrInputTextBox()
+        Me.lblFinallyRemoveObject = New System.Windows.Forms.Label()
         Me.TbFeatures.SuspendLayout()
         Me.tbPageLibrary.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
@@ -69,7 +70,7 @@ Partial Class dlgScript
         Me.TbFeatures.Location = New System.Drawing.Point(8, 7)
         Me.TbFeatures.Name = "TbFeatures"
         Me.TbFeatures.SelectedIndex = 0
-        Me.TbFeatures.Size = New System.Drawing.Size(446, 455)
+        Me.TbFeatures.Size = New System.Drawing.Size(446, 271)
         Me.TbFeatures.TabIndex = 31
         '
         'tbPageLibrary
@@ -78,7 +79,7 @@ Partial Class dlgScript
         Me.tbPageLibrary.Controls.Add(Me.lblGetPackage)
         Me.tbPageLibrary.Location = New System.Drawing.Point(4, 22)
         Me.tbPageLibrary.Name = "tbPageLibrary"
-        Me.tbPageLibrary.Size = New System.Drawing.Size(438, 429)
+        Me.tbPageLibrary.Size = New System.Drawing.Size(438, 245)
         Me.tbPageLibrary.TabIndex = 4
         Me.tbPageLibrary.Text = "Library"
         Me.tbPageLibrary.UseVisualStyleBackColor = True
@@ -89,7 +90,7 @@ Partial Class dlgScript
         Me.ucrCboLibPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboLibPackage.GetSetSelectedIndex = -1
         Me.ucrCboLibPackage.IsReadOnly = False
-        Me.ucrCboLibPackage.Location = New System.Drawing.Point(138, 38)
+        Me.ucrCboLibPackage.Location = New System.Drawing.Point(14, 30)
         Me.ucrCboLibPackage.Name = "ucrCboLibPackage"
         Me.ucrCboLibPackage.Size = New System.Drawing.Size(137, 21)
         Me.ucrCboLibPackage.TabIndex = 42
@@ -97,7 +98,7 @@ Partial Class dlgScript
         'lblGetPackage
         '
         Me.lblGetPackage.AutoSize = True
-        Me.lblGetPackage.Location = New System.Drawing.Point(135, 22)
+        Me.lblGetPackage.Location = New System.Drawing.Point(11, 14)
         Me.lblGetPackage.Name = "lblGetPackage"
         Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
         Me.lblGetPackage.TabIndex = 41
@@ -117,7 +118,7 @@ Partial Class dlgScript
         Me.tbPageSaveData.Controls.Add(Me.ucrPnlSaveData)
         Me.tbPageSaveData.Location = New System.Drawing.Point(4, 22)
         Me.tbPageSaveData.Name = "tbPageSaveData"
-        Me.tbPageSaveData.Size = New System.Drawing.Size(438, 429)
+        Me.tbPageSaveData.Size = New System.Drawing.Size(438, 245)
         Me.tbPageSaveData.TabIndex = 2
         Me.tbPageSaveData.Text = "Save Data"
         Me.tbPageSaveData.UseVisualStyleBackColor = True
@@ -125,7 +126,7 @@ Partial Class dlgScript
         'lblSaveObjectFormat
         '
         Me.lblSaveObjectFormat.AutoSize = True
-        Me.lblSaveObjectFormat.Location = New System.Drawing.Point(296, 64)
+        Me.lblSaveObjectFormat.Location = New System.Drawing.Point(16, 145)
         Me.lblSaveObjectFormat.Name = "lblSaveObjectFormat"
         Me.lblSaveObjectFormat.Size = New System.Drawing.Size(42, 13)
         Me.lblSaveObjectFormat.TabIndex = 56
@@ -137,16 +138,16 @@ Partial Class dlgScript
         Me.ucrCboSaveOutputObjectFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = -1
         Me.ucrCboSaveOutputObjectFormat.IsReadOnly = False
-        Me.ucrCboSaveOutputObjectFormat.Location = New System.Drawing.Point(298, 79)
+        Me.ucrCboSaveOutputObjectFormat.Location = New System.Drawing.Point(18, 160)
         Me.ucrCboSaveOutputObjectFormat.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSaveOutputObjectFormat.Name = "ucrCboSaveOutputObjectFormat"
-        Me.ucrCboSaveOutputObjectFormat.Size = New System.Drawing.Size(117, 21)
+        Me.ucrCboSaveOutputObjectFormat.Size = New System.Drawing.Size(141, 21)
         Me.ucrCboSaveOutputObjectFormat.TabIndex = 55
         '
         'lblSaveObjectType
         '
         Me.lblSaveObjectType.AutoSize = True
-        Me.lblSaveObjectType.Location = New System.Drawing.Point(164, 65)
+        Me.lblSaveObjectType.Location = New System.Drawing.Point(13, 101)
         Me.lblSaveObjectType.Name = "lblSaveObjectType"
         Me.lblSaveObjectType.Size = New System.Drawing.Size(34, 13)
         Me.lblSaveObjectType.TabIndex = 54
@@ -158,10 +159,10 @@ Partial Class dlgScript
         Me.ucrCboSaveOutputObjectType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSaveOutputObjectType.GetSetSelectedIndex = -1
         Me.ucrCboSaveOutputObjectType.IsReadOnly = False
-        Me.ucrCboSaveOutputObjectType.Location = New System.Drawing.Point(166, 80)
+        Me.ucrCboSaveOutputObjectType.Location = New System.Drawing.Point(15, 116)
         Me.ucrCboSaveOutputObjectType.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSaveOutputObjectType.Name = "ucrCboSaveOutputObjectType"
-        Me.ucrCboSaveOutputObjectType.Size = New System.Drawing.Size(114, 21)
+        Me.ucrCboSaveOutputObjectType.Size = New System.Drawing.Size(144, 21)
         Me.ucrCboSaveOutputObjectType.TabIndex = 53
         '
         'rdoSaveOutputObject
@@ -218,10 +219,10 @@ Partial Class dlgScript
         'ucrSaveData
         '
         Me.ucrSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveData.Location = New System.Drawing.Point(127, 116)
+        Me.ucrSaveData.Location = New System.Drawing.Point(185, 70)
         Me.ucrSaveData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveData.Name = "ucrSaveData"
-        Me.ucrSaveData.Size = New System.Drawing.Size(177, 22)
+        Me.ucrSaveData.Size = New System.Drawing.Size(230, 22)
         Me.ucrSaveData.TabIndex = 35
         '
         'ucrDataFrameSaveOutputSelect
@@ -229,7 +230,7 @@ Partial Class dlgScript
         Me.ucrDataFrameSaveOutputSelect.AutoSize = True
         Me.ucrDataFrameSaveOutputSelect.bDropUnusedFilterLevels = False
         Me.ucrDataFrameSaveOutputSelect.bUseCurrentFilter = True
-        Me.ucrDataFrameSaveOutputSelect.Location = New System.Drawing.Point(8, 60)
+        Me.ucrDataFrameSaveOutputSelect.Location = New System.Drawing.Point(14, 54)
         Me.ucrDataFrameSaveOutputSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSaveOutputSelect.Name = "ucrDataFrameSaveOutputSelect"
         Me.ucrDataFrameSaveOutputSelect.Size = New System.Drawing.Size(151, 50)
@@ -258,7 +259,7 @@ Partial Class dlgScript
         Me.tbPageGetData.Location = New System.Drawing.Point(4, 22)
         Me.tbPageGetData.Name = "tbPageGetData"
         Me.tbPageGetData.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPageGetData.Size = New System.Drawing.Size(438, 429)
+        Me.tbPageGetData.Size = New System.Drawing.Size(438, 245)
         Me.tbPageGetData.TabIndex = 1
         Me.tbPageGetData.Text = "Get Data"
         Me.tbPageGetData.UseVisualStyleBackColor = True
@@ -277,7 +278,7 @@ Partial Class dlgScript
         'lblGetObjectType
         '
         Me.lblGetObjectType.AutoSize = True
-        Me.lblGetObjectType.Location = New System.Drawing.Point(266, 57)
+        Me.lblGetObjectType.Location = New System.Drawing.Point(238, 57)
         Me.lblGetObjectType.Name = "lblGetObjectType"
         Me.lblGetObjectType.Size = New System.Drawing.Size(34, 13)
         Me.lblGetObjectType.TabIndex = 48
@@ -289,7 +290,7 @@ Partial Class dlgScript
         Me.ucrCboGetOutputObjectType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboGetOutputObjectType.GetSetSelectedIndex = -1
         Me.ucrCboGetOutputObjectType.IsReadOnly = False
-        Me.ucrCboGetOutputObjectType.Location = New System.Drawing.Point(268, 72)
+        Me.ucrCboGetOutputObjectType.Location = New System.Drawing.Point(240, 72)
         Me.ucrCboGetOutputObjectType.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboGetOutputObjectType.Name = "ucrCboGetOutputObjectType"
         Me.ucrCboGetOutputObjectType.Size = New System.Drawing.Size(137, 21)
@@ -316,7 +317,7 @@ Partial Class dlgScript
         '
         Me.lblGetObject.AutoSize = True
         Me.lblGetObject.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGetObject.Location = New System.Drawing.Point(269, 101)
+        Me.lblGetObject.Location = New System.Drawing.Point(241, 101)
         Me.lblGetObject.Name = "lblGetObject"
         Me.lblGetObject.Size = New System.Drawing.Size(41, 13)
         Me.lblGetObject.TabIndex = 26
@@ -326,7 +327,7 @@ Partial Class dlgScript
         '
         Me.ucrReceiverGetObject.AutoSize = True
         Me.ucrReceiverGetObject.frmParent = Nothing
-        Me.ucrReceiverGetObject.Location = New System.Drawing.Point(267, 117)
+        Me.ucrReceiverGetObject.Location = New System.Drawing.Point(239, 117)
         Me.ucrReceiverGetObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverGetObject.Name = "ucrReceiverGetObject"
         Me.ucrReceiverGetObject.Selector = Nothing
@@ -391,60 +392,72 @@ Partial Class dlgScript
         '
         'tbPageFinally
         '
-        Me.tbPageFinally.Controls.Add(Me.btnRemoveObjects)
+        Me.tbPageFinally.Controls.Add(Me.lblFinallyRemoveObject)
+        Me.tbPageFinally.Controls.Add(Me.ucrInputFinallyRemoveObject)
         Me.tbPageFinally.Location = New System.Drawing.Point(4, 22)
         Me.tbPageFinally.Name = "tbPageFinally"
-        Me.tbPageFinally.Size = New System.Drawing.Size(438, 429)
+        Me.tbPageFinally.Size = New System.Drawing.Size(438, 245)
         Me.tbPageFinally.TabIndex = 3
         Me.tbPageFinally.Text = "Finally"
         Me.tbPageFinally.UseVisualStyleBackColor = True
         '
-        'btnRemoveObjects
+        'lblPreview
         '
-        Me.btnRemoveObjects.Location = New System.Drawing.Point(13, 29)
-        Me.btnRemoveObjects.Name = "btnRemoveObjects"
-        Me.btnRemoveObjects.Size = New System.Drawing.Size(75, 23)
-        Me.btnRemoveObjects.TabIndex = 1
-        Me.btnRemoveObjects.Text = "Remove Objects"
-        Me.btnRemoveObjects.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(460, 11)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 13)
-        Me.Label1.TabIndex = 30
-        Me.Label1.Text = "Script:"
+        Me.lblPreview.AutoSize = True
+        Me.lblPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPreview.Location = New System.Drawing.Point(9, 281)
+        Me.lblPreview.Name = "lblPreview"
+        Me.lblPreview.Size = New System.Drawing.Size(48, 13)
+        Me.lblPreview.TabIndex = 30
+        Me.lblPreview.Text = "Preview:"
         '
         'txtScript
         '
-        Me.txtScript.Location = New System.Drawing.Point(456, 29)
+        Me.txtScript.Location = New System.Drawing.Point(5, 299)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtScript.Size = New System.Drawing.Size(576, 429)
+        Me.txtScript.Size = New System.Drawing.Size(445, 96)
         Me.txtScript.TabIndex = 32
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(287, 464)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 399)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
+        '
+        'ucrInputFinallyRemoveObject
+        '
+        Me.ucrInputFinallyRemoveObject.AddQuotesIfUnrecognised = True
+        Me.ucrInputFinallyRemoveObject.AutoSize = True
+        Me.ucrInputFinallyRemoveObject.IsMultiline = False
+        Me.ucrInputFinallyRemoveObject.IsReadOnly = False
+        Me.ucrInputFinallyRemoveObject.Location = New System.Drawing.Point(17, 30)
+        Me.ucrInputFinallyRemoveObject.Name = "ucrInputFinallyRemoveObject"
+        Me.ucrInputFinallyRemoveObject.Size = New System.Drawing.Size(197, 21)
+        Me.ucrInputFinallyRemoveObject.TabIndex = 2
+        '
+        'lblFinallyRemoveObject
+        '
+        Me.lblFinallyRemoveObject.AutoSize = True
+        Me.lblFinallyRemoveObject.Location = New System.Drawing.Point(14, 14)
+        Me.lblFinallyRemoveObject.Name = "lblFinallyRemoveObject"
+        Me.lblFinallyRemoveObject.Size = New System.Drawing.Size(95, 13)
+        Me.lblFinallyRemoveObject.TabIndex = 3
+        Me.lblFinallyRemoveObject.Text = "Remove Object(s):"
         '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1042, 529)
+        Me.ClientSize = New System.Drawing.Size(458, 458)
         Me.Controls.Add(Me.txtScript)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblPreview)
         Me.Controls.Add(Me.TbFeatures)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -461,6 +474,7 @@ Partial Class dlgScript
         Me.tbPageGetData.ResumeLayout(False)
         Me.tbPageGetData.PerformLayout()
         Me.tbPageFinally.ResumeLayout(False)
+        Me.tbPageFinally.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -471,14 +485,13 @@ Partial Class dlgScript
     Friend WithEvents TbFeatures As TabControl
     Friend WithEvents tbPageGetData As TabPage
     Friend WithEvents tbPageSaveData As TabPage
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblPreview As Label
     Friend WithEvents ucrSaveData As ucrSave
     Friend WithEvents tbPageFinally As TabPage
     Friend WithEvents ucrDataFrameSaveOutputSelect As ucrDataFrame
     Friend WithEvents ucrSelectorGetObject As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblGetObject As Label
     Friend WithEvents ucrReceiverGetObject As ucrReceiverSingle
-    Friend WithEvents btnRemoveObjects As Button
     Friend WithEvents ucrPnlGetData As UcrPanel
     Friend WithEvents rdoGetDataFrame As RadioButton
     Friend WithEvents rdoGetColumn As RadioButton
@@ -497,4 +510,6 @@ Partial Class dlgScript
     Friend WithEvents ucrCboSaveOutputObjectType As ucrInputComboBox
     Friend WithEvents lblSaveObjectFormat As Label
     Friend WithEvents ucrCboSaveOutputObjectFormat As ucrInputComboBox
+    Friend WithEvents lblFinallyRemoveObject As Label
+    Friend WithEvents ucrInputFinallyRemoveObject As ucrInputTextBox
 End Class

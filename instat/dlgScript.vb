@@ -78,8 +78,8 @@ Public Class dlgScript
         ucrCboSaveOutputObjectFormat.SetLinkedDisplayControl(lblSaveObjectFormat)
         ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = 0
 
-        ucrSaveData.SetSaveTypeAsGraph()
-        ucrSaveData.SetCheckBoxText("Save Graph")
+
+        ucrSaveData.SetLabelText("Save Graph")
         ucrSaveData.SetIsComboBox()
         ucrSaveData.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
 
@@ -242,8 +242,17 @@ Public Class dlgScript
     End Sub
 
     Private Sub SetupSaveDataControl(strLabel As String, strDataType As String, strFormat As String)
-        ucrSaveData.SetLabelText(strLabel & ":")
+        'ucrSaveData.SetIsComboBox()
         ucrSaveData.SetSaveType(strDataType, strFormat)
+        ucrSaveData.SetLabelText(strLabel & ":")
+        ucrSaveData.SetName("")
+
+        'change location of the save control if it's the data frame option selected
+        ucrSaveData.Location = If(strDataType = RObjectTypeLabel.Dataframe,
+            New Point(185 - 100, ucrSaveData.Location.Y),
+            New Point(185, ucrSaveData.Location.Y))
+
+
     End Sub
 
     Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlContentsChanged
@@ -251,6 +260,7 @@ Public Class dlgScript
         '    Exit Sub
         'End If
 
+        ucrSaveData.UpdateRCode()
 
         Dim strAssignedScript As String = ""
         Dim strAssignedTo As String = clsSaveDataFunction.Clone.ToScript(strScript:=strAssignedScript)
@@ -298,7 +308,7 @@ Public Class dlgScript
     '    AddAssignToString(ucrSaveGraph.GetText)
     'End Sub
 
-    Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs) Handles btnRemoveObjects.Click
+    Private Sub btnRemoveObjects_Click(sender As Object, e As EventArgs)
         'create function to remove the objects added in the script
         'Dim clsRemoveFunc As New RFunction
         'Dim clsRemoveListFun As New RFunction
