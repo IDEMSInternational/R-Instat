@@ -210,7 +210,6 @@ Public Class dlgScript
             SetupSaveDataControl("Data Frame", RObjectTypeLabel.Dataframe, "")
         ElseIf rdoSaveColumn.Checked Then
             ucrDataFrameSaveOutputSelect.SetVisible(True)
-            ucrCboSaveOutputObjectType.SetVisible(True)
             SetupSaveDataControl("Column", RObjectTypeLabel.Column, "")
         ElseIf rdoSaveOutputObject.Checked Then
             ucrDataFrameSaveOutputSelect.SetVisible(True)
@@ -229,19 +228,18 @@ Public Class dlgScript
     Private Sub SetupSaveDataControl(strLabel As String, strDataType As String, strFormat As String)
 
         ucrSaveData.SetSaveType(strDataType, strFormat)
-        ucrSaveData.SetLabelText(strLabel & "Name:")
+        ucrSaveData.SetLabelText(strLabel)
         ucrSaveData.SetName("")
 
         'change location of the save control if it's the data frame option selected
         If strDataType = RObjectTypeLabel.Dataframe Then
-            ucrSaveData.Location = New Point(185 - 100, ucrSaveData.Location.Y)
-            ucrSaveData.SetIsComboBox()
-        Else
-            ucrSaveData.Location = New Point(185, ucrSaveData.Location.Y)
+            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrDataFrameSaveOutputSelect.Location.Y)
             ucrSaveData.SetIsTextBox()
-            If strDataType = RObjectTypeLabel.Column Then
-                ucrSaveData.btnColumnPosition.Visible = False
-            End If
+        Else
+            ucrSaveData.SetIsComboBox()
+            ucrSaveData.Location = If(strDataType = RObjectTypeLabel.Column,
+                New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectType.Location.Y),
+                New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33))
         End If
 
     End Sub

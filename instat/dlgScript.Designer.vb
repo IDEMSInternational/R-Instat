@@ -126,7 +126,7 @@ Partial Class dlgScript
         'lblSaveObjectFormat
         '
         Me.lblSaveObjectFormat.AutoSize = True
-        Me.lblSaveObjectFormat.Location = New System.Drawing.Point(16, 145)
+        Me.lblSaveObjectFormat.Location = New System.Drawing.Point(116, 145)
         Me.lblSaveObjectFormat.Name = "lblSaveObjectFormat"
         Me.lblSaveObjectFormat.Size = New System.Drawing.Size(42, 13)
         Me.lblSaveObjectFormat.TabIndex = 56
@@ -138,7 +138,7 @@ Partial Class dlgScript
         Me.ucrCboSaveOutputObjectFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = -1
         Me.ucrCboSaveOutputObjectFormat.IsReadOnly = False
-        Me.ucrCboSaveOutputObjectFormat.Location = New System.Drawing.Point(18, 160)
+        Me.ucrCboSaveOutputObjectFormat.Location = New System.Drawing.Point(117, 160)
         Me.ucrCboSaveOutputObjectFormat.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSaveOutputObjectFormat.Name = "ucrCboSaveOutputObjectFormat"
         Me.ucrCboSaveOutputObjectFormat.Size = New System.Drawing.Size(141, 21)
@@ -147,7 +147,7 @@ Partial Class dlgScript
         'lblSaveObjectType
         '
         Me.lblSaveObjectType.AutoSize = True
-        Me.lblSaveObjectType.Location = New System.Drawing.Point(13, 101)
+        Me.lblSaveObjectType.Location = New System.Drawing.Point(114, 101)
         Me.lblSaveObjectType.Name = "lblSaveObjectType"
         Me.lblSaveObjectType.Size = New System.Drawing.Size(34, 13)
         Me.lblSaveObjectType.TabIndex = 54
@@ -159,7 +159,7 @@ Partial Class dlgScript
         Me.ucrCboSaveOutputObjectType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSaveOutputObjectType.GetSetSelectedIndex = -1
         Me.ucrCboSaveOutputObjectType.IsReadOnly = False
-        Me.ucrCboSaveOutputObjectType.Location = New System.Drawing.Point(15, 116)
+        Me.ucrCboSaveOutputObjectType.Location = New System.Drawing.Point(116, 116)
         Me.ucrCboSaveOutputObjectType.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSaveOutputObjectType.Name = "ucrCboSaveOutputObjectType"
         Me.ucrCboSaveOutputObjectType.Size = New System.Drawing.Size(144, 21)
@@ -219,10 +219,10 @@ Partial Class dlgScript
         'ucrSaveData
         '
         Me.ucrSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveData.Location = New System.Drawing.Point(185, 70)
+        Me.ucrSaveData.Location = New System.Drawing.Point(117, 193)
         Me.ucrSaveData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveData.Name = "ucrSaveData"
-        Me.ucrSaveData.Size = New System.Drawing.Size(230, 22)
+        Me.ucrSaveData.Size = New System.Drawing.Size(258, 22)
         Me.ucrSaveData.TabIndex = 35
         '
         'ucrDataFrameSaveOutputSelect
@@ -230,7 +230,7 @@ Partial Class dlgScript
         Me.ucrDataFrameSaveOutputSelect.AutoSize = True
         Me.ucrDataFrameSaveOutputSelect.bDropUnusedFilterLevels = False
         Me.ucrDataFrameSaveOutputSelect.bUseCurrentFilter = True
-        Me.ucrDataFrameSaveOutputSelect.Location = New System.Drawing.Point(14, 54)
+        Me.ucrDataFrameSaveOutputSelect.Location = New System.Drawing.Point(115, 54)
         Me.ucrDataFrameSaveOutputSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSaveOutputSelect.Name = "ucrDataFrameSaveOutputSelect"
         Me.ucrDataFrameSaveOutputSelect.Size = New System.Drawing.Size(151, 50)
