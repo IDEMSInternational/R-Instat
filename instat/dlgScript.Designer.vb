@@ -190,10 +190,9 @@ Partial Class dlgScript
         Me.rdoSaveDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSaveDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSaveDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSaveDataFrame.Location = New System.Drawing.Point(118, 21)
-        Me.rdoSaveDataFrame.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSaveDataFrame.Location = New System.Drawing.Point(79, 14)
         Me.rdoSaveDataFrame.Name = "rdoSaveDataFrame"
-        Me.rdoSaveDataFrame.Size = New System.Drawing.Size(120, 45)
+        Me.rdoSaveDataFrame.Size = New System.Drawing.Size(80, 30)
         Me.rdoSaveDataFrame.TabIndex = 49
         Me.rdoSaveDataFrame.TabStop = True
         Me.rdoSaveDataFrame.Text = "Data Frame"
@@ -208,10 +207,9 @@ Partial Class dlgScript
         Me.rdoSaveColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSaveColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSaveColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSaveColumn.Location = New System.Drawing.Point(236, 21)
-        Me.rdoSaveColumn.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSaveColumn.Location = New System.Drawing.Point(157, 14)
         Me.rdoSaveColumn.Name = "rdoSaveColumn"
-        Me.rdoSaveColumn.Size = New System.Drawing.Size(120, 45)
+        Me.rdoSaveColumn.Size = New System.Drawing.Size(80, 30)
         Me.rdoSaveColumn.TabIndex = 50
         Me.rdoSaveColumn.TabStop = True
         Me.rdoSaveColumn.Text = "Column"
@@ -241,10 +239,9 @@ Partial Class dlgScript
         'ucrPnlSaveData
         '
         Me.ucrPnlSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSaveData.Location = New System.Drawing.Point(20, 18)
-        Me.ucrPnlSaveData.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlSaveData.Location = New System.Drawing.Point(13, 12)
         Me.ucrPnlSaveData.Name = "ucrPnlSaveData"
-        Me.ucrPnlSaveData.Size = New System.Drawing.Size(603, 54)
+        Me.ucrPnlSaveData.Size = New System.Drawing.Size(402, 36)
         Me.ucrPnlSaveData.TabIndex = 47
         '
         'tbPageGetData
@@ -455,7 +452,7 @@ Partial Class dlgScript
         '
         'dlgScript
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(458, 458)
@@ -463,11 +460,7 @@ Partial Class dlgScript
         Me.Controls.Add(Me.lblPreview)
         Me.Controls.Add(Me.tbFeatures)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.ucrChkEditLibrary)
-        Me.Controls.Add(Me.ucrInputPreviewLibrary)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgScript"
@@ -486,7 +479,8 @@ Partial Class dlgScript
         Me.PerformLayout()
 
     End Sub
-  Friend WithEvents ucrBase As ucrButtons
+
+    Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrameGetDF As ucrDataFrame
     Friend WithEvents tbFeatures As TabControl
     Friend WithEvents tbPageGetData As TabPage
