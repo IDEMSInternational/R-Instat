@@ -233,8 +233,8 @@ Public Class dlgScript
 
         'change location of the save control if it's the data frame option selected
         If strDataType = RObjectTypeLabel.Dataframe Then
-            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrDataFrameSaveOutputSelect.Location.Y)
             ucrSaveData.SetIsTextBox()
+            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrDataFrameSaveOutputSelect.Location.Y)
         Else
             ucrSaveData.SetIsComboBox()
             ucrSaveData.Location = If(strDataType = RObjectTypeLabel.Column,
