@@ -18,7 +18,7 @@ Imports instat.Translations
 
 Public Class sdgFormatSummaryTables
     Private clsTableTitleFunction, clsStubFunction, clsTabFootnoteTitleFunction, clsStubFootnoteFunction, clsStubCellsFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
-        clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
+        clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsGtFunction,
         clsFootnoteCellBodyFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
         clsTabStyleFunction, clsTabStyleCellTextFunction, clsTabStylePxFunction As New RFunction
     'The dummy Function is used by input controls that add the parameter manually,
@@ -72,7 +72,6 @@ Public Class sdgFormatSummaryTables
         ucrChkStubFootnote.AddParameterPresentCondition(True, "title_stub_footnote")
         ucrChkStubFootnote.AddParameterPresentCondition(False, "title_stub_footnote", False)
 
-
         ucrInputSubtitleFootnote.SetParameter(New RParameter("subtitle_footnote", iNewPosition:=3))
         ucrChkSubtitleFootnote.SetText("Add subtitle footnote")
         ucrChkSubtitleFootnote.AddToLinkedControls(ucrInputSubtitleFootnote, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -105,7 +104,7 @@ Public Class sdgFormatSummaryTables
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(bReset As Boolean, clsNewStubFunction As RFunction, clsNewTableTitleFunction As RFunction, clsNewStubFootnoteFunction As RFunction, clsNewStubCellsFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
+    Public Sub SetRCode(bReset As Boolean, clsNewGtFunction As RFunction, clsNewStubFunction As RFunction, clsNewTableTitleFunction As RFunction, clsNewStubFootnoteFunction As RFunction, clsNewStubCellsFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
                         clsNewTableSourcenoteFunction As RFunction, clsNewTabStyleFunction As RFunction, clsNewMutableOPerator As ROperator,
                         clsNewPipeOperator As ROperator, clsNewFootnoteTitleLocationFunction As RFunction, clsNewFootnoteSubtitleLocationFunction As RFunction,
                         clsNewTabFootnoteSubtitleFunction As RFunction, clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator,
@@ -124,6 +123,7 @@ Public Class sdgFormatSummaryTables
         clsStubFootnoteFunction = clsNewStubFootnoteFunction
         clsStubCellsFunction = clsNewStubCellsFunction
         clsTabFootnoteSubtitleFunction = clsNewTabFootnoteSubtitleFunction
+        clsGtFunction = clsNewGtFunction
         clsTableSourcenoteFunction = clsNewTableSourcenoteFunction
         clsFootnoteSubtitleLocationFunction = clsNewFootnoteSubtitleLocationFunction
         clsFootnoteTitleLocationFunction = clsNewFootnoteTitleLocationFunction
@@ -198,11 +198,9 @@ Public Class sdgFormatSummaryTables
         End If
         If ucrChkStub.Checked Then
             If ucrChkStubFootnote.Checked AndAlso Not ucrInputStubFootnote.IsEmpty Then
-                'cmdStubFormat.Visible = True
                 clsPipeOperator.AddParameter("title_stub_footnote", clsRFunctionParameter:=clsStubFootnoteFunction, iPosition:=1)
             End If
         Else
-            ' cmdStubFormat.Visible = False
             clsPipeOperator.RemoveParameterByName("title_stub_footnote")
         End If
         AddRemoveOperatorStub()
@@ -317,8 +315,10 @@ Public Class sdgFormatSummaryTables
         If ucrChkStub.Checked Then
             If ucrInputStub.IsEmpty Then
                 clsJoiningOperator.RemoveParameterByName("pipe")
+                clsGtFunction.RemoveParameterByName("rownames_to_stub")
             Else
                 clsJoiningOperator.AddParameter("pipe", clsROperatorParameter:=clsPipeOperator, iPosition:=1)
+                clsGtFunction.AddParameter("rownames_to_stub", "TRUE", iPosition:=0)
             End If
             If ucrChkStubFootnote.Checked AndAlso Not ucrInputStubFootnote.IsEmpty Then
                 clsJoiningOperator.AddParameter("pipe", clsROperatorParameter:=clsPipeOperator, iPosition:=1)
@@ -327,8 +327,8 @@ Public Class sdgFormatSummaryTables
             End If
         Else
             clsPipeOperator.RemoveParameterByName("title_stub_footnote")
+            clsGtFunction.RemoveParameterByName("rownames_to_stub")
         End If
-
     End Sub
 
     Private Sub ucrThemesPanel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged,

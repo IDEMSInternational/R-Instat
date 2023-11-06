@@ -409,19 +409,19 @@ Public Class dlgSummaryTables
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
         If rdoSummaryTable.Checked Then
-            sdgFormatSummaryTables.SetRCode(clsNewStubCellsFunction:=clsStubCellsFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewStubFunction:=clsStubFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+            sdgFormatSummaryTables.SetRCode(clsNewStubCellsFunction:=clsStubCellsFunction, clsNewGtFunction:=clsGtFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewStubFunction:=clsStubFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                          clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                       clsNewMutableOperator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
+                                       clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         Else
-            sdgFormatSummaryTables.SetRCode(clsNewStubCellsFunction:=clsStubCellsFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewStubFunction:=clsStubFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+            sdgFormatSummaryTables.SetRCode(clsNewStubCellsFunction:=clsStubCellsFunction, clsNewGtFunction:=clsGtFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewStubFunction:=clsStubFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                      clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                      clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                     clsNewMutableOperator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
+                                     clsNewMutableOPerator:=clsFrequencyOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                      clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
                                      clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
         End If
