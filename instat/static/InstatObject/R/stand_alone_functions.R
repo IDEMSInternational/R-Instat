@@ -2960,3 +2960,43 @@ convert_to_list <- function(x) {
     return(as.numeric(x))
   }
 }
+
+getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = TRUE, give.lines = FALSE, local = FALSE, echo = TRUE, verbose = getOption("verbose"), setRNG = FALSE, ask = getOption("example.ask"), prompt.prefix = abbreviate(topic, 6), run.dontrun = FALSE, run.donttest = interactive()) {
+  if (!character.only) {
+    topic <- substitute(topic)
+    if (!is.character(topic))
+      topic <- deparse(topic)[1L]
+  }
+  pkgpaths <- find.package(package, lib.loc, verbose = verbose)
+  file <- utils:::index.search(topic, pkgpaths, firstOnly = TRUE)
+  if (!length(file)) {
+    warning(gettextf("no help found for %s", sQuote(topic)),
+            domain = NA)
+    return(character())
+  }
+  if (verbose)
+    cat("Found file =", sQuote(file), "\n")
+  packagePath <- dirname(dirname(file))
+  pkgname <- basename(packagePath)
+  lib <- dirname(packagePath)
+  tf <- tempfile("Rex")
+  tools::Rd2ex(utils:::.getHelpFile(file), tf, commentDontrun = !run.dontrun,
+               commentDonttest = !run.donttest)
+  if (!file.exists(tf)) {
+    if (give.lines)
+      return(character())
+    warning(gettextf("%s has a help file but no examples",
+                     sQuote(topic)), domain = NA)
+    return(character())
+  }
+  on.exit(unlink(tf))
+  example_text <- readLines(tf)
+  example_text <- paste(example_text, collapse = "\n")
+  if (give.lines) {
+    return(example_text)
+  }
+  if (echo) {
+    cat(example_text)
+  }
+  return(example_text)
+}
