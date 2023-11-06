@@ -84,15 +84,16 @@ Public Class dlgScript
 
         ucrDataFrameGetDF.SetLabelText("Get Data Frame:")
 
+        ucrReceiverGetColumns.Selector = ucrSelectorGetObject
+        ucrReceiverGetColumns.SetLinkedDisplayControl(lblGetColumn)
+
         ucrCboGetOutputObjectType.SetItems(dctOutputObjectTypes, bSetConditions:=False)
         ucrCboGetOutputObjectType.SetDropDownStyleAsNonEditable()
         ucrCboGetOutputObjectType.SetLinkedDisplayControl(lblGetObjectType)
         ucrCboGetOutputObjectType.GetSetSelectedIndex = 0
 
-        ucrReceiverGetObject.Selector = ucrSelectorGetObject
-        ucrReceiverGetObject.SetMeAsReceiver()
-        ucrReceiverGetObject.bAutoFill = True
-        ucrReceiverGetObject.SetLinkedDisplayControl(lblGetObject)
+        ucrReceiverGetOutputObject.Selector = ucrSelectorGetObject
+        ucrReceiverGetOutputObject.SetLinkedDisplayControl(lblGetOutputObject)
 
         '-------------------------------
         ' Hide base controls not supported in this dialog
@@ -136,70 +137,10 @@ Public Class dlgScript
         rdoGetDataFrame.Checked = True
 
 
-        ' Library controls
-        ucrCboLibPackage.GetSetSelectedIndex = 0
-
-
         'activate the selected tab to library tab
         tbFeatures.SelectedIndex = -1
-        tbFeatures.SelectedTab = tbPageLibrary
+        tbFeatures.SelectedTab = tbPageSaveData
 
-    End Sub
-
-    Private Sub ucrCboLibPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboLibPackage.ControlContentsChanged
-        Dim clsLibraryFunction As New RFunction
-        clsLibraryFunction.SetRCommand("library")
-        clsLibraryFunction.AddParameter("package", Chr(34) & ucrCboLibPackage.GetText() & Chr(34))
-        PreviewScript(clsLibraryFunction.ToScript)
-    End Sub
-
-    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
-        ucrDataFrameGetDF.SetVisible(False)
-        ucrCboGetOutputObjectType.SetVisible(False)
-        ucrSelectorGetObject.SetVisible(False)
-        ucrReceiverGetObject.SetVisible(False)
-        PreviewScript("")
-        If rdoGetDataFrame.Checked Then
-            ucrDataFrameGetDF.SetVisible(True)
-            ucrReceiverGetObject.SetVisible(False)
-            ucrDataFrameGetDF.Reset()
-        ElseIf rdoGetColumn.Checked Then
-            ucrSelectorGetObject.SetVisible(True)
-            ucrReceiverGetObject.SetVisible(True)
-            SetupReceiverForGetData("Column", RObjectTypeLabel.Column)
-        ElseIf rdoGetOutputObject.Checked Then
-            ucrSelectorGetObject.SetVisible(True)
-            ucrCboGetOutputObjectType.SetVisible(True)
-            lblGetObject.Text = ucrCboGetOutputObjectType.GetText()
-            ucrReceiverGetObject.SetVisible(True)
-            SetupReceiverForGetData(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
-        End If
-    End Sub
-
-    Private Sub SetupReceiverForGetData(strLabel As String, strDataType As String)
-        ucrReceiverGetObject.Clear()
-        lblGetObject.Text = strLabel & ":"
-        ucrReceiverGetObject.SetSelectorHeading(strLabel)
-        ucrReceiverGetObject.SetItemType(strDataType)
-    End Sub
-
-    Private Sub ucrDataFrameGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGetDF.ControlContentsChanged
-        Dim strAssignedScript As String = ""
-        ucrDataFrameGetDF.clsCurrDataFrame.Clone().ToScript(strAssignedScript)
-        PreviewScript(strAssignedScript)
-    End Sub
-
-    Private Sub ucrInputGetObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboGetOutputObjectType.ControlValueChanged
-        If Not ucrCboGetOutputObjectType.IsEmpty() Then
-            SetupReceiverForGetData(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
-        End If
-    End Sub
-
-    Private Sub ucrReceiverGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGetObject.ControlContentsChanged
-        Dim clsFunction As RFunction = ucrReceiverGetObject.GetVariables()
-        Dim strAssignedScript As String = ""
-        clsFunction.ToScript(strScript:=strAssignedScript)
-        PreviewScript(strAssignedScript)
     End Sub
 
     Private Sub ucrPnlSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveData.ControlValueChanged
@@ -219,7 +160,7 @@ Public Class dlgScript
         End If
     End Sub
 
-    Private Sub ucrCboSaveOutputObjectTypee_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSaveOutputObjectType.ControlValueChanged, ucrCboSaveOutputObjectFormat.ControlValueChanged
+    Private Sub ucrCboSaveOutputObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSaveOutputObjectType.ControlValueChanged, ucrCboSaveOutputObjectFormat.ControlValueChanged
         If Not ucrCboSaveOutputObjectType.IsEmpty() AndAlso Not ucrCboSaveOutputObjectFormat.IsEmpty() Then
             SetupSaveDataControl(ucrCboSaveOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboSaveOutputObjectType.GetText()), dctOutputObjectFormats.Item(ucrCboSaveOutputObjectFormat.GetText()))
         End If
@@ -252,6 +193,72 @@ Public Class dlgScript
         Dim strAssignedScript As String = ""
         clsSaveDataFunction.Clone.ToScript(strScript:=strAssignedScript)
         PreviewScript(strAssignedScript)
+    End Sub
+
+    Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
+        ucrDataFrameGetDF.SetVisible(False)
+        ucrCboGetOutputObjectType.SetVisible(False)
+        ucrSelectorGetObject.SetVisible(False)
+        ucrReceiverGetColumns.SetVisible(False)
+        ucrReceiverGetOutputObject.SetVisible(False)
+        PreviewScript("")
+        If rdoGetDataFrame.Checked Then
+            ucrDataFrameGetDF.SetVisible(True)
+            ucrReceiverGetOutputObject.SetVisible(False)
+            ucrDataFrameGetDF.Reset()
+        ElseIf rdoGetColumn.Checked Then
+            ucrSelectorGetObject.SetVisible(True)
+            ucrReceiverGetColumns.SetVisible(True)
+            ucrReceiverGetColumns.SetMeAsReceiver()
+            'SetupReceiverForGetData("Column", RObjectTypeLabel.Column)
+        ElseIf rdoGetOutputObject.Checked Then
+            ucrSelectorGetObject.SetVisible(True)
+            ucrCboGetOutputObjectType.SetVisible(True)
+            ucrReceiverGetOutputObject.SetVisible(True)
+            SetupReceiverForGetData(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
+            ucrReceiverGetOutputObject.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub SetupReceiverForGetData(strLabel As String, strDataType As String)
+        ucrReceiverGetOutputObject.Clear()
+        lblGetOutputObject.Text = strLabel & ":"
+        ucrReceiverGetOutputObject.SetSelectorHeading(strLabel)
+        ucrReceiverGetOutputObject.SetItemType(strDataType)
+    End Sub
+
+    Private Sub ucrDataFrameGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGetDF.ControlContentsChanged
+        Dim strAssignedScript As String = ""
+        ucrDataFrameGetDF.clsCurrDataFrame.Clone().ToScript(strAssignedScript)
+        PreviewScript(strAssignedScript)
+    End Sub
+
+    Private Sub ucrReceiverGetColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGetColumns.ControlContentsChanged
+        Dim clsRFunction As RFunction = ucrReceiverGetColumns.GetVariables()
+        Dim strAssignedScript As String = ""
+
+        Dim k = clsRFunction.ToScript(strScript:=strAssignedScript)
+        PreviewScript(k)
+    End Sub
+
+    Private Sub ucrInputGetObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboGetOutputObjectType.ControlValueChanged
+        If Not ucrCboGetOutputObjectType.IsEmpty() Then
+            SetupReceiverForGetData(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
+        End If
+    End Sub
+
+    Private Sub ucrReceiverGetOutputObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGetOutputObject.ControlContentsChanged
+        Dim clsRFunction As RFunction = ucrReceiverGetOutputObject.GetVariables()
+        Dim strAssignedScript As String = ""
+        clsRFunction.ToScript(strScript:=strAssignedScript)
+        PreviewScript(strAssignedScript)
+    End Sub
+
+    Private Sub ucrCboLibPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboLibPackage.ControlValueChanged
+        Dim clsLibraryFunction As New RFunction
+        clsLibraryFunction.SetRCommand("library")
+        clsLibraryFunction.AddParameter("package", Chr(34) & ucrCboLibPackage.GetText() & Chr(34))
+        PreviewScript(clsLibraryFunction.ToScript)
     End Sub
 
     Private Sub ucrInputRemoveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRemoveObjects.ControlContentsChanged
@@ -295,8 +302,12 @@ Public Class dlgScript
         ElseIf e.TabPage Is tbPageSaveData Then
             rdoSaveDataFrame.Checked = True
             ucrPnlSaveData.OnControlValueChanged()
-        ElseIf e.TabPage Is tbPageFinally Then
-            ucrInputRemoveObjects.OnControlContentsChanged()
+        ElseIf e.TabPage Is tbPageCommon Then
+            'alwys reset the common controls to be blank.
+            'the controls functionalities are not related
+            ucrCboLibPackage.GetSetSelectedIndex = -1
+            ucrInputRemoveObjects.SetName("")
+            PreviewScript("")
         End If
     End Sub
 

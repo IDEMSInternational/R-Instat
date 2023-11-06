@@ -1001,7 +1001,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
-        dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
+        'dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
         dlgScript.ShowDialog()
     End Sub
 
