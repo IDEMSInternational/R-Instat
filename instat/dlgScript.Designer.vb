@@ -35,9 +35,9 @@ Partial Class dlgScript
         Me.ucrDataFrameSaveOutputSelect = New instat.ucrDataFrame()
         Me.ucrPnlSaveData = New instat.UcrPanel()
         Me.tbPageGetData = New System.Windows.Forms.TabPage()
-        Me.lblGetColumn = New System.Windows.Forms.Label()
         Me.ucrReceiverGetOutputObject = New instat.ucrReceiverSingle()
         Me.ucrReceiverGetColumns = New instat.ucrReceiverMultiple()
+        Me.lblGetColumn = New System.Windows.Forms.Label()
         Me.ucrDataFrameGetDF = New instat.ucrDataFrame()
         Me.lblGetObjectType = New System.Windows.Forms.Label()
         Me.ucrCboGetOutputObjectType = New instat.ucrInputComboBox()
@@ -237,16 +237,6 @@ Partial Class dlgScript
         Me.tbPageGetData.Text = "Get Data"
         Me.tbPageGetData.UseVisualStyleBackColor = True
         '
-        'lblGetColumn
-        '
-        Me.lblGetColumn.AutoSize = True
-        Me.lblGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGetColumn.Location = New System.Drawing.Point(252, 88)
-        Me.lblGetColumn.Name = "lblGetColumn"
-        Me.lblGetColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblGetColumn.TabIndex = 50
-        Me.lblGetColumn.Text = "Column:"
-        '
         'ucrReceiverGetOutputObject
         '
         Me.ucrReceiverGetOutputObject.AutoSize = True
@@ -272,6 +262,16 @@ Partial Class dlgScript
         Me.ucrReceiverGetColumns.strNcFilePath = ""
         Me.ucrReceiverGetColumns.TabIndex = 49
         Me.ucrReceiverGetColumns.ucrSelector = Nothing
+        '
+        'lblGetColumn
+        '
+        Me.lblGetColumn.AutoSize = True
+        Me.lblGetColumn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGetColumn.Location = New System.Drawing.Point(252, 88)
+        Me.lblGetColumn.Name = "lblGetColumn"
+        Me.lblGetColumn.Size = New System.Drawing.Size(45, 13)
+        Me.lblGetColumn.TabIndex = 50
+        Me.lblGetColumn.Text = "Column:"
         '
         'ucrDataFrameGetDF
         '
@@ -406,7 +406,7 @@ Partial Class dlgScript
         Me.ucrCboLibPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboLibPackage.GetSetSelectedIndex = -1
         Me.ucrCboLibPackage.IsReadOnly = False
-        Me.ucrCboLibPackage.Location = New System.Drawing.Point(18, 28)
+        Me.ucrCboLibPackage.Location = New System.Drawing.Point(14, 28)
         Me.ucrCboLibPackage.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboLibPackage.Name = "ucrCboLibPackage"
         Me.ucrCboLibPackage.Size = New System.Drawing.Size(137, 21)
@@ -415,7 +415,7 @@ Partial Class dlgScript
         'lblGetPackage
         '
         Me.lblGetPackage.AutoSize = True
-        Me.lblGetPackage.Location = New System.Drawing.Point(15, 11)
+        Me.lblGetPackage.Location = New System.Drawing.Point(11, 11)
         Me.lblGetPackage.Name = "lblGetPackage"
         Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
         Me.lblGetPackage.TabIndex = 43

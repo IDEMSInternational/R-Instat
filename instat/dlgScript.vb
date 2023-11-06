@@ -210,17 +210,17 @@ Public Class dlgScript
             ucrSelectorGetObject.SetVisible(True)
             ucrReceiverGetColumns.SetVisible(True)
             ucrReceiverGetColumns.SetMeAsReceiver()
-            'SetupReceiverForGetData("Column", RObjectTypeLabel.Column)
+            ucrReceiverGetColumns.Clear()
         ElseIf rdoGetOutputObject.Checked Then
             ucrSelectorGetObject.SetVisible(True)
             ucrCboGetOutputObjectType.SetVisible(True)
             ucrReceiverGetOutputObject.SetVisible(True)
-            SetupReceiverForGetData(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
+            SetupReceiverForGetOutputObject(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
             ucrReceiverGetOutputObject.SetMeAsReceiver()
         End If
     End Sub
 
-    Private Sub SetupReceiverForGetData(strLabel As String, strDataType As String)
+    Private Sub SetupReceiverForGetOutputObject(strLabel As String, strDataType As String)
         ucrReceiverGetOutputObject.Clear()
         lblGetOutputObject.Text = strLabel & ":"
         ucrReceiverGetOutputObject.SetSelectorHeading(strLabel)
@@ -236,14 +236,14 @@ Public Class dlgScript
     Private Sub ucrReceiverGetColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGetColumns.ControlContentsChanged
         Dim clsRFunction As RFunction = ucrReceiverGetColumns.GetVariables()
         Dim strAssignedScript As String = ""
-
-        Dim k = clsRFunction.ToScript(strScript:=strAssignedScript)
-        PreviewScript(k)
+        clsRFunction.SetAssignTo(ucrSelectorGetObject.strCurrentDataFrame & "_cols")
+        clsRFunction.ToScript(strScript:=strAssignedScript)
+        PreviewScript(strAssignedScript)
     End Sub
 
     Private Sub ucrInputGetObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboGetOutputObjectType.ControlValueChanged
         If Not ucrCboGetOutputObjectType.IsEmpty() Then
-            SetupReceiverForGetData(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
+            SetupReceiverForGetOutputObject(ucrCboGetOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboGetOutputObjectType.GetText()))
         End If
     End Sub
 
