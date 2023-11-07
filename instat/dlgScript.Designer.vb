@@ -53,16 +53,17 @@ Partial Class dlgScript
         Me.lblRemoveObject = New System.Windows.Forms.Label()
         Me.ucrInputRemoveObjects = New instat.ucrInputTextBox()
         Me.tbPageLibrary = New System.Windows.Forms.TabPage()
-        Me.lblPreview = New System.Windows.Forms.Label()
-        Me.txtScript = New System.Windows.Forms.TextBox()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.rdoExampleFunction = New System.Windows.Forms.RadioButton()
         Me.rdoExampleData = New System.Windows.Forms.RadioButton()
+        Me.rdoExampleFunction = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlExample = New instat.UcrPanel()
         Me.lstExampleCollection = New System.Windows.Forms.ListView()
         Me.clmDatasets = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmDesc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ucrCboExamplePackages = New instat.ucrInputComboBox()
+        Me.lblPreview = New System.Windows.Forms.Label()
+        Me.txtScript = New System.Windows.Forms.TextBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.tbFeatures.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
@@ -452,8 +453,9 @@ Partial Class dlgScript
         '
         'tbPageLibrary
         '
-        Me.tbPageLibrary.Controls.Add(Me.rdoExampleFunction)
         Me.tbPageLibrary.Controls.Add(Me.rdoExampleData)
+        Me.tbPageLibrary.Controls.Add(Me.rdoExampleFunction)
+        Me.tbPageLibrary.Controls.Add(Me.ucrPnlExample)
         Me.tbPageLibrary.Controls.Add(Me.lstExampleCollection)
         Me.tbPageLibrary.Controls.Add(Me.Label3)
         Me.tbPageLibrary.Controls.Add(Me.ucrCboExamplePackages)
@@ -463,6 +465,97 @@ Partial Class dlgScript
         Me.tbPageLibrary.TabIndex = 4
         Me.tbPageLibrary.Text = "Examples"
         Me.tbPageLibrary.UseVisualStyleBackColor = True
+        '
+        'rdoExampleData
+        '
+        Me.rdoExampleData.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoExampleData.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExampleData.FlatAppearance.BorderSize = 2
+        Me.rdoExampleData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExampleData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoExampleData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoExampleData.Location = New System.Drawing.Point(14, 54)
+        Me.rdoExampleData.Name = "rdoExampleData"
+        Me.rdoExampleData.Size = New System.Drawing.Size(80, 30)
+        Me.rdoExampleData.TabIndex = 57
+        Me.rdoExampleData.TabStop = True
+        Me.rdoExampleData.Text = "Data"
+        Me.rdoExampleData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoExampleData.UseVisualStyleBackColor = True
+        '
+        'rdoExampleFunction
+        '
+        Me.rdoExampleFunction.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoExampleFunction.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExampleFunction.FlatAppearance.BorderSize = 2
+        Me.rdoExampleFunction.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExampleFunction.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoExampleFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoExampleFunction.Location = New System.Drawing.Point(92, 54)
+        Me.rdoExampleFunction.Name = "rdoExampleFunction"
+        Me.rdoExampleFunction.Size = New System.Drawing.Size(80, 30)
+        Me.rdoExampleFunction.TabIndex = 58
+        Me.rdoExampleFunction.TabStop = True
+        Me.rdoExampleFunction.Text = "Function"
+        Me.rdoExampleFunction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoExampleFunction.UseVisualStyleBackColor = True
+        '
+        'ucrPnlExample
+        '
+        Me.ucrPnlExample.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlExample.Location = New System.Drawing.Point(7, 51)
+        Me.ucrPnlExample.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlExample.Name = "ucrPnlExample"
+        Me.ucrPnlExample.Size = New System.Drawing.Size(402, 34)
+        Me.ucrPnlExample.TabIndex = 56
+        '
+        'lstExampleCollection
+        '
+        Me.lstExampleCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
+        Me.lstExampleCollection.FullRowSelect = True
+        Me.lstExampleCollection.HideSelection = False
+        Me.lstExampleCollection.Location = New System.Drawing.Point(3, 93)
+        Me.lstExampleCollection.MultiSelect = False
+        Me.lstExampleCollection.Name = "lstExampleCollection"
+        Me.lstExampleCollection.ShowGroups = False
+        Me.lstExampleCollection.ShowItemToolTips = True
+        Me.lstExampleCollection.Size = New System.Drawing.Size(415, 146)
+        Me.lstExampleCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.lstExampleCollection.TabIndex = 53
+        Me.lstExampleCollection.UseCompatibleStateImageBehavior = False
+        Me.lstExampleCollection.View = System.Windows.Forms.View.Details
+        '
+        'clmDatasets
+        '
+        Me.clmDatasets.Text = "Data"
+        Me.clmDatasets.Width = 142
+        '
+        'clmDesc
+        '
+        Me.clmDesc.Text = "Description"
+        Me.clmDesc.Width = 266
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(13, 5)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(50, 13)
+        Me.Label3.TabIndex = 52
+        Me.Label3.Text = "Package"
+        '
+        'ucrCboExamplePackages
+        '
+        Me.ucrCboExamplePackages.AddQuotesIfUnrecognised = True
+        Me.ucrCboExamplePackages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboExamplePackages.GetSetSelectedIndex = -1
+        Me.ucrCboExamplePackages.IsReadOnly = False
+        Me.ucrCboExamplePackages.Location = New System.Drawing.Point(14, 22)
+        Me.ucrCboExamplePackages.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrCboExamplePackages.Name = "ucrCboExamplePackages"
+        Me.ucrCboExamplePackages.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboExamplePackages.TabIndex = 51
         '
         'lblPreview
         '
@@ -492,78 +585,6 @@ Partial Class dlgScript
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
-        '
-        'rdoExampleFunction
-        '
-        Me.rdoExampleFunction.AutoSize = True
-        Me.rdoExampleFunction.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoExampleFunction.Location = New System.Drawing.Point(157, 36)
-        Me.rdoExampleFunction.Name = "rdoExampleFunction"
-        Me.rdoExampleFunction.Size = New System.Drawing.Size(66, 17)
-        Me.rdoExampleFunction.TabIndex = 55
-        Me.rdoExampleFunction.TabStop = True
-        Me.rdoExampleFunction.Text = "Function"
-        Me.rdoExampleFunction.UseVisualStyleBackColor = True
-        '
-        'rdoExampleData
-        '
-        Me.rdoExampleData.AutoSize = True
-        Me.rdoExampleData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoExampleData.Location = New System.Drawing.Point(37, 36)
-        Me.rdoExampleData.Name = "rdoExampleData"
-        Me.rdoExampleData.Size = New System.Drawing.Size(48, 17)
-        Me.rdoExampleData.TabIndex = 54
-        Me.rdoExampleData.TabStop = True
-        Me.rdoExampleData.Text = "Data"
-        Me.rdoExampleData.UseVisualStyleBackColor = True
-        '
-        'lstExampleCollection
-        '
-        Me.lstExampleCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
-        Me.lstExampleCollection.FullRowSelect = True
-        Me.lstExampleCollection.HideSelection = False
-        Me.lstExampleCollection.Location = New System.Drawing.Point(21, 62)
-        Me.lstExampleCollection.MultiSelect = False
-        Me.lstExampleCollection.Name = "lstExampleCollection"
-        Me.lstExampleCollection.ShowGroups = False
-        Me.lstExampleCollection.ShowItemToolTips = True
-        Me.lstExampleCollection.Size = New System.Drawing.Size(397, 173)
-        Me.lstExampleCollection.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.lstExampleCollection.TabIndex = 53
-        Me.lstExampleCollection.UseCompatibleStateImageBehavior = False
-        Me.lstExampleCollection.View = System.Windows.Forms.View.Details
-        '
-        'clmDatasets
-        '
-        Me.clmDatasets.Text = "Data"
-        Me.clmDatasets.Width = 142
-        '
-        'clmDesc
-        '
-        Me.clmDesc.Text = "Description"
-        Me.clmDesc.Width = 266
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(21, 14)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(50, 13)
-        Me.Label3.TabIndex = 52
-        Me.Label3.Text = "Package"
-        '
-        'ucrCboExamplePackages
-        '
-        Me.ucrCboExamplePackages.AddQuotesIfUnrecognised = True
-        Me.ucrCboExamplePackages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboExamplePackages.GetSetSelectedIndex = -1
-        Me.ucrCboExamplePackages.IsReadOnly = False
-        Me.ucrCboExamplePackages.Location = New System.Drawing.Point(87, 10)
-        Me.ucrCboExamplePackages.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrCboExamplePackages.Name = "ucrCboExamplePackages"
-        Me.ucrCboExamplePackages.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboExamplePackages.TabIndex = 51
         '
         'dlgScript
         '
@@ -629,11 +650,12 @@ Partial Class dlgScript
     Friend WithEvents lblGetPackage As Label
     Friend WithEvents ucrReceiverGetColumns As ucrReceiverMultiple
     Friend WithEvents lblGetColumn As Label
-    Friend WithEvents rdoExampleFunction As RadioButton
-    Friend WithEvents rdoExampleData As RadioButton
     Friend WithEvents lstExampleCollection As ListView
     Friend WithEvents clmDatasets As ColumnHeader
     Friend WithEvents clmDesc As ColumnHeader
     Friend WithEvents Label3 As Label
     Friend WithEvents ucrCboExamplePackages As ucrInputComboBox
+    Friend WithEvents rdoExampleData As RadioButton
+    Friend WithEvents rdoExampleFunction As RadioButton
+    Friend WithEvents ucrPnlExample As UcrPanel
 End Class
