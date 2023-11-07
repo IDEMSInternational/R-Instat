@@ -402,7 +402,7 @@ Public Class dlgScript
         SetDefaults()
     End Sub
 
-    Private Sub TbFeatures_Selected(sender As Object, e As TabControlEventArgs) Handles tbFeatures.Selected
+    Private Sub tbFeatures_Selected(sender As Object, e As TabControlEventArgs) Handles tbFeatures.Selected
         If e.TabPage Is tbPageGetData Then
             rdoGetDataFrame.Checked = True
             ucrPnlGetData.OnControlValueChanged()
