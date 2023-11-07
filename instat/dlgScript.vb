@@ -402,13 +402,6 @@ Public Class dlgScript
         SetDefaults()
     End Sub
 
-    Private Sub PreviewScript(strNewScript As String)
-        txtScript.Text = strNewScript.Trim() & Environment.NewLine
-        txtScript.SelectionStart = txtScript.Text.Length
-        txtScript.ScrollToCaret()
-        txtScript.Refresh()
-    End Sub
-
     Private Sub TbFeatures_Selected(sender As Object, e As TabControlEventArgs) Handles tbFeatures.Selected
         If e.TabPage Is tbPageGetData Then
             rdoGetDataFrame.Checked = True
@@ -427,9 +420,12 @@ Public Class dlgScript
         End If
     End Sub
 
-    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-    '    frmMain.ucrScriptWindow.InsertText(0, txtScript.Text)
-    'End Sub
+    Private Sub PreviewScript(strNewScript As String)
+        txtScript.Text = strNewScript.Trim() & Environment.NewLine
+        txtScript.SelectionStart = txtScript.Text.Length
+        txtScript.ScrollToCaret()
+        txtScript.Refresh()
+    End Sub
 
 
 End Class
