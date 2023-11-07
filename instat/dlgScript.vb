@@ -104,8 +104,10 @@ Public Class dlgScript
         ucrCboExamplePackages.SetDropDownStyleAsNonEditable()
 
         '-------------------------------
-        ' Hide base controls not supported in this dialog
+        ' base buttons controls not supported in this dialog
+        ucrBase.bAppendScriptsAtCurrentScriptWindowCursorPosition = True
 
+        ' hide controls not supported in this dialog
         ucrBase.chkComment.Checked = False
         ucrBase.chkComment.Visible = False
         ucrBase.txtComment.Visible = False
@@ -408,6 +410,10 @@ Public Class dlgScript
             ucrCboExamplePackages.OnControlValueChanged()
         End If
     End Sub
+
+    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    frmMain.ucrScriptWindow.InsertText(0, txtScript.Text)
+    'End Sub
 
 
 End Class

@@ -20,6 +20,13 @@ Public Class ucrButtons
     Public clsRsyntax As RSyntax
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
+
+    ''' <summary>
+    ''' When set to true, scripts will be appended at the current cursor position of the script window
+    ''' When set to false, scripts will appended at the below the last script in the script window
+    ''' </summary>
+    Public bAppendScriptsAtCurrentScriptWindowCursorPosition As Boolean = False
+
     Public Event BeforeClickOk(sender As Object, e As EventArgs)
     Public Event ClickOk(sender As Object, e As EventArgs)
     Public Event ClickReset(sender As Object, e As EventArgs)
@@ -128,7 +135,7 @@ Public Class ucrButtons
             strComments = ""
         End If
         If Not bRun AndAlso strComments <> "" Then
-            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine)
+            frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'Get this list before doing ToScript then no need for global variable name
@@ -147,7 +154,7 @@ Public Class ucrButtons
             If bRun Then
                 frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
-                frmMain.AddToScriptWindow(lstBeforeScripts(i))
+                frmMain.AddToScriptWindow(lstBeforeScripts(i), bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
 
@@ -161,7 +168,7 @@ Public Class ucrButtons
             End If
             frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
-            frmMain.AddToScriptWindow(clsRsyntax.GetScript())
+            frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
@@ -181,7 +188,7 @@ Public Class ucrButtons
                 End If
                 frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
-                frmMain.AddToScriptWindow(lstAfterScripts(i))
+                frmMain.AddToScriptWindow(lstAfterScripts(i), bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
 
@@ -206,7 +213,7 @@ Public Class ucrButtons
             If bRun Then
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
             Else
-                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
+                frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         End If
     End Sub
