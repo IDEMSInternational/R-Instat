@@ -52,7 +52,7 @@ Public Class dlgUseModel
         ucrReceiverForTestColumn.Selector = ucrSelectorUseModel
         ucrReceiverForTestColumn.SetMeAsReceiver()
 
-        ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes", "segmented"})
+        ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes", "segmented", "emmeans"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
@@ -198,6 +198,7 @@ Public Class dlgUseModel
         grpPrediction.Visible = False
         grpExtrRemes.Visible = False
         grpSegmented.Visible = False
+        grpEmmeans.Visible = False
         Select Case ucrInputComboRPackage.GetText
             Case "General"
                 grpGeneral.Visible = True
@@ -205,24 +206,35 @@ Public Class dlgUseModel
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
+                cmdRHelpEmmeans.Visible = False
             Case "Prediction"
                 grpPrediction.Visible = True
                 cmdRHelpGeneral.Visible = False
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = True
                 cmdRHelpSegmented.Visible = False
+                cmdRHelpEmmeans.Visible = False
             Case "extRemes"
                 grpExtrRemes.Visible = True
                 cmdRHelpGeneral.Visible = False
                 cmdRHelpExtRemes.Visible = True
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
+                cmdRHelpEmmeans.Visible = False
             Case "segmented"
                 grpSegmented.Visible = True
                 cmdRHelpGeneral.Visible = False
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = True
+                cmdRHelpEmmeans.Visible = False
+            Case "emmeans"
+                grpEmmeans.Visible = True
+                cmdRHelpEmmeans.Visible = True
+                cmdRHelpGeneral.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpPrediction.Visible = False
+                cmdRHelpSegmented.Visible = False
         End Select
     End Sub
 
@@ -398,7 +410,7 @@ Public Class dlgUseModel
         End If
     End Sub
 
-        Private Sub OpenHelpPage()
+    Private Sub OpenHelpPage()
         If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
@@ -512,4 +524,12 @@ Public Class dlgUseModel
         End If
         OpenHelpPage()
     End Sub
+
+    Private Sub cmdRHelpEmmeans_Click(sender As Object, e As EventArgs) Handles cmdRHelpEmmeans.Click, ToolStripMenuEmmeans.Click
+        If ucrInputComboRPackage.GetText = "emmeans" Then
+            strPackageName = "emmeans"
+        End If
+        OpenHelpPage()
+    End Sub
+
 End Class
