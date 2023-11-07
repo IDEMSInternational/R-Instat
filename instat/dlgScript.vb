@@ -46,14 +46,6 @@ Public Class dlgScript
         dctOutputObjectFormats.Add("Html", RObjectFormat.Html)
 
         '--------------------------------
-        ' Library controls
-
-        'todo. this combo box can be a custom package control in future. Its also needed in dlgHelpVignettes
-        ucrCboLibPackage.SetParameter(New RParameter("package", 0))
-        ucrCboLibPackage.SetItems(GetPackages(), bAddConditions:=True)
-        ucrCboLibPackage.SetDropDownStyleAsNonEditable()
-
-        '--------------------------------
         'save controls
         ucrPnlSaveData.AddRadioButton(rdoSaveDataFrame)
         ucrPnlSaveData.AddRadioButton(rdoSaveColumn)
@@ -96,6 +88,18 @@ Public Class dlgScript
         ucrReceiverGetOutputObject.SetLinkedDisplayControl(lblGetOutputObject)
 
         '--------------------------------
+        ' Command controls
+
+        'todo. this combo box can be a custom package control in future. Its also needed in dlgHelpVignettes
+        ucrCboCommandPackage.SetParameter(New RParameter("package", 0))
+        ucrCboCommandPackage.SetItems(GetPackages(), bAddConditions:=True)
+        ucrCboCommandPackage.SetDropDownStyleAsNonEditable()
+
+
+        ucrPnlCommands.AddRadioButton(rdoCommandPackage)
+        ucrPnlCommands.AddRadioButton(rdoCommandObject)
+
+        '--------------------------------
         'Get example controls
         ucrPnlExample.AddRadioButton(rdoExampleData)
         ucrPnlExample.AddRadioButton(rdoExampleFunction)
@@ -134,7 +138,9 @@ Public Class dlgScript
         ' Examples controls
         rdoExampleData.Checked = True
 
-        ' Common controls
+        ' Command controls
+        rdoCommandPackage.Checked = True
+        ucrCboCommandPackage.GetSetSelectedIndex = -1
         ucrInputRemoveObjects.Reset()
 
         ' Save controls reset
@@ -267,10 +273,22 @@ Public Class dlgScript
         PreviewScript(strAssignedScript)
     End Sub
 
-    Private Sub ucrCboLibPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboLibPackage.ControlValueChanged
+    Private Sub ucrPnlCommands_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCommands.ControlValueChanged
+        ucrCboCommandPackage.SetVisible(False)
+        ucrInputRemoveObjects.SetVisible(False)
+        If rdoCommandPackage.Checked Then
+            ucrCboCommandPackage.SetVisible(True)
+            ucrCboCommandPackage.OnControlValueChanged()
+        ElseIf rdoCommandObject.Checked Then
+            ucrInputRemoveObjects.SetVisible(True)
+            ucrInputRemoveObjects.OnControlValueChanged()
+        End If
+    End Sub
+
+    Private Sub ucrCboLibPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandPackage.ControlValueChanged
         Dim clsLibraryFunction As New RFunction
         clsLibraryFunction.SetRCommand("library")
-        clsLibraryFunction.AddParameter("package", Chr(34) & ucrCboLibPackage.GetText() & Chr(34))
+        clsLibraryFunction.AddParameter("package", Chr(34) & ucrCboCommandPackage.GetText() & Chr(34))
         PreviewScript(clsLibraryFunction.ToScript)
     End Sub
 
@@ -375,8 +393,6 @@ Public Class dlgScript
         End Try
     End Sub
 
-
-
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
         ucrBase.clsRsyntax.SetCommandString(txtScript.Text)
         ucrBase.OKEnabled(txtScript.Text.Length > 0)
@@ -400,10 +416,10 @@ Public Class dlgScript
         ElseIf e.TabPage Is tbPageSaveData Then
             rdoSaveDataFrame.Checked = True
             ucrPnlSaveData.OnControlValueChanged()
-        ElseIf e.TabPage Is tbPageCommon Then
+        ElseIf e.TabPage Is tbPageCommand Then
             'alwys reset the common controls to be blank.
             'the controls functionalities are not related
-            ucrCboLibPackage.GetSetSelectedIndex = -1
+            ucrCboCommandPackage.GetSetSelectedIndex = -1
             ucrInputRemoveObjects.SetName("")
             PreviewScript("")
         ElseIf e.TabPage Is tbPageExamples Then

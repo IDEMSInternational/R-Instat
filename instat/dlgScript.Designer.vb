@@ -47,11 +47,12 @@ Partial Class dlgScript
         Me.rdoGetColumn = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.tbPageCommon = New System.Windows.Forms.TabPage()
-        Me.ucrCboLibPackage = New instat.ucrInputComboBox()
-        Me.lblGetPackage = New System.Windows.Forms.Label()
-        Me.lblRemoveObject = New System.Windows.Forms.Label()
+        Me.tbPageCommand = New System.Windows.Forms.TabPage()
         Me.ucrInputRemoveObjects = New instat.ucrInputTextBox()
+        Me.rdoCommandPackage = New System.Windows.Forms.RadioButton()
+        Me.ucrCboCommandPackage = New instat.ucrInputComboBox()
+        Me.rdoCommandObject = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCommands = New instat.UcrPanel()
         Me.tbPageExamples = New System.Windows.Forms.TabPage()
         Me.rdoExampleData = New System.Windows.Forms.RadioButton()
         Me.rdoExampleFunction = New System.Windows.Forms.RadioButton()
@@ -67,7 +68,7 @@ Partial Class dlgScript
         Me.tbFeatures.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
-        Me.tbPageCommon.SuspendLayout()
+        Me.tbPageCommand.SuspendLayout()
         Me.tbPageExamples.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,7 +76,7 @@ Partial Class dlgScript
         '
         Me.tbFeatures.Controls.Add(Me.tbPageSaveData)
         Me.tbFeatures.Controls.Add(Me.tbPageGetData)
-        Me.tbFeatures.Controls.Add(Me.tbPageCommon)
+        Me.tbFeatures.Controls.Add(Me.tbPageCommand)
         Me.tbFeatures.Controls.Add(Me.tbPageExamples)
         Me.tbFeatures.Location = New System.Drawing.Point(8, 7)
         Me.tbFeatures.Name = "tbFeatures"
@@ -212,7 +213,7 @@ Partial Class dlgScript
         Me.ucrDataFrameSaveOutputSelect.Location = New System.Drawing.Point(86, 54)
         Me.ucrDataFrameSaveOutputSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSaveOutputSelect.Name = "ucrDataFrameSaveOutputSelect"
-        Me.ucrDataFrameSaveOutputSelect.Size = New System.Drawing.Size(158, 47)
+        Me.ucrDataFrameSaveOutputSelect.Size = New System.Drawing.Size(224, 59)
         Me.ucrDataFrameSaveOutputSelect.TabIndex = 29
         '
         'ucrPnlSaveData
@@ -393,51 +394,22 @@ Partial Class dlgScript
         Me.ucrSelectorGetObject.Location = New System.Drawing.Point(9, 52)
         Me.ucrSelectorGetObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGetObject.Name = "ucrSelectorGetObject"
-        Me.ucrSelectorGetObject.Size = New System.Drawing.Size(222, 188)
+        Me.ucrSelectorGetObject.Size = New System.Drawing.Size(320, 274)
         Me.ucrSelectorGetObject.TabIndex = 34
         '
-        'tbPageCommon
+        'tbPageCommand
         '
-        Me.tbPageCommon.Controls.Add(Me.ucrCboLibPackage)
-        Me.tbPageCommon.Controls.Add(Me.lblGetPackage)
-        Me.tbPageCommon.Controls.Add(Me.lblRemoveObject)
-        Me.tbPageCommon.Controls.Add(Me.ucrInputRemoveObjects)
-        Me.tbPageCommon.Location = New System.Drawing.Point(4, 22)
-        Me.tbPageCommon.Name = "tbPageCommon"
-        Me.tbPageCommon.Size = New System.Drawing.Size(438, 245)
-        Me.tbPageCommon.TabIndex = 3
-        Me.tbPageCommon.Text = "Common"
-        Me.tbPageCommon.UseVisualStyleBackColor = True
-        '
-        'ucrCboLibPackage
-        '
-        Me.ucrCboLibPackage.AddQuotesIfUnrecognised = True
-        Me.ucrCboLibPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboLibPackage.GetSetSelectedIndex = -1
-        Me.ucrCboLibPackage.IsReadOnly = False
-        Me.ucrCboLibPackage.Location = New System.Drawing.Point(14, 28)
-        Me.ucrCboLibPackage.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrCboLibPackage.Name = "ucrCboLibPackage"
-        Me.ucrCboLibPackage.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboLibPackage.TabIndex = 44
-        '
-        'lblGetPackage
-        '
-        Me.lblGetPackage.AutoSize = True
-        Me.lblGetPackage.Location = New System.Drawing.Point(11, 11)
-        Me.lblGetPackage.Name = "lblGetPackage"
-        Me.lblGetPackage.Size = New System.Drawing.Size(73, 13)
-        Me.lblGetPackage.TabIndex = 43
-        Me.lblGetPackage.Text = "Get Package:"
-        '
-        'lblRemoveObject
-        '
-        Me.lblRemoveObject.AutoSize = True
-        Me.lblRemoveObject.Location = New System.Drawing.Point(12, 68)
-        Me.lblRemoveObject.Name = "lblRemoveObject"
-        Me.lblRemoveObject.Size = New System.Drawing.Size(95, 13)
-        Me.lblRemoveObject.TabIndex = 3
-        Me.lblRemoveObject.Text = "Remove Object(s):"
+        Me.tbPageCommand.Controls.Add(Me.ucrInputRemoveObjects)
+        Me.tbPageCommand.Controls.Add(Me.rdoCommandPackage)
+        Me.tbPageCommand.Controls.Add(Me.ucrCboCommandPackage)
+        Me.tbPageCommand.Controls.Add(Me.rdoCommandObject)
+        Me.tbPageCommand.Controls.Add(Me.ucrPnlCommands)
+        Me.tbPageCommand.Location = New System.Drawing.Point(4, 22)
+        Me.tbPageCommand.Name = "tbPageCommand"
+        Me.tbPageCommand.Size = New System.Drawing.Size(438, 245)
+        Me.tbPageCommand.TabIndex = 3
+        Me.tbPageCommand.Text = "Commands"
+        Me.tbPageCommand.UseVisualStyleBackColor = True
         '
         'ucrInputRemoveObjects
         '
@@ -445,11 +417,56 @@ Partial Class dlgScript
         Me.ucrInputRemoveObjects.AutoSize = True
         Me.ucrInputRemoveObjects.IsMultiline = False
         Me.ucrInputRemoveObjects.IsReadOnly = False
-        Me.ucrInputRemoveObjects.Location = New System.Drawing.Point(11, 86)
+        Me.ucrInputRemoveObjects.Location = New System.Drawing.Point(156, 56)
         Me.ucrInputRemoveObjects.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputRemoveObjects.Name = "ucrInputRemoveObjects"
         Me.ucrInputRemoveObjects.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputRemoveObjects.TabIndex = 2
+        '
+        'rdoCommandPackage
+        '
+        Me.rdoCommandPackage.AutoSize = True
+        Me.rdoCommandPackage.Location = New System.Drawing.Point(25, 23)
+        Me.rdoCommandPackage.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoCommandPackage.Name = "rdoCommandPackage"
+        Me.rdoCommandPackage.Size = New System.Drawing.Size(91, 17)
+        Me.rdoCommandPackage.TabIndex = 46
+        Me.rdoCommandPackage.TabStop = True
+        Me.rdoCommandPackage.Text = "Get Package:"
+        Me.rdoCommandPackage.UseVisualStyleBackColor = True
+        '
+        'ucrCboCommandPackage
+        '
+        Me.ucrCboCommandPackage.AddQuotesIfUnrecognised = True
+        Me.ucrCboCommandPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboCommandPackage.GetSetSelectedIndex = -1
+        Me.ucrCboCommandPackage.IsReadOnly = False
+        Me.ucrCboCommandPackage.Location = New System.Drawing.Point(156, 19)
+        Me.ucrCboCommandPackage.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrCboCommandPackage.Name = "ucrCboCommandPackage"
+        Me.ucrCboCommandPackage.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboCommandPackage.TabIndex = 44
+        '
+        'rdoCommandObject
+        '
+        Me.rdoCommandObject.AutoSize = True
+        Me.rdoCommandObject.Location = New System.Drawing.Point(25, 60)
+        Me.rdoCommandObject.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoCommandObject.Name = "rdoCommandObject"
+        Me.rdoCommandObject.Size = New System.Drawing.Size(113, 17)
+        Me.rdoCommandObject.TabIndex = 48
+        Me.rdoCommandObject.TabStop = True
+        Me.rdoCommandObject.Text = "Remove Object(s):"
+        Me.rdoCommandObject.UseVisualStyleBackColor = True
+        '
+        'ucrPnlCommands
+        '
+        Me.ucrPnlCommands.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCommands.Location = New System.Drawing.Point(9, 8)
+        Me.ucrPnlCommands.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlCommands.Name = "ucrPnlCommands"
+        Me.ucrPnlCommands.Size = New System.Drawing.Size(333, 143)
+        Me.ucrPnlCommands.TabIndex = 47
         '
         'tbPageExamples
         '
@@ -607,8 +624,8 @@ Partial Class dlgScript
         Me.tbPageSaveData.PerformLayout()
         Me.tbPageGetData.ResumeLayout(False)
         Me.tbPageGetData.PerformLayout()
-        Me.tbPageCommon.ResumeLayout(False)
-        Me.tbPageCommon.PerformLayout()
+        Me.tbPageCommand.ResumeLayout(False)
+        Me.tbPageCommand.PerformLayout()
         Me.tbPageExamples.ResumeLayout(False)
         Me.tbPageExamples.PerformLayout()
         Me.ResumeLayout(False)
@@ -623,7 +640,7 @@ Partial Class dlgScript
     Friend WithEvents tbPageSaveData As TabPage
     Friend WithEvents lblPreview As Label
     Friend WithEvents ucrSaveData As ucrSave
-    Friend WithEvents tbPageCommon As TabPage
+    Friend WithEvents tbPageCommand As TabPage
     Friend WithEvents ucrDataFrameSaveOutputSelect As ucrDataFrame
     Friend WithEvents ucrSelectorGetObject As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblGetOutputObject As Label
@@ -644,10 +661,8 @@ Partial Class dlgScript
     Friend WithEvents ucrCboSaveOutputObjectType As ucrInputComboBox
     Friend WithEvents lblSaveObjectFormat As Label
     Friend WithEvents ucrCboSaveOutputObjectFormat As ucrInputComboBox
-    Friend WithEvents lblRemoveObject As Label
     Friend WithEvents ucrInputRemoveObjects As ucrInputTextBox
-    Friend WithEvents ucrCboLibPackage As ucrInputComboBox
-    Friend WithEvents lblGetPackage As Label
+    Friend WithEvents ucrCboCommandPackage As ucrInputComboBox
     Friend WithEvents ucrReceiverGetColumns As ucrReceiverMultiple
     Friend WithEvents lblGetColumn As Label
     Friend WithEvents lstExampleCollection As ListView
@@ -658,4 +673,7 @@ Partial Class dlgScript
     Friend WithEvents rdoExampleData As RadioButton
     Friend WithEvents rdoExampleFunction As RadioButton
     Friend WithEvents ucrPnlExample As UcrPanel
+    Friend WithEvents ucrPnlCommands As UcrPanel
+    Friend WithEvents rdoCommandPackage As RadioButton
+    Friend WithEvents rdoCommandObject As RadioButton
 End Class
