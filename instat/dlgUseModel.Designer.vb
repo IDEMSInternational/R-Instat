@@ -76,19 +76,22 @@ Partial Class dlgUseModel
         Me.ContextMenuStripSegmented = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuSegmented = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpEmmeans = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
+        Me.cmdXtable = New System.Windows.Forms.Button()
+        Me.cmdTest = New System.Windows.Forms.Button()
+        Me.cmdPairs = New System.Windows.Forms.Button()
+        Me.cmdRefgrid = New System.Windows.Forms.Button()
+        Me.cmdEmmeansSummary = New System.Windows.Forms.Button()
+        Me.cmdpwpp = New System.Windows.Forms.Button()
+        Me.cmdEmmeansPlot = New System.Windows.Forms.Button()
+        Me.cmdIntplot = New System.Windows.Forms.Button()
+        Me.cmdContrast = New System.Windows.Forms.Button()
+        Me.cmdEmmeanConfint = New System.Windows.Forms.Button()
+        Me.cmdTrends = New System.Windows.Forms.Button()
+        Me.cmdEmmeans = New System.Windows.Forms.Button()
+        Me.cmdJoint = New System.Windows.Forms.Button()
+        Me.ContextMenuStripEmmeans = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuEmmeans = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdRHelpEmmeans = New instat.ucrSplitButton()
         Me.cmdRHelpSegmented = New instat.ucrSplitButton()
         Me.cmdRHelpExtRemes = New instat.ucrSplitButton()
         Me.cmdRHelpGeneral = New instat.ucrSplitButton()
@@ -101,9 +104,6 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.cmdRHelpEmmeans = New instat.ucrSplitButton()
-        Me.ContextMenuStripEmmeans = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripMenuEmmeans = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -678,19 +678,19 @@ Partial Class dlgUseModel
         '
         'grpEmmeans
         '
-        Me.grpEmmeans.Controls.Add(Me.Button1)
-        Me.grpEmmeans.Controls.Add(Me.Button15)
-        Me.grpEmmeans.Controls.Add(Me.Button14)
-        Me.grpEmmeans.Controls.Add(Me.Button13)
-        Me.grpEmmeans.Controls.Add(Me.Button4)
-        Me.grpEmmeans.Controls.Add(Me.Button5)
-        Me.grpEmmeans.Controls.Add(Me.Button6)
-        Me.grpEmmeans.Controls.Add(Me.Button7)
-        Me.grpEmmeans.Controls.Add(Me.Button8)
-        Me.grpEmmeans.Controls.Add(Me.Button9)
-        Me.grpEmmeans.Controls.Add(Me.Button10)
-        Me.grpEmmeans.Controls.Add(Me.Button11)
-        Me.grpEmmeans.Controls.Add(Me.Button12)
+        Me.grpEmmeans.Controls.Add(Me.cmdXtable)
+        Me.grpEmmeans.Controls.Add(Me.cmdTest)
+        Me.grpEmmeans.Controls.Add(Me.cmdPairs)
+        Me.grpEmmeans.Controls.Add(Me.cmdRefgrid)
+        Me.grpEmmeans.Controls.Add(Me.cmdEmmeansSummary)
+        Me.grpEmmeans.Controls.Add(Me.cmdpwpp)
+        Me.grpEmmeans.Controls.Add(Me.cmdEmmeansPlot)
+        Me.grpEmmeans.Controls.Add(Me.cmdIntplot)
+        Me.grpEmmeans.Controls.Add(Me.cmdContrast)
+        Me.grpEmmeans.Controls.Add(Me.cmdEmmeanConfint)
+        Me.grpEmmeans.Controls.Add(Me.cmdTrends)
+        Me.grpEmmeans.Controls.Add(Me.cmdEmmeans)
+        Me.grpEmmeans.Controls.Add(Me.cmdJoint)
         Me.grpEmmeans.Location = New System.Drawing.Point(260, 106)
         Me.grpEmmeans.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpEmmeans.Name = "grpEmmeans"
@@ -700,148 +700,172 @@ Partial Class dlgUseModel
         Me.grpEmmeans.TabStop = False
         Me.grpEmmeans.Text = "Emmeans"
         '
-        'Button1
+        'cmdXtable
         '
-        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button1.Location = New System.Drawing.Point(3, 99)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(69, 30)
-        Me.Button1.TabIndex = 165
-        Me.Button1.Text = "xtable"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdXtable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdXtable.Location = New System.Drawing.Point(3, 99)
+        Me.cmdXtable.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdXtable.Name = "cmdXtable"
+        Me.cmdXtable.Size = New System.Drawing.Size(69, 30)
+        Me.cmdXtable.TabIndex = 165
+        Me.cmdXtable.Text = "xtable"
+        Me.cmdXtable.UseVisualStyleBackColor = True
         '
-        'Button15
+        'cmdTest
         '
-        Me.Button15.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button15.Location = New System.Drawing.Point(209, 70)
-        Me.Button15.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(69, 30)
-        Me.Button15.TabIndex = 164
-        Me.Button15.Text = "test"
-        Me.Button15.UseVisualStyleBackColor = True
+        Me.cmdTest.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTest.Location = New System.Drawing.Point(209, 70)
+        Me.cmdTest.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdTest.Name = "cmdTest"
+        Me.cmdTest.Size = New System.Drawing.Size(69, 30)
+        Me.cmdTest.TabIndex = 164
+        Me.cmdTest.Text = "test"
+        Me.cmdTest.UseVisualStyleBackColor = True
         '
-        'Button14
+        'cmdPairs
         '
-        Me.Button14.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button14.Location = New System.Drawing.Point(209, 41)
-        Me.Button14.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(69, 30)
-        Me.Button14.TabIndex = 163
-        Me.Button14.Text = "pairs"
-        Me.Button14.UseVisualStyleBackColor = True
+        Me.cmdPairs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPairs.Location = New System.Drawing.Point(209, 41)
+        Me.cmdPairs.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPairs.Name = "cmdPairs"
+        Me.cmdPairs.Size = New System.Drawing.Size(69, 30)
+        Me.cmdPairs.TabIndex = 163
+        Me.cmdPairs.Text = "pairs"
+        Me.cmdPairs.UseVisualStyleBackColor = True
         '
-        'Button13
+        'cmdRefgrid
         '
-        Me.Button13.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button13.Location = New System.Drawing.Point(209, 12)
-        Me.Button13.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(69, 30)
-        Me.Button13.TabIndex = 162
-        Me.Button13.Text = "refgrid"
-        Me.Button13.UseVisualStyleBackColor = True
+        Me.cmdRefgrid.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRefgrid.Location = New System.Drawing.Point(209, 12)
+        Me.cmdRefgrid.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdRefgrid.Name = "cmdRefgrid"
+        Me.cmdRefgrid.Size = New System.Drawing.Size(69, 30)
+        Me.cmdRefgrid.TabIndex = 162
+        Me.cmdRefgrid.Text = "refgrid"
+        Me.cmdRefgrid.UseVisualStyleBackColor = True
         '
-        'Button4
+        'cmdEmmeansSummary
         '
-        Me.Button4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button4.Location = New System.Drawing.Point(140, 70)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(69, 30)
-        Me.Button4.TabIndex = 159
-        Me.Button4.Text = "summary"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.cmdEmmeansSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdEmmeansSummary.Location = New System.Drawing.Point(140, 70)
+        Me.cmdEmmeansSummary.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdEmmeansSummary.Name = "cmdEmmeansSummary"
+        Me.cmdEmmeansSummary.Size = New System.Drawing.Size(69, 30)
+        Me.cmdEmmeansSummary.TabIndex = 159
+        Me.cmdEmmeansSummary.Text = "summary"
+        Me.cmdEmmeansSummary.UseVisualStyleBackColor = True
         '
-        'Button5
+        'cmdpwpp
         '
-        Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button5.Location = New System.Drawing.Point(72, 70)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(69, 30)
-        Me.Button5.TabIndex = 158
-        Me.Button5.Text = "pwpp"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.cmdpwpp.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdpwpp.Location = New System.Drawing.Point(72, 70)
+        Me.cmdpwpp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdpwpp.Name = "cmdpwpp"
+        Me.cmdpwpp.Size = New System.Drawing.Size(69, 30)
+        Me.cmdpwpp.TabIndex = 158
+        Me.cmdpwpp.Text = "pwpp"
+        Me.cmdpwpp.UseVisualStyleBackColor = True
         '
-        'Button6
+        'cmdEmmeansPlot
         '
-        Me.Button6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button6.Location = New System.Drawing.Point(3, 70)
-        Me.Button6.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(69, 30)
-        Me.Button6.TabIndex = 157
-        Me.Button6.Text = "plot"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.cmdEmmeansPlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdEmmeansPlot.Location = New System.Drawing.Point(3, 70)
+        Me.cmdEmmeansPlot.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdEmmeansPlot.Name = "cmdEmmeansPlot"
+        Me.cmdEmmeansPlot.Size = New System.Drawing.Size(69, 30)
+        Me.cmdEmmeansPlot.TabIndex = 157
+        Me.cmdEmmeansPlot.Text = "plot"
+        Me.cmdEmmeansPlot.UseVisualStyleBackColor = True
         '
-        'Button7
+        'cmdIntplot
         '
-        Me.Button7.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button7.Location = New System.Drawing.Point(140, 41)
-        Me.Button7.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(69, 30)
-        Me.Button7.TabIndex = 156
-        Me.Button7.Text = "intplot"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.cmdIntplot.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdIntplot.Location = New System.Drawing.Point(140, 41)
+        Me.cmdIntplot.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdIntplot.Name = "cmdIntplot"
+        Me.cmdIntplot.Size = New System.Drawing.Size(69, 30)
+        Me.cmdIntplot.TabIndex = 156
+        Me.cmdIntplot.Text = "intplot"
+        Me.cmdIntplot.UseVisualStyleBackColor = True
         '
-        'Button8
+        'cmdContrast
         '
-        Me.Button8.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button8.Location = New System.Drawing.Point(72, 41)
-        Me.Button8.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(69, 30)
-        Me.Button8.TabIndex = 155
-        Me.Button8.Text = "contrast"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.cmdContrast.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdContrast.Location = New System.Drawing.Point(72, 41)
+        Me.cmdContrast.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdContrast.Name = "cmdContrast"
+        Me.cmdContrast.Size = New System.Drawing.Size(69, 30)
+        Me.cmdContrast.TabIndex = 155
+        Me.cmdContrast.Text = "contrast"
+        Me.cmdContrast.UseVisualStyleBackColor = True
         '
-        'Button9
+        'cmdEmmeanConfint
         '
-        Me.Button9.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button9.Location = New System.Drawing.Point(3, 41)
-        Me.Button9.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(69, 30)
-        Me.Button9.TabIndex = 154
-        Me.Button9.Text = "confint"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.cmdEmmeanConfint.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdEmmeanConfint.Location = New System.Drawing.Point(3, 41)
+        Me.cmdEmmeanConfint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdEmmeanConfint.Name = "cmdEmmeanConfint"
+        Me.cmdEmmeanConfint.Size = New System.Drawing.Size(69, 30)
+        Me.cmdEmmeanConfint.TabIndex = 154
+        Me.cmdEmmeanConfint.Text = "confint"
+        Me.cmdEmmeanConfint.UseVisualStyleBackColor = True
         '
-        'Button10
+        'cmdTrends
         '
-        Me.Button10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button10.Location = New System.Drawing.Point(72, 12)
-        Me.Button10.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(69, 30)
-        Me.Button10.TabIndex = 126
-        Me.Button10.Text = "trends"
-        Me.Button10.UseVisualStyleBackColor = True
+        Me.cmdTrends.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTrends.Location = New System.Drawing.Point(72, 12)
+        Me.cmdTrends.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdTrends.Name = "cmdTrends"
+        Me.cmdTrends.Size = New System.Drawing.Size(69, 30)
+        Me.cmdTrends.TabIndex = 126
+        Me.cmdTrends.Text = "trends"
+        Me.cmdTrends.UseVisualStyleBackColor = True
         '
-        'Button11
+        'cmdEmmeans
         '
-        Me.Button11.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button11.Location = New System.Drawing.Point(3, 12)
-        Me.Button11.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(69, 30)
-        Me.Button11.TabIndex = 124
-        Me.Button11.Text = "emmeans"
-        Me.Button11.UseVisualStyleBackColor = True
+        Me.cmdEmmeans.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdEmmeans.Location = New System.Drawing.Point(3, 12)
+        Me.cmdEmmeans.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdEmmeans.Name = "cmdEmmeans"
+        Me.cmdEmmeans.Size = New System.Drawing.Size(69, 30)
+        Me.cmdEmmeans.TabIndex = 124
+        Me.cmdEmmeans.Text = "emmeans"
+        Me.cmdEmmeans.UseVisualStyleBackColor = True
         '
-        'Button12
+        'cmdJoint
         '
-        Me.Button12.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button12.Location = New System.Drawing.Point(140, 12)
-        Me.Button12.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(69, 30)
-        Me.Button12.TabIndex = 153
-        Me.Button12.Text = "joint"
-        Me.Button12.UseVisualStyleBackColor = True
+        Me.cmdJoint.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdJoint.Location = New System.Drawing.Point(140, 12)
+        Me.cmdJoint.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdJoint.Name = "cmdJoint"
+        Me.cmdJoint.Size = New System.Drawing.Size(69, 30)
+        Me.cmdJoint.TabIndex = 153
+        Me.cmdJoint.Text = "joint"
+        Me.cmdJoint.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripEmmeans
+        '
+        Me.ContextMenuStripEmmeans.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuEmmeans})
+        Me.ContextMenuStripEmmeans.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripEmmeans.Size = New System.Drawing.Size(127, 26)
+        '
+        'ToolStripMenuEmmeans
+        '
+        Me.ToolStripMenuEmmeans.Name = "ToolStripMenuEmmeans"
+        Me.ToolStripMenuEmmeans.Size = New System.Drawing.Size(126, 22)
+        Me.ToolStripMenuEmmeans.Text = "emmeans"
+        '
+        'cmdRHelpEmmeans
+        '
+        Me.cmdRHelpEmmeans.AutoSize = True
+        Me.cmdRHelpEmmeans.ContextMenuStrip = Me.ContextMenuStripEmmeans
+        Me.cmdRHelpEmmeans.Location = New System.Drawing.Point(460, 79)
+        Me.cmdRHelpEmmeans.Name = "cmdRHelpEmmeans"
+        Me.cmdRHelpEmmeans.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpEmmeans.SplitMenuStrip = Me.ContextMenuStripEmmeans
+        Me.cmdRHelpEmmeans.TabIndex = 223
+        Me.cmdRHelpEmmeans.Text = "R Help"
+        Me.cmdRHelpEmmeans.UseVisualStyleBackColor = True
         '
         'cmdRHelpSegmented
         '
@@ -979,30 +1003,6 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'cmdRHelpEmmeans
-        '
-        Me.cmdRHelpEmmeans.AutoSize = True
-        Me.cmdRHelpEmmeans.ContextMenuStrip = Me.ContextMenuStripEmmeans
-        Me.cmdRHelpEmmeans.Location = New System.Drawing.Point(460, 79)
-        Me.cmdRHelpEmmeans.Name = "cmdRHelpEmmeans"
-        Me.cmdRHelpEmmeans.Size = New System.Drawing.Size(68, 23)
-        Me.cmdRHelpEmmeans.SplitMenuStrip = Me.ContextMenuStripEmmeans
-        Me.cmdRHelpEmmeans.TabIndex = 223
-        Me.cmdRHelpEmmeans.Text = "R Help"
-        Me.cmdRHelpEmmeans.UseVisualStyleBackColor = True
-        '
-        'ContextMenuStripEmmeans
-        '
-        Me.ContextMenuStripEmmeans.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuEmmeans})
-        Me.ContextMenuStripEmmeans.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripEmmeans.Size = New System.Drawing.Size(127, 26)
-        '
-        'ToolStripMenuEmmeans
-        '
-        Me.ToolStripMenuEmmeans.Name = "ToolStripMenuEmmeans"
-        Me.ToolStripMenuEmmeans.Size = New System.Drawing.Size(126, 22)
-        Me.ToolStripMenuEmmeans.Text = "emmeans"
-        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1010,6 +1010,7 @@ Partial Class dlgUseModel
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(582, 423)
         Me.Controls.Add(Me.grpEmmeans)
+        Me.Controls.Add(Me.grpSegmented)
         Me.Controls.Add(Me.cmdRHelpEmmeans)
         Me.Controls.Add(Me.cmdRHelpSegmented)
         Me.Controls.Add(Me.cmdRHelpExtRemes)
@@ -1020,7 +1021,6 @@ Partial Class dlgUseModel
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
-        Me.Controls.Add(Me.grpSegmented)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.grpExtrRemes)
         Me.Controls.Add(Me.ucrInputModels)
@@ -1118,19 +1118,19 @@ Partial Class dlgUseModel
     Friend WithEvents ContextMenuStripSegmented As ContextMenuStrip
     Friend WithEvents ToolStripMenuSegmented As ToolStripMenuItem
     Friend WithEvents grpEmmeans As GroupBox
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button7 As Button
-    Friend WithEvents Button8 As Button
-    Friend WithEvents Button9 As Button
-    Friend WithEvents Button10 As Button
-    Friend WithEvents Button11 As Button
-    Friend WithEvents Button12 As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button15 As Button
-    Friend WithEvents Button14 As Button
-    Friend WithEvents Button13 As Button
+    Friend WithEvents cmdEmmeansSummary As Button
+    Friend WithEvents cmdpwpp As Button
+    Friend WithEvents cmdEmmeansPlot As Button
+    Friend WithEvents cmdIntplot As Button
+    Friend WithEvents cmdContrast As Button
+    Friend WithEvents cmdEmmeanConfint As Button
+    Friend WithEvents cmdTrends As Button
+    Friend WithEvents cmdEmmeans As Button
+    Friend WithEvents cmdJoint As Button
+    Friend WithEvents cmdXtable As Button
+    Friend WithEvents cmdTest As Button
+    Friend WithEvents cmdPairs As Button
+    Friend WithEvents cmdRefgrid As Button
     Friend WithEvents cmdRHelpEmmeans As ucrSplitButton
     Friend WithEvents ContextMenuStripEmmeans As ContextMenuStrip
     Friend WithEvents ToolStripMenuEmmeans As ToolStripMenuItem
