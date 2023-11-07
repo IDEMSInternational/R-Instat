@@ -106,6 +106,8 @@ Public Class ucrScript
 
         If bAppendAtCurrentCursorPosition Then
             clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText & Environment.NewLine)
+            ' Todo. find a way of going to the last position of the inserted "group of text".
+            ' Currently this just goes to the last position of the first line of inserted text
             clsScriptActive.GotoPosition(clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition)
         Else
             clsScriptActive.AppendText(Environment.NewLine & strText)
