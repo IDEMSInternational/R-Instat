@@ -52,7 +52,7 @@ Partial Class dlgScript
         Me.lblGetPackage = New System.Windows.Forms.Label()
         Me.lblRemoveObject = New System.Windows.Forms.Label()
         Me.ucrInputRemoveObjects = New instat.ucrInputTextBox()
-        Me.tbPageLibrary = New System.Windows.Forms.TabPage()
+        Me.tbPageExamples = New System.Windows.Forms.TabPage()
         Me.rdoExampleData = New System.Windows.Forms.RadioButton()
         Me.rdoExampleFunction = New System.Windows.Forms.RadioButton()
         Me.ucrPnlExample = New instat.UcrPanel()
@@ -68,7 +68,7 @@ Partial Class dlgScript
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
         Me.tbPageCommon.SuspendLayout()
-        Me.tbPageLibrary.SuspendLayout()
+        Me.tbPageExamples.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbFeatures
@@ -76,7 +76,7 @@ Partial Class dlgScript
         Me.tbFeatures.Controls.Add(Me.tbPageSaveData)
         Me.tbFeatures.Controls.Add(Me.tbPageGetData)
         Me.tbFeatures.Controls.Add(Me.tbPageCommon)
-        Me.tbFeatures.Controls.Add(Me.tbPageLibrary)
+        Me.tbFeatures.Controls.Add(Me.tbPageExamples)
         Me.tbFeatures.Location = New System.Drawing.Point(8, 7)
         Me.tbFeatures.Name = "tbFeatures"
         Me.tbFeatures.SelectedIndex = 0
@@ -451,20 +451,20 @@ Partial Class dlgScript
         Me.ucrInputRemoveObjects.Size = New System.Drawing.Size(145, 21)
         Me.ucrInputRemoveObjects.TabIndex = 2
         '
-        'tbPageLibrary
+        'tbPageExamples
         '
-        Me.tbPageLibrary.Controls.Add(Me.rdoExampleData)
-        Me.tbPageLibrary.Controls.Add(Me.rdoExampleFunction)
-        Me.tbPageLibrary.Controls.Add(Me.ucrPnlExample)
-        Me.tbPageLibrary.Controls.Add(Me.lstExampleCollection)
-        Me.tbPageLibrary.Controls.Add(Me.Label3)
-        Me.tbPageLibrary.Controls.Add(Me.ucrCboExamplePackages)
-        Me.tbPageLibrary.Location = New System.Drawing.Point(4, 22)
-        Me.tbPageLibrary.Name = "tbPageLibrary"
-        Me.tbPageLibrary.Size = New System.Drawing.Size(438, 245)
-        Me.tbPageLibrary.TabIndex = 4
-        Me.tbPageLibrary.Text = "Examples"
-        Me.tbPageLibrary.UseVisualStyleBackColor = True
+        Me.tbPageExamples.Controls.Add(Me.rdoExampleData)
+        Me.tbPageExamples.Controls.Add(Me.rdoExampleFunction)
+        Me.tbPageExamples.Controls.Add(Me.ucrPnlExample)
+        Me.tbPageExamples.Controls.Add(Me.lstExampleCollection)
+        Me.tbPageExamples.Controls.Add(Me.Label3)
+        Me.tbPageExamples.Controls.Add(Me.ucrCboExamplePackages)
+        Me.tbPageExamples.Location = New System.Drawing.Point(4, 22)
+        Me.tbPageExamples.Name = "tbPageExamples"
+        Me.tbPageExamples.Size = New System.Drawing.Size(438, 245)
+        Me.tbPageExamples.TabIndex = 4
+        Me.tbPageExamples.Text = "Examples"
+        Me.tbPageExamples.UseVisualStyleBackColor = True
         '
         'rdoExampleData
         '
@@ -609,8 +609,8 @@ Partial Class dlgScript
         Me.tbPageGetData.PerformLayout()
         Me.tbPageCommon.ResumeLayout(False)
         Me.tbPageCommon.PerformLayout()
-        Me.tbPageLibrary.ResumeLayout(False)
-        Me.tbPageLibrary.PerformLayout()
+        Me.tbPageExamples.ResumeLayout(False)
+        Me.tbPageExamples.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -639,7 +639,7 @@ Partial Class dlgScript
     Friend WithEvents txtScript As TextBox
     Friend WithEvents lblGetObjectType As Label
     Friend WithEvents ucrCboGetOutputObjectType As ucrInputComboBox
-    Friend WithEvents tbPageLibrary As TabPage
+    Friend WithEvents tbPageExamples As TabPage
     Friend WithEvents lblSaveObjectType As Label
     Friend WithEvents ucrCboSaveOutputObjectType As ucrInputComboBox
     Friend WithEvents lblSaveObjectFormat As Label

@@ -95,6 +95,14 @@ Public Class dlgScript
         ucrReceiverGetOutputObject.Selector = ucrSelectorGetObject
         ucrReceiverGetOutputObject.SetLinkedDisplayControl(lblGetOutputObject)
 
+        '--------------------------------
+        'Get example controls
+        ucrPnlExample.AddRadioButton(rdoExampleData)
+        ucrPnlExample.AddRadioButton(rdoExampleFunction)
+
+        ucrCboExamplePackages.SetItems(GetPackages(), bAddConditions:=False)
+        ucrCboExamplePackages.SetDropDownStyleAsNonEditable()
+
         '-------------------------------
         ' Hide base controls not supported in this dialog
 
@@ -121,7 +129,10 @@ Public Class dlgScript
 
     Private Sub SetDefaults()
 
-        'Finally controls
+        ' Examples controls
+        rdoExampleData.Checked = True
+
+        ' Common controls
         ucrInputRemoveObjects.Reset()
 
         ' Save controls reset
@@ -277,6 +288,93 @@ Public Class dlgScript
         PreviewScript(clsRemoveFunc.ToScript())
     End Sub
 
+    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboExamplePackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
+
+        PreviewScript("")
+        lstExampleCollection.Items.Clear()
+
+        If ucrCboExamplePackages.IsEmpty Then
+            Exit Sub
+        End If
+
+        Dim strSelectedPackage As String = ucrCboExamplePackages.GetText()
+
+        If rdoExampleData.Checked Then
+            lstExampleCollection.Columns(0).Text = "Data"
+            lstExampleCollection.Items.AddRange(GetDatasets(strSelectedPackage))
+        ElseIf rdoExampleFunction.Checked Then
+            lstExampleCollection.Columns(0).Text = "Functions"
+            lstExampleCollection.Items.AddRange(GetFunctions(strSelectedPackage))
+        End If
+        lstExampleCollection.Select()
+
+    End Sub
+
+    Private Function GetDatasets(strPackage As String) As ListViewItem()
+
+        Dim dfDataframe As DataFrame = frmMain.clsRLink.RunInternalScriptGetValue(
+            "data.frame(data(package =" & Chr(34) & strPackage & Chr(34) & ")$results)[ ,3:4]", bSilent:=True)?.AsDataFrame()
+
+        If dfDataframe Is Nothing Then
+            Return {}
+        End If
+
+        Dim lstViewItems(dfDataframe.RowCount - 1) As ListViewItem
+        For i As Integer = 0 To dfDataframe.RowCount - 1
+            Dim lstViewItem As New ListViewItem With {
+                .Text = dfDataframe(i, 0)
+            }
+
+            'lstViewItem.SubItems.Add(dfDataframe(i, 0))
+            lstViewItem.SubItems.Add(If(dfDataframe.ColumnCount > 1, dfDataframe(i, 1), ""))
+            lstViewItems(i) = lstViewItem
+        Next
+        Return lstViewItems
+
+    End Function
+
+    Private Function GetFunctions(strPackage As String) As ListViewItem()
+
+        Dim expTemp As GenericVector = frmMain.clsRLink.RunInternalScriptGetValue("ls(pos = asNamespace(" & Chr(34) & strPackage & Chr(34) & "))", bSilent:=True)?.AsList()
+
+        If expTemp Is Nothing Then
+            Return {}
+        End If
+
+        Dim lstViewItems(expTemp.Length - 1) As ListViewItem
+        For i = 0 To expTemp.Length - 1
+            Dim lstViewItem As New ListViewItem With {
+                .Text = expTemp.AsCharacter(i)
+            }
+            lstViewItem.SubItems.Add("")
+            lstViewItems(i) = lstViewItem
+        Next
+        Return lstViewItems
+
+    End Function
+
+    Private Sub lstExampleCollection_Click(sender As Object, e As EventArgs) Handles lstExampleCollection.Click
+        If lstExampleCollection.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim strTopic As String = lstExampleCollection.SelectedItems(0).SubItems(0).Text
+        Try
+
+            Dim clsLibraryExpFunction As New RFunction
+            clsLibraryExpFunction.SetRCommand("getExample")
+            clsLibraryExpFunction.AddParameter("package", Chr(34) & ucrCboExamplePackages.GetText() & Chr(34), iPosition:=1)
+            clsLibraryExpFunction.AddParameter("topic", Chr(34) & strTopic & Chr(34), iPosition:=0)
+
+            Dim strExample As String = frmMain.clsRLink.RunInternalScriptGetValue(clsLibraryExpFunction.Clone.ToScript(), bSilent:=True).AsCharacter(0)
+            PreviewScript(strExample)
+        Catch ex As Exception
+            MsgBox(strTopic & " has a help file but no examples.")
+        End Try
+    End Sub
+
+
+
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
         ucrBase.clsRsyntax.SetCommandString(txtScript.Text)
         ucrBase.OKEnabled(txtScript.Text.Length > 0)
@@ -294,9 +392,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub TbFeatures_Selected(sender As Object, e As TabControlEventArgs) Handles tbFeatures.Selected
-        If e.TabPage Is tbPageLibrary Then
-            ucrCboLibPackage.OnControlContentsChanged()
-        ElseIf e.TabPage Is tbPageGetData Then
+        If e.TabPage Is tbPageGetData Then
             rdoGetDataFrame.Checked = True
             ucrPnlGetData.OnControlValueChanged()
         ElseIf e.TabPage Is tbPageSaveData Then
@@ -308,7 +404,10 @@ Public Class dlgScript
             ucrCboLibPackage.GetSetSelectedIndex = -1
             ucrInputRemoveObjects.SetName("")
             PreviewScript("")
+        ElseIf e.TabPage Is tbPageExamples Then
+            ucrCboExamplePackages.OnControlValueChanged()
         End If
     End Sub
+
 
 End Class
