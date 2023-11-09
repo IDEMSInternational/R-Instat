@@ -26,6 +26,7 @@ Public Class ucrButtons
     ''' When set to false, scripts will appended at the below the last script in the script window
     ''' </summary>
     Public bAppendScriptsAtCurrentScriptWindowCursorPosition As Boolean = False
+    Public bAddScriptToScriptWindowOnClickOk As Boolean = True
 
     Public Event BeforeClickOk(sender As Object, e As EventArgs)
     Public Event ClickOk(sender As Object, e As EventArgs)
@@ -56,7 +57,7 @@ Public Class ucrButtons
 
     '"Ok", "Ok and Close" and "Ok and Keep" Click event 
     Private Sub Ok_Click(sender As Object, e As EventArgs) Handles cmdOk.Click, toolStripMenuItemOkClose.Click, toolStripMenuItemOkKeep.Click
-        OnScriptButtonsClick(sender, e, True, Not sender Is toolStripMenuItemOkKeep)
+        OnScriptButtonsClick(sender, e, bAddScriptToScriptWindowOnClickOk, Not sender Is toolStripMenuItemOkKeep)
     End Sub
 
     '"To Script", "To Script and Close" and "To Script and Keep" Click event 
