@@ -539,6 +539,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans( , specs =~ )", 12)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdTrends_Click(sender As Object, e As EventArgs) Handles cmdTrends.Click
@@ -548,6 +549,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emtrends( , var = )", 9)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdJoint_Click(sender As Object, e As EventArgs) Handles cmdJoint.Click
@@ -557,6 +559,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::joint_tests( )", 1)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdRefgrid_Click(sender As Object, e As EventArgs) Handles cmdRefgrid.Click
@@ -566,6 +569,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::ref_grid( )", 1)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdEmmeanConfint_Click(sender As Object, e As EventArgs) Handles cmdEmmeanConfint.Click
@@ -575,6 +579,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("confint( )", 1)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdContrast_Click(sender As Object, e As EventArgs) Handles cmdContrast.Click
@@ -584,15 +589,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::contrast( )", 1)
         End If
-    End Sub
-
-    Private Sub cmdIntplot_Click(sender As Object, e As EventArgs) Handles cmdIntplot.Click
-        Clear()
-        If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmip(obj= , formula = ~ , CIs = FALSE, PIs = TRUE, plotit = TRUE)", 55)
-        Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmip( , formula = ~ )", 15)
-        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdPairs_Click(sender As Object, e As EventArgs) Handles cmdPairs.Click
@@ -602,24 +599,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("pairs( )", 1)
         End If
-    End Sub
-
-    Private Sub cmdEmmeansPlot_Click(sender As Object, e As EventArgs) Handles cmdEmmeansPlot.Click
-        Clear()
-        If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot(obj= , by=NULL, comparisons = TRUE, horizontal = FALSE, colors = ""darkgreen"")", 73)
-        Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot( )", 1)
-        End If
-    End Sub
-
-    Private Sub cmdpwpp_Click(sender As Object, e As EventArgs) Handles cmdpwpp.Click
-        Clear()
-        If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , method = ""trt.vs.ctrll"", type = ""response"", method = "">"")", 60)
-        Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::pwpp( )", 1)
-        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdEmmeansSummary_Click(sender As Object, e As EventArgs) Handles cmdEmmeansSummary.Click
@@ -629,6 +609,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary( )", 1)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdTest_Click(sender As Object, e As EventArgs) Handles cmdTest.Click
@@ -638,6 +619,7 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::test( )", 1)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
     Private Sub cmdXtable_Click(sender As Object, e As EventArgs) Handles cmdXtable.Click
@@ -647,6 +629,36 @@ Public Class dlgUseModel
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("xtable::xtable( )", 1)
         End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
     End Sub
 
+    Private Sub cmdIntplot_Click(sender As Object, e As EventArgs) Handles cmdIntplot.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmip(obj= , formula = ~ , CIs = FALSE, PIs = TRUE, plotit = TRUE)", 55)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmip( , formula = ~ )", 15)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+    End Sub
+
+    Private Sub cmdEmmeansPlot_Click(sender As Object, e As EventArgs) Handles cmdEmmeansPlot.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot(obj= , by=NULL, comparisons = TRUE, horizontal = FALSE, colors = ""darkgreen"")", 73)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+    End Sub
+
+    Private Sub cmdpwpp_Click(sender As Object, e As EventArgs) Handles cmdpwpp.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , method = ""trt.vs.ctrll"", type = ""response"", method = "">"")", 60)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::pwpp( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+    End Sub
 End Class
