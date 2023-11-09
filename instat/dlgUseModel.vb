@@ -535,16 +535,25 @@ Public Class dlgUseModel
     Private Sub cmdEmmeans_Click(sender As Object, e As EventArgs) Handles cmdEmmeans.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans(obj= , specs =~ , by = NULL )", 23)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans(obj= , specs =~ , by = NULL )", 24)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans( , specs =~ )", 11)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans( , specs =~ )", 12)
+        End If
+    End Sub
+
+    Private Sub cmdTrends_Click(sender As Object, e As EventArgs) Handles cmdTrends.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans(obj= , var = )", 9)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emtrends( , var = )", 9)
         End If
     End Sub
 
     Private Sub cmdJoint_Click(sender As Object, e As EventArgs) Handles cmdJoint.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::joint_tests(obj= , by = NULL, show0df = FALSE, showconf=TRUE, cov.reduce=make.meanint(1))", 70)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::joint_tests(obj= , by = NULL, show0df = FALSE, showconf=TRUE, cov.reduce=make.meanint(1))", 72)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::joint_tests( )", 1)
         End If
@@ -598,16 +607,16 @@ Public Class dlgUseModel
     Private Sub cmdEmmeansPlot_Click(sender As Object, e As EventArgs) Handles cmdEmmeansPlot.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , by=NULL, comparisons = TRUE, horizontal = FALSE, colors = ""darkgreen"")", 73)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot(obj= , by=NULL, comparisons = TRUE, horizontal = FALSE, colors = ""darkgreen"")", 73)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot( )", 1)
         End If
     End Sub
 
     Private Sub cmdpwpp_Click(sender As Object, e As EventArgs) Handles cmdpwpp.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , method = ""trt.vs.ctrll"", type = ""response"", method = "">"")", 65)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , method = ""trt.vs.ctrll"", type = ""response"", method = "">"")", 60)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::pwpp( )", 1)
         End If
@@ -616,18 +625,27 @@ Public Class dlgUseModel
     Private Sub cmdEmmeansSummary_Click(sender As Object, e As EventArgs) Handles cmdEmmeansSummary.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::summary(obj= , infer = c(TRUE, TRUE ), adjust = ""scheffe"")", 47)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary(obj= , infer = c(TRUE, TRUE ), adjust = ""scheffe"")", 45)
         Else
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::summary( )", 1)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary( )", 1)
         End If
     End Sub
 
     Private Sub cmdTest_Click(sender As Object, e As EventArgs) Handles cmdTest.Click
         Clear()
         If ucrChkIncludeArguments.Checked Then
-            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , joint = TRUE, verbose = TRUE)", 47)
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::test(obj= , joint = TRUE, verbose = TRUE)", 32)
         Else
             ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::test( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdXtable_Click(sender As Object, e As EventArgs) Handles cmdXtable.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("xtable::xtable(obj = , caption = NULL, label = NULL, align = NULL,digits = 4, display = NULL, auto = FALSE)", 85)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("xtable::xtable( )", 1)
         End If
     End Sub
 
