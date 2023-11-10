@@ -425,6 +425,7 @@ Public Class dlgScript
             clsLibraryExpFunction.AddParameter("topic", Chr(34) & strTopic & Chr(34), iPosition:=0)
 
             Dim strExample As String = frmMain.clsRLink.RunInternalScriptGetValue(clsLibraryExpFunction.Clone.ToScript(), bSilent:=True).AsCharacter(0)
+            strExample = strExample.Replace("##D", String.Empty)
             PreviewScript(strExample)
         Catch ex As Exception
             MsgBox(strTopic & " has a help file but no examples.")
