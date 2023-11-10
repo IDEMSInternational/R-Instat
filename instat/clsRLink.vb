@@ -716,6 +716,163 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes <paramref name="clsRStatement"/>. If it is not an assignment 
+    '''             statement, then attempts to display the output.</summary>
+    '''
+    ''' <param name="clsRStatement">  The R code statement to execute </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub RunRStatement(clsRStatement As clsRStatement)
+
+        Dim strRStatement = clsRStatement.GetAsExecutableScript()
+
+        'if there is no script to run then just ignore and exit sub
+        If String.IsNullOrWhiteSpace(strRStatement) Then
+            Exit Sub
+        End If
+
+        Try
+            Dim strOutput As String = ""
+
+            'if not an assignment operation, then capture the output
+            Dim strRStatementNoFormatting As String =
+                    clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
+            If IsStatementViewObject(strRStatementNoFormatting) Then
+                strOutput = GetFileOutput(strRStatementNoFormatting, bSilent:=False,
+                                      bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            ElseIf clsRStatement.clsAssignment Is Nothing _
+                AndAlso Not String.IsNullOrWhiteSpace(strRStatementNoFormatting) Then
+                strOutput = GetFileOutput("view_object_data(object = " _
+                                          & strRStatementNoFormatting _
+                                          & " , object_format = 'text' )", bSilent:=False,
+                                          bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            Else
+                Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False,
+                         bShowWaitDialogOverride:=Nothing)
+            End If
+
+            clsOutputLogger.AddOutput(strRStatement, strOutput, bAsFile:=True,
+                    bDisplayOutputInExternalViewer:=strRStatementNoFormatting.StartsWith("view_object_data"))
+            LogScript(strRStatement.TrimEnd(vbCr, vbLf))
+
+        Catch e As Exception
+            MsgBox(e.Message & Environment.NewLine &
+                   "The error occurred in attempting to run the following R command:" &
+                   Environment.NewLine & strRStatement, MsgBoxStyle.Critical,
+                   "Error running R command")
+        End Try
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> This method executes the <paramref name="strScript"/> R script and displays 
+    '''           the output as text or graph (determined by <paramref name="strScript"/>).
+    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
+    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more brackets/
+    '''           quotations that have not been closed.
+    '''           This function is named '...FromWindow' because it's designed to execute scripts 
+    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
+    '''           may contain R commands split over multiple lines to make the commands more 
+    '''           readable.</para><para>
+    '''           </para>
+    ''' </summary>
+    ''' <param name="strScript">    The R script to execute.</param>
+    ''' <param name="strComment">   The comment to prefix to the script.</param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub RunScriptFromWindow(strScript As String, strComment As String)
+
+        If String.IsNullOrWhiteSpace(strScript) Then
+            Exit Sub
+        End If
+
+        'Prefix comment to script
+        Dim strRStatement As String = ""
+        Dim strRStatementComment As String = If(String.IsNullOrEmpty(strComment), "", GetFormattedComment(strComment))
+
+        'for each line in script
+        For Each strScriptLine As String In strScript.Split(Environment.NewLine)
+
+            'if line is empty or only whitespace then ignore line
+            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
+            If strTrimmedLine.Length <= 0 Then
+                Continue For
+            End If
+
+            'find any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strTrimmedLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    strRStatementComment &= If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) _
+                                            & strTrimmedLine
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strRStatementComment &= If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) _
+                                            & strTrimmedLine.Substring(strTrimmedLine.IndexOf("#"c))
+                    strTrimmedLine = strTrimmedLine.Substring(0, iCommentPos).Trim()
+            End Select
+
+            'else append line of script to command
+            strRStatement &= If(String.IsNullOrEmpty(strRStatement), "", Environment.NewLine) & strTrimmedLine
+
+            'if line ends in a '+', ',', or '%>%'; or there are open brackets; or open quotations, 
+            '    then assume command is not complete
+            Dim cLastChar As Char = strTrimmedLine.Last
+            Dim strLast3Chars As String = ""
+            Dim iNumOpenRound As Integer = strRStatement.Where(Function(c) c = "("c).Count
+            Dim iNumClosedRound As Integer = strRStatement.Where(Function(c) c = ")"c).Count
+            Dim iNumOpenCurlies As Integer = strRStatement.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies As Integer = strRStatement.Where(Function(c) c = "}"c).Count
+            Dim iNumDoubleQuotes As Integer = strRStatement.Where(Function(c) c = """"c).Count
+            If strTrimmedLine.Length >= 3 Then
+                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
+            End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" _
+                    OrElse iNumOpenRound <> iNumClosedRound _
+                    OrElse iNumOpenCurlies <> iNumClosedCurlies _
+                    OrElse iNumDoubleQuotes Mod 2 Then
+                Continue For
+            End If
+
+            'We now have what we think is a complete R statement, so try and execute it
+            Try
+                Dim strOutput As String = ""
+                Dim bAsFile As Boolean = True
+                Dim bDisplayOutputInExternalViewer As Boolean = False
+
+                If IsStatementViewObject(strRStatement) Then
+                    strOutput = GetFileOutput(strRStatement, False, False, Nothing)
+                    'if statement generates a view_object then display in external viewer (maximised)
+                    bDisplayOutputInExternalViewer = strRStatement.Contains("view_object_data")
+                ElseIf IsStatementPrint(strRStatement) Then
+                    bAsFile = False
+                    Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+                ElseIf Not IsStatementAssignment(strRStatement) Then 'if not an assignment operation, then capture the output
+                    Dim strRStatementAsSingleLine As String = strRStatement.Replace(vbCr, String.Empty)
+                    strRStatementAsSingleLine = strRStatementAsSingleLine.Replace(vbLf, String.Empty)
+                    'wrap final command inside view_object_data just in case there is an output object
+                    strOutput = GetFileOutput("view_object_data(object = " & strRStatementAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
+                Else
+                    Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+                End If
+
+                clsOutputLogger.AddOutput(If(String.IsNullOrEmpty(strRStatementComment), "",
+                        strRStatementComment & Environment.NewLine) & strRStatement,
+                        strOutput, bAsFile, bDisplayOutputInExternalViewer)
+                LogScript(strRStatement, strRStatementComment)
+
+            Catch e As Exception
+                MsgBox(e.Message & Environment.NewLine &
+                       "The error occurred in attempting to run the following R command(s):" &
+                       Environment.NewLine &
+                       strRStatement, MsgBoxStyle.Critical, "Error running R command(s)")
+            End Try
+
+            strRStatement = ""
+            strRStatementComment = ""
+        Next
+
+        frmMain.UpdateAllGrids()
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>
     ''' This method executes the <paramref name="strScript"/> R script(s) and displays the output. The
     ''' output may be displayed as text, graph or html (see <paramref name="iCallType"/>).
@@ -794,15 +951,11 @@ Public Class RLink
             If arrExecutableRScriptLines.Length > 0 Then
                 'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
                 Dim strLastScript As String = arrExecutableRScriptLines.Last()
-                If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
-                strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
-                strLastScript.StartsWith("view_object_data") Then
-
+                If IsStatementViewObject(strLastScript) Then
                     strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                     'if last function is view_object then display in external viewer (maximised)
                     bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
-
-                ElseIf strLastScript.StartsWith("print") Then
+                ElseIf IsStatementPrint(strLastScript) Then
                     bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 ElseIf iCallType = 0 Then
@@ -822,15 +975,11 @@ Public Class RLink
                     If expTemp IsNot Nothing Then
                         strOutput = String.Join(Environment.NewLine, expTemp.AsCharacter()) & Environment.NewLine
                     End If
-                ElseIf iCallType = 5 Then
-                    'else if script comes from script window
-                    'wrap command inside view_object_data just incase there is an output object
-                    strOutput = GetFileOutput("view_object_data(object = " & strScript & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                 Else
                     'else if script output should not be ignored or not stored as an object or variable
 
                     'if output should be stored as a variable just execute the script
-                    If arrExecutableRScriptLines.Last().Contains("<-") Then
+                    If IsStatementAssignment(arrExecutableRScriptLines.Last()) Then
                         Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     Else
                         'else capture the output as plain text
@@ -865,7 +1014,8 @@ Public Class RLink
     ''' <summary>
     ''' Gets the file path name if file is available and has contents, else returns an empty string
     ''' </summary>
-    ''' <param name="strScript">Script that produces a file output</param>
+    ''' <param name="strScript">Script that produces a file output. The last line of the script 
+    '''     must be a single line R statement that generates output.</param>
     ''' <param name="bSilent"></param>
     ''' <param name="bSeparateThread"></param>
     ''' <param name="bShowWaitDialogOverride"></param>
@@ -888,76 +1038,6 @@ Public Class RLink
             End If
         End If
         Return strFilePath
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
-    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
-    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
-    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
-    '''           brackets that have not been closed with an equivalent '}' bracket.
-    '''           This function is named '...FromWindow' because it's designed to execute scripts 
-    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
-    '''           may contain R commands split over multiple lines to make the commands more 
-    '''           readable.</para>
-    ''' </summary>
-    ''' <param name="strNewScript">    The R script to execute.</param>
-    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
-    '''                                <paramref name="strNewScript"/> as the comment.</param>
-    ''' 
-    ''' <returns> Any text at the end of <paramref name="strNewScript"/> that was not executed.
-    '''           If all the text in <paramref name="strNewScript"/> was executed then returns "".
-    '''           </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
-        Dim strScriptCmd As String = ""
-
-
-        'for each line in script
-        For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
-            'remove any comments (character '#' and anything after)
-            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
-            Select Case iCommentPos
-                Case 0      'a normal comment line (starts with '#')
-                    Continue For
-                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
-                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
-            End Select
-
-            'if line is empty or only whitespace then ignore line
-            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
-            If strTrimmedLine.Length <= 0 Then
-                Continue For
-            End If
-
-            'else append line of script to command
-            strScriptCmd &= strScriptLine
-
-            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
-            '    then assume command is not complete
-            Dim cLastChar As Char = strTrimmedLine.Last
-            Dim strLast3Chars As String = ""
-            Dim iNumOpenRound As Integer = strScriptCmd.Where(Function(c) c = "("c).Count
-            Dim iNumClosedRound As Integer = strScriptCmd.Where(Function(c) c = ")"c).Count
-            Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
-            Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
-            Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
-            If strTrimmedLine.Length >= 3 Then
-                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
-            End If
-            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" _
-                    OrElse iNumOpenRound <> iNumClosedRound _
-                    OrElse iNumOpenCurlies <> iNumClosedCurlies _
-                    OrElse iNumDoubleQuotes Mod 2 Then
-                Continue For
-            End If
-
-            'else execute command
-            RunScript(strScriptCmd.Trim(vbLf), iCallType:=5, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
-            strScriptCmd = ""
-            strNewComment = ""
-        Next
-        Return strScriptCmd
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1438,6 +1518,23 @@ Public Class RLink
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub LogScript(strScript As String, Optional strComment As String = "")
+
+        Dim strScriptWithComment As String =
+                If(String.IsNullOrWhiteSpace(strComment),
+                    "", strComment & Environment.NewLine) &
+                If(String.IsNullOrWhiteSpace(strScript),
+                    "",
+                    strScript & Environment.NewLine)
+
+        If String.IsNullOrWhiteSpace(strScriptWithComment) Then
+            Exit Sub
+        End If
+
+        frmMain.ucrScriptWindow.LogText(strScriptWithComment)
+        AppendToAutoSaveLog(strScriptWithComment)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -2167,13 +2264,13 @@ Public Class RLink
             'check to remove the [1] notation before some parameter values
             If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
                 Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).lstRStatements(0).clsElement
+                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).dctRStatements(0).clsElement
             Else
                 'Empty String are Not accepted hence the modification below
                 If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").dctRStatements(0).clsElement
                 Else
-                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).dctRStatements(0).clsElement
                 End If
 
             End If
@@ -2194,4 +2291,26 @@ Public Class RLink
 
         Return lstRParameters
     End Function
+
+    Private Function IsStatementAssignment(strRStatement As String) As Boolean
+        Return strRStatement.Contains("<-")
+    End Function
+
+    Private Function IsStatementPrint(strRStatement As String) As Boolean
+        Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
+        Return strRStatementTrimmed.StartsWith("print")
+    End Function
+
+    Private Function IsStatementViewObject(strRStatement As String) As Boolean
+        Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
+        Return strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_object_data") _
+               OrElse strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_last_object_data") _
+               OrElse strRStatementTrimmed.StartsWith("view_object_data")
+    End Function
+
+    Private Function TrimStartRStatement(strRStatement As String) As String
+        Dim arrTrimChars As Char() = {" "c, vbTab, vbLf, vbCr}
+        Return strRStatement.TrimStart(arrTrimChars)
+    End Function
+
 End Class
