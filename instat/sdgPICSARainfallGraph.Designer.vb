@@ -1299,7 +1299,6 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.lblTercilesLineType.AutoSize = True
         Me.lblTercilesLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTercilesLineType.Location = New System.Drawing.Point(358, 148)
         Me.lblTercilesLineType.Location = New System.Drawing.Point(370, 144)
         Me.lblTercilesLineType.Name = "lblTercilesLineType"
         Me.lblTercilesLineType.Size = New System.Drawing.Size(63, 13)
@@ -1320,7 +1319,6 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.lblMedianLineType.AutoSize = True
         Me.lblMedianLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMedianLineType.Location = New System.Drawing.Point(358, 78)
         Me.lblMedianLineType.Location = New System.Drawing.Point(370, 78)
         Me.lblMedianLineType.Name = "lblMedianLineType"
         Me.lblMedianLineType.Size = New System.Drawing.Size(63, 13)
@@ -1341,7 +1339,6 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.lblMeanLineType.AutoSize = True
         Me.lblMeanLineType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMeanLineType.Location = New System.Drawing.Point(358, 13)
         Me.lblMeanLineType.Location = New System.Drawing.Point(370, 10)
         Me.lblMeanLineType.Name = "lblMeanLineType"
         Me.lblMeanLineType.Size = New System.Drawing.Size(63, 13)
@@ -1396,7 +1393,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputTercilesLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTercilesLabelType.GetSetSelectedIndex = -1
         Me.ucrInputTercilesLabelType.IsReadOnly = False
-        Me.ucrInputTercilesLabelType.Location = New System.Drawing.Point(477, 144)
         Me.ucrInputTercilesLabelType.Location = New System.Drawing.Point(480, 140)
         Me.ucrInputTercilesLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputTercilesLabelType.Name = "ucrInputTercilesLabelType"
@@ -1421,7 +1417,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputMedianLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMedianLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMedianLabelType.IsReadOnly = False
-        Me.ucrInputMedianLabelType.Location = New System.Drawing.Point(477, 74)
         Me.ucrInputMedianLabelType.Location = New System.Drawing.Point(476, 70)
         Me.ucrInputMedianLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMedianLabelType.Name = "ucrInputMedianLabelType"
@@ -1444,7 +1439,6 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.ucrChkAddTercilesLabel.AutoSize = True
         Me.ucrChkAddTercilesLabel.Checked = False
-        Me.ucrChkAddTercilesLabel.Location = New System.Drawing.Point(210, 144)
         Me.ucrChkAddTercilesLabel.Location = New System.Drawing.Point(216, 140)
         Me.ucrChkAddTercilesLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddTercilesLabel.Name = "ucrChkAddTercilesLabel"
@@ -1455,7 +1449,6 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.ucrChkAddMedianLabel.AutoSize = True
         Me.ucrChkAddMedianLabel.Checked = False
-        Me.ucrChkAddMedianLabel.Location = New System.Drawing.Point(210, 75)
         Me.ucrChkAddMedianLabel.Location = New System.Drawing.Point(216, 71)
         Me.ucrChkAddMedianLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMedianLabel.Name = "ucrChkAddMedianLabel"
@@ -1468,7 +1461,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrInputMeanLabelType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMeanLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMeanLabelType.IsReadOnly = False
-        Me.ucrInputMeanLabelType.Location = New System.Drawing.Point(477, 9)
         Me.ucrInputMeanLabelType.Location = New System.Drawing.Point(476, 9)
         Me.ucrInputMeanLabelType.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputMeanLabelType.Name = "ucrInputMeanLabelType"
@@ -1482,7 +1474,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddMean.Location = New System.Drawing.Point(5, 10)
         Me.ucrChkAddMean.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMean.Name = "ucrChkAddMean"
-        Me.ucrChkAddMean.Size = New System.Drawing.Size(200, 23)
         Me.ucrChkAddMean.Size = New System.Drawing.Size(204, 23)
         Me.ucrChkAddMean.TabIndex = 1
         '
@@ -1490,7 +1481,6 @@ Partial Class sdgPICSARainfallGraph
         '
         Me.ucrChkAddMeanLabel.AutoSize = True
         Me.ucrChkAddMeanLabel.Checked = False
-        Me.ucrChkAddMeanLabel.Location = New System.Drawing.Point(210, 10)
         Me.ucrChkAddMeanLabel.Location = New System.Drawing.Point(216, 10)
         Me.ucrChkAddMeanLabel.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMeanLabel.Name = "ucrChkAddMeanLabel"
@@ -1504,7 +1494,6 @@ Partial Class sdgPICSARainfallGraph
         Me.ucrChkAddMedian.Location = New System.Drawing.Point(5, 74)
         Me.ucrChkAddMedian.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkAddMedian.Name = "ucrChkAddMedian"
-        Me.ucrChkAddMedian.Size = New System.Drawing.Size(200, 23)
         Me.ucrChkAddMedian.Size = New System.Drawing.Size(204, 23)
         Me.ucrChkAddMedian.TabIndex = 1
         '
@@ -2136,7 +2125,7 @@ Partial Class sdgPICSARainfallGraph
         Me.MinimizeBox = False
         Me.Name = "sdgPICSARainfallGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "PICSA Rainfall Graph"
+        Me.Text = "PICSA Graphs"
         Me.tbPICSA.ResumeLayout(False)
         Me.tpTitles.ResumeLayout(False)
         Me.grpGraphTitles.ResumeLayout(False)

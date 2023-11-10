@@ -263,6 +263,7 @@ Public Class clsRecentFiles
 
                 'create new ToolStripItem, displaying the name of the file...
                 If mnuFile IsNot Nothing Then
+                    Dim linkMenuItem As LinkLabel = New LinkLabel
                     Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
                     clsItem.ToolTipText = strPath
                     'set the tag - will be used to identify the ToolStripItem as a most recent(MRU) item 
@@ -272,20 +273,29 @@ Public Class clsRecentFiles
                     AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                     'insert into DropDownItems list...
                     mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
+                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 235)
                 End If
 
                 If mnuFileIcon IsNot Nothing Then
+                    Dim linkMenuItem As LinkLabel = New LinkLabel
                     Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
                     clsItem.ToolTipText = strPath
                     clsItem.Tag = "MRU:" & strPath
                     AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                     mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItem)
+                    clsItem.Text = TruncateLabelText(linkMenuItem, clsItem.Text, 235)
                 End If
 
                 If ucrDataViewWindow IsNot Nothing Then
                     'set and insert the data view window recent files menu items
                     Dim linkMenuItem As LinkLabel = New LinkLabel
                     linkMenuItem.Text = strFileName
+                    linkMenuItem.Text = TruncateLabelText(linkMenuItem, strFileName, 235)
+                    ' Create a ToolTip instance.
+                    Dim tooltip As New ToolTip()
+
+                    ' Set the tooltip texts for the labels.
+                    tooltip.SetToolTip(linkMenuItem, strFileName)
                     linkMenuItem.Tag = strPath 'path used when the link is clicked
                     'attach link click event handler for opening the file
                     AddHandler linkMenuItem.Click, AddressOf OnMnuRecentOpenedFile_Click
@@ -353,4 +363,22 @@ Public Class clsRecentFiles
         End If
     End Sub
 
+    Private Function TruncateLabelText(label As Label, strName As String, maximumWidth As Integer) As String
+        Dim graphics As Graphics = label.CreateGraphics()
+        Dim font As Font = label.Font
+        Dim originalWidth As Integer = CInt(graphics.MeasureString(strName, font).Width)
+        If originalWidth > maximumWidth Then
+            Dim truncatedText As String = strName
+            Dim truncatedWidth As Integer = originalWidth
+
+            While truncatedWidth > maximumWidth AndAlso truncatedText.Length > 0
+                truncatedText = truncatedText.Substring(0, truncatedText.Length - 1)
+                truncatedWidth = CInt(graphics.MeasureString(truncatedText & "...", font).Width)
+            End While
+
+            Return truncatedText & "..."
+        Else
+            Return strName
+        End If
+    End Function
 End Class
