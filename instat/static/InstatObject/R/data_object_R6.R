@@ -3239,11 +3239,13 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
       col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
     all_factors <- self$get_columns_from_data(factors, use_current_filter = FALSE)
-    first_factor <- self$get_columns_from_data(factors[1], use_current_filter = FALSE)
-    #The following line of code disabled temporarily because of the bug reported in the issue #8603
-     #the multiple variables for the station, like stationID and stationname etc my have different levels
-     #see the comment in the issue #8603
-    #if(dplyr::n_distinct(interaction(all_factors, drop = TRUE))!= dplyr::n_distinct(first_factor)) stop("The multiple factor variables are not in sync. Should have same number of levels.")
+    factor_combinations <- combn(names(all_factors), 2, simplify = FALSE)
+    for (combo in factor_combinations) {
+        factors_check <- all_factors[, combo]
+        if (nrow(unique(factors_check)) != nrow(unique(all_factors))) {
+            stop("Two factors are essentially the same variable.")
+        }
+    }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
     date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
     date_lengths <- grouped_data %>% dplyr::summarise(count = n())
