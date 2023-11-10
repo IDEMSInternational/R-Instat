@@ -167,11 +167,14 @@ Public Class dlgScript
         ucrCboSaveOutputObjectType.SetVisible(False)
         ucrCboSaveOutputObjectFormat.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
+            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrDataFrameSaveOutputSelect.Location.Y)
             SetupSaveDataControl("Data Frame", RObjectTypeLabel.Dataframe, "")
         ElseIf rdoSaveColumn.Checked Then
+            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectType.Location.Y)
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             SetupSaveDataControl("Column", RObjectTypeLabel.Column, "")
         ElseIf rdoSaveOutputObject.Checked Then
+            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33)
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             ucrCboSaveOutputObjectType.SetVisible(True)
             ucrCboSaveOutputObjectFormat.SetVisible(True)
@@ -191,27 +194,33 @@ Public Class dlgScript
         ucrSaveData.SetLabelText(strLabel)
         ucrSaveData.SetName("")
 
-        'change location of the save control if it's the data frame option selected
         If strDataType = RObjectTypeLabel.Dataframe Then
             ucrSaveData.SetIsTextBox()
-            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrDataFrameSaveOutputSelect.Location.Y)
         Else
             ucrSaveData.SetIsComboBox()
-            ucrSaveData.Location = If(strDataType = RObjectTypeLabel.Column,
-                New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectType.Location.Y),
-                New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33))
         End If
-
     End Sub
 
     Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlContentsChanged
+        Dim strScript As String = ""
 
-        ' R code is not automatiucally updated by save control when control contents changed event is raised by the control
-        ucrSaveData.UpdateRCode()
+        If ucrSaveData.IsComplete Then
+            ' R code is not automatiucally updated by save control when control contents changed event is raised by the control
+            ucrSaveData.UpdateRCode()
 
-        Dim strAssignedScript As String = ""
-        clsSaveDataFunction.Clone.ToScript(strScript:=strAssignedScript)
-        PreviewScript(strAssignedScript)
+            Dim strDataType As String = ""
+            If rdoSaveDataFrame.Checked Then
+                strDataType = "data frame"
+            ElseIf rdoSaveColumn.Checked Then
+                strDataType = "column"
+            ElseIf rdoSaveOutputObject.Checked Then
+                strDataType = ucrCboSaveOutputObjectType.GetText().ToLower()
+            End If
+
+            strScript = "# Save " & strDataType & " """ & ucrSaveData.GetText() & """" & Environment.NewLine & clsSaveDataFunction.Clone.ToScript()
+        End If
+
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrPnlGetData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetData.ControlValueChanged
@@ -247,17 +256,29 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrDataFrameGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGetDF.ControlContentsChanged
-        Dim strAssignedScript As String = ""
-        ucrDataFrameGetDF.clsCurrDataFrame.Clone().ToScript(strAssignedScript)
-        PreviewScript(strAssignedScript)
+        Dim strScript As String = ""
+
+        If String.IsNullOrEmpty(ucrDataFrameGetDF.strCurrDataFrame) Then
+            Dim strAssignedScript As String = ""
+            ucrDataFrameGetDF.clsCurrDataFrame.Clone().ToScript(strAssignedScript)
+            strScript = "# Get data frame """ & ucrDataFrameGetDF.strCurrDataFrame & """" & Environment.NewLine & strAssignedScript
+        End If
+
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrReceiverGetColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGetColumns.ControlContentsChanged
-        Dim clsRFunction As RFunction = ucrReceiverGetColumns.GetVariables()
-        Dim strAssignedScript As String = ""
-        clsRFunction.SetAssignTo(ucrSelectorGetObject.strCurrentDataFrame & "_cols")
-        clsRFunction.ToScript(strScript:=strAssignedScript)
-        PreviewScript(strAssignedScript)
+        Dim strScript As String = ""
+
+        If Not ucrReceiverGetColumns.IsEmpty() Then
+            Dim clsRFunction As RFunction = ucrReceiverGetColumns.GetVariables()
+            Dim strAssignedScript As String = ""
+            clsRFunction.SetAssignTo(ucrSelectorGetObject.strCurrentDataFrame & "_cols")
+            clsRFunction.ToScript(strScript:=strAssignedScript)
+            strScript = "# Get column(s) " & String.Join(",", ucrReceiverGetColumns.GetVariableNamesList(bWithQuotes:=True)) & Environment.NewLine & strAssignedScript
+        End If
+
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrInputGetObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboGetOutputObjectType.ControlValueChanged
@@ -267,10 +288,16 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrReceiverGetOutputObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGetOutputObject.ControlContentsChanged
-        Dim clsRFunction As RFunction = ucrReceiverGetOutputObject.GetVariables()
-        Dim strAssignedScript As String = ""
-        clsRFunction.ToScript(strScript:=strAssignedScript)
-        PreviewScript(strAssignedScript)
+        Dim strScript As String = ""
+
+        If Not ucrReceiverGetOutputObject.IsEmpty() Then
+            Dim clsRFunction As RFunction = ucrReceiverGetOutputObject.GetVariables()
+            Dim strAssignedScript As String = ""
+            clsRFunction.ToScript(strScript:=strAssignedScript)
+            strScript = "# Get " & ucrCboGetOutputObjectType.GetText().ToLower() & " " & ucrReceiverGetOutputObject.GetVariableNames(bWithQuotes:=True) & Environment.NewLine & strAssignedScript
+        End If
+
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrPnlCommands_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCommands.ControlValueChanged
@@ -286,30 +313,41 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrCboLibPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandPackage.ControlValueChanged
-        Dim clsLibraryFunction As New RFunction
-        clsLibraryFunction.SetRCommand("library")
-        clsLibraryFunction.AddParameter("package", Chr(34) & ucrCboCommandPackage.GetText() & Chr(34))
-        PreviewScript(clsLibraryFunction.ToScript)
+        Dim strScript As String = ""
+
+        If Not ucrCboCommandPackage.IsEmpty() Then
+            Dim clsLibraryFunction As New RFunction
+            clsLibraryFunction.SetRCommand("library")
+            clsLibraryFunction.AddParameter("package", Chr(34) & ucrCboCommandPackage.GetText() & Chr(34))
+            strScript = "# Load library """ & ucrCboCommandPackage.GetText() & """" & Environment.NewLine & clsLibraryFunction.ToScript
+        End If
+
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrInputRemoveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRemoveObjects.ControlContentsChanged
-        'create function to remove the objects added in the script
-        Dim lstAssignToStrings As String() = ucrInputRemoveObjects.GetText().Split(",")
-        Dim clsRemoveFunc As New RFunction
-        Dim clsRemoveListFun As New RFunction
-        clsRemoveFunc.SetRCommand("rm")
-        clsRemoveListFun.SetRCommand("c")
+        Dim strScript As String = ""
 
-        For i As Integer = 0 To lstAssignToStrings.Count - 1
-            clsRemoveListFun.AddParameter(i, Chr(34) & lstAssignToStrings(i) & Chr(34), bIncludeArgumentName:=False)
-        Next
-        clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
+        If Not ucrInputRemoveObjects.IsEmpty() Then
+            ' Create function to remove the objects added in the script
+            Dim lstAssignToStrings As String() = ucrInputRemoveObjects.GetText().Split(",")
+            Dim clsRemoveFunc As New RFunction
+            Dim clsRemoveListFun As New RFunction
+            clsRemoveFunc.SetRCommand("rm")
+            clsRemoveListFun.SetRCommand("c")
 
-        PreviewScript(clsRemoveFunc.ToScript())
+            For i As Integer = 0 To lstAssignToStrings.Count - 1
+                lstAssignToStrings.SetValue(Chr(34) & lstAssignToStrings(i) & Chr(34), i)
+                clsRemoveListFun.AddParameter(i, lstAssignToStrings(i), bIncludeArgumentName:=False)
+            Next
+            clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
+            strScript = "# Remove object(s) " & String.Join(",", lstAssignToStrings) & Environment.NewLine & clsRemoveFunc.ToScript()
+        End If
+
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboExamplePackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
-
         PreviewScript("")
         lstExampleCollection.Items.Clear()
 
@@ -421,7 +459,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub PreviewScript(strNewScript As String)
-        txtScript.Text = strNewScript.Trim() & Environment.NewLine
+        txtScript.Text = strNewScript & Environment.NewLine
         txtScript.SelectionStart = txtScript.Text.Length
         txtScript.ScrollToCaret()
         txtScript.Refresh()
