@@ -155,8 +155,8 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript, Version=0.1.0.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RScript.1.0.10\lib\net461\RScript.dll</HintPath>
+    <Reference Include="RScript, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RScript.1.0.11\lib\net461\RScript.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
