@@ -56,6 +56,7 @@ Public Class dlgUseModel
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsModel()
 
         ucrChkIncludeArguments.SetText("Show Arguments")
 
