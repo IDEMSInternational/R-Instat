@@ -104,6 +104,8 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
+        Me.cmdQuotes = New System.Windows.Forms.Button()
+        Me.cmdcurlySign = New System.Windows.Forms.Button()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -678,6 +680,8 @@ Partial Class dlgUseModel
         '
         'grpEmmeans
         '
+        Me.grpEmmeans.Controls.Add(Me.cmdcurlySign)
+        Me.grpEmmeans.Controls.Add(Me.cmdQuotes)
         Me.grpEmmeans.Controls.Add(Me.cmdXtable)
         Me.grpEmmeans.Controls.Add(Me.cmdTest)
         Me.grpEmmeans.Controls.Add(Me.cmdPairs)
@@ -1003,6 +1007,28 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
+        'cmdQuotes
+        '
+        Me.cmdQuotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdQuotes.Location = New System.Drawing.Point(72, 99)
+        Me.cmdQuotes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdQuotes.Name = "cmdQuotes"
+        Me.cmdQuotes.Size = New System.Drawing.Size(69, 30)
+        Me.cmdQuotes.TabIndex = 166
+        Me.cmdQuotes.Text = """   """
+        Me.cmdQuotes.UseVisualStyleBackColor = True
+        '
+        'cmdcurlySign
+        '
+        Me.cmdcurlySign.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdcurlySign.Location = New System.Drawing.Point(140, 99)
+        Me.cmdcurlySign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdcurlySign.Name = "cmdcurlySign"
+        Me.cmdcurlySign.Size = New System.Drawing.Size(69, 30)
+        Me.cmdcurlySign.TabIndex = 167
+        Me.cmdcurlySign.Text = "~"
+        Me.cmdcurlySign.UseVisualStyleBackColor = True
+        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1134,4 +1160,6 @@ Partial Class dlgUseModel
     Friend WithEvents cmdRHelpEmmeans As ucrSplitButton
     Friend WithEvents ContextMenuStripEmmeans As ContextMenuStrip
     Friend WithEvents ToolStripMenuEmmeans As ToolStripMenuItem
+    Friend WithEvents cmdcurlySign As Button
+    Friend WithEvents cmdQuotes As Button
 End Class

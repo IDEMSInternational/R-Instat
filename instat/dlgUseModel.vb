@@ -661,4 +661,13 @@ Public Class dlgUseModel
         End If
         ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
     End Sub
+
+    Private Sub cmdQuotes_Click(sender As Object, e As EventArgs) Handles cmdQuotes.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" "" """)
+    End Sub
+
+    Private Sub cmdcurlySign_Click(sender As Object, e As EventArgs) Handles cmdcurlySign.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" ~ ")
+    End Sub
+
 End Class
