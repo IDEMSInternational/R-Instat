@@ -52,7 +52,8 @@ Public Class ucrColumnMetadataReoGrid
         Next
 
         Dim clsDataFrame As clsDataFrame = _clsDataBook.GetDataFrame(grdData.CurrentWorksheet.Name)
-        If clsDataFrame.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+        If clsDataFrame.clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso
+             clsDataFrame.clsColumnMetaData.UseColumnSelectionInMetaData Then
             For i = 0 To clsDataFrame.clsVisibleDataFramePage.lstColumns.Count - 1
                 For j = 0 To grdData.CurrentWorksheet.Rows - 1
                     Dim strRowValue As String = grdData.CurrentWorksheet(row:=j, col:=0)

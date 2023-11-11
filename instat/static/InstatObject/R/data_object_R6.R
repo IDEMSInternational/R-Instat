@@ -447,7 +447,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
 )
 
 # As a temp fix to rlink crashing here we access private$data directly
-DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
+DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE, use_column_selection = TRUE) {
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
@@ -469,11 +469,11 @@ DataSheet$set("public", "get_variables_metadata", function(data_type = "all", co
     if(missing(column)) {
       curr_data <- private$data
       cols <- names(curr_data)
-      if(self$column_selection_applied()) cols <- self$current_column_selection
+      if(self$column_selection_applied() && use_column_selection) cols <- self$current_column_selection
     }
     else {
       cols <- column
-      if(self$column_selection_applied()) cols <- self$current_column_selection
+      if(self$column_selection_applied() && use_column_selection) cols <- self$current_column_selection
       curr_data <- private$data[column]
     }
     for (i in seq_along(cols)) {

@@ -20,6 +20,7 @@ Public Class dlgSelect
     Private bReset As Boolean = True
     Private clsSetCurrentColumnSelection As New RFunction
     Private clsApplyAsSubset As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -52,6 +53,12 @@ Public Class dlgSelect
         ucrReceiverSelect.SetParameter(New RParameter("name", 1))
         ucrReceiverSelect.SetParameterIsString()
 
+        ucrPnlOptions.SetParameter(New RParameter("check", 0))
+        ucrPnlOptions.AddRadioButton(rdoApplyAll, "all")
+        ucrPnlOptions.AddRadioButton(rdoApplyToDataFrame, "dataframe")
+        ucrPnlOptions.AddRadioButton(rdoApplyToDialogue, "dialogue")
+        ucrPnlOptions.AddRadioButton(rdoApplyToMetaData, "metadata")
+
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
         ucrPnlApplyOptions.AddFunctionNamesCondition(rdoApplyAsSelect, frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
@@ -68,7 +75,12 @@ Public Class dlgSelect
     Private Sub SetDefaults()
         clsSetCurrentColumnSelection = New RFunction
         clsApplyAsSubset = New RFunction
+        clsDummyFunction = New RFunction
         ucrSelectorForSelectColumns.Reset()
+
+        grpOptions.Visible = False
+
+        clsDummyFunction.AddParameter("check", "all", iPosition:=0)
 
         clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
 
@@ -84,6 +96,7 @@ Public Class dlgSelect
         ucrReceiverSelect.SetRCode(clsSetCurrentColumnSelection, bReset)
         ucrInputNewDataFrameName.SetRCode(clsApplyAsSubset, bReset)
         ucrPnlApplyOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -115,7 +128,9 @@ Public Class dlgSelect
     Private Sub ucrPnlApplyOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlApplyOptions.ControlValueChanged
         If rdoApplyAsSelect.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentColumnSelection)
+            grpOptions.Visible = True
         Else
+            grpOptions.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsApplyAsSubset)
         End If
     End Sub
@@ -138,5 +153,23 @@ Public Class dlgSelect
 
     Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlApplyOptions.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ApplyColumnSelectionSettings(applyToMetaData As Boolean, applyToDataFrame As Boolean, applyToDialogue As Boolean)
+        frmMain.UseColumnSelectionInMetaData(applyToMetaData)
+        frmMain.UseColumnSelectionInDataView(applyToDataFrame)
+        frmMain.clsRLink.bUseColumnSelection = applyToDialogue
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoApplyAll.Checked Then
+            ApplyColumnSelectionSettings(True, True, True)
+        Else
+            Dim applyToMetaData As Boolean = rdoApplyToMetaData.Checked
+            Dim applyToDataFrame As Boolean = rdoApplyToDataFrame.Checked
+            Dim applyToDialogue As Boolean = rdoApplyToDialogue.Checked
+
+            ApplyColumnSelectionSettings(applyToMetaData, applyToDataFrame, applyToDialogue)
+        End If
     End Sub
 End Class

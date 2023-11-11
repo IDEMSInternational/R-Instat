@@ -427,6 +427,10 @@ Public Class ucrDataView
         dlgLabelsLevels.ShowDialog()
     End Sub
 
+    Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.UseColumnSelectionInDataView = bUseColumnSelecion
+    End Sub
+
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
         Return _grid.GetSelectedColumns()
     End Function

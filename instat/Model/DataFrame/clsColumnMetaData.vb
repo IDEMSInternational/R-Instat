@@ -25,6 +25,8 @@ Public Class clsColumnMetaData
     Private Property _clsColsMetadataDataFrame As DataFrame
     Private _hasChanged As Boolean
 
+    Private _useColumnSelectionInMetaData As Boolean
+
     ''' <summary>
     ''' holds the metadata change audit id
     ''' </summary> 
@@ -107,7 +109,17 @@ Public Class clsColumnMetaData
         _RLink = rLink
         _strDataFrameName = strName
         _hasChanged = True
+        _useColumnSelectionInMetaData = True
     End Sub
+
+    Public Property UseColumnSelectionInMetaData() As Boolean
+        Get
+            Return _useColumnSelectionInMetaData
+        End Get
+        Set(value As Boolean)
+            _useColumnSelectionInMetaData = value
+        End Set
+    End Property
 
     Private Function HasDataChanged() As Boolean
         Dim clsVariablesMetadataChanged As New RFunction
@@ -143,10 +155,12 @@ Public Class clsColumnMetaData
     Private Function GetColsMetadataFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
         Dim expTemp As SymbolicExpression
+        Dim strValue = If(UseColumnSelectionInMetaData, "TRUE", "FALSE")
         _hasChanged = True
         clsGetVariablesMetadata.SetRCommand(_RLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
         clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        clsGetVariablesMetadata.AddParameter("use_column_selection", strValue)
         expTemp = _RLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsDataFrame

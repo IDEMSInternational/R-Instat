@@ -113,6 +113,9 @@ Public Class RLink
     ''' <summary>   The graph display option (e.g. 'view_output_window' or 'view_separate_window'). </summary>
     Public strGraphDisplayOption As String = "view_output_window"
 
+    ''' <summary> If true then show all the columns to the select listview. </summary>
+    Public bUseColumnSelection As Boolean = True
+
 
     ''' <summary> The current grid (the worksheet that appears similar to a spreadsheet on the 
     ''' left-hand side of the display). </summary>
@@ -1390,6 +1393,8 @@ Public Class RLink
             Select Case strType
                 Case "column"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
+                    Dim strValue = If(bUseColumnSelection, "TRUE", "FALSE")
+                    clsGetItems.AddParameter("use_current_column_selection", strValue)
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
