@@ -63,6 +63,10 @@ Public Class ucrSelector
         'always load selector contents on load event because contents may have been changed at R level 
         'and the control needs to refresh the data frame names.
         LoadList()
+        'always return the focus to the first Receiver when re-opening the dialogue.
+        If lstOrderedReceivers.Count > 0 Then
+            SetCurrentReceiver(lstOrderedReceivers(0))
+        End If
     End Sub
 
     Protected Sub OnResetAll()
