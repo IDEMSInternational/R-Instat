@@ -216,8 +216,14 @@ Public Class dlgScript
             ElseIf rdoSaveOutputObject.Checked Then
                 strDataType = ucrCboSaveOutputObjectType.GetText().ToLower()
             End If
-
-            strScript = "# Save " & strDataType & " """ & ucrSaveData.GetText() & """" & Environment.NewLine & clsSaveDataFunction.Clone.ToScript()
+            Dim strTemp As String = ""
+            clsSaveDataFunction.Clone.ToScript(strTemp)
+            Dim arrtemp() As String = strTemp.Trim().Split(Environment.NewLine)
+            If arrtemp.Length > 1 Then
+                'ignore the first line of the script because it is an "empty" assignment
+                strTemp = arrtemp(1)
+                strScript = "# Save " & strDataType & " """ & ucrSaveData.GetText() & """" & Environment.NewLine & strTemp
+            End If
         End If
 
         PreviewScript(strScript)
@@ -258,7 +264,7 @@ Public Class dlgScript
     Private Sub ucrDataFrameGet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameGetDF.ControlContentsChanged
         Dim strScript As String = ""
 
-        If String.IsNullOrEmpty(ucrDataFrameGetDF.strCurrDataFrame) Then
+        If Not String.IsNullOrEmpty(ucrDataFrameGetDF.strCurrDataFrame) Then
             Dim strAssignedScript As String = ""
             ucrDataFrameGetDF.clsCurrDataFrame.Clone().ToScript(strAssignedScript)
             strScript = "# Get data frame """ & ucrDataFrameGetDF.strCurrDataFrame & """" & Environment.NewLine & strAssignedScript
