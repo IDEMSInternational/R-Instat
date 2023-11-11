@@ -56,8 +56,8 @@ Public Class dlgSelect
         ucrPnlOptions.SetParameter(New RParameter("check", 0))
         ucrPnlOptions.AddRadioButton(rdoApplyAll, "all")
         ucrPnlOptions.AddRadioButton(rdoApplyToDataFrame, "dataframe")
-        ucrPnlOptions.AddRadioButton(rdoApplyToDialogue, "dialogue")
         ucrPnlOptions.AddRadioButton(rdoApplyToMetaData, "metadata")
+        ucrPnlOptions.AddRadioButton(rdoApplyToDialogue, "dialogue")
 
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)

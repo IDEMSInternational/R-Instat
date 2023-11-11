@@ -40,14 +40,8 @@ Partial Class dlgSelect
     Private Sub InitializeComponent()
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.rdoApplyToDataFrame = New System.Windows.Forms.RadioButton()
-        Me.rdoApplyAll = New System.Windows.Forms.RadioButton()
-        Me.rdoApplyToDialogue = New System.Windows.Forms.RadioButton()
-        Me.rdoApplyToMetaData = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
         Me.rdoApplyAsSelect = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlApplyOptions = New instat.UcrPanel()
         Me.lblSelection = New System.Windows.Forms.Label()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
@@ -57,6 +51,12 @@ Partial Class dlgSelect
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrPnlApplyOptions = New instat.UcrPanel()
+        Me.rdoApplyAll = New System.Windows.Forms.RadioButton()
+        Me.rdoApplyToDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoApplyToMetaData = New System.Windows.Forms.RadioButton()
+        Me.rdoApplyToDialogue = New System.Windows.Forms.RadioButton()
         Me.grpApplyOptions.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -78,10 +78,10 @@ Partial Class dlgSelect
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.rdoApplyToDataFrame)
-        Me.grpOptions.Controls.Add(Me.rdoApplyAll)
         Me.grpOptions.Controls.Add(Me.rdoApplyToDialogue)
         Me.grpOptions.Controls.Add(Me.rdoApplyToMetaData)
+        Me.grpOptions.Controls.Add(Me.rdoApplyToDataFrame)
+        Me.grpOptions.Controls.Add(Me.rdoApplyAll)
         Me.grpOptions.Controls.Add(Me.ucrPnlOptions)
         Me.grpOptions.Location = New System.Drawing.Point(301, 18)
         Me.grpOptions.Name = "grpOptions"
@@ -90,65 +90,10 @@ Partial Class dlgSelect
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'rdoApplyToDataFrame
-        '
-        Me.rdoApplyToDataFrame.AutoSize = True
-        Me.rdoApplyToDataFrame.Location = New System.Drawing.Point(24, 59)
-        Me.rdoApplyToDataFrame.Name = "rdoApplyToDataFrame"
-        Me.rdoApplyToDataFrame.Size = New System.Drawing.Size(115, 24)
-        Me.rdoApplyToDataFrame.TabIndex = 12
-        Me.rdoApplyToDataFrame.TabStop = True
-        Me.rdoApplyToDataFrame.Text = "DataFrame"
-        Me.rdoApplyToDataFrame.UseVisualStyleBackColor = True
-        '
-        'rdoApplyAll
-        '
-        Me.rdoApplyAll.AutoSize = True
-        Me.rdoApplyAll.Location = New System.Drawing.Point(24, 28)
-        Me.rdoApplyAll.Name = "rdoApplyAll"
-        Me.rdoApplyAll.Size = New System.Drawing.Size(51, 24)
-        Me.rdoApplyAll.TabIndex = 11
-        Me.rdoApplyAll.TabStop = True
-        Me.rdoApplyAll.Text = "All"
-        Me.rdoApplyAll.UseVisualStyleBackColor = True
-        '
-        'rdoApplyToDialogue
-        '
-        Me.rdoApplyToDialogue.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoApplyToDialogue.Location = New System.Drawing.Point(24, 125)
-        Me.rdoApplyToDialogue.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoApplyToDialogue.Name = "rdoApplyToDialogue"
-        Me.rdoApplyToDialogue.Size = New System.Drawing.Size(231, 26)
-        Me.rdoApplyToDialogue.TabIndex = 6
-        Me.rdoApplyToDialogue.TabStop = True
-        Me.rdoApplyToDialogue.Text = "Dialogues"
-        Me.rdoApplyToDialogue.UseVisualStyleBackColor = True
-        '
-        'rdoApplyToMetaData
-        '
-        Me.rdoApplyToMetaData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoApplyToMetaData.Location = New System.Drawing.Point(24, 91)
-        Me.rdoApplyToMetaData.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoApplyToMetaData.Name = "rdoApplyToMetaData"
-        Me.rdoApplyToMetaData.Size = New System.Drawing.Size(231, 26)
-        Me.rdoApplyToMetaData.TabIndex = 5
-        Me.rdoApplyToMetaData.TabStop = True
-        Me.rdoApplyToMetaData.Text = "MetaData"
-        Me.rdoApplyToMetaData.UseVisualStyleBackColor = True
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(9, 28)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(275, 133)
-        Me.ucrPnlOptions.TabIndex = 10
-        '
         'rdoApplyAsSubset
         '
         Me.rdoApplyAsSubset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(9, 90)
+        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(9, 101)
         Me.rdoApplyAsSubset.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoApplyAsSubset.Name = "rdoApplyAsSubset"
         Me.rdoApplyAsSubset.Size = New System.Drawing.Size(270, 45)
@@ -160,23 +105,14 @@ Partial Class dlgSelect
         'rdoApplyAsSelect
         '
         Me.rdoApplyAsSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoApplyAsSelect.Location = New System.Drawing.Point(9, 27)
+        Me.rdoApplyAsSelect.Location = New System.Drawing.Point(9, 45)
         Me.rdoApplyAsSelect.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoApplyAsSelect.Name = "rdoApplyAsSelect"
-        Me.rdoApplyAsSelect.Size = New System.Drawing.Size(270, 55)
+        Me.rdoApplyAsSelect.Size = New System.Drawing.Size(270, 57)
         Me.rdoApplyAsSelect.TabIndex = 0
         Me.rdoApplyAsSelect.TabStop = True
         Me.rdoApplyAsSelect.Text = "As Selected Columns"
         Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
-        '
-        'ucrPnlApplyOptions
-        '
-        Me.ucrPnlApplyOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(6, 32)
-        Me.ucrPnlApplyOptions.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
-        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(289, 137)
-        Me.ucrPnlApplyOptions.TabIndex = 2
         '
         'lblSelection
         '
@@ -282,6 +218,68 @@ Partial Class dlgSelect
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 9
         '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(12, 27)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(284, 133)
+        Me.ucrPnlOptions.TabIndex = 10
+        '
+        'ucrPnlApplyOptions
+        '
+        Me.ucrPnlApplyOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(6, 32)
+        Me.ucrPnlApplyOptions.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(289, 137)
+        Me.ucrPnlApplyOptions.TabIndex = 2
+        '
+        'rdoApplyAll
+        '
+        Me.rdoApplyAll.AutoSize = True
+        Me.rdoApplyAll.Location = New System.Drawing.Point(28, 27)
+        Me.rdoApplyAll.Name = "rdoApplyAll"
+        Me.rdoApplyAll.Size = New System.Drawing.Size(51, 24)
+        Me.rdoApplyAll.TabIndex = 11
+        Me.rdoApplyAll.TabStop = True
+        Me.rdoApplyAll.Text = "All"
+        Me.rdoApplyAll.UseVisualStyleBackColor = True
+        '
+        'rdoApplyToDataFrame
+        '
+        Me.rdoApplyToDataFrame.AutoSize = True
+        Me.rdoApplyToDataFrame.Location = New System.Drawing.Point(29, 63)
+        Me.rdoApplyToDataFrame.Name = "rdoApplyToDataFrame"
+        Me.rdoApplyToDataFrame.Size = New System.Drawing.Size(115, 24)
+        Me.rdoApplyToDataFrame.TabIndex = 12
+        Me.rdoApplyToDataFrame.TabStop = True
+        Me.rdoApplyToDataFrame.Text = "DataFrame"
+        Me.rdoApplyToDataFrame.UseVisualStyleBackColor = True
+        '
+        'rdoApplyToMetaData
+        '
+        Me.rdoApplyToMetaData.AutoSize = True
+        Me.rdoApplyToMetaData.Location = New System.Drawing.Point(28, 97)
+        Me.rdoApplyToMetaData.Name = "rdoApplyToMetaData"
+        Me.rdoApplyToMetaData.Size = New System.Drawing.Size(105, 24)
+        Me.rdoApplyToMetaData.TabIndex = 13
+        Me.rdoApplyToMetaData.TabStop = True
+        Me.rdoApplyToMetaData.Text = "MetaData"
+        Me.rdoApplyToMetaData.UseVisualStyleBackColor = True
+        '
+        'rdoApplyToDialogue
+        '
+        Me.rdoApplyToDialogue.AutoSize = True
+        Me.rdoApplyToDialogue.Location = New System.Drawing.Point(28, 134)
+        Me.rdoApplyToDialogue.Name = "rdoApplyToDialogue"
+        Me.rdoApplyToDialogue.Size = New System.Drawing.Size(97, 24)
+        Me.rdoApplyToDialogue.TabIndex = 14
+        Me.rdoApplyToDialogue.TabStop = True
+        Me.rdoApplyToDialogue.Text = "Dialogue"
+        Me.rdoApplyToDialogue.UseVisualStyleBackColor = True
+        '
         'dlgSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -326,10 +324,10 @@ Partial Class dlgSelect
     Friend WithEvents ucrPnlApplyOptions As UcrPanel
     Friend WithEvents ucrInputNewDataFrameName As ucrInputComboBox
     Friend WithEvents lblNewDataFrameName As Label
-    Friend WithEvents rdoApplyToDialogue As RadioButton
-    Friend WithEvents rdoApplyToMetaData As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents rdoApplyAll As RadioButton
+    Friend WithEvents rdoApplyToDialogue As RadioButton
+    Friend WithEvents rdoApplyToMetaData As RadioButton
     Friend WithEvents rdoApplyToDataFrame As RadioButton
+    Friend WithEvents rdoApplyAll As RadioButton
 End Class
