@@ -53,11 +53,17 @@ Public Class dlgSelect
         ucrReceiverSelect.SetParameter(New RParameter("name", 1))
         ucrReceiverSelect.SetParameterIsString()
 
-        ucrPnlOptions.SetParameter(New RParameter("check", 0))
-        ucrPnlOptions.AddRadioButton(rdoApplyAll, "all")
-        ucrPnlOptions.AddRadioButton(rdoApplyToDataFrame, "dataframe")
-        ucrPnlOptions.AddRadioButton(rdoApplyToMetaData, "metadata")
-        ucrPnlOptions.AddRadioButton(rdoApplyToDialogue, "dialogue")
+        ucrChkDataframe.SetText("DataFrame")
+        ucrChkDataframe.SetParameter(New RParameter("dataframe", 0))
+        ucrChkDataframe.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkMetaData.SetText("MetaData")
+        ucrChkMetaData.SetParameter(New RParameter("metadata", 1))
+        ucrChkMetaData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkDialogue.SetText("Dialogue")
+        ucrChkDialogue.SetParameter(New RParameter("dialogue", 2))
+        ucrChkDialogue.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
@@ -80,7 +86,9 @@ Public Class dlgSelect
 
         grpOptions.Visible = False
 
-        clsDummyFunction.AddParameter("check", "all", iPosition:=0)
+        clsDummyFunction.AddParameter("dataframe", "TRUE", iPosition:=0)
+        clsDummyFunction.AddParameter("dialogue", "TRUE", iPosition:=1)
+        clsDummyFunction.AddParameter("metadata", "TRUE", iPosition:=2)
 
         clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
 
@@ -96,14 +104,16 @@ Public Class dlgSelect
         ucrReceiverSelect.SetRCode(clsSetCurrentColumnSelection, bReset)
         ucrInputNewDataFrameName.SetRCode(clsApplyAsSubset, bReset)
         ucrPnlApplyOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+        ucrChkDataframe.SetRCode(clsDummyFunction, bReset)
+        ucrChkMetaData.SetRCode(clsDummyFunction, bReset)
+        ucrChkDialogue.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
         If rdoApplyAsSubset.Checked Then
             ucrBase.OKEnabled(Not ucrInputNewDataFrameName.IsEmpty AndAlso Not ucrReceiverSelect.IsEmpty)
         Else
-            ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty)
+            ucrBase.OKEnabled(Not ucrReceiverSelect.IsEmpty AndAlso (ucrChkDataframe.Checked OrElse ucrChkDialogue.Checked OrElse ucrChkMetaData.Checked))
         End If
     End Sub
 
@@ -151,7 +161,7 @@ Public Class dlgSelect
         End If
     End Sub
 
-    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlApplyOptions.ControlContentsChanged
+    Private Sub ucrReceiverSelect_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelect.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlApplyOptions.ControlContentsChanged, ucrChkDataframe.ControlContentsChanged, ucrChkDialogue.ControlContentsChanged, ucrChkMetaData.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -161,15 +171,7 @@ Public Class dlgSelect
         frmMain.clsRLink.bUseColumnSelection = applyToDialogue
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        If rdoApplyAll.Checked Then
-            ApplyColumnSelectionSettings(True, True, True)
-        Else
-            Dim applyToMetaData As Boolean = rdoApplyToMetaData.Checked
-            Dim applyToDataFrame As Boolean = rdoApplyToDataFrame.Checked
-            Dim applyToDialogue As Boolean = rdoApplyToDialogue.Checked
-
-            ApplyColumnSelectionSettings(applyToMetaData, applyToDataFrame, applyToDialogue)
-        End If
+    Private Sub ucrChkDataframe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlValueChanged, ucrChkDialogue.ControlValueChanged, ucrChkMetaData.ControlValueChanged
+        ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDialogue.Checked)
     End Sub
 End Class

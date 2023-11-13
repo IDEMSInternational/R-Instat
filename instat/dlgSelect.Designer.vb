@@ -42,6 +42,7 @@ Partial Class dlgSelect
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
         Me.rdoApplyAsSelect = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlApplyOptions = New instat.UcrPanel()
         Me.lblSelection = New System.Windows.Forms.Label()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
@@ -51,12 +52,9 @@ Partial Class dlgSelect
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrPnlApplyOptions = New instat.UcrPanel()
-        Me.rdoApplyAll = New System.Windows.Forms.RadioButton()
-        Me.rdoApplyToDataFrame = New System.Windows.Forms.RadioButton()
-        Me.rdoApplyToMetaData = New System.Windows.Forms.RadioButton()
-        Me.rdoApplyToDialogue = New System.Windows.Forms.RadioButton()
+        Me.ucrChkDataframe = New instat.ucrCheck()
+        Me.ucrChkMetaData = New instat.ucrCheck()
+        Me.ucrChkDialogue = New instat.ucrCheck()
         Me.grpApplyOptions.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -71,21 +69,19 @@ Partial Class dlgSelect
         Me.grpApplyOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.grpApplyOptions.Name = "grpApplyOptions"
         Me.grpApplyOptions.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpApplyOptions.Size = New System.Drawing.Size(615, 201)
+        Me.grpApplyOptions.Size = New System.Drawing.Size(615, 184)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
         Me.grpApplyOptions.Text = "Apply"
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.rdoApplyToDialogue)
-        Me.grpOptions.Controls.Add(Me.rdoApplyToMetaData)
-        Me.grpOptions.Controls.Add(Me.rdoApplyToDataFrame)
-        Me.grpOptions.Controls.Add(Me.rdoApplyAll)
-        Me.grpOptions.Controls.Add(Me.ucrPnlOptions)
+        Me.grpOptions.Controls.Add(Me.ucrChkDialogue)
+        Me.grpOptions.Controls.Add(Me.ucrChkMetaData)
+        Me.grpOptions.Controls.Add(Me.ucrChkDataframe)
         Me.grpOptions.Location = New System.Drawing.Point(301, 18)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(305, 170)
+        Me.grpOptions.Size = New System.Drawing.Size(305, 151)
         Me.grpOptions.TabIndex = 3
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -114,6 +110,15 @@ Partial Class dlgSelect
         Me.rdoApplyAsSelect.Text = "As Selected Columns"
         Me.rdoApplyAsSelect.UseVisualStyleBackColor = True
         '
+        'ucrPnlApplyOptions
+        '
+        Me.ucrPnlApplyOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(6, 32)
+        Me.ucrPnlApplyOptions.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
+        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(289, 137)
+        Me.ucrPnlApplyOptions.TabIndex = 2
+        '
         'lblSelection
         '
         Me.lblSelection.AutoSize = True
@@ -140,7 +145,7 @@ Partial Class dlgSelect
         'lblFilterPreview
         '
         Me.lblFilterPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFilterPreview.Location = New System.Drawing.Point(16, 582)
+        Me.lblFilterPreview.Location = New System.Drawing.Point(16, 559)
         Me.lblFilterPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFilterPreview.Name = "lblFilterPreview"
         Me.lblFilterPreview.Size = New System.Drawing.Size(214, 33)
@@ -151,7 +156,7 @@ Partial Class dlgSelect
         'lblNewDataFrameName
         '
         Me.lblNewDataFrameName.AutoSize = True
-        Me.lblNewDataFrameName.Location = New System.Drawing.Point(32, 536)
+        Me.lblNewDataFrameName.Location = New System.Drawing.Point(32, 513)
         Me.lblNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         Me.lblNewDataFrameName.Size = New System.Drawing.Size(179, 20)
@@ -164,7 +169,7 @@ Partial Class dlgSelect
         Me.ucrInputNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputNewDataFrameName.GetSetSelectedIndex = -1
         Me.ucrInputNewDataFrameName.IsReadOnly = False
-        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(219, 529)
+        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(219, 506)
         Me.ucrInputNewDataFrameName.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
         Me.ucrInputNewDataFrameName.Size = New System.Drawing.Size(206, 32)
@@ -176,7 +181,7 @@ Partial Class dlgSelect
         Me.ucrInputSelectPreview.AutoSize = True
         Me.ucrInputSelectPreview.IsMultiline = True
         Me.ucrInputSelectPreview.IsReadOnly = False
-        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(240, 569)
+        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(240, 546)
         Me.ucrInputSelectPreview.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputSelectPreview.Name = "ucrInputSelectPreview"
         Me.ucrInputSelectPreview.Size = New System.Drawing.Size(382, 64)
@@ -212,80 +217,48 @@ Partial Class dlgSelect
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(16, 642)
+        Me.ucrBase.Location = New System.Drawing.Point(16, 619)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 9
         '
-        'ucrPnlOptions
+        'ucrChkDataframe
         '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(12, 27)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(284, 133)
-        Me.ucrPnlOptions.TabIndex = 10
+        Me.ucrChkDataframe.AutoSize = True
+        Me.ucrChkDataframe.Checked = False
+        Me.ucrChkDataframe.Location = New System.Drawing.Point(14, 26)
+        Me.ucrChkDataframe.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDataframe.Name = "ucrChkDataframe"
+        Me.ucrChkDataframe.Size = New System.Drawing.Size(280, 34)
+        Me.ucrChkDataframe.TabIndex = 0
         '
-        'ucrPnlApplyOptions
+        'ucrChkMetaData
         '
-        Me.ucrPnlApplyOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlApplyOptions.Location = New System.Drawing.Point(6, 32)
-        Me.ucrPnlApplyOptions.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlApplyOptions.Name = "ucrPnlApplyOptions"
-        Me.ucrPnlApplyOptions.Size = New System.Drawing.Size(289, 137)
-        Me.ucrPnlApplyOptions.TabIndex = 2
+        Me.ucrChkMetaData.AutoSize = True
+        Me.ucrChkMetaData.Checked = False
+        Me.ucrChkMetaData.Location = New System.Drawing.Point(14, 64)
+        Me.ucrChkMetaData.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkMetaData.Name = "ucrChkMetaData"
+        Me.ucrChkMetaData.Size = New System.Drawing.Size(280, 34)
+        Me.ucrChkMetaData.TabIndex = 1
         '
-        'rdoApplyAll
+        'ucrChkDialogue
         '
-        Me.rdoApplyAll.AutoSize = True
-        Me.rdoApplyAll.Location = New System.Drawing.Point(28, 27)
-        Me.rdoApplyAll.Name = "rdoApplyAll"
-        Me.rdoApplyAll.Size = New System.Drawing.Size(51, 24)
-        Me.rdoApplyAll.TabIndex = 11
-        Me.rdoApplyAll.TabStop = True
-        Me.rdoApplyAll.Text = "All"
-        Me.rdoApplyAll.UseVisualStyleBackColor = True
-        '
-        'rdoApplyToDataFrame
-        '
-        Me.rdoApplyToDataFrame.AutoSize = True
-        Me.rdoApplyToDataFrame.Location = New System.Drawing.Point(29, 63)
-        Me.rdoApplyToDataFrame.Name = "rdoApplyToDataFrame"
-        Me.rdoApplyToDataFrame.Size = New System.Drawing.Size(115, 24)
-        Me.rdoApplyToDataFrame.TabIndex = 12
-        Me.rdoApplyToDataFrame.TabStop = True
-        Me.rdoApplyToDataFrame.Text = "DataFrame"
-        Me.rdoApplyToDataFrame.UseVisualStyleBackColor = True
-        '
-        'rdoApplyToMetaData
-        '
-        Me.rdoApplyToMetaData.AutoSize = True
-        Me.rdoApplyToMetaData.Location = New System.Drawing.Point(28, 97)
-        Me.rdoApplyToMetaData.Name = "rdoApplyToMetaData"
-        Me.rdoApplyToMetaData.Size = New System.Drawing.Size(105, 24)
-        Me.rdoApplyToMetaData.TabIndex = 13
-        Me.rdoApplyToMetaData.TabStop = True
-        Me.rdoApplyToMetaData.Text = "MetaData"
-        Me.rdoApplyToMetaData.UseVisualStyleBackColor = True
-        '
-        'rdoApplyToDialogue
-        '
-        Me.rdoApplyToDialogue.AutoSize = True
-        Me.rdoApplyToDialogue.Location = New System.Drawing.Point(28, 134)
-        Me.rdoApplyToDialogue.Name = "rdoApplyToDialogue"
-        Me.rdoApplyToDialogue.Size = New System.Drawing.Size(97, 24)
-        Me.rdoApplyToDialogue.TabIndex = 14
-        Me.rdoApplyToDialogue.TabStop = True
-        Me.rdoApplyToDialogue.Text = "Dialogue"
-        Me.rdoApplyToDialogue.UseVisualStyleBackColor = True
+        Me.ucrChkDialogue.AutoSize = True
+        Me.ucrChkDialogue.Checked = False
+        Me.ucrChkDialogue.Location = New System.Drawing.Point(14, 105)
+        Me.ucrChkDialogue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDialogue.Name = "ucrChkDialogue"
+        Me.ucrChkDialogue.Size = New System.Drawing.Size(280, 34)
+        Me.ucrChkDialogue.TabIndex = 2
         '
         'dlgSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(644, 734)
+        Me.ClientSize = New System.Drawing.Size(644, 706)
         Me.Controls.Add(Me.ucrInputNewDataFrameName)
         Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.lblFilterPreview)
@@ -324,10 +297,8 @@ Partial Class dlgSelect
     Friend WithEvents ucrPnlApplyOptions As UcrPanel
     Friend WithEvents ucrInputNewDataFrameName As ucrInputComboBox
     Friend WithEvents lblNewDataFrameName As Label
-    Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents rdoApplyToDialogue As RadioButton
-    Friend WithEvents rdoApplyToMetaData As RadioButton
-    Friend WithEvents rdoApplyToDataFrame As RadioButton
-    Friend WithEvents rdoApplyAll As RadioButton
+    Friend WithEvents ucrChkDialogue As ucrCheck
+    Friend WithEvents ucrChkMetaData As ucrCheck
+    Friend WithEvents ucrChkDataframe As ucrCheck
 End Class
