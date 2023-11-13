@@ -40,6 +40,9 @@ Partial Class dlgSelect
     Private Sub InitializeComponent()
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkDialogue = New instat.ucrCheck()
+        Me.ucrChkMetaData = New instat.ucrCheck()
+        Me.ucrChkDataframe = New instat.ucrCheck()
         Me.rdoApplyAsSubset = New System.Windows.Forms.RadioButton()
         Me.rdoApplyAsSelect = New System.Windows.Forms.RadioButton()
         Me.ucrPnlApplyOptions = New instat.UcrPanel()
@@ -52,9 +55,6 @@ Partial Class dlgSelect
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkDataframe = New instat.ucrCheck()
-        Me.ucrChkMetaData = New instat.ucrCheck()
-        Me.ucrChkDialogue = New instat.ucrCheck()
         Me.grpApplyOptions.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -85,6 +85,37 @@ Partial Class dlgSelect
         Me.grpOptions.TabIndex = 3
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
+        '
+        'ucrChkDialogue
+        '
+        Me.ucrChkDialogue.AutoSize = True
+        Me.ucrChkDialogue.Checked = False
+        Me.ucrChkDialogue.Enabled = False
+        Me.ucrChkDialogue.Location = New System.Drawing.Point(14, 105)
+        Me.ucrChkDialogue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDialogue.Name = "ucrChkDialogue"
+        Me.ucrChkDialogue.Size = New System.Drawing.Size(280, 34)
+        Me.ucrChkDialogue.TabIndex = 2
+        '
+        'ucrChkMetaData
+        '
+        Me.ucrChkMetaData.AutoSize = True
+        Me.ucrChkMetaData.Checked = False
+        Me.ucrChkMetaData.Location = New System.Drawing.Point(14, 64)
+        Me.ucrChkMetaData.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkMetaData.Name = "ucrChkMetaData"
+        Me.ucrChkMetaData.Size = New System.Drawing.Size(280, 34)
+        Me.ucrChkMetaData.TabIndex = 1
+        '
+        'ucrChkDataframe
+        '
+        Me.ucrChkDataframe.AutoSize = True
+        Me.ucrChkDataframe.Checked = False
+        Me.ucrChkDataframe.Location = New System.Drawing.Point(14, 26)
+        Me.ucrChkDataframe.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDataframe.Name = "ucrChkDataframe"
+        Me.ucrChkDataframe.Size = New System.Drawing.Size(280, 34)
+        Me.ucrChkDataframe.TabIndex = 0
         '
         'rdoApplyAsSubset
         '
@@ -222,36 +253,6 @@ Partial Class dlgSelect
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 9
-        '
-        'ucrChkDataframe
-        '
-        Me.ucrChkDataframe.AutoSize = True
-        Me.ucrChkDataframe.Checked = False
-        Me.ucrChkDataframe.Location = New System.Drawing.Point(14, 26)
-        Me.ucrChkDataframe.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkDataframe.Name = "ucrChkDataframe"
-        Me.ucrChkDataframe.Size = New System.Drawing.Size(280, 34)
-        Me.ucrChkDataframe.TabIndex = 0
-        '
-        'ucrChkMetaData
-        '
-        Me.ucrChkMetaData.AutoSize = True
-        Me.ucrChkMetaData.Checked = False
-        Me.ucrChkMetaData.Location = New System.Drawing.Point(14, 64)
-        Me.ucrChkMetaData.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkMetaData.Name = "ucrChkMetaData"
-        Me.ucrChkMetaData.Size = New System.Drawing.Size(280, 34)
-        Me.ucrChkMetaData.TabIndex = 1
-        '
-        'ucrChkDialogue
-        '
-        Me.ucrChkDialogue.AutoSize = True
-        Me.ucrChkDialogue.Checked = False
-        Me.ucrChkDialogue.Location = New System.Drawing.Point(14, 105)
-        Me.ucrChkDialogue.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkDialogue.Name = "ucrChkDialogue"
-        Me.ucrChkDialogue.Size = New System.Drawing.Size(280, 34)
-        Me.ucrChkDialogue.TabIndex = 2
         '
         'dlgSelect
         '
