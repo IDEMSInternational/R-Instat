@@ -428,7 +428,9 @@ Public Class ucrDataView
     End Sub
 
     Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
-        GetCurrentDataFrameFocus().clsVisibleDataFramePage.UseColumnSelectionInDataView = bUseColumnSelecion
+        If GetCurrentDataFrameFocus() IsNot Nothing Then
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.UseColumnSelectionInDataView = bUseColumnSelecion
+        End If
     End Sub
 
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
