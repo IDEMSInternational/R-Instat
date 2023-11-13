@@ -1633,8 +1633,7 @@ DataSheet$set("public", "get_column_names", function(as_list = FALSE, include = 
     }
 
     if (use_current_column_selection) col_names <- self$current_column_selection
-    else col_names <- col_names <- names(self$get_data_frame(use_column_selection = use_current_column_selection)) #names(private$data)
- #names(private$data)
+    else col_names <- names(self$get_data_frame(use_column_selection = use_current_column_selection)) #names(private$data)
     out <- c()
     i <- 1
     for(col in col_names) {
