@@ -89,6 +89,7 @@ Public Class dlgSelect
         ucrSelectorForSelectColumns.Reset()
 
         grpOptions.Visible = False
+        ucrChkDialogue.Enabled = False
 
         clsDummyFunction.AddParameter("dataframe", "TRUE", iPosition:=0)
         clsDummyFunction.AddParameter("dialogue", "TRUE", iPosition:=1)
