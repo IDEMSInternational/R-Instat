@@ -181,7 +181,7 @@ Public Class dlgSelect
         frmMain.clsRLink.bUseColumnSelection = applyToDialogue
     End Sub
 
-    Private Sub ucrChkDataframe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlValueChanged, ucrChkDialogue.ControlValueChanged, ucrChkMetaData.ControlValueChanged
+    Private Sub ucrChkDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlContentsChanged, ucrChkDialogue.ControlContentsChanged, ucrChkMetaData.ControlContentsChanged
         ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDialogue.Checked)
     End Sub
 End Class
