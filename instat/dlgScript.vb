@@ -215,7 +215,7 @@ Public Class dlgScript
                 ' If it's a single data frame then wrap it into a list
                 Dim clsDataListRFunction As New RFunction
                 clsDataListRFunction.SetRCommand("list")
-                clsDataListRFunction.AddParameter(strParameterValue:=strDataFrameName)
+                clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
                 clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
             Else
                 ' If it's already a list of data frames, then add the name directly
