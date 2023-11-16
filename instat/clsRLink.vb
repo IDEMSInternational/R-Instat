@@ -1448,9 +1448,7 @@ Public Class RLink
                 For Each kvpExclude In lstExcludedDataTypes
                     clsExcludeList.AddParameter(kvpExclude.Key, GetListAsRString(kvpExclude.Value.ToList(), bWithQuotes:=False))
                 Next
-                If Not bUseColumnSelection Then
-                    clsGetItems.RemoveParameterByName("Is_Hidden")
-                End If
+                clsGetItems.AddParameter("exclude", clsRFunctionParameter:=clsExcludeList)
             End If
             If strDataFrameName <> "" Then
                 clsGetItems.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
