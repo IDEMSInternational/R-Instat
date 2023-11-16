@@ -113,8 +113,8 @@ Public Class RLink
     ''' <summary>   The graph display option (e.g. 'view_output_window' or 'view_separate_window'). </summary>
     Public strGraphDisplayOption As String = "view_output_window"
 
-    ''' <summary> If true then show all the columns to the select listview. </summary>
-    Public bUseColumnSelection As Boolean = True
+    ''' <summary> If true then show all the selected columns to the selector listview. </summary>
+    Public bUseColumnSelection As Boolean = False
 
 
     ''' <summary> The current grid (the worksheet that appears similar to a spreadsheet on the 
@@ -1388,12 +1388,12 @@ Public Class RLink
         Dim strTemp As String
         Dim lviTemp As ListViewItem
         Dim strTopItemText As String = ""
+        Dim strValue = If(bUseColumnSelection, "TRUE", "FALSE")
 
         If bInstatObjectExists Then
             Select Case strType
                 Case "column"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
-                    Dim strValue = If(bUseColumnSelection, "TRUE", "FALSE")
                     clsGetItems.AddParameter("use_current_column_selection", strValue)
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
@@ -1448,7 +1448,9 @@ Public Class RLink
                 For Each kvpExclude In lstExcludedDataTypes
                     clsExcludeList.AddParameter(kvpExclude.Key, GetListAsRString(kvpExclude.Value.ToList(), bWithQuotes:=False))
                 Next
-                clsGetItems.AddParameter("exclude", clsRFunctionParameter:=clsExcludeList)
+                If Not bUseColumnSelection Then
+                    clsGetItems.RemoveParameterByName("Is_Hidden")
+                End If
             End If
             If strDataFrameName <> "" Then
                 clsGetItems.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))

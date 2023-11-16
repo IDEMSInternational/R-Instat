@@ -182,6 +182,6 @@ Public Class dlgSelect
     End Sub
 
     Private Sub ucrChkDataframe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlValueChanged, ucrChkDialogue.ControlValueChanged, ucrChkMetaData.ControlValueChanged
-        ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDataframe.Checked)
+        ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDialogue.Checked)
     End Sub
 End Class
