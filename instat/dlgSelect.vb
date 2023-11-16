@@ -63,8 +63,8 @@ Public Class dlgSelect
         ucrChkMetaData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkDialogue.SetText("Dialogs")
-        'ucrChkDialogue.SetParameter(New RParameter("dialogue", 2))
-        'ucrChkDialogue.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDialogue.SetParameter(New RParameter("dialogue", 2))
+        ucrChkDialogue.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
@@ -91,7 +91,7 @@ Public Class dlgSelect
         grpOptions.Visible = False
 
         clsDummyFunction.AddParameter("dataframe", "TRUE", iPosition:=0)
-        'clsDummyFunction.AddParameter("dialogue", "TRUE", iPosition:=1)
+        clsDummyFunction.AddParameter("dialogue", "TRUE", iPosition:=1)
         clsDummyFunction.AddParameter("metadata", "TRUE", iPosition:=2)
 
         clsCatFunction.SetRCommand("cat")
@@ -112,7 +112,7 @@ Public Class dlgSelect
         ucrPnlApplyOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkDataframe.SetRCode(clsDummyFunction, bReset)
         ucrChkMetaData.SetRCode(clsDummyFunction, bReset)
-        'ucrChkDialogue.SetRCode(clsDummyFunction, bReset)
+        ucrChkDialogue.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -182,6 +182,6 @@ Public Class dlgSelect
     End Sub
 
     Private Sub ucrChkDataframe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlValueChanged, ucrChkDialogue.ControlValueChanged, ucrChkMetaData.ControlValueChanged
-        ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, True)
+        ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDataframe.Checked)
     End Sub
 End Class
