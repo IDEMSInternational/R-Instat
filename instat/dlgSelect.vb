@@ -21,6 +21,7 @@ Public Class dlgSelect
     Private clsSetCurrentColumnSelection As New RFunction
     Private clsApplyAsSubset As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsCatFunction As New RFunction
 
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -61,14 +62,16 @@ Public Class dlgSelect
         ucrChkMetaData.SetParameter(New RParameter("metadata", 1))
         ucrChkMetaData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkDialogue.SetText("Dialogue")
+        ucrChkDialogue.SetText("Dialogs")
         'ucrChkDialogue.SetParameter(New RParameter("dialogue", 2))
         'ucrChkDialogue.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSelect)
         ucrPnlApplyOptions.AddRadioButton(rdoApplyAsSubset)
+        ucrPnlApplyOptions.AddRadioButton(rdoApplySave)
         ucrPnlApplyOptions.AddFunctionNamesCondition(rdoApplyAsSelect, frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
         ucrPnlApplyOptions.AddFunctionNamesCondition(rdoApplyAsSubset, frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
+        ucrPnlApplyOptions.AddFunctionNamesCondition(rdoApplySave, "cat")
 
         ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 1))
         ucrInputNewDataFrameName.SetDataFrameSelector(ucrSelectorForSelectColumns.ucrAvailableDataFrames)
@@ -82,6 +85,7 @@ Public Class dlgSelect
         clsSetCurrentColumnSelection = New RFunction
         clsApplyAsSubset = New RFunction
         clsDummyFunction = New RFunction
+        clsCatFunction = New RFunction
         ucrSelectorForSelectColumns.Reset()
 
         grpOptions.Visible = False
@@ -89,6 +93,8 @@ Public Class dlgSelect
         clsDummyFunction.AddParameter("dataframe", "TRUE", iPosition:=0)
         'clsDummyFunction.AddParameter("dialogue", "TRUE", iPosition:=1)
         clsDummyFunction.AddParameter("metadata", "TRUE", iPosition:=2)
+
+        clsCatFunction.SetRCommand("cat")
 
         clsSetCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_column_selection")
 
@@ -139,9 +145,13 @@ Public Class dlgSelect
         If rdoApplyAsSelect.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSetCurrentColumnSelection)
             grpOptions.Visible = True
-        Else
+        ElseIf rdoApplyAsSubset.Checked Then
             grpOptions.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsApplyAsSubset)
+        Else
+            clsCatFunction.AddParameter("dispay", Chr(34) & "Saved column selection" & Chr(34), bIncludeArgumentName:=False)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCatFunction)
+            grpOptions.Visible = False
         End If
     End Sub
 
