@@ -61,11 +61,12 @@ Public Class dlgScript
         ucrCboSaveOutputObjectFormat.SetLinkedDisplayControl(lblSaveObjectFormat)
         ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = 0
 
+        ucrSaveObject.SetLabelText("Save Graph")
+        ucrSaveObject.SetIsComboBox()
+        ucrSaveObject.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
 
-        ucrSaveData.SetLabelText("Save Graph")
-        ucrSaveData.SetIsComboBox()
-        ucrSaveData.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
-
+        ucrInputSaveDataFrame.SetLinkedDisplayControl(lblSaveDataFrame)
+        ucrChkSaveDataFrameList.SetText("Single")
 
         '--------------------------------
         'Get data controls
@@ -144,9 +145,10 @@ Public Class dlgScript
         ucrInputRemoveObjects.Reset()
 
         ' Save controls reset
-        ucrSaveData.SetRCode(clsSaveDataFunction, True)
-        ucrSaveData.Reset()
+        ucrSaveObject.SetRCode(clsSaveDataFunction, True)
+        ucrSaveObject.Reset()
         rdoSaveDataFrame.Checked = True
+        ucrChkSaveDataFrameList.Checked = True
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -166,15 +168,21 @@ Public Class dlgScript
         ucrDataFrameSaveOutputSelect.SetVisible(False)
         ucrCboSaveOutputObjectType.SetVisible(False)
         ucrCboSaveOutputObjectFormat.SetVisible(False)
+        ucrSaveObject.SetVisible(False)
+        ucrInputSaveDataFrame.SetVisible(False)
+        ucrChkSaveDataFrameList.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
-            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrDataFrameSaveOutputSelect.Location.Y)
-            SetupSaveDataControl("Data Frame", RObjectTypeLabel.Dataframe, "")
+            ucrInputSaveDataFrame.SetVisible(True)
+            ucrChkSaveDataFrameList.SetVisible(True)
+            ucrInputSaveDataFrame.SetName("")
         ElseIf rdoSaveColumn.Checked Then
-            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectType.Location.Y)
+            ucrSaveObject.Location = New Point(ucrSaveObject.Location.X, ucrCboSaveOutputObjectType.Location.Y)
+            ucrSaveObject.SetVisible(True)
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             SetupSaveDataControl("Column", RObjectTypeLabel.Column, "")
         ElseIf rdoSaveOutputObject.Checked Then
-            ucrSaveData.Location = New Point(ucrSaveData.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33)
+            ucrSaveObject.Location = New Point(ucrSaveObject.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33)
+            ucrSaveObject.SetVisible(True)
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             ucrCboSaveOutputObjectType.SetVisible(True)
             ucrCboSaveOutputObjectFormat.SetVisible(True)
@@ -189,29 +197,45 @@ Public Class dlgScript
     End Sub
 
     Private Sub SetupSaveDataControl(strLabel As String, strDataType As String, strFormat As String)
-
-        ucrSaveData.SetSaveType(strDataType, strFormat)
-        ucrSaveData.SetLabelText(strLabel)
-        ucrSaveData.SetName("")
-
-        If strDataType = RObjectTypeLabel.Dataframe Then
-            ucrSaveData.SetIsTextBox()
-        Else
-            ucrSaveData.SetIsComboBox()
-        End If
+        ucrSaveObject.SetSaveType(strDataType, strFormat)
+        ucrSaveObject.SetLabelText(strLabel)
+        ucrSaveObject.SetName("")
     End Sub
 
-    Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlContentsChanged
+    Private Sub ucrSaveDataFrameControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveDataFrame.ControlContentsChanged, ucrChkSaveDataFrameList.ControlContentsChanged
         Dim strScript As String = ""
 
-        If ucrSaveData.IsComplete Then
+        If Not ucrInputSaveDataFrame.IsEmpty() Then
+            Dim strDataFrameName As String = ucrInputSaveDataFrame.GetText()
+            Dim clsImportRFunction As New RFunction
+
+            clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+
+            If ucrChkSaveDataFrameList.Checked Then
+                Dim clsDataListRFunction As New RFunction
+                clsDataListRFunction.SetRCommand("list")
+                clsDataListRFunction.AddParameter(strParameterValue:=strDataFrameName, bIncludeArgumentName:=False)
+                clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
+            Else
+                clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
+            End If
+
+            strScript = "# Save data frame(s) """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
+        End If
+
+
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrSaveData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlContentsChanged
+        Dim strScript As String = ""
+
+        If ucrSaveObject.IsComplete Then
             ' R code is not automatiucally updated by save control when control contents changed event is raised by the control
-            ucrSaveData.UpdateRCode()
+            ucrSaveObject.UpdateRCode()
 
             Dim strDataType As String = ""
-            If rdoSaveDataFrame.Checked Then
-                strDataType = "data frame"
-            ElseIf rdoSaveColumn.Checked Then
+            If rdoSaveColumn.Checked Then
                 strDataType = "column"
             ElseIf rdoSaveOutputObject.Checked Then
                 strDataType = ucrCboSaveOutputObjectType.GetText().ToLower()
@@ -222,7 +246,7 @@ Public Class dlgScript
             If arrtemp.Length > 1 Then
                 'ignore the first line of the script because it is an "empty" assignment
                 strTemp = arrtemp(1)
-                strScript = "# Save " & strDataType & " """ & ucrSaveData.GetText() & """" & Environment.NewLine & strTemp
+                strScript = "# Save " & strDataType & " """ & ucrSaveObject.GetText() & """" & Environment.NewLine & strTemp
             End If
         End If
 
