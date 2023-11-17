@@ -90,6 +90,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdColour = New System.Windows.Forms.Button()
         Me.grpAethetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
         Me.SuspendLayout()
@@ -99,18 +100,18 @@ Partial Class dlgGeneralForGraphics
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(135, 25)
+        Me.cmdOptions.Size = New System.Drawing.Size(60, 25)
         Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdFacets
         '
         Me.cmdFacets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFacets.Location = New System.Drawing.Point(139, 401)
+        Me.cmdFacets.Location = New System.Drawing.Point(65, 401)
         Me.cmdFacets.Name = "cmdFacets"
-        Me.cmdFacets.Size = New System.Drawing.Size(64, 25)
+        Me.cmdFacets.Size = New System.Drawing.Size(57, 25)
         Me.cmdFacets.TabIndex = 17
         Me.cmdFacets.Tag = "Facets"
         Me.cmdFacets.Text = "Facets"
@@ -119,20 +120,20 @@ Partial Class dlgGeneralForGraphics
         'cmdTheme
         '
         Me.cmdTheme.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTheme.Location = New System.Drawing.Point(401, 401)
+        Me.cmdTheme.Location = New System.Drawing.Point(303, 401)
         Me.cmdTheme.Name = "cmdTheme"
         Me.cmdTheme.Size = New System.Drawing.Size(65, 25)
         Me.cmdTheme.TabIndex = 21
         Me.cmdTheme.Tag = "Theme"
-        Me.cmdTheme.Text = "Theme"
+        Me.cmdTheme.Text = "Themes"
         Me.cmdTheme.UseVisualStyleBackColor = True
         '
         'cmdYAxis
         '
         Me.cmdYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYAxis.Location = New System.Drawing.Point(334, 401)
+        Me.cmdYAxis.Location = New System.Drawing.Point(240, 401)
         Me.cmdYAxis.Name = "cmdYAxis"
-        Me.cmdYAxis.Size = New System.Drawing.Size(69, 25)
+        Me.cmdYAxis.Size = New System.Drawing.Size(64, 25)
         Me.cmdYAxis.TabIndex = 20
         Me.cmdYAxis.Tag = ""
         Me.cmdYAxis.Text = "Y-Axis"
@@ -141,9 +142,9 @@ Partial Class dlgGeneralForGraphics
         'cmdXAxis
         '
         Me.cmdXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdXAxis.Location = New System.Drawing.Point(266, 401)
+        Me.cmdXAxis.Location = New System.Drawing.Point(180, 401)
         Me.cmdXAxis.Name = "cmdXAxis"
-        Me.cmdXAxis.Size = New System.Drawing.Size(71, 25)
+        Me.cmdXAxis.Size = New System.Drawing.Size(61, 25)
         Me.cmdXAxis.TabIndex = 19
         Me.cmdXAxis.Tag = ""
         Me.cmdXAxis.Text = "X-Axis"
@@ -152,9 +153,9 @@ Partial Class dlgGeneralForGraphics
         'cmdTitles
         '
         Me.cmdTitles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTitles.Location = New System.Drawing.Point(201, 401)
+        Me.cmdTitles.Location = New System.Drawing.Point(121, 401)
         Me.cmdTitles.Name = "cmdTitles"
-        Me.cmdTitles.Size = New System.Drawing.Size(67, 25)
+        Me.cmdTitles.Size = New System.Drawing.Size(60, 25)
         Me.cmdTitles.TabIndex = 18
         Me.cmdTitles.Tag = ""
         Me.cmdTitles.Text = "Titles"
@@ -539,12 +540,24 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'cmdColour
+        '
+        Me.cmdColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdColour.Location = New System.Drawing.Point(367, 401)
+        Me.cmdColour.Name = "cmdColour"
+        Me.cmdColour.Size = New System.Drawing.Size(65, 25)
+        Me.cmdColour.TabIndex = 214
+        Me.cmdColour.Tag = "Colour"
+        Me.cmdColour.Text = "Colour"
+        Me.cmdColour.UseVisualStyleBackColor = True
+        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(478, 547)
+        Me.Controls.Add(Me.cmdColour)
         Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.grpAethetics)
         Me.Controls.Add(Me.ucrInputLegendPosition)
@@ -626,4 +639,5 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents lblYVariable As Label
     Friend WithEvents lblXVariable As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents cmdColour As Button
 End Class
