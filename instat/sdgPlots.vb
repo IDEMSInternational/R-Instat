@@ -746,7 +746,7 @@ Public Class sdgPlots
             ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         End If
         ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
-            ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkDrop.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
