@@ -92,7 +92,7 @@ Public Class ucrAdditionalLayers
 
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click, toolStripMenuItemGeomBar.Click, toolStripMenuItemGeomBoxPlot.Click, toolStripMenuItemGeomCol.Click, toolStripMenuItemGeomCount.Click, toolStripMenuItemGeomcategoricalmodel.Click,
             toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomLabel.Click, toolStripMenuItemGeomparallelslopes.Click, toolStripMenuItemGeomtile.Click, toolStripMenuItemGeomcontour.Click, toolStripMenuItemGeomhistogram.Click,
-            toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRugSmooth.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click, toolStripMenuItemGeomDensityRidges.Click
+            toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomsmooth.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRug.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click, toolStripMenuItemGeomDensityRidges.Click
 
         'setup the geom function to use
         Dim clsNewGeomFunction As New RFunction
@@ -130,8 +130,10 @@ Public Class ucrAdditionalLayers
             strGeomRCommand = "geom_line"
         ElseIf sender Is toolStripMenuItemGeomPoint Then
             strGeomRCommand = "geom_point"
-        ElseIf sender Is toolStripMenuItemGeomRugSmooth Then
-            strGeomRCommand = "geom_rug_smooth"
+        ElseIf sender Is toolStripMenuItemGeomRug Then
+            strGeomRCommand = "geom_rug"
+        ElseIf sender Is toolStripMenuItemGeomsmooth Then
+            strGeomRCommand = "geom_smooth"
         ElseIf sender Is toolStripMenuItemGeomText Then
             strGeomRCommand = "geom_text"
         ElseIf sender Is toolStripMenuItemGeomTextRepel Then
