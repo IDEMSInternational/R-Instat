@@ -1015,7 +1015,6 @@ Public Class dlgEndOfRainsSeason
     Private Sub Evaporation()
         If rdoEndOfSeasons.Checked Then
             If rdoValueEvaporation.Checked Then
-                'ucrReceiverRainfall.SetMeAsReceiver()
                 clsWBMinEvapOperator.RemoveParameterByName("variable")
                 clsWBMaxEvapOperator.RemoveParameterByName("variable")
                 If ucrChkWB.Checked Then
@@ -1031,8 +1030,8 @@ Public Class dlgEndOfRainsSeason
                     clsPMaxFunction.AddParameter("0", "x + y", iPosition:=0, bIncludeArgumentName:=False)
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsPMaxFunction.RemoveParameterByName("wb")
-                    clsWBMaxEvapOperator.AddParameter("value", "5", iPosition:=1)
-                    clsWBMinEvapOperator.AddParameter("value", "5", iPosition:=1)
+                    clsWBMaxEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
+                    clsWBMinEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
                 End If
             ElseIf rdoVariableEvaporation.Checked Then
                 ucrReceiverEvaporation.SetMeAsReceiver()
@@ -1121,7 +1120,7 @@ Public Class dlgEndOfRainsSeason
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged
+    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged, ucrNudWB.ControlValueChanged, ucrNudCapacity.ControlValueChanged
         Evaporation()
     End Sub
 
