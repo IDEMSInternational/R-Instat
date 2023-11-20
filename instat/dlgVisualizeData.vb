@@ -171,7 +171,7 @@ Public Class dlgVisualizeData
         clsVisValueFunction.SetPackageName("visdat")
         clsVisValueFunction.SetRCommand("vis_value")
         clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        clsVisValueFunction.AddParameter("viridis_option", Chr(34) & "A" & Chr(34), iPosition:=2)
+        clsVisValueFunction.AddParameter("viridis_option", Chr(34) & "A" & Chr(34), iPosition:=1)
         clsVisValueFunction.AddParameter("na_color", Chr(34) & "grey" & Chr(34), iPosition:=2)
 
         clsPipeOperator.SetOperation("%>%")
@@ -207,7 +207,7 @@ Public Class dlgVisualizeData
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), 1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
-        ucrSaveGraph.AddAdditionalRCode(clsVisValueFunction, iAdditionalPairNo:=2)
+        ucrSaveGraph.AddAdditionalRCode(clsVisValueFunction, iAdditionalPairNo:=3)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
         ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), iAdditionalPairNo:=1)
         'ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisValueFunction, New RParameter("viridis_option", 1), iAdditionalPairNo:=1)
@@ -303,6 +303,8 @@ Public Class dlgVisualizeData
                 clsVisDatFunction.RemoveParameterByName("x")
                 clsVisGuessFunction.RemoveParameterByName("x")
                 clsVisMissFunction.RemoveParameterByName("x")
+                clsVisValueFunction.RemoveParameterByName("x")
+                clsVisValueFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
                 clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
                 clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
                 clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
@@ -326,6 +328,7 @@ Public Class dlgVisualizeData
                 clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
             Else
                 clsPipeOperator.RemoveParameterByName("left")
                 clsPipeOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
@@ -333,7 +336,6 @@ Public Class dlgVisualizeData
                 clsVisGuessFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
                 clsVisMissFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
                 clsVisValueFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
-
             End If
         End If
     End Sub
