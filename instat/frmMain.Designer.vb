@@ -5067,7 +5067,9 @@ Partial Class frmMain
         Me.MainMenuStrip = Me.mnuBar
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmMain"
-        Me.Text = "R-Instat  .."
+        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
+                My.Application.Info.Version.Minor.ToString + "." +
+                My.Application.Info.Version.Build.ToString
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
