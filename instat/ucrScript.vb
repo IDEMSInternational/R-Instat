@@ -99,9 +99,22 @@ Public Class ucrScript
     '''     Appends <paramref name="strText"/> to the end of the text in the active tab.
     ''' </summary>
     ''' <param name="strText"> The text to append to the contents of the active tab.</param>
-    Public Sub AppendText(strText As String)
-        clsScriptActive.AppendText(Environment.NewLine & strText)
-        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+    Public Sub AppendText(strText As String, Optional bAppendAtCurrentCursorPosition As Boolean = False)
+        If String.IsNullOrEmpty(strText) Then
+            Exit Sub
+        End If
+
+        If bAppendAtCurrentCursorPosition Then
+            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText & Environment.NewLine)
+            ' Todo. find a way of going to the last position of the inserted "group of text".
+            ' Currently this just goes to the last position of the first line of inserted text
+            clsScriptActive.GotoPosition(clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition)
+        Else
+            clsScriptActive.AppendText(Environment.NewLine & strText)
+            clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+        End If
+
+
         EnableDisableButtons()
     End Sub
 
@@ -765,6 +778,10 @@ Public Class ucrScript
         LoadScript()
     End Sub
 
+    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
+        dlgScript.ShowDialog()
+    End Sub
+
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
         'never remove last script tab
         If TabControl.TabCount < 2 Then
@@ -960,7 +977,6 @@ Public Class ucrScript
         End If
     End Sub
 
-
     Private Sub TabControl_DoubleClick(sender As Object, e As EventArgs) Handles TabControl.DoubleClick
         Dim rectangle = TabControl.GetTabRect(TabControl.SelectedIndex())
         rectangle = TabControl.RectangleToScreen(rectangle)
@@ -987,23 +1003,5 @@ Public Class ucrScript
         TabControl.SelectedTab.Text = sender.text
         sender.Dispose()
     End Sub
-
-    ''' <summary>
-    ''' Insert <paramref name="strText"/> to the current cursor position in the active tab.
-    ''' </summary>
-    ''' <param name="iCurrentPosition"> The current cursor position in the active tab.</param>
-    ''' <param name="strText"> The text to insert to the contents of the active tab.</param>
-    Public Sub InsertText(iCurrentPosition As Integer, strText As String)
-        strText = strText & Environment.NewLine
-        clsScriptActive.InsertText(iCurrentPosition, strText)
-        Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
-        clsScriptActive.GotoPosition(iNextLinePos)
-    End Sub
-
-    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
-        dlgScript.iCurrentPos = clsScriptActive.CurrentPosition
-        dlgScript.ShowDialog()
-    End Sub
-
 
 End Class

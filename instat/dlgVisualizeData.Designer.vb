@@ -303,9 +303,9 @@ Partial Class dlgVisualizeData
         'ucrPnlVisualizeData
         '
         Me.ucrPnlVisualizeData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(44, 1)
+        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(12, 1)
         Me.ucrPnlVisualizeData.Name = "ucrPnlVisualizeData"
-        Me.ucrPnlVisualizeData.Size = New System.Drawing.Size(324, 46)
+        Me.ucrPnlVisualizeData.Size = New System.Drawing.Size(388, 46)
         Me.ucrPnlVisualizeData.TabIndex = 0
         '
         'ucrSaveGraph
