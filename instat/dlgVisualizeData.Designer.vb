@@ -31,6 +31,11 @@ Partial Class dlgVisualizeData
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
         Me.lblPaltte = New System.Windows.Forms.Label()
         Me.lblSampling = New System.Windows.Forms.Label()
+        Me.rdoNumeric = New System.Windows.Forms.RadioButton()
+        Me.lblColour = New System.Windows.Forms.Label()
+        Me.lblpalettecolor = New System.Windows.Forms.Label()
+        Me.ucrInputColourPalette = New instat.ucrInputComboBox()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.ucrNudAdjustSize = New instat.ucrNud()
         Me.ucrChkAdjustSize = New instat.ucrCheck()
         Me.ucrNudSamplingFunction = New instat.ucrNud()
@@ -52,12 +57,12 @@ Partial Class dlgVisualizeData
         Me.rdoVisDat.FlatAppearance.BorderSize = 2
         Me.rdoVisDat.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisDat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisDat.Location = New System.Drawing.Point(60, 11)
+        Me.rdoVisDat.Location = New System.Drawing.Point(28, 11)
         Me.rdoVisDat.Name = "rdoVisDat"
         Me.rdoVisDat.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisDat.TabIndex = 1
         Me.rdoVisDat.TabStop = True
-        Me.rdoVisDat.Text = "Data"
+        Me.rdoVisDat.Text = "Column Type "
         Me.rdoVisDat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoVisDat.UseVisualStyleBackColor = True
         '
@@ -68,9 +73,9 @@ Partial Class dlgVisualizeData
         Me.rdoVisMiss.FlatAppearance.BorderSize = 2
         Me.rdoVisMiss.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisMiss.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisMiss.Location = New System.Drawing.Point(156, 11)
+        Me.rdoVisMiss.Location = New System.Drawing.Point(126, 11)
         Me.rdoVisMiss.Name = "rdoVisMiss"
-        Me.rdoVisMiss.Size = New System.Drawing.Size(100, 28)
+        Me.rdoVisMiss.Size = New System.Drawing.Size(77, 28)
         Me.rdoVisMiss.TabIndex = 2
         Me.rdoVisMiss.TabStop = True
         Me.rdoVisMiss.Text = "Missing"
@@ -84,12 +89,12 @@ Partial Class dlgVisualizeData
         Me.rdoVisGuess.FlatAppearance.BorderSize = 2
         Me.rdoVisGuess.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisGuess.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisGuess.Location = New System.Drawing.Point(252, 11)
+        Me.rdoVisGuess.Location = New System.Drawing.Point(201, 11)
         Me.rdoVisGuess.Name = "rdoVisGuess"
         Me.rdoVisGuess.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisGuess.TabIndex = 3
         Me.rdoVisGuess.TabStop = True
-        Me.rdoVisGuess.Text = "Guess"
+        Me.rdoVisGuess.Text = "Row Type"
         Me.rdoVisGuess.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoVisGuess.UseVisualStyleBackColor = True
         '
@@ -149,6 +154,62 @@ Partial Class dlgVisualizeData
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 9
         Me.lblSampling.Text = "Sampling Fraction:"
+        '
+        'rdoNumeric
+        '
+        Me.rdoNumeric.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoNumeric.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatAppearance.BorderSize = 2
+        Me.rdoNumeric.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoNumeric.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoNumeric.Location = New System.Drawing.Point(288, 11)
+        Me.rdoNumeric.Name = "rdoNumeric"
+        Me.rdoNumeric.Size = New System.Drawing.Size(94, 28)
+        Me.rdoNumeric.TabIndex = 21
+        Me.rdoNumeric.TabStop = True
+        Me.rdoNumeric.Text = "Numeric"
+        Me.rdoNumeric.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoNumeric.UseVisualStyleBackColor = True
+        '
+        'lblColour
+        '
+        Me.lblColour.AutoSize = True
+        Me.lblColour.Location = New System.Drawing.Point(250, 274)
+        Me.lblColour.Name = "lblColour"
+        Me.lblColour.Size = New System.Drawing.Size(40, 13)
+        Me.lblColour.TabIndex = 23
+        Me.lblColour.Text = "Colour:"
+        '
+        'lblpalettecolor
+        '
+        Me.lblpalettecolor.AutoSize = True
+        Me.lblpalettecolor.Location = New System.Drawing.Point(281, 309)
+        Me.lblpalettecolor.Name = "lblpalettecolor"
+        Me.lblpalettecolor.Size = New System.Drawing.Size(43, 13)
+        Me.lblpalettecolor.TabIndex = 24
+        Me.lblpalettecolor.Text = "Palette:"
+        '
+        'ucrInputColourPalette
+        '
+        Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColourPalette.GetSetSelectedIndex = -1
+        Me.ucrInputColourPalette.IsReadOnly = False
+        Me.ucrInputColourPalette.Location = New System.Drawing.Point(330, 307)
+        Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
+        Me.ucrInputColourPalette.Size = New System.Drawing.Size(85, 21)
+        Me.ucrInputColourPalette.TabIndex = 25
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(299, 269)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(85, 21)
+        Me.ucrInputColour.TabIndex = 22
         '
         'ucrNudAdjustSize
         '
@@ -283,6 +344,11 @@ Partial Class dlgVisualizeData
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 441)
+        Me.Controls.Add(Me.ucrInputColourPalette)
+        Me.Controls.Add(Me.lblpalettecolor)
+        Me.Controls.Add(Me.lblColour)
+        Me.Controls.Add(Me.ucrInputColour)
+        Me.Controls.Add(Me.rdoNumeric)
         Me.Controls.Add(Me.ucrNudAdjustSize)
         Me.Controls.Add(Me.ucrChkAdjustSize)
         Me.Controls.Add(Me.lblSampling)
@@ -336,4 +402,9 @@ Partial Class dlgVisualizeData
     Friend WithEvents ucrNudSamplingFunction As ucrNud
     Friend WithEvents ucrNudAdjustSize As ucrNud
     Friend WithEvents ucrChkAdjustSize As ucrCheck
+    Friend WithEvents rdoNumeric As RadioButton
+    Friend WithEvents ucrInputColour As ucrInputComboBox
+    Friend WithEvents lblColour As Label
+    Friend WithEvents ucrInputColourPalette As ucrInputComboBox
+    Friend WithEvents lblpalettecolor As Label
 End Class
