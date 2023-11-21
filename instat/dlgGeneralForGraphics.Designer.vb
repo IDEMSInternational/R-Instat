@@ -494,62 +494,62 @@ Partial Class dlgGeneralForGraphics
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemTitles, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemTitles, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(141, 202)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 224)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemFacets
         '
         Me.toolStripMenuItemFacets.Name = "toolStripMenuItemFacets"
-        Me.toolStripMenuItemFacets.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemFacets.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemFacets.Text = "Facets"
         '
         'toolStripMenuItemTitles
         '
         Me.toolStripMenuItemTitles.Name = "toolStripMenuItemTitles"
-        Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemTitles.Text = "Titles"
         '
         'toolStripMenuItemYaxis
         '
         Me.toolStripMenuItemYaxis.Name = "toolStripMenuItemYaxis"
-        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemYaxis.Text = "Y-Axis"
         '
         'toolStripMenuItemXaxis
         '
         Me.toolStripMenuItemXaxis.Name = "toolStripMenuItemXaxis"
-        Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemXaxis.Text = "X-Axis"
         '
         'toolStripMenuItemThemes
         '
         Me.toolStripMenuItemThemes.Name = "toolStripMenuItemThemes"
-        Me.toolStripMenuItemThemes.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemThemes.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemThemes.Text = "Themes"
         '
         'toolStripMenuItemCoordinates
         '
         Me.toolStripMenuItemCoordinates.Name = "toolStripMenuItemCoordinates"
-        Me.toolStripMenuItemCoordinates.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemCoordinates.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemCoordinates.Text = "Coordinates"
         '
         'toolStripMenuItemColour
         '
         Me.toolStripMenuItemColour.Name = "toolStripMenuItemColour"
-        Me.toolStripMenuItemColour.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemColour.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemColour.Text = "Colour"
         '
         'toolStripMenuItemAnnotation
         '
         Me.toolStripMenuItemAnnotation.Name = "toolStripMenuItemAnnotation"
-        Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemAnnotation.Text = "Annotation"
         '
         'dlgGeneralForGraphics
