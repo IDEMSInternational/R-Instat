@@ -89,12 +89,13 @@ Partial Class dlgGeneralForGraphics
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemFacets = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTitles = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemYaxis = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemXaxis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemYaxis = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemThemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemCoordinates = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemColour = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemAnnotation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLayers = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpAethetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -494,9 +495,9 @@ Partial Class dlgGeneralForGraphics
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemTitles, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemLayers, Me.toolStripMenuItemTitles, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 224)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 246)
         '
         'toolStripMenuItemPlotOptions
         '
@@ -516,17 +517,17 @@ Partial Class dlgGeneralForGraphics
         Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemTitles.Text = "Titles"
         '
-        'toolStripMenuItemYaxis
-        '
-        Me.toolStripMenuItemYaxis.Name = "toolStripMenuItemYaxis"
-        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemYaxis.Text = "Y-Axis"
-        '
         'toolStripMenuItemXaxis
         '
         Me.toolStripMenuItemXaxis.Name = "toolStripMenuItemXaxis"
         Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemXaxis.Text = "X-Axis"
+        '
+        'toolStripMenuItemYaxis
+        '
+        Me.toolStripMenuItemYaxis.Name = "toolStripMenuItemYaxis"
+        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemYaxis.Text = "Y-Axis"
         '
         'toolStripMenuItemThemes
         '
@@ -551,6 +552,12 @@ Partial Class dlgGeneralForGraphics
         Me.toolStripMenuItemAnnotation.Name = "toolStripMenuItemAnnotation"
         Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemAnnotation.Text = "Annotation"
+        '
+        'toolStripMenuItemLayers
+        '
+        Me.toolStripMenuItemLayers.Name = "toolStripMenuItemLayers"
+        Me.toolStripMenuItemLayers.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLayers.Text = "Layers"
         '
         'dlgGeneralForGraphics
         '
@@ -640,4 +647,5 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents toolStripMenuItemColour As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemCoordinates As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemAnnotation As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLayers As ToolStripMenuItem
 End Class
