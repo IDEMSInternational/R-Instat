@@ -503,7 +503,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("G", 0, iPosition:=6)
             clsListFunction.AddParameter("as", 0.25, iPosition:=7)
             clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
-            clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
+            clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
         ElseIf rdoHargreavesSamani.Checked Then
