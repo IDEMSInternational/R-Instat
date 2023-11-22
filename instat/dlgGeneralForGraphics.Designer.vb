@@ -88,6 +88,7 @@ Partial Class dlgGeneralForGraphics
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemFacets = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLayers = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTitles = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemXaxis = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemYaxis = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,7 +96,6 @@ Partial Class dlgGeneralForGraphics
         Me.toolStripMenuItemCoordinates = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemColour = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemAnnotation = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemLayers = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpAethetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -486,7 +486,7 @@ Partial Class dlgGeneralForGraphics
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(94, 25)
+        Me.cmdOptions.Size = New System.Drawing.Size(137, 25)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 215
         Me.cmdOptions.Tag = "Plot Options"
@@ -497,67 +497,67 @@ Partial Class dlgGeneralForGraphics
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemLayers, Me.toolStripMenuItemTitles, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 246)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(141, 224)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemFacets
         '
         Me.toolStripMenuItemFacets.Name = "toolStripMenuItemFacets"
-        Me.toolStripMenuItemFacets.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemFacets.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemFacets.Text = "Facets"
+        '
+        'toolStripMenuItemLayers
+        '
+        Me.toolStripMenuItemLayers.Name = "toolStripMenuItemLayers"
+        Me.toolStripMenuItemLayers.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemLayers.Text = "Layers"
         '
         'toolStripMenuItemTitles
         '
         Me.toolStripMenuItemTitles.Name = "toolStripMenuItemTitles"
-        Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemTitles.Text = "Titles"
         '
         'toolStripMenuItemXaxis
         '
         Me.toolStripMenuItemXaxis.Name = "toolStripMenuItemXaxis"
-        Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemXaxis.Text = "X-Axis"
         '
         'toolStripMenuItemYaxis
         '
         Me.toolStripMenuItemYaxis.Name = "toolStripMenuItemYaxis"
-        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemYaxis.Text = "Y-Axis"
         '
         'toolStripMenuItemThemes
         '
         Me.toolStripMenuItemThemes.Name = "toolStripMenuItemThemes"
-        Me.toolStripMenuItemThemes.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemThemes.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemThemes.Text = "Themes"
         '
         'toolStripMenuItemCoordinates
         '
         Me.toolStripMenuItemCoordinates.Name = "toolStripMenuItemCoordinates"
-        Me.toolStripMenuItemCoordinates.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemCoordinates.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemCoordinates.Text = "Coordinates"
         '
         'toolStripMenuItemColour
         '
         Me.toolStripMenuItemColour.Name = "toolStripMenuItemColour"
-        Me.toolStripMenuItemColour.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemColour.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemColour.Text = "Colour"
         '
         'toolStripMenuItemAnnotation
         '
         Me.toolStripMenuItemAnnotation.Name = "toolStripMenuItemAnnotation"
-        Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(140, 22)
         Me.toolStripMenuItemAnnotation.Text = "Annotation"
-        '
-        'toolStripMenuItemLayers
-        '
-        Me.toolStripMenuItemLayers.Name = "toolStripMenuItemLayers"
-        Me.toolStripMenuItemLayers.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemLayers.Text = "Layers"
         '
         'dlgGeneralForGraphics
         '
