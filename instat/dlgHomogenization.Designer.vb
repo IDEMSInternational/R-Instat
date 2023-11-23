@@ -52,8 +52,6 @@ Partial Class dlgHomogenization
         Me.ucrChkSummary = New instat.ucrCheck()
         Me.ttOptions = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
-        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
-        Me.rdoNeighbouring = New System.Windows.Forms.RadioButton()
         Me.lblNeighbouring = New System.Windows.Forms.Label()
         Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -63,9 +61,22 @@ Partial Class dlgHomogenization
         Me.ucrBase = New instat.ucrButtons()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.grpStationFile = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverStationFile = New instat.ucrReceiverMultiple()
+        Me.lblStationFile = New System.Windows.Forms.Label()
+        Me.grpDataFile = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverDataFiles = New instat.ucrReceiverMultiple()
+        Me.lblDataFiles = New System.Windows.Forms.Label()
+        Me.ucrSelectorDataFiles = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputClimateVariables = New instat.ucrInputTextBox()
+        Me.lblClimaticVariable = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
+        Me.grpStationFile.SuspendLayout()
+        Me.grpDataFile.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblElement
@@ -380,7 +391,7 @@ Partial Class dlgHomogenization
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(62, 27)
+        Me.rdoSingle.Location = New System.Drawing.Point(90, 9)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(101, 28)
         Me.rdoSingle.TabIndex = 1
@@ -389,44 +400,6 @@ Partial Class dlgHomogenization
         Me.rdoSingle.Text = "Single"
         Me.rdoSingle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSingle.UseVisualStyleBackColor = False
-        '
-        'rdoMultiple
-        '
-        Me.rdoMultiple.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatAppearance.BorderSize = 2
-        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(260, 27)
-        Me.rdoMultiple.Name = "rdoMultiple"
-        Me.rdoMultiple.Size = New System.Drawing.Size(101, 28)
-        Me.rdoMultiple.TabIndex = 3
-        Me.rdoMultiple.TabStop = True
-        Me.rdoMultiple.Tag = ""
-        Me.rdoMultiple.Text = "Multiple"
-        Me.rdoMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoMultiple.UseVisualStyleBackColor = False
-        '
-        'rdoNeighbouring
-        '
-        Me.rdoNeighbouring.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoNeighbouring.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoNeighbouring.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNeighbouring.FlatAppearance.BorderSize = 2
-        Me.rdoNeighbouring.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoNeighbouring.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoNeighbouring.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoNeighbouring.Location = New System.Drawing.Point(161, 27)
-        Me.rdoNeighbouring.Name = "rdoNeighbouring"
-        Me.rdoNeighbouring.Size = New System.Drawing.Size(101, 28)
-        Me.rdoNeighbouring.TabIndex = 2
-        Me.rdoNeighbouring.TabStop = True
-        Me.rdoNeighbouring.Tag = ""
-        Me.rdoNeighbouring.Text = "Neighbouring"
-        Me.rdoNeighbouring.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoNeighbouring.UseVisualStyleBackColor = False
         '
         'lblNeighbouring
         '
@@ -454,7 +427,7 @@ Partial Class dlgHomogenization
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(51, 25)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(51, 6)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(321, 30)
         Me.ucrPnlOptions.TabIndex = 0
@@ -463,7 +436,7 @@ Partial Class dlgHomogenization
         '
         Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrSaveResult.Enabled = False
-        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 413)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 493)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(320, 24)
@@ -498,9 +471,9 @@ Partial Class dlgHomogenization
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 440)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 522)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
         'lblStation
@@ -526,19 +499,155 @@ Partial Class dlgHomogenization
         Me.ucrReceiverStation.TabIndex = 6
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
+        'rdoMultiple
+        '
+        Me.rdoMultiple.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultiple.Location = New System.Drawing.Point(189, 9)
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.Size = New System.Drawing.Size(101, 28)
+        Me.rdoMultiple.TabIndex = 16
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Tag = ""
+        Me.rdoMultiple.Text = "Multiple"
+        Me.rdoMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoMultiple.UseVisualStyleBackColor = False
+        '
+        'ucrSelectorStationFile
+        '
+        Me.ucrSelectorStationFile.AutoSize = True
+        Me.ucrSelectorStationFile.bDropUnusedFilterLevels = False
+        Me.ucrSelectorStationFile.bShowHiddenColumns = False
+        Me.ucrSelectorStationFile.bUseCurrentFilter = True
+        Me.ucrSelectorStationFile.Location = New System.Drawing.Point(6, 16)
+        Me.ucrSelectorStationFile.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStationFile.Name = "ucrSelectorStationFile"
+        Me.ucrSelectorStationFile.Size = New System.Drawing.Size(213, 185)
+        Me.ucrSelectorStationFile.TabIndex = 0
+        '
+        'grpStationFile
+        '
+        Me.grpStationFile.Controls.Add(Me.ucrReceiverStationFile)
+        Me.grpStationFile.Controls.Add(Me.lblStationFile)
+        Me.grpStationFile.Controls.Add(Me.ucrSelectorStationFile)
+        Me.grpStationFile.Location = New System.Drawing.Point(11, 260)
+        Me.grpStationFile.Name = "grpStationFile"
+        Me.grpStationFile.Size = New System.Drawing.Size(397, 201)
+        Me.grpStationFile.TabIndex = 17
+        Me.grpStationFile.TabStop = False
+        Me.grpStationFile.Text = "StationFile"
+        '
+        'ucrReceiverStationFile
+        '
+        Me.ucrReceiverStationFile.AutoSize = True
+        Me.ucrReceiverStationFile.frmParent = Me
+        Me.ucrReceiverStationFile.Location = New System.Drawing.Point(265, 38)
+        Me.ucrReceiverStationFile.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationFile.Name = "ucrReceiverStationFile"
+        Me.ucrReceiverStationFile.Selector = Nothing
+        Me.ucrReceiverStationFile.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverStationFile.strNcFilePath = ""
+        Me.ucrReceiverStationFile.TabIndex = 6
+        Me.ucrReceiverStationFile.ucrSelector = Nothing
+        '
+        'lblStationFile
+        '
+        Me.lblStationFile.AutoSize = True
+        Me.lblStationFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStationFile.Location = New System.Drawing.Point(269, 19)
+        Me.lblStationFile.Name = "lblStationFile"
+        Me.lblStationFile.Size = New System.Drawing.Size(86, 13)
+        Me.lblStationFile.TabIndex = 5
+        Me.lblStationFile.Text = "Station Columns:"
+        '
+        'grpDataFile
+        '
+        Me.grpDataFile.Controls.Add(Me.ucrReceiverDataFiles)
+        Me.grpDataFile.Controls.Add(Me.lblDataFiles)
+        Me.grpDataFile.Controls.Add(Me.ucrSelectorDataFiles)
+        Me.grpDataFile.Location = New System.Drawing.Point(12, 59)
+        Me.grpDataFile.Name = "grpDataFile"
+        Me.grpDataFile.Size = New System.Drawing.Size(397, 201)
+        Me.grpDataFile.TabIndex = 18
+        Me.grpDataFile.TabStop = False
+        Me.grpDataFile.Text = "Data File"
+        '
+        'ucrReceiverDataFiles
+        '
+        Me.ucrReceiverDataFiles.AutoSize = True
+        Me.ucrReceiverDataFiles.frmParent = Me
+        Me.ucrReceiverDataFiles.Location = New System.Drawing.Point(265, 38)
+        Me.ucrReceiverDataFiles.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDataFiles.Name = "ucrReceiverDataFiles"
+        Me.ucrReceiverDataFiles.Selector = Nothing
+        Me.ucrReceiverDataFiles.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverDataFiles.strNcFilePath = ""
+        Me.ucrReceiverDataFiles.TabIndex = 6
+        Me.ucrReceiverDataFiles.ucrSelector = Nothing
+        '
+        'lblDataFiles
+        '
+        Me.lblDataFiles.AutoSize = True
+        Me.lblDataFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDataFiles.Location = New System.Drawing.Point(269, 19)
+        Me.lblDataFiles.Name = "lblDataFiles"
+        Me.lblDataFiles.Size = New System.Drawing.Size(57, 13)
+        Me.lblDataFiles.TabIndex = 5
+        Me.lblDataFiles.Text = "Data Files:"
+        '
+        'ucrSelectorDataFiles
+        '
+        Me.ucrSelectorDataFiles.AutoSize = True
+        Me.ucrSelectorDataFiles.bDropUnusedFilterLevels = False
+        Me.ucrSelectorDataFiles.bShowHiddenColumns = False
+        Me.ucrSelectorDataFiles.bUseCurrentFilter = True
+        Me.ucrSelectorDataFiles.Location = New System.Drawing.Point(6, 16)
+        Me.ucrSelectorDataFiles.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDataFiles.Name = "ucrSelectorDataFiles"
+        Me.ucrSelectorDataFiles.Size = New System.Drawing.Size(213, 185)
+        Me.ucrSelectorDataFiles.TabIndex = 0
+        '
+        'ucrInputClimateVariables
+        '
+        Me.ucrInputClimateVariables.AddQuotesIfUnrecognised = True
+        Me.ucrInputClimateVariables.AutoSize = True
+        Me.ucrInputClimateVariables.IsMultiline = False
+        Me.ucrInputClimateVariables.IsReadOnly = False
+        Me.ucrInputClimateVariables.Location = New System.Drawing.Point(272, 464)
+        Me.ucrInputClimateVariables.Name = "ucrInputClimateVariables"
+        Me.ucrInputClimateVariables.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputClimateVariables.TabIndex = 19
+        '
+        'lblClimaticVariable
+        '
+        Me.lblClimaticVariable.AutoSize = True
+        Me.lblClimaticVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblClimaticVariable.Location = New System.Drawing.Point(182, 468)
+        Me.lblClimaticVariable.Name = "lblClimaticVariable"
+        Me.lblClimaticVariable.Size = New System.Drawing.Size(87, 13)
+        Me.lblClimaticVariable.TabIndex = 20
+        Me.lblClimaticVariable.Text = "Climatic Variable:"
+        '
         'dlgHomogenization
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(422, 494)
-        Me.Controls.Add(Me.lblStation)
+        Me.ClientSize = New System.Drawing.Size(422, 579)
+        Me.Controls.Add(Me.grpDataFile)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.lblNeighbouring)
-        Me.Controls.Add(Me.ucrReceiverNeighbour)
-        Me.Controls.Add(Me.rdoNeighbouring)
-        Me.Controls.Add(Me.rdoSingle)
+        Me.Controls.Add(Me.ucrSelectorHomogenization)
+        Me.Controls.Add(Me.lblClimaticVariable)
+        Me.Controls.Add(Me.ucrInputClimateVariables)
         Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.lblNeighbouring)
+        Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.grpOutputOptions)
@@ -546,8 +655,9 @@ Partial Class dlgHomogenization
         Me.Controls.Add(Me.grpMethods)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverElement)
-        Me.Controls.Add(Me.ucrSelectorHomogenization)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpStationFile)
+        Me.Controls.Add(Me.ucrReceiverNeighbour)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -560,6 +670,10 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.PerformLayout()
         Me.grpOutputOptions.ResumeLayout(False)
         Me.grpOutputOptions.PerformLayout()
+        Me.grpStationFile.ResumeLayout(False)
+        Me.grpStationFile.PerformLayout()
+        Me.grpDataFile.ResumeLayout(False)
+        Me.grpDataFile.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -593,9 +707,7 @@ Partial Class dlgHomogenization
     Friend WithEvents lblPenaltyValue As Label
     Friend WithEvents ucrInputPenValue As ucrInputTextBox
     Friend WithEvents rdoSingle As RadioButton
-    Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
-    Friend WithEvents rdoNeighbouring As RadioButton
     Friend WithEvents lblNeighbouring As Label
     Friend WithEvents ucrReceiverNeighbour As ucrReceiverSingle
     Friend WithEvents ucrInputComboVarDistribution As ucrInputComboBox
@@ -605,4 +717,15 @@ Partial Class dlgHomogenization
     Friend WithEvents rdoBuishand As RadioButton
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents lblClimaticVariable As Label
+    Friend WithEvents ucrInputClimateVariables As ucrInputTextBox
+    Friend WithEvents grpDataFile As GroupBox
+    Friend WithEvents ucrReceiverDataFiles As ucrReceiverMultiple
+    Friend WithEvents lblDataFiles As Label
+    Friend WithEvents ucrSelectorDataFiles As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents grpStationFile As GroupBox
+    Friend WithEvents ucrReceiverStationFile As ucrReceiverMultiple
+    Friend WithEvents lblStationFile As Label
+    Friend WithEvents ucrSelectorStationFile As ucrSelectorByDataFrameAddRemove
 End Class

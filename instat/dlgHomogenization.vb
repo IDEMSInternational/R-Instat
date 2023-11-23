@@ -19,8 +19,10 @@ Imports instat.Translations
 Public Class dlgHomogenization
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction, clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsCompleteCasesFunction As New RFunction
-    Private clsBracketsOperator, clsLeftBracketOperator, clsRightBracketOperator As New ROperator
+    Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction,
+        clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsDummyFunction, clsCsv2climatolFunction,
+        clsGetColumnsFunction, clsCompleteCasesFunction, clsPmatchFunction, clsColumnsFunction As New RFunction
+    Private clsBracketsOperator, clsLeftBracketOperator, clsVars1ColumnsFunction, clsRightBracketOperator As New ROperator
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -45,6 +47,23 @@ Public Class dlgHomogenization
 
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrSelectorStationFile.SetParameter(New RParameter("stnfile", 1))
+        'ucrSelectorStationFile.SetParameterIsrfunction()
+
+        ucrSelectorDataFiles.SetParameter(New RParameter("csvfile", 0))
+        ucrSelectorDataFiles.SetParameterIsrfunction()
+
+        ucrReceiverStationFile.SetParameter(New RParameter("datacol", 2))
+        ucrReceiverStationFile.Selector = ucrSelectorStationFile
+
+        ucrReceiverDataFiles.SetParameter(New RParameter("stncol", 3))
+        ucrReceiverDataFiles.Selector = ucrSelectorDataFiles
+        ucrReceiverDataFiles.SetParameterIsString()
+
+
+        ucrInputClimateVariables.SetParameter(New RParameter("varcli", 4))
+        ucrInputClimateVariables.SetLinkedDisplayControl(lblClimaticVariable)
 
         ucrReceiverStation.SetParameter(New RParameter("station", 0))
         ucrReceiverStation.Selector = ucrSelectorHomogenization
@@ -75,11 +94,10 @@ Public Class dlgHomogenization
         ttOptions.SetToolTip(rdoBuishand, "Performes the Buishand range test for change-point detection of a normal variate.")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
-        ucrPnlOptions.AddRadioButton(rdoNeighbouring)
         ucrPnlOptions.AddRadioButton(rdoMultiple)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"})
-        ucrPnlOptions.AddFunctionNamesCondition(rdoNeighbouring, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"}, False)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoMultiple, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"}, False)
+        'ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"})
+        ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "single")
+        ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "checked", "multiple")
 
         ucrChkPlot.SetText("Plot")
         ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
@@ -154,10 +172,10 @@ Public Class dlgHomogenization
         'ucrSaveResult.SetIsComboBox()
         'ucrSaveResult.SetPrefix("Test")
         'ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
-
+        ucrPnlOptions.AddToLinkedControls({ucrSelectorHomogenization, ucrReceiverNeighbour, ucrReceiverStation, ucrReceiverElement}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputClimateVariables, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic", "CROPS"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"SegNeigh", "BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverNeighbour, {rdoNeighbouring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanDistribution, {rdoCptMean}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboVarDistribution, {rdoCptVariance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanVarDistribution, {rdoCptMeanVariance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -166,10 +184,9 @@ Public Class dlgHomogenization
         ucrReceiverNeighbour.SetLinkedDisplayControl(lblNeighbouring)
         ucrInputPenValue.SetLinkedDisplayControl(lblPenaltyValue)
         ucrInputQ.SetLinkedDisplayControl(lblQ)
+        ucrReceiverElement.SetLinkedDisplayControl(lblElement)
+        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
 
-        'Not yet working!
-        rdoMultiple.Enabled = False
-        rdoNeighbouring.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -183,16 +200,28 @@ Public Class dlgHomogenization
         clsPettittFunction = New RFunction
         clsBuishandFunction = New RFunction
         clsCompleteCasesFunction = New RFunction
+        clsCsv2climatolFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsGetColumnsFunction = New RFunction
+        clsPmatchFunction = New RFunction
+        clsColumnsFunction = New RFunction
 
         clsBracketsOperator = New ROperator
         clsLeftBracketOperator = New ROperator
         clsRightBracketOperator = New ROperator
+        clsVars1ColumnsFunction = New ROperator
+
 
         ucrSelectorHomogenization.Reset()
         ucrReceiverElement.SetMeAsReceiver()
+        ucrReceiverDataFiles.SetMeAsReceiver()
+        ucrReceiverStationFile.SetMeAsReceiver()
         'ucrSaveResult.Reset()
         'TODO: Set conditions properly!
         rdoSnht.Checked = True
+
+        clsDummyFunction.AddParameter("checked", "single", iPosition:=0)
+
 
         clsCptMeanFunction.SetPackageName("changepoint")
         clsCptMeanFunction.SetRCommand("cpt.mean")
@@ -248,6 +277,28 @@ Public Class dlgHomogenization
         clsRightBracketOperator.bSpaceAroundOperation = False
         clsRightBracketOperator.bBrackets = False
 
+        clsCsv2climatolFunction.SetPackageName("climatol")
+        clsCsv2climatolFunction.SetRCommand("csv2climatol")
+        clsCsv2climatolFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorDataFiles.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsCsv2climatolFunction.AddParameter("datacol", clsRFunctionParameter:=clsPmatchFunction, iPosition:=1)
+        clsCsv2climatolFunction.AddParameter("header", "TRUE", iPosition:=2)
+
+        clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFunction.SetAssignTo("col_data")
+
+        clsVars1ColumnsFunction.SetOperation("", bBracketsTemp:=False)
+        clsVars1ColumnsFunction.SetAssignTo("var_1")
+
+        clsColumnsFunction.SetRCommand("colnames")
+        clsColumnsFunction.AddParameter("data", ucrSelectorDataFiles.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsPmatchFunction.SetRCommand("pmatch")
+        clsPmatchFunction.AddParameter("paste", clsRFunctionParameter:=clsColumnsFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsPmatchFunction.AddParameter("duplicates.ok", "TRUE", iPosition:=1)
+        clsPmatchFunction.AddParameter("cols", clsROperatorParameter:=clsVars1ColumnsFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsPmatchFunction.SetAssignTo("data_file")
+
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
         AddPlotSummaryParameters()
@@ -284,7 +335,8 @@ Public Class dlgHomogenization
         ucrReceiverStation.SetRCode(clsLeftBracketOperator, bReset)
 
         'ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
 
         'ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
         'ucrSaveResult.AddAdditionalRCode(clsCptMeanVarianceFunction, iAdditionalPairNo:=2)
@@ -293,6 +345,8 @@ Public Class dlgHomogenization
         'ucrSaveResult.AddAdditionalRCode(clsBuishandFunction, iAdditionalPairNo:=5)
 
         'ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
+        ucrReceiverDataFiles.SetRCode(clsGetColumnsFunction, bReset)
+        'ucrSelectorDataFiles.SetRCode(clsGetColumnsFunction, bReset)
 
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
@@ -389,5 +443,40 @@ Public Class dlgHomogenization
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged, ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged, ucrInputComboMethod.ControlContentsChanged, ucrInputComboPenalty.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoSingle.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
+
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCsv2climatolFunction)
+
+        End If
+
+        HideShowControls()
+    End Sub
+    Private Sub HideShowControls()
+        If rdoMultiple.Checked Then
+            grpDataFile.Show()
+            grpStationFile.Show()
+            grpMethods.Hide()
+            grpCptOptions.Hide()
+            grpOutputOptions.Hide()
+        Else
+            grpStationFile.Hide()
+            grpDataFile.Hide()
+            grpMethods.Show()
+            grpCptOptions.Show()
+            grpOutputOptions.Show()
+        End If
+    End Sub
+
+    Private Sub ucrReceiverDataFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDataFiles.ControlValueChanged
+        If Not ucrReceiverDataFiles.IsEmpty Then
+            clsVars1ColumnsFunction.AddParameter("cols", ucrReceiverDataFiles.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsVars1ColumnsFunction.RemoveParameterByName("cols")
+        End If
     End Sub
 End Class
