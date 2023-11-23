@@ -837,7 +837,7 @@ Public Class sdgPlots
         strAes = If(bIsX, "x", "y")
 
         Dim bIsFactor As Boolean = False
-        If clsGlobalAesFunction.ContainsParameter(strAes) Then
+        If clsGlobalAesFunction IsNot Nothing AndAlso clsGlobalAesFunction.ContainsParameter(strAes) Then
 
             Dim strCurrDataType As String = ""
             Dim clsGetDataType As New RFunction
