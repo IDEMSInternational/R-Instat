@@ -825,7 +825,7 @@ Public Class sdgPlots
 
     Private Function GetAesParameterArgValue(strAes As String) As String
         Dim strVariable As String = ""
-        If clsGlobalAesFunction.ContainsParameter(strAes) Then
+        If clsGlobalAesFunction IsNot Nothing AndAlso clsGlobalAesFunction.ContainsParameter(strAes) Then
             strVariable = clsGlobalAesFunction.GetParameter(strAes).strArgumentValue
         End If
 
