@@ -771,7 +771,7 @@ Public Class ucrScript
         Dim lenEntered = currentPos - wordStartPos
         If lenEntered > 0 Then
             If Not clsScriptActive.AutoCActive Then
-                clsScriptActive.AutoCShow(lenEntered, "ggplot2")
+                clsScriptActive.AutoCShow(lenEntered, String.Join(" ", lstEnvNames))
             End If
         End If
     End Sub

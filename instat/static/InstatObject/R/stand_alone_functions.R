@@ -3007,6 +3007,7 @@ get_list_all_env_names <- function(){
   
   # Get the list of attached packages
   attached_packages <- search()
+  attached_packages <- c(attached_packages, "package:base")
   
   # Extract package names from the search path
   package_names <- sapply(strsplit(attached_packages, ":"), function(x) tail(x, 1))
