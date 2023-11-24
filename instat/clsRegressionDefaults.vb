@@ -67,6 +67,16 @@ Public Class clsRegressionDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsDefaultAovFunction As RFunction
+        Get
+
+            Dim clsDefaultAovFunc As New RFunction
+
+            clsDefaultAovFunc.SetRCommand("aov")
+            Return clsDefaultAovFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsDefaultRGraphicsOperator As ROperator
         Get
 

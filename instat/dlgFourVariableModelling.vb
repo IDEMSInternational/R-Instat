@@ -27,7 +27,7 @@ Public Class dlgFourVariableModelling
     Public clsRCIFunction, clsRConvert, clsFamilyFunction, clsVisReg As New RFunction
     Public clsRSingleModelFunction, clsThirdTransformFunction, clsLmer, clsGlmer, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
     Public clsFormulaOperator As New ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsGLM, clsAOV, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -120,6 +120,7 @@ Public Class dlgFourVariableModelling
         clsFamilyFunction = New RFunction
         clsAsNumeric = New RFunction
         clsLM = New RFunction
+        clsAOV = New RFunction
         clsGLM = New RFunction
         clsFirstTransformFunction = New RFunction
         clsSecondTransformFunction = New RFunction
@@ -212,6 +213,14 @@ Public Class dlgFourVariableModelling
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorFourVariableModelling.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
+        clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOV.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOV.bExcludeAssignedFunctionOutput = False
+        clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorFourVariableModelling.strCurrentDataFrame,
+                                           strObjectName:="last_model")
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
@@ -357,10 +366,12 @@ Public Class dlgFourVariableModelling
         ucrSaveModel.AddAdditionalRCode(clsGLM, 1)
         ucrSaveModel.AddAdditionalRCode(clsGlmer, 2)
         ucrSaveModel.AddAdditionalRCode(clsLmer, 3)
+        ucrSaveModel.AddAdditionalRCode(clsAOV, 4)
 
         ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorFourVariableModelling.GetParameter(), 1)
         ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGlmer, ucrSelectorFourVariableModelling.GetParameter(), 2)
         ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsLmer, ucrSelectorFourVariableModelling.GetParameter(), 3)
+        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsAOV, ucrSelectorFourVariableModelling.GetParameter(), 4)
 
         ucrInputModelOperators1.SetName(clsOverallExplanatoryOperator.strOperation)
         ucrInputModelOperators2.SetName(clsSecoandndThirdExplanatoryOpertor.strOperation)
@@ -471,6 +482,8 @@ Public Class dlgFourVariableModelling
                 clsLMOrGLM = clsLmer
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag <> "Normal" And ucrInputModelOperators2.GetText = "|") Then
                 clsLMOrGLM = clsGlmer
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal_aov") Then
+                clsLMOrGLM = clsAOV
             Else
                 clsLMOrGLM = clsGLM
             End If
