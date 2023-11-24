@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgTableOptions
 
-    Dim clsOperator As ROperator
+    Private clsOperator As ROperator
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -30,7 +30,7 @@ Public Class sdgTableOptions
     ''' </summary>
     ''' <param name="clsNewOperator"></param>
     Public Sub Setup(clsNewOperator As ROperator)
-        Me.clsOperator = clsNewOperator
+        clsOperator = clsNewOperator
 
         If Not clsNewOperator.ContainsParameter("gt") Then
             MsgBox("Developer Error: Parameter with 'gt' as name MUST be set up before using this subdialog")
@@ -114,8 +114,14 @@ Public Class sdgTableOptions
                         row.Cells(0).Value = GetStringValue(clsFootNoteRParam.strArgumentValue, False)
                     ElseIf clsFootNoteRParam.strArgumentName = "locations" Then
                         ' todo go through the location function
-                        Dim clsFooterLocationRFunction As RFunction = clsFootNoteFunctRParam.clsArgumentCodeStructure
-
+                        Dim clsFooterLocationNoteRFunction As RFunction = clsFootNoteRParam.clsArgumentCodeStructure
+                        For Each clsFootNoteLocationRParam As RParameter In clsFooterLocationNoteRFunction.clsParameters
+                            If clsFootNoteLocationRParam.strArgumentName = "columns" Then
+                                row.Cells(1).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
+                            ElseIf clsFootNoteLocationRParam.strArgumentName = "rows" Then
+                                row.Cells(2).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
+                            End If
+                        Next
 
                     End If
                 Next
@@ -160,6 +166,15 @@ Public Class sdgTableOptions
             clsFooterRFunction.SetPackageName("gt")
             clsFooterRFunction.SetRCommand("tab_footnote")
             clsFooterRFunction.AddParameter(New RParameter(strParameterName:="footnote", strParamValue:=GetStringValue(row.Cells(0).Value, True)))
+
+            If Not String.IsNullOrEmpty(row.Cells(1).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(2).Value) Then
+                Dim clsFooterLocationNoteRFunction As New RFunction
+                'clsFooterLocationNoteRFunction.SetPackageName("gt")
+                clsFooterLocationNoteRFunction.SetRCommand("cells_body")
+                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=GetStringValue(row.Cells(1).Value, True)))
+                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=GetStringValue(row.Cells(2).Value, True)))
+                clsFooterRFunction.AddParameter(New RParameter(strParameterName:="locations", clsFooterLocationNoteRFunction))
+            End If
 
             clsOperator.AddParameter("tab_footnote" & index, clsRFunctionParameter:=clsFooterRFunction, bIncludeArgumentName:=False)
 
