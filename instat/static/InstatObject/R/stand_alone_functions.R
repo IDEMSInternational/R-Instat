@@ -3019,10 +3019,10 @@ get_list_all_env_names <- function(){
       functions_list <- c(functions_list, ls(paste0("package:", package)))
     }
   }
-  
+  sd_alone_func <- ls()
   
   # Combine the lists
-  combined_list <- c(objects_list, package_names, functions_list)
+  combined_list <- c(objects_list, package_names, functions_list, sd_alone_func)
   return(combined_list)
 }
 
