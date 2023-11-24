@@ -48,6 +48,8 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
+        Me.ucrChkFacet = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'rdoVisDat
@@ -149,7 +151,7 @@ Partial Class dlgVisualizeData
         'lblSampling
         '
         Me.lblSampling.AutoSize = True
-        Me.lblSampling.Location = New System.Drawing.Point(191, 244)
+        Me.lblSampling.Location = New System.Drawing.Point(191, 275)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 9
@@ -174,7 +176,7 @@ Partial Class dlgVisualizeData
         'lblColour
         '
         Me.lblColour.AutoSize = True
-        Me.lblColour.Location = New System.Drawing.Point(250, 274)
+        Me.lblColour.Location = New System.Drawing.Point(10, 296)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(40, 13)
         Me.lblColour.TabIndex = 23
@@ -183,7 +185,7 @@ Partial Class dlgVisualizeData
         'lblpalettecolor
         '
         Me.lblpalettecolor.AutoSize = True
-        Me.lblpalettecolor.Location = New System.Drawing.Point(281, 309)
+        Me.lblpalettecolor.Location = New System.Drawing.Point(7, 269)
         Me.lblpalettecolor.Name = "lblpalettecolor"
         Me.lblpalettecolor.Size = New System.Drawing.Size(43, 13)
         Me.lblpalettecolor.TabIndex = 24
@@ -195,7 +197,7 @@ Partial Class dlgVisualizeData
         Me.ucrInputColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColourPalette.GetSetSelectedIndex = -1
         Me.ucrInputColourPalette.IsReadOnly = False
-        Me.ucrInputColourPalette.Location = New System.Drawing.Point(330, 307)
+        Me.ucrInputColourPalette.Location = New System.Drawing.Point(55, 266)
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         Me.ucrInputColourPalette.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputColourPalette.TabIndex = 25
@@ -206,7 +208,7 @@ Partial Class dlgVisualizeData
         Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColour.GetSetSelectedIndex = -1
         Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(299, 269)
+        Me.ucrInputColour.Location = New System.Drawing.Point(55, 293)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputColour.TabIndex = 22
@@ -238,7 +240,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudSamplingFunction.AutoSize = True
         Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(330, 242)
+        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(330, 273)
         Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSamplingFunction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSamplingFunction.Name = "ucrNudSamplingFunction"
@@ -338,12 +340,36 @@ Partial Class dlgVisualizeData
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 18
         '
+        'ucrByFactorsReceiver
+        '
+        Me.ucrByFactorsReceiver.AutoSize = True
+        Me.ucrByFactorsReceiver.frmParent = Me
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(262, 245)
+        Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
+        Me.ucrByFactorsReceiver.Selector = Nothing
+        Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrByFactorsReceiver.strNcFilePath = ""
+        Me.ucrByFactorsReceiver.TabIndex = 26
+        Me.ucrByFactorsReceiver.ucrSelector = Nothing
+        '
+        'ucrChkFacet
+        '
+        Me.ucrChkFacet.AutoSize = True
+        Me.ucrChkFacet.Checked = False
+        Me.ucrChkFacet.Location = New System.Drawing.Point(258, 222)
+        Me.ucrChkFacet.Name = "ucrChkFacet"
+        Me.ucrChkFacet.Size = New System.Drawing.Size(124, 23)
+        Me.ucrChkFacet.TabIndex = 27
+        '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(418, 441)
+        Me.Controls.Add(Me.ucrChkFacet)
+        Me.Controls.Add(Me.ucrByFactorsReceiver)
         Me.Controls.Add(Me.ucrInputColourPalette)
         Me.Controls.Add(Me.lblpalettecolor)
         Me.Controls.Add(Me.lblColour)
@@ -407,4 +433,6 @@ Partial Class dlgVisualizeData
     Friend WithEvents lblColour As Label
     Friend WithEvents ucrInputColourPalette As ucrInputComboBox
     Friend WithEvents lblpalettecolor As Label
+    Friend WithEvents ucrChkFacet As ucrCheck
+    Friend WithEvents ucrByFactorsReceiver As ucrReceiverSingle
 End Class

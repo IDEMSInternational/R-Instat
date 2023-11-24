@@ -64,13 +64,22 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoNumeric, "vis_value")
 
-        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
+        ucrByFactorsReceiver.SetParameter(New RParameter("facet", 3))
+        ucrByFactorsReceiver.Selector = ucrSelectorVisualizeData
+        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrByFactorsReceiver.strSelectorHeading = "Factors"
+        ucrByFactorsReceiver.SetParameterIsString()
+        'ucrByFactorsReceiver.bWithQuotes = False
+        ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrByFactorsReceiver.bAddParameterIfEmpty = True
+
+        ucrPnlVisualizeData.AddToLinkedControls({ucrChkSortVariables, ucrChkFacet}, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat, rdoVisGuess}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
-        'ucrPnlVisualizeData.AddToLinkedControls(ucrInputColourPalette, {rdoNumeric}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Viridis")
-        ucrPnlVisualizeData.AddToLinkedControls({ucrInputColour, ucrInputColourPalette}, {rdoNumeric}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Grey")
+        ucrPnlVisualizeData.AddToLinkedControls(ucrInputColourPalette, {rdoNumeric}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Viridis")
+        ucrPnlVisualizeData.AddToLinkedControls({ucrInputColour}, {rdoNumeric}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Grey")
 
         ucrInputColour.SetParameter(New RParameter("na_colour", 4))
         ucrInputColour.SetLinkedDisplayControl(lblColour)
@@ -125,6 +134,11 @@ Public Class dlgVisualizeData
         lstMaximumSizeControls.Add(lblMillionDataPoints)
         lstMaximumSizeControls.Add(lblMaximumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lstMaximumSizeControls)
+        ucrInputColourPalette.SetLinkedDisplayControl(lblpalettecolor)
+
+        ucrChkFacet.SetText("Facets")
+        ucrChkFacet.AddToLinkedControls(ucrByFactorsReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrNudSamplingFunction.SetLinkedDisplayControl(lblSampling)
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -172,7 +186,7 @@ Public Class dlgVisualizeData
         clsVisValueFunction.SetRCommand("vis_value")
         clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsVisValueFunction.AddParameter("viridis_option", Chr(34) & "A" & Chr(34), iPosition:=1)
-        clsVisValueFunction.AddParameter("na_color", Chr(34) & "grey" & Chr(34), iPosition:=2)
+        clsVisValueFunction.AddParameter("na_colour", Chr(34) & "grey" & Chr(34), iPosition:=2)
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsFilterFunction, iPosition:=1)
@@ -210,9 +224,10 @@ Public Class dlgVisualizeData
         ucrSaveGraph.AddAdditionalRCode(clsVisValueFunction, iAdditionalPairNo:=3)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
         ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), iAdditionalPairNo:=1)
-        'ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisValueFunction, New RParameter("viridis_option", 1), iAdditionalPairNo:=1)
+        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsVisMissFunction, ucrByFactorsReceiver.GetParameter(), iAdditionalPairNo:=1)
 
 
+        ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
@@ -342,5 +357,13 @@ Public Class dlgVisualizeData
 
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMaximumSize.ControlValueChanged, ucrNudSamplingFunction.ControlValueChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFacet.ControlValueChanged
+        If ucrChkFacet.Checked Then
+            ucrByFactorsReceiver.SetMeAsReceiver()
+        Else
+            ucrReceiverVisualizeData.SetMeAsReceiver()
+        End If
     End Sub
 End Class
