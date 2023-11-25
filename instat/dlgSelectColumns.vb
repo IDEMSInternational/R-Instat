@@ -221,7 +221,7 @@ Public Class dlgSelectColumns
                 ElseIf strValue = "NA columns" Then
                     clsParametersList.AddParameter("fn", "is.NAvariable", iPosition:=0)
                 ElseIf strValue = "Partially labelled" Then
-                    clsParametersList.AddParameter("fn", "~any(!is.na(.))", iPosition:=0)
+                    clsParametersList.AddParameter("fn", "is.containPartialValueLabel", iPosition:=0)
                 End If
             Case "Last column"
                 strValue = "Last column"
