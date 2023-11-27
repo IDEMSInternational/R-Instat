@@ -639,7 +639,6 @@ Partial Class dlgHomogenization
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 579)
-        Me.Controls.Add(Me.grpDataFile)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSelectorHomogenization)
         Me.Controls.Add(Me.lblClimaticVariable)
@@ -658,6 +657,7 @@ Partial Class dlgHomogenization
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpStationFile)
         Me.Controls.Add(Me.ucrReceiverNeighbour)
+        Me.Controls.Add(Me.grpDataFile)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
