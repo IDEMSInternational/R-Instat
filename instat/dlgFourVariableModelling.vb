@@ -164,7 +164,7 @@ Public Class dlgFourVariableModelling
 
         ucrBaseFourVariableModelling.clsRsyntax.ClearCodes()
 
-        clsSecoandndThirdExplanatoryOpertor.SetOperation("*")
+        clsSecoandndThirdExplanatoryOpertor.SetOperation("+")
         clsSecoandndThirdExplanatoryOpertor.bBrackets = False
 
         ucrDistributionChoice.SetDataType("numeric")
@@ -215,6 +215,7 @@ Public Class dlgFourVariableModelling
 
         clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
         clsAOV.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOV.AddParameter("na.action", "na.exclude", iPosition:=4)
         clsAOV.bExcludeAssignedFunctionOutput = False
         clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
@@ -460,7 +461,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub ThirdExplanatoryFunctionEnabled()
-        If Not ucrReceiverThirdExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverThirdExplanatory.strCurrDataType) Then
+        If Not ucrReceiverThirdExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor"}.Contains(ucrReceiverThirdExplanatory.strCurrDataType) Then
             cmdThirdExplanatoryFunction.Enabled = True
         Else
             cmdThirdExplanatoryFunction.Enabled = False
@@ -593,7 +594,7 @@ Public Class dlgFourVariableModelling
         End If
         SetBaseFunction()
         FirstExplanatoryFunctionEnabled()
-        '  UpdatePreview()
+        UpdatePreview()
     End Sub
 
 
@@ -624,7 +625,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub FirstExplanatoryFunctionEnabled()
-        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
+        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
             cmdFirstExplanatoryFunction.Enabled = True
         Else
             cmdFirstExplanatoryFunction.Enabled = False
@@ -632,7 +633,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub SecondExplanatoryFunctionEnabled()
-        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
+        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
             cmdSecondExplanatoryFunction.Enabled = True
         Else
             cmdSecondExplanatoryFunction.Enabled = False
