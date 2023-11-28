@@ -296,9 +296,7 @@ Public Class dlgHistogram
 
     Private Sub UpdateParameter()
         Dim strChangedTextFreq As String = ucrInputAddReorder.GetText()
-        clsRaesFunction.RemoveParameterByName("colour")
         clsRaesFunction.RemoveParameterByName("y")
-        clsRaesFunction.RemoveParameterByName("fill")
 
         clsForecatsInfreqValue.AddParameter("f", "as.factor(" & ucrFactorReceiver.GetVariableNames(False) & ")", iPosition:=0)
 
