@@ -2612,4 +2612,7 @@ Public Class frmMain
         CheckForUpdates()
     End Sub
 
+    Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyDataKey.Click
+        dlgAddKey.ShowDialog()
+    End Sub
 End Class
