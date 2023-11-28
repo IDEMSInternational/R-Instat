@@ -52,10 +52,11 @@ Public Class dlgUseModel
         ucrReceiverForTestColumn.Selector = ucrSelectorUseModel
         ucrReceiverForTestColumn.SetMeAsReceiver()
 
-        ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes", "segmented"})
+        ucrInputComboRPackage.SetItems({"General", "Prediction", "extRemes", "segmented", "emmeans"})
         ucrInputComboRPackage.SetDropDownStyleAsNonEditable()
 
         ucrTryModelling.SetReceiver(ucrReceiverForTestColumn)
+        ucrTryModelling.SetIsModel()
 
         ucrChkIncludeArguments.SetText("Show Arguments")
 
@@ -198,6 +199,7 @@ Public Class dlgUseModel
         grpPrediction.Visible = False
         grpExtrRemes.Visible = False
         grpSegmented.Visible = False
+        grpEmmeans.Visible = False
         Select Case ucrInputComboRPackage.GetText
             Case "General"
                 grpGeneral.Visible = True
@@ -205,24 +207,35 @@ Public Class dlgUseModel
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
+                cmdRHelpEmmeans.Visible = False
             Case "Prediction"
                 grpPrediction.Visible = True
                 cmdRHelpGeneral.Visible = False
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = True
                 cmdRHelpSegmented.Visible = False
+                cmdRHelpEmmeans.Visible = False
             Case "extRemes"
                 grpExtrRemes.Visible = True
                 cmdRHelpGeneral.Visible = False
                 cmdRHelpExtRemes.Visible = True
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = False
+                cmdRHelpEmmeans.Visible = False
             Case "segmented"
                 grpSegmented.Visible = True
                 cmdRHelpGeneral.Visible = False
                 cmdRHelpExtRemes.Visible = False
                 cmdRHelpPrediction.Visible = False
                 cmdRHelpSegmented.Visible = True
+                cmdRHelpEmmeans.Visible = False
+            Case "emmeans"
+                grpEmmeans.Visible = True
+                cmdRHelpEmmeans.Visible = True
+                cmdRHelpGeneral.Visible = False
+                cmdRHelpExtRemes.Visible = False
+                cmdRHelpPrediction.Visible = False
+                cmdRHelpSegmented.Visible = False
         End Select
     End Sub
 
@@ -398,7 +411,7 @@ Public Class dlgUseModel
         End If
     End Sub
 
-        Private Sub OpenHelpPage()
+    Private Sub OpenHelpPage()
         If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
@@ -512,4 +525,150 @@ Public Class dlgUseModel
         End If
         OpenHelpPage()
     End Sub
+
+    Private Sub cmdRHelpEmmeans_Click(sender As Object, e As EventArgs) Handles cmdRHelpEmmeans.Click, ToolStripMenuEmmeans.Click
+        If ucrInputComboRPackage.GetText = "emmeans" Then
+            strPackageName = "emmeans"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub cmdEmmeans_Click(sender As Object, e As EventArgs) Handles cmdEmmeans.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans(obj= , specs =~ , by = NULL )", 24)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans( , specs =~ )", 12)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdTrends_Click(sender As Object, e As EventArgs) Handles cmdTrends.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmeans(obj= , var = )", 9)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emtrends( , var = )", 9)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdJoint_Click(sender As Object, e As EventArgs) Handles cmdJoint.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::joint_tests(obj= , by = NULL, show0df = FALSE, showconf=TRUE, cov.reduce=make.meanint(1))", 72)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::joint_tests( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdRefgrid_Click(sender As Object, e As EventArgs) Handles cmdRefgrid.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::ref_grid(obj= , cov.reduce = mean)", 20)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::ref_grid( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdEmmeanConfint_Click(sender As Object, e As EventArgs) Handles cmdEmmeanConfint.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("confint(obj= , level = 0.95)", 15)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("confint( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdContrast_Click(sender As Object, e As EventArgs) Handles cmdContrast.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::contrast(obj= )", 1)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::contrast( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdPairs_Click(sender As Object, e As EventArgs) Handles cmdPairs.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("pairs(obj= )", 1)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("pairs( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdEmmeansSummary_Click(sender As Object, e As EventArgs) Handles cmdEmmeansSummary.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary(obj= , infer = c(TRUE, TRUE ), adjust = ""scheffe"")", 45)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("summary( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdTest_Click(sender As Object, e As EventArgs) Handles cmdTest.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::test(obj= , joint = TRUE, verbose = TRUE)", 32)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::test( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdXtable_Click(sender As Object, e As EventArgs) Handles cmdXtable.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("xtable::xtable(obj = , caption = NULL, label = NULL, align = NULL,digits = 4, display = NULL, auto = FALSE)", 85)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("xtable::xtable( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+
+    Private Sub cmdIntplot_Click(sender As Object, e As EventArgs) Handles cmdIntplot.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmip(obj= , formula = ~ , CIs = FALSE, PIs = TRUE, plotit = TRUE)", 55)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::emmip( , formula = ~ )", 15)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+    End Sub
+
+    Private Sub cmdEmmeansPlot_Click(sender As Object, e As EventArgs) Handles cmdEmmeansPlot.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot(obj= , by=NULL, comparisons = TRUE, horizontal = FALSE, colors = ""darkgreen"")", 73)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("plot( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+    End Sub
+
+    Private Sub cmdpwpp_Click(sender As Object, e As EventArgs) Handles cmdpwpp.Click
+        Clear()
+        If ucrChkIncludeArguments.Checked Then
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::plot(obj= , method = ""trt.vs.ctrll"", type = ""response"", method = "">"")", 60)
+        Else
+            ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("emmeans::pwpp( )", 1)
+        End If
+        ucrSaveResult.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
+    End Sub
+
+    Private Sub cmdQuotes_Click(sender As Object, e As EventArgs) Handles cmdQuotes.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" "" """)
+    End Sub
+
+    Private Sub cmdcurlySign_Click(sender As Object, e As EventArgs) Handles cmdcurlySign.Click
+        ucrReceiverForTestColumn.AddToReceiverAtCursorPosition(" ~ ")
+    End Sub
+
 End Class
