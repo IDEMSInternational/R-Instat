@@ -2556,7 +2556,7 @@ is.containValueLabel <- function(x){
 
 is.containPartialValueLabel <- function(x) {
   if(is.containValueLabel(x)) {
-    return(all((na.omit(x) %in% attr(x, "labels"))))
+    return(all(x[!is.na(x)] %in% attr(x, labels_label)))
   }
   else{return(FALSE)}
 }
