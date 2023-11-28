@@ -29,7 +29,7 @@ Public Class dlgOptionsByContextFitModel
 
     Public clsFamilyFunction, clsVisReg As New RFunction
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsAOV, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -150,6 +150,7 @@ Public Class dlgOptionsByContextFitModel
         clsSummaryFunction = New RFunction
         clsConfint = New RFunction
         clsVisReg = New RFunction
+        clsAOV = New RFunction
 
         clsModelFormula = New ROperator
         clsOverallInteractions = New ROperator
@@ -203,6 +204,16 @@ Public Class dlgOptionsByContextFitModel
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+
+        clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOV.AddParameter("formula", clsROperatorParameter:=clsModelFormula, iPosition:=0)
+        clsAOV.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsAOV.bExcludeAssignedFunctionOutput = False
+        clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorFitModel.strCurrentDataFrame,
+                                           strObjectName:="last_model")
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -259,7 +270,8 @@ Public Class dlgOptionsByContextFitModel
 
         ucrSaveModel.AddAdditionalRCode(clsGLM, 1)
         ucrSelectorFitModel.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorFitModel.GetParameter(), 1)
-
+        ucrSelectorFitModel.AddAdditionalCodeParameterPair(clsAOV, ucrSelectorFitModel.GetParameter(), 1)
+        ucrSaveModel.AddAdditionalRCode(clsAOV, bReset)
         ucrReceiverContext1.SetRCode(clsContextsInteractions, bResetControls)
         ucrReceiverContext2.SetRCode(clsContextsInteractions, bResetControls)
         ucrReceiverContext3.SetRCode(clsContextsInteractions, bResetControls)
@@ -359,6 +371,8 @@ Public Class dlgOptionsByContextFitModel
         If Not ucrReceiverResponse.IsEmpty Then
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsLM
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal_aov") Then
+                clsLMOrGLM = clsAOV
             Else
                 clsLMOrGLM = clsGLM
             End If

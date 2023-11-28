@@ -28,7 +28,7 @@ Public Class dlgFitModel
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsAnovaIIFunction, clsSummaryFunction, clsConfint As New RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsGLMPolr, clsGLMMultinom, clsAsNumeric As New RFunction
+    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsAOV, clsGLMPolr, clsGLMMultinom, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -108,6 +108,7 @@ Public Class dlgFitModel
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
+        clsAOV = New RFunction
 
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrModelName.Reset()
@@ -130,6 +131,16 @@ Public Class dlgFitModel
         clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
         clsLM.bExcludeAssignedFunctionOutput = False
         clsLM.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
+                                           strObjectName:="last_model")
+
+        clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOV.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOV.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsAOV.bExcludeAssignedFunctionOutput = False
+        clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
@@ -327,12 +338,16 @@ Public Class dlgFitModel
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMPolr, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 3)
         ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMMultinom, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 4)
 
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsAOV, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
+        ucrModelName.AddAdditionalRCode(clsAOV, bReset)
+
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator, bReset)
         ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
         ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
         ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
         ucrModelName.SetRCode(clsLM, bReset)
         ucrFamily.SetRCode(clsFamilyFunction, bReset)
+
         bRCodeSet = True
         ResponseConvert()
     End Sub
@@ -503,6 +518,8 @@ Public Class dlgFitModel
                 clsLMOrGLM = clsGLMPolr
             ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Multinomial") Then
                 clsLMOrGLM = clsGLMMultinom
+            ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Normal_aov") Then
+                clsLMOrGLM = clsAOV
             Else
                 clsLMOrGLM = clsGLM
             End If
