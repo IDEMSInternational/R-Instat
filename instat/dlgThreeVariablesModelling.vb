@@ -27,7 +27,7 @@ Public Class dlgThreeVariableModelling
     Public clsFamilyFunction, clsVisReg As New RFunction
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
     Public clsFormulaOperator As New ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsGLM, clsLM, clsAOV, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -112,6 +112,7 @@ Public Class dlgThreeVariableModelling
         clsSummaryFunction = New RFunction
         clsConfint = New RFunction
         clsVisReg = New RFunction
+        clsAOV = New RFunction
 
 
         clsFirstTransformFunction = New RFunction
@@ -155,6 +156,15 @@ Public Class dlgThreeVariableModelling
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableModelling.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
+        clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOV.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOV.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsAOV.bExcludeAssignedFunctionOutput = False
+        clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorThreeVariableModelling.strCurrentDataFrame,
+                                           strObjectName:="last_model")
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
@@ -295,10 +305,12 @@ Public Class dlgThreeVariableModelling
     Private Sub SetRCodeForControls(bReset As Object)
         bRCodeSet = False
 
+        ucrSaveModel.AddAdditionalRCode(clsAOV, 1)
         ucrSaveModel.AddAdditionalRCode(clsGLM, 1)
         ucrSelectorThreeVariableModelling.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorThreeVariableModelling.GetParameter(), 1)
         ucrReceiverFirstExplanatory.AddAdditionalCodeParameterPair(clsFirstPowerOperator, New RParameter("x", 0), 1)
         ucrReceiverSecondExplanatory.AddAdditionalCodeParameterPair(clsSecondPowerOperator, New RParameter("x", 0), 1)
+        ucrSelectorThreeVariableModelling.AddAdditionalCodeParameterPair(clsAOV, ucrSelectorThreeVariableModelling.GetParameter(), 1)
 
         ucrInputModelOperator.SetName(clsExplanatoryOperator.strOperation)
         ucrChkConvertToNumeric.SetRCode(clsFormulaOperator, bReset)
@@ -396,6 +408,8 @@ Public Class dlgThreeVariableModelling
 
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsLM
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal_aov") Then
+                clsLMOrGLM = clsAOV
             Else
                 clsLMOrGLM = clsGLM
             End If
@@ -474,7 +488,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub FirstExplanatoryFunctionEnabled()
-        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
+        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor", "logical"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
             cmdFirstExplanatoryFunction.Enabled = True
         Else
             cmdFirstExplanatoryFunction.Enabled = False
@@ -482,7 +496,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub SecondExplanatoryFunctionEnabled()
-        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
+        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor", "logical"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
             cmdSecondExplanatoryFunction.Enabled = True
         Else
             cmdSecondExplanatoryFunction.Enabled = False

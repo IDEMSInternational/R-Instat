@@ -461,7 +461,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub ThirdExplanatoryFunctionEnabled()
-        If Not ucrReceiverThirdExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor"}.Contains(ucrReceiverThirdExplanatory.strCurrDataType) Then
+        If Not ucrReceiverThirdExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor", "logical"}.Contains(ucrReceiverThirdExplanatory.strCurrDataType) Then
             cmdThirdExplanatoryFunction.Enabled = True
         Else
             cmdThirdExplanatoryFunction.Enabled = False
@@ -625,7 +625,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub FirstExplanatoryFunctionEnabled()
-        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
+        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor", "logical"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
             cmdFirstExplanatoryFunction.Enabled = True
         Else
             cmdFirstExplanatoryFunction.Enabled = False
@@ -633,7 +633,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub SecondExplanatoryFunctionEnabled()
-        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
+        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer", "factor", "logical"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
             cmdSecondExplanatoryFunction.Enabled = True
         Else
             cmdSecondExplanatoryFunction.Enabled = False

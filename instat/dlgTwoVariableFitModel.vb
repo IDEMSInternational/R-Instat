@@ -25,7 +25,7 @@ Public Class dlgTwoVariableFitModel
     Private clsVisReg, clsFamilyFunction As New RFunction
     Private clsTransformFunction As New RFunction
     Private clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
-    Private clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
+    Private clsBrokenStickSecondOperFunction, clsAOV, clsBrokenStickIFunc As New RFunction
     Private clsSplineFunc As New RFunction
 
     'Tests
@@ -225,6 +225,7 @@ Public Class dlgTwoVariableFitModel
         clsWilcoxTestOperator = New ROperator
         clsVarTestOperator = New ROperator
         clsPropTestOperator = New ROperator
+        clsAOV = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -240,6 +241,16 @@ Public Class dlgTwoVariableFitModel
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
         clsLM.AddParameter("na.action", "na.exclude", iPosition:=4)
         clsLM.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorSimpleReg.strCurrentDataFrame,
+                                           strObjectName:="last_model")
+
+        clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOV.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOV.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsAOV.bExcludeAssignedFunctionOutput = False
+        clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorSimpleReg.strCurrentDataFrame,
@@ -567,6 +578,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsBarletteTestFunction, iAdditionalPairNo:=22)
         ucrSaveModels.AddAdditionalRCode(clsFlignerTestFunction, iAdditionalPairNo:=23)
 
+
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsNumericAnsariTestFuntion, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=3)
@@ -583,6 +595,8 @@ Public Class dlgTwoVariableFitModel
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("mu", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrInputNullHypothesis.SetRCode(clsTtestFunction, bReset)
         'General case controls 
+        ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsAOV, ucrSelectorSimpleReg.GetParameter(), 1)
+        ucrSaveModels.AddAdditionalRCode(clsAOV, 1)
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
         ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
@@ -591,6 +605,7 @@ Public Class dlgTwoVariableFitModel
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator)
         ucrSaveModels.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
+
         bRCodeSet = True
     End Sub
 
@@ -646,12 +661,15 @@ Public Class dlgTwoVariableFitModel
         If rdoGeneralCase.Checked Then
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
                 clsLMOrGLM = clsLM
+            ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal_aov") Then
+                clsLMOrGLM = clsAOV
             Else
                 clsLMOrGLM = clsGLM
             End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
+
         ElseIf rdoTest.Checked Then
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAnovaFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
