@@ -409,7 +409,6 @@ Public Class dlgHomogenization
         Else
             ucrBase.OKEnabled((Not ucrReceiverStationFile.IsEmpty AndAlso Not ucrReceiverDataFiles.IsEmpty) AndAlso (Not ucrInputClimateVariables.IsEmpty AndAlso Not ucrInputInitialYear.IsEmpty AndAlso Not ucrInputFinalYear.IsEmpty))
         End If
-
     End Sub
 
     Private Sub ucrPnlMethods_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethods.ControlValueChanged
