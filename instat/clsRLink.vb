@@ -1395,7 +1395,7 @@ Public Class RLink
             Select Case strType
                 Case "column"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
-                    clsGetItems.AddParameter("use_current_column_selection", strValue)
+                    clsGetItems.AddParameter("use_current_column_selection", If(bUseColumnSelection, "TRUE", "FALSE"))
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
