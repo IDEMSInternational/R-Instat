@@ -161,7 +161,7 @@ Public Class clsColumnMetaData
         clsGetVariablesMetadata.SetRCommand(_RLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
         clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
-        clsGetVariablesMetadata.AddParameter("use_column_selection", strValue)
+        clsGetVariablesMetadata.AddParameter("use_column_selection", If(UseColumnSelectionInMetaData, "TRUE", "FALSE"))
         expTemp = _RLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsDataFrame
