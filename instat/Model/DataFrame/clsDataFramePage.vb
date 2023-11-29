@@ -209,11 +209,10 @@ Public Class clsDataFramePage
         Dim clsGetDataFrameRFunction As New RFunction
         Dim expTemp As SymbolicExpression
         _hasChanged = True
-        'TODO. why not apply or not the column selection at the R level.
-        Dim strValue = If(UseColumnSelectionInDataView, "TRUE", "FALSE")
         clsGetDataFrameRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetDataFrameRFunction.AddParameter("convert_to_character", "TRUE")
         clsGetDataFrameRFunction.AddParameter("use_current_filter", "TRUE")
+        'TODO. why not apply or not the column selection at the R level.
         clsGetDataFrameRFunction.AddParameter("use_column_selection", If(UseColumnSelectionInDataView, "TRUE", "FALSE"))
         clsGetDataFrameRFunction.AddParameter("max_cols", iColumnIncrements)
         clsGetDataFrameRFunction.AddParameter("max_rows", intRowIncrements)

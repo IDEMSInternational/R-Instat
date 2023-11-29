@@ -155,12 +155,11 @@ Public Class clsColumnMetaData
     Private Function GetColsMetadataFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
         Dim expTemp As SymbolicExpression
-        'TODO. why not apply or not the column selection at the R level.
-        Dim strValue = If(UseColumnSelectionInMetaData, "TRUE", "FALSE")
         _hasChanged = True
         clsGetVariablesMetadata.SetRCommand(_RLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadata.AddParameter("convert_to_character", "TRUE")
         clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        'TODO. why not apply or not the column selection at the R level.
         clsGetVariablesMetadata.AddParameter("use_column_selection", If(UseColumnSelectionInMetaData, "TRUE", "FALSE"))
         expTemp = _RLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then

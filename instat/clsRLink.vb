@@ -1388,13 +1388,12 @@ Public Class RLink
         Dim strTemp As String
         Dim lviTemp As ListViewItem
         Dim strTopItemText As String = ""
-        'TODO. why not apply or not the column selection at the R level.
-        Dim strValue = If(bUseColumnSelection, "TRUE", "FALSE")
 
         If bInstatObjectExists Then
             Select Case strType
                 Case "column"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
+                    'TODO. why not apply or not the column selection at the R level.
                     clsGetItems.AddParameter("use_current_column_selection", If(bUseColumnSelection, "TRUE", "FALSE"))
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
