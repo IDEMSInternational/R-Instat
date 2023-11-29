@@ -31,47 +31,51 @@ Partial Class dlgHomogenization
         Me.rdoBuishand = New System.Windows.Forms.RadioButton()
         Me.rdoPettitt = New System.Windows.Forms.RadioButton()
         Me.rdoSnht = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpCptOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
-        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
         Me.lblPenaltyValue = New System.Windows.Forms.Label()
-        Me.ucrInputPenValue = New instat.ucrInputTextBox()
         Me.lblMinSegLen = New System.Windows.Forms.Label()
         Me.lblQ = New System.Windows.Forms.Label()
         Me.lblPenalty = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblDistribution = New System.Windows.Forms.Label()
+        Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
+        Me.ttOptions = New System.Windows.Forms.ToolTip(Me.components)
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.lblNeighbouring = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.grpStationFile = New System.Windows.Forms.GroupBox()
+        Me.lblStationFile = New System.Windows.Forms.Label()
+        Me.grpDataFile = New System.Windows.Forms.GroupBox()
+        Me.lblDataFiles = New System.Windows.Forms.Label()
+        Me.lblClimaticVariable = New System.Windows.Forms.Label()
+        Me.lblFinalYear = New System.Windows.Forms.Label()
+        Me.lblInitialYear = New System.Windows.Forms.Label()
+        Me.ucrInputFinalYear = New instat.ucrInputTextBox()
+        Me.ucrInputInitialYear = New instat.ucrInputTextBox()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputClimateVariables = New instat.ucrInputTextBox()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrChkPlot = New instat.ucrCheck()
+        Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputPenValue = New instat.ucrInputTextBox()
         Me.ucrNudMinSegLen = New instat.ucrNud()
         Me.ucrInputQ = New instat.ucrInputTextBox()
         Me.ucrInputComboMeanDistribution = New instat.ucrInputComboBox()
         Me.ucrInputComboMethod = New instat.ucrInputComboBox()
         Me.ucrInputComboPenalty = New instat.ucrInputComboBox()
-        Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkPlot = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
-        Me.ttOptions = New System.Windows.Forms.ToolTip(Me.components)
-        Me.rdoSingle = New System.Windows.Forms.RadioButton()
-        Me.lblNeighbouring = New System.Windows.Forms.Label()
-        Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrSelectorHomogenization = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
-        Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpStationFile = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverStationFile = New instat.ucrReceiverMultiple()
-        Me.lblStationFile = New System.Windows.Forms.Label()
-        Me.grpDataFile = New System.Windows.Forms.GroupBox()
+        Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
         Me.ucrReceiverDataFiles = New instat.ucrReceiverMultiple()
-        Me.lblDataFiles = New System.Windows.Forms.Label()
         Me.ucrSelectorDataFiles = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputClimateVariables = New instat.ucrInputTextBox()
-        Me.lblClimaticVariable = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -171,14 +175,6 @@ Partial Class dlgHomogenization
         Me.rdoSnht.Text = "SNHT"
         Me.rdoSnht.UseVisualStyleBackColor = True
         '
-        'ucrPnlMethods
-        '
-        Me.ucrPnlMethods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMethods.Location = New System.Drawing.Point(6, 17)
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        Me.ucrPnlMethods.Size = New System.Drawing.Size(197, 68)
-        Me.ucrPnlMethods.TabIndex = 0
-        '
         'grpCptOptions
         '
         Me.grpCptOptions.Controls.Add(Me.ucrInputComboMeanVarDistribution)
@@ -202,28 +198,6 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.TabStop = False
         Me.grpCptOptions.Text = "Change Point Options"
         '
-        'ucrInputComboMeanVarDistribution
-        '
-        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMeanVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboMeanVarDistribution.GetSetSelectedIndex = -1
-        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
-        Me.ucrInputComboMeanVarDistribution.Location = New System.Drawing.Point(68, 67)
-        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
-        Me.ucrInputComboMeanVarDistribution.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboMeanVarDistribution.TabIndex = 14
-        '
-        'ucrInputComboVarDistribution
-        '
-        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboVarDistribution.GetSetSelectedIndex = -1
-        Me.ucrInputComboVarDistribution.IsReadOnly = False
-        Me.ucrInputComboVarDistribution.Location = New System.Drawing.Point(68, 67)
-        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
-        Me.ucrInputComboVarDistribution.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboVarDistribution.TabIndex = 15
-        '
         'lblPenaltyValue
         '
         Me.lblPenaltyValue.AutoSize = True
@@ -233,17 +207,6 @@ Partial Class dlgHomogenization
         Me.lblPenaltyValue.Size = New System.Drawing.Size(59, 13)
         Me.lblPenaltyValue.TabIndex = 12
         Me.lblPenaltyValue.Text = "Pen.Value:"
-        '
-        'ucrInputPenValue
-        '
-        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputPenValue.AutoSize = True
-        Me.ucrInputPenValue.IsMultiline = False
-        Me.ucrInputPenValue.IsReadOnly = False
-        Me.ucrInputPenValue.Location = New System.Drawing.Point(68, 138)
-        Me.ucrInputPenValue.Name = "ucrInputPenValue"
-        Me.ucrInputPenValue.Size = New System.Drawing.Size(55, 21)
-        Me.ucrInputPenValue.TabIndex = 11
         '
         'lblMinSegLen
         '
@@ -294,6 +257,277 @@ Partial Class dlgHomogenization
         Me.lblDistribution.Size = New System.Drawing.Size(62, 13)
         Me.lblDistribution.TabIndex = 6
         Me.lblDistribution.Text = "Distribution:"
+        '
+        'grpOutputOptions
+        '
+        Me.grpOutputOptions.Controls.Add(Me.ucrChkPlot)
+        Me.grpOutputOptions.Controls.Add(Me.ucrChkSummary)
+        Me.grpOutputOptions.Enabled = False
+        Me.grpOutputOptions.Location = New System.Drawing.Point(12, 353)
+        Me.grpOutputOptions.Name = "grpOutputOptions"
+        Me.grpOutputOptions.Size = New System.Drawing.Size(209, 42)
+        Me.grpOutputOptions.TabIndex = 13
+        Me.grpOutputOptions.TabStop = False
+        Me.grpOutputOptions.Text = "Output Options"
+        '
+        'rdoSingle
+        '
+        Me.rdoSingle.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoSingle.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.FlatAppearance.BorderSize = 2
+        Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSingle.Location = New System.Drawing.Point(90, 9)
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.Size = New System.Drawing.Size(101, 28)
+        Me.rdoSingle.TabIndex = 1
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.Tag = ""
+        Me.rdoSingle.Text = "Single"
+        Me.rdoSingle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoSingle.UseVisualStyleBackColor = False
+        '
+        'lblNeighbouring
+        '
+        Me.lblNeighbouring.AutoSize = True
+        Me.lblNeighbouring.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNeighbouring.Location = New System.Drawing.Point(264, 190)
+        Me.lblNeighbouring.Name = "lblNeighbouring"
+        Me.lblNeighbouring.Size = New System.Drawing.Size(59, 13)
+        Me.lblNeighbouring.TabIndex = 9
+        Me.lblNeighbouring.Text = "Neighbour:"
+        '
+        'lblStation
+        '
+        Me.lblStation.AutoSize = True
+        Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStation.Location = New System.Drawing.Point(264, 80)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.TabIndex = 5
+        Me.lblStation.Text = "Station:"
+        '
+        'rdoMultiple
+        '
+        Me.rdoMultiple.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultiple.Location = New System.Drawing.Point(189, 9)
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.Size = New System.Drawing.Size(101, 28)
+        Me.rdoMultiple.TabIndex = 16
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Tag = ""
+        Me.rdoMultiple.Text = "Multiple"
+        Me.rdoMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoMultiple.UseVisualStyleBackColor = False
+        '
+        'grpStationFile
+        '
+        Me.grpStationFile.Controls.Add(Me.ucrReceiverStationFile)
+        Me.grpStationFile.Controls.Add(Me.lblStationFile)
+        Me.grpStationFile.Controls.Add(Me.ucrSelectorStationFile)
+        Me.grpStationFile.Location = New System.Drawing.Point(11, 260)
+        Me.grpStationFile.Name = "grpStationFile"
+        Me.grpStationFile.Size = New System.Drawing.Size(397, 201)
+        Me.grpStationFile.TabIndex = 17
+        Me.grpStationFile.TabStop = False
+        Me.grpStationFile.Text = "StationFile"
+        '
+        'lblStationFile
+        '
+        Me.lblStationFile.AutoSize = True
+        Me.lblStationFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblStationFile.Location = New System.Drawing.Point(269, 19)
+        Me.lblStationFile.Name = "lblStationFile"
+        Me.lblStationFile.Size = New System.Drawing.Size(86, 13)
+        Me.lblStationFile.TabIndex = 5
+        Me.lblStationFile.Text = "Station Columns:"
+        '
+        'grpDataFile
+        '
+        Me.grpDataFile.Controls.Add(Me.ucrReceiverDataFiles)
+        Me.grpDataFile.Controls.Add(Me.lblDataFiles)
+        Me.grpDataFile.Controls.Add(Me.ucrSelectorDataFiles)
+        Me.grpDataFile.Location = New System.Drawing.Point(12, 59)
+        Me.grpDataFile.Name = "grpDataFile"
+        Me.grpDataFile.Size = New System.Drawing.Size(397, 201)
+        Me.grpDataFile.TabIndex = 18
+        Me.grpDataFile.TabStop = False
+        Me.grpDataFile.Text = "Data File"
+        '
+        'lblDataFiles
+        '
+        Me.lblDataFiles.AutoSize = True
+        Me.lblDataFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDataFiles.Location = New System.Drawing.Point(269, 19)
+        Me.lblDataFiles.Name = "lblDataFiles"
+        Me.lblDataFiles.Size = New System.Drawing.Size(76, 13)
+        Me.lblDataFiles.TabIndex = 5
+        Me.lblDataFiles.Text = "Data Columns:"
+        '
+        'lblClimaticVariable
+        '
+        Me.lblClimaticVariable.AutoSize = True
+        Me.lblClimaticVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblClimaticVariable.Location = New System.Drawing.Point(182, 468)
+        Me.lblClimaticVariable.Name = "lblClimaticVariable"
+        Me.lblClimaticVariable.Size = New System.Drawing.Size(87, 13)
+        Me.lblClimaticVariable.TabIndex = 20
+        Me.lblClimaticVariable.Text = "Climatic Variable:"
+        '
+        'lblFinalYear
+        '
+        Me.lblFinalYear.AutoSize = True
+        Me.lblFinalYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFinalYear.Location = New System.Drawing.Point(15, 488)
+        Me.lblFinalYear.Name = "lblFinalYear"
+        Me.lblFinalYear.Size = New System.Drawing.Size(57, 13)
+        Me.lblFinalYear.TabIndex = 21
+        Me.lblFinalYear.Text = "Final Year:"
+        '
+        'lblInitialYear
+        '
+        Me.lblInitialYear.AutoSize = True
+        Me.lblInitialYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblInitialYear.Location = New System.Drawing.Point(15, 465)
+        Me.lblInitialYear.Name = "lblInitialYear"
+        Me.lblInitialYear.Size = New System.Drawing.Size(59, 13)
+        Me.lblInitialYear.TabIndex = 22
+        Me.lblInitialYear.Text = "Initial Year:"
+        '
+        'ucrInputFinalYear
+        '
+        Me.ucrInputFinalYear.AddQuotesIfUnrecognised = True
+        Me.ucrInputFinalYear.AutoSize = True
+        Me.ucrInputFinalYear.IsMultiline = False
+        Me.ucrInputFinalYear.IsReadOnly = False
+        Me.ucrInputFinalYear.Location = New System.Drawing.Point(77, 484)
+        Me.ucrInputFinalYear.Name = "ucrInputFinalYear"
+        Me.ucrInputFinalYear.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputFinalYear.TabIndex = 24
+        '
+        'ucrInputInitialYear
+        '
+        Me.ucrInputInitialYear.AddQuotesIfUnrecognised = True
+        Me.ucrInputInitialYear.AutoSize = True
+        Me.ucrInputInitialYear.IsMultiline = False
+        Me.ucrInputInitialYear.IsReadOnly = False
+        Me.ucrInputInitialYear.Location = New System.Drawing.Point(77, 461)
+        Me.ucrInputInitialYear.Name = "ucrInputInitialYear"
+        Me.ucrInputInitialYear.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputInitialYear.TabIndex = 23
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.AutoSize = True
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(266, 96)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 6
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrSelectorHomogenization
+        '
+        Me.ucrSelectorHomogenization.AutoSize = True
+        Me.ucrSelectorHomogenization.bDropUnusedFilterLevels = False
+        Me.ucrSelectorHomogenization.bShowHiddenColumns = False
+        Me.ucrSelectorHomogenization.bUseCurrentFilter = True
+        Me.ucrSelectorHomogenization.Location = New System.Drawing.Point(12, 58)
+        Me.ucrSelectorHomogenization.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorHomogenization.Name = "ucrSelectorHomogenization"
+        Me.ucrSelectorHomogenization.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorHomogenization.TabIndex = 4
+        '
+        'ucrInputClimateVariables
+        '
+        Me.ucrInputClimateVariables.AddQuotesIfUnrecognised = True
+        Me.ucrInputClimateVariables.AutoSize = True
+        Me.ucrInputClimateVariables.IsMultiline = False
+        Me.ucrInputClimateVariables.IsReadOnly = False
+        Me.ucrInputClimateVariables.Location = New System.Drawing.Point(272, 464)
+        Me.ucrInputClimateVariables.Name = "ucrInputClimateVariables"
+        Me.ucrInputClimateVariables.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputClimateVariables.TabIndex = 19
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(51, 6)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(321, 30)
+        Me.ucrPnlOptions.TabIndex = 0
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveResult.Enabled = False
+        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 426)
+        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveResult.TabIndex = 14
+        '
+        'ucrChkPlot
+        '
+        Me.ucrChkPlot.AutoSize = True
+        Me.ucrChkPlot.Checked = False
+        Me.ucrChkPlot.Location = New System.Drawing.Point(10, 19)
+        Me.ucrChkPlot.Name = "ucrChkPlot"
+        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPlot.TabIndex = 1
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.AutoSize = True
+        Me.ucrChkSummary.Checked = False
+        Me.ucrChkSummary.Location = New System.Drawing.Point(110, 19)
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        Me.ucrChkSummary.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkSummary.TabIndex = 0
+        '
+        'ucrInputComboMeanVarDistribution
+        '
+        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboMeanVarDistribution.GetSetSelectedIndex = -1
+        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
+        Me.ucrInputComboMeanVarDistribution.Location = New System.Drawing.Point(68, 67)
+        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
+        Me.ucrInputComboMeanVarDistribution.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboMeanVarDistribution.TabIndex = 14
+        '
+        'ucrInputComboVarDistribution
+        '
+        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboVarDistribution.GetSetSelectedIndex = -1
+        Me.ucrInputComboVarDistribution.IsReadOnly = False
+        Me.ucrInputComboVarDistribution.Location = New System.Drawing.Point(68, 67)
+        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
+        Me.ucrInputComboVarDistribution.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboVarDistribution.TabIndex = 15
+        '
+        'ucrInputPenValue
+        '
+        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputPenValue.AutoSize = True
+        Me.ucrInputPenValue.IsMultiline = False
+        Me.ucrInputPenValue.IsReadOnly = False
+        Me.ucrInputPenValue.Location = New System.Drawing.Point(68, 138)
+        Me.ucrInputPenValue.Name = "ucrInputPenValue"
+        Me.ucrInputPenValue.Size = New System.Drawing.Size(55, 21)
+        Me.ucrInputPenValue.TabIndex = 11
         '
         'ucrNudMinSegLen
         '
@@ -352,95 +586,13 @@ Partial Class dlgHomogenization
         Me.ucrInputComboPenalty.Size = New System.Drawing.Size(64, 21)
         Me.ucrInputComboPenalty.TabIndex = 0
         '
-        'grpOutputOptions
+        'ucrPnlMethods
         '
-        Me.grpOutputOptions.Controls.Add(Me.ucrChkPlot)
-        Me.grpOutputOptions.Controls.Add(Me.ucrChkSummary)
-        Me.grpOutputOptions.Enabled = False
-        Me.grpOutputOptions.Location = New System.Drawing.Point(12, 353)
-        Me.grpOutputOptions.Name = "grpOutputOptions"
-        Me.grpOutputOptions.Size = New System.Drawing.Size(209, 42)
-        Me.grpOutputOptions.TabIndex = 13
-        Me.grpOutputOptions.TabStop = False
-        Me.grpOutputOptions.Text = "Output Options"
-        '
-        'ucrChkPlot
-        '
-        Me.ucrChkPlot.AutoSize = True
-        Me.ucrChkPlot.Checked = False
-        Me.ucrChkPlot.Location = New System.Drawing.Point(10, 19)
-        Me.ucrChkPlot.Name = "ucrChkPlot"
-        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkPlot.TabIndex = 1
-        '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.AutoSize = True
-        Me.ucrChkSummary.Checked = False
-        Me.ucrChkSummary.Location = New System.Drawing.Point(110, 19)
-        Me.ucrChkSummary.Name = "ucrChkSummary"
-        Me.ucrChkSummary.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkSummary.TabIndex = 0
-        '
-        'rdoSingle
-        '
-        Me.rdoSingle.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSingle.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSingle.FlatAppearance.BorderSize = 2
-        Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(90, 9)
-        Me.rdoSingle.Name = "rdoSingle"
-        Me.rdoSingle.Size = New System.Drawing.Size(101, 28)
-        Me.rdoSingle.TabIndex = 1
-        Me.rdoSingle.TabStop = True
-        Me.rdoSingle.Tag = ""
-        Me.rdoSingle.Text = "Single"
-        Me.rdoSingle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSingle.UseVisualStyleBackColor = False
-        '
-        'lblNeighbouring
-        '
-        Me.lblNeighbouring.AutoSize = True
-        Me.lblNeighbouring.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNeighbouring.Location = New System.Drawing.Point(264, 190)
-        Me.lblNeighbouring.Name = "lblNeighbouring"
-        Me.lblNeighbouring.Size = New System.Drawing.Size(59, 13)
-        Me.lblNeighbouring.TabIndex = 9
-        Me.lblNeighbouring.Text = "Neighbour:"
-        '
-        'ucrReceiverNeighbour
-        '
-        Me.ucrReceiverNeighbour.AutoSize = True
-        Me.ucrReceiverNeighbour.frmParent = Me
-        Me.ucrReceiverNeighbour.Location = New System.Drawing.Point(266, 206)
-        Me.ucrReceiverNeighbour.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverNeighbour.Name = "ucrReceiverNeighbour"
-        Me.ucrReceiverNeighbour.Selector = Nothing
-        Me.ucrReceiverNeighbour.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverNeighbour.strNcFilePath = ""
-        Me.ucrReceiverNeighbour.TabIndex = 10
-        Me.ucrReceiverNeighbour.ucrSelector = Nothing
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(51, 6)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(321, 30)
-        Me.ucrPnlOptions.TabIndex = 0
-        '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResult.Enabled = False
-        Me.ucrSaveResult.Location = New System.Drawing.Point(12, 493)
-        Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(320, 24)
-        Me.ucrSaveResult.TabIndex = 14
+        Me.ucrPnlMethods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlMethods.Location = New System.Drawing.Point(6, 17)
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        Me.ucrPnlMethods.Size = New System.Drawing.Size(197, 68)
+        Me.ucrPnlMethods.TabIndex = 0
         '
         'ucrReceiverElement
         '
@@ -455,68 +607,27 @@ Partial Class dlgHomogenization
         Me.ucrReceiverElement.TabIndex = 8
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
-        'ucrSelectorHomogenization
-        '
-        Me.ucrSelectorHomogenization.AutoSize = True
-        Me.ucrSelectorHomogenization.bDropUnusedFilterLevels = False
-        Me.ucrSelectorHomogenization.bShowHiddenColumns = False
-        Me.ucrSelectorHomogenization.bUseCurrentFilter = True
-        Me.ucrSelectorHomogenization.Location = New System.Drawing.Point(12, 58)
-        Me.ucrSelectorHomogenization.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorHomogenization.Name = "ucrSelectorHomogenization"
-        Me.ucrSelectorHomogenization.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorHomogenization.TabIndex = 4
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 522)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 515)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
-        'lblStation
+        'ucrReceiverStationFile
         '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(264, 80)
-        Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 5
-        Me.lblStation.Text = "Station:"
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.AutoSize = True
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(266, 96)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 6
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'rdoMultiple
-        '
-        Me.rdoMultiple.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatAppearance.BorderSize = 2
-        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(189, 9)
-        Me.rdoMultiple.Name = "rdoMultiple"
-        Me.rdoMultiple.Size = New System.Drawing.Size(101, 28)
-        Me.rdoMultiple.TabIndex = 16
-        Me.rdoMultiple.TabStop = True
-        Me.rdoMultiple.Tag = ""
-        Me.rdoMultiple.Text = "Multiple"
-        Me.rdoMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoMultiple.UseVisualStyleBackColor = False
+        Me.ucrReceiverStationFile.AutoSize = True
+        Me.ucrReceiverStationFile.frmParent = Nothing
+        Me.ucrReceiverStationFile.Location = New System.Drawing.Point(265, 38)
+        Me.ucrReceiverStationFile.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationFile.Name = "ucrReceiverStationFile"
+        Me.ucrReceiverStationFile.Selector = Nothing
+        Me.ucrReceiverStationFile.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverStationFile.strNcFilePath = ""
+        Me.ucrReceiverStationFile.TabIndex = 6
+        Me.ucrReceiverStationFile.ucrSelector = Nothing
         '
         'ucrSelectorStationFile
         '
@@ -530,57 +641,23 @@ Partial Class dlgHomogenization
         Me.ucrSelectorStationFile.Size = New System.Drawing.Size(213, 185)
         Me.ucrSelectorStationFile.TabIndex = 0
         '
-        'grpStationFile
+        'ucrReceiverNeighbour
         '
-        Me.grpStationFile.Controls.Add(Me.ucrReceiverStationFile)
-        Me.grpStationFile.Controls.Add(Me.lblStationFile)
-        Me.grpStationFile.Controls.Add(Me.ucrSelectorStationFile)
-        Me.grpStationFile.Location = New System.Drawing.Point(11, 260)
-        Me.grpStationFile.Name = "grpStationFile"
-        Me.grpStationFile.Size = New System.Drawing.Size(397, 201)
-        Me.grpStationFile.TabIndex = 17
-        Me.grpStationFile.TabStop = False
-        Me.grpStationFile.Text = "StationFile"
-        '
-        'ucrReceiverStationFile
-        '
-        Me.ucrReceiverStationFile.AutoSize = True
-        Me.ucrReceiverStationFile.frmParent = Me
-        Me.ucrReceiverStationFile.Location = New System.Drawing.Point(265, 38)
-        Me.ucrReceiverStationFile.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStationFile.Name = "ucrReceiverStationFile"
-        Me.ucrReceiverStationFile.Selector = Nothing
-        Me.ucrReceiverStationFile.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverStationFile.strNcFilePath = ""
-        Me.ucrReceiverStationFile.TabIndex = 6
-        Me.ucrReceiverStationFile.ucrSelector = Nothing
-        '
-        'lblStationFile
-        '
-        Me.lblStationFile.AutoSize = True
-        Me.lblStationFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStationFile.Location = New System.Drawing.Point(269, 19)
-        Me.lblStationFile.Name = "lblStationFile"
-        Me.lblStationFile.Size = New System.Drawing.Size(86, 13)
-        Me.lblStationFile.TabIndex = 5
-        Me.lblStationFile.Text = "Station Columns:"
-        '
-        'grpDataFile
-        '
-        Me.grpDataFile.Controls.Add(Me.ucrReceiverDataFiles)
-        Me.grpDataFile.Controls.Add(Me.lblDataFiles)
-        Me.grpDataFile.Controls.Add(Me.ucrSelectorDataFiles)
-        Me.grpDataFile.Location = New System.Drawing.Point(12, 59)
-        Me.grpDataFile.Name = "grpDataFile"
-        Me.grpDataFile.Size = New System.Drawing.Size(397, 201)
-        Me.grpDataFile.TabIndex = 18
-        Me.grpDataFile.TabStop = False
-        Me.grpDataFile.Text = "Data File"
+        Me.ucrReceiverNeighbour.AutoSize = True
+        Me.ucrReceiverNeighbour.frmParent = Me
+        Me.ucrReceiverNeighbour.Location = New System.Drawing.Point(266, 206)
+        Me.ucrReceiverNeighbour.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverNeighbour.Name = "ucrReceiverNeighbour"
+        Me.ucrReceiverNeighbour.Selector = Nothing
+        Me.ucrReceiverNeighbour.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNeighbour.strNcFilePath = ""
+        Me.ucrReceiverNeighbour.TabIndex = 10
+        Me.ucrReceiverNeighbour.ucrSelector = Nothing
         '
         'ucrReceiverDataFiles
         '
         Me.ucrReceiverDataFiles.AutoSize = True
-        Me.ucrReceiverDataFiles.frmParent = Me
+        Me.ucrReceiverDataFiles.frmParent = Nothing
         Me.ucrReceiverDataFiles.Location = New System.Drawing.Point(265, 38)
         Me.ucrReceiverDataFiles.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataFiles.Name = "ucrReceiverDataFiles"
@@ -589,16 +666,6 @@ Partial Class dlgHomogenization
         Me.ucrReceiverDataFiles.strNcFilePath = ""
         Me.ucrReceiverDataFiles.TabIndex = 6
         Me.ucrReceiverDataFiles.ucrSelector = Nothing
-        '
-        'lblDataFiles
-        '
-        Me.lblDataFiles.AutoSize = True
-        Me.lblDataFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDataFiles.Location = New System.Drawing.Point(269, 19)
-        Me.lblDataFiles.Name = "lblDataFiles"
-        Me.lblDataFiles.Size = New System.Drawing.Size(57, 13)
-        Me.lblDataFiles.TabIndex = 5
-        Me.lblDataFiles.Text = "Data Files:"
         '
         'ucrSelectorDataFiles
         '
@@ -612,33 +679,16 @@ Partial Class dlgHomogenization
         Me.ucrSelectorDataFiles.Size = New System.Drawing.Size(213, 185)
         Me.ucrSelectorDataFiles.TabIndex = 0
         '
-        'ucrInputClimateVariables
-        '
-        Me.ucrInputClimateVariables.AddQuotesIfUnrecognised = True
-        Me.ucrInputClimateVariables.AutoSize = True
-        Me.ucrInputClimateVariables.IsMultiline = False
-        Me.ucrInputClimateVariables.IsReadOnly = False
-        Me.ucrInputClimateVariables.Location = New System.Drawing.Point(272, 464)
-        Me.ucrInputClimateVariables.Name = "ucrInputClimateVariables"
-        Me.ucrInputClimateVariables.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputClimateVariables.TabIndex = 19
-        '
-        'lblClimaticVariable
-        '
-        Me.lblClimaticVariable.AutoSize = True
-        Me.lblClimaticVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblClimaticVariable.Location = New System.Drawing.Point(182, 468)
-        Me.lblClimaticVariable.Name = "lblClimaticVariable"
-        Me.lblClimaticVariable.Size = New System.Drawing.Size(87, 13)
-        Me.lblClimaticVariable.TabIndex = 20
-        Me.lblClimaticVariable.Text = "Climatic Variable:"
-        '
         'dlgHomogenization
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(422, 579)
+        Me.ClientSize = New System.Drawing.Size(422, 570)
+        Me.Controls.Add(Me.ucrInputFinalYear)
+        Me.Controls.Add(Me.ucrInputInitialYear)
+        Me.Controls.Add(Me.lblInitialYear)
+        Me.Controls.Add(Me.lblFinalYear)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSelectorHomogenization)
         Me.Controls.Add(Me.lblClimaticVariable)
@@ -728,4 +778,8 @@ Partial Class dlgHomogenization
     Friend WithEvents ucrReceiverStationFile As ucrReceiverMultiple
     Friend WithEvents lblStationFile As Label
     Friend WithEvents ucrSelectorStationFile As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrInputFinalYear As ucrInputTextBox
+    Friend WithEvents ucrInputInitialYear As ucrInputTextBox
+    Friend WithEvents lblInitialYear As Label
+    Friend WithEvents lblFinalYear As Label
 End Class
