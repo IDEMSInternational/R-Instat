@@ -1388,6 +1388,7 @@ Public Class RLink
         Dim strTemp As String
         Dim lviTemp As ListViewItem
         Dim strTopItemText As String = ""
+        'TODO. why not apply or not the column selection at the R level.
         Dim strValue = If(bUseColumnSelection, "TRUE", "FALSE")
 
         If bInstatObjectExists Then

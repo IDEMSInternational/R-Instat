@@ -155,6 +155,7 @@ Public Class clsColumnMetaData
     Private Function GetColsMetadataFromRCommand() As DataFrame
         Dim clsGetVariablesMetadata As New RFunction
         Dim expTemp As SymbolicExpression
+        'TODO. why not apply or not the column selection at the R level.
         Dim strValue = If(UseColumnSelectionInMetaData, "TRUE", "FALSE")
         _hasChanged = True
         clsGetVariablesMetadata.SetRCommand(_RLink.strInstatDataObject & "$get_variables_metadata")
