@@ -63,7 +63,6 @@ Public Class dlgHomogenization
         ucrReceiverStationFile.Selector = ucrSelectorStationFile
         ucrReceiverStationFile.SetParameterIsString()
 
-
         ucrInputClimateVariables.SetParameter(New RParameter("varcli", 4))
         ucrInputClimateVariables.SetLinkedDisplayControl(lblClimaticVariable)
 
@@ -331,7 +330,6 @@ Public Class dlgHomogenization
         clsHomogenQCFunctin.SetPackageName("climatol")
         clsHomogenQCFunctin.SetRCommand("homogen")
         clsHomogenQCFunctin.AddParameter("onlyQC", "TRUE", iPosition:=3)
-        'clsHomogenQCFunctin.SetAssignTo("QC")
 
         clsDdm2Function.SetPackageName("climatol")
         clsDdm2Function.SetRCommand("dd2m")
@@ -375,7 +373,6 @@ Public Class dlgHomogenization
         ucrInputPenValue.AddAdditionalCodeParameterPair(clsCptMeanVarianceFunction, ucrInputPenValue.GetParameter, iAdditionalPairNo:=2)
         ucrInputPenValue.SetRCode(clsCptMeanFunction, bReset)
 
-        'ucrInputClimateVariables.AddAdditionalCodeParameterPair(clsHomogenQCFunctin, ucrInputClimateVariables.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverStation.SetRCode(clsLeftBracketOperator, bReset)
 
         'ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -518,6 +515,7 @@ Public Class dlgHomogenization
         DialogSize()
         HideShowControls()
     End Sub
+
     Private Sub HideShowControls()
         If rdoMultiple.Checked Then
             grpDataFile.Show()
@@ -533,6 +531,7 @@ Public Class dlgHomogenization
             grpOutputOptions.Show()
         End If
     End Sub
+
     Private Sub DialogSize()
         If rdoMultiple.Checked Then
             Me.Size = New Size(438, 609)
@@ -606,12 +605,5 @@ Public Class dlgHomogenization
             clsHomogenFunction.RemoveParameterByName("final_yr")
         End If
     End Sub
-    'Private Sub DataFrameParameter()
-    '    If ucrSelectorDataFiles.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-    '        clsColumnsFunction.AddParameter("data", ucrSelectorDataFiles.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
-    '    End If
-    'End Sub
-    'Private Sub ucrSelectorDataFiles_DataFrameChanged() Handles ucrSelectorDataFiles.DataFrameChanged
-    '    DataFrameParameter()
-    'End Sub
+
 End Class
