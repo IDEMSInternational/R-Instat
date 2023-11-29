@@ -54,11 +54,11 @@ Public Class dlgSelect
         ucrReceiverSelect.SetParameter(New RParameter("name", 1))
         ucrReceiverSelect.SetParameterIsString()
 
-        ucrChkDataframe.SetText("DataFrame")
+        ucrChkDataframe.SetText("Data Frame")
         ucrChkDataframe.SetParameter(New RParameter("dataframe", 0))
         ucrChkDataframe.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkMetaData.SetText("MetaData")
+        ucrChkMetaData.SetText("Meta Data")
         ucrChkMetaData.SetParameter(New RParameter("metadata", 1))
         ucrChkMetaData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
