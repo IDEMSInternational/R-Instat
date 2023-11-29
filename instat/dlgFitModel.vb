@@ -457,7 +457,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub UpdatePreview()
-        If Not ucrReceiverResponseVar.IsEmpty AndAlso Not ucrReceiverExpressionFitModel.IsEmpty Then
+        If Not ucrReceiverResponseVar.IsEmpty Then
             ucrInputModelPreview.SetName(clsFormulaOperator.ToScript())
         Else
             ucrInputModelPreview.SetName("")
@@ -551,7 +551,7 @@ Public Class dlgFitModel
 
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged
         ChooseRFunction()
-        ResponseConvert()
+        'ResponseConvert()
         ChooseAnovaFunction()
     End Sub
 
@@ -567,7 +567,7 @@ Public Class dlgFitModel
         ResponseVariableType()
     End Sub
 
-    Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged
+    Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged
         UpdatePreview()
         TestOKEnabled()
     End Sub
