@@ -214,7 +214,7 @@ Public Class clsDataFramePage
         clsGetDataFrameRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetDataFrameRFunction.AddParameter("convert_to_character", "TRUE")
         clsGetDataFrameRFunction.AddParameter("use_current_filter", "TRUE")
-        clsGetDataFrameRFunction.AddParameter("use_column_selection", strValue)
+        clsGetDataFrameRFunction.AddParameter("use_column_selection", If(UseColumnSelectionInDataView, "TRUE", "FALSE"))
         clsGetDataFrameRFunction.AddParameter("max_cols", iColumnIncrements)
         clsGetDataFrameRFunction.AddParameter("max_rows", intRowIncrements)
         clsGetDataFrameRFunction.AddParameter("start_row", _iRowStart)
