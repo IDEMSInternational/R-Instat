@@ -2563,7 +2563,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineSplitText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineSplitText.Click
-        dlgRandomSplit.ShowDialog()
+        dlgSplitText.ShowDialog()
     End Sub
 
     Private Sub mnuExamineEditDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableSummarise.Click
@@ -2612,4 +2612,7 @@ Public Class frmMain
         CheckForUpdates()
     End Sub
 
+    Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyDataKey.Click
+        dlgAddKey.ShowDialog()
+    End Sub
 End Class
