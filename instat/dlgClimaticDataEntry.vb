@@ -33,6 +33,7 @@ Public Class dlgClimaticDataEntry
     Private bChange As Boolean = False
     Private bSubdialogFirstLoad As Boolean
     Private bState As Boolean = False
+    Private bReturn As Boolean = False
     Private bResetSubdialogs As Boolean
 
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -181,7 +182,8 @@ Public Class dlgClimaticDataEntry
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
-            ucrBase.OKEnabled(clsSaveDataEntryFunction.ContainsParameter("rows_changed") OrElse clsCommentsListFunction.ContainsParameter("comment"))
+            ucrBase.OKEnabled((clsSaveDataEntryFunction.ContainsParameter("rows_changed") OrElse
+                              clsSaveDataEntryFunction.ContainsParameter("comments_list")) AndAlso bReturn)
             cmdEnterData.Enabled = True
             If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
                 cmdEnterData.Enabled = False
@@ -200,6 +202,7 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+        bReturn = False
         TestOkEnabled()
     End Sub
 
@@ -259,7 +262,7 @@ Public Class dlgClimaticDataEntry
             SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
             SetNumberCommentEnteredText(sdgCommentForDataEntry.GetSetNumberOfCommentsEntered)
             bSubdialogFirstLoad = False
-            bChange = False
+            bReturn = lblNbCommentEntered.Visible OrElse lblNbRowsChanged1.Visible
             TestOkEnabled()
         End If
     End Sub

@@ -65,7 +65,6 @@ Public Class ucrDataView
 
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
-        mnuPaste.Visible = False
         autoTranslate(Me)
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
@@ -132,6 +131,7 @@ Public Class ucrDataView
                 End If
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
+
         Next
         If strCurrWorksheet IsNot Nothing Then
             _grid.ReOrderWorksheets(strCurrWorksheet)
@@ -790,24 +790,10 @@ Public Class ucrDataView
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteValuesToDataFrame()
-    End Sub
-
-    '''' <summary>
-    '''' event raised on menu toolstrip click
-    '''' paste data starting from selected cells
-    '''' </summary>
-    '''' <param name="sender"></param>
-    '''' <param name="e"></param>
-    Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
-        PasteValuesToDataFrame()
-    End Sub
-
     ''' <summary>
     ''' pastes data from clipboard to data view
     ''' </summary>
-    Private Sub PasteValuesToDataFrame()
+    Public Sub PasteValuesToDataFrame()
         Dim strClipBoardText As String = My.Computer.Clipboard.GetText
         If String.IsNullOrEmpty(strClipBoardText) Then
             MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")
@@ -943,6 +929,11 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Sub GoToSpecificColumnPage(iPage As Integer)
+        GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(iPage)
+        RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+    End Sub
+
     Private Sub lblColDisplay_Click(sender As Object, e As EventArgs) Handles lblColDisplay.Click
         If lblColNext.Enabled OrElse lblColBack.Enabled Then
             sdgWindowNumber.enumWINNUMBERMode = sdgWindowNumber.WINNUMBERMode.Col
@@ -955,8 +946,7 @@ Public Class ucrDataView
             sdgWindowNumber.iTotalRowOrColumn = iTotalCol
             sdgWindowNumber.iEndRowOrColumn = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
             sdgWindowNumber.ShowDialog()
-            GetCurrentDataFrameFocus().clsVisibleDataFramePage.GoToSpecificColumnPage(sdgWindowNumber.iPage)
-            RefreshWorksheet(_grid.CurrentWorksheet, GetCurrentDataFrameFocus())
+            GoToSpecificColumnPage(sdgWindowNumber.iPage)
         End If
     End Sub
 
@@ -1004,9 +994,13 @@ Public Class ucrDataView
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Public Sub SearchInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
-                           Optional bCellOrRow As Boolean = False)
-        _grid.SearchInGrid(rowNumbers, strColumn, iRow, bCellOrRow)
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                           Optional bApplyToRows As Boolean = False)
+        _grid.SearchRowInGrid(rowNumbers, strColumn, iRow, bApplyToRows)
+    End Sub
+
+    Public Sub SelectColumnInGrid(strColumn As String)
+        _grid.SelectColumnInGrid(strColumn)
     End Sub
 
 End Class
