@@ -30,6 +30,20 @@ Public Class ucrDataFrameMetadata
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        SetupInitialLayoutAndGrid()
+    End Sub
+    Private Sub ucrDataFrameMetadata_Load(sender As Object, e As EventArgs) Handles Me.Load
+        clsViewDataFrame.SetRCommand("View")
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
+    End Sub
+
+
     Public WriteOnly Property DataBook() As clsDataBook
         Set(ByVal value As clsDataBook)
             _clsDataBook = value
@@ -37,14 +51,7 @@ Public Class ucrDataFrameMetadata
         End Set
     End Property
 
-    Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadForm()
-        clsViewDataFrame.SetRCommand("View")
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
-    End Sub
-
-    Private Sub LoadForm()
+    Private Sub SetupInitialLayoutAndGrid()
         lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Row_Count", "Column_Count", "Is_Linkable", "Is_Calculated"})
 
         'Debug

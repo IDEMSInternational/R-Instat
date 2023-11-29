@@ -716,6 +716,7 @@ Public Class dlgImportDataset
                               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
                         frmMain.ucrScriptWindow.strActiveTabText = File.ReadAllText(strFilePathSystem)
+                        frmMain.clsRecentItems.addToMenu(Replace(strFilePathSystem, "\", "/"))
                     Catch
                         MessageBox.Show("Could not load the script from file." &
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",

@@ -163,7 +163,7 @@ pkgs <-
     "jtools"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
-pth <- "C:/Users/Christopher Marsh/Documents/RPackages"
+pth <- "C:/Users/Antoine/Documents/RPackages"
 makeRepo(pkgList, path = pth, type = "win.binary", Rversion = r_version, repos = "https://cran.rstudio.com/")
 
 #add extra packages to location

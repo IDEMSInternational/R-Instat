@@ -30,7 +30,7 @@ Public Class ucrReceiverExpression
         lstDataFrames = New List(Of String)
     End Sub
 
-    Public Overrides Sub AddSelected()
+    Public Overrides Sub AddSelectedSelectorVariables()
         If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
             Add(Selector.lstAvailableVariable.SelectedItems.Item(0).Text, Selector.lstAvailableVariable.SelectedItems.Item(0).Tag)
         Else
@@ -67,7 +67,6 @@ Public Class ucrReceiverExpression
             kvpItem = New KeyValuePair(Of String, String)(strDataFrame, strItem)
             AddToItemsInExpressionList(kvpItem)
             AddToReceiverAtCursorPosition(strItem)
-            Selector.AddToVariablesList(strItem, strDataFrame)
             OnSelectionChanged()
             'we need this to run when everything else has run 
             cboExpression.Enabled = Not bFixReceiver
@@ -101,14 +100,7 @@ Public Class ucrReceiverExpression
     End Sub
 
     Public Overrides Sub RemoveSelected()
-        Dim kvpItem As KeyValuePair(Of String, String)
-
         If cboExpression.Enabled Then
-            If Selector IsNot Nothing Then
-                For Each kvpItem In lstItemsInExpression
-                    Selector.RemoveFromVariablesList(kvpItem.Value, kvpItem.Key)
-                Next
-            End If
             cboExpression.Text = ""
             cboExpression.Focus()
         End If
@@ -147,11 +139,7 @@ Public Class ucrReceiverExpression
     End Sub
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        If bWithQuotes Then
-            Return Chr(34) & cboExpression.Text & Chr(34)
-        Else
-            Return cboExpression.Text
-        End If
+        Return If(bWithQuotes, Chr(34) & cboExpression.Text & Chr(34), cboExpression.Text)
     End Function
 
     Private Sub cboExpression_GotFocus(sender As Object, e As EventArgs) Handles cboExpression.GotFocus
