@@ -145,7 +145,7 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
         VariableXType()
 
-        cmdRHelp._listBox.Items.AddRange({"geomtextpath", "GGally", "ggalt", "ggalt", "ggdendro", "ggeffects",
+        cmdRHelp._listBox.Items.AddRange({"geomtextpath", "GGally", "ggalt", "ggdendro", "ggeffects",
                  "ggfittext", "ggforce", "ggformula", "ggfortify", "ggmcmc", "ggmosaic", "ggplotify", "ggpmisc",
                  "ggpp", "ggpubr", "ggrepel", "ggsci", "ggsignif", "ggstance", "ggtext", "ggthemes", "ggwordbluid"})
         cmdRHelp._bUseListBox = True
