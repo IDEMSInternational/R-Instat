@@ -144,6 +144,11 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
         VariableXType()
+
+        cmdRHelp._listBox.Items.AddRange({"geomtextpath", "GGally", "ggalt", "ggalt", "ggdendro", "ggeffects",
+                 "ggfittext", "ggforce", "ggformula", "ggfortify", "ggmcmc", "ggmosaic", "ggplotify", "ggpmisc",
+                 "ggpp", "ggpubr", "ggrepel", "ggsci", "ggsignif", "ggstance", "ggtext", "ggthemes", "ggwordbluid"})
+        cmdRHelp._bUseListBox = True
     End Sub
 
     Private Sub SetDefaults()
@@ -403,118 +408,8 @@ Public Class dlgGeneralForGraphics
         OpenHelpPage()
     End Sub
 
-    Private Sub GeomtextpathToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeomtextpathToolStripMenuItem.Click
-        strPackageName = "geomtextpath"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GGallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GGallyToolStripMenuItem.Click
-        strPackageName = "GGally"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgaltToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgaltToolStripMenuItem.Click
-        strPackageName = "ggalt"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgdendroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgdendroToolStripMenuItem.Click
-        strPackageName = "ggdendro"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgeffectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgeffectsToolStripMenuItem.Click
-        strPackageName = "ggeffects"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgfittextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgfittextToolStripMenuItem.Click
-        strPackageName = "ggfittext"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgforceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgforceToolStripMenuItem.Click
-        strPackageName = "ggforce"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgformulaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgformulaToolStripMenuItem.Click
-        strPackageName = "ggformula"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgfortifyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgfortifyToolStripMenuItem.Click
-        strPackageName = "ggfortify"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgmcmcToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgmcmcToolStripMenuItem.Click
-        strPackageName = "ggmcmc"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgmosaicToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgmosaicToolStripMenuItem.Click
-        strPackageName = "ggmosaic"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgplotifyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgplotifyToolStripMenuItem.Click
-        strPackageName = "ggplotify"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgpmiscToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgpmiscToolStripMenuItem.Click
-        strPackageName = "ggpmisc"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgppToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgppToolStripMenuItem.Click
-        strPackageName = "ggpp"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgpubrToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgpubrToolStripMenuItem.Click
-        strPackageName = "ggpubr"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgrepelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgrepelToolStripMenuItem.Click
-        strPackageName = "ggrepel"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgridgesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgridgesToolStripMenuItem.Click
-        strPackageName = "ggridges"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgsciToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgsciToolStripMenuItem.Click
-        strPackageName = "ggsci"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgsignifToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgsignifToolStripMenuItem.Click
-        strPackageName = "ggsignif"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgstanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgstanceToolStripMenuItem.Click
-        strPackageName = "ggstance"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgtextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgtextToolStripMenuItem.Click
-        strPackageName = "ggtext"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgthemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgthemesToolStripMenuItem.Click
-        strPackageName = "ggthemes"
-        OpenHelpPage()
-    End Sub
-
-    Private Sub GgwordbuildToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgwordbuildToolStripMenuItem.Click
-        strPackageName = "ggwordbluid"
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmdRHelp.ListBoxSelectedIndexChanged
+        strPackageName = cmdRHelp._listBox.SelectedItem
         OpenHelpPage()
     End Sub
 
