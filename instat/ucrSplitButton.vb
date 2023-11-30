@@ -593,24 +593,30 @@ Public Class ucrSplitButton
         State = PushButtonState.Pressed
 
         If _bUseListBox Then
-            _listBox.BorderStyle = BorderStyle.FixedSingle
-            _listBox.Dock = DockStyle.Fill ' Make the ListBox fill the for
-
             tmpForm.AutoScaleMode = AutoScaleMode.None
             tmpForm.FormBorderStyle = FormBorderStyle.None
             tmpForm.StartPosition = FormStartPosition.Manual
             tmpForm.ShowInTaskbar = False
             tmpForm.Size = New Size(150, 100)
+            _listBox.BorderStyle = BorderStyle.FixedSingle
+            _listBox.Dock = DockStyle.Fill ' Make the ListBox fill the form
             tmpForm.Controls.Add(_listBox)
 
-            Dim screenPoint As Point = PointToScreen(New Point(0, Height))
-            tmpForm.Location = screenPoint
+            tmpForm.Location = PointToScreen(New Point(0, Height))
             tmpForm.Show()
         Else
             If _contextSplitMenuStrip IsNot Nothing Then
                 _contextSplitMenuStrip.Show(Me, New Point(0, Height), ToolStripDropDownDirection.BelowRight)
             End If
         End If
+    End Sub
+
+    Public Sub AddItemsToListbox(item As Object)
+        If item Is Nothing Then
+            Exit Sub
+        End If
+
+        _listBox.Items.AddRange(item)
     End Sub
 
     Private Sub OnListBoxSelectedIndexChanged(sender As Object, e As EventArgs) Handles _listBox.SelectedIndexChanged
