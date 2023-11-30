@@ -402,7 +402,7 @@ Public Class dlgBoxplot
                 Else
                     ucrVariablesAsFactorForBoxplot.Add(clsParam.strArgumentValue)
                 End If
-            ElseIf clsParam.strArgumentName = "colour" Then
+            ElseIf clsParam.strArgumentName = "fill" Then
                 ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next

@@ -694,25 +694,10 @@ Public Class sdgPlots
         dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElemetText)
-        dctThemeFunctions.TryGetValue("title", clsPlotElementTitleFunction)
-        dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction)
-        dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction)
         dctThemeFunctions.TryGetValue("tag", clsPlotElementTagFunction)
         dctThemeFunctions.TryGetValue("colour", clsPlotLegendTitleFunction)
 
         dctNewThemeFunctions.TryGetValue("axis.title.y", clsYElemetTitle)
-
-        If dctThemeFunctions.TryGetValue("caption", clsPlotElementCaptionFunction) Then
-            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
-        End If
-
-        If dctThemeFunctions.TryGetValue("title", clsPlotElementTitleFunction) Then
-            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
-        End If
-
-        If dctThemeFunctions.TryGetValue("sub.title", clsPlotElementSubTitleFunction) Then
-            clsThemeFunction.AddParameter("plot.subtitle", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
-        End If
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
@@ -757,7 +742,9 @@ Public Class sdgPlots
         ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFreeScalesX.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        If bReset Then
+            ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        End If
         ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkDrop.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
@@ -1208,8 +1195,8 @@ Public Class sdgPlots
         ucrChkYaxisSize.SetRCode(clsYElemetTitle, bReset, bCloneIfNeeded:=True)
         ucrNudYSize.SetRCode(clsYElemetTitle, bReset, bCloneIfNeeded:=True)
 
-        ucrNudXaxisMarkSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
         ucrChkXaxisTickMarkLabelSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
+        ucrNudXaxisMarkSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub cmdSimpleOptions_Click(sender As Object, e As EventArgs) Handles cmdSimpleOptions.Click
@@ -1331,15 +1318,30 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrNudCaptionSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCaptionSize.ControlValueChanged
-        clsPlotElementCaptionFunction.AddParameter("size", ucrNudCaptionSize.GetText)
+        If clsPlotElementCaptionFunction.clsParameters.Count > 0 Then
+            clsThemeFunction.AddParameter("plot.caption", clsRFunctionParameter:=clsPlotElementCaptionFunction)
+        Else
+            clsThemeFunction.RemoveParameterByName("plot.caption")
+        End If
+        AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTitleSize.ControlValueChanged
-        clsPlotElementTitleFunction.AddParameter("size", ucrNudTitleSize.GetText)
+        If clsPlotElementTitleFunction.clsParameters.Count > 0 Then
+            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementTitleFunction)
+        Else
+            clsThemeFunction.RemoveParameterByName("plot.title")
+        End If
+        AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudSubTitleSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSubTitleSize.ControlValueChanged
-        clsPlotElementSubTitleFunction.AddParameter("size", ucrNudSubTitleSize.GetText)
+        If clsPlotElementSubTitleFunction.clsParameters.Count > 0 Then
+            clsThemeFunction.AddParameter("plot.title", clsRFunctionParameter:=clsPlotElementSubTitleFunction)
+        Else
+            clsThemeFunction.RemoveParameterByName("plot.title")
+        End If
+        AddRemoveTheme()
     End Sub
 
     Private Sub ucrNudTagSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTagSize.ControlValueChanged
