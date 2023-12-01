@@ -272,10 +272,6 @@ Partial Class frmMain
         Me.mnuClimaticDescribeSPISPEI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeClimograph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeIDF = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator81 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticDescribeWindRose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDescribeWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDescribeOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticNCMP = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticNCMPIndices = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticNCMPVariogram = New System.Windows.Forms.ToolStripMenuItem()
@@ -683,6 +679,9 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2144,7 +2143,7 @@ Partial Class frmMain
         '
         'mnuClimaticDescribe
         '
-        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeRainfall, Me.mnuClimaticDescribeTemperatures, Me.mnuClimaticDescribeWindSpeedDirection, Me.mnuClimaticDescribeSunshineRadiation, Me.ToolStripSeparator17, Me.mnuClimaticDescribeGeneral, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator27, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator81, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots})
+        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeRainfall, Me.mnuClimaticDescribeTemperatures, Me.mnuClimaticDescribeWindSpeedDirection, Me.mnuClimaticDescribeSunshineRadiation, Me.ToolStripSeparator17, Me.mnuClimaticDescribeGeneral, Me.ToolStripSeparator27, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeIDF})
         Me.mnuClimaticDescribe.Name = "mnuClimaticDescribe"
         Me.mnuClimaticDescribe.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticDescribe.Text = "Describe"
@@ -2192,8 +2191,8 @@ Partial Class frmMain
         '
         Me.mnuClimaticDescribeGeneral.Enabled = False
         Me.mnuClimaticDescribeGeneral.Name = "mnuClimaticDescribeGeneral"
-        Me.mnuClimaticDescribeGeneral.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeGeneral.Text = "General"
+        Me.mnuClimaticDescribeGeneral.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeGeneral.Text = "General..."
         '
         'ToolStripSeparator31
         '
@@ -2203,14 +2202,14 @@ Partial Class frmMain
         'mnuClimaticDescribeSummarise23Variables
         '
         Me.mnuClimaticDescribeSummarise23Variables.Name = "mnuClimaticDescribeSummarise23Variables"
-        Me.mnuClimaticDescribeSummarise23Variables.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeSummarise23Variables.Text = "Summarise 2/3 Variables"
+        Me.mnuClimaticDescribeSummarise23Variables.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeSummarise23Variables.Text = "Summarise 2/3 Variables..."
         '
         'mnuClimaticDescribeGraph23Variables
         '
         Me.mnuClimaticDescribeGraph23Variables.Name = "mnuClimaticDescribeGraph23Variables"
-        Me.mnuClimaticDescribeGraph23Variables.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeGraph23Variables.Text = "Graph 2/3 Variables"
+        Me.mnuClimaticDescribeGraph23Variables.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeGraph23Variables.Text = "Graph 2/3 Variables..."
         '
         'ToolStripSeparator27
         '
@@ -2220,45 +2219,22 @@ Partial Class frmMain
         'mnuClimaticDescribeSPISPEI
         '
         Me.mnuClimaticDescribeSPISPEI.Name = "mnuClimaticDescribeSPISPEI"
-        Me.mnuClimaticDescribeSPISPEI.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeSPISPEI.Text = "SPI/SPEI"
+        Me.mnuClimaticDescribeSPISPEI.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeSPISPEI.Text = "SPI/SPEI..."
         '
         'mnuClimaticDescribeClimograph
         '
         Me.mnuClimaticDescribeClimograph.Enabled = False
         Me.mnuClimaticDescribeClimograph.Name = "mnuClimaticDescribeClimograph"
-        Me.mnuClimaticDescribeClimograph.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeClimograph.Text = "Climograph"
+        Me.mnuClimaticDescribeClimograph.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeClimograph.Text = "Climograph..."
         '
         'mnuClimaticDescribeIDF
         '
         Me.mnuClimaticDescribeIDF.Enabled = False
         Me.mnuClimaticDescribeIDF.Name = "mnuClimaticDescribeIDF"
-        Me.mnuClimaticDescribeIDF.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeIDF.Text = "IDF"
-        '
-        'ToolStripSeparator81
-        '
-        Me.ToolStripSeparator81.Name = "ToolStripSeparator81"
-        Me.ToolStripSeparator81.Size = New System.Drawing.Size(199, 6)
-        '
-        'mnuClimaticDescribeWindRose
-        '
-        Me.mnuClimaticDescribeWindRose.Name = "mnuClimaticDescribeWindRose"
-        Me.mnuClimaticDescribeWindRose.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeWindRose.Text = "Wind Rose..."
-        '
-        'mnuClimaticDescribeWindPollutionRose
-        '
-        Me.mnuClimaticDescribeWindPollutionRose.Name = "mnuClimaticDescribeWindPollutionRose"
-        Me.mnuClimaticDescribeWindPollutionRose.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeWindPollutionRose.Text = "Wind/Pollution Rose..."
-        '
-        'mnuClimaticDescribeOtherRosePlots
-        '
-        Me.mnuClimaticDescribeOtherRosePlots.Name = "mnuClimaticDescribeOtherRosePlots"
-        Me.mnuClimaticDescribeOtherRosePlots.Size = New System.Drawing.Size(202, 22)
-        Me.mnuClimaticDescribeOtherRosePlots.Text = "Other Rose Plots"
+        Me.mnuClimaticDescribeIDF.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeIDF.Text = "IDF..."
         '
         'mnuClimaticNCMP
         '
@@ -4264,7 +4240,7 @@ Partial Class frmMain
         '
         'mnuStructuredCircular
         '
-        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularDensityPlot, Me.ToolStripSeparator67, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
+        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularDensityPlot, Me.ToolStripSeparator67, Me.mnuStructuredCircularWindRose, Me.mnuStructuredCircularWindPollutionRose, Me.mnuStructuredCircularOtherRosePlots, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
         Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
         Me.mnuStructuredCircular.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredCircular.Text = "Circular"
@@ -4272,47 +4248,47 @@ Partial Class frmMain
         'mnuStructuredCircularDefine
         '
         Me.mnuStructuredCircularDefine.Name = "mnuStructuredCircularDefine"
-        Me.mnuStructuredCircularDefine.Size = New System.Drawing.Size(153, 22)
+        Me.mnuStructuredCircularDefine.Size = New System.Drawing.Size(192, 22)
         Me.mnuStructuredCircularDefine.Text = "Define..."
         '
         'mnuStructuredCircularCalculator
         '
         Me.mnuStructuredCircularCalculator.Name = "mnuStructuredCircularCalculator"
-        Me.mnuStructuredCircularCalculator.Size = New System.Drawing.Size(153, 22)
+        Me.mnuStructuredCircularCalculator.Size = New System.Drawing.Size(192, 22)
         Me.mnuStructuredCircularCalculator.Text = "Calculator..."
         '
         'mnuStructuredCircularSummaries
         '
         Me.mnuStructuredCircularSummaries.Name = "mnuStructuredCircularSummaries"
-        Me.mnuStructuredCircularSummaries.Size = New System.Drawing.Size(153, 22)
+        Me.mnuStructuredCircularSummaries.Size = New System.Drawing.Size(192, 22)
         Me.mnuStructuredCircularSummaries.Text = "Summaries..."
         '
         'ToolStripSeparator46
         '
         Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
-        Me.ToolStripSeparator46.Size = New System.Drawing.Size(150, 6)
+        Me.ToolStripSeparator46.Size = New System.Drawing.Size(189, 6)
         '
         'mnuStructuredCircularDensityPlot
         '
         Me.mnuStructuredCircularDensityPlot.Name = "mnuStructuredCircularDensityPlot"
-        Me.mnuStructuredCircularDensityPlot.Size = New System.Drawing.Size(153, 22)
+        Me.mnuStructuredCircularDensityPlot.Size = New System.Drawing.Size(192, 22)
         Me.mnuStructuredCircularDensityPlot.Text = "Circular Plots..."
         '
         'ToolStripSeparator67
         '
         Me.ToolStripSeparator67.Name = "ToolStripSeparator67"
-        Me.ToolStripSeparator67.Size = New System.Drawing.Size(150, 6)
+        Me.ToolStripSeparator67.Size = New System.Drawing.Size(189, 6)
         '
         'ToolStripSeparator68
         '
         Me.ToolStripSeparator68.Name = "ToolStripSeparator68"
-        Me.ToolStripSeparator68.Size = New System.Drawing.Size(150, 6)
+        Me.ToolStripSeparator68.Size = New System.Drawing.Size(189, 6)
         '
         'mnuStructuredCircularCirclize
         '
         Me.mnuStructuredCircularCirclize.Enabled = False
         Me.mnuStructuredCircularCirclize.Name = "mnuStructuredCircularCirclize"
-        Me.mnuStructuredCircularCirclize.Size = New System.Drawing.Size(153, 22)
+        Me.mnuStructuredCircularCirclize.Size = New System.Drawing.Size(192, 22)
         Me.mnuStructuredCircularCirclize.Text = "Circlize..."
         Me.mnuStructuredCircularCirclize.Visible = False
         '
@@ -5109,6 +5085,24 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuStructuredCircularWindRose
+        '
+        Me.mnuStructuredCircularWindRose.Name = "mnuStructuredCircularWindRose"
+        Me.mnuStructuredCircularWindRose.Size = New System.Drawing.Size(192, 22)
+        Me.mnuStructuredCircularWindRose.Text = "Wind Rose..."
+        '
+        'mnuStructuredCircularWindPollutionRose
+        '
+        Me.mnuStructuredCircularWindPollutionRose.Name = "mnuStructuredCircularWindPollutionRose"
+        Me.mnuStructuredCircularWindPollutionRose.Size = New System.Drawing.Size(192, 22)
+        Me.mnuStructuredCircularWindPollutionRose.Text = "Wind/Pollution Rose..."
+        '
+        'mnuStructuredCircularOtherRosePlots
+        '
+        Me.mnuStructuredCircularOtherRosePlots.Name = "mnuStructuredCircularOtherRosePlots"
+        Me.mnuStructuredCircularOtherRosePlots.Size = New System.Drawing.Size(192, 22)
+        Me.mnuStructuredCircularOtherRosePlots.Text = "Other Rose Plots..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5803,8 +5797,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticDescribeSPISPEI As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeClimograph As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeIDF As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator81 As ToolStripSeparator
-    Friend WithEvents mnuClimaticDescribeWindRose As ToolStripMenuItem
-    Friend WithEvents mnuClimaticDescribeWindPollutionRose As ToolStripMenuItem
-    Friend WithEvents mnuClimaticDescribeOtherRosePlots As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularWindRose As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularWindPollutionRose As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlots As ToolStripMenuItem
 End Class
