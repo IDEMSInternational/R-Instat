@@ -1596,6 +1596,14 @@ Public Class frmMain
         Return 0
     End Function
 
+    Public Sub UseColumnSelectionInMetaData(bUseColumnSelecion As Boolean)
+        ucrColumnMeta.UseColumnSelectionInMetaData(bUseColumnSelecion)
+    End Sub
+
+    Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
+        ucrDataViewer.UseColumnSelectionInDataView(bUseColumnSelecion)
+    End Sub
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
         ucrColumnMeta.SetCurrentDataFrame(strDataName)

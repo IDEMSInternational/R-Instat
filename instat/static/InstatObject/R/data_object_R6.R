@@ -434,7 +434,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     }
 
     if(convert_to_character) {
-      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE) 
+      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE, use_column_selection = use_column_selection) 
       scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
       return(convert_to_character_matrix(data = out, format_decimal_places =  TRUE, decimal_places =  decimal_places, is_scientific = scientific_notation))
     }
@@ -447,7 +447,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
 )
 
 # As a temp fix to rlink crashing here we access private$data directly
-DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
+DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE, use_column_selection = TRUE) {
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
