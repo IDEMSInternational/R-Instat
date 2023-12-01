@@ -581,13 +581,6 @@ Public Class sdgPlots
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
         'Colour
-        ucrPnlColourPalette.AddRadioButton(rdoSequential)
-        ucrPnlColourPalette.AddRadioButton(rdoDiverging)
-        ucrPnlColourPalette.AddRadioButton(rdoQualitative)
-        ucrPnlColourPalette.AddRadioButton(rdoViridis)
-        ucrPnlColourPalette.AddRadioButton(rdoGgthemes)
-        ucrPnlColourPalette.SetRDefault(rdoSequential)
-
         ucrPnlScale.AddRadioButton(rdoColour)
         ucrPnlScale.AddRadioButton(rdoFill)
 
