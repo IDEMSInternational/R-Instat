@@ -1365,12 +1365,8 @@ Public Class frmMain
         dlgInfill.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
+    Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs)
         dlgTemperature.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeSunshineRadiation_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSunshineRadiation.Click
-        dlgSunshine.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfallGraph.Click
@@ -1688,10 +1684,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticCheckDataBoxplot_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
         dlgClimaticBoxPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
-        dlgWindrose.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCMSAFPlotRegion_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFPlotRegion.Click
@@ -2622,6 +2614,18 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
     End Sub
 End Class
