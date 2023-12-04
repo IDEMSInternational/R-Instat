@@ -59,9 +59,7 @@ Public Class clsRegressionDefaults
     End Property
     Public Shared ReadOnly Property clsDefaultGlmFunction As RFunction
         Get
-
             Dim clsDefaultGlmFunc As New RFunction
-
             clsDefaultGlmFunc.SetRCommand("glm")
             Return clsDefaultGlmFunc
         End Get
@@ -69,9 +67,7 @@ Public Class clsRegressionDefaults
 
     Public Shared ReadOnly Property clsDefaultAovFunction As RFunction
         Get
-
             Dim clsDefaultAovFunc As New RFunction
-
             clsDefaultAovFunc.SetRCommand("aov")
             Return clsDefaultAovFunc
         End Get

@@ -25,9 +25,9 @@ Public Class dlgFourVariableModelling
     Public bResetSecondFunction As Boolean = False
     Public bRCodeSet As Boolean = False
     Public clsRCIFunction, clsRConvert, clsFamilyFunction, clsVisReg As New RFunction
-    Public clsRSingleModelFunction, clsThirdTransformFunction, clsLmer, clsGlmer, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
+    Public clsRSingleModelFunction, clsThirdTransformFunction, clsLmer, clsGLMFunctioner, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As New RFunction
     Public clsFormulaOperator As New ROperator
-    Public clsGLM, clsAOV, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
+    Public clsGLMFunction, clsAOVFunction, clsLM, clsLMOrGLM, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -120,8 +120,8 @@ Public Class dlgFourVariableModelling
         clsFamilyFunction = New RFunction
         clsAsNumeric = New RFunction
         clsLM = New RFunction
-        clsAOV = New RFunction
-        clsGLM = New RFunction
+        clsAOVFunction = New RFunction
+        clsGLMFunction = New RFunction
         clsFirstTransformFunction = New RFunction
         clsSecondTransformFunction = New RFunction
         clsFormulaFunction = New RFunction
@@ -131,7 +131,7 @@ Public Class dlgFourVariableModelling
         clsThirdTransformFunction = New RFunction
         clsLmer = New RFunction
         clsLMOrGLM = New RFunction
-        clsGlmer = New RFunction
+        clsGLMFunctioner = New RFunction
 
         clsRstandardFunction = New RFunction
         clsHatvaluesFunction = New RFunction
@@ -197,34 +197,34 @@ Public Class dlgFourVariableModelling
         clsLmer.SetRCommand("lmer")
         clsLmer.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
 
-        clsGlmer.SetPackageName("lme4")
-        clsGlmer.SetRCommand("glmer")
-        clsGlmer.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
-        clsGlmer.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        clsGLMFunctioner.SetPackageName("lme4")
+        clsGLMFunctioner.SetRCommand("glmer")
+        clsGLMFunctioner.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsGLMFunctioner.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
 
-        clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
-        clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
-        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
-        clsGLM.bExcludeAssignedFunctionOutput = False
-        clsGLM.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+        clsGLMFunction = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
+        clsGLMFunction.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsGLMFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsGLMFunction.bExcludeAssignedFunctionOutput = False
+        clsGLMFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorFourVariableModelling.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
-        clsAOV = clsRegressionDefaults.clsDefaultAovFunction.Clone()
-        clsAOV.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
-        clsAOV.AddParameter("na.action", "na.exclude", iPosition:=4)
-        clsAOV.bExcludeAssignedFunctionOutput = False
-        clsAOV.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+        clsAOVFunction = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOVFunction.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOVFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsAOVFunction.bExcludeAssignedFunctionOutput = False
+        clsAOVFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorFourVariableModelling.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
-        clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        clsGLMFunction.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
         clsFirstPowerOperator.SetOperation("^")
         clsFirstPowerOperator.AddParameter("power", 2, iPosition:=1)
@@ -364,15 +364,15 @@ Public Class dlgFourVariableModelling
 
     Private Sub SetRCodeForControls(bReset As Object)
         bRCodeSet = False
-        ucrSaveModel.AddAdditionalRCode(clsGLM, 1)
-        ucrSaveModel.AddAdditionalRCode(clsGlmer, 2)
+        ucrSaveModel.AddAdditionalRCode(clsGLMFunction, 1)
+        ucrSaveModel.AddAdditionalRCode(clsGLMFunctioner, 2)
         ucrSaveModel.AddAdditionalRCode(clsLmer, 3)
-        ucrSaveModel.AddAdditionalRCode(clsAOV, 4)
+        ucrSaveModel.AddAdditionalRCode(clsAOVFunction, 4)
 
-        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorFourVariableModelling.GetParameter(), 1)
-        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGlmer, ucrSelectorFourVariableModelling.GetParameter(), 2)
+        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGLMFunction, ucrSelectorFourVariableModelling.GetParameter(), 1)
+        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGLMFunctioner, ucrSelectorFourVariableModelling.GetParameter(), 2)
         ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsLmer, ucrSelectorFourVariableModelling.GetParameter(), 3)
-        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsAOV, ucrSelectorFourVariableModelling.GetParameter(), 4)
+        ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsAOVFunction, ucrSelectorFourVariableModelling.GetParameter(), 4)
 
         ucrInputModelOperators1.SetName(clsOverallExplanatoryOperator.strOperation)
         ucrInputModelOperators2.SetName(clsSecoandndThirdExplanatoryOpertor.strOperation)
@@ -482,11 +482,11 @@ Public Class dlgFourVariableModelling
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText = "|") Then
                 clsLMOrGLM = clsLmer
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag <> "Normal" And ucrInputModelOperators2.GetText = "|") Then
-                clsLMOrGLM = clsGlmer
+                clsLMOrGLM = clsGLMFunctioner
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal_aov") Then
-                clsLMOrGLM = clsAOV
+                clsLMOrGLM = clsAOVFunction
             Else
-                clsLMOrGLM = clsGLM
+                clsLMOrGLM = clsGLMFunction
             End If
             ucrBaseFourVariableModelling.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If

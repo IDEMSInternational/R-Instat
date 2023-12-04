@@ -127,10 +127,8 @@ Public Class ucrDistributions
     End Sub
 
     Public Sub SetAOVDistributions()
-
         strDistributionType = "AOVFunctions"
         SetDistributions()
-
     End Sub
 
     Public Sub SetExactDistributions()  ' this addition is temporary
