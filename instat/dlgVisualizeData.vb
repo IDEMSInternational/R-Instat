@@ -27,6 +27,7 @@ Public Class dlgVisualizeData
     Private clsFilterFunction As New RFunction
     Private clsAsLogicalFunction As New RFunction
     Private clsRBinonFunction As New RFunction
+    Private clsGetVariableFunction As New RFunction
     Private clsNRowFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
@@ -69,7 +70,7 @@ Public Class dlgVisualizeData
         ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
         ucrByFactorsReceiver.strSelectorHeading = "Factors"
         ucrByFactorsReceiver.SetParameterIsString()
-        'ucrByFactorsReceiver.bWithQuotes = False
+        ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrByFactorsReceiver.bAddParameterIfEmpty = True
 
@@ -159,23 +160,27 @@ Public Class dlgVisualizeData
         clsRBinonFunction = New RFunction
         clsAsLogicalFunction = New RFunction
         clsNRowFunction = New RFunction
+        clsGetVariableFunction = New RFunction
 
         clsPipeOperator = New ROperator
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
 
         clsCurrBaseFunction = clsVisDatFunction
+        clsGetVariableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetVariableFunction.SetAssignTo("colnames")
+        clsGetVariableFunction.AddParameter("force_as_data_frame", "TRUE")
 
         clsVisDatFunction.SetPackageName("visdat")
         clsVisDatFunction.SetRCommand("vis_dat")
-        clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsVisDatFunction.AddParameter("sort_type", "FALSE", iPosition:=1)
         clsVisDatFunction.AddParameter("palette", Chr(34) & "default" & Chr(34), iPosition:=2)
         clsVisDatFunction.AddParameter("warn_large_data", "TRUE", iPosition:=3)
 
         clsVisMissFunction.SetPackageName("visdat")
         clsVisMissFunction.SetRCommand("vis_miss")
-        clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsVisMissFunction.AddParameter("cluster", "FALSE", iPosition:=1)
         clsVisMissFunction.AddParameter("sort_miss", "FALSE", iPosition:=2)
         clsVisMissFunction.AddParameter("show_perc", "TRUE", iPosition:=3)
@@ -230,7 +235,6 @@ Public Class dlgVisualizeData
         ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
-        ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
@@ -238,10 +242,13 @@ Public Class dlgVisualizeData
         ucrInputColour.SetRCode(clsVisValueFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
         ucrNudSamplingFunction.SetRCode(clsRBinonFunction, bReset)
+        If bReset Then
+            ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse Not ucrSaveGraph.IsComplete() OrElse (ucrNudMaximumSize.Visible = True AndAlso ucrNudMaximumSize.GetText = "") OrElse (ucrNudSamplingFunction.GetText = "") Then
+        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse (rdoNumeric.Checked AndAlso rdoWholeDataFrame.Checked) OrElse Not ucrSaveGraph.IsComplete() OrElse (ucrNudMaximumSize.Visible = True AndAlso ucrNudMaximumSize.GetText = "") OrElse (ucrNudSamplingFunction.GetText = "") Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -272,6 +279,11 @@ Public Class dlgVisualizeData
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
         AddRemoveDataHideOptionsButtons()
+        If rdoNumeric.Checked Then
+            rdoWholeDataFrame.Enabled = False
+        Else
+            rdoWholeDataFrame.Enabled = True
+        End If
     End Sub
 
     Private Sub AddRemoveDataHideOptionsButtons()
@@ -320,9 +332,9 @@ Public Class dlgVisualizeData
                 clsVisMissFunction.RemoveParameterByName("x")
                 clsVisValueFunction.RemoveParameterByName("x")
                 clsVisValueFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
-                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
+                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
-                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
             Else ' if it is not checked we run vis_dat(col = columns selected)
                 clsVisDatFunction.RemoveParameterByName("x")
                 clsVisGuessFunction.RemoveParameterByName("x")
@@ -340,9 +352,9 @@ Public Class dlgVisualizeData
             clsVisMissFunction.RemoveParameterByName("x")
             clsVisValueFunction.RemoveParameterByName("x")
             If ucrNudSamplingFunction.Value = 1 Then
-                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
             Else
                 clsPipeOperator.RemoveParameterByName("left")
@@ -365,5 +377,17 @@ Public Class dlgVisualizeData
         Else
             ucrReceiverVisualizeData.SetMeAsReceiver()
         End If
+    End Sub
+    Private Sub ucrByFactorsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrByFactorsReceiver.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged
+        If ucrReceiverVisualizeData.lstSelectedVariables.Items.Count <= 0 Then
+            Exit Sub
+        End If
+        Dim Lstvariable As List(Of String) = ucrReceiverVisualizeData.GetVariableNamesAsList
+        Dim StrFacetvariable As String = ucrByFactorsReceiver.GetVariableNames(False)
+        If Not ucrByFactorsReceiver.IsEmpty AndAlso Not Lstvariable.Contains(StrFacetvariable) Then
+            Lstvariable.Add(StrFacetvariable)
+        End If
+        clsGetVariableFunction.AddParameter("data_name", Chr(34) & ucrSelectorVisualizeData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetVariableFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(Lstvariable, bWithQuotes:=True), iPosition:=1)
     End Sub
 End Class
