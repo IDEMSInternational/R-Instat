@@ -586,7 +586,7 @@ Public Class sdgPlots
         ucrPnlColourPalette.AddRadioButton(rdoQualitative)
         ucrPnlColourPalette.AddRadioButton(rdoViridis)
         ucrPnlColourPalette.AddRadioButton(rdoGgthemes)
-        ucrPnlColourPalette.SetRDefault(rdoSequential)
+
         ucrPnlScale.AddRadioButton(rdoColour)
         ucrPnlScale.AddRadioButton(rdoFill)
 
