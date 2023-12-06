@@ -46,8 +46,6 @@ Public Class ucrSplitButton
     Public _bUseListBox As Boolean = False
     Public WithEvents _listBox As New ListBox()
 
-    Private tmpForm As New Form
-
     ' Event to be raised when ListBox selected index changes
     Public Event ListBoxSelectedIndexChanged As EventHandler
 
@@ -593,11 +591,12 @@ Public Class ucrSplitButton
         State = PushButtonState.Pressed
 
         If _bUseListBox Then
+            Dim tmpForm = New Form
             tmpForm.AutoScaleMode = AutoScaleMode.None
             tmpForm.FormBorderStyle = FormBorderStyle.None
             tmpForm.StartPosition = FormStartPosition.Manual
             tmpForm.ShowInTaskbar = False
-            tmpForm.Size = New Size(150, 100)
+            tmpForm.Size = New Size(150, 130)
             _listBox.BorderStyle = BorderStyle.FixedSingle
             _listBox.Dock = DockStyle.Fill ' Make the ListBox fill the form
             tmpForm.Controls.Add(_listBox)
@@ -622,7 +621,6 @@ Public Class ucrSplitButton
     Private Sub OnListBoxSelectedIndexChanged(sender As Object, e As EventArgs) Handles _listBox.SelectedIndexChanged
         ' Raise the custom event when ListBox selected index changes
         RaiseEvent ListBoxSelectedIndexChanged(sender, e)
-        tmpForm.Hide()
     End Sub
 
     Private Sub SplitMenuStrip_Opening(sender As Object, e As CancelEventArgs)
