@@ -67,14 +67,13 @@ Public Class dlgVisualizeData
 
         ucrByFactorsReceiver.SetParameter(New RParameter("facet", 3))
         ucrByFactorsReceiver.Selector = ucrSelectorVisualizeData
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        ucrByFactorsReceiver.strSelectorHeading = "Factors"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrByFactorsReceiver.bAddParameterIfEmpty = True
 
-        ucrPnlVisualizeData.AddToLinkedControls({ucrChkSortVariables, ucrChkFacet}, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrChkFacet, {rdoVisDat, rdoVisMiss, rdoNumeric}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat, rdoVisGuess}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
@@ -161,12 +160,12 @@ Public Class dlgVisualizeData
         clsAsLogicalFunction = New RFunction
         clsNRowFunction = New RFunction
         clsGetVariableFunction = New RFunction
-
         clsPipeOperator = New ROperator
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
 
         clsCurrBaseFunction = clsVisDatFunction
+
         clsGetVariableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetVariableFunction.SetAssignTo("colnames")
         clsGetVariableFunction.AddParameter("force_as_data_frame", "TRUE")
@@ -189,7 +188,7 @@ Public Class dlgVisualizeData
 
         clsVisValueFunction.SetPackageName("visdat")
         clsVisValueFunction.SetRCommand("vis_value")
-        clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsVisValueFunction.AddParameter("viridis_option", Chr(34) & "A" & Chr(34), iPosition:=1)
         clsVisValueFunction.AddParameter("na_colour", Chr(34) & "grey" & Chr(34), iPosition:=2)
 
@@ -265,15 +264,19 @@ Public Class dlgVisualizeData
 
     Private Sub ucrPnlVisualizeData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVisualizeData.ControlValueChanged
         If rdoVisDat.Checked Then
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger"})
             ucrSaveGraph.SetPrefix("vis_dat")
             clsCurrBaseFunction = clsVisDatFunction
         ElseIf rdoVisMiss.Checked Then
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger"})
             ucrSaveGraph.SetPrefix("vis_miss")
             clsCurrBaseFunction = clsVisMissFunction
         ElseIf rdoVisGuess.Checked Then
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger"})
             ucrSaveGraph.SetPrefix("vis_guess")
             clsCurrBaseFunction = clsVisGuessFunction
         ElseIf rdoNumeric.Checked Then
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "interger"})
             ucrSaveGraph.SetPrefix("vis_value")
             clsCurrBaseFunction = clsVisValueFunction
         End If
@@ -288,9 +291,9 @@ Public Class dlgVisualizeData
 
     Private Sub AddRemoveDataHideOptionsButtons()
         If rdoWholeDataFrame.Checked Then
-            ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
-            ucrSelectorVisualizeData.btnAdd.Visible = False
-            ucrSelectorVisualizeData.btnDataOptions.Visible = False
+            'ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
+            'ucrSelectorVisualizeData.btnAdd.Visible = False
+            'ucrSelectorVisualizeData.btnDataOptions.Visible = False
         ElseIf rdoSelectedColumn.Checked Then
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
@@ -331,7 +334,7 @@ Public Class dlgVisualizeData
                 clsVisGuessFunction.RemoveParameterByName("x")
                 clsVisMissFunction.RemoveParameterByName("x")
                 clsVisValueFunction.RemoveParameterByName("x")
-                clsVisValueFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
+                clsVisValueFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(True), bIncludeArgumentName:=False, iPosition:=0)
                 clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -352,9 +355,9 @@ Public Class dlgVisualizeData
             clsVisMissFunction.RemoveParameterByName("x")
             clsVisValueFunction.RemoveParameterByName("x")
             If ucrNudSamplingFunction.Value = 1 Then
-                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=clsGetVariableFunction, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisValueFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
             Else
                 clsPipeOperator.RemoveParameterByName("left")
@@ -378,6 +381,7 @@ Public Class dlgVisualizeData
             ucrReceiverVisualizeData.SetMeAsReceiver()
         End If
     End Sub
+
     Private Sub ucrByFactorsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrByFactorsReceiver.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged
         If ucrReceiverVisualizeData.lstSelectedVariables.Items.Count <= 0 Then
             Exit Sub
