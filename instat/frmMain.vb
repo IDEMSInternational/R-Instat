@@ -2632,4 +2632,8 @@ Public Class frmMain
         dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
         dlgPICSARainfall.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
+        dlgSeasonalGraph.ShowDialog()
+    End Sub
 End Class

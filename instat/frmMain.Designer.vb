@@ -678,6 +678,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeSeasonalGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2139,7 +2140,7 @@ Partial Class frmMain
         '
         'mnuClimaticDescribe
         '
-        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeTrendGraph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator17, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots})
+        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeTrendGraph, Me.mnuClimaticDescribeSeasonalGraph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator17, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots})
         Me.mnuClimaticDescribe.Name = "mnuClimaticDescribe"
         Me.mnuClimaticDescribe.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticDescribe.Text = "Describe"
@@ -5071,6 +5072,12 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuClimaticDescribeSeasonalGraph
+        '
+        Me.mnuClimaticDescribeSeasonalGraph.Name = "mnuClimaticDescribeSeasonalGraph"
+        Me.mnuClimaticDescribeSeasonalGraph.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeSeasonalGraph.Text = "Seasonal Graph..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5763,4 +5770,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticDescribeWindPollutionRose As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeOtherRosePlots As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeTrendGraph As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDescribeSeasonalGraph As ToolStripMenuItem
 End Class
