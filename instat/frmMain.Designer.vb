@@ -264,6 +264,7 @@ Partial Class frmMain
         Me.mnuClimaticDescribeSPISPEI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeClimograph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeTrendGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeSeasonalGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeIDF = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeWindRose = New System.Windows.Forms.ToolStripMenuItem()
@@ -678,7 +679,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDescribeSeasonalGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2180,6 +2180,13 @@ Partial Class frmMain
         Me.mnuClimaticDescribeTrendGraph.Name = "mnuClimaticDescribeTrendGraph"
         Me.mnuClimaticDescribeTrendGraph.Size = New System.Drawing.Size(211, 22)
         Me.mnuClimaticDescribeTrendGraph.Text = "Trend Graph..."
+        '
+        'mnuClimaticDescribeSeasonalGraph
+        '
+        Me.mnuClimaticDescribeSeasonalGraph.Enabled = False
+        Me.mnuClimaticDescribeSeasonalGraph.Name = "mnuClimaticDescribeSeasonalGraph"
+        Me.mnuClimaticDescribeSeasonalGraph.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeSeasonalGraph.Text = "Seasonal Graph..."
         '
         'mnuClimaticDescribeIDF
         '
@@ -5071,12 +5078,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuClimaticDescribeSeasonalGraph
-        '
-        Me.mnuClimaticDescribeSeasonalGraph.Name = "mnuClimaticDescribeSeasonalGraph"
-        Me.mnuClimaticDescribeSeasonalGraph.Size = New System.Drawing.Size(211, 22)
-        Me.mnuClimaticDescribeSeasonalGraph.Text = "Seasonal Graph..."
         '
         'frmMain
         '
