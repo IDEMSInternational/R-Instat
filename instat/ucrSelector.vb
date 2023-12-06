@@ -65,9 +65,10 @@ Public Class ucrSelector
         LoadList()
         'always return the focus to the first Receiver when re-opening the dialogue.
         If lstOrderedReceivers.Count > 0 Then
-            Dim lstVisibleReceivers = lstOrderedReceivers.Where(Function(ctrl) ctrl.Visible).ToList()
+            Dim lstVisibleReceivers As List(Of ucrReceiver)
+            lstVisibleReceivers = lstOrderedReceivers.Where(Function(ctrl) ctrl.Visible).ToList()
             lstVisibleReceivers = lstVisibleReceivers.OrderBy(Function(ucr) ucr.TabIndex).ToList()
-            SetCurrentReceiver(lstVisibleReceivers(0))
+            SetCurrentReceiver(lstVisibleReceivers(0)) 'set the focus to the first Receiver in the dialogue.
         End If
     End Sub
 
