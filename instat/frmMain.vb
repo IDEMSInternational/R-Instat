@@ -2501,11 +2501,6 @@ Public Class frmMain
         dlgRandomSplit.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
-    End Sub
-
     'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
     '    dlgApsimx.ShowDialog()
     'End Sub
