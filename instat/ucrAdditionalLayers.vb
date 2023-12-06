@@ -88,9 +88,9 @@ Public Class ucrAdditionalLayers
 
     Private Sub ucrAdditionalLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetEditDeleteEnabled()
-        cmdAdd.AddItemsToListbox({"geom_boxplot", "geom_bar", "geom_count", "geom_col", "geom_density", "geom_tile",
-                                "geom_jitter", "geom_histogram", "geom_contour", "ggridges", "geom_density_ridges",
-                                "geom_label", "geom_label_repel", "geom_line", "geom_point", "geom_rug", "geom_smooth"})
+        cmdAdd.AddItemsToListbox({"geom_bar", "geom_boxplot", "geom_categorical_model", "geom_col", "geom_contour", "geom_count", "geom_density", "geom_density_ridges",
+                                  "geom_histogram", "geom_jitter", "geom_label", "geom_label_repel", "geom_line", "geom_parallel_slopes", "geom_point",
+                                  "geom_rug", "geom_smooth", "geom_text", "geom_text_repel", "geom_tile"})
         cmdAdd._bUseListBox = True
     End Sub
 
