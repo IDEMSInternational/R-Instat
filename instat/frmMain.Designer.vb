@@ -261,10 +261,10 @@ Partial Class frmMain
         Me.mnuClimaticDescribeSummarise23Variables = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeGraph23Variables = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeSPISPEI = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeClimograph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeIDF = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeWindRose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticDescribeOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
@@ -678,6 +678,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDescribeTrendGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2139,7 +2140,7 @@ Partial Class frmMain
         '
         'mnuClimaticDescribe
         '
-        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator17, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots})
+        Me.mnuClimaticDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDescribeSummarise23Variables, Me.mnuClimaticDescribeGraph23Variables, Me.ToolStripSeparator31, Me.mnuClimaticDescribeSPISPEI, Me.mnuClimaticDescribeClimograph, Me.mnuClimaticDescribeTrendGraph, Me.mnuClimaticDescribeIDF, Me.ToolStripSeparator17, Me.mnuClimaticDescribeWindRose, Me.mnuClimaticDescribeWindPollutionRose, Me.mnuClimaticDescribeOtherRosePlots})
         Me.mnuClimaticDescribe.Name = "mnuClimaticDescribe"
         Me.mnuClimaticDescribe.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticDescribe.Text = "Describe"
@@ -2161,11 +2162,6 @@ Partial Class frmMain
         Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
         Me.ToolStripSeparator31.Size = New System.Drawing.Size(208, 6)
         '
-        'ToolStripSeparator17
-        '
-        Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
-        Me.ToolStripSeparator17.Size = New System.Drawing.Size(208, 6)
-        '
         'mnuClimaticDescribeSPISPEI
         '
         Me.mnuClimaticDescribeSPISPEI.Name = "mnuClimaticDescribeSPISPEI"
@@ -2185,6 +2181,11 @@ Partial Class frmMain
         Me.mnuClimaticDescribeIDF.Name = "mnuClimaticDescribeIDF"
         Me.mnuClimaticDescribeIDF.Size = New System.Drawing.Size(211, 22)
         Me.mnuClimaticDescribeIDF.Text = "IDF..."
+        '
+        'ToolStripSeparator17
+        '
+        Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
+        Me.ToolStripSeparator17.Size = New System.Drawing.Size(208, 6)
         '
         'mnuClimaticDescribeWindRose
         '
@@ -5071,6 +5072,12 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuClimaticDescribeTrendGraph
+        '
+        Me.mnuClimaticDescribeTrendGraph.Name = "mnuClimaticDescribeTrendGraph"
+        Me.mnuClimaticDescribeTrendGraph.Size = New System.Drawing.Size(211, 22)
+        Me.mnuClimaticDescribeTrendGraph.Text = "Trend Graph..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5084,9 +5091,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5766,4 +5771,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticDescribeWindRose As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeWindPollutionRose As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeOtherRosePlots As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDescribeTrendGraph As ToolStripMenuItem
 End Class

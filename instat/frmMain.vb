@@ -2632,4 +2632,9 @@ Public Class frmMain
     Private Sub mnuClimaticDescribeOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.ShowDialog()
+    End Sub
 End Class
