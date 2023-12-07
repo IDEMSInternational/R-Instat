@@ -67,7 +67,7 @@ Public Class dlgVisualizeData
 
         ucrByFactorsReceiver.SetParameter(New RParameter("facet", 3))
         ucrByFactorsReceiver.Selector = ucrSelectorVisualizeData
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factors"})
+        ucrByFactorsReceiver.SetIncludedDataTypes({"factor", "ordered,factor"})
         ucrByFactorsReceiver.SetSelectorHeading("Factor")
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
@@ -230,10 +230,9 @@ Public Class dlgVisualizeData
         ucrSaveGraph.AddAdditionalRCode(clsVisValueFunction, iAdditionalPairNo:=3)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
         ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), iAdditionalPairNo:=1)
-        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsVisMissFunction, ucrByFactorsReceiver.GetParameter(), iAdditionalPairNo:=1)
+        'ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsVisMissFunction, ucrByFactorsReceiver.GetParameter(), iAdditionalPairNo:=1)
 
-
-        ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
+        'ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
@@ -245,11 +244,12 @@ Public Class dlgVisualizeData
         ucrNudSamplingFunction.SetRCode(clsRBinonFunction, bReset)
         If bReset Then
             ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
+            ucrChkFacet.SetRCode(clsVisDatFunction, bReset)
         End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse (rdoNumeric.Checked AndAlso rdoWholeDataFrame.Checked) OrElse Not ucrSaveGraph.IsComplete() OrElse (ucrNudMaximumSize.Visible = True AndAlso ucrNudMaximumSize.GetText = "") OrElse (ucrNudSamplingFunction.GetText = "") Then
+        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse Not ucrSaveGraph.IsComplete() OrElse (ucrNudMaximumSize.Visible = True AndAlso ucrNudMaximumSize.GetText = "") OrElse (ucrNudSamplingFunction.GetText = "") Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -293,10 +293,16 @@ Public Class dlgVisualizeData
 
     Private Sub AddRemoveDataHideOptionsButtons()
         If rdoWholeDataFrame.Checked Then
-            'ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
-            'ucrSelectorVisualizeData.btnAdd.Visible = False
-            'ucrSelectorVisualizeData.btnDataOptions.Visible = False
-        ElseIf rdoSelectedColumn.Checked Then
+            If ucrChkFacet.Checked Then
+                ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
+                ucrSelectorVisualizeData.btnAdd.Visible = True
+                ucrSelectorVisualizeData.btnDataOptions.Visible = True
+            Else
+                ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
+                ucrSelectorVisualizeData.btnAdd.Visible = False
+                ucrSelectorVisualizeData.btnDataOptions.Visible = False
+            End If
+        Else
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
@@ -379,9 +385,19 @@ Public Class dlgVisualizeData
     Private Sub ucrChkFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFacet.ControlValueChanged
         If ucrChkFacet.Checked Then
             ucrByFactorsReceiver.SetMeAsReceiver()
+            If Not ucrByFactorsReceiver.IsEmpty Then
+                clsVisDatFunction.AddParameter("facet", ucrByFactorsReceiver.GetVariableNames(bWithQuotes:=False))
+                clsVisMissFunction.AddParameter("facet", ucrByFactorsReceiver.GetVariableNames(bWithQuotes:=False))
+            Else
+                clsVisDatFunction.RemoveParameterByName("facet")
+                clsVisMissFunction.RemoveParameterByName("facet")
+            End If
         Else
             ucrReceiverVisualizeData.SetMeAsReceiver()
+            clsVisDatFunction.RemoveParameterByName("facet")
+            clsVisMissFunction.RemoveParameterByName("facet")
         End If
+        AddRemoveDataHideOptionsButtons()
     End Sub
 
     Private Sub ucrByFactorsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrByFactorsReceiver.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged
