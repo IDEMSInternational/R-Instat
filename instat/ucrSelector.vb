@@ -68,7 +68,9 @@ Public Class ucrSelector
             Dim lstVisibleReceivers As List(Of ucrReceiver)
             lstVisibleReceivers = lstOrderedReceivers.Where(Function(ctrl) ctrl.Visible).ToList()
             lstVisibleReceivers = lstVisibleReceivers.OrderBy(Function(ucr) ucr.TabIndex).ToList()
-            SetCurrentReceiver(lstVisibleReceivers(0)) 'set the focus to the first Receiver in the dialogue.
+            If lstVisibleReceivers.Count > 0 Then
+                SetCurrentReceiver(lstVisibleReceivers(0)) 'set the focus to the first Receiver in the dialogue.
+            End If
         End If
     End Sub
 
