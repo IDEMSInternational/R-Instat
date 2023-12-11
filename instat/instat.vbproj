@@ -245,6 +245,12 @@
     <Compile Include="dlgFindInVariableOrFilter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgIDFCurves.Designer.vb">
+      <DependentUpon>dlgIDFCurves.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgIDFCurves.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -3043,6 +3049,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgIDFCurves.resx">
+      <DependentUpon>dlgIDFCurves.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
