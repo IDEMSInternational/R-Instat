@@ -2501,11 +2501,6 @@ Public Class frmMain
         dlgRandomSplit.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
-    End Sub
-
     'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
     '    dlgApsimx.ShowDialog()
     'End Sub
@@ -2631,5 +2626,18 @@ Public Class frmMain
 
     Private Sub mnuClimaticDescribeOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
+        dlgSeasonalGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeIDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeIDF.Click
+        dlgIDFCurves.ShowDialog()
     End Sub
 End Class
