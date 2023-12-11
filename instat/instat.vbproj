@@ -263,6 +263,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSeasonalGraph.Designer.vb">
+      <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSurvey.Designer.vb">
       <DependentUpon>dlgSurvey.vb</DependentUpon>
     </Compile>
@@ -3070,6 +3076,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSearch.resx">
       <DependentUpon>dlgSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalGraph.resx">
+      <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>

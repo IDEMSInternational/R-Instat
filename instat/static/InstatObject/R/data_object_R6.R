@@ -434,7 +434,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     }
 
     if(convert_to_character) {
-      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE) 
+      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE, use_column_selection = use_column_selection) 
       scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
       return(convert_to_character_matrix(data = out, format_decimal_places =  TRUE, decimal_places =  decimal_places, is_scientific = scientific_notation))
     }
@@ -447,7 +447,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
 )
 
 # As a temp fix to rlink crashing here we access private$data directly
-DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
+DataSheet$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE, use_column_selection = TRUE) {
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
@@ -670,7 +670,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       if(require_correct_length) stop("Length of new column must be divisible by the length of the data frame")
       else curr_col <- rep(curr_col, length.out = self$get_data_frame_length())
     }
-    if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name[[i]])
+    if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     curr_col_name <- make.names(iconv(curr_col_name, to = "ASCII//TRANSLIT", sub = "."))
     new_col_names <- c(new_col_names, curr_col_name)
@@ -3239,8 +3239,13 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
       col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
     all_factors <- self$get_columns_from_data(factors, use_current_filter = FALSE)
-    first_factor <- self$get_columns_from_data(factors[1], use_current_filter = FALSE)
-    if(dplyr::n_distinct(interaction(all_factors, drop = TRUE))!= dplyr::n_distinct(first_factor)) stop("The multiple factor variables are not in sync. Should have same number of levels.")
+    factor_combinations <- combn(names(all_factors), 2, simplify = FALSE)
+    for (combo in factor_combinations) {
+        factors_check <- all_factors[, combo]
+        if (nrow(unique(factors_check)) != nrow(unique(all_factors))) {
+            stop("Two factors are essentially the same variable.")
+        }
+    }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
     date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
     date_lengths <- grouped_data %>% dplyr::summarise(count = n())

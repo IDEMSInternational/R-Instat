@@ -25,6 +25,7 @@ Public Class Distribution
     Public strDFunctionName As String = ""
     Public strExactName As String = ""
     Public strGLMFunctionName As String = ""
+    Public strAOVFunctionName As String = ""
 
     Public bIncluded As Boolean = True
     Public bNumeric As Boolean = False
@@ -77,7 +78,7 @@ Public Class Distribution
     End Sub
 
     Public Function IsDistributionFunction(strFunctionName As String) As Boolean
-        Dim strNames() As String = {strRFunctionName, strPFunctionName, strQFunctionName, strDFunctionName, strExactName, strGLMFunctionName}
+        Dim strNames() As String = {strRFunctionName, strPFunctionName, strQFunctionName, strDFunctionName, strExactName, strGLMFunctionName, strAOVFunctionName}
         Return strNames.Contains(strFunctionName)
     End Function
 End Class
