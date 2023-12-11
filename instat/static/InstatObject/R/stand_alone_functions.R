@@ -2554,6 +2554,12 @@ is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
 
+is.containPartialValueLabel <- function(x) {
+  if(is.containValueLabel(x)) {
+    return(!all(x[!is.na(x)] %in% attr(x, labels_label)))
+  }
+  else{return(FALSE)}
+}
 
 read_corpora <- function(data){
   data_all <- NULL
