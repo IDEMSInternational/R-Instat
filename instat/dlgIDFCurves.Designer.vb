@@ -34,7 +34,7 @@ Partial Class dlgIDFCurves
         Me.MinimizeBox = False
         Me.Name = "dlgIDFCurves"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgIDFCurves"
+        Me.Text = "IDF Curves"
         Me.ResumeLayout(False)
 
     End Sub
