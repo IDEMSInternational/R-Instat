@@ -2908,6 +2908,105 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
   else return(sprintf("file://%s", file))
 }
 
+# for issue 8342 - adding in a count of the number of elements that have missing values by period (and station)
+cumulative_inventory <- function(data, station = NULL, from, to){
+  if (is.null(station)){
+    data <- data %>%
+      dplyr::group_by(.data[[from]], .data[[to]]) %>%
+      dplyr::mutate(cum=dplyr::n())
+    data <- data %>%
+      dplyr::group_by(.data[[from]]) %>%
+      dplyr::mutate(cum1 = dplyr::n()) %>% 
+      dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
+                                  yes = cum,  
+                                  no = ifelse(cum == max(cum),
+                                              cum,
+                                              max(cum) + 0.5)))
+  } else {
+      data <- data %>%
+        dplyr::group_by(.data[[station]], .data[[from]], .data[[to]]) %>%
+        dplyr::mutate(cum=dplyr::n())
+      data <- data %>%
+        dplyr::group_by(.data[[station]], .data[[from]]) %>%
+        dplyr::mutate(cum1 = dplyr::n()) %>% 
+        dplyr::mutate(cum1 = ifelse(cum == cum1, # are they all in the same period?
+                                    yes = cum,  
+                                    no = ifelse(cum == max(cum),
+                                                cum,
+                                                max(cum) + 0.5)))
+    }
+    return(data)
+}
+
+getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
+  if(use_regex){
+    # Find the rows that match the search text using regex
+    matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
+  }else if (is.na(searchText)){
+    matchingRows <- apply(data[, column, drop = FALSE], 1, function(row) any(is.na(row)))
+  }else{
+    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
+  }
+  # Get the row headers where the search text is found
+  rowHeaders <- rownames(data)[matchingRows]
+  
+  # Return the row headers
+  return(rowHeaders)
+}
+
+# Custom function to convert character to list of numeric vector
+convert_to_list <- function(x) {
+  if (grepl("^c\\(", x)) {
+    x <- gsub("^c\\(|\\)$", "", x)  # Remove 'c(' and ')'
+    return(as.numeric(unlist(strsplit(x, ","))))
+  } else if (grepl(":", x)) {
+    x <- gsub(":", ",", x, fixed = TRUE)  # Replace ':' with ','
+    return(as.numeric(unlist(strsplit(x, ","))))
+  } else {
+    return(as.numeric(x))
+  }
+}
+
+getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = TRUE, give.lines = FALSE, local = FALSE, echo = TRUE, verbose = getOption("verbose"), setRNG = FALSE, ask = getOption("example.ask"), prompt.prefix = abbreviate(topic, 6), run.dontrun = FALSE, run.donttest = interactive()) {
+  if (!character.only) {
+    topic <- substitute(topic)
+    if (!is.character(topic))
+      topic <- deparse(topic)[1L]
+  }
+  pkgpaths <- find.package(package, lib.loc, verbose = verbose)
+  file <- utils:::index.search(topic, pkgpaths, firstOnly = TRUE)
+  if (!length(file)) {
+    warning(gettextf("no help found for %s", sQuote(topic)),
+            domain = NA)
+    return(character())
+  }
+  if (verbose)
+    cat("Found file =", sQuote(file), "\n")
+  packagePath <- dirname(dirname(file))
+  pkgname <- basename(packagePath)
+  lib <- dirname(packagePath)
+  tf <- tempfile("Rex")
+  tools::Rd2ex(utils:::.getHelpFile(file), tf, commentDontrun = !run.dontrun,
+               commentDonttest = !run.donttest)
+  if (!file.exists(tf)) {
+    if (give.lines)
+      return(character())
+    warning(gettextf("%s has a help file but no examples",
+                     sQuote(topic)), domain = NA)
+    return(character())
+  }
+  on.exit(unlink(tf))
+  example_text <- readLines(tf)
+  example_text <- paste(example_text, collapse = "\n")
+  if (give.lines) {
+    return(example_text)
+  }
+  if (echo) {
+    cat(example_text)
+  }
+  return(example_text)
+}
+
 WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rain){
   if (water_balance >= frac*capacity){
     evaporation <- evaporation_value
@@ -2929,6 +3028,3 @@ WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rai
   }
   return(evaporation)
 }
-
-
-               

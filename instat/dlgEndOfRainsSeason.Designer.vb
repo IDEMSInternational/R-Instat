@@ -41,7 +41,6 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrInputEndRainDoy = New instat.ucrInputTextBox()
         Me.rdoEndOfRains = New System.Windows.Forms.RadioButton()
         Me.ucrInputEndofRainsDate = New instat.ucrInputTextBox()
-        Me.lblReplaceNA = New System.Windows.Forms.Label()
         Me.ucrInputEndofSeasonOccurence = New instat.ucrInputTextBox()
         Me.ucrInputSeasonDoy = New instat.ucrInputTextBox()
         Me.ucrInputEndofSeasonDate = New instat.ucrInputTextBox()
@@ -67,7 +66,6 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrChkWB = New instat.ucrCheck()
         Me.rdoEndOfSeasons = New System.Windows.Forms.RadioButton()
         Me.ucrPnlEndOfRainsAndSeasons = New instat.UcrPanel()
-        Me.ucrInputReplaceNA = New instat.ucrInputTextBox()
         Me.ucrReceiverEvaporation = New instat.ucrReceiverSingle()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrPnlEvaporation = New instat.UcrPanel()
@@ -130,15 +128,6 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrInputEndofRainsDate.Name = "ucrInputEndofRainsDate"
         Me.ucrInputEndofRainsDate.Size = New System.Drawing.Size(93, 17)
         Me.ucrInputEndofRainsDate.TabIndex = 36
-        '
-        'lblReplaceNA
-        '
-        Me.lblReplaceNA.AutoSize = True
-        Me.lblReplaceNA.Location = New System.Drawing.Point(80, 411)
-        Me.lblReplaceNA.Name = "lblReplaceNA"
-        Me.lblReplaceNA.Size = New System.Drawing.Size(90, 13)
-        Me.lblReplaceNA.TabIndex = 113
-        Me.lblReplaceNA.Text = "Replace NA with:"
         '
         'ucrInputEndofSeasonOccurence
         '
@@ -406,18 +395,6 @@ Partial Class dlgEndOfRainsSeason
         Me.ucrPnlEndOfRainsAndSeasons.Size = New System.Drawing.Size(268, 33)
         Me.ucrPnlEndOfRainsAndSeasons.TabIndex = 117
         '
-        'ucrInputReplaceNA
-        '
-        Me.ucrInputReplaceNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputReplaceNA.AutoSize = True
-        Me.ucrInputReplaceNA.IsMultiline = False
-        Me.ucrInputReplaceNA.IsReadOnly = False
-        Me.ucrInputReplaceNA.Location = New System.Drawing.Point(175, 406)
-        Me.ucrInputReplaceNA.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputReplaceNA.Name = "ucrInputReplaceNA"
-        Me.ucrInputReplaceNA.Size = New System.Drawing.Size(52, 21)
-        Me.ucrInputReplaceNA.TabIndex = 114
-        '
         'ucrReceiverEvaporation
         '
         Me.ucrReceiverEvaporation.AutoSize = True
@@ -658,7 +635,6 @@ Partial Class dlgEndOfRainsSeason
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(477, 549)
         Me.Controls.Add(Me.rdoEndOfRains)
-        Me.Controls.Add(Me.lblReplaceNA)
         Me.Controls.Add(Me.rdoVariableEvaporation)
         Me.Controls.Add(Me.grpEndofSeason)
         Me.Controls.Add(Me.cmdDoyRange)
@@ -676,7 +652,6 @@ Partial Class dlgEndOfRainsSeason
         Me.Controls.Add(Me.ucrChkWB)
         Me.Controls.Add(Me.rdoEndOfSeasons)
         Me.Controls.Add(Me.ucrPnlEndOfRainsAndSeasons)
-        Me.Controls.Add(Me.ucrInputReplaceNA)
         Me.Controls.Add(Me.ucrReceiverEvaporation)
         Me.Controls.Add(Me.ucrInputEvaporation)
         Me.Controls.Add(Me.ucrPnlEvaporation)
@@ -713,7 +688,6 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents ucrInputEndRainDoy As ucrInputTextBox
     Friend WithEvents rdoEndOfRains As RadioButton
     Friend WithEvents ucrInputEndofRainsDate As ucrInputTextBox
-    Friend WithEvents lblReplaceNA As Label
     Friend WithEvents ucrInputEndofSeasonOccurence As ucrInputTextBox
     Friend WithEvents ucrInputSeasonDoy As ucrInputTextBox
     Friend WithEvents ucrInputEndofSeasonDate As ucrInputTextBox
@@ -739,7 +713,6 @@ Partial Class dlgEndOfRainsSeason
     Friend WithEvents ucrChkWB As ucrCheck
     Friend WithEvents rdoEndOfSeasons As RadioButton
     Friend WithEvents ucrPnlEndOfRainsAndSeasons As UcrPanel
-    Friend WithEvents ucrInputReplaceNA As ucrInputTextBox
     Friend WithEvents ucrReceiverEvaporation As ucrReceiverSingle
     Friend WithEvents ucrInputEvaporation As ucrInputTextBox
     Friend WithEvents ucrPnlEvaporation As UcrPanel
