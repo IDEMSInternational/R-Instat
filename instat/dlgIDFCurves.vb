@@ -16,6 +16,44 @@
 
 Imports instat.Translations
 Public Class dlgIDFCurves
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private bResetRCode As Boolean = True
 
+    Private Sub dlgIDFCurves_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseDialog()
+
+    End Sub
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+    Private Sub TestOkEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
 End Class
