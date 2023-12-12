@@ -30,7 +30,7 @@ Partial Class dlgIDFCurves
         Me.lblRain = New System.Windows.Forms.Label()
         Me.ucrStationName = New instat.ucrInputTextBox()
         Me.lblStationName = New System.Windows.Forms.Label()
-        Me.UcrNud1 = New instat.ucrNud()
+        Me.ucrNudMaxPrec = New instat.ucrNud()
         Me.lblMinimumProp = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -118,18 +118,18 @@ Partial Class dlgIDFCurves
         Me.lblStationName.TabIndex = 7
         Me.lblStationName.Text = "Station Name"
         '
-        'UcrNud1
+        'ucrNudMaxPrec
         '
-        Me.UcrNud1.AutoSize = True
-        Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud1.Location = New System.Drawing.Point(365, 191)
-        Me.UcrNud1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Name = "UcrNud1"
-        Me.UcrNud1.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud1.TabIndex = 8
-        Me.UcrNud1.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxPrec.AutoSize = True
+        Me.ucrNudMaxPrec.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxPrec.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxPrec.Location = New System.Drawing.Point(365, 191)
+        Me.ucrNudMaxPrec.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxPrec.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxPrec.Name = "ucrNudMaxPrec"
+        Me.ucrNudMaxPrec.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxPrec.TabIndex = 8
+        Me.ucrNudMaxPrec.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMinimumProp
         '
@@ -146,7 +146,7 @@ Partial Class dlgIDFCurves
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 355)
         Me.Controls.Add(Me.lblMinimumProp)
-        Me.Controls.Add(Me.UcrNud1)
+        Me.Controls.Add(Me.ucrNudMaxPrec)
         Me.Controls.Add(Me.lblStationName)
         Me.Controls.Add(Me.ucrStationName)
         Me.Controls.Add(Me.lblRain)
@@ -175,5 +175,5 @@ Partial Class dlgIDFCurves
     Friend WithEvents lblDateTime As Label
     Friend WithEvents ucrReceiverPrec As ucrReceiverSingle
     Friend WithEvents lblMinimumProp As Label
-    Friend WithEvents UcrNud1 As ucrNud
+    Friend WithEvents ucrNudMaxPrec As ucrNud
 End Class

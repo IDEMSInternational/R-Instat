@@ -19,6 +19,7 @@ Public Class dlgIDFCurves
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetRCode As Boolean = True
+    Private clsIDFCurvesFunction As New RFunction
 
     Private Sub dlgIDFCurves_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -35,11 +36,34 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrIDFCurvesSelector.SetParameter(New RParameter("prdat", 0))
+        ucrIDFCurvesSelector.SetParameterIsrfunction()
+
+        ucrReceiverDateTime.SetParameter(New RParameter("clmn", 1))
+        ucrReceiverDateTime.Selector = ucrIDFCurvesSelector
+
+        ucrReceiverPrec.SetParameter(New RParameter("clmn", 1))
+        ucrReceiverPrec.Selector = ucrIDFCurvesSelector
+
+        ucrStationName.SetParameter(New RParameter("stname", 2))
+
+        ucrNudMaxPrec.SetParameter(New RParameter("mindpy", 3))
+        ucrNudMaxPrec.SetMinMax(0, 1)
+        ucrNudMaxPrec.Increment = 0.1
 
     End Sub
 
     Private Sub SetDefaults()
+        clsIDFCurvesFunction = New RFunction
 
+        ucrIDFCurvesSelector.Reset()
+        ucrReceiverDateTime.SetMeAsReceiver()
+
+        clsIDFCurvesFunction.SetPackageName("climatol")
+        clsIDFCurvesFunction.SetRCommand("IDFcurves")
+        clsIDFCurvesFunction.AddParameter("na.code", "NA", iPosition:=0)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsIDFCurvesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
