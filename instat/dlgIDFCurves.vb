@@ -19,7 +19,7 @@ Public Class dlgIDFCurves
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetRCode As Boolean = True
-    Private clsIDFCurvesFunction As New RFunction
+    Private clsIDFCurvesFunction, clsPmatchFunction, clsGetColumnsFunction, clsColumnsFunction As New RFunction
     Private clsVarsColumnsOperator As ROperator
 
     Private Sub dlgIDFCurves_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -56,24 +56,44 @@ Public Class dlgIDFCurves
 
     Private Sub SetDefaults()
         clsIDFCurvesFunction = New RFunction
+        clsPmatchFunction = New RFunction
+        clsGetColumnsFunction = New RFunction
+
+        clsColumnsFunction = New RFunction
+
         clsVarsColumnsOperator = New ROperator
 
         ucrIDFCurvesSelector.Reset()
         ucrReceiverDateTime.SetMeAsReceiver()
 
+        clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnsFunction.SetAssignTo("col_data")
+
         clsIDFCurvesFunction.SetPackageName("climatol")
         clsIDFCurvesFunction.SetRCommand("IDFcurves")
-        clsIDFCurvesFunction.AddParameter("na.code", "NA", iPosition:=0)
+        clsIDFCurvesFunction.AddParameter("clmn", clsRFunctionParameter:=clsPmatchFunction, iPosition:=2)
+        clsIDFCurvesFunction.AddParameter("na.code", "NA", iPosition:=3)
 
         clsVarsColumnsOperator.SetOperation("", bBracketsTemp:=False)
         clsVarsColumnsOperator.SetAssignTo("var_2")
+
+        clsColumnsFunction.SetRCommand("colnames")
+
+
+        clsPmatchFunction.SetRCommand("pmatch")
+        clsPmatchFunction.AddParameter("elements", clsRFunctionParameter:=clsColumnsFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsPmatchFunction.AddParameter("duplicates.ok", "TRUE", iPosition:=1)
+        clsPmatchFunction.AddParameter("cols", clsROperatorParameter:=clsVarsColumnsOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsPmatchFunction.SetAssignTo("data_file")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsIDFCurvesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrIDFCurvesSelector.SetRCode(clsIDFCurvesFunction, bReset)
-        ucrReceiverDateTime.SetRCode(clsIDFCurvesFunction, bReset)
+        ucrIDFCurvesSelector.SetRCode(clsGetColumnsFunction, bReset)
+        ucrReceiverDateTime.SetRCode(clsGetColumnsFunction, bReset)
+        ucrNudMaxPrec.SetRCode(clsIDFCurvesFunction, bReset)
+        ucrStationName.SetRCode(clsIDFCurvesFunction, bReset)
 
     End Sub
 
@@ -88,18 +108,35 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub ucrReceiverDateTime_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDateTime.ControlValueChanged
-
+        If Not ucrReceiverDateTime.IsEmpty Then
+            clsVarsColumnsOperator.AddParameter("cols", ucrReceiverDateTime.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsVarsColumnsOperator.RemoveParameterByName("cols")
+        End If
     End Sub
 
     Private Sub ucrReceiverPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrec.ControlValueChanged
-
+        If Not ucrReceiverPrec.IsEmpty Then
+            clsVarsColumnsOperator.AddParameter("cols", ucrReceiverPrec.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsVarsColumnsOperator.RemoveParameterByName("cols")
+        End If
     End Sub
 
     Private Sub ucrNudMaxPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaxPrec.ControlValueChanged
-
+        clsIDFCurvesFunction.AddParameter("mindpy", ucrNudMaxPrec.GetText, iPosition:=5)
     End Sub
 
     Private Sub ucrStationName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrStationName.ControlValueChanged
+        If Not ucrStationName.IsEmpty Then
+            clsIDFCurvesFunction.AddParameter("stname", Chr(34) & ucrStationName.GetText & Chr(34), iPosition:=4)
+        Else
+            clsIDFCurvesFunction.RemoveParameterByName("stname")
+        End If
+    End Sub
 
+    Private Sub ucrIDFCurvesSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrIDFCurvesSelector.ControlValueChanged
+        clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrIDFCurvesSelector.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsIDFCurvesFunction.AddParameter("data", Chr(34) & ucrIDFCurvesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 End Class
