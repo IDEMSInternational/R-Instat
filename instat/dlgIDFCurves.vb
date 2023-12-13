@@ -20,6 +20,7 @@ Public Class dlgIDFCurves
     Private bReset As Boolean = True
     Private bResetRCode As Boolean = True
     Private clsIDFCurvesFunction As New RFunction
+    Private clsVarsColumnsOperator As ROperator
 
     Private Sub dlgIDFCurves_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -55,6 +56,7 @@ Public Class dlgIDFCurves
 
     Private Sub SetDefaults()
         clsIDFCurvesFunction = New RFunction
+        clsVarsColumnsOperator = New ROperator
 
         ucrIDFCurvesSelector.Reset()
         ucrReceiverDateTime.SetMeAsReceiver()
@@ -63,10 +65,15 @@ Public Class dlgIDFCurves
         clsIDFCurvesFunction.SetRCommand("IDFcurves")
         clsIDFCurvesFunction.AddParameter("na.code", "NA", iPosition:=0)
 
+        clsVarsColumnsOperator.SetOperation("", bBracketsTemp:=False)
+        clsVarsColumnsOperator.SetAssignTo("var_2")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsIDFCurvesFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrIDFCurvesSelector.SetRCode(clsIDFCurvesFunction, bReset)
+        ucrReceiverDateTime.SetRCode(clsIDFCurvesFunction, bReset)
 
     End Sub
 
@@ -80,4 +87,19 @@ Public Class dlgIDFCurves
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverDateTime_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDateTime.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrReceiverPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrec.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrNudMaxPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaxPrec.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrStationName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrStationName.ControlValueChanged
+
+    End Sub
 End Class
