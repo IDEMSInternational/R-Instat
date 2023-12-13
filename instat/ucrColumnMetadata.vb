@@ -508,6 +508,12 @@ Public Class ucrColumnMetadata
         EndWait()
     End Sub
 
+    Public Sub UseColumnSelectionInMetaData(bUseColumnSelecion As Boolean)
+        If GetCurrentDataFrameFocus() IsNot Nothing Then
+            GetCurrentDataFrameFocus().clsColumnMetaData.UseColumnSelectionInMetaData = bUseColumnSelecion
+        End If
+    End Sub
+
     Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click, mnuHelp2.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
     End Sub

@@ -245,6 +245,12 @@
     <Compile Include="dlgFindInVariableOrFilter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgIDFCurves.Designer.vb">
+      <DependentUpon>dlgIDFCurves.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgIDFCurves.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -261,6 +267,12 @@
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRandomSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSeasonalGraph.Designer.vb">
+      <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalGraph.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSurvey.Designer.vb">
@@ -3038,6 +3050,9 @@
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgIDFCurves.resx">
+      <DependentUpon>dlgIDFCurves.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
@@ -3070,6 +3085,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSearch.resx">
       <DependentUpon>dlgSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalGraph.resx">
+      <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>

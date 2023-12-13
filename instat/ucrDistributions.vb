@@ -126,6 +126,11 @@ Public Class ucrDistributions
 
     End Sub
 
+    Public Sub SetAOVDistributions()
+        strDistributionType = "AOVFunctions"
+        SetDistributions()
+    End Sub
+
     Public Sub SetExactDistributions()  ' this addition is temporary
         strDistributionType = "ExactSolution"
         SetDistributions()
@@ -156,6 +161,39 @@ Public Class ucrDistributions
                     bUse = (Dist.strExactName <> "")
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
+                        Select Case strDataType
+                            Case "logical"
+                                If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                            Case "numeric", "integer"
+                                If Dist.bNumeric Then
+                                    bUse = True
+                                End If
+                            Case "positive integer"
+                                If Dist.bPositiveInt Or Dist.bNumeric Then
+                                    bUse = True
+                                End If
+                            Case "two level numeric"
+                                If Dist.bNumeric Or Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                            Case "two level factor"
+                                If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
+                            Case "factor"
+                                If Dist.bFactor Then
+                                    bUse = True
+                                End If
+                            Case "ordered,factor"
+                                If Dist.bFactor Then
+                                    bUse = True
+                                End If
+                        End Select
+                    End If
+                Case "AOVFunctions"
+                    If (Dist.strAOVFunctionName <> "") Then
                         Select Case strDataType
                             Case "logical"
                                 If Dist.bTwoLevelFactor Then
@@ -239,6 +277,7 @@ Public Class ucrDistributions
         Dim clsGlmNegativeBinomialDist As New Distribution
         Dim clsPolarDist As New Distribution
         Dim clsMultinomDist As New Distribution
+        Dim clsNormalAovDist As New Distribution
 
         ' Normal distribution
         clsNormalDist.strNameTag = "Normal"
@@ -256,6 +295,15 @@ Public Class ucrDistributions
         clsNormalDist.AddParameter("mean", "Mean", 0)
         clsNormalDist.AddParameter("sd", "Standard_deviation", 1)
         lstAllDistributions.Add(clsNormalDist)
+
+        ' AOV distribution
+        clsNormalAovDist.strNameTag = "Normal_aov"
+        clsNormalAovDist.strRName = "aov"
+        clsNormalAovDist.strGLMFunctionName = "aov"
+        clsNormalAovDist.strAOVFunctionName = "aov"
+        clsNormalAovDist.bNumeric = True
+        clsNormalAovDist.bIsContinuous = True
+        lstAllDistributions.Add(clsNormalAovDist)
 
         ' Exponential Distribution
         clsExponentialDist.strNameTag = "Exponential"
@@ -662,6 +710,8 @@ Public Class ucrDistributions
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strQFunctionName)
                 Case "GLMFunctions"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strGLMFunctionName)
+                Case "AOVFunctions"
+                    clsCurrRFunction.SetRCommand(clsCurrDistribution.strAOVFunctionName)
                 Case "ExactSolution"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strExactName)
             End Select
