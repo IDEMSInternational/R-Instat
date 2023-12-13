@@ -20,12 +20,12 @@ Public Class dlgDescribeTwoVariable
     Private bReset As Boolean = True
     Private bRcodeSet As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Public strFirstVariablesType, strSecondVariableType As String
+    Public strFirstVariablesType, strSecondVariableType, strThirdVariableType As String
 
     'SUMMARY FUNCTIoNS
-    Private clsCombineFrequencyParametersFunction, clsCombineFunction,
-       clsDummyFunction, clsGroupByFunction, clsRAnovaFunction,
-        clsRCorrelationFunction, clsSkimrFunction, clsSummariesListFunction,
+    Private clsCombineFrequencyParametersFunction, clsCombineFunction, clsSummariseFunction,
+       clsDummyFunction, clsGroupByFunction, clsRAnovaFunction, clsCorrFunction, clsRAnovaTableFunction,
+        clsRCorrelationFunction, clsSkimrFunction, clsSummariesListFunction, clsCombineAnovaFunction,
         clsSummaryTableCombineFactorsFunction, clsSummaryTableFunction,
         clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction As New RFunction
 
@@ -38,7 +38,7 @@ Public Class dlgDescribeTwoVariable
         clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
         clsTabStylePxFunction, clsgtExtrasThemesFuction As New RFunction
 
-    Private clsGroupByPipeOperator, clsSummaryOperator As New ROperator
+    Private clsGroupByPipeOperator, clsSummaryOperator, clsGroupByPipeOperator2, clsGroupByPipeOperator3, clsGroupByPipeOperator4, clsGroupByPipeOperatorData As New ROperator
 
     Private clsFrequencyTablesFunction, clsgtFunction, clsCombineFrequencyFactorParameterFunction,
         clsSelectFunction, clsRenameCombineFunction As New RFunction
@@ -145,7 +145,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoTwoVariable, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
         ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
-        rdoThreeVariable.Enabled = False
+        'rdoThreeVariable.Enabled = False
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableThirdVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
@@ -155,7 +155,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableSecondFactor.SetParameterIsString()
         ucrReceiverThreeVariableSecondFactor.Selector = ucrSelectorDescribeTwoVar
-        ucrReceiverThreeVariableSecondFactor.SetIncludedDataTypes({"factor"})
+        'ucrReceiverThreeVariableSecondFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverThreeVariableSecondFactor.SetLinkedDisplayControl(lblThreeVariableSecondFactor)
 
         ucrSaveTable.SetDataFrameSelector(ucrSelectorDescribeTwoVar.ucrAvailableDataFrames)
@@ -199,8 +199,16 @@ Public Class dlgDescribeTwoVariable
         clsgtFunction = New RFunction
         clsSummaryOperator = New ROperator
         clsPivotWiderFunction = New RFunction
+        clsCombineAnovaFunction = New RFunction
+        clsSummariseFunction = New RFunction
+        clsCorrFunction = New RFunction
+        clsRAnovaTableFunction = New RFunction
         clsgtExtrasThemesFuction = New RFunction
         clsMutableOperator = New ROperator
+        clsGroupByPipeOperator2 = New ROperator
+        clsGroupByPipeOperator3 = New ROperator
+        clsGroupByPipeOperator4 = New ROperator
+        clsGroupByPipeOperatorData = New ROperator
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -234,8 +242,8 @@ Public Class dlgDescribeTwoVariable
 
         clsgtExtrasThemesFuction.SetPackageName("gtExtras")
 
-        clsGroupByFunction.SetPackageName("dplyr")
-        clsGroupByFunction.SetRCommand("group_by")
+        'clsGroupByFunction.SetPackageName("dplyr")
+        'clsGroupByFunction.SetRCommand("group_by")
 
         clsGroupByPipeOperator.SetOperation("%>%")
         clsGroupByPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction,
@@ -246,11 +254,40 @@ Public Class dlgDescribeTwoVariable
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
 
+        clsGroupByPipeOperator2.SetOperation("%>%")
+        clsGroupByPipeOperator2.AddParameter("left", clsROperatorParameter:=clsGroupByPipeOperatorData, iPosition:=0)
+        clsGroupByPipeOperator2.AddParameter("right", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+
+        clsGroupByPipeOperator3.SetOperation("%>%")
+        clsGroupByPipeOperator3.AddParameter("left", clsROperatorParameter:=clsGroupByPipeOperator2, iPosition:=0)
+        clsGroupByPipeOperator3.AddParameter("right", clsRFunctionParameter:=clsSummariseFunction, iPosition:=1)
+
+        clsGroupByPipeOperator4.SetOperation("%>%")
+        clsGroupByPipeOperator4.AddParameter("left", clsROperatorParameter:=clsGroupByPipeOperator3, iPosition:=0)
+        clsGroupByPipeOperator4.AddParameter("right", clsRFunctionParameter:=clsgtFunction, iPosition:=1)
+
+        clsGroupByPipeOperatorData.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
+        clsSummariseFunction.SetRCommand("summarise")
+        clsSummariseFunction.AddParameter("cor", clsRFunctionParameter:=clsCorrFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+
+        clsCorrFunction.SetRCommand("cor")
+
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
 
+        clsRAnovaTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
+        clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsRAnovaTableFunction.AddParameter("x_col_names", clsRFunctionParameter:=clsCombineAnovaFunction, iPosition:=1)
+        clsRAnovaTableFunction.AddParameter("y_col_name", clsRFunctionParameter:=clsCombineFunction, iPosition:=2)
+        clsRAnovaTableFunction.AddParameter("signif.stars", "FALSE", iPosition:=3)
+        clsRAnovaTableFunction.AddParameter("sign_level", "FALSE", iPosition:=4)
+        clsRAnovaTableFunction.AddParameter("means", "FALSE", iPosition:=5)
+
         clsCombineFunction.SetRCommand("c")
 
+        clsCombineAnovaFunction.SetRCommand("c")
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
 
@@ -373,7 +410,8 @@ Public Class dlgDescribeTwoVariable
                 OrElse (Not ucrReceiverThreeVariableSecondFactor.IsEmpty _
                 AndAlso Not ucrReceiverThreeVariableThirdVariable.IsEmpty) _
                 AndAlso (IsFactorByFactor() OrElse IsNumericByFactor() _
-                OrElse IsFactorByNumeric() OrElse IsNumericByNumeric())) AndAlso ucrSaveTable.IsComplete)
+                OrElse IsFactorByNumeric() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFNumericByNumeric() _
+                OrElse IsFactorByNumericByNumeric() OrElse IsNumericByFactorByNumeric() OrElse IsFactorByFactorByFactor() OrElse IsNumericByNumeric())) AndAlso ucrSaveTable.IsComplete)
     End Sub
 
     Private Function IsFactorByFactor() As Boolean
@@ -392,6 +430,30 @@ Public Class dlgDescribeTwoVariable
         Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric"
     End Function
 
+    Private Function IsNumericByNumericByFactor() As Boolean
+        Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "categorical"
+    End Function
+
+    Private Function IsNumericByFactorByFactor() As Boolean
+        Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical"
+    End Function
+
+    Private Function IsFactorByFactorByFactor() As Boolean
+        Return strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical"
+    End Function
+
+    Private Function IsNumericByFactorByNumeric() As Boolean
+        Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "numeric"
+    End Function
+
+    Private Function IsNumericByFNumericByNumeric() As Boolean
+        Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "numeric"
+    End Function
+
+    Private Function IsFactorByNumericByNumeric() As Boolean
+        Return strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "numeric"
+    End Function
+
     Private Sub ucrBaseDescribeTwoVar_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -404,7 +466,7 @@ Public Class dlgDescribeTwoVariable
                 sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
             End If
         ElseIf rdoThreeVariable.Checked Then
-            If IsFactorByNumeric() OrElse IsNumericByFactor() Then
+            If IsFactorByNumeric() Then
                 sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
             End If
         End If
@@ -436,6 +498,12 @@ Public Class dlgDescribeTwoVariable
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
             ucrChkOmitMissing.Visible = False
+        End If
+        If rdoThreeVariable.Checked Then
+            If IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+                ucrReorderSummary.Visible = False
+                cmdSummaries.Visible = False
+            End If
         End If
         cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
     End Sub
@@ -500,9 +568,36 @@ Public Class dlgDescribeTwoVariable
             ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
             ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveTable.SetCheckBoxText("Save Table")
+            If IsFactorByFactorByFactor() Then
+                ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+                clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
+                                                    strObjectName:="last_table")
+            End If
+            If IsFactorByNumericByNumeric() Then
+                ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator4)
+                clsGroupByPipeOperator4.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
+                                                    strObjectName:="last_table")
+            End If
+            If IsNumericByNumericByFactor() Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+            End If
+            If IsNumericByFNumericByNumeric() Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+            End If
+            If IsNumericByFactorByFactor() Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+            End If
+            If IsNumericByFactorByNumeric() Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+            End If
         End If
         FactorColumns()
-
     End Sub
 
     Private Sub UpdateCombineFactorParameterFunction()
@@ -568,6 +663,7 @@ Public Class dlgDescribeTwoVariable
 
         ChangeFirstTypeLabel()
         AssignSecondVariableType()
+        AssignThirdVariableType()
         ChangeBaseRCode()
         ManageControlsVisibility()
         UpdateSummaryTableFunction()
@@ -576,6 +672,12 @@ Public Class dlgDescribeTwoVariable
         AddRemoveNAParameter()
         HideFormatTableButton()
         FactorColumns()
+        AddRemoveFirstParam()
+        AddRemoveSecondParam()
+        AddRemoveThirdParam()
+        AddRemoveFirstAnovaParam()
+        AddRemoveSecondAnovaParam()
+        AddRemoveThirdAnovaParam()
     End Sub
 
     Private Sub HideFormatTableButton()
@@ -611,6 +713,42 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
+    Private Sub AddRemoveFirstParam()
+        If rdoThreeVariable.Checked Then
+            If IsFactorByNumericByNumeric() Then
+                If ucrReceiverFirstVars.IsEmpty Then
+                    clsGroupByFunction.RemoveParameterByName("var")
+                Else
+                    clsGroupByFunction.AddParameter("var", ucrReceiverFirstVars.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveSecondParam()
+        If rdoThreeVariable.Checked Then
+            If IsFactorByNumericByNumeric() Then
+                If ucrReceiverThreeVariableSecondFactor.IsEmpty Then
+                    clsCorrFunction.RemoveParameterByName("x")
+                Else
+                    clsCorrFunction.AddParameter("x", ucrReceiverThreeVariableSecondFactor.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveThirdParam()
+        If rdoThreeVariable.Checked Then
+            If IsFactorByNumericByNumeric() Then
+                If ucrReceiverThreeVariableThirdVariable.IsEmpty Then
+                    clsCorrFunction.RemoveParameterByName("y")
+                Else
+                    clsCorrFunction.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(False), iPosition:=2, bIncludeArgumentName:=False)
+                End If
+            End If
+        End If
+    End Sub
+
     Private Sub FactorColumns()
         If rdoTwoVariable.Checked Then
             clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
@@ -622,6 +760,54 @@ Public Class dlgDescribeTwoVariable
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
                 SummariesInRowsOrCols()
+            End If
+        End If
+        If rdoThreeVariable.Checked Then
+            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            If IsFactorByFactorByFactor() Then
+                clsSummaryTableFunction.AddParameter("factors", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")")
+                clsSummaryTableFunction.AddParameter("columns_to_summarise", Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34))
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text, iPosition:=0)
+            Else
+                clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+                clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
+                SummariesInRowsOrCols()
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveFirstAnovaParam()
+        If rdoThreeVariable.Checked Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+                If ucrReceiverFirstVars.IsEmpty Then
+                    clsCombineAnovaFunction.RemoveParameterByName("x")
+                Else
+                    clsCombineAnovaFunction.AddParameter("x", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveSecondAnovaParam()
+        If rdoThreeVariable.Checked Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+                If ucrReceiverThreeVariableSecondFactor.IsEmpty Then
+                    clsCombineAnovaFunction.RemoveParameterByName("y")
+                Else
+                    clsCombineAnovaFunction.AddParameter("y", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveThirdAnovaParam()
+        If rdoThreeVariable.Checked Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+                If ucrReceiverThreeVariableThirdVariable.IsEmpty Then
+                    clsCombineFunction.RemoveParameterByName("y")
+                Else
+                    clsCombineFunction.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                End If
             End If
         End If
     End Sub
@@ -702,7 +888,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverNumericVariable_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableThirdVariable.ControlValueChanged
-        AssignSecondVariableType()
+        AssignThirdVariableType()
         ManageControlsVisibility()
         UpdateCombineFactorParameterFunction()
         ChangeBaseRCode()
@@ -711,6 +897,12 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFrequencyParameters()
         AddRemoveNAParameter()
         HideFormatTableButton()
+        AddRemoveFirstParam()
+        AddRemoveThirdParam()
+        AddRemoveSecondParam()
+        AddRemoveFirstAnovaParam()
+        AddRemoveSecondAnovaParam()
+        AddRemoveThirdAnovaParam()
     End Sub
 
     Private Sub ChangeSumaryLabelText()
@@ -721,19 +913,30 @@ Public Class dlgDescribeTwoVariable
 
         If IsFactorByFactor() Then
             strSummaryName = "Frequency tables"
-        ElseIf IsNumericByFactor() Then
-            strSummaryName = "Summary tables"
         Else
             If rdoTwoVariable.Checked Then
                 If IsNumericByNumeric() Then
                     strSummaryName = "Correlations"
                 ElseIf IsFactorByNumeric() Then
                     strSummaryName = "ANOVA tables"
+                ElseIf IsNumericByFactor() Then
+                    strSummaryName = "Summary tables"
                 Else
                     strSummaryName = ""
                 End If
-            ElseIf rdoThreeVariable.Checked Then
-                strSummaryName = "Summary tables"
+            End If
+            If rdoThreeVariable.Checked Then
+                If IsFactorByNumericByNumeric() Then
+                    strSummaryName = "Correlations"
+                ElseIf IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() Then
+                    strSummaryName = "ANOVA tables"
+                ElseIf IsNumericByFactorByFactor() Then
+                    strSummaryName = "ANOVA tables"
+                ElseIf IsNumericByFactorByNumeric() Then
+                    strSummaryName = "ANOVA tables"
+                Else
+                    strSummaryName = "Summary tables"
+                End If
             End If
         End If
 
@@ -750,7 +953,7 @@ Public Class dlgDescribeTwoVariable
     Private Sub AssignSecondVariableType()
         If rdoTwoVariable.Checked OrElse rdoThreeVariable.Checked Then
             Dim ucrCurrentReceiver As ucrReceiverSingle = If(rdoTwoVariable.Checked,
-                ucrReceiverSecondTwoVariableFactor, ucrReceiverThreeVariableThirdVariable)
+                ucrReceiverSecondTwoVariableFactor, ucrReceiverThreeVariableSecondFactor)
             If Not ucrCurrentReceiver.IsEmpty Then
                 strSecondVariableType = If({"factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
                                   "categorical", "numeric")
@@ -817,6 +1020,25 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
+    Private Sub AssignThirdVariableType()
+        If rdoThreeVariable.Checked Then
+            Dim ucrCurrentReceiver As ucrReceiverSingle = ucrReceiverThreeVariableThirdVariable
+            If Not ucrCurrentReceiver.IsEmpty Then
+                strThirdVariableType = If({"factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
+                                  "categorical", "numeric")
+                lblThreeVariableCategorical.Text = strThirdVariableType
+                lblThreeVariableCategorical.ForeColor = SystemColors.Highlight
+
+            Else
+                strThirdVariableType = ""
+                lblThreeVariableCategorical.Text = "________"
+                lblThreeVariableCategorical.ForeColor = SystemColors.ControlText
+            End If
+            ChangeSumaryLabelText()
+        End If
+        ManageControlsVisibility()
+    End Sub
+
     Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged,
         ucrReceiverFirstVars.ControlContentsChanged
         ChangeFirstTypeLabel()
@@ -830,10 +1052,19 @@ Public Class dlgDescribeTwoVariable
         AddRemoveNAParameter()
         HideFormatTableButton()
         FactorColumns()
+        AddRemoveFirstParam()
+        AddRemoveFirstAnovaParam()
+        AddRemoveSecondAnovaParam()
+        AddRemoveThirdAnovaParam()
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
         UpdateCombineFactorParameterFunction()
+        AssignSecondVariableType()
+        AddRemoveFirstParam()
+        AddRemoveSecondParam()
+        AddRemoveFirstAnovaParam()
+        AddRemoveSecondAnovaParam()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
@@ -873,7 +1104,7 @@ Public Class dlgDescribeTwoVariable
                 bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverSecondTwoVariableFactor.GetVariableNames)
             Else
                 bContainedInMultipleReceiver = lstMultipleVariables.Contains(ucrReceiverThreeVariableSecondFactor.GetVariableNames) OrElse (
-                    lstMultipleVariables.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames) AndAlso strSecondVariableType = "categorical")
+                    lstMultipleVariables.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames))
             End If
         End If
 
@@ -958,4 +1189,5 @@ Public Class dlgDescribeTwoVariable
         ManageControlsVisibility()
         SummariesInRowsOrCols()
     End Sub
+
 End Class
