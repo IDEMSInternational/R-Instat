@@ -2636,4 +2636,8 @@ Public Class frmMain
     Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
         dlgSeasonalGraph.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticDescribeIDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeIDF.Click
+        dlgIDFCurves.ShowDialog()
+    End Sub
 End Class
