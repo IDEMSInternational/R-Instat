@@ -57,9 +57,10 @@ Public Class ucrReceiverMultiple
             Exit Sub
         End If
 
-        'then add the new items
+        'Then add the new items with limit check
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstActualItemsToAdd
             If iMaxItems <> 0 AndAlso lstSelectedVariables.Items.Count >= iMaxItems Then
+                MessageBox.Show($"Cannot add more than {iMaxItems} items.", "Item Limit Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Exit For ' Exit the loop if the maximum limit is reached
             End If
             lstSelectedVariables.Items.Add(New ListViewItem With {
