@@ -21,6 +21,7 @@ Public Class ucrReceiverMultiple
     Public bSingleType As Boolean = False
     ' If bSingleType and bCategoricalNumeric then categorical and numeric are the only considered types
     Public bCategoricalNumeric As Boolean = False
+    Public iMaxItems As Integer
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -58,6 +59,9 @@ Public Class ucrReceiverMultiple
 
         'then add the new items
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstActualItemsToAdd
+            If iMaxItems <> 0 AndAlso lstSelectedVariables.Items.Count >= iMaxItems Then
+                Exit For ' Exit the loop if the maximum limit is reached
+            End If
             lstSelectedVariables.Items.Add(New ListViewItem With {
                     .Name = kvpTempItem.Value,
                     .Text = kvpTempItem.Value,
