@@ -26,6 +26,7 @@ Public Class dlgUnstack
     Private clsDummyCarryFunction As New RFunction
     Private clsHierachyFunction As New RFunction
     Private clsSelectDataFunction As New RFunction
+    Private clsAddKeyFunction As New RFunction
     Private clsUnstackedOperator, clsCommaOperator, clsformulaOperator, clspipeOperator As New ROperator
     Private clsDcastFunction As New RFunction
     Private clsBaseRCode As New RCodeStructure
@@ -124,6 +125,7 @@ Public Class dlgUnstack
         clsformulaOperator = New ROperator
         clsDummyFunction = New RFunction
         clsDummyCarryFunction = New RFunction
+        clsAddKeyFunction = New RFunction
 
         clsDummyCarryFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
@@ -132,6 +134,10 @@ Public Class dlgUnstack
 
         ucrSelectorForUnstack.Reset()
         ucrNewDFName.Reset()
+
+
+        clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+        clsAddKeyFunction.AddParameter("key_name", "key", iPosition:=2)
 
         ' Operations
         clsformulaOperator.SetOperation("~")
@@ -172,9 +178,10 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsformulaOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("factor", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsAddKeyFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsformulaOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsCommaOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverFactorToUnstackby.AddAdditionalCodeParameterPair(clsSelectDataFunction, New RParameter("factor", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
         ucrNewDFName.AddAdditionalRCode(clsUnstackedOperator, iAdditionalPairNo:=1)
 
         ucrPnlUnstackCol.SetRCode(clsDummyFunction, bReset)
@@ -345,6 +352,7 @@ Public Class dlgUnstack
             clsBaseRCode = clsUnstackedOperator
             clsDummyFunction.AddParameter("checked", "hierarchy", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseROperator(clsUnstackedOperator)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, 0)
             clsDcastFunction.RemoveAssignTo()
         End If
         ucrNewDFName.SetRCode(clsBaseRCode)
