@@ -365,7 +365,9 @@ Public Class dlgUnstack
                 clsAddKeyFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
                 clsAddKeyFunction.AddParameter("col_names", ucrReceiverFactorToUnstackby.GetVariableNames(), iPosition:=1)
                 clsAddLinkFunction.AddParameter("to_data_frame", Chr(34) & strDataFrame & Chr(34), iPosition:=1)
-                clsAddLinkFunction.AddParameter("link_pairs", "names(" & ucrReceiverFactorToUnstackby.GetVariableNames() & ")", iPosition:=2)
+                Dim strLinkPair As String = "c(" & ucrReceiverFactorToUnstackby.GetVariableNames(False) & "=" &
+                                                ucrReceiverFactorToUnstackby.GetVariableNames() & ")"
+                clsAddLinkFunction.AddParameter("link_pairs", strLinkPair, iPosition:=2)
                 clsAddKeyFunction.iCallType = 0
                 clsAddLinkFunction.iCallType = 0
                 ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, 0)
