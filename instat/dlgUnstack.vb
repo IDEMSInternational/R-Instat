@@ -225,7 +225,7 @@ Public Class dlgUnstack
             clsSelectDataFunction.RemoveParameterByName("single")
             For Each strMultiple In ucrMultipleColumnsReceiver.GetVariableNamesAsList()
                 clsCommaMultiple.AddParameter(strMultiple, strMultiple, iPosition:=position)
-                position = position + 1
+                position += 1
             Next
             clsSelectDataFunction.AddParameter("Multiple_Values", clsROperatorParameter:=clsCommaMultiple, iPosition:=4, bIncludeArgumentName:=False)
             clsDcastFunction.AddParameter("values_from", ucrMultipleColumnsReceiver.GetVariableNames(False), iPosition:=2)
@@ -290,7 +290,7 @@ Public Class dlgUnstack
                 clsCarryColumnsOperator.AddParameter("factor", ucrReceiverFactorToUnstackby.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                 For Each strIndicatorVar As String In ucrReceiverCarryColumns.GetVariableNamesAsList
                     clsCarryColumnsOperator.AddParameter(i, strIndicatorVar, iPosition:=i)
-                    i = i + 1
+                    i += 1
                 Next
                 If ucrReceiverCarryColumns.GetVariableNamesAsList.Contains(strcoll) Then
                     clsCarryColumnsOperator.RemoveParameterByName("factor")
@@ -368,8 +368,6 @@ Public Class dlgUnstack
                 Dim strLinkPair As String = "c(" & ucrReceiverFactorToUnstackby.GetVariableNames(False) & "=" &
                                                 ucrReceiverFactorToUnstackby.GetVariableNames() & ")"
                 clsAddLinkFunction.AddParameter("link_pairs", strLinkPair, iPosition:=2)
-                clsAddKeyFunction.iCallType = 0
-                clsAddLinkFunction.iCallType = 0
                 ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, 0)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsAddLinkFunction, 1)
             End If
