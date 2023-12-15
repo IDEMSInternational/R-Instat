@@ -63,6 +63,15 @@ Public Class ucrSelector
         'always load selector contents on load event because contents may have been changed at R level 
         'and the control needs to refresh the data frame names.
         LoadList()
+        'always return the focus to the first Receiver when re-opening the dialogue.
+        If lstOrderedReceivers.Count > 0 Then
+            Dim lstVisibleReceivers As List(Of ucrReceiver)
+            lstVisibleReceivers = lstOrderedReceivers.Where(Function(ctrl) ctrl.Visible).ToList()
+            lstVisibleReceivers = lstVisibleReceivers.OrderBy(Function(ucr) ucr.TabIndex).ToList()
+            If lstVisibleReceivers.Count > 0 Then
+                SetCurrentReceiver(lstVisibleReceivers(0)) 'set the focus to the first Receiver in the dialogue.
+            End If
+        End If
     End Sub
 
     Protected Sub OnResetAll()
@@ -119,12 +128,11 @@ Public Class ucrSelector
         'set the type of 'elements' to show. If current receiver is set to a particular 'element' type then use it  
         strCurrentType = If(CurrentReceiver.bTypeSet, CurrentReceiver.GetItemType(), strType)
 
+        'holds the selector's list view 'fill conditions'
+        'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
+        Static _strCurrentSelectorFillCondition As String = ""
         'if selector contains columns check if fill conditions are just the same
         If strCurrentType = "column" Then
-
-            'holds the selector's list view 'fill conditions'
-            'used as a 'cache' to check if there is need to clear and refill list view based on supplied parameters
-            Static _strCurrentSelectorFillCondition As String = ""
 
             'check if the fill condition is the same, if it is then no need to refill the listview with the same data.
             'LoadList is called several times by different events raised in different places(e.g by linked receivers clearing and setting their contents ).
@@ -142,6 +150,9 @@ Public Class ucrSelector
             End If
 
             _strCurrentSelectorFillCondition = strNewSelectorFillCondition
+        Else
+            'reset selector fill conditions
+            _strCurrentSelectorFillCondition = ""
         End If
 
         'todo, for columns, the list view should be field with variables from the .Net metadata object

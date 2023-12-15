@@ -43,7 +43,8 @@ Public Class ucrDataViewReoGrid
 
         grdData.CurrentWorksheet.Columns = visiblePage.lstColumns.Count
 
-        If GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+        If GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso
+           GetCurrentDataFrameFocus.clsVisibleDataFramePage.UseColumnSelectionInDataView Then
             variableTextColour = Color.Red
         Else
             variableTextColour = Color.DarkBlue
