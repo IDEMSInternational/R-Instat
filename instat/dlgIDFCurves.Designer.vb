@@ -32,6 +32,7 @@ Partial Class dlgIDFCurves
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.ucrNudMaxPrec = New instat.ucrNud()
         Me.lblMinimumProp = New System.Windows.Forms.Label()
+        Me.ucrSave = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -140,11 +141,21 @@ Partial Class dlgIDFCurves
         Me.lblMinimumProp.TabIndex = 9
         Me.lblMinimumProp.Text = "Minimum Proportion"
         '
+        'ucrSave
+        '
+        Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSave.Location = New System.Drawing.Point(7, 264)
+        Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSave.Name = "ucrSave"
+        Me.ucrSave.Size = New System.Drawing.Size(401, 24)
+        Me.ucrSave.TabIndex = 70
+        '
         'dlgIDFCurves
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 355)
+        Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.lblMinimumProp)
         Me.Controls.Add(Me.ucrNudMaxPrec)
         Me.Controls.Add(Me.lblStationName)
@@ -176,4 +187,5 @@ Partial Class dlgIDFCurves
     Friend WithEvents ucrReceiverPrec As ucrReceiverSingle
     Friend WithEvents lblMinimumProp As Label
     Friend WithEvents ucrNudMaxPrec As ucrNud
+    Friend WithEvents ucrSave As ucrSave
 End Class
