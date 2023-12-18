@@ -558,10 +558,6 @@ Public Class dlgGeneralForGraphics
         OpenHelpPage()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrInputLegendPosition.ControlContentsChanged, ucrChkUseasNumeric.ControlContentsChanged, ucrChkLegend.ControlContentsChanged
-
-    End Sub
-
     Private Sub GgwordbuildToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GgwordbuildToolStripMenuItem.Click
         strPackageName = "ggwordbluid"
         OpenHelpPage()
