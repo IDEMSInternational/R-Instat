@@ -5537,4 +5537,8 @@ Public Class sdgPlots
         HideShowCanvaFill()
         GroupeColorScale()
     End Sub
+
+    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
+        dlgGeneralForGraphics.ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=True)
+    End Sub
 End Class
