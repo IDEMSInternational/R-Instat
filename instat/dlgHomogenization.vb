@@ -59,11 +59,29 @@ Public Class dlgHomogenization
         ucrReceiverDataFiles.Selector = ucrSelectorDataFiles
         ucrReceiverDataFiles.SetParameterIsString()
 
-        ucrReceiverStationFile.SetParameter(New RParameter("stncol", 3))
-        ucrReceiverStationFile.Selector = ucrSelectorStationFile
-        ucrReceiverStationFile.SetParameterIsString()
+        ucrReceiverLatitude.SetParameter(New RParameter("lat", 3, bNewIncludeArgumentName:=False))
+        ucrReceiverLatitude.Selector = ucrSelectorStationFile
+        ucrReceiverLatitude.SetParameterIsString()
+        ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
+        ucrReceiverLatitude.SetMeAsReceiver()
 
-        ucrInputClimateVariables.SetParameter(New RParameter("varcli", 4))
+        ucrReceiverLongtitude.Selector = ucrSelectorStationFile
+        ucrReceiverLongtitude.SetParameterIsString()
+        ucrReceiverLongtitude.SetLinkedDisplayControl(lblLongtude)
+
+        ucrReceiverElavation.Selector = ucrSelectorStationFile
+        ucrReceiverElavation.SetParameterIsString()
+        ucrReceiverElavation.SetLinkedDisplayControl(lblElavation)
+
+        ucrReceiverStationName.Selector = ucrSelectorStationFile
+        ucrReceiverStationName.SetParameterIsString()
+        ucrReceiverStationName.SetLinkedDisplayControl(lblStationName)
+
+        ucrReceiverStationId.Selector = ucrSelectorStationFile
+        ucrReceiverStationId.SetParameterIsString()
+        ucrReceiverStationId.SetLinkedDisplayControl(lblStationID)
+
+        ucrInputClimateVariables.SetParameter(New RParameter("varcli", 8))
         ucrInputClimateVariables.SetLinkedDisplayControl(lblClimaticVariable)
 
         ucrInputInitialYear.SetParameter(New RParameter("anyi", 1))
@@ -230,7 +248,7 @@ Public Class dlgHomogenization
         ucrSelectorHomogenization.Reset()
         ucrReceiverElement.SetMeAsReceiver()
         ucrReceiverDataFiles.SetMeAsReceiver()
-        ucrReceiverStationFile.SetMeAsReceiver()
+        'ucrReceiverLatitude.SetMeAsReceiver()
         ucrSelectorDataFiles.Reset()
         ucrSelectorStationFile.Reset()
         'ucrSaveResult.Reset()
@@ -390,7 +408,11 @@ Public Class dlgHomogenization
         'ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
         ucrReceiverDataFiles.SetRCode(clsGetColumnsFunction, bReset)
         ucrSelectorDataFiles.SetRCode(clsGetColumnsFunction, bReset)
-        ucrReceiverStationFile.SetRCode(clsGetStnColumnsFunction, bReset)
+        ucrReceiverLatitude.SetRCode(clsGetColumnsFunction, bReset)
+        ucrReceiverLongtitude.SetRCode(clsGetColumnsFunction, bReset)
+        ucrReceiverElavation.SetRCode(clsGetColumnsFunction, bReset)
+        ucrReceiverStationId.SetRCode(clsGetColumnsFunction, bReset)
+        ucrReceiverStationName.SetRCode(clsGetColumnsFunction, bReset)
         ucrInputClimateVariables.SetRCode(clsCsv2climatolFunction, bReset)
         ucrSelectorStationFile.SetRCode(clsGetStnColumnsFunction, bReset)
         ucrInputFinalYear.SetRCode(clsHomogenQCFunctin, bReset)
@@ -407,7 +429,7 @@ Public Class dlgHomogenization
                 ucrBase.OKEnabled(True)
             End If
         Else
-            ucrBase.OKEnabled((Not ucrReceiverStationFile.IsEmpty AndAlso Not ucrReceiverDataFiles.IsEmpty) AndAlso (Not ucrInputClimateVariables.IsEmpty AndAlso Not ucrInputInitialYear.IsEmpty AndAlso Not ucrInputFinalYear.IsEmpty))
+            ucrBase.OKEnabled((Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongtitude.IsEmpty AndAlso (Not ucrReceiverStationName.IsEmpty OrElse Not ucrReceiverStationId.IsEmpty) AndAlso Not ucrReceiverDataFiles.IsEmpty) AndAlso (Not ucrInputClimateVariables.IsEmpty AndAlso Not ucrInputInitialYear.IsEmpty AndAlso Not ucrInputFinalYear.IsEmpty))
         End If
     End Sub
 
@@ -494,8 +516,8 @@ Public Class dlgHomogenization
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged,
         ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged,
-        ucrInputComboMethod.ControlContentsChanged, ucrInputComboPenalty.ControlContentsChanged, ucrReceiverDataFiles.ControlContentsChanged,
-        ucrReceiverStationFile.ControlContentsChanged, ucrInputFinalYear.ControlContentsChanged, ucrInputInitialYear.ControlContentsChanged, ucrInputClimateVariables.ControlContentsChanged
+        ucrInputComboMethod.ControlContentsChanged, ucrInputComboPenalty.ControlContentsChanged, ucrReceiverDataFiles.ControlContentsChanged, ucrInputFinalYear.ControlContentsChanged, ucrInputInitialYear.ControlContentsChanged, ucrInputClimateVariables.ControlContentsChanged,
+        ucrReceiverStationName.ControlContentsChanged, ucrReceiverStationId.ControlContentsChanged, ucrReceiverLongtitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -549,14 +571,6 @@ Public Class dlgHomogenization
         End If
     End Sub
 
-    Private Sub ucrReceiverStationFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationFile.ControlValueChanged
-        If Not ucrReceiverStationFile.IsEmpty Then
-            clsVars2ColumnsFunction.AddParameter("cols", ucrReceiverStationFile.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
-        Else
-            clsVars2ColumnsFunction.RemoveParameterByName("cols")
-        End If
-    End Sub
-
     Private Sub ucrSelectorDataFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDataFiles.ControlValueChanged
         clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrSelectorDataFiles.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsCsv2climatolFunction.AddParameter("data", Chr(34) & ucrSelectorDataFiles.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
@@ -605,4 +619,31 @@ Public Class dlgHomogenization
         End If
     End Sub
 
+    Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged, ucrReceiverElavation.ControlValueChanged,
+            ucrReceiverLongtitude.ControlValueChanged, ucrReceiverStationId.ControlValueChanged, ucrReceiverStationName.ControlValueChanged
+        If Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongtitude.IsEmpty Then
+            Dim lstVariables As List(Of String) = New List(Of String)()
+
+            lstVariables.Add(ucrReceiverLatitude.GetVariableNames())
+            lstVariables.Add(ucrReceiverLongtitude.GetVariableNames())
+
+            If Not ucrReceiverElavation.IsEmpty Then
+                lstVariables.Add(ucrReceiverElavation.GetVariableNames())
+            Else
+                lstVariables.Add(0)
+            End If
+
+            If Not ucrReceiverStationName.IsEmpty Then
+                lstVariables.Add(ucrReceiverStationName.GetVariableNames())
+            End If
+
+            If Not ucrReceiverStationId.IsEmpty Then
+                lstVariables.Add(ucrReceiverStationId.GetVariableNames())
+            End If
+
+            clsVars2ColumnsFunction.AddParameter("cols", "c(" & String.Join(", ", lstVariables) & ")", iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsVars2ColumnsFunction.RemoveParameterByName("cols")
+        End If
+    End Sub
 End Class
