@@ -251,6 +251,7 @@ Public Class dlgGeneralForGraphics
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewAesFunc:=clsGlobalAesFunction, bReset:=True)
         bResetSubdialog = False
     End Sub
 
