@@ -284,6 +284,7 @@ Public Class dlgGeneralForGraphics
         sdgPlots.ShowDialog()
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.EnableLayersTab()
+        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewAesFunc:=clsGlobalAesFunction, bReset:=True)
         bResetSubdialog = False
     End Sub
 
