@@ -37,7 +37,7 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.bSeparateThread = False
 
         ucrIDFCurvesSelector.SetParameter(New RParameter("prdat", 0))
         ucrIDFCurvesSelector.SetParameterIsrfunction()
@@ -56,14 +56,12 @@ Public Class dlgIDFCurves
         ucrNudMaxPrec.DecimalPlaces = 1
         ucrNudMaxPrec.SetRDefault(0.8)
 
-
-        'ucrSave.SetPrefix("IDF_Curve")
-        'ucrSave.SetIsComboBox()
-        'ucrSave.SetCheckBoxText("Save Graph")
-        'ucrSave.SetSaveTypeAsGraph()
-        ''ucrSave.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
-        'ucrSave.SetDataFrameSelector(ucrIDFCurvesSelector.ucrAvailableDataFrames)
-        'ucrSave.SetAssignToIfUncheckedValue("last_summary")
+        ucrSave.SetPrefix("Prec_accum")
+        ucrSave.SetIsComboBox()
+        ucrSave.SetCheckBoxText("Save DataFrame")
+        ucrSave.SetSaveTypeAsDataFrame()
+        ucrSave.SetDataFrameSelector(ucrIDFCurvesSelector.ucrAvailableDataFrames)
+        ucrSave.SetAssignToIfUncheckedValue("last_accum")
 
     End Sub
 
@@ -83,18 +81,6 @@ Public Class dlgIDFCurves
         clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColumnsFunction.SetAssignTo("col_data")
 
-        clsIDFCurvesFunction.SetPackageName("climatol")
-        clsIDFCurvesFunction.SetRCommand("IDFcurves")
-        clsIDFCurvesFunction.AddParameter("clmn", clsRFunctionParameter:=clsPmatchFunction, iPosition:=2)
-        clsIDFCurvesFunction.AddParameter("na.code", "NA", iPosition:=3)
-        'clsIDFCurvesFunction.iCallType = 1
-        'clsIDFCurvesFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
-        '                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
-        '                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
-        '                                           strRDataFrameNameToAddObjectTo:=ucrIDFCurvesSelector.strCurrentDataFrame,
-        '                                           strObjectName:="last_summary")
-
-
         clsVarsColumnsOperator.SetOperation("", bBracketsTemp:=False)
         clsVarsColumnsOperator.SetAssignTo("var_1")
 
@@ -109,15 +95,20 @@ Public Class dlgIDFCurves
         clsPmatchFunction.AddParameter("cols", clsROperatorParameter:=clsVars1ColumnsOperator, bIncludeArgumentName:=False, iPosition:=0)
         clsPmatchFunction.SetAssignTo("data_file")
 
+        clsIDFCurvesFunction.SetPackageName("climatol")
+        clsIDFCurvesFunction.SetRCommand("IDFcurves")
+        clsIDFCurvesFunction.AddParameter("clmn", clsRFunctionParameter:=clsPmatchFunction, iPosition:=2)
+        clsIDFCurvesFunction.AddParameter("na.code", "NA", iPosition:=3)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsIDFCurvesFunction)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrIDFCurvesSelector.SetRCode(clsGetColumnsFunction, bReset)
-
         ucrNudMaxPrec.SetRCode(clsIDFCurvesFunction, bReset)
         ucrStationName.SetRCode(clsIDFCurvesFunction, bReset)
-        'ucrSave.SetRCode(clsIDFCurvesFunction, bReset)
+        ucrSave.SetRCode(clsIDFCurvesFunction, bReset)
 
         If bReset Then
             ucrReceiverDateTime.SetRCode(clsGetColumnsFunction, bReset)
@@ -126,7 +117,7 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub TestOkEnabled()
-
+        ucrBase.OKEnabled(Not ucrReceiverDateTime.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrStationName.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -134,7 +125,6 @@ Public Class dlgIDFCurves
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
 
     Private Sub ucrReceiverPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrec.ControlValueChanged, ucrReceiverDateTime.ControlValueChanged
         If Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDateTime.IsEmpty Then
@@ -159,5 +149,10 @@ Public Class dlgIDFCurves
     Private Sub ucrIDFCurvesSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrIDFCurvesSelector.ControlValueChanged
         clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrIDFCurvesSelector.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsIDFCurvesFunction.AddParameter("data", ucrIDFCurvesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverDateTime_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDateTime.ControlContentsChanged,
+ucrReceiverPrec.ControlContentsChanged, ucrStationName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

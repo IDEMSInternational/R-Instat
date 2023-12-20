@@ -2190,7 +2190,6 @@ Partial Class frmMain
         '
         'mnuClimaticDescribeIDF
         '
-        Me.mnuClimaticDescribeIDF.Enabled = False
         Me.mnuClimaticDescribeIDF.Name = "mnuClimaticDescribeIDF"
         Me.mnuClimaticDescribeIDF.Size = New System.Drawing.Size(211, 22)
         Me.mnuClimaticDescribeIDF.Text = "IDF..."
@@ -5092,9 +5091,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
