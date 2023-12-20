@@ -23,6 +23,11 @@ Public Class dlgHomogenization
         clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsDummyFunction, clsCsv2climatolFunction, clsHomogenQCFunctin, clsDdm2Function, clsHomogenFunction,
         clsGetColumnsFunction, clsGetStnColumnsFunction, clsCompleteCasesFunction, clsPmatchFunction, clsPmatch2Function, clsColumnsFunction, clsColumns2Function As New RFunction
     Private clsBracketsOperator, clsLeftBracketOperator, clsVars2ColumnsFunction, clsVars1ColumnsFunction, clsRightBracketOperator As New ROperator
+
+    Private Sub ucrPnlOptions_Load(sender As Object, e As EventArgs) Handles ucrPnlOptions.Load
+
+    End Sub
+
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -121,10 +126,18 @@ Public Class dlgHomogenization
         ttOptions.SetToolTip(rdoBuishand, "Performes the Buishand range test for change-point detection of a normal variate.")
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
-        ucrPnlOptions.AddRadioButton(rdoMultiple)
+        ucrPnlOptions.AddRadioButton(rdoPrepare)
+        ucrPnlOptions.AddRadioButton(rdoQualityControl)
+        ucrPnlOptions.AddRadioButton(rdoMonthlyTotals)
+        ucrPnlOptions.AddRadioButton(rdoHomogenization)
         'ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"})
         ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "single")
-        ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "checked", "multiple")
+        ucrPnlOptions.AddParameterValuesCondition(rdoPrepare, "checked", "prepare")
+        ucrPnlOptions.AddParameterValuesCondition(rdoQualityControl, "checked", "quality")
+        ucrPnlOptions.AddParameterValuesCondition(rdoMonthlyTotals, "checked", "month_totals")
+        ucrPnlOptions.AddParameterValuesCondition(rdoHomogenization, "checked", "homogen")
+
+
 
         ucrChkPlot.SetText("Plot")
         ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
@@ -200,7 +213,8 @@ Public Class dlgHomogenization
         'ucrSaveResult.SetPrefix("Test")
         'ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrPnlOptions.AddToLinkedControls({ucrSelectorHomogenization, ucrSaveResult, ucrReceiverNeighbour, ucrReceiverStation, ucrReceiverElement}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrInputClimateVariables, ucrInputInitialYear, ucrInputFinalYear}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputClimateVariables}, {rdoPrepare, rdoQualityControl, rdoHomogenization, rdoMonthlyTotals}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputInitialYear, ucrInputFinalYear}, {rdoQualityControl, rdoHomogenization, rdoMonthlyTotals}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboPenalty.AddToLinkedControls(ucrInputPenValue, {"Asymptotic", "CROPS"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputComboMethod.AddToLinkedControls(ucrInputQ, {"SegNeigh", "BinSeg"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboMeanDistribution, {rdoCptMean}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -248,7 +262,6 @@ Public Class dlgHomogenization
         ucrSelectorHomogenization.Reset()
         ucrReceiverElement.SetMeAsReceiver()
         ucrReceiverDataFiles.SetMeAsReceiver()
-        'ucrReceiverLatitude.SetMeAsReceiver()
         ucrSelectorDataFiles.Reset()
         ucrSelectorStationFile.Reset()
         'ucrSaveResult.Reset()
@@ -348,6 +361,7 @@ Public Class dlgHomogenization
         clsHomogenQCFunctin.SetPackageName("climatol")
         clsHomogenQCFunctin.SetRCommand("homogen")
         clsHomogenQCFunctin.AddParameter("onlyQC", "TRUE", iPosition:=3)
+        clsHomogenQCFunctin.SetAssignTo("QC")
 
         clsDdm2Function.SetPackageName("climatol")
         clsDdm2Function.SetRCommand("dd2m")
@@ -415,8 +429,6 @@ Public Class dlgHomogenization
         ucrReceiverStationName.SetRCode(clsGetColumnsFunction, bReset)
         ucrInputClimateVariables.SetRCode(clsCsv2climatolFunction, bReset)
         ucrSelectorStationFile.SetRCode(clsGetStnColumnsFunction, bReset)
-        ucrInputFinalYear.SetRCode(clsHomogenQCFunctin, bReset)
-        ucrInputInitialYear.SetRCode(clsHomogenQCFunctin, bReset)
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
@@ -428,8 +440,10 @@ Public Class dlgHomogenization
             Else
                 ucrBase.OKEnabled(True)
             End If
+        ElseIf rdoPrepare.Checked Then
+            ucrBase.OKEnabled((Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongtitude.IsEmpty AndAlso (Not ucrReceiverStationName.IsEmpty OrElse Not ucrReceiverStationId.IsEmpty) AndAlso Not ucrReceiverDataFiles.IsEmpty) AndAlso Not ucrInputClimateVariables.IsEmpty)
         Else
-            ucrBase.OKEnabled((Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongtitude.IsEmpty AndAlso (Not ucrReceiverStationName.IsEmpty OrElse Not ucrReceiverStationId.IsEmpty) AndAlso Not ucrReceiverDataFiles.IsEmpty) AndAlso (Not ucrInputClimateVariables.IsEmpty AndAlso Not ucrInputInitialYear.IsEmpty AndAlso Not ucrInputFinalYear.IsEmpty))
+            ucrBase.OKEnabled(Not ucrInputClimateVariables.IsEmpty AndAlso Not ucrInputInitialYear.IsEmpty AndAlso Not ucrInputFinalYear.IsEmpty)
         End If
     End Sub
 
@@ -527,23 +541,44 @@ Public Class dlgHomogenization
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsHomogenQCFunctin)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDdm2Function)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsHomogenFunction)
-        Else
+        ElseIf rdoPrepare.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCsv2climatolFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsHomogenQCFunctin, 0)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDdm2Function, 1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsHomogenFunction, 2)
+        ElseIf rdoQualityControl.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsHomogenQCFunctin)
+        ElseIf rdoMonthlyTotals.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDdm2Function)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsHomogenFunction)
         End If
         DialogSize()
         HideShowControls()
     End Sub
 
     Private Sub HideShowControls()
-        If rdoMultiple.Checked Then
+        If rdoPrepare.Checked Then
             grpDataFile.Show()
             grpStationFile.Show()
             grpMethods.Hide()
             grpCptOptions.Hide()
             grpOutputOptions.Hide()
+        ElseIf rdoHomogenization.Checked Then
+            grpMethods.Hide()
+            grpCptOptions.Hide()
+            grpOutputOptions.Hide()
+            grpStationFile.Hide()
+            grpDataFile.Hide()
+        ElseIf rdoMonthlyTotals.Checked Then
+            grpMethods.Hide()
+            grpCptOptions.Hide()
+            grpOutputOptions.Hide()
+            grpStationFile.Hide()
+            grpDataFile.Hide()
+        ElseIf rdoQualityControl.Checked Then
+            grpMethods.Hide()
+            grpCptOptions.Hide()
+            grpOutputOptions.Hide()
+            grpStationFile.Hide()
+            grpDataFile.Hide()
         Else
             grpStationFile.Hide()
             grpDataFile.Hide()
@@ -554,12 +589,23 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub DialogSize()
-        If rdoMultiple.Checked Then
-            Me.Size = New Size(438, 609)
-            Me.ucrBase.Location = New Point(12, 515)
-        Else
+        If rdoSingle.Checked Then
             Me.Size = New Size(438, 550)
             Me.ucrBase.Location = New Point(12, 460)
+        ElseIf rdoPrepare.Checked Then
+            Me.Size = New Size(438, 609)
+            Me.ucrBase.Location = New Point(12, 515)
+            Me.ucrInputClimateVariables.Location = New Point(272, 464)
+            Me.lblClimaticVariable.Location = New Point(182, 468)
+        Else
+            Me.Size = New Size(438, 160)
+            Me.ucrBase.Location = New Point(12, 130)
+            Me.ucrInputClimateVariables.Location = New Point(272, 61)
+            Me.ucrInputInitialYear.Location = New Point(77, 59)
+            Me.ucrInputFinalYear.Location = New Point(77, 90)
+            Me.lblClimaticVariable.Location = New Point(182, 65)
+            Me.lblFinalYear.Location = New Point(15, 94)
+            Me.lblInitialYear.Location = New Point(15, 63)
         End If
     End Sub
 
@@ -597,7 +643,7 @@ Public Class dlgHomogenization
 
     Private Sub ucrInputFinalYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFinalYear.ControlValueChanged
         If Not ucrInputFinalYear.IsEmpty Then
-            clsHomogenQCFunctin.AddParameter("anyf", ucrInputFinalYear.GetText, iPosition:=2)
+            clsHomogenQCFunctin.AddParameter("anyf", ucrInputFinalYear.GetText, iPosition:=2, bIncludeArgumentName:=False)
             clsDdm2Function.AddParameter("initial", ucrInputFinalYear.GetText, bIncludeArgumentName:=False, iPosition:=2)
             clsHomogenFunction.AddParameter("in_yr", ucrInputFinalYear.GetText, bIncludeArgumentName:=False, iPosition:=2)
         Else
@@ -609,7 +655,7 @@ Public Class dlgHomogenization
 
     Private Sub ucrInputInitialYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInitialYear.ControlValueChanged
         If Not ucrInputInitialYear.IsEmpty Then
-            clsHomogenQCFunctin.AddParameter("anyi", ucrInputInitialYear.GetText, iPosition:=1)
+            clsHomogenQCFunctin.AddParameter("anyi", ucrInputInitialYear.GetText, iPosition:=1, bIncludeArgumentName:=False)
             clsDdm2Function.AddParameter("final", ucrInputInitialYear.GetText, bIncludeArgumentName:=False, iPosition:=1)
             clsHomogenFunction.AddParameter("final_yr", ucrInputInitialYear.GetText, bIncludeArgumentName:=False, iPosition:=1)
         Else
@@ -640,10 +686,10 @@ Public Class dlgHomogenization
             If Not ucrReceiverStationId.IsEmpty Then
                 lstVariables.Add(ucrReceiverStationId.GetVariableNames())
             End If
-
             clsVars2ColumnsFunction.AddParameter("cols", "c(" & String.Join(", ", lstVariables) & ")", iPosition:=0, bIncludeArgumentName:=False)
         Else
             clsVars2ColumnsFunction.RemoveParameterByName("cols")
         End If
     End Sub
+
 End Class

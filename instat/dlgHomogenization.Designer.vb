@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgHomogenization
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgHomogenization
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.lblElement = New System.Windows.Forms.Label()
@@ -43,7 +43,7 @@ Partial Class dlgHomogenization
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.lblNeighbouring = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.rdoPrepare = New System.Windows.Forms.RadioButton()
         Me.grpStationFile = New System.Windows.Forms.GroupBox()
         Me.lblLongtude = New System.Windows.Forms.Label()
         Me.lblStationName = New System.Windows.Forms.Label()
@@ -84,6 +84,9 @@ Partial Class dlgHomogenization
         Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverDataFiles = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataFiles = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.rdoHomogenization = New System.Windows.Forms.RadioButton()
+        Me.rdoMonthlyTotals = New System.Windows.Forms.RadioButton()
+        Me.rdoQualityControl = New System.Windows.Forms.RadioButton()
         Me.grpMethods.SuspendLayout()
         Me.grpCptOptions.SuspendLayout()
         Me.grpOutputOptions.SuspendLayout()
@@ -287,9 +290,9 @@ Partial Class dlgHomogenization
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(90, 9)
+        Me.rdoSingle.Location = New System.Drawing.Point(12, 9)
         Me.rdoSingle.Name = "rdoSingle"
-        Me.rdoSingle.Size = New System.Drawing.Size(101, 28)
+        Me.rdoSingle.Size = New System.Drawing.Size(78, 28)
         Me.rdoSingle.TabIndex = 1
         Me.rdoSingle.TabStop = True
         Me.rdoSingle.Tag = ""
@@ -317,24 +320,24 @@ Partial Class dlgHomogenization
         Me.lblStation.TabIndex = 4
         Me.lblStation.Text = "Station:"
         '
-        'rdoMultiple
+        'rdoPrepare
         '
-        Me.rdoMultiple.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoMultiple.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatAppearance.BorderSize = 2
-        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(189, 9)
-        Me.rdoMultiple.Name = "rdoMultiple"
-        Me.rdoMultiple.Size = New System.Drawing.Size(101, 28)
-        Me.rdoMultiple.TabIndex = 2
-        Me.rdoMultiple.TabStop = True
-        Me.rdoMultiple.Tag = ""
-        Me.rdoMultiple.Text = "Multiple"
-        Me.rdoMultiple.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoMultiple.UseVisualStyleBackColor = False
+        Me.rdoPrepare.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPrepare.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoPrepare.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPrepare.FlatAppearance.BorderSize = 2
+        Me.rdoPrepare.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPrepare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPrepare.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPrepare.Location = New System.Drawing.Point(88, 9)
+        Me.rdoPrepare.Name = "rdoPrepare"
+        Me.rdoPrepare.Size = New System.Drawing.Size(63, 28)
+        Me.rdoPrepare.TabIndex = 2
+        Me.rdoPrepare.TabStop = True
+        Me.rdoPrepare.Tag = ""
+        Me.rdoPrepare.Text = "Prepare"
+        Me.rdoPrepare.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPrepare.UseVisualStyleBackColor = False
         '
         'grpStationFile
         '
@@ -519,9 +522,9 @@ Partial Class dlgHomogenization
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(51, 6)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(12, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(321, 30)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(408, 51)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrSaveResult
@@ -787,12 +790,72 @@ Partial Class dlgHomogenization
         Me.ucrSelectorDataFiles.Size = New System.Drawing.Size(213, 185)
         Me.ucrSelectorDataFiles.TabIndex = 0
         '
+        'rdoHomogenization
+        '
+        Me.rdoHomogenization.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoHomogenization.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoHomogenization.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoHomogenization.FlatAppearance.BorderSize = 2
+        Me.rdoHomogenization.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoHomogenization.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoHomogenization.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoHomogenization.Location = New System.Drawing.Point(319, 9)
+        Me.rdoHomogenization.Name = "rdoHomogenization"
+        Me.rdoHomogenization.Size = New System.Drawing.Size(101, 28)
+        Me.rdoHomogenization.TabIndex = 23
+        Me.rdoHomogenization.TabStop = True
+        Me.rdoHomogenization.Tag = ""
+        Me.rdoHomogenization.Text = "Homogenization"
+        Me.rdoHomogenization.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoHomogenization.UseVisualStyleBackColor = False
+        '
+        'rdoMonthlyTotals
+        '
+        Me.rdoMonthlyTotals.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMonthlyTotals.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoMonthlyTotals.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthlyTotals.FlatAppearance.BorderSize = 2
+        Me.rdoMonthlyTotals.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMonthlyTotals.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMonthlyTotals.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMonthlyTotals.Location = New System.Drawing.Point(233, 9)
+        Me.rdoMonthlyTotals.Name = "rdoMonthlyTotals"
+        Me.rdoMonthlyTotals.Size = New System.Drawing.Size(91, 28)
+        Me.rdoMonthlyTotals.TabIndex = 24
+        Me.rdoMonthlyTotals.TabStop = True
+        Me.rdoMonthlyTotals.Tag = ""
+        Me.rdoMonthlyTotals.Text = "Monthly Totals "
+        Me.rdoMonthlyTotals.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoMonthlyTotals.UseVisualStyleBackColor = False
+        '
+        'rdoQualityControl
+        '
+        Me.rdoQualityControl.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoQualityControl.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoQualityControl.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoQualityControl.FlatAppearance.BorderSize = 2
+        Me.rdoQualityControl.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoQualityControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoQualityControl.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoQualityControl.Location = New System.Drawing.Point(148, 9)
+        Me.rdoQualityControl.Name = "rdoQualityControl"
+        Me.rdoQualityControl.Size = New System.Drawing.Size(87, 28)
+        Me.rdoQualityControl.TabIndex = 25
+        Me.rdoQualityControl.TabStop = True
+        Me.rdoQualityControl.Tag = ""
+        Me.rdoQualityControl.Text = "Quality Control"
+        Me.rdoQualityControl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoQualityControl.UseVisualStyleBackColor = False
+        '
         'dlgHomogenization
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(422, 570)
+        Me.Controls.Add(Me.rdoQualityControl)
+        Me.Controls.Add(Me.rdoMonthlyTotals)
+        Me.Controls.Add(Me.rdoHomogenization)
         Me.Controls.Add(Me.grpStationFile)
         Me.Controls.Add(Me.grpDataFile)
         Me.Controls.Add(Me.ucrInputFinalYear)
@@ -803,7 +866,7 @@ Partial Class dlgHomogenization
         Me.Controls.Add(Me.ucrSelectorHomogenization)
         Me.Controls.Add(Me.lblClimaticVariable)
         Me.Controls.Add(Me.ucrInputClimateVariables)
-        Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.rdoPrepare)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.lblNeighbouring)
         Me.Controls.Add(Me.rdoSingle)
@@ -875,7 +938,7 @@ Partial Class dlgHomogenization
     Friend WithEvents rdoBuishand As RadioButton
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents rdoPrepare As RadioButton
     Friend WithEvents lblClimaticVariable As Label
     Friend WithEvents ucrInputClimateVariables As ucrInputTextBox
     Friend WithEvents grpDataFile As GroupBox
@@ -898,4 +961,7 @@ Partial Class dlgHomogenization
     Friend WithEvents lblStationName As Label
     Friend WithEvents lblStationID As Label
     Friend WithEvents lblElavation As Label
+    Friend WithEvents rdoQualityControl As RadioButton
+    Friend WithEvents rdoMonthlyTotals As RadioButton
+    Friend WithEvents rdoHomogenization As RadioButton
 End Class
