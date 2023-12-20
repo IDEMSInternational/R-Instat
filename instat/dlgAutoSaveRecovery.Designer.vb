@@ -68,7 +68,7 @@ Partial Class dlgAutoSaveRecovery
         Me.lblAutoRecoverMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAutoRecoverMessage.Location = New System.Drawing.Point(0, 0)
         Me.lblAutoRecoverMessage.Name = "lblAutoRecoverMessage"
-        Me.lblAutoRecoverMessage.Size = New System.Drawing.Size(847, 91)
+        Me.lblAutoRecoverMessage.Size = New System.Drawing.Size(896, 91)
         Me.lblAutoRecoverMessage.TabIndex = 0
         Me.lblAutoRecoverMessage.Text = "We have detected that R-Instat may have closed unexpectedly." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Below are your auto" &
     " recovery options."
@@ -112,18 +112,18 @@ Partial Class dlgAutoSaveRecovery
         '
         'cmdSaveLog
         '
-        Me.cmdSaveLog.Location = New System.Drawing.Point(269, 68)
+        Me.cmdSaveLog.Location = New System.Drawing.Point(261, 68)
         Me.cmdSaveLog.Name = "cmdSaveLog"
-        Me.cmdSaveLog.Size = New System.Drawing.Size(176, 29)
+        Me.cmdSaveLog.Size = New System.Drawing.Size(241, 29)
         Me.cmdSaveLog.TabIndex = 5
         Me.cmdSaveLog.Text = "Save Backup Log..."
         Me.cmdSaveLog.UseVisualStyleBackColor = True
         '
         'cmdSaveInternalLog
         '
-        Me.cmdSaveInternalLog.Location = New System.Drawing.Point(268, 115)
+        Me.cmdSaveInternalLog.Location = New System.Drawing.Point(262, 115)
         Me.cmdSaveInternalLog.Name = "cmdSaveInternalLog"
-        Me.cmdSaveInternalLog.Size = New System.Drawing.Size(176, 29)
+        Me.cmdSaveInternalLog.Size = New System.Drawing.Size(240, 29)
         Me.cmdSaveInternalLog.TabIndex = 7
         Me.cmdSaveInternalLog.Text = "Save Backup Internal Log..."
         Me.cmdSaveInternalLog.UseVisualStyleBackColor = True
@@ -139,9 +139,9 @@ Partial Class dlgAutoSaveRecovery
         '
         'cmdSaveData
         '
-        Me.cmdSaveData.Location = New System.Drawing.Point(270, 21)
+        Me.cmdSaveData.Location = New System.Drawing.Point(262, 21)
         Me.cmdSaveData.Name = "cmdSaveData"
-        Me.cmdSaveData.Size = New System.Drawing.Size(176, 29)
+        Me.cmdSaveData.Size = New System.Drawing.Size(240, 29)
         Me.cmdSaveData.TabIndex = 9
         Me.cmdSaveData.Text = "Save Backup Data..."
         Me.cmdSaveData.UseVisualStyleBackColor = True
@@ -158,7 +158,7 @@ Partial Class dlgAutoSaveRecovery
         'lblDataSavedTo
         '
         Me.lblDataSavedTo.AutoSize = True
-        Me.lblDataSavedTo.Location = New System.Drawing.Point(466, 29)
+        Me.lblDataSavedTo.Location = New System.Drawing.Point(508, 29)
         Me.lblDataSavedTo.Name = "lblDataSavedTo"
         Me.lblDataSavedTo.Size = New System.Drawing.Size(55, 13)
         Me.lblDataSavedTo.TabIndex = 11
@@ -167,7 +167,7 @@ Partial Class dlgAutoSaveRecovery
         'lblLogSavedTo
         '
         Me.lblLogSavedTo.AutoSize = True
-        Me.lblLogSavedTo.Location = New System.Drawing.Point(466, 78)
+        Me.lblLogSavedTo.Location = New System.Drawing.Point(509, 78)
         Me.lblLogSavedTo.Name = "lblLogSavedTo"
         Me.lblLogSavedTo.Size = New System.Drawing.Size(55, 13)
         Me.lblLogSavedTo.TabIndex = 13
@@ -176,7 +176,7 @@ Partial Class dlgAutoSaveRecovery
         'lblInternalLogSavedTo
         '
         Me.lblInternalLogSavedTo.AutoSize = True
-        Me.lblInternalLogSavedTo.Location = New System.Drawing.Point(466, 125)
+        Me.lblInternalLogSavedTo.Location = New System.Drawing.Point(509, 125)
         Me.lblInternalLogSavedTo.Name = "lblInternalLogSavedTo"
         Me.lblInternalLogSavedTo.Size = New System.Drawing.Size(55, 13)
         Me.lblInternalLogSavedTo.TabIndex = 15
@@ -207,7 +207,7 @@ Partial Class dlgAutoSaveRecovery
         Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathData)
         Me.grpSavingOptions.Location = New System.Drawing.Point(12, 85)
         Me.grpSavingOptions.Name = "grpSavingOptions"
-        Me.grpSavingOptions.Size = New System.Drawing.Size(823, 154)
+        Me.grpSavingOptions.Size = New System.Drawing.Size(877, 154)
         Me.grpSavingOptions.TabIndex = 19
         Me.grpSavingOptions.TabStop = False
         Me.grpSavingOptions.Text = "Saving Options"
@@ -230,7 +230,7 @@ Partial Class dlgAutoSaveRecovery
         Me.ucrInputSavedPathInternalLog.AutoSize = True
         Me.ucrInputSavedPathInternalLog.IsMultiline = False
         Me.ucrInputSavedPathInternalLog.IsReadOnly = False
-        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(562, 123)
+        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(605, 123)
         Me.ucrInputSavedPathInternalLog.Name = "ucrInputSavedPathInternalLog"
         Me.ucrInputSavedPathInternalLog.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathInternalLog.TabIndex = 16
@@ -241,7 +241,7 @@ Partial Class dlgAutoSaveRecovery
         Me.ucrInputSavedPathLog.AutoSize = True
         Me.ucrInputSavedPathLog.IsMultiline = False
         Me.ucrInputSavedPathLog.IsReadOnly = False
-        Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(561, 76)
+        Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(604, 76)
         Me.ucrInputSavedPathLog.Name = "ucrInputSavedPathLog"
         Me.ucrInputSavedPathLog.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathLog.TabIndex = 14
@@ -252,7 +252,7 @@ Partial Class dlgAutoSaveRecovery
         Me.ucrInputSavedPathData.AutoSize = True
         Me.ucrInputSavedPathData.IsMultiline = False
         Me.ucrInputSavedPathData.IsReadOnly = False
-        Me.ucrInputSavedPathData.Location = New System.Drawing.Point(561, 27)
+        Me.ucrInputSavedPathData.Location = New System.Drawing.Point(604, 27)
         Me.ucrInputSavedPathData.Name = "ucrInputSavedPathData"
         Me.ucrInputSavedPathData.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathData.TabIndex = 12
@@ -271,7 +271,7 @@ Partial Class dlgAutoSaveRecovery
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(847, 371)
+        Me.ClientSize = New System.Drawing.Size(896, 371)
         Me.Controls.Add(Me.grpEndChoice)
         Me.Controls.Add(Me.grpSavingOptions)
         Me.Controls.Add(Me.cmdHelp)
