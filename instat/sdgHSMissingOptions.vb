@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgHSMissingOptions
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Public clsReadInputs, clsMissingDataVector As New RFunction
+    Public clsReadInputsFunction, clsMissingDataVectorFunction As New RFunction
 
     Private Sub sdgMissingOptionsEvapotranspiration_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
         autoTranslate(Me)
@@ -47,19 +47,19 @@ Public Class sdgHSMissingOptions
         ucrNudMaxDurationMissingData.SetMinMax(1, 99)
     End Sub
 
-    Public Sub SetRFunction(clsNewReadInputs As RFunction, clsNewMissingDataVector As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewReadInputsFunction As RFunction, clsNewMissingDataVectorFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
-        clsReadInputs = clsNewReadInputs
-        clsMissingDataVector = clsNewMissingDataVector
+        clsReadInputsFunction = clsNewReadInputsFunction
+        clsMissingDataVectorFunction = clsNewMissingDataVectorFunction
 
-        ucrChkInterpMissingDays.SetRCode(clsReadInputs, bReset, bCloneIfNeeded:=True)
-        ucrChkInterpMissingEntries.SetRCode(clsReadInputs, bReset, bCloneIfNeeded:=True)
-        ucrNudMaxMissingData.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
-        ucrNudMaxMissingDays.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
-        ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
+        ucrChkInterpMissingDays.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkInterpMissingEntries.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMaxMissingData.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMaxMissingDays.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
 End Class

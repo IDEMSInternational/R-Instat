@@ -21,11 +21,11 @@ Imports RDotNet
 Public Class DlgDefineClimaticData
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim clsTypesFunction, clsNewTypesFunction As New RFunction
-    Dim lstReceivers As New List(Of ucrReceiverSingle)
-    Dim lstNewReceivers As New List(Of ucrReceiverSingle)
-    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
-    Dim lstNewRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private clsTypesFunction, clsNewTypesFunction As New RFunction
+    Private lstReceivers As New List(Of ucrReceiverSingle)
+    Private lstNewReceivers As New List(Of ucrReceiverSingle)
+    Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private lstNewRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private clsDefaultFunction, clsNewDefautFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private strCurrentDataframeName As String
@@ -246,7 +246,6 @@ Public Class DlgDefineClimaticData
                         Exit For
                     End If
                 Next
-
             End If
         Next
 
@@ -355,7 +354,7 @@ Public Class DlgDefineClimaticData
         bIsUnique = True
     End Sub
 
-    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged, ucrReceiverStation.ControlContentsChanged
         EnableDisableCheckUniqueBtn()
         If Not ucrReceiverStation.IsEmpty Then
             clsConcFunction.AddParameter("x1", ucrReceiverStation.GetVariableNames, bIncludeArgumentName:=False)

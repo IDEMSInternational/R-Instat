@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgLocation
     Private bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
-    Private clsVarnamesVectorPM, clsVarnamesVectorHS, clsVarnamesVectorPT, clsListFunction As New RFunction
+    Private clsVarnamesVectorPMFunction, clsVarnamesVectorHSFunction, clsVarnamesVectorPTFunction, clsListFunction As New RFunction
 
     Private Sub sdgLocation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -76,43 +76,39 @@ Public Class sdgLocation
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewVarnamesVectorHS As RFunction, clsNewVarnamesVectorPM As RFunction, clsNewListFunction As RFunction, clsNewVarnamesVectorPT As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewVarnamesVectorHSFunction As RFunction, clsNewVarnamesVectorPMFunction As RFunction, clsNewListFunction As RFunction, clsNewVarnamesVectorPTFunction As RFunction, Optional bReset As Boolean = False)
         clsListFunction = clsNewListFunction
-        clsVarnamesVectorPM = clsNewVarnamesVectorPM
-        clsVarnamesVectorHS = clsNewVarnamesVectorHS
-        clsVarnamesVectorPM = clsNewVarnamesVectorPT
+        clsVarnamesVectorPMFunction = clsNewVarnamesVectorPMFunction
+        clsVarnamesVectorHSFunction = clsNewVarnamesVectorHSFunction
+        clsVarnamesVectorPMFunction = clsNewVarnamesVectorPTFunction
 
         If Not bControlsInitialised Then
             InitialiseDialog()
         End If
 
-        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
-        ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHS, New RParameter("lon", 3), iAdditionalPairNo:=1)
-        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("lon", 3), iAdditionalPairNo:=2)
-        ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPT, New RParameter("lon", 3), iAdditionalPairNo:=2)
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHSFunction, New RParameter("lon", 3), iAdditionalPairNo:=1)
+        ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorHSFunction, New RParameter("lon", 3), iAdditionalPairNo:=1)
+        ucrReceiverLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPTFunction, New RParameter("lon", 3), iAdditionalPairNo:=2)
+        ucrInputLongitude.AddAdditionalCodeParameterPair(clsVarnamesVectorPTFunction, New RParameter("lon", 3), iAdditionalPairNo:=2)
 
-        ucrSelectorLocation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
-        ucrReceiverStation.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
+        ucrSelectorLocation.SetRCode(clsVarnamesVectorPMFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverStation.SetRCode(clsVarnamesVectorPMFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverAltitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             ucrInputElevation.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrInputLongitude.SetRCode(clsVarnamesVectorPM, bReset, bCloneIfNeeded:=True)
+            ucrInputLongitude.SetRCode(clsVarnamesVectorPMFunction, bReset, bCloneIfNeeded:=True)
             ucrInputLatitude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+            ucrReceiverLongitude.SetRCode(clsVarnamesVectorPMFunction, bReset, bCloneIfNeeded:=True)
         End If
     End Sub
 
     Private Sub EnableDesableSelector()
-        If ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty Then
-            ucrInputLatitude.Enabled = True
-            ucrInputElevation.Enabled = True
-            ucrInputLongitude.Enabled = True
-        Else
-            ucrInputLatitude.Enabled = False
-            ucrInputElevation.Enabled = False
-            ucrInputLongitude.Enabled = False
-        End If
+        Dim bEnableControl As Boolean = ucrReceiverLatitude.IsEmpty AndAlso ucrReceiverAltitude.IsEmpty
+        ucrInputLatitude.Enabled = bEnableControl
+        ucrInputElevation.Enabled = bEnableControl
+        ucrInputLongitude.Enabled = bEnableControl
     End Sub
 
     Private Sub ucrReceiverAltitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAltitude.ControlValueChanged, ucrReceiverLatitude.ControlValueChanged, ucrReceiverLongitude.ControlValueChanged
@@ -121,11 +117,6 @@ Public Class sdgLocation
 
     Private Sub ucrInputElevation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputElevation.ControlValueChanged
         EnableDesableSelector()
-        If Not ucrInputElevation.IsEmpty Then
-            clsListFunction.AddParameter("Elev", ucrInputElevation.GetText(), iPosition:=0)
-        Else
-            clsListFunction.RemoveParameterByName("Elev")
-        End If
     End Sub
 
     Private Sub ucrSelectorLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLocation.ControlValueChanged
@@ -134,11 +125,6 @@ Public Class sdgLocation
 
     Private Sub ucrInputLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatitude.ControlValueChanged
         EnableDesableSelector()
-        If Not ucrInputLatitude.IsEmpty Then
-            clsListFunction.AddParameter("lat_rad", ucrInputLatitude.GetText(), iPosition:=2)
-        Else
-            clsListFunction.RemoveParameterByName("lat_rad")
-        End If
     End Sub
 
     Private Sub ucrInputLongitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLongitude.ControlValueChanged

@@ -16,10 +16,10 @@
 
 Imports instat.Translations
 Public Class sdgHSConstants
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public bControlsInitialised As Boolean = False
-    Public clsListFunction As New RFunction
+    Private bControlsInitialised As Boolean = False
+    Private clsListFunction As New RFunction
     Private Sub sdgHSConstants_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
         autoTranslate(Me)
     End Sub
@@ -27,7 +27,6 @@ Public Class sdgHSConstants
     Private Sub InitialiseControls()
         ucrInputLambda.SetParameter(New RParameter("lambda", 1))
         ucrInputLambda.AddQuotesIfUnrecognised = False
-        'ucrInputLambda.IsReadOnly = True
         ucrInputLambda.SetLinkedDisplayControl(lbllambda)
 
         ucrInputSolarConstant.SetParameter(New RParameter("Gsc", 3))

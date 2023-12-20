@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class sdgMissingOptionsEvapotranspiration
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Public clsReadInputs, clsMissingDataVector As New RFunction
+    Public clsReadInputsFunction, clsMissingDataVectorFunction As New RFunction
     Private Sub sdgMissingOptionsEvapotranspiration_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
         autoTranslate(Me)
     End Sub
@@ -60,14 +60,14 @@ Public Class sdgMissingOptionsEvapotranspiration
             InitialiseControls()
         End If
 
-        clsReadInputs = clsNewReadInputs
-        clsMissingDataVector = clsNewMissingDataVector
+        clsReadInputsFunction = clsNewReadInputs
+        clsMissingDataVectorFunction = clsNewMissingDataVector
 
-        ucrInputMissingMethod.SetRCode(clsReadInputs, bReset, bCloneIfNeeded:=True)
-        ucrChkInterpMissingDays.SetRCode(clsReadInputs, bReset, bCloneIfNeeded:=True)
-        ucrChkInterpMissingEntries.SetRCode(clsReadInputs, bReset, bCloneIfNeeded:=True)
-        ucrNudMaxMissingData.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
-        ucrNudMaxMissingDays.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
-        ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVector, bReset, bCloneIfNeeded:=True)
+        ucrInputMissingMethod.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkInterpMissingDays.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkInterpMissingEntries.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMaxMissingData.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMaxMissingDays.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 End Class

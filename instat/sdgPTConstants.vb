@@ -16,10 +16,10 @@
 
 Imports instat.Translations
 Public Class sdgPTConstants
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public bControlsInitialised As Boolean = False
-    Public clsListFunction As New RFunction
+    Private bControlsInitialised As Boolean = False
+    Private clsListFunction As New RFunction
 
     Private Sub sdgPTConstants_Load(sender As Object, e As EventArgs) Handles UcrButtonsSubdialogue1.Load
         autoTranslate(Me)

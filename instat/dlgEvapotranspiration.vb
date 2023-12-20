@@ -24,8 +24,8 @@ Public Class dlgEvapotranspiration
     Private iSaveMaxY As Integer
     Private iEvapOptions, iHSConstants, iLocation As Integer
     Private iHSMissingOptions As Integer
-    Private clsETPenmanMonteith, clsHargreavesSamani, clsListFunction, clsDataFunctionPM, clsDataFunctionHS, clsDataFunctionPT, clsETPriestleyTaylor, clsReadInputs, clsVector, clsMissingDataVector, clsVarnamesVectorPT, clsVarnamesVectorPM, clsVarnamesVectorHS, clsLibraryEvap As New RFunction
-    Private clsDayFunc, clsMonthFunc, clsYearFunc As New RFunction
+    Private clsETPenmanMonteithFunction, clsHargreavesSamaniFunction, clsListFunction, clsDataFunctionPMFunction, clsDataFunctionHSFunction, clsDataFunctionPTFunction, clsETPriestleyTaylorFunction, clsReadInputsFunction, clsVectorFunction, clsMissingDataVectorFunction, clsVarnamesVectorPTFunction, clsVarnamesVectorPMFunction, clsVarnamesVectorHSFunction, clsLibraryEvapFunction As New RFunction
+    Private clsDayFuncFunction, clsMonthFuncFunction, clsYearFuncFunction As New RFunction
     Private clsBaseOperator As New ROperator
 
     Private Sub dlgEvapotranspiration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -170,18 +170,18 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub SetDefaults()
-        clsETPenmanMonteith = New RFunction
-        clsHargreavesSamani = New RFunction
-        clsDataFunctionPM = New RFunction
-        clsDataFunctionHS = New RFunction
-        clsDataFunctionPT = New RFunction
-        clsETPriestleyTaylor = New RFunction
+        clsETPenmanMonteithFunction = New RFunction
+        clsHargreavesSamaniFunction = New RFunction
+        clsDataFunctionPMFunction = New RFunction
+        clsDataFunctionHSFunction = New RFunction
+        clsDataFunctionPTFunction = New RFunction
+        clsETPriestleyTaylorFunction = New RFunction
         clsBaseOperator = New ROperator
-        clsReadInputs = New RFunction
-        clsDayFunc = New RFunction
-        clsMonthFunc = New RFunction
-        clsYearFunc = New RFunction
-        clsLibraryEvap = New RFunction
+        clsReadInputsFunction = New RFunction
+        clsDayFuncFunction = New RFunction
+        clsMonthFuncFunction = New RFunction
+        clsYearFuncFunction = New RFunction
+        clsLibraryEvapFunction = New RFunction
         clsListFunction = New RFunction
 
         ucrSelectorEvapotranspiration.Reset()
@@ -190,106 +190,106 @@ Public Class dlgEvapotranspiration
 
         bResetSubdialog = True
 
-        clsDataFunctionPM.SetRCommand("data.frame")
-        clsDataFunctionPM.AddParameter("Year", clsRFunctionParameter:=clsYearFunc)
-        clsDataFunctionPM.AddParameter("Month", clsRFunctionParameter:=clsMonthFunc)
-        clsDataFunctionPM.AddParameter("Day", clsRFunctionParameter:=clsDayFunc)
+        clsDataFunctionPMFunction.SetRCommand("data.frame")
+        clsDataFunctionPMFunction.AddParameter("Year", clsRFunctionParameter:=clsYearFuncFunction)
+        clsDataFunctionPMFunction.AddParameter("Month", clsRFunctionParameter:=clsMonthFuncFunction)
+        clsDataFunctionPMFunction.AddParameter("Day", clsRFunctionParameter:=clsDayFuncFunction)
 
-        clsDataFunctionHS.SetRCommand("data.frame")
-        clsDataFunctionHS.AddParameter("Year", clsRFunctionParameter:=clsYearFunc)
-        clsDataFunctionHS.AddParameter("Month", clsRFunctionParameter:=clsMonthFunc)
-        clsDataFunctionHS.AddParameter("Day", clsRFunctionParameter:=clsDayFunc)
+        clsDataFunctionHSFunction.SetRCommand("data.frame")
+        clsDataFunctionHSFunction.AddParameter("Year", clsRFunctionParameter:=clsYearFuncFunction)
+        clsDataFunctionHSFunction.AddParameter("Month", clsRFunctionParameter:=clsMonthFuncFunction)
+        clsDataFunctionHSFunction.AddParameter("Day", clsRFunctionParameter:=clsDayFuncFunction)
 
-        clsDataFunctionPT.SetRCommand("data.frame")
-        clsDataFunctionPT.AddParameter("Year", clsRFunctionParameter:=clsYearFunc)
-        clsDataFunctionPT.AddParameter("Month", clsRFunctionParameter:=clsMonthFunc)
-        clsDataFunctionPT.AddParameter("Day", clsRFunctionParameter:=clsDayFunc)
+        clsDataFunctionPTFunction.SetRCommand("data.frame")
+        clsDataFunctionPTFunction.AddParameter("Year", clsRFunctionParameter:=clsYearFuncFunction)
+        clsDataFunctionPTFunction.AddParameter("Month", clsRFunctionParameter:=clsMonthFuncFunction)
+        clsDataFunctionPTFunction.AddParameter("Day", clsRFunctionParameter:=clsDayFuncFunction)
 
-        clsDayFunc.SetPackageName("lubridate")
-        clsDayFunc.SetRCommand("day")
+        clsDayFuncFunction.SetPackageName("lubridate")
+        clsDayFuncFunction.SetRCommand("day")
 
-        clsMonthFunc.SetPackageName("lubridate")
-        clsMonthFunc.SetRCommand("month")
+        clsMonthFuncFunction.SetPackageName("lubridate")
+        clsMonthFuncFunction.SetRCommand("month")
 
-        clsYearFunc.SetRCommand("year")
-        clsYearFunc.SetPackageName("lubridate")
+        clsYearFuncFunction.SetRCommand("year")
+        clsYearFuncFunction.SetPackageName("lubridate")
 
-        clsReadInputs.SetPackageName("Evapotranspiration")
-        clsReadInputs.SetRCommand("ReadInputs")
-        clsReadInputs.AddParameter("constants", "constants", iPosition:=2)
-        clsReadInputs.AddParameter("stopmissing", clsRFunctionParameter:=clsMissingDataVector, iPosition:=3)
-        clsReadInputs.AddParameter("timestep", Chr(34) & "daily" & Chr(34), iPosition:=4)
-        clsReadInputs.AddParameter("interp_missing_days", "FALSE", iPosition:=5)
-        clsReadInputs.AddParameter("interp_missing_entries", "FALSE", iPosition:=6)
-        clsReadInputs.AddParameter("interp_abnormal", "FALSE", iPosition:=7)
-        clsReadInputs.AddParameter("abnormal_method", "NULL", iPosition:=9)
-        clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPM, iPosition:=0)
-        clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPM, iPosition:=1)
-        clsReadInputs.AddParameter("missing_method", Chr(34) & "monthly average" & Chr(34), iPosition:=8)
-        clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPT, iPosition:=10)
-        clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPT, iPosition:=11)
-        clsReadInputs.SetAssignTo("temp_data")
+        clsReadInputsFunction.SetPackageName("Evapotranspiration")
+        clsReadInputsFunction.SetRCommand("ReadInputs")
+        clsReadInputsFunction.AddParameter("constants", "constants", iPosition:=2)
+        clsReadInputsFunction.AddParameter("stopmissing", clsRFunctionParameter:=clsMissingDataVectorFunction, iPosition:=3)
+        clsReadInputsFunction.AddParameter("timestep", Chr(34) & "daily" & Chr(34), iPosition:=4)
+        clsReadInputsFunction.AddParameter("interp_missing_days", "FALSE", iPosition:=5)
+        clsReadInputsFunction.AddParameter("interp_missing_entries", "FALSE", iPosition:=6)
+        clsReadInputsFunction.AddParameter("interp_abnormal", "FALSE", iPosition:=7)
+        clsReadInputsFunction.AddParameter("abnormal_method", "NULL", iPosition:=9)
+        clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPMFunction, iPosition:=0)
+        clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPMFunction, iPosition:=1)
+        clsReadInputsFunction.AddParameter("missing_method", Chr(34) & "monthly average" & Chr(34), iPosition:=8)
+        clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPTFunction, iPosition:=10)
+        clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPTFunction, iPosition:=11)
+        clsReadInputsFunction.SetAssignTo("temp_data")
 
-        clsVarnamesVectorPT.SetRCommand("c")
-        clsVarnamesVectorPT.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPT.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPT.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPT.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorPTFunction.SetRCommand("c")
+        clsVarnamesVectorPTFunction.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), iPosition:=0)
+        clsVarnamesVectorPTFunction.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), iPosition:=1)
+        clsVarnamesVectorPTFunction.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), iPosition:=2)
+        clsVarnamesVectorPTFunction.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), iPosition:=3)
 
-        clsVarnamesVectorPM.SetRCommand("c")
-        clsVarnamesVectorPM.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPM.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPM.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorPM.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorPMFunction.SetRCommand("c")
+        clsVarnamesVectorPMFunction.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorPMFunction.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorPMFunction.AddParameter("RHmax", Chr(34) & "RHmax" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorPMFunction.AddParameter("RHmin", Chr(34) & "RHmin" & Chr(34), bIncludeArgumentName:=False)
 
-        clsVarnamesVectorHS.SetRCommand("c")
-        clsVarnamesVectorHS.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
-        clsVarnamesVectorHS.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorHSFunction.SetRCommand("c")
+        clsVarnamesVectorHSFunction.AddParameter("Tmax", Chr(34) & "Tmax" & Chr(34), bIncludeArgumentName:=False)
+        clsVarnamesVectorHSFunction.AddParameter("Tmin", Chr(34) & "Tmin" & Chr(34), bIncludeArgumentName:=False)
 
-        clsMissingDataVector.SetRCommand("c")
-        clsMissingDataVector.AddParameter("x", 1, bIncludeArgumentName:=False)
-        clsMissingDataVector.AddParameter("y", 1, bIncludeArgumentName:=False)
-        clsMissingDataVector.AddParameter("z", 1, bIncludeArgumentName:=False)
+        clsMissingDataVectorFunction.SetRCommand("c")
+        clsMissingDataVectorFunction.AddParameter("x", 1, bIncludeArgumentName:=False)
+        clsMissingDataVectorFunction.AddParameter("y", 1, bIncludeArgumentName:=False)
+        clsMissingDataVectorFunction.AddParameter("z", 1, bIncludeArgumentName:=False)
 
-        clsVector.SetRCommand("c")
+        clsVectorFunction.SetRCommand("c")
 
         clsListFunction.ClearParameters()
         clsListFunction.SetRCommand("list")
         clsListFunction.SetAssignTo("constants")
 
-        clsETPenmanMonteith.SetPackageName("Evapotranspiration")
-        clsETPenmanMonteith.SetRCommand("ET.PenmanMonteith")
-        clsETPenmanMonteith.AddParameter("data", clsRFunctionParameter:=clsReadInputs, iPosition:=0)
-        clsETPenmanMonteith.AddParameter("constants", "constants", iPosition:=1)
-        clsETPenmanMonteith.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
-        clsETPenmanMonteith.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
-        clsETPenmanMonteith.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=4)
-        clsETPenmanMonteith.AddParameter("crops", Chr(34) & "short" & Chr(34), iPosition:=5)
-        clsETPenmanMonteith.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=6)
-        clsETPenmanMonteith.SetAssignTo("Penman_Monteith")
+        clsETPenmanMonteithFunction.SetPackageName("Evapotranspiration")
+        clsETPenmanMonteithFunction.SetRCommand("ET.PenmanMonteith")
+        clsETPenmanMonteithFunction.AddParameter("data", clsRFunctionParameter:=clsReadInputsFunction, iPosition:=0)
+        clsETPenmanMonteithFunction.AddParameter("constants", "constants", iPosition:=1)
+        clsETPenmanMonteithFunction.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
+        clsETPenmanMonteithFunction.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
+        clsETPenmanMonteithFunction.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=4)
+        clsETPenmanMonteithFunction.AddParameter("crops", Chr(34) & "short" & Chr(34), iPosition:=5)
+        clsETPenmanMonteithFunction.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=6)
+        clsETPenmanMonteithFunction.SetAssignTo("Penman_Monteith")
 
-        clsHargreavesSamani.SetPackageName("Evapotranspiration")
-        clsHargreavesSamani.SetRCommand("ET.HargreavesSamani")
-        clsHargreavesSamani.AddParameter("data", clsRFunctionParameter:=clsReadInputs, iPosition:=0)
-        clsHargreavesSamani.AddParameter("constants", "constants", iPosition:=1)
-        clsHargreavesSamani.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
-        clsHargreavesSamani.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
-        clsHargreavesSamani.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=4)
-        clsHargreavesSamani.SetAssignTo("Hargreaves_Samani")
+        clsHargreavesSamaniFunction.SetPackageName("Evapotranspiration")
+        clsHargreavesSamaniFunction.SetRCommand("ET.HargreavesSamani")
+        clsHargreavesSamaniFunction.AddParameter("data", clsRFunctionParameter:=clsReadInputsFunction, iPosition:=0)
+        clsHargreavesSamaniFunction.AddParameter("constants", "constants", iPosition:=1)
+        clsHargreavesSamaniFunction.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
+        clsHargreavesSamaniFunction.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
+        clsHargreavesSamaniFunction.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=4)
+        clsHargreavesSamaniFunction.SetAssignTo("Hargreaves_Samani")
 
-        clsETPriestleyTaylor.SetPackageName("Evapotranspiration")
-        clsETPriestleyTaylor.SetRCommand("ET.PriestleyTaylor")
-        clsETPriestleyTaylor.AddParameter("data", clsRFunctionParameter:=clsReadInputs, iPosition:=0)
-        clsETPriestleyTaylor.AddParameter("constants", "constants", iPosition:=1, bIncludeArgumentName:=False)
-        clsETPriestleyTaylor.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
-        clsETPriestleyTaylor.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
-        clsETPriestleyTaylor.AddParameter("alpha", 0.23, iPosition:=4)
-        clsETPriestleyTaylor.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=5)
-        clsETPriestleyTaylor.SetAssignTo("Priestley_Taylor")
+        clsETPriestleyTaylorFunction.SetPackageName("Evapotranspiration")
+        clsETPriestleyTaylorFunction.SetRCommand("ET.PriestleyTaylor")
+        clsETPriestleyTaylorFunction.AddParameter("data", clsRFunctionParameter:=clsReadInputsFunction, iPosition:=0)
+        clsETPriestleyTaylorFunction.AddParameter("constants", "constants", iPosition:=1, bIncludeArgumentName:=False)
+        clsETPriestleyTaylorFunction.AddParameter("ts", Chr(34) & "daily" & Chr(34), iPosition:=2)
+        clsETPriestleyTaylorFunction.AddParameter("message", Chr(34) & "yes" & Chr(34), iPosition:=3)
+        clsETPriestleyTaylorFunction.AddParameter("alpha", 0.23, iPosition:=4)
+        clsETPriestleyTaylorFunction.AddParameter("save.csv", Chr(34) & "no" & Chr(34), iPosition:=5)
+        clsETPriestleyTaylorFunction.SetAssignTo("Priestley_Taylor")
 
         clsBaseOperator.SetOperation("$")
         clsBaseOperator.bSpaceAroundOperation = False
-        clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
+        clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteithFunction, iPosition:=0)
         clsBaseOperator.AddParameter("ET.Daily", strParameterValue:="ET.Daily", iPosition:=1)
 
         ucrBase.clsRsyntax.ClearCodes()
@@ -298,33 +298,33 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverDate.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverDate.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("x", 0), iAdditionalPairNo:=2)
-        ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmax", 3), iAdditionalPairNo:=1)
-        ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("Tmin", 4), iAdditionalPairNo:=1)
-        ucrReceiverExtraRadiation.AddAdditionalCodeParameterPair(clsDataFunctionHS, New RParameter("R_a", 6), iAdditionalPairNo:=1)
-        ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("Tmax", 3), iAdditionalPairNo:=2)
-        ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("Tmin", 4), iAdditionalPairNo:=2)
-        ucrInputTimeStep.AddAdditionalCodeParameterPair(clsHargreavesSamani, New RParameter("ts", 2), iAdditionalPairNo:=1)
-        ucrInputTimeStep.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("ts", 2), iAdditionalPairNo:=2)
-        ucrInputSolar.AddAdditionalCodeParameterPair(clsETPriestleyTaylor, New RParameter("solar", 3), iAdditionalPairNo:=1)
-        ucrReceiverHumidityMax.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("RHmax", 4), iAdditionalPairNo:=1)
-        ucrReceiverHumidityMin.AddAdditionalCodeParameterPair(clsDataFunctionPT, New RParameter("RHmin", 5), iAdditionalPairNo:=1)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsMonthFuncFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverDate.AddAdditionalCodeParameterPair(clsYearFuncFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionHSFunction, New RParameter("Tmax", 3), iAdditionalPairNo:=1)
+        ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionHSFunction, New RParameter("Tmin", 4), iAdditionalPairNo:=1)
+        ucrReceiverExtraRadiation.AddAdditionalCodeParameterPair(clsDataFunctionHSFunction, New RParameter("R_a", 6), iAdditionalPairNo:=1)
+        ucrReceiverTmax.AddAdditionalCodeParameterPair(clsDataFunctionPTFunction, New RParameter("Tmax", 3), iAdditionalPairNo:=2)
+        ucrReceiverTmin.AddAdditionalCodeParameterPair(clsDataFunctionPTFunction, New RParameter("Tmin", 4), iAdditionalPairNo:=2)
+        ucrInputTimeStep.AddAdditionalCodeParameterPair(clsHargreavesSamaniFunction, New RParameter("ts", 2), iAdditionalPairNo:=1)
+        ucrInputTimeStep.AddAdditionalCodeParameterPair(clsETPriestleyTaylorFunction, New RParameter("ts", 2), iAdditionalPairNo:=2)
+        ucrInputSolar.AddAdditionalCodeParameterPair(clsETPriestleyTaylorFunction, New RParameter("solar", 3), iAdditionalPairNo:=1)
+        ucrReceiverHumidityMax.AddAdditionalCodeParameterPair(clsDataFunctionPTFunction, New RParameter("RHmax", 4), iAdditionalPairNo:=1)
+        ucrReceiverHumidityMin.AddAdditionalCodeParameterPair(clsDataFunctionPTFunction, New RParameter("RHmin", 5), iAdditionalPairNo:=1)
 
-        ucrReceiverDate.SetRCode(clsDayFunc, bReset)
-        ucrReceiverTmax.SetRCode(clsDataFunctionPM, bReset)
-        ucrReceiverTmin.SetRCode(clsDataFunctionPM, bReset)
-        ucrReceiverHumidityMax.SetRCode(clsDataFunctionPM, bReset)
-        ucrReceiverHumidityMin.SetRCode(clsDataFunctionPM, bReset)
-        ucrReceiverWindSpeed.SetRCode(clsDataFunctionPM, bReset)
-        ucrInputTimeStep.SetRCode(clsETPenmanMonteith, bReset)
-        ucrInputCrop.SetRCode(clsETPenmanMonteith, bReset)
-        ucrChkWind.SetRCode(clsETPenmanMonteith, bReset)
+        ucrReceiverDate.SetRCode(clsDayFuncFunction, bReset)
+        ucrReceiverTmax.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrReceiverTmin.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrReceiverHumidityMax.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrReceiverHumidityMin.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrReceiverWindSpeed.SetRCode(clsDataFunctionPMFunction, bReset)
+        ucrInputTimeStep.SetRCode(clsETPenmanMonteithFunction, bReset)
+        ucrInputCrop.SetRCode(clsETPenmanMonteithFunction, bReset)
+        ucrChkWind.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrNewColName.SetRCode(clsBaseOperator, bReset)
         ucrPnlMethod.SetRCode(clsBaseOperator, bReset)
-        ucrNudAlpha.SetRCode(clsETPriestleyTaylor, bReset)
+        ucrNudAlpha.SetRCode(clsETPriestleyTaylorFunction, bReset)
         If bReset Then
-            ucrInputSolar.SetRCode(clsETPenmanMonteith, bReset)
+            ucrInputSolar.SetRCode(clsETPenmanMonteithFunction, bReset)
         End If
     End Sub
 
@@ -364,13 +364,13 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdEvapOptions_Click(sender As Object, e As EventArgs) Handles cmdEvapOptions.Click
-        sdgMissingOptionsEvapotranspiration.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
+        sdgMissingOptionsEvapotranspiration.SetRFunction(clsReadInputsFunction, clsMissingDataVectorFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgMissingOptionsEvapotranspiration.ShowDialog()
     End Sub
 
     Private Sub cmdHSMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdHSMissingOptions.Click
-        sdgHSMissingOptions.SetRFunction(clsReadInputs, clsMissingDataVector, bResetSubdialog)
+        sdgHSMissingOptions.SetRFunction(clsReadInputsFunction, clsMissingDataVectorFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgHSMissingOptions.ShowDialog()
     End Sub
@@ -397,7 +397,7 @@ Public Class dlgEvapotranspiration
     End Sub
 
     Private Sub cmdLocation_Click(sender As Object, e As EventArgs) Handles cmdLocation.Click
-        sdgLocation.SetRFunction(clsNewVarnamesVectorHS:=clsVarnamesVectorHS, clsNewVarnamesVectorPM:=clsVarnamesVectorPM, clsNewVarnamesVectorPT:=clsVarnamesVectorPT, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
+        sdgLocation.SetRFunction(clsNewVarnamesVectorHSFunction:=clsVarnamesVectorHSFunction, clsNewVarnamesVectorPMFunction:=clsVarnamesVectorPMFunction, clsNewVarnamesVectorPTFunction:=clsVarnamesVectorPTFunction, clsNewListFunction:=clsListFunction, bReset:=bResetSubdialog)
         sdgLocation.ShowDialog()
         bResetSubdialog = False
         TestOKEnabled()
@@ -430,14 +430,14 @@ Public Class dlgEvapotranspiration
 
     Private Sub Method()
         If rdoPenmanMonteith.Checked Then
-            clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPM, iPosition:=0)
-            clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPM, iPosition:=1)
+            clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPMFunction, iPosition:=0)
+            clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPMFunction, iPosition:=1)
         ElseIf rdoHargreavesSamani.Checked Then
-            clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorHS, iPosition:=0)
-            clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionHS, iPosition:=1)
+            clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorHSFunction, iPosition:=0)
+            clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionHSFunction, iPosition:=1)
         ElseIf rdoPriestleyTaylor.Checked Then
-            clsReadInputs.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPT, iPosition:=0)
-            clsReadInputs.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPT, iPosition:=1)
+            clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPTFunction, iPosition:=0)
+            clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPTFunction, iPosition:=1)
         End If
     End Sub
 
@@ -448,17 +448,17 @@ Public Class dlgEvapotranspiration
         DialogSize()
         EnableDesableSubDialog()
         If rdoPenmanMonteith.Checked Then
-            clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteith, iPosition:=0)
+            clsBaseOperator.AddParameter("ET.PenmanMonteith", clsRFunctionParameter:=clsETPenmanMonteithFunction, iPosition:=0)
         Else
             clsBaseOperator.RemoveParameterByName("ET.PenmanMonteith")
         End If
         If rdoHargreavesSamani.Checked Then
-            clsBaseOperator.AddParameter("ET.HargreavesSamani", clsRFunctionParameter:=clsHargreavesSamani, iPosition:=0)
+            clsBaseOperator.AddParameter("ET.HargreavesSamani", clsRFunctionParameter:=clsHargreavesSamaniFunction, iPosition:=0)
         Else
             clsBaseOperator.RemoveParameterByName("ET.HargreavesSamani")
         End If
         If rdoPriestleyTaylor.Checked Then
-            clsBaseOperator.AddParameter("ET.PriestleyTaylor", clsRFunctionParameter:=clsETPriestleyTaylor, iPosition:=0)
+            clsBaseOperator.AddParameter("ET.PriestleyTaylor", clsRFunctionParameter:=clsETPriestleyTaylorFunction, iPosition:=0)
         Else
             clsBaseOperator.RemoveParameterByName("ET.PriestleyTaylor")
         End If
@@ -488,16 +488,16 @@ Public Class dlgEvapotranspiration
 
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
         If ucrChkWind.Checked AndAlso Not ucrReceiverWindSpeed.IsEmpty Then
-            clsVarnamesVectorPM.AddParameter("u2", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
+            clsVarnamesVectorPMFunction.AddParameter("u2", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
         Else
-            clsVarnamesVectorPM.RemoveParameterByName("u2")
+            clsVarnamesVectorPMFunction.RemoveParameterByName("u2")
             ucrReceiverHumidityMax.SetMeAsReceiver()
         End If
     End Sub
 
     Private Sub Constants()
         If rdoPenmanMonteith.Checked Then
-            clsVarnamesVectorPM.RemoveParameterByName("lon")
+            clsVarnamesVectorPMFunction.RemoveParameterByName("lon")
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("z", 2, iPosition:=4)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
@@ -507,7 +507,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
         ElseIf rdoHargreavesSamani.Checked Then
-            clsVarnamesVectorHS.RemoveParameterByName("lon")
+            clsVarnamesVectorHSFunction.RemoveParameterByName("lon")
             clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.RemoveParameterByName("alphaPT")
@@ -517,7 +517,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.RemoveParameterByName("as")
             clsListFunction.RemoveParameterByName("bs")
         Else
-            clsVarnamesVectorPT.RemoveParameterByName("lon")
+            clsVarnamesVectorPTFunction.RemoveParameterByName("lon")
             clsListFunction.AddParameter("lambda", 2.54, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
@@ -533,71 +533,68 @@ Public Class dlgEvapotranspiration
         If rdoPenmanMonteith.Checked AndAlso ucrInputSolar.GetText = "sunshine hours" Then
             ucrReceiverRadiation.SetClimaticType("sunshine_hours")
             ucrReceiverRadiation.bAutoFill = True
-            clsETPenmanMonteith.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
-            clsVarnamesVectorPM.AddParameter("n", Chr(34) & "n" & Chr(34), bIncludeArgumentName:=False)
-            clsDataFunctionPM.AddParameter("n", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
-            clsVarnamesVectorPM.RemoveParameterByName("Rs")
-            clsVarnamesVectorPM.RemoveParameterByName("Cd")
-            clsDataFunctionPM.RemoveParameterByName("Rs")
-            clsDataFunctionPM.RemoveParameterByName("cd")
+            clsETPenmanMonteithFunction.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
+            clsVarnamesVectorPMFunction.AddParameter("n", Chr(34) & "n" & Chr(34), bIncludeArgumentName:=False)
+            clsDataFunctionPMFunction.AddParameter("n", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
+            clsVarnamesVectorPMFunction.RemoveParameterByName("Rs")
+            clsVarnamesVectorPMFunction.RemoveParameterByName("Cd")
+            clsDataFunctionPMFunction.RemoveParameterByName("Rs")
+            clsDataFunctionPMFunction.RemoveParameterByName("cd")
         ElseIf rdoPenmanMonteith.Checked AndAlso ucrInputSolar.GetText = "radiation" Then
             ucrReceiverRadiation.SetClimaticType("radiation")
             ucrReceiverRadiation.bAutoFill = True
-            clsETPenmanMonteith.AddParameter("solar", Chr(34) & "data" & Chr(34), iPosition:=3)
-            clsVarnamesVectorPM.AddParameter("Rs", Chr(34) & "Rs" & Chr(34), bIncludeArgumentName:=False)
-            clsDataFunctionPM.AddParameter("Rs", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
-            clsVarnamesVectorPM.RemoveParameterByName("n")
-            clsVarnamesVectorPM.RemoveParameterByName("Cd")
-            clsDataFunctionPM.RemoveParameterByName("n")
-            clsDataFunctionPM.RemoveParameterByName("cd")
+            clsETPenmanMonteithFunction.AddParameter("solar", Chr(34) & "data" & Chr(34), iPosition:=3)
+            clsVarnamesVectorPMFunction.AddParameter("Rs", Chr(34) & "Rs" & Chr(34), bIncludeArgumentName:=False)
+            clsDataFunctionPMFunction.AddParameter("Rs", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
+            clsVarnamesVectorPMFunction.RemoveParameterByName("n")
+            clsVarnamesVectorPMFunction.RemoveParameterByName("Cd")
+            clsDataFunctionPMFunction.RemoveParameterByName("n")
+            clsDataFunctionPMFunction.RemoveParameterByName("cd")
         ElseIf rdoPenmanMonteith.Checked AndAlso ucrInputSolar.GetText = "cloud" Then
             ucrReceiverRadiation.SetClimaticType("cloud_cover")
             ucrReceiverRadiation.bAutoFill = True
-            clsETPenmanMonteith.AddParameter("solar", Chr(34) & "cloud" & Chr(34), iPosition:=3)
-            clsVarnamesVectorPM.AddParameter("Cd", Chr(34) & "Cd" & Chr(34), bIncludeArgumentName:=False)
-            clsDataFunctionPM.AddParameter("Cd", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
-            clsVarnamesVectorPM.RemoveParameterByName("n")
-            clsVarnamesVectorPM.RemoveParameterByName("Rs")
-            clsDataFunctionPM.RemoveParameterByName("n")
-            clsDataFunctionPM.RemoveParameterByName("Rs")
+            clsETPenmanMonteithFunction.AddParameter("solar", Chr(34) & "cloud" & Chr(34), iPosition:=3)
+            clsVarnamesVectorPMFunction.AddParameter("Cd", Chr(34) & "Cd" & Chr(34), bIncludeArgumentName:=False)
+            clsDataFunctionPMFunction.AddParameter("Cd", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
+            clsVarnamesVectorPMFunction.RemoveParameterByName("n")
+            clsVarnamesVectorPMFunction.RemoveParameterByName("Rs")
+            clsDataFunctionPMFunction.RemoveParameterByName("n")
+            clsDataFunctionPMFunction.RemoveParameterByName("Rs")
         ElseIf rdoPriestleyTaylor.Checked AndAlso ucrInputSolar.GetText = "sunshine hours" Then
             ucrReceiverRadiation.SetClimaticType("sunshine_hours")
             ucrReceiverRadiation.bAutoFill = True
-            clsETPriestleyTaylor.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
-            clsVarnamesVectorPT.AddParameter("n", Chr(34) & "n" & Chr(34), bIncludeArgumentName:=False)
-            clsDataFunctionPT.AddParameter("n", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
-            clsVarnamesVectorPT.RemoveParameterByName("Rs")
-            clsVarnamesVectorPT.RemoveParameterByName("Cd")
-            clsDataFunctionPT.RemoveParameterByName("Rs")
-            clsDataFunctionPT.RemoveParameterByName("cd")
+            clsETPriestleyTaylorFunction.AddParameter("solar", Chr(34) & "sunshine hours" & Chr(34), iPosition:=3)
+            clsVarnamesVectorPTFunction.AddParameter("n", Chr(34) & "n" & Chr(34), bIncludeArgumentName:=False)
+            clsDataFunctionPTFunction.AddParameter("n", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
+            clsVarnamesVectorPTFunction.RemoveParameterByName("Rs")
+            clsVarnamesVectorPTFunction.RemoveParameterByName("Cd")
+            clsDataFunctionPTFunction.RemoveParameterByName("Rs")
+            clsDataFunctionPTFunction.RemoveParameterByName("cd")
         ElseIf rdoPriestleyTaylor.Checked AndAlso ucrInputSolar.GetText = "radiation" Then
             ucrReceiverRadiation.SetClimaticType("radiation")
             ucrReceiverRadiation.bAutoFill = True
-            clsETPriestleyTaylor.AddParameter("solar", Chr(34) & "data" & Chr(34), iPosition:=3)
-            clsVarnamesVectorPT.AddParameter("Rs", Chr(34) & "Rs" & Chr(34), bIncludeArgumentName:=False)
-            clsDataFunctionPT.AddParameter("Rs", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
-            clsDataFunctionPT.RemoveParameterByName("n")
-            clsDataFunctionPT.RemoveParameterByName("cd")
-            clsVarnamesVectorPT.RemoveParameterByName("n")
-            clsVarnamesVectorPT.RemoveParameterByName("cd")
+            clsETPriestleyTaylorFunction.AddParameter("solar", Chr(34) & "data" & Chr(34), iPosition:=3)
+            clsVarnamesVectorPTFunction.AddParameter("Rs", Chr(34) & "Rs" & Chr(34), bIncludeArgumentName:=False)
+            clsDataFunctionPTFunction.AddParameter("Rs", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
+            clsDataFunctionPTFunction.RemoveParameterByName("n")
+            clsDataFunctionPTFunction.RemoveParameterByName("cd")
+            clsVarnamesVectorPTFunction.RemoveParameterByName("n")
+            clsVarnamesVectorPTFunction.RemoveParameterByName("cd")
         ElseIf rdoPriestleyTaylor.Checked AndAlso ucrInputSolar.GetText = "cloud" Then
             ucrReceiverRadiation.SetClimaticType("cloud_cover")
             ucrReceiverRadiation.bAutoFill = True
-            clsETPriestleyTaylor.AddParameter("solar", Chr(34) & "cloud" & Chr(34), iPosition:=3)
-            clsVarnamesVectorPT.AddParameter("Cd", Chr(34) & "Cd" & Chr(34), bIncludeArgumentName:=False)
-            clsDataFunctionPT.AddParameter("Cd", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
-            clsDataFunctionPT.RemoveParameterByName("n")
-            clsDataFunctionPT.RemoveParameterByName("Rs")
-            clsVarnamesVectorPT.RemoveParameterByName("n")
-            clsVarnamesVectorPT.RemoveParameterByName("Rs")
+            clsETPriestleyTaylorFunction.AddParameter("solar", Chr(34) & "cloud" & Chr(34), iPosition:=3)
+            clsVarnamesVectorPTFunction.AddParameter("Cd", Chr(34) & "Cd" & Chr(34), bIncludeArgumentName:=False)
+            clsDataFunctionPTFunction.AddParameter("Cd", clsRFunctionParameter:=ucrReceiverRadiation.GetVariables(), iPosition:=6)
+            clsDataFunctionPTFunction.RemoveParameterByName("n")
+            clsDataFunctionPTFunction.RemoveParameterByName("Rs")
+            clsVarnamesVectorPTFunction.RemoveParameterByName("n")
+            clsVarnamesVectorPTFunction.RemoveParameterByName("Rs")
         End If
     End Sub
 
     Private Sub ucrInputSolar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSolar.ControlValueChanged
         Solar()
-    End Sub
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged, ucrChkWind.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorEvapotranspiration_DataFrameChanged() Handles ucrSelectorEvapotranspiration.DataFrameChanged
@@ -611,6 +608,10 @@ Public Class dlgEvapotranspiration
 
     Private Sub ucrReceiverRadiation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRadiation.ControlValueChanged
         Solar()
+    End Sub
+
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged, ucrChkWind.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
 
